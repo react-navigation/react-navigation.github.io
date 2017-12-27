@@ -1,0 +1,12 @@
+{
+  "docs": {
+    "Fundamentals": ["intro", "quick-start", "navigation-prop", "with-navigation", "headers", "navigation-options", "nesting", "navigation-actions", "how-do-i"],
+    "Guides": ["deep-linking", "screen-tracking", "redux-integration"],
+    "Navigators": ["navigator-overview", "stack-navigator", "tab-navigator", "drawer-navigator"],
+    "Build your own Navigator": ["routers", "custom-navigators", "custom-routers", "navigation-views", "transitioner"],
+    "Other": ["contributing"]
+  },
+  "docs-other": {
+    "First Category": ["doc4", "doc5"]
+  }
+}
