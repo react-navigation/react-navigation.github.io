@@ -21,7 +21,7 @@ Call this to link to another screen in your app. Takes the following arguments:
 
 * `routeName` - A destination routeName that has been registered somewhere in the app's router
 * `params` - Params to merge into the destination route
-* `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions) for a full list of supported actions.
+* `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions.md) for a full list of supported actions.
 
 ```js
 class HomeScreen extends React.Component {
@@ -133,7 +133,7 @@ Use dispatch to send any navigation action to the router. The other navigation f
 
 Note that if you want to dispatch react-navigation actions you should use the action creators provided in this library.
 
-See [Navigation Actions Docs](navigation-actions) for a full list of available actions.
+See [Navigation Actions Docs](navigation-actions.md) for a full list of available actions.
 
 ```js
 import { NavigationActions } from "react-navigation";

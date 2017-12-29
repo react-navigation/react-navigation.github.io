@@ -44,7 +44,7 @@ basic-header
 
 ### Adding a Right Button
 
-Then we can add a [`header` navigation option](/docs/navigators/navigation-options#Stack-Navigation-Options) that allows us to add a custom right button:
+Then we can add a [`header` navigation option](navigation-options.md) that allows us to add a custom right button:
 
 ```js
 static navigationOptions = {
@@ -56,7 +56,7 @@ static navigationOptions = {
 header-button
 ```
 
-The navigation options can be defined with a [navigation prop](/docs/navigators/navigation-prop). Let's render a different button based on the route params, and set up the button to call `navigation.setParams` when pressed.
+The navigation options can be defined with a [navigation prop](navigation-prop.md). Let's render a different button based on the route params, and set up the button to call `navigation.setParams` when pressed.
 
 ```js
 static navigationOptions = ({ navigation }) => {
@@ -136,6 +136,6 @@ class EditInfoScreen extends React.Component {
 
 **Note**: Since the `handleSave`-param is only set on component mount it is not immediately available in the `navigationOptions`-function. Before `handleSave` is set we pass down an empty function to the `Button`-component in order to make it render immediately and avoid flickering.
 
-To see the rest of the header options, see the [navigation options document](/docs/navigators/navigation-options#Stack-Navigation-Options).
+To see the rest of the header options, see the [navigation options document](navigation-options.md).
 
 As an alternative to `setParams`, you may want to consider using a state management library such as [MobX](https://github.com/mobxjs/mobx) or [Redux](https://github.com/reactjs/redux), and when navigating to a screen, pass an object which contains the data necessary for the screen to render, as well as functions you may want to call that modify the data, make network requests and etc. That way, both your screen component and the static `navbarOptions` block will have access to the object. When following this approach, make sure to consider deep linking, which works best in cases where only javascript primitives are passed as navigation props to your screen. In case when deep linking is necessary, you may use a [higher order component (HOC)](https://reactjs.org/docs/higher-order-components.html) to transform the primitives to the object your screen components expects.

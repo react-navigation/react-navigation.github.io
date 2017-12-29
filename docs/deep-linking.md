@@ -4,7 +4,7 @@ title: Deep Linking
 sidebar_label: Deep Linking
 ---
 
-In this guide we will set up our app to handle external URIs. Let's start with the SimpleApp that [we created in the getting started guide](/docs/intro).
+In this guide we will set up our app to handle external URIs. Let's start with the SimpleApp that [we created in the getting started guide](intro.md).
 
 In this example, we want a URI like `mychat://chat/Taylor` to open our app and link straight into Taylor's chat page.
 

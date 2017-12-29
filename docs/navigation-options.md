@@ -23,7 +23,7 @@ class MyScreen extends React.Component {
 Or, the options can be a function that takes the following arguments, and returns an object of navigation options that will override the route-defined and navigator-defined navigationOptions.
 
 * `props` - The same props that are available to the screen component
-  * `navigation` - The [navigation prop](/docs/navigators/navigation-prop) for the screen, with the screen's route at `navigation.state`
+  * `navigation` - The [navigation prop](navigation-prop.md) for the screen, with the screen's route at `navigation.state`
   * `screenProps` - The props passing from above the navigator component
   * `navigationOptions` - The default or previous options that would be used if new values are not provided
 
