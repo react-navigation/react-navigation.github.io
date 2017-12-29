@@ -1,14 +1,17 @@
-# Configuring the Header
+---
+id: headers
+title: Configuring the Header
+sidebar_label: Configuring Headers
+---
 
 Header is only available for StackNavigator.
 
 In the previous example, we created a StackNavigator to display several screens in our app.
 
-
 When navigating to a chat screen, we can specify params for the new route by providing them to the navigate function. In this case, we want to provide the name of the person on the chat screen:
 
 ```js
-this.props.navigation.navigate('Chat', { user:  'Lucy' });
+this.props.navigation.navigate("Chat", { user: "Lucy" });
 ```
 
 The `user` param can be accessed from the chat screen:
@@ -39,10 +42,9 @@ class ChatScreen extends React.Component {
 basic-header
 ```
 
-
 ### Adding a Right Button
 
-Then we can add a [`header` navigation option](/docs/navigators/navigation-options#Stack-Navigation-Options) that allows us to add a custom right button:
+Then we can add a [`header` navigation option](navigation-options.md) that allows us to add a custom right button:
 
 ```js
 static navigationOptions = {
@@ -54,7 +56,7 @@ static navigationOptions = {
 header-button
 ```
 
-The navigation options can be defined with a [navigation prop](/docs/navigators/navigation-prop). Let's render a different button based on the route params, and set up the button to call `navigation.setParams` when pressed.
+The navigation options can be defined with a [navigation prop](navigation-prop.md). Let's render a different button based on the route params, and set up the button to call `navigation.setParams` when pressed.
 
 ```js
 static navigationOptions = ({ navigation }) => {
@@ -102,18 +104,18 @@ class EditInfoScreen extends React.Component {
   };
 
   state = {
-    nickname: 'Lucy jacuzzi'
-  }
+    nickname: "Lucy jacuzzi"
+  };
 
   _handleSave = () => {
     // Update state, show ActivityIndicator
     this.props.navigation.setParams({ isSaving: true });
-    
+
     // Fictional function to save information in a store somewhere
     saveInfo().then(() => {
-      this.props.navigation.setParams({ isSaving: false});
-    })
-  }
+      this.props.navigation.setParams({ isSaving: false });
+    });
+  };
 
   componentDidMount() {
     // We can only set the function after the component has been initialized
@@ -123,8 +125,8 @@ class EditInfoScreen extends React.Component {
   render() {
     return (
       <TextInput
-        onChangeText={(nickname) => this.setState({ nickname })}
-        placeholder={'Nickname'}
+        onChangeText={nickname => this.setState({ nickname })}
+        placeholder={"Nickname"}
         value={this.state.nickname}
       />
     );
@@ -134,7 +136,6 @@ class EditInfoScreen extends React.Component {
 
 **Note**: Since the `handleSave`-param is only set on component mount it is not immediately available in the `navigationOptions`-function. Before `handleSave` is set we pass down an empty function to the `Button`-component in order to make it render immediately and avoid flickering.
 
-
-To see the rest of the header options, see the [navigation options document](/docs/navigators/navigation-options#Stack-Navigation-Options).
+To see the rest of the header options, see the [navigation options document](navigation-options.md).
 
 As an alternative to `setParams`, you may want to consider using a state management library such as [MobX](https://github.com/mobxjs/mobx) or [Redux](https://github.com/reactjs/redux), and when navigating to a screen, pass an object which contains the data necessary for the screen to render, as well as functions you may want to call that modify the data, make network requests and etc. That way, both your screen component and the static `navbarOptions` block will have access to the object. When following this approach, make sure to consider deep linking, which works best in cases where only javascript primitives are passed as navigation props to your screen. In case when deep linking is necessary, you may use a [higher order component (HOC)](https://reactjs.org/docs/higher-order-components.html) to transform the primitives to the object your screen components expects.

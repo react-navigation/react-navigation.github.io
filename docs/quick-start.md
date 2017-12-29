@@ -1,4 +1,8 @@
-# Quick Start Guide
+---
+id: quick-start
+title: Quick Start Guide
+sidebar_label: Quick Start
+---
 
 To get started with React Navigation, all you have to do is install the `react-navigation` npm package.
 
@@ -21,11 +25,9 @@ To start using React Navigation we will create a `StackNavigator`. `StackNavigat
 StackNavigator's are the most common form of navigator so we'll use it as a basic demonstration. To get started, create a `StackNavigator`.
 
 ```javascript
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator } from "react-navigation";
 
-const RootNavigator = StackNavigator({
-
-});
+const RootNavigator = StackNavigator({});
 
 export default RootNavigator;
 ```
@@ -33,29 +35,29 @@ export default RootNavigator;
 We can then add screens to this `StackNavigator`. Each key represents a screen.
 
 ```javascript
-import React from 'react';
-import { View, Text } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import React from "react";
+import { View, Text } from "react-native";
+import { StackNavigator } from "react-navigation";
 
 const HomeScreen = () => (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+  <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
     <Text>Home Screen</Text>
   </View>
 );
 
 const DetailsScreen = () => (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+  <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
     <Text>Details Screen</Text>
   </View>
 );
 
 const RootNavigator = StackNavigator({
   Home: {
-    screen: HomeScreen,
+    screen: HomeScreen
   },
   Details: {
-    screen: DetailsScreen,
-  },
+    screen: DetailsScreen
+  }
 });
 
 export default RootNavigator;
