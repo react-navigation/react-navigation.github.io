@@ -1,25 +1,29 @@
-# React Navigation Contributor Guide
+---
+id: contributing
+title: React Navigation Contributor Guide
+sidebar_label: Contributing
+---
 
 Want to help improve React Navigation? Your help would be greatly appreciated!
 
 Here are some of some of the ways to contribute to the project:
 
-- [Reporting Bugs](#Reporting-Bugs)
-- [Improving the Documentation](#Improving-the-Documentation)
-- [Responding to Issues](#Responding-to-Issues)
-- [Bug Fixes](#Bug-Fixes)
-- [Suggesting a Feature](#Suggesting-a-Feature)
-- [Big Pull Requests](#Big-Pull-Requests)
+* [Reporting Bugs](#Reporting-Bugs)
+* [Improving the Documentation](#Improving-the-Documentation)
+* [Responding to Issues](#Responding-to-Issues)
+* [Bug Fixes](#Bug-Fixes)
+* [Suggesting a Feature](#Suggesting-a-Feature)
+* [Big Pull Requests](#Big-Pull-Requests)
 
 And here are a few helpful resources to aid in getting started:
 
-- [Issue Template](#Issue-Template)
-- [Pull Request Template](#Pull-Request-Template)
-- [Forking the Repository](#Forking-the-Repository)
-- [Code Review Guidelines](#Code-Review-Guidelines)
-- [Run the Example App](#Run-the-Example-App)
-- [Run the Website](#Run-the-Website)
-- [Run Tests and Type-Checking](#Run-Tests-and-Type-Checking)
+* [Issue Template](#Issue-Template)
+* [Pull Request Template](#Pull-Request-Template)
+* [Forking the Repository](#Forking-the-Repository)
+* [Code Review Guidelines](#Code-Review-Guidelines)
+* [Run the Example App](#Run-the-Example-App)
+* [Run the Website](#Run-the-Website)
+* [Run Tests and Type-Checking](#Run-Tests-and-Type-Checking)
 
 > Note that we used Yarn in the examples below but you're welcome to use NPM instead.
 
@@ -40,11 +44,11 @@ Any successful projects needs quality documentation and React Navigation is no d
 
 The docs are currently organized as follows
 
-- __Getting Started__: Introduction and basics of React Navigation. Help people get up and running with the package quickly. Introduce and demonstrate core functionality.
-- __Navigators__: API documentation for the included navigators and supporting APIs
-- __Advanced Guides__: (Advanced) Beyond the basics, what can you do with React Navigation? Discuss and demonstrate that here.
-- __Routers__: (Advanced) API documentation for the included routers and how to use/customize them
-- __Views__: (Advanced) API documentation for the included views and how to use/customize them
+* **Getting Started**: Introduction and basics of React Navigation. Help people get up and running with the package quickly. Introduce and demonstrate core functionality.
+* **Navigators**: API documentation for the included navigators and supporting APIs
+* **Advanced Guides**: (Advanced) Beyond the basics, what can you do with React Navigation? Discuss and demonstrate that here.
+* **Routers**: (Advanced) API documentation for the included routers and how to use/customize them
+* **Views**: (Advanced) API documentation for the included views and how to use/customize them
 
 The documentation isn't fixed to what categories and documents currently exist. If your documentation contributation is appropriate for any existing document, add it there. If it makes sense to create a new document for your contribution please do so and add it to the docs index.
 
@@ -108,8 +112,8 @@ Much like the issue template, the [pull request template](https://github.com/rea
 
 ### Forking the Repository
 
-- Fork [`react-navigation`](https://github.com/react-community/react-navigation) on GitHub
-- Run these commands in the terminal to download locally and install it:
+* Fork [`react-navigation`](https://github.com/react-community/react-navigation) on GitHub
+* Run these commands in the terminal to download locally and install it:
 
 ```bash
 git clone https://github.com/<USERNAME>/react-navigation.git
@@ -142,9 +146,9 @@ You will be show a QR code to scan in the Expo app. You can get Expo [here](http
 
 All examples:
 
-- [NavigationPlayground](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground)
-- [ReduxExample](https://github.com/react-community/react-navigation/tree/master/examples/ReduxExample)
-- [SafeAreaExample](https://github.com/react-community/react-navigation/tree/master/examples/SafeAreaExample)
+* [NavigationPlayground](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground)
+* [ReduxExample](https://github.com/react-community/react-navigation/tree/master/examples/ReduxExample)
+* [SafeAreaExample](https://github.com/react-community/react-navigation/tree/master/examples/SafeAreaExample)
 
 Commands are the same as above for any of the example apps. If you run into any issues, please try the following to start fresh:
 

@@ -1,14 +1,17 @@
-# Configuring the Header
+---
+id: headers
+title: Configuring the Header
+sidebar_label: Configuring Headers
+---
 
 Header is only available for StackNavigator.
 
 In the previous example, we created a StackNavigator to display several screens in our app.
 
-
 When navigating to a chat screen, we can specify params for the new route by providing them to the navigate function. In this case, we want to provide the name of the person on the chat screen:
 
 ```js
-this.props.navigation.navigate('Chat', { user:  'Lucy' });
+this.props.navigation.navigate("Chat", { user: "Lucy" });
 ```
 
 The `user` param can be accessed from the chat screen:
@@ -38,7 +41,6 @@ class ChatScreen extends React.Component {
 ```phone-example
 basic-header
 ```
-
 
 ### Adding a Right Button
 
@@ -102,18 +104,18 @@ class EditInfoScreen extends React.Component {
   };
 
   state = {
-    nickname: 'Lucy jacuzzi'
-  }
+    nickname: "Lucy jacuzzi"
+  };
 
   _handleSave = () => {
     // Update state, show ActivityIndicator
     this.props.navigation.setParams({ isSaving: true });
-    
+
     // Fictional function to save information in a store somewhere
     saveInfo().then(() => {
-      this.props.navigation.setParams({ isSaving: false});
-    })
-  }
+      this.props.navigation.setParams({ isSaving: false });
+    });
+  };
 
   componentDidMount() {
     // We can only set the function after the component has been initialized
@@ -123,8 +125,8 @@ class EditInfoScreen extends React.Component {
   render() {
     return (
       <TextInput
-        onChangeText={(nickname) => this.setState({ nickname })}
-        placeholder={'Nickname'}
+        onChangeText={nickname => this.setState({ nickname })}
+        placeholder={"Nickname"}
         value={this.state.nickname}
       />
     );
@@ -133,7 +135,6 @@ class EditInfoScreen extends React.Component {
 ```
 
 **Note**: Since the `handleSave`-param is only set on component mount it is not immediately available in the `navigationOptions`-function. Before `handleSave` is set we pass down an empty function to the `Button`-component in order to make it render immediately and avoid flickering.
-
 
 To see the rest of the header options, see the [navigation options document](/docs/navigators/navigation-options#Stack-Navigation-Options).
 

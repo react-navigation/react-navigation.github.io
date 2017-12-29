@@ -1,13 +1,17 @@
-## Screen tracking and analytics
+---
+id: screen-tracking
+title: Screen Tracking and Analytics
+sidebar_label: Screen Tracking
+---
 
-This example shows how to do screen tracking and send to Google Analytics. The approach can be adapted to any other mobile analytics SDK. 
+This example shows how to do screen tracking and send to Google Analytics. The approach can be adapted to any other mobile analytics SDK.
 
 ### Screen tracking
 
 When using built-in navigation container, we can use `onNavigationStateChange` to track the screen.
 
 ```js
-import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge';
+import { GoogleAnalyticsTracker } from "react-native-google-analytics-bridge";
 
 const tracker = new GoogleAnalyticsTracker(GA_TRACKING_ID);
 
@@ -48,15 +52,15 @@ When using Redux, we can write a Redux middleware to track the screen. For this 
 we will reuse `getCurrentRouteName` from the previous section.
 
 ```js
-import { NavigationActions } from 'react-navigation';
-import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge';
+import { NavigationActions } from "react-navigation";
+import { GoogleAnalyticsTracker } from "react-native-google-analytics-bridge";
 
 const tracker = new GoogleAnalyticsTracker(GA_TRACKING_ID);
 
-const screenTracking = ({ getState }) => next => (action) => {
+const screenTracking = ({ getState }) => next => action => {
   if (
-    action.type !== NavigationActions.NAVIGATE
-    && action.type !== NavigationActions.BACK
+    action.type !== NavigationActions.NAVIGATE &&
+    action.type !== NavigationActions.BACK
   ) {
     return next(action);
   }

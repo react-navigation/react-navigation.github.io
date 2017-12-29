@@ -1,4 +1,8 @@
-# Deep Linking
+---
+id: deep-linking
+title: Deep Linking
+sidebar_label: Deep Linking
+---
 
 In this guide we will set up our app to handle external URIs. Let's start with the SimpleApp that [we created in the getting started guide](/docs/intro).
 
@@ -11,7 +15,7 @@ Previously, we had defined a navigator like this:
 ```js
 const SimpleApp = StackNavigator({
   Home: { screen: HomeScreen },
-  Chat: { screen: ChatScreen },
+  Chat: { screen: ChatScreen }
 });
 ```
 
@@ -22,15 +26,14 @@ const SimpleApp = StackNavigator({
   Home: { screen: HomeScreen },
   Chat: {
     screen: ChatScreen,
-    path: 'chat/:user',
-  },
+    path: "chat/:user"
+  }
 });
 ```
 
-
 ### URI Prefix
 
-Next, let's configure our navigation container to extract the path from the app's incoming URI. 
+Next, let's configure our navigation container to extract the path from the app's incoming URI.
 
 ```js
 const SimpleApp = StackNavigator({...});

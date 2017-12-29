@@ -1,5 +1,8 @@
-
-# Screen Navigation Options
+---
+id: navigation-options
+title: Screen Navigation Options
+sidebar_label: Screen Nav Options
+---
 
 Each screen can configure several aspects about how it gets presented in parent navigators.
 
@@ -19,10 +22,10 @@ class MyScreen extends React.Component {
 
 Or, the options can be a function that takes the following arguments, and returns an object of navigation options that will override the route-defined and navigator-defined navigationOptions.
 
-- `props` - The same props that are available to the screen component
-  - `navigation` - The [navigation prop](/docs/navigators/navigation-prop) for the screen, with the screen's route at `navigation.state`
-  - `screenProps` - The props passing from above the navigator component
-  - `navigationOptions` - The default or previous options that would be used if new values are not provided
+* `props` - The same props that are available to the screen component
+  * `navigation` - The [navigation prop](/docs/navigators/navigation-prop) for the screen, with the screen's route at `navigation.state`
+  * `screenProps` - The props passing from above the navigator component
+  * `navigationOptions` - The default or previous options that would be used if new values are not provided
 
 ```js
 class ProfileScreen extends React.Component {
@@ -37,7 +40,7 @@ The screenProps are passed in at render-time. If this screen was hosted in a Sim
 
 ```js
 <SimpleApp
-  screenProps={{tintColor: 'blue'}}
+  screenProps={{ tintColor: "blue" }}
   // navigation={{state, dispatch}} // optionally control the app
 />
 ```
@@ -83,7 +86,7 @@ const MyTabNavigator = TabNavigator({
 });
 ```
 
-Note that you can still decide to **also** specify the `navigationOptions` on the screens at the leaf level - e.g.  the `ProfileScreen` above. The `navigationOptions` from the screen will be merged key-by-key with the default options coming from the navigator. Whenever both the navigator and screen define the same option (e.g. `headerTintColor`), the screen wins. Therefore, you could change the tint color when `ProfileScreen` is active by doing the following:
+Note that you can still decide to **also** specify the `navigationOptions` on the screens at the leaf level - e.g. the `ProfileScreen` above. The `navigationOptions` from the screen will be merged key-by-key with the default options coming from the navigator. Whenever both the navigator and screen define the same option (e.g. `headerTintColor`), the screen wins. Therefore, you could change the tint color when `ProfileScreen` is active by doing the following:
 
 ```js
 class ProfileScreen extends React.Component {
@@ -99,6 +102,7 @@ class ProfileScreen extends React.Component {
 List of available navigation options depends on the `navigator` the screen is added to.
 
 Check available options for:
-- [`drawer navigator`](/docs/navigators/drawer#Screen-Navigation-Options)
-- [`stack navigator`](/docs/navigators/stack#Screen-Navigation-Options)
-- [`tab navigator`](/docs/navigators/tab#Screen-Navigation-Options)
+
+* [`drawer navigator`](/docs/navigators/drawer#Screen-Navigation-Options)
+* [`stack navigator`](/docs/navigators/stack#Screen-Navigation-Options)
+* [`tab navigator`](/docs/navigators/tab#Screen-Navigation-Options)

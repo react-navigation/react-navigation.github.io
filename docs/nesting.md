@@ -1,4 +1,8 @@
-# Nesting Navigators
+---
+id: nesting
+title: Nasting Navigators
+sidebar_label: Nasting Navigators
+---
 
 It is common in mobile apps to compose various forms of navigation. The routers and navigators in React Navigation are composable, which allows you to define a complicated navigation structure for your app.
 
@@ -13,19 +17,19 @@ import { TabNavigator } from "react-navigation";
 
 class RecentChatsScreen extends React.Component {
   render() {
-    return <Text>List of recent chats</Text>
+    return <Text>List of recent chats</Text>;
   }
 }
 
 class AllContactsScreen extends React.Component {
   render() {
-    return <Text>List of all contacts</Text>
+    return <Text>List of all contacts</Text>;
   }
 }
 
 const MainScreenNavigator = TabNavigator({
   Recent: { screen: RecentChatsScreen },
-  All: { screen: AllContactsScreen },
+  All: { screen: AllContactsScreen }
 });
 ```
 
@@ -34,8 +38,6 @@ If the `MainScreenNavigator` was rendered as the top-level navigator component, 
 ```phone-example
 simple-tabs
 ```
-
-
 
 ## Nesting a Navigator in a screen
 
@@ -46,7 +48,7 @@ Lets add our tabs navigator as a screen in our top-level `StackNavigator` that w
 ```js
 const SimpleApp = StackNavigator({
   Home: { screen: MainScreenNavigator },
-  Chat: { screen: ChatScreen },
+  Chat: { screen: ChatScreen }
 });
 ```
 
@@ -54,21 +56,21 @@ Because `MainScreenNavigator` is being used as a screen, we can give it `navigat
 
 ```js
 const SimpleApp = StackNavigator({
-  Home: { 
+  Home: {
     screen: MainScreenNavigator,
     navigationOptions: {
-      title: 'My Chats',
-    },
+      title: "My Chats"
+    }
   },
-  Chat: { screen: ChatScreen },
-})
+  Chat: { screen: ChatScreen }
+});
 ```
 
 Lets also add a button to each tab that links to a chat:
 
 ```js
 <Button
-  onPress={() => this.props.navigation.navigate('Chat', { user: 'Lucy' })}
+  onPress={() => this.props.navigation.navigate("Chat", { user: "Lucy" })}
   title="Chat with Lucy"
 />
 ```
@@ -80,14 +82,16 @@ nested
 ```
 
 ## Nesting a Navigator in a Component
+
 Sometimes it is desirable to nest a navigator that is wrapped in a component. This is useful in cases where the navigator only takes up part of the screen. For the child navigator to be wired into the navigation tree, it needs the `navigation` property from the parent navigator.
 
 ```js
 const SimpleApp = StackNavigator({
   Home: { screen: NavigatorWrappingScreen },
-  Chat: { screen: ChatScreen },
+  Chat: { screen: ChatScreen }
 });
 ```
+
 In this case, the NavigatorWrappingScreen is not a navigator, but it renders a navigator as part of its output.
 
 If this navigator renders blank then change `<View>` to `<View style={{flex: 1}}>`.
@@ -97,8 +101,8 @@ class NavigatorWrappingScreen extends React.Component {
   render() {
     return (
       <View>
-        <SomeComponent/>
-        <MainScreenNavigator/>
+        <SomeComponent />
+        <MainScreenNavigator />
       </View>
     );
   }
@@ -112,8 +116,8 @@ class NavigatorWrappingScreen extends React.Component {
   render() {
     return (
       <View>
-        <SomeComponent/>
-        <MainScreenNavigator navigation={this.props.navigation}/>
+        <SomeComponent />
+        <MainScreenNavigator navigation={this.props.navigation} />
       </View>
     );
   }
