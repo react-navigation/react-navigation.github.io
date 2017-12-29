@@ -81,7 +81,7 @@ export default screenTracking;
 
 ### Create Redux store and apply the above middleware
 
-The `screenTracking` middleware can be applied to the store during its creation. See [Redux Integration](Redux-Integration.md) for details.
+The `screenTracking` middleware can be applied to the store during its creation. See [Redux Integration](/content/docs/redux-integration.html) for details.
 
 ```js
 const store = createStore(

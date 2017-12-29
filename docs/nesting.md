@@ -43,7 +43,7 @@ simple-tabs
 
 We want these tabs to be visible in the first screen of the app, but new screens in the stack should cover the tabs.
 
-Lets add our tabs navigator as a screen in our top-level `StackNavigator` that we set up in the [previous step](/docs/intro/).
+Lets add our tabs navigator as a screen in our top-level `StackNavigator` that we set up in the [previous step](/content/docs/intro.html).
 
 ```js
 const SimpleApp = StackNavigator({

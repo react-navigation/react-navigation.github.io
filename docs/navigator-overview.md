@@ -12,9 +12,9 @@ Under the hood, navigators are plain React components.
 
 `react-navigation` includes the following functions to help you create navigators:
 
-* [StackNavigator](/docs/navigators/stack) - Renders one screen at a time and provides transitions between screens. When a new screen is opened it is placed on top of the stack.
-* [TabNavigator](/docs/navigators/tab) - Renders a tab bar that lets the user switch between several screens
-* [DrawerNavigator](/docs/navigators/drawer) - Provides a drawer that slides in from the left of the screen
+* [StackNavigator](/content/docs/stack-navigator.html) - Renders one screen at a time and provides transitions between screens. When a new screen is opened it is placed on top of the stack.
+* [TabNavigator](/content/docs/tab-navigator.html) - Renders a tab bar that lets the user switch between several screens
+* [DrawerNavigator](/content/docs/drawer-navigator.html) - Provides a drawer that slides in from the left of the screen
 
 ## Rendering screens with Navigators
 
@@ -22,8 +22,8 @@ The navigators render application screens which are just React components.
 
 To learn how to create screens, read about:
 
-* [Screen `navigation` prop](/docs/navigators/navigation-prop) to allow the screen to dispatch navigation actions, such as opening another screen
-* [Screen `navigationOptions`](/docs/navigators/navigation-options) to customize how the screen gets presented by the navigator (e.g. header title, tab label)
+* [Screen `navigation` prop](/content/docs/navigation-prop.html) to allow the screen to dispatch navigation actions, such as opening another screen
+* [Screen `navigationOptions`](/content/docs/navigation-options.html) to customize how the screen gets presented by the navigator (e.g. header title, tab label)
 
 ### Calling Navigate on Top Level Component
 
@@ -72,4 +72,4 @@ Function that gets called every time navigation state managed by the navigator c
 
 ### `uriPrefix`
 
-The prefix of the URIs that the app might handle. This will be used when handling a [deep link](/docs/guides/linking) to extract the path passed to the router.
+The prefix of the URIs that the app might handle. This will be used when handling a [deep link](/content/docs/deep-linking.html) to extract the path passed to the router.

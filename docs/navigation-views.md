@@ -4,7 +4,7 @@ title: Views
 sidebar_label: Navigation Views
 ---
 
-Navigation views are presentation components that take a [`router`](/docs/api/routers) and a [`navigation`](/docs/navigators/navigation-prop) prop, and can display several screens, as specified by the `navigation.state`.
+Navigation views are presentation components that take a [`router`](/content/docs/routers.html) and a [`navigation`](/content/docs/navigation-prop.html) prop, and can display several screens, as specified by the `navigation.state`.
 
 Navigation views are controlled React components that can present the current navigation state. They manage switching of screens, animations and gestures. They also present persistent navigation views such as tab bars and headers.
 
@@ -18,4 +18,4 @@ Navigation views are controlled React components that can present the current na
 
 ## [Transitioner](/docs/views/transitioner)
 
-`Transitioner` manages the animations during the transition and can be used to build fully custom navigation views. It is used inside the `CardStack` view. [Learn more about Transitioner here.](/docs/views/transitioner)
+`Transitioner` manages the animations during the transition and can be used to build fully custom navigation views. It is used inside the `CardStack` view. [Learn more about Transitioner here.](/content/docs/transitioner.html)

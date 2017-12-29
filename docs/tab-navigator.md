@@ -84,7 +84,7 @@ TabNavigator(RouteConfigs, TabNavigatorConfig);
 
 ### RouteConfigs
 
-The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](/docs/api/navigators/StackNavigator.md#routeconfigs) from `StackNavigator`.
+The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](/content/docs/stack-navigator.html#routeconfigs) from `StackNavigator`.
 
 ### TabNavigatorConfig
 
@@ -202,7 +202,6 @@ Useful for adding a custom logic before the transition to the next scene (the ta
 The navigator component created by `TabNavigator(...)` takes the following props:
 
 * `screenProps` - Pass down extra options to child screens and navigation options, for example:
-
 
 ```jsx
 const TabNav = TabNavigator({
