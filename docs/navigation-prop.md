@@ -1,4 +1,11 @@
-Each *screen* in your app will receive a navigation prop which contain the following:
+---
+id: navigation-prop
+title: Using the navigation prop to move between screens
+sidebar_label: Using the navigation prop to move between screens
+---
+
+Each screen component in your app will receive a navigation prop:
+
 * `this.props.navigation`
   * `navigate` - link to other screens
   * `goBack` - close active screen and move back
@@ -29,52 +36,6 @@ class HomeScreen extends React.Component {
           title="Go to Brent's profile"
         />
       </View>
-     )
-   }
-}
-```
-
-## `state` - The screen's current state/route
-
-A screen has access to its route via `this.props.navigation.state`. Each will return an object with the following:
-
-```js
-{
-  // the name of the route config in the router
-  routeName: 'profile',
-  //a unique identifier used to sort routes
-  key: 'main0',
-  //an optional object of string options for this screen
-  params: { hello: 'world' }
-}
-```
-
-```js
-class ProfileScreen extends React.Component {
-  render() {
-    const {state} = this.props.navigation;
-    // state.routeName === 'Profile'
-    return (
-      <Text>Name: {state.params.name}</Text>
-    );
-  }
-}
-```
-
-
-## `setParams` - Make changes to route params
-
-Firing the `setParams` action allows a screen to change the params in the route, which is useful for updating the header buttons and title.
-
-```js
-class ProfileScreen extends React.Component {
-  render() {
-    const {setParams} = this.props.navigation;
-    return (
-      <Button
-        onPress={() => setParams({name: 'Lucy'})}
-        title="Set title name to 'Lucy'"
-      />
      )
    }
 }
@@ -148,4 +109,50 @@ const navigateAction = NavigationActions.navigate({
 })
 this.props.navigation.dispatch(navigateAction)
 
+```
+
+## `state` - The screen's current state/route
+
+A screen has access to its route via `this.props.navigation.state`. Each will return an object with the following:
+
+```js
+{
+  // the name of the route config in the router
+  routeName: 'profile',
+  //a unique identifier used to sort routes
+  key: 'main0',
+  //an optional object of string options for this screen
+  params: { hello: 'world' }
+}
+```
+
+```js
+class ProfileScreen extends React.Component {
+  render() {
+    const {state} = this.props.navigation;
+    // state.routeName === 'Profile'
+    return (
+      <Text>Name: {state.params.name}</Text>
+    );
+  }
+}
+```
+
+
+## `setParams` - Make changes to route params
+
+Firing the `setParams` action allows a screen to change the params in the route, which is useful for updating the header buttons and title.
+
+```js
+class ProfileScreen extends React.Component {
+  render() {
+    const {setParams} = this.props.navigation;
+    return (
+      <Button
+        onPress={() => setParams({name: 'Lucy'})}
+        title="Set title name to 'Lucy'"
+      />
+     )
+   }
+}
 ```

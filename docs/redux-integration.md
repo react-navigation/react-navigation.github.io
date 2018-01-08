@@ -1,6 +1,9 @@
-# Redux Integration
+---
+id: redux-integration
+title: Redux Integration
+sidebar_label: Redux Integration
+---
 
-### Overview For Redux Integration
 1. To handle your app's navigation state in redux, you can pass your own `navigation` prop to a navigator.
 
 2. Once you pass your own navigation prop to the navigator, the default [`navigation`](https://reactnavigation.org/docs/navigators/navigation-prop) prop gets destroyed. You will most probably pass the `navigation` prop's properties that you want to access. Normally  [`state`](https://reactnavigation.org/docs/navigators/navigation-prop#state-The-screen's-current-stateroute) and [`dispatch`](https://reactnavigation.org/docs/navigators/navigation-prop#dispatch-Send-an-action-to-the-router) properties are passed to the navigator. You will learn how to pass those properties further in this guide. Since you have destroyed the default props, if you try to invoke something you have not explicitly passed down, it won't work. So, if you didn't pass `dispatch`  to the navigator and only passes `state` than you can't access `dispatch` further in your Components.

@@ -1,9 +1,10 @@
-# Configuring the Header
+---
+id: headers
+title: Configuring a StackNavigator screen's header
+sidebar_label: Configuring a StackNavigator screen's header
+---
 
-Header is only available for StackNavigator.
-
-In the previous example, we created a StackNavigator to display several screens in our app.
-
+Header is only available for StackNavigator. In the previous example, we created a `StackNavigator` to display several screens in our app.
 
 When navigating to a chat screen, we can specify params for the new route by providing them to the navigate function. In this case, we want to provide the name of the person on the chat screen:
 

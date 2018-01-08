@@ -1,4 +1,8 @@
-# Deep Linking
+---
+id: deep-linking
+title: Deep Linking
+sidebar_label: Deep Linking
+---
 
 In this guide we will set up our app to handle external URIs. Let's start with the SimpleApp that [we created in the getting started guide](/docs/intro).
 

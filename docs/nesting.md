@@ -1,6 +1,12 @@
-# Nesting Navigators
+---
+id: composing-navigators
+title: Composing Navigators
+sidebar_label: Composing Navigators
+---
 
-It is common in mobile apps to compose various forms of navigation. The routers and navigators in React Navigation are composable, which allows you to define a complicated navigation structure for your app.
+TODO: First talk about putting a Stack within a Stack for modals. Then talk about TabNavigator later.
+
+It is common in mobile apps to compose various forms of navigation. The routers and navigators in React Navigation are composable (a navigator can contain other navigators), which allows you to define a complicated navigation structure for your app.
 
 For our chat app, we want to put several tabs on the first screen, to view recent chat threads or all contacts.
 

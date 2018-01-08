@@ -1,9 +1,10 @@
+---
+id: navigation-options
+title: 
+sidebar_label: Configuring Navigation Options
+---
 
-# Screen Navigation Options
-
-Each screen can configure several aspects about how it gets presented in parent navigators.
-
-#### Two Ways to specify each option
+Each screen can configure various aspects about how it gets presented in parent navigators. You can configure 
 
 **Static configuration:** Each navigation option can either be directly assigned:
 

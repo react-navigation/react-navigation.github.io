@@ -1,6 +1,10 @@
-# TabNavigator
+---
+id: tab-navigator
+title: TabNavigator
+sidebar_label: TabNavigator
+---
 
-Used to easily set up a screen with several tabs with a TabRouter. For a live example, open [this project with Expo](https://exp.host/@react-navigation/NavigationPlayground).
+Used to easily set up a screen with several tabs with a TabRouter. For a live example, open [this project with Expo](https://expo.io/@react-navigation/NavigationPlayground).
 
 ```js
 class MyHomeScreen extends React.Component {

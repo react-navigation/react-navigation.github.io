@@ -1,8 +1,10 @@
-## Screen tracking and analytics
+---
+id: screen-tracking
+title: Screen Tracking
+sidebar_label: Screen Tracking
+---
 
-This example shows how to do screen tracking and send to Google Analytics. The approach can be adapted to any other mobile analytics SDK. 
-
-### Screen tracking
+This example shows how to do screen tracking and send to Google Analytics. The approach can be adapted to any other analytics SDK. 
 
 When using built-in navigation container, we can use `onNavigationStateChange` to track the screen.
 

@@ -1,6 +1,10 @@
-# Navigation Actions
+---
+id: navigation-actions
+title: Dispatching Navigation Actions
+sidebar_label: Dispatching Navigation Actions
+---
 
-All Navigation Actions return an object that can be sent to the router using `navigation.dispatch()` method.
+All `NavigationActions` return an object that can be sent to the router using `navigation.dispatch()` method.
 
 Note that if you want to dispatch react-navigation actions you should use the action creators provided in this library.
 
@@ -14,6 +18,7 @@ The following actions are supported:
 The action creator functions define `toString()` to return the action type, which enables easy usage with third-party Redux libraries, including redux-actions and redux-saga.
 
 ### Navigate
+
 The `Navigate` action will update the current state with the result of a `Navigate` action.
 
 - `routeName` - *String* - Required - A destination routeName that has been registered somewhere in the app's router

@@ -1,4 +1,8 @@
-# React Navigation Contributor Guide
+---
+id: contributing
+title: React Navigtion Contributing Guide
+sidebar_label: Contributing Guide
+---
 
 Want to help improve React Navigation? Your help would be greatly appreciated!
 
