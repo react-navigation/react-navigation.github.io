@@ -1,7 +1,7 @@
 ---
 id: headers
-title: Configuring a StackNavigator screen's header
-sidebar_label: Configuring a StackNavigator screen's header
+title: Configuring the header bar
+sidebar_label: Configuring the header bar
 ---
 
 Header is only available for StackNavigator. In the previous example, we created a `StackNavigator` to display several screens in our app.

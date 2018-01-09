@@ -1,16 +1,18 @@
 ---
 id: getting-started
-title: Getting Started with StackNavigator
-sidebar_label: Getting Started with StackNavigator
+title: Hello React Navigation
+sidebar_label: Hello React Navigation
 ---
 
-To get started using React Navigation we will create a simple `StackNavigator`.
+In a web browser, you can link to different pages using an anchor (`<a>`) tag. When the user clicks on a link, the URL is pushed to the browser history stack. When the user presses the back button, the browser pops the item from the top of the history stack, so the active page is now the previously visited page. React Native doesn't have a built-in idea of a global history stack like a web browser does -- this is where React Naviation enters the story.
 
-`StackNavigator` provides a way for your app to transition between screens and keep track of navigation history. If your app uses only one `StackNavigator` then it is conceptually similar to how a browser handles your navigation state: when you visit a new page, it gets pushed to the history stack, and when you press back, the most recent item is "popped" off of the stack and the page you were on before it is now active. A key difference is that React Navigation's `StackNavigator` provides the gestures and animations that you would expect on Android and iOS when navigating between routes in the stack.
+React Navigation's `StackNavigator` provides a way for your app to transition between screens and manage navigation history. If your app uses only one `StackNavigator` then it is conceptually similar to how a  web browser handles navigation state - your app pushes and pops items from the navigation stack as users interact with the it, and this results in the user seeing different screens. A key difference between how this works in a web browser and in React Navigation is that React Navigation's `StackNavigator` provides the gestures and animations that you would expect on Android and iOS when navigating between routes in the stack.
+
+All we need to get started using React Navigation is a `StackNavigator`.
 
 ## Creating a StackNavigator
 
-`StackNavigator` is a function that returns a React component. It takes _a route configuration object_ and, optionally, _an options object_ (we omit this below). Because it returns a React component, we can export it directly from App.js to be used as our App's root component.
+`StackNavigator` is a function that returns a React component. It takes _a route configuration object_ and, optionally, _an options object_ (we omit this below, for now). Because the `StackNavigator` function returns a React component, we can export it directly from `App.js` to be used as our App's root component.
 
 ```javascript
 // In App.js in a new project
@@ -35,8 +37,15 @@ export default StackNavigator({
   },
 });
 ```
+<a href="https://snack.expo.io/@react-navigation/hello-world" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-It's often useful to have more control over the component at the root of your app, so let's wrap it in another component instead of exporting it directly.
+If you run this code, you will see a screen with an empty navigation bar and a grey content area containing your `HomeScreen` component. The styles you see for the navigation bar and the content area are the default configuration for a `StackNavigator`, we'll learn how to configure those later.
+
+> The casing of the route name doesn't matter -- you can use lowercase `home` or capitalized `Home`, it's up to you. We prefer capitalizing our route names.
+
+> The only required configuration for a route is the `screen` component. You can read more about the other options available in the [StackNavigator reference](__TODO__).
+
+In React Native, the component exported from `App.js` is the entry point (or root component) for your app -- it is the component from which every other component descends. It's often useful to have more control over the component at the root of your app than you would get from exporting a `StackNavigator`, so let's export a component that just renders our `StackNavigator`.
 
 ```js
 const RootStack = StackNavigator({
@@ -52,9 +61,13 @@ export default class App extends React.Component {
 }
 ```
 
-The `<RootStack />` component doesn't accept any props -- all configuration is specified in the _options_ parameter to the `StackNavigator` fuction. To see an example of this, we will add a second screen.
+## Adding a second route
+
+The `<RootStack />` component doesn't accept any props -- all configuration is specified in the `options` parameter to the `StackNavigator` function. We left the `options` blank, so it just uses the default configuration. To see an example of using the `options` object, we will add a second screen to the `StackNavigator`.
 
 ```js
+// Other code for HomeScreen here...
+
 class DetailsScreen extends React.Component {
   render() {
     return (
@@ -78,83 +91,16 @@ const RootStack = StackNavigator(
     initialRouteName: 'Home',
   }
 );
+
+// Other code for App component here...
 ```
 
-<!-- We can then add screens to this `StackNavigator`. Each key represents a screen.
+Now our stack has two *routes*, a `Home` route and a `Details` route. The `Home` route corresponds to the `HomeScreen` component, and the `Details` route corresponds to the `DetailsScreen` component. The initial route for the stack is the `Home` route. The natural question at this point is: "how do I move from the Home route to the Details route?". That is covered in the next section.
 
-```javascript
-import React from 'react';
-import { View, Text } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+## Summary
 
-class DetailsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-      </View>
-    );
-  }
-}
-
-const RootNavigator = StackNavigator({
-  Home: {
-    screen: HomeScreen,
-  },
-  Details: {
-    screen: DetailsScreen,
-  },
-});
-
-export default RootNavigator;
-```
-
-Now let's add a title to the navigation bar.
-
-```javascript
-...
-
-const RootNavigator = StackNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: {
-      headerTitle: 'Home',
-    },
-  },
-  Details: {
-    screen: DetailsScreen,
-    navigationOptions: {
-      headerTitle: 'Details',
-    },
-  },
-});
-
-export default RootNavigator;
-```
-
-Finally, we should be able to navigate from the home screen to the details screen. When you register a component with a navigator that component will then have a `navigation` prop added to it. This `navigation` prop drives how we move between different screens.
-
-To move from the home screen to the details screen we'll want to use `this.props.navigation.navigate`, like so:
-
-```javascript
-import { View, Text, Button } from 'react-native';
-
-class HomeScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button
-          onPress={() => this.props.navigation.navigate('Details')}
-          title="Go to details"
-        />
-      </View>
-    )
-  }
-}
-);
-```
-
-And there you have it! That's the basics of using the [StackNavigator](/docs/navigators/stack), and React Navigation as a whole. Here's the full code from this example:
-
-<div class="snack" data-snack-id="HJlnU0XTb" data-snack-platform="ios" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#fafafa;border:1px solid rgba(0,0,0,.16);border-radius:4px;height:505px;width:100%"></div> -->
+- React Native doesn't have a built-in API for navigation like a web browser does. React Navigation provides this for you, along with the iOS and Android gestures and animations to transition between screens.
+- `StackNavigator` is a function that takes a route configuration object and an options object and returns a React component.
+- The keys in the route configuration object are the route names and the values are the configuration for that route. The only required property on the configuration is the `screen` (the component to use for the route).
+- To specify what the initial route in a stack is, provide an `initialRouteName` on the stack options object.
+- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/hello-react-navigation).

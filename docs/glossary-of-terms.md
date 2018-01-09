@@ -1,6 +1,6 @@
 ---
 id: glossary-of-terms
-title: Glossary of Terms
-sidebar_label: Glossary of Terms
+title: Glossary of terms
+sidebar_label: Glossary of terms
 ---
 

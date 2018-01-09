@@ -1,7 +1,7 @@
 ---
 id: redux-integration
-title: Redux Integration
-sidebar_label: Redux Integration
+title: Redux integration
+sidebar_label: Redux integration
 ---
 
 1. To handle your app's navigation state in redux, you can pass your own `navigation` prop to a navigator.

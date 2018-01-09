@@ -14,3 +14,14 @@
 
 @media only screen and (min-width: 1500px) {
 }
+
+blockquote {
+  background-color: rgba(226, 232, 125, 0.1);
+  border-left: 5px solid rgba(226, 232, 125, 0.3);
+}
+
+.run-code-button {
+  margin-top: -25px;
+  margin-bottom: 5px;
+  display: inline-block;
+}

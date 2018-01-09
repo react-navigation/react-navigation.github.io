@@ -1,16 +1,18 @@
 ---
 id: intro
-title: Introduction
-sidebar_label: Introduction
+title: Getting started
+sidebar_label: Getting started
 ---
 
-TODO: re-write this to quickly describe philosophy then link to a section in meta with more details.
+React Navigation is born from the React Native community's need for an extensible yet easy-to-use navigation solution written entirely in JavaScript (so you can read and understand all of the source), on top of powerful native primitives.
 
-React Navigation is born from the React Native community's need for an extensible yet easy-to-use navigation solution written entirely in JavaScript, on top of powerful native primitives.
+Before you commit to using React Navigation for your project, you might want to read the [anti-pitch](why-not.html) &mdash; it will help you to understand the tradeoffs that we have chosen along with the areas where we consider the library to be deficient currently.
+
+If you're already familiar with React Native then you'll be able to get moving with React Navigation quickly! If not, you may want to read sections 1 to 4 (inclusive) of [React Native Express](http://reactnativeexpress.com/) first, then come back here when you're done.
 
 ## Installation
 
-If you're already familiar with React Native then you'll be able to get moving with React Navigation quickly! First, you will need to install the `react-navigation` package in your React Native project.
+Install the `react-navigation` package in your React Native project.
 
 ```bash
 yarn add react-navigation
@@ -18,7 +20,7 @@ yarn add react-navigation
 # npm install --save react-navigation
 ```
 
-You're good to go! Continue to ["Getting Started"](getting-started.html) to start writing some code.
+You're good to go! Continue to ["Hello React Navigation"](getting-started.html) to start writing some code.
 
 
 <!-- 1. [Quick Start](/docs/intro/quick-start)

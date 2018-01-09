@@ -1,7 +1,7 @@
 ---
 id: composing-navigators
-title: Composing Navigators
-sidebar_label: Composing Navigators
+title: Composing navigators
+sidebar_label: Composing navigators
 ---
 
 TODO: First talk about putting a Stack within a Stack for modals. Then talk about TabNavigator later.
@@ -40,8 +40,6 @@ If the `MainScreenNavigator` was rendered as the top-level navigator component, 
 ```phone-example
 simple-tabs
 ```
-
-
 
 ## Nesting a Navigator in a screen
 
