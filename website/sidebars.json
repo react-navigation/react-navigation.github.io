@@ -1,9 +1,8 @@
 {
   "docs": {
-    "Fundamentals": ["intro", "getting-started", "navigating", "headers", "modal", "auth-flow", "navigation-options", "composing-navigators", "navigation-actions", "navigation-prop", "glossary-of-terms"],
-    "Common Scenarios": ["how-do-i", "handling-iphonex", "deep-linking", "screen-tracking", "redux-integration", "header-bar-animation"],
-    "Navigators": ["navigator-overview", "stack-navigator", "tab-navigator", "drawer-navigator"],
+    "Fundamentals": ["intro", "getting-started", "navigating", "params", "headers", "header-buttons", "modal", "auth-flow", "other-navigators", "navigation-prop", "stack-navigator", "navigation-actions",  "glossary-of-terms"],
+    "How do I do ...?": ["tab-navigator", "drawer-navigator", "customize-styles", "customize-transitions", "handling-iphonex", "status-bar", "custom-android-back-button-handling", "search-screen", "deep-linking", "screen-tracking", "redux-integration", "header-bar-animation"],
     "Build your own Navigator": ["custom-navigator-overview", "routers", "custom-navigators", "custom-routers", "navigation-views", "transitioner"],
-    "Meta": ["anti-pitch", "contributing"]
+    "Meta": ["pitch", "goals", "alternatives", "request-feature", "help", "contributing"]
   }
 }

@@ -1,5 +1,5 @@
 ---
 id: handling-iphonex
-title: Handling iPhone X
-sidebar_label: Handling iPhone X
+title: iPhone X support
+sidebar_label: iPhone X support
 ---

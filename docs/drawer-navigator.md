@@ -1,7 +1,7 @@
 ---
 id: drawer-navigator
-title: DrawerNavigator
-sidebar_label: DrawerNavigator
+title: Drawer-based navigation
+sidebar_label: Drawer-based navigation
 ---
 
 Used to easily set up a screen with a drawer navigation. For a live example please see [our expo demo](https://exp.host/@react-navigation/NavigationPlayground).
