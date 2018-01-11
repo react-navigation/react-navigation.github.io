@@ -4,26 +4,11 @@ title: Configuring the header bar
 sidebar_label: Configuring the header bar
 ---
 
-Header is only available for StackNavigator. In the previous example, we created a `StackNavigator` to display several screens in our app.
+By now you're probably tired of seeing a blank grey bar on the top of your screen &mdash; you're ready for some [flair](https://memegenerator.net/img/images/600x600/14303485/stan-flair-office-space.jpg).
 
 When navigating to a chat screen, we can specify params for the new route by providing them to the navigate function. In this case, we want to provide the name of the person on the chat screen:
 
-```js
-this.props.navigation.navigate('Chat', { user:  'Lucy' });
-```
-
-The `user` param can be accessed from the chat screen:
-
-```js
-class ChatScreen extends React.Component {
-  render() {
-    const { params } = this.props.navigation.state;
-    return <Text>Chat with {params.user}</Text>;
-  }
-}
-```
-
-### Setting the Header Title
+## Setting the Header Title
 
 Next, the header title can be configured to use the screen param:
 
@@ -36,12 +21,7 @@ class ChatScreen extends React.Component {
 }
 ```
 
-```phone-example
-basic-header
-```
-
-
-### Adding a Right Button
+## Adding a Right Button
 
 Then we can add a [`header` navigation option](/docs/navigators/navigation-options#Stack-Navigation-Options) that allows us to add a custom right button:
 
@@ -80,7 +60,7 @@ Now, the header can interact with the screen route/state:
 header-interaction
 ```
 
-### Header interaction with screen component
+## Header interaction with screen component
 
 Sometimes it is necessary for the header to access properties of the screen component such as functions or state.
 
@@ -182,7 +162,7 @@ The screenProps are passed in at render-time. If this screen was hosted in a Sim
 />
 ```
 
-#### Generic Navigation Options
+## Generic Navigation Options
 
 The `title` navigation option is generic between every navigator. It is used to set the title string for a given screen.
 
@@ -196,7 +176,7 @@ class MyScreen extends React.Component {
 
 Unlike the other nav options which are only utilized by the navigator view, the title option can be used by the environment to update the title in the browser window or app switcher.
 
-#### Default Navigation Options
+## Default Navigation Options
 
 It's very common to define `navigationOptions` on a screen, but sometimes it is useful to define `navigationOptions` on a navigator too.
 

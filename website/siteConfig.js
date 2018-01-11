@@ -22,7 +22,7 @@ const siteConfig = {
   baseUrl: '/content/' /* base url for your project */,
   projectName: 'react-navigation',
   headerLinks: [
-    {doc: 'intro', label: 'Docs'},
+    {doc: 'getting-started', label: 'Docs'},
     {doc: 'doc4', label: 'API'},
     {page: 'help', label: 'Help'},
     {blog: true, label: 'Blog'},
