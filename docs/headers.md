@@ -8,11 +8,31 @@ By now you're probably tired of seeing a blank grey bar on the top of your scree
 
 ## Setting the header title
 
+```js
+class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Home',
+  };
+
+  /* render function, etc */
+}
+
+class DetailsScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Details',
+  };
+
+  /* render function, etc */
+}
+```
+
+<a href="https://snack.expo.io/@react-navigation/setting-header-title" target="blank" class="run-code-button">&rarr; Run this code</a>
+
+## Using params in the title
+
 ## Adjusting header colors
 
 ## Using a different component for the title
-
-## Using params in header configuration
 
 Next, the header title can be configured to use the screen param:
 

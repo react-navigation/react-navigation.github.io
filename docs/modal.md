@@ -1,5 +1,5 @@
 ---
 id: modal
-title: Displaying a modal
-sidebar_label: Displaying a modal
+title: Opening a modal with a stack
+sidebar_label: Opening a modal with a stack
 ---

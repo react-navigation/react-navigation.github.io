@@ -1,7 +1,7 @@
 ---
-id: navigation-without-navigators
-title: Navigation-like components
-sidebar_label: Navigation-like components
+id: modals-without-stacknavigator
+title: Modals without a stack
+sidebar_label: Modals without a stack
 ---
 
 ## Why do we even need navigators?
