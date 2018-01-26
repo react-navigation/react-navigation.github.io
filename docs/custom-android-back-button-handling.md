@@ -11,7 +11,7 @@ Take, for example, a screen where user is selecting items in a list, and a "sele
 Returning `true` from `onBackButtonPressAndroid` denotes that we have handled the event, and react-navigation's lister will not get called, thus not popping the screen. Returning `false` will cause the event to bubble up and react-navigation's listener will pop the screen.
 
 ```
-class ComponentWithCustomBackBehavior extends React.Component {
+class ScreenWithCustomBackBehavior extends React.Component {
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
   }
@@ -30,3 +30,5 @@ class ComponentWithCustomBackBehavior extends React.Component {
   };
 }
 ```
+
+The presented approach will work well for screens that are shown in a `StackNavigator`. Custom back button handling in other situations may not be supported at the moment (eg. A known case when this does not work is when you want to handle back button press in an open drawer. PRs for such use cases are welcome!)
