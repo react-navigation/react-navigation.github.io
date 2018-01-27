@@ -1,5 +1,5 @@
 ---
 id: modal
-title: Opening a modal with a stack
-sidebar_label: Opening a modal with a stack
+title: Opening a full-screen modal
+sidebar_label: Opening a full-screen modal
 ---

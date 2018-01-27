@@ -1,8 +1,10 @@
 ---
-id: modals-without-stacknavigator
-title: Modals without a stack
-sidebar_label: Modals without a stack
+id: partial-overlay
+title: Partial overlays
+sidebar_label: Partial overlays
 ---
+
+like a tooltip, menu from navbar, etc.
 
 ## Why do we even need navigators?
 

@@ -48,6 +48,10 @@ const siteConfig = {
   scripts: ['https://buttons.github.io/buttons.js'],
   // You may provide arbitrary config keys to be used as needed by your template.
   repoUrl: 'https://github.com/react-navigation/react-navigation',
+  algolia: {
+    apiKey: "my-search-only-api-key-1234",
+    indexName: "my-index-name"
+  },
 };
 
 module.exports = siteConfig;
