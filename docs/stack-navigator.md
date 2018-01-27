@@ -114,6 +114,11 @@ String, React Element or React Component used by the header. Defaults to scene `
 
 Whether header title font should scale to respect Text Size accessibility settings. Defaults to true.
 
+#### `headerBackImage`
+
+The image source (either a remote URL `{{uri: 'path/to/image'}}` or a local file resource `{require('path/to/image')}`) used by the back button.
+Defaults to `react-navigation/views/assets/back-icon.png`, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
+
 #### `headerBackTitle`
 
 Title string used by the back button on iOS, or `null` to disable label. Defaults to the previous scene's `headerTitle`.
