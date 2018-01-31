@@ -37,35 +37,27 @@ class HomeSplash extends React.Component {
         <div className="homeSplashFade">
           <div className="wrapper homeWrapper">
             <div className="projectLogo">
-              <img src={siteConfig.baseUrl + 'img/docusaurus.svg'} />
+              <img src={siteConfig.baseUrl + 'img/spiro.svg'} />
             </div>
             <div className="inner">
               <h2 className="projectTitle">
                 {siteConfig.title}
                 <small>{siteConfig.tagline}</small>
               </h2>
+
               <div className="section promoSection">
                 <div className="promoRow">
                   <div className="pluginRowBlock">
-                    <Button href="#try">Try It Out</Button>
-                    <Button
-                      href={
-                        siteConfig.baseUrl +
-                        'docs/' +
-                        this.props.language +
-                        '/doc1.html'
-                      }>
-                      Example Link
+                    <Button href="/content/docs/getting-started.html">
+                      Read guides
                     </Button>
-                    <Button
-                      href={
-                        siteConfig.baseUrl +
-                        'docs/' +
-                        this.props.language +
-                        '/doc2.html'
-                      }>
-                      Example Link 2
+                    <Button href="/content/docs/api-reference.html">
+                      Read API Reference
                     </Button>
+                    <Button href="https://expo.io/@react-navigation/NavigationPlayground">
+                      Try the demo app
+                    </Button>
+                    {/* <Button href="https://snack.expo.io/@react-navigation/hello-world">Run "Hello World" in Snack</Button> */}
                   </div>
                 </div>
               </div>
@@ -101,74 +93,43 @@ class Index extends React.Component {
               align="center"
               contents={[
                 {
-                  content: 'This is the content of my feature',
+                  content:
+                    'Start quickly with built-in navigators that deliver a seamless out-of-the-box experience.',
                   image: siteConfig.baseUrl + 'img/docusaurus.svg',
                   imageAlign: 'top',
-                  title: 'Feature One',
+                  title: 'Easy-to-use',
                 },
                 {
-                  content: 'The content of my second feature',
+                  content:
+                    'Platform-specific look-and-feel with smooth animations and gestures.',
                   image: siteConfig.baseUrl + 'img/docusaurus.svg',
                   imageAlign: 'top',
-                  title: 'Feature Two',
+                  title: 'Components built for iOS and Android',
+                },
+                {
+                  content:
+                    'If you know how to write apps using JavaScript you can customize any part of React Navigation.',
+                  image: siteConfig.baseUrl + 'img/docusaurus.svg',
+                  imageAlign: 'top',
+                  title: 'Completely customizable',
+                },
+                {
+                  content:
+                    "React Navigation is extensible at every layer&mdash; you can write your own navigators or even replace the user-facing API.",
+                  image: siteConfig.baseUrl + 'img/docusaurus.svg',
+                  imageAlign: 'top',
+                  title: 'Extensible platform',
                 },
               ]}
               layout="fourColumn"
             />
           </Container>
 
-          <div
-            className="productShowcaseSection paddingBottom"
-            style={{textAlign: 'center'}}>
-            <h2>Feature Callout</h2>
-            <MarkdownBlock>These are features of this project</MarkdownBlock>
-          </div>
-
-          <Container padding={['bottom', 'top']} background="light">
-            <GridBlock
-              contents={[
-                {
-                  content: 'Talk about learning how to use this',
-                  image: siteConfig.baseUrl + 'img/docusaurus.svg',
-                  imageAlign: 'right',
-                  title: 'Learn How',
-                },
-              ]}
-            />
-          </Container>
-
-          <Container padding={['bottom', 'top']} id="try">
-            <GridBlock
-              contents={[
-                {
-                  content: 'Talk about trying this out',
-                  image: siteConfig.baseUrl + 'img/docusaurus.svg',
-                  imageAlign: 'left',
-                  title: 'Try it Out',
-                },
-              ]}
-            />
-          </Container>
-
-          <Container padding={['bottom', 'top']} background="dark">
-            <GridBlock
-              contents={[
-                {
-                  content:
-                    'This is another description of how this project is useful',
-                  image: siteConfig.baseUrl + 'img/docusaurus.svg',
-                  imageAlign: 'right',
-                  title: 'Description',
-                },
-              ]}
-            />
-          </Container>
-
-          <div className="productShowcaseSection paddingBottom">
+          <div className="productShowcaseSection paddingTop" style={{backgroundColor: '#fff'}}>
             <h2>{"Who's Using This?"}</h2>
             <p>This project is used by all these people</p>
             <div className="logos">{showcase}</div>
-            <div className="more-users">
+            {/* <div className="more-users">
               <a
                 className="button"
                 href={
@@ -176,9 +137,87 @@ class Index extends React.Component {
                 }>
                 More {siteConfig.title} Users
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
+      </div>
+    );
+  }
+}
+
+class ExtraInfo extends React.Component {
+  render() {
+    return (
+      <div>
+        <Container padding={['bottom', 'top']}>
+          <GridBlock
+            align="center"
+            contents={[
+              {
+                content:
+                  'Start quickly with built-in navigators that deliver a seamless out-of-the-box experience',
+                image: siteConfig.baseUrl + 'img/docusaurus.svg',
+                imageAlign: 'top',
+                title: 'Easy-to-use',
+              },
+              {
+                content:
+                  'Platform-specific look-and-feel with smooth animations',
+                image: siteConfig.baseUrl + 'img/docusaurus.svg',
+                imageAlign: 'top',
+                title: 'Components built for iOS and Android',
+              },
+            ]}
+            layout="fourColumn"
+          />
+        </Container>
+
+        <div
+          className="productShowcaseSection paddingBottom"
+          style={{ textAlign: 'center' }}>
+          <h2>Feature Callout</h2>
+          <MarkdownBlock>These are features of this project</MarkdownBlock>
+        </div>
+
+        <Container padding={['bottom', 'top']} background="light">
+          <GridBlock
+            contents={[
+              {
+                content: 'Talk about learning how to use this',
+                image: siteConfig.baseUrl + 'img/docusaurus.svg',
+                imageAlign: 'right',
+                title: 'Learn How',
+              },
+            ]}
+          />
+        </Container>
+
+        <Container padding={['bottom', 'top']} id="try">
+          <GridBlock
+            contents={[
+              {
+                content: 'Talk about trying this out',
+                image: siteConfig.baseUrl + 'img/docusaurus.svg',
+                imageAlign: 'left',
+                title: 'Try it Out',
+              },
+            ]}
+          />
+        </Container>
+
+        <Container padding={['bottom', 'top']} background="dark">
+          <GridBlock
+            contents={[
+              {
+                content:
+                  'This is another description of how this project is useful',
+                image: siteConfig.baseUrl + 'img/docusaurus.svg',
+                imageAlign: 'right',
+                title: 'Description',
+              },
+            ]}
+          />
+        </Container>
       </div>
     );
   }
