@@ -28,34 +28,43 @@ class Footer extends React.Component {
                 this.props.config.baseUrl +
                 'docs/' +
                 this.props.language +
-                '/doc1.html'
+                '/getting-started.html'
               }>
-              Getting Started (or other categories)
+              Getting Started
             </a>
             <a
               href={
                 this.props.config.baseUrl +
                 'docs/' +
                 this.props.language +
-                '/doc2.html'
+                '/api-reference.html'
               }>
-              Guides (or other categories)
+              API Reference
             </a>
             <a
               href={
                 this.props.config.baseUrl +
                 'docs/' +
                 this.props.language +
-                '/doc3.html'
+                '/custom-navigator-overview.html'
               }>
-              API Reference (or other categories)
+              Building your own Navigator
+            </a>
+            <a
+              href={
+                this.props.config.baseUrl +
+                'docs/' +
+                this.props.language +
+                '/contributing.html'
+              }>
+              Contributing
             </a>
           </div>
           <div>
             <h5>Support</h5>
             <a href="https://discord.gg/4xEK3nD">Chat in our Discord channel</a>
-            <a href="https://react-navigation.canny.io/feature-requests">Request a Feature on Canny</a>
-            <a href="https://github.com/react-navigation/react-navigation/issues">Report a Bug on Github</a>
+            <a href="https://react-navigation.canny.io/feature-requests">Request a feature on Canny</a>
+            <a href="https://github.com/react-navigation/react-navigation/issues">Report a bug on Github</a>
             <a
               href="https://stackoverflow.com/questions/tagged/react-navigation"
               target="_blank">

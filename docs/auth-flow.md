@@ -1,5 +1,5 @@
 ---
 id: auth-flow
-title: Building a sign in flow
-sidebar_label: Building a sign in flow
+title: Authentication flows
+sidebar_label: Authentication flows
 ---

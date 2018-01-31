@@ -94,8 +94,74 @@ There are a couple of things to notice here:
 1. On iOS the status bar is black, and this doesn't look great over a dark colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.html).
 2. The configuration we set only applies to the home screen; when we navigate to the details screen, the default styles are back. We'll look at how to share `navigationOptions` between screens now.
 
-## Sharing `navigationOptions` across screens
+## Sharing common `navigationOptions` across screens
 
+It is common to want to configure the header in a similar way across many screen. For example, your company brand color might be red and so you want the header background color to be red and tint color to be white. Conveniently, these are the colors we're using our running example, and you'll notice that when you navigate to the `DetailsScreen` the colors go back to the defaults. Wouldn't it be awful if we had to copy the `navigationOptions` header style properties from `HomeScreen` to `DetailsScreen`, and for every single screen component we use in our app? Thankfully, we do not. We can instead move the configuration up to the `StackNavigator`.
+
+```js
+class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Home',
+    /* No more header config here! */
+  };
+
+  /* render function, etc */
+}
+
+/* other code... */
+
+const RootStack = StackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+    },
+    Details: {
+      screen: DetailsScreen,
+    },
+  },
+  {
+    initialRouteName: 'Home',
+    /* The header config from HomeScreen is now here */
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+  }
+);
+```
+<a href="https://snack.expo.io/@react-navigation/sharing-header-styles" target="blank" class="run-code-button">&rarr; Run this code</a>
+
+Now, any screen that belongs to the `RouteStack` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
+
+## Overriding shared `navigationOptions`
+
+The `navigationOptions` specified on your screen component are merged together with those of its parent `StackNavigator`, with the options on the screen component taking precedence. Let's use this knowledge to invert the background and tint colors on the details screen.
+
+
+```js
+class DetailsScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state;
+
+    return {
+      title: params ? params.otherParam : 'A Nested Details Screen',
+      /* These values are used instead of the shared configuration! */
+      headerStyle: {
+        backgroundColor: '#fff',
+      },
+      headerTintColor: '#f4511e',
+    };
+  };
+
+  /* render function, etc */
+}
+```
+<a href="https://snack.expo.io/@react-navigation/overriding-shared-header-styles" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 ## Using a different component for the title
 
@@ -110,9 +176,10 @@ class ChatScreen extends React.Component {
 }
 ```
 
+
 ## Additional configuration
 
-You can read the full list of available screen `navigationOptions` in the [StackNavigator reference](stack-navigator.html#screen-navigation-options).
+You can read the full list of available screen `navigationOptions` for screens inside of `StackNavigator` in the [StackNavigator reference](stack-navigator.html#screen-navigation-options).
 
 <!-- Each screen can configure various aspects about how it gets presented in parent navigators. You can configure 
 
