@@ -4,7 +4,7 @@ title: Different status bar configuration based on route
 sidebar_label: Different status bar configuration based on route
 ---
 
-If you don't have a navigation bar, or your navigation bar changes color based on the route, you'll want to ensure that the correct color is used for the content.
+If you don't have a navigation header, or your navigation header changes color based on the route, you'll want to ensure that the correct color is used for the content.
 
 ## StackNavigator and DrawerNavigator
 
