@@ -1,7 +1,7 @@
 ---
 id: navigation-actions
 title: NavigationActions reference
-sidebar_label: NavigationActions reference
+sidebar_label: NavigationActions
 ---
 
 All `NavigationActions` return an object that can be sent to the router using `navigation.dispatch()` method.

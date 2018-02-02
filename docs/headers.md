@@ -30,6 +30,8 @@ class DetailsScreen extends React.Component {
 
 <a href="https://snack.expo.io/@react-navigation/setting-header-title" target="blank" class="run-code-button">&rarr; Run this code</a>
 
+> `StackNavigator` uses platform conventions by default, so on iOS the title will be centered and on Android it will be left-aligned.
+
 ## Using params in the title
 
 In order to use params in the title, we need to make `navigationOptions` a function that returns a configuration object. It might be tempting to try to use `this.props` inside of `navigationOptions`, but because it is a static property of the component, `this` does not refer to an instance of the component and therefore no props are available. Instead, if we make `navigationOptions` a function then React Navigation will call it with an object containing `{ navigation, navigationOptions, screenProps }` -- in this case, all we care about is `navigation`, which is the same object that is passed to your screen props as `this.props.navigation`. You may recall that we can get the params from `navigation` through `navigation.state.params`, and so we do this below to extract a param and use it as a title.
@@ -47,7 +49,6 @@ class DetailsScreen extends React.Component {
   /* render function, etc */
 }
 ```
-
 <a href="https://snack.expo.io/@react-navigation/using-params-in-title" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 The argument that is passed in to the `navigationOptions` function is an object with the following properties:
@@ -202,4 +203,11 @@ class HomeScreen extends React.Component {
 
 ## Additional configuration
 
-You can read the full list of available screen `navigationOptions` for screens inside of `StackNavigator` in the [StackNavigator reference](stack-navigator.html#screen-navigation-options).
+You can read the full list of available screen `navigationOptions` for screens inside of `StackNavigator` in the [StackNavigator reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
+
+## Summary
+
+- You can customize the header inside of the `navigationOptions` static property on your screen components. Read the full list of options [in the API reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
+- The `navigationOptions` static property can be an object or a function. When it is a function, it is provided with an objexct with the `navigation` prop, `screenProps`, and `navigationOptions` on it.
+- You can also specify shared `navigationOptions` in the `StackNavigator` configuration when you initialize it. The static property takes precedence over that configuration.
+- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/custom-header-title-component).

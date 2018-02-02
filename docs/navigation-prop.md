@@ -1,7 +1,7 @@
 ---
 id: navigation-prop
 title: Navigation prop reference
-sidebar_label: Navigation prop reference
+sidebar_label: Navigation prop
 ---
 
 Each `screen` component in your app is provided with the `navigation` prop automatically. It looks like this:

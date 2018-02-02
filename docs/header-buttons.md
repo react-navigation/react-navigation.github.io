@@ -24,96 +24,66 @@ class HomeScreen extends React.Component {
   };
 }
 ```
+
 <a href="https://snack.expo.io/@react-navigation/simple-header-button" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-The binding of `this` in `navigationOptions` is *not* the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
+The binding of `this` in `navigationOptions` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
 
 ## Header interaction with its screen component
 
-
-## Customizing the back button
-
-## Overriding the back button
-
-<!-- The navigation options can be defined with a [navigation prop](/docs/navigators/navigation-prop). Let's render a different button based on the route params, and set up the button to call `navigation.setParams` when pressed.
+The most commonly used pattern for giving a header button access to a function on the component instance is to use `params`. We'll demonstrate this with a classic example, the counter.
 
 ```js
-static navigationOptions = ({ navigation }) => {
-  const { state, setParams } = navigation;
-  const isInfo = state.params.mode === 'info';
-  const { user } = state.params;
-  return {
-    title: isInfo ? `${user}'s Contact Info` : `Chat with ${state.params.user}`,
-    headerRight: (
-      <Button
-        title={isInfo ? 'Done' : `${user}'s info`}
-        onPress={() => setParams({ mode: isInfo ? 'none' : 'info' })}
-      />
-    ),
-  };
-};
-```
-
-
-## Header interaction with screen component
-
-Sometimes it is necessary for the header to access properties of the screen component such as functions or state.
-
-Let's say we want to create an 'edit contact info' screen with a save button in the header. We want the save button to be replaced by an `ActivityIndicator` while saving.
-
-```js
-class EditInfoScreen extends React.Component {
+class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
-    let headerRight = (
-      <Button
-        title="Save"
-        onPress={params.handleSave ? params.handleSave : () => null}
-      />
-    );
-    if (params.isSaving) {
-      headerRight = <ActivityIndicator />;
-    }
-    return { headerRight };
+    const params = navigation.state.params || {};
+
+    return {
+      headerTitle: <LogoTitle />,
+      headerRight: (
+        <Button onPress={params.increaseCount} title="+1" color="#fff" />
+      ),
+    };
   };
+
+  componentWillMount() {
+    this.props.navigation.setParams({ increaseCount: this._increaseCount });
+  }
 
   state = {
-    nickname: 'Lucy jacuzzi'
-  }
+    count: 0,
+  };
 
-  _handleSave = () => {
-    // Update state, show ActivityIndicator
-    this.props.navigation.setParams({ isSaving: true });
-    
-    // Fictional function to save information in a store somewhere
-    saveInfo().then(() => {
-      this.props.navigation.setParams({ isSaving: false});
-    })
-  }
+  _increaseCount = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
 
-  componentDidMount() {
-    // We can only set the function after the component has been initialized
-    this.props.navigation.setParams({ handleSave: this._handleSave });
-  }
-
-  render() {
-    return (
-      <TextInput
-        onChangeText={(nickname) => this.setState({ nickname })}
-        placeholder={'Nickname'}
-        value={this.state.nickname}
-      />
-    );
-  }
+  /* later in the render function we display the count */
 }
 ```
 
-**Note**: Since the `handleSave`-param is only set on component mount it is not immediately available in the `navigationOptions`-function. Before `handleSave` is set we pass down an empty function to the `Button`-component in order to make it render immediately and avoid flickering.
+<a href="https://snack.expo.io/@react-navigation/header-interacting-with-component-instance" target="blank" class="run-code-button">&rarr; Run this code</a>
 
+> React Navigation doesn't guarantee that your screen component will begin mounting before the header for the screen is rendered, and because the `increaseCount` param is set in `componentWillMount`, we may not have it available to us in `navigationOptions`, which is why we include the `|| {}` when grabbing the params (there may not be any). We know this is an awkward API and we do plan on improving it!
 
-To see the rest of the header options, see the [navigation options document](/docs/navigators/navigation-options#Stack-Navigation-Options).
+> As an alternative to `setParams`, you could use a state management library (such as Redux or MobX) and communicate between the header and the screen in the same way you would with two distinct components.
 
-As an alternative to `setParams`, you may want to consider using a state management library such as [MobX](https://github.com/mobxjs/mobx) or [Redux](https://github.com/reactjs/redux), and when navigating to a screen, pass an object which contains the data necessary for the screen to render, as well as functions you may want to call that modify the data, make network requests and etc. That way, both your screen component and the static `navbarOptions` block will have access to the object. When following this approach, make sure to consider deep linking, which works best in cases where only javascript primitives are passed as navigation props to your screen. In case when deep linking is necessary, you may use a [higher order component (HOC)](https://reactjs.org/docs/higher-order-components.html) to transform the primitives to the object your screen components expects.
+## Customizing the back button
 
+`StackNavigator` provides the platform-specific defaults for the back button. On iOS this includes a label next to the button, which shows the title of the previous screen when the title fits in the available space, otherwise it says "Back".
 
- -->
+You can change the label behavior with `headerBackTitle` and `headerTruncatedBackTitle` ([read more](stack-navigator.html#headerbacktitle)).
+
+To customize the back button image, you can use [headerBackImage](stack-navigator.html#headerbackimage).
+
+## Overriding the back button
+
+The back button will be rendered automatically in a `StackNavigator` whenever it is possible for the user to go back from their current screen &mdash; in other words, the back button will be rendered whenever there is more than one screen in the stack.
+
+Generally, this is what you want. But it's possible that in some circumstances that you want to customize the back button more than you can through the options mentioned above, in which case you can specify a `headerLeft`, just as we did with `headerRight`, and completely override the back button.
+
+## Summary
+
+- You can set buttons in the header through the `headerLeft` and `headerRight` properties in `navigationOptions`.
+- The back button is fully customizable with `headerLeft`, but if you just want to change the title or image, there are other `navigationOptions` for that -- `headerBackTitle`, `headerTruncatedBackTitle`, and `headerBackImage`.
+- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/simple-header-button).
