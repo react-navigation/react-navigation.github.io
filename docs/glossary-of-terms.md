@@ -4,6 +4,10 @@ title: Glossary of terms
 sidebar_label: Glossary of terms
 ---
 
+## Header
+
+Also known as navigation header, navigation bar, navbar, and probably many other things. This is the rectangle at the top of your screen that contains the back button and the title for your screen. The entire rectangle is often referred to as the header in React Navigation.
+
 ## Screen component
 
 A screen component is a component that we use in our route configuration.

@@ -4,25 +4,38 @@ title: Header buttons
 sidebar_label: Header buttons
 ---
 
+Now that we know how to customize the look of our headers, let's make them sentient! Actually perhaps that's ambitious, let's just make them able to respond to our touches in very well defined ways.
+
 ## Adding a button to the header
+
+The most common way to interact with a header is by tapping on a button either to the left or the right of the title. Let's add a button to the right side of the header (one of the most difficult places to touch on your entire screen, depending on finger and phone size, but also a normal place to put buttons).
+
+```js
+class HomeScreen extends React.Component {
+  static navigationOptions = {
+    headerTitle: <LogoTitle />,
+    headerRight: (
+      <Button
+        onPress={() => alert('This is a button!')}
+        title="Info"
+        color="#fff"
+      />
+    ),
+  };
+}
+```
+<a href="https://snack.expo.io/@react-navigation/simple-header-button" target="blank" class="run-code-button">&rarr; Run this code</a>
+
+The binding of `this` in `navigationOptions` is *not* the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
+
+## Header interaction with its screen component
+
 
 ## Customizing the back button
 
 ## Overriding the back button
 
-Then we can add a [`header` navigation option](/docs/navigators/navigation-options#Stack-Navigation-Options) that allows us to add a custom right button:
-
-```js
-static navigationOptions = {
-  headerRight: <Button title="Info" />,
-  ...
-```
-
-```phone-example
-header-button
-```
-
-The navigation options can be defined with a [navigation prop](/docs/navigators/navigation-prop). Let's render a different button based on the route params, and set up the button to call `navigation.setParams` when pressed.
+<!-- The navigation options can be defined with a [navigation prop](/docs/navigators/navigation-prop). Let's render a different button based on the route params, and set up the button to call `navigation.setParams` when pressed.
 
 ```js
 static navigationOptions = ({ navigation }) => {
@@ -41,11 +54,6 @@ static navigationOptions = ({ navigation }) => {
 };
 ```
 
-Now, the header can interact with the screen route/state:
-
-```phone-example
-header-interaction
-```
 
 ## Header interaction with screen component
 
@@ -108,4 +116,4 @@ To see the rest of the header options, see the [navigation options document](/do
 As an alternative to `setParams`, you may want to consider using a state management library such as [MobX](https://github.com/mobxjs/mobx) or [Redux](https://github.com/reactjs/redux), and when navigating to a screen, pass an object which contains the data necessary for the screen to render, as well as functions you may want to call that modify the data, make network requests and etc. That way, both your screen component and the static `navbarOptions` block will have access to the object. When following this approach, make sure to consider deep linking, which works best in cases where only javascript primitives are passed as navigation props to your screen. In case when deep linking is necessary, you may use a [higher order component (HOC)](https://reactjs.org/docs/higher-order-components.html) to transform the primitives to the object your screen components expects.
 
 
-
+ -->
