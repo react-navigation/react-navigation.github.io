@@ -13,7 +13,7 @@ const siteConfig = {
   url: 'https://reactnavigation.org',
   baseUrl: '/content/',
   organizationName: 'react-navigation',
-  projectName: 'website',
+  projectName: 'react-navigation.github.io',
   headerLinks: [
     {doc: 'getting-started', label: 'Docs'},
     {doc: 'api-reference', label: 'API'},
