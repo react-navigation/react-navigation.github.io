@@ -6,7 +6,7 @@ sidebar_label: Getting started
 
 React Navigation is born from the React Native community's need for an extensible yet easy-to-use navigation solution written entirely in JavaScript (so you can read and understand all of the source), on top of powerful native primitives.
 
-Before you commit to using React Navigation for your project, you might want to read the [anti-pitch](__TODO__) &mdash; it will help you to understand the tradeoffs that we have chosen along with the areas where we consider the library to be deficient currently.
+Before you commit to using React Navigation for your project, you might want to read the [anti-pitch](pitch.html) &mdash; it will help you to understand the tradeoffs that we have chosen along with the areas where we consider the library to be deficient currently.
 
 ## What to expect
 
