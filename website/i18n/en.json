@@ -10,8 +10,6 @@
     "Anti-pitch": "Anti-pitch",
     "api-reference": "API Reference",
     "Overview": "Overview",
-    "api": "API Reference",
-    "API Reference": "API Reference",
     "auth-flow": "Authentication flows",
     "Authentication flows": "Authentication flows",
     "composing-navigators": "Adding tabs",
@@ -100,14 +98,11 @@
     "Docs": "Docs",
     "API": "API",
     "Help": "Help",
-    "--Fundamentals": "--Fundamentals",
-    "--How do I do ...?": "--How do I do ...?",
-    "--Build your own Navigator": "--Build your own Navigator",
-    "--Meta": "--Meta",
     "Fundamentals": "Fundamentals",
     "How do I do ...?": "How do I do ...?",
     "Build your own Navigator": "Build your own Navigator",
-    "Meta": "Meta"
+    "Meta": "Meta",
+    "API Reference": "API Reference"
   },
   "pages-strings": {
     "Help Translate|recruit community translators for your project": "Help Translate",

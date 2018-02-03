@@ -12,7 +12,8 @@ const siteConfig = {
   tagline: 'Routing and navigation for your React Native apps',
   url: 'https://reactnavigation.org',
   baseUrl: '/content/',
-  projectName: 'react-navigation',
+  organizationName: 'react-navigation',
+  projectName: 'website',
   headerLinks: [
     {doc: 'getting-started', label: 'Docs'},
     {doc: 'api-reference', label: 'API'},
