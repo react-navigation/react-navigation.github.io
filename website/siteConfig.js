@@ -10,10 +10,10 @@ const users = [
 const siteConfig = {
   title: 'React Navigation',
   tagline: 'Routing and navigation for your React Native apps',
-  url: 'https://reactnavigation.org',
+  url: 'https://react-navigation.github.io/website',
   baseUrl: '/content/',
   organizationName: 'react-navigation',
-  projectName: 'react-navigation.github.io',
+  projectName: 'website',
   headerLinks: [
     {doc: 'getting-started', label: 'Docs'},
     {doc: 'api-reference', label: 'API'},
