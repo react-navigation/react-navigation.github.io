@@ -8,11 +8,11 @@ sidebar_label: TabNavigator
 TabNavigator(RouteConfigs, TabNavigatorConfig)
 ```
 
-### RouteConfigs
+## RouteConfigs
 
-The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](/docs/api/navigators/StackNavigator.md#routeconfigs) from `StackNavigator`.
+The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.md#routeconfigs) from `StackNavigator`.
 
-### TabNavigatorConfig
+## TabNavigatorConfig
 
 - `tabBarComponent` - Component to use as the tab bar, e.g. `TabBarBottom`
 (this is the default on iOS), `TabBarTop`
@@ -21,7 +21,6 @@ The route configs object is a mapping from route name to a route config, which t
 - `swipeEnabled` - Whether to allow swiping between tabs.
 - `animationEnabled` - Whether to animate when changing tabs.
 - `configureTransition` - a function that, given `currentTransitionProps` and `nextTransitionProps`, returns a configuration object that describes the animation between tabs.
-- `lazy` - Whether to lazily render tabs as needed as opposed to rendering them upfront.
 - `initialLayout` - Optional object containing the initial `height` and `width`, can be passed to prevent the one frame delay in [react-native-tab-view](https://github.com/react-native-community/react-native-tab-view#avoid-one-frame-delay) rendering.
 - `tabBarOptions` - Configure the tab bar, see below.
 
@@ -91,7 +90,7 @@ tabBarOptions: {
 }
 ```
 
-### Screen Navigation Options
+## `navigationOptions` used by `TabNavigator`
 
 #### `title`
 
@@ -123,14 +122,14 @@ Callback to handle tap events; the argument is an object containing:
 
 Useful for adding a custom logic before the transition to the next scene (the tapped one) starts.
 
-### Navigator Props
+## Navigator props
 
 The navigator component created by `TabNavigator(...)` takes the following props:
 
 - `screenProps` - Pass down extra options to child screens and navigation options, for example:
 
 
- ```jsx
+ ```js
  const TabNav = TabNavigator({
    // config
  });

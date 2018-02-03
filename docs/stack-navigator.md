@@ -144,7 +144,7 @@ The navigator component created by `StackNavigator(...)` takes the following pro
 * `screenProps` - Pass down extra options to child screens, for example:
 
 
-```jsx
+```js
 const SomeStack = StackNavigator({
   // config
 });
@@ -203,3 +203,20 @@ const ModalNavigator = StackNavigator(
 ```
 
 Header transitions can also be configured using `headerLeftInterpolator`, `headerTitleInterpolator` and `headerRightInterpolator` fields under `transitionConfig`.
+
+## Navigator props
+
+The navigator component created by `StackNavigator(...)` takes the following props:
+
+- `screenProps` - Pass down extra options to child screens and navigation options, for example:
+
+
+ ```js
+ const StackNav = StackNavigator({
+   // config
+ });
+
+ <StackNav
+   screenProps={/* this prop will get passed to the screen components as this.props.screenProps */}
+ />
+ ```

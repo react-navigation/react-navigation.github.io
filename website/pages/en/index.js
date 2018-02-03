@@ -95,28 +95,28 @@ class Index extends React.Component {
                 {
                   content:
                     'Start quickly with built-in navigators that deliver a seamless out-of-the-box experience.',
-                  image: siteConfig.baseUrl + 'img/docusaurus.svg',
+                  // image: siteConfig.baseUrl + 'img/docusaurus.svg',
                   imageAlign: 'top',
                   title: 'Easy-to-use',
                 },
                 {
                   content:
                     'Platform-specific look-and-feel with smooth animations and gestures.',
-                  image: siteConfig.baseUrl + 'img/docusaurus.svg',
+                  // image: siteConfig.baseUrl + 'img/docusaurus.svg',
                   imageAlign: 'top',
                   title: 'Components built for iOS and Android',
                 },
                 {
                   content:
                     'If you know how to write apps using JavaScript you can customize any part of React Navigation.',
-                  image: siteConfig.baseUrl + 'img/docusaurus.svg',
+                  // image: siteConfig.baseUrl + 'img/docusaurus.svg',
                   imageAlign: 'top',
                   title: 'Completely customizable',
                 },
                 {
                   content:
                     "React Navigation is extensible at every layer&mdash; you can write your own navigators or even replace the user-facing API.",
-                  image: siteConfig.baseUrl + 'img/docusaurus.svg',
+                  // image: siteConfig.baseUrl + 'img/docusaurus.svg',
                   imageAlign: 'top',
                   title: 'Extensible platform',
                 },
@@ -124,26 +124,27 @@ class Index extends React.Component {
               layout="fourColumn"
             />
           </Container>
-
-          <div className="productShowcaseSection paddingTop" style={{backgroundColor: '#fff'}}>
-            <h2>{"Who's Using This?"}</h2>
-            <p>This project is used by all these people</p>
-            <div className="logos">{showcase}</div>
-            {/* <div className="more-users">
-              <a
-                className="button"
-                href={
-                  siteConfig.baseUrl + this.props.language + '/' + 'users.html'
-                }>
-                More {siteConfig.title} Users
-              </a>
-            </div> */}
-          </div>
         </div>
       </div>
     );
   }
 }
+
+
+        // <div className="productShowcaseSection paddingTop" style={{backgroundColor: '#fff'}}>
+        //   <h2>{"Who's Using This?"}</h2>
+        //   <p>This project is used by all these people</p>
+        //   <div className="logos">{showcase}</div>
+        //   {/* <div className="more-users">
+        //     <a
+        //       className="button"
+        //       href={
+        //         siteConfig.baseUrl + this.props.language + '/' + 'users.html'
+        //       }>
+        //       More {siteConfig.title} Users
+        //     </a>
+        //   </div> */}
+        // </div>
 
 class ExtraInfo extends React.Component {
   render() {

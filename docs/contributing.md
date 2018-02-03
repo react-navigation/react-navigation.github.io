@@ -1,7 +1,7 @@
 ---
 id: contributing
-title: React Navigation contributing guide
-sidebar_label: Contributing guide
+title: React Navigation contributor guide
+sidebar_label: Contributing
 ---
 
 Want to help improve React Navigation? Your help would be greatly appreciated!
@@ -23,7 +23,7 @@ And here are a few helpful resources to aid in getting started:
 - [Code Review Guidelines](#Code-Review-Guidelines)
 - [Run the Example App](#Run-the-Example-App)
 - [Run the Website](#Run-the-Website)
-- [Run Tests and Type-Checking](#Run-Tests-and-Type-Checking)
+- [Run Tests](#Run-Tests)
 
 > Note that we used Yarn in the examples below but you're welcome to use NPM instead.
 
@@ -42,19 +42,7 @@ Creating a high quality reproduction is critical. Without it we likely can't fix
 
 Any successful projects needs quality documentation and React Navigation is no different.
 
-The docs are currently organized as follows
-
-- __Getting Started__: Introduction and basics of React Navigation. Help people get up and running with the package quickly. Introduce and demonstrate core functionality.
-- __Navigators__: API documentation for the included navigators and supporting APIs
-- __Advanced Guides__: (Advanced) Beyond the basics, what can you do with React Navigation? Discuss and demonstrate that here.
-- __Routers__: (Advanced) API documentation for the included routers and how to use/customize them
-- __Views__: (Advanced) API documentation for the included views and how to use/customize them
-
-The documentation isn't fixed to what categories and documents currently exist. If your documentation contributation is appropriate for any existing document, add it there. If it makes sense to create a new document for your contribution please do so and add it to the docs index.
-
-The docs are indexed in [App.js](https://github.com/react-community/react-navigation/blob/master/website/src/App.js), where all the pages are declared alongside the titles. To test the docs, follow the instructions for running the website.
-
-The markdown from the `docs` folder gets generated and dumped into a json file as a part of the build step. To see updated docs appear in the website, re-run the build step by running `yarn run build-docs` from the `react-navigation` root folder.
+Read more about the documentation on the [react-navigation/website repository](https://github.com/react-navigation/website).
 
 ### Responding to Issues
 
@@ -124,11 +112,10 @@ yarn install
 
 ### Code Review Guidelines
 
-Look around. Match the style of the reset of the codebase. This project uses ESLint and Flow to ensure consistency throughout the project. You can check your project by running
+Look around. Match the style of the reset of the codebase. This project uses ESLint to ensure consistency throughout the project. You can check your project by running
 
 ```bash
 yarn run eslint
-yarn run flow-check
 ```
 
 If any errors occur you'll either have to manually fix them or you can attempt to automatically fix them by running `yarn run format`.
@@ -175,13 +162,12 @@ yarn run prod
 
 If you've made any changes to the `docs` directory you'll need to run `yarn run build-docs` from the root of the project before they're picked up by the website.
 
-### Run Tests and Type-Checking
+### Run Tests
 
-React Navigation has tests implemented in [Jest](https://facebook.github.io/jest/) and type-checking is managed by [Flow](https://flow.org/). To run either of these, from the React Navigation directory, run either of the following commands (after installing the `node_modules`) to run tests or type-checking.
+React Navigation has tests implemented in [Jest](https://facebook.github.io/jest/). To run either of these, from the React Navigation directory, run either of the following commands (after installing the `node_modules`) to run tests or type-checking.
 
 ```bash
 yarn run jest
-yarn run flow-check
 ```
 
 These commands will be run by our CI and are required to pass before any contributtions are merged.

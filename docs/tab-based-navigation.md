@@ -4,198 +4,203 @@ title: Tab navigation
 sidebar_label: Tab navigation
 ---
 
-In a `StackNavigator` when you navigate to a new route, you are *pushing* the route to the stack and making it the active screen. When you *pop* a screen from the stack (by going back), the screen is no longer rendered and the resources are freed up. The only way to change the active screen is to push or pop a route from the stack.
+Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top, below the header (or in place of the header).
 
-In tab-based navigation, you cannot *push* a new route, you can only *jump to* a route. To change the active screen, you just change the tab navigation state to point to the route that is now active; the inactive route is not unmounted but it is hidden from view. This is what *jump to* is in tab navigation -- it changes a pointer to the active screen but it doesn't actually add or remove any screens from the tab navigation state. In React Navigation, you can use [TabNavigator](__TODO__) to implement tab-based navigation.
-
-The actions that are performed and the state that is modified in response to the actions is handled by a [router](__TODO__). For most applications you shouldn't have to implement any custom routers, but if you would like to implement your own navigator that models navigation state differently from `StackNavigator` or `TabNavigator` then you may need to create a new router to do so. You can read more about creating a custom navigator in the ["Build your own Navigator"](__TODO__) section.
-
-TODO: Talk about why not just use TabBarIOS or some other thing that isn't integrated with React Navigation
-
-It is common in mobile apps to compose various forms of navigation. The routers and navigators in React Navigation are composable (a navigator can contain other navigators), which allows you to define a complicated navigation structure for your app.
-
-For our chat app, we want to put several tabs on the first screen, to view recent chat threads or all contacts.
-
-## Introducing TabNavigator
-
-Lets create a new `TabNavigator` in our `App.js`:
+## Minimal example of tab-based navigation
 
 ```js
-import { TabNavigator } from "react-navigation";
+import React from 'react';
+import { Text, View } from 'react-native';
+import { TabNavigator } from 'react-navigation';
 
-class RecentChatsScreen extends React.Component {
+class HomeScreen extends React.Component {
   render() {
-    return <Text>List of recent chats</Text>
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Home!</Text>
+      </View>
+    );
   }
 }
 
-class AllContactsScreen extends React.Component {
+class SettingsScreen extends React.Component {
   render() {
-    return <Text>List of all contacts</Text>
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Settings!</Text>
+      </View>
+    );
   }
 }
 
-const MainScreenNavigator = TabNavigator({
-  Recent: { screen: RecentChatsScreen },
-  All: { screen: AllContactsScreen },
+export default TabNavigator({
+  Home: { screen: HomeScreen },
+  Settings: { screen: SettingsScreen },
 });
 ```
 
-If the `MainScreenNavigator` was rendered as the top-level navigator component, it would look like this:
+<a href="https://snack.expo.io/@react-navigation/basic-tabs" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-```phone-example
-simple-tabs
-```
+## Customizing the appearance
 
-## Nesting a Navigator in a screen
-
-We want these tabs to be visible in the first screen of the app, but new screens in the stack should cover the tabs.
-
-Lets add our tabs navigator as a screen in our top-level `StackNavigator` that we set up in the [previous step](/docs/intro/).
+This is similar to how you would customize a `StackNavigator` &dash; there are some properties that are set when you initialize the `TabNavigator` and others that can be customized per-screen in `navigationOptions`.
 
 ```js
-const SimpleApp = StackNavigator({
-  Home: { screen: MainScreenNavigator },
-  Chat: { screen: ChatScreen },
-});
-```
+// You can import Ionicons from @expo/vector-icons if you use Expo or
+// react-native-vector-icons/Ionicons otherwise.
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { TabNavigator, TabBarBottom } from 'react-navigation';
 
-Because `MainScreenNavigator` is being used as a screen, we can give it `navigationOptions`:
+export default TabNavigator(
+  {
+    Home: { screen: HomeScreen },
+    Settings: { screen: SettingsScreen },
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'Home') {
+          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Settings') {
+          iconName = `ios-options${focused ? '' : '-outline'}`;
+        }
 
-```js
-const SimpleApp = StackNavigator({
-  Home: { 
-    screen: MainScreenNavigator,
-    navigationOptions: {
-      title: 'My Chats',
+        // You can return any component that you like here! We usually use an
+        // icon component from react-native-vector-icons
+        return <Ionicons name={iconName} size={25} color={tintColor} />;
+      },
+    }),
+    tabBarOptions: {
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray',
     },
-  },
-  Chat: { screen: ChatScreen },
-})
+    tabBarComponent: TabBarBottom,
+    tabBarPosition: 'bottom',
+    animationEnabled: false,
+    swipeEnabled: false,
+  }
+);
 ```
 
-Lets also add a button to each tab that links to a chat:
+<a href="https://snack.expo.io/@react-navigation/tabs-with-icons" target="blank" class="run-code-button">&rarr; Run this code</a>
+
+Let's dissect this:
+
+* `tabBarIcon` is a property on `navigationOptions`, so we know we can use it on our screen components, but in this case chose to put it in the `TabNavigator` configuration in order to centralize the icon configuration for convenience.
+* `tabBarIcon` is a function that is given the `focused` state and `tintColor`. If you take a peek further down in the configuration you will see `tabBarOptions` and `activeTintColor` and `inactiveTintColor`. These default to the the iOS platform defaults, but you can change them here. The `tintColor` that is passed through to the `tabBarIcon` is either the active or inactive one, depending on the `focused` state (focused is active).
+* In order to make the behavior the same on iOS and Android, we have explicitly provided `tabBarComponent`, `tabBarPosition`, `animationEnabled`, and `swipeEnabled`. The default behavior of `TabNavigator` is to show a tab bar on the top of the screen on Android and on the bottom on iOS, but here we force it to be on the bottom on both platforms.
+* Read the [full API reference](tab-navigator.html) for further information on `TabNavigator` configuration options.
+
+## Jumping between tabs
+
+Switching from one tab to another has a familiar API &mdash; `this.props.navigation.navigate`.
 
 ```js
-<Button
-  onPress={() => this.props.navigation.navigate('Chat', { user: 'Lucy' })}
-  title="Chat with Lucy"
-/>
-```
+import { Button, Text, View } from 'react-native';
 
-Now we have put one navigator inside another, and we can `navigate` between navigators:
-
-```phone-example
-nested
-```
-
-## Nesting a Navigator in a Component
-Sometimes it is desirable to nest a navigator that is wrapped in a component. This is useful in cases where the navigator only takes up part of the screen. For the child navigator to be wired into the navigation tree, it needs the `navigation` property from the parent navigator.
-
-```js
-const SimpleApp = StackNavigator({
-  Home: { screen: NavigatorWrappingScreen },
-  Chat: { screen: ChatScreen },
-});
-```
-In this case, the NavigatorWrappingScreen is not a navigator, but it renders a navigator as part of its output.
-
-If this navigator renders blank then change `<View>` to `<View style={{flex: 1}}>`.
-
-```js
-class NavigatorWrappingScreen extends React.Component {
+class HomeScreen extends React.Component {
   render() {
     return (
-      <View>
-        <SomeComponent/>
-        <MainScreenNavigator/>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Home!</Text>
+        <Button
+          title="Go to Settings"
+          onPress={() => this.props.navigation.navigate('Settings')}
+        />
+      </View>
+    );
+  }
+}
+
+class SettingsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Settings!</Text>
+        <Button
+          title="Go to Home"
+          onPress={() => this.props.navigation.navigate('Home')}
+        />
       </View>
     );
   }
 }
 ```
 
-To wire `MainScreenNavigator` into the navigation tree, we assign its `router` to the wrapping component. This makes `NavigatorWrappingScreen` "navigation aware", which tells the parent navigator to pass the navigation object down. Since the `NavigatorWrappingScreen`'s `router` is overridden with the child navigator's `router`, the child navigator will receive the needed `navigation`.
+<a href="https://snack.expo.io/@react-navigation/jumping-between-tabs" target="blank" class="run-code-button">&rarr; Run this code</a>
+
+## A `StackNavigator` for each tab
+
+Usually tabs don't just display one screen &dash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as their being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
 
 ```js
-class NavigatorWrappingScreen extends React.Component {
+import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
+
+class DetailsScreen extends React.Component {
   render() {
     return (
-      <View>
-        <SomeComponent/>
-        <MainScreenNavigator navigation={this.props.navigation}/>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Details!</Text>
+      </View>
+    );
+    )
+  }
+}
+
+class HomeScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        { /* other code from before here */ }
+        <Button
+          title="Go to Details"
+          onPress={() => this.props.navigation.navigate('Details')}
+        />
       </View>
     );
   }
 }
-NavigatorWrappingScreen.router = MainScreenNavigator.router;
-```
 
-Used to easily set up a screen with several tabs with a TabRouter. For a live example, open [this project with Expo](https://expo.io/@react-navigation/NavigationPlayground).
-
-```js
-class MyHomeScreen extends React.Component {
-  static navigationOptions = {
-    tabBarLabel: 'Home',
-    // Note: By default the icon is only shown on iOS. Search the showIcon option below.
-    tabBarIcon: ({ tintColor }) => (
-      <Image
-        source={require('./chats-icon.png')}
-        style={[styles.icon, {tintColor: tintColor}]}
-      />
-    ),
-  };
-
+class SettingsScreen extends React.Component {
   render() {
     return (
-      <Button
-        onPress={() => this.props.navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        { /* other code from before here */ }
+        <Button
+          title="Go to Details"
+          onPress={() => this.props.navigation.navigate('Details')}
+        />
+      </View>
     );
   }
 }
 
-class MyNotificationsScreen extends React.Component {
-  static navigationOptions = {
-    tabBarLabel: 'Notifications',
-    tabBarIcon: ({ tintColor }) => (
-      <Image
-        source={require('./notif-icon.png')}
-        style={[styles.icon, {tintColor: tintColor}]}
-      />
-    ),
-  };
+const HomeStack = StackNavigator({
+  Home: { screen: HomeScreen },
+  Details: { screen: DetailsScreen },
+});
 
-  render() {
-    return (
-      <Button
-        onPress={() => this.props.navigation.goBack()}
-        title="Go back home"
-      />
-    );
+const SettingsStack = StackNavigator({
+  Settings: { screen: SettingsScreen },
+  Details: { screen: DetailsScreen },
+});
+
+export default TabNavigator(
+  {
+    Home: { screen: HomeStack },
+    Settings: { screen: SettingsStack },
+  },
+  {
+    /* Other configuration remains unchanged */
   }
-}
-
-const styles = StyleSheet.create({
-  icon: {
-    width: 26,
-    height: 26,
-  },
-});
-
-const MyApp = TabNavigator({
-  Home: {
-    screen: MyHomeScreen,
-  },
-  Notifications: {
-    screen: MyNotificationsScreen,
-  },
-}, {
-  tabBarPosition: 'top',
-  animationEnabled: true,
-  tabBarOptions: {
-    activeTintColor: '#e91e63',
-  },
-});
+);
 ```
+<a href="https://snack.expo.io/@react-navigation/stacks-in-tabs" target="blank" class="run-code-button">&rarr; Run this code</a>
+
+## Why do we need a TabNavigator instead of TabBarIOS or some other component?
+
+It's common to attempt to use a standalone tab bar component without integrating it into the navigation library you use in your app. In some cases, this works fine! You should be warned, however, that you may run into some frustrating unanticipated issues when doing this.
+
+For example, React Navigation's `TabNavigator` takes care of handling the Android back button for you, while standalone components typically do not. Additionally, it is more difficult for you (as the developer) to perform actions such as "jump to this tab and then go to this screen" if you need to call into two distinct APIs for it. Lastly, mobile user interfaces have numerous small design details that require that certain components are aware of the layout or presence of other components &mdahs; for example, if you have a translucent tab bar, content should scroll underneath it and the scroll view should have an inset on the bottom equal to the height of the tab bar so you can see all of the content. Double tapping the tab bar should make the active navigation stack pop to the top of the stack, and doing it again should scroll the active scroll view in that stack scroll to the top. While not all of these behaviors are implemented out of the box yet with React Navigation, they will be and you will not get any of this if you use a standalone tab view component.

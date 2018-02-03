@@ -17,7 +17,7 @@ const siteConfig = {
     {doc: 'getting-started', label: 'Docs'},
     {doc: 'api-reference', label: 'API'},
     {page: 'help', label: 'Help'},
-    {blog: true, label: 'Blog'},
+    // {blog: true, label: 'Blog'},
   ],
   users,
   /* TODO: update to use new icon */
@@ -34,10 +34,10 @@ const siteConfig = {
   },
   scripts: ['https://buttons.github.io/buttons.js'],
   repoUrl: 'https://github.com/react-navigation/react-navigation',
-  algolia: {
-    apiKey: "my-search-only-api-key-1234",
-    indexName: "my-index-name"
-  },
+//   algolia: {
+//     apiKey: "my-search-only-api-key-1234",
+//     indexName: "my-index-name"
+//   },
 };
 
 module.exports = siteConfig;
