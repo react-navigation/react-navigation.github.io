@@ -1,7 +1,7 @@
 const users = [
   {
     caption: 'User1',
-    image: '/content/img/docusaurus.svg',
+    image: '/img/docusaurus.svg',
     infoLink: 'https://www.facebook.com',
     pinned: true,
   },
@@ -11,7 +11,7 @@ const siteConfig = {
   title: 'React Navigation',
   tagline: 'Routing and navigation for your React Native apps',
   url: 'https://react-navigation.github.io/website',
-  baseUrl: '/content/',
+  baseUrl: '/',
   organizationName: 'react-navigation',
   projectName: 'website',
   headerLinks: [

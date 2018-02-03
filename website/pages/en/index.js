@@ -48,10 +48,10 @@ class HomeSplash extends React.Component {
               <div className="section promoSection">
                 <div className="promoRow">
                   <div className="pluginRowBlock">
-                    <Button href="/content/docs/getting-started.html">
+                    <Button href="/docs/getting-started.html">
                       Read guides
                     </Button>
-                    <Button href="/content/docs/api-reference.html">
+                    <Button href="/docs/api-reference.html">
                       Read API Reference
                     </Button>
                     <Button href="https://expo.io/@react-navigation/NavigationPlayground">
