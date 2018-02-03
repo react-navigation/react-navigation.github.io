@@ -11,9 +11,9 @@ const siteConfig = {
   title: 'React Navigation',
   tagline: 'Routing and navigation for your React Native apps',
   url: 'https://react-navigation.github.io/website',
-  baseUrl: process.env.development ? '/' : 'https://react-navigation.github.io/website/',
+  baseUrl: '/,
   organizationName: 'react-navigation',
-  projectName: 'website',
+  projectName: 'react-navigation.github.io',
   headerLinks: [
     {doc: 'getting-started', label: 'Docs'},
     {doc: 'api-reference', label: 'API'},
