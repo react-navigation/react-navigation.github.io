@@ -4,6 +4,8 @@ title: Glossary of terms
 sidebar_label: Glossary of terms
 ---
 
+> This is a new section of the documentation and it's missing a lot of terms! Please [submit a pull request or an issue](https://github.com/react-navigation/website) with a term that you think should be explained here.
+
 ## Header
 
 Also known as navigation header, navigation bar, navbar, and probably many other things. This is the rectangle at the top of your screen that contains the back button and the title for your screen. The entire rectangle is often referred to as the header in React Navigation.
