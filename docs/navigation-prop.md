@@ -8,6 +8,9 @@ Each `screen` component in your app is provided with the `navigation` prop autom
 
 * `this.props.navigation`
   * `navigate` - link to other screens
+  * `pop` - go back in the stack
+  * `popToTop` - go to the top of the stack
+  * `push` - navigate forward to new route in stack
   * `goBack` - close active screen and move back
   * `state` - current state/routes
   * `setParams` - make changes to route's params
@@ -59,11 +62,14 @@ The vast majority of your interactions with the `navigation` prop will involve `
 
 Call this to link to another screen in your app. Takes the following arguments:
 
-`navigate(routeName, params, action)`
+`navigation.navigate({routeName, params, action, key})`
+OR
+`navigation.navigate(routeName, params, action)`
 
 * `routeName` - A destination routeName that has been registered somewhere in the app's router
 * `params` - Params to merge into the destination route
 * `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions) for a full list of supported actions.
+* `key` - Optional identifier of what route to navigate to. Navigate **back** to this route, if it already exists
 
 ```js
 class HomeScreen extends React.Component {
@@ -165,9 +171,36 @@ class ProfileScreen extends React.Component {
 }
 ```
 
+## Stack Actions
+
+The following actions will work within any StackNavigator:
+
+### Push
+
+Similar to navigate, push will move you forward to a new route in the stack.
+
+`navigation.push(routeName, params, action)`
+
+* `routeName` - A destination routeName that has been registered somewhere in the app's router
+* `params` - Params to merge into the destination route
+* `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions) for a full list of supported actions.
+* `key` - _String_ - Optional - The identifier for the route to navigate to. Navigate back to this route if it already exists
+
+### Pop
+
+Take you to the previous screen in the stack. If you provide a number, "n", it will specify how many screens to take you back within the stack.
+
+`navigation.pop(n)`
+
+### PopToTop
+
+Call this to jump back to the top route in the stack, dismissing all other screens.
+
+`navigation.popToTop()`
+
 ## Advanced API Reference
 
-The `dispatch` function is much less commonly used, but a good escape hatch if you can't do what you need with `navigate` and `goBack`.`
+The `dispatch` function is much less commonly used, but a good escape hatch if you can't do what you need with `navigate` and `goBack`.
 
 ### `dispatch` - Send an action to the router
 
