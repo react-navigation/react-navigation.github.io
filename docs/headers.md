@@ -105,7 +105,7 @@ There are a couple of things to notice here:
 
 ## Sharing common `navigationOptions` across screens
 
-It is common to want to configure the header in a similar way across many screen. For example, your company brand color might be red and so you want the header background color to be red and tint color to be white. Conveniently, these are the colors we're using our running example, and you'll notice that when you navigate to the `DetailsScreen` the colors go back to the defaults. Wouldn't it be awful if we had to copy the `navigationOptions` header style properties from `HomeScreen` to `DetailsScreen`, and for every single screen component we use in our app? Thankfully, we do not. We can instead move the configuration up to the `StackNavigator`.
+It is common to want to configure the header in a similar way across many screens. For example, your company brand color might be red and so you want the header background color to be red and tint color to be white. Conveniently, these are the colors we're using our running example, and you'll notice that when you navigate to the `DetailsScreen` the colors go back to the defaults. Wouldn't it be awful if we had to copy the `navigationOptions` header style properties from `HomeScreen` to `DetailsScreen`, and for every single screen component we use in our app? Thankfully, we do not. We can instead move the configuration up to the `StackNavigator`.
 
 ```js
 class HomeScreen extends React.Component {
@@ -208,6 +208,6 @@ You can read the full list of available screen `navigationOptions` for screens i
 ## Summary
 
 - You can customize the header inside of the `navigationOptions` static property on your screen components. Read the full list of options [in the API reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
-- The `navigationOptions` static property can be an object or a function. When it is a function, it is provided with an objexct with the `navigation` prop, `screenProps`, and `navigationOptions` on it.
+- The `navigationOptions` static property can be an object or a function. When it is a function, it is provided with an object with the `navigation` prop, `screenProps`, and `navigationOptions` on it.
 - You can also specify shared `navigationOptions` in the `StackNavigator` configuration when you initialize it. The static property takes precedence over that configuration.
 - [Full source of what we have built so far](https://snack.expo.io/@react-navigation/custom-header-title-component).
