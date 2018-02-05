@@ -12,9 +12,9 @@ Under the hood, navigators are plain React components.
 
 `react-navigation` includes the following functions to help you create navigators:
 
-- [StackNavigator](/docs/navigators/stack) - Renders one screen at a time and provides transitions between screens. When a new screen is opened it is placed on top of the stack.
-- [TabNavigator](/docs/navigators/tab) - Renders a tab bar that lets the user switch between several screens
-- [DrawerNavigator](/docs/navigators/drawer) - Provides a drawer that slides in from the left of the screen
+- [StackNavigator](/docs/navigators/hello-react-navigation#creating-a-stacknavigator) - Renders one screen at a time and provides transitions between screens. When a new screen is opened it is placed on top of the stack.
+- [TabNavigator](/docs/navigators/tab-based-navigation) - Renders a tab bar that lets the user switch between several screens
+- [DrawerNavigator](/docs/navigators/drawer-based-navigation) - Provides a drawer that slides in from the left of the screen
 
 ## Rendering screens with Navigators
 
