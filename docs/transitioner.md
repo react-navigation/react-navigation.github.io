@@ -72,11 +72,11 @@ _configureTransition(transitionProps, prevTransitionProps) {
 ```
 
 #### Parameters
-- `transitionProps`: the current [NavigationTransitionProps](https://github.com/react-community/react-navigation/blob/master/src/TypeDefinition.js#L273) created from the current navigation state and props
-- `prevTransitionProps`: the previous [NavigationTransitionProps](https://github.com/react-community/react-navigation/blob/master/src/TypeDefinition.js#L273) created from the previous navigation state and props
+- `transitionProps`: the current [NavigationTransitionProps](https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js) created from the current navigation state and props
+- `prevTransitionProps`: the previous [NavigationTransitionProps](https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js) created from the previous navigation state and props
 
 #### Returns
-- An object of type [NavigationTransitionSpec](https://github.com/react-community/react-navigation/blob/master/src/TypeDefinition.js#L316) that will be fed into an Animated timing function as its config
+- An object of type [NavigationTransitionSpec](https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js) that will be fed into an Animated timing function as its config
 
 
 ### `navigation` prop
@@ -103,7 +103,7 @@ export type NavigationState = {
 };
 ```
 
-For more information about the `NavigationRoute` type, check out its [flow definition](https://github.com/react-community/react-navigation/blob/master/src/TypeDefinition.js#L32).
+For more information about the `NavigationRoute` type, check out its [flow definition](https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js).
 
 ### `render` function
 Invoked from `Transitioner.render()`. This function performs the actual rendering delegated from `Transitioner`. In this function, we can use the information included in the `transitionProps` and `prevTransitionProps` parameters to render scenes, create animations and handle gestures.
@@ -114,7 +114,7 @@ There are a few important properties of the `transitionProps` and `prevTransitio
 - `position: NavigationAnimatedValue` - the progressive index of the transitioner's navigation state
 - `progress: NavigationAnimatedValue` - the value that represents the progress of the transition when navigation state changes from one to another. Its numeric value will range from 0 to 1.
 
-For the complete list of properties of `NavigationTransitionProps`, check out its [flow definition](https://github.com/react-community/react-navigation/blob/master/src/TypeDefinition.js#L273).
+For the complete list of properties of `NavigationTransitionProps`, check out its [flow definition](https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js).
 
 #### Examples
 
@@ -161,8 +161,8 @@ render: (transitionProps: NavigationTransitionProps, prevTransitionProps: ?Navig
 ```
 
 #### Parameters
-- `transitionProps`: the current [NavigationTransitionProps](https://github.com/react-community/react-navigation/blob/master/src/TypeDefinition.js#L273) created from the current state and props
-- `prevTransitionProps`: the previous [NavigationTransitionProps](https://github.com/react-community/react-navigation/blob/master/src/TypeDefinition.js#L273) created from the previous state and props
+- `transitionProps`: the current [NavigationTransitionProps](https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js) created from the current state and props
+- `prevTransitionProps`: the previous [NavigationTransitionProps](https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js) created from the previous state and props
 
 #### Returns
 - A ReactElement, which will be used to render the Transitioner component
@@ -177,8 +177,8 @@ If you return a promise from `onTransitionStart`, the transition animation will 
 onTransitionStart: (transitionProps: NavigationTransitionProps, prevTransitionProps: ?NavigationTransitionProps) => (Promise | void),
 ```
 #### Parameters
-- `transitionProps`: the current [NavigationTransitionProps](https://github.com/react-community/react-navigation/blob/master/src/TypeDefinition.js#L273) created from the current state and props
-- `prevTransitionProps`: the previous [NavigationTransitionProps](https://github.com/react-community/react-navigation/blob/master/src/TypeDefinition.js#L273) created from the previous state and props
+- `transitionProps`: the current [NavigationTransitionProps](https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js) created from the current state and props
+- `prevTransitionProps`: the previous [NavigationTransitionProps](https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js) created from the previous state and props
 
 #### Returns
 - `Promise` to delay the start of the transition animation, or none to begin the transition animation immediately.
