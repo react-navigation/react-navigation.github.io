@@ -10,27 +10,26 @@ Routers define a component's navigation state, and they allow the developer to d
 
 `react-navigation` ships with a few standard routers:
 
-- [StackRouter](/docs/routers/stack)
-- [TabRouter](/docs/routers/tab)
+- [StackRouter](https://github.com/react-navigation/react-navigation/blob/master/src/routers/StackRouter.js)
+- [TabRouter](https://github.com/react-navigation/react-navigation/blob/master/src/routers/TabRouter.js)
 
 
 ## Using Routers
 
-To make a navigator manually, put a static `router` on a component. (To quickly make a navigator with a built-in component, it may be easier to use a [built-in navigator](/docs/navigators) instead)
+To make a navigator manually, put a static `router` on a component.
 
 ```js
 class MyNavigator extends React.Component {
-    static router = StackRouter(routes, config);
-    ...
+  static router = StackRouter(routes, config);
+  ...
 }
 ```
 
 Now you can use this component as a `screen` in another navigator, and the navigation logic for `MyNavigator` will be defined by this `StackRouter`.
 
-
 ## Customizing Routers
 
-See the [Custom Router API spec](/docs/routers/api) to learn about the API of `StackRouter` and `TabRouter`. You can override the router functions as you see fit:
+See the [Custom Router API spec](/docs/custom-routers) to learn about the API of `StackRouter` and `TabRouter`. You can override the router functions as you see fit:
 
 ### Custom Navigation Actions
 
