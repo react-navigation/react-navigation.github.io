@@ -4,7 +4,7 @@ title: Moving between screens
 sidebar_label: Moving between screens
 ---
 
-In the previous section, ["Hello React Navigation"](hello-react-navigation.html), we defined a `StackNavigator` with two routes (`Home` and `Details`), but we didn't learn how to let a user navigate from from `Home` to `Details` (although we did learn how to change the _initial_ route in our code, but forcing our users to clone our repository and change the route in our code in order to see another screen is arguably among the worst user experiences one could imagine).
+In the previous section, ["Hello React Navigation"](hello-react-navigation.html), we defined a `StackNavigator` with two routes (`Home` and `Details`), but we didn't learn how to let a user navigate from `Home` to `Details` (although we did learn how to change the _initial_ route in our code, but forcing our users to clone our repository and change the route in our code in order to see another screen is arguably among the worst user experiences one could imagine).
 
 If this was a web browser, we'd be able to write something like this:
 
