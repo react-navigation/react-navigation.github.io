@@ -29,3 +29,12 @@ blockquote {
 pre code {
   background-color: #fff;
 }
+
+.quote-source {
+  display: block;
+  text-align: right;
+  margin-top: -25px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+  font-size: 14px;
+}
