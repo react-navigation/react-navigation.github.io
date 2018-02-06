@@ -1,11 +1,11 @@
 {
   "docs": {
     "Fundamentals": ["getting-started", "hello-react-navigation", "navigating", "params", "headers", "header-buttons", "modal", "next-steps", "glossary-of-terms"],
-    "How do I do ...?": ["tab-based-navigation", "drawer-based-navigation", "handling-iphonex", "status-bar", "custom-android-back-button-handling", "deep-linking", "screen-tracking", "redux-integration"],
+    "How do I do ...?": ["tab-based-navigation", "drawer-based-navigation", "handling-iphonex", "status-bar", "custom-android-back-button-handling", "connecting-navigation-prop", "deep-linking", "screen-tracking", "redux-integration"],
     "Build your own Navigator": ["custom-navigator-overview", "routers", "custom-navigators", "custom-routers", "navigation-views", "transitioner"],
     "Meta": ["pitch", "alternatives", "contributing"]
   },
   "api": {
-    "API Reference": ["api-reference", "navigation-prop", "navigation-actions", "stack-navigator", "tab-navigator", "drawer-navigator"]
+    "API Reference": ["api-reference", "navigation-prop", "navigation-actions", "stack-navigator", "tab-navigator", "drawer-navigator", "with-navigation"]
   }
 }

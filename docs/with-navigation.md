@@ -1,28 +1,27 @@
 ---
 id: with-navigation
-title: Connecting the navigation prop to any component
-sidebar_label: Connecting the navigation prop to any component
+title: withNavigation
+sidebar_label: withNavigation
 ---
 
-[`withNavigation`](/src/views/withNavigation.js) is a Higher Order Component which passes the `navigation` prop into a wrapped Component. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
+[`withNavigation`](/docs/with-navigation) is a higher order component which passes the `navigation` prop into a wrapped Component. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
+
+- `withNavigation(Component)` returns a Component.
 
 ## Example
 
-```javascript
+```js
+import React from 'react';
 import { Button } 'react-native';
 import { withNavigation } from 'react-navigation';
 
-const MyComponent = ({ to, navigation }) => (
-    <Button title={`navigate to ${to}`} onPress={() => navigation.navigate(to)} />
-);
-
-const MyComponentWithNavigation = withNavigation(MyComponent);
-
-
-// or use decorators:
-
-@withNavigation
-export default class MainScreen extends Component {
-  ...
+class MyBackButton extends React.Component {
+  render() {
+    return <Button title="Back" onPress={() => { this.props.navigation.goBack() }} />;
+  }
 }
+
+// withNavigation returns a component that wraps MyBackButton and passes in the
+// navigation prop
+export default withNavigation(MyBackButton);
 ```

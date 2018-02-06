@@ -7,52 +7,21 @@ sidebar_label: Navigation prop
 Each `screen` component in your app is provided with the `navigation` prop automatically. It looks like this:
 
 * `this.props.navigation`
-  * `navigate` - link to other screens
-  * `pop` - go back in the stack
-  * `popToTop` - go to the top of the stack
-  * `push` - navigate forward to new route in stack
-  * `goBack` - close active screen and move back
+  * `navigate` - go to another screen, figures out the action it needs to take to do it
+  * `goBack` - close active screen and move back in the stack
   * `state` - current state/routes
   * `setParams` - make changes to route's params
   * `dispatch` - send an action to router
 
 It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it.
 
-```javascript
-import React from 'react';
-import { Button } 'react-native';
-import { withNavigation } from 'react-navigation';
+There are several additional functions on `this.props.navigation` that only if the current navigator is a `StackNavigator`. These functions are alternatives to `navigate` and `goBack` and you can use whichever you prefer. The functions are:
 
-export default class MyBackButton extends React.Component {
-  render() {
-    // This will throw an 'undefined is not a function' exception because the navigation
-    // prop is undefined.
-    return <Button title="Back" onPress={() => { this.props.navigation.goBack() }} />;
-  }
-}
-```
-
-To resolve this exception, you could pass the `navigation` prop in to `MyBackButton` when you render it from a screen, like so: `<MyBackButton navigation={this.props.navigation} />`.
-
-Alternatively, you can use the `withNavigation` function to provide the `navigation` prop automatically (through React context, if you're curious). This function behaves similarly to Redux's `connect` function, except rather than providing the `dispatch` prop to the component it wraps, it provides the `navigation` prop.
-
-```js
-import React from 'react';
-import { Button } 'react-native';
-import { withNavigation } from 'react-navigation';
-
-class MyBackButton extends React.Component {
-  render() {
-    return <Button title="Back" onPress={() => { this.props.navigation.goBack() }} />;
-  }
-}
-
-// withNavigation returns a component that wraps MyBackButton and passes in the
-// navigation prop
-export default withNavigation(MyBackButton);
-```
-
-Using this approach, you can render `MyBackButton` anywhere in your app without passing in a `navigation` prop explicitly and it will work as expected.
+* `this.props.navigation`
+  * `push` - navigate forward to new route in stack
+  * `pop` - go back in the stack
+  * `popToTop` - go to the top of the stack
+  * `replace` - replace the current route with a new one
 
 ## Common API reference
 
@@ -197,6 +166,12 @@ Take you to the previous screen in the stack. If you provide a number, "n", it w
 Call this to jump back to the top route in the stack, dismissing all other screens.
 
 `navigation.popToTop()`
+
+### Replace
+
+Call this to replace the current screen with the given route, with params and sub-action.
+
+`navigation.replace(routeName, params, action)`
 
 ## Advanced API Reference
 
