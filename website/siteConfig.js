@@ -18,7 +18,7 @@ const siteConfig = {
     {doc: 'getting-started', label: 'Docs'},
     {doc: 'api-reference', label: 'API'},
     {page: 'help', label: 'Help'},
-    {blog: true, label: 'Blog'},
+    // {blog: true, label: 'Blog'},
   ],
   users,
   /* TODO: update to use new icon */
