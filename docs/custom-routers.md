@@ -27,7 +27,7 @@ class MyNavigator extends React.Component {
 ![Routers manage the relationship between URIs, actions, and navigation state](./assets/routers/routers-concept-map.png)
 
 
-### `getStateForAction(action, state)`
+### `getStateForAction(state, action)`
 
 Defines the navigation state in response to a given action. This function will be run when an action gets passed into `props.navigation.dispatch(`, or when any of the helper functions are called, like `navigation.navigate(`.
 
