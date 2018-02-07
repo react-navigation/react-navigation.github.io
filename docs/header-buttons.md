@@ -29,6 +29,8 @@ class HomeScreen extends React.Component {
 
 The binding of `this` in `navigationOptions` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
 
+There is a community-developed package for rendering buttons in the header with the correct styling available [react-navigation-header-buttons](https://github.com/vonovak/react-navigation-header-buttons).
+
 ## Header interaction with its screen component
 
 The most commonly used pattern for giving a header button access to a function on the component instance is to use `params`. We'll demonstrate this with a classic example, the counter.
