@@ -18,6 +18,7 @@ The following actions are supported:
 Within a stack, you can also use:
 
 * [Reset](#Reset) - Replace current state with a new state
+* [Replace](#Replace) - Replace a route at a given key with another route
 * [Push](#Push) - Add a route on the top of the stack, and navigate forward to it
 * [Pop](#Pop) - Navigate back to previous routes
 * [PopToTop](#PopToTop) - Navigate to the top route of the stack, dismissing all other routes
@@ -84,6 +85,17 @@ const resetAction = NavigationActions.reset({
 });
 this.props.navigation.dispatch(resetAction);
 ```
+
+### Replace
+
+The `Replace` action replaces the route at the given key with another route.
+
+* `key` - _string - required - Key of the route to replace.
+* `newKey` - _string - Key to use for the replacement route. Generated automatically if not provided.
+* `routeName` - _string - `routeName` to use for replacement route.
+* `params` - _object_ - Parameters to pass in to the replacement route.
+* `action` - _object_ - Optional sub-action.
+* `immediate`* - _boolean_ - *Currently has no effect*, this is a placeholder for when `StackNavigator` supports animated replace (it currently does not).
 
 ### Back
 
