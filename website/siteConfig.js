@@ -35,6 +35,7 @@ const siteConfig = {
   },
   scripts: ['https://buttons.github.io/buttons.js'],
   repoUrl: 'https://github.com/react-navigation/react-navigation',
+  editUrl: 'https://github.com/react-navigation/react-navigation.github.io/edit/source/docs/',
 //   algolia: {
 //     apiKey: "my-search-only-api-key-1234",
 //     indexName: "my-index-name"
