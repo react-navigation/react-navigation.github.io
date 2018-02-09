@@ -25,20 +25,6 @@ pre[class*='language-'] {
   hyphens: none;
 }
 
-pre[class*='language-']::-moz-selection,
-pre[class*='language-'] ::-moz-selection,
-code[class*='language-']::-moz-selection,
-code[class*='language-'] ::-moz-selection {
-  background: #fff;
-}
-
-/* pre[class*='language-']::selection,
-pre[class*='language-'] ::selection,
-code[class*='language-']::selection,
-code[class*='language-'] ::selection {
-  background: #b3d4fc;
-} */
-
 /* Code blocks */
 pre[class*='language-'] {
   padding: 1em;
