@@ -9,7 +9,7 @@ Now that we know how to [create a StackNavigator with a some routes](hello-react
 There are two pieces to this:
 
 1. Pass params to a route by putting them in an object as a second parameter to the `navigation.navigate` function: `this.props.navigation.navigate('RouteName', { /* params go here */ })`
-2. Read the params in your screen component: `this.props.navigation.state.params`.
+2. Read the params in your screen component: `this.props.navigation.state.params`. Alternatively, if you want to access the params directly (eg. through `this.props.itemId`), you may use a community-developed [react-navigation-props-mapper](https://github.com/vonovak/react-navigation-props-mapper) package.
 
 ```js
 class HomeScreen extends React.Component {
