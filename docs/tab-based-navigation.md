@@ -145,7 +145,6 @@ class DetailsScreen extends React.Component {
         <Text>Details!</Text>
       </View>
     );
-    )
   }
 }
 
