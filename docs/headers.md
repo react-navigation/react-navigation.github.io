@@ -100,7 +100,7 @@ class HomeScreen extends React.Component {
 <a href="https://snack.expo.io/@react-navigation/setting-header-styles" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 There are a couple of things to notice here:
-1. On iOS the status bar is black, and this doesn't look great over a dark colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.html).
+1. On iOS the status bar text and icons are black, and this doesn't look great over a dark colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.html).
 2. The configuration we set only applies to the home screen; when we navigate to the details screen, the default styles are back. We'll look at how to share `navigationOptions` between screens now.
 
 ## Sharing common `navigationOptions` across screens
