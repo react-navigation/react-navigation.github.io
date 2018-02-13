@@ -8,7 +8,7 @@ Dictionary.com provides no satisfactory definition of modal as it relates to use
 
 > A modal displays content that temporarily blocks interactions with the main view
 
-This sounds about right. A modal is like a popup &mdash; it's not part of your primary navigation flow &mdash; it usually has a different transition, a different way to dismiss it, and you it's usually intended to primary focus on one particular piece of content or interaction.
+This sounds about right. A modal is like a popup &mdash; it's not part of your primary navigation flow &mdash; it usually has a different transition, a different way to dismiss it, and is intended to focus on one particular piece of content or interaction.
 
 <!-- Often these modals don't take up the entire screen (you can read more about that in the [Partial overlays section](partial-overlay.html)), but in this case we'll talk about modals that take up the user's entire screen. -->
 
