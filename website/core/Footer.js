@@ -27,7 +27,7 @@ class Footer extends React.Component {
               href={
                 this.props.config.baseUrl +
                 'docs/' +
-                this.props.language +
+                // this.props.language +
                 '/getting-started.html'
               }>
               Getting Started
@@ -36,7 +36,7 @@ class Footer extends React.Component {
               href={
                 this.props.config.baseUrl +
                 'docs/' +
-                this.props.language +
+                // this.props.language +
                 '/api-reference.html'
               }>
               API Reference
@@ -45,7 +45,7 @@ class Footer extends React.Component {
               href={
                 this.props.config.baseUrl +
                 'docs/' +
-                this.props.language +
+                // this.props.language +
                 '/custom-navigator-overview.html'
               }>
               Building your own Navigator
@@ -54,7 +54,7 @@ class Footer extends React.Component {
               href={
                 this.props.config.baseUrl +
                 'docs/' +
-                this.props.language +
+                // this.props.language +
                 '/contributing.html'
               }>
               Contributing
