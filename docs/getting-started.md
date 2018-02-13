@@ -25,16 +25,3 @@ yarn add react-navigation
 ```
 
 You're good to go! Continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
-
-
-<!-- 1. [Quick Start](/docs/intro/quick-start)
-Quickly get a grasp on the React Navigation API with demonstrations of the StackNavigator, TabNavigator, and DrawerNavigator.
-
-2. [Simple App](/docs/intro/basic-app)
-Dive into the basics of React Navigation by creating a new React Native project, installing React Navigation, creating your first navigator, and learning how to interact with it.
-
-3. [Navigation Playground](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground)
-Curious of the various capabilities of React Navigation? Browse the official example app, which will demonstrate various patterns with React Navigation.
-
-4. [Community Contributions](https://github.com/react-community/react-navigation#community-contributions)
-With the flexibility of React Navigation we won't be able to cover every possible situation, but another developer may have! Browse our list of community contributions to find topics that may answer your questions. -->
