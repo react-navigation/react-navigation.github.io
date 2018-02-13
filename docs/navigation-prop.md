@@ -157,7 +157,7 @@ In the past, you may have encountered the frightful scenario of accessing a `par
 
 Before:
 ```js
-const { id, name } = this.props.navigation.state.params
+const { name } = this.props.navigation.state.params
 ```
 
 if `params` is `undefined`, this fails
