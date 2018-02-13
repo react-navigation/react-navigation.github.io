@@ -80,7 +80,7 @@ If you run this code, you'll notice that each time you press the "Go to Details.
 
 The header provided by `StackNavigator` will automatically include a back button when it is possible to go back from the active screen (if there is only one screen in the navigation stack, there is nothing that you can go back to, and so there is no back button).
 
-Sometimes you'll want to be able to programmatically trigger this behavior, and for that you can use `this.props.navigator.goBack();`.
+Sometimes you'll want to be able to programmatically trigger this behavior, and for that you can use `this.props.navigation.goBack();`.
 
 ```js
 class DetailsScreen extends React.Component {
