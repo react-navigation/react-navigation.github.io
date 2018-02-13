@@ -10,18 +10,18 @@ Note that if you want to dispatch react-navigation actions you should use the ac
 
 The following actions are supported:
 
-* [Navigate](#Navigate) - Navigate to another route
-* [Back](#Back) - Go back to previous state
-* [Set Params](#SetParams) - Set Params for given route
-* [Init](#Init) - Used to initialize first state if state is undefined
+* [Navigate](#navigate) - Navigate to another route
+* [Back](#back) - Go back to previous state
+* [Set Params](#setparams) - Set Params for given route
+* [Init](#init) - Used to initialize first state if state is undefined
 
 Within a stack, you can also use:
 
-* [Reset](#Reset) - Replace current state with a new state
-* [Replace](#Replace) - Replace a route at a given key with another route
-* [Push](#Push) - Add a route on the top of the stack, and navigate forward to it
-* [Pop](#Pop) - Navigate back to previous routes
-* [PopToTop](#PopToTop) - Navigate to the top route of the stack, dismissing all other routes
+* [Reset](#reset) - Replace current state with a new state
+* [Replace](#replace) - Replace a route at a given key with another route
+* [Push](#push) - Add a route on the top of the stack, and navigate forward to it
+* [Pop](#pop) - Navigate back to previous routes
+* [PopToTop](#poptotop) - Navigate to the top route of the stack, dismissing all other routes
 
 The action creator functions define `toString()` to return the action type, which enables easy usage with third-party Redux libraries, including redux-actions and redux-saga.
 

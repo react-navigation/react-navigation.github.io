@@ -8,22 +8,22 @@ Want to help improve React Navigation? Your help would be greatly appreciated!
 
 Here are some of some of the ways to contribute to the project:
 
-- [Reporting Bugs](#Reporting-Bugs)
-- [Improving the Documentation](#Improving-the-Documentation)
-- [Responding to Issues](#Responding-to-Issues)
-- [Bug Fixes](#Bug-Fixes)
-- [Suggesting a Feature](#Suggesting-a-Feature)
-- [Big Pull Requests](#Big-Pull-Requests)
+- [Reporting Bugs](#reporting-bugs)
+- [Improving the Documentation](#improving-the-documentation)
+- [Responding to Issues](#responding-to-issues)
+- [Bug Fixes](#bug-fixes)
+- [Suggesting a Feature](#suggesting-a-feature)
+- [Big Pull Requests](#big-pull-requests)
 
 And here are a few helpful resources to aid in getting started:
 
-- [Issue Template](#Issue-Template)
-- [Pull Request Template](#Pull-Request-Template)
-- [Forking the Repository](#Forking-the-Repository)
-- [Code Review Guidelines](#Code-Review-Guidelines)
-- [Run the Example App](#Run-the-Example-App)
-- [Run the Website](#Run-the-Website)
-- [Run Tests](#Run-Tests)
+- [Issue Template](#issue-template)
+- [Pull Request Template](#pull-request-template)
+- [Forking the Repository](#forking-the-repository)
+- [Code Review Guidelines](#code-review-guidelines)
+- [Run the Example App](#run-the-example-app)
+- [Run the Website](#run-the-website)
+- [Run Tests](#run-tests)
 
 > Note that we used Yarn in the examples below but you're welcome to use NPM instead.
 
