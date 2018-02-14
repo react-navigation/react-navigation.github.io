@@ -127,12 +127,12 @@ The JSON payload:
 
 ```javascript
 {
-  action: {type: "Navigation/COMPLETE_TRANSITION", key: "StackRouterRoot"},
-  context: "id-1518521010538-2:Navigation/COMPLETE_TRANSITION_Root",
+  action: { type: 'Navigation/COMPLETE_TRANSITION', key: 'StackRouterRoot' },
+  context: 'id-1518521010538-2:Navigation/COMPLETE_TRANSITION_Root',
   lastState: undefined,
   state: undefined,
-  type: "didBlur",
-}
+  type: 'didBlur',
+};
 ```
 
 ### `state` - The screen's current state/route
