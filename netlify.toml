@@ -1,4 +1,4 @@
 [build]
   base    = "website"
   publish = "website/build/react-navigation"
-  command = "sed -i -e \"s|baseUrl: .*|baseUrl: '/',|g\" siteConfig.js && yarn install && yarn build"
+  command = "yarn install && yarn build"
