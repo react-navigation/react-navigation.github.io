@@ -112,15 +112,18 @@ React Navigation emits events to screen components that subscribe to them:
 Example:
 
 ```javascript
-const didBlurSubscription = this.props.navigation.addListener('didBlur', payload => {
-  console.debug("didBlur",payload);
-});
+const didBlurSubscription = this.props.navigation.addListener(
+  'didBlur',
+  payload => {
+    console.debug('didBlur', payload);
+  }
+);
 
 // Remove the listener when you are done
 didBlurSubscription.remove();
 ```
 
-The payload will be a json object:
+The JSON payload:
 
 ```javascript
 {
@@ -130,21 +133,6 @@ The payload will be a json object:
   state: undefined,
   type: "didBlur",
 }
-```
-
-You can use this listener API to create async navigation actions so that you know when navigation has completed:
-
-```javascript
-goBackAsync = () => {
-  const promise = new Promise(resolve => {
-    const subscription = this.props.navigation.addListener('didBlur', () => {
-      subscription.remove();
-      resolve();
-    });
-  });
-  this.props.navigation.goBack();
-  return promise;
-};
 ```
 
 ### `state` - The screen's current state/route
