@@ -108,6 +108,33 @@ React Navigation emits events to screen components that subscribe to them:
 - `didFocus` - the screen focused (if there was a transition, the transition completed)
 - `didBlur` - the screen unfocused (if there was a transition, the transition completed)
 
+
+Example:
+
+```javascript
+const didBlurSubscription = this.props.navigation.addListener(
+  'didBlur',
+  payload => {
+    console.debug('didBlur', payload);
+  }
+);
+
+// Remove the listener when you are done
+didBlurSubscription.remove();
+```
+
+The JSON payload:
+
+```javascript
+{
+  action: { type: 'Navigation/COMPLETE_TRANSITION', key: 'StackRouterRoot' },
+  context: 'id-1518521010538-2:Navigation/COMPLETE_TRANSITION_Root',
+  lastState: undefined,
+  state: undefined,
+  type: 'didBlur',
+};
+```
+
 ### `state` - The screen's current state/route
 
 A screen has access to its route via `this.props.navigation.state`. Each will return an object with the following:
