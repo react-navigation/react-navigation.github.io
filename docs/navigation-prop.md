@@ -12,6 +12,7 @@ Each `screen` component in your app is provided with the `navigation` prop autom
   * `addListener` - subscribe to updates to navigation lifecycle
   * `state` - current state/routes
   * `setParams` - make changes to route's params
+  * `getParam` - get a specific param with fallback
   * `dispatch` - send an action to router
 
 It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it.
@@ -176,6 +177,24 @@ class ProfileScreen extends React.Component {
   }
 }
 ```
+
+### `getParam` - Get a specific param value with a fallback
+
+In the past, you may have encountered the frightful scenario of accessing a `param` when `params` is undefined. Instead of accessing the param directly, you can call `getParam` instead.
+
+Before:
+```js
+const { name } = this.props.navigation.state.params
+```
+
+if `params` is `undefined`, this fails
+
+After:
+```js
+const name = this.props.navigation.getParam('name', 'Peter')
+```
+
+if `name` or `param` are undefined, set the fallback to `Peter`.
 
 ## Stack Actions
 
