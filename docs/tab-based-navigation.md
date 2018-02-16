@@ -43,7 +43,7 @@ export default TabNavigator({
 
 ## Customizing the appearance
 
-This is similar to how you would customize a `StackNavigator` &dash; there are some properties that are set when you initialize the `TabNavigator` and others that can be customized per-screen in `navigationOptions`.
+This is similar to how you would customize a `StackNavigator` &mdash; there are some properties that are set when you initialize the `TabNavigator` and others that can be customized per-screen in `navigationOptions`.
 
 ```js
 // You can import Ionicons from @expo/vector-icons if you use Expo or
@@ -133,7 +133,7 @@ class SettingsScreen extends React.Component {
 
 ## A `StackNavigator` for each tab
 
-Usually tabs don't just display one screen &dash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as their being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
+Usually tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
 
 ```js
 import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
@@ -202,4 +202,4 @@ export default TabNavigator(
 
 It's common to attempt to use a standalone tab bar component without integrating it into the navigation library you use in your app. In some cases, this works fine! You should be warned, however, that you may run into some frustrating unanticipated issues when doing this.
 
-For example, React Navigation's `TabNavigator` takes care of handling the Android back button for you, while standalone components typically do not. Additionally, it is more difficult for you (as the developer) to perform actions such as "jump to this tab and then go to this screen" if you need to call into two distinct APIs for it. Lastly, mobile user interfaces have numerous small design details that require that certain components are aware of the layout or presence of other components &mdahs; for example, if you have a translucent tab bar, content should scroll underneath it and the scroll view should have an inset on the bottom equal to the height of the tab bar so you can see all of the content. Double tapping the tab bar should make the active navigation stack pop to the top of the stack, and doing it again should scroll the active scroll view in that stack scroll to the top. While not all of these behaviors are implemented out of the box yet with React Navigation, they will be and you will not get any of this if you use a standalone tab view component.
+For example, React Navigation's `TabNavigator` takes care of handling the Android back button for you, while standalone components typically do not. Additionally, it is more difficult for you (as the developer) to perform actions such as "jump to this tab and then go to this screen" if you need to call into two distinct APIs for it. Lastly, mobile user interfaces have numerous small design details that require that certain components are aware of the layout or presence of other components &mdash; for example, if you have a translucent tab bar, content should scroll underneath it and the scroll view should have an inset on the bottom equal to the height of the tab bar so you can see all of the content. Double tapping the tab bar should make the active navigation stack pop to the top of the stack, and doing it again should scroll the active scroll view in that stack scroll to the top. While not all of these behaviors are implemented out of the box yet with React Navigation, they will be and you will not get any of this if you use a standalone tab view component.
