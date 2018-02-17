@@ -58,6 +58,9 @@ Visual options:
   * `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
   * `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
   * `none` - No header will be rendered.
+* `headerTransitionPreset` - Specifies how the header should transition from one screen to another when `headerMode: float` is enabled.
+  * `fade-in-place` - Header components cross-fade without moving, similar to the Twitter, Instagram, and Facebook app for iOS. This is the default value.
+  * `uikit` - An approximation of the default behavior for iOS.
 * `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
 * `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
 https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js)). Provided function will be passed the following arguments: - `transitionProps` - Transition props for the new screen. - `prevTransitionProps` - Transitions props for the old screen. - `isModal` - Boolean specifying if screen is modal.
