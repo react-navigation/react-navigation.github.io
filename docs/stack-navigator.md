@@ -63,7 +63,10 @@ Visual options:
   * `uikit` - An approximation of the default behavior for iOS.
 * `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
 * `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
-https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js)). Provided function will be passed the following arguments: - `transitionProps` - Transition props for the new screen. - `prevTransitionProps` - Transitions props for the old screen. - `isModal` - Boolean specifying if screen is modal.
+https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js)). Provided function will be passed the following arguments: 
+  * `transitionProps` - Transition props for the new screen. 
+  * `prevTransitionProps` - Transitions props for the old screen. 
+  * `isModal` - Boolean specifying if screen is modal.
 * `onTransitionStart` - Function to be invoked when the card transition animation is about to start.
 * `onTransitionEnd` - Function to be invoked once the card transition animation completes.
 
