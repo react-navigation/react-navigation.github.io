@@ -8,7 +8,7 @@ sidebar_label: Access the navigation prop from any component
 
 ```javascript
 import React from 'react';
-import { Button } 'react-native';
+import { Button } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 export default class MyBackButton extends React.Component {
@@ -26,7 +26,7 @@ Alternatively, you can use the `withNavigation` function to provide the `navigat
 
 ```js
 import React from 'react';
-import { Button } 'react-native';
+import { Button } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 class MyBackButton extends React.Component {
