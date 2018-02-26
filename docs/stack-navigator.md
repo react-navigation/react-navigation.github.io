@@ -129,6 +129,14 @@ Tint color for the header
 
 Color for material ripple (Android >= 5.0 only)
 
+#### `headerTransparent`
+
+Defaults to `false`. If `true`, the header will not have a background unless you explicitly provide it with `headerStyle` or `headerBackground`.
+
+#### `headerBackground`
+
+Use this with `headerTransparent` to provide a component to render in the background of the header. You can use this with a blur view, for example, to create a translucent header.
+
 #### `gesturesEnabled`
 
 Whether you can use gestures to dismiss this screen. Defaults to true on iOS, false on Android.
