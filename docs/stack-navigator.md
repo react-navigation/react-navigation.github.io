@@ -113,9 +113,9 @@ React Element or Component to display on the left side of the header. When a com
 
 Style object for the header
 
-#### `safeAreaViewProps`
+#### `headerForceInset`
 
-Allow to pass props to internal SafeAreaView used in the header. Currently the main use case is to change `forceInset` property.
+Allows to pass `forceInset` object to internal SafeAreaView used in the header. 
 
 #### `headerTitleStyle`
 
