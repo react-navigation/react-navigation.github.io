@@ -1,7 +1,7 @@
 ---
 title: React Navigation 1.0 (goodbye, beta!)
 author: Core Team
-authorURL: https://twitter.com/reactnav
+authorURL: https://twitter.com/reactnavigation
 ---
 
 As of today, React Navigation version 1.0 has been released! To see a list of recent improvements leading up to the release, refer to the “[Renewed Path to React Navigation V1.0](https://github.com/react-navigation/react-navigation/issues/2585)” issue. Thank you to everybody who has filed high-quality bug reports, submitted pull requests, and helped out fellow developers while we were in beta!
