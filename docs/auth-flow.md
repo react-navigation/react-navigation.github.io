@@ -18,7 +18,7 @@ Most apps require that a user authenticate in some way to have access to data as
 ```js
 import { StackNavigator, SwitchNavigator } from 'react-navigation';
 
-// Implementation of HomeScreen, OtherScreen, SignInScreen, LoadingScreen
+// Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
 // goes here.
 
 const AppStack = StackNavigator({ Home: HomeScreen, Other: OtherScreen });
