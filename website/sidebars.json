@@ -42,7 +42,8 @@
       "switch-navigator",
       "tab-navigator",
       "drawer-navigator",
-      "with-navigation"
+      "with-navigation",
+      "with-navigation-focus"
     ]
   }
 }

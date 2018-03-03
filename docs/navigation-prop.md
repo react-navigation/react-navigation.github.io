@@ -10,6 +10,7 @@ Each `screen` component in your app is provided with the `navigation` prop autom
   * `navigate` - go to another screen, figures out the action it needs to take to do it
   * `goBack` - close active screen and move back in the stack
   * `addListener` - subscribe to updates to navigation lifecycle
+  * `isFocused` - function that returns `true` if the screen is focused and `false` otherwise.
   * `state` - current state/routes
   * `setParams` - make changes to route's params
   * `getParam` - get a specific param with fallback
@@ -104,11 +105,10 @@ navigation.goBack(SCREEN_KEY_B) // will go to screen A FROM screen B
 
 React Navigation emits events to screen components that subscribe to them:
 
-- `willBlur` - the screen will be unfocused
-- `willFocus` - the screen will focus
-- `didFocus` - the screen focused (if there was a transition, the transition completed)
-- `didBlur` - the screen unfocused (if there was a transition, the transition completed)
-
+* `willBlur` - the screen will be unfocused
+* `willFocus` - the screen will focus
+* `didFocus` - the screen focused (if there was a transition, the transition completed)
+* `didBlur` - the screen unfocused (if there was a transition, the transition completed)
 
 Example:
 
@@ -135,6 +135,16 @@ The JSON payload:
   type: 'didBlur',
 };
 ```
+
+### `isFocused` - Query the focused state of the screen
+
+Returns `true` if the screen is focused and `false` otherwise.
+
+```js
+let isFocused = this.props.navigation.isFocused();
+```
+
+You probably want to use [withNavigationFocus]() instead of using this directly, it will pass in an `isFocused` boolean a prop to your component.
 
 ### `state` - The screen's current state/route
 
@@ -183,15 +193,17 @@ class ProfileScreen extends React.Component {
 In the past, you may have encountered the frightful scenario of accessing a `param` when `params` is undefined. Instead of accessing the param directly, you can call `getParam` instead.
 
 Before:
+
 ```js
-const { name } = this.props.navigation.state.params
+const { name } = this.props.navigation.state.params;
 ```
 
 if `params` is `undefined`, this fails
 
 After:
+
 ```js
-const name = this.props.navigation.getParam('name', 'Peter')
+const name = this.props.navigation.getParam('name', 'Peter');
 ```
 
 if `name` or `param` are undefined, set the fallback to `Peter`.

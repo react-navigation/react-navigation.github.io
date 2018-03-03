@@ -99,6 +99,8 @@
     "TabNavigator": "TabNavigator",
     "transitioner": "Transitioner",
     "Transitioner": "Transitioner",
+    "with-navigation-focus": "withNavigationFocus",
+    "withNavigationFocus": "withNavigationFocus",
     "with-navigation": "withNavigation",
     "withNavigation": "withNavigation",
     "Docs": "Docs",
