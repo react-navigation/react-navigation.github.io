@@ -60,12 +60,7 @@ Check out the [help wanted](https://github.com/react-community/react-navigation/
 
 ### Suggesting a Feature
 
-Is there something you want to see from React Navigation? Go ahead and open and issue, describe what it is you want to accomplish and why you want to accomplish that. A few things to consider/add
-
-1. Is there already a way to do this and you want to simplify it?
-2. Do you have any thoughts on how to implement this feature? Have you done something similar already?
-
-Hold off on submitting feature pull requests until the feature has been discussed. Once the feature has been established and agreed upon, create the pull request (following the [big pull requests](#big-pull-requests) guide).
+Is there something you want to see from React Navigation? Please [create a feature request on Canny](https://react-navigation.canny.io/feature-requests).
 
 ### Big Pull Requests
 
