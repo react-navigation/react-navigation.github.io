@@ -23,5 +23,5 @@ class FocusStateLabel extends React.Component {
 
 // withNavigationFocus returns a component that wraps FocusStateLabel and passes
 // in the navigation prop
-export default withNavigation(FocusStateLabel);
+export default withNavigationFocus(FocusStateLabel);
 ```
