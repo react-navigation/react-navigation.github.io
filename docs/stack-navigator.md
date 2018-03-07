@@ -90,8 +90,7 @@ Whether header title font should scale to respect Text Size accessibility settin
 
 #### `headerBackImage`
 
-The image source (either a remote URL `{{uri: 'path/to/image'}}` or a local file resource `{require('path/to/image')}`) used by the back button.
-Defaults to `react-navigation/views/assets/back-icon.png`, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
+React Element or Component to display custom image in header's back button. When a component is used, it receives a number of props when rendered (`tintColor`, `title`). Defaults to Image component with `react-navigation/views/assets/back-icon.png` back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
 
 #### `headerBackTitle`
 
