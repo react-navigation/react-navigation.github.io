@@ -54,8 +54,8 @@ import {
 } from 'react-native';
 
 class AuthLoadingScreen extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this._bootstrapAsync();
   }
 
