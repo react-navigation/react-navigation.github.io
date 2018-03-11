@@ -19,6 +19,7 @@
       "status-bar",
       "custom-android-back-button-handling",
       "connecting-navigation-prop",
+      "navigating-without-navigation-prop",
       "deep-linking",
       "screen-tracking",
       "redux-integration"
