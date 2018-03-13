@@ -36,7 +36,7 @@ The navigation prop passed down to a navigator only includes `state` and `dispat
 
 All navigators are controlled components: they always display what is coming in through `props.navigation.state`, and their only way to change the state is to send actions into `props.navigation.dispatch`.
 
-Navigators can specify custom behavior to parent navigators by [customizing their router](/docs/custom-routers/). For example, a navigator is able to specify when actions should be blocked by returning null from `router.getStateForAction`. Or a navigator can specify custom URI handling by overriding `router.getActionForPathAndParams` to output a relevant navigation action, and handling that action in `router.getStateForAction`.
+Navigators can specify custom behavior to parent navigators by [customizing their router](/docs/custom-routers). For example, a navigator is able to specify when actions should be blocked by returning null from `router.getStateForAction`. Or a navigator can specify custom URI handling by overriding `router.getActionForPathAndParams` to output a relevant navigation action, and handling that action in `router.getStateForAction`.
 
 ### Navigation State
 
@@ -74,7 +74,7 @@ To help developers implement custom navigators, the following utilities are prov
 
 ### `createNavigator`
 
-This utility combines a [router](/docs/routers/) and a [navigation view](/docs/navigation-views/) together in a standard way:
+This utility combines a [router](/docs/routers) and a [navigation view](/docs/navigation-views) together in a standard way:
 
 ```js
 const MyApp = createNavigator(MyRouter)(MyView);
