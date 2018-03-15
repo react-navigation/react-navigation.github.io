@@ -72,4 +72,4 @@ import NavigationService from 'path-to-NavigationService.js';
 NavigationService.navigate('ChatScreen', { userName: 'Lucy' });
 ```
 
-In `NavigationService`, you can create your own navigation actions, or compose multiple navigation actions into one, and then easily reuse them throughout your application. When writing tests, you may mock the navigation functions, and make assertions on whether the correct functions are called, with the correct paramaters.
+In `NavigationService`, you can create your own navigation actions, or compose multiple navigation actions into one, and then easily reuse them throughout your application. When writing tests, you may mock the navigation functions, and make assertions on whether the correct functions are called, with the correct parameters.
