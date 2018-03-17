@@ -31,7 +31,7 @@ class HomeScreen extends React.Component {
   }
 }
 
-export default StackNavigator({
+export default createStackNavigator({
   Home: {
     screen: HomeScreen,
   },
@@ -48,7 +48,7 @@ If you run this code, you will see a screen with an empty navigation bar and a g
 In React Native, the component exported from `App.js` is the entry point (or root component) for your app -- it is the component from which every other component descends. It's often useful to have more control over the component at the root of your app than you would get from exporting a `StackNavigator`, so let's export a component that just renders our `StackNavigator`.
 
 ```js
-const RootStack = StackNavigator({
+const RootStack = createStackNavigator({
   Home: {
     screen: HomeScreen,
   },

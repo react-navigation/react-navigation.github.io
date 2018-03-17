@@ -33,7 +33,7 @@ class SettingsScreen extends React.Component {
   }
 }
 
-export default TabNavigator({
+export default createTabNavigator({
   Home: { screen: HomeScreen },
   Settings: { screen: SettingsScreen },
 });
@@ -176,12 +176,12 @@ class SettingsScreen extends React.Component {
   }
 }
 
-const HomeStack = StackNavigator({
+const HomeStack = createStackNavigator({
   Home: { screen: HomeScreen },
   Details: { screen: DetailsScreen },
 });
 
-const SettingsStack = StackNavigator({
+const SettingsStack = createStackNavigator({
   Settings: { screen: SettingsScreen },
   Details: { screen: DetailsScreen },
 });

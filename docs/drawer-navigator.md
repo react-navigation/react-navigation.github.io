@@ -105,7 +105,7 @@ The navigator component created by `DrawerNavigator(...)` takes the following pr
 
 
  ```jsx
- const DrawerNav = DrawerNavigator({
+ const DrawerNav = createDrawerNavigator({
    // config
  });
 

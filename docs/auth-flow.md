@@ -21,8 +21,8 @@ import { StackNavigator, SwitchNavigator } from 'react-navigation';
 // Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
 // goes here.
 
-const AppStack = StackNavigator({ Home: HomeScreen, Other: OtherScreen });
-const AuthStack = StackNavigator({ SignIn: SignInScreen });
+const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen });
+const AuthStack = createStackNavigator({ SignIn: SignInScreen });
 
 export default SwitchNavigator(
   {

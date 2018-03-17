@@ -132,7 +132,7 @@ The navigator component created by `TabNavigator(...)` takes the following props
 
 
  ```js
- const TabNav = TabNavigator({
+ const TabNav = createTabNavigator({
    // config
  });
 

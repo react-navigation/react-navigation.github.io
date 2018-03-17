@@ -115,7 +115,7 @@ Navigation state is automatically passed down from one navigator to another when
 Applying this to the example above, you could instead define `AppNavigator` to contain a nested `TabNavigator` as follows:
 
 ```es6
-const AppNavigator = StackNavigator({
+const AppNavigator = createStackNavigator({
   Home: { screen: MyTabNavigator },
 });
 ```

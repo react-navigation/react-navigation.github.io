@@ -36,7 +36,7 @@ See the [Custom Router API spec](/docs/custom-routers) to learn about the API of
 To override navigation behavior, you can override the navigation state logic in `getStateForAction`, and manually manipulate the `routes` and `index`.
 
 ```js
-const MyApp = StackNavigator({
+const MyApp = createStackNavigator({
   Home: { screen: HomeScreen },
   Profile: { screen: ProfileScreen },
 }, {
@@ -102,7 +102,7 @@ Perhaps your app has a unique URI which the built-in routers cannot handle. You 
 
 import { NavigationActions } from 'react-navigation'
 
-const MyApp = StackNavigator({
+const MyApp = createStackNavigator({
   Home: { screen: HomeScreen },
   Profile: { screen: ProfileScreen },
 }, {

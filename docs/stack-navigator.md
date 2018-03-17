@@ -19,7 +19,7 @@ StackNavigator(RouteConfigs, StackNavigatorConfig);
 The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route.
 
 ```js
-StackNavigator({
+createStackNavigator({
   // For each screen that you can navigate to, create a new entry like this:
   Profile: {
     // `ProfileScreen` is a React component that will be the main content of the screen.
@@ -163,7 +163,7 @@ The navigator component created by `StackNavigator(...)` takes the following pro
 
 
 ```js
-const SomeStack = StackNavigator({
+const SomeStack = createStackNavigator({
   // config
 });
 
@@ -230,7 +230,7 @@ The navigator component created by `StackNavigator(...)` takes the following pro
 
 
  ```js
- const StackNav = StackNavigator({
+ const StackNav = createStackNavigator({
    // config
  });
 

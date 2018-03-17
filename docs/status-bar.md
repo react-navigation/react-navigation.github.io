@@ -54,7 +54,7 @@ class Screen2 extends React.Component {
 ```
 
 ```javascript
-export default StackNavigator({
+export default createStackNavigator({
   Screen1: {
     screen: Screen1,
   },
@@ -69,7 +69,7 @@ export default StackNavigator({
 ![StackNavigator with different StatusBar configs](./assets/statusbar/statusbar-stack-demo.gif)
 
 ```javascript
-export default DrawerNavigator({
+export default createDrawerNavigator({
   Screen1: {
     screen: Screen1,
   },
