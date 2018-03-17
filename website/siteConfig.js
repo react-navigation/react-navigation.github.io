@@ -15,8 +15,8 @@ const siteConfig = {
     : 'https://next.react-navigation.org',
   baseUrl: '/',
   organizationName: process.env.STABLE_RELEASE
+    ? 'react-navigation' :
     ? 'react-navigation-next'
-    : 'react-navigation',
   projectName: process.env.STABLE_RELEASE
     ? 'react-navigation.github.io'
     : 'react-navigation-next.github.io',
