@@ -11,8 +11,8 @@ const siteConfig = {
   title: 'React Navigation',
   tagline: 'Routing and navigation for your React Native apps',
   url: process.env.STABLE_RELEASE
-    ? 'https://react-navigation.github.io/website-prelease'
-    : 'https://reactnavigation.org',
+    ? 'https://reactnavigation.org'
+    : 'https://react-navigation.github.io/website-prelease',
   baseUrl: '/',
   organizationName: 'react-navigation',
   projectName: process.env.STABLE_RELEASE
