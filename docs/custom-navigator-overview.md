@@ -64,4 +64,4 @@ Function that gets called every time navigation state managed by the navigator c
 
 ### `uriPrefix`
 
-The prefix of the URIs that the app might handle. This will be used when handling a [deep link](/docs/guides/linking) to extract the path passed to the router.
+The prefix of the URIs that the app might handle. This will be used when handling a [deep link](/docs/deep-linking.html) to extract the path passed to the router.
