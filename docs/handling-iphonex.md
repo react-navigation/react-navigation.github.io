@@ -30,7 +30,7 @@ export default StackNavigator({
 
 ![Text hidden by iPhoneX UI elements](./assets/iphoneX/02-iphonex-content-hidden.png)
 
-To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from either `react-native` or `react-navigation`.
+To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-navigation`.
 
 ```javascript
 import { SafeAreaView } from 'react-navigation';
@@ -68,3 +68,22 @@ To fix this you can, once again, wrap your content in a `SafeAreaView`. This wil
 In conclusion, use the `SafeAreaView` component on the screens you register with a React Navigation navigator.
 
 A [Snack](https://snack.expo.io/BJ6-M8pEG) is available with the code used in this overview.
+
+## Use `forceInset` to get more control
+
+In some cases you might need more control which paddings are applied. For example you can remove bottom padding by passing `forceInset` prop to `SafeAreaView`.
+
+```javascript
+<SafeAreaView style={styles.container} forceInset={{ bottom: 'never' }}>
+  <Text style={styles.paragraph}>
+    This is top text.
+  </Text>
+  <Text style={styles.paragraph}>
+    This is bottom text.
+  </Text>
+</SafeAreaView>
+```
+
+`forceInset` takes an object with the keys `top | bottom | left | right | vertical | horizontal` and the values `'always' | 'never'`. Or you can override the padding altogether by passing an integer.
+
+There is also a [Snack](https://snack.expo.io/@jozan/react-navigation-docs:-safeareaview-demo) available to demonstrate how `forceInset` behaves.
