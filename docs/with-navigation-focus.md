@@ -12,7 +12,7 @@ sidebar_label: withNavigationFocus
 
 ```js
 import React from 'react';
-import { Text } 'react-native';
+import { Text } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 
 class FocusStateLabel extends React.Component {
