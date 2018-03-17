@@ -16,11 +16,15 @@ Returning `true` from `onBackButtonPressAndroid` denotes that we have handled th
 class ScreenWithCustomBackBehavior extends React.Component {
   _didFocusSubscription;
   _willBlurSubscription;
+  
+  constructor(props) {
+    super(props);
+    this._didFocusSubscription = props.navigation.addListener('didFocus', payload =>
+      BackHandler.addEventListener('hardwareBackPress', this.onBackPressed)
+    );
+  }
 
   componentDidMount() {
-    this._didFocusSubscription = this.props.navigation.addListener('didFocus', payload =>
-      BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid)
-    );
     this._willBlurSubscription = this.props.navigation.addListener('willBlur', payload =>
       BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressAndroid)
     );
