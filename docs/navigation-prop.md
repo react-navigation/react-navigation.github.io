@@ -221,7 +221,6 @@ Similar to navigate, push will move you forward to a new route in the stack.
 * `routeName` - A destination routeName that has been registered somewhere in the app's router
 * `params` - Params to merge into the destination route
 * `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions) for a full list of supported actions.
-* `key` - _String_ - Optional - The identifier for the route to navigate to. Navigate back to this route if it already exists
 
 ### Pop
 
