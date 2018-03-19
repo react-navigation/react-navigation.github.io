@@ -221,20 +221,3 @@ const ModalNavigator =createStackNavigator(
 ```
 
 Header transitions can also be configured using `headerLeftInterpolator`, `headerTitleInterpolator` and `headerRightInterpolator` fields under `transitionConfig`.
-
-## Navigator props
-
-The navigator component created by `createStackNavigator(...)` takes the following props:
-
-- `screenProps` - Pass down extra options to child screens and navigation options, for example:
-
-
- ```js
- const StackNavigator = createStackNavigator({
-   // config
- });
-
- <StackNavigator
-   screenProps={/* this prop will get passed to the screen components as this.props.screenProps */}
- />
- ```

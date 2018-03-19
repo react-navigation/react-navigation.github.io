@@ -97,23 +97,6 @@ React Element or a function, that given `{ focused: boolean, tintColor: string }
 
 Specifies the [lock mode](https://facebook.github.io/react-native/docs/drawerlayoutandroid.html#drawerlockmode) of the drawer. This can also update dynamically by using screenProps.drawerLockMode on your top level router.
 
-### Navigator Props
-
-The navigator component created by `createDrawerNavigator(...)` takes the following props:
-
-- `screenProps` - Pass down extra options to child screens, for example:
-
-
- ```jsx
- const DrawerNavigator = createDrawerNavigator({
-   // config
- });
-
- <DrawerNavigator
-   screenProps={/* this prop will get passed to the screen components and nav options as props.screenProps */}
- />
- ```
-
  ### Nesting drawer navigators inside others
 
 If a drawer navigator is nested inside of another navigator that provides some UI, for example a tab navigator or stack navigator, then the drawer will be rendered below the UI from those navigators. The drawer will appear below the tab bar and below the header of the stack. You will need to make the drawer navigator the parent of any navigator where the drawer should be rendered on top of its UI.

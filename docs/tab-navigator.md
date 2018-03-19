@@ -123,20 +123,3 @@ Callback to handle tap events; the argument is an object containing:
 * the `jumpToIndex` method that can perform the navigation for you
 
 Useful for adding a custom logic before the transition to the next scene (the tapped one) starts.
-
-## Navigator props
-
-The navigator component created by `createTabNavigator(...)` takes the following props:
-
-* `screenProps` - Pass down extra options to child screens and navigation options, for example:
-
-
-```js
-const TabNavigator = createTabNavigator({
-  // config
-});
-
-<TabNavigator
-  screenProps={/* this prop will get passed to the screen components as this.props.screenProps */}
-/>
-```
