@@ -1,16 +1,18 @@
 ---
 id: tab-navigator
-title: TabNavigator reference
-sidebar_label: TabNavigator
+title: createTabNavigator
+sidebar_label: createTabNavigator
 ---
 
+> Note: `createTabNavigator` is deprecated. Please use `createBottomTabNavigator` and/or `createTopTabNavigator` instead.
+
 ```js
-TabNavigator(RouteConfigs, TabNavigatorConfig)
+createTabNavigator(RouteConfigs, TabNavigatorConfig)
 ```
 
 ## RouteConfigs
 
-The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.md#routeconfigs) from `StackNavigator`.
+The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.md#routeconfigs) from stack navigator.
 
 ## TabNavigatorConfig
 
@@ -92,7 +94,7 @@ tabBarOptions: {
 }
 ```
 
-## `navigationOptions` used by `TabNavigator`
+## `navigationOptions` for screens inside of the navigator
 
 #### `title`
 
@@ -126,17 +128,17 @@ Useful for adding a custom logic before the transition to the next scene (the ta
 
 ## Navigator props
 
-The navigator component created by `TabNavigator(...)` takes the following props:
+The navigator component created by `createTabNavigator(...)` takes the following props:
 
 - `screenProps` - Pass down extra options to child screens and navigation options, for example:
 
 
  ```js
- const TabNav = createTabNavigator({
+ const TabNavigator = createTabNavigator({
    // config
  });
 
- <TabNav
+ <TabNavigator
    screenProps={/* this prop will get passed to the screen components as this.props.screenProps */}
  />
  ```

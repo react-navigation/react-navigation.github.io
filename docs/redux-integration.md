@@ -34,7 +34,7 @@ With Redux, your app's state is defined by a reducer. Each navigation router eff
 
 ```es6
 import {
-  StackNavigator,
+  createStackNavigator,
   addNavigationHelpers,
 } from 'react-navigation';
 import {
@@ -49,7 +49,7 @@ import {
 import { Provider, connect } from 'react-redux';
 import React from 'react';
 
-const AppNavigator = StackNavigator(AppRouteConfigs);
+const AppNavigator = createStackNavigator(AppRouteConfigs);
 
 const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Login'));
 

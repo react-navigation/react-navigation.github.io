@@ -16,7 +16,7 @@ Most apps require that a user authenticate in some way to have access to data as
 ## Set up our navigators
 
 ```js
-import { StackNavigator, SwitchNavigator } from 'react-navigation';
+import { createStackNavigator, createStackNavigator } from 'react-navigation';
 
 // Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
 // goes here.
@@ -83,7 +83,7 @@ class AuthLoadingScreen extends React.Component {
 
 ## Fill in other components
 
-Our `App` and `Auth` routes are both `StackNavigators`, but you could do whatever you like here. As mentioned above, you probably want your authentication route to be a stack for password reset, signup, etc. Similarly for your app, you probbaly have more than one screen. We won't talk about how to implement the text inputs and buttons for the authentication screen, that is outside of the scope of navigation. We'll just fill in some placeholder content.
+Our `App` and `Auth` routes are both stack navigators, but you could do whatever you like here. As mentioned above, you probably want your authentication route to be a stack for password reset, signup, etc. Similarly for your app, you probbaly have more than one screen. We won't talk about how to implement the text inputs and buttons for the authentication screen, that is outside of the scope of navigation. We'll just fill in some placeholder content.
 
 ```js
 class SignInScreen extends React.Component {

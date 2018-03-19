@@ -72,7 +72,7 @@ class HomeScreen extends React.Component {
 
 ## Customizing the back button
 
-`StackNavigator` provides the platform-specific defaults for the back button. On iOS this includes a label next to the button, which shows the title of the previous screen when the title fits in the available space, otherwise it says "Back".
+`createStackNavigator` provides the platform-specific defaults for the back button. On iOS this includes a label next to the button, which shows the title of the previous screen when the title fits in the available space, otherwise it says "Back".
 
 You can change the label behavior with `headerBackTitle` and `headerTruncatedBackTitle` ([read more](stack-navigator.html#headerbacktitle)).
 
@@ -80,7 +80,7 @@ To customize the back button image, you can use [headerBackImage](stack-navigato
 
 ## Overriding the back button
 
-The back button will be rendered automatically in a `StackNavigator` whenever it is possible for the user to go back from their current screen &mdash; in other words, the back button will be rendered whenever there is more than one screen in the stack.
+The back button will be rendered automatically in a stack navigator whenever it is possible for the user to go back from their current screen &mdash; in other words, the back button will be rendered whenever there is more than one screen in the stack.
 
 Generally, this is what you want. But it's possible that in some circumstances that you want to customize the back button more than you can through the options mentioned above, in which case you can specify a `headerLeft`, just as we did with `headerRight`, and completely override the back button.
 

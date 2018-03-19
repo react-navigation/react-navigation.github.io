@@ -4,7 +4,7 @@ title: Passing parameters to routes
 sidebar_label: Passing parameters to routes
 ---
 
-Now that we know how to [create a StackNavigator with some routes](hello-react-navigation.html) and [navigate between those routes](navigating.html), let's look at how we can pass data to routes when we navigate to them.
+Now that we know how to [create a stack navigator with some routes](hello-react-navigation.html) and [navigate between those routes](navigating.html), let's look at how we can pass data to routes when we navigate to them.
 
 There are two pieces to this:
 
@@ -62,6 +62,6 @@ class DetailsScreen extends React.Component {
 
 ## Summary
 
-- `navigate` accepts an optional second argument to let you pass parameters to the route you are navigating to. For example: `this.props.navigation.navigate('RouteName', {paramName: 'value'})` pushes a new route to the `StackNavigator`, where the params are `{paramName: 'value'}`.
+- `navigate` accepts an optional second argument to let you pass parameters to the route you are navigating to. For example: `this.props.navigation.navigate('RouteName', {paramName: 'value'})` pushes a new route to the stack navigator, where the params are `{paramName: 'value'}`.
 - You can read the params from `this.props.navigation.state.params`. It is `null` if no parameters are specified.
 - [Full source of what we have built so far](https://snack.expo.io/@react-navigation/navigate-with-params).

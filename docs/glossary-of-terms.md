@@ -15,7 +15,7 @@ Also known as navigation header, navigation bar, navbar, and probably many other
 A screen component is a component that we use in our route configuration.
 
 ```js
-const RootStack = StackNavigator(
+const AppNavigator = createStackNavigator(
   {
     Home: {
       screen: HomeScreen,    // <----

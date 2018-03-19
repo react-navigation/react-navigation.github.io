@@ -41,8 +41,11 @@
       "navigation-actions",
       "stack-navigator",
       "switch-navigator",
-      "tab-navigator",
       "drawer-navigator",
+      "tab-navigator",
+      "bottom-tab-navigator",
+      "material-bottom-tab-navigator",
+      "material-top-tab-navigator",
       "with-navigation",
       "with-navigation-focus"
     ]

@@ -1,16 +1,16 @@
 ---
 id: drawer-navigator
-title: DrawerNavigator reference
-sidebar_label: DrawerNavigator
+title: createDrawerNavigator
+sidebar_label: createDrawerNavigator
 ---
 
 ```js
-DrawerNavigator(RouteConfigs, DrawerNavigatorConfig)
+createDrawerNavigator(RouteConfigs, DrawerNavigatorConfig)
 ```
 
 ### RouteConfigs
 
-The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](/docs/stack-navigator.html#routeconfigs) from `StackNavigator`.
+The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](/docs/stack-navigator.html#routeconfigs) from `createStackNavigator`.
 
 
 ### DrawerNavigatorConfig
@@ -99,21 +99,21 @@ Specifies the [lock mode](https://facebook.github.io/react-native/docs/drawerlay
 
 ### Navigator Props
 
-The navigator component created by `DrawerNavigator(...)` takes the following props:
+The navigator component created by `createDrawerNavigator(...)` takes the following props:
 
 - `screenProps` - Pass down extra options to child screens, for example:
 
 
  ```jsx
- const DrawerNav = createDrawerNavigator({
+ const DrawerNavigator = createDrawerNavigator({
    // config
  });
 
- <DrawerNav
+ <DrawerNavigator
    screenProps={/* this prop will get passed to the screen components and nav options as props.screenProps */}
  />
  ```
 
- ### Nesting `DrawerNavigation`
+ ### Nesting drawer navigators inside others
 
-Please bear in mind that if you nest the DrawerNavigation, the drawer will show below the parent navigation.
+If a drawer navigator is nested inside of another navigator that provides some UI, for example a tab navigator or stack navigator, then the drawer will be rendered below the UI from those navigators. The drawer will appear below the tab bar and below the header of the stack. You will need to make the drawer navigator the parent of any navigator where the drawer should be rendered on top of its UI.

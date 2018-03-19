@@ -62,7 +62,7 @@ Unlike the other nav options which are only utilized by the navigator view, the 
 It's very common to define `navigationOptions` on a screen, but sometimes it is useful to define `navigationOptions` on a navigator too.
 
 Imagine the following scenario:
-Your `TabNavigator` represents one of the screens in the app, and is nested within a top-level `StackNavigator`:
+Your `TabNavigator` represents one of the screens in the app, and is nested within a top-level stack navigator:
 
 ```
 createStackNavigator({

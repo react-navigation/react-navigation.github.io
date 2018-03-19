@@ -31,4 +31,4 @@ class ScreenWithCustomBackBehavior extends React.Component {
 }
 ```
 
-The presented approach will work well for screens that are shown in a `StackNavigator`. Custom back button handling in other situations may not be supported at the moment (eg. A known case when this does not work is when you want to handle back button press in an open drawer. PRs for such use cases are welcome!)
+The presented approach will work well for screens that are shown in a stack navigator. Custom back button handling in other situations may not be supported at the moment (eg. A known case when this does not work is when you want to handle back button press in an open drawer. PRs for such use cases are welcome!)

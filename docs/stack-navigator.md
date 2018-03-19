@@ -1,17 +1,17 @@
 ---
 id: stack-navigator
-title: StackNavigator reference
-sidebar_label: StackNavigator
+title: createStackNavigator
+sidebar_label: createStackNavigator
 ---
 
 Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
-By default the StackNavigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the StackNavigator can also be configured to a modal style where screens slide in from the bottom.
+By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
 
 ## API Definition
 
 ```js
-StackNavigator(RouteConfigs, StackNavigatorConfig);
+createStackNavigator(RouteConfigs, StackNavigatorConfig);
 ```
 
 ### RouteConfigs
@@ -70,7 +70,7 @@ https://github.com/react-navigation/react-navigation/blob/master/flow/react-navi
 * `onTransitionStart` - Function to be invoked when the card transition animation is about to start.
 * `onTransitionEnd` - Function to be invoked once the card transition animation completes.
 
-### `navigationOptions` used by `StackNavigator`
+### `navigationOptions` for screens inside of the navigator
 
 #### `title`
 
@@ -181,7 +181,7 @@ You can view these examples directly on your phone by visiting [our expo demo](h
 #### Modal StackNavigator with Custom Screen Transitions
 
 ```js
-const ModalNavigator = StackNavigator(
+const ModalNavigator =createStackNavigator(
   {
     Main: { screen: Main },
     Login: { screen: Login },
@@ -224,17 +224,17 @@ Header transitions can also be configured using `headerLeftInterpolator`, `heade
 
 ## Navigator props
 
-The navigator component created by `StackNavigator(...)` takes the following props:
+The navigator component created by `createStackNavigator(...)` takes the following props:
 
 - `screenProps` - Pass down extra options to child screens and navigation options, for example:
 
 
  ```js
- const StackNav = createStackNavigator({
+ const StackNavigator = createStackNavigator({
    // config
  });
 
- <StackNav
+ <StackNavigator
    screenProps={/* this prop will get passed to the screen components as this.props.screenProps */}
  />
  ```

@@ -10,11 +10,12 @@ Under the hood, navigators are plain React components.
 
 ## Built-in Navigators
 
-`react-navigation` includes the following functions to help you create navigators:
+`react-navigation` includes some commonly needed navigators such as:
 
-- [StackNavigator](/docs/stack-navigator) - Renders one screen at a time and provides transitions between screens. When a new screen is opened it is placed on top of the stack.
-- [TabNavigator](/docs/tab-navigator) - Renders a tab bar that lets the user switch between several screens
-- [DrawerNavigator](/docs/drawer-navigator) - Provides a drawer that slides in from the left of the screen
+- [createStackNavigator](/docs/stack-navigator) - Renders one screen at a time and provides transitions between screens. When a new screen is opened it is placed on top of the stack.
+- [createBottomTabNavigator](/docs/bottom-tab-navigator) - Renders a tab bar that lets the user switch between several screens.
+- [createSwitchNavigator](/docs/switch-navigator) - Switch between one screen and another with no UI on top of it, unmount screens when they become inactive.
+- [createDrawerNavigator](/docs/drawer-navigator) - Provides a drawer that slides in from the left of the screen.
 
 ## Rendering screens with Navigators
 
@@ -30,7 +31,7 @@ In case you want to use Navigator from the same level you declare it you can use
 ```js
 import { NavigationActions } from 'react-navigation';
 
-const AppNavigator = StackNavigator(SomeAppRouteConfigs);
+const AppNavigator = createStackNavigator(SomeAppRouteConfigs);
 
 class App extends React.Component {
   someEvent() {

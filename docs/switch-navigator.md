@@ -1,16 +1,16 @@
 ---
 id: switch-navigator
-title: SwitchNavigator reference
-sidebar_label: SwitchNavigator
+title: createSwitchNavigator
+sidebar_label: createSwitchNavigator
 ---
 
 ```js
-SwitchNavigator(RouteConfigs, SwitchNavigatorConfig)
+createSwitchNavigator(RouteConfigs, SwitchNavigatorConfig)
 ```
 
 ## RouteConfigs
 
-The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.md#routeconfigs) from `StackNavigator`.
+The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.md#routeconfigs) from `createStackNavigator`.
 
 ## SwitchNavigatorConfig
 
