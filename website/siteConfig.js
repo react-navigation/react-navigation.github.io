@@ -10,15 +10,21 @@ const users = [
 const siteConfig = {
   title: 'React Navigation',
   tagline: 'Routing and navigation for your React Native apps',
-  url: 'https://reactnavigation.org',
+  url: process.env.STABLE_RELEASE
+    ? 'https://reactnavigation.org'
+    : 'https://next.react-navigation.org',
   baseUrl: '/',
-  organizationName: 'react-navigation',
-  projectName: 'react-navigation.github.io',
+  organizationName: process.env.STABLE_RELEASE
+    ? 'react-navigation' 
+    : 'react-navigation-next',
+  projectName: process.env.STABLE_RELEASE
+    ? 'react-navigation.github.io'
+    : 'react-navigation-next.github.io',
   headerLinks: [
-    {doc: 'getting-started', label: 'Docs'},
-    {doc: 'api-reference', label: 'API'},
-    {page: 'help', label: 'Help'},
-    {blog: true, label: 'Blog'},
+    { doc: 'getting-started', label: 'Docs' },
+    { doc: 'api-reference', label: 'API' },
+    { page: 'help', label: 'Help' },
+    { blog: true, label: 'Blog' },
   ],
   users,
   /* TODO: update to use new icon */
@@ -27,7 +33,7 @@ const siteConfig = {
   favicon: 'img/favicon.ico',
   colors: {
     primaryColor: '#6b52ae',
-    secondaryColor: '#6b52ae'
+    secondaryColor: '#6b52ae',
   },
   copyright: 'None',
   highlight: {
@@ -35,11 +41,16 @@ const siteConfig = {
   },
   scripts: ['https://buttons.github.io/buttons.js'],
   repoUrl: 'https://github.com/react-navigation/react-navigation',
-  editUrl: 'https://github.com/react-navigation/react-navigation.github.io/edit/source/docs/',
-  algolia: {
-    apiKey: "c967b4a1491b9cb486d3dca087b771e6",
-    indexName: "reactnavigation"
-  },
+  editUrl:
+    'https://github.com/react-navigation/react-navigation.github.io/edit/source/docs/',
+  ...(process.env.STABLE_RELEASE
+    ? {
+        algolia: {
+          apiKey: 'c967b4a1491b9cb486d3dca087b771e6',
+          indexName: 'reactnavigation',
+        },
+      }
+    : {}),
 };
 
 module.exports = siteConfig;

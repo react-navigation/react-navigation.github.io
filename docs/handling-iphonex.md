@@ -15,13 +15,13 @@ However, if you're overriding the default navigation bar it's important to ensur
 For example, if I render nothing for the `header` or `tabBarComponent` nothing renders
 
 ```javascript
-const Tabs = TabNavigator({
+const Tabs = createTabNavigator({
   ...
 }, {
   tabBarComponent: () => null,
 });
 
-export default StackNavigator({
+export default createStackNavigator({
   ...
 }, {
   headerMode: 'none',

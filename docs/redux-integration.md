@@ -34,7 +34,7 @@ With Redux, your app's state is defined by a reducer. Each navigation router eff
 
 ```es6
 import {
-  StackNavigator,
+  createStackNavigator,
   addNavigationHelpers,
 } from 'react-navigation';
 import {
@@ -49,7 +49,7 @@ import {
 import { Provider, connect } from 'react-redux';
 import React from 'react';
 
-const AppNavigator = StackNavigator(AppRouteConfigs);
+const AppNavigator = createStackNavigator(AppRouteConfigs);
 
 const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Login'));
 
@@ -115,7 +115,7 @@ Navigation state is automatically passed down from one navigator to another when
 Applying this to the example above, you could instead define `AppNavigator` to contain a nested `TabNavigator` as follows:
 
 ```es6
-const AppNavigator = StackNavigator({
+const AppNavigator = createStackNavigator({
   Home: { screen: MyTabNavigator },
 });
 ```

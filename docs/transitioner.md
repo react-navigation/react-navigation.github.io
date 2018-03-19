@@ -6,7 +6,7 @@ sidebar_label: Transitioner
 
 `Transitioner` is a React component that helps manage transitions for complex animated components. It manages the timing of animations and keeps track of various screens as they enter and leave, but it doesn't know what anything looks like, because rendering is entirely deferred to the developer.
 
-Under the covers, `Transitioner` is used to implement `CardStack`, and hence the `StackNavigator`.
+Under the covers, `Transitioner` is used to implement `CardStack`, and hence the stack navigator.
 
 The most useful thing `Transitioner` does is to take in a prop of the current navigation state. When routes are removed from that navigation state, `Transitioner` will coordinate the transition away from those routes, keeping them on screen even though they are gone from the navigation state.
 

@@ -4,14 +4,16 @@ title: Tab navigation
 sidebar_label: Tab navigation
 ---
 
-Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top, below the header (or in place of the header).
+Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top below the header (or even instead of a header).
+
+This guide covers [createBottomTabNavigator](bottom-tab-navigator.html). You may also use [createMaterialBottomTabNavigator](material-bottom-tab-navigator.html) and [createMaterialTopTabNavigator](material-top-tab-navigator.html) to add tabs to your application.
 
 ## Minimal example of tab-based navigation
 
 ```js
 import React from 'react';
 import { Text, View } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation';
 
 class HomeScreen extends React.Component {
   render() {
@@ -33,9 +35,9 @@ class SettingsScreen extends React.Component {
   }
 }
 
-export default TabNavigator({
-  Home: { screen: HomeScreen },
-  Settings: { screen: SettingsScreen },
+export default createBottomTabNavigator({
+  Home: HomeScreen,
+  Settings: SettingsScreen,
 });
 ```
 
@@ -43,18 +45,18 @@ export default TabNavigator({
 
 ## Customizing the appearance
 
-This is similar to how you would customize a `StackNavigator` &mdash; there are some properties that are set when you initialize the `TabNavigator` and others that can be customized per-screen in `navigationOptions`.
+This is similar to how you would customize a stack navigator &mdash; there are some properties that are set when you initialize the tab navigator and others that can be customized per-screen in `navigationOptions`.
 
 ```js
 // You can import Ionicons from @expo/vector-icons if you use Expo or
 // react-native-vector-icons/Ionicons otherwise.
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation';
 
 export default TabNavigator(
   {
-    Home: { screen: HomeScreen },
-    Settings: { screen: SettingsScreen },
+    Home: HomeScreen,
+    Settings: SettingsScreen,
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -76,10 +78,6 @@ export default TabNavigator(
       activeTintColor: 'tomato',
       inactiveTintColor: 'gray',
     },
-    tabBarComponent: TabBarBottom,
-    tabBarPosition: 'bottom',
-    animationEnabled: false,
-    swipeEnabled: false,
   }
 );
 ```
@@ -91,7 +89,7 @@ Let's dissect this:
 * `tabBarIcon` is a property on `navigationOptions`, so we know we can use it on our screen components, but in this case chose to put it in the `TabNavigator` configuration in order to centralize the icon configuration for convenience.
 * `tabBarIcon` is a function that is given the `focused` state and `tintColor`. If you take a peek further down in the configuration you will see `tabBarOptions` and `activeTintColor` and `inactiveTintColor`. These default to the the iOS platform defaults, but you can change them here. The `tintColor` that is passed through to the `tabBarIcon` is either the active or inactive one, depending on the `focused` state (focused is active).
 * In order to make the behavior the same on iOS and Android, we have explicitly provided `tabBarComponent`, `tabBarPosition`, `animationEnabled`, and `swipeEnabled`. The default behavior of `TabNavigator` is to show a tab bar on the top of the screen on Android and on the bottom on iOS, but here we force it to be on the bottom on both platforms.
-* Read the [full API reference](tab-navigator.html) for further information on `TabNavigator` configuration options.
+* Read the [full API reference](bottom-tab-navigator.html) for further information on `TabNavigator` configuration options.
 
 ## Jumping between tabs
 
@@ -131,12 +129,15 @@ class SettingsScreen extends React.Component {
 
 <a href="https://snack.expo.io/@react-navigation/jumping-between-tabs" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-## A `StackNavigator` for each tab
+## A stack navigator for each tab
 
 Usually tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
 
 ```js
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import {
+  createBottomTabNavigator,
+  createStackNavigator,
+} from 'react-navigation';
 
 class DetailsScreen extends React.Component {
   render() {
@@ -152,7 +153,7 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        { /* other code from before here */ }
+        {/* other code from before here */}
         <Button
           title="Go to Details"
           onPress={() => this.props.navigation.navigate('Details')}
@@ -166,7 +167,7 @@ class SettingsScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        { /* other code from before here */ }
+        {/* other code from before here */}
         <Button
           title="Go to Details"
           onPress={() => this.props.navigation.navigate('Details')}
@@ -176,26 +177,27 @@ class SettingsScreen extends React.Component {
   }
 }
 
-const HomeStack = StackNavigator({
-  Home: { screen: HomeScreen },
-  Details: { screen: DetailsScreen },
+const HomeStack = createStackNavigator({
+  Home: HomeScreen,
+  Details: DetailsScreen,
 });
 
-const SettingsStack = StackNavigator({
-  Settings: { screen: SettingsScreen },
-  Details: { screen: DetailsScreen },
+const SettingsStack = createStackNavigator({
+  Settings: SettingsScreen,
+  Details: DetailsScreen,
 });
 
-export default TabNavigator(
+export default createBottomTabNavigator(
   {
-    Home: { screen: HomeStack },
-    Settings: { screen: SettingsStack },
+    Home: HomeScreen,
+    Settings: SettingsScreen,
   },
   {
     /* Other configuration remains unchanged */
   }
 );
 ```
+
 <a href="https://snack.expo.io/@react-navigation/stacks-in-tabs" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 ## Why do we need a TabNavigator instead of TabBarIOS or some other component?

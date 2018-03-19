@@ -18,7 +18,7 @@ Each `screen` component in your app is provided with the `navigation` prop autom
 
 It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it.
 
-There are several additional functions on `this.props.navigation` that only if the current navigator is a `StackNavigator`. These functions are alternatives to `navigate` and `goBack` and you can use whichever you prefer. The functions are:
+There are several additional functions on `this.props.navigation` that only if the current navigator is a stack navigator. These functions are alternatives to `navigate` and `goBack` and you can use whichever you prefer. The functions are:
 
 * `this.props.navigation`
   * `push` - navigate forward to new route in stack
@@ -210,7 +210,7 @@ if `name` or `param` are undefined, set the fallback to `Peter`.
 
 ## Stack Actions
 
-The following actions will work within any StackNavigator:
+The following actions will work within any stack navigator:
 
 ### Push
 
@@ -221,7 +221,6 @@ Similar to navigate, push will move you forward to a new route in the stack.
 * `routeName` - A destination routeName that has been registered somewhere in the app's router
 * `params` - Params to merge into the destination route
 * `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions) for a full list of supported actions.
-* `key` - _String_ - Optional - The identifier for the route to navigate to. Navigate back to this route if it already exists
 
 ### Pop
 

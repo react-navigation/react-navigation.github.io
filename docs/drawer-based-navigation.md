@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const MyApp = DrawerNavigator({
+const MyApp = createDrawerNavigator({
   Home: {
     screen: MyHomeScreen,
   },

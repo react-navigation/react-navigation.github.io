@@ -6,9 +6,9 @@ sidebar_label: Different status bar configuration based on route
 
 If you don't have a navigation header, or your navigation header changes color based on the route, you'll want to ensure that the correct color is used for the content.
 
-## StackNavigator and DrawerNavigator
+## Stack and drawer navigators
 
-This is a simple task when using the StackNavigator or DrawerNavigator. You can simply render the `StatusBar` component, which is exposed by React Native, and set your config.
+This is a simple task when using a stack or drawer. You can simply render the `StatusBar` component, which is exposed by React Native, and set your config.
 
 ```javascript
 class Screen1 extends React.Component {
@@ -54,7 +54,7 @@ class Screen2 extends React.Component {
 ```
 
 ```javascript
-export default StackNavigator({
+export default createStackNavigator({
   Screen1: {
     screen: Screen1,
   },
@@ -69,7 +69,7 @@ export default StackNavigator({
 ![StackNavigator with different StatusBar configs](./assets/statusbar/statusbar-stack-demo.gif)
 
 ```javascript
-export default DrawerNavigator({
+export default createDrawerNavigator({
   Screen1: {
     screen: Screen1,
   },

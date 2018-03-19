@@ -62,10 +62,10 @@ Unlike the other nav options which are only utilized by the navigator view, the 
 It's very common to define `navigationOptions` on a screen, but sometimes it is useful to define `navigationOptions` on a navigator too.
 
 Imagine the following scenario:
-Your `TabNavigator` represents one of the screens in the app, and is nested within a top-level `StackNavigator`:
+Your `TabNavigator` represents one of the screens in the app, and is nested within a top-level stack navigator:
 
 ```
-StackNavigator({
+createStackNavigator({
   route1: { screen: RouteOne },
   route2: { screen: MyTabNavigator },
 });
@@ -74,7 +74,7 @@ StackNavigator({
 Now, when `route2` is active, you would like to change the tint color of a header. It's easy to do it for `route1`, and it should also be easy to do it for `route2`. This is what Default Navigation Options are for - they are simply `navigationOptions` set on a navigator:
 
 ```js
-const MyTabNavigator = TabNavigator({
+const MyTabNavigator = createTabNavigator({
   profile: ProfileScreen,
   ...
 }, {
