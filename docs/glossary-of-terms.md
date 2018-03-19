@@ -53,3 +53,60 @@ class HomeScreen extends React.Component {
 <a href="https://snack.expo.io/@react-navigation/screen-components" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 The ["Navigation prop reference"](navigation-prop.html) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `this.props.navigation`.
+
+## Navigation Prop
+
+This prop will be passed into all screens, and it can be used for the following:
+
+- `dispatch` will send an action up to the router
+- `state` is the current route for the screen
+- `getParam` is a helper to access a param that may be on the route
+- `navigate`, `goBack`, etc are available to dispatch actions in a convenient way
+
+Navigators can also accept a navigation prop, which they should get from the parent navigator, if there is one.
+
+For more details, see the ["Navigation prop document"](navigation-prop.html).
+
+## Navigation State
+
+The state of a navigator generally looks something like this:
+
+```
+{
+  key: 'StackRouterRoot',
+  index: 1,
+  routes: [
+    { key: 'A', routeName: 'Home' },
+    { key: 'B', routeName: 'Profile' },
+  ]
+}
+```
+
+For this navigation state, there are two routes (which may be tabs, or cards in a stack). The index indicates the active route, which is "B".
+
+
+## Route
+
+Each route is a piece of navigation state which contains a key to identify it, and a "routeName" to designate the type of route. It can also contain arbitrary params:
+
+```
+{
+  key: 'B',
+  routeName: 'Profile',
+  params: { id: '123' }
+}
+```
+
+## Child Navigation State
+
+When composing navigators, it is possible for a route to be a navigation state. It would look like this:
+
+```
+{
+  key: 'B',
+  routeName: 'Profile',
+  params: { id: '123' },
+  index: 1,
+  routes: [ {...}, {...} ]
+}
+```
