@@ -40,7 +40,7 @@ OR
 
 * `routeName` - A destination routeName that has been registered somewhere in the app's router
 * `params` - Params to merge into the destination route
-* `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions) for a full list of supported actions.
+* `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](/docs/navigation-actions.html) for a full list of supported actions.
 * `key` - Optional identifier of what route to navigate to. Navigate **back** to this route, if it already exists
 
 ```js
@@ -144,7 +144,7 @@ Returns `true` if the screen is focused and `false` otherwise.
 let isFocused = this.props.navigation.isFocused();
 ```
 
-You probably want to use [withNavigationFocus]() instead of using this directly, it will pass in an `isFocused` boolean a prop to your component.
+You probably want to use [withNavigationFocus](/docs/with-navigation-focus.html) instead of using this directly, it will pass in an `isFocused` boolean a prop to your component.
 
 ### `state` - The screen's current state/route
 
@@ -220,7 +220,7 @@ Similar to navigate, push will move you forward to a new route in the stack.
 
 * `routeName` - A destination routeName that has been registered somewhere in the app's router
 * `params` - Params to merge into the destination route
-* `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions) for a full list of supported actions.
+* `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](/docs/navigation-actions.html) for a full list of supported actions.
 
 ### Pop
 
@@ -250,7 +250,7 @@ Use dispatch to send any navigation action to the router. The other navigation f
 
 Note that if you want to dispatch react-navigation actions you should use the action creators provided in this library.
 
-See [Navigation Actions Docs](navigation-actions) for a full list of available actions.
+See [Navigation Actions Docs](/docs/navigation-actions.html) for a full list of available actions.
 
 ```js
 import { NavigationActions } from 'react-navigation';
