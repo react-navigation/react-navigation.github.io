@@ -13,17 +13,7 @@ The following actions are supported:
 * [Navigate](#navigate) - Navigate to another route
 * [Back](#back) - Go back to previous state
 * [Set Params](#setparams) - Set Params for given route
-* [Init](#init) - Used to initialize first state if state is undefined
-
-Within a stack, you can also use:
-
-* [Reset](#reset) - Replace current state with a new state
-* [Replace](#replace) - Replace a route at a given key with another route
-* [Push](#push) - Add a route on the top of the stack, and navigate forward to it
-* [Pop](#pop) - Navigate back to previous routes
-* [PopToTop](#poptotop) - Navigate to the top route of the stack, dismissing all other routes
-
-The action creator functions define `toString()` to return the action type, which enables easy usage with third-party Redux libraries, including redux-actions and redux-saga.
+* Init - Used to initialize first state if state is undefined
 
 ### Navigate
 
@@ -47,6 +37,51 @@ const navigateAction = NavigationActions.navigate({
 
 this.props.navigation.dispatch(navigateAction);
 ```
+
+### Back
+
+Go back to previous screen and close current screen. `back` action creator takes in one optional parameter:
+
+* `key` - _string or null_ - optional - If set, navigation will go back from the given key. If null, navigation will go back anywhere.
+
+```js
+import { NavigationActions } from 'react-navigation';
+
+const backAction = NavigationActions.back({
+  key: 'Profile',
+});
+this.props.navigation.dispatch(backAction);
+```
+
+### SetParams
+
+When dispatching `SetParams`, the router will produce a new state that has changed the params of a particular route, as identified by the key
+
+* `params` - _object_ - required - New params to be merged into existing route params
+* `key` - _string_ - required - Route key that should get the new params
+
+```js
+import { NavigationActions } from 'react-navigation';
+
+const setParamsAction = NavigationActions.setParams({
+  params: { title: 'Hello' },
+  key: 'screen-123',
+});
+this.props.navigation.dispatch(setParamsAction);
+```
+
+## StackNavigator specific actions
+
+Within a stack, you can also use:
+
+* [Reset](#reset) - Replace current state with a new state
+* [Replace](#replace) - Replace a route at a given key with another route
+* [Push](#push) - Add a route on the top of the stack, and navigate forward to it
+* [Pop](#pop) - Navigate back to previous routes
+* [PopToTop](#poptotop) - Navigate to the top route of the stack, dismissing all other routes
+
+The action creator functions define `toString()` to return the action type, which enables easy usage with third-party Redux libraries, including redux-actions and redux-saga.
+
 
 ### Reset
 
@@ -97,34 +132,3 @@ The `Replace` action replaces the route at the given key with another route.
 * `action` - _object_ - Optional sub-action.
 * `immediate`* - _boolean_ - *Currently has no effect*, this is a placeholder for when stack navigator supports animated replace (it currently does not).
 
-### Back
-
-Go back to previous screen and close current screen. `back` action creator takes in one optional parameter:
-
-* `key` - _string or null_ - optional - If set, navigation will go back from the given key. If null, navigation will go back anywhere.
-
-```js
-import { NavigationActions } from 'react-navigation';
-
-const backAction = NavigationActions.back({
-  key: 'Profile',
-});
-this.props.navigation.dispatch(backAction);
-```
-
-### SetParams
-
-When dispatching `SetParams`, the router will produce a new state that has changed the params of a particular route, as identified by the key
-
-* `params` - _object_ - required - New params to be merged into existing route params
-* `key` - _string_ - required - Route key that should get the new params
-
-```js
-import { NavigationActions } from 'react-navigation';
-
-const setParamsAction = NavigationActions.setParams({
-  params: { title: 'Hello' },
-  key: 'screen-123',
-});
-this.props.navigation.dispatch(setParamsAction);
-```
