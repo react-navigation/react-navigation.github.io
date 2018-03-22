@@ -4,7 +4,7 @@ title: Passing parameters to routes
 sidebar_label: Passing parameters to routes
 ---
 
-Now that we know how to [create a stack navigator with some routes](hello-react-navigation.html) and [navigate between those routes](navigating.html), let's look at how we can pass data to routes when we navigate to them.
+Now that we know how to [create a stack navigator with some routes](/docs/hello-react-navigation.html) and [navigate between those routes](/docs/navigating.html), let's look at how we can pass data to routes when we navigate to them.
 
 There are two pieces to this:
 
