@@ -6,7 +6,7 @@ sidebar_label: Tab navigation
 
 Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top below the header (or even instead of a header).
 
-This guide covers [createBottomTabNavigator](bottom-tab-navigator.html). You may also use [createMaterialBottomTabNavigator](material-bottom-tab-navigator.html) and [createMaterialTopTabNavigator](material-top-tab-navigator.html) to add tabs to your application.
+This guide covers [createBottomTabNavigator](/docs/bottom-tab-navigator.html). You may also use [createMaterialBottomTabNavigator](/docs/material-bottom-tab-navigator.html) and [createMaterialTopTabNavigator](/docs/material-top-tab-navigator.html) to add tabs to your application.
 
 ## Minimal example of tab-based navigation
 
@@ -89,7 +89,7 @@ Let's dissect this:
 * `tabBarIcon` is a property on `navigationOptions`, so we know we can use it on our screen components, but in this case chose to put it in the `TabNavigator` configuration in order to centralize the icon configuration for convenience.
 * `tabBarIcon` is a function that is given the `focused` state and `tintColor`. If you take a peek further down in the configuration you will see `tabBarOptions` and `activeTintColor` and `inactiveTintColor`. These default to the the iOS platform defaults, but you can change them here. The `tintColor` that is passed through to the `tabBarIcon` is either the active or inactive one, depending on the `focused` state (focused is active).
 * In order to make the behavior the same on iOS and Android, we have explicitly provided `tabBarComponent`, `tabBarPosition`, `animationEnabled`, and `swipeEnabled`. The default behavior of `TabNavigator` is to show a tab bar on the top of the screen on Android and on the bottom on iOS, but here we force it to be on the bottom on both platforms.
-* Read the [full API reference](bottom-tab-navigator.html) for further information on `TabNavigator` configuration options.
+* Read the [full API reference](/docs/bottom-tab-navigator.html) for further information on `TabNavigator` configuration options.
 
 ## Jumping between tabs
 

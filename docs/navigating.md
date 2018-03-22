@@ -45,7 +45,7 @@ class HomeScreen extends React.Component {
 ```
 <a href="https://snack.expo.io/@react-navigation/our-first-navigate" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-Let's break down this down:
+Let's break this down:
 
 * `this.props.navigation`: the `navigation` prop is passed in to every **screen component** ([definition](glossary-of-terms.html#screen-component)) in stack navigator (more about this later in ["The navigation prop in depth"](navigation-prop.html)).
 * `navigate('Details')`: we call the `navigate` function (on the `navigation` prop &mdash; naming is hard!) with the name of the route that we'd like to move the user to.

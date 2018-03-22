@@ -37,7 +37,7 @@ export default SwitchNavigator(
 ```
 <a href="https://snack.expo.io/@react-navigation/auth-flow" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-You may not be familiar with `SwitchNavigator` yet. The purpose of `SwitchNavigator` is to only ever show one screen at a time. By default, it does not handle back actions and it resets routes to their default state when you switch away. This is the exact behavior that we want from the authentication flow: when users sign in, we want to throw away the state of the authentication flow and unmount all of the screens, and when we press the hardware back button we expect to not be able to go back to the authentication flow. We switch between routes in the `SwitchNavigator` by using the `navigate` action. You can read more about the `SwitchNavigator` in the [API reference](/docs/switch-navigator).
+You may not be familiar with `SwitchNavigator` yet. The purpose of `SwitchNavigator` is to only ever show one screen at a time. By default, it does not handle back actions and it resets routes to their default state when you switch away. This is the exact behavior that we want from the authentication flow: when users sign in, we want to throw away the state of the authentication flow and unmount all of the screens, and when we press the hardware back button we expect to not be able to go back to the authentication flow. We switch between routes in the `SwitchNavigator` by using the `navigate` action. You can read more about the `SwitchNavigator` in the [API reference](/docs/switch-navigator.html).
 
 We set the `initialRouteName` to `'AuthLoading'` because we will fetch our authentication state from persistent storage inside of that screen component.
 
