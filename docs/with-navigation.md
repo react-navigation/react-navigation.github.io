@@ -12,7 +12,7 @@ sidebar_label: withNavigation
 
 ```js
 import React from 'react';
-import { Button } 'react-native';
+import { Button } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 class MyBackButton extends React.Component {
