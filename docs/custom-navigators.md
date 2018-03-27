@@ -8,7 +8,7 @@ A navigator is any React component that has a [router](https://github.com/react-
 
 ## Extending Navigators
 
-It is possible to take an existing Navigator and extend its behavior, using the following approach:=
+It is possible to take an existing Navigator and extend its behavior, using the following approach:
 
 ```js
 const MyStack = createStackNavigator({ ... });
