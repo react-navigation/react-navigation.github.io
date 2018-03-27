@@ -55,6 +55,8 @@
     "Hello React Navigation": "Hello React Navigation",
     "help": "Get help",
     "Get help": "Get help",
+    "limitations": "Limitations",
+    "Limitations": "Limitations",
     "listen-lifecycle-events": "Know when a screen is focused and blurred",
     "Know when a screen is focused and blurred": "Know when a screen is focused and blurred",
     "material-bottom-tab-navigator": "createMaterialBottomTabNavigator",

@@ -14,7 +14,7 @@ React Navigation requires that you define your routes statically, like so:
 
 ```js
 let FriendsNavigator = createDrawerNavigator({
-  PersonalityQuiz: QuizScreen,
+  Feed: FeedScreen,
   FriendList: FriendListScreen,
 });
 
@@ -28,14 +28,14 @@ let AppNavigator = createSwitchNavigator({
   Auth: AuthNavigator,
 });
 
-export default class PersonalityTestApp extends React.Component {
+export default class MyApp extends React.Component {
   render() {
     return <AppNavigator />;
   }
 }
 ```
 
-Let's say that you're Cambridge Analytica and when a user signs in to the app, you want to get a list of the user's friends and add a route for each friend in the `FriendsNavigator`. This would make it so there is a button with each of their names in the drawer. React Navigation does not currently provide an easy way to do this. React Navigation currently works best in situations where your routes can be defined statically. Keep in mind that this does not mean that you cannot pass arbitrary data to your routes &mdash; you can do this using [params]().
+Let's say that when a user signs in to the app, you want to get a list of the user's friends and add a route for each friend in the `FriendsNavigator`. This would make it so there is a button with each of their names in the drawer. React Navigation does not currently provide an easy way to do this. React Navigation currently works best in situations where your routes can be defined statically. Keep in mind that this does not mean that you cannot pass arbitrary data to your routes &mdash; you can do this using [params](/docs/params.html).
 
 There are workarounds if you absolutely need dynamic routes but you can expect some additional complexity.
 
