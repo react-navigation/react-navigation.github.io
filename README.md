@@ -17,9 +17,9 @@
 Only collaborators on this repository can deploy. `cd` into the website directory and run the following command from the `source` branch:
 
 ```bash
-GIT_USER=your_github_username \
-STABLE_RELEASE=ya \
-CURRENT_BRANCH=source \
+GIT_USER=brentvatne \
+STABLE_RELEASE=true \
+CURRENT_BRANCH=1.x \
 USE_SSH=true \
 yarn run publish-gh-pages
 ```
