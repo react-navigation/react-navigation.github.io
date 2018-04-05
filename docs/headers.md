@@ -145,7 +145,7 @@ const RootStack = createStackNavigator(
 ```
 <a href="https://snack.expo.io/@react-navigation/sharing-header-styles" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-Now, any screen that belongs to the `RouteStack` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
+Now, any screen that belongs to the `RootStack` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
 
 ## Overriding shared `navigationOptions`
 
