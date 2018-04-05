@@ -32,11 +32,13 @@ class HomeScreen extends React.Component {
 }
 
 export default createStackNavigator({
-  Home: HomeScreen,
+  Home: {
+    screen: HomeScreen
+  },
 });
 ```
 
-<a href="https://snack.expo.io/@react-navigation/hello-world" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/hello-world-v2" target="blank" class="run-code-button">&rarr; Run this code</a> 
 
 If you run this code, you will see a screen with an empty navigation bar and a grey content area containing your `HomeScreen` component. The styles you see for the navigation bar and the content area are the default configuration for a stack navigator, we'll learn how to configure those later.
 
@@ -44,11 +46,13 @@ If you run this code, you will see a screen with an empty navigation bar and a g
 
 > The only required configuration for a route is the `screen` component. You can read more about the other options available in the [StackNavigator reference](stack-navigator.html).
 
-In React Native, the component exported from `App.js` is the entry point (or root component) for your app -- it is the component from which every other component descends. It's often useful to have more control over the component at the root of your app than you would get from exporting a stack navigator, so let's export a component that just renders our stack navigator.
+In React Native, the component exported from `App.js` is the entry point (or root component) for your app -- it is the component from which every other component descends. It's often useful to have more control over the component at the root of your app than you would get from exporting a `StackNavigator`, so let's export a component that just renders our `StackNavigator`.
 
 ```js
 const RootStack = createStackNavigator({
-  Home: HomeScreen,
+  Home: {
+    screen: HomeScreen
+  },
 });
 
 export default class App extends React.Component {
@@ -56,6 +60,16 @@ export default class App extends React.Component {
     return <RootStack />;
   }
 }
+```
+
+## Route configuration shorthand
+
+Given that the only route configuration we have for `Home` is the screen component, we don't need to use the `{ screen: HomeScreen }` configuration format, we can use the screen component directly.
+
+```js
+const RootStack = createStackNavigator({
+  Home: HomeScreen
+});
 ```
 
 ## Adding a second route
@@ -75,7 +89,7 @@ class DetailsScreen extends React.Component {
   }
 }
 
-const RootStack =createStackNavigator(
+const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
     Details: DetailsScreen,
@@ -96,4 +110,4 @@ Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home`
 * `createStackNavigator` is a function that takes a route configuration object and an options object and returns a React component.
 * The keys in the route configuration object are the route names and the values are the configuration for that route. The only required property on the configuration is the `screen` (the component to use for the route).
 * To specify what the initial route in a stack is, provide an `initialRouteName` on the stack options object.
-* [Full source of what we have built so far](https://snack.expo.io/@react-navigation/hello-react-navigation).
+* [Full source of what we have built so far](https://snack.expo.io/@react-navigation/hello-react-navigation-v2).
