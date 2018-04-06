@@ -28,7 +28,7 @@ class DetailsScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/setting-header-title" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/setting-header-title-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 > `createStackNavigator` uses platform conventions by default, so on iOS the title will be centered and on Android it will be left-aligned.
 
@@ -49,7 +49,7 @@ class DetailsScreen extends React.Component {
   /* render function, etc */
 }
 ```
-<a href="https://snack.expo.io/@react-navigation/using-params-in-title" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/using-params-in-title-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 The argument that is passed in to the `navigationOptions` function is an object with the following properties:
 
@@ -71,7 +71,7 @@ It's often necessary to update the `navigationOptions` configuration for the act
   />
 ```
 
-<a href="https://snack.expo.io/@react-navigation/updating-navigationoptions-with-setparams" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/updating-navigationoptions-with-setparams-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 ## Adjusting header styles
 
@@ -97,7 +97,7 @@ class HomeScreen extends React.Component {
   /* render function, etc */
 }
 ```
-<a href="https://snack.expo.io/@react-navigation/setting-header-styles" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/setting-header-styles-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 There are a couple of things to notice here:
 1. On iOS the status bar text and icons are black, and this doesn't look great over a dark colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.html).
@@ -121,12 +121,8 @@ class HomeScreen extends React.Component {
 
 const RootStack = createStackNavigator(
   {
-    Home: {
-      screen: HomeScreen,
-    },
-    Details: {
-      screen: DetailsScreen,
-    },
+    Home: HomeScreen,
+    Details: DetailsScreen,
   },
   {
     initialRouteName: 'Home',
@@ -143,7 +139,7 @@ const RootStack = createStackNavigator(
   }
 );
 ```
-<a href="https://snack.expo.io/@react-navigation/sharing-header-styles" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/sharing-header-styles-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 Now, any screen that belongs to the `RootStack` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
 
@@ -170,7 +166,7 @@ class DetailsScreen extends React.Component {
   /* render function, etc */
 }
 ```
-<a href="https://snack.expo.io/@react-navigation/overriding-shared-header-styles" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/overriding-shared-header-styles-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 ## Replacing the title with a custom component
 
@@ -197,17 +193,17 @@ class HomeScreen extends React.Component {
   /* render function, etc */
 }
 ```
-<a href="https://snack.expo.io/@react-navigation/custom-header-title-component" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/custom-header-title-component-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 > You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to a stack navigator, the `headerTitle` defaults to a `Text` component that displays the `title`.
 
 ## Additional configuration
 
-You can read the full list of available screen `navigationOptions` for screens inside of a stack navigator in the [createStackNavigator reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
+You can read the full list of available `navigationOptions` for screens inside of a stack navigator in the [createStackNavigator reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
 
 ## Summary
 
 - You can customize the header inside of the `navigationOptions` static property on your screen components. Read the full list of options [in the API reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
 - The `navigationOptions` static property can be an object or a function. When it is a function, it is provided with an object with the `navigation` prop, `screenProps`, and `navigationOptions` on it.
 - You can also specify shared `navigationOptions` in the stack navigator configuration when you initialize it. The static property takes precedence over that configuration.
-- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/custom-header-title-component).
+- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/custom-header-title-component-v2).
