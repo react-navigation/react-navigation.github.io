@@ -24,6 +24,7 @@
       "navigating-without-navigation-prop",
       "deep-linking",
       "screen-tracking",
+      "state-persistence",
       "redux-integration"
     ],
     "Build your own Navigator": [

@@ -101,6 +101,8 @@
     "Update params when navigating back": "Update params when navigating back",
     "stack-navigator": "createStackNavigator",
     "createStackNavigator": "createStackNavigator",
+    "state-persistence": "Navigation State Persistence",
+    "Persist Navigation State": "Persist Navigation State",
     "status-bar": "Different status bar configuration based on route",
     "Different status bar configuration based on route": "Different status bar configuration based on route",
     "switch-navigator": "createSwitchNavigator",
