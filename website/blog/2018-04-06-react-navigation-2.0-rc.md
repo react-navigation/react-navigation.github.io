@@ -6,7 +6,15 @@ authorURL: https://twitter.com/reactnavigation
 
 Exactly two months after the release of React Navigation 1.0, we are close to another major version release. We’d like to invite developers that use the library to give the release candidate a try in your app and let us know if you encounter any issues.
 
-We’re bumping the major version because some of the changes in this release are backwards incompatible. This is not a comprehensive changelog - that will come with the 2.0 proper release; the following is a list of the breaking changes, suggestions for how you can update your app to accommodate them, notice of deprecations, and some of my favourite new features. 
+```
+yarn add react-navigation@^2.0.0-rc.1
+```
+
+The documentation for 2.0 is available at http://v2.reactnavigation.org/
+
+We’re bumping the major version because some of the changes in this release are backwards incompatible. That said, this should be a fairly easy upgrade. We are improving React Navigation incrementally because we don't want to leave developers feeling stranded in an old version. If you use React Navigation in a conventional way and don't have any custom navigators, I can't imagine this update would take you more than an hour.
+
+This blog post is not a comprehensive changelog - that will come with the 2.0 proper release; the following is a list of the breaking changes, suggestions for how you can update your app to accommodate them, notice of deprecations, and some of my favourite new features. 
 
 ## Breaking changes
 
