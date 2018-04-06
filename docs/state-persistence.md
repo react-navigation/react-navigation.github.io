@@ -22,10 +22,9 @@ const App = () => <AppNavigator persistenceKey={"NavigationState"} />;
 
 This provided key will be used as the react native `AsyncStorage` key to save the JSON navigation state.
 
-### Dev Mode
+### Development Mode
 
-This feature is particularly save and desirable in dev mode. You can enable it selectively using the following approach:
-
+This feature is particularly save and desirable in development mode. You can enable it selectively using the following approach:
 
 ```js
 const AppNavigator = createStackNavigator({...});
@@ -40,18 +39,15 @@ Because the state is persisted asyncronously, the app must render an empty/loadi
 ```js
 <AppNavigator
   persistenceKey={...}
-  renderLoadingExperimental={() => <AppLoading />}
+  renderLoadingExperimental={() => <ActivityIndicator />}
 />
 ```
 
-This is particularly important if you are using Expo's [<AppLoading /> component](https://docs.expo.io/versions/v26.0.0/sdk/app-loading).
-
 > Note: This API may change in the future, which is why it is labeled experimental
-
 
 ## Warning: Serializable State
 
-Each param, route, and navigation state must be fully JSON-serializable for this feature to work. This means that your routes and params must contain no functions, class instances, or recursive data structures. 
+Each param, route, and navigation state must be fully JSON-serializable for this feature to work. This means that your routes and params must contain no functions, class instances, or recursive data structures.
 
 ## Warning: Route/Router definition changes
 
