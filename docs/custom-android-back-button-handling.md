@@ -23,7 +23,7 @@ class ScreenWithCustomBackBehavior extends React.Component {
   constructor(props) {
     super(props);
     this._didFocusSubscription = props.navigation.addListener('didFocus', payload =>
-      BackHandler.addEventListener('hardwareBackPress', this.onBackPressed)
+      BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid)
     );
   }
 
