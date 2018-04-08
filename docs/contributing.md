@@ -31,7 +31,7 @@ And here are a few helpful resources to aid in getting started:
 
 ### Reporting Bugs
 
-You can't write code without writing the occasional bug. Especially as React Navigation is in beta and moving quickly, bugs happen. When you think you've found one here's what to do:
+You can't write code without writing the occasional bug. Especially as React Navigation is moving quickly, bugs happen. When you think you've found one here's what to do:
 
 1. Search the existing issues for one like what you're seeing. If you see one, add a 👍 reaction (please no +1 comments). Read through the comments and see if you can provide any more valuable information to the thread
 2. If there are no other issues like yours then create a new one. Be sure to follow the [issue template](https://github.com/react-community/react-navigation/blob/master/.github/ISSUE_TEMPLATE.md).
