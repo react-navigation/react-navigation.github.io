@@ -39,7 +39,6 @@ With Redux, your app's state is defined by a reducer. Each navigation router eff
 ```es6
 import {
   createStackNavigator,
-  addNavigationHelpers,
 } from 'react-navigation';
 import {
   createStore,
@@ -79,11 +78,11 @@ const addListener = createReduxBoundAddListener("root");
 class App extends React.Component {
   render() {
     return (
-      <AppNavigator navigation={addNavigationHelpers({
+      <AppNavigator navigation={{
         dispatch: this.props.dispatch,
         state: this.props.nav,
         addListener,
-      })} />
+      }} />
     );
   }
 }
