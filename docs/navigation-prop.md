@@ -16,7 +16,7 @@ Each `screen` component in your app is provided with the `navigation` prop autom
   * `getParam` - get a specific param with fallback
   * `dispatch` - send an action to router
 
-It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it.
+It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically. For example, a `MyBackButton` component rendered as a child of a screen component would not has a `this.props.navigation` unless you explicitly passed it in from the screen as `<MyBackButton navigation={this.props.navigation} ...>`.
 
 There are several additional functions on `this.props.navigation` that only if the current navigator is a stack navigator. These functions are alternatives to `navigate` and `goBack` and you can use whichever you prefer. The functions are:
 
