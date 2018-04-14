@@ -18,7 +18,7 @@ Each `screen` component in your app is provided with the `navigation` prop autom
 
 It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically. For example, a `MyBackButton` component rendered as a child of a screen component would not has a `this.props.navigation` unless you explicitly passed it in from the screen as `<MyBackButton navigation={this.props.navigation} ...>`.
 
-There are several additional functions on `this.props.navigation` that only if the current navigator is a stack navigator. These functions are alternatives to `navigate` and `goBack` and you can use whichever you prefer. The functions are:
+If the current navigator is a stack navigator, an additional set of functions are provided as alternatives to `navigate` and `goBack`. You can use whichever you prefer. The functions are:
 
 * `this.props.navigation`
   * `push` - navigate forward to new route in stack
