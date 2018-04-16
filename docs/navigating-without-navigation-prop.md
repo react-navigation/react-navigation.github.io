@@ -18,7 +18,7 @@ const TopLevelNavigator = createStackNavigator({ /* ... */ })
 class App extends React.Component {
   // ...
 
-  render(): {
+  render() {
     return (
       <TopLevelNavigator
         ref={navigatorRef => {
