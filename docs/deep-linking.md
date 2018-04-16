@@ -90,7 +90,7 @@ To test the URI on a real device, open Safari and type `mychat://chat/Eric`.
 
 To configure the external linking in Android, you can create a new intent in the manifest.
 
-In `SimpleApp/android/app/src/main/AndroidManifest.xml`, add the new `VIEW` type `intent-filter` inside the `MainActivity` entry:
+In `SimpleApp/android/app/src/main/AndroidManifest.xml`, add the new `intent-filter` inside the `MainActivity` entry with a `VIEW` type action:
 
 ```
 <intent-filter>
