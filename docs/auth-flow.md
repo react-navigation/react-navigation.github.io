@@ -16,7 +16,7 @@ Most apps require that a user authenticate in some way to have access to data as
 ## Set up our navigators
 
 ```js
-import { createStackNavigator, createStackNavigator } from 'react-navigation';
+import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
 
 // Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
 // goes here.
@@ -24,7 +24,7 @@ import { createStackNavigator, createStackNavigator } from 'react-navigation';
 const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen });
 const AuthStack = createStackNavigator({ SignIn: SignInScreen });
 
-export default SwitchNavigator(
+export default createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
     App: AppStack,
