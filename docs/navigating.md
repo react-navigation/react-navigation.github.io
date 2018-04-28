@@ -84,7 +84,6 @@ Let's suppose that we actually *want* to add another details screen. This is pre
   title="Go to Details... again"
   onPress={() => this.props.navigation.push('Details')}
 />
-}
 ```
 
 <a href="https://snack.expo.io/@react-navigation/pushing-details-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
@@ -126,6 +125,17 @@ class DetailsScreen extends React.Component {
 > On Android, React Navigation hooks in to the hardware back button and fires the `goBack()` function for you when the user presses it, so it behaves as the user would expect.
 
 Another common requirement is to be able to go back _multiple_ screens -- for example, if you are several screens deep in a stack and want to dismiss all of them to go back to the first screen. In this case, we know that we want to go back to `Home` so we can use `navigate('Home')` (not `push`! try that out and see the difference). Another alternative would be `navigation.popToTop()`, which goes back to the first screen in the stack.
+
+Navigation actions behave idempotently when called with a key. When pushing, the navigator will push a route with that key. If the route already exists, it will navigate to that route and set the params.
+
+```js
+<Button
+  title="Go to Details... but don't push it to the stack if it already exists, just navigate"
+  onPress={() => this.props.navigation.navigate({ routeName: 'Details', key: 'myKey' })}
+/>
+```
+
+In a StackNavigator, you can set the key for initial route by passing `initialRouteKey` to the stack configs object if needed.
 
 ## Summary
 
