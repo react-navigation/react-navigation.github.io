@@ -8,7 +8,7 @@ The `key` parameter comes up repeatedly across different navigation functions. L
 
 ### Usage with the [`navigate`](/docs/navigation-actions.html#navigate) call
 
-If not key is provided, `StackRouter` will behave as follows:
+If no key is provided, `StackRouter` will behave as follows:
 
 * if a route with the given name already exists in the state, `StackRouter` will jump to the existing route, along with setting the new parameters.
 * if no such route exists, `StackRouter` will push it onto the stack
