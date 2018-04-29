@@ -95,7 +95,7 @@ The libdef (located at `flow/react-navigation.js`) will need to be updated such 
 
 ### Issue Template
 
-Before submitting and issue please take a look at the [issue template](https://github.com/react-community/react-navigation/blob/master/.github/ISSUE_TEMPLATE.md) and follow it. This is in place to help everyone better understand the issue you're having and reduce the back and forth to get the necessary information.
+Before submitting an issue, please take a look at the [issue template](https://github.com/react-community/react-navigation/blob/master/.github/ISSUE_TEMPLATE.md) and follow it. This is in place to help everyone better understand the issue you're having and reduce the back and forth to get the necessary information.
 
 Yes, it takes time and effort to complete the issue template. But that's the only way to ask high quality questions that actually get responses.
 
