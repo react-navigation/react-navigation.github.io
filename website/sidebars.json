@@ -25,7 +25,8 @@
       "deep-linking",
       "screen-tracking",
       "state-persistence",
-      "redux-integration"
+      "redux-integration",
+      "navigation-key"
     ],
     "Build your own Navigator": [
       "custom-navigator-overview",
