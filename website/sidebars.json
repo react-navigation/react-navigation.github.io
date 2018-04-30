@@ -42,6 +42,7 @@
       "api-reference",
       "navigation-prop",
       "navigation-actions",
+      "stack-actions",
       "stack-navigator",
       "switch-navigator",
       "drawer-navigator",

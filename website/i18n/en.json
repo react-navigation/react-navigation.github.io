@@ -99,6 +99,8 @@
     "Search screens": "Search screens",
     "set-params-on-back": "Update params when navigating back",
     "Update params when navigating back": "Update params when navigating back",
+    "stack-actions": "StackActions reference",
+    "StackActions": "StackActions",
     "stack-navigator": "createStackNavigator",
     "createStackNavigator": "createStackNavigator",
     "state-persistence": "State persistence",
