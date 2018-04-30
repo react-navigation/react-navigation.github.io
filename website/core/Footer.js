@@ -6,9 +6,11 @@
  */
 
 const React = require('react');
+// const translate = require("../server/translate.js").translate;
 
 class Footer extends React.Component {
   render() {
+    console.log('this.props.language:', this.props.language)
     const currentYear = new Date().getFullYear();
     return (
       <footer className="nav-footer" id="footer">
@@ -25,48 +27,53 @@ class Footer extends React.Component {
             <h5>Docs</h5>
             <a
               href={
-                this.props.config.baseUrl +
-                'docs/getting-started.html'
+                `${this.props.config.baseUrl}docs/${this.props.language}/getting-started.html`
               }>
               Getting Started
             </a>
             <a
               href={
-                this.props.config.baseUrl +
-                'docs/api-reference.html'
+                `${this.props.config.baseUrl}docs/${this.props.language}/api-reference.html`
               }>
               API Reference
             </a>
             <a
               href={
-                this.props.config.baseUrl +
-                'docs/custom-navigator-overview.html'
+                `${this.props.config.baseUrl}docs/${this.props.language}/custom-navigator-overview.html`
               }>
               Building your own Navigator
             </a>
             <a
               href={
-                this.props.config.baseUrl +
-                'docs/contributing.html'
+                `${this.props.config.baseUrl}docs/${this.props.language}/contributing.html`
               }>
               Contributing
             </a>
           </div>
           <div>
             <h5>Support</h5>
-            <a href="https://discord.gg/4xEK3nD">Chat in our Discord channel</a>
-            <a href="https://react-navigation.canny.io/feature-requests">Request a feature on Canny</a>
-            <a href="https://github.com/react-navigation/react-navigation/issues">Report a bug on Github</a>
+            <a href="https://discord.gg/4xEK3nD">
+              Chat in our Discord channel
+            </a>
+            <a href="https://react-navigation.canny.io/feature-requests">
+              Request a feature on Canny
+            </a>
+            <a href="https://github.com/react-navigation/react-navigation/issues">
+              Report a bug on Github
+            </a>
             <a
               href="https://stackoverflow.com/questions/tagged/react-navigation"
-              target="_blank">
+              target="_blank"
+            >
               Get help on Stack Overflow
             </a>
           </div>
           <div>
             <h5>More</h5>
             {/* <a href={this.props.config.baseUrl + 'blog'}>Blog</a> */}
-            <a href={this.props.config.repoUrl}>GitHub</a>
+            <a href={this.props.config.repoUrl}>
+              GitHub
+            </a>
             <a
               className="github-button"
               href={this.props.config.repoUrl}
