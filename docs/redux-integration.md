@@ -48,20 +48,14 @@ import {
 import {
   createReduxBoundAddListener,
   createReactNavigationReduxMiddleware,
+  createNavigationReducer,
 } from 'react-navigation-redux-helpers';
 import { Provider, connect } from 'react-redux';
 import React from 'react';
 
 const AppNavigator = createStackNavigator(AppRouteConfigs);
 
-const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Login'));
-
-const navReducer = (state = initialState, action) => {
-  const nextState = AppNavigator.router.getStateForAction(action, state);
-
-  // Simply return the original `state` if `nextState` is null or undefined.
-  return nextState || state;
-};
+const navReducer = createNavigationReducer(AppNavigator);
 
 const appReducer = combineReducers({
   nav: navReducer,
@@ -141,6 +135,25 @@ To make jest tests work with your react-navigation app, you need to change the j
     "node_modules/(?!(jest-)?react-native|react-navigation)"
   ]
 }
+```
+
+## Under the hood
+
+### Creating your own navigation reducer
+
+If you want to replace `createNavigationReducer` reducer creator this is how you would do it yourself.
+
+```es6
+const AppNavigator = StackNavigator(AppRouteConfigs);
+
+const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Login'));
+
+const navReducer = (state = initialState, action) => {
+  const nextState = AppNavigator.router.getStateForAction(action, state);
+
+  // Simply return the original `state` if `nextState` is null or undefined.
+  return nextState || state;
+};
 ```
 
 ## Handling the Hardware Back Button in Android
