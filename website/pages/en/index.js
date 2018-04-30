@@ -7,6 +7,7 @@
 
 const React = require('react');
 
+const translate = require("../../server/translate.js").translate;
 const CompLibrary = require('../../core/CompLibrary.js');
 const MarkdownBlock = CompLibrary.MarkdownBlock; /* Used to read markdown */
 const Container = CompLibrary.Container;
@@ -48,14 +49,14 @@ class HomeSplash extends React.Component {
               <div className="section promoSection">
                 <div className="promoRow">
                   <div className="pluginRowBlock">
-                    <Button href="/docs/getting-started.html">
-                      Read guides
+                    <Button href={`/docs/${this.props.language}/getting-started.html`}>
+                      <translate>Read guides</translate>
                     </Button>
-                    <Button href="/docs/api-reference.html">
-                      Read API Reference
+                    <Button href={`/docs/${this.props.language}/api-reference.html`}>
+                      <translate>Read API Reference</translate>
                     </Button>
                     <Button href="https://expo.io/@react-navigation/NavigationPlayground">
-                      Try the demo app
+                      <translate>Try the demo app</translate>
                     </Button>
                     {/* <Button href="https://snack.expo.io/@react-navigation/hello-world">Run "Hello World" in Snack</Button> */}
                   </div>
@@ -94,31 +95,31 @@ class Index extends React.Component {
               contents={[
                 {
                   content:
-                    'Start quickly with built-in navigators that deliver a seamless out-of-the-box experience.',
+                    <translate>Start quickly with built-in navigators that deliver a seamless out-of-the-box experience.</translate>,
                   // image: siteConfig.baseUrl + 'img/docusaurus.svg',
                   imageAlign: 'top',
-                  title: 'Easy-to-use',
+                  title: <translate>Easy-to-use</translate>,
                 },
                 {
                   content:
-                    'Platform-specific look-and-feel with smooth animations and gestures.',
+                    <translate>Platform-specific look-and-feel with smooth animations and gestures.</translate>,
                   // image: siteConfig.baseUrl + 'img/docusaurus.svg',
                   imageAlign: 'top',
-                  title: 'Components built for iOS and Android',
+                  title: <translate>Components built for iOS and Android</translate>,
                 },
                 {
                   content:
-                    'If you know how to write apps using JavaScript you can customize any part of React Navigation.',
+                    <translate>If you know how to write apps using JavaScript you can customize any part of React Navigation.</translate>,
                   // image: siteConfig.baseUrl + 'img/docusaurus.svg',
                   imageAlign: 'top',
-                  title: 'Completely customizable',
+                  title: <translate>Completely customizable</translate>,
                 },
                 {
                   content:
-                    "React Navigation is extensible at every layer&mdash; you can write your own navigators or even replace the user-facing API.",
+                    <translate>React Navigation is extensible at every layer&mdash; you can write your own navigators or even replace the user-facing API.</translate>,
                   // image: siteConfig.baseUrl + 'img/docusaurus.svg',
                   imageAlign: 'top',
-                  title: 'Extensible platform',
+                  title: <translate>Extensible platform</translate>,
                 },
               ]}
               layout="fourColumn"
