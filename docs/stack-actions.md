@@ -60,4 +60,51 @@ The `Replace` action replaces the route at the given key with another route.
 * `routeName` - _string_ - `routeName` to use for replacement route.
 * `params` - _object_ - Parameters to pass in to the replacement route.
 * `action` - _object_ - Optional sub-action.
-* `immediate`* - _boolean_ - *Currently has no effect*, this is a placeholder for when stack navigator supports animated replace (it currently does not).
+* `immediate`* - _boolean_ - *Currently has no effect, this is a placeholder for when stack navigator supports animated replace (it currently does not).
+
+### Push
+
+The `Push` action adds a route on top of the stack and navigates forward to it. This differs from `navigate` in that `navigate` will pop back to earlier in the stack if a component is already mounted there. `Push` will always add on top, so a component can be mounted multiple times.
+
+* `routeName` - _string_ - `routeName` to push onto the stack.
+* `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `this.props.navigation.state.params`).
+* `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator.
+
+```js
+import { StackActions } from 'react-navigation';
+
+const pushAction = StackActions.push({
+  routeName: 'Profile',
+  params: {
+    myUserId: 9,
+  },
+});
+
+this.props.navigation.dispatch(pushAction);
+```
+
+### Pop
+
+The `Pop` action takes you back to a previous screen in the stack. The `n` param allows you to specify how many screens to pop back by.
+
+* `n` - _number_ - The number of screens to pop back by.
+
+```js
+import { StackActions } from 'react-navigation';
+
+const popAction = StackActions.pop({
+  n: 1,
+});
+
+this.props.navigation.dispatch(pushAction);
+```
+
+### PopToTop
+
+The `PopToTop` action takes you back to the first screen in the stack, dismissing all the others. It's functionally identical to `StackActions.pop({n: currentIndex})`.
+
+```js
+import { StackActions } from 'react-navigation';
+
+this.props.navigation.dispatch(StackActions.popToTop());
+```
