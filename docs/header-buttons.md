@@ -29,7 +29,7 @@ class HomeScreen extends React.Component {
 
 The binding of `this` in `navigationOptions` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
 
-There is a community-developed package for rendering buttons in the header with the correct styling available [react-navigation-header-buttons](https://github.com/vonovak/react-navigation-header-buttons).
+> Please note that a community-developed library for rendering buttons in the header with the correct styling is available: [react-navigation-header-buttons](https://github.com/vonovak/react-navigation-header-buttons).
 
 ## Header interaction with its screen component
 
@@ -82,7 +82,7 @@ To customize the back button image, you can use [headerBackImage](stack-navigato
 
 The back button will be rendered automatically in a stack navigator whenever it is possible for the user to go back from their current screen &mdash; in other words, the back button will be rendered whenever there is more than one screen in the stack.
 
-Generally, this is what you want. But it's possible that in some circumstances that you want to customize the back button more than you can through the options mentioned above, in which case you can specify a `headerLeft`, just as we did with `headerRight`, and completely override the back button.
+Generally, this is what you want. But it's possible that in some circumstances that you want to customize the back button more than you can through the options mentioned above, in which case you can set the `headerLeft` option to a React Element that will be rendered, just as we did with `headerRight`. Alternatively, the `headerLeft` option also accepts a React Component, which can be used, for example, for overriding the onPress behavior of the back button. Read more about this in the [api reference](stack-navigator.html#headerleft).
 
 ## Summary
 
