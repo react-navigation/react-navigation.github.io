@@ -75,7 +75,7 @@ class DetailsScreen extends React.Component {
 
 <a href="https://snack.expo.io/@react-navigation/navigating-to-details-again-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-If you run this code, you'll notice that when you tap "Go to Details... again" that it doesn't do anything! This is because we are already on the Details route. The navigate function roughly means "go to this screen", and if you are already on that screen then it makes sense that it would do nothing.
+If you run this code, you'll notice that when you tap "Go to Details... again" that it doesn't do anything! This is because we are already on the Details route. The `navigate` function roughly means "go to this screen", and if you are already on that screen then it makes sense that it would do nothing.
 
 Let's suppose that we actually *want* to add another details screen. This is pretty common in cases where you pass in some unique data to each route (more on that later when we talk about `params`!). To do this, we can change `navigate` to `push`. This allows us to express the intent to add another route regardless of the existing navigation history.
 

@@ -46,7 +46,7 @@ If you run this code, you will see a screen with an empty navigation bar and a g
 
 > The only required configuration for a route is the `screen` component. You can read more about the other options available in the [StackNavigator reference](stack-navigator.html).
 
-In React Native, the component exported from `App.js` is the entry point (or root component) for your app -- it is the component from which every other component descends. It's often useful to have more control over the component at the root of your app than you would get from exporting a `StackNavigator`, so let's export a component that just renders our `StackNavigator`.
+In React Native, the component exported from `App.js` is the entry point (or root component) for your app -- it is the component from which every other component descends. It's often useful to have more control over the component at the root of your app than you would get from exporting the result of `createStackNavigator`, so let's export a component that just renders our `RootStack` stack navigator.
 
 ```js
 const RootStack = createStackNavigator({
@@ -74,7 +74,7 @@ const RootStack = createStackNavigator({
 
 ## Adding a second route
 
-The `<RootStack />` component doesn't accept any props -- all configuration is specified in the `options` parameter to the stack navigator function. We left the `options` blank, so it just uses the default configuration. To see an example of using the `options` object, we will add a second screen to the stack navigator.
+The `<RootStack />` component doesn't accept any props -- all configuration is specified in the `options` parameter to the `createStackNavigator` function. We left the `options` blank, so it just uses the default configuration. To see an example of using the `options` object, we will add a second screen to the stack navigator.
 
 ```js
 // Other code for HomeScreen here...
@@ -102,7 +102,7 @@ const RootStack = createStackNavigator(
 // Other code for App component here...
 ```
 
-Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home` route corresponds to the `HomeScreen` component, and the `Details` route corresponds to the `DetailsScreen` component. The initial route for the stack is the `Home` route. The natural question at this point is: "how do I move from the Home route to the Details route?". That is covered in the next section.
+Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home` route corresponds to the `HomeScreen` component, and the `Details` route corresponds to the `DetailsScreen` component. The initial route for the stack is the `Home` route. The natural question at this point is: "how do I go from the Home route to the Details route?". That is covered in the next section.
 
 ## Summary
 
