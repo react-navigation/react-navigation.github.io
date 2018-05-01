@@ -7,6 +7,7 @@
 
 const React = require('react');
 
+const translate = require("../../server/translate.js").translate;
 const CompLibrary = require('../../core/CompLibrary.js');
 const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
@@ -18,17 +19,17 @@ class Help extends React.Component {
     const supportLinks = [
       {
         content:
-          'Learn more using the [documentation on this site.](/docs/getting-started.html) and [reading the API reference](/content/docs/api-reference.html).',
-        title: 'Browse Docs and API',
+          <translate>Learn more using the [documentation on this site.](/docs/getting-started.html) and [reading the API reference](/content/docs/api-reference.html).</translate>,
+        title: <translate>Browse Docs and API</translate>,
       },
       {
-        content: 'Ask questions about the documentation and project in the `#react-navigation` channel on the [Reactiflux Discord](https://discord.gg/4xEK3nD).',
-        title: 'Join the community',
+        content: <translate>Ask questions about the documentation and project in the `#react-navigation` channel on the [Reactiflux Discord](https://discord.gg/4xEK3nD).</translate>,
+        title: <translate>Join the community</translate>,
       },
       {
         content:
-          'Read the release notes for new versions of React Navigation in the [releases tab on the Github repository](https://github.com/react-navigation/react-navigation/releases).',
-        title: 'Stay up to date',
+          <translate>Read the release notes for new versions of React Navigation in the [releases tab on the Github repository](https://github.com/react-navigation/react-navigation/releases).</translate>,
+        title: <translate>Stay up to date</translate>,
       },
     ];
 
@@ -37,18 +38,31 @@ class Help extends React.Component {
         <Container className="mainContainer documentContainer postContainer">
           <div className="post">
             <header className="postHeader">
-              <h2>Need help?</h2>
+              <h2>
+                <translate>Need help?</translate>
+              </h2>
             </header>
             <p>
-              If you've encountered a bug with React Navigation, please{' '}
+              <translate>If you've encountered a bug with React Navigation, please</translate>{' '}
               <a href="https://github.com/react-navigation/react-navigation/issues">
-                post an issue
+                <translate>post an issue</translate>
               </a>{' '}
-              and be sure to fill out the issue template. If you believe there
-              is a feature missing, please <a href="https://react-navigation.canny.io/feature-requests">create a feature request on
-              Canny</a>, or if
-              you're feeling up for the task of proposing an API for the
-              feature, <a href="https://github.com/react-navigation/rfcs">submit a RFC!</a> If you just need some help, try joining us in the <code>#react-navigation</code> channel on <a href="https://discord.gg/4xEK3nD">Discord</a> or <a href="https://stackoverflow.com/questions/tagged/react-navigation">post a question to StackOverflow</a>.
+              <translate>and be sure to fill out the issue template. If you believe there is a feature missing, please</translate>
+              <a href="https://react-navigation.canny.io/feature-requests">
+                <translate>create a feature request on Canny</translate>
+              </a>
+              <translate>, or if you're feeling up for the task of proposing an API for the feature, </translate>
+              <a href="https://github.com/react-navigation/rfcs">
+                <translate>submit a RFC!</translate>
+              </a>
+              <translate>If you just need some help, try joining us in the</translate>
+              <code> react-navigation </code>
+              <translate>channel on</translate>
+              <a href="https://discord.gg/4xEK3nD"> Discord </a>
+              <translate>or</translate>
+              <a href="https://stackoverflow.com/questions/tagged/react-navigation">
+                <translate>post a question to StackOverflow</translate>
+              </a>.
             </p>
             <GridBlock contents={supportLinks} layout="threeColumn" />
           </div>
