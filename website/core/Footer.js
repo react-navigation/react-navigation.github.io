@@ -6,11 +6,9 @@
  */
 
 const React = require('react');
-// const translate = require("../server/translate.js").translate;
 
 class Footer extends React.Component {
   render() {
-    console.log('this.props.language:', this.props.language)
     const currentYear = new Date().getFullYear();
     return (
       <footer className="nav-footer" id="footer">
