@@ -4,8 +4,13 @@ title: createSwitchNavigator
 sidebar_label: createSwitchNavigator
 ---
 
+The purpose of SwitchNavigator is to only ever show one screen at a time. By default, it does not handle back actions and it resets routes to their default state when you switch away.
+This is the exact behavior that we want from the [authentication flow](/docs/auth-flow.md).
+
+## API Definition
+
 ```js
-createSwitchNavigator(RouteConfigs, SwitchNavigatorConfig)
+createSwitchNavigator(RouteConfigs, SwitchNavigatorConfig);
 ```
 
 ## RouteConfigs
