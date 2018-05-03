@@ -13,20 +13,21 @@
       "common-mistakes",
       "limitations"
     ],
-    "How do I do ...?": [
+    "Assorted Guides": [
       "tab-based-navigation",
       "drawer-based-navigation",
       "auth-flow",
       "handling-iphonex",
       "status-bar",
+      "navigation-options-resolution",
       "custom-android-back-button-handling",
       "connecting-navigation-prop",
       "navigating-without-navigation-prop",
+      "navigation-key",
       "deep-linking",
       "screen-tracking",
       "state-persistence",
-      "redux-integration",
-      "navigation-key"
+      "redux-integration"
     ],
     "Build your own Navigator": [
       "custom-navigator-overview",

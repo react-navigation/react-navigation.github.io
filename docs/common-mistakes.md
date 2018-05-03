@@ -99,3 +99,8 @@ const AppNavigator = createSwitchNavigator({
   Home: HomeScreen,
 });
 ```
+
+## Assigning navigationOptions to the wrong component
+
+In previous version of React Navigation, the library used to dig through your component tree to find `navigationOptions`. This is no longer the case, and only `navigationOptions` on screen components of a particular navigator will apply to that navigator. You can read more about this in the [Navigation options resolution](http://localhost:3000/docs/en/navigation-options-resolution.html) guide.
+
