@@ -12,12 +12,14 @@ const siteConfig = {
   tagline: 'Routing and navigation for your React Native apps',
   url: process.env.STABLE_RELEASE
     ? 'https://reactnavigation.org'
-    : 'https://react-navigation.github.io/website-prelease',
+    : 'https://v1.react-navigation.org',
   baseUrl: '/',
-  organizationName: 'react-navigation',
+  organizationName: process.env.STABLE_RELEASE
+    ? 'react-navigation'
+    : 'react-navigation-v1',
   projectName: process.env.STABLE_RELEASE
     ? 'react-navigation.github.io'
-    : 'website-prerelease',
+    : 'react-navigation-v1.github.io',
   headerLinks: [
     { doc: 'getting-started', label: 'Docs' },
     { doc: 'api-reference', label: 'API' },
