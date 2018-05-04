@@ -6,7 +6,13 @@ sidebar_label: createMaterialBottomTabNavigator
 
 A material-design themed tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 
-This API requires that you install `react-native-vector-icons`! If you are using Expo, it will just work out of the box. Otherwise, [follow these installation instructions](https://github.com/oblador/react-native-vector-icons#installation).
+To use this navigator, you need to install `react-navigation-material-bottom-tabs`
+
+```
+npm install react-navigation-material-bottom-tabs
+```
+
+This API also requires that you install `react-native-vector-icons`! If you are using Expo, it will just work out of the box. Otherwise, [follow these installation instructions](https://github.com/oblador/react-native-vector-icons#installation).
 
 ```js
 createMaterialBottomTabNavigator(RouteConfigs, MaterialBottomTabNavigatorConfig);
