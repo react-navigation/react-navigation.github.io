@@ -76,6 +76,8 @@ If you are using `NavigationActions.push` or other stack-specific actions, youâ€
 
 Previously, `TabNavigator` would render a navigation bar on the top of the screen on Android and the bottom on iOS. Weâ€™ve now pulled these navigators apart, so you can use `createBottomTabNavigator`and `createMaterialTopTabNavigator` explicitly depending on what you need. You can use `createTabNavigator` to have the same behavior as before, but it will be removed in 3.0.
 
+It is worth noting additionally that `createBottomTabNavigator` is different from the bottom tab navigator that is available through `TabNavigator` in that it does not support `animationEnabled` or `swipeEnabled` properties.
+
 ## Enhancements
 
 * dangerouslyGetParent and dismiss helpers on navigation prop ([3669](https://github.com/react-navigation/react-navigation/pull/3669))
