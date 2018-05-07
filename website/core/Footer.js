@@ -49,6 +49,15 @@ class Footer extends React.Component {
             </a>
           </div>
           <div>
+            <h5>Versions</h5>
+            <a href="https://reactnavigation.org/docs/getting-started.html">
+              Version 2 docs
+            </a>
+            <a href="https://v1.reactnavigation.org/docs/getting-started.html">
+              Version 1 docs
+            </a>
+          </div>
+          <div>
             <h5>Support</h5>
             <a href="https://discord.gg/4xEK3nD">
               Chat in our Discord channel
