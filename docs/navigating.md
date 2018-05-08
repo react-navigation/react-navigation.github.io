@@ -126,11 +126,14 @@ class DetailsScreen extends React.Component {
 
 Another common requirement is to be able to go back _multiple_ screens -- for example, if you are several screens deep in a stack and want to dismiss all of them to go back to the first screen. In this case, we know that we want to go back to `Home` so we can use `navigate('Home')` (not `push`! try that out and see the difference). Another alternative would be `navigation.popToTop()`, which goes back to the first screen in the stack.
 
-Navigation actions always behave idempotently. If you are not using `^2.0.0`, navigation actions behave idempotently only when called with a key. When pushing, the navigator will push a route with that key. If the route already exists, it will navigate to that route and set the params.
+Navigation actions always behave idempotently in `2.x.x`. If you are still using `1.x.x`, navigation actions behave idempotently only when called with a key. When pushing, the navigator will push a route with that key. If the route already exists, it will navigate to that route and set the params.
 
 ```js
 <Button
-  title="Go to Details... but don't push it to the stack if it already exists, just navigate"
+  title="Go to Details..."
+  // in 2.x.x
+  onPress={() => this.props.navigation.navigate('Details')}
+  // in 1.x.x
   onPress={() => this.props.navigation.navigate({ routeName: 'Details', key: 'myKey' })}
 />
 ```
