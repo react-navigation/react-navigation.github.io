@@ -96,7 +96,7 @@ const popAction = StackActions.pop({
   n: 1,
 });
 
-this.props.navigation.dispatch(pushAction);
+this.props.navigation.dispatch(popAction);
 ```
 
 ### PopToTop
