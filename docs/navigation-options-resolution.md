@@ -4,7 +4,7 @@ title: Navigation options resolution
 sidebar_label: Navigation options resolution
 ---
 
-Each screen can configure various aspects about how it gets presented in the navigator that renders it. In the [Configuring the header bar](/docs/headers.html) section of the fundamentals documentation we explain the basics of how this works.
+Each screen can configure various aspects about how it gets presented in the navigator that renders it. In the [Configuring the header bar](headers.html) section of the fundamentals documentation we explain the basics of how this works.
 
 In this document we'll explain how this works when there are multiple navigators. It's important to understand this so that you put your `navigationOptions` in the correct place and can properly configure your navigators. If you put them in the wrong place, at best nothing will happen and at worst something confusing and unexpected will happen. Thankfully, the logic for this could not be any easier to understand:
 
@@ -85,7 +85,7 @@ We also know that `createStackNavigator` and related functions return React comp
 
 ## **Caution**: navigationOption property isn't the same as the one in navigatorConfig
 
-Navigators are initialized with `createXNavigator(routeConfig, navigatorConfig)`. Inside of `navigatorConfig` we can add `navigationOptions` as well. These `navigationOptions` are the default options for screens within that navigator. [Read more about sharing common navigationOptions](/docs/headers.html#sharing-common-navigationoptions-across-screens).
+Navigators are initialized with `createXNavigator(routeConfig, navigatorConfig)`. Inside of `navigatorConfig` we can add `navigationOptions` as well. These `navigationOptions` are the default options for screens within that navigator. [Read more about sharing common navigationOptions](headers.html#sharing-common-navigationoptions-across-screens).
 
 ```js
 const HomeStack = createStackNavigator({ A }, {

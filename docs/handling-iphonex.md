@@ -8,7 +8,7 @@ By default React Navigation aids in ensuring your application displays correctly
 
 ## Hidden/Custom Navigation Bar or Tab Bar
 
-![Default React Navigation Behavior](./assets/iphoneX/01-iphonex-default.png)
+![Default React Navigation Behavior](/docs/assets/iphoneX/01-iphonex-default.png)
 
 However, if you're overriding the default navigation bar it's important to ensure your UI doesn't interfere with either of those hardware elements.
 
@@ -28,7 +28,7 @@ export default createStackNavigator({
 });
 ```
 
-![Text hidden by iPhoneX UI elements](./assets/iphoneX/02-iphonex-content-hidden.png)
+![Text hidden by iPhoneX UI elements](/docs/assets/iphoneX/02-iphonex-content-hidden.png)
 
 To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-navigation`.
 
@@ -51,7 +51,7 @@ class App extends Component {
 }
 ```
 
-![Content spaced correctly with SafeAreaView](./assets/iphoneX/03-iphonex-content-fixed.png)
+![Content spaced correctly with SafeAreaView](/docs/assets/iphoneX/03-iphonex-content-fixed.png)
 
 This will detect if the app is running on an iPhoneX and, if so, ensure the content isn't hidden behind any hardware elements.
 
@@ -59,11 +59,11 @@ This will detect if the app is running on an iPhoneX and, if so, ensure the cont
 
 Even if you're using the default navigation bar and tab bar if your application works in landscape mode it's important to ensure you content isn't hidden behind the sensor cluster.
 
-![App in landscape mode with text hidden](./assets/iphoneX/04-iphonex-landscape-hidden.png)
+![App in landscape mode with text hidden](/docs/assets/iphoneX/04-iphonex-landscape-hidden.png)
 
 To fix this you can, once again, wrap your content in a `SafeAreaView`. This will not conflict with the navigation bar or tab bar's default behavior in portrait mode.
 
-![App in landscape mode with text visible](./assets/iphoneX/05-iphonex-landscape-fixed.png)
+![App in landscape mode with text visible](/docs/assets/iphoneX/05-iphonex-landscape-fixed.png)
 
 In conclusion, use the `SafeAreaView` component on the screens you register with a React Navigation navigator.
 

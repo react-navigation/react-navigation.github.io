@@ -4,7 +4,7 @@ title: Access the navigation prop from any component
 sidebar_label: Access the navigation prop from any component
 ---
 
-[`withNavigation`](/docs/with-navigation) is a higher order component which passes the `navigation` prop into a wrapped Component. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
+[`withNavigation`](with-navigation.html) is a higher order component which passes the `navigation` prop into a wrapped Component. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
 
 ```javascript
 import React from 'react';

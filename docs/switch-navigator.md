@@ -5,7 +5,7 @@ sidebar_label: createSwitchNavigator
 ---
 
 The purpose of SwitchNavigator is to only ever show one screen at a time. By default, it does not handle back actions and it resets routes to their default state when you switch away.
-This is the exact behavior that we want from the [authentication flow](/docs/auth-flow.md).
+This is the exact behavior that we want from the [authentication flow](auth-flow.html).
 
 ## API Definition
 
@@ -15,7 +15,7 @@ createSwitchNavigator(RouteConfigs, SwitchNavigatorConfig);
 
 ## RouteConfigs
 
-The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](/docs/stack-navigator.html#routeconfigs) from `createStackNavigator`.
+The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.html#routeconfigs) from `createStackNavigator`.
 
 ## SwitchNavigatorConfig
 

@@ -12,18 +12,18 @@ Under the hood, navigators are plain React components.
 
 `react-navigation` includes some commonly needed navigators such as:
 
-- [createStackNavigator](/docs/stack-navigator.html) - Renders one screen at a time and provides transitions between screens. When a new screen is opened it is placed on top of the stack.
-- [createBottomTabNavigator](/docs/bottom-tab-navigator.html) - Renders a tab bar that lets the user switch between several screens.
-- [createSwitchNavigator](/docs/switch-navigator.html) - Switch between one screen and another with no UI on top of it, unmount screens when they become inactive.
-- [createDrawerNavigator](/docs/drawer-navigator.html) - Provides a drawer that slides in from the left of the screen.
+- [createStackNavigator](stack-navigator.html) - Renders one screen at a time and provides transitions between screens. When a new screen is opened it is placed on top of the stack.
+- [createBottomTabNavigator](bottom-tab-navigator.html) - Renders a tab bar that lets the user switch between several screens.
+- [createSwitchNavigator](switch-navigator.html) - Switch between one screen and another with no UI on top of it, unmount screens when they become inactive.
+- [createDrawerNavigator](drawer-navigator.html) - Provides a drawer that slides in from the left of the screen.
 
 ## Rendering screens with Navigators
 
 The navigators render application screens which are just React components.
 
 To learn how to create screens, read about:
-- [Screen `navigation` prop](/docs/navigation-prop.html) to allow the screen to dispatch navigation actions, such as opening another screen
-- Screen `navigationOptions` to customize how the screen gets presented by the navigator (e.g. [header title](/docs/stack-navigator.html#navigationoptions-used-by-stacknavigator), tab label)
+- [Screen `navigation` prop](navigation-prop.html) to allow the screen to dispatch navigation actions, such as opening another screen
+- Screen `navigationOptions` to customize how the screen gets presented by the navigator (e.g. [header title](stack-navigator.html#navigationoptions-used-by-stacknavigator), tab label)
 
 ### Calling Navigate on Top Level Component
 
@@ -65,4 +65,4 @@ Function that gets called every time navigation state managed by the navigator c
 
 ### `uriPrefix`
 
-The prefix of the URIs that the app might handle. This will be used when handling a [deep link](/docs/deep-linking.html) to extract the path passed to the router.
+The prefix of the URIs that the app might handle. This will be used when handling a [deep link](deep-linking.html) to extract the path passed to the router.
