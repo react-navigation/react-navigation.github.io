@@ -53,7 +53,7 @@ This is similar to how you would customize a stack navigator &mdash; there are s
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from 'react-navigation';
 
-export default TabNavigator(
+export default createBottomTabNavigator(
   {
     Home: HomeScreen,
     Settings: SettingsScreen,
