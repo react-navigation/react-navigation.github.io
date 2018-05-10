@@ -6,7 +6,7 @@ sidebar_label: Custom Android back button behavior
 
 By default, when user presses the Android hardware back button, react-navigation will pop a screen or exit the app if there are no screens to pop. This is a sensible default behavior, but there are situations when you might want to implement custom handling.
 
-If you're looking for an easy-to-use solution, you can check out a community-developed package [react-navigation-backhandler](https://github.com/vonovak/react-navigation-backhandler). The following text will show you how the package actually works under the cover.
+> If you're looking for an easy-to-use solution, you can check out a community-developed package [react-navigation-backhandler](https://github.com/vonovak/react-navigation-backhandler). The following text shows what the package does under the cover.
 
 As an example, consider a screen where user is selecting items in a list, and a "selection mode" is active. On a back button press, you would first want the "selection mode" to be deactivated, and the screen should be popped only on the second back button press. The following code snippet demostrates the situation. We make use of [`BackHandler`](https://facebook.github.io/react-native/docs/backhandler.html) which comes with react-native and we [subscribe to navigation lifecycle updates](navigation-prop.html#addlistener-subscribe-to-updates-to-navigation-lifecycle) to add our custom `hardwareBackPress` listener.
 
