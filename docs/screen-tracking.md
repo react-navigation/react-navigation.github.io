@@ -8,7 +8,7 @@ This example shows how to do screen tracking and send to Google Analytics. The a
 
 ## Listening to State Changes
 
-Most users can use `onNavigationStateChange` to track the screen. If you manually control the top-level navigator (if you have intgrated redux), this will not work for you.
+Most users can use `onNavigationStateChange` to track the screen. If you manually control the top-level navigator (if you have integrated redux), this will not work for you.
 
 ```js
 import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge';
