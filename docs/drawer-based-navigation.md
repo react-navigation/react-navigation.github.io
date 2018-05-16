@@ -19,7 +19,7 @@ class MyHomeScreen extends React.Component {
   render() {
     return (
       <Button
-        onPress={() => this.props.navigation.navigate('Notifications')}
+        onPress={() => this.props.navigation.openDrawer()}
         title="Go to notifications"
       />
     );
@@ -40,7 +40,7 @@ class MyNotificationsScreen extends React.Component {
   render() {
     return (
       <Button
-        onPress={() => this.props.navigation.goBack()}
+        onPress={() => this.props.navigation.openDrawer()}
         title="Go back home"
       />
     );
