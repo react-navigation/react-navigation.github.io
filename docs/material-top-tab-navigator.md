@@ -77,10 +77,6 @@ Title string of a tab displayed in the tab bar or React Element or a function th
 
 #### `tabBarOnPress`
 
-Callback to handle tap events; the argument is an object containing:
+Callback to handle tap events; the argument is an object containing a single property, the `navigation` prop corresponding to the route that was tapped. Useful for adding a custom logic before the transition to the next scene (the tapped one) starts.
 
-* the `previousScene: { route, index }` which is the scene we are leaving
-* the `scene: { route, index }` that was tapped
-* the `jumpToIndex` method that can perform the navigation for you
-
-Useful for adding a custom logic before the transition to the next scene (the tapped one) starts.
+The transition happens after this callback is triggered, but there is currently no way to stop it. If you want to know if the tab in question was already focused at the time it was tapped, you can use the `isFocused(): bool` function on the `navigation` prop.
