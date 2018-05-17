@@ -101,6 +101,8 @@ Then you need to supply a key to goBack _FROM_:
 navigation.goBack(SCREEN_KEY_B) // will go to screen A FROM screen B
 ```
 
+Alternatively, as _screen A_ is the top of the stack, you can use `navigation.popToTop()`.
+
 ### `addListener` - Subscribe to updates to navigation lifecycle
 
 React Navigation emits events to screen components that subscribe to them:
