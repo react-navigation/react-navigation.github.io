@@ -39,11 +39,9 @@ In order to use params in the title, we need to make `navigationOptions` a funct
 ```js
 class DetailsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const { params } = navigation.state;
-    
     return {
-      title: params ? params.otherParam : 'A Nested Details Screen',
-    }
+      title: navigation.getParam('otherParam', 'A Nested Details Screen'),
+    };
   };
 
   /* render function, etc */
