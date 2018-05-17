@@ -4,21 +4,21 @@ title: Redux integration
 sidebar_label: Redux integration
 ---
 
-Some folks like to have their navigation state stored in the same place as the rest of their application state. Using Redux to store your state enables you to write custom actions that manipulate the navigation state directly, to be able to dispatch navigation actions from anywhere (sometimes in a "thunk" or "saga") and to persist the navigation state in the same way you would other Redux state (your mileage may vary on this). You can read more about other use cases in the replies to [this tweet](https://twitter.com/satya164/status/952291726521024512).
+Some folks like to have their navigation state stored in the same place as the rest of their application state. Using Redux to handle your state enables you to write custom actions that manipulate the navigation state directly, to be able to dispatch navigation actions from anywhere (sometimes in a "thunk" or "saga"), and to persist the navigation state in the same way you would other Redux state (your mileage may vary on this). You can read more about other use cases in the replies to [this tweet](https://twitter.com/satya164/status/952291726521024512).
 
 ## Warning!
 
-*You probably do not need to do this!* Storing your React Navigation state in your own Redux store is likely to give you a very difficult time if you don't know what you're doing. You lose out on some performance optimizations that React Navigation can do for you, for example. Please do not integrate your state into Redux without first ensuring that you can do what you need to do without it!
+*You probably do not need to do this!* Storing your React Navigation state in your own Redux store is likely to give you a very difficult time if you don't know what you're doing. You lose out on some performance optimizations that React Navigation can do for you, for example. Please do not integrate your state into Redux without first checking if you can do what you need to do without it!
 
 ## Overview
 
-1. To handle your app's navigation state in Redux, you can pass your own `navigation` prop to a navigator.
+1. To handle your app's navigation state in Redux, you can pass your own [`navigation`](navigation-prop.html) prop to a navigator. This `navigation` prop is an object that must contain the navigation [`state`](navigation-prop.html#state-the-screen-s-current-state-route), [`dispatch`](navigation-prop.html#dispatch-send-an-action-to-the-router), and `addListener` properties.
 
-2. Once you pass your own navigation prop to the navigator, the default [`navigation`](navigation-prop.html) prop gets destroyed. You must construct your own `navigation` prop with [`state`](navigation-prop.html#state-the-screen-s-current-state-route), [`dispatch`](navigation-prop.html#dispatch-send-an-action-to-the-router), and `addListener` properties.
+2. The aforementioned navigation `state` will need to be kept updated using React Navigation's navigation reducer. You will call this reducer from your Redux master reducer.
 
-3. The `state` will be fed from the reducer assigned to handle navigation state and the `dispatch` will be Redux's default `dispatch`. Thus you will be able to dispatch normal redux actions using `this.props.navigation.dispatch(ACTION)`, reducer will update the navigation state on the basis of dispatched action, the new navigation state will then be passed to the navigator.
+3. React Navigation's `dispatch` will just be Redux's default `dispatch`, which you pass in to React Navigation as part of the `navigation` prop. As such, you will be able to dispatch normal Redux actions using `this.props.navigation.dispatch(ACTION)`.
 
-4. A middleware is needed so that any events that mutate the navigation state properly trigger the event listeners.
+4. A middleware is needed so that any events that mutate the navigation state properly trigger the event listeners. To properly trigger the event listeners with the initial state, a call to `initializeListeners` is also necessary.
 
 ## Step-by-step guide
 
@@ -34,7 +34,7 @@ First, you need to add the `react-navigation-redux-helpers` package to your proj
   npm install --save react-navigation-redux-helpers
   ```
 
-With Redux, your app's state is defined by a reducer. Each navigation router effectively has a reducer, called `getStateForAction`. The following is a minimal example of how you might use navigators within a Redux application:
+The following is a minimal example of how you might use navigators within a Redux application:
 
 ```es6
 import {
@@ -46,9 +46,10 @@ import {
   combineReducers,
 } from 'redux';
 import {
-  createReduxBoundAddListener,
-  createReactNavigationReduxMiddleware,
-  createNavigationReducer,
+  createNavigationPropConstructor,       // handles #1 above
+  createNavigationReducer,               // handles #2 above
+  createReactNavigationReduxMiddleware,  // handles #4 above
+  initializeListeners,                   // handles #4 above
 } from 'react-navigation-redux-helpers';
 import { Provider, connect } from 'react-redux';
 import React from 'react';
@@ -56,33 +57,36 @@ import React from 'react';
 const AppNavigator = createStackNavigator(AppRouteConfigs);
 
 const navReducer = createNavigationReducer(AppNavigator);
-
 const appReducer = combineReducers({
   nav: navReducer,
   ...
 });
 
-// Note: createReactNavigationReduxMiddleware must be run before createReduxBoundAddListener
+// Note: createReactNavigationReduxMiddleware must be run before createNavigationPropConstructor
 const middleware = createReactNavigationReduxMiddleware(
   "root",
   state => state.nav,
 );
-const addListener = createReduxBoundAddListener("root");
+const navigationPropConstructor = createNavigationPropConstructor("root");
 
 class App extends React.Component {
-  render() {
-    return (
-      <AppNavigator navigation={{
-        dispatch: this.props.dispatch,
-        state: this.props.nav,
-        addListener,
-      }} />
-    );
+
+  componentDidMount() {
+    initializeListeners("root", this.props.nav);
   }
+
+  render() {
+    const navigation = navigationPropConstructor(
+      this.props.dispatch,
+      this.props.nav,
+    );
+    return <AppNavigator navigation={navigation} />;
+  }
+
 }
 
 const mapStateToProps = (state) => ({
-  nav: state.nav
+  nav: state.nav,
 });
 
 const AppWithNavigationState = connect(mapStateToProps)(App);
@@ -125,14 +129,14 @@ There's a working example app with Redux [here](https://github.com/react-communi
 
 ## Mocking tests
 
-To make jest tests work with your react-navigation app, you need to change the jest preset in the `package.json`, see [here](https://facebook.github.io/jest/docs/tutorial-react-native.html#transformignorepatterns-customization):
+To make jest tests work with your React Navigation app, you need to change the jest preset in the `package.json`, see [here](https://facebook.github.io/jest/docs/tutorial-react-native.html#transformignorepatterns-customization):
 
 
 ```json
 "jest": {
   "preset": "react-native",
   "transformIgnorePatterns": [
-    "node_modules/(?!(jest-)?react-native|react-navigation)"
+    "node_modules/(?!(jest-)?react-native|react-navigation|react-navigation-redux-helpers)"
   ]
 }
 ```
@@ -141,7 +145,7 @@ To make jest tests work with your react-navigation app, you need to change the j
 
 ### Creating your own navigation reducer
 
-If you want to replace `createNavigationReducer` reducer creator this is how you would do it yourself.
+If you want to replace `createNavigationReducer` reducer creator this is how you would do it yourself:
 
 ```es6
 const AppNavigator = StackNavigator(AppRouteConfigs);
