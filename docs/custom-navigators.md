@@ -140,7 +140,7 @@ A scene descriptor has the following properties:
 - `getComponent`, a function that returns the component for the screen
 - `options`, the flattened navigationOptions for the route
 - `navigation`, the child navigation prop, including actions and the route `state`
-- `route`, the navigation state for the child screen (a shortcut for `navigation.state`)
+- `state`, the navigation state for the child screen (a shortcut for `navigation.state`)
 - `key`, the key of the route (a shortcut for `navigation.state.key`)
 
 
