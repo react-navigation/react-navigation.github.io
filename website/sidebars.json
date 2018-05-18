@@ -37,6 +37,9 @@
       "navigation-views",
       "transitioner"
     ],
+    "Community Navigators": [      
+      "community-fluidtransitions"
+    ],
     "Meta": ["pitch", "alternatives", "contributing"]
   },
   "api": {

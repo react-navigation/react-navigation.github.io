@@ -16,6 +16,8 @@
     "createBottomTabNavigator": "createBottomTabNavigator",
     "common-mistakes": "Common mistakes",
     "Common mistakes": "Common mistakes",
+    "community-fluidtransitions": "Fluid Transitions",
+    "Fluid Transitions": "Fluid Transitions",
     "composing-navigators": "Adding tabs",
     "Adding tabs": "Adding tabs",
     "connecting-navigation-prop": "Access the navigation prop from any component",
@@ -128,6 +130,7 @@
     "Fundamentals": "Fundamentals",
     "Assorted Guides": "Assorted Guides",
     "Build your own Navigator": "Build your own Navigator",
+    "Community Navigators": "Community Navigators",
     "Meta": "Meta",
     "API Reference": "API Reference"
   },
