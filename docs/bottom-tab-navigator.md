@@ -27,6 +27,7 @@ The route configs object is a mapping from route name to a route config.
   * `inactiveTintColor` - Label and icon color of the inactive tab.
   * `inactiveBackgroundColor` - Background color of the inactive tab.
   * `showLabel` - Whether to show label for tab, default is true.
+  * `showIcon` - Whether to show icon for tab, default is true.
   * `style` - Style object for the tab bar.
   * `labelStyle` - Style object for the tab label.
   * `tabStyle` - Style object for the tab.
