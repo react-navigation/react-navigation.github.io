@@ -24,7 +24,7 @@ This provided key will be used as the react native `AsyncStorage` key to save th
 
 ### Development Mode
 
-This feature is particularly save and desirable in development mode. You can enable it selectively using the following approach:
+This feature is particularly safe and desirable in development mode. You can enable it selectively using the following approach:
 
 ```js
 const AppNavigator = createStackNavigator({...});
