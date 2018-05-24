@@ -22,7 +22,6 @@ The route configs object is a mapping from route name to a route config.
 * `backBehavior` - Should the back button cause a tab switch to the initial tab? If yes, set to `initialRoute`, otherwise `none`. Defaults to `initialRoute` behavior.
 * `swipeEnabled` - Whether to allow swiping between tabs.
 * `animationEnabled` - Whether to animate when changing tabs.
-* `configureTransition` - a function that, given `currentTransitionProps` and `nextTransitionProps`, returns a configuration object that describes the animation between tabs.
 * `initialLayout` - Optional object containing the initial `height` and `width`, can be passed to prevent the one frame delay in [react-native-tab-view](https://github.com/react-native-community/react-native-tab-view#avoid-one-frame-delay) rendering.
 * `tabBarComponent` - Optional, override the component to use as the tab bar.
 * `tabBarOptions` - An object with the following properties:
@@ -85,10 +84,9 @@ ID to locate this tab button in tests.
 
 #### `tabBarOnPress`
 
-Callback to handle tap events; the argument is an object containing:
+Callback to handle press events; the argument is an object containing:
 
-* the `previousScene: { route, index }` which is the scene we are leaving
-* the `scene: { route, index }` that was tapped
-* the `jumpToIndex` method that can perform the navigation for you
+* `navigation`: navigation prop for the screen
+* `defaultHandler`: the default handler for tab press
 
 Useful for adding a custom logic before the transition to the next scene (the tapped one) starts.
