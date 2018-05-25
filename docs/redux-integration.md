@@ -167,40 +167,32 @@ By using the following snippet, your nav component will be aware of the back but
 ```es6
 import React from "react";
 import { BackHandler } from "react-native";
-import { addNavigationHelpers, NavigationActions } from "react-navigation";
+import { NavigationActions } from "react-navigation";
 
-const AppNavigation = TabNavigator(
-  {
-    Home: { screen: HomeScreen },
-    Settings: { screen: SettingScreen }
-  }
-);
+/* your other setup code here! this is not a runnable snippet */
 
 class ReduxNavigation extends React.Component {
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
   }
+
   componentWillUnmount() {
     BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
   }
+
   onBackPress = () => {
     const { dispatch, nav } = this.props;
     if (nav.index === 0) {
       return false;
     }
+
     dispatch(NavigationActions.back());
     return true;
   };
 
   render() {
-    const { dispatch, nav } = this.props;
-    const navigation = addNavigationHelpers({
-      dispatch,
-      state: nav,
-      addListener,
-    });
-
-    return <AppNavigation navigation={navigation} />;
+    /* more setup code here! this is not a runnable snippet */ 
+    return <AppNavigator navigation={navigation} />;
   }
 }
 ```
