@@ -12,7 +12,8 @@ createBottomTabNavigator(RouteConfigs, BottomTabNavigatorConfig);
 
 ## RouteConfigs
 
-The route configs object is a mapping from route name to a route config.
+
+The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.html#routeconfigs) from stack navigator.
 
 ## BottomTabNavigatorConfig
 
