@@ -83,9 +83,9 @@ MyOtherComponent.navigationOptions = {
 
 We also know that `createStackNavigator` and related functions return React components. So when we set the `navigationOptions` directly on the `HomeStack` and `SettingsStack` component, it allows us to control the `navigationOptions` for its parent navigator when its used as a screen component. In this case, the `navigationOptions` on our stack components configure the label in the tab navigator that renders the stacks.
 
-## **Caution**: navigationOption property isn't the same as the one in navigatorConfig
+## **Caution**: the navigationOptions property vs configuration
 
-Navigators are initialized with `createXNavigator(routeConfig, navigatorConfig)`. Inside of `navigatorConfig` we can add `navigationOptions` as well. These `navigationOptions` are the default options for screens within that navigator. [Read more about sharing common navigationOptions](headers.html#sharing-common-navigationoptions-across-screens).
+Navigators are initialized with `createXNavigator(routeConfig, navigatorConfig)`. Inside of `navigatorConfig` we can add a `navigationOptions` property. These `navigationOptions` are the default options for screens within that navigator ([read more about sharing common navigationOptions](headers.html#sharing-common-navigationoptions-across-screens)), they do not refer to the `navigationOptions` for that navigator &mdash; as we have seen above, we set the `navigationOptions` property directly on the navigator for that use case.
 
 ```js
 const HomeStack = createStackNavigator({ A }, {
@@ -104,3 +104,211 @@ HomeStack.navigationOptions = {
 ```
 
 We understand that overloading the naming here is a little bit confusing. Please [open a RFC](https://github.com/react-navigation/rfcs) if you have a suggestion about how we can make this API easier to learn and work with.
+
+# A stack contains a tab navigator and you want to set the title on the stack header
+
+Imagine the following configuration:
+
+```js
+const TabNavigator = createBottomTabNavigator({
+  Feed: FeedScreen,
+  Profile: ProfileScreen,
+});
+
+const AppNavigator = createStackNavigator({
+  Home: TabNavigator,
+  Settings: SettingsScreen,
+});
+```
+
+If we were to set the `headerTitle` with `navigationOptions` on the `FeedScreen`, this would not work. This is because the `AppNavigator` stack will only look at its immediate children for configuration: `TabNavigator` and `SettingsScreen`. So we can set the `headerTitle` on the `TabNavigator` instead, like so:
+
+```js
+const TabNavigator = createBottomTabNavigator({
+  Feed: FeedScreen,
+  Profile: ProfileScreen,
+});
+
+TabNavigator.navigationOptions = ({ navigation }) => {
+  let { routeName } = navigation.state.routes[navigation.state.index];
+
+  // You can do whatever you like here to pick the title based on the route name
+  let headerTitle = routeName;
+
+  return {
+    headerTitle,
+  };
+};
+```
+
+Another option is to re-organize your navigators, such that each tab has its own stack. You can then hide the top-level stack's header when the tab screen is focused.
+
+```js
+const FeedStack = createStackNavigator({
+  FeedHome: FeedScreen,
+  /* other routes here */
+});
+
+const ProfileStack = createStackNavigator({
+  ProfileHome: ProfileScreen,
+  /* other routes here */
+});
+
+const TabNavigator = createBottomTabNavigator({
+  Feed: FeedStack,
+  Profile: ProfileStack,
+});
+
+TabNavigator.navigationOptions = {
+  // Hide the header from AppNavigator stack
+  header: null,
+};
+
+const AppNavigator = createStackNavigator({
+  Home: TabNavigator,
+  Settings: SettingsScreen,
+});
+```
+
+Using this configuration, the `headerTitle` or `title` from `navigationOptions` on `FeedScreen` and `ProfileScreen` will not determine the title in their headers.
+
+Additionally, you can push new screens to the feed and profile stacks without hiding the tab bar by adding more routes to those stacks. If you want to push screens on top of the tab bar, then you can add them to the `AppNavigator` stack.
+
+# A tab navigator contains a stack and you want to hide the tab bar on specific screens
+
+Similar to the example above where a stack contains a tab navigator, we can solve this in two ways: add `navigationOptions` to our tab navigator to set the tab bar to hidden depending on which route is active in the child stack, or we can move the tab navigator inside of the stack.
+
+Imagine the following configuration:
+
+```js
+const FeedStack = createStackNavigator({
+  FeedHome: FeedScreen,
+  Details: DetailsScreen,
+});
+
+const TabNavigator = createBottomTabNavigator({
+  Feed: FeedScreen,
+  Profile: ProfileScreen,
+});
+
+const AppNavigator = createSwitchNavigator({
+  Auth: AuthScreen,
+  Home: TabNavigator,
+});
+```
+
+If we want to hide the tab bar when we navigate from the feed home to a details screen without shuffling navigators, we cannot set the `tabBarVisible: false` configuration in `navigationOptions` on `DetailsScreen`, because those options will only apply to the `FeedStack`. Instead, we can do the following:
+
+```js
+const FeedStack = createStackNavigator({
+  FeedHome: FeedScreen,
+  Details: DetailsScreen,
+});
+
+FeedStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
+```
+
+This will hide the tab bar any time we navigate away from the feed home. We could switch visibility based on route name, but it would be strange to have the tab bar be hidden and then appear again when pushing another route &mdash; it should only be visible when returning to a route where it was previously visible.
+
+Another option here would be to add another stack navigator as a parent of the tab navigator, and put the details screen there. This is recommended.
+
+```js
+const FeedStack = createStackNavigator({
+  FeedHome: FeedScreen,
+  /* any other route you want to render under the tab bar */
+});
+
+const TabNavigator = createBottomTabNavigator({
+  Feed: FeedScreen,
+  Profile: ProfileScreen,
+});
+
+const HomeStack = createStackNavigator({
+  Tabs: TabNavigator,
+  Details: DetailsScreen,
+  /* any other route you want to render above the tab bar */
+});
+
+const AppNavigator = createSwitchNavigator({
+  Auth: AuthScreen,
+  Home: HomeStack,
+});
+```
+
+# A drawer has a stack inside of it and you want to lock the drawer on certain screens
+
+This is conceptually identical to having a tab with a stack inside of it (read that above if you have not already), where you want to hide the tab bar on certain screens. The only difference is that rather than using `tabBarVisible` you will use `drawerLockMode`.
+
+Imagine the following configuration:
+
+```js
+const FeedStack = createStackNavigator({
+  FeedHome: FeedScreen,
+  Details: DetailsScreen,
+});
+
+const DrawerNavigator = createDrawerNavigator({
+  Feed: FeedScreen,
+  Profile: ProfileScreen,
+});
+
+const AppNavigator = createSwitchNavigator({
+  Auth: AuthScreen,
+  Home: DrawerNavigator,
+});
+```
+
+In order to hide the drawer when we push the details screen to the feed stack, we need to set `navigationOptions` on the `FeedStack`. If we were to set `navigationOptions` on the `DetailsScreen`, they would be configuring the feed stack (its direct parent) and not the drawer.
+
+```js
+const FeedStack = createStackNavigator({
+  FeedHome: FeedScreen,
+  Details: DetailsScreen,
+});
+
+FeedStack.navigationOptions = ({ navigation }) => {
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    drawerLockMode = 'locked-closed';
+  }
+
+  return {
+    drawerLockMode,
+  };
+};
+```
+
+Another option here would be to add another stack navigator as a parent of the drawer navigator, and put the details screen there. This is recommended.
+
+```js
+const FeedStack = createStackNavigator({
+  FeedHome: FeedScreen,
+  /* any other route where you want the drawer to remain available */
+  /* keep in mind that it will conflict with the swipe back gesture on ios */
+});
+
+const DrawerNavigator = createDrawerNavigator({
+  Feed: FeedScreen,
+  Profile: ProfileScreen,
+});
+
+const HomeStack = createStackNavigator({
+  Drawer: DrawerNavigator,
+  Details: DetailsScreen,
+  /* add routes here where you want the drawer to be locked */
+});
+
+const AppNavigator = createSwitchNavigator({
+  Auth: AuthScreen,
+  Home: HomeStack,
+});
+```
