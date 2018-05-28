@@ -28,7 +28,7 @@ function getActiveRouteName(navigationState) {
   return route.routeName;
 }
 
-const AppNavigator =createStackNavigator(AppRouteConfigs);
+const AppNavigator = createStackNavigator(AppRouteConfigs);
 
 export default () => (
   <AppNavigator
