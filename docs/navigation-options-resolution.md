@@ -187,7 +187,7 @@ const FeedStack = createStackNavigator({
 });
 
 const TabNavigator = createBottomTabNavigator({
-  Feed: FeedScreen,
+  Feed: FeedStack,
   Profile: ProfileScreen,
 });
 
@@ -228,7 +228,7 @@ const FeedStack = createStackNavigator({
 });
 
 const TabNavigator = createBottomTabNavigator({
-  Feed: FeedScreen,
+  Feed: FeedStack,
   Profile: ProfileScreen,
 });
 
@@ -257,7 +257,7 @@ const FeedStack = createStackNavigator({
 });
 
 const DrawerNavigator = createDrawerNavigator({
-  Feed: FeedScreen,
+  Feed: FeedStack,
   Profile: ProfileScreen,
 });
 
@@ -297,7 +297,7 @@ const FeedStack = createStackNavigator({
 });
 
 const DrawerNavigator = createDrawerNavigator({
-  Feed: FeedScreen,
+  Feed: FeedStack,
   Profile: ProfileScreen,
 });
 
