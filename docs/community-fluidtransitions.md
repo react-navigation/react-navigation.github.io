@@ -15,7 +15,7 @@ The library implements a custom navigator called `FluidNavigator` that makes all
 Install the FluidTransitions package in your project:
 
 ```
-nmp install react-navigation-fluid-transitions
+npm install react-navigation-fluid-transitions
 yarn install  react-navigation-fluid-transitions
 ```
 
