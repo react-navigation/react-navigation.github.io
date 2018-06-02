@@ -92,7 +92,7 @@ const HomeStack = createStackNavigator({ A }, {
   // This is the default for screens in the stack, so `A` will
   // use this title unless it overrides it
   navigationOptions: {
-    title: 'Welcome"
+    title: 'Welcome'
   }
 })
 
