@@ -56,7 +56,7 @@ Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`
 
 #### `tabBarVisible`
 
-True or false to show or hide the tab bar, if not set then defaults to true.
+`true` or `false` to show or hide the tab bar, if not set then defaults to `true`.
 
 #### `tabBarIcon`
 
@@ -65,6 +65,10 @@ React Element or a function that given `{ focused: boolean, tintColor: string }`
 #### `tabBarLabel`
 
 Title string of a tab displayed in the tab bar or React Element or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
+
+#### `tabBarButtonComponent`
+
+React Component that wraps the icon and label and implements `onPress`. The default is a wrapper around `TouchableWithoutFeedback` that makes it behave the same as other touchables. `tabBarButtonComponent: TouchableOpacity` would use `TouchableOpacity` instead.
 
 #### `tabBarAccessibilityLabel`
 
