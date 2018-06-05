@@ -75,6 +75,14 @@ React Element or a function that given `{ focused: boolean, tintColor: string }`
 
 Title string of a tab displayed in the tab bar or React Element or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
 
+#### `tabBarAccessibilityLabel`
+
+Accessibility label for the tab button. This is read by the screen reader when the user taps the tab. It's recommended to set this if you don't have a label for the tab.
+
+#### `tabBarTestID`
+
+ID to locate this tab button in tests.
+
 #### `tabBarOnPress`
 
 Callback to handle tap events; the argument is an object containing:
