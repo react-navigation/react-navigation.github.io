@@ -60,15 +60,15 @@ Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`
 
 #### `tabBarIcon`
 
-React Element or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in tab bar.
+React Element or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node to display in tab bar.
 
 #### `tabBarColor`
 
-Color for the tab bar when the tab corresponding to the screen is active.
+Color for the tab bar when the tab corresponding to the screen is active. Used for the ripple effect. This is only supported when `shifting` is `true`.
 
 #### `tabBarLabel`
 
-Title string of a tab displayed in the tab bar or React Element or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
+Title string of a tab displayed in the tab bar or React Element or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node to display in tab bar. When undefined, scene `title` is used. To hide, see `labeled` option in the previous section.
 
 #### `tabBarAccessibilityLabel`
 
