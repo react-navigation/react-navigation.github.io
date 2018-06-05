@@ -6,6 +6,8 @@ sidebar_label: createMaterialBottomTabNavigator
 
 A material-design themed tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 
+<img src="/docs/assets/navigators/bottom-navigation.gif" style="width: 420px; max-width: 100%">
+
 To use this navigator, you need to install `react-navigation-material-bottom-tabs`
 
 ```
@@ -24,8 +26,11 @@ The route configs object is a mapping from route name to a route config.
 
 ## MaterialBottomTabNavigatorConfig
 
-* `shifting` - Whether the shifting style is used, the active tab appears wider and the inactive tabs won't have a label. By default, this is true when you have more than 3 tabs.
-* `activeTintColor` - Label and icon color of the active tab.
+* `shifting` - Whether the shifting style is used, the active tab appears wider and the inactive tabs won't have a label. By default, this is `true` when you have more than 3 tabs.
+* `labeled` - Whether to show labels in tabs. When `false`, only icons will be displayed.
+* `activeTintColor` - Custom color for icon and label in the active tab.
+* `inactiveTintColor` - Custom color for icon and label in the inactive tab.
+* `barStyle` - Style for the bottom navigation bar. You can set a bottom padding here if you have a translucent navigation bar on Android: `barStyle={{ paddingBottom: 48 }}`.
 * `initialRouteName` - The routeName for the initial tab route when first loading.
 * `order` - Array of routeNames which defines the order of the tabs.
 * `paths` - Provide a mapping of routeName to path config, which overrides the paths set in the routeConfigs.
