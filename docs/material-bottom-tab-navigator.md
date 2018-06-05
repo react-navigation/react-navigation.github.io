@@ -39,15 +39,17 @@ The route configs object is a mapping from route name to a route config.
 Example:
 
 ```js
-tabBarOptions: {
-  activeTintColor: '#e91e63',
-  labelStyle: {
-    fontSize: 12,
-  },
-  style: {
-    backgroundColor: 'blue',
-  },
-}
+export default createMaterialBottomTabNavigator({
+  Album: { screen: Album },
+  Library: { screen: Library },
+  History: { screen: History },
+  Cart: { screen: Cart },
+}, {
+  initialRouteName: 'Album',
+  activeTintColor: '#f0edf6',
+  inactiveTintColor: '#3e2465',
+  barStyle: { backgroundColor: '#694fad' },
+});
 ```
 
 ## `navigationOptions` for screens inside of the navigator
