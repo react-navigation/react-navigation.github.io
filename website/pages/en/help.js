@@ -49,13 +49,13 @@ class Help extends React.Component {
               </a>{' '}
               <translate>and be sure to fill out the issue template. If you believe there is a feature missing, please</translate>
               <a href="https://react-navigation.canny.io/feature-requests">
-                <translate>create a feature request on Canny</translate>
+                <translate> create a feature request on Canny</translate>
               </a>
               <translate>, or if you're feeling up for the task of proposing an API for the feature, </translate>
               <a href="https://github.com/react-navigation/rfcs">
                 <translate>submit a RFC!</translate>
               </a>
-              <translate>If you just need some help, try joining us in the</translate>
+              <translate> If you just need some help, try joining us in the</translate>
               <code> react-navigation </code>
               <translate>channel on</translate>
               <a href="https://discord.gg/4xEK3nD"> Discord </a>
