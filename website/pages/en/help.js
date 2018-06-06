@@ -61,7 +61,7 @@ class Help extends React.Component {
               <a href="https://discord.gg/4xEK3nD"> Discord </a>
               <translate>or</translate>
               <a href="https://stackoverflow.com/questions/tagged/react-navigation">
-                <translate>post a question to StackOverflow</translate>
+                <translate> post a question to StackOverflow</translate>
               </a>.
             </p>
             <GridBlock contents={supportLinks} layout="threeColumn" />
