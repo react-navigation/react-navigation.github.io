@@ -20,7 +20,7 @@ The route configs object is a mapping from route name to a route config.
 * `order` - Array of routeNames which defines the order of the tabs.
 * `paths` - Provide a mapping of routeName to path config, which overrides the paths set in the routeConfigs.
 * `backBehavior` - Should the back button cause a tab switch to the initial tab? If yes, set to `initialRoute`, otherwise `none`. Defaults to `initialRoute` behavior.
-* `tabBarComponent` - Optional, override component to use as the tab bar.
+* `tabBarComponent` - Optional, override component to use as the tab bar. You need to import `BottomTabBar` from `react-navigation-tabs` in order to receive the passing `props`.
 * `tabBarOptions` - An object with the following properties:
   * `activeTintColor` - Label and icon color of the active tab.
   * `activeBackgroundColor` - Background color of the active tab.
