@@ -38,17 +38,19 @@ The most commonly used pattern for giving a header button access to a function o
 ```js
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const params = navigation.state.params || {};
-
     return {
       headerTitle: <LogoTitle />,
       headerRight: (
-        <Button onPress={params.increaseCount} title="+1" color="#fff" />
+        <Button
+          onPress={navigation.getParam('increaseCount')}
+          title="+1"
+          color="#fff"
+        />
       ),
     };
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.navigation.setParams({ increaseCount: this._increaseCount });
   }
 
@@ -66,7 +68,7 @@ class HomeScreen extends React.Component {
 
 <a href="https://snack.expo.io/@react-navigation/header-interacting-with-component-instance" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-> React Navigation doesn't guarantee that your screen component will begin mounting before the header for the screen is rendered, and because the `increaseCount` param is set in `componentWillMount`, we may not have it available to us in `navigationOptions`, which is why we include the `|| {}` when grabbing the params (there may not be any). We know this is an awkward API and we do plan on improving it!
+> React Navigation doesn't guarantee that your screen component will be mounted before the header. Because the `increaseCount` param is set in `componentDidMount`, we may not have it available to us in `navigationOptions`. This usually will not be a problem because `onPress` for `Button` and `Touchable` components will do nothing if the callback is null. If you have your own custom component here, you should make sure it behaves as expected with `null` for its press handler prop.
 
 > As an alternative to `setParams`, you could use a state management library (such as Redux or MobX) and communicate between the header and the screen in the same way you would with two distinct components.
 
