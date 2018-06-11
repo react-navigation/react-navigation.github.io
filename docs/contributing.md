@@ -119,7 +119,7 @@ yarn install
 
 ### Code Review Guidelines
 
-Look around. Match the style of the reset of the codebase. This project uses ESLint to ensure consistency throughout the project. You can check your project by running
+Look around. Match the style of the rest of the codebase. This project uses ESLint to ensure consistency throughout the project. You can check your project by running
 
 ```bash
 yarn run eslint
@@ -136,7 +136,7 @@ yarn install
 yarn start
 ```
 
-You will be show a QR code to scan in the Expo app. You can get Expo [here](https://docs.expo.io/versions/latest/index.html) if you don't have it yet.
+You will be shown a QR code to scan in the Expo app. You can get Expo [here](https://docs.expo.io/versions/latest/index.html) if you don't have it yet.
 
 All examples:
 
