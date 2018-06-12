@@ -4,11 +4,9 @@ title: Redux integration
 sidebar_label: Redux integration
 ---
 
-Some folks like to have their navigation state stored in the same place as the rest of their application state. Using Redux to handle your state enables you to write custom actions that manipulate the navigation state directly, to be able to dispatch navigation actions from anywhere (sometimes in a "thunk" or "saga"), and to persist the navigation state in the same way you would other Redux state (your mileage may vary on this). You can read more about other use cases in the replies to [this tweet](https://twitter.com/satya164/status/952291726521024512).
+Some folks like to have their navigation state stored in the same place as the rest of their application state. *Think twice before you consider doing this, there is an incredibly good chance that you do not need to do this!*. Storing your React Navigation state in your own Redux store is likely to give you a very difficult time if you don't know what you're doing, and support for Redux integration is being depreacted.
 
-## Warning!
-
-*You probably do not need to do this!* Storing your React Navigation state in your own Redux store is likely to give you a very difficult time if you don't know what you're doing. You lose out on some performance optimizations that React Navigation can do for you, for example. Please do not integrate your state into Redux without first checking if you can do what you need to do without it!
+**In the next major version of React Navigation, to be released in Fall 2018, we will no longer provide any information about how to integrate with Redux and it may cease to work**. It may continue to work either by coincidence or will of the community, but it will not be tested against or considered when making any design decisions for the library.
 
 ## Overview
 
@@ -21,6 +19,8 @@ Some folks like to have their navigation state stored in the same place as the r
 4. A middleware is needed so that any events that mutate the navigation state properly trigger the event listeners. To properly trigger the event listeners with the initial state, a call to `initializeListeners` is also necessary.
 
 ## Step-by-step guide
+
+The following steps apply to `react-navigation@^2.3.0` and `react-navigation-redux-helpers@^2.0.0-beta`.
 
 First, you need to add the `react-navigation-redux-helpers` package to your project.
 
@@ -70,17 +70,18 @@ const middleware = createReactNavigationReduxMiddleware(
 const navigationPropConstructor = createNavigationPropConstructor("root");
 
 class App extends React.Component {
-
   componentDidMount() {
     initializeListeners("root", this.props.nav);
   }
 
   render() {
-    const navigation = navigationPropConstructor(
+    this._navigation = navigationPropConstructor(
       this.props.dispatch,
       this.props.nav,
+      AppNavigator.router,
+      () => this._navigation
     );
-    return <AppNavigator navigation={navigation} />;
+    return <AppNavigator navigation={this._navigation} />;
   }
 
 }
