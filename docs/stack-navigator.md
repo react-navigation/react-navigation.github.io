@@ -95,11 +95,48 @@ React Element or Component to display custom image in header's back button. When
 
 #### `headerBackTitle`
 
-Title string used by the back button on iOS, or `null` to disable label. Defaults to the previous scene's `headerTitle`.
+Title string used by the back button on iOS, or `null` to disable label. Defaults to the previous scene's `headerTitle`. `headerBackTitle` has to be defined in the origin screen, not in the destination screen. For instance, when you have a transition A to B and you want to disable the `headerBackTitle` on `B`:
+
+```js
+StackNavigator({
+  A: {
+    screen: AScreen,
+    navigationOptions: () => ({
+      title: `A`,
+      headerBackTitle: null
+    }),
+  },
+  B: {
+    screen: BScreen,
+    navigationOptions: () => ({
+      title: `B`,
+    }),
+  }
+});
+```
 
 #### `headerTruncatedBackTitle`
 
-Title string used by the back button when `headerBackTitle` doesn't fit on the screen. `"Back"` by default.
+Title string used by the back button when `headerBackTitle` doesn't fit on the screen. `"Back"` by default. `headerTruncatedBackTitle` has to be defined in the origin screen, not in the destination screen. For instance, when you have a transition A to B and you want to truncate the label on `B`:
+
+```js
+StackNavigator({
+  A: {
+    screen: AScreen,
+    navigationOptions: () => ({
+      title: `A`,
+      headerBackTitle: 'A much too long text for back button from B to A',
+      headerTruncatedBackTitle: `to A`
+    }),
+  },
+  B: {
+    screen: BScreen,
+    navigationOptions: () => ({
+      title: `B`,
+    }),
+  }
+});
+```
 
 #### `headerRight`
 
