@@ -10,7 +10,7 @@ Some folks like to have their navigation state stored in the same place as the r
 
 ## Overview
 
-1. To handle your app's navigation state in Redux, you can pass your own [`navigation`](navigation-prop.html) prop to a navigator. `react-navigation-redux-helpers` handles this for your behind the scenes with a "higher-order component" called `reduxifyNavigator`. You pass in your root navigator component to the `reduxifyNavigator` function, and it returns a new component that takes your navigation `state` and `dispatch` function as props.
+1. To handle your app's navigation state in Redux, you can pass your own [`navigation`](navigation-prop.html) prop to a navigator. `react-navigation-redux-helpers` handles this for you behind the scenes with a "higher-order component" called `reduxifyNavigator`. You pass in your root navigator component to the `reduxifyNavigator` function, and it returns a new component that takes your navigation `state` and `dispatch` function as props.
 
 2. A middleware is needed so that any events that mutate the navigation state properly trigger React Navigation's event listeners.
 
