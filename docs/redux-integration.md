@@ -12,13 +12,11 @@ If your only reason for doing this is that you want to be able to perform naviga
 
 ## Overview
 
-1. To handle your app's navigation state in Redux, you can pass your own [`navigation`](navigation-prop.html) prop to a navigator. This `navigation` prop is an object that must contain the navigation [`state`](navigation-prop.html#state-the-screen-s-current-state-route), [`dispatch`](navigation-prop.html#dispatch-send-an-action-to-the-router), and `addListener` properties.
+1. To handle your app's navigation state in Redux, you can pass your own [`navigation`](navigation-prop.html) prop to a navigator. `react-navigation-redux-helpers` handles this for you behind the scenes with a "higher-order component" called `reduxifyNavigator`. You pass in your root navigator component to the `reduxifyNavigator` function, and it returns a new component that takes your navigation `state` and `dispatch` function as props.
 
-2. The aforementioned navigation `state` will need to be kept updated using React Navigation's navigation reducer. You will call this reducer from your Redux master reducer.
+2. A middleware is needed so that any events that mutate the navigation state properly trigger React Navigation's event listeners.
 
-3. React Navigation's `dispatch` will just be Redux's default `dispatch`, which you pass in to React Navigation as part of the `navigation` prop. As such, you will be able to dispatch normal Redux actions using `this.props.navigation.dispatch(ACTION)`.
-
-4. A middleware is needed so that any events that mutate the navigation state properly trigger the event listeners. To properly trigger the event listeners with the initial state, a call to `initializeListeners` is also necessary.
+3. The navigation state inside Redux will need to be kept updated using React Navigation's navigation reducer. You will call this reducer from your Redux master reducer.
 
 ## Step-by-step guide
 
@@ -48,10 +46,9 @@ import {
   combineReducers,
 } from 'redux';
 import {
-  createNavigationPropConstructor,       // handles #1 above
-  createNavigationReducer,               // handles #2 above
-  createReactNavigationReduxMiddleware,  // handles #4 above
-  initializeListeners,                   // handles #4 above
+  reduxifyNavigator,
+  createReactNavigationReduxMiddleware,
+  createNavigationReducer,
 } from 'react-navigation-redux-helpers';
 import { Provider, connect } from 'react-redux';
 import React from 'react';
@@ -64,34 +61,16 @@ const appReducer = combineReducers({
   ...
 });
 
-// Note: createReactNavigationReduxMiddleware must be run before createNavigationPropConstructor
+// Note: createReactNavigationReduxMiddleware must be run before reduxifyNavigator
 const middleware = createReactNavigationReduxMiddleware(
   "root",
   state => state.nav,
 );
-const navigationPropConstructor = createNavigationPropConstructor("root");
 
-class App extends React.Component {
-  componentDidMount() {
-    initializeListeners("root", this.props.nav);
-  }
-
-  render() {
-    this._navigation = navigationPropConstructor(
-      this.props.dispatch,
-      this.props.nav,
-      AppNavigator.router,
-      () => this._navigation
-    );
-    return <AppNavigator navigation={this._navigation} />;
-  }
-
-}
-
+const App = reduxifyNavigator(AppNavigator, "root");
 const mapStateToProps = (state) => ({
-  nav: state.nav,
+  state: state.nav,
 });
-
 const AppWithNavigationState = connect(mapStateToProps)(App);
 
 const store = createStore(
