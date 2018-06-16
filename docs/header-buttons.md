@@ -42,7 +42,7 @@ class HomeScreen extends React.Component {
       headerTitle: <LogoTitle />,
       headerRight: (
         <Button
-          onPress={navigation.getParam('increaseCount')}
+          onPress={async () => await navigation.getParam('increaseCount')}
           title="+1"
           color="#fff"
         />
