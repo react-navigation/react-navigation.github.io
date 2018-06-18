@@ -68,7 +68,7 @@ Color for the tab bar when the tab corresponding to the screen is active. Used f
 
 #### `tabBarLabel`
 
-Title string of a tab displayed in the tab bar or React Element or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node to display in tab bar. When undefined, scene `title` is used. To hide, see `labeled` option in the previous section.
+Title string of a tab displayed in the tab bar. When undefined, scene `title` is used. To hide, see `labeled` option in the previous section.
 
 #### `tabBarAccessibilityLabel`
 
