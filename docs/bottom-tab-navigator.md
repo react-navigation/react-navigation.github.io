@@ -48,6 +48,25 @@ tabBarOptions: {
 }
 ```
 
+If you want to customize the `tabBarComponent`:
+
+```js
+import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
+
+const TabBarComponent = (props) => (<BottomTabBar {...props} />);
+
+const TabScreens = createBottomTabNavigator(
+  {
+    tabBarComponent: props =>
+      <TabBarComponent
+        {...props}
+        style={{ borderTopColor: '#605F60' }}
+      />,
+  },
+);
+```
+
+
 ## `navigationOptions` for screens inside of the navigator
 
 #### `title`
