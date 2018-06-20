@@ -35,7 +35,7 @@ export default createSwitchNavigator(
   }
 );
 ```
-<a href="https://snack.expo.io/@react-navigation/auth-flow" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/auth-flow-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 You may not be familiar with `SwitchNavigator` yet. The purpose of `SwitchNavigator` is to only ever show one screen at a time. By default, it does not handle back actions and it resets routes to their default state when you switch away. This is the exact behavior that we want from the authentication flow: when users sign in, we want to throw away the state of the authentication flow and unmount all of the screens, and when we press the hardware back button we expect to not be able to go back to the authentication flow. We switch between routes in the `SwitchNavigator` by using the `navigate` action. You can read more about the `SwitchNavigator` in the [API reference](switch-navigator.html).
 
@@ -79,7 +79,7 @@ class AuthLoadingScreen extends React.Component {
   }
 }
 ```
-<a href="https://snack.expo.io/@react-navigation/auth-flow" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/auth-flow-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 ## Fill in other components
 
@@ -131,6 +131,6 @@ class HomeScreen extends React.Component {
 
 // More code like OtherScreen omitted for brevity
 ```
-<a href="https://snack.expo.io/@react-navigation/auth-flow" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/auth-flow-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-That's about all there is to it. At the moment, `SwitchNavigator` doesn't support animating between screens. Let us know if this is important to you [on Canny](https://react-navigation.canny.io/feature-requests).
+That's about all there is to it. At the moment, `createSwitchNavigator` doesn't support animating between screens. Let us know if this is important to you [on Canny](https://react-navigation.canny.io/feature-requests).
