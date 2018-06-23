@@ -25,3 +25,15 @@ class MyBackButton extends React.Component {
 // navigation prop
 export default withNavigation(MyBackButton);
 ```
+
+## Notes
+
+- If you wish to use the `ref` prop on the wrapped component, you must pass the `onRef` prop instead. For example,
+
+```
+// MyBackButton.ts
+export default withNavigation(MyBackButton);
+
+// MyNavBar.ts
+<MyBackButton onRef={(elem) => this.backButton = elem} />
+```
