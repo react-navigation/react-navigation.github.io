@@ -16,7 +16,7 @@ Install the FluidTransitions package in your project:
 
 ```
 npm install react-navigation-fluid-transitions
-yarn install  react-navigation-fluid-transitions
+yarn add react-navigation-fluid-transitions
 ```
 
 ## Links
