@@ -146,7 +146,7 @@ const navReducer = (state = initialState, action) => {
 
 By using the following snippet, your nav component will be aware of the back button press actions and will correctly interact with your stack. This is really useful on Android.
 
-```javascript
+```es6
 import React from "react";
 import {
   reduxifyNavigator,
