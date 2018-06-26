@@ -146,14 +146,25 @@ const navReducer = (state = initialState, action) => {
 
 By using the following snippet, your nav component will be aware of the back button press actions and will correctly interact with your stack. This is really useful on Android.
 
-```es6
+```javascript
 import React from "react";
+import {
+  reduxifyNavigator,
+  createReactNavigationReduxMiddleware,
+  createNavigationReducer,
+} from 'react-navigation-redux-helpers';
+import {
+  createStackNavigator,
+} from 'react-navigation';
 import { BackHandler } from "react-native";
 import { NavigationActions } from "react-navigation";
 
 /* your other setup code here! this is not a runnable snippet */
 
-class ReduxNavigation extends React.Component {
+const Navigator = createStackNavigator(AppRouteConfigs);
+const AppNavigator = reduxifyNavigator(Navigator, "root");
+
+class  extends React.Component {
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
   }
@@ -173,8 +184,19 @@ class ReduxNavigation extends React.Component {
   };
 
   render() {
-    /* more setup code here! this is not a runnable snippet */ 
-    return <AppNavigator navigation={navigation} />;
+    const { dispatch, nav } = this.props;
+    return <AppNavigator
+      state={nav}
+      dispatch={dispatch}
+      /* screenProps={} can be added optionally */
+    />;
   }
 }
+
+const mapStateToProps = (state) => ({
+  nav: state.nav,
+  /* other props */
+});
+
+export default connect(mapStateToProps)(ReduxNavigation);
 ```
