@@ -188,8 +188,9 @@ const SettingsStack = createStackNavigator({
 
 export default createBottomTabNavigator(
   {
-    Home: HomeStack,
-    Settings: SettingsStack,
+    /* The route names of the StackNavigator and the TabNavigator must be different */
+    HomeTab: HomeStack,
+    SettingsTab: SettingsStack,
   },
   {
     /* Other configuration remains unchanged */
