@@ -19,7 +19,7 @@ class Help extends React.Component {
     const supportLinks = [
       {
         content:
-          <translate>Learn more using the [documentation on this site.](getting-started.html) and [reading the API reference](/content/docs/api-reference.html).</translate>,
+          <translate>Learn more using the [documentation on this site](getting-started.html) and [reading the API reference](/content/docs/api-reference.html).</translate>,
         title: <translate>Browse Docs and API</translate>,
       },
       {
@@ -56,7 +56,7 @@ class Help extends React.Component {
                 <translate>submit a RFC!</translate>
               </a>{' '}
               <translate> If you just need some help, try joining us in the</translate>
-              <code> react-navigation </code>
+              <code>react-navigation</code>
               <translate>channel on</translate>
               <a href="https://discord.gg/4xEK3nD"> Discord </a>
               <translate>or</translate>{' '}
