@@ -56,7 +56,7 @@ class Help extends React.Component {
                 <translate>submit a RFC!</translate>
               </a>{' '}
               <translate> If you just need some help, try joining us in the</translate>
-              <code>react-navigation</code>
+              {' '}<code>react-navigation</code>{' '}
               <translate>channel on</translate>
               <a href="https://discord.gg/4xEK3nD"> Discord </a>
               <translate>or</translate>{' '}
