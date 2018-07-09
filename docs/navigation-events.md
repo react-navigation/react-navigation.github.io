@@ -12,7 +12,7 @@ sidebar_label: NavigationEvents
 * `onWillFocus` - event listener
 * `onDidFocus` - event listener
 * `onWillBlur` - event listener
-* `onDidBlur`: event listener
+* `onDidBlur` - event listener
 
 The event listener is the same as the imperative [`navigation.addListener(...)`](navigation-prop.html#addlistener-subscribe-to-updates-to-navigation-lifecycle) API.
 
