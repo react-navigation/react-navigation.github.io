@@ -138,6 +138,8 @@ The JSON payload:
 };
 ```
 
+You can also subscribe to navigation events declaratively with the [`<NavigationEvents/>`]((navigation-events.html)) component.
+
 ### `isFocused` - Query the focused state of the screen
 
 Returns `true` if the screen is focused and `false` otherwise.
