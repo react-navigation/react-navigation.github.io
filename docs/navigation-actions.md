@@ -21,7 +21,7 @@ The action creator functions define `toString()` to return the action type, whic
 
 ### Navigate
 
-The `Navigate` action will update the current state with the result of a `Navigate` action.
+The `navigate` action will update the current state with the result of a `Navigate` action.
 
 * `routeName` - _String_ - Required - A destination routeName that has been registered somewhere in the app's router
 * `params` - _Object_ - Optional - Params to merge into the destination route
@@ -42,7 +42,7 @@ const navigateAction = NavigationActions.navigate({
 this.props.navigation.dispatch(navigateAction);
 ```
 
-### Back
+### back
 
 Go back to previous screen and close current screen. `back` action creator takes in one optional parameter:
 
@@ -57,7 +57,7 @@ const backAction = NavigationActions.back({
 this.props.navigation.dispatch(backAction);
 ```
 
-### SetParams
+### setParams
 
 When dispatching `SetParams`, the router will produce a new state that has changed the params of a particular route, as identified by the key
 
