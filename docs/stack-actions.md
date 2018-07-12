@@ -13,9 +13,9 @@ The following actions are supported:
 * [Pop](#pop) - Navigate back to previous routes
 * [PopToTop](#poptotop) - Navigate to the top route of the stack, dismissing all other routes
 
-### Reset
+### reset
 
-The `Reset` action wipes the whole navigation state and replaces it with the result of several actions.
+The `reset` action wipes the whole navigation state and replaces it with the result of several actions.
 
 * `index` - _number_ - required - Index of the active route on `routes` array in navigation `state`.
 * `actions` - _array_ - required - Array of Navigation Actions that will replace the navigation state.
@@ -51,9 +51,9 @@ const resetAction = StackActions.reset({
 this.props.navigation.dispatch(resetAction);
 ```
 
-### Replace
+### replace
 
-The `Replace` action replaces the route at the given key with another route.
+The `replace` action replaces the route at the given key with another route.
 
 * `key` - _string_ - required - Key of the route to replace.
 * `newKey` - _string_ - Key to use for the replacement route. Generated automatically if not provided.
@@ -62,9 +62,9 @@ The `Replace` action replaces the route at the given key with another route.
 * `action` - _object_ - Optional sub-action.
 * `immediate`* - _boolean_ - *Currently has no effect, this is a placeholder for when stack navigator supports animated replace (it currently does not).
 
-### Push
+### push
 
-The `Push` action adds a route on top of the stack and navigates forward to it. This differs from `navigate` in that `navigate` will pop back to earlier in the stack if a component is already mounted there. `Push` will always add on top, so a component can be mounted multiple times.
+The `push` action adds a route on top of the stack and navigates forward to it. This differs from `navigate` in that `navigate` will pop back to earlier in the stack if a component is already mounted there. `push` will always add on top, so a component can be mounted multiple times.
 
 * `routeName` - _string_ - `routeName` to push onto the stack.
 * `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `this.props.navigation.state.params`).
@@ -83,9 +83,9 @@ const pushAction = StackActions.push({
 this.props.navigation.dispatch(pushAction);
 ```
 
-### Pop
+### pop
 
-The `Pop` action takes you back to a previous screen in the stack. The `n` param allows you to specify how many screens to pop back by.
+The `pop` action takes you back to a previous screen in the stack. The `n` param allows you to specify how many screens to pop back by.
 
 * `n` - _number_ - The number of screens to pop back by.
 
@@ -99,9 +99,9 @@ const popAction = StackActions.pop({
 this.props.navigation.dispatch(popAction);
 ```
 
-### PopToTop
+### popToTop
 
-The `PopToTop` action takes you back to the first screen in the stack, dismissing all the others. It's functionally identical to `StackActions.pop({n: currentIndex})`.
+The `popToTop` action takes you back to the first screen in the stack, dismissing all the others. It's functionally identical to `StackActions.pop({n: currentIndex})`.
 
 ```js
 import { StackActions } from 'react-navigation';
