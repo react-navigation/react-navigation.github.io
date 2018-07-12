@@ -19,9 +19,9 @@ For actions specific to a StackNavigator, see [StackActions](stack-actions.html)
 
 The action creator functions define `toString()` to return the action type, which enables easy usage with third-party Redux libraries, including redux-actions and redux-saga.
 
-### Navigate
+### navigate
 
-The `navigate` action will update the current state with the result of a `Navigate` action.
+The `navigate` action will update the current state with the result of a `navigate` action.
 
 * `routeName` - _String_ - Required - A destination routeName that has been registered somewhere in the app's router
 * `params` - _Object_ - Optional - Params to merge into the destination route
@@ -59,7 +59,7 @@ this.props.navigation.dispatch(backAction);
 
 ### setParams
 
-When dispatching `SetParams`, the router will produce a new state that has changed the params of a particular route, as identified by the key
+When dispatching `setParams`, the router will produce a new state that has changed the params of a particular route, as identified by the key
 
 * `params` - _object_ - required - New params to be merged into existing route params
 * `key` - _string_ - required - Route key that should get the new params
