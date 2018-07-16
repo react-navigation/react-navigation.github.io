@@ -37,7 +37,7 @@
       "navigation-views",
       "transitioner"
     ],
-    "Community Navigators": [      
+    "Community Navigators": [
       "community-fluidtransitions"
     ],
     "Meta": ["pitch", "alternatives", "contributing"]
@@ -56,7 +56,8 @@
       "material-bottom-tab-navigator",
       "material-top-tab-navigator",
       "with-navigation",
-      "with-navigation-focus"
+      "with-navigation-focus",
+      "navigation-events"
     ]
   }
 }
