@@ -8,7 +8,7 @@ const users = [
 ];
 
 const siteConfig = {
-  title: 'React Navigation (v2)',
+  title: 'React Navigation',
   tagline: 'Routing and navigation for your React Native apps',
   url: process.env.STABLE_RELEASE
     ? 'https://reactnavigation.org'
