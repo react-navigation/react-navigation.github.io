@@ -55,7 +55,7 @@ this.props.navigation.dispatch(resetAction);
 
 The `replace` action replaces the route at the given key with another route.
 
-* `key` - _string_ - required - Key of the route to replace.
+* `key` - _string_ - Key of the route to replace. If this is not defined, the most recent route will be replaced.
 * `newKey` - _string_ - Key to use for the replacement route. Generated automatically if not provided.
 * `routeName` - _string_ - `routeName` to use for replacement route.
 * `params` - _object_ - Parameters to pass in to the replacement route.
