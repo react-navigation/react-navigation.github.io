@@ -59,9 +59,13 @@ Visual options:
   * `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
   * `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
   * `none` - No header will be rendered.
+* `headerBackTitleVisible` - A reasonable defualt is supplied for whether the back button title should be visible or not, but if you want to override that you can use `true` or `false` in this option.
 * `headerTransitionPreset` - Specifies how the header should transition from one screen to another when `headerMode: float` is enabled.
   * `fade-in-place` - Header components cross-fade without moving, similar to the Twitter, Instagram, and Facebook app for iOS. This is the default value.
   * `uikit` - An approximation of the default behavior for iOS.
+* `headerLayoutPreset` - Specifies how to lay out the header components.
+  * `left` - Anchor the title to the left, near the back button or other left component. This is the default on Android. When used on iOS, the header back title is hidden. Content from the left component will overflow underneath the title, if you need to adjust this you can use `headerLeftContainerStyle` and `headerTitleContainerStyle`. Additionally, this alignment is incompatible with `headerTransitionPreset: 'ui-kit'`.
+  * `center` - Center the title, this is the default on iOS.
 * `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
 * `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
 https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js)). Provided function will be passed the following arguments: 
@@ -161,6 +165,18 @@ Style object for the title component
 #### `headerBackTitleStyle`
 
 Style object for the back title
+
+#### `headerLeftContainerStyle`
+
+Customize the style for the container of the `headerLeft` component, for example to add padding.
+
+#### `headerRightContainerStyle`
+
+Customize the style for the container of the `headerRight` component, for example to add padding.
+
+#### `headerTitleContainerStyle`
+
+Customize the style for the container of the `headerTitle` component, for example to add padding.
 
 #### `headerTintColor`
 
