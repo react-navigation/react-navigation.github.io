@@ -85,7 +85,7 @@ We also know that `createStackNavigator` and related functions return React comp
 
 ## **Caution**: the navigationOptions property vs configuration
 
-Navigators are initialized with `createNavigator(routeConfig, navigatorConfig)`. Inside of `navigatorConfig` we can add a `navigationOptions` property. These `navigationOptions` are the default options for screens within that navigator ([read more about sharing common navigationOptions](headers.html#sharing-common-navigationoptions-across-screens)), they do not refer to the `navigationOptions` for that navigator &mdash; as we have seen above, we set the `navigationOptions` property directly on the navigator for that use case.
+Navigators are initialized with `create*Navigator(routeConfig, navigatorConfig)`. Inside of `navigatorConfig` we can add a `navigationOptions` property. These `navigationOptions` are the default options for screens within that navigator ([read more about sharing common navigationOptions](headers.html#sharing-common-navigationoptions-across-screens)), they do not refer to the `navigationOptions` for that navigator &mdash; as we have seen above, we set the `navigationOptions` property directly on the navigator for that use case.
 
 ```js
 const HomeStack = createStackNavigator({ A }, {
