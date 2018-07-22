@@ -130,7 +130,7 @@ To make jest tests work with your React Navigation app, you need to change the j
 If you want to replace `createNavigationReducer` reducer creator this is how you would do it yourself:
 
 ```es6
-const AppNavigator = StackNavigator(AppRouteConfigs);
+const AppNavigator = createStackNavigator(AppRouteConfigs);
 
 const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Login'));
 
