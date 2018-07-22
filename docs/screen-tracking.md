@@ -49,7 +49,7 @@ export default () => (
 ## Screen tracking with Redux
 
 When using Redux, we can write a Redux middleware to track the screen. For this purpose,
-we will reuse `getCurrentRouteName` from the previous section.
+we will reuse `getActiveRouteName` from the previous section.
 
 ```js
 import { NavigationActions } from 'react-navigation';
@@ -65,9 +65,9 @@ const screenTracking = ({ getState }) => next => (action) => {
     return next(action);
   }
 
-  const currentScreen = getCurrentRouteName(getState().navigation);
+  const currentScreen = getActiveRouteName(getState().navigation);
   const result = next(action);
-  const nextScreen = getCurrentRouteName(getState().navigation);
+  const nextScreen = getActiveRouteName(getState().navigation);
   if (nextScreen !== currentScreen) {
     // the line below uses the Google Analytics tracker
     // change the tracker here to use other Mobile analytics SDK.
