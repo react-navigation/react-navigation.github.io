@@ -59,7 +59,7 @@ Visual options:
   * `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
   * `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
   * `none` - No header will be rendered.
-* `headerBackTitleVisible` - A reasonable defualt is supplied for whether the back button title should be visible or not, but if you want to override that you can use `true` or `false` in this option.
+* `headerBackTitleVisible` - A reasonable default is supplied for whether the back button title should be visible or not, but if you want to override that you can use `true` or `false` in this option.
 * `headerTransitionPreset` - Specifies how the header should transition from one screen to another when `headerMode: float` is enabled.
   * `fade-in-place` - Header components cross-fade without moving, similar to the Twitter, Instagram, and Facebook app for iOS. This is the default value.
   * `uikit` - An approximation of the default behavior for iOS.
