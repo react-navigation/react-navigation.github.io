@@ -20,4 +20,4 @@ Navigation views are controlled React components that can present the current na
 
 ## [Transitioner](transitioner.html)
 
-`Transitioner` manages the animations during the transition and can be used to build fully custom navigation views. It is used inside the `CardStack` view. [Learn more about Transitioner here.](transitioner.html)
+`Transitioner` manages the animations during the transition and can be used to build fully custom navigation views. It is used inside the `StackView` view. [Learn more about Transitioner here.](transitioner.html)
