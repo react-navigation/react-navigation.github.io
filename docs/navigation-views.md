@@ -10,11 +10,12 @@ Navigation views are controlled React components that can present the current na
 
 ## Built in Views
 
-- [CardStack](https://github.com/react-community/react-navigation/blob/master/src/views/CardStack/CardStack.js) - Present a stack that looks suitable on any platform
-    + [Card](https://github.com/react-community/react-navigation/blob/master/src/views/CardStack/Card.js) - Present one card from the card stack, with gestures
+- [StackView](https://github.com/react-navigation/react-navigation/blob/master/src/views/StackView/StackView.js) - Present a stack that looks suitable on any platform
+    + [StackViewCard](https://github.com/react-navigation/react-navigation/blob/master/src/views/StackView/StackViewCard.js) - Present one card from the card stack, with gestures
     + [Header](https://github.com/react-community/react-navigation/blob/master/src/views/Header/Header.js) - The header view for the card stack
-- [Tabs](https://github.com/react-community/react-navigation/blob/master/src/views/TabView/TabView.js) - A configurable tab switcher / pager
-- [Drawer](https://github.com/react-community/react-navigation/blob/master/src/views/Drawer/DrawerView.js) - A view with a drawer that slides from the left
+- [SwitchView](https://github.com/react-navigation/react-navigation/blob/master/src/views/SwitchView/SwitchView.js) - A navigator that only ever show one screen at a time, useful for authentication flows.
+- [Tabs](https://github.com/react-navigation/react-navigation-tabs) - A configurable tab switcher / pager
+- [Drawer](https://github.com/react-navigation/react-navigation-drawer) - A view with a drawer that slides from the left
 
 
 ## [Transitioner](transitioner.html)
