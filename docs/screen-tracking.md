@@ -95,40 +95,6 @@ const store = createStore(
     ),
 );
 ```
-## Screen tracking for expo based application
-```js
-import { Analytics, ScreenHit } from 'expo-analytics';
+#### Analytics for expo based application
+[Expo Analytics](https://github.com/ryanvanderpol/expo-analytics#readme)
 
-const analytics = new Analytics('UA-XXXXXX-Y');
-
-// gets the current screen from navigation state
-function getActiveRouteName(navigationState) {
-  if (!navigationState) {
-    return null;
-  }
-  const route = navigationState.routes[navigationState.index];
-  // dive into nested navigators
-  if (route.routes) {
-    return getActiveRouteName(route);
-  }
-  return route.routeName;
-}
-
-const AppNavigator = createStackNavigator(AppRouteConfigs);
-
-export default () => (
-  <AppNavigator
-    onNavigationStateChange={(prevState, currentState) => {
-      const currentScreen = getActiveRouteName(currentState);
-      const prevScreen = getActiveRouteName(prevState);
-
-      if (prevScreen !== currentScreen) {
-      // the line below uses the Google Analytics
-        analytics.hit(new ScreenHit(currentScreen))
-                  .then(() => console.log("success"))
-                  .catch(e => console.log(e.message));
-      }
-    }}
-  />
-);
-```
