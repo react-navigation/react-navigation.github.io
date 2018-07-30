@@ -4,15 +4,15 @@ title: iPhone X support
 sidebar_label: iPhone X support
 ---
 
-By default React Navigation aids in ensuring your application displays correctly on the iPhoneX. It does so by using `SafeAreaView` inside of UI elements that may interact with the sensor cluster ("the notch") or the home activity indicator.
+By default, React Navigation aids in ensuring your application displays correctly on the iPhoneX. It does so by using `SafeAreaView` inside of UI elements that may interact with the sensor cluster ("the notch") or the home activity indicator.
 
 ## Hidden/Custom Navigation Bar or Tab Bar
 
 ![Default React Navigation Behavior](/docs/assets/iphoneX/01-iphonex-default.png)
 
-However, if you're overriding the default navigation bar it's important to ensure your UI doesn't interfere with either of those hardware elements.
+However, if you're overriding the default navigation bar, it's important to ensure your UI doesn't interfere with either of those hardware elements.
 
-For example, if I render nothing for the `header` or `tabBarComponent` nothing renders
+For example, if I render nothing for the `header` or `tabBarComponent`, nothing renders
 
 ```javascript
 const Tabs = createBottomTabNavigator({
@@ -71,7 +71,7 @@ A [Snack](https://snack.expo.io/BJ6-M8pEG) is available with the code used in th
 
 ## Use `forceInset` to get more control
 
-In some cases you might need more control which paddings are applied. For example you can remove bottom padding by passing `forceInset` prop to `SafeAreaView`.
+In some cases you might need more control over which paddings are applied. For example, you can remove bottom padding by passing `forceInset` prop to `SafeAreaView`.
 
 ```javascript
 <SafeAreaView style={styles.container} forceInset={{ bottom: 'never' }}>
