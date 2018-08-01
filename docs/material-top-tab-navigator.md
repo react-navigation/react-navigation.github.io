@@ -20,6 +20,7 @@ The route configs object is a mapping from route name to a route config.
 * `order` - Array of routeNames which defines the order of the tabs.
 * `paths` - Provide a mapping of routeName to path config, which overrides the paths set in the routeConfigs.
 * `backBehavior` - Should the back button cause a tab switch to the initial tab? If yes, set to `initialRoute`, otherwise `none`. Defaults to `initialRoute` behavior.
+* `tabBarPosition` - Position of the tab bar, can be `'top'` or `'bottom'`, default is `top`.
 * `swipeEnabled` - Whether to allow swiping between tabs.
 * `animationEnabled` - Whether to animate when changing tabs.
 * `initialLayout` - Optional object containing the initial `height` and `width`, can be passed to prevent the one frame delay in [react-native-tab-view](https://github.com/react-native-community/react-native-tab-view#avoid-one-frame-delay) rendering.
