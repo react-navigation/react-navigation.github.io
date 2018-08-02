@@ -20,6 +20,7 @@ The route configs object is a mapping from route name to a route config.
 * `order` - Array of routeNames which defines the order of the tabs.
 * `paths` - Provide a mapping of routeName to path config, which overrides the paths set in the routeConfigs.
 * `backBehavior` - Should the back button cause a tab switch to the initial tab? If yes, set to `initialRoute`, otherwise `none`. Defaults to `initialRoute` behavior.
+* `tabBarPosition` - Position of the tab bar, can be `'top'` or `'bottom'`, default is `top`.
 * `swipeEnabled` - Whether to allow swiping between tabs.
 * `animationEnabled` - Whether to animate when changing tabs.
 * `lazy` - Defaults to `false`. If `true`, tabs are rendered only when they are made active or on peek swipe. When `false`, all tabs are rendered immediately.
