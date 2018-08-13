@@ -94,12 +94,16 @@ To configure the external linking in Android, you can create a new intent in the
 In `SimpleApp/android/app/src/main/AndroidManifest.xml`, add the new `intent-filter` inside the `MainActivity` entry with a `VIEW` type action:
 
 ```
-<intent-filter>
-    <action android:name="android.intent.action.VIEW" />
-    <category android:name="android.intent.category.DEFAULT" />
-    <category android:name="android.intent.category.BROWSABLE" />
-    <data android:scheme="mychat" android:host="mychat" />
-</intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="mychat" android:host="mychat" />            
+        </intent-filter>
 ```
 
 Now, re-install the app:
