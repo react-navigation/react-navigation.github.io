@@ -95,3 +95,6 @@ const store = createStore(
     ),
 );
 ```
+#### Analytics for expo based application
+[Expo Analytics](https://github.com/ryanvanderpol/expo-analytics#readme)
+
