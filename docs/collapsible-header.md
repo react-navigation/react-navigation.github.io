@@ -4,7 +4,7 @@ title: Collapsible header
 sidebar_label: Collapsible header
 ---
 
-react-navigation-collapsible is a library and a `High Order Component` that adjusts your navigationOptions and makes your screen collapsible. 
+react-navigation-collapsible is a library and a `Higher Order Component` that adjusts your navigationOptions and makes your screen header collapsible. 
 
 Since react-navigation's header is designed as `Animated` component. You can animate the header by passing `Animated.Value` from your `ScrollView` or `FlatList` to the header.
 
@@ -13,8 +13,9 @@ Since react-navigation's header is designed as `Animated` component. You can ani
 Install the react-navigation-collapsible package in your project:
 
 ```
-npm install react-navigation-collapsible
 yarn add react-navigation-collapsible
+# or, if you use npm:
+npm install react-navigation-collapsible
 ```
 
 ## Usage
@@ -36,8 +37,8 @@ class MyScreen extends Component {
         ...
         contentContainerStyle={{ paddingTop: paddingHeight }}
         scrollIndicatorInsets={{ top: paddingHeight }}
-        _mustAddThis={ scrollY }
-        onScroll={ onScroll } 
+        _mustAddThis={scrollY}
+        onScroll={onScroll} 
         />
     )
   }
