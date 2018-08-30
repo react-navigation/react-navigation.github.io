@@ -235,7 +235,7 @@ You can view these examples directly on your phone by visiting [our expo demo](h
 #### Modal StackNavigator with Custom Screen Transitions
 
 ```js
-const ModalNavigator =createStackNavigator(
+const ModalNavigator = createStackNavigator(
   {
     Main: { screen: Main },
     Login: { screen: Login },
