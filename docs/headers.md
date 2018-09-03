@@ -152,7 +152,7 @@ class DetailsScreen extends React.Component {
     const { params } = navigation.state;
 
     return {
-      title: params ? params.otherParam : 'A Nested Details Screen',
+      title: params && params.otherParam ? params.otherParam : 'A Nested Details Screen',
       /* These values are used instead of the shared configuration! */
       headerStyle: {
         backgroundColor: navigationOptions.headerTintColor,
