@@ -28,6 +28,7 @@ blockquote {
 
 pre code {
   background-color: #fff;
+  border-left: 4px solid #6b52ae;
 }
 
 .quote-source {
