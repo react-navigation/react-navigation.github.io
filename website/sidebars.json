@@ -38,7 +38,8 @@
       "transitioner"
     ],
     "Community Navigators": [
-      "community-fluidtransitions"
+      "community-fluidtransitions",
+      "collapsible-header"
     ],
     "Meta": ["pitch", "alternatives", "contributing"]
   },
