@@ -47,6 +47,12 @@ pre[class*='language-'] {
   border: 1px solid #dddddd;
 }
 
+/* this is to override default red color from Prism */
+.token.function,
+.token.class-name {
+  color: #393a34;
+}
+
 .token.comment,
 .token.prolog,
 .token.doctype,
