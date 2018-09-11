@@ -53,6 +53,10 @@ tabBarOptions: {
   tabStyle: {
     width: 100,
   },
+  indicatorStyle: {
+    width: 100
+    left: '12.5%' // This will center the indicator (Assuming 2 tabs) as it's position is absolute across the whole tab!
+  },
   style: {
     backgroundColor: 'blue',
   },
