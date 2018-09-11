@@ -64,7 +64,7 @@ Visual options:
   * `fade-in-place` - Header components cross-fade without moving, similar to the Twitter, Instagram, and Facebook app for iOS. This is the default value.
   * `uikit` - An approximation of the default behavior for iOS.
 * `headerLayoutPreset` - Specifies how to lay out the header components.
-  * `left` - Anchor the title to the left, near the back button or other left component. This is the default on Android. When used on iOS, the header back title is hidden. Content from the left component will overflow underneath the title, if you need to adjust this you can use `headerLeftContainerStyle` and `headerTitleContainerStyle`. Additionally, this alignment is incompatible with `headerTransitionPreset: 'ui-kit'`.
+  * `left` - Anchor the title to the left, near the back button or other left component. This is the default on Android. When used on iOS, the header back title is hidden. Content from the left component will overflow underneath the title, if you need to adjust this you can use `headerLeftContainerStyle` and `headerTitleContainerStyle`. Additionally, this alignment is incompatible with `headerTransitionPreset: 'uikit'`.
   * `center` - Center the title, this is the default on iOS.
 * `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
 * `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
