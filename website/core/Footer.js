@@ -22,61 +22,63 @@ class Footer extends React.Component {
             />
           </a>
           <div>
-            <h5><translate>Docs</translate></h5>
+            <h5>
+              Docs
+            </h5>
             <a
               href={
                 `${this.props.config.baseUrl}docs/${this.props.language}/getting-started.html`
               }>
-              <translate>Getting Started</translate>
+              Getting Started
             </a>
             <a
               href={
                 `${this.props.config.baseUrl}docs/${this.props.language}/api-reference.html`
               }>
-              <translate>API Reference</translate>
+              API Reference
             </a>
             <a
               href={
                 `${this.props.config.baseUrl}docs/${this.props.language}/custom-navigator-overview.html`
               }>
-              <translate>Building your own Navigator</translate>
+              Building your own Navigator
             </a>
             <a
               href={
                 `${this.props.config.baseUrl}docs/${this.props.language}/contributing.html`
               }>
-              <translate>Contributing</translate>
+              Contributing
             </a>
           </div>
           <div>
-            <h5><translate>Versions</translate></h5>
+            <h5>Versions</h5>
             <a href="https://reactnavigation.org/docs/getting-started.html">
-              <translate>Version 2 docs</translate>
+              Version 2 docs
             </a>
             <a href="https://v1.reactnavigation.org/docs/getting-started.html">
-              <translate>Version 1 docs</translate>
+              Version 1 docs
             </a>
           </div>
           <div>
-            <h5><translate>Support</translate></h5>
+            <h5>Support</h5>
             <a href="https://discord.gg/4xEK3nD">
-              <translate>Chat in our Discord channel</translate>
+              Chat in our Discord channel
             </a>
             <a href="https://react-navigation.canny.io/feature-requests">
-              <translate>Request a feature on Canny</translate>
+              Request a feature on Canny
             </a>
             <a href="https://github.com/react-navigation/react-navigation/issues">
-              <translate>Report a bug on Github</translate>
+              Report a bug on Github
             </a>
             <a
               href="https://stackoverflow.com/questions/tagged/react-navigation"
               target="_blank"
             >
-              <translate>Get help on Stack Overflow</translate>
+              Get help on Stack Overflow
             </a>
           </div>
           <div>
-            <h5><translate>More</translate></h5>
+            <h5>More</h5>
             {/* <a href={this.props.config.baseUrl + 'blog'}>Blog</a> */}
             <a href={this.props.config.repoUrl}>
               GitHub
