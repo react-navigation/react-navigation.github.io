@@ -13,17 +13,17 @@ This one requires a bit of understanding of React Navigation to fully grok.
 React Navigation requires that you define your routes statically, like so:
 
 ```js
-let FriendsNavigator = createDrawerNavigator({
+const FriendsNavigator = createDrawerNavigator({
   Feed: FeedScreen,
   FriendList: FriendListScreen,
 });
 
-let AuthNavigator = createStackNavigator({
+const AuthNavigator = createStackNavigator({
   SignIn: SignInScreen,
   ForgotPassword: ForgotPasswordScreen,
 });
 
-let AppNavigator = createSwitchNavigator({
+const AppNavigator = createSwitchNavigator({
   App: FriendsNavigator,
   Auth: AuthNavigator,
 });
