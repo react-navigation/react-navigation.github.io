@@ -84,7 +84,6 @@ Let's suppose that we actually *want* to add another details screen. This is pre
   title="Go to Details... again"
   onPress={() => this.props.navigation.push('Details')}
 />
-}
 ```
 
 <a href="https://snack.expo.io/@react-navigation/pushing-details-v2" target="blank" class="run-code-button">&rarr; Run this code</a>

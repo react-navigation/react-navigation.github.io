@@ -29,8 +29,8 @@ class B extends React.Component {
   // etc..
 }
 
-let HomeStack = createStackNavigator({ A });
-let SettingsStack = createStackNavigator({ B });
+const HomeStack = createStackNavigator({ A });
+const SettingsStack = createStackNavigator({ B });
 
 export default createBottomTabNavigator({
   HomeStack,
@@ -43,8 +43,8 @@ export default createBottomTabNavigator({
 As we mentioned earlier, you can only modify navigation options for a navigator from one of its screen components. `A` and `B` above are screen components in `HomeStack` and `SettingsStack` respectively, not in the tab navigator. So the result will be that the `tabBarLabel` property is not applied to the tab navigator. We can fix this though!
 
 ```js
-let HomeStack = createStackNavigator({ A });
-let SettingsStack = createStackNavigator({ B });
+const HomeStack = createStackNavigator({ A });
+const SettingsStack = createStackNavigator({ B });
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home!',
@@ -130,10 +130,10 @@ const TabNavigator = createBottomTabNavigator({
 });
 
 TabNavigator.navigationOptions = ({ navigation }) => {
-  let { routeName } = navigation.state.routes[navigation.state.index];
+  const { routeName } = navigation.state.routes[navigation.state.index];
 
   // You can do whatever you like here to pick the title based on the route name
-  let headerTitle = routeName;
+  const headerTitle = routeName;
 
   return {
     headerTitle,
