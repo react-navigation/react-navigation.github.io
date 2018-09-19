@@ -20,7 +20,7 @@ This API also requires that you install `react-native-vector-icons`! If you are 
 createMaterialBottomTabNavigator(RouteConfigs, MaterialBottomTabNavigatorConfig);
 ```
 
-This library uses the [`BottomNavigation` component frpm `react-native-paper`](https://callstack.github.io/react-native-paper/bottom-navigation.html). It doesn't include the whole `react-native-paper` library in your bundle, so you don't need to worry about it.
+This library uses the [`BottomNavigation` component from `react-native-paper`](https://callstack.github.io/react-native-paper/bottom-navigation.html). It doesn't include the whole `react-native-paper` library in your bundle, so you don't need to worry about it.
 
 ## RouteConfigs
 
