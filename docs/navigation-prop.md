@@ -6,25 +6,23 @@ sidebar_label: Navigation prop
 
 Each `screen` component in your app is provided with the `navigation` prop automatically. It looks like this:
 
-* `this.props.navigation`
-  * `navigate` - go to another screen, figures out the action it needs to take to do it
+* Navigating
+  * `navigate` - navigates to another screen
   * `goBack` - close active screen and move back in the stack
+  * `replace` - replace the current route with a new one
+  * `dispatch` - manually send a navigation action to the navigator. This is a lower level method that you generally will not need to use as methods like `navigate` and `goBack` will handle it for you.
+* Navigating with stack-based navigators like `StackNavigator`. These functions are alternatives to `navigate` and `goBack` and you can use whichever you prefer.
+  * `push` - pushes a new screen onto a stack navigator and navigates to it
+  * `pop` - pop the current screen off of the stack navigator and navigate to the previous screen
+  * `popToTop` - pop all screens except the bottom-most off of the stack navigator
+* State and lifecycle
   * `addListener` - subscribe to updates to navigation lifecycle
   * `isFocused` - function that returns `true` if the screen is focused and `false` otherwise.
   * `state` - current state/routes
   * `setParams` - make changes to route's params
   * `getParam` - get a specific param with fallback
-  * `dispatch` - send an action to router
 
-It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it.
-
-There are several additional functions on `this.props.navigation` that only if the current navigator is a stack navigator. These functions are alternatives to `navigate` and `goBack` and you can use whichever you prefer. The functions are:
-
-* `this.props.navigation`
-  * `push` - navigate forward to new route in stack
-  * `pop` - go back in the stack
-  * `popToTop` - go to the top of the stack
-  * `replace` - replace the current route with a new one
+It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically. For example, a `MyBackButton` component rendered as a child of a screen component would not have the `navigation` prop unless you explicitly passed it in from the screen as `<MyBackButton navigation={this.props.navigation}>` or have used the `withNavigation` HOC.
 
 ## Common API reference
 
