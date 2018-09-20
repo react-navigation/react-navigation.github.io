@@ -62,6 +62,20 @@ h2 p {
   color: #6b52ae;
 }
 
+article h1 {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+article h2 {
+  margin-top: 16px;
+}
+
+h1.postHeaderTitle {
+}
+
 blockquote {
   background-color: rgba(226, 232, 125, 0.1);
   border-left: 5px solid rgba(226, 232, 125, 0.3);
