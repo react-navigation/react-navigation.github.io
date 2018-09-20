@@ -13,7 +13,7 @@ Most apps should only ever render one navigator inside of a React component, and
 Here's what you might write in your code -- note that this example would be incorrect:
 
 ```javascript
-export default App extends React.Component {
+export default class App extends React.Component {
   render() {
     /* In the root component we are rendering the app navigator */
     return <AppNavigator />;

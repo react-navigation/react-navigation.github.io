@@ -4,6 +4,26 @@
 }
 
 @media only screen and (min-width: 1024px) {
+  .mainContainer {
+    background: #f9f9f9;
+    padding: 0;
+  }
+
+  .docMainWrapper .mainContainer {
+    padding: 30px 0 !important;
+  }
+
+  .toc {
+    padding: 30px 0 !important;
+  }
+
+  .toc .toggleNav ul {
+    padding: 0 !important;
+  }
+
+  .onPageNav {
+    top: 70px;
+  }
 }
 
 @media only screen and (max-width: 1023px) {
@@ -13,6 +33,33 @@
 }
 
 @media only screen and (min-width: 1500px) {
+}
+
+body {
+  background: #f9f9f9;
+}
+
+.homeContainer {
+  background: #fff;
+}
+
+h2 {
+  font-weight: normal;
+}
+
+.pluginRowBlock .button {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.postHeader h2 {
+  margin-top: 12px;
+  color: #6b52ae;
+}
+
+h2 p {
+  font-weight: normal;
+  color: #6b52ae;
 }
 
 blockquote {

@@ -15,7 +15,7 @@ const siteConfig = {
     : 'https://v2.react-navigation.org',
   baseUrl: '/',
   organizationName: process.env.STABLE_RELEASE
-    ? 'react-navigation' 
+    ? 'react-navigation'
     : 'react-navigation-v2',
   projectName: process.env.STABLE_RELEASE
     ? 'react-navigation.github.io'
@@ -41,6 +41,7 @@ const siteConfig = {
   },
   usePrism: ['jsx', 'js'],
   onPageNav: 'separate',
+  scrollToTop: true,
   scripts: ['https://buttons.github.io/buttons.js'],
   repoUrl: 'https://github.com/react-navigation/react-navigation',
   editUrl:
