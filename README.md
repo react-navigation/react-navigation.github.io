@@ -21,7 +21,7 @@
 
 *Before deploying, be sure to download the latest translations!*
 
-Only collaborators on this repository can deploy. `cd` into the website directory and run the following command from the `source` branch:
+Only collaborators on this repository can deploy. `cd` into the website directory and run the following command from the `2.x` branch:
 
 ```bash
 GIT_USER=your_github_username \
