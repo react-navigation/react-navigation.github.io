@@ -24,6 +24,14 @@
   .onPageNav {
     top: 70px;
   }
+
+  .container.paddingTop {
+    padding-top: 70px;
+  }
+
+  .container.paddingBottom {
+    padding-bottom: 70px;
+  }
 }
 
 @media only screen and (max-width: 1023px) {
@@ -50,6 +58,7 @@ h2 {
 .pluginRowBlock .button {
   margin-left: 3px;
   margin-right: 3px;
+  margin-bottom: 8px;
 }
 
 .postHeader h2 {
@@ -58,8 +67,8 @@ h2 {
 }
 
 h2 p {
-  font-weight: normal;
-  color: #6b52ae;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 article h1 {
@@ -71,6 +80,15 @@ article h1 {
 
 article h2 {
   margin-top: 16px;
+}
+
+.projectTitle {
+  font-weight: 500;
+}
+
+.projectTitle small {
+  opacity: 0.8;
+  margin-top: 0.4em;
 }
 
 h1.postHeaderTitle {
