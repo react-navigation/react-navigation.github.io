@@ -40,6 +40,7 @@ const siteConfig = {
     theme: 'github-gist',
   },
   usePrism: ['jsx', 'js'],
+  onPageNav: 'separate',
   scripts: ['https://buttons.github.io/buttons.js'],
   repoUrl: 'https://github.com/react-navigation/react-navigation',
   editUrl:

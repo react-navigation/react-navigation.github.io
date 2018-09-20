@@ -37,9 +37,9 @@
       "navigation-views",
       "transitioner"
     ],
-    "Community Navigators": [
-      "community-fluidtransitions",
-      "collapsible-header"
+    "Related Resources": [
+      "community-libraries-and-navigators",
+      "more-resources"
     ],
     "Meta": ["pitch", "alternatives", "contributing"]
   },
