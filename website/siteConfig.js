@@ -39,7 +39,7 @@ const siteConfig = {
   highlight: {
     theme: 'github-gist',
   },
-  usePrism: true,
+  usePrism: ['jsx', 'js'],
   scripts: ['https://buttons.github.io/buttons.js'],
   repoUrl: 'https://github.com/react-navigation/react-navigation',
   editUrl:
