@@ -31,6 +31,10 @@ pre code {
   border-left: 4px solid #6b52ae;
 }
 
+.navWrapper li {
+  word-wrap: normal;
+}
+
 .quote-source {
   display: block;
   text-align: right;
