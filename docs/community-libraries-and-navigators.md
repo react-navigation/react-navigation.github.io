@@ -14,18 +14,9 @@ A Shared Element Transition is the visualization of an element in one screen bei
 
 The library implements a custom navigator called `FluidNavigator` that makes all this and more possible. 
 
-### Installation
+#### Links
 
-Install the FluidTransitions package in your project:
-
-```
-npm install react-navigation-fluid-transitions
-yarn add react-navigation-fluid-transitions
-```
-
-### Links
-
-[https://github.com/fram-x/FluidTransitions](https://github.com/fram-x/FluidTransitions)
+[github.com/fram-x/FluidTransitions](https://github.com/fram-x/FluidTransitions)
 
 # Libraries
 
@@ -35,21 +26,34 @@ react-navigation-collapsible is a library and a `Higher Order Component` that ad
 
 Since react-navigation's header is designed as `Animated` component. You can animate the header by passing `Animated.Value` from your `ScrollView` or `FlatList` to the header.
 
-### Installation
-
-Install the react-navigation-collapsible package in your project:
-
-```
-yarn add react-navigation-collapsible
-# or, if you use npm:
-npm install react-navigation-collapsible
-```
-
-### Demo on Snack
-
-<a href="https://snack.expo.io/@benevbright/react-navigation-collapsible" target="blank" class="run-code-button">&rarr; Run demo</a>
-
-
-### Links
+#### Links
 
 [https://github.com/benevbright/react-navigation-collapsible](https://github.com/benevbright/react-navigation-collapsible)
+
+[Demo on Snack](https://snack.expo.io/@benevbright/react-navigation-collapsible)
+
+## react-native-screens
+
+This project aims to expose native navigation container components to React Native and React Navigation can integrate with it since version 2.14.0. Using `react-native-screens` brings several benefits, such as support for the ["reachability feature"](https://www.cnet.com/how-to/how-to-use-reachability-on-iphone-6-6-plus/) on iOS, and improved memory consumption on both platforms.
+
+#### Links
+
+[github.com/kmagiera/react-native-screens](https://github.com/kmagiera/react-native-screens)
+
+## react-navigation-header-buttons
+
+Helps you to render buttons in the navigation bar and handle the styling so you don't have to. It tries to mimic the appearance of native navbar buttons and attempts to offer a simple interface for you to interact with.
+
+#### Links
+
+[github.com/vonovak/react-navigation-header-buttons](https://github.com/vonovak/react-navigation-header-buttons)
+
+[Demo on expo](https://expo.io/@vonovak/navbar-buttons-demo)
+
+## react-navigation-props-mapper
+
+Provides simple HOCs that map react-navigation props to your screen components directly - ie. instead of `const user = this.props.navigation.getParam(activeUser, null)`, you'd write `const user = this.props.activeUser`.
+
+#### Links
+
+[github.com/vonovak/react-navigation-props-mapper](https://github.com/vonovak/react-navigation-props-mapper)
