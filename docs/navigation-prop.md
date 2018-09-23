@@ -107,8 +107,8 @@ Alternatively, as _screen A_ is the top of the stack, you can use `navigation.po
 
 React Navigation emits events to screen components that subscribe to them:
 
-* `willBlur` - the screen will be unfocused
 * `willFocus` - the screen will focus
+* `willBlur` - the screen will be unfocused
 * `didFocus` - the screen focused (if there was a transition, the transition completed)
 * `didBlur` - the screen unfocused (if there was a transition, the transition completed)
 
