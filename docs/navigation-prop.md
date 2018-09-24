@@ -177,7 +177,7 @@ class ProfileScreen extends React.Component {
 
 ### `setParams` - Make changes to route params
 
-Firing the `setParams` action allows a screen to change the params in the route, which is useful for updating the header buttons and title.
+Firing the `setParams` action allows a screen to change the params in the route, which is useful for updating the header buttons and title. `setParams` works like React's `setState` - it merges the provided params object with the current params.
 
 ```js
 class ProfileScreen extends React.Component {
