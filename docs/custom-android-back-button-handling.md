@@ -57,8 +57,4 @@ The presented approach will work well for screens that are shown in a `StackNavi
 
 ### Why not use component lifecycle methods?
 
-At first, you may be inclined to use `componentDidMount` to subscribe for the back press event and `componentWillUnmount` to unsubscribe. Reason why we do not use them is that they are not generally called when entering or leaving a screen.
-
-More specifically, consider a `StackNavigator` with screens `A` and `B`. After navigating to `A`, its `componentDidMount` is called. When pushing `B`, its `componentDidMount` is also called, but `A` remains mounted and its `componentWillUnmount` is therefore not called.
-
-Similarly, when going back from `B` to `A`, `componentWillUnmount` of `B` is called, but `componentDidMount` of `A` is not because `A` remained mounted the whole time.
+At first, you may be inclined to use `componentDidMount` to subscribe for the back press event and `componentWillUnmount` to unsubscribe. This approach will not work - learn more about this in [navigation lifecycle](navigation-lifecycle.html).
