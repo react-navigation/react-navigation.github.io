@@ -312,3 +312,31 @@ const AppNavigator = createSwitchNavigator({
   Home: HomeStack,
 });
 ```
+
+# A stack has more than one screen and you want to specify the transition mode for each screen explicitly
+
+We can’t set the `StackNavigatorConfig`’s `mode` dynamically. Instead we are going to use a custom `transitionConfig` to render the specfific transition we want - modal or card - on a screen by screen basis.
+
+```js
+  import { createStackNavigator, StackViewTransitionConfigs } from "react-navigation";
+
+  /* The screens you add to IOS_MODAL_ROUTES will have the modal transition.  */
+  const IOS_MODAL_ROUTES = ["OptionsScreen"];
+
+  let dynamicModalTransition = (transitionProps, prevTransitionProps) => {
+    return StackViewTransitionConfigs.defaultTransitionConfig(
+      transitionProps,
+      prevTransitionProps,
+      IOS_MODAL_ROUTES.some(
+        screenName =>
+          screenName === transitionProps.scene.route.routeName ||
+          (prevTransitionProps && screenName === prevTransitionProps.scene.route.routeName)
+      )
+    );
+  };
+
+  const HomeStack = createStackNavigator(
+    { DetailScreen, HomeScreen, OptionsScreen },
+    { initialRouteName: "HomeScreen", transitionConfig: dynamicModalTransition }
+  );
+```
