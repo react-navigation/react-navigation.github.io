@@ -74,6 +74,7 @@ https://github.com/react-navigation/react-navigation/blob/master/flow/react-navi
   * `isModal` - Boolean specifying if screen is modal.
 * `onTransitionStart` - Function to be invoked when the card transition animation is about to start.
 * `onTransitionEnd` - Function to be invoked once the card transition animation completes.
+* `transparentCard` - *Experimental* - Prop to keep all cards in the stack visible and add a transparent background instead of a white one. This is useful to implement things like modal dialogs where the previous scene should still be visible underneath the current one.
 
 ### `navigationOptions` for screens inside of the navigator
 
