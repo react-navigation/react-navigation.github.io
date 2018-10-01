@@ -4,7 +4,7 @@ title: Navigation prop reference
 sidebar_label: Navigation prop
 ---
 
-Each `screen` component in your app is provided with the `navigation` prop automatically. It looks like this:
+Each `screen` component in your app is provided with the `navigation` prop automatically. The prop contains various convenience functions that dispatch navigation actions on the route's router. It looks like this:
 
 * `this.props.navigation`
   * `navigate` - go to another screen, figures out the action it needs to take to do it
@@ -15,27 +15,44 @@ Each `screen` component in your app is provided with the `navigation` prop autom
   * `setParams` - make changes to route's params
   * `getParam` - get a specific param with fallback
   * `dispatch` - send an action to router
+  * `dangerouslyGetParent` - function that returns the parent navigator, if any
 
-It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it.
+It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`withNavigation`](docs/with-navigation.html) HOC.
 
-There are several additional functions on `this.props.navigation` that only if the current navigator is a stack navigator. These functions are alternatives to `navigate` and `goBack` and you can use whichever you prefer. The functions are:
+### Navigator-dependent functions
+
+There are several additional functions present on `this.props.navigation` based on the kind of the current navigator.
+
+If the navigator is a stack navigator, several alternatives to `navigate` and `goBack` are provided and you can use whichever you prefer. The functions are:
 
 * `this.props.navigation`
-  * `push` - navigate forward to new route in stack
+  * `push` - push a new route onto the stack
   * `pop` - go back in the stack
   * `popToTop` - go to the top of the stack
   * `replace` - replace the current route with a new one
+  * `reset` - wipe the navigator state and replace it with the result of several actions
+  * `dismiss` - dismiss the current stack
+
+
+If the navigator is a drawer navigator, the following are also available:
+
+* `this.props.navigation`
+  * `openDrawer` - open the drawer
+  * `closeDrawer` - close the drawer
+  * `toggleDrawer` - toggle the state, ie. switch from closed to open and vice versa
 
 ## Common API reference
 
-The vast majority of your interactions with the `navigation` prop will involve `navigate`, `goBack`, `state`, and `setParams`.
+The vast majority of your interactions with the `navigation` prop will involve `navigate`, `goBack`, `state`, and `setParams` / `getParams`.
 
 ### `navigate` - Link to other screens
 
 Call this to link to another screen in your app. Takes the following arguments:
 
-`navigation.navigate({routeName, params, action, key})`
+`navigation.navigate({ routeName, params, action, key })`
+
 OR
+
 `navigation.navigate(routeName, params, action)`
 
 * `routeName` - A destination routeName that has been registered somewhere in the app's router
@@ -108,8 +125,8 @@ Alternatively, as _screen A_ is the top of the stack, you can use `navigation.po
 React Navigation emits events to screen components that subscribe to them:
 
 * `willFocus` - the screen will focus
-* `willBlur` - the screen will be unfocused
 * `didFocus` - the screen focused (if there was a transition, the transition completed)
+* `willBlur` - the screen will be unfocused
 * `didBlur` - the screen unfocused (if there was a transition, the transition completed)
 
 Example:
@@ -218,7 +235,7 @@ The following actions will work within any stack navigator:
 
 ### Push
 
-Similar to navigate, push will move you forward to a new route in the stack.
+Similar to navigate, push will move you forward to a new route in the stack. This differs from `navigate` in that `navigate will` pop back to earlier in the stack if a route of the given name is already present there. `push` will always add on top, so a route can be present multiple times.
 
 `navigation.push(routeName, params, action)`
 
@@ -244,6 +261,19 @@ Call this to replace the current screen with the given route, with params and su
 
 `navigation.replace(routeName, params, action)`
 
+### Reset
+
+Wipe the navigator state and replace it with the result of several actions.
+
+`navigation.reset([NavigationActions.navigate({ routeName: 'Profile' })], 0)`
+
+### Dismiss
+
+Call this if you're in a nested (child) stack and want to dismiss the entire stack, returning to the parent stack.
+
+`navigation.dismiss()`
+
+
 ## Advanced API Reference
 
 The `dispatch` function is much less commonly used, but a good escape hatch if you can't do what you need with `navigate` and `goBack`.
@@ -267,4 +297,26 @@ const navigateAction = NavigationActions.navigate({
   action: NavigationActions.navigate({ routeName: 'SubProfileRoute' }),
 });
 this.props.navigation.dispatch(navigateAction);
+```
+
+### `dangerouslyGetParent` - get parent navigator
+
+If, for example, you have a screen component that can be presented within multiple navigators, you may use this to influence its behavior based on what navigator it is in. Be sure to always check that the call returns a valid value.
+
+```js
+class UserCreateScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const parent = navigation.dangerouslyGetParent();
+    const gesturesEnabled =
+      parent &&
+      parent.state &&
+      parent.state.routeName === 'StackWithEnabledGestures';
+
+    return {
+      title: 'New User',
+      gesturesEnabled
+    };
+  };
+}
+
 ```
