@@ -50,6 +50,7 @@
       "navigation-prop",
       "navigation-actions",
       "stack-actions",
+      "drawer-actions",
       "stack-navigator",
       "switch-navigator",
       "drawer-navigator",

@@ -34,6 +34,8 @@
     "customize-transitions": "customize-transitions",
     "deep-linking": "Deep linking",
     "Deep linking": "Deep linking",
+    "drawer-actions": "DrawerActions reference",
+    "DrawerActions": "DrawerActions",
     "drawer-based-navigation": "Drawer navigation",
     "Drawer navigation": "Drawer navigation",
     "drawer-navigator": "createDrawerNavigator",
