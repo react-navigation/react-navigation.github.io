@@ -62,7 +62,7 @@ Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`
 
 #### `tabBarIcon`
 
-React Element or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node to display in tab bar.
+React Element or a function that given `{ focused: boolean, horizontal: boolean, tintColor: string }` returns a React.Node, to display in the tab bar. `horizontal` is `true` when the device is in landscape and `false` when portrait. The icon is re-rendered whenever the device orientation changes.
 
 #### `tabBarColor`
 
