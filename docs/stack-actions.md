@@ -64,7 +64,7 @@ The `replace` action replaces the route at the given key with another route.
 
 ### push
 
-The `push` action adds a route on top of the stack and navigates forward to it. This differs from `navigate` in that `navigate` will pop back to earlier in the stack if a component is already mounted there. `push` will always add on top, so a component can be mounted multiple times.
+The `push` action adds a route on top of the stack and navigates forward to it. This differs from `navigate` in that `navigate` will pop back to earlier in the stack if a route of the given name is already present there. `push` will always add on top, so a route can be present multiple times.
 
 * `routeName` - _string_ - `routeName` to push onto the stack.
 * `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `this.props.navigation.state.params`).
