@@ -43,6 +43,7 @@ Several options get passed to the underlying router to modify navigation logic:
 * `labelStyle` - Style object for the tab label.
 * `tabStyle` - Style object for the tab.
 * `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
+* `safeAreaInset` - Override the `forceInset` prop for `<SafeAreaView>`. Defaults to `{ bottom: 'always', top: 'never' }`. Available keys are `top | bottom | left | right` provided with the values `'always' | 'never'`.
 
 Example:
 
