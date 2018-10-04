@@ -301,7 +301,11 @@ this.props.navigation.dispatch(navigateAction);
 
 ### `dangerouslyGetParent` - get parent navigator
 
-If, for example, you have a screen component that can be presented within multiple navigators, you may use this to influence its behavior based on what navigator it is in. Be sure to always check that the call returns a valid value.
+If, for example, you have a screen component that can be presented within multiple navigators, you may use this to influence its behavior based on what navigator it is in. 
+
+Another good use case for this is to find the index of the active route in the parent's route list. So in the case of a stack if you are at index 0 then you may not want to render a back button, but if you're somewhere else in the list then you would render a back button.
+
+Be sure to always check that the call returns a valid value.
 
 ```js
 class UserCreateScreen extends Component {
