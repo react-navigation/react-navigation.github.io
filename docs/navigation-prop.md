@@ -17,7 +17,7 @@ Each `screen` component in your app is provided with the `navigation` prop autom
   * `dispatch` - send an action to router
   * `dangerouslyGetParent` - function that returns the parent navigator, if any
 
-It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`withNavigation`](docs/with-navigation.html) HOC.
+It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`withNavigation`](with-navigation.html) HOC.
 
 ### Navigator-dependent functions
 
