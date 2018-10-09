@@ -28,7 +28,7 @@ Since react-navigation's header is designed as `Animated` component. You can ani
 
 #### Links
 
-[https://github.com/benevbright/react-navigation-collapsible](https://github.com/benevbright/react-navigation-collapsible)
+[github.com/benevbright/react-navigation-collapsible](https://github.com/benevbright/react-navigation-collapsible)
 
 [Demo on Snack](https://snack.expo.io/@benevbright/react-navigation-collapsible)
 
