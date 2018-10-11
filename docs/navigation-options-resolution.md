@@ -15,7 +15,7 @@ Let's take for example a tab navigator that contains a stack in each tab. What h
 ```js
 class A extends React.Component {
   static navigationOptions = {
-    tabBarLabel: "Home!"
+    tabBarLabel: 'Home!',
   };
 
   // etc..
@@ -23,7 +23,7 @@ class A extends React.Component {
 
 class B extends React.Component {
   static navigationOptions = {
-    tabBarLabel: "Settings!"
+    tabBarLabel: 'Settings!',
   };
 
   // etc..
@@ -34,7 +34,7 @@ const SettingsStack = createStackNavigator({ B });
 
 export default createBottomTabNavigator({
   HomeStack,
-  SettingsStack
+  SettingsStack,
 });
 ```
 
@@ -47,16 +47,16 @@ const HomeStack = createStackNavigator({ A });
 const SettingsStack = createStackNavigator({ B });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: "Home!"
+  tabBarLabel: 'Home!',
 };
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: "Settings!"
+  tabBarLabel: 'Settings!',
 };
 
 export default createBottomTabNavigator({
   HomeStack,
-  SettingsStack
+  SettingsStack,
 });
 ```
 
@@ -67,7 +67,7 @@ To understand what is going on here, first recall that in the following example,
 ```js
 class MyComponent extends React.Component {
   static navigationOptions = {
-    title: "Hello!"
+    title: 'Hello!',
   };
   // etc.
 }
@@ -77,7 +77,7 @@ class MyOtherComponent extends React.Component {
 }
 
 MyOtherComponent.navigationOptions = {
-  title: "Hello!"
+  title: 'Hello!',
 };
 ```
 
@@ -88,21 +88,18 @@ We also know that `createStackNavigator` and related functions return React comp
 Navigators are initialized with `create*Navigator(routeConfig, navigatorConfig)`. Inside of `navigatorConfig` we can add a `navigationOptions` property. These `navigationOptions` are the default options for screens within that navigator ([read more about sharing common navigationOptions](headers.html#sharing-common-navigationoptions-across-screens)), they do not refer to the `navigationOptions` for that navigator &mdash; as we have seen above, we set the `navigationOptions` property directly on the navigator for that use case.
 
 ```js
-const HomeStack = createStackNavigator(
-  { A },
-  {
-    // This is the default for screens in the stack, so `A` will
-    // use this title unless it overrides it
-    navigationOptions: {
-      title: "Welcome"
-    }
+const HomeStack = createStackNavigator({ A }, {
+  // This is the default for screens in the stack, so `A` will
+  // use this title unless it overrides it
+  navigationOptions: {
+    title: 'Welcome'
   }
-);
+})
 
 // These are the options that are used by the navigator that renders
 // the HomeStack, in our example above this is a tab navigator.
 HomeStack.navigationOptions = {
-  tabBarLabel: "Home!"
+  tabBarLabel: 'Home!',
 };
 ```
 
@@ -115,12 +112,12 @@ Imagine the following configuration:
 ```js
 const TabNavigator = createBottomTabNavigator({
   Feed: FeedScreen,
-  Profile: ProfileScreen
+  Profile: ProfileScreen,
 });
 
 const AppNavigator = createStackNavigator({
   Home: TabNavigator,
-  Settings: SettingsScreen
+  Settings: SettingsScreen,
 });
 ```
 
@@ -129,7 +126,7 @@ If we were to set the `headerTitle` with `navigationOptions` on the `FeedScreen`
 ```js
 const TabNavigator = createBottomTabNavigator({
   Feed: FeedScreen,
-  Profile: ProfileScreen
+  Profile: ProfileScreen,
 });
 
 TabNavigator.navigationOptions = ({ navigation }) => {
@@ -139,7 +136,7 @@ TabNavigator.navigationOptions = ({ navigation }) => {
   const headerTitle = routeName;
 
   return {
-    headerTitle
+    headerTitle,
   };
 };
 ```
@@ -148,28 +145,28 @@ Another option is to re-organize your navigators, such that each tab has its own
 
 ```js
 const FeedStack = createStackNavigator({
-  FeedHome: FeedScreen
+  FeedHome: FeedScreen,
   /* other routes here */
 });
 
 const ProfileStack = createStackNavigator({
-  ProfileHome: ProfileScreen
+  ProfileHome: ProfileScreen,
   /* other routes here */
 });
 
 const TabNavigator = createBottomTabNavigator({
   Feed: FeedStack,
-  Profile: ProfileStack
+  Profile: ProfileStack,
 });
 
 TabNavigator.navigationOptions = {
   // Hide the header from AppNavigator stack
-  header: null
+  header: null,
 };
 
 const AppNavigator = createStackNavigator({
   Home: TabNavigator,
-  Settings: SettingsScreen
+  Settings: SettingsScreen,
 });
 ```
 
@@ -186,17 +183,17 @@ Imagine the following configuration:
 ```js
 const FeedStack = createStackNavigator({
   FeedHome: FeedScreen,
-  Details: DetailsScreen
+  Details: DetailsScreen,
 });
 
 const TabNavigator = createBottomTabNavigator({
   Feed: FeedStack,
-  Profile: ProfileScreen
+  Profile: ProfileScreen,
 });
 
 const AppNavigator = createSwitchNavigator({
   Auth: AuthScreen,
-  Home: TabNavigator
+  Home: TabNavigator,
 });
 ```
 
@@ -205,7 +202,7 @@ If we want to hide the tab bar when we navigate from the feed home to a details 
 ```js
 const FeedStack = createStackNavigator({
   FeedHome: FeedScreen,
-  Details: DetailsScreen
+  Details: DetailsScreen,
 });
 
 FeedStack.navigationOptions = ({ navigation }) => {
@@ -215,7 +212,7 @@ FeedStack.navigationOptions = ({ navigation }) => {
   }
 
   return {
-    tabBarVisible
+    tabBarVisible,
   };
 };
 ```
@@ -226,24 +223,24 @@ Another option here would be to add another stack navigator as a parent of the t
 
 ```js
 const FeedStack = createStackNavigator({
-  FeedHome: FeedScreen
+  FeedHome: FeedScreen,
   /* any other route you want to render under the tab bar */
 });
 
 const TabNavigator = createBottomTabNavigator({
   Feed: FeedStack,
-  Profile: ProfileScreen
+  Profile: ProfileScreen,
 });
 
 const HomeStack = createStackNavigator({
   Tabs: TabNavigator,
-  Details: DetailsScreen
+  Details: DetailsScreen,
   /* any other route you want to render above the tab bar */
 });
 
 const AppNavigator = createSwitchNavigator({
   Auth: AuthScreen,
-  Home: HomeStack
+  Home: HomeStack,
 });
 ```
 
@@ -256,17 +253,17 @@ Imagine the following configuration:
 ```js
 const FeedStack = createStackNavigator({
   FeedHome: FeedScreen,
-  Details: DetailsScreen
+  Details: DetailsScreen,
 });
 
 const DrawerNavigator = createDrawerNavigator({
   Feed: FeedStack,
-  Profile: ProfileScreen
+  Profile: ProfileScreen,
 });
 
 const AppNavigator = createSwitchNavigator({
   Auth: AuthScreen,
-  Home: DrawerNavigator
+  Home: DrawerNavigator,
 });
 ```
 
@@ -275,17 +272,17 @@ In order to hide the drawer when we push the details screen to the feed stack, w
 ```js
 const FeedStack = createStackNavigator({
   FeedHome: FeedScreen,
-  Details: DetailsScreen
+  Details: DetailsScreen,
 });
 
 FeedStack.navigationOptions = ({ navigation }) => {
-  let drawerLockMode = "unlocked";
+  let drawerLockMode = 'unlocked';
   if (navigation.state.index > 0) {
-    drawerLockMode = "locked-closed";
+    drawerLockMode = 'locked-closed';
   }
 
   return {
-    drawerLockMode
+    drawerLockMode,
   };
 };
 ```
@@ -294,24 +291,24 @@ Another option here would be to add another stack navigator as a parent of the d
 
 ```js
 const FeedStack = createStackNavigator({
-  FeedHome: FeedScreen
+  FeedHome: FeedScreen,
   /* any other route where you want the drawer to remain available */
   /* keep in mind that it will conflict with the swipe back gesture on ios */
 });
 
 const DrawerNavigator = createDrawerNavigator({
   Feed: FeedStack,
-  Profile: ProfileScreen
+  Profile: ProfileScreen,
 });
 
 const HomeStack = createStackNavigator({
   Drawer: DrawerNavigator,
-  Details: DetailsScreen
+  Details: DetailsScreen,
   /* add routes here where you want the drawer to be locked */
 });
 
 const AppNavigator = createSwitchNavigator({
   Auth: AuthScreen,
-  Home: HomeStack
+  Home: HomeStack,
 });
 ```
