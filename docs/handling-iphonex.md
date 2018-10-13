@@ -30,12 +30,12 @@ export default createStackNavigator({
 
 ![Text hidden by iPhoneX UI elements](/docs/assets/iphoneX/02-iphonex-content-hidden.png)
 
-To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-navigation`.
+To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-navigation`. Note that `SafeAreaView` should not wrap entire navigators, just the screen components or any content in them.
 
 ```javascript
 import { SafeAreaView } from 'react-navigation';
 
-class App extends Component {
+class MyHomeScreen extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
