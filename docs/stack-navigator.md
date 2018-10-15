@@ -276,3 +276,32 @@ const ModalNavigator = createStackNavigator(
 ```
 
 Header transitions can also be configured using `headerLeftInterpolator`, `headerTitleInterpolator` and `headerRightInterpolator` fields under `transitionConfig`.
+
+#### Specifying the transition mode for a stack's screens explicitly
+
+We can't set the `StackNavigatorConfig`'s `mode` dynamically. Instead we are going to use a custom `transitionConfig` to render the specfific transition we want - modal or card - on a screen by screen basis.
+
+```js
+import { createStackNavigator, StackViewTransitionConfigs } from 'react-navigation';
+
+/* The screens you add to IOS_MODAL_ROUTES will have the modal transition.  */
+const IOS_MODAL_ROUTES = ['OptionsScreen'];
+
+let dynamicModalTransition = (transitionProps, prevTransitionProps) => {
+  const isModal = IOS_MODAL_ROUTES.some(
+    screenName =>
+      screenName === transitionProps.scene.route.routeName ||
+      (prevTransitionProps && screenName === prevTransitionProps.scene.route.routeName)
+  )
+  return StackViewTransitionConfigs.defaultTransitionConfig(
+    transitionProps,
+    prevTransitionProps,
+    isModal
+  );
+};
+
+const HomeStack = createStackNavigator(
+  { DetailScreen, HomeScreen, OptionsScreen },
+  { initialRouteName: 'HomeScreen', transitionConfig: dynamicModalTransition }
+);
+```
