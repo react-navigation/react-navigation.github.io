@@ -132,7 +132,8 @@
     "Build your own Navigator": "Build your own Navigator",
     "Related Resources": "Related Resources",
     "Meta": "Meta",
-    "API Reference": "API Reference"
+    "API Reference": "API Reference",
+    "How do I do ...?": "How do I do ...?"
   },
   "pages-strings": {
     "Learn more using the [documentation on this site.](/test-site/docs/en/doc1.html)|no description given": "Learn more using the [documentation on this site.](/test-site/docs/en/doc1.html)",
