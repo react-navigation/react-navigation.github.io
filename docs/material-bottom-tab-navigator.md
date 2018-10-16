@@ -30,8 +30,8 @@ The route configs object is a mapping from route name to a route config.
 
 * `shifting` - Whether the shifting style is used, the active tab appears wider and the inactive tabs won't have a label. By default, this is `true` when you have more than 3 tabs.
 * `labeled` - Whether to show labels in tabs. When `false`, only icons will be displayed.
-* `activeColor` - Custom color for icon and label in the active tab.
-* `inactiveColor` - Custom color for icon and label in the inactive tab.
+* `activeTintColor` - Custom color for icon and label in the active tab.
+* `inactiveTintColor` - Custom color for icon and label in the inactive tab.
 * `barStyle` - Style for the bottom navigation bar. You can set a bottom padding here if you have a translucent navigation bar on Android: `barStyle={{ paddingBottom: 48 }}`.
 * `initialRouteName` - The routeName for the initial tab route when first loading.
 * `order` - Array of routeNames which defines the order of the tabs.
@@ -48,8 +48,8 @@ export default createMaterialBottomTabNavigator({
   Cart: { screen: Cart },
 }, {
   initialRouteName: 'Album',
-  activeColor: '#f0edf6',
-  inactiveColor: '#3e2465',
+  activeTintColor: '#f0edf6',
+  inactiveTintColor: '#3e2465',
   barStyle: { backgroundColor: '#694fad' },
 });
 ```
