@@ -28,7 +28,8 @@ function Versions() {
           <header className="postHeader">
             <h1>{siteConfig.title} Versions</h1>
           </header>
-          <p>New versions of this project are released every so often.</p>
+          <p>You can come back to this page and switch the version of the docs you're reading at any time by clicking on the version number at the top of the page.</p>
+          <a href="https://github.com/react-navigation/react-navigation/blob/master/CHANGELOG.md">React Navigation changelog</a>
           <h3 id="latest">Current version (Stable)</h3>
           <table className="versions">
             <tbody>
@@ -37,9 +38,6 @@ function Versions() {
                 <td>
                   <a href={`/docs/en/getting-started.html`}>Documentation</a>
                 </td>
-                <td>
-                  <a href="">Release Notes</a>
-                </td>
               </tr>
             </tbody>
           </table>
@@ -47,6 +45,8 @@ function Versions() {
             This is the version that is configured automatically when you first
             install this project.
           </p>
+
+{/* 
           <h3 id="rc">Pre-release versions</h3>
           <table className="versions">
             <tbody>
@@ -55,13 +55,12 @@ function Versions() {
                 <td>
                   <a href="">Documentation</a>
                 </td>
-                <td>
-                  <a href="">Release Notes</a>
-                </td>
               </tr>
             </tbody>
           </table>
           <p>Other text describing this section.</p>
+*/}
+
           <h3 id="archive">Past Versions</h3>
           <table className="versions">
             <tbody>
@@ -72,9 +71,6 @@ function Versions() {
                       <th>{version}</th>
                       <td>
                         <a href={`/docs/en/${version}/getting-started.html`}>Documentation</a>
-                      </td>
-                      <td>
-                        <a href="">Release Notes</a>
                       </td>
                     </tr>
                   )
