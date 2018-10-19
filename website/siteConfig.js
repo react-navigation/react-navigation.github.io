@@ -8,14 +8,14 @@ const users = [
 ];
 
 const siteConfig = {
-  title: 'React Navigation (next)',
+  title: 'React Navigation',
   tagline: 'Routing and navigation for your React Native apps',
   url: process.env.STABLE_RELEASE
     ? 'https://reactnavigation.org'
     : 'https://next.react-navigation.org',
   baseUrl: '/',
   organizationName: process.env.STABLE_RELEASE
-    ? 'react-navigation' 
+    ? 'react-navigation'
     : 'react-navigation-next',
   projectName: process.env.STABLE_RELEASE
     ? 'react-navigation.github.io'
