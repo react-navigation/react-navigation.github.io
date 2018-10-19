@@ -67,7 +67,7 @@ function Versions() {
               {versions.map(
                 version =>
                   version !== latestVersion && (
-                    <tr>
+                    <tr key={version}>
                       <th>{version}</th>
                       <td>
                         <a href={`/docs/en/${version}/getting-started.html`}>Documentation</a>
