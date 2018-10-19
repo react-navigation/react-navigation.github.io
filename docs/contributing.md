@@ -6,7 +6,7 @@ sidebar_label: Contributing
 
 Want to help improve React Navigation? Your help would be greatly appreciated!
 
-Here are some of some of the ways to contribute to the project:
+Here are some of the ways to contribute to the project:
 
 - [Reporting Bugs](#reporting-bugs)
 - [Improving the Documentation](#improving-the-documentation)
