@@ -38,7 +38,7 @@ A common source of confusion for developers working with React Navigation has be
 
 ### New API for creating navigators
 
-This does not impact most users, but if you have any custom navigators in your app, read on. Read more about the changes in [RFC 2](https://github.com/react-navigation/rfcs/blob/master/text/0002-navigator-view-api.md). Also read the [custom navigators documentation](https://v2.reactnavigation.org/docs/en/custom-navigators.html).
+This does not impact most users, but if you have any custom navigators in your app, read on. Read more about the changes in [RFC 2](https://github.com/react-navigation/rfcs/blob/master/text/0002-navigator-view-api.md). Also read the [custom navigators documentation](https://reactnavigation.org/docs/en/custom-navigators.html).
 
 ### Drawer routes have been replaced with actions
 
