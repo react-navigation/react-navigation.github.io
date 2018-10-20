@@ -7,7 +7,7 @@ original_id: hello-react-navigation
 
 In a web browser, you can link to different pages using an anchor (`<a>`) tag. When the user clicks on a link, the URL is pushed to the browser history stack. When the user presses the back button, the browser pops the item from the top of the history stack, so the active page is now the previously visited page. React Native doesn't have a built-in idea of a global history stack like a web browser does -- this is where React Navigation enters the story.
 
-React Navigation's `StackNavigator` provides a way for your app to transition between screens and manage navigation history. If your app uses only one `StackNavigator` then it is conceptually similar to how a  web browser handles navigation state - your app pushes and pops items from the navigation stack as users interact with it, and this results in the user seeing different screens. A key difference between how this works in a web browser and in React Navigation is that React Navigation's `StackNavigator` provides the gestures and animations that you would expect on Android and iOS when navigating between routes in the stack.
+React Navigation's `StackNavigator` provides a way for your app to transition between screens and manage navigation history. If your app uses only one `StackNavigator` then it is conceptually similar to how a web browser handles navigation state - your app pushes and pops items from the navigation stack as users interact with it, and this results in the user seeing different screens. A key difference between how this works in a web browser and in React Navigation is that React Navigation's `StackNavigator` provides the gestures and animations that you would expect on Android and iOS when navigating between routes in the stack.
 
 All we need to get started using React Navigation is a `StackNavigator`.
 
@@ -15,7 +15,7 @@ All we need to get started using React Navigation is a `StackNavigator`.
 
 `StackNavigator` is a function that returns a React component. It takes _a route configuration object_ and, optionally, _an options object_ (we omit this below, for now). Because the `StackNavigator` function returns a React component, we can export it directly from `App.js` to be used as our App's root component.
 
-```javascript
+```js
 // In App.js in a new project
 
 import React from 'react';
@@ -34,10 +34,11 @@ class HomeScreen extends React.Component {
 
 export default StackNavigator({
   Home: {
-    screen: HomeScreen,
-  },
+    screen: HomeScreen
+  }
 });
 ```
+
 <a href="https://snack.expo.io/@react-navigation/hello-world" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 If you run this code, you will see a screen with an empty navigation bar and a grey content area containing your `HomeScreen` component. The styles you see for the navigation bar and the content area are the default configuration for a `StackNavigator`, we'll learn how to configure those later.
@@ -51,8 +52,8 @@ In React Native, the component exported from `App.js` is the entry point (or roo
 ```js
 const RootStack = StackNavigator({
   Home: {
-    screen: HomeScreen,
-  },
+    screen: HomeScreen
+  }
 });
 
 export default class App extends React.Component {
@@ -82,21 +83,21 @@ class DetailsScreen extends React.Component {
 const RootStack = StackNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      screen: HomeScreen
     },
     Details: {
-      screen: DetailsScreen,
-    },
+      screen: DetailsScreen
+    }
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Home'
   }
 );
 
 // Other code for App component here...
 ```
 
-Now our stack has two *routes*, a `Home` route and a `Details` route. The `Home` route corresponds to the `HomeScreen` component, and the `Details` route corresponds to the `DetailsScreen` component. The initial route for the stack is the `Home` route. The natural question at this point is: "how do I move from the Home route to the Details route?". That is covered in the next section.
+Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home` route corresponds to the `HomeScreen` component, and the `Details` route corresponds to the `DetailsScreen` component. The initial route for the stack is the `Home` route. The natural question at this point is: "how do I move from the Home route to the Details route?". That is covered in the next section.
 
 ## Summary
 

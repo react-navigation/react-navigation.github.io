@@ -7,7 +7,7 @@ original_id: connecting-navigation-prop
 
 [`withNavigation`](/docs/with-navigation) is a higher order component which passes the `navigation` prop into a wrapped Component. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
 
-```javascript
+```js
 import React from 'react';
 import { Button } from 'react-native';
 import { withNavigation } from 'react-navigation';
@@ -16,7 +16,14 @@ export default class MyBackButton extends React.Component {
   render() {
     // This will throw an 'undefined is not a function' exception because the navigation
     // prop is undefined.
-    return <Button title="Back" onPress={() => { this.props.navigation.goBack() }} />;
+    return (
+      <Button
+        title="Back"
+        onPress={() => {
+          this.props.navigation.goBack();
+        }}
+      />
+    );
   }
 }
 ```
@@ -32,7 +39,14 @@ import { withNavigation } from 'react-navigation';
 
 class MyBackButton extends React.Component {
   render() {
-    return <Button title="Back" onPress={() => { this.props.navigation.goBack() }} />;
+    return (
+      <Button
+        title="Back"
+        onPress={() => {
+          this.props.navigation.goBack();
+        }}
+      />
+    );
   }
 }
 

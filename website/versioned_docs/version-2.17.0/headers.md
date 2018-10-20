@@ -14,7 +14,7 @@ A screen component can have a static property called `navigationOptions` which i
 ```js
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Home',
+    title: 'Home'
   };
 
   /* render function, etc */
@@ -22,7 +22,7 @@ class HomeScreen extends React.Component {
 
 class DetailsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Details',
+    title: 'Details'
   };
 
   /* render function, etc */
@@ -41,13 +41,14 @@ In order to use params in the title, we need to make `navigationOptions` a funct
 class DetailsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam('otherParam', 'A Nested Details Screen'),
+      title: navigation.getParam('otherParam', 'A Nested Details Screen')
     };
   };
 
   /* render function, etc */
 }
 ```
+
 <a href="https://snack.expo.io/@react-navigation/using-params-in-title-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 The argument that is passed in to the `navigationOptions` function is an object with the following properties:
@@ -63,11 +64,11 @@ We only needed the `navigation` prop in the above example but you may in some ca
 It's often necessary to update the `navigationOptions` configuration for the active screen from the mounted screen component itself. We can do this using `this.props.navigation.setParams`
 
 ```js
-  /* Inside of render() */
-  <Button
-    title="Update the title"
-    onPress={() => this.props.navigation.setParams({otherParam: 'Updated!'})}
-  />
+/* Inside of render() */
+<Button
+  title="Update the title"
+  onPress={() => this.props.navigation.setParams({ otherParam: 'Updated!' })}
+/>
 ```
 
 <a href="https://snack.expo.io/@react-navigation/updating-navigationoptions-with-setparams-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
@@ -85,20 +86,22 @@ class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Home',
     headerStyle: {
-      backgroundColor: '#f4511e',
+      backgroundColor: '#f4511e'
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
-      fontWeight: 'bold',
-    },
+      fontWeight: 'bold'
+    }
   };
 
   /* render function, etc */
 }
 ```
+
 <a href="https://snack.expo.io/@react-navigation/setting-header-styles-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 There are a couple of things to notice here:
+
 1. On iOS, the status bar text and icons are black, and this doesn't look great over a dark-colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.html).
 2. The configuration we set only applies to the home screen; when we navigate to the details screen, the default styles are back. We'll look at how to share `navigationOptions` between screens now.
 
@@ -109,7 +112,7 @@ It is common to want to configure the header in a similar way across many screen
 ```js
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Home',
+    title: 'Home'
     /* No more header config here! */
   };
 
@@ -121,23 +124,24 @@ class HomeScreen extends React.Component {
 const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
-    Details: DetailsScreen,
+    Details: DetailsScreen
   },
   {
     initialRouteName: 'Home',
     /* The header config from HomeScreen is now here */
     navigationOptions: {
       headerStyle: {
-        backgroundColor: '#f4511e',
+        backgroundColor: '#f4511e'
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    },
+        fontWeight: 'bold'
+      }
+    }
   }
 );
 ```
+
 <a href="https://snack.expo.io/@react-navigation/sharing-header-styles-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 Now, any screen that belongs to the `RootStack` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
@@ -146,25 +150,23 @@ Now, any screen that belongs to the `RootStack` will have our wonderful branded 
 
 The `navigationOptions` specified on your screen component are merged together with those of its parent stack navigator, with the options on the screen component taking precedence. Let's use this knowledge to invert the background and tint colors on the details screen.
 
-
 ```js
 class DetailsScreen extends React.Component {
   static navigationOptions = ({ navigation, navigationOptions }) => {
-    const { params } = navigation.state;
-
     return {
-      title: params ? params.otherParam : 'A Nested Details Screen',
+      title: navigation.getParam('otherParam', 'A Nested Details Screen'),
       /* These values are used instead of the shared configuration! */
       headerStyle: {
-        backgroundColor: navigationOptions.headerTintColor,
+        backgroundColor: navigationOptions.headerTintColor
       },
-      headerTintColor: navigationOptions.headerStyle.backgroundColor,
+      headerTintColor: navigationOptions.headerStyle.backgroundColor
     };
   };
 
   /* render function, etc */
 }
 ```
+
 <a href="https://snack.expo.io/@react-navigation/overriding-shared-header-styles-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 ## Replacing the title with a custom component
@@ -186,12 +188,13 @@ class LogoTitle extends React.Component {
 class HomeScreen extends React.Component {
   static navigationOptions = {
     // headerTitle instead of title
-    headerTitle: <LogoTitle />,
+    headerTitle: <LogoTitle />
   };
 
   /* render function, etc */
 }
 ```
+
 <a href="https://snack.expo.io/@react-navigation/custom-header-title-component-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 > You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to a stack navigator, the `headerTitle` defaults to a `Text` component that displays the `title`.

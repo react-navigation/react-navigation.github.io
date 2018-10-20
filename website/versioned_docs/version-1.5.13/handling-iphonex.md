@@ -15,7 +15,7 @@ However, if you're overriding the default navigation bar it's important to ensur
 
 For example, if I render nothing for the `header` or `tabBarComponent` nothing renders
 
-```javascript
+```js
 const Tabs = TabNavigator({
   ...
 }, {
@@ -33,19 +33,15 @@ export default StackNavigator({
 
 To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from either `react-native` or `react-navigation`.
 
-```javascript
+```js
 import { SafeAreaView } from 'react-navigation';
 
 class App extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={styles.paragraph}>
-          This is top text.
-        </Text>
-        <Text style={styles.paragraph}>
-          This is bottom text.
-        </Text>
+        <Text style={styles.paragraph}>This is top text.</Text>
+        <Text style={styles.paragraph}>This is bottom text.</Text>
       </SafeAreaView>
     );
   }

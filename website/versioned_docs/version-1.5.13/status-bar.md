@@ -11,22 +11,17 @@ If you don't have a navigation header, or your navigation header changes color b
 
 This is a simple task when using the StackNavigator or DrawerNavigator. You can simply render the `StatusBar` component, which is exposed by React Native, and set your config.
 
-```javascript
+```js
 class Screen1 extends React.Component {
   render() {
     return (
       <SafeAreaView style={[styles.container, { backgroundColor: '#6a51ae' }]}>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor="#6a51ae"
-        />
-        <Text style={[styles.paragraph, { color: '#fff' }]}>
-          Light Screen
-        </Text>
+        <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+        <Text style={[styles.paragraph, { color: '#fff' }]}>Light Screen</Text>
         <Button
           title="Next screen"
           onPress={() => this.props.navigation.navigate('Screen2')}
-          color={isAndroid ? "blue" : "#fff"}
+          color={isAndroid ? 'blue' : '#fff'}
         />
       </SafeAreaView>
     );
@@ -37,13 +32,8 @@ class Screen2 extends React.Component {
   render() {
     return (
       <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
-        <StatusBar
-          barStyle="dark-content"
-          backgroundColor="#ecf0f1"
-        />
-        <Text style={styles.paragraph}>
-          Dark Screen
-        </Text>
+        <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
+        <Text style={styles.paragraph}>Dark Screen</Text>
         <Button
           title="Next screen"
           onPress={() => this.props.navigation.navigate('Screen1')}
@@ -54,29 +44,32 @@ class Screen2 extends React.Component {
 }
 ```
 
-```javascript
-export default StackNavigator({
-  Screen1: {
-    screen: Screen1,
+```js
+export default StackNavigator(
+  {
+    Screen1: {
+      screen: Screen1
+    },
+    Screen2: {
+      screen: Screen2
+    }
   },
-  Screen2: {
-    screen: Screen2,
-  },
-}, {
-  headerMode: 'none',
-});
+  {
+    headerMode: 'none'
+  }
+);
 ```
 
 ![StackNavigator with different StatusBar configs](./assets/statusbar/statusbar-stack-demo.gif)
 
-```javascript
+```js
 export default DrawerNavigator({
   Screen1: {
-    screen: Screen1,
+    screen: Screen1
   },
   Screen2: {
-    screen: Screen2,
-  },
+    screen: Screen2
+  }
 });
 ```
 
@@ -93,14 +86,12 @@ To fix this we'll have to do two things
 
 First, the new `Screen2.js` will no longer use the `StatusBar` component.
 
-```javascript
+```js
 class Screen2 extends React.Component {
   render() {
     return (
       <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
-        <Text style={styles.paragraph}>
-          Dark Screen
-        </Text>
+        <Text style={styles.paragraph}>Dark Screen</Text>
         <Button
           title="Next screen"
           onPress={() => this.props.navigation.navigate('Screen1')}
@@ -117,7 +108,7 @@ class Screen2 extends React.Component {
 
 Then, in both `Screen1.js` and `Screen2.js` we'll set up a listener to change the `StatusBar` configuration when that tab `didFocus`. We'll also make sure to remove the listener when the `TabNavigator` has been unmounted.
 
-```javascript
+```js
 class Screen1 extends React.Component {
   componentDidMount() {
     this._navListener = this.props.navigation.addListener('didFocus', () => {
@@ -148,7 +139,6 @@ class Screen2 extends React.Component {
   ...
 }
 ```
-
 
 ![TabNavigator with different StatusBar configs](./assets/statusbar/statusbar-tab-demo.gif)
 

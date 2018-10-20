@@ -9,12 +9,14 @@ Calling functions such as `navigate` or `popToTop` on the `navigation` prop is n
 
 You can get access to a navigator through a `ref` and pass it to the `NavigationService` which we will later use to navigate. Use this only with the top-level (root) navigator of your app.
 
-```javascript
+```js
 // App.js
 
 import NavigationService from './NavigationService';
 
-const TopLevelNavigator = createStackNavigator({ /* ... */ })
+const TopLevelNavigator = createStackNavigator({
+  /* ... */
+});
 
 class App extends React.Component {
   // ...
@@ -33,7 +35,7 @@ class App extends React.Component {
 
 In the next step, we define `NavigationService` which is a simple module with functions that dispatch user-defined navigation actions.
 
-```javascript
+```js
 // NavigationService.js
 
 import { NavigationActions } from 'react-navigation';
@@ -48,7 +50,7 @@ function navigate(routeName, params) {
   _navigator.dispatch(
     NavigationActions.navigate({
       routeName,
-      params,
+      params
     })
   );
 }
@@ -57,13 +59,13 @@ function navigate(routeName, params) {
 
 export default {
   navigate,
-  setTopLevelNavigator,
+  setTopLevelNavigator
 };
 ```
 
 Then, in any of your javascript modules, just import the `NavigationService` and call functions which you exported from it. You may use this approach outside of your React components and, in fact, it works just as well when used from within them.
 
-```javascript
+```js
 // any js module
 import NavigationService from 'path-to-NavigationService.js';
 

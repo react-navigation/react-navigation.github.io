@@ -15,7 +15,7 @@ However, if you're overriding the default navigation bar, it's important to ensu
 
 For example, if I render nothing for the `header` or `tabBarComponent`, nothing renders
 
-```javascript
+```js
 const Tabs = createBottomTabNavigator({
   ...
 }, {
@@ -33,19 +33,15 @@ export default createStackNavigator({
 
 To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-navigation`. Note that `SafeAreaView` should not wrap entire navigators, just the screen components or any content in them.
 
-```javascript
+```js
 import { SafeAreaView } from 'react-navigation';
 
 class MyHomeScreen extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={styles.paragraph}>
-          This is top text.
-        </Text>
-        <Text style={styles.paragraph}>
-          This is bottom text.
-        </Text>
+        <Text style={styles.paragraph}>This is top text.</Text>
+        <Text style={styles.paragraph}>This is bottom text.</Text>
       </SafeAreaView>
     );
   }
@@ -74,14 +70,10 @@ A [Snack](https://snack.expo.io/BJ6-M8pEG) is available with the code used in th
 
 In some cases you might need more control over which paddings are applied. For example, you can remove bottom padding by passing `forceInset` prop to `SafeAreaView`.
 
-```javascript
+```js
 <SafeAreaView style={styles.container} forceInset={{ bottom: 'never' }}>
-  <Text style={styles.paragraph}>
-    This is top text.
-  </Text>
-  <Text style={styles.paragraph}>
-    This is bottom text.
-  </Text>
+  <Text style={styles.paragraph}>This is top text.</Text>
+  <Text style={styles.paragraph}>This is bottom text.</Text>
 </SafeAreaView>
 ```
 
