@@ -46,20 +46,18 @@ function Versions() {
             install this project.
           </p>
 
-{/* 
           <h3 id="rc">Pre-release versions</h3>
           <table className="versions">
             <tbody>
               <tr>
-                <th>master</th>
+                <th>next</th>
                 <td>
-                  <a href="">Documentation</a>
+                  <a href={`/docs/en/next/getting-started.html`}>Documentation</a>
                 </td>
               </tr>
             </tbody>
           </table>
-          <p>Other text describing this section.</p>
-*/}
+          <p>Our next major version release that isn't quite stable yet.</p>
 
           <h3 id="archive">Past Versions</h3>
           <table className="versions">
