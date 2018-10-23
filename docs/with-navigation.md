@@ -16,6 +16,10 @@ import { Button } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 class MyBackButton extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     return <Button title="Back" onPress={() => { this.props.navigation.goBack() }} />;
   }
@@ -37,3 +41,5 @@ export default withNavigation(MyBackButton);
 // MyNavBar.ts
 <MyBackButton onRef={(elem) => this.backButton = elem} />
 ```
+
+- Don't forget to include Props in your class constructor, otherwise `this.props.navigation` will be `undefined`. 
