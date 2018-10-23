@@ -48,7 +48,7 @@ const AppNavigator = createSwitchNavigator({
 The correct way to write this would be the following:
 
 ```javascript
-export default App extends React.Component {
+export default class App extends React.Component {
   render() {
     return <AppNavigator />;
   }
@@ -72,7 +72,7 @@ const AppNavigator = createSwitchNavigator({
 Alternatively, the following would also work because it exposes the `router` static on `AuthenticationScreen` and threads through the `navigation` prop:
 
 ```javascript
-export default App extends React.Component {
+export default class App extends React.Component {
   render() {
     /* In the root component we are rendering the app navigator */
     return <AppNavigator />;
