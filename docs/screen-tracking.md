@@ -10,6 +10,13 @@ This example shows how to do screen tracking and send to Google Analytics. The a
 
 Most users can use `onNavigationStateChange` to track the screen. If you manually control the top-level navigator (if you have integrated redux), this will not work for you.
 
+For react-native, you may run into navigation performance issues on Android if the
+tracking library is calling into native modules. This is caused by contention on
+the native modules thread between the navigation animation and the calls into the
+native tracking module. As a workaround for this, you can delay the invocation of
+the tracking until after the navigation animation is complete by wrapping the
+call to tracking in a `setTimeout`.
+
 ```js
 import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge';
 
@@ -72,6 +79,12 @@ const screenTracking = ({ getState }) => next => (action) => {
     // the line below uses the Google Analytics tracker
     // change the tracker here to use other Mobile analytics SDK.
     tracker.trackScreenView(nextScreen);
+
+    // If navigation is considerably slower after adding screen tracking,
+    // change the above line to something like:
+    // setTimeout(() => tracker.trackScreenView(nextScreen), 1000);
+    // This will delay the tracking invocation until after the animation is complete
+    // and remove possible contention in the native modules thread
   }
   return result;
 };
