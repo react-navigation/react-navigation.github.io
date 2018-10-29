@@ -34,7 +34,7 @@ const App = () => <AppNavigator persistenceKey={navigationPersistenceKey} />;
 
 ### Loading View
 
-Because the state is persisted asyncronously, the app must render an empty/loading view for a moment while the `AsyncStorage` request completes. To customize the loading view that is rendered during this time, you can use the `renderLoadingExperimental` prop:
+Because the state is persisted asynchronously, the app must render an empty/loading view for a moment while the `AsyncStorage` request completes. To customize the loading view that is rendered during this time, you can use the `renderLoadingExperimental` prop:
 
 ```js
 <AppNavigator
