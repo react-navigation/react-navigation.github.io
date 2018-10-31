@@ -52,7 +52,6 @@ class CustomNavigator extends React.Component {
 }
 ```
 
-
 ## Navigator Navigation Prop
 
 The navigation prop passed down to a navigator only includes `state`, `dispatch`, and `addListener`. This is the current state of the navigator, and an event channel to send action requests.
@@ -102,7 +101,7 @@ To help developers implement custom navigators, the following utilities are prov
 This utility combines a [router](routers.html) and a [navigation view](navigation-views.html) together in a standard way:
 
 ```js
-import {createNavigator} from 'react-navigation';
+import { createNavigator } from "react-navigation";
 
 const AppNavigator = createNavigator(NavigationView, router, navigationConfig);
 ```
@@ -127,7 +126,7 @@ Then the view will be rendered in the following way:
 />
 ```
 
-The `navigation` prop is the same navigation prop that was passed into the navigator.  
+The `navigation` prop is the same navigation prop that was passed into the navigator.
 
 Both `navigationConfig` and `screenProps` are simply passed through, as defined above.
 
@@ -142,8 +141,3 @@ A scene descriptor has the following properties:
 - `navigation`, the child navigation prop, including actions and the route `state`
 - `state`, the navigation state for the child screen (a shortcut for `navigation.state`)
 - `key`, the key of the route (a shortcut for `navigation.state.key`)
-
-
-### `createNavigationContainer`
-
-If you want your navigator to be usable as a top-level component, (without a navigation prop being passed in), you can use `createNavigationContainer`. This utility will make your navigator act like a top-level navigator when the navigation prop is missing. It will manage the app state, and integrate with app-level nav features, like handling incoming and outgoing links, and Android back button behavior.

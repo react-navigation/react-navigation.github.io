@@ -8,7 +8,7 @@ In a web browser, you can link to different pages using an anchor (`<a>`) tag. W
 
 React Navigation's stack navigator provides a way for your app to transition between screens and manage navigation history. If your app uses only one stack navigator then it is conceptually similar to how a web browser handles navigation state - your app pushes and pops items from the navigation stack as users interact with it, and this results in the user seeing different screens. A key difference between how this works in a web browser and in React Navigation is that React Navigation's stack navigator provides the gestures and animations that you would expect on Android and iOS when navigating between routes in the stack.
 
-All we need to get started using React Navigation is a function called `createStackNavigator`.
+Lets start by demonstrating the most common navigator, `createStackNavigator`.
 
 ## Creating a stack navigator
 
@@ -17,28 +17,30 @@ All we need to get started using React Navigation is a function called `createSt
 ```javascript
 // In App.js in a new project
 
-import React from 'react';
-import { View, Text } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import React from "react";
+import { View, Text } from "react-native";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 
 class HomeScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>Home Screen</Text>
       </View>
     );
   }
 }
 
-export default createStackNavigator({
+const AppNavigator = createStackNavigator({
   Home: {
     screen: HomeScreen
-  },
+  }
 });
+
+export default createAppContainer(AppNavigator);
 ```
 
-<a href="https://snack.expo.io/@react-navigation/hello-world-v2" target="blank" class="run-code-button">&rarr; Run this code</a> 
+<a href="https://snack.expo.io/@react-navigation/hello-world-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 If you run this code, you will see a screen with an empty navigation bar and a grey content area containing your `HomeScreen` component. The styles you see for the navigation bar and the content area are the default configuration for a stack navigator, we'll learn how to configure those later.
 
@@ -46,18 +48,14 @@ If you run this code, you will see a screen with an empty navigation bar and a g
 
 > The only required configuration for a route is the `screen` component. You can read more about the other options available in the [StackNavigator reference](stack-navigator.html).
 
-In React Native, the component exported from `App.js` is the entry point (or root component) for your app -- it is the component from which every other component descends. It's often useful to have more control over the component at the root of your app than you would get from exporting the result of `createStackNavigator`, so let's export a component that just renders our `RootStack` stack navigator.
+In React Native, the component exported from `App.js` is the entry point (or root component) for your app -- it is the component from which every other component descends. It's often useful to have more control over the component at the root of your app than you would get from exporting the result of `createAppContainer`, so let's export a component that just renders our `AppNavigator` stack navigator.
 
 ```js
-const RootStack = createStackNavigator({
-  Home: {
-    screen: HomeScreen
-  },
-});
+const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
   render() {
-    return <RootStack />;
+    return <AppContainer />;
   }
 }
 ```
@@ -82,7 +80,7 @@ The `<RootStack />` component doesn't accept any props -- all configuration is s
 class DetailsScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>Details Screen</Text>
       </View>
     );
@@ -92,10 +90,10 @@ class DetailsScreen extends React.Component {
 const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
-    Details: DetailsScreen,
+    Details: DetailsScreen
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: "Home"
   }
 );
 
@@ -106,8 +104,8 @@ Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home`
 
 ## Summary
 
-* React Native doesn't have a built-in API for navigation like a web browser does. React Navigation provides this for you, along with the iOS and Android gestures and animations to transition between screens.
-* `createStackNavigator` is a function that takes a route configuration object and an options object and returns a React component.
-* The keys in the route configuration object are the route names and the values are the configuration for that route. The only required property on the configuration is the `screen` (the component to use for the route).
-* To specify what the initial route in a stack is, provide an `initialRouteName` on the stack options object.
-* [Full source of what we have built so far](https://snack.expo.io/@react-navigation/hello-react-navigation-v2).
+- React Native doesn't have a built-in API for navigation like a web browser does. React Navigation provides this for you, along with the iOS and Android gestures and animations to transition between screens.
+- `createStackNavigator` is a function that takes a route configuration object and an options object and returns a React component.
+- The keys in the route configuration object are the route names and the values are the configuration for that route. The only required property on the configuration is the `screen` (the component to use for the route).
+- To specify what the initial route in a stack is, provide an `initialRouteName` on the stack options object.
+- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/hello-react-navigation-v2).

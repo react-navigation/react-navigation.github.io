@@ -8,6 +8,7 @@
       "params",
       "headers",
       "header-buttons",
+      "app-containers",
       "modal",
       "next-steps",
       "glossary-of-terms",
@@ -28,7 +29,8 @@
       "deep-linking",
       "screen-tracking",
       "state-persistence",
-      "redux-integration"
+      "redux-integration",
+      "web-support"
     ],
     "Build your own Navigator": [
       "custom-navigator-overview",
