@@ -19,7 +19,7 @@ class Help extends React.Component {
     const supportLinks = [
       {
         content:
-          <translate>Learn more using the [documentation on this site](https://reactnavigation.org/docs/en/getting-started.html) and [reading the API reference](https://reactnavigation.org/docs/en/api-reference.html).</translate>,
+          <translate>Learn more using the [documentation on this site](/docs/en/getting-started.html) and [reading the API reference](/docs/en/api-reference.html).</translate>,
         title: <translate>Browse Docs and API</translate>,
       },
       {
