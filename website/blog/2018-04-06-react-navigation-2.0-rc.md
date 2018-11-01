@@ -22,7 +22,7 @@ This blog post is not a comprehensive changelog - that will come with the 2.0 pr
 
 In 1.x, `navigate(routeName)` and `push(routeName)` were very similar: every time you called `navigate(routeName)` it would push a new route to the stack, regardless. Now `navigate(routeName)` will first try to find an existing instance of the route and jump to that if it exists, otherwise it will push the route to the stack.
 
-To update your app for this change you may need to change `navigate` to `push` in places where you would like to push a new route every time. Alternatively, you could consider using a `key`: `navigate({routeName: ‘MyRoute’, key: data.uniqueId, params: data})`. [Read more about navigation with keys](docs/en/navigation-key.html).
+To update your app for this change you may need to change `navigate` to `push` in places where you would like to push a new route every time. Alternatively, you could consider using a `key`: `navigate({routeName: ‘MyRoute’, key: data.uniqueId, params: data})`. [Read more about navigation with keys](https://reactnavigation.org/docs/en/navigation-key.html).
 
 Read more about this in [RFC 4](https://github.com/react-navigation/rfcs/blob/master/text/0004-less-pushy-navigate.md).
 
