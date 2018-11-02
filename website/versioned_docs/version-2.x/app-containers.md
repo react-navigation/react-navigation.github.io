@@ -1,7 +1,8 @@
 ---
-id: app-containers
+id: version-2.x-app-containers
 title: App Containers
 sidebar_label: App Containers
+original_id: app-containers
 ---
 
 Containers are responsible for managing your app state and linking your top-level navigator to the app environment. On Android, the app container uses the Linking API to handle the back button. The container can also be configured to persist your navigation state. On web, you'd use different containers than React Native.

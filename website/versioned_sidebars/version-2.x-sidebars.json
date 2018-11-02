@@ -28,6 +28,7 @@
       "version-2.x-deep-linking",
       "version-2.x-screen-tracking",
       "version-2.x-state-persistence",
+      "version-2.x-app-containers",
       "version-2.x-redux-integration"
     ],
     "Build your own Navigator": [
