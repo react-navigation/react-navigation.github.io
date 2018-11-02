@@ -45,6 +45,9 @@ You can use the `handleServerRequest` function to get the top-level navigation p
 
 ```js
 expressApp.get("/*", (req, res) => {
+  
+  const { path, query } = req;
+
   const { navigation, title, options } = handleServerRequest(
     AppNavigator.router,
     path,
