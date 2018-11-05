@@ -84,3 +84,10 @@ this.props.navigation.dispatch(DrawerActions.openDrawer());
 this.props.navigation.dispatch(DrawerActions.closeDrawer());
 this.props.navigation.dispatch(DrawerActions.toggleDrawer());
 ```
+
+If you would like to determine if drawer is open or closed, you can follow:
+
+```js
+const parent = this.props.navigation.dangerouslyGetParent();
+const isDrawerOpen = parent && parent.state && parent.state.isDrawerOpen;
+```
