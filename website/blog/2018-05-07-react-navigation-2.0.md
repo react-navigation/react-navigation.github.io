@@ -4,7 +4,7 @@ author: Core Team
 authorURL: https://twitter.com/reactnavigation
 ---
 
-The documentation is now live at https://reactnavigation.org, and v1 lives [here](https://reactnavigation.org/docs/en/1.x/getting-started.html). 
+The documentation is now live at https://reactnavigation.org, and v1 lives [here](docs/en/1.x/getting-started.html). 
 
 ## Significant breaking changes
 
