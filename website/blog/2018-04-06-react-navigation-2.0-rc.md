@@ -10,7 +10,7 @@ Exactly two months after the release of React Navigation 1.0, we are close to an
 yarn add react-navigation@^2.0.0-rc.1
 ```
 
-The documentation for 2.0 is available at http://v2.reactnavigation.org/
+The documentation for 2.0 is available at https://reactnavigation.org/
 
 We’re bumping the major version because some of the changes in this release are backwards incompatible. That said, this should be a fairly easy upgrade. We are improving React Navigation incrementally because we don't want to leave developers feeling stranded in an old version. If you use React Navigation in a conventional way and don't have any custom navigators, I can't imagine this update would take you more than an hour.
 
@@ -22,7 +22,7 @@ This blog post is not a comprehensive changelog - that will come with the 2.0 pr
 
 In 1.x, `navigate(routeName)` and `push(routeName)` were very similar: every time you called `navigate(routeName)` it would push a new route to the stack, regardless. Now `navigate(routeName)` will first try to find an existing instance of the route and jump to that if it exists, otherwise it will push the route to the stack.
 
-To update your app for this change you may need to change `navigate` to `push` in places where you would like to push a new route every time. Alternatively, you could consider using a `key`: `navigate({routeName: ‘MyRoute’, key: data.uniqueId, params: data})`. [Read more about navigation with keys](docs/en/navigation-key.html).
+To update your app for this change you may need to change `navigate` to `push` in places where you would like to push a new route every time. Alternatively, you could consider using a `key`: `navigate({routeName: ‘MyRoute’, key: data.uniqueId, params: data})`. [Read more about navigation with keys](/docs/en/navigation-key.html).
 
 Read more about this in [RFC 4](https://github.com/react-navigation/rfcs/blob/master/text/0004-less-pushy-navigate.md).
 
