@@ -11,22 +11,22 @@ In this guide we will set up our app to handle external URIs. Let's suppose that
 Previously, we had defined a navigator like this:
 
 ```js
-const SimpleApp = createStackNavigator({
+const SimpleApp = createAppContainer(createStackNavigator({
   Home: { screen: HomeScreen },
   Chat: { screen: ChatScreen },
-});
+}));
 ```
 
 We want paths like `chat/Eric` to link to a "Chat" screen with the `user` passed as a param. Let's re-configure our chat screen with a `path` that tells the router what relative path to match against, and what params to extract. This path spec would be `chat/:user`.
 
 ```js
-const SimpleApp = createStackNavigator({
+const SimpleApp = createAppContainer(createStackNavigator({
   Home: { screen: HomeScreen },
   Chat: {
     screen: ChatScreen,
     path: 'chat/:user',
   },
-});
+}));
 ```
 
 
@@ -35,7 +35,7 @@ const SimpleApp = createStackNavigator({
 Next, let's configure our navigation container to extract the path from the app's incoming URI. 
 
 ```js
-const SimpleApp = createStackNavigator({...});
+const SimpleApp = createAppContainer(createStackNavigator({...}));
 
 // on Android, the URI prefix typically contains a host in addition to scheme
 // on Android, note the required / (slash) at the end of the host property

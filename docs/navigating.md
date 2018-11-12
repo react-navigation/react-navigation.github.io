@@ -25,7 +25,7 @@ We'll do something similar to the latter, but rather than use a `document` globa
 ```js
 import React from 'react';
 import { Button, View, Text } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 class HomeScreen extends React.Component {
   render() {
@@ -44,7 +44,7 @@ class HomeScreen extends React.Component {
 // ... other code from the previous section
 ```
 
-<a href="https://snack.expo.io/@react-navigation/our-first-navigate-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/our-first-navigate-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 Let's break this down:
 
@@ -73,7 +73,7 @@ class DetailsScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/navigating-to-details-again-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/navigating-to-details-again-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 If you run this code, you'll notice that when you tap "Go to Details... again" that it doesn't do anything! This is because we are already on the Details route. The `navigate` function roughly means "go to this screen", and if you are already on that screen then it makes sense that it would do nothing.
 
@@ -86,7 +86,7 @@ Let's suppose that we actually *want* to add another details screen. This is pre
 />
 ```
 
-<a href="https://snack.expo.io/@react-navigation/pushing-details-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/pushing-details-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 Each time you call `push` we add a new route to the navigation stack. When you call `navigate` it first tries to find an existing route with that name, and only pushes a new route if there isn't yet one on the stack.
 
@@ -120,7 +120,7 @@ class DetailsScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/going-back-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/going-back-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 > On Android, React Navigation hooks in to the hardware back button and fires the `goBack()` function for you when the user presses it, so it behaves as the user would expect.
 
@@ -133,4 +133,4 @@ Another common requirement is to be able to go back _multiple_ screens -- for ex
 * The header bar will automatically show a back button, but you can programmatically go back by calling `this.props.navigation.goBack()`. On Android, the hardware back button just works as expected.
 * You can go back to an existing screen in the stack with `this.props.navigation.navigate('RouteName')`, and you can go back to the first screen in the stack with `this.props.navigation.popToTop()`.
 * The `navigation` prop is available to all screen components (components defined as screens in route configuration and rendered by React Navigation as a route).
-* [Full source of what we have built so far](https://snack.expo.io/@react-navigation/going-back-v2).
+* [Full source of what we have built so far](https://snack.expo.io/@react-navigation/going-back-v3).

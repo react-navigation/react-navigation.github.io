@@ -151,4 +151,4 @@ class Screen2 extends React.Component {
 
 ![TabNavigator with different StatusBar configs](/docs/assets/statusbar/statusbar-tab-demo.gif)
 
-The code used for these demos is available as a [Snack](https://snack.expo.io/r1iuFP6Ez).
+The code used for these demos is available as a [Snack](https://snack.expo.io/@react-navigation/react-navigation-docs:-stacknavigation-statusbar-v3).

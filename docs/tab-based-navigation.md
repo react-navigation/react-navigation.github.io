@@ -13,7 +13,7 @@ This guide covers [createBottomTabNavigator](bottom-tab-navigator.html). You may
 ```js
 import React from 'react';
 import { Text, View } from 'react-native';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 class HomeScreen extends React.Component {
   render() {
@@ -35,13 +35,15 @@ class SettingsScreen extends React.Component {
   }
 }
 
-export default createBottomTabNavigator({
+const TabNavigator createBottomTabNavigator({
   Home: HomeScreen,
   Settings: SettingsScreen,
 });
+
+export default createAppContainer(TabNavigator);
 ```
 
-<a href="https://snack.expo.io/@react-navigation/basic-tabs" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/basic-tabs-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 ## Customizing the appearance
 
@@ -51,7 +53,7 @@ This is similar to how you would customize a stack navigator &mdash; there are s
 // You can import Ionicons from @expo/vector-icons if you use Expo or
 // react-native-vector-icons/Ionicons otherwise.
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 export default createBottomTabNavigator(
   {
@@ -59,7 +61,7 @@ export default createBottomTabNavigator(
     Settings: SettingsScreen,
   },
   {
-    navigationOptions: ({ navigation }) => ({
+    defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
@@ -82,7 +84,7 @@ export default createBottomTabNavigator(
 );
 ```
 
-<a href="https://snack.expo.io/@react-navigation/tabs-with-icons" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/tabs-with-icons-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 Let's dissect this:
 
@@ -126,7 +128,7 @@ class SettingsScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/jumping-between-tabs" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/jumping-between-tabs-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 ## A stack navigator for each tab
 
@@ -136,6 +138,7 @@ Usually tabs don't just display one screen &mdash; for example, on your Twitter 
 import {
   createBottomTabNavigator,
   createStackNavigator,
+  createAppContainer,
 } from 'react-navigation';
 
 class DetailsScreen extends React.Component {
@@ -186,7 +189,7 @@ const SettingsStack = createStackNavigator({
   Details: DetailsScreen,
 });
 
-export default createBottomTabNavigator(
+export default createAppContainer(createBottomTabNavigator(
   {
     Home: HomeStack,
     Settings: SettingsStack,
@@ -194,10 +197,10 @@ export default createBottomTabNavigator(
   {
     /* Other configuration remains unchanged */
   }
-);
+));
 ```
 
-<a href="https://snack.expo.io/@react-navigation/stacks-in-tabs" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/stacks-in-tabs-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 ## Why do we need a TabNavigator instead of TabBarIOS or some other component?
 

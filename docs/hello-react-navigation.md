@@ -40,7 +40,7 @@ const AppNavigator = createStackNavigator({
 export default createAppContainer(AppNavigator);
 ```
 
-<a href="https://snack.expo.io/@react-navigation/hello-world-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/hello-world-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 If you run this code, you will see a screen with an empty navigation bar and a grey content area containing your `HomeScreen` component. The styles you see for the navigation bar and the content area are the default configuration for a stack navigator, we'll learn how to configure those later.
 
@@ -108,4 +108,4 @@ Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home`
 - `createStackNavigator` is a function that takes a route configuration object and an options object and returns a React component.
 - The keys in the route configuration object are the route names and the values are the configuration for that route. The only required property on the configuration is the `screen` (the component to use for the route).
 - To specify what the initial route in a stack is, provide an `initialRouteName` on the stack options object.
-- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/hello-react-navigation-v2).
+- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/hello-react-navigation-v3).
