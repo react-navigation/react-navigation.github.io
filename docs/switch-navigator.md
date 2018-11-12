@@ -28,4 +28,4 @@ Several options get passed to the underlying router to modify navigation logic:
 
 ## Example
 
-See an example of this [on Snack](https://snack.expo.io/@react-navigation/auth-flow).
+See an example of this [on Snack](https://snack.expo.io/@react-navigation/auth-flow-v3).

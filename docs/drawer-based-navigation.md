@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const MyApp = createDrawerNavigator({
+const MyDrawerNavigator = createDrawerNavigator({
   Home: {
     screen: MyHomeScreen,
   },
@@ -62,6 +62,8 @@ const MyApp = createDrawerNavigator({
     screen: MyNotificationsScreen,
   },
 });
+
+const MyApp = createAppContainer(MyDrawerNavigator);
 ```
 
 To open and close drawer, use the following helpers to open and close the drawer:

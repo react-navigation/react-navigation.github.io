@@ -80,7 +80,7 @@ const RootStack = createStackNavigator(
 );
 ```
 
-<a href="https://snack.expo.io/@react-navigation/full-screen-modal" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/full-screen-modal-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 There are some important things to notice here:
 
@@ -92,4 +92,4 @@ There are some important things to notice here:
 
 - To change the type of transition on a stack navigator you can use the `mode` configuration. When set to `modal`, all screens animate-in from bottom to top rather than right to left. This applies to that entire stack navigator, so to use right to left transitions on other screens, we add another navigation stack with the default configuration.
 - `this.props.navigation.navigate` traverses up the navigator tree to find a navigator that can handle the `navigate` action.
-- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/full-screen-modal)
+- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/full-screen-modal-v3)

@@ -67,7 +67,7 @@ To fix this you can, once again, wrap your content in a `SafeAreaView`. This wil
 
 In conclusion, use the `SafeAreaView` component on the screens you register with a React Navigation navigator.
 
-A [Snack](https://snack.expo.io/BJ6-M8pEG) is available with the code used in this overview.
+A [Snack](https://snack.expo.io/@react-navigation/react-navigation-docs:-iphonex-demo-v3) is available with the code used in this overview.
 
 ## Use `forceInset` to get more control
 
@@ -86,4 +86,4 @@ In some cases you might need more control over which paddings are applied. For e
 
 `forceInset` takes an object with the keys `top | bottom | left | right | vertical | horizontal` and the values `'always' | 'never'`. Or you can override the padding altogether by passing an integer.
 
-There is also a [Snack](https://snack.expo.io/@jozan/react-navigation-docs:-safeareaview-demo) available to demonstrate how `forceInset` behaves.
+There is also a [Snack](https://snack.expo.io/@react-navigation/react-navigation-docs:-safeareaview-demo-v3) available to demonstrate how `forceInset` behaves.

@@ -70,7 +70,7 @@ class DetailsScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/navigate-with-params-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/navigate-with-params-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 > You can also directly access the params object with `this.props.navigation.state.params`. This may be `null` if no params were supplied, and so it's usually easier to just use `getParam` so you don't have to deal with that case.
 
@@ -81,4 +81,4 @@ class DetailsScreen extends React.Component {
 - `navigate` and `push` accept an optional second argument to let you pass parameters to the route you are navigating to. For example: `this.props.navigation.navigate('RouteName', {paramName: 'value'})`.
 - You can read the params through `this.props.navigation.getParam`
 - As an alternative to `getParam`, you may use `this.props.navigation.state.params`. It is `null` if no parameters are specified.
-- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/navigate-with-params-v2).
+- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/navigate-with-params-v3).

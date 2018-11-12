@@ -67,6 +67,8 @@ Visual options:
   * `left` - Anchor the title to the left, near the back button or other left component. This is the default on Android. When used on iOS, the header back title is hidden. Content from the left component will overflow underneath the title, if you need to adjust this you can use `headerLeftContainerStyle` and `headerTitleContainerStyle`. Additionally, this alignment is incompatible with `headerTransitionPreset: 'uikit'`.
   * `center` - Center the title, this is the default on iOS.
 * `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
+* `cardShadowEnabled` - Use this prop to have visible shadows during transitions. Defaults to `true`
+* `cardOverlayEnabled` - Use this prop to have visible stack card overlays during transitions. Defaults to `false`.
 * `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
 https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js)). Provided function will be passed the following arguments: 
   * `transitionProps` - Transition props for the new screen. 
@@ -195,6 +197,10 @@ Defaults to `false`. If `true`, the header will not have a background unless you
 
 Use this with `headerTransparent` to provide a component to render in the background of the header. You can use this with a blur view, for example, to create a translucent header.
 
+#### `headerBackgroundTransitionPreset`
+
+One of `toggle` | `fade` | `translate`; lets you choose how to transition your custom `headerBackground` components between screens.
+
 #### `gesturesEnabled`
 
 Whether you can use gestures to dismiss this screen. Defaults to true on iOS, false on Android.
@@ -209,6 +215,17 @@ Object to override the distance of touch start from the edge of the screen to re
 #### `gestureDirection`
 
 String to override the direction for dismiss gesture. `default` for normal behaviour or `inverted` for right-to-left swipes.
+
+#### `params`
+
+You can provide default params inside route definitions:
+
+```js
+const Store = createStackNavigator({
+  Playstation: { screen: ProductScreen, params: { product: 'Playstation' } },
+  Xbox: { screen: ProductScreen, params: { product: 'Xbox' } },
+});
+```
 
 ### Navigator Props
 

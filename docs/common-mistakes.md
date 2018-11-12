@@ -16,7 +16,7 @@ Here's what you might write in your code -- note that this example would be inco
 export default class App extends React.Component {
   render() {
     /* In the root component we are rendering the app navigator */
-    return <AppNavigator />;
+    return <AppContainer />;
   }
 }
 
@@ -25,6 +25,7 @@ const AuthenticationNavigator = createStackNavigator({
   ForgotPassword: ForgotPasswordScreen,
 });
 
+const AuthenticationContainer = createAppContainer(AuthenticationNavigator);
 
 class AuthenticationScreen extends React.Component {
   render() {
@@ -34,7 +35,7 @@ class AuthenticationScreen extends React.Component {
      * To interact with any parent navigator, eg: it would not know the route "Home" exists
      */
     return (
-      <AuthenticationNavigator />
+      <AuthenticationContainer />
     );
   }
 }
@@ -43,6 +44,8 @@ const AppNavigator = createSwitchNavigator({
   Auth: AuthenticationScreen, // This screen renders a navigator!
   Home: HomeScreen,
 });
+
+const AppContainer = createAppContainer(AppNavigator)
 ``` 
 
 The correct way to write this would be the following:
@@ -50,7 +53,7 @@ The correct way to write this would be the following:
 ```javascript
 export default class App extends React.Component {
   render() {
-    return <AppNavigator />;
+    return <AppContainer />;
   }
 }
 
@@ -67,6 +70,8 @@ const AppNavigator = createSwitchNavigator({
   Auth: AuthenticationNavigator,
   Home: HomeScreen,
 });
+
+const AppContainer = createAppContainer(AppNavigator);
 ```
 
 Alternatively, the following would also work because it exposes the `router` static on `AuthenticationScreen` and threads through the `navigation` prop:
@@ -75,7 +80,7 @@ Alternatively, the following would also work because it exposes the `router` sta
 export default class App extends React.Component {
   render() {
     /* In the root component we are rendering the app navigator */
-    return <AppNavigator />;
+    return <AppContainer />;
   }
 }
 
@@ -98,6 +103,8 @@ const AppNavigator = createSwitchNavigator({
   Auth: AuthenticationScreen, // This screen renders a navigator!
   Home: HomeScreen,
 });
+
+const AppContainer = createAppContainer(AppNavigator);
 ```
 
 ## Assigning navigationOptions to the wrong component

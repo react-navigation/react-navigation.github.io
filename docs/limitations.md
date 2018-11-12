@@ -28,9 +28,11 @@ const AppNavigator = createSwitchNavigator({
   Auth: AuthNavigator,
 });
 
+const AppContainer = createAppContainer(AppNavigator);
+
 export default class MyApp extends React.Component {
   render() {
-    return <AppNavigator />;
+    return <AppContainer />;
   }
 }
 ```

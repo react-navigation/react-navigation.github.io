@@ -50,7 +50,7 @@ class HomeScreen extends React.Component {
   }
 }
 ```
-<a href="https://snack.expo.io/@react-navigation/screen-components" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/screen-components-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 The ["Navigation prop reference"](navigation-prop.html) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `this.props.navigation`.
 

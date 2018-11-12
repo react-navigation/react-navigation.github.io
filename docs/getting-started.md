@@ -24,6 +24,20 @@ yarn add react-navigation
 # npm install --save react-navigation
 ```
 
+Next, install react-native-gesture-handler. If you’re using Expo you don’t need to do anything here, it’s included in the SDK. Otherwise:
+
+```bash
+yarn add react-native-gesture-handler
+# or with npm
+# npm install --save react-native-gesture-handler
+```
+
+Link all native dependencies:
+
+```bash
+react-native link
+```
+
 ## Hybrid iOS Applications (Skip for RN only projects)
 
 If you're using React Navigation within a hybrid app - an iOS app that has both Swift/ObjC and React Native parts - you may be missing the `RCTLinkingIOS` subspec in your Podfile, which is installed by default in new RN projects. To add this, ensure your Podfile looks like the following:
