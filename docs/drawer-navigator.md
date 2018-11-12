@@ -21,6 +21,7 @@ The route configs object is a mapping from route name to a route config, which t
 - `contentOptions` - Configure the drawer content, see below.
 - `useNativeAnimations` - Enable native animations. Default is `true`.
 - `drawerBackgroundColor` - Use the Drawer background for some color. The Default is `white`.
+- `drawerType` - One of `front` | `back` | `slide`
 
 Several options get passed to the underlying router to modify navigation logic:
 
