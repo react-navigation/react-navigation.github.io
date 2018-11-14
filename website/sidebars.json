@@ -62,7 +62,8 @@
       "material-top-tab-navigator",
       "with-navigation",
       "with-navigation-focus",
-      "navigation-events"
+      "navigation-events",
+      "scrollables"
     ]
   }
 }
