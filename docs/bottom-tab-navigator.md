@@ -70,7 +70,7 @@ const TabScreens = createBottomTabNavigator(
 ```
 
 
-## `defaultNavigationOptions` for screens inside of the navigator
+## `navigationOptions` for screens inside of the navigator
 
 #### `title`
 

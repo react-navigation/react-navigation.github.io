@@ -180,7 +180,7 @@ import { createBrowserApp, Link } from "@react-navigation/web";
 
 class Home extends React.Component {
   static path = "";
-  static navigationOptions = {
+  static navationOptions = {
     title: "Home",
   };
   render () {
