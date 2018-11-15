@@ -30,8 +30,8 @@ createStackNavigator({
     path: 'people/:name',
     // The action and route params are extracted from the path.
 
-    // Optional: Override the `navigationOptions` for the screen
-    navigationOptions: ({ navigation }) => ({
+    // Optional: Override the `defaultNavigationOptions` for the screen
+    defaultNavigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.name}'s Profile'`,
     }),
   },
@@ -47,7 +47,7 @@ Options for the router:
 * `initialRouteName` - Sets the default screen of the stack. Must match one of the keys in route configs.
 * `initialRouteParams` - The params for the initial route
 * `initialRouteKey` - Optional identifier of the initial route
-* `navigationOptions` - Default navigation options to use for screens
+* `defaultNavigationOptions` - Default navigation options to use for screens
 * `paths` - A mapping of overrides for the paths set in the route configs
 
 Visual options:
@@ -78,7 +78,7 @@ https://github.com/react-navigation/react-navigation/blob/master/flow/react-navi
 * `onTransitionEnd` - Function to be invoked once the card transition animation completes.
 * `transparentCard` - *Experimental* - Prop to keep all cards in the stack visible and add a transparent background instead of a white one. This is useful to implement things like modal dialogs where the previous scene should still be visible underneath the current one.
 
-### `navigationOptions` for screens inside of the navigator
+### `defaultNavigationOptions` for screens inside of the navigator
 
 #### `title`
 
@@ -108,14 +108,14 @@ Title string used by the back button on iOS, or `null` to disable label. Default
 StackNavigator({
   A: {
     screen: AScreen,
-    navigationOptions: () => ({
+    defaultNavigationOptions: () => ({
       title: `A`,
       headerBackTitle: null
     }),
   },
   B: {
     screen: BScreen,
-    navigationOptions: () => ({
+    defaultNavigationOptions: () => ({
       title: `B`,
     }),
   }
@@ -130,7 +130,7 @@ Title string used by the back button when `headerBackTitle` doesn't fit on the s
 StackNavigator({
   A: {
     screen: AScreen,
-    navigationOptions: () => ({
+    defaultNavigationOptions: () => ({
       title: `A`,
       headerBackTitle: 'A much too long text for back button from B to A',
       headerTruncatedBackTitle: `to A`
@@ -138,7 +138,7 @@ StackNavigator({
   },
   B: {
     screen: BScreen,
-    navigationOptions: () => ({
+    defaultNavigationOptions: () => ({
       title: `B`,
     }),
   }
@@ -261,7 +261,7 @@ const ModalNavigator = createStackNavigator(
   {
     headerMode: 'none',
     mode: 'modal',
-    navigationOptions: {
+    defaultNavigationOptions: {
       gesturesEnabled: false,
     },
     transitionConfig: () => ({
