@@ -59,7 +59,7 @@ tabBarOptions: {
 }
 ```
 
-## `navigationOptions` for screens inside of the navigator
+## `defaultNavigationOptions` for screens inside of the navigator
 
 #### `title`
 
