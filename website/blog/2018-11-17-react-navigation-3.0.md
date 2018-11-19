@@ -177,7 +177,7 @@ Now that the core of React Navigation can be used outside of React Native, we ca
 Here is an example web app which demonstrates the new `createBrowserApp` container and the built-in  `Link` component:
 
 
-```js
+```jsx
 import { createSwitchNavigator } from "@react-navigation/core";
 import { createBrowserApp, Link } from "@react-navigation/web";
 
@@ -213,7 +213,7 @@ export default App;
 ```
 
 The above `Link` tag will render to:
- `<a href=``"``/profile/Brent?view=photos``"``>Brent's Photos</a>`
+ `<a href="/profile/Brent?view=photos">Brent's Photos</a>`
 
 See a simple web app with Create React App [here](https://github.com/react-navigation/example-web). Or take a look at [this razzle app](https://github.com/react-navigation/web-server-example) for a more complicated example including server rendering.
 
