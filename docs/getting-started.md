@@ -43,7 +43,7 @@ No additional steps are required for iOS.
 To finalise installation of react-native-gesture-handler for Android, be sure to make the necessary modifications to `MainActivity.java`:
 
 ```diff
-package com.swmansion.gesturehandler.react.example;
+package com.reactnavigation.example;
 
 import com.facebook.react.ReactActivity;
 + import com.facebook.react.ReactActivityDelegate;
