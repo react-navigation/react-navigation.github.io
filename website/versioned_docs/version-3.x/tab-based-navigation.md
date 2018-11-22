@@ -36,7 +36,7 @@ class SettingsScreen extends React.Component {
   }
 }
 
-const TabNavigator createBottomTabNavigator({
+const TabNavigator = createBottomTabNavigator({
   Home: HomeScreen,
   Settings: SettingsScreen,
 });
