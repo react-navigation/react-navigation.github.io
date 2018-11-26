@@ -65,7 +65,7 @@ export default class App extends React.Component {
 Given that the only route configuration we have for `Home` is the screen component, we don't need to use the `{ screen: HomeScreen }` configuration format, we can use the screen component directly.
 
 ```js
-const RootStack = createStackNavigator({
+const AppNavigator = createStackNavigator({
   Home: HomeScreen
 });
 ```
