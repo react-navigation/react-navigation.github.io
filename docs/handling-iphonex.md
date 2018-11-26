@@ -61,7 +61,7 @@ Even if you're using the default navigation bar and tab bar if your application 
 
 ![App in landscape mode with text hidden](/docs/assets/iphoneX/04-iphonex-landscape-hidden.png)
 
-To fix this you can, once again, wrap your content in a `SafeAreaView`. This will not conflict with the navigation bar or tab bar's default behavior in portrait mode.
+To fix this you can, once again, wrap your content in a `SafeAreaView`. This will not conflict with the navigation bar nor the tab bar's default behavior in portrait mode.
 
 ![App in landscape mode with text visible](/docs/assets/iphoneX/05-iphonex-landscape-fixed.png)
 
