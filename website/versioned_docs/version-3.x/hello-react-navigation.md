@@ -66,14 +66,14 @@ export default class App extends React.Component {
 Given that the only route configuration we have for `Home` is the screen component, we don't need to use the `{ screen: HomeScreen }` configuration format, we can use the screen component directly.
 
 ```js
-const RootStack = createStackNavigator({
+const AppNavigator = createStackNavigator({
   Home: HomeScreen
 });
 ```
 
 ## Adding a second route
 
-The `<RootStack />` component doesn't accept any props -- all configuration is specified in the `options` parameter to the `createStackNavigator` function. We left the `options` blank, so it just uses the default configuration. To see an example of using the `options` object, we will add a second screen to the stack navigator.
+The `<AppContainer />` component doesn't accept any props -- all configuration is specified in the `options` parameter to the `AppNavigator` `createStackNavigator` function. We left the `options` blank, so it just uses the default configuration. To see an example of using the `options` object, we will add a second screen to the stack navigator.
 
 ```js
 // Other code for HomeScreen here...
@@ -88,7 +88,7 @@ class DetailsScreen extends React.Component {
   }
 }
 
-const RootStack = createStackNavigator(
+const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
     Details: DetailsScreen
