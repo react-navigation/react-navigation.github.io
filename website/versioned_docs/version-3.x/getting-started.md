@@ -36,7 +36,7 @@ yarn add react-native-gesture-handler
 Link all native dependencies:
 
 ```bash
-react-native link
+react-native link react-native-gesture-handler
 ```
 
 No additional steps are required for iOS.
