@@ -95,10 +95,14 @@ In `SimpleApp/android/app/src/main/AndroidManifest.xml`, add the new `intent-fil
 
 ```
 <intent-filter>
+    <action android:name="android.intent.action.MAIN" />
+    <category android:name="android.intent.category.LAUNCHER" />
+</intent-filter>
+<intent-filter>
     <action android:name="android.intent.action.VIEW" />
     <category android:name="android.intent.category.DEFAULT" />
     <category android:name="android.intent.category.BROWSABLE" />
-    <data android:scheme="mychat" android:host="mychat" />
+    <data android:scheme="mychat" android:host="mychat" />            
 </intent-filter>
 ```
 
