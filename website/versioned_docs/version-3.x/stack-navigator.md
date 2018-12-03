@@ -71,9 +71,9 @@ Visual options:
 * `cardShadowEnabled` - Use this prop to have visible shadows during transitions. Defaults to `true`
 * `cardOverlayEnabled` - Use this prop to have visible stack card overlays during transitions. Defaults to `false`.
 * `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
-https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js)). Provided function will be passed the following arguments: 
-  * `transitionProps` - Transition props for the new screen. 
-  * `prevTransitionProps` - Transitions props for the old screen. 
+https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js)). Provided function will be passed the following arguments:
+  * `transitionProps` - Transition props for the new screen.
+  * `prevTransitionProps` - Transitions props for the old screen.
   * `isModal` - Boolean specifying if screen is modal.
 * `onTransitionStart` - Function to be invoked when the card transition animation is about to start.
 * `onTransitionEnd` - Function to be invoked once the card transition animation completes.
@@ -160,7 +160,7 @@ Style object for the header
 
 #### `headerForceInset`
 
-Allows to pass `forceInset` object to internal SafeAreaView used in the header. 
+Allows to pass `forceInset` object to internal SafeAreaView used in the header.
 
 #### `headerTitleStyle`
 
@@ -262,7 +262,7 @@ const ModalNavigator = createStackNavigator(
   {
     headerMode: 'none',
     mode: 'modal',
-    navigationOptions: {
+    defaultNavigationOptions: {
       gesturesEnabled: false,
     },
     transitionConfig: () => ({
