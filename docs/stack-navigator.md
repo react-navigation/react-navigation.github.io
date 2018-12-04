@@ -261,7 +261,7 @@ const ModalNavigator = createStackNavigator(
   {
     headerMode: 'none',
     mode: 'modal',
-    navigationOptions: {
+    defaultNavigationOptions: {
       gesturesEnabled: false,
     },
     transitionConfig: () => ({
