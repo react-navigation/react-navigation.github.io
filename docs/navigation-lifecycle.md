@@ -4,19 +4,19 @@ title: Navigation lifecycle
 sidebar_label: Navigation lifecycle
 ---
 
-In the previous section, we worked with a stack navigator that has two screens (`Home` and `Details`) and learned how to use `this.props.navigation.navigate('RouteName')` to navigate between the routes.
+在上一个章节里,我们学到了使用 stack navigator 来完成两个页面 (`Home` and `Details`) ，并知道了使用 `this.props.navigation.navigate('RouteName')` 进行页面间跳转.
 
-An important question in this context is: what happens with `Home` when we navigate away from it, or when we come back to it? How does a route find out that a user is leaving it or coming back to it?
+那么更重要的一个问题是: 当我没说离开`Home`页会发生什么？我们点击返回呢？route是怎么知道页面是正要离开或者正要返回呢？
 
-Coming to react-navigation from the web, you may assume that when user navigates from route A to route B, A will unmount (its `componentWillUnmount` is called) and A will mount again when user comes back to it. While these React lifecycle methods are still valid and are used in react-navigation, their usage differs from the web. This is driven by more complex needs of mobile navigation. 
+想想 react-navigation 在web端怎么用, 你也许会想当我们 离开A页面到B页面, A页面会执行 unmount (`componentWillUnmount`会被调用) ，当重新返回A页面的时候，A会重新执行mount. 那么React的生命周期函数在react-navigation中依然有效, 但是由于移动端复杂的需求，他们的用法有些不同。
 
 ## Example scenario
 
-Consider a stack navigator with screens A and B. After navigating to A, its `componentDidMount` is called. When pushing B, its `componentDidMount` is also called, but A remains mounted on the stack and its `componentWillUnmount` is therefore not called.
+假如一个stack navigator有AB两个页面. 当到A页面之后, 它的 `componentDidMount` 会被调用. 再到B页面, B页面的 `componentDidMount`也会被调用, 但是A页面依然是挂载状态，并没有卸载， `componentWillUnmount`没有被调用.
 
-When going back from B to A, `componentWillUnmount` of B is called, but `componentDidMount` of A is not because A remained mounted the whole time.
+我们从B回到A, B的`componentWillUnmount`会被调用, 但是A的 `componentDidMount`不会被调用，因为它一直存在，没有被重新加载.
 
-Similar results can be observed (in combination) with other navigators as well. Consider a tab navigator with two tabs, where each tab is a stack navigator:
+其他navigators的生命周期在经过联想后也可以得出相似的结论. 假如一个tab navigator有两个tabs, 每个tab 都是一个 stack navigator:
 
 
 ```jsx
@@ -38,15 +38,15 @@ const TabNavigator = createBottomTabNavigator(
 );
 ```
 
-We start on the `HomeScreen` and navigate to `DetailsScreen`. Then we use the tab bar to switch to the `SettingsScreen` and navigate to `ProfileScreen`. After this sequence of operations is done, all 4 of the screens are mounted! If you use the tab bar to switch back to the `HomeStack`, you'll notice you'll be presented with the `DetailsScreen` - the navigation state of the `HomeStack` has been preserved!
+我们开始是在 `HomeScreen` 然后到 `DetailsScreen`. 然后我们切换tabbar到 `SettingsScreen` 再到 `ProfileScreen`. 经过这一些列的操作, 所有的这四个页面的状态都是 mounted! 如果你切换tabbar回到 `HomeStack`, 你会注意到展示给你的是 `DetailsScreen` - `HomeStack`的路由栈状态已经被保存了!
 
 ## React Navigation lifecycle events
 
-Now that we understand how React lifecycle methods work in React Navigation, let's answer the question we asked at the beginning: "How do we find out that a user is leaving it or coming back to it?"
+现在我们知道React lifecycle在React Navigation上是如何工作的,让我们回答一下刚开始的问题: "我们怎么判断一个页面是要离开还是要返回呢?"
 
-React Navigation emits events to screen components that subscribe to them. There are four different events that you can subscribe to: `willFocus`, `willBlur`, `didFocus` and `didBlur`. Read more about them in the [API reference](navigation-prop.html#addlistener-subscribe-to-updates-to-navigation-lifecycle).
+React Navigation提供了 emits events 来监听页面的状态. 这里有四个events可以监听: `willFocus`, `willBlur`, `didFocus` and `didBlur`. 更多请参考 [API reference](navigation-prop.html#addlistener-subscribe-to-updates-to-navigation-lifecycle).
 
-Many of your use cases may be covered with the [`withNavigationFocus` HOC](with-navigation-focus.html) or the [`<NavigationEvents />` component](navigation-events.html) which are a little more straightforward to use.
+大部分的用法都可以参考 [`withNavigationFocus` HOC](with-navigation-focus.html) 或者 [`<NavigationEvents />` component](navigation-events.html) which are a little more straightforward to use.
 
 ## Summary
 
