@@ -161,7 +161,7 @@ const TabNavigator = createBottomTabNavigator({
 
 TabNavigator.navigationOptions = {
   // Hide the header from AppNavigator stack
-  header: null,
+  header: <React.Fragment />,
 };
 
 const AppNavigator = createStackNavigator({
