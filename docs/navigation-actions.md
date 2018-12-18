@@ -8,7 +8,7 @@ All `NavigationActions` return an object that can be sent to the router using `n
 
 Note that if you want to dispatch react-navigation actions you should use the action creators provided in this library.
 
-It's important to highlight the `NavigationActions` don't throw errors or anything when they are unhandled ( similar to how when you dispatch an action that isn't handled by a reducer in redux and nothing happens ). However, if the app state doesn't change as a result of dispatch then the return value for dispatch is `false` and `true` otherwise.
+It's important to highlight that dispatching a `NavigationAction` doesn't throw any error when the action is unhandled (similar to when you dispatch an action that isn't handled by a reducer in redux and nothing happens). However, if the app state changes as a result of a dispatch then the return value of the dispatch is `true` and `false` otherwise.
 
 The following actions are supported:
 
