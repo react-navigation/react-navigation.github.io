@@ -211,12 +211,7 @@ export default class App extends React.PureComponent<Props> {
 
   render() {
     return (
-      <AppContainer
-        uriPrefix={uriPrefix}
-        ref={ref => {
-          NavigationService.setTopLevelNavigator(ref)
-        }}
-      />
+      <AppContainer uriPrefix={uriPrefix} />
     )
   }
 }
