@@ -186,8 +186,8 @@ export const extractDeepLinkFromDynamicLink = (
 type Props = {}
 const uriPrefix =
   Platform.OS === 'android'
-    ? 'chat://chat/'
-    : 'chat://'
+    ? 'mychat://mychat/'
+    : 'mychat://'
 export default class App extends React.PureComponent<Props> {
   unsubcribe: Function
   constructor(props: Props) {
