@@ -117,3 +117,108 @@ To test the intent handling in Android, run the following:
 ```
 adb shell am start -W -a android.intent.action.VIEW -d "mychat://mychat/chat/Eric" com.simpleapp
 ```
+
+### Firebase Dynamic Links
+In case you want to handle [Dynamic Links](https://rnfirebase.io/docs/v5.x.x/links/reference/links#onLink) to navigate somewhere with `react-navigation` 
+You should setup like this:
+
+```javascript
+
+const AppContainer = createAppContainer(
+  createSwitchNavigator(
+    {
+      AuthLoading,
+      App: AppTab,
+      Auth: AuthStack,
+      ResetPassword: {
+        path: 'rspass/:token',
+        screen: ResetPassword
+      }
+    },
+    {
+      initialRouteName: 'AuthLoading'
+    }
+  )
+)
+
+// UTILS
+export const getDomainName = (url: string): string => {
+  let hostname
+  //find & remove protocol (http, ftp, etc.) and get hostname
+  if (url.indexOf('://') > -1) {
+    hostname = url.split('/')[2]
+  } else {
+    hostname = url.split('/')[0]
+  }
+  //find & remove port number
+  hostname = hostname.split(':')[0]
+  //find & remove "?"
+  hostname = hostname.split('?')[0]
+  hostname = hostname.replace('www.', '')
+
+  return hostname
+}
+//$FlowFixMe
+Array.prototype.remove = function(from: number, to: number) {
+  var rest = this.slice((to || from) + 1 || this.length)
+  this.length = from < 0 ? this.length + from : from
+  return this.push.apply(this, rest)
+}
+export const extractDeepLinkFromDynamicLink = (
+  dynamicLink: string = ''
+): string => {
+  const arr = dynamicLink.split('/').filter(str => str.length)
+  const hostname = getDomainName(dynamicLink)
+  arr.forEach((str, index) => {
+    if (
+      str.indexOf('http') === 0 ||
+      str.indexOf('https') === 0 ||
+      str === hostname
+    ) {
+      //$FlowFixMe
+      arr.remove(index, index + 1)
+    }
+  })
+  return `${hostname}://${arr.join('/')}`
+}
+// UTILS END
+
+type Props = {}
+const uriPrefix =
+  Platform.OS === 'android'
+    ? 'chat://chat/'
+    : 'chat://'
+export default class App extends React.PureComponent<Props> {
+  unsubcribe: Function
+  constructor(props: Props) {
+    super(props)
+    this.unsubcribe = firebase.links().onLink(url => {
+      const path = extractDeepLinkFromDynamicLink(url)
+      if (!path.length) {
+        console.log('nothing to do with empty path')
+        return
+      }
+      Linking.canOpenURL(path)
+        .then(() => Linking.openURL(path))
+        .catch(e => console.log('Unable to handle dynamic link as a deeplink', e))
+    })
+  }
+
+  componentWillUnmount() {
+    console.log('DYNAMIC_LINK unsubcribe')
+    this.unsubcribe()
+  }
+
+  render() {
+    return (
+      <AppContainer
+        uriPrefix={uriPrefix}
+        ref={ref => {
+          NavigationService.setTopLevelNavigator(ref)
+        }}
+      />
+    )
+  }
+}
+
+```
