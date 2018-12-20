@@ -179,6 +179,7 @@ export const extractDeepLinkFromDynamicLink = (
       arr.remove(index, index + 1)
     }
   })
+  if(Platform.OS === 'android') return `${hostname}://${hostname}/${arr.join('/')}`
   return `${hostname}://${arr.join('/')}`
 }
 // UTILS END
