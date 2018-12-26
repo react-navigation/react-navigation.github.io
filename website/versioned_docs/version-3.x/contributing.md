@@ -130,23 +130,7 @@ If any errors occur you'll either have to manually fix them or you can attempt t
 
 ### Run the Example App
 
-The [NavigationPlayground](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground) example app includes a variety of patterns and is used as a simple way for contributors to manually integration test changes.
-
-```bash
-yarn install
-cd examples/NavigationPlayground
-yarn install
-yarn start
-```
-
-You will be shown a QR code to scan in the Expo app. You can get Expo [here](https://docs.expo.io/versions/latest/index.html) if you don't have it yet. 
-
-Commands are the same as above for any of the example apps. If you run into any issues, please try the following to start fresh:
-
-```bash
-watchman watch-del-all
-yarn start -- --reset-cache
-```
+The [NavigationPlayground](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground) example app includes a variety of patterns and is used as a simple way for contributors to manually integration test changes. See the [README](https://github.com/react-navigation/react-navigation/blob/master/examples/NavigationPlayground/README.md) for instructions to run it.
 
 ### Run the Website
 
