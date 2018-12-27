@@ -23,6 +23,7 @@ The route configs object is a mapping from route name to a route config, which t
 * `order` - Array of routeNames which defines the order of the tabs.
 * `paths` - Provide a mapping of routeName to path config, which overrides the paths set in the routeConfigs.
 * `backBehavior` - Should the back button cause a tab switch to the initial tab? If yes, set to `initialRoute`, otherwise `none`. Defaults to `initialRoute` behavior.
+* `lazy` - Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
 * `tabBarComponent` - Optional, override component to use as the tab bar.
 * `tabBarOptions` - An object with the following properties:
   * `activeTintColor` - Label and icon color of the active tab.
