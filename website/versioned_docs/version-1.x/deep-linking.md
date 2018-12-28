@@ -30,26 +30,9 @@ const SimpleApp = StackNavigator({
 });
 ```
 
-
-### URI Prefix
-
-Next, let's configure our navigation container to extract the path from the app's incoming URI. 
-
-```js
-const SimpleApp = StackNavigator({...});
-
-// on Android, the URI prefix typically contains a host in addition to scheme
-// on Android, note the required / (slash) at the end of the host property
-const prefix = Platform.OS == 'android' ? 'mychat://mychat/' : 'mychat://';
-// in Expo projects you can do the following to get the URI prefix
-const prefix = Expo.Linking.makeUrl('/');
-
-const MainApp = () => <SimpleApp uriPrefix={prefix} />;
-```
-
 ## Set up with Expo projects
 
-you need to specify a scheme for your app. You can register for a scheme in your `app.json` by adding a string under the scheme key:
+You need to specify a scheme for your app. You can register for a scheme in your `app.json` by adding a string under the scheme key:
 
 ```json
 {
@@ -58,6 +41,19 @@ you need to specify a scheme for your app. You can register for a scheme in your
   }
 }
 ```
+
+### URI Prefix
+
+Next, let's configure our navigation container to extract the path from the app's incoming URI. 
+
+```js
+const SimpleApp = StackNavigator({...});
+
+const prefix = Expo.Linking.makeUrl('/');
+
+const MainApp = () => <SimpleApp uriPrefix={prefix} />;
+```
+
 ### iOS
 
 To test the URI on the simulator (Expo client app ), run the following:
@@ -89,6 +85,20 @@ Read the [Expo linking guide](https://docs.expo.io/versions/latest/guides/linkin
 
 ## Set up with `react-native init` projects
 
+### URI Prefix
+
+Next, let's configure our navigation container to extract the path from the app's incoming URI. 
+
+```js
+const SimpleApp = StackNavigator({...}));
+
+// on Android, the URI prefix typically contains a host in addition to scheme
+// on Android, note the required / (slash) at the end of the host property
+const prefix = Platform.OS == 'android' ? 'mychat://mychat/' : 'mychat://';
+
+const MainApp = () => <SimpleApp uriPrefix={prefix} />;
+```
+
 ### iOS
 
 Let's configure the native iOS app to open based on the `mychat://` URI scheme.
@@ -110,7 +120,7 @@ In `SimpleApp/ios/SimpleApp/AppDelegate.m`:
 
 In Xcode, open the project at `SimpleApp/ios/SimpleApp.xcodeproj`. Select the project in sidebar and navigate to the info tab. Scroll down to "URL Types" and add one. In the new URL type, set the identifier and the url scheme to your desired url scheme.
 
-![Xcode project info URL types with mychat added](./assets/deep-linking/xcode-linking.png)
+![Xcode project info URL types with mychat added](/docs/assets/deep-linking/xcode-linking.png)
 
 Now you can press play in Xcode, or re-build on the command line:
 

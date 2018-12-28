@@ -30,26 +30,9 @@ const SimpleApp = createAppContainer(createStackNavigator({
 }));
 ```
 
-
-### URI Prefix
-
-Next, let's configure our navigation container to extract the path from the app's incoming URI. 
-
-```js
-const SimpleApp = createAppContainer(createStackNavigator({...}));
-
-// on Android, the URI prefix typically contains a host in addition to scheme
-// on Android, note the required / (slash) at the end of the host property
-const prefix = Platform.OS == 'android' ? 'mychat://mychat/' : 'mychat://';
-// in Expo projects you can do the following to get the URI prefix
-const prefix = Expo.Linking.makeUrl('/');
-
-const MainApp = () => <SimpleApp uriPrefix={prefix} />;
-```
-
 ## Set up with Expo projects
 
-you need to specify a scheme for your app. You can register for a scheme in your `app.json` by adding a string under the scheme key:
+You need to specify a scheme for your app. You can register for a scheme in your `app.json` by adding a string under the scheme key:
 
 ```json
 {
@@ -58,6 +41,19 @@ you need to specify a scheme for your app. You can register for a scheme in your
   }
 }
 ```
+
+### URI Prefix
+
+Next, let's configure our navigation container to extract the path from the app's incoming URI. 
+
+```js
+const SimpleApp = createAppContainer(createStackNavigator({...}));
+
+const prefix = Expo.Linking.makeUrl('/');
+
+const MainApp = () => <SimpleApp uriPrefix={prefix} />;
+```
+
 ### iOS
 
 To test the URI on the simulator (Expo client app ), run the following:
@@ -88,6 +84,20 @@ adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:19004/--
 Read the [Expo linking guide](https://docs.expo.io/versions/latest/guides/linking.html) for more information about how to configure linking in projects built with Expo.
 
 ## Set up with `react-native init` projects
+
+### URI Prefix
+
+Next, let's configure our navigation container to extract the path from the app's incoming URI. 
+
+```js
+const SimpleApp = createAppContainer(createStackNavigator({...}));
+
+// on Android, the URI prefix typically contains a host in addition to scheme
+// on Android, note the required / (slash) at the end of the host property
+const prefix = Platform.OS == 'android' ? 'mychat://mychat/' : 'mychat://';
+
+const MainApp = () => <SimpleApp uriPrefix={prefix} />;
+```
 
 ### iOS
 
