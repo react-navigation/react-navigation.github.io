@@ -65,16 +65,19 @@ export default createBottomTabNavigator(
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
+        let IconComponent = Ionicons;
         let iconName;
         if (routeName === 'Home') {
           iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+          // Sometimes we want to add badges to some icons. 
+          // You can check the implementation below.
+          IconComponent = HomeIconWithBadge; 
         } else if (routeName === 'Settings') {
           iconName = `ios-options${focused ? '' : '-outline'}`;
         }
 
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
-        return <Ionicons name={iconName} size={horizontal ? 20 : 25} color={tintColor} />;
+        // You can return any component that you like here!
+        return <IconComponent name={iconName} size={25} color={tintColor} />;
       },
     }),
     tabBarOptions: {
@@ -85,13 +88,60 @@ export default createBottomTabNavigator(
 );
 ```
 
-<a href="https://snack.expo.io/@react-navigation/tabs-with-icons-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@sunnylqm/tabs-with-icons-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 Let's dissect this:
 
 * `tabBarIcon` is a property on `navigationOptions`, so we know we can use it on our screen components, but in this case chose to put it in the `createBottomTabNavigator` configuration in order to centralize the icon configuration for convenience.
 * `tabBarIcon` is a function that is given the `focused` state, `tintColor`, and `horizontal` param, which is a boolean. If you take a peek further down in the configuration you will see `tabBarOptions` and `activeTintColor` and `inactiveTintColor`. These default to the the iOS platform defaults, but you can change them here. The `tintColor` that is passed through to the `tabBarIcon` is either the active or inactive one, depending on the `focused` state (focused is active). The orientation state `horizontal` is `true` when the device is in landscape, otherwise is `false` for portrait.
 * Read the [full API reference](bottom-tab-navigator.html) for further information on `createBottomTabNavigator` configuration options.
+
+## Add badges to icons
+
+Sometimes we want to add badges to some icons. A common way is to use an extra view container and style the badge element with absolute positioning.
+
+```js
+export default class IconWithBadge extends React.Component {
+  render() {
+    const { name, badgeCount, color, size } = this.props;
+    return (
+      <View style={{ width: 24, height: 24, margin: 5 }}>
+        <Ionicons name={name} size={size} color={color} />
+        { badgeCount > 0 && (
+          <View style={{
+            // Absolute positioning ref: https://developer.mozilla.org/en-US/docs/Web/CSS/position#Absolute_positioning
+            // Note 1: On RN the absolutely positioned element is always positioned relative to its parent, 
+            // which is different from web.
+            // Note 2: Before RN 0.57, the child element can not go beyond parent on Android.
+            // Check a workaround here https://github.com/facebook/react-native/issues/12534#issuecomment-347648303
+            position: 'absolute',
+            right: -6,
+            top: -3,
+            backgroundColor: 'red',
+            borderRadius: 6,
+            width: 12,
+            height: 12,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>{badgeCount}</Text>
+          </View>
+        )}
+      </View>
+    );
+  }
+}
+```
+
+From UI perspective this component is ready to use, but you still need to find some way to pass down the badge count properly from somewhere else, like using [React Context](https://reactjs.org/docs/context.html), [redux](https://redux.js.org/), [mobx](https://mobx.js.org/) or [event emitters](https://github.com/facebook/react-native/blob/master/Libraries/vendor/emitter/EventEmitter.js).
+
+```js
+const HomeIconWithBadge = (props) => {
+  // You should pass down the badgeCount in some other ways like react context api, redux, mobx or event emitters.
+  return <IconWithBadge {...props} badgeCount={3} />;  
+}
+export default HomeIconWithBadge
+```
 
 ## Jumping between tabs
 
