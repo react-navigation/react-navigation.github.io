@@ -5,18 +5,18 @@ sidebar_label: Action After Focusing Screen
 original_id: action-after-focusing-screen
 ---
 
-In this guide, we will call an action on screen focusing. This is useful for making additional API calls when a user visits a particular screen in a Tab Navigator, or to track user events as they tap around our app.
+In this guide we will call an action on screen focusing. This is useful for making additional API calls when a user revisits a particular screen in a Tab Navigator, or to track user events as they tap around our app.
 
 There are two approaches to calling an action on screen focusing:
 
 1. Using the `withNavigationFocus` higher order component provided by react-navigation.
 2. Listening to the `'didFocus'` event with an event listener.
 
-## Triggering an action with a higher order component
+## Triggering an action with the `withNavigationFocus` higher order component
 
-react-navigation provides a [higher order component](https://reactjs.org/docs/higher-order-components.html) that passes a `isFocused` to our component, along with the `navigation` object we'd normally get with `withNavigation`.
+react-navigation provides a [higher order component](https://reactjs.org/docs/higher-order-components.html) that passes an `isFocused` prop to our component, along with the `navigation` object we'd normally get with `withNavigation`.
 
-When the prop `isFocused` is passed to our component, it will pass `true` when the screen is focused and `false` when our component is no longer focused. This enables us to call functions on a user entering or leaving a screen.
+When the `isFocused` prop is passed to our component, it will pass `true` when the screen is focused and `false` when our component is no longer focused. This enables us to call actions on a user entering or leaving a screen.
 
 ### Example
 
@@ -43,9 +43,9 @@ class TabScreen extends Component {
 export default withNavigationFocus(TabScreen);
 ```
 
-This example is also documented in the `withNavigationFocus` API documentation.
+This example is also documented in the <a href="/docs/en/with-navigation-focus.html">`withNavigationFocus` API documentation</a>.
 
-## Triggering an action with an event listener
+## Triggering an action with a `'didFocus'` event listener
 
 We can also listen to the `'didFocus'` event with an event listener. After setting up an event listener, we must also stop listening to the event when the screen is unmounted.
 
