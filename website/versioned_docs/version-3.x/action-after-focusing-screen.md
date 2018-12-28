@@ -16,7 +16,11 @@ There are two approaches to calling an action on screen focusing:
 
 react-navigation provides a [higher order component](https://reactjs.org/docs/higher-order-components.html) that passes an `isFocused` prop to our component, along with the `navigation` object we'd normally get with `withNavigation`.
 
-When the `isFocused` prop is passed to our component, it will pass `true` when the screen is focused and `false` when our component is no longer focused. This enables us to call actions on a user entering or leaving a screen.
+When the `isFocused` prop is passed to our component, it will pass `true` when the screen is focused and `false` when our component is no longer focused. This enables us to call actions on a user entering or leaving a screen. This is particularly handy when we are trying to stop something when the page is unfocused, like stopping a video or audio file from playing, or stopping the tracking of a user's location.
+
+Since `withNavigationFocus` passes a prop on every focus change, it will cause our component to re-render when we focus and unfocus a screen. Using this higher order component may introduce unnecessary component re-renders as a screen comes in and out of focus. This could cause issues depending on the type of action we're calling on focusing.
+
+For instance, if we are attempting to make an API call on focus to fetch some data, we only want to fetch data when the component is focused and not when the component becomes unfocused. To prevent extra component re-renders, we could write some logic in `shouldComponentUpdate` to control when the component renders itself, however we may be better off using the event listener method detailed below. The event listener will only call an action and render the component when the screen is focused and will do nothing when a screen becomes unfocused.
 
 ### Example
 
@@ -49,7 +53,7 @@ This example is also documented in the <a href="/docs/en/with-navigation-focus.h
 
 We can also listen to the `'didFocus'` event with an event listener. After setting up an event listener, we must also stop listening to the event when the screen is unmounted.
 
-With this approach, we will only be able to call an action when the screen focuses.
+With this approach, we will only be able to call an action when the screen focuses. This is great for fetching data with an API call when a screen becomes focused, or any other action that needs to happen once the screen comes into view.
 
 ### Example
 
