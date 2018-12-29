@@ -30,7 +30,8 @@
       "version-3.x-screen-tracking",
       "version-3.x-state-persistence",
       "version-3.x-redux-integration",
-      "version-3.x-web-support"
+      "version-3.x-web-support",
+      "version-3.x-action-after-focusing-screen"
     ],
     "Build your own Navigator": [
       "version-3.x-custom-navigator-overview",
