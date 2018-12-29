@@ -30,6 +30,17 @@ const SimpleApp = StackNavigator({
 });
 ```
 
+## Set up with Expo projects
+
+You need to specify a scheme for your app. You can register for a scheme in your `app.json` by adding a string under the scheme key:
+
+```json
+{
+  "expo": {
+    "scheme": "mychat"
+  }
+}
+```
 
 ### URI Prefix
 
@@ -38,17 +49,55 @@ Next, let's configure our navigation container to extract the path from the app'
 ```js
 const SimpleApp = StackNavigator({...});
 
-// on Android, the URI prefix typically contains a host in addition to scheme
-const prefix = Platform.OS == 'android' ? 'mychat://mychat/' : 'mychat://';
+const prefix = Expo.Linking.makeUrl('/');
 
 const MainApp = () => <SimpleApp uriPrefix={prefix} />;
 ```
 
-## Set up with Expo projects
+### iOS
+
+To test the URI on the simulator (Expo client app ), run the following:
+
+```
+xcrun simctl openurl booted [ put your URI prefix in here ]
+
+// for example
+
+xcrun simctl openurl booted exp://127.0.0.1:19004/--/chat/Eric
+
+```
+
+
+### Android
+
+To test the intent handling in Android (Expo client app ), run the following:
+
+```
+adb shell am start -W -a android.intent.action.VIEW -d "[ put your URI prefix in here ]" com.simpleapp
+
+// for example
+
+adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:19004/--/chat/Eric" com.simpleapp
+
+```
 
 Read the [Expo linking guide](https://docs.expo.io/versions/latest/guides/linking.html) for more information about how to configure linking in projects built with Expo.
 
 ## Set up with `react-native init` projects
+
+### URI Prefix
+
+Next, let's configure our navigation container to extract the path from the app's incoming URI. 
+
+```js
+const SimpleApp = StackNavigator({...}));
+
+// on Android, the URI prefix typically contains a host in addition to scheme
+// on Android, note the required / (slash) at the end of the host property
+const prefix = Platform.OS == 'android' ? 'mychat://mychat/' : 'mychat://';
+
+const MainApp = () => <SimpleApp uriPrefix={prefix} />;
+```
 
 ### iOS
 
@@ -71,7 +120,7 @@ In `SimpleApp/ios/SimpleApp/AppDelegate.m`:
 
 In Xcode, open the project at `SimpleApp/ios/SimpleApp.xcodeproj`. Select the project in sidebar and navigate to the info tab. Scroll down to "URL Types" and add one. In the new URL type, set the identifier and the url scheme to your desired url scheme.
 
-![Xcode project info URL types with mychat added](./assets/deep-linking/xcode-linking.png)
+![Xcode project info URL types with mychat added](/docs/assets/deep-linking/xcode-linking.png)
 
 Now you can press play in Xcode, or re-build on the command line:
 
@@ -95,10 +144,14 @@ In `SimpleApp/android/app/src/main/AndroidManifest.xml`, add the new `VIEW` type
 
 ```
 <intent-filter>
+    <action android:name="android.intent.action.MAIN" />
+    <category android:name="android.intent.category.LAUNCHER" />
+</intent-filter>
+<intent-filter>
     <action android:name="android.intent.action.VIEW" />
     <category android:name="android.intent.category.DEFAULT" />
     <category android:name="android.intent.category.BROWSABLE" />
-    <data android:scheme="mychat" android:host="mychat" />
+    <data android:scheme="mychat" android:host="mychat" />            
 </intent-filter>
 ```
 

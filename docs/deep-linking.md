@@ -29,6 +29,62 @@ const SimpleApp = createAppContainer(createStackNavigator({
 }));
 ```
 
+## Set up with Expo projects
+
+First, you will want to specify a url scheme for your app. This corresponds to the string before `://` in a url, so if your scheme is `mychat` then a link to your app would be `mychat://`. The scheme only applies to standalone apps and you need to re-build the standalone app for the change to take effect. In the Expo client app you can deep link using `exp://ADDRESS:PORT` where `ADDRESS` is often `127.0.0.1` and `PORT` is often `19000` - the URL is printed when you run `expo start`. If you want to test with your custom scheme you will need to run `expo build:ios -t simulator` or `expo build:android` and install the resulting binaries in your emulators. You can register for a scheme in your `app.json` by adding a string under the scheme key:
+
+```json
+{
+  "expo": {
+    "scheme": "mychat"
+  }
+}
+```
+
+
+### URI Prefix
+
+Next, let's configure our navigation container to extract the path from the app's incoming URI. 
+
+```js
+import * as Expo from 'expo';
+
+const SimpleApp = createAppContainer(createStackNavigator({...}));
+
+const prefix = Expo.Linking.makeUrl('/');
+
+const MainApp = () => <SimpleApp uriPrefix={prefix} />;
+```
+
+The reason that is necessary to use `Expo.Linking.makeUrl` is that the scheme will differ depending on whether you're in the client app or in a standalone app.
+
+### Test deep linking on iOS
+
+To test the URI on the simulator in the Expo client app, run the following:
+
+```
+xcrun simctl openurl booted [ put your URI prefix in here ]
+
+// for example
+
+xcrun simctl openurl booted exp://127.0.0.1:19000/--/chat/Eric
+```
+
+### Test deep linking on Android
+
+To test the intent handling in Android (Expo client app ), run the following:
+
+```
+adb shell am start -W -a android.intent.action.VIEW -d "[ put your URI prefix in here ]" com.simpleapp
+
+// for example
+
+adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:19000/--/chat/Eric" com.simpleapp
+```
+
+Read the [Expo linking guide](https://docs.expo.io/versions/latest/guides/linking.html) for more information about how to configure linking in projects built with Expo.
+
+## Set up with `react-native init` projects
 
 ### URI Prefix
 
@@ -43,12 +99,6 @@ const prefix = Platform.OS == 'android' ? 'mychat://mychat/' : 'mychat://';
 
 const MainApp = () => <SimpleApp uriPrefix={prefix} />;
 ```
-
-## Set up with Expo projects
-
-Read the [Expo linking guide](https://docs.expo.io/versions/latest/guides/linking.html) for more information about how to configure linking in projects built with Expo.
-
-## Set up with `react-native init` projects
 
 ### iOS
 
