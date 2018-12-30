@@ -30,7 +30,8 @@
       "screen-tracking",
       "state-persistence",
       "redux-integration",
-      "web-support"
+      "web-support",
+      "custom-modal-dismissal"
     ],
     "Build your own Navigator": [
       "custom-navigator-overview",
