@@ -108,7 +108,8 @@ export default class IconWithBadge extends React.Component {
         <Ionicons name={name} size={size} color={color} />
         { badgeCount > 0 && (
           <View style={{
-            // If you're using react-native < 0.57 overflow outside of parent will not work on Android, see https://git.io/fhLJ8
+            // If you're using react-native < 0.57 overflow outside of parent 
+            // will not work on Android, see https://git.io/fhLJ8
             position: 'absolute',
             right: -6,
             top: -3,
