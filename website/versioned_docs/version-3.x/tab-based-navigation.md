@@ -88,7 +88,7 @@ export default createBottomTabNavigator(
 );
 ```
 
-<a href="https://snack.expo.io/@sunnylqm/tabs-with-icons-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a href="https://snack.expo.io/@react-navigation/tabs-with-icons-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 Let's dissect this:
 
@@ -109,11 +109,8 @@ export default class IconWithBadge extends React.Component {
         <Ionicons name={name} size={size} color={color} />
         { badgeCount > 0 && (
           <View style={{
-            // Absolute positioning ref: https://developer.mozilla.org/en-US/docs/Web/CSS/position#Absolute_positioning
-            // Note 1: On RN the absolutely positioned element is always positioned relative to its parent, 
-            // which is different from web.
-            // Note 2: Before RN 0.57, the child element can not go beyond parent on Android.
-            // Check a workaround here https://github.com/facebook/react-native/issues/12534#issuecomment-347648303
+            // If you're using react-native < 0.57 overflow outside of the parent
+            // will not work on Android, see https://git.io/fhLJ8
             position: 'absolute',
             right: -6,
             top: -3,
