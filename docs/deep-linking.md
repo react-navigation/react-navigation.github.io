@@ -93,9 +93,7 @@ Next, let's configure our navigation container to extract the path from the app'
 ```js
 const SimpleApp = createAppContainer(createStackNavigator({...}));
 
-// on Android, the URI prefix typically contains a host in addition to scheme
-// on Android, note the required / (slash) at the end of the host property
-const prefix = Platform.OS == 'android' ? 'mychat://mychat/' : 'mychat://';
+const prefix = 'mychat://';
 
 const MainApp = () => <SimpleApp uriPrefix={prefix} />;
 ```
@@ -141,19 +139,26 @@ To test the URI on a real device, open Safari and type `mychat://chat/Eric`.
 
 To configure the external linking in Android, you can create a new intent in the manifest.
 
-In `SimpleApp/android/app/src/main/AndroidManifest.xml`, add the new `intent-filter` inside the `MainActivity` entry with a `VIEW` type action:
+In `SimpleApp/android/app/src/main/AndroidManifest.xml`, do these followings adjustments:
+1. Set `launchMode` of `MainActivity` to `singleTask` in order to receive intent on existing `MainActivity`. It is useful if you want to perform navigation using deep link you have been registered - [details](http://developer.android.com/training/app-indexing/deep-linking.html#adding-filters)
+2. Add the new `intent-filter` inside the `MainActivity` entry with a `VIEW` type action:
 
 ```
-<intent-filter>
-    <action android:name="android.intent.action.MAIN" />
-    <category android:name="android.intent.category.LAUNCHER" />
-</intent-filter>
-<intent-filter>
-    <action android:name="android.intent.action.VIEW" />
-    <category android:name="android.intent.category.DEFAULT" />
-    <category android:name="android.intent.category.BROWSABLE" />
-    <data android:scheme="mychat" android:host="mychat" />            
-</intent-filter>
+<activity
+    android:name=".MainActivity"
+    android:launchMode="singleTask"
+    ...>
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+    <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="mychat" />            
+    </intent-filter>
+</activity>
 ```
 
 Now, re-install the app:
@@ -165,5 +170,5 @@ react-native run-android
 To test the intent handling in Android, run the following:
 
 ```
-adb shell am start -W -a android.intent.action.VIEW -d "mychat://mychat/chat/Eric" com.simpleapp
+adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/Eric" com.simpleapp
 ```
