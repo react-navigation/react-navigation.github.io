@@ -146,8 +146,7 @@ In `SimpleApp/android/app/src/main/AndroidManifest.xml`, do these followings adj
 ```
 <activity
     android:name=".MainActivity"
-    android:launchMode="singleTask"
-    ...>
+    android:launchMode="singleTask">
     <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
