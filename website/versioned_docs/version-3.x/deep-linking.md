@@ -143,16 +143,20 @@ In `SimpleApp/android/app/src/main/AndroidManifest.xml`, do these followings adj
 2. Add the new `intent-filter` inside the `MainActivity` entry with a `VIEW` type action:
 
 ```
-<intent-filter>
-    <action android:name="android.intent.action.MAIN" />
-    <category android:name="android.intent.category.LAUNCHER" />
-</intent-filter>
-<intent-filter>
-    <action android:name="android.intent.action.VIEW" />
-    <category android:name="android.intent.category.DEFAULT" />
-    <category android:name="android.intent.category.BROWSABLE" />
-    <data android:scheme="mychat" />            
-</intent-filter>
+<activity
+    android:name=".MainActivity"
+    android:launchMode="singleTask">
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+    <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="mychat" />            
+    </intent-filter>
+</activity>
 ```
 
 Now, re-install the app:
