@@ -42,6 +42,8 @@
     "Drawer navigation": "Drawer navigation",
     "drawer-navigator": "createDrawerNavigator",
     "createDrawerNavigator": "createDrawerNavigator",
+    "version-3.x-function-after-focusing-screen": "Call a function when focused screen changes",
+    "Call a function when focused screen changes": "Call a function when focused screen changes",
     "getting-started": "Getting started",
     "Getting started": "Getting started",
     "glossary-of-terms": "Glossary of terms",

@@ -1,8 +1,8 @@
 ---
-id: version-3.x-action-after-focusing-screen
-title: Call an Action After Focusing Screen
-sidebar_label: Action After Focusing Screen
-original_id: action-after-focusing-screen
+id: version-3.x-function-after-focusing-screen
+title: Call a function when focused screen changes
+sidebar_label: Call a function when focused screen changes
+original_id: function-after-focusing-screen
 ---
 
 In this guide we will call an action on screen focusing. This is useful for making additional API calls when a user revisits a particular screen in a Tab Navigator, or to track user events as they tap around our app.
