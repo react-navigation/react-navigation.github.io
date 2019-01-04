@@ -11,7 +11,7 @@ Containers are responsible for managing your app state and linking your top-leve
 A quick example of `createAppContainer`:
 
 ```
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createStackNavigator } from 'react-navigation';
 // you can also import from @react-navigation/native
 
 const AppNavigator = createStackNavigator(...);
