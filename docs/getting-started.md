@@ -40,7 +40,9 @@ react-native link react-native-gesture-handler
 
 No additional steps are required for iOS.
 
-To finalise installation of react-native-gesture-handler for Android, be sure to make the necessary modifications to `MainActivity.java`:
+Gesture Handler is already [part of Expo](https://kmagiera.github.io/react-native-gesture-handler/docs/getting-started.html#with-expo-https-expoio) and there is no extra configuration of react-native-gesture-handler is required.
+
+If you are not using Expo you have will to finalise the installation of react-native-gesture-handler for Android, by manually making the necessary modifications to `MainActivity.java`:
 
 ```diff
 package com.reactnavigation.example;
