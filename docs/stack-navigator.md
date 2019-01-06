@@ -229,7 +229,7 @@ const Store = createStackNavigator({
 
 ### Navigator Props
 
-The navigator component created by `StackNavigator(...)` takes the following props:
+The navigator component created by `createStackNavigator(...)` takes the following props:
 
 * `screenProps` - Pass down extra options to child screens, for example:
 
