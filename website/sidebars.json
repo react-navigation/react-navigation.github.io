@@ -31,6 +31,9 @@
       "state-persistence",
       "web-support",
       "function-after-focusing-screen"
+      "redux-integration",
+      "MST-integration",
+      "web-support"
     ],
     "Build your own Navigator": [
       "custom-navigator-overview",
