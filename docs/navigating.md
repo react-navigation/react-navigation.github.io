@@ -122,7 +122,7 @@ class DetailsScreen extends React.Component {
 
 <a href="https://snack.expo.io/@react-navigation/going-back-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-> On Android, React Navigation hooks in to the hardware back button and fires the `goBack()` function for you when the user presses it, so it behaves as the user would expect.
+> On Android, React Navigation hooks into the hardware back button and fires the `goBack()` function for you when the user presses it, so it behaves as the user would expect.
 
 Another common requirement is to be able to go back _multiple_ screens -- for example, if you are several screens deep in a stack and want to dismiss all of them to go back to the first screen. In this case, we know that we want to go back to `Home` so we can use `navigate('Home')` (not `push`! try that out and see the difference). Another alternative would be `navigation.popToTop()`, which goes back to the first screen in the stack.
 
