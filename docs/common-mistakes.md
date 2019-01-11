@@ -35,7 +35,7 @@ class AuthenticationScreen extends React.Component {
      * To interact with any parent navigator, eg: it would not know the route "Home" exists
      */
     return (
-      <AuthenticationContainer />
+      <AuthenticationNavigator />
     );
   }
 }
