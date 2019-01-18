@@ -9,7 +9,6 @@ sidebar_label: Access the navigation prop from any component
 ```javascript
 import React from 'react';
 import { Button } from 'react-native';
-import { withNavigation } from 'react-navigation';
 
 export default class MyBackButton extends React.Component {
   render() {
