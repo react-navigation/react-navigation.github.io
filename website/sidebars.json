@@ -29,7 +29,6 @@
       "deep-linking",
       "screen-tracking",
       "state-persistence",
-      "redux-integration",
       "web-support",
       "function-after-focusing-screen"
     ],
