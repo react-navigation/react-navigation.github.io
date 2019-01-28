@@ -7,8 +7,7 @@ sidebar_label: Access the navigation prop from any component
 [`withNavigation`](with-navigation.html) is a higher order component which passes the `navigation` prop into a wrapped Component. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
 
 
-Simple components do not receive the navigation prop by default, and getting this error should be quite common for newcomers:
-ie: a simple MyBackButton component
+An ordinary component that is not a screen component will not receive the navigation prop by default, for example in this `MyBackButton` component:
 
 ```javascript
 import React from 'react';
