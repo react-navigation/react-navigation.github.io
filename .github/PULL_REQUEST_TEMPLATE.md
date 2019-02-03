@@ -1,4 +1,6 @@
-### Make sure to add your changes to versioned docs
+# READ ME PLEASE!
+
+### TL;DR: Make sure to add your changes to versioned docs
 
 Thanks for opening a PR!
 
