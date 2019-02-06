@@ -71,7 +71,7 @@ class AuthLoadingScreen extends React.Component {
   // Render any loading content that you like here
   render() {
     return (
-      <View style={styles.container}>
+      <View>
         <ActivityIndicator />
         <StatusBar barStyle="default" />
       </View>
@@ -93,7 +93,7 @@ class SignInScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View>
         <Button title="Sign in!" onPress={this._signInAsync} />
       </View>
     );
@@ -112,7 +112,7 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View>
         <Button title="Show me more of the app" onPress={this._showMoreApp} />
         <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
       </View>
