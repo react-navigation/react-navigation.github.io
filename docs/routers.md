@@ -10,8 +10,8 @@ Routers define a component's navigation state, and they allow the developer to d
 
 `react-navigation` ships with a few standard routers:
 
-- [StackRouter](https://github.com/react-navigation/react-navigation/blob/master/src/routers/StackRouter.js)
-- [TabRouter](https://github.com/react-navigation/react-navigation/blob/master/src/routers/TabRouter.js)
+- [StackRouter](https://github.com/react-navigation/react-navigation-core/blob/master/src/routers/StackRouter.js)
+- [TabRouter](https://github.com/react-navigation/react-navigation-core/blob/master/src/routers/TabRouter.js)
 
 
 ## Using Routers
