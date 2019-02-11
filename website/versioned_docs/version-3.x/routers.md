@@ -1,5 +1,5 @@
 ---
-id: version-1.x-routers
+id: version-3.x-routers
 title: Routers
 sidebar_label: Routers
 original_id: routers
@@ -11,8 +11,8 @@ Routers define a component's navigation state, and they allow the developer to d
 
 `react-navigation` ships with a few standard routers:
 
-- [StackRouter](https://github.com/react-navigation/react-navigation/blob/1.x/src/routers/StackRouter.js)
-- [TabRouter](https://github.com/react-navigation/react-navigation/blob/1.x/src/routers/TabRouter.js)
+- [StackRouter](https://github.com/react-navigation/react-navigation-core/blob/master/src/routers/StackRouter.js)
+- [TabRouter](https://github.com/react-navigation/react-navigation-core/blob/master/src/routers/TabRouter.js)
 
 
 ## Using Routers
@@ -30,14 +30,14 @@ Now you can use this component as a `screen` in another navigator, and the navig
 
 ## Customizing Routers
 
-See the [Custom Router API spec](/docs/custom-routers) to learn about the API of `StackRouter` and `TabRouter`. You can override the router functions as you see fit:
+See the [Custom Router API spec](custom-routers.html) to learn about the API of `StackRouter` and `TabRouter`. You can override the router functions as you see fit:
 
 ### Custom Navigation Actions
 
 To override navigation behavior, you can override the navigation state logic in `getStateForAction`, and manually manipulate the `routes` and `index`.
 
 ```js
-const MyApp = StackNavigator({
+const MyApp = createStackNavigator({
   Home: { screen: HomeScreen },
   Profile: { screen: ProfileScreen },
 }, {
@@ -102,7 +102,7 @@ Perhaps your app has a unique URI which the built-in routers cannot handle. You 
 ```js
 import { NavigationActions } from 'react-navigation'
 
-const MyApp = StackNavigator({
+const MyApp = createStackNavigator({
   Home: { screen: HomeScreen },
   Profile: { screen: ProfileScreen },
 }, {
