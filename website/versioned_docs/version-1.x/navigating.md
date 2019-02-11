@@ -19,7 +19,7 @@ Another way to write this would be:
 <a onClick={() => { document.location.href = "details.html"; }}>Go to Details</a>
 ```
 
-We'll do something similar to the latter, but rather than use a `document` global we'll use the `navigation` prop that is passed in our screen components.
+We'll do something similar to the latter, but rather than using a `document` global we'll use the `navigation` prop that is passed down to our screen components.
 
 ## Navigating to a new screen
 
