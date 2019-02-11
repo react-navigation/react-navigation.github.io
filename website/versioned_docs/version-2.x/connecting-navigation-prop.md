@@ -10,7 +10,6 @@ original_id: connecting-navigation-prop
 ```javascript
 import React from 'react';
 import { Button } from 'react-native';
-import { withNavigation } from 'react-navigation';
 
 export default class MyBackButton extends React.Component {
   render() {
