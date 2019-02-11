@@ -100,7 +100,6 @@ MyStackRouter.router.getStateForAction = (action, state) => {
 Perhaps your app has a unique URI which the built-in routers cannot handle. You can always extend the router `getActionForPathAndParams`.
 
 ```js
-
 import { NavigationActions } from 'react-navigation'
 
 const MyApp = StackNavigator({
