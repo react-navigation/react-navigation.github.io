@@ -36,8 +36,8 @@ class SettingsScreen extends React.Component {
 }
 
 const TabNavigator = createBottomTabNavigator({
-  Home: HomeScreen,
-  Settings: SettingsScreen,
+  Home: { screen: HomeScreen },
+  Settings: { screen: SettingsScreen }
 });
 
 export default createAppContainer(TabNavigator);
@@ -238,8 +238,8 @@ const SettingsStack = createStackNavigator({
 
 export default createAppContainer(createBottomTabNavigator(
   {
-    Home: HomeStack,
-    Settings: SettingsStack,
+    Home: { screen: HomeStack },
+    Settings: { screen: SettingsStack },
   },
   {
     /* Other configuration remains unchanged */
