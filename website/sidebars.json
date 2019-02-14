@@ -29,6 +29,7 @@
       "deep-linking",
       "screen-tracking",
       "state-persistence",
+      "MST-integration",
       "web-support",
       "function-after-focusing-screen"
     ],
