@@ -6,13 +6,12 @@ original_id: drawer-navigator
 ---
 
 ```js
-createDrawerNavigator(RouteConfigs, DrawerNavigatorConfig)
+createDrawerNavigator(RouteConfigs, DrawerNavigatorConfig);
 ```
 
 ### RouteConfigs
 
 The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.html#routeconfigs) from `createStackNavigator`.
-
 
 ### DrawerNavigatorConfig
 
@@ -38,7 +37,7 @@ The default component for the drawer is scrollable and only contains links for t
 ```js
 import { DrawerItems, SafeAreaView } from 'react-navigation';
 
-const CustomDrawerContentComponent = (props) => (
+const CustomDrawerContentComponent = props => (
   <ScrollView>
     <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
       <DrawerItems {...props} />
@@ -51,6 +50,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+```
+
+`contentComponent` also received a prop called `drawerOpenProgress` which is an [animated value](https://facebook.github.io/react-native/docs/animated#value) that represents the animated position of the drawer (0 is closed; 1 is open). This allows you to do interesting animations in your `contentComponent`, such as parallax motion of the drawer contents:
+
+```js
+const CustomDrawerContentComponent = props => {
+  const translateX = props.drawerOpenProgress.interpolate({
+    inputRange: [0, 1],
+    outputRange: [-100, 0],
+  });
+
+  return <Animated.View style={{ transform: [{ translateX }] }}>{/* ... drawer contents */}</Animated.View>;
+};
 ```
 
 ### `contentOptions` for `DrawerItems`
@@ -101,6 +113,6 @@ React Element or a function, that given `{ focused: boolean, tintColor: string }
 
 Specifies the [lock mode](https://facebook.github.io/react-native/docs/drawerlayoutandroid.html#drawerlockmode) of the drawer. This can also update dynamically by using screenProps.drawerLockMode on your top level router.
 
- ### Nesting drawer navigators inside others
+### Nesting drawer navigators inside others
 
 If a drawer navigator is nested inside of another navigator that provides some UI, for example a tab navigator or stack navigator, then the drawer will be rendered below the UI from those navigators. The drawer will appear below the tab bar and below the header of the stack. You will need to make the drawer navigator the parent of any navigator where the drawer should be rendered on top of its UI.
