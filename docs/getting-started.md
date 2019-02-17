@@ -21,7 +21,7 @@ Install the `react-navigation` package in your React Native project.
 ```bash
 yarn add react-navigation
 # or with npm
-# npm install --save react-navigation
+# npm install react-navigation
 ```
 
 Next, install react-native-gesture-handler. If you’re using Expo you don’t need to do anything here, it’s included in the SDK. Otherwise:
@@ -29,7 +29,7 @@ Next, install react-native-gesture-handler. If you’re using Expo you don’t n
 ```bash
 yarn add react-native-gesture-handler
 # or with npm
-# npm install --save react-native-gesture-handler
+# npm install react-native-gesture-handler
 ```
 
 Link all native dependencies:
