@@ -96,6 +96,10 @@ String, React Element or React Component used by the header. Defaults to scene `
 
 Whether header title font should scale to respect Text Size accessibility settings. Defaults to true.
 
+#### `headerBackAllowFontScaling`
+
+Whether back button title font should scale to respect Text Size accessibility settings. Defaults to false.
+
 #### `headerBackImage`
 
 React Element or Component to display custom image in header's back button. When a component is used, it receives a number of props when rendered (`tintColor`, `title`). Defaults to Image component with `react-navigation/views/assets/back-icon.png` back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
