@@ -24,7 +24,7 @@ yarn add react-navigation
 # npm install react-navigation
 ```
 
-Next, install react-native-gesture-handler. If you’re using Expo you don’t need to do anything here, it’s included in the SDK. Otherwise:
+Next, install react-native-gesture-handler. If you’re using the [Expo managed workflow](https://docs.expo.io/versions/latest/introduction/managed-vs-bare/) then you don’t need to do anything here, it’s included in the SDK. Otherwise:
 
 ```bash
 yarn add react-native-gesture-handler
