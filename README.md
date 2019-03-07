@@ -26,16 +26,7 @@ Only collaborators on this repository can deploy. `cd` into the website director
 ```bash
 GIT_USER=your_github_username \
 STABLE_RELEASE=true \
-CURRENT_BRANCH=your_branch_name \
-USE_SSH=true \
-yarn run publish-gh-pages
-```
-
-# Deploy a pre-release
-
-```bash
-GIT_USER=your_github_username \
-CURRENT_BRANCH=your_branch_name \
+CURRENT_BRANCH=source \
 USE_SSH=true \
 yarn run publish-gh-pages
 ```
