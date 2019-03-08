@@ -1,5 +1,5 @@
 ---
-id: redux-integration
+id: version-3.x-redux-integration
 title: Redux integration
 sidebar_label: Redux integration
 original_id: redux-integration

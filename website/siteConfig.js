@@ -39,6 +39,9 @@ const siteConfig = {
   repoUrl: 'https://github.com/react-navigation/react-navigation',
   editUrl:
     'https://github.com/react-navigation/react-navigation.github.io/edit/source/docs/',
+
+  gaTrackingId: 'UA-10128745-16',
+  docsSideNavCollapsible: true,
   algolia: {
     apiKey: 'c967b4a1491b9cb486d3dca087b771e6',
     indexName: 'reactnavigation',

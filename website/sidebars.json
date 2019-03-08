@@ -15,7 +15,7 @@
       "common-mistakes",
       "limitations"
     ],
-    "Assorted Guides": [
+    "Guides": [
       "tab-based-navigation",
       "drawer-based-navigation",
       "auth-flow",
@@ -29,6 +29,7 @@
       "deep-linking",
       "screen-tracking",
       "state-persistence",
+      "redux-integration",
       "MST-integration",
       "web-support",
       "function-after-focusing-screen"
@@ -41,7 +42,7 @@
       "navigation-views",
       "transitioner"
     ],
-    "Related Resources": [
+    "Additional Resources": [
       "community-libraries-and-navigators",
       "more-resources"
     ],
