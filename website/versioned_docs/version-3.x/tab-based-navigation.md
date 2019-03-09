@@ -250,6 +250,18 @@ export default createAppContainer(createBottomTabNavigator(
 
 <a href="https://snack.expo.io/@react-navigation/stacks-in-tabs-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
+**Caveat** When you use the same name for both the tab and the stack, the navigation works, but passing state parameters will behave unintuitively. Any state params passed in when navigating to a route that is both the tab and the stack will only be available through accessing the parent via `dangerouslyGetParent()`.
+
+<a href="https://snack.expo.io/@andrewtc/stacks-in-tabs-passing-state-params" target="blank" class="run-code-button">&rarr; Run this code</a>
+
+You can avoid this situation by using different route names for the tab and stack. Since tabs use their route name for the label, it's often simpler to change the route name of the stack (to something such as `SettingsScreen`).
+
+<a href="https://snack.expo.io/@andrewtc/stacks-in-tabs-passing-state-params-(fixed)" target="blank" class="run-code-button">&rarr; Run this code</a>
+
+Or you can override the tab bar label for each stack navigator if you prefer to change the tab routes to something different (to something such as `SettingsTab`).
+
+<a href="https://snack.expo.io/@andrewtc/stacks-in-tabs-passing-state-params-(fixed-by-changing-tab-name)" target="blank" class="run-code-button">&rarr; Run this code</a>
+
 ## Why do we need a TabNavigator instead of TabBarIOS or some other component?
 
 It's common to attempt to use a standalone tab bar component without integrating it into the navigation library you use in your app. In some cases, this works fine! You should be warned, however, that you may run into some frustrating unanticipated issues when doing this.
