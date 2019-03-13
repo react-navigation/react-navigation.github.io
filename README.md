@@ -5,7 +5,7 @@ Want to help improve the documentation? That would be so very much appreciated. 
 ## Philosophy of documentation
 
 - *Document the ugly parts as much as the good parts.* It's better for users to know that we don't have a good solution to the problem they have and get the preferred workarounds from us than have to scour the dark and moist corners of StackOverflow.
-- *Provide runnable examples where possible.* Learning through interacting with the code is a reason why REPLs are so popular. Thanks to https://snack.expo.io we can provide the same kind of experience for React Navigation users too.
+- *Provide runnable examples where possible.* Learning through interacting with the code is a reason why REPLs are so popular. Thanks to [Snack](https://snack.expo.io) we can provide the same kind of experience for React Navigation users too.
 - *Be honest about the tradeoffs and limitations.* We explain the pitch and anti-pitch of React Navigation and provide alternative libraries if React Navigation might not be a good fit. We should provide a similar level of honesty at finer levels of granularity as well.
 
 ## Things anyone can do
