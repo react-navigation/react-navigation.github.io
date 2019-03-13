@@ -11,6 +11,7 @@ This example shows how to do screen tracking and send to Google Analytics. The a
 Most users can use `onNavigationStateChange` to track the screen. If you manually control the top-level navigator (if you have integrated redux), this will not work for you.
 
 ```js
+import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge';
 
 const tracker = new GoogleAnalyticsTracker(GA_TRACKING_ID);
@@ -29,10 +30,11 @@ function getActiveRouteName(navigationState) {
 }
 
 const AppNavigator = createStackNavigator(AppRouteConfigs);
+const AppContainer = createAppContainer(AppNavigator);
 
 export default () => (
-  <AppNavigator
-    onNavigationStateChange={(prevState, currentState) => {
+  <AppContainer
+    onNavigationStateChange={(prevState, currentState, action) => {
       const currentScreen = getActiveRouteName(currentState);
       const prevScreen = getActiveRouteName(prevState);
 
