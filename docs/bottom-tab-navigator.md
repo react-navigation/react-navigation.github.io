@@ -20,6 +20,7 @@ The route configs object is a mapping from route name to a route config, which t
 ## BottomTabNavigatorConfig
 
 * `initialRouteName` - The routeName for the initial tab route when first loading.
+* `resetOnBlur` - Reset the state of any nested navigators when switching away from a screen. Defaults to `false`.
 * `order` - Array of routeNames which defines the order of the tabs.
 * `paths` - Provide a mapping of routeName to path config, which overrides the paths set in the routeConfigs.
 * `backBehavior` - `initialRoute` to return to initial tab, `order` to return to previous tab, `history` to return to last visited tab, or `none`.
