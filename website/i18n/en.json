@@ -446,8 +446,8 @@
         "sidebar_label": "withNavigation"
       },
       "version-2.x-app-containers": {
-        "title": "App Containers",
-        "sidebar_label": "App Containers"
+        "title": "App containers",
+        "sidebar_label": "App containers"
       },
       "version-2.x-auth-flow": {
         "title": "Authentication flows",
@@ -748,6 +748,10 @@
       "version-3.x-routers": {
         "title": "Routers",
         "sidebar_label": "Routers"
+      },
+      "version-3.x-screen-tracking-analytics": {
+        "title": "Screen tracking",
+        "sidebar_label": "Screen tracking for analytics"
       },
       "version-3.x-scrollables": {
         "title": "Scrollables",
