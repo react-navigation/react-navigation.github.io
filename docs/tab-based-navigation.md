@@ -72,7 +72,7 @@ export default createBottomTabNavigator(
           // You can check the implementation below.
           IconComponent = HomeIconWithBadge; 
         } else if (routeName === 'Settings') {
-          iconName = `ios-options${focused ? '' : '-outline'}`;
+          iconName = `ios-options`;
         }
 
         // You can return any component that you like here!
