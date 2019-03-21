@@ -10,7 +10,7 @@ If you don't have a navigation header, or your navigation header changes color b
 
 This is a simple task when using a stack or drawer. You can simply render the `StatusBar` component, which is exposed by React Native, and set your config.
 
-```javascript
+```jsx
 class Screen1 extends React.Component {
   render() {
     return (
@@ -53,7 +53,7 @@ class Screen2 extends React.Component {
 }
 ```
 
-```javascript
+```jsx
 export default createStackNavigator({
   Screen1: {
     screen: Screen1,
@@ -68,7 +68,7 @@ export default createStackNavigator({
 
 ![StackNavigator with different StatusBar configs](/docs/assets/statusbar/statusbar-stack-demo.gif)
 
-```javascript
+```jsx
 export default createDrawerNavigator({
   Screen1: {
     screen: Screen1,
@@ -92,7 +92,7 @@ To fix this we'll have to do two things
 
 First, the new `Screen2.js` will no longer use the `StatusBar` component.
 
-```javascript
+```jsx
 class Screen2 extends React.Component {
   render() {
     return (
@@ -116,7 +116,7 @@ class Screen2 extends React.Component {
 
 Then, in both `Screen1.js` and `Screen2.js` we'll set up a listener to change the `StatusBar` configuration when that tab `didFocus`. We'll also make sure to remove the listener when the `TabNavigator` has been unmounted.
 
-```javascript
+```jsx
 class Screen1 extends React.Component {
   componentDidMount() {
     this._navListener = this.props.navigation.addListener('didFocus', () => {
