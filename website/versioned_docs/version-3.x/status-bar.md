@@ -11,7 +11,7 @@ If you don't have a navigation header, or your navigation header changes color b
 
 This is a simple task when using a stack or drawer. You can simply render the `StatusBar` component, which is exposed by React Native, and set your config.
 
-```javascript
+```jsx
 class Screen1 extends React.Component {
   render() {
     return (
@@ -54,7 +54,7 @@ class Screen2 extends React.Component {
 }
 ```
 
-```javascript
+```jsx
 export default createStackNavigator({
   Screen1: {
     screen: Screen1,
@@ -69,7 +69,7 @@ export default createStackNavigator({
 
 ![StackNavigator with different StatusBar configs](/docs/assets/statusbar/statusbar-stack-demo.gif)
 
-```javascript
+```jsx
 export default createDrawerNavigator({
   Screen1: {
     screen: Screen1,
