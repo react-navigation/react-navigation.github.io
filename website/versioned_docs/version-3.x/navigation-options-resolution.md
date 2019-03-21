@@ -84,10 +84,6 @@ MyOtherComponent.navigationOptions = {
 
 We also know that `createStackNavigator` and related functions return React components. So when we set the `navigationOptions` directly on the `HomeStack` and `SettingsStack` component, it allows us to control the `navigationOptions` for its parent navigator when its used as a screen component. In this case, the `navigationOptions` on our stack components configure the label in the tab navigator that renders the stacks.
 
-## **Caution**: the navigationOptions property vs configuration
-
-Navigators are initialized with `create*Navigator(routeConfig, navigatorConfig)`. Inside of `navigatorConfig` we can add a `defaultNavigationOptions` property. These `defaultNavigationOptions` are the default options for screens within that navigator ([read more about sharing common navigationOptions](headers.html#sharing-common-navigationoptions-across-screens)), they do not refer to the `navigationOptions` for that navigator &mdash; as we have seen above, we set the `navigationOptions` property directly on the navigator for that use case.
-
 ```js
 const HomeStack = createStackNavigator({ A }, {
   // This is the default for screens in the stack, so `A` will
@@ -104,7 +100,55 @@ HomeStack.navigationOptions = {
 };
 ```
 
-We understand that overloading the naming here is a little bit confusing. Please [open a RFC](https://github.com/react-navigation/rfcs) if you have a suggestion about how we can make this API easier to learn and work with.
+Another way you could write this is:
+
+```js
+const HomeStack = createStackNavigator({ A }, {
+  // This applies to the parent navigator
+  navigationOptions: {
+    tabBarLabel: 'Home!',
+  },
+  // This applies to child routes
+  defaultNavigationOptions: {
+    title: 'Welcome'
+  }
+});
+```
+
+<a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-title-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
+
+# getActiveChildNavigationOptions
+
+If you would like to get the `navigationOptions` from the active child of a navigator, you can do that with `getActiveChildNavigationOptions`. This makes it possible for you to set the `tabBarLabel` directly on a screen inside of a stack that is inside of a tab, for example.
+
+```jsx
+class A extends React.Component {
+  static navigationOptions = {
+    title: 'Welcome',
+    tabBarLabel: 'Home!',
+  };
+
+  render() {
+    return <Placeholder text="A!" />;
+  }
+}
+
+const HomeStack = createStackNavigator({ A }, {
+  navigationOptions: ({ navigation, screenProps }) => ({
+    // you can put fallback values before here, eg: a default tabBarLabel
+    ...getActiveChildNavigationOptions(navigation, screenProps),
+    // put other navigationOptions that you don't want the active child to
+    // be able to override here!
+  })
+});
+```
+
+<a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-active-child-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
+
+# **Note**: the navigationOptions property vs navigator configuration
+
+Navigators are initialized with `create*Navigator(routeConfig, navigatorConfig)`. Inside of `navigatorConfig` we can add a `defaultNavigationOptions` property. These `defaultNavigationOptions` are the default options for screens within that navigator ([read more about sharing common navigationOptions](headers.html#sharing-common-navigationoptions-across-screens)), they do not refer to the `navigationOptions` for that navigator &mdash; as we have seen above, we set the `navigationOptions` property directly on the navigator for that use case.
+
 
 # A stack contains a tab navigator and you want to set the title on the stack header
 
