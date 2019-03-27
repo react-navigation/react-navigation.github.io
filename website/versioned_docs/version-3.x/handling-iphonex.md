@@ -1,11 +1,19 @@
 ---
 id: version-3.x-handling-iphonex
-title: iPhone X support
-sidebar_label: iPhone X support
+title: Supporting safe areas
+sidebar_label: Supporting safe areas
 original_id: handling-iphonex
 ---
 
-By default, React Navigation aids in ensuring your application displays correctly on the iPhoneX. It does so by using `SafeAreaView` inside of UI elements that may interact with the sensor cluster ("the notch") or the home activity indicator.
+By default, React Navigation aids in ensuring your application displays correctly on the iPhone X and other devices with notches and "safe areas". It does so by using `SafeAreaView` inside of UI elements that may interact with the sensor cluster ("the notch") or the home activity indicator.
+
+The goal is to (a) maximize usage of the screen (b) without hiding content or making it difficult to interact with by having it obscured by a physical display cutout or some operating system UI.
+
+It's tempting to solve (a) by wrapping your entire app in a container with padding that ensures all content will not be occluded. But in doing so, we waste a bunch of space on the screen, as pictured in the image on the left below. What we ideally want is the image pictured on the right. We can use `SafeAreaView` for this. The rest of this guide gives more information on how to support safe areas in React Navigation.
+
+![](/docs/assets/iphoneX/00-intro.png)
+
+<a href="https://snack.expo.io/@react-navigation/boring-safe-area" target="blank" class="run-code-button">&rarr; Run the example pictured on the left</a> or, preferably, <a href="https://snack.expo.io/@react-navigation/nice-safe-area" target="blank" class="run-code-button">run the example pictured on the right.</a>
 
 ## Hidden/Custom Navigation Bar or Tab Bar
 
@@ -15,7 +23,7 @@ However, if you're overriding the default navigation bar, it's important to ensu
 
 For example, if I render nothing for the `header` or `tabBarComponent`, nothing renders
 
-```javascript
+```jsx
 const Tabs = createBottomTabNavigator({
   ...
 }, {
@@ -31,9 +39,9 @@ export default createStackNavigator({
 
 ![Text hidden by iPhoneX UI elements](/docs/assets/iphoneX/02-iphonex-content-hidden.png)
 
-To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-navigation`. Note that `SafeAreaView` should not wrap entire navigators, just the screen components or any content in them.
+To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-navigation`. Recall that `SafeAreaView` should not wrap entire navigators, just the screen components or any content in them.
 
-```javascript
+```jsx
 import { SafeAreaView } from 'react-navigation';
 
 class MyHomeScreen extends Component {
@@ -62,7 +70,7 @@ Even if you're using the default navigation bar and tab bar if your application 
 
 ![App in landscape mode with text hidden](/docs/assets/iphoneX/04-iphonex-landscape-hidden.png)
 
-To fix this you can, once again, wrap your content in a `SafeAreaView`. This will not conflict with the navigation bar or tab bar's default behavior in portrait mode.
+To fix this you can, once again, wrap your content in a `SafeAreaView`. This will not conflict with the navigation bar nor the tab bar's default behavior in portrait mode.
 
 ![App in landscape mode with text visible](/docs/assets/iphoneX/05-iphonex-landscape-fixed.png)
 
@@ -74,7 +82,7 @@ A [Snack](https://snack.expo.io/@react-navigation/react-navigation-docs:-iphonex
 
 In some cases you might need more control over which paddings are applied. For example, you can remove bottom padding by passing `forceInset` prop to `SafeAreaView`.
 
-```javascript
+```jsx
 <SafeAreaView style={styles.container} forceInset={{ bottom: 'never' }}>
   <Text style={styles.paragraph}>
     This is top text.

@@ -99,8 +99,8 @@
         "sidebar_label": "Glossary of terms"
       },
       "handling-iphonex": {
-        "title": "iPhone X support",
-        "sidebar_label": "iPhone X support"
+        "title": "Supporting safe areas",
+        "sidebar_label": "Supporting safe areas"
       },
       "header-bar-animation": {
         "title": "header-bar-animation"
@@ -215,8 +215,8 @@
         "sidebar_label": "Routers"
       },
       "screen-tracking": {
-        "title": "Screen tracking",
-        "sidebar_label": "Screen tracking"
+        "title": "Screen tracking for analytics",
+        "sidebar_label": "Screen tracking for analytics"
       },
       "scrollables": {
         "title": "Scrollables",
@@ -694,8 +694,8 @@
         "sidebar_label": "Glossary of terms"
       },
       "version-3.x-handling-iphonex": {
-        "title": "iPhone X support",
-        "sidebar_label": "iPhone X support"
+        "title": "Supporting safe areas",
+        "sidebar_label": "Supporting safe areas"
       },
       "version-3.x-header-buttons": {
         "title": "Header buttons",
@@ -750,7 +750,7 @@
         "sidebar_label": "Routers"
       },
       "version-3.x-screen-tracking-analytics": {
-        "title": "Screen tracking",
+        "title": "Screen tracking for analytics",
         "sidebar_label": "Screen tracking for analytics"
       },
       "version-3.x-scrollables": {
