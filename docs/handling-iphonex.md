@@ -47,12 +47,8 @@ class MyHomeScreen extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={styles.paragraph}>
-          This is top text.
-        </Text>
-        <Text style={styles.paragraph}>
-          This is bottom text.
-        </Text>
+        <Text style={styles.paragraph}>This is top text.</Text>
+        <Text style={styles.paragraph}>This is bottom text.</Text>
       </SafeAreaView>
     );
   }
@@ -83,15 +79,33 @@ In some cases you might need more control over which paddings are applied. For e
 
 ```jsx
 <SafeAreaView style={styles.container} forceInset={{ bottom: 'never' }}>
-  <Text style={styles.paragraph}>
-    This is top text.
-  </Text>
-  <Text style={styles.paragraph}>
-    This is bottom text.
-  </Text>
+  <Text style={styles.paragraph}>This is top text.</Text>
+  <Text style={styles.paragraph}>This is bottom text.</Text>
 </SafeAreaView>
 ```
 
 `forceInset` takes an object with the keys `top | bottom | left | right | vertical | horizontal` and the values `'always' | 'never'`. Or you can override the padding altogether by passing an integer.
 
 There is also a [Snack](https://snack.expo.io/@react-navigation/react-navigation-docs:-safeareaview-demo-v3) available to demonstrate how `forceInset` behaves.
+
+## Android notches
+
+React Native does not currently expose an API to access information about device cutouts on Android devices. If your app has have an opaque status bar (the default in React Native), that may handle the area where the device has its cutout without any further work required. If not, to workaround this you may want to use the following temporary workaround:
+
+- Install [react-native-device-info](https://github.com/react-native-community/react-native-device-info).
+- Check if the device has a notch with `DeviceInfo.hasNotch()` - this compares the device brand and model to a list of devices with notches - a crude but effective workaround.
+- If the device has a notch, you may want to increase the status bar height known to the SafeAreaView by doing something like this:
+
+```js
+import { Platform } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+import DeviceInfo from 'react-native-device-info';
+
+if (Platform.OS === 'android' && Device.hasNotch()) {
+  SafeAreaView.setStatusBarHeight(
+    /* Some value for status bar height + notch height */
+  );
+}
+```
+
+Work is in progress on a longer term solution, see [this pull request](https://github.com/facebook/react-native/pull/20999) for more information.
