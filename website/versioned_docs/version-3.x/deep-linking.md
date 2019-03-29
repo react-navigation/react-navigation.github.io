@@ -30,6 +30,35 @@ const SimpleApp = createAppContainer(createStackNavigator({
 }));
 ```
 
+If we have nested navigators, we need to provide each parent screen with a `path`. All the paths will be concatenated and can also be an empty string. This path spec would be `friends/chat/:user`.
+
+```js
+const AuthSwitch = createAppContainer(createStackNavigator({
+  AuthLoading:  { screen: AuthLoadingScreen },
+  App: {
+    screen: AppStack,
+    path: '',
+  },
+  Auth: { screen: AuthStack },
+}));
+
+const AppStack = createStackNavigator({
+  Home: { screen: HomeScreen },
+  Friends: {
+    screen: FriendsScreen,
+    path: 'friends',
+  },
+});
+
+const FriendsScreen = createStackNavigator({
+  Overview: { screen: OverviewScreen },
+  Chat: {
+    screen: ChatScreen,
+    path: 'chat/:user',
+  },
+});
+```
+
 ## Set up with Expo projects
 
 You need to specify a scheme for your app. You can register for a scheme in your `app.json` by adding a string under the scheme key:
