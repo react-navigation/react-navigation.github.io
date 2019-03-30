@@ -17,8 +17,8 @@ The route configs object is a mapping from route name to a route config.
 ## TabNavigatorConfig
 
 * `initialRouteName` - The routeName for the initial tab route when first loading.
-- `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
-- `defaultNavigationOptions` - Default navigation options to use for screens
+* `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
+* `defaultNavigationOptions` - Default navigation options to use for screens
 * `order` - Array of routeNames which defines the order of the tabs.
 * `paths` - Provide a mapping of routeName to path config, which overrides the paths set in the routeConfigs.
 * `backBehavior` - `initialRoute` to return to initial tab, `order` to return to previous tab, `history` to return to last visited tab, or `none`.

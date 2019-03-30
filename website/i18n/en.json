@@ -263,7 +263,7 @@
       },
       "web-support": {
         "title": "React Navigation on the Web",
-        "sidebar_label": "Web Support"
+        "sidebar_label": "Web support"
       },
       "with-navigation-focus": {
         "title": "withNavigationFocus",
@@ -779,7 +779,7 @@
       },
       "version-3.x-web-support": {
         "title": "React Navigation on the Web",
-        "sidebar_label": "Web Support"
+        "sidebar_label": "Web support"
       }
     },
     "links": {

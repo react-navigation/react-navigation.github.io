@@ -22,6 +22,8 @@ The route configs object is a mapping from route name to a route config, which t
 - `useNativeAnimations` - Enable native animations. Default is `true`.
 - `drawerBackgroundColor` - Use the Drawer background for some color. The Default is `white`.
 - `drawerType` - One of `front` | `back` | `slide`
+- `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
+- `defaultNavigationOptions` - Default navigation options to use for screens
 
 Several options get passed to the underlying router to modify navigation logic:
 

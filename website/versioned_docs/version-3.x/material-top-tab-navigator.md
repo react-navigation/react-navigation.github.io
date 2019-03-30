@@ -1,54 +1,60 @@
 ---
-id: version-3.x-bottom-tab-navigator
-title: createBottomTabNavigator
-sidebar_label: createBottomTabNavigator
-original_id: bottom-tab-navigator
+id: version-3.x-material-top-tab-navigator
+title: createMaterialTopTabNavigator
+sidebar_label: createMaterialTopTabNavigator
+original_id: material-top-tab-navigator
 ---
 
-A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
-
-> For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/en/tab-based-navigation.html)
+A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the route or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
 ```js
-createBottomTabNavigator(RouteConfigs, BottomTabNavigatorConfig);
+createMaterialTopTabNavigator(RouteConfigs, TabNavigatorConfig);
 ```
 
 ## RouteConfigs
 
+The route configs object is a mapping from route name to a route config.
 
-The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.html#routeconfigs) from stack navigator.
-
-## BottomTabNavigatorConfig
+## TabNavigatorConfig
 
 * `initialRouteName` - The routeName for the initial tab route when first loading.
 * `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
 * `defaultNavigationOptions` - Default navigation options to use for screens
-* `resetOnBlur` - Reset the state of any nested navigators when switching away from a screen. Defaults to `false`.
 * `order` - Array of routeNames which defines the order of the tabs.
 * `paths` - Provide a mapping of routeName to path config, which overrides the paths set in the routeConfigs.
 * `backBehavior` - `initialRoute` to return to initial tab, `order` to return to previous tab, `history` to return to last visited tab, or `none`.
-* `lazy` - Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
-* `tabBarComponent` - Optional, override component to use as the tab bar.
+* `tabBarPosition` - Position of the tab bar, can be `'top'` or `'bottom'`, default is `top`.
+* `swipeEnabled` - Whether to allow swiping between tabs.
+* `animationEnabled` - Whether to animate when changing tabs.
+* `lazy` - Defaults to `false`. If `true`, tabs are rendered only when they are made active or on peek swipe. When `false`, all tabs are rendered immediately.
+* `optimizationsEnabled` - Whether to wrap scenes into [`<ResourceSavingScene />`](https://github.com/react-navigation/react-navigation-tabs/blob/master/src/views/ResourceSavingScene.js) to move the scene out of the screen once it's unfocused, it improves memory usage.
+* `initialLayout` - Optional object containing the initial `height` and `width`, can be passed to prevent the one frame delay in [react-native-tab-view](https://github.com/react-native-community/react-native-tab-view#avoid-one-frame-delay) rendering.
+* `tabBarComponent` - Optional, override the component to use as the tab bar.
 * `tabBarOptions` - An object with the following properties:
   * `activeTintColor` - Label and icon color of the active tab.
-  * `activeBackgroundColor` - Background color of the active tab.
   * `inactiveTintColor` - Label and icon color of the inactive tab.
-  * `inactiveBackgroundColor` - Background color of the inactive tab.
+  * `showIcon` - Whether to show icon for tab, default is false.
   * `showLabel` - Whether to show label for tab, default is true.
-  * `showIcon` - Whether to show icon for tab, default is true.
-  * `style` - Style object for the tab bar.
-  * `labelStyle` - Style object for the tab label.
+  * `upperCaseLabel` - Whether to make label uppercase, default is true.
+  * `pressColor` - Color for material ripple (Android >= 5.0 only).
+  * `pressOpacity` - Opacity for pressed tab (iOS and Android < 5.0 only).
+  * `scrollEnabled` - Whether to enable scrollable tabs.
   * `tabStyle` - Style object for the tab.
+  * `indicatorStyle` - Style object for the tab indicator (line at the bottom of the tab).
+  * `labelStyle` - Style object for the tab label.
+  * `iconStyle` - Style object for the tab icon.
+  * `style` - Style object for the tab bar.
   * `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
-  * `safeAreaInset` - Override the `forceInset` prop for `<SafeAreaView>`. Defaults to `{ bottom: 'always', top: 'never' }`. Available keys are `top | bottom | left | right` provided with the values `'always' | 'never'`.
 
 Example:
 
 ```js
 tabBarOptions: {
-  activeTintColor: '#e91e63',
   labelStyle: {
     fontSize: 12,
+  },
+  tabStyle: {
+    width: 100,
   },
   style: {
     backgroundColor: 'blue',
@@ -56,34 +62,15 @@ tabBarOptions: {
 }
 ```
 
-If you want to customize the `tabBarComponent`:
-
-```js
-import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
-
-const TabBarComponent = (props) => (<BottomTabBar {...props} />);
-
-const TabScreens = createBottomTabNavigator(
-  {
-    tabBarComponent: props =>
-      <TabBarComponent
-        {...props}
-        style={{ borderTopColor: '#605F60' }}
-      />,
-  },
-);
-```
-
-
 ## `navigationOptions` for screens inside of the navigator
 
 #### `title`
 
 Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`.
 
-#### `tabBarVisible`
+#### `swipeEnabled`
 
-`true` or `false` to show or hide the tab bar, if not set then defaults to `true`.
+True or false to enable or disable swiping between tabs, if not set then defaults to TabNavigatorConfig option swipeEnabled.
 
 #### `tabBarIcon`
 
@@ -92,10 +79,6 @@ React Element or a function that given `{ focused: boolean, horizontal: boolean,
 #### `tabBarLabel`
 
 Title string of a tab displayed in the tab bar or React Element or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
-
-#### `tabBarButtonComponent`
-
-React Component that wraps the icon and label and implements `onPress`. The default is a wrapper around `TouchableWithoutFeedback` that makes it behave the same as other touchables. `tabBarButtonComponent: TouchableOpacity` would use `TouchableOpacity` instead.
 
 #### `tabBarAccessibilityLabel`
 
