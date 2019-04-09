@@ -28,6 +28,7 @@
       "navigation-key",
       "deep-linking",
       "screen-tracking",
+      "themes",
       "state-persistence",
       "redux-integration",
       "MST-integration",

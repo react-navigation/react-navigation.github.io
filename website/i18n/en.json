@@ -24,6 +24,9 @@
         "title": "Authentication flows",
         "sidebar_label": "Authentication flows"
       },
+      "bottom-sheet": {
+        "title": "bottom-sheet"
+      },
       "bottom-tab-navigator": {
         "title": "createBottomTabNavigator",
         "sidebar_label": "createBottomTabNavigator"
@@ -86,6 +89,9 @@
         "title": "createDrawerNavigator",
         "sidebar_label": "createDrawerNavigator"
       },
+      "dynamic-routes": {
+        "title": "dynamic-routes"
+      },
       "function-after-focusing-screen": {
         "title": "Call a function when focused screen changes",
         "sidebar_label": "Call a function when focused screen changes"
@@ -127,6 +133,9 @@
       "listen-lifecycle-events": {
         "title": "Know when a screen is focused and blurred",
         "sidebar_label": "Know when a screen is focused and blurred"
+      },
+      "localization": {
+        "title": "localization"
       },
       "material-bottom-tab-navigator": {
         "title": "createMaterialBottomTabNavigator",
@@ -256,6 +265,10 @@
       "tab-navigator": {
         "title": "createTabNavigator",
         "sidebar_label": "createTabNavigator"
+      },
+      "themes": {
+        "title": "Themes",
+        "sidebar_label": "Themes"
       },
       "transitioner": {
         "title": "Transitioner",
@@ -713,6 +726,10 @@
         "title": "Limitations",
         "sidebar_label": "Limitations"
       },
+      "version-3.x-material-top-tab-navigator": {
+        "title": "createMaterialTopTabNavigator",
+        "sidebar_label": "createMaterialTopTabNavigator"
+      },
       "version-3.x-modal": {
         "title": "Opening a full-screen modal",
         "sidebar_label": "Opening a full-screen modal"
@@ -776,6 +793,10 @@
       "version-3.x-tab-based-navigation": {
         "title": "Tab navigation",
         "sidebar_label": "Tab navigation"
+      },
+      "version-3.x-themes": {
+        "title": "Themes",
+        "sidebar_label": "Themes"
       },
       "version-3.x-web-support": {
         "title": "React Navigation on the Web",
