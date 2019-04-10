@@ -43,7 +43,7 @@ If the navigator is a drawer navigator, the following are also available:
 
 ## Common API reference
 
-The vast majority of your interactions with the `navigation` prop will involve `navigate`, `goBack`, `state`, and `setParams` / `getParams`.
+The vast majority of your interactions with the `navigation` prop will involve `navigate`, `goBack`, `state`, and `setParams` / `getParam`.
 
 ### `navigate` - Link to other screens
 
