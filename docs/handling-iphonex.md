@@ -101,7 +101,7 @@ import { Platform } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import DeviceInfo from 'react-native-device-info';
 
-if (Platform.OS === 'android' && Device.hasNotch()) {
+if (Platform.OS === 'android' && DeviceInfo.hasNotch()) {
   SafeAreaView.setStatusBarHeight(
     /* Some value for status bar height + notch height */
   );
