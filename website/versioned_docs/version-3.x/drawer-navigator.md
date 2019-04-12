@@ -21,9 +21,15 @@ The route configs object is a mapping from route name to a route config, which t
 - `contentOptions` - Configure the drawer content, see below.
 - `useNativeAnimations` - Enable native animations. Default is `true`.
 - `drawerBackgroundColor` - Use the Drawer background for some color. The Default is `white`.
-- `drawerType` - One of `front` | `back` | `slide`
 - `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
 - `defaultNavigationOptions` - Default navigation options to use for screens
+
+The DrawerNavigator uses [`DrawerLayout`](https://kmagiera.github.io/react-native-gesture-handler/docs/component-drawer-layout.html) under the hood, therefore it inherits the following props:
+
+- `drawerType` - One of front | back | slide
+- `edgeWidth` - Allows for defining how far from the edge of the content view the swipe gesture should activate
+- `hideStatusBar` - when set to true Drawer component will hide the OS status bar whenever the drawer is pulled or when its in an "open" state.
+- `overlayColor` - Color overlay to be displayed on top of the content view when drawer gets open. A solid color should be used as the opacity is added by the Drawer itself and the opacity of the overlay is animated (from 0% to 70%).
 
 Several options get passed to the underlying router to modify navigation logic:
 
