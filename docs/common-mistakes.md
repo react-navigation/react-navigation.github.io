@@ -111,3 +111,41 @@ const AppContainer = createAppContainer(AppNavigator);
 
 In previous version of React Navigation, the library used to dig through your component tree to find `navigationOptions`. This is no longer the case, and only `navigationOptions` on screen components of a particular navigator will apply to that navigator. You can read more about this in the [Navigation options resolution](navigation-options-resolution.html) guide.
 
+## Wrapping AppContainer in a View without flex
+
+If you wrap the `AppContainer` in a `View`, make sure the `View` is using flex.
+```javascript
+import React from 'react';
+import { Text, View } from 'react-native';
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+
+class HomeScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Home!</Text>
+      </View>
+    );
+  }
+}
+
+class SettingsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Settings!</Text>
+      </View>
+    );
+  }
+}
+
+const TabNavigator = createBottomTabNavigator({
+  Home: HomeScreen,
+  Settings: SettingsScreen,
+});
+
+const AppContainer = createAppContainer(TabNavigator)
+
+// without the style you will see a blank screen
+export default ()=><View style={{flex: 1}}><AppContainer/></View>;
+```
