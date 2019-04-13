@@ -1,7 +1,8 @@
 ---
-id: material-top-tab-navigator
+id: version-3.x-material-top-tab-navigator
 title: createMaterialTopTabNavigator
 sidebar_label: createMaterialTopTabNavigator
+original_id: material-top-tab-navigator
 ---
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the route or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.

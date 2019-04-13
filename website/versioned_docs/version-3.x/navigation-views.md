@@ -1,7 +1,8 @@
 ---
-id: navigation-views
+id: version-3.x-navigation-views
 title: Navigation views
 sidebar_label: Navigation views
+original_id: navigation-views
 ---
 
 Navigation views are presentation components that take a [`router`](routers.html) and a [`navigation`](navigation-prop.html) prop, and can display several screens, as specified by the `navigation.state`.
