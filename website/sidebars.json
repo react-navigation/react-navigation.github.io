@@ -58,6 +58,7 @@
       "drawer-actions",
       "stack-navigator",
       "switch-navigator",
+      "animated-switch-navigator",
       "drawer-navigator",
       "tab-navigator",
       "bottom-tab-navigator",

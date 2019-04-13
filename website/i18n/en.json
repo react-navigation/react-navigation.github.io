@@ -9,6 +9,10 @@
         "title": "Alternative libraries",
         "sidebar_label": "Alternative libraries"
       },
+      "animated-switch-navigator": {
+        "title": "createAnimatedSwitchNavigator",
+        "sidebar_label": "createAnimatedSwitchNavigator"
+      },
       "anti-pitch": {
         "title": "anti-pitch"
       },
@@ -648,6 +652,10 @@
       "version-2.x-with-navigation": {
         "title": "withNavigation",
         "sidebar_label": "withNavigation"
+      },
+      "version-3.x-animated-switch-navigator": {
+        "title": "createAnimatedSwitchNavigator",
+        "sidebar_label": "createAnimatedSwitchNavigator"
       },
       "version-3.x-auth-flow": {
         "title": "Authentication flows",
