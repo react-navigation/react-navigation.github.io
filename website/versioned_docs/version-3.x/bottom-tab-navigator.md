@@ -1,8 +1,7 @@
 ---
-id: version-3.x-bottom-tab-navigator
+id: bottom-tab-navigator
 title: createBottomTabNavigator
 sidebar_label: createBottomTabNavigator
-original_id: bottom-tab-navigator
 ---
 
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
@@ -112,4 +111,12 @@ Callback to handle press events; the argument is an object containing:
 * `navigation`: navigation prop for the screen
 * `defaultHandler`: the default handler for tab press
 
-Useful for adding a custom logic before the transition to the next scene (the tapped one) starts.
+Useful for adding a custom logic before the transition to the next scene (the
+tapped one) starts.
+
+#### `tabBarOnLongPress`
+
+Callback to handle long press events; the argument is an object containing:
+
+- `navigation`: navigation prop for the screen
+- `defaultHandler`: the default handler for tab press

@@ -1,8 +1,7 @@
 ---
-id: version-3.x-material-top-tab-navigator
+id: material-top-tab-navigator
 title: createMaterialTopTabNavigator
 sidebar_label: createMaterialTopTabNavigator
-original_id: material-top-tab-navigator
 ---
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the route or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
@@ -95,4 +94,12 @@ Callback to handle press events; the argument is an object containing:
 * `navigation`: navigation prop for the screen
 * `defaultHandler`: the default handler for tab press
 
-Useful for adding a custom logic before the transition to the next scene (the tapped one) starts.
+Useful for adding a custom logic before the transition to the next scene (the
+tapped one) starts.
+
+#### `tabBarOnLongPress`
+
+Callback to handle long press events; the argument is an object containing:
+
+- `navigation`: navigation prop for the screen
+- `defaultHandler`: the default handler for tab press
