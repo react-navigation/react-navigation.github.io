@@ -1,5 +1,6 @@
 ---
-id: transitioner
+id: version-3.x-transitioner
+original_id: transitioner
 title: Transitioner
 sidebar_label: Transitioner
 ---
