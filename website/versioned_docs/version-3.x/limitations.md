@@ -58,6 +58,6 @@ We are able to offload animations to another thread using React Native's [Animat
 
 Some platform-specific behavior either cannot be implemented or has not yet been implemented in React Navigation.
 
-Versions prior to 2.14.0 do not support the ["reachability feature" on iOS](https://www.cnet.com/how-to/how-to-use-reachability-on-iphone-6-6-plus/). When you toggle this feature, the app moves down towards the bottom of the screen so you can easily reach the navigation bar and other functionality near the top of the UI. When you navigate to another screen using the built-in iOS navigation API, the UI will jump back up to the top of the screen. React-navigation 2.14.0 and later supports this feature through integration with [react-native-screens](https://github.com/kmagiera/react-native-screens).
+Versions prior to 2.14.0 do not support the ["reachability feature" on iOS](https://www.cnet.com/how-to/how-to-use-reachability-on-iphone-6-6-plus/). When you toggle this feature, the app moves down towards the bottom of the screen so you can easily reach the navigation bar and other functionality near the top of the UI. When you navigate to another screen using the built-in iOS navigation API, the UI will jump back up to the top of the screen. React-navigation 2.14.0 and later supports this feature through integration with [react-native-screens](react-native-screens.html).
 
 React-navigation does not include support for the peek & pop feature available on devices with 3D touch.
