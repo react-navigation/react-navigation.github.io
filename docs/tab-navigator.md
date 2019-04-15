@@ -4,7 +4,7 @@ title: createTabNavigator
 sidebar_label: createTabNavigator
 ---
 
-> Note: `createTabNavigator` is deprecated. Please use `createBottomTabNavigator` and/or `createMaterialTopTabNavigator` instead.
+> Note: `createTabNavigator` is deprecated and removed in `react-navigation@3.x`. Please use `createBottomTabNavigator` and/or `createMaterialTopTabNavigator` instead.
 
 ```js
 createTabNavigator(RouteConfigs, TabNavigatorConfig);

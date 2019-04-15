@@ -111,4 +111,12 @@ Callback to handle press events; the argument is an object containing:
 * `navigation`: navigation prop for the screen
 * `defaultHandler`: the default handler for tab press
 
-Useful for adding a custom logic before the transition to the next scene (the tapped one) starts.
+Useful for adding a custom logic before the transition to the next scene (the
+tapped one) starts.
+
+#### `tabBarOnLongPress`
+
+Callback to handle long press events; the argument is an object containing:
+
+- `navigation`: navigation prop for the screen
+- `defaultHandler`: the default handler for tab press

@@ -1,8 +1,8 @@
 ---
 id: version-3.x-transitioner
-original_id: transitioner
 title: Transitioner
 sidebar_label: Transitioner
+original_id: transitioner
 ---
 
 `Transitioner` is a React component that helps manage transitions for complex animated components. It manages the timing of animations and keeps track of various screens as they enter and leave, but it doesn't know what anything looks like, because rendering is entirely deferred to the developer.
