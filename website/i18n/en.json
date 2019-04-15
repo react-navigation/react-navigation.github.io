@@ -207,6 +207,10 @@
         "title": "Pitch & anti-pitch",
         "sidebar_label": "Pitch & anti-pitch"
       },
+      "react-native-screens": {
+        "title": "Optimize memory usage and performance",
+        "sidebar_label": "Optimize memory usage and performance"
+      },
       "redux-integration": {
         "title": "Redux integration",
         "sidebar_label": "Redux integration"
@@ -601,6 +605,10 @@
         "title": "Passing parameters to routes",
         "sidebar_label": "Passing parameters to routes"
       },
+      "version-2.x-react-native-screens": {
+        "title": "Optimize memory usage and performance",
+        "sidebar_label": "Optimize memory usage and performance"
+      },
       "version-2.x-redux-integration": {
         "title": "Redux integration",
         "sidebar_label": "Redux integration"
@@ -764,6 +772,10 @@
       "version-3.x-params": {
         "title": "Passing parameters to routes",
         "sidebar_label": "Passing parameters to routes"
+      },
+      "version-3.x-react-native-screens": {
+        "title": "Optimize memory usage and performance",
+        "sidebar_label": "Optimize memory usage and performance"
       },
       "version-3.x-redux-integration": {
         "title": "Redux integration",
