@@ -1,6 +1,6 @@
 ---
 id: supported-react-native-versions
-title: Supported React native versions
+title: Supported React Native versions
 sidebar_label: Supported React native versions
 ---
 
