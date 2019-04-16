@@ -1,5 +1,5 @@
 ---
-id: version-3.x-screen-tracking-analytics
+id: version-3.x-screen-tracking
 title: Screen tracking for analytics
 sidebar_label: Screen tracking for analytics
 original_id: screen-tracking

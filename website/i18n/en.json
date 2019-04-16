@@ -785,7 +785,7 @@
         "title": "Routers",
         "sidebar_label": "Routers"
       },
-      "version-3.x-screen-tracking-analytics": {
+      "version-3.x-screen-tracking": {
         "title": "Screen tracking for analytics",
         "sidebar_label": "Screen tracking for analytics"
       },
