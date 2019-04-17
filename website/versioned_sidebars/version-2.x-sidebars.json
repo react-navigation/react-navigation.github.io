@@ -3,6 +3,7 @@
     "Fundamentals": [
       "version-2.x-getting-started",
       "version-2.x-hello-react-navigation",
+      "version-2.x-supported-react-native-versions",
       "version-2.x-navigating",
       "version-2.x-navigation-lifecycle",
       "version-2.x-params",
