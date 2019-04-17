@@ -254,8 +254,8 @@
         "sidebar_label": "Different status bar configuration based on route"
       },
       "supported-react-native-versions": {
-        "title": "Supported React native versions",
-        "sidebar_label": "Supported React native versions"
+        "title": "Supported React Native versions",
+        "sidebar_label": "Supported React Native versions"
       },
       "switch-navigator": {
         "title": "createSwitchNavigator",
@@ -438,8 +438,8 @@
         "sidebar_label": "Different status bar configuration based on route"
       },
       "version-1.x-supported-react-native-versions": {
-        "title": "Supported React native versions",
-        "sidebar_label": "Supported React native versions"
+        "title": "Supported React Native versions",
+        "sidebar_label": "Supported React Native versions"
       },
       "version-1.x-switch-navigator": {
         "title": "SwitchNavigator reference",
@@ -646,8 +646,8 @@
         "sidebar_label": "Different status bar configuration based on route"
       },
       "version-2.x-supported-react-native-versions": {
-        "title": "Supported React native versions",
-        "sidebar_label": "Supported React native versions"
+        "title": "Supported React Native versions",
+        "sidebar_label": "Supported React Native versions"
       },
       "version-2.x-switch-navigator": {
         "title": "createSwitchNavigator",
@@ -818,8 +818,8 @@
         "sidebar_label": "Different status bar configuration based on route"
       },
       "version-3.x-supported-react-native-versions": {
-        "title": "Supported React native versions",
-        "sidebar_label": "Supported React native versions"
+        "title": "Supported React Native versions",
+        "sidebar_label": "Supported React Native versions"
       },
       "version-3.x-switch-navigator": {
         "title": "createSwitchNavigator",
