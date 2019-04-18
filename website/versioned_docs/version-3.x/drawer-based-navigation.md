@@ -4,7 +4,7 @@ title: Drawer navigation
 sidebar_label: Drawer navigation
 original_id: drawer-based-navigation
 ---
-This guide covers [createDrawerNavigator](https://reactnavigation.org/docs/en/drawer-navigator.html). 
+This guide covers [createDrawerNavigator](drawer-navigator.html). 
 
 ```js
 class MyHomeScreen extends React.Component {
