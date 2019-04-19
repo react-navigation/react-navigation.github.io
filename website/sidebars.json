@@ -34,6 +34,7 @@
       "state-persistence",
       "redux-integration",
       "MST-integration",
+      "localization",
       "web-support",
       "function-after-focusing-screen"
     ],

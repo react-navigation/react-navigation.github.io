@@ -132,6 +132,10 @@
         "title": "Know when a screen is focused and blurred",
         "sidebar_label": "Know when a screen is focused and blurred"
       },
+      "localization": {
+        "title": "Localization",
+        "sidebar_label": "Localization"
+      },
       "material-bottom-tab-navigator": {
         "title": "createMaterialBottomTabNavigator",
         "sidebar_label": "createMaterialBottomTabNavigator"
@@ -744,6 +748,10 @@
       "version-3.x-limitations": {
         "title": "Limitations",
         "sidebar_label": "Limitations"
+      },
+      "version-3.x-localization": {
+        "title": "Localization",
+        "sidebar_label": "Localization"
       },
       "version-3.x-material-bottom-tab-navigator": {
         "title": "createMaterialBottomTabNavigator",
