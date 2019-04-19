@@ -112,7 +112,7 @@ Callback to handle press events; the argument is an object containing:
 * `defaultHandler`: the default handler for tab press
 
 Useful for adding a custom logic before the transition to the next scene (the
-tapped one) starts.
+tapped one) starts. When setting tabBarOnPress the defaultHandler needs to be called in order to execute the default action (i.e. switch tab).
 
 #### `tabBarOnLongPress`
 
