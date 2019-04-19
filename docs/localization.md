@@ -11,8 +11,8 @@ English is only one of many languages that people speak around the world (thanks
 We'll need to use some kind of library to store our translations and provide a function that gives us access to them, along with handling fallbacks when we don't have a particular language defined. Localization and internationalization (i18n) are often used interchangably, as in the example below where we get the current `locale` from `expo-localization` and use the `i18n-js` library for managing translations, for no particular reason other than it was available - use whatever you like.
 
 ```jsx
-import { Localization } from 'expo-localization'; // or whatever library you want
-import i18n from 'i18n-js';
+import  * as Localization from 'expo-localization'; // or whatever library you want
+import i18n from 'i18n-js'; // or whatever library you want
 
 const en = {
   foo: 'Foo',
