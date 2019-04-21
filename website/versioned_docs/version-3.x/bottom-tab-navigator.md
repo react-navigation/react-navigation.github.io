@@ -40,6 +40,7 @@ The route configs object is a mapping from route name to a route config, which t
   * `labelStyle` - Style object for the tab label.
   * `tabStyle` - Style object for the tab.
   * `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
+  * `adaptive` - Should the tab icons and labels alignment change based on screen size? Defaults to `true` for iOS 11. If `false`, tab icons and labels align vertically all the time. When `true`, tab icons and labels align horizontally on tablet.
   * `safeAreaInset` - Override the `forceInset` prop for `<SafeAreaView>`. Defaults to `{ bottom: 'always', top: 'never' }`. Available keys are `top | bottom | left | right` provided with the values `'always' | 'never'`.
 
 Example:
