@@ -69,6 +69,7 @@
       "material-top-tab-navigator",
       "with-navigation",
       "with-navigation-focus",
+      "navigation-context",
       "navigation-events",
       "scrollables"
     ]

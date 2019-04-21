@@ -168,6 +168,10 @@
         "title": "NavigationActions reference",
         "sidebar_label": "NavigationActions"
       },
+      "navigation-context": {
+        "title": "NavigationContext",
+        "sidebar_label": "NavigationContext"
+      },
       "navigation-events": {
         "title": "NavigationEvents reference",
         "sidebar_label": "NavigationEvents"
