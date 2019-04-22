@@ -44,6 +44,7 @@ The route configs object is a mapping from route name to a route config.
   * `iconStyle` - Style object for the tab icon.
   * `style` - Style object for the tab bar.
   * `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
+  * `renderIndicator` - Function which takes an object with the current route and returns a custom React Element to be used as a tab indicator.
 
 Example:
 
