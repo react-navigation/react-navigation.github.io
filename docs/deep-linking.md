@@ -200,3 +200,13 @@ To test the intent handling in Android, run the following:
 ```
 adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/Eric" com.simpleapp
 ```
+
+## Disable deep linking
+
+In case you want to handle routing with deep-linking by yourself instead of `react-navigation`, you can pass `enableURLHandling={false}` prop to your app container:
+
+```js
+const SimpleApp = createAppContainer(createStackNavigator({...}));
+
+const MainApp = () => <SimpleApp enableURLHandling={false} />;
+```
