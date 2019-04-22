@@ -170,3 +170,7 @@ To test the intent handling in Android, run the following:
 ```
 adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/Eric" com.simpleapp
 ```
+
+## Disable deep linking
+
+Unfortunately, version 1.x does not support to disable deep-linking handling. If you wish to handle deep-linking yourself instead of `react-navigation`, please upgrade to newer versions.
