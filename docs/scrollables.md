@@ -7,10 +7,12 @@ sidebar_label: Scrollables
 React Navigation exports its own `ScrollView`, `FlatList`, and `SectionList`. The built-in components are wrapped in order to respond to events from navigation that will scroll to top when tapping on the active tab as you would expect from native tab bars.
 
 Example
+
 ```jsx harmony
 import React from 'react';
 import { Text, View } from 'react-native';
-import { createBottomTabNavigator, createAppContainer, FlatList } from 'react-navigation';
+import { createAppContainer, FlatList } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 const data = new Array(150).fill(0);
 
