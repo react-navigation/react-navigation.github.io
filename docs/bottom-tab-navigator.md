@@ -6,11 +6,21 @@ sidebar_label: createBottomTabNavigator
 
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 
-> For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/en/tab-based-navigation.html)
+To use this navigator, you need to install [`react-navigation-tabs`](https://github.com/react-navigation/react-navigation-tabs) and its peer dependencies:
+
+```sh
+npm install react-navigation-tabs react-native-reanimated react-native-gesture-handler
+```
+
+To use this tab navigator, import it from `react-navigation-tabs`:
 
 ```js
-createBottomTabNavigator(RouteConfigs, BottomTabNavigatorConfig);
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+
+createBottomTabNavigator(RouteConfigs, TabNavigatorConfig);
 ```
+
+> For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/en/tab-based-navigation.html)
 
 ## RouteConfigs
 

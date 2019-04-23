@@ -171,9 +171,11 @@ Some navigators may have their styles configured in the navigator configuration 
 import {
   createAppContainer,
   createStackNavigator,
+} from 'react-navigation';
+import {
   createBottomTabNavigator,
   BottomTabBar,
-} from 'react-navigation';
+} from 'react-navigation-tabs';
 
 const ThemeConstants = {
   light: {

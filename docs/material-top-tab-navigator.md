@@ -6,7 +6,27 @@ sidebar_label: createMaterialTopTabNavigator
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the route or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
+To use this navigator, you need to install [`react-navigation-tabs`](https://github.com/react-navigation/react-navigation-tabs):
+
+```sh
+npm install react-navigation-tabs
+```
+
+If you are not using Expo, you also need to install and link [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated). To install and link them, run:
+
+```sh
+npm install react-native-reanimated react-native-gesture-handler
+react-native link react-native-reanimated
+react-native link react-native-gesture-handler
+```
+
+**IMPORTANT:** There are additional steps required for `react-native-gesture-handler` on Android after running `react-native link react-native-gesture-handler`. Check the [this guide](https://kmagiera.github.io/react-native-gesture-handler/docs/getting-started.html) to complete the installation.
+
+To use this tab navigator, import it from `react-navigation-tabs`:
+
 ```js
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
+
 createMaterialTopTabNavigator(RouteConfigs, TabNavigatorConfig);
 ```
 
@@ -24,9 +44,8 @@ The route configs object is a mapping from route name to a route config.
 * `backBehavior` - `initialRoute` to return to initial tab, `order` to return to previous tab, `history` to return to last visited tab, or `none`.
 * `tabBarPosition` - Position of the tab bar, can be `'top'` or `'bottom'`, default is `top`.
 * `swipeEnabled` - Whether to allow swiping between tabs.
-* `animationEnabled` - Whether to animate when changing tabs.
 * `lazy` - Defaults to `false`. If `true`, tabs are rendered only when they are made active or on peek swipe. When `false`, all tabs are rendered immediately.
-* `optimizationsEnabled` - Whether to wrap scenes into [`<ResourceSavingScene />`](https://github.com/react-navigation/react-navigation-tabs/blob/master/src/views/ResourceSavingScene.js) to move the scene out of the screen once it's unfocused, it improves memory usage.
+* `lazyPlaceholderComponent` - React component to render for routes that haven't been rendered yet. Receives an object containing the route as the argument. The `lazy` prop also needs to be enabled.
 * `initialLayout` - Optional object containing the initial `height` and `width`, can be passed to prevent the one frame delay in [react-native-tab-view](https://github.com/react-native-community/react-native-tab-view#avoid-one-frame-delay) rendering.
 * `tabBarComponent` - Optional, override the component to use as the tab bar.
 * `tabBarOptions` - An object with the following properties:

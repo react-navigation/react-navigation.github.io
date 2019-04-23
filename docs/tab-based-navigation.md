@@ -13,7 +13,8 @@ This guide covers [createBottomTabNavigator](bottom-tab-navigator.html). You may
 ```js
 import React from 'react';
 import { Text, View } from 'react-native';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 class HomeScreen extends React.Component {
   render() {
@@ -53,7 +54,8 @@ This is similar to how you would customize a stack navigator &mdash; there are s
 // You can import Ionicons from @expo/vector-icons if you use Expo or
 // react-native-vector-icons/Ionicons otherwise.
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 export default createBottomTabNavigator(
   {
@@ -183,10 +185,10 @@ Usually tabs don't just display one screen &mdash; for example, on your Twitter 
 
 ```js
 import {
-  createBottomTabNavigator,
   createStackNavigator,
   createAppContainer,
 } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 class DetailsScreen extends React.Component {
   render() {
