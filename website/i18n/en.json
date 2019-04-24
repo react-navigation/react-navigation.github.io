@@ -265,6 +265,10 @@
         "title": "Supported React Native versions",
         "sidebar_label": "Supported React Native versions"
       },
+      "switch-actions": {
+        "title": "SwitchActions reference",
+        "sidebar_label": "SwitchActions"
+      },
       "switch-navigator": {
         "title": "createSwitchNavigator",
         "sidebar_label": "createSwitchNavigator"
@@ -589,6 +593,10 @@
         "title": "NavigationActions reference",
         "sidebar_label": "NavigationActions"
       },
+      "version-2.x-navigation-context": {
+        "title": "NavigationContext",
+        "sidebar_label": "NavigationContext"
+      },
       "version-2.x-navigation-events": {
         "title": "NavigationEvents reference",
         "sidebar_label": "NavigationEvents"
@@ -785,6 +793,10 @@
         "title": "Moving between screens",
         "sidebar_label": "Moving between screens"
       },
+      "version-3.x-navigation-context": {
+        "title": "NavigationContext",
+        "sidebar_label": "NavigationContext"
+      },
       "version-3.x-navigation-options-resolution": {
         "title": "Navigation options resolution",
         "sidebar_label": "Navigation options resolution"
@@ -832,6 +844,10 @@
       "version-3.x-supported-react-native-versions": {
         "title": "Supported React Native versions",
         "sidebar_label": "Supported React Native versions"
+      },
+      "version-3.x-switch-actions": {
+        "title": "SwitchActions reference",
+        "sidebar_label": "SwitchActions"
       },
       "version-3.x-switch-navigator": {
         "title": "createSwitchNavigator",

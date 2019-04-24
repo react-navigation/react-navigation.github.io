@@ -18,6 +18,7 @@ The following actions are supported:
 * [Init](#init) - Used to initialize first state if state is undefined
 
 For actions specific to a StackNavigator, see [StackActions](stack-actions.html).
+For actions specific to a switch-based navigators such as TabNavigator, see [SwitchActions](switch-actions.html).
 
 The action creator functions define `toString()` to return the action type, which enables easy usage with third-party Redux libraries, including redux-actions and redux-saga.
 
