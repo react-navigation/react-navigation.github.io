@@ -62,6 +62,7 @@
       "version-3.x-navigation-prop",
       "version-3.x-navigation-actions",
       "version-3.x-stack-actions",
+      "version-3.x-switch-actions",
       "version-3.x-drawer-actions",
       "version-3.x-stack-navigator",
       "version-3.x-switch-navigator",
