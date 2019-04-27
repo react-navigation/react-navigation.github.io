@@ -685,6 +685,10 @@
         "title": "Transitioner",
         "sidebar_label": "Transitioner"
       },
+      "version-2.x-troubleshooting": {
+        "title": "Troubleshooting",
+        "sidebar_label": "Troubleshooting"
+      },
       "version-2.x-with-navigation-focus": {
         "title": "withNavigationFocus",
         "sidebar_label": "withNavigationFocus"
@@ -872,6 +876,10 @@
       "version-3.x-transitioner": {
         "title": "Transitioner",
         "sidebar_label": "Transitioner"
+      },
+      "version-3.x-troubleshooting": {
+        "title": "Troubleshooting",
+        "sidebar_label": "Troubleshooting"
       },
       "version-3.x-web-support": {
         "title": "React Navigation on the Web",
