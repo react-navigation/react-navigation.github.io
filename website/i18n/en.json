@@ -289,6 +289,10 @@
         "title": "Transitioner",
         "sidebar_label": "Transitioner"
       },
+      "troubleshooting": {
+        "title": "Troubleshooting",
+        "sidebar_label": "Troubleshooting"
+      },
       "web-support": {
         "title": "React Navigation on the Web",
         "sidebar_label": "Web support"
