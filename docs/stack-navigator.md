@@ -50,6 +50,7 @@ Options for the router:
 * `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
 * `defaultNavigationOptions` - Default navigation options to use for screens
 * `paths` - A mapping of overrides for the paths set in the route configs
+* `disableKeyboardHandling` - If true, the keyboard will NOT automatically dismiss when navigating to a new screen. Defaults to false. This is ignored in the web platform.
 
 Visual options:
 
