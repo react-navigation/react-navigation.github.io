@@ -13,15 +13,28 @@ This is especially valuable during development because it allows the developer t
 
 ## Usage
 
-You can enable persistence for your top-level navigator by rendering it with a `persistenceKey`:
+You can enable persistence for your top-level navigator by rendering it with `persistNavigationState` and `loadNavigationState` props:
+
+- `persistNavigationState` is an async function that receives single argument - the navigation state object. The function should persist it.
+- `loadNavigationState` is an async function that does the inverse - it should load the persisted navigation state and return a Promise that resolves with the navigation state object. If the function rejects, React Navigation will start as if no state was provided.
 
 ```js
 const AppNavigator = createStackNavigator({...});
+const persistenceKey = "persistenceKey"
+const persistNavigationState = async (navState) => {
+  try {
+    await AsyncStorage.setItem(persistenceKey, JSON.stringify(navState))
+  } catch(err) {
+    // handle the error according to your needs
+  }
+}
+const loadNavigationState = async () => {
+  const jsonString = await AsyncStorage.getItem(persistenceKey)
+  return JSON.parse(jsonString)
+}
 
-const App = () => <AppNavigator persistenceKey={"NavigationState"} />;
+const App = () => <AppNavigator persistNavigationState={persistNavigationState} loadNavigationState={loadNavigationState} />;
 ```
-
-This provided key will be used as the react native `AsyncStorage` key to save the JSON navigation state.
 
 ### Development Mode
 
@@ -29,17 +42,23 @@ This feature is particularly useful in development mode. You can enable it selec
 
 ```js
 const AppNavigator = createStackNavigator({...});
-const navigationPersistenceKey = __DEV__ ? "NavigationStateDEV" : null;
-const App = () => <AppNavigator persistenceKey={navigationPersistenceKey} />;
+function getPersistenceFunctions() {
+  return __DEV__ ? {
+    persistNavigationState: ...,
+    loadNavigationState: ...,
+  } : undefined;
+}
+const App = () => <AppNavigator {...getPersistenceFunctions()} />;
 ```
 
 ### Loading View
 
-Because the state is persisted asynchronously, the app must render an empty/loading view for a moment while the `AsyncStorage` request completes. To customize the loading view that is rendered during this time, you can use the `renderLoadingExperimental` prop:
+Because the state is loaded asynchronously, the app must render an empty/loading view for a moment before the `loadNavigationState` function returns. To customize the loading view that is rendered during this time, you can use the `renderLoadingExperimental` prop:
 
 ```js
 <AppNavigator
-  persistenceKey={...}
+  persistNavigationState={...}
+  loadNavigationState={...}
   renderLoadingExperimental={() => <ActivityIndicator />}
 />
 ```
@@ -48,7 +67,9 @@ Because the state is persisted asynchronously, the app must render an empty/load
 
 ## Warning: Serializable State
 
-Each param, route, and navigation state must be fully JSON-serializable for this feature to work. This means that your routes and params must contain no functions, class instances, or recursive data structures.
+Each param, route, and navigation state must be fully serializable for this feature to work. Typically, you would serialize the state as a JSON string. This means that your routes and params must contain no functions, class instances, or recursive data structures.
+
+If you need to modify the nav state object, you may do so in the `loadNavigationState` / `persistNavigationState` functions, but note that if your `loadNavigationState` provides an invalid object (an object from which the navigation state cannot be recovered), React Navigation may not be able to handle the situation gracefully.
 
 ## Warning: Route/Router definition changes
 
