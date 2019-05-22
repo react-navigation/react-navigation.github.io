@@ -69,6 +69,26 @@ public class MainActivity extends ReactActivity {
 }
 ```
 
+To finalise installation of react-native-gesture-handler for Android, be sure to make the necessary modifications to `MainApplication.java`:
+
+```diff
+
+import com.facebook.react.shell.MainReactPackage;
+import com.facebook.soloader.SoLoader;
++ import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+
+public class MainApplication extends Application implements ReactApplication {
+
+@Override
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
+          new MainReactPackage(),
++            new RNGestureHandlerPackage()
+      );
+    }
+}
+```
+
 ## Hybrid iOS Applications (Skip for RN only projects)
 
 If you're using React Navigation within a hybrid app - an iOS app that has both Swift/ObjC and React Native parts - you may be missing the `RCTLinkingIOS` subspec in your Podfile, which is installed by default in new RN projects. To add this, ensure your Podfile looks like the following:
