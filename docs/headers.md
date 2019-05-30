@@ -117,7 +117,7 @@ class HomeScreen extends React.Component {
 
 /* other code... */
 
-const RootStack = createStackNavigator(
+const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
     Details: DetailsScreen,
