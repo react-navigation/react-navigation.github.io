@@ -157,7 +157,7 @@ React Element to display on the right side of the header.
 
 #### `headerLeft`
 
-React Element or Component to display on the left side of the header. When a component is used, it receives a number of props when rendered (`onPress`, `title`, `titleStyle` and more - check [Header.js](https://github.com/react-navigation/react-navigation-stack/blob/master/src/views/Header/Header.js) for the complete list).
+React Element or Component to display on the left side of the header. When a component is used, it receives a number of props when rendered (`onPress`, `title`, `titleStyle` and more - check [Header.tsx](https://github.com/react-navigation/react-navigation-stack/blob/master/src/views/Header/Header.tsx) for the complete list).
 
 #### `headerStyle`
 
@@ -254,7 +254,7 @@ const SomeStack = createStackNavigator({
 
 ### Examples
 
-See the examples [SimpleStack.js](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground/js/SimpleStack.js) and [ModalStack.js](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground/js/ModalStack.js) which you can run locally as part of the [NavigationPlayground](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground) app.
+See the examples [SimpleStack.tsx](https://github.com/react-navigation/react-navigation/blob/master/examples/NavigationPlayground/src/SimpleStack.tsx) and [ModalStack.tsx](https://github.com/react-navigation/react-navigation/blob/master/examples/NavigationPlayground/src/ModalStack.tsx) which you can run locally as part of the [NavigationPlayground](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground) app.
 
 You can view these examples directly on your phone by visiting [our expo demo](https://exp.host/@react-navigation/NavigationPlayground).
 
