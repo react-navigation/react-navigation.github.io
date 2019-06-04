@@ -14,7 +14,7 @@ The following actions are supported:
 ### Usage
 
 ```js
-import { DrawerActions } from 'react-navigation-drawer';
+import { DrawerActions } from 'react-navigation';
 
 this.props.navigation.dispatch(DrawerActions.toggleDrawer())
 ```
