@@ -90,7 +90,7 @@ There is also a [Snack](https://snack.expo.io/@react-navigation/react-navigation
 
 ## Android notches
 
-React Native does not currently expose an API to access information about device cutouts on Android devices. If your app has have an opaque status bar (the default in React Native), that may handle the area where the device has its cutout without any further work required. If not, to workaround this you may want to use the following temporary workaround:
+React Native does not currently expose an API to access information about device cutouts on Android devices. If your app has an opaque status bar (the default in React Native), that may handle the area where the device has its cutout without any further work required. If not, to workaround this you may want to use the following temporary workaround:
 
 - Install [react-native-device-info](https://github.com/react-native-community/react-native-device-info).
 - Check if the device has a notch with `DeviceInfo.hasNotch()` - this compares the device brand and model to a list of devices with notches - a crude but effective workaround.
