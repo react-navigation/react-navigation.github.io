@@ -96,7 +96,7 @@ String, React Element or React Component used by the header. Defaults to scene `
 
 #### `headerTitleAllowFontScaling`
 
-Whether header title font should scale to respect Text Size accessibility settings. Defaults to true.
+Whether header title font should scale to respect Text Size accessibility settings. Defaults to false.
 
 #### `headerBackAllowFontScaling`
 
