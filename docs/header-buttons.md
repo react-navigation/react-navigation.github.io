@@ -37,6 +37,12 @@ The most commonly used pattern for giving a header button access to a function o
 
 ```js
 class HomeScreen extends React.Component {
+
+  constructor(props) {
+   super(props)
+   this.props.navigation.setParams({ increaseCount: this._increaseCount });
+  }
+  
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: <LogoTitle />,
@@ -49,10 +55,6 @@ class HomeScreen extends React.Component {
       ),
     };
   };
-
-  componentDidMount() {
-    this.props.navigation.setParams({ increaseCount: this._increaseCount });
-  }
 
   state = {
     count: 0,
