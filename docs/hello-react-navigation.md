@@ -12,7 +12,7 @@ Lets start by demonstrating the most common navigator, `createStackNavigator`.
 
 ## Creating a stack navigator
 
-`createStackNavigator` is a function that returns a React component. It takes _a route configuration object_ and, optionally, _an options object_ (we omit this below, for now). Because the `createStackNavigator` function returns a React component, we can export it directly from `App.js` to be used as our App's root component.
+`createStackNavigator` is a function that returns a React component. It takes _a route configuration object_ and, optionally, _an options object_ (we omit this below, for now). `createAppContainer` is a function that retuns a React component to take as a parameter the React component created by the `createStackNavigator`, and can be directly exported from `App.js` to be used as our App's root component.
 
 ```javascript
 // In App.js in a new project
