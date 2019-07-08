@@ -38,7 +38,7 @@ Link all native dependencies:
 react-native link react-native-gesture-handler
 ```
 
-No additional steps are required for iOS.
+No additional steps are required for iOS. Unless on react-native v0.60.0 in which case you may need to cd into your ios directory and run ```pod install```
 
 To finalise installation of react-native-gesture-handler for Android, be sure to make the necessary modifications to `MainActivity.java`:
 
