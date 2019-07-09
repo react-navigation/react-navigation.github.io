@@ -32,7 +32,22 @@ yarn add react-native-gesture-handler
 # npm install react-native-gesture-handler
 ```
 
-Link all native dependencies:
+If you're on React Native >= 0.60, you need to [disable autolinking for `react-native-gesture-handler` first](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md#how-can-i-disable-autolinking-for-unsupported-library). To disable autolinking for it, create a `react-native.config.js` file in the root of your project with the following content:
+
+```js
+module.exports = {
+  dependencies: {
+    'react-native-gesture-handler': {
+      platforms: {
+        android: null,
+        ios: null,
+      },
+    },
+  },
+};
+```
+
+Then run the following to link it (for all React Native versions):
 
 ```bash
 react-native link react-native-gesture-handler
