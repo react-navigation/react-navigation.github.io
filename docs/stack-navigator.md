@@ -50,7 +50,6 @@ Options for the router:
 * `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
 * `defaultNavigationOptions` - Default navigation options to use for screens
 * `paths` - A mapping of overrides for the paths set in the route configs
-* `disableKeyboardHandling` - If true, the keyboard will NOT automatically dismiss when navigating to a new screen. Defaults to false. This is ignored in the web platform.
 
 Visual options:
 
@@ -61,24 +60,6 @@ Visual options:
   * `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
   * `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
   * `none` - No header will be rendered.
-* `headerBackTitleVisible` - A reasonable default is supplied for whether the back button title should be visible or not, but if you want to override that you can use `true` or `false` in this option.
-* `headerTransitionPreset` - Specifies how the header should transition from one screen to another when `headerMode: float` is enabled.
-  * `fade-in-place` - Header components cross-fade without moving, similar to the Twitter, Instagram, and Facebook app for iOS. This is the default value.
-  * `uikit` - An approximation of the default behavior for iOS.
-* `headerLayoutPreset` - Specifies how to lay out the header components.
-  * `left` - Anchor the title to the left, near the back button or other left component. This is the default on Android. When used on iOS, the header back title is hidden. Content from the left component will overflow underneath the title, if you need to adjust this you can use `headerLeftContainerStyle` and `headerTitleContainerStyle`. Additionally, this alignment is incompatible with `headerTransitionPreset: 'uikit'`.
-  * `center` - Center the title, this is the default on iOS.
-* `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
-* `cardShadowEnabled` - Use this prop to have visible shadows during transitions. Defaults to `true`
-* `cardOverlayEnabled` - Use this prop to have visible stack card overlays during transitions. Defaults to `false`.
-* `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
-https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js)). Provided function will be passed the following arguments: 
-  * `transitionProps` - Transition props for the new screen. 
-  * `prevTransitionProps` - Transitions props for the old screen. 
-  * `isModal` - Boolean specifying if screen is modal.
-* `onTransitionStart` - Function to be invoked when the card transition animation is about to start.
-* `onTransitionEnd` - Function to be invoked once the card transition animation completes.
-* `transparentCard` - *Experimental* - Prop to keep all cards in the stack visible and add a transparent background instead of a white one. This is useful to implement things like modal dialogs where the previous scene should still be visible underneath the current one.
 
 ### `navigationOptions` for screens inside of the navigator
 
@@ -92,7 +73,7 @@ React Element or a function that given `HeaderProps` returns a React Element, to
 
 #### `headerTitle`
 
-String, React Element or React Component used by the header. Defaults to scene `title`. When a component is used, it receives `allowFontScaling`, `style` and `children` props. The title string is passed in `children`.
+String or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is specified, it receives `allowFontScaling`, `onLayout`, `style` and `children` as the arguments. The title string is passed in `children`.
 
 #### `headerTitleAllowFontScaling`
 
@@ -104,68 +85,35 @@ Whether back button title font should scale to respect Text Size accessibility s
 
 #### `headerBackImage`
 
-React Element or Component to display custom image in header's back button. When a component is used, it receives a number of props when rendered (`tintColor`, `title`). Defaults to Image component with `react-navigation/views/assets/back-icon.png` back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
+Function which returns a React Element to display custom image in header's back button. When a function is used, it receives the `tintColor` in it's argument object. Defaults to Image component with `react-navigation/views/assets/back-icon.png` back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
 
 #### `headerBackTitle`
 
-Title string used by the back button on iOS, or `null` to disable label. Defaults to the previous scene's `headerTitle`. `headerBackTitle` has to be defined in the origin screen, not in the destination screen. For instance, when you have a transition A to B and you want to disable the `headerBackTitle` on `B`:
+Title string used by the back button on iOS, or `null` to disable label. Defaults to the previous scene's `headerTitle`.
 
-```js
-StackNavigator({
-  A: {
-    screen: AScreen,
-    navigationOptions: () => ({
-      title: `A`,
-      headerBackTitle: null
-    }),
-  },
-  B: {
-    screen: BScreen,
-    navigationOptions: () => ({
-      title: `B`,
-    }),
-  }
-});
-```
+#### `headerBackTitleVisible`
+
+A reasonable default is supplied for whether the back button title should be visible or not, but if you want to override that you can use `true` or `false` in this option.
 
 #### `headerTruncatedBackTitle`
 
-Title string used by the back button when `headerBackTitle` doesn't fit on the screen. `"Back"` by default. `headerTruncatedBackTitle` has to be defined in the origin screen, not in the destination screen. For instance, when you have a transition A to B and you want to truncate the label on `B`:
-
-```js
-StackNavigator({
-  A: {
-    screen: AScreen,
-    navigationOptions: () => ({
-      title: `A`,
-      headerBackTitle: 'A much too long text for back button from B to A',
-      headerTruncatedBackTitle: `to A`
-    }),
-  },
-  B: {
-    screen: BScreen,
-    navigationOptions: () => ({
-      title: `B`,
-    }),
-  }
-});
-```
+Title string used by the back button when `headerBackTitle` doesn't fit on the screen. `"Back"` by default.
 
 #### `headerRight`
 
-React Element to display on the right side of the header.
+Function which returns a React Element to display on the right side of the header.
 
 #### `headerLeft`
 
-React Element or Component to display on the left side of the header. When a component is used, it receives a number of props when rendered (`onPress`, `title`, `titleStyle` and more - check [Header.tsx](https://github.com/react-navigation/react-navigation-stack/blob/master/src/views/Header/Header.tsx) for the complete list).
+Function which returns a React Element to display on the left side of the header. When a function is used, it receives a number of arguments when rendered (`onPress`, `label`, `labelStyle` and more - check [types.tsx](https://github.com/react-navigation/react-navigation-stack/blob/master/src/types.tsx) for the complete list).
 
 #### `headerStyle`
 
-Style object for the header
+Style object for the header. You can specify a custom background color here, for example.
 
-#### `headerForceInset`
+#### `headerStatusBarHeight`
 
-Allows to pass `forceInset` object to internal SafeAreaView used in the header. 
+Allows to pass a custom status bar height to set as the top padding in the header.
 
 #### `headerTitleStyle`
 
@@ -199,19 +147,45 @@ Color for material ripple (Android >= 5.0 only)
 
 #### `headerTransparent`
 
-Defaults to `false`. If `true`, the header will not have a background unless you explicitly provide it with `headerStyle` or `headerBackground`.
+Defaults to `false`. If `true`, the header will not have a background unless you explicitly provide it with `headerBackground`. The header will also float over the screen so that it overlaps the content underneath.
+
+This is useful if you want to render a semi-transparent header or a blurred background.
 
 #### `headerBackground`
 
-Use this with `headerTransparent` to provide a component to render in the background of the header. You can use this with a blur view, for example, to create a translucent header.
+Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
 
-#### `headerBackgroundTransitionPreset`
+You can use this with `headerTransparent` to render a blur view, for example, to create a translucent header.
 
-One of `toggle` | `fade` | `translate`; lets you choose how to transition your custom `headerBackground` components between screens.
+#### `cardShadowEnabled`
+
+Use this prop to have visible shadows during transitions. Defaults to `true`.
+
+#### `cardOverlayEnabled`
+
+Use this prop to have a semi-transparent dark overlay visible under the card during transitions. Defaults to `true` on Android and `false` on iOS.
+
+#### `cardTransparent`
+
+Use this prop to use a transparent background for the card instead of a white one. This is useful to implement things like modal dialogs where the previous scene should still be visible underneath the current one. Defaults to `false`.
+
+If you use [`react-native-screens`](https://github.com/kmagiera/react-native-screens), you should also specify `mode: 'modal'` in the stack view config so previous screens aren't detached.
+
+#### `cardStyle`
+
+Style object for the card in stack. You can provide a custom background color to use instead of the default background here.
+
+#### `disableKeyboardHandling`
+
+If true, the keyboard will NOT automatically dismiss when navigating to a new screen. Defaults to `false`.
+
+#### `animationEnabled`
+
+Whether transition animation should be enabled the screen. If you set it to `false`, the screen won't animate when pushing or popping. Defaults to `true`.
 
 #### `gesturesEnabled`
 
-Whether you can use gestures to dismiss this screen. Defaults to true on iOS, false on Android.
+Whether you can use gestures to dismiss this screen. Defaults to `true` on iOS, `false` on Android.
 
 #### `gestureResponseDistance`
 
@@ -222,9 +196,29 @@ Object to override the distance of touch start from the edge of the screen to re
 
 #### `gestureDirection`
 
-String to override the direction for dismiss gesture. `default` for normal behaviour or `inverted` for right-to-left swipes.
+The direction of swipe gestures, `horizontal` or `vertical`.
 
-#### `params`
+#### `transitionSpec`
+
+An object which specifies the animation type (timing or spring) and their options (such as duration for timing). It takes 2 properties, open for the transition when adding a screen and close for the transition when removing a screen.
+
+#### `cardStyleInterpolator`
+
+This is a function which specifies interpolated styles for various parts of the card, e.g. the overlay, shadow etc.
+
+#### `headerStyleInterpolator`
+
+This is a function which specifies interpolated styles for various parts of the header, e.g. the title, left button etc.
+
+#### `onTransitionStart`
+
+Callback which is called when a transition animation starts.
+
+#### `onTransitionEnd`
+
+Callback which is called when a transition animation ends.
+
+### `params`
 
 You can provide default params inside route definitions:
 
