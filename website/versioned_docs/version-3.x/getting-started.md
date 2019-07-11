@@ -22,7 +22,7 @@ Install the `react-navigation` package in your React Native project.
 ```bash
 yarn add react-navigation
 # or with npm
-# npm install --save react-navigation
+# npm install react-navigation
 ```
 
 Next, install react-native-gesture-handler. If you’re using the [Expo managed workflow](https://docs.expo.io/versions/latest/introduction/managed-vs-bare/) then you don’t need to do anything here, it’s included in the SDK. Otherwise:
@@ -30,25 +30,10 @@ Next, install react-native-gesture-handler. If you’re using the [Expo managed 
 ```bash
 yarn add react-native-gesture-handler
 # or with npm
-# npm install --save react-native-gesture-handler
+# npm install react-native-gesture-handler
 ```
 
-If you're on React Native >= 0.60, you need to [disable autolinking for `react-native-gesture-handler` first](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md#how-can-i-disable-autolinking-for-unsupported-library). To disable autolinking for it, create a `react-native.config.js` file in the root of your project with the following content:
-
-```js
-module.exports = {
-  dependencies: {
-    'react-native-gesture-handler': {
-      platforms: {
-        android: null,
-        ios: null,
-      },
-    },
-  },
-};
-```
-
-Then run the following to link it (for all React Native versions):
+Then run the following to link it:
 
 ```bash
 react-native link react-native-gesture-handler
@@ -84,6 +69,43 @@ public class MainActivity extends ReactActivity {
 +  }
 }
 ```
+
+If you're on React Native >= 0.60, you also need to do the following:
+
+[Disable autolinking for `react-native-gesture-handler`](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md#how-can-i-disable-autolinking-for-unsupported-library). To disable autolinking for it, create a `react-native.config.js` file in the root of your project with the following content:
+
+```js
+module.exports = {
+  dependencies: {
+    'react-native-gesture-handler': {
+      platforms: {
+        android: null,
+        ios: null,
+      },
+    },
+  },
+};
+```
+
+Use [jetifier](https://github.com/mikehardy/jetifier) to work around libraries using the support library on Android:
+
+Add `jetify` under `scripts.postinstall` in your `package.json`:
+
+```json
+"scripts": {
+  "postinstall": "jetify"
+}
+```
+
+Then install it:
+
+```sh
+yarn add --dev jetifier
+# or with npm
+# npm install react-navigation
+```
+
+Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
 
 ## Hybrid iOS Applications (Skip for RN only projects)
 
