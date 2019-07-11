@@ -101,7 +101,7 @@ Then install it:
 ```sh
 yarn add --dev jetifier
 # or with npm
-# npm install react-navigation
+# npm install jetifier
 ```
 
 Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
