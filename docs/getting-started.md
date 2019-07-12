@@ -24,23 +24,24 @@ yarn add react-navigation
 # npm install react-navigation
 ```
 
-Next, install react-native-gesture-handler. If you’re using the [Expo managed workflow](https://docs.expo.io/versions/latest/introduction/managed-vs-bare/) then you don’t need to do anything here, it’s included in the SDK. Otherwise:
+Next, install `react-native-gesture-handler` and `react-native-reanimated`. If you’re using the [Expo managed workflow](https://docs.expo.io/versions/latest/introduction/managed-vs-bare/) then you don’t need to do anything here, it’s included in the SDK. Otherwise:
 
 ```bash
-yarn add react-native-gesture-handler
+yarn add react-native-gesture-handler react-native-reanimated
 # or with npm
-# npm install react-native-gesture-handler
+# npm install react-native-gesture-handler react-native-reanimated
 ```
 
-Then run the following to link it:
+On React Native >= 0.60, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md). If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
 
 ```bash
 react-native link react-native-gesture-handler
+react-native link react-native-reanimated
 ```
 
 No additional steps are required for iOS.
 
-To finalise installation of react-native-gesture-handler for Android, be sure to make the necessary modifications to `MainActivity.java`:
+To finalise installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
 
 ```diff
 package com.reactnavigation.example;
@@ -69,23 +70,6 @@ public class MainActivity extends ReactActivity {
 }
 ```
 
-If you're on React Native >= 0.60, you also need to do the following:
-
-[Disable autolinking for `react-native-gesture-handler`](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md#how-can-i-disable-autolinking-for-unsupported-library). To disable autolinking for it, create a `react-native.config.js` file in the root of your project with the following content:
-
-```js
-module.exports = {
-  dependencies: {
-    'react-native-gesture-handler': {
-      platforms: {
-        android: null,
-        ios: null,
-      },
-    },
-  },
-};
-```
-
 Use [jetifier](https://github.com/mikehardy/jetifier) to work around libraries using the support library on Android:
 
 Add `jetify` under `scripts.postinstall` in your `package.json`:
@@ -96,15 +80,13 @@ Add `jetify` under `scripts.postinstall` in your `package.json`:
 }
 ```
 
-Then install it:
+Then install it (make sure to run this **after** adding the `postinstall` script)::
 
 ```sh
 yarn add --dev jetifier
 # or with npm
 # npm install jetifier
 ```
-
-Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
 
 Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
 
