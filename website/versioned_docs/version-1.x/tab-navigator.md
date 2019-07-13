@@ -125,6 +125,8 @@ Callback to handle tap events; the argument is an object containing:
 
 Useful for adding a custom logic before the transition to the next scene (the tapped one) starts.
 
+Define this callback without ever invoking `jumpToIndex` to prevent any navigation from occurring.
+
 ## Navigator props
 
 The navigator component created by `TabNavigator(...)` takes the following props:
