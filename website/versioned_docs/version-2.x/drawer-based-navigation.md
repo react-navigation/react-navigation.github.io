@@ -6,64 +6,49 @@ original_id: drawer-based-navigation
 ---
 
 ```js
-class MyHomeScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Home',
-    drawerIcon: ({ tintColor }) => (
-      <Image
-        source={require('./chats-icon.png')}
-        style={[styles.icon, {tintColor: tintColor}]}
-      />
-    ),
-  };
-
+class HomeScreen extends React.Component {
   render() {
     return (
-      <Button
-        onPress={() => this.props.navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity onPress={this.props.navigation.openDrawer}>
+          <Text>Open Drawer</Text>
+        </TouchableOpacity>
+        <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Home</Text>
+      </View>
     );
   }
 }
 
-class MyNotificationsScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Notifications',
-    drawerIcon: ({ tintColor }) => (
-      <Image
-        source={require('./notif-icon.png')}
-        style={[styles.icon, {tintColor: tintColor}]}
-      />
-    ),
-  };
-
+class SettingsScreen extends React.Component {
   render() {
     return (
-      <Button
-        onPress={() => this.props.navigation.goBack()}
-        title="Go back home"
-      />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity onPress={this.props.navigation.openDrawer}>
+          <Text>Open Drawer</Text>
+        </TouchableOpacity>
+        <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Settings</Text>
+      </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  icon: {
-    width: 24,
-    height: 24,
+const DrawerNavigator = createDrawerNavigator(
+  {
+    Home: HomeScreen,
+    Settings: SettingsScreen,
   },
-});
+  {
+    drawerBackgroundColor: 'rgba(255,255,255,.9)',
+    contentOptions: {
+      activeTintColor: '#fff',
+      activeBackgroundColor: '#6b52ae',
+    },
+  }
+);
 
-const MyApp = createDrawerNavigator({
-  Home: {
-    screen: MyHomeScreen,
-  },
-  Notifications: {
-    screen: MyNotificationsScreen,
-  },
-});
+export default createAppContainer(DrawerNavigator);
 ```
+<a href="https://snack.expo.io/@react-navigation/basic-drawer-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 To open and close drawer, use the following helpers to open and close the drawer:
 
