@@ -117,6 +117,8 @@ Callback to handle press events; the argument is an object containing:
 Useful for adding a custom logic before the transition to the next scene (the
 tapped one) starts.
 
+Define this callback without ever invoking `defaultHandler` to prevent any navigation from occurring.
+
 #### `tabBarOnLongPress`
 
 Callback to handle long press events; the argument is an object containing:
