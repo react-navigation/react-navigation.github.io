@@ -32,14 +32,28 @@ yarn add react-native-gesture-handler react-native-reanimated
 # npm install react-native-gesture-handler react-native-reanimated
 ```
 
-On React Native >= 0.60, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md). If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
+Next, we need to link these libraries. The steps depends on your React Native version:
 
-```bash
-react-native link react-native-gesture-handler
-react-native link react-native-reanimated
-```
+- **React Native 0.60 and higher**
 
-No additional steps are required for iOS.
+  On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
+
+  To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
+
+  ```sh
+  cd ios
+  pod install
+  cd ..
+  ```
+
+- **React Native 0.59 and lower**
+
+  If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
+
+  ```sh
+  react-native link react-native-reanimated
+  react-native link react-native-gesture-handler
+  ```
 
 To finalise installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
 
@@ -68,24 +82,6 @@ public class MainActivity extends ReactActivity {
 +    };
 +  }
 }
-```
-
-Use [jetifier](https://github.com/mikehardy/jetifier) to work around libraries using the support library on Android:
-
-Add `jetify` under `scripts.postinstall` in your `package.json`:
-
-```json
-"scripts": {
-  "postinstall": "jetify"
-}
-```
-
-Then install it (make sure to run this **after** adding the `postinstall` script)::
-
-```sh
-yarn add --dev jetifier
-# or with npm
-# npm install jetifier
 ```
 
 Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
