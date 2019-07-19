@@ -200,19 +200,19 @@ The direction of swipe gestures, `horizontal` or `vertical`.
 
 #### `transitionSpec`
 
-An object which specifies the animation type (timing or spring) and their options (such as duration for timing). It takes 2 properties, open for the transition when adding a screen and close for the transition when removing a screen.
+An object which specifies the animation type (timing or spring) and their options (such as duration for timing). It takes 2 properties, `open` for the transition when adding a screen and `close` for the transition when removing a screen.
 
 #### `cardStyleInterpolator`
 
-This is a function which specifies interpolated styles for various parts of the card, e.g. the overlay, shadow etc.
+This is a function which specifies interpolated styles for various parts of the card. Is expected to return at least empty object, possibly containing styles for container, the card itself, overlay and shadow.
 
 #### `headerStyleInterpolator`
 
-This is a function which specifies interpolated styles for various parts of the header, e.g. the title, left button etc.
+This is a function which specifies interpolated styles for various parts of the header. Is expected to return at least empty object, possibly containing styles for left label and button, right button, title and background.
 
 #### `onTransitionStart`
 
-Callback which is called when a transition animation starts.
+Callback which is called when a transition animation starts (both when screen appears and hides).
 
 #### `onTransitionEnd`
 
