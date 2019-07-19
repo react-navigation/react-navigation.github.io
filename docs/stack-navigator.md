@@ -310,17 +310,34 @@ let dynamicModalTransition = (transitionProps, prevTransitionProps) => {
   const isModal = IOS_MODAL_ROUTES.some(
     screenName =>
       screenName === transitionProps.scene.route.routeName ||
-      (prevTransitionProps && screenName === prevTransitionProps.scene.route.routeName)
-  )
+      (prevTransitionProps &&
+        screenName === prevTransitionProps.scene.route.routeName),
+  );
   return StackViewTransitionConfigs.defaultTransitionConfig(
     transitionProps,
     prevTransitionProps,
-    isModal
+    isModal,
   );
 };
 
 const HomeStack = createStackNavigator(
   { DetailScreen, HomeScreen, OptionsScreen },
-  { initialRouteName: 'HomeScreen', transitionConfig: dynamicModalTransition }
+  { initialRouteName: 'HomeScreen', transitionConfig: dynamicModalTransition },
 );
 ```
+
+## Migration to version 2.0.0 of stack navigator
+
+The new release of stack navigator involved rewriting all underneath mechanisms to use `react-native-reanimated` and benefit from high performance animations. It resulted in philosophy shift that might be tricky to adopt in some cases.
+
+Most changes are related to giving each screen more control via `navigationOptions`. Interpolating styles during transitions, specifying card transparency, opening and closing callbacks now all belong there instead to the config of the whole navigator.
+
+### Removal of `transitionConfig`
+
+The least trivial change is related to drop of `transitionConfig` callback which was responsible for returning card styles (possibly animated) based on current and previous props. In consequence, apps often happened to have complicated logic for determining current screen, its phase (whether opening or closing) and relation to others.
+
+Now, using `cardStyleInterpolator`s, each screen (or all via `defaultNavigationConfig`) gets its own interpolator, allowing for more fine-grained styling. The drawback of this approach is that arguments to this callback provide less information, especially lacking properties of previous screen.
+
+### `transitionSpec`
+
+TODO
