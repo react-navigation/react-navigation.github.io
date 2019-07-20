@@ -39,13 +39,15 @@ Next, we need to link it. The steps depends on your React Native version:
 
   On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
 
-  To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
+  On iOS, to complete the linking, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
 
   ```sh
   cd ios
   pod install
   cd ..
   ```
+
+  On Android, it shouldn't need any more steps. But if you get errors regarding Android Support library during building the app, you need to install and configure [jetifier](https://github.com/mikehardy/jetifier).
 
 - **React Native 0.59 and lower**
 
@@ -55,7 +57,7 @@ Next, we need to link it. The steps depends on your React Native version:
   react-native link react-native-gesture-handler
   ```
 
-To finalise installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
+To finalize installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
 
 ```diff
 package com.reactnavigation.example;
