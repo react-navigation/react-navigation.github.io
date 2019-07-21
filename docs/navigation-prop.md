@@ -235,44 +235,55 @@ The following actions will work within any stack navigator:
 
 ### Push
 
-Similar to navigate, push will move you forward to a new route in the stack. This differs from `navigate` in that `navigate will` pop back to earlier in the stack if a route of the given name is already present there. `push` will always add on top, so a route can be present multiple times.
+Similar to navigate, push will move you forward to a new route in the stack. This differs from `navigate` in that `navigate` will pop back to earlier in the stack if a route of the given name is already present there. `push` will always add on top, so a route can be present multiple times.
 
-`navigation.push(routeName, params, action)`
+```js
+navigation.push(routeName, params, action)
+```
 
-* `routeName` - A destination routeName that has been registered somewhere in the app's router
-* `params` - Params to merge into the destination route
+* `routeName` - A destination routeName that has been registered somewhere in the app's router.
+* `params` - Params to merge into the destination route.
 * `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions.html) for a full list of supported actions.
 
 ### Pop
 
-Take you to the previous screen in the stack. If you provide a number, "n", it will specify how many screens to take you back within the stack.
+Take you to the previous screen in the stack. If you provide a number, `n`, it will specify how many screens to take you back within the stack.
 
-`navigation.pop(n)`
+```js
+navigation.pop(n)
+```
 
 ### PopToTop
 
 Call this to jump back to the top route in the stack, dismissing all other screens.
 
-`navigation.popToTop()`
+```js
+navigation.popToTop()
+```
 
 ### Replace
 
 Call this to replace the current screen with the given route, with params and sub-action.
 
-`navigation.replace(routeName, params, action)`
+```js
+navigation.replace(routeName, params, action)
+```
 
 ### Reset
 
 Wipe the navigator state and replace it with the result of several actions.
 
-`navigation.reset([NavigationActions.navigate({ routeName: 'Profile' })], 0)`
+```js
+navigation.reset([NavigationActions.navigate({ routeName: 'Profile' })], 0)
+```
 
 ### Dismiss
 
 Call this if you're in a nested (child) stack and want to dismiss the entire stack, returning to the parent stack.
 
-`navigation.dismiss()`
-
+```js
+navigation.dismiss()
+```
 
 ## Advanced API Reference
 
