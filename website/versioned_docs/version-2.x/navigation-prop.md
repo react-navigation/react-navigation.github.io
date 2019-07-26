@@ -83,6 +83,8 @@ class HomeScreen extends React.Component {
 
 Optionally provide a key, which specifies the route to go back from. By default, `goBack` will close the route that it is called from. If the goal is to go back _anywhere_, without specifying what is getting closed, call `.goBack(null);` Note that the `null` parameter is useful in the case of nested `StackNavigators` to go back on a parent navigator when the child navigator already has only one item in the stack. Don't be concerned if this is confusing, this API needs some work.
 
+Note -- a key is not the name of the route but the unique identifier you provided when navigating to the route. See [navigation key](navigation-key.html).
+
 ```js
 class HomeScreen extends React.Component {
   render() {
@@ -92,8 +94,8 @@ class HomeScreen extends React.Component {
         <Button onPress={() => goBack()} title="Go back from this HomeScreen" />
         <Button onPress={() => goBack(null)} title="Go back anywhere" />
         <Button
-          onPress={() => goBack('screen-123')}
-          title="Go back from screen-123"
+          onPress={() => goBack('key-123')}
+          title="Go back from key-123"
         />
       </View>
     );
@@ -106,10 +108,10 @@ class HomeScreen extends React.Component {
 Consider the following navigation stack history:
 
 ```javascript
-navigation.navigate(SCREEN_KEY_A);
-navigation.navigate(SCREEN_KEY_B);
-navigation.navigate(SCREEN_KEY_C);
-navigation.navigate(SCREEN_KEY_D);
+navigation.navigate({routeName: SCREEN, key: SCREEN_KEY_A});
+navigation.navigate({routeName: SCREEN, key: SCREEN_KEY_B});
+navigation.navigate({routeName: SCREEN, key: SCREEN_KEY_C});
+navigation.navigate({routeName: SCREEN, key: SCREEN_KEY_D});
 ```
 
 Now you are on _screen D_ and want to go back to _screen A_ (popping D, C, and B).
