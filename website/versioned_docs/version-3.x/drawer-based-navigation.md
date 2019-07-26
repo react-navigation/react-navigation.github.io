@@ -4,69 +4,57 @@ title: Drawer navigation
 sidebar_label: Drawer navigation
 original_id: drawer-based-navigation
 ---
+The drawer navigator allows you to present a navigation menu to your users. It can be customized out of the box, or you can completely control with a custom component.
+
 This guide covers [createDrawerNavigator](drawer-navigator.html). 
 
 ```js
-class MyHomeScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Home',
-    drawerIcon: ({ tintColor }) => (
-      <Image
-        source={require('./chats-icon.png')}
-        style={[styles.icon, {tintColor: tintColor}]}
-      />
-    ),
-  };
-
+class HomeScreen extends React.Component {
   render() {
     return (
-      <Button
-        onPress={() => this.props.navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity onPress={this.props.navigation.openDrawer}>
+          <Text>Open Drawer</Text>
+        </TouchableOpacity>
+        <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Home</Text>
+      </View>
     );
   }
 }
 
-class MyNotificationsScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Notifications',
-    drawerIcon: ({ tintColor }) => (
-      <Image
-        source={require('./notif-icon.png')}
-        style={[styles.icon, {tintColor: tintColor}]}
-      />
-    ),
-  };
-
+class SettingsScreen extends React.Component {
   render() {
     return (
-      <Button
-        onPress={() => this.props.navigation.goBack()}
-        title="Go back home"
-      />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity onPress={this.props.navigation.openDrawer}>
+          <Text>Open Drawer</Text>
+        </TouchableOpacity>
+        <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Settings</Text>
+      </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  icon: {
-    width: 24,
-    height: 24,
+const DrawerNavigator = createDrawerNavigator(
+  {
+    Home: HomeScreen,
+    Settings: SettingsScreen,
   },
-});
+  {
+    hideStatusBar: true,
+    drawerBackgroundColor: 'rgba(255,255,255,.9)',
+    overlayColor: '#6b52ae',
+    contentOptions: {
+      activeTintColor: '#fff',
+      activeBackgroundColor: '#6b52ae',
+    },
+  }
+);
 
-const MyDrawerNavigator = createDrawerNavigator({
-  Home: {
-    screen: MyHomeScreen,
-  },
-  Notifications: {
-    screen: MyNotificationsScreen,
-  },
-});
-
-const MyApp = createAppContainer(MyDrawerNavigator);
+export default createAppContainer(DrawerNavigator);
 ```
+
+<a href="https://snack.expo.io/@react-navigation/basic-drawer-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 To open and close drawer, use the following helpers to open and close the drawer:
 
@@ -95,3 +83,5 @@ If you would like to determine if drawer is open or closed, you can do the follo
 const parent = this.props.navigation.dangerouslyGetParent();
 const isDrawerOpen = parent && parent.state && parent.state.isDrawerOpen;
 ```
+
+Additionally, you can automatically hide the status bar by passing the DrawerLayout prop of `hideStatusBar: true`.
