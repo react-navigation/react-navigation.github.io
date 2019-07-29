@@ -25,15 +25,23 @@ yarn add react-navigation
 # npm install react-navigation
 ```
 
-Next, install react-native-gesture-handler. If you’re using the [Expo managed workflow](https://docs.expo.io/versions/latest/introduction/managed-vs-bare/) then you don’t need to do anything here, it’s included in the SDK. Otherwise:
+Next, install `react-native-gesture-handler` and `react-native-reanimated`.
+
+If you're using Expo, to ensure that you get the compatible versions of the libraries you should run:
 
 ```bash
-yarn add react-native-gesture-handler
-# or with npm
-# npm install react-native-gesture-handler
+expo install react-native-gesture-handler react-native-reanimated
 ```
 
-Next, we need to link it. The steps depends on your React Native version:
+Otherwise, just use yarn or npm directly:
+
+```bash
+yarn add react-native-gesture-handler react-native-reanimated
+# or with npm
+# npm install react-native-gesture-handler react-native-reanimated
+```
+
+Next, if you are not using the Expo managed workflow then you need to link these libraries if you haven't already. The steps depends on your React Native version:
 
 - **React Native 0.60 and higher**
 
@@ -51,9 +59,10 @@ Next, we need to link it. The steps depends on your React Native version:
 
 - **React Native 0.59 and lower**
 
-  If you're on an older React Native version, you need to manually link it. To do that, run:
+  If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
 
   ```sh
+  react-native link react-native-reanimated
   react-native link react-native-gesture-handler
   ```
 
