@@ -164,6 +164,8 @@ xcrun simctl openurl booted mychat://chat/Eric
 
 To test the URI on a real device, open Safari and type `mychat://chat/Eric`.
 
+**warning:** If react-native remote debugging is enabled and the app is not already running (foreground or background) deep linking will not work. To test deep linking to your app from a closed state, disable remote debugging. 
+
 ### Android
 
 To configure the external linking in Android, you can create a new intent in the manifest.
