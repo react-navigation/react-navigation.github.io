@@ -229,7 +229,7 @@ After:
 const name = this.props.navigation.getParam('name', 'Peter');
 ```
 
-if `name` or `param` are undefined, set the fallback to `Peter`.
+if `name` or `params` are undefined, set the fallback to `Peter`.
 
 ## Stack Actions
 
