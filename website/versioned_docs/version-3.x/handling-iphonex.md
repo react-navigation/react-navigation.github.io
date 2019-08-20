@@ -42,7 +42,7 @@ export default createStackNavigator({
 To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-navigation`. Recall that `SafeAreaView` should not wrap entire navigators, just the screen components or any content in them.
 
 ```jsx
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from 'react-navigation'
 
 class MyHomeScreen extends Component {
   render() {
@@ -51,7 +51,7 @@ class MyHomeScreen extends Component {
         <Text style={styles.paragraph}>This is top text.</Text>
         <Text style={styles.paragraph}>This is bottom text.</Text>
       </SafeAreaView>
-    );
+    )
   }
 }
 ```
@@ -98,14 +98,15 @@ React Native does not currently expose an API to access information about device
 - If the device has a notch, you may want to increase the status bar height known to the SafeAreaView by doing something like this:
 
 ```js
-import { Platform } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
-import DeviceInfo from 'react-native-device-info';
+import { Platform } from 'react-native'
+import { SafeAreaView } from 'react-navigation'
+import DeviceInfo from 'react-native-device-info'
 
-if (Platform.OS === 'android' && Device.hasNotch()) {
-  SafeAreaView.setStatusBarHeight(
+if (Platform.OS === 'android' && DeviceInfo.hasNotch()) {
+  SafeAreaView
+    .setStatusBarHeight
     /* Some value for status bar height + notch height */
-  );
+    ()
 }
 ```
 
