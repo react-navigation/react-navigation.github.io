@@ -370,6 +370,7 @@ import {
   createStackNavigator,
   createBottomTabNavigator,
   BottomTabBar,
+  ThemeContext,
 } from 'react-navigation';
 
 const ThemeConstants = {
@@ -393,7 +394,7 @@ class ThemedBottomTabBar extends React.Component {
   render() {
     return (
       <ThemeContext.Consumer>
-        {({ theme }) => (
+        {(theme) => (
           <BottomTabBar
             {...this.props}
             activeTintColor={ThemeConstants[theme].activeTintColor}
