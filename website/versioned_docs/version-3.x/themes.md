@@ -9,7 +9,7 @@ Providing a light theme and a dark theme is a nice way to let your users adjust 
 
 # Built-in themes
 
-> Note: support for built-in themes requires react-navigation@>=3.12.0-alpha! There is not a stable release with support for this yet. Skip ahead to "Custom themes using React context" if you'd like to learn more about how you can use themes today on a stable release.
+> Note: support for built-in themes requires react-navigation@>=3.12.0!
 
 As operating systems add built-in support for light and dark modes, supporting dark mode is less about keeping hip to trends and more about conforming to the average user expectations for how apps should work. In order to provide support for light and dark mode in a way that is reasonably consistent with the OS defaults, these themes are built in to React Navigation. You can pass in a `theme` prop to your app container component in order to switch between light and dark mode, and the value of that `theme` prop can come from whichever API you use to detect user preferences for dark mode, or in the case of older operating system versions, from a custom configuration within your app UI.
 
@@ -21,6 +21,35 @@ export default () => <Navigation theme="light">;
 ```
 
 This will take care of styling the stack navigator, bottom tab navigator, and drawer navigator for you. React Navigation also provides several tools to help you make your customizations of those navigators and the screens within the navigators support both themes too.
+
+## Using the operating system preferences
+
+At the time of writing, `react-native` does not currently support detecting the operating system color scheme preferences in the core ([you can follow this pull request](https://github.com/facebook/react-native/pull/26172)). Until it is part of core and you have updated to the version that includes it, you can use `react-native-appearance`.
+
+> Note: if you use the Expo managed workflow, this requires SDK 35+
+
+First, you need to install `react-native-appearance`. [Follow the instructions in the README](https://github.com/expo/react-native-appearance).
+
+Once you've installed it, set your root component up as follows:
+
+```js
+import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
+
+// Other navigation code goes here...
+let Navigation = createAppContainer(RootStack);
+
+export default () => {
+  let theme = useColorScheme();
+
+  return (
+    <AppearanceProvider>
+      <Navigation theme={theme}>
+    </AppearanceProvider>
+  )
+}
+```
+
+If the version of React Native you are using doesn't support hooks yet, you can use the `Appearance.addChangeListener(cb)` and `Appearance.getColorScheme()` functions as described in the [usage section of the README](https://github.com/expo/react-native-appearance#usage).
 
 ## Using the currently selected theme
 
