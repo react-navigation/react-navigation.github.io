@@ -53,6 +53,8 @@ export default () => {
 
 If the version of React Native you are using doesn't support hooks yet, you can use the `Appearance.addChangeListener(cb)` and `Appearance.getColorScheme()` functions as described in the [usage section of the README](https://github.com/expo/react-native-appearance#usage).
 
+See a full working example of theme integration in [react-navigation/theme-example](https://github.com/react-navigation/theme-example).
+
 ## Using the currently selected theme
 
 Two tools are available to gain access to the theme in any component that descends from the app navigation container: `useTheme` and `ThemeConext`.
