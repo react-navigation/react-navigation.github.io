@@ -201,6 +201,33 @@ To test the intent handling in Android, run the following:
 adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/Eric" com.simpleapp
 ```
 
+## Handling deep linking in your app
+
+To handle the URL with the parameters, you can use `Linking` in your components to react to events.
+
+```
+componentDidMount() {
+    // [...]
+    Linking.addEventListener('url', this.handleDeepLink)
+}
+componentWillUnmount() {
+    // [...]
+    Linking.removeEventListener('url', this.handleDeepLink);
+}
+```
+
+And the method to handle it :
+
+```
+handleDeepLink(e) {
+    const route = e.url.replace(/.*?:\/\//g, '')
+    // use route to navigate
+    // ...
+}
+```
+
+This should get you started! 🥳
+
 ## Disable deep linking
 
 In case you want to handle routing with deep-linking by yourself instead of `react-navigation`, you can pass `enableURLHandling={false}` prop to your app container:
