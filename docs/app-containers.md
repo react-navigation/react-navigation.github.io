@@ -54,7 +54,7 @@ In case you want to dispatch actions on an app container, you can use a React [`
   
 function App() {
   const ref = useRef();
-  useEffect(() => ref.current.dispatch({ type: 'REVERSE' }));
+  useEffect(() => ref.current.dispatch(CommonActions.goBack()));
   return (
     <NavigationContainer
       ref={ref}
