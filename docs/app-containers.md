@@ -11,7 +11,7 @@ A quick example of `NavigationContainer`:
 
 ```
 import { NavigationContainer } from '@react-navigation/core';
-import createStackNavigator from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 // you can also import NavigationContainer from @react-navigation/native
 
 const Stack = createStackNavigator();
