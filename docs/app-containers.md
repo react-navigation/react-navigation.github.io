@@ -3,71 +3,62 @@ id: app-containers
 title: App Containers
 sidebar_label: App Containers
 ---
-#TODO
 
 Containers are responsible for managing your app state and linking your top-level navigator to the app environment. On Android, the app container uses the Linking API to handle the back button. The container can also be configured to persist your navigation state. On web, you'd use different containers than React Native.
 
-> Note: In v2 and earlier, the containers in React Navigation are automatically provided by the `create*Navigator` functions. As of v3, you are required to use the container directly. In v3 we also renamed `createNavigationContainer` to `createAppContainer`.
 
-A quick example of `createAppContainer`:
+A quick example of `NavigationContainer`:
 
 ```
-import { createAppContainer, createStackNavigator } from 'react-navigation';
-// you can also import from @react-navigation/native
+import { NavigationContainer } from '@react-navigation/core';
+import createStackNavigator from '@react-navigation/stack';
+// you can also import NavigationContainer from @react-navigation/native
 
-const AppNavigator = createStackNavigator(...);
+const Stact = createStackNavigator();
 
-const AppContainer = createAppContainer(AppNavigator);
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        { /* ... */ }
+      </StackNavigator>
+    </NavigationContainer>
+  )
+}
 
-// Now AppContainer is the main component for React to render
-
-export default AppContainer;
+export default App;
 ```
 
-## Props of `createAppContainer` on React Native
+## Props of `NavigationContainer` on React Native
 
 ```js
-<AppContainer
-  onNavigationStateChange={handleNavigationChange}
-  uriPrefix="/app"
+<NavigationContainer
+  onStateChange={handleStateChange}
+  initialState={initialState}
 />
 ```
 
-### `onNavigationStateChange(prevState, newState, action)`
+### `onStateChange newState)`
 
-Function that gets called every time navigation state managed by the navigator changes. It receives the previous state, the new state of the navigation and the action that issued state change. By default it prints state changes to the console.
+Function that gets called every time navigation state managed by the navigator changes. It receives the new state of the navigation.
 
-### `uriPrefix`
+### `initialState`
 
-The prefix of the URIs that the app might handle. This will be used when handling a [deep link](deep-linking.html) to extract the path passed to the router.
+Prop that accepts initial state of navigation. You rather don't need for majority of cases but for deeplinking. #TODO
 
 ## Calling Dispatch or Navigate on App Container
 
-In case you want to dispatch actions on an app container, you can use a React [`ref`](https://facebook.github.io/react/docs/refs-and-the-dom.html#the-ref-callback-attribute) to call the `dispatch` method on it:
+In case you want to dispatch actions on an app container, you can use a React [`ref`](https://reactjs.org/docs/refs-and-the-dom.html#creating-refs) to call the `dispatch` method on it:
 
 ```js
-const AppContainer = createAppContainer(AppNavigator);
-
-class App extends React.Component {
-  someEvent() {
-    // call navigate for AppNavigator here:
-    this.navigator &&
-      this.navigator.dispatch(
-        NavigationActions.navigate({ routeName: someRouteName })
-      );
-  }
-  render() {
-    return (
-      <AppContainer
-        ref={nav => {
-          this.navigator = nav;
-        }}
-      />
-    );
-  }
+  
+function App() {
+  const ref = useRef();
+  useEffect(() => ref.current.dispatch({ type: 'REVERSE' }));
+  return (
+    <NavigationContainer
+      ref={ref}
+    />
+  );
 }
 ```
-
-## App Containers on the web
-
-On the web, you can use `createBrowserApp` and `handleServerRequest` to maintain the state for your top-level navigator.
