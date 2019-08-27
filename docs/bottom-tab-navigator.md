@@ -3,22 +3,34 @@ id: bottom-tab-navigator
 title: createBottomTabNavigator
 sidebar_label: createBottomTabNavigator
 ---
-#TODO
 
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 
-To use this navigator, you need to install [`react-navigation-tabs`](https://github.com/react-navigation/react-navigation-tabs) and its peer dependencies:
+To use this navigator, you need to install `@react-navigation/bottom-tabs` and its peer dependencies:
 
 ```sh
 npm install react-navigation-tabs react-native-reanimated react-native-gesture-handler
 ```
 
-To use this tab navigator, import it from `react-navigation-tabs`:
+To use this tab navigator, import it from `@react-navigation/bottom-tabs`:
 
 ```js
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-createBottomTabNavigator(RouteConfigs, TabNavigatorConfig);
+const Tab = createBottomTabNavigator();
+function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator initialRouteName="feed">
+        <Tab.Screen name="feed" component={Feed} />
+        <Tab.Screen name="article" component={Article} />
+        <Tab.Screen name="notifications">
+          {props => <Notifications {...props} />}
+        </Tab.Screen>
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
 ```
 
 > For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/en/tab-based-navigation.html)
@@ -32,10 +44,8 @@ The route configs object is a mapping from route name to a route config, which t
 
 * `initialRouteName` - The routeName for the initial tab route when first loading.
 * `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
-* `defaultNavigationOptions` - Default navigation options to use for screens
+* `screenOptions` - Default options to use for screens
 * `resetOnBlur` - Reset the state of any nested navigators when switching away from a screen. Defaults to `false`.
-* `order` - Array of routeNames which defines the order of the tabs.
-* `paths` - Provide a mapping of routeName to path config, which overrides the paths set in the routeConfigs.
 * `backBehavior` - `initialRoute` to return to initial tab, `order` to return to previous tab, `history` to return to last visited tab, or `none`.
 * `lazy` - Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
 * `tabBarComponent` - Optional, override component to use as the tab bar.
@@ -57,37 +67,34 @@ The route configs object is a mapping from route name to a route config, which t
 Example:
 
 ```js
-tabBarOptions: {
-  activeTintColor: '#e91e63',
-  labelStyle: {
-    fontSize: 12,
-  },
-  style: {
-    backgroundColor: 'blue',
-  },
+```js
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
+function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator initialRouteName="feed"
+        activeTintColor={'#e91e63'}
+        labelStyle={{
+          fontSize: 12
+        }}
+        style={{
+          backgroundColor: 'blue'
+        }}
+      >
+        <Tab.Screen name="feed" component={Feed} />
+        <Tab.Screen name="article" component={Article} />
+        <Tab.Screen name="notifications">
+          {props => <Notifications {...props} />}
+        </Tab.Screen>
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
 }
 ```
 
-If you want to customize the `tabBarComponent`:
-
-```js
-import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
-
-const TabBarComponent = (props) => (<BottomTabBar {...props} />);
-
-const TabScreens = createBottomTabNavigator(
-  {
-    tabBarComponent: props =>
-      <TabBarComponent
-        {...props}
-        style={{ borderTopColor: '#605F60' }}
-      />,
-  },
-);
-```
-
-
-## `navigationOptions` for screens inside of the navigator
+##  Props for `Tab.Screen` inside of the navigator
 
 #### `title`
 
