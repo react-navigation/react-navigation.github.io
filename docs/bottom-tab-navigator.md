@@ -90,7 +90,7 @@ function App() {
 }
 ```
 
-##  Props for `Tab.Screen` inside of the navigator
+##  `options` for `Tab.Screen` inside of the navigator
 
 #### `title`
 
