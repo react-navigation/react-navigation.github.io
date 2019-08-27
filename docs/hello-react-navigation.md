@@ -12,7 +12,7 @@ Lets start by demonstrating the most common navigator, `createStackNavigator`.
 
 ## Creating a stack navigator
 
-`createStackNavigator` is a function that returns a Navigator. Navigator is an object which contains of `Screen` and `Navigator`. Both of them are React object, but does not render anything itself. They are used for configuring behavior of navigator. `Navigator` should contains `Screen`s as children defining routes. `NavigationContainer` is a root component for navigation. This component must wrap all navigators structure.
+`createStackNavigator` is a function that returns a Navigator. Navigator is an object which contains of `Screen` and `Navigator`. Both of them are React components. They are used for configuring behavior of navigator. `Navigator` should contains `Screen`s as children defining routes. `NavigationContainer` is a root component for navigation. This component must wrap all navigators structure.
 
 ```js
 // In App.js in a new project
