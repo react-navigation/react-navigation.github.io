@@ -219,6 +219,10 @@
         "title": "Optimize memory usage and performance",
         "sidebar_label": "Optimize memory usage and performance"
       },
+      "react-navigation-5": {
+        "title": "React Navigation 5.*",
+        "sidebar_label": "React Navigation 5.*"
+      },
       "redux-integration": {
         "title": "Redux integration",
         "sidebar_label": "Redux integration"
