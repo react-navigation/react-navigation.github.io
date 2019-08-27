@@ -14,7 +14,7 @@ import { NavigationContainer } from '@react-navigation/core';
 import createStackNavigator from '@react-navigation/stack';
 // you can also import NavigationContainer from @react-navigation/native
 
-const Stact = createStackNavigator();
+const Stack = createStackNavigator();
 
 function App() {
   return (
