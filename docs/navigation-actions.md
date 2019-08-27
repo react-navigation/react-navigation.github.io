@@ -1,14 +1,14 @@
 ---
 id: navigation-actions
-title: NavigationActions reference
-sidebar_label: NavigationActions
+title: CommonActions reference
+sidebar_label: CommonActions
 ---
 
-All `NavigationActions` return an object that can be sent to the router using `navigation.dispatch()` method.
+All `CommonActions` return an object that can be sent to the router using `navigation.dispatch()` method.
 
 Note that if you want to dispatch react-navigation actions you should use the action creators provided in this library.
 
-It's important to highlight that dispatching a `NavigationAction` doesn't throw any error when the action is unhandled (similar to when you dispatch an action that isn't handled by a reducer in redux and nothing happens). However, if the app state changes as a result of a dispatch then the return value of the dispatch is `true` and `false` otherwise.
+It's important to highlight that dispatching a `CommonAction` doesn't throw any error when the action is unhandled (similar to when you dispatch an action that isn't handled by a reducer in redux and nothing happens). However, if the app state changes as a result of a dispatch then the return value of the dispatch is `true` and `false` otherwise.
 
 The following actions are supported:
 
@@ -32,14 +32,14 @@ The `navigate` action will update the current state with the result of a `naviga
 * `key` - _String_ - Optional - The identifier for the route to navigate to. Navigate back to this route if it already exists
 
 ```js
-import { NavigationActions } from 'react-navigation';
+import { CommonActions } from '@react-navigation/core';
 
-const navigateAction = NavigationActions.navigate({
+const navigateAction = CommonActions.navigate({
   routeName: 'Profile',
 
   params: {},
 
-  action: NavigationActions.navigate({ routeName: 'SubProfileRoute' }),
+  action: CommonActions.navigate({ routeName: 'SubProfileRoute' }),
 });
 
 this.props.navigation.dispatch(navigateAction);
@@ -52,9 +52,9 @@ Go back to previous screen and close current screen. `back` action creator takes
 * `key` - _string or null_ - optional - If set, navigation will go back from the given key. If null, navigation will go back anywhere.
 
 ```js
-import { NavigationActions } from 'react-navigation';
+import { CommonActions } from '@react-navigation/core';
 
-const backAction = NavigationActions.back({
+const backAction = CommonActions.back({
   key: 'Profile',
 });
 this.props.navigation.dispatch(backAction);
@@ -70,9 +70,9 @@ When dispatching `setParams`, the router will produce a new state that has chang
 #TODO - idk
  
 ```js
-import { NavigationActions } from 'react-navigation';
+import { CommonActions } from '@react-navigation/core';
 
-const setParamsAction = NavigationActions.setParams({
+const setParamsAction = CommonActions.setParams({
   params: { title: 'Hello' },
   key: 'screen-123',
 });
