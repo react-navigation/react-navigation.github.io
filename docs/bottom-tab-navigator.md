@@ -18,15 +18,13 @@ To use this tab navigator, import it from `@react-navigation/bottom-tabs`:
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
+
 function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator initialRouteName="feed">
         <Tab.Screen name="feed" component={Feed} />
         <Tab.Screen name="article" component={Article} />
-        <Tab.Screen name="notifications">
-          {props => <Notifications {...props} />}
-        </Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
   );
