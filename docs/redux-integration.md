@@ -36,6 +36,7 @@ Alright fair enough, the answer here isn't the most obvious. Let's say that you 
 ### Use a component that is `connect`ed
 
 Create a component, `connect` it to the store, then use that component in the `title`.
+#TODO
 
 ```js
 class Count extends React.Component {
@@ -71,6 +72,7 @@ If the value isn't expected to change, you can just pass it from a `connect`ed c
   }
 />
 ```
+#TODO
 
 ```js
 class StaticCounter extends React.Component {
@@ -95,6 +97,7 @@ class StaticCounter extends React.Component {
 ### setParams from your screen
 
 Let's modify the `StaticCounter` from the previous example as follows:
+#TODO
 
 ```js
 class StaticCounter extends React.Component {

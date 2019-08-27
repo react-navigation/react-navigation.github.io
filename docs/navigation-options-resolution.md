@@ -11,6 +11,7 @@ In this document we'll explain how this works when there are multiple navigators
 **You can only modify navigation options for a navigator from one of its screen components. This applies equally to navigators that are nested as screens.**
 
 Let's take for example a tab navigator that contains a stack in each tab. What happens if we set the `navigationOptions` on a screen inside of the stack?
+#TODO 
 
 ```js
 class A extends React.Component {
@@ -41,6 +42,7 @@ export default createAppContainer(createBottomTabNavigator({
 <a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-wrong-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 As we mentioned earlier, you can only modify navigation options for a navigator from one of its screen components. `A` and `B` above are screen components in `HomeStack` and `SettingsStack` respectively, not in the tab navigator. So the result will be that the `tabBarLabel` property is not applied to the tab navigator. We can fix this though!
+#TODO 
 
 ```js
 const HomeStack = createStackNavigator({ A });
@@ -63,6 +65,7 @@ export default createAppContainer(createBottomTabNavigator({
 <a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-correct-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 To understand what is going on here, first recall that in the following example, `MyComponent` and `MyOtherComponent` are identical:
+#TODO 
 
 ```js
 class MyComponent extends React.Component {
@@ -82,6 +85,7 @@ MyOtherComponent.navigationOptions = {
 ```
 
 We also know that `createStackNavigator` and related functions return React components. So when we set the `navigationOptions` directly on the `HomeStack` and `SettingsStack` component, it allows us to control the `navigationOptions` for its parent navigator when its used as a screen component. In this case, the `navigationOptions` on our stack components configure the label in the tab navigator that renders the stacks.
+#TODO 
 
 ```js
 const HomeStack = createStackNavigator({ A }, {
@@ -100,6 +104,7 @@ HomeStack.navigationOptions = {
 ```
 
 Another way you could write this is:
+#TODO 
 
 ```js
 const HomeStack = createStackNavigator({ A }, {
@@ -152,6 +157,7 @@ Navigators are initialized with `create*Navigator(routeConfig, navigatorConfig)`
 # A stack contains a tab navigator and you want to set the title on the stack header
 
 Imagine the following configuration:
+#TODO 
 
 ```js
 const TabNavigator = createBottomTabNavigator({
@@ -166,6 +172,7 @@ const AppNavigator = createStackNavigator({
 ```
 
 If we were to set the `headerTitle` with `navigationOptions` on the `FeedScreen`, this would not work. This is because the `AppNavigator` stack will only look at its immediate children for configuration: `TabNavigator` and `SettingsScreen`. So we can set the `headerTitle` on the `TabNavigator` instead, like so:
+#TODO 
 
 ```js
 const TabNavigator = createBottomTabNavigator({
@@ -186,6 +193,7 @@ TabNavigator.navigationOptions = ({ navigation }) => {
 ```
 
 Another option is to re-organize your navigators, such that each tab has its own stack. You can then hide the top-level stack's header when the tab screen is focused.
+#TODO 
 
 ```js
 const FeedStack = createStackNavigator({
@@ -223,6 +231,7 @@ Additionally, you can push new screens to the feed and profile stacks without hi
 Similar to the example above where a stack contains a tab navigator, we can solve this in two ways: add `navigationOptions` to our tab navigator to set the tab bar to hidden depending on which route is active in the child stack, or we can move the tab navigator inside of the stack.
 
 Imagine the following configuration:
+#TODO 
 
 ```js
 const FeedStack = createStackNavigator({
@@ -242,6 +251,7 @@ const AppNavigator = createSwitchNavigator({
 ```
 
 If we want to hide the tab bar when we navigate from the feed home to a details screen without shuffling navigators, we cannot set the `tabBarVisible: false` configuration in `navigationOptions` on `DetailsScreen`, because those options will only apply to the `FeedStack`. Instead, we can do the following:
+#TODO 
 
 ```js
 const FeedStack = createStackNavigator({
@@ -264,6 +274,7 @@ FeedStack.navigationOptions = ({ navigation }) => {
 This will hide the tab bar any time we navigate away from the feed home. We could switch visibility based on route name, but it would be strange to have the tab bar be hidden and then appear again when pushing another route &mdash; it should only be visible when returning to a route where it was previously visible.
 
 Another option here would be to add another stack navigator as a parent of the tab navigator, and put the details screen there. This is recommended.
+#TODO 
 
 ```js
 const FeedStack = createStackNavigator({
@@ -293,6 +304,7 @@ const AppNavigator = createSwitchNavigator({
 This is conceptually identical to having a tab with a stack inside of it (read that above if you have not already), where you want to hide the tab bar on certain screens. The only difference is that rather than using `tabBarVisible` you will use `drawerLockMode`.
 
 Imagine the following configuration:
+#TODO 
 
 ```js
 const FeedStack = createStackNavigator({
@@ -312,6 +324,7 @@ const AppNavigator = createSwitchNavigator({
 ```
 
 In order to hide the drawer when we push the details screen to the feed stack, we need to set `navigationOptions` on the `FeedStack`. If we were to set `navigationOptions` on the `DetailsScreen`, they would be configuring the feed stack (its direct parent) and not the drawer.
+#TODO 
 
 ```js
 const FeedStack = createStackNavigator({
@@ -332,6 +345,7 @@ FeedStack.navigationOptions = ({ navigation }) => {
 ```
 
 Another option here would be to add another stack navigator as a parent of the drawer navigator, and put the details screen there. This is recommended.
+#TODO 
 
 ```js
 const FeedStack = createStackNavigator({

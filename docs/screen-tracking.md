@@ -3,6 +3,7 @@ id: screen-tracking
 title: Screen tracking for analytics
 sidebar_label: Screen tracking for analytics
 ---
+#TODO
 
 This example shows how to do screen tracking and send to Google Analytics. The approach can be adapted to any other analytics SDK. 
 

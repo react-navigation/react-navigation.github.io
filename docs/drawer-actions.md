@@ -12,6 +12,7 @@ The following actions are supported:
 * [toggleDrawer](#toggleDrawer) - toggle the state, ie. switche from closed to open and vice versa
 
 ### Usage
+#TODO  rather ok, no?
 
 ```js
 import { DrawerActions } from 'react-navigation-drawer';

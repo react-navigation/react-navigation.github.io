@@ -9,7 +9,7 @@ If you don't have a navigation header, or your navigation header changes color b
 ## Stack and drawer navigators
 
 This is a simple task when using a stack or drawer. You can simply render the `StatusBar` component, which is exposed by React Native, and set your config.
-
+#TODO
 ```jsx
 class Screen1 extends React.Component {
   render() {

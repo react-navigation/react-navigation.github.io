@@ -3,6 +3,7 @@ id: tab-navigator
 title: createTabNavigator
 sidebar_label: createTabNavigator
 ---
+#TODO
 
 > Note: `createTabNavigator` is deprecated and removed in `react-navigation@3.x`. Please use `createBottomTabNavigator` and/or `createMaterialTopTabNavigator` instead.
 

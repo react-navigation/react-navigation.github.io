@@ -47,6 +47,7 @@ The route configs object is a mapping from route name to a route config.
 * `backBehavior` - `initialRoute` to return to initial tab, `order` to return to previous tab, `history` to return to last visited tab, or `none`.
 
 Example:
+#TODO 
 
 ```js
 export default createMaterialBottomTabNavigator({

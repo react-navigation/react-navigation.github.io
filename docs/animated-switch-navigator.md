@@ -3,6 +3,7 @@ id: animated-switch-navigator
 title: createAnimatedSwitchNavigator
 sidebar_label: createAnimatedSwitchNavigator
 ---
+#TODO it's missing!
 
 A `SwitchNavigator` with animation support. 
 

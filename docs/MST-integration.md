@@ -40,6 +40,7 @@ This means that rather than sending the params from one screen to another (eg. w
 
 
 To give an example, the navigation store may look similar to this:
+#TODO - not sure!
 
 ```js
 import { types, onSnapshot, getRoot } from 'mobx-state-tree';

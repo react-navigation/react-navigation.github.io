@@ -21,7 +21,7 @@ It's tempting to solve (a) by wrapping your entire app in a container with paddi
 However, if you're overriding the default navigation bar, it's important to ensure your UI doesn't interfere with either of those hardware elements.
 
 For example, if I render nothing for the `header` or `tabBarComponent`, nothing renders
-
+#TODO 
 ```jsx
 const Tabs = createBottomTabNavigator({
   ...

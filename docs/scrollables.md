@@ -11,6 +11,7 @@ Example
 ```jsx harmony
 import React from 'react';
 import { Text, View } from 'react-native';
+// TODO
 import { createAppContainer, FlatList } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 

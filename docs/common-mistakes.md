@@ -12,6 +12,8 @@ Most apps should only ever render one navigator inside of a React component, and
 
 Here's what you might write in your code -- note that this example would be incorrect:
 
+#TODO
+
 ```javascript
 export default class App extends React.Component {
   render() {
@@ -49,6 +51,7 @@ const AppContainer = createAppContainer(AppNavigator)
 ``` 
 
 The correct way to write this would be the following:
+#TODO
 
 ```javascript
 export default class App extends React.Component {
@@ -75,6 +78,8 @@ const AppContainer = createAppContainer(AppNavigator);
 ```
 
 Alternatively, the following would also work because it exposes the `router` static on `AuthenticationScreen` and threads through the `navigation` prop:
+
+#TODO
 
 ```javascript
 export default class App extends React.Component {

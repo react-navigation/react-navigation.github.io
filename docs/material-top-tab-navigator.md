@@ -23,7 +23,7 @@ react-native link react-native-gesture-handler
 **IMPORTANT:** There are additional steps required for `react-native-gesture-handler` on Android after running `react-native link react-native-gesture-handler`. Check the [this guide](https://kmagiera.github.io/react-native-gesture-handler/docs/getting-started.html) to complete the installation.
 
 To use this tab navigator, import it from `react-navigation-tabs`:
-
+#TODO 
 ```js
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 

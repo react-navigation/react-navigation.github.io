@@ -12,32 +12,41 @@ Lets start by demonstrating the most common navigator, `createStackNavigator`.
 
 ## Creating a stack navigator
 
-`createStackNavigator` is a function that returns a React component. It takes _a route configuration object_ and, optionally, _an options object_ (we omit this below, for now). `createAppContainer` is a function that retuns a React component to take as a parameter the React component created by the `createStackNavigator`, and can be directly exported from `App.js` to be used as our App's root component.
+`createStackNavigator` is a function that returns a Navigator. Navigator is an object which contains of `Screen` and `Navigator`. Both of them are React object, but does not render anything itself. They are used for configuring behavior of navigator. `Navigator` should contains `Screen`s as children defining routes. `NavigationContainer` is a root component for navigation. This component must wrap all navigators structure.
 
 ```js
 // In App.js in a new project
 
 import React from "react";
 import { View, Text } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { NavigationContainer } from "@react-navigation/core";
+import { createStackNavigator } from "@react-navigation/stack";
 
-class HomeScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Home Screen</Text>
-      </View>
-    );
-  }
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
 }
 
-const AppNavigator = createStackNavigator({
-  Home: {
-    screen: HomeScreen
-  }
-});
+const Stack = createStackNavigator();
 
-export default createAppContainer(AppNavigator);
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="home"
+          component={HomeScreen}
+        />  
+      </<Stack.Navigator>
+    </NavigationContainer>
+  ) 
+}
+  
+
+export default App;
 ```
 
 <a href="https://snack.expo.io/@react-navigation/hello-world-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
@@ -48,6 +57,7 @@ If you run this code, you will see a screen with an empty navigation bar and a g
 
 > The only required configuration for a route is the `screen` component. You can read more about the other options available in the [StackNavigator reference](stack-navigator.html).
 
+#TODO
 In React Native, the component exported from `App.js` is the entry point (or root component) for your app -- it is the component from which every other component descends. It's often useful to have more control over the component at the root of your app than you would get from exporting the result of `createAppContainer`, so let's export a component that just renders our `AppNavigator` stack navigator.
 
 ```js
@@ -63,6 +73,7 @@ export default class App extends React.Component {
 ## Route configuration shorthand
 
 Given that the only route configuration we have for `Home` is the screen component, we don't need to use the `{ screen: HomeScreen }` configuration format, we can use the screen component directly.
+#TODO
 
 ```js
 const AppNavigator = createStackNavigator({
@@ -73,6 +84,7 @@ const AppNavigator = createStackNavigator({
 ## Adding a second route
 
 The `<AppContainer />` component doesn't accept any props -- all configuration is specified in the `options` parameter to the `AppNavigator` `createStackNavigator` function. We left the `options` blank, so it just uses the default configuration. To see an example of using the `options` object, we will add a second screen to the stack navigator.
+#TODO
 
 ```js
 // Other code for HomeScreen here...

@@ -15,7 +15,7 @@ There are two pieces to this:
 2. Read the params in your screen component: `this.props.navigation.getParam(paramName, defaultValue)`.
 
 > We recommend that the params you pass are JSON-serializable. That way, you'll be able to use [state persistence](state-persistence.html) and your screen components will have the right contract for implementing [deep linking](deep-linking.html).
-
+#TODO how about get Params? Maybe we can support it?
 ```js
 class HomeScreen extends React.Component {
   render() {

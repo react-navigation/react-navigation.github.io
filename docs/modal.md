@@ -15,6 +15,7 @@ This sounds about right. A modal is like a popup &mdash; it's not part of your p
 The purpose of explaining this as part of the React Navigation fundamentals is not only because this is a common use case, but also because the implementation requires knowledge of _nesting navigators_, which is an important part of React Navigation.
 
 ## Creating a modal stack
+#TODO 
 
 ```js
 class HomeScreen extends React.Component {

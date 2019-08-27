@@ -7,7 +7,7 @@ sidebar_label: NavigationEvents
 `NavigationEvents` is a React component providing a declarative API to subscribe to navigation events. It will subscribe to navigation events on mount, and unsubscribe on unmount.
 
 ### Component props
-
+#TODO  - sth changed
 * `navigation` - navigation props (optional, defaults to reading from React context)
 * `onWillFocus` - event listener
 * `onDidFocus` - event listener

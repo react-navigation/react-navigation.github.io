@@ -32,6 +32,7 @@ You will need iOS 13 (currently in beta) to actually be able to toggle dark mode
 First, you need to install `react-native-appearance`. [Follow the instructions in the README](https://github.com/expo/react-native-appearance).
 
 Once you've installed it, set your root component up as follows:
+#TODO
 
 ```js
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
@@ -59,6 +60,7 @@ See a full working example of theme integration in [react-navigation/theme-examp
 Two tools are available to gain access to the theme in any component that descends from the app navigation container: `useTheme` and `ThemeConext`.
 
 `useTheme` is a simple custom hook that returns the theme.
+#TODO
 
 ```js
 import * as React from 'react';
@@ -100,6 +102,7 @@ function MyButton() {
   );
 }
 ```
+#TODO
 
 ```js
 import * as React from 'react';
@@ -146,6 +149,7 @@ function MyButton() {
 ### Default themed components
 
 Several components have defaults that are biased to a specific theme. `Text`, for example, defaults to black. `StatusBar` defaults to dark text. React Navigation provides themed alternatives to these.
+#TODO
 
 ```js
 import * as React from 'react';

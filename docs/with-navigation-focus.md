@@ -3,6 +3,7 @@ id: with-navigation-focus
 title: withNavigationFocus
 sidebar_label: withNavigationFocus
 ---
+#TODO
 
 `withNavigationFocus` is a higher order component which passes the `isFocused` prop into a wrapped component. It's useful if you need to use the focus state in the render function of your screen component or another component rendered somewhere inside of a screen.
 

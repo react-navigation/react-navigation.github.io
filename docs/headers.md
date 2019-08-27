@@ -9,7 +9,7 @@ By now you're probably tired of seeing a blank grey bar on the top of your scree
 ## Setting the header title
 
 A screen component can have a static property called `navigationOptions` which is either an object or a function that returns an object that contains various configuration options. The one we use for the header title is `title`, as demonstrated in the following example.
-
+#TODO 
 ```js
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -18,7 +18,6 @@ class HomeScreen extends React.Component {
 
   /* render function, etc */
 }
-
 class DetailsScreen extends React.Component {
   static navigationOptions = {
     title: 'Details',
@@ -35,6 +34,8 @@ class DetailsScreen extends React.Component {
 ## Using params in the title
 
 In order to use params in the title, we need to make `navigationOptions` a function that returns a configuration object. It might be tempting to try to use `this.props` inside of `navigationOptions`, but because it is a static property of the component, `this` does not refer to an instance of the component and therefore no props are available. Instead, if we make `navigationOptions` a function then React Navigation will call it with an object containing `{ navigation, navigationOptions, screenProps }` -- in this case, all we care about is `navigation`, which is the same object that is passed to your screen props as `this.props.navigation`. You may recall that we can get the params from `navigation` through `navigation.getParam` or `navigation.state.params`, and so we do this below to extract a param and use it as a title.
+
+#TODO
 
 ```js
 class DetailsScreen extends React.Component {
@@ -104,7 +105,7 @@ There are a couple of things to notice here:
 ## Sharing common `navigationOptions` across screens
 
 It is common to want to configure the header in a similar way across many screens. For example, your company brand color might be red and so you want the header background color to be red and tint color to be white. Conveniently, these are the colors we're using in our running example, and you'll notice that when you navigate to the `DetailsScreen` the colors go back to the defaults. Wouldn't it be awful if we had to copy the `navigationOptions` header style properties from `HomeScreen` to `DetailsScreen`, and for every single screen component we use in our app? Thankfully, we do not. We can instead move the configuration up to the stack navigator under the property `defaultNavigationOptions`.
-
+#TODO 
 ```js
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -116,7 +117,7 @@ class HomeScreen extends React.Component {
 }
 
 /* other code... */
-
+#TODO 
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
@@ -195,6 +196,8 @@ class DetailsScreen extends React.Component {
 ## Replacing the title with a custom component
 
 Sometimes you need more control than just changing the text and styles of your title -- for example, you may want to render an image in place of the title, or make the title into a button. In these cases you can completely override the component used for the title and provide your own.
+
+#TODO 
 
 ```js
 class LogoTitle extends React.Component {

@@ -5,7 +5,7 @@ sidebar_label: Custom routers
 ---
 
 You can make your own router by building an object with the following functions:
-
+#TODO
 ```js
 const MyRouter = {
   getStateForAction: (action, state) => ({}),
@@ -32,6 +32,7 @@ class MyNavigator extends React.Component {
 Defines the navigation state in response to a given action. This function will be run when an action gets passed into `props.navigation.dispatch(`, or when any of the helper functions are called, like `navigation.navigate(`.
 
 Typically this should return a navigation state, with the following form:
+#TODO
 
 ```
 {
@@ -60,6 +61,8 @@ If the router has handled the action externally, or wants to swallow it without 
 Returns the child component or navigator for the given route name.
 
 Say a router `getStateForAction` outputs a state like this:
+#TODO
+
 ```js
 {
   index: 1,

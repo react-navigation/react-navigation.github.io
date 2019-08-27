@@ -9,6 +9,7 @@ In this guide we will set up our app to handle external URIs. Let's suppose that
 ## Configuration
 
 Previously, we had defined a navigator like this:
+#TODO
 
 ```js
 const SimpleApp = createAppContainer(createStackNavigator({
@@ -30,6 +31,7 @@ const SimpleApp = createAppContainer(createStackNavigator({
 ```
 
 If we have nested navigators, we need to provide each parent screen with a `path`. All the paths will be concatenated and can also be an empty string. This path spec would be `friends/chat/:user`.
+#TODO
 
 ```js
 const AuthSwitch = createAppContainer(createStackNavigator({

@@ -21,6 +21,7 @@ Another way to write this would be:
 We'll do something similar to the latter, but rather than using a `document` global we'll use the `navigation` prop that is passed down to our screen components.
 
 ## Navigating to a new screen
+#TODO 
 
 ```js
 import React from 'react';
@@ -56,6 +57,7 @@ Let's break this down:
 So we now have a stack with two routes: 1) the Home route 2) the Details route. What would happen if we navigated to the Details route again, from the Details screen?
 
 ## Navigate to a route multiple times
+#TODO 
 
 ```js
 class DetailsScreen extends React.Component {

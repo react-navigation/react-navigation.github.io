@@ -14,6 +14,8 @@ Also known as navigation header, navigation bar, navbar, and probably many other
 
 A screen component is a component that we use in our route configuration.
 
+#TODO 
+
 ```js
 const AppNavigator = createStackNavigator(
   {
@@ -33,6 +35,8 @@ const AppNavigator = createStackNavigator(
 The suffix `Screen` in the component name is entirely optional, but a frequently used convention; we could call it `CasaPantalla` and this would work just the same. 
 
 We saw earlier that our screen components are provided with the `navigation` prop. It's important to note that *this only happens if the screen is rendered as a route by React Navigation* (for example, in response to `this.props.navigation.navigate`). For example, if we render `DetailsScreen` as a child of `HomeScreen`, then `DetailsScreen` won't be provided with the `navigation` prop, and when you press the "Go to Details... again" button on the Home screen, the app will throw one of the quintessential JavaScript exceptions "undefined is not an object".
+
+#TODO 
 
 ```js
 class HomeScreen extends React.Component {
@@ -59,6 +63,7 @@ The ["Navigation prop reference"](navigation-prop.html) section goes into more d
 This prop will be passed into all screens, and it can be used for the following:
 
 - `dispatch` will send an action up to the router
+#TODO 
 - `state` is the current route for the screen
 - `getParam` is a helper to access a param that may be on the route
 - `navigate`, `goBack`, etc are available to dispatch actions in a convenient way
@@ -70,7 +75,7 @@ For more details, see the ["Navigation prop document"](navigation-prop.html).
 ## Navigation State
 
 The state of a navigator generally looks something like this:
-
+#TODO 
 ```
 {
   key: 'StackRouterRoot',
@@ -88,7 +93,7 @@ For this navigation state, there are two routes (which may be tabs, or cards in 
 ## Route
 
 Each route is a piece of navigation state which contains a key to identify it, and a "routeName" to designate the type of route. It can also contain arbitrary params:
-
+#TODO 
 ```
 {
   key: 'B',
@@ -100,7 +105,7 @@ Each route is a piece of navigation state which contains a key to identify it, a
 ## Child Navigation State
 
 When composing navigators, it is possible for a route to be a navigation state. It would look like this:
-
+#TODO 
 ```
 {
   key: 'B',
