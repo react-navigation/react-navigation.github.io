@@ -22,11 +22,12 @@ The `reset` action wipes the whole navigation state and replaces it with the res
 * `key` - _string or null_ - optional - If set, the navigator with the given key will reset. If null, the root navigator will reset.
 
 ```js
-import { StackActions, NavigationActions } from '@react-navigation/routers';
+import { StackActions } from '@react-navigation/routers';
+import { CommonActions } from '@react-navigation/core';
 
-const resetAction = StackActions.reset({
+const resetAction = CommonActions.reset({
   index: 0,
-  actions: [NavigationActions.navigate({ routeName: 'Profile' })],
+  actions: [CommonActions.navigate({ routeName: 'Profile' })],
 });
 this.props.navigation.dispatch(resetAction);
 ```
@@ -39,13 +40,14 @@ eg: given a basic stack navigation with two routes `Profile` and `Settings`.
 To reset the state to a point where the active screen was `Settings` but have it stacked on top of a `Profile` screen, you would do the following:
 
 ```js
-import { StackActions, NavigationActions } from '@react-navigation/routers';
+import { StackActions } from '@react-navigation/routers';
+import { CommonActions } from '@react-navigation/core';
 
 const resetAction = StackActions.reset({
   index: 1,
   actions: [
-    NavigationActions.navigate({ routeName: 'Profile' }),
-    NavigationActions.navigate({ routeName: 'Settings' }),
+    CommonActions.navigate({ routeName: 'Profile' }),
+    CommonActions.navigate({ routeName: 'Settings' }),
   ],
 });
 this.props.navigation.dispatch(resetAction);
