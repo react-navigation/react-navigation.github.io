@@ -38,7 +38,7 @@ export default App;
 />
 ```
 
-### `onStateChange newState)`
+### `onStateChange(newState)`
 
 Function that gets called every time navigation state managed by the navigator changes. It receives the new state of the navigation.
 
