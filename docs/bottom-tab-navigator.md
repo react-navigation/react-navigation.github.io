@@ -64,7 +64,6 @@ The route configs object is a mapping from route name to a route config, which t
 Example:
 
 ```js
-```js
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
