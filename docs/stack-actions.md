@@ -3,7 +3,6 @@ id: stack-actions
 title: StackActions reference
 sidebar_label: StackActions
 ---
-#TODO
 
 `StackActions` is an object containing methods for generating actions specific to stack-based navigators. Its methods expand upon the actions available in [NavigationActions](navigation-actions.html).
 
@@ -23,7 +22,7 @@ The `reset` action wipes the whole navigation state and replaces it with the res
 * `key` - _string or null_ - optional - If set, the navigator with the given key will reset. If null, the root navigator will reset.
 
 ```js
-import { StackActions, NavigationActions } from 'react-navigation';
+import { StackActions, NavigationActions } from '@react-navigation/routers';
 
 const resetAction = StackActions.reset({
   index: 0,
@@ -40,7 +39,7 @@ eg: given a basic stack navigation with two routes `Profile` and `Settings`.
 To reset the state to a point where the active screen was `Settings` but have it stacked on top of a `Profile` screen, you would do the following:
 
 ```js
-import { StackActions, NavigationActions } from 'react-navigation';
+import { StackActions, NavigationActions } from '@react-navigation/routers';
 
 const resetAction = StackActions.reset({
   index: 1,
@@ -72,7 +71,7 @@ The `push` action adds a route on top of the stack and navigates forward to it. 
 * `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator.
 
 ```js
-import { StackActions } from 'react-navigation';
+import { StackActions } from '@react-navigation/routers';
 
 const pushAction = StackActions.push({
   routeName: 'Profile',
@@ -91,7 +90,7 @@ The `pop` action takes you back to a previous screen in the stack. The `n` param
 * `n` - _number_ - The number of screens to pop back by.
 
 ```js
-import { StackActions } from 'react-navigation';
+import { StackActions } from '@react-navigation/routers';
 
 const popAction = StackActions.pop({
   n: 1,
@@ -105,7 +104,7 @@ this.props.navigation.dispatch(popAction);
 The `popToTop` action takes you back to the first screen in the stack, dismissing all the others. It's functionally identical to `StackActions.pop({n: currentIndex})`.
 
 ```js
-import { StackActions } from 'react-navigation';
+import { StackActions } from '@react-navigation/routers';
 
 this.props.navigation.dispatch(StackActions.popToTop());
 ```
