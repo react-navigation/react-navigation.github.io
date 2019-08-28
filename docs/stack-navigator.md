@@ -69,7 +69,7 @@ String that can be used as a fallback for `headerTitle`. Additionally, will be u
 
 #### `header`
 
-React Element or a function that given `HeaderProps` returns a React Element, to display as a header. Setting to `null` hides header.
+Function that given `HeaderProps` returns a React Element, to display as a header. Setting to `null` hides header.
 
 #### `headerTitle`
 
