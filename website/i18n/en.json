@@ -301,577 +301,809 @@
         "title": "withNavigation",
         "sidebar_label": "withNavigation"
       },
-      "version-1.x-alternatives": {
+      "version-1.x/version-1.x-alternatives": {
         "title": "Alternative libraries",
         "sidebar_label": "Alternative libraries"
       },
-      "version-1.x-api-reference": {
+      "version-1.x/version-1.x-api-reference": {
         "title": "API Reference",
         "sidebar_label": "Overview"
       },
-      "version-1.x-auth-flow": {
+      "version-1.x/version-1.x-auth-flow": {
         "title": "Authentication flows",
         "sidebar_label": "Authentication flows"
       },
-      "version-1.x-connecting-navigation-prop": {
+      "version-1.x/version-1.x-connecting-navigation-prop": {
         "title": "Access the navigation prop from any component",
         "sidebar_label": "Access the navigation prop from any component"
       },
-      "version-1.x-contributing": {
+      "version-1.x/version-1.x-contributing": {
         "title": "React Navigation contributor guide",
         "sidebar_label": "Contributing"
       },
-      "version-1.x-custom-android-back-button-handling": {
+      "version-1.x/version-1.x-custom-android-back-button-handling": {
         "title": "Custom Android back button behavior",
         "sidebar_label": "Custom Android back button behavior"
       },
-      "version-1.x-custom-navigator-overview": {
+      "version-1.x/version-1.x-custom-navigator-overview": {
         "title": "Overview",
         "sidebar_label": "Overview"
       },
-      "version-1.x-custom-navigators": {
+      "version-1.x/version-1.x-custom-navigators": {
         "title": "Custom navigators",
         "sidebar_label": "Custom navigators"
       },
-      "version-1.x-custom-routers": {
+      "version-1.x/version-1.x-custom-routers": {
         "title": "Custom routers",
         "sidebar_label": "Custom routers"
       },
-      "version-1.x-customize-styles": {
+      "version-1.x/version-1.x-customize-styles": {
         "title": "Custom styles",
         "sidebar_label": "Custom styles"
       },
-      "version-1.x-deep-linking": {
+      "version-1.x/version-1.x-deep-linking": {
         "title": "Deep linking",
         "sidebar_label": "Deep linking"
       },
-      "version-1.x-drawer-based-navigation": {
+      "version-1.x/version-1.x-drawer-based-navigation": {
         "title": "Drawer navigation",
         "sidebar_label": "Drawer navigation"
       },
-      "version-1.x-drawer-navigator": {
+      "version-1.x/version-1.x-drawer-navigator": {
         "title": "DrawerNavigator reference",
         "sidebar_label": "DrawerNavigator"
       },
-      "version-1.x-getting-started": {
+      "version-1.x/version-1.x-getting-started": {
         "title": "Getting started",
         "sidebar_label": "Getting started"
       },
-      "version-1.x-glossary-of-terms": {
+      "version-1.x/version-1.x-glossary-of-terms": {
         "title": "Glossary of terms",
         "sidebar_label": "Glossary of terms"
       },
-      "version-1.x-handling-iphonex": {
+      "version-1.x/version-1.x-handling-iphonex": {
         "title": "iPhone X support",
         "sidebar_label": "iPhone X support"
       },
-      "version-1.x-header-buttons": {
+      "version-1.x/version-1.x-header-buttons": {
         "title": "Header buttons",
         "sidebar_label": "Header buttons"
       },
-      "version-1.x-headers": {
+      "version-1.x/version-1.x-headers": {
         "title": "Configuring the header bar",
         "sidebar_label": "Configuring the header bar"
       },
-      "version-1.x-hello-react-navigation": {
+      "version-1.x/version-1.x-hello-react-navigation": {
         "title": "Hello React Navigation",
         "sidebar_label": "Hello React Navigation"
       },
-      "version-1.x-listen-lifecycle-events": {
+      "version-1.x/version-1.x-listen-lifecycle-events": {
         "title": "Know when a screen is focused and blurred",
         "sidebar_label": "Know when a screen is focused and blurred"
       },
-      "version-1.x-modal": {
+      "version-1.x/version-1.x-modal": {
         "title": "Opening a full-screen modal",
         "sidebar_label": "Opening a full-screen modal"
       },
-      "version-1.x-navigating-without-navigation-prop": {
+      "version-1.x/version-1.x-navigating-without-navigation-prop": {
         "title": "Navigating without the navigation prop",
         "sidebar_label": "Navigating without the navigation prop"
       },
-      "version-1.x-navigating": {
+      "version-1.x/version-1.x-navigating": {
         "title": "Moving between screens",
         "sidebar_label": "Moving between screens"
       },
-      "version-1.x-navigation-actions": {
+      "version-1.x/version-1.x-navigation-actions": {
         "title": "NavigationActions reference",
         "sidebar_label": "NavigationActions"
       },
-      "version-1.x-navigation-options": {
+      "version-1.x/version-1.x-navigation-options": {
         "title": "navigation-options",
         "sidebar_label": "Configuring Navigation Options"
       },
-      "version-1.x-navigation-prop": {
+      "version-1.x/version-1.x-navigation-prop": {
         "title": "Navigation prop reference",
         "sidebar_label": "Navigation prop"
       },
-      "version-1.x-navigation-views": {
+      "version-1.x/version-1.x-navigation-views": {
         "title": "Navigation views",
         "sidebar_label": "Navigation views"
       },
-      "version-1.x-next-steps": {
+      "version-1.x/version-1.x-next-steps": {
         "title": "Next steps",
         "sidebar_label": "Next steps"
       },
-      "version-1.x-params": {
+      "version-1.x/version-1.x-params": {
         "title": "Passing parameters to routes",
         "sidebar_label": "Passing parameters to routes"
       },
-      "version-1.x-partial-overlay": {
+      "version-1.x/version-1.x-partial-overlay": {
         "title": "Partial overlays",
         "sidebar_label": "Partial overlays"
       },
-      "version-1.x-pitch": {
+      "version-1.x/version-1.x-pitch": {
         "title": "Pitch & anti-pitch",
         "sidebar_label": "Pitch & anti-pitch"
       },
-      "version-1.x-redux-integration": {
+      "version-1.x/version-1.x-redux-integration": {
         "title": "Redux integration",
         "sidebar_label": "Redux integration"
       },
-      "version-1.x-routers": {
+      "version-1.x/version-1.x-routers": {
         "title": "Routers",
         "sidebar_label": "Routers"
       },
-      "version-1.x-screen-tracking": {
+      "version-1.x/version-1.x-screen-tracking": {
         "title": "Screen tracking",
         "sidebar_label": "Screen tracking"
       },
-      "version-1.x-set-params-on-back": {
+      "version-1.x/version-1.x-set-params-on-back": {
         "title": "Update params when navigating back",
         "sidebar_label": "Update params when navigating back"
       },
-      "version-1.x-stack-navigator": {
+      "version-1.x/version-1.x-stack-navigator": {
         "title": "StackNavigator reference",
         "sidebar_label": "StackNavigator"
       },
-      "version-1.x-status-bar": {
+      "version-1.x/version-1.x-status-bar": {
         "title": "Different status bar configuration based on route",
         "sidebar_label": "Different status bar configuration based on route"
       },
-      "version-1.x-supported-react-native-versions": {
+      "version-1.x/version-1.x-supported-react-native-versions": {
         "title": "Supported React Native versions",
         "sidebar_label": "Supported React Native versions"
       },
-      "version-1.x-switch-navigator": {
+      "version-1.x/version-1.x-switch-navigator": {
         "title": "SwitchNavigator reference",
         "sidebar_label": "SwitchNavigator"
       },
-      "version-1.x-tab-based-navigation": {
+      "version-1.x/version-1.x-tab-based-navigation": {
         "title": "Tab navigation",
         "sidebar_label": "Tab navigation"
       },
-      "version-1.x-tab-navigator": {
+      "version-1.x/version-1.x-tab-navigator": {
         "title": "TabNavigator reference",
         "sidebar_label": "TabNavigator"
       },
-      "version-1.x-transitioner": {
+      "version-1.x/version-1.x-transitioner": {
         "title": "Transitioner",
         "sidebar_label": "Transitioner"
       },
-      "version-1.x-with-navigation-focus": {
+      "version-1.x/version-1.x-with-navigation-focus": {
         "title": "withNavigationFocus",
         "sidebar_label": "withNavigationFocus"
       },
-      "version-1.x-with-navigation": {
+      "version-1.x/version-1.x-with-navigation": {
         "title": "withNavigation",
         "sidebar_label": "withNavigation"
       },
-      "version-2.x-app-containers": {
+      "version-2.x/version-2.x-app-containers": {
         "title": "App containers",
         "sidebar_label": "App containers"
       },
-      "version-2.x-auth-flow": {
+      "version-2.x/version-2.x-auth-flow": {
         "title": "Authentication flows",
         "sidebar_label": "Authentication flows"
       },
-      "version-2.x-bottom-tab-navigator": {
+      "version-2.x/version-2.x-bottom-tab-navigator": {
         "title": "createBottomTabNavigator",
         "sidebar_label": "createBottomTabNavigator"
       },
-      "version-2.x-common-mistakes": {
+      "version-2.x/version-2.x-common-mistakes": {
         "title": "Common mistakes",
         "sidebar_label": "Common mistakes"
       },
-      "version-2.x-community-libraries-and-navigators": {
+      "version-2.x/version-2.x-community-libraries-and-navigators": {
         "title": "Community-developed Navigators and Libraries",
         "sidebar_label": "Community Navigators and Libraries"
       },
-      "version-2.x-connecting-navigation-prop": {
+      "version-2.x/version-2.x-connecting-navigation-prop": {
         "title": "Access the navigation prop from any component",
         "sidebar_label": "Access the navigation prop from any component"
       },
-      "version-2.x-contributing": {
+      "version-2.x/version-2.x-contributing": {
         "title": "React Navigation contributor guide",
         "sidebar_label": "Contributing"
       },
-      "version-2.x-custom-android-back-button-handling": {
+      "version-2.x/version-2.x-custom-android-back-button-handling": {
         "title": "Custom Android back button behavior",
         "sidebar_label": "Custom Android back button behavior"
       },
-      "version-2.x-custom-navigator-overview": {
+      "version-2.x/version-2.x-custom-navigator-overview": {
         "title": "Overview",
         "sidebar_label": "Overview"
       },
-      "version-2.x-custom-navigators": {
+      "version-2.x/version-2.x-custom-navigators": {
         "title": "Custom navigators",
         "sidebar_label": "Custom navigators"
       },
-      "version-2.x-custom-routers": {
+      "version-2.x/version-2.x-custom-routers": {
         "title": "Custom routers",
         "sidebar_label": "Custom routers"
       },
-      "version-2.x-deep-linking": {
+      "version-2.x/version-2.x-deep-linking": {
         "title": "Deep linking",
         "sidebar_label": "Deep linking"
       },
-      "version-2.x-drawer-actions": {
+      "version-2.x/version-2.x-drawer-actions": {
         "title": "DrawerActions reference",
         "sidebar_label": "DrawerActions"
       },
-      "version-2.x-drawer-based-navigation": {
+      "version-2.x/version-2.x-drawer-based-navigation": {
         "title": "Drawer navigation",
         "sidebar_label": "Drawer navigation"
       },
-      "version-2.x-drawer-navigator": {
+      "version-2.x/version-2.x-drawer-navigator": {
         "title": "createDrawerNavigator",
         "sidebar_label": "createDrawerNavigator"
       },
-      "version-2.x-getting-started": {
+      "version-2.x/version-2.x-getting-started": {
         "title": "Getting started",
         "sidebar_label": "Getting started"
       },
-      "version-2.x-glossary-of-terms": {
+      "version-2.x/version-2.x-glossary-of-terms": {
         "title": "Glossary of terms",
         "sidebar_label": "Glossary of terms"
       },
-      "version-2.x-handling-iphonex": {
+      "version-2.x/version-2.x-handling-iphonex": {
         "title": "iPhone X support",
         "sidebar_label": "iPhone X support"
       },
-      "version-2.x-header-buttons": {
+      "version-2.x/version-2.x-header-buttons": {
         "title": "Header buttons",
         "sidebar_label": "Header buttons"
       },
-      "version-2.x-headers": {
+      "version-2.x/version-2.x-headers": {
         "title": "Configuring the header bar",
         "sidebar_label": "Configuring the header bar"
       },
-      "version-2.x-hello-react-navigation": {
+      "version-2.x/version-2.x-hello-react-navigation": {
         "title": "Hello React Navigation",
         "sidebar_label": "Hello React Navigation"
       },
-      "version-2.x-limitations": {
+      "version-2.x/version-2.x-limitations": {
         "title": "Limitations",
         "sidebar_label": "Limitations"
       },
-      "version-2.x-material-bottom-tab-navigator": {
+      "version-2.x/version-2.x-material-bottom-tab-navigator": {
         "title": "createMaterialBottomTabNavigator",
         "sidebar_label": "createMaterialBottomTabNavigator"
       },
-      "version-2.x-material-top-tab-navigator": {
+      "version-2.x/version-2.x-material-top-tab-navigator": {
         "title": "createMaterialTopTabNavigator",
         "sidebar_label": "createMaterialTopTabNavigator"
       },
-      "version-2.x-modal": {
+      "version-2.x/version-2.x-modal": {
         "title": "Opening a full-screen modal",
         "sidebar_label": "Opening a full-screen modal"
       },
-      "version-2.x-more-resources": {
+      "version-2.x/version-2.x-more-resources": {
         "title": "More Resources",
         "sidebar_label": "More Resources"
       },
-      "version-2.x-navigating-without-navigation-prop": {
+      "version-2.x/version-2.x-navigating-without-navigation-prop": {
         "title": "Navigating without the navigation prop",
         "sidebar_label": "Navigating without the navigation prop"
       },
-      "version-2.x-navigating": {
+      "version-2.x/version-2.x-navigating": {
         "title": "Moving between screens",
         "sidebar_label": "Moving between screens"
       },
-      "version-2.x-navigation-actions": {
+      "version-2.x/version-2.x-navigation-actions": {
         "title": "NavigationActions reference",
         "sidebar_label": "NavigationActions"
       },
-      "version-2.x-navigation-context": {
+      "version-2.x/version-2.x-navigation-context": {
         "title": "NavigationContext",
         "sidebar_label": "NavigationContext"
       },
-      "version-2.x-navigation-events": {
+      "version-2.x/version-2.x-navigation-events": {
         "title": "NavigationEvents reference",
         "sidebar_label": "NavigationEvents"
       },
-      "version-2.x-navigation-key": {
+      "version-2.x/version-2.x-navigation-key": {
         "title": "Using the navigation key",
         "sidebar_label": "Using the navigation key"
       },
-      "version-2.x-navigation-lifecycle": {
+      "version-2.x/version-2.x-navigation-lifecycle": {
         "title": "Navigation lifecycle",
         "sidebar_label": "Navigation lifecycle"
       },
-      "version-2.x-navigation-options-resolution": {
+      "version-2.x/version-2.x-navigation-options-resolution": {
         "title": "Navigation options resolution",
         "sidebar_label": "Navigation options resolution"
       },
-      "version-2.x-navigation-prop": {
+      "version-2.x/version-2.x-navigation-prop": {
         "title": "Navigation prop reference",
         "sidebar_label": "Navigation prop"
       },
-      "version-2.x-navigation-views": {
+      "version-2.x/version-2.x-navigation-views": {
         "title": "Navigation views",
         "sidebar_label": "Navigation views"
       },
-      "version-2.x-next-steps": {
+      "version-2.x/version-2.x-next-steps": {
         "title": "Next steps",
         "sidebar_label": "Next steps"
       },
-      "version-2.x-params": {
+      "version-2.x/version-2.x-params": {
         "title": "Passing parameters to routes",
         "sidebar_label": "Passing parameters to routes"
       },
-      "version-2.x-react-native-screens": {
+      "version-2.x/version-2.x-react-native-screens": {
         "title": "Optimize memory usage and performance",
         "sidebar_label": "Optimize memory usage and performance"
       },
-      "version-2.x-redux-integration": {
+      "version-2.x/version-2.x-redux-integration": {
         "title": "Redux integration",
         "sidebar_label": "Redux integration"
       },
-      "version-2.x-routers": {
+      "version-2.x/version-2.x-routers": {
         "title": "Routers",
         "sidebar_label": "Routers"
       },
-      "version-2.x-screen-tracking": {
+      "version-2.x/version-2.x-screen-tracking": {
         "title": "Screen tracking",
         "sidebar_label": "Screen tracking"
       },
-      "version-2.x-stack-actions": {
+      "version-2.x/version-2.x-stack-actions": {
         "title": "StackActions reference",
         "sidebar_label": "StackActions"
       },
-      "version-2.x-stack-navigator": {
+      "version-2.x/version-2.x-stack-navigator": {
         "title": "createStackNavigator",
         "sidebar_label": "createStackNavigator"
       },
-      "version-2.x-state-persistence": {
+      "version-2.x/version-2.x-state-persistence": {
         "title": "State persistence",
         "sidebar_label": "State persistence"
       },
-      "version-2.x-status-bar": {
+      "version-2.x/version-2.x-status-bar": {
         "title": "Different status bar configuration based on route",
         "sidebar_label": "Different status bar configuration based on route"
       },
-      "version-2.x-supported-react-native-versions": {
+      "version-2.x/version-2.x-supported-react-native-versions": {
         "title": "Supported React Native versions",
         "sidebar_label": "Supported React Native versions"
       },
-      "version-2.x-switch-navigator": {
+      "version-2.x/version-2.x-switch-navigator": {
         "title": "createSwitchNavigator",
         "sidebar_label": "createSwitchNavigator"
       },
-      "version-2.x-tab-based-navigation": {
+      "version-2.x/version-2.x-tab-based-navigation": {
         "title": "Tab navigation",
         "sidebar_label": "Tab navigation"
       },
-      "version-2.x-tab-navigator": {
+      "version-2.x/version-2.x-tab-navigator": {
         "title": "createTabNavigator",
         "sidebar_label": "createTabNavigator"
       },
-      "version-2.x-transitioner": {
+      "version-2.x/version-2.x-transitioner": {
         "title": "Transitioner",
         "sidebar_label": "Transitioner"
       },
-      "version-2.x-with-navigation-focus": {
+      "version-2.x/version-2.x-with-navigation-focus": {
         "title": "withNavigationFocus",
         "sidebar_label": "withNavigationFocus"
       },
-      "version-2.x-with-navigation": {
+      "version-2.x/version-2.x-with-navigation": {
         "title": "withNavigation",
         "sidebar_label": "withNavigation"
       },
-      "version-3.x-animated-switch-navigator": {
+      "version-3.x/version-3.x-animated-switch-navigator": {
         "title": "createAnimatedSwitchNavigator",
         "sidebar_label": "createAnimatedSwitchNavigator"
       },
-      "version-3.x-auth-flow": {
+      "version-3.x/version-3.x-auth-flow": {
         "title": "Authentication flows",
         "sidebar_label": "Authentication flows"
       },
-      "version-3.x-bottom-tab-navigator": {
+      "version-3.x/version-3.x-bottom-tab-navigator": {
         "title": "createBottomTabNavigator",
         "sidebar_label": "createBottomTabNavigator"
       },
-      "version-3.x-common-mistakes": {
+      "version-3.x/version-3.x-common-mistakes": {
         "title": "Common mistakes",
         "sidebar_label": "Common mistakes"
       },
-      "version-3.x-contributing": {
+      "version-3.x/version-3.x-contributing": {
         "title": "React Navigation contributor guide",
         "sidebar_label": "Contributing"
       },
-      "version-3.x-custom-navigator-overview": {
+      "version-3.x/version-3.x-custom-navigator-overview": {
         "title": "Overview",
         "sidebar_label": "Overview"
       },
-      "version-3.x-custom-navigators": {
+      "version-3.x/version-3.x-custom-navigators": {
         "title": "Custom navigators",
         "sidebar_label": "Custom navigators"
       },
-      "version-3.x-deep-linking": {
+      "version-3.x/version-3.x-deep-linking": {
         "title": "Deep linking",
         "sidebar_label": "Deep linking"
       },
-      "version-3.x-drawer-based-navigation": {
+      "version-3.x/version-3.x-drawer-based-navigation": {
         "title": "Drawer navigation",
         "sidebar_label": "Drawer navigation"
       },
-      "version-3.x-drawer-navigator": {
+      "version-3.x/version-3.x-drawer-navigator": {
         "title": "createDrawerNavigator",
         "sidebar_label": "createDrawerNavigator"
       },
-      "version-3.x-function-after-focusing-screen": {
+      "version-3.x/version-3.x-function-after-focusing-screen": {
         "title": "Call a function when focused screen changes",
         "sidebar_label": "Call a function when focused screen changes"
       },
-      "version-3.x-getting-started": {
+      "version-3.x/version-3.x-getting-started": {
         "title": "Getting started",
         "sidebar_label": "Getting started"
       },
-      "version-3.x-glossary-of-terms": {
+      "version-3.x/version-3.x-glossary-of-terms": {
         "title": "Glossary of terms",
         "sidebar_label": "Glossary of terms"
       },
-      "version-3.x-handling-iphonex": {
+      "version-3.x/version-3.x-handling-iphonex": {
         "title": "Supporting safe areas",
         "sidebar_label": "Supporting safe areas"
       },
-      "version-3.x-header-buttons": {
+      "version-3.x/version-3.x-header-buttons": {
         "title": "Header buttons",
         "sidebar_label": "Header buttons"
       },
-      "version-3.x-headers": {
+      "version-3.x/version-3.x-headers": {
         "title": "Configuring the header bar",
         "sidebar_label": "Configuring the header bar"
       },
-      "version-3.x-hello-react-navigation": {
+      "version-3.x/version-3.x-hello-react-navigation": {
         "title": "Hello React Navigation",
         "sidebar_label": "Hello React Navigation"
       },
-      "version-3.x-limitations": {
+      "version-3.x/version-3.x-limitations": {
         "title": "Limitations",
         "sidebar_label": "Limitations"
       },
-      "version-3.x-localization": {
+      "version-3.x/version-3.x-localization": {
         "title": "Localization",
         "sidebar_label": "Localization"
       },
-      "version-3.x-material-bottom-tab-navigator": {
+      "version-3.x/version-3.x-material-bottom-tab-navigator": {
         "title": "createMaterialBottomTabNavigator",
         "sidebar_label": "createMaterialBottomTabNavigator"
       },
-      "version-3.x-material-top-tab-navigator": {
+      "version-3.x/version-3.x-material-top-tab-navigator": {
         "title": "createMaterialTopTabNavigator",
         "sidebar_label": "createMaterialTopTabNavigator"
       },
-      "version-3.x-modal": {
+      "version-3.x/version-3.x-modal": {
         "title": "Opening a full-screen modal",
         "sidebar_label": "Opening a full-screen modal"
       },
-      "version-3.x-more-resources": {
+      "version-3.x/version-3.x-more-resources": {
         "title": "More Resources",
         "sidebar_label": "More Resources"
       },
-      "version-3.x-MST-integration": {
+      "version-3.x/version-3.x-MST-integration": {
         "title": "Integrating with MobX State Tree",
         "sidebar_label": "MobX State Tree integration"
       },
-      "version-3.x-navigating-without-navigation-prop": {
+      "version-3.x/version-3.x-navigating-without-navigation-prop": {
         "title": "Navigating without the navigation prop",
         "sidebar_label": "Navigating without the navigation prop"
       },
-      "version-3.x-navigating": {
+      "version-3.x/version-3.x-navigating": {
         "title": "Moving between screens",
         "sidebar_label": "Moving between screens"
       },
-      "version-3.x-navigation-context": {
+      "version-3.x/version-3.x-navigation-context": {
         "title": "NavigationContext",
         "sidebar_label": "NavigationContext"
       },
-      "version-3.x-navigation-options-resolution": {
+      "version-3.x/version-3.x-navigation-options-resolution": {
         "title": "Navigation options resolution",
         "sidebar_label": "Navigation options resolution"
       },
-      "version-3.x-navigation-views": {
+      "version-3.x/version-3.x-navigation-views": {
         "title": "Navigation views",
         "sidebar_label": "Navigation views"
       },
-      "version-3.x-params": {
+      "version-3.x/version-3.x-params": {
         "title": "Passing parameters to routes",
         "sidebar_label": "Passing parameters to routes"
       },
-      "version-3.x-react-native-screens": {
+      "version-3.x/version-3.x-react-native-screens": {
         "title": "Optimize memory usage and performance",
         "sidebar_label": "Optimize memory usage and performance"
       },
-      "version-3.x-redux-integration": {
+      "version-3.x/version-3.x-redux-integration": {
         "title": "Redux integration",
         "sidebar_label": "Redux integration"
       },
-      "version-3.x-routers": {
+      "version-3.x/version-3.x-routers": {
         "title": "Routers",
         "sidebar_label": "Routers"
       },
-      "version-3.x-screen-tracking": {
+      "version-3.x/version-3.x-screen-tracking": {
         "title": "Screen tracking for analytics",
         "sidebar_label": "Screen tracking for analytics"
       },
-      "version-3.x-scrollables": {
+      "version-3.x/version-3.x-scrollables": {
         "title": "Scrollables",
         "sidebar_label": "Scrollables"
       },
-      "version-3.x-stack-navigator": {
+      "version-3.x/version-3.x-stack-navigator": {
         "title": "createStackNavigator",
         "sidebar_label": "createStackNavigator"
       },
-      "version-3.x-state-persistence": {
+      "version-3.x/version-3.x-state-persistence": {
         "title": "State persistence",
         "sidebar_label": "State persistence"
       },
-      "version-3.x-status-bar": {
+      "version-3.x/version-3.x-status-bar": {
         "title": "Different status bar configuration based on route",
         "sidebar_label": "Different status bar configuration based on route"
       },
-      "version-3.x-supported-react-native-versions": {
+      "version-3.x/version-3.x-supported-react-native-versions": {
         "title": "Supported React Native versions",
         "sidebar_label": "Supported React Native versions"
       },
-      "version-3.x-switch-actions": {
+      "version-3.x/version-3.x-switch-actions": {
         "title": "SwitchActions reference",
         "sidebar_label": "SwitchActions"
       },
-      "version-3.x-switch-navigator": {
+      "version-3.x/version-3.x-switch-navigator": {
         "title": "createSwitchNavigator",
         "sidebar_label": "createSwitchNavigator"
       },
-      "version-3.x-tab-based-navigation": {
+      "version-3.x/version-3.x-tab-based-navigation": {
         "title": "Tab navigation",
         "sidebar_label": "Tab navigation"
       },
-      "version-3.x-tab-navigator": {
+      "version-3.x/version-3.x-tab-navigator": {
         "title": "createTabNavigator",
         "sidebar_label": "createTabNavigator"
       },
-      "version-3.x-themes": {
+      "version-3.x/version-3.x-themes": {
         "title": "Themes",
         "sidebar_label": "Themes"
       },
-      "version-3.x-transitioner": {
+      "version-3.x/version-3.x-transitioner": {
         "title": "Transitioner",
         "sidebar_label": "Transitioner"
       },
-      "version-3.x-web-support": {
+      "version-3.x/version-3.x-web-support": {
         "title": "React Navigation on the Web",
         "sidebar_label": "Web support"
+      },
+      "version-4.x/version-4.x-animated-switch-navigator": {
+        "title": "createAnimatedSwitchNavigator",
+        "sidebar_label": "createAnimatedSwitchNavigator"
+      },
+      "version-4.x/version-4.x-api-reference": {
+        "title": "API Reference",
+        "sidebar_label": "Overview"
+      },
+      "version-4.x/version-4.x-app-containers": {
+        "title": "App Containers",
+        "sidebar_label": "App Containers"
+      },
+      "version-4.x/version-4.x-auth-flow": {
+        "title": "Authentication flows",
+        "sidebar_label": "Authentication flows"
+      },
+      "version-4.x/version-4.x-bottom-tab-navigator": {
+        "title": "createBottomTabNavigator",
+        "sidebar_label": "createBottomTabNavigator"
+      },
+      "version-4.x/version-4.x-common-mistakes": {
+        "title": "Common mistakes",
+        "sidebar_label": "Common mistakes"
+      },
+      "version-4.x/version-4.x-connecting-navigation-prop": {
+        "title": "Access the navigation prop from any component",
+        "sidebar_label": "Access the navigation prop from any component"
+      },
+      "version-4.x/version-4.x-contributing": {
+        "title": "React Navigation contributor guide",
+        "sidebar_label": "Contributing"
+      },
+      "version-4.x/version-4.x-custom-android-back-button-handling": {
+        "title": "Custom Android back button behavior",
+        "sidebar_label": "Custom Android back button behavior"
+      },
+      "version-4.x/version-4.x-custom-navigator-overview": {
+        "title": "Overview",
+        "sidebar_label": "Overview"
+      },
+      "version-4.x/version-4.x-custom-navigators": {
+        "title": "Custom navigators",
+        "sidebar_label": "Custom navigators"
+      },
+      "version-4.x/version-4.x-custom-routers": {
+        "title": "Custom routers",
+        "sidebar_label": "Custom routers"
+      },
+      "version-4.x/version-4.x-deep-linking": {
+        "title": "Deep linking",
+        "sidebar_label": "Deep linking"
+      },
+      "version-4.x/version-4.x-drawer-actions": {
+        "title": "DrawerActions reference",
+        "sidebar_label": "DrawerActions"
+      },
+      "version-4.x/version-4.x-drawer-based-navigation": {
+        "title": "Drawer navigation",
+        "sidebar_label": "Drawer navigation"
+      },
+      "version-4.x/version-4.x-drawer-navigator": {
+        "title": "createDrawerNavigator",
+        "sidebar_label": "createDrawerNavigator"
+      },
+      "version-4.x/version-4.x-function-after-focusing-screen": {
+        "title": "Call a function when focused screen changes",
+        "sidebar_label": "Call a function when focused screen changes"
+      },
+      "version-4.x/version-4.x-getting-started": {
+        "title": "Getting started",
+        "sidebar_label": "Getting started"
+      },
+      "version-4.x/version-4.x-glossary-of-terms": {
+        "title": "Glossary of terms",
+        "sidebar_label": "Glossary of terms"
+      },
+      "version-4.x/version-4.x-handling-iphonex": {
+        "title": "Supporting safe areas",
+        "sidebar_label": "Supporting safe areas"
+      },
+      "version-4.x/version-4.x-header-buttons": {
+        "title": "Header buttons",
+        "sidebar_label": "Header buttons"
+      },
+      "version-4.x/version-4.x-headers": {
+        "title": "Configuring the header bar",
+        "sidebar_label": "Configuring the header bar"
+      },
+      "version-4.x/version-4.x-hello-react-navigation": {
+        "title": "Hello React Navigation",
+        "sidebar_label": "Hello React Navigation"
+      },
+      "version-4.x/version-4.x-limitations": {
+        "title": "Limitations",
+        "sidebar_label": "Limitations"
+      },
+      "version-4.x/version-4.x-localization": {
+        "title": "Localization",
+        "sidebar_label": "Localization"
+      },
+      "version-4.x/version-4.x-material-bottom-tab-navigator": {
+        "title": "createMaterialBottomTabNavigator",
+        "sidebar_label": "createMaterialBottomTabNavigator"
+      },
+      "version-4.x/version-4.x-material-top-tab-navigator": {
+        "title": "createMaterialTopTabNavigator",
+        "sidebar_label": "createMaterialTopTabNavigator"
+      },
+      "version-4.x/version-4.x-modal": {
+        "title": "Opening a full-screen modal",
+        "sidebar_label": "Opening a full-screen modal"
+      },
+      "version-4.x/version-4.x-MST-integration": {
+        "title": "Integrating with MobX State Tree",
+        "sidebar_label": "MobX State Tree integration"
+      },
+      "version-4.x/version-4.x-navigating-without-navigation-prop": {
+        "title": "Navigating without the navigation prop",
+        "sidebar_label": "Navigating without the navigation prop"
+      },
+      "version-4.x/version-4.x-navigating": {
+        "title": "Moving between screens",
+        "sidebar_label": "Moving between screens"
+      },
+      "version-4.x/version-4.x-navigation-actions": {
+        "title": "NavigationActions reference",
+        "sidebar_label": "NavigationActions"
+      },
+      "version-4.x/version-4.x-navigation-context": {
+        "title": "NavigationContext",
+        "sidebar_label": "NavigationContext"
+      },
+      "version-4.x/version-4.x-navigation-events": {
+        "title": "NavigationEvents reference",
+        "sidebar_label": "NavigationEvents"
+      },
+      "version-4.x/version-4.x-navigation-key": {
+        "title": "Using the navigation key",
+        "sidebar_label": "Using the navigation key"
+      },
+      "version-4.x/version-4.x-navigation-lifecycle": {
+        "title": "Navigation lifecycle",
+        "sidebar_label": "Navigation lifecycle"
+      },
+      "version-4.x/version-4.x-navigation-options-resolution": {
+        "title": "Navigation options resolution",
+        "sidebar_label": "Navigation options resolution"
+      },
+      "version-4.x/version-4.x-navigation-prop": {
+        "title": "Navigation prop reference",
+        "sidebar_label": "Navigation prop"
+      },
+      "version-4.x/version-4.x-next-steps": {
+        "title": "Next steps",
+        "sidebar_label": "Next steps"
+      },
+      "version-4.x/version-4.x-params": {
+        "title": "Passing parameters to routes",
+        "sidebar_label": "Passing parameters to routes"
+      },
+      "version-4.x/version-4.x-pitch": {
+        "title": "Pitch & anti-pitch",
+        "sidebar_label": "Pitch & anti-pitch"
+      },
+      "version-4.x/version-4.x-react-native-screens": {
+        "title": "Optimize memory usage and performance",
+        "sidebar_label": "Optimize memory usage and performance"
+      },
+      "version-4.x/version-4.x-redux-integration": {
+        "title": "Redux integration",
+        "sidebar_label": "Redux integration"
+      },
+      "version-4.x/version-4.x-routers": {
+        "title": "Routers",
+        "sidebar_label": "Routers"
+      },
+      "version-4.x/version-4.x-screen-tracking": {
+        "title": "Screen tracking for analytics",
+        "sidebar_label": "Screen tracking for analytics"
+      },
+      "version-4.x/version-4.x-scrollables": {
+        "title": "Scrollables",
+        "sidebar_label": "Scrollables"
+      },
+      "version-4.x/version-4.x-stack-actions": {
+        "title": "StackActions reference",
+        "sidebar_label": "StackActions"
+      },
+      "version-4.x/version-4.x-stack-navigator-2.0": {
+        "title": "createStackNavigator (2.0 alpha)",
+        "sidebar_label": "createStackNavigator (2.0 alpha)"
+      },
+      "version-4.x/version-4.x-stack-navigator": {
+        "title": "createStackNavigator",
+        "sidebar_label": "createStackNavigator"
+      },
+      "version-4.x/version-4.x-state-persistence": {
+        "title": "State persistence",
+        "sidebar_label": "State persistence"
+      },
+      "version-4.x/version-4.x-status-bar": {
+        "title": "Different status bar configuration based on route",
+        "sidebar_label": "Different status bar configuration based on route"
+      },
+      "version-4.x/version-4.x-supported-react-native-versions": {
+        "title": "Supported React Native versions",
+        "sidebar_label": "Supported React Native versions"
+      },
+      "version-4.x/version-4.x-switch-actions": {
+        "title": "SwitchActions reference",
+        "sidebar_label": "SwitchActions"
+      },
+      "version-4.x/version-4.x-switch-navigator": {
+        "title": "createSwitchNavigator",
+        "sidebar_label": "createSwitchNavigator"
+      },
+      "version-4.x/version-4.x-tab-based-navigation": {
+        "title": "Tab navigation",
+        "sidebar_label": "Tab navigation"
+      },
+      "version-4.x/version-4.x-themes": {
+        "title": "Themes",
+        "sidebar_label": "Themes"
+      },
+      "version-4.x/version-4.x-with-navigation-focus": {
+        "title": "withNavigationFocus",
+        "sidebar_label": "withNavigationFocus"
+      },
+      "version-4.x/version-4.x-with-navigation": {
+        "title": "withNavigation",
+        "sidebar_label": "withNavigation"
       }
     },
     "links": {
