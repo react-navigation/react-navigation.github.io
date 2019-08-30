@@ -4,16 +4,19 @@ title: Custom routers
 sidebar_label: Custom routers
 ---
 
+The router object provides various helper methods to deal with the state and actions, a reducer to update the state as well as some action creators.
+
+The router is responsible for handling actions dispatched by calling methods on the navigation object. If the router cannot handle an action, it can return null, which would propagate the action to other routers until it's handled.
+
 You can make your own router by building an object with the following functions:
-#TODO
 
 ```js
 const MyRouter = {
-  getStateForAction: (action, state) => ({}),
-  getActionForPathAndParams: (path, params) => null,
-  getPathAndParamsForState: (state) => null,
-  getComponentForState: (state) => MyScreen,
-  getComponentForRouteName: (routeName) => MyScreen,
+  getInitialState: ({ routeNames, routeParamList }) => ({}),
+  getRehydratedState: (partialState, { routeNames, routeParamList }) => ({}),
+  getStateForRouteNamesChange: (state, { routeNames }) => ({}),
+  getStateForRouteFocus: (state, key) => ({}),
+  shouldActionChangeFocus: () => true,
 };
 
 // Now, you can make a navigator by putting the router on it:
