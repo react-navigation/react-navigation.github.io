@@ -5,68 +5,54 @@ sidebar_label: Drawer navigation
 ---
 
 This guide covers [createDrawerNavigator](drawer-navigator.html).
-#TODO
+
+To use this navigator, you need to install `@react-navigation/drawer` and its peer dependencies:
+
+```sh
+npm install react-navigation-tabs react-native-reanimated
+```	```
+
+
+ To use this tab navigator, import it from `@react-navigation/bottom-tabs`:
+
+
 
 ```js
-class MyHomeScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: "Home",
-    drawerIcon: ({ tintColor }) => (
-      <Image
-        source={require("./chats-icon.png")}
-        style={[styles.icon, { tintColor: tintColor }]}
-      />
-    )
-  };
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/core";
 
-  render() {
-    return (
-      <Button
-        onPress={() => this.props.navigation.navigate("Notifications")}
-        title="Go to notifications"
-      />
-    );
-  }
+const Drawer = createBottomTabNavigator();
+
+
+function MyHomeScreen() {
+  return (
+    <Button
+      onPress={() => this.props.navigation.navigate("Notifications")}
+      title="Go to notifications"
+    />
+  );
 }
 
-class MyNotificationsScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: "Notifications",
-    drawerIcon: ({ tintColor }) => (
-      <Image
-        source={require("./notif-icon.png")}
-        style={[styles.icon, { tintColor: tintColor }]}
-      />
-    )
-  };
-
-  render() {
-    return (
-      <Button
-        onPress={() => this.props.navigation.goBack()}
-        title="Go back home"
-      />
-    );
-  }
+function MyNotificationsScreen() {
+  return (
+    <Button
+      onPress={() => this.props.navigation.goBack()}
+      title="Go back home"
+    />
+  );
 }
 
-const styles = StyleSheet.create({
-  icon: {
-    width: 24,
-    height: 24
-  }
-});
+exprt default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator initialRouteName="feed">
+        <Tab.Screen name="Home" component={MyHomeScreen} />
+        <Tab.Screen name="Notifications" component={MyNotificationsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  )
+}
 
-const MyDrawerNavigator = createDrawerNavigator({
-  Home: {
-    screen: MyHomeScreen
-  },
-  Notifications: {
-    screen: MyNotificationsScreen
-  }
-});
-
-const MyApp = createAppContainer(MyDrawerNavigator);
 ```
 
 To open and close drawer, use the following helpers to open and close the drawer:
@@ -94,5 +80,5 @@ If you would like to determine if drawer is open or closed, you can do the follo
 
 ```js
 const parent = this.props.navigation.dangerouslyGetParent();
-const isDrawerOpen = parent && parent.state && parent.state.isDrawerOpen;
+const isDrawerOpen = parent && parent.dangerouslyGetState() && parent.dangerouslyGetState().isDrawerOpen;
 ```
