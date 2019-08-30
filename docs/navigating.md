@@ -22,35 +22,29 @@ We'll do something similar to the latter, but rather than using a `document` glo
 
 ## Navigating to a new screen
 
-#TODO
-
 ```js
 import React from "react";
 import { Button, View, Text } from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
-class HomeScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to Details"
-          onPress={() => this.props.navigation.navigate("Details")}
-        />
-      </View>
-    );
-  }
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate("Details")}
+      />
+    </View>
+  );
 }
 
 // ... other code from the previous section
 ```
 
-<a href="https://snack.expo.io/@react-navigation/our-first-navigate-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
-
 Let's break this down:
 
-- `this.props.navigation`: the `navigation` prop is passed in to every **screen component** ([definition](glossary-of-terms.html#screen-component)) in stack navigator (more about this later in ["The navigation prop in depth"](navigation-prop.html)).
+- `navigation`: the `navigation` prop is passed in to every **screen component** ([definition](glossary-of-terms.html#screen-component)) in stack navigator (more about this later in ["The navigation prop in depth"](navigation-prop.html)).
 - `navigate('Details')`: we call the `navigate` function (on the `navigation` prop &mdash; naming is hard!) with the name of the route that we'd like to move the user to.
 
 > If we call `this.props.navigation.navigate` with a route name that we haven't defined on a stack navigator, nothing will happen. Said another way, we can only navigate to routes that have been defined on our stack navigator &mdash; we cannot navigate to an arbitrary component.
@@ -59,21 +53,18 @@ So we now have a stack with two routes: 1) the Home route 2) the Details route. 
 
 ## Navigate to a route multiple times
 
-#TODO
 
 ```js
-class DetailsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Details Screen</Text>
-        <Button
-          title="Go to Details... again"
-          onPress={() => this.props.navigation.navigate("Details")}
-        />
-      </View>
-    );
-  }
+function DetailsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Details Screen</Text>
+      <Button
+        title="Go to Details... again"
+        onPress={() => navigation.navigate("Details")}
+      />
+    </View>
+  );
 }
 ```
 
@@ -86,7 +77,7 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 ```js
 <Button
   title="Go to Details... again"
-  onPress={() => this.props.navigation.push("Details")}
+  onPress={() => navigation.push("Details")}
 />
 ```
 
@@ -101,30 +92,27 @@ The header provided by stack navigator will automatically include a back button 
 Sometimes you'll want to be able to programmatically trigger this behavior, and for that you can use `this.props.navigation.goBack();`.
 
 ```js
-class DetailsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Details Screen</Text>
-        <Button
-          title="Go to Details... again"
-          onPress={() => this.props.navigation.push("Details")}
-        />
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate("Home")}
-        />
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.goBack()}
-        />
-      </View>
-    );
-  }
+funtction DetailsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Details Screen</Text>
+      <Button
+        title="Go to Details... again"
+        onPress={() => navigation.push("Details")}
+      />
+      <Button
+        title="Go to Home"
+        onPress={() => navigation.navigate("Home")}
+      />
+      <Button
+        title="Go back"
+        onPress={() => navigation.goBack()}
+      />
+    </View>
+  );
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/going-back-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 > On Android, React Navigation hooks in to the hardware back button and fires the `goBack()` function for you when the user presses it, so it behaves as the user would expect.
 
@@ -132,7 +120,7 @@ Another common requirement is to be able to go back _multiple_ screens -- for ex
 
 ## Summary
 
-- `this.props.navigation.navigate('RouteName')` pushes a new route to the stack navigator if it's not already in the stack, otherwise it jumps to that screen.
+- `navigation.navigate('RouteName')` pushes a new route to the stack navigator if it's not already in the stack, otherwise it jumps to that screen.
 - We can call `this.props.navigation.push('RouteName')` as many times as we like and it will continue pushing routes.
 - The header bar will automatically show a back button, but you can programmatically go back by calling `this.props.navigation.goBack()`. On Android, the hardware back button just works as expected.
 - You can go back to an existing screen in the stack with `this.props.navigation.navigate('RouteName')`, and you can go back to the first screen in the stack with `this.props.navigation.popToTop()`.
