@@ -4,8 +4,6 @@ title: Authentication flows
 sidebar_label: Authentication flows
 ---
 
-#TODO
-
 Most apps require that a user authenticate in some way to have access to data associated with a user or other private content. Typically the flow will look like this:
 
 - The user opens the app.
@@ -18,37 +16,48 @@ Most apps require that a user authenticate in some way to have access to data as
 ## Set up our navigators
 
 ```js
-import {
-  createSwitchNavigator,
-  createStackNavigator,
-  createAppContainer
-} from "react-navigation";
+import * as React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 
-// Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
-// goes here.
 
-const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen });
-const AuthStack = createStackNavigator({ SignIn: SignInScreen });
+ export default function SimpleStackScreen({ navigation }) {
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [userToken, setUserToken] = React.useState<string | undefined>(
+    undefined
+  );
 
-export default createAppContainer(
-  createSwitchNavigator(
-    {
-      AuthLoading: AuthLoadingScreen,
-      App: AppStack,
-      Auth: AuthStack
-    },
-    {
-      initialRouteName: "AuthLoading"
-    }
-  )
-);
+   return (
+    <SimpleStack.Navigator
+      screenOptions={{
+        headerLeft: () => (
+          <HeaderBackButton onPress={() => navigation.goBack()} />
+        ),
+      }}
+    >
+      {isLoading ? (
+        <SimpleStack.Screen
+          name="splash"
+          options={{ title: `Auth Flow` }}
+        >
+          {() => <SplashScreen setIsLoading={setIsLoading} setUserToken={setUserToken} />}
+        </SimpleStack.Screen>
+      ) : userToken === undefined ? (
+        <SimpleStack.Screen name="sign-in" options={{ title: `Sign in` }}>
+          {() => <SignInScreen setUserToken={setUserToken} />}
+        </SimpleStack.Screen>
+      ) : (
+        <SimpleStack.Screen name="home" options={{ title: 'Home' }}>
+          {() => <HomeScreen setUserToken={setUserToken} />}
+        </SimpleStack.Screen>
+      )}
+    </SimpleStack.Navigator>
+  );
+}
+
 ```
 
-<a href="https://snack.expo.io/@react-navigation/auth-flow-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-You may not be familiar with `SwitchNavigator` yet. The purpose of `SwitchNavigator` is to only ever show one screen at a time. By default, it does not handle back actions and it resets routes to their default state when you switch away. This is the exact behavior that we want from the authentication flow: when users sign in, we want to throw away the state of the authentication flow and unmount all of the screens, and when we press the hardware back button we expect to not be able to go back to the authentication flow. We switch between routes in the `SwitchNavigator` by using the `navigate` action. You can read more about the `SwitchNavigator` in the [API reference](switch-navigator.html).
-
-We set the `initialRouteName` to `'AuthLoading'` because we will fetch our authentication state from persistent storage inside of that screen component.
+This is the behavior that we want from the authentication flow: when users sign in, we want to throw away the state of the authentication flow and unmount all of the screens, and when we press the hardware back button we expect to not be able to go back to the authentication flow.
 
 ## Implement our authentication loading screen
 
@@ -62,11 +71,8 @@ import {
   View
 } from "react-native";
 
-class AuthLoadingScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this._bootstrapAsync();
-  }
+function AuthLoadingScreen({ setIsLoading, setUserToken }) {
+  React.useEffect(() => this._bootstrapAsync();)
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
@@ -74,74 +80,38 @@ class AuthLoadingScreen extends React.Component {
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(userToken ? "App" : "Auth");
+    setIsLoading(false);
+    setUserToken(userToken);
   };
 
   // Render any loading content that you like here
-  render() {
-    return (
-      <View>
-        <ActivityIndicator />
-        <StatusBar barStyle="default" />
-      </View>
-    );
-  }
+  return (
+    <View>
+      <ActivityIndicator />
+    </View>
+  );
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/auth-flow-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 ## Fill in other components
 
 Our `App` and `Auth` routes are both stack navigators, but you could do whatever you like here. As mentioned above, you probably want your authentication route to be a stack for password reset, signup, etc. Similarly for your app, you probably have more than one screen. We won't talk about how to implement the text inputs and buttons for the authentication screen, that is outside of the scope of navigation. We'll just fill in some placeholder content.
 
 ```js
-class SignInScreen extends React.Component {
-  static navigationOptions = {
-    title: "Please sign in"
-  };
-
-  render() {
-    return (
-      <View>
-        <Button title="Sign in!" onPress={this._signInAsync} />
-      </View>
-    );
-  }
-
-  _signInAsync = async () => {
-    await AsyncStorage.setItem("userToken", "abc");
-    this.props.navigation.navigate("App");
-  };
-}
-
-class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: "Welcome to the app!"
-  };
-
-  render() {
-    return (
-      <View>
-        <Button title="Show me more of the app" onPress={this._showMoreApp} />
-        <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
-      </View>
-    );
-  }
-
-  _showMoreApp = () => {
-    this.props.navigation.navigate("Other");
-  };
-
-  _signOutAsync = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate("Auth");
-  };
-}
-
-// More code like OtherScreen omitted for brevity
+function SignInScreen({ setUserToken }) {
+  return (
+    <View style={styles.content}>
+      <TextInput placeholder="Username" style={styles.input} />
+      <TextInput placeholder="Password" secureTextEntry style={styles.input} />
+      <Button
+        mode="contained"
+        onPress={() => setUserToken('token')}
+        style={styles.button}
+      >
+        Sign in
+      </Button>
+    </View>
+  );
+};
 ```
-
-<a href="https://snack.expo.io/@react-navigation/auth-flow-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
-
-That's about all there is to it. At the moment, `createSwitchNavigator` doesn't support animating between screens. Let us know if this is important to you [on Canny](https://react-navigation.canny.io/feature-requests).
