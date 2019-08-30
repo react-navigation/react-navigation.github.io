@@ -21,20 +21,38 @@ It's tempting to solve (a) by wrapping your entire app in a container with paddi
 However, if you're overriding the default navigation bar, it's important to ensure your UI doesn't interfere with either of those hardware elements.
 
 For example, if I render nothing for the `header` or `tabBarComponent`, nothing renders
-#TODO
 
 ```jsx
-const Tabs = createBottomTabNavigator({
-  ...
-}, {
-  tabBarComponent: () => null,
-});
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-export default createStackNavigator({
-  ...
-}, {
-  headerMode: 'none',
-});
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function App2() {
+  return (
+    <NativeContainer>
+      <Stack.Navigator initialRouteName="home" headerMode="none">
+        <Stack.Screen name="settings" component={Settings} />
+        <Stack.Screen
+          name="profile"
+          component={Profile}
+          options={{ title: 'John Doe' }}
+        />
+        <Stack.Screen name="home">
+          {() => (
+            <Tab.Navigator initialRouteName="feed" tabBarComponent={() => null}>
+              <Tab.Screen name="feed" component={Feed} />
+              <Tab.Screen name="article" component={Article} />
+              <Tab.Screen name="notifications">
+                {props => <Notifications {...props} />}
+              </Tab.Screen>
+            </Tab.Navigator>
+          )}
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NativeContainer>
+  );
 ```
 
 ![Text hidden by iPhoneX UI elements](/docs/assets/iphoneX/02-iphonex-content-hidden.png)
@@ -44,15 +62,13 @@ To fix this issue you can wrap your content in a `SafeAreaView`, which can be im
 ```jsx
 import { SafeAreaView } from "react-navigation";
 
-class MyHomeScreen extends Component {
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.paragraph}>This is top text.</Text>
-        <Text style={styles.paragraph}>This is bottom text.</Text>
-      </SafeAreaView>
-    );
-  }
+function MyHomeScreen() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.paragraph}>This is top text.</Text>
+      <Text style={styles.paragraph}>This is bottom text.</Text>
+    </SafeAreaView>
+  );
 }
 ```
 
