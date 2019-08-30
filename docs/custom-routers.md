@@ -6,6 +6,7 @@ sidebar_label: Custom routers
 
 You can make your own router by building an object with the following functions:
 #TODO
+
 ```js
 const MyRouter = {
   getStateForAction: (action, state) => ({}),
@@ -25,7 +26,6 @@ class MyNavigator extends React.Component {
 ```
 
 ![Routers manage the relationship between URIs, actions, and navigation state](/docs/assets/routers/routers-concept-map.png)
-
 
 ### `getStateForAction(action, state)`
 
@@ -98,12 +98,13 @@ Used to retrieve the navigation options for a screen. Must provide the screen's 
 - `navigationOptions` - The previous set of options that are default or provided by the previous configurer
 
 Inside an example view, perhaps you need to fetch the configured title:
+
 ```js
 // First, prepare a navigation prop for your child, or re-use one if already available.
 const screenNavigation = addNavigationHelpers({
   // In this case we use navigation.state.index because we want the title for the active route.
   state: navigation.state.routes[navigation.state.index],
-  dispatch: navigation.dispatch,
+  dispatch: navigation.dispatch
 });
 const options = this.props.router.getScreenOptions(screenNavigation, {});
 const title = options.title;

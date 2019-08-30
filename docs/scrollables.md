@@ -9,11 +9,11 @@ React Navigation exports its own `ScrollView`, `FlatList`, and `SectionList`. Th
 Example
 
 ```jsx harmony
-import React from 'react';
-import { Text, View } from 'react-native';
+import React from "react";
+import { Text, View } from "react-native";
 // TODO
-import { createAppContainer, FlatList } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createAppContainer, FlatList } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation-tabs";
 
 const data = new Array(150).fill(0);
 
@@ -21,14 +21,14 @@ class HomeScreen extends React.Component {
   renderItem = ({ index }) => {
     return (
       <View style={{ height: 50 }}>
-        <Text style={{ textAlign: 'center' }}>Item {index}</Text>
+        <Text style={{ textAlign: "center" }}>Item {index}</Text>
       </View>
     );
   };
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <FlatList
           data={data}
           renderItem={this.renderItem}
@@ -40,9 +40,10 @@ class HomeScreen extends React.Component {
 }
 
 const TabNavigator = createBottomTabNavigator({
-  Home: { screen: HomeScreen },
+  Home: { screen: HomeScreen }
 });
 
 export default createAppContainer(TabNavigator);
 ```
+
 <a href="https://snack.expo.io/@react-navigation/basic-scrollables-tab-v3" target="blank" class="run-code-button">&rarr; Run this code</a>

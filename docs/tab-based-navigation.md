@@ -3,6 +3,7 @@ id: tab-based-navigation
 title: Tab navigation
 sidebar_label: Tab navigation
 ---
+
 #TODO
 
 Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top below the header (or even instead of a header).
@@ -12,15 +13,15 @@ This guide covers [createBottomTabNavigator](bottom-tab-navigator.html). You may
 ## Minimal example of tab-based navigation
 
 ```js
-import React from 'react';
-import { Text, View } from 'react-native';
-import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import React from "react";
+import { Text, View } from "react-native";
+import { createAppContainer } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation-tabs";
 
 class HomeScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Home!</Text>
       </View>
     );
@@ -30,7 +31,7 @@ class HomeScreen extends React.Component {
 class SettingsScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Settings!</Text>
       </View>
     );
@@ -39,7 +40,7 @@ class SettingsScreen extends React.Component {
 
 const TabNavigator = createBottomTabNavigator({
   Home: HomeScreen,
-  Settings: SettingsScreen,
+  Settings: SettingsScreen
 });
 
 export default createAppContainer(TabNavigator);
@@ -54,14 +55,14 @@ This is similar to how you would customize a stack navigator &mdash; there are s
 ```js
 // You can import Ionicons from @expo/vector-icons if you use Expo or
 // react-native-vector-icons/Ionicons otherwise.
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { createAppContainer } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation-tabs";
 
 export default createBottomTabNavigator(
   {
     Home: HomeScreen,
-    Settings: SettingsScreen,
+    Settings: SettingsScreen
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -69,23 +70,23 @@ export default createBottomTabNavigator(
         const { routeName } = navigation.state;
         let IconComponent = Ionicons;
         let iconName;
-        if (routeName === 'Home') {
-          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-          // Sometimes we want to add badges to some icons. 
+        if (routeName === "Home") {
+          iconName = `ios-information-circle${focused ? "" : "-outline"}`;
+          // Sometimes we want to add badges to some icons.
           // You can check the implementation below.
-          IconComponent = HomeIconWithBadge; 
-        } else if (routeName === 'Settings') {
+          IconComponent = HomeIconWithBadge;
+        } else if (routeName === "Settings") {
           iconName = `ios-options`;
         }
 
         // You can return any component that you like here!
         return <IconComponent name={iconName} size={25} color={tintColor} />;
-      },
+      }
     }),
     tabBarOptions: {
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray',
-    },
+      activeTintColor: "tomato",
+      inactiveTintColor: "gray"
+    }
   }
 );
 ```
@@ -94,9 +95,9 @@ export default createBottomTabNavigator(
 
 Let's dissect this:
 
-* `tabBarIcon` is a property on `navigationOptions`, so we know we can use it on our screen components, but in this case chose to put it in the `createBottomTabNavigator` configuration in order to centralize the icon configuration for convenience.
-* `tabBarIcon` is a function that is given the `focused` state, `tintColor`, and `horizontal` param, which is a boolean. If you take a peek further down in the configuration you will see `tabBarOptions` and `activeTintColor` and `inactiveTintColor`. These default to the the iOS platform defaults, but you can change them here. The `tintColor` that is passed through to the `tabBarIcon` is either the active or inactive one, depending on the `focused` state (focused is active). The orientation state `horizontal` is `true` when the device is in landscape, otherwise is `false` for portrait.
-* Read the [full API reference](bottom-tab-navigator.html) for further information on `createBottomTabNavigator` configuration options.
+- `tabBarIcon` is a property on `navigationOptions`, so we know we can use it on our screen components, but in this case chose to put it in the `createBottomTabNavigator` configuration in order to centralize the icon configuration for convenience.
+- `tabBarIcon` is a function that is given the `focused` state, `tintColor`, and `horizontal` param, which is a boolean. If you take a peek further down in the configuration you will see `tabBarOptions` and `activeTintColor` and `inactiveTintColor`. These default to the the iOS platform defaults, but you can change them here. The `tintColor` that is passed through to the `tabBarIcon` is either the active or inactive one, depending on the `focused` state (focused is active). The orientation state `horizontal` is `true` when the device is in landscape, otherwise is `false` for portrait.
+- Read the [full API reference](bottom-tab-navigator.html) for further information on `createBottomTabNavigator` configuration options.
 
 ## Add badges to icons
 
@@ -109,21 +110,25 @@ export default class IconWithBadge extends React.Component {
     return (
       <View style={{ width: 24, height: 24, margin: 5 }}>
         <Ionicons name={name} size={size} color={color} />
-        { badgeCount > 0 && (
-          <View style={{
-            // If you're using react-native < 0.57 overflow outside of parent 
-            // will not work on Android, see https://git.io/fhLJ8
-            position: 'absolute',
-            right: -6,
-            top: -3,
-            backgroundColor: 'red',
-            borderRadius: 6,
-            width: 12,
-            height: 12,
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-            <Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>{badgeCount}</Text>
+        {badgeCount > 0 && (
+          <View
+            style={{
+              // If you're using react-native < 0.57 overflow outside of parent
+              // will not work on Android, see https://git.io/fhLJ8
+              position: "absolute",
+              right: -6,
+              top: -3,
+              backgroundColor: "red",
+              borderRadius: 6,
+              width: 12,
+              height: 12,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Text style={{ color: "white", fontSize: 10, fontWeight: "bold" }}>
+              {badgeCount}
+            </Text>
           </View>
         )}
       </View>
@@ -135,11 +140,11 @@ export default class IconWithBadge extends React.Component {
 From UI perspective this component is ready to use, but you still need to find some way to pass down the badge count properly from somewhere else, like using [React Context](https://reactjs.org/docs/context.html), [redux](https://redux.js.org/), [mobx](https://mobx.js.org/) or [event emitters](https://github.com/facebook/react-native/blob/master/Libraries/vendor/emitter/EventEmitter.js).
 
 ```js
-const HomeIconWithBadge = (props) => {
+const HomeIconWithBadge = props => {
   // You should pass down the badgeCount in some other ways like react context api, redux, mobx or event emitters.
-  return <IconWithBadge {...props} badgeCount={3} />;  
-}
-export default HomeIconWithBadge
+  return <IconWithBadge {...props} badgeCount={3} />;
+};
+export default HomeIconWithBadge;
 ```
 
 ## Jumping between tabs
@@ -147,16 +152,16 @@ export default HomeIconWithBadge
 Switching from one tab to another has a familiar API &mdash; `this.props.navigation.navigate`.
 
 ```js
-import { Button, Text, View } from 'react-native';
+import { Button, Text, View } from "react-native";
 
 class HomeScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Home!</Text>
         <Button
           title="Go to Settings"
-          onPress={() => this.props.navigation.navigate('Settings')}
+          onPress={() => this.props.navigation.navigate("Settings")}
         />
       </View>
     );
@@ -166,11 +171,11 @@ class HomeScreen extends React.Component {
 class SettingsScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Settings!</Text>
         <Button
           title="Go to Home"
-          onPress={() => this.props.navigation.navigate('Home')}
+          onPress={() => this.props.navigation.navigate("Home")}
         />
       </View>
     );
@@ -185,16 +190,13 @@ class SettingsScreen extends React.Component {
 Usually tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
 
 ```js
-import {
-  createStackNavigator,
-  createAppContainer,
-} from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation-tabs";
 
 class DetailsScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Details!</Text>
       </View>
     );
@@ -204,11 +206,11 @@ class DetailsScreen extends React.Component {
 class HomeScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         {/* other code from before here */}
         <Button
           title="Go to Details"
-          onPress={() => this.props.navigation.navigate('Details')}
+          onPress={() => this.props.navigation.navigate("Details")}
         />
       </View>
     );
@@ -218,11 +220,11 @@ class HomeScreen extends React.Component {
 class SettingsScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         {/* other code from before here */}
         <Button
           title="Go to Details"
-          onPress={() => this.props.navigation.navigate('Details')}
+          onPress={() => this.props.navigation.navigate("Details")}
         />
       </View>
     );
@@ -231,23 +233,25 @@ class SettingsScreen extends React.Component {
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
-  Details: DetailsScreen,
+  Details: DetailsScreen
 });
 
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen,
-  Details: DetailsScreen,
+  Details: DetailsScreen
 });
 
-export default createAppContainer(createBottomTabNavigator(
-  {
-    Home: HomeStack,
-    Settings: SettingsStack,
-  },
-  {
-    /* Other configuration remains unchanged */
-  }
-));
+export default createAppContainer(
+  createBottomTabNavigator(
+    {
+      Home: HomeStack,
+      Settings: SettingsStack
+    },
+    {
+      /* Other configuration remains unchanged */
+    }
+  )
+);
 ```
 
 <a href="https://snack.expo.io/@react-navigation/stacks-in-tabs-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
@@ -259,4 +263,5 @@ It's common to attempt to use a standalone tab bar component without integrating
 For example, React Navigation's `TabNavigator` takes care of handling the Android back button for you, while standalone components typically do not. Additionally, it is more difficult for you (as the developer) to perform actions such as "jump to this tab and then go to this screen" if you need to call into two distinct APIs for it. Lastly, mobile user interfaces have numerous small design details that require that certain components are aware of the layout or presence of other components &mdash; for example, if you have a translucent tab bar, content should scroll underneath it and the scroll view should have an inset on the bottom equal to the height of the tab bar so you can see all of the content. Double tapping the tab bar should make the active navigation stack pop to the top of the stack, and doing it again should scroll the active scroll view in that stack scroll to the top. While not all of these behaviors are implemented out of the box yet with React Navigation, they will be and you will not get any of this if you use a standalone tab view component.
 
 ## A tab navigator contains a stack and you want to hide the tab bar on specific screens
+
 [See the documentation here](navigation-options-resolution.html#a-tab-navigator-contains-a-stack-and-you-want-to-hide-the-tab-bar-on-specific-screens)

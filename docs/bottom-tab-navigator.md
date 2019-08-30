@@ -15,7 +15,7 @@ npm install react-navigation-tabs react-native-reanimated react-native-gesture-h
 To use this tab navigator, import it from `@react-navigation/bottom-tabs`:
 
 ```js
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Tab = createBottomTabNavigator();
 
@@ -35,48 +35,48 @@ function App() {
 
 ## RouteConfigs
 
-
 The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.html#routeconfigs) from stack navigator.
 
 ## BottomTabNavigatorConfig
 
-* `initialRouteName` - The routeName for the initial tab route when first loading.
-* `screenOptions` - Default options to use for screens
-* `resetOnBlur` - Reset the state of any nested navigators when switching away from a screen. Defaults to `false`.
-* `backBehavior` - `initialRoute` to return to initial tab, `order` to return to previous tab, `history` to return to last visited tab, or `none`.
-* `lazy` - Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
-* `tabBarComponent` - Optional, override component to use as the tab bar.
-* `tabBarOptions` - An object with the following properties:
-  * `activeTintColor` - Label and icon color of the active tab.
-  * `activeBackgroundColor` - Background color of the active tab.
-  * `inactiveTintColor` - Label and icon color of the inactive tab.
-  * `inactiveBackgroundColor` - Background color of the inactive tab.
-  * `showLabel` - Whether to show label for tab, default is true.
-  * `showIcon` - Whether to show icon for tab, default is true.
-  * `style` - Style object for the tab bar.
-  * `labelStyle` - Style object for the tab label.
-  * `tabStyle` - Style object for the tab.
-  * `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
-  * `adaptive` - Should the tab icons and labels alignment change based on screen size? Defaults to `true` for iOS 11. If `false`, tab icons and labels align vertically all the time. When `true`, tab icons and labels align horizontally on tablet.
-  * `safeAreaInset` - Override the `forceInset` prop for `<SafeAreaView>`. Defaults to `{ bottom: 'always', top: 'never' }`. Available keys are `top | bottom | left | right` provided with the values `'always' | 'never'`.
-  * `keyboardHidesTabBar` - Defaults to `false`. If `true` hide the tab bar when keyboard opens.
+- `initialRouteName` - The routeName for the initial tab route when first loading.
+- `screenOptions` - Default options to use for screens
+- `resetOnBlur` - Reset the state of any nested navigators when switching away from a screen. Defaults to `false`.
+- `backBehavior` - `initialRoute` to return to initial tab, `order` to return to previous tab, `history` to return to last visited tab, or `none`.
+- `lazy` - Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
+- `tabBarComponent` - Optional, override component to use as the tab bar.
+- `tabBarOptions` - An object with the following properties:
+  - `activeTintColor` - Label and icon color of the active tab.
+  - `activeBackgroundColor` - Background color of the active tab.
+  - `inactiveTintColor` - Label and icon color of the inactive tab.
+  - `inactiveBackgroundColor` - Background color of the inactive tab.
+  - `showLabel` - Whether to show label for tab, default is true.
+  - `showIcon` - Whether to show icon for tab, default is true.
+  - `style` - Style object for the tab bar.
+  - `labelStyle` - Style object for the tab label.
+  - `tabStyle` - Style object for the tab.
+  - `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
+  - `adaptive` - Should the tab icons and labels alignment change based on screen size? Defaults to `true` for iOS 11. If `false`, tab icons and labels align vertically all the time. When `true`, tab icons and labels align horizontally on tablet.
+  - `safeAreaInset` - Override the `forceInset` prop for `<SafeAreaView>`. Defaults to `{ bottom: 'always', top: 'never' }`. Available keys are `top | bottom | left | right` provided with the values `'always' | 'never'`.
+  - `keyboardHidesTabBar` - Defaults to `false`. If `true` hide the tab bar when keyboard opens.
 
 Example:
 
 ```js
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Tab = createBottomTabNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="feed"
-        activeTintColor={'#e91e63'}
+      <Tab.Navigator
+        initialRouteName="feed"
+        activeTintColor={"#e91e63"}
         labelStyle={{
           fontSize: 12
         }}
         style={{
-          backgroundColor: 'blue'
+          backgroundColor: "blue"
         }}
       >
         <Tab.Screen name="feed" component={Feed} />
@@ -90,7 +90,7 @@ function App() {
 }
 ```
 
-##  `options` for `Tab.Screen` inside of the navigator
+## `options` for `Tab.Screen` inside of the navigator
 
 #### `title`
 
@@ -124,8 +124,8 @@ ID to locate this tab button in tests.
 
 Callback to handle press events; the argument is an object containing:
 
-* `navigation`: navigation prop for the screen
-* `defaultHandler`: the default handler for tab press
+- `navigation`: navigation prop for the screen
+- `defaultHandler`: the default handler for tab press
 
 Useful for adding a custom logic before the transition to the next scene (the
 tapped one) starts. When setting tabBarOnPress the defaultHandler needs to be called in order to execute the default action (i.e. switch tab).

@@ -23,7 +23,7 @@ For instance, if we are attempting to make an API call on focus to fetch some da
 
 ### Example
 
-#TODO  - ldt's make it hoop
+#TODO - ldt's make it hoop
 
 ```js
 import React, { Component } from "react";

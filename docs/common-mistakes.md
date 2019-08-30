@@ -24,7 +24,7 @@ export default class App extends React.Component {
 
 const AuthenticationNavigator = createStackNavigator({
   SignIn: SignInScreen,
-  ForgotPassword: ForgotPasswordScreen,
+  ForgotPassword: ForgotPasswordScreen
 });
 
 const AuthenticationContainer = createAppContainer(AuthenticationNavigator);
@@ -32,23 +32,21 @@ const AuthenticationContainer = createAppContainer(AuthenticationNavigator);
 class AuthenticationScreen extends React.Component {
   render() {
     /*
-     * In a screen inside of the navigator we are rendering another navigator 
+     * In a screen inside of the navigator we are rendering another navigator
      * You should avoid this! It will have its own navigation state and be unable
      * To interact with any parent navigator, eg: it would not know the route "Home" exists
      */
-    return (
-      <AuthenticationContainer />
-    );
+    return <AuthenticationContainer />;
   }
 }
 
 const AppNavigator = createSwitchNavigator({
   Auth: AuthenticationScreen, // This screen renders a navigator!
-  Home: HomeScreen,
+  Home: HomeScreen
 });
 
-const AppContainer = createAppContainer(AppNavigator)
-``` 
+const AppContainer = createAppContainer(AppNavigator);
+```
 
 The correct way to write this would be the following:
 #TODO
@@ -62,16 +60,16 @@ export default class App extends React.Component {
 
 const AuthenticationNavigator = createStackNavigator({
   SignIn: SignInScreen,
-  ForgotPassword: ForgotPasswordScreen,
+  ForgotPassword: ForgotPasswordScreen
 });
 
 const AppNavigator = createSwitchNavigator({
-  /* 
+  /*
    * Rather than being rendered by a screen component, the
    * AuthenticationNavigator is a screen component
    */
   Auth: AuthenticationNavigator,
-  Home: HomeScreen,
+  Home: HomeScreen
 });
 
 const AppContainer = createAppContainer(AppNavigator);
@@ -91,22 +89,20 @@ export default class App extends React.Component {
 
 const AuthenticationNavigator = createStackNavigator({
   SignIn: SignInScreen,
-  ForgotPassword: ForgotPasswordScreen,
+  ForgotPassword: ForgotPasswordScreen
 });
 
 class AuthenticationScreen extends React.Component {
   static router = AuthenticationNavigator.router;
 
   render() {
-    return (
-      <AuthenticationNavigator navigation={this.props.navigation} />
-    );
+    return <AuthenticationNavigator navigation={this.props.navigation} />;
   }
 }
 
 const AppNavigator = createSwitchNavigator({
   Auth: AuthenticationScreen, // This screen renders a navigator!
-  Home: HomeScreen,
+  Home: HomeScreen
 });
 
 const AppContainer = createAppContainer(AppNavigator);
@@ -121,15 +117,15 @@ In previous version of React Navigation, the library used to dig through your co
 If you wrap the `AppContainer` in a `View`, make sure the `View` is using flex.
 
 ```javascript
-import React from 'react';
-import { Text, View } from 'react-native';
-import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import React from "react";
+import { Text, View } from "react-native";
+import { createAppContainer } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation-tabs";
 
 class HomeScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Home!</Text>
       </View>
     );
@@ -139,7 +135,7 @@ class HomeScreen extends React.Component {
 class SettingsScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Settings!</Text>
       </View>
     );
@@ -148,11 +144,15 @@ class SettingsScreen extends React.Component {
 
 const TabNavigator = createBottomTabNavigator({
   Home: HomeScreen,
-  Settings: SettingsScreen,
+  Settings: SettingsScreen
 });
 
-const AppContainer = createAppContainer(TabNavigator)
+const AppContainer = createAppContainer(TabNavigator);
 
 // without the style you will see a blank screen
-export default ()=><View style={{flex: 1}}><AppContainer/></View>;
+export default () => (
+  <View style={{ flex: 1 }}>
+    <AppContainer />
+  </View>
+);
 ```

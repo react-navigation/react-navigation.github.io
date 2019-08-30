@@ -9,18 +9,19 @@ Now that we know how to customize the look of our headers, let's make them senti
 ## Adding a button to the header
 
 The most common way to interact with a header is by tapping on a button either to the left or the right of the title. Let's add a button to the right side of the header (one of the most difficult places to touch on your entire screen, depending on finger and phone size, but also a normal place to put buttons).
-#TODO 
+#TODO
+
 ```js
 class HomeScreen extends React.Component {
   static navigationOptions = {
     headerTitle: <LogoTitle />,
     headerRight: (
       <Button
-        onPress={() => alert('This is a button!')}
+        onPress={() => alert("This is a button!")}
         title="Info"
         color="#fff"
       />
-    ),
+    )
   };
 }
 ```
@@ -34,7 +35,8 @@ The binding of `this` in `navigationOptions` is _not_ the `HomeScreen` instance,
 ## Header interaction with its screen component
 
 The most commonly used pattern for giving a header button access to a function on the component instance is to use `params`. We'll demonstrate this with a classic example, the counter.
-#TODO 
+#TODO
+
 ```js
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -42,11 +44,11 @@ class HomeScreen extends React.Component {
       headerTitle: <LogoTitle />,
       headerRight: (
         <Button
-          onPress={navigation.getParam('increaseCount')}
+          onPress={navigation.getParam("increaseCount")}
           title="+1"
           color="#fff"
         />
-      ),
+      )
     };
   };
 
@@ -55,7 +57,7 @@ class HomeScreen extends React.Component {
   }
 
   state = {
-    count: 0,
+    count: 0
   };
 
   _increaseCount = () => {

@@ -26,7 +26,7 @@ Use `Provider` to wrap what you return from your root component's render method:
 <Provider myObject={this.myObject}>
   <AppNavigator />
 </Provider>
-```  
+```
 
 this will allow you to access `myObject` from any React component in the application through the `inject` function which can be quite useful.
 
@@ -37,7 +37,6 @@ Use `observer` function to wrap all components that render observable data. This
 Screens in your application often depend on params. React Navigation allows you to [send params](params.html) from one screen to another. These params are stored in the navigation state. However, in order to persist the navigation state, it needs to be serializable. This requirement does not play well with MST, because the MST objects are complex objects and React Navigation doesn't know how to (de)serialize them. In this guide, we will work around this by storing the navigation params ourselves.
 
 This means that rather than sending the params from one screen to another (eg. with `props.navigation.navigate('MyScreen', { complexMSTObject })`) we will store the params to a navigation store, then navigate without sending any params, and on the target screen, we'll pick the params up from the navigation store.
-
 
 To give an example, the navigation store may look similar to this:
 #TODO - not sure!
@@ -66,7 +65,6 @@ export const NavigationStore = types
 Note that `userProfileScreenParams` is a simple model with a `user` entry, while `productDetailScreenParams` is a map of `ProductDetailScreenParams` model. The reason we chose this shape of data is that we only have a single user profile screen in our app which reads its params from `userProfileScreenParams`. `productDetailScreenParams` is a map because the app can have several product screens on a stack. Each screen points to a `Product` instance saved in the map. The keys into the map are the React Navigation [keys](https://reactnavigation.org/docs/en/navigation-key.html#usage-with-the-navigate-navigation-actionshtml-navigate-call): think of the `key` as of an identifier of the route.
 
 Your navigation store may also be just one map where for each screen (regardless if it is a product or user profile screen), we store its navigation params. This is the approach taken in the [sample app](https://github.com/vonovak/react-navigation-mst-demo).
-
 
 ## Summary
 

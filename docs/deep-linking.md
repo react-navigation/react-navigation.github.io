@@ -12,51 +12,57 @@ Previously, we had defined a navigator like this:
 #TODO
 
 ```js
-const SimpleApp = createAppContainer(createStackNavigator({
-  Home: { screen: HomeScreen },
-  Chat: { screen: ChatScreen },
-}));
+const SimpleApp = createAppContainer(
+  createStackNavigator({
+    Home: { screen: HomeScreen },
+    Chat: { screen: ChatScreen }
+  })
+);
 ```
 
 We want paths like `chat/Eric` to link to a "Chat" screen with the `user` passed as a param. Let's re-configure our chat screen with a `path` that tells the router what relative path to match against, and what params to extract. This path spec would be `chat/:user`.
 
 ```js
-const SimpleApp = createAppContainer(createStackNavigator({
-  Home: { screen: HomeScreen },
-  Chat: {
-    screen: ChatScreen,
-    path: 'chat/:user',
-  },
-}));
+const SimpleApp = createAppContainer(
+  createStackNavigator({
+    Home: { screen: HomeScreen },
+    Chat: {
+      screen: ChatScreen,
+      path: "chat/:user"
+    }
+  })
+);
 ```
 
 If we have nested navigators, we need to provide each parent screen with a `path`. All the paths will be concatenated and can also be an empty string. This path spec would be `friends/chat/:user`.
 #TODO
 
 ```js
-const AuthSwitch = createAppContainer(createStackNavigator({
-  AuthLoading:  { screen: AuthLoadingScreen },
-  App: {
-    screen: AppStack,
-    path: '',
-  },
-  Auth: { screen: AuthStack },
-}));
+const AuthSwitch = createAppContainer(
+  createStackNavigator({
+    AuthLoading: { screen: AuthLoadingScreen },
+    App: {
+      screen: AppStack,
+      path: ""
+    },
+    Auth: { screen: AuthStack }
+  })
+);
 
 const AppStack = createStackNavigator({
   Home: { screen: HomeScreen },
   Friends: {
     screen: FriendsScreen,
-    path: 'friends',
-  },
+    path: "friends"
+  }
 });
 
 const FriendsScreen = createStackNavigator({
   Overview: { screen: OverviewScreen },
   Chat: {
     screen: ChatScreen,
-    path: 'chat/:user',
-  },
+    path: "chat/:user"
+  }
 });
 ```
 
@@ -72,10 +78,9 @@ First, you will want to specify a url scheme for your app. This corresponds to t
 }
 ```
 
-
 ### URI Prefix
 
-Next, let's configure our navigation container to extract the path from the app's incoming URI. 
+Next, let's configure our navigation container to extract the path from the app's incoming URI.
 
 ```js
 import * as Expo from 'expo';
@@ -119,7 +124,7 @@ Read the [Expo linking guide](https://docs.expo.io/versions/latest/guides/linkin
 
 ### URI Prefix
 
-Next, let's configure our navigation container to extract the path from the app's incoming URI. 
+Next, let's configure our navigation container to extract the path from the app's incoming URI.
 
 ```js
 const SimpleApp = createAppContainer(createStackNavigator({...}));
@@ -171,6 +176,7 @@ To test the URI on a real device, open Safari and type `mychat://chat/Eric`.
 To configure the external linking in Android, you can create a new intent in the manifest.
 
 In `SimpleApp/android/app/src/main/AndroidManifest.xml`, do these followings adjustments:
+
 1. Set `launchMode` of `MainActivity` to `singleTask` in order to receive intent on existing `MainActivity`. It is useful if you want to perform navigation using deep link you have been registered - [details](http://developer.android.com/training/app-indexing/deep-linking.html#adding-filters)
 2. Add the new `intent-filter` inside the `MainActivity` entry with a `VIEW` type action:
 
@@ -186,7 +192,7 @@ In `SimpleApp/android/app/src/main/AndroidManifest.xml`, do these followings adj
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="mychat" />            
+        <data android:scheme="mychat" />
     </intent-filter>
 </activity>
 ```

@@ -10,8 +10,8 @@ The `key` parameter comes up repeatedly across different navigation functions. L
 
 If no key is provided, `StackRouter` will behave as follows:
 
-* if a route with the given name already exists in the state, `StackRouter` will jump to the existing route, along with setting the new parameters.
-* if no such route exists, `StackRouter` will push it onto the stack
+- if a route with the given name already exists in the state, `StackRouter` will jump to the existing route, along with setting the new parameters.
+- if no such route exists, `StackRouter` will push it onto the stack
 
 If, however, you want to push several instances of the same route, you can do so by providing a unique `key` parameter each time you call `navigate`, or you can use the `push` action available on `StackRouter`. See the related [RFC](https://github.com/react-navigation/rfcs/blob/master/text/0004-less-pushy-navigate.md) for more background.
 

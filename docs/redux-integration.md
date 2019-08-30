@@ -10,7 +10,7 @@ It is extremely easy to use Redux in an app with React Navigation. It's basicall
 ```js
 let RootStack = createStackNavigator({
   Counter: CounterContainer,
-  StaticCounter: StaticCounterContainer,
+  StaticCounter: StaticCounterContainer
 });
 
 let Navigation = createAppContainer(RootStack);
@@ -41,7 +41,7 @@ Create a component, `connect` it to the store, then use that component in the `t
 ```js
 class Count extends React.Component {
   render() {
-    return <Text>Count: {this.props.value}</Text>
+    return <Text>Count: {this.props.value}</Text>;
   }
 }
 
@@ -60,31 +60,32 @@ class Counter extends React.Component {
 
 ### Pass the state you care about as a param to the screen
 
-If the value isn't expected to change, you can just pass it from a `connect`ed component to the other screen as a param. 
+If the value isn't expected to change, you can just pass it from a `connect`ed component to the other screen as a param.
 
 ```js
 <Button
   title="Go to static count screen"
   onPress={() =>
-    this.props.navigation.navigate('StaticCounter', {
-      count: this.props.count,
+    this.props.navigation.navigate("StaticCounter", {
+      count: this.props.count
     })
   }
 />
 ```
+
 #TODO
 
 ```js
 class StaticCounter extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('count'),
+    title: navigation.getParam("count")
   });
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.paragraph}>
-          {this.props.navigation.getParam('count')}
+          {this.props.navigation.getParam("count")}
         </Text>
       </View>
     );
@@ -102,7 +103,7 @@ Let's modify the `StaticCounter` from the previous example as follows:
 ```js
 class StaticCounter extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('count'),
+    title: navigation.getParam("count")
   });
 
   componentDidMount() {
@@ -121,7 +122,7 @@ class StaticCounter extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.paragraph}>
-          {this.props.navigation.getParam('count')}
+          {this.props.navigation.getParam("count")}
         </Text>
       </View>
     );

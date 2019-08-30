@@ -9,18 +9,19 @@ By now you're probably tired of seeing a blank grey bar on the top of your scree
 ## Setting the header title
 
 A screen component can have a static property called `navigationOptions` which is either an object or a function that returns an object that contains various configuration options. The one we use for the header title is `title`, as demonstrated in the following example.
-#TODO 
+#TODO
+
 ```js
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Home',
+    title: "Home"
   };
 
   /* render function, etc */
 }
 class DetailsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Details',
+    title: "Details"
   };
 
   /* render function, etc */
@@ -41,13 +42,14 @@ In order to use params in the title, we need to make `navigationOptions` a funct
 class DetailsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam('otherParam', 'A Nested Details Screen'),
+      title: navigation.getParam("otherParam", "A Nested Details Screen")
     };
   };
 
   /* render function, etc */
 }
 ```
+
 <a href="https://snack.expo.io/@react-navigation/using-params-in-title-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 The argument that is passed in to the `navigationOptions` function is an object with the following properties:
@@ -63,11 +65,11 @@ We only needed the `navigation` prop in the above example but you may in some ca
 It's often necessary to update the `navigationOptions` configuration for the active screen from the mounted screen component itself. We can do this using `this.props.navigation.setParams`
 
 ```js
-  /* Inside of render() */
-  <Button
-    title="Update the title"
-    onPress={() => this.props.navigation.setParams({otherParam: 'Updated!'})}
-  />
+/* Inside of render() */
+<Button
+  title="Update the title"
+  onPress={() => this.props.navigation.setParams({ otherParam: "Updated!" })}
+/>
 ```
 
 <a href="https://snack.expo.io/@react-navigation/updating-navigationoptions-with-setparams-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
@@ -83,29 +85,32 @@ There are three key properties to use when customizing the style of your header:
 ```js
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Home',
+    title: "Home",
     headerStyle: {
-      backgroundColor: '#f4511e',
+      backgroundColor: "#f4511e"
     },
-    headerTintColor: '#fff',
+    headerTintColor: "#fff",
     headerTitleStyle: {
-      fontWeight: 'bold',
-    },
+      fontWeight: "bold"
+    }
   };
 
   /* render function, etc */
 }
 ```
+
 <a href="https://snack.expo.io/@react-navigation/setting-header-styles-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 There are a couple of things to notice here:
+
 1. On iOS, the status bar text and icons are black, and this doesn't look great over a dark-colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.html).
 2. The configuration we set only applies to the home screen; when we navigate to the details screen, the default styles are back. We'll look at how to share `navigationOptions` between screens now.
 
 ## Sharing common `navigationOptions` across screens
 
 It is common to want to configure the header in a similar way across many screens. For example, your company brand color might be red and so you want the header background color to be red and tint color to be white. Conveniently, these are the colors we're using in our running example, and you'll notice that when you navigate to the `DetailsScreen` the colors go back to the defaults. Wouldn't it be awful if we had to copy the `navigationOptions` header style properties from `HomeScreen` to `DetailsScreen`, and for every single screen component we use in our app? Thankfully, we do not. We can instead move the configuration up to the stack navigator under the property `defaultNavigationOptions`.
-#TODO 
+#TODO
+
 ```js
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -117,7 +122,7 @@ class HomeScreen extends React.Component {
 }
 
 /* other code... */
-#TODO 
+#TODO
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
@@ -138,11 +143,12 @@ const AppNavigator = createStackNavigator(
   }
 );
 ```
+
 <a href="https://snack.expo.io/@react-navigation/sharing-header-styles-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 Now, any screen that belongs to the `RootStack` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
 
-> Note: In v2 and below, the property you would want to use to do this is `navigationOptions`. In v3 we've renamed this to `defaultNavigationOptions`. 
+> Note: In v2 and below, the property you would want to use to do this is `navigationOptions`. In v3 we've renamed this to `defaultNavigationOptions`.
 
 The property `navigationOptions` can be used to configure the navigator itself:
 
@@ -150,23 +156,24 @@ The property `navigationOptions` can be used to configure the navigator itself:
 const Home = createStackNavigator(
   {
     Feed: ExampleScreen,
-    Profile: ExampleScreen,
-  }, {
+    Profile: ExampleScreen
+  },
+  {
     defaultNavigationOptions: {
-      headerTintColor: '#fff',
+      headerTintColor: "#fff",
       headerStyle: {
-        backgroundColor: '#000',
-      },
+        backgroundColor: "#000"
+      }
     },
     navigationOptions: {
-      tabBarLabel: 'Home!',
-    },
+      tabBarLabel: "Home!"
+    }
   }
 );
 
 const Tabs = createBottomTabNavigator({ Home });
-
 ```
+
 <a href="https://snack.expo.io/@notbrent/belligerent-pizza" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 ## Overriding shared `navigationOptions`
@@ -179,32 +186,33 @@ class DetailsScreen extends React.Component {
     const { params } = navigation.state;
 
     return {
-      title: params ? params.otherParam : 'A Nested Details Screen',
+      title: params ? params.otherParam : "A Nested Details Screen",
       /* These values are used instead of the shared configuration! */
       headerStyle: {
-        backgroundColor: navigationOptions.headerTintColor,
+        backgroundColor: navigationOptions.headerTintColor
       },
-      headerTintColor: navigationOptions.headerStyle.backgroundColor,
+      headerTintColor: navigationOptions.headerStyle.backgroundColor
     };
   };
 
   /* render function, etc */
 }
 ```
+
 <a href="https://snack.expo.io/@react-navigation/overriding-shared-header-styles-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 ## Replacing the title with a custom component
 
 Sometimes you need more control than just changing the text and styles of your title -- for example, you may want to render an image in place of the title, or make the title into a button. In these cases you can completely override the component used for the title and provide your own.
 
-#TODO 
+#TODO
 
 ```js
 class LogoTitle extends React.Component {
   render() {
     return (
       <Image
-        source={require('./spiro.png')}
+        source={require("./spiro.png")}
         style={{ width: 30, height: 30 }}
       />
     );
@@ -214,12 +222,13 @@ class LogoTitle extends React.Component {
 class HomeScreen extends React.Component {
   static navigationOptions = {
     // headerTitle instead of title
-    headerTitle: <LogoTitle />,
+    headerTitle: <LogoTitle />
   };
 
   /* render function, etc */
 }
 ```
+
 <a href="https://snack.expo.io/@react-navigation/custom-header-title-component-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 > You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to a stack navigator, the `headerTitle` defaults to a `Text` component that displays the `title`.

@@ -39,12 +39,12 @@ function App() {
         <Stack.Screen
           name="home"
           component={HomeScreen}
-        />  
+        />
       </<Stack.Navigator>
     </NavigationContainer>
-  ) 
+  )
 }
-  
+
 
 export default App;
 ```

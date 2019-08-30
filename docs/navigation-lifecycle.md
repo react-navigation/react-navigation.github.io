@@ -8,7 +8,7 @@ In the previous section, we worked with a stack navigator that has two screens (
 
 An important question in this context is: what happens with `Home` when we navigate away from it, or when we come back to it? How does a route find out that a user is leaving it or coming back to it?
 
-Coming to react-navigation from the web, you may assume that when user navigates from route A to route B, A will unmount (its `componentWillUnmount` is called) and A will mount again when user comes back to it. While these React lifecycle methods are still valid and are used in react-navigation, their usage differs from the web. This is driven by more complex needs of mobile navigation. 
+Coming to react-navigation from the web, you may assume that when user navigates from route A to route B, A will unmount (its `componentWillUnmount` is called) and A will mount again when user comes back to it. While these React lifecycle methods are still valid and are used in react-navigation, their usage differs from the web. This is driven by more complex needs of mobile navigation.
 
 ## Example scenario
 
@@ -18,25 +18,23 @@ When going back from B to A, `componentWillUnmount` of B is called, but `compone
 
 Similar results can be observed (in combination) with other navigators as well. Consider a tab navigator with two tabs, where each tab is a stack navigator:
 
-#TODO 
+#TODO
 
 ```jsx
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
-  Details: DetailsScreen,
+  Details: DetailsScreen
 });
 
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen,
-  Profile: ProfileScreen,
+  Profile: ProfileScreen
 });
 
-const TabNavigator = createBottomTabNavigator(
-  {
-    Home: HomeStack,
-    Settings: SettingsStack,
-  }
-);
+const TabNavigator = createBottomTabNavigator({
+  Home: HomeStack,
+  Settings: SettingsStack
+});
 ```
 
 We start on the `HomeScreen` and navigate to `DetailsScreen`. Then we use the tab bar to switch to the `SettingsScreen` and navigate to `ProfileScreen`. After this sequence of operations is done, all 4 of the screens are mounted! If you use the tab bar to switch back to the `HomeStack`, you'll notice you'll be presented with the `DetailsScreen` - the navigation state of the `HomeStack` has been preserved!

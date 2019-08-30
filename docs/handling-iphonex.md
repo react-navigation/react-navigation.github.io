@@ -21,7 +21,8 @@ It's tempting to solve (a) by wrapping your entire app in a container with paddi
 However, if you're overriding the default navigation bar, it's important to ensure your UI doesn't interfere with either of those hardware elements.
 
 For example, if I render nothing for the `header` or `tabBarComponent`, nothing renders
-#TODO 
+#TODO
+
 ```jsx
 const Tabs = createBottomTabNavigator({
   ...
@@ -41,7 +42,7 @@ export default createStackNavigator({
 To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-navigation`. Recall that `SafeAreaView` should not wrap entire navigators, just the screen components or any content in them.
 
 ```jsx
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from "react-navigation";
 
 class MyHomeScreen extends Component {
   render() {
@@ -78,7 +79,7 @@ A [Snack](https://snack.expo.io/@react-navigation/react-navigation-docs:-iphonex
 In some cases you might need more control over which paddings are applied. For example, you can remove bottom padding by passing `forceInset` prop to `SafeAreaView`.
 
 ```jsx
-<SafeAreaView style={styles.container} forceInset={{ bottom: 'never' }}>
+<SafeAreaView style={styles.container} forceInset={{ bottom: "never" }}>
   <Text style={styles.paragraph}>This is top text.</Text>
   <Text style={styles.paragraph}>This is bottom text.</Text>
 </SafeAreaView>
@@ -97,14 +98,15 @@ React Native does not currently expose an API to access information about device
 - If the device has a notch, you may want to increase the status bar height known to the SafeAreaView by doing something like this:
 
 ```js
-import { Platform } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
-import DeviceInfo from 'react-native-device-info';
+import { Platform } from "react-native";
+import { SafeAreaView } from "react-navigation";
+import DeviceInfo from "react-native-device-info";
 
-if (Platform.OS === 'android' && DeviceInfo.hasNotch()) {
-  SafeAreaView.setStatusBarHeight(
+if (Platform.OS === "android" && DeviceInfo.hasNotch()) {
+  SafeAreaView
+    .setStatusBarHeight
     /* Some value for status bar height + notch height */
-  );
+    ();
 }
 ```
 

@@ -14,12 +14,10 @@ By default expo already included `react-native-screens`, all you need to do is p
 
 ```js
 // Before rendering any navigation stack
-import { useScreens } from 'react-native-screens';
+import { useScreens } from "react-native-screens";
 useScreens();
 ```
 
 ## Setup in normal react-native applications
 
 You will need to follow the installation instruction from [react-native-screens](https://github.com/kmagiera/react-native-screens) first. After that, you can import the library like mentioned above and enjoy the optimization.
-
-

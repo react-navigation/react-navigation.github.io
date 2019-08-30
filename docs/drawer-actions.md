@@ -7,15 +7,17 @@ sidebar_label: DrawerActions
 `DrawerActions` is an object containing methods for generating actions specific to drawer-based navigators. Its methods expand upon the actions available in [NavigationActions](navigation-actions.html).
 
 The following actions are supported:
-* [openDrawer](#openDrawer) - open the drawer
-* [closeDrawer](#closeDrawer) - close the drawer
-* [toggleDrawer](#toggleDrawer) - toggle the state, ie. switche from closed to open and vice versa
+
+- [openDrawer](#openDrawer) - open the drawer
+- [closeDrawer](#closeDrawer) - close the drawer
+- [toggleDrawer](#toggleDrawer) - toggle the state, ie. switche from closed to open and vice versa
 
 ### Usage
-#TODO  rather ok, no?
+
+#TODO rather ok, no?
 
 ```js
-import { DrawerActions } from '@react-navigation/routers';
+import { DrawerActions } from "@react-navigation/routers";
 
-this.props.navigation.dispatch(DrawerActions.toggleDrawer())
+this.props.navigation.dispatch(DrawerActions.toggleDrawer());
 ```

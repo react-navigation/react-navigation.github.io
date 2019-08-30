@@ -63,9 +63,9 @@ Two tools are available to gain access to the theme in any component that descen
 #TODO
 
 ```js
-import * as React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import { useTheme } from 'react-navigation';
+import * as React from "react";
+import { TouchableOpacity, Text } from "react-native";
+import { useTheme } from "react-navigation";
 
 // Black background and white text in light theme, inverted on dark theme
 function MyButton() {
@@ -73,8 +73,9 @@ function MyButton() {
 
   return (
     <TouchableOpacity
-      style={{ backgroundColor: theme === 'light' ? '#000' : '#fff' }}>
-      <Text style={{ color: theme === 'light' ? '#fff' : '#000' }}>
+      style={{ backgroundColor: theme === "light" ? "#000" : "#fff" }}
+    >
+      <Text style={{ color: theme === "light" ? "#fff" : "#000" }}>
         Button!
       </Text>
     </TouchableOpacity>
@@ -102,12 +103,13 @@ function MyButton() {
   );
 }
 ```
+
 #TODO
 
 ```js
-import * as React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import { ThemeContext } from 'react-navigation';
+import * as React from "react";
+import { TouchableOpacity, Text } from "react-native";
+import { ThemeContext } from "react-navigation";
 
 class MyButton extends React.Component {
   static contextType = ThemeContext;
@@ -115,8 +117,9 @@ class MyButton extends React.Component {
   render() {
     return (
       <TouchableOpacity
-        style={{ backgroundColor: theme === 'light' ? '#000' : '#fff' }}>
-        <Text style={{ color: theme === 'light' ? '#fff' : '#000' }}>
+        style={{ backgroundColor: theme === "light" ? "#000" : "#fff" }}
+      >
+        <Text style={{ color: theme === "light" ? "#fff" : "#000" }}>
           Button!
         </Text>
       </TouchableOpacity>
@@ -130,9 +133,9 @@ class MyButton extends React.Component {
 There is a small but perhaps useful list of colors that are used to style navigators according to the theme. This list of colors is exported under `ThemeColors`. See the TypeScript definition for a full list of colors.
 
 ```js
-import * as React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import { ThemeColors, useTheme } from 'react-navigation';
+import * as React from "react";
+import { TouchableOpacity, Text } from "react-native";
+import { ThemeColors, useTheme } from "react-navigation";
 
 function MyButton() {
   let theme = useTheme();
@@ -152,13 +155,13 @@ Several components have defaults that are biased to a specific theme. `Text`, fo
 #TODO
 
 ```js
-import * as React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import { Themed } from 'react-navigation';
+import * as React from "react";
+import { TouchableOpacity, Text } from "react-native";
+import { Themed } from "react-navigation";
 
 function MyButton() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <TouchableOpacity style={{ backgroundColor: colors.bodyContent }}>
         <Themed.Text>Button!</Themed.Text>
       </TouchableOpacity>
@@ -174,20 +177,20 @@ function MyButton() {
 import {
   ThemeColors,
   createAppContainer,
-  createStackNavigator,
-} from 'react-navigation';
+  createStackNavigator
+} from "react-navigation";
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ theme }) => {
     return {
-      title: 'Home',
+      title: "Home",
       headerLeft: (
         <Button
-          color={theme === 'dark' ? 'white' : 'blue'}
+          color={theme === "dark" ? "white" : "blue"}
           title="Press me"
-          onPress={() => alert('success!')}
+          onPress={() => alert("success!")}
         />
-      ),
+      )
     };
   };
 
@@ -209,14 +212,14 @@ let Tabs = createBottomTabNavigator(
   {
     tabBarOptions: {
       activeTintColor: {
-        light: '#000',
-        dark: '#fff',
+        light: "#000",
+        dark: "#fff"
       },
       inactiveTintColor: {
-        light: 'rgba(0,0,0,0.2)',
-        dark: 'rgba(255,255,255,0.2)',
-      },
-    },
+        light: "rgba(0,0,0,0.2)",
+        dark: "rgba(255,255,255,0.2)"
+      }
+    }
   }
 );
 ```
@@ -230,9 +233,9 @@ let Tabs = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: '#000',
-      inactiveTintColor: 'rgba(0,0,0,0.2)',
-    },
+      activeTintColor: "#000",
+      inactiveTintColor: "rgba(0,0,0,0.2)"
+    }
   }
 );
 ```
@@ -246,36 +249,37 @@ Building custom themes into an app with React Navigation is not too much differe
 React's context API allows you to share state from an ancenstor component to any of its descendents without explicitly passing the value through layers and layers of components ("prop drilling"). This is a useful tool in order to build themes because we can define the theme at the root of the app, and then access it from anywhere else and re-render every themed component whenever the theme changes. If you are not familiar with how to use context already, you might want to read the [React documentation](https://reactjs.org/docs/context.html) for it before continuing.
 
 ```jsx
-import * as React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import * as React from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 
 const ThemeContext = React.createContext(null);
 const ThemeConstants = {
   light: {
-    backgroundColor: '#fff',
-    fontColor: '#000',
+    backgroundColor: "#fff",
+    fontColor: "#000"
   },
   dark: {
-    backgroundColor: '#000',
-    fontColor: '#fff',
-  },
+    backgroundColor: "#000",
+    fontColor: "#fff"
+  }
 };
 
 export default class AppContainer extends React.Component {
   state = {
-    theme: 'light',
+    theme: "light"
   };
 
   toggleTheme = () => {
     this.setState(({ theme }) => ({
-      theme: theme === 'light' ? 'dark' : 'light',
+      theme: theme === "light" ? "dark" : "light"
     }));
   };
 
   render() {
     return (
       <ThemeContext.Provider
-        value={{ theme: this.state.theme, toggleTheme: this.toggleTheme }}>
+        value={{ theme: this.state.theme, toggleTheme: this.toggleTheme }}
+      >
         <HomeScreen />
       </ThemeContext.Provider>
     );
@@ -286,7 +290,8 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <ThemedView
-        style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+      >
         <ThemeContext.Consumer>
           {({ toggleTheme }) => (
             <ThemedButton title="Toggle theme" onPress={toggleTheme} />
@@ -323,7 +328,7 @@ class ThemedView extends React.Component {
             {...this.props}
             style={[
               this.props.style,
-              { backgroundColor: ThemeConstants[theme].backgroundColor },
+              { backgroundColor: ThemeConstants[theme].backgroundColor }
             ]}
           />
         )}
@@ -340,23 +345,24 @@ Okay, that's a lot of code. There isn't much going on here aside from passing th
 A regrettable limitation of the current implementation of `navigationOptions` is that we are unable to access React context for use in properties such as `headerStyle` and `headerTintColor`. We can and should use them in properties that access React components, for example in `headerRight` we could provide a component like `ThemedHeaderButton`. To apply the theme to other properties we need to use `screenProps`.
 
 ```jsx
-import { createAppContainer, createStackNavigator } from 'react-navigation';
+import { createAppContainer, createStackNavigator } from "react-navigation";
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ screenProps }) => {
     let currentTheme = ThemeConstants[screenProps.theme];
 
     return {
-      title: 'Home',
+      title: "Home",
       headerTintColor: currentTheme.fontColor,
-      headerStyle: { backgroundColor: currentTheme.backgroundColor },
+      headerStyle: { backgroundColor: currentTheme.backgroundColor }
     };
   };
 
   render() {
     return (
       <ThemedView
-        style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+      >
         <ThemeContext.Consumer>
           {({ toggleTheme }) => (
             <ThemedButton title="Toggle theme" onPress={toggleTheme} />
@@ -372,19 +378,20 @@ const Navigation = createAppContainer(Stack);
 
 export default class AppContainer extends React.Component {
   state = {
-    theme: 'light',
+    theme: "light"
   };
 
   toggleTheme = () => {
     this.setState(({ theme }) => ({
-      theme: theme === 'light' ? 'dark' : 'light',
+      theme: theme === "light" ? "dark" : "light"
     }));
   };
 
   render() {
     return (
       <ThemeContext.Provider
-        value={{ theme: this.state.theme, toggleTheme: this.toggleTheme }}>
+        value={{ theme: this.state.theme, toggleTheme: this.toggleTheme }}
+      >
         <Navigation screenProps={{ theme: this.state.theme }} />
       </ThemeContext.Provider>
     );
@@ -405,22 +412,22 @@ import {
   createAppContainer,
   createStackNavigator,
   createBottomTabNavigator,
-  BottomTabBar,
-} from 'react-navigation';
+  BottomTabBar
+} from "react-navigation";
 
 const ThemeConstants = {
   light: {
-    backgroundColor: '#fff',
-    fontColor: '#000',
-    activeTintColor: 'blue',
-    inactiveTintColor: '#ccc',
+    backgroundColor: "#fff",
+    fontColor: "#000",
+    activeTintColor: "blue",
+    inactiveTintColor: "#ccc"
   },
   dark: {
-    backgroundColor: '#000',
-    fontColor: '#fff',
-    activeTintColor: '#fff',
-    inactiveTintColor: '#888',
-  },
+    backgroundColor: "#000",
+    fontColor: "#fff",
+    activeTintColor: "#fff",
+    inactiveTintColor: "#888"
+  }
 };
 
 // Notice how we override the `activeTintColor`, `inactiveTintColor` and
@@ -435,7 +442,7 @@ class ThemedBottomTabBar extends React.Component {
             activeTintColor={ThemeConstants[theme].activeTintColor}
             inactiveTintColor={ThemeConstants[theme].inactiveTintColor}
             style={{
-              backgroundColor: ThemeConstants[theme].backgroundColor,
+              backgroundColor: ThemeConstants[theme].backgroundColor
             }}
           />
         )}

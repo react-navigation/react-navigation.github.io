@@ -3,24 +3,26 @@ id: drawer-based-navigation
 title: Drawer navigation
 sidebar_label: Drawer navigation
 ---
-This guide covers [createDrawerNavigator](drawer-navigator.html). 
-#TODO 
+
+This guide covers [createDrawerNavigator](drawer-navigator.html).
+#TODO
+
 ```js
 class MyHomeScreen extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Home',
+    drawerLabel: "Home",
     drawerIcon: ({ tintColor }) => (
       <Image
-        source={require('./chats-icon.png')}
-        style={[styles.icon, {tintColor: tintColor}]}
+        source={require("./chats-icon.png")}
+        style={[styles.icon, { tintColor: tintColor }]}
       />
-    ),
+    )
   };
 
   render() {
     return (
       <Button
-        onPress={() => this.props.navigation.navigate('Notifications')}
+        onPress={() => this.props.navigation.navigate("Notifications")}
         title="Go to notifications"
       />
     );
@@ -29,13 +31,13 @@ class MyHomeScreen extends React.Component {
 
 class MyNotificationsScreen extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Notifications',
+    drawerLabel: "Notifications",
     drawerIcon: ({ tintColor }) => (
       <Image
-        source={require('./notif-icon.png')}
-        style={[styles.icon, {tintColor: tintColor}]}
+        source={require("./notif-icon.png")}
+        style={[styles.icon, { tintColor: tintColor }]}
       />
-    ),
+    )
   };
 
   render() {
@@ -51,17 +53,17 @@ class MyNotificationsScreen extends React.Component {
 const styles = StyleSheet.create({
   icon: {
     width: 24,
-    height: 24,
-  },
+    height: 24
+  }
 });
 
 const MyDrawerNavigator = createDrawerNavigator({
   Home: {
-    screen: MyHomeScreen,
+    screen: MyHomeScreen
   },
   Notifications: {
-    screen: MyNotificationsScreen,
-  },
+    screen: MyNotificationsScreen
+  }
 });
 
 const MyApp = createAppContainer(MyDrawerNavigator);

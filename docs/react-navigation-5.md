@@ -4,14 +4,12 @@ title: React Navigation 5.*
 sidebar_label: React Navigation 5.*
 ---
 
-We decided to make major refactor and rewriting of React Navigation concepts recently. Main difference is to abandon 
-static API in favor of component-based API. 
+We decided to make major refactor and rewriting of React Navigation concepts recently. Main difference is to abandon
+static API in favor of component-based API.
 
 Main motivations for these changes are:
 
 #TODO
-
-
 
 ## Architectural differences
 
@@ -85,8 +83,8 @@ It's also possible to disable bubbling of actions when dispatching them by addin
 ## Basic usage
 
 ```js
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -99,7 +97,7 @@ function App() {
         <Stack.Screen
           name="profile"
           component={Profile}
-          options={{ title: 'John Doe' }}
+          options={{ title: "John Doe" }}
         />
         <Stack.Screen name="home">
           {() => (
@@ -131,7 +129,6 @@ A render callback which doesn't have such limitation and is easier to use for th
 
 The rendered component will receives a `navigation` prop with various helpers and a `route` prop which represents the route being rendered.
 
-
 ## Setting screen options
 
 In React Navigation, screen options can be specified in a static property on the component (`navigationOptions`). This poses few issues:
@@ -147,7 +144,7 @@ function Selection({ navigation }) {
   const [selectedIds, setSelectedIds] = React.useState([]);
 
   navigation.setOptions({
-    title: `${selectedIds.length} items selected`,
+    title: `${selectedIds.length} items selected`
   });
 
   return <SelectionList onSelect={id => setSelectedIds(ids => [...ids, id])} />;
@@ -163,7 +160,7 @@ Screens can add listeners on the `navigation` prop like in React Navigation. By 
 ```js
 function Profile({ navigation }) {
   React.useEffect(() =>
-    navigation.addListener('focus', () => {
+    navigation.addListener("focus", () => {
       // do something
     })
   );
@@ -178,9 +175,9 @@ Navigators can also emit custom events using the `emit` method in the `navigatio
 
 ```js
 navigation.emit({
-  type: 'transitionStart',
+  type: "transitionStart",
   data: { blurring: false },
-  target: route.key,
+  target: route.key
 });
 ```
 
@@ -209,7 +206,7 @@ Sometimes we want to run side-effects when a screen is focused. A side effect ma
 To make this easier, the library exports a `useFocusEffect` hook:
 
 ```js
-import { useFocusEffect } from '@react-navigation/core';
+import { useFocusEffect } from "@react-navigation/core";
 
 function Profile({ userId }) {
   const [user, setUser] = React.useState(null);
@@ -238,7 +235,7 @@ The `useFocusEffect` is analogous to React's `useEffect` hook. The only differen
 We might want to render different content based on the current focus state of the screen. The library exports a `useIsFocused` hook to make this easier:
 
 ```js
-import { useIsFocused } from '@react-navigation/core';
+import { useIsFocused } from "@react-navigation/core";
 
 // ...
 

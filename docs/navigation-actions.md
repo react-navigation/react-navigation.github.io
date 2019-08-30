@@ -12,10 +12,10 @@ It's important to highlight that dispatching a `CommonAction` doesn't throw any 
 
 The following actions are supported:
 
-* [Navigate](#navigate) - Navigate to another route
-* [Back](#back) - Go back to previous state
-* [Set Params](#setparams) - Set Params for given route
-* [Init](#init) - Used to initialize first state if state is undefined
+- [Navigate](#navigate) - Navigate to another route
+- [Back](#back) - Go back to previous state
+- [Set Params](#setparams) - Set Params for given route
+- [Init](#init) - Used to initialize first state if state is undefined
 
 For actions specific to a StackNavigator, see [StackActions](stack-actions.html).
 For actions specific to a switch-based navigators such as TabNavigator, see [SwitchActions](switch-actions.html).
@@ -26,20 +26,20 @@ The action creator functions define `toString()` to return the action type, whic
 
 The `navigate` action will update the current state with the result of a `navigate` action.
 
-* `routeName` - _String_ - Required - A destination routeName that has been registered somewhere in the app's router
-* `params` - _Object_ - Optional - Params to merge into the destination route
-* `action` - _Object_ - Optional - (advanced) The sub-action to run in the child router, if the screen is a navigator. Any one of the actions described in this doc can be set as a sub-action.
-* `key` - _String_ - Optional - The identifier for the route to navigate to. Navigate back to this route if it already exists
+- `routeName` - _String_ - Required - A destination routeName that has been registered somewhere in the app's router
+- `params` - _Object_ - Optional - Params to merge into the destination route
+- `action` - _Object_ - Optional - (advanced) The sub-action to run in the child router, if the screen is a navigator. Any one of the actions described in this doc can be set as a sub-action.
+- `key` - _String_ - Optional - The identifier for the route to navigate to. Navigate back to this route if it already exists
 
 ```js
-import { CommonActions } from '@react-navigation/core';
+import { CommonActions } from "@react-navigation/core";
 
 const navigateAction = CommonActions.navigate({
-  routeName: 'Profile',
+  routeName: "Profile",
 
   params: {},
 
-  action: CommonActions.navigate({ routeName: 'SubProfileRoute' }),
+  action: CommonActions.navigate({ routeName: "SubProfileRoute" })
 });
 
 this.props.navigation.dispatch(navigateAction);
@@ -49,13 +49,13 @@ this.props.navigation.dispatch(navigateAction);
 
 Go back to previous screen and close current screen. `back` action creator takes in one optional parameter:
 
-* `key` - _string or null_ - optional - If set, navigation will go back from the given key. If null, navigation will go back anywhere.
+- `key` - _string or null_ - optional - If set, navigation will go back from the given key. If null, navigation will go back anywhere.
 
 ```js
-import { CommonActions } from '@react-navigation/core';
+import { CommonActions } from "@react-navigation/core";
 
 const backAction = CommonActions.back({
-  key: 'Profile',
+  key: "Profile"
 });
 this.props.navigation.dispatch(backAction);
 ```
@@ -64,17 +64,17 @@ this.props.navigation.dispatch(backAction);
 
 When dispatching `setParams`, the router will produce a new state that has changed the params of a particular route, as identified by the key
 
-* `params` - _object_ - required - New params to be merged into existing route params
-* `key` - _string_ - required - Route key that should get the new params
+- `params` - _object_ - required - New params to be merged into existing route params
+- `key` - _string_ - required - Route key that should get the new params
 
 #TODO - idk
- 
+
 ```js
-import { CommonActions } from '@react-navigation/core';
+import { CommonActions } from "@react-navigation/core";
 
 const setParamsAction = CommonActions.setParams({
-  params: { title: 'Hello' },
-  key: 'screen-123',
+  params: { title: "Hello" },
+  key: "screen-123"
 });
 this.props.navigation.dispatch(setParamsAction);
 ```

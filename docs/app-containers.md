@@ -6,7 +6,6 @@ sidebar_label: App Containers
 
 Containers are responsible for managing your app state and linking your top-level navigator to the app environment. On Android, the app container uses the Linking API to handle the back button. The container can also be configured to persist your navigation state. On web, you'd use different containers than React Native.
 
-
 A quick example of `NavigationContainer`:
 
 ```
@@ -51,14 +50,9 @@ Prop that accepts initial state of navigation. You rather don't need for majorit
 In case you want to dispatch actions on an app container, you can use a React [`ref`](https://reactjs.org/docs/refs-and-the-dom.html#creating-refs) to call the `dispatch` method on it:
 
 ```js
-  
 function App() {
   const ref = useRef();
   useEffect(() => ref.current.dispatch(CommonActions.goBack()));
-  return (
-    <NavigationContainer
-      ref={ref}
-    />
-  );
+  return <NavigationContainer ref={ref} />;
 }
 ```

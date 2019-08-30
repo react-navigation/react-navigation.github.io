@@ -3,7 +3,8 @@ id: drawer-navigator
 title: createDrawerNavigator
 sidebar_label: createDrawerNavigator
 ---
-#TODO 
+
+#TODO
 
 ```js
 createDrawerNavigator(RouteConfigs, DrawerNavigatorConfig);
@@ -43,11 +44,14 @@ Several options get passed to the underlying router to modify navigation logic:
 The default component for the drawer is scrollable and only contains links for the routes in the RouteConfig. You can easily override the default component to add a header, footer, or other content to the drawer. By default the drawer is scrollable and supports iPhone X safe area. If you customize the content, be sure to wrap the content in a SafeAreaView:
 
 ```js
-import { DrawerItems, SafeAreaView } from 'react-navigation';
+import { DrawerItems, SafeAreaView } from "react-navigation";
 
 const CustomDrawerContentComponent = props => (
   <ScrollView>
-    <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
+    <SafeAreaView
+      style={styles.container}
+      forceInset={{ top: "always", horizontal: "never" }}
+    >
       <DrawerItems {...props} />
     </SafeAreaView>
   </ScrollView>
@@ -55,8 +59,8 @@ const CustomDrawerContentComponent = props => (
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
+    flex: 1
+  }
 });
 ```
 
@@ -66,10 +70,14 @@ const styles = StyleSheet.create({
 const CustomDrawerContentComponent = props => {
   const translateX = props.drawerOpenProgress.interpolate({
     inputRange: [0, 1],
-    outputRange: [-100, 0],
+    outputRange: [-100, 0]
   });
 
-  return <Animated.View style={{ transform: [{ translateX }] }}>{/* ... drawer contents */}</Animated.View>;
+  return (
+    <Animated.View style={{ transform: [{ translateX }] }}>
+      {/* ... drawer contents */}
+    </Animated.View>
+  );
 };
 ```
 

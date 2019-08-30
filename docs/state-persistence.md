@@ -3,6 +3,7 @@ id: state-persistence
 title: State persistence
 sidebar_label: State persistence
 ---
+
 #TODO
 
 You may want to save the user's location in the app, so that they are immediately returned to the same location after the app is restarted.

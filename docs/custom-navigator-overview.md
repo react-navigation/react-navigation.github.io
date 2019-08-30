@@ -23,6 +23,7 @@ The navigators render application screens which are just React components.
 
 To learn how to create screens, read about:
 
-#TODO - not sure? 
+#TODO - not sure?
+
 - [Screen `navigation` prop](navigation-prop.html) to allow the screen to dispatch navigation actions, such as opening another screen
 - Screen `navigationOptions` to customize how the screen gets presented by the navigator (e.g. [header title](stack-navigator.html#navigationoptions-used-by-stacknavigator), tab label)
