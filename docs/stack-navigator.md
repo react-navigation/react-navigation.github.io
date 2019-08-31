@@ -4,96 +4,124 @@ title: createStackNavigator
 sidebar_label: createStackNavigator
 ---
 
-#TODO
-
 Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
 
+To use this navigator, you need to install [`@react-navigation/stack`](https://github.com/navigation-ex/packages/stack):
+
+```sh
+yarn add @react-navigation/core @react-navigation/stack
+```
+
+Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated) and [`react-native-screens`](https://github.com/kmagiera/react-native-screens).
+
+If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
+
+```sh
+expo install react-native-gesture-handler react-native-reanimated react-native-screens
+```
+
+If you are not using Expo, run the following:
+
+```sh
+yarn add react-native-gesture-handler react-native-reanimated react-native-screens
+```
+
+If you are using Expo, you are done. Otherwise, continue to the next steps.
+
+Next, we need to link these libraries. The steps depends on your React Native version:
+
+- **React Native 0.60 and higher**
+
+  On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
+
+  To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
+
+  ```sh
+  cd ios
+  pod install
+  cd ..
+  ```
+
+- **React Native 0.59 and lower**
+
+  If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
+
+  ```sh
+  react-native link react-native-reanimated
+  react-native link react-native-gesture-handler
+  ```
+
+**IMPORTANT:** There are additional steps required for `react-native-gesture-handler` on Android after linking (for all React Native versions). Check the [this guide](https://kmagiera.github.io/react-native-gesture-handler/docs/getting-started.html) to complete the installation.
+
 ## API Definition
 
-```js
-createStackNavigator(RouteConfigs, StackNavigatorConfig);
-```
-
-### RouteConfigs
-
-The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route.
+To use this navigator, import it from `@react-navigation/stack`:
 
 ```js
-createStackNavigator({
-  // For each screen that you can navigate to, create a new entry like this:
-  Profile: {
-    // `ProfileScreen` is a React component that will be the main content of the screen.
-    screen: ProfileScreen,
-    // When `ProfileScreen` is loaded by the StackNavigator, it will be given a `navigation` prop.
+import { createStackNavigator } from '@react-navigation/stack';
 
-    // Optional: When deep linking or using react-navigation in a web app, this path is used:
-    path: "people/:name",
-    // The action and route params are extracted from the path.
+const Stack = createStackNavigator();
 
-    // Optional: Override the `navigationOptions` for the screen
-    navigationOptions: ({ navigation }) => ({
-      title: `${navigation.state.params.name}'s Profile'`
-    })
-  },
-
-  ...MyOtherRoutes
-});
+function App() {
+  return (
+    <Stack.Navigator initialRouteName="home">
+      <Stack.Screen name="home" component={Home} />
+      <Stack.Screen name="notifications" component={Notifications} />
+      <Stack.Screen name="profile" component={Profile} />
+      <Stack.Screen name="settings" component={Settings} />
+    </Stack.Navigator>
+  );
+}
 ```
 
-### StackNavigatorConfig
+### Props
 
-Options for the router:
+The `Stack.Navigator` component accepts following props:
 
-- `initialRouteName` - Sets the default screen of the stack. Must match one of the keys in route configs.
-- `initialRouteParams` - The params for the initial route
-- `initialRouteKey` - Optional identifier of the initial route
-- `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
-- `defaultNavigationOptions` - Default navigation options to use for screens
-- `paths` - A mapping of overrides for the paths set in the route configs
-- `disableKeyboardHandling` - If true, the keyboard will NOT automatically dismiss when navigating to a new screen. Defaults to false. This is ignored in the web platform.
+#### `initialRouteName`
 
-Visual options:
+The name of the route to render on first load of the navigator.
 
-- `mode` - Defines the style for rendering and transitions:
-  - `card` - Use the standard iOS and Android screen transitions. This is the default.
-  - `modal` - Make the screens slide in from the bottom which is a common iOS pattern. Only works on iOS, has no effect on Android.
-- `headerMode` - Specifies how the header should be rendered:
-  - `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
-  - `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
-  - `none` - No header will be rendered.
-- `headerBackTitleVisible` - A reasonable default is supplied for whether the back button title should be visible or not, but if you want to override that you can use `true` or `false` in this option.
-- `headerTransitionPreset` - Specifies how the header should transition from one screen to another when `headerMode: float` is enabled.
-  - `fade-in-place` - Header components cross-fade without moving, similar to the Twitter, Instagram, and Facebook app for iOS. This is the default value.
-  - `uikit` - An approximation of the default behavior for iOS.
-- `headerLayoutPreset` - Specifies how to lay out the header components.
-  - `left` - Anchor the title to the left, near the back button or other left component. This is the default on Android. When used on iOS, the header back title is hidden. Content from the left component will overflow underneath the title, if you need to adjust this you can use `headerLeftContainerStyle` and `headerTitleContainerStyle`. Additionally, this alignment is incompatible with `headerTransitionPreset: 'uikit'`.
-  - `center` - Center the title, this is the default on iOS.
-- `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
-- `cardShadowEnabled` - Use this prop to have visible shadows during transitions. Defaults to `true`
-- `cardOverlayEnabled` - Use this prop to have visible stack card overlays during transitions. Defaults to `false`.
-- `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js)). Provided function will be passed the following arguments:
-  - `transitionProps` - Transition props for the new screen.
-  - `prevTransitionProps` - Transitions props for the old screen.
-  - `isModal` - Boolean specifying if screen is modal.
-- `onTransitionStart` - Function to be invoked when the card transition animation is about to start.
-- `onTransitionEnd` - Function to be invoked once the card transition animation completes.
-- `transparentCard` - _Experimental_ - Prop to keep all cards in the stack visible and add a transparent background instead of a white one. This is useful to implement things like modal dialogs where the previous scene should still be visible underneath the current one.
+#### `screenOptions`
 
-### `navigationOptions` for screens inside of the navigator
+Default options to use for the screens in the navigator.
+
+#### `keyboardHandlingEnabled`
+
+If `false`, the on screen keyboard will NOT automatically dismiss when navigating to a new screen. Defaults to `true`.
+
+#### `mode`
+
+Defines the style for rendering and transitions:
+
+- `card` - Use the standard iOS and Android screen transitions. This is the default.
+- `modal` - Make the screens slide in from the bottom which is a common iOS pattern. Only works on iOS, has no effect on Android.
+
+#### `headerMode`
+
+Specifies how the header should be rendered:
+
+- `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
+- `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
+- `none` - No header will be rendered.
+
+### Options for `Stack.Screen`
+
+The `options` prop can be used to configure individual screens inside the navigator. Supported options are:
 
 #### `title`
 
-String that can be used as a fallback for `headerTitle`. Additionally, will be used as a fallback for `tabBarLabel` (if nested in a TabNavigator) or `drawerLabel` (if nested in a DrawerNavigator).
+String that can be used as a fallback for `headerTitle`.
 
 #### `header`
 
-React Element or a function that given `HeaderProps` returns a React Element, to display as a header. Setting to `null` hides header.
+Function that given `HeaderProps` returns a React Element, to display as a header. Setting to `null` hides header.
 
 #### `headerTitle`
 
-String, React Element or React Component used by the header. Defaults to scene `title`. When a component is used, it receives `allowFontScaling`, `style` and `children` props. The title string is passed in `children`.
+String or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is specified, it receives `allowFontScaling`, `onLayout`, `style` and `children` as the arguments. The title string is passed in `children`.
 
 #### `headerTitleAllowFontScaling`
 
@@ -105,68 +133,35 @@ Whether back button title font should scale to respect Text Size accessibility s
 
 #### `headerBackImage`
 
-React Element or Component to display custom image in header's back button. When a component is used, it receives a number of props when rendered (`tintColor`, `title`). Defaults to Image component with `react-navigation/views/assets/back-icon.png` back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
+Function which returns a React Element to display custom image in header's back button. When a function is used, it receives the `tintColor` in it's argument object. Defaults to Image component with `react-navigation/views/assets/back-icon.png` back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
 
 #### `headerBackTitle`
 
-Title string used by the back button on iOS, or `null` to disable label. Defaults to the previous scene's `headerTitle`. `headerBackTitle` has to be defined in the origin screen, not in the destination screen. For instance, when you have a transition A to B and you want to disable the `headerBackTitle` on `B`:
+Title string used by the back button on iOS, or `null` to disable label. Defaults to the previous scene's `headerTitle`.
 
-```js
-StackNavigator({
-  A: {
-    screen: AScreen,
-    navigationOptions: () => ({
-      title: `A`,
-      headerBackTitle: null
-    })
-  },
-  B: {
-    screen: BScreen,
-    navigationOptions: () => ({
-      title: `B`
-    })
-  }
-});
-```
+#### `headerBackTitleVisible`
+
+A reasonable default is supplied for whether the back button title should be visible or not, but if you want to override that you can use `true` or `false` in this option.
 
 #### `headerTruncatedBackTitle`
 
-Title string used by the back button when `headerBackTitle` doesn't fit on the screen. `"Back"` by default. `headerTruncatedBackTitle` has to be defined in the origin screen, not in the destination screen. For instance, when you have a transition A to B and you want to truncate the label on `B`:
-
-```js
-StackNavigator({
-  A: {
-    screen: AScreen,
-    navigationOptions: () => ({
-      title: `A`,
-      headerBackTitle: "A much too long text for back button from B to A",
-      headerTruncatedBackTitle: `to A`
-    })
-  },
-  B: {
-    screen: BScreen,
-    navigationOptions: () => ({
-      title: `B`
-    })
-  }
-});
-```
+Title string used by the back button when `headerBackTitle` doesn't fit on the screen. `"Back"` by default.
 
 #### `headerRight`
 
-React Element to display on the right side of the header.
+Function which returns a React Element to display on the right side of the header.
 
 #### `headerLeft`
 
-React Element or Component to display on the left side of the header. When a component is used, it receives a number of props when rendered (`onPress`, `title`, `titleStyle` and more - check [Header.tsx](https://github.com/react-navigation/react-navigation-stack/blob/master/src/views/Header/Header.tsx) for the complete list).
+Function which returns a React Element to display on the left side of the header. When a function is used, it receives a number of arguments when rendered (`onPress`, `label`, `labelStyle` and more - check [types.tsx](https://github.com/react-navigation/stack/blob/master/src/types.tsx) for the complete list).
 
 #### `headerStyle`
 
-Style object for the header
+Style object for the header. You can specify a custom background color here, for example.
 
-#### `headerForceInset`
+#### `headerStatusBarHeight`
 
-Allows to pass `forceInset` object to internal SafeAreaView used in the header.
+Allows to pass a custom status bar height to set as the top padding in the header.
 
 #### `headerTitleStyle`
 
@@ -200,19 +195,43 @@ Color for material ripple (Android >= 5.0 only)
 
 #### `headerTransparent`
 
-Defaults to `false`. If `true`, the header will not have a background unless you explicitly provide it with `headerStyle` or `headerBackground`.
+Defaults to `false`. If `true`, the header will not have a background unless you explicitly provide it with `headerBackground`. The header will also float over the screen so that it overlaps the content underneath.
+
+This is useful if you want to render a semi-transparent header or a blurred background.
+
+Note that if you don't want your content to appear under the header, you need to manually add a top margin to your content. React Navigation won't do it automatically.
 
 #### `headerBackground`
 
-Use this with `headerTransparent` to provide a component to render in the background of the header. You can use this with a blur view, for example, to create a translucent header.
+Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
 
-#### `headerBackgroundTransitionPreset`
+You can use this with `headerTransparent` to render a blur view, for example, to create a translucent header.
 
-One of `toggle` | `fade` | `translate`; lets you choose how to transition your custom `headerBackground` components between screens.
+#### `cardShadowEnabled`
 
-#### `gesturesEnabled`
+Use this prop to have visible shadows during transitions. Defaults to `true`.
 
-Whether you can use gestures to dismiss this screen. Defaults to true on iOS, false on Android.
+#### `cardOverlayEnabled`
+
+Use this prop to have a semi-transparent dark overlay visible under the card during transitions. Defaults to `true` on Android and `false` on iOS.
+
+#### `cardTransparent`
+
+Use this prop to use a transparent background for the card instead of a white one. This is useful to implement things like modal dialogs where the previous scene should still be visible underneath the current one. Defaults to `false`.
+
+If you use [`react-native-screens`](https://github.com/kmagiera/react-native-screens), you should also specify `mode: 'modal'` in the stack view config so previous screens aren't detached.
+
+#### `cardStyle`
+
+Style object for the card in stack. You can provide a custom background color to use instead of the default background here.
+
+#### `animationEnabled`
+
+Whether transition animation should be enabled the screen. If you set it to `false`, the screen won't animate when pushing or popping. Defaults to `true`.
+
+#### `gestureEnabled`
+
+Whether you can use gestures to dismiss this screen. Defaults to `true` on iOS, `false` on Android.
 
 #### `gestureResponseDistance`
 
@@ -223,114 +242,243 @@ Object to override the distance of touch start from the edge of the screen to re
 
 #### `gestureDirection`
 
-String to override the direction for dismiss gesture. `default` for normal behaviour or `inverted` for right-to-left swipes.
+Direction of the gesture. Refer the [Animations section](#animations) for details.
 
-#### `params`
+#### `transitionSpec`
 
-You can provide default params inside route definitions:
+Configuration object for the screen transition. Refer the [Animations section](#animations) for details.
+
+#### `cardStyleInterpolator`
+
+Interpolated styles for various parts of the card. Refer the [Animations section](#animations) for details.
+
+#### `headerStyleInterpolator`
+
+Interpolated styles for various parts of the header. Refer the [Animations section](#animations) for details.
+
+### Events
+
+The navigator can emit events on certain actions. Supported events are:
+
+#### `transitionStart`
+
+This event is fired when the transition animation starts for the current screen.
+
+#### `transitionEnd`
+
+This event is fired when the transition animation ends for the current screen.
+
+## Example
 
 ```js
-const Store = createStackNavigator({
-  Playstation: { screen: ProductScreen, params: { product: "Playstation" } },
-  Xbox: { screen: ProductScreen, params: { product: "Xbox" } }
-});
+import { createStackNavigator } from '@react-navigation/stack';
+import { MaterialCommunityIcons } from 'react-native-vector-icons';
+
+const Stack = createStackNavigator();
+
+function App() {
+  return (
+    <Stack.Navigator
+      initialRouteName="home"
+      headerMode="screen"
+      screenOptions={{
+        headerTintColor: 'white',
+        headerStyle: { backgroundColor: 'tomato' },
+      }}
+    >
+      <Stack.Screen
+        name="home"
+        component={Home}
+        options={{
+          title: 'Awesome app',
+        }}
+      />
+      <Stack.Screen
+        name="profile"
+        component={Profile}
+        options={{
+          title: 'My profile',
+        }}
+      />
+      <Stack.Screen
+        name="settings"
+        component={Settings}
+        options={{
+          title: 'Settings',
+          gestureEnabled: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 ```
 
-### Navigator Props
+## Animations
 
-The navigator component created by `createStackNavigator(...)` takes the following props:
+Stack Navigator exposes various options to configure the transition animation when a screen is added or removed. These transition animations can be customize on a per-screen basis by specifying the options in the `options` prop for each screen.
 
-- `screenProps` - Pass down extra options to child screens, for example:
+- `gestureDirection` - The direction of swipe gestures, `horizontal`, `vertical` or `vertical-inverted`.
+- `transitionSpec` - An object which specifies the animation type (`timing` or `spring`) and their options (such as `duration` for `timing`). It takes 2 properties:
+
+  - `open` - Configuration for the transition when adding a screen
+  - `close` - Configuration for the transition when removing a screen.
+
+  Each of the object should specify 2 properties:
+
+  - `animation` - The animation function to use for the animation. Supported values are `timing` and `spring`.
+  - `config` - The configuration object for the timing function. For `timing`, it can be `duration` and `easing`. For `spring`, it can be `stiffness`, `damping`, `mass`, `overshootClamping`, `restDisplacementThreshold` and `restSpeedThreshold`.
+
+  A config which uses spring animation looks like this:
+
+  ```js
+  {
+    animation: 'spring',
+    config: {
+      stiffness: 1000,
+      damping: 500,
+      mass: 3,
+      overshootClamping: true,
+      restDisplacementThreshold: 0.01,
+      restSpeedThreshold: 0.01,
+    },
+  }
+  ```
+
+- `cardStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the card. Is expected to return at least empty object, possibly containing interpolated styles for container, the card itself, overlay and shadow. Supported properties are:
+
+  - `containerStyle` - Style for the container view wrapping the card.
+  - `cardStyle` - Style for the view representing the card.
+  - `overlayStyle` - Style for the view representing the semi-transparent overlay below
+  - `shadowStyle` - Style for the view representing the card shadow.
+
+  The function receives the following properties in it's argument:
+
+  - `index` - The index of the card in the stack.
+  - `progress`- Reanimated nodes representing the progress of the animation:
+    - `current`: Progress value of the current screen.
+    - `next` - Progress value for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
+  - `closing` - Animated node representing whether the card is closing. `1` when closing, `0` if not.
+  - `layouts` - Layout measurements for various items we use for animation.
+    - `screen` - Layout of the whole screen. Contains `height` and `width` properties.
+
+  A config which just fades the card looks like this:
+
+  ```js
+  const forFade = ({ progress, closing }) => ({
+    cardStyle: {
+      opacity: cond(
+        closing,
+        progress.current,
+        interpolate(progress.current, {
+          inputRange: [0, 0.5, 0.9, 1],
+          outputRange: [0, 0.25, 0.7, 1],
+        })
+      ),
+    },
+  });
+  ```
+
+- `headerStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the header. Is expected to return at least empty object, possibly containing interpolated styles for left label and button, right button, title and background. Supported properties are:
+
+  - `leftLabelStyle` - Style for the label of the left button (back button label).
+  - `leftButtonStyle` - Style for the left button (usually the back button).
+  - `rightButtonStyle` - Style for the right button.
+  - `titleStyle` - Style for the header title text.
+  - `backgroundStyle` - Style for the header background.
+
+  The function receives the following properties in it's argument:
+
+  - `progress`- Reanimated nodes representing the progress of the animation:
+    - `current`: Progress value of the current screen (the screen which owns this header).
+    - `next` - Progress value for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
+  - `layouts` - Layout measurements for various items we use for animation. Each layout object contain `height` and `width` properties.
+    - `screen` - Layout of the whole screen.
+    - `title` - Layout of the title element. Might be `undefined` when not rendering a title.
+    - `leftLabel` - Layout of the back button label. Might be `undefined` when not rendering a back button label.
+
+  A config which just fades the elements looks like this:
+
+  ```js
+  const forFade = ({ progress }) => {
+    const opacity = interpolate(
+      add(progress.current, progress.next ? progress.next : 0),
+      {
+        inputRange: [0, 1, 2],
+        outputRange: [0, 1, 0],
+      }
+    );
+
+    return {
+      leftButtonStyle: { opacity },
+      rightButtonStyle: { opacity },
+      titleStyle: { opacity },
+      backgroundStyle: { opacity },
+    };
+  };
+  ```
+
+With these options, it's possible to build custom transition animations for screens. We also export various configs from the library with ready-made animations which you can use:
+
+- `TransitionSpecs`
+
+  - `TransitionIOSSpec` - Exact values from UINavigationController's animation configuration.
+  - `FadeInFromBottomAndroidSpec` - Configuration for activity open animation from Android Nougat.
+  - `FadeOutToBottomAndroidSpec` - Configuration for activity close animation from Android Nougat.
+  - `RevealFromBottomAndroidSpec` - Approximate configuration for activity open animation from Android Pie.
+
+- `CardStyleInterpolators`
+
+  - `forHorizontalIOS` - Standard iOS-style slide in from the right.
+  - `forVerticalIOS` - Standard iOS-style slide in from the bottom (used for modals).
+  - `forModalPresentationIOS` - Standard iOS-style modal animation in iOS 13.
+  - `forFadeFromBottomAndroid` - Standard Android-style fade in from the bottom for Android Oreo.
+  - `forRevealFromBottomAndroid` - Standard Android-style reveal from the bottom for Android Pie.
+
+- `HeaderStyleInterpolators`
+  - `forUIKit` - Standard UIKit style animation for the header where the title fades into the back button label.
+  - `forFade` - Simple fade animation for the header elements.
+  - `forStatic` - Simple translate animation to translate the header along with the sliding screen.
+
+**IMPORTANT**: Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
+
+We export various transition presets (under `TransitionPresets`) which bundle various set of these options together to match certain native animations:
+
+- `SlideFromRightIOS` - Standard iOS navigation transition.
+- `ModalSlideFromBottomIOS` - Standard iOS navigation transition for modals.
+- `ModalPresentationIOS` - Standard iOS modal presentation style (introduced in iOS 13).
+- `FadeFromBottomAndroid` - Standard Android navigation transition when opening or closing an Activity on Android < 9 (Oreo).
+- `RevealFromBottomAndroid` - Standard Android navigation transition when opening or closing an Activity on Android >= 9 (Pie).
+- `DefaultTransition` - Default navigation transition for the current platform.
+- `ModalTransition` - Default modal transition for the current platform.
+
+You can spread these presets in `options` to customize the animation for a screen:
 
 ```js
-const SomeStack = createStackNavigator({
-  // config
-});
-
-<SomeStack
-  screenProps={/* this prop will get passed to the screen components as this.props.screenProps */}
+<Stack.Screen
+  name="name"
+  component={Profile}
+  options={{
+    title: 'Profile',
+    ...TransitionSpecs.ModalSlideFromBottomIOS,
+  }}
 />
 ```
 
-### Examples
+If you want to customize the transition animations for all of the screens in the navigator, you can specify it in `screenOptions` prop for the navigator.
 
-See the examples [SimpleStack.tsx](https://github.com/react-navigation/react-navigation/blob/master/examples/NavigationPlayground/src/SimpleStack.tsx) and [ModalStack.tsx](https://github.com/react-navigation/react-navigation/blob/master/examples/NavigationPlayground/src/ModalStack.tsx) which you can run locally as part of the [NavigationPlayground](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground) app.
-
-You can view these examples directly on your phone by visiting [our expo demo](https://exp.host/@react-navigation/NavigationPlayground).
-
-#### Modal StackNavigator with Custom Screen Transitions
+Example configuration for iOS modal presentation style:
 
 ```js
-const ModalNavigator = createStackNavigator(
-  {
-    Main: { screen: Main },
-    Login: { screen: Login }
-  },
-  {
-    headerMode: "none",
-    mode: "modal",
-    defaultNavigationOptions: {
-      gesturesEnabled: false
-    },
-    transitionConfig: () => ({
-      transitionSpec: {
-        duration: 300,
-        easing: Easing.out(Easing.poly(4)),
-        timing: Animated.timing
-      },
-      screenInterpolator: sceneProps => {
-        const { layout, position, scene } = sceneProps;
-        const { index } = scene;
-
-        const height = layout.initHeight;
-        const translateY = position.interpolate({
-          inputRange: [index - 1, index, index + 1],
-          outputRange: [height, 0, 0]
-        });
-
-        const opacity = position.interpolate({
-          inputRange: [index - 1, index - 0.99, index],
-          outputRange: [0, 1, 1]
-        });
-
-        return { opacity, transform: [{ translateY }] };
-      }
-    })
-  }
-);
-```
-
-Header transitions can also be configured using `headerLeftInterpolator`, `headerTitleInterpolator` and `headerRightInterpolator` fields under `transitionConfig`.
-
-#### Specifying the transition mode for a stack's screens explicitly
-
-We can't set the `StackNavigatorConfig`'s `mode` dynamically. Instead we are going to use a custom `transitionConfig` to render the specfific transition we want - modal or card - on a screen by screen basis.
-
-```js
-import {
-  createStackNavigator,
-  StackViewTransitionConfigs
-} from "react-navigation";
-
-/* The screens you add to IOS_MODAL_ROUTES will have the modal transition.  */
-const IOS_MODAL_ROUTES = ["OptionsScreen"];
-
-let dynamicModalTransition = (transitionProps, prevTransitionProps) => {
-  const isModal = IOS_MODAL_ROUTES.some(
-    screenName =>
-      screenName === transitionProps.scene.route.routeName ||
-      (prevTransitionProps &&
-        screenName === prevTransitionProps.scene.route.routeName)
-  );
-  return StackViewTransitionConfigs.defaultTransitionConfig(
-    transitionProps,
-    prevTransitionProps,
-    isModal
-  );
-};
-
-const HomeStack = createStackNavigator(
-  { DetailScreen, HomeScreen, OptionsScreen },
-  { initialRouteName: "HomeScreen", transitionConfig: dynamicModalTransition }
-);
+<Stack.Navigator
+  initialRouteName="home"
+  screenOptions={{
+    ...TransitionPresets.ModalPresentationIOS,
+    gestureEnabled: true,
+    cardOverlayEnabled: true,
+  }}
+>
+  <Stack.Screen name="home" component={Home} />
+  <Stack.Screen name="profile" component={Profile} />
+  <Stack.Screen name="settings" component={Settings} />
+</Stack.Navigator>
 ```

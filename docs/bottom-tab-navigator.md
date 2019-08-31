@@ -33,19 +33,19 @@ function App() {
 
 > For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/en/tab-based-navigation.html)
 
-## Props
+### Props
 
 The `Tab.Navigator` component accepts following props:
 
-### `initialRouteName`
+#### `initialRouteName`
 
 The name of the route to render on first load of the navigator.
 
-### `screenOptions`
+#### `screenOptions`
 
 Default options to use for the screens in the navigator.
 
-### `backBehavior`
+#### `backBehavior`
 
 Behavior of back button handling.
 
@@ -54,19 +54,19 @@ Behavior of back button handling.
 - `history` to return to last visited tab
 - `none` to not handle back button
 
-### `resetOnBlur`
+#### `resetOnBlur`
 
 Reset the state of any nested navigators when switching away from a screen. Defaults to `false`.
 
-### `lazy`
+#### `lazy`
 
 Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
 
-### `tabBarComponent`
+#### `tabBarComponent`
 
 Override component to use as the tab bar.
 
-### `tabBarOptions`
+#### `tabBarOptions`
 
 An object containing the props for the tab bar component. It can contain the following properties:
 
@@ -84,45 +84,45 @@ An object containing the props for the tab bar component. It can contain the fol
 - `safeAreaInset` - Override the `forceInset` prop for `<SafeAreaView>`. Defaults to `{ bottom: 'always', top: 'never' }`. Available keys are `top | bottom | left | right` provided with the values `'always' | 'never'`.
 - `keyboardHidesTabBar` - Defaults to `false`. If `true` hide the tab bar when keyboard opens.
 
-## Options for `Tab.Screen`
+### Options for `Tab.Screen`
 
 The `options` prop can be used to configure individual screens inside the navigator. Supported options are:
 
-### `title`
+#### `title`
 
 Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`.
 
-### `tabBarVisible`
+#### `tabBarVisible`
 
 `true` or `false` to show or hide the tab bar, if not set then defaults to `true`.
 
-### `tabBarIcon`
+#### `tabBarIcon`
 
 React Element or a function that given `{ focused: boolean, horizontal: boolean, tintColor: string }` returns a React.Node, to display in the tab bar. `horizontal` is `true` when the device is in landscape and `false` when portrait. The icon is re-rendered whenever the device orientation changes.
 
-### `tabBarLabel`
+#### `tabBarLabel`
 
 Title string of a tab displayed in the tab bar or React Element or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
 
-### `tabBarButtonComponent`
+#### `tabBarButtonComponent`
 
 React Component that wraps the icon and label and implements `onPress`. The default is a wrapper around `TouchableWithoutFeedback` that makes it behave the same as other touchables. `tabBarButtonComponent: TouchableOpacity` would use `TouchableOpacity` instead.
 
-### `tabBarAccessibilityLabel`
+#### `tabBarAccessibilityLabel`
 
 Accessibility label for the tab button. This is read by the screen reader when the user taps the tab. It's recommended to set this if you don't have a label for the tab.
 
-### `tabBarTestID`
+#### `tabBarTestID`
 
 ID to locate this tab button in tests.
 
-## Events
+### Events
 
-The navigator can emit events on certain actions. Supported events are:
+The navigator can fire events on certain actions. Supported events are:
 
-### `tabPress`
+#### `tabPress`
 
-This event is emitted when the user presses the tab button in the tab bar. By default a tab press does several things:
+This event is fired when the user presses the tab button for the current screen in the tab bar. By default a tab press does several things:
 
 - If the tab is not focused, tab press will focus that tab
 - If the tab is already focused:
@@ -141,9 +141,9 @@ navigation.addListener('tabPress', e => {
 });
 ```
 
-### `tabLongPress`
+#### `tabLongPress`
 
-This event is emitted when the user presses the tab button in the tab bar for extended period.
+This event is fired when the user presses the tab button for the current screen in the tab bar for an extended period.
 
 ## Example
 
