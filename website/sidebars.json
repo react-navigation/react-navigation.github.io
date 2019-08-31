@@ -69,6 +69,7 @@
       "material-top-tab-navigator",
       "use-navigation",
       "use-focus-effect",
+      "use-is-focused",
       "navigation-context",
       "navigation-events",
       "scrollables"
