@@ -272,7 +272,6 @@ This event is fired when the transition animation ends for the current screen.
 
 ```js
 import { createStackNavigator } from '@react-navigation/stack';
-import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
 const Stack = createStackNavigator();
 
