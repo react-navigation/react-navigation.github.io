@@ -6,133 +6,192 @@ sidebar_label: createBottomTabNavigator
 
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 
-To use this navigator, you need to install `@react-navigation/bottom-tabs` and its peer dependencies:
+To use this navigator, you need to install `@react-navigation/bottom-tabs`:
 
 ```sh
-npm install react-navigation-tabs react-native-reanimated react-native-gesture-handler
+npm install @react-navigation/bottom-tabs
 ```
+
+## API Definition
 
 To use this tab navigator, import it from `@react-navigation/bottom-tabs`:
 
 ```js
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator initialRouteName="feed">
-        <Tab.Screen name="feed" component={Feed} />
-        <Tab.Screen name="article" component={Article} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Tab.Navigator initialRouteName="feed">
+      <Tab.Screen name="feed" component={Feed} />
+      <Tab.Screen name="article" component={Article} />
+    </Tab.Navigator>
   );
 }
 ```
 
 > For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/en/tab-based-navigation.html)
 
-## RouteConfigs
+## Props
 
-The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.html#routeconfigs) from stack navigator.
+The `Tab.Navigator` component accepts following props:
 
-## BottomTabNavigatorConfig
+### `initialRouteName`
 
-- `initialRouteName` - The routeName for the initial tab route when first loading.
-- `screenOptions` - Default options to use for screens
-- `resetOnBlur` - Reset the state of any nested navigators when switching away from a screen. Defaults to `false`.
-- `backBehavior` - `initialRoute` to return to initial tab, `order` to return to previous tab, `history` to return to last visited tab, or `none`.
-- `lazy` - Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
-- `tabBarComponent` - Optional, override component to use as the tab bar.
-- `tabBarOptions` - An object with the following properties:
-  - `activeTintColor` - Label and icon color of the active tab.
-  - `activeBackgroundColor` - Background color of the active tab.
-  - `inactiveTintColor` - Label and icon color of the inactive tab.
-  - `inactiveBackgroundColor` - Background color of the inactive tab.
-  - `showLabel` - Whether to show label for tab, default is true.
-  - `showIcon` - Whether to show icon for tab, default is true.
-  - `style` - Style object for the tab bar.
-  - `labelStyle` - Style object for the tab label.
-  - `tabStyle` - Style object for the tab.
-  - `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
-  - `adaptive` - Should the tab icons and labels alignment change based on screen size? Defaults to `true` for iOS 11. If `false`, tab icons and labels align vertically all the time. When `true`, tab icons and labels align horizontally on tablet.
-  - `safeAreaInset` - Override the `forceInset` prop for `<SafeAreaView>`. Defaults to `{ bottom: 'always', top: 'never' }`. Available keys are `top | bottom | left | right` provided with the values `'always' | 'never'`.
-  - `keyboardHidesTabBar` - Defaults to `false`. If `true` hide the tab bar when keyboard opens.
+The name of the route to render on first load of the navigator.
 
-Example:
+### `screenOptions`
 
-```js
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+Default options to use for the screens in the navigator.
 
-const Tab = createBottomTabNavigator();
-function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="feed"
-        activeTintColor={"#e91e63"}
-        labelStyle={{
-          fontSize: 12
-        }}
-        style={{
-          backgroundColor: "blue"
-        }}
-      >
-        <Tab.Screen name="feed" component={Feed} />
-        <Tab.Screen name="article" component={Article} />
-        <Tab.Screen name="notifications">
-          {props => <Notifications {...props} />}
-        </Tab.Screen>
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-}
-```
+### `backBehavior`
 
-## `options` for `Tab.Screen` inside of the navigator
+Behavior of back button handling.
 
-#### `title`
+- `initialRoute` to return to initial tab
+- `order` to return to previous tab (in the order they are shown in the tab bar)
+- `history` to return to last visited tab
+- `none` to not handle back button
+
+### `resetOnBlur`
+
+Reset the state of any nested navigators when switching away from a screen. Defaults to `false`.
+
+### `lazy`
+
+Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
+
+### `tabBarComponent`
+
+Override component to use as the tab bar.
+
+### `tabBarOptions`
+
+An object containing the props for the tab bar component. It can contain the following properties:
+
+- `activeTintColor` - Label and icon color of the active tab.
+- `activeBackgroundColor` - Background color of the active tab.
+- `inactiveTintColor` - Label and icon color of the inactive tab.
+- `inactiveBackgroundColor` - Background color of the inactive tab.
+- `showLabel` - Whether to show label for tab, default is true.
+- `showIcon` - Whether to show icon for tab, default is true.
+- `style` - Style object for the tab bar.
+- `labelStyle` - Style object for the tab label.
+- `tabStyle` - Style object for the tab.
+- `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
+- `adaptive` - Should the tab icons and labels alignment change based on screen size? Defaults to `true` for iOS 11. If `false`, tab icons and labels align vertically all the time. When `true`, tab icons and labels align horizontally on tablet.
+- `safeAreaInset` - Override the `forceInset` prop for `<SafeAreaView>`. Defaults to `{ bottom: 'always', top: 'never' }`. Available keys are `top | bottom | left | right` provided with the values `'always' | 'never'`.
+- `keyboardHidesTabBar` - Defaults to `false`. If `true` hide the tab bar when keyboard opens.
+
+## Options for `Tab.Screen`
+
+The `options` prop can be used to configure individual screens inside the navigator. Supported options are:
+
+### `title`
 
 Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`.
 
-#### `tabBarVisible`
+### `tabBarVisible`
 
 `true` or `false` to show or hide the tab bar, if not set then defaults to `true`.
 
-#### `tabBarIcon`
+### `tabBarIcon`
 
 React Element or a function that given `{ focused: boolean, horizontal: boolean, tintColor: string }` returns a React.Node, to display in the tab bar. `horizontal` is `true` when the device is in landscape and `false` when portrait. The icon is re-rendered whenever the device orientation changes.
 
-#### `tabBarLabel`
+### `tabBarLabel`
 
 Title string of a tab displayed in the tab bar or React Element or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
 
-#### `tabBarButtonComponent`
+### `tabBarButtonComponent`
 
 React Component that wraps the icon and label and implements `onPress`. The default is a wrapper around `TouchableWithoutFeedback` that makes it behave the same as other touchables. `tabBarButtonComponent: TouchableOpacity` would use `TouchableOpacity` instead.
 
-#### `tabBarAccessibilityLabel`
+### `tabBarAccessibilityLabel`
 
 Accessibility label for the tab button. This is read by the screen reader when the user taps the tab. It's recommended to set this if you don't have a label for the tab.
 
-#### `tabBarTestID`
+### `tabBarTestID`
 
 ID to locate this tab button in tests.
 
-#### `tabBarOnPress`
+## Events
 
-Callback to handle press events; the argument is an object containing:
+The navigator can emit events on certain actions. Supported events are:
 
-- `navigation`: navigation prop for the screen
-- `defaultHandler`: the default handler for tab press
+### `tabPress`
 
-Useful for adding a custom logic before the transition to the next scene (the
-tapped one) starts. When setting tabBarOnPress the defaultHandler needs to be called in order to execute the default action (i.e. switch tab).
+This event is emitted when the user presses the tab button in the tab bar. By default a tab press does several things:
 
-#### `tabBarOnLongPress`
+- If the tab is not focused, tab press will focus that tab
+- If the tab is already focused:
+  - If the screen for the tab renders a scroll view, scroll to top is performed by `useScrollToTop`
+  - If the screen for the tab renders a stack navigator, a `popToTop` action is performed on the stack
 
-Callback to handle long press events; the argument is an object containing:
+To prevent the default behavior, you can call `eventPreventDefault`:
 
-- `navigation`: navigation prop for the screen
-- `defaultHandler`: the default handler for tab press
+```js
+navigation.addListener('tabPress', e => {
+  // Prevent default behavior
+  e.preventDefault();
+
+  // Do something manually
+  // ...
+});
+```
+
+### `tabLongPress`
+
+This event is emitted when the user presses the tab button in the tab bar for extended period.
+
+## Example
+
+```js
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from 'react-native-vector-icons';
+
+const Tab = createBottomTabNavigator();
+
+function App() {
+  return (
+    <Tab.Navigator
+      initialRouteName="feed"
+      activeTintColor="#e91e63"
+      labelStyle={{ fontSize: 12 }}
+      style={{ backgroundColor: 'tomato' }}
+    >
+      <Tab.Screen
+        name="feed"
+        component={Feed}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ tintColor }) => (
+            <MaterialCommunityIcons name="home" color={tintColor} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="notifications"
+        component={Notifications}
+        options={{
+          tabBarLabel: 'Updates',
+          tabBarIcon: ({ tintColor }) => (
+            <MaterialCommunityIcons name="bell" color={tintColor} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="profile"
+        component={Profile}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ tintColor }) => (
+            <MaterialCommunityIcons name="account" color={tintColor} size={24} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
+```

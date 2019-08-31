@@ -64,7 +64,6 @@
       "switch-navigator",
       "animated-switch-navigator",
       "drawer-navigator",
-      "tab-navigator",
       "bottom-tab-navigator",
       "material-bottom-tab-navigator",
       "material-top-tab-navigator",
