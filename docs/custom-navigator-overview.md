@@ -14,7 +14,6 @@ Under the hood, navigators are plain React components.
 
 - [createStackNavigator](stack-navigator.html) - Renders one screen at a time and provides transitions between screens. When a new screen is opened it is placed on top of the stack.
 - [createBottomTabNavigator](bottom-tab-navigator.html) - Renders a tab bar that lets the user switch between several screens.
-- [createSwitchNavigator](switch-navigator.html) - Switch between one screen and another with no UI on top of it, unmount screens when they become inactive.
 - [createDrawerNavigator](drawer-navigator.html) - Provides a drawer that slides in from the left of the screen.
 
 ## Rendering screens with Navigators
