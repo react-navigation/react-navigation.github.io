@@ -23,8 +23,8 @@ This approach requires that you rebuild the navigation views for your app (at le
 To set up a navigator in a React app, [(such as one created with create-react-app)](https://github.com/react-navigation/example-web):
 
 ```js
-import { createSwitchNavigator } from "@react-navigation/core";
-import { createBrowserApp } from "@react-navigation/web";
+import { createSwitchNavigator } from '@react-navigation/core';
+import { createBrowserApp } from '@react-navigation/web';
 
 const MyNavigator = createSwitchNavigator(routes);
 
@@ -44,7 +44,7 @@ When the app is running, the default browser behavior will be blocked and a navi
 To render a link to the "Profile" route:
 
 ```js
-<Link toRoute="Profile" params={{ name: "jamie" }}>
+<Link toRoute="Profile" params={{ name: 'jamie' }}>
   Jamie's Profile
 </Link>
 ```
@@ -58,7 +58,7 @@ You can alternatively provide an `action` prop to the `Link`, to specify the exa
 You can use the `handleServerRequest` function to get the top-level navigation prop for your app, as well as the current title for this route.
 
 ```js
-expressApp.get("/*", (req, res) => {
+expressApp.get('/*', (req, res) => {
   const { path, query } = req;
 
   const { navigation, title, options } = handleServerRequest(

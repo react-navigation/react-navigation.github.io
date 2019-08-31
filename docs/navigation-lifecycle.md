@@ -23,17 +23,17 @@ Similar results can be observed (in combination) with other navigators as well. 
 ```jsx
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
-  Details: DetailsScreen
+  Details: DetailsScreen,
 });
 
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen,
-  Profile: ProfileScreen
+  Profile: ProfileScreen,
 });
 
 const TabNavigator = createBottomTabNavigator({
   Home: HomeStack,
-  Settings: SettingsStack
+  Settings: SettingsStack,
 });
 ```
 

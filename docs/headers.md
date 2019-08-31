@@ -14,14 +14,14 @@ A screen component can have a static property called `navigationOptions` which i
 ```js
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: "Home"
+    title: 'Home',
   };
 
   /* render function, etc */
 }
 class DetailsScreen extends React.Component {
   static navigationOptions = {
-    title: "Details"
+    title: 'Details',
   };
 
   /* render function, etc */
@@ -42,7 +42,7 @@ In order to use params in the title, we need to make `navigationOptions` a funct
 class DetailsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam("otherParam", "A Nested Details Screen")
+      title: navigation.getParam('otherParam', 'A Nested Details Screen'),
     };
   };
 
@@ -68,7 +68,7 @@ It's often necessary to update the `navigationOptions` configuration for the act
 /* Inside of render() */
 <Button
   title="Update the title"
-  onPress={() => this.props.navigation.setParams({ otherParam: "Updated!" })}
+  onPress={() => this.props.navigation.setParams({ otherParam: 'Updated!' })}
 />
 ```
 
@@ -85,14 +85,14 @@ There are three key properties to use when customizing the style of your header:
 ```js
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: "Home",
+    title: 'Home',
     headerStyle: {
-      backgroundColor: "#f4511e"
+      backgroundColor: '#f4511e',
     },
-    headerTintColor: "#fff",
+    headerTintColor: '#fff',
     headerTitleStyle: {
-      fontWeight: "bold"
-    }
+      fontWeight: 'bold',
+    },
   };
 
   /* render function, etc */
@@ -156,18 +156,18 @@ The property `navigationOptions` can be used to configure the navigator itself:
 const Home = createStackNavigator(
   {
     Feed: ExampleScreen,
-    Profile: ExampleScreen
+    Profile: ExampleScreen,
   },
   {
     defaultNavigationOptions: {
-      headerTintColor: "#fff",
+      headerTintColor: '#fff',
       headerStyle: {
-        backgroundColor: "#000"
-      }
+        backgroundColor: '#000',
+      },
     },
     navigationOptions: {
-      tabBarLabel: "Home!"
-    }
+      tabBarLabel: 'Home!',
+    },
   }
 );
 
@@ -186,12 +186,12 @@ class DetailsScreen extends React.Component {
     const { params } = navigation.state;
 
     return {
-      title: params ? params.otherParam : "A Nested Details Screen",
+      title: params ? params.otherParam : 'A Nested Details Screen',
       /* These values are used instead of the shared configuration! */
       headerStyle: {
-        backgroundColor: navigationOptions.headerTintColor
+        backgroundColor: navigationOptions.headerTintColor,
       },
-      headerTintColor: navigationOptions.headerStyle.backgroundColor
+      headerTintColor: navigationOptions.headerStyle.backgroundColor,
     };
   };
 
@@ -212,7 +212,7 @@ class LogoTitle extends React.Component {
   render() {
     return (
       <Image
-        source={require("./spiro.png")}
+        source={require('./spiro.png')}
         style={{ width: 30, height: 30 }}
       />
     );
@@ -222,7 +222,7 @@ class LogoTitle extends React.Component {
 class HomeScreen extends React.Component {
   static navigationOptions = {
     // headerTitle instead of title
-    headerTitle: <LogoTitle />
+    headerTitle: <LogoTitle />,
   };
 
   /* render function, etc */

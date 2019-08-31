@@ -15,13 +15,13 @@ This is a simple task when using a stack or drawer. You can simply render the `S
 class Screen1 extends React.Component {
   render() {
     return (
-      <SafeAreaView style={[styles.container, { backgroundColor: "#6a51ae" }]}>
+      <SafeAreaView style={[styles.container, { backgroundColor: '#6a51ae' }]}>
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
-        <Text style={[styles.paragraph, { color: "#fff" }]}>Light Screen</Text>
+        <Text style={[styles.paragraph, { color: '#fff' }]}>Light Screen</Text>
         <Button
           title="Next screen"
-          onPress={() => this.props.navigation.navigate("Screen2")}
-          color={isAndroid ? "blue" : "#fff"}
+          onPress={() => this.props.navigation.navigate('Screen2')}
+          color={isAndroid ? 'blue' : '#fff'}
         />
       </SafeAreaView>
     );
@@ -31,12 +31,12 @@ class Screen1 extends React.Component {
 class Screen2 extends React.Component {
   render() {
     return (
-      <SafeAreaView style={[styles.container, { backgroundColor: "#ecf0f1" }]}>
+      <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
         <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
         <Text style={styles.paragraph}>Dark Screen</Text>
         <Button
           title="Next screen"
-          onPress={() => this.props.navigation.navigate("Screen1")}
+          onPress={() => this.props.navigation.navigate('Screen1')}
         />
       </SafeAreaView>
     );
@@ -48,14 +48,14 @@ class Screen2 extends React.Component {
 export default createStackNavigator(
   {
     Screen1: {
-      screen: Screen1
+      screen: Screen1,
     },
     Screen2: {
-      screen: Screen2
-    }
+      screen: Screen2,
+    },
   },
   {
-    headerMode: "none"
+    headerMode: 'none',
   }
 );
 ```
@@ -65,11 +65,11 @@ export default createStackNavigator(
 ```jsx
 export default createDrawerNavigator({
   Screen1: {
-    screen: Screen1
+    screen: Screen1,
   },
   Screen2: {
-    screen: Screen2
-  }
+    screen: Screen2,
+  },
 });
 ```
 
@@ -90,11 +90,11 @@ First, the new `Screen2.js` will no longer use the `StatusBar` component.
 class Screen2 extends React.Component {
   render() {
     return (
-      <SafeAreaView style={[styles.container, { backgroundColor: "#ecf0f1" }]}>
+      <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
         <Text style={styles.paragraph}>Dark Screen</Text>
         <Button
           title="Next screen"
-          onPress={() => this.props.navigation.navigate("Screen1")}
+          onPress={() => this.props.navigation.navigate('Screen1')}
         />
         {/* <Button
           title="Toggle Drawer"

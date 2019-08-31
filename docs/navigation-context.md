@@ -13,8 +13,8 @@ Most of the time, you won't use `NavigationContext` directly, as the provided `w
 #TODO
 
 ```js
-import { useState, useContext, useEffect } from "react";
-import { NavigationContext } from "@react-navigation/core";
+import { useState, useContext, useEffect } from 'react';
+import { NavigationContext } from '@react-navigation/core';
 
 export function useFocusState() {
   const navigation = useContext(NavigationContext);
@@ -25,11 +25,11 @@ export function useFocusState() {
     newState && setFocusState(newState);
   }
   useEffect(() => {
-    const subsA = navigation.addListener("action", handleEvt);
-    const subsWF = navigation.addListener("willFocus", handleEvt);
-    const subsDF = navigation.addListener("didFocus", handleEvt);
-    const subsWB = navigation.addListener("willBlur", handleEvt);
-    const subsDB = navigation.addListener("didBlur", handleEvt);
+    const subsA = navigation.addListener('action', handleEvt);
+    const subsWF = navigation.addListener('willFocus', handleEvt);
+    const subsDF = navigation.addListener('didFocus', handleEvt);
+    const subsWB = navigation.addListener('willBlur', handleEvt);
+    const subsDB = navigation.addListener('didBlur', handleEvt);
     return () => {
       subsA.remove();
       subsWF.remove();

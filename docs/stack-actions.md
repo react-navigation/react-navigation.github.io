@@ -23,12 +23,12 @@ The `reset` action wipes the whole navigation state and replaces it with the res
 - `key` - _string or null_ - optional - If set, the navigator with the given key will reset. If null, the root navigator will reset.
 
 ```js
-import { StackActions } from "@react-navigation/routers";
-import { CommonActions } from "@react-navigation/core";
+import { StackActions } from '@react-navigation/routers';
+import { CommonActions } from '@react-navigation/core';
 
 const resetAction = CommonActions.reset({
   index: 0,
-  actions: [CommonActions.navigate({ routeName: "Profile" })]
+  actions: [CommonActions.navigate({ routeName: 'Profile' })],
 });
 this.props.navigation.dispatch(resetAction);
 ```
@@ -41,15 +41,15 @@ eg: given a basic stack navigation with two routes `Profile` and `Settings`.
 To reset the state to a point where the active screen was `Settings` but have it stacked on top of a `Profile` screen, you would do the following:
 
 ```js
-import { StackActions } from "@react-navigation/routers";
-import { CommonActions } from "@react-navigation/core";
+import { StackActions } from '@react-navigation/routers';
+import { CommonActions } from '@react-navigation/core';
 
 const resetAction = StackActions.reset({
   index: 1,
   actions: [
-    CommonActions.navigate({ routeName: "Profile" }),
-    CommonActions.navigate({ routeName: "Settings" })
-  ]
+    CommonActions.navigate({ routeName: 'Profile' }),
+    CommonActions.navigate({ routeName: 'Settings' }),
+  ],
 });
 this.props.navigation.dispatch(resetAction);
 ```
@@ -74,13 +74,13 @@ The `push` action adds a route on top of the stack and navigates forward to it. 
 - `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator.
 
 ```js
-import { StackActions } from "@react-navigation/routers";
+import { StackActions } from '@react-navigation/routers';
 
 const pushAction = StackActions.push({
-  routeName: "Profile",
+  routeName: 'Profile',
   params: {
-    myUserId: 9
-  }
+    myUserId: 9,
+  },
 });
 
 this.props.navigation.dispatch(pushAction);
@@ -93,10 +93,10 @@ The `pop` action takes you back to a previous screen in the stack. The `n` param
 - `n` - _number_ - The number of screens to pop back by.
 
 ```js
-import { StackActions } from "@react-navigation/routers";
+import { StackActions } from '@react-navigation/routers';
 
 const popAction = StackActions.pop({
-  n: 1
+  n: 1,
 });
 
 this.props.navigation.dispatch(popAction);
@@ -107,7 +107,7 @@ this.props.navigation.dispatch(popAction);
 The `popToTop` action takes you back to the first screen in the stack, dismissing all the others. It's functionally identical to `StackActions.pop({n: currentIndex})`.
 
 ```js
-import { StackActions } from "@react-navigation/routers";
+import { StackActions } from '@react-navigation/routers';
 
 this.props.navigation.dispatch(StackActions.popToTop());
 ```

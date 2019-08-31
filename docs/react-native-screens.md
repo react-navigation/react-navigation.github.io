@@ -14,7 +14,7 @@ By default expo already included `react-native-screens`, all you need to do is p
 
 ```js
 // Before rendering any navigation stack
-import { useScreens } from "react-native-screens";
+import { useScreens } from 'react-native-screens';
 useScreens();
 ```
 

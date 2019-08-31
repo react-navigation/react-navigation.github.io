@@ -17,11 +17,11 @@ class HomeScreen extends React.Component {
     headerTitle: <LogoTitle />,
     headerRight: (
       <Button
-        onPress={() => alert("This is a button!")}
+        onPress={() => alert('This is a button!')}
         title="Info"
         color="#fff"
       />
-    )
+    ),
   };
 }
 ```
@@ -44,11 +44,11 @@ class HomeScreen extends React.Component {
       headerTitle: <LogoTitle />,
       headerRight: (
         <Button
-          onPress={navigation.getParam("increaseCount")}
+          onPress={navigation.getParam('increaseCount')}
           title="+1"
           color="#fff"
         />
-      )
+      ),
     };
   };
 
@@ -57,7 +57,7 @@ class HomeScreen extends React.Component {
   }
 
   state = {
-    count: 0
+    count: 0,
   };
 
   _increaseCount = () => {

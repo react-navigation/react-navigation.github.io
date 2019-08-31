@@ -17,7 +17,7 @@ The following actions are supported:
 #TODO rather ok, no?
 
 ```js
-import { DrawerActions } from "@react-navigation/routers";
+import { DrawerActions } from '@react-navigation/routers';
 
 this.props.navigation.dispatch(DrawerActions.toggleDrawer());
 ```

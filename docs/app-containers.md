@@ -59,7 +59,9 @@ function App() {
       <Button onPress={() => ref.current && ref.current.navigate('Home')}>
         Go home
       </Button>
-      <NavigationNativeContainer ref={ref}>{/* ... */}</NavigationNativeContainer>
+      <NavigationNativeContainer ref={ref}>
+        {/* ... */}
+      </NavigationNativeContainer>
     </View>
   );
 }

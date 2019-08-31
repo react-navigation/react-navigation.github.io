@@ -24,4 +24,4 @@ The navigators render application screens which are just React components.
 To learn how to create screens, read about:
 
 - [Screen `navigation` prop](navigation-prop.html) to allow the screen to dispatch navigation actions, such as opening another screen
- #TODO
+  #TODO

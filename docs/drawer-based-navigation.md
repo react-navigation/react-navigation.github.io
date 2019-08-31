@@ -8,7 +8,7 @@ This guide covers [createDrawerNavigator](drawer-navigator.html).
 
 To use this navigator, you need to install `@react-navigation/drawer` and its peer dependencies:
 
-```sh
+````sh
 npm install react-navigation-tabs react-native-reanimated
 ```	```
 
@@ -53,7 +53,7 @@ exprt default function App() {
   )
 }
 
-```
+````
 
 To open and close drawer, use the following helpers to open and close the drawer:
 
@@ -80,5 +80,8 @@ If you would like to determine if drawer is open or closed, you can do the follo
 
 ```js
 const parent = this.props.navigation.dangerouslyGetParent();
-const isDrawerOpen = parent && parent.dangerouslyGetState() && parent.dangerouslyGetState().isDrawerOpen;
+const isDrawerOpen =
+  parent &&
+  parent.dangerouslyGetState() &&
+  parent.dangerouslyGetState().isDrawerOpen;
 ```

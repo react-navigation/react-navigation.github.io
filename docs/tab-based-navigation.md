@@ -13,15 +13,15 @@ This guide covers [createBottomTabNavigator](bottom-tab-navigator.html). You may
 ## Minimal example of tab-based navigation
 
 ```js
-import React from "react";
-import { Text, View } from "react-native";
-import { createAppContainer } from "react-navigation";
-import { createBottomTabNavigator } from "react-navigation-tabs";
+import React from 'react';
+import { Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 class HomeScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Home!</Text>
       </View>
     );
@@ -31,7 +31,7 @@ class HomeScreen extends React.Component {
 class SettingsScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Settings!</Text>
       </View>
     );
@@ -40,7 +40,7 @@ class SettingsScreen extends React.Component {
 
 const TabNavigator = createBottomTabNavigator({
   Home: HomeScreen,
-  Settings: SettingsScreen
+  Settings: SettingsScreen,
 });
 
 export default createAppContainer(TabNavigator);
@@ -55,14 +55,14 @@ This is similar to how you would customize a stack navigator &mdash; there are s
 ```js
 // You can import Ionicons from @expo/vector-icons if you use Expo or
 // react-native-vector-icons/Ionicons otherwise.
-import Ionicons from "react-native-vector-icons/Ionicons";
-import { createAppContainer } from "react-navigation";
-import { createBottomTabNavigator } from "react-navigation-tabs";
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 export default createBottomTabNavigator(
   {
     Home: HomeScreen,
-    Settings: SettingsScreen
+    Settings: SettingsScreen,
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -70,23 +70,23 @@ export default createBottomTabNavigator(
         const { routeName } = navigation.state;
         let IconComponent = Ionicons;
         let iconName;
-        if (routeName === "Home") {
-          iconName = `ios-information-circle${focused ? "" : "-outline"}`;
+        if (routeName === 'Home') {
+          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
           // Sometimes we want to add badges to some icons.
           // You can check the implementation below.
           IconComponent = HomeIconWithBadge;
-        } else if (routeName === "Settings") {
+        } else if (routeName === 'Settings') {
           iconName = `ios-options`;
         }
 
         // You can return any component that you like here!
         return <IconComponent name={iconName} size={25} color={tintColor} />;
-      }
+      },
     }),
     tabBarOptions: {
-      activeTintColor: "tomato",
-      inactiveTintColor: "gray"
-    }
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray',
+    },
   }
 );
 ```
@@ -115,18 +115,18 @@ export default class IconWithBadge extends React.Component {
             style={{
               // If you're using react-native < 0.57 overflow outside of parent
               // will not work on Android, see https://git.io/fhLJ8
-              position: "absolute",
+              position: 'absolute',
               right: -6,
               top: -3,
-              backgroundColor: "red",
+              backgroundColor: 'red',
               borderRadius: 6,
               width: 12,
               height: 12,
-              justifyContent: "center",
-              alignItems: "center"
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
-            <Text style={{ color: "white", fontSize: 10, fontWeight: "bold" }}>
+            <Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>
               {badgeCount}
             </Text>
           </View>
@@ -152,16 +152,16 @@ export default HomeIconWithBadge;
 Switching from one tab to another has a familiar API &mdash; `this.props.navigation.navigate`.
 
 ```js
-import { Button, Text, View } from "react-native";
+import { Button, Text, View } from 'react-native';
 
 class HomeScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Home!</Text>
         <Button
           title="Go to Settings"
-          onPress={() => this.props.navigation.navigate("Settings")}
+          onPress={() => this.props.navigation.navigate('Settings')}
         />
       </View>
     );
@@ -171,11 +171,11 @@ class HomeScreen extends React.Component {
 class SettingsScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Settings!</Text>
         <Button
           title="Go to Home"
-          onPress={() => this.props.navigation.navigate("Home")}
+          onPress={() => this.props.navigation.navigate('Home')}
         />
       </View>
     );
@@ -190,13 +190,13 @@ class SettingsScreen extends React.Component {
 Usually tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
 
 ```js
-import { createStackNavigator, createAppContainer } from "react-navigation";
-import { createBottomTabNavigator } from "react-navigation-tabs";
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 class DetailsScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Details!</Text>
       </View>
     );
@@ -206,11 +206,11 @@ class DetailsScreen extends React.Component {
 class HomeScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         {/* other code from before here */}
         <Button
           title="Go to Details"
-          onPress={() => this.props.navigation.navigate("Details")}
+          onPress={() => this.props.navigation.navigate('Details')}
         />
       </View>
     );
@@ -220,11 +220,11 @@ class HomeScreen extends React.Component {
 class SettingsScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         {/* other code from before here */}
         <Button
           title="Go to Details"
-          onPress={() => this.props.navigation.navigate("Details")}
+          onPress={() => this.props.navigation.navigate('Details')}
         />
       </View>
     );
@@ -233,19 +233,19 @@ class SettingsScreen extends React.Component {
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
-  Details: DetailsScreen
+  Details: DetailsScreen,
 });
 
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen,
-  Details: DetailsScreen
+  Details: DetailsScreen,
 });
 
 export default createAppContainer(
   createBottomTabNavigator(
     {
       Home: HomeStack,
-      Settings: SettingsStack
+      Settings: SettingsStack,
     },
     {
       /* Other configuration remains unchanged */

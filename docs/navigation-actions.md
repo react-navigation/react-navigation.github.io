@@ -32,14 +32,14 @@ The `navigate` action will update the current state with the result of a `naviga
 - `key` - _String_ - Optional - The identifier for the route to navigate to. Navigate back to this route if it already exists
 
 ```js
-import { CommonActions } from "@react-navigation/core";
+import { CommonActions } from '@react-navigation/core';
 
 const navigateAction = CommonActions.navigate({
-  routeName: "Profile",
+  routeName: 'Profile',
 
   params: {},
 
-  action: CommonActions.navigate({ routeName: "SubProfileRoute" })
+  action: CommonActions.navigate({ routeName: 'SubProfileRoute' }),
 });
 
 this.props.navigation.dispatch(navigateAction);
@@ -52,10 +52,10 @@ Go back to previous screen and close current screen. `back` action creator takes
 - `key` - _string or null_ - optional - If set, navigation will go back from the given key. If null, navigation will go back anywhere.
 
 ```js
-import { CommonActions } from "@react-navigation/core";
+import { CommonActions } from '@react-navigation/core';
 
 const backAction = CommonActions.back({
-  key: "Profile"
+  key: 'Profile',
 });
 this.props.navigation.dispatch(backAction);
 ```
@@ -70,11 +70,11 @@ When dispatching `setParams`, the router will produce a new state that has chang
 #TODO - idk
 
 ```js
-import { CommonActions } from "@react-navigation/core";
+import { CommonActions } from '@react-navigation/core';
 
 const setParamsAction = CommonActions.setParams({
-  params: { title: "Hello" },
-  key: "screen-123"
+  params: { title: 'Hello' },
+  key: 'screen-123',
 });
 this.props.navigation.dispatch(setParamsAction);
 ```

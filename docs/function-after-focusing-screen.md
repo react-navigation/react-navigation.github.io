@@ -26,9 +26,9 @@ For instance, if we are attempting to make an API call on focus to fetch some da
 #TODO - ldt's make it hoop
 
 ```js
-import React, { Component } from "react";
-import { View } from "react-native";
-import { withNavigationFocus } from "react-navigation";
+import React, { Component } from 'react';
+import { View } from 'react-native';
+import { withNavigationFocus } from 'react-navigation';
 
 class TabScreen extends Component {
   componentDidUpdate(prevProps) {
@@ -59,14 +59,14 @@ With this approach, we will only be able to call an action when the screen focus
 ### Example
 
 ```js
-import React, { Component } from "react";
-import { View } from "react-native";
-import { withNavigation } from "react-navigation";
+import React, { Component } from 'react';
+import { View } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 class TabScreen extends Component {
   componentDidMount() {
     const { navigation } = this.props;
-    this.focusListener = navigation.addListener("didFocus", () => {
+    this.focusListener = navigation.addListener('didFocus', () => {
       // The screen is focused
       // Call any action
     });

@@ -40,26 +40,26 @@ To override navigation behavior, you can override the navigation state logic in 
 const MyApp = createStackNavigator(
   {
     Home: { screen: HomeScreen },
-    Profile: { screen: ProfileScreen }
+    Profile: { screen: ProfileScreen },
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: 'Home',
   }
 );
 
 const defaultGetStateForAction = MyApp.router.getStateForAction;
 
 MyApp.router.getStateForAction = (action, state) => {
-  if (state && action.type === "PushTwoProfiles") {
+  if (state && action.type === 'PushTwoProfiles') {
     const routes = [
       ...state.routes,
-      { key: "A", routeName: "Profile", params: { name: action.name1 } },
-      { key: "B", routeName: "Profile", params: { name: action.name2 } }
+      { key: 'A', routeName: 'Profile', params: { name: action.name1 } },
+      { key: 'B', routeName: 'Profile', params: { name: action.name2 } },
     ];
     return {
       ...state,
       routes,
-      index: routes.length - 1
+      index: routes.length - 1,
     };
   }
   return defaultGetStateForAction(action, state);
@@ -71,15 +71,15 @@ MyApp.router.getStateForAction = (action, state) => {
 Sometimes you may want to prevent some navigation activity, depending on your route.
 
 ```js
-import { NavigationActions } from "react-navigation";
+import { NavigationActions } from 'react-navigation';
 
 const MyStackRouter = StackRouter(
   {
     Home: { screen: HomeScreen },
-    Profile: { screen: ProfileScreen }
+    Profile: { screen: ProfileScreen },
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: 'Home',
   }
 );
 
@@ -105,15 +105,15 @@ MyStackRouter.router.getStateForAction = (action, state) => {
 Perhaps your app has a unique URI which the built-in routers cannot handle. You can always extend the router `getActionForPathAndParams`.
 
 ```js
-import { NavigationActions } from "react-navigation";
+import { NavigationActions } from 'react-navigation';
 
 const MyApp = createStackNavigator(
   {
     Home: { screen: HomeScreen },
-    Profile: { screen: ProfileScreen }
+    Profile: { screen: ProfileScreen },
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: 'Home',
   }
 );
 const previousGetActionForPathAndParams =
@@ -121,19 +121,19 @@ const previousGetActionForPathAndParams =
 
 Object.assign(MyApp.router, {
   getActionForPathAndParams(path, params) {
-    if (path === "my/custom/path" && params.magic === "yes") {
+    if (path === 'my/custom/path' && params.magic === 'yes') {
       // returns a profile navigate action for /my/custom/path?magic=yes
       return NavigationActions.navigate({
-        routeName: "Profile",
+        routeName: 'Profile',
         action: NavigationActions.navigate({
           // This child action will get passed to the child router
           // ProfileScreen.router.getStateForAction to get the child
           // navigation state.
-          routeName: "Friends"
-        })
+          routeName: 'Friends',
+        }),
       });
     }
     return previousGetActionForPathAndParams(path, params);
-  }
+  },
 });
 ```

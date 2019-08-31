@@ -26,7 +26,7 @@ To use this tab navigator, import it from `react-navigation-tabs`:
 #TODO
 
 ```js
-import { createMaterialTopTabNavigator } from "react-navigation-tabs";
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 
 createMaterialTopTabNavigator(RouteConfigs, TabNavigatorConfig);
 ```

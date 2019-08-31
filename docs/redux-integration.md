@@ -10,7 +10,7 @@ It is extremely easy to use Redux in an app with React Navigation. It's basicall
 ```js
 let RootStack = createStackNavigator({
   Counter: CounterContainer,
-  StaticCounter: StaticCounterContainer
+  StaticCounter: StaticCounterContainer,
 });
 
 let Navigation = createAppContainer(RootStack);
@@ -49,7 +49,7 @@ let CountContainer = connect(state => ({ value: state.count }))(Count);
 
 class Counter extends React.Component {
   static navigationOptions = {
-    title: <CountContainer />
+    title: <CountContainer />,
   };
 
   /* .. the rest of the code */
@@ -66,8 +66,8 @@ If the value isn't expected to change, you can just pass it from a `connect`ed c
 <Button
   title="Go to static count screen"
   onPress={() =>
-    this.props.navigation.navigate("StaticCounter", {
-      count: this.props.count
+    this.props.navigation.navigate('StaticCounter', {
+      count: this.props.count,
     })
   }
 />
@@ -78,14 +78,14 @@ If the value isn't expected to change, you can just pass it from a `connect`ed c
 ```js
 class StaticCounter extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam("count")
+    title: navigation.getParam('count'),
   });
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.paragraph}>
-          {this.props.navigation.getParam("count")}
+          {this.props.navigation.getParam('count')}
         </Text>
       </View>
     );
@@ -103,7 +103,7 @@ Let's modify the `StaticCounter` from the previous example as follows:
 ```js
 class StaticCounter extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam("count")
+    title: navigation.getParam('count'),
   });
 
   componentDidMount() {
@@ -122,7 +122,7 @@ class StaticCounter extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.paragraph}>
-          {this.props.navigation.getParam("count")}
+          {this.props.navigation.getParam('count')}
         </Text>
       </View>
     );

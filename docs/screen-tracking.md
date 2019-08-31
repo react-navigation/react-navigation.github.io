@@ -11,8 +11,8 @@ This example shows how to do screen tracking and send to Google Analytics. The a
 ## Listening to State Changes
 
 ```js
-import { createAppContainer, createStackNavigator } from "react-navigation";
-import { GoogleAnalyticsTracker } from "react-native-google-analytics-bridge";
+import { createAppContainer, createStackNavigator } from 'react-navigation';
+import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge';
 
 const tracker = new GoogleAnalyticsTracker(GA_TRACKING_ID);
 

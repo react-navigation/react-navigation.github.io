@@ -11,17 +11,12 @@ sidebar_label: useRoute
 ## Example
 
 ```js
-import React from "react";
-import { Text } from "react-native";
-import { useRoute } from "@react-navigation/core";
+import React from 'react';
+import { Text } from 'react-native';
+import { useRoute } from '@react-navigation/core';
 
 export default function MyText() {
   const route = useRoute();
-  return (
-    <Text>
-      { route.params.caption }
-    </Text>
-  );
+  return <Text>{route.params.caption}</Text>;
 }
-
 ```

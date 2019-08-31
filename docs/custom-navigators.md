@@ -102,7 +102,7 @@ To help developers implement custom navigators, the following utilities are prov
 This utility combines a [router](routers.html) and a [navigation view](navigation-views.html) together in a standard way:
 
 ```js
-import { createNavigator } from "react-navigation";
+import { createNavigator } from 'react-navigation';
 
 const AppNavigator = createNavigator(NavigationView, router, navigationConfig);
 ```

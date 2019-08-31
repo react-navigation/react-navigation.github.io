@@ -17,14 +17,14 @@ Lets start by demonstrating the most common navigator, `createStackNavigator`.
 ```js
 // In App.js in a new project
 
-import React from "react";
-import { View, Text } from "react-native";
-import { NavigationNativeContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationNativeContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 function HomeScreen() {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
     </View>
   );
@@ -36,15 +36,11 @@ function App() {
   return (
     <NavigationNativeContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="home"
-          component={HomeScreen}
-        />
+        <Stack.Screen name="home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationNativeContainer>
-  )
+  );
 }
-
 
 export default App;
 ```
@@ -77,7 +73,7 @@ Given that the only route configuration we have for `Home` is the screen compone
 
 ```js
 const AppNavigator = createStackNavigator({
-  Home: HomeScreen
+  Home: HomeScreen,
 });
 ```
 
@@ -92,7 +88,7 @@ The `<AppContainer />` component doesn't accept any props -- all configuration i
 class DetailsScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Details Screen</Text>
       </View>
     );
@@ -102,10 +98,10 @@ class DetailsScreen extends React.Component {
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
-    Details: DetailsScreen
+    Details: DetailsScreen,
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: 'Home',
   }
 );
 

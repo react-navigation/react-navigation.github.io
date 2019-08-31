@@ -20,14 +20,14 @@ A screen component is a component that we use in our route configuration.
 const AppNavigator = createStackNavigator(
   {
     Home: {
-      screen: HomeScreen // <----
+      screen: HomeScreen, // <----
     },
     Details: {
-      screen: DetailsScreen // <----
-    }
+      screen: DetailsScreen, // <----
+    },
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: 'Home',
   }
 );
 ```
@@ -42,11 +42,11 @@ We saw earlier that our screen components are provided with the `navigation` pro
 class HomeScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Home Screen</Text>
         <Button
           title="Go to Details"
-          onPress={() => this.props.navigation.navigate("Details")}
+          onPress={() => this.props.navigation.navigate('Details')}
         />
         <DetailsScreen />
       </View>

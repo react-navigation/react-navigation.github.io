@@ -60,15 +60,17 @@ OR
 
 ```js
 function HomeScree({ navigation: { navigate } }) {
-return (
-  <View>
-    <Text>This is the home screen of the app</Text>
-    <Button
-      onPress={() => navigate("Profile", { names: ["Brent", "Satya", "Michaś"] })}
-      title="Go to Brent's profile"
-    />
-  </View>
-);
+  return (
+    <View>
+      <Text>This is the home screen of the app</Text>
+      <Button
+        onPress={() =>
+          navigate('Profile', { names: ['Brent', 'Satya', 'Michaś'] })
+        }
+        title="Go to Brent's profile"
+      />
+    </View>
+  );
 }
 ```
 
@@ -84,10 +86,7 @@ function HomeScreen({ navigation: { goBack } }) {
     <View>
       <Button onPress={() => goBack()} title="Go back from this HomeScreen" />
       <Button onPress={() => goBack(null)} title="Go back anywhere" />
-      <Button
-        onPress={() => goBack("key-123")}
-        title="Go back from key-123"
-      />
+      <Button onPress={() => goBack('key-123')} title="Go back from key-123" />
     </View>
   );
 }
@@ -112,7 +111,7 @@ navigation.goBack(SCREEN_KEY_B) // will go to screen A FROM screen B
 ```
 
 Alternatively, as _screen A_ is the top of the stack, you can use `navigation.popToTop()`.
-    
+
 ## Navigation events
 
 Screens can add listeners on the `navigation` prop like in React Navigation. By default, `focus` and `blur` events are fired when focused screen changes:
@@ -149,7 +148,6 @@ Screens cannot emit events as there is no `emit` method on a screen's `navigatio
 
 If you don't need to get notified of focus change, but just need to check if the screen is currently focused in a callback, you can use the `navigation.isFocused()` method which returns a boolean. Note that it's not safe to use this in `render`. Only use it in callbacks, event listeners etc.
 
-
 ### `isFocused` - Query the focused state of the screen
 
 Returns `true` if the screen is focused and `false` otherwise.
@@ -160,7 +158,7 @@ let isFocused = this.props.navigation.isFocused();
 
 You probably want to use [withNavigationFocus](with-navigation-focus.html) instead of using this directly, it will pass in an `isFocused` boolean a prop to your component.
 
-```
+````
 
 ### `setParams` - Make changes to route params
 
@@ -177,8 +175,7 @@ function ProfileScreen({ navigation: { setParams } }) {
     );
   }
 }
-```
-
+````
 
 ## Stack Actions
 
@@ -225,7 +222,7 @@ navigation.replace(routeName, params, action);
 Wipe the navigator state and replace it with the result of several actions.
 
 ```js
-navigation.reset([NavigationActions.navigate({ routeName: "Profile" })], 0);
+navigation.reset([NavigationActions.navigate({ routeName: 'Profile' })], 0);
 ```
 
 ### Dismiss
@@ -249,14 +246,14 @@ Note that if you want to dispatch react-navigation actions you should use the ac
 See [Navigation Actions Docs](navigation-actions.html) for a full list of available actions.
 
 ```js
-import { NavigationActions } from "react-navigation";
+import { NavigationActions } from 'react-navigation';
 
 const navigateAction = NavigationActions.navigate({
-  routeName: "Profile",
+  routeName: 'Profile',
   params: {},
 
   // navigate can have a nested navigate action that will be run inside the child router
-  action: NavigationActions.navigate({ name: "SubProfileRoute" })
+  action: NavigationActions.navigate({ name: 'SubProfileRoute' }),
 });
 this.props.navigation.dispatch(navigateAction);
 ```
@@ -270,7 +267,6 @@ Another good use case for this is to find the index of the active route in the p
 Be sure to always check that the call returns a valid value.
 
 <add example>
-
 
 ### `dangerouslyGetState` - get state of navigator
 

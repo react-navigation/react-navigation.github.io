@@ -5,6 +5,7 @@ sidebar_label: Deep linking
 ---
 
 In this guide we will set up our app to handle external URIs. Let's suppose that we want a URI like `mychat://chat/Eric` to open our app and link straight into a chat screen for some user named "Eric".
+
 ### Deep-link integration
 
 To handle incoming links, we need to handle 2 scenarios:
@@ -39,7 +40,10 @@ For example, the path `/rooms/chat?user=jane` will be translated to a state obje
 The `useLinking` hooks makes it easier to handle incoming links:
 
 ```js
-import { NavigationNativeContainer, useLinking } from '@react-navigation/native';
+import {
+  NavigationNativeContainer,
+  useLinking,
+} from '@react-navigation/native';
 
 function App() {
   const ref = React.useRef();
@@ -72,7 +76,7 @@ function App() {
       {/* content */}
     </NavigationNativeContainer>
   );
-};
+}
 ```
 
 The hook also accepts a `getStateFromPath` option where you can provide a custom function to convert the URL to a valid state object for more advanced use cases.
@@ -102,7 +106,7 @@ function App() {
   const ref = React.useRef();
 
   const { getInitialState } = useLinking(ref, {
-    prefixes: [ prefix ],
+    prefixes: [prefix],
   });
 
   const [isReady, setIsReady] = React.useState(false);
@@ -129,7 +133,7 @@ function App() {
       {/* content */}
     </NavigationNativeContainer>
   );
-};
+}
 ```
 
 The reason that is necessary to use `Expo.Linking.makeUrl` is that the scheme will differ depending on whether you're in the client app or in a standalone app.

@@ -11,17 +11,17 @@ English is only one of many languages that people speak around the world (thanks
 We'll need to use some kind of library to store our translations and provide a function that gives us access to them, along with handling fallbacks when we don't have a particular language defined. Localization and internationalization (i18n) are often used interchangably, as in the example below where we get the current `locale` from `expo-localization` and use the `i18n-js` library for managing translations, for no particular reason other than it was available - use whatever you like.
 
 ```jsx
-import * as Localization from "expo-localization"; // or whatever library you want
-import i18n from "i18n-js"; // or whatever library you want
+import * as Localization from 'expo-localization'; // or whatever library you want
+import i18n from 'i18n-js'; // or whatever library you want
 
 const en = {
-  foo: "Foo",
-  bar: "Bar {{someValue}}"
+  foo: 'Foo',
+  bar: 'Bar {{someValue}}',
 };
 
 const fr = {
-  foo: "Fou",
-  bar: "Bár {{someValue}}"
+  foo: 'Fou',
+  bar: 'Bár {{someValue}}',
 };
 
 i18n.fallbacks = true;
@@ -38,7 +38,7 @@ Next let's store our `locale` in the state of our root app component and then th
 ```jsx
 export default class App extends React.Component {
   state = {
-    locale: Localization.locale
+    locale: Localization.locale,
   };
 
   setLocale = locale => {
@@ -55,7 +55,7 @@ export default class App extends React.Component {
         screenProps={{
           t: this.t,
           locale: this.state.locale,
-          setLocale: this.setLocale
+          setLocale: this.setLocale,
         }}
       />
     );
@@ -69,7 +69,7 @@ Now in our screens we can use these `screenProps` as follows:
 ```jsx
 class Screen extends React.Component {
   static navigationOptions = ({ screenProps: { t } }) => ({
-    title: t("foo")
+    title: t('foo'),
   });
 
   render() {
@@ -78,21 +78,21 @@ class Screen extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          Current locale: {locale}.{" "}
-          {locale !== "en" && locale !== "fr"
+          Current locale: {locale}.{' '}
+          {locale !== 'en' && locale !== 'fr'
             ? 'Translations will fall back to "en" because none available'
             : null}
         </Text>
-        <Text>{t("bar", { someValue: Date.now() })}</Text>
-        {locale === "en" ? (
+        <Text>{t('bar', { someValue: Date.now() })}</Text>
+        {locale === 'en' ? (
           <Button
             title="Switch to French"
-            onPress={() => this.props.screenProps.setLocale("fr")}
+            onPress={() => this.props.screenProps.setLocale('fr')}
           />
         ) : (
           <Button
             title="Switch to English"
-            onPress={() => this.props.screenProps.setLocale("en")}
+            onPress={() => this.props.screenProps.setLocale('en')}
           />
         )}
       </View>

@@ -26,11 +26,11 @@ class HomeScreen extends React.Component {
     return {
       headerLeft: (
         <Button
-          onPress={() => navigation.navigate("MyModal")}
+          onPress={() => navigation.navigate('MyModal')}
           title="Info"
           color="#fff"
         />
-      )
+      ),
       /* the rest of this config is unchanged */
     };
   };
@@ -41,7 +41,7 @@ class HomeScreen extends React.Component {
 class ModalScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text style={{ fontSize: 30 }}>This is a modal!</Text>
         <Button
           onPress={() => this.props.navigation.goBack()}
@@ -55,11 +55,11 @@ class ModalScreen extends React.Component {
 const MainStack = createStackNavigator(
   {
     Home: {
-      screen: HomeScreen
+      screen: HomeScreen,
     },
     Details: {
-      screen: DetailsScreen
-    }
+      screen: DetailsScreen,
+    },
   },
   {
     /* Same configuration as before */
@@ -69,15 +69,15 @@ const MainStack = createStackNavigator(
 const RootStack = createStackNavigator(
   {
     Main: {
-      screen: MainStack
+      screen: MainStack,
     },
     MyModal: {
-      screen: ModalScreen
-    }
+      screen: ModalScreen,
+    },
   },
   {
-    mode: "modal",
-    headerMode: "none"
+    mode: 'modal',
+    headerMode: 'none',
   }
 );
 ```

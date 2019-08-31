@@ -107,7 +107,7 @@ Inside an example view, perhaps you need to fetch the configured title:
 const screenNavigation = addNavigationHelpers({
   // In this case we use navigation.state.index because we want the title for the active route.
   state: navigation.state.routes[navigation.state.index],
-  dispatch: navigation.dispatch
+  dispatch: navigation.dispatch,
 });
 const options = this.props.router.getScreenOptions(screenNavigation, {});
 const title = options.title;

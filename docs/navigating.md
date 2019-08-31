@@ -23,17 +23,17 @@ We'll do something similar to the latter, but rather than using a `document` glo
 ## Navigating to a new screen
 
 ```js
-import React from "react";
-import { Button, View, Text } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import React from 'react';
+import { Button, View, Text } from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 function HomeScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
       <Button
         title="Go to Details"
-        onPress={() => navigation.navigate("Details")}
+        onPress={() => navigation.navigate('Details')}
       />
     </View>
   );
@@ -53,15 +53,14 @@ So we now have a stack with two routes: 1) the Home route 2) the Details route. 
 
 ## Navigate to a route multiple times
 
-
 ```js
 function DetailsScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Details Screen</Text>
       <Button
         title="Go to Details... again"
-        onPress={() => navigation.navigate("Details")}
+        onPress={() => navigation.navigate('Details')}
       />
     </View>
   );
@@ -77,7 +76,7 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 ```js
 <Button
   title="Go to Details... again"
-  onPress={() => navigation.push("Details")}
+  onPress={() => navigation.push('Details')}
 />
 ```
 
@@ -112,7 +111,6 @@ funtction DetailsScreen({ navigation }) {
   );
 }
 ```
-
 
 > On Android, React Navigation hooks in to the hardware back button and fires the `goBack()` function for you when the user presses it, so it behaves as the user would expect.
 

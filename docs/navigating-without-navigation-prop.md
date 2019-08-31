@@ -12,8 +12,8 @@ You can get access to a navigator through a `ref` and pass it to the `Navigation
 ```javascript
 // App.js
 
-import { createStackNavigator, createAppContainer } from "react-navigation";
-import NavigationService from "./NavigationService";
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import NavigationService from './NavigationService';
 
 const TopLevelNavigator = createStackNavigator({
   /* ... */
@@ -41,7 +41,7 @@ In the next step, we define `NavigationService` which is a simple module with fu
 ```javascript
 // NavigationService.js
 
-import { NavigationActions } from "react-navigation";
+import { NavigationActions } from 'react-navigation';
 
 let _navigator;
 
@@ -53,7 +53,7 @@ function navigate(routeName, params) {
   _navigator.dispatch(
     NavigationActions.navigate({
       routeName,
-      params
+      params,
     })
   );
 }
@@ -62,7 +62,7 @@ function navigate(routeName, params) {
 
 export default {
   navigate,
-  setTopLevelNavigator
+  setTopLevelNavigator,
 };
 ```
 
@@ -70,11 +70,11 @@ Then, in any of your javascript modules, just import the `NavigationService` and
 
 ```javascript
 // any js module
-import NavigationService from "path-to-NavigationService.js";
+import NavigationService from 'path-to-NavigationService.js';
 
 // ...
 
-NavigationService.navigate("ChatScreen", { userName: "Lucy" });
+NavigationService.navigate('ChatScreen', { userName: 'Lucy' });
 ```
 
 In `NavigationService`, you can create your own navigation actions, or compose multiple navigation actions into one, and then easily reuse them throughout your application. When writing tests, you may mock the navigation functions, and make assertions on whether the correct functions are called, with the correct parameters.

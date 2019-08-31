@@ -187,7 +187,11 @@ function App() {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ tintColor }) => (
-            <MaterialCommunityIcons name="account" color={tintColor} size={24} />
+            <MaterialCommunityIcons
+              name="account"
+              color={tintColor}
+              size={24}
+            />
           ),
         }}
       />
