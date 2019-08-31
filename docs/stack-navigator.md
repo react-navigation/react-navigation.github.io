@@ -437,6 +437,7 @@ With these options, it's possible to build custom transition animations for scre
   - `forRevealFromBottomAndroid` - Standard Android-style reveal from the bottom for Android Pie.
 
 - `HeaderStyleInterpolators`
+
   - `forUIKit` - Standard UIKit style animation for the header where the title fades into the back button label.
   - `forFade` - Simple fade animation for the header elements.
   - `forStatic` - Simple translate animation to translate the header along with the sliding screen.
