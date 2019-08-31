@@ -4,38 +4,28 @@ title: App Containers
 sidebar_label: App Containers
 ---
 
-Containers are responsible for managing your app state and linking your top-level navigator to the app environment. On Android, the app container uses the Linking API to handle the back button. The container can also be configured to persist your navigation state. On web, you'd use different containers than React Native.
+Containers are responsible for managing your app state and linking your top-level navigator to the app environment. On Android, the app container uses the `BackHandler` module to handle the system back button. The container can also be configured to persist your navigation state.
 
 A quick example of `NavigationContainer`:
 
-```
-import { NavigationContainer } from '@react-navigation/core';
+```js
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-// you can also import NavigationContainer from @react-navigation/native
 
 const Stack = createStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        { /* ... */ }
-      </StackNavigator>
+      <Stack.Navigator>{/* ... */}</Stack.Navigator>
     </NavigationContainer>
-  )
+  );
 }
 
 export default App;
 ```
 
-## Props of `NavigationContainer` on React Native
-
-```js
-<NavigationContainer
-  onStateChange={handleStateChange}
-  initialState={initialState}
-/>
-```
+## Props of `NavigationContainer`
 
 ### `onStateChange(newState)`
 
@@ -43,7 +33,18 @@ Function that gets called every time navigation state managed by the navigator c
 
 ### `initialState`
 
-Prop that accepts initial state of navigation. You rather don't need for majority of cases but for deeplinking. #TODO
+Prop that accepts initial state for the navigator. This can be useful for cases such as deep linking, state persistence etc.
+
+Example:
+
+```js
+<NavigationContainer
+  onStateChange={state => console.log('New state is', state)}
+  initialState={initialState}
+>
+  {/* ... */}
+</NavigationContainer>
+```
 
 ## Calling Dispatch or Navigate on App Container
 
@@ -51,8 +52,15 @@ In case you want to dispatch actions on an app container, you can use a React [`
 
 ```js
 function App() {
-  const ref = useRef();
-  useEffect(() => ref.current.dispatch(CommonActions.goBack()));
-  return <NavigationContainer ref={ref} />;
+  const ref = React.useRef(null);
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Button onPress={() => ref.current && ref.current.navigate('Home')}>
+        Go home
+      </Button>
+      <NavigationContainer ref={ref}>{/* ... */}</NavigationContainer>
+    </View>
+  );
 }
 ```
