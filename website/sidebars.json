@@ -68,6 +68,7 @@
       "material-bottom-tab-navigator",
       "material-top-tab-navigator",
       "use-navigation",
+      "use-route",
       "use-focus-effect",
       "use-is-focused",
       "navigation-context",
