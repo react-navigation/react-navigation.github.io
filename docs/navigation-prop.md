@@ -4,8 +4,6 @@ title: Navigation prop reference
 sidebar_label: Navigation prop
 ---
 
-#TODO
-
 Each `screen` component in your app is provided with the `navigation` prop automatically. The prop contains various convenience functions that dispatch navigation actions on the route's router. It looks like this:
 
 - `this.props.navigation`
@@ -15,7 +13,6 @@ Each `screen` component in your app is provided with the `navigation` prop autom
   - `isFocused` - function that returns `true` if the screen is focused and `false` otherwise.
   - `state` - current state/routes
   - `setParams` - make changes to route's params
-  - `getParam` - get a specific param with fallback
   - `dispatch` - send an action to router
   - `dangerouslyGetParent` - function that returns the parent navigator, if any
 
@@ -62,20 +59,16 @@ OR
 - `key` - Optional identifier of what route to navigate to. Navigate **back** to this route, if it already exists
 
 ```js
-class HomeScreen extends React.Component {
-  render() {
-    const { navigate } = this.props.navigation;
-
-    return (
-      <View>
-        <Text>This is the home screen of the app</Text>
-        <Button
-          onPress={() => navigate("Profile", { name: "Brent" })}
-          title="Go to Brent's profile"
-        />
-      </View>
-    );
-  }
+function HomeScree({ navigation: { navigate } }) {
+return (
+  <View>
+    <Text>This is the home screen of the app</Text>
+    <Button
+      onPress={() => navigate("Profile", { names: ["Brent", "Satya", "Michaś"] })}
+      title="Go to Brent's profile"
+    />
+  </View>
+);
 }
 ```
 
@@ -86,20 +79,17 @@ Optionally provide a key, which specifies the route to go back from. By default,
 Note -- a key is not the name of the route but the unique identifier you provided when navigating to the route. See [navigation key](navigation-key.html).
 
 ```js
-class HomeScreen extends React.Component {
-  render() {
-    const { goBack } = this.props.navigation;
-    return (
-      <View>
-        <Button onPress={() => goBack()} title="Go back from this HomeScreen" />
-        <Button onPress={() => goBack(null)} title="Go back anywhere" />
-        <Button
-          onPress={() => goBack("key-123")}
-          title="Go back from key-123"
-        />
-      </View>
-    );
-  }
+function HomeScreen({ navigation: { goBack } }) {
+  return (
+    <View>
+      <Button onPress={() => goBack()} title="Go back from this HomeScreen" />
+      <Button onPress={() => goBack(null)} title="Go back anywhere" />
+      <Button
+        onPress={() => goBack("key-123")}
+        title="Go back from key-123"
+      />
+    </View>
+  );
 }
 ```
 
@@ -122,43 +112,43 @@ navigation.goBack(SCREEN_KEY_B) // will go to screen A FROM screen B
 ```
 
 Alternatively, as _screen A_ is the top of the stack, you can use `navigation.popToTop()`.
+    
+## Navigation events
 
-### `addListener` - Subscribe to updates to navigation lifecycle
+Screens can add listeners on the `navigation` prop like in React Navigation. By default, `focus` and `blur` events are fired when focused screen changes:
 
-React Navigation emits events to screen components that subscribe to them:
+```js
+function Profile({ navigation }) {
+  React.useEffect(() =>
+    navigation.addListener('focus', () => {
+      // do something
+    })
+  );
 
-- `willFocus` - the screen will focus
-- `didFocus` - the screen focused (if there was a transition, the transition completed)
-- `willBlur` - the screen will be unfocused
-- `didBlur` - the screen unfocused (if there was a transition, the transition completed)
-
-Example:
-
-```javascript
-const didBlurSubscription = this.props.navigation.addListener(
-  "didBlur",
-  payload => {
-    console.debug("didBlur", payload);
-  }
-);
-
-// Remove the listener when you are done
-didBlurSubscription.remove();
+  return <ProfileContent />;
+}
 ```
 
-The JSON payload:
+The `navigation.addListener` method returns a function to remove the listener which can be returned as the cleanup function in an effect.
 
-```javascript
-{
-  action: { type: 'Navigation/COMPLETE_TRANSITION', key: 'StackRouterRoot' },
-  context: 'id-1518521010538-2:Navigation/COMPLETE_TRANSITION_Root',
-  lastState: undefined,
-  state: undefined,
-  type: 'didBlur',
-};
+Navigators can also emit custom events using the `emit` method in the `navigation` object passed:
+
+```js
+navigation.emit({
+  type: 'transitionStart',
+  data: { blurring: false },
+  target: route.key,
+});
 ```
 
-You can also subscribe to navigation events declaratively with the [`<NavigationEvents/>`](navigation-events.html) component.
+The `data` is available under the `data` property in the `event` object, i.e. `event.data`.
+
+The `target` property determines the screen that will receive the event. If the `target` property is omitted, the event is dispatched to all screens in the navigator.
+
+Screens cannot emit events as there is no `emit` method on a screen's `navigation` prop.
+
+If you don't need to get notified of focus change, but just need to check if the screen is currently focused in a callback, you can use the `navigation.isFocused()` method which returns a boolean. Note that it's not safe to use this in `render`. Only use it in callbacks, event listeners etc.
+
 
 ### `isFocused` - Query the focused state of the screen
 
@@ -170,29 +160,6 @@ let isFocused = this.props.navigation.isFocused();
 
 You probably want to use [withNavigationFocus](with-navigation-focus.html) instead of using this directly, it will pass in an `isFocused` boolean a prop to your component.
 
-### `state` - The screen's current state/route
-
-A screen has access to its route via `this.props.navigation.state`. Each will return an object with the following:
-
-```js
-{
-  // the name of the route config in the router
-  routeName: 'profile',
-  //a unique identifier used to sort routes
-  key: 'main0',
-  //an optional object of string options for this screen
-  params: { hello: 'world' }
-}
-```
-
-This is most commonly used to access the `params` for the screen, passed in through `navigate` or `setParams`.
-
-```js
-class ProfileScreen extends React.Component {
-  render() {
-    return <Text>Name: {this.props.navigation.state.params.name}</Text>;
-  }
-}
 ```
 
 ### `setParams` - Make changes to route params
@@ -200,11 +167,11 @@ class ProfileScreen extends React.Component {
 Firing the `setParams` action allows a screen to change the params in the route, which is useful for updating the header buttons and title. `setParams` works like React's `setState` - it merges the provided params object with the current params.
 
 ```js
-class ProfileScreen extends React.Component {
+function ProfileScreen({ navigation: { setParams } }) {
   render() {
     return (
       <Button
-        onPress={() => this.props.navigation.setParams({ name: "Lucy" })}
+        onPress={() => setParams({ name: "Lucy" })}
         title="Set title name to 'Lucy'"
       />
     );
@@ -212,25 +179,6 @@ class ProfileScreen extends React.Component {
 }
 ```
 
-### `getParam` - Get a specific param value with a fallback
-
-In the past, you may have encountered the frightful scenario of accessing a `param` when `params` is undefined. Instead of accessing the param directly, you can call `getParam` instead.
-
-Before:
-
-```js
-const { name } = this.props.navigation.state.params;
-```
-
-if `params` is `undefined`, this fails
-
-After:
-
-```js
-const name = this.props.navigation.getParam("name", "Peter");
-```
-
-if `name` or `params` are undefined, set the fallback to `Peter`.
 
 ## Stack Actions
 
@@ -308,7 +256,7 @@ const navigateAction = NavigationActions.navigate({
   params: {},
 
   // navigate can have a nested navigate action that will be run inside the child router
-  action: NavigationActions.navigate({ routeName: "SubProfileRoute" })
+  action: NavigationActions.navigate({ name: "SubProfileRoute" })
 });
 this.props.navigation.dispatch(navigateAction);
 ```
@@ -321,19 +269,11 @@ Another good use case for this is to find the index of the active route in the p
 
 Be sure to always check that the call returns a valid value.
 
-```js
-class UserCreateScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    const parent = navigation.dangerouslyGetParent();
-    const gesturesEnabled =
-      parent &&
-      parent.state &&
-      parent.state.routeName === "StackWithEnabledGestures";
+<add example>
 
-    return {
-      title: "New User",
-      gesturesEnabled
-    };
-  };
-}
-```
+
+### `dangerouslyGetState` - get state of navigator
+
+Most likely you don't want to get state of navigator. It's used for internal logic and we currently do not predict any use case of it. If you do, make sure you have a good reason.
+
+<add example if we find any>
