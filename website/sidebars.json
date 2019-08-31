@@ -68,8 +68,8 @@
       "bottom-tab-navigator",
       "material-bottom-tab-navigator",
       "material-top-tab-navigator",
-      "with-navigation",
-      "with-navigation-focus",
+      "use-navigation",
+      "use-focus-effect",
       "navigation-context",
       "navigation-events",
       "scrollables"
