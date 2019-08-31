@@ -11,7 +11,7 @@ sidebar_label: useNavigation
 ## Example
 
 ```js
-import React from 'react';
+import * as React from 'react';
 import { Button } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 

@@ -11,7 +11,7 @@ This section attempts to outline issues that users frequently encounter when fir
 If you wrap the `AppContainer` in a `View`, make sure the `View` is using flex.
 
 ```javascript
-import React from 'react';
+import * as React from 'react';
 import { NavigationNativeContainer } from '@react-navigation/native';
 
 // without the style you will see a blank screen

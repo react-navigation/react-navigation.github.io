@@ -9,7 +9,7 @@ sidebar_label: Access the navigation prop from any component
 An ordinary component that is not a screen component will not receive the navigation prop automatically. for example in this `MyBackButton` component:
 
 ```js
-import React from 'react';
+import * as React from 'react';
 import { Button } from 'react-native';
 
 export function MyBackButton({ navigation }) {
@@ -30,7 +30,7 @@ To resolve this exception, you could pass the `navigation` prop in to `MyBackBut
 Alternatively, you can use the `useNavigation` to provide the `navigation` automatically automatically (through React context, if you're curious).
 
 ```js
-import React from 'react';
+import * as React from 'react';
 import { Button } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 
