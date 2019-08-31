@@ -12,14 +12,14 @@ Lets start by demonstrating the most common navigator, `createStackNavigator`.
 
 ## Creating a stack navigator
 
-`createStackNavigator` is a function that returns a Navigator. Navigator is an object which contains of `Screen` and `Navigator`. Both of them are React components. They are used for configuring behavior of navigator. `Navigator` should contains `Screen`s as children defining routes. `NavigationContainer` is a root component for navigation. This component must wrap all navigators structure.
+`createStackNavigator` is a function that returns a Navigator. Navigator is an object which contains of `Screen` and `Navigator`. Both of them are React components. They are used for configuring behavior of navigator. `Navigator` should contains `Screen`s as children defining routes. `NavigationNativeContainer` is a root component for navigation. This component must wrap all navigators structure.
 
 ```js
 // In App.js in a new project
 
 import React from "react";
 import { View, Text } from "react-native";
-import { NavigationContainer } from "@react-navigation/core";
+import { NavigationNativeContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 function HomeScreen() {
@@ -34,14 +34,14 @@ const Stack = createStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
+    <NavigationNativeContainer>
       <Stack.Navigator>
         <Stack.Screen
           name="home"
           component={HomeScreen}
         />
-      </<Stack.Navigator>
-    </NavigationContainer>
+      </Stack.Navigator>
+    </NavigationNativeContainer>
   )
 }
 

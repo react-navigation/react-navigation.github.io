@@ -66,7 +66,7 @@ const Stack = createStackNavigator();
 
 function App() {
   return (
-    <Stack.Navigator initialRouteName="home">
+    <Stack.Navigator>
       <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="notifications" component={Notifications} />
       <Stack.Screen name="profile" component={Profile} />

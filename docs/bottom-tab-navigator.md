@@ -23,7 +23,7 @@ const Tab = createBottomTabNavigator();
 
 function App() {
   return (
-    <Tab.Navigator initialRouteName="feed">
+    <Tab.Navigator>
       <Tab.Screen name="feed" component={Feed} />
       <Tab.Screen name="article" component={Article} />
     </Tab.Navigator>
@@ -31,7 +31,7 @@ function App() {
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/en/tab-based-navigation.html)
+> For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/tab-based-navigation.html)
 
 ### Props
 

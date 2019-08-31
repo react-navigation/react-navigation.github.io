@@ -39,7 +39,7 @@ For example, the path `/rooms/chat?user=jane` will be translated to a state obje
 The `useLinking` hooks makes it easier to handle incoming links:
 
 ```js
-import { useLinking } from '@react-navigation/native';
+import { NavigationNativeContainer, useLinking } from '@react-navigation/native';
 
 function App() {
   const ref = React.useRef();
@@ -68,9 +68,9 @@ function App() {
   }
 
   return (
-    <NavigationContainer initialState={initialState} ref={ref}>
+    <NavigationNativeContainer initialState={initialState} ref={ref}>
       {/* content */}
-    </NavigationContainer>
+    </NavigationNativeContainer>
   );
 };
 ```
@@ -125,9 +125,9 @@ function App() {
   }
 
   return (
-    <NavigationContainer initialState={initialState} ref={ref}>
+    <NavigationNativeContainer initialState={initialState} ref={ref}>
       {/* content */}
-    </NavigationContainer>
+    </NavigationNativeContainer>
   );
 };
 ```

@@ -6,26 +6,26 @@ sidebar_label: App Containers
 
 Containers are responsible for managing your app state and linking your top-level navigator to the app environment. On Android, the app container uses the `BackHandler` module to handle the system back button. The container can also be configured to persist your navigation state.
 
-A quick example of `NavigationContainer`:
+A quick example of `NavigationNativeContainer`:
 
 ```js
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationNativeContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
+    <NavigationNativeContainer>
       <Stack.Navigator>{/* ... */}</Stack.Navigator>
-    </NavigationContainer>
+    </NavigationNativeContainer>
   );
 }
 
 export default App;
 ```
 
-## Props of `NavigationContainer`
+## Props of `NavigationNativeContainer`
 
 ### `onStateChange(newState)`
 
@@ -38,12 +38,12 @@ Prop that accepts initial state for the navigator. This can be useful for cases 
 Example:
 
 ```js
-<NavigationContainer
+<NavigationNativeContainer
   onStateChange={state => console.log('New state is', state)}
   initialState={initialState}
 >
   {/* ... */}
-</NavigationContainer>
+</NavigationNativeContainer>
 ```
 
 ## Calling Dispatch or Navigate on App Container
@@ -59,7 +59,7 @@ function App() {
       <Button onPress={() => ref.current && ref.current.navigate('Home')}>
         Go home
       </Button>
-      <NavigationContainer ref={ref}>{/* ... */}</NavigationContainer>
+      <NavigationNativeContainer ref={ref}>{/* ... */}</NavigationNativeContainer>
     </View>
   );
 }

@@ -12,14 +12,14 @@ If you wrap the `AppContainer` in a `View`, make sure the `View` is using flex.
 
 ```javascript
 import React from "react";
-import { NavigationContainer } from "@react-navigation/core";
+import { NavigationNativeContainer } from "@react-navigation/native";
 
 // without the style you will see a blank screen
 export default () => (
   <View style={{ flex: 1 }}>
-    <NavigationContainer>
+    <NavigationNativeContainer>
       { /* ... */ }
-    </NavigationContainer>
+    </NavigationNativeContainer>
   </View>
 );
 ```
