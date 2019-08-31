@@ -73,7 +73,7 @@
       "use-is-focused",
       "navigation-context",
       "navigation-events",
-      "scrollables"
+      "use-scroll-to-top"
     ]
   }
 }
