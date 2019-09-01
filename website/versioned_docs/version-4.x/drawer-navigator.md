@@ -8,7 +8,7 @@ original_id: drawer-navigator
 To use this navigator, you need to install [`react-navigation-drawer`](https://github.com/react-navigation/drawer) and its peer dependencies:
 
 ```sh
-yarn add @react-navigation/core react-navigation-drawer
+yarn add react-navigation react-navigation-drawer
 ```
 
 Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated).

@@ -12,7 +12,7 @@ By default the stack navigator is configured to have the familiar iOS and Androi
 To use this navigator, you need to install [`react-navigation-stack`](https://github.com/react-navigation/stack):
 
 ```sh
-yarn add @react-navigation/core react-navigation-stack
+yarn add react-navigation react-navigation-stack
 ```
 
 Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-screens`](https://github.com/kmagiera/react-native-screens).
@@ -50,7 +50,6 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
 
   ```sh
-  react-native link react-native-reanimated
   react-native link react-native-gesture-handler
   ```
 

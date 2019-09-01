@@ -13,7 +13,7 @@ Most of the time, you won't use `NavigationContext` directly, as the provided `w
 
 ```js
 import { useState, useContext, useEffect } from 'react';
-import { NavigationContext } from '@react-navigation/core';
+import { NavigationContext } from 'react-navigation';
 
 export function useFocusState() {
   const navigation = useContext(NavigationContext);
