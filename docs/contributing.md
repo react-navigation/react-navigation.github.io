@@ -107,7 +107,7 @@ Much like the issue template, the [pull request template](https://github.com/rea
 
 ### Forking the Repository
 
-- Fork [`react-navigation`](https://github.com/react-community/react-navigation) on GitHub
+- Fork the [`repo`](https://github.com/react-navigation/navigation-ex) on GitHub
 - Run these commands in the terminal to download locally and install it:
 
 ```bash

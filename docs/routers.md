@@ -10,7 +10,7 @@ Routers define a component's navigation state, and they allow the developer to d
 
 ## Built-In Routers
 
-`react-navigation` ships with a few standard routers:
+`@react-navigation/routers` ships with a few standard routers:
 
 - [StackRouter](https://github.com/react-navigation/react-navigation-core/blob/master/src/routers/StackRouter.js)
 - [TabRouter](https://github.com/react-navigation/react-navigation-core/blob/master/src/routers/TabRouter.js)
@@ -71,7 +71,7 @@ MyApp.router.getStateForAction = (action, state) => {
 Sometimes you may want to prevent some navigation activity, depending on your route.
 
 ```js
-import { NavigationActions } from 'react-navigation';
+import { CommonActions } from '@react-navigation/core';
 
 const MyStackRouter = StackRouter(
   {
@@ -105,7 +105,7 @@ MyStackRouter.router.getStateForAction = (action, state) => {
 Perhaps your app has a unique URI which the built-in routers cannot handle. You can always extend the router `getActionForPathAndParams`.
 
 ```js
-import { NavigationActions } from 'react-navigation';
+import { CommonActions } from '@react-navigation/core';
 
 const MyApp = createStackNavigator(
   {

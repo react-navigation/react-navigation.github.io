@@ -165,7 +165,7 @@ The default component for the drawer is scrollable and only contains links for t
 
 ```js
 import SafeAreaView from 'react-native-safe-area-view';
-import { DrawerItems } from 'react-navigation-drawer';
+import { DrawerItems } from '@react-navigation/drawer';
 
 const CustomDrawerContentComponent = props => (
   <ScrollView>

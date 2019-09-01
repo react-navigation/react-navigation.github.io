@@ -55,10 +55,10 @@ function App2() {
 
 ![Text hidden by iPhoneX UI elements](/docs/assets/iphoneX/02-iphonex-content-hidden.png)
 
-To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-navigation`. Recall that `SafeAreaView` should not wrap entire navigators, just the screen components or any content in them.
+To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-native-safe-area-view`. Recall that `SafeAreaView` should not wrap entire navigators, just the screen components or any content in them.
 
 ```jsx
-import { SafeAreaView } from 'react-navigation';
+import SafeAreaView from 'react-native-safe-area-view';
 
 function MyHomeScreen() {
   return (
@@ -109,7 +109,7 @@ React Native does not currently expose an API to access information about device
 
 ```js
 import { Platform } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import SafeAreaView from 'react-native-safe-area-view';
 import DeviceInfo from 'react-native-device-info';
 
 if (Platform.OS === 'android' && DeviceInfo.hasNotch()) {

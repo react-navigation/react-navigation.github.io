@@ -4,9 +4,9 @@ title: Supported React Native versions
 sidebar_label: Supported React Native versions
 ---
 
-Since `react-navigation@5.x` depends on the new hooks API which is available from `react-native@^0.59.0` onwards, you'll need to be on at least `0.59.0`. If you're using Expo, your SDK version should be at least 34.
+Since `5.x` depends on the new hooks API which is available from `react-native@^0.59.0` onwards, you'll need to be on at least `0.59.0`. If you're using Expo, your SDK version should be at least 34.
 
-Also, `react-navigation@5.x` needs [react-native-gesture-handler](https://github.com/kmagiera/react-native-gesture-handler#react-native-support) to work, so you will need to make sure that the version of `react-native-gesture-handler` you are using matches your current `react-native` version.
+Also, `5.x` needs [react-native-gesture-handler](https://github.com/kmagiera/react-native-gesture-handler#react-native-support) to work, so you will need to make sure that the version of `react-native-gesture-handler` you are using matches your current `react-native` version.
 
 If you are using [react-native-screens](react-native-screens.html), you will need to be aware of its own supported `react-native` version too.
 
