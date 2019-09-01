@@ -68,7 +68,6 @@
       "use-focus-effect",
       "use-is-focused",
       "navigation-context",
-      "navigation-events",
       "use-scroll-to-top"
     ]
   }
