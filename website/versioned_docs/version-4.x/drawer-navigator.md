@@ -84,7 +84,7 @@ The route configs object is a mapping from route name to a route config, which t
 - `gestureHandlerProps` - Props to pass to the underlying pan gesture handler.
 - `lazy` - Whether the screens should render the first time they are accessed. Defaults to `true`. Set it to `false` if you want to render all screens on initial render.
 - `unmountInactiveRoutes` - Whether a screen should be unmounted when navigating away from it. Defaults to `false`.
-- `contentComponent` - Component used to render the content of the drawer, for example, navigation items. Receives the `navigation` prop and `drawerOpenProgress` for the drawer. Defaults to `DrawerItems`. For more information, see below.
+- `contentComponent` - Component used to render the content of the drawer, for example, navigation items. Receives the `navigation` prop and `drawerOpenProgress` for the drawer. Defaults to `DrawerNavigatorItems`. For more information, see below.
 - `contentOptions` - Configure the drawer content, see below.
 - `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
 - `defaultNavigationOptions` - Default navigation options to use for screens
@@ -102,7 +102,7 @@ The default component for the drawer is scrollable and only contains links for t
 
 ```js
 import SafeAreaView from 'react-native-safe-area-view';
-import { DrawerItems } from 'react-navigation-drawer';
+import { DrawerNavigatorItems } from 'react-navigation-drawer';
 
 const CustomDrawerContentComponent = props => (
   <ScrollView>
@@ -110,7 +110,7 @@ const CustomDrawerContentComponent = props => (
       style={styles.container}
       forceInset={{ top: 'always', horizontal: 'never' }}
     >
-      <DrawerItems {...props} />
+      <DrawerNavigatorItems {...props} />
     </SafeAreaView>
   </ScrollView>
 );
@@ -139,7 +139,7 @@ const CustomDrawerContentComponent = props => {
 };
 ```
 
-### `contentOptions` for `DrawerItems`
+### `contentOptions` for `DrawerNavigatorItems`
 
 - `items` - the array of routes, can be modified or overridden
 - `activeItemKey` - key identifying the active route
