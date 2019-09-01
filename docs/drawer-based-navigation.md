@@ -4,39 +4,41 @@ title: Drawer navigation
 sidebar_label: Drawer navigation
 ---
 
+Common pattern in navigation is to use drawer from left (sometimes right) site for navigating between screens.
+
 This guide covers [createDrawerNavigator](drawer-navigator.html).
 
 To use this navigator, you need to install `@react-navigation/drawer` and its peer dependencies:
 
-````sh
+
+```sh
 yarn addreact-navigation-tabs react-native-reanimated
-```	```
+```
 
+## Minimal example of drawer-based navigation
 
- To use this tab navigator, import it from `@react-navigation/bottom-tabs`:
-
+To use this tab navigator, import it from `@react-navigation/bottom-tabs`:
 
 
 ```js
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/core";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationNativeContainer } from "@react-navigation/native";
 
-const Drawer = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
-
-function MyHomeScreen() {
+function MyHomeScreen({ navigation }) {
   return (
     <Button
-      onPress={() => this.props.navigation.navigate("Notifications")}
+      onPress={() => navigation.navigate("Notifications")}
       title="Go to notifications"
     />
   );
 }
 
-function MyNotificationsScreen() {
+function MyNotificationsScreen({ navigation }) {
   return (
     <Button
-      onPress={() => this.props.navigation.goBack()}
+      onPress={() => navigation.goBack()}
       title="Go back home"
     />
   );
@@ -44,16 +46,19 @@ function MyNotificationsScreen() {
 
 exprt default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator initialRouteName="feed">
-        <Tab.Screen name="Home" component={MyHomeScreen} />
-        <Tab.Screen name="Notifications" component={MyNotificationsScreen} />
+    <NavigationNativeContainer>
+      <Drawer.Navigator initialRouteName="feed">
+        <Drawer.Screen name="Home" component={MyHomeScreen} />
+        <Drawer.Screen name="Notifications" component={MyNotificationsScreen} />
       </Tab.Navigator>
-    </NavigationContainer>
+    </NavigationNativeContainer>
   )
 }
 
 ````
+
+## Opening and closing drawer
+
 
 To open and close drawer, use the following helpers to open and close the drawer:
 
