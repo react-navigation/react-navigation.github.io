@@ -10,7 +10,7 @@ A simple tab bar on the bottom of the screen that lets you switch between differ
 To use this navigator, you need to install [`react-navigation-tabs`](https://github.com/react-navigation/tabs) and its peer dependencies:
 
 ```sh
-yarn add @react-navigation/core react-navigation-tabs
+yarn add react-navigation react-navigation-tabs
 ```
 
 Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated).

@@ -10,7 +10,7 @@ A material-design themed tab bar on the top of the screen that lets you switch b
 To use this navigator, you need to install [`react-navigation-tabs`](https://github.com/react-navigation/tabs):
 
 ```sh
-yarn add @react-navigation/core react-navigation-tabs
+yarn add react-navigation react-navigation-tabs
 ```
 
 Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated).
@@ -52,7 +52,38 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   react-native link react-native-gesture-handler
   ```
 
-**IMPORTANT:** There are additional steps required for `react-native-gesture-handler` on Android after linking (for all React Native versions). Check the [this guide](https://kmagiera.github.io/react-native-gesture-handler/docs/getting-started.html) to complete the installation.
+To finalize installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
+
+```diff
+package com.reactnavigation.example;
+
+import com.facebook.react.ReactActivity;
++ import com.facebook.react.ReactActivityDelegate;
++ import com.facebook.react.ReactRootView;
++ import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+
+public class MainActivity extends ReactActivity {
+
+  @Override
+  protected String getMainComponentName() {
+    return "Example";
+  }
+
++  @Override
++  protected ReactActivityDelegate createReactActivityDelegate() {
++    return new ReactActivityDelegate(this, getMainComponentName()) {
++      @Override
++      protected ReactRootView createRootView() {
++       return new RNGestureHandlerEnabledRootView(MainActivity.this);
++      }
++    };
++  }
+}
+```
+
+Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
+
+## API Definition
 
 To use this tab navigator, import it from `react-navigation-tabs`:
 

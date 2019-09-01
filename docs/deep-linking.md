@@ -252,3 +252,15 @@ If you're using React Navigation within a hybrid app - an iOS app that has both 
     . . .
   ]
 ```
+
+## Disable deep linking
+
+If you're using React Navigation within a hybrid app - an iOS app that has both Swift/ObjC and React Native parts - you may be missing the `RCTLinkingIOS` subspec in your Podfile, which is installed by default in new RN projects. To add this, ensure your Podfile looks like the following:
+
+```pod
+ pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    . . . // other subspecs
+    'RCTLinkingIOS',
+    . . .
+  ]
+```

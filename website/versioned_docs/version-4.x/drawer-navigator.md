@@ -8,7 +8,7 @@ original_id: drawer-navigator
 To use this navigator, you need to install [`react-navigation-drawer`](https://github.com/react-navigation/drawer) and its peer dependencies:
 
 ```sh
-yarn add @react-navigation/core react-navigation-drawer
+yarn add react-navigation react-navigation-drawer
 ```
 
 Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated).
@@ -50,7 +50,38 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   react-native link react-native-gesture-handler
   ```
 
-**IMPORTANT:** There are additional steps required for `react-native-gesture-handler` on Android after linking (for all React Native versions). Check the [this guide](https://kmagiera.github.io/react-native-gesture-handler/docs/getting-started.html) to complete the installation.
+To finalize installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
+
+```diff
+package com.reactnavigation.example;
+
+import com.facebook.react.ReactActivity;
++ import com.facebook.react.ReactActivityDelegate;
++ import com.facebook.react.ReactRootView;
++ import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+
+public class MainActivity extends ReactActivity {
+
+  @Override
+  protected String getMainComponentName() {
+    return "Example";
+  }
+
++  @Override
++  protected ReactActivityDelegate createReactActivityDelegate() {
++    return new ReactActivityDelegate(this, getMainComponentName()) {
++      @Override
++      protected ReactRootView createRootView() {
++       return new RNGestureHandlerEnabledRootView(MainActivity.this);
++      }
++    };
++  }
+}
+```
+
+Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
+
+## API Definition
 
 Then import it from `react-navigation-drawer`:
 
@@ -84,7 +115,7 @@ The route configs object is a mapping from route name to a route config, which t
 - `gestureHandlerProps` - Props to pass to the underlying pan gesture handler.
 - `lazy` - Whether the screens should render the first time they are accessed. Defaults to `true`. Set it to `false` if you want to render all screens on initial render.
 - `unmountInactiveRoutes` - Whether a screen should be unmounted when navigating away from it. Defaults to `false`.
-- `contentComponent` - Component used to render the content of the drawer, for example, navigation items. Receives the `navigation` prop and `drawerOpenProgress` for the drawer. Defaults to `DrawerItems`. For more information, see below.
+- `contentComponent` - Component used to render the content of the drawer, for example, navigation items. Receives the `navigation` prop and `drawerOpenProgress` for the drawer. Defaults to `DrawerNavigatorItems`. For more information, see below.
 - `contentOptions` - Configure the drawer content, see below.
 - `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
 - `defaultNavigationOptions` - Default navigation options to use for screens
@@ -102,7 +133,7 @@ The default component for the drawer is scrollable and only contains links for t
 
 ```js
 import SafeAreaView from 'react-native-safe-area-view';
-import { DrawerItems } from 'react-navigation-drawer';
+import { DrawerNavigatorItems } from 'react-navigation-drawer';
 
 const CustomDrawerContentComponent = props => (
   <ScrollView>
@@ -110,7 +141,7 @@ const CustomDrawerContentComponent = props => (
       style={styles.container}
       forceInset={{ top: 'always', horizontal: 'never' }}
     >
-      <DrawerItems {...props} />
+      <DrawerNavigatorItems {...props} />
     </SafeAreaView>
   </ScrollView>
 );
@@ -139,7 +170,7 @@ const CustomDrawerContentComponent = props => {
 };
 ```
 
-### `contentOptions` for `DrawerItems`
+### `contentOptions` for `DrawerNavigatorItems`
 
 - `items` - the array of routes, can be modified or overridden
 - `activeItemKey` - key identifying the active route
