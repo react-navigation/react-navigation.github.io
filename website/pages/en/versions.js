@@ -29,7 +29,7 @@ function Versions() {
             <h1>{siteConfig.title} Versions</h1>
           </header>
           <p>You can come back to this page and switch the version of the docs you're reading at any time by clicking on the version number at the top of the page.</p>
-          <a href="https://github.com/react-navigation/react-navigation/blob/master/CHANGELOG.md">React Navigation changelog</a>
+          <a href="https://github.com/react-navigation/react-navigation/releases">React Navigation release notes</a>
           <h3 id="latest">Current version (Stable)</h3>
           <table className="versions">
             <tbody>
