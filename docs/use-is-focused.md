@@ -11,5 +11,11 @@ import { useIsFocused } from '@react-navigation/core';
 
 // ...
 
-const isFocused = useIsFocused();
+function Profile() {
+  const isFocused = useIsFocused();
+
+  return <Text>{isFocused ? 'focused' : 'unfocused'}</Text>;
+}
 ```
+
+Note that using this hook triggers a re-render for the screen when it changes focus. This might cause lags during the animation if your screen is heavy. You might want to extract the expensive parts to separate components and use [`React.memo`](https://reactjs.org/docs/react-api.html#reactmemo) or [`React.PureComponent`](https://reactjs.org/docs/react-api.html#reactpurecomponent) to minimize re-renders for them.
