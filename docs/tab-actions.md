@@ -14,7 +14,7 @@ The following actions are supported:
 
 The `jumpTo` action can be used to jump to an existing route in the tab navigator
 
-- `routeName` - _string_ - `routeName` to push onto the stack.
+- `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `this.props.route.params`).
 
 ```js

@@ -76,13 +76,13 @@ For more details, see the ["Navigation prop document"](navigation-prop.html).
 The state of a navigator generally looks something like this:
 #TODO
 
-```
+```js
 {
   key: 'StackRouterRoot',
   index: 1,
   routes: [
-    { key: 'A', routeName: 'Home' },
-    { key: 'B', routeName: 'Profile' },
+    { key: 'A', name: 'Home' },
+    { key: 'B', name: 'Profile' },
   ]
 }
 ```
@@ -91,13 +91,13 @@ For this navigation state, there are two routes (which may be tabs, or cards in 
 
 ## Route
 
-Each route is a piece of navigation state which contains a key to identify it, and a "routeName" to designate the type of route. It can also contain arbitrary params:
+Each route is a piece of navigation state which contains a key to identify it, and a "name" to designate the type of route. It can also contain arbitrary params:
 #TODO
 
-```
+```js
 {
   key: 'B',
-  routeName: 'Profile',
+  name: 'Profile',
   params: { id: '123' }
 }
 ```
@@ -107,12 +107,15 @@ Each route is a piece of navigation state which contains a key to identify it, a
 When composing navigators, it is possible for a route to be a navigation state. It would look like this:
 #TODO
 
-```
+```js
 {
   key: 'B',
-  routeName: 'Profile',
+  name: 'Profile',
   params: { id: '123' },
-  index: 1,
-  routes: [ {...}, {...} ]
+  state: {
+    key: 'C',
+    index: 1,
+    routes: [ {...}, {...} ]
+  }
 }
 ```

@@ -37,20 +37,16 @@ Defines the navigation state in response to a given action. This function will b
 Typically this should return a navigation state, with the following form:
 #TODO
 
-```
+```js
 {
   index: 1, // identifies which route in the routes array is active
   routes: [
     {
       // Each route needs a name to identify the type.
-      routeName: 'MyRouteName',
+      name: 'MyRouteName',
 
       // A unique identifier for this route in the routes array:
       key: 'myroute-123',
-      // (used to specify the re-ordering of routes)
-
-      // Routes can have any data, as long as key and routeName are correct
-      ...randomRouteData,
     },
     ...moreRoutes,
   ]
@@ -70,13 +66,13 @@ Say a router `getStateForAction` outputs a state like this:
 {
   index: 1,
   routes: [
-    { key: 'A', routeName: 'Foo' },
-    { key: 'B', routeName: 'Bar' },
+    { key: 'A', name: 'Foo' },
+    { key: 'B', name: 'Bar' },
   ],
 }
 ```
 
-Based on the routeNames in the state, the router is responsible for returning valid components when calling `router.getComponentForRouteName('Foo')` or `router.getComponentForRouteName('Bar')`.
+Based on the route names in the state, the router is responsible for returning valid components when calling `router.getComponentForRouteName('Foo')` or `router.getComponentForRouteName('Bar')`.
 
 ### `getComponentForState(state)`
 

@@ -88,6 +88,20 @@ function TabNavigator({ initialRouteName, children, screenOptions, ...rest }) {
 }
 ```
 
+The `navigation` object for navigators also has an `emit` method to emit custom events to the child screens. The usage looks like this:
+
+```js
+navigation.emit({
+  type: 'transitionStart',
+  data: { blurring: false },
+  target: route.key,
+});
+```
+
+The `data` is available under the `data` property in the `event` object, i.e. `event.data`.
+
+The `target` property determines the screen that will receive the event. If the `target` property is omitted, the event is dispatched to all screens in the navigator.
+
 ### `createNavigator`
 
 This function is used to create a Navigator and Screen pair. Custom navigators need to wrap the navigator component in `createNavigator` before exporting.

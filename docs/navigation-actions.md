@@ -13,7 +13,7 @@ It's important to highlight that dispatching a `CommonAction` doesn't throw any 
 The following actions are supported:
 
 - [Navigate](#navigate) - Navigate to another route
-- [Back](#back) - Go back to previous state
+- [Back](#goback) - Go back to previous state
 - [Set Params](#setparams) - Set Params for given route
 - [Init](#init) - Used to initialize first state if state is undefined
 
@@ -26,7 +26,7 @@ The action creator functions define `toString()` to return the action type, whic
 
 The `navigate` action will update the current state with the result of a `navigate` action.
 
-- `routeName` - _String_ - Required - A destination routeName that has been registered somewhere in the app's router
+- `name` - _String_ - Required - A destination name of the route that has been registered somewhere
 - `params` - _Object_ - Optional - Params to merge into the destination route
 - `action` - _Object_ - Optional - (advanced) The sub-action to run in the child router, if the screen is a navigator. Any one of the actions described in this doc can be set as a sub-action.
 - `key` - _String_ - Optional - The identifier for the route to navigate to. Navigate back to this route if it already exists
@@ -34,18 +34,15 @@ The `navigate` action will update the current state with the result of a `naviga
 ```js
 import { CommonActions } from '@react-navigation/core';
 
-const navigateAction = CommonActions.navigate({
-  routeName: 'Profile',
-
-  params: {},
-
-  action: CommonActions.navigate({ routeName: 'SubProfileRoute' }),
-});
-
-this.props.navigation.dispatch(navigateAction);
+this.props.navigation.dispatch(
+  CommonActions.navigate({
+    name: 'Profile',
+    params: {},
+  })
+);
 ```
 
-### back
+### goBack
 
 Go back to previous screen and close current screen. `back` action creator takes in one optional parameter:
 
@@ -54,9 +51,10 @@ Go back to previous screen and close current screen. `back` action creator takes
 ```js
 import { CommonActions } from '@react-navigation/core';
 
-const backAction = CommonActions.back({
+const backAction = CommonActions.goBack({
   key: 'Profile',
 });
+
 this.props.navigation.dispatch(backAction);
 ```
 
