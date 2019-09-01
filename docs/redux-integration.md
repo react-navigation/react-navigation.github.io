@@ -8,55 +8,42 @@ original_id: redux-integration
 It is extremely easy to use Redux in an app with React Navigation. It's basically no different than without React Navigation. The following example shows how to do it end to end: https://snack.expo.io/@react-navigation/redux-example. The most important piece from it is the following:
 
 ```js
-let RootStack = createStackNavigator({
-  Counter: CounterContainer,
-  StaticCounter: StaticCounterContainer,
-});
-
-let Navigation = createAppContainer(RootStack);
+import { Provider } from 'react-redux';
+import { NavigationNativeContainer } from '@react-navigation/native';
 
 // Render the app container component with the provider around it
-export default class App extends React.Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Navigation />
-      </Provider>
-    );
-  }
+export default class App() {
+  return (
+    <Provider store={store}>
+      <NavigationNativeContainer>
+        {/* Screen configuration */}
+      </NavigationNativeContainer>
+    </Provider>
+  );
 }
 ```
 
-Notice that we take the component returned from `createAppContainer` and wrap it in a `Provider`. Ta da! Now feel free to use `connect` throughout your app.
+Notice that we wrap our components in a `Provider` like we'd normally do with `react-redux`. Ta da! Now feel free to use `connect` throughout your app.
 
-## What about `navigationOptions`?
-
-Alright fair enough, the answer here isn't the most obvious. Let's say that you want to access the Redux store state from the title, what would you do? There are a couple of options. For these examples let's say that you want to put the count from the above example into the title.
-
-### Use a component that is `connect`ed
+### Use a component that is `connect`ed in `options`
 
 Create a component, `connect` it to the store, then use that component in the `title`.
-#TODO
 
 ```js
-class Count extends React.Component {
-  render() {
-    return <Text>Count: {this.props.value}</Text>;
-  }
+function Count({ value }) {
+  return <Text>Count: {value}</Text>;
 }
 
-let CountContainer = connect(state => ({ value: state.count }))(Count);
-
-class Counter extends React.Component {
-  static navigationOptions = {
-    title: <CountContainer />,
-  };
-
-  /* .. the rest of the code */
-}
+const CountContainer = connect(state => ({ value: state.count }))(Count);
 ```
 
-[See a runnable example](https://snack.expo.io/@react-navigation/redux-example-with-dynamic-title).
+```js
+<Screen
+  name="Test"
+  component={TestScreen}
+  options={{ title: () => <CountContainer /> }}
+/>
+```
 
 ### Pass the state you care about as a param to the screen
 
@@ -66,67 +53,46 @@ If the value isn't expected to change, you can just pass it from a `connect`ed c
 <Button
   title="Go to static count screen"
   onPress={() =>
-    this.props.navigation.navigate('StaticCounter', {
-      count: this.props.count,
+    props.navigation.navigate('StaticCounter', {
+      count: props.count,
     })
   }
 />
 ```
 
-#TODO
-
 ```js
-class StaticCounter extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('count'),
-  });
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.paragraph}>
-          {this.props.navigation.getParam('count')}
-        </Text>
-      </View>
-    );
-  }
+function StaticCounter({ route }) {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.paragraph}>{route.params.count}</Text>
+    </View>
+  );
 }
 ```
 
-[See a runnable example](https://snack.expo.io/@react-navigation/redux-example-with-dynamic-title).
+```js
+<Screen
+  name="Counter"
+  component={StaticCounter}
+  options={({ route }) => ({ title: () => route.params.count })}
+/>
+```
 
 ### setParams from your screen
 
 Let's modify the `StaticCounter` from the previous example as follows:
-#TODO
 
 ```js
-class StaticCounter extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('count'),
-  });
+function StaticCounter({ count, route, navigation }) {
+  React.useEffect(() => {
+    navigation.setParams({ count });
+  }, [navigation, count]);
 
-  componentDidMount() {
-    this.updateCount();
-  }
-
-  componentDidUpdate() {
-    this.updateCount();
-  }
-
-  updateCount() {
-    this.props.navigation.setParams({ count: this.props.count });
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.paragraph}>
-          {this.props.navigation.getParam('count')}
-        </Text>
-      </View>
-    );
-  }
+  return (
+    <View style={styles.container}>
+      <Text style={styles.paragraph}>{route.params.count}</Text>
+    </View>
+  );
 }
 ```
 
@@ -134,4 +100,8 @@ Now whenever the store updates we update the `count` param and the title updates
 
 ## Can I store the navigation state in Redux too?
 
-This is technically possible, but we don't recommend it - it's too easy to shoot yourself in the foot and slow down / break your app. We encourage you to leave it up to React Navigation to manage the navigation state. But if you really want to do this, you can use [react-navigation-redux-helpers](https://github.com/react-navigation/react-navigation-redux-helpers), but this isn't an officially supported workflow.
+This is not possible. We don't support it because it's too easy to shoot yourself in the foot and slow down / break your app.
+
+However it's possible to use [`redux-devtools-extension`](https://github.com/zalmoxisus/redux-devtools-extension) to inspect the navigation state and actions, as well as perform time travel debugging. This works out of the box without any extra configuration.
+
+If you use [`react-native-debugger`](https://github.com/jhen0409/react-native-debugger), it already includes this extension.
