@@ -16,45 +16,43 @@ What follows within the _Fundamentals_ section of this documentation is a tour o
 
 ## Installation
 
-Install the `react-navigation` package in your React Native project.
+Install the required packages in your React Native project.
 
 ```bash
-yarn add react-navigation
+yarn add @react-navigation/core@next @react-navigation/native@next
 # or with npm
-# yarn addreact-navigation
+# npm install @react-navigation/core@next @react-navigation/native@next
 ```
 
-Next, install `react-native-gesture-handler` and `react-native-reanimated`.
+Several official navigators rely on some third party libraries for animations and gesture such as [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated). Let's install them.
 
-If you're using Expo, to ensure that you get the compatible versions of the libraries you should run:
+If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
 
-```bash
+```sh
 expo install react-native-gesture-handler react-native-reanimated
 ```
 
-Otherwise, just use yarn or npm directly:
+If you are not using Expo, run the following:
 
-```bash
+```sh
 yarn add react-native-gesture-handler react-native-reanimated
-# or with npm
-# yarn addreact-native-gesture-handler react-native-reanimated
 ```
 
-Next, if you are not using the Expo managed workflow then you need to link these libraries if you haven't already. The steps depends on your React Native version:
+If you are using Expo, you are done. Otherwise, continue to the next steps.
+
+Next, we need to link these libraries. The steps depends on your React Native version:
 
 - **React Native 0.60 and higher**
 
   On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
 
-  On iOS, to complete the linking, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
+  To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
 
   ```sh
   cd ios
   pod install
   cd ..
   ```
-
-  On Android, it shouldn't need any more steps. But if you get errors regarding Android Support library during building the app, you need to install and configure [jetifier](https://github.com/mikehardy/jetifier).
 
 - **React Native 0.59 and lower**
 

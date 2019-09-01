@@ -32,19 +32,19 @@ const Tab = createBottomTabNavigator();
 function App2() {
   return (
     <NativeContainer>
-      <Stack.Navigator initialRouteName="home" headerMode="none">
-        <Stack.Screen name="settings" component={Settings} />
+      <Stack.Navigator initialRouteName="Home" headerMode="none">
+        <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen
-          name="profile"
+          name="Profile"
           component={Profile}
           options={{ title: 'John Doe' }}
         />
-        <Stack.Screen name="home">
+        <Stack.Screen name="Home">
           {() => (
-            <Tab.Navigator initialRouteName="feed" tabBarComponent={() => null}>
-              <Tab.Screen name="feed" component={Feed} />
-              <Tab.Screen name="article" component={Article} />
-              <Tab.Screen name="notifications">
+            <Tab.Navigator initialRouteName="Feed" tabBarComponent={() => null}>
+              <Tab.Screen name="Feed" component={Feed} />
+              <Tab.Screen name="Article" component={Article} />
+              <Tab.Screen name="Notifications">
                 {props => <Notifications {...props} />}
               </Tab.Screen>
             </Tab.Navigator>

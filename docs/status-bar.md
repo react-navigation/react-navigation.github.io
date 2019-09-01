@@ -43,8 +43,8 @@ const Stack = createStackNavigator();
 export default function MyStack() {
   return (
     <Stack.Navigator headerMode="none">
-      <Stack.Screen name="screen-1" component={Screen1} />
-      <Stack.Screen name="screen-2" component={Screen2} />
+      <Stack.Screen name="Screen1" component={Screen1} />
+      <Stack.Screen name="Screen2" component={Screen2} />
     </Stack.Navigator>
   );
 }

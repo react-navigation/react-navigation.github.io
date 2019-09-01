@@ -3,7 +3,6 @@
     "Fundamentals": [
       "getting-started",
       "hello-react-navigation",
-      "supported-react-native-versions",
       "navigating",
       "navigation-lifecycle",
       "params",
@@ -15,6 +14,7 @@
       "glossary-of-terms",
       "common-mistakes",
       "react-native-screens",
+      "supported-react-native-versions",
       "limitations"
     ],
     "Guides": [

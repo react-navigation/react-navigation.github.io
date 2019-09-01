@@ -3,7 +3,6 @@
     "Fundamentals": [
       "version-4.x-getting-started",
       "version-4.x-hello-react-navigation",
-      "version-4.x-supported-react-native-versions",
       "version-4.x-navigating",
       "version-4.x-navigation-lifecycle",
       "version-4.x-params",
@@ -15,6 +14,7 @@
       "version-4.x-glossary-of-terms",
       "version-4.x-common-mistakes",
       "version-4.x-react-native-screens",
+      "version-4.x-supported-react-native-versions",
       "version-4.x-limitations"
     ],
     "Guides": [

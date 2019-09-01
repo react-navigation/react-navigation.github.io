@@ -70,15 +70,15 @@ return (
   <SimpleStack.Navigator>
     {isLoading ? (
       // We haven't finished checking for the token yet
-      <SimpleStack.Screen name="splash" component={Splash} />
+      <SimpleStack.Screen name="Splash" component={Splash} />
     ) : userToken === undefined ? (
       // Notoken found, user isn't signed in
-      <SimpleStack.Screen name="sign-in">
+      <SimpleStack.Screen name="SignIn">
         {() => <SignInScreen onSignIn={setUserToken} />}
       </SimpleStack.Screen>
     ) : (
       // User is signed in
-      <SimpleStack.Screen name="home" component={HomeScreen} />
+      <SimpleStack.Screen name="Home" component={HomeScreen} />
     )}
   </SimpleStack.Navigator>
 );
@@ -91,18 +91,18 @@ We're conditionally defining one screen for each case here. But you could define
 ```js
 userToken === undefined ? (
   <>
-    <SimpleStack.Screen name="sign-in">
+    <SimpleStack.Screen name="SignIn">
       {() => <SignInScreen onSignIn={setUserToken} />}
     </SimpleStack.Screen>
-    <SimpleStack.Screen name="sign-up">
+    <SimpleStack.Screen name="SignUp">
       {() => <SignUpScreen onSignIn={setUserToken} />}
     </SimpleStack.Screen>
-    <SimpleStack.Screen name="reset-password" component={ResetPassword} />
+    <SimpleStack.Screen name="ResetPassword" component={ResetPassword} />
   </>
 ) : (
   <>
-    <SimpleStack.Screen name="home" component={HomeScreen} />
-    <SimpleStack.Screen name="profile" component={ProfileScreen} />
+    <SimpleStack.Screen name="Home" component={HomeScreen} />
+    <SimpleStack.Screen name="Profile" component={ProfileScreen} />
   </>
 );
 ```

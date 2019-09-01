@@ -65,8 +65,8 @@ const Drawer = createDrawerNavigator();
 function App() {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="feed" component={Feed} />
-      <Drawer.Screen name="article" component={Article} />
+      <Drawer.Screen name="Feed" component={Feed} />
+      <Drawer.Screen name="Article" component={Article} />
     </Drawer.Navigator>
   );
 }

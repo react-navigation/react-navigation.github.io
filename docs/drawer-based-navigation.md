@@ -47,7 +47,7 @@ function MyNotificationsScreen({ navigation }) {
 exprt default function App() {
   return (
     <NavigationNativeContainer>
-      <Drawer.Navigator initialRouteName="feed">
+      <Drawer.Navigator initialRouteName="Feed">
         <Drawer.Screen name="Home" component={MyHomeScreen} />
         <Drawer.Screen name="Notifications" component={MyNotificationsScreen} />
       </Drawer.Navigator>

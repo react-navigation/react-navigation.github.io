@@ -11,7 +11,7 @@ By default the stack navigator is configured to have the familiar iOS and Androi
 To use this navigator, you need to install [`@react-navigation/stack`](https://github.com/navigation-ex/packages/stack):
 
 ```sh
-yarn add @react-navigation/core@next @react-navigation/stack@next
+yarn add @react-navigation/core@next @react-navigation/stack@next @react-native-community/masked-view
 ```
 
 Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated) and [`react-native-screens`](https://github.com/kmagiera/react-native-screens).
@@ -67,10 +67,10 @@ const Stack = createStackNavigator();
 function App() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="home" component={Home} />
-      <Stack.Screen name="notifications" component={Notifications} />
-      <Stack.Screen name="profile" component={Profile} />
-      <Stack.Screen name="settings" component={Settings} />
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Notifications" component={Notifications} />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Settings" component={Settings} />
     </Stack.Navigator>
   );
 }
@@ -278,7 +278,7 @@ const Stack = createStackNavigator();
 function App() {
   return (
     <Stack.Navigator
-      initialRouteName="home"
+      initialRouteName="Home"
       headerMode="screen"
       screenOptions={{
         headerTintColor: 'white',
@@ -286,24 +286,23 @@ function App() {
       }}
     >
       <Stack.Screen
-        name="home"
+        name="Home"
         component={Home}
         options={{
           title: 'Awesome app',
         }}
       />
       <Stack.Screen
-        name="profile"
+        name="Profile"
         component={Profile}
         options={{
           title: 'My profile',
         }}
       />
       <Stack.Screen
-        name="settings"
+        name="Settings"
         component={Settings}
         options={{
-          title: 'Settings',
           gestureEnabled: false,
         }}
       />
@@ -457,7 +456,7 @@ You can spread these presets in `options` to customize the animation for a scree
 
 ```js
 <Stack.Screen
-  name="name"
+  name="Profile"
   component={Profile}
   options={{
     title: 'Profile',
@@ -472,15 +471,15 @@ Example configuration for iOS modal presentation style:
 
 ```js
 <Stack.Navigator
-  initialRouteName="home"
+  initialRouteName="Home"
   screenOptions={{
     ...TransitionPresets.ModalPresentationIOS,
     gestureEnabled: true,
     cardOverlayEnabled: true,
   }}
 >
-  <Stack.Screen name="home" component={Home} />
-  <Stack.Screen name="profile" component={Profile} />
-  <Stack.Screen name="settings" component={Settings} />
+  <Stack.Screen name="Home" component={Home} />
+  <Stack.Screen name="Profile" component={Profile} />
+  <Stack.Screen name="Settings" component={Settings} />
 </Stack.Navigator>
 ```

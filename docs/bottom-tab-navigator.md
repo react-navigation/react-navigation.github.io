@@ -24,8 +24,8 @@ const Tab = createBottomTabNavigator();
 function App() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="feed" component={Feed} />
-      <Tab.Screen name="article" component={Article} />
+      <Tab.Screen name="Feed" component={Feed} />
+      <Tab.Screen name="Article" component={Article} />
     </Tab.Navigator>
   );
 }
@@ -156,13 +156,13 @@ const Tab = createBottomTabNavigator();
 function App() {
   return (
     <Tab.Navigator
-      initialRouteName="feed"
+      initialRouteName="Feed"
       activeTintColor="#e91e63"
       labelStyle={{ fontSize: 12 }}
       style={{ backgroundColor: 'tomato' }}
     >
       <Tab.Screen
-        name="feed"
+        name="Feed"
         component={Feed}
         options={{
           tabBarLabel: 'Home',
@@ -172,7 +172,7 @@ function App() {
         }}
       />
       <Tab.Screen
-        name="notifications"
+        name="Notifications"
         component={Notifications}
         options={{
           tabBarLabel: 'Updates',
@@ -182,7 +182,7 @@ function App() {
         }}
       />
       <Tab.Screen
-        name="profile"
+        name="Profile"
         component={Profile}
         options={{
           tabBarLabel: 'Profile',

@@ -32,8 +32,8 @@ const Tab = createMaterialBottomTabNavigator();
 function App() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="feed" component={Feed} />
-      <Tab.Screen name="article" component={Article} />
+      <Tab.Screen name="Feed" component={Feed} />
+      <Tab.Screen name="Article" component={Article} />
     </Tab.Navigator>
   );
 }
