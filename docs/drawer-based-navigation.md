@@ -9,7 +9,7 @@ This guide covers [createDrawerNavigator](drawer-navigator.html).
 To use this navigator, you need to install `@react-navigation/drawer` and its peer dependencies:
 
 ````sh
-npm install react-navigation-tabs react-native-reanimated
+yarn addreact-navigation-tabs react-native-reanimated
 ```	```
 
 

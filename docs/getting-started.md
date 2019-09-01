@@ -21,7 +21,7 @@ Install the `react-navigation` package in your React Native project.
 ```bash
 yarn add react-navigation
 # or with npm
-# npm install react-navigation
+# yarn addreact-navigation
 ```
 
 Next, install `react-native-gesture-handler` and `react-native-reanimated`.
@@ -37,7 +37,7 @@ Otherwise, just use yarn or npm directly:
 ```bash
 yarn add react-native-gesture-handler react-native-reanimated
 # or with npm
-# npm install react-native-gesture-handler react-native-reanimated
+# yarn addreact-native-gesture-handler react-native-reanimated
 ```
 
 Next, if you are not using the Expo managed workflow then you need to link these libraries if you haven't already. The steps depends on your React Native version:

@@ -11,7 +11,7 @@ By default the stack navigator is configured to have the familiar iOS and Androi
 To use this navigator, you need to install [`@react-navigation/stack`](https://github.com/navigation-ex/packages/stack):
 
 ```sh
-yarn add @react-navigation/core @react-navigation/stack
+yarn add @react-navigation/core@next @react-navigation/stack@next
 ```
 
 Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated) and [`react-native-screens`](https://github.com/kmagiera/react-native-screens).
