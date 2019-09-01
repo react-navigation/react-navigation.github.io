@@ -142,10 +142,10 @@ The reason that is necessary to use `Expo.Linking.makeUrl` is that the scheme wi
 
 To test the URI on the simulator in the Expo client app, run the following:
 
-```
+```sh
 xcrun simctl openurl booted [ put your URI prefix in here ]
 
-// for example
+# for example
 
 xcrun simctl openurl booted exp://127.0.0.1:19000/--/chat/Eric
 ```
@@ -154,10 +154,10 @@ xcrun simctl openurl booted exp://127.0.0.1:19000/--/chat/Eric
 
 To test the intent handling in Android (Expo client app ), run the following:
 
-```
+```sh
 adb shell am start -W -a android.intent.action.VIEW -d "[ put your URI prefix in here ]" com.simpleapp
 
-// for example
+# for example
 
 adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:19000/--/chat/Eric" com.simpleapp
 ```
@@ -172,7 +172,7 @@ Let's configure the native iOS app to open based on the `mychat://` URI scheme.
 
 In `SimpleApp/ios/SimpleApp/AppDelegate.m`:
 
-```
+```objc
 // Add the header at the top of the file:
 #import <React/RCTLinkingManager.h>
 
@@ -197,7 +197,7 @@ react-native run-ios
 
 To test the URI on the simulator, run the following:
 
-```
+```sh
 xcrun simctl openurl booted mychat://chat/Eric
 ```
 
@@ -212,7 +212,7 @@ In `SimpleApp/android/app/src/main/AndroidManifest.xml`, do these followings adj
 1. Set `launchMode` of `MainActivity` to `singleTask` in order to receive intent on existing `MainActivity`. It is useful if you want to perform navigation using deep link you have been registered - [details](http://developer.android.com/training/app-indexing/deep-linking.html#adding-filters)
 2. Add the new `intent-filter` inside the `MainActivity` entry with a `VIEW` type action:
 
-```
+```xml
 <activity
     android:name=".MainActivity"
     android:launchMode="singleTask">
@@ -237,6 +237,18 @@ react-native run-android
 
 To test the intent handling in Android, run the following:
 
-```
+```sh
 adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/Eric" com.simpleapp
+```
+
+## Hybrid iOS Applications (Skip for RN only projects)
+
+If you're using React Navigation within a hybrid app - an iOS app that has both Swift/ObjC and React Native parts - you may be missing the `RCTLinkingIOS` subspec in your Podfile, which is installed by default in new RN projects. To add this, ensure your Podfile looks like the following:
+
+```pod
+ pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    . . . // other subspecs
+    'RCTLinkingIOS',
+    . . .
+  ]
 ```
