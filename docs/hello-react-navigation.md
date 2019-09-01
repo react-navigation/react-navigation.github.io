@@ -8,11 +8,13 @@ In a web browser, you can link to different pages using an anchor (`<a>`) tag. W
 
 React Navigation's stack navigator provides a way for your app to transition between screens and manage navigation history. If your app uses only one stack navigator then it is conceptually similar to how a web browser handles navigation state - your app pushes and pops items from the navigation stack as users interact with it, and this results in the user seeing different screens. A key difference between how this works in a web browser and in React Navigation is that React Navigation's stack navigator provides the gestures and animations that you would expect on Android and iOS when navigating between routes in the stack.
 
+## Basics
+
 Lets start by demonstrating the most common navigator, `createStackNavigator`.
 
 Before continuing, first install [`react-navigation-stack`](https://github.com/react-navigation/stack) following the guide on [Stack Navigator's page](stack-navigator.html).
 
-## Creating a stack navigator
+### Creating a stack navigator
 
 `createStackNavigator` is a function that returns an object which containing 2 properties: `Screen` and `Navigator`. Both of them are React components used for configuring the navigator. The `Navigator` should contains `Screen` elements as its children to define the configuration for routes.
 
@@ -55,7 +57,7 @@ If you run this code, you will see a screen with an empty navigation bar and a g
 
 > The only required configuration for a route is the `screen` component. You can read more about the other options available in the [StackNavigator reference](stack-navigator.html).
 
-## Adding a second route
+### Configuring the navigator
 
 All of the route configuration is specified as props to our navigator. We haven't passed any props to our navigator, so it just uses the default configuration.
 
@@ -90,7 +92,25 @@ function App() {
 // Other code for App component here...
 ```
 
-Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home` route corresponds to the `HomeScreen` component, and the `Details` route corresponds to the `DetailsScreen` component. The initial route for the stack is the `Home` route. The natural question at this point is: "how do I go from the `Home` route to the `Details` route?". That is covered in the [next section](navigating.html).
+Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home` route corresponds to the `HomeScreen` component, and the `Details` route corresponds to the `DetailsScreen` component. The initial route for the stack is the `Home` route.
+
+### Specifying options
+
+Each screen in the navigator can specify some options for the navigator, such as the title to render in the header. These options can be passed in the `options` prop for each screen component:
+
+```js
+<Stack.Screen
+  name="Home"
+  component={HomeScreen}
+  options={{ title: 'Overview' }}
+/>
+```
+
+Sometimes we will want to specify the same options for all of the screens in the navigator. For that, we can pass a `screenOptions` prop to the navigator.
+
+## What's next?
+
+The natural question at this point is: "how do I go from the `Home` route to the `Details` route?". That is covered in the [next section](navigating.html).
 
 ## Summary
 
@@ -98,3 +118,4 @@ Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home`
 - `Stck.Navigator` is a a component that takes route configuration as it's children with additional props for configuration and renders our content.
 - Each `Stack.Screen` component take a `name` prop which refers to the name of the route and `component` prop which specifies the component to render for the route. These are the 2 required props.
 - To specify what the initial route in a stack is, provide an `initialRouteName` as the prop for the navigator.
+- To specify screen-specific options, we can pass an `options` prop to `Stack.Screen`, and for common options, we can pass `screenOptions` to `Stack.Navigator`
