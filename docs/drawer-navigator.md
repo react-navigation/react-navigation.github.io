@@ -242,11 +242,11 @@ Generic title that can be used as a fallback for `headerTitle` and `drawerLabel`
 
 #### `drawerLabel`
 
-String, React Element or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in drawer sidebar. When undefined, scene `title` is used
+String or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in drawer sidebar. When undefined, scene `title` is used
 
 #### `drawerIcon`
 
-React Element or a function, that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in drawer sidebar
+Function, that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in drawer sidebar
 
 #### `drawerLockMode`
 

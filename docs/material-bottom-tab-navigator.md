@@ -99,26 +99,6 @@ Example:
 </Tab.Navigator>
 ```
 
-Example:
-#TODO
-
-```js
-export default createMaterialBottomTabNavigator(
-  {
-    Album: { screen: Album },
-    Library: { screen: Library },
-    History: { screen: History },
-    Cart: { screen: Cart },
-  },
-  {
-    initialRouteName: 'Album',
-    activeColor: '#f0edf6',
-    inactiveColor: '#3e2465',
-    barStyle: { backgroundColor: '#694fad' },
-  }
-);
-```
-
 ### Options for `Tab.Screen`
 
 The `options` prop can be used to configure individual screens inside the navigator. Supported options are:
@@ -129,7 +109,7 @@ Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`
 
 #### `tabBarIcon`
 
-React Element or a function that given `{ focused: boolean, horizontal: boolean, tintColor: string }` returns a React.Node, to display in the tab bar. `horizontal` is `true` when the device is in landscape and `false` when portrait. The icon is re-rendered whenever the device orientation changes.
+Function that given `{ focused: boolean, horizontal: boolean, tintColor: string }` returns a React.Node, to display in the tab bar. `horizontal` is `true` when the device is in landscape and `false` when portrait. The icon is re-rendered whenever the device orientation changes.
 
 #### `tabBarColor`
 
@@ -179,6 +159,61 @@ navigation.addListener('tabPress', e => {
   // Do something manually
   // ...
 });
+```
+
+## Example
+
+```js
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { MaterialCommunityIcons } from 'react-native-vector-icons';
+
+const Tab = createMaterialBottomTabNavigator();
+
+function App() {
+  return (
+    <Tab.Navigator
+      initialRouteName="Feed"
+      activeTintColor="#e91e63"
+      labelStyle={{ fontSize: 12 }}
+      style={{ backgroundColor: 'tomato' }}
+    >
+      <Tab.Screen
+        name="Feed"
+        component={Feed}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ tintColor }) => (
+            <MaterialCommunityIcons name="home" color={tintColor} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Notifications"
+        component={Notifications}
+        options={{
+          tabBarLabel: 'Updates',
+          tabBarIcon: ({ tintColor }) => (
+            <MaterialCommunityIcons name="bell" color={tintColor} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ tintColor }) => (
+            <MaterialCommunityIcons
+              name="account"
+              color={tintColor}
+              size={24}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
 ```
 
 ## Using with `react-native-paper` (optional)
