@@ -12,12 +12,12 @@ To use this navigator, you need to install `@react-navigation/drawer` and its pe
 
 
 ```sh
-yarn addreact-navigation-tabs react-native-reanimated
+yarn add react-navigation-drawer react-native-reanimated react-native-gesture-handler
 ```
 
 ## Minimal example of drawer-based navigation
 
-To use this tab navigator, import it from `@react-navigation/bottom-tabs`:
+To use this drawer navigator, import it from `@react-navigation/drawer`:
 
 
 ```js
@@ -50,7 +50,7 @@ exprt default function App() {
       <Drawer.Navigator initialRouteName="feed">
         <Drawer.Screen name="Home" component={MyHomeScreen} />
         <Drawer.Screen name="Notifications" component={MyNotificationsScreen} />
-      </Tab.Navigator>
+      </Drawer.Navigator>
     </NavigationNativeContainer>
   )
 }
