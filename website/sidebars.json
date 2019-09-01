@@ -39,7 +39,6 @@
       "function-after-focusing-screen"
     ],
     "Build your own Navigator": [
-      "custom-navigator-overview",
       "routers",
       "custom-navigators",
       "custom-routers",
