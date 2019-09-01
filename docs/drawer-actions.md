@@ -12,12 +12,26 @@ The following actions are supported:
 - [closeDrawer](#closeDrawer) - close the drawer
 - [toggleDrawer](#toggleDrawer) - toggle the state, ie. switche from closed to open and vice versa
 
-### Usage
-
-#TODO rather ok, no?
+### toggleDrawer
 
 ```js
 import { DrawerActions } from '@react-navigation/routers';
 
 this.props.navigation.dispatch(DrawerActions.toggleDrawer());
+```
+
+### closeDrawer
+
+```js
+import { DrawerActions } from '@react-navigation/routers';
+
+this.props.navigation.dispatch(DrawerActions.closeDrawer());
+```
+
+### openDrawer
+
+```js
+import { DrawerActions } from '@react-navigation/routers';
+
+this.props.navigation.dispatch(DrawerActions.openDrawer());
 ```
