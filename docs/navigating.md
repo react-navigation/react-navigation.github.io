@@ -120,4 +120,3 @@ Another common requirement is to be able to go back _multiple_ screens -- for ex
 - The header bar will automatically show a back button, but you can programmatically go back by calling `navigation.goBack()`. On Android, the hardware back button just works as expected.
 - You can go back to an existing screen in the stack with `navigation.navigate('RouteName')`, and you can go back to the first screen in the stack with `navigation.popToTop()`.
 - The `navigation` prop is available to all screen components (components defined as screens in route configuration and rendered by React Navigation as a route).
-- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/going-back-v3).

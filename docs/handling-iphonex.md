@@ -12,8 +12,6 @@ It's tempting to solve (a) by wrapping your entire app in a container with paddi
 
 ![](/docs/assets/iphoneX/00-intro.png)
 
-<a href="https://snack.expo.io/@react-navigation/boring-safe-area" target="blank" class="run-code-button">&rarr; Run the example pictured on the left</a> or, preferably, <a href="https://snack.expo.io/@react-navigation/nice-safe-area" target="blank" class="run-code-button">run the example pictured on the right.</a>
-
 ## Hidden/Custom Navigation Bar or Tab Bar
 
 ![Default React Navigation Behavior](/docs/assets/iphoneX/01-iphonex-default.png)
@@ -88,8 +86,6 @@ To fix this you can, once again, wrap your content in a `SafeAreaView`. This wil
 
 In conclusion, use the `SafeAreaView` component on the screens you register with a React Navigation navigator.
 
-A [Snack](https://snack.expo.io/@react-navigation/react-navigation-docs:-iphonex-demo-v3) is available with the code used in this overview.
-
 ## Use `forceInset` to get more control
 
 In some cases you might need more control over which paddings are applied. For example, you can remove bottom padding by passing `forceInset` prop to `SafeAreaView`.
@@ -102,8 +98,6 @@ In some cases you might need more control over which paddings are applied. For e
 ```
 
 `forceInset` takes an object with the keys `top | bottom | left | right | vertical | horizontal` and the values `'always' | 'never'`. Or you can override the padding altogether by passing an integer.
-
-There is also a [Snack](https://snack.expo.io/@react-navigation/react-navigation-docs:-safeareaview-demo-v3) available to demonstrate how `forceInset` behaves.
 
 ## Android notches
 

@@ -26,8 +26,6 @@ class HomeScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/simple-header-button-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
-
 The binding of `this` in `navigationOptions` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
 
 > Please note that a community-developed library for rendering buttons in the header with the correct styling is available: [react-navigation-header-buttons](https://github.com/vonovak/react-navigation-header-buttons).
@@ -68,8 +66,6 @@ class HomeScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/header-interacting-with-component-instance-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
-
 > React Navigation doesn't guarantee that your screen component will be mounted before the header. Because the `increaseCount` param is set in `componentDidMount`, we may not have it available to us in `navigationOptions`. This usually will not be a problem because `onPress` for `Button` and `Touchable` components will do nothing if the callback is null. If you have your own custom component here, you should make sure it behaves as expected with `null` for its press handler prop.
 
 > As an alternative to `setParams`, you could use a state management library (such as Redux or MobX) and communicate between the header and the screen in the same way you would with two distinct components.
@@ -92,4 +88,3 @@ Generally, this is what you want. But it's possible that in some circumstances t
 
 - You can set buttons in the header through the `headerLeft` and `headerRight` properties in `navigationOptions`.
 - The back button is fully customizable with `headerLeft`, but if you just want to change the title or image, there are other `navigationOptions` for that &mdash; `headerBackTitle`, `headerTruncatedBackTitle`, and `headerBackImage`.
-- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/header-interacting-with-component-instance-v3).

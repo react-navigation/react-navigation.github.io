@@ -41,8 +41,6 @@ export default createAppContainer(
 );
 ```
 
-<a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-wrong-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
-
 As we mentioned earlier, you can only modify navigation options for a navigator from one of its screen components. `A` and `B` above are screen components in `HomeStack` and `SettingsStack` respectively, not in the tab navigator. So the result will be that the `tabBarLabel` property is not applied to the tab navigator. We can fix this though!
 #TODO
 
@@ -65,8 +63,6 @@ export default createAppContainer(
   })
 );
 ```
-
-<a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-correct-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 To understand what is going on here, first recall that in the following example, `MyComponent` and `MyOtherComponent` are identical:
 #TODO
@@ -129,8 +125,6 @@ const HomeStack = createStackNavigator(
 );
 ```
 
-<a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-title-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
-
 # getActiveChildNavigationOptions
 
 If you would like to get the `navigationOptions` from the active child of a navigator, you can do that with `getActiveChildNavigationOptions`. This makes it possible for you to set the `tabBarLabel` directly on a screen inside of a stack that is inside of a tab, for example.
@@ -159,8 +153,6 @@ const HomeStack = createStackNavigator(
   }
 );
 ```
-
-<a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-active-child-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 # **Note**: the navigationOptions property vs navigator configuration
 
