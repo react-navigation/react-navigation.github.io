@@ -9,66 +9,68 @@ Now that we know how to customize the look of our headers, let's make them senti
 ## Adding a button to the header
 
 The most common way to interact with a header is by tapping on a button either to the left or the right of the title. Let's add a button to the right side of the header (one of the most difficult places to touch on your entire screen, depending on finger and phone size, but also a normal place to put buttons).
-#TODO
 
 ```js
-class HomeScreen extends React.Component {
-  static navigationOptions = {
-    headerTitle: <LogoTitle />,
-    headerRight: (
-      <Button
-        onPress={() => alert('This is a button!')}
-        title="Info"
-        color="#fff"
-      />
-    ),
-  };
-}
+function StackScreen() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ 
+          headerTitle: <LogoTitle/>,
+          headerRight: (
+            <Button
+              onPress={() => alert('This is a button!')}
+              title="Info"
+              color="#fff"
+            />
+          ),
+        }}
+      />  
+    </Stack.Navigator>
+  )
+)   
 ```
 
-The binding of `this` in `navigationOptions` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
+The binding of `this` in `options` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
 
 > Please note that a community-developed library for rendering buttons in the header with the correct styling is available: [react-navigation-header-buttons](https://github.com/vonovak/react-navigation-header-buttons).
 
 ## Header interaction with its screen component
 
-The most commonly used pattern for giving a header button access to a function on the component instance is to use `params`. We'll demonstrate this with a classic example, the counter.
-#TODO
+The most commonly used pattern for giving a header button access to a combine `route` and `params` props to obtain expected behavior.
 
 ```js
-class HomeScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerTitle: <LogoTitle />,
-      headerRight: (
-        <Button
-          onPress={navigation.getParam('increaseCount')}
-          title="+1"
-          color="#fff"
-        />
-      ),
-    };
-  };
+function StackScreen() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={({ navigation, route }) => ({ 
+          headerTitle: <LogoTitle/>,
+          headerRight: () => (
+            <Button
+              onPress={() => navigation.setParam(route.params.count + 1)}
+              title="Info"
+              color="#fff"
+            />
+          )
+        })}
+      />  
+    </Stack.Navigator>
+  )
+)   
 
-  componentDidMount() {
-    this.props.navigation.setParams({ increaseCount: this._increaseCount });
-  }
-
-  state = {
-    count: 0,
-  };
-
-  _increaseCount = () => {
-    this.setState({ count: this.state.count + 1 });
-  };
-
-  /* later in the render function we display the count */
+function HomeScreen({ route }) {
+  return (
+    <Text>
+      {route.params.count}
+    </Text>    
+  )
 }
 ```
-
-> React Navigation doesn't guarantee that your screen component will be mounted before the header. Because the `increaseCount` param is set in `componentDidMount`, we may not have it available to us in `navigationOptions`. This usually will not be a problem because `onPress` for `Button` and `Touchable` components will do nothing if the callback is null. If you have your own custom component here, you should make sure it behaves as expected with `null` for its press handler prop.
-
-> As an alternative to `setParams`, you could use a state management library (such as Redux or MobX) and communicate between the header and the screen in the same way you would with two distinct components.
 
 ## Customizing the back button
 
@@ -86,5 +88,5 @@ Generally, this is what you want. But it's possible that in some circumstances t
 
 ## Summary
 
-- You can set buttons in the header through the `headerLeft` and `headerRight` properties in `navigationOptions`.
-- The back button is fully customizable with `headerLeft`, but if you just want to change the title or image, there are other `navigationOptions` for that &mdash; `headerBackTitle`, `headerTruncatedBackTitle`, and `headerBackImage`.
+- You can set buttons in the header through the `headerLeft` and `headerRight` properties in `options`.
+- The back button is fully customizable with `headerLeft`, but if you just want to change the title or image, there are other `options` for that &mdash; `headerBackTitle`, `headerTruncatedBackTitle`, and `headerBackImage`.
