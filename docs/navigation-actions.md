@@ -65,7 +65,6 @@ When dispatching `setParams`, the router will produce a new state that has chang
 - `params` - _object_ - required - New params to be merged into existing route params
 - `key` - _string_ - required - Route key that should get the new params
 
-#TODO - idk
 
 ```js
 import { CommonActions } from '@react-navigation/core';
