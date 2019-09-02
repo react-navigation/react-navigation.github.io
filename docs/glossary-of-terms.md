@@ -14,29 +14,28 @@ Also known as navigation header, navigation bar, navbar, and probably many other
 
 A screen component is a component that we use in our route configuration.
 
-#TODO
-
 ```js
-const AppNavigator = createStackNavigator(
-  {
-    Home: {
-      screen: HomeScreen, // <----
-    },
-    Details: {
-      screen: DetailsScreen, // <----
-    },
-  },
-  {
-    initialRouteName: 'Home',
-  }
+
+const Stack = createStackNavigator();
+
+const StactNavigator = (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="Home"
+      conponent={HomeScreen} // <----
+    />
+    <Stack.Screen
+      name="Details"
+      conponent={DetailsScreen} // <----
+    />    
+  </Stack.Navigator>
 );
 ```
 
-The suffix `Screen` in the component name is entirely optional, but a frequently used convention; we could call it `CasaPantalla` and this would work just the same.
+The suffix `Screen` in the component name is entirely optional, but a frequently used convention; we could call it `Michael` and this would work just the same.
 
 We saw earlier that our screen components are provided with the `navigation` prop. It's important to note that _this only happens if the screen is rendered as a route by React Navigation_ (for example, in response to `this.props.navigation.navigate`). For example, if we render `DetailsScreen` as a child of `HomeScreen`, then `DetailsScreen` won't be provided with the `navigation` prop, and when you press the "Go to Details... again" button on the Home screen, the app will throw one of the quintessential JavaScript exceptions "undefined is not an object".
 
-#TODO
 
 ```js
 class HomeScreen extends React.Component {
@@ -62,19 +61,20 @@ The ["Navigation prop reference"](navigation-prop.html) section goes into more d
 This prop will be passed into all screens, and it can be used for the following:
 
 - `dispatch` will send an action up to the router
-  #TODO
-- `state` is the current route for the screen
-- `getParam` is a helper to access a param that may be on the route
 - `navigate`, `goBack`, etc are available to dispatch actions in a convenient way
 
 Navigators can also accept a navigation prop, which they should get from the parent navigator, if there is one.
 
 For more details, see the ["Navigation prop document"](navigation-prop.html).
 
+The ["Route prop reference"](route-prop.html) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `this.props.route`.
+## Route prop
+
+This prop will be passed into all screens. Contains information about current route i.e. `params`, `key` and `name`.
+
 ## Navigation State
 
 The state of a navigator generally looks something like this:
-#TODO
 
 ```js
 {
@@ -92,7 +92,6 @@ For this navigation state, there are two routes (which may be tabs, or cards in 
 ## Route
 
 Each route is a piece of navigation state which contains a key to identify it, and a "name" to designate the type of route. It can also contain arbitrary params:
-#TODO
 
 ```js
 {
@@ -104,8 +103,7 @@ Each route is a piece of navigation state which contains a key to identify it, a
 
 ## Child Navigation State
 
-When composing navigators, it is possible for a route to be a navigation state. It would look like this:
-#TODO
+When composing navigators, it is possible for a route to be a navigation state. It's vital to emphasise, that actually React Navigation under the hood is managed by only one state. Even though you might assume that the state of other navigators are different (because result of `navigator.dengerouslyGetState` might be different for different for different routes – they're only representing part of state important for navigator), still React Navigation internally uses one source of truth. The state would look like this:
 
 ```js
 {
