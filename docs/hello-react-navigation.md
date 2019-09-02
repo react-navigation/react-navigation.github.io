@@ -64,8 +64,6 @@ All of the route configuration is specified as props to our navigator. We haven'
 Let's add a second screen to our stack navigator and configure the screen to render first:
 
 ```js
-// Other code for HomeScreen here...
-
 function DetailsScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -74,7 +72,6 @@ function DetailsScreen() {
   );
 }
 
-// ...
 
 function App() {
   return (
@@ -86,8 +83,6 @@ function App() {
     </NavigationNativeContainer>
   );
 }
-
-// Other code for App component here...
 ```
 
 Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home` route corresponds to the `HomeScreen` component, and the `Details` route corresponds to the `DetailsScreen` component. The initial route for the stack is the `Home` route.
