@@ -103,7 +103,7 @@ Each route is a piece of navigation state which contains a key to identify it, a
 
 ## Child Navigation State
 
-When composing navigators, it is possible for a route to be a navigation state. It's vital to emphasise, that actually React Navigation under the hood is managed by only one state. Even though you might assume that the state of other navigators are different (because result of `navigator.dengerouslyGetState` might be different for different for different routes – they're only representing part of state important for navigator), still React Navigation internally uses one source of truth. The state would look like this:
+When composing navigators, it is possible for a route to be a navigation state. It's vital to emphasise, that actually React Navigation under the hood is managed by only one state. Even though you might assume that the state of other navigators are different (because result of `navigator.dangerouslyGetState()` might be different for different for different routes – they're only representing part of state important for navigator), still React Navigation internally uses one source of truth. The state would look like this:
 
 ```js
 {
