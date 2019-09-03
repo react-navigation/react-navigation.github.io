@@ -63,7 +63,7 @@ export default function App() {
   return (
     <NavigationNativeContainer>
       <Tab.Navigator
-        screenOptopns={({ route }) => {
+        screenOptions={({ route }) => {
           let IconComponent = Ionicons;
           let iconName;
 
