@@ -17,8 +17,6 @@ It's useful when considering whether or not to use a project to understand the t
 
 ## Anti-pitch
 
-#TODO
-
 - The API is sometimes unintuitive and difficult to use, improvements may require breaking changes. We are working to make ["easy things easy and hard things possible"](https://www.quora.com/What-is-the-origin-of-the-phrase-make-the-easy-things-easy-and-the-hard-things-possible) and this may require us to change the API at times.
 - React Navigation does not directly use most of the native navigation APIs on iOS and Android; rather, it uses the lowest level pieces and then re-creates some subset of the APIs on top. This is a conscious choice in order to make it possible for users to customize any part of the navigation experience (because it's implemented in JavaScript) and to be able to debug issues that they encounter without needing to learn Objective C / Swift / Java / Kotlin.
   - If you need the exact platform behavior you are better off using another library that wraps the platform APIs. Read more about these in [Alternatives](alternatives.html) and be sure to understand the tradeoffs that they make before digging in!

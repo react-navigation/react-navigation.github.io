@@ -4,17 +4,25 @@ title: Know when a screen is focused and blurred
 sidebar_label: Know when a screen is focused and blurred
 ---
 
-Screens can add listeners on the `navigation` prop. By default, `focus` and `blur` events are fired when focused screen changes. Navigators can also emit custom events. For example, the stack navigator emits `transitionStart` and `transitionEnd` event, tab navigator emits `tabPress` event etc.
+Screens can add listeners on the `navigation` prop. By default, there are 2 events available:
+
+- `focus` - This event is emitted when the screen comes into focus
+- `blur` - This event is emitted when the screen goes out of focus
+
+Navigators can also emit custom events. For example, the stack navigator emits `transitionStart` and `transitionEnd` event, tab navigator emits `tabPress` event etc.
 
 Example:
 
 ```js
 function Profile({ navigation }) {
-  React.useEffect(() =>
-    navigation.addListener('focus', () => {
-      // do something
-    })
-  );
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // Screen was focused
+      // Do something
+    });
+
+    return unsubscribe;
+  });
 
   return <ProfileContent />;
 }
