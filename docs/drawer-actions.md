@@ -8,19 +8,19 @@ sidebar_label: DrawerActions
 
 The following actions are supported:
 
-- [openDrawer](#openDrawer) - open the drawer
-- [closeDrawer](#closeDrawer) - close the drawer
-- [toggleDrawer](#toggleDrawer) - toggle the state, ie. switche from closed to open and vice versa
+### openDrawer
 
-### toggleDrawer
+The `openDrawer` action can be used to open the drawer pane.
 
 ```js
 import { DrawerActions } from '@react-navigation/routers';
 
-navigation.dispatch(DrawerActions.toggleDrawer());
+navigation.dispatch(DrawerActions.openDrawer());
 ```
 
 ### closeDrawer
+
+The `openDrawer` action can be used to close the drawer pane.
 
 ```js
 import { DrawerActions } from '@react-navigation/routers';
@@ -28,10 +28,27 @@ import { DrawerActions } from '@react-navigation/routers';
 navigation.dispatch(DrawerActions.closeDrawer());
 ```
 
-### openDrawer
+### toggleDrawer
+
+The `toggleDrawer` action can be used to open the drawer pane if closed, or close if open.
 
 ```js
 import { DrawerActions } from '@react-navigation/routers';
 
-navigation.dispatch(DrawerActions.openDrawer());
+navigation.dispatch(DrawerActions.toggleDrawer());
+```
+
+### jumpTo
+
+The `jumpTo` action can be used to jump to an existing route in the drawer navigator.
+
+- `name` - _string_ - Name of the route to jump to.
+- `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
+
+```js
+import { TabActions } from '@react-navigation/routers';
+
+const jumpToAction = TabActions.jumpTo('Profile', { name: 'Satya' });
+
+navigation.dispatch(jumpToAction);
 ```

@@ -4,32 +4,29 @@ title: CommonActions reference
 sidebar_label: CommonActions
 ---
 
-All `CommonActions` return an object that can be sent to the router using `navigation.dispatch()` method.
+A navigation action is an object containing at least a `type` property. The action can be handled by routers with the `getStateForAction` method to return a new state from an existing navigation state.
 
-Note that if you want to dispatch react-navigation actions you should use the action creators provided in this library.
+Each navigation actions can contain at least the following properties:
 
-It's important to highlight that dispatching a `CommonAction` doesn't throw any error when the action is unhandled (similar to when you dispatch an action that isn't handled by a reducer in redux and nothing happens). However, if the app state changes as a result of a dispatch then the return value of the dispatch is `true` and `false` otherwise.
+- `type` (required) - A string which represents the name of the action.
+- `source` (optional) - The route which dispatched the action. This is used by some routers to determine which route to apply the action on. By default, `navigation.dispatch` adds the key of the current route here.
+- `target` (optional) - The key of the navigation state the action should be applied on.
 
-The following actions are supported:
+It's important to highlight that dispatching a navigation action doesn't throw any error when the action is unhandled (similar to when you dispatch an action that isn't handled by a reducer in redux and nothing happens).
 
-- [Navigate](#navigate) - Navigate to another route
-- [Back](#goback) - Go back to previous state
-- [Set Params](#setparams) - Set Params for given route
-- [Init](#init) - Used to initialize first state if state is undefined
+## Common actions
 
-For actions specific to a StackNavigator, see [StackActions](stack-actions.html).
-For actions specific to a switch-based navigators such as TabNavigator, see [SwitchActions](switch-actions.html).
-
-The action creator functions define `toString()` to return the action type, which enables easy usage with third-party Redux libraries, including redux-actions and redux-saga.
+The library exports several action creators under the `CommonActions` namespace. You should use these action creators instead of writing action objects manually.
 
 ### navigate
 
-The `navigate` action will update the current state with the result of a `navigate` action.
+The `navigate` action allows to navigate to a specific route. It takes the following arguments:
 
-- `name` - _String_ - Required - A destination name of the route that has been registered somewhere
-- `params` - _Object_ - Optional - Params to merge into the destination route
-- `action` - _Object_ - Optional - (advanced) The sub-action to run in the child router, if the screen is a navigator. Any one of the actions described in this doc can be set as a sub-action.
-- `key` - _String_ - Optional - The identifier for the route to navigate to. Navigate back to this route if it already exists
+- `name` - _string_ - A destination name of the route that has been registered somewhere..
+- `key` - _string_ - The identifier for the route to navigate to. Navigate back to this route if it already exists..
+- `params` - _object_ - Params to merge into the destination route..
+
+The options object passed should at least contain a `key` or `name` property, and optionally `params`. If both `key` and `name` are passed, stack navigator will create a new route with the specified key if no matches were found.
 
 ```js
 import { CommonActions } from '@react-navigation/core';
@@ -37,41 +34,119 @@ import { CommonActions } from '@react-navigation/core';
 navigation.dispatch(
   CommonActions.navigate({
     name: 'Profile',
-    params: {},
+    params: {
+      user: 'jane',
+    },
+  })
+);
+```
+
+### replace
+
+The `replace` action allows to replace a route in the navigation state. It takes the following arguments:
+
+- `name` - _string_ - A destination name of the route that has been registered somewhere.
+- `params` - _object_ - Params to merge into the destination route.
+
+```js
+import { CommonActions } from '@react-navigation/core';
+
+navigation.dispatch(
+  CommonActions.replace({
+    name: 'Profile',
+    params: {
+      user: 'jane',
+    },
+  })
+);
+```
+
+If you want to replace a particular route, you can add a `source` property referring to the route key:
+
+```js
+import { CommonActions } from '@react-navigation/core';
+
+navigation.dispatch({
+  ...CommonActions.replace({
+    name: 'Profile',
+    params: {
+      user: 'jane',
+    },
+  }),
+  source: route.key,
+});
+```
+
+If the `source` property is explicitly set to `undefined`, it'll replace the focused route.
+
+### reset
+
+The `reset` action allows to reset the navigation state to the given state. It takes the following arguments:
+
+- `state` - _object_ - The new navigation state object to use.
+
+```js
+import { CommonActions } from '@react-navigation/core';
+
+navigation.dispatch(
+  CommonActions.reset({
+    index: 1,
+    routes: [{ name: 'foo' }, { name: 'bar' }],
   })
 );
 ```
 
 ### goBack
 
-Go back to previous screen and close current screen. `back` action creator takes in one optional parameter:
-
-- `key` - _string or null_ - optional - If set, navigation will go back from the given key. If null, navigation will go back anywhere.
+The `goBack` action creator allows to go back to the previous route in history. It doesn't take any arguments.
 
 ```js
 import { CommonActions } from '@react-navigation/core';
 
-navigation.dispatch(
-  CommonActions.goBack({
-    key: 'Profile',
-  })
-);
+navigation.dispatch(CommonActions.goBack());
 ```
+
+If you want to go back from a particular route, you can add a `source` property referring to the route key and a `target` property referring to the `key` of the navigator which contains the route:
+
+```js
+import { CommonActions } from '@react-navigation/core';
+
+navigation.dispatch({
+  ...CommonActions.goBack(),
+  source: route.key,
+  target: state.key,
+});
+```
+
+By default, the key of the route which dispatched the action is passed as the `source` property and the `target` property is `undefined`.
 
 ### setParams
 
-When dispatching `setParams`, the router will produce a new state that has changed the params of a particular route, as identified by the key
+The `setParams` action allows to update params for a certain route. It takes the following arguments:
 
-- `params` - _object_ - required - New params to be merged into existing route params
-- `key` - _string_ - required - Route key that should get the new params
+- `params` - _object_ - required - New params to be merged into existing route params.
 
 ```js
 import { CommonActions } from '@react-navigation/core';
 
-navigation.dispatch(
-  CommonActions.setParams({
-    params: { title: 'Hello' },
-    key: 'screen-123',
-  })
-);
+navigation.dispatch(CommonActions.setParams({ title: 'Hello' }));
 ```
+
+If you want to set params for a particular route, you can add a `source` property referring to the route key:
+
+```js
+import { CommonActions } from '@react-navigation/core';
+
+navigation.dispatch({
+  ...CommonActions.setParams({ title: 'Hello' }),
+  source: route.key,
+});
+```
+
+If the `source` property is explicitly set to `undefined`, it'll set the params for the focused route.
+
+## Navigator specific actions
+
+- StackNavigator - [StackActions](stack-actions.html)
+- TabNavigator - [TabActions](tab-actions.html)
+- DrawerNavigator - [DrawerActions](drawer-actions.html)

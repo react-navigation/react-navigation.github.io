@@ -8,10 +8,6 @@ sidebar_label: StackActions
 
 The following actions are supported:
 
-- [Push](#push) - Add a route on the top of the stack, and navigate forward to it
-- [Pop](#pop) - Navigate back to previous routes
-- [PopToTop](#poptotop) - Navigate to the top route of the stack, dismissing all other routes
-
 ### push
 
 The `push` action adds a route on top of the stack and navigates forward to it. This differs from `navigate` in that `navigate` will pop back to earlier in the stack if a route of the given name is already present there. `push` will always add on top, so a route can be present multiple times.

@@ -28,7 +28,7 @@ function ScreenWithCustomBackBehavior() {
 
     return () =>
       BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-  }, []);
+  }, [isSelectionModeEnabled, disableSelectionMode]);
 
   useFocusEffect(backHandler);
 

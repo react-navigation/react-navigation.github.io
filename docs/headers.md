@@ -91,6 +91,7 @@ function StackScreen() {
             fontWeight: 'bold',
           },
         }}
+      />
     </Stack.Navigator>
   )
 )
