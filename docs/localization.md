@@ -4,14 +4,14 @@ title: Localization
 sidebar_label: Localization
 ---
 
-English is only one of many languages that people speak around the world (thanks a lot, [Tower of Babel](https://en.wikipedia.org/wiki/Tower_of_Babel)) and it's polite and sometimes even necessary to translate to your app into the languages that your users speak. Let's look at one way you can do this in React Navigation - it's not the only way but it'll do the trick. Similar to [themes](themes.html), we will use `screenProps`. You may want to also use React's context API as demonstrated in the [themes](themes.html) guide in order to make it easier to access the translate function from a variety of components.
+English is only one of many languages that people speak around the world (thanks a lot, [Tower of Babel](https://en.wikipedia.org/wiki/Tower_of_Babel)) and it's polite and sometimes even necessary to translate to your app into the languages that your users speak. Let's look at one way you can do this in React Navigation - it's not the only way but it'll do the trick. Similar to [themes](themes.html), we will use React's context API in order to make it easier to access the translate function from a variety of components.
 
 ## Setting up a localization library
 
 We'll need to use some kind of library to store our translations and provide a function that gives us access to them, along with handling fallbacks when we don't have a particular language defined. Localization and internationalization (i18n) are often used interchangably, as in the example below where we get the current `locale` from `expo-localization` and use the `i18n-js` library for managing translations, for no particular reason other than it was available - use whatever you like.
 
 ```jsx
-import  * as Localization from 'expo-localization'; // or whatever library you want
+import * as Localization from 'expo-localization'; // or whatever library you want
 import i18n from 'i18n-js'; // or whatever library you want
 
 const en = {
@@ -33,71 +33,70 @@ console.log(Localization.locale);
 
 ## Wiring up your localization library to navigation
 
-Next let's store our `locale` in the state of our root app component and then thread it through `screenProps` to make it available throughout React Navigation.
+Next let's store our `locale` in the state of our root app component and then thread it through `LocalizationContext` to make it available throughout our app.
+
+```js
+export const LocalizationContext = React,createContext();
+
+export default function App() {
+  const [locale, setLocale] = React.useState(Localization.locale);
+  const localizationContext = React.useMemo(() => ({
+    t: (scope, options) => i18n.t(scope, { locale, ...options }),
+    locale,
+    setlocale,
+  }), [locale]);
+
+  return (
+    <LocalizationContext.Provider value={localizationContext}>
+      <NavigationNativeContainer>
+        {/* Screen configuration */}
+      </NavigationNativeContainer>
+    </LocalizationContext.Provider>
+  );
+}
+```
+
+Now in our screens we can use these `LocalizationContext` as follows:
 
 ```jsx
-export default class App extends React.Component {
-  state = {
-    locale: Localization.locale,
-  };
+function MyScreen() {
+  const { t, locale, setLocale } = React.useContext(LocalizationContext);
 
-  setLocale = locale => {
-    this.setState({ locale });
-  };
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>
+        Current locale: {locale}.{' '}
+        {locale !== 'en' && locale !== 'fr'
+          ? 'Translations will fall back to "en" because none available'
+          : null}
+      </Text>
+      <Text>{t('bar', { someValue: Date.now() })}</Text>
+      {locale === 'en' ? (
+        <Button title="Switch to French" onPress={() => setLocale('fr')} />
+      ) : (
+        <Button title="Switch to English" onPress={() => setLocale('en')} />
+      )}
+    </View>
+  );
+}
+```
 
-  t = (scope, options) => {
-    return i18n.t(scope, { locale: this.state.locale, ...options });
-  };
+We can also use it for screen options:
 
-  render() {
-    return (
-      <AppContainer
-        screenProps={{
-          t: this.t,
-          locale: this.state.locale,
-          setLocale: this.setLocale,
-        }}
+```js
+function MyStack() {
+  const { t } = React.useContext(LocalizationContext);
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={MyScreen}
+        options={{ title: t('foo') }}
       />
-    );
-  }
+    </Stack.Navigator>
+  );
 }
 ```
 
-Now in our screens we can use these `screenProps` as follows:
-
-```jsx
-class Screen extends React.Component {
-  static navigationOptions = ({ screenProps: { t } }) => ({
-    title: t('foo'),
-  });
-
-  render() {
-    let { t, locale } = this.props.screenProps;
-
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>
-          Current locale: {locale}.{' '}
-          {locale !== 'en' && locale !== 'fr'
-            ? 'Translations will fall back to "en" because none available'
-            : null}
-        </Text>
-        <Text>{t('bar', { someValue: Date.now() })}</Text>
-        {locale === 'en' ? (
-          <Button
-            title="Switch to French"
-            onPress={() => this.props.screenProps.setLocale('fr')}
-          />
-        ) : (
-          <Button
-            title="Switch to English"
-            onPress={() => this.props.screenProps.setLocale('en')}
-          />
-        )}
-      </View>
-    );
-  }
-}
-```
-
-You can run this example in [this Snack](https://snack.expo.io/@react-navigation/localization-example). Again, you may want to go further than just passing this through `screenProps` if you want to make it easier to access the `t` function or the other `screenProps` from any React component (and not just screen components that are rendered by React Navigation). Refer to [themes](themes.html) and the [React documentation on context](https://reactjs.org/docs/context.html) for help with that.
+Refer to [themes](themes.html) and the [React documentation on context](https://reactjs.org/docs/context.html) for help.

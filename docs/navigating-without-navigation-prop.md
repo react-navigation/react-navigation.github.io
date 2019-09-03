@@ -4,32 +4,22 @@ title: Navigating without the navigation prop
 sidebar_label: Navigating without the navigation prop
 ---
 
-Calling functions such as `navigate` or `popToTop` on the `navigation` prop is not the only way to navigate around your app. As an alternative, you can dispatch navigation actions on your top-level navigator, provided you aren't passing your own `navigation` prop as you would with a redux integration. The presented approach is useful in situations when you want to trigger a navigation action from places where you do not have access to the `navigation` prop, or if you're looking for an alternative to using the `navigation` prop.
+Calling functions such as `navigate` or `popToTop` on the `navigation` prop is not the only way to navigate around your app. As an alternative, you can dispatch navigation actions on the navigation container. The presented approach is useful in situations when you want to trigger a navigation action from places where you do not have access to the `navigation` prop, or if you're looking for an alternative to using the `navigation` prop.
 
-You can get access to a navigator through a `ref` and pass it to the `NavigationService` which we will later use to navigate. Use this only with the top-level (root) navigator of your app.
+You can get access to the root navigation object through a `ref` and pass it to the `NavigationService` which we will later use to navigate.
 
 ```javascript
 // App.js
 
-import { createStackNavigator, createAppContainer } from 'react-navigation';
-import NavigationService from './NavigationService';
+import { NavigationNativeContainer } from '@react-navigation/native';
+import { navigationRef } from './NavigationService';
 
-const TopLevelNavigator = createStackNavigator({ /* ... */ })
-
-const AppContainer = createAppContainer(TopLevelNavigator);
-
-export default class App extends React.Component {
-  // ...
-
-  render() {
-    return (
-      <AppContainer
-        ref={navigatorRef => {
-          NavigationService.setTopLevelNavigator(navigatorRef);
-        }}
-      />
-    );
-  }
+export default function App() {
+  return (
+    <NavigationNativeContainer ref={navigationRef}>
+      {/* ... */}
+    </NavigationNativeContainer>
+  );
 }
 ```
 
@@ -38,36 +28,22 @@ In the next step, we define `NavigationService` which is a simple module with fu
 ```javascript
 // NavigationService.js
 
-import { NavigationActions } from 'react-navigation';
+import * as React from 'react';
 
-let _navigator;
+export const navigationRef = React.createRef;
 
-function setTopLevelNavigator(navigatorRef) {
-  _navigator = navigatorRef;
-}
-
-function navigate(routeName, params) {
-  _navigator.dispatch(
-    NavigationActions.navigate({
-      routeName,
-      params,
-    })
-  );
+export function navigate(name, params) {
+  navigationRef.current && navigationRef.current.navigate(name, params);
 }
 
 // add other navigation functions that you need and export them
-
-export default {
-  navigate,
-  setTopLevelNavigator,
-};
 ```
 
 Then, in any of your javascript modules, just import the `NavigationService` and call functions which you exported from it. You may use this approach outside of your React components and, in fact, it works just as well when used from within them.
 
 ```javascript
 // any js module
-import NavigationService from 'path-to-NavigationService.js';
+import * as NavigationService from './path/to/NavigationService.js';
 
 // ...
 

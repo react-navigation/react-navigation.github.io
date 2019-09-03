@@ -4,15 +4,17 @@ title: Community-developed Navigators and Libraries
 sidebar_label: Community Navigators and Libraries
 ---
 
+> Libraries listed in this guide may not have been updated to work with the latest version of React Navigation. Please refer to the library's documentation to see which version of React Navigation it supports.
+
 # Navigators
 
 ## Fluid Transitions
 
-Fluid Transitions is a library that provides Shared Element Transitions during navigation between screens using react-navigation. 
+Fluid Transitions is a library that provides Shared Element Transitions during navigation between screens using react-navigation.
 
 A Shared Element Transition is the visualization of an element in one screen being transformed into a corresponding element in another screen during the navigation transition.
 
-The library implements a custom navigator called `FluidNavigator` that makes all this and more possible. 
+The library implements a custom navigator called `FluidNavigator` that makes all this and more possible.
 
 #### Links
 
@@ -22,7 +24,7 @@ The library implements a custom navigator called `FluidNavigator` that makes all
 
 ## react-navigation-collapsible
 
-react-navigation-collapsible is a library and a `Higher Order Component` that adjusts your navigationOptions and makes your screen header collapsible.
+react-navigation-collapsible is a library and a `Higher Order Component` that adjusts your screen options and makes your screen header collapsible.
 
 Since react-navigation's header is designed as `Animated` component. You can animate the header by passing `Animated.Value` from your `ScrollView` or `FlatList` to the header.
 
@@ -52,7 +54,7 @@ Helps you to render buttons in the navigation bar and handle the styling so you 
 
 ## react-navigation-props-mapper
 
-Provides simple HOCs that map react-navigation props to your screen components directly - ie. instead of `const user = this.props.navigation.getParam(activeUser, null)`, you'd write `const user = this.props.activeUser`.
+Provides simple HOCs that map react-navigation props to your screen components directly - ie. instead of `const user = this.props.route.params.activeUser`, you'd write `const user = this.props.activeUser`.
 
 #### Links
 

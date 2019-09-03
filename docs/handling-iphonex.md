@@ -12,8 +12,6 @@ It's tempting to solve (a) by wrapping your entire app in a container with paddi
 
 ![](/docs/assets/iphoneX/00-intro.png)
 
-<a href="https://snack.expo.io/@react-navigation/boring-safe-area" target="blank" class="run-code-button">&rarr; Run the example pictured on the left</a> or, preferably, <a href="https://snack.expo.io/@react-navigation/nice-safe-area" target="blank" class="run-code-button">run the example pictured on the right.</a>
-
 ## Hidden/Custom Navigation Bar or Tab Bar
 
 ![Default React Navigation Behavior](/docs/assets/iphoneX/01-iphonex-default.png)
@@ -23,35 +21,52 @@ However, if you're overriding the default navigation bar, it's important to ensu
 For example, if I render nothing for the `header` or `tabBarComponent`, nothing renders
 
 ```jsx
-const Tabs = createBottomTabNavigator({
-  ...
-}, {
-  tabBarComponent: () => null,
-});
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-export default createStackNavigator({
-  ...
-}, {
-  headerMode: 'none',
-});
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function App2() {
+  return (
+    <NativeContainer>
+      <Stack.Navigator initialRouteName="Home" headerMode="none">
+        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{ title: 'John Doe' }}
+        />
+        <Stack.Screen name="Home">
+          {() => (
+            <Tab.Navigator initialRouteName="Feed" tabBarComponent={() => null}>
+              <Tab.Screen name="Feed" component={Feed} />
+              <Tab.Screen name="Article" component={Article} />
+              <Tab.Screen name="Notifications">
+                {props => <Notifications {...props} />}
+              </Tab.Screen>
+            </Tab.Navigator>
+          )}
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NativeContainer>
+  );
 ```
 
 ![Text hidden by iPhoneX UI elements](/docs/assets/iphoneX/02-iphonex-content-hidden.png)
 
-To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-navigation`. Recall that `SafeAreaView` should not wrap entire navigators, just the screen components or any content in them.
+To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-native-safe-area-view`. Recall that `SafeAreaView` should not wrap entire navigators, just the screen components or any content in them.
 
 ```jsx
-import { SafeAreaView } from 'react-navigation';
+import SafeAreaView from 'react-native-safe-area-view';
 
-class MyHomeScreen extends Component {
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.paragraph}>This is top text.</Text>
-        <Text style={styles.paragraph}>This is bottom text.</Text>
-      </SafeAreaView>
-    );
-  }
+function MyHomeScreen() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.paragraph}>This is top text.</Text>
+      <Text style={styles.paragraph}>This is bottom text.</Text>
+    </SafeAreaView>
+  );
 }
 ```
 
@@ -71,8 +86,6 @@ To fix this you can, once again, wrap your content in a `SafeAreaView`. This wil
 
 In conclusion, use the `SafeAreaView` component on the screens you register with a React Navigation navigator.
 
-A [Snack](https://snack.expo.io/@react-navigation/react-navigation-docs:-iphonex-demo-v3) is available with the code used in this overview.
-
 ## Use `forceInset` to get more control
 
 In some cases you might need more control over which paddings are applied. For example, you can remove bottom padding by passing `forceInset` prop to `SafeAreaView`.
@@ -86,8 +99,6 @@ In some cases you might need more control over which paddings are applied. For e
 
 `forceInset` takes an object with the keys `top | bottom | left | right | vertical | horizontal` and the values `'always' | 'never'`. Or you can override the padding altogether by passing an integer.
 
-There is also a [Snack](https://snack.expo.io/@react-navigation/react-navigation-docs:-safeareaview-demo-v3) available to demonstrate how `forceInset` behaves.
-
 ## Android notches
 
 React Native does not currently expose an API to access information about device cutouts on Android devices. If your app has an opaque status bar (the default in React Native), that may handle the area where the device has its cutout without any further work required. If not, to workaround this you may want to use the following temporary workaround:
@@ -98,13 +109,14 @@ React Native does not currently expose an API to access information about device
 
 ```js
 import { Platform } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import SafeAreaView from 'react-native-safe-area-view';
 import DeviceInfo from 'react-native-device-info';
 
 if (Platform.OS === 'android' && DeviceInfo.hasNotch()) {
-  SafeAreaView.setStatusBarHeight(
+  SafeAreaView
+    .setStatusBarHeight
     /* Some value for status bar height + notch height */
-  );
+    ();
 }
 ```
 

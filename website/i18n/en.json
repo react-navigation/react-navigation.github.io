@@ -9,13 +9,6 @@
         "title": "Alternative libraries",
         "sidebar_label": "Alternative libraries"
       },
-      "animated-switch-navigator": {
-        "title": "createAnimatedSwitchNavigator",
-        "sidebar_label": "createAnimatedSwitchNavigator"
-      },
-      "anti-pitch": {
-        "title": "anti-pitch"
-      },
       "api-reference": {
         "title": "API Reference",
         "sidebar_label": "Overview"
@@ -54,10 +47,6 @@
       "custom-android-back-button-handling": {
         "title": "Custom Android back button behavior",
         "sidebar_label": "Custom Android back button behavior"
-      },
-      "custom-navigator-overview": {
-        "title": "Overview",
-        "sidebar_label": "Overview"
       },
       "custom-navigators": {
         "title": "Custom navigators",
@@ -165,16 +154,12 @@
         "sidebar_label": "Moving between screens"
       },
       "navigation-actions": {
-        "title": "NavigationActions reference",
-        "sidebar_label": "NavigationActions"
+        "title": "CommonActions reference",
+        "sidebar_label": "CommonActions"
       },
       "navigation-context": {
         "title": "NavigationContext",
         "sidebar_label": "NavigationContext"
-      },
-      "navigation-events": {
-        "title": "NavigationEvents reference",
-        "sidebar_label": "NavigationEvents"
       },
       "navigation-key": {
         "title": "Using the navigation key",
@@ -226,6 +211,10 @@
       "request-feature": {
         "title": "request-feature"
       },
+      "route-prop": {
+        "title": "Route prop reference",
+        "sidebar_label": "Route prop"
+      },
       "routers": {
         "title": "Routers",
         "sidebar_label": "Routers"
@@ -234,16 +223,11 @@
         "title": "Screen tracking for analytics",
         "sidebar_label": "Screen tracking for analytics"
       },
-      "scrollables": {
-        "title": "Scrollables",
-        "sidebar_label": "Scrollables"
-      },
       "search-screen": {
         "title": "search-screen"
       },
       "set-params-on-back": {
-        "title": "Update params when navigating back",
-        "sidebar_label": "Update params when navigating back"
+        "title": "set-params-on-back"
       },
       "stack-actions": {
         "title": "StackActions reference",
@@ -265,41 +249,41 @@
         "title": "Supported React Native versions",
         "sidebar_label": "Supported React Native versions"
       },
-      "switch-actions": {
-        "title": "SwitchActions reference",
-        "sidebar_label": "SwitchActions"
-      },
-      "switch-navigator": {
-        "title": "createSwitchNavigator",
-        "sidebar_label": "createSwitchNavigator"
+      "tab-actions": {
+        "title": "TabActions reference",
+        "sidebar_label": "TabActions"
       },
       "tab-based-navigation": {
         "title": "Tab navigation",
         "sidebar_label": "Tab navigation"
       },
-      "tab-navigator": {
-        "title": "createTabNavigator",
-        "sidebar_label": "createTabNavigator"
-      },
       "themes": {
         "title": "Themes",
         "sidebar_label": "Themes"
       },
-      "transitioner": {
-        "title": "Transitioner",
-        "sidebar_label": "Transitioner"
+      "use-focus-effect": {
+        "title": "useFocusEffect",
+        "sidebar_label": "useFocusEffect"
+      },
+      "use-is-focused": {
+        "title": "useFocusEffect",
+        "sidebar_label": "useFocusEffect"
+      },
+      "use-navigation": {
+        "title": "useNavigation",
+        "sidebar_label": "useNavigation"
+      },
+      "use-route": {
+        "title": "useRoute",
+        "sidebar_label": "useRoute"
+      },
+      "use-scroll-to-top": {
+        "title": "useScrollToTop",
+        "sidebar_label": "useScrollToTop"
       },
       "web-support": {
         "title": "React Navigation on the Web",
         "sidebar_label": "Web support"
-      },
-      "with-navigation-focus": {
-        "title": "withNavigationFocus",
-        "sidebar_label": "withNavigationFocus"
-      },
-      "with-navigation": {
-        "title": "withNavigation",
-        "sidebar_label": "withNavigation"
       },
       "version-1.x/version-1.x-alternatives": {
         "title": "Alternative libraries",
@@ -1110,7 +1094,8 @@
       "Docs": "Docs",
       "API": "API",
       "Help": "Help",
-      "Blog": "Blog"
+      "Blog": "Blog",
+      "Next": "Next"
     },
     "categories": {
       "Fundamentals": "Fundamentals",

@@ -15,98 +15,85 @@ Also known as navigation header, navigation bar, navbar, and probably many other
 A screen component is a component that we use in our route configuration.
 
 ```js
-const AppNavigator = createStackNavigator(
-  {
-    Home: {
-      screen: HomeScreen,    // <----
-    },
-    Details: {
-      screen: DetailsScreen, // <----
-    },
-  },
-  {
-    initialRouteName: 'Home',
-  }
+const Stack = createStackNavigator();
+
+const StactNavigator = (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="Home"
+      conponent={HomeScreen} // <----
+    />
+    <Stack.Screen
+      name="Details"
+      conponent={DetailsScreen} // <----
+    />
+  </Stack.Navigator>
 );
 ```
 
-The suffix `Screen` in the component name is entirely optional, but a frequently used convention; we could call it `CasaPantalla` and this would work just the same. 
+The suffix `Screen` in the component name is entirely optional, but a frequently used convention; we could call it `Michael` and this would work just the same.
 
-We saw earlier that our screen components are provided with the `navigation` prop. It's important to note that *this only happens if the screen is rendered as a route by React Navigation* (for example, in response to `this.props.navigation.navigate`). For example, if we render `DetailsScreen` as a child of `HomeScreen`, then `DetailsScreen` won't be provided with the `navigation` prop, and when you press the "Go to Details... again" button on the Home screen, the app will throw one of the quintessential JavaScript exceptions "undefined is not an object".
+We saw earlier that our screen components are provided with the `navigation` prop. It's important to note that _this only happens if the screen is rendered as a route by React Navigation_ (for example, in response to `navigation.navigate`). For example, if we render `DetailsScreen` as a child of `HomeScreen`, then `DetailsScreen` won't be provided with the `navigation` prop, and when you press the "Go to Details... again" button on the Home screen, the app will throw one of the quintessential JavaScript exceptions "undefined is not an object".
 
 ```js
-class HomeScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to Details"
-          onPress={() => this.props.navigation.navigate('Details')}
-        />
-        <DetailsScreen />
-      </View>
-    );
-  }
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+      <DetailsScreen />
+    </View>
+  );
 }
 ```
-<a href="https://snack.expo.io/@react-navigation/screen-components-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-The ["Navigation prop reference"](navigation-prop.html) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `this.props.navigation`.
+The ["Navigation prop reference"](navigation-prop.html) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `navigation` prop.
 
 ## Navigation Prop
 
 This prop will be passed into all screens, and it can be used for the following:
 
 - `dispatch` will send an action up to the router
-- `state` is the current route for the screen
-- `getParam` is a helper to access a param that may be on the route
 - `navigate`, `goBack`, etc are available to dispatch actions in a convenient way
 
 Navigators can also accept a navigation prop, which they should get from the parent navigator, if there is one.
 
 For more details, see the ["Navigation prop document"](navigation-prop.html).
 
+The ["Route prop reference"](route-prop.html) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `route` prop.
+
+## Route prop
+
+This prop will be passed into all screens. Contains information about current route i.e. `params`, `key` and `name`.
+
 ## Navigation State
 
 The state of a navigator generally looks something like this:
 
-```
+```js
 {
   key: 'StackRouterRoot',
   index: 1,
   routes: [
-    { key: 'A', routeName: 'Home' },
-    { key: 'B', routeName: 'Profile' },
+    { key: 'A', name: 'Home' },
+    { key: 'B', name: 'Profile' },
   ]
 }
 ```
 
 For this navigation state, there are two routes (which may be tabs, or cards in a stack). The index indicates the active route, which is "B".
 
-
 ## Route
 
-Each route is a piece of navigation state which contains a key to identify it, and a "routeName" to designate the type of route. It can also contain arbitrary params:
+Each route is a piece of navigation state which contains a key to identify it, and a "name" to designate the type of route. It can also contain arbitrary params:
 
-```
+```js
 {
   key: 'B',
-  routeName: 'Profile',
+  name: 'Profile',
   params: { id: '123' }
-}
-```
-
-## Child Navigation State
-
-When composing navigators, it is possible for a route to be a navigation state. It would look like this:
-
-```
-{
-  key: 'B',
-  routeName: 'Profile',
-  params: { id: '123' },
-  index: 1,
-  routes: [ {...}, {...} ]
 }
 ```

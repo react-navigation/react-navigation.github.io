@@ -4,81 +4,86 @@ title: Call a function when focused screen changes
 sidebar_label: Call a function when focused screen changes
 ---
 
-In this guide we will call a function on screen focusing. This is useful for making additional API calls when a user revisits a particular screen in a Tab Navigator, or to track user events as they tap around our app.
+In this guide we will call a function or render something on screen focusing. This is useful for making additional API calls when a user revisits a particular screen in a Tab Navigator, or to track user events as they tap around our app.
 
-There are two approaches available to us:
+There are multiple approaches available to us:
 
-1. Using the `withNavigationFocus` higher order component provided by react-navigation.
-2. Listening to the `'didFocus'` event with an event listener.
+1. Listening to the `'focus'` event with an event listener.
+2. Using the `useFocusEffect` hook provided by react-navigation.
+3. Using the `useIsFocused` hook provided by react-navigation.
 
-## Triggering an action with the `withNavigationFocus` higher order component
+## Triggering an action with a `'focus'` event listener
 
-react-navigation provides a [higher order component](https://reactjs.org/docs/higher-order-components.html) that passes an `isFocused` prop to our component, along with the `navigation` object we'd normally get with `withNavigation`.
+We can also listen to the `'focus'` event with an event listener. After setting up an event listener, we must also stop listening to the event when the screen is unmounted.
 
-When the `isFocused` prop is passed to our component, it will pass `true` when the screen is focused and `false` when our component is no longer focused. This enables us to call actions on a user entering or leaving a screen. This is particularly handy when we are trying to stop something when the page is unfocused, like stopping a video or audio file from playing, or stopping the tracking of a user's location.
+With this approach, we will only be able to call an action when the screen focuses. This is useful for performing an action such as logging the screen view for analytics.
 
-Since `withNavigationFocus` passes a prop on every focus change, it will cause our component to re-render when we focus and unfocus a screen. Using this higher order component may introduce unnecessary component re-renders as a screen comes in and out of focus. This could cause issues depending on the type of action we're calling on focusing.
-
-For instance, if we are attempting to make an API call on focus to fetch some data, we only want to fetch data when the component is focused and not when the component becomes unfocused. To prevent extra component re-renders, we could write some logic in `shouldComponentUpdate` to control when the component renders itself, however we may be better off using the event listener method detailed below. The event listener will only call an action and render the component when the screen is focused and will do nothing when a screen becomes unfocused.
-
-### Example
+Example:
 
 ```js
-import React, { Component } from "react";
-import { View } from "react-native";
-import { withNavigationFocus } from "react-navigation";
+import * as React from 'react';
+import { View } from 'react-native';
 
-class TabScreen extends Component {
-  componentDidUpdate(prevProps) {
-    if (prevProps.isFocused !== this.props.isFocused) {
-      // Use the `this.props.isFocused` boolean
-      // Call any action
-    }
-  }
-
-  render() {
-    return <View />;
-  }
-}
-
-// withNavigationFocus returns a component that wraps TabScreen and passes
-// in the navigation prop
-export default withNavigationFocus(TabScreen);
-```
-
-This example is also documented in the <a href="/docs/en/with-navigation-focus.html">`withNavigationFocus` API documentation</a>.
-
-## Triggering an action with a `'didFocus'` event listener
-
-We can also listen to the `'didFocus'` event with an event listener. After setting up an event listener, we must also stop listening to the event when the screen is unmounted.
-
-With this approach, we will only be able to call an action when the screen focuses. This is great for fetching data with an API call when a screen becomes focused, or any other action that needs to happen once the screen comes into view.
-
-### Example
-
-```js
-import React, { Component } from "react";
-import { View } from "react-native";
-import { withNavigation } from "react-navigation";
-
-class TabScreen extends Component {
-  componentDidMount() {
-    const { navigation } = this.props;
-    this.focusListener = navigation.addListener("didFocus", () => {
+export default function TabScreen({ navigation }) {
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
       // The screen is focused
       // Call any action
     });
-  }
 
-  componentWillUnmount() {
-    // Remove the event listener
-    this.focusListener.remove();
-  }
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, []);
 
-  render() {
-    return <View />;
-  }
+  return <View />;
 }
-
-export default withNavigation(TabScreen);
 ```
+
+In most cases, it's recommended to use the `useFocusEffect` hook instead of adding the listener manually. See below for details.
+
+## Triggering an action with the `useFocusEffect` hook
+
+React Navigation provides a [hook](https://reactjs.org/docs/hooks-intro.html) that runs an effect when the screen comes into focus and cleans it up when it goes out of focus. This is useful for cases such as adding event listeners, for fetching data with an API call when a screen becomes focused, or any other action that needs to happen once the screen comes into view.
+
+This is particularly handy when we are trying to stop something when the page is unfocused, like stopping a video or audio file from playing, or stopping the tracking of a user's location.
+
+```js
+import { useFocusEffect } from '@react-navigation/core';
+
+function Profile({ userId }) {
+  const [user, setUser] = React.useState(null);
+
+  const watchUser = React.useCallback(() => {
+    const unsubscribe = API.subscribe(userId, user => setUser(data));
+
+    return () => unsubscribe();
+  }, [userId]);
+
+  useFocusEffect(watchUser);
+
+  return <ProfileContent user={user} />;
+}
+```
+
+## Re-rendering screen with the `useIsFocused` hook
+
+React Navigation provides a [hook](https://reactjs.org/docs/hooks-intro.html) that returns a boolean indicating whether the screen is focused or not.
+
+The hook will return `true` when the screen is focused and `false` when our component is no longer focused. This enables us to render something conditionally based on whether the user is on the screen or not.
+
+The `useIsFocused` hook will cause our component to re-render when we focus and unfocus a screen. Using this hook component may introduce unnecessary component re-renders as a screen comes in and out of focus. This could cause issues depending on the type of action we're calling on focusing. Hence we recommend to use this hook only if you need to trigger a re-render. For side-effects such as subscribing to events or fetching data, use the methods described above.
+
+```js
+import * as React from 'react';
+import { Text } from 'react-native';
+import { useIsFocused } from '@react-navigation/core';
+
+function Profile() {
+  // This hook returns `true` if the screen is focused, `false` otherwise
+  const isFocused = useIsFocused();
+
+  return <Text>{isFocused ? 'focused' : 'unfocused'}</Text>;
+}
+```
+
+This example is also documented in the <a href="/docs/use-is-focused.html">`useIsFocused` API documentation</a>.

@@ -6,57 +6,80 @@ sidebar_label: Deep linking
 
 In this guide we will set up our app to handle external URIs. Let's suppose that we want a URI like `mychat://chat/Eric` to open our app and link straight into a chat screen for some user named "Eric".
 
-## Configuration
+### Deep-link integration
 
-Previously, we had defined a navigator like this:
+To handle incoming links, we need to handle 2 scenarios:
 
-```js
-const SimpleApp = createAppContainer(createStackNavigator({
-  Home: { screen: HomeScreen },
-  Chat: { screen: ChatScreen },
-}));
-```
+1. If the app wasn't previously open, we need to set the initial state based on the link
+2. If the app was already open, we need to update the state to reflect the incoming link
 
-We want paths like `chat/Eric` to link to a "Chat" screen with the `user` passed as a param. Let's re-configure our chat screen with a `path` that tells the router what relative path to match against, and what params to extract. This path spec would be `chat/:user`.
+The current implementation of React Navigation has an advantage in handling deep links and is able to automatically set the state based on the path definitions for each screen. It's possible because it can get the configuration for all screens statically.
 
-```js
-const SimpleApp = createAppContainer(createStackNavigator({
-  Home: { screen: HomeScreen },
-  Chat: {
-    screen: ChatScreen,
-    path: 'chat/:user',
-  },
-}));
-```
+With our dynamic architecture, we can't determine the state automatically. So it's necessary to manually translate a deep link to a navigation state. The library exports a `getStateFromPath` utility to convert a URL to a state object if the path segments translate directly to route names.
 
-If we have nested navigators, we need to provide each parent screen with a `path`. All the paths will be concatenated and can also be an empty string. This path spec would be `friends/chat/:user`.
+For example, the path `/rooms/chat?user=jane` will be translated to a state object like this:
 
 ```js
-const AuthSwitch = createAppContainer(createStackNavigator({
-  AuthLoading:  { screen: AuthLoadingScreen },
-  App: {
-    screen: AppStack,
-    path: '',
-  },
-  Auth: { screen: AuthStack },
-}));
-
-const AppStack = createStackNavigator({
-  Home: { screen: HomeScreen },
-  Friends: {
-    screen: FriendsScreen,
-    path: 'friends',
-  },
-});
-
-const FriendsScreen = createStackNavigator({
-  Overview: { screen: OverviewScreen },
-  Chat: {
-    screen: ChatScreen,
-    path: 'chat/:user',
-  },
-});
+{
+  routes: [
+    {
+      name: 'rooms',
+      state: {
+        routes: [
+          {
+            name: 'chat',
+            params: { user: 'jane' },
+          },
+        ],
+      },
+    },
+  ],
+}
 ```
+
+The `useLinking` hooks makes it easier to handle incoming links:
+
+```js
+import {
+  NavigationNativeContainer,
+  useLinking,
+} from '@react-navigation/native';
+
+function App() {
+  const ref = React.useRef();
+
+  const { getInitialState } = useLinking(ref, {
+    prefixes: ['https://myapp.com', 'myapp://'],
+  });
+
+  const [isReady, setIsReady] = React.useState(false);
+  const [initialState, setInitialState] = React.useState();
+
+  React.useEffect(() => {
+    getInitialState()
+      .catch(() => {})
+      .then(state => {
+        if (state !== undefined) {
+          setInitialState(state);
+        }
+
+        setIsReady(true);
+      });
+  }, [getInitialState]);
+
+  if (!isReady) {
+    return null;
+  }
+
+  return (
+    <NavigationNativeContainer initialState={initialState} ref={ref}>
+      {/* content */}
+    </NavigationNativeContainer>
+  );
+}
+```
+
+The hook also accepts a `getStateFromPath` option where you can provide a custom function to convert the URL to a valid state object for more advanced use cases.
 
 ## Set up with Expo projects
 
@@ -77,11 +100,40 @@ Next, let's configure our navigation container to extract the path from the app'
 ```js
 import * as Expo from 'expo';
 
-const SimpleApp = createAppContainer(createStackNavigator({...}));
-
 const prefix = Expo.Linking.makeUrl('/');
 
-const MainApp = () => <SimpleApp uriPrefix={prefix} />;
+function App() {
+  const ref = React.useRef();
+
+  const { getInitialState } = useLinking(ref, {
+    prefixes: [prefix],
+  });
+
+  const [isReady, setIsReady] = React.useState(false);
+  const [initialState, setInitialState] = React.useState();
+
+  React.useEffect(() => {
+    getInitialState()
+      .catch(() => {})
+      .then(state => {
+        if (state !== undefined) {
+          setInitialState(state);
+        }
+
+        setIsReady(true);
+      });
+  }, [getInitialState]);
+
+  if (!isReady) {
+    return null;
+  }
+
+  return (
+    <NavigationNativeContainer initialState={initialState} ref={ref}>
+      {/* content */}
+    </NavigationNativeContainer>
+  );
+}
 ```
 
 The reason that is necessary to use `Expo.Linking.makeUrl` is that the scheme will differ depending on whether you're in the client app or in a standalone app.
@@ -113,18 +165,6 @@ adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:19000/--
 Read the [Expo linking guide](https://docs.expo.io/versions/latest/guides/linking.html) for more information about how to configure linking in projects built with Expo.
 
 ## Set up with `react-native init` projects
-
-### URI Prefix
-
-Next, let's configure our navigation container to extract the path from the app's incoming URI.
-
-```js
-const SimpleApp = createAppContainer(createStackNavigator({...}));
-
-const prefix = 'mychat://';
-
-const MainApp = () => <SimpleApp uriPrefix={prefix} />;
-```
 
 ### iOS
 
@@ -168,6 +208,7 @@ To test the URI on a real device, open Safari and type `mychat://chat/Eric`.
 To configure the external linking in Android, you can create a new intent in the manifest.
 
 In `SimpleApp/android/app/src/main/AndroidManifest.xml`, do these followings adjustments:
+
 1. Set `launchMode` of `MainActivity` to `singleTask` in order to receive intent on existing `MainActivity`. It is useful if you want to perform navigation using deep link you have been registered - [details](http://developer.android.com/training/app-indexing/deep-linking.html#adding-filters)
 2. Add the new `intent-filter` inside the `MainActivity` entry with a `VIEW` type action:
 
@@ -214,10 +255,12 @@ If you're using React Navigation within a hybrid app - an iOS app that has both 
 
 ## Disable deep linking
 
-In case you want to handle routing with deep-linking by yourself instead of `react-navigation`, you can pass `enableURLHandling={false}` prop to your app container:
+If you're using React Navigation within a hybrid app - an iOS app that has both Swift/ObjC and React Native parts - you may be missing the `RCTLinkingIOS` subspec in your Podfile, which is installed by default in new RN projects. To add this, ensure your Podfile looks like the following:
 
-```js
-const SimpleApp = createAppContainer(createStackNavigator({...}));
-
-const MainApp = () => <SimpleApp enableURLHandling={false} />;
+```pod
+ pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    . . . // other subspecs
+    'RCTLinkingIOS',
+    . . .
+  ]
 ```
