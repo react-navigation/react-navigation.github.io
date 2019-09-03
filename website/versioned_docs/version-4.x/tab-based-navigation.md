@@ -64,7 +64,7 @@ export default createBottomTabNavigator(
     Settings: SettingsScreen,
   },
   {
-    navigationOptions: ({ navigation }) => ({
+    defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
         let IconComponent = Ionicons;
