@@ -7,85 +7,13 @@ original_id: material-top-tab-navigator
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the route or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
-To use this navigator, you need to install [`react-navigation-tabs`](https://github.com/react-navigation/tabs):
+To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`react-navigation-tabs`](https://github.com/react-navigation/tabs).
 
 ```sh
-yarn add react-navigation react-navigation-tabs
+yarn add react-navigation-tabs
 ```
 
-Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated).
-
-If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
-
-```sh
-expo install react-native-gesture-handler react-native-reanimated
-```
-
-If you are not using Expo, run the following:
-
-```sh
-yarn add react-native-reanimated react-native-gesture-handler
-```
-
-If you are using Expo, you are done. Otherwise, continue to the next steps.
-
-Next, we need to link these libraries. The steps depends on your React Native version:
-
-- **React Native 0.60 and higher**
-
-  On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
-
-  To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
-
-  ```sh
-  cd ios
-  pod install
-  cd ..
-  ```
-
-- **React Native 0.59 and lower**
-
-  If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
-
-  ```sh
-  react-native link react-native-reanimated
-  react-native link react-native-gesture-handler
-  ```
-
-To finalize installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
-
-```diff
-package com.reactnavigation.example;
-
-import com.facebook.react.ReactActivity;
-+ import com.facebook.react.ReactActivityDelegate;
-+ import com.facebook.react.ReactRootView;
-+ import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
-
-public class MainActivity extends ReactActivity {
-
-  @Override
-  protected String getMainComponentName() {
-    return "Example";
-  }
-
-+  @Override
-+  protected ReactActivityDelegate createReactActivityDelegate() {
-+    return new ReactActivityDelegate(this, getMainComponentName()) {
-+      @Override
-+      protected ReactRootView createRootView() {
-+       return new RNGestureHandlerEnabledRootView(MainActivity.this);
-+      }
-+    };
-+  }
-}
-```
-
-Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
-
-## API Definition
-
-To use this tab navigator, import it from `react-navigation-tabs`:
+## API
 
 ```js
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';

@@ -9,82 +9,13 @@ Provides a way for your app to transition between screens where each new screen 
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
 
-To use this navigator, you need to install [`react-navigation-stack`](https://github.com/react-navigation/stack):
+To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`react-navigation-stack`](https://github.com/react-navigation/stack).
 
 ```sh
-yarn add react-navigation react-navigation-stack
+yarn add react-navigation-stack
 ```
 
-Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-screens`](https://github.com/kmagiera/react-native-screens).
-
-If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
-
-```sh
-expo install react-native-gesture-handler react-native-screens
-```
-
-If you are not using Expo, run the following:
-
-```sh
-yarn add react-native-gesture-handler react-native-screens
-```
-
-If you are using Expo, you are done. Otherwise, continue to the next steps.
-
-Next, we need to link these libraries. The steps depends on your React Native version:
-
-- **React Native 0.60 and higher**
-
-  On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
-
-  To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
-
-  ```sh
-  cd ios
-  pod install
-  cd ..
-  ```
-
-- **React Native 0.59 and lower**
-
-  If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
-
-  ```sh
-  react-native link react-native-gesture-handler
-  ```
-
-To finalize installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
-
-```diff
-package com.reactnavigation.example;
-
-import com.facebook.react.ReactActivity;
-+ import com.facebook.react.ReactActivityDelegate;
-+ import com.facebook.react.ReactRootView;
-+ import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
-
-public class MainActivity extends ReactActivity {
-
-  @Override
-  protected String getMainComponentName() {
-    return "Example";
-  }
-
-+  @Override
-+  protected ReactActivityDelegate createReactActivityDelegate() {
-+    return new ReactActivityDelegate(this, getMainComponentName()) {
-+      @Override
-+      protected ReactRootView createRootView() {
-+       return new RNGestureHandlerEnabledRootView(MainActivity.this);
-+      }
-+    };
-+  }
-}
-```
-
-Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
-
-## API Definition
+## API
 
 ```js
 import { createStackNavigator } from 'react-navigation-stack';
@@ -412,3 +343,10 @@ const HomeStack = createStackNavigator(
   { initialRouteName: 'HomeScreen', transitionConfig: dynamicModalTransition }
 );
 ```
+
+## Peer dependencies
+
+react-navigation-stack depends on the following libraries in addition to react-navigation itself:
+
+- react-native-gesture-handler
+- react-native-screens

@@ -7,27 +7,13 @@ original_id: bottom-tab-navigator
 
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 
-To use this navigator, you need to install [`react-navigation-tabs`](https://github.com/react-navigation/tabs) and its peer dependencies:
+To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`react-navigation-tabs`](https://github.com/react-navigation/tabs).
 
 ```sh
-yarn add react-navigation react-navigation-tabs
+yarn add react-navigation-tabs
 ```
 
-Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated).
-
-If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
-
-```sh
-expo install react-native-gesture-handler react-native-reanimated
-```
-
-If you are not using Expo, run the following:
-
-```sh
-yarn add react-native-reanimated react-native-gesture-handler
-```
-
-Then import it from `react-navigation-tabs`:
+## API
 
 ```js
 import { createBottomTabNavigator } from 'react-navigation-tabs';

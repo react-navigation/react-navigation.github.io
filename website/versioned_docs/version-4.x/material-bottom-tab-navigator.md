@@ -9,15 +9,15 @@ A material-design themed tab bar on the bottom of the screen that lets you switc
 
 <img src="/docs/assets/navigators/bottom-navigation.gif" style="width: 420px; max-width: 100%">
 
-To use this navigator, you need to install [`react-navigation-material-bottom-tabs`](https://github.com/react-navigation/material-bottom-tabs):
+To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`react-navigation-material-bottom-tabs`](https://github.com/react-navigation/material-bottom-tabs) and [react-native-paper](https://github.com/callstack/react-native-paper).
 
 ```sh
-yarn add react-navigation react-navigation-material-bottom-tabs react-native-paper
+yarn add react-navigation-material-bottom-tabs react-native-paper
 ```
 
-This API also requires that you install `react-native-vector-icons`! If you are using Expo, it will just work out of the box. Otherwise, [follow these installation instructions](https://github.com/oblador/react-native-vector-icons#installation).
+This API also requires that you install `react-native-vector-icons`! If you are using Expo (managed or bare), run `expo install @expo/vector-icons` instead. Otherwise, [follow these installation instructions](https://github.com/oblador/react-native-vector-icons#installation).
 
-To use this tab navigator, import it from `react-navigation-material-bottom-tabs`
+## API
 
 ```js
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
