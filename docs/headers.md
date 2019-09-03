@@ -26,7 +26,7 @@ function StackScreen() {
 
 ## Using params in the title
 
-In order to use params in the title, we need to make `navigationOptions` a function that returns a configuration object. It might be tempting to try to use `this.props` inside of `navigationOptions`, but because it is a static property of the component, `this` does not refer to an instance of the component and therefore no props are available. Instead, if we make `navigationOptions` a function then React Navigation will call it with an object containing `{ navigation, route }` -- in this case, all we care about is `navigation`, which is the same object that is passed to your screen props as `navigation` prop. You may recall that we can get the params through `route.params`, and so we do this below to extract a param and use it as a title.
+In order to use params in the title, we need to make `options` prop for the screen a function that returns a configuration object. It might be tempting to try to use `this.props` inside of `options`, but because it is defined before the component is rendered, `this` does not refer to an instance of the component and therefore no props are available. Instead, if we make `options` a function then React Navigation will call it with an object containing `{ navigation, route }` -- in this case, all we care about is `navigation`, which is the same object that is passed to your screen props as `navigation` prop. You may recall that we can get the params through `route.params`, and so we do this below to extract a param and use it as a title.
 
 ```js
 function StackScreen() {
@@ -99,17 +99,17 @@ function StackScreen() {
 There are a couple of things to notice here:
 
 1. On iOS, the status bar text and icons are black, and this doesn't look great over a dark-colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.html).
-2. The configuration we set only applies to the home screen; when we navigate to the details screen, the default styles are back. We'll look at how to share `navigationOptions` between screens now.
+2. The configuration we set only applies to the home screen; when we navigate to the details screen, the default styles are back. We'll look at how to share `options` between screens now.
 
 ## Sharing common `options` across screens
 
-It is common to want to configure the header in a similar way across many screens. For example, your company brand color might be red and so you want the header background color to be red and tint color to be white. Conveniently, these are the colors we're using in our running example, and you'll notice that when you navigate to the `DetailsScreen` the colors go back to the defaults. Wouldn't it be awful if we had to copy the `navigationOptions` header style properties from `HomeScreen` to `DetailsScreen`, and for every single screen component we use in our app? Thankfully, we do not. We can instead move the configuration up to the stack navigator under the property `defaultNavigationOptions`.
+It is common to want to configure the header in a similar way across many screens. For example, your company brand color might be red and so you want the header background color to be red and tint color to be white. Conveniently, these are the colors we're using in our running example, and you'll notice that when you navigate to the `DetailsScreen` the colors go back to the defaults. Wouldn't it be awful if we had to copy the `options` header style properties from `HomeScreen` to `DetailsScreen`, and for every single screen component we use in our app? Thankfully, we do not. We can instead move the configuration up to the stack navigator under the prop `screenOptions`.
 
 ```js
 function StackScreen() {
   return (
     <Stack.Navigator
-      defaultOptions={{
+      screenOptions={{
         headerStyle: {
           backgroundColor: '#f4511e',
         },
@@ -130,8 +130,6 @@ function StackScreen() {
 ```
 
 Now, any screen that belongs to the `StackScreen` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
-
-> Note: In v2 and below, the property you would want to use to do this is `navigationOptions`. In v3 we've renamed this to `defaultNavigationOptions`.
 
 ## Replacing the title with a custom component
 
@@ -164,7 +162,7 @@ function StackScreen() {
 
 ## Additional configuration
 
-You can read the full list of available `navigationOptions` for screens inside of a stack navigator in the [createStackNavigator reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
+You can read the full list of available `options` for screens inside of a stack navigator in the [createStackNavigator reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
 
 ## Summary
 

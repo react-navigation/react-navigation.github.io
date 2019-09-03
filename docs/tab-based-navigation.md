@@ -48,7 +48,7 @@ export default function App() {
 
 ## Customizing the appearance
 
-This is similar to how you would customize a stack navigator &mdash; there are some properties that are set when you initialize the tab navigator and others that can be customized per-screen in `navigationOptions`.
+This is similar to how you would customize a stack navigator &mdash; there are some properties that are set when you initialize the tab navigator and others that can be customized per-screen in `options`.
 
 ```js
 // You can import Ionicons from @expo/vector-icons if you use Expo or
