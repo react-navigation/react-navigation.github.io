@@ -11,7 +11,6 @@ Each `screen` component in your app is provided with the `route` prop automatica
   - `name` - name of the screen. Defined in navigator component hierarchy.
   - `params` - set of params which is defined while navigating e.g. `navigate('Twitter', { user: 'Dan Abramov' })`.
 
-
 ```js
 function ProfileScreen({ navigation: { route } }) {
   return (

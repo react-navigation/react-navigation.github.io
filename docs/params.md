@@ -10,9 +10,9 @@ Now that we know how to [create a stack navigator with some routes](hello-react-
 
 There are two pieces to this:
 
-1. Pass params to a route by putting them in an object as a second parameter to the `navigation.navigate` function: `this.props.navigation.navigate('RouteName', { /* params go here */ })`
+1. Pass params to a route by putting them in an object as a second parameter to the `navigation.navigate` function: `navigation.navigate('RouteName', { /* params go here */ })`
 
-2. Read the params in your screen component: `this.props.route.params`.
+2. Read the params in your screen component: `route.params`.
 
 > We recommend that the params you pass are JSON-serializable. That way, you'll be able to use [state persistence](state-persistence.html) and your screen components will have the right contract for implementing [deep linking](deep-linking.html).
 
@@ -52,14 +52,8 @@ function DetailsScreen({ route, navigation }) {
           })
         }
       />
-      <Button
-        title="Go to Home"
-        onPress={() => navigation.navigate('Home')}
-      />
-      <Button
-        title="Go back"
-        onPress={() => navigation.goBack()}
-      />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
     </View>
   );
 }
@@ -67,5 +61,5 @@ function DetailsScreen({ route, navigation }) {
 
 ## Summary
 
-- `navigate` and `push` accept an optional second argument to let you pass parameters to the route you are navigating to. For example: `this.props.navigation.navigate('RouteName', {paramName: 'value'})`.
-- You can read the params through `this.props.route.params`
+- `navigate` and `push` accept an optional second argument to let you pass parameters to the route you are navigating to. For example: `navigation.navigate('RouteName', {paramName: 'value'})`.
+- You can read the params through `route.params`

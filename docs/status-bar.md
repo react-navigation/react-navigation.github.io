@@ -11,28 +11,28 @@ If you don't have a navigation header, or your navigation header changes color b
 This is a simple task when using a stack. You can render the `StatusBar` component, which is exposed by React Native, and set your config.
 
 ```js
-function Screen1() {
+function Screen1({ navigation }) {
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: '#6a51ae' }]}>
       <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
       <Text style={[styles.paragraph, { color: '#fff' }]}>Light Screen</Text>
       <Button
         title="Next screen"
-        onPress={() => this.props.navigation.navigate('Screen2')}
+        onPress={() => navigation.navigate('Screen2')}
         color={isAndroid ? 'blue' : '#fff'}
       />
     </SafeAreaView>
   );
 }
 
-function Screen2() {
+function Screen2({ navigation }) {
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
       <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       <Text style={styles.paragraph}>Dark Screen</Text>
       <Button
         title="Next screen"
-        onPress={() => this.props.navigation.navigate('Screen1')}
+        onPress={() => navigation.navigate('Screen1')}
       />
     </SafeAreaView>
   );
@@ -64,13 +64,13 @@ To fix this we'll have to do two things
 First, the new `Screen2.js` will no longer use the `StatusBar` component.
 
 ```jsx
-function Screen2() {
+function Screen2({ navigation }) {
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
       <Text style={styles.paragraph}>Dark Screen</Text>
       <Button
         title="Next screen"
-        onPress={() => this.props.navigation.navigate('Screen1')}
+        onPress={() => navigation.navigate('Screen1')}
       />
     </SafeAreaView>
   );

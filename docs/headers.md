@@ -10,7 +10,6 @@ By now you're probably tired of seeing a blank grey bar on the top of your scree
 
 A Screen component accepts props `options` which is either an object or a function that returns an object that contains various configuration options. The one we use for the header title is `title`, as demonstrated in the following example.
 
-
 ```js
 function StackScreen() {
   return (
@@ -22,13 +21,12 @@ function StackScreen() {
       />
     </Stack.Navigator>
   )
-)      
+)
 ```
 
 ## Using params in the title
 
-In order to use params in the title, we need to make `navigationOptions` a function that returns a configuration object. It might be tempting to try to use `this.props` inside of `navigationOptions`, but because it is a static property of the component, `this` does not refer to an instance of the component and therefore no props are available. Instead, if we make `navigationOptions` a function then React Navigation will call it with an object containing `{ navigation, navigationOptions, screenProps }` -- in this case, all we care about is `navigation`, which is the same object that is passed to your screen props as `this.props.navigation`. You may recall that we can get the params from `navigation` through `navigation.getParam` or `navigation.state.params`, and so we do this below to extract a param and use it as a title.
-
+In order to use params in the title, we need to make `navigationOptions` a function that returns a configuration object. It might be tempting to try to use `this.props` inside of `navigationOptions`, but because it is a static property of the component, `this` does not refer to an instance of the component and therefore no props are available. Instead, if we make `navigationOptions` a function then React Navigation will call it with an object containing `{ navigation, route }` -- in this case, all we care about is `navigation`, which is the same object that is passed to your screen props as `navigation` prop. You may recall that we can get the params through `route.params`, and so we do this below to extract a param and use it as a title.
 
 ```js
 function StackScreen() {
@@ -42,11 +40,11 @@ function StackScreen() {
       <Stack.Screen
         name="Profile"
         component={HomeScreen}
-        options={({ name }) => ({ title: name })}
+        options={({ route }) => ({ title: route.params.name })}
       />
     </Stack.Navigator>
   )
-)      
+)
 ```
 
 The argument that is passed in to the `options` function is an object with the following properties:
@@ -64,7 +62,7 @@ It's often necessary to update the `options` configuration for the active screen
 /* Inside of render() of React class */
 <Button
   title="Update the title"
-  onPress={() => this.props.navigation.setParams({ otherParam: 'Updated!' })}
+  onPress={() => navigation.setParams({ otherParam: 'Updated!' })}
 />
 ```
 
@@ -95,7 +93,7 @@ function StackScreen() {
         }}
     </Stack.Navigator>
   )
-)     
+)
 ```
 
 There are a couple of things to notice here:
@@ -118,16 +116,17 @@ function StackScreen() {
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
-        }, 
+        },
       }}
     >
       <Stack.Screen
         name="Home"
         component={HomeScreen}
         options={{ title: "My home" }}
+      />
     </Stack.Navigator>
   )
-)     
+)
 ```
 
 Now, any screen that belongs to the `StackScreen` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
@@ -155,10 +154,10 @@ function StackScreen() {
         name="Home"
         component={HomeScreen}
         options={{ headerTitle: <LogoTitle/> }}
-      />  
+      />
     </Stack.Navigator>
   )
-)     
+)
 ```
 
 > You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to a stack navigator, the `headerTitle` defaults to a `Text` component that displays the `title`.

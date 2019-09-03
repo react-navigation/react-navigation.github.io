@@ -4,7 +4,7 @@ title: Navigation lifecycle
 sidebar_label: Navigation lifecycle
 ---
 
-In the previous section, we worked with a stack navigator that has two screens (`Home` and `Details`) and learned how to use `this.props.navigation.navigate('RouteName')` to navigate between the routes.
+In the previous section, we worked with a stack navigator that has two screens (`Home` and `Details`) and learned how to use `navigation.navigate('RouteName')` to navigate between the routes.
 
 An important question in this context is: what happens with `Home` when we navigate away from it, or when we come back to it? How does a route find out that a user is leaving it or coming back to it?
 

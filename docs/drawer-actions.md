@@ -17,7 +17,7 @@ The following actions are supported:
 ```js
 import { DrawerActions } from '@react-navigation/routers';
 
-this.props.navigation.dispatch(DrawerActions.toggleDrawer());
+navigation.dispatch(DrawerActions.toggleDrawer());
 ```
 
 ### closeDrawer
@@ -25,7 +25,7 @@ this.props.navigation.dispatch(DrawerActions.toggleDrawer());
 ```js
 import { DrawerActions } from '@react-navigation/routers';
 
-this.props.navigation.dispatch(DrawerActions.closeDrawer());
+navigation.dispatch(DrawerActions.closeDrawer());
 ```
 
 ### openDrawer
@@ -33,5 +33,5 @@ this.props.navigation.dispatch(DrawerActions.closeDrawer());
 ```js
 import { DrawerActions } from '@react-navigation/routers';
 
-this.props.navigation.dispatch(DrawerActions.openDrawer());
+navigation.dispatch(DrawerActions.openDrawer());
 ```

@@ -72,7 +72,6 @@ function DetailsScreen() {
   );
 }
 
-
 function App() {
   return (
     <NavigationNativeContainer>

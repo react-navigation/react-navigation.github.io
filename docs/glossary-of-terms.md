@@ -15,7 +15,6 @@ Also known as navigation header, navigation bar, navbar, and probably many other
 A screen component is a component that we use in our route configuration.
 
 ```js
-
 const Stack = createStackNavigator();
 
 const StactNavigator = (
@@ -27,34 +26,31 @@ const StactNavigator = (
     <Stack.Screen
       name="Details"
       conponent={DetailsScreen} // <----
-    />    
+    />
   </Stack.Navigator>
 );
 ```
 
 The suffix `Screen` in the component name is entirely optional, but a frequently used convention; we could call it `Michael` and this would work just the same.
 
-We saw earlier that our screen components are provided with the `navigation` prop. It's important to note that _this only happens if the screen is rendered as a route by React Navigation_ (for example, in response to `this.props.navigation.navigate`). For example, if we render `DetailsScreen` as a child of `HomeScreen`, then `DetailsScreen` won't be provided with the `navigation` prop, and when you press the "Go to Details... again" button on the Home screen, the app will throw one of the quintessential JavaScript exceptions "undefined is not an object".
-
+We saw earlier that our screen components are provided with the `navigation` prop. It's important to note that _this only happens if the screen is rendered as a route by React Navigation_ (for example, in response to `navigation.navigate`). For example, if we render `DetailsScreen` as a child of `HomeScreen`, then `DetailsScreen` won't be provided with the `navigation` prop, and when you press the "Go to Details... again" button on the Home screen, the app will throw one of the quintessential JavaScript exceptions "undefined is not an object".
 
 ```js
-class HomeScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to Details"
-          onPress={() => this.props.navigation.navigate('Details')}
-        />
-        <DetailsScreen />
-      </View>
-    );
-  }
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+      <DetailsScreen />
+    </View>
+  );
 }
 ```
 
-The ["Navigation prop reference"](navigation-prop.html) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `this.props.navigation`.
+The ["Navigation prop reference"](navigation-prop.html) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `navigation` prop.
 
 ## Navigation Prop
 
@@ -67,7 +63,8 @@ Navigators can also accept a navigation prop, which they should get from the par
 
 For more details, see the ["Navigation prop document"](navigation-prop.html).
 
-The ["Route prop reference"](route-prop.html) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `this.props.route`.
+The ["Route prop reference"](route-prop.html) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `route` prop.
+
 ## Route prop
 
 This prop will be passed into all screens. Contains information about current route i.e. `params`, `key` and `name`.

@@ -17,7 +17,7 @@ function StackScreen() {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{ 
+        options={{
           headerTitle: <LogoTitle/>,
           headerRight: (
             <Button
@@ -27,10 +27,10 @@ function StackScreen() {
             />
           ),
         }}
-      />  
+      />
     </Stack.Navigator>
   )
-)   
+)
 ```
 
 The binding of `this` in `options` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
@@ -48,7 +48,7 @@ function StackScreen() {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={({ navigation, route }) => ({ 
+        options={({ navigation, route }) => ({
           headerTitle: <LogoTitle/>,
           headerRight: () => (
             <Button
@@ -58,16 +58,16 @@ function StackScreen() {
             />
           )
         })}
-      />  
+      />
     </Stack.Navigator>
   )
-)   
+)
 
 function HomeScreen({ route }) {
   return (
     <Text>
       {route.params.count}
-    </Text>    
+    </Text>
   )
 }
 ```

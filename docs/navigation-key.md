@@ -4,6 +4,8 @@ title: Using the navigation key
 sidebar_label: Using the navigation key
 ---
 
+#TODO
+
 The `key` parameter comes up repeatedly across different navigation functions. Let's take a look at a summary of its use cases:
 
 ### Usage with the [`navigate`](navigation-actions.html#navigate) call
@@ -23,7 +25,7 @@ When resetting, `key` is also optional and can be a string or `null`. If set, th
 
 ### Usage with [`replace`](navigation-actions.html#replace)
 
-With the `replace` navigation action, `key` is a required parameter used for identifying the route to be replaced. If you use the helper function `this.props.navigation.replace`, we will automatically substitute the key of the current route.
+With the `replace` navigation action, `key` is a required parameter used for identifying the route to be replaced. If you use the helper function `navigation.replace`, we will automatically substitute the key of the current route.
 
 ### Usage with `goBack`
 

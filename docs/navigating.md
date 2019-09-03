@@ -15,7 +15,13 @@ If this was a web browser, we'd be able to write something like this:
 Another way to write this would be:
 
 ```js
-<a onClick={() => { window.location.href = "details.html"; }}>Go to Details</a>
+<a
+  onClick={() => {
+    window.location.href = 'details.html';
+  }}
+>
+  Go to Details
+</a>
 ```
 
 We'll do something similar to the latter, but rather than using a `window.location` global, we'll use the `navigation` prop that is passed down to our screen components.

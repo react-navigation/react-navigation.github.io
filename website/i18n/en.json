@@ -9,9 +9,6 @@
         "title": "Alternative libraries",
         "sidebar_label": "Alternative libraries"
       },
-      "anti-pitch": {
-        "title": "anti-pitch"
-      },
       "api-reference": {
         "title": "API Reference",
         "sidebar_label": "Overview"
@@ -50,10 +47,6 @@
       "custom-android-back-button-handling": {
         "title": "Custom Android back button behavior",
         "sidebar_label": "Custom Android back button behavior"
-      },
-      "custom-navigator-overview": {
-        "title": "Overview",
-        "sidebar_label": "Overview"
       },
       "custom-navigators": {
         "title": "Custom navigators",
@@ -168,10 +161,6 @@
         "title": "NavigationContext",
         "sidebar_label": "NavigationContext"
       },
-      "navigation-events": {
-        "title": "NavigationEvents reference",
-        "sidebar_label": "NavigationEvents"
-      },
       "navigation-key": {
         "title": "Using the navigation key",
         "sidebar_label": "Using the navigation key"
@@ -222,6 +211,10 @@
       "request-feature": {
         "title": "request-feature"
       },
+      "route-prop": {
+        "title": "Route prop reference",
+        "sidebar_label": "Route prop"
+      },
       "routers": {
         "title": "Routers",
         "sidebar_label": "Routers"
@@ -255,6 +248,10 @@
       "supported-react-native-versions": {
         "title": "Supported React Native versions",
         "sidebar_label": "Supported React Native versions"
+      },
+      "tab-actions": {
+        "title": "TabActions reference",
+        "sidebar_label": "TabActions"
       },
       "tab-based-navigation": {
         "title": "Tab navigation",
@@ -1097,7 +1094,8 @@
       "Docs": "Docs",
       "API": "API",
       "Help": "Help",
-      "Blog": "Blog"
+      "Blog": "Blog",
+      "Next": "Next"
     },
     "categories": {
       "Fundamentals": "Fundamentals",

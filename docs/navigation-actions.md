@@ -34,7 +34,7 @@ The `navigate` action will update the current state with the result of a `naviga
 ```js
 import { CommonActions } from '@react-navigation/core';
 
-this.props.navigation.dispatch(
+navigation.dispatch(
   CommonActions.navigate({
     name: 'Profile',
     params: {},
@@ -51,11 +51,11 @@ Go back to previous screen and close current screen. `back` action creator takes
 ```js
 import { CommonActions } from '@react-navigation/core';
 
-const backAction = CommonActions.goBack({
-  key: 'Profile',
-});
-
-this.props.navigation.dispatch(backAction);
+navigation.dispatch(
+  CommonActions.goBack({
+    key: 'Profile',
+  })
+);
 ```
 
 ### setParams
@@ -65,13 +65,13 @@ When dispatching `setParams`, the router will produce a new state that has chang
 - `params` - _object_ - required - New params to be merged into existing route params
 - `key` - _string_ - required - Route key that should get the new params
 
-
 ```js
 import { CommonActions } from '@react-navigation/core';
 
-const setParamsAction = CommonActions.setParams({
-  params: { title: 'Hello' },
-  key: 'screen-123',
-});
-this.props.navigation.dispatch(setParamsAction);
+navigation.dispatch(
+  CommonActions.setParams({
+    params: { title: 'Hello' },
+    key: 'screen-123',
+  })
+);
 ```

@@ -4,6 +4,8 @@ title: Community-developed Navigators and Libraries
 sidebar_label: Community Navigators and Libraries
 ---
 
+> Libraries listed in this guide may not have been updated to work with the latest version of React Navigation. Please refer to the library's documentation to see which version of React Navigation it supports.
+
 # Navigators
 
 ## Fluid Transitions
@@ -52,7 +54,7 @@ Helps you to render buttons in the navigation bar and handle the styling so you 
 
 ## react-navigation-props-mapper
 
-Provides simple HOCs that map react-navigation props to your screen components directly - ie. instead of `const user = this.props.navigation.getParam(activeUser, null)`, you'd write `const user = this.props.activeUser`.
+Provides simple HOCs that map react-navigation props to your screen components directly - ie. instead of `const user = this.props.route.params.activeUser`, you'd write `const user = this.props.activeUser`.
 
 #### Links
 

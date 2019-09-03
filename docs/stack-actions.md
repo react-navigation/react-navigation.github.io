@@ -17,14 +17,14 @@ The following actions are supported:
 The `push` action adds a route on top of the stack and navigates forward to it. This differs from `navigate` in that `navigate` will pop back to earlier in the stack if a route of the given name is already present there. `push` will always add on top, so a route can be present multiple times.
 
 - `name` - _string_ - Name of the route to push onto the stack.
-- `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `this.props.navigation.state.params`).
+- `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
 ```js
 import { StackActions } from '@react-navigation/routers';
 
 const pushAction = StackActions.push('Profile', { name: 'Michaś' });
 
-this.props.navigation.dispatch(pushAction);
+navigation.dispatch(pushAction);
 ```
 
 ### pop
@@ -36,7 +36,7 @@ import { StackActions } from '@react-navigation/routers';
 
 const popAction = StackActions.pop(1);
 
-this.props.navigation.dispatch(popAction);
+navigation.dispatch(popAction);
 ```
 
 ### popToTop
@@ -46,5 +46,5 @@ The `popToTop` action takes you back to the first screen in the stack, dismissin
 ```js
 import { StackActions } from '@react-navigation/routers';
 
-this.props.navigation.dispatch(StackActions.popToTop());
+navigation.dispatch(StackActions.popToTop());
 ```

@@ -148,30 +148,30 @@ export default function HomeIconWithBadge(props) {
 
 ## Jumping between tabs
 
-Switching from one tab to another has a familiar API &mdash; `this.props.navigation.navigate`.
+Switching from one tab to another has a familiar API &mdash; `navigation.navigate`.
 
 ```js
 import { Button, Text, View } from 'react-native';
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Home!</Text>
       <Button
         title="Go to Settings"
-        onPress={() => this.props.navigation.navigate('Settings')}
+        onPress={() => navigation.navigate('Settings')}
       />
     </View>
   );
 }
 
-function SettingsScreen() {
+function SettingsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Settings!</Text>
       <Button
         title="Go to Home"
-        onPress={() => this.props.navigation.navigate('Home')}
+        onPress={() => navigation.navigate('Home')}
       />
     </View>
   );
@@ -179,8 +179,6 @@ function SettingsScreen() {
 ```
 
 ## A stack navigator for each tab
-
-#TODO
 
 Usually tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
 
@@ -197,25 +195,25 @@ function DetailsScreen() {
   );
 }
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       {/* other code from before here */}
       <Button
         title="Go to Details"
-        onPress={() => this.props.navigation.navigate('Details')}
+        onPress={() => navigation.navigate('Details')}
       />
     </View>
   );
 }
 
-function SettingsScreen() {
+function SettingsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       {/* other code from before here */}
       <Button
         title="Go to Details"
-        onPress={() => this.props.navigation.navigate('Details')}
+        onPress={() => navigation.navigate('Details')}
       />
     </View>
   );
