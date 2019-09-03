@@ -169,10 +169,6 @@
         "title": "Navigation lifecycle",
         "sidebar_label": "Navigation lifecycle"
       },
-      "navigation-options-resolution": {
-        "title": "Navigation options resolution",
-        "sidebar_label": "Navigation options resolution"
-      },
       "navigation-prop": {
         "title": "Navigation prop reference",
         "sidebar_label": "Navigation prop"
@@ -218,6 +214,10 @@
       "routers": {
         "title": "Routers",
         "sidebar_label": "Routers"
+      },
+      "screen-options-resolution": {
+        "title": "Screen options resolution",
+        "sidebar_label": "Screen options resolution"
       },
       "screen-tracking": {
         "title": "Screen tracking for analytics",
