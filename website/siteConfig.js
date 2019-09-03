@@ -19,7 +19,6 @@ const siteConfig = {
     { doc: 'api-reference', label: 'API' },
     { page: 'help', label: 'Help' },
     { blog: true, label: 'Blog' },
-    { page: 'next', label: 'Next' },
   ],
   users,
   /* TODO: update to use new icon */
