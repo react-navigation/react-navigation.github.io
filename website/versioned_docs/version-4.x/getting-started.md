@@ -15,7 +15,21 @@ If you're already familiar with React Native then you'll be able to get moving w
 
 What follows within the _Fundamentals_ section of this documentation is a tour of the most important aspects of React Navigation. It should cover enough for you to know how to build your typical small mobile application, and give you the background that you need to dive deeper into the more advanced parts of React Navigation.
 
-## Installation
+<hr />
+
+## Start from a template
+
+The easiest way to get running with `react-navigation` is to initialize a project using `expo-cli`. You can install this with `npm i -g expo-cli`.
+
+- If you'd like to create a [managed React Native project](https://docs.expo.io/versions/latest/introduction/managed-vs-bare) then choose the `blank` template under the Managed workflow heading.
+- If you'd like a [bare React Native project](https://docs.expo.io/versions/latest/introduction/managed-vs-bare/#bare-workflow), then choose `minimal` under the Bare workflow heading.
+- In both cases you can pick the TypeScript version of the template if you prefer &mdash; React Navigation ships with TypeScript types.
+
+Once the project is initialized, in the project directory run `expo install react-navigation react-native-gesture-handler react-native-reanimated react-native-screens`, and you're ready to go! You can now continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
+
+<hr />
+
+## Install into an existing project
 
 Install the `react-navigation` package in your React Native project.
 
@@ -25,6 +39,71 @@ yarn add react-navigation
 # npm install react-navigation
 ```
 
-When you use a navigator, you'll need to follow the installation instructions of that navigator for any additional configuration.
+React Navigation is made up of some core utilities and those are then used by navigators to create the navigation structure in your app. Don't worry too much about this for now, it'll become clear soon enough! To frontload the installation work, let's also install and configure dependencies used by most navigators, then we can move forward with starting to write some code.
+
+The libraries we will install now are [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated). If you already have these libraries installed and at the latest version, you are done here! Otherwise, read on.
+
+#### Installing dependencies into an Expo managed project
+
+In your project directory, run `expo install react-native-gesture-handler react-native-reanimated`. This will install versions of these libraries that are compatible
+
+You can now continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
+
+#### Installing dependencies into a bare React Native project
+
+In your project directory, run `yarn add react-native-reanimated react-native-gesture-handler react-native-screens`.
+
+Next, we need to link these libraries. The steps depends on your React Native version:
+
+- **React Native 0.60 and higher**
+
+  On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
+
+  To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
+
+  ```sh
+  cd ios
+  pod install
+  cd ..
+  ```
+
+- **React Native 0.59 and lower**
+
+  If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
+
+  ```sh
+  react-native link react-native-reanimated
+  react-native link react-native-gesture-handler
+  react-native link react-native-screens
+  ```
+
+To finalize installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
+
+```diff
+package com.reactnavigation.example;
+
+import com.facebook.react.ReactActivity;
++ import com.facebook.react.ReactActivityDelegate;
++ import com.facebook.react.ReactRootView;
++ import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+
+public class MainActivity extends ReactActivity {
+
+  @Override
+  protected String getMainComponentName() {
+    return "Example";
+  }
+
++  @Override
++  protected ReactActivityDelegate createReactActivityDelegate() {
++    return new ReactActivityDelegate(this, getMainComponentName()) {
++      @Override
++      protected ReactRootView createRootView() {
++       return new RNGestureHandlerEnabledRootView(MainActivity.this);
++      }
++    };
++  }
+}
+```
 
 Continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
