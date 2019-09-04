@@ -14,7 +14,7 @@ yarn add react-navigation-drawer
 ## API
 
 ```js
-import { createBottomTabNavigator } from 'react-navigation-drawer';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 createDrawerNavigator(RouteConfigs, DrawerNavigatorConfig);
 ```
