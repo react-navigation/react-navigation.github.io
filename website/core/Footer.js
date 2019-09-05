@@ -12,6 +12,38 @@ class Footer extends React.Component {
     const currentYear = new Date().getFullYear();
     return (
       <footer className="nav-footer" id="footer">
+        <div
+          style={{
+            marginBottom: '2em',
+            backgroundColor: '#fff',
+            display: 'flex',
+            flex: 1,
+            position: 'relative',
+            paddingTop: 35,
+            paddingBottom: 35,
+            maxHeight: 412,
+            borderTopWidth: 1,
+            borderTopColor: '#eee',
+            borderTopStyle: 'solid',
+          }}
+        >
+          <div id="expo-spiro" />
+          <p
+            style={{
+              justifyContent: 'center',
+              flex: 1,
+              marginBottom: 0,
+              zIndex: 1,
+              textAlign: 'center',
+              paddingLeft: 20,
+              paddingRight: 20,
+              color: '#7b7b7b',
+            }}
+          >
+            React Navigation is built and funded by <a href="https://expo.io" style={{fontWeight: 'bold'}}>Expo</a>, with contributions from the community.
+          </p>
+        </div>
+
         <section className="sitemap">
           <a href={this.props.config.baseUrl} className="nav-home">
             <img
@@ -24,35 +56,29 @@ class Footer extends React.Component {
           <div>
             <h5>Docs</h5>
             <a
-              href={
-                `${this.props.config.baseUrl}docs/${this.props.language}/getting-started.html`
-              }>
+              href={`${this.props.config.baseUrl}docs/${this.props.language}/getting-started.html`}
+            >
               Getting Started
             </a>
             <a
-              href={
-                `${this.props.config.baseUrl}docs/${this.props.language}/api-reference.html`
-              }>
+              href={`${this.props.config.baseUrl}docs/${this.props.language}/api-reference.html`}
+            >
               API Reference
             </a>
             <a
-              href={
-                `${this.props.config.baseUrl}docs/${this.props.language}/custom-navigator-overview.html`
-              }>
+              href={`${this.props.config.baseUrl}docs/${this.props.language}/custom-navigator-overview.html`}
+            >
               Building your own Navigator
             </a>
             <a
-              href={
-                `${this.props.config.baseUrl}docs/${this.props.language}/contributing.html`
-              }>
+              href={`${this.props.config.baseUrl}docs/${this.props.language}/contributing.html`}
+            >
               Contributing
             </a>
           </div>
           <div>
             <h5>Support</h5>
-            <a href="https://discord.gg/4xEK3nD">
-              Chat in our Discord channel
-            </a>
+            <a href="https://discord.gg/4xEK3nD">Chat in our Discord channel</a>
             <a href="https://react-navigation.canny.io/feature-requests">
               Request a feature on Canny
             </a>
@@ -69,9 +95,7 @@ class Footer extends React.Component {
           <div>
             <h5>More</h5>
             {/* <a href={this.props.config.baseUrl + 'blog'}>Blog</a> */}
-            <a href={this.props.config.repoUrl}>
-              GitHub
-            </a>
+            <a href={this.props.config.repoUrl}>GitHub</a>
             <a
               className="github-button"
               href={this.props.config.repoUrl}
@@ -79,7 +103,8 @@ class Footer extends React.Component {
               data-count-href="/react-community/react-navigation/stargazers"
               data-show-count={true}
               data-count-aria-label="# stargazers on GitHub"
-              aria-label="Star this project on GitHub">
+              aria-label="Star this project on GitHub"
+            >
               Star
             </a>
           </div>
