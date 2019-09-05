@@ -122,22 +122,3 @@ pre code {
   opacity: 0.8;
   font-size: 14px;
 }
-
-
-#expo-spiro {
-  z-index: 0;
-  opacity: 0.4;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  top: 0;
-  left: 0;
-  background-image: url(/img/expo_spiro.png);
-  background-repeat: repeat;
-  background-color: #fff;
-  background-position-x: center;
-}
-
-#footer {
-  padding-top: 0 !important;
-}

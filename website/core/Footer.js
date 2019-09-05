@@ -11,7 +11,7 @@ class Footer extends React.Component {
   render() {
     const currentYear = new Date().getFullYear();
     return (
-      <footer className="nav-footer" id="footer">
+      <footer className="nav-footer" id="footer" style={{ paddingTop: 0 }}>
         <div
           style={{
             marginBottom: '2em',
@@ -27,7 +27,21 @@ class Footer extends React.Component {
             borderTopStyle: 'solid',
           }}
         >
-          <div id="expo-spiro" />
+          <div
+            style={{
+              zIndex: 0,
+              opacity: 0.4,
+              position: 'absolute',
+              bottom: 0,
+              right: 0,
+              top: 0,
+              left: 0,
+              backgroundImage: 'url(/img/expo_spiro.png)',
+              backgroundRepeat: 'repeat',
+              backgroundColor: '#fff',
+              backgroundPositionX: 'center',
+            }}
+          />
           <p
             style={{
               justifyContent: 'center',
@@ -40,7 +54,18 @@ class Footer extends React.Component {
               color: '#7b7b7b',
             }}
           >
-            React Navigation is built and funded by <a href="https://expo.io" style={{fontWeight: 'bold'}}>Expo</a>, with contributions from the <a style={{fontWeight: 'bold'}} href="https://github.com/react-navigation/react-navigation/graphs/contributors">community</a>.
+            React Navigation is built and funded by{' '}
+            <a href="https://expo.io" style={{ fontWeight: 'bold' }}>
+              Expo
+            </a>
+            , with contributions from the{' '}
+            <a
+              style={{ fontWeight: 'bold' }}
+              href="https://github.com/react-navigation/react-navigation/graphs/contributors"
+            >
+              community
+            </a>
+            .
           </p>
         </div>
 
