@@ -1,7 +1,7 @@
 ---
 id: version-4.x-app-containers
-title: App Containers
-sidebar_label: App Containers
+title: App containers
+sidebar_label: App containers
 original_id: app-containers
 ---
 
