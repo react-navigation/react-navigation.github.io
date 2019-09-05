@@ -40,7 +40,7 @@ class Footer extends React.Component {
               color: '#7b7b7b',
             }}
           >
-            React Navigation is built and funded by <a href="https://expo.io" style={{fontWeight: 'bold'}}>Expo</a>, with contributions from the community.
+            React Navigation is built and funded by <a href="https://expo.io" style={{fontWeight: 'bold'}}>Expo</a>, with contributions from the <a style={{fontWeight: 'bold'}} href="https://github.com/react-navigation/react-navigation/graphs/contributors">community</a>.
           </p>
         </div>
 
