@@ -77,14 +77,14 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   react-native link react-native-screens
   ```
 
-- To finalize installation of `react-native-screens` for Android, add the following two lines to `dependencies` section in `android/app/build.gradle`:
+To finalize installation of `react-native-screens` for Android, add the following two lines to `dependencies` section in `android/app/build.gradle`:
 
-```
+```gradle
 implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
 implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
 ```
 
-- To finalize installation of `react-native-gesture-handler` for Android, make the following modifications to `MainActivity.java`:
+To finalize installation of `react-native-gesture-handler` for Android, make the following modifications to `MainActivity.java`:
 
 ```diff
 package com.reactnavigation.example;
