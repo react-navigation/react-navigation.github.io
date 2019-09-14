@@ -30,7 +30,7 @@ In the next step, we define `NavigationService` which is a simple module with fu
 
 import * as React from 'react';
 
-export const navigationRef = React.createRef;
+export const navigationRef = React.createRef();
 
 export function navigate(name, params) {
   navigationRef.current && navigationRef.current.navigate(name, params);
