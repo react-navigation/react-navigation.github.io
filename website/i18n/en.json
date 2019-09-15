@@ -261,6 +261,10 @@
         "title": "Themes",
         "sidebar_label": "Themes"
       },
+      "typescript": {
+        "title": "Type checking with TypeScript",
+        "sidebar_label": "Type checking with TypeScript"
+      },
       "use-focus-effect": {
         "title": "useFocusEffect",
         "sidebar_label": "useFocusEffect"
