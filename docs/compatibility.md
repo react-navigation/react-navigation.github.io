@@ -4,6 +4,8 @@ title: Compatibility layer
 sidebar_label: Compatibility layer
 ---
 
+> **NOTE**: Before following this guide, make sure that you've followed the [Getting Started](getting-started.html) guide to setup React Navigation 5 in your app.
+
 React Navigation 5 has a completely new API, so our old code using React Navigation 4 will no longer work with this version. We understand that this can be a lot of work, so we have made a compatibility layer to make this easier.
 
 To use the compatibility layer, we need to install [`@react-navigation/compat`](https://github.com/navigation-ex/packages/compat):
@@ -34,9 +36,25 @@ Then we can make minimal changes in our code to use it:
 If you were importing actions from `react-navigation`, you need to change them to import from `@react-navigation/compat`:
 
 ```diff
--import { SwitchActions } from 'react-navigation';
-+import { SwitchActions } from '@react-navigation/compat';
+-import { NavigationActions } from 'react-navigation';
++import { NavigationActions } from '@react-navigation/compat';
 ```
+
+The library exports the following APIs:
+
+- Actions:
+  - `NavigationActions`
+  - `StackActions`
+  - `DrawerActions`
+  - `SwitchActions`
+- HOCs
+  - `withNavigation`
+  - `withNavigationFocus`
+- Navigators
+  - `createSwitchNavigator`
+- Compatibility helpers
+  - `createCompatNavigatorFactory` - Takes a navigator with the v5 API and returns a `createXNavigator` with the v4 API.
+  - `createCompatNavigationProp` - Takes the v5 `navigation` object along with a `route` object and returns a v4 `navigation` object.
 
 ### What does it handle?
 
