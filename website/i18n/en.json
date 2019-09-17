@@ -33,6 +33,10 @@
         "title": "Community-developed Navigators and Libraries",
         "sidebar_label": "Community Navigators and Libraries"
       },
+      "compatibility": {
+        "title": "Compatibility layer",
+        "sidebar_label": "Compatibility layer"
+      },
       "composing-navigators": {
         "title": "composing-navigators"
       },

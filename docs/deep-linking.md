@@ -79,7 +79,46 @@ function App() {
 }
 ```
 
-The hook also accepts a `getStateFromPath` option where you can provide a custom function to convert the URL to a valid state object for more advanced use cases.
+Often, directly translating path segments to route names may not be the expected behavior. For example, you might want to parse the path `/feed/latest` to something like:
+
+```js
+{
+  routes: [
+    {
+      name: 'feed',
+      params: {
+        sort: 'latest',
+      },
+    },
+  ];
+}
+```
+
+You can specify a separate `config` option to control how the deep link is parsed to suit your needs.
+
+```js
+const { getInitialState } = useLinking(ref, {
+  prefixes: ['https://myapp.com', 'myapp://'],
+  config: {
+    Chat: 'feed/:sort',
+  },
+});
+```
+
+You can also customize how params are parsed, for example, if you parse the path `/item/42` as `item/:id`, the param `id` will be parsed as string by default. But you can customize it by passing a function:
+
+```js
+{
+  Catalog: {
+    path: 'item/:id',
+    parse: {
+      id: Number,
+    },
+  },
+}
+```
+
+If this doesn't satisfy your use case, The hook also accepts a `getStateFromPath` option where you can provide a custom function to convert the URL to a valid state object for more advanced use cases.
 
 ## Set up with Expo projects
 
