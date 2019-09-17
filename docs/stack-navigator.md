@@ -30,28 +30,22 @@ yarn add react-native-gesture-handler react-native-reanimated react-native-scree
 
 If you are using Expo, you are done. Otherwise, continue to the next steps.
 
-Next, we need to link these libraries. The steps depends on your React Native version:
+Next, we need to link these libraries. React Navigation 5 supports React Native 0.60 and higher which has [automatic linking](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
 
-- **React Native 0.60 and higher**
+To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
 
-  On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
+```sh
+cd ios
+pod install
+cd ..
+```
 
-  To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
+To finalize installation of `react-native-screens` for Android, add the following two lines to `dependencies` section in `android/app/build.gradle`:
 
-  ```sh
-  cd ios
-  pod install
-  cd ..
-  ```
-
-- **React Native 0.59 and lower**
-
-  If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
-
-  ```sh
-  react-native link react-native-reanimated
-  react-native link react-native-gesture-handler
-  ```
+```gradle
+implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
+```
 
 To finalize installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
 
