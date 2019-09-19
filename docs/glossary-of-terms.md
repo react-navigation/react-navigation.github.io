@@ -21,11 +21,11 @@ const StactNavigator = (
   <Stack.Navigator>
     <Stack.Screen
       name="Home"
-      conponent={HomeScreen} // <----
+      component={HomeScreen} // <----
     />
     <Stack.Screen
       name="Details"
-      conponent={DetailsScreen} // <----
+      component={DetailsScreen} // <----
     />
   </Stack.Navigator>
 );
