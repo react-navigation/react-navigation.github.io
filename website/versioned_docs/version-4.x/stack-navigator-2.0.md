@@ -152,6 +152,33 @@ String that can be used as a fallback for `headerTitle`. Additionally, will be u
 
 Function that given `HeaderProps` returns a React Element, to display as a header. Setting to `null` hides header.
 
+Example:
+
+```js
+header: ({ scene, previous, navigation }) => {
+  const { options } = scene.descriptor;
+  const title =
+    options.headerTitle !== undefined
+      ? options.headerTitle
+      : options.title !== undefined
+      ? options.title
+      : scene.route.routeName;
+
+  return (
+    <MyHeader
+      title={title}
+      leftButton={
+        previous ? <MyBackButton onPress={navigation.goBack} /> : undefined
+      }
+    />
+  );
+};
+```
+
+When using a custom header, it's recommended set the `headerMode` option on the navigator to `screen`.
+
+To set a custom header for all the screens in the navigator, you can specify this option in the `defaultNavigationOptions` option of the navigator.
+
 #### `headerTitle`
 
 String or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is specified, it receives `allowFontScaling`, `onLayout`, `style` and `children` as the arguments. The title string is passed in `children`.
