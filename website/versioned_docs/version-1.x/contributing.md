@@ -142,8 +142,6 @@ You will be show a QR code to scan in the Expo app. You can get Expo [here](http
 All examples:
 
 - [NavigationPlayground](https://github.com/react-navigation/react-navigation/tree/master/example)
-- [ReduxExample](https://github.com/react-navigation/react-navigation/tree/master/examples/ReduxExample)
-- [SafeAreaExample](https://github.com/react-navigation/react-navigation/tree/master/examples/SafeAreaExample)
 
 Commands are the same as above for any of the example apps. If you run into any issues, please try the following to start fresh:
 
