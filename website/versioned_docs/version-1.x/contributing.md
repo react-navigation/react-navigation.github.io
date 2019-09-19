@@ -84,12 +84,12 @@ The reason we want to do this is to save everyone time. Maybe that feature alrea
 
 If you ever find yourself making a change to the project's public interface (the API) then you should make sure to update the corresponding library definitions for Flow. These "libdefs" specify our API's types so that library users can typecheck their code. An example of a qualifying change would be adding a new navigation option.
 
-The libdef (located at `flow/react-navigation.js`) will need to be updated such that running `flow` in the `examples/NavigationPlayground` folder produces no errors.
+The libdef (located at `flow/react-navigation.js`) will need to be updated such that running `flow` in the `example` folder produces no errors.
 
 1. Follow the instructions in the [Run the Example App](#Run-the-Example-App) section to prepare the `NavigationPlayground` example and install `flow` into the example's local `node_modules/.bin` folder.
 2. Run `flow` to see any current errors.
 3. If no errors occur as a result of an API change, that indicates that we don't have any coverage in the `NavigationPlayground` example project for your API change. This is frequently the case - for instance, if you add a new navigation option. In this case, you must add an example use of your new feature to `NavigationPlayground` so that you can test your libdef changes, and so that we can keep your feature properly tested and typed in perpetuity.
-4. Once you are seeing errors, go ahead and update the libdef (located at `flow/react-navigation.js`) so that there are no longer any errors when you run `flow` from within `examples/NavigationPlayground`.
+4. Once you are seeing errors, go ahead and update the libdef (located at `flow/react-navigation.js`) so that there are no longer any errors when you run `flow` from within `example`.
 5. Include the libdef changes in the PR for your new feature. Make sure to flag to the maintainers that your PR has a libdef change, so that when the next version of the library is released, we make sure to upload the updated libdef to the `flow-typed` repo.
 
 ## Information
@@ -132,7 +132,7 @@ If any errors occur you'll either have to manually fix them or you can attempt t
 
 ```bash
 yarn install
-cd examples/NavigationPlayground
+cd example
 yarn install
 yarn start
 ```
@@ -141,9 +141,9 @@ You will be show a QR code to scan in the Expo app. You can get Expo [here](http
 
 All examples:
 
-- [NavigationPlayground](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground)
-- [ReduxExample](https://github.com/react-community/react-navigation/tree/master/examples/ReduxExample)
-- [SafeAreaExample](https://github.com/react-community/react-navigation/tree/master/examples/SafeAreaExample)
+- [NavigationPlayground](https://github.com/react-navigation/react-navigation/tree/master/example)
+- [ReduxExample](https://github.com/react-navigation/react-navigation/tree/master/examples/ReduxExample)
+- [SafeAreaExample](https://github.com/react-navigation/react-navigation/tree/master/examples/SafeAreaExample)
 
 Commands are the same as above for any of the example apps. If you run into any issues, please try the following to start fresh:
 

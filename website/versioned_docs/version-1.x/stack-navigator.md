@@ -176,7 +176,7 @@ const SomeStack = StackNavigator({
 
 ### Examples
 
-See the examples [SimpleStack.js](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground/js/SimpleStack.js) and [ModalStack.js](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground/js/ModalStack.js) which you can run locally as part of the [NavigationPlayground](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground) app.
+See the examples [SimpleStack.tsx](https://github.com/react-navigation/react-navigation/blob/master/example/src/SimpleStack.tsx) and [ModalStack.tsx](https://github.com/react-navigation/react-navigation/blob/master/example/src/ModalStack.tsx) which you can run locally as part of the [NavigationPlayground](https://github.com/react-navigation/react-navigation/tree/master/example) app.
 
 You can view these examples directly on your phone by visiting [our expo demo](https://exp.host/@react-navigation/NavigationPlayground).
 
