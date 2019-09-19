@@ -38,8 +38,8 @@ export default function App() {
   return (
     <NavigationNativeContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Home" screen={HomeScreen} />
-        <Tab.Screen name="Settings" screen={SettingsScreen} />
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationNativeContainer>
   );
@@ -84,8 +84,8 @@ export default function App() {
           inactiveTintColor: 'gray',
         }}
       >
-        <Tab.Screen name="Home" screen={HomeScreen} />
-        <Tab.Screen name="Settings" screen={SettingsScreen} />
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationNativeContainer>
   );
