@@ -93,11 +93,11 @@ When we nest navigators, the navigation prop of the screen is a combination of m
 
 ```ts
 import { CompositeNavigationProp } from '@react-navigation/core';
-import { TabNavigationProp } from '@react-navigation/bottom-tabs';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 type ProfileScreenNavigationProp = CompositeNavigationProp<
-  TabNavigationProp<TabParamList, 'Profile'>,
+  BottomTabNavigationProp<TabParamList, 'Profile'>,
   StackNavigationProp<StackParamList>
 >;
 ```
@@ -108,7 +108,7 @@ For multiple parent navigators, this secondary type should be nested:
 
 ```ts
 type ProfileScreenNavigationProp = CompositeNavigationProp<
-  TabNavigationProp<TabParamList, 'Profile'>,
+  BottomTabNavigationProp<TabParamList, 'Profile'>,
   CompositeNavigationProp<
     StackNavigationProp<StackParamList>,
     DrawerNavigationProp<DrawerParamList>
