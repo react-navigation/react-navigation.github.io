@@ -169,4 +169,4 @@ You can read the full list of available `options` for screens inside of a stack 
 
 - You can customize the header inside of the `options` prop of your screen components. Read the full list of options [in the API reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
 - The `options` prop can be an object or a function. When it is a function, it is provided with an object with the `navigation` and `route` prop.
-- You can also specify shared `defaultOptions` in the stack navigator configuration when you initialize it. The prop takes precedence over that configuration.
+- You can also specify shared `screenOptions` in the stack navigator configuration when you initialize it. The prop takes precedence over that configuration.
