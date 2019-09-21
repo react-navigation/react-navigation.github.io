@@ -26,7 +26,7 @@ This will take care of styling the stack navigator, bottom tab navigator, and dr
 
 At the time of writing, `react-native` does not currently support detecting the operating system color scheme preferences in the core ([you can follow this pull request](https://github.com/facebook/react-native/pull/26172)). Until it is part of core and you have updated to the version that includes it, you can use `react-native-appearance`.
 
-You will need iOS 13 (currently in beta) to actually be able to toggle dark mode through system settings.
+You will need iOS 13 to actually be able to toggle dark mode through system settings.
 
 > Note: if you use the Expo managed workflow, this requires SDK 35+
 
