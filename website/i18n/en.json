@@ -274,8 +274,8 @@
         "sidebar_label": "useFocusEffect"
       },
       "use-is-focused": {
-        "title": "useFocusEffect",
-        "sidebar_label": "useFocusEffect"
+        "title": "useIsFocused",
+        "sidebar_label": "useIsFocused"
       },
       "use-navigation": {
         "title": "useNavigation",
@@ -797,6 +797,10 @@
         "title": "Navigation views",
         "sidebar_label": "Navigation views"
       },
+      "version-3.x/version-3.x-next-steps": {
+        "title": "Next steps",
+        "sidebar_label": "Next steps"
+      },
       "version-3.x/version-3.x-params": {
         "title": "Passing parameters to routes",
         "sidebar_label": "Passing parameters to routes"
@@ -1088,6 +1092,10 @@
       "version-4.x/version-4.x-themes": {
         "title": "Themes",
         "sidebar_label": "Themes"
+      },
+      "version-4.x/version-4.x-typescript": {
+        "title": "Type checking with TypeScript",
+        "sidebar_label": "Type checking with TypeScript"
       },
       "version-4.x/version-4.x-with-navigation-focus": {
         "title": "withNavigationFocus",
