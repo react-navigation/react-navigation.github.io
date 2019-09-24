@@ -122,3 +122,17 @@ pre code {
   opacity: 0.8;
   font-size: 14px;
 }
+
+samp {
+  display: none;
+}
+
+.snack-sample-link {
+  display: block;
+  margin-bottom: 20px;
+  margin-top: -5px;
+}
+
+code.template {
+  display: none;
+}

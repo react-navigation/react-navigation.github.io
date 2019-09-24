@@ -13,8 +13,6 @@
       "version-4.x-next-steps",
       "version-4.x-glossary-of-terms",
       "version-4.x-common-mistakes",
-      "version-4.x-react-native-screens",
-      "version-4.x-supported-react-native-versions",
       "version-4.x-limitations"
     ],
     "Guides": [
@@ -37,7 +35,8 @@
       "version-4.x-MST-integration",
       "version-4.x-localization",
       "version-4.x-web-support",
-      "version-4.x-function-after-focusing-screen"
+      "version-4.x-function-after-focusing-screen",
+      "version-4.x-react-native-screens"
     ],
     "Build your own Navigator": [
       "version-4.x-custom-navigator-overview",
@@ -48,6 +47,7 @@
       "version-4.x-transitioner"
     ],
     "Additional Resources": [
+      "version-4.x-supported-react-native-versions",
       "version-4.x-community-libraries-and-navigators",
       "version-4.x-more-resources"
     ],

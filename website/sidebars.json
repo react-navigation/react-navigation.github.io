@@ -14,8 +14,6 @@
       "glossary-of-terms",
       "compatibility",
       "common-mistakes",
-      "react-native-screens",
-      "supported-react-native-versions",
       "limitations"
     ],
     "Guides": [
@@ -38,7 +36,8 @@
       "MST-integration",
       "localization",
       "web-support",
-      "function-after-focusing-screen"
+      "function-after-focusing-screen",
+      "react-native-screens"
     ],
     "Build your own Navigator": [
       "routers",
@@ -48,6 +47,7 @@
       "transitioner"
     ],
     "Additional Resources": [
+      "supported-react-native-versions",
       "community-libraries-and-navigators",
       "more-resources"
     ],

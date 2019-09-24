@@ -17,6 +17,8 @@ The purpose of explaining this as part of the React Navigation fundamentals is n
 
 ## Creating a modal stack
 
+<samp id="full-screen-modal">modal stack</samp>
+
 ```js
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -81,8 +83,6 @@ const RootStack = createStackNavigator(
 );
 ```
 
-<a href="https://snack.expo.io/@react-navigation/full-screen-modal-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
-
 There are some important things to notice here:
 
 - As we know, the stack navigator function returns a React component (remember we render `<RootStack />` in our `App` component). This same component can be used as a screen component! By doing this, we are nesting a stack navigator inside of another stack navigator. In this case, this is useful for us because we want to use a different transition style for the modal, and we want to disable the header across the entire stack. In the future this will be important because for tab navigation, for example, each tab will likely have its own stack! Intuitively, this is what you expect: when you are on tab A and switch to tab B, you would like tab A to maintain its navigation state as you continue to explore tab B. Look at [this diagram](/docs/assets/modal/tree.png) to visualize the structure of navigation in this example.
@@ -93,4 +93,4 @@ There are some important things to notice here:
 
 * To change the type of transition on a stack navigator you can use the `mode` configuration. When set to `modal`, all screens animate-in from bottom to top rather than right to left. This applies to that entire stack navigator, so to use right to left transitions on other screens, we add another navigation stack with the default configuration.
 * `this.props.navigation.navigate` traverses up the navigator tree to find a navigator that can handle the `navigate` action.
-* [Full source of what we have built so far](https://snack.expo.io/@react-navigation/full-screen-modal-v3)
+* [Full source of what we have built so far](#example/full-screen-modal)

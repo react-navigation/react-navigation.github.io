@@ -35,7 +35,7 @@ const siteConfig = {
   },
   usePrism: ['jsx', 'js'],
   onPageNav: 'separate',
-  scripts: ['https://buttons.github.io/buttons.js'],
+  scripts: ['https://buttons.github.io/buttons.js', '/js/snack.js'],
   repoUrl: 'https://github.com/react-navigation/react-navigation',
   editUrl:
     'https://github.com/react-navigation/react-navigation.github.io/edit/source/docs/',

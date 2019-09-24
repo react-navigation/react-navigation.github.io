@@ -28,6 +28,8 @@ We'll do something similar to the latter, but rather than using a `window.locati
 
 ## Navigating to a new screen
 
+<samp id="new-screen" />
+
 ```js
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
@@ -126,3 +128,51 @@ Another common requirement is to be able to go back _multiple_ screens -- for ex
 - The header bar will automatically show a back button, but you can programmatically go back by calling `navigation.goBack()`. On Android, the hardware back button just works as expected.
 - You can go back to an existing screen in the stack with `navigation.navigate('RouteName')`, and you can go back to the first screen in the stack with `navigation.popToTop()`.
 - The `navigation` prop is available to all screen components (components defined as screens in route configuration and rendered by React Navigation as a route).
+
+<p id="new-screen">
+  import React from 'react';
+  import { Button, View, Text } from 'react-native';
+  import { createStackNavigator, createAppContainer } from 'react-navigation';
+
+  class HomeScreen extends React.Component {
+    render() {
+      return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Text>Home Screen</Text>
+          <Button
+            title="Go to Details"
+            onPress={() => this.props.navigation.navigate('Details')}
+          />
+        </View>
+      );
+    }
+  }
+
+  class DetailsScreen extends React.Component {
+    render() {
+      return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Text>Details Screen</Text>
+        </View>
+      );
+    }
+  }
+
+  const RootStack = createStackNavigator(
+    {
+      Home: HomeScreen,
+      Details: DetailsScreen,
+    },
+    {
+      initialRouteName: 'Home',
+    }
+  );
+
+  const AppContainer = createAppContainer(RootStack);
+
+  export default class App extends React.Component {
+    render() {
+      return <AppContainer />;
+    }
+  }
+</p>
