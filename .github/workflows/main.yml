@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - source
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Use Node.js 10
+      uses: actions/setup-node@v1
+      with:
+        version: 10
+
+    - name: Use Yarn
+      run: |
+        curl -o- -L https://yarnpkg.com/install.sh | bash
+
+    - name: Use crowdin
+      run: |
+        wget https://artifacts.crowdin.com/repo/deb/crowdin.deb -O crowdin.deb
+        sudo dpkg -i crowdin.deb
+
+    - name: Install dependencies
+      run: |
+        yarn --cwd website --frozen-lockfile
+
+    - name: Sync with crowdin
+      env:
+        CROWDIN_DOCUSAURUS_PROJECT_ID: react-navigation
+        CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.CROWDIN_DOCUSAURUS_API_KEY }}
+      run: |
+        yarn --cwd website crowdin-upload
+        yarn --cwd website crowdin-download
+
+    - name: Publish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GIT_USER: $GITHUB_ACTOR
+        CURRENT_BRANCH: $GITHUB_REF
+        STABLE_RELEASE: true
+      run: |
+        git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        git config --global user.name "$GITHUB_ACTOR"
+        echo "machine github.com login $GITHUB_ACTOR password $GITHUB_TOKEN" > ~/.netrc
+        yarn --cwd website publish-gh-pages
