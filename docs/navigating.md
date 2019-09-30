@@ -96,7 +96,7 @@ The header provided by stack navigator will automatically include a back button 
 Sometimes you'll want to be able to programmatically trigger this behavior, and for that you can use `navigation.goBack();`.
 
 ```js
-funtction DetailsScreen({ navigation }) {
+function DetailsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Details Screen</Text>
