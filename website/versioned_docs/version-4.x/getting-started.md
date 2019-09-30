@@ -92,6 +92,13 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   # npm install --save-dev jetifier
   ```
 
+  Next, add these two lines in `gradle.properties` under `android` folder
+
+  ```sh
+  android.useAndroidX=true
+  android.enableJetifier=true
+  ```
+
   Then add it to the `postinstall` script in `package.json`:
 
   ```json
