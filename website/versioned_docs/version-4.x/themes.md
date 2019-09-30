@@ -17,7 +17,7 @@ As operating systems add built-in support for light and dark modes, supporting d
 let Navigation = createAppContainer(RootStack);
 
 // `theme` can be `light` or `dark`. It defaults to `light` if not specified.
-export default () => <Navigation theme="light">;
+export default () => <Navigation theme="light" />;
 ```
 
 This will take care of styling the stack navigator, bottom tab navigator, and drawer navigator for you. React Navigation also provides several tools to help you make your customizations of those navigators and the screens within the navigators support both themes too.
@@ -45,7 +45,7 @@ export default () => {
 
   return (
     <AppearanceProvider>
-      <Navigation theme={theme}>
+      <Navigation theme={theme} />
     </AppearanceProvider>
   )
 }
