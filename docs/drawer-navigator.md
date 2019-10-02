@@ -6,7 +6,7 @@ sidebar_label: createDrawerNavigator
 
 Component that renders a navigation drawer which can be opened and closed via gestures.
 
-To use this navigator, you need to install [`@react-navigation/drawer`](https://github.com/navigation-ex/packages/drawer):
+To use this navigator, you need to install [`@react-navigation/drawer`](https://github.com/react-navigation/navigation-ex/tree/master/packages/drawer):
 
 ```sh
 yarn add @react-navigation/core@next @react-navigation/drawer@next
