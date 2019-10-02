@@ -8,7 +8,7 @@ sidebar_label: Compatibility layer
 
 React Navigation 5 has a completely new API, so our old code using React Navigation 4 will no longer work with this version. We understand that this can be a lot of work, so we have made a compatibility layer to make this easier.
 
-To use the compatibility layer, we need to install [`@react-navigation/compat`](https://github.com/navigation-ex/packages/compat):
+To use the compatibility layer, we need to install [`@react-navigation/compat`](https://github.com/react-navigation/navigation-ex/tree/master/packages/compat):
 
 ```sh
 yarn add @react-navigation/core@next @react-navigation/compat@next
