@@ -59,3 +59,20 @@ Provides simple HOCs that map react-navigation props to your screen components d
 #### Links
 
 [github.com/vonovak/react-navigation-props-mapper](https://github.com/vonovak/react-navigation-props-mapper)
+
+## react-native-header-scroll-view
+
+This component addresses the most requested feature to React Navigation – [iOS large header and grow/shrink on scroll](https://react-navigation.canny.io/feature-requests/p/ios-11-large-header-and-growshrink-on-scroll), made by [@jonsamp](https://github.com/jonsamp). It is different than the actual iOS large header behavior, but does the header title shrinking well. It can be used with React Navigation by using the following code in your component:
+
+```
+  static navigationOptions = {
+    headerMode: "none",
+    header: null
+  };
+```
+
+#### Links
+
+[https://github.com/jonsamp/react-native-header-scroll-view](https://github.com/jonsamp/react-native-header-scroll-view)
+
+[Demo on expo via VaxNow](https://expo.io/@thomaswangio/vax-now)
