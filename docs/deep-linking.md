@@ -231,11 +231,10 @@ In `SimpleApp/ios/SimpleApp/AppDelegate.m`:
 #import <React/RCTLinkingManager.h>
 
 // Add this above the `@end`:
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-  return [RCTLinkingManager application:application openURL:url
-                      sourceApplication:sourceApplication annotation:annotation];
+  return [RCTLinkingManager application:app openURL:url options:options];
 }
 ```
 
