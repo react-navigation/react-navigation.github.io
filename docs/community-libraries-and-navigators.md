@@ -64,13 +64,31 @@ Provides simple HOCs that map react-navigation props to your screen components d
 
 This component implements [iOS large header with grow/shrink on scroll](https://react-navigation.canny.io/feature-requests/p/ios-11-large-header-and-growshrink-on-scroll), made by [@jonsamp](https://github.com/jonsamp). Note that it doesn't handle header animation between screens, it only handles animating the header title on scroll.
 
-To use this component for header in React Navigation, we need to disable the default header:
+headerMode is an option in createStackNavigator's config, not in navigationOptions. I'd document both, headerMode: 'none' to disable globally, and header: null to disable header for one screen.
+
+There are 2 ways to use this component for a header in React Navigation:
+
+1. Disable the default header for one screen:
 
 ```
   static navigationOptions = {
-    headerMode: "none",
     header: null
   };
+```
+
+2. Disable header globally in `createStackNavigator`
+
+```
+const Home = createStackNavigator(
+  {
+    ExampleScreen1: ExampleScreen1,
+    ExampleScreen1: ExampleScreen2,
+  },
+  {
+    headerMode: 'none'
+  }
+);
+
 ```
 
 #### Links
