@@ -62,7 +62,9 @@ Provides simple HOCs that map react-navigation props to your screen components d
 
 ## react-native-header-scroll-view
 
-This component addresses the most requested feature to React Navigation – [iOS large header and grow/shrink on scroll](https://react-navigation.canny.io/feature-requests/p/ios-11-large-header-and-growshrink-on-scroll), made by [@jonsamp](https://github.com/jonsamp). It is different than the actual iOS large header behavior, but does the header title shrinking well. It can be used with React Navigation by using the following code in your component:
+This component implements [iOS large header with grow/shrink on scroll](https://react-navigation.canny.io/feature-requests/p/ios-11-large-header-and-growshrink-on-scroll), made by [@jonsamp](https://github.com/jonsamp). Note that it doesn't handle header animation between screens, it only handles animating the header title on scroll.
+
+To use this component for header in React Navigation, we need to disable the default header:
 
 ```
   static navigationOptions = {
