@@ -12,6 +12,32 @@ To use this navigator, you need to install [`@react-navigation/bottom-tabs`](htt
 yarn add @react-navigation/core@next @react-navigation/bottom-tabs@next
 ```
 
+Now we need to install [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
+
+If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
+
+```sh
+expo install react-native-safe-area-context
+```
+
+If you are not using Expo, run the following:
+
+```sh
+yarn add react-native-safe-area-context
+```
+
+If you are using Expo, you are done. Otherwise, continue to the next steps.
+
+To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
+
+```sh
+cd ios
+pod install
+cd ..
+```
+
+Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
+
 ## API Definition
 
 To use this tab navigator, import it from `@react-navigation/bottom-tabs`:
