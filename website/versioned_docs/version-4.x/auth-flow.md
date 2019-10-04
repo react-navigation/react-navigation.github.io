@@ -139,4 +139,4 @@ class HomeScreen extends React.Component {
 
 <a href="https://snack.expo.io/@react-navigation/auth-flow-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-That's about all there is to it. At the moment, `createSwitchNavigator` doesn't support animating between screens. Let us know if this is important to you [on Canny](https://react-navigation.canny.io/feature-requests).
+That's about all there is to it. If you're interested in animating the switch between screens, you can read about `createAnimatedSwitchNavigator` in the [API reference](animated-switch-navigator.html).
