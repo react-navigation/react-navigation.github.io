@@ -288,6 +288,10 @@ Object to override the distance of touch start from the edge of the screen to re
 - `horizontal` - _number_ - Distance for horizontal direction. Defaults to 25.
 - `vertical` - _number_ - Distance for vertical direction. Defaults to 135.
 
+#### `gestureVelocityImpact`
+
+Number which determines the relevance of velocity for the gesture. Defaults to 0.3.
+
 #### `gestureDirection`
 
 Direction of the gesture. Refer the [Animations section](#animations) for details.
