@@ -138,7 +138,7 @@ String that can be used as a fallback for `headerTitle`.
 
 #### `header`
 
-Function that given `HeaderProps` returns a React Element, to display as a header. Setting to `null` hides header.
+Function that given `HeaderProps` returns a React Element, to display as a header.
 
 Example:
 
@@ -166,6 +166,10 @@ header: ({ scene, previous, navigation }) => {
 When using a custom header, it's recommended set the `headerMode` prop on the navigator to `screen`.
 
 To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
+
+#### `headerShown`
+
+Whether to show or hide the header for the screen. The header is shown by default unless `headerMode` was set to `none`. Setting this to `false` hides the header.
 
 #### `headerTitle`
 
@@ -206,10 +210,6 @@ Function which returns a React Element to display on the left side of the header
 #### `headerStyle`
 
 Style object for the header. You can specify a custom background color here, for example.
-
-#### `headerStatusBarHeight`
-
-Allows to pass a custom status bar height to set as the top padding in the header.
 
 #### `headerTitleStyle`
 
