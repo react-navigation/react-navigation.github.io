@@ -17,18 +17,18 @@ To use this navigator, you need to install [`react-navigation-stack`](https://gi
 yarn add react-navigation react-navigation-stack@alpha @react-native-community/masked-view
 ```
 
-Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated) and [`react-native-screens`](https://github.com/kmagiera/react-native-screens).
+Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated), [`react-native-screens`](https://github.com/kmagiera/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
 
 If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
 
 ```sh
-expo install react-native-gesture-handler react-native-reanimated react-native-screens
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context
 ```
 
 If you are not using Expo, run the following:
 
 ```sh
-yarn add react-native-reanimated react-native-gesture-handler react-native-screens@^1.0.0-alpha.23
+yarn add react-native-reanimated react-native-gesture-handler react-native-screens@^1.0.0-alpha.23 react-native-safe-area-context
 ```
 
 If you are using Expo, you are done. Otherwise, continue to the next steps.
@@ -47,6 +47,13 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   cd ..
   ```
 
+  To finalize installation of `react-native-screens` for Android, add the following two lines to `dependencies` section in `android/app/build.gradle`:
+
+  ```gradle
+  implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+  implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
+  ```
+
 - **React Native 0.59 and lower**
 
   If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
@@ -54,6 +61,34 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   ```sh
   react-native link react-native-reanimated
   react-native link react-native-gesture-handler
+  react-native link react-native-screens
+  react-native link react-native-safe-area-context
+  ```
+
+  You also need to configure [jetifier](https://github.com/mikehardy/jetifier) to support dependencies using `androidx`:
+
+  ```sh
+  yarn add --dev jetifier
+  # or with npm
+  # npm install --save-dev jetifier
+  ```
+
+  Then add it to the `postinstall` script in `package.json`:
+
+  ```json
+  "scripts": {
+    "postinstall": "jetifier -r"
+  }
+  ```
+
+  > **NOTE**: Remember to remove this when you upgrade to React Native 0.60 and higher.
+
+  Now, run the `postinstall` script manually:
+
+  ```sh
+  yarn postinstall
+  # or with npm
+  # npm run postinstall
   ```
 
 To finalize installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
