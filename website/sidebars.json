@@ -20,7 +20,7 @@
       "tab-based-navigation",
       "drawer-based-navigation",
       "auth-flow",
-      "handling-iphonex",
+      "handling-safe-area",
       "status-bar",
       "screen-options-resolution",
       "custom-android-back-button-handling",
