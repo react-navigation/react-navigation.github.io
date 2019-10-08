@@ -167,7 +167,7 @@ Whether a screen should be unmounted when navigating away from it. Defaults to `
 
 #### `contentComponent`
 
-Component used to render the content of the drawer, for example, navigation items. Receives the `navigation` prop and `drawerOpenProgress` for the drawer. Defaults to `DrawerItems`. For more information, see below.
+Component used to render the content of the drawer, for example, navigation items. Receives the `navigation` prop and `drawerOpenProgress` for the drawer. Defaults to `DrawerNavigatorItems`. For more information, see below.
 
 #### `contentOptions`
 
@@ -179,7 +179,7 @@ The default component for the drawer is scrollable and only contains links for t
 
 ```js
 import SafeAreaView from 'react-native-safe-area-view';
-import { DrawerItems } from '@react-navigation/drawer';
+import { DrawerNavigatorItems } from '@react-navigation/drawer';
 
 const CustomDrawerContentComponent = props => (
   <ScrollView>
@@ -187,7 +187,7 @@ const CustomDrawerContentComponent = props => (
       style={styles.container}
       forceInset={{ top: 'always', horizontal: 'never' }}
     >
-      <DrawerItems {...props} />
+      <DrawerNavigatorItems {...props} />
     </SafeAreaView>
   </ScrollView>
 );
@@ -216,7 +216,7 @@ const CustomDrawerContentComponent = props => {
 };
 ```
 
-### `contentOptions` for `DrawerItems`
+### `contentOptions` for `DrawerNavigatorItems`
 
 - `items` - the array of routes, can be modified or overridden
 - `activeItemKey` - key identifying the active route
