@@ -109,7 +109,7 @@ An object containing the props for the tab bar component. It can contain the fol
 - `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
 - `adaptive` - Should the tab icons and labels alignment change based on screen size? Defaults to `true` for iOS 11. If `false`, tab icons and labels align vertically all the time. When `true`, tab icons and labels align horizontally on tablet.
 - `safeAreaInset` - Override the `forceInset` prop for `<SafeAreaView>`. Defaults to `{ bottom: 'always', top: 'never' }`. Available keys are `top | bottom | left | right` provided with the values `'always' | 'never'`.
-- `keyboardHidesTabBar` - Defaults to `false`. If `true` hide the tab bar when keyboard opens.
+- `keyboardHidesTabBar` - Defaults to `true`. If `true` hide the tab bar when keyboard opens.
 
 ### Options for `Tab.Screen`
 
