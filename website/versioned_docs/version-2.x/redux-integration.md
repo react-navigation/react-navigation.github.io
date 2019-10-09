@@ -106,6 +106,10 @@ const AppNavigator = createStackNavigator({
 
 In this case, once you `connect` `AppNavigator` to Redux as is done in `AppWithNavigationState`, `MyTabNavigator` will automatically have access to navigation state as a `navigation` prop.
 
+## Full example
+
+There's a working example app with Redux [here](https://github.com/react-navigation/react-navigation/tree/2.x/examples/ReduxExample) if you want to try it out yourself.
+
 ## Mocking tests
 
 To make jest tests work with your React Navigation app, you need to change the jest preset in the `package.json`, see [here](https://facebook.github.io/jest/docs/tutorial-react-native.html#transformignorepatterns-customization):
