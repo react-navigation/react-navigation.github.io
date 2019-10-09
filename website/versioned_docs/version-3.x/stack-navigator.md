@@ -255,7 +255,7 @@ const SomeStack = createStackNavigator({
 
 ### Examples
 
-See the examples [SimpleStack.tsx](https://github.com/react-navigation/react-navigation/blob/master/example/src/SimpleStack.tsx) and [ModalStack.tsx](https://github.com/react-navigation/react-navigation/blob/master/example/src/ModalStack.tsx) which you can run locally as part of the [NavigationPlayground](https://github.com/react-navigation/react-navigation/tree/master/example) app.
+See the examples [SimpleStack.tsx](https://github.com/react-navigation/react-navigation/blob/3.0/examples/NavigationPlayground/src/SimpleStack.tsx) and [ModalStack.tsx](https://github.com/react-navigation/react-navigation/blob/3.0/examples/NavigationPlayground/src/ModalStack.tsx) which you can run locally as part of the [NavigationPlayground](https://github.com/react-community/react-navigation/tree/3.0/examples/NavigationPlayground) app.
 
 You can view these examples directly on your phone by visiting [our expo demo](https://exp.host/@react-navigation/NavigationPlayground).
 
