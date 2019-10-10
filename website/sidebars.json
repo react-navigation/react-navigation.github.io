@@ -62,6 +62,7 @@
       "drawer-actions",
       "tab-actions",
       "stack-navigator",
+      "native-stack-navigator",
       "drawer-navigator",
       "bottom-tab-navigator",
       "material-bottom-tab-navigator",
