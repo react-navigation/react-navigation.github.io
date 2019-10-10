@@ -156,4 +156,4 @@ React Navigation has tests implemented in [Jest](https://facebook.github.io/jest
 yarn test
 ```
 
-These commands will be run by our CI and are required to pass before any contributtions are merged.
+These commands will be run by our CI and are required to pass before any contributions are merged.

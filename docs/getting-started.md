@@ -21,7 +21,7 @@ Install the required packages in your React Native project.
 ```bash
 yarn add @react-navigation/core@next @react-navigation/native@next
 # or with npm
-# npm install @react-navigation/core@next @react-navigation/native@next
+npm install @react-navigation/core@next @react-navigation/native@next
 ```
 
 When you use a navigator, you'll need to follow the installation instructions of that navigator for any additional configuration.

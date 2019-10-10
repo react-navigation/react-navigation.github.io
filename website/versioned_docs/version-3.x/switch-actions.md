@@ -5,7 +5,7 @@ sidebar_label: SwitchActions
 original_id: switch-actions
 ---
 
-`SwitchActions` is an object containing methods for generating actions specific to switch-based navigators. Its methods expand upon the actions available in [NavigationActions](navigation-actions.html).
+`SwitchActions` is an object containing methods for generating actions specific to switch-based navigators. Its methods expand upon the actions available in [`NavigationActions`](navigation-actions.html).
 
 The following actions are supported:
 

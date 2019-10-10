@@ -5,7 +5,7 @@ sidebar_label: StackActions
 original_id: stack-actions
 ---
 
-`StackActions` is an object containing methods for generating actions specific to stack-based navigators. Its methods expand upon the actions available in [NavigationActions](navigation-actions.html).
+`StackActions` is an object containing methods for generating actions specific to stack-based navigators. Its methods expand upon the actions available in [`NavigationActions`](navigation-actions.html).
 
 The following actions are supported:
 * [Reset](#reset) - Replace current state with a new state

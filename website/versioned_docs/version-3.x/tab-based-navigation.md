@@ -7,7 +7,7 @@ original_id: tab-based-navigation
 
 Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top below the header (or even instead of a header).
 
-This guide covers [createBottomTabNavigator](bottom-tab-navigator.html). You may also use [createMaterialBottomTabNavigator](material-bottom-tab-navigator.html) and [createMaterialTopTabNavigator](material-top-tab-navigator.html) to add tabs to your application.
+This guide covers [`createBottomTabNavigator`](bottom-tab-navigator.html). You may also use [`createMaterialBottomTabNavigator`](material-bottom-tab-navigator.html) and [`createMaterialTopTabNavigator`](material-top-tab-navigator.html) to add tabs to your application.
 
 ## Minimal example of tab-based navigation
 
@@ -130,11 +130,11 @@ export default class IconWithBadge extends React.Component {
 }
 ```
 
-From UI perspective this component is ready to use, but you still need to find some way to pass down the badge count properly from somewhere else, like using [React Context](https://reactjs.org/docs/context.html), [redux](https://redux.js.org/), [mobx](https://mobx.js.org/) or [event emitters](https://github.com/facebook/react-native/blob/master/Libraries/vendor/emitter/EventEmitter.js).
+From UI perspective this component is ready to use, but you still need to find some way to pass down the badge count properly from somewhere else, like using [React Context](https://reactjs.org/docs/context.html), [Redux](https://redux.js.org/), [MobX](https://mobx.js.org/) or [event emitters](https://github.com/facebook/react-native/blob/master/Libraries/vendor/emitter/EventEmitter.js).
 
 ```js
 const HomeIconWithBadge = (props) => {
-  // You should pass down the badgeCount in some other ways like react context api, redux, mobx or event emitters.
+  // You should pass down the badgeCount in some other ways like React Context API, Redux, MobX or event emitters.
   return <IconWithBadge {...props} badgeCount={3} />;  
 }
 export default HomeIconWithBadge
