@@ -94,6 +94,14 @@ String that can be used as a fallback for `headerTitle`.
 
 Whether to show or hide the header for the screen. The header is shown by default. Setting this to `false` hides the header.
 
+#### `headerHideBackButton`
+
+Boolean indicating whether to hide the elevation shadow on the header. Only supported on Android.
+
+#### `headerHideShadow`
+
+Boolean indicating whether to hide the elevation shadow on the header. Only supported on Android.
+
 #### `headerTitle`
 
 String to be used by the header as title string. Defaults to scene `title`.
@@ -149,13 +157,23 @@ Whether you can use gestures to dismiss this screen. Defaults to `true` on iOS, 
 
 #### `presentation`
 
-How should the screen be presented. Available options:
+How should the screen be presented. Possible options:
 
 - `modal`
 - `transparentModal`
 - `push`
 
-Defaults to `push`. Only supported on iOS.
+Defaults to `push`.
+
+#### `animation`
+
+How should the screen be animated. Possible options:
+
+- `default`
+- `fade`
+- `none`
+
+Only supported on `Android`.
 
 ### Events
 

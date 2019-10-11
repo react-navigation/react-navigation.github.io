@@ -175,6 +175,15 @@ Whether to show or hide the header for the screen. The header is shown by defaul
 
 String or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is specified, it receives `allowFontScaling`, `onLayout`, `style` and `children` as the arguments. The title string is passed in `children`.
 
+#### `headerTitleAlign`
+
+How to align the the header title. Possible values:
+
+- `left`
+- `center`
+
+Defaults to `center` on iOS and `left` on Android.
+
 #### `headerTitleAllowFontScaling`
 
 Whether header title font should scale to respect Text Size accessibility settings. Defaults to false.
