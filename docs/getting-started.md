@@ -20,7 +20,11 @@ Install the required packages in your React Native project.
 
 ```bash
 yarn add @react-navigation/core@next @react-navigation/native@next
-# or with npm
+```
+
+Or with npm
+
+```sh
 npm install @react-navigation/core@next @react-navigation/native@next
 ```
 
