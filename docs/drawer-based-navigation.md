@@ -36,7 +36,7 @@ function MyNotificationsScreen({ navigation }) {
   );
 }
 
-exprt default function App() {
+export default function App() {
   return (
     <NavigationNativeContainer>
       <Drawer.Navigator initialRouteName="Feed">
