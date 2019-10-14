@@ -30,7 +30,7 @@ class MyNavView extends Component {
 }
 ```
 
-For a small but complete working example, see the [CustomTransitioner](https://github.com/react-navigation/react-navigation/blob/master/examples/NavigationPlayground/js/CustomTransitioner.js) example from the [NavigationPlayground](https://github.com/react-navigation/react-navigation/tree/master/examples/NavigationPlayground).
+For a small but complete working example, see the [CustomTransitioner](https://github.com/react-navigation/react-navigation/blob/2.x/examples/NavigationPlayground/js/CustomTransitioner.js) example from the [NavigationPlayground](https://github.com/react-navigation/react-navigation/tree/2.x/examples/NavigationPlayground).
 
 ## Props
 

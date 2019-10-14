@@ -130,7 +130,7 @@ If any errors occur you'll either have to manually fix them or you can attempt t
 
 ### Run the Example App
 
-The [NavigationPlayground](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground) example app includes a variety of patterns and is used as a simple way for contributors to manually integration test changes.
+The [NavigationPlayground](https://github.com/react-community/react-navigation/tree/2.x/examples/NavigationPlayground) example app includes a variety of patterns and is used as a simple way for contributors to manually integration test changes.
 
 ```bash
 yarn install

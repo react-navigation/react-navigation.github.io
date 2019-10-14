@@ -130,7 +130,7 @@ If any errors occur you'll either have to manually fix them or you can attempt t
 
 ### Run the Example App
 
-The [NavigationPlayground](https://github.com/react-community/react-navigation/tree/master/examples/NavigationPlayground) example app includes a variety of patterns and is used as a simple way for contributors to manually integration test changes. See the [README](https://github.com/react-navigation/react-navigation/blob/master/examples/NavigationPlayground/README.md) for instructions to run it.
+The [NavigationPlayground](https://github.com/react-community/react-navigation/tree/3.0/examples/NavigationPlayground) example app includes a variety of patterns and is used as a simple way for contributors to manually integration test changes. See the [README](https://github.com/react-navigation/react-navigation/blob/3.0/examples/NavigationPlayground/README.md) for instructions to run it.
 
 ### Run the Website
 
