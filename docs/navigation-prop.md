@@ -16,7 +16,7 @@ Each `screen` component in your app is provided with the `navigation` prop autom
   - `dispatch` - send an action to router
   - `dangerouslyGetParent` - function that returns the parent navigator, if any
 
-It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`useNavigation`](use-navigation.html) HOC.
+It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`useNavigation`](use-navigation.md) HOC.
 
 ### Navigator-dependent functions
 
@@ -144,7 +144,7 @@ The `navigation.addListener` method returns a function to remove the listener wh
 
 Apart from `focus` and `blur`, each navigator can emit their own custom events. For example, stack navigator emits `transitionStart` and `transitionEnd` events. You can find details about the events emitted on the individual navigator's documentation.
 
-See more details in [lifecycle events documentation](listen-lifecycle-events).
+See more details in [lifecycle events documentation](listen-lifecycle-events.md).
 
 ### `isFocused` - Query the focused state of the screen
 
@@ -154,7 +154,7 @@ Returns `true` if the screen is focused and `false` otherwise.
 const isFocused = navigation.isFocused();
 ```
 
-This method doesn't re-render the screen when the value changes and mainly useful in callbacks. You probably want to use [useIsFocused](use-is-focused.html) instead of using this directly, it will return a boolean a prop to indicating if the screen is focused.
+This method doesn't re-render the screen when the value changes and mainly useful in callbacks. You probably want to use [useIsFocused](use-is-focused.md) instead of using this directly, it will return a boolean a prop to indicating if the screen is focused.
 
 ### `setParams` - Make changes to route params
 
@@ -183,7 +183,7 @@ Use dispatch to send any navigation action to the router. The other navigation f
 
 Note that if you want to dispatch react-navigation actions you should use the action creators provided in this library.
 
-See [Navigation Actions Docs](navigation-actions.html) for a full list of available actions.
+See [Navigation Actions Docs](navigation-actions.md) for a full list of available actions.
 
 ```js
 import { CommonActions } from '@react-navigation/core';
