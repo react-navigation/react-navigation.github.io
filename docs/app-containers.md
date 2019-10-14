@@ -4,7 +4,9 @@ title: App containers
 sidebar_label: App containers
 ---
 
-Containers are responsible for managing your app state and linking your top-level navigator to the app environment. On Android, the app container uses the `BackHandler` module to handle the system back button. The container can also be configured to persist your navigation state.
+Containers are responsible for managing your app state and linking your top-level navigator to the app environment.
+
+The container can notify state changes and can be used to persist and restore state. On Android, the app container uses the `BackHandler` module to handle the system back button.
 
 A quick example of `NavigationNativeContainer`:
 

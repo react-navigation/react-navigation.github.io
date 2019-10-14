@@ -21,7 +21,7 @@ function StackScreen() {
       />
     </Stack.Navigator>
   )
-)
+}
 ```
 
 ## Using params in the title
@@ -44,7 +44,7 @@ function StackScreen() {
       />
     </Stack.Navigator>
   )
-)
+}
 ```
 
 The argument that is passed in to the `options` function is an object with the following properties:
@@ -94,7 +94,7 @@ function StackScreen() {
       />
     </Stack.Navigator>
   )
-)
+}
 ```
 
 There are a couple of things to notice here:
@@ -127,7 +127,7 @@ function StackScreen() {
       />
     </Stack.Navigator>
   )
-)
+}
 ```
 
 Now, any screen that belongs to the `StackScreen` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
@@ -156,17 +156,17 @@ function StackScreen() {
       />
     </Stack.Navigator>
   )
-)
+}
 ```
 
 > You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to a stack navigator, the `headerTitle` defaults to a `Text` component that displays the `title`.
 
 ## Additional configuration
 
-You can read the full list of available `options` for screens inside of a stack navigator in the [createStackNavigator reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
+You can read the full list of available `options` for screens inside of a stack navigator in the [`createStackNavigator` reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
 
 ## Summary
 
 - You can customize the header inside of the `options` prop of your screen components. Read the full list of options [in the API reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
 - The `options` prop can be an object or a function. When it is a function, it is provided with an object with the `navigation` and `route` prop.
-- You can also specify shared `defaultOptions` in the stack navigator configuration when you initialize it. The prop takes precedence over that configuration.
+- You can also specify shared `screenOptions` in the stack navigator configuration when you initialize it. The prop takes precedence over that configuration.

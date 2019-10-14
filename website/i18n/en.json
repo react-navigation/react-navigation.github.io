@@ -33,6 +33,10 @@
         "title": "Community-developed Navigators and Libraries",
         "sidebar_label": "Community Navigators and Libraries"
       },
+      "compatibility": {
+        "title": "Compatibility layer",
+        "sidebar_label": "Compatibility layer"
+      },
       "composing-navigators": {
         "title": "composing-navigators"
       },
@@ -91,7 +95,7 @@
         "title": "Glossary of terms",
         "sidebar_label": "Glossary of terms"
       },
-      "handling-iphonex": {
+      "handling-safe-area": {
         "title": "Supporting safe areas",
         "sidebar_label": "Supporting safe areas"
       },
@@ -144,6 +148,10 @@
       "MST-integration": {
         "title": "Integrating with MobX State Tree",
         "sidebar_label": "MobX State Tree integration"
+      },
+      "native-stack-navigator": {
+        "title": "createNativeStackNavigator",
+        "sidebar_label": "createNativeStackNavigator"
       },
       "navigating-without-navigation-prop": {
         "title": "Navigating without the navigation prop",
@@ -270,8 +278,8 @@
         "sidebar_label": "useFocusEffect"
       },
       "use-is-focused": {
-        "title": "useFocusEffect",
-        "sidebar_label": "useFocusEffect"
+        "title": "useIsFocused",
+        "sidebar_label": "useIsFocused"
       },
       "use-navigation": {
         "title": "useNavigation",
@@ -793,6 +801,10 @@
         "title": "Navigation views",
         "sidebar_label": "Navigation views"
       },
+      "version-3.x/version-3.x-next-steps": {
+        "title": "Next steps",
+        "sidebar_label": "Next steps"
+      },
       "version-3.x/version-3.x-params": {
         "title": "Passing parameters to routes",
         "sidebar_label": "Passing parameters to routes"
@@ -1084,6 +1096,10 @@
       "version-4.x/version-4.x-themes": {
         "title": "Themes",
         "sidebar_label": "Themes"
+      },
+      "version-4.x/version-4.x-typescript": {
+        "title": "Type checking with TypeScript",
+        "sidebar_label": "Type checking with TypeScript"
       },
       "version-4.x/version-4.x-with-navigation-focus": {
         "title": "withNavigationFocus",

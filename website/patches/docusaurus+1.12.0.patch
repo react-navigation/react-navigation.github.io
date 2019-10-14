@@ -1,0 +1,54 @@
+diff --git a/node_modules/docusaurus/lib/server/server.js b/node_modules/docusaurus/lib/server/server.js
+index 465ba7c..214f69d 100755
+--- a/node_modules/docusaurus/lib/server/server.js
++++ b/node_modules/docusaurus/lib/server/server.js
+@@ -363,6 +363,12 @@ function execute(port, host) {
+     res.send(cssContent);
+   });
+ 
++  app.use(function(req, res, next) {
++    res.header("Access-Control-Allow-Origin", "*");
++    res.header("Access-Control-Allow-Headers", "*");
++    next();
++  });
++
+   // serve static assets from these locations
+   app.use(
+     `${siteConfig.baseUrl}${
+@@ -374,6 +380,7 @@ function execute(port, host) {
+     `${siteConfig.baseUrl}blog/assets`,
+     express.static(join(CWD, 'blog', 'assets')),
+   );
++
+   app.use(siteConfig.baseUrl, express.static(join(CWD, 'static')));
+   app.use(siteConfig.baseUrl, express.static(join(__dirname, '..', 'static')));
+ 
+diff --git a/node_modules/docusaurus/lib/server/start.js b/node_modules/docusaurus/lib/server/start.js
+index 08ba69d..6bfb89d 100755
+--- a/node_modules/docusaurus/lib/server/start.js
++++ b/node_modules/docusaurus/lib/server/start.js
+@@ -10,6 +10,7 @@ const openBrowser = require('react-dev-utils/openBrowser');
+ const portFinder = require('portfinder');
+ const liveReloadServer = require('./liveReloadServer.js');
+ const server = require('./server.js');
++const localtunnel = require('localtunnel');
+ 
+ const CWD = process.cwd();
+ 
+@@ -30,8 +31,14 @@ function startServer() {
+       server(port, host);
+       const {baseUrl} = require(`${CWD}/siteConfig.js`);
+       const serverAddress = `http://${host}:${port}${baseUrl}`;
+-      console.log('Docusaurus server started on port %d', port);
+-      openBrowser(serverAddress);
++      console.log('Docusaurus server started on port %d. Open this URL if you want, but the tunnel connection is required for testing Snack links.', port);
++
++      console.log('Starting tunnel...');
++      localtunnel({ port }).then(tunnel => {
++        console.log(`Tunnel started at ${tunnel.url}. Open this URL to begin working on the docs!`);
++      }).catch(err => {
++        console.log(`Unable to start tunnel for some reason. You can use ${serverAddress} but Snack links will not work.`);
++      });
+     });
+   return promise;
+ }

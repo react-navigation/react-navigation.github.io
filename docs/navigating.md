@@ -28,6 +28,8 @@ We'll do something similar to the latter, but rather than using a `window.locati
 
 ## Navigating to a new screen
 
+<samp id="new-screen" />
+
 ```js
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
@@ -94,7 +96,7 @@ The header provided by stack navigator will automatically include a back button 
 Sometimes you'll want to be able to programmatically trigger this behavior, and for that you can use `navigation.goBack();`.
 
 ```js
-funtction DetailsScreen({ navigation }) {
+function DetailsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Details Screen</Text>
@@ -126,3 +128,4 @@ Another common requirement is to be able to go back _multiple_ screens -- for ex
 - The header bar will automatically show a back button, but you can programmatically go back by calling `navigation.goBack()`. On Android, the hardware back button just works as expected.
 - You can go back to an existing screen in the stack with `navigation.navigate('RouteName')`, and you can go back to the first screen in the stack with `navigation.popToTop()`.
 - The `navigation` prop is available to all screen components (components defined as screens in route configuration and rendered by React Navigation as a route).
+

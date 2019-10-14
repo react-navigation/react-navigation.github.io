@@ -17,6 +17,8 @@ There are two pieces to this:
 
 > We recommend that the params you pass are JSON-serializable. That way, you'll be able to use [state persistence](state-persistence.html) and your screen components will have the right contract for implementing [deep linking](deep-linking.html).
 
+<samp id="passing-params" />
+
 ```js
 class HomeScreen extends React.Component {
   render() {
@@ -26,7 +28,6 @@ class HomeScreen extends React.Component {
         <Button
           title="Go to Details"
           onPress={() => {
-            /* 1. Navigate to the Details route with params */
             this.props.navigation.navigate('Details', {
               itemId: 86,
               otherParam: 'anything you want here',
@@ -40,39 +41,30 @@ class HomeScreen extends React.Component {
 
 class DetailsScreen extends React.Component {
   render() {
-    /* 2. Get the param, provide a fallback value if not available */
     const { navigation } = this.props;
-    const itemId = navigation.getParam('itemId', 'NO-ID');
-    const otherParam = navigation.getParam('otherParam', 'some default value');
-
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Details Screen</Text>
-        <Text>itemId: {JSON.stringify(itemId)}</Text>
-        <Text>otherParam: {JSON.stringify(otherParam)}</Text>
+        <Text>
+          itemId: {JSON.stringify(navigation.getParam('itemId', 'NO-ID'))}
+        </Text>
+        <Text>
+          otherParam:
+          {JSON.stringify(navigation.getParam('otherParam', 'default value'))}
+        </Text>
         <Button
           title="Go to Details... again"
           onPress={() =>
-            this.props.navigation.push('Details', {
+            navigation.push('Details', {
               itemId: Math.floor(Math.random() * 100),
             })
           }
-        />
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.goBack()}
         />
       </View>
     );
   }
 }
 ```
-
-<a href="https://snack.expo.io/@react-navigation/navigate-with-params-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 > You can also directly access the params object with `this.props.navigation.state.params`. This may be `null` if no params were supplied, and so it's usually easier to just use `getParam` so you don't have to deal with that case.
 
@@ -83,4 +75,4 @@ class DetailsScreen extends React.Component {
 - `navigate` and `push` accept an optional second argument to let you pass parameters to the route you are navigating to. For example: `this.props.navigation.navigate('RouteName', {paramName: 'value'})`.
 - You can read the params through `this.props.navigation.getParam`
 - As an alternative to `getParam`, you may use `this.props.navigation.state.params`. It is `null` if no parameters are specified.
-- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/navigate-with-params-v3).
+- [Full source of what we have built so far](#example/passing-params).

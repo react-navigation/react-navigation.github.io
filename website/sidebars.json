@@ -12,16 +12,15 @@
       "modal",
       "next-steps",
       "glossary-of-terms",
+      "compatibility",
       "common-mistakes",
-      "react-native-screens",
-      "supported-react-native-versions",
       "limitations"
     ],
     "Guides": [
       "tab-based-navigation",
       "drawer-based-navigation",
       "auth-flow",
-      "handling-iphonex",
+      "handling-safe-area",
       "status-bar",
       "screen-options-resolution",
       "custom-android-back-button-handling",
@@ -37,7 +36,8 @@
       "MST-integration",
       "localization",
       "web-support",
-      "function-after-focusing-screen"
+      "function-after-focusing-screen",
+      "react-native-screens"
     ],
     "Build your own Navigator": [
       "routers",
@@ -47,6 +47,7 @@
       "transitioner"
     ],
     "Additional Resources": [
+      "supported-react-native-versions",
       "community-libraries-and-navigators",
       "more-resources"
     ],
@@ -61,6 +62,7 @@
       "drawer-actions",
       "tab-actions",
       "stack-navigator",
+      "native-stack-navigator",
       "drawer-navigator",
       "bottom-tab-navigator",
       "material-bottom-tab-navigator",

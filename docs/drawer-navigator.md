@@ -6,50 +6,35 @@ sidebar_label: createDrawerNavigator
 
 Component that renders a navigation drawer which can be opened and closed via gestures.
 
-To use this navigator, you need to install [`@react-navigation/drawer`](https://github.com/navigation-ex/packages/drawer):
+To use this navigator, you need to install [`@react-navigation/drawer`](https://github.com/react-navigation/navigation-ex/tree/master/packages/drawer):
 
 ```sh
 yarn add @react-navigation/core@next @react-navigation/drawer@next
 ```
 
-Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated).
+Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated), [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
 
 If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
 
 ```sh
-expo install react-native-gesture-handler react-native-reanimated
+expo install react-native-gesture-handler react-native-reanimated react-native-safe-area-context
 ```
 
 If you are not using Expo, run the following:
 
 ```sh
-yarn add react-native-gesture-handler react-native-reanimated
+yarn add react-native-reanimated react-native-gesture-handler react-native-safe-area-context
 ```
 
 If you are using Expo, you are done. Otherwise, continue to the next steps.
 
-Next, we need to link these libraries. The steps depends on your React Native version:
+To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
 
-- **React Native 0.60 and higher**
-
-  On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
-
-  To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
-
-  ```sh
-  cd ios
-  pod install
-  cd ..
-  ```
-
-- **React Native 0.59 and lower**
-
-  If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
-
-  ```sh
-  react-native link react-native-reanimated
-  react-native link react-native-gesture-handler
-  ```
+```sh
+cd ios
+pod install
+cd ..
+```
 
 To finalize installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
 
@@ -124,10 +109,6 @@ Behavior of back button handling.
 - `history` to return to last visited tab
 - `none` to not handle back button
 
-#### `drawerBackgroundColor`
-
-Use the Drawer background for some color. The Default is `white`.
-
 #### `drawerPosition`
 
 Options are `left` or `right`. Default is `left` position.
@@ -139,10 +120,6 @@ Type of the drawer. It determines how the drawer looks and animates.
 - `front`: Traditional drawer which covers the screen with a overlay behind it.
 - `back`: The drawer is revealed behind the screen on swipe.
 - `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.
-
-#### `drawerWidth`
-
-Number or a function which returns the width of the drawer. If a function is provided, it'll be called again when the screen's dimensions change.
 
 #### `edgeWidth`
 
@@ -180,32 +157,53 @@ Whether the screens should render the first time they are accessed. Defaults to 
 
 Whether a screen should be unmounted when navigating away from it. Defaults to `false`.
 
+#### `sceneContainerStyle`
+
+Style object for the component wrapping the screen content.
+
+#### `drawerStyle`
+
+Style object for the drawer component. You can pass a custom background color for a drawer or a custom width here.
+
 #### `contentComponent`
 
-Component used to render the content of the drawer, for example, navigation items. Receives the `navigation` prop and `drawerOpenProgress` for the drawer. Defaults to `DrawerItems`. For more information, see below.
+Component used to render the content of the drawer, for example, navigation items.
 
-#### `contentOptions`
+The content component receives following props by default:
 
-An object containing the props for the drawer content component. See below for more details.
+- `state` - The navigation state of the navigator, `state.routes` contains list of all routes
+- `navigation` - The navigation object for the navigator.
+- `descriptors` - An descriptor object containing options for the drawer screens. The options can be accessed at `descriptors[route.key].options`.
+- `progress` - Reanimated Node that represents the animated position of the drawer (0 is closed; 1 is open).
 
-### Providing a custom `contentComponent`
+##### Providing a custom `contentComponent`
 
-The default component for the drawer is scrollable and only contains links for the routes in the RouteConfig. You can easily override the default component to add a header, footer, or other content to the drawer. By default the drawer is scrollable and supports iPhone X safe area. If you customize the content, be sure to wrap the content in a SafeAreaView:
+The default component for the drawer is scrollable and only contains links for the routes in the RouteConfig. You can easily override the default component to add a header, footer, or other content to the drawer. The default content component is exported as `DrawerContent`. It renders a `DrawerItemList` component inside a `ScrollView`.
+
+By default the drawer is scrollable and supports devices with notches. If you customize the content, be sure to apply safe area insets:
 
 ```js
-import SafeAreaView from 'react-native-safe-area-view';
-import { DrawerItems } from '@react-navigation/drawer';
+import { useSafeArea } from 'react-native-safe-area-context';
+import { DrawerItemList } from '@react-navigation/drawer';
 
-const CustomDrawerContentComponent = props => (
-  <ScrollView>
-    <SafeAreaView
+function CustomDrawerContent({ drawerPosition, ...rest }) {
+  const insets = useSafeArea();
+
+  return (
+    <ScrollView
+      contentContainerStyle={[
+        {
+          paddingTop: insets.top + 4,
+          paddingLeft: drawerPosition === 'left' ? insets.left : 0,
+          paddingRight: drawerPosition === 'right' ? insets.right : 0,
+        },
+      ]}
       style={styles.container}
-      forceInset={{ top: 'always', horizontal: 'never' }}
     >
-      <DrawerItems {...props} />
-    </SafeAreaView>
-  </ScrollView>
-);
+      <DrawerItemList {...rest} />
+    </ScrollView>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -214,10 +212,10 @@ const styles = StyleSheet.create({
 });
 ```
 
-`contentComponent` also received a prop called `drawerOpenProgress` which is an Reanimated Node that represents the animated position of the drawer (0 is closed; 1 is open). This allows you to do interesting animations in your `contentComponent`, such as parallax motion of the drawer contents:
+The `progress` node can be used to do interesting animations in your `contentComponent`, such as parallax motion of the drawer contents:
 
 ```js
-const CustomDrawerContentComponent = props => {
+function CustomDrawerContent({ progress, ...rest }) {
   const translateX = props.drawerOpenProgress.interpolate({
     inputRange: [0, 1],
     outputRange: [-100, 0],
@@ -228,37 +226,84 @@ const CustomDrawerContentComponent = props => {
       {/* ... drawer contents */}
     </Animated.View>
   );
-};
+}
 ```
 
-### `contentOptions` for `DrawerItems`
+To add additional items in the drawer, you can use the `DrawerItem` component:
 
-- `items` - the array of routes, can be modified or overridden
-- `activeItemKey` - key identifying the active route
-- `activeTintColor` - label and icon color of the active label
-- `activeBackgroundColor` - background color of the active label
-- `inactiveTintColor` - label and icon color of the inactive label
-- `inactiveBackgroundColor` - background color of the inactive label
-- `onItemPress({ route, focused })` - function to be invoked when an item is pressed
-- `itemsContainerStyle` - style object for the content section
-- `itemStyle` - style object for the single item, which can contain an Icon and/or a Label
-- `labelStyle` - style object to overwrite `Text` style inside content section, when your label is a string
-- `activeLabelStyle` - style object to overwrite `Text` style of the active label, when your label is a string (merged with `labelStyle`)
-- `inactiveLabelStyle` - style object to overwrite `Text` style of the inactive label, when your label is a string (merged with `labelStyle`)
-- `iconContainerStyle` - style object to overwrite `View` icon container styles.
+```js
+function CustomDrawerContent({ drawerPosition, ...rest }) {
+  const insets = useSafeArea();
+
+  return (
+    <ScrollView
+      contentContainerStyle={[
+        {
+          paddingTop: insets.top + 4,
+          paddingLeft: drawerPosition === 'left' ? insets.left : 0,
+          paddingRight: drawerPosition === 'right' ? insets.right : 0,
+        },
+      ]}
+      style={styles.container}
+    >
+      <DrawerItemList {...rest} />
+      <DrawerItem label="Help" onPress={() => Linking.openUrl('https://mywebsite.com/help')} />
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
+```
+
+#### `contentOptions`
+
+An object containing the props for the drawer content component. See below for more details.
+
+##### `activeTintColor`
+
+Color for the icon and label in the active item in the drawer.
+
+##### `activeBackgroundColor`
+
+Background color for the active item in the drawer.
+
+##### `inactiveTintColor`
+
+Color for the icon and label in the inactive items in the drawer.
+
+##### `inactiveBackgroundColor`
+
+Background color for the inactive items in the drawer.
+
+##### `itemStyle`
+
+Style object for the single item, which can contain an icon and/or a label.
+
+##### `labelStyle`
+
+Style object to apply to the `Text` style inside content section which renders a label.
+
+##### `contentContainerStyle`
+
+Style object for the content section inside the `ScrollView`.
+
+##### `style`
+
+Style object for the wrapper view.
 
 Example:
 
 ```js
-contentOptions: {
+contentOptions={{
   activeTintColor: '#e91e63',
-  itemsContainerStyle: {
+  itemStyle: {
     marginVertical: 0,
   },
-  iconContainerStyle: {
-    opacity: 1
-  }
-}
+}}
 ```
 
 ### Options for `Tab.Screen`
@@ -280,6 +325,18 @@ Function, that given `{ focused: boolean, tintColor: string }` returns a React.N
 #### `drawerLockMode`
 
 Specifies the [lock mode](https://facebook.github.io/react-native/docs/drawerlayoutandroid.html#drawerlockmode) of the drawer.
+
+### Events
+
+The navigator can emit events on certain actions. Supported events are:
+
+#### `drawerOpen`
+
+This event is fired when the drawer opens.
+
+#### `drawerClose`
+
+This event is fired when the drawer closes.
 
 ### Nesting drawer navigators inside others
 

@@ -4,7 +4,7 @@ title: Deep linking
 sidebar_label: Deep linking
 ---
 
-In this guide we will set up our app to handle external URIs. Let's suppose that we want a URI like `mychat://chat/Eric` to open our app and link straight into a chat screen for some user named "Eric".
+In this guide we will set up our app to handle external URIs.
 
 ### Deep-link integration
 
@@ -13,9 +13,7 @@ To handle incoming links, we need to handle 2 scenarios:
 1. If the app wasn't previously open, we need to set the initial state based on the link
 2. If the app was already open, we need to update the state to reflect the incoming link
 
-The current implementation of React Navigation has an advantage in handling deep links and is able to automatically set the state based on the path definitions for each screen. It's possible because it can get the configuration for all screens statically.
-
-With our dynamic architecture, we can't determine the state automatically. So it's necessary to manually translate a deep link to a navigation state. The library exports a `getStateFromPath` utility to convert a URL to a state object if the path segments translate directly to route names.
+To handle a deep link, we need to translate it to a valid navigation state. The library exports a `getStateFromPath` utility to convert a URL to a state object.
 
 For example, the path `/rooms/chat?user=jane` will be translated to a state object like this:
 
@@ -49,7 +47,7 @@ function App() {
   const ref = React.useRef();
 
   const { getInitialState } = useLinking(ref, {
-    prefixes: ['https://myapp.com', 'myapp://'],
+    prefixes: ['https://mychat.com', 'mychat://'],
   });
 
   const [isReady, setIsReady] = React.useState(false);
@@ -79,7 +77,63 @@ function App() {
 }
 ```
 
-The hook also accepts a `getStateFromPath` option where you can provide a custom function to convert the URL to a valid state object for more advanced use cases.
+Often, directly translating path segments to route names may not be the expected behavior. For example, you might want to parse the path `/feed/latest` to something like:
+
+```js
+{
+  routes: [
+    {
+      name: 'Chat',
+      params: {
+        sort: 'latest',
+      },
+    },
+  ];
+}
+```
+
+You can specify a separate `config` option to control how the deep link is parsed to suit your needs.
+
+```js
+const { getInitialState } = useLinking(ref, {
+  prefixes: ['https://mychat.com', 'mychat://'],
+  config: {
+    Chat: 'feed/:sort',
+  },
+});
+```
+
+Here `Chat` is the name of the screen that handles this URL. The navigator will need to have a `Chat` screen which handles a `sort` param for the route:
+
+You can also customize how params are parsed, for example, if you parse the path `/item/42` as `item/:id`, the param `id` will be parsed as string by default. But you can customize it by passing a function:
+
+```js
+{
+  Catalog: {
+    path: 'item/:id',
+    parse: {
+      id: Number,
+    },
+  },
+}
+```
+
+This will result in something like:
+
+```js
+{
+  routes: [
+    {
+      name: 'Catalog',
+      params: {
+        id: 42,
+      },
+    },
+  ];
+}
+```
+
+If this doesn't satisfy your use case, The hook also accepts a `getStateFromPath` option where you can provide a custom function to convert the URL to a valid state object for more advanced use cases.
 
 ## Set up with Expo projects
 
@@ -147,7 +201,7 @@ xcrun simctl openurl booted [ put your URI prefix in here ]
 
 # for example
 
-xcrun simctl openurl booted exp://127.0.0.1:19000/--/chat/Eric
+xcrun simctl openurl booted exp://127.0.0.1:19000/--/chat/jane
 ```
 
 ### Test deep linking on Android
@@ -159,7 +213,7 @@ adb shell am start -W -a android.intent.action.VIEW -d "[ put your URI prefix in
 
 # for example
 
-adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:19000/--/chat/Eric" com.simpleapp
+adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:19000/--/chat/jane" com.simpleapp
 ```
 
 Read the [Expo linking guide](https://docs.expo.io/versions/latest/guides/linking.html) for more information about how to configure linking in projects built with Expo.
@@ -177,11 +231,10 @@ In `SimpleApp/ios/SimpleApp/AppDelegate.m`:
 #import <React/RCTLinkingManager.h>
 
 // Add this above the `@end`:
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-  return [RCTLinkingManager application:application openURL:url
-                      sourceApplication:sourceApplication annotation:annotation];
+  return [RCTLinkingManager application:app openURL:url options:options];
 }
 ```
 
@@ -198,10 +251,10 @@ react-native run-ios
 To test the URI on the simulator, run the following:
 
 ```sh
-xcrun simctl openurl booted mychat://chat/Eric
+xcrun simctl openurl booted mychat://chat/jane
 ```
 
-To test the URI on a real device, open Safari and type `mychat://chat/Eric`.
+To test the URI on a real device, open Safari and type `mychat://chat/jane`.
 
 ### Android
 
@@ -238,7 +291,7 @@ react-native run-android
 To test the intent handling in Android, run the following:
 
 ```sh
-adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/Eric" com.simpleapp
+adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/jane" com.simpleapp
 ```
 
 ## Hybrid iOS Applications (Skip for RN only projects)

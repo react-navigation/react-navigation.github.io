@@ -6,13 +6,7 @@ sidebar_label: Drawer navigation
 
 Common pattern in navigation is to use drawer from left (sometimes right) site for navigating between screens.
 
-This guide covers [createDrawerNavigator](drawer-navigator.html).
-
-To use this navigator, you need to install `@react-navigation/drawer` and its peer dependencies:
-
-```sh
-yarn add react-navigation-drawer react-native-reanimated react-native-gesture-handler
-```
+Before continuing, first install [`@react-navigation/drawer`](https://github.com/react-navigation/navigation-ex/tree/master/packages/drawer) following the guide on [Drawer Navigator's page](drawer-navigator.html).
 
 ## Minimal example of drawer-based navigation
 
@@ -42,7 +36,7 @@ function MyNotificationsScreen({ navigation }) {
   );
 }
 
-exprt default function App() {
+export default function App() {
   return (
     <NavigationNativeContainer>
       <Drawer.Navigator initialRouteName="Feed">

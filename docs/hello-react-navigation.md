@@ -12,11 +12,11 @@ React Navigation's stack navigator provides a way for your app to transition bet
 
 Lets start by demonstrating the most common navigator, `createStackNavigator`.
 
-Before continuing, first install [`@react-navigation/stack`](https://github.com/react-navigation/stack) following the guide on [Stack Navigator's page](stack-navigator.html).
+Before continuing, first install [`@react-navigation/stack`](https://github.com/react-navigation/navigation-ex/tree/master/packages/stack) following the guide on [Stack Navigator's page](stack-navigator.html).
 
 ### Creating a stack navigator
 
-`createStackNavigator` is a function that returns an object which containing 2 properties: `Screen` and `Navigator`. Both of them are React components used for configuring the navigator. The `Navigator` should contains `Screen` elements as its children to define the configuration for routes.
+`createStackNavigator` is a function that returns an object containing 2 properties: `Screen` and `Navigator`. Both of them are React components used for configuring the navigator. The `Navigator` should contain `Screen` elements as its children to define the configuration for routes.
 
 `NavigationNativeContainer` is a component which manages our navigation tree and contains the navigation state. This component must wrap all navigators structure. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
 

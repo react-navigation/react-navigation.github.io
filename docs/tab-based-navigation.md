@@ -6,7 +6,7 @@ sidebar_label: Tab navigation
 
 Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top below the header (or even instead of a header).
 
-This guide covers [createBottomTabNavigator](bottom-tab-navigator.html). You may also use [createMaterialBottomTabNavigator](material-bottom-tab-navigator.html) and [createMaterialTopTabNavigator](material-top-tab-navigator.html) to add tabs to your application.
+This guide covers [`createBottomTabNavigator`](bottom-tab-navigator.html). You may also use [`createMaterialBottomTabNavigator`](material-bottom-tab-navigator.html) and [`createMaterialTopTabNavigator`](material-top-tab-navigator.html) to add tabs to your application.
 
 ## Minimal example of tab-based navigation
 
@@ -38,8 +38,8 @@ export default function App() {
   return (
     <NavigationNativeContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Home" screen={HomeScreen} />
-        <Tab.Screen name="Settings" screen={SettingsScreen} />
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationNativeContainer>
   );
@@ -84,8 +84,8 @@ export default function App() {
           inactiveTintColor: 'gray',
         }}
       >
-        <Tab.Screen name="Home" screen={HomeScreen} />
-        <Tab.Screen name="Settings" screen={SettingsScreen} />
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationNativeContainer>
   );
@@ -115,7 +115,7 @@ export default function IconWithBadge({
       {badgeCount > 0 && (
         <View
           style={{
-            // On react-native < 0.57 overflow outside of parent will not work on Android, see https://git.io/fhLJ8
+            // On React Native < 0.57 overflow outside of parent will not work on Android, see https://git.io/fhLJ8
             position: 'absolute',
             right: -6,
             top: -3,
@@ -137,11 +137,11 @@ export default function IconWithBadge({
 }
 ```
 
-From UI perspective this component is ready to use, but you still need to find some way to pass down the badge count properly from somewhere else, like using [React Context](https://reactjs.org/docs/context.html), [redux](https://redux.js.org/), [mobx](https://mobx.js.org/) or [event emitters](https://github.com/facebook/react-native/blob/master/Libraries/vendor/emitter/EventEmitter.js).
+From UI perspective this component is ready to use, but you still need to find some way to pass down the badge count properly from somewhere else, like using [React Context](https://reactjs.org/docs/context.html), [Redux](https://redux.js.org/), [MobX](https://mobx.js.org/) or [event emitters](https://github.com/facebook/react-native/blob/master/Libraries/vendor/emitter/EventEmitter.js).
 
 ```js
 export default function HomeIconWithBadge(props) {
-  // You should pass down the badgeCount in some other ways like react context api, redux, mobx or event emitters.
+  // You should pass down the badgeCount in some other ways like React Context API, Redux, MobX or event emitters.
   return <IconWithBadge {...props} badgeCount={3} />;
 }
 ```
@@ -260,4 +260,4 @@ For example, React Navigation's tab navigator takes care of handling the Android
 
 ## A tab navigator contains a stack and you want to hide the tab bar on specific screens
 
-[See the documentation here](navigation-options-resolution.html#a-tab-navigator-contains-a-stack-and-you-want-to-hide-the-tab-bar-on-specific-screens)
+[See the documentation here](screen-options-resolution.html#a-tab-navigator-contains-a-stack-and-you-want-to-hide-the-tab-bar-on-specific-screens)

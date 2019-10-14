@@ -17,15 +17,15 @@ A screen component is a component that we use in our route configuration.
 ```js
 const Stack = createStackNavigator();
 
-const StactNavigator = (
+const StackNavigator = (
   <Stack.Navigator>
     <Stack.Screen
       name="Home"
-      conponent={HomeScreen} // <----
+      component={HomeScreen} // <----
     />
     <Stack.Screen
       name="Details"
-      conponent={DetailsScreen} // <----
+      component={DetailsScreen} // <----
     />
   </Stack.Navigator>
 );

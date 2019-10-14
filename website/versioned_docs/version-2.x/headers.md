@@ -198,7 +198,7 @@ class HomeScreen extends React.Component {
 
 ## Additional configuration
 
-You can read the full list of available `navigationOptions` for screens inside of a stack navigator in the [createStackNavigator reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
+You can read the full list of available `navigationOptions` for screens inside of a stack navigator in the [`createStackNavigator` reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
 
 ## Summary
 

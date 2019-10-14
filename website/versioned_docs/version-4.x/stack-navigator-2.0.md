@@ -17,18 +17,18 @@ To use this navigator, you need to install [`react-navigation-stack`](https://gi
 yarn add react-navigation react-navigation-stack@alpha @react-native-community/masked-view
 ```
 
-Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated) and [`react-native-screens`](https://github.com/kmagiera/react-native-screens).
+Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated), [`react-native-screens`](https://github.com/kmagiera/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
 
 If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
 
 ```sh
-expo install react-native-gesture-handler react-native-reanimated react-native-screens
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context
 ```
 
 If you are not using Expo, run the following:
 
 ```sh
-yarn add react-native-reanimated react-native-gesture-handler react-native-screens
+yarn add react-native-reanimated react-native-gesture-handler react-native-screens@^1.0.0-alpha.23 react-native-safe-area-context
 ```
 
 If you are using Expo, you are done. Otherwise, continue to the next steps.
@@ -47,6 +47,13 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   cd ..
   ```
 
+  To finalize installation of `react-native-screens` for Android, add the following two lines to `dependencies` section in `android/app/build.gradle`:
+
+  ```gradle
+  implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+  implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
+  ```
+
 - **React Native 0.59 and lower**
 
   If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
@@ -54,6 +61,34 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   ```sh
   react-native link react-native-reanimated
   react-native link react-native-gesture-handler
+  react-native link react-native-screens
+  react-native link react-native-safe-area-context
+  ```
+
+  You also need to configure [jetifier](https://github.com/mikehardy/jetifier) to support dependencies using `androidx`:
+
+  ```sh
+  yarn add --dev jetifier
+  # or with npm
+  # npm install --save-dev jetifier
+  ```
+
+  Then add it to the `postinstall` script in `package.json`:
+
+  ```json
+  "scripts": {
+    "postinstall": "jetifier -r"
+  }
+  ```
+
+  > **NOTE**: Remember to remove this when you upgrade to React Native 0.60 and higher.
+
+  Now, run the `postinstall` script manually:
+
+  ```sh
+  yarn postinstall
+  # or with npm
+  # npm run postinstall
   ```
 
 To finalize installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
@@ -150,11 +185,51 @@ String that can be used as a fallback for `headerTitle`. Additionally, will be u
 
 #### `header`
 
-Function that given `HeaderProps` returns a React Element, to display as a header. Setting to `null` hides header.
+Function that given `HeaderProps` returns a React Element, to display as a header.
+
+Example:
+
+```js
+header: ({ scene, previous, navigation }) => {
+  const { options } = scene.descriptor;
+  const title =
+    options.headerTitle !== undefined
+      ? options.headerTitle
+      : options.title !== undefined
+      ? options.title
+      : scene.route.routeName;
+
+  return (
+    <MyHeader
+      title={title}
+      leftButton={
+        previous ? <MyBackButton onPress={navigation.goBack} /> : undefined
+      }
+    />
+  );
+};
+```
+
+When using a custom header, it's recommended set the `headerMode` option on the navigator to `screen`.
+
+To set a custom header for all the screens in the navigator, you can specify this option in the `defaultNavigationOptions` option of the navigator.
+
+#### `headerShown`
+
+Whether to show or hide the header for the screen. The header is shown by default unless `headerMode` was set to `none`. Setting this to `false` hides the header.
 
 #### `headerTitle`
 
 String or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is specified, it receives `allowFontScaling`, `onLayout`, `style` and `children` as the arguments. The title string is passed in `children`.
+
+#### `headerTitleAlign`
+
+How to align the the header title. Possible values:
+
+- `left`
+- `center`
+
+Defaults to `center` on iOS and `left` on Android.
 
 #### `headerTitleAllowFontScaling`
 
@@ -191,10 +266,6 @@ Function which returns a React Element to display on the left side of the header
 #### `headerStyle`
 
 Style object for the header. You can specify a custom background color here, for example.
-
-#### `headerStatusBarHeight`
-
-Allows to pass a custom status bar height to set as the top padding in the header.
 
 #### `headerTitleStyle`
 
@@ -276,6 +347,10 @@ Object to override the distance of touch start from the edge of the screen to re
 
 - `horizontal` - _number_ - Distance for horizontal direction. Defaults to 25.
 - `vertical` - _number_ - Distance for vertical direction. Defaults to 135.
+
+#### `gestureVelocityImpact`
+
+Number which determines the relevance of velocity for the gesture. Defaults to 0.3.
 
 #### `gestureDirection`
 

@@ -154,4 +154,4 @@ It's useful to run tests in watch mode when working on the project. To do it, ru
 yarn test --watch
 ```
 
-These commands will be run by our CI and are required to pass before any contributtions are merged.
+These commands will be run by our CI and are required to pass before any contributions are merged.

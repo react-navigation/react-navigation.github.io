@@ -42,7 +42,7 @@ const RootStack = createStackNavigator();
 function MainStackScreen() {
   return (
     <MainStack.Navigator>
-      <MainStak.Screen
+      <MainStack.Screen
         name="Home"
         component={HomeScreen}
         options={({ navigation }) => ({
@@ -56,7 +56,7 @@ function MainStackScreen() {
           /* the rest of this config is unchanged */
         })}
       />
-      <MainStak.Screen name="Details" component={DetailsScreen} />
+      <MainStack.Screen name="Details" component={DetailsScreen} />
     </MainStack.Navigator>
   );
 }

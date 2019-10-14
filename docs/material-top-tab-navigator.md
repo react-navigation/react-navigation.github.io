@@ -8,7 +8,7 @@ A material-design themed tab bar on the top of the screen that lets you switch b
 
 This wraps [`react-native-tab-view`](https://github.com/react-native-community/react-native-tab-view).
 
-To use this navigator, you need to install [`@react-navigation/material-top-tabs`](https://github.com/navigation-ex/packages/material-top-tabs):
+To use this navigator, you need to install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/navigation-ex/tree/master/packages/material-top-tabs):
 
 ```sh
 yarn add @react-navigation/core@next @react-navigation/material-top-tabs@next react-native-tab-view
@@ -25,33 +25,18 @@ expo install react-native-gesture-handler react-native-reanimated
 If you are not using Expo, run the following:
 
 ```sh
-yarn add react-native-gesture-handler react-native-reanimated
+yarn add react-native-reanimated react-native-gesture-handler
 ```
 
 If you are using Expo, you are done. Otherwise, continue to the next steps.
 
-Next, we need to link these libraries. The steps depends on your React Native version:
+To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
 
-- **React Native 0.60 and higher**
-
-  On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
-
-  To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
-
-  ```sh
-  cd ios
-  pod install
-  cd ..
-  ```
-
-- **React Native 0.59 and lower**
-
-  If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
-
-  ```sh
-  react-native link react-native-reanimated
-  react-native link react-native-gesture-handler
-  ```
+```sh
+cd ios
+pod install
+cd ..
+```
 
 To finalize installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
 
@@ -190,7 +175,7 @@ Configuration object for the spring animation which occurs after swiping. Suppor
 
 Number for determining how meaningful is gesture velocity for calculating initial velocity of spring animation. Defaults to `0`.
 
-#### `initialLayout
+#### `initialLayout`
 
 Object containing the initial height and width of the screens. Passing this will improve the initial rendering performance. For most apps, this is a good default:
 

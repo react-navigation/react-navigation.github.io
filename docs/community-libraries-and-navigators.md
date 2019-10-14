@@ -59,3 +59,37 @@ Provides simple HOCs that map react-navigation props to your screen components d
 #### Links
 
 [github.com/vonovak/react-navigation-props-mapper](https://github.com/vonovak/react-navigation-props-mapper)
+
+## react-native-header-scroll-view
+
+This component implements [iOS large header with grow/shrink on scroll](https://react-navigation.canny.io/feature-requests/p/ios-11-large-header-and-growshrink-on-scroll), made by [@jonsamp](https://github.com/jonsamp). Note that it doesn't handle header animation between screens, it only handles animating the header title on scroll.
+
+To use this component, we'd want to disable the built-in header. There are 2 ways to disable the header in React Navigation:
+
+1. Disable the default header for one screen:
+
+```js
+static navigationOptions = {
+  header: null
+};
+```
+
+2. Disable header globally in `createStackNavigator`
+
+```js
+const Home = createStackNavigator(
+  {
+    ExampleScreen1,
+    ExampleScreen1,
+  },
+  {
+    headerMode: 'none'
+  }
+);
+```
+
+#### Links
+
+[https://github.com/jonsamp/react-native-header-scroll-view](https://github.com/jonsamp/react-native-header-scroll-view)
+
+[Demo on expo via VaxNow](https://expo.io/@thomaswangio/vax-now)

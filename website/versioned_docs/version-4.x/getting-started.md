@@ -41,7 +41,7 @@ yarn add react-navigation
 
 React Navigation is made up of some core utilities and those are then used by navigators to create the navigation structure in your app. Don't worry too much about this for now, it'll become clear soon enough! To frontload the installation work, let's also install and configure dependencies used by most navigators, then we can move forward with starting to write some code.
 
-The libraries we will install now are [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated). If you already have these libraries installed and at the latest version, you are done here! Otherwise, read on.
+The libraries we will install now are [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated), and [`react-native-screens`](https://github.com/kmagiera/react-native-screens). If you already have these libraries installed and at the latest version, you are done here! Otherwise, read on.
 
 #### Installing dependencies into an Expo managed project
 
@@ -51,7 +51,7 @@ You can now continue to ["Hello React Navigation"](hello-react-navigation.html) 
 
 #### Installing dependencies into a bare React Native project
 
-In your project directory, run `yarn add react-native-reanimated react-native-gesture-handler react-native-screens`.
+In your project directory, run `yarn add react-native-reanimated react-native-gesture-handler react-native-screens@^1.0.0-alpha.23`.
 
 Next, we need to link these libraries. The steps depends on your React Native version:
 
@@ -67,6 +67,13 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   cd ..
   ```
 
+  To finalize installation of `react-native-screens` for Android, add the following two lines to `dependencies` section in `android/app/build.gradle`:
+
+  ```gradle
+  implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+  implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
+  ```
+
 - **React Native 0.59 and lower**
 
   If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
@@ -77,12 +84,31 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   react-native link react-native-screens
   ```
 
-To finalize installation of `react-native-screens` for Android, add the following two lines to `dependencies` section in `android/app/build.gradle`:
+  You also need to configure [jetifier](https://github.com/mikehardy/jetifier) to support dependencies using `androidx`:
 
-```gradle
-implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
-implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
-```
+  ```sh
+  yarn add --dev jetifier
+  # or with npm
+  # npm install --save-dev jetifier
+  ```
+
+  Then add it to the `postinstall` script in `package.json`:
+
+  ```json
+  "scripts": {
+    "postinstall": "jetifier -r"
+  }
+  ```
+
+  > **NOTE**: Remember to remove this when you upgrade to React Native 0.60 and higher.
+
+  Now, run the `postinstall` script manually:
+
+  ```sh
+  yarn postinstall
+  # or with npm
+  # npm run postinstall
+  ```
 
 To finalize installation of `react-native-gesture-handler` for Android, make the following modifications to `MainActivity.java`:
 
@@ -112,5 +138,7 @@ public class MainActivity extends ReactActivity {
 +  }
 }
 ```
+
+Now you are ready to build and run your app on the device/simulator.
 
 Continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.

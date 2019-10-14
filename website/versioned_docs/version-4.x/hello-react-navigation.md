@@ -17,9 +17,9 @@ Before continuing, first install [`react-navigation-stack`](https://github.com/r
 
 `createStackNavigator` is a function that returns a React component. It takes _a route configuration object_ and, optionally, _an options object_ (we omit this below, for now). `createAppContainer` is a function that returns a React component to take as a parameter the React component created by the `createStackNavigator`, and can be directly exported from `App.js` to be used as our App's root component.
 
-```js
-// In App.js in a new project
+<samp id="hello-react-navigation">Hello World</samp>
 
+```js
 import React from 'react';
 import { View, Text } from 'react-native';
 import { createAppContainer } from 'react-navigation';
@@ -43,8 +43,6 @@ const AppNavigator = createStackNavigator({
 
 export default createAppContainer(AppNavigator);
 ```
-
-<a href="https://snack.expo.io/@react-navigation/hello-world-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 If you run this code, you will see a screen with an empty navigation bar and a grey content area containing your `HomeScreen` component. The styles you see for the navigation bar and the content area are the default configuration for a stack navigator, we'll learn how to configure those later.
 
@@ -77,6 +75,8 @@ const AppNavigator = createStackNavigator({
 ## Adding a second route
 
 The `<AppContainer />` component doesn't accept any props -- all configuration is specified in the `options` parameter to the `AppNavigator` `createStackNavigator` function. We left the `options` blank, so it just uses the default configuration. To see an example of using the `options` object, we will add a second screen to the stack navigator.
+
+<samp id="hello-react-navigation-full" />
 
 ```js
 // Other code for HomeScreen here...
@@ -112,4 +112,4 @@ Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home`
 - `createStackNavigator` is a function that takes a route configuration object and an options object and returns a React component.
 - The keys in the route configuration object are the route names and the values are the configuration for that route. The only required property on the configuration is the `screen` (the component to use for the route).
 - To specify what the initial route in a stack is, provide an `initialRouteName` on the stack options object.
-- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/hello-react-navigation-v3).
+- [Full source of what we have built so far](#example/hello-react-navigation-full).

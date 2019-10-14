@@ -47,6 +47,7 @@ The route configs object is a mapping from route name to a route config, which t
   - `showIcon` - Whether to show icon for tab, default is true.
   - `style` - Style object for the tab bar.
   - `labelStyle` - Style object for the tab label.
+  - `labelPosition` - Where to show the tab label in relation to the tab icon. Available values are `beside-icon` and `below-icon`. Defaults to `beside-icon`.
   - `tabStyle` - Style object for the tab.
   - `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
   - `adaptive` - Should the tab icons and labels alignment change based on screen size? Defaults to `true` for iOS 11. If `false`, tab icons and labels align vertically all the time. When `true`, tab icons and labels align horizontally on tablet.
@@ -74,13 +75,16 @@ import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
 
 const TabBarComponent = props => <BottomTabBar {...props} />;
 
-const TabScreens = createBottomTabNavigator({
-  // other screens
-}, {
-  tabBarComponent: props => (
-    <TabBarComponent {...props} style={{ borderTopColor: '#605F60' }} />
-  ),
-});
+const TabScreens = createBottomTabNavigator(
+  {
+    // other screens
+  },
+  {
+    tabBarComponent: props => (
+      <TabBarComponent {...props} style={{ borderTopColor: '#605F60' }} />
+    ),
+  }
+);
 ```
 
 ## `navigationOptions` for screens inside of the navigator

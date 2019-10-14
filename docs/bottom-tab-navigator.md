@@ -6,11 +6,37 @@ sidebar_label: createBottomTabNavigator
 
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 
-To use this navigator, you need to install [`@react-navigation/bottom-tabs`](https://github.com/navigation-ex/packages/bottom-tabs):
+To use this navigator, you need to install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/navigation-ex/tree/master/packages/bottom-tabs):
 
 ```sh
-yarn add @react-navigation-core@next @react-navigation/bottom-tabs@next
+yarn add @react-navigation/core@next @react-navigation/bottom-tabs@next
 ```
+
+Now we need to install [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
+
+If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
+
+```sh
+expo install react-native-safe-area-context
+```
+
+If you are not using Expo, run the following:
+
+```sh
+yarn add react-native-safe-area-context
+```
+
+If you are using Expo, you are done. Otherwise, continue to the next steps.
+
+To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
+
+```sh
+cd ios
+pod install
+cd ..
+```
+
+Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
 
 ## API Definition
 
@@ -78,11 +104,12 @@ An object containing the props for the tab bar component. It can contain the fol
 - `showIcon` - Whether to show icon for tab, default is true.
 - `style` - Style object for the tab bar.
 - `labelStyle` - Style object for the tab label.
+- `labelPosition` - Where to show the tab label in relation to the tab icon. Available values are `beside-icon` and `below-icon`. Defaults to `beside-icon`.
 - `tabStyle` - Style object for the tab.
 - `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
 - `adaptive` - Should the tab icons and labels alignment change based on screen size? Defaults to `true` for iOS 11. If `false`, tab icons and labels align vertically all the time. When `true`, tab icons and labels align horizontally on tablet.
 - `safeAreaInset` - Override the `forceInset` prop for `<SafeAreaView>`. Defaults to `{ bottom: 'always', top: 'never' }`. Available keys are `top | bottom | left | right` provided with the values `'always' | 'never'`.
-- `keyboardHidesTabBar` - Defaults to `false`. If `true` hide the tab bar when keyboard opens.
+- `keyboardHidesTabBar` - Defaults to `true`. If `true` hide the tab bar when keyboard opens.
 
 ### Options for `Tab.Screen`
 
