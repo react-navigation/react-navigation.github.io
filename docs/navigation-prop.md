@@ -105,7 +105,7 @@ navigation.navigate({ key: SCREEN_KEY_A }); // will go to screen A FROM screen D
 
 Alternatively, as _screen A_ is the top of the stack, you can use `navigation.popToTop()`.
 
-### Replace
+### `replace`
 
 Call this to replace the current screen with the given route, with params and sub-action.
 
@@ -113,7 +113,7 @@ Call this to replace the current screen with the given route, with params and su
 navigation.replace(name, params);
 ```
 
-### Reset
+### `reset`
 
 Replace the navigator state to a new state:
 
@@ -123,6 +123,41 @@ navigation.reset({
   routes: [{ name: 'Profile' }],
 });
 ```
+
+### `setParams` - Make changes to route params
+
+Firing the `setParams` action allows a screen to change the params in the route, which is useful for updating the header buttons and title. `setParams` works like React's `setState` - it merges the provided params object with the current params.
+
+```js
+function ProfileScreen({ navigation: { setParams } }) {
+  render() {
+    return (
+      <Button
+        onPress={() => setParams({ name: "Lucy" })}
+        title="Set title name to 'Lucy'"
+      />
+    );
+  }
+}
+```
+
+### `setOptions` - Update screen options from the component
+
+The `setOptions` method lets us set screen options from within the component. This is useful if we need to use the component's props, state or context to configure our screen.
+
+```js
+function SelectionScreen({ navigation }) {
+  const [selectCount, setSelectCount] = React.useState(0);
+
+  navigation.setOptions({
+    title: selectCount > 0 : `${selectCount} items selected` : 'Select some items',
+  });
+
+  return <SelectionList onSelectCountChange={setSelectCount} />;
+}
+```
+
+Any options specified here are shallow merged with the options specified when defining the screen.
 
 ## Navigation events
 
@@ -155,23 +190,6 @@ const isFocused = navigation.isFocused();
 ```
 
 This method doesn't re-render the screen when the value changes and mainly useful in callbacks. You probably want to use [useIsFocused](use-is-focused.md) instead of using this directly, it will return a boolean a prop to indicating if the screen is focused.
-
-### `setParams` - Make changes to route params
-
-Firing the `setParams` action allows a screen to change the params in the route, which is useful for updating the header buttons and title. `setParams` works like React's `setState` - it merges the provided params object with the current params.
-
-```js
-function ProfileScreen({ navigation: { setParams } }) {
-  render() {
-    return (
-      <Button
-        onPress={() => setParams({ name: "Lucy" })}
-        title="Set title name to 'Lucy'"
-      />
-    );
-  }
-}
-```
 
 ## Advanced API Reference
 
