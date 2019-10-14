@@ -273,6 +273,10 @@
         "title": "Type checking with TypeScript",
         "sidebar_label": "Type checking with TypeScript"
       },
+      "upgrading-from-4.x": {
+        "title": "Upgrading from 4.x",
+        "sidebar_label": "Upgrading from 4.x"
+      },
       "use-focus-effect": {
         "title": "useFocusEffect",
         "sidebar_label": "useFocusEffect"

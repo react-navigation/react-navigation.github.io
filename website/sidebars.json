@@ -37,7 +37,8 @@
       "localization",
       "web-support",
       "function-after-focusing-screen",
-      "react-native-screens"
+      "react-native-screens",
+      "upgrading-from-4.x"
     ],
     "Build your own Navigator": [
       "routers",
