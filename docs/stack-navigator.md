@@ -198,7 +198,7 @@ Function which returns a React Element to display custom image in header's back 
 
 #### `headerBackTitle`
 
-Title string used by the back button on iOS, or `null` to disable label. Defaults to the previous scene's `headerTitle`.
+Title string used by the back button on iOS. Defaults to the previous scene's `headerTitle`.
 
 #### `headerBackTitleVisible`
 
