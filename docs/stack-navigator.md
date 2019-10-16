@@ -390,7 +390,7 @@ Stack Navigator exposes various options to configure the transition animation wh
   A config which uses spring animation looks like this:
 
   ```js
-  {
+  const config = {
     animation: 'spring',
     config: {
       stiffness: 1000,
@@ -400,7 +400,21 @@ Stack Navigator exposes various options to configure the transition animation wh
       restDisplacementThreshold: 0.01,
       restSpeedThreshold: 0.01,
     },
-  }
+  };
+  ```
+
+  We can pass this config in the `transitionSpec` option:
+
+  ```js
+  <Stack.Screen
+    component={Profile}
+    options={{
+      transitionSpec: {
+        open: config,
+        close: config,
+      },
+    }}
+  />
   ```
 
 - `cardStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the card. Is expected to return at least empty object, possibly containing interpolated styles for container, the card itself, overlay and shadow. Supported properties are:
@@ -436,6 +450,15 @@ Stack Navigator exposes various options to configure the transition animation wh
       ),
     },
   });
+  ```
+
+  We can pass this function in `cardStyleInterpolator` option:
+
+  ```js
+  <Stack.Screen
+    component={Profile}
+    options={{ cardStyleInterpolator: forFade }}
+  />
   ```
 
 - `headerStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the header. Is expected to return at least empty object, possibly containing interpolated styles for left label and button, right button, title and background. Supported properties are:
@@ -476,6 +499,15 @@ Stack Navigator exposes various options to configure the transition animation wh
       backgroundStyle: { opacity },
     };
   };
+  ```
+
+  We can pass this function in `headerStyleInterpolator` option:
+
+  ```js
+  <Stack.Screen
+    component={Profile}
+    options={{ headerStyleInterpolator: forFade }}
+  />
   ```
 
 With these options, it's possible to build custom transition animations for screens. We also export various configs from the library with ready-made animations which you can use:
@@ -534,9 +566,9 @@ Example configuration for iOS modal presentation style:
 <Stack.Navigator
   initialRouteName="Home"
   screenOptions={{
-    ...TransitionPresets.ModalPresentationIOS,
     gestureEnabled: true,
     cardOverlayEnabled: true,
+    ...TransitionPresets.ModalPresentationIOS,
   }}
 >
   <Stack.Screen name="Home" component={Home} />

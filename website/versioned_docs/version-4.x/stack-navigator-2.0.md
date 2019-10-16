@@ -425,7 +425,7 @@ Stack Navigator exposes various options to configure the transition animation wh
   A config which uses spring animation looks like this:
 
   ```js
-  {
+  const config = {
     animation: 'spring',
     config: {
       stiffness: 1000,
@@ -435,7 +435,18 @@ Stack Navigator exposes various options to configure the transition animation wh
       restDisplacementThreshold: 0.01,
       restSpeedThreshold: 0.01,
     },
-  }
+  };
+  ```
+
+  We can pass this function in `transitionSpec` option:
+
+  ```js
+  Profile.navigationOptions = {
+    transitionSpec: {
+      open: config,
+      close: config,
+    },
+  };
   ```
 
 - `cardStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the card. Is expected to return at least empty object, possibly containing interpolated styles for container, the card itself, overlay and shadow. Supported properties are:
@@ -470,6 +481,14 @@ Stack Navigator exposes various options to configure the transition animation wh
       ),
     },
   });
+  ```
+
+  We can pass this function in `cardStyleInterpolator` option:
+
+  ```js
+  Profile.navigationOptions = {
+    cardStyleInterpolator: forFade,
+  };
   ```
 
 - `headerStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the header. Is expected to return at least empty object, possibly containing interpolated styles for left label and button, right button, title and background. Supported properties are:
@@ -511,6 +530,14 @@ Stack Navigator exposes various options to configure the transition animation wh
   };
   ```
 
+  We can pass this function in `headerStyleInterpolator` option:
+
+  ```js
+  Profile.navigationOptions = {
+    headerStyleInterpolator: forFade,
+  };
+  ```
+
 With these options, it's possible to build custom transition animations for screens. We also export various configs from the library with ready-made animations which you can use:
 
 - `TransitionSpecs`
@@ -529,6 +556,7 @@ With these options, it's possible to build custom transition animations for scre
   - `forRevealFromBottomAndroid` - Standard Android-style reveal from the bottom for Android Pie.
 
 - `HeaderStyleInterpolators`
+
   - `forUIKit` - Standard UIKit style animation for the header where the title fades into the back button label.
   - `forFade` - Simple fade animation for the header elements.
   - `forStatic` - Simple translate animation to translate the header along with the sliding screen.
@@ -569,9 +597,9 @@ const Stack = createStackNavigator(
     mode: 'modal',
     headerMode: 'none',
     defaultNavigationOptions: {
-      ...TransitionPresets.ModalPresentationIOS,
       gestureEnabled: true,
       cardOverlayEnabled: true,
+      ...TransitionPresets.ModalPresentationIOS,
     },
   }
 );

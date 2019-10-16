@@ -306,7 +306,7 @@ contentOptions={{
 }}
 ```
 
-### Options for `Tab.Screen`
+### Options for `Drawer.Screen`
 
 The `options` prop can be used to configure individual screens inside the navigator. Supported options are:
 
