@@ -14,13 +14,13 @@ import { useFocusEffect } from '@react-navigation/core';
 function Profile({ userId }) {
   const [user, setUser] = React.useState(null);
 
-  const watchUser = React.useCallback(() => {
-    const unsubscribe = API.subscribe(userId, user => setUser(data));
+  useFocusEffect(
+    React.useCallback(() => {
+      const unsubscribe = API.subscribe(userId, user => setUser(user));
 
-    return () => unsubscribe();
-  }, [userId]);
-
-  useFocusEffect(watchUser);
+      return () => unsubscribe();
+    }, [userId])
+  );
 
   return <ProfileContent user={user} />;
 }
@@ -29,6 +29,24 @@ function Profile({ userId }) {
 The `useFocusEffect` is analogous to React's `useEffect` hook. The only difference is that it runs on focus instead of render.
 
 **NOTE:** To avoid the running the effect too often, it's important to wrap the callback in `useCallback` before passing it to `useFocusEffect` as shown in the example.
+
+## Delaying effect until transition finishes
+
+The `useFocusEffect` hook runs the effect as soon as the screen comes into focus. This often means that if there is an animation for the screen change, it might not have finished yet.
+
+React Navigation runs its animations in native thread, so it's not a problem in many cases. But if the effect updates the UI or renders something expensive, then it can affect the animation performance. In such cases, we can use [`InteractionManager`](https://facebook.github.io/react-native/docs/interactionmanager) to defer our work until the animations or gestures have finished:
+
+```js
+useFocusEffect(
+  React.useCallback(() => {
+    const task = InteractionManager.runAfterInteractions(() => {
+      // Expensive task
+    });
+
+    return () => task.cancel();
+  }, [])
+);
+```
 
 ## How is `useFocusEffect` different from adding a listener for `focus` event?
 

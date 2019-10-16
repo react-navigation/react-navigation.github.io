@@ -193,7 +193,7 @@ This method doesn't re-render the screen when the value changes and mainly usefu
 
 ## Advanced API Reference
 
-The `dispatch` function is much less commonly used, but a good escape hatch if you can't do what you need with `navigate` and `goBack`.
+The `dispatch` function is much less commonly used, but a good escape hatch if you can't do what you need with the available methods such as `navigate`, `goBack` etc. We recommend to avoid using the `dispatch` method often unless absolutely necessary.
 
 ### `dispatch` - Send an action to the router
 

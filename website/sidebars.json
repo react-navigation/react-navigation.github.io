@@ -58,10 +58,6 @@
     "API Reference": [
       "api-reference",
       "navigation-prop",
-      "navigation-actions",
-      "stack-actions",
-      "drawer-actions",
-      "tab-actions",
       "stack-navigator",
       "native-stack-navigator",
       "drawer-navigator",
@@ -72,8 +68,12 @@
       "use-route",
       "use-focus-effect",
       "use-is-focused",
+      "use-scroll-to-top",
       "navigation-context",
-      "use-scroll-to-top"
+      "navigation-actions",
+      "stack-actions",
+      "drawer-actions",
+      "tab-actions"
     ]
   }
 }

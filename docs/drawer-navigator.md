@@ -306,7 +306,7 @@ contentOptions={{
 }}
 ```
 
-### Options for `Drawer.Screen`
+### Options
 
 The `options` prop can be used to configure individual screens inside the navigator. Supported options are:
 
@@ -337,6 +337,45 @@ This event is fired when the drawer opens.
 #### `drawerClose`
 
 This event is fired when the drawer closes.
+
+### Helpers
+
+The drawer navigator adds the following methods to the navigation prop:
+
+#### `openDrawer`
+
+Opens the drawer pane.
+
+```js
+navigation.openDrawer();
+```
+
+#### `closeDrawer`
+
+Closes the drawer pane.
+
+```js
+navigation.closeDrawer();
+```
+
+#### `toggleDrawer`
+
+Opens the drawer pane if closed, closes the drawer pane if opened.
+
+```js
+navigation.toggleDrawer();
+```
+
+#### `jumpTo`
+
+Navigates to an existing screen in the drawer navigator. The method accepts following arguments:
+
+- `name` - _string_ - Name of the route to jump to.
+- `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
+
+```js
+navigation.jumpTo('Profile', { name: 'Satya' });
+```
 
 ### Nesting drawer navigators inside others
 

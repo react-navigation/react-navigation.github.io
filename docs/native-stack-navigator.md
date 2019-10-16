@@ -82,7 +82,7 @@ The name of the route to render on first load of the navigator.
 
 Default options to use for the screens in the navigator.
 
-### Options for `Stack.Screen`
+### Options
 
 The `options` prop can be used to configure individual screens inside the navigator. Supported options are:
 
@@ -178,6 +178,37 @@ Only supported on `Android`.
 ### Events
 
 The navigator doesn't emit any events.
+
+### Helpers
+
+The stack navigator adds the following methods to the navigation prop:
+
+#### `push`
+
+Pushes a new screen to top of the stack and navigate to it. The method accepts following arguments:
+
+- `name` - _string_ - Name of the route to push onto the stack.
+- `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
+
+```js
+navigation.push('Profile', { name: 'Michaś' });
+```
+
+#### `pop`
+
+Pops the current screen from the stack and navigates back to the previous screen.
+
+```js
+navigation.pop();
+```
+
+#### `popToTop`
+
+Pops all of the screens in the stack except the first one and navigates to it.
+
+```js
+navigation.popToTop();
+```
 
 ## Example
 

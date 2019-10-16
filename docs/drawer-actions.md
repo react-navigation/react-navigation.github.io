@@ -46,9 +46,9 @@ The `jumpTo` action can be used to jump to an existing route in the drawer navig
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
 ```js
-import { TabActions } from '@react-navigation/routers';
+import { DrawerActions } from '@react-navigation/routers';
 
-const jumpToAction = TabActions.jumpTo('Profile', { name: 'Satya' });
+const jumpToAction = DrawerActions.jumpTo('Profile', { name: 'Satya' });
 
 navigation.dispatch(jumpToAction);
 ```

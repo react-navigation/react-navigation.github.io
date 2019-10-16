@@ -6,7 +6,7 @@ sidebar_label: useNavigation
 
 `useNavigation` is a hook which gives access to `navigation` object. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
 
-- `useNavigation()` returns a `navigation` prop.
+`useNavigation()` returns the `navigation` prop of the screen it's inside.
 
 ## Example
 
@@ -17,6 +17,7 @@ import { useNavigation } from '@react-navigation/core';
 
 export default function MyBackButton() {
   const navigation = useNavigation();
+
   return (
     <Button
       title="Back"

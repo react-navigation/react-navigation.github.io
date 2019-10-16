@@ -128,7 +128,7 @@ Specifies how the header should be rendered:
 - `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
 - `none` - No header will be rendered.
 
-### Options for `Stack.Screen`
+### Options
 
 The `options` prop can be used to configure individual screens inside the navigator. Supported options are:
 
@@ -328,6 +328,37 @@ This event is fired when the transition animation starts for the current screen.
 #### `transitionEnd`
 
 This event is fired when the transition animation ends for the current screen.
+
+### Helpers
+
+The stack navigator adds the following methods to the navigation prop:
+
+#### `push`
+
+Pushes a new screen to top of the stack and navigate to it. The method accepts following arguments:
+
+- `name` - _string_ - Name of the route to push onto the stack.
+- `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
+
+```js
+navigation.push('Profile', { name: 'Michaś' });
+```
+
+#### `pop`
+
+Pops the current screen from the stack and navigates back to the previous screen.
+
+```js
+navigation.pop();
+```
+
+#### `popToTop`
+
+Pops all of the screens in the stack except the first one and navigates to it.
+
+```js
+navigation.popToTop();
+```
 
 ## Example
 

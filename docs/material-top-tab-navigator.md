@@ -244,7 +244,7 @@ Example:
 </Tab.Navigator>
 ```
 
-### Options for `Tab.Screen`
+### Options
 
 The `options` prop can be used to configure individual screens inside the navigator. Supported options are:
 
@@ -296,6 +296,21 @@ navigation.addListener('tabPress', e => {
 #### `tabLongPress`
 
 This event is fired when the user presses the tab button for the current screen in the tab bar for an extended period.
+
+### Helpers
+
+The tab navigator adds the following methods to the navigation prop:
+
+#### `jumpTo`
+
+Navigates to an existing screen in the tab navigator. The method accepts following arguments:
+
+- `name` - _string_ - Name of the route to jump to.
+- `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
+
+```js
+navigation.jumpTo('Profile', { name: 'Michaś' });
+```
 
 ## Example
 
