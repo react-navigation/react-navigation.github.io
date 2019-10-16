@@ -82,7 +82,7 @@ Visual options:
 - `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
 - `cardShadowEnabled` - Use this prop to have visible shadows during transitions. Defaults to `true`
 - `cardOverlayEnabled` - Use this prop to have visible stack card overlays during transitions. Defaults to `false`.
-- `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](https://github.com/react-navigation/stack/blob/v1.9.4/src/types.tsx#L232)). Provided function will be passed the following arguments:
+- `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](https://github.com/react-navigation/stack/blob/1.0/src/types.tsx#L232)). Provided function will be passed the following arguments:
   - `transitionProps` - Transition props for the new screen.
   - `prevTransitionProps` - Transitions props for the old screen.
   - `isModal` - Boolean specifying if screen is modal.
