@@ -458,9 +458,9 @@ Stack Navigator exposes various options to configure the transition animation wh
   The function receives the following properties in it's argument:
 
   - `current` - Values for the current screen:
-    - `progress` - Progress value of the current screen.
-  - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one:
-    - `progress` - Progress value of the next screen.
+    - `progress` - Renimated node representing the progress value of the current screen.
+  - `next` - Values for the current screen the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
+    - `progress` - Renimated node representing the progress value of the next screen.
   - `index` - The index of the card in the stack.
   - `closing` - Animated node representing whether the card is closing. `1` when closing, `0` if not.
   - `layouts` - Layout measurements for various items we use for animation.
@@ -469,12 +469,12 @@ Stack Navigator exposes various options to configure the transition animation wh
   A config which just fades the card looks like this:
 
   ```js
-  const forFade = ({ progress, closing }) => ({
+  const forFade = ({ current, closing }) => ({
     cardStyle: {
       opacity: cond(
         closing,
-        progress.current,
-        interpolate(progress.current, {
+        current.progress,
+        interpolate(current.progress, {
           inputRange: [0, 0.5, 0.9, 1],
           outputRange: [0, 0.25, 0.7, 1],
         })
@@ -502,10 +502,10 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   The function receives the following properties in it's argument:
 
-  - `current` - Values for the current screen:
-    - `progress` - Progress value of the current screen (the screen which owns this header).
-  - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one:
-    - `progress` - Progress value of the next screen.
+  - `current` - Values for the current screen (the screen which owns this header).
+    - `progress` - Renimated node representing the progress value of the current screen.
+  - `next` - Values for the current screen the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
+    - `progress` - Renimated node representing the progress value of the next screen.
   - `layouts` - Layout measurements for various items we use for animation. Each layout object contain `height` and `width` properties.
     - `screen` - Layout of the whole screen.
     - `title` - Layout of the title element. Might be `undefined` when not rendering a title.
@@ -514,9 +514,9 @@ Stack Navigator exposes various options to configure the transition animation wh
   A config which just fades the elements looks like this:
 
   ```js
-  const forFade = ({ progress }) => {
+  const forFade = ({ current, next }) => {
     const opacity = interpolate(
-      add(progress.current, progress.next ? progress.next : 0),
+      add(current.progress, next ? next.progress : 0),
       {
         inputRange: [0, 1, 2],
         outputRange: [0, 1, 0],
