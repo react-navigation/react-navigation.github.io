@@ -153,27 +153,27 @@ Style object for the scene content.
 
 #### `gestureEnabled`
 
-Whether you can use gestures to dismiss this screen. Defaults to `true` on iOS, Only supported on iOS.
-
-#### `presentation`
-
-How should the screen be presented. Possible options:
-
-- `modal`
-- `transparentModal`
-- `push`
-
-Defaults to `push`.
+Whether you can use gestures to dismiss this screen. Defaults to `true`, Only supported on iOS.
 
 #### `animation`
 
-How should the screen be animated. Possible options:
+How the given screen should appear/disappear when pushed or popped at the top of the stack. Possible values:
 
-- `default`
-- `fade`
-- `none`
+- `default` - Use the platform default animation.
+- `fade` - Fade screen in or out.
+- `none` - Don't perform an animation.
 
-Only supported on `Android`.
+Defaults to `default`. Only supported on Android.
+
+#### `presentation`
+
+How should the screen be presented. Possible values:
+
+- `push` - The new screen will be pushed onto a stack. The default animation on iOS is to slide from the side. The animation on Android may vary depending on the OS version and theme.
+- `modal` - The new screen will be presented modally. In addition this allows for a nested stack to be rendered inside such screens
+- `transparentModal` - The new screen will be presented modally. In addition, the second to last screen will remain attached to the stack container such that if the top screen is translucent, the content below can still be seen. If `"modal"` is used instead, the below screen gets removed as soon as the transition ends.
+
+Defaults to `push`.
 
 ### Events
 
