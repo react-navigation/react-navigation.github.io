@@ -368,6 +368,14 @@ Interpolated styles for various parts of the card. Refer the [Animations section
 
 Interpolated styles for various parts of the header. Refer the [Animations section](#animations) for details.
 
+#### `safeAreaInsets`
+
+Safe area insets for the screen. This is used to avoid elements like notch and status bar. By default, the device's safe area insets are automatically detected. You can override the behavior with this option.
+
+Takes an object containing following optional properties: `top`, `right`, `bottom` and `left`.
+
+For example, to remove the extra spacing for status bar, pass `safeAreaInsets: { top: 0 }`.
+
 #### `onTransitionStart`
 
 Callback which is called when a transition animation starts (both when screen appears and hides).
