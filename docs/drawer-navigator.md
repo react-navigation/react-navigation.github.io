@@ -256,6 +256,19 @@ const styles = StyleSheet.create({
 });
 ```
 
+The `DrawerItem` component accepts the following props:
+
+- `label` (required): The label text of the item. Can be string, or a function returning a react element. e.g. `({ focused, color }) => <Text style={{ color }}>{focused ? 'Focused text' : 'Unfocused text'}</Text>`.
+- `icon`: Icon to display for the item. Accepts a function returning a react element. e.g. `({ focused, color, size }) => <Icon color={color} size={size} name={focused ? 'heart' : 'heart-outline'} />`.
+- `focused`: Boolean indicating whether to highlight the drawer item as active.
+- `onPress` (required): Function to execute on press.
+- `activeTintColor`: Color for the icon and label when the item is active.
+- `inactiveTintColor`: Color for the icon and label when the item is inactive.
+- `activeBackgroundColor`: Background color for item when its active.
+- `inactiveBackgroundColor`: Background color for item when its inactive.
+- `labelStyle`: Style object for the label `Text`.
+- `style`: Style object for the wrapper `View`.
+
 The `progress` node can be used to do interesting animations in your `contentComponent`, such as parallax motion of the drawer contents:
 
 ```js
