@@ -86,7 +86,7 @@ function App() {
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/drawer-based-navigation.html)
+> For a complete usage guide please visit [Drawer Navigation](https://reactnavigation.org/docs/drawer-based-navigation.html).
 
 ### Props
 
@@ -165,6 +165,17 @@ Style object for the component wrapping the screen content.
 
 Style object for the drawer component. You can pass a custom background color for a drawer or a custom width here.
 
+```js
+<Drawer.Navigator
+  drawerStyle={{
+    backgroundColor: '#c6cbef',
+    width: 240,
+  }}
+>
+  {/* screens */}
+</Drawer.Navigator>
+```
+
 #### `contentComponent`
 
 Component used to render the content of the drawer, for example, navigation items.
@@ -212,23 +223,6 @@ const styles = StyleSheet.create({
 });
 ```
 
-The `progress` node can be used to do interesting animations in your `contentComponent`, such as parallax motion of the drawer contents:
-
-```js
-function CustomDrawerContent({ progress, ...rest }) {
-  const translateX = props.drawerOpenProgress.interpolate({
-    inputRange: [0, 1],
-    outputRange: [-100, 0],
-  });
-
-  return (
-    <Animated.View style={{ transform: [{ translateX }] }}>
-      {/* ... drawer contents */}
-    </Animated.View>
-  );
-}
-```
-
 To add additional items in the drawer, you can use the `DrawerItem` component:
 
 ```js
@@ -247,7 +241,10 @@ function CustomDrawerContent({ drawerPosition, ...rest }) {
       style={styles.container}
     >
       <DrawerItemList {...rest} />
-      <DrawerItem label="Help" onPress={() => Linking.openUrl('https://mywebsite.com/help')} />
+      <DrawerItem
+        label="Help"
+        onPress={() => Linking.openUrl('https://mywebsite.com/help')}
+      />
     </ScrollView>
   );
 }
@@ -257,6 +254,31 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+```
+
+The `progress` node can be used to do interesting animations in your `contentComponent`, such as parallax motion of the drawer contents:
+
+```js
+function CustomDrawerContent({ progress, ...rest }) {
+  const translateX = props.drawerOpenProgress.interpolate({
+    inputRange: [0, 1],
+    outputRange: [-100, 0],
+  });
+
+  return (
+    <Animated.View style={{ transform: [{ translateX }] }}>
+      {/* ... drawer contents */}
+    </Animated.View>
+  );
+}
+```
+
+To use the custom component, we need to pass it in the `contentComponent` prop:
+
+```js
+<Drawer.Navigator contentComponent={CustomDrawerContent}>
+  {/* screens */}
+</Drawer.Navigator>
 ```
 
 #### `contentOptions`
@@ -298,12 +320,14 @@ Style object for the wrapper view.
 Example:
 
 ```js
-contentOptions={{
-  activeTintColor: '#e91e63',
-  itemStyle: {
-    marginVertical: 0,
-  },
-}}
+<Drawer.Navigator
+  contentOptions={{
+    activeTintColor: '#e91e63',
+    itemStyle: { marginVertical: 0 },
+  }}
+>
+  {/* screens */}
+</Drawer.Navigator>
 ```
 
 ### Options
