@@ -18,8 +18,8 @@ function StackScreen() {
         name="Home"
         component={HomeScreen}
         options={{
-          headerTitle: <LogoTitle/>,
-          headerRight: (
+          headerTitle: props => <LogoTitle {...props} />,
+          headerRight: () => (
             <Button
               onPress={() => alert('This is a button!')}
               title="Info"
@@ -29,8 +29,8 @@ function StackScreen() {
         }}
       />
     </Stack.Navigator>
-  )
-)
+  );
+}
 ```
 
 The binding of `this` in `options` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
@@ -49,26 +49,24 @@ function StackScreen() {
         name="Home"
         component={HomeScreen}
         options={({ navigation, route }) => ({
-          headerTitle: <LogoTitle/>,
+          headerTitle: props => <LogoTitle {...props} />,
           headerRight: () => (
             <Button
-              onPress={() => navigation.setParam(route.params.count + 1)}
+              onPress={() =>
+                navigation.setParams({ count: route.params.count + 1 })
+              }
               title="Info"
               color="#fff"
             />
-          )
+          ),
         })}
       />
     </Stack.Navigator>
-  )
-)
+  );
+}
 
 function HomeScreen({ route }) {
-  return (
-    <Text>
-      {route.params.count}
-    </Text>
-  )
+  return <Text>{route.params.count}</Text>;
 }
 ```
 

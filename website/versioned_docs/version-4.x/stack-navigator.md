@@ -98,7 +98,11 @@ String that can be used as a fallback for `headerTitle`. Additionally, will be u
 
 #### `header`
 
-React Element or a function that given `HeaderProps` returns a React Element, to display as a header. Setting to `null` hides header.
+React Element or a function that given `HeaderProps` returns a React Element, to display as a header.
+
+#### `headerShown`
+
+Whether to show or hide the header for the screen. The header is shown by default unless `headerMode` was set to `none`. Setting this to `false` hides the header.
 
 #### `headerTitle`
 

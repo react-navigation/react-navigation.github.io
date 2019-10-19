@@ -218,7 +218,7 @@ const TabNavigator = createBottomTabNavigator({
 
 TabNavigator.navigationOptions = {
   // Hide the header from AppNavigator stack
-  header: null,
+  headerShown: false,
 };
 
 const AppNavigator = createStackNavigator({

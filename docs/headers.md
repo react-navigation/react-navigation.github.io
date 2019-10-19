@@ -8,7 +8,7 @@ By now you're probably tired of seeing a blank grey bar on the top of your scree
 
 ## Setting the header title
 
-A Screen component accepts props `options` which is either an object or a function that returns an object that contains various configuration options. The one we use for the header title is `title`, as demonstrated in the following example.
+A Screen component accepts `options` prop which is either an object or a function that returns an object, that contains various configuration options. The one we use for the header title is `title`, as shown in the following example.
 
 ```js
 function StackScreen() {
@@ -17,16 +17,16 @@ function StackScreen() {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: "My home" }}
+        options={{ title: 'My home' }}
       />
     </Stack.Navigator>
-  )
+  );
 }
 ```
 
 ## Using params in the title
 
-In order to use params in the title, we need to make `options` prop for the screen a function that returns a configuration object. It might be tempting to try to use `this.props` inside of `options`, but because it is defined before the component is rendered, `this` does not refer to an instance of the component and therefore no props are available. Instead, if we make `options` a function then React Navigation will call it with an object containing `{ navigation, route }` -- in this case, all we care about is `navigation`, which is the same object that is passed to your screen props as `navigation` prop. You may recall that we can get the params through `route.params`, and so we do this below to extract a param and use it as a title.
+In order to use params in the title, we need to make `options` prop for the screen a function that returns a configuration object. It might be tempting to try to use `this.props` inside of `options`, but because it is defined before the component is rendered, `this` does not refer to an instance of the component and therefore no props are available. Instead, if we make `options` a function then React Navigation will call it with an object containing `{ navigation, route }` -- in this case, all we care about is `route`, which is the same object that is passed to your screen props as `route` prop. You may recall that we can get the params through `route.params`, and so we do this below to extract a param and use it as a title.
 
 ```js
 function StackScreen() {
@@ -35,7 +35,7 @@ function StackScreen() {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: "My home" }}
+        options={{ title: 'My home' }}
       />
       <Stack.Screen
         name="Profile"
@@ -43,7 +43,7 @@ function StackScreen() {
         options={({ route }) => ({ title: route.params.name })}
       />
     </Stack.Navigator>
-  )
+  );
 }
 ```
 
@@ -54,15 +54,15 @@ The argument that is passed in to the `options` function is an object with the f
 
 We only needed the `route` prop in the above example but you may in some cases want to use `navigation` as well.
 
-## Updating `options` with `setParams`
+## Updating `options` with `setOptions`
 
-It's often necessary to update the `options` configuration for the active screen from the mounted screen component itself. We can do this using `navigation.setParams`
+It's often necessary to update the `options` configuration for the active screen from the mounted screen component itself. We can do this using `navigation.setOptions`
 
 ```js
 /* Inside of render() of React class */
 <Button
   title="Update the title"
-  onPress={() => navigation.setParams({ otherParam: 'Updated!' })}
+  onPress={() => navigation.setOptions({ title: 'Updated!' })}
 />
 ```
 
@@ -82,7 +82,7 @@ function StackScreen() {
         name="Home"
         component={HomeScreen}
         options={{
-          title: "My home",
+          title: 'My home',
           headerStyle: {
             backgroundColor: '#f4511e',
           },
@@ -93,7 +93,7 @@ function StackScreen() {
         }}
       />
     </Stack.Navigator>
-  )
+  );
 }
 ```
 
@@ -123,10 +123,10 @@ function StackScreen() {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: "My home" }}
+        options={{ title: 'My home' }}
       />
     </Stack.Navigator>
-  )
+  );
 }
 ```
 
@@ -139,10 +139,7 @@ Sometimes you need more control than just changing the text and styles of your t
 ```js
 function LogoTitle() {
   return (
-    <Image
-      source={require('./spiro.png')}
-      style={{ width: 30, height: 30 }}
-    />
+    <Image source={require('./spiro.png')} style={{ width: 30, height: 30 }} />
   );
 }
 
@@ -152,10 +149,10 @@ function StackScreen() {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{ headerTitle: <LogoTitle/> }}
+        options={{ headerTitle: props => <LogoTitle {...props} /> }}
       />
     </Stack.Navigator>
-  )
+  );
 }
 ```
 

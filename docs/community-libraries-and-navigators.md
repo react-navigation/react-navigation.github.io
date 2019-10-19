@@ -70,7 +70,7 @@ To use this component, we'd want to disable the built-in header. There are 2 way
 
 ```js
 static navigationOptions = {
-  header: null
+  headerShown: false
 };
 ```
 
