@@ -46,7 +46,7 @@ function MainStackScreen() {
         name="Home"
         component={HomeScreen}
         options={({ navigation }) => ({
-          headerLeft: (
+          headerLeft: () => (
             <Button
               onPress={() => navigation.navigate('MyModal')}
               title="Info"

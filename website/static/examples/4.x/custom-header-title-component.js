@@ -17,7 +17,7 @@ class LogoTitle extends React.Component {
 class HomeScreen extends React.Component {
   static navigationOptions = {
     // headerTitle instead of title
-    headerTitle: <LogoTitle />,
+    headerTitle: () => <LogoTitle />,
   };
 
   render() {
@@ -58,7 +58,7 @@ class DetailsScreen extends React.Component {
   render() {
     /* 2. Get the param, provide a fallback value if not available */
     const { navigation } = this.props;
-    const itemId = navigation.getParam('itemId', 'NO-ID'); 
+    const itemId = navigation.getParam('itemId', 'NO-ID');
     const otherParam = navigation.getParam('otherParam', 'some default value');
 
     return (

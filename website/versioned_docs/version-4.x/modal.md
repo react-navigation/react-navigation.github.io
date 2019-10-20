@@ -25,7 +25,7 @@ class HomeScreen extends React.Component {
     const params = navigation.state.params || {};
 
     return {
-      headerLeft: (
+      headerLeft: () => (
         <Button
           onPress={() => navigation.navigate('MyModal')}
           title="Info"

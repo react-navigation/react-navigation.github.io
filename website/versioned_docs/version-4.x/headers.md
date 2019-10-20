@@ -220,7 +220,7 @@ class LogoTitle extends React.Component {
 class HomeScreen extends React.Component {
   static navigationOptions = {
     // headerTitle instead of title
-    headerTitle: <LogoTitle />,
+    headerTitle: () => <LogoTitle />,
   };
 
   /* render function, etc */

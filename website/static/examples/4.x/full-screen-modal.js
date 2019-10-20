@@ -19,15 +19,15 @@ class HomeScreen extends React.Component {
     const params = navigation.state.params || {};
 
     return {
-      headerTitle: <LogoTitle />,
-      headerLeft: (
+      headerTitle: () => <LogoTitle />,
+      headerLeft: () => (
         <Button
           onPress={() => navigation.navigate('MyModal')}
           title="Info"
           color={Platform.OS === 'ios' ? '#fff' : null}
         />
       ),
-      headerRight: (
+      headerRight: () => (
         <Button onPress={params.increaseCount} title="+1" color={Platform.OS === 'ios' ? "#fff" : null} />
       ),
     };

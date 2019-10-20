@@ -180,7 +180,7 @@ class HomeScreen extends React.Component {
   static navigationOptions = ({ theme }) => {
     return {
       title: 'Home',
-      headerLeft: (
+      headerLeft: () => (
         <Button
           color={theme === 'dark' ? 'white' : 'blue'}
           title="Press me"

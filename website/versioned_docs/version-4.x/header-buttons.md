@@ -16,8 +16,8 @@ The most common way to interact with a header is by tapping on a button either t
 ```js
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    headerTitle: <LogoTitle />,
-    headerRight: (
+    headerTitle: () => <LogoTitle />,
+    headerRight: () => (
       <Button
         onPress={() => alert('This is a button!')}
         title="Info"
@@ -42,8 +42,8 @@ The most commonly used pattern for giving a header button access to a function o
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <LogoTitle />,
-      headerRight: (
+      headerTitle: () => <LogoTitle />,
+      headerRight: () => (
         <Button
           onPress={navigation.getParam('increaseCount')}
           title="+1"

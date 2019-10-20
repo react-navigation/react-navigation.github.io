@@ -16,8 +16,8 @@ class LogoTitle extends React.Component {
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    headerTitle: <LogoTitle />,
-    headerRight: (
+    headerTitle: () => <LogoTitle />,
+    headerRight: () => (
       <Button
         onPress={() => alert('This is a button!')}
         title="Info"
