@@ -63,22 +63,24 @@ export default function App() {
   return (
     <NavigationNativeContainer>
       <Tab.Navigator
-        screenOptions={({ route }) => {
-          let IconComponent = Ionicons;
-          let iconName;
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ tintColor, focused }) => {
+            let IconComponent = Ionicons;
+            let iconName;
 
-          if (route.name === 'home') {
-            iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-            // Sometimes we want to add badges to some icons.
-            // You can check the implementation below.
-            IconComponent = HomeIconWithBadge;
-          } else if (route.name === 'settings') {
-            iconName = `ios-options`;
+            if (route.name === 'home') {
+              iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+              // Sometimes we want to add badges to some icons.
+              // You can check the implementation below.
+              IconComponent = HomeIconWithBadge;
+            } else if (route.name === 'settings') {
+              iconName = `ios-options`;
+            }
+
+            // You can return any component that you like here!
+            return <IconComponent name={iconName} size={25} color={tintColor} />;
           }
-
-          // You can return any component that you like here!
-          return <IconComponent name={iconName} size={25} color={tintColor} />;
-        }}
+        })}
         tabBarOptions={{
           activeTintColor: 'tomato',
           inactiveTintColor: 'gray',
