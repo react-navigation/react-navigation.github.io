@@ -119,6 +119,10 @@ Color for the tab bar when the tab corresponding to the screen is active. Used f
 
 Title string of a tab displayed in the tab bar. When undefined, scene `title` is used. To hide, see `labeled` option in the previous section.
 
+#### `tabBarBadge`
+
+Badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
+
 #### `tabBarAccessibilityLabel`
 
 Accessibility label for the tab button. This is read by the screen reader when the user taps the tab. It's recommended to set this if you don't have a label for the tab.
@@ -126,15 +130,6 @@ Accessibility label for the tab button. This is read by the screen reader when t
 #### `tabBarTestID`
 
 ID to locate this tab button in tests.
-
-#### `tabBarOnPress`
-
-Callback to handle press events; the argument is an object containing:
-
-- `navigation`: navigation prop for the screen
-- `defaultHandler`: the default handler for tab press
-
-Useful for adding a custom logic before the transition to the next scene (the tapped one) starts. When setting tabBarOnPress the defaultHandler needs to be called in order to execute the default action (i.e. switch tab).
 
 ### Events
 

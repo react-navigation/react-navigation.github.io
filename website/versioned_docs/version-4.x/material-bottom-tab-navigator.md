@@ -83,6 +83,10 @@ Color for the tab bar when the tab corresponding to the screen is active. Used f
 
 Title string of a tab displayed in the tab bar. When undefined, scene `title` is used. To hide, see `labeled` option in the previous section.
 
+#### `tabBarBadge`
+
+Badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
+
 #### `tabBarAccessibilityLabel`
 
 Accessibility label for the tab button. This is read by the screen reader when the user taps the tab. It's recommended to set this if you don't have a label for the tab.
