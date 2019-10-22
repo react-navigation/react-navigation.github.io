@@ -13,27 +13,22 @@ Before continuing, first install [`@react-navigation/drawer`](https://github.com
 To use this drawer navigator, import it from `@react-navigation/drawer`:
 
 ```js
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { NavigationNativeContainer } from "@react-navigation/native";
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationNativeContainer } from '@react-navigation/native';
 
 const Drawer = createDrawerNavigator();
 
 function MyHomeScreen({ navigation }) {
   return (
     <Button
-      onPress={() => navigation.navigate("Notifications")}
+      onPress={() => navigation.navigate('Notifications')}
       title="Go to notifications"
     />
   );
 }
 
 function MyNotificationsScreen({ navigation }) {
-  return (
-    <Button
-      onPress={() => navigation.goBack()}
-      title="Go back home"
-    />
-  );
+  return <Button onPress={() => navigation.goBack()} title="Go back home" />;
 }
 
 export default function App() {
@@ -44,9 +39,8 @@ export default function App() {
         <Drawer.Screen name="Notifications" component={MyNotificationsScreen} />
       </Drawer.Navigator>
     </NavigationNativeContainer>
-  )
+  );
 }
-
 ```
 
 ## Opening and closing drawer

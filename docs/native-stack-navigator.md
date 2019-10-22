@@ -120,7 +120,7 @@ Boolean indicating whether the navigation bar is translucent. Only supported on 
 
 #### `headerLargeTitle`
 
-Boolean to set native property to prefer large title header (like in iOS setting).  Only supported on iOS.
+Boolean to set native property to prefer large title header (like in iOS setting). Only supported on iOS.
 
 #### `headerTintColor`
 

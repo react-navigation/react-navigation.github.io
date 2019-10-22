@@ -254,11 +254,11 @@ Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`
 
 #### `tabBarIcon`
 
-Function that given `{ focused: boolean, horizontal: boolean, tintColor: string }` returns a React.Node, to display in the tab bar. `horizontal` is `true` when the device is in landscape and `false` when portrait. The icon is re-rendered whenever the device orientation changes.
+Function that given `{ focused: boolean, color: string }` returns a React.Node, to display in the tab bar.
 
 #### `tabBarLabel`
 
-Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
+Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
 
 #### `tabBarAccessibilityLabel`
 
@@ -323,9 +323,11 @@ function App() {
   return (
     <Tab.Navigator
       initialRouteName="Feed"
-      activeTintColor="#e91e63"
-      labelStyle={{ fontSize: 12 }}
-      style={{ backgroundColor: 'tomato' }}
+      tabBarOptions={{
+        activeTintColor: '#e91e63',
+        labelStyle: { fontSize: 12 },
+        style: { backgroundColor: 'tomato' },
+      }}
     >
       <Tab.Screen
         name="Feed"

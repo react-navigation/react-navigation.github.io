@@ -353,11 +353,11 @@ Generic title that can be used as a fallback for `headerTitle` and `drawerLabel`
 
 #### `drawerLabel`
 
-String or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in drawer sidebar. When undefined, scene `title` is used
+String or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in drawer sidebar. When undefined, scene `title` is used
 
 #### `drawerIcon`
 
-Function, that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in drawer sidebar
+Function, that given `{ focused: boolean, color: string, size: number }` returns a React.Node, to display in drawer sidebar
 
 #### `drawerLockMode`
 
@@ -414,6 +414,36 @@ Navigates to an existing screen in the drawer navigator. The method accepts foll
 navigation.jumpTo('Profile', { name: 'Satya' });
 ```
 
-### Nesting drawer navigators inside others
+## Example
+
+```js
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
+
+function App() {
+  return (
+    <Drawer.Navigator initialRouteName="Feed">
+      <Drawer.Screen
+        name="Feed"
+        component={Feed}
+        options={{ drawerLabel: 'Home' }}
+      />
+      <Drawer.Screen
+        name="Notifications"
+        component={Notifications}
+        options={{ drawerLabel: 'Updates' }}
+      />
+      <Drawer.Screen
+        name="Profile"
+        component={Profile}
+        options={{ drawerLabel: 'Profile' }}
+      />
+    </Drawer.Navigator>
+  );
+}
+```
+
+## Nesting drawer navigators inside others
 
 If a drawer navigator is nested inside of another navigator that provides some UI, for example a tab navigator or stack navigator, then the drawer will be rendered below the UI from those navigators. The drawer will appear below the tab bar and below the header of the stack. You will need to make the drawer navigator the parent of any navigator where the drawer should be rendered on top of its UI.

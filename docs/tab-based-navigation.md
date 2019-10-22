@@ -63,22 +63,24 @@ export default function App() {
   return (
     <NavigationNativeContainer>
       <Tab.Navigator
-        screenOptions={({ route }) => {
-          let IconComponent = Ionicons;
-          let iconName;
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let IconComponent = Ionicons;
+            let iconName;
 
-          if (route.name === 'home') {
-            iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-            // Sometimes we want to add badges to some icons.
-            // You can check the implementation below.
-            IconComponent = HomeIconWithBadge;
-          } else if (route.name === 'settings') {
-            iconName = `ios-options`;
-          }
+            if (route.name === 'home') {
+              iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+              // Sometimes we want to add badges to some icons.
+              // You can check the implementation below.
+              IconComponent = HomeIconWithBadge;
+            } else if (route.name === 'settings') {
+              iconName = `ios-options`;
+            }
 
-          // You can return any component that you like here!
-          return <IconComponent name={iconName} size={25} color={tintColor} />;
-        }}
+            // You can return any component that you like here!
+            return <IconComponent name={iconName} size={size} color={color} />;
+          },
+        })}
         tabBarOptions={{
           activeTintColor: 'tomato',
           inactiveTintColor: 'gray',
@@ -95,8 +97,8 @@ export default function App() {
 Let's dissect this:
 
 - `tabBarIcon` is a supported option in bottom tab navigator. So we know we can use it on our screen components in the `options` prop, but in this case chose to put it in the `screenOptions` prop of `Tab.Navigator` in order to centralize the icon configuration for convenience.
-- `tabBarIcon` is a function that is given the `focused` state, `tintColor`, and `horizontal` param, which is a boolean. If you take a peek further down in the configuration you will see `tabBarOptions` and `activeTintColor` and `inactiveTintColor`. These default to the the iOS platform defaults, but you can change them here. The `tintColor` that is passed through to the `tabBarIcon` is either the active or inactive one, depending on the `focused` state (focused is active). The orientation state `horizontal` is `true` when the device is in landscape, otherwise is `false` for portrait.
-- Read the [full API reference](bottom-tab-navigator.html) for further information on `createBottomTabNavigator` configuration options.
+- `tabBarIcon` is a function that is given the `focused` state, `color`, and `size` params. If you take a peek further down in the configuration you will see `tabBarOptions` and `activeTintColor` and `inactiveTintColor`. These default to the the iOS platform defaults, but you can change them here. The `color` that is passed through to the `tabBarIcon` is either the active or inactive one, depending on the `focused` state (focused is active). The `size` is the size of the icon expected by the tab bar.
+- Read the [full API reference](bottom-tab-navigator.md) for further information on `createBottomTabNavigator` configuration options.
 
 ## Add badges to icons
 

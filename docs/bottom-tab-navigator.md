@@ -125,11 +125,11 @@ Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`
 
 #### `tabBarIcon`
 
-Function that given `{ focused: boolean, horizontal: boolean, tintColor: string }` returns a React.Node, to display in the tab bar. `horizontal` is `true` when the device is in landscape and `false` when portrait. The icon is re-rendered whenever the device orientation changes.
+Function that given `{ focused: boolean, color: string, size: number }` returns a React.Node, to display in the tab bar.
 
 #### `tabBarLabel`
 
-Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, tintColor: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
+Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
 
 #### `tabBarButtonComponent`
 
@@ -199,17 +199,17 @@ function App() {
   return (
     <Tab.Navigator
       initialRouteName="Feed"
-      activeTintColor="#e91e63"
-      labelStyle={{ fontSize: 12 }}
-      style={{ backgroundColor: 'tomato' }}
+      tabBarOptions={{
+        activeTintColor: '#e91e63',
+      }}
     >
       <Tab.Screen
         name="Feed"
         component={Feed}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({ tintColor }) => (
-            <MaterialCommunityIcons name="home" color={tintColor} size={24} />
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
         }}
       />
@@ -218,8 +218,8 @@ function App() {
         component={Notifications}
         options={{
           tabBarLabel: 'Updates',
-          tabBarIcon: ({ tintColor }) => (
-            <MaterialCommunityIcons name="bell" color={tintColor} size={24} />
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="bell" color={color} size={size} />
           ),
         }}
       />
@@ -228,12 +228,8 @@ function App() {
         component={Profile}
         options={{
           tabBarLabel: 'Profile',
-          tabBarIcon: ({ tintColor }) => (
-            <MaterialCommunityIcons
-              name="account"
-              color={tintColor}
-              size={24}
-            />
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
         }}
       />

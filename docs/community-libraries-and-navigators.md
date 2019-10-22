@@ -83,7 +83,7 @@ const Home = createStackNavigator(
     ExampleScreen1,
   },
   {
-    headerMode: 'none'
+    headerMode: 'none',
   }
 );
 ```
