@@ -197,3 +197,9 @@ function App() {
 The new approach is more maintainable and removes the need for something like Switch Navigator. So it has been removed.
 
 See [Authentication flows](auth-flow.md) for more info on implementing authentication flows.
+
+## Navigation state in Redux
+
+We have long recommended not to store navigation state in Redux. We have finally dropped support for storing navigation state in Redux in React Navigation 5.x.
+
+This means you cannot store navigation state in Redux. You can still use Redux (or any other library) for managing your app state and it will work fine. See [Redux integration](redux-integration.md) for more info.
