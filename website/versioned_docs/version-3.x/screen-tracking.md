@@ -11,9 +11,7 @@ This example shows how to do screen tracking and send to Google Analytics. The a
 
 ```js
 import { createAppContainer, createStackNavigator } from 'react-navigation';
-import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge';
-
-const tracker = new GoogleAnalyticsTracker(GA_TRACKING_ID);
+import analytics from '@react-native-firebase/analytics';
 
 // gets the current screen from navigation state
 function getActiveRouteName(navigationState) {
@@ -34,13 +32,13 @@ const AppContainer = createAppContainer(AppNavigator);
 export default () => (
   <AppContainer
     onNavigationStateChange={(prevState, currentState, action) => {
-      const currentScreen = getActiveRouteName(currentState);
-      const prevScreen = getActiveRouteName(prevState);
+      const currentRouteName = getActiveRouteName(currentState);
+      const previousRouteName = getActiveRouteName(prevState);
 
-      if (prevScreen !== currentScreen) {
-        // the line below uses the Google Analytics tracker
+      if (previousRouteName !== currentRouteName) {
+        // The line below uses the @react-native-firebase/analytics tracker
         // change the tracker here to use other Mobile analytics SDK.
-        tracker.trackScreenView(currentScreen);
+        analytics().setCurrentScreen(currentRouteName, currentRouteName);
       }
     }}
   />
