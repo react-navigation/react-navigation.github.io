@@ -18,11 +18,11 @@ To be able to persist the navigation state, we can use the `onStateChange` and `
 - `initialState` - This prop allows us to pass an initial state to use for navigation state. We can pass the restored state in this prop.
 
 ```js
+const PERSISTENCE_KEY = 'NAVIGATION_STATE';
+
 export default function App() {
   const [isReady, setIsReady] = React.useState(false);
-  const [initialState, setInitialState] = React.useState<
-    InitialState | undefined
-  >();
+  const [initialState, setInitialState] = React.useState();
 
   React.useEffect(() => {
     const restoreState = async () => {
@@ -39,7 +39,7 @@ export default function App() {
     if (!isReady) {
       restoreState();
     }
-  }, [getInitialState]);
+  }, [isReady]);
 
   if (!isReady) {
     return null;
