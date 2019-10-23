@@ -152,3 +152,48 @@ function SelectionScreen({ navigation }) {
   // ...
 }
 ```
+
+## Switch Navigator
+
+The purpose of Switch Navigator was to dynamically switch between screens/navigators, mostly useful for implementing onboarding/auth flows. For example:
+
+```js
+const AppNavigator = createStackNavigator({
+  Home: HomeScreen,
+  Settings: SettingsScreen,
+});
+
+const RootNavigator = createSwitchNavigator({
+  Login: LoginScreen,
+  App: AppNavigator,
+});
+```
+
+And then after login:
+
+```js
+navigation.navigate('App');
+```
+
+With React Navigation 5.x, we can dynamically define and alter the screen definitions of a navigator, which makes Switch Navigator unnecessary. The above pattern can be now defined declaratively:
+
+```js
+function App() {
+  return (
+    <Stack.Navigator>
+      {isLoggedIn ? (
+        <>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Settings" component={SettingsScreen} />
+        </>
+      ) : (
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+      )}
+    </Stack.Navigator>
+  );
+}
+```
+
+The new approach is more maintainable and removes the need for something like Switch Navigator. So it has been removed.
+
+See [Authentication flows](auth-flow.md) for more info on implementing authentication flows.

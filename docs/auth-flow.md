@@ -11,7 +11,7 @@ Most apps require that a user authenticate in some way to have access to data as
 - When the state has loaded, the user is presented with either authentication screens or the main app, depending on whether valid authentication state was loaded.
 - When the user signs out, we clear the authentication state and send them back to authentication screens.
 
-> Note: we say "authentication screens" because usually there is more than one. You may have a main screen with a username and password field, another for "forgot password", and another set for sign up.
+> Note: We say "authentication screens" because usually there is more than one. You may have a main screen with a username and password field, another for "forgot password", and another set for sign up.
 
 ## What we need
 
@@ -67,22 +67,43 @@ So our navigator will look like:
 
 ```js
 return (
-  <SimpleStack.Navigator>
+  <Stack.Navigator>
     {isLoading ? (
       // We haven't finished checking for the token yet
-      <SimpleStack.Screen name="Splash" component={Splash} />
+      <Stack.Screen name="Splash" component={SplashScreen} />
     ) : userToken === undefined ? (
       // Notoken found, user isn't signed in
-      <SimpleStack.Screen name="SignIn">
+      <Stack.Screen name="SignIn">
         {() => <SignInScreen onSignIn={setUserToken} />}
-      </SimpleStack.Screen>
+      </Stack.Screen>
     ) : (
       // User is signed in
-      <SimpleStack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
     )}
-  </SimpleStack.Navigator>
+  </Stack.Navigator>
 );
 ```
+
+In the above code snippet, we're conditionally defining screens:
+
+- `Splash` screen is only defined if `isLoading` is `true`
+- `SignIn` screen is only defined if `userToken` is `undefined`
+- `Home` screen is only defined if `userToken` is defined
+
+This takes advantage of a new feature in React Navigation: being able to dynamically define and alter the screen definitions of a navigator based on props or state. The example shows stack navigator, but you can use the same approach with any navigator.
+
+> Note: The following explanation is useful for people coming from older versions of React Navigation. If React Navigation 5 is your first version, then you can skip to the next section.
+
+In earlier versions of React Navigation, there were 2 ways to handle this:
+
+1. Keep multiple navigators and use switch navigator to switch the active navigator to a different one upon login (recommended)
+2. Reset the state of the navigator to the desired screens upon login
+
+Both of these approaches were imperative. We needed to update the state to save your token, and then do a `navigate` or `reset` to change screens manually. Seems reasonable, right? But what happens when the user logs out? We need to update the state to delete the token, then `navigate` or `reset` again manually to show the login screen. We have to imperatively do the task twice already. Add more scenarios to this (e.g. unverified user, guest etc.) and it becomes even more complex.
+
+But now, with above approach, we can declaratively say which screens should be accessible if user is logged in and which screens shouldn't be. If the user logs in or logs out, we update the `userToken` in state and the correct screens are shown automatically.
+
+Another advantage of this approach is that all the screens are still under the stack navigator, which means they are animated like any other screens in the stack. For example, when the user logs in, the new screen will animate in smoothly instead of an abrupt screen change like with switch navigator. There is an experimental animated switch navigator, but the same animations as stack are not available.
 
 ## Fill in other components
 
@@ -91,18 +112,18 @@ We're conditionally defining one screen for each case here. But you could define
 ```js
 userToken === undefined ? (
   <>
-    <SimpleStack.Screen name="SignIn">
+    <Stack.Screen name="SignIn">
       {() => <SignInScreen onSignIn={setUserToken} />}
-    </SimpleStack.Screen>
-    <SimpleStack.Screen name="SignUp">
+    </Stack.Screen>
+    <Stack.Screen name="SignUp">
       {() => <SignUpScreen onSignIn={setUserToken} />}
-    </SimpleStack.Screen>
-    <SimpleStack.Screen name="ResetPassword" component={ResetPassword} />
+    </Stack.Screen>
+    <Stack.Screen name="ResetPassword" component={ResetPassword} />
   </>
 ) : (
   <>
-    <SimpleStack.Screen name="Home" component={HomeScreen} />
-    <SimpleStack.Screen name="Profile" component={ProfileScreen} />
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="Profile" component={ProfileScreen} />
   </>
 );
 ```

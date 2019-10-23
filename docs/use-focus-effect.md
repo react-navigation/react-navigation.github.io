@@ -28,7 +28,7 @@ function Profile({ userId }) {
 
 The `useFocusEffect` is analogous to React's `useEffect` hook. The only difference is that it runs on focus instead of render.
 
-**NOTE:** To avoid the running the effect too often, it's important to wrap the callback in `useCallback` before passing it to `useFocusEffect` as shown in the example.
+> Note: To avoid the running the effect too often, it's important to wrap the callback in `useCallback` before passing it to `useFocusEffect` as shown in the example.
 
 ## Delaying effect until transition finishes
 
