@@ -571,9 +571,9 @@ With these options, it's possible to build custom transition animations for scre
   - `forFade` - Simple fade animation for the header elements.
   - `forStatic` - Simple translate animation to translate the header along with the sliding screen.
 
-**IMPORTANT**: Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
+> Note: Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
 
-We export various transition presets (under `TransitionPresets`) which bundle various set of these options together to match certain native animations:
+We export various transition presets which bundle various set of these options together to match certain native animations. A transition preset is an object containing few animation related screen options exported under `TransitionPresets`. Currently the following presets are available:
 
 - `SlideFromRightIOS` - Standard iOS navigation transition.
 - `ModalSlideFromBottomIOS` - Standard iOS navigation transition for modals.
@@ -588,7 +588,7 @@ You can spread these presets in `navigationOptions` to customize the animation f
 ```js
 static navigationOptions = {
   title: 'Profile',
-  ...TransitionSpecs.ModalSlideFromBottomIOS
+  ...TransitionPresets.ModalSlideFromBottomIOS
 }
 ```
 

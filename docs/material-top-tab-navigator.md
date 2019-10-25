@@ -137,7 +137,7 @@ By default, this renders `null`.
 
 Boolean indicating whether to remove invisible views (such as unfocused screens) from the native view hierarchy to improve memory usage. Defaults to `false`.
 
-**Note**: Don't enable this on iOS where this is buggy and views don't re-appear.
+> Note: Don't enable this on iOS where this is buggy and views don't re-appear.
 
 #### `keyboardDismissMode`
 
