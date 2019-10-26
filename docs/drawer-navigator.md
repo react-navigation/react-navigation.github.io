@@ -127,7 +127,7 @@ Allows for defining how far from the edge of the content view the swipe gesture 
 
 #### `hideStatusBar`
 
-When set to true Drawer component will hide the OS status bar whenever the drawer is pulled or when its in an "open" state.
+When set to true Drawer component will hide the OS status bar whenever the drawer is pulled or when it's in an "open" state.
 
 #### `statusBarAnimation`
 
@@ -264,8 +264,8 @@ The `DrawerItem` component accepts the following props:
 - `onPress` (required): Function to execute on press.
 - `activeTintColor`: Color for the icon and label when the item is active.
 - `inactiveTintColor`: Color for the icon and label when the item is inactive.
-- `activeBackgroundColor`: Background color for item when its active.
-- `inactiveBackgroundColor`: Background color for item when its inactive.
+- `activeBackgroundColor`: Background color for item when it's active.
+- `inactiveBackgroundColor`: Background color for item when it's inactive.
 - `labelStyle`: Style object for the label `Text`.
 - `style`: Style object for the wrapper `View`.
 
