@@ -185,6 +185,10 @@
         "title": "Navigation views",
         "sidebar_label": "Navigation views"
       },
+      "nesting-navigators": {
+        "title": "Nesting navigators",
+        "sidebar_label": "Nesting navigators"
+      },
       "next-steps": {
         "title": "Next steps",
         "sidebar_label": "Next steps"
