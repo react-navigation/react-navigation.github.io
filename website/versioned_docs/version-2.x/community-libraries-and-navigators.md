@@ -25,7 +25,7 @@ The library implements a custom navigator called `FluidNavigator` that makes all
 
 react-navigation-collapsible is a library and a `Higher Order Component` that adjusts your navigationOptions and makes your screen header collapsible.
 
-Since react-navigation's header is designed as `Animated` component. You can animate the header by passing `Animated.Value` from your `ScrollView` or `FlatList` to the header.
+Since react-navigation's header is designed as `Animated` component, you can animate the header by passing `Animated.Value` from your `ScrollView` or `FlatList` to the header.
 
 #### Links
 

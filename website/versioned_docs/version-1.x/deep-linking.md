@@ -116,7 +116,7 @@ In `SimpleApp/ios/SimpleApp/AppDelegate.m`:
 }
 ```
 
-In Xcode, open the project at `SimpleApp/ios/SimpleApp.xcodeproj`. Select the project in sidebar and navigate to the info tab. Scroll down to "URL Types" and add one. In the new URL type, set the identifier and the url scheme to your desired url scheme.
+In Xcode, open the project at `SimpleApp/ios/SimpleApp.xcodeproj`. Select the project in sidebar and navigate to the info tab. Scroll down to "URL Types" and add one. In the new URL type, set the identifier and the URL scheme to your desired URL scheme.
 
 ![Xcode project info URL types with mychat added](/docs/assets/deep-linking/xcode-linking.png)
 

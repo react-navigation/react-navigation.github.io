@@ -27,7 +27,7 @@ export function MyBackButton({ navigation }) {
 
 To resolve this exception, you could pass the `navigation` prop in to `MyBackButton` when you render it from a screen, like so: `<MyBackButton navigation={props.navigation} />`.
 
-Alternatively, you can use the `useNavigation` to provide the `navigation` automatically (through React context, if you're curious).
+Alternatively, you can use the `useNavigation` to provide the `navigation` prop automatically (through React context, if you're curious).
 
 ```js
 import * as React from 'react';
