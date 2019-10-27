@@ -6,7 +6,7 @@ sidebar_label: Access the navigation prop from any component
 
 [`useNavigation`](use-navigation.md) is a a hook which gives access to the `navigation` object. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
 
-An ordinary component that is not a screen component will not receive the navigation prop automatically. for example in this `MyBackButton` component:
+An ordinary component that is not a screen component will not receive the navigation prop automatically. For example in this `MyBackButton` component:
 
 ```js
 import * as React from 'react';
@@ -27,7 +27,7 @@ export function MyBackButton({ navigation }) {
 
 To resolve this exception, you could pass the `navigation` prop in to `MyBackButton` when you render it from a screen, like so: `<MyBackButton navigation={props.navigation} />`.
 
-Alternatively, you can use the `useNavigation` to provide the `navigation` automatically automatically (through React context, if you're curious).
+Alternatively, you can use the `useNavigation` to provide the `navigation` prop automatically (through React context, if you're curious).
 
 ```js
 import * as React from 'react';

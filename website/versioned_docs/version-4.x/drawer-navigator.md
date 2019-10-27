@@ -35,7 +35,7 @@ The route configs object is a mapping from route name to a route config, which t
 
 - `drawerWidth` - Number or a function which returns the width of the drawer. If a function is provided, it'll be called again when the screen's dimensions change.
 - `edgeWidth` - Allows for defining how far from the edge of the content view the swipe gesture should activate
-- `hideStatusBar` - when set to true Drawer component will hide the OS status bar whenever the drawer is pulled or when its in an "open" state.
+- `hideStatusBar` - when set to true Drawer component will hide the OS status bar whenever the drawer is pulled or when it's in an "open" state.
 - `statusBarAnimation` - Animation of the statusbar when hiding it. use in combination with `hideStatusBar`.
 - `keyboardDismissMode` - Whether the keyboard should be dismissed when the swipe gesture begins. Defaults to `'on-drag'`. Set to `'none'` to disable keyboard handling.
 - `minSwipeDistance` - Minimum swipe distance threshold that should activate opening the drawer.
