@@ -72,7 +72,74 @@ When we set the `options` directly on `Screen` components containing the `HomeSt
 
 ## A stack contains a tab navigator and you want to set the title on the stack header
 
-> TODO: We haven't written this guide yet. Please check back later.
+```js
+import React from 'react'
+import { View, Text, Button } from 'react-native'
+import { NavigationContainer } from '@react-navigation/core'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
+const Enroll = ({ navigation }) => (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Enroll Screen</Text>
+      <Button title="Dismiss" onPress={() => navigation.goBack()} />
+    </View>
+)
+
+const Settings = ({ navigation }) => (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings Screen</Text>
+      <Button title="Go Back" onPress={() => navigation.goBack()} />
+    </View>
+)
+
+const TabHome = ({ navigation }) => (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'purple' }}>
+      <Text>Tab Home</Text>
+      <Button title="Enroll" onPress={() => navigation.navigate('Enroll')} />
+    </View>
+)
+
+const TabProfile = ({ navigation }) => (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'yellow' }}>
+      <Text>Tab Profile</Text>
+      <Button title="Settings" onPress={() => navigation.navigate('Settings')} />
+      <Button title="Enroll" onPress={() => navigation.navigate('Enroll')} />
+    </View>
+)
+
+const Tab = createBottomTabNavigator()
+const Stack = createNativeStackNavigator()
+
+const TabHomeStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Home" component={TabHome} />
+  </Stack.Navigator>
+)
+
+const TabProfileStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Profile" component={TabProfile} />
+    <Stack.Screen name="Settings" component={Settings} />
+  </Stack.Navigator>
+)
+
+const TabNavigator = () => (
+  <Tab.Navigator>
+    <Tab.Screen name="Home" component={TabHomeStack} />
+    <Tab.Screen name="Profile" component={TabProfileStack} />
+  </Tab.Navigator>
+)
+
+export default () => (
+  <NavigationContainer>
+    <Stack.Navigator screenOptions={{ presentation: 'modal', headerShown: false }}>
+      <Stack.Screen name="Tab" component={TabNavigator} />
+      <Stack.Screen name="Enroll" component={Enroll} />
+    </Stack.Navigator>
+  </NavigationContainer>
+)
+```
 
 ## A tab navigator contains a stack and you want to hide the tab bar on specific screens
 
