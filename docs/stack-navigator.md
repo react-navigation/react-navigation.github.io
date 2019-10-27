@@ -177,7 +177,7 @@ String or a function that returns a React Element to be used by the header. Defa
 
 #### `headerTitleAlign`
 
-How to align the the header title. Possible values:
+How to align the header title. Possible values:
 
 - `left`
 - `center`

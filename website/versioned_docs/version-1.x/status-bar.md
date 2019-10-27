@@ -88,7 +88,7 @@ If you're using a TabNavigator it's a bit more complex because the screens on al
 
 To fix this we'll have to do two things
 
-1. Only use the `StatusBar` component on our inital screen. This allows us to ensure the correct `StatusBar` config is used.
+1. Only use the `StatusBar` component on our initial screen. This allows us to ensure the correct `StatusBar` config is used.
 2. Leverage the events system in React Navigation and `StatusBar`'s implicit API to change the `StatusBar` configuration when a tab becomes active.
 
 First, the new `Screen2.js` will no longer use the `StatusBar` component.

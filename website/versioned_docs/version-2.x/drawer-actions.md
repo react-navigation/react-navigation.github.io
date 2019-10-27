@@ -10,7 +10,7 @@ original_id: drawer-actions
 The following actions are supported:
 * [openDrawer](#openDrawer) - open the drawer
 * [closeDrawer](#closeDrawer) - close the drawer
-* [toggleDrawer](#toggleDrawer) - toggle the state, ie. switche from closed to open and vice versa
+* [toggleDrawer](#toggleDrawer) - toggle the state, ie. switch from closed to open and vice versa
 
 ### Usage
 
