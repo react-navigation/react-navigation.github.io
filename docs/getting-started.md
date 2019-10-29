@@ -30,4 +30,19 @@ npm install @react-navigation/core@next @react-navigation/native@next
 
 > When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional configuration.
 
+Now, we need to wrap the whole app in `NavigationNativeContainer`. Usually you'd do this in your entry file, such as `index.js` or `App.js`:
+
+```js
+import * as React from 'react';
+import { NavigationNativeContainer } from '@react-navigation/native';
+
+export default function App() {
+  return (
+    <NavigationNativeContainer>
+      {/* Rest of your app code */}
+    </NavigationNativeContainer>
+  );
+}
+```
+
 Continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.
