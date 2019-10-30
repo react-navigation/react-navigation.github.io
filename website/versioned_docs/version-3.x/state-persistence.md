@@ -75,7 +75,7 @@ If you need to modify the nav state object, you may do so in the `loadNavigation
 
 When your application code changes to support new routes or different routers for a given route in your navigation state, the app may break when presented with the old navigation state.
 
-This may happen regularly during development as you re-configure your routes and navigator heirarchy. But it also may happen in production when you release a new version of your app!
+This may happen regularly during development as you re-configure your routes and navigator hierarchy. But it also may happen in production when you release a new version of your app!
 
 The conservative behavior is to wipe the navigation state when the app has been updated. The easiest way to do this is to refer to a different persistence key for each version that you release to users.
 

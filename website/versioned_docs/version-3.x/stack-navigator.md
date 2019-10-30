@@ -305,7 +305,7 @@ Header transitions can also be configured using `headerLeftInterpolator`, `heade
 
 #### Specifying the transition mode for a stack's screens explicitly
 
-We can't set the `StackNavigatorConfig`'s `mode` dynamically. Instead we are going to use a custom `transitionConfig` to render the specfific transition we want - modal or card - on a screen by screen basis.
+We can't set the `StackNavigatorConfig`'s `mode` dynamically. Instead we are going to use a custom `transitionConfig` to render the specific transition we want - modal or card - on a screen by screen basis.
 
 ```js
 import { createStackNavigator, StackViewTransitionConfigs } from 'react-navigation';
