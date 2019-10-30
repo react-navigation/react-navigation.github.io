@@ -24,7 +24,7 @@ export default class App() {
 
 Notice that we wrap our components in a `Provider` like we'd normally do with `react-redux`. Ta da! Now feel free to use `connect` throughout your app.
 
-### Use a component that is `connect`ed in `options`
+### Use a component that is connected in `options`
 
 Create a component, `connect` it to the store, then use that component in the `title`.
 
