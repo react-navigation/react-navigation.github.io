@@ -10,6 +10,7 @@ The router is responsible for handling actions dispatched by calling methods on 
 
 You can make your own router by building an object with the following functions:
 
+- `type` - String representing the type of the router, e.g. `'stack'`, `'tab'`, `'drawer'` etc.
 - `getInitialState` - Function which returns the initial state for the navigator. Receives an options object with `routeNames` and `routeParamList` properties.
 - `getRehydratedState` - Function which rehydrates the full navigation state from a given partial state. Receives a partial state object and an options object with `routeNames` and `routeParamList` properties.
 - `getStateForRouteNamesChange` - Function which takes the current state and updated list of route names, and returns a new state. Receives the state object and an options object with `routeNames` and `routeParamList` properties.
@@ -22,6 +23,8 @@ Example:
 
 ```js
 const router = {
+  type: 'tab',
+
   getInitialState({ routeNames, routeParamList }) {
     const index =
       options.initialRouteName === undefined
@@ -30,6 +33,7 @@ const router = {
 
     return {
       stale: false,
+      type: 'tab',
       key: shortid(),
       index,
       routeNames,
@@ -67,6 +71,7 @@ const router = {
 
     return {
       stale: false,
+      type: 'tab',
       key: shortid(),
       index:
         typeof state.index === 'number' && state.index < routes.length
