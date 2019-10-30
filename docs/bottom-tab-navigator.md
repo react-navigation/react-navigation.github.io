@@ -88,6 +88,10 @@ Reset the state of any nested navigators when switching away from a screen. Defa
 
 Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
 
+#### `unmountInactiveScreens`
+
+Whether a screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
+
 #### `tabBarComponent`
 
 Override component to use as the tab bar.

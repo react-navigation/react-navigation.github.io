@@ -153,9 +153,9 @@ Props to pass to the underlying pan gesture handler.
 
 Whether the screens should render the first time they are accessed. Defaults to `true`. Set it to `false` if you want to render all screens on initial render.
 
-#### `unmountInactiveRoutes`
+#### `unmountInactiveScreens`
 
-Whether a screen should be unmounted when navigating away from it. Defaults to `false`.
+Whether a screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
 
 #### `sceneContainerStyle`
 
