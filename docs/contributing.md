@@ -88,7 +88,7 @@ Would you rather take 1 minute to create an incomplete issue report and wait mon
 
 ### Pull Request Template
 
-Much like the issue template, the [pull request template](https://github.com/react-navigation/navigation-ex/blob/master/.github/PULL_REQUEST_TEMPLATE.md) lays out instructions to ensure your pull request gets reviewed in a timely manner and reduces the back and forth. Make sure to look it over before you start writing any code.
+Much like the issue template, the [pull request template](https://github.com/react-navigation/navigation-ex/blob/master/.github/PULL_REQUEST.md) lays out instructions to ensure your pull request gets reviewed in a timely manner and reduces the back and forth. Make sure to look it over before you start writing any code.
 
 ### Forking the Repository
 
