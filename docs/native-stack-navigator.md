@@ -221,8 +221,8 @@ function App() {
   return (
     <Stack.Navigator
       initialRouteName="Home"
-      headerMode="screen"
       screenOptions={{
+        headerShown: false,
         headerTintColor: 'white',
         headerStyle: { backgroundColor: 'tomato' },
       }}
