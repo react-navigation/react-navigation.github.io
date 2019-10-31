@@ -28,7 +28,7 @@ We'll do something similar to the latter, but rather than using a `window.locati
 
 ## Navigating to a new screen
 
-<samp id="new-screen" />
+<samp id="new-screen">First navigation</samp>
 
 ```js
 import * as React from 'react';
@@ -62,6 +62,8 @@ So we now have a stack with two routes: 1) the `Home` route 2) the `Details` rou
 
 ## Navigate to a route multiple times
 
+<samp id="multiple-navigate" />
+
 ```js
 function DetailsScreen({ navigation }) {
   return (
@@ -80,6 +82,8 @@ If you run this code, you'll notice that when you tap "Go to Details... again" t
 
 Let's suppose that we actually _want_ to add another details screen. This is pretty common in cases where you pass in some unique data to each route (more on that later when we talk about `params`!). To do this, we can change `navigate` to `push`. This allows us to express the intent to add another route regardless of the existing navigation history.
 
+<samp id="multiple-push">push</samp>
+
 ```js
 <Button
   title="Go to Details... again"
@@ -94,6 +98,8 @@ Each time you call `push` we add a new route to the navigation stack. When you c
 The header provided by stack navigator will automatically include a back button when it is possible to go back from the active screen (if there is only one screen in the navigation stack, there is nothing that you can go back to, and so there is no back button).
 
 Sometimes you'll want to be able to programmatically trigger this behavior, and for that you can use `navigation.goBack();`.
+
+<samp id="go-back">go back</samp>
 
 ```js
 function DetailsScreen({ navigation }) {

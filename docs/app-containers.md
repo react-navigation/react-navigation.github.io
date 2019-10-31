@@ -52,6 +52,8 @@ Example:
 
 In case you want to dispatch actions on an app container, you can use a React [`ref`](https://reactjs.org/docs/refs-and-the-dom.html#creating-refs) to call the `dispatch` method on it:
 
+<samp id="using-refs" />
+
 ```js
 function App() {
   const ref = React.useRef(null);
