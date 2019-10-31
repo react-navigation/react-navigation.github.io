@@ -10,6 +10,8 @@ Now that we know how to customize the look of our headers, let's make them senti
 
 The most common way to interact with a header is by tapping on a button either to the left or the right of the title. Let's add a button to the right side of the header (one of the most difficult places to touch on your entire screen, depending on finger and phone size, but also a normal place to put buttons).
 
+<samp id="simple-header-button">header button</samp>
+
 ```js
 function StackScreen() {
   return (
@@ -41,6 +43,8 @@ The binding of `this` in `options` is _not_ the `HomeScreen` instance, so you ca
 
 The most commonly used pattern for giving a header button access to a combine `route` and `params` props to obtain expected behavior.
 
+<samp id="header-interaction">header interaction</samp>
+
 ```js
 function StackScreen() {
   return (
@@ -48,6 +52,7 @@ function StackScreen() {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
+        initialParams={{ count: 0 }}
         options={({ navigation, route }) => ({
           headerTitle: props => <LogoTitle {...props} />,
           headerRight: () => (
@@ -66,7 +71,7 @@ function StackScreen() {
 }
 
 function HomeScreen({ route }) {
-  return <Text>{route.params.count}</Text>;
+  return <Text>Count: {route.params.count}</Text>;
 }
 ```
 

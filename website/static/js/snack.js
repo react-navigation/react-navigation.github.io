@@ -1,29 +1,41 @@
 const DEFAULT_PLATFORM = 'android';
+const DEPS_VERSIONS = {
+  '4': [
+    'react-navigation@^4.0.10',
+    'react-navigation-tabs@^2.5.6',
+    'react-navigation-stack@^1.10.3',
+    'react-navigation-drawer@^2.3.3',
+  ],
+  next: [
+    '@react-navigation/core@5.0.0-alpha.18',
+    '@react-navigation/native@5.0.0-alpha.13',
+    '@react-navigation/stack@5.0.0-alpha.30',
+    '@react-navigation/bottom-tabs@5.0.0-alpha.16',
+    '@react-navigation/drawer@5.0.0-alpha.17',
+    '@react-native-community/masked-view@^0.1.1',
+  ],
+};
 
 // todo: should get the version somewhere, maybe within the page html,
 // and match the appropriate version of react-navigation/stack/tabs/drawer
 // based on that
 function getSnackUrl(options) {
+  let currentVersion = document.querySelector('header a h3').innerText;
   let label = options.label || document.title;
   let code = options.code;
   let templateId = options.templateId;
+  const currentMajorVersion =
+    currentVersion === 'next' ? 'next' : currentVersion.match(/(\d+)\./)[1];
+
   let baseUrl =
     `https://snack.expo.io?platform=${DEFAULT_PLATFORM}&name=` +
     encodeURIComponent(label) +
     '&dependencies=' +
-    encodeURIComponent(
-      [
-        'react-navigation',
-        'react-navigation-stack',
-        'react-navigation-tabs',
-        'react-navigation-drawer',
-      ].join(',')
-    );
+    encodeURIComponent(DEPS_VERSIONS[currentMajorVersion].join(','));
 
   // todo: this is ridiculous but there's no other way i can see to get the
   // current version from the html or the url, given that the root url is
   // the latest version
-  let currentVersion = document.querySelector('header a h3').innerText;
 
   if (templateId) {
     let templateUrl = `${document.location.origin}/examples/${currentVersion}/${templateId}.js`;

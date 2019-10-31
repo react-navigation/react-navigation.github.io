@@ -10,6 +10,8 @@ By now you're probably tired of seeing a blank grey bar on the top of your scree
 
 A Screen component accepts `options` prop which is either an object or a function that returns an object, that contains various configuration options. The one we use for the header title is `title`, as shown in the following example.
 
+<samp id="basic-header-config">header title</samp>
+
 ```js
 function StackScreen() {
   return (
@@ -26,7 +28,9 @@ function StackScreen() {
 
 ## Using params in the title
 
-In order to use params in the title, we need to make `options` prop for the screen a function that returns a configuration object. It might be tempting to try to use `this.props` inside of `options`, but because it is defined before the component is rendered, `this` does not refer to an instance of the component and therefore no props are available. Instead, if we make `options` a function then React Navigation will call it with an object containing `{ navigation, route }` -- in this case, all we care about is `route`, which is the same object that is passed to your screen props as `route` prop. You may recall that we can get the params through `route.params`, and so we do this below to extract a param and use it as a title.
+In order to use params in the title, we need to make `options` prop for the screen a function that returns a configuration object. It might be tempting to try to use `this.props` inside of `options`, but because it is defined before the component is rendered, `this` does not refer to an instance of the component and therefore no props are available. Instead, if we make `options` a function then React Navigation will call it with an object containing `{ navigation, route }` - in this case, all we care about is `route`, which is the same object that is passed to your screen props as `route` prop. You may recall that we can get the params through `route.params`, and so we do this below to extract a param and use it as a title.
+
+<samp id="params-in-title">params in title</samp>
 
 ```js
 function StackScreen() {
@@ -58,6 +62,8 @@ We only needed the `route` prop in the above example but you may in some cases w
 
 It's often necessary to update the `options` configuration for the active screen from the mounted screen component itself. We can do this using `navigation.setOptions`
 
+<samp id="updating-options-with-setparams">updating navigation options</samp>
+
 ```js
 /* Inside of render() of React class */
 <Button
@@ -73,6 +79,8 @@ There are three key properties to use when customizing the style of your header:
 - `headerStyle`: a style object that will be applied to the `View` that wraps the header. If you set `backgroundColor` on it, that will be the color of your header.
 - `headerTintColor`: the back button and title both use this property as their color. In the example below, we set the tint color to white (`#fff`) so the back button and the header title would be white.
 - `headerTitleStyle`: if we want to customize the `fontFamily`, `fontWeight` and other `Text` style properties for the title, we can use this to do it.
+
+<samp id="header-styles">header styles</samp>
 
 ```js
 function StackScreen() {
@@ -106,6 +114,8 @@ There are a couple of things to notice here:
 
 It is common to want to configure the header in a similar way across many screens. For example, your company brand color might be red and so you want the header background color to be red and tint color to be white. Conveniently, these are the colors we're using in our running example, and you'll notice that when you navigate to the `DetailsScreen` the colors go back to the defaults. Wouldn't it be awful if we had to copy the `options` header style properties from `HomeScreen` to `DetailsScreen`, and for every single screen component we use in our app? Thankfully, we do not. We can instead move the configuration up to the stack navigator under the prop `screenOptions`.
 
+<samp id="sharing-header-styles">sharing header styles</samp>
+
 ```js
 function StackScreen() {
   return (
@@ -136,10 +146,15 @@ Now, any screen that belongs to the `StackScreen` will have our wonderful brande
 
 Sometimes you need more control than just changing the text and styles of your title -- for example, you may want to render an image in place of the title, or make the title into a button. In these cases you can completely override the component used for the title and provide your own.
 
+<samp id="custom-header-title-component">custom header title component</samp>
+
 ```js
 function LogoTitle() {
   return (
-    <Image source={require('./spiro.png')} style={{ width: 30, height: 30 }} />
+    <Image
+      style={{ width: 50, height: 50 }}
+      source={require('@expo/snack-static/react-native-logo.png')}
+    />
   );
 }
 

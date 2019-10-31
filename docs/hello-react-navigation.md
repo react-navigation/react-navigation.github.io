@@ -20,6 +20,8 @@ Lets start by demonstrating the most common navigator, `createStackNavigator`.
 
 `NavigationNativeContainer` is a component which manages our navigation tree and contains the navigation state. This component must wrap all navigators structure. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
 
+<samp id="hello-react-navigation">Hello World</samp>
+
 ```js
 // In App.js in a new project
 
@@ -62,6 +64,8 @@ If you run this code, you will see a screen with an empty navigation bar and a g
 All of the route configuration is specified as props to our navigator. We haven't passed any props to our navigator, so it just uses the default configuration.
 
 Let's add a second screen to our stack navigator and configure the screen to render first:
+
+<samp id="hello-react-navigation-full" />
 
 ```js
 function DetailsScreen() {

@@ -14,6 +14,8 @@ The purpose of explaining this as part of the React Navigation fundamentals is n
 
 ## Creating a modal stack
 
+<samp id="full-screen-modal">modal stack</samp>
+
 ```js
 function HomeScreen({ navigation }) {
   return (
@@ -23,6 +25,14 @@ function HomeScreen({ navigation }) {
         onPress={() => navigation.navigate('MyModal')}
         title="Open Modal"
       />
+    </View>
+  );
+}
+
+function DetailsScreen() {
+  return (
+    <View>
+      <Text>Details</Text>
     </View>
   );
 }
@@ -42,20 +52,7 @@ const RootStack = createStackNavigator();
 function MainStackScreen() {
   return (
     <MainStack.Navigator>
-      <MainStack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={({ navigation }) => ({
-          headerLeft: () => (
-            <Button
-              onPress={() => navigation.navigate('MyModal')}
-              title="Info"
-              color="#fff"
-            />
-          ),
-          /* the rest of this config is unchanged */
-        })}
-      />
+      <MainStack.Screen name="Home" component={HomeScreen} />
       <MainStack.Screen name="Details" component={DetailsScreen} />
     </MainStack.Navigator>
   );

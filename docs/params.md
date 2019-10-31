@@ -16,6 +16,8 @@ There are two pieces to this:
 
 > We recommend that the params you pass are JSON-serializable. That way, you'll be able to use [state persistence](state-persistence.html) and your screen components will have the right contract for implementing [deep linking](deep-linking.html).
 
+<samp id="passing-params" />
+
 ```js
 function HomeScreen({ navigation }) {
   return (
