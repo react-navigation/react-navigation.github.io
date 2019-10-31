@@ -80,10 +80,6 @@ Behavior of back button handling.
 - `history` to return to last visited tab
 - `none` to not handle back button
 
-#### `resetOnBlur`
-
-Reset the state of any nested navigators when switching away from a screen. Defaults to `false`.
-
 #### `lazy`
 
 Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
