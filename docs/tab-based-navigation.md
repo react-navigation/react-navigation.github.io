@@ -10,6 +10,8 @@ This guide covers [`createBottomTabNavigator`](bottom-tab-navigator.html). You m
 
 ## Minimal example of tab-based navigation
 
+<samp id="tab-based-navigation-minimal" />
+
 ```js
 import * as React from 'react';
 import { Text, View } from 'react-native';
@@ -50,14 +52,14 @@ export default function App() {
 
 This is similar to how you would customize a stack navigator &mdash; there are some properties that are set when you initialize the tab navigator and others that can be customized per-screen in `options`.
 
+<samp id="tab-based-navigation-icons" />
+
 ```js
 // You can import Ionicons from @expo/vector-icons if you use Expo or
 // react-native-vector-icons/Ionicons otherwise.
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { NavigationNativeContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 
-// ...
+// (...)
 
 export default function App() {
   return (
@@ -65,20 +67,16 @@ export default function App() {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
-            let IconComponent = Ionicons;
             let iconName;
 
-            if (route.name === 'home') {
+            if (route.name === 'Home') {
               iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-              // Sometimes we want to add badges to some icons.
-              // You can check the implementation below.
-              IconComponent = HomeIconWithBadge;
-            } else if (route.name === 'settings') {
+            } else if (route.name === 'Settings') {
               iconName = `ios-options`;
             }
 
             // You can return any component that you like here!
-            return <IconComponent name={iconName} size={size} color={color} />;
+            return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
         tabBarOptions={{
@@ -105,12 +103,7 @@ Let's dissect this:
 Sometimes we want to add badges to some icons. A common way is to use an extra view container and style the badge element with absolute positioning.
 
 ```js
-export default function IconWithBadge({
-  name,
-  badgeCount,
-  color,
-  size,
-}: Props) {
+function IconWithBadge({ name, badgeCount, color, size }) {
   return (
     <View style={{ width: 24, height: 24, margin: 5 }}>
       <Ionicons name={name} size={size} color={color} />
@@ -141,8 +134,10 @@ export default function IconWithBadge({
 
 From UI perspective this component is ready to use, but you still need to find some way to pass down the badge count properly from somewhere else, like using [React Context](https://reactjs.org/docs/context.html), [Redux](https://redux.js.org/), [MobX](https://mobx.js.org/) or [event emitters](https://github.com/facebook/react-native/blob/master/Libraries/vendor/emitter/EventEmitter.js).
 
+<samp id="tab-based-navigation-badges" />
+
 ```js
-export default function HomeIconWithBadge(props) {
+function HomeIconWithBadge(props) {
   // You should pass down the badgeCount in some other ways like React Context API, Redux, MobX or event emitters.
   return <IconWithBadge {...props} badgeCount={3} />;
 }
@@ -152,9 +147,9 @@ export default function HomeIconWithBadge(props) {
 
 Switching from one tab to another has a familiar API &mdash; `navigation.navigate`.
 
-```js
-import { Button, Text, View } from 'react-native';
+<samp id="tab-based-navigation-switching" />
 
+```js
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -181,7 +176,11 @@ function SettingsScreen({ navigation }) {
 
 Usually tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
 
+<samp id="tab-based-navigation-stack" />
+
 ```js
+import * as React from 'react';
+import { Button, Text, View } from 'react-native';
 import { NavigationNativeContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -197,7 +196,7 @@ function DetailsScreen() {
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {/* other code from before here */}
+      <Text>Home screen</Text>
       <Button
         title="Go to Details"
         onPress={() => navigation.navigate('Details')}
@@ -209,7 +208,7 @@ function HomeScreen({ navigation }) {
 function SettingsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {/* other code from before here */}
+      <Text>Settings screen</Text>
       <Button
         title="Go to Details"
         onPress={() => navigation.navigate('Details')}
