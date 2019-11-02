@@ -33,31 +33,23 @@ const getActiveRouteName = state => {
 };
 
 export default function App() {
-  const navigationRef = React.useRef();
   const routeNameRef = React.useRef();
 
   return (
     <NavigationNativeContainer
       ref={navigationRef}
-      onStateChange={() => {
-        const navigation = navigationRef.current;
+      onStateChange={state => {
+        const previousRouteName = routeNameRef.current;
+        const currentRouteName = getActiveRouteName(state);
 
-        if (navigation) {
-          const previousRouteName = routeNameRef.current;
-          const currentRouteName = getActiveRouteName(
-            // Get the root navigator state to find the active route
-            navigation.getRootState()
-          );
-
-          if (previousRouteName !== currentRouteName) {
-            // The line below uses the @react-native-firebase/analytics tracker
-            // Change this line to use another Mobile analytics SDK
-            analytics().setCurrentScreen(currentRouteName, currentRouteName);
-          }
-
-          // Save the current route name for later comparision
-          routeNameRef.current = currentRouteName;
+        if (previousRouteName !== currentRouteName) {
+          // The line below uses the @react-native-firebase/analytics tracker
+          // Change this line to use another Mobile analytics SDK
+          analytics().setCurrentScreen(currentRouteName, currentRouteName);
         }
+
+        // Save the current route name for later comparision
+        routeNameRef.current = currentRouteName;
       }}
     >
       {/* ... */}
