@@ -88,9 +88,9 @@ Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, 
 
 Whether a screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
 
-#### `tabBarComponent`
+#### `tabBar`
 
-Override component to use as the tab bar.
+Function that returns a React element to display as the tab bar.
 
 #### `tabBarOptions`
 
@@ -131,9 +131,9 @@ Function that given `{ focused: boolean, color: string, size: number }` returns 
 
 Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
 
-#### `tabBarButtonComponent`
+#### `tabBarButton`
 
-React Component that wraps the icon and label and implements `onPress`. The default is a wrapper around `TouchableWithoutFeedback` that makes it behave the same as other touchables. `tabBarButtonComponent: TouchableOpacity` would use `TouchableOpacity` instead.
+Function which returns a React element to render as the tab bar button. It wraps the icon and label and implements `onPress`. Renders `TouchableWithoutFeedback` by default. `tabBarButton: props => <TouchableOpacity {...props} />` would use `TouchableOpacity` instead.
 
 #### `tabBarAccessibilityLabel`
 

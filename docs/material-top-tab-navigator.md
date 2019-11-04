@@ -125,9 +125,9 @@ When you enable `lazy`, the unfocused screens will usually take some time to ren
 
 When `lazy` is enabled, you can specify how many adjacent routes should be preloaded with this prop. This value defaults to `0` which means lazy pages are loaded as they come into the viewport.
 
-#### `lazyPlaceholderComponent`
+#### `lazyPlaceholder`
 
-React component to render for routes that haven't been rendered yet. Receives an object containing the route as the argument. The `lazy` prop also needs to be enabled.
+Function that returns a React element to render for routes that haven't been rendered yet. Receives an object containing the route as the argument. The `lazy` prop also needs to be enabled.
 
 This view is usually only shown for a split second. Keep it lightweight.
 
@@ -206,9 +206,9 @@ gestureHandlerProps={{
 }}
 ```
 
-#### `tabBarComponent`
+#### `tabBar`
 
-Override component to use as the tab bar.
+Function that returns a React element to display as the tab bar.
 
 #### `tabBarOptions`
 

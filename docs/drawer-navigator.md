@@ -176,9 +176,9 @@ Style object for the drawer component. You can pass a custom background color fo
 </Drawer.Navigator>
 ```
 
-#### `contentComponent`
+#### `drawerContent`
 
-Component used to render the content of the drawer, for example, navigation items.
+Function that returns React element to render as the content of the drawer, for example, navigation items
 
 The content component receives following props by default:
 
@@ -187,7 +187,7 @@ The content component receives following props by default:
 - `descriptors` - An descriptor object containing options for the drawer screens. The options can be accessed at `descriptors[route.key].options`.
 - `progress` - Reanimated Node that represents the animated position of the drawer (0 is closed; 1 is open).
 
-##### Providing a custom `contentComponent`
+##### Providing a custom `drawerContent`
 
 The default component for the drawer is scrollable and only contains links for the routes in the RouteConfig. You can easily override the default component to add a header, footer, or other content to the drawer. The default content component is exported as `DrawerContent`. It renders a `DrawerItemList` component inside a `ScrollView`.
 
@@ -269,7 +269,7 @@ The `DrawerItem` component accepts the following props:
 - `labelStyle`: Style object for the label `Text`.
 - `style`: Style object for the wrapper `View`.
 
-The `progress` node can be used to do interesting animations in your `contentComponent`, such as parallax motion of the drawer contents:
+The `progress` node can be used to do interesting animations in your `drawerContent`, such as parallax motion of the drawer contents:
 
 ```js
 function CustomDrawerContent({ progress, ...rest }) {
@@ -286,15 +286,15 @@ function CustomDrawerContent({ progress, ...rest }) {
 }
 ```
 
-To use the custom component, we need to pass it in the `contentComponent` prop:
+To use the custom component, we need to pass it in the `drawerContent` prop:
 
 ```js
-<Drawer.Navigator contentComponent={CustomDrawerContent}>
+<Drawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />}>
   {/* screens */}
 </Drawer.Navigator>
 ```
 
-#### `contentOptions`
+#### `drawerContentOptions`
 
 An object containing the props for the drawer content component. See below for more details.
 
@@ -334,7 +334,7 @@ Example:
 
 ```js
 <Drawer.Navigator
-  contentOptions={{
+  drawerContentOptions={{
     activeTintColor: '#e91e63',
     itemStyle: { marginVertical: 0 },
   }}

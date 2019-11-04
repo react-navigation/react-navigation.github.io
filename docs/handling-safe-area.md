@@ -31,7 +31,7 @@ The rest of this guide gives more information on how to support safe areas in Re
 
 React Navigation handles safe area in the default header. However, if you're using a custom header, it's important to ensure your UI is within the safe area.
 
-For example, if I render nothing for the `header` or `tabBarComponent`, nothing renders
+For example, if I render nothing for the `header` or `tabBar`, nothing renders
 
 ```jsx
 import { createStackNavigator } from '@react-navigation/stack';
@@ -52,7 +52,7 @@ function App2() {
         />
         <Stack.Screen name="Home">
           {() => (
-            <Tab.Navigator initialRouteName="Feed" tabBarComponent={() => null}>
+            <Tab.Navigator initialRouteName="Feed" tabBar={() => null}>
               <Tab.Screen name="Feed" component={Feed} />
               <Tab.Screen name="Article" component={Article} />
               <Tab.Screen name="Notifications">
