@@ -95,7 +95,7 @@ export const AppNavigator = (config): React.ReactElement => (
 
 ### Step 2. Top tabs
 
-Say, our app has both in-progress and finished tasks. So, you should separate them to avoid a mess. Here you can make it with two tabs on the home screen. To do this, we need to have three screens: two for tabs and one master screen for navigation management between tabs. Unlike the Stack Navigatorcomponent, the Top Tabs `Navigator` has a special prop for the component to control navigation between tabs - `tabBarComponent`. We will use it to configure the tab bar with UI Kitten components.
+Say, our app has both in-progress and finished tasks. So, you should separate them to avoid a mess. Here you can make it with two tabs on the home screen. To do this, we need to have three screens: two for tabs and one master screen for navigation management between tabs. Unlike the Stack Navigator component, the Top Tabs `Navigator` has a special prop for the component to control navigation between tabs - `tabBar`. We will use it to configure the tab bar with UI Kitten components.
 
 Open `./src/navigators/todo.navigator.tsx` file and paste the following code:
 
@@ -110,7 +110,7 @@ const Stack = createStackNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
 export const TodoNavigator = (): React.ReactElement => (
-  <TopTab.Navigator tabBarComponent={TodoScreen}>
+  <TopTab.Navigator tabBar={TodoScreen}>
     <TopTab.Screen name={AppRoute.TODO_IN_PROGRESS} component={TodoInProgressScreen}/>
     <TopTab.Screen name={AppRoute.TODO_DONE} component={TodoDoneScreen}/>
   </TopTab.Navigator>
@@ -208,14 +208,14 @@ import { AppRoute } from './app-routes';
 const BottomTab = createBottomTabNavigator();
 
 export const HomeNavigator = (): React.ReactElement => (
-  <BottomTab.Navigator tabBarComponent={BottomHomeScreen}>
+  <BottomTab.Navigator tabBar={BottomHomeScreen}>
     <BottomTab.Screen name={AppRoute.TODO} component={TodoNavigator}/>
     <BottomTab.Screen name={AppRoute.PROFILE} component={ProfileNavigator}/>
   </BottomTab.Navigator>
 );
 ```
 
-Just like in the case with tabs at the top, we also need to make a custom `tabBarComponent`. Open `./src/scenes/home/bottom-home.component.tsx` file and paste the following code:
+Just like in the case with tabs at the top, we also need to make a custom `tabBar`. Open `./src/scenes/home/bottom-home.component.tsx` file and paste the following code:
 
 ```js
 import React from 'react';
@@ -290,14 +290,14 @@ const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
 
 const HomeBottomNavigator = (): React.ReactElement => (
-  <BottomTab.Navigator tabBarComponent={BottomHomeScreen}>
+  <BottomTab.Navigator tabBar={BottomHomeScreen}>
     <BottomTab.Screen name={AppRoute.TODO} component={TodoNavigator}/>
     <BottomTab.Screen name={AppRoute.PROFILE} component={ProfileNavigator}/>
   </BottomTab.Navigator>
 );
 
 export const HomeNavigator = (): React.ReactElement => (
-  <Drawer.Navigator contentComponent={DrawerHomeScreen}>
+  <Drawer.Navigator drawerContent={DrawerHomeScreen}>
     <Drawer.Screen name={AppRoute.HOME} component={HomeBottomNavigator}/>
     <Drawer.Screen name={AppRoute.ABOUT} component={AboutScreen}/>
   </Drawer.Navigator>
@@ -306,7 +306,7 @@ export const HomeNavigator = (): React.ReactElement => (
 
 In this example, we've implemented a Drawer Navigator with `createDrawerNavigator` and used it to display on the Home screen. We have also added `AboutScreen` to demonstrate navigation directly from the Drawer menu.
 
-Just like Top/Bottom tab navigators, the drawer navigator also has a special property for declaring custom drawer view. Use a `contentComponent` property to pass the custom view to the navigator. `Open ./src/scenes/home/drawer-home.component.tsx` file and add the following code:
+Just like Top/Bottom tab navigators, the drawer navigator also has a special property for declaring custom drawer view. Use a `drawerContent` property to pass the custom view to the navigator. `Open ./src/scenes/home/drawer-home.component.tsx` file and add the following code:
 
 ```js
 import React from 'react';
