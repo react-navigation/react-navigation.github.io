@@ -145,7 +145,7 @@ export const TodoScreen = (props): SafeAreaLayoutElement => {
 
 With the code above we render `TabBar` component with two tabs inside: one per each screen inside `TodoNavigator`. Then, we use the React Navigation state to pass `selectedIndex` and `onSelect` props to navigate between screens. So, when the user taps one of the tabs, the `TabBar` component calls `onTabSelect` function and this is the place where we need to navigate to the corresponding route.
 
-Finally, open [app.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/app.navigator.tsx) file and add the `TodoNavigator as a Home screen. Now you're able to navigate the home screen with todo tabs after sign in.
+Finally, open [app.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/app.navigator.tsx) file and add the `TodoNavigator` as a Home screen. Now you're able to navigate the home screen with todo tabs after sign in.
 
 ```js
 import React from 'react';
