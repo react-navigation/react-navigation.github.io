@@ -33,7 +33,7 @@ export const AuthNavigator = (): React.ReactElement => (
 );
 ```
 
-The syntax is simple. You just import `createXNavigator` from the navigator package of your choice and use `Navigator` and `Screen` components from the value returned by this function.
+To create a navigator, you import `createXNavigator` function from the navigator package of your choice and use `Navigator` and `Screen` components from the value it returns.
 
 Unlike the previous React Navigation versions, all the screens used inside a navigator are passed as child elements with wrapping it to a `Screen` component. If you need to set up additional navigator configuration like configuration of the header, you can simply pass corresponding props directly to the `Navigator` component.
 
