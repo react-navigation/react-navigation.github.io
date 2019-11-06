@@ -55,8 +55,8 @@ Open [./src/navigation/auth.navigator.tsx`](https://github.com/artyorsh/react-n
 ```js
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { SignInScreen, SignUpScreen, ResetPasswordScreen } from '@app-scenes/auth';
 import { AppRoute } from './app-routes';
+import { SignInScreen, SignUpScreen, ResetPasswordScreen } from '../scenes/auth';
 
 const Stack = createStackNavigator();
 
@@ -103,8 +103,8 @@ Open [./src/navigation/todo.navigator.tsx`](https://github.com/artyorsh/react-n
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { TodoScreen, TodoInProgressScreen, TodoDoneScreen } from '@app-scenes/todo';
 import { AppRoute } from './app-routes';
+import { TodoScreen, TodoInProgressScreen, TodoDoneScreen } from '../scenes/todo';
 
 const Stack = createStackNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -122,9 +122,9 @@ The code above will enable you to navigate with gestures between `In Progress` s
 ```js
 import React from 'react';
 import { TabBar, Tab, Divider } from 'react-native-ui-kitten';
-import { SafeAreaLayout, SaveAreaInset, SafeAreaLayoutElement } from '@app-components/safe-area-layout.component';
-import { Toolbar } from '@app-components/toolbar.component';
-import { DoneAllIcon, GridIcon } from '@app-assets/icons';
+import { SafeAreaLayout, SaveAreaInset, SafeAreaLayoutElement } from '../../components/safe-area-layout.component';
+import { Toolbar } from '../../components/toolbar.component';
+import { DoneAllIcon, GridIcon } from '../../assets/icons';
 
 export const TodoScreen = (props): SafeAreaLayoutElement => {
 
@@ -181,8 +181,8 @@ Let's start by creating another navigator for the second tab. The first one will
 ```js
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { ProfileScreen } from '@app-scenes/profile';
 import { AppRoute } from './app-routes';
+import { ProfileScreen } from '../scenes/profile';
 
 const Stack = createStackNavigator();
 
@@ -200,10 +200,10 @@ Now we need to somehow connect `TodoNavigator` with `ProfileNavigator` . The im
 ```js
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { BottomHomeScreen } from '@app-scenes/home';
 import { TodoNavigator } from './todo.navigator';
 import { ProfileNavigator } from './profile.navigator';
 import { AppRoute } from './app-routes';
+import { BottomHomeScreen } from '../scenes/home';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -220,8 +220,8 @@ Just like in the case with tabs at the top, we also need to make a custom `tabBa
 ```js
 import React from 'react';
 import { BottomNavigation, BottomNavigationTab, Divider } from 'react-native-ui-kitten';
-import { SafeAreaLayout, SafeAreaLayoutElement, SaveAreaInset } from '@app-components/safe-area-layout.component';
-import { LayoutIcon, PersonIcon } from '@app-assets/icons';
+import { SafeAreaLayout, SafeAreaLayoutElement, SaveAreaInset } from '../../components/safe-area-layout.component';
+import { LayoutIcon, PersonIcon } from '../../assets/icons';
 
 export const BottomHomeScreen = (props): SafeAreaLayoutElement => {
 
@@ -275,16 +275,16 @@ export const AppNavigator = (config): React.ReactElement => (
 
 At the final stage of this guide, we will describe how to create the drawer navigation. While the top and bottom tabs can be used to present the main product features, a drawer menu can be also used to direct a user to legal information about it, or simply contain quick actions like a logout.
 
-Usually, the drawer menu is available in app on the home screen, so let's add it to `HomeNavigator`. Open [./src/scenes/home/home.component.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/scenes/home/home.component.tsx) file and paste the following code:
+Usually, the drawer menu is available in app on the home screen, so let's add it to `HomeNavigator`. Open [./src/navigation/home.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/home.navigator.tsx) file and paste the following code:
 
 ```js
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { BottomHomeScreen, DrawerHomeScreen, AboutScreen } from '@app-scenes/home';
 import { TodoNavigator } from './todo.navigator';
 import { ProfileNavigator } from './profile.navigator';
 import { AppRoute } from './app-routes';
+import { BottomHomeScreen, DrawerHomeScreen, AboutScreen } from '../scenes/home';
 
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -311,9 +311,9 @@ Just like Top/Bottom tab navigators, the drawer navigator also has a special pro
 ```js
 import React from 'react';
 import { Drawer, DrawerElement, MenuItemType } from 'react-native-ui-kitten';
-import { InfoIcon, LogoutIcon } from '@app-assets/icons';
-import { AppRoute } from '@app-navigation/app-routes';
-import { SafeAreaLayout, SaveAreaInset} from '@app-components/safe-area-layout.component';
+import { AppRoute } from '../../navigation/app-routes';
+import { SafeAreaLayout, SaveAreaInset} from '../../components/safe-area-layout.component';
+import { InfoIcon, LogoutIcon } from '../../assets/icons';
 
 const drawerData: MenuItemType[] = [
   { icon: InfoIcon, title: 'About' },
@@ -352,9 +352,9 @@ The next thing to do is to modify the Todo screen by adding a menu icon to open 
 ```js
 import React from 'react';
 import { TabBar, Tab, Divider } from 'react-native-ui-kitten';
-import { SafeAreaLayout, SaveAreaInset, SafeAreaLayoutElement } from '@app-components/safe-area-layout.component';
-import { Toolbar } from '@app-components/toolbar.component';
-import { DoneAllIcon, GridIcon, MenuIcon } from '@app-assets/icons';
+import { SafeAreaLayout, SaveAreaInset, SafeAreaLayoutElement } from '../../components/safe-area-layout.component';
+import { Toolbar } from '../../components/toolbar.component';
+import { DoneAllIcon, GridIcon, MenuIcon } from '../../assets/icons';
 
 export const TodoScreen = (props): SafeAreaLayoutElement => {
 
