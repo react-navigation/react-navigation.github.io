@@ -75,7 +75,6 @@ In app.navigator.tsx file and replace the placeholder screen with Auth Navigator
 
 ```js
 import React from 'react';
-import { NavigationNativeContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AuthNavigator } from './auth.navigator';
 import { AppRoute } from './app-routes';
@@ -83,11 +82,9 @@ import { AppRoute } from './app-routes';
 const Stack = createStackNavigator();
 
 export const AppNavigator = (config): React.ReactElement => (
-  <NavigationNativeContainer>
-    <Stack.Navigator headerMode='none'>
-      <Stack.Screen name={AppRoute.AUTH} component={AuthNavigator}/>
-    </Stack.Navigator>
-  </NavigationNativeContainer>
+  <Stack.Navigator headerMode='none'>
+    <Stack.Screen name={AppRoute.AUTH} component={AuthNavigator}/>
+  </Stack.Navigator>
 );
 ```
 
@@ -152,7 +149,6 @@ Finally, open [app.navigator.tsx](https://github.com/artyorsh/react-navigation-e
 
 ```js
 import React from 'react';
-import { NavigationNativeContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AuthNavigator } from './auth.navigator';
 import { TodoNavigator } from './todo.navigator';
@@ -161,12 +157,10 @@ import { AppRoute } from './app-routes';
 const Stack = createStackNavigator();
 
 export const AppNavigator = (config): React.ReactElement => (
-  <NavigationNativeContainer>
-    <Stack.Navigator {...config} headerMode='none'>
-      <Stack.Screen name={AppRoute.AUTH} component={AuthNavigator}/>
-      <Stack.Screen name={AppRoute.HOME} component={TodoNavigator}/>
-    </Stack.Navigator>
-  </NavigationNativeContainer>
+  <Stack.Navigator {...config} headerMode='none'>
+    <Stack.Screen name={AppRoute.AUTH} component={AuthNavigator}/>
+    <Stack.Screen name={AppRoute.HOME} component={TodoNavigator}/>
+  </Stack.Navigator>
 );
 ```
 
@@ -251,7 +245,6 @@ Then, open [app.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-d
 
 ```js
 import React from 'react';
-import { NavigationNativeContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AuthNavigator } from './auth.navigator';
 import { HomeNavigator } from './home.navigator';
@@ -260,12 +253,10 @@ import { AppRoute } from './app-routes';
 const Stack = createStackNavigator();
 
 export const AppNavigator = (config): React.ReactElement => (
-  <NavigationNativeContainer>
-    <Stack.Navigator {...config} headerMode='none'>
-      <Stack.Screen name={AppRoute.AUTH} component={AuthNavigator}/>
-      <Stack.Screen name={AppRoute.HOME} component={HomeNavigator}/>
-    </Stack.Navigator>
-  </NavigationNativeContainer>
+  <Stack.Navigator {...config} headerMode='none'>
+    <Stack.Screen name={AppRoute.AUTH} component={AuthNavigator}/>
+    <Stack.Screen name={AppRoute.HOME} component={HomeNavigator}/>
+  </Stack.Navigator>
 );
 ```
 
