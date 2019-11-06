@@ -81,7 +81,7 @@ import { AppRoute } from './app-routes';
 
 const Stack = createStackNavigator();
 
-export const AppNavigator = (config): React.ReactElement => (
+export const AppNavigator = (): React.ReactElement => (
   <Stack.Navigator headerMode='none'>
     <Stack.Screen name={AppRoute.AUTH} component={AuthNavigator}/>
   </Stack.Navigator>
@@ -156,8 +156,8 @@ import { AppRoute } from './app-routes';
 
 const Stack = createStackNavigator();
 
-export const AppNavigator = (config): React.ReactElement => (
-  <Stack.Navigator {...config} headerMode='none'>
+export const AppNavigator = (props): React.ReactElement => (
+  <Stack.Navigator {...props} headerMode='none'>
     <Stack.Screen name={AppRoute.AUTH} component={AuthNavigator}/>
     <Stack.Screen name={AppRoute.HOME} component={TodoNavigator}/>
   </Stack.Navigator>
@@ -252,8 +252,8 @@ import { AppRoute } from './app-routes';
 
 const Stack = createStackNavigator();
 
-export const AppNavigator = (config): React.ReactElement => (
-  <Stack.Navigator {...config} headerMode='none'>
+export const AppNavigator = (props): React.ReactElement => (
+  <Stack.Navigator {...props} headerMode='none'>
     <Stack.Screen name={AppRoute.AUTH} component={AuthNavigator}/>
     <Stack.Screen name={AppRoute.HOME} component={HomeNavigator}/>
   </Stack.Navigator>
