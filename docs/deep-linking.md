@@ -129,6 +129,52 @@ This will result in something like:
         id: 42,
       },
     },
+  ]
+}
+```
+
+It's important to note that the state object must match the hierarchy of nested navigators. Otherwise the state will be discarded.
+
+Sometimes we'll have the target navigator nested in other navigators which aren't part of the deep link. In this case, specifying the mapping isn't sufficient and we need to account for the additional navigators as well. For example, let's say the navigator containing the `Catalog` screen is nested inside a screen named `Tabs` in another navigator. In this case, we'll need to modify the returned state object to include it. We can use the `getStateFromPath` option to achieve it:
+
+```js
+import { getStateFromPath } from '@react-navigation/core';
+
+// ...
+
+const { getInitialState } = useLinking(ref, {
+  prefixes: ['https://mychat.com', 'mychat://'],
+  config: {
+    Chat: 'feed/:sort',
+  },
+  getStateFromPath: (path, options) => {
+    const state = getStateFromPath(path, options);
+
+    return {
+      routes: [{ name: 'Tabs', state }],
+    };
+  },
+});
+```
+
+This will result in the following state object:
+
+```js
+{
+  routes: [
+    {
+      name: 'Tabs',
+      state: {
+        routes: [
+          {
+            name: 'Catalog',
+            params: {
+              id: 42,
+            },
+          },
+        ],
+      },
+    },
   ];
 }
 ```
@@ -224,17 +270,48 @@ Read the [Expo linking guide](https://docs.expo.io/versions/latest/guides/linkin
 
 Let's configure the native iOS app to open based on the `mychat://` URI scheme.
 
-In `SimpleApp/ios/SimpleApp/AppDelegate.m`:
+You'll need to link `RCTLinking` to your project by following the steps described here. To be able to listen to incoming app links, you'll need to add the following lines to `SimpleApp/ios/SimpleApp/AppDelegate.m`.
+
+If you're targeting iOS 9.x or newer:
 
 ```objc
 // Add the header at the top of the file:
 #import <React/RCTLinkingManager.h>
 
-// Add this above the `@end`:
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
-            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+// Add this above `@end`:
+- (BOOL)application:(UIApplication *)application
+   openURL:(NSURL *)url
+   options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-  return [RCTLinkingManager application:app openURL:url options:options];
+  return [RCTLinkingManager application:application openURL:url options:options];
+}
+```
+
+If you're targeting iOS 8.x or older, you can use the following code instead:
+
+```objc
+// Add the header at the top of the file:
+#import <React/RCTLinkingManager.h>
+
+// Add this above `@end`:
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+  return [RCTLinkingManager application:application openURL:url
+                      sourceApplication:sourceApplication annotation:annotation];
+}
+```
+
+If your app is using Universal Links, you'll need to add the following code as well:
+
+```objc
+// Add this above `@end`:
+- (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
+ restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
+{
+ return [RCTLinkingManager application:application
+                  continueUserActivity:userActivity
+                    restorationHandler:restorationHandler];
 }
 ```
 
@@ -295,18 +372,6 @@ adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/jane" com.
 ```
 
 ## Hybrid iOS Applications (Skip for RN only projects)
-
-If you're using React Navigation within a hybrid app - an iOS app that has both Swift/ObjC and React Native parts - you may be missing the `RCTLinkingIOS` subspec in your Podfile, which is installed by default in new RN projects. To add this, ensure your Podfile looks like the following:
-
-```pod
- pod 'React', :path => '../node_modules/react-native', :subspecs => [
-    . . . // other subspecs
-    'RCTLinkingIOS',
-    . . .
-  ]
-```
-
-## Disable deep linking
 
 If you're using React Navigation within a hybrid app - an iOS app that has both Swift/ObjC and React Native parts - you may be missing the `RCTLinkingIOS` subspec in your Podfile, which is installed by default in new RN projects. To add this, ensure your Podfile looks like the following:
 
