@@ -121,16 +121,14 @@ You can also customize how params are parsed, for example, if you parse the path
 This will result in something like:
 
 ```js
-{
+const state = {
   routes: [
     {
       name: 'Catalog',
-      params: {
-        id: 42,
-      },
+      params: { id: 42 },
     },
-  ]
-}
+  ],
+};
 ```
 
 It's important to note that the state object must match the hierarchy of nested navigators. Otherwise the state will be discarded.
@@ -160,7 +158,7 @@ const { getInitialState } = useLinking(ref, {
 This will result in the following state object:
 
 ```js
-{
+const state = {
   routes: [
     {
       name: 'Tabs',
@@ -168,15 +166,13 @@ This will result in the following state object:
         routes: [
           {
             name: 'Catalog',
-            params: {
-              id: 42,
-            },
+            params: { id: 42 },
           },
         ],
       },
     },
-  ];
-}
+  ],
+};
 ```
 
 If this doesn't satisfy your use case, the hook also accepts a `getStateFromPath` option where you can provide a custom function to convert the URL to a valid state object for more advanced use cases.
