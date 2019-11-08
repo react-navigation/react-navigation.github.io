@@ -33,52 +33,77 @@ React Navigation handles safe area in the default header. However, if you're usi
 
 For example, if I render nothing for the `header` or `tabBar`, nothing renders
 
-```jsx
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+<samp id="hidden-components" />
 
+```jsx
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { NavigationNativeContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function Demo() {
+  return (
+    <View
+      style={{ flex: 1, justifyContent: 'space-between', alignItems: 'center' }}
+    >
+      <Text>This is top text.</Text>
+      <Text>This is bottom text.</Text>
+    </View>
+  );
+}
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function App2() {
+export default function App() {
   return (
-    <NativeContainer>
+    <NavigationNativeContainer>
       <Stack.Navigator initialRouteName="Home" headerMode="none">
-        <Stack.Screen name="Settings" component={Settings} />
-        <Stack.Screen
-          name="Profile"
-          component={Profile}
-          options={{ title: 'John Doe' }}
-        />
         <Stack.Screen name="Home">
           {() => (
-            <Tab.Navigator initialRouteName="Feed" tabBar={() => null}>
-              <Tab.Screen name="Feed" component={Feed} />
-              <Tab.Screen name="Article" component={Article} />
-              <Tab.Screen name="Notifications">
-                {props => <Notifications {...props} />}
-              </Tab.Screen>
+            <Tab.Navigator
+              initialRouteName="Analitics"
+              tabBarComponent={() => null}
+            >
+              <Tab.Screen name="Analitics" component={Demo} />
+              <Tab.Screen name="Profile" component={Demo} />
             </Tab.Navigator>
           )}
         </Stack.Screen>
+
+        <Stack.Screen name="Settings" component={Demo} />
       </Stack.Navigator>
-    </NativeContainer>
+    </NavigationNativeContainer>
   );
+}
 ```
 
 ![Text hidden by iPhoneX UI elements](/docs/assets/iphoneX/02-iphonex-content-hidden.png)
 
 To fix this issue you can apply safe area insets on your content. This can be achieved easily by using the `SafeAreaView` component from the `react-native-safe-area-context` library:
 
-```jsx
-import { SafeAreaView } from 'react-native-safe-area-context';
+<samp id="safe-area-example" />
 
-function MyHomeScreen() {
+```jsx
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import SafeAreaView from 'react-native-safe-area-view';
+
+function Demo() {
   return (
-    <SafeAreaView>
-      <Text style={styles.paragraph}>This is top text.</Text>
-      <Text style={styles.paragraph}>This is bottom text.</Text>
+    <SafeAreaView
+      style={{ flex: 1, justifyContent: 'space-between', alignItems: 'center' }}
+    >
+      <Text>This is top text.</Text>
+      <Text>This is bottom text.</Text>
     </SafeAreaView>
+  );
+}
+
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <NavigationNativeContainer>{/*(...) */}</NavigationNativeContainer>
+    </SafeAreaProvider>
   );
 }
 ```
@@ -106,21 +131,21 @@ In some cases you might need more control over which paddings are applied. For e
 ```jsx
 import { useSafeArea } from 'react-native-safe-area-context';
 
-function MyHomeScreen() {
+function Demo() {
   const insets = useSafeArea();
-
   return (
     <View
-      style={[
-        styles.container,
-        {
-          paddingTop: insets.top,
-          paddingBottom: insets.bottom,
-        },
-      ]}
+      style={{
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
     >
-      <Text style={styles.paragraph}>This is top text.</Text>
-      <Text style={styles.paragraph}>This is bottom text.</Text>
+      <Text>This is top text.</Text>
+      <Text>This is bottom text.</Text>
     </View>
   );
 }
