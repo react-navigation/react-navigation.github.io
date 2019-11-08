@@ -4,6 +4,8 @@ title: Drawer navigation
 sidebar_label: Drawer navigation
 ---
 
+![Using drawer navigator](/docs/assets/navigators/drawer/drawer-demo.gif)
+
 Common pattern in navigation is to use drawer from left (sometimes right) site for navigating between screens.
 
 Before continuing, first install [`@react-navigation/drawer`](https://github.com/react-navigation/navigation-ex/tree/master/packages/drawer) following the guide on [Drawer Navigator's page](drawer-navigator.html).

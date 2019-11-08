@@ -143,6 +143,8 @@ function HomeIconWithBadge(props) {
 }
 ```
 
+![Tabs with badges](/docs/assets/navigators/tabs/tabs-badges.png)
+
 ## Jumping between tabs
 
 Switching from one tab to another has a familiar API &mdash; `navigation.navigate`.
