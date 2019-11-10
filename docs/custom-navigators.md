@@ -102,18 +102,18 @@ The `data` is available under the `data` property in the `event` object, i.e. `e
 
 The `target` property determines the screen that will receive the event. If the `target` property is omitted, the event is dispatched to all screens in the navigator.
 
-### `createNavigator`
+### `createNavigatorFactory`
 
-This function is used to create a Navigator and Screen pair. Custom navigators need to wrap the navigator component in `createNavigator` before exporting.
+This `createNavigatorFactory` function is used to create a function that will `Navigator` and `Screen` pair. Custom navigators need to wrap the navigator component in `createNavigatorFactory` before exporting.
 
 Example:
 
 ```js
-import { useNavigationBuilder, createNavigator } from '@react-navigation/core';
+import { useNavigationBuilder, createNavigatorFactory } from '@react-navigation/core';
 
 // ...
 
-export default createNavigator(TabNavigator);
+export default createNavigatorFactory(TabNavigator);
 ```
 
 ## Type-checking navigators
