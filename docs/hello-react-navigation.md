@@ -88,7 +88,11 @@ function App() {
 }
 ```
 
-Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home` route corresponds to the `HomeScreen` component, and the `Details` route corresponds to the `DetailsScreen` component. The initial route for the stack is the `Home` route.
+Now our stack has two _routes_, a `Home` route and a `Details` route. A route can be specified by using the `Screen` component. The `Screen` component accepts a `name` prop which corresponds to the name of the route we will use to navigate, and a `component` prop which corresponds to the component it'll render.
+
+Here, the `Home` route corresponds to the `HomeScreen` component, and the `Details` route corresponds to the `DetailsScreen` component. The initial route for the stack is the `Home` route.
+
+> Note: The `component` prop accepts component, not a render function. Don't pass a inline function (e.g. `component={() => <HomeScreen />}`), or your component will unmount and remount losing all state when the parent component re-renders. See [Passing additional props](#passing-additional-props) for alternatives.
 
 ### Specifying options
 
@@ -103,6 +107,21 @@ Each screen in the navigator can specify some options for the navigator, such as
 ```
 
 Sometimes we will want to specify the same options for all of the screens in the navigator. For that, we can pass a `screenOptions` prop to the navigator.
+
+### Passing additional props
+
+Sometimes we might want to pass additional props to a screen. We can do that with 2 approaches:
+
+1. Use [React context](https://reactjs.org/docs/context.html) and wrap the navigator with a context provider to pass data to the screens (recommended).
+2. Use a render callback for the screen instead of specifying a `component` prop:
+
+   ```js
+   <Stack.Screen name="Home">
+     {props => <HomeScreen {...props} extraData={someData} />}
+   </Stack.Screen>
+   ```
+
+  > Note: By default, React Navigation applies optimizations to screen components to prevent unnecessary renders. Using a render callback removes those optimizations. So if you use a render callback, you'll need to ensure that you use [`React.memo`](https://reactjs.org/docs/react-api.html#reactmemo) or [`React.PureComponent`](https://reactjs.org/docs/react-api.html#reactpurecomponent) for your screen components to prevent avoid performance issues.
 
 ## What's next?
 
