@@ -38,6 +38,44 @@
       "version-4.x-function-after-focusing-screen",
       "version-4.x-react-native-screens"
     ],
+    "API Reference": [
+      "version-4.x-navigation-prop",
+      "version-4.x-navigation-context",
+      "version-4.x-navigation-events",
+      {
+        "type": "subcategory",
+        "label": "Navigators",
+        "ids": [
+          "version-4.x-stack-navigator",
+          "version-4.x-stack-navigator-2.0",
+          "version-4.x-switch-navigator",
+          "version-4.x-animated-switch-navigator",
+          "version-4.x-drawer-navigator",
+          "version-4.x-bottom-tab-navigator",
+          "version-4.x-material-bottom-tab-navigator",
+          "version-4.x-material-top-tab-navigator"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Actions",
+        "ids": [
+          "version-4.x-navigation-actions",
+          "version-4.x-stack-actions",
+          "version-4.x-switch-actions",
+          "version-4.x-drawer-actions"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Helpers",
+        "ids": [
+          "version-4.x-with-navigation",
+          "version-4.x-with-navigation-focus",
+          "version-4.x-scrollables"
+        ]
+      }
+    ],
     "Build your own Navigator": [
       "version-4.x-custom-navigator-overview",
       "version-4.x-routers",
@@ -55,29 +93,6 @@
       "version-4.x-pitch",
       "version-4.x-alternatives",
       "version-4.x-contributing"
-    ]
-  },
-  "version-4.x-api": {
-    "API Reference": [
-      "version-4.x-api-reference",
-      "version-4.x-navigation-prop",
-      "version-4.x-navigation-actions",
-      "version-4.x-stack-actions",
-      "version-4.x-switch-actions",
-      "version-4.x-drawer-actions",
-      "version-4.x-stack-navigator",
-      "version-4.x-stack-navigator-2.0",
-      "version-4.x-switch-navigator",
-      "version-4.x-animated-switch-navigator",
-      "version-4.x-drawer-navigator",
-      "version-4.x-bottom-tab-navigator",
-      "version-4.x-material-bottom-tab-navigator",
-      "version-4.x-material-top-tab-navigator",
-      "version-4.x-with-navigation",
-      "version-4.x-with-navigation-focus",
-      "version-4.x-navigation-context",
-      "version-4.x-navigation-events",
-      "version-4.x-scrollables"
     ]
   }
 }

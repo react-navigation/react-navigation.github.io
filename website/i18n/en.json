@@ -9,10 +9,6 @@
         "title": "Alternative libraries",
         "sidebar_label": "Alternative libraries"
       },
-      "api-reference": {
-        "title": "API Reference",
-        "sidebar_label": "Overview"
-      },
       "app-containers": {
         "title": "App containers",
         "sidebar_label": "App containers"
@@ -881,10 +877,6 @@
         "title": "createAnimatedSwitchNavigator",
         "sidebar_label": "createAnimatedSwitchNavigator"
       },
-      "version-4.x/version-4.x-api-reference": {
-        "title": "API Reference",
-        "sidebar_label": "Overview"
-      },
       "version-4.x/version-4.x-app-containers": {
         "title": "App containers",
         "sidebar_label": "App containers"
@@ -1116,7 +1108,6 @@
     },
     "links": {
       "Docs": "Docs",
-      "API": "API",
       "Help": "Help",
       "Blog": "Blog"
     },
@@ -1156,7 +1147,6 @@
     "or|no description given": "or",
     "post a question to StackOverflow|no description given": "post a question to StackOverflow",
     "Read guides|no description given": "Read guides",
-    "Read API Reference|no description given": "Read API Reference",
     "Try the demo app|no description given": "Try the demo app",
     "React Navigation 5 has a new dynamic API|no description given": "React Navigation 5 has a new dynamic API",
     "Read about it here|no description given": "Read about it here",

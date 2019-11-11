@@ -54,11 +54,6 @@ class HomeSplash extends React.Component {
                     >
                       <translate>Read guides</translate>
                     </Button>
-                    <Button
-                      href={`/docs/${this.props.language}/api-reference.html`}
-                    >
-                      <translate>Read API Reference</translate>
-                    </Button>
                     <Button href="https://github.com/react-navigation/react-navigation/tree/master/example">
                       <translate>Try the demo app</translate>
                     </Button>
