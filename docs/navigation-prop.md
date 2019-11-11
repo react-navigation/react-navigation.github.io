@@ -161,15 +161,22 @@ Any options specified here are shallow merged with the options specified when de
 
 ## Navigation events
 
-Screens can add listeners on the `navigation` prop like in React Navigation. By default, `focus` and `blur` events are fired when focused screen changes:
+Screens can add listeners on the `navigation` prop like in React Navigation. By default, there are 2 events available:
+
+- `focus` - This event is emitted when the screen comes into focus
+- `blur` - This event is emitted when the screen goes out of focus
+
+Example:
 
 ```js
 function Profile({ navigation }) {
-  React.useEffect(() =>
-    navigation.addListener('focus', () => {
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
       // do something
-    })
-  );
+    });
+
+    return unsubscribe;
+  });
 
   return <ProfileContent />;
 }
@@ -177,9 +184,12 @@ function Profile({ navigation }) {
 
 The `navigation.addListener` method returns a function to remove the listener which can be returned as the cleanup function in an effect.
 
-Apart from `focus` and `blur`, each navigator can emit their own custom events. For example, stack navigator emits `transitionStart` and `transitionEnd` events. You can find details about the events emitted on the individual navigator's documentation.
+Each event listener receives an event object as it's argument. The event object contains following properties:
 
-See more details in [lifecycle events documentation](listen-lifecycle-events.md).
+- `data` - Additional data regarding the event passed by the navigator. This can be `undefined` if no data was passed.
+- `preventDefault` - Calling this method may prevent the default action performed by the action (such as switching tabs on `tabPress`). Support for preventing actions depends on the navigator and won't work for all events.
+
+Apart from `focus` and `blur`, each navigator can emit their own custom events. For example, stack navigator emits `transitionStart` and `transitionEnd` events, tab navigator emits `tabPress` event etc. You can find details about the events emitted on the individual navigator's documentation.
 
 ### `isFocused` - Query the focused state of the screen
 

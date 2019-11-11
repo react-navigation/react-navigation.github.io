@@ -49,11 +49,53 @@ We start on the `HomeScreen` and navigate to `DetailsScreen`. Then we use the ta
 
 ## React Navigation lifecycle events
 
-Now that we understand how React lifecycle methods work in React Navigation, let's answer the question we asked at the beginning: "How do we find out that a user is leaving it or coming back to it?"
+Now that we understand how React lifecycle methods work in React Navigation, let's answer the question we asked at the beginning: "How do we find out that a user is leaving (blur) it or coming back to it (focus)?"
 
-React Navigation emits events to screen components that subscribe to them. There are 2 different events that you can subscribe to: `focus` and `blur`. Read more about them in the [API reference](navigation-prop.html#addlistener-subscribe-to-updates-to-navigation-lifecycle).
+React Navigation emits events to screen components that subscribe to them. We can listen to `focus` and `blur` events to know when a screen comes into focus or goes out of focus respectively.
 
-Many of your use cases may be covered with the [`useFocusEffect`](use-focus-effect.html) hook or the [`useIsFocused`](use-is-focused.html) hook.
+Example:
+
+```js
+function Profile({ navigation }) {
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // Screen was focused
+      // Do something
+    });
+
+    return unsubscribe;
+  });
+
+  return <ProfileContent />;
+}
+```
+
+Read more about events in the [API reference](navigation-prop.html#navigation-events).
+
+Instead of adding event listeners manually, we can use the [`useFocusEffect`](use-focus-effect.html) hook to perform side effects. It's like React's `useEffect` hook, but it ties into the navigation lifecycle.
+
+Example:
+
+```js
+import { useFocusEffect } from '@react-navigation/core';
+
+function Profile() {
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
+
+  return <ProfileContent />;
+}
+```
+
+If you want to render different things based on if the screen is focused or not, you can use the [`useIsFocused`](use-is-focused.html) hook which returns a boolean indicating whether the screen is focused.
 
 ## Summary
 
