@@ -121,10 +121,6 @@
         "title": "Limitations",
         "sidebar_label": "Limitations"
       },
-      "listen-lifecycle-events": {
-        "title": "Know when a screen is focused and blurred",
-        "sidebar_label": "Know when a screen is focused and blurred"
-      },
       "localization": {
         "title": "Localization",
         "sidebar_label": "Localization"
@@ -1127,10 +1123,10 @@
     "categories": {
       "Fundamentals": "Fundamentals",
       "Guides": "Guides",
+      "API Reference": "API Reference",
       "Build your own Navigator": "Build your own Navigator",
       "Additional Resources": "Additional Resources",
       "Meta": "Meta",
-      "API Reference": "API Reference",
       "Related Resources": "Related Resources",
       "Assorted Guides": "Assorted Guides",
       "How do I do ...?": "How do I do ...?"

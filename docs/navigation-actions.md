@@ -144,9 +144,3 @@ navigation.dispatch({
 ```
 
 If the `source` property is explicitly set to `undefined`, it'll set the params for the focused route.
-
-## Navigator specific actions
-
-- StackNavigator - [StackActions](stack-actions.html)
-- TabNavigator - [TabActions](tab-actions.html)
-- DrawerNavigator - [DrawerActions](drawer-actions.html)

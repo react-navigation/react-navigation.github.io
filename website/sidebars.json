@@ -41,6 +41,44 @@
       "react-native-screens",
       "upgrading-from-4.x"
     ],
+    "API Reference": [
+      "api-reference",
+      "navigation-prop",
+      "navigation-context",
+      {
+        "type": "subcategory",
+        "label": "Navigators",
+        "ids": [
+          "stack-navigator",
+          "native-stack-navigator",
+          "drawer-navigator",
+          "bottom-tab-navigator",
+          "material-bottom-tab-navigator",
+          "material-top-tab-navigator"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Hooks",
+        "ids": [
+          "use-navigation",
+          "use-route",
+          "use-focus-effect",
+          "use-is-focused",
+          "use-scroll-to-top"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Actions",
+        "ids": [
+          "navigation-actions",
+          "stack-actions",
+          "drawer-actions",
+          "tab-actions"
+        ]
+      }
+    ],
     "Build your own Navigator": [
       "routers",
       "custom-navigators",
@@ -54,27 +92,5 @@
       "more-resources"
     ],
     "Meta": ["pitch", "alternatives", "contributing"]
-  },
-  "api": {
-    "API Reference": [
-      "api-reference",
-      "navigation-prop",
-      "stack-navigator",
-      "native-stack-navigator",
-      "drawer-navigator",
-      "bottom-tab-navigator",
-      "material-bottom-tab-navigator",
-      "material-top-tab-navigator",
-      "use-navigation",
-      "use-route",
-      "use-focus-effect",
-      "use-is-focused",
-      "use-scroll-to-top",
-      "navigation-context",
-      "navigation-actions",
-      "stack-actions",
-      "drawer-actions",
-      "tab-actions"
-    ]
   }
 }
