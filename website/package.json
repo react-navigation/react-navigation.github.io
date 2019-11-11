@@ -9,10 +9,10 @@
     "rename-version": "docusaurus-rename-version",
     "crowdin-upload": "crowdin --config ../crowdin.yaml upload sources --auto-update -b source",
     "crowdin-download": "crowdin --config ../crowdin.yaml download -b source",
-     "postinstall": "patch-package"
+    "postinstall": "patch-package"
   },
   "devDependencies": {
-    "docusaurus": "^1.12.0",
+    "docusaurus": "^1.14.0",
     "localtunnel": "^2.0.0"
   },
   "dependencies": {

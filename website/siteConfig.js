@@ -16,7 +16,6 @@ const siteConfig = {
   projectName: 'react-navigation.github.io',
   headerLinks: [
     { doc: 'getting-started', label: 'Docs' },
-    { doc: 'api-reference', label: 'API' },
     { page: 'help', label: 'Help' },
     { blog: true, label: 'Blog' },
   ],
@@ -41,7 +40,7 @@ const siteConfig = {
     'https://github.com/react-navigation/react-navigation.github.io/edit/source/docs/',
 
   gaTrackingId: 'UA-10128745-16',
-  docsSideNavCollapsible: false,
+  docsSideNavCollapsible: true,
   algolia: {
     apiKey: 'c967b4a1491b9cb486d3dca087b771e6',
     indexName: 'reactnavigation',

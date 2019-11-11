@@ -4,34 +4,6 @@
 }
 
 @media only screen and (min-width: 1024px) {
-  .mainContainer {
-    background: #f9f9f9;
-    padding: 0;
-  }
-
-  .docMainWrapper .mainContainer {
-    padding: 30px 0 !important;
-  }
-
-  .toc {
-    padding: 30px 0 !important;
-  }
-
-  .toc .toggleNav ul {
-    padding: 0 !important;
-  }
-
-  .onPageNav {
-    top: 70px;
-  }
-
-  .container.paddingTop {
-    padding-top: 70px;
-  }
-
-  .container.paddingBottom {
-    padding-bottom: 70px;
-  }
 }
 
 @media only screen and (max-width: 1023px) {
@@ -44,15 +16,25 @@
 }
 
 body {
+  background: #fff;
+}
+
+blockquote {
+  background-color: rgba(226, 232, 125, 0.2);
+  border-left: 5px solid rgba(226, 232, 125, 0.5);
+}
+
+pre code {
+  background-color: #f9f9f9 !important;
+  border-left: 4px solid #6b52ae;
+}
+
+.heroContainer {
   background: #f9f9f9;
 }
 
 .homeContainer {
   background: #fff;
-}
-
-h2 {
-  font-weight: normal;
 }
 
 .pluginRowBlock .button {
@@ -66,20 +48,8 @@ h2 {
   color: #6b52ae;
 }
 
-h2 p {
+.headerTitleWithLogo {
   font-weight: 500;
-  color: rgba(0, 0, 0, 0.7);
-}
-
-article h1 {
-  margin-top: 25px;
-  margin-bottom: 25px;
-  font-weight: normal;
-  text-decoration: underline;
-}
-
-article h2 {
-  margin-top: 16px;
 }
 
 .projectTitle {
@@ -91,25 +61,11 @@ article h2 {
   margin-top: 0.4em;
 }
 
-h1.postHeaderTitle {
-}
-
-blockquote {
-  background-color: rgba(226, 232, 125, 0.1);
-  border-left: 5px solid rgba(226, 232, 125, 0.3);
-}
-
 .run-code-button {
   margin-top: -25px;
   margin-bottom: 5px;
   display: inline-block;
 }
-
-pre code {
-  background-color: #fff;
-  border-left: 4px solid #6b52ae;
-}
-
 .navWrapper li {
   word-wrap: normal;
 }
