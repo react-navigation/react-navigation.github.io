@@ -86,11 +86,6 @@ class Footer extends React.Component {
               Getting Started
             </a>
             <a
-              href={`${this.props.config.baseUrl}docs/${this.props.language}/api-reference.html`}
-            >
-              API Reference
-            </a>
-            <a
               href={`${this.props.config.baseUrl}docs/${this.props.language}/custom-navigator-overview.html`}
             >
               Building your own Navigator

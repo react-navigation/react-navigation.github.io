@@ -11,6 +11,4 @@ The rest of the documentation is organized around specific use cases, so you can
 
 While most users won't need to do this, if you are curious and want to learn more about how React Navigation works, it's recommended to work through the "Build your own Navigator" section.
 
-Lastly, you might want to bookmark the [API reference](api-reference.html) page for future reference.
-
 Good luck!

@@ -38,6 +38,44 @@
       "version-3.x-web-support",
       "version-3.x-function-after-focusing-screen"
     ],
+    "API Reference": [
+      "version-3.x-navigation-prop",
+      "version-3.x-navigation-context",
+      "version-3.x-navigation-events",
+      {
+        "type": "subcategory",
+        "label": "Navigators",
+        "ids": [
+          "version-3.x-stack-navigator",
+          "version-3.x-stack-navigator-2.0",
+          "version-3.x-switch-navigator",
+          "version-3.x-animated-switch-navigator",
+          "version-3.x-drawer-navigator",
+          "version-3.x-bottom-tab-navigator",
+          "version-3.x-material-bottom-tab-navigator",
+          "version-3.x-material-top-tab-navigator"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Actions",
+        "ids": [
+          "version-3.x-navigation-actions",
+          "version-3.x-stack-actions",
+          "version-3.x-switch-actions",
+          "version-3.x-drawer-actions"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Helpers",
+        "ids": [
+          "version-3.x-with-navigation",
+          "version-3.x-with-navigation-focus",
+          "version-3.x-scrollables"
+        ]
+      }
+    ],
     "Build your own Navigator": [
       "version-3.x-custom-navigator-overview",
       "version-3.x-routers",
@@ -54,28 +92,6 @@
       "version-3.x-pitch",
       "version-3.x-alternatives",
       "version-3.x-contributing"
-    ]
-  },
-  "version-3.x-api": {
-    "API Reference": [
-      "version-3.x-api-reference",
-      "version-3.x-navigation-prop",
-      "version-3.x-navigation-actions",
-      "version-3.x-stack-actions",
-      "version-3.x-switch-actions",
-      "version-3.x-drawer-actions",
-      "version-3.x-stack-navigator",
-      "version-3.x-switch-navigator",
-      "version-3.x-animated-switch-navigator",
-      "version-3.x-drawer-navigator",
-      "version-3.x-tab-navigator",
-      "version-3.x-bottom-tab-navigator",
-      "version-3.x-material-bottom-tab-navigator",
-      "version-3.x-material-top-tab-navigator",
-      "version-3.x-with-navigation",
-      "version-3.x-with-navigation-focus",
-      "version-3.x-navigation-events",
-      "version-3.x-scrollables"
     ]
   }
 }
