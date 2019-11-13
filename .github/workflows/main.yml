@@ -16,16 +16,23 @@ jobs:
     - name: Use Node.js 10
       uses: actions/setup-node@v1
       with:
-        version: 10
-
-    - name: Use Yarn
-      run: |
-        curl -o- -L https://yarnpkg.com/install.sh | bash
+        node-version: 10
 
     - name: Use crowdin
       run: |
-        wget https://artifacts.crowdin.com/repo/deb/crowdin.deb -O crowdin.deb
+        wget -c https://artifacts.crowdin.com/repo/deb/crowdin.deb -O crowdin.deb
         sudo dpkg -i crowdin.deb
+
+    - name: Get yarn cache
+      id: yarn-cache
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+
+    - uses: actions/cache@v1
+      with:
+        path: ${{ steps.yarn-cache.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
 
     - name: Install dependencies
       run: |
@@ -39,7 +46,7 @@ jobs:
         yarn --cwd website crowdin-upload
         yarn --cwd website crowdin-download
 
-    - name: Publish
+    - name: Publish to Github pages
       env:
         GITHUB_TOKEN: ${{ secrets.DEPLOY_GITHUB_TOKEN }}
         GITHUB_EMAIL: ${{ secrets.DEPLOY_GITHUB_EMAIL }}
