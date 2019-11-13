@@ -74,6 +74,12 @@ public class MainActivity extends ReactActivity {
 }
 ```
 
+Then add the following at the top of your entry file, such as `index.js` or `App.js`:
+
+```js
+import 'react-native-gesture-handler'
+```
+
 Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
 
 ## API Definition

@@ -139,6 +139,12 @@ public class MainActivity extends ReactActivity {
 }
 ```
 
+Then add the following at the top of your entry file, such as `index.js` or `App.js`:
+
+```js
+import 'react-native-gesture-handler'
+```
+
 Now you are ready to build and run your app on the device/simulator.
 
 Continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
