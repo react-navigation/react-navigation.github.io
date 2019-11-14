@@ -70,14 +70,150 @@ export default function App() {
 
 When we set the `options` directly on `Screen` components containing the `HomeStack` and `SettingsStack` component, it allows us to control the options for its parent navigator when its used as a screen component. In this case, the options on our stack components configure the label in the tab navigator that renders the stacks.
 
-## A stack contains a tab navigator and you want to set the title on the stack header
+## Setting parent screen options based on child navigator's state
 
-> TODO: We haven't written this guide yet. Please check back later.
+Imagine the following configuration:
 
-## A tab navigator contains a stack and you want to hide the tab bar on specific screens
+```js
+const Tab = createBottomTabNavigator();
 
-> TODO: We haven't written this guide yet. Please check back later.
+function HomeTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Feed" component={FeedScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Account" component={AccountScreen} />
+    </Tab.Navigator>
+  );
+}
 
-## A drawer has a stack inside of it and you want to lock the drawer on certain screens
+const Stack = createStackNavigator();
 
-> TODO: We haven't written this guide yet. Please check back later.
+function App() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeTabs} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
+    </Stack.Navigator>
+  );
+}
+```
+
+If we were to set the `headerTitle` with `options` for the `FeedScreen`, this would not work. This is because `App` stack will only look at its immediate children for configuration: `HomeTabs` and `SettingsScreen`.
+
+But we can determine the `headerTitle` option based on the navigation state of our tab navigator using the `route.state` property. Let's create a function to get the title from `route.state` first:
+
+```js
+function getHeaderTitle(route) {
+  // Access the tab navigator's state using `route.state`
+  const routeName = route.state
+    ? // Get the currently active route name in the tab navigator
+      route.state.routes[route.state.index].name
+    : // If state doesn't exist, we need to default to the initial screen
+      // In our case, it's "Feed" as that's the first screen inside the navigator
+      'Feed';
+
+  switch (routeName) {
+    case 'Feed':
+      return 'News feed';
+    case 'Profile':
+      return 'My profile';
+    case 'Account':
+      return 'My account';
+  }
+}
+```
+
+Then we can use this function in 2 ways:
+
+1. Using `options` prop on `Screen` (recommended):
+
+   ```js
+   <Stack.Screen
+     name="Home"
+     component={HomeTabs}
+     options={({ route }) => ({
+       headerTitle: getHeaderTitle(route),
+     })}
+   />
+   ```
+
+2. Using `navigation.setOptions`:
+
+   ```js
+   function HomeTabs({ navigation, route }) {
+     navigation.setOptions({ headerTitle: getHeaderTitle(route) });
+
+     return (
+       <Tab.Navigator>
+         <Tab.Screen name="Feed" component={FeedScreen} />
+         <Tab.Screen name="Profile" component={ProfileScreen} />
+         <Tab.Screen name="Account" component={AccountScreen} />
+       </Tab.Navigator>
+     );
+   }
+   ```
+
+So what's happening here? The `route` prop contains a `state` property which refers to the child navigator's state (in this case it's the tab navigator since that's what we're rendering). We are getting the value of the currently active route name from this state and setting an appropriate title for the header.
+
+> Note: The `route.state` property may not exist at all. This will always happen if we have never navigated inside the tab navigator. So it's very important to handle this case, otherwise, your app will crash.
+
+This approach can be used anytime you want to set options for a parent navigator based on a child navigator's state. Common use cases are:
+
+1. Show tab title in stack header: a stack contains a tab navigator and you want to set the title on the stack header (above example)
+2. Show screens without tab bar: a tab navigator contains a stack and you want to hide the tab bar on specific screens
+3. Lock drawer on certain screens: a drawer has a stack inside of it and you want to lock the drawer on certain screens
+
+In many cases, similar behavior can be achieved by reorganizing our navigators. We usually recommend this option if it fits your use case.
+
+For example, for the above use case, instead of adding a tab navigator inside a stack navigator, we can add a stack navigator inside each of the tabs.
+
+```js
+const FeedStack = createStackNavigator();
+
+function FeedStackScreen() {
+  return (
+    <FeedStack.Navigator>
+      <FeedStack.Screen name="Feed" component={FeedScreen} />
+      {/* other screens */}
+    </FeedStack.Navigator>
+  );
+}
+
+const ProfileStack = createStackNavigator();
+
+function ProfileStackScreen() {
+  return (
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen name="Profile" component={ProfileScreen} />
+      {/* other screens */}
+    </ProfileStack.Navigator>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+function HomeTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Feed" component={FeedStackScreen} />
+      <Tab.Screen name="Profile" component={ProfileStackScreen} />
+    </Tab.Navigator>
+  );
+}
+
+const RootStack = createStackNavigator();
+
+function App() {
+  return (
+    <RootStack.Navigator>
+      <RootStack.Screen name="Home" component={HomeTabs} />
+      <RootStack.Screen name="Settings" component={SettingsScreen} />
+    </RootStack.Navigator>
+  );
+}
+```
+
+Additionally, this lets you push new screens to the feed and profile stacks without hiding the tab bar by adding more routes to those stacks.
+
+If you want to push screens on top of the tab bar (i.e. that don't show the tab bar), then you can add them to the `App` stack instead of adding them into the screens inside the tab navigator.

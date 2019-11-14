@@ -21,3 +21,5 @@ export default function MyText() {
   return <Text>{route.params.caption}</Text>;
 }
 ```
+
+See the documentation for the [`route` prop](route-prop.md) for more info.

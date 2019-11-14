@@ -28,3 +28,5 @@ export default function MyBackButton() {
   );
 }
 ```
+
+See the documentation for the [`navigation` prop](navigation-prop.md) for more info.
