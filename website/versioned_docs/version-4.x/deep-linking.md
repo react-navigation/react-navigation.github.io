@@ -82,11 +82,11 @@ First, you will want to specify a URL scheme for your app. This corresponds to t
 Next, let's configure our navigation container to extract the path from the app's incoming URI.
 
 ```js
-import * as Expo from 'expo';
+import { Linking } from 'expo';
 
 const SimpleApp = createAppContainer(createStackNavigator({...}));
 
-const prefix = Expo.Linking.makeUrl('/');
+const prefix = Linking.makeUrl('/');
 
 const MainApp = () => <SimpleApp uriPrefix={prefix} />;
 ```
