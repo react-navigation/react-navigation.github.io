@@ -156,7 +156,7 @@ Then we can use this function in 2 ways:
 
 So what's happening here? The `route` prop contains a `state` property which refers to the child navigator's state (in this case it's the tab navigator since that's what we're rendering). We are getting the value of the currently active route name from this state and setting an appropriate title for the header.
 
-> Note: The `route.state` property may not exist at all. This will always happen if we have never navigated inside the tab navigator. So it's very important to handle this case, otherwise your app will crash.
+> Note: The `route.state` property may not exist at all. This will always happen if we have never navigated inside the tab navigator. So it's very important to handle this case, otherwise, your app will crash.
 
 This approach can be used anytime you want to set options for a parent navigator based on a child navigator's state. Common use cases are:
 
