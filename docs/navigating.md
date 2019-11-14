@@ -91,6 +91,8 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 />
 ```
 
+![Stack navigation pushing routes to stack](/docs/assets/navigators/stack/push_stack_nav-demo.gif)
+
 Each time you call `push` we add a new route to the navigation stack. When you call `navigate` it first tries to find an existing route with that name, and only pushes a new route if there isn't yet one on the stack.
 
 ## Going back

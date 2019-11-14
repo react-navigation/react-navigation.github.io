@@ -82,8 +82,7 @@
       "routers",
       "custom-navigators",
       "custom-routers",
-      "navigation-views",
-      "transitioner"
+      "navigation-views"
     ],
     "Additional Resources": [
       "supported-react-native-versions",

@@ -13,6 +13,8 @@ const DEPS_VERSIONS = {
     '@react-navigation/bottom-tabs@5.0.0-alpha.16',
     '@react-navigation/drawer@5.0.0-alpha.17',
     '@react-native-community/masked-view@^0.1.1',
+    'react-native-safe-area-context@~0.3.6',
+    'react-native-safe-area-view@^1.0.0',
   ],
 };
 

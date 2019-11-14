@@ -4,6 +4,8 @@ title: Opening a full-screen modal
 sidebar_label: Opening a full-screen modal
 ---
 
+![Modal shown on screen](/docs/assets/modal/modal-demo.gif)
+
 A modal displays content that temporarily blocks interactions with the main view.
 
 A modal is like a popup &mdash; it's not part of your primary navigation flow &mdash; it usually has a different transition, a different way to dismiss it, and is intended to focus on one particular piece of content or interaction.

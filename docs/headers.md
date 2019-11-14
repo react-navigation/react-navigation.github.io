@@ -105,6 +105,8 @@ function StackScreen() {
 }
 ```
 
+![Custom header styles](/docs/assets/headers/custom_headers.png)
+
 There are a couple of things to notice here:
 
 1. On iOS, the status bar text and icons are black, and this doesn't look great over a dark-colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.html).

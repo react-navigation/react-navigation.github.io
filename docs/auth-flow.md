@@ -22,17 +22,17 @@ This is the behavior that we want from the authentication flow: when users sign 
 In our component, we'll keep 2 states:
 
 - `isLoading` - We set this to `true` when we're trying to check if we already have a token saved in `AsyncStorage`
-- `userToken` - The token for the user. If it's there, we assume the user is logged in, otherwise not.
+- `userToken` - The token for the user. If it's non-null, we assume the user is logged in, otherwise not.
 
 So our component will look like this:
 
 ```js
 import * as React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { AsyncStorage } from 'react-native';
 
 export default function App({ navigation }) {
   const [isLoading, setIsLoading] = React.useState(true);
-  const [userToken, setUserToken] = React.useState(undefined);
+  const [userToken, setUserToken] = React.useState(null);
 
   React.useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
@@ -65,16 +65,18 @@ In our navigator, we can conditionally render appropriate screens. For our case,
 
 So our navigator will look like:
 
+<samp id="auth-flow" />
+
 ```js
 return (
   <Stack.Navigator>
     {isLoading ? (
       // We haven't finished checking for the token yet
       <Stack.Screen name="Splash" component={SplashScreen} />
-    ) : userToken === undefined ? (
-      // Notoken found, user isn't signed in
+    ) : userToken === null ? (
+      // No token found, user isn't signed in
       <Stack.Screen name="SignIn">
-        {() => <SignInScreen onSignIn={setUserToken} />}
+        {() => <SignInScreen setUserToken={setUserToken} />}
       </Stack.Screen>
     ) : (
       // User is signed in
@@ -87,8 +89,8 @@ return (
 In the above code snippet, we're conditionally defining screens:
 
 - `Splash` screen is only defined if `isLoading` is `true`
-- `SignIn` screen is only defined if `userToken` is `undefined`
-- `Home` screen is only defined if `userToken` is defined
+- `SignIn` screen is only defined if `userToken` is `null`
+- `Home` screen is only defined if `userToken` is non-null
 
 This takes advantage of a new feature in React Navigation: being able to dynamically define and alter the screen definitions of a navigator based on props or state. The example shows stack navigator, but you can use the same approach with any navigator.
 
@@ -107,16 +109,16 @@ Another advantage of this approach is that all the screens are still under the s
 
 ## Fill in other components
 
-We're conditionally defining one screen for each case here. But you could define multiple screens here too. For example, you probably want to defined password reset, signup, etc screens as well when the user isn't signed in. Similarly for your app, you probably have more than one screen. We can use `React.Fragment` to define multiple screens:
+We're conditionally defining one screen for each case here. But you could define multiple screens here too. For example, you probably want to defined password reset, signup, etc screens as well when the user isn't signed in. Similarly for your app, you probably have more than one screen. We can use `React.Fragment` - to define multiple screens:
 
 ```js
-userToken === undefined ? (
+userToken === null ? (
   <>
     <Stack.Screen name="SignIn">
       {() => <SignInScreen onSignIn={setUserToken} />}
     </Stack.Screen>
     <Stack.Screen name="SignUp">
-      {() => <SignUpScreen onSignIn={setUserToken} />}
+      {() => <SignUpScreen setUserToken={setUserToken} />}
     </Stack.Screen>
     <Stack.Screen name="ResetPassword" component={ResetPassword} />
   </>
@@ -133,16 +135,14 @@ We won't talk about how to implement the text inputs and buttons for the authent
 ```js
 function SignInScreen({ setUserToken }) {
   return (
-    <View style={styles.content}>
-      <TextInput placeholder="Username" style={styles.input} />
-      <TextInput placeholder="Password" secureTextEntry style={styles.input} />
+    <View>
+      <TextInput placeholder="Username" />
+      <TextInput placeholder="Password" secureTextEntry />
       <Button
+        title="Sign in"
         mode="contained"
         onPress={() => setUserToken('token')}
-        style={styles.button}
-      >
-        Sign in
-      </Button>
+      />
     </View>
   );
 }

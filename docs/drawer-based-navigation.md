@@ -4,39 +4,51 @@ title: Drawer navigation
 sidebar_label: Drawer navigation
 ---
 
+![Using drawer navigator](/docs/assets/navigators/drawer/drawer-demo.gif)
+
 Common pattern in navigation is to use drawer from left (sometimes right) site for navigating between screens.
 
 Before continuing, first install [`@react-navigation/drawer`](https://github.com/react-navigation/navigation-ex/tree/master/packages/drawer) following the guide on [Drawer Navigator's page](drawer-navigator.html).
 
 ## Minimal example of drawer-based navigation
 
-To use this drawer navigator, import it from `@react-navigation/drawer`:
+To use this drawer navigator, import it from `@react-navigation/drawer`:  
+(swipe right to open)
+<samp id="drawer-based-navigation" />
 
 ```js
+import * as React from 'react';
+import { Button, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationNativeContainer } from '@react-navigation/native';
 
-const Drawer = createDrawerNavigator();
-
-function MyHomeScreen({ navigation }) {
+function HomeScreen({ navigation }) {
   return (
-    <Button
-      onPress={() => navigation.navigate('Notifications')}
-      title="Go to notifications"
-    />
+    <View style={{ flex: 1, flexDirection: 'column-reverse' }}>
+      <Button
+        onPress={() => navigation.navigate('Notifications')}
+        title="Go to notifications"
+      />
+    </View>
   );
 }
 
-function MyNotificationsScreen({ navigation }) {
-  return <Button onPress={() => navigation.goBack()} title="Go back home" />;
+function NotificationsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, flexDirection: 'column-reverse' }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    </View>
+  );
 }
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <NavigationNativeContainer>
-      <Drawer.Navigator initialRouteName="Feed">
-        <Drawer.Screen name="Home" component={MyHomeScreen} />
-        <Drawer.Screen name="Notifications" component={MyNotificationsScreen} />
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
       </Drawer.Navigator>
     </NavigationNativeContainer>
   );

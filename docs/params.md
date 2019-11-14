@@ -61,6 +61,8 @@ function DetailsScreen({ route, navigation }) {
 }
 ```
 
+![Screen with passed parameters](/docs/assets/navigators/passing_params.png)
+
 ## Summary
 
 - `navigate` and `push` accept an optional second argument to let you pass parameters to the route you are navigating to. For example: `navigation.navigate('RouteName', {paramName: 'value'})`.
