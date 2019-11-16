@@ -220,8 +220,8 @@ Function that returns a React element to display as the tab bar.
 
 An object containing the props for the tab bar component. It can contain the following properties:
 
-- `activeTintColor` - Label and icon color of the active tab.
-- `inactiveTintColor` - Label and icon color of the inactive tab.
+- `activeTintColor` - Label and icon color of the active tab (Applicable only if the color attribute is not mentioned in label style object).
+- `inactiveTintColor` - Label and icon color of the inactive tab (Applicable only if the color attribute is not mentioned in label style object).
 - `showIcon` - Whether to show icon for tab, default is false.
 - `showLabel` - Whether to show label for tab, default is true.
 - `upperCaseLabel` - Whether to make label uppercase, default is true.
