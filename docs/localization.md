@@ -36,7 +36,7 @@ console.log(Localization.locale);
 Next let's store our `locale` in the state of our root app component and then thread it through `LocalizationContext` to make it available throughout our app.
 
 ```js
-export const LocalizationContext = React,createContext();
+export const LocalizationContext = React.createContext();
 
 export default function App() {
   const [locale, setLocale] = React.useState(Localization.locale);
