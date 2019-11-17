@@ -365,9 +365,9 @@ String or a function that given `{ focused: boolean, color: string }` returns a 
 
 Function, that given `{ focused: boolean, color: string, size: number }` returns a React.Node, to display in drawer sidebar
 
-#### `drawerLockMode`
+#### `gestureEnabled`
 
-Specifies the [lock mode](https://facebook.github.io/react-native/docs/drawerlayoutandroid.html#drawerlockmode) of the drawer.
+Whether you can use gestures to open or close the drawer. Defaults to `true` on iOS, `false` on Android.
 
 ### Events
 

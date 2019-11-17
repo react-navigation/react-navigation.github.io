@@ -96,11 +96,11 @@ Whether to show or hide the header for the screen. The header is shown by defaul
 
 #### `headerHideBackButton`
 
-Boolean indicating whether to hide the elevation shadow on the header. Only supported on Android.
+Boolean indicating whether to hide the back button in header. Only supported on Android.
 
 #### `headerHideShadow`
 
-Boolean indicating whether to hide the elevation shadow on the header. Only supported on Android.
+Boolean indicating whether to hide the elevation shadow on the header.
 
 #### `headerTitle`
 
@@ -109,6 +109,10 @@ String to be used by the header as title string. Defaults to scene `title`.
 #### `headerBackTitle`
 
 Title string used by the back button on iOS. Defaults to the previous scene's `headerTitle`.
+
+### `headerBackTitleVisible`
+
+Whether the back button title should be visible or not. Defaults to `true`. Only supported on iOS.
 
 #### `headerRight`
 
