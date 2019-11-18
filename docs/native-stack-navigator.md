@@ -124,7 +124,11 @@ Boolean indicating whether the navigation bar is translucent. Only supported on 
 
 #### `headerLargeTitle`
 
-Boolean to set native property to prefer large title header (like in iOS setting). Only supported on iOS.
+Boolean to set native property to prefer large title header (like in iOS setting).
+
+For large title to collapse on scroll, the content of the screen should be wrapped in a scrollable view such as `ScrollView` or `FlatList`. If the scrollable area doesn't fill the screen, the large title won't collapse on scroll.
+
+Only supported on iOS.
 
 #### `headerTintColor`
 
