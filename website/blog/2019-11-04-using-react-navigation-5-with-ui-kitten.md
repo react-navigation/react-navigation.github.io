@@ -438,11 +438,11 @@ The new React Navigation has great TypeScript support and exports type definitio
 Let's add some type definitions for Auth screens. For this purpose, open [./src/navigation/auth.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/auth.navigator.tsx) and paste the following code:
 
 ```js
-import { ParamListBase, RouteProp } from '@react-navigation/core';
+import { RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { AppRoute } from './app-routes';
 
-interface AuthNavigatorParams extends ParamListBase {
+type AuthNavigatorParams = {
   [AppRoute.SIGN_IN]: undefined;
   [AppRoute.SIGN_UP]: undefined;
   [AppRoute.RESET_PASSWORD]: undefined;
