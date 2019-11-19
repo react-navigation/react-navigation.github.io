@@ -4,7 +4,8 @@ author: Artur Yorsh
 authorURL: https://twitter.com/artyorsh
 ---
 
-The complete step-by-step guide on using new React Navigation API.
+This is a guest post by the [UI Kitten](http://akveo.github.io/react-native-ui-kitten) team. If you like this guide, checkout UI Kitten for more!
+In this blog post, we'll show a step-by-step guide on using React Navigation 5 with UI Kitten.
 
 ## Introduction
  
@@ -71,7 +72,7 @@ export const AuthNavigator = (): React.ReactElement => (
 
 In this example, we're using a `createStackNavigator` function to create simple stack navigation between Sign In, Sign Up and Reset Password screens. Under `Stack Navigator` we mean the default navigation behavior between screens: with slide-from-right animation on iOS, and slide-in-top on Android.
 
-In app.navigator.tsx file and replace the placeholder screen with Auth Navigator. This will make authentication screens to be the starter point of your app.
+In [./src/navigation/app.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/app.navigator.tsx) file and replace the placeholder screen with Auth Navigator. This will make authentication screens to be the starter point of your app.
 
 ```js
 import React from 'react';
@@ -98,44 +99,60 @@ Open [./src/navigation/todo.navigator.tsx`](https://github.com/artyorsh/react-n
 
 ```js
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { AppRoute } from './app-routes';
-import { TodoScreen, TodoInProgressScreen, TodoDoneScreen } from '../scenes/todo';
+import { TodoTabBar, TodoInProgressScreen, TodoDoneScreen } from '../scenes/todo';
+import { DoneAllIcon, GridIcon } from '../assets/icons';
 
-const Stack = createStackNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
 export const TodoNavigator = (): React.ReactElement => (
-  <TopTab.Navigator tabBar={TodoScreen}>
-    <TopTab.Screen name={AppRoute.TODO_IN_PROGRESS} component={TodoInProgressScreen}/>
-    <TopTab.Screen name={AppRoute.TODO_DONE} component={TodoDoneScreen}/>
+  <TopTab.Navigator tabBar={props => <TodoTabBar {...props} />}>
+    <TopTab.Screen
+      name={AppRoute.TODO_IN_PROGRESS}
+      component={TodoInProgressScreen}
+      options={{ title: 'IN PROGRESS', tabBarIcon: GridIcon }}
+    />
+    <TopTab.Screen
+      name={AppRoute.TODO_DONE}
+      component={TodoDoneScreen}
+      options={{ title: 'DONE', tabBarIcon: DoneAllIcon }}
+    />
   </TopTab.Navigator>
 );
 ```
 
-The code above will enable you to navigate with gestures between `In Progress` screen and `Done` screen, but not set up the Tab Bar. Open [./src/scenes/todo/todo.component.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/scenes/todo/todo.component.tsx) file and paste the following code:
+The code above will enable you to navigate with gestures between `In Progress` screen and `Done` screen, but not set up the Tab Bar. Open [./src/scenes/todo/todo-tab-bar.component.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/scenes/todo/todo-tab-bar.component.tsx) file and paste the following code:
 
 ```js
 import React from 'react';
-import { TabBar, Tab, Divider } from 'react-native-ui-kitten';
+import { TabBar, Tab, Divider, TabElement } from 'react-native-ui-kitten';
 import { SafeAreaLayout, SaveAreaInset, SafeAreaLayoutElement } from '../../components/safe-area-layout.component';
 import { Toolbar } from '../../components/toolbar.component';
-import { DoneAllIcon, GridIcon } from '../../assets/icons';
 
-export const TodoScreen = (props): SafeAreaLayoutElement => {
+export const TodoTabBar = (props): SafeAreaLayoutElement => {
 
   const onTabSelect = (index: number): void => {
-    const { [index]: selectedTabRoute } = props.state.routeNames;
+    const selectedTabRoute: string = props.state.routeNames[index];
     props.navigation.navigate(selectedTabRoute);
+  };
+
+  const createNavigationTabForRoute = (route): TabElement => {
+    const { options } = props.descriptors[route.key];
+    return (
+      <Tab
+        key={route.key}
+        title={options.title}
+        icon={options.tabBarIcon}
+      />
+    );
   };
 
   return (
     <SafeAreaLayout insets={SaveAreaInset.TOP}>
       <Toolbar title='React Navigation Ex 🐱'/>
       <TabBar selectedIndex={props.state.index} onSelect={onTabSelect}>
-        <Tab icon={GridIcon} title='IN PROGRESS'/>
-        <Tab icon={DoneAllIcon} title='DONE'/>
+        {props.state.routes.map(createNavigationTabForRoute)}
       </TabBar>
       <Divider/>
     </SafeAreaLayout>
@@ -197,31 +214,50 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TodoNavigator } from './todo.navigator';
 import { ProfileNavigator } from './profile.navigator';
 import { AppRoute } from './app-routes';
-import { BottomHomeScreen } from '../scenes/home';
+import { HomeTabBar } from '../scenes/home';
+import { LayoutIcon, PersonIcon } from '../assets/icons';
 
 const BottomTab = createBottomTabNavigator();
 
 export const HomeNavigator = (): React.ReactElement => (
-  <BottomTab.Navigator tabBar={BottomHomeScreen}>
-    <BottomTab.Screen name={AppRoute.TODO} component={TodoNavigator}/>
-    <BottomTab.Screen name={AppRoute.PROFILE} component={ProfileNavigator}/>
+  <BottomTab.Navigator tabBar={props => <HomeTabBar {...props} />}>
+    <BottomTab.Screen
+      name={AppRoute.TODO}
+      component={TodoNavigator}
+      options={{ title: 'TODO', tabBarIcon: LayoutIcon }}
+    />
+    <BottomTab.Screen
+      name={AppRoute.PROFILE}
+      component={ProfileNavigator}
+      options={{ title: 'PROFILE', tabBarIcon: PersonIcon }}
+    />
   </BottomTab.Navigator>
 );
 ```
 
-Just like in the case with tabs at the top, we also need to make a custom `tabBar`. Open [./src/scenes/home/bottom-home.component.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/bottom-home.component.tsx) file and paste the following code:
+Just like in the case with tabs at the top, we also need to make a custom `tabBar`. Open [./src/scenes/home/home-tab-bar.component.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/scenes/home/home-tab-bar.component.tsx) file and paste the following code:
 
 ```js
 import React from 'react';
-import { BottomNavigation, BottomNavigationTab, Divider } from 'react-native-ui-kitten';
+import { BottomNavigation, BottomNavigationTab, Divider, BottomNavigationTabElement } from 'react-native-ui-kitten';
 import { SafeAreaLayout, SafeAreaLayoutElement, SaveAreaInset } from '../../components/safe-area-layout.component';
-import { LayoutIcon, PersonIcon } from '../../assets/icons';
 
-export const BottomHomeScreen = (props): SafeAreaLayoutElement => {
-
+export const HomeTabBar = (props): SafeAreaLayoutElement => {
+  
   const onSelect = (index: number): void => {
-    const { [index]: selectedRoute } = props.state.routeNames;
-    props.navigation.navigate(selectedRoute);
+    const selectedTabRoute: string = props.state.routeNames[index];
+    props.navigation.navigate(selectedTabRoute);
+  };
+
+  const createNavigationTabForRoute = (route): BottomNavigationTabElement => {
+    const { options } = props.descriptors[route.key];
+    return (
+      <BottomNavigationTab
+        key={route.key}
+        title={options.title}
+        icon={options.tabBarIcon}
+      />
+    );
   };
 
   return (
@@ -231,8 +267,7 @@ export const BottomHomeScreen = (props): SafeAreaLayoutElement => {
         appearance='noIndicator'
         selectedIndex={props.state.index}
         onSelect={onSelect}>
-        <BottomNavigationTab icon={LayoutIcon} title='TODO'/>
-        <BottomNavigationTab icon={PersonIcon} title='PROFILE'/>
+        {props.state.routes.map(createNavigationTabForRoute)}
       </BottomNavigation>
     </SafeAreaLayout>
   );
@@ -275,83 +310,107 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TodoNavigator } from './todo.navigator';
 import { ProfileNavigator } from './profile.navigator';
 import { AppRoute } from './app-routes';
-import { BottomHomeScreen, DrawerHomeScreen, AboutScreen } from '../scenes/home';
+import { HomeTabBar, HomeDrawer, AboutScreen } from '../scenes/home';
+import { HomeIcon, InfoIcon, LayoutIcon, PersonIcon } from '../assets/icons';
 
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
 
 const HomeBottomNavigator = (): React.ReactElement => (
-  <BottomTab.Navigator tabBar={BottomHomeScreen}>
-    <BottomTab.Screen name={AppRoute.TODO} component={TodoNavigator}/>
-    <BottomTab.Screen name={AppRoute.PROFILE} component={ProfileNavigator}/>
+  <BottomTab.Navigator tabBar={props => <HomeTabBar {...props} />}>
+    <BottomTab.Screen
+      name={AppRoute.TODO}
+      component={TodoNavigator}
+      options={{ title: 'TODO', tabBarIcon: LayoutIcon }}
+    />
+    <BottomTab.Screen
+      name={AppRoute.PROFILE}
+      component={ProfileNavigator}
+      options={{ title: 'PROFILE', tabBarIcon: PersonIcon }}
+    />
   </BottomTab.Navigator>
 );
 
 export const HomeNavigator = (): React.ReactElement => (
-  <Drawer.Navigator drawerContent={DrawerHomeScreen}>
-    <Drawer.Screen name={AppRoute.HOME} component={HomeBottomNavigator}/>
-    <Drawer.Screen name={AppRoute.ABOUT} component={AboutScreen}/>
+  <Drawer.Navigator drawerContent={props => <HomeDrawer {...props} />}>
+    <Drawer.Screen
+      name={AppRoute.HOME}
+      component={HomeBottomNavigator}
+      options={{ title: 'Home', drawerIcon: HomeIcon }}
+    />
+    <Drawer.Screen
+      name={AppRoute.ABOUT}
+      component={AboutScreen}
+      options={{ title: 'About', drawerIcon: InfoIcon }}
+    />
   </Drawer.Navigator>
 );
 ```
 
 In this example, we've implemented a Drawer Navigator with `createDrawerNavigator` and used it to display on the Home screen. We have also added `AboutScreen` to demonstrate navigation directly from the Drawer menu.
 
-Just like Top/Bottom tab navigators, the drawer navigator also has a special property for declaring custom drawer view. Use a `drawerContent` property to pass the custom view to the navigator. Open [./src/scenes/home/drawer-home.component.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/scenes/home/drawer-home.component.tsx) file and add the following code:
+Just like Top/Bottom tab navigators, the drawer navigator also has a special property for declaring custom drawer view. Use a `drawerContent` property to pass the custom view to the navigator. Open [./src/scenes/home/home-drawer.component.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/scenes/home/home-drawer.component.tsx) file and add the following code:
 
 ```js
 import React from 'react';
 import { Drawer, DrawerElement, MenuItemType } from 'react-native-ui-kitten';
-import { AppRoute } from '../../navigation/app-routes';
-import { SafeAreaLayout, SaveAreaInset} from '../../components/safe-area-layout.component';
-import { InfoIcon, LogoutIcon } from '../../assets/icons';
+import { SafeAreaLayout, SaveAreaInset } from '../../components/safe-area-layout.component';
 
-const drawerData: MenuItemType[] = [
-  { icon: InfoIcon, title: 'About' },
-  { icon: LogoutIcon, title: 'Log Out' },
-];
-
-export const DrawerHomeScreen = (props): DrawerElement => {
+export const HomeDrawer = (props): DrawerElement => {
 
   const onMenuItemSelect = (index: number): void => {
-    const { [index]: selectedItem } = drawerData;
-
-    switch (selectedItem.title) {
-      case 'Log Out':
-        props.navigation.navigate(AppRoute.AUTH);
-        break;
-      default:
-        props.navigation.navigate(selectedItem.title);
-        break;
-    }
-
+    const selectedTabRoute: string = props.state.routeNames[index];
+    props.navigation.navigate(selectedTabRoute);
     props.navigation.closeDrawer();
+  };
+
+  const createNavigationItemForRoute = (route): MenuItemType => {
+    const { options } = props.descriptors[route.key];
+    return {
+      routeName: route.name,
+      title: options.title,
+      icon: options.drawerIcon,
+    };
   };
 
   return (
     <SafeAreaLayout insets={SaveAreaInset.TOP}>
-      <Drawer data={drawerData} onSelect={onMenuItemSelect} />
+      <Drawer 
+        data={props.state.routes.map(createNavigationItemForRoute)}
+        onSelect={onMenuItemSelect}
+      />
     </SafeAreaLayout>
   );
 };
 ```
 
-Due to the use of this code, we render `Drawer` component with two actions inside: one for navigating to legal information screen and one for performing a user logout. Then, we pass `data` prop to display our actions and `onSelect` prop to handle it. So, when the user taps the action, the `Drawer` component calls `onMenuItemSelect function and this is the place where we need to handle it.`
+Due to the use of this code, we render `Drawer` component with two actions inside: one for navigating to legal information screen and one for performing a user logout. Then, we pass `data` prop to display our actions and `onSelect` prop to handle it. So, when the user taps the action, the `Drawer` component calls `onMenuItemSelect` function and this is the place where we need to handle it.`
 
-The next thing to do is to modify the Todo screen by adding a menu icon to open a drawer:
+The next thing to do is to modify the Todo tab bar by adding a menu icon to open a drawer. Open [./src/scenes/todo/todo-tab-bar.component.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/scenes/todo/todo-tab-bar.component.tsx) file and paste the following code:
 
 ```js
 import React from 'react';
-import { TabBar, Tab, Divider } from 'react-native-ui-kitten';
+import { TabBar, Tab, Divider, TabElement } from 'react-native-ui-kitten';
 import { SafeAreaLayout, SaveAreaInset, SafeAreaLayoutElement } from '../../components/safe-area-layout.component';
 import { Toolbar } from '../../components/toolbar.component';
-import { DoneAllIcon, GridIcon, MenuIcon } from '../../assets/icons';
+import { MenuIcon } from '../../assets/icons';
 
-export const TodoScreen = (props): SafeAreaLayoutElement => {
+export const TodoTabBar = (props): SafeAreaLayoutElement => {
 
   const onTabSelect = (index: number): void => {
-    const { [index]: selectedTabRoute } = props.state.routeNames;
+    const selectedTabRoute: string = props.state.routeNames[index];
     props.navigation.navigate(selectedTabRoute);
+  };
+
+  const createNavigationTabForRoute = (route): TabElement => {
+    const { options } = props.descriptors[route.key];
+    return (
+      <Tab
+        key={route.key}
+        title={options.title}
+        icon={options.tabBarIcon}
+      />
+    );
   };
 
   return (
@@ -362,8 +421,7 @@ export const TodoScreen = (props): SafeAreaLayoutElement => {
         onBackPress={props.navigation.toggleDrawer}
       />
       <TabBar selectedIndex={props.state.index} onSelect={onTabSelect}>
-        <Tab icon={GridIcon} title='IN PROGRESS'/>
-        <Tab icon={DoneAllIcon} title='DONE'/>
+        {props.state.routes.map(createNavigationTabForRoute)}
       </TabBar>
       <Divider/>
     </SafeAreaLayout>
