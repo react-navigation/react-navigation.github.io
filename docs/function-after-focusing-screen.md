@@ -53,13 +53,13 @@ import { useFocusEffect } from '@react-navigation/core';
 function Profile({ userId }) {
   const [user, setUser] = React.useState(null);
 
-  const watchUser = React.useCallback(() => {
-    const unsubscribe = API.subscribe(userId, user => setUser(data));
+  useFocusEffect(
+    React.useCallback(() => {
+      const unsubscribe = API.subscribe(userId, user => setUser(data));
 
-    return () => unsubscribe();
-  }, [userId]);
-
-  useFocusEffect(watchUser);
+      return () => unsubscribe();
+    }, [userId])
+  );
 
   return <ProfileContent user={user} />;
 }

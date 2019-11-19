@@ -14,23 +14,23 @@ Returning `true` from `onBackPress` denotes that we have handled the event, and 
 function ScreenWithCustomBackBehavior() {
   // ...
 
-  const backHandler = React.useCallback(() => {
-    const onBackPress = () => {
-      if (isSelectionModeEnabled()) {
-        disableSelectionMode();
-        return true;
-      } else {
-        return false;
-      }
-    };
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        if (isSelectionModeEnabled()) {
+          disableSelectionMode();
+          return true;
+        } else {
+          return false;
+        }
+      };
 
-    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
-    return () =>
-      BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-  }, [isSelectionModeEnabled, disableSelectionMode]);
-
-  useFocusEffect(backHandler);
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [isSelectionModeEnabled, disableSelectionMode])
+  );
 
   // ...
 }

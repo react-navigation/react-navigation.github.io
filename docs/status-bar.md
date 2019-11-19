@@ -25,7 +25,11 @@ function Screen1({ navigation }) {
     <SafeAreaView style={[styles.container, { backgroundColor: '#6a51ae' }]}>
       <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
       <Text style={{ color: '#fff' }}>Light Screen</Text>
-      <Button title="Next screen" onPress={() => navigation.navigate('Screen2')} color="#fff" />
+      <Button
+        title="Next screen"
+        onPress={() => navigation.navigate('Screen2')}
+        color="#fff"
+      />
     </SafeAreaView>
   );
 }
@@ -35,7 +39,10 @@ function Screen2({ navigation }) {
     <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
       <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       <Text>Dark Screen</Text>
-      <Button title="Next screen" onPress={() => navigation.navigate('Screen1')} />
+      <Button
+        title="Next screen"
+        onPress={() => navigation.navigate('Screen1')}
+      />
     </SafeAreaView>
   );
 }
@@ -93,23 +100,24 @@ Then, in both `Screen1.js` and `Screen2.js` we'll use `useFocusEffect` to change
 import { useFocusEffect } from '@react-navigation/core';
 
 function Screen1() {
-  const setStatusBarConfig = React.useCallback(() => {
-    StatusBar.setBarStyle('light-content');
-    Platform.OS === 'android' && StatusBar.setBackgroundColor('#6a51ae');
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      const unsubscribe = API.subscribe(userId, user => setUser(data));
 
-  useFocusEffect(setStatusBarConfig);
+      return () => unsubscribe();
+    }, [userId])
+  );
 
   // ...
 }
 
 function Screen2() {
-  const setStatusBarConfig = React.useCallback(() => {
-    StatusBar.setBarStyle('dark-content');
-    Platform.OS === 'android' && StatusBar.setBackgroundColor('#ecf0f1');
-  }, []);
-
-  useFocusEffect(setStatusBarConfig);
+  useFocusEffect(
+    React.useCallback(() => {
+      StatusBar.setBarStyle('dark-content');
+      Platform.OS === 'android' && StatusBar.setBackgroundColor('#ecf0f1');
+    }, [])
+  );
 
   // ...
 }
