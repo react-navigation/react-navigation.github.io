@@ -60,6 +60,14 @@ Provides simple HOCs that map react-navigation props to your screen components d
 
 [github.com/vonovak/react-navigation-props-mapper](https://github.com/vonovak/react-navigation-props-mapper)
 
+## react-navigation-backhandler
+
+Easily handle Android back button behavior with React-Navigation with a component based API.
+
+#### Links
+
+[github.com/vonovak/react-navigation-backhandler](https://github.com/vonovak/react-navigation-backhandler)
+
 ## react-native-header-scroll-view
 
 This component implements [iOS large header with grow/shrink on scroll](https://react-navigation.canny.io/feature-requests/p/ios-11-large-header-and-growshrink-on-scroll), made by [@jonsamp](https://github.com/jonsamp). Note that it doesn't handle header animation between screens, it only handles animating the header title on scroll.
