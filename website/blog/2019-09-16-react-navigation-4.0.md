@@ -1,7 +1,7 @@
 ---
 title: React Navigation 4.0
-author: Core Team
-authorURL: https://twitter.com/reactnavigation
+author: Satyajit Sahoo
+authorURL: https://twitter.com/satya164
 ---
 
 The documentation is now live at https://reactnavigation.org, and v3 lives [here](/docs/en/3.x/getting-started.html).

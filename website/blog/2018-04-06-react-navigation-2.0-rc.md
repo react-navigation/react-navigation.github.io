@@ -14,7 +14,7 @@ The documentation for 2.0 is available at https://reactnavigation.org/
 
 We’re bumping the major version because some of the changes in this release are backwards incompatible. That said, this should be a fairly easy upgrade. We are improving React Navigation incrementally because we don't want to leave developers feeling stranded in an old version. If you use React Navigation in a conventional way and don't have any custom navigators, I can't imagine this update would take you more than an hour.
 
-This blog post is not a comprehensive changelog - that will come with the 2.0 proper release; the following is a list of the breaking changes, suggestions for how you can update your app to accommodate them, notice of deprecations, and some of my favourite new features. 
+This blog post is not a comprehensive changelog - that will come with the 2.0 proper release; the following is a list of the breaking changes, suggestions for how you can update your app to accommodate them, notice of deprecations, and some of my favourite new features.
 
 ## Breaking changes
 
@@ -46,7 +46,7 @@ Rather than opening a drawer with `navigation.navigate(‘DrawerOpen’)`, you c
 
 ### Navigation actions API overhaul
 
-In 1.x, functions on the `navigation` were not contextual - they would be the same regardless of whether your screen was inside of a drawer, a stack, a tab navigator, etc. In 2.0 the functions that are available to you on the `navigation` prop depend on the navigators that it corresponds to. If your screen is inside of both a stack and a drawer navigator, you will have helpers for both -- `push` and `openDrawer`, for example. 
+In 1.x, functions on the `navigation` were not contextual - they would be the same regardless of whether your screen was inside of a drawer, a stack, a tab navigator, etc. In 2.0 the functions that are available to you on the `navigation` prop depend on the navigators that it corresponds to. If your screen is inside of both a stack and a drawer navigator, you will have helpers for both -- `push` and `openDrawer`, for example.
 
 Given that we only exposed generic helpers (`navigate`, `goBack`) and helpers specific to the stack in 1.x, this would only impact you if you attempted to use the stack helpers from outside of a stack. For example, if you had a tab navigator with a stack in tab A and just a plain screen in tab B, then tried to `push` a route from the screen in tab B, `push` would not be available. Keep this in mind when you update your app if it follows this type of structure.
 

@@ -4,7 +4,7 @@ author: Core Team
 authorURL: https://twitter.com/reactnavigation
 ---
 
-The documentation is now live at https://reactnavigation.org, and v1 lives [here](/docs/en/1.x/getting-started.html). 
+The documentation is now live at https://reactnavigation.org, and v1 lives [here](/docs/en/1.x/getting-started.html).
 
 ## Significant breaking changes
 
@@ -38,7 +38,7 @@ It is now easier to create and maintain custom navigators. The new `createNaviga
 
 Custom navigators can now provide actions helpers for their screens. For example, the new drawer navigator now allows `props.navigation.openDrawer()` within its screen components.
 
-This does not impact most users - you won't need to make any changes for this unless you use custom navigators in your app. Read more about the changes in [RFC 2](https://github.com/react-navigation/rfcs/blob/master/text/0002-navigator-view-api.md). Also read the [custom navigators documentation](/docs/en/custom-navigators.html). You can also watch the ["Creating a navigator" section in this talk](https://youtu.be/wJJZ9Od8MjM?t=1215) to learn more. 
+This does not impact most users - you won't need to make any changes for this unless you use custom navigators in your app. Read more about the changes in [RFC 2](https://github.com/react-navigation/rfcs/blob/master/text/0002-navigator-view-api.md). Also read the [custom navigators documentation](/docs/en/custom-navigators.html). You can also watch the ["Creating a navigator" section in this talk](https://youtu.be/wJJZ9Od8MjM?t=1215) to learn more.
 
 ## Trivial breaking changes
 
@@ -52,7 +52,7 @@ Rather than opening a drawer with `navigation.navigate(‘DrawerOpen’)`, you c
 
 In practice, this change is unlikely to impact your app at all except for one case that is mentioned below.
 
-In 1.x, functions on the `navigation` were not contextual - they would be the same regardless of whether your screen was inside of a drawer, a stack, a tab navigator, etc. In 2.0 the functions that are available to you on the `navigation` prop depend on the navigators that it corresponds to. If your screen is inside of both a stack and a drawer navigator, you will have helpers for both -- `push` and `openDrawer`, for example. 
+In 1.x, functions on the `navigation` were not contextual - they would be the same regardless of whether your screen was inside of a drawer, a stack, a tab navigator, etc. In 2.0 the functions that are available to you on the `navigation` prop depend on the navigators that it corresponds to. If your screen is inside of both a stack and a drawer navigator, you will have helpers for both -- `push` and `openDrawer`, for example.
 
 Given that we only exposed generic helpers (`navigate`, `goBack`) and helpers specific to the stack in 1.x, this would only impact you if you attempted to use the stack helpers from outside of a stack. For example, if you had a tab navigator with a stack in tab A and just a plain screen in tab B, then tried to `push` a route from the screen in tab B, `push` would not be available. Keep this in mind when you update your app if it follows this type of structure.
 
@@ -66,11 +66,11 @@ This change was intended to simplify the implementation of actions. We may go ba
 
 If you are using `NavigationActions.push` or other stack-specific actions, you’ll need to import `StackActions` and use `StackActions.push` instead.
 
-## Deprecations 
+## Deprecations
 
 ###  XNavigator(...) is now createXNavigator(...)
 
-`StackNavigator`, `TabNavigator` and `DrawerNavigator` are now deprecated in favour of `createStackNavigator`, `createTabNavigator`, and `createDrawerNavigator`, which are functionally identical but more clearly communicate that they are functions and that they return a component. The `XNavigator` style will removed in 3.0. 
+`StackNavigator`, `TabNavigator` and `DrawerNavigator` are now deprecated in favour of `createStackNavigator`, `createTabNavigator`, and `createDrawerNavigator`, which are functionally identical but more clearly communicate that they are functions and that they return a component. The `XNavigator` style will removed in 3.0.
 
 ### Tab navigator split into separate components
 

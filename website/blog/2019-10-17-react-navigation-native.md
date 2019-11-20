@@ -1,7 +1,7 @@
 ---
 title: React Navigation meets native
-author: Core Team
-authorURL: https://twitter.com/reactnavigation
+author: Michał Osadnik
+authorURL: https://twitter.com/mosdnk
 ---
 
 React Navigation steps firmly into the next level and we’re very excited to announce to you something great happening in React Navigation codebase.
