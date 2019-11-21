@@ -179,7 +179,7 @@ Whether to show or hide the header for the screen. The header is shown by defaul
 
 #### `headerTitle`
 
-String or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is specified, it receives `allowFontScaling`, `onLayout`, `style` and `children` as the arguments. The title string is passed in `children`.
+String or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is specified, it receives an object containing `allowFontScaling`, `style` and `children` properties. The `children` property contains the title string.
 
 #### `headerTitleAlign`
 

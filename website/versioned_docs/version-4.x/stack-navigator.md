@@ -106,7 +106,7 @@ Whether to show or hide the header for the screen. The header is shown by defaul
 
 #### `headerTitle`
 
-String, React Element or React Component used by the header. Defaults to scene `title`. When a component is used, it receives `allowFontScaling`, `style` and `children` props. The title string is passed in `children`.
+String, React Element or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is used, it receives an object containing `allowFontScaling`, `style` and `children` properties. The `children` property contains the title string.
 
 #### `headerTitleAllowFontScaling`
 
@@ -118,7 +118,7 @@ Whether back button title font should scale to respect Text Size accessibility s
 
 #### `headerBackImage`
 
-React Element or Component to display custom image in header's back button. When a component is used, it receives a number of props when rendered (`tintColor`, `title`). Defaults to Image component with `react-navigation/views/assets/back-icon.png` back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
+Function which returns a React Element to display custom image in header's back button. When a function is used, it receives the `tintColor` in it's argument object. Defaults to Image component with back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
 
 #### `headerBackTitle`
 
@@ -171,7 +171,7 @@ React Element to display on the right side of the header.
 
 #### `headerLeft`
 
-React Element or Component to display on the left side of the header. When a component is used, it receives a number of props when rendered (`onPress`, `title`, `titleStyle` and more - check [Header.tsx](https://github.com/react-navigation/react-navigation-stack/blob/master/src/views/Header/Header.tsx) for the complete list).
+Function which returns a React Element to display on the left side of the header. When a function is used, it receives a number of arguments when rendered (`onPress`, `title`, `titleStyle` and more).
 
 #### `headerStyle`
 
@@ -217,7 +217,7 @@ Defaults to `false`. If `true`, the header will not have a background unless you
 
 #### `headerBackground`
 
-Use this with `headerTransparent` to provide a component to render in the background of the header. You can use this with a blur view, for example, to create a translucent header.
+Use this with `headerTransparent` to provide a Function which returns a React Element to render in the background of the header. You can use this with a blur view, for example, to create a translucent header.
 
 #### `headerBackgroundTransitionPreset`
 
