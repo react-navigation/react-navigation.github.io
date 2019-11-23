@@ -15,7 +15,7 @@ Most apps require that a user authenticate in some way to have access to data as
 
 ## What we need
 
-This is the behavior that we want from the authentication flow: when users sign in, we want to throw away the state of the authentication flow and unmount all of the screens, and when we press the hardware back button we expect to not be able to go back to the authentication flow.
+This is the behavior that we want from the authentication flow: when users sign in, we want to throw away the state of the authentication flow and unmount all of the screens related to authentication, and when we press the hardware back button we expect to not be able to go back to the authentication flow.
 
 ## Implement the logic for restoring the token
 
@@ -28,7 +28,7 @@ So our component will look like this:
 
 ```js
 import * as React from 'react';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function App({ navigation }) {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -59,7 +59,7 @@ export default function App({ navigation }) {
 
 In our navigator, we can conditionally render appropriate screens. For our case, let's say we have 3 screens:
 
-- `LoadingScreen` - This will show a loading screen when we're restoring the token.
+- `SplashScreen` - This will show a splash or loading screen when we're restoring the token.
 - `SignInScreen` - This is the screen we show if the user isn't signed in already (we couldn't find a token).
 - `HomeScreen` - This is the screen we show if the user is already signed in.
 

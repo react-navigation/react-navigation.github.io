@@ -360,7 +360,7 @@ navigation.push('Profile', { name: 'Michaś' });
 
 #### `pop`
 
-Pops the current screen from the stack and navigates back to the previous screen.
+Pops the current screen from the stack and navigates back to the previous screen. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
 
 ```js
 navigation.pop();

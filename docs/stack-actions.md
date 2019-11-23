@@ -25,7 +25,7 @@ navigation.dispatch(pushAction);
 
 ### pop
 
-The `pop` action takes you back to a previous screen in the stack. The `count` argument allows you to specify how many screens to pop back by.
+The `pop` action takes you back to a previous screen in the stack. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
 
 ```js
 import { StackActions } from '@react-navigation/routers';

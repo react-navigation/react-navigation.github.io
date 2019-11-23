@@ -42,6 +42,8 @@ If the navigator is a drawer navigator, the following are also available:
   - `closeDrawer` - close the drawer
   - `toggleDrawer` - toggle the state, ie. switch from closed to open and vice versa
 
+You can find more details about navigator dependent functions in the documentation for the navigator that you're using.
+
 ## Common API reference
 
 The vast majority of your interactions with the `navigation` prop will involve `navigate`, `goBack`, and `setParams`.
