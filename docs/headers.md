@@ -62,7 +62,7 @@ We only needed the `route` prop in the above example but you may in some cases w
 
 It's often necessary to update the `options` configuration for the active screen from the mounted screen component itself. We can do this using `navigation.setOptions`
 
-<samp id="updating-options-with-setparams">updating navigation options</samp>
+<samp id="updating-options-with-setoptions">updating navigation options</samp>
 
 ```js
 /* Inside of render() of React class */
