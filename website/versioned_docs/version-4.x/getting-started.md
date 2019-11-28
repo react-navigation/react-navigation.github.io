@@ -57,7 +57,7 @@ Next, we need to link these libraries. The steps depends on your React Native ve
 
 - **React Native 0.60 and higher**
 
-  On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
+  On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md). But, react-native-gesture-handler and react-native-reanimated doesn't support automtic linking yet. also, react-native-gesture-handler require more configuration follow ['this guide'](https://kmagiera.github.io/react-native-gesture-handler/docs/getting-started.html#android).
 
   To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
 

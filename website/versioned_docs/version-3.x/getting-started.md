@@ -45,7 +45,7 @@ Next, if you are not using the Expo managed workflow then you need to link these
 
 - **React Native 0.60 and higher**
 
-  On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
+  On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md). But, react-native-gesture-handler and react-native-reanimated doesn't support automtic linking yet. also, react-native-gesture-handler require more configuration follow ['this guide'](https://kmagiera.github.io/react-native-gesture-handler/docs/getting-started.html#android).
 
   On iOS, to complete the linking, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
 
