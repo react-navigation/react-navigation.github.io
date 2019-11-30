@@ -225,6 +225,23 @@ The new approach is more maintainable and removes the need for something like Sw
 
 See [Authentication flows](auth-flow.md) for more info on implementing authentication flows.
 
+## Global props with `screenProps`
+
+In React Navigation 4.x, we could pass a prop called `screenProps` which you could access in all the child navigators:
+
+```js
+<App screenProps={{ /* some data here */ }}>
+```
+
+This was handy for passing global configuration such as translations, themes etc. to all components.
+
+However, using `screenProps` had some disadvantages:
+
+- Changing the values in `screenProps` re-renders all of the screens in the app, regardless of whether they use it or not. This can be very bad for performance, and easy mistake to make.
+- When using a type-checker like TypeScript, it was necessary to annotate `screenProps` every time we want to use it, which wasn't type-safe or convenient.
+
+Due to the component based API of React Navigation 5.x, we have a much better alternative to `screenProps` which doesn't have these disadvantages: [React Context](https://reactjs.org/docs/context.html). Using React Context, it's possible to pass data to any child component in a performant and type-safe way, and we don't need to learn a new API!
+
 ## Navigation state in Redux
 
 We have long recommended not to store navigation state in Redux. We have finally dropped support for storing navigation state in Redux in React Navigation 5.x.
