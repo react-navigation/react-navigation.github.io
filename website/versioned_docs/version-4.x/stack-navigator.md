@@ -249,22 +249,6 @@ const Store = createStackNavigator({
 });
 ```
 
-### Navigator Props
-
-The navigator component created by `createStackNavigator(...)` takes the following props:
-
-- `screenProps` - Pass down extra options to child screens, for example:
-
-```js
-const SomeStack = createStackNavigator({
-  // config
-});
-
-<SomeStack
-  screenProps={/* this prop will get passed to the screen components as this.props.screenProps */}
-/>
-```
-
 ### Examples
 
 See the examples [SimpleStack.tsx](https://github.com/react-navigation/react-navigation/blob/master/example/src/SimpleStack.tsx) and [ModalStack.tsx](https://github.com/react-navigation/react-navigation/blob/master/example/src/ModalStack.tsx) which you can run locally as part of the [NavigationPlayground](https://github.com/react-navigation/react-navigation/tree/master/example) app.

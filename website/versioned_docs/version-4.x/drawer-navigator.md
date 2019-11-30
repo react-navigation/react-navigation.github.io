@@ -144,7 +144,7 @@ React Element or a function, that given `{ focused: boolean, tintColor: string }
 
 #### `drawerLockMode`
 
-Specifies the [lock mode](https://facebook.github.io/react-native/docs/drawerlayoutandroid.html#drawerlockmode) of the drawer. This can also update dynamically by using screenProps.drawerLockMode on your top level router.
+Specifies the [lock mode](https://facebook.github.io/react-native/docs/drawerlayoutandroid.html#drawerlockmode) of the drawer.
 
 ### Nesting drawer navigators inside others
 

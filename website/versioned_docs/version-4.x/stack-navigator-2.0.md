@@ -401,22 +401,6 @@ const Store = createStackNavigator({
 });
 ```
 
-### Navigator Props
-
-The navigator component created by `createStackNavigator(...)` takes the following props:
-
-- `screenProps` - Pass down extra options to child screens, for example:
-
-```js
-const SomeStack = createStackNavigator({
-  // config
-});
-
-<SomeStack
-  screenProps={/* this prop will get passed to the screen components as this.props.screenProps */}
-/>
-```
-
 ### Examples
 
 See the examples in the [example app](https://github.com/react-navigation/stack/tree/master/example) in the repo.
