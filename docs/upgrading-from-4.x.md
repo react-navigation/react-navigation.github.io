@@ -180,6 +180,19 @@ function SelectionScreen({ navigation }) {
 }
 ```
 
+## Navigation events
+
+In React Navigation 4.x, there were 4 navigation events to notify focus state of the screen:
+
+- `willFocus`: emitted when screen comes into focus
+- `didFocus`: emitted when the transition animation for focus finishes
+- `willBlur`: emitted when the screen goes out of focus
+- `didBlur`: emitted when the transition animation for blur finishes
+
+It was confusing to decide which events to use and what each event meant. Some navigators also didn't emit events for transition animations which made the events inconsistent.
+
+We have simplified the events in React Navigation 5.x, so now we have only `focus` and `blur` events which are equivalent to `willFocus` and `willBlur` events. To run tasks after an animation finishes, we can use the [`InteractionManager`](https://facebook.github.io/react-native/docs/interactionmanager) API provided by React Native. See the docs for [Navigation lifecycle](navigation-lifecycle.md) for more details.
+
 ## Switch Navigator
 
 The purpose of Switch Navigator was to dynamically switch between screens/navigators, mostly useful for implementing onboarding/auth flows. For example:
