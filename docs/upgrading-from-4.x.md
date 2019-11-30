@@ -69,6 +69,33 @@ function RootStack() {
 }
 ```
 
+But what if we want to define options statically on the component? It's less flexible to do it, but we could do it if we wanted:
+
+```js
+class HomeScreen extends React.Component {
+  static navigationOptions = {
+    // ...
+  }
+}
+
+// ...
+
+<Stack.Screen
+  name="Home"
+  component={HomeScreen}
+  options={HomeScreen.navigationOptions}
+/>
+```
+
+You might be curious, why don't we support it by default anymore if it's so easy?
+
+- Static properties need extra code to work if you have a [Higher Order Component](https://reactjs.org/docs/higher-order-components.html)
+- You lose the ability to use props and context here, making them less flexible
+- They cannot be type-checked automatically, you need to manually annotate this property
+- We've seen people get confused on how to use static properties when transitioning from class components to function components
+
+Due to the numerous disadvantages with this pattern, we decided to drop it in favor of the current API.
+
 ## The `navigation` prop
 
 In React Navigation 4.x, the `navigation` prop contained various helper methods as well as the current screen's state. In React Navigation 5.x, we have split the `navigation` prop into 2 props: `navigation` prop contains helper methods such as `navigate`, `goBack` etc., `route` prop contains the current screen's data (previously accessed via `navigation.state`).
