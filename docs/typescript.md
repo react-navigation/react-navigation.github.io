@@ -124,6 +124,8 @@ To annotate the `navigation` prop that we get from `useNavigation`, we can use a
 const navigation = useNavigation<ProfileScreenNavigationProp>();
 ```
 
+It's important to note that this isn't completely type-safe because the type parameter you use may not be correct and we cannot statically verify it.
+
 ### Annotating `useRoute`
 
 To annotate the `route` prop that we get from `useRoute`, we can use a type parameter:
@@ -131,3 +133,5 @@ To annotate the `route` prop that we get from `useRoute`, we can use a type para
 ```ts
 const route = useRoute<ProfileScreenRouteProp>();
 ```
+
+It's important to note that this isn't completely type-safe, similar to `useNavigation`.
