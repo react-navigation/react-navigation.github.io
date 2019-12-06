@@ -87,7 +87,7 @@ In some cases you might need more control over which paddings are applied. For e
 
 `forceInset` takes an object with the keys `top | bottom | left | right | vertical | horizontal` and the values `'always' | 'never'`. Or you can override the padding altogether by passing an integer.
 
-There is also a [Snack](https://snack.expo.io/@react-navigation/docs:-safeareaview-demo-v3) available to demonstrate how `forceInset` behaves.
+There is also a [Snack](https://snack.expo.io/@react-navigation/react-navigation-docs:-safeareaview-demo-v3) available to demonstrate how `forceInset` behaves.
 
 ## Android notches
 
