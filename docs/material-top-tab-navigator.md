@@ -70,7 +70,7 @@ public class MainActivity extends ReactActivity {
 Then add the following at the top of your entry file, such as `index.js` or `App.js`:
 
 ```js
-import 'react-native-gesture-handler'
+import 'react-native-gesture-handler';
 ```
 
 Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
@@ -216,6 +216,78 @@ gestureHandlerProps={{
 
 Function that returns a React element to display as the tab bar.
 
+Example:
+
+```js
+import { View, TouchableOpacity } from 'react-native';
+import Animated from 'react-native-reanimated';
+
+function MyTabBar({ state, descriptors, navigation, position }) {
+  return (
+    <View style={{ flexDirection: 'row' }}>
+      {state.routes.map((route, index) => {
+        const { options } = descriptors[route.key];
+        const label =
+          options.tabBarLabel !== undefined
+            ? options.tabBarLabel
+            : options.title !== undefined
+            ? options.title
+            : route.name;
+
+        const isFocused = state.index === index;
+
+        const onPress = () => {
+          const event = navigation.emit({
+            type: 'tabPress',
+            target: route.key,
+          });
+
+          if (!isFocused && !event.defaultPrevented) {
+            navigation.navigate(route.name);
+          }
+        };
+
+        const onLongPress = () => {
+          navigation.emit({
+            type: 'tabLongPress',
+            target: route.key,
+          });
+        };
+
+        const opacity = Animated.interpolate(position, {
+          inputRange,
+          outputRange: inputRange.map(i => (i === index ? 1 : 0)),
+        });
+
+        return (
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityStates={isFocused ? ['selected'] : []}
+            accessibilityLabel={options.tabBarAccessibilityLabel}
+            testID={options.tabBarTestID}
+            onPress={onPress}
+            onLongPress={onLongPress}
+            style={{ flex: 1 }}
+          >
+            <Animated.Text style={{ opacity }}>
+              {label}
+            </Animated.Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
+
+// ...
+
+<Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
+  {...}
+</Tab.Navigator>
+```
+
+This example will render a basic tab bar with labels.
+
 #### `tabBarOptions`
 
 An object containing the props for the tab bar component. It can contain the following properties:
@@ -224,7 +296,6 @@ An object containing the props for the tab bar component. It can contain the fol
 - `inactiveTintColor` - Label and icon color of the inactive tab.
 - `showIcon` - Whether to show icon for tab, default is false.
 - `showLabel` - Whether to show label for tab, default is true.
-- `upperCaseLabel` - Whether to make label uppercase, default is true.
 - `pressColor` - Color for material ripple (Android >= 5.0 only).
 - `pressOpacity` - Opacity for pressed tab (iOS and Android < 5.0 only).
 - `scrollEnabled` - Whether to enable scrollable tabs.

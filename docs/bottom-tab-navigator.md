@@ -92,6 +92,72 @@ Whether a screen should be unmounted when navigating away from it. Unmounting a 
 
 Function that returns a React element to display as the tab bar.
 
+Example:
+
+```js
+import { View, Text, TouchableOpacity } from 'react-native';
+
+function MyTabBar({ state, descriptors, navigation }) {
+  return (
+    <View style={{ flexDirection: 'row' }}>
+      {state.routes.map((route, index) => {
+        const { options } = descriptors[route.key];
+        const label =
+          options.tabBarLabel !== undefined
+            ? options.tabBarLabel
+            : options.title !== undefined
+            ? options.title
+            : route.name;
+
+        const isFocused = state.index === index;
+
+        const onPress = () => {
+          const event = navigation.emit({
+            type: 'tabPress',
+            target: route.key,
+          });
+
+          if (!isFocused && !event.defaultPrevented) {
+            navigation.navigate(route.name);
+          }
+        };
+
+        const onLongPress = () => {
+          navigation.emit({
+            type: 'tabLongPress',
+            target: route.key,
+          });
+        };
+
+        return (
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityStates={isFocused ? ['selected'] : []}
+            accessibilityLabel={options.tabBarAccessibilityLabel}
+            testID={options.tabBarTestID}
+            onPress={onPress}
+            onLongPress={onLongPress}
+            style={{ flex: 1 }}
+          >
+            <Text style={{ color: isFocused ? '#673ab7' : '#222' }}>
+              {label}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
+
+// ...
+
+<Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
+  {...}
+</Tab.Navigator>
+```
+
+This example will render a basic tab bar with labels.
+
 #### `tabBarOptions`
 
 An object containing the props for the tab bar component. It can contain the following properties:
@@ -168,9 +234,11 @@ navigation.addListener('tabPress', e => {
 });
 ```
 
+If you have a custom tab bar, make sure to emit this event.
+
 #### `tabLongPress`
 
-This event is fired when the user presses the tab button for the current screen in the tab bar for an extended period.
+This event is fired when the user presses the tab button for the current screen in the tab bar for an extended period. If you have a custom tab bar, make sure to emit this event.
 
 ### Helpers
 
