@@ -31,19 +31,49 @@ import * as React from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export default function App({ navigation }) {
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [userToken, setUserToken] = React.useState(null);
+  const [state, dispatch] = React.useReducer(
+    (prevState, action) => {
+      switch (action.type) {
+        case 'RESTORE_TOKEN':
+          return {
+            ...prevState,
+            userToken: action.token,
+            isLoading: false,
+          };
+        case 'SIGN_IN':
+          return {
+            ...prevState,
+            userToken: action.token,
+          };
+        case 'SIGN_OUT':
+          return {
+            ...prevState,
+            userToken: undefined,
+          };
+      }
+    },
+    {
+      isLoading: true,
+      userToken: null,
+    }
+  );
 
   React.useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
-      // We should also handle error for production apps
-      const userToken = await AsyncStorage.getItem('userToken');
+      let userToken;
+
+      try {
+        userToken = await AsyncStorage.getItem('userToken');
+      } catch (e) {
+        // Restoring token failed
+      }
+
+      // After restoring token, we may need to validate it in production apps
 
       // This will switch to the App screen or Auth screen and this loading
       // screen will be unmounted and thrown away.
-      setIsLoading(false);
-      setUserToken(userToken);
+      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
     };
 
     bootstrapAsync();
@@ -70,13 +100,20 @@ So our navigator will look like:
 ```js
 return (
   <Stack.Navigator>
-    {isLoading ? (
+    {state.isLoading ? (
       // We haven't finished checking for the token yet
       <Stack.Screen name="Splash" component={SplashScreen} />
-    ) : userToken === null ? (
+    ) : state.userToken === null ? (
       // No token found, user isn't signed in
       <Stack.Screen name="SignIn">
-        {() => <SignInScreen setUserToken={setUserToken} />}
+        {() => (
+          <SignInScreen
+            onSignIn={token => {
+              // In a real app, you should also store this token in async storage
+              dispatch({ type: 'SIGN_IN', token });
+            }}
+          />
+        )}
       </Stack.Screen>
     ) : (
       // User is signed in
@@ -112,7 +149,7 @@ Another advantage of this approach is that all the screens are still under the s
 We're conditionally defining one screen for each case here. But you could define multiple screens here too. For example, you probably want to defined password reset, signup, etc screens as well when the user isn't signed in. Similarly for your app, you probably have more than one screen. We can use `React.Fragment` - to define multiple screens:
 
 ```js
-userToken === null ? (
+state.userToken === null ? (
   <>
     <Stack.Screen name="SignIn">
       {() => <SignInScreen onSignIn={setUserToken} />}
@@ -133,7 +170,7 @@ userToken === null ? (
 We won't talk about how to implement the text inputs and buttons for the authentication screen, that is outside of the scope of navigation. We'll just fill in some placeholder content.
 
 ```js
-function SignInScreen({ setUserToken }) {
+function SignInScreen({ onSignIn }) {
   return (
     <View>
       <TextInput placeholder="Username" />
@@ -141,7 +178,7 @@ function SignInScreen({ setUserToken }) {
       <Button
         title="Sign in"
         mode="contained"
-        onPress={() => setUserToken('token')}
+        onPress={() => onSignIn('token')}
       />
     </View>
   );

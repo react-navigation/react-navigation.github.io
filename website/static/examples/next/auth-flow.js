@@ -14,12 +14,12 @@ function SplashScreen() {
 function HomeScreen() {
   return (
     <View>
-      <Text>Welcome home!</Text>
+      <Text>Signed in!</Text>
     </View>
   );
 }
 
-function SignInScreen({ setUserToken }) {
+function SignInScreen({ onSignIn }) {
   return (
     <View>
       <View>
@@ -30,7 +30,7 @@ function SignInScreen({ setUserToken }) {
         <Button
           title="Sign in"
           mode="contained"
-          onPress={() => setUserToken('token')}
+          onPress={() => onSignIn('token')}
         />
       </View>
     </View>
@@ -38,19 +38,49 @@ function SignInScreen({ setUserToken }) {
 }
 
 export default function App({ navigation }) {
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [userToken, setUserToken] = React.useState(null);
+  const [state, dispatch] = React.useReducer(
+    (prevState, action) => {
+      switch (action.type) {
+        case 'RESTORE_TOKEN':
+          return {
+            ...prevState,
+            userToken: action.token,
+            isLoading: false,
+          };
+        case 'SIGN_IN':
+          return {
+            ...prevState,
+            userToken: action.token,
+          };
+        case 'SIGN_OUT':
+          return {
+            ...prevState,
+            userToken: undefined,
+          };
+      }
+    },
+    {
+      isLoading: true,
+      userToken: null,
+    }
+  );
 
   React.useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
-      // We should also handle error for production apps
-      const userToken = await AsyncStorage.getItem('userToken');
+      let userToken;
+
+      try {
+        userToken = await AsyncStorage.getItem('userToken');
+      } catch (e) {
+        // Restoring token failed
+      }
+
+      // After restoring token, we may need to validate it in production apps
 
       // This will switch to the App screen or Auth screen and this loading
       // screen will be unmounted and thrown away.
-      setIsLoading(false);
-      setUserToken(userToken);
+      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
     };
 
     bootstrapAsync();
@@ -61,13 +91,20 @@ export default function App({ navigation }) {
   return (
     <NavigationNativeContainer>
       <Stack.Navigator>
-        {isLoading ? (
+        {state.isLoading ? (
           // We haven't finished checking for the token yet
           <Stack.Screen name="Splash" component={SplashScreen} />
-        ) : userToken === null ? (
+        ) : state.userToken === null ? (
           // No token found, user isn't signed in
           <Stack.Screen name="SignIn">
-            {() => <SignInScreen setUserToken={setUserToken} />}
+            {() => (
+              <SignInScreen
+                onSignIn={token => {
+                  // In a real app, you should also store this token in async storage
+                  dispatch({ type: 'SIGN_IN', token });
+                }}
+              />
+            )}
           </Stack.Screen>
         ) : (
           // User is signed in
