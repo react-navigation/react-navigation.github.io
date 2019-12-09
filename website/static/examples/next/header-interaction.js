@@ -12,9 +12,21 @@ function LogoTitle() {
   );
 }
 
-function HomeScreen({ route }) {
-  return <Text>Count: {route.params.count}</Text>;
+function HomeScreen({ navigation }) {
+  const [count, setCount] = React.useState(0);
+
+  navigation.setOptions({
+    headerRight: () => (
+      <Button
+        onPress={() => setCount(c => c + 1)}
+        title="Update count"
+      />
+    ),
+  });
+
+  return <Text>Count: {count}</Text>;
 }
+
 const Stack = createStackNavigator();
 
 function App() {
@@ -24,20 +36,8 @@ function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          initialParams={{ count: 0 }}
           options={({ navigation, route }) => ({
             headerTitle: props => <LogoTitle {...props} />,
-            headerRight: () => (
-              <Button
-                onPress={() =>
-                  navigation.setParams({
-                    count: route.params.count + 1,
-                  })
-                }
-                title="Info"
-                color="#00cc00"
-              />
-            ),
           })}
         />
       </Stack.Navigator>

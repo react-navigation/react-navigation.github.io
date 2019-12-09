@@ -35,13 +35,11 @@ function StackScreen() {
 }
 ```
 
-The binding of `this` in `options` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
-
-> Please note that a community-developed library for rendering buttons in the header with the correct styling is available: [react-navigation-header-buttons](https://github.com/vonovak/react-navigation-header-buttons).
+When we define our button this way, the `this` variable in `options` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
 
 ## Header interaction with its screen component
 
-The most commonly used pattern for giving a header button access to a combine `route` and `params` props to obtain expected behavior.
+To be able to interact with the screen component, we need to use `navigation.setOptions` to define our button instead of the `options` prop. By using `navigation.setOptions` inside the screen component, we get access to screen's props, state, context etc.
 
 <samp id="header-interaction">header interaction</samp>
 
@@ -52,26 +50,27 @@ function StackScreen() {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        initialParams={{ count: 0 }}
         options={({ navigation, route }) => ({
           headerTitle: props => <LogoTitle {...props} />,
-          headerRight: () => (
-            <Button
-              onPress={() =>
-                navigation.setParams({ count: route.params.count + 1 })
-              }
-              title="Info"
-              color="#fff"
-            />
-          ),
         })}
       />
     </Stack.Navigator>
   );
 }
 
-function HomeScreen({ route }) {
-  return <Text>Count: {route.params.count}</Text>;
+function HomeScreen({ navigation }) {
+  const [count, setCount] = React.useState(0);
+
+  navigation.setOptions({
+    headerRight: () => (
+      <Button
+        onPress={() => setCount(c => c + 1)}
+        title="Update count"
+      />
+    ),
+  });
+
+  return <Text>Count: {count}</Text>;
 }
 ```
 
