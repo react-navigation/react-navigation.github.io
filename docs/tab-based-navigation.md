@@ -57,7 +57,7 @@ This is similar to how you would customize a stack navigator &mdash; there are s
 ```js
 // You can import Ionicons from @expo/vector-icons if you use Expo or
 // react-native-vector-icons/Ionicons otherwise.
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 // (...)
 
@@ -70,13 +70,13 @@ export default function App() {
             let iconName;
 
             if (route.name === 'Home') {
-              iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+              iconName = `information${focused ? '' : '-outline'}`;
             } else if (route.name === 'Settings') {
-              iconName = `ios-options`;
+              iconName = `settings${focused ? '' : '-outline'}`;
             }
 
             // You can return any component that you like here!
-            return <Ionicons name={iconName} size={size} color={color} />;
+            return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
           },
         })}
         tabBarOptions={{
