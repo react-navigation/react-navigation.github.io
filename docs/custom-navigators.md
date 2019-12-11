@@ -52,7 +52,7 @@ The hook returns an object with following properties:
 Example:
 
 ```js
-import { useNavigationBuilder } from '@react-navigation/core';
+import { useNavigationBuilder } from '@react-navigation/native';
 import { TabRouter, TabActions } from '@react-navigation/routers';
 
 function TabNavigator({ initialRouteName, children, screenOptions, ...rest }) {
@@ -109,7 +109,7 @@ This `createNavigatorFactory` function is used to create a function that will `N
 Example:
 
 ```js
-import { useNavigationBuilder, createNavigatorFactory } from '@react-navigation/core';
+import { useNavigationBuilder, createNavigatorFactory } from '@react-navigation/native';
 
 // ...
 

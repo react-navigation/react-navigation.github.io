@@ -11,7 +11,7 @@ Most of the time, you won't use `NavigationContext` directly, as the provided `u
 Example:
 
 ```js
-import { NavigationContext } from '@react-navigation/core';
+import { NavigationContext } from '@react-navigation/native';
 
 class SomeComponent extends React.Component {
   static contextType = NavigationContext;

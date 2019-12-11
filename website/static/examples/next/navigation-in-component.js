@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/core';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { useNavigation, NavigationNativeContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 function GoToButton({ screenName }) {

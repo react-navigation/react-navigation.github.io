@@ -13,7 +13,7 @@ sidebar_label: useRoute
 ```js
 import * as React from 'react';
 import { Text } from 'react-native';
-import { useRoute } from '@react-navigation/core';
+import { useRoute } from '@react-navigation/native';
 
 export default function MyText() {
   const route = useRoute();

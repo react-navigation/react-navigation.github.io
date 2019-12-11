@@ -216,7 +216,7 @@ Note that if you want to dispatch react-navigation actions you should use the ac
 See [Navigation Actions Docs](navigation-actions.md) for a full list of available actions.
 
 ```js
-import { CommonActions } from '@react-navigation/core';
+import { CommonActions } from '@react-navigation/native';
 
 navigation.dispatch(
   CommonActions.navigate({

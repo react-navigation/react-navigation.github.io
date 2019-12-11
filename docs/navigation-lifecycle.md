@@ -77,7 +77,7 @@ Instead of adding event listeners manually, we can use the [`useFocusEffect`](us
 Example:
 
 ```js
-import { useFocusEffect } from '@react-navigation/core';
+import { useFocusEffect } from '@react-navigation/native';
 
 function Profile() {
   useFocusEffect(

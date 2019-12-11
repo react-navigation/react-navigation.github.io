@@ -31,7 +31,7 @@ Alternatively, you can use the `useNavigation` to provide the `navigation` prop 
 ```js
 import * as React from 'react';
 import { Button } from 'react-native';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
 
 function GoToButton({ screenName }) {
   const navigation = useNavigation();

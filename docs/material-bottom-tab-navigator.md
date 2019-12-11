@@ -13,7 +13,7 @@ This wraps the [`BottomNavigation`](https://callstack.github.io/react-native-pap
 To use this navigator, you need to install [`@react-navigation/material-bottom-tabs`](https://github.com/react-navigation/navigation-ex/tree/master/packages/material-bottom-tabs):
 
 ```sh
-yarn add @react-navigation/core@next @react-navigation/material-bottom-tabs@next react-native-paper
+yarn add @react-navigation/native@next @react-navigation/material-bottom-tabs@next react-native-paper
 ```
 
 This API also requires that you install `react-native-vector-icons`! If you are using Expo, it will just work out of the box. Otherwise, [follow these installation instructions](https://github.com/oblador/react-native-vector-icons#installation).

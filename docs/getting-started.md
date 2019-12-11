@@ -19,13 +19,13 @@ What follows within the _Fundamentals_ section of this documentation is a tour o
 Install the required packages in your React Native project.
 
 ```bash
-yarn add @react-navigation/core@next @react-navigation/native@next
+yarn add @react-navigation/native@next @react-navigation/native@next
 ```
 
 Or with npm
 
 ```sh
-npm install @react-navigation/core@next @react-navigation/native@next
+npm install @react-navigation/native@next @react-navigation/native@next
 ```
 
 > When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional configuration.

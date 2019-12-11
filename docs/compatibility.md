@@ -11,7 +11,7 @@ React Navigation 5 has a completely new API, so our old code using React Navigat
 To use the compatibility layer, we need to install [`@react-navigation/compat`](https://github.com/react-navigation/navigation-ex/tree/master/packages/compat):
 
 ```sh
-yarn add @react-navigation/core@next @react-navigation/compat@next
+yarn add @react-navigation/native@next @react-navigation/compat@next
 ```
 
 Then we can make minimal changes in our code to use it:

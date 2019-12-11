@@ -15,7 +15,7 @@ Expo is currently not supported as it includes an older version of `react-native
 To use this navigator, you need to install [`@react-navigation/native-stack`](https://github.com/react-navigation/navigation-ex/tree/master/packages/native-stack):
 
 ```sh
-yarn add @react-navigation/core@next @react-navigation/native-stack@next
+yarn add @react-navigation/native@next @react-navigation/native-stack@next
 ```
 
 Now we need to install [`react-native-screens`](https://github.com/kmagiera/react-native-screens).

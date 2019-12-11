@@ -136,7 +136,7 @@ It's important to note that the state object must match the hierarchy of nested 
 Sometimes we'll have the target navigator nested in other navigators which aren't part of the deep link. In this case, specifying the mapping isn't sufficient and we need to account for the additional navigators as well. For example, let's say the navigator containing the `Catalog` screen is nested inside a screen named `Tabs` in another navigator. In this case, we'll need to modify the returned state object to include it. We can use the `getStateFromPath` option to achieve it:
 
 ```js
-import { getStateFromPath } from '@react-navigation/core';
+import { getStateFromPath } from '@react-navigation/native';
 
 // ...
 

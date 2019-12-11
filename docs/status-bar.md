@@ -97,7 +97,7 @@ function Screen2({ navigation }) {
 Then, in both `Screen1.js` and `Screen2.js` we'll use `useFocusEffect` to change the `StatusBar` configuration when that tab `didFocus`. We'll also make sure to remove the listener when the `TabNavigator` has been unmounted.
 
 ```js
-import { useFocusEffect } from '@react-navigation/core';
+import { useFocusEffect } from '@react-navigation/native';
 
 function Screen1() {
   useFocusEffect(

@@ -48,7 +48,7 @@ React Navigation provides a [hook](https://reactjs.org/docs/hooks-intro.html) th
 This is particularly handy when we are trying to stop something when the page is unfocused, like stopping a video or audio file from playing, or stopping the tracking of a user's location.
 
 ```js
-import { useFocusEffect } from '@react-navigation/core';
+import { useFocusEffect } from '@react-navigation/native';
 
 function Profile({ userId }) {
   const [user, setUser] = React.useState(null);
@@ -76,7 +76,7 @@ The `useIsFocused` hook will cause our component to re-render when we focus and 
 ```js
 import * as React from 'react';
 import { Text } from 'react-native';
-import { useIsFocused } from '@react-navigation/core';
+import { useIsFocused } from '@react-navigation/native';
 
 function Profile() {
   // This hook returns `true` if the screen is focused, `false` otherwise

@@ -9,7 +9,7 @@ Sometimes we want to run side-effects when a screen is focused. A side effect ma
 To make this easier, the library exports a `useFocusEffect` hook:
 
 ```js
-import { useFocusEffect } from '@react-navigation/core';
+import { useFocusEffect } from '@react-navigation/native';
 
 function Profile({ userId }) {
   const [user, setUser] = React.useState(null);

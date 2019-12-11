@@ -9,7 +9,7 @@ A simple tab bar on the bottom of the screen that lets you switch between differ
 To use this navigator, you need to install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/navigation-ex/tree/master/packages/bottom-tabs):
 
 ```sh
-yarn add @react-navigation/core@next @react-navigation/bottom-tabs@next
+yarn add @react-navigation/native@next @react-navigation/bottom-tabs@next
 ```
 
 Now we need to install [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).

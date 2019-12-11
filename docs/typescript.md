@@ -73,10 +73,10 @@ type Props = {
 
 The type for the navigation prop takes 2 generics, the param list object we defined earlier, and the name of the current route. This allows us to type check route names and params which you're navigating using `navigate`, `push` etc. The name of the current route is necessary to type check the params when you call `setParams`.
 
-To annotate the `route` prop, we need to use the `RouteProp` type from `@react-navigation/core`:
+To annotate the `route` prop, we need to use the `RouteProp` type from `@react-navigation/native`:
 
 ```tsx
-import { RouteProp } from '@react-navigation/core';
+import { RouteProp } from '@react-navigation/native';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'Profile'>;
 
@@ -92,7 +92,7 @@ This allows us to type check the route object, such as `route.params`.
 When we nest navigators, the navigation prop of the screen is a combination of multiple navigation props. For example, if we have a tab inside a stack, the `navigation` prop will have both `jumpTo` (from the tab navigator) and `push` (from the stack navigator). To make it easier to combine types from multiple navigator, you can use the `CompositeNavigationProp` type:
 
 ```ts
-import { CompositeNavigationProp } from '@react-navigation/core';
+import { CompositeNavigationProp } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { StackNavigationProp } from '@react-navigation/stack';
 

@@ -11,7 +11,7 @@ This wraps [`react-native-tab-view`](https://github.com/react-native-community/r
 To use this navigator, you need to install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/navigation-ex/tree/master/packages/material-top-tabs):
 
 ```sh
-yarn add @react-navigation/core@next @react-navigation/material-top-tabs@next react-native-tab-view
+yarn add @react-navigation/native@next @react-navigation/material-top-tabs@next react-native-tab-view
 ```
 
 Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated).
