@@ -3,6 +3,8 @@ import { AsyncStorage, Button, Text, TextInput, View } from 'react-native';
 import { NavigationNativeContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+const AuthContext = React.createContext();
+
 function SplashScreen() {
   return (
     <View>
@@ -12,30 +14,41 @@ function SplashScreen() {
 }
 
 function HomeScreen() {
+  const { signOut } = React.useContext(AuthContext);
+
   return (
     <View>
       <Text>Signed in!</Text>
+      <Button title="Sign out" onPress={signOut} />
     </View>
   );
 }
 
-function SignInScreen({ onSignIn }) {
+function SignInScreen() {
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const { signIn } = React.useContext(AuthContext);
+
   return (
     <View>
-      <View>
-        <Text>Name: </Text>
-        <TextInput placeholder="Username" />
-        <Text>Password: </Text>
-        <TextInput placeholder="Password" secureTextEntry />
-        <Button
-          title="Sign in"
-          mode="contained"
-          onPress={() => onSignIn('token')}
-        />
-      </View>
+      <TextInput
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
+      />
+      <TextInput
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      <Button title="Sign in" onPress={() => signIn({ username, password })} />
     </View>
   );
 }
+
+const Stack = createStackNavigator();
 
 export default function App({ navigation }) {
   const [state, dispatch] = React.useReducer(
@@ -55,7 +68,7 @@ export default function App({ navigation }) {
         case 'SIGN_OUT':
           return {
             ...prevState,
-            userToken: undefined,
+            userToken: null,
           };
       }
     },
@@ -86,31 +99,45 @@ export default function App({ navigation }) {
     bootstrapAsync();
   }, []);
 
-  const Stack = createStackNavigator();
+  const authContext = React.useMemo(
+    () => ({
+      signIn: async data => {
+        // In a production app, we need to send some data (usually username, password) to server and get a token
+        // We will also need to handle errors if sign in failed
+        // After getting token, we need to persist the token using `AsyncStorage`
+        // In the example, we'll use a dummy token
+
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+      },
+      signOut: () => dispatch({ type: 'SIGN_OUT' }),
+      signUp: async data => {
+        // In a production app, we need to send user data to server and get a token
+        // We will also need to handle errors if sign up failed
+        // After getting token, we need to persist the token using `AsyncStorage`
+        // In the example, we'll use a dummy token
+
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+      },
+    }),
+    []
+  );
 
   return (
-    <NavigationNativeContainer>
-      <Stack.Navigator>
-        {state.isLoading ? (
-          // We haven't finished checking for the token yet
-          <Stack.Screen name="Splash" component={SplashScreen} />
-        ) : state.userToken === null ? (
-          // No token found, user isn't signed in
-          <Stack.Screen name="SignIn">
-            {() => (
-              <SignInScreen
-                onSignIn={token => {
-                  // In a real app, you should also store this token in async storage
-                  dispatch({ type: 'SIGN_IN', token });
-                }}
-              />
-            )}
-          </Stack.Screen>
-        ) : (
-          // User is signed in
-          <Stack.Screen name="Home" component={HomeScreen} />
-        )}
-      </Stack.Navigator>
-    </NavigationNativeContainer>
+    <AuthContext.Provider value={authContext}>
+      <NavigationNativeContainer>
+        <Stack.Navigator>
+          {state.isLoading ? (
+            // We haven't finished checking for the token yet
+            <Stack.Screen name="Splash" component={SplashScreen} />
+          ) : state.userToken == null ? (
+            // No token found, user isn't signed in
+            <Stack.Screen name="SignIn" component={SignInScreen} />
+          ) : (
+            // User is signed in
+            <Stack.Screen name="Home" component={HomeScreen} />
+          )}
+        </Stack.Navigator>
+      </NavigationNativeContainer>
+    </AuthContext.Provider>
   );
 }

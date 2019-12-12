@@ -24,6 +24,21 @@ In our component, we'll keep 2 states:
 - `isLoading` - We set this to `true` when we're trying to check if we already have a token saved in `AsyncStorage`
 - `userToken` - The token for the user. If it's non-null, we assume the user is logged in, otherwise not.
 
+So we need to:
+
+- Add some logic for restoring token, sign in and sign out
+- Expose methods for sign in and sign out to other components
+
+We'll use `React.useReducer` and `React.useContext` in this guide. But if you're using a state management library such as Redux or Mobx, you can use them for this functionality instead.
+
+First we'll need to create a context for auth where we can expose necessary methods:
+
+```js
+import * as React from 'react';
+
+const AuthContext = React.createContext();
+```
+
 So our component will look like this:
 
 ```js
@@ -79,8 +94,33 @@ export default function App({ navigation }) {
     bootstrapAsync();
   }, []);
 
+  const authContext = React.useMemo(
+    () => ({
+      signIn: async data => {
+        // In a production app, we need to send some data (usually username, password) to server and get a token
+        // We will also need to handle errors if sign in failed
+        // After getting token, we need to persist the token using `AsyncStorage`
+        // In the example, we'll use a dummy token
+
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+      },
+      signOut: () => dispatch({ type: 'SIGN_OUT' }),
+      signUp: async data => {
+        // In a production app, we need to send user data to server and get a token
+        // We will also need to handle errors if sign up failed
+        // After getting token, we need to persist the token using `AsyncStorage`
+        // In the example, we'll use a dummy token
+
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+      },
+    }),
+    []
+  );
+
   return (
-    /* We'll render navigator content here */
+    <AuthContext.Provider value={authContext}>
+      {/* We'll render navigator content here */}
+    </AuthContext.Provider>
   );
 }
 ```
@@ -99,27 +139,20 @@ So our navigator will look like:
 
 ```js
 return (
-  <Stack.Navigator>
-    {state.isLoading ? (
-      // We haven't finished checking for the token yet
-      <Stack.Screen name="Splash" component={SplashScreen} />
-    ) : state.userToken === null ? (
-      // No token found, user isn't signed in
-      <Stack.Screen name="SignIn">
-        {() => (
-          <SignInScreen
-            onSignIn={token => {
-              // In a real app, you should also store this token in async storage
-              dispatch({ type: 'SIGN_IN', token });
-            }}
-          />
-        )}
-      </Stack.Screen>
-    ) : (
-      // User is signed in
-      <Stack.Screen name="Home" component={HomeScreen} />
-    )}
-  </Stack.Navigator>
+  <AuthContext.Provider value={authContext}>
+    <Stack.Navigator>
+      {state.isLoading ? (
+        // We haven't finished checking for the token yet
+        <Stack.Screen name="Splash" component={SplashScreen} />
+      ) : state.userToken === null ? (
+        // No token found, user isn't signed in
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+      ) : (
+        // User is signed in
+        <Stack.Screen name="Home" component={HomeScreen} />
+      )}
+    </Stack.Navigator>
+  </AuthContext.Provider>
 );
 ```
 
@@ -149,14 +182,10 @@ Another advantage of this approach is that all the screens are still under the s
 We're conditionally defining one screen for each case here. But you could define multiple screens here too. For example, you probably want to defined password reset, signup, etc screens as well when the user isn't signed in. Similarly for your app, you probably have more than one screen. We can use `React.Fragment` - to define multiple screens:
 
 ```js
-state.userToken === null ? (
+state.userToken == null ? (
   <>
-    <Stack.Screen name="SignIn">
-      {() => <SignInScreen onSignIn={setUserToken} />}
-    </Stack.Screen>
-    <Stack.Screen name="SignUp">
-      {() => <SignUpScreen setUserToken={setUserToken} />}
-    </Stack.Screen>
+    <Stack.Screen name="SignIn" component={SignInScreen} />
+    <Stack.Screen name="SignUp" component={SignUpScreen} />
     <Stack.Screen name="ResetPassword" component={ResetPassword} />
   </>
 ) : (
@@ -170,16 +199,26 @@ state.userToken === null ? (
 We won't talk about how to implement the text inputs and buttons for the authentication screen, that is outside of the scope of navigation. We'll just fill in some placeholder content.
 
 ```js
-function SignInScreen({ onSignIn }) {
+function SignInScreen() {
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const { signIn } = React.useContext(AuthContext);
+
   return (
     <View>
-      <TextInput placeholder="Username" />
-      <TextInput placeholder="Password" secureTextEntry />
-      <Button
-        title="Sign in"
-        mode="contained"
-        onPress={() => onSignIn('token')}
+      <TextInput
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
       />
+      <TextInput
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      <Button title="Sign in" onPress={() => signIn({ username, password })} />
     </View>
   );
 }
