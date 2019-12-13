@@ -42,9 +42,9 @@ implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
 Make sure to enable `react-native-screens`. This needs to be done before our app renders. To do it, add the following code in your entry file (e.g. `App.js`):
 
 ```js
-import { useScreens } from 'react-native-screens';
+import { enableScreens } from 'react-native-screens';
 
-useScreens();
+enableScreens();
 ```
 
 Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
