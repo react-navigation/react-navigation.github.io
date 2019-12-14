@@ -4,7 +4,7 @@ title: Supported React Native versions
 sidebar_label: Supported React Native versions
 ---
 
-React Navigation 5 depends on the new hooks API and libraries using `androidx`. So you'll need to be on at least `react-native@0.60.0`. If you're using Expo, your SDK version should be at least 34.
+React Navigation 5 depends on the new hooks API and libraries using `androidx`. So you'll need to be on at least `react-native@0.60.0`. If you're using Expo, your SDK version should be at least `36`.
 
 You also need to make sure that your React Native version is compatible with following libraries:
 

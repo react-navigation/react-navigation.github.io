@@ -10,19 +10,25 @@ By default the stack navigator is configured to have the familiar iOS and Androi
 
 This uses native primitives for navigation using [`react-native-screens`](https://github.com/kmagiera/react-native-screens) under the hood, as opposed to the JS based stack navigator. While this provides native feeling and performance, it's not as customizable.
 
-Expo is currently not supported as it includes an older version of `react-native-screens`.
-
 To use this navigator, you need to install [`@react-navigation/native-stack`](https://github.com/react-navigation/navigation-ex/tree/master/packages/native-stack):
 
 ```sh
 yarn add @react-navigation/native@next @react-navigation/native-stack@next
 ```
 
-Now we need to install [`react-native-screens`](https://github.com/kmagiera/react-native-screens).
+If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
+
+```sh
+expo install react-native-screens
+```
+
+If you are not using Expo, run the following:
 
 ```sh
 yarn add react-native-screens
 ```
+
+If you are using Expo, you are done. Otherwise, continue to the next steps.
 
 To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
 
