@@ -197,69 +197,34 @@ The content component receives following props by default:
 
 The default component for the drawer is scrollable and only contains links for the routes in the RouteConfig. You can easily override the default component to add a header, footer, or other content to the drawer. The default content component is exported as `DrawerContent`. It renders a `DrawerItemList` component inside a `ScrollView`.
 
-By default the drawer is scrollable and supports devices with notches. If you customize the content, be sure to apply safe area insets:
+By default the drawer is scrollable and supports devices with notches. If you customize the content, you can use `DrawerContentScrollView` to handle this automatically:
 
 ```js
-import { useSafeArea } from 'react-native-safe-area-context';
-import { DrawerItemList } from '@react-navigation/drawer';
+import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 
-function CustomDrawerContent({ drawerPosition, ...rest }) {
-  const insets = useSafeArea();
-
+function CustomDrawerContent(props) {
   return (
-    <ScrollView
-      contentContainerStyle={[
-        {
-          paddingTop: insets.top + 4,
-          paddingLeft: drawerPosition === 'left' ? insets.left : 0,
-          paddingRight: drawerPosition === 'right' ? insets.right : 0,
-        },
-      ]}
-      style={styles.container}
-    >
-      <DrawerItemList {...rest} />
-    </ScrollView>
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+    </DrawerContentScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 ```
 
 To add additional items in the drawer, you can use the `DrawerItem` component:
 
 ```js
-function CustomDrawerContent({ drawerPosition, ...rest }) {
-  const insets = useSafeArea();
-
+function CustomDrawerContent(props) {
   return (
-    <ScrollView
-      contentContainerStyle={[
-        {
-          paddingTop: insets.top + 4,
-          paddingLeft: drawerPosition === 'left' ? insets.left : 0,
-          paddingRight: drawerPosition === 'right' ? insets.right : 0,
-        },
-      ]}
-      style={styles.container}
-    >
-      <DrawerItemList {...rest} />
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
       <DrawerItem
         label="Help"
         onPress={() => Linking.openUrl('https://mywebsite.com/help')}
       />
-    </ScrollView>
+    </DrawerContentScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 ```
 
 The `DrawerItem` component accepts the following props:
