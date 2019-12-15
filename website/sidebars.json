@@ -27,7 +27,6 @@
       "custom-android-back-button-handling",
       "connecting-navigation-prop",
       "navigating-without-navigation-prop",
-      "navigation-key",
       "deep-linking",
       "screen-tracking",
       "themes",
@@ -79,10 +78,8 @@
       }
     ],
     "Build your own Navigator": [
-      "routers",
-      "custom-navigators",
       "custom-routers",
-      "navigation-views"
+      "custom-navigators"
     ],
     "Additional Resources": [
       "supported-react-native-versions",

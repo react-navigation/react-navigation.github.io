@@ -13,14 +13,11 @@ Under the hood, navigators are plain React components.
 We include some commonly needed navigators such as:
 
 - [`createStackNavigator`](stack-navigator.html) - Renders one screen at a time and provides transitions between screens. When a new screen is opened it is placed on top of the stack.
+- [`createNativeStackNavigator`](native-stack-navigator.html) - Similar to `createStackNavigator`, but implemented using native navigation primitives such as `UINavigationController` on iOS and `Fragment` on Android.
 - [`createDrawerNavigator`](drawer-navigator.html) - Provides a drawer that slides in from the left of the screen.
 - [`createBottomTabNavigator`](bottom-tab-navigator.html) - Renders a tab bar that lets the user switch between several screens.
 - [`createMaterialTopTabNavigator`](material-top-tab-navigator.html) - Renders tab view which lets the user switch between several screens using swipe gesture or the tab bar.
 - [`createMaterialBottomTabNavigator`](material-bottom-tab-navigator.html) - Renders tab view which lets the user switch between several screens using swipe gesture or the tab bar.
-
-## Extending Navigators
-
-> TODO: We haven't written this guide yet. Please check back later.
 
 ## API for building custom navigators
 
@@ -52,10 +49,17 @@ The hook returns an object with following properties:
 Example:
 
 ```js
+import * as React from 'react';
 import { useNavigationBuilder } from '@react-navigation/native';
 import { TabRouter, TabActions } from '@react-navigation/routers';
 
-function TabNavigator({ initialRouteName, children, screenOptions, ...rest }) {
+function TabNavigator({
+  initialRouteName,
+  children,
+  screenOptions,
+  tabBarStyle,
+  contentStyle,
+}) {
   const { state, navigation, descriptors } = useNavigationBuilder(TabRouter, {
     children,
     screenOptions,
@@ -64,24 +68,31 @@ function TabNavigator({ initialRouteName, children, screenOptions, ...rest }) {
 
   return (
     <React.Fragment>
-      <View>
+      <View style={[{ flexDirection: 'row' }, tabBarStyle]}>
         {state.routes.map(route => (
           <TouchableOpacity
             key={route.key}
-            onPress={() =>
-              navigation.dispatch({
-                ...TabActions.jumpTo(route.name),
-                target: state.key,
-              })
-            }
+            onPress={() => {
+              const event = navigation.emit({
+                type: 'tabPress',
+                target: route.key,
+              });
+
+              if (!event.defaultPrevented) {
+                navigation.dispatch({
+                  ...TabActions.jumpTo(route.name),
+                  target: state.key,
+                });
+              }
+            }}
             style={{ flex: 1 }}
           >
             <Text>{descriptors[route.key].options.title || route.name}</Text>
           </TouchableOpacity>
         ))}
       </View>
-      <View style={{ flex: 1 }}>
-        {state.routes.map(route => descriptors[route.key].render())}
+      <View style={[{ flex: 1 }, contentStyle]}>
+        {descriptors[state.routes[state.index].key].render()}
       </View>
     </React.Fragment>
   );
@@ -109,7 +120,10 @@ This `createNavigatorFactory` function is used to create a function that will `N
 Example:
 
 ```js
-import { useNavigationBuilder, createNavigatorFactory } from '@react-navigation/native';
+import {
+  useNavigationBuilder,
+  createNavigatorFactory,
+} from '@react-navigation/native';
 
 // ...
 
@@ -118,4 +132,162 @@ export default createNavigatorFactory(TabNavigator);
 
 ## Type-checking navigators
 
-> TODO: We haven't written this guide yet. Please check back later.
+To type-check navigators, we need to provide 3 types:
+
+- Type of the props accepted by the view
+- Type of supported screen options
+- A map of event types emitted by the navigator
+
+For example, to type-check our custom tab navigator, we can do something like this:
+
+```tsx
+import * as React from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
+import {
+  useNavigationBuilder,
+  DefaultNavigatorOptions,
+} from '@react-navigation/native';
+import {
+  TabRouter,
+  TabActions,
+  TabRouterOptions,
+  TabNavigationState,
+} from '@react-navigation/routers';
+
+// Props accepted by the view
+type TabNavigationConfig = {
+  tabBarStyle: StyleProp<ViewStyle>;
+  contentStyle: StyleProp<ViewStyle>;
+};
+
+// Supported screen options
+type TabNavigationOptions = {
+  title?: string;
+};
+
+// Map of events and the type of data (in event.data)
+type TabNavigationEventMap = {
+  tabPress: { isAlreadyFocused: boolean };
+};
+
+// The props accepted by the component is a combination of 3 things
+type Props = DefaultNavigatorOptions<TabNavigationOptions> &
+  TabRouterOptions &
+  TabNavigationConfig;
+
+function TabNavigator({
+  initialRouteName,
+  children,
+  screenOptions,
+  tabBarStyle,
+  contentStyle,
+}: Props) {
+  const { state, navigation, descriptors } = useNavigationBuilder<
+    TabNavigationState,
+    TabRouterOptions,
+    TabNavigationOptions,
+    TabNavigationEventMap
+  >(TabRouter, {
+    children,
+    screenOptions,
+    initialRouteName,
+  });
+
+  return (
+    <React.Fragment>
+      <View style={[{ flexDirection: 'row' }, tabBarStyle]}>
+        {state.routes.map(route => (
+          <TouchableOpacity
+            key={route.key}
+            onPress={() => {
+              const event = navigation.emit({
+                type: 'tabPress',
+                target: route.key,
+                data: {
+                  isAlreadyFocused: route.key === state.routes[state.index].key,
+                },
+              });
+
+              if (!event.defaultPrevented) {
+                navigation.dispatch({
+                  ...TabActions.jumpTo(route.name),
+                  target: state.key,
+                });
+              }
+            }}
+            style={{ flex: 1 }}
+          >
+            <Text>{descriptors[route.key].options.title || route.name}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+      <View style={[{ flex: 1 }, contentStyle]}>
+        {descriptors[state.routes[state.index].key].render()}
+      </View>
+    </React.Fragment>
+  );
+}
+
+export default createNavigatorFactory<
+  TabNavigationOptions,
+  typeof TabNavigator
+>(TabNavigator);
+```
+
+## Extending Navigators
+
+All of the built-in navigators export their views, which we can reuse and build additional functionality on top of them. For example, if we want to re-build the bottom tab navigator, we need the following code:
+
+```js
+import * as React from 'react';
+import {
+  useNavigationBuilder,
+  createNavigatorFactory,
+} from '@react-navigation/native';
+import { TabRouter } from '@react-navigation/routers';
+import { BottomTabView } from '@react-navigation/bottom-tabs';
+
+function BottomTabNavigator({
+  initialRouteName,
+  backBehavior,
+  children,
+  screenOptions,
+  ...rest
+}) {
+  const { state, descriptors, navigation } = useNavigationBuilder(TabRouter, {
+    initialRouteName,
+    backBehavior,
+    children,
+    screenOptions,
+  });
+
+  return (
+    <BottomTabView
+      {...rest}
+      state={state}
+      navigation={navigation}
+      descriptors={descriptors}
+    />
+  );
+}
+
+export default createNavigatorFactory(BottomTabNavigator);
+```
+
+Now, we can customize it to add additional functionality or change the behavior. For example, use a [custom router](custom-routers.md) instead of the default `TabRouter`:
+
+```js
+import MyRouter from './MyRouter';
+
+// ...
+
+const { state, descriptors, navigation } = useNavigationBuilder(MyRouter, {
+  initialRouteName,
+  backBehavior,
+  children,
+  screenOptions,
+});
+
+
+// ...
+```

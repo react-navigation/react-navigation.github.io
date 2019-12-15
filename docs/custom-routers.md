@@ -133,3 +133,81 @@ const SimpleRouter = () => router;
 
 export default SimpleRouter;
 ```
+
+## Built-In Routers
+
+The `@react-navigation/routers` package ships with a few standard routers:
+
+- `StackRouter`
+- `TabRouter`
+- `DrawerRouter`
+
+## Customizing Routers
+
+You can reuse a router and override the router functions as per your needs, such as customizing how existing actions are handled, adding additional actions etc.
+
+See [custom navigators](custom-navigators.md) for details on how to override the router with a custom router in an existing navigator.
+
+### Custom Navigation Actions
+
+Let's say you want to add a custom action to clear the history:
+
+```js
+import { TabRouter } from '@react-navigation/routers';
+
+const MyTabRouter = options => {
+  const router = TabRouter(options);
+
+  return {
+    ...router,
+    getStateForAction(state, action, options) {
+      switch (action.type) {
+        case 'CLEAR_HISTORY':
+          return {
+            ...state,
+            routeKeyHistory: [],
+          };
+        default:
+          return router.getStateForAction(state, action, options);
+      }
+    },
+
+    actionCreators: {
+      ...router.actionCreators,
+      clearHistory() {
+        return { type: 'CLEAR_HISTORY' };
+      },
+    },
+  };
+};
+```
+
+### Blocking Navigation Actions
+
+Sometimes you may want to prevent some navigation activity, depending on your route. Let's say, you want to prevent going back if `isEditing` is `true`:
+
+```js
+import { StackRouter } from '@react-navigation/routers';
+
+const MyStackRouter = options => {
+  const router = StackRouter(options);
+
+  return {
+    ...router,
+    getStateForAction(state, action, options) {
+      const result = router.getStateForAction(state, action, options);
+
+      if (
+        result != null &&
+        result.index < state.index &&
+        state.routes[state.index].params?.isEditing
+      ) {
+        // Returning the current state means that the action has been handled, but we don't have a new state
+        return state;
+      }
+
+      return result;
+    },
+  };
+};
+```
