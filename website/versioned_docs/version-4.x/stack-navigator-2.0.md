@@ -325,15 +325,11 @@ Use this prop to have visible shadows during transitions. Defaults to `true`.
 
 Use this prop to have a semi-transparent dark overlay visible under the card during transitions. Defaults to `true` on Android and `false` on iOS.
 
-#### `cardTransparent`
-
-Use this prop to use a transparent background for the card instead of a white one. This is useful to implement things like modal dialogs where the previous scene should still be visible underneath the current one. Defaults to `false`.
-
-If you use [`react-native-screens`](https://github.com/kmagiera/react-native-screens), you should also specify `mode: 'modal'` in the stack view config so previous screens aren't detached.
-
 #### `cardStyle`
 
 Style object for the card in stack. You can provide a custom background color to use instead of the default background here.
+
+You can also specify `{ backgroundColor: 'transparent' }` to make the previous screen visible underneath. This is useful to implement things like modal dialogs. If you use [`react-native-screens`](https://github.com/kmagiera/react-native-screens), you should also specify `mode: 'modal'` in the stack view config when using a transparent background so previous screens aren't detached.
 
 #### `disableKeyboardHandling`
 
