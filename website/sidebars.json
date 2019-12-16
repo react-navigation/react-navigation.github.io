@@ -63,6 +63,7 @@
           "use-route",
           "use-focus-effect",
           "use-is-focused",
+          "use-linking",
           "use-scroll-to-top"
         ]
       },

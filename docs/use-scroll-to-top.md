@@ -16,7 +16,7 @@ import { ScrollView } from 'react-native';
 import { useScrollToTop } from '@react-navigation/native';
 
 export default function Albums() {
-  const ref = React.useRef < ScrollView > null;
+  const ref = React.useRef(null);
 
   useScrollToTop(ref);
 

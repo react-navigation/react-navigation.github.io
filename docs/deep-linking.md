@@ -35,7 +35,7 @@ For example, the path `/rooms/chat?user=jane` will be translated to a state obje
 }
 ```
 
-The `useLinking` hooks makes it easier to handle incoming links:
+The [`useLinking`](use-linking.md) hook makes it easier to handle incoming links:
 
 ```js
 import {
