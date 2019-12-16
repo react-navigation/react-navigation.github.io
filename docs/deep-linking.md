@@ -133,40 +133,50 @@ const state = {
 
 It's important to note that the state object must match the hierarchy of nested navigators. Otherwise the state will be discarded.
 
-Sometimes we'll have the target navigator nested in other navigators which aren't part of the deep link. In this case, specifying the mapping isn't sufficient and we need to account for the additional navigators as well. For example, let's say the navigator containing the `Catalog` screen is nested inside a screen named `Tabs` in another navigator. In this case, we'll need to modify the returned state object to include it. We can use the `getStateFromPath` option to achieve it:
+Sometimes we'll have the target navigator nested in other navigators which aren't part of the deep link. For example, let's say our navigation structure looks this:
 
 ```js
-import { getStateFromPath } from '@react-navigation/native';
+function Home() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Notifications" component={Notifications} />
+    </Tab.Navigator>
+  );
+}
 
-// ...
-
-const { getInitialState } = useLinking(ref, {
-  prefixes: ['https://mychat.com', 'mychat://'],
-  config: {
-    Chat: 'feed/:sort',
-  },
-  getStateFromPath: (path, options) => {
-    const state = getStateFromPath(path, options);
-
-    return {
-      routes: [{ name: 'Tabs', state }],
-    };
-  },
-});
+function App() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Settings" component={Settings} />
+    </Stack.Navigator>
+  );
+}
 ```
 
-This will result in the following state object:
+Here we have a stack navigator in root, and inside the `Home` screen of the root stack, we have a tab navigator with various screens. With this structure, let's say we want the path `/users/:id` to go to the `Profile` screen. We can express the nested config like so:
+
+```js
+{
+  Home: {
+    Profile: 'users/:id',
+  },
+}
+```
+
+In this config, we specify that the `Profile` screen should be resolved for the `users/:id` pattern and it's nested inside the `Home` screen. This will result in the following state object:
 
 ```js
 const state = {
   routes: [
     {
-      name: 'Tabs',
+      name: 'Home',
       state: {
         routes: [
           {
-            name: 'Catalog',
-            params: { id: 42 },
+            name: 'Users',
+            params: { id: 'jane' },
           },
         ],
       },
@@ -175,7 +185,19 @@ const state = {
 };
 ```
 
-If this doesn't satisfy your use case, the hook also accepts a `getStateFromPath` option where you can provide a custom function to convert the URL to a valid state object for more advanced use cases.
+For some advanced cases, specifying the mapping may not be sufficient. You can implement your custom parser to address these cases using the `getStateFromPath` option:
+
+```js
+const { getInitialState } = useLinking(ref, {
+  prefixes: ['https://mychat.com', 'mychat://'],
+  config: {
+    Chat: 'feed/:sort',
+  },
+  getStateFromPath: (path, options) => {
+    // Implement your custom parser and return the navigation state here
+  },
+});
+```
 
 ## Set up with Expo projects
 
