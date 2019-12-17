@@ -126,7 +126,7 @@ The code above will enable you to navigate with gestures between `In Progress` s
 
 ```js
 import React from 'react';
-import { TabBar, Tab, Divider, TabElement } from 'react-native-ui-kitten';
+import { TabBar, Tab, Divider, TabElement } from '@ui-kitten/components';
 import { SafeAreaLayout, SaveAreaInset, SafeAreaLayoutElement } from '../../components/safe-area-layout.component';
 import { Toolbar } from '../../components/toolbar.component';
 
@@ -239,7 +239,7 @@ Just like in the case with tabs at the top, we also need to make a custom `tabBa
 
 ```js
 import React from 'react';
-import { BottomNavigation, BottomNavigationTab, Divider, BottomNavigationTabElement } from 'react-native-ui-kitten';
+import { BottomNavigation, BottomNavigationTab, Divider, BottomNavigationTabElement } from '@ui-kitten/components';
 import { SafeAreaLayout, SafeAreaLayoutElement, SaveAreaInset } from '../../components/safe-area-layout.component';
 
 export const HomeTabBar = (props): SafeAreaLayoutElement => {
@@ -353,7 +353,7 @@ Just like Top/Bottom tab navigators, the drawer navigator also has a special pro
 
 ```js
 import React from 'react';
-import { Drawer, DrawerElement, MenuItemType } from 'react-native-ui-kitten';
+import { Drawer, DrawerElement, MenuItemType } from '@ui-kitten/components';
 import { SafeAreaLayout, SaveAreaInset } from '../../components/safe-area-layout.component';
 
 export const HomeDrawer = (props): DrawerElement => {
@@ -390,7 +390,7 @@ The next thing to do is to modify the Todo tab bar by adding a menu icon to open
 
 ```js
 import React from 'react';
-import { TabBar, Tab, Divider, TabElement } from 'react-native-ui-kitten';
+import { TabBar, Tab, Divider, TabElement } from '@ui-kitten/components';
 import { SafeAreaLayout, SaveAreaInset, SafeAreaLayoutElement } from '../../components/safe-area-layout.component';
 import { Toolbar } from '../../components/toolbar.component';
 import { MenuIcon } from '../../assets/icons';
