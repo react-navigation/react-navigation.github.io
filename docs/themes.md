@@ -15,10 +15,10 @@ To pass a custom theme, you can pass the `theme` prop to the navigation containe
 
 ```js
 import * as React from 'react';
-import { NavigationNativeContainer, DefaultTheme } from 'react-native-paper';
+import { NavigationNativeContainer, DefaultTheme } from '@react-navigation/native';
 import App from './src/App';
 
-const theme = {
+const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
