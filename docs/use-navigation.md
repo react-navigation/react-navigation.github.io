@@ -13,7 +13,7 @@ sidebar_label: useNavigation
 ```js
 import * as React from 'react';
 import { Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/core';
 
 export default function MyBackButton() {
   const navigation = useNavigation();
