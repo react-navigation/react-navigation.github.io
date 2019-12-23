@@ -28,7 +28,7 @@ expo install react-native-gesture-handler react-native-reanimated react-native-s
 If you are not using Expo, run the following:
 
 ```sh
-yarn add react-native-reanimated react-native-gesture-handler react-native-screens@^1.0.0-alpha.23 react-native-safe-area-context
+yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context
 ```
 
 If you are using Expo, you are done. Otherwise, continue to the next steps.

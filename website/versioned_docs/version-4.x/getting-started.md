@@ -51,7 +51,7 @@ You can now continue to ["Hello React Navigation"](hello-react-navigation.html) 
 
 #### Installing dependencies into a bare React Native project
 
-In your project directory, run `yarn add react-native-reanimated react-native-gesture-handler react-native-screens@^1.0.0-alpha.23`.
+In your project directory, run `yarn add react-native-reanimated react-native-gesture-handler react-native-screens`.
 
 Next, we need to link these libraries. The steps depends on your React Native version:
 
