@@ -17,25 +17,13 @@ function SettingsScreen({ navigation }) {
 }
 
 function ProfileScreen({ navigation }) {
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      alert('Screen was focused');
-      // Screen was focused
-      // Do something
-    });
+  React.useEffect(() =>
+    navigation.addListener('focus', () => alert('Screen was focused'))
+  );
 
-    return unsubscribe;
-  });
-
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('blur', () => {
-      alert('Screen was unfocused');
-      // Screen was focused
-      // Do something
-    });
-
-    return unsubscribe;
-  });
+  React.useEffect(() =>
+    navigation.addListener('blur', () => alert('Screen was unfocused'))
+  );
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
