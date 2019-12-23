@@ -88,6 +88,8 @@ navigation.navigate('Root', { screen: 'Settings' });
 
 Now, the `Settings` screen will be rendered instead of `Profile` upon navigation. We can also pass params this way:
 
+<samp id="nest-navigators" />
+
 ```js
 navigation.navigate('Root', {
   screen: 'Settings',
