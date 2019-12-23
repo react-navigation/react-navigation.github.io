@@ -55,6 +55,8 @@ React Navigation emits events to screen components that subscribe to them. We ca
 
 Example:
 
+<samp id="focus-and-blur" />
+
 ```js
 function Profile({ navigation }) {
   React.useEffect(() => {
@@ -75,6 +77,8 @@ Read more about events in the [API reference](navigation-prop.html#navigation-ev
 Instead of adding event listeners manually, we can use the [`useFocusEffect`](use-focus-effect.html) hook to perform side effects. It's like React's `useEffect` hook, but it ties into the navigation lifecycle.
 
 Example:
+
+<samp id="use-focus-effect" />
 
 ```js
 import { useFocusEffect } from '@react-navigation/native';
