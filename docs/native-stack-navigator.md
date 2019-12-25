@@ -8,7 +8,7 @@ Provides a way for your app to transition between screens where each new screen 
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
 
-This uses native primitives for navigation using [`react-native-screens`](https://github.com/kmagiera/react-native-screens) under the hood, as opposed to the JS based stack navigator. While this provides native feeling and performance, it's not as customizable.
+This uses native primitives (`UINavigationController` on iOS and `Fragment` on Android) for navigation using [`react-native-screens`](https://github.com/kmagiera/react-native-screens) under the hood, as opposed to the JS based stack navigator. While this provides native feeling and performance, it's not as customizable.
 
 To use this navigator, you need to install [`@react-navigation/native-stack`](https://github.com/react-navigation/navigation-ex/tree/master/packages/native-stack):
 
@@ -116,7 +116,7 @@ String to be used by the header as title string. Defaults to scene `title`.
 
 Title string used by the back button on iOS. Defaults to the previous scene's `headerTitle`.
 
-### `headerBackTitleVisible`
+#### `headerBackTitleVisible`
 
 Whether the back button title should be visible or not. Defaults to `true`. Only supported on iOS.
 

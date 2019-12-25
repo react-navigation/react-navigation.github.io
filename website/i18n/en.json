@@ -161,10 +161,6 @@
         "title": "NavigationContext",
         "sidebar_label": "NavigationContext"
       },
-      "navigation-key": {
-        "title": "Using the navigation key",
-        "sidebar_label": "Using the navigation key"
-      },
       "navigation-lifecycle": {
         "title": "Navigation lifecycle",
         "sidebar_label": "Navigation lifecycle"
@@ -172,10 +168,6 @@
       "navigation-prop": {
         "title": "Navigation prop reference",
         "sidebar_label": "Navigation prop"
-      },
-      "navigation-views": {
-        "title": "Navigation views",
-        "sidebar_label": "Navigation views"
       },
       "nesting-navigators": {
         "title": "Nesting navigators",
@@ -214,10 +206,6 @@
       "route-prop": {
         "title": "Route prop reference",
         "sidebar_label": "Route prop"
-      },
-      "routers": {
-        "title": "Routers",
-        "sidebar_label": "Routers"
       },
       "screen-options-resolution": {
         "title": "Screen options resolution",
@@ -280,6 +268,10 @@
       "use-is-focused": {
         "title": "useIsFocused",
         "sidebar_label": "useIsFocused"
+      },
+      "use-linking": {
+        "title": "useLinking",
+        "sidebar_label": "useLinking"
       },
       "use-navigation": {
         "title": "useNavigation",
