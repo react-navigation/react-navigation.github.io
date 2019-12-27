@@ -92,6 +92,7 @@ You might be curious, why don't we support it by default anymore if it's so easy
 - Static properties need extra code to work if you have a [Higher Order Component](https://reactjs.org/docs/higher-order-components.html)
 - You lose the ability to use props and context here, making them less flexible
 - They cannot be type-checked automatically, you need to manually annotate this property
+- They don't play well with Fast Refresh, as changing them doesn't trigger a re-render
 - We've seen people get confused on how to use static properties when transitioning from class components to function components
 
 Due to the numerous disadvantages with this pattern, we decided to drop it in favor of the current API.
@@ -246,14 +247,27 @@ In React Navigation 4.x, we could pass a prop called `screenProps` which you cou
 <App screenProps={{ /* some data here */ }}>
 ```
 
-This was handy for passing global configuration such as translations, themes etc. to all components.
+This was handy for passing global configuration such as translations, themes etc. to all screens.
 
 However, using `screenProps` had some disadvantages:
 
 - Changing the values in `screenProps` re-renders all of the screens in the app, regardless of whether they use it or not. This can be very bad for performance, and easy mistake to make.
 - When using a type-checker like TypeScript, it was necessary to annotate `screenProps` every time we want to use it, which wasn't type-safe or convenient.
+- You could only access `screenProps` in screens. To access them in child components, you needed to pass them down as props manually. It's very inconvenient for things like translation where we often use it in a lot of components.
 
 Due to the component based API of React Navigation 5.x, we have a much better alternative to `screenProps` which doesn't have these disadvantages: [React Context](https://reactjs.org/docs/context.html). Using React Context, it's possible to pass data to any child component in a performant and type-safe way, and we don't need to learn a new API!
+
+## Themes
+
+React Navigation 4.x had basic theming support where you could specify whether to use a light or dark theme:
+
+```js
+<App theme="dark">
+```
+
+It wasn't easy to customize the colors used by the built-in components such as header, tab bar etc. without extra code or repetition.
+
+In React navigation 5.x, we have revamped the theme system for easier customization. Now you can provide a theme object with your desired colors for background, accent color etc. and it will automatically change the colors of all navigators without any extra code. See the [Themes](themes.md) documentation for more details on how to customize the theme.
 
 ## Navigation state in Redux
 
