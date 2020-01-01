@@ -14,18 +14,18 @@ To use this navigator, you need to install [`@react-navigation/stack`](https://g
 yarn add @react-navigation/native@next @react-navigation/stack@next @react-native-community/masked-view
 ```
 
-Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated), [`react-native-screens`](https://github.com/kmagiera/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
+Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler), [`react-native-screens`](https://github.com/kmagiera/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
 
 If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
 
 ```sh
-expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context
+expo install react-native-gesture-handler react-native-screens react-native-safe-area-context
 ```
 
 If you are not using Expo, run the following:
 
 ```sh
-yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context
+yarn add react-native-gesture-handler react-native-screens react-native-safe-area-context
 ```
 
 If you are using Expo, you are done. Otherwise, continue to the next steps.
@@ -77,7 +77,7 @@ public class MainActivity extends ReactActivity {
 Then add the following at the top of your entry file, such as `index.js` or `App.js`:
 
 ```js
-import 'react-native-gesture-handler'
+import 'react-native-gesture-handler';
 ```
 
 Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
@@ -468,9 +468,9 @@ Stack Navigator exposes various options to configure the transition animation wh
   The function receives the following properties in it's argument:
 
   - `current` - Values for the current screen:
-    - `progress` - Renimated node representing the progress value of the current screen.
+    - `progress` - Animated node representing the progress value of the current screen.
   - `next` - Values for the current screen the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
-    - `progress` - Renimated node representing the progress value of the next screen.
+    - `progress` - Animated node representing the progress value of the next screen.
   - `index` - The index of the card in the stack.
   - `closing` - Animated node representing whether the card is closing. `1` when closing, `0` if not.
   - `layouts` - Layout measurements for various items we use for animation.
@@ -481,14 +481,7 @@ Stack Navigator exposes various options to configure the transition animation wh
   ```js
   const forFade = ({ current, closing }) => ({
     cardStyle: {
-      opacity: cond(
-        closing,
-        current.progress,
-        interpolate(current.progress, {
-          inputRange: [0, 0.5, 0.9, 1],
-          outputRange: [0, 0.25, 0.7, 1],
-        })
-      ),
+      opacity: current.progress,
     },
   });
   ```
@@ -513,9 +506,9 @@ Stack Navigator exposes various options to configure the transition animation wh
   The function receives the following properties in it's argument:
 
   - `current` - Values for the current screen (the screen which owns this header).
-    - `progress` - Renimated node representing the progress value of the current screen.
+    - `progress` - Animated node representing the progress value of the current screen.
   - `next` - Values for the current screen the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
-    - `progress` - Renimated node representing the progress value of the next screen.
+    - `progress` - Animated node representing the progress value of the next screen.
   - `layouts` - Layout measurements for various items we use for animation. Each layout object contain `height` and `width` properties.
     - `screen` - Layout of the whole screen.
     - `title` - Layout of the title element. Might be `undefined` when not rendering a title.
@@ -525,13 +518,13 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   ```js
   const forFade = ({ current, next }) => {
-    const opacity = interpolate(
-      add(current.progress, next ? next.progress : 0),
-      {
-        inputRange: [0, 1, 2],
-        outputRange: [0, 1, 0],
-      }
-    );
+    const opacity = Animated.add(
+      current.progress,
+      next ? next.progress : 0
+    ).interpolate({
+      inputRange: [0, 1, 2],
+      outputRange: [0, 1, 0],
+    });
 
     return {
       leftButtonStyle: { opacity },
