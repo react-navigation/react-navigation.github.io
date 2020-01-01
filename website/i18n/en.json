@@ -1049,9 +1049,9 @@
         "title": "StackActions reference",
         "sidebar_label": "StackActions"
       },
-      "version-4.x/version-4.x-stack-navigator-2.0": {
-        "title": "createStackNavigator (2.0 alpha)",
-        "sidebar_label": "createStackNavigator (2.0 alpha)"
+      "version-4.x/version-4.x-stack-navigator-1.0": {
+        "title": "createStackNavigator (1.x)",
+        "sidebar_label": "createStackNavigator (1.x)"
       },
       "version-4.x/version-4.x-stack-navigator": {
         "title": "createStackNavigator",

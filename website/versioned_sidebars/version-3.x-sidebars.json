@@ -47,7 +47,6 @@
         "label": "Navigators",
         "ids": [
           "version-3.x-stack-navigator",
-          "version-3.x-stack-navigator-2.0",
           "version-3.x-switch-navigator",
           "version-3.x-animated-switch-navigator",
           "version-3.x-drawer-navigator",
