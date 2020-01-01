@@ -9,10 +9,10 @@ Provides a way for your app to transition between screens where each new screen 
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
 
-To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`react-navigation-stack`](https://github.com/react-navigation/stack).
+To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`react-navigation-stack`](https://github.com/react-navigation/stack/tree/1.0).
 
 ```sh
-yarn add react-navigation-stack
+yarn add react-navigation-stack@^1.10.3
 ```
 
 ## API
