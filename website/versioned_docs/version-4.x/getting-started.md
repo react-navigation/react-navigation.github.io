@@ -41,17 +41,27 @@ yarn add react-navigation
 
 React Navigation is made up of some core utilities and those are then used by navigators to create the navigation structure in your app. Don't worry too much about this for now, it'll become clear soon enough! To frontload the installation work, let's also install and configure dependencies used by most navigators, then we can move forward with starting to write some code.
 
-The libraries we will install now are [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated), and [`react-native-screens`](https://github.com/kmagiera/react-native-screens). If you already have these libraries installed and at the latest version, you are done here! Otherwise, read on.
+The libraries we will install now are [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated), [`react-native-screens`](https://github.com/kmagiera/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context). If you already have these libraries installed and at the latest version, you are done here! Otherwise, read on.
 
 #### Installing dependencies into an Expo managed project
 
-In your project directory, run `expo install react-native-gesture-handler react-native-reanimated`. This will install versions of these libraries that are compatible
+In your project directory, run:
+
+```sh
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context
+```
+
+This will install versions of these libraries that are compatible.
 
 You can now continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
 
 #### Installing dependencies into a bare React Native project
 
-In your project directory, run `yarn add react-native-reanimated react-native-gesture-handler react-native-screens`.
+In your project directory, run:
+
+```sh
+yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context
+```
 
 Next, we need to link these libraries. The steps depends on your React Native version:
 
@@ -82,6 +92,7 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   react-native link react-native-reanimated
   react-native link react-native-gesture-handler
   react-native link react-native-screens
+  react-native link react-native-safe-area-context
   ```
 
   You also need to configure [jetifier](https://github.com/mikehardy/jetifier) to support dependencies using `androidx`:
@@ -142,7 +153,7 @@ public class MainActivity extends ReactActivity {
 Then add the following at the top of your entry file, such as `index.js` or `App.js`:
 
 ```js
-import 'react-native-gesture-handler'
+import 'react-native-gesture-handler';
 ```
 
 Now you are ready to build and run your app on the device/simulator.

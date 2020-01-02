@@ -8,8 +8,8 @@ This is a guest post by the [UI Kitten](http://akveo.github.io/react-native-ui-k
 In this blog post, we'll show a step-by-step guide on using React Navigation 5 with UI Kitten.
 
 ## Introduction
- 
-The new React Navigation comes with several significant improvements such as [improving animation performance](https://blog.expo.io/re-writing-react-navigation-stack-db6a376522b1) with [gesture-handler](https://github.com/kmagiera/react-native-gesture-handler) and [reanimated](https://github.com/kmagiera/react-native-reanimated) libraries. What's more, it was migrated to TypeScript for improving the quality of your code base with type checking and more. But the biggest update is migrating to component-based API.
+
+The new React Navigation comes with several significant improvements such as [improving animation performance](https://blog.expo.io/re-writing-react-navigation-stack-db6a376522b1) with [gesture-handler](https://github.com/software-mansion/react-native-gesture-handler) and [reanimated](https://github.com/software-mansion/react-native-reanimated) libraries. What's more, it was migrated to TypeScript for improving the quality of your code base with type checking and more. But the biggest update is migrating to component-based API.
 
 [Eva Design System](https://eva.design) is a customizable Design System that is easy to adapt to your brand. It provides Mobile and Web component libraries and allows businesses to quickly create beautiful unique branding themes. The React Native realization of Eva Design System includes [UI Kitten](http://akveo.github.io/react-native-ui-kitten), React Native framework for building modern cross-platform mobile applications.
 
@@ -243,7 +243,7 @@ import { BottomNavigation, BottomNavigationTab, Divider, BottomNavigationTabElem
 import { SafeAreaLayout, SafeAreaLayoutElement, SaveAreaInset } from '../../components/safe-area-layout.component';
 
 export const HomeTabBar = (props): SafeAreaLayoutElement => {
-  
+
   const onSelect = (index: number): void => {
     const selectedTabRoute: string = props.state.routeNames[index];
     props.navigation.navigate(selectedTabRoute);
@@ -375,7 +375,7 @@ export const HomeDrawer = (props): DrawerElement => {
 
   return (
     <SafeAreaLayout insets={SaveAreaInset.TOP}>
-      <Drawer 
+      <Drawer
         data={props.state.routes.map(createNavigationItemForRoute)}
         onSelect={onMenuItemSelect}
       />

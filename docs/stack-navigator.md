@@ -14,7 +14,7 @@ To use this navigator, you need to install [`@react-navigation/stack`](https://g
 yarn add @react-navigation/native@next @react-navigation/stack@next @react-native-community/masked-view
 ```
 
-Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler), [`react-native-screens`](https://github.com/kmagiera/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
+Now we need to install [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler), [`react-native-screens`](https://github.com/kmagiera/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
 
 If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
 

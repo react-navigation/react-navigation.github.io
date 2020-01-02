@@ -52,4 +52,4 @@ const MySwitch = createAnimatedSwitchNavigator(
 );
 ```
 
-Since the transition are possible thanks to the `Transition` API from `react-native-reanimated`, you can learn more about it [here](https://github.com/kmagiera/react-native-reanimated).
+Since the transition are possible thanks to the `Transition` API from `react-native-reanimated`, you can learn more about it [here](https://github.com/software-mansion/react-native-reanimated).

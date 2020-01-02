@@ -12,7 +12,7 @@ To use this navigator, you need to install [`@react-navigation/drawer`](https://
 yarn add @react-navigation/native@next @react-navigation/drawer@next
 ```
 
-Now we need to install [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated), [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
+Now we need to install [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated), [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
 
 If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
 

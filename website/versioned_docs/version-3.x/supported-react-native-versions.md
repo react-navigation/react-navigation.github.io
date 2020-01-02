@@ -5,7 +5,7 @@ sidebar_label: Supported React Native versions
 original_id: supported-react-native-versions
 ---
 
-Since `react-navigation@3.x` depends on the new `React.createContext` API, which was added in `react@16.3.x`, we require `react-native@^0.54.x`. Also, `react-navigation@3.x` needs [react-native-gesture-handler](https://github.com/kmagiera/react-native-gesture-handler#react-native-support) to work, so you will need to make sure that the version of `react-native-gesture-handler` you are using matches your current `react-native` version.
+Since `react-navigation@3.x` depends on the new `React.createContext` API, which was added in `react@16.3.x`, we require `react-native@^0.54.x`. Also, `react-navigation@3.x` needs [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler#react-native-support) to work, so you will need to make sure that the version of `react-native-gesture-handler` you are using matches your current `react-native` version.
 
 If you are using [react-native-screens](react-native-screens.html), you will need to be aware of its own supported `react-native` version too.
 
