@@ -23,3 +23,5 @@ If you like what React Navigation has to offer but are turned off by this constr
 React Navigation doesn't support master-detail split-views on iPad yet. If you need this feature, you may want to use another library, although you can build it yourself if you like.
 
 React Navigation does not include support for the peek & pop feature available on devices with 3D touch.
+
+React Navigation does not support location change on the web yet. 
