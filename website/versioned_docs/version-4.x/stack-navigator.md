@@ -103,7 +103,11 @@ header: ({ scene, previous, navigation }) => {
 };
 ```
 
-When using a custom header, it's recommended set the `headerMode` option on the navigator to `screen`.
+When using a custom header, it's recommended set the `headerMode` option on the navigator to `screen`. You should also specify a height in `headerStyle` to avoid glitches:
+
+```js
+headerStyle: { height: 80 } // Specify the height of your custom header
+```
 
 To set a custom header for all the screens in the navigator, you can specify this option in the `defaultNavigationOptions` option of the navigator.
 
@@ -197,6 +201,16 @@ Defaults to `false`. If `true`, the header will not have a background unless you
 This is useful if you want to render a semi-transparent header or a blurred background.
 
 Note that if you don't want your content to appear under the header, you need to manually add a top margin to your content. React Navigation won't do it automatically.
+
+To get the height of the header, you can use `useHeaderHeight`:
+
+```js
+import { useHeaderHeight } from 'react-navigation-stack';
+
+// ...
+
+const headerHeight = useHeaderHeight();
+```
 
 #### `headerBackground`
 
