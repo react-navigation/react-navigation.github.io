@@ -204,6 +204,10 @@ Function which returns a React Element to render as the background of the header
 
 You can use this with `headerTransparent` to render a blur view, for example, to create a translucent header.
 
+#### `headerStatusBarHeight`
+
+Extra padding to add at the top of header to account for translucent status bar. By default, it uses the top value from the safe area insets of the device. Pass 0 or a custom value to disable the default behavior, and customize the height.
+
 #### `cardShadowEnabled`
 
 Use this prop to have visible shadows during transitions. Defaults to `true`.
@@ -262,8 +266,6 @@ Interpolated styles for various parts of the header. Refer the [Animations secti
 Safe area insets for the screen. This is used to avoid elements like notch and status bar. By default, the device's safe area insets are automatically detected. You can override the behavior with this option.
 
 Takes an object containing following optional properties: `top`, `right`, `bottom` and `left`.
-
-For example, to remove the extra spacing for status bar, pass `safeAreaInsets: { top: 0 }`.
 
 #### `onTransitionStart`
 
