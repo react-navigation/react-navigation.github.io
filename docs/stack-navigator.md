@@ -172,7 +172,9 @@ header: ({ scene, previous, navigation }) => {
 When using a custom header, it's recommended set the `headerMode` prop on the navigator to `screen`. You should also specify a height in `headerStyle` to avoid glitches:
 
 ```js
-headerStyle: { height: 80 } // Specify the height of your custom header
+headerStyle: {
+  height: 80, // Specify the height of your custom header
+};
 ```
 
 To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
@@ -282,7 +284,24 @@ const headerHeight = useHeaderHeight();
 
 Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
 
-You can use this with `headerTransparent` to render a blur view, for example, to create a translucent header.
+For example, you can use this with `headerTransparent` to render a blur view to create a translucent header.
+
+```js
+import { BlurView } from 'expo-blur';
+
+// ...
+
+<Screen
+  name="Home"
+  component={HomeScreen}
+  options={{
+    headerTransparent: true,
+    headerBackground: () => (
+      <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />
+    ),
+  }}
+/>;
+```
 
 #### `headerStatusBarHeight`
 
