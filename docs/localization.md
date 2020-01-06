@@ -43,7 +43,7 @@ export default function App() {
   const localizationContext = React.useMemo(() => ({
     t: (scope, options) => i18n.t(scope, { locale, ...options }),
     locale,
-    setlocale,
+    setLocale,
   }), [locale]);
 
   return (
