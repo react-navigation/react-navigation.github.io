@@ -61,7 +61,7 @@ export default function App() {
 
 Now in our screens we can use these `LocalizationContext` as follows:
 
-<samp id="localization">
+<samp id="localization" />
 
 ```js
 function MyScreen() {
@@ -88,7 +88,7 @@ function MyScreen() {
 
 We can also use it for screen options:
 
-<samp id="localization-with-title">
+<samp id="localization-with-title" />
 
 ```js
 function MyStack() {

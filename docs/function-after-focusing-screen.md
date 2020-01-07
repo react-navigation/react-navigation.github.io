@@ -20,7 +20,7 @@ With this approach, we will only be able to call an action when the screen focus
 
 Example:
 
-<samp id="focus-event-listener">
+<samp id="focus-event-listener" />
 
 ```js
 import * as React from 'react';
@@ -49,7 +49,7 @@ React Navigation provides a [hook](https://reactjs.org/docs/hooks-intro.html) th
 
 This is particularly handy when we are trying to stop something when the page is unfocused, like stopping a video or audio file from playing, or stopping the tracking of a user's location.
 
-<samp id="simple-focus-effect">
+<samp id="simple-focus-effect" />
 
 ```js
 import { useFocusEffect } from '@react-navigation/native';
@@ -77,7 +77,7 @@ The hook will return `true` when the screen is focused and `false` when our comp
 
 The `useIsFocused` hook will cause our component to re-render when we focus and unfocus a screen. Using this hook component may introduce unnecessary component re-renders as a screen comes in and out of focus. This could cause issues depending on the type of action we're calling on focusing. Hence we recommend to use this hook only if you need to trigger a re-render. For side-effects such as subscribing to events or fetching data, use the methods described above.
 
-<samp id="use-is-focused">
+<samp id="use-is-focused" />
 
 ```js
 import * as React from 'react';
