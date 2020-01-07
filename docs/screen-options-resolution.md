@@ -12,6 +12,8 @@ In this document we'll explain how this works when there are multiple navigators
 
 Let's take for example a tab navigator that contains a stack in each tab. What happens if we set the `options` on a screen inside of the stack?
 
+<samp id="stack-in-tab-nav-options" />
+
 ```js
 const Tab = createTabNavigator();
 const HomeStack = createStackNavigator();
@@ -19,51 +21,61 @@ const SettingsStack = createStackNavigator();
 
 function HomeStackScreen() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="A" component={A} options={{ tabBarLabel: 'Home!' }} />
-    </Tab.Navigator>
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="A"
+        component={A}
+        options={{ tabBarLabel: 'Home!' }}
+      />
+    </HomeStack.Navigator>
   );
 }
 
 function SettingsStackScreen() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen
         name="B"
         component={B}
         options={{ tabBarLabel: 'Settings!' }}
       />
-    </Tab.Navigator>
+    </SettingsStack.Navigator>
   );
 }
 
 export default function App() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeStackScreen} />
-      <Tab.Screen name="Settings" component={SettingsStack} />
-    </Tab.Navigator>
+    <NavigationNativeContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeStackScreen} />
+        <Tab.Screen name="Settings" component={SettingsStackScreen} />
+      </Tab.Navigator>
+    </NavigationNativeContainer>
   );
 }
 ```
 
 As we mentioned earlier, you can only modify navigation options for a navigator from one of its screen components. `A` and `B` above are screen components in `HomeStack` and `SettingsStack` respectively, not in the tab navigator. So the result will be that the `tabBarLabel` property is not applied to the tab navigator. We can fix this though!
 
+<samp id="stack-in-tab-nav-options-fixed" />
+
 ```js
 export default function App() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Home"
-        component={HomeStackScreen}
-        options={{ tabBarLabel: 'Home!' }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={SettingsStack}
-        options={{ tabBarLabel: 'Settings!' }}
-      />
-    </Tab.Navigator>
+    <NavigationNativeContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Home"
+          component={HomeStackScreen}
+          options={{ tabBarLabel: 'Home!' }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsStackScreen}
+          options={{ tabBarLabel: 'Settings!' }}
+        />
+      </Tab.Navigator>
+    </NavigationNativeContainer>
   );
 }
 ```
@@ -73,6 +85,8 @@ When we set the `options` directly on `Screen` components containing the `HomeSt
 ## Setting parent screen options based on child navigator's state
 
 Imagine the following configuration:
+
+<samp id="parent-options-from-child-start" />
 
 ```js
 const Tab = createBottomTabNavigator();
@@ -89,12 +103,14 @@ function HomeTabs() {
 
 const Stack = createStackNavigator();
 
-function App() {
+export default function App() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeTabs} />
-      <Stack.Screen name="Settings" component={SettingsScreen} />
-    </Stack.Navigator>
+    <NavigationNativeContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeTabs} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
+      </Stack.Navigator>
+    </NavigationNativeContainer>
   );
 }
 ```
@@ -127,6 +143,7 @@ function getHeaderTitle(route) {
 Then we can use this function in 2 ways:
 
 1. Using `options` prop on `Screen` (recommended):
+   <samp id="parent-options-from-child-opt1" />
 
    ```js
    <Stack.Screen
@@ -139,6 +156,7 @@ Then we can use this function in 2 ways:
    ```
 
 2. Using `navigation.setOptions`:
+   <samp id="parent-options-from-child-opt2" />
 
    ```js
    function HomeTabs({ navigation, route }) {
@@ -167,6 +185,8 @@ This approach can be used anytime you want to set options for a parent navigator
 In many cases, similar behavior can be achieved by reorganizing our navigators. We usually recommend this option if it fits your use case.
 
 For example, for the above use case, instead of adding a tab navigator inside a stack navigator, we can add a stack navigator inside each of the tabs.
+
+<samp id="reorganized-navigators" />
 
 ```js
 const FeedStack = createStackNavigator();

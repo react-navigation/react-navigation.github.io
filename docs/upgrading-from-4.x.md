@@ -75,7 +75,7 @@ But what if we want to define options statically on the component? It's less fle
 class HomeScreen extends React.Component {
   static navigationOptions = {
     // ...
-  }
+  };
 }
 
 // ...
@@ -84,7 +84,7 @@ class HomeScreen extends React.Component {
   name="Home"
   component={HomeScreen}
   options={HomeScreen.navigationOptions}
-/>
+/>;
 ```
 
 You might be curious, why don't we support it by default anymore if it's so easy?
@@ -105,7 +105,7 @@ This means, now we can access screen's params through `route.params` instead of 
 
 ```js
 function ProfileScreen({ route }) {
-  const useerId = route.params.me;
+  const userId = route.params.me;
 
   // ...
 }

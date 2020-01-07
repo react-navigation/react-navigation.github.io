@@ -20,11 +20,13 @@ With this approach, we will only be able to call an action when the screen focus
 
 Example:
 
+<samp id="focus-event-listener" />
+
 ```js
 import * as React from 'react';
 import { View } from 'react-native';
 
-export default function TabScreen({ navigation }) {
+function ProfileScreen({ navigation }) {
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       // The screen is focused
@@ -46,6 +48,8 @@ In most cases, it's recommended to use the `useFocusEffect` hook instead of addi
 React Navigation provides a [hook](https://reactjs.org/docs/hooks-intro.html) that runs an effect when the screen comes into focus and cleans it up when it goes out of focus. This is useful for cases such as adding event listeners, for fetching data with an API call when a screen becomes focused, or any other action that needs to happen once the screen comes into view.
 
 This is particularly handy when we are trying to stop something when the page is unfocused, like stopping a video or audio file from playing, or stopping the tracking of a user's location.
+
+<samp id="simple-focus-effect" />
 
 ```js
 import { useFocusEffect } from '@react-navigation/native';
@@ -73,6 +77,8 @@ The hook will return `true` when the screen is focused and `false` when our comp
 
 The `useIsFocused` hook will cause our component to re-render when we focus and unfocus a screen. Using this hook component may introduce unnecessary component re-renders as a screen comes in and out of focus. This could cause issues depending on the type of action we're calling on focusing. Hence we recommend to use this hook only if you need to trigger a re-render. For side-effects such as subscribing to events or fetching data, use the methods described above.
 
+<samp id="use-is-focused" />
+
 ```js
 import * as React from 'react';
 import { Text } from 'react-native';
@@ -86,4 +92,4 @@ function Profile() {
 }
 ```
 
-This example is also documented in the <a href="/docs/use-is-focused.html">`useIsFocused` API documentation</a>.
+This example is also documented in the [`useIsFocused` API documentation](use-is-focused.md).
