@@ -14,6 +14,7 @@ Before continuing, first install [`@react-navigation/drawer`](https://github.com
 
 To use this drawer navigator, import it from `@react-navigation/drawer`:  
 (swipe right to open)
+
 <samp id="drawer-based-navigation" />
 
 ```js
@@ -24,7 +25,7 @@ import { NavigationNativeContainer } from '@react-navigation/native';
 
 function HomeScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, flexDirection: 'column-reverse' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button
         onPress={() => navigation.navigate('Notifications')}
         title="Go to notifications"
@@ -35,7 +36,7 @@ function HomeScreen({ navigation }) {
 
 function NotificationsScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, flexDirection: 'column-reverse' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button onPress={() => navigation.goBack()} title="Go back home" />
     </View>
   );
@@ -57,7 +58,7 @@ export default function App() {
 
 ## Opening and closing drawer
 
-To open and close drawer, use the following helpers to open and close the drawer:
+To open and close drawer, use the following helpers:
 
 ```js
 navigation.openDrawer();

@@ -4,7 +4,7 @@ title: Redux integration
 sidebar_label: Redux integration
 ---
 
-It is extremely easy to use Redux in an app with React Navigation. It's basically no different than without React Navigation. The following example shows how to do it end to end: https://snack.expo.io/@react-navigation/redux-example. The most important piece from it is the following:
+It is extremely easy to use Redux in an app with React Navigation. It's basically no different than without React Navigation.
 
 ```js
 import { Provider } from 'react-redux';
@@ -28,12 +28,14 @@ Notice that we wrap our components in a `Provider` like we'd normally do with `r
 
 Create a component, `connect` it to the store, then use that component in the `title`.
 
+ <samp id="redux-integration" />
+
 ```js
-function Count({ value }) {
+function Counter({ value }) {
   return <Text>Count: {value}</Text>;
 }
 
-const CountContainer = connect(state => ({ value: state.count }))(Count);
+const CounterContainer = connect(state => ({ value: state.count }))(Counter);
 ```
 
 ```js
@@ -50,10 +52,10 @@ If the value isn't expected to change, you can just pass it from a `connect`ed c
 
 ```js
 <Button
-  title="Go to static count screen"
+  title="Go to static counter screen"
   onPress={() =>
     props.navigation.navigate('StaticCounter', {
-      count: props.count,
+      count,
     })
   }
 />
@@ -69,33 +71,15 @@ function StaticCounter({ route }) {
 }
 ```
 
+ <samp id="redux-integration-nav-param" />
+
 ```js
-<Screen
-  name="Counter"
+<RootStack.Screen
+  name="StaticCounter"
   component={StaticCounter}
-  options={({ route }) => ({ title: () => route.params.count })}
+  options={({ route }) => ({ title: route.params.count })}
 />
 ```
-
-### setParams from your screen
-
-Let's modify the `StaticCounter` from the previous example as follows:
-
-```js
-function StaticCounter({ count, route, navigation }) {
-  React.useEffect(() => {
-    navigation.setParams({ count });
-  }, [navigation, count]);
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.paragraph}>{route.params.count}</Text>
-    </View>
-  );
-}
-```
-
-Now whenever the store updates we update the `count` param and the title updates accordingly.
 
 ## Can I store the navigation state in Redux too?
 

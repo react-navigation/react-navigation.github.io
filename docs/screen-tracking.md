@@ -15,6 +15,8 @@ To get notified of state changes, we can use the `onStateChange` prop on `Naviga
 
 This example shows how to do screen tracking and send to Google Analytics. The approach can be adapted to any other analytics SDK.
 
+ <samp id="screen-tracking-for-analytics" />
+
 ```js
 import * as React from 'react';
 import analytics from '@react-native-firebase/analytics';

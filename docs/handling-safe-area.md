@@ -128,6 +128,8 @@ To fix this you can, once again, apply safe area insets your content. This will 
 
 In some cases you might need more control over which paddings are applied. For example, you can only apply the top and the bottom padding by changing the `style` object:
 
+<samp id="use-safe-area" />
+
 ```jsx
 import { useSafeArea } from 'react-native-safe-area-context';
 

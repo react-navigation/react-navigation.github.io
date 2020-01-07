@@ -17,6 +17,8 @@ To be able to persist the navigation state, we can use the `onStateChange` and `
 - `onStateChange` - This prop notifies us of any state changes. We can persist the state in this callback.
 - `initialState` - This prop allows us to pass an initial state to use for navigation state. We can pass the restored state in this prop.
 
+ <samp id="state-persistance" />
+
 ```js
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 
@@ -28,7 +30,7 @@ export default function App() {
     const restoreState = async () => {
       try {
         const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
-        const state = JSON.parse(savedStateString)
+        const state = JSON.parse(savedStateString);
 
         setInitialState(state);
       } finally {
