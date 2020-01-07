@@ -7,15 +7,13 @@ original_id: getting-started
 
 React Navigation is born from the React Native community's need for an extensible yet easy-to-use navigation solution written entirely in JavaScript (so you can read and understand all of the source), on top of powerful native primitives.
 
-Before you commit to using React Navigation for your project, you might want to read the [anti-pitch](pitch.html) &mdash; it will help you to understand the tradeoffs that we have chosen along with the areas where we consider the library to be deficient currently.
+Before you commit to using React Navigation for your project, you might want to read the [anti-pitch](pitch.md) &mdash; it will help you to understand the tradeoffs that we have chosen along with the areas where we consider the library to be deficient currently.
 
 ## What to expect
 
 If you're already familiar with React Native then you'll be able to get moving with React Navigation quickly! If not, you may want to read sections 1 to 4 (inclusive) of [React Native Express](http://reactnativeexpress.com/) first, then come back here when you're done.
 
 What follows within the _Fundamentals_ section of this documentation is a tour of the most important aspects of React Navigation. It should cover enough for you to know how to build your typical small mobile application, and give you the background that you need to dive deeper into the more advanced parts of React Navigation.
-
-<hr />
 
 ## Start from a template
 
@@ -26,8 +24,6 @@ The easiest way to get running with `react-navigation` is to initialize a projec
 - In both cases you can pick the TypeScript version of the template if you prefer &mdash; React Navigation ships with TypeScript types.
 
 Once the project is initialized, in the project directory run `expo install react-navigation react-native-gesture-handler react-native-reanimated react-native-screens`, and you're ready to go! You can now continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
-
-<hr />
 
 ## Install into an existing project
 
@@ -62,6 +58,8 @@ In your project directory, run:
 ```sh
 yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context
 ```
+
+> Note: You might get warnings related to peer dependencies after installation. They are usually caused my incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.
 
 Next, we need to link these libraries. The steps depends on your React Native version:
 
@@ -111,7 +109,7 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   }
   ```
 
-  > **NOTE**: Remember to remove this when you upgrade to React Native 0.60 and higher.
+  > Note: Remember to remove this when you upgrade to React Native 0.60 and higher.
 
   Now, run the `postinstall` script manually:
 
@@ -143,7 +141,7 @@ public class MainActivity extends ReactActivity {
 +    return new ReactActivityDelegate(this, getMainComponentName()) {
 +      @Override
 +      protected ReactRootView createRootView() {
-+       return new RNGestureHandlerEnabledRootView(MainActivity.this);
++        return new RNGestureHandlerEnabledRootView(MainActivity.this);
 +      }
 +    };
 +  }
@@ -156,6 +154,8 @@ Then add the following at the top of your entry file, such as `index.js` or `App
 import 'react-native-gesture-handler';
 ```
 
+> Note: When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional dependencies. If you're getting an error "Unable to resolve module", you need to install that module in your project.
+
 Now you are ready to build and run your app on the device/simulator.
 
-Continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
+Continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.

@@ -4,10 +4,6 @@ title: Getting started
 sidebar_label: Getting started
 ---
 
-React Navigation is born from the React Native community's need for an extensible yet easy-to-use navigation solution written entirely in JavaScript (so you can read and understand all of the source), on top of powerful native primitives.
-
-Before you commit to using React Navigation for your project, you might want to read the [anti-pitch](pitch.md) &mdash; it will help you to understand the tradeoffs that we have chosen along with the areas where we consider the library to be deficient currently.
-
 ## What to expect
 
 If you're already familiar with React Native then you'll be able to get moving with React Navigation quickly! If not, you may want to read sections 1 to 4 (inclusive) of [React Native Express](http://reactnativeexpress.com/) first, then come back here when you're done.
@@ -16,7 +12,7 @@ What follows within the _Fundamentals_ section of this documentation is a tour o
 
 ## Installation
 
-Install the required packages in your React Native project.
+Install the required packages in your React Native project:
 
 ```bash
 yarn add @react-navigation/native@next
@@ -28,7 +24,83 @@ Or with npm
 npm install @react-navigation/native@next
 ```
 
-> When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional configuration.
+React Navigation is made up of some core utilities and those are then used by navigators to create the navigation structure in your app. Don't worry too much about this for now, it'll become clear soon enough! To frontload the installation work, let's also install and configure dependencies used by most navigators, then we can move forward with starting to write some code.
+
+The libraries we will install now are [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated), [`react-native-screens`](https://github.com/kmagiera/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context). If you already have these libraries installed and at the latest version, you are done here! Otherwise, read on.
+
+#### Installing dependencies into an Expo managed project
+
+In your project directory, run:
+
+```sh
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context
+```
+
+This will install versions of these libraries that are compatible.
+
+You can now continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
+
+#### Installing dependencies into a bare React Native project
+
+In your project directory, run:
+
+```sh
+yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context
+```
+
+> Note: You might get warnings related to peer dependencies after installation. They are usually caused my incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.
+
+From React Native 0.60 and higher, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md). So you **don't need to run** `react-native link`.
+
+To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
+
+```sh
+cd ios
+pod install
+cd ..
+```
+
+To finalize installation of `react-native-screens` for Android, add the following two lines to `dependencies` section in `android/app/build.gradle`:
+
+```gradle
+implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
+```
+
+To finalize installation of `react-native-gesture-handler` for Android, make the following modifications to `MainActivity.java`:
+
+```diff
+package com.reactnavigation.example;
+
+import com.facebook.react.ReactActivity;
++ import com.facebook.react.ReactActivityDelegate;
++ import com.facebook.react.ReactRootView;
++ import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+
+public class MainActivity extends ReactActivity {
+
+  @Override
+  protected String getMainComponentName() {
+    return "Example";
+  }
+
++  @Override
++  protected ReactActivityDelegate createReactActivityDelegate() {
++    return new ReactActivityDelegate(this, getMainComponentName()) {
++      @Override
++      protected ReactRootView createRootView() {
++        return new RNGestureHandlerEnabledRootView(MainActivity.this);
++      }
++    };
++  }
+}
+```
+
+Then add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+
+```js
+import 'react-native-gesture-handler';
+```
 
 Now, we need to wrap the whole app in `NavigationNativeContainer`. Usually you'd do this in your entry file, such as `index.js` or `App.js`:
 
@@ -44,5 +116,9 @@ export default function App() {
   );
 }
 ```
+
+> Note: When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional dependencies. If you're getting an error "Unable to resolve module", you need to install that module in your project.
+
+Now you are ready to build and run your app on the device/simulator.
 
 Continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.

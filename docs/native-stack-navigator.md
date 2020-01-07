@@ -10,39 +10,10 @@ By default the stack navigator is configured to have the familiar iOS and Androi
 
 This uses native primitives (`UINavigationController` on iOS and `Fragment` on Android) for navigation using [`react-native-screens`](https://github.com/kmagiera/react-native-screens) under the hood, as opposed to the JS based stack navigator. While this provides native feeling and performance, it's not as customizable.
 
-To use this navigator, you need to install [`@react-navigation/native-stack`](https://github.com/react-navigation/navigation-ex/tree/master/packages/native-stack):
+To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`@react-navigation/native-stack`](https://github.com/react-navigation/navigation-ex/tree/master/packages/native-stack):
 
 ```sh
-yarn add @react-navigation/native@next @react-navigation/native-stack@next
-```
-
-If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
-
-```sh
-expo install react-native-screens
-```
-
-If you are not using Expo, run the following:
-
-```sh
-yarn add react-native-screens
-```
-
-If you are using Expo, you are done. Otherwise, continue to the next steps.
-
-To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
-
-```sh
-cd ios
-pod install
-cd ..
-```
-
-To finalize installation of `react-native-screens` for Android, add the following two lines to dependencies section in `android/app/build.gradle`:
-
-```gradle
-implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
-implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
+yarn add @react-navigation/native-stack@next
 ```
 
 Make sure to enable `react-native-screens`. This needs to be done before our app renders. To do it, add the following code in your entry file (e.g. `App.js`):
@@ -52,8 +23,6 @@ import { enableScreens } from 'react-native-screens';
 
 enableScreens();
 ```
-
-Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
 
 ## API Definition
 

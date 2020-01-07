@@ -8,10 +8,10 @@ A material-design themed tab bar on the top of the screen that lets you switch b
 
 This wraps [`react-native-tab-view`](https://github.com/react-native-community/react-native-tab-view).
 
-To use this navigator, you need to install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/navigation-ex/tree/master/packages/material-top-tabs):
+To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/navigation-ex/tree/master/packages/material-top-tabs):
 
 ```sh
-yarn add @react-navigation/native@next @react-navigation/material-top-tabs@next react-native-tab-view
+yarn add @react-navigation/material-top-tabs@next react-native-tab-view
 ```
 
 Now we need to install [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated).
