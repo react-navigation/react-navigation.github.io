@@ -103,7 +103,7 @@ header: ({ scene, previous, navigation }) => {
 };
 ```
 
-When using a custom header, it's recommended set the `headerMode` option on the navigator to `screen`. You should also specify a height in `headerStyle` to avoid glitches:
+By default, there is one floating header which renders headers for multiple screens on iOS. These headers include animations to smoothly switch to one another. When using a custom header, it's recommended set the `headerMode` option on the navigator to `screen` so that you don't have to implement animations.
 
 ```js
 headerStyle: {
