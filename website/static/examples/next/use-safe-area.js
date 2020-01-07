@@ -36,7 +36,7 @@ export default function App() {
             {() => (
               <Tab.Navigator
                 initialRouteName="Analitics"
-                tabBarComponent={() => null}
+                tabBar={() => null}
               >
                 <Tab.Screen name="Analitics" component={Demo} />
                 <Tab.Screen name="Profile" component={Demo} />

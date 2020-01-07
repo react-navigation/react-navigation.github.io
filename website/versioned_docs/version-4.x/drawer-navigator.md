@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
 
 ```js
 const CustomDrawerContentComponent = props => {
-  const translateX = props.drawerOpenProgress.interpolate({
+  const translateX = Animated.interpolate(drawerOpenProgress, {
     inputRange: [0, 1],
     outputRange: [-100, 0],
   });

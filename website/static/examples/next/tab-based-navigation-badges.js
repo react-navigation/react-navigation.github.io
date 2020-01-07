@@ -64,13 +64,23 @@ export default function App() {
             if (route.name === 'Home') {
               return (
                 <HomeIconWithBadge
-                  name={`ios-information-circle${focused ? '' : '-outline'}`}
+                  name={
+                    focused
+                      ? 'ios-information-circle'
+                      : 'ios-information-circle-outline'
+                  }
                   size={size}
                   color={color}
                 />
               );
             } else if (route.name === 'Settings') {
-              return <Ionicons name="ios-options" size={size} color={color} />;
+              return (
+                <Ionicons
+                  name={focused ? 'ios-list-box' : 'ios-list'}
+                  size={size}
+                  color={color}
+                />
+              );
             }
           },
         })}

@@ -61,10 +61,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home" headerMode="none">
         <Stack.Screen name="Home">
           {() => (
-            <Tab.Navigator
-              initialRouteName="Analitics"
-              tabBarComponent={() => null}
-            >
+            <Tab.Navigator initialRouteName="Analitics" tabBar={() => null}>
               <Tab.Screen name="Analitics" component={Demo} />
               <Tab.Screen name="Profile" component={Demo} />
             </Tab.Navigator>
@@ -85,8 +82,7 @@ To fix this issue you can apply safe area insets on your content. This can be ac
 <samp id="safe-area-example" />
 
 ```jsx
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import SafeAreaView from 'react-native-safe-area-view';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 function Demo() {
   return (

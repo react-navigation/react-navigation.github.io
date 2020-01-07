@@ -183,7 +183,7 @@ The `progress` node can be used to do interesting animations in your `drawerCont
 
 ```js
 function CustomDrawerContent({ progress, ...rest }) {
-  const translateX = props.drawerOpenProgress.interpolate({
+  const translateX = Animated.interpolate(progress, {
     inputRange: [0, 1],
     outputRange: [-100, 0],
   });
