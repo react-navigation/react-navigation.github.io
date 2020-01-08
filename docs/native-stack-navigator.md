@@ -28,19 +28,24 @@ enableScreens();
 
 To use this navigator, import it from `@react-navigation/native-stack`:
 
+<samp id="simple-native-stack">
+
 ```js
+import { NavigationNativeContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-function App() {
+export default function App() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Notifications" component={Notifications} />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Settings" component={Settings} />
-    </Stack.Navigator>
+    <NavigationNativeContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Notifications" component={Notifications} />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Settings" component={Settings} />
+      </Stack.Navigator>
+    </NavigationNativeContainer>
   );
 }
 ```
@@ -195,43 +200,48 @@ navigation.popToTop();
 
 ## Example
 
+<samp id="native-stack-with-options">
+
 ```js
+import { NavigationNativeContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-function App() {
+export default function App() {
   return (
-    <Stack.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerShown: false,
-        headerTintColor: 'white',
-        headerStyle: { backgroundColor: 'tomato' },
-      }}
-    >
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          title: 'Awesome app',
+    <NavigationNativeContainer>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: false,
+          headerTintColor: 'white',
+          headerStyle: { backgroundColor: 'tomato' },
         }}
-      />
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          title: 'My profile',
-        }}
-      />
-      <Stack.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          gestureEnabled: false,
-        }}
-      />
-    </Stack.Navigator>
+      >
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            title: 'Awesome app',
+          }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            title: 'My profile',
+          }}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            gestureEnabled: false,
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationNativeContainer>
   );
 }
 ```
