@@ -11,7 +11,7 @@ React Navigation is written with TypeScript and exports type definitions for Typ
 To type check our route name and params, the first thing we need to do is to create an object type with mappings for route name to the params of the route. For example, say we have a route called `Profile` in our root navigator which should have a param `userId`:
 
 ```tsx
-type RootParamList = {
+type RootStackParamList = {
   Profile: { userId: string };
 };
 ```
@@ -19,7 +19,7 @@ type RootParamList = {
 Similarly, we need to do the same for each route:
 
 ```tsx
-type RootParamList = {
+type RootStackParamList = {
   Home: undefined;
   Profile: { userId: string };
   Feed: { sort: 'latest' | 'top' } | undefined;
@@ -33,7 +33,7 @@ After we have defined the mappings, we need to tell our navigator to use it. To 
 ```tsx
 import { createStackNavigator } from '@react-navigation/stack';
 
-const RootStack = createStackNavigator<RootParamList>();
+const RootStack = createStackNavigator<RootStackParamList>();
 ```
 
 And then we can use it:
