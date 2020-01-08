@@ -317,7 +317,7 @@ An object containing the props for the tab bar component. It can contain the fol
 - `scrollEnabled` - Whether to enable scrollable tabs.
 - `tabStyle` - Style object for the tab.
 - `indicatorStyle` - Style object for the tab indicator (line at the bottom of the tab).
-- `labelStyle` - Style object for the tab label (specifying a color here will override the color specified in `activeTintColor` and `inactiveTintColor` for the label).
+- `labelStyle` - Style object for the tab label. Specifying a color here will override the color specified in `activeTintColor` and `inactiveTintColor` for the label.
 - `iconStyle` - Style object for the tab icon.
 - `style` - Style object for the tab bar.
 - `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
