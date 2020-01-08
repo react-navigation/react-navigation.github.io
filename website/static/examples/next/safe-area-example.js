@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { NavigationNativeContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import SafeAreaView from 'react-native-safe-area-view';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 function Demo() {
   return (
@@ -27,10 +26,7 @@ export default function App() {
         <Stack.Navigator initialRouteName="Home" headerMode="none">
           <Stack.Screen name="Home">
             {() => (
-              <Tab.Navigator
-                initialRouteName="Analitics"
-                tabBar={() => null}
-              >
+              <Tab.Navigator initialRouteName="Analitics" tabBar={() => null}>
                 <Tab.Screen name="Analitics" component={Demo} />
                 <Tab.Screen name="Profile" component={Demo} />
               </Tab.Navigator>
