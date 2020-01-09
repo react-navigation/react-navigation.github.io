@@ -83,11 +83,11 @@ class AuthLoadingScreen extends React.Component {
 }
 ```
 
-<samp id="auth-flow">Auth Flow</samp>
-
 ## Fill in other components
 
 Our `App` and `Auth` routes are both stack navigators, but you could do whatever you like here. As mentioned above, you probably want your authentication route to be a stack for password reset, signup, etc. Similarly for your app, you probably have more than one screen. We won't talk about how to implement the text inputs and buttons for the authentication screen, that is outside of the scope of navigation. We'll just fill in some placeholder content.
+
+<samp id="auth-flow">Auth Flow</samp>
 
 ```js
 class SignInScreen extends React.Component {
@@ -135,7 +135,5 @@ class HomeScreen extends React.Component {
 
 // More code like OtherScreen omitted for brevity
 ```
-
-<samp id="auth-flow">Auth Flow</samp>
 
 That's about all there is to it. If you're interested in animating the switch between screens, you can read about `createAnimatedSwitchNavigator` in the [API reference](animated-switch-navigator.html).
