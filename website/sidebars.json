@@ -14,7 +14,7 @@
       "next-steps",
       "glossary-of-terms",
       "compatibility",
-      "common-mistakes",
+      "troubleshooting",
       "limitations"
     ],
     "Guides": [
@@ -78,10 +78,7 @@
         ]
       }
     ],
-    "Build your own Navigator": [
-      "custom-routers",
-      "custom-navigators"
-    ],
+    "Build your own Navigator": ["custom-routers", "custom-navigators"],
     "Additional Resources": [
       "supported-react-native-versions",
       "community-libraries-and-navigators",

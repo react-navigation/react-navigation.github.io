@@ -1,28 +1,8 @@
 ---
-id: common-mistakes
-title: Common mistakes
-sidebar_label: Common mistakes
+id: troubleshooting
+title: Troubleshooting
+sidebar_label: Troubleshooting
 ---
-
-This section attempts to outline issues that users frequently encounter when first getting accustomed to using React Navigation and serves as a reference in some cases for error messages.
-
-## Wrapping AppContainer in a View without flex
-
-If you wrap the `AppContainer` in a `View`, make sure the `View` is using flex.
-
-```js
-import * as React from 'react';
-import { NavigationNativeContainer } from '@react-navigation/native';
-
-// without the style you will see a blank screen
-export default () => (
-  <View style={{ flex: 1 }}>
-    <NavigationNativeContainer>{/* ... */}</NavigationNativeContainer>
-  </View>
-);
-```
-
-# Troubleshooting
 
 This section points out issues not directly connected with React Navigation but which may occur while using it.
 
@@ -68,3 +48,23 @@ react-native link react-native-gesture-handler
 This might happen if you didn't update your MainActivity.java file (or wherever you create an instance of ReactActivityDelegate), so that it uses the root view wrapper provided by this library.
 
 Check how to do it [here](https://software-mansion.github.io/react-native-gesture-handler/docs/getting-started.html).
+
+# Common mistakes
+
+This section attempts to outline issues that users frequently encounter when first getting accustomed to using React Navigation and serves as a reference in some cases for error messages.
+
+## Wrapping AppContainer in a View without flex
+
+If you wrap the `AppContainer` in a `View`, make sure the `View` is using flex.
+
+```js
+import * as React from 'react';
+import { NavigationNativeContainer } from '@react-navigation/native';
+
+// without the style you will see a blank screen
+export default () => (
+  <View style={{ flex: 1 }}>
+    <NavigationNativeContainer>{/* ... */}</NavigationNativeContainer>
+  </View>
+);
+```
