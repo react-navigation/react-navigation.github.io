@@ -117,6 +117,8 @@ To set a custom header for all the screens in the navigator, you can specify thi
 
 Whether to show or hide the header for the screen. The header is shown by default unless `headerMode` was set to `none`. Setting this to `false` hides the header.
 
+When hiding the header on specific screens, you might also want to set `headerMode` prop to `screen`.
+
 #### `headerTitle`
 
 String or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is specified, it receives an object containing `allowFontScaling`, `style` and `children` properties. The `children` property contains the title string.
@@ -530,11 +532,37 @@ With these options, it's possible to build custom transition animations for scre
   - `forFadeFromBottomAndroid` - Standard Android-style fade in from the bottom for Android Oreo.
   - `forRevealFromBottomAndroid` - Standard Android-style reveal from the bottom for Android Pie.
 
+  Example configuration for Android Oreo style vertical screen fade animation:
+
+  ```js
+  <Stack.Screen
+    name="Profile"
+    component={Profile}
+    options={{
+      title: 'Profile',
+      cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+    }}
+  />
+  ```
+
 - `HeaderStyleInterpolators`
 
   - `forUIKit` - Standard UIKit style animation for the header where the title fades into the back button label.
   - `forFade` - Simple fade animation for the header elements.
   - `forStatic` - Simple translate animation to translate the header along with the sliding screen.
+
+  Example configuration for default iOS animation for header elements where the title fades into the back button:
+
+  ```js
+  <Stack.Screen
+    name="Profile"
+    component={Profile}
+    options={{
+      title: 'Profile',
+      headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
+    }}
+  />
+  ```
 
 > Note: Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
 
@@ -573,6 +601,8 @@ Example configuration for iOS modal presentation style:
     cardOverlayEnabled: true,
     ...TransitionPresets.ModalPresentationIOS,
   }}
+  mode="modal"
+  headerMode="none"
 >
   <Stack.Screen name="Home" component={Home} />
   <Stack.Screen name="Profile" component={Profile} />

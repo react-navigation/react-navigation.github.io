@@ -117,6 +117,8 @@ To set a custom header for all the screens in the navigator, you can specify thi
 
 Whether to show or hide the header for the screen. The header is shown by default unless `headerMode` was set to `none`. Setting this to `false` hides the header.
 
+When hiding the header on specific screens, you might also want to set `headerMode` option to `screen`.
+
 #### `headerTitle`
 
 String or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is specified, it receives an object containing `allowFontScaling`, `style` and `children` properties. The `children` property contains the title string.
@@ -204,7 +206,7 @@ This is useful if you want to render a semi-transparent header or a blurred back
 
 Note that if you don't want your content to appear under the header, you need to manually add a top margin to your content. React Navigation won't do it automatically.
 
-To get the height of the header, you can use `useHeaderHeight`:
+To get the height of the header, you can use `HeaderHeightContext` with [React's Context API](https://reactjs.org/docs/context.html#contextconsumer) or `useHeaderHeight`:
 
 ```js
 import { useHeaderHeight } from 'react-navigation-stack';
@@ -462,11 +464,29 @@ With these options, it's possible to build custom transition animations for scre
   - `forFadeFromBottomAndroid` - Standard Android-style fade in from the bottom for Android Oreo.
   - `forRevealFromBottomAndroid` - Standard Android-style reveal from the bottom for Android Pie.
 
+  Example configuration for Android Oreo style vertical screen fade animation:
+
+  ```js
+  static navigationOptions = {
+    title: 'Profile',
+    cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+  }
+  ```
+
 - `HeaderStyleInterpolators`
 
   - `forUIKit` - Standard UIKit style animation for the header where the title fades into the back button label.
   - `forFade` - Simple fade animation for the header elements.
   - `forStatic` - Simple translate animation to translate the header along with the sliding screen.
+
+  Example configuration for default iOS animation for header elements where the title fades into the back button:
+
+  ```js
+  static navigationOptions = {
+    title: 'Profile',
+    headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
+  }
+  ```
 
 > Note: Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
 
