@@ -21,10 +21,6 @@
         "title": "createBottomTabNavigator",
         "sidebar_label": "createBottomTabNavigator"
       },
-      "common-mistakes": {
-        "title": "Common mistakes",
-        "sidebar_label": "Common mistakes"
-      },
       "community-libraries-and-navigators": {
         "title": "Community-developed Navigators and Libraries",
         "sidebar_label": "Community Navigators and Libraries"
@@ -252,6 +248,10 @@
       "themes": {
         "title": "Themes",
         "sidebar_label": "Themes"
+      },
+      "troubleshooting": {
+        "title": "Troubleshooting",
+        "sidebar_label": "Troubleshooting"
       },
       "typescript": {
         "title": "Type checking with TypeScript",
