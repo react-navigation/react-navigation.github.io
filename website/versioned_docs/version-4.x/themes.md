@@ -112,6 +112,7 @@ class MyButton extends React.Component {
   static contextType = ThemeContext;
 
   render() {
+    const theme = this.context;
     return (
       <TouchableOpacity
         style={{ backgroundColor: theme === 'light' ? '#000' : '#fff' }}
@@ -341,7 +342,11 @@ Okay, that's a lot of code. There isn't much going on here aside from passing th
 A regrettable limitation of the current implementation of `navigationOptions` is that we are unable to access React context for use in properties such as `headerStyle` and `headerTintColor`. We can and should use them in properties that access React components, for example in `headerRight` we could provide a component like `ThemedHeaderButton`. To apply the theme to other properties we need to use `screenProps`.
 
 ```jsx
-import { createAppContainer, createStackNavigator } from 'react-navigation';
+import { 
+  createAppContainer,
+  createStackNavigator,
+  ThemeContext
+} from 'react-navigation';
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ screenProps }) => {
@@ -409,6 +414,7 @@ import {
   createStackNavigator,
   createBottomTabNavigator,
   BottomTabBar,
+  ThemeContext
 } from 'react-navigation';
 
 const ThemeConstants = {
