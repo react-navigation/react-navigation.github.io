@@ -465,4 +465,4 @@ const Navigation = createAppContainer(Tabs);
 
 You will likely want to go a bit further than we detailed in this guide, such as change the status bar color depending on the theme and customize the border color for the header and tab bar as well. You can see all of the above code plus some more changes to make it more complete in [this Snack](https://snack.expo.io/@react-navigation/themes-example).
 
-I never said it was easy, but this about covers what you need to know to theme an app that uses React Navigation. Good luck, remember me you're a billionaire.
+I never said it was easy, but this about covers what you need to know to be able to theme an app that uses React Navigation. Good luck, remember me when you're a billionaire.
