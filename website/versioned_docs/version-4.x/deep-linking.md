@@ -107,15 +107,17 @@ xcrun simctl openurl booted exp://127.0.0.1:19000/--/chat/Eric
 
 ### Test deep linking on Android
 
-To test the intent handling in Android (Expo client app ), run the following:
+To test the intent handling in the Expo client app on Android, run the following:
 
 ```sh
-adb shell am start -W -a android.intent.action.VIEW -d "[ put your URI prefix in here ]" com.simpleapp
+adb shell am start -W -a android.intent.action.VIEW -d "[ put your URI prefix in here ]" host.exp.exponent
 
-// for example
+# for example
 
-adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:19000/--/chat/Eric" com.simpleapp
+adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:19000/--/chat/jane" host.exp.exponent
 ```
+
+Change `host.exp.exponent` to your app package name if you are testig on a standalone app.
 
 Read the [Expo linking guide](https://docs.expo.io/versions/latest/guides/linking.html) for more information about how to configure linking in projects built with Expo.
 
