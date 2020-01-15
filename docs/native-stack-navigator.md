@@ -8,7 +8,7 @@ Provides a way for your app to transition between screens where each new screen 
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
 
-This uses native primitives (`UINavigationController` on iOS and `Fragment` on Android) for navigation using [`react-native-screens`](https://github.com/kmagiera/react-native-screens) under the hood, as opposed to the JS based stack navigator. While this provides native feeling and performance, it's not as customizable.
+This navigator uses native navigation primitives (`UINavigationController` on iOS and `Fragment` on Android) for navigation using [`react-native-screens`](https://github.com/kmagiera/react-native-screens) under the hood. The main difference from the JS based [stack navigator](stack-navigator.md) is that the JS based navigator re-implements animations and gestures while the native stack navigator relies on the platform primitives for animations and gestures. You should use this navigator if you want native feeling and performance for navigation and don't need much customization, as the customization options of this navigator are limited.
 
 To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`@react-navigation/native-stack`](https://github.com/react-navigation/navigation-ex/tree/master/packages/native-stack):
 

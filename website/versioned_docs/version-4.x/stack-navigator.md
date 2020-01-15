@@ -69,6 +69,7 @@ Visual options:
   - `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
   - `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
   - `none` - No header will be rendered.
+- `keyboardHandlingEnabled` - If `false`, the on screen keyboard will NOT automatically dismiss when navigating to a new screen. Defaults to `true`.
 
 ### `navigationOptions` for screens inside of the navigator
 
@@ -252,10 +253,6 @@ Use this prop to have a semi-transparent dark overlay visible under the card dur
 Style object for the card in stack. You can provide a custom background color to use instead of the default background here.
 
 You can also specify `{ backgroundColor: 'transparent' }` to make the previous screen visible underneath. This is useful to implement things like modal dialogs. If you use [`react-native-screens`](https://github.com/kmagiera/react-native-screens), you should also specify `mode: 'modal'` in the stack view config when using a transparent background so previous screens aren't detached.
-
-#### `disableKeyboardHandling`
-
-If true, the keyboard will NOT automatically dismiss when navigating to a new screen. Defaults to `false`.
 
 #### `animationEnabled`
 
