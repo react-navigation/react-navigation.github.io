@@ -122,8 +122,10 @@ function appendSnackLink() {
   });
 }
 
+// This is used to update links like the following:
+// [Full source of what we have built so far](#example/full-screen-modal)
 function transformExistingSnackLinks() {
-  document.querySelectorAll('a[href*="#example"]').forEach(a => {
+  document.querySelectorAll('a[href*="#example/"]').forEach(a => {
     let urlParts = a.href.split('#example/');
     let templateId = urlParts[urlParts.length - 1];
     a.href = getSnackUrl({ templateId });
