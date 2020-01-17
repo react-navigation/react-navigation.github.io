@@ -440,7 +440,7 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   - `current` - Values for the current screen:
     - `progress` - Animated node representing the progress value of the current screen.
-  - `next` - Values for the current screen the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
+  - `next` - Values for the screen after the current one in the stack. This can be `undefined` in case the screen animating is the last one.
     - `progress` - Animated node representing the progress value of the next screen.
   - `index` - The index of the card in the stack.
   - `closing` - Animated node representing whether the card is closing. `1` when closing, `0` if not.
