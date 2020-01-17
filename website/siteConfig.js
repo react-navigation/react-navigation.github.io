@@ -34,7 +34,13 @@ const siteConfig = {
   },
   usePrism: ['jsx', 'js'],
   onPageNav: 'separate',
-  scripts: ['https://buttons.github.io/buttons.js', '/js/snack.js'],
+  scripts: [
+    'https://buttons.github.io/buttons.js',
+    '/js/snack.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js',
+    '/js/code-block-buttons.js'
+  ],
+  stylesheets: ['/css/code-block-buttons.css'],
   repoUrl: 'https://github.com/react-navigation/react-navigation',
   editUrl:
     'https://github.com/react-navigation/react-navigation.github.io/edit/source/docs/',
