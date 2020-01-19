@@ -61,6 +61,7 @@
         "ids": [
           "use-navigation",
           "use-route",
+          "use-navigation-state",
           "use-focus-effect",
           "use-is-focused",
           "use-linking",

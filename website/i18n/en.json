@@ -281,6 +281,10 @@
         "title": "useRoute",
         "sidebar_label": "useRoute"
       },
+      "use-navigation-state": {
+        "title": "useNavigationState",
+        "sidebar_label": "useNavigationState"
+      },
       "use-scroll-to-top": {
         "title": "useScrollToTop",
         "sidebar_label": "useScrollToTop"

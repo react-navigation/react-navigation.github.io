@@ -236,4 +236,6 @@ Be sure to always check that the call returns a valid value.
 
 ### `dangerouslyGetState` - get state of navigator
 
-Most likely you don't want to get state of navigator. It's used for internal logic and we currently do not predict any use case of it. If you do, make sure you have a good reason.
+Getting the navigator state could be useful in very rare situations. You most likely don't need to use this method. If you do, make sure you have a good reason.
+
+If you need the state for rendering content, you should use [`useNavigationState`](use-navigation-state.md) instead of this method.

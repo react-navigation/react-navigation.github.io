@@ -99,6 +99,8 @@ Due to the numerous disadvantages with this pattern, we decided to drop it in fa
 
 ## The `navigation` prop
 
+### Separate `route` prop
+
 In React Navigation 4.x, the `navigation` prop contained various helper methods as well as the current screen's state. In React Navigation 5.x, we have split the `navigation` prop into 2 props: `navigation` prop contains helper methods such as `navigate`, `goBack` etc., `route` prop contains the current screen's data (previously accessed via `navigation.state`).
 
 This means, now we can access screen's params through `route.params` instead of `navigation.state.params`:
@@ -110,6 +112,8 @@ function ProfileScreen({ route }) {
   // ...
 }
 ```
+
+### No more `getParam`
 
 Previously we could also use `navigation.getParam('someParam', 'defaultValue')` to get a param value. It addressed 2 things:
 
@@ -129,6 +133,28 @@ route.params?.someParam ?? 'defaultValue';
 ```
 
 Remember to add the Babel plugins for [optional-chaining](https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining) and [nullish-coalescing-operator](https://babeljs.io/docs/en/next/babel-plugin-proposal-nullish-coalescing-operator).
+
+### No more `isFirstRouteInParent`
+
+The `isFirstRouteInParent` method did a very specific job: tell you if the route is the first one in parent's state. The main purpose was to decide whether you can show a back button in a screen depending on if it's the first one.
+
+However, it had many of shortcomings:
+
+1. It checked the `routes` array in state to determine if it's the first, which means that it won't work for other navigators such as tab navigator which keep history in a separate `routeKeyHistory` array.
+2. Since this was a method on the navigation object, if a screen's index changed to/from the first one, it would always trigger re-render for that screen whether you use the method or not.
+
+Now we have added a [`useNavigationState`](use-navigation-state.md) which addresses many more use cases and doesn't have these shortcomings. We can implement `isFirstRouteInParent` with this hook:
+
+```js
+function useIsFirstRouteInParent() {
+  const route = useRoute();
+  const isFirstRouteInParent = useNavigationState(
+    state => state.routes[0].key === route.key
+  );
+
+  return isFirstRouteInParent;
+}
+```
 
 ## Specifying `navigationOptions` for a screen
 
@@ -193,6 +219,12 @@ In React Navigation 4.x, there were 4 navigation events to notify focus state of
 It was confusing to decide which events to use and what each event meant. Some navigators also didn't emit events for transition animations which made the events inconsistent.
 
 We have simplified the events in React Navigation 5.x, so now we have only `focus` and `blur` events which are equivalent to `willFocus` and `willBlur` events. To run tasks after an animation finishes, we can use the [`InteractionManager`](https://facebook.github.io/react-native/docs/interactionmanager) API provided by React Native. See the docs for [Navigation lifecycle](navigation-lifecycle.md) for more details.
+
+## Deep-linking
+
+In React Navigation 4.x, you could specify a `path` property in your screen configuration which was used for handling incoming links. This was possible because we could statically get the configuration for all of the defined `path`s.
+
+Due to dynamic configuration in 5.x, links need to be handled before we can know what to render for our navigators. So it's necessary to specify the deep link configuration separately. See the [deep linking](deep-linking.md) docs for more information.
 
 ## Switch Navigator
 

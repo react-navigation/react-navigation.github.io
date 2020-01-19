@@ -12,7 +12,7 @@ Before continuing, first install [`@react-navigation/drawer`](https://github.com
 
 ## Minimal example of drawer-based navigation
 
-To use this drawer navigator, import it from `@react-navigation/drawer`:  
+To use this drawer navigator, import it from `@react-navigation/drawer`:
 (swipe right to open)
 
 <samp id="drawer-based-navigation" />
@@ -82,9 +82,5 @@ navigation.dispatch(DrawerActions.toggleDrawer());
 If you would like to determine if drawer is open or closed, you can do the following:
 
 ```js
-const parent = navigation.dangerouslyGetParent();
-const isDrawerOpen =
-  parent &&
-  parent.dangerouslyGetState() &&
-  parent.dangerouslyGetState().isDrawerOpen;
+const isDrawerOpen = useNavigationState(state => state.isDrawerOpen);
 ```
