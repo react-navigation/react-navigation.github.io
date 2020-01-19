@@ -4,7 +4,7 @@ title: Troubleshooting
 sidebar_label: Troubleshooting
 ---
 
-This section points out issues not directly connected with React Navigation but which may occur while using it.
+This section attempts to outline issues that users frequently encounter when first getting accustomed to using React Navigation. These issues may or may not be related to React Navigation itself.
 
 ## I'm getting an error "Unable to resolve module" after updating to the latest version
 
@@ -33,38 +33,48 @@ If the module points to an npm package (i.e. the name of the module doesn't with
 yarn add name-of-the-module
 ```
 
-## I'm getting an error "null is not an object ( evaluating 'RNGestureHandlerModule.default.Direction')".
+## I'm getting an error "null is not an object (evaluating 'RNGestureHandlerModule.default.Direction')"
 
-This and some similar errors might occur if you didn't link the RNGestureHandler library.
+This and some similar errors might occur if you didn't link the [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) library.
 
-To fix it, run this command in your project directory:
+Linking is automatic from React Native 0.60, so if you have linked the library manually, first unlink it:
 
 ```sh
-react-native link react-native-gesture-handler
+react-native unlink react-native-gesture-handler
 ```
 
-## I linked RNGestureHandler library but gestures won't work on Android.
+If you're testing on iOS, make sure you have run `pod install` in the `ios/` folder:
+
+```js
+cd ios; pod install; cd ..
+```
+
+Now rebuild the app and test on your device or simulator.
+
+## I linked RNGestureHandler library but gestures won't work on Android
 
 This might happen if you didn't update your MainActivity.java file (or wherever you create an instance of ReactActivityDelegate), so that it uses the root view wrapper provided by this library.
 
 Check how to do it [here](https://software-mansion.github.io/react-native-gesture-handler/docs/getting-started.html).
 
-# Common mistakes
+## Nothing is visible on the screen after adding a `View`
 
-This section attempts to outline issues that users frequently encounter when first getting accustomed to using React Navigation and serves as a reference in some cases for error messages.
-
-## Wrapping AppContainer in a View without flex
-
-If you wrap the `AppContainer` in a `View`, make sure the `View` is using flex.
+If you wrap the container in a `View`, make sure the `View` stretches to fill the container using `flex: 1`:
 
 ```js
 import * as React from 'react';
 import { NavigationNativeContainer } from '@react-navigation/native';
 
 // without the style you will see a blank screen
-export default () => (
-  <View style={{ flex: 1 }}>
-    <NavigationNativeContainer>{/* ... */}</NavigationNativeContainer>
-  </View>
-);
+export default function App() {
+  return (
+    <View style={{ flex: 1 }}>
+      <NavigationNativeContainer>{/* ... */}</NavigationNativeContainer>
+    </View>
+  );
+}
 ```
+
+## Pressing buttons don't do anything
+
+Make sure you're not connected to Chrome Debugger. When connected to Chrome Debugger, you might encounter various issues related to timing, such as button presses and animations not working correctly.
