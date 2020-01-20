@@ -273,6 +273,10 @@
         "title": "useLinking",
         "sidebar_label": "useLinking"
       },
+      "use-navigation-state": {
+        "title": "useNavigationState",
+        "sidebar_label": "useNavigationState"
+      },
       "use-navigation": {
         "title": "useNavigation",
         "sidebar_label": "useNavigation"
@@ -280,10 +284,6 @@
       "use-route": {
         "title": "useRoute",
         "sidebar_label": "useRoute"
-      },
-      "use-navigation-state": {
-        "title": "useNavigationState",
-        "sidebar_label": "useNavigationState"
       },
       "use-scroll-to-top": {
         "title": "useScrollToTop",
@@ -1088,6 +1088,10 @@
       "version-4.x/version-4.x-themes": {
         "title": "Themes",
         "sidebar_label": "Themes"
+      },
+      "version-4.x/version-4.x-troubleshooting": {
+        "title": "Troubleshooting",
+        "sidebar_label": "Troubleshooting"
       },
       "version-4.x/version-4.x-typescript": {
         "title": "Type checking with TypeScript",

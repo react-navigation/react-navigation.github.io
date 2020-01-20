@@ -1,10 +1,11 @@
 ---
-id: troubleshooting
+id: version-4.x-troubleshooting
 title: Troubleshooting
 sidebar_label: Troubleshooting
+original_id: troubleshooting
 ---
 
-This section attempts to outline issues that users frequently encounter when first getting accustomed to using React Navigation. These issues may or may not be related to React Navigation itself.
+This section attempts to outline issues that can happen during setup and may not be related to React Navigation itself. Also see [common mistakes](common-mistakes.md).
 
 ## I'm getting an error "Unable to resolve module" after updating to the latest version
 
@@ -37,17 +38,27 @@ yarn add name-of-the-module
 
 This and some similar errors might occur if you didn't link the [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) library.
 
-Linking is automatic from React Native 0.60, so if you have linked the library manually, first unlink it:
+- **React Native 0.60 and higher**
 
-```sh
-react-native unlink react-native-gesture-handler
-```
+  On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md), so if you have linked the library manually, first unlink it:
 
-If you're testing on iOS, make sure you have run `pod install` in the `ios/` folder:
+  ```sh
+  react-native unlink react-native-gesture-handler
+  ```
 
-```sh
-cd ios; pod install; cd ..
-```
+  If you're testing on iOS, make sure you have run `pod install` in the `ios/` folder:
+
+  ```sh
+  cd ios; pod install; cd ..
+  ```
+
+- **React Native 0.59 and lower**
+
+  If you're on an older React Native version, you need to manually link the library. To do that, run:
+
+  ```sh
+  react-native link react-native-gesture-handler
+  ```
 
 Now rebuild the app and test on your device or simulator.
 
@@ -60,21 +71,3 @@ Check how to do it [here](https://software-mansion.github.io/react-native-gestur
 ## Pressing buttons don't do anything
 
 Make sure you're not connected to Chrome Debugger. When connected to Chrome Debugger, you might encounter various issues related to timing, such as button presses and animations not working correctly.
-
-## Nothing is visible on the screen after adding a `View`
-
-If you wrap the container in a `View`, make sure the `View` stretches to fill the container using `flex: 1`:
-
-```js
-import * as React from 'react';
-import { View } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
-
-export default function App() {
-  return (
-    <View style={{ flex: 1 }}>
-      <NavigationNativeContainer>{/* ... */}</NavigationNativeContainer>
-    </View>
-  );
-}
-```
