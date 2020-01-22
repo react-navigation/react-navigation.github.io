@@ -36,6 +36,7 @@ const getActiveRouteName = state => {
 
 export default function App() {
   const routeNameRef = React.useRef();
+  const navigationRef = React.useRef();
 
   return (
     <NavigationNativeContainer
