@@ -79,16 +79,18 @@ Finally, run `react-native run-android` or `react-native run-ios` to launch the 
 
 To use this tab navigator, import it from `@react-navigation/material-top-tabs`:
 
+<samp id="material-top-tab-based-navigation-minimal" />
+
 ```js
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const Tab = createMaterialTopTabNavigator();
 
-function App() {
+function MyTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Feed" component={Feed} />
-      <Tab.Screen name="Article" component={Article} />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );
 }
@@ -234,6 +236,8 @@ Function that returns a React element to display as the tab bar.
 
 Example:
 
+<samp id="material-top-tab-custom-tab-bar">
+
 ```js
 import { View, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
@@ -270,6 +274,7 @@ function MyTabBar({ state, descriptors, navigation, position }) {
           });
         };
 
+        const inputRange = [0, 1, 2];
         const opacity = Animated.interpolate(position, {
           inputRange,
           outputRange: inputRange.map(i => (i === index ? 1 : 0)),
@@ -325,12 +330,14 @@ An object containing the props for the tab bar component. It can contain the fol
 
 Example:
 
+<samp id="material-top-tab-options">
+
 ```js
 <Tab.Navigator
   tabBarOptions={{
     labelStyle: { fontSize: 12 },
     tabStyle: { width: 100 },
-    style: { backgroundColor: 'blue' },
+    style: { backgroundColor: 'powderblue' },
   }}
 >
   {/* ... */}
@@ -376,6 +383,8 @@ This event is fired when the user presses the tab button for the current screen 
 
 To prevent the default behavior, you can call `eventPreventDefault`:
 
+<samp id="material-top-tab-prevent-default">
+
 ```js
 navigation.addListener('tabPress', e => {
   // Prevent default behavior
@@ -401,25 +410,29 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
+<samp id="material-top-tab-jump-to">
+
 ```js
 navigation.jumpTo('Profile', { name: 'Michaś' });
 ```
 
 ## Example
 
+<samp id="material-top-tab-example">
+
 ```js
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const Tab = createMaterialTopTabNavigator();
 
-function App() {
+function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Feed"
       tabBarOptions={{
         activeTintColor: '#e91e63',
         labelStyle: { fontSize: 12 },
-        style: { backgroundColor: 'tomato' },
+        style: { backgroundColor: 'powderblue' },
       }}
     >
       <Tab.Screen

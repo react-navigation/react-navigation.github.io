@@ -24,22 +24,24 @@ To use this tab navigator, import it from `@react-navigation/material-bottom-tab
 
 To use this tab navigator, import it from `@react-navigation/material-bottom-tabs`:
 
+<samp id="material-tab-based-navigation-minimal" />
+
 ```js
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 const Tab = createMaterialBottomTabNavigator();
 
-function App() {
+function MyTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Feed" component={Feed} />
-      <Tab.Screen name="Article" component={Article} />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/tab-based-navigation.html)
+> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
 
 ## RouteConfigs
 
@@ -88,9 +90,11 @@ Style for the bottom navigation bar. You can set a bottom padding here if you ha
 
 Example:
 
+<samp id="material-bottom-tab-styled">
+
 ```js
 <Tab.Navigator
-  initialRouteName="Album"
+  initialRouteName="Home"
   activeColor="#f0edf6"
   inactiveColor="#3e2465"
   barStyle={{ backgroundColor: '#694fad' }}
@@ -144,18 +148,6 @@ This event is fired when the user presses the tab button for the current screen 
   - If the screen for the tab renders a scroll view, scroll to top is performed by `useScrollToTop`
   - If the screen for the tab renders a stack navigator, a `popToTop` action is performed on the stack
 
-To prevent the scroll to top/`popToTop` behavior, you can call `eventPreventDefault`:
-
-```js
-navigation.addListener('tabPress', e => {
-  // Prevent default behavior
-  e.preventDefault();
-
-  // Do something manually
-  // ...
-});
-```
-
 ### Helpers
 
 The tab navigator adds the following methods to the navigation prop:
@@ -167,11 +159,15 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
+<samp id="material-tab-jump-to">
+
 ```js
 navigation.jumpTo('Profile', { name: 'Michaś' });
 ```
 
 ## Example
+
+<samp id="material-bottom-tab-example">
 
 ```js
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -179,7 +175,7 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
 const Tab = createMaterialBottomTabNavigator();
 
-function App() {
+function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Feed"

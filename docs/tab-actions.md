@@ -15,10 +15,12 @@ The `jumpTo` action can be used to jump to an existing route in the tab navigato
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
+<samp id="tab-actions">
+
 ```js
 import { TabActions } from '@react-navigation/routers';
 
-const jumpToAction = TabActions.jumpTo('Profile', { name: 'Satya' });
+const jumpToAction = TabActions.jumpTo('Profile', { user: 'Satya' });
 
 navigation.dispatch(jumpToAction);
 ```

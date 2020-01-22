@@ -18,12 +18,14 @@ yarn add @react-navigation/stack@next @react-native-community/masked-view
 
 To use this navigator, import it from `@react-navigation/stack`:
 
+<samp id="simple-stack">
+
 ```js
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-function App() {
+function MyStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} />
@@ -222,6 +224,8 @@ Function which returns a React Element to render as the background of the header
 
 For example, you can use this with `headerTransparent` to render a blur view to create a translucent header.
 
+<samp id="header-blur">
+
 ```js
 import { BlurView } from 'expo-blur';
 
@@ -259,7 +263,7 @@ You can also specify `{ backgroundColor: 'transparent' }` to make the previous s
 
 #### `animationEnabled`
 
-Whether transition animation should be enabled the screen. If you set it to `false`, the screen won't animate when pushing or popping. Defaults to `true`.
+Whether transition animation should be enabled on the screen. If you set it to `false`, the screen won't animate when pushing or popping. Defaults to `true`.
 
 #### `gestureEnabled`
 
@@ -321,13 +325,17 @@ Pushes a new screen to top of the stack and navigate to it. The method accepts f
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
+<samp id="stack-with-options">
+
 ```js
-navigation.push('Profile', { name: 'Michaś' });
+navigation.push('Profile', { owner: 'Michaś' });
 ```
 
 #### `pop`
 
 Pops the current screen from the stack and navigates back to the previous screen. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
+
+<samp id="stack-with-options">
 
 ```js
 navigation.pop();
@@ -337,18 +345,22 @@ navigation.pop();
 
 Pops all of the screens in the stack except the first one and navigates to it.
 
+<samp id="stack-with-options">
+
 ```js
 navigation.popToTop();
 ```
 
 ## Example
 
+<samp id="stack-with-options">
+
 ```js
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-function App() {
+function MyStack() {
   return (
     <Stack.Navigator
       initialRouteName="Home"
@@ -386,7 +398,7 @@ function App() {
 
 ## Animations
 
-Stack Navigator exposes various options to configure the transition animation when a screen is added or removed. These transition animations can be customize on a per-screen basis by specifying the options in the `options` prop for each screen.
+Stack Navigator exposes various options to configure the transition animation when a screen is added or removed. These transition animations can be customized on a per-screen basis by specifying the options in the `options` prop for each screen.
 
 - `gestureDirection` - The direction of swipe gestures, `horizontal`, `vertical` or `vertical-inverted`.
 - `transitionSpec` - An object which specifies the animation type (`timing` or `spring`) and their options (such as `duration` for `timing`). It takes 2 properties:
@@ -417,8 +429,11 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   We can pass this config in the `transitionSpec` option:
 
+  <samp id="stack-animation-config">
+
   ```js
   <Stack.Screen
+    name="Profile"
     component={Profile}
     options={{
       transitionSpec: {
@@ -429,7 +444,7 @@ Stack Navigator exposes various options to configure the transition animation wh
   />
   ```
 
-- `cardStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the card. Is expected to return at least empty object, possibly containing interpolated styles for container, the card itself, overlay and shadow. Supported properties are:
+- `cardStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the card. It is expected to return at least empty object, possibly containing interpolated styles for container, the card itself, overlay and shadow. Supported properties are:
 
   - `containerStyle` - Style for the container view wrapping the card.
   - `cardStyle` - Style for the view representing the card.
@@ -440,7 +455,7 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   - `current` - Values for the current screen:
     - `progress` - Animated node representing the progress value of the current screen.
-  - `next` - Values for the current screen the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
+  - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
     - `progress` - Animated node representing the progress value of the next screen.
   - `index` - The index of the card in the stack.
   - `closing` - Animated node representing whether the card is closing. `1` when closing, `0` if not.
@@ -459,14 +474,17 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   We can pass this function in `cardStyleInterpolator` option:
 
+  <samp id="stack-for-fade-card">
+
   ```js
   <Stack.Screen
+    name="Profile"
     component={Profile}
     options={{ cardStyleInterpolator: forFade }}
   />
   ```
 
-- `headerStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the header. Is expected to return at least empty object, possibly containing interpolated styles for left label and button, right button, title and background. Supported properties are:
+- `headerStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the header. It is expected to return at least empty object, possibly containing interpolated styles for left label and button, right button, title and background. Supported properties are:
 
   - `leftLabelStyle` - Style for the label of the left button (back button label).
   - `leftButtonStyle` - Style for the left button (usually the back button).
@@ -478,7 +496,7 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   - `current` - Values for the current screen (the screen which owns this header).
     - `progress` - Animated node representing the progress value of the current screen.
-  - `next` - Values for the current screen the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
+  - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
     - `progress` - Animated node representing the progress value of the next screen.
   - `layouts` - Layout measurements for various items we use for animation. Each layout object contain `height` and `width` properties.
     - `screen` - Layout of the whole screen.
@@ -508,8 +526,11 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   We can pass this function in `headerStyleInterpolator` option:
 
+  <samp id="stack-for-fade-header">
+
   ```js
   <Stack.Screen
+    name="Profile"
     component={Profile}
     options={{ headerStyleInterpolator: forFade }}
   />
@@ -534,6 +555,8 @@ With these options, it's possible to build custom transition animations for scre
 
   Example configuration for Android Oreo style vertical screen fade animation:
 
+  <samp id="stack-card-style-interpolator">
+
   ```js
   <Stack.Screen
     name="Profile"
@@ -552,6 +575,8 @@ With these options, it's possible to build custom transition animations for scre
   - `forStatic` - Simple translate animation to translate the header along with the sliding screen.
 
   Example configuration for default iOS animation for header elements where the title fades into the back button:
+
+  <samp id="stack-for-ui-kit">
 
   ```js
   <Stack.Screen
@@ -578,6 +603,8 @@ We export various transition presets which bundle various set of these options t
 
 You can spread these presets in `options` to customize the animation for a screen:
 
+  <samp id="stack-modal-slide-from-bottom">
+
 ```js
 <Stack.Screen
   name="Profile"
@@ -593,6 +620,8 @@ If you want to customize the transition animations for all of the screens in the
 
 Example configuration for iOS modal presentation style:
 
+  <samp id="stack-modal-presentation">
+
 ```js
 <Stack.Navigator
   initialRouteName="Home"
@@ -606,6 +635,5 @@ Example configuration for iOS modal presentation style:
 >
   <Stack.Screen name="Home" component={Home} />
   <Stack.Screen name="Profile" component={Profile} />
-  <Stack.Screen name="Settings" component={Settings} />
 </Stack.Navigator>
 ```

@@ -22,6 +22,7 @@ function Notifications({ navigation }) {
         title="Go to Profile"
         onPress={() => navigation.navigate('Profile')}
       />
+      <Button title="Go Back" onPress={() => navigation.goBack()} />
     </View>
   );
 }
@@ -33,12 +34,17 @@ function Profile({ navigation }) {
         title="Go to Settings"
         onPress={() => navigation.navigate('Settings')}
       />
+      <Button title="Go Back" onPress={() => navigation.goBack()} />
     </View>
   );
 }
 
-function Settings() {
-  return <View />;
+function Settings({ navigation }) {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Button title="Go Back" onPress={() => navigation.goBack()} />
+    </View>
+  );
 }
 
 const Stack = createNativeStackNavigator();

@@ -47,6 +47,8 @@ function MyStack() {
 }
 ```
 
+Please keep in mind that this snack won't work on Web.
+
 ### Props
 
 The `Stack.Navigator` component accepts following props:
@@ -175,6 +177,8 @@ Pushes a new screen to top of the stack and navigate to it. The method accepts f
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
+<samp id="native-stack-push-pop">
+
 ```js
 navigation.push('Profile', { name: 'Michaś' });
 ```
@@ -183,6 +187,8 @@ navigation.push('Profile', { name: 'Michaś' });
 
 Pops the current screen from the stack and navigates back to the previous screen. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
 
+<samp id="native-stack-push-pop">
+
 ```js
 navigation.pop();
 ```
@@ -190,6 +196,8 @@ navigation.pop();
 #### `popToTop`
 
 Pops all of the screens in the stack except the first one and navigates to it.
+
+<samp id="native-stack-push-pop">
 
 ```js
 navigation.popToTop();
@@ -239,3 +247,5 @@ function MyStack() {
   );
 }
 ```
+
+Please keep in mind that this snack won't work on Web.
