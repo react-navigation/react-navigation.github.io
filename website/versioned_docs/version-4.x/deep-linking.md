@@ -218,3 +218,28 @@ const SimpleApp = createAppContainer(createStackNavigator({...}));
 
 const MainApp = () => <SimpleApp enableURLHandling={false} />;
 ```
+
+Then, to handle the URL with the parameters, you can use `Linking` in your components to react to events.
+
+```js
+componentDidMount() {
+    // [...]
+    Linking.addEventListener('url', this.handleDeepLink)
+}
+componentWillUnmount() {
+    // [...]
+    Linking.removeEventListener('url', this.handleDeepLink);
+}
+```
+
+And the method to handle it :
+
+```js
+handleDeepLink(e) {
+    const route = e.url.replace(/.*?:\/\//g, '')
+    // use route to navigate
+    // ...
+}
+```
+
+This should get you started! 🥳
