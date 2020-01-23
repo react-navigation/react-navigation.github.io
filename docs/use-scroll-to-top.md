@@ -10,12 +10,14 @@ In order to achieve it we export `useScrollToTop` which accept ref to scrollable
 
 Example:
 
+<samp id="use-scroll-to-top">
+
 ```js
 import * as React from 'react';
 import { ScrollView } from 'react-native';
 import { useScrollToTop } from '@react-navigation/native';
 
-export default function Albums() {
+function Albums() {
   const ref = React.useRef(null);
 
   useScrollToTop(ref);

@@ -60,6 +60,8 @@ export default function App() {
 
 To open and close drawer, use the following helpers:
 
+<samp id="drawer-open-close-toggle">
+
 ```js
 navigation.openDrawer();
 navigation.closeDrawer();
@@ -67,11 +69,15 @@ navigation.closeDrawer();
 
 If you would like to toggle the drawer you call the following:
 
+<samp id="drawer-open-close-toggle">
+
 ```js
 navigation.toggleDrawer();
 ```
 
 Each of these functions, behind the scenes, are simply dispatching actions:
+
+<samp id="drawer-dispatch">
 
 ```js
 navigation.dispatch(DrawerActions.openDrawer());

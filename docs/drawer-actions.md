@@ -12,6 +12,8 @@ The following actions are supported:
 
 The `openDrawer` action can be used to open the drawer pane.
 
+<samp id="drawer-actions">
+
 ```js
 import { DrawerActions } from '@react-navigation/routers';
 
@@ -20,7 +22,9 @@ navigation.dispatch(DrawerActions.openDrawer());
 
 ### closeDrawer
 
-The `openDrawer` action can be used to close the drawer pane.
+The `closeDrawer` action can be used to close the drawer pane.
+
+<samp id="drawer-actions">
 
 ```js
 import { DrawerActions } from '@react-navigation/routers';
@@ -31,6 +35,8 @@ navigation.dispatch(DrawerActions.closeDrawer());
 ### toggleDrawer
 
 The `toggleDrawer` action can be used to open the drawer pane if closed, or close if open.
+
+<samp id="drawer-actions">
 
 ```js
 import { DrawerActions } from '@react-navigation/routers';
@@ -44,6 +50,8 @@ The `jumpTo` action can be used to jump to an existing route in the drawer navig
 
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
+
+<samp id="drawer-actions">
 
 ```js
 import { DrawerActions } from '@react-navigation/routers';

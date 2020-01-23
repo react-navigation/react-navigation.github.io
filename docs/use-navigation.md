@@ -10,12 +10,14 @@ sidebar_label: useNavigation
 
 ## Example
 
+<samp id="use-navigation-example">
+
 ```js
 import * as React from 'react';
 import { Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-export default function MyBackButton() {
+function MyBackButton() {
   const navigation = useNavigation();
 
   return (

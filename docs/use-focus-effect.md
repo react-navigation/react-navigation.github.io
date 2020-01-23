@@ -8,6 +8,8 @@ Sometimes we want to run side-effects when a screen is focused. A side effect ma
 
 To make this easier, the library exports a `useFocusEffect` hook:
 
+<samp id="simple-focus-effect" />
+
 ```js
 import { useFocusEffect } from '@react-navigation/native';
 

@@ -15,10 +15,12 @@ The `push` action adds a route on top of the stack and navigates forward to it. 
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
+<samp id="stack-actions">
+
 ```js
 import { StackActions } from '@react-navigation/routers';
 
-const pushAction = StackActions.push('Profile', { name: 'Michaś' });
+const pushAction = StackActions.push('Profile', { user: 'Wojtek' });
 
 navigation.dispatch(pushAction);
 ```
@@ -26,6 +28,8 @@ navigation.dispatch(pushAction);
 ### pop
 
 The `pop` action takes you back to a previous screen in the stack. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
+
+<samp id="stack-actions">
 
 ```js
 import { StackActions } from '@react-navigation/routers';
@@ -38,6 +42,8 @@ navigation.dispatch(popAction);
 ### popToTop
 
 The `popToTop` action takes you back to the first screen in the stack, dismissing all the others. It's functionally identical to `StackActions.pop({n: currentIndex})`.
+
+<samp id="stack-actions">
 
 ```js
 import { StackActions } from '@react-navigation/routers';

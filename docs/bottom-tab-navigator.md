@@ -16,22 +16,24 @@ yarn add @react-navigation/bottom-tabs@next
 
 To use this tab navigator, import it from `@react-navigation/bottom-tabs`:
 
+<samp id="tab-based-navigation-minimal" />
+
 ```js
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
 
-function App() {
+function MyTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Feed" component={Feed} />
-      <Tab.Screen name="Article" component={Article} />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/tab-based-navigation.html)
+> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
 
 ### Props
 
@@ -67,6 +69,8 @@ Whether a screen should be unmounted when navigating away from it. Unmounting a 
 Function that returns a React element to display as the tab bar.
 
 Example:
+
+<samp id="custom-tab-bar" />
 
 ```js
 import { View, Text, TouchableOpacity } from 'react-native';
@@ -196,7 +200,9 @@ This event is fired when the user presses the tab button for the current screen 
   - If the screen for the tab renders a scroll view, scroll to top is performed by `useScrollToTop`
   - If the screen for the tab renders a stack navigator, a `popToTop` action is performed on the stack
 
-To prevent the default behavior, you can call `eventPreventDefault`:
+To prevent the default behavior, you can call `event.preventDefault`:
+
+<samp id="bottom-tab-prevent-default">
 
 ```js
 navigation.addListener('tabPress', e => {
@@ -225,11 +231,15 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
+<samp id="tab-jump-to">
+
 ```js
-navigation.jumpTo('Profile', { name: 'Michaś' });
+navigation.jumpTo('Profile', { owner: 'Michaś' });
 ```
 
 ## Example
+
+<samp id="bottom-tab-example">
 
 ```js
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -237,7 +247,7 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
 const Tab = createBottomTabNavigator();
 
-function App() {
+function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Feed"

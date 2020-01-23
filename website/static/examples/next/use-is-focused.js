@@ -4,7 +4,7 @@ import {
   NavigationNativeContainer,
   useIsFocused,
 } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 function ProfileScreen() {
   // This hook returns `true` if the screen is focused, `false` otherwise
@@ -21,7 +21,7 @@ function HomeScreen() {
   return <View />;
 }
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 export default function App() {
   return (

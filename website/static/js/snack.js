@@ -11,7 +11,7 @@ const DEPS_VERSIONS = {
     '@react-navigation/native@^5.0.0-alpha.18',
     '@react-navigation/bottom-tabs@^5.0.0-alpha.25',
     '@react-navigation/drawer@^5.0.0-alpha.27',
-    '@react-navigation/material-bottom-tabs@^5.0.0-alpha.24',
+    '@react-navigation/material-bottom-tabs@^5.0.0-alpha.35',
     '@react-navigation/material-top-tabs@^5.0.0-alpha.22',
     '@react-navigation/native-stack@^5.0.0-alpha.16',
     '@react-navigation/stack@^5.0.0-alpha.43',

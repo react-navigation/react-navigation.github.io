@@ -4,6 +4,8 @@ import { NavigationNativeContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { enableScreens } from 'react-native-screens';
 
+enableScreens();
+
 function Home({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -22,6 +24,7 @@ function Notifications({ navigation }) {
         title="Go to Profile"
         onPress={() => navigation.navigate('Profile')}
       />
+      <Button title="Go Back" onPress={() => navigation.goBack()} />
     </View>
   );
 }
@@ -33,12 +36,17 @@ function Profile({ navigation }) {
         title="Go to Settings"
         onPress={() => navigation.navigate('Settings')}
       />
+      <Button title="Go Back" onPress={() => navigation.goBack()} />
     </View>
   );
 }
 
-function Settings() {
-  return <View />;
+function Settings({ navigation }) {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Button title="Go Back" onPress={() => navigation.goBack()} />
+    </View>
+  );
 }
 
 const Stack = createNativeStackNavigator();
@@ -55,7 +63,6 @@ function MyStack() {
 }
 
 export default function App() {
-  enableScreens();
   return (
     <NavigationNativeContainer>
       <MyStack />

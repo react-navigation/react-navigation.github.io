@@ -16,12 +16,14 @@ yarn add @react-navigation/drawer@next
 
 To use this drawer navigator, import it from `@react-navigation/drawer`:
 
+<samp id="simple-drawer">
+
 ```js
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
 
-function App() {
+function MyDrawer() {
   return (
     <Drawer.Navigator>
       <Drawer.Screen name="Feed" component={Feed} />
@@ -31,7 +33,7 @@ function App() {
 }
 ```
 
-> For a complete usage guide please visit [Drawer Navigation](https://reactnavigation.org/docs/drawer-based-navigation.html).
+> For a complete usage guide please visit [Drawer Navigation](drawer-based-navigation.md).
 
 ### Props
 
@@ -110,6 +112,8 @@ Style object for the component wrapping the screen content.
 
 Style object for the drawer component. You can pass a custom background color for a drawer or a custom width here.
 
+<samp id="drawer-with-style">
+
 ```js
 <Drawer.Navigator
   drawerStyle={{
@@ -139,7 +143,10 @@ The default component for the drawer is scrollable and only contains links for t
 By default the drawer is scrollable and supports devices with notches. If you customize the content, you can use `DrawerContentScrollView` to handle this automatically:
 
 ```js
-import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import {
+  DrawerContentScrollView,
+  DrawerItemList,
+} from '@react-navigation/drawer';
 
 function CustomDrawerContent(props) {
   return (
@@ -151,6 +158,8 @@ function CustomDrawerContent(props) {
 ```
 
 To add additional items in the drawer, you can use the `DrawerItem` component:
+
+<samp id="custom-drawer-content">
 
 ```js
 function CustomDrawerContent(props) {
@@ -180,6 +189,8 @@ The `DrawerItem` component accepts the following props:
 - `style`: Style object for the wrapper `View`.
 
 The `progress` node can be used to do interesting animations in your `drawerContent`, such as parallax motion of the drawer contents:
+
+<samp id="animated-drawer-content">
 
 ```js
 function CustomDrawerContent({ progress, ...rest }) {
@@ -242,11 +253,13 @@ Style object for the wrapper view.
 
 Example:
 
+<samp id="drawer-content-options">
+
 ```js
 <Drawer.Navigator
   drawerContentOptions={{
     activeTintColor: '#e91e63',
-    itemStyle: { marginVertical: 0 },
+    itemStyle: { marginVertical: 30 },
   }}
 >
   {/* screens */}
@@ -293,6 +306,8 @@ The drawer navigator adds the following methods to the navigation prop:
 
 Opens the drawer pane.
 
+<samp id="drawer-open-close-toggle">
+
 ```js
 navigation.openDrawer();
 ```
@@ -301,6 +316,8 @@ navigation.openDrawer();
 
 Closes the drawer pane.
 
+<samp id="drawer-open-close-toggle">
+
 ```js
 navigation.closeDrawer();
 ```
@@ -308,6 +325,8 @@ navigation.closeDrawer();
 #### `toggleDrawer`
 
 Opens the drawer pane if closed, closes the drawer pane if opened.
+
+<samp id="drawer-open-close-toggle">
 
 ```js
 navigation.toggleDrawer();
@@ -320,18 +339,22 @@ Navigates to an existing screen in the drawer navigator. The method accepts foll
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
+<samp id="drawer-example">
+
 ```js
-navigation.jumpTo('Profile', { name: 'Satya' });
+navigation.jumpTo('Profile', { owner: 'Satya' });
 ```
 
 ## Example
+
+<samp id="drawer-example">
 
 ```js
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
 
-function App() {
+function MyDrawer() {
   return (
     <Drawer.Navigator initialRouteName="Feed">
       <Drawer.Screen

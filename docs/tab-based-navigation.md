@@ -6,7 +6,7 @@ sidebar_label: Tab navigation
 
 Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top below the header (or even instead of a header).
 
-This guide covers [`createBottomTabNavigator`](bottom-tab-navigator.html). You may also use [`createMaterialBottomTabNavigator`](material-bottom-tab-navigator.html) and [`createMaterialTopTabNavigator`](material-top-tab-navigator.html) to add tabs to your application.
+This guide covers [`createBottomTabNavigator`](bottom-tab-navigator.md). You may also use [`createMaterialBottomTabNavigator`](material-bottom-tab-navigator.md) and [`createMaterialTopTabNavigator`](material-top-tab-navigator.md) to add tabs to your application.
 
 ## Minimal example of tab-based navigation
 
@@ -70,7 +70,9 @@ export default function App() {
             let iconName;
 
             if (route.name === 'Home') {
-              iconName = focused ? 'ios-information-circle' : 'ios-information-circle-outline';
+              iconName = focused
+                ? 'ios-information-circle'
+                : 'ios-information-circle-outline';
             } else if (route.name === 'Settings') {
               iconName = focused ? 'ios-list-box' : 'ios-list';
             }

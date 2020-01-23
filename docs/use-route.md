@@ -10,12 +10,14 @@ sidebar_label: useRoute
 
 ## Example
 
+<samp id="use-route-example">
+
 ```js
 import * as React from 'react';
 import { Text } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
-export default function MyText() {
+function MyText() {
   const route = useRoute();
 
   return <Text>{route.params.caption}</Text>;
