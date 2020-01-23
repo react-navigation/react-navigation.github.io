@@ -274,7 +274,7 @@ function MyTabBar({ state, descriptors, navigation, position }) {
           });
         };
 
-        const inputRange = [0, 1, 2];
+        const inputRange = state.routes.map((_, i) => i);
         const opacity = Animated.interpolate(position, {
           inputRange,
           outputRange: inputRange.map(i => (i === index ? 1 : 0)),
@@ -381,7 +381,7 @@ This event is fired when the user presses the tab button for the current screen 
   - If the screen for the tab renders a scroll view, scroll to top is performed by `useScrollToTop`
   - If the screen for the tab renders a stack navigator, a `popToTop` action is performed on the stack
 
-To prevent the default behavior, you can call `eventPreventDefault`:
+To prevent the default behavior, you can call `event.preventDefault`:
 
 <samp id="material-top-tab-prevent-default">
 

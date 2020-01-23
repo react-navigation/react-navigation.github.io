@@ -7,9 +7,6 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
-import { DrawerActions } from '@react-navigation/routers';
-
-const navRef = React.createRef(null);
 
 function Feed({ navigation }) {
   return (
@@ -35,11 +32,11 @@ function CustomDrawerContent(props) {
       <DrawerItemList {...props} />
       <DrawerItem
         label="Close drawer"
-        onPress={() => navRef.current.dispatch(DrawerActions.closeDrawer())}
+        onPress={() => props.navigation.closeDrawer()}
       />
       <DrawerItem
         label="Toggle drawer"
-        onPress={() => navRef.current.dispatch(DrawerActions.toggleDrawer())}
+        onPress={() => props.navigation.toggleDrawer()}
       />
     </DrawerContentScrollView>
   );
@@ -58,7 +55,7 @@ function MyDrawer() {
 
 export default function App() {
   return (
-    <NavigationNativeContainer ref={navRef}>
+    <NavigationNativeContainer>
       <MyDrawer />
     </NavigationNativeContainer>
   );

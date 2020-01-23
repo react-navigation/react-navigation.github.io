@@ -9,8 +9,6 @@ import {
 } from '@react-navigation/drawer';
 import { DrawerActions } from '@react-navigation/routers';
 
-const navRef = React.createRef(null);
-
 function HomeScreen({ navigation }) {
   const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
 
@@ -48,11 +46,11 @@ function CustomDrawerContent(props) {
       <DrawerItemList {...props} />
       <DrawerItem
         label="Close drawer"
-        onPress={() => navRef.current.dispatch(DrawerActions.closeDrawer())}
+        onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}
       />
       <DrawerItem
         label="Toggle drawer"
-        onPress={() => navRef.current.dispatch(DrawerActions.toggleDrawer())}
+        onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
       />
     </DrawerContentScrollView>
   );
@@ -62,7 +60,7 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <NavigationNativeContainer ref={navRef}>
+    <NavigationNativeContainer>
       <Drawer.Navigator drawerContent={props => CustomDrawerContent(props)}>
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Profile" component={ProfileScreen} />

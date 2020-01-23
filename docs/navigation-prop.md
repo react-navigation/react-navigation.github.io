@@ -210,7 +210,7 @@ function Profile({ navigation }) {
     });
 
     return unsubscribe;
-  });
+  }, []);
 
   return <ProfileContent />;
 }

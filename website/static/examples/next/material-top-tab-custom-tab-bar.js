@@ -36,7 +36,7 @@ function MyTabBar({ state, descriptors, navigation, position }) {
           });
         };
         // modify inputRange for custom behavior
-        const inputRange = [0, 1, 2];
+        const inputRange = state.routes.map((_, i) => i);
         const opacity = Animated.interpolate(position, {
           inputRange,
           outputRange: inputRange.map(i => (i === index ? 1 : 0)),

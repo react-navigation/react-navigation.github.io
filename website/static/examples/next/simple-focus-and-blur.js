@@ -16,12 +16,14 @@ function SettingsScreen({ navigation }) {
 }
 
 function ProfileScreen({ navigation }) {
-  React.useEffect(() =>
-    navigation.addListener('focus', () => alert('Screen was focused'))
+  React.useEffect(
+    () => navigation.addListener('focus', () => alert('Screen was focused')),
+    []
   );
 
-  React.useEffect(() =>
-    navigation.addListener('blur', () => alert('Screen was unfocused'))
+  React.useEffect(
+    () => navigation.addListener('blur', () => alert('Screen was unfocused')),
+    []
   );
 
   return (

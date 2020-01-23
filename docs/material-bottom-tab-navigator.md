@@ -148,6 +148,19 @@ This event is fired when the user presses the tab button for the current screen 
   - If the screen for the tab renders a scroll view, scroll to top is performed by `useScrollToTop`
   - If the screen for the tab renders a stack navigator, a `popToTop` action is performed on the stack
 
+To prevent the default behavior, you can call `event.preventDefault`:
+
+<samp id="material-bottom-tab-prevent-default">
+
+```js
+navigation.addListener('tabPress', e => {
+  // Prevent default behavior
+  e.preventDefault();
+  // Do something manually
+  // ...
+});
+```
+
 ### Helpers
 
 The tab navigator adds the following methods to the navigation prop:
