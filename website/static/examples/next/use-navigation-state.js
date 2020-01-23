@@ -16,7 +16,7 @@ function useIsFirstRouteInParent() {
   return isFirstRouteInParent;
 }
 
-function getPreviousRouteName() {
+function usePreviousRouteName() {
   return useNavigationState(state =>
     state.routes[state.index - 1]?.name
       ? state.routes[state.index - 1].name
@@ -26,7 +26,7 @@ function getPreviousRouteName() {
 
 function HomeScreen({ navigation }) {
   const isFirstRoute = useIsFirstRouteInParent();
-  const previousRouteName = getPreviousRouteName();
+  const previousRouteName = usePreviousRouteName();
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>It is {isFirstRoute ? '' : 'not '}first route in navigator</Text>
@@ -42,7 +42,7 @@ function HomeScreen({ navigation }) {
 
 function ProfileScreen({ navigation }) {
   const isFirstRoute = useIsFirstRouteInParent();
-  const previousRouteName = getPreviousRouteName();
+  const previousRouteName = usePreviousRouteName();
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>It is {isFirstRoute ? '' : 'not '}first route in navigator</Text>
@@ -58,7 +58,7 @@ function ProfileScreen({ navigation }) {
 
 function SettingsScreen({ navigation }) {
   const isFirstRoute = useIsFirstRouteInParent();
-  const previousRouteName = getPreviousRouteName();
+  const previousRouteName = usePreviousRouteName();
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>It is {isFirstRoute ? '' : 'not '}first route in navigator</Text>
