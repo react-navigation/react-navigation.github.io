@@ -22,7 +22,7 @@ const state = useNavigationState(state => state);
 
 ## How is `useNavigationState` different from `navigation.dangerouslyGetState()`?
 
-The `navigation.dangerouslyGetState()` function also returns the current navigation state. The main difference is that the `useNavigation` hook will trigger a re-render when values change, while `navigation.dangerouslyGetState()` won't. For example, the following code will be incorrect:
+The `navigation.dangerouslyGetState()` function also returns the current navigation state. The main difference is that the `useNavigationState` hook will trigger a re-render when values change, while `navigation.dangerouslyGetState()` won't. For example, the following code will be incorrect:
 
 ```js
 function Profile() {
@@ -33,6 +33,8 @@ function Profile() {
 ```
 
 In this example, even if you push a new screen, this text won't update. If you use the hook, it'll work as expected:
+
+<samp id="use-navigation-state">
 
 ```js
 function Profile() {
