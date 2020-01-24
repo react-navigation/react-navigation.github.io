@@ -28,9 +28,43 @@ function Profile({ userId }) {
 }
 ```
 
-The `useFocusEffect` is analogous to React's `useEffect` hook. The only difference is that it runs on focus instead of render.
-
 > Note: To avoid the running the effect too often, it's important to wrap the callback in `useCallback` before passing it to `useFocusEffect` as shown in the example.
+
+The `useFocusEffect` is analogous to React's `useEffect` hook. The only difference is that it only runs if the screen is currently focused.
+
+The effect will run whenever the dependencies passed to `React.useCallback` change, i.e. it'll run on initial render (if the screen is focused) as well as on subsequent renders if the dependencies have changed. If you don't wrap your effect in `React.useCallback`, the effect will run every render if the screen is focused.
+
+The cleanup function runs when the previous effect needs to be cleaned up, i.e. when dependencies change and a new effect is scheduled and when the screen unmounts or blurs.
+
+## Running asynchronous effects
+
+When running asynchronous effects such as fetching data from server, it's important to make sure that you cancel the request in the cleanup function (similar to `React.useEffect`). If you're using an API that doesn't provide a cancellation mechanism, make sure to ignore the state updates:
+
+```js
+useFocusEffect(
+  React.useCallback(() => {
+    let isActive = true;
+
+    const fetchUser = async () => {
+      try {
+        const user = await API.fetch({ userId });
+
+        if (isActive) {
+          setUser(user);
+        }
+      } catch (e) {
+        // Handle error
+      }
+    };
+
+    fetchUser();
+
+    return () => {
+      isActive = false;
+    };
+  }, [])
+);
+```
 
 ## Delaying effect until transition finishes
 
