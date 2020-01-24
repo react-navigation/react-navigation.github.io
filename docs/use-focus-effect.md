@@ -62,9 +62,11 @@ useFocusEffect(
     return () => {
       isActive = false;
     };
-  }, [])
+  }, [userId])
 );
 ```
+
+If you don't ignore the result, then you might end up with inconsistent data due to race conditions in your API calls.
 
 ## Delaying effect until transition finishes
 
