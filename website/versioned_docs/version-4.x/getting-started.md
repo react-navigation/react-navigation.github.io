@@ -30,9 +30,7 @@ Once the project is initialized, in the project directory run `expo install reac
 Install the `react-navigation` package in your React Native project.
 
 ```bash
-yarn add react-navigation
-# or with npm
-# npm install react-navigation
+npm install react-navigation
 ```
 
 React Navigation is made up of some core utilities and those are then used by navigators to create the navigation structure in your app. Don't worry too much about this for now, it'll become clear soon enough! To frontload the installation work, let's also install and configure dependencies used by most navigators, then we can move forward with starting to write some code.
@@ -56,7 +54,7 @@ You can now continue to ["Hello React Navigation"](hello-react-navigation.html) 
 In your project directory, run:
 
 ```sh
-yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context
+npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context
 ```
 
 > Note: You might get warnings related to peer dependencies after installation. They are usually caused my incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.
@@ -96,9 +94,7 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   You also need to configure [jetifier](https://github.com/mikehardy/jetifier) to support dependencies using `androidx`:
 
   ```sh
-  yarn add --dev jetifier
-  # or with npm
-  # npm install --save-dev jetifier
+  npm install --save-dev jetifier
   ```
 
   Then add it to the `postinstall` script in `package.json`:
@@ -114,9 +110,7 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   Now, run the `postinstall` script manually:
 
   ```sh
-  yarn postinstall
-  # or with npm
-  # npm run postinstall
+  npm run postinstall
   ```
 
 To finalize installation of `react-native-gesture-handler` for Android, make the following modifications to `MainActivity.java`:

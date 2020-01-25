@@ -9,7 +9,7 @@ A simple tab bar on the bottom of the screen that lets you switch between differ
 To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/navigation-ex/tree/master/packages/bottom-tabs):
 
 ```sh
-yarn add @react-navigation/bottom-tabs@next
+npm install @react-navigation/bottom-tabs@next
 ```
 
 ## API Definition

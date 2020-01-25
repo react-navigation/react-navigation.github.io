@@ -8,7 +8,7 @@ original_id: drawer-navigator
 To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`react-navigation-drawer`](https://github.com/react-navigation/drawer).
 
 ```sh
-yarn add react-navigation-drawer
+npm install react-navigation-drawer
 ```
 
 ## API

@@ -14,12 +14,6 @@ What follows within the _Fundamentals_ section of this documentation is a tour o
 
 Install the required packages in your React Native project:
 
-```bash
-yarn add @react-navigation/native@next
-```
-
-Or with npm
-
 ```sh
 npm install @react-navigation/native@next
 ```
@@ -45,7 +39,7 @@ You can now continue to ["Hello React Navigation"](hello-react-navigation.html) 
 In your project directory, run:
 
 ```sh
-yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context
+npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context
 ```
 
 > Note: You might get warnings related to peer dependencies after installation. They are usually caused my incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.

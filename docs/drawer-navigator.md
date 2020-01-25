@@ -9,7 +9,7 @@ Component that renders a navigation drawer which can be opened and closed via ge
 To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/navigation-ex/tree/master/packages/drawer):
 
 ```sh
-yarn add @react-navigation/drawer@next
+npm install @react-navigation/drawer@next
 ```
 
 ## API Definition
