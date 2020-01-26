@@ -519,7 +519,7 @@ static navigationOptions = {
 
 > Note: Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
 
-#### TransitionPresets
+#### `TransitionPresets`
 
 We export various transition presets which bundle various set of these options together to match certain native animations. A transition preset is an object containing few animation related screen options exported under `TransitionPresets`. Currently the following presets are available:
 
