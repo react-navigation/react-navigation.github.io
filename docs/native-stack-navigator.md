@@ -165,7 +165,15 @@ Defaults to `default`.
 
 ### Events
 
-The navigator doesn't emit any events.
+The navigator can emit events on certain actions. Supported events are:
+
+#### `appear`
+
+Event which fires when the screen appears.
+
+#### `dismiss`
+
+Event which fires when the current screen is dismissed by hardware back (on Android) or dismiss gesture (swipe back or down).
 
 ### Helpers
 
