@@ -8,7 +8,19 @@ sidebar_label: Upgrading from 4.x
 
 React Navigation 5 has a completely new component based API. While the main concepts are the same, the API is different. In this guide, we aim to document all the differences so that it's easier to upgrade your app.
 
-You can also use the [compatibility layer](compatibility.md) to reuse code using the old API with minimal changes.
+If you have not installed React Navigation 5 yet, you can do so following the [Getting Started guide](getting-started.md).
+
+To reuse code using the old API with minimal changes, you can use the [compatibility layer](compatibility.md).
+
+## Package names
+
+For React Navigation 5, we went with scoped packages (e.g. `@react-navigation/stack`). It distinguishes them from previous versions and makes it harder to accidentally mix v4 and v5 packages. The following are the new equivalent package names:
+
+- `react-navigation` -> `@react-navigation/native`
+- `react-navigation-stack` -> `@react-navigation/stack`
+- `react-navigation-tabs` -> `@react-navigation/bottom-tabs`, `@react-navigation/material-top-tabs`
+- `react-navigation-material-bottom-tabs` -> `@react-navigation/material-bottom-tabs`
+- `react-navigation-drawer` -> `@react-navigation/drawer`
 
 ## Configuring the navigator
 
@@ -37,7 +49,7 @@ const RootStack = createStackNavigator(
 
 With 5.x, we now configure the navigator inside a component. First, we create `Navigator` and `Screen` pair using `createXNavigator` and then use them to render our navigator.
 
-There are few key differences here:
+The main concepts are the same. There are navigators and screens, nesting works the same, we have configuration for the navigator and options for the screen. To summarize the differences:
 
 - All of the configuration is passed as props to the navigator
 - The route configuration is done using `Screen` elements and passed as children
@@ -131,8 +143,6 @@ is equivalent to:
 ```js
 route.params?.someParam ?? 'defaultValue';
 ```
-
-Remember to add the Babel plugins for [optional-chaining](https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining) and [nullish-coalescing-operator](https://babeljs.io/docs/en/next/babel-plugin-proposal-nullish-coalescing-operator).
 
 ### No more `isFirstRouteInParent`
 
@@ -300,6 +310,22 @@ React Navigation 4.x had basic theming support where you could specify whether t
 It wasn't easy to customize the colors used by the built-in components such as header, tab bar etc. without extra code or repetition.
 
 In React navigation 5.x, we have revamped the theme system for easier customization. Now you can provide a theme object with your desired colors for background, accent color etc. and it will automatically change the colors of all navigators without any extra code. See the [Themes](themes.md) documentation for more details on how to customize the theme.
+
+## Action creators
+
+The `navigation` object has a `dispatch` method used to dispatch navigation actions. Normally we don't recommend dispatching action objects, but use the existing methods such as `navigation.push`, `naigation.navigate` etc. But if you were importing action creators from the library, then you'll need to update your code:
+
+- `NavigationActions` is now `CommonActions`, can be imported from `@react-navigation/native`
+- `StackActions`, `DrawerActions` etc. can be imported from `@react-navigation/router`
+- `SwitchActions` is now `TabActions`. can be imported from `@react-navigation/router`
+
+Signature of many actions have changed. Refer to their docs for details:
+
+- [`StackActions`](stack-actions.md)
+- [`TabActions`](tab-actions.md)
+- [`DrawerActions`](drawer-actions.md)
+
+It's highly recommended to use the methods on the navigation object instead of using action creators and `dispatch`. It should only be used for advanced use cases.
 
 ## Navigation state in Redux
 

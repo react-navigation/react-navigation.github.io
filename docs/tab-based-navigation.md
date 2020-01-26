@@ -8,6 +8,12 @@ Possibly the most common style of navigation in mobile apps is tab-based navigat
 
 This guide covers [`createBottomTabNavigator`](bottom-tab-navigator.md). You may also use [`createMaterialBottomTabNavigator`](material-bottom-tab-navigator.md) and [`createMaterialTopTabNavigator`](material-top-tab-navigator.md) to add tabs to your application.
 
+Before continuing, first install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/navigation-ex/tree/master/packages/bottom-tabs):
+
+```sh
+npm install @react-navigation/bottom-tabs@next
+```
+
 ## Minimal example of tab-based navigation
 
 <samp id="tab-based-navigation-minimal" />

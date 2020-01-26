@@ -8,7 +8,6 @@ Each `screen` component in your app is provided with the `navigation` prop autom
 
 - `navigation`
   - `navigate` - go to another screen, figures out the action it needs to take to do it
-  - `replace` - replace the current route with a new one
   - `reset` - wipe the navigator state and replace it with the result of several actions
   - `goBack` - close active screen and move back in the stack
   - `addListener` - subscribe to updates to navigation lifecycle
@@ -25,6 +24,7 @@ There are several additional functions present on `navigation` prop based on the
 If the navigator is a stack navigator, several alternatives to `navigate` and `goBack` are provided and you can use whichever you prefer. The functions are:
 
 - `navigation`
+  - `replace` - replace the current route with a new one
   - `push` - push a new route onto the stack
   - `pop` - go back in the stack
   - `popToTop` - go to the top of the stack
@@ -110,16 +110,6 @@ navigation.navigate({ key: SCREEN_KEY_A }); // will go to screen A FROM screen D
 ```
 
 Alternatively, as _screen A_ is the top of the stack, you can use `navigation.popToTop()`.
-
-### `replace`
-
-Call this to replace the current screen with the given route, with params and sub-action.
-
-<samp id="navigate-replace-reset">
-
-```js
-navigation.replace(name, params);
-```
 
 ### `reset`
 
@@ -258,6 +248,23 @@ navigation.dispatch(
     params: {},
   })
 );
+```
+
+When dispatching action objects, you can also specify few additional properties:
+
+- `source` - The key of the route which should be considered as the source of the action. The key maybe used by the router to handle the action. For example, the `replace` action will replace the route with the given key. By default, it'll use the key of the route that dispatched the action. You can explicitly pass `undefined` to override this behavior.
+- `target` - The key of the navigation state the action should be applied on. By default, actions bubble to other navigators if not handled by a navigator. If `target` is specified, the action won't bubble if the navigator with the same key didn't handle it.
+
+Example:
+
+```js
+import { CommonActions } from '@react-navigation/native';
+
+navigation.dispatch({
+  ...CommonActions.navigate('Profile'),
+  source: 'someRoutekey',
+  target: 'someStatekey',
+});
 ```
 
 ### `dangerouslyGetParent` - get parent navigator

@@ -12,7 +12,11 @@ React Navigation's stack navigator provides a way for your app to transition bet
 
 Lets start by demonstrating the most common navigator, `createStackNavigator`.
 
-> Before continuing, first install [`@react-navigation/stack`](https://github.com/react-navigation/navigation-ex/tree/master/packages/stack) following the guide on [Stack Navigator's page](stack-navigator.html).
+Before continuing, first install [`@react-navigation/stack`](https://github.com/react-navigation/navigation-ex/tree/master/packages/stack) :
+
+```sh
+npm install @react-navigation/stack@next @react-native-community/masked-view
+```
 
 ### Creating a stack navigator
 

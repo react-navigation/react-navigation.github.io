@@ -9,7 +9,8 @@ A navigation action is an object containing at least a `type` property. The acti
 Each navigation actions can contain at least the following properties:
 
 - `type` (required) - A string which represents the name of the action.
-- `source` (optional) - The route which dispatched the action. This is used by some routers to determine which route to apply the action on. By default, `navigation.dispatch` adds the key of the current route here.
+- `payload` (options) - An object containing additional information about the action. For example, it will contain `name` and `params` for `navigate`.
+- `source` (optional) - The key of the route which should be considered as the source of the action. This is used by some routers to determine which route to apply the action on. By default, `navigation.dispatch` adds the key of the route that dispatched the action.
 - `target` (optional) - The key of the navigation state the action should be applied on.
 
 It's important to highlight that dispatching a navigation action doesn't throw any error when the action is unhandled (similar to when you dispatch an action that isn't handled by a reducer in redux and nothing happens).

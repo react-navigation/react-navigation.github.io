@@ -8,6 +8,20 @@ sidebar_label: StackActions
 
 The following actions are supported:
 
+### `replace`
+
+The `replace` action replaces the current route with the given route in the stack.
+
+<samp id="stack-actions">
+
+```js
+import { StackActions } from '@react-navigation/routers';
+
+const pushAction = StackActions.replace('Profile', { user: 'Wojtek' });
+
+navigation.dispatch(pushAction);
+```
+
 ### push
 
 The `push` action adds a route on top of the stack and navigates forward to it. This differs from `navigate` in that `navigate` will pop back to earlier in the stack if a route of the given name is already present there. `push` will always add on top, so a route can be present multiple times.

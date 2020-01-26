@@ -42,7 +42,7 @@ The libraries we will install now are [`react-native-gesture-handler`](https://g
 In your project directory, run:
 
 ```sh
-expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 ```
 
 This will install versions of these libraries that are compatible.
@@ -54,7 +54,7 @@ You can now continue to ["Hello React Navigation"](hello-react-navigation.html) 
 In your project directory, run:
 
 ```sh
-npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context
+npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
 ```
 
 > Note: You might get warnings related to peer dependencies after installation. They are usually caused my incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.
