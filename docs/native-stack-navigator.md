@@ -161,7 +161,7 @@ How the given screen should appear/disappear when pushed or popped at the top of
 - `flip` – Flips the screen, requires stackPresentation: `modal` (iOS only).
 - `none` - The screen appears/dissapears without an animation.
 
-Defaults to `default`. Only supported on Android.
+Defaults to `default`.
 
 ### Events
 
