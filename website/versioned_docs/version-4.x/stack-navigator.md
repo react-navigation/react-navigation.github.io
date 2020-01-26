@@ -275,7 +275,7 @@ Number which determines the relevance of velocity for the gesture. Defaults to 0
 
 #### `gestureDirection`
 
-Direction of the gesture. Refer the [Animations section](#animations) for details.
+Direction of the gestures and animations. Refer the [Animations section](#animations) for details.
 
 #### `transitionSpec`
 
@@ -320,9 +320,17 @@ See the examples in the [example app](https://github.com/react-navigation/stack/
 
 ### Animations
 
-Stack Navigator exposes various options to configure the transition animation when a screen is added or removed. These transition animations can be customize on a per-screen basis by specifying the options in the `navigationOptions` config.
+### Animation related options
 
-- `gestureDirection` - The direction of swipe gestures, `horizontal`, `vertical` or `vertical-inverted`.
+Stack Navigator exposes various options to configure the transition animation when a screen is added or removed. These transition animations can be customized on a per-screen basis by specifying the options in the `options` prop for each screen.
+
+- `gestureDirection` - The direction of swipe gestures as well as animations:
+
+  - `horizontal` - The gesture to close the screen will start from the left, and from the right in RTL. For animations, screen will slide from the right with `SlideFromRightIOS`, and from the left in RTL.
+  - `horizontal-inverted` - The gesture to close the screen will start from the right, and from the left in RTL. For animations, screen will slide from the left with `SlideFromRightIOS`, and from the right in RTL as the direction is inverted.
+  - `vertical` - The gesture to close the screen will start from the top. For animations, screen will slide from the bottom.
+  - `vertical-inverted` - The gesture to close the screen will start from the bottom. For animations, screen will slide from the top.
+
 - `transitionSpec` - An object which specifies the animation type (`timing` or `spring`) and their options (such as `duration` for `timing`). It takes 2 properties:
 
   - `open` - Configuration for the transition when adding a screen
@@ -370,7 +378,7 @@ Stack Navigator exposes various options to configure the transition animation wh
   The function receives the following properties in it's argument:
 
   - `current` - Values for the current screen:
-    - `progress` - Animated node representing the progress value of the current screen.
+    - `progress` - Animated node representing the progress value of the current screen. `0` when screen should start coming into view, `0.5` when it's mid-way, `1` when it should be fully in view.
   - `next` - Values for the current screen the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
     - `progress` - Animated node representing the progress value of the next screen.
   - `index` - The index of the card in the stack.
@@ -444,48 +452,74 @@ Stack Navigator exposes various options to configure the transition animation wh
   };
   ```
 
+### Pre-made configs
+
 With these options, it's possible to build custom transition animations for screens. We also export various configs from the library with ready-made animations which you can use:
 
-- `TransitionSpecs`
+#### `TransitionSpecs`
 
-  - `TransitionIOSSpec` - Exact values from UINavigationController's animation configuration.
-  - `FadeInFromBottomAndroidSpec` - Configuration for activity open animation from Android Nougat.
-  - `FadeOutToBottomAndroidSpec` - Configuration for activity close animation from Android Nougat.
-  - `RevealFromBottomAndroidSpec` - Approximate configuration for activity open animation from Android Pie.
+- `TransitionIOSSpec` - Exact values from UINavigationController's animation configuration.
+- `FadeInFromBottomAndroidSpec` - Configuration for activity open animation from Android Nougat.
+- `FadeOutToBottomAndroidSpec` - Configuration for activity close animation from Android Nougat.
+- `RevealFromBottomAndroidSpec` - Approximate configuration for activity open animation from Android Pie.
 
-- `CardStyleInterpolators`
+```js
+import { TransitionSpecs } from 'react-navigation-stack';
 
-  - `forHorizontalIOS` - Standard iOS-style slide in from the right.
-  - `forVerticalIOS` - Standard iOS-style slide in from the bottom (used for modals).
-  - `forModalPresentationIOS` - Standard iOS-style modal animation in iOS 13.
-  - `forFadeFromBottomAndroid` - Standard Android-style fade in from the bottom for Android Oreo.
-  - `forRevealFromBottomAndroid` - Standard Android-style reveal from the bottom for Android Pie.
+// ...
 
-  Example configuration for Android Oreo style vertical screen fade animation:
+static navigationOptions = {
+  title: 'Profile',
+  transitionSpec: {
+    open: TransitionSpecs.TransitionIOSSpec,
+    close: TransitionSpecs.TransitionIOSSpec,
+  },
+}
+```
 
-  ```js
-  static navigationOptions = {
-    title: 'Profile',
-    cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
-  }
-  ```
+#### `CardStyleInterpolators`
 
-- `HeaderStyleInterpolators`
+- `forHorizontalIOS` - Standard iOS-style slide in from the right.
+- `forVerticalIOS` - Standard iOS-style slide in from the bottom (used for modals).
+- `forModalPresentationIOS` - Standard iOS-style modal animation in iOS 13.
+- `forFadeFromBottomAndroid` - Standard Android-style fade in from the bottom for Android Oreo.
+- `forRevealFromBottomAndroid` - Standard Android-style reveal from the bottom for Android Pie.
 
-  - `forUIKit` - Standard UIKit style animation for the header where the title fades into the back button label.
-  - `forFade` - Simple fade animation for the header elements.
-  - `forStatic` - Simple translate animation to translate the header along with the sliding screen.
+Example configuration for Android Oreo style vertical screen fade animation:
 
-  Example configuration for default iOS animation for header elements where the title fades into the back button:
+```js
+import { CardStyleInterpolators } from 'react-navigation-stack';
 
-  ```js
-  static navigationOptions = {
-    title: 'Profile',
-    headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
-  }
-  ```
+// ...
+
+static navigationOptions = {
+  title: 'Profile',
+  cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+}
+```
+
+#### `HeaderStyleInterpolators`
+
+- `forUIKit` - Standard UIKit style animation for the header where the title fades into the back button label.
+- `forFade` - Simple fade animation for the header elements.
+- `forStatic` - Simple translate animation to translate the header along with the sliding screen.
+
+Example configuration for default iOS animation for header elements where the title fades into the back button:
+
+```js
+import { HeaderStyleInterpolators } from 'react-navigation-stack';
+
+// ...
+
+static navigationOptions = {
+  title: 'Profile',
+  headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
+}
+```
 
 > Note: Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
+
+#### TransitionPresets
 
 We export various transition presets which bundle various set of these options together to match certain native animations. A transition preset is an object containing few animation related screen options exported under `TransitionPresets`. Currently the following presets are available:
 
@@ -500,6 +534,10 @@ We export various transition presets which bundle various set of these options t
 You can spread these presets in `navigationOptions` to customize the animation for a screen:
 
 ```js
+import { TransitionPresets } from 'react-navigation-stack';
+
+// ...
+
 static navigationOptions = {
   title: 'Profile',
   ...TransitionPresets.ModalSlideFromBottomIOS
@@ -511,6 +549,10 @@ If you want to customize the transition animations for all of the screens in the
 Example configuration for iOS modal presentation style:
 
 ```js
+import { TransitionPresets } from 'react-navigation-stack';
+
+// ...
+
 const Stack = createStackNavigator(
   {
     Home,
