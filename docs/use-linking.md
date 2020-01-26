@@ -67,10 +67,12 @@ For example, if we have `Catalog` screen inside `Home` screen and want it to han
 ```js
 {
   Home: {
-    Catalog: {
-      path: 'item/:id',
-      parse: {
-        id: Number,
+    screens: {
+      Catalog: {
+        path: 'item/:id',
+        parse: {
+          id: Number,
+        },
       },
     },
   },
