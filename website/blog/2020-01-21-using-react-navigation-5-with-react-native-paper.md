@@ -19,7 +19,7 @@ In this guide, we would like to show you how to integrate React Navigation with 
 
 In the following gif, you can see what is the final version of the app gonna look like:
 
-// TODO: record the app
+<img src="/blog/assets/using-react-navigation-5-with-paper/final-app.gif" height="480"/>
 
 ## Overview of the App
 
@@ -59,7 +59,7 @@ expo install react-native-gesture-handler react-native-reanimated react-native-s
 
 After you run these two commands you should be ready to go. Let's start implementing the app!
 
-### Step 1. React-Navigation and React-Native-Paper initial setup.
+### 1. React-Navigation and React-Native-Paper initial setup.
 
 Both these libraries require a minimal setup.
 
@@ -100,7 +100,7 @@ export default function App() {
 }
 ```
 
-### Step 2. Drawer
+### 2. Drawer
 
 In our Twitter clone we want to implement a Drawer that is available from any screen in the app. This means, it has to be a top most navigator.
 
@@ -307,7 +307,7 @@ That's how the final version of the drawer looks like:
 
 <img src="/blog/assets/using-react-navigation-5-with-paper/final-drawer.gif" height="480"/>
 
-### Step 3. Bottom Navigation
+### 3. Bottom Navigation
 
 In this step we will implement a Tab Navigator with 3 tabs. We will use a [Bottom Navigation](https://callstack.github.io/react-native-paper/bottom-navigation.html) component from React-Native-Paper that is exposed via **@react-navigation/material-bottom-tabs** package.
 
@@ -374,7 +374,7 @@ When we check the screen of the phone now, we will see a nice looking, material 
 
 We still miss a last piece of our navigation flow - **Stack Navigator**. Let's move to the next section where we will take care of it.
 
-### Step 4. Stack Navigator + Paper's Appbar
+### 4. Stack Navigator + Paper's Appbar
 
 Stack Navigator provides a way for an app to transition between screens when each new screen is placed on top of a stack. In case of this Twitter clone, we will use it to transition from a screen displaying feed of tweets to the screen showing details of a tweet.
 
@@ -499,10 +499,10 @@ export const FeedStack = () => {
     </Stack.Navigator>
   );
 };
-
 ```
 
 Function that we pass as a `header` has access to 3 properties:
+
 - scene
 - previous
 - navigation
@@ -519,16 +519,15 @@ React Navigation gives us many different ways to navigate, but we will mostly fo
 
 As the name suggests `push` method pushes the new screen on the stack and `pop` removes current screen from the stack.
 
-As you can see on a snippet above, we invoke a `navigation.pop` function whenever user presses the back button in header. This means user will be allowed to come back from **Details** to the **Feed** screen. 
+As you can see on a snippet above, we invoke a `navigation.pop` function whenever user presses the back button in header. This means user will be allowed to come back from **Details** to the **Feed** screen.
 
 We still need to implement an option to go from **Feed** to the **Details**. We can do it by invoking `navigation.push('Details')` whenever user presses a Tweet.
 
 ```jsx
-  function onTweetPress() {
-    navigation.push('Details');
-  }
+function onTweetPress() {
+  navigation.push('Details');
+}
 ```
-
 
 The implementation of `Feed` and `Details` components is quite big and complex, that's why i am not gonna post it here. Please make sure to check it out on [github repo](https://github.com/Trancever/twitterClone)
 
@@ -537,3 +536,294 @@ We have coverd only the basics of navigating between screens. If you want to lea
 Now, let's see what does the app look like with Stack Navigator and Paper's Appbar.
 
 <img src="/blog/assets/using-react-navigation-5-with-paper/stack-final.gif" height="480"/>
+
+### 5. FAB and Portal
+
+As it is stated in [MD Guidelines](https://material.io/components/buttons-floating-action-button/), the purpose of FAB button is to give an easy access to the main action of the application. Of course, official Twitter app follows this pattern. Based on the type of screen, it allows creating new tweets or sending direct messages via FAB. It also smoothly animates the icon of the FAB when user changes the tab and hides the FAB completely on specific screens.
+
+In this section, we are going to implement the very same behaviour in our app. We are going to use a [FAB](https://callstack.github.io/react-native-paper/fab.html) and [Portal](https://callstack.github.io/react-native-paper/portal.html) components from React-Native-Paper.
+
+`Portal` allows to render a component at a different place in the parent tree. It means you can use it to render content which should appear above other elemenets, similar to Modal.
+
+As an initial step we will render a FAB on all tabs and then we will add additional functionalities.
+
+Let's render a `FAB` and `Portal` in the same component where we render Tabs:
+
+```jsx
+import React from 'react';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { useTheme, Portal, FAB } from 'react-native-paper';
+
+import { Feed } from './feed';
+import { Message } from './message';
+import { Notifications } from './notifications';
+
+const Tab = createMaterialBottomTabNavigator();
+
+export const BottomTabs = () => {
+  return (
+    <React.Fragment>
+      <Tab.Navigator
+        initialRouteName="Feed"
+        backBehavior="initialRoute"
+        shifting={true}
+        sceneAnimationEnabled={false}
+      >
+        <Tab.Screen
+          name="Feed"
+          component={Feed}
+          options={{
+            tabBarIcon: 'home-account',
+          }}
+        />
+        <Tab.Screen
+          name="Notifications"
+          component={Notifications}
+          options={{
+            tabBarIcon: 'bell-outline',
+          }}
+        />
+        <Tab.Screen
+          name="Messages"
+          component={Message}
+          options={{
+            tabBarIcon: 'message-text-outline',
+          }}
+        />
+      </Tab.Navigator>
+      <Portal>
+        <FAB
+          icon="feather"
+          style={{
+            position: 'absolute',
+            bottom: 100,
+            right: 16,
+          }}
+        />
+      </Portal>
+    </React.Fragment>
+  );
+};
+```
+
+With just few lines of JSX we have a nice looking FAB displayed on all tabs. Let's implement hiding it whenever user goes to the tweet details screen.
+
+Our current navigation structure should be:
+
+- StackNavigator that has two screens
+- First screen of StackNavigator renders a TabNavigator with 3 tabs
+- Second screen of StckNavigator renders a Tweet details
+
+This means, a component that renders TabNavigator is a Stack's screen. Thanks to that, we can use `useIsFocused` hook provided by `@react-navigation/native` and conditionally hide `FAB`.
+
+```jsx
+import React from 'react';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { useTheme, Portal, FAB } from 'react-native-paper';
+import { useIsFocused } from '@react-navigation/native';
+
+import { Feed } from './feed';
+import { Message } from './message';
+import { Notifications } from './notifications';
+
+const Tab = createMaterialBottomTabNavigator();
+
+export const BottomTabs = () => {
+  const isFocused = useIsFocused();
+
+  return (
+    <React.Fragment>
+      <Tab.Navigator
+        initialRouteName="Feed"
+        backBehavior="initialRoute"
+        shifting={true}
+      >
+        <Tab.Screen
+          name="Feed"
+          component={Feed}
+          options={{
+            tabBarIcon: 'home-account',
+          }}
+        />
+        <Tab.Screen
+          name="Notifications"
+          component={Notifications}
+          options={{
+            tabBarIcon: 'bell-outline',
+          }}
+        />
+        <Tab.Screen
+          name="Messages"
+          component={Message}
+          options={{
+            tabBarIcon: 'message-text-outline',
+          }}
+        />
+      </Tab.Navigator>
+      <Portal>
+        <FAB
+          visible={isFocused} // show FAB only when this screen is focused
+          icon="feather"
+          style={{
+            position: 'absolute',
+            bottom: safeArea.bottom + 65,
+            right: 16,
+          }}
+        />
+      </Portal>
+    </React.Fragment>
+  );
+};
+```
+
+In the last step we will add ability to show different icon depending on the active tab.
+
+Currently, React-Navigation v5 allows listening to `tabPress` event only in Tab.Navigator Screens. It means we can't set the listener in the component showed above which would be really handy because we also render a FAB there. To get around this problem we will use a context to get and set currently active tab.
+
+```jsx
+import React from 'react';
+
+export type Tab = 'Feed' | 'Notifications' | 'Message';
+
+type TabBarSetContext = (tab: Tab) => void;
+
+export const TabBarContext = React.createContext < Tab > 'Feed';
+export const TabBarSetContext =
+  React.createContext < TabBarSetContext > (() => {});
+```
+
+Let's setup context providers in the root component:
+
+```jsx
+import React from 'react';
+import { Provider as PaperProvider } from 'react-native-paper';
+import { NavigationNativeContainer } from '@react-navigation/native';
+
+export default function App() {
+  const [tab, setTab] = React.useState<Tab>('Feed');
+
+  return (
+    <PaperProvider>
+      <NavigationNativeContainer>
+        <TabBarContext.Provider value={tab}>
+          <TabBarSetContext.Provider value={setTab}>
+            <Main />
+          </TabBarSetContext.Provider>
+        </TabBarContext.Provider>
+      </NavigationNativeContainer>
+    </PaperProvider>
+  );
+}
+```
+
+We are finally ready to start listening to `tabPress` event. We will set the listener in each Tab.Navigator Screen.
+
+Example for Feed Screen:
+
+```jsx
+import React from 'react';
+import { MaterialBottomTabNavigationProp } from '@react-navigation/material-bottom-tabs';
+import { TabBarSetContext } from './context/tabBarContext';
+
+type Props = {
+  navigation: MaterialBottomTabNavigationProp<{}>;
+};
+
+export const Feed = (props: Props) => {
+  const setTab = React.useContext(TabBarSetContext);
+
+  React.useEffect(() => {
+    const onTabPress = () => setTab('Feed'); // We pass a 'Feed' string representing Feed screen
+
+    props.navigation.addListener('tabPress', onTabPress); // set listener
+
+    return () => props.navigation.removeListener('tabPress', onTabPress); // remove listener
+  }, [props.navigation, setTab]);
+
+  return (
+    <View>
+      <Text>Feed</Text>
+    </View>
+  );
+};
+```
+
+Now, we can access currently active tab in Feed screen using `TabBarContext` and render a proper icon in FAB:
+
+```jsx
+import React from 'react';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { useTheme, Portal, FAB } from 'react-native-paper';
+import { useIsFocused } from '@react-navigation/native';
+
+import { Feed } from './feed';
+import { Message } from './message';
+import { Notifications } from './notifications';
+import { TabBarContext } from './context/tabBarContext';
+
+const Tab = createMaterialBottomTabNavigator();
+
+export const BottomTabs = () => {
+  const isFocused = useIsFocused();
+
+  const tab = React.useContext(TabBarContext); // get current active tab using TabBarContext
+
+  let icon = 'feather';
+
+  switch (tab) {
+    case 'Message':
+      icon = 'email-plus-outline';
+      break;
+    default:
+      icon = 'feather';
+      break;
+  }
+
+  return (
+    <React.Fragment>
+      <Tab.Navigator
+        initialRouteName="Feed"
+        shifting={true}
+      >
+        <Tab.Screen
+          name="Feed"
+          component={Feed}
+          options={{
+            tabBarIcon: 'home-account',
+          }}
+        />
+        <Tab.Screen
+          name="Notifications"
+          component={Notifications}
+          options={{
+            tabBarIcon: 'bell-outline',
+          }}
+        />
+        <Tab.Screen
+          name="Messages"
+          component={Message}
+          options={{
+            tabBarIcon: 'message-text-outline',
+          }}
+        />
+      </Tab.Navigator>
+      <Portal>
+        <FAB
+          visible={isFocused}
+          icon={icon} // Pass a proper icon for current tab
+          style={{
+            position: 'absolute',
+            bottom: safeArea.bottom + 65,
+            right: 16,
+          }}
+        />
+      </Portal>
+    </React.Fragment>
+  );
+};
+```
+
+<img src="/blog/assets/using-react-navigation-5-with-paper/fab.gif" height="480"/>
+
+As you can see on the gif, the FAB button works in a same way as in a Twitter app.
+What's more, it even animates icon change properly even though we haven't implement it. That's the behaviour we get from React-Native-Paper's FAB out of the box.
