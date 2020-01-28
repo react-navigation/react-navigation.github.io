@@ -5,13 +5,13 @@ authorURL: https://twitter.com/trensik
 ---
 
 This is a guest post by the [React Native Paper](https://reactnativepaper.com/) team. If you like this guide, checkout React Native Paper for more!
-In this blog post, we'll show you how to build a real world app using React Navigation v5 with Paper.
+In this blog post, we'll show you how to build a real world app using React Navigation v5 and Paper.
 
 ## Introduction
 
 React Navigation v5 is a breakthrough navigation. It not only provides a cross-platform native Stack, but also the API was redesigned from the ground up to allow things that were never possible before. Thanks to the component based API, all of the configuration is happening inside the **render method**. This means, we can access **props**, **state** and **context** and can **dynamically change configuration** for the navigator.
 
-React Native Paper is a UI component library that implements [MD Guidelines](https://material.io/design/).
+[React Native Paper]((https://reactnativepaper.com/)) is a UI component library that implements [MD Guidelines](https://material.io/design/).
 It allows building beautiful interfaces on Mobile and Web with high quality cross-platform components.
 Furthermore, Paper provides you with a full **theming support**, **accessibility**, **RTL** and it will take care of **platform adaptation**. This means you can focus on building apps with ready to use components instead of reimplementing the boring stuff.
 
@@ -37,7 +37,7 @@ Let's get started!
 
 ## Getting started
 
-I assume you already have an [Expo](https://expo.io/) project running locally. If not, make sure to create one. I choosed Expo over plain React-Native, because it includs most of the dependencies that we need so there is less work to do for us.
+I assume you already have an [Expo](https://expo.io/) project running locally. If not, make sure to create one. I choosed Expo over plain React-Native, because it includes most of the dependencies that we need so there is less work to do for us.
 
 Let's install React-Native-Paper, React-Navigation v5 and other required dependencies.
 
@@ -63,7 +63,7 @@ After you run these two commands you should be ready to go. Let's start implemen
 
 Both these libraries require a minimal setup.
 
-In case of React-Native-Paper we need to wrap the component tree with a **Provider**. You can do this inside the exported component in the **App.tsx** file.
+In case of React-Native-Paper we need to wrap the component tree with a **Provider**. You can do this inside the exported component in the **App.js** file.
 
 ```jsx
 import React from 'react';
@@ -151,9 +151,9 @@ We will use:
 - **_DrawerContentScrollView_** and **_DrawerItem_** from **_@react-navigation/drawer_**
 - **_Avatar_**, **_Text_** and **_Switch_** from **_react-native-paper_**
 
-**DrawerContentScrollView** component makes the drawer scrollable and provides support for devices with notches, so it's highly recommended to use it even for custom drawers.
+**DrawerContentScrollView** component makes the drawer vertically scrollable and provides support for devices with notches, so it's highly recommended to use it even for custom drawers.
 
-**Components from React-Native-Paper** make a nice looking, material UI.
+**Components from React-Native-Paper** make a clean, material UI.
 
 ```jsx
 import React from 'react';
@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-That's how the final version of the drawer looks like:
+The final version of a drawer looks like this:
 
 <img src="/blog/assets/using-react-navigation-5-with-paper/final-drawer.gif" height="480"/>
 
@@ -383,7 +383,7 @@ React Navigation v5 provides two implementations of a Stack Navigator
 - Native Stack
 - JS based Stack
 
-The main difference between them is that JS based stack re-implements animations and gestures while the native stack navigator relies on the platform primitivs for animations and gestures.
+The main difference between them is that JS based stack re-implements animations and gestures while the native stack navigator relies on the platform primitives for animations and gestures.
 
 In this section we will integrate React-Native-Paper [Appbar](https://callstack.github.io/react-native-paper/appbar-header.html) and JS based Stack Navigator.
 
@@ -827,3 +827,137 @@ export const BottomTabs = () => {
 
 As you can see on the gif, the FAB button works in a same way as in a Twitter app.
 What's more, it even animates icon change properly even though we haven't implement it. That's the behaviour we get from React-Native-Paper's FAB out of the box.
+
+### 5. Theming
+
+Nowadays, supporting Light/Dark theme is no longer a fancy way to stand out from other apps, but it has become a standard. Happily, both React-Navigation v5 and React-Native-Paper supports theming and in this section I'll guide you through setting it up.
+
+#### React-Navigation
+
+React-Navigation exports two themes:
+- DefaultTheme
+- DarkTheme
+
+We can import them from `@react-navigation/native` package and pass to `NavigationNativeContainer` to apply the theme:
+
+```jsx
+import React from 'react';
+import {
+  NavigationNativeContainer,
+  DarkTheme,
+} from '@react-navigation/native';
+
+export default function App() {
+  return (
+    <NavigationNativeContainer theme={DarkTheme}>
+      {/* content */}
+    </NavigationNativeContainer>
+  );
+}
+```
+
+#### React-Native-Paper
+
+React-Native-Paper similarly to React-Navigation also exports two themes:
+- DefaultTheme
+- DarkTheme
+
+Once we import a theme we can pass it to the Paper's `Provider` component:
+
+```jsx
+import * as React from 'react';
+import {
+  NavigationNativeContainer,
+  DarkTheme as PaperDarkTheme,
+} from '@react-navigation/native';
+import { DarkTheme, Provider as PaperProvider } from 'react-native-paper';
+
+export default function Main() {
+  return (
+    <PaperProvider theme={PaperDarkTheme}>
+      <NavigationNativeContainer theme={DarkTheme}>
+        {/* content */}
+      </NavigationNativeContainer>
+    </PaperProvider>
+  );
+}
+```
+
+Of course the built-in themes are not the only themes we can apply. Both libraries allows full customization and you can learn about it in the official documentation ([React-Navigation](https://reactnavigation.org/docs/en/next/themes.html), [React-Native-Paper](https://callstack.github.io/react-native-paper/theming.html))
+
+In the last step I want to show you how to change theme dynamically. We will implement a switch in a drawer that will allow users choosing light or dark theme.
+
+We need to store an information about currently selected theme somewhere. Local state of the root component sounds reasonable. Also, we will conditionally pass different theme based on the state.
+
+```jsx
+import * as React from 'react';
+import {
+  NavigationNativeContainer,
+  DefaultTheme,
+  DarkTheme,
+} from '@react-navigation/native';
+import { DarkTheme as PaperDarkTheme, DefaultTheme as PaperDefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+
+export default function Main() {
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false)
+
+  return (
+    <PaperProvider theme={isDarkTheme ? PaperDarkTheme : PaperDefaultTheme}>
+      <NavigationNativeContainer theme={isDarkTheme ? DarkTheme: DefaultTheme}>
+        {/* content */}
+      </NavigationNativeContainer>
+    </PaperProvider>
+  );
+}
+```
+
+As you remember, we already render a Switch in a Drawer, but we haven't implement any logic when it is pressed. Let's take care of it now:
+
+```jsx
+import React from 'react';
+import { View } from 'react-native';
+import {
+  DrawerContentScrollView,
+} from '@react-navigation/drawer';
+import {
+  useTheme,
+  Avatar,
+  Drawer,
+  Text,
+  TouchableRipple,
+  Switch,
+} from 'react-native-paper';
+
+type Props = {
+  toggleTheme: () => void;
+}
+
+export function DrawerContent(props: Props) {
+  const paperTheme = useTheme();
+
+  return (
+    <DrawerContentScrollView {...props}>
+      /* {...other-content} */
+      <Drawer.Section title="Preferences">
+        <TouchableRipple onPress={props.toggleTheme}>
+          <View style={styles.preference}>
+            <Text>Dark Theme</Text>
+            <View pointerEvents="none">
+              <Switch value={theme.dark} />
+            </View>
+          </View>
+        </TouchableRipple>
+      </Drawer.Section>
+    </DrawerContentScrollView>
+  );
+}
+```
+
+Firstly, we get a current theme using `useTheme` hook from Paper. This means, we can check `dark` property on it and pass correct value to `Switch`.
+</br>Secondly, we pass a `toggleTheme` func to `TouchableRipple` to toggle theme whenever user press a Switch.
+
+
+You should be able to toggle a switch now and both `Provider` from Paper and `NativeNavigationContainer` from React-Navigation will automatically apply correct colors to the components.
+
+</br>
+<img src="/blog/assets/using-react-navigation-5-with-paper/theming.gif" height="480"/>
