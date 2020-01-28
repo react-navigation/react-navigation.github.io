@@ -4,15 +4,17 @@ title: Navigating without the navigation prop
 sidebar_label: Navigating without the navigation prop
 ---
 
-Calling functions such as `navigate` or `popToTop` on the `navigation` prop is not the only way to navigate around your app. As an alternative, you can dispatch navigation actions on the navigation container. The presented approach is useful in situations when you want to trigger a navigation action from places where you do not have access to the `navigation` prop, or if you're looking for an alternative to using the `navigation` prop.
+Sometimes you need to trigger a navigation action from places where you do not have access to the `navigation` prop, such as a Redux middleware. For such cases, you can dispatch navigation actions from the navigation container.
 
-You can get access to the root navigation object through a `ref` and pass it to the `NavigationService` which we will later use to navigate.
+If you're looking for a way to navigate from inside a component without needing to pass the `navigation` prop down, see [`useNavigation`](use-navigation.md).
+
+You can get access to the root navigation object through a `ref` and pass it to the `RootNavigation` which we will later use to navigate.
 
 ```js
 // App.js
 
 import { NavigationNativeContainer } from '@react-navigation/native';
-import { navigationRef } from './NavigationService';
+import { navigationRef } from './RootNavigation';
 
 export default function App() {
   return (
@@ -23,10 +25,10 @@ export default function App() {
 }
 ```
 
-In the next step, we define `NavigationService` which is a simple module with functions that dispatch user-defined navigation actions.
+In the next step, we define `RootNavigation`, which is a simple module with functions that dispatch user-defined navigation actions.
 
 ```js
-// NavigationService.js
+// RootNavigation.js
 
 import * as React from 'react';
 
@@ -39,17 +41,17 @@ export function navigate(name, params) {
 // add other navigation functions that you need and export them
 ```
 
-Then, in any of your javascript modules, just import the `NavigationService` and call functions which you exported from it. You may use this approach outside of your React components and, in fact, it works just as well when used from within them.
+Then, in any of your javascript modules, just import the `RootNavigation` and call functions which you exported from it. You may use this approach outside of your React components and, in fact, it works just as well when used from within them.
 
  <samp id="no-nav-prop" />
 
 ```js
 // any js module
-import * as NavigationService from './path/to/NavigationService.js';
+import * as RootNavigation from './path/to/RootNavigation.js';
 
 // ...
 
-NavigationService.navigate('ChatScreen', { userName: 'Lucy' });
+RootNavigation.navigate('ChatScreen', { userName: 'Lucy' });
 ```
 
-In `NavigationService`, you can create your own navigation actions, or compose multiple navigation actions into one, and then easily reuse them throughout your application. When writing tests, you may mock the navigation functions, and make assertions on whether the correct functions are called, with the correct parameters.
+In `RootNavigation`, you can create your own navigation actions, or compose multiple navigation actions into one, and then easily reuse them throughout your application. When writing tests, you may mock the navigation functions, and make assertions on whether the correct functions are called, with the correct parameters.

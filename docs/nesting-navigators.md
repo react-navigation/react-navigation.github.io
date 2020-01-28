@@ -4,37 +4,39 @@ title: Nesting navigators
 sidebar_label: Nesting navigators
 ---
 
-Nesting navigators is an important concept in React Navigation. It's necessary to nest navigators correctly to achieve the behavior we want.
-
-In short, nesting navigators means rendering a navigator inside a screen of another navigator, for example:
+Nesting navigators means rendering a navigator inside a screen of another navigator, for example:
 
 ```js
-function Root() {
+function Home() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Settings" component={Settings} />
-    </Stack.Navigator>
+    <Tab.Navigator>
+      <Tab.Screen name="Feed" component={Root} />
+      <Tab.Screen name="Messages" component={Home} />
+    </Tab.Navigator>
   );
 }
 
 function App() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Root" component={Root} />
-      <Tab.Screen name="Home" component={Home} />
-    </Tab.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Settings" component={Settings} />
+    </Stack.Navigator>
   );
 }
 ```
 
-In the above example, the `Root` component contains a stack navigator. The `Root` component is also used for the `Root` screen in our tab navigator inside the `App` component. So here, a stack navigator is nested inside a tab navigator:
+In the above example, the `Home` component contains a tab navigator. The `Home` component is also used for the `Home` screen in our stack navigator inside the `App` component. So here, a tab navigator is nested inside a stack navigator:
 
-- `Tab.Navigator`
-  - `Root` (`Stack.Navigator`)
-    - `Profile` (`Screen`)
-    - `Settings` (`Screen`)
-  - `Home` (`Screen`)
+- `Stack.Navigator`
+  - `Home` (`Tab.Navigator`)
+    - `Feed` (`Screen`)
+    - `Messages` (`Screen`)
+  - `Profile` (`Screen`)
+  - `Settings` (`Screen`)
+
+To achieve the behavior we want, it's often necessary to nest multiple navigators. For example, if you want.
 
 When nesting navigators, we get some interesting behavior:
 
@@ -101,8 +103,10 @@ If the navigator was already rendered, navigating to another screen will push a 
 
 ## Best practices when nesting
 
-We recommend to avoid nesting navigators too much. Try to achieve the behavior you want with as little nesting as possible. Excessive nesting has many downsides:
+We recommend to reduce nesting navigators to minimal. Try to achieve the behavior you want with as little nesting as possible. Nesting has many downsides:
 
 - Code becomes difficult to follow when navigating to nested screens
 - It results in deeply nested view hierarchy which can cause memory and performance issues in lower end devices
 - Nesting same type of navigators (e.g. tabs inside tabs, drawer inside drawer etc.) leads to a confusing UX
+
+Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, keep them in separate objects/arrays rather than separate navigators.
