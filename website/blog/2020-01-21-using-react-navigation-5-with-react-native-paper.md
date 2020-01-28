@@ -25,13 +25,11 @@ In the following gif, you can see what is the final version of the app gonna loo
 
 Since original Twitter is a very complex app, we will build only a part of it. This means we will implement:
 
-- Bottom navigation with 3 tabs: Feed, Notifications and Messages
 - Drawer
-- Screen that shows details of a Tweet
+- Stack Navigator with two screens: Screen showing bottom navigation and Details of a tweet
+- Bottom navigation with 3 tabs: Feed, Notifications and Messages
 
-I won't show you how to build all of the components necessary to create such app, because that's not a point of this guide. You can always check the implementation in the [github repo](https://github.com/Trancever/twitterClone).
-
-We will focus mostly on integrating React navigation with Paper's components such as **_BottomNavigation_**, **_Appbar_**, **_Drawer_**, **_FAB_** and **_Portal_**.
+I will focus this guide on a React-Navigation and React-Native-Paper integration. It means I won't show you how to build all of the components necessary to create such app, but you can always check the full implementation in the [github repo](https://github.com/Trancever/twitterClone).
 
 Let's get started!
 
@@ -307,74 +305,7 @@ The final version of a drawer looks like this:
 
 <img src="/blog/assets/using-react-navigation-5-with-paper/final-drawer.gif" height="480"/>
 
-### 3. Bottom Navigation
-
-In this step we will implement a Tab Navigator with 3 tabs. We will use a [Bottom Navigation](https://callstack.github.io/react-native-paper/bottom-navigation.html) component from React-Native-Paper that is exposed via **@react-navigation/material-bottom-tabs** package.
-
-Let's import the **createMaterialBottomTabNavigator** function first.
-
-```jsx
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-```
-
-Then we can get a reference to the Tab.Navigator and Tab.Screen components.
-
-```jsx
-const Tab = createMaterialBottomTabNavigator();
-```
-
-Now, we are ready to build the actual Bottom Navigation. We will render a `Tab.navigator` and 3 `Tab.Screen` components as a children. Each `Tab.Screen` representing a tab.
-
-```jsx
-import React from 'react';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-
-import { Feed } from './feed';
-import { Messages } from './messages';
-import { Notifications } from './notifications';
-
-const Tab = createMaterialBottomTabNavigator();
-
-export const BottomTabs = () => {
-  return (
-    <Tab.Navigator
-      initialRouteName="Feed"
-      shifting={true}
-      sceneAnimationEnabled={false}
-    >
-      <Tab.Screen
-        name="Feed"
-        component={Feed}
-        options={{
-          tabBarIcon: 'home-account',
-        }}
-      />
-      <Tab.Screen
-        name="Notifications"
-        component={Notifications}
-        options={{
-          tabBarIcon: 'bell-outline',
-        }}
-      />
-      <Tab.Screen
-        name="Messages"
-        component={Messages}
-        options={{
-          tabBarIcon: 'message-text-outline',
-        }}
-      />
-    </Tab.Navigator>
-  );
-};
-```
-
-When we check the screen of the phone now, we will see a nice looking, material bottom navigation.
-
-<img src="/blog/assets/using-react-navigation-5-with-paper/bottom-navigation.gif" height="480"/>
-
-We still miss a last piece of our navigation flow - **Stack Navigator**. Let's move to the next section where we will take care of it.
-
-### 4. Stack Navigator + Paper's Appbar
+### 3. Stack Navigator + Paper's Appbar
 
 Stack Navigator provides a way for an app to transition between screens when each new screen is placed on top of a stack. In case of this Twitter clone, we will use it to transition from a screen displaying feed of tweets to the screen showing details of a tweet.
 
@@ -535,7 +466,77 @@ We have coverd only the basics of navigating between screens. If you want to lea
 
 Now, let's see what does the app look like with Stack Navigator and Paper's Appbar.
 
-<img src="/blog/assets/using-react-navigation-5-with-paper/stack-final.gif" height="480"/>
+<img src="/blog/assets/using-react-navigation-5-with-paper/stack.gif" height="480"/>
+
+We still miss a last piece of our navigation flow - **Tab Navigator**. Let's move to the next section where we will take care of it.
+
+### 4. Bottom Navigation
+
+In this section we will implement a Tab Navigator with 3 tabs and we will make sure this component is now a one of Stack's screen.
+
+We will use a [Bottom Navigation](https://callstack.github.io/react-native-paper/bottom-navigation.html) component from React-Native-Paper that is exposed via **@react-navigation/material-bottom-tabs** package.
+
+Let's import the **createMaterialBottomTabNavigator** function first.
+
+```jsx
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+```
+
+Then we can get a reference to the Tab.Navigator and Tab.Screen components.
+
+```jsx
+const Tab = createMaterialBottomTabNavigator();
+```
+
+Now, we are ready to build the actual Bottom Navigation. We will render a `Tab.navigator` and 3 `Tab.Screen` components as a children. Each `Tab.Screen` representing a tab.
+
+```jsx
+import React from 'react';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
+import { Feed } from './feed';
+import { Messages } from './messages';
+import { Notifications } from './notifications';
+
+const Tab = createMaterialBottomTabNavigator();
+
+export const BottomTabs = () => {
+  return (
+    <Tab.Navigator
+      initialRouteName="Feed"
+      shifting={true}
+      sceneAnimationEnabled={false}
+    >
+      <Tab.Screen
+        name="Feed"
+        component={Feed}
+        options={{
+          tabBarIcon: 'home-account',
+        }}
+      />
+      <Tab.Screen
+        name="Notifications"
+        component={Notifications}
+        options={{
+          tabBarIcon: 'bell-outline',
+        }}
+      />
+      <Tab.Screen
+        name="Messages"
+        component={Messages}
+        options={{
+          tabBarIcon: 'message-text-outline',
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
+```
+
+When we check the screen of the phone now, we will see a nice looking, material bottom navigation. What's more, Stack Navigator integrates nicely with Tab.Navigator and we can still navigate to the tweet `Details` screen.
+
+</br>
+<img src="/blog/assets/using-react-navigation-5-with-paper/bottom-navigation.gif" height="480"/>
 
 ### 5. FAB and Portal
 
