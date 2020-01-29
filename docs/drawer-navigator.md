@@ -100,10 +100,6 @@ Props to pass to the underlying pan gesture handler.
 
 Whether the screens should render the first time they are accessed. Defaults to `true`. Set it to `false` if you want to render all screens on initial render.
 
-#### `unmountInactiveScreens`
-
-Whether a screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
-
 #### `sceneContainerStyle`
 
 Style object for the component wrapping the screen content.
@@ -285,6 +281,10 @@ Function, that given `{ focused: boolean, color: string, size: number }` returns
 #### `gestureEnabled`
 
 Whether you can use gestures to open or close the drawer. Defaults to `true` on iOS, `false` on Android.
+
+#### `unmountOnBlur`
+
+Whether this screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
 
 ### Events
 

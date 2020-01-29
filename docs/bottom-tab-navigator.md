@@ -60,10 +60,6 @@ Behavior of back button handling.
 
 Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
 
-#### `unmountInactiveScreens`
-
-Whether a screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
-
 #### `tabBar`
 
 Function that returns a React element to display as the tab bar.
@@ -186,6 +182,10 @@ Accessibility label for the tab button. This is read by the screen reader when t
 #### `tabBarTestID`
 
 ID to locate this tab button in tests.
+
+#### `unmountOnBlur`
+
+Whether this screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
 
 ### Events
 
