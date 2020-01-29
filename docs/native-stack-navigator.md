@@ -174,9 +174,13 @@ Event which fires when the screen appears.
 Example:
 
 ```js
-navigation.addListener('appear', e => {
-  // Do something
-});
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('appear', e => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
 ```
 
 #### `dismiss`
@@ -186,9 +190,13 @@ Event which fires when the current screen is dismissed by hardware back (on Andr
 Example:
 
 ```js
-navigation.addListener('dismiss', e => {
-  // Do something
-});
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('dismiss', e => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
 ```
 
 ### Helpers

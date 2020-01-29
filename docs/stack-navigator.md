@@ -313,9 +313,13 @@ This event is fired when the transition animation starts for the current screen.
 Example:
 
 ```js
-navigation.addListener('transitionStart', e => {
-  // Do something
-});
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('transitionStart', e => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
 ```
 
 #### `transitionEnd`
@@ -325,9 +329,13 @@ This event is fired when the transition animation ends for the current screen.
 Example:
 
 ```js
-navigation.addListener('transitionEnd', e => {
-  // Do something
-});
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('transitionEnd', e => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
 ```
 
 ### Helpers
@@ -587,7 +595,7 @@ import { TransitionSpecs } from '@react-navigation/stack';
       close: TransitionSpecs.TransitionIOSSpec,
     },
   }}
-/>
+/>;
 ```
 
 #### `CardStyleInterpolators`
@@ -614,7 +622,7 @@ import { CardStyleInterpolators } from '@react-navigation/stack';
     title: 'Profile',
     cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
   }}
-/>
+/>;
 ```
 
 #### `HeaderStyleInterpolators`
@@ -639,7 +647,7 @@ import { HeaderStyleInterpolators } from '@react-navigation/stack';
     title: 'Profile',
     headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
   }}
-/>
+/>;
 ```
 
 > Note: Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
@@ -672,7 +680,7 @@ import { TransitionPresets } from '@react-navigation/stack';
     title: 'Profile',
     ...TransitionPresets.ModalSlideFromBottomIOS,
   }}
-/>
+/>;
 ```
 
 If you want to customize the transition animations for all of the screens in the navigator, you can specify it in `screenOptions` prop for the navigator.
@@ -698,5 +706,5 @@ import { TransitionPresets } from '@react-navigation/stack';
 >
   <Stack.Screen name="Home" component={Home} />
   <Stack.Screen name="Profile" component={Profile} />
-</Stack.Navigator>
+</Stack.Navigator>;
 ```

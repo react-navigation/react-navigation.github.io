@@ -63,10 +63,7 @@ function HomeScreen({ navigation }) {
 
   navigation.setOptions({
     headerRight: () => (
-      <Button
-        onPress={() => setCount(c => c + 1)}
-        title="Update count"
-      />
+      <Button onPress={() => setCount(c => c + 1)} title="Update count" />
     ),
   });
 

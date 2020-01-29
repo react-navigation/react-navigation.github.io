@@ -153,12 +153,17 @@ To prevent the default behavior, you can call `event.preventDefault`:
 <samp id="material-bottom-tab-prevent-default">
 
 ```js
-navigation.addListener('tabPress', e => {
-  // Prevent default behavior
-  e.preventDefault();
-  // Do something manually
-  // ...
-});
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('tabPress', e => {
+    // Prevent default behavior
+
+    e.preventDefault();
+    // Do something manually
+    // ...
+  });
+
+  return unsubscribe;
+}, [navigation]);
 ```
 
 ### Helpers

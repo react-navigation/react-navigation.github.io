@@ -201,7 +201,7 @@ function Profile({ navigation }) {
     });
 
     return unsubscribe;
-  }, []);
+  }, [navigation]);
 
   return <ProfileContent />;
 }

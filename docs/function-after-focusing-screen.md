@@ -35,7 +35,7 @@ function ProfileScreen({ navigation }) {
 
     // Return the function to unsubscribe from the event so it gets removed on unmount
     return unsubscribe;
-  }, []);
+  }, [navigation]);
 
   return <View />;
 }

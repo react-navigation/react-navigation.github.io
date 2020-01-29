@@ -297,9 +297,13 @@ This event is fired when the drawer opens.
 Example:
 
 ```js
-navigation.addListener('drawerOpen', e => {
-  // Do something
-});
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('drawerOpen', e => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
 ```
 
 #### `drawerClose`
@@ -309,9 +313,13 @@ This event is fired when the drawer closes.
 Example:
 
 ```js
-navigation.addListener('drawerClose', e => {
-  // Do something
-});
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('drawerClose', e => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
 ```
 
 ### Helpers

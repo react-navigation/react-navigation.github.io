@@ -205,13 +205,17 @@ To prevent the default behavior, you can call `event.preventDefault`:
 <samp id="bottom-tab-prevent-default">
 
 ```js
-navigation.addListener('tabPress', e => {
-  // Prevent default behavior
-  e.preventDefault();
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('tabPress', e => {
+    // Prevent default behavior
+    e.preventDefault();
 
-  // Do something manually
-  // ...
-});
+    // Do something manually
+    // ...
+  });
+
+  return unsubscribe;
+}, [navigation]);
 ```
 
 If you have a custom tab bar, make sure to emit this event.
@@ -223,9 +227,13 @@ This event is fired when the user presses the tab button for the current screen 
 Example:
 
 ```js
-navigation.addListener('tabLongPress', e => {
-  // Do something
-});
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('tabLongPress', e => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
 ```
 
 ### Helpers
