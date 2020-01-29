@@ -140,7 +140,9 @@ Style object for the scene content.
 
 #### `gestureEnabled`
 
-Whether you can use gestures to dismiss this screen. Defaults to `true`, Only supported on iOS.
+Whether you can use gestures to dismiss this screen. Defaults to `true`,
+
+Gestures are only supported on iOS. They can be disabled only when `stackPresentation` is `push`.
 
 #### `stackPresentation`
 
