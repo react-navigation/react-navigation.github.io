@@ -294,9 +294,25 @@ The navigator can emit events on certain actions. Supported events are:
 
 This event is fired when the drawer opens.
 
+Example:
+
+```js
+navigation.addListener('drawerOpen', e => {
+  // Do something
+});
+```
+
 #### `drawerClose`
 
 This event is fired when the drawer closes.
+
+Example:
+
+```js
+navigation.addListener('drawerClose', e => {
+  // Do something
+});
+```
 
 ### Helpers
 

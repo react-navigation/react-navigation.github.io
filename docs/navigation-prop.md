@@ -187,6 +187,7 @@ Screens can add listeners on the `navigation` prop like in React Navigation. By 
 
 - `focus` - This event is emitted when the screen comes into focus
 - `blur` - This event is emitted when the screen goes out of focus
+- `state` (advanced) - This event is emitted when the navigator's state changes
 
 Example:
 
@@ -211,15 +212,15 @@ The `navigation.addListener` method returns a function to remove the listener wh
 Each event listener receives an event object as it's argument. The event object contains following properties:
 
 - `data` - Additional data regarding the event passed by the navigator. This can be `undefined` if no data was passed.
-- `preventDefault` - Calling this method may prevent the default action performed by the action (such as switching tabs on `tabPress`). Support for preventing actions depends on the navigator and won't work for all events.
+- `preventDefault` - For some events, there may be a `preventDefault` method on the event object. Calling this method will prevent the default action performed by the event (such as switching tabs on `tabPress`). Support for preventing actions are only available for certain events like `tabPress` and won't work for all events.
 
-Apart from `focus` and `blur`, each navigator can emit their own custom events. For example, stack navigator emits `transitionStart` and `transitionEnd` events, tab navigator emits `tabPress` event etc. You can find details about the events emitted on the individual navigator's documentation.
+Apart from `focus`, `blur` and `state`, each navigator can emit their own custom events. For example, stack navigator emits `transitionStart` and `transitionEnd` events, tab navigator emits `tabPress` event etc. You can find details about the events emitted on the individual navigator's documentation.
+
+You can only listen to events from the immediate parent navigator. For example, if you try to add a listener in a screen is inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use `navigation.dangerouslyGetParent()` to get a reference to parent navigator's navigation prop and add a listener.
 
 ### `isFocused` - Query the focused state of the screen
 
 Returns `true` if the screen is focused and `false` otherwise.
-
-<samp id="use-is-focused">
 
 ```js
 const isFocused = navigation.isFocused();
@@ -267,16 +268,14 @@ navigation.dispatch({
 });
 ```
 
-### `dangerouslyGetParent` - get parent navigator
+### `dangerouslyGetParent` - get parent navigator's navigation prop
 
-If, for example, you have a screen component that can be presented within multiple navigators, you may use this to influence its behavior based on what navigator it is in.
+This method returns the navigation prop from the parent navigator that the current navigator is nested in. For example, if you have a stack navigator and a tab navigator nested inside the stack, then you can use `dangerouslyGetParent` inside a screen of the tab navigator to get the navigation prop passed from the stack navigator.
 
-Another good use case for this is to find the index of the active route in the parent's route list. So in the case of a stack if you are at index 0 then you may not want to render a back button, but if you're somewhere else in the list then you would render a back button.
-
-Be sure to always check that the call returns a valid value.
+This method will return `undefined` if there is no parent navigator. Be sure to always check for `undefined` when using this method.
 
 ### `dangerouslyGetState` - get state of navigator
 
-Getting the navigator state could be useful in very rare situations. You most likely don't need to use this method. If you do, make sure you have a good reason.
+This method returns the state object of the navigator which contains the screen. Getting the navigator state could be useful in very rare situations. You most likely don't need to use this method. If you do, make sure you have a good reason.
 
 If you need the state for rendering content, you should use [`useNavigationState`](use-navigation-state.md) instead of this method.

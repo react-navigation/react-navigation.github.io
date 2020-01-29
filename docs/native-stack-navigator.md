@@ -171,9 +171,25 @@ The navigator can emit events on certain actions. Supported events are:
 
 Event which fires when the screen appears.
 
+Example:
+
+```js
+navigation.addListener('appear', e => {
+  // Do something
+});
+```
+
 #### `dismiss`
 
 Event which fires when the current screen is dismissed by hardware back (on Android) or dismiss gesture (swipe back or down).
+
+Example:
+
+```js
+navigation.addListener('dismiss', e => {
+  // Do something
+});
+```
 
 ### Helpers
 

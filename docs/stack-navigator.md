@@ -310,9 +310,25 @@ The navigator can emit events on certain actions. Supported events are:
 
 This event is fired when the transition animation starts for the current screen.
 
+Example:
+
+```js
+navigation.addListener('transitionStart', e => {
+  // Do something
+});
+```
+
 #### `transitionEnd`
 
 This event is fired when the transition animation ends for the current screen.
+
+Example:
+
+```js
+navigation.addListener('transitionEnd', e => {
+  // Do something
+});
+```
 
 ### Helpers
 

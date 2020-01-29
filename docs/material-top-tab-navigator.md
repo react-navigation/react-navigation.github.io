@@ -399,6 +399,14 @@ navigation.addListener('tabPress', e => {
 
 This event is fired when the user presses the tab button for the current screen in the tab bar for an extended period.
 
+Example:
+
+```js
+navigation.addListener('tabLongPress', e => {
+  // Do something
+});
+```
+
 ### Helpers
 
 The tab navigator adds the following methods to the navigation prop:
