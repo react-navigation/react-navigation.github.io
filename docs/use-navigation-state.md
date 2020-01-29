@@ -6,6 +6,8 @@ sidebar_label: useNavigationState
 
 `useNavigationState` is a hook which gives access to the navigation state of the navigator which contains the screen. It's useful in rare cases where you want to render something based on the navigation state.
 
+> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+
 It takes a selector function as an argument. The selector will receive the full navigation state and can return a specific value from the state:
 
 ```js

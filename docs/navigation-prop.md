@@ -124,6 +124,8 @@ navigation.reset({
 });
 ```
 
+> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+
 ### `setParams` - Make changes to route params
 
 Firing the `setParams` action allows a screen to change the params in the route, which is useful for updating the header buttons and title. `setParams` works like React's `setState` - it merges the provided params object with the current params.
@@ -275,6 +277,8 @@ This method returns the navigation prop from the parent navigator that the curre
 This method will return `undefined` if there is no parent navigator. Be sure to always check for `undefined` when using this method.
 
 ### `dangerouslyGetState` - get state of navigator
+
+> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
 
 This method returns the state object of the navigator which contains the screen. Getting the navigator state could be useful in very rare situations. You most likely don't need to use this method. If you do, make sure you have a good reason.
 

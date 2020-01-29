@@ -31,6 +31,8 @@ export default App;
 
 ### `onStateChange(newState)`
 
+> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+
 Function that gets called every time navigation state managed by the navigator changes. It receives the new state of the navigation.
 
 ### `initialState`

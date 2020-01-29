@@ -401,6 +401,18 @@ function MyDrawer() {
 }
 ```
 
+## Checking if the drawer is open
+
+You can check if the drawer is open by using the `useIsDrawerOpen` hook.
+
+```js
+import { useIsDrawerOpen } from '@react-navigation/drawer';
+
+// ...
+
+const isDrawerOpen = useIsDrawerOpen();
+```
+
 ## Nesting drawer navigators inside others
 
 If a drawer navigator is nested inside of another navigator that provides some UI, for example a tab navigator or stack navigator, then the drawer will be rendered below the UI from those navigators. The drawer will appear below the tab bar and below the header of the stack. You will need to make the drawer navigator the parent of any navigator where the drawer should be rendered on top of its UI.

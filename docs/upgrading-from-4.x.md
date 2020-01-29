@@ -81,34 +81,6 @@ function RootStack() {
 }
 ```
 
-But what if we want to define options statically on the component? It's less flexible to do it, but we could do it if we wanted:
-
-```js
-class HomeScreen extends React.Component {
-  static navigationOptions = {
-    // ...
-  };
-}
-
-// ...
-
-<Stack.Screen
-  name="Home"
-  component={HomeScreen}
-  options={HomeScreen.navigationOptions}
-/>;
-```
-
-You might be curious, why don't we support it by default anymore if it's so easy?
-
-- Static properties need extra code to work if you have a [Higher Order Component](https://reactjs.org/docs/higher-order-components.html)
-- You lose the ability to use props and context here, making them less flexible
-- They cannot be type-checked automatically, you need to manually annotate this property
-- They don't play well with Fast Refresh, as changing them doesn't trigger a re-render
-- We've seen people get confused on how to use static properties when transitioning from class components to function components
-
-Due to the numerous disadvantages with this pattern, we decided to drop it in favor of the current API.
-
 ## The `navigation` prop
 
 ### Separate `route` prop
@@ -216,6 +188,34 @@ function SelectionScreen({ navigation }) {
   // ...
 }
 ```
+
+But what if we want to define options statically on the component? It's less flexible to do it, but we could do it if we wanted:
+
+```js
+class HomeScreen extends React.Component {
+  static navigationOptions = {
+    // ...
+  };
+}
+
+// ...
+
+<Stack.Screen
+  name="Home"
+  component={HomeScreen}
+  options={HomeScreen.navigationOptions}
+/>;
+```
+
+You might be curious, why don't we support it by default anymore if it's so easy?
+
+- Static properties need extra code to work if you have a [Higher Order Component](https://reactjs.org/docs/higher-order-components.html)
+- You lose the ability to use props and context here, making them less flexible
+- They cannot be type-checked automatically, you need to manually annotate this property
+- They don't play well with Fast Refresh, as changing them doesn't trigger a re-render
+- We've seen people get confused on how to use static properties when transitioning from class components to function components
+
+Due to the numerous disadvantages with this pattern, we decided to drop it in favor of the current API.
 
 ## Navigation events
 

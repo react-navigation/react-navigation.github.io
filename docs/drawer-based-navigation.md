@@ -92,5 +92,9 @@ navigation.dispatch(DrawerActions.toggleDrawer());
 If you would like to determine if drawer is open or closed, you can do the following:
 
 ```js
-const isDrawerOpen = useNavigationState(state => state.isDrawerOpen);
+import { useIsDrawerOpen } from '@react-navigation/drawer';
+
+// ...
+
+const isDrawerOpen = useIsDrawerOpen();
 ```
