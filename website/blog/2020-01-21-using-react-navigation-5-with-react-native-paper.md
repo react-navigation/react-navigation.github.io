@@ -4,21 +4,21 @@ author: Dawid Urbaniak
 authorURL: https://twitter.com/trensik
 ---
 
-This is a guest post by the [React Native Paper](https://reactnativepaper.com/) team. If you like this guide, checkout React Native Paper for more!
+This is a guest post by the [React Native Paper](https://reactnativepaper.com/) team. If you like this guide, check out React Native Paper for more!
 
-In this blog post, we'll show you how to build a real world app using React Navigation v5 and Paper.
+In this blog post, we'll show you how to build a real-world app using React Navigation v5 and Paper.
 
 ## Introduction
 
-React Navigation v5 is a breakthrough navigation. It not only provides a cross-platform native Stack, but also the API was redesigned from the ground up to allow things that were never possible before. Thanks to the component based API, all of the configuration is happening inside the **render method**. This means, we can access **props**, **state** and **context** and can **dynamically change configuration** for the navigator.
+React Navigation v5 is breakthrough navigation. It not only provides a cross-platform native Stack, but also the API was redesigned from the ground up to allow things that were never possible before. Thanks to the component-based API, all of the configuration is happening inside the **render method**. This means we can access **props**, **state** and **context** and can **dynamically change configuration** for the navigator.
 
 [React Native Paper](<(https://reactnativepaper.com/)>) is a UI component library that implements [MD Guidelines](https://material.io/design/).
-It allows building beautiful interfaces on Mobile and Web with high quality cross-platform components.
+It allows building beautiful interfaces on Mobile and Web with high-quality cross-platform components.
 Furthermore, Paper provides you with a full **theming support**, **accessibility**, **RTL** and it will take care of **platform adaptation**. This means you can focus on building apps with ready to use components instead of reimplementing the boring stuff.
 
-In this guide, we would like to show you how to integrate React Navigation with Paper's components. To show all the details of the integration we've decided to build a clone of Twitter. Of course the functionalities will be very limited but the navigation part and main screens should look and feel similiar.
+In this guide, we would like to show you how to integrate React Navigation with Paper's components. To show all the details of the integration we've decided to build a clone of Twitter. Of course, the functionalities will be very limited but the navigation part and main screens should look and feel similar.
 
-In the following gif, you can see what is the final version of the app gonna look like:
+In the following gif, you can see what is the final version of the app gonna looks like:
 
 <img src="/blog/assets/using-react-navigation-5-with-paper/final-app.gif" height="480"/>
 
@@ -28,15 +28,15 @@ Since original Twitter is a very complex app, we will build only a part of it. T
 
 - Drawer
 - Stack Navigator with two screens: Screen showing bottom navigation and Details of a tweet
-- Bottom navigation with 3 tabs: Feed, Notifications and Messages
+- Bottom navigation with 3 tabs: Feed, Notifications, and Messages
 
-I will focus this guide on a React Navigation and React Native Paper integration. It means I won't show you how to build all of the components necessary to create such app, but you can always check the full implementation in the [github repo](https://github.com/Trancever/twitterClone).
+I will focus this guide on a React Navigation and React Native Paper integration. It means I won't show you how to build all of the components necessary to create such an app, but you can always check the full implementation in the [github repo](https://github.com/Trancever/twitterClone).
 
 Let's get started!
 
 ## Getting started
 
-I assume you already have an [Expo](https://expo.io/) project running locally. If not, make sure to create one. I choosed Expo over plain React-Native, because it includes most of the dependencies that we need so there is less work to do for us.
+I assume you already have an [Expo](https://expo.io/) project running locally. If not, make sure to create one. I chose Expo over plain React-Native because it includes most of the dependencies that we need so there is less work to do for us.
 
 Let's install React Native Paper, React Navigation v5 and other required dependencies.
 
@@ -52,11 +52,11 @@ expo install react-native-gesture-handler react-native-reanimated react-native-s
 
 After you run these two commands you should be ready to go. Let's start implementing the app!
 
-### 1. React Navigation and React Native Paper initial setup.
+## React Navigation and React Native Paper initial setup.
 
-Both these libraries require a minimal setup.
+Both these libraries require minimal setup.
 
-In case of React Native Paper we need to wrap the component tree with a **Provider**. You can do this inside the exported component in the **App.js** file.
+In case of React Native Paper, we need to wrap the component tree with a **Provider**. You can do this inside the exported component in the **App.js** file.
 
 ```jsx
 import React from 'react';
@@ -72,9 +72,9 @@ export default function App() {
 }
 ```
 
-The **PaperProvider** provides the theme to all the components in the framework. It also acts as a portal to components which need to be rendered at the top level. Check the full [Getting-Started](https://callstack.github.io/react-native-paper/getting-started.html) page for more information.
+The **PaperProvider** provides the theme to all the components in the framework. It also acts as a portal to components that need to be rendered at the top level. Check the full [Getting-Started](https://callstack.github.io/react-native-paper/getting-started.html) page for more information.
 
-React Navigation setup looks similiar. There is a component called **NavigationNativeContainer** which manages our navigation tree and contains the navigation state. It must wrap all navigator structure. We will render this components in **App.tsx** inside a **PaperProvider**. More informations can be found in the official [documentation](https://reactnavigation.org/docs/en/next/hello-react-navigation.html).
+React Navigation setup looks similar. There is a component called **NavigationNativeContainer** which manages our navigation tree and contains the navigation state. It must wrap all navigator structure. We will render this component in **App.tsx** inside a **PaperProvider**. More information can be found in the official [documentation](https://reactnavigation.org/docs/en/next/hello-react-navigation.html).
 
 ```jsx
 import React from 'react';
@@ -93,9 +93,9 @@ export default function App() {
 }
 ```
 
-### 2. Drawer
+## Drawer
 
-In our Twitter clone we want to implement a Drawer that is available from any screen in the app. This means, it has to be a top most navigator.
+In our Twitter clone, we want to implement a Drawer that is available from any screen in the app. This means it has to be a topmost navigator.
 
 In React Navigation v5 there is a common pattern for creating navigators. After importing **createXNavigator** function from the navigator package of your choice you can use **Navigator** and **Screen** components from the value it returns.
 
@@ -300,18 +300,18 @@ The final version of a drawer looks like this:
 
 <img src="/blog/assets/using-react-navigation-5-with-paper/final-drawer.gif" height="480"/>
 
-### 3. Stack Navigator + Paper's Appbar
+## Stack Navigator + Paper's Appbar
 
-Stack Navigator provides a way for an app to transition between screens when each new screen is placed on top of a stack. In case of this Twitter clone, we will use it to transition from a screen displaying feed of tweets to the screen showing details of a tweet.
+Stack Navigator provides a way for an app to transition between screens when each new screen is placed on top of a stack. In case of this Twitter clone, we will use it to transition from a screen displaying a feed of tweets to the screen showing details of a tweet.
 
 React Navigation v5 provides two implementations of a Stack Navigator
 
 - Native Stack
-- JS based Stack
+- JS-based Stack
 
-The main difference between them is that JS based stack re-implements animations and gestures while the native stack navigator relies on the platform primitives for animations and gestures.
+The main difference between them is that JS-based stack re-implements animations and gestures while the native stack navigator relies on the platform primitives for animations and gestures.
 
-In this section we will integrate React Native Paper [Appbar](https://callstack.github.io/react-native-paper/appbar-header.html) and JS based Stack Navigator.
+In this section, we will integrate React Native Paper [Appbar](https://callstack.github.io/react-native-paper/appbar-header.html) and JS-based Stack Navigator.
 
 As a first step, we will create a minimal version of a Stack:
 
@@ -340,7 +340,7 @@ export const FeedStack = () => {
 };
 ```
 
-By default the stack navigator is configured to have the familiar iOS and Android header. That doesn't suit our needs, because we want to use a Paper's Appbar instead.
+By default, the stack navigator is configured to have the familiar iOS and Android header. That doesn't suit our needs, because we want to use Paper's Appbar instead.
 We can achieve that by passing an `Appbar.Header` component as a `header` in Stack's `screenOptions`:
 
 ```jsx
@@ -427,19 +427,19 @@ export const FeedStack = () => {
 };
 ```
 
-Function that we pass as a `header` has access to 3 properties:
+The Function that we pass as a `header` has access to 3 properties:
 
 - scene
 - previous
 - navigation
 
-Thanks to the **scene** property we can access the title of top most screen on the stack and display it in the header.
+Thanks to the **scene** property we can access the title of topmost screen on the stack and display it in the header.
 **Previous** property tells us if there are any other screens lower on the Stack.
 </br>
 Finally, **navigation** property allows navigating to different screens e.g. opening a Drawer.
 
-The thing that we haven't coverd yet and it is very important is how to actually navigate between Stack Navigator screens.
-In case of Tab or Drawer Navigator we get it out of the box. We can swipe to open/close the Drawer or press a tab to change the scene. In Stack we have to implement it by ourselves.
+The thing that we haven't covered yet and it is very important is how to actually navigate between Stack Navigator screens.
+In case of Tab or Drawer Navigator, we get it out of the box. We can swipe to open/close the Drawer or press a tab to change the scene. In Stack, we have to implement it by ourselves.
 
 React Navigation gives us many different ways to navigate, but we will mostly focus on `push` and `pop`. You can access these two methods in **navigation** prop.
 
@@ -455,19 +455,19 @@ function onTweetPress() {
 }
 ```
 
-The implementation of `Feed` and `Details` components is quite big and complex, that's why i am not gonna post it here. Please make sure to check it out on [github repo](https://github.com/Trancever/twitterClone)
+The implementation of `Feed` and `Details` components is quite big and complex, that's why I am not gonna post it here. Please make sure to check it out on [github repo](https://github.com/Trancever/twitterClone)
 
-We have coverd only the basics of navigating between screens. If you want to learn more details check the official [documentation](https://reactnavigation.org/docs/en/next/navigating.html).
+We have covered only the basics of navigating between screens. If you want to learn more details check the official [documentation](https://reactnavigation.org/docs/en/next/navigating.html).
 
-Now, let's see what does the app look like with Stack Navigator and Paper's Appbar.
+Now, let's see what does the app looks like with Stack Navigator and Paper's Appbar.
 
 <img src="/blog/assets/using-react-navigation-5-with-paper/stack.gif" height="480"/>
 
-We still miss a last piece of our navigation flow - **Tab Navigator**. Let's move to the next section where we will take care of it.
+We still miss the last piece of our navigation flow - **Tab Navigator**. Let's move to the next section where we will take care of it.
 
-### 4. Bottom Navigation
+## Bottom Navigation
 
-In this section we will implement a Tab Navigator with 3 tabs and we will make sure this component is now a one of Stack's screen.
+In this section, we will implement a Tab Navigator with 3 tabs and we will make sure this component is now a one of Stack's screen.
 
 We will use a [Bottom Navigation](https://callstack.github.io/react-native-paper/bottom-navigation.html) component from React Native Paper that is exposed via **@react-navigation/material-bottom-tabs** package.
 
@@ -483,7 +483,7 @@ Then we can get a reference to the Tab.Navigator and Tab.Screen components.
 const Tab = createMaterialBottomTabNavigator();
 ```
 
-Now, we are ready to build the actual Bottom Navigation. We will render a `Tab.navigator` and 3 `Tab.Screen` components as a children. Each `Tab.Screen` representing a tab.
+Now, we are ready to build the actual Bottom Navigation. We will render a `Tab.navigator` and 3 `Tab.Screen` components as children. Each `Tab.Screen` representing a tab.
 
 ```jsx
 import React from 'react';
@@ -533,15 +533,15 @@ When we check the screen of the phone now, we will see a nice looking, material 
 </br>
 <img src="/blog/assets/using-react-navigation-5-with-paper/bottom-navigation.gif" height="480"/>
 
-### 5. FAB and Portal
+## FAB and Portal
 
-As it is stated in [MD Guidelines](https://material.io/components/buttons-floating-action-button/), the purpose of FAB button is to give an easy access to the main action of the application. Of course, official Twitter app follows this pattern. Based on the type of screen, it allows creating new tweets or sending direct messages via FAB. It also smoothly animates the icon of the FAB when user changes the tab and hides the FAB completely on specific screens.
+As it is stated in [MD Guidelines](https://material.io/components/buttons-floating-action-button/), the purpose of the FAB button is to give easy access to the main action of the application. Of course, the official Twitter app follows this pattern. Based on the type of screen, it allows creating new tweets or sending direct messages via FAB. It also smoothly animates the icon of the FAB when the user changes the tab and hides the FAB completely on specific screens.
 
 In this section, we are going to implement the very same behaviour in our app. We are going to use a [FAB](https://callstack.github.io/react-native-paper/fab.html) and [Portal](https://callstack.github.io/react-native-paper/portal.html) components from React Native Paper.
 
-`Portal` allows to render a component at a different place in the parent tree. It means you can use it to render content which should appear above other elemenets, similar to Modal.
+`Portal` allows rendering a component at a different place in the parent tree. It means you can use it to render content that should appear above other elements, similar to Modal.
 
-As an initial step we will render a FAB on all tabs and then we will add additional functionalities.
+As an initial step, we will render a FAB on all tabs and then we will add additional functionalities.
 
 Let's render a `FAB` and `Portal` in the same component where we render Tabs:
 
@@ -602,15 +602,15 @@ export const BottomTabs = () => {
 };
 ```
 
-With just few lines of JSX we have a nice looking FAB displayed on all tabs. Let's implement hiding it whenever user goes to the tweet details screen.
+With just a few lines of JSX we have a nice looking FAB displayed on all tabs. Let's implement hiding it whenever the user goes to the tweet details screen.
 
 Our current navigation structure should be:
 
 - StackNavigator that has two screens
-- First screen of StackNavigator renders a TabNavigator with 3 tabs
-- Second screen of StckNavigator renders a Tweet details
+- The First screen of StackNavigator renders a TabNavigator with 3 tabs
+- The Second screen of StckNavigator renders a Tweet details
 
-This means, a component that renders TabNavigator is a Stack's screen. Thanks to that, we can use `useIsFocused` hook provided by `@react-navigation/native` and conditionally hide `FAB`.
+This means a component that renders TabNavigator is a Stack's screen. Thanks to that, we can use `useIsFocused` hook provided by `@react-navigation/native` and conditionally hide `FAB`.
 
 ```jsx
 import React from 'react';
@@ -674,7 +674,7 @@ export const BottomTabs = () => {
 
 In the last step we will add ability to show different icon depending on the active tab.
 
-Currently, React Navigation v5 allows listening to `tabPress` event only in Tab.Navigator Screens. It means we can't set the listener in the component showed above which would be really handy because we also render a FAB there. To get around this problem we will use a context to get and set currently active tab.
+Currently, React Navigation v5 allows listening to `tabPress` event only in Tab.Navigator Screens. It means we can't set the listener in the component showed above which would be really handy because we also render a FAB there. To get around this problem we will use a context to get and set the currently active tab.
 
 ```jsx
 import React from 'react';
@@ -818,12 +818,12 @@ export const BottomTabs = () => {
 
 <img src="/blog/assets/using-react-navigation-5-with-paper/fab.gif" height="480"/>
 
-As you can see on the gif, the FAB button works in a same way as in a Twitter app.
-What's more, it even animates icon change properly even though we haven't implement it. That's the behaviour we get from React Native Paper's FAB out of the box.
+As you can see on the gif, the FAB button works in the same way as in a Twitter app.
+What's more, it even animates icon change properly even though we haven't implemented it. That's the behavior we get from React Native Paper's FAB out of the box.
 
-### 5. Theming
+## Theming
 
-Nowadays, supporting Light/Dark theme is no longer a fancy way to stand out from other apps, but it has become a standard. Happily, both React Navigation v5 and React Native Paper supports theming and in this section I'll guide you through setting it up.
+Nowadays, supporting the Light/Dark theme is no longer a fancy way to stand out from other apps, but it has become a standard. Happily, both React Navigation v5 and React Native Paper supports theming and in this section I'll guide you through setting it up.
 
 #### React Navigation
 
@@ -877,7 +877,7 @@ export default function Main() {
 
 #### Themes Combining
 
-Since both React Navigation and React Native Paper follows same pattern for theming and structure of the theme object is very similiar, we can combine them into one object:
+Since both React Navigation and React Native Paper follows the same pattern for theming and structure of the theme object is very similar, we can combine them into one object:
 
 ```jsx
 import * as React from 'react';
@@ -900,11 +900,11 @@ export default function Main() {
 }
 ```
 
-Of course the built-in themes are not the only themes we can apply. Both libraries allows full customization and you can learn about it in the official documentation ([React Navigation](https://reactnavigation.org/docs/en/next/themes.html), [React Native Paper](https://callstack.github.io/react-native-paper/theming.html))
+Of course, the built-in themes are not the only themes we can apply. Both libraries allow full customization and you can learn about it in the official documentation ([React Navigation](https://reactnavigation.org/docs/en/next/themes.html), [React Native Paper](https://callstack.github.io/react-native-paper/theming.html))
 
-In the last step I want to show you how to change theme dynamically. We will implement a switch in a drawer that will allow users choosing light or dark theme.
+In the last step, I want to show you how to change the theme dynamically. We will implement a switch in a drawer that will allow users choosing light or dark theme.
 
-We need to store an information about currently selected theme somewhere. Local state of the root component sounds reasonable. Also, we will conditionally pass different theme based on the state.
+We need to store information about the currently selected theme somewhere. The local state of the root component sounds reasonable. Also, we will conditionally pass different themes based on the state.
 
 ```jsx
 import * as React from 'react';
@@ -942,7 +942,7 @@ export default function Main() {
 }
 ```
 
-As you remember, we already render a Switch in a Drawer, but we haven't implement any logic when it is pressed. Let's take care of it now:
+As you remember, we already render a Switch in a Drawer, but we haven't implemented any logic when it is pressed. Let's take care of it now:
 
 ```jsx
 import React from 'react';
@@ -982,8 +982,8 @@ export function DrawerContent(props: Props) {
 }
 ```
 
-Firstly, we get a current theme using `useTheme` hook from Paper. This means, we can check `dark` property on it and pass correct value to `Switch`.
-</br>Secondly, we pass a `toggleTheme` func to `TouchableRipple` to toggle theme whenever user press a Switch.
+Firstly, we get a current theme using `useTheme` hook from Paper. This means we can check `dark` property on it and pass the correct value to `Switch`.
+</br>Secondly, we pass a `toggleTheme` function to `TouchableRipple` to toggle theme whenever user presses a Switch.
 
 You should be able to toggle a switch now and both `Provider` from Paper and `NativeNavigationContainer` from React Navigation will automatically apply correct colors to the components.
 
