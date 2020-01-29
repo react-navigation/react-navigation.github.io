@@ -6,11 +6,11 @@ authorURL: https://twitter.com/trensik
 
 This is a guest post by the [React Native Paper](https://reactnativepaper.com/) team. If you like this guide, check out React Native Paper for more!
 
-In this blog post, we'll show you how to build a real-world app using React Navigation v5 and Paper.
+In this blog post, we'll show you how to build a Twitter clone app using React Navigation v5 and Paper.
 
 ## Introduction
 
-React Navigation v5 is breakthrough navigation. It not only provides a cross-platform native Stack, but also the API was redesigned from the ground up to allow things that were never possible before. Thanks to the component-based API, all of the configuration is happening inside the **render method**. This means we can access **props**, **state** and **context** and can **dynamically change configuration** for the navigator.
+React Navigation v5 not only provides a cross-platform native Stack, but also the API was redesigned from the ground up to allow things that were never possible before. Thanks to the component-based API, all of the configuration is happening inside the **render method**. This means we can access **props**, **state** and **context** and can **dynamically change configuration** for the navigator.
 
 [React Native Paper](<(https://reactnativepaper.com/)>) is a UI component library that implements [MD Guidelines](https://material.io/design/).
 It allows building beautiful interfaces on Mobile and Web with high-quality cross-platform components.
@@ -535,7 +535,7 @@ When we check the screen of the phone now, we will see a nice looking, material 
 
 ## FAB and Portal
 
-As it is stated in [MD Guidelines](https://material.io/components/buttons-floating-action-button/), the purpose of the FAB button is to give easy access to the main action of the application. Of course, the official Twitter app follows this pattern. Based on the type of screen, it allows creating new tweets or sending direct messages via FAB. It also smoothly animates the icon of the FAB when the user changes the tab and hides the FAB completely on specific screens.
+As it is stated in [Material Design Guidelines](https://material.io/components/buttons-floating-action-button/), the purpose of the FAB button is to give easy access to the main action of the application. Of course, the official Twitter app follows this pattern. Based on the type of screen, it allows creating new tweets or sending direct messages via FAB. It also smoothly animates the icon of the FAB when the user changes the tab and hides the FAB completely on specific screens.
 
 In this section, we are going to implement the very same behaviour in our app. We are going to use a [FAB](https://callstack.github.io/react-native-paper/fab.html) and [Portal](https://callstack.github.io/react-native-paper/portal.html) components from React Native Paper.
 
