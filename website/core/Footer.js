@@ -58,6 +58,10 @@ class Footer extends React.Component {
             <a href="https://expo.io" style={{ fontWeight: 'bold' }}>
               Expo
             </a>
+            <span>{' '}&{' '}</span>
+            <a href="https://swmansion.com/" style={{ fontWeight: 'bold' }}>
+              Software Mansion
+            </a>
             , with contributions from the{' '}
             <a
               style={{ fontWeight: 'bold' }}
