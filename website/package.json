@@ -12,8 +12,7 @@
     "postinstall": "patch-package"
   },
   "devDependencies": {
-    "docusaurus": "^1.14.0",
-    "localtunnel": "^2.0.0"
+    "docusaurus": "^1.14.0"
   },
   "dependencies": {
     "patch-package": "^6.2.0",
