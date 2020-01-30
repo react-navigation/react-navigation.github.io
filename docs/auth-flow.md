@@ -29,7 +29,7 @@ So we need to:
 - Add some logic for restoring token, sign in and sign out
 - Expose methods for sign in and sign out to other components
 
-We'll use `React.useReducer` and `React.useContext` in this guide. But if you're using a state management library such as Redux or Mobx, you can use them for this functionality instead.
+We'll use `React.useReducer` and `React.useContext` in this guide. But if you're using a state management library such as Redux or Mobx, you can use them for this functionality instead. In fact, in bigger apps, a global state management library is more suitable for storing authentication tokens.
 
 First we'll need to create a context for auth where we can expose necessary methods:
 
@@ -58,17 +58,20 @@ export default function App({ navigation }) {
         case 'SIGN_IN':
           return {
             ...prevState,
+            isSignout: false,
             userToken: action.token,
           };
         case 'SIGN_OUT':
           return {
             ...prevState,
+            isSignout: true,
             userToken: undefined,
           };
       }
     },
     {
       isLoading: true,
+      isSignout: false,
       userToken: null,
     }
   );
@@ -146,7 +149,15 @@ return (
         <Stack.Screen name="Splash" component={SplashScreen} />
       ) : state.userToken === null ? (
         // No token found, user isn't signed in
-        <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen
+          name="SignIn"
+          component={SignInScreen}
+          options={{
+            title: 'Sign in',
+            // When logging out, a pop animation feels intuitive
+            animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+          }}
+        />
       ) : (
         // User is signed in
         <Stack.Screen name="Home" component={HomeScreen} />
@@ -173,9 +184,15 @@ In earlier versions of React Navigation, there were 2 ways to handle this:
 
 Both of these approaches were imperative. We needed to update the state to save your token, and then do a `navigate` or `reset` to change screens manually. Seems reasonable, right? But what happens when the user logs out? We need to update the state to delete the token, then `navigate` or `reset` again manually to show the login screen. We have to imperatively do the task twice already. Add more scenarios to this (e.g. unverified user, guest etc.) and it becomes even more complex.
 
-But now, with above approach, we can declaratively say which screens should be accessible if user is logged in and which screens shouldn't be. If the user logs in or logs out, we update the `userToken` in state and the correct screens are shown automatically.
+But with the above approach, you can declaratively say which screens should be accessible if user is logged in and which screens shouldn't be. If the user logs in or logs out, you update the `userToken` in state and the correct screens are shown automatically.
 
-Another advantage of this approach is that all the screens are still under the stack navigator, which means they are animated like any other screens in the stack. For example, when the user logs in, the new screen will animate in smoothly instead of an abrupt screen change like with switch navigator. There is an experimental animated switch navigator, but the same animations as stack are not available.
+To summarize the benefits:
+
+- No need for manually navigating to correct screen on log in or log out, correct screens are shown automatically.
+- If the user is not logged in, it's impossible to navigate to screens which need the user to be logged in (e.g. from a deep link, restoring persisted state), which means you don't need to deal with inconsistent states.
+- Since all our screens are under the stack navigator, we get smooth animations after log in or log out unlike the abrupt screen change with switch navigator.
+
+This pattern has been in use by other routing libraries such as React Router for a long time, and is commonly knows as "Protected routes". Here, our screens which need the user to be logged in are "protected" and cannot be navigated to by other means if the user is not logged in.
 
 ## Fill in other components
 

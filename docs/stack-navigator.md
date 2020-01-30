@@ -265,13 +265,24 @@ You can also specify `{ backgroundColor: 'transparent' }` to make the previous s
 
 Whether transition animation should be enabled on the screen. If you set it to `false`, the screen won't animate when pushing or popping. Defaults to `true`.
 
+#### `animationTypeForReplace`
+
+The type of animation to use when this screen replaces another screen. It takes the following values:
+
+- `push` - The animation of a new screen being pushed will be used
+- `pop` - The animation of a screen being popped will be used
+
+Defaults to `push`.
+
+When `pop` is used, the `pop` animation is applied to the screen being replaced.
+
 #### `gestureEnabled`
 
 Whether you can use gestures to dismiss this screen. Defaults to `true` on iOS, `false` on Android.
 
 #### `gestureResponseDistance`
 
-Object to override the distance of touch start from the edge of the screen to recognize gestures. It takes the following properties:
+Object to override the distance of touch start from the edge of the screen to recognize gestures. The object can contain the following properties:
 
 - `horizontal` - _number_ - Distance for horizontal direction. Defaults to 25.
 - `vertical` - _number_ - Distance for vertical direction. Defaults to 135.
@@ -300,7 +311,12 @@ Interpolated styles for various parts of the header. Refer the [Animations secti
 
 Safe area insets for the screen. This is used to avoid elements like notch and status bar. By default, the device's safe area insets are automatically detected. You can override the behavior with this option.
 
-Takes an object containing following optional properties: `top`, `right`, `bottom` and `left`.
+Takes an object containing following optional properties:
+
+- `top` - _number_ - The value of the top inset, e.g. area containing the status bar and notch.
+- `right` - _number_ - The value of the left inset.
+- `bottom` - _number_ - The value of the top inset, e.g. area navigation bar on bottom.
+- `left`. - _number_ - The value of the right inset.
 
 ### Events
 

@@ -63,17 +63,20 @@ export default function App({ navigation }) {
         case 'SIGN_IN':
           return {
             ...prevState,
+            isSignout: false,
             userToken: action.token,
           };
         case 'SIGN_OUT':
           return {
             ...prevState,
+            isSignout: true,
             userToken: null,
           };
       }
     },
     {
       isLoading: true,
+      isSignout: false,
       userToken: null,
     }
   );
@@ -131,7 +134,15 @@ export default function App({ navigation }) {
             <Stack.Screen name="Splash" component={SplashScreen} />
           ) : state.userToken == null ? (
             // No token found, user isn't signed in
-            <Stack.Screen name="SignIn" component={SignInScreen} />
+            <Stack.Screen
+              name="SignIn"
+              component={SignInScreen}
+              options={{
+                title: 'Sign in',
+            // When logging out, a pop animation feels intuitive
+                animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+              }}
+            />
           ) : (
             // User is signed in
             <Stack.Screen name="Home" component={HomeScreen} />
