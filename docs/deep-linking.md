@@ -175,7 +175,7 @@ const state = {
       state: {
         routes: [
           {
-            name: 'Users',
+            name: 'Profile',
             params: { id: 'jane' },
           },
         ],
