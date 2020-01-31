@@ -3,6 +3,7 @@
   "scripts": {
     "examples": "docusaurus-examples",
     "start": "docusaurus-start --no-watch",
+    "build": "docusaurus-build",
     "publish-gh-pages": "docusaurus-publish",
     "write-translations": "docusaurus-write-translations",
     "version": "docusaurus-version",
