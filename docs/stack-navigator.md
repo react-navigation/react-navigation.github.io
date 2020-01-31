@@ -58,7 +58,9 @@ If `false`, the on screen keyboard will NOT automatically dismiss when navigatin
 Defines the style for rendering and transitions:
 
 - `card` - Use the standard iOS and Android screen transitions. This is the default.
-- `modal` - Make the screens slide in from the bottom which is a common iOS pattern. Only works on iOS, has no effect on Android.
+- `modal` - This does 2 things:
+  - Sets `headerMode` to `screen` for the stack unless specified
+  - Make the screens slide in from the bottom on iOS which is a common iOS pattern.
 
 #### `headerMode`
 
