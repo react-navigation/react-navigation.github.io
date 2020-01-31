@@ -10,7 +10,7 @@ In this blog post, we'll show you how to build a Twitter clone app using React N
 
 ## Introduction
 
-React Navigation v5 not only provides a cross-platform native Stack, but also the API was redesigned from the ground up to allow things that were never possible before. Thanks to the component-based API, all of the configuration is happening inside the **render method**. This means we can access **props**, **state** and **context** and can **dynamically change configuration** for the navigator.
+The React Navigation v5 comes with many great improvements compared to previous version. It not only provides a cross-platform native Stack, but also the API was redesigned from the ground up to allow things that were never possible before. Thanks to the component-based API, all of the configuration is happening inside the **render method**. This means we can access **props**, **state** and **context** and can **dynamically change configuration** for the navigator.
 
 [React Native Paper](<(https://reactnativepaper.com/)>) is a UI component library that implements [MD Guidelines](https://material.io/design/).
 It allows building beautiful interfaces on Mobile and Web with high-quality cross-platform components.
@@ -341,7 +341,7 @@ export const FeedStack = () => {
 ```
 
 By default, the stack navigator is configured to have the familiar iOS and Android header. That doesn't suit our needs, because we want to use Paper's Appbar instead.
-We can achieve that by passing an `Appbar.Header` component as a `header` in Stack's `screenOptions`:
+We can achieve that by passing an `Appbar.Header` component as a `header` in Stack's `screenOptions`. We will also pass a `headerMode` prop with a value of `screen` to have a nice looking fade in/out animation.
 
 ```jsx
 import React from 'react';
@@ -353,63 +353,55 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Feed } from './feed';
 import { Details } from './details';
 
+const Header = ({ scene, previous, navigation }) => {
+  const { options } = scene.descriptor;
+  const title =
+    options.headerTitle !== undefined
+      ? options.headerTitle
+      : options.title !== undefined
+      ? options.title
+      : scene.route.name;
+
+  return (
+    <Appbar.Header theme={{ colors: { primary: theme.colors.surface } }}>
+      {previous ? (
+        <Appbar.BackAction
+          onPress={navigation.pop}
+          color={theme.colors.primary}
+        />
+      ) : (
+        <TouchableOpacity
+          onPress={() => {
+            navigation.openDrawer();
+          }}
+        >
+          <Avatar.Image
+            size={40}
+            source={{
+              uri:
+                'https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg',
+            }}
+          />
+        </TouchableOpacity>
+      )}
+      <Appbar.Content
+        title={
+          previous ? title : <MaterialCommunityIcons name="twitter" size={40} />
+        }
+      />
+    </Appbar.Header>
+  );
+};
+
 export const FeedStack = () => {
   return (
     <Stack.Navigator
       initialRouteName="FeedList"
+      headerMode="screen"
       screenOptions={{
-        header: ({ scene, previous, navigation }) => {
-          const { options } = scene.descriptor;
-          const title =
-            options.headerTitle !== undefined
-              ? options.headerTitle
-              : options.title !== undefined
-              ? options.title
-              : scene.route.name;
-
-          return (
-            <Appbar.Header
-              theme={{ colors: { primary: theme.colors.surface } }}
-            >
-              {previous ? (
-                <Appbar.BackAction
-                  onPress={navigation.pop}
-                  color={theme.colors.primary}
-                />
-              ) : (
-                <TouchableOpacity
-                  style={{ marginLeft: 10 }}
-                  onPress={() => {
-                    navigation.openDrawer();
-                  }}
-                >
-                  <Avatar.Image
-                    size={40}
-                    source={{
-                      uri:
-                        'https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg',
-                    }}
-                  />
-                </TouchableOpacity>
-              )}
-              <Appbar.Content
-                title={
-                  previous ? (
-                    title
-                  ) : (
-                    <MaterialCommunityIcons
-                      style={{ marginRight: 10 }}
-                      name="twitter"
-                      size={40}
-                      color={theme.colors.primary}
-                    />
-                  )
-                }
-                titleStyle={{ fontSize: 18, fontWeight: 'bold' }}
-              />
-            </Appbar.Header>
-          );
-        },
+        header: ({ scene, previous, navigation }) => (
+          <Header scene={scene} previous={previous} navigation={navigation} />
+        ),
       }}
     >
       <Stack.Screen
@@ -427,7 +419,7 @@ export const FeedStack = () => {
 };
 ```
 
-The Function that we pass as a `header` has access to 3 properties:
+The Function that we pass to `header` prop has access to 3 properties:
 
 - scene
 - previous
@@ -674,100 +666,33 @@ export const BottomTabs = () => {
 
 In the last step we will add ability to show different icon depending on the active tab.
 
-Currently, React Navigation v5 allows listening to `tabPress` event only in Tab.Navigator Screens. It means we can't set the listener in the component showed above which would be really handy because we also render a FAB there. To get around this problem we will use a context to get and set the currently active tab.
+We will take an advantage of our `BottomTabs` component being one of a Stack's screen. It means it has an access to the `route` object that is passed to each screen as a prop. This object contains an information about current screen which means we can access it and conditionally render proper icon. This is not a very common pattern and it can be confusing at first, so make sure to read the whole [guide](https://reactnavigation.org/docs/en/next/screen-options-resolution.html) on how to use it and what can be achieved by using it.
 
 ```jsx
 import React from 'react';
-
-export type Tab = 'Feed' | 'Notifications' | 'Message';
-
-type TabBarSetContext = (tab: Tab) => void;
-
-export const TabBarContext = React.createContext < Tab > 'Feed';
-export const TabBarSetContext =
-  React.createContext < TabBarSetContext > (() => {});
-```
-
-Let's setup context providers in the root component:
-
-```jsx
-import React from 'react';
-import { Provider as PaperProvider } from 'react-native-paper';
-import { NavigationNativeContainer } from '@react-navigation/native';
-
-export default function App() {
-  const [tab, setTab] = React.useState < Tab > 'Feed';
-
-  return (
-    <PaperProvider>
-      <NavigationNativeContainer>
-        <TabBarContext.Provider value={tab}>
-          <TabBarSetContext.Provider value={setTab}>
-            <Main />
-          </TabBarSetContext.Provider>
-        </TabBarContext.Provider>
-      </NavigationNativeContainer>
-    </PaperProvider>
-  );
-}
-```
-
-We are finally ready to start listening to `tabPress` event. We will set the listener in each Tab.Navigator Screen.
-
-Example for Feed Screen:
-
-```jsx
-import React from 'react';
-import { MaterialBottomTabNavigationProp } from '@react-navigation/material-bottom-tabs';
-import { TabBarSetContext } from './context/tabBarContext';
-
-type Props = {
-  navigation: MaterialBottomTabNavigationProp<{}>,
-};
-
-export const Feed = (props: Props) => {
-  const setTab = React.useContext(TabBarSetContext);
-
-  React.useEffect(() => {
-    const onTabPress = () => setTab('Feed'); // We pass a 'Feed' string representing Feed screen
-
-    props.navigation.addListener('tabPress', onTabPress); // set listener
-
-    return () => props.navigation.removeListener('tabPress', onTabPress); // remove listener
-  }, [props.navigation, setTab]);
-
-  return (
-    <View>
-      <Text>Feed</Text>
-    </View>
-  );
-};
-```
-
-Now, we can access currently active tab in Feed screen using `TabBarContext` and render a proper icon in FAB:
-
-```jsx
-import React from 'react';
+import color from 'color';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { useTheme, Portal, FAB } from 'react-native-paper';
+import { Portal, FAB } from 'react-native-paper';
 import { useIsFocused } from '@react-navigation/native';
 
 import { Feed } from './feed';
 import { Message } from './message';
 import { Notifications } from './notifications';
-import { TabBarContext } from './context/tabBarContext';
 
 const Tab = createMaterialBottomTabNavigator();
 
-export const BottomTabs = () => {
-  const isFocused = useIsFocused();
+export const BottomTabs = (props) => {
+  // Get a name of current screen
+  const routeName = props.route.state
+    ? props.route.state.routes[props.route.state.index].name
+    : 'Feed';
 
-  const tab = React.useContext(TabBarContext); // get current active tab using TabBarContext
+  const isFocused = useIsFocused();
 
   let icon = 'feather';
 
-  switch (tab) {
-    case 'Message':
+  switch (routeName) {
+    case 'Messages':
       icon = 'email-plus-outline';
       break;
     default:
@@ -777,12 +702,16 @@ export const BottomTabs = () => {
 
   return (
     <React.Fragment>
-      <Tab.Navigator initialRouteName="Feed" shifting={true}>
+      <Tab.Navigator
+        initialRouteName="Feed"
+        shifting={true}
+      >
         <Tab.Screen
           name="Feed"
           component={Feed}
           options={{
             tabBarIcon: 'home-account',
+            tabBarColor,
           }}
         />
         <Tab.Screen
@@ -790,6 +719,7 @@ export const BottomTabs = () => {
           component={Notifications}
           options={{
             tabBarIcon: 'bell-outline',
+            tabBarColor,
           }}
         />
         <Tab.Screen
@@ -797,23 +727,26 @@ export const BottomTabs = () => {
           component={Message}
           options={{
             tabBarIcon: 'message-text-outline',
+            tabBarColor,
           }}
         />
       </Tab.Navigator>
       <Portal>
         <FAB
           visible={isFocused}
-          icon={icon} // Pass a proper icon for current tab
+          icon={icon}
           style={{
             position: 'absolute',
-            bottom: safeArea.bottom + 65,
+            bottom: 100,
             right: 16,
           }}
+          color="white"
         />
       </Portal>
     </React.Fragment>
   );
 };
+
 ```
 
 <img src="/blog/assets/using-react-navigation-5-with-paper/fab.gif" height="480"/>
@@ -858,11 +791,11 @@ Once we import a theme we can pass it to the Paper's `Provider` component:
 
 ```jsx
 import * as React from 'react';
+import { NavigationNativeContainer, DarkTheme } from '@react-navigation/native';
 import {
-  NavigationNativeContainer,
-  DarkTheme,
-} from '@react-navigation/native';
-import { DarkTheme as PaperDarkTheme, Provider as PaperProvider } from 'react-native-paper';
+  DarkTheme as PaperDarkTheme,
+  Provider as PaperProvider,
+} from 'react-native-paper';
 
 export default function Main() {
   return (
@@ -875,7 +808,7 @@ export default function Main() {
 }
 ```
 
-#### Themes Combining
+#### Combining themes
 
 Since both React Navigation and React Native Paper follows the same pattern for theming and structure of the theme object is very similar, we can combine them into one object:
 
@@ -885,9 +818,16 @@ import {
   NavigationNativeContainer,
   DarkTheme as NavigationDarkTheme,
 } from '@react-navigation/native';
-import { DarkTheme as PaperDarkTheme, Provider as PaperProvider } from 'react-native-paper';
+import {
+  DarkTheme as PaperDarkTheme,
+  Provider as PaperProvider,
+} from 'react-native-paper';
 
-const CombinedDarkTheme = { ...PaperDarkTheme, ...NavigationDarkTheme };
+const CombinedDarkTheme = {
+  ...PaperDarkTheme,
+  ...NavigationDarkTheme,
+  colors: { ...PaperDarkTheme.colors, ...NavigationDarkTheme.colors },
+};
 
 export default function Main() {
   return (
@@ -899,6 +839,10 @@ export default function Main() {
   );
 }
 ```
+
+If code for themes merging looks complex, you can use a [deepmerge](https://www.npmjs.com/package/deepmerge) package. It will simplify the implementation significantly.
+
+#### Custom themes
 
 Of course, the built-in themes are not the only themes we can apply. Both libraries allow full customization and you can learn about it in the official documentation ([React Navigation](https://reactnavigation.org/docs/en/next/themes.html), [React Native Paper](https://callstack.github.io/react-native-paper/theming.html))
 
@@ -919,13 +863,16 @@ import {
   Provider as PaperProvider,
 } from 'react-native-paper';
 
-const CombinedDefaultTheme = { ...PaperDefaultTheme, ...NavigationDefaultTheme };
+const CombinedDefaultTheme = {
+  ...PaperDefaultTheme,
+  ...NavigationDefaultTheme,
+};
 const CombinedDarkTheme = { ...PaperDarkTheme, ...NavigationDarkTheme };
 
 export default function Main() {
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
-  const theme = isDarkTheme ? CombinedDarkTheme : CombinedDefaultTheme // Use Light/Dark theme based on a state
+  const theme = isDarkTheme ? CombinedDarkTheme : CombinedDefaultTheme; // Use Light/Dark theme based on a state
 
   function toggleTheme() {
     // We will pass this function to Drawer and invoke it on theme switch press
@@ -957,11 +904,7 @@ import {
   Switch,
 } from 'react-native-paper';
 
-type Props = {
-  toggleTheme: () => void,
-};
-
-export function DrawerContent(props: Props) {
+export function DrawerContent(props) {
   const paperTheme = useTheme();
 
   return (
