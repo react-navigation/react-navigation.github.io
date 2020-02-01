@@ -81,7 +81,7 @@ Example:
 <samp id="use-focus-effect" />
 
 ```js
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/core';
 
 function Profile() {
   useFocusEffect(
