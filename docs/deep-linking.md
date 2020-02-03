@@ -160,7 +160,9 @@ Here we have a stack navigator in root, and inside the `Home` screen of the root
 ```js
 {
   Home: {
-    Profile: 'users/:id',
+    screens: {
+      Profile: 'users/:id',
+    },
   },
 }
 ```
