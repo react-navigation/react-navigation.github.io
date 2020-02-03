@@ -21,3 +21,23 @@ function Profile() {
 ```
 
 Note that using this hook triggers a re-render for the screen when it changes focus. This might cause lags during the animation if your screen is heavy. You might want to extract the expensive parts to separate components and use [`React.memo`](https://reactjs.org/docs/react-api.html#reactmemo) or [`React.PureComponent`](https://reactjs.org/docs/react-api.html#reactpurecomponent) to minimize re-renders for them.
+
+## Using with class component
+
+You can wrap your class component in a function component to use the hook:
+
+```js
+class Profile extends React.Component {
+  render() {
+    // Get it from props
+    const { isFocused } = this.props;
+  }
+}
+
+// Wrap and export
+export default function(props) {
+  const isFocused = useIsFocused();
+
+  return <Profile {...props} isFocused={isFocused} />;
+}
+```

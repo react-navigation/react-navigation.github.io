@@ -25,3 +25,24 @@ function Albums() {
   return <ScrollView ref={ref}>{/* content */}</ScrollView>;
 }
 ```
+
+## Using with class component
+
+You can wrap your class component in a function component to use the hook:
+
+```js
+class Albums extends React.Component {
+  render() {
+    return <ScrollView ref={this.props.scrollRef}>{/* content */}</ScrollView>;
+  }
+}
+
+// Wrap and export
+export default function(props) {
+  const ref = React.useRef(null);
+
+  useScrollToTop(ref);
+
+  return <Albums {...props} scrollRef={ref} />;
+}
+```
