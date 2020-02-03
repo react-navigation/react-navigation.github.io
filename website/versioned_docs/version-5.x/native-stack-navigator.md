@@ -16,7 +16,7 @@ This navigator uses native navigation primitives (`UINavigationController` on iO
 To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`@react-navigation/native-stack`](https://github.com/react-navigation/react-navigation/tree/master/packages/native-stack):
 
 ```sh
-npm install @react-navigation/native-stack@next
+npm install @react-navigation/native-stack
 ```
 
 Make sure to enable `react-native-screens`. This needs to be done before our app renders. To do it, add the following code in your entry file (e.g. `App.js`):

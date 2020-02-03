@@ -16,7 +16,7 @@ Lets start by demonstrating the most common navigator, `createStackNavigator`.
 Before continuing, first install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/master/packages/stack) :
 
 ```sh
-npm install @react-navigation/stack@next @react-native-community/masked-view
+npm install @react-navigation/stack @react-native-community/masked-view
 ```
 
 ### Creating a stack navigator
