@@ -9,7 +9,7 @@ As a potential user of the library, it's important to know what you can and cann
 
 ## Dynamic routes
 
-> It's not a limitation anymore with [React Navigation 5](https://reactnavigation.org/next) which uses a new component based API to be able to support this use case.
+> It's not a limitation anymore with [React Navigation 5](https://reactnavigation.org) which uses a new component based API to be able to support this use case.
 
 This one requires a bit of understanding of React Navigation to fully grok.
 
@@ -46,7 +46,7 @@ There are workarounds if you absolutely need dynamic routes but you can expect s
 
 ## iOS 11 style header with large text
 
-> [React Navigation 5](https://reactnavigation.org/next) includes a new [native stack navigator](https://reactnavigation.org/docs/en/next/native-stack-navigator.html) which uses the platform navigation primitives. It supports the native [large title](https://reactnavigation.org/docs/en/next/native-stack-navigator.html#headerlargetitle) on iOS.
+> [React Navigation 5](https://reactnavigation.org) includes a new [native stack navigator](https://reactnavigation.org/docs/en/next/native-stack-navigator.html) which uses the platform navigation primitives. It supports the native [large title](https://reactnavigation.org/docs/en/next/native-stack-navigator.html#headerlargetitle) on iOS.
 
 This is on the roadmap to implement, but it's not currently available in the React Navigation. Some folks have [gone ahead and built their own version of this](https://github.com/react-navigation/react-navigation-4/issues/2749#issuecomment-367516290), but your mileage may vary.
 
@@ -58,7 +58,7 @@ If you like what React Navigation has to offer but are turned off by this constr
 
 ## Performance limitations
 
-> [React Navigation 5](https://reactnavigation.org/next) includes a new [native stack navigator](https://reactnavigation.org/docs/en/next/native-stack-navigator.html) which uses the platform navigation primitives. While the customization options are limited with it, the performance is close to native.
+> [React Navigation 5](https://reactnavigation.org) includes a new [native stack navigator](https://reactnavigation.org/docs/en/next/native-stack-navigator.html) which uses the platform navigation primitives. While the customization options are limited with it, the performance is close to native.
 
 We are able to offload animations to another thread using React Native's [Animated native driver](https://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html), but we currently still need to call back into JavaScript for gestures (although there are plans to remedy this in the near future). React Navigation is entirely made up of React components and the state is managed in JavaScript on the same thread as the rest of your app. This is what makes React Navigation great in many ways but it also means that your app logic contends for CPU time with React Navigation &mdash; there's only so much JavaScript execution time available per frame.
 
