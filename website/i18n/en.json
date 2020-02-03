@@ -5,10 +5,6 @@
     "previous": "Previous",
     "tagline": "Routing and navigation for your React Native apps",
     "docs": {
-      "getting-started": {
-        "title": "Getting started",
-        "sidebar_label": "Getting started"
-      },
       "version-1.x/version-1.x-alternatives": {
         "title": "Alternative libraries",
         "sidebar_label": "Alternative libraries"
@@ -1107,7 +1103,7 @@
     "Learn more using the [documentation on this site](/docs/en/getting-started.html).|no description given": "Learn more using the [documentation on this site](/docs/en/getting-started.html).",
     "Browse Docs and API|no description given": "Browse Docs and API",
     "Ask questions about the documentation and project in the `#react-navigation` channel on the [Reactiflux Discord](https://discord.gg/4xEK3nD).|no description given": "Ask questions about the documentation and project in the `#react-navigation` channel on the [Reactiflux Discord](https://discord.gg/4xEK3nD).",
-    "Read the release notes for new versions of React Navigation in the [releases tab on the Github repository](https://github.com/react-navigation/react-navigation-4/releases).|no description given": "Read the release notes for new versions of React Navigation in the [releases tab on the Github repository](https://github.com/react-navigation/react-navigation-4/releases).",
+    "Read the release notes for new versions of React Navigation in the [releases tab on the Github repository](https://github.com/react-navigation/react-navigation/releases).|no description given": "Read the release notes for new versions of React Navigation in the [releases tab on the Github repository](https://github.com/react-navigation/react-navigation/releases).",
     "If you've encountered a bug with React Navigation, please|no description given": "If you've encountered a bug with React Navigation, please",
     "post an issue|no description given": "post an issue",
     "and be sure to fill out the issue template. If you believe there is a feature missing, please|no description given": "and be sure to fill out the issue template. If you believe there is a feature missing, please",
