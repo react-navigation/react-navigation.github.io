@@ -86,8 +86,46 @@ useFocusEffect(
 );
 ```
 
-## How is `useFocusEffect` different from adding a listener for `focus` event?
+## How is `useFocusEffect` different from adding a listener for `focus` event
 
 The `focus` event fires when a screen comes into focus. Since it's an event, your listener won't be called if the screen was already focused when you subscribed to the event. This also doesn't provide a way to perform a cleanup function when the screen becomes unfocused. You can subscribe to the `blur` event and handle it manually, but it can get messy. You will usually need to handle `componentDidMount` and `componentWillUnmount` as well in addition to these events, which complicates it even more.
 
 The `useFocusEffect` allows you to run an effect on focus and clean it up when the screen becomes unfocused. It also handles cleanup on unmount. It re-runs the effect when dependencies change, so you don't need to worry about stale values in your listener.
+
+## Using with class component
+
+You can make a component for your effect and use it in your class component:
+
+```js
+function FetchUserData({ userId, onUpdate }) {
+  useFocusEffect(
+    React.useCallback(() => {
+      const unsubscribe = API.subscribe(userId, onUpdate);
+
+      return () => unsubscribe();
+    }, [userId, onUpdate])
+  );
+
+  return null;
+}
+
+// ...
+
+class Profile extends React.Component {
+  _handleUpdate = user => {
+    // Do something with user object
+  };
+
+  render() {
+    return (
+      <>
+        <FetchUserData
+          userId={this.props.userId}
+          onUpdate={this.handleUpdate}
+        />
+        {/* rest of your code */}
+      </>
+    );
+  }
+}
+```

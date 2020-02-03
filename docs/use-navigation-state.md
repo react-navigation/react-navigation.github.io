@@ -47,3 +47,23 @@ function Profile() {
 ```
 
 So when do you use `navigation.dangerouslyGetState()`? It's mostly useful within event listeners where you don't care about what's rendered. In most cases, using the hook should be preferred.
+
+## Using with class component
+
+You can wrap your class component in a function component to use the hook:
+
+```js
+class Profile extends React.Component {
+  render() {
+    // Get it from props
+    const { routesLength } = this.props;
+  }
+}
+
+// Wrap and export
+export default function(props) {
+  const routesLength = useNavigationState(state => state.routes.length);
+
+  return <Profile {...props} routesLength={routesLength} />;
+}
+```

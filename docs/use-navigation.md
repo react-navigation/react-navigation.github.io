@@ -31,4 +31,24 @@ function MyBackButton() {
 }
 ```
 
-See the documentation for the [`navigation` prop](navigation-prop.md) for more info.
+See the documentation for the [`navigation` prop](navigation-prop.html) for more info.
+
+## Using with class component
+
+You can wrap your class component in a function component to use the hook:
+
+```js
+class MyBackButton extends React.Component {
+  render() {
+    // Get it from props
+    const { navigation } = this.props;
+  }
+}
+
+// Wrap and export
+export default function(props) {
+  const navigation = useNavigation();
+
+  return <MyBackButton {...props} navigation={navigation} />;
+}
+```
