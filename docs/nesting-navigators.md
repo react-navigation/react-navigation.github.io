@@ -10,8 +10,8 @@ Nesting navigators means rendering a navigator inside a screen of another naviga
 function Home() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Feed" component={Root} />
-      <Tab.Screen name="Messages" component={Home} />
+      <Tab.Screen name="Feed" component={Feed} />
+      <Tab.Screen name="Messages" component={Messages} />
     </Tab.Navigator>
   );
 }
