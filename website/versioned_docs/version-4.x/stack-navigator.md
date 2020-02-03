@@ -303,7 +303,7 @@ Number which determines the relevance of velocity for the gesture. Defaults to 0
 
 #### `gestureDirection`
 
-Direction of the gestures and animations. Refer the [Animations section](#animations) for details.
+Direction of the gestures. Refer the [Animations section](#animations) for details.
 
 #### `transitionSpec`
 
@@ -352,12 +352,14 @@ See the examples in the [example app](https://github.com/react-navigation/stack/
 
 Stack Navigator exposes various options to configure the transition animation when a screen is added or removed. These transition animations can be customized on a per-screen basis by specifying the options in the `options` prop for each screen.
 
-- `gestureDirection` - The direction of swipe gestures as well as animations:
+- `gestureDirection` - The direction of swipe gestures:
 
   - `horizontal` - The gesture to close the screen will start from the left, and from the right in RTL. For animations, screen will slide from the right with `SlideFromRightIOS`, and from the left in RTL.
   - `horizontal-inverted` - The gesture to close the screen will start from the right, and from the left in RTL. For animations, screen will slide from the left with `SlideFromRightIOS`, and from the right in RTL as the direction is inverted.
   - `vertical` - The gesture to close the screen will start from the top. For animations, screen will slide from the bottom.
   - `vertical-inverted` - The gesture to close the screen will start from the bottom. For animations, screen will slide from the top.
+
+  You may want to specify a matching horizontal/vertical animation along with `gestureDirection` as well. For the animations included in the library, if you set `gestureDirection` to one of the inverted ones, it'll also flip the animation direction.
 
 - `transitionSpec` - An object which specifies the animation type (`timing` or `spring`) and their options (such as `duration` for `timing`). It takes 2 properties:
 
