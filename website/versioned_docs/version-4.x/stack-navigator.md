@@ -213,6 +213,20 @@ Note that if you don't want your content to appear under the header, you need to
 To get the height of the header, you can use `HeaderHeightContext` with [React's Context API](https://reactjs.org/docs/context.html#contextconsumer) or `useHeaderHeight`:
 
 ```js
+import { HeaderHeightContext } from 'react-navigation-stack';
+
+// ...
+
+<HeaderHeightContext.Consumer>
+  {headerHeight => (
+    /* render something */
+  )}
+</HeaderHeightContext.Consumer>
+```
+
+or
+
+```js
 import { useHeaderHeight } from 'react-navigation-stack';
 
 // ...
@@ -260,6 +274,17 @@ You can also specify `{ backgroundColor: 'transparent' }` to make the previous s
 #### `animationEnabled`
 
 Whether transition animation should be enabled the screen. If you set it to `false`, the screen won't animate when pushing or popping. Defaults to `true`.
+
+#### `animationTypeForReplace`
+
+The type of animation to use when this screen replaces another screen. It takes the following values:
+
+- `push` - The animation of a new screen being pushed will be used
+- `pop` - The animation of a screen being popped will be used
+
+Defaults to `push`.
+
+When `pop` is used, the `pop` animation is applied to the screen being replaced.
 
 #### `gestureEnabled`
 
