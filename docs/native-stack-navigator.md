@@ -4,6 +4,8 @@ title: createNativeStackNavigator
 sidebar_label: createNativeStackNavigator
 ---
 
+> Note: This navigator is in its early development stages and may have bugs. So be careful when using it in production. If you're facing any issues, open a bug report in the [`react-native-screens`](https://github.com/kmagiera/react-native-screens) repo.
+
 Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
