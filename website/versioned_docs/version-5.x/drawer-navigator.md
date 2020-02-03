@@ -7,7 +7,7 @@ original_id: drawer-navigator
 
 Component that renders a navigation drawer which can be opened and closed via gestures.
 
-To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`@react-navigation/drawer`](https://github.com/react-navigation/navigation-ex/tree/master/packages/drawer):
+To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/master/packages/drawer):
 
 ```sh
 npm install @react-navigation/drawer@next

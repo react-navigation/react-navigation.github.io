@@ -48,7 +48,7 @@ There are workarounds if you absolutely need dynamic routes but you can expect s
 
 > [React Navigation 5](https://reactnavigation.org/next) includes a new [native stack navigator](https://reactnavigation.org/docs/en/next/native-stack-navigator.html) which uses the platform navigation primitives. It supports the native [large title](https://reactnavigation.org/docs/en/next/native-stack-navigator.html#headerlargetitle) on iOS.
 
-This is on the roadmap to implement, but it's not currently available in the React Navigation. Some folks have [gone ahead and built their own version of this](https://github.com/react-navigation/react-navigation/issues/2749#issuecomment-367516290), but your mileage may vary.
+This is on the roadmap to implement, but it's not currently available in the React Navigation. Some folks have [gone ahead and built their own version of this](https://github.com/react-navigation/react-navigation-4/issues/2749#issuecomment-367516290), but your mileage may vary.
 
 ## Right-to-left (RTL) layout support
 

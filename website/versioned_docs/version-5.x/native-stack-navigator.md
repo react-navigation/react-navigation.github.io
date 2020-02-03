@@ -13,7 +13,7 @@ By default the stack navigator is configured to have the familiar iOS and Androi
 
 This navigator uses native navigation primitives (`UINavigationController` on iOS and `Fragment` on Android) for navigation using [`react-native-screens`](https://github.com/kmagiera/react-native-screens) under the hood. The main difference from the JS based [stack navigator](stack-navigator.html) is that the JS based navigator re-implements animations and gestures while the native stack navigator relies on the platform primitives for animations and gestures. You should use this navigator if you want native feeling and performance for navigation and don't need much customization, as the customization options of this navigator are limited.
 
-To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`@react-navigation/native-stack`](https://github.com/react-navigation/navigation-ex/tree/master/packages/native-stack):
+To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`@react-navigation/native-stack`](https://github.com/react-navigation/react-navigation/tree/master/packages/native-stack):
 
 ```sh
 npm install @react-navigation/native-stack@next

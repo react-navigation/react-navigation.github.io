@@ -5,7 +5,7 @@ sidebar_label: Custom navigators
 original_id: custom-navigators
 ---
 
-A navigator is any React component that has a [router](https://github.com/react-navigation/react-navigation/blob/master/src/routers/StackRouter.js) on it, to define the navigation behavior. Each navigator is given a `navigation` prop, which allows the parent to control the navigation state.
+A navigator is any React component that has a [router](https://github.com/react-navigation/react-navigation-4/blob/master/src/routers/StackRouter.js) on it, to define the navigation behavior. Each navigator is given a `navigation` prop, which allows the parent to control the navigation state.
 
 ## Extending Navigators
 
@@ -128,7 +128,7 @@ Then the view will be rendered in the following way:
 />
 ```
 
-The `navigation` prop is the same navigation prop that was passed into the navigator.  
+The `navigation` prop is the same navigation prop that was passed into the navigator.
 
 Both `navigationConfig` and `screenProps` are simply passed through, as defined above.
 

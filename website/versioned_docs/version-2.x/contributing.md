@@ -35,7 +35,7 @@ And here are a few helpful resources to aid in getting started:
 You can't write code without writing the occasional bug. Especially as React Navigation is moving quickly, bugs happen. When you think you've found one here's what to do:
 
 1. Search the existing issues for one like what you're seeing. If you see one, add a 👍 reaction (please no +1 comments). Read through the comments and see if you can provide any more valuable information to the thread
-2. If there are no other issues like yours then create a new one. Be sure to follow the [issue template](https://github.com/react-community/react-navigation/blob/master/.github/ISSUE_TEMPLATE.md).
+2. If there are no other issues like yours then create a new one. Be sure to follow the [issue template](https://github.com/react-navigation/react-navigation-4/blob/master/.github/ISSUE_TEMPLATE.md).
 
 Creating a high quality reproduction is critical. Without it we likely can't fix the bug and, in an ideal situation, you'll find out that it's not actually a bug of the library but simply done incorrectly in your project. Instant bug fix!
 
@@ -57,7 +57,7 @@ Find a bug, fix it up, all day long you'll have good luck! Like it was mentioned
 2. If there isn't already a pull request then figure out the fix! If it's relatively small go ahead and fix it and submit a pull request. If it's a decent number of changes file an issue first so we can discuss it (see the [Big Pull Requests](#big-pull-requests) section)
 3. If there is an issue related to that bug leave a comment on it, linking to your pull request, so others know it's been addressed.
 
-Check out the [help wanted](https://github.com/react-community/react-navigation/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) and [good first issue](https://github.com/react-community/react-navigation/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) tags to see where you can start helping out!
+Check out the [help wanted](https://github.com/react-navigation/react-navigation-4/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) and [good first issue](https://github.com/react-navigation/react-navigation-4/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) tags to see where you can start helping out!
 
 ### Suggesting a Feature
 
@@ -96,7 +96,7 @@ The libdef (located at `flow/react-navigation.js`) will need to be updated such 
 
 ### Issue Template
 
-Before submitting an issue, please take a look at the [issue template](https://github.com/react-community/react-navigation/blob/master/.github/ISSUE_TEMPLATE.md) and follow it. This is in place to help everyone better understand the issue you're having and reduce the back and forth to get the necessary information.
+Before submitting an issue, please take a look at the [issue template](https://github.com/react-navigation/react-navigation-4/blob/master/.github/ISSUE_TEMPLATE.md) and follow it. This is in place to help everyone better understand the issue you're having and reduce the back and forth to get the necessary information.
 
 Yes, it takes time and effort to complete the issue template. But that's the only way to ask high quality questions that actually get responses.
 
@@ -104,7 +104,7 @@ Would you rather take 1 minute to create an incomplete issue report and wait mon
 
 ### Pull Request Template
 
-Much like the issue template, the [pull request template](https://github.com/react-community/react-navigation/blob/master/.github/PULL_REQUEST_TEMPLATE.md) lays out instructions to ensure your pull request gets reviewed in a timely manner and reduces the back and forth. Make sure to look it over before you start writing any code.
+Much like the issue template, the [pull request template](https://github.com/react-navigation/react-navigation-4/blob/master/.github/PULL_REQUEST_TEMPLATE.md) lays out instructions to ensure your pull request gets reviewed in a timely manner and reduces the back and forth. Make sure to look it over before you start writing any code.
 
 ### Forking the Repository
 
@@ -130,7 +130,7 @@ If any errors occur you'll either have to manually fix them or you can attempt t
 
 ### Run the Example App
 
-The [NavigationPlayground](https://github.com/react-community/react-navigation/tree/2.x/examples/NavigationPlayground) example app includes a variety of patterns and is used as a simple way for contributors to manually integration test changes.
+The [NavigationPlayground](https://github.com/react-navigation/react-navigation-4/tree/2.x/examples/NavigationPlayground) example app includes a variety of patterns and is used as a simple way for contributors to manually integration test changes.
 
 ```bash
 yarn install
@@ -139,7 +139,7 @@ yarn install
 yarn start
 ```
 
-You will be shown a QR code to scan in the Expo app. You can get Expo [here](https://docs.expo.io/versions/latest/index.html) if you don't have it yet. 
+You will be shown a QR code to scan in the Expo app. You can get Expo [here](https://docs.expo.io/versions/latest/index.html) if you don't have it yet.
 
 Commands are the same as above for any of the example apps. If you run into any issues, please try the following to start fresh:
 

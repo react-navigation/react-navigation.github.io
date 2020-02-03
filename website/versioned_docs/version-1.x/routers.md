@@ -11,8 +11,8 @@ Routers define a component's navigation state, and they allow the developer to d
 
 `react-navigation` ships with a few standard routers:
 
-- [StackRouter](https://github.com/react-navigation/react-navigation/blob/1.x/src/routers/StackRouter.js)
-- [TabRouter](https://github.com/react-navigation/react-navigation/blob/1.x/src/routers/TabRouter.js)
+- [StackRouter](https://github.com/react-navigation/react-navigation-4/blob/1.x/src/routers/StackRouter.js)
+- [TabRouter](https://github.com/react-navigation/react-navigation-4/blob/1.x/src/routers/TabRouter.js)
 
 
 ## Using Routers
@@ -89,7 +89,7 @@ MyStackRouter.router.getStateForAction = (action, state) => {
     // has been handled/blocked, but there is not a new state
     return null;
   }
-  
+
   return defaultGetStateForAction(action, state);
 };
 ```

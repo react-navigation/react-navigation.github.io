@@ -9,7 +9,7 @@ original_id: drawer-based-navigation
 
 Common pattern in navigation is to use drawer from left (sometimes right) side for navigating between screens.
 
-Before continuing, first install [`@react-navigation/drawer`](https://github.com/react-navigation/navigation-ex/tree/master/packages/drawer):
+Before continuing, first install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/master/packages/drawer):
 
 ```sh
 npm install @react-navigation/drawer@next

@@ -9,7 +9,7 @@ original_id: compatibility
 
 React Navigation 5 has a completely new API, so our old code using React Navigation 4 will no longer work with this version. If you are not familiar with the new API, you can read about the differences in the [upgrade guide](upgrading-from-4.x.html). We understand that this can be a lot of work, so we have made a compatibility layer to make this easier.
 
-To use the compatibility layer, we need to install [`@react-navigation/compat`](https://github.com/react-navigation/navigation-ex/tree/master/packages/compat):
+To use the compatibility layer, we need to install [`@react-navigation/compat`](https://github.com/react-navigation/react-navigation/tree/master/packages/compat):
 
 ```sh
 npm install @react-navigation/native@next @react-navigation/compat@next

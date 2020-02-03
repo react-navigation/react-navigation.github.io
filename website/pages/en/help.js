@@ -44,7 +44,7 @@ class Help extends React.Component {
             </header>
             <p>
               <translate>If you've encountered a bug with React Navigation, please</translate>{' '}
-              <a href="https://github.com/react-navigation/react-navigation/issues">
+              <a href="https://github.com/react-navigation/react-navigation-4/issues">
                 <translate>post an issue</translate>
               </a>{' '}
               <translate>and be sure to fill out the issue template. If you believe there is a feature missing, please</translate>{' '}
