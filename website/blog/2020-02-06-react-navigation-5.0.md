@@ -14,7 +14,7 @@ Today is the day, when we want to mark this vision and major refactoring of the 
 
 ### Component based configuration
 
-In previous versions of React Navigation, we used configure the navigator statically using `createXNavigator` functions and `static navigationOptions`. In React Navigation 5, all of the configuration happens inside a component and is dynamic.
+In previous versions of React Navigation, we used to configure the navigator statically using `createXNavigator` functions and `static navigationOptions`. In React Navigation 5, all of the configuration happens inside a component and is dynamic.
 
 Example:
 
