@@ -169,4 +169,4 @@ React Navigation 5 wouldn't have possible without these wonderful people. A lot 
 
 Additionally, I would like to mention how important is the community's influence on building this project. Without you, your support, your readiness to test and apply the next versions of the libraries, it wouldn't be possible at all, and despite mentioning a few people by name, at no stage do we forget that this is a community activity and will respond to its needs. We are incredibly grateful for the opportunity to work on such an unusual project, which facilitates the work of a large number of users.
 
-Thanks again and hope you find this release useful.
+Thanks again and hope you will find this release useful.
