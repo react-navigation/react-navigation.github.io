@@ -14,7 +14,7 @@ The React Navigation v5 comes with many great improvements compared to previous 
 
 ### What is React Native Paper?
 
-[React Native Paper](<(https://reactnativepaper.com/)>) is a UI component library that implements [MD Guidelines](https://material.io/design/).
+[React Native Paper](https://reactnativepaper.com/) is a UI component library that implements [MD Guidelines](https://material.io/design/).
 It allows building beautiful interfaces on Mobile and Web with high-quality cross-platform components.
 Furthermore, Paper provides you with a full **theming support**, **accessibility**, **RTL** and it will take care of **platform adaptation**. This means you can focus on building apps with ready to use components instead of reimplementing the boring stuff.
 
