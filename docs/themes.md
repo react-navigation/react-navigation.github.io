@@ -18,7 +18,7 @@ To pass a custom theme, you can pass the `theme` prop to the navigation containe
 ```js
 import * as React from 'react';
 import {
-  NavigationNativeContainer,
+  NavigationContainer,
   DefaultTheme,
 } from '@react-navigation/native';
 
@@ -32,9 +32,9 @@ const MyTheme = {
 
 export default function App() {
   return (
-    <NavigationNativeContainer theme={MyTheme}>
+    <NavigationContainer theme={MyTheme}>
       {/* content */}
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```
@@ -95,7 +95,7 @@ Once you've installed it, set your root component up as follows:
 ```js
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import {
-  NavigationNativeContainer,
+  NavigationContainer,
   DefaultTheme,
   DarkTheme,
 } from '@react-navigation/native';
@@ -105,11 +105,11 @@ export default () => {
 
   return (
     <AppearanceProvider>
-      <NavigationNativeContainer
+      <NavigationContainer
         theme={scheme === 'dark' ? DarkTheme : DefaultTheme}
       >
         {/* content */}
-      </NavigationNativeContainer>
+      </NavigationContainer>
     </AppearanceProvider>
   );
 };

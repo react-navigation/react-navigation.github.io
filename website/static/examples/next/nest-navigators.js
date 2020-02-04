@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -57,11 +57,11 @@ function Root() {
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <Drawer.Navigator initialRouteName="Root">
         <Drawer.Screen name="Root" component={Root} />
         <Drawer.Screen name="Home" component={HomeScreen} />
       </Drawer.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }

@@ -45,12 +45,12 @@ function SettingsStackScreen() {
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeStackScreen} />
         <Tab.Screen name="Settings" component={SettingsStackScreen} />
       </Tab.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```
@@ -62,7 +62,7 @@ As we mentioned earlier, you can only modify navigation options for a navigator 
 ```js
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
           name="Home"
@@ -75,7 +75,7 @@ export default function App() {
           options={{ tabBarLabel: 'Settings!' }}
         />
       </Tab.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```
@@ -105,12 +105,12 @@ const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeTabs} />
         <Stack.Screen name="Settings" component={SettingsScreen} />
       </Stack.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```

@@ -22,7 +22,7 @@ npm install @react-navigation/stack@next @react-native-community/masked-view
 
 `createStackNavigator` is a function that returns an object containing 2 properties: `Screen` and `Navigator`. Both of them are React components used for configuring the navigator. The `Navigator` should contain `Screen` elements as its children to define the configuration for routes.
 
-`NavigationNativeContainer` is a component which manages our navigation tree and contains the navigation state. This component must wrap all navigators structure. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
+`NavigationContainer` is a component which manages our navigation tree and contains the navigation state. This component must wrap all navigators structure. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
 
 <samp id="hello-react-navigation">Hello World</samp>
 
@@ -31,7 +31,7 @@ npm install @react-navigation/stack@next @react-native-community/masked-view
 
 import * as React from 'react';
 import { View, Text } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 function HomeScreen() {
@@ -46,11 +46,11 @@ const Stack = createStackNavigator();
 
 function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 
@@ -84,12 +84,12 @@ function DetailsScreen() {
 
 function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```

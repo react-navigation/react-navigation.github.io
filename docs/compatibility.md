@@ -73,7 +73,7 @@ Due to the dynamic API of React Navigation 5, some functionality possible with t
 - Legacy deep link support by defining `path` in route configuration is not supported. See [deep linking documentation](deep-linking.md) for more details now how to handle deep links.
 - Navigating to a navigator doesn't work the same, i.e. we can't navigate to a screen in a navigator that's not rendered already, and params aren't merged to all child screens. See [nesting navigators documentation](nesting-navigators.md) for more details on how to navigate to screens in a different navigator.
 - Some methods such as the legacy `reset` method which take an array of actions aren't supported anymore. Unsupported methods will throw errors when using them as well as give type errors if we're using TypeScript.
-- It doesn't export `createAppContainer`, so you'll need to use the v5 API for the container (`NavigationNativeContainer`). This also means any features supported by the container need to be migrated to the new API.
+- It doesn't export `createAppContainer`, so you'll need to use the v5 API for the container (`NavigationContainer`). This also means any features supported by the container need to be migrated to the new API.
 - If you're using advanced APIs like Redux integration, custom routers and actions etc., they aren't supported anymore and you'll need to remove Redux integration.
 
 While we have tried our best to make the compatibility layer handle most of the differences, there might be something missing. So make sure to test the code that you've migrated.

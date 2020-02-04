@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Button, AsyncStorage } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -78,7 +78,7 @@ export default function App() {
   }
 
   return (
-    <NavigationNativeContainer
+    <NavigationContainer
       initialState={initialState}
       onStateChange={state =>
         AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
@@ -96,6 +96,6 @@ export default function App() {
           options={{ tabBarLabel: 'Settings!' }}
         />
       </Tab.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }

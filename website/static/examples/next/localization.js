@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Localization from 'expo-localization'; // or whatever library you want
 import i18n from 'i18n-js'; // or whatever library you want
 import { View, Text, Button } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const en = {
@@ -56,11 +56,11 @@ export default function App() {
 
   return (
     <LocalizationContext.Provider value={localizationContext}>
-      <NavigationNativeContainer>
+      <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={MyScreen} />
         </Stack.Navigator>
-      </NavigationNativeContainer>
+      </NavigationContainer>
     </LocalizationContext.Provider>
   );
 }

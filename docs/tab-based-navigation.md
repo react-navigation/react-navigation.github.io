@@ -21,7 +21,7 @@ npm install @react-navigation/bottom-tabs@next
 ```js
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 function HomeScreen() {
@@ -44,12 +44,12 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```
@@ -69,7 +69,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
@@ -95,7 +95,7 @@ export default function App() {
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```
@@ -191,7 +191,7 @@ Usually tabs don't just display one screen &mdash; for example, on your Twitter 
 ```js
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -253,12 +253,12 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeStackScreen} />
         <Tab.Screen name="Settings" component={SettingsStackScreen} />
       </Tab.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```

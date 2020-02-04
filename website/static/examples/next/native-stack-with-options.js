@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Button } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { enableScreens } from 'react-native-screens';
 
@@ -76,8 +76,8 @@ function MyStack() {
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <MyStack />
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }

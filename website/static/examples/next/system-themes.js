@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, View, Text, TouchableOpacity } from 'react-native';
 import {
-  NavigationNativeContainer,
+  NavigationContainer,
   DefaultTheme,
   DarkTheme,
   useTheme,
@@ -77,14 +77,14 @@ export default function App() {
 
   return (
     <AppearanceProvider>
-      <NavigationNativeContainer
+      <NavigationContainer
         theme={scheme === 'dark' ? DarkTheme : DefaultTheme}
       >
         <Drawer.Navigator initialRouteName="Root">
           <Drawer.Screen name="Home" component={HomeScreen} />
           <Drawer.Screen name="Root" component={Root} />
         </Drawer.Navigator>
-      </NavigationNativeContainer>
+      </NavigationContainer>
     </AppearanceProvider>
   );
 }

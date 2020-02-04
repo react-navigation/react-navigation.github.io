@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Button, Text } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TabActions } from '@react-navigation/routers';
 
@@ -31,11 +31,11 @@ const Tabs = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <Tabs.Navigator>
         <Tabs.Screen name="Home" component={HomeScreen} />
         <Tabs.Screen name="Profile" component={ProfileScreen} />
       </Tabs.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }

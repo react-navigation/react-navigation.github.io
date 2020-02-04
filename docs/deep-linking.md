@@ -39,7 +39,7 @@ The [`useLinking`](use-linking.md) hook makes it easier to handle incoming links
 
 ```js
 import {
-  NavigationNativeContainer,
+  NavigationContainer,
   useLinking,
 } from '@react-navigation/native';
 
@@ -70,9 +70,9 @@ function App() {
   }
 
   return (
-    <NavigationNativeContainer initialState={initialState} ref={ref}>
+    <NavigationContainer initialState={initialState} ref={ref}>
       {/* content */}
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```
@@ -249,9 +249,9 @@ function App() {
   }
 
   return (
-    <NavigationNativeContainer initialState={initialState} ref={ref}>
+    <NavigationContainer initialState={initialState} ref={ref}>
       {/* content */}
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```

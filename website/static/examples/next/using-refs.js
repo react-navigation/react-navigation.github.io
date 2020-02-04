@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text, Button } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
@@ -18,12 +18,12 @@ function App() {
 
   return (
     <View style={{ flex: 1 }}>
-      <NavigationNativeContainer ref={ref}>
+      <NavigationContainer ref={ref}>
         <Stack.Navigator initialRouteName="Empty">
           <Stack.Screen name="Empty" component={() => <View></View>} />
           <Stack.Screen name="Home" component={HomeScreen} />
         </Stack.Navigator>
-      </NavigationNativeContainer>
+      </NavigationContainer>
       <Button
         onPress={() => ref.current && ref.current.navigate('Home')}
         title="Go home"

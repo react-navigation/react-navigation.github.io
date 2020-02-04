@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
@@ -74,8 +74,8 @@ function MyTabs() {
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <MyTabs />
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }

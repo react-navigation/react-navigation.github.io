@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Button, Text } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const navigationRef = React.createRef();
@@ -33,11 +33,11 @@ const RootStack = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationNativeContainer ref={navigationRef}>
+    <NavigationContainer ref={navigationRef}>
       <RootStack.Navigator>
         <RootStack.Screen name="Home" component={Home} />
         <RootStack.Screen name="Settings" component={Settings} />
       </RootStack.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }

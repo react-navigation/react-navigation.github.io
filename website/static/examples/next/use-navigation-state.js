@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
 import {
-  NavigationNativeContainer,
+  NavigationContainer,
   useRoute,
   useNavigationState,
 } from '@react-navigation/native';
@@ -82,8 +82,8 @@ function MyStack() {
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <MyStack />
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }

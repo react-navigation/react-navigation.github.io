@@ -74,20 +74,20 @@ export default function App() {
 
 The **PaperProvider** provides the theme to all the components in the framework. It also acts as a portal to components that need to be rendered at the top level. Check the full [Getting-Started](https://callstack.github.io/react-native-paper/getting-started.html) page for more information.
 
-React Navigation setup looks similar. There is a component called **NavigationNativeContainer** which manages our navigation tree and contains the navigation state. It must wrap all navigator structure. We will render this component in **App.tsx** inside a **PaperProvider**. More information can be found in the official [documentation](https://reactnavigation.org/docs/en/next/hello-react-navigation.html).
+React Navigation setup looks similar. There is a component called **NavigationContainer** which manages our navigation tree and contains the navigation state. It must wrap all navigator structure. We will render this component in **App.tsx** inside a **PaperProvider**. More information can be found in the official [documentation](https://reactnavigation.org/docs/en/next/hello-react-navigation.html).
 
 ```jsx
 import React from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import Main from './src/Main';
 
 export default function App() {
   return (
     <PaperProvider>
-      <NavigationNativeContainer>
+      <NavigationContainer>
         <Main />
-      </NavigationNativeContainer>
+      </NavigationContainer>
     </PaperProvider>
   );
 }
@@ -765,17 +765,17 @@ React Navigation exports two themes:
 - DefaultTheme
 - DarkTheme
 
-We can import them from `@react-navigation/native` package and pass to `NavigationNativeContainer` to apply the theme:
+We can import them from `@react-navigation/native` package and pass to `NavigationContainer` to apply the theme:
 
 ```jsx
 import React from 'react';
-import { NavigationNativeContainer, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 
 export default function App() {
   return (
-    <NavigationNativeContainer theme={DarkTheme}>
+    <NavigationContainer theme={DarkTheme}>
       {/* content */}
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```
@@ -791,7 +791,7 @@ Once we import a theme we can pass it to the Paper's `Provider` component:
 
 ```jsx
 import * as React from 'react';
-import { NavigationNativeContainer, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import {
   DarkTheme as PaperDarkTheme,
   Provider as PaperProvider,
@@ -800,9 +800,9 @@ import {
 export default function Main() {
   return (
     <PaperProvider theme={PaperDarkTheme}>
-      <NavigationNativeContainer theme={DarkTheme}>
+      <NavigationContainer theme={DarkTheme}>
         {/* content */}
-      </NavigationNativeContainer>
+      </NavigationContainer>
     </PaperProvider>
   );
 }
@@ -815,7 +815,7 @@ Since both React Navigation and React Native Paper follows the same pattern for 
 ```jsx
 import * as React from 'react';
 import {
-  NavigationNativeContainer,
+  NavigationContainer,
   DarkTheme as NavigationDarkTheme,
 } from '@react-navigation/native';
 import {
@@ -832,9 +832,9 @@ const CombinedDarkTheme = {
 export default function Main() {
   return (
     <PaperProvider theme={CombinedDarkTheme}>
-      <NavigationNativeContainer theme={CombinedDarkTheme}>
+      <NavigationContainer theme={CombinedDarkTheme}>
         {/* content */}
-      </NavigationNativeContainer>
+      </NavigationContainer>
     </PaperProvider>
   );
 }
@@ -853,7 +853,7 @@ We need to store information about the currently selected theme somewhere. The l
 ```jsx
 import * as React from 'react';
 import {
-  NavigationNativeContainer,
+  NavigationContainer,
   DefaultTheme as NavigationDefaultTheme,
   DarkTheme as NavigationDarkTheme,
 } from '@react-navigation/native';
@@ -881,9 +881,9 @@ export default function Main() {
 
   return (
     <PaperProvider theme={theme}>
-      <NavigationNativeContainer theme={theme}>
+      <NavigationContainer theme={theme}>
         {/* content */}
-      </NavigationNativeContainer>
+      </NavigationContainer>
     </PaperProvider>
   );
 }
