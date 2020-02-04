@@ -12,6 +12,8 @@ In this blog post, we'll show you how to build a Twitter clone app using React N
 
 The React Navigation v5 comes with many great improvements compared to previous version. It not only provides a cross-platform native Stack, but also the API was redesigned from the ground up to allow things that were never possible before. Thanks to the component-based API, all of the configuration is happening inside the **render method**. This means we can access **props**, **state** and **context** and can **dynamically change configuration** for the navigator.
 
+### What is React Native Paper?
+
 [React Native Paper](<(https://reactnativepaper.com/)>) is a UI component library that implements [MD Guidelines](https://material.io/design/).
 It allows building beautiful interfaces on Mobile and Web with high-quality cross-platform components.
 Furthermore, Paper provides you with a full **theming support**, **accessibility**, **RTL** and it will take care of **platform adaptation**. This means you can focus on building apps with ready to use components instead of reimplementing the boring stuff.
@@ -932,3 +934,11 @@ You should be able to toggle a switch now and both `Provider` from Paper and `Na
 
 </br>
 <img src="/blog/assets/using-react-navigation-5-with-paper/theming.gif" height="480"/>
+
+## Summary
+
+We all know that UI Component library like Paper can speed up the development, but integrating it with a navigation can be sometimes not very straighforward. I hope I showed you the most important aspects of this process in this guide. After reading this article, using Paper's BottomNavigation, Appbar, Drawer, FAB or Portal alongside with React Navigation shouldn't be a problem for you.
+
+Do you have any questions? Tweet to me [@trensik](https://twitter.com/trensik).
+
+At the end I want to thank [@satya164](https://twitter.com/satya164) and the whole [Callstack](https://callstack.com/) team for their help with the article. 
