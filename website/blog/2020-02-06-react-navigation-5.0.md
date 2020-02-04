@@ -67,7 +67,7 @@ navigation.setOptions({
 })
 ```
 
-It can be used fo things like adding a button in the header which needs to interact with the screen state.
+It can be used for things like adding a button in the header which needs to interact with the screen state.
 
 ### New theming API
 
