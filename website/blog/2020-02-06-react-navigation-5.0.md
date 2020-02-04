@@ -106,7 +106,7 @@ You don't need to use Redux in your apps for this to work and it works without a
 
 ### Native Stack Navigator
 
-Traditionally, we have written our navigators in JavaScript for greater customizability. It fits a lot of use cases, but sometimes you want the exact native feel and the performance of native navigation. Now, we have added a new native stack navigator that uses native navigation primitives (`UINavigationController` on iOS and `Fragment` on Android) for navigation using the [`react-native-screens`](https://github.com/kmagiera/react-native-screens) library.
+Traditionally, we have written our navigators in JavaScript for greater customizability. It fits a lot of use cases, but sometimes you want the exact native feel and the performance of native navigation. Now, we have added a new native stack navigator that uses native navigation primitives for navigation using the [`react-native-screens`](https://github.com/kmagiera/react-native-screens) library. Under the hood it just uses naitive components which might be obvious choice for native developement and might be good pick in the most cases. 
 
 <img src="/blog/assets/android-native-stack.gif" height="530" />
 <img src="/blog/assets/ios-native-stack.gif" height="530" />
@@ -121,6 +121,18 @@ import ViewPagerAdapter from 'react-native-tab-view-viewpager-adapter';
 // ...
 
 <Tab.Navigator pager={props => <ViewPagerAdapter {...props} />}>
+  {...}
+</Tab.Navigator>
+```
+
+or 
+
+```js
+import ScrollPager from 'react-native-tab-view';
+
+// ...
+
+<Tab.Navigator pager={props => <ScrollPager {...props} />}>
   {...}
 </Tab.Navigator>
 ```
@@ -153,7 +165,7 @@ If you were using React Navigation 5 when it was alpha, you might need to check 
 
 ## Thanks to these wonderful people
 
-React Navigation 5 wouldn't have possible without these wonderful people. A lot of thanks to [Michał Osadnik](https://github.com/osdnk) for working in this project with me from idea to fruition, [Brent Vatne](https://github.com/brentvatne) for his ideas, encouragement and funding from [Expo](https://expo.io), [Wojciech Lewicki](https://github.com/WoLewicki) for improving the documentation, and working on deep link support, [Krzysztof Magiera](https://github.com/kmagiera) and [Software Mansion](https://github.com/software-mansion) for their awesome libraries that the core functionality depends on, [Janic Duplessis](https://github.com/janicduplessis) for [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
+React Navigation 5 wouldn't have possible without these wonderful people. A lot of thanks to [Michał Osadnik](https://github.com/osdnk) for working in this project with me from idea to fruition, [Brent Vatne](https://github.com/brentvatne) for his ideas, encouragement and funding from [Expo](https://expo.io), [Wojciech Lewicki](https://github.com/WoLewicki) and [Jakub Gonet](https://github.com/jakub-gonet) for improving the documentation, and working on deep link support, [Krzysztof Magiera](https://github.com/kmagiera) and [Software Mansion](https://github.com/software-mansion) for their awesome libraries that the core functionality depends on and contibutions, [Janic Duplessis](https://github.com/janicduplessis) for [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
 
 Additionally, I would like to mention how important is the community's influence on building this project. Without you, your support, your readiness to test and apply the next versions of the libraries, it wouldn't be possible at all, and despite mentioning a few people by name, at no stage do we forget that this is a community activity and will respond to its needs. We are incredibly grateful for the opportunity to work on such an unusual project, which facilitates the work of a large number of users.
 
