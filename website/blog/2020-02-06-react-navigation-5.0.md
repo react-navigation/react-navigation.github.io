@@ -73,7 +73,7 @@ It can be used fo things like adding a button in the header which needs to inter
 
 In React Navigation, we had basic theming support where you could specify whether to use a light or dark theme. It wasn't easy to customize the colors used by the built-in components such as header, tab bar etc. without extra code or repetition.
 
-Now, we have revamped the [theme system](https://reactnavigation.org/docs/themes.html) for easier customization. Its possible to provide a theme object with your desired colors for background, accent color etc. and it will automatically change the colors of all navigators without any extra code.
+Now, we have revamped the [theme system](https://reactnavigation.org/docs/themes.html) for easier customization. It is possible to provide a theme object with your desired colors for background, accent color etc. and it will automatically change the colors of all navigators without any extra code.
 
 ```js
 const MyTheme = {
