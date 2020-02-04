@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Button, Text } from 'react-native';
 import {
-  NavigationNativeContainer,
+  NavigationContainer,
   CommonActions,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -112,11 +112,11 @@ const Tab = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }

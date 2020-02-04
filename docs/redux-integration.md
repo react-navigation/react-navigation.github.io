@@ -8,15 +8,15 @@ It is extremely easy to use Redux in an app with React Navigation. It's basicall
 
 ```js
 import { Provider } from 'react-redux';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 
 // Render the app container component with the provider around it
 export default class App() {
   return (
     <Provider store={store}>
-      <NavigationNativeContainer>
+      <NavigationContainer>
         {/* Screen configuration */}
-      </NavigationNativeContainer>
+      </NavigationContainer>
     </Provider>
   );
 }

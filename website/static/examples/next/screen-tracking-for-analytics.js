@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Button } from 'react-native';
 // import analytics from '@react-native-firebase/analytics';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Gets the current screen from navigation state
@@ -42,7 +42,7 @@ export default function App() {
   const Stack = createStackNavigator();
 
   return (
-    <NavigationNativeContainer
+    <NavigationContainer
       ref={navigationRef}
       onStateChange={state => {
         const previousRouteName = routeNameRef.current;
@@ -63,6 +63,6 @@ export default function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Settings" component={Settings} />
       </Stack.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }

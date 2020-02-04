@@ -8,7 +8,7 @@ import {
   API,
 } from 'react-native';
 import {
-  NavigationNativeContainer,
+  NavigationContainer,
   useFocusEffect,
 } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -57,12 +57,12 @@ const Drawer = createDrawerNavigator();
 export default function App() {
   return (
     <SafeAreaProvider>
-      <NavigationNativeContainer>
+      <NavigationContainer>
         <Drawer.Navigator headerMode="none">
           <Drawer.Screen name="Screen1" component={Screen1} />
           <Drawer.Screen name="Screen2" component={Screen2} />
         </Drawer.Navigator>
-      </NavigationNativeContainer>
+      </NavigationContainer>
     </SafeAreaProvider>
   );
 }

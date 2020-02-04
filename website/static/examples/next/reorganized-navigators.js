@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Button } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -60,11 +60,11 @@ const RootStack = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <RootStack.Navigator>
         <RootStack.Screen name="Home" component={HomeTabs} />
         <RootStack.Screen name="Settings" component={SettingsScreen} />
       </RootStack.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }

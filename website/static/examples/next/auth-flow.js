@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AsyncStorage, Button, Text, TextInput, View } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const AuthContext = React.createContext();
@@ -127,7 +127,7 @@ export default function App({ navigation }) {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationNativeContainer>
+      <NavigationContainer>
         <Stack.Navigator>
           {state.isLoading ? (
             // We haven't finished checking for the token yet
@@ -148,7 +148,7 @@ export default function App({ navigation }) {
             <Stack.Screen name="Home" component={HomeScreen} />
           )}
         </Stack.Navigator>
-      </NavigationNativeContainer>
+      </NavigationContainer>
     </AuthContext.Provider>
   );
 }

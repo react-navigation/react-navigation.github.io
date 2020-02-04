@@ -26,9 +26,9 @@ Use `Provider` to wrap what you return from your root component's render method:
 
 ```js
 <Provider myObject={this.myObject}>
-  <NavigationNativeContainer>
+  <NavigationContainer>
     {/* Screen configuration */}
-  </NavigationNativeContainer>
+  </NavigationContainer>
 </Provider>
 ```
 

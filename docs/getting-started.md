@@ -96,17 +96,17 @@ Then add the following at the **top** (make sure it's at the top and there's not
 import 'react-native-gesture-handler';
 ```
 
-Now, we need to wrap the whole app in `NavigationNativeContainer`. Usually you'd do this in your entry file, such as `index.js` or `App.js`:
+Now, we need to wrap the whole app in `NavigationContainer`. Usually you'd do this in your entry file, such as `index.js` or `App.js`:
 
 ```js
 import * as React from 'react';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       {/* Rest of your app code */}
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```

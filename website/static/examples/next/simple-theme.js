@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
 import {
-  NavigationNativeContainer,
+  NavigationContainer,
   DefaultTheme,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -68,11 +68,11 @@ function Root() {
 
 export default function App() {
   return (
-    <NavigationNativeContainer theme={MyTheme}>
+    <NavigationContainer theme={MyTheme}>
       <Drawer.Navigator initialRouteName="Root">
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Root" component={Root} />
       </Drawer.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }

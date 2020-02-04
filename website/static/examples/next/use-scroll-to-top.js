@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, ScrollView, Image } from 'react-native';
 import {
-  NavigationNativeContainer,
+  NavigationContainer,
   useScrollToTop,
 } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -45,11 +45,11 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Albums" component={Albums} />
       </Tab.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }

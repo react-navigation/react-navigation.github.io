@@ -68,12 +68,12 @@ If you wrap the container in a `View`, make sure the `View` stretches to fill th
 ```js
 import * as React from 'react';
 import { View } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (
     <View style={{ flex: 1 }}>
-      <NavigationNativeContainer>{/* ... */}</NavigationNativeContainer>
+      <NavigationContainer>{/* ... */}</NavigationContainer>
     </View>
   );
 }

@@ -48,14 +48,14 @@ export default function App() {
   }
 
   return (
-    <NavigationNativeContainer
+    <NavigationContainer
       initialState={initialState}
       onStateChange={state =>
         AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
       }
     >
       {/* ... */}
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```

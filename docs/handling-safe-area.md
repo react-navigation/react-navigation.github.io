@@ -38,7 +38,7 @@ For example, if I render nothing for the `header` or `tabBar`, nothing renders
 ```jsx
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -57,7 +57,7 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <NavigationNativeContainer>
+    <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" headerMode="none">
         <Stack.Screen name="Home">
           {() => (
@@ -70,7 +70,7 @@ export default function App() {
 
         <Stack.Screen name="Settings" component={Demo} />
       </Stack.Navigator>
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```
@@ -98,7 +98,7 @@ function Demo() {
 export default function App() {
   return (
     <SafeAreaProvider>
-      <NavigationNativeContainer>{/*(...) */}</NavigationNativeContainer>
+      <NavigationContainer>{/*(...) */}</NavigationContainer>
     </SafeAreaProvider>
   );
 }

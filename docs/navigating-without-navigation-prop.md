@@ -13,14 +13,14 @@ You can get access to the root navigation object through a `ref` and pass it to 
 ```js
 // App.js
 
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { navigationRef } from './RootNavigation';
 
 export default function App() {
   return (
-    <NavigationNativeContainer ref={navigationRef}>
+    <NavigationContainer ref={navigationRef}>
       {/* ... */}
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```

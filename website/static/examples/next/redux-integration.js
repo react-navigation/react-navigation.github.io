@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { Provider, connect } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // A very simple reducer
@@ -68,7 +68,7 @@ let RootStack = createStackNavigator();
 export default function App() {
   return (
     <Provider store={store}>
-      <NavigationNativeContainer>
+      <NavigationContainer>
         <RootStack.Navigator>
           <RootStack.Screen name="Counter" component={CounterContainer} />
           <RootStack.Screen
@@ -76,7 +76,7 @@ export default function App() {
             component={StaticCounterContainer}
           />
         </RootStack.Navigator>
-      </NavigationNativeContainer>
+      </NavigationContainer>
     </Provider>
   );
 }

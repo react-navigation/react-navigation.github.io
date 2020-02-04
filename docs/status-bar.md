@@ -15,7 +15,7 @@ This is a simple task when using a stack. You can render the `StatusBar` compone
 ```js
 import * as React from 'react';
 import { Text, StatusBar, Button, StyleSheet } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -52,12 +52,12 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <SafeAreaProvider>
-      <NavigationNativeContainer>
+      <NavigationContainer>
         <Stack.Navigator headerMode="none">
           <Stack.Screen name="Screen1" component={Screen1} />
           <Stack.Screen name="Screen2" component={Screen2} />
         </Stack.Navigator>
-      </NavigationNativeContainer>
+      </NavigationContainer>
     </SafeAreaProvider>
   );
 }

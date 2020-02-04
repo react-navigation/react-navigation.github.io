@@ -41,9 +41,9 @@ export default function App() {
   }
 
   return (
-    <NavigationNativeContainer initialState={initialState}>
+    <NavigationContainer initialState={initialState}>
       {/* content */}
-    </NavigationNativeContainer>
+    </NavigationContainer>
   );
 }
 ```
