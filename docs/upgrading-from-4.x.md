@@ -335,6 +335,90 @@ Signature of many actions have changed. Refer to their docs for details:
 
 It's highly recommended to use the methods on the navigation object instead of using action creators and `dispatch`. It should only be used for advanced use cases.
 
+In addition, there have been some changes to the way the navigation actions work. These changes probably won't affect you if you didn't do any advanced tasks with these methods.
+
+One major difference is that a lot of methods used to take some parameters for controlling which screen and navigator it should be applied to and didn't follow a specific pattern.
+
+In this version, we have standardized this and made it possible to use with any action without the action needing to support it. The new  `target` and `source` properties provides control over which navigator should handle an action. See [docs for dispatch](https://reactnavigation.org/docs/navigation-prop.html#dispatch---send-an-action-to-the-router) for more details.
+
+You can import the action creators from the [compatibility layer](compatibility.md) to preserve old behavior for the actions.
+
+More differences in the signatures are listed below:
+
+### `navigate`
+
+Previously, it was possible to pass an object `{ routeName, key, params }`. Now, `routeName` is called just `name`, so it'll be `{ name, key, params }`.
+
+The `navigate` action also supported child actions in the `action` property in the object. We found that very few people actually used it and most found it confusing. It also complicated the code quite a bit, so we have removed this functionality.
+
+See [`navigate` action docs](https://reactnavigation.org/docs/navigation-actions.html#navigate) for more details.
+
+### `goBack`
+
+Previously, the `goBack` method took one parameter: `from`. You could pass nothing to go back from anywhere, pass `null` to go back from the current screen, or a route key to go back from a specific route. It was a common source of confusion.
+
+The new behavior of `goBack` is more intuitive as it takes you back from the screen that dispatched the action. More advanced behavior can be achieved by `target` and `source` properties to replicate old behavior.
+
+See [`goBack` action docs](https://reactnavigation.org/docs/navigation-actions.html#goback) for more details.
+
+### `setParams`
+
+Previously, the `setParams` method also took an optional `key` to specify which screen was setting its params. Now the `source` property can be used to achieve the same functionality.
+
+See [`setParams` action docs](https://reactnavigation.org/docs/navigation-actions.html#setparams) for more details.
+
+### `reset`
+
+Previously, the `reset` method took an array of actions to apply. This was often not intuitive. Now, we have changed `reset` method to take the new state instead:
+
+For example, this will reset the navigator's state to have one screen called `Home`:
+
+```js
+navigation.reset({
+  routes: [{ name: 'Home' }]
+});
+```
+
+The `reset` action is now also supported on all navigators instead of just stack.
+
+See [`reset` action docs](https://reactnavigation.org/docs/navigation-actions.html#reset) for more details.
+
+### `replace`
+
+Previously, it was possible to pass an object `{ routeName, key, newKey, params }`. Now, `routeName` is called just `name`, and `newKey` is called `key`, so it'll be `{ name, key, params }`. The previous `key` can be specified using the `source` property.
+
+The `replace` action also supported child actions in the `action` property which has been removed.
+
+See [`replace` action docs](https://reactnavigation.org/docs/stack-actions.html#replace) for more details.
+
+### `push`
+
+Previously, it was possible to pass an object `{ routeName, params }`. Now, `routeName` is called just `name`, so it'll be `{ name, params }`.
+
+The `push` action also supported child actions in the `action` property which has been removed.
+
+See [`push` action docs](https://reactnavigation.org/docs/stack-actions.html#push) for more details.
+
+### `pop`
+
+Previously, the `pop` method used to take an object with a property called `n` which specified how many screens to go back to. Now, you can directly specify the number as the first argument instead of an object.
+
+See [`pop` action docs](https://reactnavigation.org/docs/stack-actions.html#pop) for more details.
+
+### `dismiss`
+
+The `dismiss` method has been removed. You can achieve similar effect with following:
+
+```js
+navigation.dangerouslyGetParent().pop();
+```
+
+### `jumpTo`
+
+Previously, the `jumpTo` method also took an optional `key` to specify which screen was setting its params. Now the `source` property can be used to achieve the same functionality.
+
+See [`jumpTo` action docs](https://reactnavigation.org/docs/tab-actions.html#jumpto) for more details.
+
 ## Navigation state in Redux
 
 We have long recommended not to store navigation state in Redux. We have finally dropped support for storing navigation state in Redux in React Navigation 5.x.
