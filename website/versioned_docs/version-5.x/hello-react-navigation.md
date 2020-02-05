@@ -9,15 +9,17 @@ In a web browser, you can link to different pages using an anchor (`<a>`) tag. W
 
 React Navigation's stack navigator provides a way for your app to transition between screens and manage navigation history. If your app uses only one stack navigator then it is conceptually similar to how a web browser handles navigation state - your app pushes and pops items from the navigation stack as users interact with it, and this results in the user seeing different screens. A key difference between how this works in a web browser and in React Navigation is that React Navigation's stack navigator provides the gestures and animations that you would expect on Android and iOS when navigating between routes in the stack.
 
-## Basics
-
 Lets start by demonstrating the most common navigator, `createStackNavigator`.
 
-Before continuing, first install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/master/packages/stack) :
+## Installing the stack navigator library
+
+The libraries we've installed so far are the building blocks and shared foundations for navigators, and each navigator in React Navigation lives in its own library. To use the stack navigator, we need to install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/master/packages/stack) :
 
 ```sh
-npm install @react-navigation/stack @react-native-community/masked-view
+npm install @react-navigation/stack
 ```
+
+> 💡 `@react-navigation/stack` depends on `@react-native-community/masked-view` and the other libraries that we installed in [Getting started](getting-started.html). If you haven't installed those yet, head over to that page and follow the installation instructions.
 
 ### Creating a stack navigator
 
