@@ -5,4 +5,4 @@ sidebar_label: Web support
 original_id: web-support
 ---
 
-This version of React Navigation doesn't currently support web.
+Support for web in React Navigation 5 is experimental and a work-in-progress. Documentation is coming soon.
