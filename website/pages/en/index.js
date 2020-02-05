@@ -62,7 +62,7 @@ class HomeSplash extends React.Component {
               </div>
 
               <div className="section">
-                <p><translate>React Navigation 5 has a new dynamic API</translate> 🎉. <a href="https://blog.expo.io/announcing-react-navigation-5-0-bd9e5d45569e"><translate>Read about it here</translate></a>.</p>
+                <p><translate>React Navigation 5 has a new dynamic API</translate> 🎉. <a href="https://reactnavigation.org/blog/2020/02/06/react-navigation-5.0.html"><translate>Read about it here</translate></a>.</p>
               </div>
             </div>
           </div>
