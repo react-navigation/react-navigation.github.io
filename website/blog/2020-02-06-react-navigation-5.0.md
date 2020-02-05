@@ -128,7 +128,7 @@ import ViewPagerAdapter from 'react-native-tab-view-viewpager-adapter';
 or 
 
 ```js
-import ScrollPager from 'react-native-tab-view';
+import { ScrollPager } from 'react-native-tab-view';
 
 // ...
 
