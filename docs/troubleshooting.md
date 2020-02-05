@@ -33,6 +33,24 @@ If the module points to an npm package (i.e. the name of the module doesn't with
 npm install name-of-the-module
 ```
 
+## I'm getting "SyntaxError in @react-navigation/xxx/xxx.tsx"
+
+This might happen if you have an old version of the `metro-react-native-babel-preset` package. The easiest way to fix it is to delete your lock file and reinstall your dependencies.
+
+If you use `npm`:
+
+```sh
+rm package-lock.json
+npm install
+```
+
+If you use `yarn`:
+
+```sh
+rm yarn.lock
+yarn
+```
+
 ## I'm getting an error "null is not an object (evaluating 'RNGestureHandlerModule.default.Direction')"
 
 This and some similar errors might occur if you didn't link the [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) library.
