@@ -92,6 +92,49 @@ When a string is specified, it's equivalent to providing the `path` option.
 
 The `path` option is a pattern to match against the path. Any segments starting with `:` are recognized as a param with the same name. For example `item/42` will be parsed to `{ name: 'item', params: { id: '42' } }`.
 
+The `initialRouteName` option ensures that the route name passed there will be present in the state for the navigator, e.g. for config:
+
+```js
+{
+  Home: {
+    initialRouteName: 'Feed',
+    screens: {
+      Catalog: {
+        path: 'item/:id',
+        parse: {
+          id: Number,
+        },
+      },
+      Feed: 'feed',
+    },
+  },
+}
+```
+
+and URL : `/item/42`, the state will look like this:
+
+```js
+{
+  routes: [
+    {
+      name: 'Home',
+      state: {
+        index: 1,
+        routes: [
+          {
+            name: 'Feed'
+          },
+          {
+            name: 'Catalog',
+            params: { id: 42 },
+          },
+        ],
+      },
+    },
+  ],
+}
+```
+
 The `parse` option controls how the params are parsed. Here, you can provide the name of the param to parse as a key, and a function which takes the string value for the param and returns a parsed value:
 
 ```js
