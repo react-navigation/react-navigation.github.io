@@ -178,11 +178,11 @@ In addition to this, React Navigation 5.x has another way to configure screen dy
 
 ```js
 function SelectionScreen({ navigation }) {
-  const [selctionCount, setSelectionCount] = React.useState(0);
+  const [selectionCount, setSelectionCount] = React.useState(0);
 
   navigation.setOptions({
     title:
-      selctionCount === 0 ? 'Select items' : `${selectionCount} items selected`,
+      selectionCount === 0 ? 'Select items' : `${selectionCount} items selected`,
   });
 
   // ...
@@ -229,6 +229,14 @@ In React Navigation 4.x, there were 4 navigation events to notify focus state of
 It was confusing to decide which events to use and what each event meant. Some navigators also didn't emit events for transition animations which made the events inconsistent.
 
 We have simplified the events in React Navigation 5.x, so now we have only `focus` and `blur` events which are equivalent to `willFocus` and `willBlur` events. To run tasks after an animation finishes, we can use the [`InteractionManager`](https://facebook.github.io/react-native/docs/interactionmanager) API provided by React Native. See the docs for [Navigation lifecycle](navigation-lifecycle.md) for more details.
+
+## Navigating to nested screens
+
+Previously, you could navigate to a screen deeply nested somewhere in a navigator. This was possible because the configuration was static, and all of the navigators were available on the initial startup.
+
+With a dynamic configuration, it becomes impossible, because new navigators and screens could be added, or existing navigators and screens could be removed any time in future. In addition, navigators are initialized as needed in 5.x instead of initializing all navigators at startup, which means that a navigator may not be available to handle an action.
+
+Because of these reasons, you now need to be more explicit when navigating to a deeply nested screen. See [nesting navigators docs](https://reactnavigation.org/docs/en/next/nesting-navigators.html#navigating-to-a-screen-in-a-nested-navigator) for more details.
 
 ## Deep-linking
 
