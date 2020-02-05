@@ -54,4 +54,16 @@ import * as RootNavigation from './path/to/RootNavigation.js';
 RootNavigation.navigate('ChatScreen', { userName: 'Lucy' });
 ```
 
-In `RootNavigation`, you can create your own navigation actions, or compose multiple navigation actions into one, and then easily reuse them throughout your application. When writing tests, you may mock the navigation functions, and make assertions on whether the correct functions are called, with the correct parameters.
+Apart from `navigate`, you can add other navigation actions:
+
+```js
+import { StackActions } from '@react-navigation/routers';
+
+export function push(...args) {
+  navigationRef.current?.dispatch(StackActions.push(...args));
+}
+```
+
+Note that a stack navigators needs to be rendered to handle this action. You may want to check the [docs for nesting](https://reactnavigation.org/docs/nesting-navigators.html#navigating-to-a-screen-in-a-nested-navigator) for more details.
+
+When writing tests, you may mock the navigation functions, and make assertions on whether the correct functions are called with the correct parameters.
