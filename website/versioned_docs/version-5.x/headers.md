@@ -5,7 +5,7 @@ sidebar_label: Configuring the header bar
 original_id: headers
 ---
 
-By now you're probably tired of seeing a blank grey bar on the top of your screen &mdash; you're ready for some [flair](https://memegenerator.net/img/images/600x600/14303485/stan-flair-office-space.jpg). So let's jump in to configuring the header bar.
+We've seen how to configure the header title already, but let's go over that again before moving on to some other options &mdash; repetition is key to learning!
 
 ## Setting the header title
 
