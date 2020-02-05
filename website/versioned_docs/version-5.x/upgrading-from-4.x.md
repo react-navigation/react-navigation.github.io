@@ -5,7 +5,7 @@ sidebar_label: Upgrading from 4.x
 original_id: upgrading-from-4.x
 ---
 
-> TODO: This guide is a work in progress. Please send pull requests to improve it.
+> This guide is a work in progress! As more people upgrade their apps we can continue to improve it. Please send pull requests to add any suggestions that you have from your upgrade experience.
 
 React Navigation 5 has a completely new component based API. While the main concepts are the same, the API is different. In this guide, we aim to document all the differences so that it's easier to upgrade your app.
 
