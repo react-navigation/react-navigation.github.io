@@ -18,7 +18,7 @@ const DEPS_VERSIONS = {
     'react-native-gesture-handler@1.5.2',
     'react-native-reanimated@1.4.0',
     'react-native-safe-area-context@0.6.0',
-    'react-native-screens@2.0.0',
+    'react-native-screens@2.0.0-alpha.12',
   ],
   next: [
     '@react-native-community/masked-view@^0.1.1',
@@ -32,7 +32,7 @@ const DEPS_VERSIONS = {
     'react-native-gesture-handler@1.5.2',
     'react-native-reanimated@1.4.0',
     'react-native-safe-area-context@0.6.0',
-    'react-native-screens@2.0.0',
+    'react-native-screens@2.0.0-alpha.12',
   ],
 };
 
