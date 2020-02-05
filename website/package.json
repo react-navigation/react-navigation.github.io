@@ -2,7 +2,7 @@
   "license": "MIT",
   "scripts": {
     "examples": "docusaurus-examples",
-    "start": "docusaurus-start --no-watch",
+    "start": "docusaurus-start",
     "build": "docusaurus-build",
     "publish-gh-pages": "docusaurus-publish",
     "write-translations": "docusaurus-write-translations",

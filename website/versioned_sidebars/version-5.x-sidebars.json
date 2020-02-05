@@ -1,0 +1,97 @@
+{
+  "version-5.x-docs": {
+    "Fundamentals": [
+      "version-5.x-getting-started",
+      "version-5.x-hello-react-navigation",
+      "version-5.x-navigating",
+      "version-5.x-navigation-lifecycle",
+      "version-5.x-params",
+      "version-5.x-nesting-navigators",
+      "version-5.x-headers",
+      "version-5.x-header-buttons",
+      "version-5.x-app-containers",
+      "version-5.x-modal",
+      "version-5.x-next-steps",
+      "version-5.x-glossary-of-terms",
+      "version-5.x-compatibility",
+      "version-5.x-troubleshooting",
+      "version-5.x-limitations"
+    ],
+    "Guides": [
+      "version-5.x-tab-based-navigation",
+      "version-5.x-drawer-based-navigation",
+      "version-5.x-auth-flow",
+      "version-5.x-handling-safe-area",
+      "version-5.x-status-bar",
+      "version-5.x-screen-options-resolution",
+      "version-5.x-custom-android-back-button-handling",
+      "version-5.x-connecting-navigation-prop",
+      "version-5.x-navigating-without-navigation-prop",
+      "version-5.x-deep-linking",
+      "version-5.x-screen-tracking",
+      "version-5.x-themes",
+      "version-5.x-state-persistence",
+      "version-5.x-typescript",
+      "version-5.x-redux-integration",
+      "version-5.x-MST-integration",
+      "version-5.x-localization",
+      "version-5.x-web-support",
+      "version-5.x-function-after-focusing-screen",
+      "version-5.x-react-native-screens",
+      "version-5.x-upgrading-from-4.x"
+    ],
+    "API Reference": [
+      "version-5.x-navigation-prop",
+      "version-5.x-navigation-context",
+      {
+        "type": "subcategory",
+        "label": "Navigators",
+        "ids": [
+          "version-5.x-stack-navigator",
+          "version-5.x-native-stack-navigator",
+          "version-5.x-drawer-navigator",
+          "version-5.x-bottom-tab-navigator",
+          "version-5.x-material-bottom-tab-navigator",
+          "version-5.x-material-top-tab-navigator"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Hooks",
+        "ids": [
+          "version-5.x-use-navigation",
+          "version-5.x-use-route",
+          "version-5.x-use-navigation-state",
+          "version-5.x-use-focus-effect",
+          "version-5.x-use-is-focused",
+          "version-5.x-use-linking",
+          "version-5.x-use-scroll-to-top"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Actions",
+        "ids": [
+          "version-5.x-navigation-actions",
+          "version-5.x-stack-actions",
+          "version-5.x-drawer-actions",
+          "version-5.x-tab-actions"
+        ]
+      }
+    ],
+    "Build your own Navigator": [
+      "version-5.x-custom-routers",
+      "version-5.x-custom-navigators"
+    ],
+    "Additional Resources": [
+      "version-5.x-supported-react-native-versions",
+      "version-5.x-community-libraries-and-navigators",
+      "version-5.x-more-resources"
+    ],
+    "Meta": [
+      "version-5.x-pitch",
+      "version-5.x-alternatives",
+      "version-5.x-contributing"
+    ]
+  }
+}

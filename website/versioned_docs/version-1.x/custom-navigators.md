@@ -5,7 +5,7 @@ sidebar_label: Custom navigators
 original_id: custom-navigators
 ---
 
-A navigator is any React component that has a [router](https://github.com/react-navigation/react-navigation/blob/master/src/routers/StackRouter.js) on it. Here is a basic one, which uses the [router's API](/docs/routers) to get the active component to render:
+A navigator is any React component that has a [router](https://github.com/react-navigation/react-navigation-4/blob/master/src/routers/StackRouter.js) on it. Here is a basic one, which uses the [router's API](/docs/routers) to get the active component to render:
 
 ```js
 class MyNavigator extends React.Component {

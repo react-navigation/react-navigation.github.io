@@ -70,9 +70,9 @@ Visual options:
   * `center` - Center the title, this is the default on iOS.
 * `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
 * `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
-https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js)). Provided function will be passed the following arguments: 
-  * `transitionProps` - Transition props for the new screen. 
-  * `prevTransitionProps` - Transitions props for the old screen. 
+https://github.com/react-navigation/react-navigation-4/blob/master/flow/react-navigation.js)). Provided function will be passed the following arguments:
+  * `transitionProps` - Transition props for the new screen.
+  * `prevTransitionProps` - Transitions props for the old screen.
   * `isModal` - Boolean specifying if screen is modal.
 * `onTransitionStart` - Function to be invoked when the card transition animation is about to start.
 * `onTransitionEnd` - Function to be invoked once the card transition animation completes.
@@ -159,7 +159,7 @@ Style object for the header
 
 #### `headerForceInset`
 
-Allows to pass `forceInset` object to internal SafeAreaView used in the header. 
+Allows to pass `forceInset` object to internal SafeAreaView used in the header.
 
 #### `headerTitleStyle`
 
@@ -231,7 +231,7 @@ const SomeStack = createStackNavigator({
 
 ### Examples
 
-See the examples [SimpleStack.js](https://github.com/react-community/react-navigation/tree/2.x/examples/NavigationPlayground/js/SimpleStack.js) and [ModalStack.js](https://github.com/react-community/react-navigation/tree/2.x/examples/NavigationPlayground/js/ModalStack.js) which you can run locally as part of the [NavigationPlayground](https://github.com/react-community/react-navigation/tree/2.x/examples/NavigationPlayground) app.
+See the examples [SimpleStack.js](https://github.com/react-navigation/react-navigation-4/tree/2.x/examples/NavigationPlayground/js/SimpleStack.js) and [ModalStack.js](https://github.com/react-navigation/react-navigation-4/tree/2.x/examples/NavigationPlayground/js/ModalStack.js) which you can run locally as part of the [NavigationPlayground](https://github.com/react-navigation/react-navigation-4/tree/2.x/examples/NavigationPlayground) app.
 
 You can view these examples directly on your phone by visiting [our expo demo](https://exp.host/@react-navigation/NavigationPlayground).
 

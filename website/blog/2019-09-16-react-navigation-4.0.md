@@ -18,10 +18,10 @@ The navigators live at:
 - `createBottomTabNavigator`, `createMaterialTopTabNavigator` - [`react-navigation-tabs`](https://github.com/react-navigation/tabs)
 - `createDrawerNavigator` - [`react-navigation-drawer`](https://github.com/react-navigation/drawer)
 
-For upgrade instructions, please check the [release notes](https://github.com/react-navigation/react-navigation/releases/tag/v4.0.0).
+For upgrade instructions, please check the [release notes](https://github.com/react-navigation/react-navigation-4/releases/tag/v4.0.0).
 
 If you're using TypeScript, navigator specific types were also removed from the main package. We've mentioned the replacement types in the release notes. But if you are still having problems, please open an issue and let us know.
 
 ---
 
-Thanks for reading, please post any issues you encounter to https://github.com/react-navigation/react-navigation/issues!
+Thanks for reading, please post any issues you encounter to https://github.com/react-navigation/react-navigation-4/issues!

@@ -43,7 +43,7 @@ I assume you already have an [Expo](https://expo.io/) project running locally. I
 Let's install React Native Paper, React Navigation v5 and other required dependencies.
 
 ```bash
-npm install @react-navigation/native@next @react-navigation/stack@next @react-native-community/masked-view @react-navigation/drawer@next @react-navigation/material-bottom-tabs@next react-native-paper
+npm install @react-navigation/native @react-navigation/stack @react-native-community/masked-view @react-navigation/drawer @react-navigation/material-bottom-tabs react-native-paper
 ```
 
 In the next step we will make sure versions of these libraries are compatible.

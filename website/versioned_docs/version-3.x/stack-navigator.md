@@ -73,7 +73,7 @@ Visual options:
 * `cardShadowEnabled` - Use this prop to have visible shadows during transitions. Defaults to `true`
 * `cardOverlayEnabled` - Use this prop to have visible stack card overlays during transitions. Defaults to `false`.
 * `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
-https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js)). Provided function will be passed the following arguments:
+https://github.com/react-navigation/react-navigation-4/blob/master/flow/react-navigation.js)). Provided function will be passed the following arguments:
   * `transitionProps` - Transition props for the new screen.
   * `prevTransitionProps` - Transitions props for the old screen.
   * `isModal` - Boolean specifying if screen is modal.
@@ -255,7 +255,7 @@ const SomeStack = createStackNavigator({
 
 ### Examples
 
-See the examples [SimpleStack.tsx](https://github.com/react-navigation/react-navigation/blob/3.0/examples/NavigationPlayground/src/SimpleStack.tsx) and [ModalStack.tsx](https://github.com/react-navigation/react-navigation/blob/3.0/examples/NavigationPlayground/src/ModalStack.tsx) which you can run locally as part of the [NavigationPlayground](https://github.com/react-community/react-navigation/tree/3.0/examples/NavigationPlayground) app.
+See the examples [SimpleStack.tsx](https://github.com/react-navigation/react-navigation-4/blob/3.0/examples/NavigationPlayground/src/SimpleStack.tsx) and [ModalStack.tsx](https://github.com/react-navigation/react-navigation-4/blob/3.0/examples/NavigationPlayground/src/ModalStack.tsx) which you can run locally as part of the [NavigationPlayground](https://github.com/react-navigation/react-navigation-4/tree/3.0/examples/NavigationPlayground) app.
 
 You can view these examples directly on your phone by visiting [our expo demo](https://exp.host/@react-navigation/NavigationPlayground).
 
