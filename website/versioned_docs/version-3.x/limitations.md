@@ -44,7 +44,7 @@ There are workarounds if you absolutely need dynamic routes but you can expect s
 
 ## iOS 11 style header with large text
 
-This is on the roadmap to implement, but it's not currently available in the React Navigation. Some folks have [gone ahead and built their own version of this](https://github.com/react-navigation/react-navigation/issues/2749#issuecomment-367516290), but your mileage may vary.
+This is on the roadmap to implement, but it's not currently available in the React Navigation. Some folks have [gone ahead and built their own version of this](https://github.com/react-navigation/react-navigation-4/issues/2749#issuecomment-367516290), but your mileage may vary.
 
 ## Right-to-left (RTL) layout support
 

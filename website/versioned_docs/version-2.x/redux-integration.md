@@ -108,7 +108,7 @@ In this case, once you `connect` `AppNavigator` to Redux as is done in `AppWithN
 
 ## Full example
 
-There's a working example app with Redux [here](https://github.com/react-navigation/react-navigation/tree/2.x/examples/ReduxExample) if you want to try it out yourself.
+There's a working example app with Redux [here](https://github.com/react-navigation/react-navigation-4/tree/2.x/examples/ReduxExample) if you want to try it out yourself.
 
 ## Mocking tests
 
@@ -174,7 +174,7 @@ class ReduxNavigation extends React.Component {
   };
 
   render() {
-    /* more setup code here! this is not a runnable snippet */ 
+    /* more setup code here! this is not a runnable snippet */
     return <AppNavigator navigation={navigation} />;
   }
 }

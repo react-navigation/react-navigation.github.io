@@ -473,6 +473,6 @@ Now you can modify props of Auth screens props by adding types to make your auto
 By the links below, you can find a lot of useful information about UI Kitten and React Navigation 5. The demo application may contain more complex examples. Also, by referring to the app built by the React Navigation team, you can find plenty of useful examples too.
 
 - [Demo App by UI Kitten team](https://github.com/artyorsh/react-navigation-ex-demo/tree/complete-exmaples)
-- [Demo App by React Navigation team](https://github.com/react-navigation/navigation-ex/tree/master/packages/example)
+- [Demo App by React Navigation team](https://github.com/react-navigation/react-navigation/tree/master/packages/example)
 - [React Navigation 5 Highlights](https://blog.expo.io/announcing-react-navigation-5-0-bd9e5d45569e)
 - [UI Kitten Documentation](https://akveo.github.io/react-native-ui-kitten/)
