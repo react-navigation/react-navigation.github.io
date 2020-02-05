@@ -66,7 +66,7 @@ If you run this code, you will see a screen with an empty navigation bar and a g
 
 > The casing of the route name doesn't matter -- you can use lowercase `home` or capitalized `Home`, it's up to you. We prefer capitalizing our route names.
 
-> The only required configuration for a route is the `screen` component. You can read more about the other options available in the [StackNavigator reference](stack-navigator.html).
+> The only required configuration for a screen is the `name` and `component` props. You can read more about the other options available in the [stack navigator reference](stack-navigator.html).
 
 ### Configuring the navigator
 
@@ -84,6 +84,8 @@ function DetailsScreen() {
     </View>
   );
 }
+
+const Stack = createStackNavigator();
 
 function App() {
   return (
