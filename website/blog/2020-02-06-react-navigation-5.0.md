@@ -149,7 +149,7 @@ In addition to these larger improvements, there are several smaller improvements
 
 ## Upgrading
 
-This is a big release and, while the basic concepts such as nesting are the same, the new API is mostly incompatible with the previous API. We know it can be a challenge to upgrade your code base. So we're going to keep supporting React Navigation 4 with bug fixes. We'll accept contributions and keep it compatible with the latest React Native version. The old code will now leave at [`react-navigation/react-navigation-4`](https://github.com/react-navigation/react-navigation-4) on GitHub.
+This is a big release and, while the basic concepts such as nesting are the same, the new API is mostly incompatible with the previous API. We know it can be a challenge to upgrade your code base. So we're going to keep supporting React Navigation 4 with bug fixes. We'll accept contributions and keep it compatible with the latest React Native version. The old code will now live at [`react-navigation/react-navigation-4`](https://github.com/react-navigation/react-navigation-4) on GitHub.
 
 We recommend starting your new projects with the new version so you can take advantage of the new APIs and the new features.
 
