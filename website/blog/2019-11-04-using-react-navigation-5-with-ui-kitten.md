@@ -464,7 +464,7 @@ export interface ResetPasswordScreenProps {
 }
 ```
 
-Now you can modify props of Auth screens props by adding types to make your autocomplete and IntelliSense work. For more complex examples, consider reading [type-checking](https://reactnavigation.org/docs/en/next/typescript.html) doc or reviewing [complete demo application sources](https://github.com/artyorsh/react-navigation-ex-demo/tree/complete-exmaples).
+Now you can modify props of Auth screens props by adding types to make your autocomplete and IntelliSense work. For more complex examples, consider reading [type-checking](https://reactnavigation.org/docs/en/typescript.html) doc or reviewing [complete demo application sources](https://github.com/artyorsh/react-navigation-ex-demo/tree/complete-exmaples).
 
 <img src="/blog/assets/using-react-navigation-5-with-ui-kitten/typescript.gif" />
 
