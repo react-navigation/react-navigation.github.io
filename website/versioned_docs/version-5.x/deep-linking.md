@@ -39,10 +39,7 @@ For example, the path `/rooms/chat?user=jane` will be translated to a state obje
 The [`useLinking`](use-linking.html) hook makes it easier to handle incoming links:
 
 ```js
-import {
-  NavigationContainer,
-  useLinking,
-} from '@react-navigation/native';
+import { NavigationContainer, useLinking } from '@react-navigation/native';
 
 function App() {
   const ref = React.useRef();
@@ -168,7 +165,7 @@ Here we have a stack navigator in root, and inside the `Home` screen of the root
 }
 ```
 
-In this config, we specify that the `Profile` screen should be resolved for the `users/:id` pattern and it's nested inside the `Home` screen. This will result in the following state object:
+In this config, we specify that the `Profile` screen should be resolved for the `users/:id` pattern and it's nested inside the `Home` screen. Then parsing `users/jane` will result in the following state object:
 
 ```js
 const state = {
@@ -187,6 +184,46 @@ const state = {
   ],
 };
 ```
+
+Sometimes we want to ensure that a certain screen will always be present for the navigator in the state object. We can achieve it by specifying the `initialRouteName` property for that navigator in the config. For the above example, if we want the `Notifications` screen to be the initial route in `Home` tab navigator, we should specify such config (`Notifications` screen needn't be mentioned in `screens` property):
+
+```js
+{
+  Home: {
+    initialRouteName: 'Notifications',
+    screens: {
+      Profile: 'users/:id',
+      Notifications: 'notify/:user',
+    },
+  },
+};
+```
+
+Then, the path `/users/42` will resolve to the following state object:
+
+```js
+const state = {
+  routes: [
+    {
+      name: 'Home',
+      state: {
+        index: 1,
+        routes: [
+          {
+            name: 'Notifications',
+          },
+          {
+            name: 'Profile',
+            params: { id: 'jane' },
+          },
+        ],
+      },
+    },
+  ],
+};
+```
+
+Notice that we can't pass any params to the `Notifications` screen if it isn't explicitly mentioned in the URL string, so the screen should implement handling lack of these params with e.g. providing default ones.
 
 For some advanced cases, specifying the mapping may not be sufficient. You can implement your custom parser to address these cases using the `getStateFromPath` option:
 
