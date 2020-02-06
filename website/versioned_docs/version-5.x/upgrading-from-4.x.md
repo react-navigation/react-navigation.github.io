@@ -237,7 +237,7 @@ Previously, you could navigate to a screen deeply nested somewhere in a navigato
 
 With a dynamic configuration, it becomes impossible, because new navigators and screens could be added, or existing navigators and screens could be removed any time in future. In addition, navigators are initialized as needed in 5.x instead of initializing all navigators at startup, which means that a navigator may not be available to handle an action.
 
-Because of these reasons, you now need to be more explicit when navigating to a deeply nested screen. See [nesting navigators docs](https://reactnavigation.org/docs/en/next/nesting-navigators.html#navigating-to-a-screen-in-a-nested-navigator) for more details.
+Because of these reasons, you now need to be more explicit when navigating to a deeply nested screen. See [nesting navigators docs](https://reactnavigation.org/docs/en/nesting-navigators.html#navigating-to-a-screen-in-a-nested-navigator) for more details.
 
 ## Deep-linking
 
