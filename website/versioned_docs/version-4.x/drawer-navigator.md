@@ -144,7 +144,11 @@ React Element or a function, that given `{ focused: boolean, tintColor: string }
 
 #### `drawerLockMode`
 
-Specifies the [lock mode](https://facebook.github.io/react-native/docs/drawerlayoutandroid.html#drawerlockmode) of the drawer.
+Specifies the lock mode of the drawer. The drawer can be locked in 3 states:
+
+- `unlocked` (default) - that the drawer will respond (open/close) to touch gestures.
+- `locked-closed` - that the drawer will stay closed and not respond to gestures.
+- `locked-open` - that the drawer will stay opened and not respond to gestures. The drawer may still be opened and closed programmatically with `navigation.openDrawer` and `navigation.closeDrawer`.
 
 ### Nesting drawer navigators inside others
 
