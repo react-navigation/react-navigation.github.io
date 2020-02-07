@@ -114,7 +114,7 @@ navigation.navigate('Root', {
 
 If the navigator was already rendered, navigating to another screen will push a new screen in case of stack navigator.
 
-You can follow similar approach for deeply nested screens. Note that the second argument to `navigate` here is just `params`, so you ca do something like:
+You can follow similar approach for deeply nested screens. Note that the second argument to `navigate` here is just `params`, so you can do something like:
 
 ```js
 navigation.navigate('Root', {
