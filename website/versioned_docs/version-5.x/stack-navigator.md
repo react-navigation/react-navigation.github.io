@@ -276,7 +276,7 @@ Use this prop to have a semi-transparent dark overlay visible under the card dur
 
 Style object for the card in stack. You can provide a custom background color to use instead of the default background here.
 
-You can also specify `{ backgroundColor: 'transparent' }` to make the previous screen visible underneath. This is useful to implement things like modal dialogs. You should also specify `mode: 'modal'` in the stack view config when using a transparent background so previous screens aren't detached and stay visible underneath.
+You can also specify `{ backgroundColor: 'transparent' }` to make the previous screen visible underneath (for transparent modals). This is useful to implement things like modal dialogs. You should also specify `mode: 'modal'` in the stack view config when using a transparent background so previous screens aren't detached and stay visible underneath.
 
 #### `animationEnabled`
 
@@ -743,3 +743,46 @@ import { TransitionPresets } from '@react-navigation/stack';
   <Stack.Screen name="Profile" component={Profile} />
 </Stack.Navigator>;
 ```
+
+### Transparent modals
+
+A transparent modal is like a modal dialog which overlays the screen. The previous screen still stays visible underneath. To get a transparent modal screen, it's usually easier to create a separate modal stack. In the modal stack, you will want to configure few things:
+
+- Set the `mode` prop to `modal`
+- Set the card background to transparent using `cardStyle`
+- Use a fade animation instead of the default animation
+- Disable the header with `headerMode="none"` (optional)
+- Enable the overlay with `cardOverlayEnabled: true` (optional)
+
+Example:
+
+```js
+<Stack.Navigator
+  screenOptions={{
+    cardStyle: { backgroundColor: 'transparent' },
+    cardOverlayEnabled: true,
+    cardStyleInterpolator: ({ current: { progress } }) => {
+      cardStyle: {
+        opacity: progress.interpolate({
+          inputRange: [0, 0.5, 0.9, 1],
+          outputRange: [0, 0.25, 0.7, 1],
+        }),
+      },
+      overlayStyle: {
+        opacity: progress.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, 0.5],
+          extrapolate: 'clamp',
+        }),
+      },
+    }),
+  }}
+  mode="modal"
+  headerMode="none"
+>
+  <Stack.Screen name="Home" component={HomeStack} />
+  <Stack.Screen name="Modal" component={ModalScreen} />
+</Stack.Navigator>
+```
+
+Now, when you navigate to the `Modal` screen, the `Home` screen will still be visible underneath.
