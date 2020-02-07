@@ -106,7 +106,7 @@ You don't need to use Redux in your apps for this to work and it works without a
 
 ### Native Stack Navigator
 
-Traditionally, we have written our navigators in JavaScript for greater customizability. It fits a lot of use cases, but sometimes you want the exact native feel and the performance of native navigation. Now, we have added a new native stack navigator that uses native navigation primitives for navigation using the [`react-native-screens`](https://github.com/kmagiera/react-native-screens) library. Under the hood, it just uses native components which might be obvious choice for native development and might be a good pick in the most cases. 
+Traditionally, we have written our navigators in JavaScript for greater customizability. It fits a lot of use cases, but sometimes you want the exact native feel and the performance of native navigation. Now, we have added a new native stack navigator that uses native navigation primitives for navigation using the [`react-native-screens`](https://github.com/kmagiera/react-native-screens) library. Under the hood, it just uses native components which might be obvious choice for native development and might be a good pick in the most cases.
 
 <img src="/blog/assets/android-native-stack.gif" height="530" />
 <img src="/blog/assets/ios-native-stack.gif" height="530" />
@@ -125,7 +125,7 @@ import ViewPagerAdapter from 'react-native-tab-view-viewpager-adapter';
 </Tab.Navigator>
 ```
 
-or 
+or
 
 ```js
 import { ScrollPager } from 'react-native-tab-view';
@@ -149,7 +149,7 @@ In addition to these larger improvements, there are several smaller improvements
 
 ## Upgrading
 
-This is a big release and, while the basic concepts such as nesting are the same, the new API is mostly incompatible with the previous API. We know it can be a challenge to upgrade your code base. So we're going to keep supporting React Navigation 4 with bug fixes. We'll accept contributions and keep it compatible with the latest React Native version. The old code will now live at [`react-navigation/react-navigation-4`](https://github.com/react-navigation/react-navigation-4) on GitHub.
+This is a big release and, while the basic concepts such as nesting are the same, the new API is mostly incompatible with the previous API. We know it can be a challenge to upgrade your code base. So we're going to keep supporting React Navigation 4 with bug fixes. We'll accept contributions and keep it compatible with the latest React Native version. The old code will now live in the [4.x branch](https://github.com/react-navigation/react-navigation/tree/4.x) on GitHub.
 
 We recommend starting your new projects with the new version so you can take advantage of the new APIs and the new features.
 

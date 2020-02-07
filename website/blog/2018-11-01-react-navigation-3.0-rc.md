@@ -136,10 +136,10 @@ const Store = createStackNavigator({
 # Assorted fixes & improvements
 
 - Stack transition performance improved greatly by removing the shadow from the entire card and rendering it only on the slice where it is needed. The card opacity is also no longer directly animated but instead an overlay is put on top to create a similar effect but with better performance.
-- Fix long-standing issues with stack that led to quietly re-mounting screens when navigating quickly in certain patterns: https://github.com/react-navigation/react-navigation-4/issues/4155
+- Fix long-standing issues with stack that led to quietly re-mounting screens when navigating quickly in certain patterns: https://github.com/react-navigation/react-navigation/issues/4155
 - Support inverted gesture in modals.
 - Stack card gesture uses react-native-gesture-handler and native driver so the gesture runs on the UI thread (except when the gesture ends, then it calls back to JS).
-- Fix a variety of issues with drawer navigator, including issues around nesting (https://github.com/react-navigation/react-navigation-4/issues/4154) and bugs with firing open / close (eg: https://github.com/react-navigation/react-navigation-4/issues/5146).
+- Fix a variety of issues with drawer navigator, including issues around nesting (https://github.com/react-navigation/react-navigation/issues/4154) and bugs with firing open / close (eg: https://github.com/react-navigation/react-navigation/issues/5146).
 # Ecosystem and web support
 
 React Navigation 3.0 brings some important changes to the React Navigation ecosystem: the project now lives across a number of repositories and packages, we have an exciting new transitioner on the way, and the core finally has first-class support for web apps on the client and server!
@@ -217,5 +217,5 @@ See a simple web app with Create React App [here](https://github.com/react-navig
 
 ----------
 
-Thanks for reading, please post any issues you encounter to https://github.com/react-navigation/react-navigation-4/issues!
+Thanks for reading, please post any issues you encounter to https://github.com/react-navigation/react-navigation/issues!
 
