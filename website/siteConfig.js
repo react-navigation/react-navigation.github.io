@@ -43,7 +43,7 @@ const siteConfig = {
   stylesheets: ['/css/code-block-buttons.css'],
   repoUrl: 'https://github.com/react-navigation/react-navigation',
   editUrl:
-    'https://github.com/react-navigation/react-navigation.github.io/tree/source/website/versioned_docs/version-5.x',
+    'https://github.com/react-navigation/react-navigation.github.io/tree/source/website/versioned_docs/version-5.x/',
 
   gaTrackingId: 'UA-10128745-16',
   docsSideNavCollapsible: true,
