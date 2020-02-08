@@ -761,7 +761,7 @@ Example:
   screenOptions={{
     cardStyle: { backgroundColor: 'transparent' },
     cardOverlayEnabled: true,
-    cardStyleInterpolator: ({ current: { progress } }) => {
+    cardStyleInterpolator: ({ current: { progress } }) => ({
       cardStyle: {
         opacity: progress.interpolate({
           inputRange: [0, 0.5, 0.9, 1],
