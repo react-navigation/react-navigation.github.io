@@ -50,9 +50,6 @@ const siteConfig = {
   algolia: {
     apiKey: 'c967b4a1491b9cb486d3dca087b771e6',
     indexName: 'reactnavigation',
-    algoliaOptions: {
-      facetFilters: [ "version:VERSION" ]
-    }
   },
 };
 
