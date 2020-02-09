@@ -46,7 +46,7 @@ This and some similar errors might occur if you didn't link the [`react-native-g
   react-native unlink react-native-gesture-handler
   ```
 
-  If you're testing on iOS, make sure you have run `pod install` in the `ios/` folder:
+  If you're testing on iOS and use Mac, make sure you have run `pod install` in the `ios/` folder:
 
   ```sh
   cd ios; pod install; cd ..

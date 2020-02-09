@@ -9,72 +9,11 @@ A material-design themed tab bar on the top of the screen that lets you switch b
 
 This wraps [`react-native-tab-view`](https://github.com/react-native-community/react-native-tab-view).
 
-To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/master/packages/material-top-tabs):
+To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.html), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/master/packages/material-top-tabs):
 
 ```sh
 npm install @react-navigation/material-top-tabs react-native-tab-view
 ```
-
-Now we need to install [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated).
-
-If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
-
-```sh
-expo install react-native-gesture-handler react-native-reanimated
-```
-
-If you are not using Expo, run the following:
-
-```sh
-npm install react-native-reanimated react-native-gesture-handler
-```
-
-If you are using Expo, you are done. Otherwise, continue to the next steps.
-
-To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
-
-```sh
-cd ios
-pod install
-cd ..
-```
-
-To finalize installation of `react-native-gesture-handler` for Android, be sure to make the necessary modifications to `MainActivity.java`:
-
-```diff
-package com.reactnavigation.example;
-
-import com.facebook.react.ReactActivity;
-+ import com.facebook.react.ReactActivityDelegate;
-+ import com.facebook.react.ReactRootView;
-+ import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
-
-public class MainActivity extends ReactActivity {
-
-  @Override
-  protected String getMainComponentName() {
-    return "Example";
-  }
-
-+  @Override
-+  protected ReactActivityDelegate createReactActivityDelegate() {
-+    return new ReactActivityDelegate(this, getMainComponentName()) {
-+      @Override
-+      protected ReactRootView createRootView() {
-+       return new RNGestureHandlerEnabledRootView(MainActivity.this);
-+      }
-+    };
-+  }
-}
-```
-
-Then add the following at the top of your entry file, such as `index.js` or `App.js`:
-
-```js
-import 'react-native-gesture-handler';
-```
-
-Finally, run `react-native run-android` or `react-native run-ios` to launch the app on your device/simulator.
 
 ## API Definition
 

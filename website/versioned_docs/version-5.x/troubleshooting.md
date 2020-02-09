@@ -62,7 +62,7 @@ Linking is automatic from React Native 0.60, so if you have linked the library m
 react-native unlink react-native-gesture-handler
 ```
 
-If you're testing on iOS, make sure you have run `pod install` in the `ios/` folder:
+If you're testing on iOS and use Mac, make sure you have run `pod install` in the `ios/` folder:
 
 ```sh
 cd ios; pod install; cd ..

@@ -53,6 +53,8 @@ pod install
 cd ..
 ```
 
+> Note: This step is for iOS development on Mac. If you're not using a Mac, then skip this step.
+
 To finalize installation of `react-native-screens` for Android, add the following two lines to `dependencies` section in `android/app/build.gradle`:
 
 ```gradle
