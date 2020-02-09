@@ -24,17 +24,6 @@ function HomeScreen({ navigation, route }) {
         }
       />
       <Button
-        title="Replace screen with Profile"
-        onPress={() =>
-          navigation.dispatch({
-            ...CommonActions.replace('Profile', {
-              user: 'jane',
-            }),
-            source: route.key,
-          })
-        }
-      />
-      <Button
         title="Go back"
         onPress={() => navigation.dispatch(CommonActions.goBack())}
       />
@@ -72,17 +61,6 @@ function ProfileScreen({ navigation, route }) {
               ],
             })
           )
-        }
-      />
-      <Button
-        title="Replace screen with Profile"
-        onPress={() =>
-          navigation.dispatch({
-            ...CommonActions.replace('Profile', {
-              user: 'jane',
-            }),
-            source: route.key,
-          })
         }
       />
       <Button

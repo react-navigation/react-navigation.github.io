@@ -9,19 +9,41 @@ original_id: stack-actions
 
 The following actions are supported:
 
-### `replace`
+### replace
 
-The `replace` action replaces the current route with the given route in the stack.
+The `replace` action allows to replace a route in the navigation state. It takes the following arguments:
+
+- `name` - _string_ - A destination name of the route that has been registered somewhere.
+- `params` - _object_ - Params to merge into the destination route.
 
 <samp id="stack-actions">
 
 ```js
 import { StackActions } from '@react-navigation/routers';
 
-const pushAction = StackActions.replace('Profile', { user: 'Wojtek' });
-
-navigation.dispatch(pushAction);
+navigation.dispatch(
+  CommonActions.replace('Profile', {
+    user: 'jane',
+  })
+);
 ```
+
+If you want to replace a particular route, you can add a `source` property referring to the route key:
+
+<samp id="stack-actions">
+
+```js
+import { StackActions } from '@react-navigation/routers';
+
+navigation.dispatch({
+  ...CommonActions.replace('Profile', {
+    user: 'jane',
+  }),
+  source: route.key,
+});
+```
+
+If the `source` property is explicitly set to `undefined`, it'll replace the focused route.
 
 ### push
 

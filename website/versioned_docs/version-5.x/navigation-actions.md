@@ -45,42 +45,6 @@ navigation.dispatch(
 );
 ```
 
-### replace
-
-The `replace` action allows to replace a route in the navigation state. It takes the following arguments:
-
-- `name` - _string_ - A destination name of the route that has been registered somewhere.
-- `params` - _object_ - Params to merge into the destination route.
-
-<samp id="common-actions">
-
-```js
-import { CommonActions } from '@react-navigation/native';
-
-navigation.dispatch(
-  CommonActions.replace('Profile', {
-    user: 'jane',
-  })
-);
-```
-
-If you want to replace a particular route, you can add a `source` property referring to the route key:
-
-<samp id="common-actions">
-
-```js
-import { CommonActions } from '@react-navigation/native';
-
-navigation.dispatch({
-  ...CommonActions.replace('Profile', {
-    user: 'jane',
-  }),
-  source: route.key,
-});
-```
-
-If the `source` property is explicitly set to `undefined`, it'll replace the focused route.
-
 ### reset
 
 The `reset` action allows to reset the navigation state to the given state. It takes the following arguments:
