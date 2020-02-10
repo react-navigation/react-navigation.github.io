@@ -137,7 +137,7 @@ export default SimpleRouter;
 
 ## Built-In Routers
 
-The `@react-navigation/routers` package ships with a few standard routers:
+The library ships with a few standard routers:
 
 - `StackRouter`
 - `TabRouter`
@@ -154,7 +154,7 @@ See [custom navigators](custom-navigators.html) for details on how to override t
 Let's say you want to add a custom action to clear the history:
 
 ```js
-import { TabRouter } from '@react-navigation/routers';
+import { TabRouter } from '@react-navigation/native';
 
 const MyTabRouter = options => {
   const router = TabRouter(options);
@@ -188,7 +188,7 @@ const MyTabRouter = options => {
 Sometimes you may want to prevent some navigation activity, depending on your route. Let's say, you want to prevent going back if `isEditing` is `true`:
 
 ```js
-import { StackRouter } from '@react-navigation/routers';
+import { StackRouter } from '@react-navigation/native';
 
 const MyStackRouter = options => {
   const router = StackRouter(options);

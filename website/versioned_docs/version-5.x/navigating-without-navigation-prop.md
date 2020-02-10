@@ -58,7 +58,7 @@ RootNavigation.navigate('ChatScreen', { userName: 'Lucy' });
 Apart from `navigate`, you can add other navigation actions:
 
 ```js
-import { StackActions } from '@react-navigation/routers';
+import { StackActions } from '@react-navigation/native';
 
 export function push(...args) {
   navigationRef.current?.dispatch(StackActions.push(...args));

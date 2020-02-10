@@ -325,8 +325,8 @@ In React navigation 5.x, we have revamped the theme system for easier customizat
 The `navigation` object has a `dispatch` method used to dispatch navigation actions. Normally we don't recommend dispatching action objects, but use the existing methods such as `navigation.push`, `naigation.navigate` etc. But if you were importing action creators from the library, then you'll need to update your code:
 
 - `NavigationActions` is now `CommonActions`, can be imported from `@react-navigation/native`
-- `StackActions`, `DrawerActions` etc. can be imported from `@react-navigation/router`
-- `SwitchActions` is now `TabActions`. can be imported from `@react-navigation/router`
+- `StackActions`, `DrawerActions` etc. can be imported from `@react-navigation/native`
+- `SwitchActions` is now `TabActions`. can be imported from `@react-navigation/native`
 
 Signature of many actions have changed. Refer to their docs for details:
 

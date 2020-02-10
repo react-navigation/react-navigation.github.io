@@ -51,8 +51,11 @@ Example:
 
 ```js
 import * as React from 'react';
-import { useNavigationBuilder } from '@react-navigation/native';
-import { TabRouter, TabActions } from '@react-navigation/routers';
+import {
+  useNavigationBuilder,
+  TabRouter,
+  TabActions,
+} from '@react-navigation/native';
 
 function TabNavigator({
   initialRouteName,
@@ -147,13 +150,11 @@ import { StyleProp, ViewStyle } from 'react-native';
 import {
   useNavigationBuilder,
   DefaultNavigatorOptions,
-} from '@react-navigation/native';
-import {
   TabRouter,
   TabActions,
   TabRouterOptions,
   TabNavigationState,
-} from '@react-navigation/routers';
+} from '@react-navigation/native';
 
 // Props accepted by the view
 type TabNavigationConfig = {
@@ -244,8 +245,8 @@ import * as React from 'react';
 import {
   useNavigationBuilder,
   createNavigatorFactory,
+  TabRouter,
 } from '@react-navigation/native';
-import { TabRouter } from '@react-navigation/routers';
 import { BottomTabView } from '@react-navigation/bottom-tabs';
 
 function BottomTabNavigator({

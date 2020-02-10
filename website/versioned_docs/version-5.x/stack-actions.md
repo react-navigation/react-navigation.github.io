@@ -19,7 +19,7 @@ The `replace` action allows to replace a route in the navigation state. It takes
 <samp id="stack-actions">
 
 ```js
-import { StackActions } from '@react-navigation/routers';
+import { StackActions } from '@react-navigation/native';
 
 navigation.dispatch(
   CommonActions.replace('Profile', {
@@ -33,7 +33,7 @@ If you want to replace a particular route, you can add a `source` property refer
 <samp id="stack-actions">
 
 ```js
-import { StackActions } from '@react-navigation/routers';
+import { StackActions } from '@react-navigation/native';
 
 navigation.dispatch({
   ...CommonActions.replace('Profile', {
@@ -55,7 +55,7 @@ The `push` action adds a route on top of the stack and navigates forward to it. 
 <samp id="stack-actions">
 
 ```js
-import { StackActions } from '@react-navigation/routers';
+import { StackActions } from '@react-navigation/native';
 
 const pushAction = StackActions.push('Profile', { user: 'Wojtek' });
 
@@ -69,7 +69,7 @@ The `pop` action takes you back to a previous screen in the stack. It takes one 
 <samp id="stack-actions">
 
 ```js
-import { StackActions } from '@react-navigation/routers';
+import { StackActions } from '@react-navigation/native';
 
 const popAction = StackActions.pop(1);
 
@@ -83,7 +83,7 @@ The `popToTop` action takes you back to the first screen in the stack, dismissin
 <samp id="stack-actions">
 
 ```js
-import { StackActions } from '@react-navigation/routers';
+import { StackActions } from '@react-navigation/native';
 
 navigation.dispatch(StackActions.popToTop());
 ```

@@ -19,7 +19,7 @@ The `jumpTo` action can be used to jump to an existing route in the tab navigato
 <samp id="tab-actions">
 
 ```js
-import { TabActions } from '@react-navigation/routers';
+import { TabActions } from '@react-navigation/native';
 
 const jumpToAction = TabActions.jumpTo('Profile', { user: 'Satya' });
 

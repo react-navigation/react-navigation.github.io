@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { View, Button, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StackActions } from '@react-navigation/routers';
 
 function HomeScreen({ navigation }) {
   return (
@@ -10,11 +9,17 @@ function HomeScreen({ navigation }) {
       <Text>Home!</Text>
       <Button
         title="Push Profile on the stack"
-        onPress={() => navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))}
+        onPress={() =>
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
+        }
       />
       <Button
         title="Replace with Profile"
-        onPress={() => navigation.dispatch(StackActions.replace('Profile', { user: 'Wojtek' }))}
+        onPress={() =>
+          navigation.dispatch(
+            StackActions.replace('Profile', { user: 'Wojtek' })
+          )
+        }
       />
     </View>
   );
@@ -31,7 +36,9 @@ function ProfileScreen({ navigation, route }) {
       />
       <Button
         title="Pop one screen from stack"
-        onPress={() => navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))}
+        onPress={() =>
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
+        }
       />
       <Button
         title="Pop to top"
