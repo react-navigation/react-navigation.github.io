@@ -25,7 +25,7 @@ expo start -c
 If you're not using Expo, run:
 
 ```sh
-react-native start --reset-cache
+npx react-native start --reset-cache
 ```
 
 If the module points to an npm package (i.e. the name of the module doesn't with `./`), then it's probably due to a missing peer dependency. To fix this, install the dependency in your project:
@@ -33,6 +33,8 @@ If the module points to an npm package (i.e. the name of the module doesn't with
 ```sh
 npm install name-of-the-module
 ```
+
+Sometimes it might even be due to a corrupt installation. If clearing cache didn't work, try deleting your `node_modules` folder and run `npm install` again.
 
 ## I'm getting "SyntaxError in @react-navigation/xxx/xxx.tsx"
 

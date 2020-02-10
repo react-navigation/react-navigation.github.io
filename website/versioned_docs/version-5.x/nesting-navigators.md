@@ -39,31 +39,33 @@ In the above example, the `Home` component contains a tab navigator. The `Home` 
 
 To achieve the behavior you want, it's often necessary to nest multiple navigators. For example, if you want.
 
+## How nesting navigators affects the behaviour
+
 When nesting navigators, there are some things to keep in mind:
 
-- **Each navigator keeps its own navigation history.**
+### Each navigator keeps its own navigation history
 
-  For example, when you press the back button inside a nested stack navigator, it'll go back to the previous screen inside the nested stack even if there's another navigator as the parent.
+For example, when you press the back button inside a nested stack navigator, it'll go back to the previous screen inside the nested stack even if there's another navigator as the parent.
 
-- **Navigation actions are handled by current navigator and bubble up if couldn't be handled.**
+### Navigation actions are handled by current navigator and bubble up if couldn't be handled
 
-  For example, if you're calling `navigation.goBack()` in a nested screen, it'll only go back in the parent navigator if you're already on the first screen of the navigator. Other actions such as `navigate` work similarly, i.e. navigation will happen in the nested navigator and if the nested navigator couldn't handle it, then the parent navigator will try to handle it. In the above example, when calling `navigate('Settings')`, inside `Profile` screen, the nested stack navigator will handle it, but if you call `navigate('Home')`, the parent tab navigator will handle it.
+For example, if you're calling `navigation.goBack()` in a nested screen, it'll only go back in the parent navigator if you're already on the first screen of the navigator. Other actions such as `navigate` work similarly, i.e. navigation will happen in the nested navigator and if the nested navigator couldn't handle it, then the parent navigator will try to handle it. In the above example, when calling `navigate('Settings')`, inside `Profile` screen, the nested stack navigator will handle it, but if you call `navigate('Home')`, the parent tab navigator will handle it.
 
-- **Navigator specific methods are available in the navigators nested inside**
+### Navigator specific methods are available in the navigators nested inside
 
-  For example, if you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer` methods etc. will also be available on the `navigation` prop in the screen's inside the stack navigator. But say you have a stack navigator as the parent of the drawer, then the screens inside the stack navigator won't have access to these methods, because they aren't nested inside the drawer.
+For example, if you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer` methods etc. will also be available on the `navigation` prop in the screen's inside the stack navigator. But say you have a stack navigator as the parent of the drawer, then the screens inside the stack navigator won't have access to these methods, because they aren't nested inside the drawer.
 
-  Similarly, if you have a tab navigator inside stack navigator, the screens in the tab navigator will get the `push` and `replace` methods for stack in their `navigation` prop.
+Similarly, if you have a tab navigator inside stack navigator, the screens in the tab navigator will get the `push` and `replace` methods for stack in their `navigation` prop.
 
-- **Parent navigator's UI is rendered on top of child navigator.**
+### Parent navigator's UI is rendered on top of child navigator
 
-  For example, when you nest a stack navigator inside a drawer navigator, you'll see that the drawer appears above the stack navigator's header. However, if you nest the drawer navigator inside a stack, the drawer will appear below the header. This is an important point to consider when deciding how to nest your navigators.
+For example, when you nest a stack navigator inside a drawer navigator, you'll see that the drawer appears above the stack navigator's header. However, if you nest the drawer navigator inside a stack, the drawer will appear below the header. This is an important point to consider when deciding how to nest your navigators.
 
-  In your app, you will probably use one of these patterns depending on the behavior you want:
+In your app, you will probably use these patterns depending on the behavior you want:
 
-  - Stack navigator nested inside drawer navigator - The drawer appears over the header from the stack.
-  - Tab navigator nested inside stack navigator - New screens cover the tab bar when you push them.
-  - Stack navigator nested inside tab navigator - The tab bar is always visible. Usually pressing the tab again also pops the stack to top.
+- Stack navigators nested inside each screen of drawer navigator - The drawer appears over the header from the stack.
+- Tab navigator nested inside the initial screen of stack navigator - New screens cover the tab bar when you push them.
+- Stack navigators nested inside each screen of tab navigator - The tab bar is always visible. Usually pressing the tab again also pops the stack to top.
 
 ## Navigating to a screen in a nested navigator
 
@@ -122,8 +124,8 @@ navigation.navigate('Root', {
   params: {
     screen: 'Sound',
     params: {
-      screen: 'Media'
-    }
+      screen: 'Media',
+    },
   },
 });
 ```
