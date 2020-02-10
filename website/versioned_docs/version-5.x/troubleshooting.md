@@ -7,6 +7,8 @@ original_id: troubleshooting
 
 This section attempts to outline issues that users frequently encounter when first getting accustomed to using React Navigation. These issues may or may not be related to React Navigation itself.
 
+Before troubleshooting an issue, make sure that you have upgraded to **the latest available versions** of the packages. You can install the latest versions by installing the packages again (e.g. `npm install package-name`).
+
 ## I'm getting an error "Unable to resolve module" after updating to the latest version
 
 This might happen for 2 reasons:
@@ -67,16 +69,12 @@ react-native unlink react-native-gesture-handler
 If you're testing on iOS and use Mac, make sure you have run `pod install` in the `ios/` folder:
 
 ```sh
-cd ios; pod install; cd ..
+cd ios
+pod install
+cd ..
 ```
 
 Now rebuild the app and test on your device or simulator.
-
-## I linked RNGestureHandler library but gestures won't work on Android
-
-This might happen if you didn't update your MainActivity.java file (or wherever you create an instance of ReactActivityDelegate), so that it uses the root view wrapper provided by this library.
-
-Check how to do it [here](https://software-mansion.github.io/react-native-gesture-handler/docs/getting-started.html).
 
 ## Pressing buttons don't do anything
 
