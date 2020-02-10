@@ -281,7 +281,7 @@ Function, that given `{ focused: boolean, color: string, size: number }` returns
 
 #### `gestureEnabled`
 
-Whether you can use gestures to open or close the drawer. Defaults to `true` on iOS, `false` on Android.
+Whether you can use gestures to open or close the drawer. Defaults to `true`.
 
 #### `unmountOnBlur`
 
