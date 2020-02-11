@@ -16,7 +16,7 @@ Deep linking lets you open your app by passing a URL into it and retrieving the 
 
 ## Overview
 
-To activate deep linking in your app, you're going to need some configuration, varying on whether your project is using Expo or bare React Native. You can check how to do it in [deep linking docs](https://reactnavigation.org/docs/en/deep-linking.html). In our example app, we will use the Expo managed workflow. The guide will focus on creating the deep linking configuration and not on creating the components themselves, but you can always check the full implementation in the [github repo](link here)
+To activate deep linking in your app, you're going to need some configuration, varying on whether your project is using Expo or bare React Native. You can check how to do it in [deep linking docs](https://reactnavigation.org/docs/en/deep-linking.html). In our example app, we will use the Expo managed workflow. The guide will focus on creating the deep linking configuration and not on creating the components themselves, but you can always check the full implementation in the [github repo](https://github.com/WoLewicki/DeepLinkingExample).
 
 ## Getting Started
 
