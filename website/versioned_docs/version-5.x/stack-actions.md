@@ -5,7 +5,7 @@ sidebar_label: StackActions
 original_id: stack-actions
 ---
 
-`StackActions` is an object containing methods for generating actions specific to stack-based navigators. Its methods expand upon the actions available in [`NavigationActions`](navigation-actions.html).
+`StackActions` is an object containing methods for generating actions specific to stack-based navigators. Its methods expand upon the actions available in [`CommonActions`](navigation-actions.html).
 
 The following actions are supported:
 
@@ -22,7 +22,7 @@ The `replace` action allows to replace a route in the navigation state. It takes
 import { StackActions } from '@react-navigation/native';
 
 navigation.dispatch(
-  CommonActions.replace('Profile', {
+  StackActions.replace('Profile', {
     user: 'jane',
   })
 );
@@ -36,7 +36,7 @@ If you want to replace a particular route, you can add a `source` property refer
 import { StackActions } from '@react-navigation/native';
 
 navigation.dispatch({
-  ...CommonActions.replace('Profile', {
+  ...StackActions.replace('Profile', {
     user: 'jane',
   }),
   source: route.key,
