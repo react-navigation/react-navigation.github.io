@@ -23,6 +23,20 @@ For React Navigation 5, we went with scoped packages (e.g. `@react-navigation/st
 - `react-navigation-material-bottom-tabs` -> `@react-navigation/material-bottom-tabs`
 - `react-navigation-drawer` -> `@react-navigation/drawer`
 
+## Navigation Container
+
+In React Navigation 5.x there's no `createAppContainer` which provided screens with navigation context. You'll need to wrap your app with [NavigationContainer](app-containers.html) provider.
+
+```js
+import { NavigationContainer } from '@react-navigation/native';
+
+export default function App() {
+  return <NavigationContainer>{/*...*/}</NavigationContainer>
+}
+```
+
+The `onNavigationStateChange` prop on the AppContainer is now available as `onStateChange` on NavigationContainer.
+
 ## Configuring the navigator
 
 In React Navigation 4.x, we used to statically configure our navigator to `createXNavigator` functions. The first parameter was an object containing route configuration, and the second parameter was configuration for the navigator.
