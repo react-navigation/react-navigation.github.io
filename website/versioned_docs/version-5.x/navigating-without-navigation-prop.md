@@ -68,3 +68,59 @@ export function push(...args) {
 Note that a stack navigators needs to be rendered to handle this action. You may want to check the [docs for nesting](https://reactnavigation.org/docs/nesting-navigators.html#navigating-to-a-screen-in-a-nested-navigator) for more details.
 
 When writing tests, you may mock the navigation functions, and make assertions on whether the correct functions are called with the correct parameters.
+
+## Handling initialization
+
+When using this pattern, you need to keep few things in mind to avoid crashes in your app.
+
+- The ref is set only after the navigation container renders
+- A navigator needs to be rendered to be able to handle actions
+
+If you try to navigate without rendering a navigator or before the navigator finishes mounting, it will throw and crash your app if not handled. So you'll need to add an additional check to decide what to do until your app mounts.
+
+For an example, consider the following scenario, you have a screen somewhere in the app, and that screen dispatches a redux action on `useEffect`/`componentDidMount`. You are listening for this action in your middleware and try to perform navigation when you get it. This will throw an error, because by this time, the parent navigator hasn't finished mounting. Parent's `useEffect`/`componentDidMount` is always called **after** child's `useEffect`/`componentDidMount`.
+
+To avoid this, you can keep set a ref to tell you that your app has finished mounting, and check that ref before performing any navigation. To do this, we can use `useEffect` in our root component:
+
+```js
+// App.js
+
+import { NavigationContainer } from '@react-navigation/native';
+import { navigationRef, isMountedRef } from './RootNavigation';
+
+export default function App() {
+  React.useEffect(() => {
+    isMountedRef.current = true;
+
+    return () => isMountedRef.current = false;
+  }, [])
+
+  return (
+    <NavigationContainer ref={navigationRef}>
+      {/* ... */}
+    </NavigationContainer>
+  );
+}
+```
+
+Also export this ref from our `RootNavigation`:
+
+```js
+// RootNavigation.js
+
+import * as React from 'react';
+
+export const isMountedRef = React.createRef();
+
+export const navigationRef = React.createRef();
+
+export function navigate(name, params) {
+  if (isMountedRef.current && navigationRef.current) {
+    // Perform navigation if the app has mounted
+    navigationRef.current.navigate(name, params);
+  } else {
+    // You can decide what to do if the app hasn't mounted
+    // You can ignore this, or add these actions to a queue you can call later
+  }
+}
+```
