@@ -65,15 +65,11 @@ Next, we need to link these libraries. The steps depends on your React Native ve
 
   On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
 
-  To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
+  If you're on a Mac and developing for iOS, you need to install pods to complete the linking. Make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
 
   ```sh
-  cd ios
-  pod install
-  cd ..
+  cd ios; pod install; cd ..
   ```
-
-  > Note: This step is for iOS development on Mac. If you're not using a Mac, then skip this step.
 
   To finalize installation of `react-native-screens` for Android, add the following two lines to `dependencies` section in `android/app/build.gradle`:
 
