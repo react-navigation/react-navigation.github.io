@@ -145,5 +145,3 @@ Here we will mention some of the consequences of using nested navigators in the 
 ## Summary
 
 Deep linking is a very common and useful tool for managing apps with navigation included, but properly integrating it can be sometimes not very straightforward. I tried to show you the crucial aspects of deep linking configuration in this guide. I hope that after reading this article, the usage of these concepts won't be a problem for you.
-
-Do you have any questions? Contact me via [github](https://github.com/WoLewicki).
