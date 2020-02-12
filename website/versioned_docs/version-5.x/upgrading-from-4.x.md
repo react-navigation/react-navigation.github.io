@@ -438,6 +438,16 @@ Previously, the `jumpTo` method also took an optional `key` to specify which scr
 
 See [`jumpTo` action docs](https://reactnavigation.org/docs/tab-actions.html#jumpto) for more details.
 
+## Scrollables
+
+React Navigation 4.x exported its own `ScrollView`, `FlatList`, and `SectionList` components. These were wrappers around the scrollable components [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) and would scroll to top when tapping on an active tab.
+
+However, this was very restrictive since you may want to use another scrollable implementation which we didn't wrap. So now we have a [`useScrollToTop`](use-scroll-to-top.html) hook that can be used with any scrollable component.
+
+## Higher order components
+
+React Navigation 4.x included higher order components such as `withNavigation` and `withNavigationFocus`. Now they live in the [compat package](compatibility.html).
+
 ## Navigation state in Redux
 
 We have long recommended not to store navigation state in Redux. We have finally dropped support for storing navigation state in Redux in React Navigation 5.x.
