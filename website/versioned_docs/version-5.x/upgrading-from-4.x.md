@@ -197,7 +197,9 @@ function SelectionScreen({ navigation }) {
 
   navigation.setOptions({
     title:
-      selectionCount === 0 ? 'Select items' : `${selectionCount} items selected`,
+      selectionCount === 0
+        ? 'Select items'
+        : `${selectionCount} items selected`,
   });
 
   // ...
@@ -284,18 +286,20 @@ navigation.navigate('App');
 With React Navigation 5.x, we can dynamically define and alter the screen definitions of a navigator, which makes Switch Navigator unnecessary. The above pattern can be now defined declaratively:
 
 ```js
-function App() {
+export default function App() {
   return (
-    <Stack.Navigator>
-      {isLoggedIn ? (
-        <>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Settings" component={SettingsScreen} />
-        </>
-      ) : (
-        <Stack.Screen name="SignIn" component={SignInScreen} />
-      )}
-    </Stack.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator>
+        {isLoggedIn ? (
+          <>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Settings" component={SettingsScreen} />
+          </>
+        ) : (
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 ```
@@ -354,9 +358,9 @@ In addition, there have been some changes to the way the navigation actions work
 
 One major difference is that a lot of methods used to take some parameters for controlling which screen and navigator it should be applied to and didn't follow a specific pattern.
 
-In this version, we have standardized this and made it possible to use with any action without the action needing to support it. The new  `target` and `source` properties provides control over which navigator should handle an action. See [docs for dispatch](https://reactnavigation.org/docs/navigation-prop.html#dispatch---send-an-action-to-the-router) for more details.
+In this version, we have standardized this and made it possible to use with any action without the action needing to support it. The new `target` and `source` properties provides control over which navigator should handle an action. See [docs for dispatch](https://reactnavigation.org/docs/navigation-prop.html#dispatch---send-an-action-to-the-router) for more details.
 
-You can import the action creators from the [compatibility layer](compatibility.md) to preserve old behavior for the actions.
+You can import the action creators from the [compatibility layer](compatibility.html) to preserve old behavior for the actions.
 
 More differences in the signatures are listed below:
 
@@ -390,7 +394,7 @@ For example, this will reset the navigator's state to have one screen called `Ho
 
 ```js
 navigation.reset({
-  routes: [{ name: 'Home' }]
+  routes: [{ name: 'Home' }],
 });
 ```
 

@@ -137,7 +137,7 @@ Firing the `setParams` action allows a screen to change the params in the route,
 function ProfileScreen({ navigation: { setParams } }) {
   render() {
     return (
-            <Button
+      <Button
         onPress={() =>
           navigation.setParams({
             friends:

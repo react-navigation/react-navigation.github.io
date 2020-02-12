@@ -225,12 +225,14 @@ function HomeTabs() {
 
 const RootStack = createStackNavigator();
 
-function App() {
+export default function App() {
   return (
-    <RootStack.Navigator>
-      <RootStack.Screen name="Home" component={HomeTabs} />
-      <RootStack.Screen name="Settings" component={SettingsScreen} />
-    </RootStack.Navigator>
+    <NavigationContainer>
+      <RootStack.Navigator>
+        <RootStack.Screen name="Home" component={HomeTabs} />
+        <RootStack.Screen name="Settings" component={SettingsScreen} />
+      </RootStack.Navigator>
+    </NavigationContainer>
   );
 }
 ```
