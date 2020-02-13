@@ -5,7 +5,11 @@ sidebar_label: createBottomTabNavigator
 original_id: bottom-tab-navigator
 ---
 
-![Using bottom-tabs navigator](/docs/assets/navigators/tabs/bottom-tabs-demo.gif)
+<div style="display: flex; justify-content: center">
+  <video width="60%" playsinline autoplay muted loop>
+    <source src="/docs/assets/navigators/tabs/bottom-tabs-demo.mov">
+  <video>
+</div>
 
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 

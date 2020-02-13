@@ -5,7 +5,11 @@ sidebar_label: createDrawerNavigator
 original_id: drawer-navigator
 ---
 
-![Using drawer navigator](/docs/assets/navigators/drawer/drawer-demo.gif)
+<div style="display: flex; justify-content: center">
+  <video width="60%" playsinline autoplay muted loop>
+    <source src="/docs/assets/navigators/drawer/drawer.mov">
+  <video>
+</div>
 
 Component that renders a navigation drawer which can be opened and closed via gestures.
 

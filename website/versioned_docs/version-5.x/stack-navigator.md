@@ -5,7 +5,11 @@ sidebar_label: createStackNavigator
 original_id: stack-navigator
 ---
 
-![Using stack navigator](/docs/assets/navigators/stack/stack-demo.gif)
+<div style="display: flex; justify-content: center">
+  <video  width="60%" playsinline autoplay muted loop>
+    <source src="/docs/assets/navigators/stack/stack.mov">
+  <video>
+</div>
 
 Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
