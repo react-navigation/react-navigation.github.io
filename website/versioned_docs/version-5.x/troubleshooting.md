@@ -11,12 +11,11 @@ Before troubleshooting an issue, make sure that you have upgraded to **the lates
 
 ## I'm getting an error "Unable to resolve module" after updating to the latest version
 
-This might happen for 2 reasons:
+This might happen for 3 reasons:
 
-- Incorrect cache of Metro bundler
-- Missing peer dependency
+### Stale cache of Metro bundler
 
-If the module points to a local file (i.e. the name of the module starts with `./`), then it's probably due to incorrect cache. To fix this, try the following solutions.
+If the module points to a local file (i.e. the name of the module starts with `./`), then it's probably due to stale cache. To fix this, try the following solutions.
 
 If you're using Expo, run:
 
@@ -30,6 +29,8 @@ If you're not using Expo, run:
 npx react-native start --reset-cache
 ```
 
+### Missing peer dependency
+
 If the module points to an npm package (i.e. the name of the module doesn't with `./`), then it's probably due to a missing peer dependency. To fix this, install the dependency in your project:
 
 ```sh
@@ -37,6 +38,22 @@ npm install name-of-the-module
 ```
 
 Sometimes it might even be due to a corrupt installation. If clearing cache didn't work, try deleting your `node_modules` folder and run `npm install` again.
+
+### Missing extensions in metro configuration
+
+Sometimes the error may look like this:
+
+```sh
+Error: While trying to resolve module "@react-navigation/native" from file "/path/to/src/App.js", the package "/path/to/node_modules/@react-navigation/native/package.json" was successfully found. However, this package itself specifies a "main" module field that could not be resolved ("/path/to/node_modules/@react-navigation/native/src/index.tsx"
+```
+
+This can happen if you have a custom configuration for metro and haven't specified `ts` and `tsx` as valid extensions. These extensions are present in the default configuration. To check if this is the issue, look for a `metro.config.js` file in your project and check if you have specified the [`sourceExts`](https://facebook.github.io/metro/docs/en/configuration#sourceexts) option. It should at least have the following configuration:
+
+```js
+sourceExts: ['js', 'json', 'ts', 'tsx'];
+```
+
+If it's missing these extensions, add them and then clear metro cache as shown in the section above.
 
 ## I'm getting "SyntaxError in @react-navigation/xxx/xxx.tsx"
 
@@ -96,4 +113,26 @@ export default function App() {
     </View>
   );
 }
+```
+
+## I get the warning "We found non-serializable values in the navigation state"
+
+This can happen if you are passing non-serializable values such as class instances, functions etc. in params. React Navigation warns you in this case because this can break other functionality such [state persistence](state-persistence.html), [deep linking](deep-linking.html) etc.
+
+Example of common use cases for passing functions in params are the following:
+
+- To pass a callback to use in a header button. This can be achieved using `navigation.setOptions` instead. See the [guide for header buttons](https://reactnavigation.org/docs/en/header-buttons.html#header-interaction-with-its-screen-component) for examples.
+- To pass a callback to the next screen which it can call to pass some data back. You can usually achieve it using `navigate` instead. See the [guide for params](params.html) for examples.
+- To pass complex data to another screen. Instead of passing the data `params`, you can store that complex data somewhere else (like a global store), and pass an id instead. Then the screen can get the data from the global store using the id.
+
+If you don't use state persistence or deep link to the screen which accepts functions in params, then you can ignore the warning. To ignore it, you can use `YellowBox.ignoreWarnings`.
+
+Example:
+
+```js
+import { YellowBox } from 'react-native';
+
+YellowBox.ignoreWarnings([
+  'We found non-serializable values in the navigation state',
+]);
 ```
