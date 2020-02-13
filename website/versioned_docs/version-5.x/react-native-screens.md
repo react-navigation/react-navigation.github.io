@@ -11,7 +11,7 @@ With the advent of `react-native-screens`, the native screen optimization is bro
 
 ## Setup when you are using Expo
 
-By default expo already included `react-native-screens`, all you need to do is pasting the following snippet before your navigation stacks are rendered (typically in an `index.js` or `App.js` file):
+By default expo already included `react-native-screens`, all you need to do is paste the following snippet before your navigation stacks are rendered (typically in an `index.js` or `App.js` file):
 
 ```js
 // Before rendering any navigation stack
