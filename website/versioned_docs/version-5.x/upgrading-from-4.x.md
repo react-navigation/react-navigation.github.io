@@ -448,6 +448,8 @@ However, this was very restrictive since you may want to use another scrollable 
 
 React Navigation 4.x included higher order components such as `withNavigation` and `withNavigationFocus`. Now they live in the [compat package](compatibility.html).
 
+We also have documentation on how to use the new hooks such as [`useFocusEffect`](use-focus-effect.html) if you're using class components.
+
 ## Navigation state in Redux
 
 We have long recommended not to store navigation state in Redux. We have finally dropped support for storing navigation state in Redux in React Navigation 5.x.

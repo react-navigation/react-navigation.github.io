@@ -106,7 +106,9 @@ header: ({ scene, previous, navigation }) => {
 };
 ```
 
-By default, there is one floating header which renders headers for multiple screens on iOS. These headers include animations to smoothly switch to one another. When using a custom header, it's recommended set the `headerMode` prop on the navigator to `screen` so that you don't have to implement animations.
+By default, there is one floating header which renders headers for multiple screens on iOS. These headers include animations to smoothly switch to one another.
+
+When using a custom header, it's recommended set the `headerMode` prop on the navigator to `screen` so that you don't have to implement animations.
 
 You should also specify a height in `headerStyle` to avoid glitches:
 
@@ -117,6 +119,21 @@ headerStyle: {
 ```
 
 To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
+
+If you want your custom header to animate with screen transitions and want to keep `headerMode` as `float`, you can interpolate on the `scene.progress.current` and `scene.progress.next` props. For example, following will cross-fade the header:
+
+```js
+const progress = Animated.add(scene.progress.current, scene.progress.next || 0);
+
+const opacity = progress.interpolate({
+  inputRange: [0, 1, 2],
+  outputRange: [0, 1, 0],
+});
+
+return (
+  <Animated.View style={{ opacity }}>{/* Header content */}</Animated.View>
+);
+```
 
 #### `headerShown`
 
@@ -744,13 +761,15 @@ import { TransitionPresets } from '@react-navigation/stack';
 </Stack.Navigator>;
 ```
 
+> Note: The `ModalPresentationIOS` preset needs to be configured for the whole stack for it to work correctly. If you want few screens to have this transition, you can add a modal stack at root with this transition, and nest a regular stack inside it.
+
 ### Transparent modals
 
 A transparent modal is like a modal dialog which overlays the screen. The previous screen still stays visible underneath. To get a transparent modal screen, it's usually easier to create a separate modal stack. In the modal stack, you will want to configure few things:
 
 - Set the `mode` prop to `modal`
 - Set the card background to transparent using `cardStyle`
-- Use a fade animation instead of the default animation
+- Use a custom animation instead of the default platform animation (we'll use fade in this case)
 - Disable the header with `headerMode="none"` (optional)
 - Enable the overlay with `cardOverlayEnabled: true` (optional)
 
