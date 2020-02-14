@@ -37,7 +37,8 @@
       "version-4.x-localization",
       "version-4.x-web-support",
       "version-4.x-function-after-focusing-screen",
-      "version-4.x-react-native-screens"
+      "version-4.x-react-native-screens",
+      "version-4.x-upgrading-from-3.x"
     ],
     "API Reference": [
       "version-4.x-navigation-prop",
