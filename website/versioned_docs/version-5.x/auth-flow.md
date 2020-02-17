@@ -66,7 +66,7 @@ export default function App({ navigation }) {
           return {
             ...prevState,
             isSignout: true,
-            userToken: undefined,
+            userToken: null,
           };
       }
     },
@@ -150,7 +150,7 @@ if (state.isLoading) {
 return (
   <AuthContext.Provider value={authContext}>
     <Stack.Navigator>
-      {state.userToken === null ? (
+      {state.userToken == null ? (
         // No token found, user isn't signed in
         <Stack.Screen
           name="SignIn"
