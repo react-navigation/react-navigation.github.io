@@ -52,14 +52,14 @@ function App() {
   const [initialState, setInitialState] = React.useState();
 
   React.useEffect(() => {
-    Promise.race(
+    Promise.race([
       getInitialState(),
       new Promise(resolve =>
         // Timeout in 150ms if `getInitialState` doesn't resolve
         // Workaround for https://github.com/facebook/react-native/issues/25675
         setTimeout(resolve, 150)
       )
-    )
+    ])
       .catch(e => {
         console.error(e);
       })
