@@ -4,7 +4,11 @@ title: Drawer navigation
 sidebar_label: Drawer navigation
 ---
 
-![Using drawer navigator](/docs/assets/navigators/drawer/drawer-demo.gif)
+<div style="display: flex; justify-content: center">
+  <video width="60%" playsinline autoplay muted loop>
+    <source src="/docs/assets/navigators/drawer/drawer.mov"></source>
+  </video>
+</div>
 
 Common pattern in navigation is to use drawer from left (sometimes right) side for navigating between screens.
 

@@ -4,6 +4,12 @@ title: createDrawerNavigator
 sidebar_label: createDrawerNavigator
 ---
 
+<div style="display: flex; justify-content: center">
+  <video width="60%" playsinline autoplay muted loop>
+    <source src="/docs/assets/navigators/drawer/drawer.mov"></source>
+  </video>
+</div>
+
 Component that renders a navigation drawer which can be opened and closed via gestures.
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.html), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/master/packages/drawer):

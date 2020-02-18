@@ -62,7 +62,7 @@ So we now have a stack with two routes: 1) the `Home` route 2) the `Details` rou
 
 ## Navigate to a route multiple times
 
-<samp id="multiple-navigate" />
+<samp id="multiple-navigate"></samp>
 
 ```js
 function DetailsScreen({ navigation }) {
@@ -91,7 +91,11 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 />
 ```
 
-![Stack navigation pushing routes to stack](/docs/assets/navigators/stack/push_stack_nav-demo.gif)
+<div style="display: flex; justify-content: center">
+  <video width="60%" playsinline autoplay muted loop>
+    <source src="/docs/assets/navigators/stack/stack-push.mov"></source>
+  </video>
+</div>
 
 Each time you call `push` we add a new route to the navigation stack. When you call `navigate` it first tries to find an existing route with that name, and only pushes a new route if there isn't yet one on the stack.
 
@@ -123,7 +127,7 @@ function DetailsScreen({ navigation }) {
 
 Another common requirement is to be able to go back _multiple_ screens -- for example, if you are several screens deep in a stack and want to dismiss all of them to go back to the first screen. In this case, we know that we want to go back to `Home` so we can use `navigate('Home')` (not `push`! try that out and see the difference). Another alternative would be `navigation.popToTop()`, which goes back to the first screen in the stack.
 
-<samp id="pop-to-top" />
+<samp id="pop-to-top"></samp>
 
 ```js
 function DetailsScreen({ navigation }) {

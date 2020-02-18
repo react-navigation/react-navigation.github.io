@@ -2,7 +2,6 @@
 id: drawer-based-navigation
 title: Drawer navigation
 sidebar_label: Drawer navigation
-original_id: drawer-based-navigation
 ---
 
 ![Using drawer navigator](/docs/assets/navigators/drawer/drawer-demo.gif)
