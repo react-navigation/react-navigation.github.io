@@ -38,7 +38,7 @@ Thanks to the great work of Krzysztof Magiera for [React Native Screens](https:/
 <img src="/blog/assets/android-native-stack.gif" height="530" />
 <img src="/blog/assets/ios-native-stack.gif" height="530" />
 
-We believe you will find it useful in your projects and strongly encourage you to get acquainted with our [documentation](https://reactnavigation.org/docs/en/native-stack-navigator.html). Things that I’m the most excited about are iOS header animations!
+We believe you will find it useful in your projects and strongly encourage you to get acquainted with our [documentation](https://github.com/kmagiera/react-native-screens/native-stack). Things that I’m the most excited about are iOS header animations!
 
 Please, note that we don’t intend this component to be a drop-off replacement for the currently existing stack. There are many benefits of using JavaScript-based stack. Moreover, the range of customization of the native stack is very limited and probably won’t get broader due to the limitations of native API.
 
