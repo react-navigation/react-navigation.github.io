@@ -10,8 +10,6 @@ As a potential user of the library, it's important to know what you can and cann
 
 React Navigation implements animations and gestures using [Reanimated](https://software-mansion.github.io/react-native-reanimated/) and [Gesture Handler](https://kmagiera.github.io/react-native-gesture-handler/) which run in the native thread. This makes sure that the animations and gestures are smooth even if the JavaScript thread is blocked. However, you might still experience frame drops when rendering expensive components which render or update many complex views since rendering also happens on the same thread that the animations run in. We're also limited by the performance of Reanimated and Gesture Handler libraries.
 
-The new [native stack navigator](native-stack-navigator.md) uses the platform navigation primitives. While the customization options are limited with it, you'll get much better performance with it.
-
 ## Right-to-left (RTL) layout support
 
 We try to handle RTL layouts properly in React Navigation, however the team working on React Navigation is fairly small and we do not have the bandwidth or processes at the moment to test all changes against RTL layouts. So you might encounter issues with RTL layouts.

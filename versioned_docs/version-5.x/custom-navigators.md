@@ -13,7 +13,6 @@ Under the hood, navigators are plain React components.
 We include some commonly needed navigators such as:
 
 - [`createStackNavigator`](stack-navigator.md) - Renders one screen at a time and provides transitions between screens. When a new screen is opened it is placed on top of the stack.
-- [`createNativeStackNavigator`](native-stack-navigator.md) - Similar to `createStackNavigator`, but implemented using native navigation primitives such as `UINavigationController` on iOS and `Fragment` on Android.
 - [`createDrawerNavigator`](drawer-navigator.md) - Provides a drawer that slides in from the left of the screen by default.
 - [`createBottomTabNavigator`](bottom-tab-navigator.md) - Renders a tab bar that lets the user switch between several screens.
 - [`createMaterialTopTabNavigator`](material-top-tab-navigator.md) - Renders tab view which lets the user switch between several screens using swipe gesture or the tab bar.
