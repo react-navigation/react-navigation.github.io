@@ -1,0 +1,19 @@
+{
+  "id": "custom-navigators",
+  "title": "Custom navigators",
+  "description": "Navigators allow you to define your application's navigation structure. Navigators also render common elements such as headers and tab bars which you can configure.",
+  "source": "@site/docs/custom-navigators.md",
+  "permalink": "/docs/next/custom-navigators",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/custom-navigators.md",
+  "version": "next",
+  "sidebar_label": "Custom navigators",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Custom routers",
+    "permalink": "/docs/next/custom-routers"
+  },
+  "next": {
+    "title": "Supported React Native versions",
+    "permalink": "/docs/next/supported-react-native-versions"
+  }
+}

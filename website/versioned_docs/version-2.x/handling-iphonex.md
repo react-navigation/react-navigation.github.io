@@ -1,8 +1,7 @@
 ---
-id: version-2.x-handling-iphonex
+id: handling-iphonex
 title: iPhone X support
 sidebar_label: iPhone X support
-original_id: handling-iphonex
 ---
 
 By default, React Navigation aids in ensuring your application displays correctly on the iPhoneX. It does so by using `SafeAreaView` inside of UI elements that may interact with the sensor cluster ("the notch") or the home activity indicator.

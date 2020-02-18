@@ -1,0 +1,19 @@
+{
+  "id": "version-1.x/custom-routers",
+  "title": "Custom routers",
+  "description": "You can make your own router by building an object with the following functions:",
+  "source": "@site/versioned_docs/version-1.x/custom-routers.md",
+  "permalink": "/docs/1.x/custom-routers",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-1.x/custom-routers.md",
+  "version": "1.x",
+  "sidebar_label": "Custom routers",
+  "sidebar": "version-1.x/docs",
+  "previous": {
+    "title": "Custom navigators",
+    "permalink": "/docs/1.x/custom-navigators"
+  },
+  "next": {
+    "title": "Navigation views",
+    "permalink": "/docs/1.x/navigation-views"
+  }
+}

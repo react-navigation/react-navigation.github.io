@@ -1,8 +1,7 @@
 ---
-id: version-4.x-troubleshooting
+id: troubleshooting
 title: Troubleshooting
 sidebar_label: Troubleshooting
-original_id: troubleshooting
 ---
 
 This section attempts to outline issues that can happen during setup and may not be related to React Navigation itself. Also see [common mistakes](common-mistakes.html).

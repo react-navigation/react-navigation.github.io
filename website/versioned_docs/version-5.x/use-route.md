@@ -1,8 +1,7 @@
 ---
-id: version-5.x-use-route
+id: use-route
 title: useRoute
 sidebar_label: useRoute
-original_id: use-route
 ---
 
 `useRoute` is a hook which gives access to `route` object. It's useful when you cannot pass the `route` prop into the component directly, or don't want to pass it in case of a deeply nested child.
@@ -11,7 +10,7 @@ original_id: use-route
 
 ## Example
 
-<samp id="use-route-example">
+<samp id="use-route-example"></samp>
 
 ```js
 import * as React from 'react';

@@ -1,0 +1,19 @@
+{
+  "id": "version-5.x/params",
+  "title": "Passing parameters to routes",
+  "description": "Remember when I said \"more on that later when we talk about `params`!\"? Well, the time has come.",
+  "source": "@site/versioned_docs/version-5.x/params.md",
+  "permalink": "/docs/params",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-5.x/params.md",
+  "version": "5.x",
+  "sidebar_label": "Passing parameters to routes",
+  "sidebar": "version-5.x/docs",
+  "previous": {
+    "title": "Moving between screens",
+    "permalink": "/docs/navigating"
+  },
+  "next": {
+    "title": "Configuring the header bar",
+    "permalink": "/docs/headers"
+  }
+}

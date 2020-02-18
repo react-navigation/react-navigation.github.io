@@ -1,8 +1,7 @@
 ---
-id: version-4.x-stack-actions
+id: stack-actions
 title: StackActions reference
 sidebar_label: StackActions
-original_id: stack-actions
 ---
 
 `StackActions` is an object containing methods for generating actions specific to stack-based navigators. Its methods expand upon the actions available in [`NavigationActions`](navigation-actions.html).

@@ -1,0 +1,13 @@
+{
+  "permalink": "/blog/2020/02/06/react-navigation-5.0",
+  "source": "@site/blog/2020-02-06-react-navigation-5.0.md",
+  "description": "Exactly two years ago, we published the first stable version of React Navigation. Throughout this time, the library has been actively developed by adding  many new features and bug fixes. The essence of React Navigation was that it was a project that was to become not only a project of individual programmers adapting it to their requirements, but a community as a whole, hence the emphasis on versatility, extensibility, and the tendency to reconsider the assumptions if there were such needs. Thanks to this, the Library has been undergoing metamorphosis of both incremental and completely reorganized shape.",
+  "date": "2020-02-06T00:00:00.000Z",
+  "tags": [],
+  "title": "React Navigation 5.0 - A new way to navigate",
+  "truncated": false,
+  "nextItem": {
+    "title": "Using React Navigation 5 with UI Kitten",
+    "permalink": "/blog/2019/11/04/using-react-navigation-5-with-ui-kitten"
+  }
+}

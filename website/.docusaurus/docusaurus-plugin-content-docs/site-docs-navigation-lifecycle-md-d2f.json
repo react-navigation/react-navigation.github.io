@@ -1,0 +1,19 @@
+{
+  "id": "navigation-lifecycle",
+  "title": "Navigation lifecycle",
+  "description": "In a previous section, we worked with a stack navigator that has two screens (`Home` and `Details`) and learned how to use `navigation.navigate('RouteName')` to navigate between the routes.",
+  "source": "@site/docs/navigation-lifecycle.md",
+  "permalink": "/docs/next/navigation-lifecycle",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/navigation-lifecycle.md",
+  "version": "next",
+  "sidebar_label": "Navigation lifecycle",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Nesting navigators",
+    "permalink": "/docs/next/nesting-navigators"
+  },
+  "next": {
+    "title": "Opening a full-screen modal",
+    "permalink": "/docs/next/modal"
+  }
+}

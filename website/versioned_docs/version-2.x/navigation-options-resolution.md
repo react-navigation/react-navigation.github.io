@@ -1,8 +1,7 @@
 ---
-id: version-2.x-navigation-options-resolution
+id: navigation-options-resolution
 title: Navigation options resolution
 sidebar_label: Navigation options resolution
-original_id: navigation-options-resolution
 ---
 
 Each screen can configure various aspects about how it gets presented in the navigator that renders it. In the [Configuring the header bar](headers.html) section of the fundamentals documentation we explain the basics of how this works.

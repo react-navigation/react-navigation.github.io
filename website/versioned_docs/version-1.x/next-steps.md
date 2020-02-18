@@ -1,8 +1,7 @@
 ---
-id: version-1.x-next-steps
+id: next-steps
 title: Next steps
 sidebar_label: Next steps
-original_id: next-steps
 ---
 
 You are now familiar with how to create a `StackNavigator`, configure it on your screen components, navigate between routes, and display full-screen modals. `StackNavigator` and its related APIs will be the most frequently used tools in your React Navigation toolbelt, but there are problems that they don't solve. For example, you can't build tab-based navigation using a `StackNavigator` &mdash; for that, you need to use a [TabNavigator](tab-based-navigation.html).

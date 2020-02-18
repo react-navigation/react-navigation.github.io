@@ -1,0 +1,19 @@
+{
+  "id": "upgrading-from-4.x",
+  "title": "Upgrading from 4.x",
+  "description": "> This guide is a work in progress! As more people upgrade their apps we can continue to improve it. Please send pull requests to add any suggestions that you have from your upgrade experience.",
+  "source": "@site/docs/upgrading-from-4.x.md",
+  "permalink": "/docs/next/upgrading-from-4.x",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/upgrading-from-4.x.md",
+  "version": "next",
+  "sidebar_label": "Upgrading from 4.x",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Optimize memory usage and performance",
+    "permalink": "/docs/next/react-native-screens"
+  },
+  "next": {
+    "title": "Navigation prop reference",
+    "permalink": "/docs/next/navigation-prop"
+  }
+}

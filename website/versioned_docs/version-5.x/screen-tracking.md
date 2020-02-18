@@ -1,8 +1,7 @@
 ---
-id: version-5.x-screen-tracking
+id: screen-tracking
 title: Screen tracking for analytics
 sidebar_label: Screen tracking for analytics
-original_id: screen-tracking
 ---
 
 To track the currently active screen, we need to:

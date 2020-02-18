@@ -1,0 +1,19 @@
+{
+  "id": "version-1.x/tab-navigator",
+  "title": "TabNavigator reference",
+  "description": "```js",
+  "source": "@site/versioned_docs/version-1.x/tab-navigator.md",
+  "permalink": "/docs/1.x/tab-navigator",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-1.x/tab-navigator.md",
+  "version": "1.x",
+  "sidebar_label": "TabNavigator",
+  "sidebar": "api",
+  "previous": {
+    "title": "SwitchNavigator reference",
+    "permalink": "/docs/1.x/switch-navigator"
+  },
+  "next": {
+    "title": "DrawerNavigator reference",
+    "permalink": "/docs/1.x/drawer-navigator"
+  }
+}

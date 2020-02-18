@@ -1,0 +1,99 @@
+{
+  "version-4.x-docs": {
+    "Fundamentals": [
+      "version-4.x-getting-started",
+      "version-4.x-hello-react-navigation",
+      "version-4.x-navigating",
+      "version-4.x-navigation-lifecycle",
+      "version-4.x-params",
+      "version-4.x-headers",
+      "version-4.x-header-buttons",
+      "version-4.x-app-containers",
+      "version-4.x-modal",
+      "version-4.x-next-steps",
+      "version-4.x-glossary-of-terms",
+      "version-4.x-common-mistakes",
+      "version-4.x-troubleshooting",
+      "version-4.x-limitations"
+    ],
+    "Guides": [
+      "version-4.x-tab-based-navigation",
+      "version-4.x-drawer-based-navigation",
+      "version-4.x-auth-flow",
+      "version-4.x-handling-iphonex",
+      "version-4.x-status-bar",
+      "version-4.x-navigation-options-resolution",
+      "version-4.x-custom-android-back-button-handling",
+      "version-4.x-connecting-navigation-prop",
+      "version-4.x-navigating-without-navigation-prop",
+      "version-4.x-navigation-key",
+      "version-4.x-deep-linking",
+      "version-4.x-screen-tracking",
+      "version-4.x-themes",
+      "version-4.x-state-persistence",
+      "version-4.x-typescript",
+      "version-4.x-redux-integration",
+      "version-4.x-MST-integration",
+      "version-4.x-localization",
+      "version-4.x-web-support",
+      "version-4.x-function-after-focusing-screen",
+      "version-4.x-react-native-screens",
+      "version-4.x-upgrading-from-3.x"
+    ],
+    "API Reference": [
+      "version-4.x-navigation-prop",
+      "version-4.x-navigation-context",
+      "version-4.x-navigation-events",
+      {
+        "type": "subcategory",
+        "label": "Navigators",
+        "ids": [
+          "version-4.x-stack-navigator",
+          "version-4.x-stack-navigator-1.0",
+          "version-4.x-switch-navigator",
+          "version-4.x-animated-switch-navigator",
+          "version-4.x-drawer-navigator",
+          "version-4.x-bottom-tab-navigator",
+          "version-4.x-material-bottom-tab-navigator",
+          "version-4.x-material-top-tab-navigator"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Actions",
+        "ids": [
+          "version-4.x-navigation-actions",
+          "version-4.x-stack-actions",
+          "version-4.x-switch-actions",
+          "version-4.x-drawer-actions"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Helpers",
+        "ids": [
+          "version-4.x-with-navigation",
+          "version-4.x-with-navigation-focus",
+          "version-4.x-scrollables"
+        ]
+      }
+    ],
+    "Build your own Navigator": [
+      "version-4.x-custom-navigator-overview",
+      "version-4.x-routers",
+      "version-4.x-custom-navigators",
+      "version-4.x-custom-routers",
+      "version-4.x-navigation-views"
+    ],
+    "Additional Resources": [
+      "version-4.x-supported-react-native-versions",
+      "version-4.x-community-libraries-and-navigators",
+      "version-4.x-more-resources"
+    ],
+    "Meta": [
+      "version-4.x-pitch",
+      "version-4.x-alternatives",
+      "version-4.x-contributing"
+    ]
+  }
+}

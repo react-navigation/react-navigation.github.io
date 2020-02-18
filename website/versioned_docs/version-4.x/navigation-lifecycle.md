@@ -1,8 +1,7 @@
 ---
-id: version-4.x-navigation-lifecycle
+id: navigation-lifecycle
 title: Navigation lifecycle
 sidebar_label: Navigation lifecycle
-original_id: navigation-lifecycle
 ---
 
 In the previous section, we worked with a stack navigator that has two screens (`Home` and `Details`) and learned how to use `this.props.navigation.navigate('RouteName')` to navigate between the routes.

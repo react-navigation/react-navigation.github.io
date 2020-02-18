@@ -1,0 +1,19 @@
+{
+  "id": "version-5.x/redux-integration",
+  "title": "Redux integration",
+  "description": "It is extremely easy to use Redux in an app with React Navigation. It's basically no different than without React Navigation.",
+  "source": "@site/versioned_docs/version-5.x/redux-integration.md",
+  "permalink": "/docs/redux-integration",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-5.x/redux-integration.md",
+  "version": "5.x",
+  "sidebar_label": "Redux integration",
+  "sidebar": "version-5.x/docs",
+  "previous": {
+    "title": "Type checking with TypeScript",
+    "permalink": "/docs/typescript"
+  },
+  "next": {
+    "title": "Integrating with MobX State Tree",
+    "permalink": "/docs/MST-integration"
+  }
+}

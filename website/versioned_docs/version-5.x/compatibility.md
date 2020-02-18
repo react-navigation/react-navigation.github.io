@@ -1,8 +1,7 @@
 ---
-id: version-5.x-compatibility
+id: compatibility
 title: Compatibility layer
 sidebar_label: Compatibility layer
-original_id: compatibility
 ---
 
 > Note: Before following this guide, make sure that you've followed the [Getting Started](getting-started.html) guide to setup React Navigation 5 in your app.

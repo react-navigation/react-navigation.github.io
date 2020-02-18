@@ -1,8 +1,7 @@
 ---
-id: version-5.x-MST-integration
+id: MST-integration
 title: Integrating with MobX State Tree
 sidebar_label: MobX State Tree integration
-original_id: MST-integration
 ---
 
 > TODO: This guide is incomplete. Please help improve this by sending pull requests.

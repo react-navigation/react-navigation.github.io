@@ -1,0 +1,1521 @@
+{
+  "/": {
+    "component": "component---site-src-pages-index-jsc-4-f-f99"
+  },
+  "/blog": {
+    "component": "component---theme-blog-list-pagea-6-a-7ba",
+    "items": [
+      {
+        "content": "content---blogf-71-62f"
+      },
+      {
+        "content": "content---bloga-93-ddf"
+      },
+      {
+        "content": "content---blog-885-84a"
+      },
+      {
+        "content": "content---blog-66-b-4a7"
+      },
+      {
+        "content": "content---blog-1-b-7-7a4"
+      },
+      {
+        "content": "content---blog-802-c8d"
+      },
+      {
+        "content": "content---blog-298-3d6"
+      },
+      {
+        "content": "content---blog-892-71a"
+      },
+      {
+        "content": "content---blog-880-085"
+      }
+    ],
+    "metadata": "metadata---blogbbb-5f9"
+  },
+  "/blog/2018/02/06/react-navigation-1.0": {
+    "component": "component---theme-blog-post-pageccc-cab",
+    "content": "content---blog-2018-02-06-react-navigation-1-0-f-10-b6f"
+  },
+  "/blog/2018/04/06/react-navigation-2.0-rc": {
+    "component": "component---theme-blog-post-pageccc-cab",
+    "content": "content---blog-2018-04-06-react-navigation-2-0-rc-0-ad-622"
+  },
+  "/blog/2018/05/07/react-navigation-2.0": {
+    "component": "component---theme-blog-post-pageccc-cab",
+    "content": "content---blog-2018-05-07-react-navigation-2-0206-70f"
+  },
+  "/blog/2018/11/01/react-navigation-3.0-rc": {
+    "component": "component---theme-blog-post-pageccc-cab",
+    "content": "content---blog-2018-11-01-react-navigation-3-0-rc-272-cf6"
+  },
+  "/blog/2018/11/17/react-navigation-3.0": {
+    "component": "component---theme-blog-post-pageccc-cab",
+    "content": "content---blog-2018-11-17-react-navigation-3-03-bd-31a"
+  },
+  "/blog/2019/09/16/react-navigation-4.0": {
+    "component": "component---theme-blog-post-pageccc-cab",
+    "content": "content---blog-2019-09-16-react-navigation-4-0317-cfa"
+  },
+  "/blog/2019/10/17/react-navigation-native": {
+    "component": "component---theme-blog-post-pageccc-cab",
+    "content": "content---blog-2019-10-17-react-navigation-native-726-3f8"
+  },
+  "/blog/2019/11/04/using-react-navigation-5-with-ui-kitten": {
+    "component": "component---theme-blog-post-pageccc-cab",
+    "content": "content---blog-2019-11-04-using-react-navigation-5-with-ui-kitten-328-fb2"
+  },
+  "/blog/2020/02/06/react-navigation-5.0": {
+    "component": "component---theme-blog-post-pageccc-cab",
+    "content": "content---blog-2020-02-06-react-navigation-5-0-db-1-00e"
+  },
+  "/versions": {
+    "component": "component---site-src-pages-versions-js-18-b-bfe"
+  },
+  "/docs/1.x/:route": {
+    "component": "component---theme-doc-page-1-be-9be",
+    "docsMetadata": "docsMetadata---docs-1-x-route-59-f-03c"
+  },
+  "/docs/1.x/alternatives": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-alternativesd-4-b-b08"
+  },
+  "/docs/1.x/api-reference": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-api-reference-123-049"
+  },
+  "/docs/1.x/auth-flow": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-auth-flow-02-f-fb4"
+  },
+  "/docs/1.x/connecting-navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-connecting-navigation-propa-5-a-ee6"
+  },
+  "/docs/1.x/contributing": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-contributing-481-fcb"
+  },
+  "/docs/1.x/custom-android-back-button-handling": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-custom-android-back-button-handlingea-5-344"
+  },
+  "/docs/1.x/custom-navigator-overview": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-custom-navigator-overviewd-71-a7a"
+  },
+  "/docs/1.x/custom-navigators": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-custom-navigators-867-cbc"
+  },
+  "/docs/1.x/custom-routers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-custom-routers-635-1cd"
+  },
+  "/docs/1.x/customize-styles": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-customize-stylesa-50-888"
+  },
+  "/docs/1.x/deep-linking": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-deep-linking-915-cc6"
+  },
+  "/docs/1.x/drawer-based-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-drawer-based-navigation-6-f-8-910"
+  },
+  "/docs/1.x/drawer-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-drawer-navigator-7-bf-e71"
+  },
+  "/docs/1.x/getting-started": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-getting-startedb-89-b4f"
+  },
+  "/docs/1.x/glossary-of-terms": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-glossary-of-terms-696-b01"
+  },
+  "/docs/1.x/handling-iphonex": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-handling-iphonex-2-bf-b3d"
+  },
+  "/docs/1.x/header-buttons": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-header-buttons-349-dd1"
+  },
+  "/docs/1.x/headers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-headers-6-ba-dec"
+  },
+  "/docs/1.x/hello-react-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-hello-react-navigationfb-8-5ac"
+  },
+  "/docs/1.x/listen-lifecycle-events": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-listen-lifecycle-events-34-b-e22"
+  },
+  "/docs/1.x/modal": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-modal-732-a0d"
+  },
+  "/docs/1.x/navigating": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-navigating-347-77f"
+  },
+  "/docs/1.x/navigating-without-navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-navigating-without-navigation-prop-4-d-9-32d"
+  },
+  "/docs/1.x/navigation-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-navigation-actions-852-d8f"
+  },
+  "/docs/1.x/navigation-options": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-navigation-optionse-95-5b4"
+  },
+  "/docs/1.x/navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-navigation-prop-662-a46"
+  },
+  "/docs/1.x/navigation-views": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-navigation-views-409-7d5"
+  },
+  "/docs/1.x/next-steps": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-next-steps-79-a-3f4"
+  },
+  "/docs/1.x/params": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-paramsbf-3-15e"
+  },
+  "/docs/1.x/partial-overlay": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-partial-overlay-9-af-6ac"
+  },
+  "/docs/1.x/pitch": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-pitch-769-048"
+  },
+  "/docs/1.x/redux-integration": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-redux-integratione-3-d-f6d"
+  },
+  "/docs/1.x/routers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-routers-168-097"
+  },
+  "/docs/1.x/screen-tracking": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-screen-trackingddf-607"
+  },
+  "/docs/1.x/set-params-on-back": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-set-params-on-backef-7-42e"
+  },
+  "/docs/1.x/stack-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-stack-navigator-668-ccf"
+  },
+  "/docs/1.x/status-bar": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-status-bar-147-cf4"
+  },
+  "/docs/1.x/supported-react-native-versions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-supported-react-native-versionsae-5-eb9"
+  },
+  "/docs/1.x/switch-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-switch-navigator-8-da-52e"
+  },
+  "/docs/1.x/tab-based-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-tab-based-navigation-08-c-505"
+  },
+  "/docs/1.x/tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-tab-navigator-8-fe-3f4"
+  },
+  "/docs/1.x/transitioner": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-transitioner-22-c-3f3"
+  },
+  "/docs/1.x/with-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-with-navigation-726-cae"
+  },
+  "/docs/1.x/with-navigation-focus": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-1-x-with-navigation-focus-54-c-c44"
+  },
+  "/docs/2.x/:route": {
+    "component": "component---theme-doc-page-1-be-9be",
+    "docsMetadata": "docsMetadata---docs-2-x-routeea-0-0ac"
+  },
+  "/docs/2.x/alternatives": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-alternatives-480-9be"
+  },
+  "/docs/2.x/api-reference": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-api-reference-14-a-34d"
+  },
+  "/docs/2.x/app-containers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-app-containers-296-e06"
+  },
+  "/docs/2.x/auth-flow": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-auth-flow-2-a-7-cb9"
+  },
+  "/docs/2.x/bottom-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-bottom-tab-navigatora-44-618"
+  },
+  "/docs/2.x/common-mistakes": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-common-mistakes-0-e-9-c10"
+  },
+  "/docs/2.x/community-libraries-and-navigators": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-community-libraries-and-navigators-990-7f8"
+  },
+  "/docs/2.x/connecting-navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-connecting-navigation-propf-97-f10"
+  },
+  "/docs/2.x/contributing": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-contributinga-76-464"
+  },
+  "/docs/2.x/custom-android-back-button-handling": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-custom-android-back-button-handling-7-f-0-2fb"
+  },
+  "/docs/2.x/custom-navigator-overview": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-custom-navigator-overview-4-aa-f5c"
+  },
+  "/docs/2.x/custom-navigators": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-custom-navigators-5-a-6-382"
+  },
+  "/docs/2.x/custom-routers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-custom-routers-36-d-866"
+  },
+  "/docs/2.x/deep-linking": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-deep-linkingc-47-293"
+  },
+  "/docs/2.x/drawer-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-drawer-actionsfc-5-a04"
+  },
+  "/docs/2.x/drawer-based-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-drawer-based-navigationee-2-835"
+  },
+  "/docs/2.x/drawer-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-drawer-navigatorb-03-e62"
+  },
+  "/docs/2.x/getting-started": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-getting-startedc-41-2ef"
+  },
+  "/docs/2.x/glossary-of-terms": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-glossary-of-terms-20-f-aea"
+  },
+  "/docs/2.x/handling-iphonex": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-handling-iphonex-63-f-cd2"
+  },
+  "/docs/2.x/header-buttons": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-header-buttons-15-c-5f0"
+  },
+  "/docs/2.x/headers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-headersd-8-c-cc4"
+  },
+  "/docs/2.x/hello-react-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-hello-react-navigation-900-09e"
+  },
+  "/docs/2.x/limitations": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-limitationsa-83-2e6"
+  },
+  "/docs/2.x/material-bottom-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-material-bottom-tab-navigator-493-8d0"
+  },
+  "/docs/2.x/material-top-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-material-top-tab-navigator-13-e-b99"
+  },
+  "/docs/2.x/modal": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-modal-116-727"
+  },
+  "/docs/2.x/more-resources": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-more-resourcesd-42-c7c"
+  },
+  "/docs/2.x/navigating": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-navigating-029-c06"
+  },
+  "/docs/2.x/navigating-without-navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-navigating-without-navigation-prop-220-bd1"
+  },
+  "/docs/2.x/navigation-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-navigation-actions-75-a-9ee"
+  },
+  "/docs/2.x/navigation-context": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-navigation-context-346-411"
+  },
+  "/docs/2.x/navigation-events": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-navigation-events-8-df-cac"
+  },
+  "/docs/2.x/navigation-key": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-navigation-key-233-f23"
+  },
+  "/docs/2.x/navigation-lifecycle": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-navigation-lifecycle-34-a-699"
+  },
+  "/docs/2.x/navigation-options-resolution": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-navigation-options-resolutionf-26-fd1"
+  },
+  "/docs/2.x/navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-navigation-prope-83-ca2"
+  },
+  "/docs/2.x/navigation-views": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-navigation-views-825-849"
+  },
+  "/docs/2.x/next-steps": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-next-stepsdf-5-503"
+  },
+  "/docs/2.x/params": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-paramsbaa-91c"
+  },
+  "/docs/2.x/pitch": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-pitch-94-b-4bd"
+  },
+  "/docs/2.x/react-native-screens": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-react-native-screens-628-e84"
+  },
+  "/docs/2.x/redux-integration": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-redux-integration-278-fdf"
+  },
+  "/docs/2.x/routers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-routers-17-d-485"
+  },
+  "/docs/2.x/screen-tracking": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-screen-tracking-3-d-2-e90"
+  },
+  "/docs/2.x/stack-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-stack-actionsb-81-06e"
+  },
+  "/docs/2.x/stack-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-stack-navigatorc-96-ee3"
+  },
+  "/docs/2.x/state-persistence": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-state-persistence-234-f38"
+  },
+  "/docs/2.x/status-bar": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-status-bar-27-e-2e2"
+  },
+  "/docs/2.x/supported-react-native-versions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-supported-react-native-versions-6-a-2-b6f"
+  },
+  "/docs/2.x/switch-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-switch-navigatorc-71-ffb"
+  },
+  "/docs/2.x/tab-based-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-tab-based-navigationcb-1-687"
+  },
+  "/docs/2.x/tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-tab-navigator-1-c-0-ea5"
+  },
+  "/docs/2.x/transitioner": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-transitioner-682-852"
+  },
+  "/docs/2.x/with-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-with-navigation-739-0f6"
+  },
+  "/docs/2.x/with-navigation-focus": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-2-x-with-navigation-focus-1-c-2-af9"
+  },
+  "/docs/3.x/:route": {
+    "component": "component---theme-doc-page-1-be-9be",
+    "docsMetadata": "docsMetadata---docs-3-x-route-202-37f"
+  },
+  "/docs/3.x/MST-integration": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-mst-integration-9-ff-5a4"
+  },
+  "/docs/3.x/alternatives": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-alternatives-86-d-14c"
+  },
+  "/docs/3.x/animated-switch-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-animated-switch-navigator-42-b-8ab"
+  },
+  "/docs/3.x/app-containers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-app-containersc-6-c-ca4"
+  },
+  "/docs/3.x/auth-flow": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-auth-flowcd-3-58c"
+  },
+  "/docs/3.x/bottom-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-bottom-tab-navigator-693-205"
+  },
+  "/docs/3.x/common-mistakes": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-common-mistakes-68-b-b06"
+  },
+  "/docs/3.x/community-libraries-and-navigators": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-community-libraries-and-navigators-682-358"
+  },
+  "/docs/3.x/connecting-navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-connecting-navigation-prop-87-f-892"
+  },
+  "/docs/3.x/contributing": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-contributingd-40-7e6"
+  },
+  "/docs/3.x/custom-android-back-button-handling": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-custom-android-back-button-handling-0-f-2-5e1"
+  },
+  "/docs/3.x/custom-navigator-overview": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-custom-navigator-overview-2-ad-25c"
+  },
+  "/docs/3.x/custom-navigators": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-custom-navigators-32-c-f35"
+  },
+  "/docs/3.x/custom-routers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-custom-routers-798-ef3"
+  },
+  "/docs/3.x/deep-linking": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-deep-linking-7-a-3-1f5"
+  },
+  "/docs/3.x/drawer-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-drawer-actionsc-07-bac"
+  },
+  "/docs/3.x/drawer-based-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-drawer-based-navigation-7-ac-7d6"
+  },
+  "/docs/3.x/drawer-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-drawer-navigatorf-67-849"
+  },
+  "/docs/3.x/function-after-focusing-screen": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-function-after-focusing-screen-958-83d"
+  },
+  "/docs/3.x/getting-started": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-getting-startedb-8-a-017"
+  },
+  "/docs/3.x/glossary-of-terms": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-glossary-of-terms-957-eb6"
+  },
+  "/docs/3.x/handling-iphonex": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-handling-iphonex-421-974"
+  },
+  "/docs/3.x/header-buttons": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-header-buttons-198-028"
+  },
+  "/docs/3.x/headers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-headers-55-b-c8e"
+  },
+  "/docs/3.x/hello-react-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-hello-react-navigation-5-ee-a2f"
+  },
+  "/docs/3.x/limitations": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-limitationsaf-7-89c"
+  },
+  "/docs/3.x/localization": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-localization-2-e-3-f92"
+  },
+  "/docs/3.x/material-bottom-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-material-bottom-tab-navigator-477-489"
+  },
+  "/docs/3.x/material-top-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-material-top-tab-navigator-1-d-4-f81"
+  },
+  "/docs/3.x/modal": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-modal-4-de-21d"
+  },
+  "/docs/3.x/more-resources": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-more-resources-455-ec5"
+  },
+  "/docs/3.x/navigating": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-navigating-585-1df"
+  },
+  "/docs/3.x/navigating-without-navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-navigating-without-navigation-prop-41-d-b00"
+  },
+  "/docs/3.x/navigation-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-navigation-actionsd-52-fed"
+  },
+  "/docs/3.x/navigation-context": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-navigation-context-6-f-0-3a1"
+  },
+  "/docs/3.x/navigation-events": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-navigation-eventsc-2-e-bdc"
+  },
+  "/docs/3.x/navigation-key": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-navigation-keyf-12-4a6"
+  },
+  "/docs/3.x/navigation-lifecycle": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-navigation-lifecycle-34-a-a6f"
+  },
+  "/docs/3.x/navigation-options-resolution": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-navigation-options-resolution-438-b88"
+  },
+  "/docs/3.x/navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-navigation-prop-389-e21"
+  },
+  "/docs/3.x/navigation-views": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-navigation-views-4-f-9-e28"
+  },
+  "/docs/3.x/next-steps": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-next-steps-482-442"
+  },
+  "/docs/3.x/params": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-paramscdb-2f1"
+  },
+  "/docs/3.x/pitch": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-pitch-6-f-9-c61"
+  },
+  "/docs/3.x/react-native-screens": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-react-native-screensf-43-294"
+  },
+  "/docs/3.x/redux-integration": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-redux-integration-8-a-5-805"
+  },
+  "/docs/3.x/routers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-routers-691-5ce"
+  },
+  "/docs/3.x/screen-tracking": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-screen-tracking-3-dd-2db"
+  },
+  "/docs/3.x/scrollables": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-scrollables-4-f-1-c1f"
+  },
+  "/docs/3.x/stack-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-stack-actions-15-f-85f"
+  },
+  "/docs/3.x/stack-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-stack-navigatorf-75-6ae"
+  },
+  "/docs/3.x/state-persistence": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-state-persistencec-08-72c"
+  },
+  "/docs/3.x/status-bar": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-status-bar-38-e-02e"
+  },
+  "/docs/3.x/supported-react-native-versions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-supported-react-native-versionsd-54-1fb"
+  },
+  "/docs/3.x/switch-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-switch-actions-99-b-f6e"
+  },
+  "/docs/3.x/switch-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-switch-navigatorb-6-e-1ab"
+  },
+  "/docs/3.x/tab-based-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-tab-based-navigation-156-350"
+  },
+  "/docs/3.x/tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-tab-navigatorc-71-77b"
+  },
+  "/docs/3.x/themes": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-themes-322-3fb"
+  },
+  "/docs/3.x/transitioner": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-transitioner-060-9c5"
+  },
+  "/docs/3.x/web-support": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-web-supportc-90-ee5"
+  },
+  "/docs/3.x/with-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-with-navigation-29-a-a6c"
+  },
+  "/docs/3.x/with-navigation-focus": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-3-x-with-navigation-focus-3-dd-2ee"
+  },
+  "/docs/4.x/:route": {
+    "component": "component---theme-doc-page-1-be-9be",
+    "docsMetadata": "docsMetadata---docs-4-x-routeb-29-0b8"
+  },
+  "/docs/4.x/MST-integration": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-mst-integration-7-cb-4f5"
+  },
+  "/docs/4.x/alternatives": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-alternativesc-94-894"
+  },
+  "/docs/4.x/animated-switch-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-animated-switch-navigator-1-b-0-93e"
+  },
+  "/docs/4.x/app-containers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-app-containerscb-5-f99"
+  },
+  "/docs/4.x/auth-flow": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-auth-flowa-4-a-c78"
+  },
+  "/docs/4.x/bottom-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-bottom-tab-navigator-85-e-6f8"
+  },
+  "/docs/4.x/common-mistakes": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-common-mistakes-31-a-439"
+  },
+  "/docs/4.x/community-libraries-and-navigators": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-community-libraries-and-navigators-07-f-b1d"
+  },
+  "/docs/4.x/connecting-navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-connecting-navigation-propa-7-b-281"
+  },
+  "/docs/4.x/contributing": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-contributing-73-c-ad4"
+  },
+  "/docs/4.x/custom-android-back-button-handling": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-custom-android-back-button-handlingc-8-d-00e"
+  },
+  "/docs/4.x/custom-navigator-overview": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-custom-navigator-overview-857-056"
+  },
+  "/docs/4.x/custom-navigators": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-custom-navigatorsa-60-a79"
+  },
+  "/docs/4.x/custom-routers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-custom-routersa-90-0fe"
+  },
+  "/docs/4.x/deep-linking": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-deep-linkinga-62-d3b"
+  },
+  "/docs/4.x/drawer-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-drawer-actions-2-f-8-8c0"
+  },
+  "/docs/4.x/drawer-based-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-drawer-based-navigation-9-a-1-765"
+  },
+  "/docs/4.x/drawer-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-drawer-navigatorf-04-01c"
+  },
+  "/docs/4.x/function-after-focusing-screen": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-function-after-focusing-screene-14-c9a"
+  },
+  "/docs/4.x/getting-started": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-getting-started-0-e-0-74b"
+  },
+  "/docs/4.x/glossary-of-terms": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-glossary-of-terms-2-c-6-b45"
+  },
+  "/docs/4.x/handling-iphonex": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-handling-iphonexff-5-ea1"
+  },
+  "/docs/4.x/header-buttons": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-header-buttonsb-38-4f3"
+  },
+  "/docs/4.x/headers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-headers-06-a-13f"
+  },
+  "/docs/4.x/hello-react-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-hello-react-navigation-870-428"
+  },
+  "/docs/4.x/limitations": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-limitationsd-7-f-1a8"
+  },
+  "/docs/4.x/localization": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-localization-69-e-9d6"
+  },
+  "/docs/4.x/material-bottom-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-material-bottom-tab-navigator-720-36e"
+  },
+  "/docs/4.x/material-top-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-material-top-tab-navigator-3-f-0-e45"
+  },
+  "/docs/4.x/modal": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-modal-505-b90"
+  },
+  "/docs/4.x/more-resources": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-more-resources-385-c91"
+  },
+  "/docs/4.x/navigating": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-navigating-661-ae6"
+  },
+  "/docs/4.x/navigating-without-navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-navigating-without-navigation-prop-4-a-8-ebf"
+  },
+  "/docs/4.x/navigation-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-navigation-actions-506-8bc"
+  },
+  "/docs/4.x/navigation-context": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-navigation-context-1-fc-8ca"
+  },
+  "/docs/4.x/navigation-events": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-navigation-events-2-f-8-348"
+  },
+  "/docs/4.x/navigation-key": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-navigation-key-45-e-bc6"
+  },
+  "/docs/4.x/navigation-lifecycle": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-navigation-lifecycle-589-b6b"
+  },
+  "/docs/4.x/navigation-options-resolution": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-navigation-options-resolution-7-c-9-a20"
+  },
+  "/docs/4.x/navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-navigation-propdb-2-62b"
+  },
+  "/docs/4.x/navigation-views": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-navigation-views-852-3d5"
+  },
+  "/docs/4.x/next-steps": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-next-stepsfe-0-dab"
+  },
+  "/docs/4.x/params": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-params-583-1a5"
+  },
+  "/docs/4.x/pitch": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-pitch-430-cb4"
+  },
+  "/docs/4.x/react-native-screens": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-react-native-screens-09-d-d62"
+  },
+  "/docs/4.x/redux-integration": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-redux-integrationa-22-7b3"
+  },
+  "/docs/4.x/routers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-routersef-5-5e2"
+  },
+  "/docs/4.x/screen-tracking": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-screen-tracking-6-f-6-ac7"
+  },
+  "/docs/4.x/scrollables": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-scrollablesb-48-e53"
+  },
+  "/docs/4.x/stack-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-stack-actionscf-1-457"
+  },
+  "/docs/4.x/stack-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-stack-navigatordeb-b59"
+  },
+  "/docs/4.x/stack-navigator-1.0": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-stack-navigator-1-08-d-8-581"
+  },
+  "/docs/4.x/state-persistence": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-state-persistence-915-0a4"
+  },
+  "/docs/4.x/status-bar": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-status-barf-33-800"
+  },
+  "/docs/4.x/supported-react-native-versions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-supported-react-native-versions-7-a-3-f86"
+  },
+  "/docs/4.x/switch-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-switch-actions-320-5c8"
+  },
+  "/docs/4.x/switch-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-switch-navigator-4-ed-9d2"
+  },
+  "/docs/4.x/tab-based-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-tab-based-navigationd-51-154"
+  },
+  "/docs/4.x/themes": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-themes-67-b-b69"
+  },
+  "/docs/4.x/troubleshooting": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-troubleshooting-7-a-6-ccc"
+  },
+  "/docs/4.x/typescript": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-typescript-553-6fe"
+  },
+  "/docs/4.x/web-support": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-web-supporte-88-52a"
+  },
+  "/docs/4.x/with-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-with-navigation-510-79a"
+  },
+  "/docs/4.x/with-navigation-focus": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-4-x-with-navigation-focus-347-357"
+  },
+  "/docs/next/:route": {
+    "component": "component---theme-doc-page-1-be-9be",
+    "docsMetadata": "docsMetadata---docs-next-routec-6-c-720"
+  },
+  "/docs/next/MST-integration": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-mst-integration-33-d-a11"
+  },
+  "/docs/next/alternatives": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-alternatives-477-166"
+  },
+  "/docs/next/app-containers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-app-containers-854-459"
+  },
+  "/docs/next/auth-flow": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-auth-flow-82-a-d11"
+  },
+  "/docs/next/bottom-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-bottom-tab-navigatorcc-4-79a"
+  },
+  "/docs/next/community-libraries-and-navigators": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-community-libraries-and-navigatorsf-1-f-4a8"
+  },
+  "/docs/next/compatibility": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-compatibilitye-29-ce1"
+  },
+  "/docs/next/connecting-navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-connecting-navigation-propea-6-dd2"
+  },
+  "/docs/next/contributing": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-contributing-4-d-5-a3e"
+  },
+  "/docs/next/custom-android-back-button-handling": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-custom-android-back-button-handling-345-a49"
+  },
+  "/docs/next/custom-navigators": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-custom-navigators-096-c2b"
+  },
+  "/docs/next/custom-routers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-custom-routersa-50-00a"
+  },
+  "/docs/next/deep-linking": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-deep-linking-472-4c7"
+  },
+  "/docs/next/drawer-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-drawer-actions-6-e-1-a38"
+  },
+  "/docs/next/drawer-based-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-drawer-based-navigation-6-a-3-8c2"
+  },
+  "/docs/next/drawer-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-drawer-navigatorff-5-7a1"
+  },
+  "/docs/next/function-after-focusing-screen": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-function-after-focusing-screenb-49-3c4"
+  },
+  "/docs/next/getting-started": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-getting-startedd-58-366"
+  },
+  "/docs/next/glossary-of-terms": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-glossary-of-termsc-15-8ad"
+  },
+  "/docs/next/handling-safe-area": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-handling-safe-area-6-c-2-1d8"
+  },
+  "/docs/next/header-buttons": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-header-buttonsf-72-d07"
+  },
+  "/docs/next/headers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-headerse-7-b-142"
+  },
+  "/docs/next/hello-react-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-hello-react-navigationd-8-c-678"
+  },
+  "/docs/next/limitations": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-limitations-147-d01"
+  },
+  "/docs/next/localization": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-localizationdeb-d53"
+  },
+  "/docs/next/material-bottom-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-material-bottom-tab-navigator-97-b-131"
+  },
+  "/docs/next/material-top-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-material-top-tab-navigator-838-0fe"
+  },
+  "/docs/next/modal": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-modal-54-d-1ff"
+  },
+  "/docs/next/more-resources": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-more-resources-332-2a4"
+  },
+  "/docs/next/native-stack-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-native-stack-navigatorb-5-f-c86"
+  },
+  "/docs/next/navigating": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-navigating-466-b91"
+  },
+  "/docs/next/navigating-without-navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-navigating-without-navigation-prop-79-a-50b"
+  },
+  "/docs/next/navigation-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-navigation-actions-5-b-7-5f1"
+  },
+  "/docs/next/navigation-context": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-navigation-contextdfd-3dd"
+  },
+  "/docs/next/navigation-lifecycle": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-navigation-lifecycled-2-f-5d4"
+  },
+  "/docs/next/navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-navigation-propffa-555"
+  },
+  "/docs/next/nesting-navigators": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-nesting-navigators-65-f-e58"
+  },
+  "/docs/next/next-steps": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-next-steps-8-ef-e06"
+  },
+  "/docs/next/params": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-params-78-e-2a6"
+  },
+  "/docs/next/pitch": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-pitchc-76-ad2"
+  },
+  "/docs/next/react-native-screens": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-react-native-screensda-5-7e4"
+  },
+  "/docs/next/redux-integration": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-redux-integrationa-78-839"
+  },
+  "/docs/next/route-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-route-prop-5-a-1-122"
+  },
+  "/docs/next/screen-options-resolution": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-screen-options-resolution-987-a39"
+  },
+  "/docs/next/screen-tracking": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-screen-tracking-1-bc-75b"
+  },
+  "/docs/next/stack-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-stack-actions-42-d-f46"
+  },
+  "/docs/next/stack-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-stack-navigator-00-a-1e4"
+  },
+  "/docs/next/state-persistence": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-state-persistence-27-e-7e0"
+  },
+  "/docs/next/status-bar": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-status-bar-9-c-6-e1a"
+  },
+  "/docs/next/supported-react-native-versions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-supported-react-native-versionsa-85-47f"
+  },
+  "/docs/next/tab-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-tab-actions-7-d-6-68a"
+  },
+  "/docs/next/tab-based-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-tab-based-navigatione-09-8a3"
+  },
+  "/docs/next/themes": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-themes-85-a-27c"
+  },
+  "/docs/next/troubleshooting": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-troubleshooting-9-d-9-ba2"
+  },
+  "/docs/next/typescript": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-typescript-1-be-1a0"
+  },
+  "/docs/next/upgrading-from-4.x": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-upgrading-from-4-xac-5-eef"
+  },
+  "/docs/next/use-focus-effect": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-use-focus-effect-2-cf-206"
+  },
+  "/docs/next/use-is-focused": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-use-is-focusedcac-428"
+  },
+  "/docs/next/use-linking": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-use-linking-86-f-69d"
+  },
+  "/docs/next/use-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-use-navigation-861-9ca"
+  },
+  "/docs/next/use-navigation-state": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-use-navigation-state-7-d-4-262"
+  },
+  "/docs/next/use-route": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-use-route-6-f-8-655"
+  },
+  "/docs/next/use-scroll-to-top": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-use-scroll-to-topba-8-d96"
+  },
+  "/docs/next/web-support": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-web-supportd-73-54e"
+  },
+  "/docs/:route": {
+    "component": "component---theme-doc-page-1-be-9be",
+    "docsMetadata": "docsMetadata---docs-route-20-a-f24"
+  },
+  "/docs/MST-integration": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-mst-integrationd-5-b-42b"
+  },
+  "/docs/alternatives": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-alternatives-3-a-7-2a4"
+  },
+  "/docs/app-containers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-app-containers-163-85c"
+  },
+  "/docs/auth-flow": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-auth-flow-79-d-548"
+  },
+  "/docs/bottom-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-bottom-tab-navigator-11-e-e9e"
+  },
+  "/docs/community-libraries-and-navigators": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-community-libraries-and-navigators-6-a-7-a8c"
+  },
+  "/docs/compatibility": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-compatibility-966-77a"
+  },
+  "/docs/connecting-navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-connecting-navigation-prop-2-bc-dd9"
+  },
+  "/docs/contributing": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-contributing-1-e-6-fbe"
+  },
+  "/docs/custom-android-back-button-handling": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-custom-android-back-button-handlingb-6-a-475"
+  },
+  "/docs/custom-navigators": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-custom-navigators-17-e-bda"
+  },
+  "/docs/custom-routers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-custom-routers-508-790"
+  },
+  "/docs/deep-linking": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-deep-linkingb-31-055"
+  },
+  "/docs/drawer-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-drawer-actions-11-f-554"
+  },
+  "/docs/drawer-based-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-drawer-based-navigation-7-e-7-ec3"
+  },
+  "/docs/drawer-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-drawer-navigator-1-f-9-197"
+  },
+  "/docs/function-after-focusing-screen": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-function-after-focusing-screenbd-1-184"
+  },
+  "/docs/getting-started": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-getting-startedd-57-c6b"
+  },
+  "/docs/glossary-of-terms": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-glossary-of-termseef-f48"
+  },
+  "/docs/handling-safe-area": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-handling-safe-areaf-61-835"
+  },
+  "/docs/header-buttons": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-header-buttonsb-26-692"
+  },
+  "/docs/headers": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-headers-57-b-ceb"
+  },
+  "/docs/hello-react-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-hello-react-navigation-3-d-5-b6c"
+  },
+  "/docs/limitations": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-limitations-891-631"
+  },
+  "/docs/localization": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-localizationc-04-bbb"
+  },
+  "/docs/material-bottom-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-material-bottom-tab-navigatorc-9-b-307"
+  },
+  "/docs/material-top-tab-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-material-top-tab-navigatorcaf-c1d"
+  },
+  "/docs/modal": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-modalb-5-e-d21"
+  },
+  "/docs/more-resources": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-more-resources-1-ca-023"
+  },
+  "/docs/native-stack-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-native-stack-navigator-9-a-1-f28"
+  },
+  "/docs/navigating": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-navigatingf-0-d-f4f"
+  },
+  "/docs/navigating-without-navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-navigating-without-navigation-propa-06-c80"
+  },
+  "/docs/navigation-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-navigation-actionsb-3-d-208"
+  },
+  "/docs/navigation-context": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-navigation-contexte-32-2d5"
+  },
+  "/docs/navigation-lifecycle": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-navigation-lifecycle-884-e41"
+  },
+  "/docs/navigation-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-navigation-prop-9-b-8-5e5"
+  },
+  "/docs/nesting-navigators": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-nesting-navigatorsf-56-156"
+  },
+  "/docs/next-steps": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-next-stepsfa-3-331"
+  },
+  "/docs/params": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-params-82-b-bab"
+  },
+  "/docs/pitch": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-pitchf-22-9bc"
+  },
+  "/docs/react-native-screens": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-react-native-screens-238-4f7"
+  },
+  "/docs/redux-integration": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-redux-integrationb-54-0b6"
+  },
+  "/docs/route-prop": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-route-prop-209-d18"
+  },
+  "/docs/screen-options-resolution": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-screen-options-resolution-146-96c"
+  },
+  "/docs/screen-tracking": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-screen-trackingec-4-375"
+  },
+  "/docs/stack-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-stack-actions-073-5ef"
+  },
+  "/docs/stack-navigator": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-stack-navigator-017-4e7"
+  },
+  "/docs/state-persistence": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-state-persistencef-4-e-68f"
+  },
+  "/docs/status-bar": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-status-bar-852-6d0"
+  },
+  "/docs/supported-react-native-versions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-supported-react-native-versions-479-68b"
+  },
+  "/docs/tab-actions": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-tab-actionsc-18-07e"
+  },
+  "/docs/tab-based-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-tab-based-navigation-6-fc-f30"
+  },
+  "/docs/themes": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-themesfde-35e"
+  },
+  "/docs/troubleshooting": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-troubleshootinga-4-e-c4d"
+  },
+  "/docs/typescript": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-typescriptd-4-a-c02"
+  },
+  "/docs/upgrading-from-4.x": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-upgrading-from-4-xd-9-d-bd0"
+  },
+  "/docs/use-focus-effect": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-use-focus-effect-38-f-0e1"
+  },
+  "/docs/use-is-focused": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-use-is-focused-9-ae-892"
+  },
+  "/docs/use-linking": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-use-linkinge-4-e-b05"
+  },
+  "/docs/use-navigation": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-use-navigationdd-0-67b"
+  },
+  "/docs/use-navigation-state": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-use-navigation-statedeb-507"
+  },
+  "/docs/use-route": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-use-route-208-79a"
+  },
+  "/docs/use-scroll-to-top": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-use-scroll-to-topf-31-f48"
+  },
+  "/docs/web-support": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-web-support-513-791"
+  }
+}

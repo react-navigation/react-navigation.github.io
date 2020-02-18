@@ -1,0 +1,19 @@
+{
+  "id": "version-1.x/custom-navigators",
+  "title": "Custom navigators",
+  "description": "A navigator is any React component that has a [router](https://github.com/react-navigation/react-navigation/blob/1.x/src/routers/StackRouter.js) on it. Here is a basic one, which uses the [router's API](/docs/routers) to get the active component to render:",
+  "source": "@site/versioned_docs/version-1.x/custom-navigators.md",
+  "permalink": "/docs/1.x/custom-navigators",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-1.x/custom-navigators.md",
+  "version": "1.x",
+  "sidebar_label": "Custom navigators",
+  "sidebar": "version-1.x/docs",
+  "previous": {
+    "title": "Routers",
+    "permalink": "/docs/1.x/routers"
+  },
+  "next": {
+    "title": "Custom routers",
+    "permalink": "/docs/1.x/custom-routers"
+  }
+}

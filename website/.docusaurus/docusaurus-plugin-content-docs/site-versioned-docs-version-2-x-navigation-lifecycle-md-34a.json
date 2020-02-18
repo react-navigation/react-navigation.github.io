@@ -1,0 +1,19 @@
+{
+  "id": "version-2.x/navigation-lifecycle",
+  "title": "Navigation lifecycle",
+  "description": "In the previous section, we worked with a stack navigator that has two screens (`Home` and `Details`) and learned how to use `this.props.navigation.navigate('RouteName')` to navigate between the routes.",
+  "source": "@site/versioned_docs/version-2.x/navigation-lifecycle.md",
+  "permalink": "/docs/2.x/navigation-lifecycle",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-2.x/navigation-lifecycle.md",
+  "version": "2.x",
+  "sidebar_label": "Navigation lifecycle",
+  "sidebar": "version-2.x-docs",
+  "previous": {
+    "title": "Moving between screens",
+    "permalink": "/docs/2.x/navigating"
+  },
+  "next": {
+    "title": "Passing parameters to routes",
+    "permalink": "/docs/2.x/params"
+  }
+}

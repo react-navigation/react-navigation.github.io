@@ -1,0 +1,17 @@
+{
+  "permalink": "/blog/2018/11/17/react-navigation-3.0",
+  "source": "@site/blog/2018-11-17-react-navigation-3.0.md",
+  "description": "The documentation is now live at https://reactnavigation.org, and v2 lives [here](/docs/en/2.x/getting-started.html).",
+  "date": "2018-11-17T00:00:00.000Z",
+  "tags": [],
+  "title": "React Navigation 3.0",
+  "truncated": false,
+  "prevItem": {
+    "title": "React Navigation 4.0",
+    "permalink": "/blog/2019/09/16/react-navigation-4.0"
+  },
+  "nextItem": {
+    "title": "3.0 release candidate",
+    "permalink": "/blog/2018/11/01/react-navigation-3.0-rc"
+  }
+}

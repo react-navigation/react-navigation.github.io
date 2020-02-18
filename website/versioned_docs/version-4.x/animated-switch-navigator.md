@@ -1,8 +1,7 @@
 ---
-id: version-4.x-animated-switch-navigator
+id: animated-switch-navigator
 title: createAnimatedSwitchNavigator
 sidebar_label: createAnimatedSwitchNavigator
-original_id: animated-switch-navigator
 ---
 
 A `SwitchNavigator` with animation support.

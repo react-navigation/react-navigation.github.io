@@ -1,0 +1,19 @@
+{
+  "id": "version-4.x/screen-tracking",
+  "title": "Screen tracking for analytics",
+  "description": "This example shows how to do screen tracking and send to Google Analytics. The approach can be adapted to any other analytics SDK.",
+  "source": "@site/versioned_docs/version-4.x/screen-tracking.md",
+  "permalink": "/docs/4.x/screen-tracking",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-4.x/screen-tracking.md",
+  "version": "4.x",
+  "sidebar_label": "Screen tracking for analytics",
+  "sidebar": "version-4.x-docs",
+  "previous": {
+    "title": "Deep linking",
+    "permalink": "/docs/4.x/deep-linking"
+  },
+  "next": {
+    "title": "Themes",
+    "permalink": "/docs/4.x/themes"
+  }
+}

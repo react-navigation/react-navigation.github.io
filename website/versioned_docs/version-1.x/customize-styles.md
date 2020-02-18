@@ -1,8 +1,7 @@
 ---
-id: version-1.x-customize-styles
+id: customize-styles
 title: Custom styles
 sidebar_label: Custom styles
-original_id: customize-styles
 ---
 
 - talk about cardstyle

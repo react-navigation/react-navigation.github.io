@@ -1,0 +1,19 @@
+{
+  "id": "version-5.x/deep-linking",
+  "title": "Deep linking",
+  "description": "In this guide we will set up our app to handle external URIs.",
+  "source": "@site/versioned_docs/version-5.x/deep-linking.md",
+  "permalink": "/docs/deep-linking",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-5.x/deep-linking.md",
+  "version": "5.x",
+  "sidebar_label": "Deep linking",
+  "sidebar": "version-5.x/docs",
+  "previous": {
+    "title": "Navigating without the navigation prop",
+    "permalink": "/docs/navigating-without-navigation-prop"
+  },
+  "next": {
+    "title": "Screen tracking for analytics",
+    "permalink": "/docs/screen-tracking"
+  }
+}

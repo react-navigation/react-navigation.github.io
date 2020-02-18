@@ -1,8 +1,7 @@
 ---
-id: version-4.x-routers
+id: routers
 title: Routers
 sidebar_label: Routers
-original_id: routers
 ---
 
 Routers define a component's navigation state, and they allow the developer to define paths and actions that can be handled.

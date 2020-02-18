@@ -1,0 +1,19 @@
+{
+  "id": "version-5.x/handling-safe-area",
+  "title": "Supporting safe areas",
+  "description": "By default, React Navigation tries to ensure that the elements of the navigators display correctly on devices with notches (e.g. iPhone X) and UI elements which may overlap the app content. Such items include:",
+  "source": "@site/versioned_docs/version-5.x/handling-safe-area.md",
+  "permalink": "/docs/handling-safe-area",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-5.x/handling-safe-area.md",
+  "version": "5.x",
+  "sidebar_label": "Supporting safe areas",
+  "sidebar": "version-5.x/docs",
+  "previous": {
+    "title": "Authentication flows",
+    "permalink": "/docs/auth-flow"
+  },
+  "next": {
+    "title": "Different status bar configuration based on route",
+    "permalink": "/docs/status-bar"
+  }
+}

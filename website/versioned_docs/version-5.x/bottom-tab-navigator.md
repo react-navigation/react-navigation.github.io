@@ -1,8 +1,7 @@
 ---
-id: version-5.x-bottom-tab-navigator
+id: bottom-tab-navigator
 title: createBottomTabNavigator
 sidebar_label: createBottomTabNavigator
-original_id: bottom-tab-navigator
 ---
 
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
@@ -17,7 +16,7 @@ npm install @react-navigation/bottom-tabs
 
 To use this tab navigator, import it from `@react-navigation/bottom-tabs`:
 
-<samp id="tab-based-navigation-minimal" />
+<samp id="tab-based-navigation-minimal"></samp>
 
 ```js
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -67,7 +66,7 @@ Function that returns a React element to display as the tab bar.
 
 Example:
 
-<samp id="custom-tab-bar" />
+<samp id="custom-tab-bar"></samp>
 
 ```js
 import { View, Text, TouchableOpacity } from 'react-native';
@@ -203,7 +202,7 @@ This event is fired when the user presses the tab button for the current screen 
 
 To prevent the default behavior, you can call `event.preventDefault`:
 
-<samp id="bottom-tab-prevent-default">
+<samp id="bottom-tab-prevent-default"></samp>
 
 ```js
 React.useEffect(() => {
@@ -248,7 +247,7 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
-<samp id="tab-jump-to">
+<samp id="tab-jump-to"></samp>
 
 ```js
 navigation.jumpTo('Profile', { owner: 'Michaś' });
@@ -256,7 +255,7 @@ navigation.jumpTo('Profile', { owner: 'Michaś' });
 
 ## Example
 
-<samp id="bottom-tab-example">
+<samp id="bottom-tab-example"></samp>
 
 ```js
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

@@ -1,0 +1,19 @@
+{
+  "id": "version-5.x/drawer-based-navigation",
+  "title": "Drawer navigation",
+  "description": "![Using drawer navigator](/docs/assets/navigators/drawer/drawer-demo.gif)",
+  "source": "@site/versioned_docs/version-5.x/drawer-based-navigation.md",
+  "permalink": "/docs/drawer-based-navigation",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-5.x/drawer-based-navigation.md",
+  "version": "5.x",
+  "sidebar_label": "Drawer navigation",
+  "sidebar": "version-5.x/docs",
+  "previous": {
+    "title": "Tab navigation",
+    "permalink": "/docs/tab-based-navigation"
+  },
+  "next": {
+    "title": "Authentication flows",
+    "permalink": "/docs/auth-flow"
+  }
+}

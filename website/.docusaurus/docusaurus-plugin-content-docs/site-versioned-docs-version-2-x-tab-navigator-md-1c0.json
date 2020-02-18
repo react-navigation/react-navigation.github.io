@@ -1,0 +1,19 @@
+{
+  "id": "version-2.x/tab-navigator",
+  "title": "createTabNavigator",
+  "description": "> Note: `createTabNavigator` is deprecated. Please use `createBottomTabNavigator` and/or `createMaterialTopTabNavigator` instead.",
+  "source": "@site/versioned_docs/version-2.x/tab-navigator.md",
+  "permalink": "/docs/2.x/tab-navigator",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-2.x/tab-navigator.md",
+  "version": "2.x",
+  "sidebar_label": "createTabNavigator",
+  "sidebar": "version-2.x-api",
+  "previous": {
+    "title": "createDrawerNavigator",
+    "permalink": "/docs/2.x/drawer-navigator"
+  },
+  "next": {
+    "title": "createBottomTabNavigator",
+    "permalink": "/docs/2.x/bottom-tab-navigator"
+  }
+}

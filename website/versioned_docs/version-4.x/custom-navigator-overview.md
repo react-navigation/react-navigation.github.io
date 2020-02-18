@@ -1,8 +1,7 @@
 ---
-id: version-4.x-custom-navigator-overview
+id: custom-navigator-overview
 title: Overview
 sidebar_label: Overview
-original_id: custom-navigator-overview
 ---
 
 Navigators allow you to define your application's navigation structure. Navigators also render common elements such as headers and tab bars which you can configure.

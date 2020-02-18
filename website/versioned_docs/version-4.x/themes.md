@@ -1,8 +1,7 @@
 ---
-id: version-4.x-themes
+id: themes
 title: Themes
 sidebar_label: Themes
-original_id: themes
 ---
 
 Providing a light theme and a dark theme is a nice way to let your users adjust the appearance of your app depending on the time of day or their preference. It also signals that you are a hip app developer that keeps up with the trends of the day.

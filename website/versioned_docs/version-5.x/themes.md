@@ -1,8 +1,7 @@
 ---
-id: version-5.x-themes
+id: themes
 title: Themes
 sidebar_label: Themes
-original_id: themes
 ---
 
 Themes allow you to change the colors of various components provided by React Navigation. You can use themes to:
@@ -14,7 +13,7 @@ Themes allow you to change the colors of various components provided by React Na
 
 To pass a custom theme, you can pass the `theme` prop to the navigation container.
 
-<samp id="simple-theme" />
+<samp id="simple-theme"></samp>
 
 ```js
 import * as React from 'react';
@@ -120,7 +119,7 @@ export default () => {
 
 To gain access to the theme in any component that is rendered inside the navigation container:, you can use the `useTheme` hook. It returns the theme object:
 
-<samp id="system-themes" />
+<samp id="system-themes"></samp>
 
 ```js
 import * as React from 'react';

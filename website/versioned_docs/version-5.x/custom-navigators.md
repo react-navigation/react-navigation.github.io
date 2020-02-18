@@ -1,8 +1,7 @@
 ---
-id: version-5.x-custom-navigators
+id: custom-navigators
 title: Custom navigators
 sidebar_label: Custom navigators
-original_id: custom-navigators
 ---
 
 Navigators allow you to define your application's navigation structure. Navigators also render common elements such as headers and tab bars which you can configure.
@@ -240,7 +239,7 @@ export default createNavigatorFactory<
 
 All of the built-in navigators export their views, which we can reuse and build additional functionality on top of them. For example, if we want to re-build the bottom tab navigator, we need the following code:
 
-```js
+```jsx
 import * as React from 'react';
 import {
   useNavigationBuilder,

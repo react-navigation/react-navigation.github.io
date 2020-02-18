@@ -1,8 +1,7 @@
 ---
-id: version-2.x-navigation-context
+id: navigation-context
 title: NavigationContext
 sidebar_label: NavigationContext
-original_id: navigation-context
 ---
 
 `NavigationContext` provides the `navigation` object (similar to the [navigation](navigation-prop.html) prop). In fact, [withNavigation](with-navigation.html) uses this context to inject the `navigation` prop to your wrapped component. The [hook counterpart](https://github.com/react-navigation/react-navigation-hooks#usenavigation) is essentially an `useContext` with this context as well.

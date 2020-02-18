@@ -1,0 +1,10 @@
+{
+  "id": "version-1.x/partial-overlay",
+  "title": "Partial overlays",
+  "description": "like a tooltip, menu from navbar, etc.",
+  "source": "@site/versioned_docs/version-1.x/partial-overlay.md",
+  "permalink": "/docs/1.x/partial-overlay",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-1.x/partial-overlay.md",
+  "version": "1.x",
+  "sidebar_label": "Partial overlays"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "supported-react-native-versions",
+  "title": "Supported React Native versions",
+  "description": "React Navigation 5 depends on the new hooks API and libraries using `androidx`. So you'll need to be on at least `react-native@0.60.0`. If you're using Expo, your SDK version should be at least `36`.",
+  "source": "@site/docs/supported-react-native-versions.md",
+  "permalink": "/docs/next/supported-react-native-versions",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/supported-react-native-versions.md",
+  "version": "next",
+  "sidebar_label": "Supported React Native versions",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Custom navigators",
+    "permalink": "/docs/next/custom-navigators"
+  },
+  "next": {
+    "title": "Community-developed Navigators and Libraries",
+    "permalink": "/docs/next/community-libraries-and-navigators"
+  }
+}

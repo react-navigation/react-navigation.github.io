@@ -1,0 +1,15 @@
+{
+  "id": "version-4.x/getting-started",
+  "title": "Getting started",
+  "description": "React Navigation is born from the React Native community's need for an extensible yet easy-to-use navigation solution written entirely in JavaScript (so you can read and understand all of the source), on top of powerful native primitives.",
+  "source": "@site/versioned_docs/version-4.x/getting-started.md",
+  "permalink": "/docs/4.x/getting-started",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-4.x/getting-started.md",
+  "version": "4.x",
+  "sidebar_label": "Getting started",
+  "sidebar": "version-4.x-docs",
+  "next": {
+    "title": "Hello React Navigation",
+    "permalink": "/docs/4.x/hello-react-navigation"
+  }
+}

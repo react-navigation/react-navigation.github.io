@@ -1,8 +1,7 @@
 ---
-id: version-2.x-headers
+id: headers
 title: Configuring the header bar
 sidebar_label: Configuring the header bar
-original_id: headers
 ---
 
 By now you're probably tired of seeing a blank grey bar on the top of your screen &mdash; you're ready for some [flair](https://memegenerator.net/img/images/600x600/14303485/stan-flair-office-space.jpg). So let's jump in to configuring the header bar.

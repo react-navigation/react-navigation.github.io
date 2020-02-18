@@ -1,0 +1,19 @@
+{
+  "id": "use-navigation-state",
+  "title": "useNavigationState",
+  "description": "`useNavigationState` is a hook which gives access to the navigation state of the navigator which contains the screen. It's useful in rare cases where you want to render something based on the navigation state.",
+  "source": "@site/docs/use-navigation-state.md",
+  "permalink": "/docs/next/use-navigation-state",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/use-navigation-state.md",
+  "version": "next",
+  "sidebar_label": "useNavigationState",
+  "sidebar": "docs",
+  "previous": {
+    "title": "useRoute",
+    "permalink": "/docs/next/use-route"
+  },
+  "next": {
+    "title": "useFocusEffect",
+    "permalink": "/docs/next/use-focus-effect"
+  }
+}

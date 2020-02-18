@@ -1,0 +1,19 @@
+{
+  "id": "version-1.x/navigating-without-navigation-prop",
+  "title": "Navigating without the navigation prop",
+  "description": "Calling functions such as `navigate` or `popToTop` on the `navigation` prop is not the only way to navigate around your app. As an alternative, you can dispatch navigation actions on your top-level navigator, provided you aren't passing your own `navigation` prop as you would with a redux integration. The presented approach is useful in situations when you want to trigger a navigation action from places where you do not have access to the `navigation` prop, or if you're looking for an alternative to using the `navigation` prop.",
+  "source": "@site/versioned_docs/version-1.x/navigating-without-navigation-prop.md",
+  "permalink": "/docs/1.x/navigating-without-navigation-prop",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-1.x/navigating-without-navigation-prop.md",
+  "version": "1.x",
+  "sidebar_label": "Navigating without the navigation prop",
+  "sidebar": "version-1.x/docs",
+  "previous": {
+    "title": "Access the navigation prop from any component",
+    "permalink": "/docs/1.x/connecting-navigation-prop"
+  },
+  "next": {
+    "title": "Deep linking",
+    "permalink": "/docs/1.x/deep-linking"
+  }
+}

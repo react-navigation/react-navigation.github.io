@@ -1,0 +1,10 @@
+{
+  "id": "version-1.x/set-params-on-back",
+  "title": "Update params when navigating back",
+  "description": "",
+  "source": "@site/versioned_docs/version-1.x/set-params-on-back.md",
+  "permalink": "/docs/1.x/set-params-on-back",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-1.x/set-params-on-back.md",
+  "version": "1.x",
+  "sidebar_label": "Update params when navigating back"
+}

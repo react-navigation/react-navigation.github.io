@@ -1,8 +1,7 @@
 ---
-id: version-4.x-custom-navigators
+id: custom-navigators
 title: Custom navigators
 sidebar_label: Custom navigators
-original_id: custom-navigators
 ---
 
 A navigator is any React component that has a [router](https://github.com/react-navigation/react-navigation-core/blob/master/src/routers/StackRouter.js) on it, to define the navigation behavior. Each navigator is given a `navigation` prop, which allows the parent to control the navigation state.

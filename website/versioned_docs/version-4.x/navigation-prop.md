@@ -1,8 +1,7 @@
 ---
-id: version-4.x-navigation-prop
+id: navigation-prop
 title: Navigation prop reference
 sidebar_label: Navigation prop
-original_id: navigation-prop
 ---
 
 Each `screen` component in your app is provided with the `navigation` prop automatically. The prop contains various convenience functions that dispatch navigation actions on the route's router. It looks like this:

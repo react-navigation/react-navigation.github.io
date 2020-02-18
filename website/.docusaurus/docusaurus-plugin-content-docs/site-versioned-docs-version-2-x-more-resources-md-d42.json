@@ -1,0 +1,19 @@
+{
+  "id": "version-2.x/more-resources",
+  "title": "More Resources",
+  "description": "# Talks",
+  "source": "@site/versioned_docs/version-2.x/more-resources.md",
+  "permalink": "/docs/2.x/more-resources",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-2.x/more-resources.md",
+  "version": "2.x",
+  "sidebar_label": "More Resources",
+  "sidebar": "version-2.x-docs",
+  "previous": {
+    "title": "Community-developed Navigators and Libraries",
+    "permalink": "/docs/2.x/community-libraries-and-navigators"
+  },
+  "next": {
+    "title": "Pitch & anti-pitch",
+    "permalink": "/docs/2.x/pitch"
+  }
+}

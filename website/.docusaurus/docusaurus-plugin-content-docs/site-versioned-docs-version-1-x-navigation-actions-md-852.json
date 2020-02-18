@@ -1,0 +1,19 @@
+{
+  "id": "version-1.x/navigation-actions",
+  "title": "NavigationActions reference",
+  "description": "All `NavigationActions` return an object that can be sent to the router using `navigation.dispatch()` method.",
+  "source": "@site/versioned_docs/version-1.x/navigation-actions.md",
+  "permalink": "/docs/1.x/navigation-actions",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-1.x/navigation-actions.md",
+  "version": "1.x",
+  "sidebar_label": "NavigationActions",
+  "sidebar": "api",
+  "previous": {
+    "title": "Navigation prop reference",
+    "permalink": "/docs/1.x/navigation-prop"
+  },
+  "next": {
+    "title": "StackNavigator reference",
+    "permalink": "/docs/1.x/stack-navigator"
+  }
+}

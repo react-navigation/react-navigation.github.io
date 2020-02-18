@@ -1,0 +1,19 @@
+{
+  "id": "version-1.x/navigation-views",
+  "title": "Navigation views",
+  "description": "Navigation views are presentation components that take a [`router`](/docs/routers) and a [`navigation`](/docs/navigation-prop) prop, and can display several screens, as specified by the `navigation.state`.",
+  "source": "@site/versioned_docs/version-1.x/navigation-views.md",
+  "permalink": "/docs/1.x/navigation-views",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-1.x/navigation-views.md",
+  "version": "1.x",
+  "sidebar_label": "Navigation views",
+  "sidebar": "version-1.x/docs",
+  "previous": {
+    "title": "Custom routers",
+    "permalink": "/docs/1.x/custom-routers"
+  },
+  "next": {
+    "title": "Transitioner",
+    "permalink": "/docs/1.x/transitioner"
+  }
+}

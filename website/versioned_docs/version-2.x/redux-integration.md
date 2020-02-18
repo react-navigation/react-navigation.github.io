@@ -1,8 +1,7 @@
 ---
-id: version-2.x-redux-integration
+id: redux-integration
 title: Redux integration
 sidebar_label: Redux integration
-original_id: redux-integration
 ---
 
 **Warning: in the next major version of React Navigation, to be released in Fall 2018, we will no longer provide any information about how to integrate with Redux and it may cease to work**. Issues related to Redux that are posted on the React Navigation issue tracker will be immediately closed. Redux integration may continue to work but it will not be tested against or considered when making any design decisions for the library.

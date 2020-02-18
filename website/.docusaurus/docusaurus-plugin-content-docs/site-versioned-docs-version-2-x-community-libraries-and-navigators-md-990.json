@@ -1,0 +1,19 @@
+{
+  "id": "version-2.x/community-libraries-and-navigators",
+  "title": "Community-developed Navigators and Libraries",
+  "description": "# Navigators",
+  "source": "@site/versioned_docs/version-2.x/community-libraries-and-navigators.md",
+  "permalink": "/docs/2.x/community-libraries-and-navigators",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-2.x/community-libraries-and-navigators.md",
+  "version": "2.x",
+  "sidebar_label": "Community Navigators and Libraries",
+  "sidebar": "version-2.x-docs",
+  "previous": {
+    "title": "Transitioner",
+    "permalink": "/docs/2.x/transitioner"
+  },
+  "next": {
+    "title": "More Resources",
+    "permalink": "/docs/2.x/more-resources"
+  }
+}

@@ -1,8 +1,7 @@
 ---
-id: version-4.x-drawer-based-navigation
+id: drawer-based-navigation
 title: Drawer navigation
 sidebar_label: Drawer navigation
-original_id: drawer-based-navigation
 ---
 
 This guide covers [createDrawerNavigator](drawer-navigator.html).

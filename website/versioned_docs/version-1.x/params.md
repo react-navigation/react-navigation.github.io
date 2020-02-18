@@ -1,8 +1,7 @@
 ---
-id: version-1.x-params
+id: params
 title: Passing parameters to routes
 sidebar_label: Passing parameters to routes
-original_id: params
 ---
 
 Now that we know how to [create a StackNavigator with some routes](hello-react-navigation.html) and [navigate between those routes](navigating.html), let's look at how we can pass data to routes when we navigate to them.

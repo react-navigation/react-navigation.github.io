@@ -1,8 +1,7 @@
 ---
-id: version-5.x-use-navigation
+id: use-navigation
 title: useNavigation
 sidebar_label: useNavigation
-original_id: use-navigation
 ---
 
 `useNavigation` is a hook which gives access to `navigation` object. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
@@ -11,7 +10,7 @@ original_id: use-navigation
 
 ## Example
 
-<samp id="use-navigation-example">
+<samp id="use-navigation-example"></samp>
 
 ```js
 import * as React from 'react';

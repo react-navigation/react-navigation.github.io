@@ -1,0 +1,19 @@
+{
+  "id": "nesting-navigators",
+  "title": "Nesting navigators",
+  "description": "Nesting navigators means rendering a navigator inside a screen of another navigator, for example:",
+  "source": "@site/docs/nesting-navigators.md",
+  "permalink": "/docs/next/nesting-navigators",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/nesting-navigators.md",
+  "version": "next",
+  "sidebar_label": "Nesting navigators",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Header buttons",
+    "permalink": "/docs/next/header-buttons"
+  },
+  "next": {
+    "title": "Navigation lifecycle",
+    "permalink": "/docs/next/navigation-lifecycle"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "version-3.x/drawer-actions",
+  "title": "DrawerActions reference",
+  "description": "`DrawerActions` is an object containing methods for generating actions specific to drawer-based navigators. Its methods expand upon the actions available in [`NavigationActions`](navigation-actions.html).",
+  "source": "@site/versioned_docs/version-3.x/drawer-actions.md",
+  "permalink": "/docs/3.x/drawer-actions",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-3.x/drawer-actions.md",
+  "version": "3.x",
+  "sidebar_label": "DrawerActions",
+  "sidebar": "version-3.x-docs",
+  "previous": {
+    "title": "SwitchActions reference",
+    "permalink": "/docs/3.x/switch-actions"
+  },
+  "next": {
+    "title": "withNavigation",
+    "permalink": "/docs/3.x/with-navigation"
+  }
+}

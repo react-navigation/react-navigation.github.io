@@ -1,0 +1,19 @@
+{
+  "id": "version-3.x/themes",
+  "title": "Themes",
+  "description": "Providing a light theme and a dark theme is a nice way to let your users adjust the appearance of your app depending on the time of day or their preference. It also signals that you are a hip app developer that keeps up with the trends of the day.",
+  "source": "@site/versioned_docs/version-3.x/themes.md",
+  "permalink": "/docs/3.x/themes",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-3.x/themes.md",
+  "version": "3.x",
+  "sidebar_label": "Themes",
+  "sidebar": "version-3.x-docs",
+  "previous": {
+    "title": "Screen tracking for analytics",
+    "permalink": "/docs/3.x/screen-tracking"
+  },
+  "next": {
+    "title": "State persistence",
+    "permalink": "/docs/3.x/state-persistence"
+  }
+}

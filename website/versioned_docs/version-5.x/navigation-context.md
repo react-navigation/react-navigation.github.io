@@ -1,8 +1,7 @@
 ---
-id: version-5.x-navigation-context
+id: navigation-context
 title: NavigationContext
 sidebar_label: NavigationContext
-original_id: navigation-context
 ---
 
 `NavigationContext` provides the `navigation` object (same object as the [navigation](navigation-prop.html) prop). In fact, [useNavigation](use-navigation.html) uses this context to get the `navigation` prop.
@@ -11,7 +10,7 @@ Most of the time, you won't use `NavigationContext` directly, as the provided `u
 
 Example:
 
-<samp id="navigation-context">
+<samp id="navigation-context"></samp>
 
 ```js
 import { NavigationContext } from '@react-navigation/native';

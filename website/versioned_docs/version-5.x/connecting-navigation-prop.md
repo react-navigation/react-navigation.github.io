@@ -1,8 +1,7 @@
 ---
-id: version-5.x-connecting-navigation-prop
+id: connecting-navigation-prop
 title: Access the navigation prop from any component
 sidebar_label: Access the navigation prop from any component
-original_id: connecting-navigation-prop
 ---
 
 [`useNavigation`](use-navigation.html) is a hook which gives access to the `navigation` object. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.

@@ -1,0 +1,19 @@
+{
+  "id": "connecting-navigation-prop",
+  "title": "Access the navigation prop from any component",
+  "description": "[`useNavigation`](use-navigation.html) is a hook which gives access to the `navigation` object. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.",
+  "source": "@site/docs/connecting-navigation-prop.md",
+  "permalink": "/docs/next/connecting-navigation-prop",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/connecting-navigation-prop.md",
+  "version": "next",
+  "sidebar_label": "Access the navigation prop from any component",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Custom Android back button behavior",
+    "permalink": "/docs/next/custom-android-back-button-handling"
+  },
+  "next": {
+    "title": "Navigating without the navigation prop",
+    "permalink": "/docs/next/navigating-without-navigation-prop"
+  }
+}

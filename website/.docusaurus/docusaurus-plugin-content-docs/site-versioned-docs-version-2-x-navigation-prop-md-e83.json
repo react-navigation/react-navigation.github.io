@@ -1,0 +1,19 @@
+{
+  "id": "version-2.x/navigation-prop",
+  "title": "Navigation prop reference",
+  "description": "Each `screen` component in your app is provided with the `navigation` prop automatically. The prop contains various convenience functions that dispatch navigation actions on the route's router. It looks like this:",
+  "source": "@site/versioned_docs/version-2.x/navigation-prop.md",
+  "permalink": "/docs/2.x/navigation-prop",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-2.x/navigation-prop.md",
+  "version": "2.x",
+  "sidebar_label": "Navigation prop",
+  "sidebar": "version-2.x-api",
+  "previous": {
+    "title": "API Reference",
+    "permalink": "/docs/2.x/api-reference"
+  },
+  "next": {
+    "title": "NavigationActions reference",
+    "permalink": "/docs/2.x/navigation-actions"
+  }
+}

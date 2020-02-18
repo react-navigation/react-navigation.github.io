@@ -1,0 +1,10 @@
+{
+  "id": "route-prop",
+  "title": "Route prop reference",
+  "description": "Each `screen` component in your app is provided with the `route` prop automatically. The prop contains various information regarding current route (place in navigation hierarchy component lives).",
+  "source": "@site/docs/route-prop.md",
+  "permalink": "/docs/next/route-prop",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/route-prop.md",
+  "version": "next",
+  "sidebar_label": "Route prop"
+}

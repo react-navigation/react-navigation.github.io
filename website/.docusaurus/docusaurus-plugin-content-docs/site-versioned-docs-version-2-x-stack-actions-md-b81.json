@@ -1,0 +1,19 @@
+{
+  "id": "version-2.x/stack-actions",
+  "title": "StackActions reference",
+  "description": "`StackActions` is an object containing methods for generating actions specific to stack-based navigators. Its methods expand upon the actions available in [`NavigationActions`](navigation-actions.html).",
+  "source": "@site/versioned_docs/version-2.x/stack-actions.md",
+  "permalink": "/docs/2.x/stack-actions",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-2.x/stack-actions.md",
+  "version": "2.x",
+  "sidebar_label": "StackActions",
+  "sidebar": "version-2.x-api",
+  "previous": {
+    "title": "NavigationActions reference",
+    "permalink": "/docs/2.x/navigation-actions"
+  },
+  "next": {
+    "title": "DrawerActions reference",
+    "permalink": "/docs/2.x/drawer-actions"
+  }
+}

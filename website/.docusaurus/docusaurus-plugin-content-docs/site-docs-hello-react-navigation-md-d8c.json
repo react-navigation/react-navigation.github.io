@@ -1,0 +1,19 @@
+{
+  "id": "hello-react-navigation",
+  "title": "Hello React Navigation",
+  "description": "In a web browser, you can link to different pages using an anchor (`<a>`) tag. When the user clicks on a link, the URL is pushed to the browser history stack. When the user presses the back button, the browser pops the item from the top of the history stack, so the active page is now the previously visited page. React Native doesn't have a built-in idea of a global history stack like a web browser does -- this is where React Navigation enters the story.",
+  "source": "@site/docs/hello-react-navigation.md",
+  "permalink": "/docs/next/hello-react-navigation",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/hello-react-navigation.md",
+  "version": "next",
+  "sidebar_label": "Hello React Navigation",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Getting started",
+    "permalink": "/docs/next/getting-started"
+  },
+  "next": {
+    "title": "Moving between screens",
+    "permalink": "/docs/next/navigating"
+  }
+}

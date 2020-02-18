@@ -1,55 +1,55 @@
 {
-  "version-1.x-docs": {
+  "version-1.x/docs": {
     "Fundamentals": [
-      "version-1.x-getting-started",
-      "version-1.x-hello-react-navigation",
-      "version-1.x-supported-react-native-versions",
-      "version-1.x-navigating",
-      "version-1.x-params",
-      "version-1.x-headers",
-      "version-1.x-header-buttons",
-      "version-1.x-modal",
-      "version-1.x-next-steps",
-      "version-1.x-glossary-of-terms"
+      "version-1.x/getting-started",
+      "version-1.x/hello-react-navigation",
+      "version-1.x/supported-react-native-versions",
+      "version-1.x/navigating",
+      "version-1.x/params",
+      "version-1.x/headers",
+      "version-1.x/header-buttons",
+      "version-1.x/modal",
+      "version-1.x/next-steps",
+      "version-1.x/glossary-of-terms"
     ],
     "How do I do ...?": [
-      "version-1.x-tab-based-navigation",
-      "version-1.x-drawer-based-navigation",
-      "version-1.x-auth-flow",
-      "version-1.x-handling-iphonex",
-      "version-1.x-status-bar",
-      "version-1.x-custom-android-back-button-handling",
-      "version-1.x-connecting-navigation-prop",
-      "version-1.x-navigating-without-navigation-prop",
-      "version-1.x-deep-linking",
-      "version-1.x-screen-tracking",
-      "version-1.x-redux-integration"
+      "version-1.x/tab-based-navigation",
+      "version-1.x/drawer-based-navigation",
+      "version-1.x/auth-flow",
+      "version-1.x/handling-iphonex",
+      "version-1.x/status-bar",
+      "version-1.x/custom-android-back-button-handling",
+      "version-1.x/connecting-navigation-prop",
+      "version-1.x/navigating-without-navigation-prop",
+      "version-1.x/deep-linking",
+      "version-1.x/screen-tracking",
+      "version-1.x/redux-integration"
     ],
     "Build your own Navigator": [
-      "version-1.x-custom-navigator-overview",
-      "version-1.x-routers",
-      "version-1.x-custom-navigators",
-      "version-1.x-custom-routers",
-      "version-1.x-navigation-views",
-      "version-1.x-transitioner"
+      "version-1.x/custom-navigator-overview",
+      "version-1.x/routers",
+      "version-1.x/custom-navigators",
+      "version-1.x/custom-routers",
+      "version-1.x/navigation-views",
+      "version-1.x/transitioner"
     ],
     "Meta": [
-      "version-1.x-pitch",
-      "version-1.x-alternatives",
-      "version-1.x-contributing"
+      "version-1.x/pitch",
+      "version-1.x/alternatives",
+      "version-1.x/contributing"
     ]
   },
-  "version-1.x-api": {
+  "api": {
     "API Reference": [
-      "version-1.x-api-reference",
-      "version-1.x-navigation-prop",
-      "version-1.x-navigation-actions",
-      "version-1.x-stack-navigator",
-      "version-1.x-switch-navigator",
-      "version-1.x-tab-navigator",
-      "version-1.x-drawer-navigator",
-      "version-1.x-with-navigation",
-      "version-1.x-with-navigation-focus"
+      "version-1.x/api-reference",
+      "version-1.x/navigation-prop",
+      "version-1.x/navigation-actions",
+      "version-1.x/stack-navigator",
+      "version-1.x/switch-navigator",
+      "version-1.x/tab-navigator",
+      "version-1.x/drawer-navigator",
+      "version-1.x/with-navigation",
+      "version-1.x/with-navigation-focus"
     ]
   }
 }

@@ -1,0 +1,19 @@
+{
+  "id": "navigating-without-navigation-prop",
+  "title": "Navigating without the navigation prop",
+  "description": "Sometimes you need to trigger a navigation action from places where you do not have access to the `navigation` prop, such as a Redux middleware. For such cases, you can dispatch navigation actions from the navigation container.",
+  "source": "@site/docs/navigating-without-navigation-prop.md",
+  "permalink": "/docs/next/navigating-without-navigation-prop",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/navigating-without-navigation-prop.md",
+  "version": "next",
+  "sidebar_label": "Navigating without the navigation prop",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Access the navigation prop from any component",
+    "permalink": "/docs/next/connecting-navigation-prop"
+  },
+  "next": {
+    "title": "Deep linking",
+    "permalink": "/docs/next/deep-linking"
+  }
+}

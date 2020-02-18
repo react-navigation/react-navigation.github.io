@@ -1,0 +1,19 @@
+{
+  "id": "version-2.x/glossary-of-terms",
+  "title": "Glossary of terms",
+  "description": "> This is a new section of the documentation and it's missing a lot of terms! Please [submit a pull request or an issue](https://github.com/react-navigation/website) with a term that you think should be explained here.",
+  "source": "@site/versioned_docs/version-2.x/glossary-of-terms.md",
+  "permalink": "/docs/2.x/glossary-of-terms",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-2.x/glossary-of-terms.md",
+  "version": "2.x",
+  "sidebar_label": "Glossary of terms",
+  "sidebar": "version-2.x-docs",
+  "previous": {
+    "title": "Next steps",
+    "permalink": "/docs/2.x/next-steps"
+  },
+  "next": {
+    "title": "Common mistakes",
+    "permalink": "/docs/2.x/common-mistakes"
+  }
+}

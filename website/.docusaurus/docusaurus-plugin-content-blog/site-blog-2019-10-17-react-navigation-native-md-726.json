@@ -1,0 +1,17 @@
+{
+  "permalink": "/blog/2019/10/17/react-navigation-native",
+  "source": "@site/blog/2019-10-17-react-navigation-native.md",
+  "description": "React Navigation steps firmly into the next level and we’re very excited to announce to you something great happening in React Navigation codebase.",
+  "date": "2019-10-17T00:00:00.000Z",
+  "tags": [],
+  "title": "React Navigation meets native",
+  "truncated": false,
+  "prevItem": {
+    "title": "Using React Navigation 5 with UI Kitten",
+    "permalink": "/blog/2019/11/04/using-react-navigation-5-with-ui-kitten"
+  },
+  "nextItem": {
+    "title": "React Navigation 4.0",
+    "permalink": "/blog/2019/09/16/react-navigation-4.0"
+  }
+}

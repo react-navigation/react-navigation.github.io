@@ -1,8 +1,7 @@
 ---
-id: version-5.x-custom-routers
+id: custom-routers
 title: Custom routers
 sidebar_label: Custom routers
-original_id: custom-routers
 ---
 
 The router object provides various helper methods to deal with the state and actions, a reducer to update the state as well as some action creators.

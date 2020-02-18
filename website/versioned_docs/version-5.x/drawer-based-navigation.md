@@ -1,8 +1,7 @@
 ---
-id: version-5.x-drawer-based-navigation
+id: drawer-based-navigation
 title: Drawer navigation
 sidebar_label: Drawer navigation
-original_id: drawer-based-navigation
 ---
 
 ![Using drawer navigator](/docs/assets/navigators/drawer/drawer-demo.gif)
@@ -20,7 +19,7 @@ npm install @react-navigation/drawer
 To use this drawer navigator, import it from `@react-navigation/drawer`:
 (swipe right to open)
 
-<samp id="drawer-based-navigation" />
+<samp id="drawer-based-navigation"></samp>
 
 ```js
 import * as React from 'react';
@@ -65,7 +64,7 @@ export default function App() {
 
 To open and close drawer, use the following helpers:
 
-<samp id="drawer-open-close-toggle">
+<samp id="drawer-open-close-toggle"></samp>
 
 ```js
 navigation.openDrawer();
@@ -74,7 +73,7 @@ navigation.closeDrawer();
 
 If you would like to toggle the drawer you call the following:
 
-<samp id="drawer-open-close-toggle">
+<samp id="drawer-open-close-toggle"></samp>
 
 ```js
 navigation.toggleDrawer();
@@ -82,7 +81,7 @@ navigation.toggleDrawer();
 
 Each of these functions, behind the scenes, are simply dispatching actions:
 
-<samp id="drawer-dispatch">
+<samp id="drawer-dispatch"></samp>
 
 ```js
 navigation.dispatch(DrawerActions.openDrawer());

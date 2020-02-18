@@ -1,0 +1,19 @@
+{
+  "id": "version-5.x/community-libraries-and-navigators",
+  "title": "Community-developed Navigators and Libraries",
+  "description": "> Libraries listed in this guide may not have been updated to work with the latest version of React Navigation. Please refer to the library's documentation to see which version of React Navigation it supports.",
+  "source": "@site/versioned_docs/version-5.x/community-libraries-and-navigators.md",
+  "permalink": "/docs/community-libraries-and-navigators",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-5.x/community-libraries-and-navigators.md",
+  "version": "5.x",
+  "sidebar_label": "Community Navigators and Libraries",
+  "sidebar": "version-5.x/docs",
+  "previous": {
+    "title": "Supported React Native versions",
+    "permalink": "/docs/supported-react-native-versions"
+  },
+  "next": {
+    "title": "More Resources",
+    "permalink": "/docs/more-resources"
+  }
+}

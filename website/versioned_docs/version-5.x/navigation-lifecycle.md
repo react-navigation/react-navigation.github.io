@@ -1,8 +1,7 @@
 ---
-id: version-5.x-navigation-lifecycle
+id: navigation-lifecycle
 title: Navigation lifecycle
 sidebar_label: Navigation lifecycle
-original_id: navigation-lifecycle
 ---
 
 In a previous section, we worked with a stack navigator that has two screens (`Home` and `Details`) and learned how to use `navigation.navigate('RouteName')` to navigate between the routes.

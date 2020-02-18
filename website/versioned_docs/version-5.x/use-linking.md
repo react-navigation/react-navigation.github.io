@@ -1,8 +1,7 @@
 ---
-id: version-5.x-use-linking
+id: use-linking
 title: useLinking
 sidebar_label: useLinking
-original_id: use-linking
 ---
 
 The `useLinking` hook lets us handle deep links in our apps.
@@ -15,7 +14,6 @@ import { ScrollView } from 'react-native';
 import { useLinking } from '@react-navigation/native';
 
 export default function App() {
-  const ref = React.useRef();
   const { getInitialState } = useLinking(ref, {
     prefixes: ['https://mychat.com', 'mychat://'],
     config: {
@@ -43,7 +41,7 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer initialState={initialState} ref={ref}>
+    <NavigationContainer initialState={initialState}>
       {/* content */}
     </NavigationContainer>
   );

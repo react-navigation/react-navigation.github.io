@@ -1,0 +1,19 @@
+{
+  "id": "react-native-screens",
+  "title": "Optimize memory usage and performance",
+  "description": "Prior to `2.14.0`, all screens are essentially regular native `View` in each platform, which will increase memory usage and make the render tree deep in a heavy-stacked application. This is one of the reason your app is slowing down comparing to native navigation solution.",
+  "source": "@site/docs/react-native-screens.md",
+  "permalink": "/docs/next/react-native-screens",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/react-native-screens.md",
+  "version": "next",
+  "sidebar_label": "Optimize memory usage and performance",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Call a function when focused screen changes",
+    "permalink": "/docs/next/function-after-focusing-screen"
+  },
+  "next": {
+    "title": "Upgrading from 4.x",
+    "permalink": "/docs/next/upgrading-from-4.x"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "version-4.x/navigation-key",
+  "title": "Using the navigation key",
+  "description": "The `key` parameter comes up repeatedly across different navigation functions. Let's take a look at a summary of its use cases:",
+  "source": "@site/versioned_docs/version-4.x/navigation-key.md",
+  "permalink": "/docs/4.x/navigation-key",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-4.x/navigation-key.md",
+  "version": "4.x",
+  "sidebar_label": "Using the navigation key",
+  "sidebar": "version-4.x-docs",
+  "previous": {
+    "title": "Navigating without the navigation prop",
+    "permalink": "/docs/4.x/navigating-without-navigation-prop"
+  },
+  "next": {
+    "title": "Deep linking",
+    "permalink": "/docs/4.x/deep-linking"
+  }
+}

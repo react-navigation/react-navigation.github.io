@@ -1,8 +1,7 @@
 ---
-id: version-3.x-params
+id: params
 title: Passing parameters to routes
 sidebar_label: Passing parameters to routes
-original_id: params
 ---
 
 Remember when I said "more on that later when we talk about `params`!"? Well, the time has come.

@@ -1,8 +1,7 @@
 ---
-id: version-2.x-screen-tracking
+id: screen-tracking
 title: Screen tracking
 sidebar_label: Screen tracking
-original_id: screen-tracking
 ---
 
 This example shows how to do screen tracking and send to Google Analytics. The approach can be adapted to any other analytics SDK. 

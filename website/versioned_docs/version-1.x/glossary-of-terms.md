@@ -1,8 +1,7 @@
 ---
-id: version-1.x-glossary-of-terms
+id: glossary-of-terms
 title: Glossary of terms
 sidebar_label: Glossary of terms
-original_id: glossary-of-terms
 ---
 
 > This is a new section of the documentation and it's missing a lot of terms! Please [submit a pull request or an issue](https://github.com/react-navigation/website) with a term that you think should be explained here.

@@ -1,8 +1,7 @@
 ---
-id: version-2.x-drawer-navigator
+id: drawer-navigator
 title: createDrawerNavigator
 sidebar_label: createDrawerNavigator
-original_id: drawer-navigator
 ---
 
 ```js

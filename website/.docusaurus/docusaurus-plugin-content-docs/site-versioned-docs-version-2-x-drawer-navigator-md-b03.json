@@ -1,0 +1,19 @@
+{
+  "id": "version-2.x/drawer-navigator",
+  "title": "createDrawerNavigator",
+  "description": "```js",
+  "source": "@site/versioned_docs/version-2.x/drawer-navigator.md",
+  "permalink": "/docs/2.x/drawer-navigator",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-2.x/drawer-navigator.md",
+  "version": "2.x",
+  "sidebar_label": "createDrawerNavigator",
+  "sidebar": "version-2.x-api",
+  "previous": {
+    "title": "createSwitchNavigator",
+    "permalink": "/docs/2.x/switch-navigator"
+  },
+  "next": {
+    "title": "createTabNavigator",
+    "permalink": "/docs/2.x/tab-navigator"
+  }
+}

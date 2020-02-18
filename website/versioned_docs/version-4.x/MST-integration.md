@@ -1,8 +1,7 @@
 ---
-id: version-4.x-MST-integration
+id: MST-integration
 title: Integrating with MobX State Tree
 sidebar_label: MobX State Tree integration
-original_id: MST-integration
 ---
 
 This guide explores possible way to use React Navigation in a React Native project that uses [MobX State Tree](https://github.com/mobxjs/mobx-state-tree)(MST) for state management. The guide is accompanied by a [sample app](https://github.com/vonovak/react-navigation-mst-demo). Parts of the guide may be relevant also for users of [MobX](https://github.com/mobxjs/mobx) but please be aware of the fact that MobX does not come with a built-in solution for (de)serializing its state.

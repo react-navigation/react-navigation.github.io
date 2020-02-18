@@ -1,0 +1,19 @@
+{
+  "id": "version-5.x/material-top-tab-navigator",
+  "title": "createMaterialTopTabNavigator",
+  "description": "A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the route or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.",
+  "source": "@site/versioned_docs/version-5.x/material-top-tab-navigator.md",
+  "permalink": "/docs/material-top-tab-navigator",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-5.x/material-top-tab-navigator.md",
+  "version": "5.x",
+  "sidebar_label": "createMaterialTopTabNavigator",
+  "sidebar": "version-5.x/docs",
+  "previous": {
+    "title": "createMaterialBottomTabNavigator",
+    "permalink": "/docs/material-bottom-tab-navigator"
+  },
+  "next": {
+    "title": "useNavigation",
+    "permalink": "/docs/use-navigation"
+  }
+}

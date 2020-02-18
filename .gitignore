@@ -4,5 +4,10 @@ website/translated_docs
 website/build/
 website/node_modules
 
+website1/translated_docs
+website1/build/
+website1/node_modules
+
 website/i18n/*
+website1/i18n/*
 !website/i18n/en.json

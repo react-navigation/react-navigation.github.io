@@ -1,13 +1,12 @@
 ---
-id: version-5.x-use-is-focused
+id: use-is-focused
 title: useIsFocused
 sidebar_label: useIsFocused
-original_id: use-is-focused
 ---
 
 We might want to render different content based on the current focus state of the screen. The library exports a `useIsFocused` hook to make this easier:
 
-<samp id="use-is-focused">
+<samp id="use-is-focused"></samp>
 
 ```js
 import { useIsFocused } from '@react-navigation/native';

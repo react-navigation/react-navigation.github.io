@@ -1,0 +1,19 @@
+{
+  "id": "use-is-focused",
+  "title": "useIsFocused",
+  "description": "We might want to render different content based on the current focus state of the screen. The library exports a `useIsFocused` hook to make this easier:",
+  "source": "@site/docs/use-is-focused.md",
+  "permalink": "/docs/next/use-is-focused",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/use-is-focused.md",
+  "version": "next",
+  "sidebar_label": "useIsFocused",
+  "sidebar": "docs",
+  "previous": {
+    "title": "useFocusEffect",
+    "permalink": "/docs/next/use-focus-effect"
+  },
+  "next": {
+    "title": "useLinking",
+    "permalink": "/docs/next/use-linking"
+  }
+}

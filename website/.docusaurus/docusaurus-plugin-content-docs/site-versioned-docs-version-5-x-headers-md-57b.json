@@ -1,0 +1,19 @@
+{
+  "id": "version-5.x/headers",
+  "title": "Configuring the header bar",
+  "description": "We've seen how to configure the header title already, but let's go over that again before moving on to some other options &mdash; repetition is key to learning!",
+  "source": "@site/versioned_docs/version-5.x/headers.md",
+  "permalink": "/docs/headers",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-5.x/headers.md",
+  "version": "5.x",
+  "sidebar_label": "Configuring the header bar",
+  "sidebar": "version-5.x/docs",
+  "previous": {
+    "title": "Passing parameters to routes",
+    "permalink": "/docs/params"
+  },
+  "next": {
+    "title": "Header buttons",
+    "permalink": "/docs/header-buttons"
+  }
+}

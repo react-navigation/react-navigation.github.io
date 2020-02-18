@@ -1,0 +1,13 @@
+{
+  "permalink": "/blog/2018/02/06/react-navigation-1.0",
+  "source": "@site/blog/2018-02-06-react-navigation-1.0.md",
+  "description": "As of today, React Navigation version 1.0 has been released! To see a list of recent improvements leading up to the release, refer to the “[Renewed Path to React Navigation V1.0](https://github.com/react-navigation/react-navigation/issues/2585)” issue. Thank you to everybody who has filed high-quality bug reports, submitted pull requests, and helped out fellow developers while we were in beta!",
+  "date": "2018-02-06T00:00:00.000Z",
+  "tags": [],
+  "title": "React Navigation 1.0 (goodbye, beta!)",
+  "truncated": false,
+  "prevItem": {
+    "title": "2.0 release candidate",
+    "permalink": "/blog/2018/04/06/react-navigation-2.0-rc"
+  }
+}

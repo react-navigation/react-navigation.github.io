@@ -1,0 +1,17 @@
+{
+  "permalink": "/blog/2018/11/01/react-navigation-3.0-rc",
+  "source": "@site/blog/2018-11-01-react-navigation-3.0-rc.md",
+  "description": "We are excited to announce the release candidate of version 3.0 today!",
+  "date": "2018-11-01T00:00:00.000Z",
+  "tags": [],
+  "title": "3.0 release candidate",
+  "truncated": false,
+  "prevItem": {
+    "title": "React Navigation 3.0",
+    "permalink": "/blog/2018/11/17/react-navigation-3.0"
+  },
+  "nextItem": {
+    "title": "React Navigation 2.0",
+    "permalink": "/blog/2018/05/07/react-navigation-2.0"
+  }
+}

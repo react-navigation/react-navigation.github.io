@@ -1,8 +1,7 @@
 ---
-id: version-2.x-switch-navigator
+id: switch-navigator
 title: createSwitchNavigator
 sidebar_label: createSwitchNavigator
-original_id: switch-navigator
 ---
 
 The purpose of SwitchNavigator is to only ever show one screen at a time. By default, it does not handle back actions and it resets routes to their default state when you switch away.

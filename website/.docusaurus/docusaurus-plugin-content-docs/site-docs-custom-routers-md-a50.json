@@ -1,0 +1,19 @@
+{
+  "id": "custom-routers",
+  "title": "Custom routers",
+  "description": "The router object provides various helper methods to deal with the state and actions, a reducer to update the state as well as some action creators.",
+  "source": "@site/docs/custom-routers.md",
+  "permalink": "/docs/next/custom-routers",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/custom-routers.md",
+  "version": "next",
+  "sidebar_label": "Custom routers",
+  "sidebar": "docs",
+  "previous": {
+    "title": "TabActions reference",
+    "permalink": "/docs/next/tab-actions"
+  },
+  "next": {
+    "title": "Custom navigators",
+    "permalink": "/docs/next/custom-navigators"
+  }
+}

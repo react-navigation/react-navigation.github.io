@@ -1,0 +1,19 @@
+{
+  "id": "version-4.x/custom-android-back-button-handling",
+  "title": "Custom Android back button behavior",
+  "description": "By default, when user presses the Android hardware back button, react-navigation will pop a screen or exit the app if there are no screens to pop. This is a sensible default behavior, but there are situations when you might want to implement custom handling.",
+  "source": "@site/versioned_docs/version-4.x/custom-android-back-button-handling.md",
+  "permalink": "/docs/4.x/custom-android-back-button-handling",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-4.x/custom-android-back-button-handling.md",
+  "version": "4.x",
+  "sidebar_label": "Custom Android back button behavior",
+  "sidebar": "version-4.x-docs",
+  "previous": {
+    "title": "Navigation options resolution",
+    "permalink": "/docs/4.x/navigation-options-resolution"
+  },
+  "next": {
+    "title": "Access the navigation prop from any component",
+    "permalink": "/docs/4.x/connecting-navigation-prop"
+  }
+}

@@ -1,8 +1,7 @@
 ---
-id: version-2.x-common-mistakes
+id: common-mistakes
 title: Common mistakes
 sidebar_label: Common mistakes
-original_id: common-mistakes
 ---
 
 This section attempts to outline issues that users frequently encounter when first getting accustomed to using React Navigation and serves as a reference in some cases for error messages.

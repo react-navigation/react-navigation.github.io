@@ -1,0 +1,15 @@
+{
+  "id": "version-2.x/contributing",
+  "title": "React Navigation contributor guide",
+  "description": "Want to help improve React Navigation? Your help would be greatly appreciated!",
+  "source": "@site/versioned_docs/version-2.x/contributing.md",
+  "permalink": "/docs/2.x/contributing",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-2.x/contributing.md",
+  "version": "2.x",
+  "sidebar_label": "Contributing",
+  "sidebar": "version-2.x-docs",
+  "previous": {
+    "title": "Alternative libraries",
+    "permalink": "/docs/2.x/alternatives"
+  }
+}

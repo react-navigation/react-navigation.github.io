@@ -1,0 +1,19 @@
+{
+  "id": "version-3.x/animated-switch-navigator",
+  "title": "createAnimatedSwitchNavigator",
+  "description": "A `SwitchNavigator` with animation support.",
+  "source": "@site/versioned_docs/version-3.x/animated-switch-navigator.md",
+  "permalink": "/docs/3.x/animated-switch-navigator",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-3.x/animated-switch-navigator.md",
+  "version": "3.x",
+  "sidebar_label": "createAnimatedSwitchNavigator",
+  "sidebar": "version-3.x-docs",
+  "previous": {
+    "title": "createSwitchNavigator",
+    "permalink": "/docs/3.x/switch-navigator"
+  },
+  "next": {
+    "title": "createDrawerNavigator",
+    "permalink": "/docs/3.x/drawer-navigator"
+  }
+}

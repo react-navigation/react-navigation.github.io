@@ -1,8 +1,7 @@
 ---
-id: version-5.x-deep-linking
+id: deep-linking
 title: Deep linking
 sidebar_label: Deep linking
-original_id: deep-linking
 ---
 
 In this guide we will set up our app to handle external URIs.
@@ -52,17 +51,8 @@ function App() {
   const [initialState, setInitialState] = React.useState();
 
   React.useEffect(() => {
-    Promise.race([
-      getInitialState(),
-      new Promise(resolve =>
-        // Timeout in 150ms if `getInitialState` doesn't resolve
-        // Workaround for https://github.com/facebook/react-native/issues/25675
-        setTimeout(resolve, 150)
-      )
-    ])
-      .catch(e => {
-        console.error(e);
-      })
+    getInitialState()
+      .catch(() => {})
       .then(state => {
         if (state !== undefined) {
           setInitialState(state);
@@ -83,8 +73,6 @@ function App() {
   );
 }
 ```
-
-> Note: The `getInitialState` function uses React Native's `Linking.getInitialUrl()` under the hood. Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android.
 
 Often, directly translating path segments to route names may not be the expected behavior. For example, you might want to parse the path `/feed/latest` to something like:
 

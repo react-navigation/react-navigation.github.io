@@ -1,0 +1,19 @@
+{
+  "id": "version-2.x/redux-integration",
+  "title": "Redux integration",
+  "description": "**Warning: in the next major version of React Navigation, to be released in Fall 2018, we will no longer provide any information about how to integrate with Redux and it may cease to work**. Issues related to Redux that are posted on the React Navigation issue tracker will be immediately closed. Redux integration may continue to work but it will not be tested against or considered when making any design decisions for the library.",
+  "source": "@site/versioned_docs/version-2.x/redux-integration.md",
+  "permalink": "/docs/2.x/redux-integration",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-2.x/redux-integration.md",
+  "version": "2.x",
+  "sidebar_label": "Redux integration",
+  "sidebar": "version-2.x-docs",
+  "previous": {
+    "title": "App containers",
+    "permalink": "/docs/2.x/app-containers"
+  },
+  "next": {
+    "title": "Overview",
+    "permalink": "/docs/2.x/custom-navigator-overview"
+  }
+}

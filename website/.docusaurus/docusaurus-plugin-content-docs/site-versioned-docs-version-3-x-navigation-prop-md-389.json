@@ -1,0 +1,19 @@
+{
+  "id": "version-3.x/navigation-prop",
+  "title": "Navigation prop reference",
+  "description": "Each `screen` component in your app is provided with the `navigation` prop automatically. The prop contains various convenience functions that dispatch navigation actions on the route's router. It looks like this:",
+  "source": "@site/versioned_docs/version-3.x/navigation-prop.md",
+  "permalink": "/docs/3.x/navigation-prop",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-3.x/navigation-prop.md",
+  "version": "3.x",
+  "sidebar_label": "Navigation prop",
+  "sidebar": "version-3.x-docs",
+  "previous": {
+    "title": "Call a function when focused screen changes",
+    "permalink": "/docs/3.x/function-after-focusing-screen"
+  },
+  "next": {
+    "title": "NavigationContext",
+    "permalink": "/docs/3.x/navigation-context"
+  }
+}

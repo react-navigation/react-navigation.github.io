@@ -1,0 +1,19 @@
+{
+  "id": "version-5.x/themes",
+  "title": "Themes",
+  "description": "Themes allow you to change the colors of various components provided by React Navigation. You can use themes to:",
+  "source": "@site/versioned_docs/version-5.x/themes.md",
+  "permalink": "/docs/themes",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-5.x/themes.md",
+  "version": "5.x",
+  "sidebar_label": "Themes",
+  "sidebar": "version-5.x/docs",
+  "previous": {
+    "title": "Screen tracking for analytics",
+    "permalink": "/docs/screen-tracking"
+  },
+  "next": {
+    "title": "State persistence",
+    "permalink": "/docs/state-persistence"
+  }
+}

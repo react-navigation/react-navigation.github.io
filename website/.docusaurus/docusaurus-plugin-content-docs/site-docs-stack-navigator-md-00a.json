@@ -1,0 +1,19 @@
+{
+  "id": "stack-navigator",
+  "title": "createStackNavigator",
+  "description": "Provides a way for your app to transition between screens where each new screen is placed on top of a stack.",
+  "source": "@site/docs/stack-navigator.md",
+  "permalink": "/docs/next/stack-navigator",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/stack-navigator.md",
+  "version": "next",
+  "sidebar_label": "createStackNavigator",
+  "sidebar": "docs",
+  "previous": {
+    "title": "NavigationContext",
+    "permalink": "/docs/next/navigation-context"
+  },
+  "next": {
+    "title": "createNativeStackNavigator",
+    "permalink": "/docs/next/native-stack-navigator"
+  }
+}

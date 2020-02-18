@@ -1,0 +1,19 @@
+{
+  "id": "version-4.x/troubleshooting",
+  "title": "Troubleshooting",
+  "description": "This section attempts to outline issues that can happen during setup and may not be related to React Navigation itself. Also see [common mistakes](common-mistakes.html).",
+  "source": "@site/versioned_docs/version-4.x/troubleshooting.md",
+  "permalink": "/docs/4.x/troubleshooting",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-4.x/troubleshooting.md",
+  "version": "4.x",
+  "sidebar_label": "Troubleshooting",
+  "sidebar": "version-4.x-docs",
+  "previous": {
+    "title": "Common mistakes",
+    "permalink": "/docs/4.x/common-mistakes"
+  },
+  "next": {
+    "title": "Limitations",
+    "permalink": "/docs/4.x/limitations"
+  }
+}

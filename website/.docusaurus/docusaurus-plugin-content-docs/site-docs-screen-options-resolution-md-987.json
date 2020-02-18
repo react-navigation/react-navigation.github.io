@@ -1,0 +1,19 @@
+{
+  "id": "screen-options-resolution",
+  "title": "Screen options resolution",
+  "description": "Each screen can configure various aspects about how it gets presented in the navigator that renders it. In the [Configuring the header bar](headers.html) section of the fundamentals documentation we explain the basics of how this works.",
+  "source": "@site/docs/screen-options-resolution.md",
+  "permalink": "/docs/next/screen-options-resolution",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/screen-options-resolution.md",
+  "version": "next",
+  "sidebar_label": "Screen options resolution",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Different status bar configuration based on route",
+    "permalink": "/docs/next/status-bar"
+  },
+  "next": {
+    "title": "Custom Android back button behavior",
+    "permalink": "/docs/next/custom-android-back-button-handling"
+  }
+}

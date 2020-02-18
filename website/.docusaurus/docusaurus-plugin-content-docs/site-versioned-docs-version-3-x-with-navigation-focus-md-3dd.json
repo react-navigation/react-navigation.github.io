@@ -1,0 +1,19 @@
+{
+  "id": "version-3.x/with-navigation-focus",
+  "title": "withNavigationFocus",
+  "description": "`withNavigationFocus` is a higher order component which passes the `isFocused` prop into a wrapped component. It's useful if you need to use the focus state in the render function of your screen component or another component rendered somewhere inside of a screen.",
+  "source": "@site/versioned_docs/version-3.x/with-navigation-focus.md",
+  "permalink": "/docs/3.x/with-navigation-focus",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-3.x/with-navigation-focus.md",
+  "version": "3.x",
+  "sidebar_label": "withNavigationFocus",
+  "sidebar": "version-3.x-docs",
+  "previous": {
+    "title": "withNavigation",
+    "permalink": "/docs/3.x/with-navigation"
+  },
+  "next": {
+    "title": "Scrollables",
+    "permalink": "/docs/3.x/scrollables"
+  }
+}

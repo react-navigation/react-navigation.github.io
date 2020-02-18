@@ -1,0 +1,19 @@
+{
+  "id": "version-3.x/custom-navigator-overview",
+  "title": "Overview",
+  "description": "Navigators allow you to define your application's navigation structure. Navigators also render common elements such as headers and tab bars which you can configure.",
+  "source": "@site/versioned_docs/version-3.x/custom-navigator-overview.md",
+  "permalink": "/docs/3.x/custom-navigator-overview",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-3.x/custom-navigator-overview.md",
+  "version": "3.x",
+  "sidebar_label": "Overview",
+  "sidebar": "version-3.x-docs",
+  "previous": {
+    "title": "Scrollables",
+    "permalink": "/docs/3.x/scrollables"
+  },
+  "next": {
+    "title": "Routers",
+    "permalink": "/docs/3.x/routers"
+  }
+}

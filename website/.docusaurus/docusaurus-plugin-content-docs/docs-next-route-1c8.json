@@ -1,0 +1,441 @@
+{
+  "docsSidebars": {
+    "docs": [
+      {
+        "type": "category",
+        "label": "Fundamentals",
+        "items": [
+          {
+            "type": "link",
+            "label": "Getting started",
+            "href": "/docs/next/getting-started"
+          },
+          {
+            "type": "link",
+            "label": "Hello React Navigation",
+            "href": "/docs/next/hello-react-navigation"
+          },
+          {
+            "type": "link",
+            "label": "Moving between screens",
+            "href": "/docs/next/navigating"
+          },
+          {
+            "type": "link",
+            "label": "Passing parameters to routes",
+            "href": "/docs/next/params"
+          },
+          {
+            "type": "link",
+            "label": "Configuring the header bar",
+            "href": "/docs/next/headers"
+          },
+          {
+            "type": "link",
+            "label": "Header buttons",
+            "href": "/docs/next/header-buttons"
+          },
+          {
+            "type": "link",
+            "label": "Nesting navigators",
+            "href": "/docs/next/nesting-navigators"
+          },
+          {
+            "type": "link",
+            "label": "Navigation lifecycle",
+            "href": "/docs/next/navigation-lifecycle"
+          },
+          {
+            "type": "link",
+            "label": "Opening a full-screen modal",
+            "href": "/docs/next/modal"
+          },
+          {
+            "type": "link",
+            "label": "App containers",
+            "href": "/docs/next/app-containers"
+          },
+          {
+            "type": "link",
+            "label": "Next steps",
+            "href": "/docs/next/next-steps"
+          },
+          {
+            "type": "link",
+            "label": "Glossary of terms",
+            "href": "/docs/next/glossary-of-terms"
+          },
+          {
+            "type": "link",
+            "label": "Compatibility layer",
+            "href": "/docs/next/compatibility"
+          },
+          {
+            "type": "link",
+            "label": "Troubleshooting",
+            "href": "/docs/next/troubleshooting"
+          },
+          {
+            "type": "link",
+            "label": "Limitations",
+            "href": "/docs/next/limitations"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Guides",
+        "items": [
+          {
+            "type": "link",
+            "label": "Tab navigation",
+            "href": "/docs/next/tab-based-navigation"
+          },
+          {
+            "type": "link",
+            "label": "Drawer navigation",
+            "href": "/docs/next/drawer-based-navigation"
+          },
+          {
+            "type": "link",
+            "label": "Authentication flows",
+            "href": "/docs/next/auth-flow"
+          },
+          {
+            "type": "link",
+            "label": "Supporting safe areas",
+            "href": "/docs/next/handling-safe-area"
+          },
+          {
+            "type": "link",
+            "label": "Different status bar configuration based on route",
+            "href": "/docs/next/status-bar"
+          },
+          {
+            "type": "link",
+            "label": "Screen options resolution",
+            "href": "/docs/next/screen-options-resolution"
+          },
+          {
+            "type": "link",
+            "label": "Custom Android back button behavior",
+            "href": "/docs/next/custom-android-back-button-handling"
+          },
+          {
+            "type": "link",
+            "label": "Access the navigation prop from any component",
+            "href": "/docs/next/connecting-navigation-prop"
+          },
+          {
+            "type": "link",
+            "label": "Navigating without the navigation prop",
+            "href": "/docs/next/navigating-without-navigation-prop"
+          },
+          {
+            "type": "link",
+            "label": "Deep linking",
+            "href": "/docs/next/deep-linking"
+          },
+          {
+            "type": "link",
+            "label": "Screen tracking for analytics",
+            "href": "/docs/next/screen-tracking"
+          },
+          {
+            "type": "link",
+            "label": "Themes",
+            "href": "/docs/next/themes"
+          },
+          {
+            "type": "link",
+            "label": "State persistence",
+            "href": "/docs/next/state-persistence"
+          },
+          {
+            "type": "link",
+            "label": "Type checking with TypeScript",
+            "href": "/docs/next/typescript"
+          },
+          {
+            "type": "link",
+            "label": "Redux integration",
+            "href": "/docs/next/redux-integration"
+          },
+          {
+            "type": "link",
+            "label": "MobX State Tree integration",
+            "href": "/docs/next/MST-integration"
+          },
+          {
+            "type": "link",
+            "label": "Localization",
+            "href": "/docs/next/localization"
+          },
+          {
+            "type": "link",
+            "label": "Web support",
+            "href": "/docs/next/web-support"
+          },
+          {
+            "type": "link",
+            "label": "Call a function when focused screen changes",
+            "href": "/docs/next/function-after-focusing-screen"
+          },
+          {
+            "type": "link",
+            "label": "Optimize memory usage and performance",
+            "href": "/docs/next/react-native-screens"
+          },
+          {
+            "type": "link",
+            "label": "Upgrading from 4.x",
+            "href": "/docs/next/upgrading-from-4.x"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "API Reference",
+        "items": [
+          {
+            "type": "link",
+            "label": "Navigation prop",
+            "href": "/docs/next/navigation-prop"
+          },
+          {
+            "type": "link",
+            "label": "NavigationContext",
+            "href": "/docs/next/navigation-context"
+          },
+          {
+            "type": "category",
+            "label": "Navigators",
+            "items": [
+              {
+                "type": "link",
+                "label": "createStackNavigator",
+                "href": "/docs/next/stack-navigator"
+              },
+              {
+                "type": "link",
+                "label": "createNativeStackNavigator",
+                "href": "/docs/next/native-stack-navigator"
+              },
+              {
+                "type": "link",
+                "label": "createDrawerNavigator",
+                "href": "/docs/next/drawer-navigator"
+              },
+              {
+                "type": "link",
+                "label": "createBottomTabNavigator",
+                "href": "/docs/next/bottom-tab-navigator"
+              },
+              {
+                "type": "link",
+                "label": "createMaterialBottomTabNavigator",
+                "href": "/docs/next/material-bottom-tab-navigator"
+              },
+              {
+                "type": "link",
+                "label": "createMaterialTopTabNavigator",
+                "href": "/docs/next/material-top-tab-navigator"
+              }
+            ]
+          },
+          {
+            "type": "category",
+            "label": "Hooks",
+            "items": [
+              {
+                "type": "link",
+                "label": "useNavigation",
+                "href": "/docs/next/use-navigation"
+              },
+              {
+                "type": "link",
+                "label": "useRoute",
+                "href": "/docs/next/use-route"
+              },
+              {
+                "type": "link",
+                "label": "useNavigationState",
+                "href": "/docs/next/use-navigation-state"
+              },
+              {
+                "type": "link",
+                "label": "useFocusEffect",
+                "href": "/docs/next/use-focus-effect"
+              },
+              {
+                "type": "link",
+                "label": "useIsFocused",
+                "href": "/docs/next/use-is-focused"
+              },
+              {
+                "type": "link",
+                "label": "useLinking",
+                "href": "/docs/next/use-linking"
+              },
+              {
+                "type": "link",
+                "label": "useScrollToTop",
+                "href": "/docs/next/use-scroll-to-top"
+              }
+            ]
+          },
+          {
+            "type": "category",
+            "label": "Actions",
+            "items": [
+              {
+                "type": "link",
+                "label": "CommonActions",
+                "href": "/docs/next/navigation-actions"
+              },
+              {
+                "type": "link",
+                "label": "StackActions",
+                "href": "/docs/next/stack-actions"
+              },
+              {
+                "type": "link",
+                "label": "DrawerActions",
+                "href": "/docs/next/drawer-actions"
+              },
+              {
+                "type": "link",
+                "label": "TabActions",
+                "href": "/docs/next/tab-actions"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Build your own Navigator",
+        "items": [
+          {
+            "type": "link",
+            "label": "Custom routers",
+            "href": "/docs/next/custom-routers"
+          },
+          {
+            "type": "link",
+            "label": "Custom navigators",
+            "href": "/docs/next/custom-navigators"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Additional Resources",
+        "items": [
+          {
+            "type": "link",
+            "label": "Supported React Native versions",
+            "href": "/docs/next/supported-react-native-versions"
+          },
+          {
+            "type": "link",
+            "label": "Community Navigators and Libraries",
+            "href": "/docs/next/community-libraries-and-navigators"
+          },
+          {
+            "type": "link",
+            "label": "More Resources",
+            "href": "/docs/next/more-resources"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Meta",
+        "items": [
+          {
+            "type": "link",
+            "label": "Pitch & anti-pitch",
+            "href": "/docs/next/pitch"
+          },
+          {
+            "type": "link",
+            "label": "Alternative libraries",
+            "href": "/docs/next/alternatives"
+          },
+          {
+            "type": "link",
+            "label": "Contributing",
+            "href": "/docs/next/contributing"
+          }
+        ]
+      }
+    ]
+  },
+  "permalinkToSidebar": {
+    "/docs/next/MST-integration": "docs",
+    "/docs/next/alternatives": "docs",
+    "/docs/next/app-containers": "docs",
+    "/docs/next/auth-flow": "docs",
+    "/docs/next/bottom-tab-navigator": "docs",
+    "/docs/next/community-libraries-and-navigators": "docs",
+    "/docs/next/compatibility": "docs",
+    "/docs/next/connecting-navigation-prop": "docs",
+    "/docs/next/contributing": "docs",
+    "/docs/next/custom-android-back-button-handling": "docs",
+    "/docs/next/custom-navigators": "docs",
+    "/docs/next/custom-routers": "docs",
+    "/docs/next/deep-linking": "docs",
+    "/docs/next/drawer-actions": "docs",
+    "/docs/next/drawer-based-navigation": "docs",
+    "/docs/next/drawer-navigator": "docs",
+    "/docs/next/function-after-focusing-screen": "docs",
+    "/docs/next/getting-started": "docs",
+    "/docs/next/glossary-of-terms": "docs",
+    "/docs/next/handling-safe-area": "docs",
+    "/docs/next/header-buttons": "docs",
+    "/docs/next/headers": "docs",
+    "/docs/next/hello-react-navigation": "docs",
+    "/docs/next/limitations": "docs",
+    "/docs/next/localization": "docs",
+    "/docs/next/material-bottom-tab-navigator": "docs",
+    "/docs/next/material-top-tab-navigator": "docs",
+    "/docs/next/modal": "docs",
+    "/docs/next/more-resources": "docs",
+    "/docs/next/native-stack-navigator": "docs",
+    "/docs/next/navigating": "docs",
+    "/docs/next/navigating-without-navigation-prop": "docs",
+    "/docs/next/navigation-actions": "docs",
+    "/docs/next/navigation-context": "docs",
+    "/docs/next/navigation-lifecycle": "docs",
+    "/docs/next/navigation-prop": "docs",
+    "/docs/next/nesting-navigators": "docs",
+    "/docs/next/next-steps": "docs",
+    "/docs/next/params": "docs",
+    "/docs/next/pitch": "docs",
+    "/docs/next/react-native-screens": "docs",
+    "/docs/next/redux-integration": "docs",
+    "/docs/next/screen-options-resolution": "docs",
+    "/docs/next/screen-tracking": "docs",
+    "/docs/next/stack-actions": "docs",
+    "/docs/next/stack-navigator": "docs",
+    "/docs/next/state-persistence": "docs",
+    "/docs/next/status-bar": "docs",
+    "/docs/next/supported-react-native-versions": "docs",
+    "/docs/next/tab-actions": "docs",
+    "/docs/next/tab-based-navigation": "docs",
+    "/docs/next/themes": "docs",
+    "/docs/next/troubleshooting": "docs",
+    "/docs/next/typescript": "docs",
+    "/docs/next/upgrading-from-4.x": "docs",
+    "/docs/next/use-focus-effect": "docs",
+    "/docs/next/use-is-focused": "docs",
+    "/docs/next/use-linking": "docs",
+    "/docs/next/use-navigation": "docs",
+    "/docs/next/use-navigation-state": "docs",
+    "/docs/next/use-route": "docs",
+    "/docs/next/use-scroll-to-top": "docs",
+    "/docs/next/web-support": "docs"
+  },
+  "version": "next"
+}

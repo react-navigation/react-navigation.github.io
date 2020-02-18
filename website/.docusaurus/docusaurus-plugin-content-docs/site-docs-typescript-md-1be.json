@@ -1,0 +1,19 @@
+{
+  "id": "typescript",
+  "title": "Type checking with TypeScript",
+  "description": "React Navigation is written with TypeScript and exports type definitions for TypeScript projects.",
+  "source": "@site/docs/typescript.md",
+  "permalink": "/docs/next/typescript",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/typescript.md",
+  "version": "next",
+  "sidebar_label": "Type checking with TypeScript",
+  "sidebar": "docs",
+  "previous": {
+    "title": "State persistence",
+    "permalink": "/docs/next/state-persistence"
+  },
+  "next": {
+    "title": "Redux integration",
+    "permalink": "/docs/next/redux-integration"
+  }
+}

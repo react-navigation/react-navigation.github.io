@@ -1,8 +1,7 @@
 ---
-id: version-2.x-tab-based-navigation
+id: tab-based-navigation
 title: Tab navigation
 sidebar_label: Tab navigation
-original_id: tab-based-navigation
 ---
 
 Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top below the header (or even instead of a header).

@@ -1,8 +1,7 @@
 ---
-id: version-4.x-getting-started
+id: getting-started
 title: Getting started
 sidebar_label: Getting started
-original_id: getting-started
 ---
 
 React Navigation is born from the React Native community's need for an extensible yet easy-to-use navigation solution written entirely in JavaScript (so you can read and understand all of the source), on top of powerful native primitives.

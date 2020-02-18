@@ -1,0 +1,19 @@
+{
+  "id": "version-2.x/deep-linking",
+  "title": "Deep linking",
+  "description": "In this guide we will set up our app to handle external URIs. Let's suppose that we want a URI like `mychat://chat/Eric` to open our app and link straight into a chat screen for some user named \"Eric\".",
+  "source": "@site/versioned_docs/version-2.x/deep-linking.md",
+  "permalink": "/docs/2.x/deep-linking",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-2.x/deep-linking.md",
+  "version": "2.x",
+  "sidebar_label": "Deep linking",
+  "sidebar": "version-2.x-docs",
+  "previous": {
+    "title": "Using the navigation key",
+    "permalink": "/docs/2.x/navigation-key"
+  },
+  "next": {
+    "title": "Screen tracking",
+    "permalink": "/docs/2.x/screen-tracking"
+  }
+}

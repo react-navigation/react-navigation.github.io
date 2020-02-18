@@ -1,8 +1,7 @@
 ---
-id: version-5.x-modal
+id: modal
 title: Opening a full-screen modal
 sidebar_label: Opening a full-screen modal
-original_id: modal
 ---
 
 ![Modal shown on screen](/docs/assets/modal/modal-demo.gif)

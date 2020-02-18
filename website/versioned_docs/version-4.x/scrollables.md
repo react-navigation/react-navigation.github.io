@@ -1,8 +1,7 @@
 ---
-id: version-4.x-scrollables
+id: scrollables
 title: Scrollables
 sidebar_label: Scrollables
-original_id: scrollables
 ---
 
 React Navigation exports its own `ScrollView`, `FlatList`, and `SectionList`. The built-in components are wrapped in order to respond to events from navigation that will scroll to top when tapping on the active tab as you would expect from native tab bars.

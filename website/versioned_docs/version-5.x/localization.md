@@ -1,8 +1,7 @@
 ---
-id: version-5.x-localization
+id: localization
 title: Localization
 sidebar_label: Localization
-original_id: localization
 ---
 
 English is only one of many languages that people speak around the world (thanks a lot, [Tower of Babel](https://en.wikipedia.org/wiki/Tower_of_Babel)) and it's polite and sometimes even necessary to translate to your app into the languages that your users speak. Let's look at one way you can do this in React Navigation - it's not the only way but it'll do the trick. Similar to [themes](themes.html), we will use React's context API in order to make it easier to access the translate function from a variety of components.

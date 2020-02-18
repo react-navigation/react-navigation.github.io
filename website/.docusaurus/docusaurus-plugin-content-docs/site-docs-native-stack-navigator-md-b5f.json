@@ -1,0 +1,19 @@
+{
+  "id": "native-stack-navigator",
+  "title": "createNativeStackNavigator",
+  "description": "> Note: This navigator is in its early development stages and may have bugs. So be careful when using it in production. If you're facing any issues, open a bug report in the [`react-native-screens`](https://github.com/kmagiera/react-native-screens) repo.",
+  "source": "@site/docs/native-stack-navigator.md",
+  "permalink": "/docs/next/native-stack-navigator",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/native-stack-navigator.md",
+  "version": "next",
+  "sidebar_label": "createNativeStackNavigator",
+  "sidebar": "docs",
+  "previous": {
+    "title": "createStackNavigator",
+    "permalink": "/docs/next/stack-navigator"
+  },
+  "next": {
+    "title": "createDrawerNavigator",
+    "permalink": "/docs/next/drawer-navigator"
+  }
+}

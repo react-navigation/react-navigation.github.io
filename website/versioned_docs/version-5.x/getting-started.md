@@ -1,8 +1,7 @@
 ---
-id: version-5.x-getting-started
+id: getting-started
 title: Getting started
 sidebar_label: Getting started
-original_id: getting-started
 ---
 
 If you're already familiar with React Native then you'll be able to get moving with React Navigation quickly! If not, you may want to read sections 1 to 4 (inclusive) of [React Native Express](http://reactnativeexpress.com/) first, then come back here when you're done.

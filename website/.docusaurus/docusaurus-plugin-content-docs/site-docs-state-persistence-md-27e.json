@@ -1,0 +1,19 @@
+{
+  "id": "state-persistence",
+  "title": "State persistence",
+  "description": "You might want to save the user's location in the app, so that they are immediately returned to the same location after the app is restarted.",
+  "source": "@site/docs/state-persistence.md",
+  "permalink": "/docs/next/state-persistence",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/state-persistence.md",
+  "version": "next",
+  "sidebar_label": "State persistence",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Themes",
+    "permalink": "/docs/next/themes"
+  },
+  "next": {
+    "title": "Type checking with TypeScript",
+    "permalink": "/docs/next/typescript"
+  }
+}

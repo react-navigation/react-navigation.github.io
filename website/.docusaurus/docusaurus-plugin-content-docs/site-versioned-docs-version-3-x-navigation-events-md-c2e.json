@@ -1,0 +1,19 @@
+{
+  "id": "version-3.x/navigation-events",
+  "title": "NavigationEvents reference",
+  "description": "`NavigationEvents` is a React component providing a declarative API to subscribe to navigation events. It will subscribe to navigation events on mount, and unsubscribe on unmount.",
+  "source": "@site/versioned_docs/version-3.x/navigation-events.md",
+  "permalink": "/docs/3.x/navigation-events",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-3.x/navigation-events.md",
+  "version": "3.x",
+  "sidebar_label": "NavigationEvents",
+  "sidebar": "version-3.x-docs",
+  "previous": {
+    "title": "NavigationContext",
+    "permalink": "/docs/3.x/navigation-context"
+  },
+  "next": {
+    "title": "createStackNavigator",
+    "permalink": "/docs/3.x/stack-navigator"
+  }
+}

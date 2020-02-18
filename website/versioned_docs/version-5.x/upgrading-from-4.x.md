@@ -1,8 +1,7 @@
 ---
-id: version-5.x-upgrading-from-4.x
+id: upgrading-from-4.x
 title: Upgrading from 4.x
 sidebar_label: Upgrading from 4.x
-original_id: upgrading-from-4.x
 ---
 
 > This guide is a work in progress! As more people upgrade their apps we can continue to improve it. Please send pull requests to add any suggestions that you have from your upgrade experience.
@@ -447,8 +446,6 @@ However, this was very restrictive since you may want to use another scrollable 
 ## Higher order components
 
 React Navigation 4.x included higher order components such as `withNavigation` and `withNavigationFocus`. Now they live in the [compat package](compatibility.html).
-
-We also have documentation on how to use the new hooks such as [`useFocusEffect`](use-focus-effect.html) if you're using class components.
 
 ## Navigation state in Redux
 

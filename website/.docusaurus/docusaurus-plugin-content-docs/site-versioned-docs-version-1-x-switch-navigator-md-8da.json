@@ -1,0 +1,19 @@
+{
+  "id": "version-1.x/switch-navigator",
+  "title": "SwitchNavigator reference",
+  "description": "```js",
+  "source": "@site/versioned_docs/version-1.x/switch-navigator.md",
+  "permalink": "/docs/1.x/switch-navigator",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-1.x/switch-navigator.md",
+  "version": "1.x",
+  "sidebar_label": "SwitchNavigator",
+  "sidebar": "api",
+  "previous": {
+    "title": "StackNavigator reference",
+    "permalink": "/docs/1.x/stack-navigator"
+  },
+  "next": {
+    "title": "TabNavigator reference",
+    "permalink": "/docs/1.x/tab-navigator"
+  }
+}

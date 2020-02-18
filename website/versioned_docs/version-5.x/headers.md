@@ -1,8 +1,7 @@
 ---
-id: version-5.x-headers
+id: headers
 title: Configuring the header bar
 sidebar_label: Configuring the header bar
-original_id: headers
 ---
 
 We've seen how to configure the header title already, but let's go over that again before moving on to some other options &mdash; repetition is key to learning!

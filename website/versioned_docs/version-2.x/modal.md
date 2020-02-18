@@ -1,8 +1,7 @@
 ---
-id: version-2.x-modal
+id: modal
 title: Opening a full-screen modal
 sidebar_label: Opening a full-screen modal
-original_id: modal
 ---
 
 Dictionary.com provides no satisfactory definition of modal as it relates to user interfaces, but semantic UI describes it as follows:

@@ -1,0 +1,19 @@
+{
+  "id": "alternatives",
+  "title": "Alternative libraries",
+  "description": "React Navigation isn't your only option for routing and navigation in React Native. If the [pitch & anti-pitch](pitch.html) or the API design leave you wanting to explore other options, here are a few to consider.",
+  "source": "@site/docs/alternatives.md",
+  "permalink": "/docs/next/alternatives",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/alternatives.md",
+  "version": "next",
+  "sidebar_label": "Alternative libraries",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Pitch & anti-pitch",
+    "permalink": "/docs/next/pitch"
+  },
+  "next": {
+    "title": "React Navigation contributor guide",
+    "permalink": "/docs/next/contributing"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "use-route",
+  "title": "useRoute",
+  "description": "`useRoute` is a hook which gives access to `route` object. It's useful when you cannot pass the `route` prop into the component directly, or don't want to pass it in case of a deeply nested child.",
+  "source": "@site/docs/use-route.md",
+  "permalink": "/docs/next/use-route",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/use-route.md",
+  "version": "next",
+  "sidebar_label": "useRoute",
+  "sidebar": "docs",
+  "previous": {
+    "title": "useNavigation",
+    "permalink": "/docs/next/use-navigation"
+  },
+  "next": {
+    "title": "useNavigationState",
+    "permalink": "/docs/next/use-navigation-state"
+  }
+}

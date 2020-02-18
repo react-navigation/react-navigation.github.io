@@ -1,0 +1,19 @@
+{
+  "id": "navigation-actions",
+  "title": "CommonActions reference",
+  "description": "A navigation action is an object containing at least a `type` property. The action can be handled by routers with the `getStateForAction` method to return a new state from an existing navigation state.",
+  "source": "@site/docs/navigation-actions.md",
+  "permalink": "/docs/next/navigation-actions",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/navigation-actions.md",
+  "version": "next",
+  "sidebar_label": "CommonActions",
+  "sidebar": "docs",
+  "previous": {
+    "title": "useScrollToTop",
+    "permalink": "/docs/next/use-scroll-to-top"
+  },
+  "next": {
+    "title": "StackActions reference",
+    "permalink": "/docs/next/stack-actions"
+  }
+}

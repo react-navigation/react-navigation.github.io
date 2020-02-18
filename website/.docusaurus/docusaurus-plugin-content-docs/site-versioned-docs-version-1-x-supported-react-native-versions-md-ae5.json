@@ -1,0 +1,19 @@
+{
+  "id": "version-1.x/supported-react-native-versions",
+  "title": "Supported React Native versions",
+  "description": "Currently at the time of writing, `react-navigation@1.x` will work on most of previous `react-native` versions.",
+  "source": "@site/versioned_docs/version-1.x/supported-react-native-versions.md",
+  "permalink": "/docs/1.x/supported-react-native-versions",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-1.x/supported-react-native-versions.md",
+  "version": "1.x",
+  "sidebar_label": "Supported React Native versions",
+  "sidebar": "version-1.x/docs",
+  "previous": {
+    "title": "Hello React Navigation",
+    "permalink": "/docs/1.x/hello-react-navigation"
+  },
+  "next": {
+    "title": "Moving between screens",
+    "permalink": "/docs/1.x/navigating"
+  }
+}

@@ -1,8 +1,7 @@
 ---
-id: version-2.x-drawer-based-navigation
+id: drawer-based-navigation
 title: Drawer navigation
 sidebar_label: Drawer navigation
-original_id: drawer-based-navigation
 ---
 
 ```js

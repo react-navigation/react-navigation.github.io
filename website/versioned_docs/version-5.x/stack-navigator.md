@@ -1,8 +1,7 @@
 ---
-id: version-5.x-stack-navigator
+id: stack-navigator
 title: createStackNavigator
 sidebar_label: createStackNavigator
-original_id: stack-navigator
 ---
 
 Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
@@ -19,7 +18,7 @@ npm install @react-navigation/stack
 
 To use this navigator, import it from `@react-navigation/stack`:
 
-<samp id="simple-stack">
+<samp id="simple-stack"></samp>
 
 ```js
 import { createStackNavigator } from '@react-navigation/stack';
@@ -106,9 +105,7 @@ header: ({ scene, previous, navigation }) => {
 };
 ```
 
-By default, there is one floating header which renders headers for multiple screens on iOS. These headers include animations to smoothly switch to one another.
-
-When using a custom header, it's recommended set the `headerMode` prop on the navigator to `screen` so that you don't have to implement animations.
+By default, there is one floating header which renders headers for multiple screens on iOS. These headers include animations to smoothly switch to one another. When using a custom header, it's recommended set the `headerMode` prop on the navigator to `screen` so that you don't have to implement animations.
 
 You should also specify a height in `headerStyle` to avoid glitches:
 
@@ -119,21 +116,6 @@ headerStyle: {
 ```
 
 To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
-
-If you want your custom header to animate with screen transitions and want to keep `headerMode` as `float`, you can interpolate on the `scene.progress.current` and `scene.progress.next` props. For example, following will cross-fade the header:
-
-```js
-const progress = Animated.add(scene.progress.current, scene.progress.next || 0);
-
-const opacity = progress.interpolate({
-  inputRange: [0, 1, 2],
-  outputRange: [0, 1, 0],
-});
-
-return (
-  <Animated.View style={{ opacity }}>{/* Header content */}</Animated.View>
-);
-```
 
 #### `headerShown`
 
@@ -258,7 +240,7 @@ Function which returns a React Element to render as the background of the header
 
 For example, you can use this with `headerTransparent` to render a blur view to create a translucent header.
 
-<samp id="header-blur">
+<samp id="header-blur"></samp>
 
 ```js
 import { BlurView } from 'expo-blur';
@@ -399,7 +381,7 @@ Pushes a new screen to top of the stack and navigate to it. The method accepts f
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
-<samp id="stack-with-options">
+<samp id="stack-with-options"></samp>
 
 ```js
 navigation.push('Profile', { owner: 'Michaś' });
@@ -409,7 +391,7 @@ navigation.push('Profile', { owner: 'Michaś' });
 
 Pops the current screen from the stack and navigates back to the previous screen. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
 
-<samp id="stack-with-options">
+<samp id="stack-with-options"></samp>
 
 ```js
 navigation.pop();
@@ -419,7 +401,7 @@ navigation.pop();
 
 Pops all of the screens in the stack except the first one and navigates to it.
 
-<samp id="stack-with-options">
+<samp id="stack-with-options"></samp>
 
 ```js
 navigation.popToTop();
@@ -427,7 +409,7 @@ navigation.popToTop();
 
 ## Example
 
-<samp id="stack-with-options">
+<samp id="stack-with-options"></samp>
 
 ```js
 import { createStackNavigator } from '@react-navigation/stack';
@@ -513,7 +495,7 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   We can pass this config in the `transitionSpec` option:
 
-  <samp id="stack-animation-config">
+  <samp id="stack-animation-config"></samp>
 
   ```js
   <Stack.Screen
@@ -558,7 +540,7 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   We can pass this function in `cardStyleInterpolator` option:
 
-  <samp id="stack-for-fade-card">
+  <samp id="stack-for-fade-card"></samp>
 
   ```js
   <Stack.Screen
@@ -610,7 +592,7 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   We can pass this function in `headerStyleInterpolator` option:
 
-  <samp id="stack-for-fade-header">
+  <samp id="stack-for-fade-header"></samp>
 
   ```js
   <Stack.Screen
@@ -660,7 +642,7 @@ import { TransitionSpecs } from '@react-navigation/stack';
 
 Example configuration for Android Oreo style vertical screen fade animation:
 
-<samp id="stack-card-style-interpolator">
+<samp id="stack-card-style-interpolator"></samp>
 
 ```js
 import { CardStyleInterpolators } from '@react-navigation/stack';
@@ -685,7 +667,7 @@ import { CardStyleInterpolators } from '@react-navigation/stack';
 
 Example configuration for default iOS animation for header elements where the title fades into the back button:
 
-<samp id="stack-for-ui-kit">
+<samp id="stack-for-ui-kit"></samp>
 
 ```js
 import { HeaderStyleInterpolators } from '@react-navigation/stack';
@@ -718,7 +700,7 @@ We export various transition presets which bundle various set of these options t
 
 You can spread these presets in `options` to customize the animation for a screen:
 
-<samp id="stack-modal-slide-from-bottom">
+<samp id="stack-modal-slide-from-bottom"></samp>
 
 ```js
 import { TransitionPresets } from '@react-navigation/stack';
@@ -739,7 +721,7 @@ If you want to customize the transition animations for all of the screens in the
 
 Example configuration for iOS modal presentation style:
 
-<samp id="stack-modal-presentation">
+<samp id="stack-modal-presentation"></samp>
 
 ```js
 import { TransitionPresets } from '@react-navigation/stack';
@@ -761,15 +743,13 @@ import { TransitionPresets } from '@react-navigation/stack';
 </Stack.Navigator>;
 ```
 
-> Note: The `ModalPresentationIOS` preset needs to be configured for the whole stack for it to work correctly. If you want few screens to have this transition, you can add a modal stack at root with this transition, and nest a regular stack inside it.
-
 ### Transparent modals
 
 A transparent modal is like a modal dialog which overlays the screen. The previous screen still stays visible underneath. To get a transparent modal screen, it's usually easier to create a separate modal stack. In the modal stack, you will want to configure few things:
 
 - Set the `mode` prop to `modal`
 - Set the card background to transparent using `cardStyle`
-- Use a custom animation instead of the default platform animation (we'll use fade in this case)
+- Use a fade animation instead of the default animation
 - Disable the header with `headerMode="none"` (optional)
 - Enable the overlay with `cardOverlayEnabled: true` (optional)
 

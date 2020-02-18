@@ -1,8 +1,7 @@
 ---
-id: version-5.x-auth-flow
+id: auth-flow
 title: Authentication flows
 sidebar_label: Authentication flows
-original_id: auth-flow
 ---
 
 Most apps require that a user authenticate in some way to have access to data associated with a user or other private content. Typically the flow will look like this:
@@ -66,7 +65,7 @@ export default function App({ navigation }) {
           return {
             ...prevState,
             isSignout: true,
-            userToken: null,
+            userToken: undefined,
           };
       }
     },
@@ -142,15 +141,13 @@ So our navigator will look like:
 <samp id="auth-flow" />
 
 ```js
-if (state.isLoading) {
-  // We haven't finished checking for the token yet
-  return <SplashScreen />;
-}
-
 return (
   <AuthContext.Provider value={authContext}>
     <Stack.Navigator>
-      {state.userToken == null ? (
+      {state.isLoading ? (
+        // We haven't finished checking for the token yet
+        <Stack.Screen name="Splash" component={SplashScreen} />
+      ) : state.userToken === null ? (
         // No token found, user isn't signed in
         <Stack.Screen
           name="SignIn"
@@ -158,7 +155,6 @@ return (
           options={{
             title: 'Sign in',
             // When logging out, a pop animation feels intuitive
-            // You can remove this if you want the default 'push' animation
             animationTypeForReplace: state.isSignout ? 'pop' : 'push',
           }}
         />
@@ -173,6 +169,7 @@ return (
 
 In the above code snippet, we're conditionally defining screens:
 
+- `Splash` screen is only defined if `isLoading` is `true`
 - `SignIn` screen is only defined if `userToken` is `null`
 - `Home` screen is only defined if `userToken` is non-null
 

@@ -1,6 +1,5 @@
 ---
-original_id: localization
-id: version-3.x-localization
+id: localization
 title: Localization
 sidebar_label: Localization
 ---

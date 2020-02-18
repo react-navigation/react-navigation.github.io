@@ -1,0 +1,19 @@
+{
+  "id": "version-1.x/modal",
+  "title": "Opening a full-screen modal",
+  "description": "Dictionary.com provides no satisfactory definition of modal as it relates to user interfaces, but semantic UI describes it as follows:",
+  "source": "@site/versioned_docs/version-1.x/modal.md",
+  "permalink": "/docs/1.x/modal",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-1.x/modal.md",
+  "version": "1.x",
+  "sidebar_label": "Opening a full-screen modal",
+  "sidebar": "version-1.x/docs",
+  "previous": {
+    "title": "Header buttons",
+    "permalink": "/docs/1.x/header-buttons"
+  },
+  "next": {
+    "title": "Next steps",
+    "permalink": "/docs/1.x/next-steps"
+  }
+}

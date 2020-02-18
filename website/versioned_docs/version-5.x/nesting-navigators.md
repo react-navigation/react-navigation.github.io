@@ -1,8 +1,7 @@
 ---
-id: version-5.x-nesting-navigators
+id: nesting-navigators
 title: Nesting navigators
 sidebar_label: Nesting navigators
-original_id: nesting-navigators
 ---
 
 Nesting navigators means rendering a navigator inside a screen of another navigator, for example:
@@ -39,7 +38,7 @@ In the above example, the `Home` component contains a tab navigator. The `Home` 
   - `Profile` (`Screen`)
   - `Settings` (`Screen`)
 
-Nesting navigators work very much like nesting regular components. To achieve the behavior you want, it's often necessary to nest multiple navigators.
+To achieve the behavior you want, it's often necessary to nest multiple navigators. For example, if you want.
 
 ## How nesting navigators affects the behaviour
 
@@ -58,10 +57,6 @@ For example, if you're calling `navigation.goBack()` in a nested screen, it'll o
 For example, if you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer` methods etc. will also be available on the `navigation` prop in the screen's inside the stack navigator. But say you have a stack navigator as the parent of the drawer, then the screens inside the stack navigator won't have access to these methods, because they aren't nested inside the drawer.
 
 Similarly, if you have a tab navigator inside stack navigator, the screens in the tab navigator will get the `push` and `replace` methods for stack in their `navigation` prop.
-
-### Nested navigators don't receive parent's events
-
-For example, if you have a stack navigator nested inside a tab navigator, the screens in the stack navigator won't receive the events emitted by the parent tab navigator such as (`tabPress`) when using `navigation.addListener`. To receive events from parent navigator, you can explicitly listen to parent's events with `navigation.dangerouslyGetParent().addListener`.
 
 ### Parent navigator's UI is rendered on top of child navigator
 

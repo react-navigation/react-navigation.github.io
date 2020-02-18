@@ -1,0 +1,19 @@
+{
+  "id": "version-4.x/header-buttons",
+  "title": "Header buttons",
+  "description": "Now that we know how to customize the look of our headers, let's make them sentient! Actually perhaps that's ambitious, let's just make them able to respond to our touches in very well defined ways.",
+  "source": "@site/versioned_docs/version-4.x/header-buttons.md",
+  "permalink": "/docs/4.x/header-buttons",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-4.x/header-buttons.md",
+  "version": "4.x",
+  "sidebar_label": "Header buttons",
+  "sidebar": "version-4.x-docs",
+  "previous": {
+    "title": "Configuring the header bar",
+    "permalink": "/docs/4.x/headers"
+  },
+  "next": {
+    "title": "App containers",
+    "permalink": "/docs/4.x/app-containers"
+  }
+}

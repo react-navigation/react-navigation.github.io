@@ -1,8 +1,7 @@
 ---
-id: version-5.x-troubleshooting
+id: troubleshooting
 title: Troubleshooting
 sidebar_label: Troubleshooting
-original_id: troubleshooting
 ---
 
 This section attempts to outline issues that users frequently encounter when first getting accustomed to using React Navigation. These issues may or may not be related to React Navigation itself.

@@ -1,0 +1,19 @@
+{
+  "id": "version-5.x/use-focus-effect",
+  "title": "useFocusEffect",
+  "description": "Sometimes we want to run side-effects when a screen is focused. A side effect may involve things like adding an event listener, fetching data, updating document title, etc. While this can be achieved using `focus` and `blur` events, it's not very ergonomic.",
+  "source": "@site/versioned_docs/version-5.x/use-focus-effect.md",
+  "permalink": "/docs/use-focus-effect",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-5.x/use-focus-effect.md",
+  "version": "5.x",
+  "sidebar_label": "useFocusEffect",
+  "sidebar": "version-5.x/docs",
+  "previous": {
+    "title": "useNavigationState",
+    "permalink": "/docs/use-navigation-state"
+  },
+  "next": {
+    "title": "useIsFocused",
+    "permalink": "/docs/use-is-focused"
+  }
+}

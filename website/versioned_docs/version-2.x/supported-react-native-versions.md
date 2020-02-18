@@ -1,8 +1,7 @@
 ---
-id: version-2.x-supported-react-native-versions
+id: supported-react-native-versions
 title: Supported React Native versions
 sidebar_label: Supported React Native versions
-original_id: supported-react-native-versions
 ---
 
 Currently at the time of writing, `react-navigation@2.x` will work on most of the previous `react-native` versions, until the [lean core effort](https://github.com/facebook/react-native/issues/23313) finally removes `AsyncStorage` out of `react-native`.

@@ -1,8 +1,7 @@
 ---
-id: version-1.x-navigation-options
+id: navigation-options
 title: navigation-options
 sidebar_label: Configuring Navigation Options
-original_id: navigation-options
 ---
 
 Each screen can configure various aspects about how it gets presented in parent navigators. You can configure 

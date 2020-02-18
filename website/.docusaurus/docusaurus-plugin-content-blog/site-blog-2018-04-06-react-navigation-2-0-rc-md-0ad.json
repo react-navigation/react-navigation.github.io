@@ -1,0 +1,17 @@
+{
+  "permalink": "/blog/2018/04/06/react-navigation-2.0-rc",
+  "source": "@site/blog/2018-04-06-react-navigation-2.0-rc.md",
+  "description": "Exactly two months after the release of React Navigation 1.0, we are close to another major version release. We’d like to invite developers that use the library to give the release candidate a try in your app and let us know if you encounter any issues.",
+  "date": "2018-04-06T00:00:00.000Z",
+  "tags": [],
+  "title": "2.0 release candidate",
+  "truncated": false,
+  "prevItem": {
+    "title": "React Navigation 2.0",
+    "permalink": "/blog/2018/05/07/react-navigation-2.0"
+  },
+  "nextItem": {
+    "title": "React Navigation 1.0 (goodbye, beta!)",
+    "permalink": "/blog/2018/02/06/react-navigation-1.0"
+  }
+}

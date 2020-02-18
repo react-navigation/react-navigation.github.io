@@ -1,8 +1,7 @@
 ---
-id: version-2.x-header-buttons
+id: header-buttons
 title: Header buttons
 sidebar_label: Header buttons
-original_id: header-buttons
 ---
 
 Now that we know how to customize the look of our headers, let's make them sentient! Actually perhaps that's ambitious, let's just make them able to respond to our touches in very well defined ways.

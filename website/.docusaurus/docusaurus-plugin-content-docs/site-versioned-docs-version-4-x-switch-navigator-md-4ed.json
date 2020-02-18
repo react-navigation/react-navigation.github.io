@@ -1,0 +1,19 @@
+{
+  "id": "version-4.x/switch-navigator",
+  "title": "createSwitchNavigator",
+  "description": "The purpose of SwitchNavigator is to only ever show one screen at a time. By default, it does not handle back actions and it resets routes to their default state when you switch away.",
+  "source": "@site/versioned_docs/version-4.x/switch-navigator.md",
+  "permalink": "/docs/4.x/switch-navigator",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/versioned_docs/version-4.x/switch-navigator.md",
+  "version": "4.x",
+  "sidebar_label": "createSwitchNavigator",
+  "sidebar": "version-4.x-docs",
+  "previous": {
+    "title": "createStackNavigator (1.x)",
+    "permalink": "/docs/4.x/stack-navigator-1.0"
+  },
+  "next": {
+    "title": "createAnimatedSwitchNavigator",
+    "permalink": "/docs/4.x/animated-switch-navigator"
+  }
+}

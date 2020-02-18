@@ -1,8 +1,7 @@
 ---
-id: version-1.x-switch-navigator
+id: switch-navigator
 title: SwitchNavigator reference
 sidebar_label: SwitchNavigator
-original_id: switch-navigator
 ---
 
 ```js

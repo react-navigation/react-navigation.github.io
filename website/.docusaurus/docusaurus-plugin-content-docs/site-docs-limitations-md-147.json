@@ -1,0 +1,19 @@
+{
+  "id": "limitations",
+  "title": "Limitations",
+  "description": "As a potential user of the library, it's important to know what you can and cannot do with it. Armed with this knowledge, you may choose to adopt [a different library instead](alternatives.html). We discuss the high level design decisions in the [pitch & anti-pitch](pitch.html) section, and here we will cover some of the use cases that are either not supported or are so difficult to do that they may as well be impossible. If any of the following limitations are dealbreakers for your app, React Navigation might not be for you.",
+  "source": "@site/docs/limitations.md",
+  "permalink": "/docs/next/limitations",
+  "editUrl": "https://github.com/react-navigation/react-navigation.github.io/edit/source/website/docs/limitations.md",
+  "version": "next",
+  "sidebar_label": "Limitations",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Troubleshooting",
+    "permalink": "/docs/next/troubleshooting"
+  },
+  "next": {
+    "title": "Tab navigation",
+    "permalink": "/docs/next/tab-based-navigation"
+  }
+}
