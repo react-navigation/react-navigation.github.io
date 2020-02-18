@@ -15,6 +15,7 @@ import { ScrollView } from 'react-native';
 import { useLinking } from '@react-navigation/native';
 
 export default function App() {
+  const ref = React.useRef();
   const { getInitialState } = useLinking(ref, {
     prefixes: ['https://mychat.com', 'mychat://'],
     config: {
@@ -42,7 +43,7 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer initialState={initialState}>
+    <NavigationContainer initialState={initialState} ref={ref}>
       {/* content */}
     </NavigationContainer>
   );
