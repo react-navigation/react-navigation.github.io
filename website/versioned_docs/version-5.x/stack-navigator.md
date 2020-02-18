@@ -5,6 +5,12 @@ sidebar_label: createStackNavigator
 original_id: stack-navigator
 ---
 
+<div style="display: flex; justify-content: center">
+  <video  width="60%" playsinline autoplay muted loop>
+    <source src="/docs/assets/navigators/stack/stack.mov">
+  <video>
+</div>
+
 Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
