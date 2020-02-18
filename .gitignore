@@ -1,8 +1,10 @@
 node_modules
 .DS_Store
+.docusaurus
 website/translated_docs
 website/build/
 website/node_modules
+website/.docusaurus
 
 website1/translated_docs
 website1/build/
