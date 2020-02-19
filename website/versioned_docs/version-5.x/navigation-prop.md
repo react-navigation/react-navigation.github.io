@@ -57,7 +57,7 @@ Call this to link to another screen in your app. Takes the following arguments:
 - `name` - A destination name of the route that has been defined somewhere
 - `params` - Params to merge into the destination route
 
-<samp id="navigate"></samp>
+<samp id="navigate" />
 
 ```js
 function HomeScreen({ navigation: { navigate } }) {
@@ -79,7 +79,7 @@ function HomeScreen({ navigation: { navigate } }) {
 
 Optionally provide a key, which specifies the route to go back from. By default, `goBack` will close the route that it is called from:
 
-<samp id="navigate"></samp>
+<samp id="navigate" />
 
 ```js
 function ProfileScreen({ navigation: { goBack } }) {
@@ -115,7 +115,7 @@ Alternatively, as _screen A_ is the top of the stack, you can use `navigation.po
 
 Replace the navigator state to a new state:
 
-<samp id="navigate-replace-reset"></samp>
+<samp id="navigate-replace-reset" />
 
 ```js
 navigation.reset({
@@ -130,7 +130,7 @@ navigation.reset({
 
 Firing the `setParams` action allows a screen to change the params in the route, which is useful for updating the header buttons and title. `setParams` works like React's `setState` - it merges the provided params object with the current params.
 
-<samp id="navigate-set-params"></samp>
+<samp id="navigate-set-params" />
 
 ```js
 function ProfileScreen({ navigation: { setParams } }) {
@@ -160,7 +160,7 @@ function ProfileScreen({ navigation: { setParams } }) {
 
 The `setOptions` method lets us set screen options from within the component. This is useful if we need to use the component's props, state or context to configure our screen.
 
-<samp id="navigate-set-options"></samp>
+<samp id="navigate-set-options" />
 
 ```js
 function ProfileScreen({ navigation, route }) {
@@ -195,7 +195,7 @@ Screens can add listeners on the `navigation` prop like in React Navigation. By 
 
 Example:
 
-<samp id="simple-focus-and-blur"></samp>
+<samp id="simple-focus-and-blur" />
 
 ```js
 function Profile({ navigation }) {

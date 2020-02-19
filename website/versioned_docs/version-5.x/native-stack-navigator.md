@@ -30,7 +30,7 @@ enableScreens();
 
 To use this navigator, import it from `@react-navigation/native-stack`:
 
-<samp id="simple-native-stack"></samp>
+<samp id="simple-native-stack" />
 
 ```js
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -214,7 +214,7 @@ Pushes a new screen to top of the stack and navigate to it. The method accepts f
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
-<samp id="native-stack-push-pop"></samp>
+<samp id="native-stack-push-pop" />
 
 ```js
 navigation.push('Profile', { name: 'Michaś' });
@@ -224,7 +224,7 @@ navigation.push('Profile', { name: 'Michaś' });
 
 Pops the current screen from the stack and navigates back to the previous screen. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
 
-<samp id="native-stack-push-pop"></samp>
+<samp id="native-stack-push-pop" />
 
 ```js
 navigation.pop();
@@ -234,7 +234,7 @@ navigation.pop();
 
 Pops all of the screens in the stack except the first one and navigates to it.
 
-<samp id="native-stack-push-pop"></samp>
+<samp id="native-stack-push-pop" />
 
 ```js
 navigation.popToTop();
@@ -242,7 +242,7 @@ navigation.popToTop();
 
 ## Example
 
-<samp id="native-stack-with-options"></samp>
+<samp id="native-stack-with-options" />
 
 ```js
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

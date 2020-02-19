@@ -36,7 +36,7 @@ function Profile() {
 
 In this example, even if you push a new screen, this text won't update. If you use the hook, it'll work as expected:
 
-<samp id="use-navigation-state"></samp>
+<samp id="use-navigation-state" />
 
 ```js
 function Profile() {

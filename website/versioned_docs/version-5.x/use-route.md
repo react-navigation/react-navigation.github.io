@@ -10,7 +10,7 @@ sidebar_label: useRoute
 
 ## Example
 
-<samp id="use-route-example"></samp>
+<samp id="use-route-example" />
 
 ```js
 import * as React from 'react';

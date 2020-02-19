@@ -8,13 +8,13 @@ const DEPS_VERSIONS = {
   ],
   '5': [
     '@react-native-community/masked-view@^0.1.1',
-    '@react-navigation/native@^5.0.1',
-    '@react-navigation/bottom-tabs@^5.0.1',
-    '@react-navigation/drawer@^5.0.1',
-    '@react-navigation/material-bottom-tabs@^5.0.1',
-    '@react-navigation/material-top-tabs@^5.0.1',
-    '@react-navigation/native-stack@^5.0.1',
-    '@react-navigation/stack@^5.0.1',
+    '@react-navigation/native@^5.0.5',
+    '@react-navigation/bottom-tabs@^5.0.5',
+    '@react-navigation/drawer@^5.0.5',
+    '@react-navigation/material-bottom-tabs@^5.0.5',
+    '@react-navigation/material-top-tabs@^5.0.5',
+    '@react-navigation/native-stack@^5.0.5',
+    '@react-navigation/stack@^5.0.5',
     'react-native-gesture-handler@1.5.2',
     'react-native-reanimated@1.4.0',
     'react-native-safe-area-context@0.6.0',
@@ -126,7 +126,7 @@ function appendSnackLink() {
     }
 
     link.href = href;
-    
+
     pre.insertAdjacentElement('afterend', link);
 
     // Don't try to add the link more than once!

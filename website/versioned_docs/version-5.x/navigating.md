@@ -28,7 +28,7 @@ We'll do something similar to the latter, but rather than using a `window.locati
 
 ## Navigating to a new screen
 
-<samp id="new-screen">First navigation</samp>
+<samp id="new-screen" />
 
 ```js
 import * as React from 'react';
@@ -62,7 +62,7 @@ So we now have a stack with two routes: 1) the `Home` route 2) the `Details` rou
 
 ## Navigate to a route multiple times
 
-<samp id="multiple-navigate"></samp>
+<samp id="multiple-navigate" />
 
 ```js
 function DetailsScreen({ navigation }) {
@@ -82,7 +82,7 @@ If you run this code, you'll notice that when you tap "Go to Details... again" t
 
 Let's suppose that we actually _want_ to add another details screen. This is pretty common in cases where you pass in some unique data to each route (more on that later when we talk about `params`!). To do this, we can change `navigate` to `push`. This allows us to express the intent to add another route regardless of the existing navigation history.
 
-<samp id="multiple-push">push</samp>
+<samp id="multiple-push" />
 
 ```js
 <Button
@@ -93,7 +93,7 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 
 <div style="display: flex; justify-content: center">
   <video width="60%" playsinline autoplay muted loop>
-    <source src="/docs/assets/navigators/stack/stack-push.mov"></source>
+    <source src="/docs/assets/navigators/stack/stack-push.mov" />
   </video>
 </div>
 
@@ -105,7 +105,7 @@ The header provided by stack navigator will automatically include a back button 
 
 Sometimes you'll want to be able to programmatically trigger this behavior, and for that you can use `navigation.goBack();`.
 
-<samp id="go-back">go back</samp>
+<samp id="go-back" />
 
 ```js
 function DetailsScreen({ navigation }) {
@@ -127,7 +127,7 @@ function DetailsScreen({ navigation }) {
 
 Another common requirement is to be able to go back _multiple_ screens -- for example, if you are several screens deep in a stack and want to dismiss all of them to go back to the first screen. In this case, we know that we want to go back to `Home` so we can use `navigate('Home')` (not `push`! try that out and see the difference). Another alternative would be `navigation.popToTop()`, which goes back to the first screen in the stack.
 
-<samp id="pop-to-top"></samp>
+<samp id="pop-to-top" />
 
 ```js
 function DetailsScreen({ navigation }) {

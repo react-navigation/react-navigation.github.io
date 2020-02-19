@@ -18,9 +18,7 @@ import { navigationRef } from './RootNavigation';
 
 export default function App() {
   return (
-    <NavigationContainer ref={navigationRef}>
-      {/* ... */}
-    </NavigationContainer>
+    <NavigationContainer ref={navigationRef}>{/* ... */}</NavigationContainer>
   );
 }
 ```
@@ -79,7 +77,7 @@ If you try to navigate without rendering a navigator or before the navigator fin
 
 For an example, consider the following scenario, you have a screen somewhere in the app, and that screen dispatches a redux action on `useEffect`/`componentDidMount`. You are listening for this action in your middleware and try to perform navigation when you get it. This will throw an error, because by this time, the parent navigator hasn't finished mounting. Parent's `useEffect`/`componentDidMount` is always called **after** child's `useEffect`/`componentDidMount`.
 
-To avoid this, you can keep set a ref to tell you that your app has finished mounting, and check that ref before performing any navigation. To do this, we can use `useEffect` in our root component:
+To avoid this, you can set a ref to tell you that your app has finished mounting, and check that ref before performing any navigation. To do this, we can use `useEffect` in our root component:
 
 ```js
 // App.js
@@ -91,13 +89,11 @@ export default function App() {
   React.useEffect(() => {
     isMountedRef.current = true;
 
-    return () => isMountedRef.current = false;
-  }, [])
+    return () => (isMountedRef.current = false);
+  }, []);
 
   return (
-    <NavigationContainer ref={navigationRef}>
-      {/* ... */}
-    </NavigationContainer>
+    <NavigationContainer ref={navigationRef}>{/* ... */}</NavigationContainer>
   );
 }
 ```

@@ -239,7 +239,7 @@ export default createNavigatorFactory<
 
 All of the built-in navigators export their views, which we can reuse and build additional functionality on top of them. For example, if we want to re-build the bottom tab navigator, we need the following code:
 
-```jsx
+```js
 import * as React from 'react';
 import {
   useNavigationBuilder,

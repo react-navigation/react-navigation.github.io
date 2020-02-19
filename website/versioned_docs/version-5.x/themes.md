@@ -13,14 +13,11 @@ Themes allow you to change the colors of various components provided by React Na
 
 To pass a custom theme, you can pass the `theme` prop to the navigation container.
 
-<samp id="simple-theme"></samp>
+<samp id="simple-theme" />
 
 ```js
 import * as React from 'react';
-import {
-  NavigationContainer,
-  DefaultTheme,
-} from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -32,9 +29,7 @@ const MyTheme = {
 
 export default function App() {
   return (
-    <NavigationContainer theme={MyTheme}>
-      {/* content */}
-    </NavigationContainer>
+    <NavigationContainer theme={MyTheme}>{/* content */}</NavigationContainer>
   );
 }
 ```
@@ -105,9 +100,7 @@ export default () => {
 
   return (
     <AppearanceProvider>
-      <NavigationContainer
-        theme={scheme === 'dark' ? DarkTheme : DefaultTheme}
-      >
+      <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
         {/* content */}
       </NavigationContainer>
     </AppearanceProvider>
@@ -119,7 +112,7 @@ export default () => {
 
 To gain access to the theme in any component that is rendered inside the navigation container:, you can use the `useTheme` hook. It returns the theme object:
 
-<samp id="system-themes"></samp>
+<samp id="system-themes" />
 
 ```js
 import * as React from 'react';

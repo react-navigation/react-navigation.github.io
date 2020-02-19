@@ -2,14 +2,13 @@
 id: navigation-lifecycle
 title: Navigation lifecycle
 sidebar_label: Navigation lifecycle
-original_id: navigation-lifecycle
 ---
 
 In the previous section, we worked with a stack navigator that has two screens (`Home` and `Details`) and learned how to use `this.props.navigation.navigate('RouteName')` to navigate between the routes.
 
 An important question in this context is: what happens with `Home` when we navigate away from it, or when we come back to it? How does a route find out that a user is leaving it or coming back to it?
 
-Coming to react-navigation from the web, you may assume that when user navigates from route A to route B, A will unmount (its `componentWillUnmount` is called) and A will mount again when user comes back to it. While these React lifecycle methods are still valid and are used in react-navigation, their usage differs from the web. This is driven by more complex needs of mobile navigation. 
+Coming to react-navigation from the web, you may assume that when user navigates from route A to route B, A will unmount (its `componentWillUnmount` is called) and A will mount again when user comes back to it. While these React lifecycle methods are still valid and are used in react-navigation, their usage differs from the web. This is driven by more complex needs of mobile navigation.
 
 ## Example scenario
 

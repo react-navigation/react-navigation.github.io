@@ -30,7 +30,7 @@ In React Navigation 5.x there's no `createAppContainer` which provided screens w
 import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
-  return <NavigationContainer>{/*...*/}</NavigationContainer>
+  return <NavigationContainer>{/*...*/}</NavigationContainer>;
 }
 ```
 
@@ -446,6 +446,8 @@ However, this was very restrictive since you may want to use another scrollable 
 ## Higher order components
 
 React Navigation 4.x included higher order components such as `withNavigation` and `withNavigationFocus`. Now they live in the [compat package](compatibility.html).
+
+We also have documentation on how to use the new hooks such as [`useFocusEffect`](use-focus-effect.html) if you're using class components.
 
 ## Navigation state in Redux
 

@@ -10,7 +10,7 @@ Most of the time, you won't use `NavigationContext` directly, as the provided `u
 
 Example:
 
-<samp id="navigation-context"></samp>
+<samp id="navigation-context" />
 
 ```js
 import { NavigationContext } from '@react-navigation/native';

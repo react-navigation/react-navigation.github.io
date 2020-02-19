@@ -26,7 +26,7 @@ npm install @react-navigation/stack
 
 `NavigationContainer` is a component which manages our navigation tree and contains the navigation state. This component must wrap all navigators structure. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
 
-<samp id="hello-react-navigation">Hello World</samp>
+<samp id="hello-react-navigation" />
 
 ```js
 // In App.js in a new project

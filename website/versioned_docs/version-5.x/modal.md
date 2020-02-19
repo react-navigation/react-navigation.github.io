@@ -16,7 +16,7 @@ The purpose of explaining this as part of the React Navigation fundamentals is n
 
 ## Creating a modal stack
 
-<samp id="full-screen-modal">modal stack</samp>
+<samp id="full-screen-modal" />
 
 ```js
 function HomeScreen({ navigation }) {

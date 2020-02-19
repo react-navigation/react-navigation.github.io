@@ -10,7 +10,7 @@ In order to achieve it we export `useScrollToTop` which accept ref to scrollable
 
 Example:
 
-<samp id="use-scroll-to-top"></samp>
+<samp id="use-scroll-to-top" />
 
 ```js
 import * as React from 'react';

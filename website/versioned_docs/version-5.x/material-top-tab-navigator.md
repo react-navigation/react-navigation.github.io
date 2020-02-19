@@ -6,7 +6,7 @@ sidebar_label: createMaterialTopTabNavigator
 
 <div style="display: flex; justify-content: center">
   <video width="60%" playsinline autoplay muted loop>
-    <source src="/docs/assets/navigators/tabs/material-top-tabs.mov"></source>
+    <source src="/docs/assets/navigators/tabs/material-top-tabs.mov" />
   </video>
 </div>
 
@@ -24,7 +24,7 @@ npm install @react-navigation/material-top-tabs react-native-tab-view
 
 To use this tab navigator, import it from `@react-navigation/material-top-tabs`:
 
-<samp id="material-top-tab-based-navigation-minimal"></samp>
+<samp id="material-top-tab-based-navigation-minimal" />
 
 ```js
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -70,9 +70,9 @@ Position of the tab bar in the tab view. Possible values are `'top'` and `'botto
 
 #### `lazy`
 
-Boolean indicating whether to lazily render the scenes. By default all scenes are rendered to provide a smoother swipe experience. But you might want to defer the rendering of unfocused scenes until the user sees them. To enable lazy rendering, set `lazy` to `true`.
+Boolean indicating whether to lazily render the scenes. When this is set to `true`, screens will be rendered as they come into the viewport. By default all scenes are rendered to provide a smoother swipe experience. But you might want to defer the rendering of screens out of the viewport until the user sees them. To enable lazy rendering, set `lazy` to `true`.
 
-When you enable `lazy`, the unfocused screens will usually take some time to render when they come into focus. You can use the `renderLazyPlaceholder` prop to customize what the user sees during this short period.
+When you enable `lazy`, the lazy loaded screens will usually take some time to render when they come into the viewport. You can use the `renderLazyPlaceholder` prop to customize what the user sees during this short period.
 
 #### `lazyPreloadDistance`
 
@@ -181,7 +181,7 @@ Function that returns a React element to display as the tab bar.
 
 Example:
 
-<samp id="material-top-tab-custom-tab-bar"></samp>
+<samp id="material-top-tab-custom-tab-bar" />
 
 ```js
 import { View, TouchableOpacity } from 'react-native';
@@ -275,7 +275,7 @@ An object containing the props for the tab bar component. It can contain the fol
 
 Example:
 
-<samp id="material-top-tab-options"></samp>
+<samp id="material-top-tab-options" />
 
 ```js
 <Tab.Navigator
@@ -328,7 +328,7 @@ This event is fired when the user presses the tab button for the current screen 
 
 To prevent the default behavior, you can call `event.preventDefault`:
 
-<samp id="material-top-tab-prevent-default"></samp>
+<samp id="material-top-tab-prevent-default" />
 
 ```js
 React.useEffect(() => {
@@ -371,7 +371,7 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
-<samp id="material-top-tab-jump-to"></samp>
+<samp id="material-top-tab-jump-to" />
 
 ```js
 navigation.jumpTo('Profile', { name: 'Michaś' });
@@ -379,7 +379,7 @@ navigation.jumpTo('Profile', { name: 'Michaś' });
 
 ## Example
 
-<samp id="material-top-tab-example"></samp>
+<samp id="material-top-tab-example" />
 
 ```js
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';

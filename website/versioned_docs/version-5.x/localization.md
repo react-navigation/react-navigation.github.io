@@ -51,9 +51,7 @@ export default function App() {
 
   return (
     <LocalizationContext.Provider value={localizationContext}>
-      <NavigationContainer>
-        {/* Screen configuration */}
-      </NavigationContainer>
+      <NavigationContainer>{/* Screen configuration */}</NavigationContainer>
     </LocalizationContext.Provider>
   );
 }

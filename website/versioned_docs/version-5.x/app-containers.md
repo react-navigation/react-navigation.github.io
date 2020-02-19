@@ -63,9 +63,7 @@ function App() {
   return (
     <View style={{ flex: 1 }}>
       <Button onPress={() => ref.current?.navigate('Home')}>Go home</Button>
-      <NavigationContainer ref={ref}>
-        {/* ... */}
-      </NavigationContainer>
+      <NavigationContainer ref={ref}>{/* ... */}</NavigationContainer>
     </View>
   );
 }

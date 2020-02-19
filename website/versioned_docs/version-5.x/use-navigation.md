@@ -10,7 +10,7 @@ sidebar_label: useNavigation
 
 ## Example
 
-<samp id="use-navigation-example"></samp>
+<samp id="use-navigation-example" />
 
 ```js
 import * as React from 'react';

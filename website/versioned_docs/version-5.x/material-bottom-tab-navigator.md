@@ -6,7 +6,7 @@ sidebar_label: createMaterialBottomTabNavigator
 
 A material-design themed tab bar on the bottom of the screen that lets you switch between different routes with animation. Routes are lazily initialized - their screen components are not mounted until they are first focused.
 
-<img src="/docs/assets/navigators/tabs/material-bottom-tabs.gif" style="width: 420px; max-width: 100%"/>
+<img src="/docs/assets/navigators/tabs/material-bottom-tabs.gif" style="width: 420px; max-width: 100%" />
 
 This wraps the [`BottomNavigation`](https://callstack.github.io/react-native-paper/bottom-navigation.html) component from [`react-native-paper`](https://reactnativepaper.com). If you [configure the Babel plugin](https://callstack.github.io/react-native-paper/getting-started.html), it won't include the whole `react-native-paper` library in your bundle.
 
@@ -24,7 +24,7 @@ To use this tab navigator, import it from `@react-navigation/material-bottom-tab
 
 To use this tab navigator, import it from `@react-navigation/material-bottom-tabs`:
 
-<samp id="material-tab-based-navigation-minimal"></samp>
+<samp id="material-tab-based-navigation-minimal" />
 
 ```js
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -90,7 +90,7 @@ Style for the bottom navigation bar. You can set a bottom padding here if you ha
 
 Example:
 
-<samp id="material-bottom-tab-styled"></samp>
+<samp id="material-bottom-tab-styled" />
 
 ```js
 <Tab.Navigator
@@ -150,7 +150,7 @@ This event is fired when the user presses the tab button for the current screen 
 
 To prevent the default behavior, you can call `event.preventDefault`:
 
-<samp id="material-bottom-tab-prevent-default"></samp>
+<samp id="material-bottom-tab-prevent-default" />
 
 ```js
 React.useEffect(() => {
@@ -177,7 +177,7 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
-<samp id="material-tab-jump-to"></samp>
+<samp id="material-tab-jump-to" />
 
 ```js
 navigation.jumpTo('Profile', { name: 'Michaś' });
@@ -185,7 +185,7 @@ navigation.jumpTo('Profile', { name: 'Michaś' });
 
 ## Example
 
-<samp id="material-bottom-tab-example"></samp>
+<samp id="material-bottom-tab-example" />
 
 ```js
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
