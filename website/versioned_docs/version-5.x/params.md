@@ -107,7 +107,8 @@ function CreatePostScreen({ navigation, route }) {
 
   return (
     <>
-      <TextInput
+      {/* Add {TextInput} to react-native import */}
+      <TextInput 
         multiline
         placeholder="What's on your mind?"
         style={{ height: 200, padding: 10, backgroundColor: 'white' }}
@@ -134,3 +135,4 @@ Here, after you press "Done", the home screen's `route.params` will be updated t
 - You can read the params through `route.params` inside a screen
 - You can update the screen's params with `navigation.setParams`
 - Initial params can be passed via the `initialParams` prop on `Screen`
+- Note: Remember to add {TextInput} to react-native import
