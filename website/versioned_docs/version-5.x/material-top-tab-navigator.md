@@ -4,7 +4,7 @@ title: createMaterialTopTabNavigator
 sidebar_label: createMaterialTopTabNavigator
 ---
 
-<div style="display: flex; justify-content: center">
+<div style={{ display: 'flex', justifyContent: 'center' }}>
   <video width="60%" playsinline autoplay muted loop>
     <source src="/docs/assets/navigators/tabs/material-top-tabs.mov" />
   </video>

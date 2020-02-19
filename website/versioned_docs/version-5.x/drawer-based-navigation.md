@@ -4,7 +4,7 @@ title: Drawer navigation
 sidebar_label: Drawer navigation
 ---
 
-<div style="display: flex; justify-content: center">
+<div style={{ display: 'flex', justifyContent: 'center' }}>
   <video width="60%" playsinline autoplay muted loop>
     <source src="/docs/assets/navigators/drawer/drawer.mov" />
   </video>

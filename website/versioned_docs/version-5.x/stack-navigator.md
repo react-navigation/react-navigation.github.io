@@ -4,7 +4,7 @@ title: createStackNavigator
 sidebar_label: createStackNavigator
 ---
 
-<div style="display: flex; justify-content: center">
+<div style={{ display: 'flex', justifyContent: 'center' }}>
   <video  width="60%" playsinline autoplay muted loop>
     <source src="/docs/assets/navigators/stack/stack.mov" />
   </video>
