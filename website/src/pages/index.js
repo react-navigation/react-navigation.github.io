@@ -116,6 +116,65 @@ function Home() {
           </section>
         )}
       </main>
+      <div
+        style={{
+          backgroundColor: '#fff',
+          display: 'flex',
+          flex: 1,
+          position: 'relative',
+          paddingTop: 35,
+          paddingBottom: 35,
+          maxHeight: 412,
+          borderTopWidth: 1,
+          borderTopColor: '#eee',
+          borderTopStyle: 'solid',
+        }}
+      >
+        <div
+          style={{
+            zIndex: 0,
+            opacity: 0.4,
+            position: 'absolute',
+            bottom: 0,
+            right: 0,
+            top: 0,
+            left: 0,
+            backgroundImage: 'url(/img/expo_spiro.png)',
+            backgroundRepeat: 'repeat',
+            backgroundColor: '#fff',
+            backgroundPositionX: 'center',
+          }}
+        />
+        <p
+          style={{
+            justifyContent: 'center',
+            flex: 1,
+            marginBottom: 0,
+            zIndex: 1,
+            textAlign: 'center',
+            paddingLeft: 20,
+            paddingRight: 20,
+            color: '#7b7b7b',
+          }}
+        >
+          React Navigation is built and funded by{' '}
+          <a href="https://expo.io" style={{ fontWeight: 'bold' }}>
+            Expo
+          </a>
+          <span>{' '}&{' '}</span>
+          <a href="https://swmansion.com/" style={{ fontWeight: 'bold' }}>
+            Software Mansion
+          </a>
+          , with contributions from the{' '}
+          <a
+            style={{ fontWeight: 'bold' }}
+            href="https://github.com/react-navigation/react-navigation/graphs/contributors"
+          >
+            community
+          </a>
+          .
+        </p>
+      </div>
     </Layout>
   );
 }
