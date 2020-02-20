@@ -15,6 +15,10 @@ module.exports = {
     '/js/code-block-buttons.js'
   ],
   themeConfig: {
+    prism: {
+      theme: require('prism-react-renderer/themes/github'),
+      darkTheme: require('prism-react-renderer/themes/dracula'),
+    },
     algolia: {
       apiKey: 'c967b4a1491b9cb486d3dca087b771e6',
       indexName: 'reactnavigation',
