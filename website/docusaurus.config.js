@@ -102,7 +102,6 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} React Navigation.`,
     },
   },
   presets: [
