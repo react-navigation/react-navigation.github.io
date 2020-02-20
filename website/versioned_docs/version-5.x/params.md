@@ -20,6 +20,8 @@ There are two pieces to this:
 <samp id="passing-params" />
 
 ```js
+import { TextInput } from 'react-native'
+
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -83,6 +85,7 @@ To achieve this, you can use the `navigate` method, which acts like `goBack` if 
 <samp id="passing-params-back" />
 
 ```js
+import { TextInput } from 'react-native'
 function HomeScreen({ navigation, route }) {
   React.useEffect(() => {
     if (route.params?.post) {
