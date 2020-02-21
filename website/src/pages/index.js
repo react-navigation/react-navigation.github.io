@@ -78,21 +78,21 @@ function Home() {
 
           <div className={styles.buttons}>
             <Link
+              id="btn-start"
               className={classnames(
                 'button button--outline button--secondary button--lg',
                 styles.getStarted,
               )}
-              style={{color: '#fff'}}
               to={useBaseUrl('/docs/getting-started')}>
               Read guides
             </Link>
 
             <Link
+              id="btn-start"
               className={classnames(
                 'button button--outline button--secondary button--lg',
                 styles.getStarted,
               )}
-              style={{color: '#fff'}}
               to={'https://github.com/react-navigation/react-navigation/tree/master/example'}>
               Try the demo app
             </Link>

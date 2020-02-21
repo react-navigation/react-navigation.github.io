@@ -101,3 +101,9 @@ samp {
 code.template {
   display: none;
 }
+#btn-start {
+  color: white;
+}
+#btn-start:hover {
+  color: #6b52ae !important;
+}
