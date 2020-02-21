@@ -304,9 +304,24 @@ export default function App() {
 }
 ```
 
-The new approach is more maintainable and removes the need for something like Switch Navigator. So it has been removed.
+In earlier versions of React Navigation, there were 2 ways to handle this:
 
-See [Authentication flows](auth-flow.html) for more info on implementing authentication flows.
+1. Keep multiple navigators and use switch navigator to switch the active navigator to a different one upon login (recommended)
+2. Reset the state of the navigator to the desired screens upon login
+
+Both of these approaches were imperative. We needed to update the state to save your token, and then do a `navigate` or `reset` to change screens manually. Seems reasonable, right? But what happens when the user logs out? We need to update the state to delete the token, then `navigate` or `reset` again manually to show the login screen. We have to imperatively do the task twice already. Add more scenarios to this (e.g. unverified user, guest etc.) and it becomes even more complex.
+
+But with the above approach, you can declaratively say which screens should be accessible if user is logged in and which screens shouldn't be. If the user logs in or logs out, you update the `userToken` in state and the correct screens are shown automatically.
+
+To summarize the benefits:
+
+- No need for manually navigating to correct screen on log in or log out, correct screens are shown automatically.
+- If the user is not logged in, it's impossible to navigate to screens which need the user to be logged in (e.g. from a deep link, restoring persisted state), which means you don't need to deal with inconsistent states.
+- Since all our screens are under the stack navigator, we get smooth animations after log in or log out unlike the abrupt screen change with switch navigator.
+
+So, the new approach covers more edge cased and removes the need for something like Switch Navigator. So it has been removed.
+
+See [Authentication flows](auth-flow.html) for a guide on implementing authentication flows.
 
 ## Global props with `screenProps`
 
