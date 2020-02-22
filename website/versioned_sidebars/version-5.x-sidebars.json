@@ -41,6 +41,7 @@
       "version-5.x-upgrading-from-4.x"
     ],
     "API Reference": [
+      "version-5.x-route-prop",
       "version-5.x-navigation-prop",
       "version-5.x-navigation-context",
       {

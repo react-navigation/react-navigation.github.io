@@ -23,4 +23,4 @@ function ProfileScreen({ navigation: { route } }) {
 }
 ```
 
-You might also find a `state` property on the route object in some cases. This property contains the child navigator's state and may exist when you have a navigator inside this screen. It's important to note that **this property may be `undefined`** even if you have a child navigator. It gets initialized only after the first navigation in the child navigator. It's not recommended to use this property.
+You might also find a `state` property on the route object in some cases. This property contains the child navigator's state and may exist when you have a navigator inside this screen. It's important to note that **this property may be `undefined`** even if you have a child navigator. It gets initialized only after the first navigation in the child navigator. It's **not recommended** to use this property.
