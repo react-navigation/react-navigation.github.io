@@ -7,7 +7,7 @@ sidebar_label: Drawer navigation
 Common pattern in navigation is to use drawer from left (sometimes right) side for navigating between screens.
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsinline autoplay muted loop>
+  <video playsInline autoPlay muted loop>
     <source src="/docs/assets/navigators/drawer/drawer.mov" />
   </video>
 </div>

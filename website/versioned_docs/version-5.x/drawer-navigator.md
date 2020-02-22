@@ -7,7 +7,7 @@ sidebar_label: createDrawerNavigator
 Component that renders a navigation drawer which can be opened and closed via gestures.
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsinline autoplay muted loop>
+  <video playsInline autoPlay muted loop>
     <source src="/docs/assets/navigators/drawer/drawer.mov" />
   </video>
 </div>

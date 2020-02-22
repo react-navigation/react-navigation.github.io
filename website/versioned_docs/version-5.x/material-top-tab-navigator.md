@@ -9,7 +9,7 @@ A material-design themed tab bar on the top of the screen that lets you switch b
 This wraps [`react-native-tab-view`](https://github.com/react-native-community/react-native-tab-view).
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsinline autoplay muted loop>
+  <video playsInline autoPlay muted loop>
     <source src="/docs/assets/navigators/tabs/material-top-tabs.mov" />
   </video>
 </div>
