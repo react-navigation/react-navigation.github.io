@@ -4,13 +4,13 @@ title: Drawer navigation
 sidebar_label: Drawer navigation
 ---
 
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-  <video width="60%" playsinline autoplay muted loop>
+Common pattern in navigation is to use drawer from left (sometimes right) side for navigating between screens.
+
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsinline autoplay muted loop>
     <source src="/docs/assets/navigators/drawer/drawer.mov" />
   </video>
 </div>
-
-Common pattern in navigation is to use drawer from left (sometimes right) side for navigating between screens.
 
 Before continuing, first install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/master/packages/drawer):
 

@@ -4,15 +4,15 @@ title: createMaterialTopTabNavigator
 sidebar_label: createMaterialTopTabNavigator
 ---
 
-<div style={{ display: 'flex', justifyContent: 'center' }}>
-  <video width="60%" playsinline autoplay muted loop>
-    <source src="/docs/assets/navigators/tabs/material-top-tabs.mov" />
-  </video>
-</div>
-
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the route or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
 This wraps [`react-native-tab-view`](https://github.com/react-native-community/react-native-tab-view).
+
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsinline autoplay muted loop>
+    <source src="/docs/assets/navigators/tabs/material-top-tabs.mov" />
+  </video>
+</div>
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.html), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/master/packages/material-top-tabs):
 
