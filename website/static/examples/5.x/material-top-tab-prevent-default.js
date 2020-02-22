@@ -4,13 +4,19 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 function HomeScreen({ navigation }) {
-  navigation.addListener('tabPress', e => {
-    // Prevent default behavior
-    e.preventDefault();
-    alert('Default behavior prevented');
-    // Do something manually
-    // ...
-  });
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('tabPress', e => {
+      // Prevent default behavior
+      e.preventDefault();
+
+      alert('Default behavior prevented');
+      // Do something manually
+      // ...
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Home!</Text>
