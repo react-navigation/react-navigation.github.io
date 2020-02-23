@@ -1,12 +1,17 @@
 ---
 title: React Navigation v5 + React Native Paper = ❤️
 author: Dawid Urbaniak
-authorURL: https://twitter.com/trensik
+author_url: https://twitter.com/trensik
+author_title: Paper Team
+author_image_url: https://avatars0.githubusercontent.com/u/18584155?s=200&v=4
+tags: [tutorial, react-native-paper]
 ---
 
 This is a guest post by the [React Native Paper](https://reactnativepaper.com/) team. If you like this guide, check out React Native Paper for more!
 
 In this blog post, we'll show you how to build a Twitter clone app using React Navigation v5 and Paper.
+
+<!--truncate-->
 
 ## Introduction
 
