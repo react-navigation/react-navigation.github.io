@@ -4,7 +4,7 @@ title: Localization
 sidebar_label: Localization
 ---
 
-English is only one of many languages that people speak around the world (thanks a lot, [Tower of Babel](https://en.wikipedia.org/wiki/Tower_of_Babel)) and it's polite and sometimes even necessary to translate to your app into the languages that your users speak. Let's look at one way you can do this in React Navigation - it's not the only way but it'll do the trick. Similar to [themes](themes.html), we will use `screenProps`. You may want to also use React's context API as demonstrated in the [themes](themes.html) guide in order to make it easier to access the translate function from a variety of components.
+English is only one of many languages that people speak around the world (thanks a lot, [Tower of Babel](https://en.wikipedia.org/wiki/Tower_of_Babel)) and it's polite and sometimes even necessary to translate to your app into the languages that your users speak. Let's look at one way you can do this in React Navigation - it's not the only way but it'll do the trick. Similar to [themes](themes.md), we will use `screenProps`. You may want to also use React's context API as demonstrated in the [themes](themes.md) guide in order to make it easier to access the translate function from a variety of components.
 
 ## Setting up a localization library
 
@@ -100,4 +100,4 @@ class Screen extends React.Component {
 }
 ```
 
-You can run this example in [this Snack](https://snack.expo.io/@react-navigation/localization-example). Again, you may want to go further than just passing this through `screenProps` if you want to make it easier to access the `t` function or the other `screenProps` from any React component (and not just screen components that are rendered by React Navigation). Refer to [themes](themes.html) and the [React documentation on context](https://reactjs.org/docs/context.html) for help with that.
+You can run this example in [this Snack](https://snack.expo.io/@react-navigation/localization-example). Again, you may want to go further than just passing this through `screenProps` if you want to make it easier to access the `t` function or the other `screenProps` from any React component (and not just screen components that are rendered by React Navigation). Refer to [themes](themes.md) and the [React documentation on context](https://reactjs.org/docs/context.html) for help with that.

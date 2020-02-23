@@ -105,7 +105,7 @@ const AppContainer = createAppContainer(AppNavigator);
 
 ## Assigning navigationOptions to the wrong component
 
-In previous version of React Navigation, the library used to dig through your component tree to find `navigationOptions`. This is no longer the case, and only `navigationOptions` on screen components of a particular navigator will apply to that navigator. You can read more about this in the [Navigation options resolution](navigation-options-resolution.html) guide.
+In previous version of React Navigation, the library used to dig through your component tree to find `navigationOptions`. This is no longer the case, and only `navigationOptions` on screen components of a particular navigator will apply to that navigator. You can read more about this in the [Navigation options resolution](navigation-options-resolution.md) guide.
 
 ## Wrapping AppContainer in a View without flex: 1
 

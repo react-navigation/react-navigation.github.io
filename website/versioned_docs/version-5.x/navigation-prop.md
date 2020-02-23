@@ -15,7 +15,7 @@ Each `screen` component in your app is provided with the `navigation` prop autom
   - `dispatch` - send an action to router
   - `dangerouslyGetParent` - function that returns the parent navigator, if any
 
-It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do any magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`useNavigation`](use-navigation.html) hook.
+It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do any magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`useNavigation`](use-navigation.md) hook.
 
 ### Navigator-dependent functions
 
@@ -230,7 +230,7 @@ Returns `true` if the screen is focused and `false` otherwise.
 const isFocused = navigation.isFocused();
 ```
 
-This method doesn't re-render the screen when the value changes and mainly useful in callbacks. You probably want to use [useIsFocused](use-is-focused.html) instead of using this directly, it will return a boolean a prop to indicating if the screen is focused.
+This method doesn't re-render the screen when the value changes and mainly useful in callbacks. You probably want to use [useIsFocused](use-is-focused.md) instead of using this directly, it will return a boolean a prop to indicating if the screen is focused.
 
 ## Advanced API Reference
 
@@ -242,7 +242,7 @@ Use dispatch to send any navigation action to the router. The other navigation f
 
 Note that if you want to dispatch react-navigation actions you should use the action creators provided in this library.
 
-See [Navigation Actions Docs](navigation-actions.html) for a full list of available actions.
+See [Navigation Actions Docs](navigation-actions.md) for a full list of available actions.
 
 ```js
 import { CommonActions } from '@react-navigation/native';
@@ -284,4 +284,4 @@ This method will return `undefined` if there is no parent navigator. Be sure to 
 
 This method returns the state object of the navigator which contains the screen. Getting the navigator state could be useful in very rare situations. You most likely don't need to use this method. If you do, make sure you have a good reason.
 
-If you need the state for rendering content, you should use [`useNavigationState`](use-navigation-state.html) instead of this method.
+If you need the state for rendering content, you should use [`useNavigationState`](use-navigation-state.md) instead of this method.

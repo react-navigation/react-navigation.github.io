@@ -8,7 +8,7 @@ In the previous section, we worked with a stack navigator that has two screens (
 
 An important question in this context is: what happens with `Home` when we navigate away from it, or when we come back to it? How does a route find out that a user is leaving it or coming back to it?
 
-Coming to react-navigation from the web, you may assume that when user navigates from route A to route B, A will unmount (its `componentWillUnmount` is called) and A will mount again when user comes back to it. While these React lifecycle methods are still valid and are used in react-navigation, their usage differs from the web. This is driven by more complex needs of mobile navigation. 
+Coming to react-navigation from the web, you may assume that when user navigates from route A to route B, A will unmount (its `componentWillUnmount` is called) and A will mount again when user comes back to it. While these React lifecycle methods are still valid and are used in react-navigation, their usage differs from the web. This is driven by more complex needs of mobile navigation.
 
 ## Example scenario
 
@@ -46,7 +46,7 @@ Now that we understand how React lifecycle methods work in React Navigation, let
 
 React Navigation emits events to screen components that subscribe to them. There are four different events that you can subscribe to: `willFocus`, `willBlur`, `didFocus` and `didBlur`. Read more about them in the [API reference](navigation-prop.html#addlistener-subscribe-to-updates-to-navigation-lifecycle).
 
-Many of your use cases may be covered with the [`withNavigationFocus` HOC](with-navigation-focus.html) or the [`<NavigationEvents />` component](navigation-events.html) which are a little more straightforward to use.
+Many of your use cases may be covered with the [`withNavigationFocus` HOC](with-navigation-focus.md) or the [`<NavigationEvents />` component](navigation-events.md) which are a little more straightforward to use.
 
 ## Summary
 

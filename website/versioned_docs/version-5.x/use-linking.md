@@ -50,7 +50,7 @@ export default function App() {
 }
 ```
 
-See [deep linking guide](deep-linking.html) for a complete guide.
+See [deep linking guide](deep-linking.md) for a complete guide.
 
 ### Options
 

@@ -10,7 +10,7 @@ This wraps the [`BottomNavigation`](https://callstack.github.io/react-native-pap
 
 <img src="/docs/assets/navigators/tabs/material-bottom-tabs.gif" style={{ width: '420px', maxWidth: '100%', margin: '16px 0' }} />
 
-To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.html), then install [`@react-navigation/material-bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/master/packages/material-bottom-tabs):
+To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/master/packages/material-bottom-tabs):
 
 ```sh
 npm install @react-navigation/material-bottom-tabs react-native-paper
@@ -41,7 +41,7 @@ function MyTabs() {
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.html)
+> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
 
 ## RouteConfigs
 

@@ -52,7 +52,7 @@ class DetailsScreen extends React.Component {
 
 The argument that is passed in to the `navigationOptions` function is an object with the following properties:
 
-- `navigation` - The [navigation prop](navigation-prop.html) for the screen, with the screen's route at `navigation.state`.
+- `navigation` - The [navigation prop](navigation-prop.md) for the screen, with the screen's route at `navigation.state`.
 - `screenProps` - The props passing from above the navigator component
 - `navigationOptions` - The default or previous options that would be used if new values are not provided
 
@@ -101,7 +101,7 @@ class HomeScreen extends React.Component {
 
 There are a couple of things to notice here:
 
-1. On iOS, the status bar text and icons are black, and this doesn't look great over a dark-colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.html).
+1. On iOS, the status bar text and icons are black, and this doesn't look great over a dark-colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.md).
 2. The configuration we set only applies to the home screen; when we navigate to the details screen, the default styles are back. We'll look at how to share `navigationOptions` between screens now.
 
 ## Sharing common `navigationOptions` across screens

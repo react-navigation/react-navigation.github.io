@@ -4,7 +4,7 @@ title: Screen options resolution
 sidebar_label: Screen options resolution
 ---
 
-Each screen can configure various aspects about how it gets presented in the navigator that renders it. In the [Configuring the header bar](headers.html) section of the fundamentals documentation we explain the basics of how this works.
+Each screen can configure various aspects about how it gets presented in the navigator that renders it. In the [Configuring the header bar](headers.md) section of the fundamentals documentation we explain the basics of how this works.
 
 In this document we'll explain how this works when there are multiple navigators. It's important to understand this so that you put your `options` in the correct place and can properly configure your navigators. If you put them in the wrong place, at best nothing will happen and at worst something confusing and unexpected will happen.
 

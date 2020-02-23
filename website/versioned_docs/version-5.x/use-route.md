@@ -24,7 +24,7 @@ function MyText() {
 }
 ```
 
-See the documentation for the [`route` prop](route-prop.html) for more info.
+See the documentation for the [`route` prop](route-prop.md) for more info.
 
 ## Using with class component
 

@@ -30,7 +30,7 @@ expo install react-native-gesture-handler react-native-reanimated react-native-s
 
 This will install versions of these libraries that are compatible.
 
-You can now continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
+You can now continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.
 
 ### Installing dependencies into a bare React Native project
 
@@ -83,4 +83,4 @@ export default function App() {
 
 Now you are ready to build and run your app on the device/simulator.
 
-Continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
+Continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.

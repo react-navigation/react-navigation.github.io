@@ -14,7 +14,7 @@ By default the stack navigator is configured to have the familiar iOS and Androi
   </video>
 </div>
 
-To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.html), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/master/packages/stack):
+To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/master/packages/stack):
 
 ```sh
 npm install @react-navigation/stack

@@ -40,4 +40,4 @@ The presented approach will work well for screens that are shown in a `StackNavi
 
 ### Why not use component lifecycle methods?
 
-At first, you may be inclined to use `componentDidMount` to subscribe for the back press event and `componentWillUnmount` to unsubscribe, or use `useEffect` to add the listener. This approach will not work - learn more about this in [navigation lifecycle](navigation-lifecycle.html).
+At first, you may be inclined to use `componentDidMount` to subscribe for the back press event and `componentWillUnmount` to unsubscribe, or use `useEffect` to add the listener. This approach will not work - learn more about this in [navigation lifecycle](navigation-lifecycle.md).

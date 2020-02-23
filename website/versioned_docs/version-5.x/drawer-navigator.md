@@ -12,7 +12,7 @@ Component that renders a navigation drawer which can be opened and closed via ge
   </video>
 </div>
 
-To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.html), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/master/packages/drawer):
+To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/master/packages/drawer):
 
 ```sh
 npm install @react-navigation/drawer
@@ -39,7 +39,7 @@ function MyDrawer() {
 }
 ```
 
-> For a complete usage guide please visit [Drawer Navigation](drawer-based-navigation.html).
+> For a complete usage guide please visit [Drawer Navigation](drawer-based-navigation.md).
 
 ### Props
 

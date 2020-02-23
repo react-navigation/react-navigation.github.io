@@ -6,7 +6,7 @@ sidebar_label: createMaterialTopTabNavigator
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the route or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
-To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`react-navigation-tabs`](https://github.com/react-navigation/tabs).
+To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`react-navigation-tabs`](https://github.com/react-navigation/tabs).
 
 ```sh
 npm install react-navigation-tabs

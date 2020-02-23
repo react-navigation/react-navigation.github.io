@@ -22,7 +22,7 @@ Now that we understand how React lifecycle methods work in React Navigation, let
 
 React Navigation emits events to screen components that subscribe to them. There are four different events that you can subscribe to: `willFocus`, `willBlur`, `didFocus` and `didBlur`. Read more about them in the [API reference](navigation-prop.html#addlistener-subscribe-to-updates-to-navigation-lifecycle).
 
-Many of your use cases may be covered with the [`withNavigationFocus` higher-order-component](with-navigation-focus.html), the [`<NavigationEvents />` component](navigation-events.html), or the [useFocusState hook](https://github.com/react-navigation/hooks#usefocusstate).
+Many of your use cases may be covered with the [`withNavigationFocus` higher-order-component](with-navigation-focus.md), the [`<NavigationEvents />` component](navigation-events.md), or the [useFocusState hook](https://github.com/react-navigation/hooks#usefocusstate).
 
 ## Summary
 

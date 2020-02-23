@@ -57,7 +57,7 @@ You can use the `handleServerRequest` function to get the top-level navigation p
 
 ```js
 expressApp.get("/*", (req, res) => {
-  
+
   const { path, query } = req;
 
   const { navigation, title, options } = handleServerRequest(
@@ -91,6 +91,6 @@ The built-in navigator components such as Stack are often not well suited for we
 
 Your view can use `props.descriptors` to see the current set of screens, get their navigation object, and see the current navigation options. You should use `SceneView` to present your child screen components.
 
-See ["Custom Navigators"](custom-navigators.html) for more details.
+See ["Custom Navigators"](custom-navigators.md) for more details.
 
 For an example of this, see how the custom `SidebarView` and `AppView` are used from [`App.js` in the web server example](https://github.com/react-navigation/web-server-example/blob/master/src/App.js).

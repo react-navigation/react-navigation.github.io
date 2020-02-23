@@ -18,7 +18,7 @@ The libraries we've installed so far are the building blocks and shared foundati
 npm install @react-navigation/stack
 ```
 
-> 💡 `@react-navigation/stack` depends on `@react-native-community/masked-view` and the other libraries that we installed in [Getting started](getting-started.html). If you haven't installed those yet, head over to that page and follow the installation instructions.
+> 💡 `@react-navigation/stack` depends on `@react-native-community/masked-view` and the other libraries that we installed in [Getting started](getting-started.md). If you haven't installed those yet, head over to that page and follow the installation instructions.
 
 ### Creating a stack navigator
 
@@ -65,7 +65,7 @@ If you run this code, you will see a screen with an empty navigation bar and a g
 
 > The casing of the route name doesn't matter -- you can use lowercase `home` or capitalized `Home`, it's up to you. We prefer capitalizing our route names.
 
-> The only required configuration for a screen is the `name` and `component` props. You can read more about the other options available in the [stack navigator reference](stack-navigator.html).
+> The only required configuration for a screen is the `name` and `component` props. You can read more about the other options available in the [stack navigator reference](stack-navigator.md).
 
 ### Configuring the navigator
 
@@ -137,7 +137,7 @@ Sometimes we might want to pass additional props to a screen. We can do that wit
 
 ## What's next?
 
-The natural question at this point is: "how do I go from the `Home` route to the `Details` route?". That is covered in the [next section](navigating.html).
+The natural question at this point is: "how do I go from the `Home` route to the `Details` route?". That is covered in the [next section](navigating.md).
 
 ## Summary
 

@@ -53,7 +53,7 @@ class HomeScreen extends React.Component {
 
 <a href="https://snack.expo.io/@react-navigation/screen-components-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-The ["Navigation prop reference"](navigation-prop.html) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `this.props.navigation`.
+The ["Navigation prop reference"](navigation-prop.md) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `this.props.navigation`.
 
 ## Navigation Prop
 
@@ -66,7 +66,7 @@ This prop will be passed into all screens, and it can be used for the following:
 
 Navigators can also accept a navigation prop, which they should get from the parent navigator, if there is one.
 
-For more details, see the ["Navigation prop document"](navigation-prop.html).
+For more details, see the ["Navigation prop document"](navigation-prop.md).
 
 ## Navigation State
 

@@ -14,7 +14,7 @@ This wraps [`react-native-tab-view`](https://github.com/react-native-community/r
   </video>
 </div>
 
-To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.html), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/master/packages/material-top-tabs):
+To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/master/packages/material-top-tabs):
 
 ```sh
 npm install @react-navigation/material-top-tabs react-native-tab-view

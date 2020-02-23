@@ -92,4 +92,4 @@ function Profile() {
 }
 ```
 
-This example is also documented in the [`useIsFocused` API documentation](use-is-focused.html).
+This example is also documented in the [`useIsFocused` API documentation](use-is-focused.md).

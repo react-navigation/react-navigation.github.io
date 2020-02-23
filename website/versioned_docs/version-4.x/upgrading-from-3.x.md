@@ -317,6 +317,6 @@ If you're using TypeScript, you'll also need to upgrade the navigators to the la
   - `NavigationMaterialTabScreenComponent` for `createMaterialTopTabNavigator` from `react-navigation-tabs`
   - `NavigationDrawerScreenComponent` for `createDrawerNavigator` from `react-navigation-drawer`
 
-See the [TypeScript guide](typescript.html) for more details.
+See the [TypeScript guide](typescript.md) for more details.
 
 TypeScript support is still a work in progress, so please open an issue if you're facing a problem.

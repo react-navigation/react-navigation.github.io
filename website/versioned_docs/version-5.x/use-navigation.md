@@ -31,7 +31,7 @@ function MyBackButton() {
 }
 ```
 
-See the documentation for the [`navigation` prop](navigation-prop.html) for more info.
+See the documentation for the [`navigation` prop](navigation-prop.md) for more info.
 
 ## Using with class component
 

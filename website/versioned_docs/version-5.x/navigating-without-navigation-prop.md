@@ -6,7 +6,7 @@ sidebar_label: Navigating without the navigation prop
 
 Sometimes you need to trigger a navigation action from places where you do not have access to the `navigation` prop, such as a Redux middleware. For such cases, you can dispatch navigation actions from the navigation container.
 
-If you're looking for a way to navigate from inside a component without needing to pass the `navigation` prop down, see [`useNavigation`](use-navigation.html).
+If you're looking for a way to navigate from inside a component without needing to pass the `navigation` prop down, see [`useNavigation`](use-navigation.md).
 
 You can get access to the root navigation object through a `ref` and pass it to the `RootNavigation` which we will later use to navigate.
 

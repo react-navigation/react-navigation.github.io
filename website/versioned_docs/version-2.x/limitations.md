@@ -4,7 +4,7 @@ title: Limitations
 sidebar_label: Limitations
 ---
 
-As a potential user of the library, it's important to know what you can and cannot do with it. Armed with this knowledge, you may choose to adopt [a different library instead](alternatives.html). We discuss the high level design decisions in the [pitch & anti-pitch](pitch.html) section, and here we will cover some of the use cases that are either not supported or are so difficult to do that they may as well be impossible. If any of the following limitations are dealbreakers for your app, React Navigation might not be for you.
+As a potential user of the library, it's important to know what you can and cannot do with it. Armed with this knowledge, you may choose to adopt [a different library instead](alternatives.md). We discuss the high level design decisions in the [pitch & anti-pitch](pitch.md) section, and here we will cover some of the use cases that are either not supported or are so difficult to do that they may as well be impossible. If any of the following limitations are dealbreakers for your app, React Navigation might not be for you.
 
 ## Dynamic routes
 
@@ -35,7 +35,7 @@ export default class MyApp extends React.Component {
 }
 ```
 
-Let's say that when a user signs in to the app, you want to get a list of the user's friends and add a route for each friend in the `FriendsNavigator`. This would make it so there is a button with each of their names in the drawer. React Navigation does not currently provide an easy way to do this. React Navigation currently works best in situations where your routes can be defined statically. Keep in mind that this does not mean that you cannot pass arbitrary data to your routes &mdash; you can do this using [params](params.html).
+Let's say that when a user signs in to the app, you want to get a list of the user's friends and add a route for each friend in the `FriendsNavigator`. This would make it so there is a button with each of their names in the drawer. React Navigation does not currently provide an easy way to do this. React Navigation currently works best in situations where your routes can be defined statically. Keep in mind that this does not mean that you cannot pass arbitrary data to your routes &mdash; you can do this using [params](params.md).
 
 There are workarounds if you absolutely need dynamic routes but you can expect some additional complexity.
 
@@ -55,6 +55,6 @@ We are able to offload animations to another thread using React Native's [Animat
 
 Some platform-specific behavior either cannot be implemented or has not yet been implemented in React Navigation.
 
-Versions prior to 2.14.0 do not support the ["reachability feature" on iOS](https://www.cnet.com/how-to/how-to-use-reachability-on-iphone-6-6-plus/). When you toggle this feature, the app moves down towards the bottom of the screen so you can easily reach the navigation bar and other functionality near the top of the UI. When you navigate to another screen using the built-in iOS navigation API, the UI will jump back up to the top of the screen. React-navigation 2.14.0 and later supports this feature through integration with [react-native-screens](react-native-screens.html).
+Versions prior to 2.14.0 do not support the ["reachability feature" on iOS](https://www.cnet.com/how-to/how-to-use-reachability-on-iphone-6-6-plus/). When you toggle this feature, the app moves down towards the bottom of the screen so you can easily reach the navigation bar and other functionality near the top of the UI. When you navigate to another screen using the built-in iOS navigation API, the UI will jump back up to the top of the screen. React-navigation 2.14.0 and later supports this feature through integration with [react-native-screens](react-native-screens.md).
 
 React-navigation does not include support for the peek & pop feature available on devices with 3D touch.

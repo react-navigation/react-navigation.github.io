@@ -19,7 +19,7 @@ import { BackHandler } from "react-native";
 class ScreenWithCustomBackBehavior extends React.Component {
   _didFocusSubscription;
   _willBlurSubscription;
-  
+
   constructor(props) {
     super(props);
     this._didFocusSubscription = props.navigation.addListener('didFocus', payload =>
@@ -57,4 +57,4 @@ The presented approach will work well for screens that are shown in a `StackNavi
 
 ### Why not use component lifecycle methods?
 
-At first, you may be inclined to use `componentDidMount` to subscribe for the back press event and `componentWillUnmount` to unsubscribe. This approach will not work - learn more about this in [navigation lifecycle](navigation-lifecycle.html).
+At first, you may be inclined to use `componentDidMount` to subscribe for the back press event and `componentWillUnmount` to unsubscribe. This approach will not work - learn more about this in [navigation lifecycle](navigation-lifecycle.md).

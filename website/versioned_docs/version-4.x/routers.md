@@ -28,7 +28,7 @@ Now you can use this component as a `screen` in another navigator, and the navig
 
 ## Customizing Routers
 
-See the [Custom Router API spec](custom-routers.html) to learn about the API of `StackRouter` and `TabRouter`. You can override the router functions as you see fit:
+See the [Custom Router API spec](custom-routers.md) to learn about the API of `StackRouter` and `TabRouter`. You can override the router functions as you see fit:
 
 ### Custom Navigation Actions
 

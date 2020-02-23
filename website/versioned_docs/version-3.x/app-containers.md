@@ -38,7 +38,7 @@ Function that gets called every time navigation state managed by the navigator c
 
 ### `uriPrefix`
 
-The prefix of the URIs that the app might handle. This will be used when handling a [deep link](deep-linking.html) to extract the path passed to the router.
+The prefix of the URIs that the app might handle. This will be used when handling a [deep link](deep-linking.md) to extract the path passed to the router.
 
 ## Calling Dispatch or Navigate on App Container
 

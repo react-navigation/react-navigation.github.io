@@ -8,9 +8,9 @@ sidebar_label: Upgrading from 4.x
 
 React Navigation 5 has a completely new component based API. While the main concepts are the same, the API is different. In this guide, we aim to document all the differences so that it's easier to upgrade your app.
 
-If you have not installed React Navigation 5 yet, you can do so following the [Getting Started guide](getting-started.html).
+If you have not installed React Navigation 5 yet, you can do so following the [Getting Started guide](getting-started.md).
 
-To reuse code using the old API with minimal changes, you can use the [compatibility layer](compatibility.html).
+To reuse code using the old API with minimal changes, you can use the [compatibility layer](compatibility.md).
 
 ## Package names
 
@@ -24,7 +24,7 @@ For React Navigation 5, we went with scoped packages (e.g. `@react-navigation/st
 
 ## Navigation Container
 
-In React Navigation 5.x there's no `createAppContainer` which provided screens with navigation context. You'll need to wrap your app with [NavigationContainer](app-containers.html) provider.
+In React Navigation 5.x there's no `createAppContainer` which provided screens with navigation context. You'll need to wrap your app with [NavigationContainer](app-containers.md) provider.
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';
@@ -139,7 +139,7 @@ However, it had many of shortcomings:
 1. It checked the `routes` array in state to determine if it's the first, which means that it won't work for other navigators such as tab navigator which keep history in a separate `routeKeyHistory` array.
 2. Since this was a method on the navigation object, if a screen's index changed to/from the first one, it would always trigger re-render for that screen whether you use the method or not.
 
-Now we have added a [`useNavigationState`](use-navigation-state.html) which addresses many more use cases and doesn't have these shortcomings. We can implement `isFirstRouteInParent` with this hook:
+Now we have added a [`useNavigationState`](use-navigation-state.md) which addresses many more use cases and doesn't have these shortcomings. We can implement `isFirstRouteInParent` with this hook:
 
 ```js
 function useIsFirstRouteInParent() {
@@ -244,7 +244,7 @@ In React Navigation 4.x, there were 4 navigation events to notify focus state of
 
 It was confusing to decide which events to use and what each event meant. Some navigators also didn't emit events for transition animations which made the events inconsistent.
 
-We have simplified the events in React Navigation 5.x, so now we have only `focus` and `blur` events which are equivalent to `willFocus` and `willBlur` events. To run tasks after an animation finishes, we can use the [`InteractionManager`](https://facebook.github.io/react-native/docs/interactionmanager) API provided by React Native. See the docs for [Navigation lifecycle](navigation-lifecycle.html) for more details.
+We have simplified the events in React Navigation 5.x, so now we have only `focus` and `blur` events which are equivalent to `willFocus` and `willBlur` events. To run tasks after an animation finishes, we can use the [`InteractionManager`](https://facebook.github.io/react-native/docs/interactionmanager) API provided by React Native. See the docs for [Navigation lifecycle](navigation-lifecycle.md) for more details.
 
 ## Navigating to nested screens
 
@@ -258,7 +258,7 @@ Because of these reasons, you now need to be more explicit when navigating to a 
 
 In React Navigation 4.x, you could specify a `path` property in your screen configuration which was used for handling incoming links. This was possible because we could statically get the configuration for all of the defined `path`s.
 
-Due to dynamic configuration in 5.x, links need to be handled before we can know what to render for our navigators. So it's necessary to specify the deep link configuration separately. See the [deep linking](deep-linking.html) docs for more information.
+Due to dynamic configuration in 5.x, links need to be handled before we can know what to render for our navigators. So it's necessary to specify the deep link configuration separately. See the [deep linking](deep-linking.md) docs for more information.
 
 ## Switch Navigator
 
@@ -320,7 +320,7 @@ To summarize the benefits:
 
 So, the new approach covers more edge cased and removes the need for something like Switch Navigator. So it has been removed.
 
-See [Authentication flows](auth-flow.html) for a guide on implementing authentication flows.
+See [Authentication flows](auth-flow.md) for a guide on implementing authentication flows.
 
 ## Global props with `screenProps`
 
@@ -350,7 +350,7 @@ React Navigation 4.x had basic theming support where you could specify whether t
 
 It wasn't easy to customize the colors used by the built-in components such as header, tab bar etc. without extra code or repetition.
 
-In React navigation 5.x, we have revamped the theme system for easier customization. Now you can provide a theme object with your desired colors for background, accent color etc. and it will automatically change the colors of all navigators without any extra code. See the [Themes](themes.html) documentation for more details on how to customize the theme.
+In React navigation 5.x, we have revamped the theme system for easier customization. Now you can provide a theme object with your desired colors for background, accent color etc. and it will automatically change the colors of all navigators without any extra code. See the [Themes](themes.md) documentation for more details on how to customize the theme.
 
 ## Action creators
 
@@ -362,9 +362,9 @@ The `navigation` object has a `dispatch` method used to dispatch navigation acti
 
 Signature of many actions have changed. Refer to their docs for details:
 
-- [`StackActions`](stack-actions.html)
-- [`TabActions`](tab-actions.html)
-- [`DrawerActions`](drawer-actions.html)
+- [`StackActions`](stack-actions.md)
+- [`TabActions`](tab-actions.md)
+- [`DrawerActions`](drawer-actions.md)
 
 It's highly recommended to use the methods on the navigation object instead of using action creators and `dispatch`. It should only be used for advanced use cases.
 
@@ -374,7 +374,7 @@ One major difference is that a lot of methods used to take some parameters for c
 
 In this version, we have standardized this and made it possible to use with any action without the action needing to support it. The new `target` and `source` properties provides control over which navigator should handle an action. See [docs for dispatch](https://reactnavigation.org/docs/navigation-prop.html#dispatch---send-an-action-to-the-router) for more details.
 
-You can import the action creators from the [compatibility layer](compatibility.html) to preserve old behavior for the actions.
+You can import the action creators from the [compatibility layer](compatibility.md) to preserve old behavior for the actions.
 
 More differences in the signatures are listed below:
 
@@ -456,16 +456,16 @@ See [`jumpTo` action docs](https://reactnavigation.org/docs/tab-actions.html#jum
 
 React Navigation 4.x exported its own `ScrollView`, `FlatList`, and `SectionList` components. These were wrappers around the scrollable components [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) and would scroll to top when tapping on an active tab.
 
-However, this was very restrictive since you may want to use another scrollable implementation which we didn't wrap. So now we have a [`useScrollToTop`](use-scroll-to-top.html) hook that can be used with any scrollable component.
+However, this was very restrictive since you may want to use another scrollable implementation which we didn't wrap. So now we have a [`useScrollToTop`](use-scroll-to-top.md) hook that can be used with any scrollable component.
 
 ## Higher order components
 
-React Navigation 4.x included higher order components such as `withNavigation` and `withNavigationFocus`. Now they live in the [compat package](compatibility.html).
+React Navigation 4.x included higher order components such as `withNavigation` and `withNavigationFocus`. Now they live in the [compat package](compatibility.md).
 
-We also have documentation on how to use the new hooks such as [`useFocusEffect`](use-focus-effect.html) if you're using class components.
+We also have documentation on how to use the new hooks such as [`useFocusEffect`](use-focus-effect.md) if you're using class components.
 
 ## Navigation state in Redux
 
 We have long recommended not to store navigation state in Redux. We have finally dropped support for storing navigation state in Redux in React Navigation 5.x.
 
-This means you cannot store navigation state in Redux. You can still use Redux (or any other library) for managing your app state and it will work fine. See [Redux integration](redux-integration.html) for more info.
+This means you cannot store navigation state in Redux. You can still use Redux (or any other library) for managing your app state and it will work fine. See [Redux integration](redux-integration.md) for more info.

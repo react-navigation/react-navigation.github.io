@@ -34,7 +34,7 @@ Function that gets called every time navigation state managed by the navigator c
 
 ### `uriPrefix`
 
-The prefix of the URIs that the app might handle. This will be used when handling a [deep link](deep-linking.html) to extract the path passed to the router.
+The prefix of the URIs that the app might handle. This will be used when handling a [deep link](deep-linking.md) to extract the path passed to the router.
 
 ## Calling `dispatch` or `navigate` on a container ref
 
@@ -65,4 +65,4 @@ class App extends React.Component {
 
 ## On the web
 
-To learn about how to use React Navigation the web (still very experimental), see the [web support](web-support.html) guide.
+To learn about how to use React Navigation the web (still very experimental), see the [web support](web-support.md) guide.
