@@ -14,6 +14,7 @@
     "@docusaurus/core": "^2.0.0-alpha.41",
     "@docusaurus/preset-classic": "^2.0.0-alpha.41",
     "classnames": "^2.2.6",
+    "mkdirp": "^1.0.3",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },

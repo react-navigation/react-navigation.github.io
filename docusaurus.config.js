@@ -1,3 +1,4 @@
+const path = require('path');
 const versions = require('./versions.json');
 
 module.exports = {
@@ -104,6 +105,9 @@ module.exports = {
       ],
     },
   },
+  plugins: [
+    path.resolve(__dirname, './src/plugins/docusaurus-plugin-redirect-html')
+  ],
   presets: [
     [
       '@docusaurus/preset-classic',
