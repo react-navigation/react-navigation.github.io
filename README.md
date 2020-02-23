@@ -13,32 +13,30 @@ Want to help improve the documentation? That would be so very much appreciated. 
 ### Run it locally
 
 1. Clone the repository
-2. `cd` into the `website` directory.
-3. Run `yarn` (or `npm install`)
-4. `yarn start`
+2. Run `yarn` (or `npm install`)
+3. `yarn start`
 
 ### Make changes
 
 * The `docs` directory contains the markdown files used to generate the website. Change them and refresh the page when running the documentation locally and you will see the changes reflected.
-* If you want to add a new page, you need to add it to [sidebars.json](https://github.com/react-navigation/react-navigation.github.io/blob/source/website/sidebars.json) and then restart the server.
+* If you want to add a new page, you need to add it to [sidebars.json](https://github.com/react-navigation/react-navigation.github.io/blob/source/sidebars.json) and then restart the server.
 
 ## Things you need to be a collaborator to do
 
 ### Download the latest translations
 
 - Configure `CROWDIN_DOCUSAURUS_PROJECT_ID` and `CROWDIN_DOCUSAURUS_API_KEY` environment variables (ask @brentvatne if you need access).
-- `cd website` and run `yarn crowdin-upload` and then `yarn crowdin-download`
+- Run `yarn crowdin-upload` and then `yarn crowdin-download`
 
 ### Deploy it
 
 *Before deploying, be sure to download the latest translations!*
 
-Only collaborators on this repository can deploy. `cd` into the website directory and run the following command from the `source` branch:
+Only collaborators on this repository can deploy. Run the following command from the `source` branch:
 
 ```bash
-GIT_USER=your_github_username \
-STABLE_RELEASE=true \
+GIT_USER=<Your GitHub username> \
 CURRENT_BRANCH=source \
 USE_SSH=true \
-yarn run publish-gh-pages
+yarn deploy
 ```

@@ -36,15 +36,15 @@ jobs:
 
     - name: Install dependencies
       run: |
-        yarn --cwd website --frozen-lockfile
+        yarn --frozen-lockfile
 
     - name: Sync with crowdin
       env:
         CROWDIN_DOCUSAURUS_PROJECT_ID: react-navigation
         CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.CROWDIN_DOCUSAURUS_API_KEY }}
       run: |
-        yarn --cwd website crowdin-upload
-        yarn --cwd website crowdin-download
+        yarn crowdin-upload
+        yarn crowdin-download
 
     - name: Publish to Github pages
       env:
@@ -57,4 +57,4 @@ jobs:
         git config --global user.email "$GITHUB_EMAIL"
         git config --global user.name "$GITHUB_ACTOR"
         echo "machine github.com login $GIT_USER password $GITHUB_TOKEN" > ~/.netrc
-        yarn --cwd website publish-gh-pages
+        yarn deploy
