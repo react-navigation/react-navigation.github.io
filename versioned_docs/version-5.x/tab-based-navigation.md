@@ -61,8 +61,8 @@ This is similar to how you would customize a stack navigator &mdash; there are s
 <samp id="tab-based-navigation-icons" />
 
 ```js
-// You can import Ionicons from @expo/vector-icons if you use Expo or
-// react-native-vector-icons/Ionicons otherwise.
+// You can import { Ionicons } from @expo/vector-icons if you use Expo or
+// import Ionicons from 'react-native-vector-icons/Ionicons' otherwise.
 import { Ionicons } from '@expo/vector-icons';
 
 // (...)
