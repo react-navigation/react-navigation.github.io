@@ -1,8 +1,7 @@
 ---
-id: version-5.x-use-linking
+id: use-linking
 title: useLinking
 sidebar_label: useLinking
-original_id: use-linking
 ---
 
 The `useLinking` hook lets us handle deep links in our apps.
@@ -16,6 +15,7 @@ import { useLinking } from '@react-navigation/native';
 
 export default function App() {
   const ref = React.useRef();
+
   const { getInitialState } = useLinking(ref, {
     prefixes: ['https://mychat.com', 'mychat://'],
     config: {
@@ -50,7 +50,7 @@ export default function App() {
 }
 ```
 
-See [deep linking guide](deep-linking.html) for a complete guide.
+See [deep linking guide](deep-linking.md) for a complete guide.
 
 ### Options
 

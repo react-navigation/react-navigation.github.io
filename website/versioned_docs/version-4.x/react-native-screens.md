@@ -1,8 +1,7 @@
 ---
-id: version-4.x-react-native-screens
+id: react-native-screens
 title: Optimize memory usage and performance
 sidebar_label: Optimize memory usage and performance
-original_id: react-native-screens
 ---
 
 Prior to `react-navigation@2.14.0`, all screens are essentially regular native `View` in each platform, which will increase memory usage and make the render tree deep in a heavy-stacked application. This is one of the reason your app is slowing down comparing to native navigation solution.

@@ -1,8 +1,7 @@
 ---
-id: version-2.x-glossary-of-terms
+id: glossary-of-terms
 title: Glossary of terms
 sidebar_label: Glossary of terms
-original_id: glossary-of-terms
 ---
 
 > This is a new section of the documentation and it's missing a lot of terms! Please [submit a pull request or an issue](https://github.com/react-navigation/website) with a term that you think should be explained here.
@@ -31,7 +30,7 @@ const AppNavigator = createStackNavigator(
 );
 ```
 
-The suffix `Screen` in the component name is entirely optional, but a frequently used convention; we could call it `CasaPantalla` and this would work just the same. 
+The suffix `Screen` in the component name is entirely optional, but a frequently used convention; we could call it `CasaPantalla` and this would work just the same.
 
 We saw earlier that our screen components are provided with the `navigation` prop. It's important to note that *this only happens if the screen is rendered as a route by React Navigation* (for example, in response to `this.props.navigation.navigate`). For example, if we render `DetailsScreen` as a child of `HomeScreen`, then `DetailsScreen` won't be provided with the `navigation` prop, and when you press the "Go to Details... again" button on the Home screen, the app will throw one of the quintessential JavaScript exceptions "undefined is not an object".
 
@@ -53,7 +52,7 @@ class HomeScreen extends React.Component {
 ```
 <a href="https://snack.expo.io/@react-navigation/screen-components" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-The ["Navigation prop reference"](navigation-prop.html) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `this.props.navigation`.
+The ["Navigation prop reference"](navigation-prop.md) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `this.props.navigation`.
 
 ## Navigation Prop
 
@@ -66,7 +65,7 @@ This prop will be passed into all screens, and it can be used for the following:
 
 Navigators can also accept a navigation prop, which they should get from the parent navigator, if there is one.
 
-For more details, see the ["Navigation prop document"](navigation-prop.html).
+For more details, see the ["Navigation prop document"](navigation-prop.md).
 
 ## Navigation State
 

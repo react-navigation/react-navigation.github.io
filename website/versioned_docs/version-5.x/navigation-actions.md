@@ -1,8 +1,7 @@
 ---
-id: version-5.x-navigation-actions
+id: navigation-actions
 title: CommonActions reference
 sidebar_label: CommonActions
-original_id: navigation-actions
 ---
 
 A navigation action is an object containing at least a `type` property. The action can be handled by routers with the `getStateForAction` method to return a new state from an existing navigation state.
@@ -30,7 +29,7 @@ The `navigate` action allows to navigate to a specific route. It takes the follo
 
 The options object passed should at least contain a `key` or `name` property, and optionally `params`. If both `key` and `name` are passed, stack navigator will create a new route with the specified key if no matches were found.
 
-<samp id="common-actions">
+<samp id="common-actions" />
 
 ```js
 import { CommonActions } from '@react-navigation/native';
@@ -51,7 +50,7 @@ The `reset` action allows to reset the navigation state to the given state. It t
 
 - `state` - _object_ - The new navigation state object to use.
 
-<samp id="common-actions">
+<samp id="common-actions" />
 
 ```js
 import { CommonActions } from '@react-navigation/native';
@@ -76,7 +75,7 @@ navigation.dispatch(
 
 The `goBack` action creator allows to go back to the previous route in history. It doesn't take any arguments.
 
-<samp id="common-actions">
+<samp id="common-actions" />
 
 ```js
 import { CommonActions } from '@react-navigation/native';
@@ -86,7 +85,7 @@ navigation.dispatch(CommonActions.goBack());
 
 If you want to go back from a particular route, you can add a `source` property referring to the route key and a `target` property referring to the `key` of the navigator which contains the route:
 
-<samp id="common-actions">
+<samp id="common-actions" />
 
 ```js
 import { CommonActions } from '@react-navigation/native';
@@ -106,7 +105,7 @@ The `setParams` action allows to update params for a certain route. It takes the
 
 - `params` - _object_ - required - New params to be merged into existing route params.
 
-<samp id="common-actions">
+<samp id="common-actions" />
 
 ```js
 import { CommonActions } from '@react-navigation/native';
@@ -116,7 +115,7 @@ navigation.dispatch(CommonActions.setParams({ user: 'Wojtek' }));
 
 If you want to set params for a particular route, you can add a `source` property referring to the route key:
 
-<samp id="common-actions">
+<samp id="common-actions" />
 
 ```js
 import { CommonActions } from '@react-navigation/native';

@@ -1,8 +1,7 @@
 ---
-id: version-3.x-deep-linking
+id: deep-linking
 title: Deep linking
 sidebar_label: Deep linking
-original_id: deep-linking
 ---
 
 In this guide we will set up our app to handle external URIs. Let's suppose that we want a URI like `mychat://chat/Eric` to open our app and link straight into a chat screen for some user named "Eric".

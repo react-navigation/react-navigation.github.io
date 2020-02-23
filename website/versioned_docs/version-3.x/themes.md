@@ -1,6 +1,5 @@
 ---
-id: version-3.x-themes
-original_id: themes
+id: themes
 title: Themes
 sidebar_label: Themes
 ---

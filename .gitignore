@@ -1,8 +1,10 @@
 node_modules
 .DS_Store
+.docusaurus
 website/translated_docs
 website/build/
 website/node_modules
+website/.docusaurus
 
 website/i18n/*
 !website/i18n/en.json

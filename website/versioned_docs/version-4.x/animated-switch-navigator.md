@@ -1,8 +1,7 @@
 ---
-id: version-4.x-animated-switch-navigator
+id: animated-switch-navigator
 title: createAnimatedSwitchNavigator
 sidebar_label: createAnimatedSwitchNavigator
-original_id: animated-switch-navigator
 ---
 
 A `SwitchNavigator` with animation support.
@@ -19,11 +18,11 @@ createAnimatedSwitchNavigator(RouteConfigs, SwitchNavigatorConfig);
 
 ## RouteConfigs
 
-The route configs are identical to [createSwitchNavigator](switch-navigator.html)
+The route configs are identical to [createSwitchNavigator](switch-navigator.md)
 
 ## SwitchNavigatorConfig
 
-The switch navigator configs are identical to [createSwitchNavigator](switch-navigator.html).
+The switch navigator configs are identical to [createSwitchNavigator](switch-navigator.md).
 
 By default, the transition between screens is a cross-fade. You can customize the transition with an additional option `transition`:
 

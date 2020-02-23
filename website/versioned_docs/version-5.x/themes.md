@@ -1,8 +1,7 @@
 ---
-id: version-5.x-themes
+id: themes
 title: Themes
 sidebar_label: Themes
-original_id: themes
 ---
 
 Themes allow you to change the colors of various components provided by React Navigation. You can use themes to:
@@ -18,10 +17,7 @@ To pass a custom theme, you can pass the `theme` prop to the navigation containe
 
 ```js
 import * as React from 'react';
-import {
-  NavigationContainer,
-  DefaultTheme,
-} from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -33,9 +29,7 @@ const MyTheme = {
 
 export default function App() {
   return (
-    <NavigationContainer theme={MyTheme}>
-      {/* content */}
-    </NavigationContainer>
+    <NavigationContainer theme={MyTheme}>{/* content */}</NavigationContainer>
   );
 }
 ```
@@ -106,9 +100,7 @@ export default () => {
 
   return (
     <AppearanceProvider>
-      <NavigationContainer
-        theme={scheme === 'dark' ? DarkTheme : DefaultTheme}
-      >
+      <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
         {/* content */}
       </NavigationContainer>
     </AppearanceProvider>

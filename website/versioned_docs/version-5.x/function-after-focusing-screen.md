@@ -1,8 +1,7 @@
 ---
-id: version-5.x-function-after-focusing-screen
+id: function-after-focusing-screen
 title: Call a function when focused screen changes
 sidebar_label: Call a function when focused screen changes
-original_id: function-after-focusing-screen
 ---
 
 In this guide we will call a function or render something on screen focusing. This is useful for making additional API calls when a user revisits a particular screen in a Tab Navigator, or to track user events as they tap around our app.
@@ -93,4 +92,4 @@ function Profile() {
 }
 ```
 
-This example is also documented in the [`useIsFocused` API documentation](use-is-focused.html).
+This example is also documented in the [`useIsFocused` API documentation](use-is-focused.md).

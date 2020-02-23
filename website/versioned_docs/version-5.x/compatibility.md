@@ -1,11 +1,10 @@
 ---
-id: version-5.x-compatibility
+id: compatibility
 title: Compatibility layer
 sidebar_label: Compatibility layer
-original_id: compatibility
 ---
 
-> Note: Before following this guide, make sure that you've followed the [Getting Started](getting-started.html) guide to setup React Navigation 5 in your app.
+> Note: Before following this guide, make sure that you've followed the [Getting Started](getting-started.md) guide to setup React Navigation 5 in your app.
 
 React Navigation 5 has a completely new API, so our old code using React Navigation 4 will no longer work with this version. If you are not familiar with the new API, you can read about the differences in the [upgrade guide](upgrading-from-4.x.html). We understand that this can be a lot of work, so we have made a compatibility layer to make this easier.
 
@@ -71,8 +70,8 @@ The compatibility layer handles various API differences between React Navigation
 Due to the dynamic API of React Navigation 5, some functionality possible with the static API of v4 are not possible anymore, and hence the compatibility layer doesn't handle them:
 
 - It doesn't wrap navigator's props or options. This basically means that the options you're passing to a navigator might be different as per breaking changes in the navigators. Refer to the navigator's docs for update options API.
-- Legacy deep link support by defining `path` in route configuration is not supported. See [deep linking documentation](deep-linking.html) for more details now how to handle deep links.
-- Navigating to a navigator doesn't work the same, i.e. we can't navigate to a screen in a navigator that's not rendered already, and params aren't merged to all child screens. See [nesting navigators documentation](nesting-navigators.html) for more details on how to navigate to screens in a different navigator.
+- Legacy deep link support by defining `path` in route configuration is not supported. See [deep linking documentation](deep-linking.md) for more details now how to handle deep links.
+- Navigating to a navigator doesn't work the same, i.e. we can't navigate to a screen in a navigator that's not rendered already, and params aren't merged to all child screens. See [nesting navigators documentation](nesting-navigators.md) for more details on how to navigate to screens in a different navigator.
 - Some methods such as the legacy `reset` method which take an array of actions aren't supported anymore. Unsupported methods will throw errors when using them as well as give type errors if we're using TypeScript.
 - It doesn't export `createAppContainer`, so you'll need to use the v5 API for the container (`NavigationContainer`). This also means any features supported by the container need to be migrated to the new API.
 - If you're using advanced APIs like Redux integration, custom routers and actions etc., they aren't supported anymore and you'll need to remove Redux integration.

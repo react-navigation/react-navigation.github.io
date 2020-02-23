@@ -1,17 +1,16 @@
 ---
-id: version-5.x-limitations
+id: limitations
 title: Limitations
 sidebar_label: Limitations
-original_id: limitations
 ---
 
-As a potential user of the library, it's important to know what you can and cannot do with it. Armed with this knowledge, you may choose to adopt [a different library instead](alternatives.html). We discuss the high level design decisions in the [pitch & anti-pitch](pitch.html) section, and here we will cover some of the use cases that are either not supported or are so difficult to do that they may as well be impossible. If any of the following limitations are dealbreakers for your app, React Navigation might not be for you.
+As a potential user of the library, it's important to know what you can and cannot do with it. Armed with this knowledge, you may choose to adopt [a different library instead](alternatives.md). We discuss the high level design decisions in the [pitch & anti-pitch](pitch.md) section, and here we will cover some of the use cases that are either not supported or are so difficult to do that they may as well be impossible. If any of the following limitations are dealbreakers for your app, React Navigation might not be for you.
 
 ## Performance limitations
 
 React Navigation implements animations and gestures using [Reanimated](https://software-mansion.github.io/react-native-reanimated/) and [Gesture Handler](https://kmagiera.github.io/react-native-gesture-handler/) which run in the native thread. This makes sure that the animations and gestures are smooth even if the JavaScript thread is blocked. However, you might still experience frame drops when rendering expensive components which render or update many complex views since rendering also happens on the same thread that the animations run in. We're also limited by the performance of Reanimated and Gesture Handler libraries.
 
-The new [native stack navigator](native-stack-navigator.html) uses the platform navigation primitives. While the customization options are limited with it, you'll get much better performance with it.
+The new [native stack navigator](native-stack-navigator.md) uses the platform navigation primitives. While the customization options are limited with it, you'll get much better performance with it.
 
 ## Right-to-left (RTL) layout support
 

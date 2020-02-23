@@ -1,8 +1,7 @@
 ---
-id: version-2.x-status-bar
+id: status-bar
 title: Different status bar configuration based on route
 sidebar_label: Different status bar configuration based on route
-original_id: status-bar
 ---
 
 If you don't have a navigation header, or your navigation header changes color based on the route, you'll want to ensure that the correct color is used for the content.

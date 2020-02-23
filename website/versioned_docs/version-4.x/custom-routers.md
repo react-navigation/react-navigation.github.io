@@ -1,8 +1,7 @@
 ---
-id: version-4.x-custom-routers
+id: custom-routers
 title: Custom routers
 sidebar_label: Custom routers
-original_id: custom-routers
 ---
 
 You can make your own router by building an object with the following functions:

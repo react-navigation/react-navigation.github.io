@@ -1,12 +1,17 @@
 ---
 title: React Navigation v5 + React Native Paper = ❤️
 author: Dawid Urbaniak
-authorURL: https://twitter.com/trensik
+author_url: https://twitter.com/trensik
+author_title: Paper Team
+author_image_url: https://avatars0.githubusercontent.com/u/18584155?s=200&v=4
+tags: [tutorial, react-native-paper]
 ---
 
 This is a guest post by the [React Native Paper](https://reactnativepaper.com/) team. If you like this guide, check out React Native Paper for more!
 
 In this blog post, we'll show you how to build a Twitter clone app using React Navigation v5 and Paper.
+
+<!--truncate-->
 
 ## Introduction
 
@@ -429,7 +434,7 @@ The Function that we pass to `header` prop has access to 3 properties:
 
 Thanks to the **scene** property we can access the title of topmost screen on the stack and display it in the header.
 **Previous** property tells us if there are any other screens lower on the Stack.
-</br>
+<br />
 Finally, **navigation** property allows navigating to different screens e.g. opening a Drawer.
 
 The thing that we haven't covered yet and it is very important is how to actually navigate between Stack Navigator screens.
@@ -524,7 +529,7 @@ export const BottomTabs = () => {
 
 When we check the screen of the phone now, we will see a nice looking, material bottom navigation. What's more, Stack Navigator integrates nicely with Tab.Navigator and we can still navigate to the tweet `Details` screen.
 
-</br>
+<br />
 <img src="/blog/assets/using-react-navigation-5-with-paper/bottom-navigation.gif" height="480"/>
 
 ## FAB and Portal
@@ -920,11 +925,11 @@ export function DrawerContent(props) {
 ```
 
 Firstly, we get a current theme using `useTheme` hook from Paper. This means we can check `dark` property on it and pass the correct value to `Switch`.
-</br>Secondly, we pass a `toggleTheme` function to `TouchableRipple` to toggle theme whenever user presses a Switch.
+<br />Secondly, we pass a `toggleTheme` function to `TouchableRipple` to toggle theme whenever user presses a Switch.
 
 You should be able to toggle a switch now and both `Provider` from Paper and `NativeNavigationContainer` from React Navigation will automatically apply correct colors to the components.
 
-</br>
+<br />
 <img src="/blog/assets/using-react-navigation-5-with-paper/theming.gif" height="480"/>
 
 ## Summary

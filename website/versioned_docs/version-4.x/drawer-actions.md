@@ -1,11 +1,10 @@
 ---
-id: version-4.x-drawer-actions
+id: drawer-actions
 title: DrawerActions reference
 sidebar_label: DrawerActions
-original_id: drawer-actions
 ---
 
-`DrawerActions` is an object containing methods for generating actions specific to drawer-based navigators. Its methods expand upon the actions available in [`NavigationActions`](navigation-actions.html).
+`DrawerActions` is an object containing methods for generating actions specific to drawer-based navigators. Its methods expand upon the actions available in [`NavigationActions`](navigation-actions.md).
 
 The following actions are supported:
 

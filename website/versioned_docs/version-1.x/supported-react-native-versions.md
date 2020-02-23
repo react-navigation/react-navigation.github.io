@@ -1,8 +1,7 @@
 ---
-id: version-1.x-supported-react-native-versions
+id: supported-react-native-versions
 title: Supported React Native versions
 sidebar_label: Supported React Native versions
-original_id: supported-react-native-versions
 ---
 
 Currently at the time of writing, `react-navigation@1.x` will work on most of previous `react-native` versions.

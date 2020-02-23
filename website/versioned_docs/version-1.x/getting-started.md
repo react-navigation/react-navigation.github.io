@@ -1,13 +1,12 @@
 ---
-id: version-1.x-getting-started
+id: getting-started
 title: Getting started
 sidebar_label: Getting started
-original_id: getting-started
 ---
 
 React Navigation is born from the React Native community's need for an extensible yet easy-to-use navigation solution written entirely in JavaScript (so you can read and understand all of the source), on top of powerful native primitives.
 
-Before you commit to using React Navigation for your project, you might want to read the [anti-pitch](pitch.html) &mdash; it will help you to understand the tradeoffs that we have chosen along with the areas where we consider the library to be deficient currently.
+Before you commit to using React Navigation for your project, you might want to read the [anti-pitch](pitch.md) &mdash; it will help you to understand the tradeoffs that we have chosen along with the areas where we consider the library to be deficient currently.
 
 ## What to expect
 
@@ -25,4 +24,4 @@ yarn add react-navigation
 # npm install --save react-navigation
 ```
 
-You're good to go! Continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
+You're good to go! Continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.

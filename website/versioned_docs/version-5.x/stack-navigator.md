@@ -1,21 +1,20 @@
 ---
-id: version-5.x-stack-navigator
+id: stack-navigator
 title: createStackNavigator
 sidebar_label: createStackNavigator
-original_id: stack-navigator
 ---
-
-<div style="display: flex; justify-content: center">
-  <video  width="60%" playsinline autoplay muted loop>
-    <source src="/docs/assets/navigators/stack/stack.mov">
-  <video>
-</div>
 
 Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
 
-To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.html), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/master/packages/stack):
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop>
+    <source src="/docs/assets/navigators/stack/stack.mov" />
+  </video>
+</div>
+
+To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/master/packages/stack):
 
 ```sh
 npm install @react-navigation/stack
@@ -25,7 +24,7 @@ npm install @react-navigation/stack
 
 To use this navigator, import it from `@react-navigation/stack`:
 
-<samp id="simple-stack">
+<samp id="simple-stack" />
 
 ```js
 import { createStackNavigator } from '@react-navigation/stack';
@@ -264,7 +263,7 @@ Function which returns a React Element to render as the background of the header
 
 For example, you can use this with `headerTransparent` to render a blur view to create a translucent header.
 
-<samp id="header-blur">
+<samp id="header-blur" />
 
 ```js
 import { BlurView } from 'expo-blur';
@@ -405,7 +404,7 @@ Pushes a new screen to top of the stack and navigate to it. The method accepts f
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
-<samp id="stack-with-options">
+<samp id="stack-with-options" />
 
 ```js
 navigation.push('Profile', { owner: 'Michaś' });
@@ -415,7 +414,7 @@ navigation.push('Profile', { owner: 'Michaś' });
 
 Pops the current screen from the stack and navigates back to the previous screen. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
 
-<samp id="stack-with-options">
+<samp id="stack-with-options" />
 
 ```js
 navigation.pop();
@@ -425,7 +424,7 @@ navigation.pop();
 
 Pops all of the screens in the stack except the first one and navigates to it.
 
-<samp id="stack-with-options">
+<samp id="stack-with-options" />
 
 ```js
 navigation.popToTop();
@@ -433,7 +432,7 @@ navigation.popToTop();
 
 ## Example
 
-<samp id="stack-with-options">
+<samp id="stack-with-options" />
 
 ```js
 import { createStackNavigator } from '@react-navigation/stack';
@@ -519,7 +518,7 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   We can pass this config in the `transitionSpec` option:
 
-  <samp id="stack-animation-config">
+  <samp id="stack-animation-config" />
 
   ```js
   <Stack.Screen
@@ -564,7 +563,7 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   We can pass this function in `cardStyleInterpolator` option:
 
-  <samp id="stack-for-fade-card">
+  <samp id="stack-for-fade-card" />
 
   ```js
   <Stack.Screen
@@ -616,7 +615,7 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   We can pass this function in `headerStyleInterpolator` option:
 
-  <samp id="stack-for-fade-header">
+  <samp id="stack-for-fade-header" />
 
   ```js
   <Stack.Screen
@@ -666,7 +665,7 @@ import { TransitionSpecs } from '@react-navigation/stack';
 
 Example configuration for Android Oreo style vertical screen fade animation:
 
-<samp id="stack-card-style-interpolator">
+<samp id="stack-card-style-interpolator" />
 
 ```js
 import { CardStyleInterpolators } from '@react-navigation/stack';
@@ -691,7 +690,7 @@ import { CardStyleInterpolators } from '@react-navigation/stack';
 
 Example configuration for default iOS animation for header elements where the title fades into the back button:
 
-<samp id="stack-for-ui-kit">
+<samp id="stack-for-ui-kit" />
 
 ```js
 import { HeaderStyleInterpolators } from '@react-navigation/stack';
@@ -724,7 +723,7 @@ We export various transition presets which bundle various set of these options t
 
 You can spread these presets in `options` to customize the animation for a screen:
 
-<samp id="stack-modal-slide-from-bottom">
+<samp id="stack-modal-slide-from-bottom" />
 
 ```js
 import { TransitionPresets } from '@react-navigation/stack';
@@ -745,7 +744,7 @@ If you want to customize the transition animations for all of the screens in the
 
 Example configuration for iOS modal presentation style:
 
-<samp id="stack-modal-presentation">
+<samp id="stack-modal-presentation" />
 
 ```js
 import { TransitionPresets } from '@react-navigation/stack';

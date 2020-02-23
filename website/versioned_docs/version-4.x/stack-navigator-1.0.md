@@ -1,15 +1,14 @@
 ---
-id: version-4.x-stack-navigator-1.0
+id: stack-navigator-1.0
 title: createStackNavigator (1.x)
 sidebar_label: createStackNavigator (1.x)
-original_id: stack-navigator-1.0
 ---
 
 Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
 
-To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`react-navigation-stack`](https://github.com/react-navigation/stack/tree/1.0).
+To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`react-navigation-stack`](https://github.com/react-navigation/stack/tree/1.0).
 
 ```sh
 npm install react-navigation-stack@^1.10.3

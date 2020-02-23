@@ -1,12 +1,17 @@
 ---
 title: 3.0 release candidate
-author: Core Team
-authorURL: https://twitter.com/reactnavigation
+author: Brent Vatne
+author_url: https://twitter.com/notbrent
+author_title: Core Team
+author_image_url: https://avatars0.githubusercontent.com/u/90494?s=200&v=4
+tags: [release, announcement]
 ---
 
 We are excited to announce the release candidate of version 3.0 today!
 
 This is the first release where React Navigation depends on a native module outside of React Native core: it now depends on react-native-gesture-handler. This library provides an excellent set of primitives for leveraging the operating systems’ native gesture APIs and has enabled us to fix a variety of issues with stack and drawer navigators. React Navigation also depends on react-native-screens, but you don’t need to install the native module if you prefer not to use it (we have a blog post coming soon that will explain what react-native-screens is and why you may want to use it, or you can watch [this talk](https://www.youtube.com/watch?v=Z0Jl1KCWiag) by the author of the library).
+
+<!--truncate-->
 
 We didn’t get around to every feature that we wanted to land for this release, but we also didn’t want to hold it up further because we expect that you will want to start using it right away - the release includes performance improvements, bugfixes, ergonomics improvements, some handy new features, and a re-organizing of the internals to improve support for web as a target of React Navigation.
 
@@ -218,4 +223,3 @@ See a simple web app with Create React App [here](https://github.com/react-navig
 ----------
 
 Thanks for reading, please post any issues you encounter to https://github.com/react-navigation/react-navigation/issues!
-

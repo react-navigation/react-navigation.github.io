@@ -1,8 +1,7 @@
 ---
-id: version-1.x-with-navigation
+id: with-navigation
 title: withNavigation
 sidebar_label: withNavigation
-original_id: with-navigation
 ---
 
 `withNavigation` is a higher order component which passes the `navigation` prop into a wrapped component. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.

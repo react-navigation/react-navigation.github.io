@@ -1,10 +1,15 @@
 ---
 title: React Navigation 2.0
-author: Core Team
-authorURL: https://twitter.com/reactnavigation
+author: Brent Vatne
+author_url: https://twitter.com/notbrent
+author_title: Core Team
+author_image_url: https://avatars0.githubusercontent.com/u/90494?s=200&v=4
+tags: [release, announcement]
 ---
 
 The documentation is now live at https://reactnavigation.org, and v1 lives [here](/docs/en/1.x/getting-started.html).
+
+<!--truncate-->
 
 ## Significant breaking changes
 

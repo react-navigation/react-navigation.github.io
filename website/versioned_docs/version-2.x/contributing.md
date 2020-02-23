@@ -1,8 +1,7 @@
 ---
-id: version-2.x-contributing
+id: contributing
 title: React Navigation contributor guide
 sidebar_label: Contributing
-original_id: contributing
 ---
 
 Want to help improve React Navigation? Your help would be greatly appreciated!

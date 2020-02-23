@@ -1,8 +1,7 @@
 ---
-id: version-5.x-hello-react-navigation
+id: hello-react-navigation
 title: Hello React Navigation
 sidebar_label: Hello React Navigation
-original_id: hello-react-navigation
 ---
 
 In a web browser, you can link to different pages using an anchor (`<a>`) tag. When the user clicks on a link, the URL is pushed to the browser history stack. When the user presses the back button, the browser pops the item from the top of the history stack, so the active page is now the previously visited page. React Native doesn't have a built-in idea of a global history stack like a web browser does -- this is where React Navigation enters the story.
@@ -19,7 +18,7 @@ The libraries we've installed so far are the building blocks and shared foundati
 npm install @react-navigation/stack
 ```
 
-> 💡 `@react-navigation/stack` depends on `@react-native-community/masked-view` and the other libraries that we installed in [Getting started](getting-started.html). If you haven't installed those yet, head over to that page and follow the installation instructions.
+> 💡 `@react-navigation/stack` depends on `@react-native-community/masked-view` and the other libraries that we installed in [Getting started](getting-started.md). If you haven't installed those yet, head over to that page and follow the installation instructions.
 
 ### Creating a stack navigator
 
@@ -27,7 +26,7 @@ npm install @react-navigation/stack
 
 `NavigationContainer` is a component which manages our navigation tree and contains the navigation state. This component must wrap all navigators structure. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
 
-<samp id="hello-react-navigation">Hello World</samp>
+<samp id="hello-react-navigation" />
 
 ```js
 // In App.js in a new project
@@ -66,7 +65,7 @@ If you run this code, you will see a screen with an empty navigation bar and a g
 
 > The casing of the route name doesn't matter -- you can use lowercase `home` or capitalized `Home`, it's up to you. We prefer capitalizing our route names.
 
-> The only required configuration for a screen is the `name` and `component` props. You can read more about the other options available in the [stack navigator reference](stack-navigator.html).
+> The only required configuration for a screen is the `name` and `component` props. You can read more about the other options available in the [stack navigator reference](stack-navigator.md).
 
 ### Configuring the navigator
 
@@ -138,7 +137,7 @@ Sometimes we might want to pass additional props to a screen. We can do that wit
 
 ## What's next?
 
-The natural question at this point is: "how do I go from the `Home` route to the `Details` route?". That is covered in the [next section](navigating.html).
+The natural question at this point is: "how do I go from the `Home` route to the `Details` route?". That is covered in the [next section](navigating.md).
 
 ## Summary
 

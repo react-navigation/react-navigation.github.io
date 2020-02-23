@@ -1,11 +1,10 @@
 ---
-id: version-5.x-navigating
+id: navigating
 title: Moving between screens
 sidebar_label: Moving between screens
-original_id: navigating
 ---
 
-In the previous section, ["Hello React Navigation"](hello-react-navigation.html), we defined a stack navigator with two routes (`Home` and `Details`), but we didn't learn how to let a user navigate from `Home` to `Details` (although we did learn how to change the _initial_ route in our code, but forcing our users to clone our repository and change the route in our code in order to see another screen is arguably among the worst user experiences one could imagine).
+In the previous section, ["Hello React Navigation"](hello-react-navigation.md), we defined a stack navigator with two routes (`Home` and `Details`), but we didn't learn how to let a user navigate from `Home` to `Details` (although we did learn how to change the _initial_ route in our code, but forcing our users to clone our repository and change the route in our code in order to see another screen is arguably among the worst user experiences one could imagine).
 
 If this was a web browser, we'd be able to write something like this:
 
@@ -29,7 +28,7 @@ We'll do something similar to the latter, but rather than using a `window.locati
 
 ## Navigating to a new screen
 
-<samp id="new-screen">First navigation</samp>
+<samp id="new-screen" />
 
 ```js
 import * as React from 'react';
@@ -54,7 +53,7 @@ function HomeScreen({ navigation }) {
 
 Let's break this down:
 
-- `navigation` - the `navigation` prop is passed in to every **screen component** ([definition](glossary-of-terms.html#screen-component)) in stack navigator (more about this later in ["The navigation prop in depth"](navigation-prop.html)).
+- `navigation` - the `navigation` prop is passed in to every **screen component** ([definition](glossary-of-terms.html#screen-component)) in stack navigator (more about this later in ["The navigation prop in depth"](navigation-prop.md)).
 - `navigate('Details')` - we call the `navigate` function (on the `navigation` prop &mdash; naming is hard!) with the name of the route that we'd like to move the user to.
 
 > If we call `navigation.navigate` with a route name that we haven't defined on a stack navigator, nothing will happen. Said another way, we can only navigate to routes that have been defined on our stack navigator &mdash; we cannot navigate to an arbitrary component.
@@ -83,7 +82,7 @@ If you run this code, you'll notice that when you tap "Go to Details... again" t
 
 Let's suppose that we actually _want_ to add another details screen. This is pretty common in cases where you pass in some unique data to each route (more on that later when we talk about `params`!). To do this, we can change `navigate` to `push`. This allows us to express the intent to add another route regardless of the existing navigation history.
 
-<samp id="multiple-push">push</samp>
+<samp id="multiple-push" />
 
 ```js
 <Button
@@ -92,10 +91,10 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 />
 ```
 
-<div style="display: flex; justify-content: center">
-  <video width="60%" playsinline autoplay muted loop>
-    <source src="/docs/assets/navigators/stack/stack-push.mov">
-  <video>
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop>
+    <source src="/docs/assets/navigators/stack/stack-push.mov" />
+  </video>
 </div>
 
 Each time you call `push` we add a new route to the navigation stack. When you call `navigate` it first tries to find an existing route with that name, and only pushes a new route if there isn't yet one on the stack.
@@ -106,7 +105,7 @@ The header provided by stack navigator will automatically include a back button 
 
 Sometimes you'll want to be able to programmatically trigger this behavior, and for that you can use `navigation.goBack();`.
 
-<samp id="go-back">go back</samp>
+<samp id="go-back" />
 
 ```js
 function DetailsScreen({ navigation }) {

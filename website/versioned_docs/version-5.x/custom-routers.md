@@ -1,8 +1,7 @@
 ---
-id: version-5.x-custom-routers
+id: custom-routers
 title: Custom routers
 sidebar_label: Custom routers
-original_id: custom-routers
 ---
 
 The router object provides various helper methods to deal with the state and actions, a reducer to update the state as well as some action creators.
@@ -147,7 +146,7 @@ The library ships with a few standard routers:
 
 You can reuse a router and override the router functions as per your needs, such as customizing how existing actions are handled, adding additional actions etc.
 
-See [custom navigators](custom-navigators.html) for details on how to override the router with a custom router in an existing navigator.
+See [custom navigators](custom-navigators.md) for details on how to override the router with a custom router in an existing navigator.
 
 ### Custom Navigation Actions
 

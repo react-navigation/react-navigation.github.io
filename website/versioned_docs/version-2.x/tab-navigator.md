@@ -1,8 +1,7 @@
 ---
-id: version-2.x-tab-navigator
+id: tab-navigator
 title: createTabNavigator
 sidebar_label: createTabNavigator
-original_id: tab-navigator
 ---
 
 > Note: `createTabNavigator` is deprecated. Please use `createBottomTabNavigator` and/or `createMaterialTopTabNavigator` instead.

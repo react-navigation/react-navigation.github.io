@@ -1,8 +1,7 @@
 ---
-id: version-3.x-navigating-without-navigation-prop
+id: navigating-without-navigation-prop
 title: Navigating without the navigation prop
 sidebar_label: Navigating without the navigation prop
-original_id: navigating-without-navigation-prop
 ---
 
 Calling functions such as `navigate` or `popToTop` on the `navigation` prop is not the only way to navigate around your app. As an alternative, you can dispatch navigation actions on your top-level navigator, provided you aren't passing your own `navigation` prop as you would with a redux integration. The presented approach is useful in situations when you want to trigger a navigation action from places where you do not have access to the `navigation` prop, or if you're looking for an alternative to using the `navigation` prop.

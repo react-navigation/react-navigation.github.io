@@ -1,8 +1,7 @@
 ---
-id: version-5.x-route-prop
+id: route-prop
 title: Route prop reference
 sidebar_label: Route prop
-original_id: route-prop
 ---
 
 Each `screen` component in your app is provided with the `route` prop automatically. The prop contains various information regarding current route (place in navigation hierarchy component lives).

@@ -1,8 +1,7 @@
 ---
-id: version-5.x-use-scroll-to-top
+id: use-scroll-to-top
 title: useScrollToTop
 sidebar_label: useScrollToTop
-original_id: use-scroll-to-top
 ---
 
 The expected native behavior of scrollable components is to respond to events from navigation that will scroll to top when tapping on the active tab as you would expect from native tab bars.
@@ -11,7 +10,7 @@ In order to achieve it we export `useScrollToTop` which accept ref to scrollable
 
 Example:
 
-<samp id="use-scroll-to-top">
+<samp id="use-scroll-to-top" />
 
 ```js
 import * as React from 'react';

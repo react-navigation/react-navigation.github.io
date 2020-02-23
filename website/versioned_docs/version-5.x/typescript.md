@@ -1,8 +1,7 @@
 ---
-id: version-5.x-typescript
+id: typescript
 title: Type checking with TypeScript
 sidebar_label: Type checking with TypeScript
-original_id: typescript
 ---
 
 React Navigation is written with TypeScript and exports type definitions for TypeScript projects.

@@ -1,13 +1,12 @@
 ---
-id: version-2.x-material-bottom-tab-navigator
+id: material-bottom-tab-navigator
 title: createMaterialBottomTabNavigator
 sidebar_label: createMaterialBottomTabNavigator
-original_id: material-bottom-tab-navigator
 ---
 
 A material-design themed tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 
-<img src="/docs/assets/navigators/bottom-navigation.gif" style="width: 420px; max-width: 100%">
+<img src="/docs/assets/navigators/bottom-navigation.gif" style={{ width: '420px', maxWidth: '100%' }} />
 
 To use this navigator, you need to install `react-navigation-material-bottom-tabs`
 

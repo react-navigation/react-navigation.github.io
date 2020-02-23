@@ -1,8 +1,7 @@
 ---
-id: version-5.x-use-navigation-state
+id: use-navigation-state
 title: useNavigationState
 sidebar_label: useNavigationState
-original_id: use-navigation-state
 ---
 
 `useNavigationState` is a hook which gives access to the navigation state of the navigator which contains the screen. It's useful in rare cases where you want to render something based on the navigation state.
@@ -37,7 +36,7 @@ function Profile() {
 
 In this example, even if you push a new screen, this text won't update. If you use the hook, it'll work as expected:
 
-<samp id="use-navigation-state">
+<samp id="use-navigation-state" />
 
 ```js
 function Profile() {

@@ -1,13 +1,12 @@
 ---
-id: version-4.x-tab-based-navigation
+id: tab-based-navigation
 title: Tab navigation
 sidebar_label: Tab navigation
-original_id: tab-based-navigation
 ---
 
 Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top below the header (or even instead of a header).
 
-This guide covers [`createBottomTabNavigator`](bottom-tab-navigator.html). You may also use [`createMaterialBottomTabNavigator`](material-bottom-tab-navigator.html) and [`createMaterialTopTabNavigator`](material-top-tab-navigator.html) to add tabs to your application.
+This guide covers [`createBottomTabNavigator`](bottom-tab-navigator.md). You may also use [`createMaterialBottomTabNavigator`](material-bottom-tab-navigator.md) and [`createMaterialTopTabNavigator`](material-top-tab-navigator.md) to add tabs to your application.
 
 ## Minimal example of tab-based navigation
 
@@ -98,7 +97,7 @@ Let's dissect this:
 
 - `tabBarIcon` is a property on `navigationOptions`, so we know we can use it on our screen components, but in this case chose to put it in the `createBottomTabNavigator` configuration in order to centralize the icon configuration for convenience.
 - `tabBarIcon` is a function that is given the `focused` state, `tintColor`, and `horizontal` param, which is a boolean. If you take a peek further down in the configuration you will see `tabBarOptions` and `activeTintColor` and `inactiveTintColor`. These default to the iOS platform defaults, but you can change them here. The `tintColor` that is passed through to the `tabBarIcon` is either the active or inactive one, depending on the `focused` state (focused is active). The orientation state `horizontal` is `true` when the device is in landscape, otherwise is `false` for portrait.
-- Read the [full API reference](bottom-tab-navigator.html) for further information on `createBottomTabNavigator` configuration options.
+- Read the [full API reference](bottom-tab-navigator.md) for further information on `createBottomTabNavigator` configuration options.
 
 ## Add badges to icons
 

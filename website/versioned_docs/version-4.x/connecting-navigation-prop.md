@@ -1,11 +1,10 @@
 ---
-id: version-4.x-connecting-navigation-prop
+id: connecting-navigation-prop
 title: Access the navigation prop from any component
 sidebar_label: Access the navigation prop from any component
-original_id: connecting-navigation-prop
 ---
 
-[`withNavigation`](with-navigation.html) is a higher order component which passes the `navigation` prop into a wrapped Component. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
+[`withNavigation`](with-navigation.md) is a higher order component which passes the `navigation` prop into a wrapped Component. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
 
 An ordinary component that is not a screen component will not receive the navigation prop by default, for example in this `MyBackButton` component:
 

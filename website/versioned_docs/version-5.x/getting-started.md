@@ -1,8 +1,7 @@
 ---
-id: version-5.x-getting-started
+id: getting-started
 title: Getting started
 sidebar_label: Getting started
-original_id: getting-started
 ---
 
 If you're already familiar with React Native then you'll be able to get moving with React Navigation quickly! If not, you may want to read sections 1 to 4 (inclusive) of [React Native Express](http://reactnativeexpress.com/) first, then come back here when you're done.
@@ -31,7 +30,7 @@ expo install react-native-gesture-handler react-native-reanimated react-native-s
 
 This will install versions of these libraries that are compatible.
 
-You can now continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
+You can now continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.
 
 ### Installing dependencies into a bare React Native project
 
@@ -75,9 +74,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      {/* Rest of your app code */}
-    </NavigationContainer>
+    <NavigationContainer>{/* Rest of your app code */}</NavigationContainer>
   );
 }
 ```
@@ -86,4 +83,4 @@ export default function App() {
 
 Now you are ready to build and run your app on the device/simulator.
 
-Continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
+Continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.

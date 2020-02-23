@@ -1,17 +1,16 @@
 ---
-id: version-5.x-drawer-based-navigation
+id: drawer-based-navigation
 title: Drawer navigation
 sidebar_label: Drawer navigation
-original_id: drawer-based-navigation
 ---
 
-<div style="display: flex; justify-content: center">
-  <video width="60%" playsinline autoplay muted loop>
-    <source src="/docs/assets/navigators/drawer/drawer.mov">
-  <video>
-</div>
-
 Common pattern in navigation is to use drawer from left (sometimes right) side for navigating between screens.
+
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop>
+    <source src="/docs/assets/navigators/drawer/drawer.mov" />
+  </video>
+</div>
 
 Before continuing, first install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/master/packages/drawer):
 
@@ -69,7 +68,7 @@ export default function App() {
 
 To open and close drawer, use the following helpers:
 
-<samp id="drawer-open-close-toggle">
+<samp id="drawer-open-close-toggle" />
 
 ```js
 navigation.openDrawer();
@@ -78,7 +77,7 @@ navigation.closeDrawer();
 
 If you would like to toggle the drawer you call the following:
 
-<samp id="drawer-open-close-toggle">
+<samp id="drawer-open-close-toggle" />
 
 ```js
 navigation.toggleDrawer();
@@ -86,7 +85,7 @@ navigation.toggleDrawer();
 
 Each of these functions, behind the scenes, are simply dispatching actions:
 
-<samp id="drawer-dispatch">
+<samp id="drawer-dispatch" />
 
 ```js
 navigation.dispatch(DrawerActions.openDrawer());

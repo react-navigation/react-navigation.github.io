@@ -1,8 +1,7 @@
 ---
-id: version-4.x-pitch
+id: pitch
 title: Pitch & anti-pitch
 sidebar_label: Pitch & anti-pitch
-original_id: pitch
 ---
 
 It's useful when considering whether or not to use a project to understand the tradeoffs that the developers of the project made when building it. What problems does it explicitly try to solve for you, and which ones does it ignore? What are the current limitations of the project and common problems that people encounter? These are the kinds of questions that we believe you should have answers to when making an important technology decision for your project, and so we have documented answers to these questions as best we can here, in the form of a "pitch" (why you should use it) and "anti-pitch" (why you should not use it). Please [submit a pull request](https://github.com/react-navigation/website) if you believe we have omitted important information!
@@ -20,6 +19,6 @@ It's useful when considering whether or not to use a project to understand the t
 
 - The API is sometimes unintuitive and difficult to use, improvements may require breaking changes. We are working to make ["easy things easy and hard things possible"](https://www.quora.com/What-is-the-origin-of-the-phrase-make-the-easy-things-easy-and-the-hard-things-possible) and this may require us to change the API at times.
 - React Navigation does not directly use most of the native navigation APIs on iOS and Android; rather, it uses the lowest level pieces and then re-creates some subset of the APIs on top. This is a conscious choice in order to make it possible for users to customize any part of the navigation experience (because it's implemented in JavaScript) and to be able to debug issues that they encounter without needing to learn Objective C / Swift / Java / Kotlin.
-  - If you need the exact platform behavior you are better off using another library that wraps the platform APIs. Read more about these in [Alternatives](alternatives.html) and be sure to understand the tradeoffs that they make before digging in!
+  - If you need the exact platform behavior you are better off using another library that wraps the platform APIs. Read more about these in [Alternatives](alternatives.md) and be sure to understand the tradeoffs that they make before digging in!
 - Because much of the logic for React Navigation runs in JavaScript rather than in native, the usual concerns about blocking the JavaScript thread come into play.
 - If you need to support master-detail split-views on iPad, you may want to use another library. This has not yet been implemented in React Navigation, although you can build it yourself if you like.
