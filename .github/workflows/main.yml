@@ -52,7 +52,6 @@ jobs:
         GITHUB_EMAIL: ${{ secrets.DEPLOY_GITHUB_EMAIL }}
         GIT_USER: ${{ secrets.DEPLOY_GITHUB_USER }}
         CURRENT_BRANCH: $GITHUB_REF
-        STABLE_RELEASE: true
       run: |
         git config --global user.email "$GITHUB_EMAIL"
         git config --global user.name "$GITHUB_ACTOR"
