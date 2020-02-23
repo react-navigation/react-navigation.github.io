@@ -14,6 +14,7 @@ function Version() {
   const latestVersion = versions[0];
   const pastVersions = versions.filter(version => version !== latestVersion);
   const repoUrl = `https://github.com/${siteConfig.organizationName}/${siteConfig.projectName}`;
+
   return (
     <Layout
       permalink="/versions"
@@ -31,7 +32,7 @@ function Version() {
                   <Link to={useBaseUrl('/docs/getting-started')}>
                     Documentation
                   </Link>
-                </td>                
+                </td>
               </tr>
             </tbody>
           </table>
