@@ -1,13 +1,12 @@
 ---
-id: version-2.x-params
+id: params
 title: Passing parameters to routes
 sidebar_label: Passing parameters to routes
-original_id: params
 ---
 
 Remember when I said "more on that later when we talk about `params`!"? Well, the time has come.
 
-Now that we know how to [create a stack navigator with some routes](hello-react-navigation.html) and [navigate between those routes](navigating.html), let's look at how we can pass data to routes when we navigate to them.
+Now that we know how to [create a stack navigator with some routes](hello-react-navigation.md) and [navigate between those routes](navigating.md), let's look at how we can pass data to routes when we navigate to them.
 
 There are two pieces to this:
 
@@ -15,7 +14,7 @@ There are two pieces to this:
 
 2. Read the params in your screen component: `this.props.navigation.getParam(paramName, defaultValue)`.
 
-> We recommend that the params you pass are JSON-serializable. That way, you'll be able to use [state persistence](state-persistence.html) and your screen components will have the right contract for implementing [deep linking](deep-linking.html).
+> We recommend that the params you pass are JSON-serializable. That way, you'll be able to use [state persistence](state-persistence.md) and your screen components will have the right contract for implementing [deep linking](deep-linking.md).
 
 ```js
 class HomeScreen extends React.Component {

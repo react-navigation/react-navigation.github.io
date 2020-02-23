@@ -1,19 +1,18 @@
 ---
-id: version-2.x-redux-integration
+id: redux-integration
 title: Redux integration
 sidebar_label: Redux integration
-original_id: redux-integration
 ---
 
 **Warning: in the next major version of React Navigation, to be released in Fall 2018, we will no longer provide any information about how to integrate with Redux and it may cease to work**. Issues related to Redux that are posted on the React Navigation issue tracker will be immediately closed. Redux integration may continue to work but it will not be tested against or considered when making any design decisions for the library.
 
 Some folks like to have their navigation state stored in the same place as the rest of their application state. *Think twice before you consider doing this, there is an incredibly good chance that you do not need to do this!*. Storing your React Navigation state in your own Redux store is likely to give you a very difficult time if you don't know what you're doing.
 
-If your only reason for doing this is that you want to be able to perform navigation actions from outside of your components (eg: from a Redux middleware), you can learn more about this in [navigating without the navigation prop](navigating-without-navigation-prop.html).
+If your only reason for doing this is that you want to be able to perform navigation actions from outside of your components (eg: from a Redux middleware), you can learn more about this in [navigating without the navigation prop](navigating-without-navigation-prop.md).
 
 ## Overview
 
-1. To handle your app's navigation state in Redux, you can pass your own [`navigation`](navigation-prop.html) prop to a navigator. `react-navigation-redux-helpers` handles this for you behind the scenes with a "higher-order component" called `reduxifyNavigator`. You pass in your root navigator component to the `reduxifyNavigator` function, and it returns a new component that takes your navigation `state` and `dispatch` function as props.
+1. To handle your app's navigation state in Redux, you can pass your own [`navigation`](navigation-prop.md) prop to a navigator. `react-navigation-redux-helpers` handles this for you behind the scenes with a "higher-order component" called `reduxifyNavigator`. You pass in your root navigator component to the `reduxifyNavigator` function, and it returns a new component that takes your navigation `state` and `dispatch` function as props.
 
 2. A middleware is needed so that any events that mutate the navigation state properly trigger React Navigation's event listeners.
 

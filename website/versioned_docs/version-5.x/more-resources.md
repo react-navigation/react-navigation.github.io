@@ -1,8 +1,7 @@
 ---
-id: version-5.x-more-resources
+id: more-resources
 title: More Resources
 sidebar_label: More Resources
-original_id: more-resources
 ---
 
 # Talks

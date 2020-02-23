@@ -1,19 +1,18 @@
 ---
-id: version-5.x-bottom-tab-navigator
+id: bottom-tab-navigator
 title: createBottomTabNavigator
 sidebar_label: createBottomTabNavigator
-original_id: bottom-tab-navigator
 ---
-
-<div style="display: flex; justify-content: center">
-  <video width="60%" playsinline autoplay muted loop>
-    <source src="/docs/assets/navigators/tabs/bottom-tabs-demo.mov">
-  <video>
-</div>
 
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 
-To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.html), then install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/master/packages/bottom-tabs):
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop>
+    <source src="/docs/assets/navigators/tabs/bottom-tabs-demo.mov" />
+  </video>
+</div>
+
+To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/master/packages/bottom-tabs):
 
 ```sh
 npm install @react-navigation/bottom-tabs
@@ -40,7 +39,7 @@ function MyTabs() {
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.html)
+> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
 
 ### Props
 
@@ -209,7 +208,7 @@ This event is fired when the user presses the tab button for the current screen 
 
 To prevent the default behavior, you can call `event.preventDefault`:
 
-<samp id="bottom-tab-prevent-default">
+<samp id="bottom-tab-prevent-default" />
 
 ```js
 React.useEffect(() => {
@@ -254,7 +253,7 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
-<samp id="tab-jump-to">
+<samp id="tab-jump-to" />
 
 ```js
 navigation.jumpTo('Profile', { owner: 'Michaś' });
@@ -262,7 +261,7 @@ navigation.jumpTo('Profile', { owner: 'Michaś' });
 
 ## Example
 
-<samp id="bottom-tab-example">
+<samp id="bottom-tab-example" />
 
 ```js
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

@@ -1,13 +1,12 @@
 ---
-id: version-4.x-getting-started
+id: getting-started
 title: Getting started
 sidebar_label: Getting started
-original_id: getting-started
 ---
 
 React Navigation is born from the React Native community's need for an extensible yet easy-to-use navigation solution written entirely in JavaScript (so you can read and understand all of the source), on top of powerful native primitives.
 
-Before you commit to using React Navigation for your project, you might want to read the [anti-pitch](pitch.html) &mdash; it will help you to understand the tradeoffs that we have chosen along with the areas where we consider the library to be deficient currently.
+Before you commit to using React Navigation for your project, you might want to read the [anti-pitch](pitch.md) &mdash; it will help you to understand the tradeoffs that we have chosen along with the areas where we consider the library to be deficient currently.
 
 ## What to expect
 
@@ -23,7 +22,7 @@ The easiest way to get running with `react-navigation` is to initialize a projec
 - If you'd like a [bare React Native project](https://docs.expo.io/versions/latest/introduction/managed-vs-bare/#bare-workflow), then choose `minimal` under the Bare workflow heading.
 - In both cases you can pick the TypeScript version of the template if you prefer &mdash; React Navigation ships with TypeScript types.
 
-Once the project is initialized, in the project directory run `expo install react-navigation react-native-gesture-handler react-native-reanimated react-native-screens`, and you're ready to go! You can now continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
+Once the project is initialized, in the project directory run `expo install react-navigation react-native-gesture-handler react-native-reanimated react-native-screens`, and you're ready to go! You can now continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.
 
 ## Install into an existing project
 
@@ -47,7 +46,7 @@ expo install react-native-gesture-handler react-native-reanimated react-native-s
 
 This will install versions of these libraries that are compatible.
 
-You can now continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
+You can now continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.
 
 #### Installing dependencies into a bare React Native project
 
@@ -150,4 +149,4 @@ import 'react-native-gesture-handler';
 
 Now you are ready to build and run your app on the device/simulator.
 
-Continue to ["Hello React Navigation"](hello-react-navigation.html) to start writing some code.
+Continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.

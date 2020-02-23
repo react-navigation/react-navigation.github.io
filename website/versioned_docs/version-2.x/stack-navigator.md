@@ -1,8 +1,7 @@
 ---
-id: version-2.x-stack-navigator
+id: stack-navigator
 title: createStackNavigator
 sidebar_label: createStackNavigator
-original_id: stack-navigator
 ---
 
 Provides a way for your app to transition between screens where each new screen is placed on top of a stack.

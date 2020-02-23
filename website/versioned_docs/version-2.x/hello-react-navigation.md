@@ -1,8 +1,7 @@
 ---
-id: version-2.x-hello-react-navigation
+id: hello-react-navigation
 title: Hello React Navigation
 sidebar_label: Hello React Navigation
-original_id: hello-react-navigation
 ---
 
 In a web browser, you can link to different pages using an anchor (`<a>`) tag. When the user clicks on a link, the URL is pushed to the browser history stack. When the user presses the back button, the browser pops the item from the top of the history stack, so the active page is now the previously visited page. React Native doesn't have a built-in idea of a global history stack like a web browser does -- this is where React Navigation enters the story.
@@ -39,13 +38,13 @@ export default createStackNavigator({
 });
 ```
 
-<a href="https://snack.expo.io/@react-navigation/hello-world-v2" target="blank" class="run-code-button">&rarr; Run this code</a> 
+<a href="https://snack.expo.io/@react-navigation/hello-world-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 If you run this code, you will see a screen with an empty navigation bar and a grey content area containing your `HomeScreen` component. The styles you see for the navigation bar and the content area are the default configuration for a stack navigator, we'll learn how to configure those later.
 
 > The casing of the route name doesn't matter -- you can use lowercase `home` or capitalized `Home`, it's up to you. We prefer capitalizing our route names.
 
-> The only required configuration for a route is the `screen` component. You can read more about the other options available in the [StackNavigator reference](stack-navigator.html).
+> The only required configuration for a route is the `screen` component. You can read more about the other options available in the [StackNavigator reference](stack-navigator.md).
 
 In React Native, the component exported from `App.js` is the entry point (or root component) for your app -- it is the component from which every other component descends. It's often useful to have more control over the component at the root of your app than you would get from exporting the result of `createStackNavigator`, so let's export a component that just renders our `RootStack` stack navigator.
 

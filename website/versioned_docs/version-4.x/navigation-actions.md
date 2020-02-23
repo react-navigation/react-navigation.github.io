@@ -1,8 +1,7 @@
 ---
-id: version-4.x-navigation-actions
+id: navigation-actions
 title: NavigationActions reference
 sidebar_label: NavigationActions
-original_id: navigation-actions
 ---
 
 All `NavigationActions` return an object that can be sent to the router using `navigation.dispatch()` method.
@@ -18,8 +17,8 @@ The following actions are supported:
 - [Set Params](#setparams) - Set Params for given route
 - [Init](#init) - Used to initialize first state if state is undefined
 
-For actions specific to a StackNavigator, see [StackActions](stack-actions.html).
-For actions specific to a switch-based navigators such as TabNavigator, see [SwitchActions](switch-actions.html).
+For actions specific to a StackNavigator, see [StackActions](stack-actions.md).
+For actions specific to a switch-based navigators such as TabNavigator, see [SwitchActions](switch-actions.md).
 
 The action creator functions define `toString()` to return the action type, which enables easy usage with third-party Redux libraries, including redux-actions and redux-saga.
 

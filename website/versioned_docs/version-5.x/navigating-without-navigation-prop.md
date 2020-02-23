@@ -1,13 +1,12 @@
 ---
-id: version-5.x-navigating-without-navigation-prop
+id: navigating-without-navigation-prop
 title: Navigating without the navigation prop
 sidebar_label: Navigating without the navigation prop
-original_id: navigating-without-navigation-prop
 ---
 
 Sometimes you need to trigger a navigation action from places where you do not have access to the `navigation` prop, such as a Redux middleware. For such cases, you can dispatch navigation actions from the navigation container.
 
-If you're looking for a way to navigate from inside a component without needing to pass the `navigation` prop down, see [`useNavigation`](use-navigation.html).
+If you're looking for a way to navigate from inside a component without needing to pass the `navigation` prop down, see [`useNavigation`](use-navigation.md).
 
 You can get access to the root navigation object through a `ref` and pass it to the `RootNavigation` which we will later use to navigate.
 
@@ -19,9 +18,7 @@ import { navigationRef } from './RootNavigation';
 
 export default function App() {
   return (
-    <NavigationContainer ref={navigationRef}>
-      {/* ... */}
-    </NavigationContainer>
+    <NavigationContainer ref={navigationRef}>{/* ... */}</NavigationContainer>
   );
 }
 ```
@@ -92,13 +89,11 @@ export default function App() {
   React.useEffect(() => {
     isMountedRef.current = true;
 
-    return () => isMountedRef.current = false;
-  }, [])
+    return () => (isMountedRef.current = false);
+  }, []);
 
   return (
-    <NavigationContainer ref={navigationRef}>
-      {/* ... */}
-    </NavigationContainer>
+    <NavigationContainer ref={navigationRef}>{/* ... */}</NavigationContainer>
   );
 }
 ```

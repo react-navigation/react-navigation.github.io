@@ -1,19 +1,18 @@
 ---
-id: version-5.x-drawer-navigator
+id: drawer-navigator
 title: createDrawerNavigator
 sidebar_label: createDrawerNavigator
-original_id: drawer-navigator
 ---
-
-<div style="display: flex; justify-content: center">
-  <video width="60%" playsinline autoplay muted loop>
-    <source src="/docs/assets/navigators/drawer/drawer.mov">
-  <video>
-</div>
 
 Component that renders a navigation drawer which can be opened and closed via gestures.
 
-To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.html), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/master/packages/drawer):
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop>
+    <source src="/docs/assets/navigators/drawer/drawer.mov" />
+  </video>
+</div>
+
+To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/master/packages/drawer):
 
 ```sh
 npm install @react-navigation/drawer
@@ -23,7 +22,7 @@ npm install @react-navigation/drawer
 
 To use this drawer navigator, import it from `@react-navigation/drawer`:
 
-<samp id="simple-drawer">
+<samp id="simple-drawer" />
 
 ```js
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -40,7 +39,7 @@ function MyDrawer() {
 }
 ```
 
-> For a complete usage guide please visit [Drawer Navigation](drawer-based-navigation.html).
+> For a complete usage guide please visit [Drawer Navigation](drawer-based-navigation.md).
 
 ### Props
 
@@ -115,7 +114,7 @@ Style object for the component wrapping the screen content.
 
 Style object for the drawer component. You can pass a custom background color for a drawer or a custom width here.
 
-<samp id="drawer-with-style">
+<samp id="drawer-with-style" />
 
 ```js
 <Drawer.Navigator
@@ -162,7 +161,7 @@ function CustomDrawerContent(props) {
 
 To add additional items in the drawer, you can use the `DrawerItem` component:
 
-<samp id="custom-drawer-content">
+<samp id="custom-drawer-content" />
 
 ```js
 function CustomDrawerContent(props) {
@@ -193,7 +192,7 @@ The `DrawerItem` component accepts the following props:
 
 The `progress` node can be used to do interesting animations in your `drawerContent`, such as parallax motion of the drawer contents:
 
-<samp id="animated-drawer-content">
+<samp id="animated-drawer-content" />
 
 ```js
 function CustomDrawerContent({ progress, ...rest }) {
@@ -256,7 +255,7 @@ Style object for the wrapper view.
 
 Example:
 
-<samp id="drawer-content-options">
+<samp id="drawer-content-options" />
 
 ```js
 <Drawer.Navigator
@@ -337,7 +336,7 @@ The drawer navigator adds the following methods to the navigation prop:
 
 Opens the drawer pane.
 
-<samp id="drawer-open-close-toggle">
+<samp id="drawer-open-close-toggle" />
 
 ```js
 navigation.openDrawer();
@@ -347,7 +346,7 @@ navigation.openDrawer();
 
 Closes the drawer pane.
 
-<samp id="drawer-open-close-toggle">
+<samp id="drawer-open-close-toggle" />
 
 ```js
 navigation.closeDrawer();
@@ -357,7 +356,7 @@ navigation.closeDrawer();
 
 Opens the drawer pane if closed, closes the drawer pane if opened.
 
-<samp id="drawer-open-close-toggle">
+<samp id="drawer-open-close-toggle" />
 
 ```js
 navigation.toggleDrawer();
@@ -370,7 +369,7 @@ Navigates to an existing screen in the drawer navigator. The method accepts foll
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
-<samp id="drawer-example">
+<samp id="drawer-example" />
 
 ```js
 navigation.jumpTo('Profile', { owner: 'Satya' });
@@ -378,7 +377,7 @@ navigation.jumpTo('Profile', { owner: 'Satya' });
 
 ## Example
 
-<samp id="drawer-example">
+<samp id="drawer-example" />
 
 ```js
 import { createDrawerNavigator } from '@react-navigation/drawer';

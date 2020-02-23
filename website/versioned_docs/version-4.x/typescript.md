@@ -1,8 +1,7 @@
 ---
-id: version-4.x-typescript
+id: typescript
 title: Type checking with TypeScript
 sidebar_label: Type checking with TypeScript
-original_id: typescript
 ---
 
 React Navigation exports type definitions for TypeScript projects, which can be used to type check screens, navigation options, and the navigation prop.

@@ -1,8 +1,7 @@
 ---
-id: version-5.x-navigation-lifecycle
+id: navigation-lifecycle
 title: Navigation lifecycle
 sidebar_label: Navigation lifecycle
-original_id: navigation-lifecycle
 ---
 
 In a previous section, we worked with a stack navigator that has two screens (`Home` and `Details`) and learned how to use `navigation.navigate('RouteName')` to navigate between the routes.
@@ -19,7 +18,7 @@ When going back from B to A, `componentWillUnmount` of B is called, but `compone
 
 Similar results can be observed (in combination) with other navigators as well. Consider a tab navigator with two tabs, where each tab is a stack navigator:
 
-<samp id="navigation-lifecycle">navigation lifecycle</samp>
+<samp id="navigation-lifecycle" />
 
 ```jsx
 function App() {
@@ -80,7 +79,7 @@ function Profile({ navigation }) {
 
 Read more about events in the [API reference](navigation-prop.html#navigation-events).
 
-Instead of adding event listeners manually, we can use the [`useFocusEffect`](use-focus-effect.html) hook to perform side effects. It's like React's `useEffect` hook, but it ties into the navigation lifecycle.
+Instead of adding event listeners manually, we can use the [`useFocusEffect`](use-focus-effect.md) hook to perform side effects. It's like React's `useEffect` hook, but it ties into the navigation lifecycle.
 
 Example:
 
@@ -105,7 +104,7 @@ function Profile() {
 }
 ```
 
-If you want to render different things based on if the screen is focused or not, you can use the [`useIsFocused`](use-is-focused.html) hook which returns a boolean indicating whether the screen is focused.
+If you want to render different things based on if the screen is focused or not, you can use the [`useIsFocused`](use-is-focused.md) hook which returns a boolean indicating whether the screen is focused.
 
 ## Summary
 

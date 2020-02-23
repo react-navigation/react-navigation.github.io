@@ -1,11 +1,10 @@
 ---
-id: version-2.x-screen-tracking
+id: screen-tracking
 title: Screen tracking
 sidebar_label: Screen tracking
-original_id: screen-tracking
 ---
 
-This example shows how to do screen tracking and send to Google Analytics. The approach can be adapted to any other analytics SDK. 
+This example shows how to do screen tracking and send to Google Analytics. The approach can be adapted to any other analytics SDK.
 
 ## Listening to State Changes
 
@@ -82,7 +81,7 @@ export default screenTracking;
 
 ### Create Redux store and apply the above middleware
 
-The `screenTracking` middleware can be applied to the store during its creation. See [Redux Integration](redux-integration.html) for details.
+The `screenTracking` middleware can be applied to the store during its creation. See [Redux Integration](redux-integration.md) for details.
 
 ```js
 const store = createStore(

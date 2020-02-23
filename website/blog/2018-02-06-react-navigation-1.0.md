@@ -1,10 +1,15 @@
 ---
 title: React Navigation 1.0 (goodbye, beta!)
-author: Core Team
-authorURL: https://twitter.com/reactnavigation
+author: Brent Vatne
+author_url: https://twitter.com/notbrent
+author_title: Core Team
+author_image_url: https://avatars0.githubusercontent.com/u/90494?s=200&v=4
+tags: [release, announcement]
 ---
 
 As of today, React Navigation version 1.0 has been released! To see a list of recent improvements leading up to the release, refer to the “[Renewed Path to React Navigation V1.0](https://github.com/react-navigation/react-navigation/issues/2585)” issue. Thank you to everybody who has filed high-quality bug reports, submitted pull requests, and helped out fellow developers while we were in beta!
+
+<!--truncate-->
 
 This release isn’t meant to be interpreted as a signal that React Navigation is “finished" &mdash; work is already underway on a number of significant changes to the API that aim to make React Navigation easier to use and more powerful. These changes will be run through our [new RFC process](https://github.com/react-navigation/rfcs). For example, the [Navigator View API RFC](https://github.com/react-navigation/rfcs/blob/master/text/0002-navigator-view-api.md) outlines a plan to decouple views from the router in order to make it easier for other navigation APIs, such as [react-native-router-flux](https://github.com/aksonov/react-native-router-flux) and [react-router-native](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-native), to build on top of the same navigation views. We’re also very excited about a plan (no RFC is open yet, but keep an eye out for it) to use [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler) to run navigation gestures (sliding a drawer open, or swiping back on a stack, for example) on the UI thread using the Animated native driver.
 

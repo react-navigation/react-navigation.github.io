@@ -1,8 +1,7 @@
 ---
-id: version-5.x-app-containers
+id: app-containers
 title: App containers
 sidebar_label: App containers
-original_id: app-containers
 ---
 
 Containers are responsible for managing your app state and linking your top-level navigator to the app environment.
@@ -64,9 +63,7 @@ function App() {
   return (
     <View style={{ flex: 1 }}>
       <Button onPress={() => ref.current?.navigate('Home')}>Go home</Button>
-      <NavigationContainer ref={ref}>
-        {/* ... */}
-      </NavigationContainer>
+      <NavigationContainer ref={ref}>{/* ... */}</NavigationContainer>
     </View>
   );
 }

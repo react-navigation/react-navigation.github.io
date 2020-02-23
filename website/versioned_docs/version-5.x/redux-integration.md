@@ -1,8 +1,7 @@
 ---
-id: version-5.x-redux-integration
+id: redux-integration
 title: Redux integration
 sidebar_label: Redux integration
-original_id: redux-integration
 ---
 
 It is extremely easy to use Redux in an app with React Navigation. It's basically no different than without React Navigation.

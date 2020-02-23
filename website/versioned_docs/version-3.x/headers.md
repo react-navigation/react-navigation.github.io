@@ -1,8 +1,7 @@
 ---
-id: version-3.x-headers
+id: headers
 title: Configuring the header bar
 sidebar_label: Configuring the header bar
-original_id: headers
 ---
 
 By now you're probably tired of seeing a blank grey bar on the top of your screen &mdash; you're ready for some [flair](https://memegenerator.net/img/images/600x600/14303485/stan-flair-office-space.jpg). So let's jump in to configuring the header bar.
@@ -52,7 +51,7 @@ class DetailsScreen extends React.Component {
 
 The argument that is passed in to the `navigationOptions` function is an object with the following properties:
 
-- `navigation` - The [navigation prop](navigation-prop.html) for the screen, with the screen's route at `navigation.state`.
+- `navigation` - The [navigation prop](navigation-prop.md) for the screen, with the screen's route at `navigation.state`.
 - `screenProps` - The props passing from above the navigator component
 - `navigationOptions` - The default or previous options that would be used if new values are not provided
 
@@ -99,7 +98,7 @@ class HomeScreen extends React.Component {
 <a href="https://snack.expo.io/@react-navigation/setting-header-styles-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 There are a couple of things to notice here:
-1. On iOS, the status bar text and icons are black, and this doesn't look great over a dark-colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.html).
+1. On iOS, the status bar text and icons are black, and this doesn't look great over a dark-colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.md).
 2. The configuration we set only applies to the home screen; when we navigate to the details screen, the default styles are back. We'll look at how to share `navigationOptions` between screens now.
 
 ## Sharing common `navigationOptions` across screens
@@ -142,7 +141,7 @@ const RootStack = createStackNavigator(
 
 Now, any screen that belongs to the `RootStack` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
 
-> Note: In v2 and below, the property you would want to use to do this is `navigationOptions`. In v3 we've renamed this to `defaultNavigationOptions`. 
+> Note: In v2 and below, the property you would want to use to do this is `navigationOptions`. In v3 we've renamed this to `defaultNavigationOptions`.
 
 The property `navigationOptions` can be used to configure the navigator itself:
 

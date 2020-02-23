@@ -1,8 +1,7 @@
 ---
-id: version-5.x-deep-linking
+id: deep-linking
 title: Deep linking
 sidebar_label: Deep linking
-original_id: deep-linking
 ---
 
 In this guide we will set up our app to handle external URIs.
@@ -36,7 +35,7 @@ For example, the path `/rooms/chat?user=jane` will be translated to a state obje
 }
 ```
 
-The [`useLinking`](use-linking.html) hook makes it easier to handle incoming links:
+The [`useLinking`](use-linking.md) hook makes it easier to handle incoming links:
 
 ```js
 import { NavigationContainer, useLinking } from '@react-navigation/native';
@@ -58,7 +57,7 @@ function App() {
         // Timeout in 150ms if `getInitialState` doesn't resolve
         // Workaround for https://github.com/facebook/react-native/issues/25675
         setTimeout(resolve, 150)
-      )
+      ),
     ])
       .catch(e => {
         console.error(e);

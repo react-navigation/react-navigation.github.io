@@ -1,8 +1,7 @@
 ---
-id: version-5.x-navigation-prop
+id: navigation-prop
 title: Navigation prop reference
 sidebar_label: Navigation prop
-original_id: navigation-prop
 ---
 
 Each `screen` component in your app is provided with the `navigation` prop automatically. The prop contains various convenience functions that dispatch navigation actions on the route's router. It looks like this:
@@ -16,7 +15,7 @@ Each `screen` component in your app is provided with the `navigation` prop autom
   - `dispatch` - send an action to router
   - `dangerouslyGetParent` - function that returns the parent navigator, if any
 
-It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do any magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`useNavigation`](use-navigation.html) hook.
+It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do any magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`useNavigation`](use-navigation.md) hook.
 
 ### Navigator-dependent functions
 
@@ -58,7 +57,7 @@ Call this to link to another screen in your app. Takes the following arguments:
 - `name` - A destination name of the route that has been defined somewhere
 - `params` - Params to merge into the destination route
 
-<samp id="navigate">
+<samp id="navigate" />
 
 ```js
 function HomeScreen({ navigation: { navigate } }) {
@@ -80,7 +79,7 @@ function HomeScreen({ navigation: { navigate } }) {
 
 Optionally provide a key, which specifies the route to go back from. By default, `goBack` will close the route that it is called from:
 
-<samp id="navigate">
+<samp id="navigate" />
 
 ```js
 function ProfileScreen({ navigation: { goBack } }) {
@@ -116,7 +115,7 @@ Alternatively, as _screen A_ is the top of the stack, you can use `navigation.po
 
 Replace the navigator state to a new state:
 
-<samp id="navigate-replace-reset">
+<samp id="navigate-replace-reset" />
 
 ```js
 navigation.reset({
@@ -131,7 +130,7 @@ navigation.reset({
 
 Firing the `setParams` action allows a screen to change the params in the route, which is useful for updating the header buttons and title. `setParams` works like React's `setState` - it merges the provided params object with the current params.
 
-<samp id="navigate-set-params">
+<samp id="navigate-set-params" />
 
 ```js
 function ProfileScreen({ navigation: { setParams } }) {
@@ -161,7 +160,7 @@ function ProfileScreen({ navigation: { setParams } }) {
 
 The `setOptions` method lets us set screen options from within the component. This is useful if we need to use the component's props, state or context to configure our screen.
 
-<samp id="navigate-set-options">
+<samp id="navigate-set-options" />
 
 ```js
 function ProfileScreen({ navigation, route }) {
@@ -196,7 +195,7 @@ Screens can add listeners on the `navigation` prop like in React Navigation. By 
 
 Example:
 
-<samp id="simple-focus-and-blur">
+<samp id="simple-focus-and-blur" />
 
 ```js
 function Profile({ navigation }) {
@@ -231,7 +230,7 @@ Returns `true` if the screen is focused and `false` otherwise.
 const isFocused = navigation.isFocused();
 ```
 
-This method doesn't re-render the screen when the value changes and mainly useful in callbacks. You probably want to use [useIsFocused](use-is-focused.html) instead of using this directly, it will return a boolean a prop to indicating if the screen is focused.
+This method doesn't re-render the screen when the value changes and mainly useful in callbacks. You probably want to use [useIsFocused](use-is-focused.md) instead of using this directly, it will return a boolean a prop to indicating if the screen is focused.
 
 ## Advanced API Reference
 
@@ -243,7 +242,7 @@ Use dispatch to send any navigation action to the router. The other navigation f
 
 Note that if you want to dispatch react-navigation actions you should use the action creators provided in this library.
 
-See [Navigation Actions Docs](navigation-actions.html) for a full list of available actions.
+See [Navigation Actions Docs](navigation-actions.md) for a full list of available actions.
 
 ```js
 import { CommonActions } from '@react-navigation/native';
@@ -285,4 +284,4 @@ This method will return `undefined` if there is no parent navigator. Be sure to 
 
 This method returns the state object of the navigator which contains the screen. Getting the navigator state could be useful in very rare situations. You most likely don't need to use this method. If you do, make sure you have a good reason.
 
-If you need the state for rendering content, you should use [`useNavigationState`](use-navigation-state.html) instead of this method.
+If you need the state for rendering content, you should use [`useNavigationState`](use-navigation-state.md) instead of this method.

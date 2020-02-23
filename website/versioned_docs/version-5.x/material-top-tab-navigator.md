@@ -1,21 +1,20 @@
 ---
-id: version-5.x-material-top-tab-navigator
+id: material-top-tab-navigator
 title: createMaterialTopTabNavigator
 sidebar_label: createMaterialTopTabNavigator
-original_id: material-top-tab-navigator
 ---
-
-<div style="display: flex; justify-content: center">
-  <video width="60%" playsinline autoplay muted loop>
-    <source src="/docs/assets/navigators/tabs/material-top-tabs.mov">
-  <video>
-</div>
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the route or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
 This wraps [`react-native-tab-view`](https://github.com/react-native-community/react-native-tab-view).
 
-To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.html), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/master/packages/material-top-tabs):
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop>
+    <source src="/docs/assets/navigators/tabs/material-top-tabs.mov" />
+  </video>
+</div>
+
+To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/master/packages/material-top-tabs):
 
 ```sh
 npm install @react-navigation/material-top-tabs react-native-tab-view
@@ -182,7 +181,7 @@ Function that returns a React element to display as the tab bar.
 
 Example:
 
-<samp id="material-top-tab-custom-tab-bar">
+<samp id="material-top-tab-custom-tab-bar" />
 
 ```js
 import { View, TouchableOpacity } from 'react-native';
@@ -276,7 +275,7 @@ An object containing the props for the tab bar component. It can contain the fol
 
 Example:
 
-<samp id="material-top-tab-options">
+<samp id="material-top-tab-options" />
 
 ```js
 <Tab.Navigator
@@ -329,7 +328,7 @@ This event is fired when the user presses the tab button for the current screen 
 
 To prevent the default behavior, you can call `event.preventDefault`:
 
-<samp id="material-top-tab-prevent-default">
+<samp id="material-top-tab-prevent-default" />
 
 ```js
 React.useEffect(() => {
@@ -372,7 +371,7 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
 
-<samp id="material-top-tab-jump-to">
+<samp id="material-top-tab-jump-to" />
 
 ```js
 navigation.jumpTo('Profile', { name: 'Michaś' });
@@ -380,7 +379,7 @@ navigation.jumpTo('Profile', { name: 'Michaś' });
 
 ## Example
 
-<samp id="material-top-tab-example">
+<samp id="material-top-tab-example" />
 
 ```js
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';

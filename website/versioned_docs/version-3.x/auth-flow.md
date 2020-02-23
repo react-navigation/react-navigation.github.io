@@ -1,8 +1,7 @@
 ---
-id: version-3.x-auth-flow
+id: auth-flow
 title: Authentication flows
 sidebar_label: Authentication flows
-original_id: auth-flow
 ---
 
 Most apps require that a user authenticate in some way to have access to data associated with a user or other private content. Typically the flow will look like this:
@@ -38,7 +37,7 @@ export default createAppContainer(createSwitchNavigator(
 ```
 <a href="https://snack.expo.io/@react-navigation/auth-flow-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-You may not be familiar with `SwitchNavigator` yet. The purpose of `SwitchNavigator` is to only ever show one screen at a time. By default, it does not handle back actions and it resets routes to their default state when you switch away. This is the exact behavior that we want from the authentication flow: when users sign in, we want to throw away the state of the authentication flow and unmount all of the screens, and when we press the hardware back button we expect to not be able to go back to the authentication flow. We switch between routes in the `SwitchNavigator` by using the `navigate` action. You can read more about the `SwitchNavigator` in the [API reference](switch-navigator.html).
+You may not be familiar with `SwitchNavigator` yet. The purpose of `SwitchNavigator` is to only ever show one screen at a time. By default, it does not handle back actions and it resets routes to their default state when you switch away. This is the exact behavior that we want from the authentication flow: when users sign in, we want to throw away the state of the authentication flow and unmount all of the screens, and when we press the hardware back button we expect to not be able to go back to the authentication flow. We switch between routes in the `SwitchNavigator` by using the `navigate` action. You can read more about the `SwitchNavigator` in the [API reference](switch-navigator.md).
 
 We set the `initialRouteName` to `'AuthLoading'` because we will fetch our authentication state from persistent storage inside of that screen component.
 
@@ -135,4 +134,4 @@ class HomeScreen extends React.Component {
 <a href="https://snack.expo.io/@react-navigation/auth-flow-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 That's about all there is to it. To enable animation, you need to use
-[createAnimatedSwitchNavigator](animated-switch-navigator.html) instead.
+[createAnimatedSwitchNavigator](animated-switch-navigator.md) instead.

@@ -1,8 +1,7 @@
 ---
-id: version-5.x-glossary-of-terms
+id: glossary-of-terms
 title: Glossary of terms
 sidebar_label: Glossary of terms
-original_id: glossary-of-terms
 ---
 
 > This is a new section of the documentation and it's missing a lot of terms! Please [submit a pull request or an issue](https://github.com/react-navigation/react-navigation.github.io) with a term that you think should be explained here.
@@ -51,7 +50,7 @@ function HomeScreen() {
 }
 ```
 
-The ["Navigation prop reference"](navigation-prop.html) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `navigation` prop.
+The ["Navigation prop reference"](navigation-prop.md) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `navigation` prop.
 
 ## Navigation Prop
 
@@ -62,9 +61,9 @@ This prop will be passed into all screens, and it can be used for the following:
 
 Navigators can also accept a navigation prop, which they should get from the parent navigator, if there is one.
 
-For more details, see the ["Navigation prop document"](navigation-prop.html).
+For more details, see the ["Navigation prop document"](navigation-prop.md).
 
-The ["Route prop reference"](route-prop.html) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `route` prop.
+The ["Route prop reference"](route-prop.md) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `route` prop.
 
 ## Route prop
 

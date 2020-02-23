@@ -1,8 +1,7 @@
 ---
-id: version-5.x-handling-safe-area
+id: handling-safe-area
 title: Supporting safe areas
 sidebar_label: Supporting safe areas
-original_id: handling-safe-area
 ---
 
 By default, React Navigation tries to ensure that the elements of the navigators display correctly on devices with notches (e.g. iPhone X) and UI elements which may overlap the app content. Such items include:

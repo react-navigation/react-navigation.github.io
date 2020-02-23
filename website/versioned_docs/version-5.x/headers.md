@@ -1,8 +1,7 @@
 ---
-id: version-5.x-headers
+id: headers
 title: Configuring the header bar
 sidebar_label: Configuring the header bar
-original_id: headers
 ---
 
 We've seen how to configure the header title already, but let's go over that again before moving on to some other options &mdash; repetition is key to learning!
@@ -54,8 +53,8 @@ function StackScreen() {
 
 The argument that is passed in to the `options` function is an object with the following properties:
 
-- `navigation` - The [navigation prop](navigation-prop.html) for the screen.
-- `route` - The [route prop](route-prop.html) for the screen
+- `navigation` - The [navigation prop](navigation-prop.md) for the screen.
+- `route` - The [route prop](route-prop.md) for the screen
 
 We only needed the `route` prop in the above example but you may in some cases want to use `navigation` as well.
 
@@ -110,7 +109,7 @@ function StackScreen() {
 
 There are a couple of things to notice here:
 
-1. On iOS, the status bar text and icons are black, and this doesn't look great over a dark-colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.html).
+1. On iOS, the status bar text and icons are black, and this doesn't look great over a dark-colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.md).
 2. The configuration we set only applies to the home screen; when we navigate to the details screen, the default styles are back. We'll look at how to share `options` between screens now.
 
 ## Sharing common `options` across screens

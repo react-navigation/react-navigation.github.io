@@ -1,8 +1,7 @@
 ---
-id: version-4.x-navigation-prop
+id: navigation-prop
 title: Navigation prop reference
 sidebar_label: Navigation prop
-original_id: navigation-prop
 ---
 
 Each `screen` component in your app is provided with the `navigation` prop automatically. The prop contains various convenience functions that dispatch navigation actions on the route's router. It looks like this:
@@ -18,7 +17,7 @@ Each `screen` component in your app is provided with the `navigation` prop autom
   - `dispatch` - send an action to router
   - `dangerouslyGetParent` - function that returns the parent navigator, if any
 
-It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`withNavigation`](with-navigation.html) HOC.
+It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`withNavigation`](with-navigation.md) HOC.
 
 ### Navigator-dependent functions
 
@@ -57,7 +56,7 @@ OR
 
 - `routeName` - A destination routeName that has been registered somewhere in the app's router
 - `params` - Params to merge into the destination route
-- `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions.html) for a full list of supported actions.
+- `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions.md) for a full list of supported actions.
 - `key` - Optional identifier of what route to navigate to. Navigate **back** to this route, if it already exists
 
 ```js
@@ -82,7 +81,7 @@ class HomeScreen extends React.Component {
 
 Optionally provide a key, which specifies the route to go back from. By default, `goBack` will close the route that it is called from. If the goal is to go back _anywhere_, without specifying what is getting closed, call `.goBack(null);` Note that the `null` parameter is useful in the case of nested `StackNavigators` to go back on a parent navigator when the child navigator already has only one item in the stack. Don't be concerned if this is confusing, this API needs some work.
 
-Note -- a key is not the name of the route but the unique identifier you provided when navigating to the route. See [navigation key](navigation-key.html).
+Note -- a key is not the name of the route but the unique identifier you provided when navigating to the route. See [navigation key](navigation-key.md).
 
 ```js
 class HomeScreen extends React.Component {
@@ -157,7 +156,7 @@ The JSON payload:
 };
 ```
 
-You can also subscribe to navigation events declaratively with the [`<NavigationEvents/>`](navigation-events.html) component.
+You can also subscribe to navigation events declaratively with the [`<NavigationEvents/>`](navigation-events.md) component.
 
 ### `isFocused` - Query the focused state of the screen
 
@@ -167,7 +166,7 @@ Returns `true` if the screen is focused and `false` otherwise.
 let isFocused = this.props.navigation.isFocused();
 ```
 
-You probably want to use [withNavigationFocus](with-navigation-focus.html) instead of using this directly, it will pass in an `isFocused` boolean a prop to your component.
+You probably want to use [withNavigationFocus](with-navigation-focus.md) instead of using this directly, it will pass in an `isFocused` boolean a prop to your component.
 
 ### `state` - The screen's current state/route
 
@@ -245,7 +244,7 @@ navigation.push(routeName, params, action);
 
 - `routeName` - A destination routeName that has been registered somewhere in the app's router.
 - `params` - Params to merge into the destination route.
-- `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions.html) for a full list of supported actions.
+- `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions.md) for a full list of supported actions.
 
 ### Pop
 
@@ -297,7 +296,7 @@ Use dispatch to send any navigation action to the router. The other navigation f
 
 Note that if you want to dispatch react-navigation actions you should use the action creators provided in this library.
 
-See [Navigation Actions Docs](navigation-actions.html) for a full list of available actions.
+See [Navigation Actions Docs](navigation-actions.md) for a full list of available actions.
 
 ```js
 import { NavigationActions } from 'react-navigation';

@@ -1,8 +1,7 @@
 ---
-id: version-5.x-use-focus-effect
+id: use-focus-effect
 title: useFocusEffect
 sidebar_label: useFocusEffect
-original_id: use-focus-effect
 ---
 
 Sometimes we want to run side-effects when a screen is focused. A side effect may involve things like adding an event listener, fetching data, updating document title, etc. While this can be achieved using `focus` and `blur` events, it's not very ergonomic.

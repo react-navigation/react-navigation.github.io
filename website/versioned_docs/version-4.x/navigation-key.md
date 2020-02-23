@@ -1,8 +1,7 @@
 ---
-id: version-4.x-navigation-key
+id: navigation-key
 title: Using the navigation key
 sidebar_label: Using the navigation key
-original_id: navigation-key
 ---
 
 The `key` parameter comes up repeatedly across different navigation functions. Let's take a look at a summary of its use cases:

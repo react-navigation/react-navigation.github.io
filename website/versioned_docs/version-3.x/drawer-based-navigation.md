@@ -1,12 +1,11 @@
 ---
-id: version-3.x-drawer-based-navigation
+id: drawer-based-navigation
 title: Drawer navigation
 sidebar_label: Drawer navigation
-original_id: drawer-based-navigation
 ---
 The drawer navigator allows you to present a navigation menu to your users. It can be customized out of the box, or you can completely control with a custom component.
 
-This guide covers [createDrawerNavigator](drawer-navigator.html). 
+This guide covers [createDrawerNavigator](drawer-navigator.md).
 
 ```js
 class HomeScreen extends React.Component {

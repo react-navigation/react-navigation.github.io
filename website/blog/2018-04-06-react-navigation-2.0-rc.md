@@ -1,10 +1,15 @@
 ---
 title: 2.0 release candidate
-author: Core Team
-authorURL: https://twitter.com/reactnavigation
+author: Brent Vatne
+author_url: https://twitter.com/notbrent
+author_title: Core Team
+author_image_url: https://avatars0.githubusercontent.com/u/90494?s=200&v=4
+tags: [release, announcement]
 ---
 
 Exactly two months after the release of React Navigation 1.0, we are close to another major version release. We’d like to invite developers that use the library to give the release candidate a try in your app and let us know if you encounter any issues.
+
+<!--truncate-->
 
 ```
 yarn add react-navigation@^2.0.0-rc.1

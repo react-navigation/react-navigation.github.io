@@ -1,8 +1,7 @@
 ---
-id: version-5.x-community-libraries-and-navigators
+id: community-libraries-and-navigators
 title: Community-developed Navigators and Libraries
 sidebar_label: Community Navigators and Libraries
-original_id: community-libraries-and-navigators
 ---
 
 > Libraries listed in this guide may not have been updated to work with the latest version of React Navigation. Please refer to the library's documentation to see which version of React Navigation it supports.

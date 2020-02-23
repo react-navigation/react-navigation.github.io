@@ -1,8 +1,7 @@
 ---
-id: version-5.x-nesting-navigators
+id: nesting-navigators
 title: Nesting navigators
 sidebar_label: Nesting navigators
-original_id: nesting-navigators
 ---
 
 Nesting navigators means rendering a navigator inside a screen of another navigator, for example:

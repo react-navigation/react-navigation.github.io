@@ -1,8 +1,7 @@
 ---
-id: version-3.x-MST-integration
+id: MST-integration
 title: Integrating with MobX State Tree
 sidebar_label: MobX State Tree integration
-original_id: MST-integration
 ---
 
 This guide explores possible way to use React Navigation in a React Native project that uses [MobX State Tree](https://github.com/mobxjs/mobx-state-tree)(MST) for state management. The guide is accompanied by a [sample app](https://github.com/vonovak/react-navigation-mst-demo). Parts of the guide may be relevant also for users of [MobX](https://github.com/mobxjs/mobx) but please be aware of the fact that MobX does not come with a built-in solution for (de)serializing its state.
@@ -13,7 +12,7 @@ This guide explores possible way to use React Navigation in a React Native proje
 
 Our goal with this guide is to use MST with React Navigation and achieve optimal developer experience. In the scope of this guide, this means allowing us to do a full JS reload and be brought back to the state before the reload happened.
 
-We will do this by persisting the navigation state using the React Navigation's [built-in mechanism](state-persistence.html). We also need to persist the app state and navigation params - that way, when you're working on a screen in your app and do a full JS reload, you will be brought back to the same screen, with the same data in it.
+We will do this by persisting the navigation state using the React Navigation's [built-in mechanism](state-persistence.md). We also need to persist the app state and navigation params - that way, when you're working on a screen in your app and do a full JS reload, you will be brought back to the same screen, with the same data in it.
 
 ## Guide
 
@@ -27,7 +26,7 @@ Use `Provider` to wrap what you return from your root component's render method:
 <Provider myObject={this.myObject}>
   <AppNavigator />
 </Provider>
-```  
+```
 
 this will allow you to access `myObject` from any React component in the application through the `inject` function which can be quite useful.
 
@@ -35,7 +34,7 @@ Use `observer` function to wrap all components that render observable data. This
 
 ### Navigation params
 
-Screens in your application often depend on params. React Navigation allows you to [send params](params.html) from one screen to another. These params are stored in the navigation state. However, in order to persist the navigation state, it needs to be serializable. This requirement does not play well with MST, because the MST objects are complex objects and React Navigation doesn't know how to (de)serialize them. In this guide, we will work around this by storing the navigation params ourselves.
+Screens in your application often depend on params. React Navigation allows you to [send params](params.md) from one screen to another. These params are stored in the navigation state. However, in order to persist the navigation state, it needs to be serializable. This requirement does not play well with MST, because the MST objects are complex objects and React Navigation doesn't know how to (de)serialize them. In this guide, we will work around this by storing the navigation params ourselves.
 
 This means that rather than sending the params from one screen to another (eg. with `props.navigation.navigate('MyScreen', { complexMSTObject })`) we will store the params to a navigation store, then navigate without sending any params, and on the target screen, we'll pick the params up from the navigation store.
 

@@ -1,8 +1,7 @@
 ---
-id: version-4.x-navigation-events
+id: navigation-events
 title: NavigationEvents reference
 sidebar_label: NavigationEvents
-original_id: navigation-events
 ---
 
 `NavigationEvents` is a React component providing a declarative API to subscribe to navigation events. It will subscribe to navigation events on mount, and unsubscribe on unmount.

@@ -1,8 +1,7 @@
 ---
-id: version-1.x-modal
+id: modal
 title: Opening a full-screen modal
 sidebar_label: Opening a full-screen modal
-original_id: modal
 ---
 
 Dictionary.com provides no satisfactory definition of modal as it relates to user interfaces, but semantic UI describes it as follows:
@@ -11,7 +10,7 @@ Dictionary.com provides no satisfactory definition of modal as it relates to use
 
 This sounds about right. A modal is like a popup &mdash; it's not part of your primary navigation flow &mdash; it usually has a different transition, a different way to dismiss it, and is intended to focus on one particular piece of content or interaction.
 
-<!-- Often these modals don't take up the entire screen (you can read more about that in the [Partial overlays section](partial-overlay.html)), but in this case we'll talk about modals that take up the user's entire screen. -->
+<!-- Often these modals don't take up the entire screen (you can read more about that in the [Partial overlays section](partial-overlay.md)), but in this case we'll talk about modals that take up the user's entire screen. -->
 
 The purpose of explaining this as part of the React Navigation fundamentals is not only because this is a common use case, but also because the implementation requires knowledge of _nesting navigators_, which is an important part of React Navigation.
 

@@ -1,11 +1,10 @@
 ---
-id: version-4.x-drawer-navigator
+id: drawer-navigator
 title: createDrawerNavigator
 sidebar_label: createDrawerNavigator
-original_id: drawer-navigator
 ---
 
-To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.html), then install [`react-navigation-drawer`](https://github.com/react-navigation/drawer).
+To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`react-navigation-drawer`](https://github.com/react-navigation/drawer).
 
 ```sh
 npm install react-navigation-drawer

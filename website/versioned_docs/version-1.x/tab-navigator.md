@@ -1,8 +1,7 @@
 ---
-id: version-1.x-tab-navigator
+id: tab-navigator
 title: TabNavigator reference
 sidebar_label: TabNavigator
-original_id: tab-navigator
 ---
 
 ```js

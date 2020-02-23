@@ -1,8 +1,7 @@
 ---
-id: version-3.x-common-mistakes
+id: common-mistakes
 title: Common mistakes
 sidebar_label: Common mistakes
-original_id: common-mistakes
 ---
 
 This section attempts to outline issues that users frequently encounter when first getting accustomed to using React Navigation and serves as a reference in some cases for error messages.
@@ -31,7 +30,7 @@ const AuthenticationContainer = createAppContainer(AuthenticationNavigator);
 class AuthenticationScreen extends React.Component {
   render() {
     /*
-     * In a screen inside of the navigator we are rendering another navigator 
+     * In a screen inside of the navigator we are rendering another navigator
      * You should avoid this! It will have its own navigation state and be unable
      * To interact with any parent navigator, eg: it would not know the route "Home" exists
      */
@@ -47,7 +46,7 @@ const AppNavigator = createSwitchNavigator({
 });
 
 const AppContainer = createAppContainer(AppNavigator)
-``` 
+```
 
 The correct way to write this would be the following:
 
@@ -64,7 +63,7 @@ const AuthenticationNavigator = createStackNavigator({
 });
 
 const AppNavigator = createSwitchNavigator({
-  /* 
+  /*
    * Rather than being rendered by a screen component, the
    * AuthenticationNavigator is a screen component
    */
@@ -110,7 +109,7 @@ const AppContainer = createAppContainer(AppNavigator);
 
 ## Assigning navigationOptions to the wrong component
 
-In previous version of React Navigation, the library used to dig through your component tree to find `navigationOptions`. This is no longer the case, and only `navigationOptions` on screen components of a particular navigator will apply to that navigator. You can read more about this in the [Navigation options resolution](navigation-options-resolution.html) guide.
+In previous version of React Navigation, the library used to dig through your component tree to find `navigationOptions`. This is no longer the case, and only `navigationOptions` on screen components of a particular navigator will apply to that navigator. You can read more about this in the [Navigation options resolution](navigation-options-resolution.md) guide.
 
 ## Wrapping AppContainer in a View without flex
 
@@ -145,4 +144,3 @@ import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
  // without the style you will see a blank screen
 export default ()=><View style={{flex: 1}}><AppContainer/></View>;
 ```
-

@@ -1,8 +1,7 @@
 ---
-id: version-1.x-redux-integration
+id: redux-integration
 title: Redux integration
 sidebar_label: Redux integration
-original_id: redux-integration
 ---
 
 Some folks like to have their navigation state stored in the same place as the rest of their application state. Using Redux to store your state enables you to write custom actions that manipulate the navigation state directly, to be able to dispatch navigation actions from anywhere (sometimes in a "thunk" or "saga") and to persist the navigation state in the same way you would other Redux state (your mileage may vary on this). You can read more about other use cases in the replies to [this tweet](https://twitter.com/satya164/status/952291726521024512).

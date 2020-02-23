@@ -1,8 +1,7 @@
 ---
-id: version-5.x-custom-android-back-button-handling
+id: custom-android-back-button-handling
 title: Custom Android back button behavior
 sidebar_label: Custom Android back button behavior
-original_id: custom-android-back-button-handling
 ---
 
 By default, when user presses the Android hardware back button, react-navigation will pop a screen or exit the app if there are no screens to pop. This is a sensible default behavior, but there are situations when you might want to implement custom handling.
@@ -41,4 +40,4 @@ The presented approach will work well for screens that are shown in a `StackNavi
 
 ### Why not use component lifecycle methods?
 
-At first, you may be inclined to use `componentDidMount` to subscribe for the back press event and `componentWillUnmount` to unsubscribe, or use `useEffect` to add the listener. This approach will not work - learn more about this in [navigation lifecycle](navigation-lifecycle.html).
+At first, you may be inclined to use `componentDidMount` to subscribe for the back press event and `componentWillUnmount` to unsubscribe, or use `useEffect` to add the listener. This approach will not work - learn more about this in [navigation lifecycle](navigation-lifecycle.md).
