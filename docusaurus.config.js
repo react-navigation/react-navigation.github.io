@@ -111,7 +111,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
-            'https://github.com/react-navigation/react-navigation.github.io/edit/source/website/',
+            'https://github.com/react-navigation/react-navigation.github.io/edit/source/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
