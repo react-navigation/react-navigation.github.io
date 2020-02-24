@@ -73,6 +73,7 @@ The main concepts are the same. There are navigators and screens, nesting works 
 - `defaultNavigationOptions` becomes `screenOptions` prop on `Navigator`
 
 ```js
+import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 function RootStack() {
