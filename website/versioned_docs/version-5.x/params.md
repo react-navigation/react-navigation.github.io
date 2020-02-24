@@ -83,6 +83,8 @@ To achieve this, you can use the `navigate` method, which acts like `goBack` if 
 <samp id="passing-params-back" />
 
 ```js
+import { TextInput } from 'react-native'
+
 function HomeScreen({ navigation, route }) {
   React.useEffect(() => {
     if (route.params?.post) {
