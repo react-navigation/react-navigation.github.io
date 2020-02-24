@@ -102,12 +102,21 @@ header: ({ scene, previous, navigation }) => {
       leftButton={
         previous ? <MyBackButton onPress={navigation.goBack} /> : undefined
       }
+      style={options.headerStyle}
     />
   );
 };
 ```
 
-By default, there is one floating header which renders headers for multiple screens on iOS. These headers include animations to smoothly switch to one another. When using a custom header, it's recommended set the `headerMode` option on the navigator to `screen` so that you don't have to implement animations.
+To set a custom header for all the screens in the navigator, you can specify this option in the `defaultNavigationOptions` option of the navigator.
+
+When using a custom header, there are 2 important things to keep in mind:
+
+##### Specify a `height` in `headerStyle`
+
+If your header's height differs from the default header height, then you might notice glitches due to measurement being async. Explicitly specifying the height will avoid such glitches.
+
+Example:
 
 ```js
 headerStyle: {
@@ -115,7 +124,28 @@ headerStyle: {
 };
 ```
 
-To set a custom header for all the screens in the navigator, you can specify this option in the `defaultNavigationOptions` option of the navigator.
+Note that this style is not applied to the header by default since you control the styling of your custom header. If you also want to apply this style to your header, use `scene.descriptor.options.headerStyle` from the props.
+
+##### Set `headerMode` to `screen`
+
+By default, there is one floating header which renders headers for multiple screens on iOS. These headers include animations to smoothly switch to one another.
+
+Setting the `headerMode` prop to `screen` makes the header part of the screen, so you don't have to implement animations to animate it separately.
+
+If you want to customize how the header animates and want to keep `headerMode` as `float`, you can interpolate on the `scene.progress.current` and `scene.progress.next` props. For example, following will cross-fade the header:
+
+```js
+const progress = Animated.add(scene.progress.current, scene.progress.next || 0);
+
+const opacity = progress.interpolate({
+  inputRange: [0, 1, 2],
+  outputRange: [0, 1, 0],
+});
+
+return (
+  <Animated.View style={{ opacity }}>{/* Header content */}</Animated.View>
+);
+```
 
 #### `headerShown`
 
