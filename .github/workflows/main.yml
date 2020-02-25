@@ -18,11 +18,6 @@ jobs:
       with:
         node-version: 10
 
-    - name: Use crowdin
-      run: |
-        wget -c https://artifacts.crowdin.com/repo/deb/crowdin.deb -O crowdin.deb
-        sudo dpkg -i crowdin.deb
-
     - name: Get yarn cache
       id: yarn-cache
       run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -38,13 +33,18 @@ jobs:
       run: |
         yarn --frozen-lockfile
 
-    - name: Sync with crowdin
-      env:
-        CROWDIN_DOCUSAURUS_PROJECT_ID: react-navigation
-        CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.CROWDIN_DOCUSAURUS_API_KEY }}
-      run: |
-        yarn crowdin-upload
-        yarn crowdin-download
+    # - name: Use crowdin
+    #   run: |
+    #     wget -c https://artifacts.crowdin.com/repo/deb/crowdin.deb -O crowdin.deb
+    #     sudo dpkg -i crowdin.deb
+
+    # - name: Sync with crowdin
+    #   env:
+    #     CROWDIN_DOCUSAURUS_PROJECT_ID: react-navigation
+    #     CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.CROWDIN_DOCUSAURUS_API_KEY }}
+    #   run: |
+    #     yarn crowdin-upload
+    #     yarn crowdin-download
 
     - name: Publish to Github pages
       env:
