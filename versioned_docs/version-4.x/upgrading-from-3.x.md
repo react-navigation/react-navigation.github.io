@@ -14,8 +14,8 @@ First, we need to install the `react-navigation` package along with the various 
 
 To install them, run:
 
-```sh
-npm install react-navigation react-navigation-stack@^1.7.3 react-navigation-tabs@^1.2.0 react-navigation-drawer@^1.4.0
+```bash npm2yarn
+npm install --save react-navigation react-navigation-stack@^1.7.3 react-navigation-tabs@^1.2.0 react-navigation-drawer@^1.4.0
 ```
 
 This will install the versions compatible with your code if you were using `react-navigation@3.x`, so you wouldn't need any more changes beyond changing the imports.
@@ -144,8 +144,8 @@ public class MainActivity extends ReactActivity {
 
 To upgrade `react-navigation-tabs`, run:
 
-```sh
-npm install react-navigation-tabs
+```bash npm2yarn
+npm install --save react-navigation-tabs
 ```
 
 This version upgrades [`react-native-tab-view`](https://github.com/react-native-community/react-native-tab-view) to 2.x. As a result, the animations in `createMaterialTopTabNavigator` now use the [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated) library.
@@ -165,8 +165,8 @@ This version upgrades [`react-native-tab-view`](https://github.com/react-native-
 
 To upgrade `react-navigation-drawer`, run:
 
-```sh
-npm install react-navigation-drawer
+```bash npm2yarn
+npm install --save react-navigation-drawer
 ```
 
 This version upgrades now uses the [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated) library for animations. This means, if you're using the `drawerProgress` value, you'll need to migrate your code to use `Animated` from `react-native-reanimated`.
@@ -175,8 +175,8 @@ This version upgrades now uses the [`react-native-reanimated`](https://github.co
 
 To upgrade `react-navigation-stack`, run:
 
-```sh
-npm install react-navigation-stack
+```bash npm2yarn
+npm install --save react-navigation-stack
 ```
 
 In this release, we have moved several options into `navigationOptions` so that you can configure options per screen instead of per navigator. This lets you do things like customize animations for a particular screen, set options based on `screenProps` etc. Usage of built-in components such as `Header` and `HeaderBackButton` has also been simplified. Other changes are made to improve consistency within the API.
@@ -189,8 +189,8 @@ From this version, all state changes have an animation, including `replace` and 
 
 The new version requires 2 new peer dependencies. To install them in your project, run:
 
-```sh
-npm install react-native-safe-area-context @react-native-community/masked-view
+```bash npm2yarn
+npm install --save react-native-safe-area-context @react-native-community/masked-view
 ```
 
 ##### Stack Navigator config

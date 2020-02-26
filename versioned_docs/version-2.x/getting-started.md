@@ -18,10 +18,8 @@ What follows within the _Fundamentals_ section of this documentation is a tour o
 
 Install the `react-navigation` package in your React Native project.
 
-```bash
-yarn add react-navigation
-# or with npm
-# npm install --save react-navigation
+```bash npm2yarn
+npm install --save react-navigation
 ```
 
 ## Hybrid iOS Applications (Skip for RN only projects)

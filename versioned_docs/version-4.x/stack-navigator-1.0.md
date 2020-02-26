@@ -10,8 +10,8 @@ By default the stack navigator is configured to have the familiar iOS and Androi
 
 To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`react-navigation-stack`](https://github.com/react-navigation/stack/tree/1.0).
 
-```sh
-npm install react-navigation-stack@^1.10.3
+```bash npm2yarn
+npm install --save react-navigation-stack@^1.10.3
 ```
 
 ## API

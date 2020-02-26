@@ -28,8 +28,8 @@ Once the project is initialized, in the project directory run `expo install reac
 
 Install the `react-navigation` package in your React Native project.
 
-```bash
-npm install react-navigation
+```bash npm2yarn
+npm install --save react-navigation
 ```
 
 React Navigation is made up of some core utilities and those are then used by navigators to create the navigation structure in your app. Don't worry too much about this for now, it'll become clear soon enough! To frontload the installation work, let's also install and configure dependencies used by most navigators, then we can move forward with starting to write some code.
@@ -52,8 +52,8 @@ You can now continue to ["Hello React Navigation"](hello-react-navigation.md) to
 
 In your project directory, run:
 
-```sh
-npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+```bash npm2yarn
+npm install --save react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
 ```
 
 > Note: You might get warnings related to peer dependencies after installation. They are usually caused my incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.
@@ -90,7 +90,7 @@ Next, we need to link these libraries. The steps depends on your React Native ve
 
   You also need to configure [jetifier](https://github.com/mikehardy/jetifier) to support dependencies using `androidx`:
 
-  ```sh
+  ```bash npm2yarn
   npm install --save-dev jetifier
   ```
 

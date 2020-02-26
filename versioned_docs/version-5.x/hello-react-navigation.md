@@ -14,8 +14,8 @@ Lets start by demonstrating the most common navigator, `createStackNavigator`.
 
 The libraries we've installed so far are the building blocks and shared foundations for navigators, and each navigator in React Navigation lives in its own library. To use the stack navigator, we need to install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/master/packages/stack) :
 
-```sh
-npm install @react-navigation/stack
+```bash npm2yarn
+npm install --save @react-navigation/stack
 ```
 
 > 💡 `@react-navigation/stack` depends on `@react-native-community/masked-view` and the other libraries that we installed in [Getting started](getting-started.md). If you haven't installed those yet, head over to that page and follow the installation instructions.
