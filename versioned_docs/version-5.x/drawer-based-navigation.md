@@ -14,7 +14,7 @@ Common pattern in navigation is to use drawer from left (sometimes right) side f
 
 Before continuing, first install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/master/packages/drawer):
 
-```sh
+```bash npm2yarn
 npm install @react-navigation/drawer
 ```
 

@@ -24,15 +24,9 @@ Some folks like to have their navigation state stored in the same place as the r
 
 First, you need to add the `react-navigation-redux-helpers` package to your project.
 
-  ```bash
-  yarn add react-navigation-redux-helpers
-  ```
-
-  or
-
-  ```bash
-  npm install --save react-navigation-redux-helpers
-  ```
+```bash npm2yarn
+npm install react-navigation-redux-helpers
+```
 
 With Redux, your app's state is defined by a reducer. Each navigation router effectively has a reducer, called `getStateForAction`. The following is a minimal example of how you might use navigators within a Redux application:
 

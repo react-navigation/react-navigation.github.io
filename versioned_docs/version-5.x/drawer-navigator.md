@@ -14,7 +14,7 @@ Component that renders a navigation drawer which can be opened and closed via ge
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/master/packages/drawer):
 
-```sh
+```bash npm2yarn
 npm install @react-navigation/drawer
 ```
 

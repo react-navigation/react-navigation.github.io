@@ -14,7 +14,7 @@ This navigator uses native navigation primitives (`UINavigationController` on iO
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/native-stack`](https://github.com/react-navigation/react-navigation/tree/master/packages/native-stack):
 
-```sh
+```bash npm2yarn
 npm install @react-navigation/native-stack
 ```
 

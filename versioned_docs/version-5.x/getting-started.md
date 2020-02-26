@@ -12,7 +12,7 @@ What follows within the _Fundamentals_ section of this documentation is a tour o
 
 Install the required packages in your React Native project:
 
-```sh
+```bash npm2yarn
 npm install @react-navigation/native
 ```
 
@@ -36,7 +36,7 @@ You can now continue to ["Hello React Navigation"](hello-react-navigation.md) to
 
 In your project directory, run:
 
-```sh
+```bash npm2yarn
 npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
 ```
 

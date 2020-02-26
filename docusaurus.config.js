@@ -116,6 +116,7 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
             'https://github.com/react-navigation/react-navigation.github.io/edit/source/',
+          remarkPlugins: [require('./src/plugins/remark-npm2yarn')],
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

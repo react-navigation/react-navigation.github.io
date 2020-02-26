@@ -10,7 +10,7 @@ A material-design themed tab bar on the bottom of the screen that lets you switc
 
 To use this navigator, you need to install `react-navigation-material-bottom-tabs`
 
-```
+```bash npm2yarn
 npm install react-navigation-material-bottom-tabs react-native-paper
 ```
 

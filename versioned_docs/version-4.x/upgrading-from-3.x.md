@@ -14,7 +14,7 @@ First, we need to install the `react-navigation` package along with the various 
 
 To install them, run:
 
-```sh
+```bash npm2yarn
 npm install react-navigation react-navigation-stack@^1.7.3 react-navigation-tabs@^1.2.0 react-navigation-drawer@^1.4.0
 ```
 
@@ -144,7 +144,7 @@ public class MainActivity extends ReactActivity {
 
 To upgrade `react-navigation-tabs`, run:
 
-```sh
+```bash npm2yarn
 npm install react-navigation-tabs
 ```
 
@@ -165,7 +165,7 @@ This version upgrades [`react-native-tab-view`](https://github.com/react-native-
 
 To upgrade `react-navigation-drawer`, run:
 
-```sh
+```bash npm2yarn
 npm install react-navigation-drawer
 ```
 
@@ -175,7 +175,7 @@ This version upgrades now uses the [`react-native-reanimated`](https://github.co
 
 To upgrade `react-navigation-stack`, run:
 
-```sh
+```bash npm2yarn
 npm install react-navigation-stack
 ```
 
@@ -189,7 +189,7 @@ From this version, all state changes have an animation, including `replace` and 
 
 The new version requires 2 new peer dependencies. To install them in your project, run:
 
-```sh
+```bash npm2yarn
 npm install react-native-safe-area-context @react-native-community/masked-view
 ```
 
