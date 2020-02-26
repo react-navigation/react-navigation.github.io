@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-![StackNavigator with different StatusBar configs](/docs/assets/statusbar/statusbar-stack-demo.gif)
+![StackNavigator with different StatusBar configs](/assets/statusbar/statusbar-stack-demo.gif)
 
 ## Tabs and Drawer
 
@@ -125,6 +125,6 @@ function Screen2() {
 }
 ```
 
-![DrawerNavigator with different StatusBar configs](/docs/assets/statusbar/statusbar-drawer-demo.gif)
+![DrawerNavigator with different StatusBar configs](/assets/statusbar/statusbar-drawer-demo.gif)
 
-![TabNavigator with different StatusBar configs](/docs/assets/statusbar/statusbar-tab-demo.gif)
+![TabNavigator with different StatusBar configs](/assets/statusbar/statusbar-tab-demo.gif)

@@ -4,7 +4,7 @@ title: Opening a full-screen modal
 sidebar_label: Opening a full-screen modal
 ---
 
-![Modal shown on screen](/docs/assets/modal/modal-demo.gif)
+![Modal shown on screen](/assets/modal/modal-demo.gif)
 
 A modal displays content that temporarily blocks interactions with the main view.
 
@@ -77,7 +77,7 @@ function RootStackScreen() {
 There are some important things to notice here:
 
 - We are using our `MainStackScreen` component as a screen inside `RootStackScreen`! By doing this, we are nesting a stack navigator inside of another stack navigator. In this case, this is useful for us because we want to use a different transition style for the modal. Since `RootStackScreen` renders a stack navigator and has its own header, we also want to hide the header for this screen. In the future this will be important because for tab navigation, for example, each tab will likely have its own stack! Intuitively, this is what you expect: when you are on tab A and switch to tab B, you would like tab A to maintain its navigation state as you continue to explore tab B. Look at this diagram to visualize the structure of navigation in this example:
-  ![tree diagram](/docs/assets/modal/tree.png)
+  ![tree diagram](/assets/modal/tree.png)
 
 - The `mode` prop for stack navigator can be either `card` (default) or `modal`. The `modal` behavior slides the screen in from the bottom on iOS and allows the user to swipe down from the top to dismiss it. The `modal` prop has no effect on Android because full-screen modals don't have any different transition behavior on the platform.
 - When we call `navigate` we don't have to specify anything except the route that we'd like to navigate to. There is no need to qualify which stack it belongs to (the arbitrarily named 'root' or the 'main' stack) &mdash; React Navigation attempts to find the route on the closest navigator and then performs the action there. To visualize this, look again at the above tree diagram and imagine the `navigate` action flowing up from `HomeScreen` to `MainStack`. We know that `MainStack` can't handle the route `MyModal`, so it then flows it up to `RootStack`, which can handle that route, and so it does.

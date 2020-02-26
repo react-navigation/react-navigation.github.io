@@ -151,7 +151,7 @@ function HomeIconWithBadge(props) {
 }
 ```
 
-![Tabs with badges](/docs/assets/navigators/tabs/tabs-badges.png)
+![Tabs with badges](/assets/navigators/tabs/tabs-badges.png)
 
 ## Jumping between tabs
 

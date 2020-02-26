@@ -24,7 +24,7 @@ class MyNavigator extends React.Component {
 }
 ```
 
-![Routers manage the relationship between URIs, actions, and navigation state](/docs/assets/routers/routers-concept-map.png)
+![Routers manage the relationship between URIs, actions, and navigation state](/assets/routers/routers-concept-map.png)
 
 
 ### `getStateForAction(action, state)`

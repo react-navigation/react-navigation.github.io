@@ -10,7 +10,7 @@ This wraps [`react-native-tab-view`](https://github.com/react-native-community/r
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
-    <source src="/docs/assets/navigators/tabs/material-top-tabs.mov" />
+    <source src="/assets/navigators/tabs/material-top-tabs.mov" />
   </video>
 </div>
 

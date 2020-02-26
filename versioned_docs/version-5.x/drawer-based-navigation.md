@@ -8,7 +8,7 @@ Common pattern in navigation is to use drawer from left (sometimes right) side f
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
-    <source src="/docs/assets/navigators/drawer/drawer.mov" />
+    <source src="/assets/navigators/drawer/drawer.mov" />
   </video>
 </div>
 

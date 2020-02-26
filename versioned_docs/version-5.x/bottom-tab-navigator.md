@@ -8,7 +8,7 @@ A simple tab bar on the bottom of the screen that lets you switch between differ
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
-    <source src="/docs/assets/navigators/tabs/bottom-tabs-demo.mov" />
+    <source src="/assets/navigators/tabs/bottom-tabs-demo.mov" />
   </video>
 </div>
 

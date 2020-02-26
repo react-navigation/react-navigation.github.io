@@ -66,7 +66,7 @@ export default createStackNavigator({
 });
 ```
 
-![StackNavigator with different StatusBar configs](/docs/assets/statusbar/statusbar-stack-demo.gif)
+![StackNavigator with different StatusBar configs](/assets/statusbar/statusbar-stack-demo.gif)
 
 ```javascript
 export default createDrawerNavigator({
@@ -79,7 +79,7 @@ export default createDrawerNavigator({
 });
 ```
 
-![DrawerNavigator with different StatusBar configs](/docs/assets/statusbar/statusbar-drawer-demo.gif)
+![DrawerNavigator with different StatusBar configs](/assets/statusbar/statusbar-drawer-demo.gif)
 
 ## TabNavigator
 
@@ -149,6 +149,6 @@ class Screen2 extends React.Component {
 ```
 
 
-![TabNavigator with different StatusBar configs](/docs/assets/statusbar/statusbar-tab-demo.gif)
+![TabNavigator with different StatusBar configs](/assets/statusbar/statusbar-tab-demo.gif)
 
 The code used for these demos is available as a [Snack](https://snack.expo.io/r1iuFP6Ez).

@@ -61,7 +61,7 @@ function DetailsScreen({ route, navigation }) {
 }
 ```
 
-![Screen with passed parameters](/docs/assets/navigators/passing_params.png)
+![Screen with passed parameters](/assets/navigators/passing_params.png)
 
 Screens can also update their params, like they can update their state. The `navigation.setParams` method lets you update the params of a screen. Refer to the [API reference for `setParams`](navigation-prop.html#setparams---make-changes-to-route-params) for more details.
 
