@@ -94,7 +94,7 @@ module.exports = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/react-navigation/react-navigation',
             },
             {
               label: 'Twitter',
