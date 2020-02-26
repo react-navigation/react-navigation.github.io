@@ -59,7 +59,7 @@ If you like what React Navigation has to offer but are turned off by this constr
 
 > [React Navigation 5](https://reactnavigation.org) includes a new [native stack navigator](https://reactnavigation.org/docs/en/native-stack-navigator.html) which uses the platform navigation primitives. While the customization options are limited with it, the performance is close to native.
 
-We are able to offload animations to another thread using React Native's [Animated native driver](https://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html), but we currently still need to call back into JavaScript for gestures (although there are plans to remedy this in the near future). React Navigation is entirely made up of React components and the state is managed in JavaScript on the same thread as the rest of your app. This is what makes React Navigation great in many ways but it also means that your app logic contends for CPU time with React Navigation &mdash; there's only so much JavaScript execution time available per frame.
+We are able to offload animations to another thread using React Native's [Animated native driver](https://reactnative.dev/blog/2017/02/14/using-native-driver-for-animated.html), but we currently still need to call back into JavaScript for gestures (although there are plans to remedy this in the near future). React Navigation is entirely made up of React components and the state is managed in JavaScript on the same thread as the rest of your app. This is what makes React Navigation great in many ways but it also means that your app logic contends for CPU time with React Navigation &mdash; there's only so much JavaScript execution time available per frame.
 
 ## Nuanced platform-specific behavior
 
