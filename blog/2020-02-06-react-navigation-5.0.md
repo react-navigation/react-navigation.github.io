@@ -97,7 +97,7 @@ const MyTheme = {
 
 The new version has been written from the ground-up with TypeScript. We now get first class autocompletion and type-checking.
 
-![TypeScript in action](assets/announcing-5.0/typescript.gif)
+![TypeScript in action](/blog/assets/announcing-5.0/typescript.gif)
 
 We also have JSDoc for the built-in methods and options, so you get their description directly in your editor. See [our typescript documentation](https://reactnavigation.org/docs/typescript.html) for more details on how to use it.
 
@@ -105,7 +105,7 @@ We also have JSDoc for the built-in methods and options, so you get their descri
 
 If you use [React Native Debugger](https://github.com/jhen0409/react-native-debugger) or [Redux Devtools Extension](https://github.com/zalmoxisus/redux-devtools-extension), you can see navigation actions in the devtools along with the current navigation state. It also supports time-travel debugging!
 
-![Redux Devtools in action](assets/announcing-5.0/redux-devtools.gif)
+![Redux Devtools in action](/blog/assets/announcing-5.0/redux-devtools.gif)
 
 You don't need to use Redux in your apps for this to work and it works without any extra setup!
 

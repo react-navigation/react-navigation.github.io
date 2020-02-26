@@ -10,7 +10,7 @@ By default the stack navigator is configured to have the familiar iOS and Androi
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
-    <source src="/docs/assets/navigators/stack/stack.mov" />
+    <source src="/assets/navigators/stack/stack.mov" />
   </video>
 </div>
 

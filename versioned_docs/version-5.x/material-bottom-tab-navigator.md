@@ -8,7 +8,7 @@ A material-design themed tab bar on the bottom of the screen that lets you switc
 
 This wraps the [`BottomNavigation`](https://callstack.github.io/react-native-paper/bottom-navigation.html) component from [`react-native-paper`](https://reactnativepaper.com). If you [configure the Babel plugin](https://callstack.github.io/react-native-paper/getting-started.html), it won't include the whole `react-native-paper` library in your bundle.
 
-<img src="/docs/assets/navigators/tabs/material-bottom-tabs.gif" style={{ width: '420px', maxWidth: '100%', margin: '16px 0' }} />
+<img src="/assets/navigators/tabs/material-bottom-tabs.gif" style={{ width: '420px', maxWidth: '100%', margin: '16px 0' }} />
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/master/packages/material-bottom-tabs):
 

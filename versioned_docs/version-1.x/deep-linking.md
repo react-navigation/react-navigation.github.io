@@ -43,7 +43,7 @@ You need to specify a scheme for your app. You can register for a scheme in your
 
 ### URI Prefix
 
-Next, let's configure our navigation container to extract the path from the app's incoming URI. 
+Next, let's configure our navigation container to extract the path from the app's incoming URI.
 
 ```js
 const SimpleApp = StackNavigator({...});
@@ -86,7 +86,7 @@ Read the [Expo linking guide](https://docs.expo.io/versions/latest/guides/linkin
 
 ### URI Prefix
 
-Next, let's configure our navigation container to extract the path from the app's incoming URI. 
+Next, let's configure our navigation container to extract the path from the app's incoming URI.
 
 ```js
 const SimpleApp = StackNavigator({...}));
@@ -117,7 +117,7 @@ In `SimpleApp/ios/SimpleApp/AppDelegate.m`:
 
 In Xcode, open the project at `SimpleApp/ios/SimpleApp.xcodeproj`. Select the project in sidebar and navigate to the info tab. Scroll down to "URL Types" and add one. In the new URL type, set the identifier and the URL scheme to your desired URL scheme.
 
-![Xcode project info URL types with mychat added](/docs/assets/deep-linking/xcode-linking.png)
+![Xcode project info URL types with mychat added](/assets/deep-linking/xcode-linking.png)
 
 Now you can press play in Xcode, or re-build on the command line:
 
@@ -153,7 +153,7 @@ In `SimpleApp/android/app/src/main/AndroidManifest.xml`, do these followings adj
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="mychat" />            
+        <data android:scheme="mychat" />
     </intent-filter>
 </activity>
 ```

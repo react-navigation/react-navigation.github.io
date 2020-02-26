@@ -19,7 +19,7 @@ While React Navigation handles safe areas for the built-in UI elements by defaul
 
 It's tempting to solve (a) by wrapping your entire app in a container with padding that ensures all content will not be occluded. But in doing so, we waste a bunch of space on the screen, as pictured in the image on the left below. What we ideally want is the image pictured on the right.
 
-![Notch on the iPhone X](/docs/assets/iphoneX/00-intro.png)
+![Notch on the iPhone X](/assets/iphoneX/00-intro.png)
 
 While React Native exports a `SafeAreaView` component, it has some inherent issues, i.e. if a screen containing safe area is animating, it causes jumpy behavior. In addition, this component only supports iOS 10+ with no support for older iOS versions or Android. We recommend to use the [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) library to handle safe areas in a more reliable way.
 
@@ -27,7 +27,7 @@ The rest of this guide gives more information on how to support safe areas in Re
 
 ## Hidden/Custom Header or Tab Bar
 
-![Default React Navigation Behavior](/docs/assets/iphoneX/01-iphonex-default.png)
+![Default React Navigation Behavior](/assets/iphoneX/01-iphonex-default.png)
 
 React Navigation handles safe area in the default header. However, if you're using a custom header, it's important to ensure your UI is within the safe area.
 
@@ -75,7 +75,7 @@ export default function App() {
 }
 ```
 
-![Text hidden by iPhoneX UI elements](/docs/assets/iphoneX/02-iphonex-content-hidden.png)
+![Text hidden by iPhoneX UI elements](/assets/iphoneX/02-iphonex-content-hidden.png)
 
 To fix this issue you can apply safe area insets on your content. This can be achieved easily by using the `SafeAreaView` component from the `react-native-safe-area-context` library:
 
@@ -106,7 +106,7 @@ export default function App() {
 
 Make sure to wrap your app in `SafeAreaProvider` as per the instructions [here](https://github.com/th3rdwave/react-native-safe-area-context#usage).
 
-![Content spaced correctly with safe area insets](/docs/assets/iphoneX/03-iphonex-content-fixed.png)
+![Content spaced correctly with safe area insets](/assets/iphoneX/03-iphonex-content-fixed.png)
 
 This will detect if the app is running on a device with notches, if so, ensure the content isn't hidden behind any hardware elements.
 
@@ -114,11 +114,11 @@ This will detect if the app is running on a device with notches, if so, ensure t
 
 Even if you're using the default navigation bar and tab bar if your application works in landscape mode it's important to ensure you content isn't hidden behind the sensor cluster.
 
-![App in landscape mode with text hidden](/docs/assets/iphoneX/04-iphonex-landscape-hidden.png)
+![App in landscape mode with text hidden](/assets/iphoneX/04-iphonex-landscape-hidden.png)
 
 To fix this you can, once again, apply safe area insets your content. This will not conflict with the navigation bar nor the tab bar's default behavior in portrait mode.
 
-![App in landscape mode with text visible](/docs/assets/iphoneX/05-iphonex-landscape-fixed.png)
+![App in landscape mode with text visible](/assets/iphoneX/05-iphonex-landscape-fixed.png)
 
 ## Tweak paddings for more control
 

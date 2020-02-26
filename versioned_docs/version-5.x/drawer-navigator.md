@@ -8,7 +8,7 @@ Component that renders a navigation drawer which can be opened and closed via ge
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
-    <source src="/docs/assets/navigators/drawer/drawer.mov" />
+    <source src="/assets/navigators/drawer/drawer.mov" />
   </video>
 </div>
 

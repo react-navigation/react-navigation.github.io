@@ -93,7 +93,7 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
-    <source src="/docs/assets/navigators/stack/stack-push.mov" />
+    <source src="/assets/navigators/stack/stack-push.mov" />
   </video>
 </div>
 
