@@ -61,8 +61,8 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home" headerMode="none">
         <Stack.Screen name="Home">
           {() => (
-            <Tab.Navigator initialRouteName="Analitics" tabBar={() => null}>
-              <Tab.Screen name="Analitics" component={Demo} />
+            <Tab.Navigator initialRouteName="Analytics" tabBar={() => null}>
+              <Tab.Screen name="Analytics" component={Demo} />
               <Tab.Screen name="Profile" component={Demo} />
             </Tab.Navigator>
           )}
@@ -112,11 +112,11 @@ This will detect if the app is running on a device with notches, if so, ensure t
 
 ## Landscape Mode
 
-Even if you're using the default navigation bar and tab bar if your application works in landscape mode it's important to ensure you content isn't hidden behind the sensor cluster.
+Even if you're using the default navigation bar and tab bar - if your application works in landscape mode it's important to ensure your content isn't hidden behind the sensor cluster.
 
 ![App in landscape mode with text hidden](/assets/iphoneX/04-iphonex-landscape-hidden.png)
 
-To fix this you can, once again, apply safe area insets your content. This will not conflict with the navigation bar nor the tab bar's default behavior in portrait mode.
+To fix this you can, once again, apply safe area insets to your content. This will not conflict with the navigation bar nor the tab bar's default behavior in portrait mode.
 
 ![App in landscape mode with text visible](/assets/iphoneX/05-iphonex-landscape-fixed.png)
 
