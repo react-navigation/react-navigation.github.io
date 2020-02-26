@@ -77,7 +77,7 @@ function Profile({ navigation }) {
 }
 ```
 
-Read more about events in the [API reference](navigation-prop.html#navigation-events).
+See [Navigation events](navigation-events.md) for more details on the available events and the API usage.
 
 Instead of adding event listeners manually, we can use the [`useFocusEffect`](use-focus-effect.md) hook to perform side effects. It's like React's `useEffect` hook, but it ties into the navigation lifecycle.
 

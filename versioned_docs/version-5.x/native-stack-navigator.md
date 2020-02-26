@@ -163,13 +163,13 @@ How the given screen should appear/disappear when pushed or popped at the top of
 - `default` - Uses a platform default animation.
 - `fade` - Fades screen in or out.
 - `flip` – Flips the screen, requires stackPresentation: `modal` (iOS only).
-- `none` - The screen appears/dissapears without an animation.
+- `none` - The screen appears/disappears without an animation.
 
 Defaults to `default`.
 
 ### Events
 
-The navigator can emit events on certain actions. Supported events are:
+The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
 
 #### `appear`
 

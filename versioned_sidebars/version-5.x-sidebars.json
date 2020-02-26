@@ -44,6 +44,7 @@
       "version-5.x/route-prop",
       "version-5.x/navigation-prop",
       "version-5.x/navigation-context",
+      "version-5.x/navigation-events",
       {
         "type": "category",
         "label": "Navigators",

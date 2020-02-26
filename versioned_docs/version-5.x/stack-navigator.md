@@ -370,7 +370,7 @@ Takes an object containing following optional properties:
 
 ### Events
 
-The navigator can emit events on certain actions. Supported events are:
+The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
 
 #### `transitionStart`
 

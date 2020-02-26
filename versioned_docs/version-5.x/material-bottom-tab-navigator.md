@@ -137,7 +137,7 @@ ID to locate this tab button in tests.
 
 ### Events
 
-The navigator can fire events on certain actions. Supported events are:
+The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
 
 #### `tabPress`
 

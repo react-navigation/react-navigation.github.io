@@ -294,7 +294,7 @@ Whether this screen should be unmounted when navigating away from it. Unmounting
 
 ### Events
 
-The navigator can emit events on certain actions. Supported events are:
+The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
 
 #### `drawerOpen`
 

@@ -187,13 +187,7 @@ Any options specified here are shallow merged with the options specified when de
 
 ## Navigation events
 
-Screens can add listeners on the `navigation` prop like in React Navigation. By default, there are 2 events available:
-
-- `focus` - This event is emitted when the screen comes into focus
-- `blur` - This event is emitted when the screen goes out of focus
-- `state` (advanced) - This event is emitted when the navigator's state changes
-
-Example:
+Screens can add listeners on the `navigation` prop with the `addListener` method. For example, to listen to the `focus` event:
 
 <samp id="simple-focus-and-blur" />
 
@@ -211,16 +205,7 @@ function Profile({ navigation }) {
 }
 ```
 
-The `navigation.addListener` method returns a function to remove the listener which can be returned as the cleanup function in an effect.
-
-Each event listener receives an event object as it's argument. The event object contains following properties:
-
-- `data` - Additional data regarding the event passed by the navigator. This can be `undefined` if no data was passed.
-- `preventDefault` - For some events, there may be a `preventDefault` method on the event object. Calling this method will prevent the default action performed by the event (such as switching tabs on `tabPress`). Support for preventing actions are only available for certain events like `tabPress` and won't work for all events.
-
-Apart from `focus`, `blur` and `state`, each navigator can emit their own custom events. For example, stack navigator emits `transitionStart` and `transitionEnd` events, tab navigator emits `tabPress` event etc. You can find details about the events emitted on the individual navigator's documentation.
-
-You can only listen to events from the immediate parent navigator. For example, if you try to add a listener in a screen is inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use `navigation.dangerouslyGetParent()` to get a reference to parent navigator's navigation prop and add a listener.
+See [Navigation events](navigation-events.md) for more details on the available events and the API usage.
 
 ### `isFocused` - Query the focused state of the screen
 
