@@ -25,7 +25,7 @@ The following steps apply to `react-navigation@^2.3.0` and `react-navigation-red
 First, you need to add the `react-navigation-redux-helpers` package to your project.
 
 ```bash npm2yarn
-npm install --save react-navigation-redux-helpers
+npm install react-navigation-redux-helpers
 ```
 
 The following is a minimal example of how you might use navigators within a Redux application:

@@ -32,7 +32,7 @@ npx react-native start --reset-cache
 If the module points to an npm package (i.e. the name of the module doesn't with `./`), then it's probably due to a missing peer dependency. To fix this, install the dependency in your project:
 
 ```bash npm2yarn
-npm install --save name-of-the-module
+npm install name-of-the-module
 ```
 
 ## I'm getting an error "null is not an object (evaluating 'RNGestureHandlerModule.default.Direction')"

@@ -9,7 +9,7 @@ A material-design themed tab bar on the top of the screen that lets you switch b
 To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`react-navigation-tabs`](https://github.com/react-navigation/tabs).
 
 ```bash npm2yarn
-npm install --save react-navigation-tabs
+npm install react-navigation-tabs
 ```
 
 ## API

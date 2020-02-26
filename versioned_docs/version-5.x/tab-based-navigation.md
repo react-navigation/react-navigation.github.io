@@ -11,7 +11,7 @@ This guide covers [`createBottomTabNavigator`](bottom-tab-navigator.md). You may
 Before continuing, first install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/master/packages/bottom-tabs):
 
 ```bash npm2yarn
-npm install --save @react-navigation/bottom-tabs
+npm install @react-navigation/bottom-tabs
 ```
 
 ## Minimal example of tab-based navigation
