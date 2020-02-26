@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-`contentComponent` also received a prop called `drawerOpenProgress` which is an [animated value](https://facebook.github.io/react-native/docs/animated#value) that represents the animated position of the drawer (0 is closed; 1 is open). This allows you to do interesting animations in your `contentComponent`, such as parallax motion of the drawer contents:
+`contentComponent` also received a prop called `drawerOpenProgress` which is an [animated value](https://reactnative.dev/docs/animated#value) that represents the animated position of the drawer (0 is closed; 1 is open). This allows you to do interesting animations in your `contentComponent`, such as parallax motion of the drawer contents:
 
 ```js
 const CustomDrawerContentComponent = props => {
@@ -118,7 +118,7 @@ React Element or a function, that given `{ focused: boolean, tintColor: string }
 
 #### `drawerLockMode`
 
-Specifies the [lock mode](https://facebook.github.io/react-native/docs/drawerlayoutandroid.html#drawerlockmode) of the drawer. This can also update dynamically by using screenProps.drawerLockMode on your top level router.
+Specifies the [lock mode](https://reactnative.dev/docs/drawerlayoutandroid.html#drawerlockmode) of the drawer. This can also update dynamically by using screenProps.drawerLockMode on your top level router.
 
 ### Nesting drawer navigators inside others
 

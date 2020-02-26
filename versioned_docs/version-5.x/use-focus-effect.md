@@ -72,7 +72,7 @@ If you don't ignore the result, then you might end up with inconsistent data due
 
 The `useFocusEffect` hook runs the effect as soon as the screen comes into focus. This often means that if there is an animation for the screen change, it might not have finished yet.
 
-React Navigation runs its animations in native thread, so it's not a problem in many cases. But if the effect updates the UI or renders something expensive, then it can affect the animation performance. In such cases, we can use [`InteractionManager`](https://facebook.github.io/react-native/docs/interactionmanager) to defer our work until the animations or gestures have finished:
+React Navigation runs its animations in native thread, so it's not a problem in many cases. But if the effect updates the UI or renders something expensive, then it can affect the animation performance. In such cases, we can use [`InteractionManager`](https://reactnative.dev/docs/interactionmanager) to defer our work until the animations or gestures have finished:
 
 ```js
 useFocusEffect(

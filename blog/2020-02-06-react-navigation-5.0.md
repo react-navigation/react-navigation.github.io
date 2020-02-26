@@ -118,7 +118,7 @@ Traditionally, we have written our navigators in JavaScript for greater customiz
 
 ### Native backends for Material top tab navigator
 
-Similar to native stack, we also have [new backends](https://reactnavigation.org/docs/material-top-tab-navigator.html#pager) for Material top tab navigator based on [`react-native-viewpager`](https://github.com/react-native-community/react-native-viewpager) and [`ScrollView`](https://facebook.github.io/react-native/docs/scrollview).
+Similar to native stack, we also have [new backends](https://reactnavigation.org/docs/material-top-tab-navigator.html#pager) for Material top tab navigator based on [`react-native-viewpager`](https://github.com/react-native-community/react-native-viewpager) and [`ScrollView`](https://reactnative.dev/docs/scrollview).
 
 ```js
 import ViewPagerAdapter from 'react-native-tab-view-viewpager-adapter';
@@ -149,7 +149,7 @@ In addition to these larger improvements, there are several smaller improvements
 - Revamped drawer navigator to make customizing the drawer sidebar content easier and more flexible.
 - Simpler API for [`reset` action](https://reactnavigation.org/docs/navigation-prop.html#reset) where you can pass the new state directly instead of a chain of actions.
 - More reliable [`focus` and `blur` events](https://reactnavigation.org/docs/navigation-lifecycle.html) to know when a screen's focus state changes.
-- Integration with [`InteractionManager`](https://facebook.github.io/react-native/docs/interactionmanager) to delay tasks until animation is complete.
+- Integration with [`InteractionManager`](https://reactnative.dev/docs/interactionmanager) to delay tasks until animation is complete.
 - Better safe area handling with [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
 
 ## Upgrading
