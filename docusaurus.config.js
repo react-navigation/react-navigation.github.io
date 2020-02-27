@@ -15,6 +15,9 @@ module.exports = {
     '/js/code-block-buttons.js',
   ],
   themeConfig: {
+    googleAnalytics: {
+      trackingID: 'UA-10128745-16',
+    },
     prism: {
       theme: require('prism-react-renderer/themes/github'),
       darkTheme: require('prism-react-renderer/themes/dracula'),
@@ -128,9 +131,4 @@ module.exports = {
       },
     ],
   ],
-  themeConfig: {
-    googleAnalytics: {
-      trackingID: 'UA-10128745-16',
-    },
-  },
 };
