@@ -13,7 +13,7 @@ module.exports = {
     'https://buttons.github.io/buttons.js',
     '/js/snack.js',
     'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js',
-    '/js/code-block-buttons.js'
+    '/js/code-block-buttons.js',
   ],
   themeConfig: {
     prism: {
@@ -31,16 +31,16 @@ module.exports = {
         src: 'img/spiro.svg',
       },
       links: [
-        {
-          to: 'versions',
-          label: 'Versions',
-        },
-        {to: 'docs/getting-started', label: 'Docs', position: 'left'},
-        {to: 'blog', label: 'Blog', position: 'left'},
+        { to: 'docs/getting-started', label: 'Docs', position: 'left' },
+        { to: 'blog', label: 'Blog', position: 'left' },
         {
           href: 'https://github.com/react-navigation',
           label: 'GitHub',
           position: 'right',
+        },
+        {
+          to: 'versions',
+          label: 'Versions',
         },
       ],
     },
@@ -73,7 +73,8 @@ module.exports = {
             },
             {
               label: 'Get help on Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/react-navigation',
+              href:
+                'https://stackoverflow.com/questions/tagged/react-navigation',
             },
             {
               label: 'Request a feature on Canny',
@@ -81,7 +82,8 @@ module.exports = {
             },
             {
               label: 'Report a bug on Github',
-              href: 'https://github.com/react-navigation/react-navigation/issues/new/choose',
+              href:
+                'https://github.com/react-navigation/react-navigation/issues/new/choose',
             },
           ],
         },
@@ -106,7 +108,7 @@ module.exports = {
     },
   },
   plugins: [
-    path.resolve(__dirname, './src/plugins/docusaurus-plugin-redirect-html')
+    path.resolve(__dirname, './src/plugins/docusaurus-plugin-redirect-html'),
   ],
   presets: [
     [
@@ -114,6 +116,8 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          docLayoutComponent: require.resolve('./src/layouts/DocPage.js'),
+          docItemComponent: require.resolve('./src/layouts/DocItem.js'),
           editUrl:
             'https://github.com/react-navigation/react-navigation.github.io/edit/source/',
           remarkPlugins: [require('./src/plugins/remark-npm2yarn')],

@@ -1,3 +1,5 @@
+// NOTE(brentvatne): the package:version meta tag isn't available when this code
+// first executes....
 const DEFAULT_PLATFORM = 'android';
 const DEPS_VERSIONS = {
   '4': [
@@ -23,16 +25,12 @@ const DEPS_VERSIONS = {
   next: [],
 };
 
-function getVersion(){
-  const navBarItems = document.getElementsByClassName('navbar__items');
-  if(navBarItems[0] && navBarItems[0].children[2] && navBarItems[0].children[2].textContent){
-    return navBarItems[0].children[2].textContent;
+function getVersion() {
+  if (window.__reactNavigationVersion) {
+    return window.__reactNavigationVersion;
   }
-  return 'next';
 }
-// todo: should get the version somewhere, maybe within the page html,
-// and match the appropriate version of react-navigation/stack/tabs/drawer
-// based on that
+
 function getSnackUrl(options) {
   let currentVersion = getVersion();
   let label = options.label || document.title;
@@ -59,24 +57,20 @@ function getSnackUrl(options) {
   }
 }
 
-function findNearestPreElement(node) {
+function findNearestCodeBlock(node) {
   let nextElement = node.nextElementSibling;
   if (!nextElement && node.parentElement.tagName === 'P') {
     nextElement = node.parentElement.nextElementSibling;
   }
 
   while (nextElement) {
-    if(nextElement.tagName === 'DIV' && nextElement.className.includes('mdxCodeBlock_node_modules-@docusaurus-theme-classic-src-theme-MDXComponents-')){
-      nextElement = nextElement.firstChild;
-    }
     if (
-      nextElement.tagName === 'PRE' &&
-      nextElement.children[1] &&
-      nextElement.children[1].tagName === 'CODE'
+      nextElement.tagName === 'DIV' &&
+      nextElement.className.includes(
+        'mdxCodeBlock_node_modules-@docusaurus-theme-classic-src-theme-MDXComponents-'
+      )
     ) {
-      return nextElement.children[1];
-    } else {
-      nextElement = nextElement.nextElementSibling;
+      return nextElement;
     }
   }
 }
@@ -92,19 +86,18 @@ function appendSnackLink() {
   }
 
   samples.forEach(samp => {
-    let pre = findNearestPreElement(samp);
+    let codeBlock = findNearestCodeBlock(samp);
 
-    if (!pre) {
+    if (!codeBlock) {
       console.log(
-        `<pre> tag with <code> child not found for <samp> element ${samp.innerText}`
+        `Code block not found for <samp> element ${samp.innerText}`
       );
       return;
     }
 
-    let code = pre.innerText;
+    let code = codeBlock.innerText;
     let label = samp.innerText;
     let templateId = samp.getAttribute('id');
-
 
     let link = document.createElement('a');
     link.className = 'snack-sample-link';
@@ -117,7 +110,6 @@ function appendSnackLink() {
       link.innerHTML = `Try this example on Snack ${openIcon}`;
     }
 
-
     // Add the href and append the link element if we have some code
     let href = getSnackUrl({ code, templateId, label });
 
@@ -127,7 +119,7 @@ function appendSnackLink() {
 
     link.href = href;
 
-    pre.insertAdjacentElement('afterend', link);
+    codeBlock.insertAdjacentElement('afterend', link);
 
     // Don't try to add the link more than once!
     samp.remove();
