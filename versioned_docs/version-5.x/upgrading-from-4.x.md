@@ -194,12 +194,14 @@ In addition to this, React Navigation 5.x has another way to configure screen dy
 function SelectionScreen({ navigation }) {
   const [selectionCount, setSelectionCount] = React.useState(0);
 
-  navigation.setOptions({
-    title:
-      selectionCount === 0
-        ? 'Select items'
-        : `${selectionCount} items selected`,
-  });
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title:
+        selectionCount === 0
+          ? 'Select items'
+          : `${selectionCount} items selected`,
+    });
+  }, [navigation, selectionCount]);
 
   // ...
 }

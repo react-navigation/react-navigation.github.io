@@ -15,14 +15,13 @@ function LogoTitle() {
 function HomeScreen({ navigation }) {
   const [count, setCount] = React.useState(0);
 
-  navigation.setOptions({
-    headerRight: () => (
-      <Button
-        onPress={() => setCount(c => c + 1)}
-        title="Update count"
-      />
-    ),
-  });
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button onPress={() => setCount(c => c + 1)} title="Update count" />
+      ),
+    });
+  }, [navigation, setCount]);
 
   return <Text>Count: {count}</Text>;
 }

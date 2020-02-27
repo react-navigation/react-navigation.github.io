@@ -160,7 +160,9 @@ Then we can use this function in 2 ways:
 
    ```js
    function HomeTabs({ navigation, route }) {
-     navigation.setOptions({ headerTitle: getHeaderTitle(route) });
+     React.useLayoutEffect(() => {
+       navigation.setOptions({ headerTitle: getHeaderTitle(route) });
+     }, [navigation, route]);
 
      return (
        <Tab.Navigator>

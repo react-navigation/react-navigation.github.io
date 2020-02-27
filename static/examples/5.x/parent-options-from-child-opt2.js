@@ -49,7 +49,9 @@ function SettingsScreen() {
 const Tab = createBottomTabNavigator();
 
 function HomeTabs({ navigation, route }) {
-  navigation.setOptions({ headerTitle: getHeaderTitle(route) });
+  React.useLayoutEffect(() => {
+    navigation.setOptions({ headerTitle: getHeaderTitle(route) });
+  }, [navigation, route]);
 
   return (
     <Tab.Navigator>
