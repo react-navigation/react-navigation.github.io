@@ -1,5 +1,3 @@
-// NOTE(brentvatne): the package:version meta tag isn't available when this code
-// first executes....
 const DEFAULT_PLATFORM = 'android';
 const DEPS_VERSIONS = {
   '4': [
@@ -66,11 +64,11 @@ function findNearestCodeBlock(node) {
   while (nextElement) {
     if (
       nextElement.tagName === 'DIV' &&
-      nextElement.className.includes(
-        'mdxCodeBlock_node_modules-@docusaurus-theme-classic-src-theme-MDXComponents-'
-      )
+      nextElement.className.includes('mdxCodeBlock')
     ) {
       return nextElement;
+    } else {
+      nextElement = nextElement.nextElementSibling;
     }
   }
 }
@@ -89,9 +87,7 @@ function appendSnackLink() {
     let codeBlock = findNearestCodeBlock(samp);
 
     if (!codeBlock) {
-      console.log(
-        `Code block not found for <samp> element ${samp.innerText}`
-      );
+      console.log(`Code block not found for <samp> element ${samp.innerText}`);
       return;
     }
 
@@ -137,15 +133,24 @@ function transformExistingSnackLinks() {
   });
 }
 
-appendSnackLink();
-transformExistingSnackLinks();
+let mutationObserver;
 
-var mutationObserver = new MutationObserver(mutations => {
-  mutations.forEach(appendSnackLink);
-  mutations.forEach(transformExistingSnackLinks);
-});
+export function initializeSnackObservers() {
+  appendSnackLink();
+  transformExistingSnackLinks();
 
-mutationObserver.observe(document.documentElement, {
-  childList: true,
-  subtree: true,
-});
+  mutationObserver = new MutationObserver(mutations => {
+    mutations.forEach(appendSnackLink);
+    mutations.forEach(transformExistingSnackLinks);
+  });
+
+  mutationObserver.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
+}
+
+export function removeSnackObservers() {
+  mutationObserver && mutationObserver.disconnect();
+  mutationObserver = null;
+}
