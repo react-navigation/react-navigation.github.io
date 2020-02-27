@@ -108,7 +108,6 @@ module.exports = {
   },
   plugins: [
     path.resolve(__dirname, './src/plugins/docusaurus-plugin-redirect-html'),
-    '@docusaurus/plugin-google-analytics',
   ],
   presets: [
     [
@@ -128,9 +127,4 @@ module.exports = {
       },
     ],
   ],
-  themeConfig: {
-    googleAnalytics: {
-      trackingID: 'UA-10128745-16',
-    },
-  },
 };
