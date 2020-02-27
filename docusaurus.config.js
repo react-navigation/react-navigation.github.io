@@ -33,7 +33,7 @@ module.exports = {
       links: [
         {
           to: 'versions',
-          label: versions[0],
+          label: 'Versions',
         },
         {to: 'docs/getting-started', label: 'Docs', position: 'left'},
         {to: 'blog', label: 'Blog', position: 'left'},
