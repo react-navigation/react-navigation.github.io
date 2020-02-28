@@ -41,6 +41,10 @@ module.exports = {
           position: 'right',
         },
         {
+          to: 'help',
+          label: 'Help',
+        },
+        {
           to: 'versions',
           label: 'Versions',
         },
