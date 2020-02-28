@@ -20,7 +20,7 @@ The new React Navigation comes with several significant improvements such as [im
 
 The UI Kitten team started actively using React Navigation alpha and we're proud to announce the full compatibility to the new React Navigation API. In this guide, we won't consider how to implement all of the boilerplate stuff like auth screens. Instead, we will learn how to navigate between screens using Drawer, Bottom Tabs, Top Tabs, and Stack navigators to build a TODO-App. Furthermore, we'll demonstrate using React Navigation with UI Kitten components.
 
-<img src="/blog/assets/using-react-navigation-5-with-ui-kitten/overview.gif" height="480"/>
+<img src="/assets/blog/using-react-navigation-5-with-ui-kitten/overview.gif" height="480"/>
 
 ## Overview
 
@@ -94,7 +94,7 @@ export const AppNavigator = (): React.ReactElement => (
 );
 ```
 
-<img src="/blog/assets/using-react-navigation-5-with-ui-kitten/stack-navigator.gif" height="420" />
+<img src="/assets/blog/using-react-navigation-5-with-ui-kitten/stack-navigator.gif" height="420" />
 
 ### Step 2. Top tabs
 
@@ -186,7 +186,7 @@ export const AppNavigator = (props): React.ReactElement => (
 );
 ```
 
-<img src="/blog/assets/using-react-navigation-5-with-ui-kitten/material-top-tab-navigator.gif" height="480" />
+<img src="/assets/blog/using-react-navigation-5-with-ui-kitten/material-top-tab-navigator.gif" height="480" />
 
 ### Step 3. Bottom tabs
 
@@ -300,7 +300,7 @@ export const AppNavigator = (props): React.ReactElement => (
 );
 ```
 
-<img src="/blog/assets/using-react-navigation-5-with-ui-kitten/bottom-tab-navigator.gif" height="480" />
+<img src="/assets/blog/using-react-navigation-5-with-ui-kitten/bottom-tab-navigator.gif" height="480" />
 
 ### Step 4. Drawer menu
 
@@ -434,7 +434,7 @@ export const TodoTabBar = (props): SafeAreaLayoutElement => {
 };
 ```
 
-<img src="/blog/assets/using-react-navigation-5-with-ui-kitten/drawer-navigator.gif" height="420" />
+<img src="/assets/blog/using-react-navigation-5-with-ui-kitten/drawer-navigator.gif" height="420" />
 
 ### TypeScript
 
@@ -471,7 +471,7 @@ export interface ResetPasswordScreenProps {
 
 Now you can modify props of Auth screens props by adding types to make your autocomplete and IntelliSense work. For more complex examples, consider reading [type-checking](https://reactnavigation.org/docs/en/typescript.html) doc or reviewing [complete demo application sources](https://github.com/artyorsh/react-navigation-ex-demo/tree/complete-exmaples).
 
-<img src="/blog/assets/using-react-navigation-5-with-ui-kitten/typescript.gif" />
+<img src="/assets/blog/using-react-navigation-5-with-ui-kitten/typescript.gif" />
 
 ### Useful links
 

@@ -27,7 +27,7 @@ In this guide, we would like to show you how to integrate React Navigation with 
 
 In the following gif, you can see what is the final version of the app gonna looks like:
 
-<img src="/blog/assets/using-react-navigation-5-with-paper/final-app.gif" height="480"/>
+<img src="/assets/blog/using-react-navigation-5-with-paper/final-app.gif" height="480"/>
 
 ## Overview of the App
 
@@ -142,7 +142,7 @@ export const RootNavigator = () => {
 
 That's what we see on a screen:
 
-<img src="/blog/assets/using-react-navigation-5-with-paper/simple-drawer.gif" height="480"/>
+<img src="/assets/blog/using-react-navigation-5-with-paper/simple-drawer.gif" height="480"/>
 
 We can open a drawer with a swipe gesture, it looks very smooth. However, the UI doesn't look very impressive so let's add more content to the drawer to make it look just like in the final version.
 
@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
 
 The final version of a drawer looks like this:
 
-<img src="/blog/assets/using-react-navigation-5-with-paper/final-drawer.gif" height="480"/>
+<img src="/assets/blog/using-react-navigation-5-with-paper/final-drawer.gif" height="480"/>
 
 ## Stack Navigator + Paper's Appbar
 
@@ -460,7 +460,7 @@ We have covered only the basics of navigating between screens. If you want to le
 
 Now, let's see what does the app looks like with Stack Navigator and Paper's Appbar.
 
-<img src="/blog/assets/using-react-navigation-5-with-paper/stack.gif" height="480"/>
+<img src="/assets/blog/using-react-navigation-5-with-paper/stack.gif" height="480"/>
 
 We still miss the last piece of our navigation flow - **Tab Navigator**. Let's move to the next section where we will take care of it.
 
@@ -530,7 +530,7 @@ export const BottomTabs = () => {
 When we check the screen of the phone now, we will see a nice looking, material bottom navigation. What's more, Stack Navigator integrates nicely with Tab.Navigator and we can still navigate to the tweet `Details` screen.
 
 <br />
-<img src="/blog/assets/using-react-navigation-5-with-paper/bottom-navigation.gif" height="480"/>
+<img src="/assets/blog/using-react-navigation-5-with-paper/bottom-navigation.gif" height="480"/>
 
 ## FAB and Portal
 
@@ -752,7 +752,7 @@ export const BottomTabs = props => {
 };
 ```
 
-<img src="/blog/assets/using-react-navigation-5-with-paper/fab.gif" height="480"/>
+<img src="/assets/blog/using-react-navigation-5-with-paper/fab.gif" height="480"/>
 
 As you can see on the gif, the FAB button works in the same way as in a Twitter app.
 What's more, it even animates icon change properly even though we haven't implemented it. That's the behavior we get from React Native Paper's FAB out of the box.
@@ -930,7 +930,7 @@ Firstly, we get a current theme using `useTheme` hook from Paper. This means we 
 You should be able to toggle a switch now and both `Provider` from Paper and `NativeNavigationContainer` from React Navigation will automatically apply correct colors to the components.
 
 <br />
-<img src="/blog/assets/using-react-navigation-5-with-paper/theming.gif" height="480"/>
+<img src="/assets/blog/using-react-navigation-5-with-paper/theming.gif" height="480"/>
 
 ## Summary
 
