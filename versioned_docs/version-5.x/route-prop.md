@@ -12,7 +12,7 @@ Each `screen` component in your app is provided with the `route` prop automatica
   - `params` - set of params which is defined while navigating e.g. `navigate('Twitter', { user: 'Dan Abramov' })`.
 
 ```js
-function ProfileScreen({ navigation: { route } }) {
+function ProfileScreen({ route }) {
   return (
     <View>
       <Text>This is the profile screen of the app</Text>
