@@ -114,7 +114,7 @@ export default function App() {
 }
 ```
 
-## I get the warning "We found non-serializable values in the navigation state"
+## I get the warning "Non-serializable values were found in the navigation state"
 
 This can happen if you are passing non-serializable values such as class instances, functions etc. in params. React Navigation warns you in this case because this can break other functionality such [state persistence](state-persistence.md), [deep linking](deep-linking.md) etc.
 
