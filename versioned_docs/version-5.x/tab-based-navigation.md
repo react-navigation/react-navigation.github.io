@@ -271,4 +271,4 @@ For example, React Navigation's tab navigator takes care of handling the Android
 
 ## A tab navigator contains a stack and you want to hide the tab bar on specific screens
 
-[See the documentation here](screen-options-resolution.html#a-tab-navigator-contains-a-stack-and-you-want-to-hide-the-tab-bar-on-specific-screens)
+[See the documentation here](screen-options-resolution.md#setting-parent-screen-options-based-on-child-navigators-state)
