@@ -1,4 +1,4 @@
 [build]
-  base    = "website"
-  publish = "website/build/react-navigation.github.io"
+  base    = "/"
+  publish = "build"
   command = "yarn install && yarn build"

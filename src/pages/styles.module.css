@@ -1,0 +1,37 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.sponsoredBanner {
+  position: relative;;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.sponsoredBanner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-repeat: repeat;
+  background-image: url(/img/expo_spiro.png);
+  background-position-x: center;
+  background-color: #fff;;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .sponsoredBanner::before {
+  filter: invert(100%);
+}
+
+.heroButton {
+  color: #fff !important;
+}
+
+.heroButton:hover {
+  color: #6b52ae !important;
+}

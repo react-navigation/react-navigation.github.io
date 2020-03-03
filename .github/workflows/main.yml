@@ -18,11 +18,6 @@ jobs:
       with:
         node-version: 10
 
-    - name: Use crowdin
-      run: |
-        wget -c https://artifacts.crowdin.com/repo/deb/crowdin.deb -O crowdin.deb
-        sudo dpkg -i crowdin.deb
-
     - name: Get yarn cache
       id: yarn-cache
       run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -36,15 +31,20 @@ jobs:
 
     - name: Install dependencies
       run: |
-        yarn --cwd website --frozen-lockfile
+        yarn --frozen-lockfile
 
-    - name: Sync with crowdin
-      env:
-        CROWDIN_DOCUSAURUS_PROJECT_ID: react-navigation
-        CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.CROWDIN_DOCUSAURUS_API_KEY }}
-      run: |
-        yarn --cwd website crowdin-upload
-        yarn --cwd website crowdin-download
+    # - name: Use crowdin
+    #   run: |
+    #     wget -c https://artifacts.crowdin.com/repo/deb/crowdin.deb -O crowdin.deb
+    #     sudo dpkg -i crowdin.deb
+
+    # - name: Sync with crowdin
+    #   env:
+    #     CROWDIN_DOCUSAURUS_PROJECT_ID: react-navigation
+    #     CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.CROWDIN_DOCUSAURUS_API_KEY }}
+    #   run: |
+    #     yarn crowdin-upload
+    #     yarn crowdin-download
 
     - name: Publish to Github pages
       env:
@@ -52,9 +52,8 @@ jobs:
         GITHUB_EMAIL: ${{ secrets.DEPLOY_GITHUB_EMAIL }}
         GIT_USER: ${{ secrets.DEPLOY_GITHUB_USER }}
         CURRENT_BRANCH: $GITHUB_REF
-        STABLE_RELEASE: true
       run: |
         git config --global user.email "$GITHUB_EMAIL"
         git config --global user.name "$GITHUB_ACTOR"
         echo "machine github.com login $GIT_USER password $GITHUB_TOKEN" > ~/.netrc
-        yarn --cwd website publish-gh-pages
+        yarn deploy

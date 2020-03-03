@@ -1,0 +1,96 @@
+{
+  "version-3.x-docs": {
+    "Fundamentals": [
+      "version-3.x/getting-started",
+      "version-3.x/hello-react-navigation",
+      "version-3.x/supported-react-native-versions",
+      "version-3.x/navigating",
+      "version-3.x/navigation-lifecycle",
+      "version-3.x/params",
+      "version-3.x/headers",
+      "version-3.x/header-buttons",
+      "version-3.x/app-containers",
+      "version-3.x/modal",
+      "version-3.x/next-steps",
+      "version-3.x/glossary-of-terms",
+      "version-3.x/common-mistakes",
+      "version-3.x/react-native-screens",
+      "version-3.x/limitations"
+    ],
+    "Guides": [
+      "version-3.x/tab-based-navigation",
+      "version-3.x/drawer-based-navigation",
+      "version-3.x/auth-flow",
+      "version-3.x/handling-iphonex",
+      "version-3.x/status-bar",
+      "version-3.x/navigation-options-resolution",
+      "version-3.x/custom-android-back-button-handling",
+      "version-3.x/connecting-navigation-prop",
+      "version-3.x/navigating-without-navigation-prop",
+      "version-3.x/navigation-key",
+      "version-3.x/deep-linking",
+      "version-3.x/screen-tracking",
+      "version-3.x/themes",
+      "version-3.x/state-persistence",
+      "version-3.x/redux-integration",
+      "version-3.x/MST-integration",
+      "version-3.x/localization",
+      "version-3.x/web-support",
+      "version-3.x/function-after-focusing-screen"
+    ],
+    "API Reference": [
+      "version-3.x/navigation-prop",
+      "version-3.x/navigation-context",
+      "version-3.x/navigation-events",
+      {
+        "type": "category",
+        "label": "Navigators",
+        "items": [
+          "version-3.x/stack-navigator",
+          "version-3.x/switch-navigator",
+          "version-3.x/animated-switch-navigator",
+          "version-3.x/drawer-navigator",
+          "version-3.x/bottom-tab-navigator",
+          "version-3.x/material-bottom-tab-navigator",
+          "version-3.x/material-top-tab-navigator"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Actions",
+        "items": [
+          "version-3.x/navigation-actions",
+          "version-3.x/stack-actions",
+          "version-3.x/switch-actions",
+          "version-3.x/drawer-actions"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Helpers",
+        "items": [
+          "version-3.x/with-navigation",
+          "version-3.x/with-navigation-focus",
+          "version-3.x/scrollables"
+        ]
+      }
+    ],
+    "Build your own Navigator": [
+      "version-3.x/custom-navigator-overview",
+      "version-3.x/routers",
+      "version-3.x/custom-navigators",
+      "version-3.x/custom-routers",
+      "version-3.x/navigation-views",
+      "version-3.x/transitioner"
+    ],
+    "Related Resources": [
+      "version-3.x/community-libraries-and-navigators",
+      "version-3.x/more-resources"
+    ],
+    "Meta": [
+      "version-3.x/pitch",
+      "version-3.x/alternatives",
+      "version-3.x/contributing"
+    ]
+  }
+}
