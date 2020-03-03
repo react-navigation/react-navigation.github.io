@@ -81,7 +81,7 @@ state.userToken == null ? (
 );
 ```
 
-This pattern has been in use by other routing libraries such as React Router for a long time, and is commonly knows as "Protected routes". Here, our screens which need the user to be logged in are "protected" and cannot be navigated to by other means if the user is not logged in.
+This pattern has been in use by other routing libraries such as React Router for a long time, and is commonly known as "Protected routes". Here, our screens which need the user to be logged in are "protected" and cannot be navigated to by other means if the user is not logged in.
 
 ## Implement the logic for restoring the token
 
