@@ -24,7 +24,7 @@ function SettingsScreen({ route, navigation }) {
   );
 }
 
-function ProfileScreen({ navigation }) {
+function ProfileScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
@@ -77,9 +77,7 @@ export default function App() {
 
   return (
     <AppearanceProvider>
-      <NavigationContainer
-        theme={scheme === 'dark' ? DarkTheme : DefaultTheme}
-      >
+      <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Drawer.Navigator initialRouteName="Root">
           <Drawer.Screen name="Home" component={HomeScreen} />
           <Drawer.Screen name="Root" component={Root} />

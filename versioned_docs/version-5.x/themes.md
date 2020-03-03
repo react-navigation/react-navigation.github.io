@@ -87,6 +87,8 @@ First, you need to install `react-native-appearance`. [Follow the instructions i
 
 Once you've installed it, set your root component up as follows:
 
+<samp id="system-themes" />
+
 ```js
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import {
