@@ -59,15 +59,15 @@ module.exports = {
           items: [
             {
               label: 'Getting Started',
-              to: 'getting-started',
+              to: 'docs/getting-started',
             },
             {
               label: 'Building your own Navigator',
-              to: 'custom-navigator-overview',
+              to: 'docs/custom-navigators',
             },
             {
               label: 'Contributing',
-              to: 'contributing',
+              to: 'docs/contributing',
             },
           ],
         },
