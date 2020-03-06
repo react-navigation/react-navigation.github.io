@@ -23,6 +23,13 @@ const Search = props => {
     themeConfig: {algolia},
   } = siteConfig;
 
+  /**
+   * NOTE: @eriveltonelias
+   * this isn't the better way to do that 
+   * but currently docusarus v2 isn't working the filter
+   * by version, so this will allow us to get the current version
+   * and use to filter the search
+   */
   function getVersion(){
     const url = window.location.href;
     const index = VERSIONS.findIndex(e => url.includes(e));
