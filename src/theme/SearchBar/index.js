@@ -13,6 +13,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import './styles.css';
 
+const VERSIONS  = ["1.x", "2.x", "3.x", "4.x"];
+
 const Search = props => {
   const [algoliaLoaded, setAlgoliaLoaded] = useState(false);
   const searchBarRef = useRef(null);
@@ -21,7 +23,17 @@ const Search = props => {
     themeConfig: {algolia},
   } = siteConfig;
 
+  function getVersion(){
+    const url = window.location.href;
+    const index = VERSIONS.findIndex(e => url.includes(e));
+    return index >= 0 ? VERSIONS[index] : '5.x';
+  }
+
   function initAlgolia(focus) {
+    const version = getVersion();
+    algolia.algoliaOptions.facetFilters = [
+      `version:${version}`
+    ];
     window.docsearch({
       appId: algolia.appId,
       apiKey: algolia.apiKey,
