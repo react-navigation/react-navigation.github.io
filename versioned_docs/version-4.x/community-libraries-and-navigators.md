@@ -54,6 +54,34 @@ Helps you to render buttons in the navigation bar and handle the styling so you 
 
 Provides simple HOCs that map react-navigation props to your screen components directly - ie. instead of `const user = this.props.navigation.getParam(activeUser, null)`, you'd write `const user = this.props.activeUser`.
 
+## react-native-header-scroll-view
+
+This component implements [iOS large header with grow/shrink on scroll](https://react-navigation.canny.io/feature-requests/p/ios-11-large-header-and-growshrink-on-scroll), made by [@jonsamp](https://github.com/jonsamp). Note that it doesn't handle header animation between screens, it only handles animating the header title on scroll.
+
+To use this component, we'd want to disable the built-in header. There are 2 ways to disable the header in React Navigation:
+
+1. Disable the default header for one screen:
+
+```js
+static navigationOptions = {
+  headerShown: false
+};
+```
+
+2. Disable header globally in `createStackNavigator`
+
+```js
+const Home = createStackNavigator(
+  {
+    ExampleScreen1,
+    ExampleScreen1,
+  },
+  {
+    headerMode: 'none',
+  }
+);
+```
+
 #### Links
 
 [github.com/vonovak/react-navigation-props-mapper](https://github.com/vonovak/react-navigation-props-mapper)

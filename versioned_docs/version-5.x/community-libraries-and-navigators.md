@@ -68,33 +68,6 @@ Easily handle Android back button behavior with React-Navigation with a componen
 
 [github.com/vonovak/react-navigation-backhandler](https://github.com/vonovak/react-navigation-backhandler)
 
-## react-native-header-scroll-view
-
-This component implements [iOS large header with grow/shrink on scroll](https://react-navigation.canny.io/feature-requests/p/ios-11-large-header-and-growshrink-on-scroll), made by [@jonsamp](https://github.com/jonsamp). Note that it doesn't handle header animation between screens, it only handles animating the header title on scroll.
-
-To use this component, we'd want to disable the built-in header. There are 2 ways to disable the header in React Navigation:
-
-1. Disable the default header for one screen:
-
-```js
-static navigationOptions = {
-  headerShown: false
-};
-```
-
-2. Disable header globally in `createStackNavigator`
-
-```js
-const Home = createStackNavigator(
-  {
-    ExampleScreen1,
-    ExampleScreen1,
-  },
-  {
-    headerMode: 'none',
-  }
-);
-```
 
 #### Links
 
