@@ -25,6 +25,7 @@ module.exports = {
     algolia: {
       apiKey: '2378e3838ac984c220a994bfc0e0420f',
       indexName: 'react-navigation',
+      algoliaOptions: {}
     },
     navbar: {
       title: 'React Navigation',
