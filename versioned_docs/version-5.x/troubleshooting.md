@@ -132,6 +132,6 @@ Example:
 import { YellowBox } from 'react-native';
 
 YellowBox.ignoreWarnings([
-  'We found non-serializable values in the navigation state',
+  'Non-serializable values were found in the navigation state',
 ]);
 ```
