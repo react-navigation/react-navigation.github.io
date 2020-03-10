@@ -35,11 +35,18 @@ function Settings({ navigation }) {
   );
 }
 
+const Stack = createStackNavigator();
+
 export default function App() {
   const routeNameRef = React.useRef();
   const navigationRef = React.useRef();
 
-  const Stack = createStackNavigator();
+  React.useEffect(() => {
+    const state = navigationRef.current.getRootState();
+
+    // Save the initial route name
+    routeNameRef.current = getActiveRouteName(state);
+  }, []);
 
   return (
     <NavigationContainer
