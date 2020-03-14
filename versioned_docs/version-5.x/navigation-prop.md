@@ -10,10 +10,11 @@ Each `screen` component in your app is provided with the `navigation` prop autom
   - `navigate` - go to another screen, figures out the action it needs to take to do it
   - `reset` - wipe the navigator state and replace it with the result of several actions
   - `goBack` - close active screen and move back in the stack
-  - `addListener` - subscribe to updates to navigation lifecycle
   - `setParams` - make changes to route's params
   - `dispatch` - send an action to router
-  - `dangerouslyGetParent` - function that returns the parent navigator, if any
+  - `setOptions` - update the screen's options
+  - `isFocused` - check whether the screen is focused
+  - `addListener` - subscribe to updates to events from the navigators
 
 It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do any magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`useNavigation`](use-navigation.md) hook.
 
@@ -48,9 +49,9 @@ You can find more details about navigator dependent functions in the documentati
 
 The vast majority of your interactions with the `navigation` prop will involve `navigate`, `goBack`, and `setParams`.
 
-### `navigate` - Link to other screens
+### `navigate`
 
-Call this to link to another screen in your app. Takes the following arguments:
+The `navigate` method lets us navigate to another screen in your app. It takes the following arguments:
 
 `navigation.navigate(name, params)`
 
@@ -75,9 +76,11 @@ function HomeScreen({ navigation: { navigate } }) {
 }
 ```
 
-### `goBack` - Close the active screen and move back
+### `goBack`
 
-Optionally provide a key, which specifies the route to go back from. By default, `goBack` will close the route that it is called from:
+The `goBack` method lets us go back to the previous screen in the navigator.
+
+By default, `goBack` will go back from the screen that it is called from:
 
 <samp id="navigate" />
 
@@ -91,7 +94,7 @@ function ProfileScreen({ navigation: { goBack } }) {
 }
 ```
 
-#### Going back from a specific screen with `goBack`
+#### Going back from a specific screen
 
 Consider the following navigation stack history:
 
@@ -113,7 +116,7 @@ Alternatively, as _screen A_ is the top of the stack, you can use `navigation.po
 
 ### `reset`
 
-Replace the navigator state to a new state:
+The `reset` method lets us replace the navigator state with a new state:
 
 <samp id="navigate-replace-reset" />
 
@@ -126,9 +129,9 @@ navigation.reset({
 
 > Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
 
-### `setParams` - Make changes to route params
+### `setParams`
 
-Firing the `setParams` action allows a screen to change the params in the route, which is useful for updating the header buttons and title. `setParams` works like React's `setState` - it merges the provided params object with the current params.
+The `setParams` method lets us update the params (`route.params`) of the current screen. `setParams` works like React's `setState` - it merges the provided params object with the current params.
 
 <samp id="navigate-set-params" />
 
@@ -156,7 +159,7 @@ function ProfileScreen({ navigation: { setParams } }) {
 }
 ```
 
-### `setOptions` - Update screen options from the component
+### `setOptions`
 
 The `setOptions` method lets us set screen options from within the component. This is useful if we need to use the component's props, state or context to configure our screen.
 
@@ -209,9 +212,9 @@ function Profile({ navigation }) {
 
 See [Navigation events](navigation-events.md) for more details on the available events and the API usage.
 
-### `isFocused` - Query the focused state of the screen
+### `isFocused`
 
-Returns `true` if the screen is focused and `false` otherwise.
+This method lets us check whether the screen is currently focused. Returns `true` if the screen is focused and `false` otherwise.
 
 ```js
 const isFocused = navigation.isFocused();
@@ -223,11 +226,11 @@ This method doesn't re-render the screen when the value changes and mainly usefu
 
 The `dispatch` function is much less commonly used, but a good escape hatch if you can't do what you need with the available methods such as `navigate`, `goBack` etc. We recommend to avoid using the `dispatch` method often unless absolutely necessary.
 
-### `dispatch` - Send an action to the router
+### `dispatch`
 
-Use dispatch to send any navigation action to the router. The other navigation functions use dispatch behind the scenes.
+The `dispatch` method lets us send a navigation action object to the router. All of the navigation functions like `navigate` use dispatch behind the scenes.
 
-Note that if you want to dispatch react-navigation actions you should use the action creators provided in this library.
+Note that if you want to dispatch actions you should use the action creators provided in this library instead of writing the action object directly.
 
 See [Navigation Actions Docs](navigation-actions.md) for a full list of available actions.
 
@@ -259,13 +262,31 @@ navigation.dispatch({
 });
 ```
 
-### `dangerouslyGetParent` - get parent navigator's navigation prop
+It's also possible to pass a function to `dispatch`. The function will receive the current state and needs to return a navigation action object to use:
+
+```js
+import shortid from 'shortid';
+import { CommonActions } from '@react-navigation/native';
+
+navigation.dispatch(state => {
+  // Add the home route to the start of the stack
+  const routes = [{ name: 'Home', key: `Home-${shortid()}` }, ...state.routes];
+
+  return CommonActions.reset({
+    ...state,
+    routes,
+    index: routes.length - 1,
+  });
+});
+```
+
+### `dangerouslyGetParent`
 
 This method returns the navigation prop from the parent navigator that the current navigator is nested in. For example, if you have a stack navigator and a tab navigator nested inside the stack, then you can use `dangerouslyGetParent` inside a screen of the tab navigator to get the navigation prop passed from the stack navigator.
 
 This method will return `undefined` if there is no parent navigator. Be sure to always check for `undefined` when using this method.
 
-### `dangerouslyGetState` - get state of navigator
+### `dangerouslyGetState`
 
 > Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
 
