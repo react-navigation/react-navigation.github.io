@@ -205,6 +205,7 @@ function MyTabBar({ state, descriptors, navigation, position }) {
           const event = navigation.emit({
             type: 'tabPress',
             target: route.key,
+            canPreventDefault: true,
           });
 
           if (!isFocused && !event.defaultPrevented) {
