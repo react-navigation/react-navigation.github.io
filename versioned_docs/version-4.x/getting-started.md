@@ -70,13 +70,6 @@ Next, we need to link these libraries. The steps depends on your React Native ve
   cd ios; pod install; cd ..
   ```
 
-  To finalize installation of `react-native-screens` for Android, add the following two lines to `dependencies` section in `android/app/build.gradle`:
-
-  ```gradle
-  implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
-  implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
-  ```
-
 - **React Native 0.59 and lower**
 
   If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
