@@ -73,6 +73,26 @@ Type of the drawer. It determines how the drawer looks and animates.
 - `front`: Traditional drawer which covers the screen with a overlay behind it.
 - `back`: The drawer is revealed behind the screen on swipe.
 - `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.
+- `permanent`: A permanent drawer is shown as a sidebar.
+
+You can conditionally specify the `drawerType` to show a permanent drawer on bigger screens and a traditional drawer drawer on small screens:
+
+```js
+import { useWindowDimensions } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  const dimensions = useWindowDimensions();
+
+  return (
+    <Drawer.Navigator drawerType={dimensions.width > 900 ? 'permanent' : 'front'}>
+      {/* Screens */}
+    </Drawer.Navigator>
+  );
+}
+```
 
 #### `edgeWidth`
 
