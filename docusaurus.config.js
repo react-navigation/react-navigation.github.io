@@ -112,6 +112,23 @@ module.exports = {
             },
           ],
         },
+        {
+          title: 'Built with',
+          items: [
+            {
+              label: 'Docusaurus',
+              to: 'https://docusaurus.io/',
+            },
+            {
+              label: 'GitHub Pages',
+              href: 'https://pages.github.com/',
+            },
+            {
+              label: 'Netlify',
+              href: 'https://www.netlify.com/',
+            },
+          ],
+        },
       ],
     },
   },
