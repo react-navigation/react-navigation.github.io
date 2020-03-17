@@ -43,23 +43,24 @@ In some cases you may want to perform navigation actions from the root of your a
 ```js
 const AppContainer = createAppContainer(AppNavigator);
 
-class App extends React.Component {
-  someEvent() {
+const App = () => {
+  const navigator = React.useRef(null)
+
+  function someEvent() {
     // call navigate for AppNavigator here:
-    this.navigator &&
-      this.navigator.dispatch(
+    navigator.current &&
+      navigator.current.dispatch(
         NavigationActions.navigate({ routeName: someRouteName })
       );
   }
-  render() {
-    return (
-      <AppContainer
-        ref={nav => {
-          this.navigator = nav;
-        }}
-      />
-    );
-  }
+  
+  return (
+    <AppContainer
+      ref={nav => {
+        navigator.current = nav;
+      }}
+    />
+  );
 }
 ```
 

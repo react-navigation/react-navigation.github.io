@@ -47,23 +47,24 @@ In case you want to dispatch actions on an app container, you can use a React [`
 ```js
 const AppContainer = createAppContainer(AppNavigator);
 
-class App extends React.Component {
-  someEvent() {
+const App = () => {
+  const navigator = React.useRef(null)
+
+  function someEvent() {
     // call navigate for AppNavigator here:
-    this.navigator &&
-      this.navigator.dispatch(
+    navigator.current &&
+      navigator.current.dispatch(
         NavigationActions.navigate({ routeName: someRouteName })
       );
   }
-  render() {
-    return (
-      <AppContainer
-        ref={nav => {
-          this.navigator = nav;
-        }}
-      />
-    );
-  }
+  
+  return (
+    <AppContainer
+      ref={nav => {
+        navigator.current = nav;
+      }}
+    />
+  );
 }
 ```
 
