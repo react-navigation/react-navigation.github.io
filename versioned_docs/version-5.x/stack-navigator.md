@@ -305,6 +305,10 @@ Use this prop to have visible shadows during transitions. Defaults to `true`.
 
 Use this prop to have a semi-transparent dark overlay visible under the card during transitions. Defaults to `true` on Android and `false` on iOS.
 
+#### `cardOverlay`
+
+Function which returns a React Element to display as the overlay for the card. Make sure to set `cardOverlayEnabled` to `true` when using this.
+
 #### `cardStyle`
 
 Style object for the card in stack. You can provide a custom background color to use instead of the default background here.
