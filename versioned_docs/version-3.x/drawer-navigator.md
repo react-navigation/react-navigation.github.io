@@ -23,7 +23,7 @@ The route configs object is a mapping from route name to a route config, which t
 - `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
 - `defaultNavigationOptions` - Default navigation options to use for screens
 
-The DrawerNavigator uses [`DrawerLayout`](https://kmagiera.github.io/react-native-gesture-handler/docs/component-drawer-layout.html) under the hood, therefore it inherits the following props:
+The DrawerNavigator uses [`DrawerLayout`](https://software-mansion.github.io/react-native-gesture-handler/docs/component-drawer-layout.html) under the hood, therefore it inherits the following props:
 
 - `drawerType` - One of front | back | slide
 - `edgeWidth` - Allows for defining how far from the edge of the content view the swipe gesture should activate

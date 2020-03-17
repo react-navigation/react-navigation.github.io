@@ -20,4 +20,4 @@ useScreens();
 
 ## Setup in normal react-native applications
 
-You will need to follow the installation instruction from [react-native-screens](https://github.com/kmagiera/react-native-screens) first. After that, you can import the library like mentioned above and enjoy the optimization.
+You will need to follow the installation instruction from [react-native-screens](https://github.com/software-mansion/react-native-screens) first. After that, you can import the library like mentioned above and enjoy the optimization.

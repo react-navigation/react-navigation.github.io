@@ -40,7 +40,7 @@ This project aims to expose native navigation container components to React Nati
 
 #### Links
 
-[github.com/kmagiera/react-native-screens](https://github.com/kmagiera/react-native-screens)
+[github.com/software-mansion/react-native-screens](https://github.com/software-mansion/react-native-screens)
 
 ## react-navigation-header-buttons
 
@@ -67,7 +67,6 @@ Easily handle Android back button behavior with React-Navigation with a componen
 #### Links
 
 [github.com/vonovak/react-navigation-backhandler](https://github.com/vonovak/react-navigation-backhandler)
-
 
 #### Links
 

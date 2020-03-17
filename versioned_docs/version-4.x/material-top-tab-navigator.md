@@ -72,7 +72,7 @@ Optional object containing the initial `height` and `width`, can be passed to pr
 
 ### `pagerComponent`
 
-React component to use as the pager. The pager handles swipe gestures and page switching. By default we use [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) for handling gestures. You can switch out the pager for a different implementation to customize the experience.
+React component to use as the pager. The pager handles swipe gestures and page switching. By default we use [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) for handling gestures. You can switch out the pager for a different implementation to customize the experience.
 
 For example, to use pager backed by the native `ViewPager`, you can use [`react-native-tab-view-viewpager-adapter`](https://github.com/software-mansion/react-native-tab-view-viewpager-adapter):
 

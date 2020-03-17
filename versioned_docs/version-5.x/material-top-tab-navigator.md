@@ -150,7 +150,7 @@ Style to apply to the tab view container.
 
 #### `gestureHandlerProps`
 
-An object with props to be passed to underlying [`PanGestureHandler`](https://kmagiera.github.io/react-native-gesture-handler/docs/handler-pan.html#properties). For example:
+An object with props to be passed to underlying [`PanGestureHandler`](https://software-mansion.github.io/react-native-gesture-handler/docs/handler-pan.html#properties). For example:
 
 ```js
 gestureHandlerProps={{
@@ -161,7 +161,7 @@ gestureHandlerProps={{
 
 #### `pager`
 
-Function that returns a React element to use as the pager. The pager handles swipe gestures and page switching. By default we use [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) for handling gestures. You can switch out the pager for a different implementation to customize the experience.
+Function that returns a React element to use as the pager. The pager handles swipe gestures and page switching. By default we use [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) for handling gestures. You can switch out the pager for a different implementation to customize the experience.
 
 For example, to use pager backed by the native `ViewPager`, you can use [`react-native-tab-view-viewpager-adapter`](https://github.com/software-mansion/react-native-tab-view-viewpager-adapter):
 
