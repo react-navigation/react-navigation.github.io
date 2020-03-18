@@ -6,7 +6,7 @@ sidebar_label: Compatibility layer
 
 > Note: Before following this guide, make sure that you've followed the [Getting Started](getting-started.md) guide to setup React Navigation 5 in your app.
 
-React Navigation 5 has a completely new API, so our old code using React Navigation 4 will no longer work with this version. If you are not familiar with the new API, you can read about the differences in the [upgrade guide](upgrading-from-4.x.html). We understand that this can be a lot of work, so we have made a compatibility layer to make this easier.
+React Navigation 5 has a completely new API, so our old code using React Navigation 4 will no longer work with this version. If you are not familiar with the new API, you can read about the differences in the [upgrade guide](upgrading-from-4.x). We understand that this can be a lot of work, so we have made a compatibility layer to make this easier.
 
 To use the compatibility layer, we need to install [`@react-navigation/compat`](https://github.com/react-navigation/react-navigation/tree/master/packages/compat):
 
