@@ -8,7 +8,7 @@ As a potential user of the library, it's important to know what you can and cann
 
 ## Performance limitations
 
-React Navigation implements animations and gestures using [Reanimated](https://software-mansion.github.io/react-native-reanimated/) and [Gesture Handler](https://kmagiera.github.io/react-native-gesture-handler/) which run in the native thread. This makes sure that the animations and gestures are smooth even if the JavaScript thread is blocked. However, you might still experience frame drops when rendering expensive components which render or update many complex views since rendering also happens on the same thread that the animations run in. We're also limited by the performance of Reanimated and Gesture Handler libraries.
+React Navigation implements animations and gestures using [Reanimated](https://software-mansion.github.io/react-native-reanimated/) and [Gesture Handler](https://software-mansion.github.io/react-native-gesture-handler/) which run in the native thread. This makes sure that the animations and gestures are smooth even if the JavaScript thread is blocked. However, you might still experience frame drops when rendering expensive components which render or update many complex views since rendering also happens on the same thread that the animations run in. We're also limited by the performance of Reanimated and Gesture Handler libraries.
 
 ## Right-to-left (RTL) layout support
 

@@ -38,7 +38,7 @@ This project aims to expose native navigation container components to React Nati
 
 #### Links
 
-[github.com/kmagiera/react-native-screens](https://github.com/kmagiera/react-native-screens)
+[github.com/software-mansion/react-native-screens](https://github.com/software-mansion/react-native-screens)
 
 ## react-navigation-header-buttons
 

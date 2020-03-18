@@ -70,7 +70,7 @@ You don't need to upgrade the navigators to their latest version when upgrading 
 
 ### Installing dependencies
 
-The latest drawer and tabs depend on [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated). If you already have these libraries installed and at the latest version, you are done here! Otherwise, read on for installation instructions for these dependencies.
+The latest drawer and tabs depend on [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) and [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated). If you already have these libraries installed and at the latest version, you are done here! Otherwise, read on for installation instructions for these dependencies.
 
 #### Installing dependencies into an Expo managed project
 
