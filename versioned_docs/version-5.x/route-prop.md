@@ -16,7 +16,7 @@ function ProfileScreen({ route }) {
   return (
     <View>
       <Text>This is the profile screen of the app</Text>
-      <Text>{route.params.name}</Text>
+      <Text>{route.name}</Text>
     </View>
   );
 }
