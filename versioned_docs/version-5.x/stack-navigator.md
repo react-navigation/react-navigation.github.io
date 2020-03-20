@@ -768,11 +768,15 @@ import { TransitionPresets } from '@react-navigation/stack';
 
 <Stack.Navigator
   initialRouteName="Home"
-  screenOptions={{
+  screenOptions={({ route, navigation }) => ({
     gestureEnabled: true,
     cardOverlayEnabled: true,
+    headerStatusBarHeight:
+      navigation.dangerouslyGetState().routes.indexOf(route) > 0
+        ? 0
+        : undefined,
     ...TransitionPresets.ModalPresentationIOS,
-  }}
+  })}
   mode="modal"
   headerMode="none"
 >
