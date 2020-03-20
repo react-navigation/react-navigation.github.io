@@ -75,7 +75,7 @@ You can also pass some initial params to a screen. If you didn't specify any par
 />
 ```
 
-Params aren't only useful for passing some data to a new screen, but they can also be useful to pass data to a previous screen too. For example, let's say you have a screen with an create post button, and the create post button opens a new screen to create a post. After creating the post, you want to pass the data for the post back to previous screen.
+Params aren't only useful for passing some data to a new screen, but they can also be useful to pass data to a previous screen too. For example, let's say you have a screen with a create post button, and the create post button opens a new screen to create a post. After creating the post, you want to pass the data for the post back to previous screen.
 
 To achieve this, you can use the `navigate` method, which acts like `goBack` if the screen already exists. You can pass the `params` with `navigate` to pass the data back:
 
