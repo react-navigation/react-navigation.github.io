@@ -95,3 +95,23 @@ Example:
   }}
 />
 ```
+
+You can also pass a callback which returns the object with listeners. It'll receive `navigation` and `route` as the arguments.
+
+Example:
+
+```js
+<Tabs.Screen
+  name="Chat"
+  component={Chat}
+  listeners={({ navigation, route }) => ({
+    tabPress: e => {
+      // Prevent default action
+      e.preventDefault();
+
+      // Do something with the `navigation` object
+      navigation.navigate('AnotherPlace');
+    },
+  })}
+/>
+```
