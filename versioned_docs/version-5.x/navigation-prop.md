@@ -8,7 +8,7 @@ Each `screen` component in your app is provided with the `navigation` prop autom
 
 - `navigation`
   - `navigate` - go to another screen, figures out the action it needs to take to do it
-  - `reset` - wipe the navigator state and replace it with the result of several actions
+  - `reset` - wipe the navigator state and replace it with a new routes
   - `goBack` - close active screen and move back in the stack
   - `setParams` - make changes to route's params
   - `dispatch` - send an action to router
