@@ -74,6 +74,23 @@ function Home() {
           </div>
         </div>
       </header>
+
+      <section className="margin-vert--xl text--center">
+        <div className="container">
+          <div className="row">
+            <div  className="col col--12">
+              <h4>
+              Coming from v4? Check out our{' '}
+              <Link to={useBaseUrl('/docs/upgrading-from-4.x')}>
+                v4 to v5 migration guide
+              </Link>
+              .
+              </h4>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       {features && features.length && (
         <section className="margin-vert--xl">
           <div className="container">
