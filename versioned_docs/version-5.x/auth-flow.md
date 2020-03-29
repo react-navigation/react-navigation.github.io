@@ -192,7 +192,7 @@ export default function App({ navigation }) {
   return (
     <AuthContext.Provider value={authContext}>
       <Stack.Navigator>
-        {state.userToken == null ? (
+        {state.userToken === null ? (
           <Stack.Screen name="SignIn" component={SignInScreen} />
         ) : (
           <Stack.Screen name="Home" component={HomeScreen} />
