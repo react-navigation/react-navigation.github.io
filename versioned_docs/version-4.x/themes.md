@@ -97,7 +97,7 @@ function MyButton() {
           <Text style={{ color: theme === 'light' ? '#fff' : '#000' }}>Button!</Text>
         </TouchableOpacity>
       )}
-    <ThemeContext.Consumer>
+    </ThemeContext.Consumer>
   );
 }
 ```
