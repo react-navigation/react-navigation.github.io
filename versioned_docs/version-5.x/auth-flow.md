@@ -35,7 +35,7 @@ if (state.isLoading) {
 
 return (
   <Stack.Navigator>
-    {state.userToken == null ? (
+    {state.userToken === null ? (
       // No token found, user isn't signed in
       <Stack.Screen
         name="SignIn"
@@ -67,7 +67,7 @@ This takes advantage of a new feature in React Navigation: being able to dynamic
 Here, we're conditionally defining one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly for the screens accessible after sign in, you probably have more than one screen. We can use `React.Fragment` to define multiple screens:
 
 ```js
-state.userToken == null ? (
+state.userToken === null ? (
   <>
     <Stack.Screen name="SignIn" component={SignInScreen} />
     <Stack.Screen name="SignUp" component={SignUpScreen} />
