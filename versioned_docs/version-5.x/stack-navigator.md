@@ -548,14 +548,14 @@ Stack Navigator exposes various options to configure the transition animation wh
   />
   ```
 
-- `cardStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the card. It is expected to return at least empty object, possibly containing interpolated styles for container, the card itself, overlay and shadow. Supported properties are:
+- `cardStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the card. This allows you to customize the transitions when navigating from screen to screen. It is expected to return at least empty object, possibly containing interpolated styles for container, the card itself, overlay and shadow. Supported properties are:
 
   - `containerStyle` - Style for the container view wrapping the card.
   - `cardStyle` - Style for the view representing the card.
   - `overlayStyle` - Style for the view representing the semi-transparent overlay below
   - `shadowStyle` - Style for the view representing the card shadow.
 
-  The function receives the following properties in it's argument:
+  The function receives the following properties in its argument:
 
   - `current` - Values for the current screen:
     - `progress` - Animated node representing the progress value of the current screen.
@@ -565,6 +565,8 @@ Stack Navigator exposes various options to configure the transition animation wh
   - `closing` - Animated node representing whether the card is closing. `1` when closing, `0` if not.
   - `layouts` - Layout measurements for various items we use for animation.
     - `screen` - Layout of the whole screen. Contains `height` and `width` properties.
+
+  > **Note that when a screen is not the last, it will use the next screen's transition config.** This is because many transitions involve an animation of the previous screen, and so these two transitions need to be kept together to prevent running two different kinds of transitions on the two screens (for example a slide and a modal). You can check the `next` parameter to find out if you want to animate out the previous screen.
 
   A config which just fades the card looks like this:
 
