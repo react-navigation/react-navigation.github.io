@@ -50,7 +50,7 @@ For example, when you press the back button inside a nested stack navigator, it'
 
 ### Navigation actions are handled by current navigator and bubble up if couldn't be handled
 
-For example, if you're calling `navigation.goBack()` in a nested screen, it'll only go back in the parent navigator if you're already on the first screen of the navigator. Other actions such as `navigate` work similarly, i.e. navigation will happen in the nested navigator and if the nested navigator couldn't handle it, then the parent navigator will try to handle it. In the above example, when calling `navigate('Settings')`, inside `Profile` screen, the nested stack navigator will handle it, but if you call `navigate('Home')`, the parent tab navigator will handle it.
+For example, if you're calling `navigation.goBack()` in a nested screen, it'll only go back in the parent navigator if you're already on the first screen of the navigator. Other actions such as `navigate` work similarly, i.e. navigation will happen in the nested navigator and if the nested navigator couldn't handle it, then the parent navigator will try to handle it. In the above example, when calling `navigate('Messages')`, inside `Feed` screen, the nested tab navigator will handle it, but if you call `navigate('Settings')`, the parent stack navigator will handle it.
 
 ### Navigator specific methods are available in the navigators nested inside
 
