@@ -17,9 +17,40 @@ Most apps require that a user authenticate in some way to have access to data as
 
 This is the behavior that we want from the authentication flow: when users sign in, we want to throw away the state of the authentication flow and unmount all of the screens related to authentication, and when we press the hardware back button we expect to not be able to go back to the authentication flow.
 
-## Conditionally define our screens
+## How it will work
 
-In our navigator, we can conditionally render appropriate screens. For our case, let's say we have 3 screens:
+We can define different screens based on some condition. For example, if the user is signed in, we can define `Home`, `Profile`, `Settings` etc. If the user is not signed in, we can define `SignIn` and `SignUp` screens.
+
+For example:
+
+```js
+isSignedIn ? (
+  <>
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="Profile" component={ProfileScreen} />
+    <Stack.Screen name="Settings" component={SettingsScreen} />
+  </>
+) : (
+  <>
+    <Stack.Screen name="SignIn" component={SignInScreen} />
+    <Stack.Screen name="SignUp" component={SignUpScreen} />
+  </>
+)
+```
+
+When we define screens like this, when `isSignedIn` is `true`, React Navigation will only see the `Home`, `Profile` and `Settings` screens, and when it's `false`, React Navigation will see the `SignIn` and `SignUp` screens. This makes it impossible to navigate to the `Home`, `Profile` and `Settings` screens when the user is not signed in, and to `SignIn` and `SignUp` screens when the user is signed in.
+
+This pattern has been in use by other routing libraries such as React Router for a long time, and is commonly known as "Protected routes". Here, our screens which need the user to be signed in are "protected" and cannot be navigated to by other means if the user is not signed in.
+
+The magic happens when the value of the `isSignedIn` variable changes. Let's say, initially `isSignedIn` is `false`. This means, either `SignIn` or `SignUp` screens are shown. After the user signs in, the value of `isSignedIn` will change to `true`. React Navigation will see that the `SignIn` and `SignUp` screens are no longer defined and so it will remove them. Then it'll show the `Home` screen automatically because that's the first screen defined when `isSignedIn` is `true`.
+
+This takes advantage of a new feature in React Navigation: being able to dynamically define and alter the screen definitions of a navigator based on props or state. The example shows stack navigator, but you can use the same approach with any navigator.
+
+By conditionally defining different screens based on a variable, we can implement auth flow in a simple way that doesn't require additional logic to make sure that the correct screen is shown.
+
+## Define our screens
+
+In our navigator, we can conditionally define appropriate screens. For our case, let's say we have 3 screens:
 
 - `SplashScreen` - This will show a splash or loading screen when we're restoring the token.
 - `SignInScreen` - This is the screen we show if the user isn't signed in already (we couldn't find a token).
@@ -62,8 +93,6 @@ The main thing to notice is that we're conditionally defining screens based on t
 - `SignIn` screen is only defined if `userToken` is `null` (user is not signed in)
 - `Home` screen is only defined if `userToken` is non-null (user is signed in)
 
-This takes advantage of a new feature in React Navigation: being able to dynamically define and alter the screen definitions of a navigator based on props or state. The example shows stack navigator, but you can use the same approach with any navigator.
-
 Here, we're conditionally defining one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly for the screens accessible after sign in, you probably have more than one screen. We can use `React.Fragment` to define multiple screens:
 
 ```js
@@ -81,9 +110,9 @@ state.userToken == null ? (
 );
 ```
 
-This pattern has been in use by other routing libraries such as React Router for a long time, and is commonly known as "Protected routes". Here, our screens which need the user to be logged in are "protected" and cannot be navigated to by other means if the user is not logged in.
-
 ## Implement the logic for restoring the token
+
+> Note: The following is just an example of how you might implement the logic for authentication in your app. You don't need to follow it as is.
 
 From the previous snippet, we can see that we need 3 state variables:
 
