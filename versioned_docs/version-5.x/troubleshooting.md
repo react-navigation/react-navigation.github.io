@@ -120,7 +120,7 @@ Example of common use cases for passing functions in params are the following:
 - To pass a callback to the next screen which it can call to pass some data back. You can usually achieve it using `navigate` instead. See the [guide for params](params.md) for examples.
 - To pass complex data to another screen. Instead of passing the data `params`, you can store that complex data somewhere else (like a global store), and pass an id instead. Then the screen can get the data from the global store using the id.
 
-If you don't use state persistence or deep link to the screen which accepts functions in params, then you can ignore the warning. To ignore it, you can use `YellowBox.ignoreWarnings`.
+If you don't use state persistence or deep link to the screen which accepts functions in params, then the warning doesn't affect you and you can safely ignore it. To ignore the warning, you can use `YellowBox.ignoreWarnings`.
 
 Example:
 

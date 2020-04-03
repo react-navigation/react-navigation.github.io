@@ -63,6 +63,8 @@ function DetailsScreen({ route, navigation }) {
 
 ![Screen with passed parameters](/assets/navigators/passing_params.png)
 
+## Updating params
+
 Screens can also update their params, like they can update their state. The `navigation.setParams` method lets you update the params of a screen. Refer to the [API reference for `setParams`](navigation-prop.html#setparams---make-changes-to-route-params) for more details.
 
 You can also pass some initial params to a screen. If you didn't specify any params when navigating to this screen, the initial params will be used. They are also shallow merged with any params that you pass. Initial params can be specified with an `initialParams` prop:
@@ -74,6 +76,8 @@ You can also pass some initial params to a screen. If you didn't specify any par
   initialParams={{ itemId: 42 }}
 />
 ```
+
+## Passing params to a previous screen
 
 Params aren't only useful for passing some data to a new screen, but they can also be useful to pass data to a previous screen too. For example, let's say you have a screen with a create post button, and the create post button opens a new screen to create a post. After creating the post, you want to pass the data for the post back to previous screen.
 
@@ -126,6 +130,19 @@ function CreatePostScreen({ navigation, route }) {
 ```
 
 Here, after you press "Done", the home screen's `route.params` will be updated to reflect the post text that you passed in `navigate`.
+
+## Passing params to nested navigators
+
+If you have nested navigators, you need to pass params a bit differently. For example, say you have a navigator inside the `Account` screen, and want to pass params to the `Settings` screen inside that navigator. Then you can pass params as following:
+
+```js
+navigation.navigate('Account', {
+  screen: 'Settings',
+  params: { user: 'jane' },
+});
+```
+
+See [Nesting navigators](nesting-navigators.md) for more details on nesting.
 
 ## Summary
 
