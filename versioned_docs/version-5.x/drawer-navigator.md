@@ -304,9 +304,13 @@ String or a function that given `{ focused: boolean, color: string }` returns a 
 
 Function, that given `{ focused: boolean, color: string, size: number }` returns a React.Node, to display in drawer sidebar
 
+#### `swipeeEnabled`
+
+Whether you can use swipe gestures to open or close the drawer. Defaults to `true`.
+
 #### `gestureEnabled`
 
-Whether you can use gestures to open or close the drawer. Defaults to `true`.
+Whether you can use gestures to open or close the drawer. Setting this to `false` disables swipe gestures as well as tap on overlay to close. See `swipeEnabled` to disable only the swipe gesture.
 
 #### `unmountOnBlur`
 
