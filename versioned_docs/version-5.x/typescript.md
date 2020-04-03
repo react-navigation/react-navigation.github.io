@@ -87,6 +87,53 @@ type Props = {
 
 This allows us to type check the route object, such as `route.params`.
 
+To summarize:
+
+```tsx
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type RootStackParamList = {
+  Home: undefined;
+  Profile: { userId: string };
+  Feed: { sort: 'latest' | 'top' } | undefined;
+};
+
+type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'Profile'>;
+
+type ProfileScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Profile'
+>;
+
+type Props = {
+  route: ProfileScreenRouteProp;
+  navigation: ProfileScreenNavigationProp;
+};
+```
+
+Then you can use the `Props` type to annotate your component.
+
+For function components:
+
+```tsx
+function ProfileScreen({ route, navigation }: Props) {
+  // ...
+}
+```
+
+For class components:
+
+```ts
+class ProfileScreen extends React.Component<Props> {
+  render() {
+    // ...
+  }
+}
+```
+
+We recommend creating a separate `types.tsx` file where you keep the types and import them in your component files instead of repeating them in each file.
+
 ### Nesting navigators
 
 When we nest navigators, the navigation prop of the screen is a combination of multiple navigation props. For example, if we have a tab inside a stack, the `navigation` prop will have both `jumpTo` (from the tab navigator) and `push` (from the stack navigator). To make it easier to combine types from multiple navigator, you can use the `CompositeNavigationProp` type:
