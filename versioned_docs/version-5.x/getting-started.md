@@ -44,10 +44,10 @@ npm install react-native-reanimated react-native-gesture-handler react-native-sc
 
 From React Native 0.60 and higher, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md). So you **don't need to run** `react-native link`.
 
-If you're on a Mac and developing for iOS, you need to install pods to complete the linking. Make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
+If you're on a Mac and developing for iOS, you need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking. 
 
 ```sh
-cd ios; pod install; cd ..
+npx pod-install ios
 ```
 
 To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
