@@ -304,7 +304,7 @@ String or a function that given `{ focused: boolean, color: string }` returns a 
 
 Function, that given `{ focused: boolean, color: string, size: number }` returns a React.Node, to display in drawer sidebar
 
-#### `swipeeEnabled`
+#### `swipeEnabled`
 
 Whether you can use swipe gestures to open or close the drawer. Defaults to `true`.
 
