@@ -181,7 +181,7 @@ So what's happening here? The `route` prop contains a `state` property which ref
 This approach can be used anytime you want to set options for a parent navigator based on a child navigator's state. Common use cases are:
 
 1. Show tab title in stack header: a stack contains a tab navigator and you want to set the title on the stack header (above example)
-2. Show screens without tab bar: a tab navigator contains a stack and you want to hide the tab bar on specific screens
+2. Show screens without tab bar: a tab navigator contains a stack and you want to hide the tab bar on specific screens (not recommended, nest the tab navigator inside a stack navigator instead)
 3. Lock drawer on certain screens: a drawer has a stack inside of it and you want to lock the drawer on certain screens
 
 In many cases, similar behavior can be achieved by reorganizing our navigators. We usually recommend this option if it fits your use case.

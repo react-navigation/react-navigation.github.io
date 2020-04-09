@@ -170,6 +170,8 @@ Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`
 
 `true` or `false` to show or hide the tab bar, if not set then defaults to `true`.
 
+> Note: Hiding tab bar can cause glitches and jumpy behavior. We recommend [nesting](nesting-navigators.md) the tab navigator inside of a stack navigator instead.
+
 #### `tabBarIcon`
 
 Function that given `{ focused: boolean, color: string, size: number }` returns a React.Node, to display in the tab bar.
