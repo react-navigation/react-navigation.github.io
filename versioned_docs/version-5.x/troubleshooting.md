@@ -28,6 +28,12 @@ If you're not using Expo, run:
 npx react-native start --reset-cache
 ```
 
+If that doesn't work, you can also try the following:
+
+```sh
+rm -rf $TMPDIR/metro-bundler-cache-*
+```
+
 ### Missing peer dependency
 
 If the module points to an npm package (i.e. the name of the module doesn't with `./`), then it's probably due to a missing peer dependency. To fix this, install the dependency in your project:
@@ -54,13 +60,14 @@ sourceExts: ['js', 'json', 'ts', 'tsx'];
 
 If it's missing these extensions, add them and then clear metro cache as shown in the section above.
 
-## I'm getting "SyntaxError in @react-navigation/xxx/xxx.tsx"
+## I'm getting "SyntaxError in @react-navigation/xxx/xxx.tsx" or "SyntaxError: /xxx/@react-navigation/xxx/xxx.tsx: Unexpected token"
 
-This might happen if you have an old version of the `metro-react-native-babel-preset` package. The easiest way to fix it is to delete your lock file and reinstall your dependencies.
+This might happen if you have an old version of the `metro-react-native-babel-preset` package. The easiest way to fix it is to delete your `node_modules` as well as lock file and reinstall your dependencies.
 
 If you use `npm`:
 
 ```sh
+rm -rf node_modules
 rm package-lock.json
 npm install
 ```
@@ -68,8 +75,27 @@ npm install
 If you use `yarn`:
 
 ```sh
+rm -rf node_modules
 rm yarn.lock
 yarn
+```
+
+You might also need to clear Metro bundler's cache following the instructions earlier in the page.
+
+## I'm getting "Module '[...]' has no exported member 'xxx' when using TypeScript
+
+This might happen if you have an old version of TypeScript in your project. You can try upgrading it:
+
+If you use `npm`:
+
+```sh
+npm install --save-dev typescript
+```
+
+If you use `yarn`:
+
+```sh
+yarn add --dev typescript
 ```
 
 ## I'm getting an error "null is not an object (evaluating 'RNGestureHandlerModule.default.Direction')"
