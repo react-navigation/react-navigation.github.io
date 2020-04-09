@@ -265,12 +265,11 @@ navigation.dispatch({
 It's also possible to pass a function to `dispatch`. The function will receive the current state and needs to return a navigation action object to use:
 
 ```js
-import shortid from 'shortid';
 import { CommonActions } from '@react-navigation/native';
 
 navigation.dispatch(state => {
   // Add the home route to the start of the stack
-  const routes = [{ name: 'Home', key: `Home-${shortid()}` }, ...state.routes];
+  const routes = [{ name: 'Home' }, ...state.routes];
 
   return CommonActions.reset({
     ...state,

@@ -69,6 +69,25 @@ navigation.dispatch(
 );
 ```
 
+The state object specified in `reset` replaces the existing navigation state with the new one. This means that if you provide new route objects without a key, or route objects with a different key, it'll remove the existing screens for those routes and add new screens.
+
+If you want to preserve the existing screens but only want to modify the state, you can pass a function to `dispatch` where you can get the existing state. Then you can change it as you like (make sure not to mutate the existing state, but create new state object for your changes). and return a `reset` action with the desired state:
+
+```js
+import { CommonActions } from '@react-navigation/native';
+
+navigation.dispatch(state => {
+  // Remove the home route from the stack
+  const routes = state.routes.filter(r => r.name !== 'Home');
+
+  return CommonActions.reset({
+    ...state,
+    routes,
+    index: routes.length - 1,
+  });
+});
+```
+
 > Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
 
 ### goBack
