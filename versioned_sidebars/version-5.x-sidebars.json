@@ -22,6 +22,7 @@
       "version-5.x/drawer-based-navigation",
       "version-5.x/auth-flow",
       "version-5.x/handling-safe-area",
+      "version-5.x/hiding-tabbar-in-screens",
       "version-5.x/status-bar",
       "version-5.x/screen-options-resolution",
       "version-5.x/custom-android-back-button-handling",

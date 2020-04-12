@@ -170,7 +170,7 @@ Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`
 
 `true` or `false` to show or hide the tab bar, if not set then defaults to `true`.
 
-> Note: Hiding tab bar can cause glitches and jumpy behavior. We recommend [nesting](nesting-navigators.md) the tab navigator inside of a stack navigator instead.
+> Note: Hiding tab bar can cause glitches and jumpy behavior. We recommend [the tab navigator inside of a stack navigator instead](hiding-tabbar-in-screens.md).
 
 #### `tabBarIcon`
 
