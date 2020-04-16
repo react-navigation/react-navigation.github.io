@@ -268,7 +268,7 @@ navigation.jumpTo('Profile', { owner: 'Michaś' });
 
 ```js
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons } from 'react-native-vector-icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
 

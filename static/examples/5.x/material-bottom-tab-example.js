@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { MaterialCommunityIcons } from 'react-native-vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 function Feed() {
   return (

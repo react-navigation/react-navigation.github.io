@@ -189,7 +189,7 @@ navigation.jumpTo('Profile', { name: 'Michaś' });
 
 ```js
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { MaterialCommunityIcons } from 'react-native-vector-icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createMaterialBottomTabNavigator();
 
