@@ -47,13 +47,25 @@ The `Tab.Navigator` component accepts following props:
 
 #### `initialRouteName`
 
+| Type                               | Required |
+| ---------------------------------- | -------- |
+| string                             | No       |
+
 The name of the route to render on first load of the navigator.
 
-#### `screenOptions`
+#### `screenOptions` 
+
+| Type                               | Required |
+| ---------------------------------- | -------- |
+| `BottomTabNavigationOptions or ((props: { route: RouteProp<ParamListBase, string>; navigation: any; }) => BottomTabNavigationOptions)`  | No       |
 
 Default options to use for the screens in the navigator.
 
 #### `backBehavior`
+
+| Type                               | Required |
+| ---------------------------------- | -------- |
+| `enum('initialRoute', 'order', 'history', 'none')` | No       |
 
 Behavior of back button handling.
 
@@ -64,9 +76,18 @@ Behavior of back button handling.
 
 #### `lazy`
 
+| Type      | Required |
+| --------- | -------- |
+| `boolean` | No       |
+
 Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
 
 #### `tabBar`
+
+| Type      | Required |
+| --------- | -------- |
+| `(props: BottomTabBarProps) => React.Element<BottomTabBarProps>` | No       |
+
 
 Function that returns a React element to display as the tab bar.
 
@@ -143,20 +164,20 @@ This example will render a basic tab bar with labels.
 
 An object containing the props for the tab bar component. It can contain the following properties:
 
-- `activeTintColor` - Label and icon color of the active tab.
-- `activeBackgroundColor` - Background color of the active tab.
-- `inactiveTintColor` - Label and icon color of the inactive tab.
-- `inactiveBackgroundColor` - Background color of the inactive tab.
-- `showLabel` - Whether to show label for tab, default is true.
-- `showIcon` - Whether to show icon for tab, default is true.
-- `style` - Style object for the tab bar.
-- `labelStyle` - Style object for the tab label.
-- `labelPosition` - Where to show the tab label in relation to the tab icon. Available values are `beside-icon` and `below-icon`. Defaults to `beside-icon`.
-- `tabStyle` - Style object for the tab.
-- `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
-- `adaptive` - Should the tab icons and labels alignment change based on screen size? Defaults to `true` for iOS 11. If `false`, tab icons and labels align vertically all the time. When `true`, tab icons and labels align horizontally on tablet.
-- `safeAreaInset` - Override the `forceInset` prop for `<SafeAreaView>`. Defaults to `{ bottom: 'always', top: 'never' }`. Available keys are `top | bottom | left | right` provided with the values `'always' | 'never'`.
-- `keyboardHidesTabBar` - Defaults to `false`. If `true` hide the tab bar when keyboard opens.
+- `activeTintColor` - _string_ - Label and icon color of the active tab.
+- `activeBackgroundColor` - _string_ - Background color of the active tab.
+- `inactiveTintColor` - _string_ - Label and icon color of the inactive tab.
+- `inactiveBackgroundColor`- _string_ - Background color of the inactive tab.
+- `showLabel` - _boolean_ - Whether to show label for tab, default is true.
+- `showIcon` - _boolean_ - Whether to show icon for tab, default is true.
+- `style` - _[ViewStyle](https://reactnative.dev/docs/view-style-props)_ - Style object for the tab bar.
+- `labelStyle` - _[TextStyle](https://reactnative.dev/docs/text-style-props)_ - Style object for the tab label.
+- `labelPosition` - _"beside-icon" | "below-icon"_ - Where to show the tab label in relation to the tab icon. Defaults to `beside-icon`.
+- `tabStyle` - _[ViewStyle](https://reactnative.dev/docs/view-style-props)_ - Style object for the tab.
+- `allowFontScaling` - _boolean_ - Whether label font should scale to respect Text Size accessibility settings, default is true.
+- `adaptive` - _boolean_ - Should the tab icons and labels alignment change based on screen size? Defaults to `true` for iOS 11. If `false`, tab icons and labels align vertically all the time. When `true`, tab icons and labels align horizontally on tablet.
+- `safeAreaInset` - _Object_ - Override the `forceInset` prop for `<SafeAreaView>`. Defaults to `{ bottom: 'always', top: 'never' }`. Available keys are `top | bottom | left | right` provided with the values `'always' | 'never'`.
+- `keyboardHidesTabBar` - _boolean_ - Defaults to `false`. If `true` hide the tab bar when keyboard opens.
 
 ### Options
 
@@ -164,35 +185,65 @@ The `options` prop can be used to configure individual screens inside the naviga
 
 #### `title`
 
+| Type      | Required |
+| --------- | -------- |
+| `string`  | No       |
+
 Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`.
 
 #### `tabBarVisible`
 
-`true` or `false` to show or hide the tab bar, if not set then defaults to `true`.
+| Type      | Required | Default |
+| --------- | -------- | ------- |
+| `boolean` | No       | `true`  |
 
 > Note: Hiding tab bar can cause glitches and jumpy behavior. We recommend [the tab navigator inside of a stack navigator instead](hiding-tabbar-in-screens.md).
 
 #### `tabBarIcon`
 
-Function that given `{ focused: boolean, color: string, size: number }` returns a React.Node, to display in the tab bar.
+| Type      | Required |
+| --------- | -------- |
+| `({ focused: boolean, color: string, size: number }) => React.Node` | No       |
+
+Function that returns a React.Node, to display in the tab bar.
 
 #### `tabBarLabel`
 
-Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
+| Type      | Required |
+| --------- | -------- |
+| `string or ({ focused: boolean, color: string }}) => React.Node` | No       |
+
+When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
 
 #### `tabBarButton`
+
+| Type      | Required |
+| --------- | -------- |
+| `(props: BottomTabBarButtonProps) => React.ReactNode` | No       |
 
 Function which returns a React element to render as the tab bar button. It wraps the icon and label and implements `onPress`. Renders `TouchableWithoutFeedback` by default. `tabBarButton: props => <TouchableOpacity {...props} />` would use `TouchableOpacity` instead.
 
 #### `tabBarAccessibilityLabel`
 
+| Type      | Required |
+| --------- | -------- |
+| `string` | No       |
+
 Accessibility label for the tab button. This is read by the screen reader when the user taps the tab. It's recommended to set this if you don't have a label for the tab.
 
 #### `tabBarTestID`
 
+| Type      | Required |
+| --------- | -------- |
+| `string` | No       |
+
 ID to locate this tab button in tests.
 
 #### `unmountOnBlur`
+
+| Type      | Required |
+| --------- | -------- |
+| `boolean` | No       |
 
 Whether this screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
 
