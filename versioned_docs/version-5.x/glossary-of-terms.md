@@ -10,6 +10,23 @@ sidebar_label: Glossary of terms
 
 Also known as navigation header, navigation bar, navbar, and probably many other things. This is the rectangle at the top of your screen that contains the back button and the title for your screen. The entire rectangle is often referred to as the header in React Navigation.
 
+## Navigator
+
+A `Navigator` contains `Screen` elements as its children to define the configuration for routes.
+`NavigationContainer` is a component which manages our navigation tree and contains the navigation state. This component must wrap all navigators structure. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
+
+```js
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator> // <----
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
 ## Screen component
 
 A screen component is a component that we use in our route configuration.
