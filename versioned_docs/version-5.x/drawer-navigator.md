@@ -62,6 +62,10 @@ Behavior of back button handling.
 - `history` to return to last visited tab
 - `none` to not handle back button
 
+#### `openByDefault`
+
+Whether the drawer should stay open by default. When this is `true`, the drawer will be open from the initial render. It can be closed normally using gestures or programmatically. However, when going back, drawer will re-open if it was closed. This essentially reverses the behavior of the drawer where the closed state is the default state.
+
 #### `drawerPosition`
 
 Options are `left` or `right`. Default is `left` position.
@@ -73,7 +77,7 @@ Type of the drawer. It determines how the drawer looks and animates.
 - `front`: Traditional drawer which covers the screen with a overlay behind it.
 - `back`: The drawer is revealed behind the screen on swipe.
 - `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.
-- `permanent`: A permanent drawer is shown as a sidebar.
+- `permanent`: A permanent drawer is shown as a sidebar. Useful for having always visible drawer on larger screens.
 
 You can conditionally specify the `drawerType` to show a permanent drawer on bigger screens and a traditional drawer drawer on small screens:
 
@@ -87,7 +91,35 @@ function MyDrawer() {
   const dimensions = useWindowDimensions();
 
   return (
-    <Drawer.Navigator drawerType={dimensions.width > 900 ? 'permanent' : 'front'}>
+    <Drawer.Navigator
+      drawerType={dimensions.width >= 768 ? 'permanent' : 'front'}
+    >
+      {/* Screens */}
+    </Drawer.Navigator>
+  );
+}
+```
+
+You can also specify other props such as `drawerStyle` based on screen size to customize the behavior. For example, you can combine it with `openByDefault` to achieve a master-detail layout:
+
+```js
+import { useWindowDimensions } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  const dimensions = useWindowDimensions();
+
+  const isLargeScreen = dimensions.width >= 768;
+
+  return (
+    <Drawer.Navigator
+      openByDefault
+      drawerType={isLargeScreen ? 'permanent' : 'back'}
+      drawerStyle={isLargeScreen ? null : { width: '100%' }}
+      overlayColor="transparent"
+    >
       {/* Screens */}
     </Drawer.Navigator>
   );
@@ -232,7 +264,7 @@ function CustomDrawerContent({ progress, ...rest }) {
 To use the custom component, we need to pass it in the `drawerContent` prop:
 
 ```js
-<Drawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />}>
+<Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
   {/* screens */}
 </Drawer.Navigator>
 ```
@@ -328,7 +360,7 @@ Example:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('drawerOpen', e => {
+  const unsubscribe = navigation.addListener('drawerOpen', (e) => {
     // Do something
   });
 
@@ -344,7 +376,7 @@ Example:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('drawerClose', e => {
+  const unsubscribe = navigation.addListener('drawerClose', (e) => {
     // Do something
   });
 
