@@ -19,7 +19,7 @@ A `Navigator` contains `Screen` elements as its children to define the configura
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator> // <----
+      <Stack.Navigator> // <---- This is a Navigator
         <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
