@@ -1,4 +1,4 @@
-# React Navigation website
+<h2 align="center"><a href="https://reactnavigation.org/"> <img src="https://github.com/vivekverma007/react-navigation.github.io/blob/source/static/img/react_navigation_header.png" width="400" /> </a></h2>
 
 Want to help improve the documentation? That would be so very much appreciated. Some information on that below.
 
