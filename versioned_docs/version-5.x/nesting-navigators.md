@@ -110,7 +110,15 @@ It works, and the initial screen inside the `Root` component is shown, which is 
 navigation.navigate('Root', { screen: 'Settings' });
 ```
 
-Now, the `Settings` screen will be rendered instead of `Profile` upon navigation. You can also pass params this way:
+Now, the `Settings` screen will be rendered instead of `Profile` upon navigation.
+
+<summary>
+This may look very different from the way navigation used to work with nested screens previously. The difference is that in the previous versions, all configuration was static, so React Navigation could statically find the list of all the navigators and their screens by recursing into nested configurations. But with dynamic configuration, React Navigation doesn't know which screens are available and where until the navigator containing the screen renders. Normally, a screen doesn't render its contents until you navigate to it, so the configuration of navigators which haven't rendered is not yet available. This makes it necessary to specify the hierarchy you're navigating to. This is also why you should have as little nesting of navigators as possible to keep your code simpler.
+</summary>
+
+### Passing params to a screen in a nested navigator
+
+You can also pass params by specifying a `params` key:
 
 <samp id="nest-navigators" />
 
@@ -139,7 +147,18 @@ navigation.navigate('Root', {
 
 In the above case, you're navigating to the `Media` screen, which is in a navigator nested inside the `Sound` screen, which is in a navigator nested inside the `Settings` screen.
 
-This may look very different from the way navigation used to work with nested screens previously. The difference is that in the previous versions, all configuration was static, so React Navigation could statically find the list of all the navigators and their screens by recursing into nested configurations. But with dynamic configuration, React Navigation doesn't know which screens are available and where until the navigator containing the screen renders. Normally, a screen doesn't render its contents until you navigate to it, so the configuration of navigators which haven't rendered is not yet available. This makes it necessary to specify the hierarchy you're navigating to. This is also why you should have as little nesting of navigators as possible to keep your code simpler.
+### Rendering initial route defined in the navigator
+
+By default, when you navigate a screen in the nested navigator, the specified screen is used as the initial screen and the initial route prop on the navigator is ignored. This behaviour is different from the React Navigation 4.
+
+If you need to render the initial route specified in the navigator, you can disable the behaviour of using the specified screen as the initial screen by setting `initial: false`:
+
+```js
+navigation.navigate('Root', {
+  screen: 'Settings',
+  initial: false,
+});
+```
 
 ## Best practices when nesting
 
