@@ -12,6 +12,14 @@ If you have not installed React Navigation 5 yet, you can do so following the [G
 
 To reuse code using the old API with minimal changes, you can use the [compatibility layer](compatibility.md).
 
+## Before you upgrade
+
+React Navigation 4 is still maintained and will stay compatible with the latest version of React Native. We'll accept small pull requests and release bug fixes. While we won't be actively working on new features for React Navigation 4, they may be occasionally backported.
+
+If React Navigation 4 is working well for you and you don't need any of the new capabilities of the new version, you can keep using it. You don't have to rewrite your navigation structure.
+
+However, if you're starting a new project, we recommend to use the latest version instead of React Navigation 4.
+
 ## Package names
 
 For React Navigation 5, we went with scoped packages (e.g. `@react-navigation/stack`). It distinguishes them from previous versions and makes it harder to accidentally mix v4 and v5 packages. The following are the new equivalent package names:
