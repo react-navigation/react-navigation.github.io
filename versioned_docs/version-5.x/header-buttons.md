@@ -79,7 +79,7 @@ function HomeScreen({ navigation }) {
 
 You can change the label behavior with `headerBackTitle` and `headerTruncatedBackTitle` ([read more](stack-navigator.html#headerbacktitle)).
 
-To customize the back button image, you can use [headerBackImage](stack-navigator.html#headerbackimage).
+To customize the back button image, you can use [headerBackImage](https://reactnavigation.org/docs/stack-navigator/#headerbackimage).
 
 ## Overriding the back button
 
