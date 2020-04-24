@@ -85,7 +85,49 @@ To customize the back button image, you can use [headerBackImage](stack-navigato
 
 The back button will be rendered automatically in a stack navigator whenever it is possible for the user to go back from their current screen &mdash; in other words, the back button will be rendered whenever there is more than one screen in the stack.
 
-Generally, this is what you want. But it's possible that in some circumstances that you want to customize the back button more than you can through the options mentioned above, in which case you can set the `headerLeft` option to a React Element that will be rendered, just as we did with `headerRight`. Alternatively, the `headerLeft` option also accepts a React Component, which can be used, for example, for overriding the onPress behavior of the back button. Read more about this in the [api reference](stack-navigator.html#headerleft).
+Generally, this is what you want. But it's possible that in some circumstances that you want to customize the back button more than you can through the options mentioned above, in which case you can set the `headerLeft` option to a React Element that will be rendered, just as we did with `headerRight`. Alternatively, the `headerLeft` option also accepts a React Component, which can be used, for example, for overriding the onPress behavior of the back button.
+
+Example of headerLeft and headerRight:
+
+```js
+static navigationOptions = ({ navigation }) => {
+    return {
+        headerTitle: (
+            <View style={{ flex: 1, alignSelf: 'center' }}>
+                <AppFontLoader>
+                    <Text style={{
+                        color: '#fff',
+                        alignSelf: 'center',
+                        ...Platform.select({
+                            ios: {
+                                fontFamily: 'Some implemented font',
+                            },
+                            android: {
+                                fontFamily: 'Another font for android',
+                            }
+                        }),
+                    }}>Place you title here</Text>
+                </AppFontLoader>
+            </View>
+        ),
+        headerRight: (
+            <TouchableOpacity onPress={() => navigation.navigate({ routeName: 'PriceList' })}
+                style={{ right: Platform.OS === 'ios' ? Dimensions.get("window").height < 667 ? '10%' : '5%' : '25%', backgroundColor: 'transparent', paddingLeft: 15 }}>
+                <Image style={{ width: 25, height: 25 }} source={require('../../assets/icons/info2.png')} />
+            </TouchableOpacity>
+        ),
+        headerLeft: (
+            <TouchableOpacity onPress={() => navigation.goBack(null)} style={{ left: Dimensions.get("window").height < 667 ? '8%' : '3%', backgroundColor: 'red', width: '100%' }}>
+                <Image style={{ width: 30, height: 30 }} source={require('../../assets/icons/back-icon-50x50.png')} />
+            </TouchableOpacity>
+        ),
+        headerStyle: {
+            backgroundColor: '#14b6e4',
+        },
+        headerTintColor: '#fff',
+    };
+};
+```
 
 ## Summary
 
