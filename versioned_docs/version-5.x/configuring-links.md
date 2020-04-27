@@ -8,7 +8,7 @@ In this guide, we will configure React Navigation to handle external links. This
 
 1. Handle deep links in React Native app
 2. Enable URL integration in browser when using on Web
-3. Use [`<Link />`](link.md) or [`useLinkTo`](use-link-to.md) to navigate using links.
+3. Use [`<Link />`](link.md) or [`useLinkTo`](use-link-to.md) to navigate using paths.
 
 To handle a link, we need to translate it to a valid navigation state and vice versa. For example, the path `/rooms/chat?user=jane` may be translated to a state object like this:
 
