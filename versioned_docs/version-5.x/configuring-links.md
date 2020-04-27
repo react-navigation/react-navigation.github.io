@@ -10,7 +10,7 @@ In this guide, we will configure React Navigation to handle external links. This
 2. Enable URL integration in browser when using on Web
 3. Use [`<Link />`](link.md) or [`useLinkTo`](use-link-to.md) to navigate using links.
 
-To handle a links, we need to translate it to a valid navigation state and vice versa. For example, the path `/rooms/chat?user=jane` may be translated to a state object like this:
+To handle a link, we need to translate it to a valid navigation state and vice versa. For example, the path `/rooms/chat?user=jane` may be translated to a state object like this:
 
 ```js
 {
@@ -110,7 +110,7 @@ const state = {
 
 It's important to note that the state object must match the hierarchy of nested navigators. Otherwise the state will be discarded.
 
-Sometimes we'll have the target navigator nested in other navigators which aren't part of the deep link. For example, let's say our navigation structure looks this:
+Sometimes we'll have the target navigator nested in other navigators which aren't part of the deep link. For example, let's say our navigation structure looks like this:
 
 ```js
 function Home() {
@@ -132,7 +132,7 @@ function App() {
 }
 ```
 
-Here we have a stack navigator in root, and inside the `Home` screen of the root stack, we have a tab navigator with various screens. With this structure, let's say we want the path `/users/:id` to go to the `Profile` screen. We can express the nested config like so:
+Here we have a stack navigator in the root, and inside the `Home` screen of the root stack, we have a tab navigator with various screens. With this structure, let's say we want the path `/users/:id` to go to the `Profile` screen. We can express the nested config like so:
 
 ```js
 {
