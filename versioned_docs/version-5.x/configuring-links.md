@@ -6,7 +6,7 @@ sidebar_label: Configuring links
 
 In this guide, we will configure React Navigation to handle external links. This is necessary if we want to:
 
-1. Handle deep links in React Native app
+1. Handle deep links in React Native apps on Android and iOS
 2. Enable URL integration in browser when using on Web
 3. Use [`<Link />`](link.md) or [`useLinkTo`](use-link-to.md) to navigate using paths.
 
