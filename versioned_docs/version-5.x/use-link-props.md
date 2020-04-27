@@ -13,11 +13,34 @@ import { useLinkProps } from '@react-navigation/native';
 
 // ...
 
-function LinkButton({ to, action }) {
+const LinkButton = ({ to, action, children, ...rest }) => {
   const props = useLinkProps({ to, action });
 
-  return <TouchableOpacity {...props}>Go to Jane's profile</TouchableOpacity>;
-}
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  if (Platform.OS === 'web') {
+    // It's important to use a `View` or `Text` on web instead of `TouchableX`
+    // Otherwise React Native for Web omits the `onClick` prop that's passed
+    // You can add hover effects using `onMouseEnter` and `onMouseLeave`
+    return (
+      <View
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{ transitionDuration: '150ms', opacity: isHovered ? 0.5 : 1 }}
+        {...props}
+        {...rest}
+      >
+        <Text>{children}</Text>
+      </View>
+    );
+  }
+
+  return (
+    <TouchableOpacity {...props} {...rest}>
+      <Text>{children}</Text>
+    </TouchableOpacity>
+  );
+};
 
 function Home() {
   return <LinkButton to="/profile/jane">Go to Jane's profile</LinkButton>;
