@@ -50,6 +50,7 @@ Example:
 ```js
 import * as React from 'react';
 import {
+  NavigationHelpersContext
   useNavigationBuilder,
   TabRouter,
   TabActions,
@@ -69,7 +70,7 @@ function TabNavigator({
   });
 
   return (
-    <React.Fragment>
+    <NavigationHelpersContext.Provider value={navigation}>
       <View style={[{ flexDirection: 'row' }, tabBarStyle]}>
         {state.routes.map(route => (
           <TouchableOpacity
@@ -97,7 +98,7 @@ function TabNavigator({
       <View style={[{ flex: 1 }, contentStyle]}>
         {descriptors[state.routes[state.index].key].render()}
       </View>
-    </React.Fragment>
+    </NavigationHelpersContext.Provider>
   );
 }
 ```

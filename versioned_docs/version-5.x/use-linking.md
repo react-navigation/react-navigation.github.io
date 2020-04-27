@@ -4,7 +4,7 @@ title: useLinking
 sidebar_label: useLinking
 ---
 
-The `useLinking` hook lets us handle deep links in our apps.
+The `useLinking` hook lets us handle deep links in our apps. You probably want to use the [`linking` prop on `NavigationContainer`](navigation-container.md#linking) instead of using this hook directly.
 
 Example:
 
@@ -50,7 +50,7 @@ export default function App() {
 }
 ```
 
-See [deep linking guide](deep-linking.md) for a complete guide.
+See [deep linking guide](deep-linking.md) for a complete guide on how to configure deep linking.
 
 ### Options
 
@@ -59,6 +59,17 @@ See [deep linking guide](deep-linking.md) for a complete guide.
 URL prefixes to handle. You can provide multiple prefixes to support custom schemes as well as [universal links](https://developer.apple.com/ios/universal-links/).
 
 Only URLs matching these prefixes will be handled. The prefix will be stripped from the URL before parsing.
+
+Example:
+
+```js
+useLinking(ref, {
+  prefixes: ['https://mychat.com', 'mychat://'],
+  config: {
+    Chat: 'feed/:sort',
+  },
+});
+```
 
 #### `config`
 
@@ -178,4 +189,46 @@ This will result in the following navigation state:
     },
   ],
 }
+```
+
+#### `enabled`
+
+Optional boolean to enable or disable the linking integration. Defaults to `true`.
+
+#### `getStateFromPath`
+
+You can optionally override the way React Navigation parses deep links to a state object by providing your own implementation.
+
+Example:
+
+```js
+useLinking(ref, {
+  prefixes: ['https://mychat.com', 'mychat://'],
+  config: {
+    Chat: 'feed/:sort',
+  },
+  getStateFromPath(path, config) {
+    // Return a state object here
+    // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
+  }
+});
+```
+
+#### `getPathFromState`
+
+You can optionally override the way React Navigation serializes state objects to link by providing your own implementation. This is necessary for proper web support if you have specified `getStateFromPath`.
+
+Example:
+
+```js
+useLinking(ref, {
+  prefixes: ['https://mychat.com', 'mychat://'],
+  config: {
+    Chat: 'feed/:sort',
+  },
+  getPathFromState(state, config) {
+    // Return a path string here
+    // You can also reuse the default logic by importing `getPathFromState` from `@react-navigation/native`
+  }
+});
 ```
