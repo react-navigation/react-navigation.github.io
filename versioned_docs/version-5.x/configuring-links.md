@@ -222,7 +222,7 @@ const linking = {
 
 ### Overview
 
-In the example app, we will use the Expo managed workflow. The guide will focus on creating the deep linking configuration and not on creating the components themselves, but you can always check the full implementation in the [github repo](https://github.com/WoLewicki/DeepLinkingExample).
+In the example app, we will use the Expo managed workflow. The guide will focus on creating the deep linking configuration and not on creating the components themselves, but you can always check the full implementation in the [github repo](https://github.com/react-navigation/deep-linking-example).
 
 ### Getting Started
 
