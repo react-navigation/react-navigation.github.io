@@ -244,8 +244,7 @@ But what if we want to have parameters in the URL, like the name of the person, 
 
 ### Defining better config
 
-Even for such a simple configuration, we can make some optimization.
-With the above config, in order to get to `Home` or `Profile` screen, we need to pass two "elements" to the URL. We can reduce it to only one by introducing nested navigators in our `config`. The syntax looks like that:
+With the above config, in order to get to `Home` or `Profile` screen, we need to pass two "elements" to the URL (`HomeStack/Home` and `HomeStack/Profile`). We can reduce it to only one by introducing nested navigators in our `config`. The syntax looks like that:
 
 ```js
 config = {
@@ -292,7 +291,7 @@ Profile: {
     age: Number,
   },
   stringify: {
-    id: id => id.replace(/^xxx-/)
+    id: id => id.replace(/^user-/, '')
   }
 }
 ```
@@ -307,18 +306,18 @@ Profile: {
     age: Number,
   },
   stringify: {
-    id: id => id.replace(/^xxx-/)
+    id: id => id.replace(/^user-/, '')
   }
 }
 ```
 
-### Specific configuration
+### Routing constraints to consider when building your app
 
 Here we will mention some of the consequences of using nested navigators in the config.
 
-1. Using `initialRouteName` makes the screen always appear in the state of a navigator. It makes it impossible to pass params to that screen through the URL unless the screen is explicitly mentioned in it. It is then reasonable for that screen not to take any params or to provide default ones.
+1. **Using `initialRouteName` makes the screen always appear in the state of a navigator.** It makes it impossible to pass params to that screen through the URL unless the screen is explicitly mentioned in it. It is then reasonable for that screen not to take any params or to provide default ones.
 
-2. Having multiple screens of a nested navigator present in the state object is not possible through a one-part URL string. We also cannot provide a URL like (for the above configuration) `/user/home`, because it would be resolved to `HomeStack->Profile->HomeStack->Home`, If we want to get rid of the second `HomeStack`, we can provide an explicit config for the `Home` screen in the first level of config nesting (remember to provide a different path string for each occurrence of a screen in the config):
+2. **Having multiple screens of a nested navigator present in the state object is not possible through a one-part URL string.** We also cannot provide a URL like (for the above configuration) `/user/home`, because it would be resolved to `HomeStack->Profile->HomeStack->Home`. If we want to get rid of the second `HomeStack`, we can provide an explicit config for the `Home` screen in the first level of config nesting (remember to provide a different path string for each occurrence of a screen in the config):
 
    ```js
    config = {
@@ -350,6 +349,6 @@ Here we will mention some of the consequences of using nested navigators in the 
 
    Then `/stack/user/home` will resolve to `HomeStack->Profile->Home`.
 
-3. Usage of the nested navigators disables the option of passing any params to the routes in the nested state, except for the last one. It shouldn't be a problem, because only the last part of the nested config should be a screen, while rest being navigators, which don't take any params.
+3. **Usage of the nested navigators disables the option of passing any params to the routes in the nested state, except for the last one.** It shouldn't be a problem, because only the last part of the nested config should be a screen, while rest being navigators, which don't take any params.
 
 4. There is an option to retrieve the URL path that would lead to the present state of navigation by calling `getPathFromState()`. The function takes the current navigation state as the first argument (it can be retrieved by using `useNavigationState()` hook) and optionally the `config` object as the second argument. The navigation in the application shouldn't typically be this complicated for the user to use this function.
