@@ -229,7 +229,38 @@ Note that in this case, any params in the URL are only passed to the `Profile` s
 
 ## Omitting a screen from path
 
-// TODO
+Sometimes, you may not want to have the route name of a screen in the path. For example, let's say you have a `Home` screen and our navigation state looks like this:
+
+```js
+const state = {
+  routes: [{ name: 'Home' }],
+};
+```
+
+When this state is serialized to a path with the following config, you'll get `/Home`:
+
+```js
+{
+  Home: {
+    screens: {
+      Profile: 'users/:id',
+    },
+  },
+}
+```
+
+But it'll be nicer if the URL was just `/` when visiting the home screen. You can specify an empty string as path and React Navigation won't add the screen to the path (think of it like adding empty string to the path, which doesn't change anything):
+
+```js
+{
+  Home: {
+    path: '',
+    screens: {
+      Profile: 'users/:id',
+    },
+  },
+}
+```
 
 ## Advanced cases
 
@@ -250,7 +281,7 @@ const linking = {
   getPathFromState(state, config) {
     // Return a path string here
     // You can also reuse the default logic by importing `getPathFromState` from `@react-navigation/native`
-  }
+  },
 };
 ```
 
