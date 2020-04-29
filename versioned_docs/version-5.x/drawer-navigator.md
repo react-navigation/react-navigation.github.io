@@ -128,7 +128,9 @@ function MyDrawer() {
 
 #### `edgeWidth`
 
-Allows for defining how far from the edge of the content view the swipe gesture should activate
+Allows for defining how far from the edge of the content view the swipe gesture should activate.
+
+This is not supported on Web.
 
 #### `hideStatusBar`
 
@@ -153,6 +155,8 @@ Color overlay to be displayed on top of the content view when drawer gets open. 
 #### `gestureHandlerProps`
 
 Props to pass to the underlying pan gesture handler.
+
+This is not supported on Web.
 
 #### `lazy`
 
@@ -339,6 +343,8 @@ Function, that given `{ focused: boolean, color: string, size: number }` returns
 #### `swipeEnabled`
 
 Whether you can use swipe gestures to open or close the drawer. Defaults to `true`.
+
+Swipe gesture is not supported on Web.
 
 #### `gestureEnabled`
 

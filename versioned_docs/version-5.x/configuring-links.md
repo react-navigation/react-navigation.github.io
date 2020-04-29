@@ -227,6 +227,10 @@ const state = {
 
 Note that in this case, any params in the URL are only passed to the `Profile` screen which matches the path pattern `users/:id`, and the `Notifications` screen doesn't receive any params. If you want to have the same params in the `Notifications` screen, you can specify a [custom `getStateFromPath` function](use-linking.md#getstatefrompath) and copy those params.
 
+## Omitting a screen from path
+
+// TODO
+
 ## Advanced cases
 
 For some advanced cases, specifying the mapping may not be sufficient. To handle such cases, you can specify a custom function to parse the URL into a state object ([`getStateFromPath`](use-linking.md#getstatefrompath)), and a custom function to serialize the state object into an URL ([`getPathFromState`](use-linking.md#getpathfromstate)).
