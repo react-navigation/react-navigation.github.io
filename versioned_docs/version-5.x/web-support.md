@@ -13,4 +13,10 @@ Currently, the following features are available:
 - [URL integration in browser](configuring-links.md)
 - [Accessible links](link.md)
 
-The [drawer navigator](drawer-navigator.md) and [bottom tab navigator](bottom-tab-navigator.md) also have additional integration to provide a better experience on web by showing hyperlinks. The [stack navigator](stack-navigator.md) also disables gestures and animations on web because they don't integrate well with the platform.
+Some navigators are also configured differently on web or provide additional web specific features:
+
+1. The [drawer](drawer-navigator.md) and [bottom tab](bottom-tab-navigator.md) navigators show hyperlinks in the drawer sidebar and tab bar respectively.
+2. Swipe gestures are not available on [drawer](drawer-navigator.md) and [stack](stack-navigator.md) navigators when using on the web.
+3. By default, [stack](stack-navigator.md) navigator disables page transition animations, but it can be re-enabled by specifying `animationEnabled: true`.
+
+> Note: Unlike React Navigation 4, you don't need to install a separate package to use web integration when using React Native for Web. If you have the `@react-navigation/web` package installed, please uninstall it because it cannot be used with React Navigation 5.

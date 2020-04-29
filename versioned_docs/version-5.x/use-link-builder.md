@@ -4,6 +4,8 @@ title: useLinkBuilder
 sidebar_label: useLinkBuilder
 ---
 
+> Note: This API is experimental and might change in a minor version.
+
 The `useLinkBuilder` hook let's us build a path to use for links based on a `navigate` action. It returns a function that takes `name` and `params` for the screen to navigate to and returns path based on the [`linking` options](navigation-container.md#linking).
 
 ```js
