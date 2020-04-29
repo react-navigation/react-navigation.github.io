@@ -71,6 +71,8 @@ useLinking(ref, {
 });
 ```
 
+This is only supported on iOS and Android.
+
 #### `config`
 
 Config to fine-tune how to parse the path. The config object should represent the structure of the navigators in the app.
