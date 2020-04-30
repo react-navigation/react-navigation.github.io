@@ -317,7 +317,7 @@ You can also specify `{ backgroundColor: 'transparent' }` to make the previous s
 
 #### `animationEnabled`
 
-Whether transition animation should be enabled on the screen. If you set it to `false`, the screen won't animate when pushing or popping. Defaults to `true`.
+Whether transition animation should be enabled on the screen. If you set it to `false`, the screen won't animate when pushing or popping. Defaults to `true` on iOS and Android, `false` on Web.
 
 #### `animationTypeForReplace`
 
@@ -334,6 +334,8 @@ When `pop` is used, the `pop` animation is applied to the screen being replaced.
 
 Whether you can use gestures to dismiss this screen. Defaults to `true` on iOS, `false` on Android.
 
+Gestures are not supported on Web.
+
 #### `gestureResponseDistance`
 
 Object to override the distance of touch start from the edge of the screen to recognize gestures. The object can contain the following properties:
@@ -341,13 +343,19 @@ Object to override the distance of touch start from the edge of the screen to re
 - `horizontal` - _number_ - Distance for horizontal direction. Defaults to 25.
 - `vertical` - _number_ - Distance for vertical direction. Defaults to 135.
 
+This is not supported on Web.
+
 #### `gestureVelocityImpact`
 
 Number which determines the relevance of velocity for the gesture. Defaults to 0.3.
 
+This is not supported on Web.
+
 #### `gestureDirection`
 
 Direction of the gestures. Refer the [Animations section](#animations) for details.
+
+This is not supported on Web.
 
 #### `transitionSpec`
 

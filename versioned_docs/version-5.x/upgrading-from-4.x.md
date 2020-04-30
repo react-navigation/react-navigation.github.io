@@ -32,7 +32,7 @@ For React Navigation 5, we went with scoped packages (e.g. `@react-navigation/st
 
 ## Navigation Container
 
-In React Navigation 5.x there's no `createAppContainer` which provided screens with navigation context. You'll need to wrap your app with [NavigationContainer](app-containers.md) provider.
+In React Navigation 5.x there's no `createAppContainer` which provided screens with navigation context. You'll need to wrap your app with [NavigationContainer](navigation-container.md) provider.
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';

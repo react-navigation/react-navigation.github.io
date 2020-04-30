@@ -10,7 +10,6 @@
       "version-5.x/nesting-navigators",
       "version-5.x/navigation-lifecycle",
       "version-5.x/modal",
-      "version-5.x/app-containers",
       "version-5.x/next-steps",
       "version-5.x/glossary-of-terms",
       "version-5.x/compatibility",
@@ -29,6 +28,8 @@
       "version-5.x/connecting-navigation-prop",
       "version-5.x/navigating-without-navigation-prop",
       "version-5.x/deep-linking",
+      "version-5.x/configuring-links",
+      "version-5.x/web-support",
       "version-5.x/screen-tracking",
       "version-5.x/themes",
       "version-5.x/state-persistence",
@@ -36,16 +37,17 @@
       "version-5.x/redux-integration",
       "version-5.x/MST-integration",
       "version-5.x/localization",
-      "version-5.x/web-support",
       "version-5.x/function-after-focusing-screen",
       "version-5.x/react-native-screens",
       "version-5.x/upgrading-from-4.x"
     ],
     "API Reference": [
+      "version-5.x/navigation-container",
       "version-5.x/route-prop",
       "version-5.x/navigation-prop",
       "version-5.x/navigation-context",
       "version-5.x/navigation-events",
+      "version-5.x/link",
       {
         "type": "category",
         "label": "Navigators",
@@ -66,6 +68,9 @@
           "version-5.x/use-navigation-state",
           "version-5.x/use-focus-effect",
           "version-5.x/use-is-focused",
+          "version-5.x/use-link-to",
+          "version-5.x/use-link-props",
+          "version-5.x/use-link-builder",
           "version-5.x/use-linking",
           "version-5.x/use-scroll-to-top"
         ]
