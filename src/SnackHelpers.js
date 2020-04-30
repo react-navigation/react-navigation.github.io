@@ -17,7 +17,7 @@ const DEPS_VERSIONS = {
     "@react-navigation/material-bottom-tabs@5.1.6",
     "@react-navigation/material-top-tabs@5.1.6",
     "@react-navigation/native@5.1.3",
-    "@react-navigation/stack@5.2.6"
+    "@react-navigation/stack@5.2.6",
     "react-native-reanimated@1.7.0",
     "react-native-safe-area-context@0.7.3",
     "react-native-screens@2.4.0",
