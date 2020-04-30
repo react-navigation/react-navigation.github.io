@@ -50,12 +50,6 @@ function App() {
 
 ## Props
 
-### `onStateChange(newState)`
-
-> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
-
-Function that gets called every time navigation state managed by the navigator changes. It receives the new state of the navigation.
-
 ### `initialState`
 
 Prop that accepts initial state for the navigator. This can be useful for cases such as deep linking, state persistence etc.
@@ -70,6 +64,14 @@ Example:
   {/* ... */}
 </NavigationContainer>
 ```
+
+### `onStateChange`
+
+> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+
+Function that gets called every time navigation state changes. It receives the new navigation state as the argument.
+
+You can use it to track the focused screen, persist the navigation state etc.
 
 ### `linking`
 
@@ -99,3 +101,7 @@ function App() {
 ### `fallback`
 
 React Element to use as a fallback while we resolve the deep link. Defaults to `null`.
+
+### `theme`
+
+Custom theme to use for the navigation components such as the header, tab bar etc. See [theming guide](themes.md) for more details and usage guide.
