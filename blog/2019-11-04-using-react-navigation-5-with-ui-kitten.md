@@ -358,24 +358,26 @@ Just like Top/Bottom tab navigators, the drawer navigator also has a special pro
 
 ```js
 import React from 'react';
-import { Drawer, DrawerElement, MenuItemType } from '@ui-kitten/components';
+import { Drawer, DrawerItem, DrawerElement DrawerItemElement } from '@ui-kitten/components';
 import { SafeAreaLayout, SaveAreaInset } from '../../components/safe-area-layout.component';
 
 export const HomeDrawer = (props): DrawerElement => {
 
-  const onMenuItemSelect = (index: number): void => {
-    const selectedTabRoute: string = props.state.routeNames[index];
+  const onItemSelect = (index: IndexPath): void => {
+    const selectedTabRoute: string = props.state.routeNames[index.row];
     props.navigation.navigate(selectedTabRoute);
     props.navigation.closeDrawer();
   };
 
-  const createNavigationItemForRoute = (route): MenuItemType => {
+  const createDrawerItemForRoute = (route, index: number): DrawerItemElement => {
     const { options } = props.descriptors[route.key];
-    return {
-      routeName: route.name,
-      title: options.title,
-      icon: options.drawerIcon,
-    };
+    return (
+      <DrawerItem
+        key={index}
+        title={route.name}
+        accessoryLeft={options.drawerIcon}
+      />
+    );
   };
 
   return (
