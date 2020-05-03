@@ -13,7 +13,9 @@ Currently, the following features are available:
 - [URL integration in browser](configuring-links.md)
 - [Accessible links](link.md)
 
-Some navigators are also configured differently on web or provide additional web specific features:
+It's important to use links as the primary way of navigation instead of navigation actions such as `navigation.navigate`. It'll ensure that your links are properly usable on web.
+
+Some of the navigators are also configured differently on web or provide additional web specific features:
 
 1. The [drawer](drawer-navigator.md) and [bottom tab](bottom-tab-navigator.md) navigators show hyperlinks in the drawer sidebar and tab bar respectively.
 2. Swipe gestures are not available on [drawer](drawer-navigator.md) and [stack](stack-navigator.md) navigators when using on the web.
