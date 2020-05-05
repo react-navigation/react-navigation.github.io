@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Button } from 'react-native';
-// import analytics from '@react-native-firebase/analytics';
+// import * as Analytics from 'expo-firebase-analytics';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -56,9 +56,10 @@ export default function App() {
         const currentRouteName = getActiveRouteName(state);
 
         if (previousRouteName !== currentRouteName) {
-          // The line below uses the @react-native-firebase/analytics tracker
+          // The line below uses the expo-firebase-analytics tracker
+          // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
           // Change this line to use another Mobile analytics SDK
-          // analytics().setCurrentScreen(currentRouteName, currentRouteName);
+          // Analytics.setCurrentScreen(currentRouteName, currentRouteName);
           alert(`The route changed to ${currentRouteName}`);
         }
 
