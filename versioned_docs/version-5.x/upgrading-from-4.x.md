@@ -262,7 +262,7 @@ Previously, you could navigate to a screen deeply nested somewhere in a navigato
 
 With a dynamic configuration, it becomes impossible, because new navigators and screens could be added, or existing navigators and screens could be removed any time in future. In addition, navigators are initialized as needed in 5.x instead of initializing all navigators at startup, which means that a navigator may not be available to handle an action.
 
-Because of these reasons, you now need to be more explicit when navigating to a deeply nested screen. See [nesting navigators docs](https://reactnavigation.org/docs/en/nesting-navigators.html#navigating-to-a-screen-in-a-nested-navigator) for more details.
+Because of these reasons, you now need to be more explicit when navigating to a deeply nested screen. See [nesting navigators docs](nesting-navigators.md#navigating-to-a-screen-in-a-nested-navigator) for more details.
 
 ## Deep-linking
 
@@ -382,7 +382,7 @@ In addition, there have been some changes to the way the navigation actions work
 
 One major difference is that a lot of methods used to take some parameters for controlling which screen and navigator it should be applied to and didn't follow a specific pattern.
 
-In this version, we have standardized this and made it possible to use with any action without the action needing to support it. The new `target` and `source` properties provides control over which navigator should handle an action. See [docs for dispatch](https://reactnavigation.org/docs/navigation-prop.html#dispatch---send-an-action-to-the-router) for more details.
+In this version, we have standardized this and made it possible to use with any action without the action needing to support it. The new `target` and `source` properties provides control over which navigator should handle an action. See [docs for dispatch](navigation-prop.md#dispatch) for more details.
 
 You can import the action creators from the [compatibility layer](compatibility.md) to preserve old behavior for the actions.
 
@@ -394,7 +394,7 @@ Previously, it was possible to pass an object `{ routeName, key, params }`. Now,
 
 The `navigate` action also supported child actions in the `action` property in the object. We found that very few people actually used it and most found it confusing. It also complicated the code quite a bit, so we have removed this functionality.
 
-See [`navigate` action docs](https://reactnavigation.org/docs/navigation-actions.html#navigate) for more details.
+See [`navigate` action docs](navigation-actions.md#navigate) for more details.
 
 ### `goBack`
 
@@ -402,13 +402,13 @@ Previously, the `goBack` method took one parameter: `from`. You could pass nothi
 
 The new behavior of `goBack` is more intuitive as it takes you back from the screen that dispatched the action. More advanced behavior can be achieved by `target` and `source` properties to replicate old behavior.
 
-See [`goBack` action docs](https://reactnavigation.org/docs/navigation-actions.html#goback) for more details.
+See [`goBack` action docs](navigation-actions.md#goback) for more details.
 
 ### `setParams`
 
 Previously, the `setParams` method also took an optional `key` to specify which screen was setting its params. Now the `source` property can be used to achieve the same functionality.
 
-See [`setParams` action docs](https://reactnavigation.org/docs/navigation-actions.html#setparams) for more details.
+See [`setParams` action docs](navigation-actions.md#setparams) for more details.
 
 ### `reset`
 
@@ -424,7 +424,7 @@ navigation.reset({
 
 The `reset` action is now also supported on all navigators instead of just stack.
 
-See [`reset` action docs](https://reactnavigation.org/docs/navigation-actions.html#reset) for more details.
+See [`reset` action docs](navigation-actions.md#reset) for more details.
 
 ### `replace`
 
@@ -432,7 +432,7 @@ Previously, it was possible to pass an object `{ routeName, key, newKey, params 
 
 The `replace` action also supported child actions in the `action` property which has been removed.
 
-See [`replace` action docs](https://reactnavigation.org/docs/stack-actions.html#replace) for more details.
+See [`replace` action docs](stack-actions.md#replace) for more details.
 
 ### `push`
 
@@ -440,13 +440,13 @@ Previously, it was possible to pass an object `{ routeName, params }`. Now, `rou
 
 The `push` action also supported child actions in the `action` property which has been removed.
 
-See [`push` action docs](https://reactnavigation.org/docs/stack-actions.html#push) for more details.
+See [`push` action docs](stack-actions.md#push) for more details.
 
 ### `pop`
 
 Previously, the `pop` method used to take an object with a property called `n` which specified how many screens to go back to. Now, you can directly specify the number as the first argument instead of an object.
 
-See [`pop` action docs](https://reactnavigation.org/docs/stack-actions.html#pop) for more details.
+See [`pop` action docs](stack-actions.md#pop) for more details.
 
 ### `dismiss`
 
@@ -460,7 +460,11 @@ navigation.dangerouslyGetParent().pop();
 
 Previously, the `jumpTo` method also took an optional `key` to specify which screen was setting its params. Now the `source` property can be used to achieve the same functionality.
 
-See [`jumpTo` action docs](https://reactnavigation.org/docs/tab-actions.html#jumpto) for more details.
+See [`jumpTo` action docs](tab-actions.md#jumpto) for more details.
+
+## Custom actions
+
+Previously, it was possible to override the `router` and its `getStateForAction` property on the navigator component to implement custom actions. Due to the dynamic nature of React Navigation 5, this is not possible. However, you can implement custom helpers to achieve the same functionality. See [`dispatch` docs](navigation-prop.md#dispatch) for more details.
 
 ## Scrollables
 

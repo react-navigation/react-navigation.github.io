@@ -179,7 +179,7 @@ function ProfileScreen({ navigation, route }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <TextInput
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-        onChangeText={text => onChangeText(text)}
+        onChangeText={onChangeText}
         value={value}
       />
       <Button title="Go back" onPress={() => navigation.goBack()} />
@@ -267,7 +267,7 @@ It's also possible to pass a function to `dispatch`. The function will receive t
 ```js
 import { CommonActions } from '@react-navigation/native';
 
-navigation.dispatch(state => {
+navigation.dispatch((state) => {
   // Add the home route to the start of the stack
   const routes = [{ name: 'Home' }, ...state.routes];
 
@@ -277,6 +277,32 @@ navigation.dispatch(state => {
     index: routes.length - 1,
   });
 });
+```
+
+You can use this functionality to build your own helpers that you can utilize in your app. Here is an example which implements inserting a screen just before the last one:
+
+```js
+import { CommonActions } from '@react-navigation/native';
+
+const insertBeforeLast = (routeName, params) => (state) => {
+  const routes = [
+    ...state.routes.slice(0, -1),
+    { name: routeName, params },
+    state.routes[state.routes.length - 1],
+  ];
+
+  return CommonActions.reset({
+    ...state,
+    routes,
+    index: routes.length - 1,
+  });
+};
+```
+
+Then use it like:
+
+```js
+navigation.dispatch(insertBeforeLast('Home'));
 ```
 
 ### `dangerouslyGetParent`
