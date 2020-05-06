@@ -32,7 +32,11 @@ Next, let's configure our navigation container to extract the path from the app'
 ```js
 import { Linking } from 'expo';
 
-const prefix = Linking.makeUrl('/');
+// Expo Version - use the following line if you use Expo managed workflow
+const prefix = Linking.makeUrl('/'); 
+
+// React-Native CLI (non-Expo) Version - Use the following line, instead of the one above, if you are NOT using Expo
+// const prefix = 'casualjob://'; 
 
 function App() {
   const linking = {
