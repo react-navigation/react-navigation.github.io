@@ -78,7 +78,7 @@ Specifies how the header should be rendered:
 
 ### Options
 
-The `options` prop can be used to configure individual screens inside the navigator. Supported options are:
+The `screenOptions` prop can be used to configure individual screens inside the navigator. Supported options are:
 
 #### `title`
 
