@@ -77,7 +77,7 @@ function HomeScreen({ navigation }) {
 
 `createStackNavigator` provides the platform-specific defaults for the back button. On iOS this includes a label next to the button, which shows the title of the previous screen when the title fits in the available space, otherwise it says "Back".
 
-You can change the label behavior with `headerBackTitle` and `headerTruncatedBackTitle` ([read more](stack-navigator.html#headerbacktitle)).
+You can change the label behavior with `headerBackTitle` and `headerTruncatedBackTitle` ([read more](stack-navigator.md#headerbacktitle)).
 
 To customize the back button image, you can use [headerBackImage](/docs/stack-navigator/#headerbackimage).
 

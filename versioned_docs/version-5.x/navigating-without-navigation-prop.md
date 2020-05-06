@@ -62,7 +62,7 @@ export function push(...args) {
 }
 ```
 
-Note that a stack navigators needs to be rendered to handle this action. You may want to check the [docs for nesting](https://reactnavigation.org/docs/nesting-navigators.html#navigating-to-a-screen-in-a-nested-navigator) for more details.
+Note that a stack navigators needs to be rendered to handle this action. You may want to check the [docs for nesting](nesting-navigators.md#navigating-to-a-screen-in-a-nested-navigator) for more details.
 
 When writing tests, you may mock the navigation functions, and make assertions on whether the correct functions are called with the correct parameters.
 
