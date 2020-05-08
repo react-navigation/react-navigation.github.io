@@ -292,7 +292,7 @@ Example:
 
 ### Options
 
-The `options` prop can be used to configure individual screens inside the navigator. Supported options are:
+The following [options](screen-options.md) can be used to configure the screens in the navigator:
 
 #### `title`
 
