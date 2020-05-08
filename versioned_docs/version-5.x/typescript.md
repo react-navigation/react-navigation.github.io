@@ -112,6 +112,20 @@ type Props = {
 };
 ```
 
+Alternatively, you can also import a generic type to define types for both the `navigation` and `route` props from the corresponding navigator:
+
+```tsx
+import { StackScreenProps } from '@react-navigation/stack';
+
+type RootStackParamList = {
+  Home: undefined;
+  Profile: { userId: string };
+  Feed: { sort: 'latest' | 'top' } | undefined;
+};
+
+type Props = StackScreenProps<RootStackParamList, 'Profile'>;
+```
+
 Then you can use the `Props` type to annotate your component.
 
 For function components:
