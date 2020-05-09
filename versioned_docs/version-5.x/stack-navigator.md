@@ -200,7 +200,7 @@ Function which returns a React Element to display on the right side of the heade
 
 #### `headerLeft`
 
-Function which returns a React Element to display on the left side of the header. When a function is used, it receives a number of arguments when rendered (`onPress`, `label`, `labelStyle` and more - check [types.tsx](https://github.com/react-navigation/stack/blob/master/src/types.tsx) for the complete list).
+Function which returns a React Element to display on the left side of the header. When a function is used, it receives a number of arguments when rendered (`onPress`, `label`, `labelStyle` and more - check [types.tsx](https://github.com/react-navigation/react-navigation/blob/master/packages/stack/src/types.tsx) for the complete list).
 
 #### `headerStyle`
 
