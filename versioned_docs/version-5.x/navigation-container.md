@@ -65,6 +65,18 @@ Example:
 </NavigationContainer>
 ```
 
+Providing a custom initial state object will override the initial state object obtained via deep linking or from browser's URL. If you're providing an initial state object, make sure that you don;t pass it on web and that there's no deep link by using `Linking.getInitialURL()`:
+
+```js
+const initialUrl = await Linking.getInitialURL();
+
+if (Platform.OS !== 'web' && initialUrl == null) {
+  // Only restore state if there's no deep link and we're not on web
+}
+```
+
+See [state persistence guide](state-persistence.md) for more details on how to persist and restore state.
+
 ### `onStateChange`
 
 > Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
@@ -75,7 +87,7 @@ You can use it to track the focused screen, persist the navigation state etc.
 
 ### `linking`
 
-Configuration for linking integration used for deep linking and URL support. Accepts the same options as [`useLinking`](use-linking.md#options).
+Configuration for linking integration used for deep linking and URL support in browsers. Accepts the same options as [`useLinking`](use-linking.md#options).
 
 Example:
 
@@ -97,6 +109,8 @@ function App() {
   );
 }
 ```
+
+See [configuring links guide](configuring-links.md) for more details on how to configure deep links and URL integration.
 
 ### `fallback`
 

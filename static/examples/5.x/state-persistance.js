@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Button, AsyncStorage } from 'react-native';
+import { View, Button, Linking, AsyncStorage } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -59,10 +59,16 @@ export default function App() {
   React.useEffect(() => {
     const restoreState = async () => {
       try {
-        const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
-        const state = JSON.parse(savedStateString);
+        const initialUrl = await Linking.getInitialURL();
 
-        setInitialState(state);
+        if (Platform.OS !== 'web' && initialUrl == null) {
+          const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
+          const state = savedState ? JSON.parse(savedState) : undefined;
+
+          if (state !== undefined) {
+            setInitialState(state);
+          }
+        }
       } finally {
         setIsReady(true);
       }
@@ -80,7 +86,7 @@ export default function App() {
   return (
     <NavigationContainer
       initialState={initialState}
-      onStateChange={state =>
+      onStateChange={(state) =>
         AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
       }
     >

@@ -20,6 +20,11 @@ To be able to persist the navigation state, we can use the `onStateChange` and `
  <samp id="state-persistance" />
 
 ```js
+import * as React from 'react';
+import { Linking } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import { NavigationContainer } from '@react-navigation/native';
+
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 
 export default function App() {
@@ -29,10 +34,17 @@ export default function App() {
   React.useEffect(() => {
     const restoreState = async () => {
       try {
-        const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
-        const state = JSON.parse(savedStateString);
+        const initialUrl = await Linking.getInitialURL();
 
-        setInitialState(state);
+        if (Platform.OS !== 'web' && initialUrl == null) {
+          // Only restore state if there's no deep link and we're not on web
+          const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
+          const state = savedState ? JSON.parse(savedState) : undefined;
+
+          if (state !== undefined) {
+            setInitialState(state);
+          }
+        }
       } finally {
         setIsReady(true);
       }
@@ -50,7 +62,7 @@ export default function App() {
   return (
     <NavigationContainer
       initialState={initialState}
-      onStateChange={state =>
+      onStateChange={(state) =>
         AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
       }
     >
