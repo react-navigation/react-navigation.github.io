@@ -11,16 +11,18 @@ const DEPS_VERSIONS = {
     'react-native-screens@^2.4.0',
   ],
   '5': [
-    "@react-native-community/masked-view@0.1.7",
-    "@react-navigation/bottom-tabs@5.2.4",
-    "@react-navigation/drawer@5.3.4",
-    "@react-navigation/material-bottom-tabs@5.1.6",
-    "@react-navigation/material-top-tabs@5.1.6",
-    "@react-navigation/native@5.1.3",
-    "@react-navigation/stack@5.2.6",
-    "react-native-reanimated@1.7.0",
-    "react-native-safe-area-context@0.7.3",
-    "react-native-screens@2.4.0",
+    '@react-native-community/masked-view@^0.1.7',
+    '@react-navigation/bottom-tabs@^5.4.2',
+    '@react-navigation/drawer@^5.7.2',
+    '@react-navigation/material-bottom-tabs@^5.2.2',
+    '@react-navigation/material-top-tabs@^5.2.2',
+    '@react-navigation/native@^5.3.0',
+    '@react-navigation/stack@^5.3.2',
+    'react-native-paper@^3.10.1',
+    'react-native-reanimated@^1.7.0',
+    'react-native-safe-area-context@^0.7.3',
+    'react-native-screens@^2.4.0',
+    'react-native-tab-view@^2.14.0',
   ],
   next: [],
 };
@@ -85,7 +87,7 @@ function appendSnackLink() {
     return;
   }
 
-  samples.forEach(samp => {
+  samples.forEach((samp) => {
     let codeBlock = findNearestCodeBlock(samp);
 
     if (!codeBlock) {
@@ -127,7 +129,7 @@ function appendSnackLink() {
 // This is used to update links like the following:
 // [Full source of what we have built so far](#example/full-screen-modal)
 function transformExistingSnackLinks() {
-  document.querySelectorAll('a[href*="#example/"]').forEach(a => {
+  document.querySelectorAll('a[href*="#example/"]').forEach((a) => {
     let urlParts = a.href.split('#example/');
     let templateId = urlParts[urlParts.length - 1];
     a.href = getSnackUrl({ templateId });
@@ -141,7 +143,7 @@ export function initializeSnackObservers() {
   appendSnackLink();
   transformExistingSnackLinks();
 
-  mutationObserver = new MutationObserver(mutations => {
+  mutationObserver = new MutationObserver((mutations) => {
     mutations.forEach(appendSnackLink);
     mutations.forEach(transformExistingSnackLinks);
   });
