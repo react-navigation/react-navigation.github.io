@@ -79,7 +79,7 @@ You can specify a separate `config` option to control how the deep link is parse
 const linking = {
   prefixes: ['https://mychat.com', 'mychat://'],
   config: {
-    Chat: 'feed',
+    Chat: 'feed/:sort',
     Profile: 'user',
   },
 };
