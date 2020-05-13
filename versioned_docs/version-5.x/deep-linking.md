@@ -49,6 +49,33 @@ function App() {
 
 The reason that is necessary to use `Expo.Linking.makeUrl` is that the scheme will differ depending on whether you're in the client app or in a standalone app.
 
+### Universal Links
+
+If you are using universal links, you need to add you domain to the prefixes.
+
+```js
+function App() {
+  const linking = {
+    prefixes: ['https://app.example.com'],
+  });
+
+  return (
+    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
+      {/* content */}
+    </NavigationContainer>
+  );
+}
+```
+
+**Note:** If you are using Expo SDK version 37 or lower, you need to add your domain with both the `https` and `exps` scheme, to work around [this bug in Expo](https://github.com/expo/expo/issues/6609).
+
+```diff
+   const linking = {
+-    prefixes: ['https://app.example.com'],
++    prefixes: ['https://app.example.com', 'exps://app.example.com'],
+   });
+```
+
 ### Test deep linking on iOS
 
 To test the URI on the simulator in the Expo client app, run the following:
