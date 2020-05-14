@@ -54,7 +54,7 @@ The `prefixes` option is needed to match the incoming deep links and strip the p
 
 The `fallback` prop controls what's displayed when React Navigation is trying to resolve the initial deep link URL.
 
-> Note: Deep link integration uses React Native's `Linking.getInitialUrl()` under the hood. Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android. you add a timeout to avoid getting stuck forever, but it means that the link might not be handled in some cases.
+> Note: Deep link integration uses React Native's `Linking.getInitialUrl()` under the hood. Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android. We add a timeout to avoid getting stuck forever, but it means that the link might not be handled in some cases.
 
 ## Mapping path to route names
 
@@ -153,7 +153,7 @@ function App() {
 }
 ```
 
-Here you have a stack navigator in the root, and inside the `Home` screen of the root stack, you have a tab navigator with various screens. With this structure, let's say you want the path `/users/:id` to go to the `Profile` screen. you can express the nested config like so:
+Here you have a stack navigator in the root, and inside the `Home` screen of the root stack, you have a tab navigator with various screens. With this structure, let's say you want the path `/users/:id` to go to the `Profile` screen. You can express the nested config like so:
 
 ```js
 {
@@ -189,7 +189,7 @@ It's important to note that the state object must match the hierarchy of nested 
 
 ## Rendering an initial route
 
-Sometimes you want to ensure that a certain screen will always be present as the first screen in the navigator's state. you can use the `initialRouteName` property to specify the screen to use for the initial screen.
+Sometimes you want to ensure that a certain screen will always be present as the first screen in the navigator's state. You can use the `initialRouteName` property to specify the screen to use for the initial screen.
 
 In the above example, if you want the `Notifications` screen to be the initial route in the navigator under `Home`, your config will look like this:
 
@@ -228,6 +228,43 @@ const state = {
 ```
 
 Note that in this case, any params in the URL are only passed to the `Profile` screen which matches the path pattern `users/:id`, and the `Notifications` screen doesn't receive any params. If you want to have the same params in the `Notifications` screen, you can specify a [custom `getStateFromPath` function](use-linking.md#getstatefrompath) and copy those params.
+
+## Matching exact paths
+
+By default, paths defined for each screen are matched against the URL relative to their parent screen's path. Consider the following config:
+
+```js
+{
+  Home: {
+    path: 'feed',
+    screens: {
+      Profile: 'users/:id',
+    },
+  },
+}
+```
+
+Here, you have a `path` property defined for the `Home` screen, as well as the child `Profile` screen. The profile screen specifies the path `users/:id`, but since it's nested inside a screen with the path `feed`, it'll try to match the pattern `feed/users/:id`.
+
+This will result in the URL `/feed` navigating to `Home` screen, and `/feed/users/cal` navigating to the `Profile` screen.
+
+In this case, it makes more sense to navigate to the `Profile` screen using a URL like `/users/cal`, rather than `/feed/users/cal`. To achieve this, you can override the relative matching behavior to `exact` matching:
+
+```js
+{
+  Home: {
+    path: 'feed',
+    screens: {
+      Profile: {
+        path: 'users/:id',
+        exact: true,
+      },
+    },
+  },
+}
+```
+
+With `exact` property set to `true`, `Profile` will ignore the parent screen's `path` config and you'll be able to navigate to `Profile` using a URL like `users/cal`.
 
 ## Omitting a screen from path
 
@@ -293,15 +330,14 @@ There are some constraints to consider when using nested navigators in the linki
 
 1. **Using `initialRouteName` makes the screen always appear in the state of a navigator.** It's not possible to pass params to the initial screen through the URL by default, unless the URL explicitly maps to the screen. So make sure that your initial route doesn't take any params or specify `initialParams`.
 
-2. **Having multiple screens of a nested navigator present in the state object is not possible through a one-part URL string.** you also cannot provide a URL like (for the above configuration) `/user/home`, because it would be resolved to `HomeStack->Profile->HomeStack->Home`. If you want to get rid of the second `HomeStack`, you can provide an explicit config for the `Home` screen in the first level of config nesting (remember to provide a different path string for each occurrence of a screen in the config):
+2. **Having multiple screens of a nested navigator present in the state object is not possible in a single URL.** you also cannot provide a URL like (for the above configuration) `/user/home`, because it would be resolved to `HomeStack->Profile->HomeStack->Home`. If you want to get rid of the second `HomeStack`, you can provide an explicit config for the `Home` screen in the first level of config nesting (remember to provide a different path string for each occurrence of a screen in the config):
 
    ```js
    const config = {
      HomeStack: {
        path: 'stack',
-       initialRouteName: 'Profile',
+       initialRouteName: 'Feed',
        screens: {
-         Home: 'home',
          Profile: 'user',
        },
      },
@@ -310,9 +346,9 @@ There are some constraints to consider when using nested navigators in the linki
    };
    ```
 
-   Then `/user/first` will resolve to `HomeStack->Profile->Home`.
+   Then `/user/home` will resolve to `HomeStack->Profile->Home`.
 
-   you can also make the config not include nested navigator, which will make the URL even longer, but maybe a bit less confusing.
+   You can also make the config not include nested navigator, which will make the URL even longer, but maybe a bit less confusing.
 
    ```js
    const config = {
@@ -366,12 +402,11 @@ But what if you want to have parameters in the URL, like the user id of the pers
 
 With the above config, in order to get to `Home` or `Profile` screen, you need to have `/stack` in the URL (`/stack/home` and `/stack/user`). But it'll be much better if you could go to the `Home` screen with `/home` and `Profile` screen with `/profile`.
 
-you can achieve the behavior by using nested navigators in your `config`. The syntax looks like that:
+You can achieve the behavior by using nested navigators in your `config`. The syntax looks like that:
 
 ```js
 config = {
   HomeStack: {
-    path: 'stack',
     screens: {
       Home: 'home',
       Profile: 'user',
@@ -383,14 +418,13 @@ config = {
 
 As you can see, `Home` and `Profile` are now nested in the `screens` property of `HomeStack`. This means that when you pass the `/home` URL, it will be resolved to a `HomeStack`->`Home` state object (similarly for `/user` it would be `HomeStack`->`Profile`).
 
-Here, the `HomeStack` property now contains a config object, and if you want to navigate straight to it, you have to provide it with the `path` property (`/stack` will go to `HomeStack`). The config can go as deep as you want, e.g. if `Home` was a navigator, you could make it an object with `screens` property, and put more screens or navigators inside it, making the URL string much more readable.
+Here, the `HomeStack` property now contains a config object. The config can go as deep as you want, e.g. if `Home` was a navigator, you could make it an object with `screens` property, and put more screens or navigators inside it, making the URL string much more readable.
 
 What if you wanted a specific screen to used as the initial screen in the navigator? For example, if you had a URL that would open `Home` screen, you would like to be able to navigate to `Profile` from it by using navigation's `navigation.goBack()` method. It is possible by defining `initialRouteName` for a navigator. It would look like this:
 
 ```js
 config = {
   HomeStack: {
-    path: 'stack',
     initialRouteName: 'Profile',
     screens: {
       Home: 'home',
