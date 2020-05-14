@@ -14,7 +14,7 @@
     "@docusaurus/core": "2.0.0-alpha.43",
     "@docusaurus/plugin-google-analytics": "^2.0.0-alpha.37",
     "@docusaurus/preset-classic": "2.0.0-alpha.43",
-    "@react-navigation/core": "^5.6.0",
+    "@react-navigation/core": "^5.6.1",
     "classnames": "^2.2.6",
     "escape-html": "^1.0.3",
     "mkdirp": "^1.0.3",
