@@ -73,7 +73,8 @@
           "version-5.x/use-link-props",
           "version-5.x/use-link-builder",
           "version-5.x/use-linking",
-          "version-5.x/use-scroll-to-top"
+          "version-5.x/use-scroll-to-top",
+          "version-5.x/use-theme"
         ]
       },
       {
