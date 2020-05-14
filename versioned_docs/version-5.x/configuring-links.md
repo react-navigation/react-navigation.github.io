@@ -4,8 +4,6 @@ title: Configuring links
 sidebar_label: Configuring links
 ---
 
-import LinkingTester from '@site/src/components/LinkingTester'
-
 In this guide, we will configure React Navigation to handle external links. This is necessary if you want to:
 
 1. Handle deep links in React Native apps on Android and iOS
@@ -366,6 +364,8 @@ There are some constraints to consider when using nested navigators in the linki
 ## Playground
 
 You can play around with customizing the config and path below, and see how the path is parsed.
+
+import LinkingTester from '@site/src/components/LinkingTester'
 
 <LinkingTester />
 
