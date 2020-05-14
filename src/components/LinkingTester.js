@@ -35,7 +35,13 @@ export default function LinkingTester() {
   const [config, setConfig] = React.useState(() => parse(rawConfig));
   const [showJSON, setShowJSON] = React.useState(false);
 
-  const state = getStateFromPath(path.replace(/(^\w+:|^)\/\//, ''), config);
+  let state;
+
+  try {
+    state = getStateFromPath(path.replace(/(^\w+:|^)\/\//, ''), config);
+  } catch (e) {
+    // Ignore
+  }
 
   return (
     <>
