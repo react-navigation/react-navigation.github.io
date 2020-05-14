@@ -14,10 +14,14 @@
     "@docusaurus/core": "2.0.0-alpha.43",
     "@docusaurus/plugin-google-analytics": "^2.0.0-alpha.37",
     "@docusaurus/preset-classic": "2.0.0-alpha.43",
+    "@react-navigation/core": "^5.6.0",
     "classnames": "^2.2.6",
+    "escape-html": "^1.0.3",
     "mkdirp": "^1.0.3",
+    "prism-react-renderer": "^1.1.0",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "react-simple-code-editor": "^0.11.0"
   },
   "browserslist": {
     "production": [

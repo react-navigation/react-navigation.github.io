@@ -4,6 +4,8 @@ title: Configuring links
 sidebar_label: Configuring links
 ---
 
+import LinkingTester from '@site/src/components/LinkingTester'
+
 In this guide, we will configure React Navigation to handle external links. This is necessary if you want to:
 
 1. Handle deep links in React Native apps on Android and iOS
@@ -324,6 +326,12 @@ There are some constraints to consider when using nested navigators in the linki
    Then `/stack/user/home` will resolve to `HomeStack->Profile->Home`.
 
 3. **When nesting navigators, params are only passed to the screen that'll be opened by the URL.** If you want to have the same params in other screens, you can specify a [custom `getStateFromPath` function](use-linking.md#getstatefrompath) and copy those params to the desired route objects.
+
+## Playground
+
+You can play around with customizing the config and path below, and see how the path is parsed.
+
+<LinkingTester />
 
 ## Example App
 
