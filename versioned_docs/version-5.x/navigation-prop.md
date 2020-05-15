@@ -169,7 +169,7 @@ The `setOptions` method lets us set screen options from within the component. Th
 function ProfileScreen({ navigation, route }) {
   const [value, onChangeText] = React.useState(route.params.title);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     navigation.setOptions({
       title: value === '' ? 'No title' : value,
     });
