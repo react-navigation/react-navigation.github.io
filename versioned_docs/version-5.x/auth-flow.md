@@ -88,7 +88,7 @@ return (
 );
 ```
 
-In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `AsyncStorage` and validating if token. After we get the token and if it's valid, we need to set the `userToken`. We also have another state called `isSignout` to have a different animation on sign out.
+In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `AsyncStorage` and validating the token. After we get the token and if it's valid, we need to set the `userToken`. We also have another state called `isSignout` to have a different animation on sign out.
 
 The main thing to notice is that we're conditionally defining screens based on these state variables:
 
