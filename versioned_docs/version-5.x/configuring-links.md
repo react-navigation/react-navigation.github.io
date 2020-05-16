@@ -35,11 +35,11 @@ The `NavigationContainer` accepts a `linking` prop that makes it easier to handl
 ```js
 import { NavigationContainer } from '@react-navigation/native';
 
-function App() {
-  const linking = {
-    prefixes: ['https://mychat.com', 'mychat://'],
-  };
+const linking = {
+  prefixes: ['https://mychat.com', 'mychat://'],
+};
 
+function App() {
   return (
     <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
       {/* content */}
@@ -189,7 +189,7 @@ It's important to note that the state object must match the hierarchy of nested 
 
 Sometimes you want to ensure that a certain screen will always be present as the first screen in the navigator's state. You can use the `initialRouteName` property to specify the screen to use for the initial screen.
 
-In the above example, if you want the `Notifications` screen to be the initial route in the navigator under `Home`, your config will look like this:
+In the above example, if you want the `Feed` screen to be the initial route in the navigator under `Home`, your config will look like this:
 
 ```js
 {
@@ -197,7 +197,7 @@ In the above example, if you want the `Notifications` screen to be the initial r
     initialRouteName: 'Notifications',
     screens: {
       Profile: 'users/:id',
-      Notifications: 'notify/:user',
+      Settings: 'settings',
     },
   },
 };
