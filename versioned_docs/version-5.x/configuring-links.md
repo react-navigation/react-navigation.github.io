@@ -85,7 +85,7 @@ const linking = {
 };
 ```
 
-Here `Chat` is the name of the screen that handles the URL `/feed`, and `Profile` handles the URL `/profile`.
+Here `Chat` is the name of the screen that handles the URL `/feed`, and `Profile` handles the URL `/user`.
 
 ## Passing params
 
