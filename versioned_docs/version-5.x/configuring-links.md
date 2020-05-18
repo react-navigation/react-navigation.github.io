@@ -136,7 +136,7 @@ function Home() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Profile" component={Profile} />
-      <Tab.Screen name="Notifications" component={Notifications} />
+      <Tab.Screen name="Feed" component={Feed} />
     </Tab.Navigator>
   );
 }
@@ -194,7 +194,7 @@ In the above example, if you want the `Feed` screen to be the initial route in t
 ```js
 {
   Home: {
-    initialRouteName: 'Notifications',
+    initialRouteName: 'Feed',
     screens: {
       Profile: 'users/:id',
       Settings: 'settings',
@@ -213,7 +213,7 @@ const state = {
       state: {
         index: 1,
         routes: [
-          { name: 'Notifications' },
+          { name: 'Feed' },
           {
             name: 'Profile',
             params: { id: 'jane' },
@@ -225,7 +225,7 @@ const state = {
 };
 ```
 
-Note that in this case, any params in the URL are only passed to the `Profile` screen which matches the path pattern `users/:id`, and the `Notifications` screen doesn't receive any params. If you want to have the same params in the `Notifications` screen, you can specify a [custom `getStateFromPath` function](use-linking.md#getstatefrompath) and copy those params.
+Note that in this case, any params in the URL are only passed to the `Profile` screen which matches the path pattern `users/:id`, and the `Feed` screen doesn't receive any params. If you want to have the same params in the `Feed` screen, you can specify a [custom `getStateFromPath` function](use-linking.md#getstatefrompath) and copy those params.
 
 ## Matching exact paths
 
@@ -298,6 +298,79 @@ But it'll be nicer if the URL was just `/` when visiting the home screen. You ca
   },
 }
 ```
+
+## Serializing and parsing params
+
+Since URLs are strings, any params you have for routes are also converted to strings when constructing the path.
+
+For example, say you have a state like following:
+
+```js
+{
+  routes: [
+    {
+      name: 'Chat',
+      params: { at: 1589842744264 },
+    },
+  ];
+}
+```
+
+It'll be converted to `chat/1589842744264` with the following config:
+
+```js
+{
+  Chat: 'chat/:date';
+}
+```
+
+When parsing this path, you'll get the following state:
+
+```js
+{
+  routes: [
+    {
+      name: 'Chat',
+      params: { date: '1589842744264' },
+    },
+  ];
+}
+```
+
+Here, the `date` param was parsed as a string because React Navigation doesn't know that it's supposed to be a timestamp, and hence number. You can customize it by providing a custom function to use for parsing:
+
+```js
+{
+  Chat: {
+    path: 'chat/:date',
+    parse: {
+      date: Number,
+    },
+  }
+}
+```
+
+You can also provide a custom function to serialize the params. For example, let's say that you want to use a DD-MM-YYYY format in the path instead of a timestamp:
+
+```js
+{
+  Chat: {
+    path: 'chat/:date',
+    parse: {
+      date: date => new Date(date).getTime(),
+    },
+    stringify: {
+      date: date => {
+        const d = new Date(date);
+
+        return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
+      },
+    },
+  }
+}
+```
+
+Depending on your requirements, you can use this functionality to parse and stringify more complex data.
 
 ## Advanced cases
 
