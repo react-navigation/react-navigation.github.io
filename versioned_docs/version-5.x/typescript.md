@@ -165,8 +165,6 @@ type ProfileScreenNavigationProp = CompositeNavigationProp<
 
 The `CompositeNavigationProp` type takes 2 parameters, first parameter is the primary navigation type (type for the navigator that owns this screen, in our case the tab navigator which contains the `Profile` screen) and second parameter is the secondary navigation type (type for a parent navigator). The primary navigation type should always have the screen's route name as it's second parameter.
 
-For multiple parent navigators, this secondary type should be nested:
-
 ```ts
 type ProfileScreenNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<TabParamList, 'Profile'>,
@@ -175,6 +173,53 @@ type ProfileScreenNavigationProp = CompositeNavigationProp<
     DrawerNavigationProp<DrawerParamList>
   >
 >;
+```
+
+In order to navigate to a deeply nested navigator you must define the paramater type for the route. An example use of this could be with a authentication flow where registration has multiple screens and is nested in a root app stack. 
+
+```ts
+export type AppNavigationProp<RouteName extends keyof AppParamsList> = StackNavigationProp<AppParamsList>
+export type NestedNavigator<T> = { screen: keyof T; params?: T[keyof T] }
+
+export type AppParamsList = {
+    Auth: NestedNavigator<AuthParamList>
+    Main: NestedNavigator<MainParamList>
+}
+```
+
+```ts
+export type AuthParamList = {
+    Lander: undefined
+    Login: undefined
+    Register: NestedNavigator<RegisterParamList>
+}
+
+export type AuthNavigationProp<RouteName extends keyof AuthParamList> = CompositeNavigationProp<
+    AppNavigationProp<'Auth'>,
+    StackNavigationProp<
+        AuthParamList,
+        RouteName
+    >
+>
+```
+
+```ts
+export type RegisterParamList = {
+    Credentials: undefined
+    Details: undefined
+    ValidateEmail: undefined
+}
+
+export type RegisterNavigationProp<RouteName extends keyof RegisterParamList> = CompositeNavigationProp<
+    AuthNavigationProp<'Register'>,
+    StackNavigationProp<RegisterParamList, RouteName>
+>
+```
+
+The defined `NestedNavigator<T>` allows us to make deeply nested navigation calls without type errors:
+
+```ts
+navigation.navigate('Register', { screen: 'Details' });
 ```
 
 ### Annotating `useNavigation`
