@@ -165,6 +165,8 @@ type ProfileScreenNavigationProp = CompositeNavigationProp<
 
 The `CompositeNavigationProp` type takes 2 parameters, first parameter is the primary navigation type (type for the navigator that owns this screen, in our case the tab navigator which contains the `Profile` screen) and second parameter is the secondary navigation type (type for a parent navigator). The primary navigation type should always have the screen's route name as it's second parameter.
 
+For multiple parent navigators, this secondary type should be nested:
+
 ```ts
 type ProfileScreenNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<TabParamList, 'Profile'>,
