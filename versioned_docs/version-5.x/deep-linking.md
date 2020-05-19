@@ -37,7 +37,7 @@ const prefix = Linking.makeUrl('/');
 function App() {
   const linking = {
     prefixes: [prefix],
-  });
+  };
 
   return (
     <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
