@@ -41,4 +41,4 @@ Sponsorships will help us to move more quickly towards our goal of building the 
 
 ### 👉 [Visit our GitHub Sponsors page](https://github.com/sponsors/react-navigation) 👈
 
-We appreciate and support you can provide, but please only donate if you have the financial means to do so comfortably.
+We appreciate any support you can provide, but please only donate if you have the financial means to do so comfortably!
