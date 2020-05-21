@@ -340,7 +340,7 @@ Gestures are not supported on Web.
 
 Object to override the distance of touch start from the edge of the screen to recognize gestures. The object can contain the following properties:
 
-- `horizontal` - _number_ - Distance for horizontal direction. Defaults to 25.
+- `horizontal` - _number_ - Distance for horizontal direction. Defaults to 50.
 - `vertical` - _number_ - Distance for vertical direction. Defaults to 135.
 
 This is not supported on Web.
