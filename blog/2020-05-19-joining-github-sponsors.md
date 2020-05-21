@@ -17,6 +17,8 @@ React Navigation is depended on by some of the most respected engineering organi
 
 We've also seen React Navigation used in apps that help in the fight against COVID-19. Our favourites are [How We Feel](https://howwefeel.org/) by Pinterest co-founder and CEO Ben Silbermann and a team from Pinterest in collaboration with leading scientists ([article](https://news.harvard.edu/gazette/story/2020/04/how-we-feel-app-helps-track-spread-of-covid-19/)) and [COVID Symptom Study](https://covid.joinzoe.com/) by ZOE Global in association with King's College London ([article](https://www.nytimes.com/2020/05/11/health/coronavirus-symptoms-app.html)).
 
+<!--truncate-->
+
 There are so many more apps that we could mention here, but let's move on. If you've been following along with React Navigation, you already know what a huge improvement v5 has been for the library and for navigation in React Native in general. We haven't slowed down since shipping v5, some other substantial improvements we've shipped recently include:
 
 - [First-class support for web](https://reactnavigation.org/blog/2020/05/16/web-support) 🎉
