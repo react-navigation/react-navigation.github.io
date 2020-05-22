@@ -11,7 +11,7 @@ Example:
 ```js
 import * as React from 'react';
 import { ScrollView } from 'react-native';
-import { useLinking } from '@react-navigation/native';
+import { useLinking , NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   const ref = React.useRef();
