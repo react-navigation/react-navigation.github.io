@@ -100,7 +100,7 @@
     "Meta": [
       "version-5.x/pitch",
       "version-5.x/alternatives",
-      "version-5.x/apps",
+      "version-5.x/used-by",
       "version-5.x/contributing"
     ]
   }
