@@ -63,7 +63,7 @@ const MyTheme = {
 };
 ```
 
-Providing a theme will take care of styling all of the official navigators you. React Navigation also provides several tools to help you make your customizations of those navigators and the screens within the navigators can use the theme too.
+Providing a theme will take care of styling of all the official navigators. React Navigation also provides several tools to help you make your customizations of those navigators and the screens within the navigators can use the theme too.
 
 ## Built-in themes
 
