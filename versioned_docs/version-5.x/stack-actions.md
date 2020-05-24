@@ -27,7 +27,7 @@ navigation.dispatch(
 );
 ```
 
-If you want to replace a particular route, you can add a `source` property referring to the route key:
+If you want to replace a particular route, you can add a `source` property referring to the route key and `target` property referring to the navigation state key:
 
 <samp id="stack-actions" />
 
@@ -39,6 +39,7 @@ navigation.dispatch({
     user: 'jane',
   }),
   source: route.key,
+  target: navigation.dangerouslyGetState().key,
 });
 ```
 
