@@ -226,7 +226,7 @@ function CustomDrawerContent(props) {
       <DrawerItemList {...props} />
       <DrawerItem
         label="Help"
-        onPress={() => Linking.openUrl('https://mywebsite.com/help')}
+        onPress={() => Linking.openURL('https://mywebsite.com/help')}
       />
     </DrawerContentScrollView>
   );
