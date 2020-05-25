@@ -18,7 +18,7 @@ npm install @react-navigation/native
 
 React Navigation is made up of some core utilities and those are then used by navigators to create the navigation structure in your app. Don't worry too much about this for now, it'll become clear soon enough! To frontload the installation work, let's also install and configure dependencies used by most navigators, then we can move forward with starting to write some code.
 
-The libraries we will install now are [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated), [`react-native-screens`](https://github.com/software-mansion/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context) and `@react-native-community/masked-view`(https://github.com/react-native-community/react-native-masked-view). If you already have these libraries installed and at the latest version, you are done here! Otherwise, read on.
+The libraries we will install now are [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler), [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated), [`react-native-screens`](https://github.com/software-mansion/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context) and [`@react-native-community/masked-view`](https://github.com/react-native-community/react-native-masked-view). If you already have these libraries installed and at the latest version, you are done here! Otherwise, read on.
 
 ### Installing dependencies into an Expo managed project
 
