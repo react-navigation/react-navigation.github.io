@@ -12,6 +12,7 @@ Currently, the following features are available:
 
 - [URL integration in browser](configuring-links.md)
 - [Accessible links](link.md)
+- [Server rendering](server-rendering.md)
 
 It's important to use links as the primary way of navigation instead of navigation actions such as `navigation.navigate`. It'll ensure that your links are properly usable on web.
 
