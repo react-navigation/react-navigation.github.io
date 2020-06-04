@@ -73,7 +73,7 @@ function App() {
    const linking = {
 -    prefixes: ['https://app.example.com'],
 +    prefixes: ['https://app.example.com', 'exps://app.example.com'],
-   });
+   };
 ```
 
 ### Test deep linking on iOS
