@@ -50,7 +50,7 @@ Example:
 ```js
 import * as React from 'react';
 import {
-  NavigationHelpersContext
+  NavigationHelpersContext,
   useNavigationBuilder,
   TabRouter,
   TabActions,
