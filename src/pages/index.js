@@ -50,6 +50,18 @@ function Home() {
       title={`${siteConfig.title}`}
       description="Description will go into a meta tag in <head />"
     >
+      <div className={styles.blm}>
+        Black Lives Matter.{' '}
+        <a
+          target="_blank"
+          rel="noopener"
+          rel="noreferrer"
+          href="https://support.eji.org/give/153413/#!/donation/checkout"
+        >
+          Support the Equal Justice Initiative
+        </a>
+        .
+      </div>
       <header className="hero text--center">
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
@@ -57,14 +69,20 @@ function Home() {
 
           <div>
             <Link
-              className={classnames("button button--secondary button--outline button--lg margin-right--sm", styles.heroButton)}
+              className={classnames(
+                'button button--secondary button--outline button--lg margin-right--sm',
+                styles.heroButton
+              )}
               to={useBaseUrl('/docs/getting-started')}
             >
               Read docs
             </Link>
 
             <Link
-              className={classnames("button button--secondary button--outline button--lg", styles.heroButton)}
+              className={classnames(
+                'button button--secondary button--outline button--lg',
+                styles.heroButton
+              )}
               to={
                 'https://github.com/react-navigation/react-navigation/tree/master/example'
               }
@@ -74,23 +92,21 @@ function Home() {
           </div>
         </div>
       </header>
-
       <section className="margin-vert--xl text--center">
         <div className="container">
           <div className="row">
-            <div  className="col col--12">
+            <div className="col col--12">
               <h4>
-              Coming from v4? Check out our{' '}
-              <Link to={useBaseUrl('/docs/upgrading-from-4.x')}>
-                v4 to v5 migration guide
-              </Link>
-              .
+                Coming from v4? Check out our{' '}
+                <Link to={useBaseUrl('/docs/upgrading-from-4.x')}>
+                  v4 to v5 migration guide
+                </Link>
+                .
               </h4>
             </div>
           </div>
         </div>
       </section>
-      
       {features && features.length && (
         <section className="margin-vert--xl">
           <div className="container">
