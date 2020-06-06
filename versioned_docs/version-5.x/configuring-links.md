@@ -185,6 +185,81 @@ const state = {
 
 It's important to note that the state object must match the hierarchy of nested navigators. Otherwise the state will be discarded.
 
+## Handling unmatched routes or 404
+
+If your app is opened with an invalid URL, most of the times you'd want to show an error page with some information. On the web, this is commonly known as 404 - or page not found error.
+
+To handle this, you'll need to define a catch-all route that will be rendered if no other routes match the path. You can do it by specifying `*` for the path matching pattern.
+
+For example:
+
+```js
+{
+  Home: {
+    initialRouteName: 'Feed',
+    screens: {
+      Profile: 'users/:id',
+      Settings: 'settings',
+    },
+  },
+  404: '*',
+}
+```
+
+Here, we have defined a route named `404` and set it to match `*` aka everything. If the path didn't match `user/:id` or `settings`, it'll be matched by this route.
+
+So, a path like `/library` or `/settings/notification` will resolve to the following state object:
+
+```js
+const state = {
+  routes: [{ name: '404' }],
+};
+```
+
+You can even go more specific, for example, say if you want to show a different screen for invalid paths under `/settings`, you can specify such a pattern under `Settings`:
+
+```js
+{
+  Home: {
+    initialRouteName: 'Feed',
+    screens: {
+      Profile: 'users/:id',
+      Settings: {
+        path: 'settings',
+        screens: {
+          InvalidSettings: '*',
+        },
+      },
+    },
+  },
+  404: '*',
+}
+```
+
+With this configuration, the path `/settings/notification` will resolve to the following state object:
+
+```js
+const state = {
+  routes: [
+    {
+      name: 'Home',
+      state: {
+        index: 1,
+        routes: [
+          { name: 'Feed' },
+          {
+            name: 'Settings',
+            state: {
+              routes: [{ name: 'InvalidSettings' }],
+            },
+          },
+        ],
+      },
+    },
+  ],
+};
+```
+
 ## Rendering an initial route
 
 Sometimes you want to ensure that a certain screen will always be present as the first screen in the navigator's state. You can use the `initialRouteName` property to specify the screen to use for the initial screen.
@@ -200,7 +275,7 @@ In the above example, if you want the `Feed` screen to be the initial route in t
       Settings: 'settings',
     },
   },
-};
+}
 ```
 
 Then, the path `/users/42` will resolve to the following state object:
