@@ -127,6 +127,8 @@ navigation.reset({
 });
 ```
 
+The state object specified in `reset` replaces the existing navigation state with the new one, i.e. removes existing screens and add new ones. If you want to preserve the existing screens when changing the state, you can use `CommonActions.reset` with [`dispatch`](#dispatch) instead.
+
 > Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
 
 ### `setParams`
