@@ -78,6 +78,12 @@ Example:
 import { View, Text, TouchableOpacity } from 'react-native';
 
 function MyTabBar({ state, descriptors, navigation }) {
+  const focusedOptions = descriptors[state.routes[state.index].key].options;
+
+  if (focusedOptions.tabBarVisible === false) {
+    return null;
+  }
+
   return (
     <View style={{ flexDirection: 'row' }}>
       {state.routes.map((route, index) => {

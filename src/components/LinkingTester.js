@@ -24,10 +24,13 @@ export default function LinkingTester() {
         parse: {
           id: id => id.replace(/^@/, ''),
         },
+        screens: {
+          Settings: 'edit',
+        },
       },
     },
   },
-  Settings: 'edit',
+  NoMatch: '*',
 }`
   );
 

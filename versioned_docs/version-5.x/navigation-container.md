@@ -29,6 +29,8 @@ export default function App() {
 }
 ```
 
+## Ref
+
 It's also possible to attach a [`ref`](https://reactjs.org/docs/refs-and-the-dom.html#creating-refs) to the container to get access to various helper methods, for example, dispatch navigation actions.
 
 Example:

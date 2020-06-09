@@ -30,6 +30,7 @@
       "version-5.x/deep-linking",
       "version-5.x/configuring-links",
       "version-5.x/web-support",
+      "version-5.x/server-rendering",
       "version-5.x/screen-tracking",
       "version-5.x/themes",
       "version-5.x/state-persistence",
@@ -43,6 +44,7 @@
     ],
     "API Reference": [
       "version-5.x/navigation-container",
+      "version-5.x/server-container",
       "version-5.x/screen-options",
       "version-5.x/route-prop",
       "version-5.x/navigation-prop",
@@ -54,6 +56,7 @@
         "label": "Navigators",
         "items": [
           "version-5.x/stack-navigator",
+          "version-5.x/native-stack-navigator",
           "version-5.x/drawer-navigator",
           "version-5.x/bottom-tab-navigator",
           "version-5.x/material-bottom-tab-navigator",

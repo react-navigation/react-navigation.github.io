@@ -35,3 +35,15 @@
 .heroButton:hover {
   color: #6b52ae !important;
 }
+
+.blm {
+  font-size: 1.4em;
+  padding: 20px;
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+.blm a {
+  color: rgb(166, 151, 206);
+}
