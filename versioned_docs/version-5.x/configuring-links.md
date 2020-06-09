@@ -202,17 +202,17 @@ For example:
       Settings: 'settings',
     },
   },
-  404: '*',
+  NotFound: '*',
 }
 ```
 
-Here, we have defined a route named `404` and set it to match `*` aka everything. If the path didn't match `user/:id` or `settings`, it'll be matched by this route.
+Here, we have defined a route named `NotFound` and set it to match `*` aka everything. If the path didn't match `user/:id` or `settings`, it'll be matched by this route.
 
 So, a path like `/library` or `/settings/notification` will resolve to the following state object:
 
 ```js
 const state = {
-  routes: [{ name: '404' }],
+  routes: [{ name: 'NotFound' }],
 };
 ```
 
@@ -232,7 +232,7 @@ You can even go more specific, for example, say if you want to show a different 
       },
     },
   },
-  404: '*',
+  NotFound: '*',
 }
 ```
 
@@ -259,6 +259,8 @@ const state = {
   ],
 };
 ```
+
+When doing server rendering, you'd also want to return correct status code for 404 errors. See [server rendering docs](server-rendering.md#handling-404-or-other-status-codes) for a guide on how to handle it.
 
 ## Rendering an initial route
 

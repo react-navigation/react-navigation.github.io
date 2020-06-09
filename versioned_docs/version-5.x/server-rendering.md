@@ -144,6 +144,63 @@ Make sure that you have specified a `title` option in your screens:
 />
 ```
 
+## Handling 404 or other status codes
+
+When [rendering a screen for an invalid URL](configuring-links.md#handling-unmatched-routes-or-404), we should also return a `404` status code from the server.
+
+First, we need to create a context where we'll attach the status code. To do this, place the following code in a separate file that we will be importing on both the server and client:
+
+```js
+import * as React from 'react';
+
+const StatusCodeContext = React.createContext();
+
+export default StatusCodeContext;
+```
+
+Then, we need to use the context in our `NotFound` screen. Here, we add a `code` property with the value of `404` to signal that the screen was not found:
+
+```js
+function NotFound() {
+  const status = React.useContext(StatusCodeContext);
+
+  if (status) {
+    staus.code = 404;
+  }
+
+  return (
+    <View>
+      <Text>Oops! This URL doesn't exist.</Text>
+    </View>
+  );
+}
+```
+
+You could also attach additional information in this object if you need to.
+
+Next, we need to create a status object to pass in the context on our server. By default, we'll set the `code` to `200`. Then pass the object in `StatusCodeContext.Provider` which should wrap the element with `ServerContainer`:
+
+```js
+// Create a status object
+const status = { code: 200 };
+
+const html = ReactDOMServer.renderToString(
+  // Pass the status object via context
+  <StatusCodeContext.Provider value={status}>
+    <ServerContainer ref={ref} location={location}>
+      {element}
+    </ServerContainer>
+  </StatusCodeContext.Provider>
+);
+
+// After rendering, get the status code and use it for server's response
+ctx.status = status.code;
+```
+
+After we render the app with `ReactDOMServer.renderToString`, the `code` property of the `status` object will be updated to be `404` if the `NotFound` screen was rendered.
+
+You can follow a similar approach for other status codes too.
+
 ## Summary
 
 - Use the `location` prop on `ServerContainer` to render correct screens based on the incoming request.
