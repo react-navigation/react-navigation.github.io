@@ -131,7 +131,24 @@ import {
 
 // ...
 
-export default createNavigatorFactory(TabNavigator);
+export const createMyNavigator = createNavigatorFactory(TabNavigator);
+```
+
+Then it can be used like this:
+
+```js
+import { createMyNavigator } from './myNavigator';
+
+const My = createMyNavigator();
+
+function App() {
+  return (
+    <My.Navigator>
+      <My.Screen name="Home" component={HomeScreen} />
+      <My.Screen name="Feed" component={FeedScreen} />
+    </My.Navigator>
+  )
+}
 ```
 
 ## Type-checking navigators
