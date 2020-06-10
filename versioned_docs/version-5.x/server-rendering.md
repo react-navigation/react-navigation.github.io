@@ -199,9 +199,10 @@ ctx.status = status.code;
 
 After we render the app with `ReactDOMServer.renderToString`, the `code` property of the `status` object will be updated to be `404` if the `NotFound` screen was rendered.
 
-You can follow a similar approach for other status codes too.
+You can follow a similar approach for other status codes too, for example, `401` for unauthorized etc.
 
 ## Summary
 
 - Use the `location` prop on `ServerContainer` to render correct screens based on the incoming request.
 - Attach a `ref` to the `ServerContainer` get options for the current screen.
+- Use context to attach more information such as status code.

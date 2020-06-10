@@ -67,7 +67,7 @@ function HomeScreen({ navigation }) {
         <Button onPress={() => setCount(c => c + 1)} title="Update count" />
       ),
     });
-  }, [navigation, setCount]);
+  }, [navigation]);
 
   return <Text>Count: {count}</Text>;
 }
@@ -79,15 +79,16 @@ function HomeScreen({ navigation }) {
 
 You can change the label behavior with `headerBackTitle` and `headerTruncatedBackTitle` ([read more](stack-navigator.md#headerbacktitle)).
 
-To customize the back button image, you can use [headerBackImage](/docs/stack-navigator/#headerbackimage).
+To customize the back button image, you can use [headerBackImage](stack-navigator.md#headerbackimage).
 
 ## Overriding the back button
 
 The back button will be rendered automatically in a stack navigator whenever it is possible for the user to go back from their current screen &mdash; in other words, the back button will be rendered whenever there is more than one screen in the stack.
 
-Generally, this is what you want. But it's possible that in some circumstances that you want to customize the back button more than you can through the options mentioned above, in which case you can set the `headerLeft` option to a React Element that will be rendered, just as we did with `headerRight`. Alternatively, the `headerLeft` option also accepts a React Component, which can be used, for example, for overriding the onPress behavior of the back button. Read more about this in the [api reference](/docs/stack-navigator/#headerleft).
+Generally, this is what you want. But it's possible that in some circumstances that you want to customize the back button more than you can through the options mentioned above, in which case you can set the `headerLeft` option to a React Element that will be rendered, just as we did with `headerRight`. Alternatively, the `headerLeft` option also accepts a React Component, which can be used, for example, for overriding the onPress behavior of the back button. Read more about this in the [api reference](stack-navigator.md#headerleft).
 
 ## Summary
 
 - You can set buttons in the header through the `headerLeft` and `headerRight` properties in `options`.
 - The back button is fully customizable with `headerLeft`, but if you just want to change the title or image, there are other `options` for that &mdash; `headerBackTitle`, `headerTruncatedBackTitle`, and `headerBackImage`.
+- You can use a callback for the options prop to access `navigation` and `route` objects.

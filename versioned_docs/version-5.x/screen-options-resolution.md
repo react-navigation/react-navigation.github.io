@@ -1,7 +1,7 @@
 ---
 id: screen-options-resolution
-title: Screen options resolution
-sidebar_label: Screen options resolution
+title: Screen options with nested navigators
+sidebar_label: Screen options with nested navigators
 ---
 
 In this document we'll explain how [screen options](screen-options.md) work when there are multiple navigators. It's important to understand this so that you put your `options` in the correct place and can properly configure your navigators. If you put them in the wrong place, at best nothing will happen and at worst something confusing and unexpected will happen.

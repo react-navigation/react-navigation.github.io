@@ -202,6 +202,29 @@ Function which returns a React Element to display on the right side of the heade
 
 Function which returns a React Element to display on the left side of the header. When a function is used, it receives a number of arguments when rendered (`onPress`, `label`, `labelStyle` and more - check [types.tsx](https://github.com/react-navigation/react-navigation/blob/master/packages/stack/src/types.tsx#L344-L408) for the complete list).
 
+By default, `HeaderBackButton` component is used. You can implement it and use it to override the back button press, for example:
+
+```js
+import { HeaderBackButton } from '@react-navigation/stack';
+
+// ...
+
+<Screen
+  name="Home"
+  component={HomeScreen}
+  options={{
+    headerLeft: (props) => (
+      <HeaderBackButton
+        {...props}
+        onPress={() => {
+          // Do something
+        }}
+      />
+    ),
+  }}
+/>;
+```
+
 #### `headerStyle`
 
 Style object for the header. You can specify a custom background color here, for example.
@@ -392,7 +415,7 @@ Example:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('transitionStart', e => {
+  const unsubscribe = navigation.addListener('transitionStart', (e) => {
     // Do something
   });
 
@@ -408,7 +431,7 @@ Example:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('transitionEnd', e => {
+  const unsubscribe = navigation.addListener('transitionEnd', (e) => {
     // Do something
   });
 
