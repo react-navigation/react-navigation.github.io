@@ -29,6 +29,7 @@ It's impossible to list every single app that uses React Navigation, but below a
 - [1000Kitap](https://1000kitap.com/) ([iOS](https://apps.apple.com/tr/app/1000kitap/id1319837589?l=tr)) ([Android](https://play.google.com/store/apps/details?id=com.binkitap.android&hl=en))
 - [Cameo](https://apps.apple.com/us/app/cameo-personal-celeb-videos/id1258311581)
 - [COVID Shield](https://www.covidshield.app/) ([Source Code](https://github.com/CovidShield/mobile))
+- [CuppaZee](https://www.cuppazee.app/) ([Source Code](https://github.com/CuppaZee/CuppaZee)) ([iOS](https://apps.apple.com/us/app/cuppazee/id1514563308)) ([Android](https://play.google.com/store/apps/details?id=uk.cuppazee.paper))
 - [Driversnote](https://www.driversnote.com/)
 - [Fin](https://tryfin.app/)
 - [Pickyourtrail](https://apps.apple.com/us/app/pickyourtrail/id1400253672)
