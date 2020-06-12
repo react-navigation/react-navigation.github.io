@@ -21,7 +21,7 @@ To be able to persist the navigation state, we can use the `onStateChange` and `
 
 ```js
 import * as React from 'react';
-import { Linking } from 'react-native';
+import { Linking, Platform } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 
