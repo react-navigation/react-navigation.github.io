@@ -49,8 +49,9 @@ Example:
 
 ```js
 import * as React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import {
-  NavigationHelpersContext
+  NavigationHelpersContext,
   useNavigationBuilder,
   TabRouter,
   TabActions,
