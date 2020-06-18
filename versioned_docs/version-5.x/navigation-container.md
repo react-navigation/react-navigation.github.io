@@ -67,7 +67,7 @@ Example:
 </NavigationContainer>
 ```
 
-Providing a custom initial state object will override the initial state object obtained via deep linking or from browser's URL. If you're providing an initial state object, make sure that you don;t pass it on web and that there's no deep link by using `Linking.getInitialURL()`:
+Providing a custom initial state object will override the initial state object obtained via deep linking or from browser's URL. If you're providing an initial state object, make sure that you don't pass it on web and that there's no deep link by using `Linking.getInitialURL()`:
 
 ```js
 const initialUrl = await Linking.getInitialURL();
