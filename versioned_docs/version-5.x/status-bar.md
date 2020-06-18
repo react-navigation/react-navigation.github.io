@@ -73,17 +73,41 @@ const styles = StyleSheet.create({
 
 If you're using a tab or drawer navigator, it's a bit more complex because all of the screens in the navigator might be rendered at once and kept rendered - that means that the last `StatusBar` config you set will be used (likely on the final tab of your tab navigator, not what the user is seeing).
 
-To fix this we'll have to do two things
+To fix this, we'll have to do make the status bar component aware of screen focus and render it only when the screen is focused. We can achieve this by using the [`useIsFocused` hook](use-is-focused.md) and creating a wrapper component:
 
-1. Only use the `StatusBar` component on our initial screen. This allows us to ensure the correct `StatusBar` config is used.
-2. Use `useFocusEffect` and `StatusBar`'s implicit API to change the `StatusBar` configuration when a tab becomes active.
+```js
+import * as React from 'react';
+import { StatusBar } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 
-First, the new `Screen2.js` will no longer use the `StatusBar` component.
+function FocusAwareStatusBar(props) {
+  const isFocused = useIsFocused();
+
+  return isFocused ? <StatusBar {...props} /> : null;
+}
+```
+
+Now, our screens (both `Screen1.js` and `Screen2.js`) will use the `FocusAwareStatusBar` component instead of the `StatusBar` component from React Native:
 
 ```jsx
+function Screen1({ navigation }) {
+  return (
+    <SafeAreaView style={[styles.container, { backgroundColor: '#6a51ae' }]}>
+      <FocusAwareStatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+      <Text style={{ color: '#fff' }}>Light Screen</Text>
+      <Button
+        title="Next screen"
+        onPress={() => navigation.navigate('Screen2')}
+        color="#fff"
+      />
+    </SafeAreaView>
+  );
+}
+
 function Screen2({ navigation }) {
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       <Text>Dark Screen</Text>
       <Button
         title="Next screen"
@@ -94,36 +118,7 @@ function Screen2({ navigation }) {
 }
 ```
 
-Then, in both `Screen1.js` and `Screen2.js` we'll use `useFocusEffect` to change the `StatusBar` configuration when that tab `didFocus`. We'll also make sure to remove the listener when the `TabNavigator` has been unmounted.
-
-<samp id="status-bar-focus-effect" />
-
-```js
-import { useFocusEffect } from '@react-navigation/native';
-
-function Screen1() {
-  useFocusEffect(
-    React.useCallback(() => {
-      const unsubscribe = API.subscribe(userId, user => setUser(data));
-
-      return () => unsubscribe();
-    }, [userId])
-  );
-
-  // ...
-}
-
-function Screen2() {
-  useFocusEffect(
-    React.useCallback(() => {
-      StatusBar.setBarStyle('dark-content');
-      Platform.OS === 'android' && StatusBar.setBackgroundColor('#ecf0f1');
-    }, [])
-  );
-
-  // ...
-}
-```
+Although not necessary, you can use the `FocusAwareStatusBar` component in the screens of the stack navigator as well.
 
 ![DrawerNavigator with different StatusBar configs](/assets/statusbar/statusbar-drawer-demo.gif)
 

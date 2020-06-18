@@ -74,71 +74,63 @@ export default createDrawerNavigator({
 
 ![DrawerNavigator with different StatusBar configs](/assets/statusbar/statusbar-drawer-demo.gif)
 
-## TabNavigator
+## Tabs and Drawer
 
-If you're using a TabNavigator it's a bit more complex because the screens on all of your tabs are rendered at once - that means that the last `StatusBar` config you set will be used (likely on the final tab of your tab navigator, not what the user is seeing).
+If you're using a tab or drawer navigator, it's a bit more complex because all of the screens in the navigator might be rendered at once and kept rendered - that means that the last `StatusBar` config you set will be used (likely on the final tab of your tab navigator, not what the user is seeing).
 
-To fix this we'll have to do two things
+To fix this, we'll have to do make the status bar component aware of screen focus and render it only when the screen is focused. We can achieve this by using the [`withNavigationFocus` HOC](with-navigation-focus.md) and creating a wrapper component:
 
-1. Only use the `StatusBar` component on our initial screen. This allows us to ensure the correct `StatusBar` config is used.
-2. Leverage the events system in React Navigation and `StatusBar`'s implicit API to change the `StatusBar` configuration when a tab becomes active.
+```js
+import * as React from 'react';
+import { StatusBar } from 'react-native';
+import { withNavigationFocus } from 'react-navigation';
 
-First, the new `Screen2.js` will no longer use the `StatusBar` component.
+const FocusAwareStatusBar = withNavigationFocus(({ isFocused, ...rest }) =>
+  isFocused ? <StatusBar {...rest} /> : null
+);
+```
+
+Now, our screens (both `Screen1.js` and `Screen2.js`) will use the `FocusAwareStatusBar` component instead of the `StatusBar` component from React Native:
 
 ```jsx
+class Screen1 extends React.Component {
+  render() {
+    return (
+      <SafeAreaView style={[styles.container, { backgroundColor: '#6a51ae' }]}>
+        <FocusAwareStatusBar
+          barStyle="light-content"
+          backgroundColor="#6a51ae"
+        />
+        <Text style={[styles.paragraph, { color: '#fff' }]}>Light Screen</Text>
+        <Button
+          title="Next screen"
+          onPress={() => this.props.navigation.navigate('Screen2')}
+          color={isAndroid ? 'blue' : '#fff'}
+        />
+      </SafeAreaView>
+    );
+  }
+}
+
 class Screen2 extends React.Component {
   render() {
     return (
       <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
+        <FocusAwareStatusBar
+          barStyle="dark-content"
+          backgroundColor="#ecf0f1"
+        />
         <Text style={styles.paragraph}>Dark Screen</Text>
         <Button
           title="Next screen"
           onPress={() => this.props.navigation.navigate('Screen1')}
         />
-        {/* <Button
-          title="Toggle Drawer"
-          onPress={() => this.props.navigation.navigate('DrawerToggle')}
-        /> */}
       </SafeAreaView>
     );
   }
 }
 ```
 
-Then, in both `Screen1.js` and `Screen2.js` we'll set up a listener to change the `StatusBar` configuration when that tab `didFocus`. We'll also make sure to remove the listener when the `TabNavigator` has been unmounted.
-
-```jsx
-class Screen1 extends React.Component {
-  componentDidMount() {
-    this._navListener = this.props.navigation.addListener('didFocus', () => {
-      StatusBar.setBarStyle('light-content');
-      isAndroid && StatusBar.setBackgroundColor('#6a51ae');
-    });
-  }
-
-  componentWillUnmount() {
-    this._navListener.remove();
-  }
-
-  ...
-}
-
-class Screen2 extends React.Component {
-  componentDidMount() {
-    this._navListener = this.props.navigation.addListener('didFocus', () => {
-      StatusBar.setBarStyle('dark-content');
-      isAndroid && StatusBar.setBackgroundColor('#ecf0f1');
-    });
-  }
-
-  componentWillUnmount() {
-    this._navListener.remove();
-  }
-
-  ...
-}
-```
+Although not necessary, you can use the `FocusAwareStatusBar` component in the screens of the stack navigator as well.
 
 ![TabNavigator with different StatusBar configs](/assets/statusbar/statusbar-tab-demo.gif)
-
-The code used for these demos is available as a [Snack](https://snack.expo.io/@react-navigation/docs:-stacknavigation-statusbar-v3).
