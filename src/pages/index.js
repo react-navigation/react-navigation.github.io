@@ -84,7 +84,7 @@ function Home() {
                 styles.heroButton
               )}
               to={
-                'https://github.com/react-navigation/react-navigation/tree/master/example'
+                'https://github.com/react-navigation/react-navigation/tree/main/example'
               }
             >
               Try the demo app

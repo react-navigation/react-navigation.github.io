@@ -14,7 +14,7 @@ By default the stack navigator is configured to have the familiar iOS and Androi
   </video>
 </div>
 
-To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/master/packages/stack):
+To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/stack):
 
 ```bash npm2yarn
 npm install @react-navigation/stack
@@ -200,7 +200,7 @@ Function which returns a React Element to display on the right side of the heade
 
 #### `headerLeft`
 
-Function which returns a React Element to display on the left side of the header. When a function is used, it receives a number of arguments when rendered (`onPress`, `label`, `labelStyle` and more - check [types.tsx](https://github.com/react-navigation/react-navigation/blob/master/packages/stack/src/types.tsx#L344-L408) for the complete list).
+Function which returns a React Element to display on the left side of the header. When a function is used, it receives a number of arguments when rendered (`onPress`, `label`, `labelStyle` and more - check [types.tsx](https://github.com/react-navigation/react-navigation/blob/main/packages/stack/src/types.tsx#L344-L408) for the complete list).
 
 By default, `HeaderBackButton` component is used. You can implement it and use it to override the back button press, for example:
 
