@@ -47,12 +47,12 @@ function MyStack() {
     <Stack.Navigator
       initialRouteName="Home"
       screenOptions={{
+        headerShown: false,
         gestureEnabled: true,
         cardOverlayEnabled: true,
         ...TransitionPresets.ModalPresentationIOS,
       }}
       mode="modal"
-      headerMode="none"
     >
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Profile" component={Profile} />

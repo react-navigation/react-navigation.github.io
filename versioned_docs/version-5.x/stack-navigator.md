@@ -74,7 +74,7 @@ Specifies how the header should be rendered:
 
 - `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
 - `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
-- `none` - No header will be rendered.
+- `none` - No header will be shown. It's recommended to use [`headerShown`](#headershown) option instead for more granularity.
 
 ### Options
 
@@ -153,9 +153,12 @@ return (
 
 #### `headerShown`
 
-Whether to show or hide the header for the screen. The header is shown by default unless `headerMode` was set to `none`. Setting this to `false` hides the header.
+Whether to show or hide the header for the screen. The header is shown by default unless:
 
-When hiding the header on specific screens, you might also want to set `headerMode` prop to `screen`.
+- The `headerMode` prop on the navigator was set to `none`.
+- The screen is in a stack nested in another stack navigator's screen which has a header.
+
+Setting this to `false` hides the header. When the header is hidden in a nested stack, you can explicitly set it to `true` to show it.
 
 #### `headerTitle`
 
@@ -802,6 +805,7 @@ import { TransitionPresets } from '@react-navigation/stack';
 <Stack.Navigator
   initialRouteName="Home"
   screenOptions={({ route, navigation }) => ({
+    headerShown: false,
     gestureEnabled: true,
     cardOverlayEnabled: true,
     headerStatusBarHeight:
@@ -811,7 +815,6 @@ import { TransitionPresets } from '@react-navigation/stack';
     ...TransitionPresets.ModalPresentationIOS,
   })}
   mode="modal"
-  headerMode="none"
 >
   <Stack.Screen name="Home" component={Home} />
   <Stack.Screen name="Profile" component={Profile} />
@@ -827,7 +830,7 @@ A transparent modal is like a modal dialog which overlays the screen. The previo
 - Set the `mode` prop to `modal`
 - Set the card background to transparent using `cardStyle`
 - Use a custom animation instead of the default platform animation (we'll use fade in this case)
-- Disable the header with `headerMode="none"` (optional)
+- Disable the header with `headerShown: false` (optional)
 - Enable the overlay with `cardOverlayEnabled: true` (optional)
 
 Example:
@@ -835,6 +838,7 @@ Example:
 ```js
 <Stack.Navigator
   screenOptions={{
+    headerShown: false,
     cardStyle: { backgroundColor: 'transparent' },
     cardOverlayEnabled: true,
     cardStyleInterpolator: ({ current: { progress } }) => ({
@@ -854,7 +858,6 @@ Example:
     }),
   }}
   mode="modal"
-  headerMode="none"
 >
   <Stack.Screen name="Home" component={HomeStack} />
   <Stack.Screen name="Modal" component={ModalScreen} />
