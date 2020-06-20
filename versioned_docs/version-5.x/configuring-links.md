@@ -61,7 +61,7 @@ By default, React Navigation will use the path segments as the route name when p
 For example, you might want to parse the path `/feed/latest` to something like:
 
 ```js
-{
+const state = {
   routes: [
     {
       name: 'Chat',
@@ -91,21 +91,20 @@ Here `Chat` is the name of the screen that handles the URL `/feed`, and `Profile
 
 A common use case is to pass params to a screen to pass some data. For example, you may want the `Profile` screen to have an `id` param to know which user's profile it is. It's possible to pass params to a screen through a URL when handling deep links.
 
-By default, query params are used to specify params for a screen. For example, with the above example, the URL `/user?id=wojciech` will pass the `id` param to the `Profile` screen.
+By default, query params are parsed to get the params for a screen. For example, with the above example, the URL `/user?id=wojciech` will pass the `id` param to the `Profile` screen.
 
 You can also customize how the params are parsed from the URL. Let's say you want the URL to look like `/user/wojciech` where the `id` param is `wojciech` instead of having the `id` in query params. You can do this by specifying `user/:id` for the `path`. **When the path segment starts with `:`, it'll be treated as a param**. For example, the URL `/user/wojciech` would resolve to `Profile` screen with the string `wojciech` as a value of the `id` param and will be available in `route.params.id` in `Profile` screen.
 
 By default, all params are treated as strings. You can also customize how to parse them by specifying a function in the `parse` property to parse the param, and a function in the `stringify` property to convert it back to a string.
 
-If you wanted to resolve `/user/wojciech/22` to result in the params `{ id: 'user-wojciech' age: 22 }`, you could make `Profile`'s config to look like this:
+If you wanted to resolve `/user/wojciech/settings` to result in the params `{ id: 'user-wojciech' section: 'settings' }`, you could make `Profile`'s config to look like this:
 
 ```js
 {
   Profile: {
-    path: 'user/:id/:age',
+    path: 'user/:id/:section',
     parse: {
       id: id => `user-${id}`,
-      age: Number,
     },
     stringify: {
       id: id => id.replace(/^user-/, '')
@@ -121,7 +120,53 @@ const state = {
   routes: [
     {
       name: 'Profile',
-      params: { id: 'user-wojciech', age: 22 },
+      params: { id: 'user-wojciech', section: 'settings' },
+    },
+  ],
+};
+```
+
+## Marking params as optional
+
+Sometimes a param may or may not be present in the URL depending on certain conditions. For example, in the above scenario, you may not always have the section parameter in the URL, i.e. both `/user/wojciech/settings` and `/user/wojciech` should go to the `Profile` screen, but the `section` param (with the value `settings` in this case) may or may not be present.
+
+In this case, you would need to mark the `section` param as optional. You can do it by adding the `?` suffix after the param name:
+
+```js
+{
+  Profile: {
+    path: 'user/:id/:section?',
+    parse: {
+      id: id => `user-${id}`,
+    },
+    stringify: {
+      id: id => id.replace(/^user-/, '')
+    }
+  }
+}
+```
+
+With the URL `/users/wojciech`, this will result in:
+
+```js
+const state = {
+  routes: [
+    {
+      name: 'Profile',
+      params: { id: 'user-wojciech' },
+    },
+  ],
+};
+```
+
+If the URL contains a `section` param, e.g. `/users/wojciech/settings`, this will result in the following with the same config:
+
+```js
+const state = {
+  routes: [
+    {
+      name: 'Profile',
+      params: { id: 'user-wojciech', section: 'settings' },
     },
   ],
 };
