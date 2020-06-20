@@ -72,7 +72,7 @@ Position of the tab bar in the tab view. Possible values are `'top'` and `'botto
 
 Boolean indicating whether to lazily render the scenes. When this is set to `true`, screens will be rendered as they come into the viewport. By default all scenes are rendered to provide a smoother swipe experience. But you might want to defer the rendering of screens out of the viewport until the user sees them. To enable lazy rendering, set `lazy` to `true`.
 
-When you enable `lazy`, the lazy loaded screens will usually take some time to render when they come into the viewport. You can use the `renderLazyPlaceholder` prop to customize what the user sees during this short period.
+When you enable `lazy`, the lazy loaded screens will usually take some time to render when they come into the viewport. You can use the `lazyPlaceholder` prop to customize what the user sees during this short period.
 
 #### `lazyPreloadDistance`
 
