@@ -121,7 +121,7 @@ class Profile extends React.Component {
       <>
         <FetchUserData
           userId={this.props.userId}
-          onUpdate={this.handleUpdate}
+          onUpdate={this._handleUpdate}
         />
         {/* rest of your code */}
       </>
