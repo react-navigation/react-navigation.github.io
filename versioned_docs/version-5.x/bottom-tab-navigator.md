@@ -147,22 +147,73 @@ This example will render a basic tab bar with labels.
 
 #### `tabBarOptions`
 
-An object containing the props for the tab bar component. It can contain the following properties:
+An object containing the props for the default tab bar component. If you're using a custom tab bar, these will be passed as props to the tab bar and you can handle them.
 
-- `activeTintColor` - Label and icon color of the active tab.
-- `activeBackgroundColor` - Background color of the active tab.
-- `inactiveTintColor` - Label and icon color of the inactive tab.
-- `inactiveBackgroundColor` - Background color of the inactive tab.
-- `showLabel` - Whether to show label for tab, default is true.
-- `showIcon` - Whether to show icon for tab, default is true.
-- `style` - Style object for the tab bar.
-- `labelStyle` - Style object for the tab label.
-- `labelPosition` - Where to show the tab label in relation to the tab icon. Available values are `beside-icon` and `below-icon`. Defaults to `beside-icon`.
-- `tabStyle` - Style object for the tab.
-- `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
-- `adaptive` - Should the tab icons and labels alignment change based on screen size? Defaults to `true` for iOS 11. If `false`, tab icons and labels align vertically all the time. When `true`, tab icons and labels align horizontally on tablet.
-- `safeAreaInset` - Override the `forceInset` prop for `<SafeAreaView>`. Defaults to `{ bottom: 'always', top: 'never' }`. Available keys are `top | bottom | left | right` provided with the values `'always' | 'never'`.
-- `keyboardHidesTabBar` - Defaults to `false`. If `true` hide the tab bar when keyboard opens.
+It can contain the following properties:
+
+##### `activeTintColor`
+
+Label and icon color of the active tab item.
+
+##### `inactiveTintColor`
+
+Label and icon color of the inactive tab item.
+
+##### `activeBackgroundColor`
+
+Background color of the active tab item.
+
+##### `inactiveBackgroundColor`
+
+Background color of the inactive tab item.
+
+##### `tabStyle`
+
+Style object for the tab item.
+
+##### `showLabel`
+
+Whether to show label for tab, default is `true`.
+
+##### `labelStyle`
+
+Style object for the tab label text.
+
+##### `labelPosition`
+
+Whether the label is rendered below the icon or beside the icon. Possible values are:
+
+- `below-icon`
+- `beside-icon`
+
+By default, in `vertical` orientation (portrait mode), label is rendered below the icon and in `horizontal` orientation (landscape mode)., it's rendered beside the icon.
+
+##### `adaptive`
+
+Should the tab icons and labels alignment change based on screen size? Defaults to `true`. If `false`, tab icons and labels align vertically all the time (`labelPosition: 'below-icon'`). When `true`, tab icons and labels align horizontally on tablets (`labelPosition: 'beside-icon'`).
+
+##### `allowFontScaling`
+
+Whether label font should scale to respect Text Size accessibility settings, default is true.
+
+##### `keyboardHidesTabBar`
+
+Whether the tab bar is hidden when the keyboard opens. Defaults to `false`.
+
+##### `safeAreaInsets`
+
+Safe area insets for the screen. This is used to avoid elements like notch and system navigation bar. By default, the device's safe area insets are automatically detected. You can override the behavior with this option.
+
+Takes an object containing following optional properties:
+
+- `top` - _number_ - The value of the top inset, e.g. area containing the status bar and notch.
+- `right` - _number_ - The value of the left inset.
+- `bottom` - _number_ - The value of the top inset, e.g. area navigation bar on bottom.
+- `left`. - _number_ - The value of the right inset.
+
+##### `style`
+
+Style object for the tab bar.
 
 ### Options
 
