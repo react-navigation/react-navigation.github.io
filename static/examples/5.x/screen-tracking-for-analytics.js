@@ -4,18 +4,6 @@ import { View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-// Gets the current screen from navigation state
-const getActiveRouteName = state => {
-  const route = state.routes[state.index];
-
-  if (route.state) {
-    // Dive into nested navigators
-    return getActiveRouteName(route.state);
-  }
-
-  return route.name;
-};
-
 function Home({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -41,19 +29,13 @@ export default function App() {
   const routeNameRef = React.useRef();
   const navigationRef = React.useRef();
 
-  React.useEffect(() => {
-    const state = navigationRef.current.getRootState();
-
-    // Save the initial route name
-    routeNameRef.current = getActiveRouteName(state);
-  }, []);
-
   return (
     <NavigationContainer
       ref={navigationRef}
-      onStateChange={state => {
+      onReady={() => routeNameRef.current = navigationRef.current.getCurrentRoute().name}
+      onStateChange={() => {
         const previousRouteName = routeNameRef.current;
-        const currentRouteName = getActiveRouteName(state);
+        const currentRouteName = navigationRef.current.getCurrentRoute().name
 
         if (previousRouteName !== currentRouteName) {
           // The line below uses the expo-firebase-analytics tracker
