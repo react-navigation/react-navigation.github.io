@@ -100,7 +100,9 @@ function App() {
   const linking = {
     prefixes: ['https://mychat.com', 'mychat://'],
     config: {
-      Home: 'feed/:sort',
+      screens: {
+        Home: 'feed/:sort',
+      },
     },
   };
 

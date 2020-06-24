@@ -19,7 +19,9 @@ export default function App() {
   const { getInitialState } = useLinking(ref, {
     prefixes: ['https://mychat.com', 'mychat://'],
     config: {
-      Chat: 'feed/:sort',
+      screens: {
+        Chat: 'feed/:sort',
+      }
     },
   });
 
@@ -66,7 +68,9 @@ Example:
 useLinking(ref, {
   prefixes: ['https://mychat.com', 'mychat://'],
   config: {
-    Chat: 'feed/:sort',
+    screens: {
+      Chat: 'feed/:sort',
+    }
   },
 });
 ```
@@ -81,16 +85,18 @@ For example, if we have `Catalog` screen inside `Home` screen and want it to han
 
 ```js
 {
-  Home: {
-    screens: {
-      Catalog: {
-        path: 'item/:id',
-        parse: {
-          id: Number,
+  screens: {
+    Home: {
+      screens: {
+        Catalog: {
+          path: 'item/:id',
+          parse: {
+            id: Number,
+          },
         },
       },
     },
-  },
+  }
 }
 ```
 
@@ -98,7 +104,9 @@ The options for parsing can be an object or a string:
 
 ```js
 {
-  Catalog: 'item/:id',
+  screens: {
+    Catalog: 'item/:id',
+  }
 }
 ```
 
@@ -110,18 +118,20 @@ The `initialRouteName` option ensures that the route name passed there will be p
 
 ```js
 {
-  Home: {
-    initialRouteName: 'Feed',
-    screens: {
-      Catalog: {
-        path: 'item/:id',
-        parse: {
-          id: Number,
+  screens: {
+    Home: {
+      initialRouteName: 'Feed',
+      screens: {
+        Catalog: {
+          path: 'item/:id',
+          parse: {
+            id: Number,
+          },
         },
+        Feed: 'feed',
       },
-      Feed: 'feed',
     },
-  },
+  }
 }
 ```
 
@@ -153,12 +163,14 @@ The `parse` option controls how the params are parsed. Here, you can provide the
 
 ```js
 {
-  Catalog: {
-    path: 'item/:id',
-    parse: {
-      id: id => parseInt(id, 10),
+  screens: {
+    Catalog: {
+      path: 'item/:id',
+      parse: {
+        id: id => parseInt(id, 10),
+      },
     },
-  },
+  }
 }
 ```
 
@@ -168,8 +180,10 @@ Different segments of the same path can be handled by different parts of the con
 
 ```js
 {
-  Rooms: 'rooms',
-  Chat: 'chat/:user'
+  screens: {
+    Rooms: 'rooms',
+    Chat: 'chat/:user'
+  }
 }
 ```
 
@@ -207,7 +221,9 @@ Example:
 useLinking(ref, {
   prefixes: ['https://mychat.com', 'mychat://'],
   config: {
-    Chat: 'feed/:sort',
+    screens: {
+      Chat: 'feed/:sort',
+    }
   },
   getStateFromPath(path, config) {
     // Return a state object here
@@ -226,7 +242,9 @@ Example:
 useLinking(ref, {
   prefixes: ['https://mychat.com', 'mychat://'],
   config: {
-    Chat: 'feed/:sort',
+    screens: {
+      Chat: 'feed/:sort',
+    }
   },
   getPathFromState(state, config) {
     // Return a path string here

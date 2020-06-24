@@ -79,8 +79,10 @@ You can specify a separate `config` option to control how the deep link is parse
 const linking = {
   prefixes: ['https://mychat.com', 'mychat://'],
   config: {
-    Chat: 'feed/:sort',
-    Profile: 'user',
+    screens: {
+      Chat: 'feed/:sort',
+      Profile: 'user',
+    },
   },
 };
 ```
@@ -100,17 +102,19 @@ By default, all params are treated as strings. You can also customize how to par
 If you wanted to resolve `/user/wojciech/settings` to result in the params `{ id: 'user-wojciech' section: 'settings' }`, you could make `Profile`'s config to look like this:
 
 ```js
-{
-  Profile: {
-    path: 'user/:id/:section',
-    parse: {
-      id: id => `user-${id}`,
+const config = {
+  screens: {
+    Profile: {
+      path: 'user/:id/:section',
+      parse: {
+        id: (id) => `user-${id}`,
+      },
+      stringify: {
+        id: (id) => id.replace(/^user-/, ''),
+      },
     },
-    stringify: {
-      id: id => id.replace(/^user-/, '')
-    }
-  }
-}
+  },
+};
 ```
 
 This will result in something like:
@@ -133,17 +137,19 @@ Sometimes a param may or may not be present in the URL depending on certain cond
 In this case, you would need to mark the `section` param as optional. You can do it by adding the `?` suffix after the param name:
 
 ```js
-{
-  Profile: {
-    path: 'user/:id/:section?',
-    parse: {
-      id: id => `user-${id}`,
+const config = {
+  screens: {
+    Profile: {
+      path: 'user/:id/:section?',
+      parse: {
+        id: (id) => `user-${id}`,
+      },
+      stringify: {
+        id: (id) => id.replace(/^user-/, ''),
+      },
     },
-    stringify: {
-      id: id => id.replace(/^user-/, '')
-    }
-  }
-}
+  },
+};
 ```
 
 With the URL `/users/wojciech`, this will result in:
@@ -199,13 +205,15 @@ function App() {
 Here you have a stack navigator in the root, and inside the `Home` screen of the root stack, you have a tab navigator with various screens. With this structure, let's say you want the path `/users/:id` to go to the `Profile` screen. You can express the nested config like so:
 
 ```js
-{
-  Home: {
-    screens: {
-      Profile: 'users/:id',
+const config = {
+  screens: {
+    Home: {
+      screens: {
+        Profile: 'users/:id',
+      },
     },
   },
-}
+};
 ```
 
 In this config, you specify that the `Profile` screen should be resolved for the `users/:id` pattern and it's nested inside the `Home` screen. Then parsing `users/jane` will result in the following state object:
@@ -239,16 +247,18 @@ To handle this, you'll need to define a catch-all route that will be rendered if
 For example:
 
 ```js
-{
-  Home: {
-    initialRouteName: 'Feed',
-    screens: {
-      Profile: 'users/:id',
-      Settings: 'settings',
+const config = {
+  screens: {
+    Home: {
+      initialRouteName: 'Feed',
+      screens: {
+        Profile: 'users/:id',
+        Settings: 'settings',
+      },
     },
+    NotFound: '*',
   },
-  NotFound: '*',
-}
+};
 ```
 
 Here, we have defined a route named `NotFound` and set it to match `*` aka everything. If the path didn't match `user/:id` or `settings`, it'll be matched by this route.
@@ -264,21 +274,23 @@ const state = {
 You can even go more specific, for example, say if you want to show a different screen for invalid paths under `/settings`, you can specify such a pattern under `Settings`:
 
 ```js
-{
-  Home: {
-    initialRouteName: 'Feed',
-    screens: {
-      Profile: 'users/:id',
-      Settings: {
-        path: 'settings',
-        screens: {
-          InvalidSettings: '*',
+const config = {
+  screens: {
+    Home: {
+      initialRouteName: 'Feed',
+      screens: {
+        Profile: 'users/:id',
+        Settings: {
+          path: 'settings',
+          screens: {
+            InvalidSettings: '*',
+          },
         },
       },
     },
+    NotFound: '*',
   },
-  NotFound: '*',
-}
+};
 ```
 
 With this configuration, the path `/settings/notification` will resolve to the following state object:
@@ -314,15 +326,17 @@ Sometimes you want to ensure that a certain screen will always be present as the
 In the above example, if you want the `Feed` screen to be the initial route in the navigator under `Home`, your config will look like this:
 
 ```js
-{
-  Home: {
-    initialRouteName: 'Feed',
-    screens: {
-      Profile: 'users/:id',
-      Settings: 'settings',
+const config = {
+  screens: {
+    Home: {
+      initialRouteName: 'Feed',
+      screens: {
+        Profile: 'users/:id',
+        Settings: 'settings',
+      },
     },
   },
-}
+};
 ```
 
 Then, the path `/users/42` will resolve to the following state object:
@@ -354,14 +368,16 @@ Note that in this case, any params in the URL are only passed to the `Profile` s
 By default, paths defined for each screen are matched against the URL relative to their parent screen's path. Consider the following config:
 
 ```js
-{
-  Home: {
-    path: 'feed',
-    screens: {
-      Profile: 'users/:id',
+const config = {
+  screens: {
+    Home: {
+      path: 'feed',
+      screens: {
+        Profile: 'users/:id',
+      },
     },
   },
-}
+};
 ```
 
 Here, you have a `path` property defined for the `Home` screen, as well as the child `Profile` screen. The profile screen specifies the path `users/:id`, but since it's nested inside a screen with the path `feed`, it'll try to match the pattern `feed/users/:id`.
@@ -371,17 +387,19 @@ This will result in the URL `/feed` navigating to `Home` screen, and `/feed/user
 In this case, it makes more sense to navigate to the `Profile` screen using a URL like `/users/cal`, rather than `/feed/users/cal`. To achieve this, you can override the relative matching behavior to `exact` matching:
 
 ```js
-{
-  Home: {
-    path: 'feed',
-    screens: {
-      Profile: {
-        path: 'users/:id',
-        exact: true,
+const config = {
+  screens: {
+    Home: {
+      path: 'feed',
+      screens: {
+        Profile: {
+          path: 'users/:id',
+          exact: true,
+        },
       },
     },
   },
-}
+};
 ```
 
 With `exact` property set to `true`, `Profile` will ignore the parent screen's `path` config and you'll be able to navigate to `Profile` using a URL like `users/cal`.
@@ -396,29 +414,34 @@ const state = {
 };
 ```
 
-When this state is serialized to a path with the following config, you'll get `/Home`:
+When this state is serialized to a path with the following config, you'll get `/home`:
 
 ```js
-{
-  Home: {
-    screens: {
-      Profile: 'users/:id',
+const config = {
+  screens: {
+    Home: {
+      path: 'home',
+      screens: {
+        Profile: 'users/:id',
+      },
     },
   },
-}
+};
 ```
 
-But it'll be nicer if the URL was just `/` when visiting the home screen. You can specify an empty string as path and React Navigation won't add the screen to the path (think of it like adding empty string to the path, which doesn't change anything):
+But it'll be nicer if the URL was just `/` when visiting the home screen. You can specify an empty string as path or not specify a path at all, and React Navigation won't add the screen to the path (think of it like adding empty string to the path, which doesn't change anything):
 
 ```js
-{
-  Home: {
-    path: '',
-    screens: {
-      Profile: 'users/:id',
+const config = {
+  screens: {
+    Home: {
+      path: '',
+      screens: {
+        Profile: 'users/:id',
+      },
     },
   },
-}
+};
 ```
 
 ## Serializing and parsing params
@@ -441,9 +464,11 @@ For example, say you have a state like following:
 It'll be converted to `chat/1589842744264` with the following config:
 
 ```js
-{
-  Chat: 'chat/:date';
-}
+const config = {
+  screens: {
+    Chat: 'chat/:date',
+  },
+};
 ```
 
 When parsing this path, you'll get the following state:
@@ -462,34 +487,38 @@ When parsing this path, you'll get the following state:
 Here, the `date` param was parsed as a string because React Navigation doesn't know that it's supposed to be a timestamp, and hence number. You can customize it by providing a custom function to use for parsing:
 
 ```js
-{
-  Chat: {
-    path: 'chat/:date',
-    parse: {
-      date: Number,
+const config = {
+  screens: {
+    Chat: {
+      path: 'chat/:date',
+      parse: {
+        date: Number,
+      },
     },
-  }
-}
+  },
+};
 ```
 
 You can also provide a custom function to serialize the params. For example, let's say that you want to use a DD-MM-YYYY format in the path instead of a timestamp:
 
 ```js
-{
-  Chat: {
-    path: 'chat/:date',
-    parse: {
-      date: date => new Date(date).getTime(),
-    },
-    stringify: {
-      date: date => {
-        const d = new Date(date);
+const config = {
+  screens: {
+    Chat: {
+      path: 'chat/:date',
+      parse: {
+        date: (date) => new Date(date).getTime(),
+      },
+      stringify: {
+        date: (date) => {
+          const d = new Date(date);
 
-        return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
+          return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+        },
       },
     },
-  }
-}
+  },
+};
 ```
 
 Depending on your requirements, you can use this functionality to parse and stringify more complex data.
@@ -504,7 +533,9 @@ Example:
 const linking = {
   prefixes: ['https://mychat.com', 'mychat://'],
   config: {
-    Chat: 'feed/:sort',
+    screens: {
+      Chat: 'feed/:sort',
+    },
   },
   getStateFromPath: (path, options) => {
     // Return a state object here
@@ -517,6 +548,47 @@ const linking = {
 };
 ```
 
+## Updating config
+
+Older versions of React Navigation had a slightly different configuration format for linking. The old config allowed a simple key value pair in the object regardless of nesting of navigators:
+
+```js
+const config = {
+  Home: 'home',
+  Feed: 'feed',
+  Profile: 'profile',
+  Settings: 'settings',
+};
+```
+
+Let's say, your `Feed` and `Profile` screens are nested inside `Home`. Even if you don't have such a nesting with the above configuration, as long as the URL was `/home/profile`, it would work. Furthermore, it would also treat path segments and route names the same, which means that you could deep link to a screen that's not specified in the configuration. For example, if you have a `Albums` screen inside `Home`, the deep link `/home/Albums` would navigate to that screen. While that may be desirable in some cases, there's no way to prevent access to specific screens. This approach also makes it impossible to have something like a 404 screen since any route name is a valid path.
+
+Latest versions of React Navigation use a different config format which is stricter in this regard:
+
+- The shape of the config must match the shape of the nesting in the navigation structure
+- Only screens defined in the config will be eligible for deep linking
+
+So, you'd refactor the above config to the following format:
+
+```js
+const config = {
+  screens: {
+    Home: {
+      path: 'home',
+      screens: {
+        Feed: 'feed',
+        Profile: 'profile',
+      },
+    },
+    Settings: 'settings',
+  },
+};
+```
+
+Here, there's a new `screens` property to the configuration object, and the `Feed` and `Profile` configs are now nested under `Home` to match the navigation structure.
+
+If you have the old format, it will continue to work without any changes. However, you won't be able to specify a wildcard pattern to handle unmatched screens or prevent screens from being deep linked. The old format will be removed in the next major release. So we recommend to migrate to the new format when you can.
+
 ## Constraints to consider with nesting configs
 
 There are some constraints to consider when using nested navigators in the linking config.
@@ -527,32 +599,26 @@ There are some constraints to consider when using nested navigators in the linki
 
    ```js
    const config = {
-     HomeStack: {
-       path: 'stack',
-       initialRouteName: 'Feed',
-       screens: {
-         Profile: 'user',
+     screens: {
+       HomeStack: {
+         path: 'stack',
+         initialRouteName: 'Feed',
+         screens: {
+           Profile: {
+             path: 'user',
+             exact: true,
+             screens: {
+               Home: 'home',
+             },
+           },
+         },
        },
+       Settings: 'settings',
      },
-     Settings: 'settings',
-     Home: 'first',
    };
    ```
 
    Then `/user/home` will resolve to `HomeStack->Profile->Home`.
-
-   You can also make the config not include nested navigator, which will make the URL even longer, but maybe a bit less confusing.
-
-   ```js
-   const config = {
-     HomeStack: 'stack',
-     Home: 'home',
-     Profile: 'user',
-     Settings: 'settings',
-   };
-   ```
-
-   Then `/stack/user/home` will resolve to `HomeStack->Profile->Home`.
 
 3. **When nesting navigators, params are only passed to the screen that'll be opened by the URL.** If you want to have the same params in other screens, you can specify a [custom `getStateFromPath` function](use-linking.md#getstatefrompath) and copy those params to the desired route objects.
 
@@ -582,38 +648,21 @@ After creating the navigation structure, you can create a config for deep linkin
 
 ```js
 const config = {
-  HomeStack: 'stack',
-  Home: 'home',
-  Profile: 'user',
-  Settings: 'settings',
-};
-```
-
-Then, to get to `Home` screen in `HomeStack`, the URL would look like `/stack/home`, and for `Settings` screen, it would be `/settings` etc.
-
-But what if you want to have parameters in the URL, like the user id of the person, whose profile you are visiting in the `Profile` screen? Or maybe you would like to define a screen that will be always present in the state for the `HomeStack` navigator? With properly defined `config` it can all be done easily, so let's do this!
-
-### Making the config more flexible
-
-With the above config, in order to get to `Home` or `Profile` screen, you need to have `/stack` in the URL (`/stack/home` and `/stack/user`). But it'll be much better if you could go to the `Home` screen with `/home` and `Profile` screen with `/profile`.
-
-You can achieve the behavior by using nested navigators in your `config`. The syntax looks like that:
-
-```js
-config = {
-  HomeStack: {
-    screens: {
-      Home: 'home',
-      Profile: 'user',
+  screens: {
+    HomeStack: {
+      screens: {
+        Home: 'home',
+        Profile: 'user',
+      },
     },
+    Settings: 'settings',
   },
-  Settings: 'settings',
 };
 ```
 
-As you can see, `Home` and `Profile` are now nested in the `screens` property of `HomeStack`. This means that when you pass the `/home` URL, it will be resolved to a `HomeStack`->`Home` state object (similarly for `/user` it would be `HomeStack`->`Profile`).
+As you can see, `Home` and `Profile` are nested in the `screens` property of `HomeStack`. This means that when you pass the `/home` URL, it will be resolved to a `HomeStack`->`Home` state object (similarly for `/user` it would be `HomeStack`->`Profile`). The nesting in this object should match the nesting of our navigators.
 
-Here, the `HomeStack` property now contains a config object. The config can go as deep as you want, e.g. if `Home` was a navigator, you could make it an object with `screens` property, and put more screens or navigators inside it, making the URL string much more readable.
+Here, the `HomeStack` property contains a config object. The config can go as deep as you want, e.g. if `Home` was a navigator, you could make it an object with `screens` property, and put more screens or navigators inside it, making the URL string much more readable.
 
 What if you wanted a specific screen to used as the initial screen in the navigator? For example, if you had a URL that would open `Home` screen, you would like to be able to navigate to `Profile` from it by using navigation's `navigation.goBack()` method. It is possible by defining `initialRouteName` for a navigator. It would look like this:
 

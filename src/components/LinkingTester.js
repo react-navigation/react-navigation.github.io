@@ -16,21 +16,23 @@ export default function LinkingTester() {
 
   const [rawConfig, setRawConfig] = React.useState(
     `{
-  Home: {
-    initialRouteName: 'Feed',
-    screens: {
-      Profile: {
-        path: 'user/:id',
-        parse: {
-          id: id => id.replace(/^@/, ''),
-        },
-        screens: {
-          Settings: 'edit',
+  screens: {
+    Home: {
+      initialRouteName: 'Feed',
+      screens: {
+        Profile: {
+          path: 'user/:id',
+          parse: {
+            id: id => id.replace(/^@/, ''),
+          },
+          screens: {
+            Settings: 'edit',
+          },
         },
       },
     },
-  },
-  NoMatch: '*',
+    NoMatch: '*',
+  }
 }`
   );
 
@@ -114,7 +116,7 @@ export default function LinkingTester() {
           </Highlight>
         ) : state ? (
           <RouteMap routes={state.routes} />
-        ) : null}
+        ) : <p style={styles.error}>Failed to parse the path. Make sure that the path matches the patterns specified in the config.</p>}
       </div>
     </>
   );
@@ -169,4 +171,8 @@ const styles = {
     MozAppearance: 'none',
     WebkitAppearance: 'none',
   },
+  error: {
+    margin: 24,
+    color: '#A12027'
+  }
 };

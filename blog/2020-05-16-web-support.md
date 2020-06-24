@@ -38,9 +38,11 @@ Example:
 const linking = {
   prefixes: ['https://mychat.com', 'mychat://'],
   config: {
-    Home: '',
-    Profile: ':id/profile',
-    Settings: ':id/blog',
+    screens: {
+      Home: '',
+      Profile: ':id/profile',
+      Settings: ':id/blog',
+    }
   },
 };
 
