@@ -118,14 +118,12 @@ If we were to set the `headerTitle` with `options` for the `FeedScreen`, this wo
 But we can determine the `headerTitle` option based on the navigation state of our tab navigator using the `route.state` property. Let's create a function to get the title from `route.state` first:
 
 ```js
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+
 function getHeaderTitle(route) {
-  // Access the tab navigator's state using `route.state`
-  const routeName = route.state
-    ? // Get the currently active route name in the tab navigator
-      route.state.routes[route.state.index].name
-    : // If state doesn't exist, we need to default to `screen` param if available, or the initial screen
-      // In our case, it's "Feed" as that's the first screen inside the navigator
-      route.params?.screen || 'Feed';
+  // If state doesn't exist, we need to default to `screen` param if available, or the initial screen
+  // In our case, it's "Feed" as that's the first screen inside the navigator
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
 
   switch (routeName) {
     case 'Feed':
