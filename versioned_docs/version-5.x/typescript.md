@@ -73,6 +73,8 @@ type Props = {
 
 The type for the navigation prop takes 2 generics, the param list object we defined earlier, and the name of the current route. This allows us to type check route names and params which you're navigating using `navigate`, `push` etc. The name of the current route is necessary to type check the params when you call `setParams`.
 
+Similarly, you can import `DrawerNavigationProp` from `@react-navigation/drawer`, `BottomTabNavigationProp` from `@react-navigation/bottom-tabs` etc.
+
 To annotate the `route` prop, we need to use the `RouteProp` type from `@react-navigation/native`:
 
 ```tsx
@@ -125,6 +127,8 @@ type RootStackParamList = {
 
 type Props = StackScreenProps<RootStackParamList, 'Profile'>;
 ```
+
+Similarly, you can import `DrawerScreenProps` from `@react-navigation/drawer`, `BottomTabScreenProps` from `@react-navigation/bottom-tabs` etc.
 
 Then you can use the `Props` type to annotate your component.
 
@@ -196,3 +200,20 @@ const route = useRoute<ProfileScreenRouteProp>();
 ```
 
 It's important to note that this isn't completely type-safe, similar to `useNavigation`.
+
+### Annotating `options` and `screenOptions`
+
+When you pass the `options` to a `Screen` or `screenOptions` prop to a `Navigator` component, they are already type-checked and you don't need to do anything special. However, sometimes you might want to extract the options to a separate object, and you might want to annotate it.
+
+To annotate the options, we need to import the corresponding type from the navigator. For example, `StackNavigationOptions` for `@react-navigation/stack`:
+
+
+```ts
+import { StackNavigationProp } from '@react-navigation/stack';
+
+const options: StackNavigationOptions = {
+  headerShown: false,
+}
+```
+
+Similarly, you can import `DrawerNavigationOptions` from `@react-navigation/drawer`, `BottomTabNavigationOptions` from `@react-navigation/bottom-tabs` etc.
