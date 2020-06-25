@@ -2,10 +2,10 @@ const DEFAULT_PLATFORM = 'android';
 const DEPS_VERSIONS = {
   '4': [
     '@react-native-community/masked-view@^0.1.7',
-    'react-navigation@^4.3.3',
-    'react-navigation-tabs@^2.8.7',
-    'react-navigation-stack@^2.3.6',
-    'react-navigation-drawer@^2.4.7',
+    'react-navigation@^4.4.0',
+    'react-navigation-tabs@^2.9.0',
+    'react-navigation-stack@^2.8.2',
+    'react-navigation-drawer@^2.5.0',
     'react-native-reanimated@^1.7.0',
     'react-native-safe-area-context@^0.7.3',
     'react-native-screens@^2.4.0',
@@ -17,7 +17,7 @@ const DEPS_VERSIONS = {
     "@react-navigation/material-bottom-tabs@^5.2.11",
     "@react-navigation/material-top-tabs@^5.2.11",
     "@react-navigation/native@^5.6.0",
-    "@react-navigation/stack@^5.6.0",
+    "@react-navigation/stack@^5.6.1",
     'react-native-paper@^3.10.1',
     'react-native-reanimated@^1.7.0',
     'react-native-safe-area-context@^0.7.3',
