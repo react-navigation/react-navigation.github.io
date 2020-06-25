@@ -1,6 +1,6 @@
 ---
 id: devtools
-title: devtools
+title: Developer tools
 sidebar_label: Developer tools
 ---
 

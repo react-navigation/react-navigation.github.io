@@ -13,7 +13,7 @@ In this guide, we will configure React Navigation to handle external links. This
 To handle a link, you need to translate it to a valid navigation state and vice versa. For example, the path `/rooms/chat?user=jane` may be translated to a state object like this:
 
 ```js
-{
+const state = {
   routes: [
     {
       name: 'rooms',
@@ -451,7 +451,7 @@ Since URLs are strings, any params you have for routes are also converted to str
 For example, say you have a state like following:
 
 ```js
-{
+const state = {
   routes: [
     {
       name: 'Chat',
@@ -474,7 +474,7 @@ const config = {
 When parsing this path, you'll get the following state:
 
 ```js
-{
+const state = {
   routes: [
     {
       name: 'Chat',
@@ -667,14 +667,16 @@ Here, the `HomeStack` property contains a config object. The config can go as de
 What if you wanted a specific screen to used as the initial screen in the navigator? For example, if you had a URL that would open `Home` screen, you would like to be able to navigate to `Profile` from it by using navigation's `navigation.goBack()` method. It is possible by defining `initialRouteName` for a navigator. It would look like this:
 
 ```js
-config = {
-  HomeStack: {
-    initialRouteName: 'Profile',
-    screens: {
-      Home: 'home',
-      Profile: 'user',
+const config = {
+  screens: {
+    HomeStack: {
+      initialRouteName: 'Profile',
+      screens: {
+        Home: 'home',
+        Profile: 'user',
+      },
     },
+    Settings: 'settings',
   },
-  Settings: 'settings',
 };
 ```
