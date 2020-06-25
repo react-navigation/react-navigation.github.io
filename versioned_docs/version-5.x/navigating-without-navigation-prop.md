@@ -70,30 +70,35 @@ When writing tests, you may mock the navigation functions, and make assertions o
 
 When using this pattern, you need to keep few things in mind to avoid crashes in your app.
 
-- The ref is set only after the navigation container renders
+- The ref is set only after the navigation container renders, this can be async when handling deep links
 - A navigator needs to be rendered to be able to handle actions
 
 If you try to navigate without rendering a navigator or before the navigator finishes mounting, it will throw and crash your app if not handled. So you'll need to add an additional check to decide what to do until your app mounts.
 
-For an example, consider the following scenario, you have a screen somewhere in the app, and that screen dispatches a redux action on `useEffect`/`componentDidMount`. You are listening for this action in your middleware and try to perform navigation when you get it. This will throw an error, because by this time, the parent navigator hasn't finished mounting. Parent's `useEffect`/`componentDidMount` is always called **after** child's `useEffect`/`componentDidMount`.
+For an example, consider the following scenario, you have a screen somewhere in the app, and that screen dispatches a redux action on `useEffect`/`componentDidMount`. You are listening for this action in your middleware and try to perform navigation when you get it. This will throw an error, because by this time, the parent navigator hasn't finished mounting and isn't ready. Parent's `useEffect`/`componentDidMount` is always called **after** child's `useEffect`/`componentDidMount`.
 
-To avoid this, you can set a ref to tell you that your app has finished mounting, and check that ref before performing any navigation. To do this, we can use `useEffect` in our root component:
+To avoid this, you can set a ref to tell you that your app has finished mounting, and check that ref before performing any navigation. To do this, we can use the `onReady` callback in our `NavigationContainer`:
 
 ```js
 // App.js
 
 import { NavigationContainer } from '@react-navigation/native';
-import { navigationRef, isMountedRef } from './RootNavigation';
+import { navigationRef, isReadyRef } from './RootNavigation';
 
 export default function App() {
   React.useEffect(() => {
-    isMountedRef.current = true;
-
-    return () => (isMountedRef.current = false);
+    return () => (isReadyRef.current = false);
   }, []);
 
   return (
-    <NavigationContainer ref={navigationRef}>{/* ... */}</NavigationContainer>
+    <NavigationContainer
+      ref={navigationRef}
+      onReady={() => {
+        isReadyRef.current = true;
+      }}
+    >
+      {/* ... */}
+    </NavigationContainer>
   );
 }
 ```
@@ -105,12 +110,12 @@ Also export this ref from our `RootNavigation`:
 
 import * as React from 'react';
 
-export const isMountedRef = React.createRef();
+export const isReadyRef = React.createRef();
 
 export const navigationRef = React.createRef();
 
 export function navigate(name, params) {
-  if (isMountedRef.current && navigationRef.current) {
+  if (isReadyRef.current && navigationRef.current) {
     // Perform navigation if the app has mounted
     navigationRef.current.navigate(name, params);
   } else {
