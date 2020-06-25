@@ -54,7 +54,7 @@ For example, if you're calling `navigation.goBack()` in a nested screen, it'll o
 
 ### Navigator specific methods are available in the navigators nested inside
 
-For example, if you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer` methods etc. will also be available on the `navigation` prop in the screen's inside the stack navigator. But say you have a stack navigator as the parent of the drawer, then the screens inside the stack navigator won't have access to these methods, because they aren't nested inside the drawer.
+For example, if you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer` methods etc. will also be available on the `navigation` prop in the screens inside the stack navigator. But say you have a stack navigator as the parent of the drawer, then the screens inside the stack navigator won't have access to these methods, because they aren't nested inside the drawer.
 
 Similarly, if you have a tab navigator inside stack navigator, the screens in the tab navigator will get the `push` and `replace` methods for stack in their `navigation` prop.
 
