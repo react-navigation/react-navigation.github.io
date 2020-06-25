@@ -113,7 +113,7 @@ This means, now we can access screen's params through `route.params` instead of 
 
 ```js
 function ProfileScreen({ route }) {
-  const userId = route.params.me;
+  const userId = route.params.user;
 
   // ...
 }
