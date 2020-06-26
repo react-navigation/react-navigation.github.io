@@ -143,6 +143,6 @@ The natural question at this point is: "how do I go from the `Home` route to the
 
 - React Native doesn't have a built-in API for navigation like a web browser does. React Navigation provides this for you, along with the iOS and Android gestures and animations to transition between screens.
 - `Stack.Navigator` is a component that takes route configuration as its children with additional props for configuration and renders our content.
-- Each `Stack.Screen` component take a `name` prop which refers to the name of the route and `component` prop which specifies the component to render for the route. These are the 2 required props.
+- Each `Stack.Screen` component takes a `name` prop which refers to the name of the route and `component` prop which specifies the component to render for the route. These are the 2 required props.
 - To specify what the initial route in a stack is, provide an `initialRouteName` as the prop for the navigator.
 - To specify screen-specific options, we can pass an `options` prop to `Stack.Screen`, and for common options, we can pass `screenOptions` to `Stack.Navigator`
