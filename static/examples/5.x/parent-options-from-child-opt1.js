@@ -8,7 +8,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
 function getHeaderTitle(route) {
-  // If state doesn't exist, we need to default to `screen` param if available, or the initial screen
+  // If the focused route is not found, we need to assume it's the initial screen
+  // This can happen during if there hasn't been any navigation inside the screen
   // In our case, it's "Feed" as that's the first screen inside the navigator
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
 
