@@ -86,7 +86,7 @@ String that can be used as a fallback for `headerTitle`.
 
 #### `header`
 
-Function that given `HeaderProps` returns a React Element, to display as a header.
+Function that given `HeaderProps` returns a React Element, to display as a header. Make sure to set `headerMode` to `screen` as well when using a custom header (see below for more details).
 
 Example:
 
@@ -116,20 +116,6 @@ To set a custom header for all the screens in the navigator, you can specify thi
 
 When using a custom header, there are 2 important things to keep in mind:
 
-##### Specify a `height` in `headerStyle`
-
-If your header's height differs from the default header height, then you might notice glitches due to measurement being async. Explicitly specifying the height will avoid such glitches.
-
-Example:
-
-```js
-headerStyle: {
-  height: 80, // Specify the height of your custom header
-};
-```
-
-Note that this style is not applied to the header by default since you control the styling of your custom header. If you also want to apply this style to your header, use `scene.descriptor.options.headerStyle` from the props.
-
 ##### Set `headerMode` to `screen`
 
 By default, there is one floating header which renders headers for multiple screens on iOS. These headers include animations to smoothly switch to one another.
@@ -150,6 +136,20 @@ return (
   <Animated.View style={{ opacity }}>{/* Header content */}</Animated.View>
 );
 ```
+
+##### Specify a `height` in `headerStyle`
+
+If your header's height differs from the default header height, then you might notice glitches due to measurement being async. Explicitly specifying the height will avoid such glitches.
+
+Example:
+
+```js
+headerStyle: {
+  height: 80, // Specify the height of your custom header
+};
+```
+
+Note that this style is not applied to the header by default since you control the styling of your custom header. If you also want to apply this style to your header, use `scene.descriptor.options.headerStyle` from the props.
 
 #### `headerShown`
 
