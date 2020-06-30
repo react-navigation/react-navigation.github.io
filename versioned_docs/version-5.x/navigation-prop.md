@@ -143,7 +143,7 @@ function ProfileScreen({ navigation: { setParams } }) {
     return (
       <Button
         onPress={() =>
-          navigation.setParams({
+          setParams({
             friends:
               route.params.friends[0] === 'Brent'
                 ? ['Wojciech', 'Szymon', 'Jakub']
