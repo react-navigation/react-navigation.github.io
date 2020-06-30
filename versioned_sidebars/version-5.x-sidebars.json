@@ -34,6 +34,7 @@
       "version-5.x/screen-tracking",
       "version-5.x/themes",
       "version-5.x/state-persistence",
+      "version-5.x/testing",
       "version-5.x/typescript",
       "version-5.x/redux-integration",
       "version-5.x/MST-integration",
