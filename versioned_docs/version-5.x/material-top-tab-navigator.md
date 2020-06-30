@@ -324,7 +324,7 @@ This event is fired when the user presses the tab button for the current screen 
 
 - If the tab is not focused, tab press will focus that tab
 - If the tab is already focused:
-  - If the screen for the tab renders a scroll view, scroll to top is performed by `useScrollToTop`
+  - If the screen for the tab renders a scroll view, you can use [`useScrollToTop`](use-scroll-to-top.md) to scroll it to top
   - If the screen for the tab renders a stack navigator, a `popToTop` action is performed on the stack
 
 To prevent the default behavior, you can call `event.preventDefault`:
