@@ -85,6 +85,4 @@ function StaticCounter({ route }) {
 
 This is not possible. We don't support it because it's too easy to shoot yourself in the foot and slow down / break your app.
 
-However it's possible to use [`redux-devtools-extension`](https://github.com/zalmoxisus/redux-devtools-extension) to inspect the navigation state and actions, as well as perform time travel debugging. This works out of the box without any extra configuration.
-
-If you use [`react-native-debugger`](https://github.com/jhen0409/react-native-debugger), it already includes this extension.
+However it's possible to use [`redux-devtools-extension`](https://github.com/zalmoxisus/redux-devtools-extension) to inspect the navigation state and actions, as well as perform time travel debugging by using the [`devtools` package](devtools.md).
