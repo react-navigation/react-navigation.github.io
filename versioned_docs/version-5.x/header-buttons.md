@@ -87,6 +87,8 @@ The back button will be rendered automatically in a stack navigator whenever it 
 
 Generally, this is what you want. But it's possible that in some circumstances that you want to customize the back button more than you can through the options mentioned above, in which case you can set the `headerLeft` option to a React Element that will be rendered, just as we did with `headerRight`. Alternatively, the `headerLeft` option also accepts a React Component, which can be used, for example, for overriding the onPress behavior of the back button. Read more about this in the [api reference](stack-navigator.md#headerleft).
 
+If you would like to retain the view of back button and only override the `onPress` method, you can import [HeaderBackButton](https://github.com/react-navigation/react-navigation/blob/main/packages/stack/src/views/Header/HeaderBackButton.tsx) from `@react-navigation/stack` and assign that component to the `headerLeft` option.
+
 ## Summary
 
 - You can set buttons in the header through the `headerLeft` and `headerRight` properties in `options`.
