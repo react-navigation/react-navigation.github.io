@@ -51,7 +51,7 @@ The reason that is necessary to use `Expo.Linking.makeUrl` is that the scheme wi
 
 ### Universal Links
 
-If you are using universal links, you need to add you domain to the prefixes.
+If you are using universal links, you need to add your domain to the prefixes.
 
 ```js
 function App() {
