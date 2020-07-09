@@ -168,4 +168,33 @@ We recommend to reduce nesting navigators to minimal. Try to achieve the behavio
 - It results in deeply nested view hierarchy which can cause memory and performance issues in lower end devices
 - Nesting same type of navigators (e.g. tabs inside tabs, drawer inside drawer etc.) leads to a confusing UX
 
-Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, keep them in separate objects/arrays rather than separate navigators.
+Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, instead of using separate navigators, consider doing something like this:
+
+```js
+// Define multiple groups of screens in objects like this
+const commonScreens = {
+  Help: HelpScreen,
+};
+
+const authScreens = {
+  SignIn: SignInScreen,
+  SignUp: SignUpScreen,
+};
+
+const userScreens = {
+  Home: HomeScreen,
+  Profile: ProfileScreen,
+};
+
+// Then use them in your components by looping over the object and creating screen configs
+<Stack.Navigator>
+  {Object.entries({
+    // Use the screens normally
+    ...commonScreens,
+    // Use some screens conditionally based on some condition
+    ...(isLoggedIn ? userScreens : authScreens),
+  }).map(([name, component]) => (
+    <Stack.Screen name={name} component={component} />
+  ))}
+</Stack.Navigator>;
+```
