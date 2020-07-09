@@ -25,6 +25,8 @@
       "version-5.x/status-bar",
       "version-5.x/screen-options-resolution",
       "version-5.x/custom-android-back-button-handling",
+      "version-5.x/preventing-going-back",
+      "version-5.x/function-after-focusing-screen",
       "version-5.x/connecting-navigation-prop",
       "version-5.x/navigating-without-navigation-prop",
       "version-5.x/deep-linking",
@@ -39,7 +41,6 @@
       "version-5.x/redux-integration",
       "version-5.x/MST-integration",
       "version-5.x/localization",
-      "version-5.x/function-after-focusing-screen",
       "version-5.x/react-native-screens",
       "version-5.x/upgrading-from-4.x"
     ],

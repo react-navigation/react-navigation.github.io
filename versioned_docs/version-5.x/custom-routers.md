@@ -184,7 +184,7 @@ const MyTabRouter = options => {
 
 ### Blocking Navigation Actions
 
-Sometimes you may want to prevent some navigation activity, depending on your route. Let's say, you want to prevent going back if `isEditing` is `true`:
+Sometimes you may want to prevent some navigation activity, depending on your route. Let's say, you want to prevent pushing a new screen if `isEditing` is `true`:
 
 ```js
 import { StackRouter } from '@react-navigation/native';
@@ -199,7 +199,7 @@ const MyStackRouter = options => {
 
       if (
         result != null &&
-        result.index < state.index &&
+        result.index > state.index &&
         state.routes[state.index].params?.isEditing
       ) {
         // Returning the current state means that the action has been handled, but we don't have a new state
@@ -211,3 +211,5 @@ const MyStackRouter = options => {
   };
 };
 ```
+
+If you want to prevent going back, the recommended approach is to use the [`beforeRemove` event](preventing-going-back.md).
