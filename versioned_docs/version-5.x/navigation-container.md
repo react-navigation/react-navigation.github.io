@@ -120,6 +120,41 @@ See [configuring links guide](configuring-links.md) for more details on how to c
 
 React Element to use as a fallback while we resolve the deep link. Defaults to `null`.
 
+### `documentTitle`
+
+By default, React Navigation automatically updates the document title on Web to match the `title` option of the focused screen. You can disable it or customize it using this prop. It accepts a configuration object with the following options:
+
+#### `enabled`
+
+Whether document title handling should be enabled. Defaults to `true`.
+
+#### `formatter`
+
+Custom formatter to use if you want to customize the title text. Defaults to:
+
+```js
+(options, route) => options?.title ?? route?.name;
+```
+
+Example:
+
+```js
+import { NavigationContainer } from '@react-navigation/native';
+
+function App() {
+  return (
+    <NavigationContainer
+      documentTitle={{
+        formatter: (options, route) =>
+          `${options?.title ?? route?.name} - My Cool App`,
+      }}
+    >
+      {/* content */}
+    </NavigationContainer>
+  );
+}
+```
+
 ### `theme`
 
 Custom theme to use for the navigation components such as the header, tab bar etc. See [theming guide](themes.md) for more details and usage guide.
