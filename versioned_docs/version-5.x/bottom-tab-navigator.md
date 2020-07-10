@@ -237,6 +237,10 @@ Function that given `{ focused: boolean, color: string, size: number }` returns 
 
 Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
 
+#### `tabBarBadge`
+
+Text to show in a badge on the tab icon. Accepts a `string` or a `number`.
+
 #### `tabBarButton`
 
 Function which returns a React element to render as the tab bar button. It wraps the icon and label and implements `onPress`. Renders `TouchableWithoutFeedback` by default. `tabBarButton: props => <TouchableOpacity {...props} />` would use `TouchableOpacity` instead.
@@ -272,7 +276,7 @@ To prevent the default behavior, you can call `event.preventDefault`:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('tabPress', e => {
+  const unsubscribe = navigation.addListener('tabPress', (e) => {
     // Prevent default behavior
     e.preventDefault();
 
@@ -294,7 +298,7 @@ Example:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('tabLongPress', e => {
+  const unsubscribe = navigation.addListener('tabLongPress', (e) => {
     // Do something
   });
 
@@ -355,6 +359,7 @@ function MyTabs() {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="bell" color={color} size={size} />
           ),
+          tabBarBadge: 3,
         }}
       />
       <Tab.Screen
