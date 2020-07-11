@@ -16,6 +16,8 @@ The event receives the `action` that triggered it. You can dispatch this action 
 
 Example:
 
+<samp id="prevent-going-back" />
+
 ```js
 function EditText({ navigation }) {
   const [text, setText] = React.useState('');
