@@ -48,6 +48,12 @@ When nesting navigators, there are some things to keep in mind:
 
 For example, when you press the back button inside a nested stack navigator, it'll go back to the previous screen inside the nested stack even if there's another navigator as the parent.
 
+### Each navigator has it's own options
+
+For example, specifying a `title` option in a screen nested in a child navigator won't affect the title shown in a parent navigator.
+
+If you want to achieve this behavior, see the guide for [screen options with nested navigators](screen-options-resolution.md#setting-parent-screen-options-based-on-child-navigators-state). this could be useful if you are rendering a tab navigator inside a stack navigator and want to show the title of the active screen inside the tab navigator in the header of the stack navigator.
+
 ### Navigation actions are handled by current navigator and bubble up if couldn't be handled
 
 For example, if you're calling `navigation.goBack()` in a nested screen, it'll only go back in the parent navigator if you're already on the first screen of the navigator. Other actions such as `navigate` work similarly, i.e. navigation will happen in the nested navigator and if the nested navigator couldn't handle it, then the parent navigator will try to handle it. In the above example, when calling `navigate('Messages')`, inside `Feed` screen, the nested tab navigator will handle it, but if you call `navigate('Settings')`, the parent stack navigator will handle it.
@@ -160,13 +166,81 @@ navigation.navigate('Root', {
 });
 ```
 
+## Nesting multiple stack navigators
+
+It's sometimes useful to nest multiple stack navigators, for example, to have [some screens in a modal stack and some in regular stack](modal.md).
+
+When nesting multiple stacks, React Navigation will automatically hide the header from the child stack navigator in order to avoid showing duplicate headers. However, depending on the scenario, it might be more useful to show the header in the child stack navigator instead and hide the header in the parent stack navigator.
+
+To achieve this, you can hide the header in the screen containing the stack using the `headerShown: false` option.
+
+For example:
+
+```js
+function Home() {
+  return (
+    <NestedStack.Navigator>
+      <NestedStack.Screen name="Profile" component={Profile} />
+      <NestedStack.Screen name="Settings" component={Settings} />
+    </NestedStack.Navigator>
+  );
+}
+
+function App() {
+  return (
+    <NavigationContainer>
+      <RootStack.Navigator>
+        <RootStack.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen name="EditPost" component={EditPost} />
+      </RootStack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+A complete example can be found in the [modal guide](modal.md). However, the principle isn't only specific to modals, but any kind of nesting of stack navigators.
+
+In rare cases, you also might want to show both headers from the child and parent stack navigators. In this case, you can explicitly use `headerShown: true` on the child stack navigator to override the default behavior.
+
+For example:
+
+```js
+function Home() {
+  return (
+    <NestedStack.Navigator screenOptions={{ headerShown: true }}>
+      <NestedStack.Screen name="Profile" component={Profile} />
+      <NestedStack.Screen name="Settings" component={Settings} />
+    </NestedStack.Navigator>
+  );
+}
+
+function App() {
+  return (
+    <NavigationContainer>
+      <RootStack.Navigator>
+        <RootStack.Screen name="Home" component={Home} />
+        <RootStack.Screen name="EditPost" component={EditPost} />
+      </RootStack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+In these examples, we have used a stack navigator directly nested inside another stack navigator, but the same principle applies when there are other navigators in the middle, for example: stack navigator inside a tab navigator which is inside another stack navigator.
+
+When nesting multiple stack navigators, we recommend nesting at most 2 stack navigators, unless absolutely necessary.
+
 ## Best practices when nesting
 
 We recommend to reduce nesting navigators to minimal. Try to achieve the behavior you want with as little nesting as possible. Nesting has many downsides:
 
-- Code becomes difficult to follow when navigating to nested screens
 - It results in deeply nested view hierarchy which can cause memory and performance issues in lower end devices
-- Nesting same type of navigators (e.g. tabs inside tabs, drawer inside drawer etc.) leads to a confusing UX
+- Nesting same type of navigators (e.g. tabs inside tabs, drawer inside drawer etc.) might lead to a confusing UX
+- With excessive nesting, code becomes difficult to follow when navigating to nested screens, configuring deep link etc.
 
 Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, instead of using separate navigators, consider doing something like this:
 
@@ -187,6 +261,7 @@ const userScreens = {
 };
 
 // Then use them in your components by looping over the object and creating screen configs
+// You could extract this logic to a utility function and reuse it to simplify your code
 <Stack.Navigator>
   {Object.entries({
     // Use the screens normally
