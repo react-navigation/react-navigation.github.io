@@ -486,3 +486,20 @@ We also have documentation on how to use the new hooks such as [`useFocusEffect`
 We have long recommended not to store navigation state in Redux. We have finally dropped support for storing navigation state in Redux in React Navigation 5.x.
 
 This means you cannot store navigation state in Redux. You can still use Redux (or any other library) for managing your app state and it will work fine. See [Redux integration](redux-integration.md) for more info.
+
+## Options for screens inside of a navigator
+
+### `header`
+
+Previously to hide the header we used to specify it as
+
+```js
+header: null
+```
+
+Now in 5.x it should be a function that returns an empty component as follows:
+
+```js
+header: () => {}
+```
+
