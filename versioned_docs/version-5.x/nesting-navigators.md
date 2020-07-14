@@ -60,13 +60,29 @@ For example, if you're calling `navigation.goBack()` in a nested screen, it'll o
 
 ### Navigator specific methods are available in the navigators nested inside
 
-For example, if you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer` methods etc. will also be available on the `navigation` prop in the screen's inside the stack navigator. But say you have a stack navigator as the parent of the drawer, then the screens inside the stack navigator won't have access to these methods, because they aren't nested inside the drawer.
+For example, if you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer`, `toggleDrawer` methods etc. will also be available on the `navigation` prop in the screen's inside the stack navigator. But say you have a stack navigator as the parent of the drawer, then the screens inside the stack navigator won't have access to these methods, because they aren't nested inside the drawer.
 
 Similarly, if you have a tab navigator inside stack navigator, the screens in the tab navigator will get the `push` and `replace` methods for stack in their `navigation` prop.
 
+If you need to dispatch actions to the nested child navigators from a parent, you can use [`navigation.dispatch`](navigation-prop.md#dispatch):
+
+```js
+navigation.dispatch(DrawerActions.toggleDrawer());
+```
+
 ### Nested navigators don't receive parent's events
 
-For example, if you have a stack navigator nested inside a tab navigator, the screens in the stack navigator won't receive the events emitted by the parent tab navigator such as (`tabPress`) when using `navigation.addListener`. To receive events from parent navigator, you can explicitly listen to parent's events with `navigation.dangerouslyGetParent().addListener`.
+For example, if you have a stack navigator nested inside a tab navigator, the screens in the stack navigator won't receive the events emitted by the parent tab navigator such as (`tabPress`) when using `navigation.addListener`.
+
+To receive events from parent navigator, you can explicitly listen to parent's events with `navigation.dangerouslyGetParent()`:
+
+```js
+const unsubscribe = navigation
+  .dangerouslyGetParent()
+  .addListener('tabPress', (e) => {
+    // Do something
+  });
+```
 
 ### Parent navigator's UI is rendered on top of child navigator
 
