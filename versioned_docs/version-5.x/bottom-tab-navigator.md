@@ -257,6 +257,8 @@ ID to locate this tab button in tests.
 
 Whether this screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
 
+Normally, we don't recommend enabling this prop as users don't expect their navigation history to be lost when switching tabs. If you enable this prop, please consider if this will actually provide a better experience for the user.
+
 ### Events
 
 The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
