@@ -158,6 +158,104 @@ YellowBox.ignoreWarnings([
 ]);
 ```
 
+## I'm getting "Invalid hook call. Hooks can only be called inside of the body of a function component"
+
+This can happen when you pass a React component to an option that accepts a function returning a react element. For example, the [`header` option in stack navigator](stack-navigator.md#header) expects a function returning a react element:
+
+```js
+<Stack.Screen
+  name="Home"
+  component={Home}
+  option={{ header: (props) => <MyHeader {...props} /> }}
+/>
+```
+
+If you directly pass a function here, you'll get this error when using hooks:
+
+```js
+<Stack.Screen
+  name="Home"
+  component={Home}
+  option={{
+    // This is not correct
+    header: MyHeader,
+  }}
+/>
+```
+
+The same applies to other options like `headerLeft`, `headerRight`, `tabBarIcon` etc. as well as props such as `tabBar`, `drawerContent` etc.
+
+## Screens are unmounting/remounting during navigation
+
+Sometimes you might have noticed that your screens unmount/remount, or your local component state or the navigation state resets when you navigate. This might happen if you are creating React components during render.
+
+The simplest example is something like following:
+
+```js
+function App() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={() => {
+          return <SomeComponent />;
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+```
+
+The `component` prop expects a React Component, but in the example, it's getting a function returning an React Element. While superficially a component and a function returning a React Element look the exact same, they don't behave the same way when used.
+
+Here, every time the component re-renders, a new function will be created and passed to the `component` prop. React will see a new component and unmount the previous component before rendering the new one. This will cause any local state in the old component to be lost. React Navigation will detect and warn for this specific case but there can be other ways you might be creating components during render which it can't detect.
+
+Another easy to identify example of this is when you create a component inside another component:
+
+```js
+function App() {
+  const Home = () => {
+    return <SomeComponent />;
+  };
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+    </Stack.Navigator>
+  );
+}
+```
+
+Or when you use a higher order component (such as `connect` from Redux, or `withX` functions that accept a component) inside another component:
+
+```js
+function App() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={withSomeData(Home)} />
+    </Stack.Navigator>
+  );
+}
+```
+
+If you're unsure, it's always best to make sure that the components you are using as screens are defined outside of a React component. They could be defined in another file and imported, or defined at the top level scope in the same file:
+
+```js
+const Home = () => {
+  return <SomeComponent />;
+};
+
+function App() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+    </Stack.Navigator>
+  );
+}
+```
+
+This is not React Navigation specific, but related to React in general. You should always avoid creating components during render, whether you are using React Navigation or not.
+
 ## App is not working properly when connected to Chrome Debugger
 
 When the app is connected to Chrome Debugger (or other tools that use Chrome Debugger such as [React Native Debugger](https://github.com/jhen0409/react-native-debugger)) you might encounter various issues related to timing.
