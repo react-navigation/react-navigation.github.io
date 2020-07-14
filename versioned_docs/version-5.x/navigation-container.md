@@ -89,7 +89,7 @@ You can use it to track the focused screen, persist the navigation state etc.
 
 ### `linking`
 
-Configuration for linking integration used for deep linking and URL support in browsers. Accepts the same options as [`useLinking`](use-linking.md#options).
+Configuration for linking integration used for deep linking and URL support in browsers.
 
 Example:
 
@@ -116,6 +116,186 @@ function App() {
 
 See [configuring links guide](configuring-links.md) for more details on how to configure deep links and URL integration.
 
+#### Options
+
+##### `linking.prefixes`
+
+URL prefixes to handle. You can provide multiple prefixes to support custom schemes as well as [universal links](https://developer.apple.com/ios/universal-links/).
+
+Only URLs matching these prefixes will be handled. The prefix will be stripped from the URL before parsing.
+
+Example:
+
+```js
+<NavigationContainer
+  linking={{
+    prefixes: ['https://mychat.com', 'mychat://'],
+    config: {
+      screens: {
+        Chat: 'feed/:sort',
+      },
+    },
+  }}
+>
+  {/* content */}
+</NavigationContainer>
+```
+
+This is only supported on iOS and Android.
+
+##### `linking.config`
+
+Config to fine-tune how to parse the path. The config object should represent the structure of the navigators in the app.
+
+For example, if we have `Catalog` screen inside `Home` screen and want it to handle the `item/:id` pattern:
+
+```js
+{
+  screens: {
+    Home: {
+      screens: {
+        Catalog: {
+          path: 'item/:id',
+          parse: {
+            id: Number,
+          },
+        },
+      },
+    },
+  }
+}
+```
+
+The options for parsing can be an object or a string:
+
+```js
+{
+  screens: {
+    Catalog: 'item/:id',
+  }
+}
+```
+
+When a string is specified, it's equivalent to providing the `path` option.
+
+The `path` option is a pattern to match against the path. Any segments starting with `:` are recognized as a param with the same name. For example `item/42` will be parsed to `{ name: 'item', params: { id: '42' } }`.
+
+The `initialRouteName` option ensures that the route name passed there will be present in the state for the navigator, e.g. for config:
+
+```js
+{
+  screens: {
+    Home: {
+      initialRouteName: 'Feed',
+      screens: {
+        Catalog: {
+          path: 'item/:id',
+          parse: {
+            id: Number,
+          },
+        },
+        Feed: 'feed',
+      },
+    },
+  }
+}
+```
+
+and URL : `/item/42`, the state will look like this:
+
+```js
+{
+  routes: [
+    {
+      name: 'Home',
+      state: {
+        index: 1,
+        routes: [
+          {
+            name: 'Feed'
+          },
+          {
+            name: 'Catalog',
+            params: { id: 42 },
+          },
+        ],
+      },
+    },
+  ],
+}
+```
+
+The `parse` option controls how the params are parsed. Here, you can provide the name of the param to parse as a key, and a function which takes the string value for the param and returns a parsed value:
+
+```js
+{
+  screens: {
+    Catalog: {
+      path: 'item/:id',
+      parse: {
+        id: id => parseInt(id, 10),
+      },
+    },
+  }
+}
+```
+
+If no custom function is provided for parsing a param, it'll be parsed as a string.
+
+##### `linking.enabled`
+
+Optional boolean to enable or disable the linking integration. Defaults to `true` if the `linking` prop is specified.
+
+##### `linking.getStateFromPath`
+
+You can optionally override the way React Navigation parses deep links to a state object by providing your own implementation.
+
+Example:
+
+```js
+<NavigationContainer
+  linking={{
+    prefixes: ['https://mychat.com', 'mychat://'],
+    config: {
+      screens: {
+        Chat: 'feed/:sort',
+      },
+    },
+    getStateFromPath(path, config) {
+      // Return a state object here
+      // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
+    },
+  }}
+>
+  {/* content */}
+</NavigationContainer>
+```
+
+##### `linking.getPathFromState`
+
+You can optionally override the way React Navigation serializes state objects to link by providing your own implementation. This is necessary for proper web support if you have specified `getStateFromPath`.
+
+Example:
+
+```js
+<NavigationContainer
+  linking={{
+    prefixes: ['https://mychat.com', 'mychat://'],
+    config: {
+      screens: {
+        Chat: 'feed/:sort',
+      },
+    },
+    getPathFromState(state, config) {
+      // Return a path string here
+      // You can also reuse the default logic by importing `getPathFromState` from `@react-navigation/native`
+    },
+  }}
+>
+  {/* content */}
+</NavigationContainer>
+```
+
 ### `fallback`
 
 React Element to use as a fallback while we resolve the deep link. Defaults to `null`.
@@ -124,11 +304,11 @@ React Element to use as a fallback while we resolve the deep link. Defaults to `
 
 By default, React Navigation automatically updates the document title on Web to match the `title` option of the focused screen. You can disable it or customize it using this prop. It accepts a configuration object with the following options:
 
-#### `enabled`
+#### `documentTitle.enabled`
 
 Whether document title handling should be enabled. Defaults to `true`.
 
-#### `formatter`
+#### `documentTitle.formatter`
 
 Custom formatter to use if you want to customize the title text. Defaults to:
 

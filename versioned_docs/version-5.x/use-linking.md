@@ -4,7 +4,10 @@ title: useLinking
 sidebar_label: useLinking
 ---
 
-The `useLinking` hook lets us handle deep links in our apps. You probably want to use the [`linking` prop on `NavigationContainer`](navigation-container.md#linking) instead of using this hook directly.
+The `useLinking` hook lets us handle deep links in our apps. This is used internally by React Navigation to implement deep linking support.
+
+You should use the [`linking` prop on `NavigationContainer`](navigation-container.md#linking) instead of using this hook directly.
+This documentation exists for users who were already using this hook before the `linking` prop was added.
 
 Example:
 
@@ -175,37 +178,6 @@ The `parse` option controls how the params are parsed. Here, you can provide the
 ```
 
 If no custom function is provided for parsing a param, it'll be parsed as a string.
-
-Different segments of the same path can be handled by different parts of the config. For example, say we have the URL `/rooms/chat/jane`. We can provide the following config to handle it:
-
-```js
-{
-  screens: {
-    Rooms: 'rooms',
-    Chat: 'chat/:user'
-  }
-}
-```
-
-This will result in the following navigation state:
-
-```js
-{
-  routes: [
-    {
-      name: 'Rooms',
-      state: {
-        routes: [
-          {
-            name: 'Chat',
-            params: { user: 'jane' },
-          },
-        ],
-      },
-    },
-  ],
-}
-```
 
 #### `enabled`
 
