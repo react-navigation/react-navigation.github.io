@@ -17,10 +17,10 @@
   right: 0;
   bottom: 0;
   z-index: -1;
-  background-repeat: repeat;
+  /* background-repeat: repeat;
   background-image: url(/img/expo_spiro.png);
   background-position-x: center;
-  background-color: #fff;;
+  background-color: #fff;; */
   border-top: 1px solid rgba(0, 0, 0, 0.04);
 }
 

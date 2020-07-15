@@ -31,6 +31,13 @@ _Deployment is done automatically via Github Actions. Normally you shouldn't nee
 - Configure `CROWDIN_DOCUSAURUS_PROJECT_ID` and `CROWDIN_DOCUSAURUS_API_KEY` environment variables (ask [@brentvatne](https://github.com/brentvatne) if you need access).
 - Run `yarn crowdin-upload` and then `yarn crowdin-download`
 
+### Update the sponsors list
+
+- Create a Github "Personal Access Token" [here](https://github.com/settings/tokens) and set the `read:org` scope on it.
+- Set the environment variable `REACT_NAV_GITHUB_TOKEN` to that value.
+- Run `yarn fetch-sponsors`.
+- Commit the updated `sponsors.js` file.
+
 ### Deploy it
 
 _Before deploying, be sure to download the latest translations!_

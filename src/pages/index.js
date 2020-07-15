@@ -5,6 +5,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
+import sponsors from '../data/sponsors';
 
 const features = [
   {
@@ -46,10 +47,7 @@ function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
   return (
-    <Layout
-      title={siteConfig.title}
-      description={siteConfig.tagline}
-    >
+    <Layout title={siteConfig.title} description={siteConfig.tagline}>
       <div className={styles.blm}>
         Black Lives Matter.{' '}
         <a
@@ -90,23 +88,20 @@ function Home() {
               Try the demo app
             </Link>
           </div>
-        </div>
-      </header>
-      <section className="margin-vert--xl text--center">
-        <div className="container">
-          <div className="row">
-            <div className="col col--12">
-              <h4>
-                Coming from v4? Check out our{' '}
-                <Link to={useBaseUrl('/docs/upgrading-from-4.x')}>
-                  v4 to v5 migration guide
-                </Link>
-                .
-              </h4>
-            </div>
+
+          <div style={{ marginTop: 30, opacity: 0.8 }}>
+            💡 Coming from v4? Check out our{' '}
+            <Link
+              to={useBaseUrl('/docs/upgrading-from-4.x')}
+              style={{ color: '#fff', fontWeight: 'bold' }}
+            >
+              v4 to v5 migration guide
+            </Link>
+            .
           </div>
         </div>
-      </section>
+      </header>
+
       {features && features.length && (
         <section className="margin-vert--xl">
           <div className="container">
@@ -136,8 +131,49 @@ function Home() {
           href="https://github.com/react-navigation/react-navigation/graphs/contributors"
         >
           community
+        </a>{' '}
+        and{' '}
+        <a
+          href="https://github.com/sponsors/react-navigation"
+          style={{ fontWeight: 'bold' }}
+        >
+          sponsors
         </a>
-        .
+        :
+        <div
+          style={{ marginTop: 20, display: 'flex', justifyContent: 'center' }}
+        >
+          {sponsors.map((sponsor) => {
+            return (
+              <a
+                href={`https://github.com/${sponsor.username}`}
+                target="_blank"
+              >
+                <img
+                  alt={`${sponsor.name} (${sponsor.username})`}
+                  src={sponsor.avatarUrl}
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 2,
+                    opacity: 0.8,
+                    display: 'inline-block',
+                    marginLeft: 10,
+                  }}
+                />
+              </a>
+            );
+          })}
+        </div>
+        <div style={{ marginTop: 20 }}>
+          If React Navigation is helpful to you, consider{' '}
+          <a
+            style={{ fontWeight: 'bold' }}
+            href="https://github.com/sponsors/react-navigation"
+          >
+            supporting the project by sponsoring it 💜
+          </a>
+        </div>
       </section>
     </Layout>
   );
