@@ -34,12 +34,11 @@ It's impossible to list every single app that uses React Navigation, but below a
 - [Pickyourtrail](https://apps.apple.com/us/app/pickyourtrail/id1400253672)
 - [Saffron](https://www.mysaffronapp.com/) ([iOS](https://apps.apple.com/us/app/saffron-your-digital-cookbook/id1438683531)) ([Android](https://play.google.com/store/apps/details?id=com.awad.saffron))
 - [Single Origin 2](https://singleoriginapp.com/)
+- [Skeel](https://www.skeelapp.com/) ([iOS](https://apps.apple.com/fr/app/skeel-qui-est-le-meilleur/id1292404366)) ([Android](https://play.google.com/store/apps/details?id=com.skeelofficial.reactnativeclient))
 - [Stillwhite: Wedding Dresses](https://www.stillwhite.com/) ([iOS](https://apps.apple.com/us/app/stillwhite-wedding-dresses/id1483180828)) ([Android](https://play.google.com/store/apps/details?id=com.stillwhite.app))
 - [Sweepy](https://sweepy.app/)
 - [Tracker Network for Fortnite](https://apps.apple.com/us/app/tracker-network-for-fortnite/id1287696482)
 - [vrbo](https://www.vrbo.com/mobile/)
-- [Skeel](https://www.skeelapp.com/) ([iOS](https://apps.apple.com/fr/app/skeel-qui-est-le-meilleur/id1292404366)) ([Android](https://play.google.com/store/apps/details?id=com.skeelofficial.reactnativeclient))
-
 
 ## Your app?
 
