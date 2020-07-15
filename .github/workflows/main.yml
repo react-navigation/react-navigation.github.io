@@ -42,6 +42,10 @@ jobs:
     #     yarn crowdin-upload
     #     yarn crowdin-download
 
+    - name: Update sponsors list
+      env:
+        GITHUB_TOKEN: ${{ secrets.DEPLOY_GITHUB_TOKEN }}
+      run: yarn fetch-sponsors
     - name: Publish to Github pages
       env:
         GITHUB_TOKEN: ${{ secrets.DEPLOY_GITHUB_TOKEN }}

@@ -46,7 +46,7 @@ function organizationToSponsors(organization) {
 async function fetchSponsorsAsync() {
   let { organization } = await graphql(query, {
     headers: {
-      authorization: `token ${process.env.REACT_NAV_GITHUB_TOKEN}`,
+      authorization: `token ${process.env.REACT_NAV_GITHUB_TOKEN || process.env.GITHUB_TOKEN}`,
     },
   });
 
