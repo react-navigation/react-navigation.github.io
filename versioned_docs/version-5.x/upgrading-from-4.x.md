@@ -20,6 +20,8 @@ If React Navigation 4 is working well for you and you don't need any of the new 
 
 However, if you're starting a new project, we recommend to use the latest version instead of React Navigation 4.
 
+If you are upgrading from older versions of navigators, you should take a look at the guide for [upgrading to React Navigation 4](../version-4.x/upgrading-from-3.x.md) first, especially the part for [upgrading packages](../version-4.x/upgrading-from-3.x.md#upgrading-packages).
+
 ## Package names
 
 For React Navigation 5, we went with scoped packages (e.g. `@react-navigation/stack`). It distinguishes them from previous versions and makes it harder to accidentally mix v4 and v5 packages. The following are the new equivalent package names:
