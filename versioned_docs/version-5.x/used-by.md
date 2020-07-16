@@ -34,6 +34,7 @@ It's impossible to list every single app that uses React Navigation, but below a
 - [Fin](https://tryfin.app/)
 - [Pickyourtrail](https://apps.apple.com/us/app/pickyourtrail/id1400253672)
 - [Prep: University Companion](https://prep.surf) ([iOS](http://tiny.cc/q4lliz)) ([Android](http://tiny.cc/14lliz)) ([Web](https://app.prep.surf/))
+- [Rocket.Chat](https://rocket.chat/) ([Source Code](https://github.com/RocketChat/Rocket.Chat.ReactNative)) ([iOS](https://apps.apple.com/us/app/rocket-chat/id1148741252)) ([Android](https://play.google.com/store/apps/details?id=chat.rocket.android))
 - [Saffron](https://www.mysaffronapp.com/) ([iOS](https://apps.apple.com/us/app/saffron-your-digital-cookbook/id1438683531)) ([Android](https://play.google.com/store/apps/details?id=com.awad.saffron))
 - [Single Origin 2](https://singleoriginapp.com/)
 - [Stillwhite: Wedding Dresses](https://www.stillwhite.com/) ([iOS](https://apps.apple.com/us/app/stillwhite-wedding-dresses/id1483180828)) ([Android](https://play.google.com/store/apps/details?id=com.stillwhite.app))
