@@ -30,6 +30,11 @@ export default [
     "name": "Jonny Burger"
   },
   {
+    "avatarUrl": "https://avatars0.githubusercontent.com/u/2590799?u=b900982619800752d4359ad03fe98eef81ccf418&v=4",
+    "username": "maikmacs",
+    "name": "Miguel Contreras"
+  },
+  {
     "avatarUrl": "https://avatars0.githubusercontent.com/u/3090527?u=6cf70a882423f683b5fa93cf02b43a50b05c482e&v=4",
     "username": "elie222",
     "name": "Elie"
