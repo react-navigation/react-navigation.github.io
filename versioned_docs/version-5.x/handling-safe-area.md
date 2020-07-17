@@ -120,17 +120,18 @@ To fix this you can, once again, apply safe area insets to your content. This wi
 
 ![App in landscape mode with text visible](/assets/iphoneX/05-iphonex-landscape-fixed.png)
 
-## Tweak paddings for more control
+## Use the hook for more control
 
 In some cases you might need more control over which paddings are applied. For example, you can only apply the top and the bottom padding by changing the `style` object:
 
 <samp id="use-safe-area" />
 
 ```jsx
-import { useSafeArea } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function Demo() {
-  const insets = useSafeArea();
+  const insets = useSafeAreaInsets();
+
   return (
     <View
       style={{
@@ -148,3 +149,10 @@ function Demo() {
   );
 }
 ```
+
+Similarly, you could apply these paddings in `contentContainerStyle` of `FlatList` to have the content avoid the safe areas, but still show them under the statusbar and navigation bar when scrolling.
+
+## Summary
+
+- Don't wrap your whole app in `SafeAreaView`, instead wrap content inside your screens
+- Use `useSafeAreaInsets` hook for more control over where the insets are applied
