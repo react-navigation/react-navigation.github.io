@@ -34,7 +34,7 @@ export default function Help () {
             <h2>Need help?</h2>
           </header>
           <p>
-            If you've encountered a bug with React Navigation, please{' '}
+            {`If you've encountered a bug with React Navigation, please `}
             <a href="https://github.com/react-navigation/react-navigation/issues">
               post an issue
             </a>{' '}
@@ -42,7 +42,7 @@ export default function Help () {
             <a href="https://react-navigation.canny.io/feature-requests">
                create a feature request on Canny
             </a>
-            , or if you're feeling up for the task of proposing an API for the feature, {' '}
+            , {`or if you're feeling up for the task of proposing an API for the feature, `}
             <a href="https://github.com/react-navigation/rfcs">
               submit a RFC!
             </a>{' '}
