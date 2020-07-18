@@ -12,12 +12,12 @@
     "fetch-sponsors": "node scripts/fetch-sponsors.js"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-alpha.43",
+    "@docusaurus/core": "2.0.0-alpha.58",
     "@docusaurus/plugin-google-analytics": "^2.0.0-alpha.37",
-    "@docusaurus/preset-classic": "2.0.0-alpha.43",
+    "@docusaurus/preset-classic": "2.0.0-alpha.58",
     "@octokit/graphql": "^4.5.1",
     "@react-navigation/core": "^5.11.0",
-    "classnames": "^2.2.6",
+    "clsx": "^1.1.1",
     "escape-html": "^1.0.3",
     "mkdirp": "^1.0.3",
     "prism-react-renderer": "^1.1.0",

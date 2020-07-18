@@ -1,5 +1,5 @@
 import React from 'react';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -67,7 +67,7 @@ function Home() {
 
           <div>
             <Link
-              className={classnames(
+              className={clsx(
                 'button button--secondary button--outline button--lg margin-right--sm',
                 styles.heroButton
               )}
@@ -77,7 +77,7 @@ function Home() {
             </Link>
 
             <Link
-              className={classnames(
+              className={clsx(
                 'button button--secondary button--outline button--lg',
                 styles.heroButton
               )}
