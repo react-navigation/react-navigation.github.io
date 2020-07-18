@@ -16,8 +16,3 @@ Navigation views are controlled React components that can present the current na
 - [SwitchView](https://github.com/react-navigation/core/blob/ad6e5cecccb8bce081f773fdff7af000e0450746/src/views/SwitchView/SwitchView.js) - A navigator that only ever show one screen at a time, useful for authentication flows.
 - [Tabs](https://github.com/react-navigation/tabs) - A configurable tab switcher / pager
 - [Drawer](https://github.com/react-navigation/drawer) - A view with a drawer that slides from the left
-
-
-## [Transitioner](transitioner.md)
-
-`Transitioner` manages the animations during the transition and can be used to build fully custom navigation views. It is used inside the `StackView` view. [Learn more about Transitioner here.](transitioner.md)
