@@ -45,6 +45,7 @@ A theme is a JS object containing a list of colors to use. It contains the follo
   - `card` (`string`): The background color of card-like elements, such as headers, tab bars etc.
   - `text` (`string`): The text color of various elements.
   - `border` (`string`): The color of borders, e.g. header border, tab bar border etc.
+  - `notification` (`string`): The color of Tab Navigator badge.
 
 When creating a custom theme, you will need to provide all of these properties.
 
@@ -59,6 +60,7 @@ const MyTheme = {
     card: 'rgb(255, 255, 255)',
     text: 'rgb(28, 28, 30)',
     border: 'rgb(199, 199, 204)',
+    notification: 'rgb(255, 69, 58)',
   },
 };
 ```
