@@ -265,6 +265,22 @@ function CustomDrawerContent({ progress, ...rest }) {
 }
 ```
 
+Note that you **cannot** use the `useNavigation` hook inside the `drawerContent` since `useNavigation` is only available inside screens. You get a `navigation` prop for your `drawerContent` which you can use instead:
+
+```js
+function CustomDrawerContent({ navigation }) {
+  return (
+    <Button
+      title="Go somewhere"
+      onPress={() => {
+        // Navigate using the `navigation` prop that you received
+        navigation.navigate('SomeScreen');
+      }}
+    />
+  );
+}
+```
+
 To use the custom component, we need to pass it in the `drawerContent` prop:
 
 ```js

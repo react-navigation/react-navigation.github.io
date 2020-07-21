@@ -145,6 +145,22 @@ function MyTabBar({ state, descriptors, navigation }) {
 
 This example will render a basic tab bar with labels.
 
+Note that you **cannot** use the `useNavigation` hook inside the `tabBar` since `useNavigation` is only available inside screens. You get a `navigation` prop for your `tabBar` which you can use instead:
+
+```js
+function MyTabBar({ navigation }) {
+  return (
+    <Button
+      title="Go somewhere"
+      onPress={() => {
+        // Navigate using the `navigation` prop that you received
+        navigation.navigate('SomeScreen');
+      }}
+    />
+  );
+}
+```
+
 #### `tabBarOptions`
 
 An object containing the props for the default tab bar component. If you're using a custom tab bar, these will be passed as props to the tab bar and you can handle them.
