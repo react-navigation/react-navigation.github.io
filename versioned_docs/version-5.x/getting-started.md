@@ -4,9 +4,18 @@ title: Getting started
 sidebar_label: Getting started
 ---
 
-If you're already familiar with React Native then you'll be able to get moving with React Navigation quickly! If not, you may want to read sections 1 to 4 (inclusive) of [React Native Express](http://reactnativeexpress.com/) first, then come back here when you're done.
-
 What follows within the _Fundamentals_ section of this documentation is a tour of the most important aspects of React Navigation. It should cover enough for you to know how to build your typical small mobile application, and give you the background that you need to dive deeper into the more advanced parts of React Navigation.
+
+## Pre-requisites
+
+If you're already familiar with JavaScript, React and React Native, then you'll be able to get moving with React Navigation quickly! If not, we highly recommend you to gain some basic knowledge first, then come back here when you're done.
+
+Here are some resources to help you out:
+
+1. [React Native Express](http://reactnativeexpress.com/) (Sections 1 to 4)
+2. [Main Concepts of React](https://reactjs.org/docs/hello-world.html)
+3. [React Hooks](https://reactjs.org/docs/hooks-intro.html)
+4. [React Context](https://reactjs.org/docs/context.html) (Advanced)
 
 ## Installation
 
@@ -44,7 +53,7 @@ npm install react-native-reanimated react-native-gesture-handler react-native-sc
 
 From React Native 0.60 and higher, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md). So you **don't need to run** `react-native link`.
 
-If you're on a Mac and developing for iOS, you need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking. 
+If you're on a Mac and developing for iOS, you need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
 ```sh
 npx pod-install ios

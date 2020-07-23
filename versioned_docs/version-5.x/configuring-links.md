@@ -363,6 +363,8 @@ const state = {
 
 Note that in this case, any params in the URL are only passed to the `Profile` screen which matches the path pattern `users/:id`, and the `Feed` screen doesn't receive any params. If you want to have the same params in the `Feed` screen, you can specify a [custom `getStateFromPath` function](use-linking.md#getstatefrompath) and copy those params.
 
+Similarly, if you want to access params of a parent screen from a child screen, you can use [React Context](https://reactjs.org/docs/context.html) to expose them.
+
 ## Matching exact paths
 
 By default, paths defined for each screen are matched against the URL relative to their parent screen's path. Consider the following config:
