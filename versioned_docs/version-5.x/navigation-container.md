@@ -39,15 +39,107 @@ Example:
 
 ```js
 function App() {
-  const ref = React.useRef(null);
+  const navigationRef = React.useRef(null);
 
   return (
     <View style={{ flex: 1 }}>
-      <Button onPress={() => ref.current?.navigate('Home')}>Go home</Button>
-      <NavigationContainer ref={ref}>{/* ... */}</NavigationContainer>
+      <Button onPress={() => navigationRef.current?.navigate('Home')}>
+        Go home
+      </Button>
+      <NavigationContainer ref={navigationRef}>{/* ... */}</NavigationContainer>
     </View>
   );
 }
+```
+
+Keep in mind that the ref may be initially `null` in some situations (such as when deep linking is enabled). To make sure that the ref is initialized, you can use the [`onReady`](#onready) callback to get notified when the navigation container finishes mounting.
+
+### Methods on the ref
+
+The ref object includes all of the common navigation methods such as `navigate`, `goBack` etc. See [docs for `CommonActions`](navigation-actions.md) for more details.
+
+Example:
+
+```js
+navigationRef.current?.navigate(name, params);
+```
+
+All of these methods will act as if they were called inside the currently focused screen. It's important note that there must be a navigator rendered to handle these actions.
+
+In addition to these methods, the ref object also includes the following special methods:
+
+#### `resetRoot`
+
+The `resetRoot` method lets you reset the state of the navigation tree to the specified state object:
+
+```js
+navigationRef.current?.resetRoot({
+  index: 0,
+  routes: [{ name: 'Profile' }],
+});
+```
+
+Unlike the `reset` method, this acts on the root navigator instead of navigator of the currently focused screen.
+
+#### `getRootState`
+
+The `getRootState` method returns the current navigation state containing the navigation states for all navigators in the navigation tree:
+
+```js
+const state = navigationRef.current?.getRootState();
+```
+
+Note that the returned `state` object will be `undefined` if there are no navigators currently rendered.
+
+#### `getCurrentRoute`
+
+The `getCurrentRoute` method returns the route object for the currently focused screen in the whole navigation tree:
+
+```js
+const route = navigationRef.current?.getCurrentRoute();
+```
+
+Note that the returned `route` object will be `undefined` if there are no navigators currently rendered.
+
+#### `getCurrentOptions`
+
+The `getCurrentOptions` method returns the options for the currently focused screen in the whole navigation tree:
+
+```js
+const options = navigationRef.current?.getCurrentOptions();
+```
+
+Note that the returned `options` object will be `undefined` if there are no navigators currently rendered.
+
+#### `addListener`
+
+The `addListener` method lets you listen to the following events:
+
+##### `state`
+
+The event is triggered whenever the navigation state changes in any navigator in the navigation tree:
+
+```js
+const unsubscribe = navigationRef.current?.addListener('state', (e) => {
+  // You can get the raw navigation state (partial state object of the root navigator)
+  console.log(e.data.state);
+
+  // Or get the full state object with `getRootState()`
+  console.log(navigationRef.current.getRootState());
+});
+```
+
+This is analogous to the [`onStateChange`](#onstatechange) method. The only difference is that the `e.data.state` object might contain partial state object unlike the `state` argument in `onStateChange` which will always contain the full state object.
+
+##### `options`
+
+The event is triggered whenever the options change for the currently focused screen in the navigation tree:
+
+```js
+const unsubscribe = navigationRef.current?.addListener('options', (e) => {
+  // You can get the new options for the currently focused screen
+  console.log(e.data.options);
+});
 ```
 
 ## Props
@@ -86,6 +178,10 @@ See [state persistence guide](state-persistence.md) for more details on how to p
 Function that gets called every time navigation state changes. It receives the new navigation state as the argument.
 
 You can use it to track the focused screen, persist the navigation state etc.
+
+### `onReady`
+
+Function which is called after the navigation container and all its children finish mounting for the first time. See [docs regarding initialization of the ref](navigating-without-navigation-prop.md#handling-initialization) for more details.
 
 ### `linking`
 
