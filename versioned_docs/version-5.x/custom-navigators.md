@@ -172,6 +172,7 @@ import {
   TabActions,
   TabRouterOptions,
   TabNavigationState,
+  createNavigatorFactory,
 } from '@react-navigation/native';
 
 // Props accepted by the view
@@ -185,9 +186,15 @@ type TabNavigationOptions = {
   title?: string;
 };
 
-// Map of events and the type of data (in event.data)
+// Map of event name and the type of data (in event.data)
+//
+// canPreventDefault: true adds the defaultPrevented property to the
+// emitted events.
 type TabNavigationEventMap = {
-  tabPress: { isAlreadyFocused: boolean };
+  tabPress: { 
+    data: { isAlreadyFocused: boolean }
+    canPreventDefault: true
+  };
 };
 
 // The props accepted by the component is a combination of 3 things
@@ -249,7 +256,9 @@ function TabNavigator({
 }
 
 export default createNavigatorFactory<
+  TabNavigationState,
   TabNavigationOptions,
+  TabNavigationEventMap,
   typeof TabNavigator
 >(TabNavigator);
 ```
