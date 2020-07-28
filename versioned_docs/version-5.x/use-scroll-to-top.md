@@ -46,3 +46,24 @@ export default function(props) {
   return <Albums {...props} scrollRef={ref} />;
 }
 ```
+
+## Providing scroll offset
+
+If you require offset to scroll position you can wrap and decorate passed reference:
+
+```js
+import * as React from 'react';
+import { ScrollView } from 'react-native';
+import { useScrollToTop } from '@react-navigation/native';
+
+function Albums() {
+  const ref = React.useRef(null);
+
+  useScrollToTop(React.useRef(
+    scrollToTop: () => ref.current?.scrollToOffset({ offset: -100 }),
+  ));
+
+  return <ScrollView ref={ref}>{/* content */}</ScrollView>;
+}
+
+```
