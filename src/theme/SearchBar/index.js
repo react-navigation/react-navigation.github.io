@@ -6,7 +6,7 @@
  */
 
 import React, {useState, useRef, useCallback} from 'react';
-import clsx from 'clsx';
+import classnames from 'classnames';
 
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
@@ -110,7 +110,7 @@ const Search = props => {
       <span
         aria-label="expand searchbar"
         role="button"
-        className={clsx('search-icon', {
+        className={classnames('search-icon', {
           'search-icon-hidden': props.isSearchBarExpanded,
         })}
         onClick={handleSearchIcon}
@@ -122,7 +122,7 @@ const Search = props => {
         type="search"
         placeholder="Search"
         aria-label="Search"
-        className={clsx(
+        className={classnames(
           'navbar__search-input',
           {'search-bar-expanded': props.isSearchBarExpanded},
           {'search-bar': !props.isSearchBarExpanded},
