@@ -217,3 +217,27 @@ const options: StackNavigationOptions = {
 ```
 
 Similarly, you can import `DrawerNavigationOptions` from `@react-navigation/drawer`, `BottomTabNavigationOptions` from `@react-navigation/bottom-tabs` etc.
+
+### Annotating `ref` on `NavigationContainer`
+
+When adding a `ref` to `NavigationContainer`, you can use the `NavigationContainerRef` type to annotate it.
+
+Example when using `React.useRef` hook:
+
+```ts
+import { NavigationContainerRef } from '@react-navigation/native';
+
+// ...
+
+const navigationRef = React.useRef<NavigationContainerRef>(null)
+```
+
+Example when using `React.createRef`:
+
+```ts
+import { NavigationContainerRef } from '@react-navigation/native';
+
+// ...
+
+const navigationRef = React.createRef<NavigationContainerRef>()
+```
