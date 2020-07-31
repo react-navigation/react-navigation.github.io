@@ -182,6 +182,8 @@ const MyTabRouter = options => {
 };
 ```
 
+Instead of writing a custom router to handle custom actions, you can [pass a function to `dispatch`](navigation-prop.md#dispatch) instead. It's cleaner and recommended instead of overriding routers.
+
 ### Blocking Navigation Actions
 
 Sometimes you may want to prevent some navigation activity, depending on your route. Let's say, you want to prevent pushing a new screen if `isEditing` is `true`:
