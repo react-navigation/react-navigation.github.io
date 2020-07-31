@@ -115,7 +115,7 @@ export default function App() {
 
 If we were to set the `headerTitle` with `options` for the `FeedScreen`, this would not work. This is because `App` stack will only look at its immediate children for configuration: `HomeTabs` and `SettingsScreen`.
 
-But we can determine the `headerTitle` option based on the navigation state of our tab navigator using the `getFocusedRouteNameFromRoute` property. Let's create a function to get the title first:
+But we can determine the `headerTitle` option based on the navigation state of our tab navigator using the `getFocusedRouteNameFromRoute` helper. Let's create a function to get the title first:
 
 ```js
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
