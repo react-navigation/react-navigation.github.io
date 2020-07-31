@@ -6,7 +6,7 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
+    "deploy": "DEPLOYMENT_BRANCH=gh-pages docusaurus deploy",
     "crowdin-upload": "crowdin upload sources --auto-update -b source",
     "crowdin-download": "crowdin download -b source",
     "fetch-sponsors": "node scripts/fetch-sponsors.js"
