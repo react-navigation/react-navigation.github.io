@@ -34,7 +34,7 @@ module.exports = {
         alt: 'React Navigation Logo',
         src: 'img/spiro.svg',
       },
-      links: [
+      items: [
         { to: 'docs/getting-started', label: 'Docs', position: 'left' },
         { to: 'blog', label: 'Blog', position: 'left' },
         {
