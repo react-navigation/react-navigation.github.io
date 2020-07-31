@@ -690,10 +690,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 export const BottomTabs = props => {
   // Get a name of current screen
-  const routeName = props.route.state
-    ? props.route.state.routes[props.route.state.index].name
-    : 'Feed';
-
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
   const isFocused = useIsFocused();
 
   let icon = 'feather';
