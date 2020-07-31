@@ -47,7 +47,6 @@ Only collaborators on this repository can deploy. Run the following command from
 ```bash
 GIT_USER=<Your GitHub username> \
 CURRENT_BRANCH=main \
-DEPLOYMENT_BRANCH=gh-pages \
 USE_SSH=true \
 yarn deploy
 ```
