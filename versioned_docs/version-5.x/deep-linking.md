@@ -57,7 +57,7 @@ If you are using universal links, you need to add your domain to the prefixes.
 function App() {
   const linking = {
     prefixes: ['https://app.example.com'],
-  });
+  };
 
   return (
     <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
