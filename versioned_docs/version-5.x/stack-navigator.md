@@ -602,10 +602,10 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   > **Note that when a screen is not the last, it will use the next screen's transition config.** This is because many transitions involve an animation of the previous screen, and so these two transitions need to be kept together to prevent running two different kinds of transitions on the two screens (for example a slide and a modal). You can check the `next` parameter to find out if you want to animate out the previous screen. For more information about this parameter, see [Animation](/docs/stack-navigator#animations) section.
 
-  A config which just fades the card looks like this:
+  A config which just fades the screen looks like this:
 
   ```js
-  const forFade = ({ current, closing }) => ({
+  const forFade = ({ current }) => ({
     cardStyle: {
       opacity: current.progress,
     },
@@ -622,6 +622,74 @@ Stack Navigator exposes various options to configure the transition animation wh
     component={Profile}
     options={{ cardStyleInterpolator: forFade }}
   />
+  ```
+
+  The interpolator will be called for each screen. For example, say you have a 2 screens in the stack, A & B. B is the new screen coming into focus and A is the previous screen. The interpolator will be called for each screen:
+
+  - The interpolator is called for `B`: Here, the `current.progress` value represents the progress of the transition, which will start at `0` and end at `1`. There won't be a `next.progress` since `B` is the last screen.
+  - The interpolator is called for `A`: Here, the `current.progress` will stay at the value of `1` and won't change, since the current transition is running for `B`, not `A`. The `next.progress` value represents the progress of `B` and will start at `0` and end at `1`.
+
+  Say we want to animate both screens during the transition. The easiest way to do it would be to combine the progress value of current and next screens:
+
+  ```js
+  const progress = Animated.add(
+    current.progress.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 1],
+      extrapolate: 'clamp',
+    }),
+    next
+      ? next.progress.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, 1],
+          extrapolate: 'clamp',
+        })
+      : 0
+  );
+  ```
+
+  Here, the screen `A` will have both `current.progress` and `next.progress`, and since `current.progress` stays at `1` and `next.progress` is changing, combined, the progress will change from `1` to `2`. The screen `B` will only have `current.progress` which will change from `0` to `1`. So, we can apply different interpolations for `0-1` and `1-2` to animate focused screen and unfocused screen respectively.
+
+  A config which translates the previous screen slightly to the left, and translates the current screen from the right edge would look like this:
+
+  ```js
+  const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
+    const progress = Animated.add(
+      current.progress.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+        extrapolate: 'clamp',
+      }),
+      next
+        ? next.progress.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1],
+            extrapolate: 'clamp',
+          })
+        : 0
+    );
+
+    return {
+      cardStyle: {
+        transform: [
+          {
+            translateX: Animated.multiply(
+              progress.interpolate({
+                inputRange: [0, 1, 2],
+                outputRange: [
+                  screen.width, // Focused, but offscreen in the beginning
+                  0, // Fully focused
+                  screen.width * -0.3, // Fully unfocused
+                ],
+                extrapolate: 'clamp',
+              }),
+              inverted
+            ),
+          },
+        ],
+      },
+    };
+  };
   ```
 
 - `headerStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the header. It is expected to return at least empty object, possibly containing interpolated styles for left label and button, right button, title and background. Supported properties are:
