@@ -108,48 +108,15 @@ Let's dissect this:
 
 ## Add badges to icons
 
-Sometimes we want to add badges to some icons. A common way is to use an extra view container and style the badge element with absolute positioning.
-
-```js
-function IconWithBadge({ name, badgeCount, color, size }) {
-  return (
-    <View style={{ width: 24, height: 24, margin: 5 }}>
-      <Ionicons name={name} size={size} color={color} />
-      {badgeCount > 0 && (
-        <View
-          style={{
-            // On React Native < 0.57 overflow outside of parent will not work on Android, see https://git.io/fhLJ8
-            position: 'absolute',
-            right: -6,
-            top: -3,
-            backgroundColor: 'red',
-            borderRadius: 6,
-            width: 12,
-            height: 12,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>
-            {badgeCount}
-          </Text>
-        </View>
-      )}
-    </View>
-  );
-}
-```
-
-From UI perspective this component is ready to use, but you still need to find some way to pass down the badge count properly from somewhere else, like using [React Context](https://reactjs.org/docs/context.html), [Redux](https://redux.js.org/), [MobX](https://mobx.js.org/) or [event emitters](https://github.com/facebook/react-native/blob/master/Libraries/vendor/emitter/EventEmitter.js).
+Sometimes we want to add badges to some icons. You can use the [`tabBarBadge` option](bottom-tab-navigator.md#tabbarbadge) to do it:
 
 <samp id="tab-based-navigation-badges" />
 
 ```js
-function HomeIconWithBadge(props) {
-  // You should pass down the badgeCount in some other ways like React Context API, Redux, MobX or event emitters.
-  return <IconWithBadge {...props} badgeCount={3} />;
-}
+<Tab.Screen name="Home" component={HomeScreen} options={{ tabBarBadge: 3 }} />
 ```
+
+From UI perspective this component is ready to use, but you still need to find some way to pass down the badge count properly from somewhere else, like using [React Context](https://reactjs.org/docs/context.html), [Redux](https://redux.js.org/), [MobX](https://mobx.js.org/) or [event emitters](https://github.com/facebook/react-native/blob/master/Libraries/vendor/emitter/EventEmitter.js).
 
 ![Tabs with badges](/assets/navigators/tabs/tabs-badges.png)
 
