@@ -44,6 +44,37 @@ navigation.dispatch(
 );
 ```
 
+The `navigate` action may also take on a different function signature:
+
+`CommonActions.navigate(name, navigateParams)`
+
+- `name` - _string_ - A destination name of the route that has been defined somewhere
+- `navigateParams` - _object_ - An object which may contain any of the following fields:
+  - `screen` - _string_ - The screen of a nested navigator to route to
+  - `params` - _object_ - Params to merge into the destination route
+  - `initial` - _boolean_ - <!-- HELP WANTED: Still didn't figure out what this property does - I see it's used in packages/core/src/useNavigationBuilder.tsx but I didn't yet understand what it's purpose is. Could someone explain? I'll then replace this comment. -->
+
+With the `screen` prop, for example, you can navigate to screen of a [nested navigator](nesting-navigators.md) right after navigating to its parent. This is necessary if you want to route to a screen of a nested navigator which is not the initial screen.
+
+Here we want to navigate to the `Profile` screen (which is a non-initial screen inside `SettingsStack`):
+
+<samp id="common-actions" />
+
+```js
+import { CommonActions } from '@react-navigation/native';
+
+navigation.dispatch(
+  CommonActions.navigate('SettingsStack', {
+    screen: 'Profile'
+    params: {
+      user: 'jane',
+    },
+  })
+);
+```
+
+**Note**: This function signature is different from the [`navigate` method of the `navigation` prop](navigation-prop.md#navigate) where the `params` argument directly contains the `params` you want to merge into the destination route whereas here the `navigateParams` argument accepts an object which may contain a `params` property.
+
 ### reset
 
 The `reset` action allows to reset the navigation state to the given state. It takes the following arguments:
