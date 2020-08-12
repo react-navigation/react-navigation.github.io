@@ -145,7 +145,7 @@ module.exports = {
           docLayoutComponent: require.resolve('./src/layouts/DocPage.js'),
           docItemComponent: require.resolve('./src/layouts/DocItem.js'),
           editUrl:
-            'https://github.com/react-navigation/react-navigation.github.io/edit/source/',
+            'https://github.com/react-navigation/react-navigation.github.io/edit/main/',
           remarkPlugins: [require('./src/plugins/remark-npm2yarn')],
         },
         theme: {
