@@ -4,6 +4,8 @@ title: Preventing going back
 sidebar_label: Preventing going back
 ---
 
+**Available in version 5.7+**
+
 Sometimes you may want to prevent the user from leaving a screen, for example, if there are unsaved changes, you might want to show a confirmation dialog.
 
 You can achieve it by using the `beforeRemove` event. This event is triggered whenever a screen is being removed. For example:
