@@ -36,7 +36,7 @@ function ScreenWithCustomBackBehavior() {
 }
 ```
 
-The presented approach will work well for screens that are shown in a `StackNavigator`. Custom back button handling in other situations may not be supported at the moment (eg. A known case when this does not work is when you want to handle back button press in an open drawer. PRs for such use cases are welcome!).
+The presented approach will work well for screens that are shown in a `StackNavigator` and `BottomTabNavigator`. Custom back button handling in other situations may not be supported at the moment (eg. A known case when this does not work is when you want to handle back button press in an open drawer. PRs for such use cases are welcome!).
 
 If instead of overriding system back button, you'd like to prevent going back from the screen, see docs for [preventing going back](preventing-going-back.md).
 
