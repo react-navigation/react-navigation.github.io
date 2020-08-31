@@ -121,7 +121,7 @@ function Home() {
         <a href="https://expo.io" style={{ fontWeight: 'bold' }}>
           Expo
         </a>{' '}
-        &{' '}
+        {' & '}
         <a href="https://swmansion.com/" style={{ fontWeight: 'bold' }}>
           Software Mansion
         </a>
