@@ -112,14 +112,9 @@ function Home() {
       )}
       <section className={styles.sponsoredBanner}>
         <p>
-          React Navigation is built and funded by{' '}
-          <a href="https://expo.io" style={{ fontWeight: 'bold' }}>
-            Expo
-          </a>
+          React Navigation is built and funded by <a href="https://expo.io" style={{ fontWeight: 'bold' }}>Expo</a>
           {' '}&amp;{' '}
-          <a href="https://swmansion.com/" style={{ fontWeight: 'bold' }}>
-            Software Mansion
-          </a>
+          <a href="https://swmansion.com/" style={{ fontWeight: 'bold' }}>Software Mansion</a>
           , with contributions from the{' '}
           <a
             style={{ fontWeight: 'bold' }}
