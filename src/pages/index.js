@@ -111,28 +111,30 @@ function Home() {
         </section>
       )}
       <section className={styles.sponsoredBanner}>
-        React Navigation is built and funded by{' '}
-        <a href="https://expo.io" style={{ fontWeight: 'bold' }}>
-          Expo
-        </a>
-        {' '}&amp;{' '}
-        <a href="https://swmansion.com/" style={{ fontWeight: 'bold' }}>
-          Software Mansion
-        </a>
-        , with contributions from the{' '}
-        <a
-          style={{ fontWeight: 'bold' }}
-          href="https://github.com/react-navigation/react-navigation/graphs/contributors"
-        >
-          community
-        </a>{' '}
-        and{' '}
-        <a
-          href="https://github.com/sponsors/react-navigation"
-          style={{ fontWeight: 'bold' }}
-        >
-          sponsors
-        </a>
+        <p>
+          React Navigation is built and funded by{' '}
+          <a href="https://expo.io" style={{ fontWeight: 'bold' }}>
+            Expo
+          </a>
+          {' '}&amp;{' '}
+          <a href="https://swmansion.com/" style={{ fontWeight: 'bold' }}>
+            Software Mansion
+          </a>
+          , with contributions from the{' '}
+          <a
+            style={{ fontWeight: 'bold' }}
+            href="https://github.com/react-navigation/react-navigation/graphs/contributors"
+          >
+            community
+          </a>{' '}
+          and{' '}
+          <a
+            href="https://github.com/sponsors/react-navigation"
+            style={{ fontWeight: 'bold' }}
+          >
+            sponsors
+          </a>
+        </p>
         :
         <div
           style={{ marginTop: 20, display: 'flex', justifyContent: 'center' }}
