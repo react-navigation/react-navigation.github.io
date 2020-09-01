@@ -120,8 +120,8 @@ function Home() {
         React Navigation is built and funded by{' '}
         <a href="https://expo.io" style={{ fontWeight: 'bold' }}>
           Expo
-        </a>{' '}
-        {' & '}
+        </a>
+        {' '}&amp;{' '}
         <a href="https://swmansion.com/" style={{ fontWeight: 'bold' }}>
           Software Mansion
         </a>
