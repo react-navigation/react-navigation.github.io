@@ -9,37 +9,31 @@ import sponsors from '../data/sponsors';
 
 const features = [
   {
-    title: <>Easy to Use</>,
-    description: (
-      <>
-        Start quickly with built-in navigators that deliver a seamless
-        out-of-the-box experience.
-      </>
-    ),
+    title: `Easy to Use`,
+    description: `
+      Start quickly with built-in navigators that deliver a seamless
+      out-of-the-box experience.
+    `
   },
   {
-    title: <>Components built for iOS and Android</>,
-    description: (
-      <>Platform-specific look-and-feel with smooth animations and gestures.</>
-    ),
+    title: `Components built for iOS and Android`,
+    description: `
+      Platform-specific look-and-feel with smooth animations and gestures.
+    `
   },
   {
-    title: <>Completely customizable</>,
-    description: (
-      <>
-        If you know how to write apps using JavaScript you can customize any
-        part of React Navigation.
-      </>
-    ),
+    title: `Completely customizable`,
+    description: `
+      If you know how to write apps using JavaScript you can customize any
+      part of React Navigation.
+    `
   },
   {
-    title: <>Extensible platform</>,
-    description: (
-      <>
-        React Navigation is extensible at every layer— you can write your own
-        navigators or even replace the user-facing API.
-      </>
-    ),
+    title: `Extensible platform`,
+    description: `
+      React Navigation is extensible at every layer— you can write your own
+      navigators or even replace the user-facing API.
+    `
   },
 ];
 
