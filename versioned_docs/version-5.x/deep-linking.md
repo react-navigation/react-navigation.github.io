@@ -30,7 +30,8 @@ First, you will want to specify a URL scheme for your app. This corresponds to t
 Next, let's configure our navigation container to extract the path from the app's incoming URI.
 
 ```js
-import { Linking } from 'expo';
+// Install this package with `expo install expo-linking`
+import * as Linking from 'expo-linking';
 
 const prefix = Linking.makeUrl('/');
 
@@ -47,7 +48,7 @@ function App() {
 }
 ```
 
-The reason that is necessary to use `Expo.Linking.makeUrl` is that the scheme will differ depending on whether you're in the client app or in a standalone app.
+The reason that is necessary to use `Linking.makeUrl` is that the scheme will differ depending on whether you're in the client app or in a standalone app.
 
 ### Universal Links
 
@@ -81,6 +82,16 @@ function App() {
 To test the URI on the simulator in the Expo client app, run the following:
 
 ```sh
+npx uri-scheme open [ put your uri prefix in here] --ios
+
+# for example
+
+npx uri-scheme open exp://127.0.0.1:19000/--/chat/jan --ios
+```
+
+or use `xcrun` directly:
+
+```sh
 xcrun simctl openurl booted [ put your URI prefix in here ]
 
 # for example
@@ -91,6 +102,16 @@ xcrun simctl openurl booted exp://127.0.0.1:19000/--/chat/jane
 ### Test deep linking on Android
 
 To test the intent handling in the Expo client app on Android, run the following:
+
+```sh
+npx uri-scheme open "[ put your URI prefix in here ]" --/chat/jan --android
+
+# for example
+
+npx uri-scheme open exp://127.0.0.1:19000/--/chat/jan --android
+```
+
+or use `adb` directly:
 
 ```sh
 adb shell am start -W -a android.intent.action.VIEW -d "[ put your URI prefix in here ]" host.exp.exponent
@@ -104,7 +125,7 @@ Change `host.exp.exponent` to your app package name if you are testing on a stan
 
 Read the [Expo linking guide](https://docs.expo.io/versions/latest/guides/linking.html) for more information about how to configure linking in projects built with Expo.
 
-## Set up with `react-native init` projects
+## Set up with bare React Native projects
 
 ### iOS
 
@@ -155,17 +176,28 @@ If your app is using Universal Links, you'll need to add the following code as w
 }
 ```
 
-In Xcode, open the project at `SimpleApp/ios/SimpleApp.xcodeproj`. Select the project in sidebar and navigate to the info tab. Scroll down to "URL Types" and add one. In the new URL type, set the identifier and the URL scheme to your desired URL scheme.
+Now you need to add the scheme to your project configuration.
+
+
+The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add mychat --ios`.
+
+If you want to do it manually, open the project at `SimpleApp/ios/SimpleApp.xcodeproj` in Xcode. Select the project in sidebar and navigate to the info tab. Scroll down to "URL Types" and add one. In the new URL type, set the identifier and the URL scheme to your desired URL scheme.
 
 ![Xcode project info URL types with mychat added](/assets/deep-linking/xcode-linking.png)
 
 Now you can press play in Xcode, or re-build on the command line:
 
 ```sh
-react-native run-ios
+npx react-native run-ios
 ```
 
 To test the URI on the simulator, run the following:
+
+```sh
+npx uri-scheme open mychat://chat/jane --ios
+```
+
+or use `xcrun` directly:
 
 ```sh
 xcrun simctl openurl booted mychat://chat/jane
@@ -177,9 +209,11 @@ To test the URI on a real device, open Safari and type `mychat://chat/jane`.
 
 To configure the external linking in Android, you can create a new intent in the manifest.
 
-In `SimpleApp/android/app/src/main/AndroidManifest.xml`, do these following adjustments:
+The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add mychat --android`.
 
-1. Set `launchMode` of `MainActivity` to `singleTask` in order to receive intent on existing `MainActivity`. It is useful if you want to perform navigation using deep link you have been registered - [details](http://developer.android.com/training/app-indexing/deep-linking.html#adding-filters)
+If you want to add it manually, open up `SimpleApp/android/app/src/main/AndroidManifest.xml`, and make the following adjustments:
+
+1. Set `launchMode` of `MainActivity` to `singleTask` in order to receive intent on existing `MainActivity` (this is the default on all new projects, so you may not need to actually change anything!). It is useful if you want to perform navigation using deep link you have been registered - [details](http://developer.android.com/training/app-indexing/deep-linking.html#adding-filters)
 2. Add the new `intent-filter` inside the `MainActivity` entry with a `VIEW` type action:
 
 ```xml
@@ -208,10 +242,16 @@ react-native run-android
 To test the intent handling in Android, run the following:
 
 ```sh
+npx uri-scheme open mychat://chat/jane --android
+```
+
+or use `adb` directly:
+
+```sh
 adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/jane" com.simpleapp
 ```
 
-## Hybrid iOS Applications (Skip for RN only projects)
+## Hybrid React Native and native iOS Applications (skip for React-Native-only projects)
 
 If you're using React Navigation within a hybrid app - an iOS app that has both Swift/ObjC and React Native parts - you may be missing the `RCTLinkingIOS` subspec in your Podfile, which is installed by default in new RN projects. To add this, ensure your Podfile looks like the following:
 
