@@ -224,7 +224,7 @@ Takes an object containing following optional properties:
 
 - `top` - _number_ - The value of the top inset, e.g. area containing the status bar and notch.
 - `right` - _number_ - The value of the left inset.
-- `bottom` - _number_ - The value of the top inset, e.g. area navigation bar on bottom.
+- `bottom` - _number_ - The value of the bottom inset, e.g. area navigation bar on bottom.
 - `left`. - _number_ - The value of the right inset.
 
 ##### `style`
