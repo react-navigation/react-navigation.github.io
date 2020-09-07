@@ -58,6 +58,7 @@ Options for the router:
 - `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
 - `defaultNavigationOptions` - Default navigation options to use for screens
 - `paths` - A mapping of overrides for the paths set in the route configs
+- `screensEnabled` - Boolean used to indicate whether [react-native-screens](https://github.com/software-mansion/react-native-screens) should be used for this navigator.
 
 Visual options:
 
