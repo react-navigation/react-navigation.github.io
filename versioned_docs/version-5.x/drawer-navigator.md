@@ -51,7 +51,7 @@ The name of the route to render on first load of the navigator.
 
 #### `screensEnabled`
 
-Boolean used to indicate whether [react-native-screens](https://github.com/software-mansion/react-native-screens) should be used for this navigator.
+Boolean used to indicate whether [react-native-screens](https://github.com/software-mansion/react-native-screens) should be used for this navigator. Defaults to `true`.
 
 #### `screenOptions`
 

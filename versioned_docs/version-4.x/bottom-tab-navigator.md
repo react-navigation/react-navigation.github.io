@@ -29,6 +29,7 @@ The route configs object is a mapping from route name to a route config, which t
 ## BottomTabNavigatorConfig
 
 - `initialRouteName` - The routeName for the initial tab route when first loading.
+- `screensEnabled` - Boolean used to indicate whether [react-native-screens](https://github.com/software-mansion/react-native-screens) should be used for this navigator. Defaults to `true`.
 - `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
 - `defaultNavigationOptions` - Default navigation options to use for screens
 - `resetOnBlur` - Reset the state of any nested navigators when switching away from a screen. Defaults to `false`.
@@ -72,14 +73,14 @@ If you want to customize the `tabBarComponent`:
 ```js
 import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
 
-const TabBarComponent = props => <BottomTabBar {...props} />;
+const TabBarComponent = (props) => <BottomTabBar {...props} />;
 
 const TabScreens = createBottomTabNavigator(
   {
     // other screens
   },
   {
-    tabBarComponent: props => (
+    tabBarComponent: (props) => (
       <TabBarComponent {...props} style={{ borderTopColor: '#605F60' }} />
     ),
   }
