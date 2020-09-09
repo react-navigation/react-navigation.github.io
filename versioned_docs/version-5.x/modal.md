@@ -62,11 +62,10 @@ function MainStackScreen() {
 
 function RootStackScreen() {
   return (
-    <RootStack.Navigator mode="modal">
+    <RootStack.Navigator mode="modal" headerMode="none">
       <RootStack.Screen
         name="Main"
         component={MainStackScreen}
-        options={{ headerShown: false }}
       />
       <RootStack.Screen name="MyModal" component={ModalScreen} />
     </RootStack.Navigator>
