@@ -39,8 +39,7 @@ function HomeScreen({ navigation }) {
 
 function DetailsScreen({ route, navigation }) {
   /* 2. Get the param */
-  const { itemId } = route.params;
-  const { otherParam } = route.params;
+  const { itemId , otherParam} = route.params;
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Details Screen</Text>
