@@ -58,7 +58,8 @@ Options for the router:
 - `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
 - `defaultNavigationOptions` - Default navigation options to use for screens
 - `paths` - A mapping of overrides for the paths set in the route configs
-- `screensEnabled` - Boolean used to indicate whether [react-native-screens](https://github.com/software-mansion/react-native-screens) should be used for this navigator. Defaults to `false` for `mode = 'modal'` and `true` in other cases.
+- `screensEnabled` - Boolean used to indicate whether [react-native-screens](https://github.com/software-mansion/react-native-screens) should be used for this navigator. Defaults to `true`.
+- `activeLimit` - Number of screens to be rendered when not transitioning. Defaults to `1` for `mode="card"` and `2` for `mode="modal"`. Only has effect with [react-native-screens](https://github.com/software-mansion/react-native-screens) turned on.
 
 Visual options:
 
