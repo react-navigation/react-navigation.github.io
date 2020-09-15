@@ -5,7 +5,7 @@ export default [
     "name": "Brent Vatne"
   },
   {
-    "avatarUrl": "https://avatars2.githubusercontent.com/u/619186?u=38027a12ffbb89925bab811c56233d2d8a2a60e6&v=4",
+    "avatarUrl": "https://avatars1.githubusercontent.com/u/619186?u=5012b9068d5e81dbad57de5902da47af3b2b5717&v=4",
     "username": "brunolemos",
     "name": "Bruno Lemos"
   },
@@ -58,6 +58,11 @@ export default [
     "avatarUrl": "https://avatars3.githubusercontent.com/u/21980965?u=418759528b6cd702bc1204278ea87b97f32f5e3c&v=4",
     "username": "jarvisluong",
     "name": "Jarvis Luong"
+  },
+  {
+    "avatarUrl": "https://avatars2.githubusercontent.com/u/27461460?u=b5860875e26d33fd70fd210f4ea74f81cdf9d99b&v=4",
+    "username": "hyochan",
+    "name": "Hyo"
   },
   {
     "avatarUrl": "https://avatars0.githubusercontent.com/u/28190937?u=a28babe1aeab33e348ef168c80125bb83c6b4562&v=4",
