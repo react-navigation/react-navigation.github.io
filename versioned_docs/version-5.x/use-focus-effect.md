@@ -43,24 +43,26 @@ When running asynchronous effects such as fetching data from server, it's import
 ```js
 useFocusEffect(
   React.useCallback(() => {
-    let isActive = true;
+    const abortController = new AbortController()
 
     const fetchUser = async () => {
       try {
-        const user = await API.fetch({ userId });
+        const user = await fetch(`https://example.com/users/${userId}`, {
+          signal: abortController.signal 
+        });
 
-        if (isActive) {
-          setUser(user);
-        }
+        setUser(user);
       } catch (e) {
-        // Handle error
+        if (e.name !== 'AbortError'){
+          // Handle error
+        }
       }
     };
 
     fetchUser();
 
     return () => {
-      isActive = false;
+       abortController.abort()
     };
   }, [userId])
 );
