@@ -85,7 +85,7 @@ Sometimes you might want to add a listener from the component where you defined 
 Example:
 
 ```js
-<Tabs.Screen
+<Tab.Screen
   name="Chat"
   component={Chat}
   listeners={{
@@ -102,7 +102,7 @@ You can also pass a callback which returns the object with listeners. It'll rece
 Example:
 
 ```js
-<Tabs.Screen
+<Tab.Screen
   name="Chat"
   component={Chat}
   listeners={({ navigation, route }) => ({

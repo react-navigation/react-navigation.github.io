@@ -257,9 +257,47 @@ In React Navigation 4.x, there were 4 navigation events to notify focus state of
 
 It was confusing to decide which events to use and what each event meant. Some navigators also didn't emit events for transition animations which made the events inconsistent.
 
-We have simplified the events in React Navigation 5.x, so now we have only `focus` and `blur` events which are equivalent to `willFocus` and `willBlur` events. To run tasks after an animation finishes, we can use the [`InteractionManager`](https://reactnative.dev/docs/interactionmanager) API provided by React Native. See the docs for [Navigation events](navigation-events.md) for more details.
+We have simplified the events in React Navigation 5.x, so now we have only `focus` and `blur` events which are equivalent to `willFocus` and `willBlur` events. These events can be listened to using the reworked event system.
 
-Many of the navigators in React Navigation 4.x also had their events such as tab press, transition start etc. exposed in `navigationOptions`. They are now consolidated into the same event system as `focus` and `blur` events, now named `tabPress`, `transitionStart`, `transitionEnd` etc. To achieve the previous use cases for these events where you added listeners without rendering a screen, you can use the `listeners` prop in the `Screen` component to achieve the same functionality.
+```js
+function Profile({ navigation }) {
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // do something
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  return <ProfileContent />;
+}
+```
+
+See the docs for [Navigation events](navigation-events.md) for more details and examples.
+
+In addition, there is a new [`useFocusEffect`](use-focus-effect.md) hook to make it easier to perform side-effects and data fetching only when a screen is focused.
+
+To run tasks after an animation finishes, we can use the [`InteractionManager`](https://reactnative.dev/docs/interactionmanager) API provided by React Native. See the docs for [`useFocusEffect`](use-focus-effect.md#delaying-effect-until-transition-finishes) for more details.
+
+Many of the navigators in React Navigation 4.x also had their events such as tab press, transition start etc. exposed in `navigationOptions`. They are now consolidated into the same event system as `focus` and `blur` events, now named `tabPress`, `transitionStart`, `transitionEnd` etc.
+
+To achieve the previous use cases for these events where you added listeners without rendering a screen, you can use the [`listeners` prop in the `Screen` component](navigation-events.md#listeners-prop-on-screen) to achieve the same functionality:
+
+```js
+<Tab.Screen
+  name="Chat"
+  component={Chat}
+  listeners={({ navigation, route }) => ({
+    tabPress: e => {
+      // Prevent default action
+      e.preventDefault();
+
+      // Do something with the `navigation` object
+      navigation.navigate('AnotherPlace');
+    },
+  })}
+/>
+```
 
 ## Navigating to nested screens
 
