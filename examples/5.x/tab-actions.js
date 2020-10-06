@@ -26,15 +26,15 @@ function ProfileScreen({ route }) {
   );
 }
 
-const Tabs = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tabs.Navigator>
-        <Tabs.Screen name="Home" component={HomeScreen} />
-        <Tabs.Screen name="Profile" component={ProfileScreen} />
-      </Tabs.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
