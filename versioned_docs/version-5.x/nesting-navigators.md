@@ -48,7 +48,7 @@ When nesting navigators, there are some things to keep in mind:
 
 For example, when you press the back button when inside a screen in a nested stack navigator, it'll go back to the previous screen inside the nested stack even if there's another navigator as the parent.
 
-### Each navigator has it's own options
+### Each navigator has its own options
 
 For example, specifying a `title` option in a screen nested in a child navigator won't affect the title shown in a parent navigator.
 
