@@ -66,6 +66,10 @@ Behavior of back button handling.
 
 Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
 
+#### `sceneContainerStyle`
+
+Style object for the component wrapping the screen content.
+
 #### `tabBar`
 
 Function that returns a React element to display as the tab bar.
