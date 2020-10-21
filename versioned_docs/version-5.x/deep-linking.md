@@ -77,6 +77,16 @@ function App() {
    };
 ```
 
+### WildCard
+
+To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*.` before the beginning of a specific domain. Note that an entry for `*.example.com` does not match `example.com` because of the period after the asterisk. To enable matching for both `*.example.com` and `example.com`, you need to provide a separate prefix entry for each.
+
+```js
+const linking = {
+  prefixes: ['*.example.com', 'example.com'],
+};
+```
+
 ### Test deep linking on iOS
 
 To test the URI on the simulator in the Expo client app, run the following:
@@ -177,7 +187,6 @@ If your app is using Universal Links, you'll need to add the following code as w
 ```
 
 Now you need to add the scheme to your project configuration.
-
 
 The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add mychat --ios`.
 
