@@ -188,6 +188,7 @@ If your app is using Universal Links, you'll need to add the following code as w
 
 Now you need to add the scheme to your project configuration.
 
+
 The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add mychat --ios`.
 
 If you want to do it manually, open the project at `SimpleApp/ios/SimpleApp.xcodeproj` in Xcode. Select the project in sidebar and navigate to the info tab. Scroll down to "URL Types" and add one. In the new URL type, set the identifier and the URL scheme to your desired URL scheme.
