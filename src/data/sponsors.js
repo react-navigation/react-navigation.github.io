@@ -5,9 +5,14 @@ export default [
     "name": "Brent Vatne"
   },
   {
-    "avatarUrl": "https://avatars1.githubusercontent.com/u/619186?u=5012b9068d5e81dbad57de5902da47af3b2b5717&v=4",
+    "avatarUrl": "https://avatars1.githubusercontent.com/u/619186?u=2c48df3212e1e73172ea6294cef90777d5da281d&v=4",
     "username": "brunolemos",
     "name": "Bruno Lemos"
+  },
+  {
+    "avatarUrl": "https://avatars3.githubusercontent.com/u/916690?v=4",
+    "username": "benevbright",
+    "name": "Bright Lee"
   },
   {
     "avatarUrl": "https://avatars3.githubusercontent.com/u/980234?u=59bb4c6ac0a23b53225bb2235b69c72a960ba83f&v=4",
@@ -48,11 +53,6 @@ export default [
     "avatarUrl": "https://avatars2.githubusercontent.com/u/6936373?u=4edd14e6636c45d10ac6a3eecb4b3ffa6cc2bf5c&v=4",
     "username": "Naturalclar",
     "name": "Jesse Katsumata"
-  },
-  {
-    "avatarUrl": "https://avatars2.githubusercontent.com/u/20118440?u=9ce0ea57d08ad26653116ad07bfd660abcd69ec0&v=4",
-    "username": "adokce",
-    "name": "Adnan Karšić"
   },
   {
     "avatarUrl": "https://avatars3.githubusercontent.com/u/21980965?u=418759528b6cd702bc1204278ea87b97f32f5e3c&v=4",
