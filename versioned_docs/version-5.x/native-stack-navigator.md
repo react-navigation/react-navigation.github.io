@@ -20,6 +20,8 @@ To use this navigator, ensure that you have [`@react-navigation/native` and its 
 
 To use this navigator, import `enableScreens` from `react-native-screens` and invoke it, and import `createNativeStackNavigator` from `react-native-screens/native-stack`:
 
+<samp id="simple-native-stack" />
+
 ```js
 import { enableScreens } from 'react-native-screens';
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
