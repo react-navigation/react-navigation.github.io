@@ -6,13 +6,10 @@ sidebar_label: Glossary of terms
 
 > This is a new section of the documentation and it's missing a lot of terms! Please [submit a pull request or an issue](https://github.com/react-navigation/react-navigation.github.io) with a term that you think should be explained here.
 
-## Header
-
-Also known as navigation header, navigation bar, navbar, and probably many other things. This is the rectangle at the top of your screen that contains the back button and the title for your screen. The entire rectangle is often referred to as the header in React Navigation.
-
 ## Navigator
 
-A `Navigator` contains `Screen` elements as its children to define the configuration for routes.
+A `Navigator` is React component that decides how to render the screens you have defined. It contains `Screen` elements as its children to define the configuration for screens.
+
 `NavigationContainer` is a component which manages our navigation tree and contains the navigation state. This component must wrap all navigators structure. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
 
 ```js
@@ -26,6 +23,10 @@ function App() {
   );
 }
 ```
+
+## Router
+
+A router is a collection of functions that decide how to handle actions and state changes in the navigator (similar to reducers in Redux apps). Normally you'd never need to interact with a router directly, unless you're writing a [custom navigator](custom-navigator.md).
 
 ## Screen component
 
@@ -82,7 +83,7 @@ For more details, see the ["Navigation prop document"](navigation-prop.md).
 
 The ["Route prop reference"](route-prop.md) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `route` prop.
 
-## Route prop
+## Route Prop
 
 This prop will be passed into all screens. Contains information about current route i.e. `params`, `key` and `name`.
 
@@ -114,3 +115,7 @@ Each route is a piece of navigation state which contains a key to identify it, a
   params: { id: '123' }
 }
 ```
+
+## Header
+
+Also known as navigation header, navigation bar, app bar, and probably many other things. This is the rectangle at the top of your screen that contains the back button and the title for your screen. The entire rectangle is often referred to as the header in React Navigation.

@@ -56,7 +56,7 @@ Let's break this down:
 - `navigation` - the `navigation` prop is passed in to every **screen component** ([definition](glossary-of-terms.md#screen-component)) in stack navigator (more about this later in ["The navigation prop in depth"](navigation-prop.md)).
 - `navigate('Details')` - we call the `navigate` function (on the `navigation` prop &mdash; naming is hard!) with the name of the route that we'd like to move the user to.
 
-> If we call `navigation.navigate` with a route name that we haven't defined on a stack navigator, nothing will happen. Said another way, we can only navigate to routes that have been defined on our stack navigator &mdash; we cannot navigate to an arbitrary component.
+> If we call `navigation.navigate` with a route name that we haven't defined in a navigator, it'll print an error in development builds and nothing will happen in production builds. Said another way, we can only navigate to routes that have been defined on our navigator &mdash; we cannot navigate to an arbitrary component.
 
 So we now have a stack with two routes: 1) the `Home` route 2) the `Details` route. What would happen if we navigated to the `Details` route again, from the `Details` screen?
 
