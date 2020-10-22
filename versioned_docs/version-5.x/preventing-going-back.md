@@ -8,7 +8,11 @@ sidebar_label: Preventing going back
 
 Sometimes you may want to prevent the user from leaving a screen, for example, if there are unsaved changes, you might want to show a confirmation dialog.
 
-You can achieve it by using the `beforeRemove` event. This event is triggered whenever a screen is being removed. For example:
+You can achieve it by using the `beforeRemove` event. This event is **not** triggered when a top/bottom tab is being unfocused. For example:
+
+- The user navigates from one top/bottom tab to another top/bottom tab.
+
+This event is **only** triggered whenever a screen is being removed. For example:
 
 - The user pressed back button on a screen in a stack
 - The user performed a swipe back gesture
