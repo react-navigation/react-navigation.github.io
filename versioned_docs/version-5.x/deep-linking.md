@@ -77,7 +77,7 @@ function App() {
    };
 ```
 
-### WildCard
+### Wildcards
 
 To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*.` before the beginning of a specific domain. Note that an entry for `*.example.com` does not match `example.com` because of the period after the asterisk. To enable matching for both `*.example.com` and `example.com`, you need to provide a separate prefix entry for each.
 
