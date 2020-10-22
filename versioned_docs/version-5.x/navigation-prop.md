@@ -4,14 +4,14 @@ title: Navigation prop reference
 sidebar_label: Navigation prop
 ---
 
-Each `screen` component in your app is provided with the `navigation` prop automatically. The prop contains various convenience functions that dispatch navigation actions on the route's router. It looks like this:
+Each `screen` component in your app is provided with the `navigation` prop automatically. The prop contains various convenience functions that dispatch navigation actions. It looks like this:
 
 - `navigation`
   - `navigate` - go to another screen, figures out the action it needs to take to do it
   - `reset` - wipe the navigator state and replace it with a new routes
   - `goBack` - close active screen and move back in the stack
   - `setParams` - make changes to route's params
-  - `dispatch` - send an action to router
+  - `dispatch` - send an action object to update the navigation state
   - `setOptions` - update the screen's options
   - `isFocused` - check whether the screen is focused
   - `addListener` - subscribe to updates to events from the navigators
@@ -230,7 +230,7 @@ The `dispatch` function is much less commonly used, but a good escape hatch if y
 
 ### `dispatch`
 
-The `dispatch` method lets us send a navigation action object to the router. All of the navigation functions like `navigate` use dispatch behind the scenes.
+The `dispatch` method lets us send a navigation action object which determines how the navigation state will be updated. All of the navigation functions like `navigate` use `dispatch` behind the scenes.
 
 Note that if you want to dispatch actions you should use the action creators provided in this library instead of writing the action object directly.
 
@@ -249,7 +249,7 @@ navigation.dispatch(
 
 When dispatching action objects, you can also specify few additional properties:
 
-- `source` - The key of the route which should be considered as the source of the action. The key maybe used by the router to handle the action. For example, the `replace` action will replace the route with the given key. By default, it'll use the key of the route that dispatched the action. You can explicitly pass `undefined` to override this behavior.
+- `source` - The key of the route which should be considered as the source of the action. For example, the `replace` action will replace the route with the given key. By default, it'll use the key of the route that dispatched the action. You can explicitly pass `undefined` to override this behavior.
 - `target` - The key of the navigation state the action should be applied on. By default, actions bubble to other navigators if not handled by a navigator. If `target` is specified, the action won't bubble if the navigator with the same key didn't handle it.
 
 Example:

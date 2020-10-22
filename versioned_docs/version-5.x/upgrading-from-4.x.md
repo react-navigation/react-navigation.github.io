@@ -507,7 +507,7 @@ See [`jumpTo` action docs](tab-actions.md#jumpto) for more details.
 
 ## Custom actions
 
-Previously, it was possible to override the `router` and its `getStateForAction` property on the navigator component to implement custom actions. Due to the dynamic nature of React Navigation 5, this is not possible. However, you can implement custom helpers to achieve the same functionality. See [`dispatch` docs](navigation-prop.md#dispatch) for more details.
+Previously, it was possible to override the `router` property and its `getStateForAction` property on the navigator component to implement custom actions. Due to the dynamic nature of React Navigation 5, this is not possible. However, you can implement custom helpers to achieve the same functionality. See [`dispatch` docs](navigation-prop.md#dispatch) for more details.
 
 ## Scrollables
 
