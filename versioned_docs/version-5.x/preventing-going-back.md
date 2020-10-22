@@ -6,19 +6,20 @@ sidebar_label: Preventing going back
 
 **Available in version 5.7+**
 
-Sometimes you may want to prevent the user from leaving a screen, for example, if there are unsaved changes, you might want to show a confirmation dialog.
+Sometimes you may want to prevent the user from leaving a screen, for example, if there are unsaved changes, you might want to show a confirmation dialog. You can achieve it by using the `beforeRemove` event.
 
-You can achieve it by using the `beforeRemove` event. This event is **not** triggered when a top/bottom tab is being unfocused. For example:
-
-- The user navigates from one top/bottom tab to another top/bottom tab.
-
-This event is **only** triggered whenever a screen is being removed. For example:
+Note that this event is **only** triggered whenever a screen is being removed. For example:
 
 - The user pressed back button on a screen in a stack
 - The user performed a swipe back gesture
 - Some action such as `pop` or `reset` was dispatched which removes the screen from the state
 
-The event receives the `action` that triggered it. You can dispatch this action again after confirmation, or check the action object to determine what to do.
+This event is **not** triggered when a screen is being unfocused, but not removed. For example:
+
+- The user pushed a new screen on top of the screen with the listener in a stack
+- The user navigated from one tab/drawer screen to another tab/drawer screen
+
+The event listener receives the `action` that triggered it. You can dispatch this action again after confirmation, or check the action object to determine what to do.
 
 Example:
 
