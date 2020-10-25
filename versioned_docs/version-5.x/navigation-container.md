@@ -52,7 +52,7 @@ function App() {
 }
 ```
 
-Keep in mind that the ref may be initially `null` in some situations (such as when deep linking is enabled). To make sure that the ref is initialized, you can use the [`onReady`](#onready) callback to get notified when the navigation container finishes mounting.
+Keep in mind that the ref may be initially `null` in some situations (such as when linking is enabled). To make sure that the ref is initialized, you can use the [`onReady`](#onready) callback to get notified when the navigation container finishes mounting.
 
 ### Methods on the ref
 
@@ -159,7 +159,7 @@ Example:
 </NavigationContainer>
 ```
 
-Providing a custom initial state object will override the initial state object obtained via deep linking or from browser's URL. If you're providing an initial state object, make sure that you don't pass it on web and that there's no deep link by using `Linking.getInitialURL()`:
+Providing a custom initial state object will override the initial state object obtained via linking configuration or from browser's URL. If you're providing an initial state object, make sure that you don't pass it on web and that there's no deep link by using `Linking.getInitialURL()`:
 
 ```js
 const initialUrl = await Linking.getInitialURL();
@@ -185,7 +185,7 @@ Function which is called after the navigation container and all its children fin
 
 ### `linking`
 
-Configuration for linking integration used for deep linking and URL support in browsers.
+Configuration for linking integration used for deep linking, URL support in browsers etc.
 
 Example:
 
@@ -342,9 +342,96 @@ If no custom function is provided for parsing a param, it'll be parsed as a stri
 
 Optional boolean to enable or disable the linking integration. Defaults to `true` if the `linking` prop is specified.
 
+##### `linking.getInitialURL`
+
+By default, linking integrates with React Native's `Linking` API and uses `Linking.getInitialURL()` to provide built-in support for deep linking. However, you might also want to handle links from other sources, such as push notifications.
+
+You can provide a custom `getInitialURL` function where you can return the link which we should use as the initial URL. The `getInitialURL` function should return a `string` if there's a URL to handle, otherwise `undefined`.
+
+For example, you could do something like following to handle both deep linking and firebase notifications:
+
+```js
+<NavigationContainer
+  linking={{
+    prefixes: ['https://mychat.com', 'mychat://'],
+    config: {
+      screens: {
+        Chat: 'feed/:sort',
+      },
+    },
+    async getInitialURL() {
+      // Check if app was opened from a deep link
+      const url = await Linking.getInitialURL();
+
+      if (url != null) {
+        return url;
+      }
+
+      // Check if there is an initial firebase notification
+      const message = await messaging().getInitialNotification();
+
+      // Get the `url` property from the notification which corresponds to a screen
+      // This property needs to be set on the notification payload when sending it
+      return message?.notification.url;
+    },
+  }}
+>
+  {/* content */}
+</NavigationContainer>
+```
+
+This option is not available on Web.
+
+##### `linking.subscribe`
+
+Similar to [`getInitialURL`](#linkinggetinitialurl), you can provide a custom `subscribe` function to handle any incoming links instead of the default deep link handling. The `subscribe` function will receive a listener as the argument and you can call it with a URL string whenever there's a new URL to handle. It should return a cleanup function where you can unsubscribe from any event listeners that you have setup.
+
+For example, you could do something like following to handle both deep linking and firebase notifications:
+
+```js
+<NavigationContainer
+  linking={{
+    prefixes: ['https://mychat.com', 'mychat://'],
+    config: {
+      screens: {
+        Chat: 'feed/:sort',
+      },
+    },
+    subscribe(listener) {
+      const onReceiveURL = ({ url }: { url: string }) => listener(url);
+
+      // Listen to incoming links from deep linking
+      Linking.addEventListener('url', onReceiveURL);
+
+      // Listen to firebase push notifications
+      const unsubscribeNotification = messaging().onNotificationOpenedApp(
+        (message) => {
+          const url = message.notification.url;
+
+          if (url) {
+            // If the notification has a `url` property, use it for linking
+            listener(url);
+          }
+        }
+      );
+
+      return () => {
+        // Clean up the event listeners
+        Linking.removeEventListener('url', onReceiveURL);
+        unsubscribeNotification();
+      };
+    },
+  }}
+>
+  {/* content */}
+</NavigationContainer>
+```
+
+This option is not available on Web.
+
 ##### `linking.getStateFromPath`
 
-You can optionally override the way React Navigation parses deep links to a state object by providing your own implementation.
+You can optionally override the way React Navigation parses links to a state object by providing your own implementation.
 
 Example:
 
@@ -394,7 +481,7 @@ Example:
 
 ### `fallback`
 
-React Element to use as a fallback while we resolve the deep link. Defaults to `null`.
+React Element to use as a fallback while we resolve the link. Defaults to `null`.
 
 ### `documentTitle`
 
