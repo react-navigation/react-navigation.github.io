@@ -836,7 +836,8 @@ We export various transition presets which bundle various set of these options t
 - `ModalSlideFromBottomIOS` - Standard iOS navigation transition for modals.
 - `ModalPresentationIOS` - Standard iOS modal presentation style (introduced in iOS 13).
 - `FadeFromBottomAndroid` - Standard Android navigation transition when opening or closing an Activity on Android < 9 (Oreo).
-- `RevealFromBottomAndroid` - Standard Android navigation transition when opening or closing an Activity on Android >= 9 (Pie).
+- `RevealFromBottomAndroid` - Standard Android navigation transition when opening or closing an Activity on Android 9 (Pie).
+- `ScaleFromCenterAndroid` - Standard Android navigation transition when opening or closing an Activity on Android >= 10.
 - `DefaultTransition` - Default navigation transition for the current platform.
 - `ModalTransition` - Default modal transition for the current platform.
 
