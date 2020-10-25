@@ -170,6 +170,7 @@ import {
   DefaultNavigatorOptions,
   TabRouter,
   TabActions,
+  TabActionHelpers,
   TabRouterOptions,
   TabNavigationState,
   createNavigatorFactory,
@@ -191,7 +192,7 @@ type TabNavigationOptions = {
 // canPreventDefault: true adds the defaultPrevented property to the
 // emitted events.
 type TabNavigationEventMap = {
-  tabPress: { 
+  tabPress: {
     data: { isAlreadyFocused: boolean }
     canPreventDefault: true
   };
@@ -210,8 +211,9 @@ function TabNavigator({
   contentStyle,
 }: Props) {
   const { state, navigation, descriptors } = useNavigationBuilder<
-    TabNavigationState,
+    TabNavigationState<ParamListBase>,
     TabRouterOptions,
+    TabActionHelpers<ParamListBase>,
     TabNavigationOptions,
     TabNavigationEventMap
   >(TabRouter, {
@@ -256,7 +258,7 @@ function TabNavigator({
 }
 
 export default createNavigatorFactory<
-  TabNavigationState,
+  TabNavigationState<ParamListBase>,
   TabNavigationOptions,
   TabNavigationEventMap,
   typeof TabNavigator
