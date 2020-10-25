@@ -142,7 +142,7 @@ Animated (from `react-native-reanimated`) value to listen to the position update
 
 #### `sceneContainerStyle`
 
-Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping:
+Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping.
 
 #### `style`
 
