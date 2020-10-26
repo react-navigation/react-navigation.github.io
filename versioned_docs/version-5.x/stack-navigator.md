@@ -51,13 +51,13 @@ The `Stack.Navigator` component accepts following props:
 
 The name of the route to render on first load of the navigator.
 
-#### `screensEnabled`
+#### `detachInactiveScreens`
 
-Boolean used to indicate whether [react-native-screens](https://github.com/software-mansion/react-native-screens) should be used for this navigator. Defaults to `true`.
+Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true` on Android and `false` on iOS.
 
-#### `activeLimit`
+#### `detachPreviousScreen`
 
-Number of screens to be rendered when not transitioning. Defaults to `1` for `mode="card"` and `2` for `mode="modal"`. Only has effect with [react-native-screens](https://github.com/software-mansion/react-native-screens) turned on.
+Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`. Defaults to `false` for the last screen when `mode='modal'`, otherwise `true`.
 
 #### `screenOptions`
 

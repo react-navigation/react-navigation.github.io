@@ -53,7 +53,7 @@ Several options get passed to the underlying router to modify navigation logic:
 - `order` - Array of routeNames which defines the order of the drawer items.
 - `paths` - Provide a mapping of routeName to path config, which overrides the paths set in the routeConfigs.
 - `backBehavior` - Should the back button cause switch to the initial route? If yes, set to `initialRoute`, otherwise `none`. Defaults to `initialRoute` behavior.
-- `screensEnabled` - Boolean used to indicate whether [react-native-screens](https://github.com/software-mansion/react-native-screens) should be used for this navigator. Defaults to `true`.
+- `detachInactiveScreens` - Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
 
 ### Providing a custom `contentComponent`
 
