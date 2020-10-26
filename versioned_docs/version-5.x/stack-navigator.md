@@ -68,6 +68,10 @@ Defines the style for rendering and transitions:
   - Sets `headerMode` to `screen` for the stack unless specified
   - Make the screens slide in from the bottom on iOS which is a common iOS pattern.
 
+#### `detachInactiveScreens`
+
+Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true` on Android and `false` on iOS.
+
 #### `headerMode`
 
 Specifies how the header should be rendered:
@@ -83,6 +87,10 @@ The following [options](screen-options.md) can be used to configure the screens 
 #### `title`
 
 String that can be used as a fallback for `headerTitle`.
+
+#### `detachPreviousScreen`
+
+Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`. Defaults to `false` for the last screen when `mode='modal'`, otherwise `true`.
 
 #### `header`
 

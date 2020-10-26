@@ -53,6 +53,10 @@ The name of the route to render on first load of the navigator.
 
 Default options to use for the screens in the navigator.
 
+#### `detachInactiveScreens`
+
+Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
+
 #### `backBehavior`
 
 Behavior of back button handling.

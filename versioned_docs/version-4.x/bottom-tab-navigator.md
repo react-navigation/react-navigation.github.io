@@ -35,6 +35,7 @@ The route configs object is a mapping from route name to a route config, which t
 - `order` - Array of routeNames which defines the order of the tabs.
 - `paths` - Provide a mapping of routeName to path config, which overrides the paths set in the routeConfigs.
 - `backBehavior` - `initialRoute` to return to initial tab, `order` to return to previous tab, `history` to return to last visited tab, or `none`.
+- `detachInactiveScreens` - Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
 - `lazy` - Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
 - `tabBarComponent` - Optional, override component to use as the tab bar.
 - `tabBarOptions` - An object with the following properties:
@@ -72,14 +73,14 @@ If you want to customize the `tabBarComponent`:
 ```js
 import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
 
-const TabBarComponent = props => <BottomTabBar {...props} />;
+const TabBarComponent = (props) => <BottomTabBar {...props} />;
 
 const TabScreens = createBottomTabNavigator(
   {
     // other screens
   },
   {
-    tabBarComponent: props => (
+    tabBarComponent: (props) => (
       <TabBarComponent {...props} style={{ borderTopColor: '#605F60' }} />
     ),
   }

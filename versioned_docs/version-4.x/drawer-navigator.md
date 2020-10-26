@@ -53,6 +53,7 @@ Several options get passed to the underlying router to modify navigation logic:
 - `order` - Array of routeNames which defines the order of the drawer items.
 - `paths` - Provide a mapping of routeName to path config, which overrides the paths set in the routeConfigs.
 - `backBehavior` - Should the back button cause switch to the initial route? If yes, set to `initialRoute`, otherwise `none`. Defaults to `initialRoute` behavior.
+- `detachInactiveScreens` - Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
 
 ### Providing a custom `contentComponent`
 
@@ -62,7 +63,7 @@ The default component for the drawer is scrollable and only contains links for t
 import SafeAreaView from 'react-native-safe-area-view';
 import { DrawerItems } from 'react-navigation-drawer';
 
-const CustomDrawerContentComponent = props => (
+const CustomDrawerContentComponent = (props) => (
   <ScrollView>
     <SafeAreaView
       style={styles.container}
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
 `contentComponent` also received a prop called `drawerOpenProgress` which is an Reanimated Node that represents the animated position of the drawer (0 is closed; 1 is open). This allows you to do interesting animations in your `contentComponent`, such as parallax motion of the drawer contents:
 
 ```js
-const CustomDrawerContentComponent = props => {
+const CustomDrawerContentComponent = (props) => {
   const translateX = Animated.interpolate(drawerOpenProgress, {
     inputRange: [0, 1],
     outputRange: [-100, 0],
