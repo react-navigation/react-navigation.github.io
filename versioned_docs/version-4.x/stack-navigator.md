@@ -58,6 +58,7 @@ Options for the router:
 - `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
 - `defaultNavigationOptions` - Default navigation options to use for screens
 - `paths` - A mapping of overrides for the paths set in the route configs
+- `detachInactiveScreens` - Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true` on Android and `false` on iOS.
 
 Visual options:
 
@@ -78,10 +79,6 @@ Visual options:
 #### `title`
 
 String that can be used as a fallback for `headerTitle`. Additionally, will be used as a fallback for `tabBarLabel` (if nested in a TabNavigator) or `drawerLabel` (if nested in a DrawerNavigator).
-
-#### `detachInactiveScreens`
-
-Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true` on Android and `false` on iOS.
 
 #### `detachPreviousScreen`
 
