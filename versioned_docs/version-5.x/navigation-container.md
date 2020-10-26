@@ -159,7 +159,9 @@ Example:
 </NavigationContainer>
 ```
 
-Providing a custom initial state object will override the initial state object obtained via linking configuration or from browser's URL. If you're providing an initial state object, make sure that you don't pass it on web and that there's no deep link by using `Linking.getInitialURL()`:
+Providing a custom initial state object will override the initial state object obtained via linking configuration or from browser's URL. If you're providing an initial state object, make sure that you don't pass it on web and that there's no deep link to handle.
+
+Example:
 
 ```js
 const initialUrl = await Linking.getInitialURL();
@@ -344,11 +346,11 @@ Optional boolean to enable or disable the linking integration. Defaults to `true
 
 ##### `linking.getInitialURL`
 
-By default, linking integrates with React Native's `Linking` API and uses `Linking.getInitialURL()` to provide built-in support for deep linking. However, you might also want to handle links from other sources, such as push notifications.
+By default, linking integrates with React Native's `Linking` API and uses `Linking.getInitialURL()` to provide built-in support for deep linking. However, you might also want to handle links from other sources, such as [Branch](https://help.branch.io/developers-hub/docs/react-native), or push notifications using [Firebase](https://rnfirebase.io/messaging/notifications) etc.
 
 You can provide a custom `getInitialURL` function where you can return the link which we should use as the initial URL. The `getInitialURL` function should return a `string` if there's a URL to handle, otherwise `undefined`.
 
-For example, you could do something like following to handle both deep linking and firebase notifications:
+For example, you could do something like following to handle both deep linking and Firebase notifications:
 
 ```js
 <NavigationContainer

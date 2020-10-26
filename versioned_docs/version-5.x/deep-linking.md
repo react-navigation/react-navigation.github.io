@@ -9,7 +9,7 @@ In this guide, we will configure our app to handle deep links on various platfor
 1. If the app wasn't previously open, we need to set the initial state based on the link
 2. If the app was already open, we need to update the state to reflect the incoming link
 
-React Native provides a [`Linking`](https://reactnative.dev/docs/linking) to get notified of incoming links. React Navigation provides a wrapper API around `Linking` to automatically handle deep links. See [configuring links](configuring-links.md) to see how to configure links in React Navigation.
+React Native provides a [`Linking`](https://reactnative.dev/docs/linking) to get notified of incoming links. React Navigation can integrate with the `Linking` module to automatically handle deep links. See [configuring links](configuring-links.md) to see more details on how to configure links in React Navigation.
 
 Below, we'll go through required configurations for each platform so that the deep link integration works.
 
@@ -77,13 +77,13 @@ function App() {
    };
 ```
 
-### Wildcards
+### Multiple subdomains
 
 To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*.` before the beginning of a specific domain. Note that an entry for `*.example.com` does not match `example.com` because of the period after the asterisk. To enable matching for both `*.example.com` and `example.com`, you need to provide a separate prefix entry for each.
 
 ```js
 const linking = {
-  prefixes: ['*.example.com', 'example.com'],
+  prefixes: ['https://*.example.com', 'https://example.com'],
 };
 ```
 
@@ -272,3 +272,81 @@ If you're using React Navigation within a hybrid app - an iOS app that has both 
     . . .
   ]
 ```
+
+## Third-party integrations
+
+React Native's `Linking` isn't the only way to handle deep linking. You might also want to integrate other services such as [Branch](https://help.branch.io/developers-hub/docs/react-native) which provide their own API for getting notified of incoming links, or you also might want to handle links from push notifications using [Firebase](https://rnfirebase.io/messaging/notifications) etc.
+
+To achieve this, you'd need to override how React Navigation subscribes to incoming links. To do so, you can provide your own [`getInitialURL`](navigation-container.md#linkinggetinitialurl) and [`subscribe`](navigation-container.md#linkingsubscribe) functions:
+
+```js
+const linking = {
+  prefixes: ['myapp://', 'https://myapp.com'],
+
+  // Custom function to get the URL which was used to open the app
+  async getInitialURL() {
+    // First, you may want to do the default deep link handling
+    // Check if app was opened from a deep link
+    const url = await Linking.getInitialURL();
+
+    if (url != null) {
+      return url;
+    }
+
+    // Next, you would need to get the initial URL from your third-party integration
+    // It depends on the third-party SDK you use
+    // For example, to get to get the initial URL for branch.io:
+    const params = branch.getFirstReferringParams();
+
+    return params?.$canonical_url;
+  },
+
+  // Custom function to subscribe to incoming links
+  subscribe(listener) {
+    // First, you may want to do the default deep link handling
+    const onReceiveURL = ({ url }: { url: string }) => listener(url);
+
+    // Listen to incoming links from deep linking
+    Linking.addEventListener('url', onReceiveURL);
+
+    // Next, you would need to subscribe to incoming links from your third-party integration
+    // For example, to get to subscribe to incoming links from branch.io:
+    branch.subscribe(({ error, params, uri }) => {
+      if (error) {
+        console.error('Error from Branch: ' + error);
+        return;
+      }
+
+      if (params['+non_branch_link']) {
+        const nonBranchUrl = params['+non_branch_link'];
+        // Route non-Branch URL if appropriate.
+        return;
+      }
+
+      if (!params['+clicked_branch_link']) {
+        // Indicates initialization success and some other conditions.
+        // No link was opened.
+        return;
+      }
+
+      // A Branch link was opened
+      const url = params.$canonical_url;
+
+      listener(url);
+    });
+    );
+
+    return () => {
+      // Clean up the event listeners
+      Linking.removeEventListener('url', onReceiveURL);
+      branch.unsubscribe();
+    };
+  },
+
+  config: {
+    // Deep link configuration
+  }
+};
+```
+
+Similar to the above example, you can integrate any API that provides a way to get the initial URL and to subscribe to new incoming URLs using the `getInitialURL` and `subscribe` options.

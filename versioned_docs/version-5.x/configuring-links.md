@@ -30,7 +30,9 @@ const state = {
 }
 ```
 
-The `NavigationContainer` accepts a `linking` prop that makes it easier to handle incoming links:
+The `NavigationContainer` accepts a `linking` prop that makes it easier to handle incoming links. React
+
+## Prefix
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';
@@ -52,7 +54,7 @@ The `prefixes` option is needed to match the incoming deep links and strip the p
 
 The `fallback` prop controls what's displayed when React Navigation is trying to resolve the initial deep link URL.
 
-> Note: Deep link integration uses React Native's `Linking.getInitialUrl()` under the hood. Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android. We add a timeout to avoid getting stuck forever, but it means that the link might not be handled in some cases.
+> Note: By default, deep link integration uses React Native's `Linking.getInitialUrl()` under the hood. Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android. We add a timeout to avoid getting stuck forever, but it means that the link might not be handled in some cases.
 
 ## Mapping path to route names
 
