@@ -58,8 +58,6 @@ Options for the router:
 - `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
 - `defaultNavigationOptions` - Default navigation options to use for screens
 - `paths` - A mapping of overrides for the paths set in the route configs
-- `detachInactiveScreens` - Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true` on Android and `false` on iOS.
-- `detachPreviousScreen` - Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`. Defaults to `false` for the last screen when `mode='modal'`, otherwise `true`.
 
 Visual options:
 
@@ -80,6 +78,14 @@ Visual options:
 #### `title`
 
 String that can be used as a fallback for `headerTitle`. Additionally, will be used as a fallback for `tabBarLabel` (if nested in a TabNavigator) or `drawerLabel` (if nested in a DrawerNavigator).
+
+#### `detachInactiveScreens`
+
+Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true` on Android and `false` on iOS.
+
+#### `detachPreviousScreen`
+
+Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`. Defaults to `false` for the last screen when `mode='modal'`, otherwise `true`.
 
 #### `header`
 
