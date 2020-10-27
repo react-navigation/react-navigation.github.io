@@ -350,7 +350,7 @@ By default, linking integrates with React Native's `Linking` API and uses `Linki
 
 You can provide a custom `getInitialURL` function where you can return the link which we should use as the initial URL. The `getInitialURL` function should return a `string` if there's a URL to handle, otherwise `undefined`.
 
-For example, you could do something like following to handle both deep linking and Firebase notifications:
+For example, you could do something like following to handle both deep linking and [Firebase notifications](https://rnfirebase.io/messaging/notifications):
 
 ```js
 <NavigationContainer
@@ -388,7 +388,7 @@ This option is not available on Web.
 
 Similar to [`getInitialURL`](#linkinggetinitialurl), you can provide a custom `subscribe` function to handle any incoming links instead of the default deep link handling. The `subscribe` function will receive a listener as the argument and you can call it with a URL string whenever there's a new URL to handle. It should return a cleanup function where you can unsubscribe from any event listeners that you have setup.
 
-For example, you could do something like following to handle both deep linking and firebase notifications:
+For example, you could do something like following to handle both deep linking and [Firebase notifications](https://rnfirebase.io/messaging/notifications):
 
 ```js
 <NavigationContainer
@@ -411,7 +411,10 @@ For example, you could do something like following to handle both deep linking a
           const url = message.notification.url;
 
           if (url) {
-            // If the notification has a `url` property, use it for linking
+            // Any custom logic to check whether the URL needs to be handled
+            //...
+
+            // Call the listener to let React Navigation handle the URL
             listener(url);
           }
         }
