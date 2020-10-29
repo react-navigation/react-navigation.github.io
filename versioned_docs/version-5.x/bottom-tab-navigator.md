@@ -53,13 +53,9 @@ The name of the route to render on first load of the navigator.
 
 Default options to use for the screens in the navigator.
 
-#### `detachInactiveScreens`
-
-Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
-
 #### `backBehavior`
 
-Behavior of back button handling.
+How the going back behaves in the navigator, e.g. when `goBack` is called or device back button is pressed.
 
 - `initialRoute` to return to initial tab
 - `order` to return to previous tab (in the order they are shown in the tab bar)
@@ -69,6 +65,10 @@ Behavior of back button handling.
 #### `lazy`
 
 Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
+
+#### `detachInactiveScreens`
+
+Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
 
 #### `sceneContainerStyle`
 

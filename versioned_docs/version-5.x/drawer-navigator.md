@@ -53,13 +53,9 @@ The name of the route to render on first load of the navigator.
 
 Default options to use for the screens in the navigator.
 
-#### `detachInactiveScreens`
-
-Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
-
 #### `backBehavior`
 
-Behavior of back button handling.
+How the going back behaves in the navigator, e.g. when `goBack` is called or device back button is pressed.
 
 - `initialRoute` to return to initial tab
 - `order` to return to previous tab (in the order they are shown in the tab bar)
@@ -156,12 +152,6 @@ Minimum swipe distance threshold that should activate opening the drawer.
 
 Color overlay to be displayed on top of the content view when drawer gets open. The opacity is animated from `0` to `1` when the drawer opens.
 
-#### `gestureHandlerProps`
-
-Props to pass to the underlying pan gesture handler.
-
-This is not supported on Web.
-
 #### `lazy`
 
 Whether the screens should render the first time they are accessed. Defaults to `true`. Set it to `false` if you want to render all screens on initial render.
@@ -197,6 +187,16 @@ The content component receives following props by default:
 - `navigation` - The navigation object for the navigator.
 - `descriptors` - An descriptor object containing options for the drawer screens. The options can be accessed at `descriptors[route.key].options`.
 - `progress` - Reanimated Node that represents the animated position of the drawer (0 is closed; 1 is open).
+
+#### `gestureHandlerProps`
+
+Props to pass to the underlying pan gesture handler.
+
+This is not supported on Web.
+
+#### `detachInactiveScreens`
+
+Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
 
 ##### Providing a custom `drawerContent`
 

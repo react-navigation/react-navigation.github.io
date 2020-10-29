@@ -68,10 +68,6 @@ Defines the style for rendering and transitions:
   - Sets `headerMode` to `screen` for the stack unless specified
   - Make the screens slide in from the bottom on iOS which is a common iOS pattern.
 
-#### `detachInactiveScreens`
-
-Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true` on Android and `false` on iOS.
-
 #### `headerMode`
 
 Specifies how the header should be rendered:
@@ -80,6 +76,10 @@ Specifies how the header should be rendered:
 - `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
 - `none` - No header will be shown. It's recommended to use [`headerShown`](#headershown) option instead for more granularity.
 
+#### `detachInactiveScreens`
+
+Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
+
 ### Options
 
 The following [options](screen-options.md) can be used to configure the screens in the navigator:
@@ -87,10 +87,6 @@ The following [options](screen-options.md) can be used to configure the screens 
 #### `title`
 
 String that can be used as a fallback for `headerTitle`.
-
-#### `detachPreviousScreen`
-
-Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`. Defaults to `false` for the last screen when `mode='modal'`, otherwise `true`.
 
 #### `header`
 
@@ -402,6 +398,10 @@ Interpolated styles for various parts of the card. Refer the [Animations section
 #### `headerStyleInterpolator`
 
 Interpolated styles for various parts of the header. Refer the [Animations section](#animations) for details.
+
+#### `detachPreviousScreen`
+
+Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`. Defaults to `false` for the last screen when `mode='modal'`, otherwise `true`.
 
 #### `safeAreaInsets`
 
@@ -904,7 +904,7 @@ import { TransitionPresets } from '@react-navigation/stack';
 
 A transparent modal is like a modal dialog which overlays the screen. The previous screen still stays visible underneath. To get a transparent modal screen, it's usually easier to create a separate modal stack. In the modal stack, you will want to configure few things:
 
-- Set the `mode` prop to `modal`
+- Set the `mode` prop to `modal` which sets `detachPreviousScreen` option to `false` for the last screen
 - Set the card background to transparent using `cardStyle`
 - Use a custom animation instead of the default platform animation (we'll use fade in this case)
 - Disable the header with `headerShown: false` (optional)
