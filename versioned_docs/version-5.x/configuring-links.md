@@ -10,6 +10,39 @@ In this guide, we will configure React Navigation to handle external links. This
 2. Enable URL integration in browser when using on web
 3. Use [`<Link />`](link.md) or [`useLinkTo`](use-link-to.md) to navigate using paths.
 
+Make sure that you have [configured deep links](deep-links.md) in your app before proceeding. If you have an Android or iOS app, remember to specify the [`prefixes`](navigation-container.md#linkingprefixes) option.
+
+The `NavigationContainer` accepts a [`linking`](navigation-container.md#linking) prop that makes it easier to handle incoming links. The 2 of the most important properties you can specify in the `linking` prop are `prefixes` and `config`:
+
+```js
+import { NavigationContainer } from '@react-navigation/native';
+
+const linking = {
+  prefixes: [
+    /* your linking prefixes */
+  ],
+  config: {
+    /* configuration for matching screens with paths */
+  },
+};
+
+function App() {
+  return (
+    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
+      {/* content */}
+    </NavigationContainer>
+  );
+}
+```
+
+When you specify the `linking` prop, React Navigation will handling incoming links automatically. On Android and iOS, it'll use React Native's [`Linking` module](https://reactnative.dev/docs/linking) to handle incoming links, both when the app was opened with the link, and when new links are received when the app is open. On the Web, it'll use the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to sync the URL with the browser.
+
+> Note: Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android. We add a timeout to avoid getting stuck forever, but it means that the link might not be handled in some cases.
+
+You can also pass a [`fallback`](navigation-container.md#fallback) prop to `NavigationContainer` which controls what's displayed when React Navigation is trying to resolve the initial deep link URL.
+
+## Mapping path to route names
+
 To handle a link, you need to translate it to a valid navigation state and vice versa. For example, the path `/rooms/chat?user=jane` may be translated to a state object like this:
 
 ```js
@@ -27,36 +60,8 @@ const state = {
       },
     },
   ],
-}
-```
-
-The `NavigationContainer` accepts a `linking` prop that makes it easier to handle incoming links. React
-
-## Prefix
-
-```js
-import { NavigationContainer } from '@react-navigation/native';
-
-const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
 };
-
-function App() {
-  return (
-    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
-      {/* content */}
-    </NavigationContainer>
-  );
-}
 ```
-
-The `prefixes` option is needed to match the incoming deep links and strip the prefix before React Navigation parses them. It's not needed for web integration.
-
-The `fallback` prop controls what's displayed when React Navigation is trying to resolve the initial deep link URL.
-
-> Note: By default, deep link integration uses React Native's `Linking.getInitialUrl()` under the hood. Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android. We add a timeout to avoid getting stuck forever, but it means that the link might not be handled in some cases.
-
-## Mapping path to route names
 
 By default, React Navigation will use the path segments as the route name when parsing the URL. But directly translating path segments to route names may not be the expected behavior, and your.
 
@@ -75,21 +80,93 @@ const state = {
 }
 ```
 
-You can specify a separate `config` option to control how the deep link is parsed to suit your needs.
+You can specify the [`config`](navigation-container.md#linkingconfig) option in `linking` to control how the deep link is parsed to suit your needs.
 
 ```js
-const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
-  config: {
-    screens: {
-      Chat: 'feed/:sort',
-      Profile: 'user',
-    },
+const config = {
+  screens: {
+    Chat: 'feed/:sort',
+    Profile: 'user',
   },
 };
 ```
 
 Here `Chat` is the name of the screen that handles the URL `/feed`, and `Profile` handles the URL `/user`.
+
+The config option can then be passed in the `linking` prop to the container:
+
+```js
+import { NavigationContainer } from '@react-navigation/native';
+
+const config = {
+  screens: {
+    Chat: 'feed/:sort',
+    Profile: 'user',
+  },
+};
+
+const linking = {
+  prefixes: ['https://mychat.com', 'mychat://'],
+  config,
+};
+
+function App() {
+  return (
+    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
+      {/* content */}
+    </NavigationContainer>
+  );
+}
+```
+
+The config object must match the navigation structure for your app. For example, the above configuration is if you have `Chat` and `Profile` screens in the navigator at the root:
+
+```js
+function App() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Chat" component={ChatScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
+  );
+}
+```
+
+If your `Chat` screen is inside a nested navigator, we'd need to account for that. For example, consider the following structure where your `Profile` screen is at the root, but the `Chat` screen is nested inside `Home`:
+
+```js
+function App() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function HomeScreen() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Chat" component={ChatScreen} />
+    </Tab.Navigator>
+  );
+}
+```
+
+For above structure, our configuration will look like this:
+
+```js
+const config = {
+  screens: {
+    Home: {
+      Chat: 'feed/:sort',
+    },
+    Profile: 'user',
+  },
+};
+```
+
+Similarly, any nesting needs to be reflected in the configuration. See [handling nested navigators](#handling-nested-navigators) for more details.
 
 ## Passing params
 
