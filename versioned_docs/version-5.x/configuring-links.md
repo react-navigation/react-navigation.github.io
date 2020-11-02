@@ -440,7 +440,9 @@ const state = {
 };
 ```
 
-Note that in this case, any params in the URL are only passed to the `Profile` screen which matches the path pattern `users/:id`, and the `Feed` screen doesn't receive any params. If you want to have the same params in the `Feed` screen, you can specify a [custom `getStateFromPath` function](use-linking.md#getstatefrompath) and copy those params.
+It's not possible to pass params to the initial screen through the URL. So make sure that your initial route doesn't need any params or specify `initialParams` to pass required params.
+
+In this case, any params in the URL are only passed to the `Profile` screen which matches the path pattern `users/:id`, and the `Feed` screen doesn't receive any params. If you want to have the same params in the `Feed` screen, you can specify a [custom `getStateFromPath` function](use-linking.md#getstatefrompath) and copy those params.
 
 Similarly, if you want to access params of a parent screen from a child screen, you can use [React Context](https://reactjs.org/docs/context.html) to expose them.
 
@@ -669,39 +671,6 @@ const config = {
 Here, there's a new `screens` property to the configuration object, and the `Feed` and `Profile` configs are now nested under `Home` to match the navigation structure.
 
 If you have the old format, it will continue to work without any changes. However, you won't be able to specify a wildcard pattern to handle unmatched screens or prevent screens from being deep linked. The old format will be removed in the next major release. So we recommend to migrate to the new format when you can.
-
-## Constraints to consider with nesting configs
-
-There are some constraints to consider when using nested navigators in the linking config.
-
-1. **Using `initialRouteName` makes the screen always appear in the state of a navigator.** It's not possible to pass params to the initial screen through the URL by default, unless the URL explicitly maps to the screen. So make sure that your initial route doesn't take any params or specify `initialParams`.
-
-2. **Having multiple screens of a nested navigator present in the state object is not possible in a single URL.** you also cannot provide a URL like (for the above configuration) `/user/home`, because it would be resolved to `HomeStack->Profile->HomeStack->Home`. If you want to get rid of the second `HomeStack`, you can provide an explicit config for the `Home` screen in the first level of config nesting (remember to provide a different path string for each occurrence of a screen in the config):
-
-   ```js
-   const config = {
-     screens: {
-       HomeStack: {
-         path: 'stack',
-         initialRouteName: 'Feed',
-         screens: {
-           Profile: {
-             path: 'user',
-             exact: true,
-             screens: {
-               Home: 'home',
-             },
-           },
-         },
-       },
-       Settings: 'settings',
-     },
-   };
-   ```
-
-   Then `/user/home` will resolve to `HomeStack->Profile->Home`.
-
-3. **When nesting navigators, params are only passed to the screen that'll be opened by the URL.** If you want to have the same params in other screens, you can specify a [custom `getStateFromPath` function](use-linking.md#getstatefrompath) and copy those params to the desired route objects.
 
 ## Playground
 
