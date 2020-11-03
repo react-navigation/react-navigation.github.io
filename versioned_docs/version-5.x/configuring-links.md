@@ -10,7 +10,7 @@ In this guide, we will configure React Navigation to handle external links. This
 2. Enable URL integration in browser when using on web
 3. Use [`<Link />`](link.md) or [`useLinkTo`](use-link-to.md) to navigate using paths.
 
-Make sure that you have [configured deep links](deep-links.md) in your app before proceeding. If you have an Android or iOS app, remember to specify the [`prefixes`](navigation-container.md#linkingprefixes) option.
+Make sure that you have [configured deep links](deep-linking.md) in your app before proceeding. If you have an Android or iOS app, remember to specify the [`prefixes`](navigation-container.md#linkingprefixes) option.
 
 The `NavigationContainer` accepts a [`linking`](navigation-container.md#linking) prop that makes it easier to handle incoming links. The 2 of the most important properties you can specify in the `linking` prop are `prefixes` and `config`:
 
