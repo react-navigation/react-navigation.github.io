@@ -154,7 +154,31 @@ We recommend creating a separate `types.tsx` file where you keep the types and i
 
 ### Nesting navigators
 
-When we nest navigators, the navigation prop of the screen is a combination of multiple navigation props. For example, if we have a tab inside a stack, the `navigation` prop will have both `jumpTo` (from the tab navigator) and `push` (from the stack navigator). To make it easier to combine types from multiple navigator, you can use the `CompositeNavigationProp` type:
+#### Type checking screens and params in nested navigator
+
+You can [navigate to a screen in a nested navigator](nesting-navigators.md#navigating-to-a-screen-in-a-nested-navigator) by passing `screen` and `params` properties for the nested screen:
+
+```ts
+navigation.navigate('Home', {
+  screen: 'Feed',
+  params: { sort: 'latest' },
+});
+```
+
+To be able to type check this, we need to extract the params from the screen containing the nested navigator. This can be done using the `NavigatorScreenParams` utility:
+
+```ts
+import { NavigatorScreenParams } from '@react-navigation/native';
+
+type TabParamList = {
+  Home: NavigatorScreenParams<StackParamList>;
+  Profile: { userId: string };
+};
+```
+
+#### Combining navigation props
+
+When you nest navigators, the navigation prop of the screen is a combination of multiple navigation props. For example, if we have a tab inside a stack, the `navigation` prop will have both `jumpTo` (from the tab navigator) and `push` (from the stack navigator). To make it easier to combine types from multiple navigator, you can use the `CompositeNavigationProp` type:
 
 ```ts
 import { CompositeNavigationProp } from '@react-navigation/native';
@@ -207,13 +231,12 @@ When you pass the `options` to a `Screen` or `screenOptions` prop to a `Navigato
 
 To annotate the options, we need to import the corresponding type from the navigator. For example, `StackNavigationOptions` for `@react-navigation/stack`:
 
-
 ```ts
 import { StackNavigationProp } from '@react-navigation/stack';
 
 const options: StackNavigationOptions = {
   headerShown: false,
-}
+};
 ```
 
 Similarly, you can import `DrawerNavigationOptions` from `@react-navigation/drawer`, `BottomTabNavigationOptions` from `@react-navigation/bottom-tabs` etc.
@@ -229,7 +252,7 @@ import { NavigationContainerRef } from '@react-navigation/native';
 
 // ...
 
-const navigationRef = React.useRef<NavigationContainerRef>(null)
+const navigationRef = React.useRef<NavigationContainerRef>(null);
 ```
 
 Example when using `React.createRef`:
@@ -239,5 +262,5 @@ import { NavigationContainerRef } from '@react-navigation/native';
 
 // ...
 
-const navigationRef = React.createRef<NavigationContainerRef>()
+const navigationRef = React.createRef<NavigationContainerRef>();
 ```
