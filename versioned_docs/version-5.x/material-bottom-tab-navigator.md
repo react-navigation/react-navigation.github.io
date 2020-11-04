@@ -121,7 +121,7 @@ Color for the tab bar when the tab corresponding to the screen is active. Used f
 
 #### `tabBarLabel`
 
-Title string of a tab displayed in the tab bar. When undefined, scene `title` is used. To hide, see `labeled` option in the previous section.
+Title string of a tab displayed in the tab bar. When undefined, scene `title` is used. To hide, see `labeled` option in the previous section. You can also pass a React Component for full customization.
 
 #### `tabBarBadge`
 
