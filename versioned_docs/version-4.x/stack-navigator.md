@@ -178,6 +178,10 @@ Whether header title font should scale to respect Text Size accessibility settin
 
 Whether back button title font should scale to respect Text Size accessibility settings. Defaults to false.
 
+#### `headerBackAccessibilityLabel`
+
+Accessibility label for the header back button.
+
 #### `headerBackImage`
 
 Function which returns a React Element to display custom image in header's back button. When a function is used, it receives the `tintColor` in it's argument object. Defaults to Image component with `react-navigation/views/assets/back-icon.png` back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
