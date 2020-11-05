@@ -24,21 +24,21 @@
 <link rel="stylesheet" href="/styles.602e36a5.css">
 
 
-<link rel="preload" href="/styles.009dbeb8.js" as="script">
+<link rel="preload" href="/styles.14697a0b.js" as="script">
 
-<link rel="preload" href="/runtime~main.66582ebe.js" as="script">
+<link rel="preload" href="/runtime~main.f7c41ffd.js" as="script">
 
-<link rel="preload" href="/main.52d0289a.js" as="script">
+<link rel="preload" href="/main.ba0a82c7.js" as="script">
 
-<link rel="preload" href="/1.7d569c4c.js" as="script">
+<link rel="preload" href="/1.22a56730.js" as="script">
 
-<link rel="preload" href="/2.a90f223a.js" as="script">
+<link rel="preload" href="/2.10ab11ad.js" as="script">
 
-<link rel="preload" href="/3.11f00fd1.js" as="script">
+<link rel="preload" href="/3.46d3fc4a.js" as="script">
 
-<link rel="preload" href="/ccc49370.9ef8d6df.js" as="script">
+<link rel="preload" href="/ccc49370.3927690e.js" as="script">
 
-<link rel="preload" href="/f100c192.ee1ec352.js" as="script">
+<link rel="preload" href="/f100c192.fd1e937a.js" as="script">
 
 </head>
 <body>
@@ -47,21 +47,21 @@
 <nav class="navbar navbar--light navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><div aria-label="Navigation bar toggle" class="navbar__toggle" role="button" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img" focusable="false"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></div><a aria-current="page" class="navbar__brand active" href="/"><img class="navbar__logo" src="/img/spiro.svg" alt="React Navigation Logo"><strong>React Navigation</strong></a><a class="navbar__item navbar__link" href="/docs/getting-started">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/blog">Blog</a><a class="navbar__item navbar__link" href="/help">Help</a><a class="navbar__item navbar__link" href="/versions">Versions</a></div><div class="navbar__items navbar__items--right"><a class="navbar__item navbar__link" target="_blank" rel="noopener noreferrer" href="https://github.com/react-navigation">GitHub</a><div class="react-toggle react-toggle--disabled displayOnlyInLargeViewport_1gtM"><div class="react-toggle-track"><div class="react-toggle-track-check"><span class="toggle_keGJ moon_1gwN"></span></div><div class="react-toggle-track-x"><span class="toggle_keGJ sun_3CPA"></span></div></div><div class="react-toggle-thumb"></div><input type="checkbox" disabled="" aria-label="Dark mode toggle" class="react-toggle-screenreader-only"></div><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input type="search" id="search_input_react" placeholder="Search" aria-label="Search" class="navbar__search-input search-bar"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div><div class="navbar-sidebar"><div class="navbar-sidebar__brand"><a aria-current="page" class="navbar__brand active" href="/"><img class="navbar__logo" src="/img/spiro.svg" alt="React Navigation Logo"><strong>React Navigation</strong></a></div><div class="navbar-sidebar__items"><div class="menu"><ul class="menu__list"><li class="menu__list-item"><a class="menu__link" href="/docs/getting-started">Docs</a></li><li class="menu__list-item"><a aria-current="page" class="menu__link navbar__link--active" href="/blog">Blog</a></li><li class="menu__list-item"><a class="menu__link" target="_blank" rel="noopener noreferrer" href="https://github.com/react-navigation">GitHub</a></li><li class="menu__list-item"><a class="menu__link" href="/help">Help</a></li><li class="menu__list-item"><a class="menu__link" href="/versions">Versions</a></li></ul></div></div></div></nav><div class="main-wrapper"><div class="container margin-vert--xl"><div class="row"><div class="col col--8 col--offset-2"><article><header><h1 class="margin-bottom--sm blogPostTitle_2RZH">React Navigation 1.0 (goodbye, beta!)</h1><div class="margin-bottom--sm"><time datetime="2018-02-06T00:00:00.000Z" class="blogPostDate_3tRe">February 6, 2018</time></div><div class="avatar margin-bottom--md"><a class="avatar__photo-link" href="https://twitter.com/notbrent" target="_blank" rel="noreferrer noopener"><img class="avatar__photo" src="https://avatars0.githubusercontent.com/u/90494?s=200&amp;v=4" alt="Brent Vatne"></a><div class="avatar__intro"><h4 class="avatar__name"><a href="https://twitter.com/notbrent" target="_blank" rel="noreferrer noopener">Brent Vatne</a></h4><small class="avatar__subtitle">Core Team</small></div></div></header><section class="markdown"><p>As of today, React Navigation version 1.0 has been released! To see a list of recent improvements leading up to the release, refer to the “<a href="https://github.com/react-navigation/react-navigation/issues/2585">Renewed Path to React Navigation V1.0</a>” issue. Thank you to everybody who has filed high-quality bug reports, submitted pull requests, and helped out fellow developers while we were in beta!</p><p>This release isn’t meant to be interpreted as a signal that React Navigation is “finished&quot; — work is already underway on a number of significant changes to the API that aim to make React Navigation easier to use and more powerful. These changes will be run through our <a href="https://github.com/react-navigation/rfcs">new RFC process</a>. For example, the <a href="https://github.com/react-navigation/rfcs/blob/master/text/0002-navigator-view-api.md">Navigator View API RFC</a> outlines a plan to decouple views from the router in order to make it easier for other navigation APIs, such as <a href="https://github.com/aksonov/react-native-router-flux">react-native-router-flux</a> and <a href="https://github.com/ReactTraining/react-router/tree/master/packages/react-router-native">react-router-native</a>, to build on top of the same navigation views. We’re also very excited about a plan (no RFC is open yet, but keep an eye out for it) to use <a href="https://github.com/software-mansion/react-native-gesture-handler">react-native-gesture-handler</a> to run navigation gestures (sliding a drawer open, or swiping back on a stack, for example) on the UI thread using the Animated native driver.</p><p>Last week we released an updated version of our <a href="https://reactnavigation.org/docs/getting-started.html">documentation website</a>, built using <a href="https://docusaurus.io/">Docusaurus</a>. We hope that the new documentation will help newcomers get onboarded with the fundamentals of React Navigation, and serve as an ongoing resource to handle specific use cases as you come across them (under the “How do I do..?” section). <a href="https://github.com/react-navigation/react-navigation.github.io">Contributions to the documentation are very welcome</a>.</p><p><a href="https://reactnavigation.org/docs/getting-started.html">Give React Navigation 1.0 a try</a>, <a href="https://react-navigation.canny.io/feature-requests">post a feature request</a> if you think something is missing, <a href="https://github.com/react-navigation/rfcs">open a RFC</a> if you have an idea of how to implement it, <a href="https://github.com/react-navigation/react-navigation/issues">file a detailed bug report</a> when you encounter problems (or <a href="https://github.com/react-navigation/react-navigation/pulls">open a pull request</a> if you know how to fix them)! Updating your existing installation should be easy if you have tracked releases over recent months — <a href="https://github.com/react-navigation/react-navigation/releases/tag/1.0.0">read the brief release notes</a> for more information.</p></section><footer class="row margin-vert--lg"><div class="col"><strong>Tags:</strong><a class="margin-horiz--sm" href="/blog/tags/release">release</a><a class="margin-horiz--sm" href="/blog/tags/announcement">announcement</a></div></footer></article><div class="margin-vert--xl"><nav class="pagination-nav"><div class="pagination-nav__item"><a class="pagination-nav__link" href="/blog/2018/04/06/react-navigation-2.0-rc"><h5 class="pagination-nav__link--sublabel">Previous Post</h5><h4 class="pagination-nav__link--label">« 2.0 release candidate</h4></a></div><div class="pagination-nav__item pagination-nav__item--next"></div></nav></div></div></div></div></div><footer class="footer footer--dark"><div class="container"><div class="row footer__links"><div class="col footer__col"><h4 class="footer__title">Docs</h4><ul class="footer__items"><li class="footer__item"><a class="footer__link-item" href="/docs/getting-started">Getting Started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/custom-navigators">Building your own Navigator</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/contributing">Contributing</a></li></ul></div><div class="col footer__col"><h4 class="footer__title">Support</h4><ul class="footer__items"><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://discord.gg/reactiflux">Chat in our Discord channel</a></li><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://stackoverflow.com/questions/tagged/react-navigation">Get help on Stack Overflow</a></li><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://react-navigation.canny.io/feature-requests">Request a feature on Canny</a></li><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://github.com/react-navigation/react-navigation/issues/new/choose">Report a bug on Github</a></li></ul></div><div class="col footer__col"><h4 class="footer__title">Social</h4><ul class="footer__items"><li class="footer__item"><a aria-current="page" class="footer__link-item active" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://github.com/react-navigation/react-navigation">GitHub</a></li><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://twitter.com/reactnavigation">Twitter</a></li></ul></div><div class="col footer__col"><h4 class="footer__title">Built with</h4><ul class="footer__items"><li class="footer__item"><a class="footer__link-item" to="https://docusaurus.io/" href="https://docusaurus.io/">Docusaurus</a></li><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://pages.github.com/">GitHub Pages</a></li><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://www.netlify.com/">Netlify</a></li></ul></div></div><div class="text--center"></div></div></footer>
 </div>
 
-<script src="/styles.009dbeb8.js"></script>
+<script src="/styles.14697a0b.js"></script>
 
-<script src="/runtime~main.66582ebe.js"></script>
+<script src="/runtime~main.f7c41ffd.js"></script>
 
-<script src="/main.52d0289a.js"></script>
+<script src="/main.ba0a82c7.js"></script>
 
-<script src="/1.7d569c4c.js"></script>
+<script src="/1.22a56730.js"></script>
 
-<script src="/2.a90f223a.js"></script>
+<script src="/2.10ab11ad.js"></script>
 
-<script src="/3.11f00fd1.js"></script>
+<script src="/3.46d3fc4a.js"></script>
 
-<script src="/ccc49370.9ef8d6df.js"></script>
+<script src="/ccc49370.3927690e.js"></script>
 
-<script src="/f100c192.ee1ec352.js"></script>
+<script src="/f100c192.fd1e937a.js"></script>
 
 
 </body>

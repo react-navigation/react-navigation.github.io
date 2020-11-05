@@ -24,25 +24,25 @@
 <link rel="stylesheet" href="/styles.602e36a5.css">
 
 
-<link rel="preload" href="/styles.009dbeb8.js" as="script">
+<link rel="preload" href="/styles.14697a0b.js" as="script">
 
-<link rel="preload" href="/runtime~main.66582ebe.js" as="script">
+<link rel="preload" href="/runtime~main.f7c41ffd.js" as="script">
 
-<link rel="preload" href="/main.52d0289a.js" as="script">
+<link rel="preload" href="/main.ba0a82c7.js" as="script">
 
-<link rel="preload" href="/1.7d569c4c.js" as="script">
+<link rel="preload" href="/1.22a56730.js" as="script">
 
-<link rel="preload" href="/2.a90f223a.js" as="script">
+<link rel="preload" href="/2.10ab11ad.js" as="script">
 
-<link rel="preload" href="/3.11f00fd1.js" as="script">
+<link rel="preload" href="/3.46d3fc4a.js" as="script">
 
-<link rel="preload" href="/ee9e7730.99c51c56.js" as="script">
+<link rel="preload" href="/ee9e7730.e443e630.js" as="script">
 
 <link rel="preload" href="/59fd4140.bf29137c.js" as="script">
 
-<link rel="preload" href="/7bdc89f1.70ee0b6e.js" as="script">
+<link rel="preload" href="/7bdc89f1.74e61373.js" as="script">
 
-<link rel="preload" href="/8674297c.e1b3e262.js" as="script">
+<link rel="preload" href="/8674297c.3d97bafa.js" as="script">
 
 </head>
 <body>
@@ -57,25 +57,25 @@
 </span></div><div class="token-line" style="color:#393A34"><span class="token plain">      // Routes can have any additional data. The included routers have `params`</span></div><div class="token-line" style="color:#393A34"><span class="token plain">      ...customRouteData,</span></div><div class="token-line" style="color:#393A34"><span class="token plain">    },</span></div><div class="token-line" style="color:#393A34"><span class="token plain">    ...moreRoutes,</span></div><div class="token-line" style="color:#393A34"><span class="token plain">  ]</span></div><div class="token-line" style="color:#393A34"><span class="token plain">}</span></div></code></pre></div><h3><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="navigation-dispatchers"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#navigation-dispatchers" title="Direct link to heading">#</a>Navigation Dispatchers</h3><p>A navigator can dispatch navigation actions, such as &#x27;Go to a URI&#x27;, &#x27;Go back&#x27;.</p><p>The dispatcher will return <code>true</code> if the action was successfully handled, otherwise <code>false</code>.</p><h2><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="api-for-building-custom-navigators"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#api-for-building-custom-navigators" title="Direct link to heading">#</a>API for building custom navigators</h2><p>To help developers implement custom navigators, the following utilities are provided with React Navigation:</p><h3><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="createnavigator"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#createnavigator" title="Direct link to heading">#</a><code>createNavigator</code></h3><p>This utility combines a <a href="/docs/routers/">router</a> and a <a href="/docs/navigation-views/">navigation view</a> together in a standard way:</p><div class="mdxCodeBlock_iHAB"><pre class="prism-code language-js codeBlock_19pQ"><button type="button" aria-label="Copy code to clipboard" class="copyButton_1BYj">Copy</button><code class="codeBlockLines_2n9r" style="color:#393A34;background-color:#f6f8fa"><div class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">const</span><span class="token plain"> </span><span class="token maybe-class-name">MyApp</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">createNavigator</span><span class="token punctuation" style="color:#393A34">(</span><span class="token maybe-class-name">MyRouter</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">(</span><span class="token maybe-class-name">MyView</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span></div></code></pre></div><p>All this does behind the scenes is:</p><div class="mdxCodeBlock_iHAB"><pre class="prism-code language-js codeBlock_19pQ"><button type="button" aria-label="Copy code to clipboard" class="copyButton_1BYj">Copy</button><code class="codeBlockLines_2n9r" style="color:#393A34;background-color:#f6f8fa"><div class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">const</span><span class="token plain"> </span><span class="token function-variable function maybe-class-name" style="color:#d73a49">MyApp</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token parameter punctuation" style="color:#393A34">{</span><span class="token parameter"> navigation </span><span class="token parameter punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token arrow operator" style="color:#393A34">=&gt;</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token maybe-class-name">MyView</span><span class="token plain"> router</span><span class="token operator" style="color:#393A34">=</span><span class="token punctuation" style="color:#393A34">{</span><span class="token maybe-class-name">MyRouter</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"> navigation</span><span class="token operator" style="color:#393A34">=</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain">navigation</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">/</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token maybe-class-name">MyApp</span><span class="token punctuation" style="color:#393A34">.</span><span class="token property-access">router</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token maybe-class-name">MyRouter</span><span class="token punctuation" style="color:#393A34">;</span></div></code></pre></div><h3><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="addnavigationhelpers"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#addnavigationhelpers" title="Direct link to heading">#</a><code>addNavigationHelpers</code></h3><p>Takes in a bare navigator navigation prop with <code>state</code> and <code>dispatch</code>, and augments it with all the various functions in a screen navigation prop, such as <code>navigation.navigate()</code> and <code>navigation.goBack()</code>. These functions are simply helpers to create the actions and send them into <code>dispatch</code>.</p><h3><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="createnavigationcontainer"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#createnavigationcontainer" title="Direct link to heading">#</a><code>createNavigationContainer</code></h3><p>If you want your navigator to be usable as a top-level component, (without a navigation prop being passed in), you can use <code>createNavigationContainer</code>. This utility will make your navigator act like a top-level navigator when the navigation prop is missing. It will manage the app state, and integrate with app-level nav features, like handling incoming and outgoing links, and Android back button behavior.</p></div></article><div class="margin-vert--xl"><div class="row"><div class="col"><a href="https://github.com/react-navigation/react-navigation.github.io/edit/main/versioned_docs/version-1.x/custom-navigators.md" target="_blank" rel="noreferrer noopener"><svg fill="currentColor" height="1.2em" width="1.2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 40 40" style="margin-right:0.3em;vertical-align:sub"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div></div></div><div class="margin-vert--lg"><nav class="pagination-nav"><div class="pagination-nav__item"><a class="pagination-nav__link" href="/docs/1.x/routers"><h5 class="pagination-nav__link--sublabel">Previous</h5><h4 class="pagination-nav__link--label">« Routers</h4></a></div><div class="pagination-nav__item pagination-nav__item--next"><a class="pagination-nav__link" href="/docs/1.x/custom-routers"><h5 class="pagination-nav__link--sublabel">Next</h5><h4 class="pagination-nav__link--label">Custom routers »</h4></a></div></nav></div></div></div><div class="col col--3"><div class="tableOfContents_TbNY"><ul class="contents contents__left-border"><li><a href="#navigation-prop" class="contents__link">Navigation Prop</a><ul><li><a href="#navigation-state" class="contents__link">Navigation State</a></li><li><a href="#navigation-dispatchers" class="contents__link">Navigation Dispatchers</a></li></ul></li><li><a href="#api-for-building-custom-navigators" class="contents__link">API for building custom navigators</a><ul><li><a href="#createnavigator" class="contents__link"><code>createNavigator</code></a></li><li><a href="#addnavigationhelpers" class="contents__link"><code>addNavigationHelpers</code></a></li><li><a href="#createnavigationcontainer" class="contents__link"><code>createNavigationContainer</code></a></li></ul></li></ul></div></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="row footer__links"><div class="col footer__col"><h4 class="footer__title">Docs</h4><ul class="footer__items"><li class="footer__item"><a class="footer__link-item" href="/docs/getting-started">Getting Started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/custom-navigators">Building your own Navigator</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/contributing">Contributing</a></li></ul></div><div class="col footer__col"><h4 class="footer__title">Support</h4><ul class="footer__items"><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://discord.gg/reactiflux">Chat in our Discord channel</a></li><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://stackoverflow.com/questions/tagged/react-navigation">Get help on Stack Overflow</a></li><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://react-navigation.canny.io/feature-requests">Request a feature on Canny</a></li><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://github.com/react-navigation/react-navigation/issues/new/choose">Report a bug on Github</a></li></ul></div><div class="col footer__col"><h4 class="footer__title">Social</h4><ul class="footer__items"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://github.com/react-navigation/react-navigation">GitHub</a></li><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://twitter.com/reactnavigation">Twitter</a></li></ul></div><div class="col footer__col"><h4 class="footer__title">Built with</h4><ul class="footer__items"><li class="footer__item"><a class="footer__link-item" to="https://docusaurus.io/" href="https://docusaurus.io/">Docusaurus</a></li><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://pages.github.com/">GitHub Pages</a></li><li class="footer__item"><a class="footer__link-item" target="_blank" rel="noopener noreferrer" href="https://www.netlify.com/">Netlify</a></li></ul></div></div><div class="text--center"></div></div></footer>
 </div>
 
-<script src="/styles.009dbeb8.js"></script>
+<script src="/styles.14697a0b.js"></script>
 
-<script src="/runtime~main.66582ebe.js"></script>
+<script src="/runtime~main.f7c41ffd.js"></script>
 
-<script src="/main.52d0289a.js"></script>
+<script src="/main.ba0a82c7.js"></script>
 
-<script src="/1.7d569c4c.js"></script>
+<script src="/1.22a56730.js"></script>
 
-<script src="/2.a90f223a.js"></script>
+<script src="/2.10ab11ad.js"></script>
 
-<script src="/3.11f00fd1.js"></script>
+<script src="/3.46d3fc4a.js"></script>
 
-<script src="/ee9e7730.99c51c56.js"></script>
+<script src="/ee9e7730.e443e630.js"></script>
 
 <script src="/59fd4140.bf29137c.js"></script>
 
-<script src="/7bdc89f1.70ee0b6e.js"></script>
+<script src="/7bdc89f1.74e61373.js"></script>
 
-<script src="/8674297c.e1b3e262.js"></script>
+<script src="/8674297c.3d97bafa.js"></script>
 
 
 </body>
