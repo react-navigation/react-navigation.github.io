@@ -183,7 +183,7 @@ Function that returns React element to render as the content of the drawer, for 
 
 The content component receives following props by default:
 
-- `state` - The navigation state of the navigator, `state.routes` contains list of all routes
+- `state` - The [navigation state](navigation-state.md) of the navigator.
 - `navigation` - The navigation object for the navigator.
 - `descriptors` - An descriptor object containing options for the drawer screens. The options can be accessed at `descriptors[route.key].options`.
 - `progress` - Reanimated Node that represents the animated position of the drawer (0 is closed; 1 is open).

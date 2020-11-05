@@ -4,14 +4,14 @@ title: CommonActions reference
 sidebar_label: CommonActions
 ---
 
-A navigation action is an object containing at least a `type` property. Internally, the action can be handled by [routers](custom-routers.md) with the `getStateForAction` method to return a new state from an existing navigation state.
+A navigation action is an object containing at least a `type` property. Internally, the action can be handled by [routers](custom-routers.md) with the `getStateForAction` method to return a new state from an existing [navigation state](navigation-state.md).
 
 Each navigation actions can contain at least the following properties:
 
 - `type` (required) - A string which represents the name of the action.
 - `payload` (options) - An object containing additional information about the action. For example, it will contain `name` and `params` for `navigate`.
 - `source` (optional) - The key of the route which should be considered as the source of the action. This is used for some actions to determine which route to apply the action on. By default, `navigation.dispatch` adds the key of the route that dispatched the action.
-- `target` (optional) - The key of the navigation state the action should be applied on.
+- `target` (optional) - The key of the [navigation state](navigation-state.md) the action should be applied on.
 
 It's important to highlight that dispatching a navigation action doesn't throw any error when the action is unhandled (similar to when you dispatch an action that isn't handled by a reducer in redux and nothing happens).
 
@@ -46,9 +46,9 @@ navigation.dispatch(
 
 ### reset
 
-The `reset` action allows to reset the navigation state to the given state. It takes the following arguments:
+The `reset` action allows to reset the [navigation state](navigation-state.md) to the given state. It takes the following arguments:
 
-- `state` - _object_ - The new navigation state object to use.
+- `state` - _object_ - The new [navigation state](navigation-state.md) object to use.
 
 <samp id="common-actions" />
 
@@ -69,7 +69,7 @@ navigation.dispatch(
 );
 ```
 
-The state object specified in `reset` replaces the existing navigation state with the new one. This means that if you provide new route objects without a key, or route objects with a different key, it'll remove the existing screens for those routes and add new screens.
+The state object specified in `reset` replaces the existing [navigation state](navigation-state.md) with the new one. This means that if you provide new route objects without a key, or route objects with a different key, it'll remove the existing screens for those routes and add new screens.
 
 If you want to preserve the existing screens but only want to modify the state, you can pass a function to `dispatch` where you can get the existing state. Then you can change it as you like (make sure not to mutate the existing state, but create new state object for your changes). and return a `reset` action with the desired state:
 
@@ -88,7 +88,7 @@ navigation.dispatch(state => {
 });
 ```
 
-> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
 
 ### goBack
 

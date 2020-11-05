@@ -12,10 +12,10 @@ This is especially valuable during development because it allows the developer t
 
 ## Usage
 
-To be able to persist the navigation state, we can use the `onStateChange` and `initialState` props of the container.
+To be able to persist the [navigation state](navigation-state.md), we can use the `onStateChange` and `initialState` props of the container.
 
 - `onStateChange` - This prop notifies us of any state changes. We can persist the state in this callback.
-- `initialState` - This prop allows us to pass an initial state to use for navigation state. We can pass the restored state in this prop.
+- `initialState` - This prop allows us to pass an initial state to use for [navigation state](navigation-state.md). We can pass the restored state in this prop.
 
  <samp id="state-persistance" />
 

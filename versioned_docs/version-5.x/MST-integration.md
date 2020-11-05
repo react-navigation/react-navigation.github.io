@@ -14,7 +14,7 @@ This guide explores possible way to use React Navigation in a React Native proje
 
 Our goal with this guide is to use MST with React Navigation and achieve optimal developer experience. In the scope of this guide, this means allowing us to do a full JS reload and be brought back to the state before the reload happened.
 
-We will do this by persisting the navigation state using the React Navigation's [built-in mechanism](state-persistence.md). We also need to persist the app state and navigation params - that way, when you're working on a screen in your app and do a full JS reload, you will be brought back to the same screen, with the same data in it.
+We will do this by persisting the [navigation state](navigation-state.md) using the React Navigation's [built-in mechanism](state-persistence.md). We also need to persist the app state and navigation params - that way, when you're working on a screen in your app and do a full JS reload, you will be brought back to the same screen, with the same data in it.
 
 ## Guide
 

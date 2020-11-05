@@ -4,11 +4,11 @@ title: useNavigationState
 sidebar_label: useNavigationState
 ---
 
-`useNavigationState` is a hook which gives access to the navigation state of the navigator which contains the screen. It's useful in rare cases where you want to render something based on the navigation state.
+`useNavigationState` is a hook which gives access to the [navigation state](navigation-state.md) of the navigator which contains the screen. It's useful in rare cases where you want to render something based on the navigation state.
 
-> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
 
-It takes a selector function as an argument. The selector will receive the full navigation state and can return a specific value from the state:
+It takes a selector function as an argument. The selector will receive the full [navigation state](navigation-state.md) and can return a specific value from the state:
 
 ```js
 const index = useNavigationState(state => state.index);
@@ -24,7 +24,7 @@ const state = useNavigationState(state => state);
 
 ## How is `useNavigationState` different from `navigation.dangerouslyGetState()`?
 
-The `navigation.dangerouslyGetState()` function also returns the current navigation state. The main difference is that the `useNavigationState` hook will trigger a re-render when values change, while `navigation.dangerouslyGetState()` won't. For example, the following code will be incorrect:
+The `navigation.dangerouslyGetState()` function also returns the current [navigation state](navigation-state.md). The main difference is that the `useNavigationState` hook will trigger a re-render when values change, while `navigation.dangerouslyGetState()` won't. For example, the following code will be incorrect:
 
 ```js
 function Profile() {

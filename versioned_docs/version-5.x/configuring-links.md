@@ -43,7 +43,7 @@ You can also pass a [`fallback`](navigation-container.md#fallback) prop to `Navi
 
 ## Mapping path to route names
 
-To handle a link, you need to translate it to a valid navigation state and vice versa. For example, the path `/rooms/chat?user=jane` may be translated to a state object like this:
+To handle a link, you need to translate it to a valid [navigation state](navigation-state.md) and vice versa. For example, the path `/rooms/chat?user=jane` may be translated to a state object like this:
 
 ```js
 const state = {
@@ -489,7 +489,7 @@ With `exact` property set to `true`, `Profile` will ignore the parent screen's `
 
 ## Omitting a screen from path
 
-Sometimes, you may not want to have the route name of a screen in the path. For example, let's say you have a `Home` screen and our navigation state looks like this:
+Sometimes, you may not want to have the route name of a screen in the path. For example, let's say you have a `Home` screen and our [navigation state](navigation-state.md) looks like this:
 
 ```js
 const state = {

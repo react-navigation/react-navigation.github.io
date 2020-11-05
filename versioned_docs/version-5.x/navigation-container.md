@@ -83,7 +83,7 @@ Unlike the `reset` method, this acts on the root navigator instead of navigator 
 
 #### `getRootState`
 
-The `getRootState` method returns the current navigation state containing the navigation states for all navigators in the navigation tree:
+The `getRootState` method returns a [navigation state](navigation-state.md) object containing the navigation states for all navigators in the navigation tree:
 
 ```js
 const state = navigationRef.current?.getRootState();
@@ -117,7 +117,7 @@ The `addListener` method lets you listen to the following events:
 
 ##### `state`
 
-The event is triggered whenever the navigation state changes in any navigator in the navigation tree:
+The event is triggered whenever the [navigation state](navigation-state.md) changes in any navigator in the navigation tree:
 
 ```js
 const unsubscribe = navigationRef.current?.addListener('state', (e) => {
@@ -177,7 +177,7 @@ See [state persistence guide](state-persistence.md) for more details on how to p
 
 > Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
 
-Function that gets called every time navigation state changes. It receives the new navigation state as the argument.
+Function that gets called every time [navigation state](navigation-state.md) changes. It receives the new navigation state as the argument.
 
 You can use it to track the focused screen, persist the navigation state etc.
 

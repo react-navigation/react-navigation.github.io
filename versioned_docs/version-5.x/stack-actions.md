@@ -10,7 +10,7 @@ The following actions are supported:
 
 ### replace
 
-The `replace` action allows to replace a route in the navigation state. It takes the following arguments:
+The `replace` action allows to replace a route in the [navigation state](navigation-state.md). It takes the following arguments:
 
 - `name` - _string_ - A destination name of the route that has been registered somewhere.
 - `params` - _object_ - Params to merge into the destination route.

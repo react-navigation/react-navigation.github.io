@@ -52,6 +52,7 @@
       "version-5.x/navigation-prop",
       "version-5.x/navigation-context",
       "version-5.x/navigation-events",
+      "version-5.x/navigation-state",
       "version-5.x/link",
       "version-5.x/devtools",
       {

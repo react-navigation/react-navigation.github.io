@@ -10,7 +10,7 @@ sidebar_label: Glossary of terms
 
 A `Navigator` is React component that decides how to render the screens you have defined. It contains `Screen` elements as its children to define the configuration for screens.
 
-`NavigationContainer` is a component which manages our navigation tree and contains the navigation state. This component must wrap all navigators structure. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
+`NavigationContainer` is a component which manages our navigation tree and contains the [navigation state](navigation-state.md). This component must wrap all navigators structure. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
 
 ```js
 function App() {
@@ -104,9 +104,11 @@ The state of a navigator generally looks something like this:
 
 For this navigation state, there are two routes (which may be tabs, or cards in a stack). The index indicates the active route, which is "B".
 
+You can read more about the navigation state [here](navigation-state.md).
+
 ## Route
 
-Each route is a piece of navigation state which contains a key to identify it, and a "name" to designate the type of route. It can also contain arbitrary params:
+Each route is an object which contains a key to identify it, and a "name" to designate the type of route. It can also contain arbitrary params:
 
 ```js
 {

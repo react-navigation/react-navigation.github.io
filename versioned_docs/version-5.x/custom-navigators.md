@@ -20,7 +20,7 @@ We include some commonly needed navigators such as:
 
 ## API for building custom navigators
 
-A navigator bundles a router and a view which takes the navigation state and decides how to render it. We export a `useNavigationBuilder` hook to build custom navigators that integrate with rest of React Navigation.
+A navigator bundles a router and a view which takes the [navigation state](navigation-state.md) and decides how to render it. We export a `useNavigationBuilder` hook to build custom navigators that integrate with rest of React Navigation.
 
 ### `useNavigationBuilder`
 
@@ -37,8 +37,8 @@ This hook allows a component to hook into React Navigation. It accepts the follo
 
 The hook returns an object with following properties:
 
-- `state` - The navigation state for the navigator. The component can take this state and decide how to render it.
-- `navigation` - The navigation object containing various helper methods for the navigator to manipulate the navigation state. This isn't the same as the navigation object for the screen and includes some helpers such as `emit` to emit events to the screens.
+- `state` - The [navigation state](navigation-state.md) for the navigator. The component can take this state and decide how to render it.
+- `navigation` - The navigation object containing various helper methods for the navigator to manipulate the [navigation state](navigation-state.md). This isn't the same as the navigation object for the screen and includes some helpers such as `emit` to emit events to the screens.
 - `descriptors` - This is an object containing descriptors for each route with the route keys as its properties. The descriptor for a route can be accessed by `descriptors[route.key]`. Each descriptor contains the following properties:
 
   - `navigation` - The navigation prop for the screen. You don't need to pass this to the screen manually. But it's useful if we're rendering components outside the screen that need to receive `navigation` prop as well, such as a header component.
