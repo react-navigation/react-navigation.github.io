@@ -890,7 +890,9 @@ import { TransitionPresets } from '@react-navigation/stack';
     gestureEnabled: true,
     cardOverlayEnabled: true,
     headerStatusBarHeight:
-      navigation.dangerouslyGetState().routes.indexOf(route) > 0
+      navigation
+        .dangerouslyGetState()
+        .routes.findIndex((r) => r.key === route.key) > 0
         ? 0
         : undefined,
     ...TransitionPresets.ModalPresentationIOS,
