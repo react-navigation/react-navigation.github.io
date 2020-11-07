@@ -232,7 +232,7 @@ When you pass the `options` to a `Screen` or `screenOptions` prop to a `Navigato
 To annotate the options, we need to import the corresponding type from the navigator. For example, `StackNavigationOptions` for `@react-navigation/stack`:
 
 ```ts
-import { StackNavigationProp } from '@react-navigation/stack';
+import { StackNavigationOptions } from '@react-navigation/stack';
 
 const options: StackNavigationOptions = {
   headerShown: false,
