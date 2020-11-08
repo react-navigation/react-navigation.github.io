@@ -192,7 +192,7 @@ navigation.navigate('Root', {
 
 It's sometimes useful to nest multiple stack navigators, for example, to have [some screens in a modal stack and some in regular stack](modal.md).
 
-When nesting multiple stacks, React Navigation will automatically hide the header from the child stack navigator in order to avoid showing duplicate headers. However, depending on the scenario, it might be more useful to show the header in the child stack navigator instead and hide the header in the parent stack navigator.
+When nesting multiple stacks, headers from both child and parent stack navigators would be shown. However, usually it's more desirable to show the header in the child stack navigator and hide the header in the parent stack navigator.
 
 To achieve this, you can hide the header in the screen containing the stack using the `headerShown: false` option.
 
@@ -225,32 +225,6 @@ function App() {
 ```
 
 A complete example can be found in the [modal guide](modal.md). However, the principle isn't only specific to modals, but any kind of nesting of stack navigators.
-
-In rare cases, you also might want to show both headers from the child and parent stack navigators. In this case, you can explicitly use `headerShown: true` on the child stack navigator to override the default behavior.
-
-For example:
-
-```js
-function Home() {
-  return (
-    <NestedStack.Navigator screenOptions={{ headerShown: true }}>
-      <NestedStack.Screen name="Profile" component={Profile} />
-      <NestedStack.Screen name="Settings" component={Settings} />
-    </NestedStack.Navigator>
-  );
-}
-
-function App() {
-  return (
-    <NavigationContainer>
-      <RootStack.Navigator>
-        <RootStack.Screen name="Home" component={Home} />
-        <RootStack.Screen name="EditPost" component={EditPost} />
-      </RootStack.Navigator>
-    </NavigationContainer>
-  );
-}
-```
 
 In these examples, we have used a stack navigator directly nested inside another stack navigator, but the same principle applies when there are other navigators in the middle, for example: stack navigator inside a tab navigator which is inside another stack navigator.
 
