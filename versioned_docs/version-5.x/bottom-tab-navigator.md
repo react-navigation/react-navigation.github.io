@@ -265,6 +265,10 @@ Title string of a tab displayed in the tab bar or a function that given `{ focus
 
 Text to show in a badge on the tab icon. Accepts a `string` or a `number`.
 
+#### `tabBarBadgeStyle`
+
+Style for the badge on the tab icon. You can specify a background color or text color here.
+
 #### `tabBarButton`
 
 Function which returns a React element to render as the tab bar button. It wraps the icon and label and implements `onPress`. Renders `TouchableWithoutFeedback` by default. `tabBarButton: props => <TouchableOpacity {...props} />` would use `TouchableOpacity` instead.

@@ -90,7 +90,21 @@ String that can be used as a fallback for `headerTitle`.
 
 #### `header`
 
-Function that given `HeaderProps` returns a React Element, to display as a header. Make sure to set `headerMode` to `screen` as well when using a custom header (see below for more details).
+
+
+Function that returns a React Element to display as a header. It accepts an object containing the following properties as the argument:
+
+- `mode` - Mode of the header - `float` or `screen`
+- `layout` - Dimensions of the screen
+- `insets` - Safe area insets to use in the header
+- `scene` - This contains 2 properties:
+  - `route` - The route object for the header
+  - `descriptor` - The descriptor containing the `navigation` prop and `options` for the screen
+- `previous` - The `scene` object of the previous screen, will be undefined if there's no previous screen
+- `navigation` prop for the header
+- `styleInterpolator` - Function which returns interpolated styles for various elements in the header.
+
+Make sure to set `headerMode` to `screen` as well when using a custom header (see below for more details).
 
 Example:
 
@@ -157,12 +171,7 @@ Note that this style is not applied to the header by default since you control t
 
 #### `headerShown`
 
-Whether to show or hide the header for the screen. The header is shown by default unless:
-
-- The `headerMode` prop on the navigator was set to `none`.
-- The screen is in a stack nested in another stack navigator's screen which has a header.
-
-Setting this to `false` hides the header. When the header is hidden in a nested stack, you can explicitly set it to `true` to show it.
+Whether to show or hide the header for the screen. The header is shown by default unless the `headerMode` prop on the navigator was set to `none`. Setting this to `false` hides the header.
 
 #### `headerTitle`
 

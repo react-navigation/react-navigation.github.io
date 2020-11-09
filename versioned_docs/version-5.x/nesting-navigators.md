@@ -92,12 +92,13 @@ const unsubscribe = navigation
 
 ### Parent navigator's UI is rendered on top of child navigator
 
-For example, when you nest a stack navigator inside a drawer navigator, you'll see that the drawer appears above the stack navigator's header. However, if you nest the drawer navigator inside a stack, the drawer will appear below the header. This is an important point to consider when deciding how to nest your navigators.
+For example, when you nest a stack navigator inside a drawer navigator, you'll see that the drawer appears above the stack navigator's header. However, if you nest the drawer navigator inside a stack, the drawer will appear below the header of the stack. This is an important point to consider when deciding how to nest your navigators.
 
 In your app, you will probably use these patterns depending on the behavior you want:
 
-- Stack navigators nested inside each screen of drawer navigator - The drawer appears over the header from the stack.
 - Tab navigator nested inside the initial screen of stack navigator - New screens cover the tab bar when you push them.
+- Drawer navigator nested inside the initial screen of stack navigator with the initial screen's stack header hidden - The drawer can only be opened from the first screen of the stack.
+- Stack navigators nested inside each screen of drawer navigator - The drawer appears over the header from the stack.
 - Stack navigators nested inside each screen of tab navigator - The tab bar is always visible. Usually pressing the tab again also pops the stack to top.
 
 ## Navigating to a screen in a nested navigator
@@ -192,9 +193,9 @@ navigation.navigate('Root', {
 
 It's sometimes useful to nest multiple stack navigators, for example, to have [some screens in a modal stack and some in regular stack](modal.md).
 
-When nesting multiple stacks, headers from both child and parent stack navigators would be shown. However, usually it's more desirable to show the header in the child stack navigator and hide the header in the parent stack navigator.
+When nesting multiple stacks or drawers, headers from both child and parent navigators would be shown. However, usually it's more desirable to show the header in the child navigator and hide the header in the stack navigator.
 
-To achieve this, you can hide the header in the screen containing the stack using the `headerShown: false` option.
+To achieve this, you can hide the header in the screen containing the navigator using the `headerShown: false` option.
 
 For example:
 

@@ -370,6 +370,96 @@ Swipe gesture is not supported on Web.
 
 Whether you can use gestures to open or close the drawer. Setting this to `false` disables swipe gestures as well as tap on overlay to close. See `swipeEnabled` to disable only the swipe gesture.
 
+#### `header`
+
+Function that returns a React Element to display as a header. It accepts an object containing the following properties as the argument:
+
+- `layout` - Dimensions of the screen
+- `scene` - This contains 2 properties:
+  - `route` - The route object for the header
+  - `descriptor` - The descriptor containing the `navigation` prop and `options` for the screen
+
+Example:
+
+```js
+header: ({ scene }) => {
+  const { options } = scene.descriptor;
+  const title =
+    options.headerTitle !== undefined
+      ? options.headerTitle
+      : options.title !== undefined
+      ? options.title
+      : scene.route.name;
+
+  return (
+    <MyHeader
+      title={title}
+      leftButton={
+        <DrawerToggleButton
+          onPress={scene.descriptor.navigation.toggleDrawer}
+        />
+      }
+      style={options.headerStyle}
+    />
+  );
+};
+```
+
+To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
+
+#### `headerShown`
+
+Whether to show or hide the header for the screen. The header is shown by default. Setting this to `false` hides the header.
+
+#### `headerTitle`
+
+String or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is specified, it receives an object containing `allowFontScaling`, `style` and `children` properties. The `children` property contains the title string.
+
+#### `headerTitleAlign`
+
+How to align the header title. Possible values:
+
+- `left`
+- `center`
+
+Defaults to `center` on iOS and `left` on Android.
+
+#### `headerTitleAllowFontScaling`
+
+Whether header title font should scale to respect Text Size accessibility settings. Defaults to false.
+
+#### `headerTitleStyle`
+
+Style object for the header title component.
+
+#### `headerLeft`
+
+Function which returns a React Element to display on the left side of the header. By default, a button to toggle the drawer is shown.
+
+#### `headerLeftAccessibilityLabel`
+
+Accessibility label for the header left button.
+
+#### `headerRight`
+
+Function which returns a React Element to display on the right side of the header.
+
+#### `headerPressColorAndroid`
+
+Color for material ripple (Android >= 5.0 only).
+
+#### `headerTintColor`
+
+Tint color for the header.
+
+#### `headerStyle`
+
+Style object for the header. You can specify a custom background color here, for example.
+
+#### `headerStatusBarHeight`
+
+Extra padding to add at the top of header to account for translucent status bar. By default, it uses the top value from the safe area insets of the device. Pass 0 or a custom value to disable the default behavior, and customize the height.
+
 #### `unmountOnBlur`
 
 Whether this screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
