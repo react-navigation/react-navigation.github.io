@@ -10,6 +10,7 @@ It's a JavaScript object which looks like this:
 
 ```js
 const state = {
+  type: 'stack',
   key: 'stack-1',
   routeNames: ['Home', 'Profile', 'Settings'],
   routes: [
@@ -23,11 +24,12 @@ const state = {
 
 There are few properties present in every navigation state object:
 
+- `type` - Type of the navigator that the state belongs to, e.g. `stack`, `tab`, `drawer`.
 - `key` - Unique key to identify the navigator.
 - `routeName` - Name of the screens defined in the navigator. This is an unique array containing strings for each screen.
-- `routes` - List of route objects (screens) which are rendered in the navigator. It also represents the history in a stack navigator.
+- `routes` - List of route objects (screens) which are rendered in the navigator. It also represents the history in a stack navigator. There should be at least one item present in this array.
 - `index` - Index of the focused route object in the `routes` array.
-- `history` - A list of visited items. This is an optional property and not present in all navigators. For example, it's only present in tab and drawer navigators in the core. The shape of the items in the `history` array can vary depending on the navigator.
+- `history` - A list of visited items. This is an optional property and not present in all navigators. For example, it's only present in tab and drawer navigators in the core. The shape of the items in the `history` array can vary depending on the navigator. There should be at least one item present in this array.
 - `stale` - A navigation state is assumed to be stale unless the `stale` property is explicitly set to `false`. This means that the state object needs to be ["rehydrated"](#partial-state-objects).
 
 Each route object in a `routes` array may contain the following properties:
@@ -41,6 +43,7 @@ For example, a stack navigator containing a tab navigator nested inside it's hom
 
 ```js
 const state = {
+  type: 'stack',
   key: 'stack-1',
   routeNames: ['Home', 'Profile', 'Settings'],
   routes: [
@@ -82,6 +85,7 @@ After rehydration, it'll look something like this:
 
 ```js
 const state = {
+  type: 'stack',
   key: 'stack-1',
   routeNames: ['Home', 'Profile', 'Settings'],
   routes: [
@@ -96,5 +100,7 @@ const state = {
 Here, React Navigation filled in the missing bits such as keys, route names, index etc.
 
 It's also possible to provide invalid data such as non-existent screens and it'll be fixed automatically. While it's not recommended to write code with invalid state objects, it can be super useful if you do things like [state persistence](state-persistence.md), where the configured screens might have changed after an update, which could cause problems if React Navigation didn't fix the state object automatically.
+
+> If you want React Navigation to fix invalid state, you need to make sure that you don't have `stale: false` in the state object. State objects with `stale: false` are assumed to be valid state objects and React Navigation won't attempt to fix them.
 
 When you're providing a state object in [`initialState`](navigation-container.md#initial-state), React Navigation will always assume that it's a stale state object, which makes sure that things like state persistence work smoothly without extra manipulation of the state object.
