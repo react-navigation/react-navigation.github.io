@@ -7,7 +7,7 @@ author_image_url: https://avatars0.githubusercontent.com/u/90494?s=200&v=4
 tags: [release, announcement]
 ---
 
-The documentation is now live at https://reactnavigation.org, and v1 lives [here](/docs/en/1.x/getting-started.html).
+The documentation is now live at https://reactnavigation.org, and v1 lives [here](/docs/1.x/getting-started).
 
 <!--truncate-->
 
@@ -19,7 +19,7 @@ The following changes are considered “significant” because they can’t be f
 
 In 1.x, `navigate(routeName)` and `push(routeName)` were very similar: every time you called `navigate(routeName)` it would push a new route to the stack. Now `navigate(routeName)` will first try to find an existing instance of the route and jump to that if it exists, otherwise it will push the route to the stack.
 
-To update your app for this change you may need to change `navigate` to `push` in places where you would like to push a new route every time. Alternatively, you could consider using a `key`: `navigate({routeName: ‘MyRoute’, key: data.uniqueId, params: data})`. [Read more about navigation with keys](/docs/en/navigation-key.html).
+To update your app for this change you may need to change `navigate` to `push` in places where you would like to push a new route every time. Alternatively, you could consider using a `key`: `navigate({routeName: ‘MyRoute’, key: data.uniqueId, params: data})`. [Read more about navigation with keys](/docs/2.x/navigation-key).
 
 Read more about this in [RFC 4](https://github.com/react-navigation/rfcs/blob/master/text/0004-less-pushy-navigate.md) and [commit 7a978b1](https://github.com/react-navigation/react-navigation/commit/7a978b1087ff3acc7dd71267bd900d15c932d7cc).
 
@@ -35,7 +35,7 @@ Read about this in [RFC 4](https://github.com/react-navigation/rfcs/blob/master/
 
 A common source of confusion for developers working with React Navigation has been around `navigationOptions` resolution. For example, if you have a stack navigator with a header, and a drawer inside of that stack, then in some circumstances the title of the stack would change every time you change screens in the drawer. This is because the stack navigator would crawl into child navigators and pull `navigationOptions` off of the deepest active screen. As of 2.0, this no longer happens: navigators will only look at their direct children for `navigationOptions`.
 
-Read more about the justification for this in [RFC 5](https://github.com/react-navigation/rfcs/blob/master/text/0005-shallow-navigation-options.md). Also see the new documentation page [Navigation options resolution](https://reactnavigation.org/docs/en/navigation-options-resolution.html) to learn more.
+Read more about the justification for this in [RFC 5](https://github.com/react-navigation/rfcs/blob/master/text/0005-shallow-navigation-options.md). Also see the new documentation page [Navigation options resolution](/docs/2.x/navigation-options-resolution) to learn more.
 
 ### New API for creating navigators
 
@@ -43,7 +43,7 @@ It is now easier to create and maintain custom navigators. The new `createNaviga
 
 Custom navigators can now provide actions helpers for their screens. For example, the new drawer navigator now allows `props.navigation.openDrawer()` within its screen components.
 
-This does not impact most users - you won't need to make any changes for this unless you use custom navigators in your app. Read more about the changes in [RFC 2](https://github.com/react-navigation/rfcs/blob/master/text/0002-navigator-view-api.md). Also read the [custom navigators documentation](/docs/en/custom-navigators.html). You can also watch the ["Creating a navigator" section in this talk](https://youtu.be/wJJZ9Od8MjM?t=1215) to learn more.
+This does not impact most users - you won't need to make any changes for this unless you use custom navigators in your app. Read more about the changes in [RFC 2](https://github.com/react-navigation/rfcs/blob/master/text/0002-navigator-view-api.md). Also read the [custom navigators documentation](/docs/2.x/custom-navigators). You can also watch the ["Creating a navigator" section in this talk](https://youtu.be/wJJZ9Od8MjM?t=1215) to learn more.
 
 ## Trivial breaking changes
 

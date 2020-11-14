@@ -26,7 +26,7 @@ function App() {
 
 ## Router
 
-A router is a collection of functions that decide how to handle actions and state changes in the navigator (similar to reducers in Redux apps). Normally you'd never need to interact with a router directly, unless you're writing a [custom navigator](custom-navigator.md).
+A router is a collection of functions that decide how to handle actions and state changes in the navigator (similar to reducers in Redux apps). Normally you'd never need to interact with a router directly, unless you're writing a [custom navigator](custom-navigators.md).
 
 ## Screen component
 

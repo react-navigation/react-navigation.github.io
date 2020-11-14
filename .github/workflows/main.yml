@@ -1,4 +1,4 @@
-name: CI
+name: Deploy
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy to Github Pages
     runs-on: ubuntu-latest
 
     steps:

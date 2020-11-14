@@ -26,7 +26,7 @@ module.exports = {
     algolia: {
       apiKey: '2378e3838ac984c220a994bfc0e0420f',
       indexName: 'react-navigation',
-      algoliaOptions: {}
+      algoliaOptions: {},
     },
     navbar: {
       title: 'React Navigation',
@@ -34,7 +34,7 @@ module.exports = {
         alt: 'React Navigation Logo',
         src: 'img/spiro.svg',
       },
-      links: [
+      items: [
         { to: 'docs/getting-started', label: 'Docs', position: 'left' },
         { to: 'blog', label: 'Blog', position: 'left' },
         {
@@ -47,8 +47,15 @@ module.exports = {
           label: 'Help',
         },
         {
-          to: 'versions',
-          label: 'Versions',
+          type: 'docsVersionDropdown',
+          position: 'left',
+          dropdownActiveClassDisabled: true,
+          dropdownItemsAfter: [
+            {
+              to: '/versions',
+              label: 'All versions',
+            },
+          ],
         },
       ],
     },
@@ -134,7 +141,6 @@ module.exports = {
   },
   plugins: [
     path.resolve(__dirname, './src/plugins/docusaurus-plugin-redirect-html'),
-    '@docusaurus/plugin-google-analytics',
   ],
   presets: [
     [
@@ -147,6 +153,8 @@ module.exports = {
           editUrl:
             'https://github.com/react-navigation/react-navigation.github.io/edit/main/',
           remarkPlugins: [require('./src/plugins/remark-npm2yarn')],
+          includeCurrentVersion: false,
+          lastVersion: '5.x',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

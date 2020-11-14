@@ -205,8 +205,8 @@ The following configuration options have been removed or moved:
 - `headerLayoutPreset` - moved to `navigationOptions` as `headerTitleAlign`
 - `onTransitionStart` - moved to `navigationOptions`
 - `onTransitionEnd` - moved to `navigationOptions`
-- `headerTransitionPreset` - removed in favor of [new APIs for animations](https://reactnavigation.org/docs/en/stack-navigator.html#animations) in `navigationOptions`
-- `transitionConfig` - removed in favor of [new APIs for animations](https://reactnavigation.org/docs/en/stack-navigator.html#animations) in `navigationOptions`
+- `headerTransitionPreset` - removed in favor of [new APIs for animations](stack-navigator.md#animations) in `navigationOptions`
+- `transitionConfig` - removed in favor of [new APIs for animations](stack-navigator.md#animations) in `navigationOptions`
 
 ##### `navigationOptions`
 
@@ -236,7 +236,7 @@ The following `navigationOptions` have been added:
 - `onTransitionStart`
 - `onTransitionEnd`
 
-You can find more details about these options in the [documentation](https://reactnavigation.org/docs/en/stack-navigator.html#navigationoptions-for-screens-inside-of-the-navigator).
+You can find more details about these options in the [documentation](stack-navigator.md#navigationoptions-for-screens-inside-of-the-navigator).
 
 ##### Library exports
 

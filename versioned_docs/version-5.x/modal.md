@@ -10,8 +10,6 @@ A modal displays content that temporarily blocks interactions with the main view
 
 A modal is like a popup &mdash; it's not part of your primary navigation flow &mdash; it usually has a different transition, a different way to dismiss it, and is intended to focus on one particular piece of content or interaction.
 
-<!-- Often these modals don't take up the entire screen (you can read more about that in the [Partial overlays section](partial-overlay.md)), but in this case we'll talk about modals that take up the user's entire screen. -->
-
 The purpose of explaining this as part of the React Navigation fundamentals is not only because this is a common use case, but also because the implementation requires knowledge of [nesting navigators](nesting-navigators.md), which is an important part of React Navigation.
 
 ## Creating a modal stack

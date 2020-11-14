@@ -621,7 +621,7 @@ Stack Navigator exposes various options to configure the transition animation wh
   - `layouts` - Layout measurements for various items we use for animation.
     - `screen` - Layout of the whole screen. Contains `height` and `width` properties.
 
-  > **Note that when a screen is not the last, it will use the next screen's transition config.** This is because many transitions involve an animation of the previous screen, and so these two transitions need to be kept together to prevent running two different kinds of transitions on the two screens (for example a slide and a modal). You can check the `next` parameter to find out if you want to animate out the previous screen. For more information about this parameter, see [Animation](/docs/stack-navigator#animations) section.
+  > **Note that when a screen is not the last, it will use the next screen's transition config.** This is because many transitions involve an animation of the previous screen, and so these two transitions need to be kept together to prevent running two different kinds of transitions on the two screens (for example a slide and a modal). You can check the `next` parameter to find out if you want to animate out the previous screen. For more information about this parameter, see [Animation](stack-navigator.md#animations) section.
 
   A config which just fades the screen looks like this:
 

@@ -14,7 +14,7 @@ sidebar_label: NavigationEvents
 * `onWillBlur` - event listener
 * `onDidBlur` - event listener
 
-The event listener is the same as the imperative [`navigation.addListener(...)`](navigation-prop.html#addlistener-subscribe-to-updates-to-navigation-lifecycle) API.
+The event listener is the same as the imperative [`navigation.addListener(...)`](navigation-prop.md#addlistener-subscribe-to-updates-to-navigation-lifecycle) API.
 
 ### Example
 
@@ -31,7 +31,7 @@ const MyScreen = () => (
       onWillBlur={payload => console.log('will blur',payload)}
       onDidBlur={payload => console.log('did blur',payload)}
     />
-    {/* 
+    {/*
       Your view code
     */}
   </View>

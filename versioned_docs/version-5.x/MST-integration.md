@@ -63,7 +63,7 @@ export const NavigationStore = types
   }));
 ```
 
-Note that `userProfileScreenParams` is a simple model with a `user` entry, while `productDetailScreenParams` is a map of `ProductDetailScreenParams` model. The reason we chose this shape of data is that we only have a single user profile screen in our app which reads its params from `userProfileScreenParams`. `productDetailScreenParams` is a map because the app can have several product screens on a stack. Each screen points to a `Product` instance saved in the map. The keys into the map are the React Navigation [keys](navigation-key.md#usage-with-the-navigate-navigation-actionshtml-navigate-call): think of the `key` as of an identifier of the route.
+Note that `userProfileScreenParams` is a simple model with a `user` entry, while `productDetailScreenParams` is a map of `ProductDetailScreenParams` model. The reason we chose this shape of data is that we only have a single user profile screen in our app which reads its params from `userProfileScreenParams`. `productDetailScreenParams` is a map because the app can have several product screens on a stack. Each screen points to a `Product` instance saved in the map. The keys into the map are the React Navigation [keys](navigation-state.md): think of the `key` as of an identifier of the route.
 
 Your navigation store may also be just one map where for each screen (regardless if it is a product or user profile screen), we store its navigation params. This is the approach taken in the [sample app](https://github.com/vonovak/react-navigation-mst-demo).
 

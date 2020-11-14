@@ -8,21 +8,37 @@ Want to help improve React Navigation? Your help would be greatly appreciated!
 
 Here are some of the ways to contribute to the project:
 
-- [Reporting Bugs](#reporting-bugs)
-- [Improving the Documentation](#improving-the-documentation)
-- [Responding to Issues](#responding-to-issues)
-- [Bug Fixes](#bug-fixes)
-- [Suggesting a Feature](#suggesting-a-feature)
-- [Big Pull Requests](#big-pull-requests)
+- [Contributing](#contributing)
+  - [Reporting Bugs](#reporting-bugs)
+  - [Improving the Documentation](#improving-the-documentation)
+  - [Responding to Issues](#responding-to-issues)
+  - [Bug Fixes](#bug-fixes)
+  - [Suggesting a Feature](#suggesting-a-feature)
+  - [Big Pull Requests](#big-pull-requests)
+- [Information](#information)
+  - [Issue Template](#issue-template)
+  - [Pull Request Template](#pull-request-template)
+  - [Forking the Repository](#forking-the-repository)
+  - [Code Review Guidelines](#code-review-guidelines)
+  - [Run the Example App](#run-the-example-app)
+  - [Run Tests](#run-tests)
 
 And here are a few helpful resources to aid in getting started:
 
-- [Issue Template](#issue-template)
-- [Pull Request Template](#pull-request-template)
-- [Forking the Repository](#forking-the-repository)
-- [Code Review Guidelines](#code-review-guidelines)
-- [Run the Example App](#run-the-example-app)
-- [Run Tests](#run-tests)
+- [Contributing](#contributing)
+  - [Reporting Bugs](#reporting-bugs)
+  - [Improving the Documentation](#improving-the-documentation)
+  - [Responding to Issues](#responding-to-issues)
+  - [Bug Fixes](#bug-fixes)
+  - [Suggesting a Feature](#suggesting-a-feature)
+  - [Big Pull Requests](#big-pull-requests)
+- [Information](#information)
+  - [Issue Template](#issue-template)
+  - [Pull Request Template](#pull-request-template)
+  - [Forking the Repository](#forking-the-repository)
+  - [Code Review Guidelines](#code-review-guidelines)
+  - [Run the Example App](#run-the-example-app)
+  - [Run Tests](#run-tests)
 
 ## Contributing
 
@@ -134,7 +150,7 @@ yarn typescript --watch
 
 The [example app](https://github.com/react-navigation/react-navigation/tree/main/packages/example) includes a variety of patterns and is used as a simple way for contributors to manually integration test changes.
 
-While developing, you can run the [example app](/example/) with [Expo](https://expo.io/) to test your changes:
+While developing, you can run the [example app](https://github.com/react-navigation/react-navigation/tree/main/example) with [Expo](https://expo.io/) to test your changes:
 
 ```sh
 yarn example start

@@ -4,7 +4,7 @@ title: navigation-options
 sidebar_label: Configuring Navigation Options
 ---
 
-Each screen can configure various aspects about how it gets presented in parent navigators. You can configure 
+Each screen can configure various aspects about how it gets presented in parent navigators. You can configure
 
 **Static configuration:** Each navigation option can either be directly assigned:
 
@@ -21,7 +21,7 @@ class MyScreen extends React.Component {
 Or, the options can be a function that takes the following arguments, and returns an object of navigation options that will override the route-defined and navigator-defined navigationOptions.
 
 - `props` - The same props that are available to the screen component
-  - `navigation` - The [navigation prop](/docs/navigators/navigation-prop) for the screen, with the screen's route at `navigation.state`
+  - `navigation` - The [navigation prop](navigation-prop.md) for the screen, with the screen's route at `navigation.state`
   - `screenProps` - The props passing from above the navigator component
   - `navigationOptions` - The default or previous options that would be used if new values are not provided
 
@@ -100,6 +100,6 @@ class ProfileScreen extends React.Component {
 List of available navigation options depends on the `navigator` the screen is added to.
 
 Check available options for:
-- [`drawer navigator`](/docs/navigators/drawer#screen-navigation-options)
-- [`stack navigator`](/docs/navigators/stack#screen-navigation-options)
-- [`tab navigator`](/docs/navigators/tab#screen-navigation-options)
+- [`drawer navigator`](drawer-navigator.md#screen-navigation-options)
+- [`stack navigator`](stack-navigator.md#screen-navigation-options)
+- [`tab navigator`](tab-navigator.md#screen-navigation-options)

@@ -1,0 +1,30 @@
+name: Build
+
+on: [pull_request]
+
+jobs:
+  deploy:
+    name: Build pages
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Use Node.js 10
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+
+    - name: Restore yarn cache
+      id: yarn-cache
+      uses: actions/cache@master
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+    - name: Install dependencies
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      run: yarn install --frozen-lockfile
+
+    - name: Build pages
+      run: yarn build

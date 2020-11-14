@@ -7,7 +7,7 @@ author_image_url: https://avatars0.githubusercontent.com/u/90494?s=200&v=4
 tags: [release, announcement]
 ---
 
-The documentation is now live at https://reactnavigation.org, and v2 lives [here](/docs/en/2.x/getting-started.html).
+The documentation is now live at https://reactnavigation.org, and v2 lives [here](/docs/2.x/getting-started).
 
 This is the first release where React Navigation depends on a native module outside of React Native core: it now depends on react-native-gesture-handler. This library provides an excellent set of primitives for leveraging the operating systems’ native gesture APIs and has enabled us to fix a variety of issues with stack and drawer navigators. React Navigation also depends on react-native-screens, but you don’t need to install the native module if you prefer not to use it (we have a blog post coming soon that will explain what react-native-screens is and why you may want to use it, or you can watch [this talk](https://www.youtube.com/watch?v=Z0Jl1KCWiag) by the author of the library).
 

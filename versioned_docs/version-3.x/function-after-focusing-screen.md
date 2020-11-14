@@ -46,7 +46,7 @@ class TabScreen extends Component {
 export default withNavigationFocus(TabScreen);
 ```
 
-This example is also documented in the <a href="/docs/en/with-navigation-focus.html">`withNavigationFocus` API documentation</a>.
+This example is also documented in the [`withNavigationFocus` API documentation](with-navigation-focus.md).
 
 ## Triggering an action with a `'didFocus'` event listener
 

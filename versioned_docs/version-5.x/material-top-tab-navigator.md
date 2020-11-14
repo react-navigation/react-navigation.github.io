@@ -41,7 +41,7 @@ function MyTabs() {
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/tab-based-navigation.html)
+> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
 
 ### Props
 

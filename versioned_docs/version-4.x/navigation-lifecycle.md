@@ -20,7 +20,7 @@ When going back from `B` to `A`, `componentWillUnmount` of `B` is called, but `c
 
 Now that we understand how React lifecycle methods work in React Navigation, let's answer the question we asked at the beginning: "How do we find out that a user is leaving it or coming back to it?"
 
-React Navigation emits events to screen components that subscribe to them. There are four different events that you can subscribe to: `willFocus`, `willBlur`, `didFocus` and `didBlur`. Read more about them in the [API reference](navigation-prop.html#addlistener-subscribe-to-updates-to-navigation-lifecycle).
+React Navigation emits events to screen components that subscribe to them. There are four different events that you can subscribe to: `willFocus`, `willBlur`, `didFocus` and `didBlur`. Read more about them in the [API reference](navigation-prop.md#addlistener-subscribe-to-updates-to-navigation-lifecycle).
 
 Many of your use cases may be covered with the [`withNavigationFocus` higher-order-component](with-navigation-focus.md), the [`<NavigationEvents />` component](navigation-events.md), or the [useFocusState hook](https://github.com/react-navigation/hooks#usefocusstate).
 

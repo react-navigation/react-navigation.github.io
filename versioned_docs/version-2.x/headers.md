@@ -197,11 +197,11 @@ class HomeScreen extends React.Component {
 
 ## Additional configuration
 
-You can read the full list of available `navigationOptions` for screens inside of a stack navigator in the [`createStackNavigator` reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
+You can read the full list of available `navigationOptions` for screens inside of a stack navigator in the [`createStackNavigator` reference](stack-navigator.md#navigationoptions-used-by-stacknavigator).
 
 ## Summary
 
-- You can customize the header inside of the `navigationOptions` static property on your screen components. Read the full list of options [in the API reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
+- You can customize the header inside of the `navigationOptions` static property on your screen components. Read the full list of options [in the API reference](stack-navigator.md#navigationoptions-used-by-stacknavigator).
 - The `navigationOptions` static property can be an object or a function. When it is a function, it is provided with an object with the `navigation` prop, `screenProps`, and `navigationOptions` on it.
 - You can also specify shared `navigationOptions` in the stack navigator configuration when you initialize it. The static property takes precedence over that configuration.
 - [Full source of what we have built so far](https://snack.expo.io/@react-navigation/custom-header-title-component-v2).

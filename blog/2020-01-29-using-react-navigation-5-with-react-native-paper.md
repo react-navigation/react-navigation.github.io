@@ -81,7 +81,7 @@ export default function App() {
 
 The **PaperProvider** provides the theme to all the components in the framework. It also acts as a portal to components that need to be rendered at the top level. Check the full [Getting-Started](https://callstack.github.io/react-native-paper/getting-started.html) page for more information.
 
-React Navigation setup looks similar. There is a component called **NavigationContainer** which manages our navigation tree and contains the navigation state. It must wrap all navigator structure. We will render this component in **App.tsx** inside a **PaperProvider**. More information can be found in the official [documentation](https://reactnavigation.org/docs/en/hello-react-navigation.html).
+React Navigation setup looks similar. There is a component called **NavigationContainer** which manages our navigation tree and contains the navigation state. It must wrap all navigator structure. We will render this component in **App.tsx** inside a **PaperProvider**. More information can be found in the official [documentation](/docs/hello-react-navigation).
 
 ```jsx
 import React from 'react';
@@ -456,7 +456,7 @@ function onTweetPress() {
 
 The implementation of `Feed` and `Details` components is quite big and complex, that's why I am not gonna post it here. Please make sure to check it out on [github repo](https://github.com/Trancever/twitterClone)
 
-We have covered only the basics of navigating between screens. If you want to learn more details check the official [documentation](https://reactnavigation.org/docs/en/navigating.html).
+We have covered only the basics of navigating between screens. If you want to learn more details check the official [documentation](/docs/navigating).
 
 Now, let's see what does the app looks like with Stack Navigator and Paper's Appbar.
 
@@ -673,7 +673,7 @@ export const BottomTabs = () => {
 
 In the last step we will add ability to show different icon depending on the active tab.
 
-We will take an advantage of our `BottomTabs` component being one of a Stack's screen. It means it has an access to the `route` object that is passed to each screen as a prop. This object contains an information about current screen which means we can access it and conditionally render proper icon. This is not a very common pattern and it can be confusing at first, so make sure to read the whole [guide](https://reactnavigation.org/docs/en/screen-options-resolution.html) on how to use it and what can be achieved by using it.
+We will take an advantage of our `BottomTabs` component being one of a Stack's screen. It means it has an access to the `route` object that is passed to each screen as a prop. This object contains an information about current screen which means we can access it and conditionally render proper icon. This is not a very common pattern and it can be confusing at first, so make sure to read the whole [guide](/docs/screen-options-resolution) on how to use it and what can be achieved by using it.
 
 ```jsx
 import React from 'react';
@@ -842,7 +842,7 @@ If code for themes merging looks complex, you can use a [deepmerge](https://www.
 
 #### Custom themes
 
-Of course, the built-in themes are not the only themes we can apply. Both libraries allow full customization and you can learn about it in the official documentation ([React Navigation](https://reactnavigation.org/docs/en/themes.html), [React Native Paper](https://callstack.github.io/react-native-paper/theming.html))
+Of course, the built-in themes are not the only themes we can apply. Both libraries allow full customization and you can learn about it in the official documentation ([React Navigation](/docs/themes), [React Native Paper](https://callstack.github.io/react-native-paper/theming.html))
 
 In the last step, I want to show you how to change the theme dynamically. We will implement a switch in a drawer that will allow users choosing light or dark theme.
 

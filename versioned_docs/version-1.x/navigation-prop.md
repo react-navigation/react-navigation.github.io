@@ -65,7 +65,7 @@ class HomeScreen extends React.Component {
 
 Optionally provide a key, which specifies the route to go back from. By default, `goBack` will close the route that it is called from. If the goal is to go back _anywhere_, without specifying what is getting closed, call `.goBack(null);` Note that the `null` parameter is useful in the case of nested `StackNavigators` to go back on a parent navigator when the child navigator already has only one item in the stack. Don't be concerned if this is confusing, this API needs some work.
 
-Note -- a key is not the name of the route but the unique identifier you provided when navigating to the route. 
+Note -- a key is not the name of the route but the unique identifier you provided when navigating to the route.
 
 ```js
 class HomeScreen extends React.Component {
@@ -146,7 +146,7 @@ Returns `true` if the screen is focused and `false` otherwise.
 let isFocused = this.props.navigation.isFocused();
 ```
 
-You probably want to use [withNavigationFocus]() instead of using this directly, it will pass in an `isFocused` boolean a prop to your component.
+You probably want to use [withNavigationFocus](with-navigation-focus.md) instead of using this directly, it will pass in an `isFocused` boolean a prop to your component.
 
 ### `state` - The screen's current state/route
 

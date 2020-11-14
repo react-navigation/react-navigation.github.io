@@ -6,7 +6,7 @@ sidebar_label: createBottomTabNavigator
 
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 
-> For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/en/tab-based-navigation.html)
+> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
 
 ```js
 createBottomTabNavigator(RouteConfigs, BottomTabNavigatorConfig);
@@ -15,7 +15,7 @@ createBottomTabNavigator(RouteConfigs, BottomTabNavigatorConfig);
 ## RouteConfigs
 
 
-The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.html#routeconfigs) from stack navigator.
+The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.md#routeconfigs) from stack navigator.
 
 ## BottomTabNavigatorConfig
 

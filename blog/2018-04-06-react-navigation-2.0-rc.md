@@ -27,7 +27,7 @@ This blog post is not a comprehensive changelog - that will come with the 2.0 pr
 
 In 1.x, `navigate(routeName)` and `push(routeName)` were very similar: every time you called `navigate(routeName)` it would push a new route to the stack, regardless. Now `navigate(routeName)` will first try to find an existing instance of the route and jump to that if it exists, otherwise it will push the route to the stack.
 
-To update your app for this change you may need to change `navigate` to `push` in places where you would like to push a new route every time. Alternatively, you could consider using a `key`: `navigate({routeName: ‘MyRoute’, key: data.uniqueId, params: data})`. [Read more about navigation with keys](/docs/en/navigation-key.html).
+To update your app for this change you may need to change `navigate` to `push` in places where you would like to push a new route every time. Alternatively, you could consider using a `key`: `navigate({routeName: ‘MyRoute’, key: data.uniqueId, params: data})`. [Read more about navigation with keys](/docs/2.x/navigation-key).
 
 Read more about this in [RFC 4](https://github.com/react-navigation/rfcs/blob/master/text/0004-less-pushy-navigate.md).
 
@@ -43,7 +43,7 @@ A common source of confusion for developers working with React Navigation has be
 
 ### New API for creating navigators
 
-This does not impact most users, but if you have any custom navigators in your app, read on. Read more about the changes in [RFC 2](https://github.com/react-navigation/rfcs/blob/master/text/0002-navigator-view-api.md). Also read the [custom navigators documentation](https://reactnavigation.org/docs/en/custom-navigators.html).
+This does not impact most users, but if you have any custom navigators in your app, read on. Read more about the changes in [RFC 2](https://github.com/react-navigation/rfcs/blob/master/text/0002-navigator-view-api.md). Also read the [custom navigators documentation](/docs/2.x/custom-navigators).
 
 ### Drawer routes have been replaced with actions
 
@@ -76,6 +76,6 @@ This change was made to improve the ease of learning and understanding the libra
 
 ## New feature highlights
 
-- State persistence - automatically save state and reload it when the app restarts. See https://reactnavigation.org/docs/en/state-persistence.html
+- State persistence - automatically save state and reload it when the app restarts. See [state persistence docs](docs/state-persistence)
 - Transitions between screens in stack with headers and without headers now animates as expected on iOS. https://github.com/react-navigation/react-navigation/pull/3821. Thanks [skevy](https://github.com/skevy)!
 - As mentioned above, `createMaterialBottomNavigator` is a new navigator type that provides the material design bottom tab bar pattern.

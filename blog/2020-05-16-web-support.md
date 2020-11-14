@@ -59,9 +59,9 @@ function App() {
 }
 ```
 
-We have a [playground](https://reactnavigation.org/docs/configuring-links/#playground) where you can try custom configurations and see how it's parsed. Give it a try, and we hope it'll make it easier for you to configure links in your apps.
+We have a [playground](/docs/configuring-links/#playground) where you can try custom configurations and see how it's parsed. Give it a try, and we hope it'll make it easier for you to configure links in your apps.
 
-There's a new [`<Link />` component](https://reactnavigation.org/docs/link) which lets you use URLs for navigation in the app.
+There's a new [`<Link />` component](/docs/link) which lets you use URLs for navigation in the app.
 
 Example:
 
@@ -93,7 +93,7 @@ We've also disabled animations on the web by default since they are not commonly
 
 Phones have small screens, so it's important to maximize the use of available screen size. One of the ways mobile browsers achieve it is by hiding and showing the address bar when scrolling to give more vertical space to the content.
 
-It's especially important in case of the [stack navigator](https://reactnavigation.org/docs/stack-navigator) because not only we have the browser's address bar, but also the header at the top which is taking vertical space. Now we'll automatically adjust the styles of the stack navigator to get this behavior without you having to write any special code.
+It's especially important in case of the [stack navigator](/docs/stack-navigator) because not only we have the browser's address bar, but also the header at the top which is taking vertical space. Now we'll automatically adjust the styles of the stack navigator to get this behavior without you having to write any special code.
 
 <video playsInline autoPlay muted loop style={{ maxWidth: '100%' }}>
   <source src="/assets/blog/web-support/hide-addressbar.mp4" type="video/mp4" />
@@ -101,7 +101,7 @@ It's especially important in case of the [stack navigator](https://reactnavigati
 
 ### Permanent drawer
 
-Another way we can make maximum us of the available screen size is by making our UIs adapt to different screen sizes. For example, we may want to show a sidebar for navigation on large screens while switching to a drawer on smaller screens. You can now specify `drawerType` as `permanent` to show an always visible sidebar. See the [documentation for `drawerType`](https://reactnavigation.org/docs/drawer-navigator#drawertype) for example code on how to achieve it.
+Another way we can make maximum us of the available screen size is by making our UIs adapt to different screen sizes. For example, we may want to show a sidebar for navigation on large screens while switching to a drawer on smaller screens. You can now specify `drawerType` as `permanent` to show an always visible sidebar. See the [documentation for `drawerType`](/docs/drawer-navigator#drawertype) for example code on how to achieve it.
 
 <video playsInline autoPlay muted loop style={{ maxWidth: '100%' }}>
   <source src="/assets/blog/web-support/permanent-drawer.mp4" type="video/mp4" />
@@ -113,4 +113,4 @@ Special thanks to [Noemi](https://twitter.com/noemi_rozpara) for implementing th
 
 This is just a start. We still need to figure out many things, such as SSR, handling of 404 etc. There is still a lot to do, but we’re excited to announce it and looking forward to feedback and bug reports.
 
-Take a look at the [documentation](https://reactnavigation.org/docs/web-support) to give it a try and let us know what you think. You can also [check the example app](https://react-navigation-example.netlify.app/) to see a live demo of web support.
+Take a look at the [documentation](/docs/web-support) to give it a try and let us know what you think. You can also [check the example app](https://react-navigation-example.netlify.app/) to see a live demo of web support.
