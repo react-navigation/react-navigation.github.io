@@ -388,7 +388,7 @@ const state = {
           {
             name: 'Settings',
             state: {
-              routes: [{ name: 'InvalidSettings' }],
+              routes: [{ name: 'InvalidSettings', path: '/settings/notification' }],
             },
           },
         ],
@@ -396,6 +396,18 @@ const state = {
     },
   ],
 };
+```
+
+The `route` passed to the `NotFound` screen will contain a `path` property which corresponds to the path that opened the page. If you need, you can use this property to customize what's shown in this screen, e.g. load the page in a `WebView`:
+
+```js
+function NotFoundScreen({ route }) {
+  if (route.path) {
+    return <WebView source={{ uri: `https://mywebsite.com/${route.path}` }} />;
+  }
+
+  return <Text>This screen doesn't exist!</Text>
+}
 ```
 
 When doing server rendering, you'd also want to return correct status code for 404 errors. See [server rendering docs](server-rendering.md#handling-404-or-other-status-codes) for a guide on how to handle it.

@@ -11,8 +11,8 @@ import versions from '../../versions.json';
 function Version() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
-  const latestVersion = versions[0];
-  const pastVersions = versions.filter(version => version !== latestVersion);
+  const latestVersion = versions[1];
+  const pastVersions = versions.slice(1, 1);
   const repoUrl = `https://github.com/${siteConfig.organizationName}/${siteConfig.projectName}`;
 
   return (

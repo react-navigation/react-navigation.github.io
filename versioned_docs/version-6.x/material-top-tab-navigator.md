@@ -17,7 +17,7 @@ This wraps [`react-native-tab-view`](https://github.com/react-native-community/r
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/material-top-tabs):
 
 ```bash npm2yarn
-npm install @react-navigation/material-top-tabs react-native-tab-view@^2.16.0
+npm install @react-navigation/material-top-tabs@next react-native-tab-view react-native-pager-view
 ```
 
 ## API Definition
@@ -57,12 +57,15 @@ Default options to use for the screens in the navigator.
 
 #### `backBehavior`
 
-Behavior of back button handling.
+This controls how going back in the navigator is handled. This includes when the back button is pressed/back gesture is performed, or `goBack` is called.
 
-- `initialRoute` to return to initial tab
-- `order` to return to previous tab (in the order they are shown in the tab bar)
-- `history` to return to last visited tab
-- `none` to not handle back button
+It supports the following values:
+
+- `firstRoute` - return to the first tab (default)
+- `initialRoute` - return to initial tab
+- `order` - return to previous tab (in the order they are shown in the tab bar)
+- `history` - return to last visited tab
+- `none` - do not handle back button
 
 #### `tabBarPosition`
 
@@ -86,12 +89,6 @@ This view is usually only shown for a split second. Keep it lightweight.
 
 By default, this renders `null`.
 
-#### `removeClippedSubviews`
-
-Boolean indicating whether to remove invisible views (such as unfocused screens) from the native view hierarchy to improve memory usage. Defaults to `false`.
-
-> Note: Don't enable this on iOS where this is buggy and views don't re-appear.
-
 #### `keyboardDismissMode`
 
 String indicating whether the keyboard gets dismissed in response to a drag gesture. Possible values are:
@@ -104,29 +101,6 @@ String indicating whether the keyboard gets dismissed in response to a drag gest
 
 Boolean indicating whether to enable swipe gestures. Swipe gestures are enabled by default. Passing `false` will disable swipe gestures, but the user can still switch tabs by pressing the tab bar.
 
-#### `swipeVelocityImpact`
-
-Determines how relevant is a velocity while calculating next position while swiping. Defaults to `0.2`.
-
-#### `timingConfig`
-
-Configuration object for the timing animation which occurs when tapping on tabs. Supported properties are:
-
-- `duration` (`number`)
-
-#### `springConfig`
-
-Configuration object for the spring animation which occurs after swiping. Supported properties are:
-
-- `damping` (`number`)
-- `mass` (`number`)
-- `stiffness` (`number`)
-- `restSpeedThreshold` (`number`)
-- `restDisplacementThreshold` (`number`)
-
-#### `springVelocityScale`
-
-Number for determining how meaningful is gesture velocity for calculating initial velocity of spring animation. Defaults to `0`.
 
 #### `initialLayout`
 
@@ -136,10 +110,6 @@ Object containing the initial height and width of the screens. Passing this will
 { width: Dimensions.get('window').width }}
 ```
 
-#### `position`
-
-Animated (from `react-native-reanimated`) value to listen to the position updates. The passed position value will be kept in sync with the current position of the tabs. It's useful for accessing the animated value outside the tab view.
-
 #### `sceneContainerStyle`
 
 Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping.
@@ -147,33 +117,6 @@ Style to apply to the view wrapping each screen. You can pass this to override s
 #### `style`
 
 Style to apply to the tab view container.
-
-#### `gestureHandlerProps`
-
-An object with props to be passed to underlying [`PanGestureHandler`](https://software-mansion.github.io/react-native-gesture-handler/docs/handler-pan.html#properties). For example:
-
-```js
-gestureHandlerProps={{
-  maxPointers: 1,
-  waitFor: [someRef]
-}}
-```
-
-#### `pager`
-
-Function that returns a React element to use as the pager. The pager handles swipe gestures and page switching. By default we use [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) for handling gestures. You can switch out the pager for a different implementation to customize the experience.
-
-For example, to use pager backed by the native `ViewPager`, you can use [`react-native-tab-view-viewpager-adapter`](https://github.com/software-mansion/react-native-tab-view-viewpager-adapter):
-
-```js
-import ViewPagerAdapter from 'react-native-tab-view-viewpager-adapter';
-
-// ...
-
-<Tab.Navigator pager={props => <ViewPagerAdapter {...props} />}>
-  {...}
-</Tab.Navigator>
-```
 
 #### `tabBar`
 
@@ -184,8 +127,7 @@ Example:
 <samp id="material-top-tab-custom-tab-bar" />
 
 ```js
-import { View, TouchableOpacity } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { Animated, View, TouchableOpacity } from 'react-native';
 
 function MyTabBar({ state, descriptors, navigation, position }) {
   return (
@@ -221,7 +163,7 @@ function MyTabBar({ state, descriptors, navigation, position }) {
         };
 
         const inputRange = state.routes.map((_, i) => i);
-        const opacity = Animated.interpolate(position, {
+        const opacity = position.interpolate({
           inputRange,
           outputRange: inputRange.map(i => (i === index ? 1 : 0)),
         });
@@ -386,7 +328,7 @@ The tab navigator adds the following methods to the navigation prop:
 Navigates to an existing screen in the tab navigator. The method accepts following arguments:
 
 - `name` - _string_ - Name of the route to jump to.
-- `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
+- `params` - _object_ - Screen params to pass to the destination route.
 
 <samp id="material-top-tab-jump-to" />
 
