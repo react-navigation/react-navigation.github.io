@@ -29,7 +29,7 @@ function DocVersionSuggestions() {
     latestVersionSuggestion,
   } = useDocVersionSuggestions(pluginId); // No suggestion to be made
 
-  if (!latestVersionSuggestion || activeVersion.name === '4.x') {
+  if (!latestVersionSuggestion || activeVersion.name === '4.x' || activeVersion.name === '6.x') {
     return <></>;
   } // try to link to same doc in latest version (not always possible)
   // fallback to main doc of latest version

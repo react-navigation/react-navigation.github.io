@@ -1,5 +1,4 @@
 const path = require('path');
-const versions = require('./versions.json');
 
 module.exports = {
   title: 'React Navigation',
@@ -147,7 +146,6 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
           docLayoutComponent: require.resolve('./src/layouts/DocPage.js'),
           docItemComponent: require.resolve('./src/layouts/DocItem.js'),
           editUrl:
@@ -155,6 +153,11 @@ module.exports = {
           remarkPlugins: [require('./src/plugins/remark-npm2yarn')],
           includeCurrentVersion: false,
           lastVersion: '5.x',
+          versions: {
+            '6.x': {
+              label: '6.x (next)',
+            },
+          },
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

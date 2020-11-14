@@ -17,7 +17,7 @@ This wraps [`react-native-tab-view`](https://github.com/react-native-community/r
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/material-top-tabs):
 
 ```bash npm2yarn
-npm install @react-navigation/material-top-tabs react-native-tab-view react-native-pager-view
+npm install @react-navigation/material-top-tabs react-native-tab-view
 ```
 
 ## API Definition
@@ -57,12 +57,15 @@ Default options to use for the screens in the navigator.
 
 #### `backBehavior`
 
-Behavior of back button handling.
+This controls how going back in the navigator is handled. This includes when the back button is pressed/back gesture is performed, or `goBack` is called.
 
-- `initialRoute` to return to initial tab
-- `order` to return to previous tab (in the order they are shown in the tab bar)
-- `history` to return to last visited tab
-- `none` to not handle back button
+It supports the following values:
+
+- `firstRoute` - return to the first tab (default)
+- `initialRoute` - return to initial tab
+- `order` - return to previous tab (in the order they are shown in the tab bar)
+- `history` - return to last visited tab
+- `none` - do not handle back button
 
 #### `tabBarPosition`
 
@@ -386,7 +389,7 @@ The tab navigator adds the following methods to the navigation prop:
 Navigates to an existing screen in the tab navigator. The method accepts following arguments:
 
 - `name` - _string_ - Name of the route to jump to.
-- `params` - _object_ - Screen params to merge into the destination route (found in the pushed screen through `route.params`).
+- `params` - _object_ - Screen params to pass to the destination route.
 
 <samp id="material-top-tab-jump-to" />
 
