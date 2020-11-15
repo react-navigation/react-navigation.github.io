@@ -189,11 +189,11 @@ navigation.navigate('Root', {
 });
 ```
 
-## Nesting multiple stack navigators
+## Nesting multiple navigators
 
-It's sometimes useful to nest multiple stack navigators, for example, to have [some screens in a modal stack and some in regular stack](modal.md).
+It's sometimes useful to nest multiple navigators such as stack or drawer, for example, to have [some screens in a modal stack and some in regular stack](modal.md).
 
-When nesting multiple stacks or drawers, headers from both child and parent navigators would be shown. However, usually it's more desirable to show the header in the child navigator and hide the header in the stack navigator.
+When nesting multiple stack or drawer navigator, headers from both child and parent navigators would be shown. However, usually it's more desirable to show the header in the child navigator and hide the header in the stack navigator.
 
 To achieve this, you can hide the header in the screen containing the navigator using the `headerShown: false` option.
 
@@ -212,7 +212,7 @@ function Home() {
 function App() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator>
+      <RootStack.Navigator mode="modal">
         <RootStack.Screen
           name="Home"
           component={Home}
@@ -225,9 +225,9 @@ function App() {
 }
 ```
 
-A complete example can be found in the [modal guide](modal.md). However, the principle isn't only specific to modals, but any kind of nesting of stack navigators.
+A complete example can be found in the [modal guide](modal.md). However, the principle isn't only specific to modals, but any kind of nesting of navigators.
 
-In these examples, we have used a stack navigator directly nested inside another stack navigator, but the same principle applies when there are other navigators in the middle, for example: stack navigator inside a tab navigator which is inside another stack navigator.
+In these examples, we have used a stack navigator directly nested inside another stack navigator, but the same principle applies when there are other navigators in the middle, for example: stack navigator inside a tab navigator which is inside another stack navigator, stack navigator inside drawer navigator etc.
 
 When nesting multiple stack navigators, we recommend nesting at most 2 stack navigators, unless absolutely necessary.
 
