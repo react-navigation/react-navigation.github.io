@@ -409,7 +409,7 @@ To set a custom header for all the screens in the navigator, you can specify thi
 
 #### `headerShown`
 
-Whether to show or hide the header for the screen. The header is shown by default. Setting this to `false` hides the header.
+Whether to show or hide the header for the screen. The header is not shown by default. Setting this to `true` shows the header.
 
 #### `headerTitle`
 
