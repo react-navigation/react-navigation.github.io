@@ -1,16 +1,19 @@
 const DEFAULT_PLATFORM = 'android';
 const DEPS_VERSIONS = {
   '4': [
+    '@expo/vector-icons@*',
     '@react-native-community/masked-view@*',
     'react-navigation@^4.4.0',
     'react-navigation-tabs@^2.9.0',
     'react-navigation-stack@^2.8.2',
     'react-navigation-drawer@^2.5.0',
     'react-native-reanimated@*',
+    'react-native-gesture-handler@*',
     'react-native-safe-area-context@*',
     'react-native-screens@*',
   ],
   '5': [
+    '@expo/vector-icons@*',
     '@react-native-community/masked-view@*',
     "@react-navigation/bottom-tabs@^5.8.0",
     "@react-navigation/drawer@^5.9.0",
@@ -21,6 +24,7 @@ const DEPS_VERSIONS = {
     'react-native-paper@^4.0.1',
     'react-native-reanimated@*',
     'react-native-safe-area-context@*',
+    'react-native-gesture-handler@*',
     'react-native-screens@*',
     'react-native-tab-view@^2.15.1',
   ],
