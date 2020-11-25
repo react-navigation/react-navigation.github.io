@@ -8,7 +8,7 @@ A material-design themed tab bar on the bottom of the screen that lets you switc
 
 <img src="/assets/navigators/bottom-navigation.gif" style={{ width: '420px', maxWidth: '100%' }} />
 
-To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`react-navigation-material-bottom-tabs`](https://github.com/react-navigation/material-bottom-tabs) and [react-native-paper](https://github.com/callstack/react-native-paper).
+To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`react-navigation-material-bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/4.x/packages/material-bottom-tabs) and [react-native-paper](https://github.com/callstack/react-native-paper).
 
 ```bash npm2yarn
 npm install react-navigation-material-bottom-tabs react-native-paper
