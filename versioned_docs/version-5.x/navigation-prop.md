@@ -18,6 +18,8 @@ Each `screen` component in your app is provided with the `navigation` prop autom
 
 It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do any magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`useNavigation`](use-navigation.md) hook.
 
+> `setParams`/`setOptions` etc. should only be called in `useEffect`/`useLayoutEffect`/`componentDidMount`/`componentDidUpdate` etc. Not during render or in constructor.
+
 ### Navigator-dependent functions
 
 There are several additional functions present on `navigation` prop based on the kind of the current navigator.
