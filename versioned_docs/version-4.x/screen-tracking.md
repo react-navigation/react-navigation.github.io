@@ -30,14 +30,17 @@ const AppContainer = createAppContainer(AppNavigator);
 
 export default () => (
   <AppContainer
-    onNavigationStateChange={(prevState, currentState, action) => {
+    onNavigationStateChange={async (prevState, currentState) => {
       const currentRouteName = getActiveRouteName(currentState);
       const previousRouteName = getActiveRouteName(prevState);
 
       if (previousRouteName !== currentRouteName) {
         // the line below uses the @react-native-firebase/analytics tracker
         // change the tracker here to use other Mobile analytics SDK.
-        analytics().setCurrentScreen(currentRouteName, currentRouteName);
+        await analytics().logScreenView({
+          screen_name: currentRouteName,
+          screen_class: currentRouteName
+        });
       }
     }}
   />
