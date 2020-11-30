@@ -8,7 +8,7 @@ Provides a way for your app to transition between screens where each new screen 
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
 
-To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`react-navigation-stack`](https://github.com/react-navigation/stack).
+To use this navigator, ensure that you have [react-navigation and its dependencies installed](getting-started.md), then install [`react-navigation-stack`](https://github.com/react-navigation/react-navigation/tree/4.x/packages/stack).
 
 ```bash npm2yarn
 npm install react-navigation-stack @react-native-community/masked-view
@@ -204,7 +204,7 @@ Function which returns a React Element to display on the right side of the heade
 
 #### `headerLeft`
 
-Function which returns a React Element to display on the left side of the header. When a function is used, it receives a number of arguments when rendered (`onPress`, `label`, `labelStyle` and more - check [types.tsx](https://github.com/react-navigation/stack/blob/master/src/types.tsx) for the complete list).
+Function which returns a React Element to display on the left side of the header. When a function is used, it receives a number of arguments when rendered (`onPress`, `label`, `labelStyle` and more - check [types.tsx](https://github.com/react-navigation/react-navigation/blob/4.x/packages/stack/src/types.tsx) for the complete list).
 
 #### `headerStyle`
 
