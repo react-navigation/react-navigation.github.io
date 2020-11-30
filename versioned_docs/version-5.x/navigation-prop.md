@@ -137,8 +137,6 @@ The state object specified in `reset` replaces the existing navigation state wit
 
 The `setParams` method lets us update the params (`route.params`) of the current screen. `setParams` works like React's `setState` - it merges the provided params object with the current params.
 
-> 
-
 <samp id="navigate-set-params" />
 
 ```js
