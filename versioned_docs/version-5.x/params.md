@@ -146,6 +146,32 @@ navigation.navigate('Account', {
 
 See [Nesting navigators](nesting-navigators.md) for more details on nesting.
 
+## Behavior of params
+
+On every action (e.g. ```navigation```, ```setParams```, etc.) params are getting merged. 
+If your previous screen already contains route params, new params will added or overwrite current.
+
+```
+// old params
+{
+  user: 'jane',
+  age: 20
+}
+
+// new params
+{
+  age: 33,
+  position: 'developer'
+}
+
+// result
+{
+  user: 'jane',
+  age: 33,
+  position: 'developer'
+}
+```
+
 ## Summary
 
 - `navigate` and `push` accept an optional second argument to let you pass parameters to the route you are navigating to. For example: `navigation.navigate('RouteName', {paramName: 'value'})`.
