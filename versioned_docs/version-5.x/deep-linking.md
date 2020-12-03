@@ -350,3 +350,13 @@ const linking = {
 ```
 
 Similar to the above example, you can integrate any API that provides a way to get the initial URL and to subscribe to new incoming URLs using the `getInitialURL` and `subscribe` options.
+
+ In case you use Firebase Dynamic Links, be sure to get it's 'link' parameter value. In other words, replace
+ ```js
+  const url = await Linking.getInitialUrl()
+ ```
+ with 
+  ```js
+ const initialLink = await dynamicLinks().getInitialLink()
+ const url = initialLink?.url
+  ```
