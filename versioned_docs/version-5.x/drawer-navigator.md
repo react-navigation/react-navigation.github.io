@@ -154,7 +154,17 @@ Color overlay to be displayed on top of the content view when drawer gets open. 
 
 #### `lazy`
 
+#### `detachInactiveScreens`
+
+Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
+
 Whether the screens should render the first time they are accessed. Defaults to `true`. Set it to `false` if you want to render all screens on initial render.
+
+#### `gestureHandlerProps`
+
+Props to pass to the underlying pan gesture handler.
+
+This is not supported on Web.
 
 #### `sceneContainerStyle`
 
@@ -187,16 +197,6 @@ The content component receives following props by default:
 - `navigation` - The navigation object for the navigator.
 - `descriptors` - An descriptor object containing options for the drawer screens. The options can be accessed at `descriptors[route.key].options`.
 - `progress` - Reanimated Node that represents the animated position of the drawer (0 is closed; 1 is open).
-
-#### `gestureHandlerProps`
-
-Props to pass to the underlying pan gesture handler.
-
-This is not supported on Web.
-
-#### `detachInactiveScreens`
-
-Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
 
 ##### Providing a custom `drawerContent`
 
