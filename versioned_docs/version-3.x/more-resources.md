@@ -6,7 +6,7 @@ sidebar_label: More Resources
 
 # Talks
 
-- [Mobile App Development with React Native at Harvard Extension School](https://cs50.github.io/mobile/lectures): Lecture 6 covers React Navigation, includes exercises, slides, and video.
+- [Mobile App Development with React Native at Harvard Extension School](https://cs50.harvard.edu/mobile/2018/): Lecture 6 covers React Navigation, includes exercises, slides, and video.
 
 - [Mobile Navigation at React Alicante](https://www.youtube.com/watch?v=GBhdooVxX6Q): An overview and comparison of the approaches taken by react-native-navigation and react-navigation.
 
