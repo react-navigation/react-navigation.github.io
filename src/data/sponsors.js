@@ -1,5 +1,15 @@
 export default [
   {
+    "avatarUrl": "https://avatars2.githubusercontent.com/u/6936373?u=4edd14e6636c45d10ac6a3eecb4b3ffa6cc2bf5c&v=4",
+    "username": "Naturalclar",
+    "name": "Jesse Katsumata"
+  },
+  {
+    "avatarUrl": "https://avatars2.githubusercontent.com/u/1566403?u=3df07e2ae72e89a3a3509ba6c2f927115b5f38aa&v=4",
+    "username": "vonovak",
+    "name": "Vojtech Novak"
+  },
+  {
     "avatarUrl": "https://avatars1.githubusercontent.com/u/90494?u=a7ad2e06021c9547dcf8638a6a38ccc93a76b6fe&v=4",
     "username": "brentvatne",
     "name": "Brent Vatne"
@@ -25,11 +35,6 @@ export default [
     "name": "Hiroaki KARASAWA"
   },
   {
-    "avatarUrl": "https://avatars2.githubusercontent.com/u/1566403?u=3df07e2ae72e89a3a3509ba6c2f927115b5f38aa&v=4",
-    "username": "vonovak",
-    "name": "Vojtech Novak"
-  },
-  {
     "avatarUrl": "https://avatars1.githubusercontent.com/u/1629785?u=12eb94da6070d00fc924761ce06e3a428d01b7e9&v=4",
     "username": "JonnyBurger",
     "name": "Jonny Burger"
@@ -38,11 +43,6 @@ export default [
     "avatarUrl": "https://avatars0.githubusercontent.com/u/2590799?u=b900982619800752d4359ad03fe98eef81ccf418&v=4",
     "username": "maikmacs",
     "name": "Miguel Contreras"
-  },
-  {
-    "avatarUrl": "https://avatars2.githubusercontent.com/u/6936373?u=4edd14e6636c45d10ac6a3eecb4b3ffa6cc2bf5c&v=4",
-    "username": "Naturalclar",
-    "name": "Jesse Katsumata"
   },
   {
     "avatarUrl": "https://avatars1.githubusercontent.com/u/14099522?u=965e74751a9db0f40a30ace9cd0cb1f82eaf1412&v=4",
@@ -55,9 +55,9 @@ export default [
     "name": "Jarvis Luong"
   },
   {
-    "avatarUrl": "https://avatars2.githubusercontent.com/u/27461460?u=b5860875e26d33fd70fd210f4ea74f81cdf9d99b&v=4",
-    "username": "hyochan",
-    "name": "Hyo"
+    "avatarUrl": "https://avatars0.githubusercontent.com/u/35618196?u=73ac0f3cf49f428c485ff0c4c1cb3599dd08eb1c&v=4",
+    "username": "handipriyono",
+    "name": "Handi Priyono"
   },
   {
     "avatarUrl": "https://avatars1.githubusercontent.com/u/65687793?u=85bc8ea9018a174a1adb79a278b8c284c305c5a3&v=4",
