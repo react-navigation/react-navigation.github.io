@@ -263,3 +263,7 @@ function SignInScreen() {
   );
 }
 ```
+
+## More Resources
+
+- [React Navigation Tutorial](https://www.robinwieruch.de/react-native-navigation): An extensive navigation tutorial for React Native featuring React Navigation for a sign up, sign in, sign out flow with public and protected pages.
