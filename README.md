@@ -50,3 +50,6 @@ CURRENT_BRANCH=main \
 USE_SSH=true \
 yarn deploy
 ```
+
+## License
+[MIT License](LICENSE)
