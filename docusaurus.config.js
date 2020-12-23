@@ -84,7 +84,7 @@ module.exports = {
           items: [
             {
               label: 'Chat in our Discord channel',
-              href: 'https://discord.gg/reactiflux',
+              href: 'https://discord.gg/4xEK3nD',
             },
             {
               label: 'Get help on Stack Overflow',
