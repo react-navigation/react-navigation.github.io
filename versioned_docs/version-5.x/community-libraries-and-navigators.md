@@ -68,3 +68,11 @@ Easily handle Android back button behavior with React-Navigation with a componen
 
 [github.com/vonovak/react-navigation-backhandler](https://github.com/vonovak/react-navigation-backhandler)
 
+## react-native-collapsible-tab-view
+
+A simple wrapper for react-native-tab-view that exports a navigator with collapsible header above the tab view.
+
+#### Links
+
+[github.com/pedrobern/react-native-collapsible-tab-view](https://github.com/react-native-collapsible-tab-view)
+
