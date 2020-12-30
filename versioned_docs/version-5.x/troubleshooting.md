@@ -62,7 +62,7 @@ If it's missing these extensions, add them and then clear metro cache as shown i
 
 ## I'm getting "SyntaxError in @react-navigation/xxx/xxx.tsx" or "SyntaxError: /xxx/@react-navigation/xxx/xxx.tsx: Unexpected token"
 
-This might happen if you have an old version of the `metro-react-native-babel-preset` package. Ttry upgrading it to the latest version.
+This might happen if you have an old version of the `metro-react-native-babel-preset` package. Try upgrading it to the latest version.
 
 If you use `npm`:
 
