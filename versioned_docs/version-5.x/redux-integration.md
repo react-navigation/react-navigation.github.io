@@ -48,7 +48,7 @@ const CounterContainer = connect(state => ({ value: state.count }))(Counter);
 
 ### Pass the state you care about as a param to the screen
 
-If the value isn't expected to change, you can just pass it from a `connect`ed component to the other screen as a param.
+If the value isn't expected to change, you can just pass it from a connected component to the other screen as a param.
 
 ```js
 <Button
