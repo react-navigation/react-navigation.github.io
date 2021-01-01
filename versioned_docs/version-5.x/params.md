@@ -145,7 +145,9 @@ See [Nesting navigators](nesting-navigators.md) for more details on nesting.
 
 ## What should be in params
 
-It's important to understand what kind of data should be in params. Think of the route object like a URL. If your screen had a URL, what should be in the URL? Params shouldn't contain data that you think should not be in the URL. This often means that you should keep as little data as possible needed to determine what the screen is.
+It's important to understand what kind of data should be in params. Params are like options for a screen. They should only contain information to configure what's displayed in the screen. Avoid passing the full data which will be displayed on the screen itself (e.g. pass an user id instead of user object). Also avoid passing data which is used by multiple screens, such data should be in a global store.
+
+You can also think of the route object like a URL. If your screen had a URL, what should be in the URL? Params shouldn't contain data that you think should not be in the URL. This often means that you should keep as little data as possible needed to determine what the screen is. Think of visiting a shopping website, when you are seeing product listings, the URL usually contains category name, type of sort, any filters etc., it doesn't contain the actual list of products displayed on the screen.
 
 For example, say if you have a `Profile` screen. When navigating to it, you might be tempted to pass the user object in the params:
 
@@ -190,7 +192,8 @@ In essence, pass the least amount of data required to identify a screen in param
 
 ## Summary
 
-- `navigate` and `push` accept an optional second argument to let you pass parameters to the route you are navigating to. For example: `navigation.navigate('RouteName', {paramName: 'value'})`.
+- `navigate` and `push` accept an optional second argument to let you pass parameters to the route you are navigating to. For example: `navigation.navigate('RouteName', { paramName: 'value' })`.
 - You can read the params through `route.params` inside a screen
 - You can update the screen's params with `navigation.setParams`
 - Initial params can be passed via the `initialParams` prop on `Screen`
+- Params should contain the minimal data required to show a screen, nothing more

@@ -128,7 +128,7 @@ yarn add --dev typescript
 
 ## I'm getting an error "null is not an object (evaluating 'RNGestureHandlerModule.default.Direction')"
 
-This and some similar errors might occur if you didn't link the [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) library.
+This and some similar errors might occur if you have a bare React Native project and the library [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) library isn't linked.
 
 Linking is automatic from React Native 0.60, so if you have linked the library manually, first unlink it:
 
@@ -137,6 +137,78 @@ react-native unlink react-native-gesture-handler
 ```
 
 If you're testing on iOS and use Mac, make sure you have run `pod install` in the `ios/` folder:
+
+```sh
+cd ios
+pod install
+cd ..
+```
+
+Now rebuild the app and test on your device or simulator.
+
+## I'm getting an error "requireNativeComponent: "RNCSafeAreaProvider" was not found in the UIManager"
+
+This and some similar errors might occur if you have a bare React Native project and the library [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context) library isn't linked.
+
+Linking is automatic from React Native 0.60, so if you have linked the library manually, first unlink it:
+
+```sh
+react-native unlink react-native-safe-area-context
+```
+
+If you're testing on iOS and use Mac, make sure you have run `pod install` in the `ios/` folder:
+
+```sh
+cd ios
+pod install
+cd ..
+```
+
+Now rebuild the app and test on your device or simulator.
+
+## I'm getting an error "Tried to register two views with the same name RNCSafeAreaProvider"
+
+This might occur if you have multiple versions of [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context) installed.
+
+If you're using Expo managed workflow, it's likely that you have installed an incompatible version. To install the correct version, run:
+
+```sh
+expo install react-native-safe-area-context
+```
+
+If it didn't fix the error or you're not using Expo managed workflow, you'll need to check which package depends on a different version of `react-native-safe-area-context`.
+
+If you use `yarn`, run:
+
+```sh
+yarn why react-native-safe-area-context
+```
+
+If you use `npm`, run:
+
+```sh
+npm ls react-native-safe-area-context
+```
+
+This will tell you if a package you use has a dependency on `react-native-safe-area-context`. If it's a third-party package, you should open an issue on the relevant repo's issue tracker explaining the problem. Generally for libraries, dependencies containing native code should be defined in `peerDependencies` instead of `dependencies` to avoid such issues.
+
+If it's already in `peerDependencies` and not in `dependencies`, and you use `npm`, it might be because of incompatible version range defined for the package. The author of the library will need to relax the version range in such cases to allow a wider range of versions to be installed.
+
+If you use `yarn`, you can also temporarily override the version being installed using `resolutions`. Add the following in your `package.json`:
+
+```json
+"resolutions": {
+  "react-native-safe-area-context": "<version you want to use>"
+}
+```
+
+And then run:
+
+```sh
+yarn
+```
+
+If you're on iOS and not using Expo managed workflow, also run:
 
 ```sh
 cd ios
@@ -168,11 +240,12 @@ export default function App() {
 
 This can happen if you are passing non-serializable values such as class instances, functions etc. in params. React Navigation warns you in this case because this can break other functionality such [state persistence](state-persistence.md), [deep linking](deep-linking.md) etc.
 
-Example of common use cases for passing functions in params are the following:
+Example of some use cases for passing functions in params are the following:
 
 - To pass a callback to use in a header button. This can be achieved using `navigation.setOptions` instead. See the [guide for header buttons](header-buttons.md#header-interaction-with-its-screen-component) for examples.
 - To pass a callback to the next screen which it can call to pass some data back. You can usually achieve it using `navigate` instead. See the [guide for params](params.md) for examples.
-- To pass complex data to another screen. Instead of passing the data `params`, you can store that complex data somewhere else (like a global store), and pass an id instead. Then the screen can get the data from the global store using the id.
+- To pass complex data to another screen. Instead of passing the data `params`, you can store that complex data somewhere else (like a global store), and pass an id instead. Then the screen can get the data from the global store using the id. See [what should be in params](params.md#what-should-be-in-params).
+- Pass data, callbacks etc. from a parent to child screens. You can either use React Context, or pass a children callback to pass these down instead of using params. See [passing additional props](hello-react-navigation.md#passing-additional-props).
 
 If you don't use state persistence or deep link to the screen which accepts functions in params, then the warning doesn't affect you and you can safely ignore it. To ignore the warning, you can use `YellowBox.ignoreWarnings`.
 
