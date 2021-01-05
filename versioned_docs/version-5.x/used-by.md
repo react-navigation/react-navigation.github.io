@@ -18,6 +18,7 @@ It's impossible to list every single app that uses React Navigation, but below a
 - [Expo](https://expo.io/client)
 - [How We Feel](https://howwefeel.org/)
 - [National Football League (NFL)](https://itunes.apple.com/app/nfl/id389781154) and [NFL Fantasy Football](https://apps.apple.com/us/app/nfl-fantasy-football/id876054082)
+- [Playstation App](https://www.playstation.com/en-ca/playstation-app/) ([iOS](https://apps.apple.com/us/app/playstation-app/id410896080)) ([Android](https://play.google.com/store/apps/details?id=com.scee.psxandroid&hl=en_CA&gl=US))
 - [Readwise](https://readwise.io/)
 - [Shop from Shopify](https://www.shopify.com/shop)
 - [Steady](https://steadyapp.com/) ([iOS](https://apps.apple.com/us/app/id1339259265)) ([Android](https://play.google.com/store/apps/details?id=com.steady.steadyapp.com))
