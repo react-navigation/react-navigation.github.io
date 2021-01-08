@@ -198,7 +198,7 @@ function MyTabs() {
     <Tab.Navigator
       initialRouteName="Feed"
       activeColor="#e91e63"
-      style={{ backgroundColor: 'tomato' }}
+      barStyle={{ backgroundColor: 'tomato' }}
     >
       <Tab.Screen
         name="Feed"
