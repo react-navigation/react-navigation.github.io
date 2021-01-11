@@ -49,7 +49,8 @@ function getSnackUrl(options) {
     `https://snack.expo.io?platform=${DEFAULT_PLATFORM}&name=` +
     encodeURIComponent(label) +
     '&dependencies=' +
-    encodeURIComponent(DEPS_VERSIONS[currentMajorVersion].join(','));
+    encodeURIComponent(DEPS_VERSIONS[currentMajorVersion].join(',')) +
+    '&hideQueryParams=true';
 
   // todo: this is ridiculous but there's no other way i can see to get the
   // current version from the html or the url, given that the root url is
