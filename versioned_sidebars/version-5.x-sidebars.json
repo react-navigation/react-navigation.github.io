@@ -47,6 +47,7 @@
     "API Reference": [
       "version-5.x/navigation-container",
       "version-5.x/server-container",
+      "version-5.x/screen",
       "version-5.x/screen-options",
       "version-5.x/route-prop",
       "version-5.x/navigation-prop",
