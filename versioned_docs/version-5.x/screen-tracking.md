@@ -41,7 +41,7 @@ export default function App() {
           Analytics.setCurrentScreen(currentRouteName);
         }
 
-        // Save the current route name for later comparision
+        // Save the current route name for later comparison
         routeNameRef.current = currentRouteName;
       }}
     >
