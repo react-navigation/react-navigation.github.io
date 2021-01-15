@@ -70,7 +70,9 @@ Behavior of back button handling.
 
 #### `shifting`
 
-Whether the shifting style is used, the active tab appears wider and the inactive tabs won't have a label. By default, this is `true` when you have more than 3 tabs.
+Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.
+
+By default, this is `true` when you have more than 3 tabs. Pass `shifting={false}` to explicitly disable this animation, or `shifting={true}` to always use this animation.
 
 #### `labeled`
 
