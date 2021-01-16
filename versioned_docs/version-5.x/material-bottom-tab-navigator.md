@@ -88,9 +88,7 @@ Custom color for icon and label in the inactive tab.
 
 #### `barStyle`
 
-Style for the bottom navigation bar. You can set a bottom padding here if you have a translucent navigation bar on Android: `barStyle={{ paddingBottom: 48 }}`.
-
-Example:
+Style for the bottom navigation bar. You can pass custom background color here:
 
 <samp id="material-bottom-tab-styled" />
 
@@ -100,6 +98,19 @@ Example:
   activeColor="#f0edf6"
   inactiveColor="#3e2465"
   barStyle={{ backgroundColor: '#694fad' }}
+>
+  {/* ... */}
+</Tab.Navigator>
+```
+
+If you have a translucent navigation bar on Android, you can also set a bottom padding here:
+
+```js
+<Tab.Navigator
+  initialRouteName="Home"
+  activeColor="#f0edf6"
+  inactiveColor="#3e2465"
+  barStyle={{ paddingBottom: 48 }}
 >
   {/* ... */}
 </Tab.Navigator>
@@ -156,7 +167,7 @@ To prevent the default behavior, you can call `event.preventDefault`:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('tabPress', e => {
+  const unsubscribe = navigation.addListener('tabPress', (e) => {
     // Prevent default behavior
 
     e.preventDefault();
