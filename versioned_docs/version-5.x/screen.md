@@ -83,7 +83,7 @@ Callback to return an unique ID to use for the screen. It receives an object wit
 />
 ```
 
-When it's specified and doesn't return `undefined`, the unique ID is respected for any navigation. For a given screen name, there will always be only one screen corresponding to an ID.
+By default, calling `navigate('ScreenName', params)` identifies the screen by its name, and navigates to the existing screen instead of adding a new one. If you specify `getId` and it doesn't return `undefined`, the screen is identified by both the screen name and the returned ID.
 
 This is useful for preventing multiple instances of the same screen in the navigator, e.g. - when `params.userId` is used as an ID, subsequent navigation to the screen with the same `userId` will navigate to the existing screen instead of adding a new one to the stack. If the navigation was with a different `userId`, then it'll add a new screen.
 

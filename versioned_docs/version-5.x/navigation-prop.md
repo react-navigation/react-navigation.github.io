@@ -78,6 +78,20 @@ function HomeScreen({ navigation: { navigate } }) {
 }
 ```
 
+In a [stack navigator](stack-navigator.md), calling `navigate` with a screen name will result in different behavior based on if the screen is already present or not. If the screen is already present in the stack's history, it'll go back to that screen and remove any screens after that. If the screen is not present, it'll push a new screen.
+
+For example, if you have a stack with the history `Home > Profile > Settings` and you call `navigate(Profile)`, the resulting screens will be `Home > Profile` as it goes back to `Profile` and removes the `Settings` screen.
+
+By default, the screen is identified by its name. But you can also customize it to take the params into account by using the [`getId`](screen.md#getid) prop.
+
+For example, say you have specified a `getId` prop for `Profile` screen:
+
+```js
+<Screen name={Profile} component={ProfileScreen} getId={({ params }) => params.userId} />
+```
+
+Now, if you have a stack with the history `Home > Profile (userId: bob) > Settings` and you call `navigate(Profile, { userId: 'alice' })`, the resulting screens will be `Home > Profile (userId: bob) > Settings > Profile (userId: alice)` since it'll add a new `Profile` screen as no matching screen was found.
+
 ### `goBack`
 
 The `goBack` method lets us go back to the previous screen in the navigator.
