@@ -81,16 +81,21 @@ First, you will want to specify a URL scheme for your app. This corresponds to t
 Next, let's configure our navigation container to extract the path from the app's incoming URI.
 
 ```js
-import { Linking } from 'expo';
+// Install this package with `expo install expo-linking`
+import * as Linking from 'expo-linking';
 
 const SimpleApp = createAppContainer(createStackNavigator({...}));
 
-const prefix = Linking.makeUrl('/');
+// Linking.createURL is available as of expo@40.0.1 and expo-linking@2.0.1. If
+// you are using older versions, you can upgrade or use Linking.makeUrl instead,
+// but note that your deep links in standalone apps will be in the format
+// scheme:/// rather than scheme:// if you use makeUrl.
+const prefix = Linking.createURL('/');
 
 const MainApp = () => <SimpleApp uriPrefix={prefix} />;
 ```
 
-The reason that is necessary to use `Expo.Linking.makeUrl` is that the scheme will differ depending on whether you're in the client app or in a standalone app.
+The reason that is necessary to use `Linking.createURL` is that the scheme will differ depending on whether you're in the client app or in a standalone app.
 
 ### Test deep linking on iOS
 
