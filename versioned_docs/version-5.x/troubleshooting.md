@@ -259,6 +259,17 @@ YellowBox.ignoreWarnings([
 ]);
 ```
 
+
+> Note: As of React Native 0.63 YellowBox has been deprecated in favor of LogBox, so the previous 
+code would be written as follows:
+>```js
+>import { LogBox } from 'react-native';
+>
+>LogBox.ignoreLogs([
+>  'Non-serializable values were found in the navigation >state',
+>]);
+>```
+
 ## I'm getting "Invalid hook call. Hooks can only be called inside of the body of a function component"
 
 This can happen when you pass a React component to an option that accepts a function returning a react element. For example, the [`header` option in stack navigator](stack-navigator.md#header) expects a function returning a react element:
