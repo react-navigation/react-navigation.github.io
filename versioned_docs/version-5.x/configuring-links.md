@@ -159,7 +159,9 @@ For above structure, our configuration will look like this:
 const config = {
   screens: {
     Home: {
-      Chat: 'feed/:sort',
+      screens: {
+        Chat: 'feed/:sort',
+      },
     },
     Profile: 'user',
   },
