@@ -163,7 +163,7 @@ navigation.navigate('Profile', {
 });
 ```
 
-This looks convenient, and let's you access the user objects with `route.params.user` without any extra work.
+This looks convenient, and lets you access the user objects with `route.params.user` without any extra work.
 
 However, this is an anti-pattern. Data such as user objects should be in your global store instead of the navigation state. Otherwise you have the same data duplicated in multiple places. This can leads to bugs such as the profile screen showing outdated data even if the user object has changed after navigation.
 
