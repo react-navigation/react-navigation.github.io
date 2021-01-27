@@ -26,7 +26,7 @@ There are few properties present in every navigation state object:
 
 - `type` - Type of the navigator that the state belongs to, e.g. `stack`, `tab`, `drawer`.
 - `key` - Unique key to identify the navigator.
-- `routeName` - Name of the screens defined in the navigator. This is an unique array containing strings for each screen.
+- `routeNames` - Name of the screens defined in the navigator. This is an unique array containing strings for each screen.
 - `routes` - List of route objects (screens) which are rendered in the navigator. It also represents the history in a stack navigator. There should be at least one item present in this array.
 - `index` - Index of the focused route object in the `routes` array.
 - `history` - A list of visited items. This is an optional property and not present in all navigators. For example, it's only present in tab and drawer navigators in the core. The shape of the items in the `history` array can vary depending on the navigator. There should be at least one item present in this array.
