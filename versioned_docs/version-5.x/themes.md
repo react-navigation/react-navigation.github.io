@@ -79,7 +79,7 @@ import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 ## Using the operating system preferences
 
-At the time of writing, `react-native` does not currently support detecting the operating system color scheme preferences in the core ([you can follow this pull request](https://github.com/facebook/react-native/pull/26172)). Until it is part of core and you have updated to the version that includes it, you can use `react-native-appearance`.
+appearance is a part of react native and can see more details here https://reactnative.dev/docs/appearance.
 
 You will need iOS 13 to actually be able to toggle dark mode through system settings.
 
