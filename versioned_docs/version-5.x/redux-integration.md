@@ -42,7 +42,7 @@ const CounterContainer = connect(state => ({ value: state.count }))(Counter);
 <Screen
   name="Test"
   component={TestScreen}
-  options={{ title: () => <CountContainer /> }}
+  options={{ title: () => <CounterContainer /> }}
 />
 ```
 
