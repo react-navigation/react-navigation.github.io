@@ -55,6 +55,46 @@ npm install react-native-reanimated react-native-gesture-handler react-native-sc
 
 From React Native 0.60 and higher, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md). So you **don't need to run** `react-native link`.
 
+### Updating MainActivity.java
+
+Location:
+> ..\MyApp\android\app\src\main\java\com\MyApp\MainActivity.java
+
+React Native 0.60 migrated from Support Library to AndroidX. React Native Gesture Handler is not yet compatible with AndroidX.
+Make sure to update the React Native CLI to the latest version which runs jetifier – the AndroidX migration tool – during the run-android command.
+
+```
+package com.swmansion.gesturehandler.react.example;
+
+import com.facebook.react.ReactActivity;
+//Copy from this
+ import com.facebook.react.ReactActivityDelegate;
+ import com.facebook.react.ReactRootView;
+ import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+//To this
+public class MainActivity extends ReactActivity {
+
+  @Override
+  protected String getMainComponentName() {
+    return "Example";
+  }
+
+//Copy from this
+  @Override
+  protected ReactActivityDelegate createReactActivityDelegate() {
+    return new ReactActivityDelegate(this, getMainComponentName()) {
+      @Override
+      protected ReactRootView createRootView() {
+       return new RNGestureHandlerEnabledRootView(MainActivity.this);
+      }
+    };
+  }
+//To this
+}
+```
+
+## For IOS
+
 If you're on a Mac and developing for iOS, you need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
 ```sh
