@@ -57,7 +57,8 @@ From React Native 0.60 and higher, [linking is automatic](https://github.com/rea
 
 ### Updating MainActivity.java
 
-Location:
+Files location:
+
 > ..\MyApp\android\app\src\main\java\com\MyApp\MainActivity.java
 
 React Native 0.60 migrated from Support Library to AndroidX. React Native Gesture Handler is not yet compatible with AndroidX.
