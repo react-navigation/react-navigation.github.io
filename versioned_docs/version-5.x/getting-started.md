@@ -57,7 +57,7 @@ From React Native 0.60 and higher, [linking is automatic](https://github.com/rea
 
 ### Updating MainActivity.java
 
-Files location:
+Location:
 
 > ..\MyApp\android\app\src\main\java\com\MyApp\MainActivity.java
 
