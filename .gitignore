@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+.docusaurus
+.history
+
+build/
+translated_docs/
+
+i18n/*
+!i18n/en.json

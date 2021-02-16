@@ -1,0 +1,20 @@
+project_identifier_env: CROWDIN_DOCUSAURUS_PROJECT_ID
+api_key_env: CROWDIN_DOCUSAURUS_API_KEY
+base_path: "./"
+preserve_hierarchy: true
+
+files:
+  -
+    source: '/docs/*.md'
+    translation: '/translated_docs/%locale%/%original_file_name%'
+    languages_mapping: &anchor
+      locale:
+        'zh-CN': 'zh-Hans'
+  -
+    source: '/i18n/en.json'
+    translation: '/i18n/%locale%.json'
+    languages_mapping: *anchor
+  -
+    source: '/versioned_docs/**/*.md'
+    translation: '/translated_docs/%locale%/**/%original_file_name%'
+    languages_mapping: *anchor
