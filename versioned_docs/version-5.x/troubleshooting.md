@@ -266,7 +266,7 @@ code would be written as follows:
 >import { LogBox } from 'react-native';
 >
 >LogBox.ignoreLogs([
->  'Non-serializable values were found in the navigation >state',
+>  'Non-serializable values were found in the navigation state',
 >]);
 >```
 
