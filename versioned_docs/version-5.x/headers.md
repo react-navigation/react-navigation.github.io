@@ -44,7 +44,7 @@ function StackScreen() {
       <Stack.Screen
         name="Profile"
         component={ProfileScreen}
-        options={({ route }) => ({ title: route.params.name })}
+        options={({ route }) => ({ title: route.name })}
       />
     </Stack.Navigator>
   );
