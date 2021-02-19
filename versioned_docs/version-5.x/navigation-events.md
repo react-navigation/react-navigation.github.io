@@ -10,7 +10,7 @@ Following are the built-in events available with every navigator:
 
 - `focus` - This event is emitted when the screen comes into focus
 - `blur` - This event is emitted when the screen goes out of focus
-- `beforeRemove` (version 5.7+ only) - This event is emitted when the user is a leaving the screen, there's a chance to [prevent the user from leaving](preventing-going-back.md)
+- `beforeRemove` (version 5.7+ only) - This event is emitted when the user is leaving a screen, there's a chance to [prevent the user from leaving](preventing-going-back.md)
 - `state` (advanced) - This event is emitted when the navigator's state changes
 
 Apart from these, each navigator can emit their own custom events. For example, stack navigator emits `transitionStart` and `transitionEnd` events, tab navigator emits `tabPress` event etc. You can find details about the events emitted on the individual navigator's documentation.
