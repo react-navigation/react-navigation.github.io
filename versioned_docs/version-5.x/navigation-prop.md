@@ -280,7 +280,9 @@ navigation.dispatch({
 });
 ```
 
-It's also possible to pass a function to `dispatch`. The function will receive the current state and needs to return a navigation action object to use:
+#### Custom action creators
+
+It's also possible to pass a action creator function to `dispatch`. The function will receive the current state and needs to return a navigation action object to use:
 
 ```js
 import { CommonActions } from '@react-navigation/native';
