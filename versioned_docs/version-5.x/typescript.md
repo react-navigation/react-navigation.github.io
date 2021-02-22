@@ -264,3 +264,7 @@ import { NavigationContainerRef } from '@react-navigation/native';
 
 const navigationRef = React.createRef<NavigationContainerRef>();
 ```
+
+### A full example for beginners
+
+[An Quick Example in TypeScript for React Native Beginners](https://github.com/zjkuang/ReactNavigationTypeScript)
