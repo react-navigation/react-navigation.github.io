@@ -31,7 +31,8 @@ function EditText({ navigation }) {
   const hasUnsavedChanges = Boolean(text);
 
   React.useEffect(
-    () =>
+    () => {
+      navigation.removeListener('beforeRemove', (e) => {}); // to avoid possibly being added repetitively
       navigation.addListener('beforeRemove', (e) => {
         if (!hasUnsavedChanges) {
           // If we don't have unsaved changes, then we don't need to do anything
@@ -56,7 +57,8 @@ function EditText({ navigation }) {
             },
           ]
         );
-      }),
+      });
+    },
     [navigation, hasUnsavedChanges]
   );
 
