@@ -79,20 +79,17 @@ import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 ## Using the operating system preferences
 
-At the time of writing, `react-native` does not currently support detecting the operating system color scheme preferences in the core ([you can follow this pull request](https://github.com/facebook/react-native/pull/26172)). Until it is part of core and you have updated to the version that includes it, you can use `react-native-appearance`.
+`react-native` currently supports detecting the operating system color scheme preferences in the core ([via Appearance API](https://reactnative.dev/docs/appearance)) introduced in 0.63. If the version you use doesn't support it, you can use [`react-native-appearance`](https://github.com/expo/react-native-appearance).
 
-You will need iOS 13 to actually be able to toggle dark mode through system settings.
+You will need iOS 13 to actually be able to toggle dark mode through system settings. Be aware that Android 11 also supports it but some custom layer doesn't handle to easily toggle.
 
 > Note: if you use the Expo managed workflow, this requires SDK 35+
 
-First, you need to install `react-native-appearance`. [Follow the instructions in the README](https://github.com/expo/react-native-appearance).
-
-Once you've installed it, set your root component up as follows:
 
 <samp id="system-themes" />
 
 ```js
-import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
+import { useColorScheme } from 'react-native';
 import {
   NavigationContainer,
   DefaultTheme,
@@ -103,11 +100,9 @@ export default () => {
   const scheme = useColorScheme();
 
   return (
-    <AppearanceProvider>
-      <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-        {/* content */}
-      </NavigationContainer>
-    </AppearanceProvider>
+    <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
+      {/* content */}
+    </NavigationContainer>
   );
 };
 ```
