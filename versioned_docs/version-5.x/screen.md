@@ -71,6 +71,18 @@ When you pass a function, it'll receive the [`route`](route-prop.md) and [`navig
 
 See [Options for screens](screen-options.md) for more details and examples.
 
+### `initialParams`
+
+Initial params to use for the screen. If a screen is used as `initialRouteName`, it'll contain the params from `initialParams`. If you navigate to a new screen, the params passed are shallow merged with the initial params.
+
+```js
+<Stack.Screen
+  name="Details"
+  component={DetailsScreen}
+  initialParams={{ itemId: 42 }}
+/>
+```
+
 ### `getId`
 
 Callback to return an unique ID to use for the screen. It receives an object with the route params:

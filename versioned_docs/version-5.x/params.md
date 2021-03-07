@@ -64,7 +64,19 @@ function DetailsScreen({ route, navigation }) {
 
 ## Updating params
 
-Screens can also update their params, like they can update their state. The `navigation.setParams` method lets you update the params of a screen. Refer to the [API reference for `setParams`](navigation-prop.md#setparams---make-changes-to-route-params) for more details.
+Screens can also update their params, like they can update their state. The `navigation.setParams` method lets you update the params of a screen. Refer to the [API reference for `setParams`](navigation-prop.md#setparams) for more details.
+
+Basic usage:
+
+```js
+navigation.setParams({
+  query: 'someText',
+})
+```
+
+> Note: Avoid using `setParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-prop.md#setoptions) instead.
+
+## Initial params
 
 You can also pass some initial params to a screen. If you didn't specify any params when navigating to this screen, the initial params will be used. They are also shallow merged with any params that you pass. Initial params can be specified with an `initialParams` prop:
 
