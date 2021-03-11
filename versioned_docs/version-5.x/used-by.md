@@ -24,6 +24,7 @@ It's impossible to list every single app that uses React Navigation, but below a
 - [Steady](https://steadyapp.com/) ([iOS](https://apps.apple.com/us/app/id1339259265)) ([Android](https://play.google.com/store/apps/details?id=com.steady.steadyapp.com))
 - [TaskRabbit](https://apps.apple.com/ca/app/taskrabbit-handyman-more/id374165361)
 - [Th3rdwave](https://www.th3rdwave.coffee/)
+- [Pl@ntNet](https://plantnet.org/)
 
 ## Other great apps
 
