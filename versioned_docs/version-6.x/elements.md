@@ -9,7 +9,7 @@ A component library containing the UI elements and helpers used in React Navigat
 To use this package, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/elements):
 
 ```sh npm2yarn
-npm install @react-navigation/elementss@next
+npm install @react-navigation/elements@next
 ```
 
 ## Components
