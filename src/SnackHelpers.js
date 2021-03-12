@@ -28,6 +28,9 @@ const DEPS_VERSIONS = {
     'react-native-screens@*',
     'react-native-tab-view@^2.15.1',
   ],
+  '6': [
+    // TODO
+  ],
   next: [],
 };
 
