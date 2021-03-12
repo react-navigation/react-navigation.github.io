@@ -87,259 +87,6 @@ The following [options](screen-options.md) can be used to configure the screens 
 
 String that can be used as a fallback for `headerTitle`.
 
-#### `header`
-
-Function that returns a React Element to display as a header. It accepts an object containing the following properties as the argument:
-
-- `navigation` - The navigation object for the current screen.
-- `route` - The route object for the current screen.
-- `options` - The options for the current screen
-- `layout` - Dimensions of the screen, contains `height` and `width` properties.
-- `progress` Animated nodes representing the progress of the animation.
-- `back` - Options for the back button, contains an object with a `title` property to use for back button label.
-- `styleInterpolator` - Function which returns interpolated styles for various elements in the header.
-
-Make sure to set `headerMode` to `screen` as well when using a custom header (see below for more details).
-
-Example:
-
-```js
-header: ({ navigation, route, options, back }) => {
-  const title =
-    options.headerTitle !== undefined
-      ? options.headerTitle
-      : options.title !== undefined
-      ? options.title
-      : route.name;
-
-  return (
-    <MyHeader
-      title={title}
-      leftButton={
-        back ? <MyBackButton onPress={navigation.goBack} /> : undefined
-      }
-      style={options.headerStyle}
-    />
-  );
-};
-```
-
-To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
-
-When using a custom header, there are 2 important things to keep in mind:
-
-##### Set `headerMode` to `screen`
-
-By default, there is one floating header which renders headers for multiple screens on iOS. These headers include animations to smoothly switch to one another.
-
-Setting the `headerMode` prop to `screen` makes the header part of the screen, so you don't have to implement animations to animate it separately.
-
-If you want to customize how the header animates and want to keep `headerMode` as `float`, you can interpolate on the `scene.progress.current` and `scene.progress.next` props. For example, following will cross-fade the header:
-
-```js
-const opacity = Animated.add(progress.current, progress.next || 0).interpolate({
-  inputRange: [0, 1, 2],
-  outputRange: [0, 1, 0],
-});
-
-return (
-  <Animated.View style={{ opacity }}>{/* Header content */}</Animated.View>
-);
-```
-
-##### Specify a `height` in `headerStyle`
-
-If your header's height differs from the default header height, then you might notice glitches due to measurement being async. Explicitly specifying the height will avoid such glitches.
-
-Example:
-
-```js
-headerStyle: {
-  height: 80, // Specify the height of your custom header
-};
-```
-
-Note that this style is not applied to the header by default since you control the styling of your custom header. If you also want to apply this style to your header, use `scene.descriptor.options.headerStyle` from the props.
-
-#### `headerShown`
-
-Whether to show or hide the header for the screen. The header is shown by default unless the `headerMode` prop on the navigator was set to `none`. Setting this to `false` hides the header.
-
-#### `headerTitle`
-
-String or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is specified, it receives an object containing `allowFontScaling`, `tintColor`, `style` and `children` properties. The `children` property contains the title string.
-
-#### `headerTitleAlign`
-
-How to align the header title. Possible values:
-
-- `left`
-- `center`
-
-Defaults to `center` on iOS and `left` on Android.
-
-#### `headerTitleAllowFontScaling`
-
-Whether header title font should scale to respect Text Size accessibility settings. Defaults to false.
-
-#### `headerBackAllowFontScaling`
-
-Whether back button title font should scale to respect Text Size accessibility settings. Defaults to false.
-
-#### `headerBackAccessibilityLabel`
-
-Accessibility label for the header back button.
-
-#### `headerBackImage`
-
-Function which returns a React Element to display custom image in header's back button. When a function is used, it receives the `tintColor` in it's argument object. Defaults to Image component with back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
-
-#### `headerBackTitle`
-
-Title string used by the back button on iOS. Defaults to the previous scene's `headerTitle`.
-
-#### `headerBackTitleVisible`
-
-A reasonable default is supplied for whether the back button title should be visible or not, but if you want to override that you can use `true` or `false` in this option.
-
-#### `headerTruncatedBackTitle`
-
-Title string used by the back button when `headerBackTitle` doesn't fit on the screen. `"Back"` by default.
-
-#### `headerLeft`
-
-Function which returns a React Element to display on the left side of the header. When a function is used, it receives a number of arguments when rendered (`onPress`, `label`, `labelStyle` and more.
-
-By default, `DrawerToggleButton` component is used. You can use it to override the functionality, for example:
-
-```js
-import { DrawerToggleButton } from '@react-navigation/stack';
-
-// ...
-
-<Stack.Screen
-  name="Home"
-  component={HomeScreen}
-  options={{
-    headerLeft: (props) => (
-      <DrawerToggleButton
-        {...props}
-        onPress={() => {
-          // Do something
-        }}
-      />
-    ),
-  }}
-/>;
-```
-
-#### `headerRight`
-
-Function which returns a React Element to display on the right side of the header.
-
-#### `headerStyle`
-
-Style object for the header. You can specify a custom background color here, for example.
-
-#### `headerTitleStyle`
-
-Style object for the title component
-
-#### `headerBackTitleStyle`
-
-Style object for the back title
-
-#### `headerLeftContainerStyle`
-
-Customize the style for the container of the `headerLeft` component, for example to add padding.
-
-#### `headerRightContainerStyle`
-
-Customize the style for the container of the `headerRight` component, for example to add padding.
-
-#### `headerTitleContainerStyle`
-
-Customize the style for the container of the `headerTitle` component, for example to add padding.
-
-By default, `headerTitleContainerStyle` is with an absolute position style and offsets both `left` and `right`. This may lead to white space or overlap between `headerLeft` and `headerTitle` if a customized `headerLeft` is used. It can be solved by adjusting `left` and `right` style in `headerTitleContainerStyle` and `marginHorizontal` in `headerTitleStyle`.
-
-#### `headerBackgroundContainerStyle`
-
-Style object for the container of the `headerBackground` element.
-
-#### `headerTintColor`
-
-Tint color for the header
-
-#### `headerPressColor
-
-Color for material ripple (Android >= 5.0 only)
-
-#### `headerPressOpacity`
-
-Press opacity for the buttons in header (Android < 5.0, and iOS)
-
-#### `headerTransparent`
-
-Defaults to `false`. If `true`, the header will not have a background unless you explicitly provide it with `headerBackground`. The header will also float over the screen so that it overlaps the content underneath.
-
-This is useful if you want to render a semi-transparent header or a blurred background.
-
-Note that if you don't want your content to appear under the header, you need to manually add a top margin to your content. React Navigation won't do it automatically.
-
-To get the height of the header, you can use [`HeaderHeightContext`](element.md#headerheightcontext) with [React's Context API](https://reactjs.org/docs/context.html#contextconsumer) or [`useHeaderHeight`](elements.md#useheaderheight):
-
-```js
-import { HeaderHeightContext } from '@react-navigation/elements';
-
-// ...
-
-<HeaderHeightContext.Consumer>
-  {headerHeight => (
-    /* render something */
-  )}
-</HeaderHeightContext.Consumer>
-```
-
-or
-
-```js
-import { useHeaderHeight } from '@react-navigation/elements';
-
-// ...
-
-const headerHeight = useHeaderHeight();
-```
-
-#### `headerBackground`
-
-Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
-
-For example, you can use this with `headerTransparent` to render a blur view to create a translucent header.
-
-<samp id="header-blur" />
-
-```js
-import { BlurView } from 'expo-blur';
-
-// ...
-
-<Stack.Screen
-  name="Home"
-  component={HomeScreen}
-  options={{
-    headerTransparent: true,
-    headerBackground: () => (
-      <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />
-    ),
-  }}
-/>;
-```
-
-#### `headerStatusBarHeight`
-
-Extra padding to add at the top of header to account for translucent status bar. By default, it uses the top value from the safe area insets of the device. Pass 0 or a custom value to disable the default behavior, and customize the height.
-
 #### `cardShadowEnabled`
 
 Use this prop to have visible shadows during transitions. Defaults to `true`.
@@ -416,16 +163,115 @@ Interpolated styles for various parts of the header. Refer the [Animations secti
 
 Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`. Defaults to `false` for the last screen when `mode='modal'`, otherwise `true`.
 
-#### `safeAreaInsets`
+### Header related options
 
-Safe area insets for the screen. This is used to avoid elements like notch and status bar. By default, the device's safe area insets are automatically detected. You can override the behavior with this option.
+You can find the list of header related options [here](elements.md#header). In addition to those, the following options are also supported in stack:
 
-Takes an object containing following optional properties:
+#### `header`
 
-- `top` - _number_ - The value of the top inset, e.g. area containing the status bar and notch.
-- `right` - _number_ - The value of the left inset.
-- `bottom` - _number_ - The value of the top inset, e.g. area navigation bar on bottom.
-- `left`. - _number_ - The value of the right inset.
+Function that returns a React Element to display as a header. It accepts an object containing the following properties as the argument:
+
+- `navigation` - The navigation object for the current screen.
+- `route` - The route object for the current screen.
+- `options` - The options for the current screen
+- `layout` - Dimensions of the screen, contains `height` and `width` properties.
+- `progress` Animated nodes representing the progress of the animation.
+- `back` - Options for the back button, contains an object with a `title` property to use for back button label.
+- `styleInterpolator` - Function which returns interpolated styles for various elements in the header.
+
+Make sure to set `headerMode` to `screen` as well when using a custom header (see below for more details).
+
+Example:
+
+```js
+header: ({ navigation, route, options, back }) => {
+  const title =
+    options.headerTitle !== undefined
+      ? options.headerTitle
+      : options.title !== undefined
+      ? options.title
+      : route.name;
+
+  return (
+    <MyHeader
+      title={title}
+      leftButton={
+        back ? <MyBackButton onPress={navigation.goBack} /> : undefined
+      }
+      style={options.headerStyle}
+    />
+  );
+};
+```
+
+To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
+
+When using a custom header, there are 2 important things to keep in mind:
+
+##### Set `headerMode` to `screen`
+
+By default, there is one floating header which renders headers for multiple screens on iOS. These headers include animations to smoothly switch to one another.
+
+Setting the `headerMode` prop to `screen` makes the header part of the screen, so you don't have to implement animations to animate it separately.
+
+If you want to customize how the header animates and want to keep `headerMode` as `float`, you can interpolate on the `progress.current` and `progress.next` props. For example, following will cross-fade the header:
+
+```js
+const opacity = Animated.add(progress.current, progress.next || 0).interpolate({
+  inputRange: [0, 1, 2],
+  outputRange: [0, 1, 0],
+});
+
+return (
+  <Animated.View style={{ opacity }}>{/* Header content */}</Animated.View>
+);
+```
+
+##### Specify a `height` in `headerStyle`
+
+If your header's height differs from the default header height, then you might notice glitches due to measurement being async. Explicitly specifying the height will avoid such glitches.
+
+Example:
+
+```js
+headerStyle: {
+  height: 80, // Specify the height of your custom header
+};
+```
+
+Note that this style is not applied to the header by default since you control the styling of your custom header. If you also want to apply this style to your header, use `headerStyle` from the props.
+
+#### `headerShown`
+
+Whether to show or hide the header for the screen. The header is shown by default. Setting this to `false` hides the header.
+
+#### `headerBackAllowFontScaling`
+
+Whether back button title font should scale to respect Text Size accessibility settings. Defaults to false.
+
+#### `headerBackAccessibilityLabel`
+
+Accessibility label for the header back button.
+
+#### `headerBackImage`
+
+Function which returns a React Element to display custom image in header's back button. When a function is used, it receives the `tintColor` in it's argument object. Defaults to Image component with back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
+
+#### `headerBackTitle`
+
+Title string used by the back button on iOS. Defaults to the previous scene's `headerTitle`.
+
+#### `headerBackTitleVisible`
+
+A reasonable default is supplied for whether the back button title should be visible or not, but if you want to override that you can use `true` or `false` in this option.
+
+#### `headerTruncatedBackTitle`
+
+Title string used by the back button when `headerBackTitle` doesn't fit on the screen. `"Back"` by default.
+
+#### `headerBackTitleStyle`
+
+Style object for the back title.
 
 ### Events
 

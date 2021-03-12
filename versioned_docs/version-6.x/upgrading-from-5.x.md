@@ -152,13 +152,7 @@ If you don't want to use the new animations, you can change it to your liking us
 
 ### Props passed to header are streamlined
 
-Previously, the stack header accepted scene and previous scene which contained things such as `descriptor`, `navigation` prop, `progress` etc. The props are now simplified to following:
-
-- `route` - the route prop for the screen that the header is part of
-- `navigation` - the navigation prop for the screen
-- `options` - the options specified for the screen
-- `progress` - animated value representing animation progress of the screen
-- `previous` - optional object containing information about the previous screen, contains `route`, `options` and `progress` properties.
+Previously, the stack header accepted scene and previous scene which contained things such as `descriptor`, `navigation` prop, `progress` etc. The props are now simplified to following. See [header docs](stack-navigator.md#header) for the list.
 
 If you have a custom header, you may need to adjust it to use the new props.
 

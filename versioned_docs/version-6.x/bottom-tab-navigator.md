@@ -306,6 +306,16 @@ Accessibility label for the tab button. This is read by the screen reader when t
 
 ID to locate this tab button in tests.
 
+#### `unmountOnBlur`
+
+Whether this screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
+
+Normally, we don't recommend enabling this prop as users don't expect their navigation history to be lost when switching tabs. If you enable this prop, please consider if this will actually provide a better experience for the user.
+
+### Header related options
+
+You can find the list of header related options [here](elements.md#header). In addition to those, the following options are also supported in bottom tabs:
+
 #### `header`
 
 Function that returns a React Element to display as a header. It accepts an object containing the following properties as the argument:
@@ -344,160 +354,11 @@ headerStyle: {
 };
 ```
 
-Note that this style is not applied to the header by default since you control the styling of your custom header. If you also want to apply this style to your header, use `scene.descriptor.options.headerStyle` from the props.
+Note that this style is not applied to the header by default since you control the styling of your custom header. If you also want to apply this style to your header, use `options.headerStyle` from the props.
 
 #### `headerShown`
 
-Whether to show or hide the header for the screen. The header is shown by default unless the `headerMode` prop on the navigator was set to `none`. Setting this to `false` hides the header.
-
-#### `headerTitle`
-
-String or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is specified, it receives an object containing `allowFontScaling`, `tintColor`, `style` and `children` properties. The `children` property contains the title string.
-
-#### `headerTitleAlign`
-
-How to align the header title. Possible values:
-
-- `left`
-- `center`
-
-Defaults to `center` on iOS and `left` on Android.
-
-#### `headerTitleAllowFontScaling`
-
-Whether header title font should scale to respect Text Size accessibility settings. Defaults to false.
-
-#### `headerLeft`
-
-Function which returns a React Element to display on the left side of the header. When a function is used, it receives a number of arguments when rendered (`onPress`, `label`, `labelStyle` and more.
-
-You can use it to implement your custom left button, for example:
-
-```js
-<Tab.Screen
-  name="Home"
-  component={HomeScreen}
-  options={{
-    headerLeft: (props) => (
-      <MyButton
-        {...props}
-        onPress={() => {
-          // Do something
-        }}
-      />
-    ),
-  }}
-/>;
-```
-
-#### `headerRight`
-
-Function which returns a React Element to display on the right side of the header.
-
-#### `headerStyle`
-
-Style object for the header. You can specify a custom background color here, for example.
-
-#### `headerTitleStyle`
-
-Style object for the title component
-
-#### `headerLeftContainerStyle`
-
-Customize the style for the container of the `headerLeft` component, for example to add padding.
-
-#### `headerRightContainerStyle`
-
-Customize the style for the container of the `headerRight` component, for example to add padding.
-
-#### `headerTitleContainerStyle`
-
-Customize the style for the container of the `headerTitle` component, for example to add padding.
-
-By default, `headerTitleContainerStyle` is with an absolute position style and offsets both `left` and `right`. This may lead to white space or overlap between `headerLeft` and `headerTitle` if a customized `headerLeft` is used. It can be solved by adjusting `left` and `right` style in `headerTitleContainerStyle` and `marginHorizontal` in `headerTitleStyle`.
-
-#### `headerBackgroundContainerStyle`
-
-Style object for the container of the `headerBackground` element.
-
-#### `headerTintColor`
-
-Tint color for the header
-
-#### `headerPressColor`
-
-Color for material ripple (Android >= 5.0 only)
-
-#### `headerPressOpacity`
-
-Press opacity for the buttons in header (Android < 5.0, and iOS)
-
-#### `headerTransparent`
-
-Defaults to `false`. If `true`, the header will not have a background unless you explicitly provide it with `headerBackground`. The header will also float over the screen so that it overlaps the content underneath.
-
-This is useful if you want to render a semi-transparent header or a blurred background.
-
-Note that if you don't want your content to appear under the header, you need to manually add a top margin to your content. React Navigation won't do it automatically.
-
-To get the height of the header, you can use [`HeaderHeightContext`](element.md#headerheightcontext) with [React's Context API](https://reactjs.org/docs/context.html#contextconsumer) or [`useHeaderHeight`](elements.md#useheaderheight):
-
-```js
-import { HeaderHeightContext } from '@react-navigation/elements';
-
-// ...
-
-<HeaderHeightContext.Consumer>
-  {headerHeight => (
-    /* render something */
-  )}
-</HeaderHeightContext.Consumer>
-```
-
-or
-
-```js
-import { useHeaderHeight } from '@react-navigation/elements';
-
-// ...
-
-const headerHeight = useHeaderHeight();
-```
-
-#### `headerBackground`
-
-Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
-
-For example, you can use this with `headerTransparent` to render a blur view to create a translucent header.
-
-<samp id="header-blur" />
-
-```js
-import { BlurView } from 'expo-blur';
-
-// ...
-
-<Tab.Screen
-  name="Home"
-  component={HomeScreen}
-  options={{
-    headerTransparent: true,
-    headerBackground: () => (
-      <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />
-    ),
-  }}
-/>;
-```
-
-#### `headerStatusBarHeight`
-
-Extra padding to add at the top of header to account for translucent status bar. By default, it uses the top value from the safe area insets of the device. Pass 0 or a custom value to disable the default behavior, and customize the height.
-
-#### `unmountOnBlur`
-
-Whether this screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
-
-Normally, we don't recommend enabling this prop as users don't expect their navigation history to be lost when switching tabs. If you enable this prop, please consider if this will actually provide a better experience for the user.
+Whether to show or hide the header for the screen. The header is shown by default. Setting this to `false` hides the header.
 
 ### Events
 
