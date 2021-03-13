@@ -29,7 +29,21 @@ const DEPS_VERSIONS = {
     'react-native-tab-view@^2.15.1',
   ],
   '6': [
-    // TODO
+    '@expo/vector-icons@*',
+    '@react-native-community/masked-view@*',
+    'react-native-gesture-handler@*',
+    'react-native-pager-view@*',
+    'react-native-paper@^4.7.2',
+    'react-native-reanimated@*',
+    'react-native-safe-area-context@*',
+    'react-native-screens@*',
+    'react-native-tab-view@^3.0.0',
+    "@react-navigation/bottom-tabs@^6.0.0-next.1",
+    "@react-navigation/drawer@^6.0.0-next.1",
+    "@react-navigation/material-bottom-tabs@^6.0.0-next.1",
+    "@react-navigation/material-top-tabs@^6.0.0-next.1",
+    "@react-navigation/native@^6.0.0-next.1",
+    "@react-navigation/stack@^6.0.0-next.2",
   ],
   next: [],
 };
