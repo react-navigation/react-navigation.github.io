@@ -61,23 +61,19 @@ If `false`, the on screen keyboard will NOT automatically dismiss when navigatin
 
 #### `mode`
 
-Defines the style for rendering and transitions:
+This is shortcut property which configures several options to configure the style for rendering and transitions:
 
 - `card` - Use the standard iOS and Android screen transitions. This is the default.
-- `modal` - This does 2 things:
-  - Sets `headerMode` to `screen` for the stack unless specified.
-  - Changes the screen animation to match the platform behavior.
-
-#### `headerMode`
-
-Specifies how the header should be rendered:
-
-- `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
-- `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
+- `modal` - This does few things:
+  - Sets `headerMode` to `screen` for all screens in the stack unless specified.
+  - Changes the screen animation to match the platform behavior for modals.
+  - Adjusts the `detachPreviousScreen` option so that the previous screen stays rendered.
 
 #### `detachInactiveScreens`
 
 Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
+
+You can customize it further on per screen basis using the [`detachPreviousScreen`](#detachinactivescreen) option.
 
 ### Options
 
@@ -206,28 +202,9 @@ header: ({ navigation, route, options, back }) => {
 
 To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
 
-When using a custom header, there are 2 important things to keep in mind:
+When using a custom header, there are 2 things to keep in mind:
 
-##### Set `headerMode` to `screen`
-
-By default, there is one floating header which renders headers for multiple screens on iOS. These headers include animations to smoothly switch to one another.
-
-Setting the `headerMode` prop to `screen` makes the header part of the screen, so you don't have to implement animations to animate it separately.
-
-If you want to customize how the header animates and want to keep `headerMode` as `float`, you can interpolate on the `progress.current` and `progress.next` props. For example, following will cross-fade the header:
-
-```js
-const opacity = Animated.add(progress.current, progress.next || 0).interpolate({
-  inputRange: [0, 1, 2],
-  outputRange: [0, 1, 0],
-});
-
-return (
-  <Animated.View style={{ opacity }}>{/* Header content */}</Animated.View>
-);
-```
-
-##### Specify a `height` in `headerStyle`
+##### Specify a `height` in `headerStyle` to avoid glitches
 
 If your header's height differs from the default header height, then you might notice glitches due to measurement being async. Explicitly specifying the height will avoid such glitches.
 
@@ -240,6 +217,34 @@ headerStyle: {
 ```
 
 Note that this style is not applied to the header by default since you control the styling of your custom header. If you also want to apply this style to your header, use `headerStyle` from the props.
+
+##### Set `headerMode` to `float` for custom header animations
+
+By default, there is one floating header which renders headers for multiple screens on iOS for non-modals. These headers include animations to smoothly switch to one another.
+
+If you specify a custom header, React Navigation will change it to `screen` automatically so that the header animated along with the screen instead. This means that you don't have to implement animations to animate it separately.
+
+Setting the `headerMode` prop to `screen` makes the header part of the screen, so you don't have to implement animations to animate it separately.
+
+But you might want to keep the floating header to have a different transition animation between headers. To do that, you'll need to specify `headerMode: 'float'` in the options, and then interpolate on the `progress.current` and `progress.next` props in your custom header. For example, following will cross-fade the header:
+
+```js
+const opacity = Animated.add(progress.current, progress.next || 0).interpolate({
+  inputRange: [0, 1, 2],
+  outputRange: [0, 1, 0],
+});
+
+return (
+  <Animated.View style={{ opacity }}>{/* Header content */}</Animated.View>
+);
+```
+
+#### `headerMode`
+
+Specifies how the header should be rendered:
+
+- `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
+- `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
 
 #### `headerShown`
 

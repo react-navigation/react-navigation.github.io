@@ -43,7 +43,7 @@ const DEPS_VERSIONS = {
     "@react-navigation/material-bottom-tabs@^6.0.0-next.1",
     "@react-navigation/material-top-tabs@^6.0.0-next.1",
     "@react-navigation/native@^6.0.0-next.1",
-    "@react-navigation/stack@^6.0.0-next.2",
+    "@react-navigation/stack@^6.0.0-next.6",
   ],
   next: [],
 };

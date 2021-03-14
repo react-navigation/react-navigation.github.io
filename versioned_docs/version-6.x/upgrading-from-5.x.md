@@ -127,6 +127,14 @@ See [configuring links](configuring-links.md) for more details on configuring de
 
 Thee following changes are in the `@react-navigation/stack` package.
 
+### New default animations for modal screens
+
+To match the default behavior of iOS, now `mode="modal"` shows the new presentation style modal introduced in iOS 13. It also adjusts things like status bar height in the header automatically that you had to do manually before.
+
+Previously Android didn't have any special animation for modals. But now there's a slide from bottom animation instead of the default animation.
+
+If you don't want to use the new animations, you can change it to your liking using the [animation related options](stack-navigator.md#animations)
+
 ### `headerMode="none"` is removed in favor of `headerShown: false`
 
 Previously, you could pass `headerMode="none"` prop to hide the header in a stack navigator. However, there is also a [`headerShown`](stack-navigator.md#headershown) option which can be used to hide or show the header, and it supports configuration per screen.
@@ -140,17 +148,26 @@ So instead of having 2 ways to do very similar things, we have removed `headerMo
 </Stack.Navigator>
 ```
 
-The `headerMode` prop still exists and supports other values: `screen` and `float`.
+### `headerMode is moved to options
 
-### New default animations for modal screens
+Previously, `headerMode` was a prop on the navigator, but now it needs to be specified in screen's `options` instead. To keep previous behavior, you can specify it in `screenOptions`:
 
-To match the default behavior of iOS, now `mode="modal"` shows the new presentation style modal introduced in iOS 13. It also adjusts things like status bar height in the header automatically that you had to do manually before.
+```js
+<Stack.Navigator screenOptions={{ headerMode: 'screen' }}>
+  <Stack.Screen name="Home" component={Home} />
+  <Stack.Screen name="Profile" component={Profile} />
+</Stack.Navigator>
+```
 
-Previously Android didn't have any special animation for modals. But now there's a slide from bottom animation instead of the default animation.
+The `headerMode` option supports 2 values: `screen` and `float`.
 
-If you don't want to use the new animations, you can change it to your liking using the [animation related options](stack-navigator.md#animations)
+### Custom header now uses 'headerMode: screen' by default
 
-### Props passed to header are streamlined
+Previously it was necessary to specify `headerMode='screen'` or a custom animation manually when using a custom header. Even though this was mentioned in the docs, it has been tripped up many people.
+
+But now specifying a custom header automatically sets `headerMode` to `screen`, so it doesn't need anything more. This is now possible because `headerMode` is no longer a prop for the navigator, so it can be configured per screen where a custom header is specified.
+
+### Props passed to custom header are streamlined
 
 Previously, the stack header accepted scene and previous scene which contained things such as `descriptor`, `navigation` prop, `progress` etc. The props are now simplified to following. See [header docs](stack-navigator.md#header) for the list.
 
