@@ -7,7 +7,7 @@ sidebar_label: Authentication flows
 Most apps require that a user authenticate in some way to have access to data associated with a user or other private content. Typically the flow will look like this:
 
 - The user opens the app.
-- The app loads some authentication state from persistent storage (for example, `AsyncStorage`).
+- The app loads some authentication state from encrypted persistent storage (for example, [`SecureStore`](https://docs.expo.io/versions/latest/sdk/securestore/)).
 - When the state has loaded, the user is presented with either authentication screens or the main app, depending on whether valid authentication state was loaded.
 - When the user signs out, we clear the authentication state and send them back to authentication screens.
 
@@ -88,7 +88,7 @@ return (
 );
 ```
 
-In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `AsyncStorage` and validating the token. After we get the token and if it's valid, we need to set the `userToken`. We also have another state called `isSignout` to have a different animation on sign out.
+In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `SecureStore` and validating the token. After we get the token and if it's valid, we need to set the `userToken`. We also have another state called `isSignout` to have a different animation on sign out.
 
 The main thing to notice is that we're conditionally defining screens based on these state variables:
 
@@ -118,7 +118,7 @@ state.userToken == null ? (
 
 From the previous snippet, we can see that we need 3 state variables:
 
-- `isLoading` - We set this to `true` when we're trying to check if we already have a token saved in `AsyncStorage`
+- `isLoading` - We set this to `true` when we're trying to check if we already have a token saved in `SecureStore`
 - `isSignout` - We set this to `true` when user is signing out, otherwise set it to `false`
 - `userToken` - The token for the user. If it's non-null, we assume the user is logged in, otherwise not.
 
@@ -143,7 +143,7 @@ So our component will look like this:
 
 ```js
 import * as React from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 
 export default function App({ navigation }) {
   const [state, dispatch] = React.useReducer(
@@ -182,7 +182,7 @@ export default function App({ navigation }) {
       let userToken;
 
       try {
-        userToken = await AsyncStorage.getItem('userToken');
+        userToken = await SecureStore.getItemAsync('userToken');
       } catch (e) {
         // Restoring token failed
       }
@@ -202,7 +202,7 @@ export default function App({ navigation }) {
       signIn: async data => {
         // In a production app, we need to send some data (usually username, password) to server and get a token
         // We will also need to handle errors if sign in failed
-        // After getting token, we need to persist the token using `AsyncStorage`
+        // After getting token, we need to persist the token using `SecureStore`
         // In the example, we'll use a dummy token
 
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
@@ -211,7 +211,7 @@ export default function App({ navigation }) {
       signUp: async data => {
         // In a production app, we need to send user data to server and get a token
         // We will also need to handle errors if sign up failed
-        // After getting token, we need to persist the token using `AsyncStorage`
+        // After getting token, we need to persist the token using `SecureStore`
         // In the example, we'll use a dummy token
 
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
