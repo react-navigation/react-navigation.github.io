@@ -13,7 +13,7 @@ Let's take for example a tab navigator that contains a stack in each tab. What h
 <samp id="stack-in-tab-nav-options" />
 
 ```js
-const Tab = createTabNavigator();
+const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const SettingsStack = createStackNavigator();
 
