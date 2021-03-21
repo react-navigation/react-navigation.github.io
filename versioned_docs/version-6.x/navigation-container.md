@@ -183,7 +183,10 @@ You can use it to track the focused screen, persist the navigation state etc.
 
 ### `onReady`
 
-Function which is called after the navigation container and all its children finish mounting for the first time. See [docs regarding initialization of the ref](navigating-without-navigation-prop.md#handling-initialization) for more details.
+Function which is called after the navigation container and all its children finish mounting for the first time. You can use it for:
+
+- Making sure that the `ref` is usable. See [docs regarding initialization of the ref](navigating-without-navigation-prop.md#handling-initialization) for more details.
+- Hiding your native splash screen
 
 ### `linking`
 
@@ -486,7 +489,9 @@ Example:
 
 ### `fallback`
 
-React Element to use as a fallback while we resolve the link. Defaults to `null`.
+React Element to use as a fallback while we resolve deep links. Defaults to `null`.
+
+If you have a native splash screen, please use [`onReady`](#onready) instead of `fallback` prop.
 
 ### `documentTitle`
 
