@@ -124,10 +124,14 @@ Gestures are not supported on Web.
 
 #### `gestureResponseDistance`
 
-Object to override the distance of touch start from the edge of the screen to recognize gestures. The object can contain the following properties:
+Number to override the distance of touch start from the edge of the screen to recognize gestures.
 
-- `horizontal` - _number_ - Distance for horizontal direction. Defaults to 50.
-- `vertical` - _number_ - Distance for vertical direction. Defaults to 135.
+It'll configure either the horizontal or vertical distance based on the [`gestureDirection`](#gesturedirection) value.
+
+The default values are:
+
+- `50` - when `gestureDirection` is `horizontal` or `horizontal-inverted`
+- `135` - when `gestureDirection` is `vertical` or `vertical-inverted`
 
 This is not supported on Web.
 

@@ -177,6 +177,10 @@ If you have a custom header, you may need to adjust it to use the new props.
 
 The header elements were rendered using absolute positioning which didn't work well in certain situations. We now use flexbox for header elements which should work better. If you have code which relied on the absolute positioning, you'll need to change it.
 
+### The `gestureResponseDistance` option is now a number instead of an object
+
+Previously, the [`gestureResponseDistance`](stack-navigator.md#gestureresponsedistance) option took an object with `horizontal` and `vertical` properties. Now it takes a number which will be used as the horizontal or vertical value based on the [`gestureDirection`](stack-navigator.md#gesturedirection) option.
+
 ### Some exports are now moved to the element library
 
 The following exports now live in the elements library since they are no longer specific to the stack navigator:
