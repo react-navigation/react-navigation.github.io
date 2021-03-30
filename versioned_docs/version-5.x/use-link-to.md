@@ -42,6 +42,6 @@ class Home extends React.Component {
 export default function (props) {
   const linkTo = useLinkTo();
 
-  return <Profile {...props} linkTo={linkTo} />;
+  return <Home {...props} linkTo={linkTo} />;
 }
 ```
