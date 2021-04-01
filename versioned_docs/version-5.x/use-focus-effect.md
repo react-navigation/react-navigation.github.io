@@ -34,7 +34,7 @@ The `useFocusEffect` is analogous to React's `useEffect` hook. The only differen
 
 The effect will run whenever the dependencies passed to `React.useCallback` change, i.e. it'll run on initial render (if the screen is focused) as well as on subsequent renders if the dependencies have changed. If you don't wrap your effect in `React.useCallback`, the effect will run every render if the screen is focused.
 
-The cleanup function runs when the previous effect needs to be cleaned up, i.e. when dependencies change and a new effect is scheduled and when the screen unmounts or blurs.
+The code passed to `useFocusEffect` can return a cleanup function that runs when the previous effect needs to be cleaned up, i.e. when dependencies change and a new effect is scheduled and when the screen unmounts or blurs.
 
 ## Running asynchronous effects
 
