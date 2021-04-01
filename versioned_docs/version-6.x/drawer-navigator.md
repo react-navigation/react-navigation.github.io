@@ -397,13 +397,12 @@ Function that returns a React Element to display as a header. It accepts an obje
 Example:
 
 ```js
+import { getHeaderTitle } from '@react-navigation/elements';
+
+// ..
+
 header: ({ navigation, route, options }) => {
-  const title =
-    options.headerTitle !== undefined
-      ? options.headerTitle
-      : options.title !== undefined
-      ? options.title
-      : route.name;
+  const title = getHeaderTitle(options, route.name);
 
   return <MyHeader title={title} style={options.headerStyle} />;
 };

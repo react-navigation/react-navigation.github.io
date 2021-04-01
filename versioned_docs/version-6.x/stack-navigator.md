@@ -184,13 +184,12 @@ Make sure to set `headerMode` to `screen` as well when using a custom header (se
 Example:
 
 ```js
+import { getHeaderTitle } from '@react-navigation/elements';
+
+// ..
+
 header: ({ navigation, route, options, back }) => {
-  const title =
-    options.headerTitle !== undefined
-      ? options.headerTitle
-      : options.title !== undefined
-      ? options.title
-      : route.name;
+  const title = getHeaderTitle(options, route.name);
 
   return (
     <MyHeader
