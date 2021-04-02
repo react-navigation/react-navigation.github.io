@@ -62,7 +62,7 @@ function Home() {
           <div>
             <Link
               className={classnames(
-                'button button--secondary button--outline button--lg margin-right--sm',
+                'button button--secondary button--outline button--lg margin-right--sm margin-top--md',
                 styles.heroButton
               )}
               to={useBaseUrl('/docs/getting-started')}
@@ -72,7 +72,7 @@ function Home() {
 
             <Link
               className={classnames(
-                'button button--secondary button--outline button--lg',
+                'button button--secondary button--outline button--lg margin-top--md',
                 styles.heroButton
               )}
               to={
