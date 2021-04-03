@@ -13,11 +13,11 @@ We're excited to announce that we finally have a prerelease version  of React Na
 
 While React Navigation 5 was complete overhaul to the API of React Navigation, React Navigation 6 keeps the same API, with some breaking changes to make things more consistent and provide more flexibility. We also tried to address some common pain points and confusions that users had.
 
-We'll share few highlights of the release in this blog post. If you're looking for a detailed upgrade guide, you can find it [here](/docs/6.x/upgrading-from-5.x)
+We'll share few highlights of the release in this blog post. If you're looking for a detailed upgrade guide, you can find it [here](/docs/6.x/upgrading-from-5.x).
 
 ## Highlights
 
-- Params are now overwritten on navigation instead if merging (with option to merge them)
+- Params are now overwritten on navigation instead of merging (with option to merge them)
 - Modals in [stack](/docs/6.x/stack-navigator) now use the presentation style on iOS by default, and there's a new slide animation for modals on Android
 - [Drawer](/docs/6.x/drawer-navigator) now uses a slide animation by default on iOS
 - Headers are now shown by default in [drawer](/docs/6.x/drawer-navigator) and [bottom tab](/docs/6.x/bottom-tab-navigator) screens, so you don't need extra stack navigators
