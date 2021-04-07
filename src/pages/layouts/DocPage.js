@@ -3,7 +3,7 @@ import DefaultDocPage from '@theme/DocPage';
 import {
   initializeSnackObservers,
   removeSnackObservers,
-} from '../SnackHelpers';
+} from '../../SnackHelpers';
 
 function DocPage(props) {
   React.useEffect(() => {

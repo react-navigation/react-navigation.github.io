@@ -1,139 +1,223 @@
 /**
- * Copyright (c) 2017-present, Facebook, Inc.
+ * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {useState, useRef, useCallback} from 'react';
-import classnames from 'classnames';
-
+import React, {useState, useRef, useCallback, useMemo} from 'react';
+import {createPortal} from 'react-dom';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import {useHistory} from '@docusaurus/router';
+import {useBaseUrlUtils} from '@docusaurus/useBaseUrl';
+import Link from '@docusaurus/Link';
+import Head from '@docusaurus/Head';
+import useSearchQuery from '@theme/hooks/useSearchQuery';
+import {DocSearchButton, useDocSearchKeyboardEvents} from '@docsearch/react';
+import useAlgoliaContextualFacetFilters from '@theme/hooks/useAlgoliaContextualFacetFilters';
+import {translate} from '@docusaurus/Translate';
 
+let DocSearchModal = null;
 
-import './styles.css';
-
-const VERSIONS  = ["1.x", "2.x", "3.x", "4.x"];
-
-const Search = props => {
-  const [algoliaLoaded, setAlgoliaLoaded] = useState(false);
-  const searchBarRef = useRef(null);
-  const {siteConfig = {}} = useDocusaurusContext();
-  const {
-    themeConfig: {algolia},
-  } = siteConfig;
+const VERSIONS  = ["1.x", "2.x", "3.x", "4.x", "6.x"];
 
   /**
    * NOTE: @eriveltonelias
    * this isn't the better way to do that 
    * but currently docusarus v2 isn't working the filter
    * by version, so this will allow us to get the current version
-   * and use to filter the search
+   * and use to facetFilters in the search
    */
-  function getVersion(){
-    const url = window.location.href;
-    const index = VERSIONS.findIndex(e => url.includes(e));
-    return index >= 0 ? VERSIONS[index] : '5.x';
-  }
 
-  function initAlgolia(focus) {
-    const version = getVersion();
-    algolia.algoliaOptions.facetFilters = [
-      `version:${version}`
-    ];
-    window.docsearch({
-      appId: algolia.appId,
-      apiKey: algolia.apiKey,
-      indexName: algolia.indexName,
-      inputSelector: '#search_input_react',
-      algoliaOptions: algolia.algoliaOptions,
-      // Override algolia's default selection event, allowing us to do client-side
-      // navigation and avoiding a full page refresh.
-      handleSelected: (_input, _event, suggestion) => {
-        // Use an anchor tag to parse the absolute url into a relative url
-        // Alternatively, we can use new URL(suggestion.url) but its not supported in IE
-        const a = document.createElement('a');
-        a.href = suggestion.url;
+function getVersion(){
+  const url = window.location.href;
+  const index = VERSIONS.findIndex(e => url.includes(e));
+  return index >= 0 ? VERSIONS[index] : '5.x';
+}
 
-        // Algolia use closest parent element id #__docusaurus when a h1 page title does not have an id
-        // So, we can safely remove it. See https://github.com/facebook/docusaurus/issues/1828 for more details.
-        const routePath =
-          `#__docusaurus` === a.hash
-            ? `${a.pathname}`
-            : `${a.pathname}${a.hash}`;
-        
-        window.open(routePath, "_self");
-      },
-    });
+function Hit({hit, children}) {
+  return <Link to={hit.url}>{children}</Link>;
+}
 
-    if (focus) {
-      searchBarRef.current.focus();
-    }
-  }
+function ResultsFooter({state, onClose}) {
+  const {generateSearchPageLink} = useSearchQuery();
 
-  const loadAlgolia = (focus = true) => {
-    if (algoliaLoaded) {
-      return;
-    }
+  return (
+    <Link to={generateSearchPageLink(state.query)} onClick={onClose}>
+      See all {state.context.nbHits} results
+    </Link>
+  );
+}
 
-    Promise.all([import('docsearch.js'), import('./algolia.css')]).then(
-      ([{default: docsearch}]) => {
-        setAlgoliaLoaded(true);
-        window.docsearch = docsearch;
-        initAlgolia(focus);
-      },
-    );
+function DocSearch({contextualSearch, ...props}) {
+  const {siteMetadata} = useDocusaurusContext();
+
+  const contextualSearchFacetFilters = useAlgoliaContextualFacetFilters();
+
+  const configFacetFilters = props.searchParameters?.facetFilters ?? [];
+
+  let facetFilters = contextualSearch
+    ? // Merge contextual search filters with config filters
+      [...contextualSearchFacetFilters, ...configFacetFilters]
+    : // ... or use config facetFilters
+      configFacetFilters;
+
+  const version = getVersion();
+  facetFilters = [...facetFilters,`version:${version}`];
+
+  // we let user override default searchParameters if he wants to
+  const searchParameters = {
+    ...props.searchParameters,
+    facetFilters,
   };
 
-  const handleSearchIcon = useCallback(() => {
-    loadAlgolia();
+  const {withBaseUrl} = useBaseUrlUtils();
+  const history = useHistory();
+  const searchContainer = useRef(null);
+  const searchButtonRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [initialQuery, setInitialQuery] = useState(null);
 
-    if (algoliaLoaded) {
-      searchBarRef.current.focus();
+  const importDocSearchModalIfNeeded = useCallback(() => {
+    if (DocSearchModal) {
+      return Promise.resolve();
     }
 
-    props.handleSearchBarToggle(!props.isSearchBarExpanded);
-  }, [props.isSearchBarExpanded]);
+    return Promise.all([
+      import('@docsearch/react/modal'),
+      import('@docsearch/react/style'),
+      import('./styles.css'),
+    ]).then(([{DocSearchModal: Modal}]) => {
+      DocSearchModal = Modal;
+    });
+  }, []);
 
-  const handleSearchInputBlur = useCallback(() => {
-    props.handleSearchBarToggle(!props.isSearchBarExpanded);
-  }, [props.isSearchBarExpanded]);
+  const onOpen = useCallback(() => {
+    importDocSearchModalIfNeeded().then(() => {
+      searchContainer.current = document.createElement('div');
+      document.body.insertBefore(
+        searchContainer.current,
+        document.body.firstChild,
+      );
+      setIsOpen(true);
+    });
+  }, [importDocSearchModalIfNeeded, setIsOpen]);
 
-  const handleSearchInput = useCallback(e => {
-    const needFocus = e.type !== 'mouseover';
+  const onClose = useCallback(() => {
+    setIsOpen(false);
+    searchContainer.current.remove();
+  }, [setIsOpen]);
 
-    loadAlgolia(needFocus);
+  const onInput = useCallback(
+    (event) => {
+      importDocSearchModalIfNeeded().then(() => {
+        setIsOpen(true);
+        setInitialQuery(event.key);
+      });
+    },
+    [importDocSearchModalIfNeeded, setIsOpen, setInitialQuery],
+  );
+
+  const navigator = useRef({
+    navigate({itemUrl}) {
+      history.push(itemUrl);
+    },
+  }).current;
+
+  const transformItems = useRef((items) => {
+    return items.map((item) => {
+      // We transform the absolute URL into a relative URL.
+      // Alternatively, we can use `new URL(item.url)` but it's not
+      // supported in IE.
+      const a = document.createElement('a');
+      a.href = item.url;
+
+      return {
+        ...item,
+        url: withBaseUrl(`${a.pathname}${a.hash}`),
+      };
+    });
+  }).current;
+
+  const resultsFooterComponent = useMemo(
+    () => (footerProps) => <ResultsFooter {...footerProps} onClose={onClose} />,
+    [onClose],
+  );
+
+  const transformSearchClient = useCallback(
+    (searchClient) => {
+      searchClient.addAlgoliaAgent(
+        'docusaurus',
+        siteMetadata.docusaurusVersion,
+      );
+
+      return searchClient;
+    },
+    [siteMetadata.docusaurusVersion],
+  );
+
+  useDocSearchKeyboardEvents({
+    isOpen,
+    onOpen,
+    onClose,
+    onInput,
+    searchButtonRef,
+  });
+
+  const translatedSearchLabel = translate({
+    id: 'theme.SearchBar.label',
+    message: 'Search',
+    description: 'The ARIA label and placeholder for search button',
   });
 
   return (
-    <div className="navbar__search" key="search-box">
-      <span
-        aria-label="expand searchbar"
-        role="button"
-        className={classnames('search-icon', {
-          'search-icon-hidden': props.isSearchBarExpanded,
-        })}
-        onClick={handleSearchIcon}
-        onKeyDown={handleSearchIcon}
-        tabIndex={0}
-      />
-      <input
-        id="search_input_react"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-        className={classnames(
-          'navbar__search-input',
-          {'search-bar-expanded': props.isSearchBarExpanded},
-          {'search-bar': !props.isSearchBarExpanded},
-        )}
-        onMouseOver={handleSearchInput}
-        onFocus={handleSearchInput}
-        onBlur={handleSearchInputBlur}
-        ref={searchBarRef}
-      />
-    </div>
-  );
-};
+    <>
+      <Head>
+        {/* This hints the browser that the website will load data from Algolia,
+        and allows it to preconnect to the DocSearch cluster. It makes the first
+        query faster, especially on mobile. */}
+        <link
+          rel="preconnect"
+          href={`https://${props.appId}-dsn.algolia.net`}
+          crossOrigin="anonymous"
+        />
+      </Head>
 
-export default Search;
+      <DocSearchButton
+        onTouchStart={importDocSearchModalIfNeeded}
+        onFocus={importDocSearchModalIfNeeded}
+        onMouseOver={importDocSearchModalIfNeeded}
+        onClick={onOpen}
+        ref={searchButtonRef}
+        translations={{
+          buttonText: translatedSearchLabel,
+          buttonAriaLabel: translatedSearchLabel,
+        }}
+      />
+
+      {isOpen &&
+        createPortal(
+          <DocSearchModal
+            onClose={onClose}
+            initialScrollY={window.scrollY}
+            initialQuery={initialQuery}
+            navigator={navigator}
+            transformItems={transformItems}
+            hitComponent={Hit}
+            resultsFooterComponent={resultsFooterComponent}
+            transformSearchClient={transformSearchClient}
+            {...props}
+            searchParameters={searchParameters}
+          />,
+          searchContainer.current,
+        )}
+    </>
+  );
+}
+
+function SearchBar() {
+  const {siteConfig} = useDocusaurusContext();
+  return <DocSearch {...siteConfig.themeConfig.algolia} />;
+}
+
+export default SearchBar;

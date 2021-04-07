@@ -1,40 +1,20 @@
 /**
- * Copyright (c) 2017-present, Facebook, Inc.
+ * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-.search-icon {
-  background-image: var(--ifm-navbar-search-input-icon);
-  height: auto;
-  width: 24px;
-  cursor: pointer;
-  padding: 8px;
-  line-height: 32px;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: none;
+:root {
+  --docsearch-primary-color: var(--ifm-color-primary);
+  --docsearch-text-color: var(--ifm-font-color-base);
 }
 
-.search-icon-hidden {
-  visibility: hidden;
+.DocSearch-Button {
+  transition: all var(--ifm-transition-fast)
+    var(--ifm-transition-timing-default);
 }
 
-@media (max-width: 360px) {
-  .search-bar {
-    width: 0 !important;
-    background: none !important;
-    padding: 0 !important;
-    transition: none !important;
-  }
-
-  .search-bar-expanded {
-    width: 9rem !important;
-  }
-
-  .search-icon {
-    display: inline;
-    vertical-align: sub;
-  }
+.DocSearch-Container {
+  z-index: calc(var(--ifm-z-index-fixed) + 1);
 }
