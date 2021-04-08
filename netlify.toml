@@ -1,6 +1,7 @@
-environment = { NODE_VERSION = "12.13" }
-
 [build]
   base    = "/"
   publish = "build"
   command = "yarn install && yarn build"
+
+[build.environment]
+  NODE_VERSION = "12.13"
