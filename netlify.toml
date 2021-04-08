@@ -1,3 +1,5 @@
+environment = { NODE_VERSION = "12.13" }
+
 [build]
   base    = "/"
   publish = "build"
