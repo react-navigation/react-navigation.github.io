@@ -90,7 +90,7 @@ function findNearestCodeBlock(node) {
   while (nextElement) {
     if (
       nextElement.tagName === 'DIV' &&
-      nextElement.className.includes('mdxCodeBlock')
+      ( nextElement.className.includes('mdxCodeBlock') || nextElement.className.includes('codeBlockContainer'))
     ) {
       return nextElement;
     } else {
