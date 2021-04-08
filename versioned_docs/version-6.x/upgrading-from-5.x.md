@@ -281,6 +281,10 @@ To keep the same behavior as before, you can specify these in `screenOptions`.
 
 Similar to bottom tabs, the `lazy` prop is now moved to `options` for material top tabs.
 
+### The `lazyPlaceholder` prop is moved to `lazyPlaceholder` option for per-screen configuration for material top tabs
+
+The `lazyPlaceholder` prop is now moved to `options` for material top tabs so you can configure a placeholder in each screen's options.
+
 ### The default value for `backBehavior` is now `firstRoute` for material top tabs tabs
 
 Similar to bottom tabs, material top tabs now uses `firstRoute` for the `backBehavior` prop as well.
