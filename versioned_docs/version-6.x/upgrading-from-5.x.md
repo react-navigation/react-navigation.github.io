@@ -297,6 +297,12 @@ Similar to bottom tabs, material bottom tabs now uses `firstRoute` for the `back
 
 The following changes are in the `@react-navigation/drawer` package.
 
+### Drawer now uses Reanimated 2 if available
+
+There is a new implementation based on the latest [Reanimated](https://docs.swmansion.com/react-native-reanimated/) which will be used if it's available, otherwise drawer will fallback to the old implementation.
+
+You can pass `useLegacyImplementation={true}` to `Drawer.Navigator` to force it to always use the old implementation if you need.
+
 ### A header is shown by default in drawer screens
 
 Tab screens now show a header by default similar to screens in a stack navigator and bottom tab navigator. See [its options](bottom-tab-navigator.md#options) to see all header related options.

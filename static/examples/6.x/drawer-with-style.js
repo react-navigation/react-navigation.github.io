@@ -24,9 +24,11 @@ const Drawer = createDrawerNavigator();
 function MyDrawer() {
   return (
     <Drawer.Navigator
-      drawerStyle={{
-        backgroundColor: '#c6cbef',
-        width: 240,
+      screenOptions={{
+        drawerStyle: {
+          backgroundColor: '#c6cbef',
+          width: 240,
+        },
       }}
     >
       <Drawer.Screen name="Feed" component={Feed} />

@@ -69,128 +69,23 @@ It supports the following values:
 
 Whether the drawer should stay open by default. When this is `true`, the drawer will be open from the initial render. It can be closed normally using gestures or programmatically. However, when going back, drawer will re-open if it was closed. This essentially reverses the behavior of the drawer where the closed state is the default state.
 
-#### `drawerPosition`
-
-Options are `left` or `right`. Default is `left` position.
-
-#### `drawerType`
-
-Type of the drawer. It determines how the drawer looks and animates.
-
-- `front`: Traditional drawer which covers the screen with a overlay behind it.
-- `back`: The drawer is revealed behind the screen on swipe.
-- `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.
-- `permanent`: A permanent drawer is shown as a sidebar. Useful for having always visible drawer on larger screens.
-
-Defaults to `slide` on iOS and `front` on other platforms.
-
-You can conditionally specify the `drawerType` to show a permanent drawer on bigger screens and a traditional drawer drawer on small screens:
-
-```js
-import { useWindowDimensions } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-
-const Drawer = createDrawerNavigator();
-
-function MyDrawer() {
-  const dimensions = useWindowDimensions();
-
-  return (
-    <Drawer.Navigator
-      drawerType={dimensions.width >= 768 ? 'permanent' : 'front'}
-    >
-      {/* Screens */}
-    </Drawer.Navigator>
-  );
-}
-```
-
-You can also specify other props such as `drawerStyle` based on screen size to customize the behavior. For example, you can combine it with `openByDefault` to achieve a master-detail layout:
-
-```js
-import { useWindowDimensions } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-
-const Drawer = createDrawerNavigator();
-
-function MyDrawer() {
-  const dimensions = useWindowDimensions();
-
-  const isLargeScreen = dimensions.width >= 768;
-
-  return (
-    <Drawer.Navigator
-      openByDefault
-      drawerType={isLargeScreen ? 'permanent' : 'back'}
-      drawerStyle={isLargeScreen ? null : { width: '100%' }}
-      overlayColor="transparent"
-    >
-      {/* Screens */}
-    </Drawer.Navigator>
-  );
-}
-```
-
-#### `edgeWidth`
-
-Allows for defining how far from the edge of the content view the swipe gesture should activate.
-
-This is not supported on Web.
-
-#### `hideStatusBar`
-
-When set to true Drawer component will hide the OS status bar whenever the drawer is pulled or when it's in an "open" state.
-
-#### `statusBarAnimation`
-
-Animation of the statusbar when hiding it. use in combination with `hideStatusBar`.
-
-#### `keyboardDismissMode`
-
-Whether the keyboard should be dismissed when the swipe gesture begins. Defaults to `'on-drag'`. Set to `'none'` to disable keyboard handling.
-
-#### `minSwipeDistance`
-
-Minimum swipe distance threshold that should activate opening the drawer.
-
-#### `overlayColor`
-
-Color overlay to be displayed on top of the content view when drawer gets open. The opacity is animated from `0` to `1` when the drawer opens.
-
-#### `lazy`
-
 #### `detachInactiveScreens`
 
 Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
 
 Whether the screens should render the first time they are accessed. Defaults to `true`. Set it to `false` if you want to render all screens on initial render.
 
-#### `gestureHandlerProps`
+#### useLegacyImplementation
 
-Props to pass to the underlying pan gesture handler.
+Whether to use the legacy implementation based on Reanimated 1. The new implementation based on Reanimated 2 will perform better, but you need additional configuration and need to use Hermes with Flipper to debug.
 
-This is not supported on Web.
+This defaults to `true` in following cases:
 
-#### `sceneContainerStyle`
+- Reanimated 2 is not configured
+- App is connected to Chrome debugger (Reanimated 2 cannot be used with Chrome debugger)
+- App is running on Web
 
-Style object for the component wrapping the screen content.
-
-#### `drawerStyle`
-
-Style object for the drawer component. You can pass a custom background color for a drawer or a custom width here.
-
-<samp id="drawer-with-style" />
-
-```js
-<Drawer.Navigator
-  drawerStyle={{
-    backgroundColor: '#c6cbef',
-    width: 240,
-  }}
->
-  {/* screens */}
-</Drawer.Navigator>
-```
+Otherwise, it defaults to `false`
 
 #### `drawerContent`
 
@@ -255,12 +150,14 @@ The `DrawerItem` component accepts the following props:
 - `labelStyle`: Style object for the label `Text`.
 - `style`: Style object for the wrapper `View`.
 
-The `progress` node can be used to do interesting animations in your `drawerContent`, such as parallax motion of the drawer contents:
+The `progress` object can be used to do interesting animations in your `drawerContent`, such as parallax motion of the drawer contents:
 
 <samp id="animated-drawer-content" />
 
 ```js
-function CustomDrawerContent({ progress, ...rest }) {
+function CustomDrawerContent(props) {
+  const progress = useDrawerProgress();
+
   const translateX = Animated.interpolate(progress, {
     inputRange: [0, 1],
     outputRange: [-100, 0],
@@ -273,6 +170,8 @@ function CustomDrawerContent({ progress, ...rest }) {
   );
 }
 ```
+
+The `progress` object is a Reanimated `Node` if you're using Reanimated 1 (see [`useLegacyImplementation`](#uselegacyimplementation)), otherwise a `SharedValue`.
 
 Note that you **cannot** use the `useNavigation` hook inside the `drawerContent` since `useNavigation` is only available inside screens. You get a `navigation` prop for your `drawerContent` which you can use instead:
 
@@ -298,72 +197,176 @@ To use the custom component, we need to pass it in the `drawerContent` prop:
 </Drawer.Navigator>
 ```
 
-#### `drawerContentOptions`
-
-An object containing the props for the drawer content component. See below for more details.
-
-##### `activeTintColor`
-
-Color for the icon and label in the active item in the drawer.
-
-##### `activeBackgroundColor`
-
-Background color for the active item in the drawer.
-
-##### `inactiveTintColor`
-
-Color for the icon and label in the inactive items in the drawer.
-
-##### `inactiveBackgroundColor`
-
-Background color for the inactive items in the drawer.
-
-##### `itemStyle`
-
-Style object for the single item, which can contain an icon and/or a label.
-
-##### `labelStyle`
-
-Style object to apply to the `Text` style inside content section which renders a label.
-
-##### `contentContainerStyle`
-
-Style object for the content section inside the `ScrollView`.
-
-##### `style`
-
-Style object for the wrapper view.
-
-Example:
-
-<samp id="drawer-content-options" />
-
-```js
-<Drawer.Navigator
-  drawerContentOptions={{
-    activeTintColor: '#e91e63',
-    itemStyle: { marginVertical: 30 },
-  }}
->
-  {/* screens */}
-</Drawer.Navigator>
-```
-
 ### Options
 
 The following [options](screen-options.md) can be used to configure the screens in the navigator:
 
 #### `title`
 
-Generic title that can be used as a fallback for `headerTitle` and `drawerLabel`
+Generic title that can be used as a fallback for `headerTitle` and `drawerLabel`.
+
+#### `lazy`
+
+Whether this screen should render the first time it's accessed. Defaults to `true`. Set it to `false` if you want to render the screen on initial render.
 
 #### `drawerLabel`
 
-String or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in drawer sidebar. When undefined, scene `title` is used
+String or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in drawer sidebar. When undefined, scene `title` is used.
 
 #### `drawerIcon`
 
-Function, that given `{ focused: boolean, color: string, size: number }` returns a React.Node, to display in drawer sidebar
+Function, that given `{ focused: boolean, color: string, size: number }` returns a React.Node to display in drawer sidebar.
+
+##### `drawerActiveTintColor`
+
+Color for the icon and label in the active item in the drawer.
+
+##### `drawerActiveBackgroundColor`
+
+Background color for the active item in the drawer.
+
+##### `drawerInactiveTintColor`
+
+Color for the icon and label in the inactive items in the drawer.
+
+##### `drawerInactiveBackgroundColor`
+
+Background color for the inactive items in the drawer.
+
+##### `drawerItemStyle`
+
+Style object for the single item, which can contain an icon and/or a label.
+
+##### `drawerLabelStyle`
+
+Style object to apply to the `Text` style inside content section which renders a label.
+
+##### `drawerContentContainerStyle`
+
+Style object for the content section inside the `ScrollView`.
+
+##### `drawerContentStyle`
+
+Style object for the wrapper view.
+
+#### `drawerStyle`
+
+Style object for the drawer component. You can pass a custom background color for a drawer or a custom width here.
+
+<samp id="drawer-with-style" />
+
+```js
+<Drawer.Navigator
+  screenOptions={{
+    drawerStyle: {
+      backgroundColor: '#c6cbef',
+      width: 240,
+    },
+  }}
+>
+  {/* screens */}
+</Drawer.Navigator>
+```
+
+#### `drawerPosition`
+
+Options are `left` or `right`. Defaults to `left` for LTR languages and `right` for RTL languages.
+
+#### `drawerType`
+
+Type of the drawer. It determines how the drawer looks and animates.
+
+- `front`: Traditional drawer which covers the screen with a overlay behind it.
+- `back`: The drawer is revealed behind the screen on swipe.
+- `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.
+- `permanent`: A permanent drawer is shown as a sidebar. Useful for having always visible drawer on larger screens.
+
+Defaults to `slide` on iOS and `front` on other platforms.
+
+You can conditionally specify the `drawerType` to show a permanent drawer on bigger screens and a traditional drawer drawer on small screens:
+
+```js
+import { useWindowDimensions } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  const dimensions = useWindowDimensions();
+
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
+      }}
+    >
+      {/* Screens */}
+    </Drawer.Navigator>
+  );
+}
+```
+
+You can also specify other props such as `drawerStyle` based on screen size to customize the behavior. For example, you can combine it with `openByDefault` to achieve a master-detail layout:
+
+```js
+import { useWindowDimensions } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  const dimensions = useWindowDimensions();
+
+  const isLargeScreen = dimensions.width >= 768;
+
+  return (
+    <Drawer.Navigator
+      openByDefault
+      screenOptions={{
+        drawerType: isLargeScreen ? 'permanent' : 'back',
+        drawerStyle: isLargeScreen ? null : { width: '100%' },
+        overlayColor: 'transparent',
+      }}
+    >
+      {/* Screens */}
+    </Drawer.Navigator>
+  );
+}
+```
+
+#### `drawerHideStatusBarOnOpen`
+
+When set to `true`, Drawer will hide the OS status bar whenever the drawer is pulled or when it's in an "open" state.
+
+#### `drawerStatusBarAnimation`
+
+Animation of the statusbar when hiding it. use in combination with `hideStatusBar`.
+
+Supported values:
+
+- `slide`
+- `fade`
+- `none`
+
+This is only supported on iOS. Defaults to `slide`.
+
+#### `overlayColor`
+
+Color overlay to be displayed on top of the content view when drawer gets open. The opacity is animated from `0` to `1` when the drawer opens.
+
+#### `sceneContainerStyle`
+
+Style object for the component wrapping the screen content.
+
+#### `gestureEnabled`
+
+Whether you can use gestures to open or close the drawer. Setting this to `false` disables swipe gestures as well as tap on overlay to close. See `swipeEnabled` to disable only the swipe gesture.
+
+#### `gestureHandlerProps`
+
+Props to pass to the underlying pan gesture handler.
+
+This is not supported on Web.
 
 #### `swipeEnabled`
 
@@ -371,9 +374,19 @@ Whether you can use swipe gestures to open or close the drawer. Defaults to `tru
 
 Swipe gesture is not supported on Web.
 
-#### `gestureEnabled`
+#### `swipeEdgeWidth`
 
-Whether you can use gestures to open or close the drawer. Setting this to `false` disables swipe gestures as well as tap on overlay to close. See `swipeEnabled` to disable only the swipe gesture.
+Allows for defining how far from the edge of the content view the swipe gesture should activate.
+
+This is not supported on Web.
+
+#### `swipeMinDistance`
+
+Minimum swipe distance threshold that should activate opening the drawer.
+
+#### `keyboardDismissMode`
+
+Whether the keyboard should be dismissed when the swipe gesture begins. Defaults to `'on-drag'`. Set to `'none'` to disable keyboard handling.
 
 #### `unmountOnBlur`
 
