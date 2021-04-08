@@ -15,6 +15,8 @@ import Head from '@docusaurus/Head';
 import useSearchQuery from '@theme/hooks/useSearchQuery';
 import {DocSearchButton, useDocSearchKeyboardEvents} from '@docsearch/react';
 import useAlgoliaContextualFacetFilters from '@theme/hooks/useAlgoliaContextualFacetFilters';
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
+
 import {translate} from '@docusaurus/Translate';
 
 let DocSearchModal = null;
@@ -216,6 +218,11 @@ function DocSearch({contextualSearch, ...props}) {
 }
 
 function SearchBar() {
+  // make sure to not use the window on the SSR
+  if(!ExecutionEnvironment.canUseDOM){
+    return null;
+  }
+
   const {siteConfig} = useDocusaurusContext();
   return <DocSearch {...siteConfig.themeConfig.algolia} />;
 }
