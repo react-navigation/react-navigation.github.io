@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://reactnavigation.org/blog</id>
+    <title>React Navigation Blog</title>
+    <updated>2021-03-12T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://reactnavigation.org/blog"/>
+    <subtitle>React Navigation Blog</subtitle>
+    <icon>https://reactnavigation.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[On the way to React Navigation 6.0]]></title>
+        <id>On the way to React Navigation 6.0</id>
+        <link href="https://reactnavigation.org/blog/2021/03/12/react-navigation-6.0-next"/>
+        <updated>2021-03-12T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We're excited to announce that we finally have a prerelease version  of React Navigation 6. We released React Navigation 5 more than half a year ago, and it brought a lot of new possibilities with the new dynamic API, and was met with overwhelmingly positive reaction. Since then, we've been working on incremental improvements and refinements to the library and thinking about how to make it even better. This brings us to the next major version of React Navigation.]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[React Navigation joins GitHub Sponsors]]></title>
+        <id>React Navigation joins GitHub Sponsors</id>
+        <link href="https://reactnavigation.org/blog/2020/05/19/joining-github-sponsors"/>
+        <updated>2020-05-19T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We joined GitHub Sponsors - https://github.com/sponsors/react-navigation!]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[React Navigation on the Web]]></title>
+        <id>React Navigation on the Web</id>
+        <link href="https://reactnavigation.org/blog/2020/05/16/web-support"/>
+        <updated>2020-05-16T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[React Native has made cross-platform development much easier than before, and with React Native for Web, you can reuse code across Android, iOS and Web too!]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[React Navigation 5.0 - A new way to navigate]]></title>
+        <id>React Navigation 5.0 - A new way to navigate</id>
+        <link href="https://reactnavigation.org/blog/2020/02/06/react-navigation-5.0"/>
+        <updated>2020-02-06T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Exactly two years ago, we published the first stable version of React Navigation. Throughout this time, the library has been actively developed by adding  many new features and bug fixes. The essence of React Navigation was that it was a project that was to become not only a project of individual programmers adapting it to their requirements, but a community as a whole, hence the emphasis on versatility, extensibility, and the tendency to reconsider the assumptions if there were such needs. Thanks to this, the Library has been undergoing metamorphosis of both incremental and completely reorganized shape.]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[React Navigation v5 + React Native Paper = ❤️]]></title>
+        <id>React Navigation v5 + React Native Paper = ❤️</id>
+        <link href="https://reactnavigation.org/blog/2020/01/29/using-react-navigation-5-with-react-native-paper"/>
+        <updated>2020-01-29T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[This is a guest post by the React Native Paper team. If you like this guide, check out React Native Paper for more!]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Using React Navigation 5 with UI Kitten]]></title>
+        <id>Using React Navigation 5 with UI Kitten</id>
+        <link href="https://reactnavigation.org/blog/2019/11/04/using-react-navigation-5-with-ui-kitten"/>
+        <updated>2019-11-04T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[This is a guest post by the UI Kitten team. If you like this guide, checkout UI Kitten for more!]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[React Navigation meets native]]></title>
+        <id>React Navigation meets native</id>
+        <link href="https://reactnavigation.org/blog/2019/10/17/react-navigation-native"/>
+        <updated>2019-10-17T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[React Navigation steps firmly into the next level and we’re very excited to announce to you something great happening in React Navigation codebase.]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[React Navigation 4.0]]></title>
+        <id>React Navigation 4.0</id>
+        <link href="https://reactnavigation.org/blog/2019/09/16/react-navigation-4.0"/>
+        <updated>2019-09-16T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[The documentation is now live at https://reactnavigation.org, and v3 lives here.]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[React Navigation 3.0]]></title>
+        <id>React Navigation 3.0</id>
+        <link href="https://reactnavigation.org/blog/2018/11/17/react-navigation-3.0"/>
+        <updated>2018-11-17T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[The documentation is now live at https://reactnavigation.org, and v2 lives here.]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[3.0 release candidate]]></title>
+        <id>3.0 release candidate</id>
+        <link href="https://reactnavigation.org/blog/2018/11/01/react-navigation-3.0-rc"/>
+        <updated>2018-11-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We are excited to announce the release candidate of version 3.0 today!]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[React Navigation 2.0]]></title>
+        <id>React Navigation 2.0</id>
+        <link href="https://reactnavigation.org/blog/2018/05/07/react-navigation-2.0"/>
+        <updated>2018-05-07T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[The documentation is now live at https://reactnavigation.org, and v1 lives here.]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[2.0 release candidate]]></title>
+        <id>2.0 release candidate</id>
+        <link href="https://reactnavigation.org/blog/2018/04/06/react-navigation-2.0-rc"/>
+        <updated>2018-04-06T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Exactly two months after the release of React Navigation 1.0, we are close to another major version release. We’d like to invite developers that use the library to give the release candidate a try in your app and let us know if you encounter any issues.]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[React Navigation 1.0 (goodbye, beta!)]]></title>
+        <id>React Navigation 1.0 (goodbye, beta!)</id>
+        <link href="https://reactnavigation.org/blog/2018/02/06/react-navigation-1.0"/>
+        <updated>2018-02-06T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[As of today, React Navigation version 1.0 has been released! To see a list of recent improvements leading up to the release, refer to the “Renewed Path to React Navigation V1.0” issue. Thank you to everybody who has filed high-quality bug reports, submitted pull requests, and helped out fellow developers while we were in beta!]]></summary>
+    </entry>
+</feed>
