@@ -146,8 +146,8 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          docLayoutComponent: require.resolve('./src/layouts/DocPage.js'),
-          docItemComponent: require.resolve('./src/layouts/DocItem.js'),
+          docLayoutComponent: require.resolve('./src/pages/layouts/DocPage.js'),
+          docItemComponent: require.resolve('./src/pages/layouts/DocItem.js'),
           editUrl:
             'https://github.com/react-navigation/react-navigation.github.io/edit/main/',
           remarkPlugins: [require('./src/plugins/remark-npm2yarn')],
