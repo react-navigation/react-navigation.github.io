@@ -24,9 +24,9 @@ const Drawer = createDrawerNavigator();
 function MyDrawer() {
   return (
     <Drawer.Navigator
-      drawerContentOptions={{
-        activeTintColor: '#e91e63',
-        itemStyle: { marginVertical: 30 },
+      screenOptions={{
+        drawerActiveTintColor: '#e91e63',
+        drawerItemStyle: { marginVertical: 30 },
       }}
     >
       <Drawer.Screen name="Feed" component={Feed} />
