@@ -125,7 +125,7 @@ See [configuring links](configuring-links.md) for more details on configuring de
 
 ## Stack Navigator
 
-Thee following changes are in the `@react-navigation/stack` package.
+The following changes are in the `@react-navigation/stack` package.
 
 ### New default animations for modal screens
 
