@@ -37,8 +37,12 @@ function CreatePostScreen({ navigation, route }) {
       <Button
         title="Done"
         onPress={() => {
-          // Pass params back to home screen
-          navigation.navigate('Home', { post: postText });
+          // Pass and merge params back to home screen
+          navigation.navigate({
+            name: 'Home',
+            params: { post: postText },
+            merge: true,
+          });
         }}
       />
     </>
