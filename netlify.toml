@@ -5,3 +5,10 @@
 
 [build.environment]
   NODE_VERSION = "12.13"
+
+[[plugins]]
+  package = "netlify-plugin-cache"
+  [plugins.inputs]
+    paths = [
+      "node_modules/.cache",
+    ]
