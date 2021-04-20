@@ -56,7 +56,7 @@ See a full working example of theme integration in [react-navigation/theme-examp
 
 ## Using the currently selected theme
 
-Two tools are available to gain access to the theme in any component that descends from the app navigation container: `useTheme` and `ThemeConext`.
+Two tools are available to gain access to the theme in any component that descends from the app navigation container: `useTheme` and `ThemeContext`.
 
 `useTheme` is a simple custom hook that returns the theme.
 
