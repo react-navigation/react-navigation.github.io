@@ -16,4 +16,4 @@ sidebar_label: More Resources
 
 # Tutorials
 
-- [Routing for Authentication/Authorization](https://www.robinwieruch.de/react-native-navigation): An extensive walkthrough for sign up, sign in, sign out, password forget/change, and protected routes.
+- [Routing for Authentication and Authorization](https://www.robinwieruch.de/react-native-navigation): An extensive walkthrough for sign up, sign in, sign out, password forget/change, and protected routes.
