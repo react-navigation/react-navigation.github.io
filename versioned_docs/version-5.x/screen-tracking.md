@@ -44,6 +44,7 @@ export default () => {
             screen_name: currentRouteName,
             screen_class: currentRouteName
           });
+          // or: await Analytics.setCurrentScreen('currentRouteName');
         }
 
         // Save the current route name for later comparison
