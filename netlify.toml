@@ -12,5 +12,3 @@
     paths = [
       "node_modules/.cache",
     ]
-
-
