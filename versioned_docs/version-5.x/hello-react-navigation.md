@@ -18,7 +18,7 @@ The libraries we've installed so far are the building blocks and shared foundati
 npm install @react-navigation/stack
 ```
 
-> 💡 `@react-navigation/stack` depends on `@react-native-community/masked-view` and the other libraries that we installed in [Getting started](getting-started.md). If you haven't installed those yet, head over to that page and follow the installation instructions.
+> 💡 `@react-navigation/stack` depends on `@react-native-masked-view/masked-view` and the other libraries that we installed in [Getting started](getting-started.md). If you haven't installed those yet, head over to that page and follow the installation instructions.
 
 ### Creating a stack navigator
 
