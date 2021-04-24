@@ -14,7 +14,7 @@ const DEPS_VERSIONS = {
   ],
   '5': [
     '@expo/vector-icons@*',
-    '@react-native-community/masked-view@*',
+    '@react-native-masked-view/masked-view@*',
     "@react-navigation/bottom-tabs@^5.8.0",
     "@react-navigation/drawer@^5.9.0",
     "@react-navigation/material-bottom-tabs@^5.2.16",
@@ -30,7 +30,7 @@ const DEPS_VERSIONS = {
   ],
   '6': [
     '@expo/vector-icons@*',
-    '@react-native-community/masked-view@*',
+    '@react-native-masked-view/masked-view@*',
     'react-native-gesture-handler@*',
     'react-native-pager-view@*',
     'react-native-paper@^4.7.2',
