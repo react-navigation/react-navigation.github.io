@@ -46,7 +46,7 @@ You can now continue to ["Hello React Navigation"](hello-react-navigation.md) to
 In your project directory, run:
 
 ```bash npm2yarn
-npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-masked-view/masked-view
 ```
 
 > Note: You might get warnings related to peer dependencies after installation. They are usually caused by incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.
