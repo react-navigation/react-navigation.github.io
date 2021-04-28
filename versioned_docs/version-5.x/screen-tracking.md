@@ -40,10 +40,7 @@ export default () => {
           // The line below uses the expo-firebase-analytics tracker
           // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
           // Change this line to use another Mobile analytics SDK
-          await analytics().logScreenView({
-            screen_name: currentRouteName,
-            screen_class: currentRouteName
-          });
+          Analytics.setCurrentScreen(currentRouteName);
         }
 
         // Save the current route name for later comparison
