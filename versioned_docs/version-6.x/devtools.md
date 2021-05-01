@@ -26,11 +26,11 @@ Usage:
 
 ```js
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { useReduxDevToolsExtension } from '@react-navigation/devtools';
 
 export default function App() {
-  const navigationRef = React.useRef();
+  const navigationRef = useNavigationContainerRef();
 
   useReduxDevToolsExtension(navigationRef);
 

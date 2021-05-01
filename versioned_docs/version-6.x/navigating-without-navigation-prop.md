@@ -28,18 +28,20 @@ In the next step, we define `RootNavigation`, which is a simple module with func
 ```js
 // RootNavigation.js
 
-import * as React from 'react';
+import { createNavigationContainerRef } from '@react-navigation/native';
 
-export const navigationRef = React.createRef();
+export const navigationRef = createNavigationContainerRef()
 
 export function navigate(name, params) {
-  navigationRef.current?.navigate(name, params);
+  if (navigationRef.isReady()) {
+    navigationRef.navigate(name, params);
+  }
 }
 
 // add other navigation functions that you need and export them
 ```
 
-Then, in any of your javascript modules, just import the `RootNavigation` and call functions which you exported from it. You may use this approach outside of your React components and, in fact, it works just as well when used from within them.
+Then, in any of your javascript modules, import the `RootNavigation` and call functions which you exported from it. You may use this approach outside of your React components and, in fact, it works as well when used from within them.
 
  <samp id="no-nav-prop" />
 
@@ -57,8 +59,12 @@ Apart from `navigate`, you can add other navigation actions:
 ```js
 import { StackActions } from '@react-navigation/native';
 
+// ...
+
 export function push(...args) {
-  navigationRef.current?.dispatch(StackActions.push(...args));
+  if (navigationRef.isReady()) {
+    navigationRef.dispatch(StackActions.push(...args));
+  }
 }
 ```
 
@@ -73,60 +79,28 @@ When using this pattern, you need to keep few things in mind to avoid crashes in
 - The ref is set only after the navigation container renders, this can be async when handling deep links
 - A navigator needs to be rendered to be able to handle actions
 
-If you try to navigate without rendering a navigator or before the navigator finishes mounting, it will throw and crash your app if not handled. So you'll need to add an additional check to decide what to do until your app mounts.
+If you try to navigate without rendering a navigator or before the navigator finishes mounting, it will print an error and do nothing. So you'll need to add an additional check to decide what to do until your app mounts.
 
 For an example, consider the following scenario, you have a screen somewhere in the app, and that screen dispatches a redux action on `useEffect`/`componentDidMount`. You are listening for this action in your middleware and try to perform navigation when you get it. This will throw an error, because by this time, the parent navigator hasn't finished mounting and isn't ready. Parent's `useEffect`/`componentDidMount` is always called **after** child's `useEffect`/`componentDidMount`.
 
-To avoid this, you can set a ref to tell you that your app has finished mounting, and check that ref before performing any navigation. To do this, we can use the `onReady` callback in our `NavigationContainer`:
-
-```js
-// App.js
-
-import { NavigationContainer } from '@react-navigation/native';
-import { navigationRef, isReadyRef } from './RootNavigation';
-
-export default function App() {
-  React.useEffect(() => {
-    return () => {
-      isReadyRef.current = false
-    };
-  }, []);
-
-  return (
-    <NavigationContainer
-      ref={navigationRef}
-      onReady={() => {
-        isReadyRef.current = true;
-      }}
-    >
-      {/* ... */}
-    </NavigationContainer>
-  );
-}
-```
-
-Also export this ref from our `RootNavigation`:
+To avoid this, you can use the `isReady()` method available on the ref as shown in the above examples.
 
 ```js
 // RootNavigation.js
 
 import * as React from 'react';
 
-export const isReadyRef = React.createRef();
-
-export const navigationRef = React.createRef();
+export const navigationRef = createNavigationContainerRef()
 
 export function navigate(name, params) {
-  if (isReadyRef.current && navigationRef.current) {
-    // Perform navigation if the app has mounted
-    navigationRef.current.navigate(name, params);
+  if (navigationRef.isReady()) {
+    // Perform navigation if the react navigation is ready to handle actions
+    navigationRef.navigate(name, params);
   } else {
-    // You can decide what to do if the app hasn't mounted
+    // You can decide what to do if react navigation is not ready
     // You can ignore this, or add these actions to a queue you can call later
   }
 }
 ```
-
-Note that this only handles the case when you're dispatching actions before the container finishes mounting. You'll still have an error if you are not rendering any navigators. A navigator must be rendered to be able to dispatch actions.
 
 If you're unsure if a navigator is rendered, you can call `navigationRef.current.getRootState()`, and it'll return a valid state object if any navigators are rendered, otherwise it will return `undefined`.

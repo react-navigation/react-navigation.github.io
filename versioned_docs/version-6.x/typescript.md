@@ -205,6 +205,19 @@ type ProfileScreenNavigationProp = CompositeNavigationProp<
 >;
 ```
 
+If you're using helpers such as `StackScreenProps`, you can use `CompositeScreenProps` to combine them:
+
+```ts
+import { CompositeScreenProps } from '@react-navigation/native';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { StackScreenProps } from '@react-navigation/stack';
+
+type ProfileScreenNavigationProp = CompositeScreenProps<
+  BottomTabScreenProps<TabParamList, 'Profile'>,
+  StackScreenProps<StackParamList>
+>;
+```
+
 ### Annotating `useNavigation`
 
 To annotate the `navigation` prop that we get from `useNavigation`, we can use a type parameter:
@@ -243,7 +256,27 @@ Similarly, you can import `DrawerNavigationOptions` from `@react-navigation/draw
 
 ### Annotating `ref` on `NavigationContainer`
 
-When adding a `ref` to `NavigationContainer`, you can use the `NavigationContainerRef` type to annotate it.
+If you use the `createNavigationContainerRef()` method to create the ref, you can annotate it to type-check navigation actions:
+
+```ts
+import { createNavigationContainerRef } from '@react-navigation/native';
+
+// ...
+
+const navigationRef = createNavigationContainerRef<RootStackParamList>();
+```
+
+Similarly, for `useNavigationContainerRef()`:
+
+```ts
+import { createNavigationContainerRef } from '@react-navigation/native';
+
+// ...
+
+const navigationRef = useNavigationContainerRef<RootStackParamList>();
+```
+
+If you're using a regular `ref` object, you can pass a generic to the `NavigationContainerRef` type..
 
 Example when using `React.useRef` hook:
 
@@ -252,7 +285,7 @@ import { NavigationContainerRef } from '@react-navigation/native';
 
 // ...
 
-const navigationRef = React.useRef<NavigationContainerRef>(null);
+const navigationRef = React.useRef<NavigationContainerRef<RootStackParamList>>(null);
 ```
 
 Example when using `React.createRef`:
@@ -262,5 +295,5 @@ import { NavigationContainerRef } from '@react-navigation/native';
 
 // ...
 
-const navigationRef = React.createRef<NavigationContainerRef>();
+const navigationRef = React.createRef<NavigationContainerRef<RootStackParamList>>();
 ```

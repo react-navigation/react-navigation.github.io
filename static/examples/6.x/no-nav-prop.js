@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { View, Button, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-const navigationRef = React.createRef();
+const navigationRef = createNavigationContainerRef()
 
 function navigate(name, params) {
-  navigationRef.current && navigationRef.current.navigate(name, params);
+  if (navigationRef.isReady()) {
+    navigationRef.navigate(name, params);
+  }
 }
 
 function Home() {

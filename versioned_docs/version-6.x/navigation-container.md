@@ -38,12 +38,14 @@ Example:
 <samp id="using-refs" />
 
 ```js
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+
 function App() {
-  const navigationRef = React.useRef(null);
+  const navigationRef = useNavigationContainerRef(); // You can also use a regular ref with `React.useRef()`
 
   return (
     <View style={{ flex: 1 }}>
-      <Button onPress={() => navigationRef.current?.navigate('Home')}>
+      <Button onPress={() => navigationRef.navigate('Home')}>
         Go home
       </Button>
       <NavigationContainer ref={navigationRef}>{/* ... */}</NavigationContainer>
@@ -52,7 +54,7 @@ function App() {
 }
 ```
 
-Keep in mind that the ref may be initially `null` in some situations (such as when linking is enabled). To make sure that the ref is initialized, you can use the [`onReady`](#onready) callback to get notified when the navigation container finishes mounting.
+If you're using a regular ref object, keep in mind that the ref may be initially `null` in some situations (such as when linking is enabled). To make sure that the ref is initialized, you can use the [`onReady`](#onready) callback to get notified when the navigation container finishes mounting.
 
 ### Methods on the ref
 
@@ -61,7 +63,7 @@ The ref object includes all of the common navigation methods such as `navigate`,
 Example:
 
 ```js
-navigationRef.current?.navigate(name, params);
+navigationRef.navigate(name, params);
 ```
 
 All of these methods will act as if they were called inside the currently focused screen. It's important note that there must be a navigator rendered to handle these actions.
@@ -73,7 +75,7 @@ In addition to these methods, the ref object also includes the following special
 The `resetRoot` method lets you reset the state of the navigation tree to the specified state object:
 
 ```js
-navigationRef.current?.resetRoot({
+navigationRef.resetRoot({
   index: 0,
   routes: [{ name: 'Profile' }],
 });
@@ -86,7 +88,7 @@ Unlike the `reset` method, this acts on the root navigator instead of navigator 
 The `getRootState` method returns a [navigation state](navigation-state.md) object containing the navigation states for all navigators in the navigation tree:
 
 ```js
-const state = navigationRef.current?.getRootState();
+const state = navigationRef.getRootState();
 ```
 
 Note that the returned `state` object will be `undefined` if there are no navigators currently rendered.
@@ -96,7 +98,7 @@ Note that the returned `state` object will be `undefined` if there are no naviga
 The `getCurrentRoute` method returns the route object for the currently focused screen in the whole navigation tree:
 
 ```js
-const route = navigationRef.current?.getCurrentRoute();
+const route = navigationRef.getCurrentRoute();
 ```
 
 Note that the returned `route` object will be `undefined` if there are no navigators currently rendered.
@@ -106,7 +108,7 @@ Note that the returned `route` object will be `undefined` if there are no naviga
 The `getCurrentOptions` method returns the options for the currently focused screen in the whole navigation tree:
 
 ```js
-const options = navigationRef.current?.getCurrentOptions();
+const options = navigationRef.getCurrentOptions();
 ```
 
 Note that the returned `options` object will be `undefined` if there are no navigators currently rendered.
@@ -120,12 +122,12 @@ The `addListener` method lets you listen to the following events:
 The event is triggered whenever the [navigation state](navigation-state.md) changes in any navigator in the navigation tree:
 
 ```js
-const unsubscribe = navigationRef.current?.addListener('state', (e) => {
+const unsubscribe = navigationRef.addListener('state', (e) => {
   // You can get the raw navigation state (partial state object of the root navigator)
   console.log(e.data.state);
 
   // Or get the full state object with `getRootState()`
-  console.log(navigationRef.current.getRootState());
+  console.log(navigationRef.getRootState());
 });
 ```
 
@@ -136,7 +138,7 @@ This is analogous to the [`onStateChange`](#onstatechange) method. The only diff
 The event is triggered whenever the options change for the currently focused screen in the navigation tree:
 
 ```js
-const unsubscribe = navigationRef.current?.addListener('options', (e) => {
+const unsubscribe = navigationRef.addListener('options', (e) => {
   // You can get the new options for the currently focused screen
   console.log(e.data.options);
 });

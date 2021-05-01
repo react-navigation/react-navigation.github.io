@@ -19,22 +19,24 @@ This example shows how to do screen tracking and send to Firebase Analytics usin
 
 ```js
 import * as Analytics from 'expo-firebase-analytics';
-import { useRef } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 
 export default () => {
-  const navigationRef = useRef();
+  const navigationRef = useNavigationContainerRef();
   const routeNameRef = useRef();
 
   return (
     <NavigationContainer
       ref={navigationRef}
-      onReady={() =>
-        (routeNameRef.current = navigationRef.current.getCurrentRoute().name)
-      }
+      onReady={() => {
+        routeNameRef.current = navigationRef.getCurrentRoute().name;
+      }}
       onStateChange={async () => {
         const previousRouteName = routeNameRef.current;
-        const currentRouteName = navigationRef.current.getCurrentRoute().name;
+        const currentRouteName = navigationRef.getCurrentRoute().name;
 
         if (previousRouteName !== currentRouteName) {
           // The line below uses the expo-firebase-analytics tracker
@@ -42,7 +44,7 @@ export default () => {
           // Change this line to use another Mobile analytics SDK
           await analytics().logScreenView({
             screen_name: currentRouteName,
-            screen_class: currentRouteName
+            screen_class: currentRouteName,
           });
         }
 
@@ -54,5 +56,4 @@ export default () => {
     </NavigationContainer>
   );
 };
-
 ```
