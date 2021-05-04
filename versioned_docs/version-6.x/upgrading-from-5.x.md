@@ -12,6 +12,12 @@ This guide lists all the changes that you need to keep in mind when upgrading.
 
 These following changes are in the core library. You'll need to address this changes when upgrading the `@react-navigation/native` package.
 
+To install the 6.x version of `@react-navigation/native`, run:
+
+```sh npm2yarn
+npm install @react-navigation/native@next
+```
+
 ### Older versions of some libraries are no longer supported
 
 React Navigation now requires newer versions of following libraries:
@@ -127,6 +133,12 @@ See [configuring links](configuring-links.md) for more details on configuring de
 
 The following changes are in the `@react-navigation/stack` package.
 
+To install the 6.x version of `@react-navigation/stack`, run:
+
+```sh npm2yarn
+npm install @react-navigation/stack@next
+```
+
 ### New default animations for modal screens
 
 To match the default behavior of iOS, now `mode="modal"` shows the new presentation style modal introduced in iOS 13. It also adjusts things like status bar height in the header automatically that you had to do manually before.
@@ -198,6 +210,12 @@ See [below](#elements-library) for more details on installing the elements libra
 
 The following changes are in the `@react-navigation/bottom-tabs` package.
 
+To install the 6.x version of `@react-navigation/bottom-tabs`, run:
+
+```sh npm2yarn
+npm install @react-navigation/bottom-tabs@next
+```
+
 ### A header is shown by default in tab screens
 
 Tab screens now show a header by default similar to screens in a stack navigator. This avoid the need for nesting a stack navigator in each screen just for a header. See [its options](bottom-tab-navigator.md#options) to see all header related options.
@@ -246,6 +264,12 @@ Returning to first route after pressing back seems more common in apps. To match
 
 The following changes are in the `@react-navigation/material-top-tabs` package.
 
+To install the 6.x version of `@react-navigation/material-top-tabs`, run:
+
+```sh npm2yarn
+npm install @react-navigation/material-top-tabs@next
+```
+
 ### It now uses `ViewPager` instead of Reanimated and Gesture Handler
 
 The `react-native-tab-view` dependency is upgraded to the latest version (3.x) which now uses [`ViewPager`](https://github.com/callstack/react-native-pager-view) instead of Reanimated and Gesture Handler. This will provide a native UX and also improve the performance.
@@ -293,6 +317,12 @@ Similar to bottom tabs, material top tabs now uses `firstRoute` for the `backBeh
 
 The following changes are in the `@react-navigation/material-bottom-tabs` package.
 
+To install the 6.x version of `@react-navigation/material-bottom-tabs`, run:
+
+```sh npm2yarn
+npm install @react-navigation/material-bottom-tabs@next
+```
+
 ### The default value for `backBehavior` is now `firstRoute` for material bottom tabs
 
 Similar to bottom tabs, material bottom tabs now uses `firstRoute` for the `backBehavior` prop as well.
@@ -300,6 +330,12 @@ Similar to bottom tabs, material bottom tabs now uses `firstRoute` for the `back
 ## Drawer Navigator
 
 The following changes are in the `@react-navigation/drawer` package.
+
+To install the 6.x version of `@react-navigation/drawer`, run:
+
+```sh npm2yarn
+npm install @react-navigation/drawer@next
+```
 
 ### Drawer now uses Reanimated 2 if available
 
@@ -366,7 +402,7 @@ Similar to bottom tabs, drawer now uses `firstRoute` for the `backBehavior` prop
 
 We have a new package which contains various UI elements related to navigation, such as a `Header` component. This means that we can now use these components in all navigators. You can also install the library to import components such as `Header` to use in any navigator:
 
-```sh
+```sh npm2yarn
 npm install @react-navigation/elements@next
 ```
 
