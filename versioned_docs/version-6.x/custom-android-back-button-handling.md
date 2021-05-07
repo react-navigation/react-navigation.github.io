@@ -25,10 +25,9 @@ function ScreenWithCustomBackBehavior() {
         }
       };
 
-      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+      const backHandler = BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
-      return () =>
-        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+      return () => backHandler.remove();
     }, [isSelectionModeEnabled, disableSelectionMode])
   );
 
