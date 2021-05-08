@@ -5,11 +5,12 @@
   );
   height: 100%;
   width: 100%;
-  padding: 8rem 0;
+  padding: 8rem 0 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .container {
@@ -107,7 +108,7 @@
 .migrationText {
   color: var(--ifm-home-color-text);
   opacity: 0.8;
-  margin: 4rem 1rem 0;
+  margin: 4rem 1rem;
   background-color: var(--ifm-home-color-background);
   padding: 1rem 1.5rem;
   border-radius: 0.25rem;
@@ -139,6 +140,10 @@
 }
 
 @media (max-width: 1050px) {
+  .wrapper {
+    padding: 0;
+  }
+
   .container {
     padding: 4rem 0;
     grid-template-columns: repeat(2, auto);
@@ -160,10 +165,10 @@
   .container {
     padding: 0;
   }
+
   .main {
-    margin-right: -8px;
-    margin-left: -8px;
     border-radius: 0;
+    border: none;
   }
 
   .mainUnderlay {

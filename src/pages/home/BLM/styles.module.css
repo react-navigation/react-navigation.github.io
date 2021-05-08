@@ -1,0 +1,19 @@
+.wrapper {
+  background-color: var(--ifm-home-color-black);
+  color: var(--ifm-home-color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.wrapper a {
+  color: var(--ifm-home-color-highlight);
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1366px;
+}

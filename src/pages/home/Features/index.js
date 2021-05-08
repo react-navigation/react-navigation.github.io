@@ -38,7 +38,7 @@ export default function Features() {
   ];
 
   return (
-    <div className={styles.wrapper}>
+    <section className={styles.wrapper}>
       <div className={styles.container}>
         {features.map((feature) => (
           <div key={feature.title} className={styles.feature}>
@@ -48,6 +48,6 @@ export default function Features() {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

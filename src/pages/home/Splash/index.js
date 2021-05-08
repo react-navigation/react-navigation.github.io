@@ -9,7 +9,7 @@ import SplashRightIllustration from './SplashRightIllustration';
 
 export default function Splash() {
   return (
-    <div className={styles.wrapper}>
+    <section className={styles.wrapper}>
       <div className={styles.container}>
         <SplashLeftIllustration />
         <div className={styles.main}>
@@ -51,6 +51,6 @@ export default function Splash() {
         </Link>
         .
       </div>
-    </div>
+    </section>
   );
 }
