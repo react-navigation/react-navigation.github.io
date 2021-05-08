@@ -1,0 +1,1 @@
+(self.webpackChunkreact_navigation_website_next=self.webpackChunkreact_navigation_website_next||[]).push([[205],{54077:function(e){"use strict";e.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"release","name":"release","count":8,"permalink":"/blog/tags/release"}')}}]);

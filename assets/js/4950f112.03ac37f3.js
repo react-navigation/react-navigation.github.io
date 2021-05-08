@@ -1,0 +1,1 @@
+(self.webpackChunkreact_navigation_website_next=self.webpackChunkreact_navigation_website_next||[]).push([[8543],{27737:function(t){"use strict";t.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"ui-kitten","name":"ui-kitten","count":1,"permalink":"/blog/tags/ui-kitten"}')}}]);

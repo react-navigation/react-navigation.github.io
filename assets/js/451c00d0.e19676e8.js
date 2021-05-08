@@ -1,0 +1,1 @@
+(self.webpackChunkreact_navigation_website_next=self.webpackChunkreact_navigation_website_next||[]).push([[801],{5368:function(e){"use strict";e.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"react-native-paper","name":"react-native-paper","count":1,"permalink":"/blog/tags/react-native-paper"}')}}]);
