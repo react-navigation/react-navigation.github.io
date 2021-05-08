@@ -7,33 +7,36 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 import sponsors from '../data/sponsors';
 
+import Splash from './home/Splash';
+import Features from './home/Features';
+
 const features = [
   {
     title: `Easy to Use`,
     description: `
       Start quickly with built-in navigators that deliver a seamless
       out-of-the-box experience.
-    `
+    `,
   },
   {
     title: `Components built for iOS and Android`,
     description: `
       Platform-specific look-and-feel with smooth animations and gestures.
-    `
+    `,
   },
   {
     title: `Completely customizable`,
     description: `
       If you know how to write apps using JavaScript you can customize any
       part of React Navigation.
-    `
+    `,
   },
   {
     title: `Extensible platform`,
     description: `
       React Navigation is extensible at every layer— you can write your own
       navigators or even replace the user-facing API.
-    `
+    `,
   },
 ];
 
@@ -42,6 +45,8 @@ function Home() {
   const { siteConfig = {} } = context;
   return (
     <Layout title={siteConfig.title} description={siteConfig.tagline}>
+      <Splash />
+      <Features />
       <div className={styles.blm}>
         Black Lives Matter.{' '}
         <a
@@ -112,8 +117,29 @@ function Home() {
       )}
       <section className={styles.sponsoredBanner}>
         <p>
-          React Navigation is built and funded by <a href="https://expo.io" style={{ fontWeight: 'bold' }}>Expo</a> &amp; <a href="https://swmansion.com/" style={{ fontWeight: 'bold' }}>Software Mansion</a>
-          , with contributions from the <a style={{ fontWeight: 'bold' }} href="https://github.com/react-navigation/react-navigation/graphs/contributors">community</a> and <a href="https://github.com/sponsors/react-navigation" style={{ fontWeight: 'bold' }}>sponsors</a>:
+          React Navigation is built and funded by{' '}
+          <a href="https://expo.io" style={{ fontWeight: 'bold' }}>
+            Expo
+          </a>{' '}
+          &amp;{' '}
+          <a href="https://swmansion.com/" style={{ fontWeight: 'bold' }}>
+            Software Mansion
+          </a>
+          , with contributions from the{' '}
+          <a
+            style={{ fontWeight: 'bold' }}
+            href="https://github.com/react-navigation/react-navigation/graphs/contributors"
+          >
+            community
+          </a>{' '}
+          and{' '}
+          <a
+            href="https://github.com/sponsors/react-navigation"
+            style={{ fontWeight: 'bold' }}
+          >
+            sponsors
+          </a>
+          :
         </p>
         <div
           style={{ marginTop: 20, display: 'flex', justifyContent: 'center' }}
