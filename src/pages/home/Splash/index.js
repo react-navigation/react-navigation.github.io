@@ -44,7 +44,6 @@ export default function Splash() {
         💡 Coming from v4? Check out our{' '}
         <Link
           to={useBaseUrl('/docs/upgrading-from-4.x')}
-          // style={{ color: '#fff', fontWeight: 'bold' }}
           className={styles.linkText}
         >
           v4 to v5 migration guide
