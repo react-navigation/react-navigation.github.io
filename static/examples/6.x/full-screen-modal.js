@@ -42,7 +42,7 @@ function App() {
           <RootStack.Screen name="Home" component={HomeScreen} />
           <RootStack.Screen name="Details" component={DetailsScreen} />
         </RootStack.Group>
-        <RootStack.Group options={{ animationPresentation: 'modal' }}>
+        <RootStack.Group screenOptions={{ animationPresentation: 'modal' }}>
           <RootStack.Screen name="MyModal" component={ModalScreen} />
         </RootStack.Group>
       </RootStack.Navigator>
