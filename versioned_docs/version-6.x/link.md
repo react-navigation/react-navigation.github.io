@@ -18,7 +18,11 @@ import { Link } from '@react-navigation/native';
 // ...
 
 function Home() {
-  return <Link to="/profile/jane">Go to Jane's profile</Link>;
+  return (
+    <Link to={{ screen: 'Profile', params: { id: 'jane' } }}>
+      Go to Jane's profile
+    </Link>
+  );
 }
 ```
 

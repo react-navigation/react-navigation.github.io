@@ -47,7 +47,7 @@ const LinkButton = ({ to, action, children, ...rest }) => {
 };
 
 function Home() {
-  return <LinkButton to="/profile/jane">Go to Jane's profile</LinkButton>;
+  return <LinkButton to={{ screen: 'Profile', params: { id: 'jane' } }}>Go to Jane's profile</LinkButton>;
 }
 ```
 
@@ -55,7 +55,7 @@ Then you can use the `LinkButton` component elsewhere in your app:
 
 ```js
 function Home() {
-  return <LinkButton to="/profile/jane">Go to Jane's profile</LinkButton>;
+  return <LinkButton to={{ screen: 'Profile', params: { id: 'jane' } }}>Go to Jane's profile</LinkButton>;
 }
 ```
 
@@ -90,7 +90,7 @@ import { StackActions } from '@react-navigation/native';
 function Home() {
   return (
     <LinkButton
-      to="/profile/jane"
+      to={{ screen: 'Profile', params: { id: 'jane' } }}
       action={StackActions.replace('Profile', { id: 'jane' })}
     >
       Go to Jane's profile
