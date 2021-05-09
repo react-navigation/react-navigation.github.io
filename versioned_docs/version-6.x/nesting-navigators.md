@@ -113,7 +113,7 @@ function Root() {
     <Drawer.Navigator>
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Settings" component={Settings} />
     </Drawer.Navigator>
   );
 }
@@ -221,7 +221,7 @@ function Home() {
 function App() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator mode="modal">
+      <RootStack.Navigator screenOptions={{ animationPresentation: 'modal' }}>
         <RootStack.Screen
           name="Home"
           component={Home}

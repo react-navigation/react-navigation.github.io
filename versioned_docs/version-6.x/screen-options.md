@@ -44,6 +44,45 @@ You can also pass a function to `options`. The function will receive the [`navig
 />
 ```
 
+### `screenOptions` prop on `Group`
+
+You can pass a prop named `screenOptions` to the `Group` component to configure screens inside the group, where you can specify an object with different options. The options specified in `screenOptions` apply to all of the screens in the group.
+
+Example:
+
+```js
+<Stack.Navigator>
+  <Stack.Group
+    screenOptions={{ headerStyle: { backgroundColor: 'papayawhip' } }}
+  >
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="Profile" component={ProfileScreen} />
+  </Stack.Group>
+  <Stack.Group screenOptions={{ animationPresentation: 'modal' }}>
+    <Stack.Screen name="Settings" component={Settings} />
+    <Stack.Screen name="Share" component={Share} />
+  </Stack.Group>
+</Stack.Navigator>
+```
+
+Similar to `options`, you can also pass a function to `screenOptions`. The function will receive the [`navigation` prop](navigation-prop.md) and the [`route` prop](route-prop.md) for each screen. This can be useful if you want to configure options for all the screens in one place based on the route:
+
+```js
+<Stack.Navigator>
+  <Stack.Screen name="Home" component={HomeScreen} />
+  <Stack.Screen name="Profile" component={ProfileScreen} />
+  <Stack.Group
+    screenOptions={({ navigation }) => ({
+      animationPresentation: 'modal',
+      headerLeft: () => <CancelButton onPress={navigation.goBack} />,
+    })}
+  >
+    <Stack.Screen name="Settings" component={Settings} />
+    <Stack.Screen name="Share" component={Share} />
+  </Stack.Group>
+</Stack.Navigator>
+```
+
 ### `screenOptions` prop on the navigator
 
 You can pass a prop named `screenOptions` to the navigator component, where you can specify an object with different options. The options specified in `screenOptions` apply to all of the screens in the navigator. So this is a good place to add specify options that you want to configure for the whole navigator.

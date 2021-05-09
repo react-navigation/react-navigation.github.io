@@ -59,16 +59,6 @@ Default options to use for the screens in the navigator.
 
 If `false`, the on screen keyboard will NOT automatically dismiss when navigating to a new screen. Defaults to `true`.
 
-#### `mode`
-
-This is shortcut property which configures several options to configure the style for rendering and transitions:
-
-- `card` - Use the standard iOS and Android screen transitions. This is the default.
-- `modal` - This does few things:
-  - Sets `headerMode` to `screen` for all screens in the stack unless specified.
-  - Changes the screen animation to match the platform behavior for modals.
-  - Adjusts the `detachPreviousScreen` option so that the previous screen stays rendered.
-
 #### `detachInactiveScreens`
 
 Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
@@ -99,11 +89,21 @@ Function which returns a React Element to display as the overlay for the card. M
 
 Style object for the card in stack. You can provide a custom background color to use instead of the default background here.
 
-You can also specify `{ backgroundColor: 'transparent' }` to make the previous screen visible underneath (for transparent modals). This is useful to implement things like modal dialogs. You should also specify `mode: 'modal'` in the stack view config when using a transparent background so previous screens aren't detached and stay visible underneath.
+You can also specify `{ backgroundColor: 'transparent' }` to make the previous screen visible underneath (for transparent modals). This is useful to implement things like modal dialogs. You should also specify `animationPresentation: 'modal'` in the options when using a transparent background so previous screens aren't detached and stay visible underneath.
 
 #### `animationEnabled`
 
 Whether transition animation should be enabled on the screen. If you set it to `false`, the screen won't animate when pushing or popping. Defaults to `true` on iOS and Android, `false` on Web.
+
+#### `animationPresentation`
+
+This is shortcut option which configures several options to configure the style for rendering and transitions:
+
+- `card` - Use the standard iOS and Android screen transitions. This is the default.
+- `modal` - This does few things:
+  - Sets `headerMode` to `screen` for the screen unless specified otherwise.
+  - Changes the screen animation to match the platform behavior for modals.
+  - Adjusts the `detachPreviousScreen` option so that the previous screen stays rendered.
 
 #### `animationTypeForReplace`
 
@@ -161,7 +161,7 @@ Interpolated styles for various parts of the header. Refer the [Animations secti
 
 #### `detachPreviousScreen`
 
-Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`. Defaults to `false` for the last screen when `mode='modal'`, otherwise `true`.
+Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`. Defaults to `false` for the last screen when `animationPresentation: 'modal'`, otherwise `true`.
 
 ### Header related options
 
@@ -367,8 +367,8 @@ function MyStack() {
   return (
     <Stack.Navigator
       initialRouteName="Home"
-      headerMode="screen"
       screenOptions={{
+        headerMode: 'screen',
         headerTintColor: 'white',
         headerStyle: { backgroundColor: 'tomato' },
       }}
@@ -751,23 +751,19 @@ import { TransitionPresets } from '@react-navigation/stack';
   screenOptions={({ route, navigation }) => ({
     headerShown: false,
     gestureEnabled: true,
-    cardOverlayEnabled: true,
     ...TransitionPresets.ModalPresentationIOS,
   })}
-  mode="modal"
 >
   <Stack.Screen name="Home" component={Home} />
   <Stack.Screen name="Profile" component={Profile} />
 </Stack.Navigator>;
 ```
 
-> Note: The `ModalPresentationIOS` preset needs to be configured for the whole stack for it to work correctly. If you want few screens to have this transition, you can add a modal stack at root with this transition, and nest a regular stack inside it.
-
 ### Transparent modals
 
 A transparent modal is like a modal dialog which overlays the screen. The previous screen still stays visible underneath. To get a transparent modal screen, it's usually easier to create a separate modal stack. In the modal stack, you will want to configure few things:
 
-- Set the `mode` prop to `modal` which sets `detachPreviousScreen` option to `false` for the last screen
+- Set the `animationPresentation` prop to `modal` which sets `detachPreviousScreen` option to `false` for the last screen
 - Set the card background to transparent using `cardStyle`
 - Use a custom animation instead of the default platform animation (we'll use fade in this case)
 - Disable the header with `headerShown: false` (optional)
@@ -779,6 +775,7 @@ Example:
 <Stack.Navigator
   screenOptions={{
     headerShown: false,
+    animationPresentation: 'modal',
     cardStyle: { backgroundColor: 'transparent' },
     cardOverlayEnabled: true,
     cardStyleInterpolator: ({ current: { progress } }) => ({
@@ -797,7 +794,6 @@ Example:
       },
     }),
   }}
-  mode="modal"
 >
   <Stack.Screen name="Home" component={HomeStack} />
   <Stack.Screen name="Modal" component={ModalScreen} />
