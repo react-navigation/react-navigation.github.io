@@ -297,3 +297,20 @@ import { NavigationContainerRef } from '@react-navigation/native';
 
 const navigationRef = React.createRef<NavigationContainerRef<RootStackParamList>>();
 ```
+
+### Specifying default types for `useNavigation`, `Link`, `ref` etc
+
+Instead of manually annotating these APIs, you can specify a global type for your root navigator which will be used as the default type.
+
+To do this, you can add this snippet somewhere in your codebase:
+
+```js
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
+}
+```
+
+The `RootParamList` interface lets React Navigation know about the params accepted by your root navigator. Here we extend the type `RootStackParamList` because that's the type of params for our stack navigator at the root. The name of this type isn't important.
