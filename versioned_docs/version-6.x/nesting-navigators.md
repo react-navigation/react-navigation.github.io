@@ -221,7 +221,7 @@ function Home() {
 function App() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator screenOptions={{ animationPresentation: 'modal' }}>
+      <RootStack.Navigator screenOptions={{ presentation: 'modal' }}>
         <RootStack.Screen
           name="Home"
           component={Home}

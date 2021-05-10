@@ -139,11 +139,11 @@ To install the 6.x version of `@react-navigation/stack`, run:
 npm install @react-navigation/stack@next
 ```
 
-### `mode="modal"` is removed in favor of `animationPresentation: 'modal'`
+### `mode="modal"` is removed in favor of `presentation: 'modal'`
 
-Now there is a new `animationPresentation` option which allows you to customize whether a screen is a modal or not on a per screen basis.
+Now there is a new `presentation` option which allows you to customize whether a screen is a modal or not on a per screen basis.
 
-In addition, to match the default behavior of iOS, now `animationPresentation: 'modal'` shows the new presentation style modal introduced in iOS 13. It also adjusts things like status bar height in the header automatically that you had to do manually before.
+In addition, to match the default behavior of iOS, now `presentation: 'modal'` shows the new presentation style modal introduced in iOS 13. It also adjusts things like status bar height in the header automatically that you had to do manually before.
 
 Previously Android didn't have any special animation for modals. But now there's a slide from bottom animation instead of the default animation.
 

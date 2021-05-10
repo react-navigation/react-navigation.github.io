@@ -32,7 +32,7 @@ Options to configure how the screens inside the group get presented in the navig
 ```js
 <Stack.Group
   screenOptions={{
-    animationPresentation: 'modal',
+    presentation: 'modal',
   }}
 >
   {/* screens */}

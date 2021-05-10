@@ -58,7 +58,7 @@ Example:
     <Stack.Screen name="Home" component={HomeScreen} />
     <Stack.Screen name="Profile" component={ProfileScreen} />
   </Stack.Group>
-  <Stack.Group screenOptions={{ animationPresentation: 'modal' }}>
+  <Stack.Group screenOptions={{ presentation: 'modal' }}>
     <Stack.Screen name="Settings" component={Settings} />
     <Stack.Screen name="Share" component={Share} />
   </Stack.Group>
@@ -73,7 +73,7 @@ Similar to `options`, you can also pass a function to `screenOptions`. The funct
   <Stack.Screen name="Profile" component={ProfileScreen} />
   <Stack.Group
     screenOptions={({ navigation }) => ({
-      animationPresentation: 'modal',
+      presentation: 'modal',
       headerLeft: () => <CancelButton onPress={navigation.goBack} />,
     })}
   >
