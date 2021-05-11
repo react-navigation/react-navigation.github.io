@@ -49,7 +49,7 @@ Example:
 
 ```js
 import * as React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, Pressable, View, StyleSheet } from 'react-native';
 import {
   NavigationHelpersContext,
   useNavigationBuilder,
@@ -73,8 +73,8 @@ function TabNavigator({
   return (
     <NavigationHelpersContext.Provider value={navigation}>
       <View style={[{ flexDirection: 'row' }, tabBarStyle]}>
-        {state.routes.map(route => (
-          <TouchableOpacity
+        {state.routes.map((route) => (
+          <Pressable
             key={route.key}
             onPress={() => {
               const event = navigation.emit({
@@ -93,10 +93,23 @@ function TabNavigator({
             style={{ flex: 1 }}
           >
             <Text>{descriptors[route.key].options.title || route.name}</Text>
-          </TouchableOpacity>
+          </Pressable>
         ))}
       </View>
       <View style={[{ flex: 1 }, contentStyle]}>
+        {state.routes.map((route, i) => {
+          return (
+            <View
+              key={route.key}
+              style={[
+                StyleSheet.absoluteFill,
+                { display: i === state.index ? 'flex' : 'none' },
+              ]}
+            >
+              {descriptors[route.key].render()}
+            </View>
+          );
+        })}
         {descriptors[state.routes[state.index].key].render()}
       </View>
     </NavigationHelpersContext.Provider>
@@ -148,7 +161,7 @@ function App() {
       <My.Screen name="Home" component={HomeScreen} />
       <My.Screen name="Feed" component={FeedScreen} />
     </My.Navigator>
-  )
+  );
 }
 ```
 
@@ -164,16 +177,25 @@ For example, to type-check our custom tab navigator, we can do something like th
 
 ```tsx
 import * as React from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
 import {
-  useNavigationBuilder,
-  DefaultNavigatorOptions,
-  TabRouter,
-  TabActions,
-  TabActionHelpers,
-  TabRouterOptions,
-  TabNavigationState,
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
+import {
   createNavigatorFactory,
+  DefaultNavigatorOptions,
+  NavigationHelpersContext,
+  ParamListBase,
+  TabActionHelpers,
+  TabActions,
+  TabNavigationState,
+  TabRouter,
+  TabRouterOptions,
+  useNavigationBuilder,
 } from '@react-navigation/native';
 
 // Props accepted by the view
@@ -193,8 +215,8 @@ type TabNavigationOptions = {
 // emitted events.
 type TabNavigationEventMap = {
   tabPress: {
-    data: { isAlreadyFocused: boolean }
-    canPreventDefault: true
+    data: { isAlreadyFocused: boolean };
+    canPreventDefault: true;
   };
 };
 
@@ -223,15 +245,16 @@ function TabNavigator({
   });
 
   return (
-    <React.Fragment>
+    <NavigationHelpersContext.Provider value={navigation}>
       <View style={[{ flexDirection: 'row' }, tabBarStyle]}>
-        {state.routes.map(route => (
-          <TouchableOpacity
+        {state.routes.map((route) => (
+          <Pressable
             key={route.key}
             onPress={() => {
               const event = navigation.emit({
                 type: 'tabPress',
                 target: route.key,
+                canPreventDefault: true,
                 data: {
                   isAlreadyFocused: route.key === state.routes[state.index].key,
                 },
@@ -247,13 +270,25 @@ function TabNavigator({
             style={{ flex: 1 }}
           >
             <Text>{descriptors[route.key].options.title || route.name}</Text>
-          </TouchableOpacity>
+          </Pressable>
         ))}
       </View>
       <View style={[{ flex: 1 }, contentStyle]}>
-        {descriptors[state.routes[state.index].key].render()}
+        {state.routes.map((route, i) => {
+          return (
+            <View
+              key={route.key}
+              style={[
+                StyleSheet.absoluteFill,
+                { display: i === state.index ? 'flex' : 'none' },
+              ]}
+            >
+              {descriptors[route.key].render()}
+            </View>
+          );
+        })}
       </View>
-    </React.Fragment>
+    </NavigationHelpersContext.Provider>
   );
 }
 
