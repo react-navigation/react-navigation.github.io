@@ -1,0 +1,36 @@
+.wrapper {
+  background-color: var(--ifm-home-color-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1.5rem;
+  color: var(--ifm-home-color-text);
+  text-align: center;
+}
+
+.wrapper a {
+  color: var(--ifm-home-color-text);
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1366px;
+}
+
+.sponsorsContainer {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
