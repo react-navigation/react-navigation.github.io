@@ -40,7 +40,6 @@
       "version-5.x/typescript",
       "version-5.x/redux-integration",
       "version-5.x/MST-integration",
-      "version-5.x/localization",
       "version-5.x/react-native-screens",
       "version-5.x/upgrading-from-4.x"
     ],
