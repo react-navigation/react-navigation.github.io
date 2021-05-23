@@ -95,11 +95,18 @@ You can also specify `{ backgroundColor: 'transparent' }` to make the previous s
 
 This is shortcut option which configures several options to configure the style for rendering and transitions:
 
-- `card` - Use the standard iOS and Android screen transitions. This is the default.
-- `modal` - This does few things:
+- `card`: Use the default OS animations for iOS and Android screen transitions.
+- `modal`: Use Modal animations. This changes a few things:
   - Sets `headerMode` to `screen` for the screen unless specified otherwise.
   - Changes the screen animation to match the platform behavior for modals.
+- `transparentModal`: Similar to `modal`. This changes following things:
+  - Sets `headerMode` to `screen` for the screen unless specified otherwise.
+  - Sets background color of the screen to transparent, so previous screen is visible
   - Adjusts the `detachPreviousScreen` option so that the previous screen stays rendered.
+  - Prevents the previous screen from animating from its last position.
+  - Changes the screen animation to a vertical slide animation.
+
+See [Transparent modals](#transparent-modals) for more details on how to customize `transparentModal`.
 
 #### `animationEnabled`
 
@@ -761,43 +768,102 @@ import { TransitionPresets } from '@react-navigation/stack';
 
 ### Transparent modals
 
-A transparent modal is like a modal dialog which overlays the screen. The previous screen still stays visible underneath. To get a transparent modal screen, it's usually easier to create a separate modal stack. In the modal stack, you will want to configure few things:
-
-- Set the `presentation` prop to `modal` which sets `detachPreviousScreen` option to `false` for the last screen
-- Set the card background to transparent using `cardStyle`
-- Use a custom animation instead of the default platform animation (we'll use fade in this case)
-- Disable the header with `headerShown: false` (optional)
-- Enable the overlay with `cardOverlayEnabled: true` (optional)
+A transparent modal is like a modal dialog which overlays the screen. The previous screen still stays visible underneath. To get a transparent modal screen, you can specify `presentation: 'transparentModal'` in the screen's options.
 
 Example:
 
 ```js
-<Stack.Navigator
-  screenOptions={{
-    headerShown: false,
-    presentation: 'modal',
-    cardStyle: { backgroundColor: 'transparent' },
-    cardOverlayEnabled: true,
-    cardStyleInterpolator: ({ current: { progress } }) => ({
-      cardStyle: {
-        opacity: progress.interpolate({
-          inputRange: [0, 0.5, 0.9, 1],
-          outputRange: [0, 0.25, 0.7, 1],
-        }),
-      },
-      overlayStyle: {
-        opacity: progress.interpolate({
-          inputRange: [0, 1],
-          outputRange: [0, 0.5],
-          extrapolate: 'clamp',
-        }),
-      },
-    }),
-  }}
->
+<Stack.Navigator>
   <Stack.Screen name="Home" component={HomeStack} />
-  <Stack.Screen name="Modal" component={ModalScreen} />
+  <Stack.Screen
+    name="Modal"
+    component={ModalScreen}
+    options={{ presentation: 'transparentModal' }}
+  />
 </Stack.Navigator>
 ```
 
-Now, when you navigate to the `Modal` screen, the `Home` screen will still be visible underneath.
+Now, when you navigate to the `Modal` screen, it'll have a transparent background and the `Home` screen will be visible underneath.
+
+In addition to `presentation`, you might want to optionally specify few more things to get a modal dialog like behavior:
+
+- Disable the header with `headerShown: false`
+- Enable the overlay with `cardOverlayEnabled: true` (you can't tap the overlay to close the screen this way, see below for alternatives)
+
+If you want to further customize how the dialog animates, or want to close the screen when tapping the overlay etc., you can use the `useCardAnimation` hook to customize elements inside your screen.
+
+Example:
+
+```js
+import {
+  Animated,
+  View,
+  Text,
+  Pressable,
+  Button,
+  StyleSheet,
+} from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { useCardAnimation } from '@react-navigation/stack';
+
+function ModalScreen({ navigation }) {
+  const { colors } = useTheme();
+  const { current } = useCardAnimation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Pressable
+        style={[
+          StyleSheet.absoluteFill,
+          { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
+        ]}
+        onPress={navigation.goBack}
+      />
+      <Animated.View
+        style={{
+          padding: 16,
+          width: '90%',
+          maxWidth: 400,
+          borderRadius: 3,
+          backgroundColor: colors.card,
+          transform: [
+            {
+              scale: current.progress.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0.9, 1],
+                extrapolate: 'clamp',
+              }),
+            },
+          ],
+        }}
+      >
+        <Text>
+          Mise en place is a French term that literally means “put in place.” It
+          also refers to a way cooks in professional kitchens and restaurants
+          set up their work stations—first by gathering all ingredients for a
+          recipes, partially preparing them (like measuring out and chopping),
+          and setting them all near each other. Setting up mise en place before
+          cooking is another top tip for home cooks, as it seriously helps with
+          organization. It’ll pretty much guarantee you never forget to add an
+          ingredient and save you time from running back and forth from the
+          pantry ten times.
+        </Text>
+        <Button
+          title="Okay"
+          color={colors.primary}
+          style={{ alignSelf: 'flex-end' }}
+          onPress={navigation.goBack}
+        />
+      </Animated.View>
+    </View>
+  );
+}
+```
+
+Here we animate the scale of the dialog, and also add an overlay to close the dialog.
