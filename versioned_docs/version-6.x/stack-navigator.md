@@ -4,7 +4,7 @@ title: createStackNavigator
 sidebar_label: createStackNavigator
 ---
 
-Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
+Native Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
 
@@ -55,15 +55,15 @@ The name of the route to render on first load of the navigator.
 
 Default options to use for the screens in the navigator.
 
-#### `keyboardHandlingEnabled`
-
-If `false`, the on screen keyboard will NOT automatically dismiss when navigating to a new screen. Defaults to `true`.
-
 #### `detachInactiveScreens`
 
 Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
 
 You can customize it further on per screen basis using the [`detachPreviousScreen`](#detachinactivescreen) option.
+
+#### `keyboardHandlingEnabled`
+
+If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen.  Defaults to `true`.
 
 ### Options
 
@@ -168,7 +168,7 @@ Interpolated styles for various parts of the header. Refer the [Animations secti
 
 #### `detachPreviousScreen`
 
-Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`. Defaults to `false` for the last screen when `presentation: 'modal'`, otherwise `true`.
+Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`. Defaults to `false` for the last screen for modals, otherwise `true`.
 
 ### Header related options
 
