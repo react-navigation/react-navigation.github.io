@@ -65,9 +65,11 @@ It supports the following values:
 - `history` - return to last visited tab
 - `none` - do not handle back button
 
-#### `openByDefault`
+#### `defaultStatus`
 
-Whether the drawer should stay open by default. When this is `true`, the drawer will be open from the initial render. It can be closed normally using gestures or programmatically. However, when going back, drawer will re-open if it was closed. This essentially reverses the behavior of the drawer where the closed state is the default state.
+The default status of  the drawer - whether the drawer should stay `open` or `closed` by default.
+
+When this is set to `open`, the drawer will be open from the initial render. It can be closed normally using gestures or programmatically. However, when going back, drawer will re-open if it was closed. This is essentially the opposite of the default behavior of the drawer where it starts `closed`, and back button closes an open drawer.
 
 #### `detachInactiveScreens`
 
@@ -306,7 +308,7 @@ function MyDrawer() {
 }
 ```
 
-You can also specify other props such as `drawerStyle` based on screen size to customize the behavior. For example, you can combine it with `openByDefault` to achieve a master-detail layout:
+You can also specify other props such as `drawerStyle` based on screen size to customize the behavior. For example, you can combine it with `defaultStatus="open"` to achieve a master-detail layout:
 
 ```js
 import { useWindowDimensions } from 'react-native';
@@ -321,7 +323,7 @@ function MyDrawer() {
 
   return (
     <Drawer.Navigator
-      openByDefault
+      defaultStatus="open"
       screenOptions={{
         drawerType: isLargeScreen ? 'permanent' : 'back',
         drawerStyle: isLargeScreen ? null : { width: '100%' },
