@@ -463,6 +463,54 @@ React.useEffect(() => {
 }, [navigation]);
 ```
 
+#### `gestureStart`
+
+This event is fired when the swipe gesture starts for the current screen.
+
+Example:
+
+```js
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('gestureStart', (e) => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
+```
+
+#### `gestureEnd`
+
+This event is fired when the swipe gesture ends for the current screen. e.g. a screen was successfully dismissed.
+
+Example:
+
+```js
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('gestureEnd', (e) => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
+```
+
+#### `gestureCancel`
+
+This event is fired when the swipe gesture is cancelled for the current screen. e.g. a screen wasn't dismissed by the gesture.
+
+Example:
+
+```js
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('gestureCancel', (e) => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
+```
+
 ### Helpers
 
 The stack navigator adds the following methods to the navigation prop:

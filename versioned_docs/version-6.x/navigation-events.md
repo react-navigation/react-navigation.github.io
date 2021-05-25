@@ -23,7 +23,7 @@ Each callback registered as an event listener receive an event object as its arg
 
 One thing to keep in mind is that you can only listen to events from the immediate parent navigator. For example, if you try to add a listener in a screen is inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use `navigation.getParent()` to get a reference to parent navigator's navigation prop and add a listener.
 
-There are 2 ways to listen to events:
+There are 3 ways to listen to events:
 
 ### `navigation.addListener`
 
@@ -32,7 +32,7 @@ Inside a screen, you can add listeners on the `navigation` prop with the `addLis
 Example:
 
 ```js
-const unsubscribe = navigation.addListener('tabPress', e => {
+const unsubscribe = navigation.addListener('tabPress', (e) => {
   // Prevent default action
   e.preventDefault();
 });
@@ -89,7 +89,7 @@ Example:
   name="Chat"
   component={Chat}
   listeners={{
-    tabPress: e => {
+    tabPress: (e) => {
       // Prevent default action
       e.preventDefault();
     },
@@ -106,7 +106,7 @@ Example:
   name="Chat"
   component={Chat}
   listeners={({ navigation, route }) => ({
-    tabPress: e => {
+    tabPress: (e) => {
       // Prevent default action
       e.preventDefault();
 
@@ -115,4 +115,45 @@ Example:
     },
   })}
 />
+```
+
+### `screenListeners` prop on the navigator
+
+You can pass a prop named `screenListeners` to the navigator component, where you can specify listeners for events from all screens. This can be useful if you want to listen to specific events regardless of the screen, or want to listen to common events such as `state` which is emitted to all screens.
+
+Example:
+
+```js
+<Stack.Navigator
+  screenListeners={{
+    state: (e) => {
+      // Do something with the state
+      console.log('state changed', e.data);
+    },
+  }}
+>
+  <Stack.Screen name="Home" component={HomeScreen} />
+  <Stack.Screen name="Profile" component={ProfileScreen} />
+</Stack.Navigator>
+```
+
+Similar to `listeners`, you can also pass a function to `screenListeners`. The function will receive the [`navigation` prop](navigation-prop.md) and the [`route` prop](route-prop.md) for each screen. This can be useful if you need access to the `navigation` object.
+
+```js
+<Tab.Navigator
+  screenListeners={({ navigation }) => ({
+    state: (e) => {
+      // Do something with the state
+      console.log('state changed', e.data);
+
+      // Do something with the `navigation` object
+      if (!navigation.canGoBack()) {
+        console.log("we're on the initial screen");
+      }
+    },
+  })}
+>
+  <Tab.Screen name="Home" component={HomeScreen} />
+  <Tab.Screen name="Profile" component={ProfileScreen} />
+</Tab.Navigator>
 ```
