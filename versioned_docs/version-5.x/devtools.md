@@ -6,7 +6,7 @@ sidebar_label: Developer tools
 
 Developer tools to make debugging easier when using React Navigation.
 
-To configure the developer tools, install [`@react-navigation/devtools`](https://github.com/react-navigation/react-navigation/tree/master/packages/devtools):
+To use the developer tools, install [`@react-navigation/devtools`](https://github.com/react-navigation/react-navigation/tree/master/packages/devtools):
 
 ```bash npm2yarn
 npm install @react-navigation/devtools
@@ -18,19 +18,19 @@ The package exposes the following APIs:
 
 ### `useReduxDevToolsExtension`
 
-This hook provides integration with [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension).It also works with [`React Native Debugger app`](https://github.com/jhen0409/react-native-debugger) which includes this extension.
+This hook provides integration with [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension). It also works with [`React Native Debugger app`](https://github.com/jhen0409/react-native-debugger) which includes this extension.
 
-The hook accepts a `ref` to the `NavigationContainer` as its argument.
+**Usage:**
 
-Usage:
+To use the hook, import it and pass a `ref` to the `NavigationContainer` as its argument:
 
 ```js
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { useReduxDevToolsExtension } from '@react-navigation/devtools';
 
 export default function App() {
-  const navigationRef = React.useRef();
+  const navigationRef = useNavigationContainerRef();
 
   useReduxDevToolsExtension(navigationRef);
 
@@ -39,5 +39,7 @@ export default function App() {
   );
 }
 ```
+
+Now, you'll be able to see logs from React Navigation in Redux DevTools Extension, e.g. when you're debugging your app with React Native Debugger app.
 
 The hook only works during development and is disabled in production. You don't need to do anything special to remove it from the production build.
