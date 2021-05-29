@@ -35,7 +35,7 @@ To be able to use this hook, you need to:
 
 - Install the `react-navigation` plugin in the Flipper app
 
-  ![Install Flipper](/devtools/flipper-plugin-install.png)
+  ![Install Flipper](/assets/devtools/flipper-plugin-install.png)
 
 **Usage:**
 
@@ -59,9 +59,9 @@ export default function App() {
 
 Now, you'll be able to use the React Navigation devtools in Flipper whenever your device is connected to Flipper.
 
-![React Navigation Logs](/devtools/flipper-plugin-logs.png)
+![React Navigation Logs](/assets/devtools/flipper-plugin-logs.png)
 
-![React Navigation Linking](/devtools/flipper-plugin-linking.png)
+![React Navigation Linking](/assets/devtools/flipper-plugin-linking.png)
 
 ### `useReduxDevToolsExtension`
 
