@@ -4,7 +4,7 @@ title: Moving between screens
 sidebar_label: Moving between screens
 ---
 
-In the previous section, ["Hello React Navigation"](hello-react-navigation.md), we defined a stack navigator with two routes (`Home` and `Details`), but we didn't learn how to let a user navigate from `Home` to `Details` (although we did learn how to change the _initial_ route in our code, but forcing our users to clone our repository and change the route in our code in order to see another screen is arguably among the worst user experiences one could imagine).
+In the previous section, ["Hello React Navigation"](hello-react-navigation.md), we defined a native stack navigator with two routes (`Home` and `Details`), but we didn't learn how to let a user navigate from `Home` to `Details` (although we did learn how to change the _initial_ route in our code, but forcing our users to clone our repository and change the route in our code in order to see another screen is arguably among the worst user experiences one could imagine).
 
 If this was a web browser, we'd be able to write something like this:
 
@@ -34,7 +34,7 @@ We'll do something similar to the latter, but rather than using a `window.locati
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function HomeScreen({ navigation }) {
   return (
@@ -53,7 +53,7 @@ function HomeScreen({ navigation }) {
 
 Let's break this down:
 
-- `navigation` - the `navigation` prop is passed in to every **screen component** ([definition](glossary-of-terms.md#screen-component)) in stack navigator (more about this later in ["The navigation prop in depth"](navigation-prop.md)).
+- `navigation` - the `navigation` prop is passed in to every **screen component** ([definition](glossary-of-terms.md#screen-component)) in the native stack navigator (more about this later in ["The navigation prop in depth"](navigation-prop.md)).
 - `navigate('Details')` - we call the `navigate` function (on the `navigation` prop &mdash; naming is hard!) with the name of the route that we'd like to move the user to.
 
 > If we call `navigation.navigate` with a route name that we haven't defined in a navigator, it'll print an error in development builds and nothing will happen in production builds. Said another way, we can only navigate to routes that have been defined on our navigator &mdash; we cannot navigate to an arbitrary component.
@@ -101,7 +101,7 @@ Each time you call `push` we add a new route to the navigation stack. When you c
 
 ## Going back
 
-The header provided by stack navigator will automatically include a back button when it is possible to go back from the active screen (if there is only one screen in the navigation stack, there is nothing that you can go back to, and so there is no back button).
+The header provided by the native stack navigator will automatically include a back button when it is possible to go back from the active screen (if there is only one screen in the navigation stack, there is nothing that you can go back to, and so there is no back button).
 
 Sometimes you'll want to be able to programmatically trigger this behavior, and for that you can use `navigation.goBack();`.
 
@@ -151,7 +151,7 @@ function DetailsScreen({ navigation }) {
 
 ## Summary
 
-- `navigation.navigate('RouteName')` pushes a new route to the stack navigator if it's not already in the stack, otherwise it jumps to that screen.
+- `navigation.navigate('RouteName')` pushes a new route to the native stack navigator if it's not already in the stack, otherwise it jumps to that screen.
 - We can call `navigation.push('RouteName')` as many times as we like and it will continue pushing routes.
 - The header bar will automatically show a back button, but you can programmatically go back by calling `navigation.goBack()`. On Android, the hardware back button just works as expected.
 - You can go back to an existing screen in the stack with `navigation.navigate('RouteName')`, and you can go back to the first screen in the stack with `navigation.popToTop()`.
