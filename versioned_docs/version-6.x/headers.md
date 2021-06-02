@@ -114,7 +114,7 @@ There are a couple of things to notice here:
 
 ## Sharing common `options` across screens
 
-It is common to want to configure the header in a similar way across many screens. For example, your company brand color might be red and so you want the header background color to be red and tint color to be white. Conveniently, these are the colors we're using in our running example, and you'll notice that when you navigate to the `DetailsScreen` the colors go back to the defaults. Wouldn't it be awful if we had to copy the `options` header style properties from `HomeScreen` to `DetailsScreen`, and for every single screen component we use in our app? Thankfully, we do not. We can instead move the configuration up to the stack navigator under the prop `screenOptions`.
+It is common to want to configure the header in a similar way across many screens. For example, your company brand color might be red and so you want the header background color to be red and tint color to be white. Conveniently, these are the colors we're using in our running example, and you'll notice that when you navigate to the `DetailsScreen` the colors go back to the defaults. Wouldn't it be awful if we had to copy the `options` header style properties from `HomeScreen` to `DetailsScreen`, and for every single screen component we use in our app? Thankfully, we do not. We can instead move the configuration up to the native stack navigator under the prop `screenOptions`.
 
 <samp id="sharing-header-styles">sharing header styles</samp>
 
@@ -173,14 +173,14 @@ function StackScreen() {
 }
 ```
 
-> You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to a stack navigator, the `headerTitle` defaults to a `Text` component that displays the `title`.
+> You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to a native stack navigator, the `headerTitle` defaults to a `Text` component that displays the `title`.
 
 ## Additional configuration
 
-You can read the full list of available `options` for screens inside of a stack navigator in the [`createStackNavigator` reference](stack-navigator.md#navigationoptions-used-by-stacknavigator).
+You can read the full list of available `options` for screens inside of a native stack navigator in the [`createNativeStackNavigator` reference](native-stack-navigator#options).
 
 ## Summary
 
-- You can customize the header inside of the `options` prop of your screen components. Read the full list of options [in the API reference](stack-navigator.md#navigationoptions-used-by-stacknavigator).
+- You can customize the header inside of the `options` prop of your screen components. Read the full list of options [in the API reference](native-stack-navigator#options).
 - The `options` prop can be an object or a function. When it is a function, it is provided with an object with the `navigation` and `route` prop.
 - You can also specify shared `screenOptions` in the stack navigator configuration when you initialize it. The prop takes precedence over that configuration.
