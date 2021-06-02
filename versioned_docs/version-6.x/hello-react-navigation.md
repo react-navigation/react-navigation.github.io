@@ -6,23 +6,23 @@ sidebar_label: Hello React Navigation
 
 In a web browser, you can link to different pages using an anchor (`<a>`) tag. When the user clicks on a link, the URL is pushed to the browser history stack. When the user presses the back button, the browser pops the item from the top of the history stack, so the active page is now the previously visited page. React Native doesn't have a built-in idea of a global history stack like a web browser does -- this is where React Navigation enters the story.
 
-React Navigation's stack navigator provides a way for your app to transition between screens and manage navigation history. If your app uses only one stack navigator then it is conceptually similar to how a web browser handles navigation state - your app pushes and pops items from the navigation stack as users interact with it, and this results in the user seeing different screens. A key difference between how this works in a web browser and in React Navigation is that React Navigation's stack navigator provides the gestures and animations that you would expect on Android and iOS when navigating between routes in the stack.
+React Navigation's native stack navigator provides a way for your app to transition between screens and manage navigation history. If your app uses only one stack navigator then it is conceptually similar to how a web browser handles navigation state - your app pushes and pops items from the navigation stack as users interact with it, and this results in the user seeing different screens. A key difference between how this works in a web browser and in React Navigation is that React Navigation's native stack navigator provides the gestures and animations that you would expect on Android and iOS when navigating between routes in the stack.
 
-Lets start by demonstrating the most common navigator, `createStackNavigator`.
+Let's start by demonstrating the most common navigator, `createNativeStackNavigator`.
 
-## Installing the stack navigator library
+## Installing the native stack navigator library
 
-The libraries we've installed so far are the building blocks and shared foundations for navigators, and each navigator in React Navigation lives in its own library. To use the stack navigator, we need to install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/stack) :
+The libraries we've installed so far are the building blocks and shared foundations for navigators, and each navigator in React Navigation lives in its own library. To use the native stack navigator, we need to install [`@react-navigation/native-stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/native-stack) :
 
 ```bash npm2yarn
-npm install @react-navigation/stack@next @react-native-masked-view/masked-view
+npm install @react-navigation/native-stack@next react-native-screens
 ```
 
-> 💡 `@react-navigation/stack` depends on `@react-native-masked-view/masked-view` and the other libraries that we installed in [Getting started](getting-started.md). If you haven't installed those yet, head over to that page and follow the installation instructions.
+> 💡 `@react-navigation/native-stack` depends on `react-native-screens` and the other libraries that we installed in [Getting started](getting-started.md). If you haven't installed those yet, head over to that page and follow the installation instructions.
 
-### Creating a stack navigator
+### Creating a native stack navigator
 
-`createStackNavigator` is a function that returns an object containing 2 properties: `Screen` and `Navigator`. Both of them are React components used for configuring the navigator. The `Navigator` should contain `Screen` elements as its children to define the configuration for routes.
+`createNativeStackNavigator` is a function that returns an object containing 2 properties: `Screen` and `Navigator`. Both of them are React components used for configuring the navigator. The `Navigator` should contain `Screen` elements as its children to define the configuration for routes.
 
 `NavigationContainer` is a component which manages our navigation tree and contains the [navigation state](navigation-state.md). This component must wrap all navigators structure. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
 
@@ -34,7 +34,7 @@ npm install @react-navigation/stack@next @react-native-masked-view/masked-view
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function HomeScreen() {
   return (
@@ -44,7 +44,7 @@ function HomeScreen() {
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function App() {
   return (
@@ -65,13 +65,13 @@ If you run this code, you will see a screen with an empty navigation bar and a g
 
 > The casing of the route name doesn't matter -- you can use lowercase `home` or capitalized `Home`, it's up to you. We prefer capitalizing our route names.
 
-> The only required configuration for a screen is the `name` and `component` props. You can read more about the other options available in the [stack navigator reference](stack-navigator.md).
+> The only required configuration for a screen is the `name` and `component` props. You can read more about the other options available in the [native stack navigator reference](native-stack-navigator.md).
 
 ### Configuring the navigator
 
 All of the route configuration is specified as props to our navigator. We haven't passed any props to our navigator, so it just uses the default configuration.
 
-Let's add a second screen to our stack navigator and configure the `Home` screen to render first:
+Let's add a second screen to our native stack navigator and configure the `Home` screen to render first:
 
 <samp id="hello-react-navigation-full" />
 
@@ -84,7 +84,7 @@ function DetailsScreen() {
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function App() {
   return (
