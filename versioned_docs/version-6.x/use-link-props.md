@@ -72,9 +72,25 @@ In a future version of React Native for Web, these won't be an issue and you'll 
 
 ### `to`
 
-Absolute path to the screen, e.g. - `/profile/jane`.
+You can pass an object with a `screen` property:
 
-This will be used for the `href` prop as well as for in-page navigation. This uses a `navigate` action for navigation by default.
+```js
+function Home() {
+  return (
+    <LinkButton
+      to={{ screen: 'Profile', params: { id: 'jane' } }}
+    >
+      Go to Jane's profile
+    </LinkButton>
+  );
+}
+```
+
+The syntax of this object is the same as [navigating to a screen in a nested navigators](nesting-navigators.md#navigating-to-a-screen-in-a-nested-navigator). This uses a `navigate` action for navigation by default, unless you specify a different action.
+
+Alternatively, you can also pass an absolute path to the screen, e.g. - `/profile/jane`.
+
+This will be used for the `href` prop as well as for in-page navigation.
 
 ### `action`
 
@@ -99,4 +115,4 @@ function Home() {
 }
 ```
 
-If the `action` prop is not specified, the path provided to the `to` prop will be parsed and dispatched as a `navigate` action.
+If the `action` prop is not specified, the path provided to the `to` prop will be used and dispatched as a `navigate` action.

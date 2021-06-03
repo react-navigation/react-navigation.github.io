@@ -129,6 +129,32 @@ In 6.x, we finally removed the hook in favor of the `linking` prop. If you're st
 
 See [configuring links](configuring-links.md) for more details on configuring deep links.
 
+### `Link` and `useLinkProps` can now accept screen names
+
+Earlier, the `Link` component could only accept a path string.
+
+**TODO**
+
+### New `Group` component
+
+**TODO**
+
+### New hook and helper for creating container ref
+
+**TODO**
+
+### `useNavigation`, `Link`, `useLinkProps` etc. now work outside a screen
+
+**TODO**
+
+### Ability to specify a type for root navigator when using TypeScript
+
+**TODO**
+
+### New `CompositeScreenProps` type for TypeScript
+
+**TODO**
+
 ## Stack Navigator
 
 The following changes are in the `@react-navigation/stack` package.
@@ -139,6 +165,17 @@ To install the 6.x version of `@react-navigation/stack`, run:
 npm install @react-navigation/stack@next
 ```
 
+### `keyboardHandlingEnabled` is moved to options
+
+Previously, `keyboardHandlingEnabled` was a prop on the navigator, but now it needs to be specified in screen's `options` instead. To keep previous behavior, you can specify it in `screenOptions`:
+
+```js
+<Stack.Navigator screenOptions={{ keyboardHandlingEnabled: false }}>
+  <Stack.Screen name="Home" component={Home} />
+  <Stack.Screen name="Profile" component={Profile} />
+</Stack.Navigator>
+```
+
 ### `mode="modal"` is removed in favor of `presentation: 'modal'`
 
 Now there is a new `presentation` option which allows you to customize whether a screen is a modal or not on a per screen basis.
@@ -147,7 +184,11 @@ In addition, to match the default behavior of iOS, now `presentation: 'modal'` s
 
 Previously Android didn't have any special animation for modals. But now there's a slide from bottom animation instead of the default animation.
 
-If you don't want to use the new animations, you can change it to your liking using the [animation related options](stack-navigator.md#animations)
+If you don't want to use the new animations, you can change it to your liking using the [animation related options](stack-navigator.md#animations).
+
+In addition, a new `presentation: 'transparentModal'` option to make it easier to build transparent modals. See [transparent modals](stack-navigator.md#transparent-modals) docs for more details.
+
+This also makes it possible to mix regular screens with modal screens in the same stack, since these options don't need to be applied to the whole screen anymore.
 
 ### `headerMode="none"` is removed in favor of `headerShown: false`
 
@@ -208,6 +249,18 @@ The following exports now live in the elements library since they are no longer 
 
 See [below](#elements-library) for more details on installing the elements library.
 
+## Native Stack Navigator
+
+The `@react-navigation/native-stack` package is back. We made few changes to the API so that moving between `@react-navigation/stack` and `@react-navigation/native-stack` is easier. If you were using `react-native-screens/native-stack` before, then you'd need to make some changes to your code.
+
+To install the 6.x version of `@react-navigation/native-stack`, run:
+
+```sh npm2yarn
+npm install @react-navigation/native-stack@next react-native-screens react-native-safe-area-context
+```
+
+**TODO**
+
 ## Bottom Tab Navigator
 
 The following changes are in the `@react-navigation/bottom-tabs` package.
@@ -262,6 +315,10 @@ The `lazy` prop now can be configured per screen instead of for the whole naviga
 
 Returning to first route after pressing back seems more common in apps. To match this behavior, drawer now uses `firstRoute` for the `backBehavior` prop. To preserve old behavior, you can pass `backBehavior="history"` prop to the bottom tab navigator.
 
+### New `tabBarBackground` option to specify custom backgrounds
+
+**TODO**
+
 ## Material Top Tab Navigator
 
 The following changes are in the `@react-navigation/material-top-tabs` package.
@@ -269,12 +326,12 @@ The following changes are in the `@react-navigation/material-top-tabs` package.
 To install the 6.x version of `@react-navigation/material-top-tabs`, run:
 
 ```sh npm2yarn
-npm install @react-navigation/material-top-tabs@next
+npm install @react-navigation/material-top-tabs@next react-native-pager-view
 ```
 
 ### It now uses `ViewPager` instead of Reanimated and Gesture Handler
 
-The `react-native-tab-view` dependency is upgraded to the latest version (3.x) which now uses [`ViewPager`](https://github.com/callstack/react-native-pager-view) instead of Reanimated and Gesture Handler. This will provide a native UX and also improve the performance.
+The `react-native-tab-view` dependency is upgraded to the latest version (3.x) which now uses [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) instead of Reanimated and Gesture Handler. This will provide a native UX and also improve the performance.
 
 See [release notes for `react-native-tab-view`](https://github.com/satya164/react-native-tab-view/releases/tag/v3.0.0) for more details.
 
@@ -322,8 +379,10 @@ The following changes are in the `@react-navigation/material-bottom-tabs` packag
 To install the 6.x version of `@react-navigation/material-bottom-tabs`, run:
 
 ```sh npm2yarn
-npm install @react-navigation/material-bottom-tabs@next
+npm install @react-navigation/material-bottom-tabs@next react-native-safe-area-context
 ```
+
+It's also necessary to install the `react-native-safe-area-context` package when using `@react-navigation/material-bottom-tab`, if you didn't have it already:
 
 ### The default value for `backBehavior` is now `firstRoute` for material bottom tabs
 
@@ -359,10 +418,11 @@ Drawer now uses a slide animation by default on iOS. To keep the previous behavi
 
 Previously, the status of drawer was a `boolean` (`true` | `false`) to signify the open and closed states. It's now a string with the values `open` and `closed`. This will let us implement more types of status in future.
 
-To match this change, the following exports have been renamed as well:
+To match this change, the following APIs have been renamed as well:
 
 - `getIsDrawerOpenFromState` -> `getDrawerStatusFromState`
 - `useIsDrawerOpen` -> `useDrawerStatus`
+- `openByDefault` -> `defaultStatus`
 
 ### Drawer no longer emits `drawerOpen` and `drawerClose` events
 
@@ -405,7 +465,7 @@ Similar to bottom tabs, drawer now uses `firstRoute` for the `backBehavior` prop
 We have a new package which contains various UI elements related to navigation, such as a `Header` component. This means that we can now use these components in all navigators. You can also install the library to import components such as `Header` to use in any navigator:
 
 ```sh npm2yarn
-npm install @react-navigation/elements@next
+npm install @react-navigation/elements@next react-native-safe-area-context
 ```
 
 Now you can import items from there:
@@ -415,3 +475,7 @@ import { useHeaderHeight } from '@react-navigation/elements';
 ```
 
 See the [Elements Library page](elements.md) for more details on what's available in the library.
+
+## Developer tools
+
+**TODO**
