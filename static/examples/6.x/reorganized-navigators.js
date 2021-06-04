@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function FeedScreen({ navigation }) {
   return (
@@ -23,7 +23,7 @@ function SettingsScreen() {
   return <View />;
 }
 
-const FeedStack = createStackNavigator();
+const FeedStack = createNativeStackNavigator();
 
 function FeedStackScreen() {
   return (
@@ -34,7 +34,7 @@ function FeedStackScreen() {
   );
 }
 
-const ProfileStack = createStackNavigator();
+const ProfileStack = createNativeStackNavigator();
 
 function ProfileStackScreen() {
   return (
@@ -56,7 +56,7 @@ function HomeTabs() {
   );
 }
 
-const RootStack = createStackNavigator();
+const RootStack = createNativeStackNavigator();
 
 export default function App() {
   return (

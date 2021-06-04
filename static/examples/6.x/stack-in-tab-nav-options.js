@@ -2,11 +2,11 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
-const HomeStack = createStackNavigator();
-const SettingsStack = createStackNavigator();
+const HomeStack = createNativeStackNavigator();
+const SettingsStack = createNativeStackNavigator();
 
 function A() {
   return <View />;

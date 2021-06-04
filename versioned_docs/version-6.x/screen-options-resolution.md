@@ -8,14 +8,14 @@ In this document we'll explain how [screen options](screen-options.md) work when
 
 **You can only modify navigation options for a navigator from one of its screen components. This applies equally to navigators that are nested as screens.**
 
-Let's take for example a tab navigator that contains a stack in each tab. What happens if we set the `options` on a screen inside of the stack?
+Let's take for example a tab navigator that contains a native stack in each tab. What happens if we set the `options` on a screen inside of the stack?
 
 <samp id="stack-in-tab-nav-options" />
 
 ```js
 const Tab = createTabNavigator();
-const HomeStack = createStackNavigator();
-const SettingsStack = createStackNavigator();
+const HomeStack = createNativeStackNavigator();
+const SettingsStack = createNativeStackNavigator();
 
 function HomeStackScreen() {
   return (
@@ -99,7 +99,7 @@ function HomeTabs() {
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
@@ -181,12 +181,12 @@ This approach can be used anytime you want to set options for a parent navigator
 
 In many cases, similar behavior can be achieved by reorganizing our navigators. We usually recommend this option if it fits your use case.
 
-For example, for the above use case, instead of adding a tab navigator inside a stack navigator, we can add a stack navigator inside each of the tabs.
+For example, for the above use case, instead of adding a tab navigator inside a native stack navigator, we can add a native stack navigator inside each of the tabs.
 
 <samp id="reorganized-navigators" />
 
 ```js
-const FeedStack = createStackNavigator();
+const FeedStack = createNativeStackNavigator();
 
 function FeedStackScreen() {
   return (
@@ -197,7 +197,7 @@ function FeedStackScreen() {
   );
 }
 
-const ProfileStack = createStackNavigator();
+const ProfileStack = createNativeStackNavigator();
 
 function ProfileStackScreen() {
   return (
@@ -219,7 +219,7 @@ function HomeTabs() {
   );
 }
 
-const RootStack = createStackNavigator();
+const RootStack = createNativeStackNavigator();
 
 export default function App() {
   return (
