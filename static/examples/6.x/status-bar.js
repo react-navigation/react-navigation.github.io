@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, StatusBar, Button, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SafeAreaView from 'react-native-safe-area-view';
 
@@ -13,7 +13,6 @@ function Screen1({ navigation }) {
       <Button
         title="Next screen"
         onPress={() => navigation.navigate('Screen2')}
-        color="#fff"
       />
     </SafeAreaView>
   );
@@ -32,7 +31,7 @@ function Screen2({ navigation }) {
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (

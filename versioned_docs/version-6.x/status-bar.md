@@ -16,7 +16,7 @@ This is a simple task when using a stack. You can render the `StatusBar` compone
 import * as React from 'react';
 import { Text, StatusBar, Button, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SafeAreaView from 'react-native-safe-area-view';
 
@@ -47,7 +47,7 @@ function Screen2({ navigation }) {
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
@@ -118,7 +118,7 @@ function Screen2({ navigation }) {
 }
 ```
 
-Although not necessary, you can use the `FocusAwareStatusBar` component in the screens of the stack navigator as well.
+Although not necessary, you can use the `FocusAwareStatusBar` component in the screens of the native stack navigator as well.
 
 ![DrawerNavigator with different StatusBar configs](/assets/statusbar/statusbar-drawer-demo.gif)
 
