@@ -203,7 +203,7 @@ So instead of having 2 ways to do very similar things, we have removed `headerMo
 </Stack.Navigator>
 ```
 
-### `headerMode is moved to options
+### `headerMode` is moved to options
 
 Previously, `headerMode` was a prop on the navigator, but now it needs to be specified in screen's `options` instead. To keep previous behavior, you can specify it in `screenOptions`:
 
