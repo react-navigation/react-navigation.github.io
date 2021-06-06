@@ -1,7 +1,7 @@
 ---
 id: drawer-navigator
-title: createDrawerNavigator
-sidebar_label: createDrawerNavigator
+title: Drawer Navigator
+sidebar_label: Drawer
 ---
 
 Component that renders a navigation drawer which can be opened and closed via gestures.

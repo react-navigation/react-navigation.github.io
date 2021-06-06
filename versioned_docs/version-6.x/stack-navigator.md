@@ -1,10 +1,10 @@
 ---
 id: stack-navigator
-title: createStackNavigator
-sidebar_label: createStackNavigator
+title: Stack Navigator
+sidebar_label: Stack
 ---
 
-Native Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
+Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
 

@@ -1,7 +1,7 @@
 ---
 id: native-stack-navigator
-title: createNativeStackNavigator
-sidebar_label: createNativeStackNavigator
+title: Native Stack Navigator
+sidebar_label: Native Stack
 ---
 
 Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
@@ -16,7 +16,7 @@ To use this navigator, ensure that you have [`@react-navigation/native` and its 
 
 ## API Definition
 
-> 💡 If you encounter any bugs while using `createNativeStackNavigator`, please open isues on [react-native-screens](https://github.com/software-mansion/react-native-screens) rather than the react-navigation repository!
+> 💡 If you encounter any bugs while using `createNativeStackNavigator`, please open issues on [`react-native-screens`](https://github.com/software-mansion/react-native-screens) rather than the `react-navigation` repository!
 
 To use this navigator, import `enableScreens` from `react-native-screens` and invoke it, and import `createNativeStackNavigator` from `react-native-screens/native-stack`:
 

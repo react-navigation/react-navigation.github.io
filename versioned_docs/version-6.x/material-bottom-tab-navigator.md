@@ -1,7 +1,7 @@
 ---
 id: material-bottom-tab-navigator
-title: createMaterialBottomTabNavigator
-sidebar_label: createMaterialBottomTabNavigator
+title: Material Bottom Tabs Navigator
+sidebar_label: Material Bottom Tabs
 ---
 
 A material-design themed tab bar on the bottom of the screen that lets you switch between different routes with animation. Routes are lazily initialized - their screen components are not mounted until they are first focused.
@@ -21,6 +21,8 @@ This API also requires that you install `react-native-vector-icons`! If you are 
 To use this tab navigator, import it from `@react-navigation/material-bottom-tabs`
 
 ## API Definition
+
+> 💡 If you encounter any bugs while using `createMaterialBottomTabNavigator`, please open issues on [`react-native-paper`](https://github.com/callstack/react-native-paper) rather than the `react-navigation` repository!
 
 To use this tab navigator, import it from `@react-navigation/material-bottom-tabs`:
 
