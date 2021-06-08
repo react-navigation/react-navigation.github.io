@@ -248,7 +248,7 @@ code would be written as follows:
 
 ## I'm getting "Invalid hook call. Hooks can only be called inside of the body of a function component"
 
-This can happen when you pass a React component to an option that accepts a function returning a react element. For example, the [`headerCenter` option in native stack navigator](native-stack-navigator.md#headerCenter) expects a function returning a react element:
+This can happen when you pass a React component to an option that accepts a function returning a react element. For example, the [`headerTitle` option in native stack navigator](native-stack-navigator.md#headerTitle) expects a function returning a react element:
 
 ```js
 <Stack.Screen
