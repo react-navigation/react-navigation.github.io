@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, View, Text, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function HomeScreen({ navigation: { navigate } }) {
   return (
@@ -36,7 +36,7 @@ function ProfileScreen({ navigation, route }) {
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function App() {
   return (
