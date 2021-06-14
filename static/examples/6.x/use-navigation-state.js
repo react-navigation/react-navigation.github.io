@@ -5,7 +5,7 @@ import {
   useRoute,
   useNavigationState,
 } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function useIsFirstRouteInParent() {
   const route = useRoute();
@@ -68,7 +68,7 @@ function SettingsScreen({ navigation }) {
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function MyStack() {
   return (
