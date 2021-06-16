@@ -75,6 +75,11 @@ export default [
     "name": "Radek Czemerys"
   },
   {
+    "avatarUrl": "https://avatars.githubusercontent.com/u/8604114?v=4",
+    "username": "ctlabvn",
+    "name": "CTLab Vietnam"
+  },
+  {
     "avatarUrl": "https://avatars.githubusercontent.com/u/13601619?v=4",
     "username": "itiden",
     "name": "Itiden"
@@ -103,6 +108,11 @@ export default [
     "avatarUrl": "https://avatars.githubusercontent.com/u/36824170?u=18c3b7d6e7db72426a6d50712eb7b50c67d669b8&v=4",
     "username": "luism3861",
     "name": "Luis Medina Huerta"
+  },
+  {
+    "avatarUrl": "https://avatars.githubusercontent.com/u/45317893?u=3cebc0f5786c6ba9c96d6b2dfb3ab8bf605994c3&v=4",
+    "username": "GandresCoello18",
+    "name": "Andres Coello"
   },
   {
     "avatarUrl": "https://avatars.githubusercontent.com/u/65687793?u=85bc8ea9018a174a1adb79a278b8c284c305c5a3&v=4",
