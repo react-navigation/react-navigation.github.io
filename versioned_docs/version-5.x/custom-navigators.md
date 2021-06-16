@@ -110,7 +110,6 @@ function TabNavigator({
             </View>
           );
         })}
-        {descriptors[state.routes[state.index].key].render()}
       </View>
     </NavigationHelpersContext.Provider>
   );
