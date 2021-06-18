@@ -95,6 +95,11 @@ export default [
     "name": "Jarvis Luong"
   },
   {
+    "avatarUrl": "https://avatars.githubusercontent.com/u/26326015?u=33a1afbe11e8f6b962c6267606d59c2b2ef94716&v=4",
+    "username": "Bang9",
+    "name": "HYUNGU, KANG"
+  },
+  {
     "avatarUrl": "https://avatars.githubusercontent.com/u/27461460?u=b5860875e26d33fd70fd210f4ea74f81cdf9d99b&v=4",
     "username": "hyochan",
     "name": "Hyo"
