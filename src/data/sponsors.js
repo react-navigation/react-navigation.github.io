@@ -60,6 +60,11 @@ export default [
     "name": null
   },
   {
+    "avatarUrl": "https://avatars.githubusercontent.com/u/6088888?v=4",
+    "username": "faraza",
+    "name": "Faraz A"
+  },
+  {
     "avatarUrl": "https://avatars.githubusercontent.com/u/6457344?u=47e100289441b7f4681a7809202ff683886e4f5e&v=4",
     "username": "ryo-rm",
     "name": "ryo kishida"
