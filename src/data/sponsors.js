@@ -115,6 +115,11 @@ export default [
     "name": null
   },
   {
+    "avatarUrl": "https://avatars.githubusercontent.com/u/30735054?v=4",
+    "username": "endearhq",
+    "name": "Endear"
+  },
+  {
     "avatarUrl": "https://avatars.githubusercontent.com/u/36824170?u=18c3b7d6e7db72426a6d50712eb7b50c67d669b8&v=4",
     "username": "luism3861",
     "name": "Luis Medina Huerta"
