@@ -130,6 +130,11 @@ export default [
     "name": "Andres Coello"
   },
   {
+    "avatarUrl": "https://avatars.githubusercontent.com/u/46625943?u=63c9ed9017c34900df8b5ae2ed455ec4c82ef8aa&v=4",
+    "username": "bowen9284",
+    "name": "Matt"
+  },
+  {
     "avatarUrl": "https://avatars.githubusercontent.com/u/65687793?u=85bc8ea9018a174a1adb79a278b8c284c305c5a3&v=4",
     "username": "expo-team",
     "name": "Expo team"
