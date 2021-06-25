@@ -28,7 +28,7 @@ React Navigation now requires newer versions of following libraries:
 - `react-native` >= 0.63.0
 - `expo` - 40+ (if you use Expo)
 
-### Params are now overwritten on navigation instead if merging
+### Params are now overwritten on navigation instead of merging
 
 This is probably one of the biggest changes. When navigating to an existing screen, we've merged the new params with the existing params since the first version of React Navigation.
 
