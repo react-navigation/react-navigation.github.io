@@ -324,7 +324,7 @@ Defaults to `push`.
 
 When `pop` is used, the `pop` animation is applied to the screen being replaced.
 
-#### `gestureEnabled`
+#### `gesturesEnabled`
 
 Whether you can use gestures to dismiss this screen. Defaults to `true` on iOS, `false` on Android.
 
@@ -631,7 +631,7 @@ const Stack = createStackNavigator(
     mode: 'modal',
     headerMode: 'none',
     defaultNavigationOptions: {
-      gestureEnabled: true,
+      gesturesEnabled: true,
       cardOverlayEnabled: true,
       ...TransitionPresets.ModalPresentationIOS,
     },
