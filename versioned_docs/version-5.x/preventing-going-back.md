@@ -85,3 +85,5 @@ However, this approach has many important differences in addition to being less 
 - It's possible to continue the same action that triggered the event
 
 There are couple of edge cases to be aware of when using this approach. Specifically, the event only checks if the route is removed from the [navigation state](navigation-state.md) when an action is handled. If the change was from other reasons, e.g. - screen getting unmounted due to parent being unmounted, conditionally rendering different screens based on state not managed by React Navigation, using `unmountOnBlur` etc., then this event won't be triggered. It's impossible to prevent unmounting a component.
+
+If you're using the `native-stack`, you'll still need to set `gesturesEnabled: false` on your screen, since preventing a back gesture on iOS isn't supported yet.
