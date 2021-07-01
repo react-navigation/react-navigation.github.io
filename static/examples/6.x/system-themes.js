@@ -6,7 +6,7 @@ import {
   DarkTheme,
   useTheme,
 } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 
@@ -61,7 +61,7 @@ function HomeScreen({ navigation }) {
 }
 
 const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function Root() {
   return (

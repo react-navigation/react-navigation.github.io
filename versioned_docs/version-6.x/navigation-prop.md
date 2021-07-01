@@ -78,7 +78,7 @@ function HomeScreen({ navigation: { navigate } }) {
 }
 ```
 
-In a [stack navigator](stack-navigator.md), calling `navigate` with a screen name will result in different behavior based on if the screen is already present or not. If the screen is already present in the stack's history, it'll go back to that screen and remove any screens after that. If the screen is not present, it'll push a new screen.
+In a [native stack navigator](native-stack-navigator.md), calling `navigate` with a screen name will result in different behavior based on if the screen is already present or not. If the screen is already present in the stack's history, it'll go back to that screen and remove any screens after that. If the screen is not present, it'll push a new screen.
 
 For example, if you have a stack with the history `Home > Profile > Settings` and you call `navigate(Profile)`, the resulting screens will be `Home > Profile` as it goes back to `Profile` and removes the `Settings` screen.
 
@@ -155,25 +155,23 @@ The `setParams` method lets us update the params (`route.params`) of the current
 
 ```js
 function ProfileScreen({ navigation: { setParams } }) {
-  render() {
-    return (
-      <Button
-        onPress={() =>
-          setParams({
-            friends:
-              route.params.friends[0] === 'Brent'
-                ? ['Wojciech', 'Szymon', 'Jakub']
-                : ['Brent', 'Satya', 'Michaś'],
-            title:
-              route.params.title === "Brent's Profile"
-                ? "Lucy's Profile"
-                : "Brent's Profile",
-          })
-        }
-        title="Swap title and friends"
-      />
-    );
-  }
+  return (
+    <Button
+      onPress={() =>
+        setParams({
+          friends:
+            route.params.friends[0] === 'Brent'
+              ? ['Wojciech', 'Szymon', 'Jakub']
+              : ['Brent', 'Satya', 'Michaś'],
+          title:
+            route.params.title === "Brent's Profile"
+              ? "Lucy's Profile"
+              : "Brent's Profile",
+        })
+      }
+      title="Swap title and friends"
+    />
+  );
 }
 ```
 

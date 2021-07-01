@@ -6,7 +6,7 @@ sidebar_label: Passing parameters to routes
 
 Remember when I said "more on that later when we talk about `params`!"? Well, the time has come.
 
-Now that we know how to [create a stack navigator with some routes](hello-react-navigation.md) and [navigate between those routes](navigating.md), let's look at how we can pass data to routes when we navigate to them.
+Now that we know how to [create a native stack navigator with some routes](hello-react-navigation.md) and [navigate between those routes](navigating.md), let's look at how we can pass data to routes when we navigate to them.
 
 There are two pieces to this:
 

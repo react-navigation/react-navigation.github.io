@@ -15,12 +15,8 @@ Example:
 ```js
 import { NavigationContext } from '@react-navigation/native';
 
-class SomeComponent extends React.Component {
-  static contextType = NavigationContext;
-
-  render() {
-    // We can access navigation object via context
-    const navigation = this.context;
-  }
+function SomeComponent() {
+  // We can access navigation object via context
+  const navigation = React.useContext(NavigationContext);
 }
 ```

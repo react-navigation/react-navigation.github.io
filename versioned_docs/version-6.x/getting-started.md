@@ -65,6 +65,26 @@ If you're on a Mac and developing for iOS, you need to install the pods (via [Co
 npx pod-install ios
 ```
 
+`react-native-screens` package requires one additional configuration step to properly
+work on Android devices. Edit `MainActivity.java` file which is located in `android/app/src/main/java/<your package name>/MainActivity.java`.
+
+Add the following code to the body of `MainActivity` class:
+
+```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(null);
+}
+```
+
+and make sure to add an import statement at the top of this file:
+
+```java
+import android.os.Bundle;
+```
+
+This change is required to avoid crashes related to View state being not persisted consistently across Activity restarts.
+
 To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
 
 ```js

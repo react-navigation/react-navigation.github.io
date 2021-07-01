@@ -33,7 +33,7 @@ A router is a collection of functions that decide how to handle actions and stat
 A screen component is a component that we use in our route configuration.
 
 ```js
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const StackNavigator = (
   <Stack.Navigator>

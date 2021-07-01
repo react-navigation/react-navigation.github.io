@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Button, Text } from 'react-native';
 import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const navigationRef = createNavigationContainerRef()
 
@@ -31,7 +31,7 @@ function Settings({ route }) {
   );
 }
 
-const RootStack = createStackNavigator();
+const RootStack = createNativeStackNavigator();
 
 export default function App() {
   return (

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 function DetailsScreen() {
@@ -36,7 +36,7 @@ function SettingsScreen({ navigation }) {
   );
 }
 
-const HomeStack = createStackNavigator();
+const HomeStack = createNativeStackNavigator();
 
 function HomeStackScreen() {
   return (
@@ -47,7 +47,7 @@ function HomeStackScreen() {
   );
 }
 
-const SettingsStack = createStackNavigator();
+const SettingsStack = createNativeStackNavigator();
 
 function SettingsStackScreen() {
   return (

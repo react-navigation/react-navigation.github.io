@@ -75,22 +75,20 @@ function HomeScreen({ navigation }) {
 
 ## Customizing the back button
 
-`createStackNavigator` provides the platform-specific defaults for the back button. On iOS this includes a label next to the button, which shows the title of the previous screen when the title fits in the available space, otherwise it says "Back".
+`createNativeStackNavigator` provides the platform-specific defaults for the back button. On iOS this includes a label next to the button, which shows the title of the previous screen when the title fits in the available space, otherwise it says "Back".
 
-You can change the label behavior with `headerBackTitle` and `headerTruncatedBackTitle` ([read more](stack-navigator.md#headerbacktitle)).
+You can change the label behavior with `headerBackTitle` and style it with `headerBackTitleStyle` ([read more](native-stack-navigator.md#headerbacktitle)).
 
-To customize the back button image, you can use [headerBackImage](stack-navigator.md#headerbackimage).
+To customize the back button image, you can use `headerBackImageSource` ([read more](native-stack-navigator.md#headerbackimagesource)).
 
 ## Overriding the back button
 
-The back button will be rendered automatically in a stack navigator whenever it is possible for the user to go back from their current screen &mdash; in other words, the back button will be rendered whenever there is more than one screen in the stack.
+The back button will be rendered automatically in a native stack navigator whenever it is possible for the user to go back from their current screen &mdash; in other words, the back button will be rendered whenever there is more than one screen in the stack.
 
-Generally, this is what you want. But it's possible that in some circumstances that you want to customize the back button more than you can through the options mentioned above, in which case you can set the `headerLeft` option to a React Element that will be rendered, just as we did with `headerRight`. Alternatively, the `headerLeft` option also accepts a React Component, which can be used, for example, for overriding the onPress behavior of the back button. Read more about this in the [api reference](stack-navigator.md#headerleft).
-
-If you would like to retain the view of back button and only override the `onPress` method, you can import [HeaderBackButton](https://github.com/react-navigation/react-navigation/blob/main/packages/stack/src/views/Header/HeaderBackButton.tsx) from `@react-navigation/stack` and assign that component to the `headerLeft` option.
+Generally, this is what you want. But it's possible that in some circumstances that you want to customize the back button more than you can through the options mentioned above, in which case you can set the `headerLeft` option to a React Element that will be rendered, just as we did with `headerRight`. Alternatively, the `headerLeft` option also accepts a React Component, which can be used, for example, for overriding the onPress behavior of the back button. Read more about this in the [api reference](native-stack-navigator.md#headerleft).
 
 ## Summary
 
 - You can set buttons in the header through the `headerLeft` and `headerRight` properties in `options`.
-- The back button is fully customizable with `headerLeft`, but if you just want to change the title or image, there are other `options` for that &mdash; `headerBackTitle`, `headerTruncatedBackTitle`, and `headerBackImage`.
+- The back button is fully customizable with `headerLeft`, but if you just want to change the title or image, there are other `options` for that &mdash; `headerBackTitle`, `headerBackTitleStyle`, and `headerBackImageSource`.
 - You can use a callback for the options prop to access `navigation` and `route` objects.

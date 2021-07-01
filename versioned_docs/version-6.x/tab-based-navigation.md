@@ -56,7 +56,7 @@ export default function App() {
 
 ## Customizing the appearance
 
-This is similar to how you would customize a stack navigator &mdash; there are some properties that are set when you initialize the tab navigator and others that can be customized per-screen in `options`.
+This is similar to how you would customize a native stack navigator &mdash; there are some properties that are set when you initialize the tab navigator and others that can be customized per-screen in `options`.
 
 <samp id="tab-based-navigation-icons" />
 
@@ -147,7 +147,7 @@ function SettingsScreen({ navigation }) {
 }
 ```
 
-## A stack navigator for each tab
+## A native stack navigator for each tab
 
 Usually tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
 
@@ -157,7 +157,7 @@ Usually tabs don't just display one screen &mdash; for example, on your Twitter 
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 function DetailsScreen() {
@@ -192,7 +192,7 @@ function SettingsScreen({ navigation }) {
   );
 }
 
-const HomeStack = createStackNavigator();
+const HomeStack = createNativeStackNavigator();
 
 function HomeStackScreen() {
   return (
@@ -203,7 +203,7 @@ function HomeStackScreen() {
   );
 }
 
-const SettingsStack = createStackNavigator();
+const SettingsStack = createNativeStackNavigator();
 
 function SettingsStackScreen() {
   return (
