@@ -4,29 +4,27 @@ import {
   NavigationContainer,
   NavigationContext,
 } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function HomeScreen() {
   return <SomeComponent />;
 }
 
-class SomeComponent extends React.Component {
-  static contextType = NavigationContext;
+function SomeComponent() {
+  // We can access navigation object via context
+  const navigation = React.useContext(NavigationContext);
 
-  render() {
-    // We can access navigation object via context
-    const navigation = this.context;
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Some component inside HomeScreen</Text>
-        <Button
-          onPress={() => navigation.navigate('Profile')}
-          title="Go to Profile"
-        />
-      </View>
-    );
-  }
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Some component inside HomeScreen</Text>
+      <Button
+        onPress={() => navigation.navigate('Profile')}
+        title="Go to Profile"
+      />
+    </View>
+  );
 }
+
 
 function ProfileScreen({ navigation }) {
   return (
@@ -36,7 +34,7 @@ function ProfileScreen({ navigation }) {
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function App() {
   return (

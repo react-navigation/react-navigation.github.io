@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { View, Button, Linking, AsyncStorage } from 'react-native';
+import { Platform, View, Button, Linking, AsyncStorage } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
-const HomeStack = createStackNavigator();
-const SettingsStack = createStackNavigator();
+const HomeStack = createNativeStackNavigator();
+const SettingsStack = createNativeStackNavigator();
 
 function A() {
   return <View />;
@@ -62,7 +62,7 @@ export default function App() {
         const initialUrl = await Linking.getInitialURL();
 
         if (Platform.OS !== 'web' && initialUrl == null) {
-          const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
+          const savedState = await AsyncStorage.getItem(PERSISTENCE_KEY);
           const state = savedState ? JSON.parse(savedState) : undefined;
 
           if (state !== undefined) {

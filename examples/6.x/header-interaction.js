@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Text, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function LogoTitle() {
   return (
@@ -26,7 +26,7 @@ function HomeScreen({ navigation }) {
   return <Text>Count: {count}</Text>;
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function App() {
   return (

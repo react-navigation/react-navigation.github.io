@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import { Provider, connect } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // A very simple reducer
 function counter(state, action) {
@@ -63,7 +63,7 @@ function StaticCounter({ route }) {
 let CounterContainer = connect((state) => ({ count: state.count }))(Counter);
 
 // Create our stack navigator
-let RootStack = createStackNavigator();
+let RootStack = createNativeStackNavigator();
 
 // Render the app container component with the provider around it
 export default function App() {
@@ -75,7 +75,7 @@ export default function App() {
           <RootStack.Screen
             name="StaticCounter"
             component={StaticCounter}
-            options={({ route }) => ({ title: route.params.count })}
+            options={({ route }) => ({ title: route.params.count.toString() })}
           />
         </RootStack.Navigator>
       </NavigationContainer>

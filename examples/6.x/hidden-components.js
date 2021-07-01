@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function Demo() {
   return (
@@ -14,7 +14,7 @@ function Demo() {
     </View>
   );
 }
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function App() {
@@ -25,12 +25,16 @@ export default function App() {
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Home">
-          {() => (
-            <Tab.Navigator initialRouteName="Analitics" tabBar={() => null}>
-              <Tab.Screen name="Analitics" component={Demo} />
-              <Tab.Screen name="Profile" component={Demo} />
-            </Tab.Navigator>
-          )}
+        {() => (
+          <Tab.Navigator
+            initialRouteName="Analitics"
+            tabBar={() => null}
+            screenOptions={{ headerShown: false }}
+          >
+            <Tab.Screen name="Analitics" component={Demo} />
+            <Tab.Screen name="Profile" component={Demo} />
+          </Tab.Navigator>
+        )}
         </Stack.Screen>
 
         <Stack.Screen name="Settings" component={Demo} />
