@@ -4,8 +4,6 @@ title: ServerContainer
 sidebar_label: ServerContainer
 ---
 
-> Note: This API is experimental and might change in a minor version.
-
 The `ServerContainer` component provides utilities to render your app on server with the correct [navigation state](navigation-state.md).
 
 Example:

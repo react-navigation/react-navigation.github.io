@@ -4,8 +4,6 @@ title: useLinkProps
 sidebar_label: useLinkProps
 ---
 
-> Note: This API is experimental and might change in a minor version.
-
 The `useLinkProps` hook let's build our custom link components which let us navigate to a screen using a path instead of a screen name based on the [`linking` options](navigation-container.md#linking). It takes a path and returns an object with some props that you can pass to a component.
 
 Example:

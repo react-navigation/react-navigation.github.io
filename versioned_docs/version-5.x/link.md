@@ -4,8 +4,6 @@ title: Link
 sidebar_label: Link
 ---
 
-> Note: This API is experimental and might change in a minor version.
-
 The `Link` component lets us navigate to a screen using a path instead of a screen name based on the [`linking` options](navigation-container.md#linking). It preserves the default behavior of anchor tags in the browser such as `Right click -> Open link in new tab"`, `Ctrl+Click`/`⌘+Click` etc.
 
 It uses a `Text` component under the hood.

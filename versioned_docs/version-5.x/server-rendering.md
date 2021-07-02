@@ -4,8 +4,6 @@ title: Server rendering
 sidebar_label: Server rendering
 ---
 
-> Note: This API is experimental and might change in a minor version.
-
 This guide will cover how to server render your React Native app using React Native for Web and React Navigation. We'll cover the following cases:
 
 1. Rendering the correct layout depending on the request URL

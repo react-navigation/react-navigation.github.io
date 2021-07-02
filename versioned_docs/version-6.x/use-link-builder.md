@@ -4,7 +4,6 @@ title: useLinkBuilder
 sidebar_label: useLinkBuilder
 ---
 
-> Note: This API is experimental and might change in a minor version.
 
 The `useLinkBuilder` hook let's us build a path to use for links for a screen in the current navigator's state. It returns a function that takes `name` and `params` for the screen to focus and returns path based on the [`linking` options](navigation-container.md#linking).
 
@@ -32,4 +31,4 @@ This hook is intended to be used in navigators to show links to various pages in
 There are couple of important things to note:
 
 - The destination screen must be present in the current navigator. It cannot be in a parent navigator or a navigator nested in a child.
-- It's intended to be only used in custom navigators to keep them reusable in multiple apps. For your regular app code, use paths directly instead of building paths for screens.
+- It's intended to be only used in custom navigators to keep them reusable in multiple apps. For your regular app code, use paths directly instead of building paths for screens, or use [`Link`](link.md) and [`useLinkProps`](use-link-props.md) which transparently handle paths.
