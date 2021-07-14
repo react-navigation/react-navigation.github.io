@@ -194,6 +194,16 @@ cd ..
 
 Now rebuild the app and test on your device or simulator.
 
+## I am getting an error "TypeError: Cannot read property 'SafeAreaProviderCompat' of undefined"
+
+The error in the stack trace that is cusing this is:
+```
+Error: Requiring module "node_modules/@react-navigation/elements/src/index.tsx", 
+which threw an exception: Error: Requiring unknown module "undefined"
+```
+
+You need to install `@react-native-masked-view/masked-view` as a dependancy until a newer version of `react-native` comes with a version of metro that will be able to handle `try..catch` around `require` statements.
+
 ## Nothing is visible on the screen after adding a `View`
 
 If you wrap the container in a `View`, make sure the `View` stretches to fill the container using `flex: 1`:
