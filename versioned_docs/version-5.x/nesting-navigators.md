@@ -266,7 +266,7 @@ const userScreens = {
     // Use some screens conditionally based on some condition
     ...(isLoggedIn ? userScreens : authScreens),
   }).map(([name, component]) => (
-    <Stack.Screen name={name} component={component} />
+    <Stack.Screen key={name} name={name} component={component} />
   ))}
 </Stack.Navigator>;
 ```
