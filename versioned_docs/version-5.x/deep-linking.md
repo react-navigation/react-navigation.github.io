@@ -37,7 +37,7 @@ import * as Linking from 'expo-linking';
 // you are using older versions, you can upgrade or use Linking.makeUrl instead,
 // but note that your deep links in standalone apps will be in the format
 // scheme:/// rather than scheme:// if you use makeUrl.
-const prefix = Linking.createURL('');
+const prefix = Linking.createURL();
 
 function App() {
   const linking = {
