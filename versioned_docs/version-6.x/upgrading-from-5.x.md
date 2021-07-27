@@ -293,13 +293,14 @@ The list of the options and their new name are follows:
 - `activeBackgroundColor` -> `tabBarActiveBackgroundColor`
 - `inactiveBackgroundColor` -> `tabBarInactiveBackgroundColor`
 - `allowFontScaling` -> `tabBarAllowFontScaling`
-- `adaptive` -> `tabBarAdaptive`
 - `showLabel` -> `tabBarShowLabel`
 - `labelPosition` -> `tabBarLabelPosition`
 - `labelStyle` -> `tabBarLabelStyle`
 - `iconStyle` -> `tabBarIconStyle`
 - `tabStyle` -> `tabBarItemStyle`
 - `style` -> `tabBarStyle`
+
+The `adaptive` option is removed since you can already disable the automatic label positioning by specifying a `tabBarLabelPosition`.
 
 To keep the same behavior as before, you can specify these in `screenOptions`.
 
