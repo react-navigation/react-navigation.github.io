@@ -77,7 +77,7 @@ Boolean used to indicate whether inactive screens should be detached from the vi
 
 Whether the screens should render the first time they are accessed. Defaults to `true`. Set it to `false` if you want to render all screens on initial render.
 
-#### useLegacyImplementation
+#### `useLegacyImplementation`
 
 Whether to use the legacy implementation based on Reanimated 1. The new implementation based on Reanimated 2 will perform better, but you need additional configuration and need to use Hermes with Flipper to debug.
 
