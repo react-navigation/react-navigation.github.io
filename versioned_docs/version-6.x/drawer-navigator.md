@@ -219,35 +219,35 @@ String or a function that given `{ focused: boolean, color: string }` returns a 
 
 Function, that given `{ focused: boolean, color: string, size: number }` returns a React.Node to display in drawer sidebar.
 
-##### `drawerActiveTintColor`
+#### `drawerActiveTintColor`
 
 Color for the icon and label in the active item in the drawer.
 
-##### `drawerActiveBackgroundColor`
+#### `drawerActiveBackgroundColor`
 
 Background color for the active item in the drawer.
 
-##### `drawerInactiveTintColor`
+#### `drawerInactiveTintColor`
 
 Color for the icon and label in the inactive items in the drawer.
 
-##### `drawerInactiveBackgroundColor`
+#### `drawerInactiveBackgroundColor`
 
 Background color for the inactive items in the drawer.
 
-##### `drawerItemStyle`
+#### `drawerItemStyle`
 
 Style object for the single item, which can contain an icon and/or a label.
 
-##### `drawerLabelStyle`
+#### `drawerLabelStyle`
 
 Style object to apply to the `Text` style inside content section which renders a label.
 
-##### `drawerContentContainerStyle`
+#### `drawerContentContainerStyle`
 
 Style object for the content section inside the `ScrollView`.
 
-##### `drawerContentStyle`
+#### `drawerContentStyle`
 
 Style object for the wrapper view.
 
