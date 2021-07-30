@@ -95,7 +95,7 @@ module.exports = {
               href: 'https://react-navigation.canny.io/feature-requests',
             },
             {
-              label: 'Report a bug on Github',
+              label: 'Report a bug on GitHub',
               href:
                 'https://github.com/react-navigation/react-navigation/issues/new/choose',
             },
