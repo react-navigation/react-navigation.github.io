@@ -95,7 +95,7 @@ export default [
     "name": "Alexi Canales"
   },
   {
-    "avatarUrl": "https://avatars.githubusercontent.com/u/21980965?u=418759528b6cd702bc1204278ea87b97f32f5e3c&v=4",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/21980965?u=5a571092a83cb71508c60a9c86ab2520fde8a68e&v=4",
     "username": "jarvisluong",
     "name": "Jarvis Luong"
   },
