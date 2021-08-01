@@ -26,7 +26,7 @@ React Navigation 6 requires at least `react-native@0.63.0`. If you're using Expo
 Install the required packages in your React Native project:
 
 ```bash npm2yarn
-npm install @react-navigation/native@next
+npm install @react-navigation/native
 ```
 
 React Navigation is made up of some core utilities and those are then used by navigators to create the navigation structure in your app. Don't worry too much about this for now, it'll become clear soon enough! To frontload the installation work, let's also install and configure dependencies used by most navigators, then we can move forward with starting to write some code.

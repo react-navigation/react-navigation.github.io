@@ -43,7 +43,7 @@ export default function Splash() {
       <div className={styles.migrationText}>
         💡 Coming from v4? Check out our{' '}
         <Link
-          to={useBaseUrl('/docs/upgrading-from-4.x')}
+          to={useBaseUrl('/docs/5.x/upgrading-from-4.x')}
           className={styles.linkText}
         >
           v4 to v5 migration guide

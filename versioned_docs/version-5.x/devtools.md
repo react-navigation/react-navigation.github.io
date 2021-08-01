@@ -9,7 +9,7 @@ Developer tools to make debugging easier when using React Navigation.
 To use the developer tools, install [`@react-navigation/devtools`](https://github.com/react-navigation/react-navigation/tree/master/packages/devtools):
 
 ```bash npm2yarn
-npm install @react-navigation/devtools
+npm install @react-navigation/devtools@^5.x
 ```
 
 ## API Definition

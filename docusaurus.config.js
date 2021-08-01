@@ -152,12 +152,7 @@ module.exports = {
             'https://github.com/react-navigation/react-navigation.github.io/edit/main/',
           remarkPlugins: [require('./src/plugins/remark-npm2yarn')],
           includeCurrentVersion: false,
-          lastVersion: '5.x',
-          versions: {
-            '6.x': {
-              label: '6.x (next)',
-            },
-          },
+          lastVersion: '6.x'
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

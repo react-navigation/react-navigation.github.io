@@ -17,7 +17,7 @@ This wraps [`react-native-tab-view`](https://github.com/react-native-community/r
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/material-top-tabs):
 
 ```bash npm2yarn
-npm install @react-navigation/material-top-tabs react-native-tab-view@^2.16.0
+npm install @react-navigation/material-top-tabs@^5.x react-native-tab-view@^2.x
 ```
 
 ## API Definition

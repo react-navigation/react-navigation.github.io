@@ -15,7 +15,7 @@ These following changes are in the core library. You'll need to address this cha
 To install the 6.x version of `@react-navigation/native`, run:
 
 ```sh npm2yarn
-npm install @react-navigation/native@next
+npm install @react-navigation/native
 ```
 
 ### Older versions of some libraries are no longer supported
@@ -162,7 +162,7 @@ The following changes are in the `@react-navigation/stack` package.
 To install the 6.x version of `@react-navigation/stack`, run:
 
 ```sh npm2yarn
-npm install @react-navigation/stack@next
+npm install @react-navigation/stack
 ```
 
 ### `keyboardHandlingEnabled` is moved to options
@@ -256,7 +256,7 @@ The `@react-navigation/native-stack` package is back. We made few changes to the
 To install the 6.x version of `@react-navigation/native-stack`, run:
 
 ```sh npm2yarn
-npm install @react-navigation/native-stack@next react-native-screens react-native-safe-area-context
+npm install @react-navigation/native-stack react-native-screens react-native-safe-area-context
 ```
 
 **TODO**
@@ -268,7 +268,7 @@ The following changes are in the `@react-navigation/bottom-tabs` package.
 To install the 6.x version of `@react-navigation/bottom-tabs`, run:
 
 ```sh npm2yarn
-npm install @react-navigation/bottom-tabs@next
+npm install @react-navigation/bottom-tabs
 ```
 
 ### A header is shown by default in tab screens
@@ -327,7 +327,7 @@ The following changes are in the `@react-navigation/material-top-tabs` package.
 To install the 6.x version of `@react-navigation/material-top-tabs`, run:
 
 ```sh npm2yarn
-npm install @react-navigation/material-top-tabs@next react-native-pager-view
+npm install @react-navigation/material-top-tabs react-native-pager-view
 ```
 
 ### It now uses `ViewPager` instead of Reanimated and Gesture Handler
@@ -380,7 +380,7 @@ The following changes are in the `@react-navigation/material-bottom-tabs` packag
 To install the 6.x version of `@react-navigation/material-bottom-tabs`, run:
 
 ```sh npm2yarn
-npm install @react-navigation/material-bottom-tabs@next react-native-safe-area-context
+npm install @react-navigation/material-bottom-tabs react-native-safe-area-context
 ```
 
 It's also necessary to install the `react-native-safe-area-context` package when using `@react-navigation/material-bottom-tab`, if you didn't have it already:
@@ -396,7 +396,7 @@ The following changes are in the `@react-navigation/drawer` package.
 To install the 6.x version of `@react-navigation/drawer`, run:
 
 ```sh npm2yarn
-npm install @react-navigation/drawer@next
+npm install @react-navigation/drawer
 ```
 
 ### Drawer now uses Reanimated 2 if available
@@ -466,7 +466,7 @@ Similar to bottom tabs, drawer now uses `firstRoute` for the `backBehavior` prop
 We have a new package which contains various UI elements related to navigation, such as a `Header` component. This means that we can now use these components in all navigators. You can also install the library to import components such as `Header` to use in any navigator:
 
 ```sh npm2yarn
-npm install @react-navigation/elements@next react-native-safe-area-context
+npm install @react-navigation/elements react-native-safe-area-context
 ```
 
 Now you can import items from there:

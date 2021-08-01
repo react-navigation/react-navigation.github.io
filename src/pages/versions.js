@@ -11,9 +11,8 @@ import versions from '../../versions.json';
 function Version() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
-  const nextVersion = versions[0];
-  const latestVersion = versions[1];
-  const pastVersions = versions.slice(2, versions.length);
+  const latestVersion = versions[0];
+  const pastVersions = versions.slice(1, versions.length);
   const repoUrl = `https://github.com/${siteConfig.organizationName}/${siteConfig.projectName}`;
 
   return (
@@ -31,22 +30,6 @@ function Version() {
                 <th>{latestVersion}</th>
                 <td>
                   <Link to={useBaseUrl('/docs/getting-started')}>
-                    Documentation
-                  </Link>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className="margin-bottom--lg">
-          <h3 id="latest">Next version (Unreleased)</h3>
-          <p>Here you can find the documentation for work-in-process unreleased version.</p>
-          <table>
-            <tbody>
-              <tr>
-                <th>{nextVersion}</th>
-                <td>
-                  <Link to={useBaseUrl(`/docs/${nextVersion}/getting-started`)}>
                     Documentation
                   </Link>
                 </td>
