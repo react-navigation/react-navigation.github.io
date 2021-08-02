@@ -241,15 +241,15 @@ Background color for the active tab.
 
 Background color for the inactive tabs.
 
-##### `tabBarHideOnKeyboard`
+#### `tabBarHideOnKeyboard`
 
 Whether the tab bar is hidden when the keyboard opens. Defaults to `false`.
 
-##### `tabBarItemStyle`
+#### `tabBarItemStyle`
 
 Style object for the tab item container.
 
-##### `tabBarStyle`
+#### `tabBarStyle`
 
 Style object for the tab bar. You can configure styles such as background color here.
 
