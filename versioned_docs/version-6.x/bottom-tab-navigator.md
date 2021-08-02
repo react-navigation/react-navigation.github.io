@@ -172,7 +172,7 @@ Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`
 
 #### `tabBarLabel`
 
-Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
+Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarShowLabel`.
 
 #### `tabBarShowLabel`
 
@@ -447,8 +447,8 @@ function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Feed"
-      tabBarOptions={{
-        activeTintColor: '#e91e63',
+      screenOptions={{
+        tabBarActiveTintColor: '#e91e63',
       }}
     >
       <Tab.Screen

@@ -403,10 +403,10 @@ function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Feed"
-      tabBarOptions={{
-        activeTintColor: '#e91e63',
-        labelStyle: { fontSize: 12 },
-        style: { backgroundColor: 'powderblue' },
+      screenOptions={{
+        tabBarActiveTintColor: '#e91e63',
+        tabBarLabelStyle: { fontSize: 12 },
+        tabBarStyle: { backgroundColor: 'powderblue' },
       }}
     >
       <Tab.Screen
