@@ -229,7 +229,7 @@ In addition, to match the default behavior of iOS, now `presentation: 'modal'` s
 
 Previously Android didn't have any special animation for modals. But now there's a slide from bottom animation instead of the default animation.
 
-If you don't want to use the new animations, you can change it to your liking using the [animation related options](stack-navigator.md#animations).
+If you don't want to use the new animations, you can change it to your liking using the [animation related options](stack-navigator.md#animations). To use the iOS modal animation from React Navigation 5, use `TransitionPresets.ModalSlideFromBottomIOS`.
 
 In addition, a new `presentation: 'transparentModal'` option to make it easier to build transparent modals. See [transparent modals](stack-navigator.md#transparent-modals) docs for more details.
 
