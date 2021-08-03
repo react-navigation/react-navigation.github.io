@@ -21,7 +21,7 @@ import {translate} from '@docusaurus/Translate';
 
 let DocSearchModal = null;
 
-const VERSIONS  = ["1.x", "2.x", "3.x", "4.x", "6.x"];
+const VERSIONS  = ["1.x", "2.x", "3.x", "4.x", "5.x"];
 
   /**
    * NOTE: @eriveltonelias
@@ -34,7 +34,7 @@ const VERSIONS  = ["1.x", "2.x", "3.x", "4.x", "6.x"];
 function getVersion(){
   const url = window.location.href;
   const index = VERSIONS.findIndex(e => url.includes(e));
-  return index >= 0 ? VERSIONS[index] : '5.x';
+  return index >= 0 ? VERSIONS[index] : '6.x';
 }
 
 function Hit({hit, children}) {
