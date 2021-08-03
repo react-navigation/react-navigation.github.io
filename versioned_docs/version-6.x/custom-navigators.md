@@ -189,8 +189,8 @@ import {
   createNavigatorFactory,
   DefaultNavigatorOptions,
   ParamListBase,
+  CommonActions,
   TabActionHelpers,
-  TabActions,
   TabNavigationState,
   TabRouter,
   TabRouterOptions,
@@ -262,7 +262,7 @@ function TabNavigator({
 
               if (!event.defaultPrevented) {
                 navigation.dispatch({
-                  ...TabActions.jumpTo(route.name),
+                  ...CommonActions.navigate({ name: route.name, merge: true }),
                   target: state.key,
                 });
               }
