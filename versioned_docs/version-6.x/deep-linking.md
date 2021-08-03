@@ -338,7 +338,6 @@ const linking = {
 
       listener(url);
     });
-    );
 
     return () => {
       // Clean up the event listeners
