@@ -296,6 +296,10 @@ The navigator can [emit events](navigation-events.md) on certain actions. Suppor
 
 This event is fired when the transition animation starts for the current screen.
 
+Event data:
+
+- `e.data.closing` - Boolean indicating whether the screen is being opened or closed.
+
 Example:
 
 ```js
@@ -311,6 +315,10 @@ React.useEffect(() => {
 #### `transitionEnd`
 
 This event is fired when the transition animation ends for the current screen.
+
+Event data:
+
+- `e.data.closing` - Boolean indicating whether the screen was opened or closed.
 
 Example:
 

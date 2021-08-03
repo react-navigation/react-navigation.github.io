@@ -314,3 +314,5 @@ declare global {
 ```
 
 The `RootParamList` interface lets React Navigation know about the params accepted by your root navigator. Here we extend the type `RootStackParamList` because that's the type of params for our stack navigator at the root. The name of this type isn't important.
+
+Specifying this type is important if you heavily use `useNavigation`, `Link` etc. in your app since it'll ensure type-safety. It will also make sure that you have correct nesting on the `linking` prop.

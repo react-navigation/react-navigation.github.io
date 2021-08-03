@@ -85,8 +85,8 @@ Only supported on iOS.
 
 Style object for header back title. Supported properties:
 
-- fontFamily
-- fontSize
+- `fontFamily`
+- `fontSize`
 
 Only supported on iOS.
 
@@ -123,10 +123,10 @@ Whether drop shadow of header is visible when a large title is shown.
 
 Style object for large title in header. Supported properties:
 
-- fontFamily
-- fontSize
-- fontWeight
-- color
+- `fontFamily`
+- `fontSize`
+- `fontWeight`
+- `color`
 
 Only supported on iOS.
 
@@ -138,7 +138,7 @@ Whether to show the header. The header is shown by default. Setting this to `fal
 
 Style object for header. Supported properties:
 
-- backgroundColor
+- `backgroundColor`
 
 #### `headerShadowVisible`
 
@@ -199,14 +199,92 @@ Note that if you render a custom element by passing a function, animations for t
 
 Style object for header title. Supported properties:
 
-- fontFamily
-- fontSize
-- fontWeight
-- color
+- `fontFamily`
+- `fontSize`
+- `fontWeight`
+- `color`
 
 #### `headerSearchBar`
 
-Options to render a native search bar on iOS.
+Options to render a native search bar on iOS. Search bars are rarely static so normally it is controlled by passing an object to `searchBar` navigation option in the component's body.
+
+Search bar is only supported on iOS.
+
+Example:
+
+```js
+React.useEffect(() => {
+  navigation.setOptions({
+    headerSearchBar: {
+      // search bar options
+    }
+  });
+}, [navigation]);
+```
+
+Supported properties are described below.
+
+##### `autoCapitalize`
+
+Controls whether the text is automatically auto-capitalized as it is entered by the user.
+Possible values:
+
+- `none`
+- `words`
+- `sentences`
+- `characters`
+
+Defaults to `sentences`.
+
+##### `barTintColor`
+
+The search field background color.
+
+By default bar tint color is translucent.
+
+##### `hideNavigationBar`
+
+Boolean indicating whether to hide the navigation bar during searching.
+
+Defaults to `true`.
+
+##### `hideWhenScrolling`
+
+Boolean indicating whether to hide the search bar when scrolling.
+
+Defaults to `true`.
+
+##### `obscureBackground`
+
+Boolean indicating whether to obscure the underlying content with semi-transparent overlay.
+
+Defaults to `true`.
+
+##### `onBlur`
+
+A callback that gets called when search bar has lost focus.
+
+##### `onCancelButtonPress`
+
+A callback that gets called when the cancel button is pressed.
+
+##### `onChangeText`
+
+A callback that gets called when the text changes. It receives the current text value of the search bar.
+
+Example:
+
+```js
+const [search, setSearch] = React.useState('');
+
+React.useEffect(() => {
+  navigation.setOptions({
+    headerSearchBar: {
+      onChangeText: (event) => setSearch(event.nativeEvent.text),
+    }
+  });
+}, [navigation]);
+```
 
 #### `statusBarAnimation`
 
@@ -246,8 +324,8 @@ The type of animation to use when this screen replaces another screen. Defaults 
 
 Supported values:
 
-- "push": the new screen will perform push animation.
-- "pop": the new screen will perform pop animation.
+- `push`: the new screen will perform push animation.
+- `pop`: the new screen will perform pop animation.
 
 #### `animation`
 
@@ -255,12 +333,12 @@ How the screen should animate when pushed or popped.
 
 Supported values:
 
-- "default": use the platform default animation
-- "fade": fade screen in or out
-- "flip": flip the screen, requires stackPresentation: "modal" (iOS only)
-- "slide_from_right": slide in the new screen from right (Android only, uses default animation on iOS)
-- "slide_from_left": slide in the new screen from left (Android only, uses default animation on iOS)
-- "none": don't animate the screen
+- `default`: use the platform default animation
+- `fade`: fade screen in or out
+- `flip`: flip the screen, requires stackPresentation: "modal" (iOS only)
+- `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
+- `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)
+- `none`: don't animate the screen
 
 #### `presentation`
 
@@ -268,13 +346,13 @@ How should the screen be presented.
 
 Supported values:
 
-- "card": the new screen will be pushed onto a stack, which means the default animation will be slide from the side on iOS, the animation on Android will vary depending on the OS version and theme.
-- "modal": the new screen will be presented modally. this also allows for a nested stack to be rendered inside the screen.
-- "transparentModal": the new screen will be presented modally, but in addition, the previous screen will stay so that the content below can still be seen if the screen has translucent background.
-- "containedModal": will use "UIModalPresentationCurrentContext" modal style on iOS and will fallback to "modal" on Android.
-- "containedTransparentModal": will use "UIModalPresentationOverCurrentContext" modal style on iOS and will fallback to "transparentModal" on Android.
-- "fullScreenModal": will use "UIModalPresentationFullScreen" modal style on iOS and will fallback to "modal" on Android.
-- "formSheet": will use "UIModalPresentationFormSheet" modal style on iOS and will fallback to "modal" on Android.
+- `card`: the new screen will be pushed onto a stack, which means the default animation will be slide from the side on iOS, the animation on Android will vary depending on the OS version and theme.
+- `modal`: the new screen will be presented modally. this also allows for a nested stack to be rendered inside the screen.
+- `transparentModal`: the new screen will be presented modally, but in addition, the previous screen will stay so that the content below can still be seen if the screen has translucent background.
+- `containedModal`: will use "UIModalPresentationCurrentContext" modal style on iOS and will fallback to "modal" on Android.
+- `containedTransparentModal`: will use "UIModalPresentationOverCurrentContext" modal style on iOS and will fallback to "transparentModal" on Android.
+- `fullScreenModal`: will use "UIModalPresentationFullScreen" modal style on iOS and will fallback to "modal" on Android.
+- `formSheet`: will use "UIModalPresentationFormSheet" modal style on iOS and will fallback to "modal" on Android.
 
 #### `orientation`
 
@@ -282,14 +360,14 @@ The display orientation to use for the screen.
 
 Supported values:
 
-- "default" - resolves to "all" without "portrait_down" on iOS. On Android, this lets the system decide the best orientation.
-- "all": all orientations are permitted.
-- "portrait": portrait orientations are permitted.
-- "portrait_up": right-side portrait orientation is permitted.
-- "portrait_down": upside-down portrait orientation is permitted.
-- "landscape": landscape orientations are permitted.
-- "landscape_left": landscape-left orientation is permitted.
-- "landscape_right": landscape-right orientation is permitted.
+- `default` - resolves to "all" without "portrait_down" on iOS. On Android, this lets the system decide the best orientation.
+- `all`: all orientations are permitted.
+- `portrait`: portrait orientations are permitted.
+- `portrait_up`: right-side portrait orientation is permitted.
+- `portrait_down`: upside-down portrait orientation is permitted.
+- `landscape`: landscape orientations are permitted.
+- `landscape_left`: landscape-left orientation is permitted.
+- `landscape_right`: landscape-right orientation is permitted.
 
 ### Events
 
@@ -298,6 +376,10 @@ The navigator can [emit events](navigation-events.md) on certain actions. Suppor
 #### `transitionStart`
 
 This event is fired when the transition animation starts for the current screen.
+
+Event data:
+
+- `e.data.closing` - Boolean indicating whether the screen is being opened or closed.
 
 Example:
 
@@ -314,6 +396,10 @@ React.useEffect(() => {
 #### `transitionEnd`
 
 This event is fired when the transition animation ends for the current screen.
+
+Event data:
+
+- `e.data.closing` - Boolean indicating whether the screen was opened or closed.
 
 Example:
 
@@ -370,7 +456,6 @@ function MyStack() {
     <Stack.Navigator
       initialRouteName="Home"
       screenOptions={{
-        headerMode: 'screen',
         headerTintColor: 'white',
         headerStyle: { backgroundColor: 'tomato' },
       }}

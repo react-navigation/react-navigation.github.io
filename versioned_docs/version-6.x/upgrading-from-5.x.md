@@ -131,29 +131,72 @@ See [configuring links](configuring-links.md) for more details on configuring de
 
 ### `Link` and `useLinkProps` can now accept screen names
 
-Earlier, the `Link` component could only accept a path string.
+Earlier, the `Link` component could only accept a path string. Now you can pass an object which specifies the screen name to navigate to, and any params to pass:
 
-**TODO**
+```js
+<Link
+  to={{
+    screen: 'Profile',
+    params: { id: 'jane' },
+  }}
+>
+  Go to Jane's profile
+</Link>
+```
+
+See [`useLinkProps`](use-link-props.md) docs for more details.
 
 ### New `Group` component
 
-**TODO**
+The new `Group` component is useful for grouping similar screens together. You can use it to pass some common options to a bunch of screens.
+
+For example, you can use it for a bunch of regular screen and a bunch of modal screens without having to create 2 navigators:
+
+```js
+<Stack.Navigator>
+  <Stack.Group
+    screenOptions={{ headerStyle: { backgroundColor: 'papayawhip' } }}
+  >
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="Profile" component={ProfileScreen} />
+  </Stack.Group>
+  <Stack.Group screenOptions={{ presentation: 'modal' }}>
+    <Stack.Screen name="Search" component={SearchScreen} />
+    <Stack.Screen name="Share" component={ShareScreen} />
+  </Stack.Group>
+</Stack.Navigator>
+```
+
+See [`Group``](group.md) docs for more details.
 
 ### New hook and helper for creating container ref
 
-**TODO**
+The new `useNavigationContainerRef` hook and `createNavigationContainerRef` helper are useful for simplifying adding a ref to to `NavigationContainer`.
+
+See docs for [`NavigationContainer`](navigation-container.md#ref) and [Navigating without the navigation prop](navigating-without-navigation-prop.md) for more details and examples.
 
 ### `useNavigation`, `Link`, `useLinkProps` etc. now work outside a screen
 
-**TODO**
+Earlier, `useNavigation`, `Link`, `useLinkProps` etc. could only be used inside screens. But now it's possible to use them in any component that's a child of [`NavigationContainer`](navigation-container.md).
 
 ### Ability to specify a type for root navigator when using TypeScript
 
-**TODO**
+Previously, we needed to specify a type for things such as `useNavigation`, `Link` etc. in every place we use them. But it's now possible to specify the type of the root navigator in one place that'll be used everywhere by default:
+
+```ts
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
+}
+```
+
+See [the docs for TypeScript](typescript.md#specifying-default-types-for-usenavigation-link-ref-etc) for more details.
 
 ### New `CompositeScreenProps` type for TypeScript
 
-**TODO**
+We now have a `CompositeScreenProps` helper similar to `CompositeNavigationProps` for usage with TypeScript. See [Combining navigation props](typescript.md#combining-navigation-props) for more details.
 
 ## Stack Navigator
 
@@ -259,7 +302,23 @@ To install the 6.x version of `@react-navigation/native-stack`, run:
 npm install @react-navigation/native-stack react-native-screens react-native-safe-area-context
 ```
 
-**TODO**
+### Options
+
+- `backButtonInCustomView` option is removed, it's now automatically set when necessary
+- `headerCenter` option is removed, the `headerLeft`, `headerRight` and `headerTitle` options now work like they do in [Stack Navigator](stack-navigator.md)
+- `headerHideBackButton` is changed to `headerBackVisible`
+- `headerHideShadow` is changed to `headerShadowVisible`
+- `headerLargeTitleHideShadow` is changed to `headerLargeTitleShadowVisible`
+- `headerBlurEffect` is now a separate option and no longer a property in `headerStyle`
+- `headerTopInsetEnabled` option is removed, it's now automatically set when necessary
+- `replaceAnimation` is renamed to `animationTypeForReplace`
+- `stackAnimation` is renamed to `animation`
+- `stackPresentation` is renamed to `presentation` - the value `push` is now called `card`
+- `direction` option is removed, it's now automatically set based on `I18nManager.isRTL`
+
+### Events
+
+The `appear` and `disappear` events have been removed in favor of `transitionStart` and `transitionEnd` events with `e.data.closing` indicating whether the screen is being opened or closed.
 
 ## Bottom Tab Navigator
 
@@ -318,7 +377,9 @@ Returning to first route after pressing back seems more common in apps. To match
 
 ### New `tabBarBackground` option to specify custom backgrounds
 
-**TODO**
+The new `tabBarBackground` option is useful to add custom backgrounds to the tab bar such as images, gradients, blur views etc. without having to wrap the `TabBar` manually.
+
+See docs for [`tabBarBackground`](bottom-tab-navigator.md#tabbarbackground) for more details.
 
 ## Material Top Tab Navigator
 
@@ -479,4 +540,6 @@ See the [Elements Library page](elements.md) for more details on what's availabl
 
 ## Developer tools
 
-**TODO**
+There's a new Flipper plugin for React Navigation to help you debug your navigation and deep link config.
+
+See docs for [`useFlipper`](devtools.md#useflipper) for more details on how to install and configure it.
