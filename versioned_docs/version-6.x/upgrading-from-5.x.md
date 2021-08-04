@@ -304,7 +304,9 @@ To install the 6.x version of `@react-navigation/native-stack`, run:
 npm install @react-navigation/native-stack react-native-screens react-native-safe-area-context
 ```
 
-### Options
+### Breaking changes
+
+#### Options
 
 - `backButtonInCustomView` option is removed, it's now automatically set when necessary
 - `headerCenter` option is removed, the `headerLeft`, `headerRight` and `headerTitle` options now work like they do in [Stack Navigator](stack-navigator.md)
@@ -318,9 +320,13 @@ npm install @react-navigation/native-stack react-native-screens react-native-saf
 - `stackPresentation` is renamed to `presentation` - the value `push` is now called `card`
 - `direction` option is removed, it's now automatically set based on `I18nManager.isRTL`
 
-### Events
+#### Events
 
 The `appear` and `disappear` events have been removed in favor of `transitionStart` and `transitionEnd` events with `e.data.closing` indicating whether the screen is being opened or closed.
+
+### Native stack now works on web
+
+Previously, `native-stack` could only be used on Android & iOS. But we also added basic web support so that you can write cross-platform apps without having to change your code.
 
 ## Bottom Tab Navigator
 
