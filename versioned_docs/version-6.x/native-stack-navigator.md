@@ -335,7 +335,10 @@ Supported values:
 
 - `default`: use the platform default animation
 - `fade`: fade screen in or out
+- `fade_from_bottom`: fade the new screen from bottom
 - `flip`: flip the screen, requires stackPresentation: "modal" (iOS only)
+- `simple_push`: default animation, but without shadow and native header transition (iOS only, uses default animation on Android)
+- `slide_from_bottom`: slide in the new screen from bottom
 - `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
 - `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)
 - `none`: don't animate the screen
