@@ -15,8 +15,16 @@ Component that renders a navigation drawer which can be opened and closed via ge
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
 
 ```bash npm2yarn
-npm install @react-navigation/drawer
+npm install @react-navigation/drawer react-native-gesture-handler react-native-reanimated
 ```
+
+To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+
+```js
+import 'react-native-gesture-handler';
+```
+
+> Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
 
 ## API Definition
 
