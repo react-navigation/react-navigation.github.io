@@ -144,13 +144,23 @@ Style object for header. Supported properties:
 
 Whether to hide the elevation shadow (Android) or the bottom border (iOS) on the header.
 
-#### `headerTranslucent`
+#### `headerTransparent`
 
-Boolean indicating whether the navigation bar is translucent. Setting this to `true` makes the header absolutely positioned, and changes the background color to `transparent` unless specified in `headerStyle`.
+Boolean indicating whether the navigation bar is translucent.
+
+Defaults to `false`. Setting this to `true` makes the header absolutely positioned - so that the header floats over the screen so that it overlaps the content underneath, and changes the background color to `transparent` unless specified in `headerStyle`.
+
+This is useful if you want to render a semi-transparent header or a blurred background.
+
+Note that if you don't want your content to appear under the header, you need to manually add a top margin to your content. React Navigation won't do it automatically.
+
+To get the height of the header, you can use [`HeaderHeightContext`](elements.md#headerheightcontext) with [React's Context API](https://reactjs.org/docs/context.html#contextconsumer) or [`useHeaderHeight`](elements.md#useheaderheight).
 
 #### `headerBlurEffect`
 
-Blur effect for the translucent header. Supported values:
+Blur effect for the translucent header. The `headerTransparent` option needs to be set to `true` for this to work.
+
+Supported values:
 
 - `extraLight`
 - `light`

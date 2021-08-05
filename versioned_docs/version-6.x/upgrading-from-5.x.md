@@ -195,6 +195,10 @@ See docs for [`NavigationContainer`](navigation-container.md#ref) and [Navigatin
 
 Earlier, `useNavigation`, `Link`, `useLinkProps` etc. could only be used inside screens. But now it's possible to use them in any component that's a child of [`NavigationContainer`](navigation-container.md).
 
+### Stricter types for TypeScript
+
+The type definitions are not stricter, which makes it easier to catch errors earlier by minimizing unsafe types. For example, `useNavigation` now throws an error if you don't specify a type. You can handle this by annotating it, or for an easier way, specify a type for root navigator which will be used for all usage of `useNavigation`.
+
 ### Ability to specify a type for root navigator when using TypeScript
 
 Previously, we needed to specify a type for things such as `useNavigation`, `Link` etc. in every place we use them. But it's now possible to specify the type of the root navigator in one place that'll be used everywhere by default:
@@ -327,6 +331,7 @@ npm install @react-navigation/native-stack
 - `headerHideBackButton` is changed to `headerBackVisible`
 - `headerHideShadow` is changed to `headerShadowVisible`
 - `headerLargeTitleHideShadow` is changed to `headerLargeTitleShadowVisible`
+- `headerTranslucent` is changed to `headerTransparent`
 - `headerBlurEffect` is now a separate option and no longer a property in `headerStyle`
 - `headerTopInsetEnabled` option is removed, it's now automatically set when necessary
 - `replaceAnimation` is renamed to `animationTypeForReplace`
