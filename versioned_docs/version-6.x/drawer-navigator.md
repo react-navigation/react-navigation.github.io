@@ -568,14 +568,14 @@ function MyDrawer() {
 
 ## Checking if the drawer is open
 
-You can check if the drawer is open by using the `useIsDrawerOpen` hook.
+You can check if the drawer is open by using the `useDrawerStatus` hook.
 
 ```js
-import { useIsDrawerOpen } from '@react-navigation/drawer';
+import { useDrawerStatus } from '@react-navigation/drawer';
 
 // ...
 
-const isDrawerOpen = useIsDrawerOpen();
+const isDrawerOpen = useDrawerStatus() === 'open';
 ```
 
 ## Nesting drawer navigators inside others
