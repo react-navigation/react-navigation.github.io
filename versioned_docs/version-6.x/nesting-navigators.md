@@ -200,9 +200,9 @@ This affects what happens when pressing the back button. When there's an initial
 
 ## Nesting multiple navigators
 
-It's sometimes useful to nest multiple navigators such as stack or drawer, for example, to have [some screens in a modal stack and some in regular stack](modal.md).
+It's sometimes useful to nest multiple navigators such as stack, drawer or tabs.
 
-When nesting multiple stack, drawer or bottom tab navigator, headers from both child and parent navigators would be shown. However, usually it's more desirable to show the header in the child navigator and hide the header in the stack navigator.
+When nesting multiple stack, drawer or bottom tab navigator, headers from both child and parent navigators would be shown. However, usually it's more desirable to show the header in the child navigator and hide the header in the screen of the parent navigator.
 
 To achieve this, you can hide the header in the screen containing the navigator using the `headerShown: false` option.
 
@@ -211,34 +211,56 @@ For example:
 ```js
 function Home() {
   return (
-    <NestedStack.Navigator>
-      <NestedStack.Screen name="Profile" component={Profile} />
-      <NestedStack.Screen name="Settings" component={Settings} />
-    </NestedStack.Navigator>
+    <Tab.Navigator>
+      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Settings" component={Settings} />
+    </Tab.Navigator>
   );
 }
 
 function App() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator screenOptions={{ presentation: 'modal' }}>
-        <RootStack.Screen
+      <Stack.Navigator>
+        <Stack.Screen
           name="Home"
           component={Home}
           options={{ headerShown: false }}
         />
-        <RootStack.Screen name="EditPost" component={EditPost} />
-      </RootStack.Navigator>
+        <Stack.Screen name="EditPost" component={EditPost} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
 ```
 
-A complete example can be found in the [modal guide](modal.md). However, the principle isn't only specific to modals, but any kind of nesting of navigators.
+In these examples, we have used a bottom tab navigator directly nested inside another stack navigator, but the same principle applies when there are other navigators in the middle, for example: stack navigator inside a tab navigator which is inside another stack navigator, stack navigator inside drawer navigator etc.
 
-In these examples, we have used a stack navigator directly nested inside another stack navigator, but the same principle applies when there are other navigators in the middle, for example: stack navigator inside a tab navigator which is inside another stack navigator, stack navigator inside drawer navigator etc.
+If you don't want headers in any of the navigators, you can specify `headerShown: false` in all of the navigators:
 
-When nesting multiple stack navigators, we recommend nesting at most 2 stack navigators, unless absolutely necessary.
+```js
+function Home() {
+  return (
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Settings" component={Settings} />
+    </Tab.Navigator>
+  );
+}
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="EditPost" component={EditPost} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+When nesting multiple stack navigators, we recommend nesting at most 2 stack navigators, unless absolutely necessary to achieve the UI you want.
 
 ## Best practices when nesting
 
