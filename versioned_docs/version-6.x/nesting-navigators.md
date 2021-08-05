@@ -260,8 +260,6 @@ function App() {
 }
 ```
 
-When nesting multiple stack navigators, we recommend nesting at most 2 stack navigators, unless absolutely necessary to achieve the UI you want.
-
 ## Best practices when nesting
 
 We recommend to reduce nesting navigators to minimal. Try to achieve the behavior you want with as little nesting as possible. Nesting has many downsides:
@@ -270,34 +268,27 @@ We recommend to reduce nesting navigators to minimal. Try to achieve the behavio
 - Nesting same type of navigators (e.g. tabs inside tabs, drawer inside drawer etc.) might lead to a confusing UX
 - With excessive nesting, code becomes difficult to follow when navigating to nested screens, configuring deep link etc.
 
-Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, instead of using separate navigators, consider doing something like this:
+Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, instead of using separate navigators, you can use the [`Group`](group.md) component.
 
 ```js
-// Define multiple groups of screens in objects like this
-const commonScreens = {
-  Help: HelpScreen,
-};
-
-const authScreens = {
-  SignIn: SignInScreen,
-  SignUp: SignUpScreen,
-};
-
-const userScreens = {
-  Home: HomeScreen,
-  Profile: ProfileScreen,
-};
-
-// Then use them in your components by looping over the object and creating screen configs
-// You could extract this logic to a utility function and reuse it to simplify your code
 <Stack.Navigator>
-  {Object.entries({
-    // Use the screens normally
-    ...commonScreens,
-    // Use some screens conditionally based on some condition
-    ...(isLoggedIn ? userScreens : authScreens),
-  }).map(([name, component]) => (
-    <Stack.Screen name={name} component={component} />
-  ))}
-</Stack.Navigator>;
+  {isLoggedIn ? (
+    // Screens for logged in users
+    <Stack.Group>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Profile" component={Profile} />
+    </Stack.Group>
+  ) : (
+    // Auth screens
+    <Stack.Group screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen name="SignUp" component={SignUp} />
+    </Stack.Group>
+  )}
+  {/* Common modal screens */}
+  <Stack.Group screenOptions={{ presentation: 'modal' }}>
+    <Stack.Screen name="Help" component={Help} />
+    <Stack.Screen name="Invite" component={Invite} />
+  </Stack.Group>
+</Stack.Navigator>
 ```
