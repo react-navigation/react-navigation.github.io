@@ -19,7 +19,6 @@ const convertNpmToYarn = npmCode => {
       .replace(/npm install/gm, 'yarn add')
       // run command: 'npm run start' -> 'yarn run start'
       .replace(/npm run/gm, 'yarn run')
-
   );
 };
 
