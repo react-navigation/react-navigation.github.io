@@ -18,7 +18,7 @@ const convertNpmToYarn = npmCode => {
       // run command: 'npm run start' -> 'yarn run start'
       .replace(/npm run/gm, 'yarn run')
       // when installing, yarn uses `--dev` instead of `--save-dev`
-      .replace(/--save-dev/gm, '--dev')
+      .replace(/npm install --save-dev/gm, 'yarn add --dev')
   );
 };
 
