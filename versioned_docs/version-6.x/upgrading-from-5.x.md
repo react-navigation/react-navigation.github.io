@@ -6,7 +6,64 @@ sidebar_label: Upgrading from 5.x
 
 React Navigation 6 keeps the same API as React Navigation 5, however there are some breaking changes to make the API more consistent, more flexible and less confusing.
 
-This guide lists all the changes that you need to keep in mind when upgrading.
+This guide lists all the changes and new features that you need to keep in mind when upgrading.
+
+## Table of breaking changes
+
+The upgrade guide includes both new features as well as breaking changes across all packages. The table below is for your convenience to quickly find the list of all the breaking changes.
+
+- General Changes: These changes affect all React Navigation users.
+
+  - [Older versions of some libraries are no longer supported](#older-versions-of-some-libraries-are-no-longer-supported)
+  - [Params are now overwritten on navigation instead of merging](#params-are-now-overwritten-on-navigation-instead-of-merging)
+  - [Dropped `dangerously` from `dangerouslyGetParent` and `dangerouslyGetState`](#dropped-dangerously-from-dangerouslygetparent-and-dangerouslygetstate)
+  - [No more `state` property on the `route` prop](#no-more-state-property-on-the-route-prop)
+  - [Linking configuration is now stricter](#linking-configuration-is-now-stricter)
+  - [Dropped useLinking hook](#dropped-uselinking-hook)
+  - [Stricter types for TypeScript](#stricter-types-for-typescript)
+
+- Stack Navigator: These changes affect users of `@react-navigation/stack` package.
+
+  - [`keyboardHandlingEnabled` is moved to options](#keyboardhandlingenabled-is-moved-to-options)
+  - [`mode="modal"` is removed in favor of `presentation: 'modal'`](#modemodal-is-removed-in-favor-of-presentation-modal)
+  - [`headerMode="none"` is removed in favor of `headerShown: false`](#headermodenone-is-removed-in-favor-of-headershown-false)
+  - [`headerMode` is moved to options](#headermode-is-moved-to-options)
+  - [Custom header now uses `'headerMode: screen'` by default](#custom-header-now-uses-headermode-screen-by-default)
+  - [Props passed to custom header are streamlined](#props-passed-to-custom-header-are-streamlined)
+  - [Header now uses flexbox](#header-now-uses-flexbox)
+  - [The `gestureResponseDistance` option is now a number instead of an object](#the-gestureresponsedistance-option-is-now-a-number-instead-of-an-object)
+  - [Some exports are now moved to the element library](#some-exports-are-now-moved-to-the-element-library)
+
+- Bottom Tab Navigator: These changes affect users of `@react-navigation/bottom-tabs` package.
+
+  - [A header is shown by default in tab screens](#a-header-is-shown-by-default-in-tab-screens)
+  - [The `tabBarOptions` prop is removed in favor of more flexible `options` for bottom tabs](#the-tabbaroptions-prop-is-removed-in-favor-of-more-flexible-options-for-bottom-tabs)
+  - [The `tabBarVisible` option is no longer present](#the-tabbarvisible-option-is-no-longer-present)
+  - [The `lazy` prop is moved to `lazy` option for per-screen configuration for bottom tabs](#the-lazy-prop-is-moved-to-lazy-option-for-per-screen-configuration-for-bottom-tabs)
+  - [The default value for `backBehavior` is now `firstRoute` for bottom tabs](#the-default-value-for-backbehavior-is-now-firstroute-for-bottom-tabs)
+
+- Material Top Tab Navigator: These changes affect users of `@react-navigation/material-top-tabs` package.
+
+  - [Material Top Tabs now uses `ViewPager` instead of Reanimated and Gesture Handler](#drawer-now-uses-viewpager-instead-of-reanimated-and-gesture-handler)
+  - [The `tabBarOptions` prop is removed in favor of more flexible `options` for material top tabs](#the-tabbaroptions-prop-is-removed-in-favor-of-more-flexible-options-for-material-top-tabs)
+  - [The `lazy` prop is moved to `lazy` option for per-screen configuration for material top tabs](#the-lazy-prop-is-moved-to-lazy-option-for-per-screen-configuration-for-material-top-tabs)
+  - [The `lazyPlaceholder` prop is moved to `lazyPlaceholder` option for per-screen configuration for material top tabs](#the-lazyplaceholder-prop-is-moved-to-lazyplaceholder-option-for-per-screen-configuration-for-material-top-tabs)
+  - [The default value for backBehavior is now firstRoute for material top tabs](#the-default-value-for-backbehavior-is-now-firstroute-for-material-top-tabs)
+
+- Material Bottom Tab Navigator: These changes affect users of `@react-navigation/material-bottom-tabs` package.
+
+  - [Material Bottom Tabs now uses `react-native-safe-area-context` to apply safe area insets](#material-bottom-tabs-now-uses-react-native-safe-area-context-to-apply-safe-area-insets)
+  - [The default value for `backBehavior` is now `firstRoute` for material bottom tabs](#the-default-value-for-backbehavior-is-now-firstroute-for-material-bottom-tabs)
+
+- Drawer Navigator: These changes affect users of `@react-navigation/drawer` package.
+
+  - [A header is shown by default in drawer screens](#a-header-is-shown-by-default-in-drawer-screens)
+  - [Slide animation is now default on iOS](#slide-animation-is-now-default-on-ios)
+  - [Drawer status is now a string instead of a boolean](#drawer-status-is-now-a-string-instead-of-a-boolean)
+  - [Drawer no longer emits `drawerOpen` and `drawerClose` events](#drawer-no-longer-emits-draweropen-and-drawerclose-events)
+  - [The `drawerContentOptions` prop is removed in favor of more flexible `options` for drawer](#the-drawercontentoptions-prop-is-now-more-flexible-by-moving-to-options-for-drawer)
+  - [The `lazy` prop is moved to `lazy` option for per-screen configuration for drawer](#the-lazy-prop-is-moved-to-lazy-option-for-per-screen-configuration-for-bottom-tabs)
+  - [The default value for `backBehavior` is now `firstRoute` for drawer](#the-default-value-for-backbehavior-is-now-firstroute-for-drawer)
 
 ## General changes
 
@@ -183,7 +240,13 @@ For example, you can use it for a bunch of regular screen and a bunch of modal s
 </Stack.Navigator>
 ```
 
-See [`Group``](group.md) docs for more details.
+See [`Group`](group.md) docs for more details.
+
+### New `screenListeners` prop for navigators similar to `screenOptions`
+
+It's now possible to add listeners for all of the screens in a navigator by using the `screenListeners` prop. This can be useful to listen to things like `tabPress` for all screens, `state` change at the navigator level etc.
+
+See docs for [Navigation Events](navigation-events.md#screenlisteners-prop-on-the-navigator) for more details.
 
 ### New hook and helper for creating container ref
 
@@ -197,7 +260,9 @@ Earlier, `useNavigation`, `Link`, `useLinkProps` etc. could only be used inside 
 
 ### Stricter types for TypeScript
 
-The type definitions are not stricter, which makes it easier to catch errors earlier by minimizing unsafe types. For example, `useNavigation` now throws an error if you don't specify a type. You can handle this by annotating it, or for an easier way, specify a type for root navigator which will be used for all usage of `useNavigation`.
+The type definitions are not stricter, which makes it easier to catch errors earlier by minimizing unsafe types. For example, `useNavigation` now shows a type error if you don't specify a type.
+
+You can handle this by [annotating it](typescript.md#annotating-usenavigation), or for an easier way, [specify a type for root navigator](typescript.md#specifying-default-types-for-usenavigation-link-ref-etc) which will be used for all usage of `useNavigation`.
 
 ### Ability to specify a type for root navigator when using TypeScript
 
@@ -243,7 +308,7 @@ Previously, `keyboardHandlingEnabled` was a prop on the navigator, but now it ne
 
 Now there is a new `presentation` option which allows you to customize whether a screen is a modal or not on a per screen basis.
 
-In addition, to match the default behavior of iOS, now `presentation: 'modal'` shows the new presentation style modal introduced in iOS 13. It also adjusts things like status bar height in the header automatically that you had to do manually before.
+In addition, to match the default behavior of iOS, now `presentation: 'modal'` shows the new presentation style modal introduced in iOS 13. It also adjusts things like status bar height in the header automatically that you had to do manually before. In addition, the color of the statusbar content is automatically managed when the screen animates.
 
 Previously Android didn't have any special animation for modals. But now there's a slide from bottom animation instead of the default animation.
 
@@ -251,7 +316,11 @@ If you don't want to use the new animations, you can change it to your liking us
 
 In addition, a new `presentation: 'transparentModal'` option to make it easier to build transparent modals. See [transparent modals](stack-navigator.md#transparent-modals) docs for more details.
 
-This also makes it possible to mix regular screens with modal screens in the same stack, since these options don't need to be applied to the whole screen anymore.
+### Better support for mixing different types of animations in a single stack
+
+Previously, it was sometimes necessary to nest 2 different stack navigators for certain animations, for example: when we wanted to use modal presentation style and regular styles.
+
+It is now possible to mix regular screens with modal screens in the same stack, since these options don't need to be applied to the whole screen anymore.
 
 ### `headerMode="none"` is removed in favor of `headerShown: false`
 
@@ -279,6 +348,14 @@ Previously, `headerMode` was a prop on the navigator, but now it needs to be spe
 
 The `headerMode` option supports 2 values: `screen` and `float`.
 
+### Header is now taller in modals on iOS
+
+The header is now 56dp tall in modals to match the native iOS style. If you are using the [`useHeaderHeight`](elements.md#use-header-height) hook to get the height of the header, then you won't need to change any code.
+
+### The header height from hidden header is now ignored
+
+Previously, the [`useHeaderHeight`](elements.md#use-header-height) hook returned `0` if the header was hidden in a Stack Navigator. Now it returns the height of the closes visible header instead.
+
 ### Custom header now uses 'headerMode: screen' by default
 
 Previously it was necessary to specify `headerMode='screen'` or a custom animation manually when using a custom header. Even though this was mentioned in the docs, it has been tripped up many people.
@@ -298,6 +375,14 @@ The header elements were rendered using absolute positioning which didn't work w
 ### The `gestureResponseDistance` option is now a number instead of an object
 
 Previously, the [`gestureResponseDistance`](stack-navigator.md#gestureresponsedistance) option took an object with `horizontal` and `vertical` properties. Now it takes a number which will be used as the horizontal or vertical value based on the [`gestureDirection`](stack-navigator.md#gesturedirection) option.
+
+### The two finger back gesture on trackpads in iPad is now supported
+
+On iPad, it's possible to use two fingers to perform the back gesture in native apps. It's now also possible in Stack Navigator.
+
+### Fix accessibility on Web when `react-native-screens` wasn't enabled
+
+Previously, unfocused screens were still accessible on Web even if `react-native-screens` was disabled. This is no longer the case. Note that this only works when animations are not enabled (this is the default on Web). Otherwise, you'd need to enable `react-native-screens` to make it work if you had it disabled.
 
 ### Some exports are now moved to the element library
 
@@ -323,6 +408,8 @@ npm install @react-navigation/native-stack
 ```
 
 ### Breaking changes
+
+If you were importing `createNativeStackNavigator` from `react-native-screens/native-stack`, you need to keep the following changes in mind when migrating to `@react-navigation/native-stack` package:
 
 #### Options
 
@@ -367,7 +454,7 @@ To keep the previous behavior, you can use `headerShown: false` in `screenOption
 
 Previously the tab bar in bottom tabs showed an empty area when no icon was specified. Now it shows a question mark to make it more obvious that the icon is missing.
 
-### The `tabBarOptions` prop is now more flexible by moving to `options` for bottom tabs
+### The `tabBarOptions` prop is removed in favor of more flexible `options` for bottom tabs
 
 The `tabBarOptions` prop was removed and the options from there were moved to screen's `options` instead. This makes them configurable on a per screen basis.
 
@@ -388,7 +475,7 @@ The list of the options and their new name are follows:
 
 The `adaptive` option is removed since you can already disable the automatic label positioning by specifying a `tabBarLabelPosition`.
 
-To keep the same behavior as before, you can specify these in `screenOptions`.
+The old options will still keep working with a deprecation warning. To avoid the deprecation warning, move these to `screenOptions`.
 
 ### The `tabBarVisible` option is no longer present
 
@@ -432,13 +519,13 @@ For bare React Native projects:
 npm install react-native-pager-view
 ```
 
-### It now uses `ViewPager` instead of Reanimated and Gesture Handler
+### Material Top Tabs now uses `ViewPager` instead of Reanimated and Gesture Handler
 
 The `react-native-tab-view` dependency is upgraded to the latest version (3.x) which now uses [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) instead of Reanimated and Gesture Handler. This will provide a native UX and also improve the performance.
 
 See [release notes for `react-native-tab-view`](https://github.com/satya164/react-native-tab-view/releases/tag/v3.0.0) for more details.
 
-### The `tabBarOptions` prop is now more flexible by moving to `options` for material top tabs
+### The `tabBarOptions` prop is removed in favor of more flexible `options` for material top tabs
 
 Similar to bottom tabs, the `tabBarOptions` prop was removed and the options from there were moved to screen's `options` instead.
 
@@ -461,7 +548,7 @@ The list of the options and their new name are follows:
 - `contentContainerStyle` -> `tabBarContentContainerStyle`
 - `style` -> `tabBarStyle`
 
-To keep the same behavior as before, you can specify these in `screenOptions`.
+The old options will still keep working with a deprecation warning. To avoid the deprecation warning, move these to `screenOptions`.
 
 ### The `lazy` prop is moved to `lazy` option for per-screen configuration for material top tabs
 
@@ -471,7 +558,7 @@ Similar to bottom tabs, the `lazy` prop is now moved to `options` for material t
 
 The `lazyPlaceholder` prop is now moved to `options` for material top tabs so you can configure a placeholder in each screen's options.
 
-### The default value for `backBehavior` is now `firstRoute` for material top tabs tabs
+### The default value for `backBehavior` is now `firstRoute` for material top tabs
 
 Similar to bottom tabs, material top tabs now uses `firstRoute` for the `backBehavior` prop as well.
 
@@ -485,7 +572,9 @@ To install the 6.x version of `@react-navigation/material-bottom-tabs`, run:
 npm install @react-navigation/material-bottom-tabs
 ```
 
-It's also necessary to install the `react-native-safe-area-context` package when using `@react-navigation/material-bottom-tab`, if you didn't have it already:
+### Material Bottom Tabs now uses `react-native-safe-area-context` to apply safe area insets
+
+It's now necessary to install the `react-native-safe-area-context` package when using `@react-navigation/material-bottom-tab`, if you didn't have it already.
 
 ### The default value for `backBehavior` is now `firstRoute` for material bottom tabs
 
@@ -553,7 +642,7 @@ The following options have been moved and renamed:
 - `edgeWidth` -> `swipeEdgeWidth`
 - `minSwipeDistance` -> `swipeMinDistance`
 
-To keep the same behavior as before, you can specify these in `screenOptions`.
+The old options will still keep working with a deprecation warning. To avoid the deprecation warning, move these to `screenOptions`.
 
 ### The `lazy` prop is moved to `lazy` option for per-screen configuration for drawer
 

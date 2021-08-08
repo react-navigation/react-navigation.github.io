@@ -27,10 +27,10 @@ We'll share few highlights of the release in this blog post. If you're looking f
 
 ## Try it out
 
-The new versions are published under `next` tag on [npm](https://npmjs.org). So if you'd like to try it out, add `@next` to the package, you're installing. For example:
+If you'd like to try it out, add `@^6.x` to the package, you're installing. For example:
 
 ```sh npm2yarn
-npm install @react-navigation/native@next @react-navigation/stack@next
+npm install @react-navigation/native@^6.x @react-navigation/stack@^6.x
 ```
 
 ## What's next?
