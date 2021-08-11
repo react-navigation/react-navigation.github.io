@@ -139,7 +139,7 @@ A common scenario where you should use `merge: true` is if you have a custom tab
 
 ### Dropped `dangerously` from `dangerouslyGetParent` and `dangerouslyGetState`
 
-The `dangerouslyGetParent` and `dangerouslyGetState` methods on the `navigation` prop are useful in many scenarios, and sometimes necessary. So we dropped the `dangerously` prefix to make it clear than it's safe to use. Now you can use [`navigation.getParent()`](navigation-prop.md#getparent) and [`navigation.getState()`](navigation-prop.md#getstate).
+The `dangerouslyGetParent` and `dangerouslyGetState` methods on the `navigation` prop are useful in many scenarios, and sometimes necessary. So we dropped the `dangerously` prefix to make it clear that it's safe to use. Now you can use [`navigation.getParent()`](navigation-prop.md#getparent) and [`navigation.getState()`](navigation-prop.md#getstate).
 
 ### No more `state` property on the `route` prop
 
@@ -260,7 +260,7 @@ Earlier, `useNavigation`, `Link`, `useLinkProps` etc. could only be used inside 
 
 ### Stricter types for TypeScript
 
-The type definitions are not stricter, which makes it easier to catch errors earlier by minimizing unsafe types. For example, `useNavigation` now shows a type error if you don't specify a type.
+The type definitions are now stricter, which makes it easier to catch errors earlier by minimizing unsafe types. For example, `useNavigation` now shows a type error if you don't specify a type.
 
 You can handle this by [annotating it](typescript.md#annotating-usenavigation), or for an easier way, [specify a type for root navigator](typescript.md#specifying-default-types-for-usenavigation-link-ref-etc) which will be used for all usage of `useNavigation`.
 
