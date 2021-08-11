@@ -350,7 +350,7 @@ When set to `true`, Drawer will hide the OS status bar whenever the drawer is pu
 
 #### `drawerStatusBarAnimation`
 
-Animation of the statusbar when hiding it. use in combination with `hideStatusBar`.
+Animation of the statusbar when hiding it. use in combination with `drawerHideStatusBarOnOpen`.
 
 Supported values:
 
