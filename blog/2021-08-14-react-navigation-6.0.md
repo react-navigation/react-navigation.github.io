@@ -9,7 +9,7 @@ tags: [release, announcement]
 
 The documentation is now live at [reactnavigation.org](https://reactnavigation.org), and v5 lives [here](/docs/5.x/getting-started).
 
-Largely, React Navigation 6 keeps the same core API as React Navigation 5, and you can think of it as further polishing what was in React Navigation 5. Let's talk about the highlights of this release in this blog post.
+React Navigation 6 keeps mostly the same core API as React Navigation 5, and you can think of it as further polishing what was in React Navigation 5. Let's talk about the highlights of this release in this blog post.
 
 <!--truncate-->
 
@@ -17,13 +17,12 @@ Largely, React Navigation 6 keeps the same core API as React Navigation 5, and y
 
 ### More flexible navigators
 
-Many of the navigators accept some of the customization options as props, which means, we can’t customize them based on the active screen. To make this possible, we needed to move these props to options that you can configure per screen.
+Navigators accept many of their customization options as props, which means we can’t customize them based on the active screen. To make this level of control possible, we needed to move these props to options that you can configure per screen.
 
-In React Navigation 6, many of the props are now screen's options, the most significant ones are `tabBarOptions` and `drawerContentOptions`, where all of them are moved to `options` instead. For example,
-
-Before:
+In React Navigation 6, many of these props are now screen options. The most significant changes are `tabBarOptions` and `drawerContentOptions`, which now all live on `options` instead. For example:
 
 ```js
+// Before (v5)
 <Tab.Navigator
   tabBarOptions={{
     inactiveTintColor: 'rgba(255, 255, 255, 0.5)',
@@ -36,9 +35,8 @@ Before:
 >
 ```
 
-After:
-
 ```js
+// After (v6)
 <Tab.Navigator
   screenOptions={{
     tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.5)',
@@ -55,13 +53,13 @@ See [deprecations](/docs/upgrading-from-5.x#deprecations) for more details.
 
 ### Elements Library
 
-We also took out some of the components and helpers used across various navigators in React Navigations and published them under a new package called [`@react-navigation/elements`](/docs/elements). It can be useful if you're building your own navigator, or just want to reuse some of the components in your app.
+We also took out some of the components and helpers used across various navigators in React Navigation and published them under a new package called [`@react-navigation/elements`](/docs/elements). It can be useful if you're building your own navigator, or just want to reuse some of the components in your app.
 
-Right now we have a small set of components, but there’s more to come.
+Currently only a small set of components are exported, but there are more to come.
 
-### Simpler APIs for existing functionality
+### Simplified APIs for existing functionality
 
-We made many APIs simpler with React Navigation 6 to address common use cases. For example:
+We simplified many APIs with React Navigation 6 to address common use cases. For example:
 
 - Single option to use a modal presentation style and transparent modal with [`presentation`](/docs/stack-navigator#presentation)
 - Custom header doesn't require setting `headerMode="screen"` manually anymore
@@ -71,9 +69,8 @@ We made many APIs simpler with React Navigation 6 to address common use cases. F
 
 ### New `Group` component for organization
 
-We have now added a [`Group`](/docs/group) component to organize your screens. You can group your screens using a `Group` component in any navigator. You can even nest `Group` components inside other `Group` components. They are lightweight and don’t render anything - like fragments, so they won’t affect performance.
 
-A nice feature of the `Group` component is that you can specify `screenOptions` on it like you can on a navigator. Passing `screenOptions` to a group configures all the screens inside that group to use these options. You can override these options by passing `options` to each Screen component, similar to how you can with `screenOptions` on Navigator.
+The [`Group`](/docs/group) component helps you organize screens inside your navigators and share common `screenOptions` between the groups.  Passing `screenOptions` to a group configures all the screens inside that group to use these options. You can override these options by passing `options` to each Screen component, similar to how you can with `screenOptions` on Navigator. You can also nest `Group` components inside other `Group` components. They are lightweight and don’t render anything - like fragments, so they won’t affect performance.
 
 In this code snippet, you can see that we group regular screens under one group and modal screens under another group:
 
@@ -104,17 +101,17 @@ We also export a [`Header`](/docs/elements#header) component in the new elements
 
 ### Native navigation by default
 
-Historically, React Navigation has been mostly JS based, with animations and gestures written in JavaScript. While this works for a lot of apps, apps with heavy screens can suffer from poor performance. So we also wanted to address this by using native primitives for navigation.
+Historically, React Navigation has been mostly JS based, with animations and gestures written in JavaScript on top of react-native-gesture-handler and `Animated`. While this works for a lot of apps, apps with heavy screens can suffer from poor performance, and some native features are difficult to duplicate exactly (such as the large header on iOS). So, we wanted to address this by using native primitives for navigation.
 
 With React Navigation 5, we introduced [`@react-navigation/native-stack`](/docs/native-stack-navigator) package powered by [`react-native-screens`](https://github.com/software-mansion/react-native-screens), as well as a native backend for [`@react-navigation/material-top-tabs`](/docs/material-top-tab-navigator) powered by [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view).
 
-In React Navigation 6, we made `@react-navigation/native-stack` the default choice for setting up Stack navigation. It uses UINavigationController on iOS and Fragments on Android to implement navigation natively. We also focused a lot on aligning the API of `@react-navigation/native-stack` with `@react-navigation/stack` so that it’d be easier to switch between them.
+In React Navigation 6, we made `@react-navigation/native-stack` the default choice for setting up Stack navigation. It uses `UINavigationController` on iOS and Fragments on Android to implement navigation natively. We also focused a lot on aligning the API of `@react-navigation/native-stack` with `@react-navigation/stack` so that it’ll be easier to switch between them.
 
 Similarly, we switched `@react-navigation/material-top-tabs` to use `react-native-pager-view` by default.
 
 ### Better type-safety
 
-React Navigation 5’s TypeScript support was much better than React Navigation 4. But some things such as `useNavigation` were still untyped by default. So we wanted to change that to make them more type-safe.
+React Navigation 5’s TypeScript support was much better than React Navigation 4; but, some things such as `useNavigation` were still untyped by default.
 
 In React Navigation 6, you don’t need to annotate `useNavigation` to get autocompletion and type checking. This is possible by defining a type for the screens globally using declaration merging:
 
@@ -134,21 +131,21 @@ You can read [more about it in our TypeScript docs](/docs/typescript#specifying-
 
 ### Flipper plugin
 
-We now have a [Flipper](https://fbflipper.com/) plugin. It includes similar functionality to the currently available Redux Devtools Extensions integration. You can see all navigation actions, and jump back n forth between earlier and new navigation states. In addition, it also includes a tab to test your linking configuration.
+We now have a [Flipper](https://fbflipper.com/) plugin. It includes similar functionality to the currently available Redux Devtools Extensions integration. You can see all navigation actions, and jump back and forth between earlier and new navigation states. In addition, it also includes a tab to test your linking configuration.
 
 Since the dev tools is built from scratch, we’re now free to add new features to make debugging easier in future.
 
-One advantage of the Flipper plugin over Redux Devtools Extension is that it doesn’t need Chrome Debugger to work. Since Chrome Debugger can sometimes affect and change how things work, we won’t have this problem with Flipper.
+One advantage of the Flipper plugin over Redux Devtools Extension is that it doesn’t need Chrome Debugger to work. Since Chrome Debugger can sometimes affect performance and even potentially change behavior, we think this is a more reliable solution.
 
 ![React Navigation Logs](/assets/devtools/flipper-plugin-logs.png)
 
 ![React Navigation Linking](/assets/devtools/flipper-plugin-linking.png)
 
-See the [guide for setting it up](/docs/devtools#useflipper) for more details.
+See the [guide for setting it up](/docs/devtools#useflipper) for more details. Note that Flipper support in Expo managed apps requires a [Custom Development Client](https://docs.expo.dev/clients/introduction/) and it does not work in Expo Go at the time of writing.
 
 ## Upgrading
 
-So with every major release, there’s still the question about upgrade strategy. While React Navigation 6 isn’t a huge change like React Navigation 5, there are still some breaking changes. But possible to mix packages from React Navigation 5 and React Navigation 6 with few caveats so that you can gradually upgrade packages.
+While React Navigation 6 doesn't introduce changes of the same magnitude as React Navigation 5, there are still some breaking changes. It is possible, however, to mix packages from React Navigation 5 and React Navigation 6 (with a few caveats) so that you can gradually upgrade packages.
 
 See the [upgrade guide](/docs/upgrading-from-5.x) for a full list of changes and more details.
 
