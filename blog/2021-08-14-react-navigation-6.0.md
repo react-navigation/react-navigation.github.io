@@ -51,9 +51,9 @@ In React Navigation 6, many of these props are now screen options. The most sign
 
 See [deprecations](/docs/upgrading-from-5.x#deprecations) for more details.
 
-### Elements Library
+### Elements library
 
-We also took out some of the components and helpers used across various navigators in React Navigation and published them under a new package called [`@react-navigation/elements`](/docs/elements). It can be useful if you're building your own navigator, or just want to reuse some of the components in your app.
+We extracted some of the components and helpers used across various navigators in React Navigation and published them under a new package called [`@react-navigation/elements`](/docs/elements). It can be useful if you're building your own navigator, or just want to reuse some of the components in your app.
 
 Currently only a small set of components are exported, but there are more to come.
 
@@ -69,8 +69,7 @@ We simplified many APIs with React Navigation 6 to address common use cases. For
 
 ### New `Group` component for organization
 
-
-The [`Group`](/docs/group) component helps you organize screens inside your navigators and share common `screenOptions` between the groups.  Passing `screenOptions` to a group configures all the screens inside that group to use these options. You can override these options by passing `options` to each Screen component, similar to how you can with `screenOptions` on Navigator. You can also nest `Group` components inside other `Group` components. They are lightweight and don’t render anything - like fragments, so they won’t affect performance.
+The [`Group`](/docs/group) component helps you organize screens inside your navigators and share common `screenOptions` between the `Group`s.  Passing `screenOptions` to a group configures all the screens inside that group to use these options. You can override `Group` options by passing `options` to each Screen component, similar to how you can with `screenOptions` on Navigator. You can also nest `Group` components inside other `Group` components. They are lightweight and don’t render anything - like fragments, so they won’t affect performance.
 
 In this code snippet, you can see that we group regular screens under one group and modal screens under another group:
 
@@ -95,13 +94,13 @@ function App() {
 
 ### Headers by default in Bottom Tabs & Drawer
 
-We often needed to show a header in the screens of drawer and bottom tabs. To do this, we had to nest a stack navigator which provides a header, even if it was a navigator with just one screen. So we now show headers by default in screens of drawer and bottom tabs. No nesting necessary.
+Developers often want to show a header for screens inside of drawers and bottom tabs. To do this, we had to nest a stack navigator which provides a header, even if it was a navigator with just one screen. So we now show headers by default in screens of drawer and bottom tabs. No nesting necessary.
 
 We also export a [`Header`](/docs/elements#header) component in the new elements library to use anywhere in your components.
 
 ### Native navigation by default
 
-Historically, React Navigation has been mostly JS based, with animations and gestures written in JavaScript on top of react-native-gesture-handler and `Animated`. While this works for a lot of apps, apps with heavy screens can suffer from poor performance, and some native features are difficult to duplicate exactly (such as the large header on iOS). So, we wanted to address this by using native primitives for navigation.
+Historically, React Navigation has been mostly JS based, with animations and gestures written in JavaScript on top of `react-native-gesture-handler`, and `react-native-reanimated` or `Animated`. While this works for a lot of apps, apps with heavy screens can suffer from poor performance, and some native features are difficult to re-create exactly (such as the large header on iOS). So, we wanted to address this by using native primitives for navigation.
 
 With React Navigation 5, we introduced [`@react-navigation/native-stack`](/docs/native-stack-navigator) package powered by [`react-native-screens`](https://github.com/software-mansion/react-native-screens), as well as a native backend for [`@react-navigation/material-top-tabs`](/docs/material-top-tab-navigator) powered by [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view).
 
@@ -131,7 +130,7 @@ You can read [more about it in our TypeScript docs](/docs/typescript#specifying-
 
 ### Flipper plugin
 
-We now have a [Flipper](https://fbflipper.com/) plugin. It includes similar functionality to the currently available Redux Devtools Extensions integration. You can see all navigation actions, and jump back and forth between earlier and new navigation states. In addition, it also includes a tab to test your linking configuration.
+Our new [Flipper](https://fbflipper.com/) plugin includes similar functionality to the currently available Redux Devtools Extensions integration. You can see all navigation actions, and jump back and forth between earlier and new navigation states. In addition, it also includes a tab to test your linking configuration.
 
 Since the dev tools is built from scratch, we’re now free to add new features to make debugging easier in future.
 
