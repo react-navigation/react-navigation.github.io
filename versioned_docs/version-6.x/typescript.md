@@ -306,7 +306,6 @@ To do this, you can add this snippet somewhere in your codebase:
 
 ```js
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace ReactNavigation {
     interface RootParamList extends RootStackParamList {}
   }

@@ -309,7 +309,6 @@ Previously, we needed to specify a type for things such as `useNavigation`, `Lin
 
 ```ts
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace ReactNavigation {
     interface RootParamList extends RootStackParamList {}
   }
