@@ -4,9 +4,16 @@
         <title>React Navigation Blog</title>
         <link>https://reactnavigation.org/blog</link>
         <description>React Navigation Blog</description>
-        <lastBuildDate>Fri, 12 Mar 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 14 Aug 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[React Navigation 6.0]]></title>
+            <link>https://reactnavigation.org/blog/2021/08/14/react-navigation-6.0</link>
+            <guid>React Navigation 6.0</guid>
+            <pubDate>Sat, 14 Aug 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[The documentation is now live at reactnavigation.org, and v5 lives here.]]></description>
+        </item>
         <item>
             <title><![CDATA[On the way to React Navigation 6.0]]></title>
             <link>https://reactnavigation.org/blog/2021/03/12/react-navigation-6.0-next</link>
