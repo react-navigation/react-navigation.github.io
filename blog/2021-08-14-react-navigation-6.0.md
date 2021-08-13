@@ -19,7 +19,7 @@ React Navigation 6 keeps mostly the same core API as React Navigation 5, and you
 
 Navigators accept many of their customization options as props, which means we can’t customize them based on the active screen. To make this level of control possible, we needed to move these props to options that you can configure per screen.
 
-In React Navigation 6, many of these props are now screen options. The most significant changes are `tabBarOptions` and `drawerContentOptions`, which now all live on screen options instead. For example:
+In React Navigation 6, many of these props are now screen options. The most significant changes are `tabBarOptions` and `drawerContentOptions`, which now all live on `options` instead. For example:
 
 ```js
 // Before (v5)
