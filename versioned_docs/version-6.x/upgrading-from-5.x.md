@@ -16,7 +16,8 @@ React Navigation 6 requires newer versions of following libraries:
 - `react-native-screens` >= 2.15.0
 - `react-native-tab-view` >= 3.0.0
 - `react-native` >= 0.63.0
-- `expo` - 40+ (if you use Expo)
+- `expo` >= 41 (if you use [Expo](https://expo.io))
+- `typescript` >= 4.1.0 (if you use [TypeScript](https://www.typescriptlang.org))
 
 To upgrade `react-native-safe-area-context` and `react-native-screens` to the latest supported versions, do the following:
 

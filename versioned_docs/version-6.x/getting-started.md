@@ -19,7 +19,9 @@ Here are some resources to help you out:
 
 ## Minimum requirements
 
-React Navigation 6 requires at least `react-native@0.63.0`. If you're using Expo, your SDK version needs to be at least `41`.
+- `react-native` >= 0.63.0
+- `expo` >= 41 (if you use [Expo](https://expo.io))
+- `typescript` >= 4.1.0 (if you use [TypeScript](https://www.typescriptlang.org))
 
 ## Installation
 
