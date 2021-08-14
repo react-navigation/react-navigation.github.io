@@ -14,7 +14,6 @@ module.exports = {
     '/js/code-block-buttons.js',
   ],
   themeConfig: {
-    sidebarCollapsible: false,
     googleAnalytics: {
       trackingID: 'UA-10128745-16',
     },
@@ -154,6 +153,7 @@ module.exports = {
           includeCurrentVersion: false,
           lastVersion: '6.x'
         },
+        sidebarCollapsible: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
