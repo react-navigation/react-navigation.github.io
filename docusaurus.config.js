@@ -8,13 +8,13 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'react-navigation',
   projectName: 'react-navigation.github.io',
+  sidebarCollapsible: false,
   scripts: [
     'https://buttons.github.io/buttons.js',
     'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js',
     '/js/code-block-buttons.js',
   ],
   themeConfig: {
-    sidebarCollapsible: false,
     googleAnalytics: {
       trackingID: 'UA-10128745-16',
     },
