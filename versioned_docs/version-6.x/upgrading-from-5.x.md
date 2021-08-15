@@ -110,18 +110,18 @@ The following changes will show deprecation warnings if you're using the related
 
 ## Note on mixing React Navigation 5 and React Navigation 6 packages
 
-While we don't recommend doing it, it's possible to mix `@react-navigation/xxx` packages from the `6.x.x` and `5.x.x` version ranges to make upgrades easier.
+To make upgrading easier, it is possible to mix packages from the `6.x.x` and `5.x.x` version ranges. However, there are a few things you need to keep in mind:
 
-However, there are a few things you need to keep in mind:
+- If you're using `@react-navigation/native@5.x.x` and navigators with `6.x.x` version:
 
-- If you're using `@react-navigation/native@5.x.x` and navigators with `6.x.x` version, it will work in 2 conditions:
+  - You need to have latest `5.x.x` version of `@react-navigation/native` package installed which includes some backported APIs.
+  - You don't need to worry about any of the breaking changes under "General changes" section. They are only applicable when you upgrade `@react-navigation/native` package.
 
-  - You need to have latest `5.x.x` version of `@react-navigation/native` package installed.
-  - The deprecated APIs in `6.x.x` versions of the navigators will not work at all, you will need to use the new APIs instead.
-  - The breaking changes from the "General changes" section won't be applicable.
+- If you're using `@react-navigation/native@6.x.x` and any navigators with `5.x.x` version:
 
-- If you're using `@react-navigation/native@6.x.x` and navigators with `5.x.x` version, you need to pay attention to the breaking changes under "General changes" section. `backBehavior`
-- If you use TypeScript, you may encounter type errors when using mixing `5.x.x` and `6.x.x`. We suggest ignoring those errors until you can upgrade your packages.
+  - Make sure to pay attention to the breaking changes under "General changes" section. Everything else should work as expected.
+
+In both cases, if you use TypeScript, you may encounter type errors when using mixing `5.x.x` and `6.x.x` due to changes in types. We suggest ignoring those errors until you can upgrade your packages.
 
 ## General changes
 
