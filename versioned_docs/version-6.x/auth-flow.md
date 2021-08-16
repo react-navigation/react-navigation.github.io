@@ -79,7 +79,7 @@ return (
           title: 'Sign in',
           // When logging out, a pop animation feels intuitive
           // You can remove this if you want the default 'push' animation
-          animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+          replaceAnimation: state.isSignout ? 'pop' : 'push',
         }}
       />
     ) : (
