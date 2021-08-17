@@ -179,7 +179,7 @@ Title string of a tab displayed in the tab bar or a function that given `{ focus
 
 Whether the tab label should be visible. Defaults to `true`.
 
-### `tabBarLabelPosition`
+#### `tabBarLabelPosition`
 
 Whether the label is shown below the icon or beside the icon.
 
