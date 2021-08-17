@@ -80,11 +80,11 @@ navigation.dispatch(DrawerActions.toggleDrawer());
 
 For example, if you have a stack navigator nested inside a tab navigator, the screens in the stack navigator won't receive the events emitted by the parent tab navigator such as (`tabPress`) when using `navigation.addListener`.
 
-To receive events from parent navigator, you can explicitly listen to parent's events with `navigation.dangerouslyGetParent()`:
+To receive events from parent navigator, you can explicitly listen to parent's events with `navigation.getParent()`:
 
 ```js
 const unsubscribe = navigation
-  .dangerouslyGetParent()
+  .getParent()
   .addListener('tabPress', (e) => {
     // Do something
   });

@@ -948,7 +948,7 @@ import { TransitionPresets } from '@react-navigation/stack';
     cardOverlayEnabled: true,
     headerStatusBarHeight:
       navigation
-        .dangerouslyGetState()
+        .getState()
         .routes.findIndex((r) => r.key === route.key) > 0
         ? 0
         : undefined,

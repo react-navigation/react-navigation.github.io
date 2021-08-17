@@ -22,13 +22,13 @@ const state = useNavigationState(state => state);
 
 > Note: This hook is useful for advanced cases and it's easy to introduce performance issues if you're not careful. For most of the cases, you don't need the navigator's state.
 
-## How is `useNavigationState` different from `navigation.dangerouslyGetState()`?
+## How is `useNavigationState` different from `navigation.getState()`?
 
-The `navigation.dangerouslyGetState()` function also returns the current [navigation state](navigation-state.md). The main difference is that the `useNavigationState` hook will trigger a re-render when values change, while `navigation.dangerouslyGetState()` won't. For example, the following code will be incorrect:
+The `navigation.getState()` function also returns the current [navigation state](navigation-state.md). The main difference is that the `useNavigationState` hook will trigger a re-render when values change, while `navigation.getState()` won't. For example, the following code will be incorrect:
 
 ```js
 function Profile() {
-  const routesLength = navigation.dangerouslyGetState().routes.length; // Don't do this
+  const routesLength = navigation.getState().routes.length; // Don't do this
 
   return <Text>Number of routes: {routesLength}</Text>;
 }
@@ -46,7 +46,7 @@ function Profile() {
 }
 ```
 
-So when do you use `navigation.dangerouslyGetState()`? It's mostly useful within event listeners where you don't care about what's rendered. In most cases, using the hook should be preferred.
+So when do you use `navigation.getState()`? It's mostly useful within event listeners where you don't care about what's rendered. In most cases, using the hook should be preferred.
 
 ## Using with class component
 
