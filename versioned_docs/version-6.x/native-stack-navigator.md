@@ -205,6 +205,17 @@ When a function is passed, it receives `tintColor` and`children` in the options 
 
 Note that if you render a custom element by passing a function, animations for the title won't work.
 
+#### `headerTitleAlign`
+
+How to align the header title. Possible values:
+
+- `left`
+- `center`
+
+Defaults to `left` on platforms other than iOS.
+
+Not supported on iOS. It's always `center` on iOS and cannot be changed.
+
 #### `headerTitleStyle`
 
 Style object for header title. Supported properties:
