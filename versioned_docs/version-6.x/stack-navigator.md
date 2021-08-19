@@ -75,7 +75,7 @@ If `false`, the keyboard will NOT automatically dismiss when navigating to a new
 
 ### Options
 
-The following [options](screen-options.md) can be used to configure the screens in the navigator:
+The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Stack.navigator` or `options` prop of `Stack.Screen`.
 
 #### `title`
 
@@ -180,7 +180,9 @@ Boolean used to indicate whether to detach the previous screen from the view hie
 
 ### Header related options
 
-You can find the list of header related options [here](elements.md#header). In addition to those, the following options are also supported in stack:
+You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Stack.navigator` or `options` prop of `Stack.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
+
+In addition to those, the following options are also supported in stack:
 
 #### `header`
 

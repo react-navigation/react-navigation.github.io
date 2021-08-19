@@ -165,7 +165,7 @@ function MyTabBar({ navigation }) {
 
 ### Options
 
-The following [options](screen-options.md) can be used to configure the screens in the navigator:
+The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Tab.navigator` or `options` prop of `Tab.Screen`.
 
 #### `title`
 
@@ -323,7 +323,9 @@ Normally, we don't recommend enabling this prop as users don't expect their navi
 
 ### Header related options
 
-You can find the list of header related options [here](elements.md#header). In addition to those, the following options are also supported in bottom tabs:
+You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Tab.navigator` or `options` prop of `Tab.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
+
+In addition to those, the following options are also supported in bottom tabs:
 
 #### `header`
 
