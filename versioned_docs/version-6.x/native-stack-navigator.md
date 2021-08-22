@@ -225,7 +225,7 @@ Style object for header title. Supported properties:
 - `fontWeight`
 - `color`
 
-#### `headerSearchBar`
+#### `headerSearchBarOptions`
 
 Options to render a native search bar on iOS. Search bars are rarely static so normally it is controlled by passing an object to `searchBar` navigation option in the component's body.
 
@@ -361,6 +361,8 @@ Supported values:
 - `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)
 - `none`: don't animate the screen
 
+Only supported on Android and iOS.
+
 #### `presentation`
 
 How should the screen be presented.
@@ -374,6 +376,8 @@ Supported values:
 - `containedTransparentModal`: will use "UIModalPresentationOverCurrentContext" modal style on iOS and will fallback to "transparentModal" on Android.
 - `fullScreenModal`: will use "UIModalPresentationFullScreen" modal style on iOS and will fallback to "modal" on Android.
 - `formSheet`: will use "UIModalPresentationFormSheet" modal style on iOS and will fallback to "modal" on Android.
+
+Only supported on Android and iOS.
 
 #### `orientation`
 
@@ -389,6 +393,8 @@ Supported values:
 - `landscape`: landscape orientations are permitted.
 - `landscape_left`: landscape-left orientation is permitted.
 - `landscape_right`: landscape-right orientation is permitted.
+
+Only supported on Android and iOS.
 
 ### Events
 
