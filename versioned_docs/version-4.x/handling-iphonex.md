@@ -4,21 +4,32 @@ title: Supporting safe areas
 sidebar_label: Supporting safe areas
 ---
 
-By default, React Navigation aids in ensuring your application displays correctly on the iPhone X and other devices with notches and "safe areas". It does so by using `SafeAreaView` inside of UI elements that may interact with the sensor cluster ("the notch") or the home activity indicator.
+By default, React Navigation tries to ensure that the elements of the navigators display correctly on devices with notches (e.g. iPhone X) and UI elements which may overlap the app content. Such items include:
 
-The goal is to (a) maximize usage of the screen (b) without hiding content or making it difficult to interact with by having it obscured by a physical display cutout or some operating system UI.
+- Physical notches
+- Status bar overlay
+- Home activity indicator on iOS
+- Navigation bar on Android
 
-It's tempting to solve (a) by wrapping your entire app in a container with padding that ensures all content will not be occluded. But in doing so, we waste a bunch of space on the screen, as pictured in the image on the left below. What we ideally want is the image pictured on the right. We can use `SafeAreaView` for this. The rest of this guide gives more information on how to support safe areas in React Navigation.
+The area not overlapped by such items is referred to as "safe area".
 
-![](/assets/iphoneX/00-intro.png)
+We try to apply proper insets on the UI elements of the navigators to avoid being overlapped by such items. The goal is to (a) maximize usage of the screen (b) without hiding content or making it difficult to interact with by having it obscured by a physical display cutout or some operating system UI.
 
-<a href="https://snack.expo.io/@react-navigation/boring-safe-area" target="blank" class="run-code-button">&rarr; Run the example pictured on the left</a> or, preferably, <a href="https://snack.expo.io/@react-navigation/nice-safe-area" target="blank" class="run-code-button">run the example pictured on the right.</a>
+While React Navigation handles safe areas for the built-in UI elements by default, your own content also needs to handle it to ensure that content isn't hidden by these items.
+
+It's tempting to solve (a) by wrapping your entire app in a container with padding that ensures all content will not be occluded. But in doing so, we waste a bunch of space on the screen, as pictured in the image on the left below. What we ideally want is the image pictured on the right.
+
+![Notch on the iPhone X](/assets/iphoneX/00-intro.png)
+
+While React Native exports a `SafeAreaView` component, it has some inherent issues, i.e. if a screen containing safe area is animating, it causes jumpy behavior. In addition, this component only supports iOS 10+ with no support for older iOS versions or Android. We recommend to use the [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) library to handle safe areas in a more reliable way.
+
+The rest of this guide gives more information on how to support safe areas in React Navigation.
 
 ## Hidden/Custom Navigation Bar or Tab Bar
 
 ![Default React Navigation Behavior](/assets/iphoneX/01-iphonex-default.png)
 
-However, if you're overriding the default navigation bar, it's important to ensure your UI doesn't interfere with either of those hardware elements.
+React Navigation handles safe area in the default header. However, if you're using a custom header, it's important to ensure your UI is within the safe area.
 
 For example, if I render nothing for the `header` or `tabBarComponent`, nothing renders
 
@@ -38,7 +49,7 @@ export default createStackNavigator({
 
 ![Text hidden by iPhoneX UI elements](/assets/iphoneX/02-iphonex-content-hidden.png)
 
-To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-navigation`. Recall that `SafeAreaView` should not wrap entire navigators, just the screen components or any content in them.
+To fix this issue you can apply safe area insets on your content. This can be achieved easily by using the `SafeAreaView` component from the `react-native-safe-area-context` library. Recall that `SafeAreaView` should not wrap entire navigators, just the content inside the screen.
 
 ```jsx
 import SafeAreaView from 'react-native-safe-area-view';
@@ -54,6 +65,8 @@ class MyHomeScreen extends Component {
   }
 }
 ```
+
+Make sure to wrap your app in `SafeAreaProvider` as per the instructions [here](https://github.com/th3rdwave/react-native-safe-area-context#usage).
 
 ![Content spaced correctly with SafeAreaView](/assets/iphoneX/03-iphonex-content-fixed.png)
 
@@ -71,42 +84,52 @@ To fix this you can, once again, wrap your content in a `SafeAreaView`. This wil
 
 In conclusion, use the `SafeAreaView` component on the screens you register with a React Navigation navigator.
 
-A [Snack](https://snack.expo.io/@react-navigation/docs:-iphonex-demo-v3) is available with the code used in this overview.
+## Use the `edges` prop to customize the safe area
 
-## Use `forceInset` to get more control
-
-In some cases you might need more control over which paddings are applied. For example, you can remove bottom padding by passing `forceInset` prop to `SafeAreaView`.
+In some cases you might need more control over which paddings are applied. For example, you can remove bottom padding by passing `edges` prop to `SafeAreaView`.
 
 ```jsx
-<SafeAreaView style={styles.container} forceInset={{ bottom: 'never' }}>
+<SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
   <Text style={styles.paragraph}>This is top text.</Text>
   <Text style={styles.paragraph}>This is bottom text.</Text>
 </SafeAreaView>
 ```
 
-`forceInset` takes an object with the keys `top | bottom | left | right | vertical | horizontal` and the values `'always' | 'never'`. Or you can override the padding altogether by passing an integer.
+`edges` takes an array with the values `top`, `bottom`, `left` and `right` which controls which sides the safe area are applied to.
 
-There is also a [Snack](https://snack.expo.io/@react-navigation/react-navigation-docs:-safeareaview-demo-v3) available to demonstrate how `forceInset` behaves.
+## Use the hook for more control
 
-## Android notches
+In some cases you might need more control over which paddings are applied. For example, you can only apply the top and the bottom padding by changing the `style` object:
 
-React Native does not currently expose an API to access information about device cutouts on Android devices. If your app has an opaque status bar (the default in React Native), that may handle the area where the device has its cutout without any further work required. If not, to workaround this you may want to use the following temporary workaround:
+```jsx
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-- Install [react-native-device-info](https://github.com/react-native-community/react-native-device-info).
-- Check if the device has a notch with `DeviceInfo.hasNotch()` - this compares the device brand and model to a list of devices with notches - a crude but effective workaround.
-- If the device has a notch, you may want to increase the status bar height known to the SafeAreaView by doing something like this:
+function Demo() {
+  const insets = useSafeAreaInsets();
 
-```js
-import { Platform } from 'react-native';
-import SafeAreaView from 'react-native-safe-area-view';
-import DeviceInfo from 'react-native-device-info';
+  return (
+    <View
+      style={{
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
 
-if (Platform.OS === 'android' && DeviceInfo.hasNotch()) {
-  SafeAreaView
-    .setStatusBarHeight
-    /* Some value for status bar height + notch height */
-    ();
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
+    >
+      <Text>This is top text.</Text>
+      <Text>This is bottom text.</Text>
+    </View>
+  );
 }
 ```
 
-Work is in progress on a longer term solution, see [this pull request](https://github.com/facebook/react-native/pull/20999) for more information.
+Similarly, you could apply these paddings in `contentContainerStyle` of `FlatList` to have the content avoid the safe areas, but still show them under the statusbar and navigation bar when scrolling.
+
+## Summary
+
+- Use `react-native-safe-area-context` instead of `SafeAreaView` from `react-native`
+- Don't wrap your whole app in `SafeAreaView`, instead wrap content inside your screens
+- Use the `edges` prop to apply safe are to specific sides
+- Use the `useSafeAreaInsets` hook for more control over where the insets are applied
