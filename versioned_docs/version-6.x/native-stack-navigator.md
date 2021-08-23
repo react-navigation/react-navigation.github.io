@@ -10,6 +10,8 @@ This navigator uses the native APIs `UINavigationController` on iOS and `Fragmen
 
 One thing to keep in mind is that while `createNativeStackNavigator` offers native performance and exposes native features such as large title on iOS etc., it isn't as customizable as [`createStackNavigator`](stack-navigator.md), So if you need more customization than what's possible in this navigator, consider using `createStackNavigator` instead - which is a more customizable JavaScript based implementation.
 
+## Installation
+
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/native-stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/native-stack):
 
 ```bash npm2yarn

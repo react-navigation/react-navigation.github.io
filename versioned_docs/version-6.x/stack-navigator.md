@@ -16,6 +16,8 @@ By default the stack navigator is configured to have the familiar iOS and Androi
 
 One thing to keep in mind is that while `createStackNavigator` is extremely customizable, it's implemented in JavaScript. While it runs animations and gestures using natively, the performance may not be as fast as a native implementation. This may not be an issue for a lot of apps, but if you're experiencing performance issues during navigation, consider using [`createNativeStackNavigator`](native-stack-navigator.md) instead - which uses native navigation primitives.
 
+## Installation
+
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/stack):
 
 ```bash npm2yarn

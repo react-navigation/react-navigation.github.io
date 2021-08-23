@@ -12,6 +12,8 @@ A simple tab bar on the bottom of the screen that lets you switch between differ
   </video>
 </div>
 
+## Installation
+
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/bottom-tabs):
 
 ```bash npm2yarn
