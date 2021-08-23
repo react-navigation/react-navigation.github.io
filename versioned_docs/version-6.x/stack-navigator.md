@@ -6,13 +6,15 @@ sidebar_label: Stack
 
 Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
-By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
+By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, use OS default animation on Android. But the [animations can be customize](#animation-related-options) to match your needs.
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
     <source src="/assets/navigators/stack/stack.mov" />
   </video>
 </div>
+
+One thing to keep in mind is that while `createStackNavigator` is extremely customizable, it's implemented in JavaScript. While it runs animations and gestures using natively, the performance may not be as fast as a native implementation. This may not be an issue for a lot of apps, but if you're experiencing performance issues during navigation, consider using [`createNativeStackNavigator`](native-stack-navigator.md) instead - which uses native navigation primitives.
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/stack):
 
@@ -244,8 +246,6 @@ By default, there is one floating header which renders headers for multiple scre
 
 If you specify a custom header, React Navigation will change it to `screen` automatically so that the header animated along with the screen instead. This means that you don't have to implement animations to animate it separately.
 
-Setting the `headerMode` prop to `screen` makes the header part of the screen, so you don't have to implement animations to animate it separately.
-
 But you might want to keep the floating header to have a different transition animation between headers. To do that, you'll need to specify `headerMode: 'float'` in the options, and then interpolate on the `progress.current` and `progress.next` props in your custom header. For example, following will cross-fade the header:
 
 ```js
@@ -263,8 +263,8 @@ return (
 
 Specifies how the header should be rendered:
 
-- `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
-- `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
+- `float` - Render a single header that stays at the top and animates as screens are changed. This is default on iOS.
+- `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is default on other platforms.
 
 #### `headerShown`
 
