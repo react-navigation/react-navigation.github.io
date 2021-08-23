@@ -23,6 +23,7 @@ And install the other required packages [`react-native-gesture-handler`](https:/
 ```bash npm2yarn
 npm install react-native-gesture-handler
 npm install react-native-reanimated
+```
 
 ## Minimal example of drawer-based navigation
 
