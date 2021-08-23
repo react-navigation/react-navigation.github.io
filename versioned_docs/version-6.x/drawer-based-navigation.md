@@ -18,6 +18,12 @@ Before continuing, first install [`@react-navigation/drawer`](https://github.com
 npm install @react-navigation/drawer
 ```
 
+And install the other required packages [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) to use Drawer Navigation.
+
+```bash npm2yarn
+npm install react-native-gesture-handler
+npm install react-native-reanimated
+
 ## Minimal example of drawer-based navigation
 
 To use this drawer navigator, import it from `@react-navigation/drawer`:
