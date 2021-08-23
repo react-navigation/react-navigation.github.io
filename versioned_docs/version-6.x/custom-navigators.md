@@ -220,7 +220,12 @@ type TabNavigationEventMap = {
 };
 
 // The props accepted by the component is a combination of 3 things
-type Props = DefaultNavigatorOptions<TabNavigationOptions> &
+type Props = DefaultNavigatorOptions<
+  ParamListBase,
+  TabNavigationState<ParamListBase>,
+  TabNavigationOptions,
+  TabNavigationEventMap
+> &
   TabRouterOptions &
   TabNavigationConfig;
 
