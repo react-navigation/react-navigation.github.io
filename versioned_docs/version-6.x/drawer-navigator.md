@@ -40,6 +40,8 @@ import 'react-native-gesture-handler';
 
 > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
 
+The Drawer Navigator supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/installation).
+
 ## API Definition
 
 To use this drawer navigator, import it from `@react-navigation/drawer`:
