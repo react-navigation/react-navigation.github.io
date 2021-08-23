@@ -52,7 +52,7 @@ export default createStackNavigator({
 To fix this issue you can apply safe area insets on your content. This can be achieved easily by using the `SafeAreaView` component from the `react-native-safe-area-context` library. Recall that `SafeAreaView` should not wrap entire navigators, just the content inside the screen.
 
 ```jsx
-import SafeAreaView from 'react-native-safe-area-view';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 class MyHomeScreen extends Component {
   render() {
