@@ -173,7 +173,7 @@ A common scenario where you should use `merge: true` is if you have a custom tab
 
 ### Dropped `dangerously` from `dangerouslyGetParent` and `dangerouslyGetState`
 
-The `dangerouslyGetParent` and `dangerouslyGetState` methods on the `navigation` prop are useful in many scenarios, and sometimes necessary. So we dropped the `dangerously` prefix to make it clear than it's safe to use. Now you can use [`navigation.getParent()`](navigation-prop.md#getparent) and [`navigation.getState()`](navigation-prop.md#getstate).
+The `dangerouslyGetParent` and `dangerouslyGetState` methods on the `navigation` prop are useful in many scenarios, and sometimes necessary. So we dropped the `dangerously` prefix to make it clear that it's safe to use. Now you can use [`navigation.getParent()`](navigation-prop.md#getparent) and [`navigation.getState()`](navigation-prop.md#getstate).
 
 ### No more `state` property on the `route` prop
 
