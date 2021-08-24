@@ -227,7 +227,7 @@ Style object for header title. Supported properties:
 
 #### `headerSearchBarOptions`
 
-Options to render a native search bar on iOS. Search bars are rarely static so normally it is controlled by passing an object to `searchBar` navigation option in the component's body.
+Options to render a native search bar on iOS. Search bars are rarely static so normally it is controlled by passing an object to `headerSearchBarOptions` navigation option in the component's body.
 
 Search bar is only supported on iOS.
 
@@ -236,7 +236,7 @@ Example:
 ```js
 React.useEffect(() => {
   navigation.setOptions({
-    headerSearchBar: {
+    headerSearchBarOptions: {
       // search bar options
     }
   });
