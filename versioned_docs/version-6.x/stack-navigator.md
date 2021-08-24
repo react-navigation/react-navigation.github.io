@@ -14,7 +14,7 @@ By default the stack navigator is configured to have the familiar iOS and Androi
   </video>
 </div>
 
-One thing to keep in mind is that while `createStackNavigator` is extremely customizable, it's implemented in JavaScript. While it runs animations and gestures using natively, the performance may not be as fast as a native implementation. This may not be an issue for a lot of apps, but if you're experiencing performance issues during navigation, consider using [`createNativeStackNavigator`](native-stack-navigator.md) instead - which uses native navigation primitives.
+One thing to keep in mind is that while `@react-navigation/stack` is extremely customizable, it's implemented in JavaScript. While it runs animations and gestures using natively, the performance may not be as fast as a native implementation. This may not be an issue for a lot of apps, but if you're experiencing performance issues during navigation, consider using [`@react-navigation/native-stack`](native-stack-navigator.md) instead - which uses native navigation primitives.
 
 ## Installation
 
