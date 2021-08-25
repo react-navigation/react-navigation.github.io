@@ -12,7 +12,8 @@ Common pattern in navigation is to use drawer from left (sometimes right) side f
   </video>
 </div>
 
-Before continuing, first install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
+Before continuing, first install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer).<br>
+Then install [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/docs/installation/) and [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/#installation).
 
 ```bash npm2yarn
 npm install @react-navigation/drawer
