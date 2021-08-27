@@ -462,6 +462,7 @@ If you were importing `createNativeStackNavigator` from `react-native-screens/na
 - `headerTranslucent` is changed to `headerTransparent`
 - `headerBlurEffect` is now a separate option and no longer a property in `headerStyle`
 - `headerTopInsetEnabled` option is removed, it's now automatically set when necessary
+- `disableBackButtonMenu` is changed to `headerBackButtonMenuEnabled`
 - `backButtonImage` is renamed to `headerBackImageSource`
 - `searchBar` is renamed to `headerSearchBarOptions`
 - `replaceAnimation` is renamed to `animationTypeForReplace`

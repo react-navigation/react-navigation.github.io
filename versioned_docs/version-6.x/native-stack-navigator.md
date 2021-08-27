@@ -63,6 +63,14 @@ The following [options](screen-options.md) can be used to configure the screens 
 
 String that can be used as a fallback for `headerTitle`.
 
+#### `headerBackButtonMenuEnabled`
+
+Boolean indicating whether to show the menu on longPress of iOS >= 14 back button. Defaults to `true`.
+
+Requires `react-native-screens` version >=3.3.0.
+
+Only supported on iOS.
+
 #### `headerBackVisible`
 
 Whether the back button is visible in the header. You can use it to show a back button alongside `headerLeft` if you have specified it.
