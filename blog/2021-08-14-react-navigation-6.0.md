@@ -106,6 +106,8 @@ With React Navigation 5, we introduced [`@react-navigation/native-stack`](/docs/
 
 In React Navigation 6, we made `@react-navigation/native-stack` the default choice for setting up Stack navigation. It uses `UINavigationController` on iOS and Fragments on Android to implement navigation natively. We also focused a lot on aligning the API of `@react-navigation/native-stack` with `@react-navigation/stack` so that it’ll be easier to switch between them.
 
+> While `@react-navigation/native-stack` is now used as the default choice in the documentation, it doesn't replace `@react-navigation/stack`. Both packages are maintained and are valid options for your projects. If you're currently using `@react-navigation/stack`, you can keep using it. You don't need to move to `@react-navigation/native-stack` unless you really want to.
+
 Similarly, we switched `@react-navigation/material-top-tabs` to use `react-native-pager-view` by default.
 
 ### Better type-safety
