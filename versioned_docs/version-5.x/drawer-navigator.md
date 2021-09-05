@@ -372,7 +372,9 @@ Whether you can use gestures to open or close the drawer. Setting this to `false
 
 #### `header`
 
-Function that returns a React Element to display as a header. It accepts an object containing the following properties as the argument:
+Custom header to use instead of the default header.
+
+This accepts a function that returns a React Element to display as a header. The function receives an object containing the following properties as the argument:
 
 - `layout` - Dimensions of the screen
 - `scene` - This contains 2 properties:

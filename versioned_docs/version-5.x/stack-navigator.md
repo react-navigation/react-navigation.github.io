@@ -92,7 +92,9 @@ String that can be used as a fallback for `headerTitle`.
 
 
 
-Function that returns a React Element to display as a header. It accepts an object containing the following properties as the argument:
+Custom header to use instead of the default header.
+
+This accepts a function that returns a React Element to display as a header. The function receives an object containing the following properties as the argument:
 
 - `mode` - Mode of the header - `float` or `screen`
 - `layout` - Dimensions of the screen

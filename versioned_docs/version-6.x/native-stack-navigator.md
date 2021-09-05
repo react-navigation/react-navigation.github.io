@@ -307,6 +307,43 @@ React.useEffect(() => {
 }, [navigation]);
 ```
 
+#### `header`
+
+Custom header to use instead of the default header.
+
+This accepts a function that returns a React Element to display as a header. The function receives an object containing the following properties as the argument:
+
+- `navigation` - The navigation object for the current screen.
+- `route` - The route object for the current screen.
+- `options` - The options for the current screen
+- `back` - Options for the back button, contains an object with a `title` property to use for back button label.
+
+Example:
+
+```js
+import { getHeaderTitle } from '@react-navigation/elements';
+
+// ..
+
+header: ({ navigation, route, options, back }) => {
+  const title = getHeaderTitle(options, route.name);
+
+  return (
+    <MyHeader
+      title={title}
+      leftButton={
+        back ? <MyBackButton onPress={navigation.goBack} /> : undefined
+      }
+      style={options.headerStyle}
+    />
+  );
+};
+```
+
+To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
+
+Note that if you specify a custom header, the native functionality such as large title, search bar etc. won't work.
+
 #### `statusBarAnimation`
 
 Sets the status bar animation (similar to the `StatusBar` component).

@@ -331,7 +331,9 @@ In addition to those, the following options are also supported in bottom tabs:
 
 #### `header`
 
-Function that returns a React Element to display as a header. It accepts an object containing the following properties as the argument:
+Custom header to use instead of the default header.
+
+This accepts a function that returns a React Element to display as a header. The function receives an object containing the following properties as the argument:
 
 - `navigation` - The navigation object for the current screen.
 - `route` - The route object for the current screen.
