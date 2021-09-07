@@ -46,7 +46,7 @@ import 'react-native-gesture-handler';
 
 > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
 
-Optionally, you can also to install [`@react-native-masked-view/masked-view`](https://github.com/react-native-masked-view/masked-view). This is needed if you want to use UIKit style animations for the header ([`HeaderStyleInterpolators.forUIKit`](#headerstyleinterpolators)).
+Optionally, you can also install [`@react-native-masked-view/masked-view`](https://github.com/react-native-masked-view/masked-view). This is needed if you want to use UIKit style animations for the header ([`HeaderStyleInterpolators.forUIKit`](#headerstyleinterpolators)).
 
 If you have a Expo managed project, in your project directory, run:
 
