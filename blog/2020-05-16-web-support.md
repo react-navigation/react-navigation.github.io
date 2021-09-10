@@ -101,7 +101,7 @@ It's especially important in case of the [stack navigator](/docs/stack-navigator
 
 ### Permanent drawer
 
-Another way we can make maximum us of the available screen size is by making our UIs adapt to different screen sizes. For example, we may want to show a sidebar for navigation on large screens while switching to a drawer on smaller screens. You can now specify `drawerType` as `permanent` to show an always visible sidebar. See the [documentation for `drawerType`](/docs/drawer-navigator#drawertype) for example code on how to achieve it.
+Another way we can make maximum use of the available screen size is by making our UIs adapt to different screen sizes. For example, we may want to show a sidebar for navigation on large screens while switching to a drawer on smaller screens. You can now specify `drawerType` as `permanent` to show an always visible sidebar. See the [documentation for `drawerType`](/docs/drawer-navigator#drawertype) for example code on how to achieve it.
 
 <video playsInline autoPlay muted loop style={{ maxWidth: '100%' }}>
   <source src="/assets/blog/web-support/permanent-drawer.mp4" type="video/mp4" />
