@@ -173,5 +173,5 @@ Similarly, you could apply these paddings in `contentContainerStyle` of `FlatLis
 
 - Use `react-native-safe-area-context` instead of `SafeAreaView` from `react-native`
 - Don't wrap your whole app in `SafeAreaView`, instead wrap content inside your screens
-- Use the `edges` prop to apply safe are to specific sides
+- Use the `edges` prop to apply safe area to specific sides
 - Use the `useSafeAreaInsets` hook for more control over where the insets are applied
