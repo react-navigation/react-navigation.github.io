@@ -183,8 +183,8 @@ A component used to show the back button header. It's the default for [`headerLe
 
 Usage:
 
-```js
-<HeaderTitle>Hello</HeaderTitle>
+```jsx
+<HeaderBackButton tintColor="#333" onPress={navigation.goBack} />
 ```
 
 ### `MissingIcon`
