@@ -6,7 +6,7 @@ sidebar_label: Stack
 
 Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
-By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, use OS default animation on Android. But the [animations can be customize](#animation-related-options) to match your needs.
+By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, use OS default animation on Android. But the [animations can be customized](#animation-related-options) to match your needs.
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
