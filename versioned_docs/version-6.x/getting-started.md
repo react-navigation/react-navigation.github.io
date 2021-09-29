@@ -103,3 +103,4 @@ export default function App() {
 Now you are ready to build and run your app on the device/simulator.
 
 Continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.
+ngntd
