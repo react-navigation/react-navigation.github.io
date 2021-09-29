@@ -29,7 +29,7 @@ If the navigator is a stack navigator, several alternatives to `navigate` and `g
 - `navigation`
   - `replace` - replace the current route with a new one
   - `push` - push a new route onto the stack
-  - `pop` - go back in the stack
+  - `pop` - go back in the stack. (takes additional integer argument to pop 'n' screens')
   - `popToTop` - go to the top of the stack
 
 If the navigator is a tab navigator, the following are also available:
