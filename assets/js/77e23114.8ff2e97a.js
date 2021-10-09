@@ -1,1 +1,0 @@
-(self.webpackChunkreact_navigation_website_next=self.webpackChunkreact_navigation_website_next||[]).push([[5074],{26401:function(t){"use strict";t.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"tutorial","name":"tutorial","count":2,"permalink":"/blog/tags/tutorial"}')}}]);
