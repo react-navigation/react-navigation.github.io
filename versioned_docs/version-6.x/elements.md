@@ -53,12 +53,28 @@ Function which returns a React Element to display on the left side of the header
       />
     ),
   }}
-/>;
+/>
 ```
 
 #### `headerRight`
 
 Function which returns a React Element to display on the right side of the header.
+
+#### `headerShadowVisible`
+
+Whether to hide the elevation shadow (Android) or the bottom border (iOS) on the header.
+
+This is a short-hand for the following styles:
+
+```js
+{
+  elevation: 0,
+  shadowOpacity: 0,
+  borderBottomWidth: 0,
+}
+```
+
+If the above styles are specified in `headerStyle` along with `headerShadowVisible: false`, then `headerShadowVisible: false` will take precedence.
 
 #### `headerStyle`
 
@@ -209,9 +225,7 @@ A component which aids in improving performance for inactive screens by utilizin
 Usage:
 
 ```js
-<ResourceSavingView visible={0}>
-  {/* Content */}
-</ResourceSavingView>
+<ResourceSavingView visible={0}>{/* Content */}</ResourceSavingView>
 ```
 
 ## Utilities
@@ -223,9 +237,7 @@ A wrapper over the `SafeAreaProvider` component from [`react-native-safe-area-co
 Usage:
 
 ```js
-<SafeAreaProviderCompat>
-  {/* Your components */}
-</SafeAreaProviderCompat>
+<SafeAreaProviderCompat>{/* Your components */}</SafeAreaProviderCompat>
 ```
 
 ### `HeaderBackContext`
@@ -238,7 +250,7 @@ import { HeaderBackContext } from '@react-navigation/elements';
 // ...
 
 <HeaderBackContext.Consumer>
-  {headerBack => {
+  {(headerBack) => {
     if (headerBack) {
       const backTitle = headerBack.title;
 
@@ -247,7 +259,7 @@ import { HeaderBackContext } from '@react-navigation/elements';
 
     /* render something */
   }}
-</HeaderBackContext.Consumer>
+</HeaderBackContext.Consumer>;
 ```
 
 ### `HeaderShownContext`
@@ -260,10 +272,10 @@ import { HeaderShownContext } from '@react-navigation/elements';
 // ...
 
 <HeaderShownContext.Consumer>
-  {headerShown => {
+  {(headerShown) => {
     /* render something */
   }}
-</HeaderShownContext.Consumer>
+</HeaderShownContext.Consumer>;
 ```
 
 ### `HeaderHeightContext`
@@ -276,10 +288,10 @@ import { HeaderHeightContext } from '@react-navigation/elements';
 // ...
 
 <HeaderHeightContext.Consumer>
-  {headerHeight => {
+  {(headerHeight) => {
     /* render something */
   }}
-</HeaderHeightContext.Consumer>
+</HeaderHeightContext.Consumer>;
 ```
 
 ### `useHeaderHeight`
