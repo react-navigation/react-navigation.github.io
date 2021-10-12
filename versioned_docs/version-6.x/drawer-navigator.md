@@ -475,39 +475,7 @@ Whether to show or hide the header for the screen. The header is shown by defaul
 
 ### Events
 
-The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
-
-#### `drawerOpen`
-
-This event is fired when the drawer opens.
-
-Example:
-
-```js
-React.useEffect(() => {
-  const unsubscribe = navigation.addListener('drawerOpen', (e) => {
-    // Do something
-  });
-
-  return unsubscribe;
-}, [navigation]);
-```
-
-#### `drawerClose`
-
-This event is fired when the drawer closes.
-
-Example:
-
-```js
-React.useEffect(() => {
-  const unsubscribe = navigation.addListener('drawerClose', (e) => {
-    // Do something
-  });
-
-  return unsubscribe;
-}, [navigation]);
-```
+The drawer navigator doesn't emit any [events](navigation-events.md).
 
 ### Helpers
 
