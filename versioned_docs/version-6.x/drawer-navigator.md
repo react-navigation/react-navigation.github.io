@@ -93,7 +93,7 @@ It supports the following values:
 
 #### `defaultStatus`
 
-The default status of  the drawer - whether the drawer should stay `open` or `closed` by default.
+The default status of the drawer - whether the drawer should stay `open` or `closed` by default.
 
 When this is set to `open`, the drawer will be open from the initial render. It can be closed normally using gestures or programmatically. However, when going back, drawer will re-open if it was closed. This is essentially the opposite of the default behavior of the drawer where it starts `closed`, and back button closes an open drawer.
 
@@ -566,6 +566,39 @@ import { useDrawerStatus } from '@react-navigation/drawer';
 // ...
 
 const isDrawerOpen = useDrawerStatus() === 'open';
+```
+
+If you can't use the hook, you can also use the `getDrawerStatusFromState` helper:
+
+```js
+import { getDrawerStatusFromState } from '@react-navigation/drawer';
+
+// ...
+
+const isDrawerOpen = getDrawerStatusFromState(navigation.getState()) === 'open';
+```
+
+For class components, you can listen tp the `state` event to check if drawer was opened or closed:
+
+```js
+class Profile extends React.Component {
+  componentDidMount() {
+    this._unsubscribe = navigation.addListener('state', () => {
+      const isDrawerOpen =
+        getDrawerStatusFromState(navigation.getState()) === 'open';
+
+      // do something
+    });
+  }
+
+  componentWillUnmount() {
+    this._unsubscribe();
+  }
+
+  render() {
+    // Content of the component
+  }
+}
 ```
 
 ## Nesting drawer navigators inside others
