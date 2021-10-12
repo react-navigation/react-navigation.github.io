@@ -133,3 +133,17 @@ Render callback to return React Element to use for the screen:
 You can use this approach instead of the `component` prop if you need to pass additional props. Though we recommend using [React context](https://reactjs.org/docs/context.html) for passing data instead.
 
 > Note: By default, React Navigation applies optimizations to screen components to prevent unnecessary renders. Using a render callback removes those optimizations. So if you use a render callback, you'll need to ensure that you use [`React.memo`](https://reactjs.org/docs/react-api.html#reactmemo) or [`React.PureComponent`](https://reactjs.org/docs/react-api.html#reactpurecomponent) for your screen components to avoid performance issues.
+
+### `navigationKey`
+
+Optional key for this screen. This doesn't need to be unique. If the key changes, existing screens with this name will be removed (if used in a stack navigator) or reset (if used in a tab or drawer navigator).
+
+This can be useful when we have some screens which we want to be removed or reset when the condition changes:
+
+```js
+<Stack.Screen
+  navigationKey={isSignedIn ? 'user' : 'guest'}
+  name="Profile"
+  component={ProfileScreen}
+/>
+```

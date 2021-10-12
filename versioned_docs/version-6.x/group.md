@@ -62,3 +62,15 @@ When you pass a function, it'll receive the [`route`](route-prop.md) and [`navig
 These options are merged with the `options` specified in the individual screens, and the screen's options will take precedence over the group's options.
 
 See [Options for screens](screen-options.md) for more details and examples.
+
+### `navigationKey`
+
+Optional key for a group of screens screen. If the key changes, all existing screens in this group will be removed or reset:
+
+```js
+<Stack.Group navigationKey={isSignedIn ? 'user' : 'guest'}>
+  {/* screens */}
+</Stack.Group>
+```
+
+This is similar to the [`navigationKey`](screen.md#navigationkey) prop on `Screen`, but applies to a group of screens.
