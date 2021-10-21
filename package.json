@@ -14,20 +14,20 @@
     "fetch-sponsors": "node scripts/fetch-sponsors.js"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-beta.6",
-    "@docusaurus/plugin-google-analytics": "^2.0.0-beta.6",
-    "@docusaurus/preset-classic": "2.0.0-beta.6",
-    "@docusaurus/remark-plugin-npm2yarn": "^2.0.0-beta.6",
+    "@docusaurus/core": "2.0.0-beta.7",
+    "@docusaurus/plugin-google-analytics": "2.0.0-beta.7",
+    "@docusaurus/preset-classic": "2.0.0-beta.7",
+    "@docusaurus/remark-plugin-npm2yarn": "2.0.0-beta.7",
     "@octokit/graphql": "^4.8.0",
     "@react-navigation/core": "^6.0.1",
-    "classnames": "^2.2.6",
+    "classnames": "^2.3.1",
     "docsearch.js": "^2.6.3",
     "escape-html": "^1.0.3",
     "mkdirp": "^1.0.4",
     "netlify-plugin-cache": "^1.0.3",
     "prism-react-renderer": "^1.1.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-simple-code-editor": "^0.11.0"
   },
   "browserslist": {
