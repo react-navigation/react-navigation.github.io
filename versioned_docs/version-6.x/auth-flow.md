@@ -4,7 +4,7 @@ title: Authentication flows
 sidebar_label: Authentication flows
 ---
 
-Most apps require that a user authenticate in some way to have access to data associated with a user or other private content. Typically the flow will look like this:
+Most apps require that a user authenticates in some way to have access to data associated with a user or other private content. Typically the flow will look like this:
 
 - The user opens the app.
 - The app loads some authentication state from encrypted persistent storage (for example, [`SecureStore`](https://docs.expo.io/versions/latest/sdk/securestore/)).
@@ -15,7 +15,7 @@ Most apps require that a user authenticate in some way to have access to data as
 
 ## What we need
 
-This is the behavior that we want from the authentication flow: when users sign in, we want to throw away the state of the authentication flow and unmount all of the screens related to authentication, and when we press the hardware back button we expect to not be able to go back to the authentication flow.
+This is the behavior that we want from the authentication flow: when users sign in, we want to throw away the state of the authentication flow and unmount all of the screens related to authentication, and when we press the hardware back button, we expect to not be able to go back to the authentication flow.
 
 ## How it will work
 
@@ -50,7 +50,7 @@ By conditionally defining different screens based on a variable, we can implemen
 
 ## Don't manually navigate when conditionally rendering screens
 
-It's important to note that when using such a setup, you **don't manually navigate** to the `Home` screen by calling `navigation.navigate('Home')` or any other method. **React Navigation will automatically navigate to the correct screen** when `isSigned` in changes - `Home` screen when `isSignedIn` becomes `true`, and to `SignIn` screen when `isSignedIn` becomes `false`. You'll get an error if you attempt to navigate manually.
+It's important to note that when using such a setup, you **don't manually navigate** to the `Home` screen by calling `navigation.navigate('Home')` or any other method. **React Navigation will automatically navigate to the correct screen** when `isSignedIn` changes - `Home` screen when `isSignedIn` becomes `true`, and to `SignIn` screen when `isSignedIn` becomes `false`. You'll get an error if you attempt to navigate manually.
 
 ## Define our screens
 
@@ -97,7 +97,7 @@ The main thing to notice is that we're conditionally defining screens based on t
 - `SignIn` screen is only defined if `userToken` is `null` (user is not signed in)
 - `Home` screen is only defined if `userToken` is non-null (user is signed in)
 
-Here, we're conditionally defining one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly for the screens accessible after sign in, you probably have more than one screen. We can use `React.Fragment` to define multiple screens:
+Here, we're conditionally defining one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly, for the screens accessible after signing in, you probably have more than one screen. We can use `React.Fragment` to define multiple screens:
 
 ```js
 state.userToken == null ? (
@@ -114,7 +114,7 @@ state.userToken == null ? (
 );
 ```
 
-> If you have both your login-related screens and rest of the screens in Stack navigators, we recommend to use a single Stack navigator and place the conditional inside instead of using 2 different navigators. This makes it possible to have a proper transition animation during login/logout.
+> If you have both your login-related screens and rest of the screens in two different Stack navigators, we recommend to use a single Stack navigator and place the conditional inside instead of using 2 different navigators. This makes it possible to have a proper transition animation during login/logout.
 
 ## Implement the logic for restoring the token
 
@@ -128,8 +128,8 @@ From the previous snippet, we can see that we need 3 state variables:
 
 So we need to:
 
-- Add some logic for restoring token, sign in and sign out
-- Expose methods for sign in and sign out to other components
+- Add some logic for restoring token, signing in and signing out
+- Expose methods for signing in and signing out to other components
 
 We'll use `React.useReducer` and `React.useContext` in this guide. But if you're using a state management library such as Redux or Mobx, you can use them for this functionality instead. In fact, in bigger apps, a global state management library is more suitable for storing authentication tokens. You can adapt the same approach to your state management library.
 
