@@ -300,7 +300,7 @@ If you have your own custom navigator using `TabRouter` or `DrawerRouter`, it wi
 
 ### Stricter types for TypeScript
 
-The type definitions are not stricter, which makes it easier to catch errors earlier by minimizing unsafe types. For example, `useNavigation` now shows a type error if you don't specify a type.
+The type definitions are now stricter, which makes it easier to catch errors earlier by minimizing unsafe types. For example, `useNavigation` now shows a type error if you don't specify a type.
 
 You can handle this by [annotating it](typescript.md#annotating-usenavigation), or for an easier way, [specify a type for root navigator](typescript.md#specifying-default-types-for-usenavigation-link-ref-etc) which will be used for all usage of `useNavigation`.
 
