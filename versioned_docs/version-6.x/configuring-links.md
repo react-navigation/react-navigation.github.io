@@ -63,7 +63,7 @@ const state = {
 };
 ```
 
-By default, React Navigation will use the path segments as the route name when parsing the URL. But directly translating path segments to route names may not be the expected behavior, and your.
+By default, React Navigation will use the path segments as the route name when parsing the URL. But directly translating path segments to route names may not be the expected behavior.
 
 For example, you might want to parse the path `/feed/latest` to something like:
 
