@@ -14,7 +14,7 @@ export default function Help () {
       title: <p>Browse Docs and API</p>,
     },
     {
-      content: <p>Ask questions about the documentation and project in the `#react-navigation` channel on the <Link to={useBaseUrl('https://discord.gg/reactiflux')}> Reactiflux Discord</Link>.</p>,
+      content: <p>Ask questions about the documentation and project in the `#help-react-native` channel on the <Link to={useBaseUrl('https://discord.gg/reactiflux')}> Reactiflux Discord</Link>.</p>,
       title: <p>Join the community</p>,
     },
     {
