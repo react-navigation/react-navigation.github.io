@@ -15,6 +15,8 @@ const convertNpmToYarn = npmCode => {
       .replace(/^npm i$/gm, 'yarn')
       // install: 'npm install foo' -> 'yarn add foo'
       .replace(/npm install/gm, 'yarn add')
+      // install: 'npm install --save-dev foo' -> 'yarn add --dev foo'
+      .replace(/npm install --save-dev/gm, 'yarn add --dev')
       // run command: 'npm run start' -> 'yarn run start'
       .replace(/npm run/gm, 'yarn run')
   );
