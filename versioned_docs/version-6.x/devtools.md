@@ -26,7 +26,7 @@ This hook provides integration with [Flipper](https://fbflipper.com/) for React 
 
 To be able to use this hook, you need to:
 
-- [Configure Flipper in your React Native app](https://fbflipper.com/docs/features/react-native/) if it's not configured already
+- [Configure Flipper in your React Native app](https://fbflipper.com/docs/getting-started/react-native/) if it's not configured already
 - Install the `react-native-flipper` package in your app:
 
   ```bash npm2yarn
