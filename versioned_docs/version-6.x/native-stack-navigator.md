@@ -300,7 +300,7 @@ const [search, setSearch] = React.useState('');
 
 React.useEffect(() => {
   navigation.setOptions({
-    headerSearchBar: {
+    headerSearchBarOptions: {
       onChangeText: (event) => setSearch(event.nativeEvent.text),
     }
   });
