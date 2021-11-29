@@ -15,7 +15,7 @@ Component that renders a navigation drawer which can be opened and closed via ge
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
 
 ```bash npm2yarn
-npm install @react-navigation/drawer
+npm install @react-navigation/drawer@^5.x
 ```
 
 ## API Definition
@@ -372,7 +372,9 @@ Whether you can use gestures to open or close the drawer. Setting this to `false
 
 #### `header`
 
-Function that returns a React Element to display as a header. It accepts an object containing the following properties as the argument:
+Custom header to use instead of the default header.
+
+This accepts a function that returns a React Element to display as a header. The function receives an object containing the following properties as the argument:
 
 - `layout` - Dimensions of the screen
 - `scene` - This contains 2 properties:

@@ -39,7 +39,7 @@ navigation.dispatch({
     user: 'jane',
   }),
   source: route.key,
-  target: navigation.dangerouslyGetState().key,
+  target: navigation.getState().key,
 });
 ```
 

@@ -14,10 +14,26 @@ This wraps [`react-native-tab-view`](https://github.com/react-native-community/r
   </video>
 </div>
 
+## Installation
+
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/material-top-tabs):
 
 ```bash npm2yarn
-npm install @react-navigation/material-top-tabs@next react-native-tab-view react-native-pager-view
+npm install @react-navigation/material-top-tabs react-native-tab-view
+```
+
+You also need to install [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view).
+
+If you have a Expo managed project, in your project directory, run:
+
+```sh
+expo install react-native-pager-view
+```
+
+If you have a bare React Native project, in your project directory, run:
+
+```bash npm2yarn
+npm install react-native-pager-view
 ```
 
 ## API Definition
@@ -71,24 +87,6 @@ It supports the following values:
 
 Position of the tab bar in the tab view. Possible values are `'top'` and `'bottom'`. Defaults to `'top'`.
 
-#### `lazy`
-
-Boolean indicating whether to lazily render the scenes. When this is set to `true`, screens will be rendered as they come into the viewport. By default all scenes are rendered to provide a smoother swipe experience. But you might want to defer the rendering of screens out of the viewport until the user sees them. To enable lazy rendering, set `lazy` to `true`.
-
-When you enable `lazy`, the lazy loaded screens will usually take some time to render when they come into the viewport. You can use the `lazyPlaceholder` prop to customize what the user sees during this short period.
-
-#### `lazyPreloadDistance`
-
-When `lazy` is enabled, you can specify how many adjacent routes should be preloaded in advance with this prop. This value defaults to `0` which means lazy pages are loaded as they come into the viewport.
-
-#### `lazyPlaceholder`
-
-Function that returns a React element to render for routes that haven't been rendered yet. Receives an object containing the route as the argument. The `lazy` prop also needs to be enabled.
-
-This view is usually only shown for a split second. Keep it lightweight.
-
-By default, this renders `null`.
-
 #### `keyboardDismissMode`
 
 String indicating whether the keyboard gets dismissed in response to a drag gesture. Possible values are:
@@ -96,11 +94,6 @@ String indicating whether the keyboard gets dismissed in response to a drag gest
 - `'auto'` (default): the keyboard is dismissed when the index changes.
 - `'on-drag'`: the keyboard is dismissed when a drag begins.
 - `'none'`: drags do not dismiss the keyboard.
-
-#### `swipeEnabled`
-
-Boolean indicating whether to enable swipe gestures. Swipe gestures are enabled by default. Passing `false` will disable swipe gestures, but the user can still switch tabs by pressing the tab bar.
-
 
 #### `initialLayout`
 
@@ -151,7 +144,8 @@ function MyTabBar({ state, descriptors, navigation, position }) {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name);
+            // The `merge: true` option makes sure that the params inside the tab screen are preserved
+            navigation.navigate({ name: route.name, merge: true });
           }
         };
 
@@ -213,24 +207,9 @@ function MyTabBar({ navigation }) {
 }
 ```
 
-#### `tabBarOptions`
+### Options
 
-An object containing the props for the tab bar component. It can contain the following properties:
-
-- `activeTintColor` - Label and icon color of the active tab.
-- `inactiveTintColor` - Label and icon color of the inactive tab.
-- `showIcon` - Whether to show icon for tab, default is false.
-- `showLabel` - Whether to show label for tab, default is true.
-- `pressColor` - Color for material ripple (Android >= 5.0 only).
-- `pressOpacity` - Opacity for pressed tab (iOS and Android < 5.0 only).
-- `scrollEnabled` - Whether to enable scrollable tabs.
-- `tabStyle` - Style object for the tab.
-- `indicatorStyle` - Style object for the tab indicator (line at the bottom of the tab).
-- `labelStyle` - Style object for the tab label. Specifying a color here will override the color specified in `activeTintColor` and `inactiveTintColor` for the label.
-- `iconStyle` - Style object for the tab icon.
-- `style` - Style object for the tab bar.
-- `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings, default is true.
-- `renderIndicator` - Function which takes an object with the current route and returns a custom React Element to be used as a tab indicator.
+The following [options](screen-options.md) can be used to configure the screens in the navigator:
 
 Example:
 
@@ -238,39 +217,131 @@ Example:
 
 ```js
 <Tab.Navigator
-  tabBarOptions={{
-    labelStyle: { fontSize: 12 },
-    tabStyle: { width: 100 },
-    style: { backgroundColor: 'powderblue' },
+  screenOptions={{
+    tabBarLabelStyle: { fontSize: 12 },
+    tabBarItemStyle: { width: 100 },
+    tabBarStyle: { backgroundColor: 'powderblue' },
   }}
 >
   {/* ... */}
 </Tab.Navigator>
 ```
 
-### Options
-
-The following [options](screen-options.md) can be used to configure the screens in the navigator:
-
 #### `title`
 
 Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`.
 
-#### `tabBarIcon`
-
-Function that given `{ focused: boolean, color: string }` returns a React.Node, to display in the tab bar.
-
 #### `tabBarLabel`
 
-Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
+Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see [`tabBarShowLabel`](#tabbarshowlabel) option.
 
 #### `tabBarAccessibilityLabel`
 
 Accessibility label for the tab button. This is read by the screen reader when the user taps the tab. It's recommended to set this if you don't have a label for the tab.
 
+#### `tabBarAllowFontScaling`
+
+Whether label font should scale to respect Text Size accessibility settings.
+
+#### `tabBarShowLabel`
+
+Whether the tab label should be visible. Defaults to `true`.
+
+#### `tabBarIcon`
+
+Function that given `{ focused: boolean, color: string }` returns a React.Node, to display in the tab bar.
+
+#### `tabBarShowIcon`
+
+Whether the tab icon should be visible. Defaults to `false`.
+
+#### `tabBarBadge`
+
+Function that returns a React element to use as a badge for the tab.
+
+#### `tabBarIndicator`
+
+Function that returns a React element as the tab bar indicator.
+
+#### `tabBarIndicatorStyle`
+
+Style object for the tab bar indicator.
+
+#### `tabBarIndicatorContainerStyle`
+
+Style object for the view containing the tab bar indicator.
+
 #### `tabBarTestID`
 
 ID to locate this tab button in tests.
+
+#### `tabBarActiveTintColor`
+
+Color for the icon and label in the active tab.
+
+#### `tabBarInactiveTintColor`
+
+Color for the icon and label in the inactive tabs.
+
+#### `tabBarPressColor`
+
+Color for material ripple (Android >= 5.0 only).
+
+#### `tabBarPressOpacity`
+
+Opacity for pressed tab (iOS and Android < 5.0 only).
+
+#### `tabBarBounces`
+
+Boolean indicating whether the tab bar bounces when overscrolling.
+
+#### `tabBarScrollEnabled`
+
+Boolean indicating whether to make the tab bar scrollable.
+
+If you set this to `true`, you should also specify a width in `tabBarItemStyle` to improve the performance of initial render.
+
+#### `tabBarIconStyle`
+
+Style object for the tab icon container.
+
+#### `tabBarLabelStyle`
+
+Style object for the tab label.
+
+#### `tabBarItemStyle`
+
+Style object for the individual tab items.
+
+#### `tabBarContentContainerStyle`
+
+Style object for the view containing the tab items.
+
+#### `tabBarStyle`
+
+Style object for the the tab bar.
+
+#### `swipeEnabled`
+
+Boolean indicating whether to enable swipe gestures. Swipe gestures are enabled by default. Passing `false` will disable swipe gestures, but the user can still switch tabs by pressing the tab bar.
+
+#### `lazy`
+
+Whether this screen should be lazily rendered. When this is set to `true`, the screen will be rendered as it comes into the viewport. By default all screens are rendered to provide a smoother swipe experience. But you might want to defer the rendering of screens out of the viewport until the user sees them. To enable lazy rendering for this screen, set `lazy` to `true`.
+
+When you enable `lazy`, the lazy loaded screens will usually take some time to render when they come into the viewport. You can use the `lazyPlaceholder` prop to customize what the user sees during this short period.
+
+#### `lazyPreloadDistance`
+
+When `lazy` is enabled, you can specify how many adjacent screens should be preloaded in advance with this prop. This value defaults to `0` which means lazy pages are loaded as they come into the viewport.
+
+#### `lazyPlaceholder`
+
+Function that returns a React element to render if this screen hasn't been rendered yet. The `lazy` option also needs to be enabled for this to work.
+
+This view is usually only shown for a split second. Keep it lightweight.
+
+By default, this renders `null`.
 
 ### Events
 
@@ -349,10 +420,10 @@ function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Feed"
-      tabBarOptions={{
-        activeTintColor: '#e91e63',
-        labelStyle: { fontSize: 12 },
-        style: { backgroundColor: 'powderblue' },
+      screenOptions={{
+        tabBarActiveTintColor: '#e91e63',
+        tabBarLabelStyle: { fontSize: 12 },
+        tabBarStyle: { backgroundColor: 'powderblue' },
       }}
     >
       <Tab.Screen

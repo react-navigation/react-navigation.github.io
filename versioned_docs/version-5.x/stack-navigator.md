@@ -17,7 +17,7 @@ By default the stack navigator is configured to have the familiar iOS and Androi
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/stack):
 
 ```bash npm2yarn
-npm install @react-navigation/stack
+npm install @react-navigation/stack@^5.x
 ```
 
 ## API Definition
@@ -92,7 +92,9 @@ String that can be used as a fallback for `headerTitle`.
 
 
 
-Function that returns a React Element to display as a header. It accepts an object containing the following properties as the argument:
+Custom header to use instead of the default header.
+
+This accepts a function that returns a React Element to display as a header. The function receives an object containing the following properties as the argument:
 
 - `mode` - Mode of the header - `float` or `screen`
 - `layout` - Dimensions of the screen
@@ -220,7 +222,7 @@ Function which returns a React Element to display on the right side of the heade
 
 #### `headerLeft`
 
-Function which returns a React Element to display on the left side of the header. When a function is used, it receives a number of arguments when rendered (`onPress`, `label`, `labelStyle` and more - check [types.tsx](https://github.com/react-navigation/react-navigation/blob/main/packages/stack/src/types.tsx#L373-L441) for the complete list).
+Function which returns a React Element to display on the left side of the header. When a function is used, it receives a number of arguments when rendered (`onPress`, `label`, `labelStyle` and more - check [types.tsx](https://github.com/react-navigation/react-navigation/blob/5.x/packages/stack/src/types.tsx#L377-L445) for the complete list).
 
 By default, `HeaderBackButton` component is used. You can implement it and use it to override the back button press, for example:
 
@@ -948,7 +950,7 @@ import { TransitionPresets } from '@react-navigation/stack';
     cardOverlayEnabled: true,
     headerStatusBarHeight:
       navigation
-        .dangerouslyGetState()
+        .getState()
         .routes.findIndex((r) => r.key === route.key) > 0
         ? 0
         : undefined,

@@ -18,7 +18,16 @@ function DocPage(props) {
   });
 
   React.useEffect(() => {
+
     initializeSnackObservers();
+    //note: @eriveltonelias
+    // currently on docusaurus v2.0.0-beta.7 when the page loads on the first time
+    // the anchor links is not working as expected.
+    const hashId = window.location.hash;
+    const element = document.getElementById(hashId.split('#').join(''));
+    if (element) {
+      element.scrollIntoView();
+    }
 
     return () => {
       removeSnackObservers();

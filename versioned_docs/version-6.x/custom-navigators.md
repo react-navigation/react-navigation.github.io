@@ -189,8 +189,8 @@ import {
   createNavigatorFactory,
   DefaultNavigatorOptions,
   ParamListBase,
+  CommonActions,
   TabActionHelpers,
-  TabActions,
   TabNavigationState,
   TabRouter,
   TabRouterOptions,
@@ -220,7 +220,12 @@ type TabNavigationEventMap = {
 };
 
 // The props accepted by the component is a combination of 3 things
-type Props = DefaultNavigatorOptions<TabNavigationOptions> &
+type Props = DefaultNavigatorOptions<
+  ParamListBase,
+  TabNavigationState<ParamListBase>,
+  TabNavigationOptions,
+  TabNavigationEventMap
+> &
   TabRouterOptions &
   TabNavigationConfig;
 
@@ -262,7 +267,7 @@ function TabNavigator({
 
               if (!event.defaultPrevented) {
                 navigation.dispatch({
-                  ...TabActions.jumpTo(route.name),
+                  ...CommonActions.navigate({ name: route.name, merge: true }),
                   target: state.key,
                 });
               }

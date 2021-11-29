@@ -12,11 +12,7 @@ Common pattern in navigation is to use drawer from left (sometimes right) side f
   </video>
 </div>
 
-Before continuing, first install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
-
-```bash npm2yarn
-npm install @react-navigation/drawer@next
-```
+Before continuing, first install and configure [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer) and its dependencies following the [installation instructions](drawer-navigator.md#installation).
 
 ## Minimal example of drawer-based navigation
 
@@ -96,9 +92,9 @@ navigation.dispatch(DrawerActions.toggleDrawer());
 If you would like to determine if drawer is open or closed, you can do the following:
 
 ```js
-import { useIsDrawerOpen } from '@react-navigation/drawer';
+import { useDrawerStatus } from '@react-navigation/drawer';
 
 // ...
 
-const isDrawerOpen = useIsDrawerOpen();
+const isDrawerOpen = useDrawerStatus() === 'open';
 ```

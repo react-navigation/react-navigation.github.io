@@ -496,7 +496,7 @@ See [`pop` action docs](stack-actions.md#pop) for more details.
 The `dismiss` method has been removed. You can achieve similar effect with following:
 
 ```js
-navigation.dangerouslyGetParent().pop();
+navigation.getState().pop();
 ```
 
 ### `jumpTo`

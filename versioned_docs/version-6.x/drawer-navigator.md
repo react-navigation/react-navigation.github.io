@@ -12,11 +12,37 @@ Component that renders a navigation drawer which can be opened and closed via ge
   </video>
 </div>
 
+## Installation
+
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
 
 ```bash npm2yarn
-npm install @react-navigation/drawer@next
+npm install @react-navigation/drawer
 ```
+
+You also need to install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
+
+If you have a Expo managed project, in your project directory, run:
+
+```sh
+expo install react-native-gesture-handler react-native-reanimated
+```
+
+If you have a bare React Native project, in your project directory, run:
+
+```bash npm2yarn
+npm install react-native-gesture-handler react-native-reanimated
+```
+
+To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+
+```js
+import 'react-native-gesture-handler';
+```
+
+> Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+
+The Drawer Navigator supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
 
 ## API Definition
 
@@ -67,7 +93,7 @@ It supports the following values:
 
 #### `defaultStatus`
 
-The default status of  the drawer - whether the drawer should stay `open` or `closed` by default.
+The default status of the drawer - whether the drawer should stay `open` or `closed` by default.
 
 When this is set to `open`, the drawer will be open from the initial render. It can be closed normally using gestures or programmatically. However, when going back, drawer will re-open if it was closed. This is essentially the opposite of the default behavior of the drawer where it starts `closed`, and back button closes an open drawer.
 
@@ -77,7 +103,7 @@ Boolean used to indicate whether inactive screens should be detached from the vi
 
 Whether the screens should render the first time they are accessed. Defaults to `true`. Set it to `false` if you want to render all screens on initial render.
 
-#### useLegacyImplementation
+#### `useLegacyImplementation`
 
 Whether to use the legacy implementation based on Reanimated 1. The new implementation based on Reanimated 2 will perform better, but you need additional configuration and need to use Hermes with Flipper to debug.
 
@@ -201,7 +227,7 @@ To use the custom component, we need to pass it in the `drawerContent` prop:
 
 ### Options
 
-The following [options](screen-options.md) can be used to configure the screens in the navigator:
+The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Drawer.navigator` or `options` prop of `Drawer.Screen`.
 
 #### `title`
 
@@ -219,35 +245,35 @@ String or a function that given `{ focused: boolean, color: string }` returns a 
 
 Function, that given `{ focused: boolean, color: string, size: number }` returns a React.Node to display in drawer sidebar.
 
-##### `drawerActiveTintColor`
+#### `drawerActiveTintColor`
 
 Color for the icon and label in the active item in the drawer.
 
-##### `drawerActiveBackgroundColor`
+#### `drawerActiveBackgroundColor`
 
 Background color for the active item in the drawer.
 
-##### `drawerInactiveTintColor`
+#### `drawerInactiveTintColor`
 
 Color for the icon and label in the inactive items in the drawer.
 
-##### `drawerInactiveBackgroundColor`
+#### `drawerInactiveBackgroundColor`
 
 Background color for the inactive items in the drawer.
 
-##### `drawerItemStyle`
+#### `drawerItemStyle`
 
 Style object for the single item, which can contain an icon and/or a label.
 
-##### `drawerLabelStyle`
+#### `drawerLabelStyle`
 
 Style object to apply to the `Text` style inside content section which renders a label.
 
-##### `drawerContentContainerStyle`
+#### `drawerContentContainerStyle`
 
 Style object for the content section inside the `ScrollView`.
 
-##### `drawerContentStyle`
+#### `drawerContentStyle`
 
 Style object for the wrapper view.
 
@@ -398,11 +424,15 @@ Normally, we don't recommend enabling this prop as users don't expect their navi
 
 ### Header related options
 
-You can find the list of header related options [here](elements.md#header). In addition to those, the following options are also supported in drawer:
+You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Drawer.navigator` or `options` prop of `Drawer.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
+
+In addition to those, the following options are also supported in drawer:
 
 #### `header`
 
-Function that returns a React Element to display as a header. It accepts an object containing the following properties as the argument:
+Custom header to use instead of the default header.
+
+This accepts a function that returns a React Element to display as a header. The function receives an object containing the following properties as the argument:
 
 - `navigation` - The navigation object for the current screen.
 - `route` - The route object for the current screen.
@@ -445,39 +475,7 @@ Whether to show or hide the header for the screen. The header is shown by defaul
 
 ### Events
 
-The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
-
-#### `drawerOpen`
-
-This event is fired when the drawer opens.
-
-Example:
-
-```js
-React.useEffect(() => {
-  const unsubscribe = navigation.addListener('drawerOpen', (e) => {
-    // Do something
-  });
-
-  return unsubscribe;
-}, [navigation]);
-```
-
-#### `drawerClose`
-
-This event is fired when the drawer closes.
-
-Example:
-
-```js
-React.useEffect(() => {
-  const unsubscribe = navigation.addListener('drawerClose', (e) => {
-    // Do something
-  });
-
-  return unsubscribe;
-}, [navigation]);
-```
+The drawer navigator doesn't emit any [events](navigation-events.md).
 
 ### Helpers
 
@@ -560,14 +558,47 @@ function MyDrawer() {
 
 ## Checking if the drawer is open
 
-You can check if the drawer is open by using the `useIsDrawerOpen` hook.
+You can check if the drawer is open by using the `useDrawerStatus` hook.
 
 ```js
-import { useIsDrawerOpen } from '@react-navigation/drawer';
+import { useDrawerStatus } from '@react-navigation/drawer';
 
 // ...
 
-const isDrawerOpen = useIsDrawerOpen();
+const isDrawerOpen = useDrawerStatus() === 'open';
+```
+
+If you can't use the hook, you can also use the `getDrawerStatusFromState` helper:
+
+```js
+import { getDrawerStatusFromState } from '@react-navigation/drawer';
+
+// ...
+
+const isDrawerOpen = getDrawerStatusFromState(navigation.getState()) === 'open';
+```
+
+For class components, you can listen tp the `state` event to check if drawer was opened or closed:
+
+```js
+class Profile extends React.Component {
+  componentDidMount() {
+    this._unsubscribe = navigation.addListener('state', () => {
+      const isDrawerOpen =
+        getDrawerStatusFromState(navigation.getState()) === 'open';
+
+      // do something
+    });
+  }
+
+  componentWillUnmount() {
+    this._unsubscribe();
+  }
+
+  render() {
+    // Content of the component
+  }
+}
 ```
 
 ## Nesting drawer navigators inside others

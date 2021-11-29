@@ -325,16 +325,20 @@ Then use it like:
 navigation.dispatch(insertBeforeLast('Home'));
 ```
 
-### `dangerouslyGetParent`
+### `getParent`
 
-This method returns the navigation prop from the parent navigator that the current navigator is nested in. For example, if you have a stack navigator and a tab navigator nested inside the stack, then you can use `dangerouslyGetParent` inside a screen of the tab navigator to get the navigation prop passed from the stack navigator.
+This method returns the navigation prop from the parent navigator that the current navigator is nested in. For example, if you have a stack navigator and a tab navigator nested inside the stack, then you can use `getParent` inside a screen of the tab navigator to get the navigation prop passed from the stack navigator.
 
-This method will return `undefined` if there is no parent navigator. Be sure to always check for `undefined` when using this method.
+It will return `undefined` if there is no parent navigator. Be sure to always check for `undefined` when using this method.
 
-### `dangerouslyGetState`
+This is only available in latest versions of `@react-navigation/native`. Earlier, it was named `dangerouslyGetParent`, which is now deprecated.
+
+### `getState`
 
 > Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
 
 This method returns the state object of the navigator which contains the screen. Getting the navigator state could be useful in very rare situations. You most likely don't need to use this method. If you do, make sure you have a good reason.
+
+This is only available in latest versions of `@react-navigation/native`. Earlier, it was named `dangerouslyGetState`, which is now deprecated.
 
 If you need the state for rendering content, you should use [`useNavigationState`](use-navigation-state.md) instead of this method.

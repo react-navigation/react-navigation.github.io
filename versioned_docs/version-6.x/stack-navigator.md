@@ -6,7 +6,7 @@ sidebar_label: Stack
 
 Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
-By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
+By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, use OS default animation on Android. But the [animations can be customized](#animation-related-options) to match your needs.
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
@@ -14,10 +14,50 @@ By default the stack navigator is configured to have the familiar iOS and Androi
   </video>
 </div>
 
+One thing to keep in mind is that while `@react-navigation/stack` is extremely customizable, it's implemented in JavaScript. While it runs animations and gestures using natively, the performance may not be as fast as a native implementation. This may not be an issue for a lot of apps, but if you're experiencing performance issues during navigation, consider using [`@react-navigation/native-stack`](native-stack-navigator.md) instead - which uses native navigation primitives.
+
+## Installation
+
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/stack):
 
 ```bash npm2yarn
-npm install @react-navigation/stack@next
+npm install @react-navigation/stack
+```
+
+You also need to install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/).
+
+If you have a Expo managed project, in your project directory, run:
+
+```sh
+expo install react-native-gesture-handler
+```
+
+If you have a bare React Native project, in your project directory, run:
+
+```bash npm2yarn
+npm install react-native-gesture-handler
+```
+
+To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+
+```js
+import 'react-native-gesture-handler';
+```
+
+> Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+
+Optionally, you can also install [`@react-native-masked-view/masked-view`](https://github.com/react-native-masked-view/masked-view). This is needed if you want to use UIKit style animations for the header ([`HeaderStyleInterpolators.forUIKit`](#headerstyleinterpolators)).
+
+If you have a Expo managed project, in your project directory, run:
+
+```sh
+expo install @react-native-masked-view/masked-view
+```
+
+If you have a bare React Native project, in your project directory, run:
+
+```bash npm2yarn
+npm install @react-native-masked-view/masked-view
 ```
 
 ## API Definition
@@ -67,7 +107,7 @@ If `false`, the keyboard will NOT automatically dismiss when navigating to a new
 
 ### Options
 
-The following [options](screen-options.md) can be used to configure the screens in the navigator:
+The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Stack.navigator` or `options` prop of `Stack.Screen`.
 
 #### `title`
 
@@ -172,11 +212,15 @@ Boolean used to indicate whether to detach the previous screen from the view hie
 
 ### Header related options
 
-You can find the list of header related options [here](elements.md#header). In addition to those, the following options are also supported in stack:
+You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Stack.navigator` or `options` prop of `Stack.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
+
+In addition to those, the following options are also supported in stack:
 
 #### `header`
 
-Function that returns a React Element to display as a header. It accepts an object containing the following properties as the argument:
+Custom header to use instead of the default header.
+
+This accepts a function that returns a React Element to display as a header. The function receives an object containing the following properties as the argument:
 
 - `navigation` - The navigation object for the current screen.
 - `route` - The route object for the current screen.
@@ -234,8 +278,6 @@ By default, there is one floating header which renders headers for multiple scre
 
 If you specify a custom header, React Navigation will change it to `screen` automatically so that the header animated along with the screen instead. This means that you don't have to implement animations to animate it separately.
 
-Setting the `headerMode` prop to `screen` makes the header part of the screen, so you don't have to implement animations to animate it separately.
-
 But you might want to keep the floating header to have a different transition animation between headers. To do that, you'll need to specify `headerMode: 'float'` in the options, and then interpolate on the `progress.current` and `progress.next` props in your custom header. For example, following will cross-fade the header:
 
 ```js
@@ -253,8 +295,8 @@ return (
 
 Specifies how the header should be rendered:
 
-- `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
-- `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
+- `float` - Render a single header that stays at the top and animates as screens are changed. This is default on iOS.
+- `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is default on other platforms.
 
 #### `headerShown`
 
@@ -296,6 +338,10 @@ The navigator can [emit events](navigation-events.md) on certain actions. Suppor
 
 This event is fired when the transition animation starts for the current screen.
 
+Event data:
+
+- `e.data.closing` - Boolean indicating whether the screen is being opened or closed.
+
 Example:
 
 ```js
@@ -311,6 +357,10 @@ React.useEffect(() => {
 #### `transitionEnd`
 
 This event is fired when the transition animation ends for the current screen.
+
+Event data:
+
+- `e.data.closing` - Boolean indicating whether the screen was opened or closed.
 
 Example:
 

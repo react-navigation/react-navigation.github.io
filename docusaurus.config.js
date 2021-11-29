@@ -14,7 +14,6 @@ module.exports = {
     '/js/code-block-buttons.js',
   ],
   themeConfig: {
-    sidebarCollapsible: false,
     googleAnalytics: {
       trackingID: 'UA-10128745-16',
     },
@@ -95,7 +94,7 @@ module.exports = {
               href: 'https://react-navigation.canny.io/feature-requests',
             },
             {
-              label: 'Report a bug on Github',
+              label: 'Report a bug on GitHub',
               href:
                 'https://github.com/react-navigation/react-navigation/issues/new/choose',
             },
@@ -152,13 +151,9 @@ module.exports = {
             'https://github.com/react-navigation/react-navigation.github.io/edit/main/',
           remarkPlugins: [require('./src/plugins/remark-npm2yarn')],
           includeCurrentVersion: false,
-          lastVersion: '5.x',
-          versions: {
-            '6.x': {
-              label: '6.x (next)',
-            },
-          },
+          lastVersion: '6.x'
         },
+        sidebarCollapsible: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },

@@ -12,10 +12,12 @@ A simple tab bar on the bottom of the screen that lets you switch between differ
   </video>
 </div>
 
+## Installation
+
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/bottom-tabs):
 
 ```bash npm2yarn
-npm install @react-navigation/bottom-tabs@next
+npm install @react-navigation/bottom-tabs
 ```
 
 ## API Definition
@@ -65,10 +67,6 @@ It supports the following values:
 - `history` - return to last visited tab
 - `none` - do not handle back button
 
-#### `lazy`
-
-Defaults to `true`. If `false`, all tabs are rendered immediately. When `true`, tabs are rendered only when they are made active for the first time. Note: tabs are **not** re-rendered upon subsequent visits.
-
 #### `detachInactiveScreens`
 
 Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
@@ -110,7 +108,8 @@ function MyTabBar({ state, descriptors, navigation }) {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name);
+            // The `merge: true` option makes sure that the params inside the tab screen are preserved
+            navigation.navigate({ name: route.name, merge: true });
           }
         };
 
@@ -166,82 +165,105 @@ function MyTabBar({ navigation }) {
 }
 ```
 
-#### `tabBarOptions`
+### Options
 
-An object containing the props for the default tab bar component. If you're using a custom tab bar, these will be passed as props to the tab bar and you can handle them.
+The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Tab.navigator` or `options` prop of `Tab.Screen`.
 
-It can contain the following properties:
+#### `title`
 
-##### `activeTintColor`
+Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`.
 
-Label and icon color of the active tab item.
+#### `tabBarLabel`
 
-##### `inactiveTintColor`
+Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarShowLabel`.
 
-Label and icon color of the inactive tab item.
+#### `tabBarShowLabel`
 
-##### `activeBackgroundColor`
+Whether the tab label should be visible. Defaults to `true`.
 
-Background color of the active tab item.
+#### `tabBarLabelPosition`
 
-##### `inactiveBackgroundColor`
+Whether the label is shown below the icon or beside the icon.
 
-Background color of the inactive tab item.
+- `below-icon`: the label is shown below the icon (typical for iPhones)
+- `beside-icon` the label is shown next to the icon (typical for iPad)
 
-##### `tabStyle`
+By default, the position is chosen automatically based on device width.
 
-Style object for the tab item.
+#### `tabBarLabelStyle`
 
-##### `showLabel`
+Style object for the tab label.
 
-Whether to show label for tab, default is `true`.
+#### `tabBarIcon`
 
-##### `labelStyle`
+Function that given `{ focused: boolean, color: string, size: number }` returns a React.Node, to display in the tab bar.
 
-Style object for the tab label text.
+#### `tabBarIconStyle`
 
-##### `labelPosition`
+Style object for the tab icon.
 
-Whether the label is rendered below the icon or beside the icon. Possible values are:
+#### `tabBarBadge`
 
-- `below-icon`
-- `beside-icon`
+Text to show in a badge on the tab icon. Accepts a `string` or a `number`.
 
-By default, in `vertical` orientation (portrait mode), label is rendered below the icon and in `horizontal` orientation (landscape mode)., it's rendered beside the icon.
+#### `tabBarBadgeStyle`
 
-##### `adaptive`
+Style for the badge on the tab icon. You can specify a background color or text color here.
 
-Should the tab icons and labels alignment change based on screen size? Defaults to `true`. If `false`, tab icons and labels align vertically all the time (`labelPosition: 'below-icon'`). When `true`, tab icons and labels align horizontally on tablets (`labelPosition: 'beside-icon'`).
+#### `tabBarAccessibilityLabel`
 
-##### `allowFontScaling`
+Accessibility label for the tab button. This is read by the screen reader when the user taps the tab. It's recommended to set this if you don't have a label for the tab.
 
-Whether label font should scale to respect Text Size accessibility settings, default is true.
+#### `tabBarTestID`
 
-##### `keyboardHidesTabBar`
+ID to locate this tab button in tests.
+
+#### `tabBarButton`
+
+Function which returns a React element to render as the tab bar button. It wraps the icon and label. Renders `Pressable` by default.
+
+You can specify a custom implementation here:
+
+```js
+tabBarButton: props => <TouchableOpacity {...props} />
+```
+
+#### `tabBarActiveTintColor`
+
+Color for the icon and label in the active tab.
+
+#### `tabBarInactiveTintColor`
+
+Color for the icon and label in the inactive tabs.
+
+#### `tabBarActiveBackgroundColor`
+
+Background color for the active tab.
+
+#### `tabBarInactiveBackgroundColor`
+
+Background color for the inactive tabs.
+
+#### `tabBarHideOnKeyboard`
 
 Whether the tab bar is hidden when the keyboard opens. Defaults to `false`.
 
-##### `safeAreaInsets`
+#### `tabBarItemStyle`
 
-Safe area insets for the screen. This is used to avoid elements like notch and system navigation bar. By default, the device's safe area insets are automatically detected. You can override the behavior with this option.
+Style object for the tab item container.
 
-Takes an object containing following optional properties:
-
-- `top` - _number_ - The value of the top inset, e.g. area containing the status bar and notch.
-- `right` - _number_ - The value of the left inset.
-- `bottom` - _number_ - The value of the bottom inset, e.g. area navigation bar on bottom.
-- `left`. - _number_ - The value of the right inset.
-
-##### `style`
+#### `tabBarStyle`
 
 Style object for the tab bar. You can configure styles such as background color here.
 
 To show your screen under the tab bar, you can set the `position` style to absolute:
 
 ```js
-style: {
-  position: 'absolute';
-}
+<Tab.Navigator
+  screenOptions={{
+    tabBarStyle: { position: 'absolute' },
+  }}
+>
 ```
 
 You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar. React Navigation won't do it automatically.
@@ -270,41 +292,30 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 const tabBarHeight = useBottomTabBarHeight();
 ```
 
-### Options
+#### `tabBarBackground`
 
-The following [options](screen-options.md) can be used to configure the screens in the navigator:
+Function which returns a React Element to use as background for the tab bar. You could render an image, a gradient, blur view etc.:
 
-#### `title`
+```js
+import { BlurView } from 'expo-blur';
 
-Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`.
+// ...
 
-#### `tabBarIcon`
+<Tab.Navigator
+  screenOptions={{
+    tabBarStyle: { position: 'absolute' },
+    tabBarBackground: () => (
+      <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />
+    ),
+  }}
+>
+```
 
-Function that given `{ focused: boolean, color: string, size: number }` returns a React.Node, to display in the tab bar.
+When using `BlurView`, make sure to set `position: 'absolute'` in `tabBarStyle` as well. You'd also need to use `useBottomTabBarHeight()` to add a bottom padding to your content.
 
-#### `tabBarLabel`
+#### `lazy`
 
-Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
-
-#### `tabBarBadge`
-
-Text to show in a badge on the tab icon. Accepts a `string` or a `number`.
-
-#### `tabBarBadgeStyle`
-
-Style for the badge on the tab icon. You can specify a background color or text color here.
-
-#### `tabBarButton`
-
-Function which returns a React element to render as the tab bar button. It wraps the icon and label and implements `onPress`. Renders `TouchableWithoutFeedback` by default. `tabBarButton: props => <TouchableOpacity {...props} />` would use `TouchableOpacity` instead.
-
-#### `tabBarAccessibilityLabel`
-
-Accessibility label for the tab button. This is read by the screen reader when the user taps the tab. It's recommended to set this if you don't have a label for the tab.
-
-#### `tabBarTestID`
-
-ID to locate this tab button in tests.
+Whether this screens should render the first time it's accessed. Defaults to `true`. Set it to `false` if you want to render the screen on initial render.
 
 #### `unmountOnBlur`
 
@@ -314,11 +325,15 @@ Normally, we don't recommend enabling this prop as users don't expect their navi
 
 ### Header related options
 
-You can find the list of header related options [here](elements.md#header). In addition to those, the following options are also supported in bottom tabs:
+You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Tab.navigator` or `options` prop of `Tab.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
+
+In addition to those, the following options are also supported in bottom tabs:
 
 #### `header`
 
-Function that returns a React Element to display as a header. It accepts an object containing the following properties as the argument:
+Custom header to use instead of the default header.
+
+This accepts a function that returns a React Element to display as a header. The function receives an object containing the following properties as the argument:
 
 - `navigation` - The navigation object for the current screen.
 - `route` - The route object for the current screen.
@@ -439,8 +454,8 @@ function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Feed"
-      tabBarOptions={{
-        activeTintColor: '#e91e63',
+      screenOptions={{
+        tabBarActiveTintColor: '#e91e63',
       }}
     >
       <Tab.Screen

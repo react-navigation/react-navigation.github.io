@@ -52,7 +52,6 @@ Hooks are great for stateful logic and code organization. Now we have several ho
 - [`useNavigationState`](/docs/use-navigation-state)
 - [`useFocusEffect`](/docs/use-focus-effect)
 - [`useIsFocused`](/docs/use-is-focused)
-- [`useLinking`](/docs/use-linking)
 - [`useScrollToTop`](/docs/use-scroll-to-top)
 
 ### Update options from component
@@ -158,7 +157,7 @@ This is a big release and, while the basic concepts such as nesting are the same
 
 We recommend starting your new projects with the new version so you can take advantage of the new APIs and the new features.
 
-We have written an [upgrade guide](/docs/upgrading-from-4.x) which will give you an overview of what's changed and how to adapt the old API and concepts to the new API.
+We have written an [upgrade guide](/docs/5.x/upgrading-from-4.x) which will give you an overview of what's changed and how to adapt the old API and concepts to the new API.
 
 ## A note for alpha users
 

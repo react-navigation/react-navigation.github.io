@@ -124,6 +124,19 @@ To fix this you can, once again, apply safe area insets to your content. This wi
 
 ![App in landscape mode with text visible](/assets/iphoneX/05-iphonex-landscape-fixed.png)
 
+## Use the `edges` prop to customize the safe area
+
+In some cases you might need more control over which paddings are applied. For example, you can remove bottom padding by passing `edges` prop to `SafeAreaView`.
+
+```jsx
+<SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+  <Text style={styles.paragraph}>This is top text.</Text>
+  <Text style={styles.paragraph}>This is bottom text.</Text>
+</SafeAreaView>
+```
+
+`edges` takes an array with the values `top`, `bottom`, `left` and `right` which controls which sides the safe area are applied to.
+
 ## Use the hook for more control
 
 In some cases you might need more control over which paddings are applied. For example, you can only apply the top and the bottom padding by changing the `style` object:
@@ -158,5 +171,7 @@ Similarly, you could apply these paddings in `contentContainerStyle` of `FlatLis
 
 ## Summary
 
+- Use `react-native-safe-area-context` instead of `SafeAreaView` from `react-native`
 - Don't wrap your whole app in `SafeAreaView`, instead wrap content inside your screens
-- Use `useSafeAreaInsets` hook for more control over where the insets are applied
+- Use the `edges` prop to apply safe area to specific sides
+- Use the `useSafeAreaInsets` hook for more control over where the insets are applied
