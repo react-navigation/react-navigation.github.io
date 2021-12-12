@@ -14,11 +14,10 @@ This is a simple task when using a stack. You can render the `StatusBar` compone
 
 ```js
 import * as React from 'react';
-import { Text, StatusBar, Button, StyleSheet } from 'react-native';
+import { Text, StatusBar, Button, StyleSheet, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import SafeAreaView from 'react-native-safe-area-view';
 
 function Screen1({ navigation }) {
   return (
