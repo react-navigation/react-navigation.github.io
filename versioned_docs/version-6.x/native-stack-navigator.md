@@ -181,7 +181,7 @@ Supported values:
 - `systemThinMaterialDark`
 - `systemMaterialDark`
 - `systemThickMaterialDark`
-- `systemChromeMaterialDark'`
+- `systemChromeMaterialDark`
 
 Only supported on iOS.
 
