@@ -71,6 +71,8 @@ function StaticCounter({ route }) {
 }
 ```
 
+So our component will look like this:
+
  <samp id="redux-integration-nav-param" />
 
 ```js
