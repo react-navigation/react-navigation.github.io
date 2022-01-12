@@ -6,7 +6,7 @@ sidebar_label: Navigation state
 
 The navigation state is the state where React Navigation stores the navigation structure and history of the app. It's useful to know about the structure of the navigation state if you need to do advanced operations such as [resetting the state](navigation-actions.md#reset), [providing a custom initial state](navigation-container.md#initial-state) etc.
 
-It's a JavaScript object which looks like this:
+For example, an app that is now showing Settings, having navigating to it from Home, might have its navigation state represented by a JavaScript object like this:
 
 ```js
 const state = {
