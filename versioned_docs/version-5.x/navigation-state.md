@@ -73,6 +73,20 @@ It's important to note that even if there's a nested navigator, the `state` prop
 
 Earlier there was a mention of `stale` property in the navigation state. A stale navigation state means that the state object needs to be rehydrated or fixed or fixed up, such as adding missing keys, removing invalid screens etc. before being used. As a user, you don't need to worry about it, React Navigation will fix up any issues in a state object automatically unless `stale` is set to `false`. If you're writing a [custom router](custom-routers.md), the `getRehydratedState` method let's you write custom rehydration logic to fix up state objects.
 
+This also applies to the `index` property: `index` should be the last route in a stack, and if a different value was specified, React Navigation fixes it. For example, if you wanted to reset your app's navigation state to have it display the `Profile` route, and have the `Home` route displayed upon going back, and did the below,
+
+```js
+navigation.reset({
+  index: 0,
+  routes: [
+    { name: 'Home' },
+    { name: 'Profile' }
+  ],
+});
+```
+
+React Navigation would correct `index` to 1, and display the route and perform navigation as intended.
+
 This feature comes handy when doing operations such as [reset](navigation-actions.md#reset), [providing a initial state](navigation-container.md#initial-state) etc., as you can safely omit many properties from the navigation state object and relying on React Navigation to add those properties for you, making your code simpler. For example, you can only provide a `routes` array without any keys and React Navigation will automatically add everything that's needed to make it work:
 
 ```js
