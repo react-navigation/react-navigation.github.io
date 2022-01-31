@@ -391,12 +391,12 @@ How the screen should animate when pushed or popped.
 
 Supported values:
 
-- `default`: use the platform default animation
-- `fade`: fade screen in or out
-- `flip`: flip the screen, requires stackPresentation: "modal" (iOS only)
-- `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
-- `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)
-- `none`: don't animate the screen
+- `"default"`: use the platform default animation
+- `"fade"`: fade screen in or out
+- `"flip"`: flip the screen, requires stackPresentation: "modal" (iOS only)
+- `"slide_from_right"`: slide in the new screen from right (Android only, uses default animation on iOS)
+- `"slide_from_left"`: slide in the new screen from left (Android only, uses default animation on iOS)
+- `"none"`: don't animate the screen
 
 Only supported on Android and iOS.
 
