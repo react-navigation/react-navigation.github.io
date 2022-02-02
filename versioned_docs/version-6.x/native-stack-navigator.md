@@ -372,6 +372,18 @@ Only supported on iOS.
 
 Style object for the scene content.
 
+#### `customAnimationOnGesture`
+
+Whether the gesture to dismiss should use animation provided to `animation` prop. Defaults to `false`.
+
+Only supported on iOS.
+
+#### `fullScreenGestureEnabled`
+
+Whether the gesture to dismiss should work on the whole screen. Using gesture to dismiss with this option results in the same transition animation as `simple_push`. This behavior can be changed by setting `customAnimationOnGesture` prop. Achieving the default iOS animation isn't possible due to platform limitations. Defaults to `false`.
+
+Only supported on iOS.
+
 #### `gestureEnabled`
 
 Whether you can use gestures to dismiss this screen. Defaults to `true`. Only supported on iOS.
@@ -394,6 +406,8 @@ Supported values:
 - `default`: use the platform default animation
 - `fade`: fade screen in or out
 - `flip`: flip the screen, requires stackPresentation: "modal" (iOS only)
+- `simple_push`: use the platform default animation, but without shadow and native header transition (iOS only)
+- `slide_from_bottom`: slide in the new screen from bottom
 - `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
 - `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)
 - `none`: don't animate the screen
