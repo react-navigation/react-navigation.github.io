@@ -475,7 +475,32 @@ Whether to show or hide the header for the screen. The header is shown by defaul
 
 ### Events
 
-The drawer navigator doesn't emit any [events](navigation-events.md).
+The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
+
+#### `drawerItemPress`
+
+This event is fired when the user presses the button for the screen in the drawer. By default a drawer item press does several things:
+
+- If the screen is not focused, drawer item press will focus that screen
+- If the screen is already focused, then it'll close the drawer
+
+To prevent the default behavior, you can call `event.preventDefault`:
+
+```js
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('drawerItemPress', (e) => {
+    // Prevent default behavior
+    e.preventDefault();
+
+    // Do something manually
+    // ...
+  });
+
+  return unsubscribe;
+}, [navigation]);
+```
+
+If you have custom drawer content, make sure to emit this event.
 
 ### Helpers
 
