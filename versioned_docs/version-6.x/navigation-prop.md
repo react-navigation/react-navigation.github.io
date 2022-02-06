@@ -323,6 +323,18 @@ Then use it like:
 navigation.dispatch(insertBeforeLast('Home'));
 ```
 
+### `canGoBack`
+
+This method returns a boolean indicating whether there's any navigation history available in the current navigator, or in any parent navigators. You can use this to check if you can call `navigation.goBack()`:
+
+```js
+if (navigation.canGoBack()) {
+  navigation.goBack();
+}
+```
+
+Don't use this method for rendering content as this will not trigger a re-render. This is only intended for use inside callbacks, event listeners etc.
+
 ### `getParent`
 
 This method returns the navigation prop from the parent navigator that the current navigator is nested in. For example, if you have a stack navigator and a tab navigator nested inside the stack, then you can use `getParent` inside a screen of the tab navigator to get the navigation prop passed from the stack navigator.
