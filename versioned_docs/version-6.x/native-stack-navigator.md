@@ -63,6 +63,14 @@ The following [options](screen-options.md) can be used to configure the screens 
 
 String that can be used as a fallback for `headerTitle`.
 
+#### `headerBackButtonMenuEnabled`
+
+Boolean indicating whether to show the menu on longPress of iOS >= 14 back button. Defaults to `true`.
+
+Requires `react-native-screens` version >=3.3.0.
+
+Only supported on iOS.
+
 #### `headerBackVisible`
 
 Whether the back button is visible in the header. You can use it to show a back button alongside `headerLeft` if you have specified it.
@@ -111,7 +119,7 @@ Only supported on iOS.
 
 Whether to enable header with large title which collapses to regular header on scroll.
 
-For large title to collapse on scroll, the content of the screen should be wrapped in a scrollable view such as `ScrollView` or `FlatList`. If the scrollable area doesn't fill the screen, the large title won't collapse on scroll.
+For large title to collapse on scroll, the content of the screen should be wrapped in a scrollable view such as `ScrollView` or `FlatList`. If the scrollable area doesn't fill the screen, the large title won't collapse on scroll. You also need to specify `contentInsetAdjustmentBehavior="automatic"` in your `ScrollView`, `FlatList` etc.
 
 Only supported on iOS.
 
@@ -227,9 +235,9 @@ Style object for header title. Supported properties:
 
 #### `headerSearchBarOptions`
 
-Options to render a native search bar on iOS. Search bars are rarely static so normally it is controlled by passing an object to `headerSearchBarOptions` navigation option in the component's body.
+Options to render a native search bar on iOS. Search bars are rarely static so normally it is controlled by passing an object to `headerSearchBarOptions` navigation option in the component's body. You also need to specify `contentInsetAdjustmentBehavior="automatic"` in your `ScrollView`, `FlatList` etc. If you don't have a `ScrollView`, specify `headerTransparent: false`.
 
-Search bar is only supported on iOS.
+Only supported on iOS and Android.
 
 Example:
 
@@ -257,29 +265,84 @@ Possible values:
 
 Defaults to `sentences`.
 
+##### `autoFocus`
+
+Whether to automatically focus search bar when it's shown. Defaults to `false`.
+
+Only supported on Android.
+
 ##### `barTintColor`
 
-The search field background color.
+The search field background color. By default bar tint color is translucent.
 
-By default bar tint color is translucent.
+Only supported on iOS.
+
+##### `cancelButtonText`
+
+The text to be used instead of default `Cancel` button text.
+
+Only supported on iOS.
+
+##### `disableBackButtonOverride`
+
+Whether the back button should close search bar's text input or not. Defaults to `false`.
+
+Only supported on Android.
 
 ##### `hideNavigationBar`
 
-Boolean indicating whether to hide the navigation bar during searching.
+Boolean indicating whether to hide the navigation bar during searching. Defaults to `true`.
 
-Defaults to `true`.
+Only supported on iOS.
 
 ##### `hideWhenScrolling`
 
-Boolean indicating whether to hide the search bar when scrolling.
+Boolean indicating whether to hide the search bar when scrolling. Defaults to `true`.
 
-Defaults to `true`.
+Only supported on iOS.
+
+##### `inputType`
+
+The type of the input. Defaults to `"text"`.
+
+Supported values:
+
+- `"text"`
+- `"phone"`
+- `"number"`
+- `"email"`
+
+Only supported on Android.
 
 ##### `obscureBackground`
 
-Boolean indicating whether to obscure the underlying content with semi-transparent overlay.
+Boolean indicating whether to obscure the underlying content with semi-transparent overlay. Defaults to `true`.
 
-Defaults to `true`.
+##### `placeholder`
+
+Text displayed when search field is empty.
+
+##### `textColor`
+
+The color of the text in the search field.
+
+##### `hintTextColor`
+
+The color of the hint text in the search field.
+
+Only supported on Android.
+
+##### `headerIconColor`
+
+The color of the search and close icons shown in the header
+
+Only supported on Android.
+
+##### `shouldShowHintSearchIcon`
+
+Whether to show the search hint icon when search bar is focused. Defaults to `true`.
+
+Only supported on Android.
 
 ##### `onBlur`
 
@@ -409,8 +472,9 @@ Supported values:
 
 - `default`: use the platform default animation
 - `fade`: fade screen in or out
+- `fade_from_bottom`: fade the new screen from bottom
 - `flip`: flip the screen, requires stackPresentation: "modal" (iOS only)
-- `simple_push`: use the platform default animation, but without shadow and native header transition (iOS only)
+- `simple_push`: default animation, but without shadow and native header transition (iOS only, uses default animation on Android)
 - `slide_from_bottom`: slide in the new screen from bottom
 - `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
 - `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)

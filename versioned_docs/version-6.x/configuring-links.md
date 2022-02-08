@@ -41,6 +41,30 @@ When you specify the `linking` prop, React Navigation will handle incoming links
 
 You can also pass a [`fallback`](navigation-container.md#fallback) prop to `NavigationContainer` which controls what's displayed when React Navigation is trying to resolve the initial deep link URL.
 
+## Prefixes
+
+The `prefixes` option can be used to specify custom schemes (e.g. `mychat://`) as well as host & domain names (e.g. `https://mychat.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
+
+For example:
+
+```js
+const linking = {
+  prefixes: ['mychat://', 'https://mychat.com'],
+};
+```
+
+Note that the `prefix` option is not supported on Web. The host & domain names will be automatically determined from the Website URL in the browser. If your app runs only on Web, then you can omit this option from the config.
+
+### Multiple subdomains​
+
+To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*`. before the beginning of a specific domain. Note that an entry for `*.mychat.com` does not match `mychat.com` because of the period after the asterisk. To enable matching for both `*.mychat.com` and `mychat.com`, you need to provide a separate prefix entry for each.
+
+```js
+const linking = {
+  prefixes: ['mychat://', 'https://mychat.com', 'https://*.mychat.com'],
+};
+```
+
 ## Mapping path to route names
 
 To handle a link, you need to translate it to a valid [navigation state](navigation-state.md) and vice versa. For example, the path `/rooms/chat?user=jane` may be translated to a state object like this:
