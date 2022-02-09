@@ -97,9 +97,9 @@ Default options to use for the screens in the navigator.
 
 #### `detachInactiveScreens`
 
-Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
+Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
 
-You can customize it further on per screen basis using the [`detachPreviousScreen`](#detachinactivescreen) option.
+If you need to disable this optimization for specific screens (e.g. you want to screen to stay in view even when unfocused) [`detachPreviousScreen`](#detachpreviousscreen) option.
 
 #### `keyboardHandlingEnabled`
 
@@ -208,7 +208,9 @@ Interpolated styles for various parts of the header. Refer the [Animations secti
 
 #### `detachPreviousScreen`
 
-Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`. Defaults to `false` for the last screen for modals, otherwise `true`.
+Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`.
+
+This is automatically adjusted when using [`presentation`](#presentation) as `transparentModal` or `modal` to kep the required screens visible. Defaults to `true` in other cases.
 
 ### Header related options
 
