@@ -131,6 +131,8 @@ Style object for the card in stack. You can provide a custom background color to
 
 You can also specify `{ backgroundColor: 'transparent' }` to make the previous screen visible underneath (for transparent modals). This is useful to implement things like modal dialogs. You should also specify `presentation: 'modal'` in the options when using a transparent background so previous screens aren't detached and stay visible underneath.
 
+On Web, the height of the screen isn't limited to the height of the viewport. This is by design to allow the browser's address bar to hide when scrolling. If this isn't desirable behavior, you can set `cardStyle` to `{ flex: 1 }` to force the screen to fill the viewport.
+
 #### `presentation`
 
 This is shortcut option which configures several options to configure the style for rendering and transitions:
