@@ -435,6 +435,22 @@ Only supported on iOS.
 
 Style object for the scene content.
 
+#### `customAnimationOnGesture`
+
+Whether the gesture to dismiss should use animation provided to `animation` prop. Defaults to `false`.
+
+Doesn't affect the behavior of screens presented modally.
+
+Only supported on iOS.
+
+#### `fullScreenGestureEnabled`
+
+Whether the gesture to dismiss should work on the whole screen. Using gesture to dismiss with this option results in the same transition animation as `simple_push`. This behavior can be changed by setting `customAnimationOnGesture` prop. Achieving the default iOS animation isn't possible due to platform limitations. Defaults to `false`.
+
+Doesn't affect the behavior of screens presented modally.
+
+Only supported on iOS.
+
 #### `gestureEnabled`
 
 Whether you can use gestures to dismiss this screen. Defaults to `true`. Only supported on iOS.
