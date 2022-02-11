@@ -469,7 +469,7 @@ const state = {
           { name: 'Feed' },
           {
             name: 'Profile',
-            params: { id: 'jane' },
+            params: { id: '42' },
           },
         ],
       },
