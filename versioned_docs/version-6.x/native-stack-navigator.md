@@ -453,7 +453,15 @@ Only supported on iOS.
 
 #### `gestureEnabled`
 
-Whether you can use gestures to dismiss this screen. Defaults to `true`. Only supported on iOS.
+Whether you can use gestures to dismiss this screen. Defaults to `true`.
+
+Only supported on iOS.
+
+#### `nativeBackButtonDismissalEnabled`
+
+Whether the dismissal of the screen on tap of the header back button on Android should be performed by the native or the navigation's side. Defaults to `false`.
+
+Only supported on Android.
 
 #### `animationTypeForReplace`
 
