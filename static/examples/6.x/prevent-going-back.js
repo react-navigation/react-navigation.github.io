@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Alert, View, TextEditText, StyleSheet } from 'react-native';
+import { Alert, View, TextInput, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -37,7 +37,7 @@ const EditTextScreen = ({ navigation }) => {
 
   return (
     <View style={styles.content}>
-      <TextEditText
+      <TextInput
         autoFocus
         style={styles.input}
         value={text}
