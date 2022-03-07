@@ -35,7 +35,7 @@ isSignedIn ? (
     <Stack.Screen name="SignIn" component={SignInScreen} />
     <Stack.Screen name="SignUp" component={SignUpScreen} />
   </>
-)
+);
 ```
 
 When we define screens like this, when `isSignedIn` is `true`, React Navigation will only see the `Home`, `Profile` and `Settings` screens, and when it's `false`, React Navigation will see the `SignIn` and `SignUp` screens. This makes it impossible to navigate to the `Home`, `Profile` and `Settings` screens when the user is not signed in, and to `SignIn` and `SignUp` screens when the user is signed in.
@@ -203,7 +203,7 @@ export default function App({ navigation }) {
 
   const authContext = React.useMemo(
     () => ({
-      signIn: async data => {
+      signIn: async (data) => {
         // In a production app, we need to send some data (usually username, password) to server and get a token
         // We will also need to handle errors if sign in failed
         // After getting token, we need to persist the token using `SecureStore`
@@ -212,7 +212,7 @@ export default function App({ navigation }) {
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
       },
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
-      signUp: async data => {
+      signUp: async (data) => {
         // In a production app, we need to send user data to server and get a token
         // We will also need to handle errors if sign up failed
         // After getting token, we need to persist the token using `SecureStore`
@@ -266,4 +266,69 @@ function SignInScreen() {
     </View>
   );
 }
+```
+
+## Removing shared screens when auth state changes
+
+Consider the following example:
+
+```js
+isSignedIn ? (
+  <>
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="Profile" component={ProfileScreen} />
+    <Stack.Screen name="Help" component={HelpScreen} />
+  </>
+) : (
+  <>
+    <Stack.Screen name="SignIn" component={SignInScreen} />
+    <Stack.Screen name="SignUp" component={SignUpScreen} />
+    <Stack.Screen name="Help" component={HelpScreen} />
+  </>
+);
+```
+
+Here we have specific screens such as `SignIn`, `Home` etc. which are only shown depending on the sign in state. But we also have the `Help` screen which can be shown in both cases. This also means that if the signin state changes when the user is in the `Help` screen, they'll stay on the `Help` screen.
+
+This can be a problem, we probably want the user to be taken to the `SignIn` screen or `Home` screen instead of keeping them on the `Help` screen. To make this work, we can use the [`navigationKey` prop](screen.md#navigationkey). When the `navigationKey` changes, React Navigation will remove all the screen.
+
+So our updated code will look like following:
+
+```js
+<>
+  {isSignedIn ? (
+    <>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </>
+  ) : (
+    <>
+      <Stack.Screen name="SignIn" component={SignInScreen} />
+      <Stack.Screen name="SignUp" component={SignUpScreen} />
+    </>
+  )}
+  <Stack.Screen navigationKey={isSignedIn ? 'user' : 'guest'} name="Help" component={HelpScreen} />
+</>
+```
+
+If you have a bunch of shared screens, you can also use [`navigationKey` with a `Group`](group.md#navigationkey) to remove all of the screens in the group. For example:
+
+```js
+<>
+  {isSignedIn ? (
+    <>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </>
+  ) : (
+    <>
+      <Stack.Screen name="SignIn" component={SignInScreen} />
+      <Stack.Screen name="SignUp" component={SignUpScreen} />
+    </>
+  )}
+  <Stack.Group navigationKey={isSignedIn ? 'user' : 'guest'}>
+    <Stack.Screen name="Help" component={HelpScreen} />
+    <Stack.Screen name="About" component={AboutScreen} />
+  </Stack.Group>
+</>
 ```
