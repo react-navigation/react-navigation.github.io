@@ -533,3 +533,9 @@ function App() {
 ### `theme`
 
 Custom theme to use for the navigation components such as the header, tab bar etc. See [theming guide](themes.md) for more details and usage guide.
+
+### `independent`
+
+Whether this navigation container should be independent of parent containers. If this is not set to `true`, this container cannot be nested inside another container. Setting it to `true` disconnects any children navigators from parent container.
+
+You probably don't want to set this to `true` in a typical React Native app. This is only useful if you have navigation trees that work like their own mini-apps and don't need to navigate to the screens outside of them.
