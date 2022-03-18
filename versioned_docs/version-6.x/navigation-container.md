@@ -358,6 +358,8 @@ You can provide a custom `getInitialURL` function where you can return the link 
 For example, you could do something like following to handle both deep linking and [Firebase notifications](https://rnfirebase.io/messaging/notifications):
 
 ```js
+import messaging from '@react-native-firebase/messaging';
+
 <NavigationContainer
   linking={{
     prefixes: ['https://mychat.com', 'mychat://'],
@@ -396,6 +398,8 @@ Similar to [`getInitialURL`](#linkinggetinitialurl), you can provide a custom `s
 For example, you could do something like following to handle both deep linking and [Firebase notifications](https://rnfirebase.io/messaging/notifications):
 
 ```js
+import messaging from '@react-native-firebase/messaging';
+
 <NavigationContainer
   linking={{
     prefixes: ['https://mychat.com', 'mychat://'],
