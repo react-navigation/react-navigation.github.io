@@ -379,7 +379,7 @@ For example, you could do something like following to handle both deep linking a
 
       // Get the `url` property from the notification which corresponds to a screen
       // This property needs to be set on the notification payload when sending it
-      return message?.data.url;
+      return message?.data?.url;
     },
   }}
 >
@@ -413,7 +413,7 @@ For example, you could do something like following to handle both deep linking a
       // Listen to firebase push notifications
       const unsubscribeNotification = messaging().onNotificationOpenedApp(
         (message) => {
-          const url = message.data.url;
+          const url = message.data?.url;
 
           if (url) {
             // Any custom logic to check whether the URL needs to be handled
