@@ -184,7 +184,7 @@ The `progress` object can be used to do interesting animations in your `drawerCo
 function CustomDrawerContent(props) {
   const progress = useDrawerProgress();
 
-  const translateX = Animated.interpolate(progress, {
+  const translateX = Animated.interpolateNode(progress, {
     inputRange: [0, 1],
     outputRange: [-100, 0],
   });
