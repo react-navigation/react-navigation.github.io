@@ -6,6 +6,7 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
   DrawerItem,
+  useDrawerProgress,
 } from '@react-navigation/drawer';
 import Animated from 'react-native-reanimated';
 
@@ -25,16 +26,18 @@ function Article() {
   );
 }
 
-function CustomDrawerContent({ progress, ...rest }) {
-  const translateX = Animated.interpolate(progress, {
+function CustomDrawerContent(props) {
+  const progress = useDrawerProgress();
+
+  const translateX = Animated.interpolateNode(progress, {
     inputRange: [0, 1],
     outputRange: [-100, 0],
   });
 
   return (
-    <DrawerContentScrollView {...rest}>
+    <DrawerContentScrollView {...props}>
       <Animated.View style={{ transform: [{ translateX }] }}>
-        <DrawerItemList {...rest} />
+        <DrawerItemList {...props} />
         <DrawerItem label="Help" onPress={() => alert('Link to help')} />
       </Animated.View>
     </DrawerContentScrollView>
