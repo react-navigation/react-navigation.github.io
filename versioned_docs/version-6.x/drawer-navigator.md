@@ -122,7 +122,6 @@ The content component receives following props by default:
 - `state` - The [navigation state](navigation-state.md) of the navigator.
 - `navigation` - The navigation object for the navigator.
 - `descriptors` - An descriptor object containing options for the drawer screens. The options can be accessed at `descriptors[route.key].options`.
-- `progress` - Reanimated Node that represents the animated position of the drawer (0 is closed; 1 is open).
 
 ##### Providing a custom `drawerContent`
 
@@ -197,7 +196,7 @@ function CustomDrawerContent(props) {
 }
 ```
 
-The `progress` object is a Reanimated `Node` if you're using Reanimated 1 (see [`useLegacyImplementation`](#uselegacyimplementation)), otherwise a `SharedValue`.
+The `progress` object is a Reanimated `Node` if you're using Reanimated 1 (see [`useLegacyImplementation`](#uselegacyimplementation)), otherwise a `SharedValue`. It represents the animated position of the drawer (0 is closed; 1 is open).
 
 Note that you **cannot** use the `useNavigation` hook inside the `drawerContent` since `useNavigation` is only available inside screens. You get a `navigation` prop for your `drawerContent` which you can use instead:
 
