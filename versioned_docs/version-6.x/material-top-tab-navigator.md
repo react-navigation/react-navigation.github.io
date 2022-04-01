@@ -63,6 +63,10 @@ function MyTabs() {
 
 The `Tab.Navigator` component accepts following props:
 
+#### `id`
+
+Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
+
 #### `initialRouteName`
 
 The name of the route to render on first load of the navigator.

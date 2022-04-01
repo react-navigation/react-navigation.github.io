@@ -70,7 +70,19 @@ type RootStackParamList = {
 type Props = NativeStackScreenProps<RootStackParamList, 'Profile'>;
 ```
 
-The type takes 2 generics, the param list object we defined earlier, and the name of the current route. This allows us to type check route names and params which you're navigating using `navigate`, `push` etc. The name of the current route is necessary to type check the params in `route.params` and when you call `setParams`.
+The type takes 3 generics:
+
+- The param list object we defined earlier
+- The name of the route the screen belongs to
+- The ID of the navigator (optional)
+
+If you have an `id` prop for your navigator, you can do:
+
+```ts
+type Props = NativeStackScreenProps<RootStackParamList, 'Profile', 'MyStack'>;
+``
+
+This allows us to type check route names and params which you're navigating using `navigate`, `push` etc. The name of the current route is necessary to type check the params in `route.params` and when you call `setParams`.
 
 Similarly, you can import `StackScreenProps` for `@react-navigation/stack`, `DrawerScreenProps` from `@react-navigation/drawer`, `BottomTabScreenProps` from `@react-navigation/bottom-tabs` and so on.
 

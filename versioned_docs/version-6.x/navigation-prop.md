@@ -339,7 +339,39 @@ Don't use this method for rendering content as this will not trigger a re-render
 
 This method returns the navigation prop from the parent navigator that the current navigator is nested in. For example, if you have a stack navigator and a tab navigator nested inside the stack, then you can use `getParent` inside a screen of the tab navigator to get the navigation prop passed from the stack navigator.
 
-This method will return `undefined` if there is no parent navigator. Be sure to always check for `undefined` when using this method.
+It accepts an optional ID parameter to refer to a specific parent navigator. For example, if your screen is nested with multiple levels of nesting somewhere under a drawer navigator with the `id` prop as `"LeftDrawer"`, you can directly refer to it without calling `getParent` multiple times.
+
+To use an ID for a navigator, first pass a unique `id` prop:
+
+```js
+<Drawer.Navigator id="LeftDrawer">
+  {/* .. */}
+</Drawer.Navigator>
+```
+
+Then when using `getParent`, instead of:
+
+```js
+const drawerNavigation = navigation.getParent().getParent();
+
+// ...
+
+drawerNavigation?.openDrawer();
+```
+
+You can do:
+
+```js
+const drawerNavigation = navigation.getParent('LeftDrawer');
+
+// ...
+
+drawerNavigation?.openDrawer();
+```
+
+This approach allows components to not have to know the nesting structure of the navigators. So it's highly recommended that use an `id` when using `getParent`.
+
+This method will return `undefined` if there is no matching parent navigator. Be sure to always check for `undefined` when using this method.
 
 ### `getState`
 
