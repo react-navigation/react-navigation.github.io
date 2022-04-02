@@ -228,23 +228,12 @@ If you don't use state persistence or deep link to the screen which accepts func
 Example:
 
 ```js
-import { YellowBox } from 'react-native';
+import { LogBox } from 'react-native';
 
-YellowBox.ignoreWarnings([
+LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
 ]);
 ```
-
-
-> Note: As of React Native 0.63 YellowBox has been deprecated in favor of LogBox, so the previous
-code would be written as follows:
->```js
->import { LogBox } from 'react-native';
->
->LogBox.ignoreLogs([
->  'Non-serializable values were found in the navigation state',
->]);
->```
 
 ## I'm getting "Invalid hook call. Hooks can only be called inside of the body of a function component"
 

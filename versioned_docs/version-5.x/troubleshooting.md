@@ -225,7 +225,17 @@ Example of some use cases for passing functions in params are the following:
 
 If you don't use state persistence or deep link to the screen which accepts functions in params, then the warning doesn't affect you and you can safely ignore it. To ignore the warning, you can use `YellowBox.ignoreWarnings`.
 
-Example:
+If you're using React Native 0.64 or higher:
+
+```js
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
+```
+
+If you're using React Native 0.62 or lower:
 
 ```js
 import { YellowBox } from 'react-native';
@@ -234,17 +244,6 @@ YellowBox.ignoreWarnings([
   'Non-serializable values were found in the navigation state',
 ]);
 ```
-
-
-> Note: As of React Native 0.63 YellowBox has been deprecated in favor of LogBox, so the previous
-code would be written as follows:
->```js
->import { LogBox } from 'react-native';
->
->LogBox.ignoreLogs([
->  'Non-serializable values were found in the navigation state',
->]);
->```
 
 ## I'm getting "Invalid hook call. Hooks can only be called inside of the body of a function component"
 
