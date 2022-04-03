@@ -1,7 +1,7 @@
 ---
 id: modal
-title: Opening a full-screen modal
-sidebar_label: Opening a full-screen modal
+title: Opening a modal
+sidebar_label: Opening a modal
 ---
 
 ![Modal shown on screen](/assets/modal/modal-demo.gif)
@@ -12,7 +12,7 @@ A modal is like a popup &mdash; it's not part of your primary navigation flow &m
 
 ## Creating a stack with modal screens
 
-<samp id="full-screen-modal" />
+<samp id="modal" />
 
 ```js
 function HomeScreen({ navigation }) {
