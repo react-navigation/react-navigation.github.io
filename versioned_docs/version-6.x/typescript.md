@@ -80,7 +80,7 @@ If you have an `id` prop for your navigator, you can do:
 
 ```ts
 type Props = NativeStackScreenProps<RootStackParamList, 'Profile', 'MyStack'>;
-``
+```
 
 This allows us to type check route names and params which you're navigating using `navigate`, `push` etc. The name of the current route is necessary to type check the params in `route.params` and when you call `setParams`.
 
