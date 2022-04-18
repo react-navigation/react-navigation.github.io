@@ -190,6 +190,12 @@ Function which is called after the navigation container and all its children fin
 - Making sure that the `ref` is usable. See [docs regarding initialization of the ref](navigating-without-navigation-prop.md#handling-initialization) for more details.
 - Hiding your native splash screen
 
+### `onUnhandledAction`
+
+Function which is called when a navigation action is not handled by any of the navigators.
+
+By default, React Navigation will show a development-only error message when an action was not handled. You can override the default behavior by providing a custom function.
+
 ### `linking`
 
 Configuration for linking integration used for deep linking, URL support in browsers etc.
