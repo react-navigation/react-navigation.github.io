@@ -342,7 +342,7 @@ export type HomeTabParamList = {
 export type HomeTabScreenProps<T extends keyof HomeTabParamList> =
   CompositeScreenProps<
     BottomTabScreenProps<HomeTabParamList, T>,
-    RootStackScreenProps<keyof RootStackParamList>
+    RootStackScreenProps<RootStackParamList>
   >;
 
 declare global {
