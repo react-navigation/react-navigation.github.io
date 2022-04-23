@@ -197,6 +197,10 @@ Supported values:
 
 Only supported on iOS.
 
+#### `headerBackground`
+
+Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
+
 #### `headerTintColor`
 
 Tint color for the header. Changes the color of back button and title.
