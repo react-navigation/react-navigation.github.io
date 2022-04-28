@@ -4,6 +4,9 @@ title: Preventing going back
 sidebar_label: Preventing going back
 ---
 
+
+> This feature doesn't work properly with [`@react-navigation/native-stack`](native-stack-navigator.md). To make this work, you need to disable the swipe gesture (`gestureEnabled: false`) and override the native back button in the header with a custom back button (`headerLeft: props => <CustomBackButton {...props} />`).
+
 Sometimes you may want to prevent the user from leaving a screen, for example, if there are unsaved changes, you might want to show a confirmation dialog. You can achieve it by using the `beforeRemove` event.
 
 Note that this event is **only** triggered whenever a screen is being removed. For example:
