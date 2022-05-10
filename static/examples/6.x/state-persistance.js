@@ -50,7 +50,7 @@ function SettingsStackScreen() {
   );
 }
 
-const PERSISTENCE_KEY = 'NAVIGATION_STATE';
+const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
 
 export default function App() {
   const [isReady, setIsReady] = React.useState(false);
