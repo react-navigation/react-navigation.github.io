@@ -187,6 +187,7 @@ The `progress` object can be used to do interesting animations in your `drawerCo
 function CustomDrawerContent(props) {
   const progress = useDrawerProgress();
 
+  //  If you use react-native-reanimated - V2, Animated.interpolate (below) should be changed to Animated.interpolateNode
   const translateX = Animated.interpolate(progress, {
     inputRange: [0, 1],
     outputRange: [-100, 0],
