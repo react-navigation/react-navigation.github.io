@@ -127,7 +127,7 @@ function App() {
           component={Root}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Feed" component={Settings} />
+        <Stack.Screen name="Feed" component={Feed} />
       </Stack.Navigator>
     </NavigationContainer>
   );
