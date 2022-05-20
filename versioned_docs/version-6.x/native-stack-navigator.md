@@ -523,6 +523,74 @@ Supported values:
 
 Only supported on Android and iOS.
 
+#### `homeIndicatorHidden`
+
+Boolean indicating whether to hide the iOS home indicator. Defaults to `false`.
+
+Only supported on iOS.
+
+#### `gestureDirection`
+
+Sets the direction in which you should swipe to dismiss the screen. 
+
+The following values are supported:
+
+- `vertical` – dismiss screen vertically
+- `horizontal` – dismiss screen horizontally (default)
+
+When using `vertical` option, options `fullScreenSwipeEnabled: true`, `customAnimationOnSwipe: true` and `stackAnimation: 'slide_from_bottom'` are set by default.
+
+Only supported on iOS.
+
+#### `animationDuration`
+
+Changes the duration (in milliseconds) of `slide_from_bottom`, `fade_from_bottom`, `fade` and `simple_push` transitions on iOS. Defaults to `350`.
+
+The duration of `default` and `flip` transitions isn't customizable.
+
+Only supported on Android.
+
+#### `navigationBarColor`
+
+Sets the navigation bar color. Defaults to initial status bar color.
+
+Only supported on Android.
+
+#### `navigationBarHidden`
+
+Boolean indicating whether navigation bar should be hidden for that particular screen. Defaults to `false`
+
+Only supported on Android.
+
+#### `statusBarColor`
+
+Sets the status bar color (similar to the `StatusBar` component). Defaults to initial status bar color.
+
+Only supported on Android.
+
+#### `statusBarTranslucent`
+
+Sets the translucency of the status bar (similar to the `StatusBar` component). Defaults to `false`.
+
+#### `hideKeyboardOnSwipe`
+
+Whether the keyboard should hide when swiping to the previous screen. Defaults to `false`.
+
+#### `gestureResponseDistance`
+
+Use it to restrict the distance from the edges of screen in which the gesture should be recognized. To be used alongside `fullScreenSwipeEnabled`. The responsive area is covered with 4 values: `start`, `end`, `top`, `bottom`. 
+
+Example usage: 
+
+```tsx
+gestureResponseDistance: {
+  start: 200,
+  end: 250,
+  top: 100,
+  bottom: 150,
+}
+```
+
 ### Events
 
 The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
