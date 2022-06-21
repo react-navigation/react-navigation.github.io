@@ -173,8 +173,9 @@ After adding them, it should look like this:
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:scheme="mychat" />
-        <data android:scheme="https" android:host="www.example.com" />
-        <data android:scheme="http" android:host="www.example.com" />
+        <data android:scheme="http" />
+        <data android:scheme="https" />
+        <data android:host="www.example.com" />
     </intent-filter>
 </activity>
 ```
