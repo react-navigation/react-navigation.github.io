@@ -544,7 +544,7 @@ Navigates to an existing screen in the drawer navigator. The method accepts foll
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to pass to the destination route.
 
-<samp id="drawer-example" />
+<samp id="drawer-jump-to" />
 
 ```js
 navigation.jumpTo('Profile', { owner: 'Satya' });
