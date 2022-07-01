@@ -523,7 +523,7 @@ Supported values:
 
 Only supported on Android and iOS.
 
-#### `homeIndicatorHidden`
+#### `autoHideHomeIndicator`
 
 Boolean indicating whether to hide the iOS home indicator. Defaults to `false`.
 
