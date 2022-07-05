@@ -525,7 +525,7 @@ Only supported on Android and iOS.
 
 #### `autoHideHomeIndicator`
 
-Boolean indicating whether to hide the iOS home indicator. Defaults to `false`.
+Boolean indicating whether the home indicator should prefer to stay hidden. Defaults to `false`.
 
 Only supported on iOS.
 
