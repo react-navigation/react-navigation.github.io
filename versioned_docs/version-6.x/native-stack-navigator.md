@@ -538,7 +538,7 @@ Supported values:
 - `vertical` – dismiss screen vertically
 - `horizontal` – dismiss screen horizontally (default)
 
-When using `vertical` option, options `fullScreenSwipeEnabled: true`, `customAnimationOnSwipe: true` and `stackAnimation: 'slide_from_bottom'` are set by default.
+When using `vertical` option, options `fullScreenGestureEnabled: true`, `customAnimationOnGesture: true` and `animation: 'slide_from_bottom'` are set by default.
 
 Only supported on iOS.
 
