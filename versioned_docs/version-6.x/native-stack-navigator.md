@@ -572,25 +572,6 @@ Only supported on Android.
 
 Sets the translucency of the status bar (similar to the `StatusBar` component). Defaults to `false`.
 
-#### `hideKeyboardOnSwipe`
-
-Whether the keyboard should hide when swiping to the previous screen. Defaults to `false`.
-
-#### `gestureResponseDistance`
-
-Use it to restrict the distance from the edges of screen in which the gesture should be recognized. To be used alongside `fullScreenSwipeEnabled`. The responsive area is covered with 4 values: `start`, `end`, `top`, `bottom`. 
-
-Example usage: 
-
-```tsx
-gestureResponseDistance: {
-  start: 200,
-  end: 250,
-  top: 100,
-  bottom: 150,
-}
-```
-
 ### Events
 
 The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
