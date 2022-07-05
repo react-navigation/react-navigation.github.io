@@ -523,6 +523,55 @@ Supported values:
 
 Only supported on Android and iOS.
 
+#### `autoHideHomeIndicator`
+
+Boolean indicating whether the home indicator should prefer to stay hidden. Defaults to `false`.
+
+Only supported on iOS.
+
+#### `gestureDirection`
+
+Sets the direction in which you should swipe to dismiss the screen. 
+
+Supported values:
+
+- `vertical` – dismiss screen vertically
+- `horizontal` – dismiss screen horizontally (default)
+
+When using `vertical` option, options `fullScreenGestureEnabled: true`, `customAnimationOnGesture: true` and `animation: 'slide_from_bottom'` are set by default.
+
+Only supported on iOS.
+
+#### `animationDuration`
+
+Changes the duration (in milliseconds) of `slide_from_bottom`, `fade_from_bottom`, `fade` and `simple_push` transitions on iOS. Defaults to `350`.
+
+The duration of `default` and `flip` transitions isn't customizable.
+
+Only supported on Android.
+
+#### `navigationBarColor`
+
+Sets the navigation bar color. Defaults to initial status bar color.
+
+Only supported on Android.
+
+#### `navigationBarHidden`
+
+Boolean indicating whether the navigation bar should be hidden. Defaults to `false`
+
+Only supported on Android.
+
+#### `statusBarColor`
+
+Sets the status bar color (similar to the `StatusBar` component). Defaults to initial status bar color.
+
+Only supported on Android.
+
+#### `statusBarTranslucent`
+
+Sets the translucency of the status bar (similar to the `StatusBar` component). Defaults to `false`.
+
 ### Events
 
 The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
