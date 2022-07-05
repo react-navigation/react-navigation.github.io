@@ -558,7 +558,7 @@ Only supported on Android.
 
 #### `navigationBarHidden`
 
-Boolean indicating whether navigation bar should be hidden for that particular screen. Defaults to `false`
+Boolean indicating whether the navigation bar should be hidden. Defaults to `false`
 
 Only supported on Android.
 
