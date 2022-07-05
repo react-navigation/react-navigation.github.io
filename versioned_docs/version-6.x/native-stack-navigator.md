@@ -533,7 +533,7 @@ Only supported on iOS.
 
 Sets the direction in which you should swipe to dismiss the screen. 
 
-The following values are supported:
+Supported values:
 
 - `vertical` – dismiss screen vertically
 - `horizontal` – dismiss screen horizontally (default)
