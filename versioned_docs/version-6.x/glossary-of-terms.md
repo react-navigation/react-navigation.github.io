@@ -54,7 +54,7 @@ The suffix `Screen` in the component name is entirely optional, but a frequently
 We saw earlier that our screen components are provided with the `navigation` prop. It's important to note that _this only happens if the screen is rendered as a route by React Navigation_ (for example, in response to `navigation.navigate`). For example, if we render `DetailsScreen` as a child of `HomeScreen`, then `DetailsScreen` won't be provided with the `navigation` prop, and when you press the "Go to Details... again" button on the Home screen, the app will throw one of the quintessential JavaScript exceptions "undefined is not an object".
 
 ```js
-function HomeScreen() {
+function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
