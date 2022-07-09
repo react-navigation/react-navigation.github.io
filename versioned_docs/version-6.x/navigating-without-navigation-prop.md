@@ -104,3 +104,5 @@ export function navigate(name, params) {
 ```
 
 If you're unsure if a navigator is rendered, you can call `navigationRef.current.getRootState()`, and it'll return a valid state object if any navigators are rendered, otherwise it will return `undefined`.
+
+Or you can check out third party solution [`react-native-wait-navigation`](https://github.com/oktaysenkan/react-native-wait-navigation)
