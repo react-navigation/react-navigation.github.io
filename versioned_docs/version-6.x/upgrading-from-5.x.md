@@ -523,7 +523,7 @@ The old options will still keep working with a deprecation warning. To avoid the
 
 ### The `tabBarVisible` option is no longer present
 
-Since the the tab bar now supports a `tabBarStyle` option, we have removed the `tabBarVisible` option. You can achieve the same behavior by specifying `tabBarStyle: { display: 'none' }` in `options`.
+Since the tab bar now supports a `tabBarStyle` option, we have removed the `tabBarVisible` option. You can achieve the same behavior by specifying `tabBarStyle: { display: 'none' }` in `options`.
 
 ### The `lazy` prop is moved to `lazy` option for per-screen configuration for bottom tabs
 
