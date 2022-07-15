@@ -4,7 +4,7 @@ title: useTheme
 sidebar_label: useTheme
 ---
 
-The `useTheme` hook let's us access the currently active theme. You can use it in your own components to have them respond to changes in the theme.
+The `useTheme` hook lets us access the currently active theme. You can use it in your own components to have them respond to changes in the theme.
 
 <samp id="system-themes" />
 
