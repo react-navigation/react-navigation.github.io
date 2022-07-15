@@ -4,7 +4,7 @@ title: Hiding tab bar in specific screens
 sidebar_label: Hiding tab bar in specific screens
 ---
 
-Sometimes we may want to hide the tab bar in specific screens in a native stack navigator nested in a tab navigator. Let's say we have 5 screens: `Home`, `Feed`, `Notifications`, `Profile` and `Settings`, and your navigation structure looks like this:
+Sometimes we may want to hide the tab bar in specific screens in a stack navigator nested in a tab navigator. Let's say we have 5 screens: `Home`, `Feed`, `Notifications`, `Profile` and `Settings`, and your navigation structure looks like this:
 
 ```js
 function HomeStack() {

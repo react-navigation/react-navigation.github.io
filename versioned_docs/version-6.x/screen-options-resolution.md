@@ -181,7 +181,7 @@ This approach can be used anytime you want to set options for a parent navigator
 
 In many cases, similar behavior can be achieved by reorganizing our navigators. We usually recommend this option if it fits your use case.
 
-For example, for the above use case, instead of adding a tab navigator inside a native stack navigator, we can add a native stack navigator inside each of the tabs.
+For example, for the above use case, instead of adding a tab navigator inside a stack navigator, we can add a stack navigator inside each of the tabs.
 
 <samp id="reorganized-navigators" />
 

@@ -56,7 +56,7 @@ export default function App() {
 
 ## Customizing the appearance
 
-This is similar to how you would customize a native stack navigator &mdash; there are some properties that are set when you initialize the tab navigator and others that can be customized per-screen in `options`.
+This is similar to how you would customize a stack navigator &mdash; there are some properties that are set when you initialize the tab navigator and others that can be customized per-screen in `options`.
 
 <samp id="tab-based-navigation-icons" />
 
@@ -147,7 +147,7 @@ function SettingsScreen({ navigation }) {
 }
 ```
 
-## A native stack navigator for each tab
+## A stack navigator for each tab
 
 Usually tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
 
