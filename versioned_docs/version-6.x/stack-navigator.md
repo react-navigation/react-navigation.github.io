@@ -38,10 +38,14 @@ If you have a bare React Native project, in your project directory, run:
 npm install react-native-gesture-handler
 ```
 
-To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+After installation, wrap your entry point with `<GestureHandlerRootView>` or `gestureHandlerRootHOC`.
+
+For example:
 
 ```js
-import 'react-native-gesture-handler';
+export default function App() {
+  return <GestureHandlerRootView style={{ flex: 1 }}>{/* content */}</GestureHandlerRootView>;
+}
 ```
 
 > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
