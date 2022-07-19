@@ -41,12 +41,12 @@ export default function Splash() {
         <SplashRightIllustration />
       </div>
       <div className={styles.migrationText}>
-        💡 Coming from v5? Check out our{' '}
+        💡 Coming from an older version? Check out our{' '}
         <Link
-          to={useBaseUrl('/docs/upgrading-from-5.x')}
+          to={useBaseUrl('/docs/migration-guides')}
           className={styles.linkText}
         >
-          v5 to v6 migration guide
+          migration guides
         </Link>
         .
       </div>
