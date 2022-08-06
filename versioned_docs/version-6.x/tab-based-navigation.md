@@ -80,7 +80,7 @@ export default function App() {
                 ? 'ios-information-circle'
                 : 'ios-information-circle-outline';
             } else if (route.name === 'Settings') {
-              iconName = focused ? 'ios-list-box' : 'ios-list';
+              iconName = focused ? 'ios-list' : 'ios-list-outline';
             }
 
             // You can return any component that you like here!
