@@ -42,7 +42,43 @@ import 'react-native-gesture-handler';
 
 > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
 
-The Drawer Navigator supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+The Drawer Navigator supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the instruction bellow or see the complete [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+
+### Installing `react-native-reanimated` package
+
+First step is to install `react-native-reanimated` as a dependency in your project:
+
+```bash npm2yarn
+npm install react-native-gesture-handler react-native-reanimated
+```
+
+### Babel plugin
+
+Add Reanimated's Babel plugin to your `babel.config.js`:
+
+```js
+  module.exports = {
+    presets: [
+      ...
+    ],
+    plugins: [
+      ...
+      'react-native-reanimated/plugin',
+    ],
+  };
+```
+
+> CAUTION: Reanimated plugin has to be listed last.
+
+#### Info
+
+After adding the `react-native-reanimated/plugin` to your project you may encounter a false-positive "Reanimated 2 failed to create a worklet" error. In most cases, this can be fixed by cleaning the application's cache. Depending on your workflow or favourite package manager that could be done by:
+
+- `yarn start --reset-cache`
+- `npm start -- --reset-cache`
+- `expo start -c`
+
+or other.
 
 ## API Definition
 
