@@ -73,7 +73,7 @@ Add the following code to the body of `MainActivity` class:
 ```java
 @Override
 protected void onCreate(Bundle savedInstanceState) {
-  super.onCreate(null);
+  super.onCreate(savedInstanceState);
 }
 ```
 
