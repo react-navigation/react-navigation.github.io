@@ -172,7 +172,7 @@ import type { CompositeScreenProps } from '@react-navigation/native';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import type { StackScreenProps } from '@react-navigation/stack';
 
-type ProfileScreenNavigationProp = CompositeScreenProps<
+type ProfileScreenProps = CompositeScreenProps<
   BottomTabScreenProps<TabParamList, 'Profile'>,
   StackScreenProps<StackParamList>
 >;
@@ -183,7 +183,7 @@ The `CompositeScreenProps` type takes 2 parameters, first parameter is the type 
 For multiple parent navigators, this secondary type should be nested:
 
 ```ts
-type ProfileScreenNavigationProp = CompositeScreenProps<
+type ProfileScreenProps = CompositeScreenProps<
   BottomTabScreenProps<TabParamList, 'Profile'>,
   CompositeScreenProps<
     StackScreenProps<StackParamList>,
