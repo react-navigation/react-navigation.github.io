@@ -30,7 +30,7 @@ First, you will want to specify a URL scheme for your app. This corresponds to t
 Next, let's configure our navigation container to extract the path from the app's incoming URI.
 
 ```js
-// Install this package with `expo install expo-linking`
+// Install this package with `npx expo install expo-linking`
 import * as Linking from 'expo-linking';
 
 // Linking.createURL is available as of expo@40.0.1 and expo-linking@2.0.1. If

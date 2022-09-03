@@ -29,7 +29,7 @@ You also need to install [`react-native-gesture-handler`](https://docs.swmansion
 If you have a Expo managed project, in your project directory, run:
 
 ```sh
-expo install react-native-gesture-handler
+npx expo install react-native-gesture-handler
 ```
 
 If you have a bare React Native project, in your project directory, run:
@@ -51,7 +51,7 @@ Optionally, you can also install [`@react-native-masked-view/masked-view`](https
 If you have a Expo managed project, in your project directory, run:
 
 ```sh
-expo install @react-native-masked-view/masked-view
+npx expo install @react-native-masked-view/masked-view
 ```
 
 If you have a bare React Native project, in your project directory, run:

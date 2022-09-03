@@ -24,7 +24,7 @@ To upgrade `react-native-safe-area-context` and `react-native-screens` to the la
 For Expo managed projects:
 
 ```sh
-expo install react-native-safe-area-context react-native-screens
+npx expo install react-native-safe-area-context react-native-screens
 ```
 
 For bare React Native projects:
@@ -550,7 +550,7 @@ To upgrade `react-native-pager-view` to the latest supported version, do the fol
 For Expo managed projects:
 
 ```sh
-expo install react-native-pager-view
+npx expo install react-native-pager-view
 ```
 
 For bare React Native projects:

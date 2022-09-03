@@ -27,7 +27,7 @@ Next, install `react-native-gesture-handler` and `react-native-reanimated`.
 If you're using Expo, to ensure that you get the compatible versions of the libraries you should run:
 
 ```bash
-expo install react-native-gesture-handler react-native-reanimated
+npx expo install react-native-gesture-handler react-native-reanimated
 ```
 
 Otherwise, just use yarn or npm directly:

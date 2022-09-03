@@ -34,7 +34,7 @@ The libraries we will install now are [`react-native-gesture-handler`](https://g
 In your project directory, run:
 
 ```sh
-expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+npx expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 ```
 
 This will install versions of these libraries that are compatible.

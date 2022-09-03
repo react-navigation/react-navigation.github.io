@@ -14,7 +14,7 @@ To use this navigator, ensure that you have [react-navigation and its dependenci
 npm install react-navigation-material-bottom-tabs react-native-paper
 ```
 
-This API also requires that you install `react-native-vector-icons`! If you are using Expo (managed or bare), run `expo install @expo/vector-icons` instead. Otherwise, [follow these installation instructions](https://github.com/oblador/react-native-vector-icons#installation).
+This API also requires that you install `react-native-vector-icons`! If you are using Expo (managed or bare), run `npx expo install @expo/vector-icons` instead. Otherwise, [follow these installation instructions](https://github.com/oblador/react-native-vector-icons#installation).
 
 ## API
 

@@ -149,7 +149,7 @@ This might occur if you have multiple versions of [`react-native-safe-area-conte
 If you're using Expo managed workflow, it's likely that you have installed an incompatible version. To install the correct version, run:
 
 ```sh
-expo install react-native-safe-area-context
+npx expo install react-native-safe-area-context
 ```
 
 If it didn't fix the error or you're not using Expo managed workflow, you'll need to check which package depends on a different version of `react-native-safe-area-context`.

@@ -25,7 +25,7 @@ You also need to install [`react-native-gesture-handler`](https://docs.swmansion
 If you have a Expo managed project, in your project directory, run:
 
 ```sh
-expo install react-native-gesture-handler react-native-reanimated
+npx expo install react-native-gesture-handler react-native-reanimated
 ```
 
 If you have a bare React Native project, in your project directory, run:

@@ -27,7 +27,7 @@ You also need to install [`react-native-pager-view`](https://github.com/callstac
 If you have a Expo managed project, in your project directory, run:
 
 ```sh
-expo install react-native-pager-view
+npx expo install react-native-pager-view
 ```
 
 If you have a bare React Native project, in your project directory, run:

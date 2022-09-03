@@ -30,7 +30,7 @@ First, you will want to specify a URL scheme for your app. This corresponds to t
 Next, install `expo-linking` which we'd need to get the deep link prefix:
 
 ```sh
-expo install expo-linking
+npx expo install expo-linking
 ```
 
 Then, let's configure React Navigation to use the `scheme` for parsing incoming deep links:
