@@ -77,7 +77,7 @@ You'll need to link `RCTLinking` to your project by following the steps describe
 // Add the header at the top of the file:
 #import <React/RCTLinkingManager.h>
 
-// Add this above `@end`:
+// Add this inside `@implementation AppDelegate` above `@end`:
 - (BOOL)application:(UIApplication *)application
    openURL:(NSURL *)url
    options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
@@ -89,7 +89,7 @@ You'll need to link `RCTLinking` to your project by following the steps describe
 If your app is using [Universal Links](https://developer.apple.com/ios/universal-links/), you'll need to add the following code as well:
 
 ```objc
-// Add this above `@end`:
+// Add this inside `@implementation AppDelegate` above `@end`:
 - (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
  restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
 {

@@ -153,7 +153,7 @@ If you're targeting iOS 9.x or newer:
 // Add the header at the top of the file:
 #import <React/RCTLinkingManager.h>
 
-// Add this above `@end`:
+// Add this inside `@implementation AppDelegate` above `@end`:
 - (BOOL)application:(UIApplication *)application
    openURL:(NSURL *)url
    options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
@@ -168,7 +168,7 @@ If you're targeting iOS 8.x or older, you can use the following code instead:
 // Add the header at the top of the file:
 #import <React/RCTLinkingManager.h>
 
-// Add this above `@end`:
+// Add this inside `@implementation AppDelegate` above `@end`:
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
@@ -180,7 +180,7 @@ If you're targeting iOS 8.x or older, you can use the following code instead:
 If your app is using Universal Links, you'll need to add the following code as well:
 
 ```objc
-// Add this above `@end`:
+// Add this inside `@implementation AppDelegate` above `@end`:
 - (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
  restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
 {
@@ -191,7 +191,6 @@ If your app is using Universal Links, you'll need to add the following code as w
 ```
 
 Now you need to add the scheme to your project configuration.
-
 
 The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add mychat --ios`.
 
