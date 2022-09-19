@@ -417,11 +417,19 @@ Note that if you specify a custom header, the native functionality such as large
 
 #### `statusBarAnimation`
 
-Sets the status bar animation (similar to the `StatusBar` component).
+Sets the status bar animation (similar to the `StatusBar` component). Defaults to `fade` on iOS and `none` on Android.
+
+Supported values:
+
+- `"fade"`
+- `"none"`
+- `"slide"`
+
+On Android, setting either `fade` or `slide` will set the transition of status bar color. On iOS, this option applies to appereance animation of the status bar.
 
 Requires setting `View controller-based status bar appearance -> YES` (or removing the config) in your `Info.plist` file.
 
-Only supported on iOS.
+Only supported on Android and iOS.
 
 #### `statusBarHidden`
 
@@ -429,15 +437,34 @@ Whether the status bar should be hidden on this screen.
 
 Requires setting `View controller-based status bar appearance -> YES` (or removing the config) in your `Info.plist` file.
 
-Only supported on iOS.
+Only supported on Android and iOS.
 
 #### `statusBarStyle`
 
-Sets the status bar color (similar to the `StatusBar` component).
+Sets the status bar color (similar to the `StatusBar` component). Defaults to `auto`.
+
+Supported values:
+
+- `"auto"`
+- `"inverted"` (iOS only)
+- `"dark"`
+- `"light"`
 
 Requires setting `View controller-based status bar appearance -> YES` (or removing the config) in your `Info.plist` file.
 
-Only supported on iOS.
+Only supported on Android and iOS.
+
+#### `statusBarColor`
+
+Sets the status bar color (similar to the `StatusBar` component). Defaults to initial status bar color.
+
+Only supported on Android.
+
+#### `statusBarTranslucent`
+
+Sets the translucency of the status bar (similar to the `StatusBar` component). Defaults to `false`.
+
+Only supported on Android.
 
 #### `contentStyle`
 
@@ -561,16 +588,6 @@ Only supported on Android.
 Boolean indicating whether the navigation bar should be hidden. Defaults to `false`.
 
 Only supported on Android.
-
-#### `statusBarColor`
-
-Sets the status bar color (similar to the `StatusBar` component). Defaults to initial status bar color.
-
-Only supported on Android.
-
-#### `statusBarTranslucent`
-
-Sets the translucency of the status bar (similar to the `StatusBar` component). Defaults to `false`.
 
 #### `freezeOnBlur`
 
