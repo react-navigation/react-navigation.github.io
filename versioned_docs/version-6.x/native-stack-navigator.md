@@ -250,7 +250,7 @@ Only supported on iOS and Android.
 Example:
 
 ```js
-React.useEffect(() => {
+React.useLayoutEffect(() => {
   navigation.setOptions({
     headerSearchBarOptions: {
       // search bar options
@@ -369,7 +369,7 @@ Example:
 ```js
 const [search, setSearch] = React.useState('');
 
-React.useEffect(() => {
+React.useLayoutEffect(() => {
   navigation.setOptions({
     headerSearchBarOptions: {
       onChangeText: (event) => setSearch(event.nativeEvent.text),
