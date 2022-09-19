@@ -229,7 +229,7 @@ Function which returns a React element to render as the tab bar button. It wraps
 You can specify a custom implementation here:
 
 ```js
-tabBarButton: props => <TouchableOpacity {...props} />
+tabBarButton: (props) => <TouchableOpacity {...props} />;
 ```
 
 #### `tabBarActiveTintColor`
@@ -326,6 +326,15 @@ Whether this screens should render the first time it's accessed. Defaults to `tr
 Whether this screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
 
 Normally, we don't recommend enabling this prop as users don't expect their navigation history to be lost when switching tabs. If you enable this prop, please consider if this will actually provide a better experience for the user.
+
+#### `freezeOnBlur`
+
+Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to `false`.
+Defaults to `true` when `enableFreeze()` from `react-native-screens` package is run at the top of the application.
+
+Requires `react-native-screens` version >=3.16.0.
+
+Only supported on iOS and Android.
 
 ### Header related options
 

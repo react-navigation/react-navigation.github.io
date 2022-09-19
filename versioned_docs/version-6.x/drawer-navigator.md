@@ -423,6 +423,15 @@ Whether this screen should be unmounted when navigating away from it. Unmounting
 
 Normally, we don't recommend enabling this prop as users don't expect their navigation history to be lost when switching screens. If you enable this prop, please consider if this will actually provide a better experience for the user.
 
+#### `freezeOnBlur`
+
+Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to `false`.
+Defaults to `true` when `enableFreeze()` from `react-native-screens` package is run at the top of the application.
+
+Requires `react-native-screens` version >=3.16.0.
+
+Only supported on iOS and Android.
+
 ### Header related options
 
 You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Drawer.navigator` or `options` prop of `Drawer.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.

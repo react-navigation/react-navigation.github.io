@@ -104,7 +104,7 @@ Only supported on iOS.
 
 #### `headerBackImageSource`
 
-Image to display in the header as the icon in the back button.  Defaults to back icon image for the platform
+Image to display in the header as the icon in the back button. Defaults to back icon image for the platform
 
 - A chevron on iOS
 - An arrow on Android
@@ -254,7 +254,7 @@ React.useEffect(() => {
   navigation.setOptions({
     headerSearchBarOptions: {
       // search bar options
-    }
+    },
   });
 }, [navigation]);
 ```
@@ -373,7 +373,7 @@ React.useEffect(() => {
   navigation.setOptions({
     headerSearchBarOptions: {
       onChangeText: (event) => setSearch(event.nativeEvent.text),
-    }
+    },
   });
 }, [navigation]);
 ```
@@ -425,7 +425,7 @@ Only supported on iOS.
 
 #### `statusBarHidden`
 
- Whether the status bar should be hidden on this screen.
+Whether the status bar should be hidden on this screen.
 
 Requires setting `View controller-based status bar appearance -> YES` (or removing the config) in your `Info.plist` file.
 
@@ -481,7 +481,7 @@ Supported values:
 - `default`: use the platform default animation
 - `fade`: fade screen in or out
 - `fade_from_bottom`: fade the new screen from bottom
-- `flip`: flip the screen, requires stackPresentation: "modal" (iOS only)
+- `flip`: flip the screen, requires `presentation: "modal"` (iOS only)
 - `simple_push`: default animation, but without shadow and native header transition (iOS only, uses default animation on Android)
 - `slide_from_bottom`: slide in the new screen from bottom
 - `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
@@ -531,7 +531,7 @@ Only supported on iOS.
 
 #### `gestureDirection`
 
-Sets the direction in which you should swipe to dismiss the screen. 
+Sets the direction in which you should swipe to dismiss the screen.
 
 Supported values:
 
@@ -558,7 +558,7 @@ Only supported on Android.
 
 #### `navigationBarHidden`
 
-Boolean indicating whether the navigation bar should be hidden. Defaults to `false`
+Boolean indicating whether the navigation bar should be hidden. Defaults to `false`.
 
 Only supported on Android.
 
@@ -571,6 +571,15 @@ Only supported on Android.
 #### `statusBarTranslucent`
 
 Sets the translucency of the status bar (similar to the `StatusBar` component). Defaults to `false`.
+
+#### `freezeOnBlur`
+
+Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to `false`.
+Defaults to `true` when `enableFreeze()` from `react-native-screens` package is run at the top of the application.
+
+Requires `react-native-screens` version >=3.16.0.
+
+Only supported on iOS and Android.
 
 ### Events
 
