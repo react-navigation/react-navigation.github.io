@@ -575,7 +575,7 @@ Changes the duration (in milliseconds) of `slide_from_bottom`, `fade_from_bottom
 
 The duration of `default` and `flip` transitions isn't customizable.
 
-Only supported on Android.
+Only supported on iOS.
 
 #### `navigationBarColor`
 
