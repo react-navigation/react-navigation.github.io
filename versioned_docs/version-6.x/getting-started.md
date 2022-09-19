@@ -77,7 +77,7 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ```
 
-and make sure to add an import statement at the top of this file:
+and make sure to add the following import statement at the top of this file below your package statement:
 
 ```java
 import android.os.Bundle;
