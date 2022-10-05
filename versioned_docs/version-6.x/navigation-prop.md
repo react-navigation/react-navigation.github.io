@@ -185,7 +185,7 @@ The `setOptions` method lets us set screen options from within the component. Th
 function ProfileScreen({ navigation, route }) {
   const [value, onChangeText] = React.useState(route.params.title);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     navigation.setOptions({
       title: value === '' ? 'No title' : value,
     });
@@ -205,6 +205,12 @@ function ProfileScreen({ navigation, route }) {
 ```
 
 Any options specified here are shallow merged with the options specified when defining the screen.
+
+When using `navigation.setOptions`, we recommend specifying a placeholder in the screen's `options` prop and update it using `navigation.setOptions`. This makes sure that the delay for updating the options isn't noticeable to the user. It also makes it work with lazy-loaded screens.
+
+You can also use `React.useLayoutEffect` to reduce the delay in updating the options. But we recommend against doing it if you support web and do server side rendering.
+
+> Note: `navigation.setOptions` is intended to provide the ability to update existing options when necessary. It's not a replacement for the `options` prop on the screen. Make sure to use `navigation.setOptions` sparingly only when absolutely necessary.
 
 ## Navigation events
 

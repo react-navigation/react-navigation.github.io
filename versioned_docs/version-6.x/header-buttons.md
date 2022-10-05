@@ -39,7 +39,7 @@ When we define our button this way, the `this` variable in `options` is _not_ th
 
 ## Header interaction with its screen component
 
-To be able to interact with the screen component, we need to use `navigation.setOptions` to define our button instead of the `options` prop. By using `navigation.setOptions` inside the screen component, we get access to screen's props, state, context etc.
+In some cases, components in the header need to interact with the screen component. For this use case, we need to use `navigation.setOptions` to update our options. By using `navigation.setOptions` inside the screen component, we get access to screen's props, state, context etc.
 
 <samp id="header-interaction">header interaction</samp>
 
@@ -52,6 +52,10 @@ function StackScreen() {
         component={HomeScreen}
         options={({ navigation, route }) => ({
           headerTitle: (props) => <LogoTitle {...props} />,
+          // Add a placeholder button without the `onPress` to avoid flicker
+          headerRight: () => (
+            <Button title="Update count" />
+          ),
         })}
       />
     </Stack.Navigator>
@@ -61,7 +65,9 @@ function StackScreen() {
 function HomeScreen({ navigation }) {
   const [count, setCount] = React.useState(0);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
+    // Use `setOptions` to update the button that we previously specified
+    // Now the button includes an `onPress` handler to update the count
     navigation.setOptions({
       headerRight: () => (
         <Button onPress={() => setCount((c) => c + 1)} title="Update count" />
@@ -72,6 +78,8 @@ function HomeScreen({ navigation }) {
   return <Text>Count: {count}</Text>;
 }
 ```
+
+Here we update the `headerRight` with a button with `onPress` handler that has access to the component's state and can update it.
 
 ## Customizing the back button
 

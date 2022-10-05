@@ -15,7 +15,9 @@ function LogoTitle() {
 function HomeScreen({ navigation }) {
   const [count, setCount] = React.useState(0);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
+    // Use `setOptions` to update the button that we previously specified
+    // Now the button includes an `onPress` handler to update the count
     navigation.setOptions({
       headerRight: () => (
         <Button onPress={() => setCount((c) => c + 1)} title="Update count" />
@@ -37,6 +39,10 @@ function App() {
           component={HomeScreen}
           options={({ navigation, route }) => ({
             headerTitle: (props) => <LogoTitle {...props} />,
+            // Add a placeholder button without the `onPress` to avoid flicker
+            headerRight: () => (
+              <Button title="Update count" />
+            ),
           })}
         />
       </Stack.Navigator>

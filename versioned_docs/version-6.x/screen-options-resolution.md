@@ -137,39 +137,19 @@ function getHeaderTitle(route) {
 }
 ```
 
-Then we can use this function in 2 ways:
+Then we can use this function with the `options` prop on `Screen`:
 
-1. Using `options` prop on `Screen` (recommended):
-   <samp id="parent-options-from-child-opt1" />
+<samp id="parent-options-from-child" />
 
-   ```js
-   <Stack.Screen
-     name="Home"
-     component={HomeTabs}
-     options={({ route }) => ({
-       headerTitle: getHeaderTitle(route),
-     })}
-   />
-   ```
-
-2. Using `navigation.setOptions`:
-   <samp id="parent-options-from-child-opt2" />
-
-   ```js
-   function HomeTabs({ navigation, route }) {
-     React.useLayoutEffect(() => {
-       navigation.setOptions({ headerTitle: getHeaderTitle(route) });
-     }, [navigation, route]);
-
-     return (
-       <Tab.Navigator>
-         <Tab.Screen name="Feed" component={FeedScreen} />
-         <Tab.Screen name="Profile" component={ProfileScreen} />
-         <Tab.Screen name="Account" component={AccountScreen} />
-       </Tab.Navigator>
-     );
-   }
-   ```
+```js
+<Stack.Screen
+  name="Home"
+  component={HomeTabs}
+  options={({ route }) => ({
+    headerTitle: getHeaderTitle(route),
+  })}
+/>
+```
 
 So what's happening here? With the `getFocusedRouteNameFromRoute` helper, we can get the currently active route name from this child navigator (in this case it's the tab navigator since that's what we're rendering) and setting an appropriate title for the header.
 
