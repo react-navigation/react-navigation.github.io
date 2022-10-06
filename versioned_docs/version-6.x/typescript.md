@@ -178,7 +178,7 @@ type ProfileScreenProps = CompositeScreenProps<
 >;
 ```
 
-The `CompositeScreenProps` type takes 2 parameters, first parameter is the type of props for the primary navigation (type for the navigator that owns this screen, in our case the tab navigator which contains the `Profile` screen) and second parameter is the type of props for secondary navigation (type for a parent navigator). The primary type should always have the screen's route name as it's second parameter.
+The `CompositeScreenProps` type takes 2 parameters, first parameter is the type of props for the primary navigation (type for the navigator that owns this screen, in our case the tab navigator which contains the `Profile` screen) and second parameter is the type of props for secondary navigation (type for a parent navigator). The primary type should always have the screen's route name as its second parameter.
 
 For multiple parent navigators, this secondary type should be nested:
 
