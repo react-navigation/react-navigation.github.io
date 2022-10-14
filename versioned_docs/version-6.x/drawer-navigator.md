@@ -613,7 +613,7 @@ import { getDrawerStatusFromState } from '@react-navigation/drawer';
 const isDrawerOpen = getDrawerStatusFromState(navigation.getState()) === 'open';
 ```
 
-For class components, you can listen tp the `state` event to check if drawer was opened or closed:
+For class components, you can listen to the `state` event to check if drawer was opened or closed:
 
 ```js
 class Profile extends React.Component {
