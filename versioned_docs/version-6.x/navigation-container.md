@@ -414,7 +414,7 @@ For example, you could do something like following to handle both deep linking a
       const onReceiveURL = ({ url }: { url: string }) => listener(url);
 
       // Listen to incoming links from deep linking
-      Linking.addEventListener('url', onReceiveURL);
+      const subscription = Linking.addEventListener('url', onReceiveURL);
 
       // Listen to firebase push notifications
       const unsubscribeNotification = messaging().onNotificationOpenedApp(
@@ -433,7 +433,7 @@ For example, you could do something like following to handle both deep linking a
 
       return () => {
         // Clean up the event listeners
-        Linking.removeEventListener('url', onReceiveURL);
+        subscription.remove();
         unsubscribeNotification();
       };
     },
