@@ -14,35 +14,35 @@ Component that renders a navigation drawer which can be opened and closed via ge
 
 ## Installation
 
-To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
+1. To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
 
-```bash npm2yarn
-npm install @react-navigation/drawer
-```
+   ```bash npm2yarn
+   npm install @react-navigation/drawer
+   ```
 
-You also need to install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
+2. You also need to install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
 
-If you have a Expo managed project, in your project directory, run:
+   If you have a Expo managed project, in your project directory, run:
 
-```sh
-npx expo install react-native-gesture-handler react-native-reanimated
-```
+   ```sh
+   npx expo install react-native-gesture-handler react-native-reanimated
+   ```
 
-If you have a bare React Native project, in your project directory, run:
+   If you have a bare React Native project, in your project directory, run:
 
-```bash npm2yarn
-npm install react-native-gesture-handler react-native-reanimated
-```
+   ```bash npm2yarn
+   npm install react-native-gesture-handler react-native-reanimated
+   ```
 
-To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+3. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
 
-```js
-import 'react-native-gesture-handler';
-```
+   ```js
+   import 'react-native-gesture-handler';
+   ```
 
-> Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+   > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
 
-The Drawer Navigator supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+4. The Drawer Navigator supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
 
 ## API Definition
 
