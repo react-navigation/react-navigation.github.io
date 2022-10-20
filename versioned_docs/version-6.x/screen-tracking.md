@@ -34,6 +34,11 @@ export default () => {
       onStateChange={async () => {
         const previousRouteName = routeNameRef.current;
         const currentRouteName = navigationRef.getCurrentRoute().name;
+        const tracker = {
+          trackScreenView: () => {
+            // Your implementation of analytics goes here!
+          };
+        }
 
         if (previousRouteName !== currentRouteName) {
           // Replace the line below to add the tracker from a mobile analytics SDK
