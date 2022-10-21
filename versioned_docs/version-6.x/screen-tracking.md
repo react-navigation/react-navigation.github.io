@@ -15,6 +15,8 @@ To get notified of state changes, we can use the `onStateChange` prop on `Naviga
 
 This example shows how the approach can be adapted to any mobile analytics SDK.
 
+<samp id="screen-tracking-for-analytics" />
+
 ```js
 import {
   NavigationContainer,
@@ -34,15 +36,13 @@ export default () => {
       onStateChange={async () => {
         const previousRouteName = routeNameRef.current;
         const currentRouteName = navigationRef.getCurrentRoute().name;
-        const tracker = {
-          trackScreenView: () => {
-            // Your implementation of analytics goes here!
-          };
-        }
+        const trackScreenView = () => {
+          // Your implementation of analytics goes here!
+        };
 
         if (previousRouteName !== currentRouteName) {
           // Replace the line below to add the tracker from a mobile analytics SDK
-          await tracker.trackScreenView(currentRouteName);
+          await trackScreenView(currentRouteName);
         }
 
         // Save the current route name for later comparison
