@@ -147,6 +147,7 @@ Possible values:
 - `none`
 
 This is supported on iOS only.
+
 #### `keyboardDismissMode`
 
 Whether the keyboard should be dismissed when the swipe gesture begins. Defaults to `'on-drag'`. Set to `'none'` to disable keyboard handling.
