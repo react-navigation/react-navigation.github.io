@@ -4,20 +4,29 @@ title: Testing with Jest
 sidebar_label: Testing with Jest
 ---
 
-Testing code using React Navigation takes some setup since we need to mock some native dependencies used in the navigators. We recommend using [Jest](https://jestjs.io) to write unit tests.
+Testing code using React Navigation may require some setup since we need to mock native dependencies used in the navigators. We recommend using [Jest](https://jestjs.io) to write unit tests.
 
 ## Mocking native modules
 
-To be able to test React Navigation components, we need to mock the following dependencies including native code:
+
+To be able to test React Navigation components, certain dependencies will need to be mocked depending on which components are being used.
+
+If you're using `@react-navigation/drawer`, you will need to mock:
 
 - `react-native-reanimated`
+- `react-native-gesture-handler`
+
+If you're using `@react-navigation/stack`, you will only need to mock:
+
 - `react-native-gesture-handler`
 
 To add the mocks, create a file `jest/setup.js` (or any other file name of your choice) and paste the following code in it:
 
 ```js
+// include this line for mocking react-native-gesture-handler
 import 'react-native-gesture-handler/jestSetup';
 
+// include this section and the NativeAnimatedHelper section for mocking react-native-reanimated
 jest.mock('react-native-reanimated', () => {
   const Reanimated = require('react-native-reanimated/mock');
 
