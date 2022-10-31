@@ -364,6 +364,8 @@ You can provide a custom `getInitialURL` function where you can return the link 
 For example, you could do something like following to handle both deep linking and [Firebase notifications](https://rnfirebase.io/messaging/notifications):
 
 ```js
+import messaging from '@react-native-firebase/messaging';
+
 <NavigationContainer
   linking={{
     prefixes: ['https://mychat.com', 'mychat://'],
@@ -385,7 +387,7 @@ For example, you could do something like following to handle both deep linking a
 
       // Get the `url` property from the notification which corresponds to a screen
       // This property needs to be set on the notification payload when sending it
-      return message?.notification.url;
+      return message?.data?.url;
     },
   }}
 >
@@ -402,6 +404,8 @@ Similar to [`getInitialURL`](#linkinggetinitialurl), you can provide a custom `s
 For example, you could do something like following to handle both deep linking and [Firebase notifications](https://rnfirebase.io/messaging/notifications):
 
 ```js
+import messaging from '@react-native-firebase/messaging';
+
 <NavigationContainer
   linking={{
     prefixes: ['https://mychat.com', 'mychat://'],
@@ -419,7 +423,7 @@ For example, you could do something like following to handle both deep linking a
       // Listen to firebase push notifications
       const unsubscribeNotification = messaging().onNotificationOpenedApp(
         (message) => {
-          const url = message.notification.url;
+          const url = message.data?.url;
 
           if (url) {
             // Any custom logic to check whether the URL needs to be handled
