@@ -35,6 +35,7 @@ If you have a bare React Native project, in your project directory, run:
 ```bash npm2yarn
 npm install react-native-pager-view
 ```
+> If you are developing for IOS, You'd need to run: **pod install**
 
 ## API Definition
 
