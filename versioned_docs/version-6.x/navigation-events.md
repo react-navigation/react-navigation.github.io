@@ -4,16 +4,35 @@ title: Navigation events
 sidebar_label: Navigation events
 ---
 
-You can listen to various events emitted by React Navigation to get notified of certain events, and in some cases, override the default action. There are few core events that work for every navigator, as well as navigator specific events that work for only for certain navigators.
+You can listen to various events emitted by React Navigation to get notified of certain events, and in some cases, override the default action. There are few core events such as `focus`, `blur` etc. (documented below) that work for every navigator, as well as navigator specific events that work only for certain navigators.
 
-Following are the built-in events available with every navigator:
+Apart from the core events, each navigator can emit their own custom events. For example, stack navigator emits `transitionStart` and `transitionEnd` events, tab navigator emits `tabPress` event etc. You can find details about the events emitted on the individual navigator's documentation.
 
-- `focus` - This event is emitted when the screen comes into focus
-- `blur` - This event is emitted when the screen goes out of focus
-- `beforeRemove` - This event is emitted when the user is leaving the screen, there's a chance to [prevent the user from leaving](preventing-going-back.md)
-- `state` (advanced) - This event is emitted when the navigator's state changes
+## Core events
 
-Apart from these, each navigator can emit their own custom events. For example, stack navigator emits `transitionStart` and `transitionEnd` events, tab navigator emits `tabPress` event etc. You can find details about the events emitted on the individual navigator's documentation.
+Following are the events available in every navigator:
+
+### `focus`
+
+This event is emitted when the screen comes into focus.
+
+For most cases, the [`useFocusEffect`](use-focus-effect.md) hook might be appropriate than adding the listener manually. See [this guide](function-after-focusing-screen.md) for more details to decide which API you should use.
+
+### `blur`
+
+This event is emitted when the screen goes out of focus.
+
+### `state`
+
+This event is emitted when the navigator's state changes. This event receives the navigator's state in the event data (`event.data.state`).
+
+### `beforeRemove`
+
+This event is emitted when the user is leaving the screen, there's a chance to [prevent the user from leaving](preventing-going-back.md).
+
+## Listening to events
+
+There are multiple ways to listen to events from the navigators. Before we get into how to add listeners, one thing to keep in mind is that you can only listen to events from the immediate parent navigator. For example, if you try to add a listener in a screen is inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use [`navigation.getParent`](navigation-prop.md#getparent) to get a reference to parent navigator's navigation prop and add a listener.
 
 Each callback registered as an event listener receive an event object as its argument. The event object contains few properties:
 
@@ -21,9 +40,7 @@ Each callback registered as an event listener receive an event object as its arg
 - `target` - The route key for the screen that should receive the event. For some events, this maybe `undefined` if the event wasn't related to a specific screen.
 - `preventDefault` - For some events, there may be a `preventDefault` method on the event object. Calling this method will prevent the default action performed by the event (such as switching tabs on `tabPress`). Support for preventing actions are only available for certain events like `tabPress` and won't work for all events.
 
-One thing to keep in mind is that you can only listen to events from the immediate parent navigator. For example, if you try to add a listener in a screen is inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use `navigation.getParent()` to get a reference to parent navigator's navigation prop and add a listener.
-
-There are 3 ways to listen to events:
+You can listen to events with the following APIs:
 
 ### `navigation.addListener`
 

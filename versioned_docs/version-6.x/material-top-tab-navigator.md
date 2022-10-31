@@ -27,7 +27,7 @@ You also need to install [`react-native-pager-view`](https://github.com/callstac
 If you have a Expo managed project, in your project directory, run:
 
 ```sh
-expo install react-native-pager-view
+npx expo install react-native-pager-view
 ```
 
 If you have a bare React Native project, in your project directory, run:
@@ -62,6 +62,10 @@ function MyTabs() {
 ### Props
 
 The `Tab.Navigator` component accepts following props:
+
+#### `id`
+
+Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
 
 #### `initialRouteName`
 
@@ -100,7 +104,9 @@ String indicating whether the keyboard gets dismissed in response to a drag gest
 Object containing the initial height and width of the screens. Passing this will improve the initial rendering performance. For most apps, this is a good default:
 
 ```js
-{ width: Dimensions.get('window').width }}
+{
+  width: Dimensions.get('window').width;
+}
 ```
 
 #### `sceneContainerStyle`
@@ -319,7 +325,7 @@ Style object for the view containing the tab items.
 
 #### `tabBarStyle`
 
-Style object for the the tab bar.
+Style object for the tab bar.
 
 #### `swipeEnabled`
 
@@ -362,7 +368,7 @@ To prevent the default behavior, you can call `event.preventDefault`:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('tabPress', e => {
+  const unsubscribe = navigation.addListener('tabPress', (e) => {
     // Prevent default behavior
     e.preventDefault();
 
@@ -382,7 +388,7 @@ Example:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('tabLongPress', e => {
+  const unsubscribe = navigation.addListener('tabLongPress', (e) => {
     // Do something
   });
 

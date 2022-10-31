@@ -4,8 +4,7 @@ title: useLinkBuilder
 sidebar_label: useLinkBuilder
 ---
 
-
-The `useLinkBuilder` hook let's us build a path to use for links for a screen in the current navigator's state. It returns a function that takes `name` and `params` for the screen to focus and returns path based on the [`linking` options](navigation-container.md#linking).
+The `useLinkBuilder` hook lets us build a path to use for links for a screen in the current navigator's state. It returns a function that takes `name` and `params` for the screen to focus and returns path based on the [`linking` options](navigation-container.md#linking).
 
 ```js
 import { Link, CommonActions, useLinkBuilder } from '@react-navigation/native';

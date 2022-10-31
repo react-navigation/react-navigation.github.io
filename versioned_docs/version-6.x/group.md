@@ -65,7 +65,7 @@ See [Options for screens](screen-options.md) for more details and examples.
 
 ### `navigationKey`
 
-Optional key for a group of screens screen. If the key changes, all existing screens in this group will be removed or reset:
+Optional key for a group of screens screen. If the key changes, all existing screens in this group will be removed (if used in a stack navigator) or reset (if used in a tab or drawer navigator):
 
 ```js
 <Stack.Group navigationKey={isSignedIn ? 'user' : 'guest'}>

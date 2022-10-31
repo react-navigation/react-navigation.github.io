@@ -40,7 +40,7 @@ The libraries we will install now are [`react-native-screens`](https://github.co
 In your project directory, run:
 
 ```sh
-expo install react-native-screens react-native-safe-area-context
+npx expo install react-native-screens react-native-safe-area-context
 ```
 
 This will install versions of these libraries that are compatible.
@@ -77,13 +77,17 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ```
 
-and make sure to add an import statement at the top of this file:
+and make sure to add the following import statement at the top of this file below your package statement:
 
 ```java
 import android.os.Bundle;
 ```
 
 This change is required to avoid crashes related to View state being not persisted consistently across Activity restarts.
+
+> Note: When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional dependencies. If you're getting an error "Unable to resolve module", you need to install that module in your project.
+
+## Wrapping your app in `NavigationContainer`
 
 Now, we need to wrap the whole app in `NavigationContainer`. Usually you'd do this in your entry file, such as `index.js` or `App.js`:
 
@@ -98,7 +102,7 @@ export default function App() {
 }
 ```
 
-> Note: When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional dependencies. If you're getting an error "Unable to resolve module", you need to install that module in your project.
+> Note: In a typical React Native app, the `NavigationContainer` should be only used once in your app at the root. You shouldn't nest multiple `NavigationContainer`s unless you have a specific use case for them.
 
 Now you are ready to build and run your app on the device/simulator.
 

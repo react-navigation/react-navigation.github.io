@@ -190,6 +190,12 @@ Function which is called after the navigation container and all its children fin
 - Making sure that the `ref` is usable. See [docs regarding initialization of the ref](navigating-without-navigation-prop.md#handling-initialization) for more details.
 - Hiding your native splash screen
 
+### `onUnhandledAction`
+
+Function which is called when a navigation action is not handled by any of the navigators.
+
+By default, React Navigation will show a development-only error message when an action was not handled. You can override the default behavior by providing a custom function.
+
 ### `linking`
 
 Configuration for linking integration used for deep linking, URL support in browsers etc.
@@ -358,6 +364,8 @@ You can provide a custom `getInitialURL` function where you can return the link 
 For example, you could do something like following to handle both deep linking and [Firebase notifications](https://rnfirebase.io/messaging/notifications):
 
 ```js
+import messaging from '@react-native-firebase/messaging';
+
 <NavigationContainer
   linking={{
     prefixes: ['https://mychat.com', 'mychat://'],
@@ -379,7 +387,7 @@ For example, you could do something like following to handle both deep linking a
 
       // Get the `url` property from the notification which corresponds to a screen
       // This property needs to be set on the notification payload when sending it
-      return message?.notification.url;
+      return message?.data?.url;
     },
   }}
 >
@@ -396,6 +404,8 @@ Similar to [`getInitialURL`](#linkinggetinitialurl), you can provide a custom `s
 For example, you could do something like following to handle both deep linking and [Firebase notifications](https://rnfirebase.io/messaging/notifications):
 
 ```js
+import messaging from '@react-native-firebase/messaging';
+
 <NavigationContainer
   linking={{
     prefixes: ['https://mychat.com', 'mychat://'],
@@ -408,12 +418,12 @@ For example, you could do something like following to handle both deep linking a
       const onReceiveURL = ({ url }: { url: string }) => listener(url);
 
       // Listen to incoming links from deep linking
-      Linking.addEventListener('url', onReceiveURL);
+      const subscription = Linking.addEventListener('url', onReceiveURL);
 
       // Listen to firebase push notifications
       const unsubscribeNotification = messaging().onNotificationOpenedApp(
         (message) => {
-          const url = message.notification.url;
+          const url = message.data?.url;
 
           if (url) {
             // Any custom logic to check whether the URL needs to be handled
@@ -427,7 +437,7 @@ For example, you could do something like following to handle both deep linking a
 
       return () => {
         // Clean up the event listeners
-        Linking.removeEventListener('url', onReceiveURL);
+        subscription.remove();
         unsubscribeNotification();
       };
     },
@@ -533,3 +543,9 @@ function App() {
 ### `theme`
 
 Custom theme to use for the navigation components such as the header, tab bar etc. See [theming guide](themes.md) for more details and usage guide.
+
+### `independent`
+
+Whether this navigation container should be independent of parent containers. If this is not set to `true`, this container cannot be nested inside another container. Setting it to `true` disconnects any children navigators from parent container.
+
+You probably don't want to set this to `true` in a typical React Native app. This is only useful if you have navigation trees that work like their own mini-apps and don't need to navigate to the screens outside of them.

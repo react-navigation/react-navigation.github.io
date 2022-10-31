@@ -4,9 +4,21 @@ title: Navigating without the navigation prop
 sidebar_label: Navigating without the navigation prop
 ---
 
-Sometimes you need to trigger a navigation action from places where you do not have access to the `navigation` prop, such as a Redux middleware. For such cases, you can dispatch navigation actions from the navigation container.
+Sometimes you need to trigger a navigation action from places where you do not have access to the `navigation` prop, such as a Redux middleware. For such cases, you can dispatch navigation actions use a `ref` on the navigation container.
 
-If you're looking for a way to navigate from inside a component without needing to pass the `navigation` prop down, see [`useNavigation`](use-navigation.md). **Do not** use this method when you have access to a `navigation` prop or `useNavigation` since it will behave differently, and many helper methods specific to screens won't be available.
+**Do not** use the `ref` if:
+
+- You need to navigate from inside a component without needing to pass the `navigation` prop down, see [`useNavigation`](use-navigation.md) instead. The `ref` behaves differently, and many helper methods specific to screens aren't available.
+- You need to handle deep links or universal links. Doing this with the `ref` has many edge cases. See [configuring links](configuring-links.md) for more information on handling deep linking.
+- You need to integrate with third party libraries, such as push notifications, branch etc. See [third party integrations for deep linking](deep-linking.md#third-party-integrations) instead.
+
+**Do** use the `ref` if:
+
+- You use a state management library such as Redux, where you need to dispatch navigation actions from a middleware.
+
+Note that it's usually better to trigger navigation from user actions such as button presses, rather than from a Redux middleware. Navigating on user action makes the app feel more responsive and provides better UX. So consider this before using the `ref` for navigation. The `ref` is an escape hatch for scenarios that can't be handled with the existing APIs and should only be used in rare situations.
+
+## Usage
 
 You can get access to the root navigation object through a `ref` and pass it to the `RootNavigation` which we will later use to navigate.
 
@@ -74,10 +86,10 @@ When writing tests, you may mock the navigation functions, and make assertions o
 
 ## Handling initialization
 
-When using this pattern, you need to keep few things in mind to avoid crashes in your app.
+When using this pattern, you need to keep few things in mind to avoid navigation from failing in your app.
 
-- The ref is set only after the navigation container renders, this can be async when handling deep links
-- A navigator needs to be rendered to be able to handle actions
+- The `ref` is set only after the navigation container renders, this can be async when handling deep links
+- A navigator needs to be rendered to be able to handle actions, the `ref` won't be ready without a navigator
 
 If you try to navigate without rendering a navigator or before the navigator finishes mounting, it will print an error and do nothing. So you'll need to add an additional check to decide what to do until your app mounts.
 

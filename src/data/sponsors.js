@@ -1,18 +1,18 @@
 export default [
   {
-    "avatarUrl": "https://avatars.githubusercontent.com/u/9664363?u=78ff34b8adf65d4b93966e6309795e42740beef2&v=4",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/9664363?u=a4a9e93dc4305c91ced38b83d4c08186f7254b04&v=4",
     "username": "EvanBacon",
     "name": "Evan Bacon"
-  },
-  {
-    "avatarUrl": "https://avatars.githubusercontent.com/u/90494?u=a7ad2e06021c9547dcf8638a6a38ccc93a76b6fe&v=4",
-    "username": "brentvatne",
-    "name": "Brent Vatne"
   },
   {
     "avatarUrl": "https://avatars.githubusercontent.com/u/306134?v=4",
     "username": "wcandillon",
     "name": "William Candillon"
+  },
+  {
+    "avatarUrl": "https://avatars.githubusercontent.com/u/476779?v=4",
+    "username": "Expensify",
+    "name": "Expensify, Inc"
   },
   {
     "avatarUrl": "https://avatars.githubusercontent.com/u/916690?u=66482eb2c5bb755553afbcfa219dcacc42fc487a&v=4",
@@ -50,9 +50,19 @@ export default [
     "name": "Mark Holland"
   },
   {
-    "avatarUrl": "https://avatars.githubusercontent.com/u/1885080?v=4",
-    "username": "coinbase",
-    "name": "Coinbase"
+    "avatarUrl": "https://avatars.githubusercontent.com/u/3584560?u=f54bd481e956c6b3fe88a15f466ff9a3973e4b35&v=4",
+    "username": "hetmann",
+    "name": "Hetmann W. Iohan"
+  },
+  {
+    "avatarUrl": "https://avatars.githubusercontent.com/u/4328772?u=c4e0fd72bd7cdb3751166c8ade8ef253e6f5ba67&v=4",
+    "username": "itsrifat",
+    "name": "Moinul Hossain"
+  },
+  {
+    "avatarUrl": "https://avatars.githubusercontent.com/u/4376835?u=0cf5324a78dd4140ef71943048dedac328be68b9&v=4",
+    "username": "lnmunhoz",
+    "name": "Lucas N. Munhoz"
   },
   {
     "avatarUrl": "https://avatars.githubusercontent.com/u/5605177?v=4",
@@ -60,9 +70,9 @@ export default [
     "name": null
   },
   {
-    "avatarUrl": "https://avatars.githubusercontent.com/u/6088888?v=4",
-    "username": "faraza",
-    "name": "Faraz A"
+    "avatarUrl": "https://avatars.githubusercontent.com/u/5967956?u=f7f5ed6b6b399c2953fd0e3be0512c378e9f76c4&v=4",
+    "username": "codinsonn",
+    "name": "Thorr Stevens"
   },
   {
     "avatarUrl": "https://avatars.githubusercontent.com/u/6457344?u=47e100289441b7f4681a7809202ff683886e4f5e&v=4",
@@ -80,9 +90,9 @@ export default [
     "name": "Radek Czemerys"
   },
   {
-    "avatarUrl": "https://avatars.githubusercontent.com/u/8604114?v=4",
-    "username": "ctlabvn",
-    "name": "CTLab Vietnam"
+    "avatarUrl": "https://avatars.githubusercontent.com/u/12504344?v=4",
+    "username": "expo",
+    "name": "Expo"
   },
   {
     "avatarUrl": "https://avatars.githubusercontent.com/u/13601619?v=4",
@@ -95,14 +105,24 @@ export default [
     "name": "Alexi Canales"
   },
   {
+    "avatarUrl": "https://avatars.githubusercontent.com/u/15199031?u=46da50e88594eb284cf249485f202d5d43d474d1&v=4",
+    "username": "mrousavy",
+    "name": "Marc Rousavy"
+  },
+  {
+    "avatarUrl": "https://avatars.githubusercontent.com/u/17621507?u=0ee7f26191d430f4fc0672cef92c2759d948bbb5&v=4",
+    "username": "dsznajder",
+    "name": "Damian Sznajder"
+  },
+  {
     "avatarUrl": "https://avatars.githubusercontent.com/u/21980965?u=5a571092a83cb71508c60a9c86ab2520fde8a68e&v=4",
     "username": "jarvisluong",
     "name": "Jarvis Luong"
   },
   {
     "avatarUrl": "https://avatars.githubusercontent.com/u/26326015?u=33a1afbe11e8f6b962c6267606d59c2b2ef94716&v=4",
-    "username": "Bang9",
-    "name": "HYUNGU, KANG"
+    "username": "bang9",
+    "name": "Hyungu Kang | Airen"
   },
   {
     "avatarUrl": "https://avatars.githubusercontent.com/u/27461460?u=b5860875e26d33fd70fd210f4ea74f81cdf9d99b&v=4",
@@ -110,33 +130,38 @@ export default [
     "name": "Hyo"
   },
   {
-    "avatarUrl": "https://avatars.githubusercontent.com/u/30093692?u=d99abcc5a79ddc4303d11e66a74a5c10142e734c&v=4",
-    "username": "henrymoulton",
-    "name": null
-  },
-  {
     "avatarUrl": "https://avatars.githubusercontent.com/u/30735054?v=4",
     "username": "endearhq",
     "name": "Endear"
   },
   {
-    "avatarUrl": "https://avatars.githubusercontent.com/u/36824170?u=18c3b7d6e7db72426a6d50712eb7b50c67d669b8&v=4",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/33361399?u=6180514361e35ae42e2401431555c82cc63adda9&v=4",
+    "username": "oliverloops",
+    "name": "Oliver Lopez "
+  },
+  {
+    "avatarUrl": "https://avatars.githubusercontent.com/u/34658847?u=17fd3603d012d068c060039bcf009095055290a1&v=4",
+    "username": "RatebSeirawan",
+    "name": "Rateb Seirawan"
+  },
+  {
+    "avatarUrl": "https://avatars.githubusercontent.com/u/36824170?u=6f56fa2998ffba6b5a3908c79e2ef9331bad502a&v=4",
     "username": "luism3861",
     "name": "Luis Medina Huerta"
   },
   {
-    "avatarUrl": "https://avatars.githubusercontent.com/u/45317893?u=3cebc0f5786c6ba9c96d6b2dfb3ab8bf605994c3&v=4",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/45317893?u=253e6eabcb23a5361e93a064914c9b8d136ac888&v=4",
     "username": "GandresCoello18",
     "name": "Andres Coello"
   },
   {
     "avatarUrl": "https://avatars.githubusercontent.com/u/46625943?u=63c9ed9017c34900df8b5ae2ed455ec4c82ef8aa&v=4",
     "username": "bowen9284",
-    "name": "Matt"
+    "name": "Matt Bowen"
   },
   {
-    "avatarUrl": "https://avatars.githubusercontent.com/u/65687793?u=85bc8ea9018a174a1adb79a278b8c284c305c5a3&v=4",
-    "username": "expo-team",
-    "name": "Expo team"
+    "avatarUrl": "https://avatars.githubusercontent.com/u/49920282?v=4",
+    "username": "reactrondev",
+    "name": "Reactron"
   }
 ]

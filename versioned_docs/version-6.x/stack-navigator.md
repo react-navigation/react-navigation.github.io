@@ -29,7 +29,7 @@ You also need to install [`react-native-gesture-handler`](https://docs.swmansion
 If you have a Expo managed project, in your project directory, run:
 
 ```sh
-expo install react-native-gesture-handler
+npx expo install react-native-gesture-handler
 ```
 
 If you have a bare React Native project, in your project directory, run:
@@ -51,7 +51,7 @@ Optionally, you can also install [`@react-native-masked-view/masked-view`](https
 If you have a Expo managed project, in your project directory, run:
 
 ```sh
-expo install @react-native-masked-view/masked-view
+npx expo install @react-native-masked-view/masked-view
 ```
 
 If you have a bare React Native project, in your project directory, run:
@@ -87,6 +87,10 @@ function MyStack() {
 
 The `Stack.Navigator` component accepts following props:
 
+#### `id`
+
+Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
+
 #### `initialRouteName`
 
 The name of the route to render on first load of the navigator.
@@ -97,13 +101,13 @@ Default options to use for the screens in the navigator.
 
 #### `detachInactiveScreens`
 
-Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. Make sure to call `enableScreens` from [react-native-screens](https://github.com/software-mansion/react-native-screens) to make it work. Defaults to `true`.
+Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
 
-You can customize it further on per screen basis using the [`detachPreviousScreen`](#detachinactivescreen) option.
+If you need to disable this optimization for specific screens (e.g. you want to screen to stay in view even when unfocused) [`detachPreviousScreen`](#detachpreviousscreen) option.
 
 #### `keyboardHandlingEnabled`
 
-If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen.  Defaults to `true`.
+If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to `true`.
 
 ### Options
 
@@ -130,6 +134,8 @@ Function which returns a React Element to display as the overlay for the card. M
 Style object for the card in stack. You can provide a custom background color to use instead of the default background here.
 
 You can also specify `{ backgroundColor: 'transparent' }` to make the previous screen visible underneath (for transparent modals). This is useful to implement things like modal dialogs. You should also specify `presentation: 'modal'` in the options when using a transparent background so previous screens aren't detached and stay visible underneath.
+
+On Web, the height of the screen isn't limited to the height of the viewport. This is by design to allow the browser's address bar to hide when scrolling. If this isn't desirable behavior, you can set `cardStyle` to `{ flex: 1 }` to force the screen to fill the viewport.
 
 #### `presentation`
 
@@ -208,7 +214,18 @@ Interpolated styles for various parts of the header. Refer the [Animations secti
 
 #### `detachPreviousScreen`
 
-Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`. Defaults to `false` for the last screen for modals, otherwise `true`.
+Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`.
+
+This is automatically adjusted when using [`presentation`](#presentation) as `transparentModal` or `modal` to keep the required screens visible. Defaults to `true` in other cases.
+
+#### `freezeOnBlur`
+
+Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to `false`.
+Defaults to `true` when `enableFreeze()` from `react-native-screens` package is run at the top of the application.
+
+Requires `react-native-screens` version >=3.16.0.
+
+Only supported on iOS and Android.
 
 ### Header related options
 

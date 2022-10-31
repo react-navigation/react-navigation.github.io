@@ -59,6 +59,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
+        useLegacyImplementation
         initialRouteName="Root"
         screenOptions={{ headerShown: false }}
       >

@@ -61,6 +61,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
+        useLegacyImplementation
         drawerContent={(props) => <CustomDrawerContent {...props} />}
       >
         <Drawer.Screen name="Home" component={HomeScreen} />

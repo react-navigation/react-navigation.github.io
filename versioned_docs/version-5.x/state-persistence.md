@@ -25,7 +25,7 @@ import { Linking, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 
-const PERSISTENCE_KEY = 'NAVIGATION_STATE';
+const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
 
 export default function App() {
   const [isReady, setIsReady] = React.useState(false);

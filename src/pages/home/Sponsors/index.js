@@ -8,10 +8,10 @@ export default function Sponsors() {
     <section className={styles.wrapper}>
       <div className={styles.container}>
         <p>
-          React Navigation is built and funded by{' '}
-          <a href="https://expo.io">Expo</a> &amp;{' '}
-          <a href="https://swmansion.com/">Software Mansion</a>, with
-          contributions from the{' '}
+          React Navigation is built by <a href="https://expo.dev">Expo</a>,{' '}
+          <a href="https://swmansion.com/">Software Mansion</a>, and{' '}
+          <a href="https://www.callstack.com/">Callstack</a>, with contributions
+          from the{' '}
           <a href="https://github.com/react-navigation/react-navigation/graphs/contributors">
             community
           </a>{' '}

@@ -41,6 +41,8 @@ function ProfileScreen({ navigation }) {
 }
 ```
 
+See the [navigation events guide](navigation-events.md) for more details on the event listener API.
+
 In most cases, it's recommended to use the `useFocusEffect` hook instead of adding the listener manually. See below for details.
 
 ## Triggering an action with the `useFocusEffect` hook
@@ -68,6 +70,8 @@ function Profile({ userId }) {
   return <ProfileContent user={user} />;
 }
 ```
+
+See the [`useFocusEffect`](https://reactnavigation.org/docs/use-focus-effect/) documentation for more details.
 
 ## Re-rendering screen with the `useIsFocused` hook
 

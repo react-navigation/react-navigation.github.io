@@ -149,7 +149,7 @@ This might occur if you have multiple versions of [`react-native-safe-area-conte
 If you're using Expo managed workflow, it's likely that you have installed an incompatible version. To install the correct version, run:
 
 ```sh
-expo install react-native-safe-area-context
+npx expo install react-native-safe-area-context
 ```
 
 If it didn't fix the error or you're not using Expo managed workflow, you'll need to check which package depends on a different version of `react-native-safe-area-context`.
@@ -223,28 +223,17 @@ Example of some use cases for passing functions in params are the following:
 - To pass complex data to another screen. Instead of passing the data `params`, you can store that complex data somewhere else (like a global store), and pass an id instead. Then the screen can get the data from the global store using the id. See [what should be in params](params.md#what-should-be-in-params).
 - Pass data, callbacks etc. from a parent to child screens. You can either use React Context, or pass a children callback to pass these down instead of using params. See [passing additional props](hello-react-navigation.md#passing-additional-props).
 
-If you don't use state persistence or deep link to the screen which accepts functions in params, then the warning doesn't affect you and you can safely ignore it. To ignore the warning, you can use `YellowBox.ignoreWarnings`.
+If you don't use state persistence or deep link to the screen which accepts functions in params, then the warning doesn't affect you and you can safely ignore it. To ignore the warning, you can use `LogBox.ignoreLogs`.
 
 Example:
 
 ```js
-import { YellowBox } from 'react-native';
+import { LogBox } from 'react-native';
 
-YellowBox.ignoreWarnings([
+LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
 ]);
 ```
-
-
-> Note: As of React Native 0.63 YellowBox has been deprecated in favor of LogBox, so the previous
-code would be written as follows:
->```js
->import { LogBox } from 'react-native';
->
->LogBox.ignoreLogs([
->  'Non-serializable values were found in the navigation state',
->]);
->```
 
 ## I'm getting "Invalid hook call. Hooks can only be called inside of the body of a function component"
 

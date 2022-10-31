@@ -30,7 +30,7 @@ First, you will want to specify a URL scheme for your app. This corresponds to t
 Next, let's configure our navigation container to extract the path from the app's incoming URI.
 
 ```js
-// Install this package with `expo install expo-linking`
+// Install this package with `npx expo install expo-linking`
 import * as Linking from 'expo-linking';
 
 // Linking.createURL is available as of expo@40.0.1 and expo-linking@2.0.1. If
@@ -153,7 +153,7 @@ If you're targeting iOS 9.x or newer:
 // Add the header at the top of the file:
 #import <React/RCTLinkingManager.h>
 
-// Add this above `@end`:
+// Add this inside `@implementation AppDelegate` above `@end`:
 - (BOOL)application:(UIApplication *)application
    openURL:(NSURL *)url
    options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
@@ -168,7 +168,7 @@ If you're targeting iOS 8.x or older, you can use the following code instead:
 // Add the header at the top of the file:
 #import <React/RCTLinkingManager.h>
 
-// Add this above `@end`:
+// Add this inside `@implementation AppDelegate` above `@end`:
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
@@ -180,7 +180,7 @@ If you're targeting iOS 8.x or older, you can use the following code instead:
 If your app is using Universal Links, you'll need to add the following code as well:
 
 ```objc
-// Add this above `@end`:
+// Add this inside `@implementation AppDelegate` above `@end`:
 - (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
  restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
 {
@@ -191,7 +191,6 @@ If your app is using Universal Links, you'll need to add the following code as w
 ```
 
 Now you need to add the scheme to your project configuration.
-
 
 The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add mychat --ios`.
 

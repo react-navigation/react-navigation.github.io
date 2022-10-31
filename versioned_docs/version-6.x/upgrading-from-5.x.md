@@ -21,10 +21,14 @@ React Navigation 6 requires newer versions of following libraries:
 
 To upgrade `react-native-safe-area-context` and `react-native-screens` to the latest supported versions, do the following:
 
+> **NOTE:**
+> 
+> If your react-native Version is <= 0.63.4, don't use `react-native-safe-area-context` in Version 4, but only till 3.4.1. [More Information see here](https://github.com/th3rdwave/react-native-safe-area-context/issues/248)
+
 For Expo managed projects:
 
 ```sh
-expo install react-native-safe-area-context react-native-screens
+npx expo install react-native-safe-area-context react-native-screens
 ```
 
 For bare React Native projects:
@@ -462,6 +466,7 @@ If you were importing `createNativeStackNavigator` from `react-native-screens/na
 - `headerTranslucent` is changed to `headerTransparent`
 - `headerBlurEffect` is now a separate option and no longer a property in `headerStyle`
 - `headerTopInsetEnabled` option is removed, it's now automatically set when necessary
+- `disableBackButtonMenu` is changed to `headerBackButtonMenuEnabled`
 - `backButtonImage` is renamed to `headerBackImageSource`
 - `searchBar` is renamed to `headerSearchBarOptions`
 - `replaceAnimation` is renamed to `animationTypeForReplace`
@@ -522,7 +527,7 @@ The old options will still keep working with a deprecation warning. To avoid the
 
 ### The `tabBarVisible` option is no longer present
 
-Since the the tab bar now supports a `tabBarStyle` option, we have removed the `tabBarVisible` option. You can achieve the same behavior by specifying `tabBarStyle: { display: 'none' }` in `options`.
+Since the tab bar now supports a `tabBarStyle` option, we have removed the `tabBarVisible` option. You can achieve the same behavior by specifying `tabBarStyle: { display: 'none' }` in `options`.
 
 ### The `lazy` prop is moved to `lazy` option for per-screen configuration for bottom tabs
 
@@ -549,7 +554,7 @@ To upgrade `react-native-pager-view` to the latest supported version, do the fol
 For Expo managed projects:
 
 ```sh
-expo install react-native-pager-view
+npx expo install react-native-pager-view
 ```
 
 For bare React Native projects:
@@ -674,6 +679,24 @@ The following options have been moved and renamed:
 - `minSwipeDistance` -> `swipeMinDistance`
 
 The old options will still keep working with a deprecation warning. To avoid the deprecation warning, move these to `screenOptions`.
+
+### The `drawerContent` prop no longer receives `progress` in its argument
+
+The callback passed to `drawerContent` no longer receives the animated `progress` value in its argument. Instead, you can use the `useDrawerProgress` hook to get the current progress value.
+
+```js
+function CustomDrawerContent(props) {
+  const progress = useDrawerProgress();
+
+  // ...
+}
+
+// ...
+
+<Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
+```
+
+The `useDrawerProgress` hook returns a Reanimated `Node` or Reanimated `SharedValue` depending on the implementation used.
 
 ### The `lazy` prop is moved to `lazy` option for per-screen configuration for drawer
 
