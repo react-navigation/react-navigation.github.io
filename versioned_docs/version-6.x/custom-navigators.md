@@ -325,20 +325,23 @@ function BottomTabNavigator({
   screenOptions,
   ...rest
 }) {
-  const { state, descriptors, navigation } = useNavigationBuilder(TabRouter, {
-    initialRouteName,
-    backBehavior,
-    children,
-    screenOptions,
-  });
+  const { state, descriptors, navigation, NavigationContent } =
+    useNavigationBuilder(TabRouter, {
+      initialRouteName,
+      backBehavior,
+      children,
+      screenOptions,
+    });
 
   return (
-    <BottomTabView
-      {...rest}
-      state={state}
-      navigation={navigation}
-      descriptors={descriptors}
-    />
+    <NavigationContent>
+      <BottomTabView
+        {...rest}
+        state={state}
+        navigation={navigation}
+        descriptors={descriptors}
+      />
+    <NavigationContent>
   );
 }
 
@@ -352,12 +355,13 @@ import MyRouter from './MyRouter';
 
 // ...
 
-const { state, descriptors, navigation } = useNavigationBuilder(MyRouter, {
-  initialRouteName,
-  backBehavior,
-  children,
-  screenOptions,
-});
+const { state, descriptors, navigation, NavigationContent } =
+  useNavigationBuilder(MyRouter, {
+    initialRouteName,
+    backBehavior,
+    children,
+    screenOptions,
+  });
 
 // ...
 ```

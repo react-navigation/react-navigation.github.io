@@ -4,7 +4,7 @@ title: Navigation events
 sidebar_label: Navigation events
 ---
 
-You can listen to various events emitted by React Navigation to get notified of certain events, and in some cases, override the default action. There are few core events such as `focus`, `blur` etc. (documented below) that work for every navigator, as well as navigator specific events that work for only for certain navigators.
+You can listen to various events emitted by React Navigation to get notified of certain events, and in some cases, override the default action. There are few core events such as `focus`, `blur` etc. (documented below) that work for every navigator, as well as navigator specific events that work only for certain navigators.
 
 Apart from the core events, each navigator can emit their own custom events. For example, stack navigator emits `transitionStart` and `transitionEnd` events, tab navigator emits `tabPress` event etc. You can find details about the events emitted on the individual navigator's documentation.
 
@@ -32,7 +32,7 @@ This event is emitted when the user is leaving the screen, there's a chance to [
 
 ## Listening to events
 
-There are multiple ways to listen to events from the navigators. Before we get into how to add listeners, one thing to keep in mind is that you can only listen to events from the immediate parent navigator. For example, if you try to add a listener in a screen is inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use `navigation.getParent()` to get a reference to parent navigator's navigation prop and add a listener.
+There are multiple ways to listen to events from the navigators. Before we get into how to add listeners, one thing to keep in mind is that you can only listen to events from the immediate parent navigator. For example, if you try to add a listener in a screen is inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use [`navigation.getParent`](navigation-prop.md#getparent) to get a reference to parent navigator's navigation prop and add a listener.
 
 Each callback registered as an event listener receive an event object as its argument. The event object contains few properties:
 

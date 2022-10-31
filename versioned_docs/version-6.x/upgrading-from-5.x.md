@@ -24,7 +24,7 @@ To upgrade `react-native-safe-area-context` and `react-native-screens` to the la
 For Expo managed projects:
 
 ```sh
-expo install react-native-safe-area-context react-native-screens
+npx expo install react-native-safe-area-context react-native-screens
 ```
 
 For bare React Native projects:
@@ -523,7 +523,7 @@ The old options will still keep working with a deprecation warning. To avoid the
 
 ### The `tabBarVisible` option is no longer present
 
-Since the the tab bar now supports a `tabBarStyle` option, we have removed the `tabBarVisible` option. You can achieve the same behavior by specifying `tabBarStyle: { display: 'none' }` in `options`.
+Since the tab bar now supports a `tabBarStyle` option, we have removed the `tabBarVisible` option. You can achieve the same behavior by specifying `tabBarStyle: { display: 'none' }` in `options`.
 
 ### The `lazy` prop is moved to `lazy` option for per-screen configuration for bottom tabs
 
@@ -550,7 +550,7 @@ To upgrade `react-native-pager-view` to the latest supported version, do the fol
 For Expo managed projects:
 
 ```sh
-expo install react-native-pager-view
+npx expo install react-native-pager-view
 ```
 
 For bare React Native projects:
@@ -675,6 +675,24 @@ The following options have been moved and renamed:
 - `minSwipeDistance` -> `swipeMinDistance`
 
 The old options will still keep working with a deprecation warning. To avoid the deprecation warning, move these to `screenOptions`.
+
+### The `drawerContent` prop no longer receives `progress` in its argument
+
+The callback passed to `drawerContent` no longer receives the animated `progress` value in its argument. Instead, you can use the `useDrawerProgress` hook to get the current progress value.
+
+```js
+function CustomDrawerContent(props) {
+  const progress = useDrawerProgress();
+
+  // ...
+}
+
+// ...
+
+<Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
+```
+
+The `useDrawerProgress` hook returns a Reanimated `Node` or Reanimated `SharedValue` depending on the implementation used.
 
 ### The `lazy` prop is moved to `lazy` option for per-screen configuration for drawer
 

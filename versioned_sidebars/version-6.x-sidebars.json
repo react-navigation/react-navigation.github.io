@@ -22,6 +22,7 @@
       "version-6.x/hiding-tabbar-in-screens",
       "version-6.x/status-bar",
       "version-6.x/modal",
+      "version-6.x/multiple-drawers",
       "version-6.x/screen-options-resolution",
       "version-6.x/custom-android-back-button-handling",
       "version-6.x/preventing-going-back",
@@ -99,6 +100,7 @@
       "version-6.x/custom-navigators"
     ],
     "Additional Resources": [
+      "version-6.x/migration-guides",
       "version-6.x/community-libraries-and-navigators",
       "version-6.x/more-resources"
     ],

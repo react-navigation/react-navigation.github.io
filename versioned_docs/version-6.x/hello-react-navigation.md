@@ -129,7 +129,7 @@ Sometimes we might want to pass additional props to a screen. We can do that wit
 
    ```js
    <Stack.Screen name="Home">
-     {props => <HomeScreen {...props} extraData={someData} />}
+     {(props) => <HomeScreen {...props} extraData={someData} />}
    </Stack.Screen>
    ```
 

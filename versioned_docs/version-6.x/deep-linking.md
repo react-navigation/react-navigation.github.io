@@ -30,7 +30,7 @@ First, you will want to specify a URL scheme for your app. This corresponds to t
 Next, install `expo-linking` which we'd need to get the deep link prefix:
 
 ```sh
-expo install expo-linking
+npx expo install expo-linking
 ```
 
 Then, let's configure React Navigation to use the `scheme` for parsing incoming deep links:
@@ -77,7 +77,7 @@ You'll need to link `RCTLinking` to your project by following the steps describe
 // Add the header at the top of the file:
 #import <React/RCTLinkingManager.h>
 
-// Add this above `@end`:
+// Add this inside `@implementation AppDelegate` above `@end`:
 - (BOOL)application:(UIApplication *)application
    openURL:(NSURL *)url
    options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
@@ -89,7 +89,7 @@ You'll need to link `RCTLinking` to your project by following the steps describe
 If your app is using [Universal Links](https://developer.apple.com/ios/universal-links/), you'll need to add the following code as well:
 
 ```objc
-// Add this above `@end`:
+// Add this inside `@implementation AppDelegate` above `@end`:
 - (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
  restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
 {
@@ -173,8 +173,14 @@ After adding them, it should look like this:
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:scheme="mychat" />
-        <data android:scheme="https" android:host="www.example.com" />
-        <data android:scheme="http" android:host="www.example.com" />
+    </intent-filter>
+    <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="http" />
+        <data android:scheme="https" />
+        <data android:host="www.example.com" />
     </intent-filter>
 </activity>
 ```
@@ -197,7 +203,7 @@ If you're testing on Android, run:
 npx react-native run-android
 ```
 
-If you're using Expo managed workflow and testing on Expo client, you don't need to rebuild the app. However, you will need to use the the correct address and port that's printed when you run `expo start` ([see above](#setup-with-expo-projects)), e.g. `exp://127.0.0.1:19000/--/`.
+If you're using Expo managed workflow and testing on Expo client, you don't need to rebuild the app. However, you will need to use the correct address and port that's printed when you run `expo start` ([see above](#setup-with-expo-projects)), e.g. `exp://127.0.0.1:19000/--/`.
 
 If you want to test with your custom scheme in your Expo app, you will need rebuild your standalone app by running `expo build:ios -t simulator` or `expo build:android` and install the resulting binaries.
 

@@ -24,6 +24,7 @@ const Drawer = createDrawerNavigator();
 function MyDrawer() {
   return (
     <Drawer.Navigator
+      useLegacyImplementation
       screenOptions={{
         drawerActiveTintColor: '#e91e63',
         drawerItemStyle: { marginVertical: 30 },

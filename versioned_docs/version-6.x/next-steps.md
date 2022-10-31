@@ -4,7 +4,7 @@ title: Next steps
 sidebar_label: Next steps
 ---
 
-You are now familiar with how to create a native stack navigator, configure it on your screen components, navigate between routes, and display full-screen modals. Native stack navigator and its related APIs will be the most frequently used tools in your React Navigation toolbelt, but there are problems that they don't solve. For example, you can't build tab-based navigation using a stack navigator &mdash; for that, you need to use a [TabNavigator](tab-based-navigation.md).
+You are now familiar with how to create a stack navigator, configure it on your screen components, navigate between routes, and display modals. Stack navigators and their related APIs will be the most frequently used tools in your React Navigation toolbelt, but there are problems that they don't solve. For example, you can't build tab-based navigation using a stack navigator &mdash; for that, you need to use a [TabNavigator](tab-based-navigation.md).
 
 The rest of the documentation is organized around specific use cases, so you can jump between the sections under "Guides" as the need arises (but it also wouldn't hurt you to familiarize yourself with them pre-emptively!).
 

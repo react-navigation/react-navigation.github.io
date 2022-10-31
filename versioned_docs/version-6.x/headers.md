@@ -142,7 +142,7 @@ function StackScreen() {
 }
 ```
 
-Now, any screen that belongs to the `StackScreen` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
+Now, any screen that belongs to the `Stack.Navigator` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
 
 ## Replacing the title with a custom component
 
@@ -173,7 +173,7 @@ function StackScreen() {
 }
 ```
 
-> You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to a native stack navigator, the `headerTitle` defaults to a `Text` component that displays the `title`.
+> You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to stack navigators, the `headerTitle` defaults to a `Text` component that displays the `title`.
 
 ## Additional configuration
 

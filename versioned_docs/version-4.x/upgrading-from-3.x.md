@@ -77,7 +77,7 @@ The latest drawer and tabs depend on [`react-native-gesture-handler`](https://gi
 In your project directory, run the following:
 
 ```sh
-expo install react-native-gesture-handler react-native-reanimated
+npx expo install react-native-gesture-handler react-native-reanimated
 ```
 
 This will install versions of these libraries that are compatible.

@@ -92,6 +92,36 @@ The `focus` event fires when a screen comes into focus. Since it's an event, you
 
 The `useFocusEffect` allows you to run an effect on focus and clean it up when the screen becomes unfocused. It also handles cleanup on unmount. It re-runs the effect when dependencies change, so you don't need to worry about stale values in your listener.
 
+## When to use `focus` and `blur` events instead
+
+Like `useEffect`, a cleanup function can be returned from the effect in `useFocusEffect`. The cleanup function is intended to cleanup the effect - e.g. abort an asynchronous task, unsubscribe from an event listener, etc. It's not intended to be used to do something on `blur`.
+
+For example, **don't do the following**:
+
+```js
+useFocusEffect(
+  React.useCallback(() => {
+    return () => {
+      // Do something that should run on blur
+    }
+  }, [])
+);
+```
+
+The cleanup function runs whenever the effect needs to cleanup, i.e. on `blur`, unmount, dependency change etc. It's not a good place to update the state or do something that should happen on `blur`. You should use listen to the `blur` event instead:
+
+```js
+React.useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+    // Do something when the screen blurs
+  });
+
+  return unsubscribe;
+}, [navigation]);
+```
+
+Similarly, if you want to do something when the screen receives focus (e.g. track screen focus) and it doesn't need cleanup or need to be re-run on dependency changes, then you should use the `focus` event instead:
+
 ## Using with class component
 
 You can make a component for your effect and use it in your class component:

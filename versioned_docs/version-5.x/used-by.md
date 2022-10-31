@@ -13,7 +13,7 @@ It's impossible to list every single app that uses React Navigation, but below a
 - [COVID Symptom Study](https://covid.joinzoe.com/)
 - [Call of Duty companion app](https://www.callofduty.com/app)
 - [Codecademy Go](https://www.codecademy.com/mobile-app-download)
-- [Coinbase Pro](https://pro.coinbase.com/)
+- [Coinbase](https://coinbase.com/)
 - [DataCamp](https://www.datacamp.com/mobile/)
 - [Expo](https://expo.io/client)
 - [How We Feel](https://howwefeel.org/)

@@ -18,7 +18,7 @@ function HomeScreen({ navigation: { navigate } }) {
 function ProfileScreen({ navigation, route }) {
   const [value, onChangeText] = React.useState(route.params.title);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     navigation.setOptions({
       title: value === '' ? 'No title' : value,
     });

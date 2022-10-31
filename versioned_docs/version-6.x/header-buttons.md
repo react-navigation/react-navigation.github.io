@@ -20,7 +20,7 @@ function StackScreen() {
         name="Home"
         component={HomeScreen}
         options={{
-          headerTitle: props => <LogoTitle {...props} />,
+          headerTitle: (props) => <LogoTitle {...props} />,
           headerRight: () => (
             <Button
               onPress={() => alert('This is a button!')}
@@ -39,7 +39,7 @@ When we define our button this way, the `this` variable in `options` is _not_ th
 
 ## Header interaction with its screen component
 
-To be able to interact with the screen component, we need to use `navigation.setOptions` to define our button instead of the `options` prop. By using `navigation.setOptions` inside the screen component, we get access to screen's props, state, context etc.
+In some cases, components in the header need to interact with the screen component. For this use case, we need to use `navigation.setOptions` to update our options. By using `navigation.setOptions` inside the screen component, we get access to screen's props, state, context etc.
 
 <samp id="header-interaction">header interaction</samp>
 
@@ -51,7 +51,11 @@ function StackScreen() {
         name="Home"
         component={HomeScreen}
         options={({ navigation, route }) => ({
-          headerTitle: props => <LogoTitle {...props} />,
+          headerTitle: (props) => <LogoTitle {...props} />,
+          // Add a placeholder button without the `onPress` to avoid flicker
+          headerRight: () => (
+            <Button title="Update count" />
+          ),
         })}
       />
     </Stack.Navigator>
@@ -61,10 +65,12 @@ function StackScreen() {
 function HomeScreen({ navigation }) {
   const [count, setCount] = React.useState(0);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
+    // Use `setOptions` to update the button that we previously specified
+    // Now the button includes an `onPress` handler to update the count
     navigation.setOptions({
       headerRight: () => (
-        <Button onPress={() => setCount(c => c + 1)} title="Update count" />
+        <Button onPress={() => setCount((c) => c + 1)} title="Update count" />
       ),
     });
   }, [navigation]);
@@ -72,6 +78,8 @@ function HomeScreen({ navigation }) {
   return <Text>Count: {count}</Text>;
 }
 ```
+
+Here we update the `headerRight` with a button with `onPress` handler that has access to the component's state and can update it.
 
 ## Customizing the back button
 
@@ -83,7 +91,7 @@ To customize the back button image, you can use `headerBackImageSource` ([read m
 
 ## Overriding the back button
 
-The back button will be rendered automatically in a native stack navigator whenever it is possible for the user to go back from their current screen &mdash; in other words, the back button will be rendered whenever there is more than one screen in the stack.
+The back button will be rendered automatically in a stack navigator whenever it is possible for the user to go back from their current screen &mdash; in other words, the back button will be rendered whenever there is more than one screen in the stack.
 
 Generally, this is what you want. But it's possible that in some circumstances that you want to customize the back button more than you can through the options mentioned above, in which case you can set the `headerLeft` option to a React Element that will be rendered, just as we did with `headerRight`. Alternatively, the `headerLeft` option also accepts a React Component, which can be used, for example, for overriding the onPress behavior of the back button. Read more about this in the [api reference](native-stack-navigator.md#headerleft).
 

@@ -4,7 +4,7 @@ title: useLinkTo
 sidebar_label: useLinkTo
 ---
 
-The `useLinkTo` hook let's us navigate to a screen using a path instead of a screen name based on the [`linking` options](navigation-container.md#linking). It returns a function that receives the path to navigate to.
+The `useLinkTo` hook lets us navigate to a screen using a path instead of a screen name based on the [`linking` options](navigation-container.md#linking). It returns a function that receives the path to navigate to.
 
 ```js
 import { useLinkTo } from '@react-navigation/native';

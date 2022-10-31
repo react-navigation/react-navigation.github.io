@@ -48,7 +48,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Drawer.Navigator>
+        <Drawer.Navigator useLegacyImplementation>
           <Drawer.Screen name="Screen1" component={Screen1} />
           <Drawer.Screen name="Screen2" component={Screen2} />
         </Drawer.Navigator>

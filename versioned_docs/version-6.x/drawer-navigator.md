@@ -14,35 +14,35 @@ Component that renders a navigation drawer which can be opened and closed via ge
 
 ## Installation
 
-To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
+1. To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
 
-```bash npm2yarn
-npm install @react-navigation/drawer
-```
+   ```bash npm2yarn
+   npm install @react-navigation/drawer
+   ```
 
-You also need to install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
+2. You also need to install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
 
-If you have a Expo managed project, in your project directory, run:
+   If you have a Expo managed project, in your project directory, run:
 
-```sh
-expo install react-native-gesture-handler react-native-reanimated
-```
+   ```sh
+   npx expo install react-native-gesture-handler react-native-reanimated
+   ```
 
-If you have a bare React Native project, in your project directory, run:
+   If you have a bare React Native project, in your project directory, run:
 
-```bash npm2yarn
-npm install react-native-gesture-handler react-native-reanimated
-```
+   ```bash npm2yarn
+   npm install react-native-gesture-handler react-native-reanimated
+   ```
 
-To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+3. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
 
-```js
-import 'react-native-gesture-handler';
-```
+   ```js
+   import 'react-native-gesture-handler';
+   ```
 
-> Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+   > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
 
-The Drawer Navigator supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+4. The Drawer Navigator supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
 
 ## API Definition
 
@@ -70,6 +70,10 @@ function MyDrawer() {
 ### Props
 
 The `Drawer.Navigator` component accepts following props:
+
+#### `id`
+
+Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
 
 #### `initialRouteName`
 
@@ -122,7 +126,6 @@ The content component receives following props by default:
 - `state` - The [navigation state](navigation-state.md) of the navigator.
 - `navigation` - The navigation object for the navigator.
 - `descriptors` - An descriptor object containing options for the drawer screens. The options can be accessed at `descriptors[route.key].options`.
-- `progress` - Reanimated Node that represents the animated position of the drawer (0 is closed; 1 is open).
 
 ##### Providing a custom `drawerContent`
 
@@ -184,6 +187,7 @@ The `progress` object can be used to do interesting animations in your `drawerCo
 function CustomDrawerContent(props) {
   const progress = useDrawerProgress();
 
+  // If you are on react-native-reanimated 1.x, use `Animated.interpolate` instead of `Animated.interpolateNode`
   const translateX = Animated.interpolateNode(progress, {
     inputRange: [0, 1],
     outputRange: [-100, 0],
@@ -197,7 +201,7 @@ function CustomDrawerContent(props) {
 }
 ```
 
-The `progress` object is a Reanimated `Node` if you're using Reanimated 1 (see [`useLegacyImplementation`](#uselegacyimplementation)), otherwise a `SharedValue`.
+The `progress` object is a Reanimated `Node` if you're using Reanimated 1 (see [`useLegacyImplementation`](#uselegacyimplementation)), otherwise a `SharedValue`. It represents the animated position of the drawer (0 is closed; 1 is open).
 
 Note that you **cannot** use the `useNavigation` hook inside the `drawerContent` since `useNavigation` is only available inside screens. You get a `navigation` prop for your `drawerContent` which you can use instead:
 
@@ -420,6 +424,15 @@ Whether this screen should be unmounted when navigating away from it. Unmounting
 
 Normally, we don't recommend enabling this prop as users don't expect their navigation history to be lost when switching screens. If you enable this prop, please consider if this will actually provide a better experience for the user.
 
+#### `freezeOnBlur`
+
+Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to `false`.
+Defaults to `true` when `enableFreeze()` from `react-native-screens` package is run at the top of the application.
+
+Requires `react-native-screens` version >=3.16.0.
+
+Only supported on iOS and Android.
+
 ### Header related options
 
 You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Drawer.navigator` or `options` prop of `Drawer.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
@@ -541,7 +554,7 @@ Navigates to an existing screen in the drawer navigator. The method accepts foll
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to pass to the destination route.
 
-<samp id="drawer-example" />
+<samp id="drawer-jump-to" />
 
 ```js
 navigation.jumpTo('Profile', { owner: 'Satya' });
@@ -601,7 +614,7 @@ import { getDrawerStatusFromState } from '@react-navigation/drawer';
 const isDrawerOpen = getDrawerStatusFromState(navigation.getState()) === 'open';
 ```
 
-For class components, you can listen tp the `state` event to check if drawer was opened or closed:
+For class components, you can listen to the `state` event to check if drawer was opened or closed:
 
 ```js
 class Profile extends React.Component {

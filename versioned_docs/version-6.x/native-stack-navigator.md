@@ -47,6 +47,10 @@ function MyStack() {
 
 The `Stack.Navigator` component accepts following props:
 
+#### `id`
+
+Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
+
 #### `initialRouteName`
 
 The name of the route to render on first load of the navigator.
@@ -100,7 +104,7 @@ Only supported on iOS.
 
 #### `headerBackImageSource`
 
-Image to display in the header as the icon in the back button.  Defaults to back icon image for the platform
+Image to display in the header as the icon in the back button. Defaults to back icon image for the platform
 
 - A chevron on iOS
 - An arrow on Android
@@ -193,6 +197,10 @@ Supported values:
 
 Only supported on iOS.
 
+#### `headerBackground`
+
+Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
+
 #### `headerTintColor`
 
 Tint color for the header. Changes the color of back button and title.
@@ -242,11 +250,11 @@ Only supported on iOS and Android.
 Example:
 
 ```js
-React.useEffect(() => {
+React.useLayoutEffect(() => {
   navigation.setOptions({
     headerSearchBarOptions: {
       // search bar options
-    }
+    },
   });
 }, [navigation]);
 ```
@@ -361,11 +369,11 @@ Example:
 ```js
 const [search, setSearch] = React.useState('');
 
-React.useEffect(() => {
+React.useLayoutEffect(() => {
   navigation.setOptions({
     headerSearchBarOptions: {
       onChangeText: (event) => setSearch(event.nativeEvent.text),
-    }
+    },
   });
 }, [navigation]);
 ```
@@ -409,27 +417,54 @@ Note that if you specify a custom header, the native functionality such as large
 
 #### `statusBarAnimation`
 
-Sets the status bar animation (similar to the `StatusBar` component).
+Sets the status bar animation (similar to the `StatusBar` component). Defaults to `fade` on iOS and `none` on Android.
+
+Supported values:
+
+- `"fade"`
+- `"none"`
+- `"slide"`
+
+On Android, setting either `fade` or `slide` will set the transition of status bar color. On iOS, this option applies to appereance animation of the status bar.
 
 Requires setting `View controller-based status bar appearance -> YES` (or removing the config) in your `Info.plist` file.
 
-Only supported on iOS.
+Only supported on Android and iOS.
 
 #### `statusBarHidden`
 
- Whether the status bar should be hidden on this screen.
+Whether the status bar should be hidden on this screen.
 
 Requires setting `View controller-based status bar appearance -> YES` (or removing the config) in your `Info.plist` file.
 
-Only supported on iOS.
+Only supported on Android and iOS.
 
 #### `statusBarStyle`
 
-Sets the status bar color (similar to the `StatusBar` component).
+Sets the status bar color (similar to the `StatusBar` component). Defaults to `auto`.
+
+Supported values:
+
+- `"auto"`
+- `"inverted"` (iOS only)
+- `"dark"`
+- `"light"`
 
 Requires setting `View controller-based status bar appearance -> YES` (or removing the config) in your `Info.plist` file.
 
-Only supported on iOS.
+Only supported on Android and iOS.
+
+#### `statusBarColor`
+
+Sets the status bar color (similar to the `StatusBar` component). Defaults to initial status bar color.
+
+Only supported on Android.
+
+#### `statusBarTranslucent`
+
+Sets the translucency of the status bar (similar to the `StatusBar` component). Defaults to `false`.
+
+Only supported on Android.
 
 #### `contentStyle`
 
@@ -473,7 +508,7 @@ Supported values:
 - `default`: use the platform default animation
 - `fade`: fade screen in or out
 - `fade_from_bottom`: fade the new screen from bottom
-- `flip`: flip the screen, requires stackPresentation: "modal" (iOS only)
+- `flip`: flip the screen, requires `presentation: "modal"` (iOS only)
 - `simple_push`: default animation, but without shadow and native header transition (iOS only, uses default animation on Android)
 - `slide_from_bottom`: slide in the new screen from bottom
 - `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
@@ -514,6 +549,54 @@ Supported values:
 - `landscape_right`: landscape-right orientation is permitted.
 
 Only supported on Android and iOS.
+
+#### `autoHideHomeIndicator`
+
+Boolean indicating whether the home indicator should prefer to stay hidden. Defaults to `false`.
+
+Only supported on iOS.
+
+#### `gestureDirection`
+
+Sets the direction in which you should swipe to dismiss the screen.
+
+Supported values:
+
+- `vertical` – dismiss screen vertically
+- `horizontal` – dismiss screen horizontally (default)
+
+When using `vertical` option, options `fullScreenGestureEnabled: true`, `customAnimationOnGesture: true` and `animation: 'slide_from_bottom'` are set by default.
+
+Only supported on iOS.
+
+#### `animationDuration`
+
+Changes the duration (in milliseconds) of `slide_from_bottom`, `fade_from_bottom`, `fade` and `simple_push` transitions on iOS. Defaults to `350`.
+
+The duration of `default` and `flip` transitions isn't customizable.
+
+Only supported on iOS.
+
+#### `navigationBarColor`
+
+Sets the navigation bar color. Defaults to initial status bar color.
+
+Only supported on Android.
+
+#### `navigationBarHidden`
+
+Boolean indicating whether the navigation bar should be hidden. Defaults to `false`.
+
+Only supported on Android.
+
+#### `freezeOnBlur`
+
+Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to `false`.
+Defaults to `true` when `enableFreeze()` from `react-native-screens` package is run at the top of the application.
+
+Requires `react-native-screens` version >=3.16.0.
+
+Only supported on iOS and Android.
 
 ### Events
 
