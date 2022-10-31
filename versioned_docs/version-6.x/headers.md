@@ -142,7 +142,7 @@ function StackScreen() {
 }
 ```
 
-Now, any screen that belongs to the `StackScreen` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
+Now, any screen that belongs to the `Stack.Navigator` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
 
 ## Replacing the title with a custom component
 
