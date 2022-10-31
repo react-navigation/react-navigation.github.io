@@ -200,7 +200,7 @@ A component used to show the back button header. It's the default for [`headerLe
 Usage:
 
 ```js
-<HeaderBackButton label="Hello" />
+<HeaderBackButton label="Hello" onPress={() => console.log('back pressed')} />
 ```
 
 ### `MissingIcon`
