@@ -22,7 +22,7 @@ To use this navigator, ensure that you have [`@react-navigation/native` and its 
 npm install @react-navigation/material-top-tabs react-native-tab-view
 ```
 
-You also need to install [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view).
+Then, you need to install [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) which is required by the navigator.
 
 If you have a Expo managed project, in your project directory, run:
 
@@ -35,7 +35,12 @@ If you have a bare React Native project, in your project directory, run:
 ```bash npm2yarn
 npm install react-native-pager-view
 ```
-> If you are developing for IOS, You'd need to run: **pod install**
+
+If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+
+```sh
+npx pod-install ios
+```
 
 ## API Definition
 
