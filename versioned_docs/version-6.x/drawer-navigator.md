@@ -20,29 +20,37 @@ To use this navigator, ensure that you have [`@react-navigation/native` and its 
 npm install @react-navigation/drawer
 ```
 
-You also need to install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
+Then, you need to install and configure the libraries that are required by the drawer navigator:
 
-If you have a Expo managed project, in your project directory, run:
+1. First, install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
 
-```sh
-npx expo install react-native-gesture-handler react-native-reanimated
-```
+   If you have a Expo managed project, in your project directory, run:
 
-If you have a bare React Native project, in your project directory, run:
+   ```sh
+   npx expo install react-native-gesture-handler react-native-reanimated
+   ```
 
-```bash npm2yarn
-npm install react-native-gesture-handler react-native-reanimated
-```
+   If you have a bare React Native project, in your project directory, run:
 
-To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+   ```bash npm2yarn
+   npm install react-native-gesture-handler react-native-reanimated
+   ```
 
-```js
-import 'react-native-gesture-handler';
-```
+   The Drawer Navigator supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
 
-> Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+2. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
 
-The Drawer Navigator supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+   ```js
+   import 'react-native-gesture-handler';
+   ```
+
+   > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+
+3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+
+  ```sh
+  npx pod-install ios
+  ```
 
 ## API Definition
 
@@ -187,7 +195,8 @@ The `progress` object can be used to do interesting animations in your `drawerCo
 function CustomDrawerContent(props) {
   const progress = useDrawerProgress();
 
-  const translateX = Animated.interpolate(progress, {
+  // If you are on react-native-reanimated 1.x, use `Animated.interpolate` instead of `Animated.interpolateNode`
+  const translateX = Animated.interpolateNode(progress, {
     inputRange: [0, 1],
     outputRange: [-100, 0],
   });
@@ -613,7 +622,7 @@ import { getDrawerStatusFromState } from '@react-navigation/drawer';
 const isDrawerOpen = getDrawerStatusFromState(navigation.getState()) === 'open';
 ```
 
-For class components, you can listen tp the `state` event to check if drawer was opened or closed:
+For class components, you can listen to the `state` event to check if drawer was opened or closed:
 
 ```js
 class Profile extends React.Component {

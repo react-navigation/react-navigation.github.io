@@ -21,6 +21,10 @@ React Navigation 6 requires newer versions of following libraries:
 
 To upgrade `react-native-safe-area-context` and `react-native-screens` to the latest supported versions, do the following:
 
+> **NOTE:**
+> 
+> If your react-native Version is <= 0.63.4, don't use `react-native-safe-area-context` in Version 4, but only till 3.4.1. [More Information see here](https://github.com/th3rdwave/react-native-safe-area-context/issues/248)
+
 For Expo managed projects:
 
 ```sh
