@@ -15,6 +15,8 @@ To get notified of state changes, we can use the `onStateChange` prop on `Naviga
 
 This example shows how the approach can be adapted to any mobile analytics SDK.
 
+<samp id="screen-tracking-for-analytics" />
+
 ```js
 import { useRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
