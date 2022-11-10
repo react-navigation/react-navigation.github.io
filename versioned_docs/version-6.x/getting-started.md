@@ -68,16 +68,26 @@ npx pod-install ios
 `react-native-screens` package requires one additional configuration step to properly
 work on Android devices. Edit `MainActivity.java` file which is located in `android/app/src/main/java/<your package name>/MainActivity.java`.
 
-Add the following code to the body of `MainActivity` class:
+Add the following override to the body of `MainActivity` class:
 
 ```java
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-  super.onCreate(null);
-}
+public class MainActivity extends ReactActivity {
+    //...code
+   
+    //react-native-screens override
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(null);
+    }
+   
+    public static class MainActivityDelegate extends ReactActivityDelegate {
+        //...code
+    }
 ```
 
-and make sure to add the following import statement at the top of this file below your package statement:
+Ensure you have placed this in the parent MainActivity and not inside the MainActivityDelegate.
+
+Also, make sure to add the following import statement at the top of this file below your package statement:
 
 ```java
 import android.os.Bundle;
