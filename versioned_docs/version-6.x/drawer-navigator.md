@@ -93,14 +93,14 @@ Default options to use for the screens in the navigator.
 
 #### `backBehavior`
 
-This controls how going back in the navigator is handled. This includes when the back button is pressed/back gesture is performed, or `goBack` is called.
+This controls what happens when `goBack` is called in the navigator. This includes pressing the device's back button or back gesture on Android.
 
 It supports the following values:
 
-- `firstRoute` - return to the first tab (default)
-- `initialRoute` - return to initial tab
-- `order` - return to previous tab (in the order they are shown in the tab bar)
-- `history` - return to last visited tab
+- `firstRoute` - return to the first screen defined in the navigator (default)
+- `initialRoute` - return to initial screen passed in `initialRouteName` prop, if not passed, defaults to the first screen
+- `order` - return to screen defined before the focused screen
+- `history` - return to last visited screen in the navigator; if the same screen is visited multiple times, the older entries are dropped from the history
 - `none` - do not handle back button
 
 #### `defaultStatus`
