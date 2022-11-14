@@ -4,7 +4,7 @@ title: Navigating without the navigation prop
 sidebar_label: Navigating without the navigation prop
 ---
 
-Sometimes you need to trigger a navigation action from places where you do not have access to the `navigation` prop, such as a Redux middleware. For such cases, you can dispatch navigation actions use a `ref` on the navigation container.
+Sometimes you need to trigger a navigation action from places where you do not have access to the `navigation` prop, such as a Redux middleware. For such cases, you can dispatch navigation actions use a [`ref` on the navigation container](navigation-container.md#ref).
 
 **Do not** use the `ref` if:
 
