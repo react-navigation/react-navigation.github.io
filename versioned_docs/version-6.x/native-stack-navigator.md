@@ -285,6 +285,12 @@ The search field background color. By default bar tint color is translucent.
 
 Only supported on iOS.
 
+##### `tintColor`
+
+The color for the cursor caret and cancel button text.
+
+Only supported on iOS.
+
 ##### `cancelButtonText`
 
 The text to be used instead of default `Cancel` button text.
