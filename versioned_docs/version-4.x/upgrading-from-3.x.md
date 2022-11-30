@@ -148,7 +148,7 @@ To upgrade `react-navigation-tabs`, run:
 npm install react-navigation-tabs
 ```
 
-This version upgrades [`react-native-tab-view`](https://github.com/react-native-community/react-native-tab-view) to 2.x. As a result, the animations in `createMaterialTopTabNavigator` now use the [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated) library.
+This version upgrades [`react-native-tab-view`](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view) to 2.x. As a result, the animations in `createMaterialTopTabNavigator` now use the [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated) library.
 
 ##### Breaking changes
 
