@@ -68,7 +68,7 @@ React component to render for routes that haven't been rendered yet. Receives an
 
 ### `initialLayout`
 
-Optional object containing the initial `height` and `width`, can be passed to prevent the one frame delay in [react-native-tab-view](https://github.com/react-native-community/react-native-tab-view#avoid-one-frame-delay) rendering.
+Optional object containing the initial `height` and `width`, can be passed to prevent the one frame delay in [react-native-tab-view](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view#avoid-one-frame-delay) rendering.
 
 ### `pagerComponent`
 
