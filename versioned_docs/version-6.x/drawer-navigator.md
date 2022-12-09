@@ -396,10 +396,6 @@ Color overlay to be displayed on top of the content view when drawer gets open. 
 
 Style object for the component wrapping the screen content.
 
-#### `gestureEnabled`
-
-Whether you can use gestures to open or close the drawer. Setting this to `false` disables swipe gestures as well as tap on overlay to close. See `swipeEnabled` to disable only the swipe gesture.
-
 #### `gestureHandlerProps`
 
 Props to pass to the underlying pan gesture handler.
