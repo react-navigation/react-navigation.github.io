@@ -6,7 +6,7 @@ sidebar_label: Group
 
 `Group` components are used to group several [screens](screen.md) inside a navigator.
 
-A `Group` is returned from a `createNavigatorX` function:
+A `Group` is returned from a `create*Navigator` function:
 
 ```js
 const Stack = createStackNavigator(); // Stack contains Screen & Navigator properties
