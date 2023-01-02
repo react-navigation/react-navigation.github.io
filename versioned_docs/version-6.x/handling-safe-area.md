@@ -15,13 +15,15 @@ The area not overlapped by such items is referred to as "safe area".
 
 We try to apply proper insets on the UI elements of the navigators to avoid being overlapped by such items. The goal is to (a) maximize usage of the screen (b) without hiding content or making it difficult to interact with by having it obscured by a physical display cutout or some operating system UI.
 
-While React Navigation handles safe areas for the built-in UI elements by default, your own content also needs to handle it to ensure that content isn't hidden by these items.
+While React Navigation handles safe areas for the built-in UI elements by default, your own content may also need to handle it to ensure that content isn't hidden by these items.
 
 It's tempting to solve (a) by wrapping your entire app in a container with padding that ensures all content will not be occluded. But in doing so, we waste a bunch of space on the screen, as pictured in the image on the left below. What we ideally want is the image pictured on the right.
 
 ![Notch on the iPhone X](/assets/iphoneX/00-intro.png)
 
-While React Native exports a `SafeAreaView` component, it has some inherent issues, i.e. if a screen containing safe area is animating, it causes jumpy behavior. In addition, this component only supports iOS 10+ with no support for older iOS versions or Android. We recommend to use the [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) library to handle safe areas in a more reliable way.
+While React Native exports a `SafeAreaView` component, this component only supports iOS 10+ with no support for older iOS versions or Android. In addition, it also has some issues, i.e. if a screen containing safe area is animating, it causes jumpy behavior. So we recommend to use the `useSafeAreaInsets` hook from the [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) library to handle safe areas in a more reliable way.
+
+> Note: The `react-native-safe-area-context` library also exports a `SafeAreaView` component. While it works on Android, it also has the same issues related to jumpy behavior when animating. So we recommend always using the `useSafeAreaInsets` hook instead and avoid using the `SafeAreaView` component.
 
 The rest of this guide gives more information on how to support safe areas in React Navigation.
 
@@ -58,18 +60,21 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{ headerShown: false }}
+      >
         <Stack.Screen name="Home">
-            {() => (
-              <Tab.Navigator
-                initialRouteName="Analitics"
-                tabBar={() => null}
-                screenOptions={{ headerShown: false }}
-              >
-                <Tab.Screen name="Analitics" component={Demo} />
-                <Tab.Screen name="Profile" component={Demo} />
-              </Tab.Navigator>
-            )}
+          {() => (
+            <Tab.Navigator
+              initialRouteName="Analitics"
+              tabBar={() => null}
+              screenOptions={{ headerShown: false }}
+            >
+              <Tab.Screen name="Analitics" component={Demo} />
+              <Tab.Screen name="Profile" component={Demo} />
+            </Tab.Navigator>
+          )}
         </Stack.Screen>
 
         <Stack.Screen name="Settings" component={Demo} />
@@ -81,21 +86,36 @@ export default function App() {
 
 ![Text hidden by iPhoneX UI elements](/assets/iphoneX/02-iphonex-content-hidden.png)
 
-To fix this issue you can apply safe area insets on your content. This can be achieved easily by using the `SafeAreaView` component from the `react-native-safe-area-context` library:
+To fix this issue you can apply safe area insets on your content. This can be achieved using the `useSafeAreaInsets` hook from the `react-native-safe-area-context` library:
 
 <samp id="safe-area-example" />
 
 ```jsx
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 function Demo() {
+  const insets = useSafeAreaInsets();
+
   return (
-    <SafeAreaView
-      style={{ flex: 1, justifyContent: 'space-between', alignItems: 'center' }}
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+
+        // Paddings to handle safe area
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+        paddingLeft: insets.left,
+        paddingRight: insets.right,
+      }}
     >
       <Text>This is top text.</Text>
       <Text>This is bottom text.</Text>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -123,19 +143,6 @@ Even if you're using the default navigation bar and tab bar - if your applicatio
 To fix this you can, once again, apply safe area insets to your content. This will not conflict with the navigation bar nor the tab bar's default behavior in portrait mode.
 
 ![App in landscape mode with text visible](/assets/iphoneX/05-iphonex-landscape-fixed.png)
-
-## Use the `edges` prop to customize the safe area
-
-In some cases you might need more control over which paddings are applied. For example, you can remove bottom padding by passing `edges` prop to `SafeAreaView`.
-
-```jsx
-<SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
-  <Text style={styles.paragraph}>This is top text.</Text>
-  <Text style={styles.paragraph}>This is bottom text.</Text>
-</SafeAreaView>
-```
-
-`edges` takes an array with the values `top`, `bottom`, `left` and `right` which controls which sides the safe area are applied to.
 
 ## Use the hook for more control
 
@@ -171,7 +178,6 @@ Similarly, you could apply these paddings in `contentContainerStyle` of `FlatLis
 
 ## Summary
 
-- Use `react-native-safe-area-context` instead of `SafeAreaView` from `react-native`
-- Don't wrap your whole app in `SafeAreaView`, instead wrap content inside your screens
-- Use the `edges` prop to apply safe area to specific sides
-- Use the `useSafeAreaInsets` hook for more control over where the insets are applied
+- Use `useSafeAreaInsets` hook from `react-native-safe-area-context` instead of `SafeAreaView` component
+- Don't wrap your whole app in `SafeAreaView`, instead apply the styles to content inside your screens
+- Apply only specific insets using the `useSafeAreaInsets` hook for more control

@@ -1,18 +1,31 @@
 import * as React from 'react';
-import { Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 function Demo() {
+  const insets = useSafeAreaInsets();
+
   return (
-    <SafeAreaView
-      style={{ flex: 1, justifyContent: 'space-between', alignItems: 'center' }}
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+        paddingLeft: insets.left,
+        paddingRight: insets.right,
+      }}
     >
       <Text>This is top text.</Text>
       <Text>This is bottom text.</Text>
-    </SafeAreaView>
+    </View>
   );
 }
 
