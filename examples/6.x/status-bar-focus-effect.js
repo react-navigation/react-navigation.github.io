@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  View,
   Text,
   StatusBar,
   Button,
@@ -9,8 +10,10 @@ import {
 } from 'react-native';
 import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import SafeAreaView from 'react-native-safe-area-view';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 function FocusAwareStatusBar(props) {
   const isFocused = useIsFocused();
@@ -19,8 +22,21 @@ function FocusAwareStatusBar(props) {
 }
 
 function Screen1({ navigation }) {
+  const insets = useSafeAreaInsets();
+
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: '#6a51ae' }]}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: '#6a51ae',
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        },
+      ]}
+    >
       <FocusAwareStatusBar barStyle="light-content" backgroundColor="#6a51ae" />
       <Text style={{ color: '#fff' }}>Light Screen</Text>
       <Button
@@ -28,17 +44,30 @@ function Screen1({ navigation }) {
         onPress={() => navigation.toggleDrawer()}
         color="#fff"
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
 function Screen2({ navigation }) {
+  const insets = useSafeAreaInsets();
+
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: '#ecf0f1',
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        },
+      ]}
+    >
       <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       <Text>Dark Screen</Text>
       <Button title="Toggle Drawer" onPress={() => navigation.toggleDrawer()} />
-    </SafeAreaView>
+    </View>
   );
 }
 
