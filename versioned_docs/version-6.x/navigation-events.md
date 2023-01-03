@@ -32,9 +32,7 @@ This event is emitted when the user is leaving the screen, there's a chance to [
 
 ## Listening to events
 
-There are multiple ways to listen to events from the navigators. Before we get into how to add listeners, one thing to keep in mind is that you can only listen to events from the immediate parent navigator. For example, if you try to add a listener in a screen is inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use [`navigation.getParent`](navigation-prop.md#getparent) to get a reference to parent navigator's navigation prop and add a listener.
-
-Each callback registered as an event listener receive an event object as its argument. The event object contains few properties:
+There are multiple ways to listen to events from the navigators. Each callback registered as an event listener receives an event object as its argument. The event object contains few properties:
 
 - `data` - Additional data regarding the event passed by the navigator. This can be `undefined` if no data was passed.
 - `target` - The route key for the screen that should receive the event. For some events, this maybe `undefined` if the event wasn't related to a specific screen.
@@ -95,6 +93,18 @@ class Profile extends React.Component {
 }
 ```
 
+One thing to keep in mind is that you can only listen to events from the immediate navigator with `addListener`. For example, if you try to add a listener in a screen that's inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use [`navigation.getParent`](navigation-prop.md#getparent) to get a reference to parent navigator's navigation prop and add a listener.
+
+```js
+const unsubscribe = navigation
+  .getParent('MyTabs')
+  .addListener('tabPress', (e) => {
+    // Do something
+  });
+```
+
+Here `'MyTabs'` refers to the value you pass in the `id` prop of the parent `Tab.Navigator` whose event you want to listen to.
+
 ### `listeners` prop on `Screen`
 
 Sometimes you might want to add a listener from the component where you defined the navigator rather than inside the screen. You can use the `listeners` prop on the `Screen` component to add listeners. The `listeners` prop takes an object with the event names as keys and the listener callbacks as values.
@@ -136,7 +146,7 @@ Example:
 
 ### `screenListeners` prop on the navigator
 
-You can pass a prop named `screenListeners` to the navigator component, where you can specify listeners for events from all screens. This can be useful if you want to listen to specific events regardless of the screen, or want to listen to common events such as `state` which is emitted to all screens.
+You can pass a prop named `screenListeners` to the navigator component, where you can specify listeners for events from all screens for this navigator. This can be useful if you want to listen to specific events regardless of the screen, or want to listen to common events such as `state` which is emitted to all screens.
 
 Example:
 
