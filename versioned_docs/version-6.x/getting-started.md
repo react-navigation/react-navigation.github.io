@@ -94,10 +94,13 @@ Now, we need to wrap the whole app in `NavigationContainer`. Usually you'd do th
 ```js
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function App() {
   return (
-    <NavigationContainer>{/* Rest of your app code */}</NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>{/* Rest of your app code */}</NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 ```
