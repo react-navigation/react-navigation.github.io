@@ -23,8 +23,10 @@ function EditText({ navigation }) {
         // If we don't have unsaved changes, then we don't need to do anything
         return;
       }
+
       // Prevent default behavior of leaving the screen
       e.preventDefault();
+
       // Prompt the user before leaving the screen
       Alert.alert(
         'Discard changes?',
@@ -38,7 +40,7 @@ function EditText({ navigation }) {
             // This will continue the action that had triggered the removal of the screen
             onPress: () => navigation.dispatch(e.data.action),
           },
-        ],
+        ]
       );
     });
 
