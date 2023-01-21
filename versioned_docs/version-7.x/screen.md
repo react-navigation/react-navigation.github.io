@@ -147,3 +147,7 @@ This can be useful when we have some screens which we want to be removed or rese
   component={ProfileScreen}
 />
 ```
+
+### `listeners`
+
+Event listeners to subscribe to. See [`listeners` prop on `Screen`](navigation-events.md#listeners-prop-on-screen) for more details.

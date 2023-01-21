@@ -42,6 +42,13 @@
       "version-7.x/MST-integration",
       "version-7.x/upgrading-from-6.x"
     ],
+    "Static configuration": [
+      "version-7.x/static-configuration",
+      "version-7.x/static-api-reference",
+      "version-7.x/static-typescript",
+      "version-7.x/static-authentication",
+      "version-7.x/static-combine-with-dynamic"
+    ],
     "API Reference": [
       "version-7.x/navigation-container",
       "version-7.x/server-container",

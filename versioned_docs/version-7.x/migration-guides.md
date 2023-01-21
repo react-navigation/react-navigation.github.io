@@ -6,7 +6,7 @@ sidebar_label: Migration Guides
 
 This page contains links to pages that will guide you through the process of upgrading React Navigation:
 
-- [Upgrading from 6.x to 7.x](../version-6.x/upgrading-from-6.x.md)
+- [Upgrading from 6.x to 7.x](../version-7.x/upgrading-from-6.x.md)
 - [Upgrading from 5.x to 6.x](../version-6.x/upgrading-from-5.x.md)
 - [Upgrading from 4.x to 5.x](../version-5.x/upgrading-from-4.x.md)
 - [Upgrading from 3.x to 4.x](../version-4.x/upgrading-from-3.x.md)
