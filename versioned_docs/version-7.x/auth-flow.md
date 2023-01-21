@@ -57,8 +57,8 @@ It's important to note that when using such a setup, you **don't manually naviga
 In our navigator, we can conditionally define appropriate screens. For our case, let's say we have 3 screens:
 
 - `SplashScreen` - This will show a splash or loading screen when we're restoring the token.
-- `SignInScreen` - This is the screen we show if the user isn't signed in already (we couldn't find a token).
-- `HomeScreen` - This is the screen we show if the user is already signed in.
+- `SignIn` - This is the screen we show if the user isn't signed in already (we couldn't find a token).
+- `Home` - This is the screen we show if the user is already signed in.
 
 So our navigator will look like:
 
@@ -141,6 +141,12 @@ import * as React from 'react';
 const AuthContext = React.createContext();
 ```
 
+In our component, we will:
+
+- Store the token and loading state in `useReducer`
+- Persist it to `SecureStore` and read it from there on app launch
+- Expose the methods for sign in and sign out to child components using `AuthContext`
+
 So our component will look like this:
 
 <samp id="auth-flow" />
@@ -192,6 +198,7 @@ export default function App({ navigation }) {
       }
 
       // After restoring token, we may need to validate it in production apps
+      // ...
 
       // This will switch to the App screen or Auth screen and this loading
       // screen will be unmounted and thrown away.
@@ -223,6 +230,10 @@ export default function App({ navigation }) {
     }),
     []
   );
+
+  if (state.isLoading) {
+    return <SplashScreen />;
+  }
 
   return (
     <AuthContext.Provider value={authContext}>
@@ -267,6 +278,8 @@ function SignInScreen() {
   );
 }
 ```
+
+You can similarly fill in the other screens according to your requirements.
 
 ## Removing shared screens when auth state changes
 
