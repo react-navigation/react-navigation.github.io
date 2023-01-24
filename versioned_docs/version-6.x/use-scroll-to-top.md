@@ -60,7 +60,7 @@ function Albums() {
   const ref = React.useRef(null);
 
   useScrollToTop(React.useRef({
-    scrollToTop: () => ref.current?.scrollToOffset({ offset: -100 }),
+    scrollToTop: () => ref.current?.scrollTo({ y: 100 }),
   }));
 
   return <ScrollView ref={ref}>{/* content */}</ScrollView>;
