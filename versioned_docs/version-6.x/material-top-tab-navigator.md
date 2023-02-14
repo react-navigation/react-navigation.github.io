@@ -295,6 +295,14 @@ Color for the icon and label in the active tab.
 
 Color for the icon and label in the inactive tabs.
 
+#### `tabBarGap`
+
+Gaps between tabs.
+
+#### `tabBarAndroidRipple`
+
+Allows to customize the android ripple effect (Android >= 5.0 only)
+
 #### `tabBarPressColor`
 
 Color for material ripple (Android >= 5.0 only).
