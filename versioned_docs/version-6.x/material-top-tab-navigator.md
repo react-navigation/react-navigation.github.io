@@ -297,19 +297,47 @@ Color for the icon and label in the inactive tabs.
 
 #### `tabBarGap`
 
-Gaps between tabs.
+Spacing between the tab items in the tab bar.
+
+Example: 
+
+```js
+<Tab.Navigator
+  //...
+  screenOptions={{
+    tabBarGap: 10,
+  }}
+>
+</Tab.Navigator>
+```
 
 #### `tabBarAndroidRipple`
 
-Allows to customize the android ripple effect (Android >= 5.0 only)
+Allows to customize the android ripple effect.
+
+Example: 
+
+```js
+<Tab.Navigator
+  //...
+  screenOptions={{
+    tabBarAndroidRipple: { borderless: false },
+  }}
+>
+</Tab.Navigator>
+```
 
 #### `tabBarPressColor`
 
-Color for material ripple (Android >= 5.0 only).
+Color for material ripple.
+
+Only supported on Android.
 
 #### `tabBarPressOpacity`
 
-Opacity for pressed tab (iOS and Android < 5.0 only).
+Opacity for pressed tab.
+
+Only supported on iOS.
 
 #### `tabBarBounces`
 
