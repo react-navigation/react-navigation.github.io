@@ -6,6 +6,8 @@ sidebar_label: Nesting navigators
 
 Nesting navigators means rendering a navigator inside a screen of another navigator, for example:
 
+<samp id="nested-navigators" />
+
 ```js
 function Home() {
   return (
@@ -86,6 +88,8 @@ For example, if you have a stack navigator nested inside a tab navigator, the sc
 
 To receive events from parent navigator, you can explicitly listen to parent's events with [`navigation.getParent`](navigation-prop.md#getparent):
 
+<samp id="nested-navigators-events" />
+
 ```js
 const unsubscribe = navigation
   .getParent('MyTabs')
@@ -160,7 +164,7 @@ This may look very different from the way navigation used to work with nested sc
 
 You can also pass params by specifying a `params` key:
 
-<samp id="nest-navigators" />
+<samp id="params-nested-navigators" />
 
 ```js
 navigation.navigate('Root', {
