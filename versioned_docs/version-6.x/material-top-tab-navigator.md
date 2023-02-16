@@ -6,7 +6,7 @@ sidebar_label: Material Top Tabs
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the tabs or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
-This wraps [`react-native-tab-view`](https://github.com/react-native-community/react-native-tab-view).
+This wraps [`react-native-tab-view`](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view).
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
@@ -295,13 +295,49 @@ Color for the icon and label in the active tab.
 
 Color for the icon and label in the inactive tabs.
 
+#### `tabBarGap`
+
+Spacing between the tab items in the tab bar.
+
+Example: 
+
+```js
+<Tab.Navigator
+  //...
+  screenOptions={{
+    tabBarGap: 10,
+  }}
+>
+</Tab.Navigator>
+```
+
+#### `tabBarAndroidRipple`
+
+Allows to customize the android ripple effect.
+
+Example: 
+
+```js
+<Tab.Navigator
+  //...
+  screenOptions={{
+    tabBarAndroidRipple: { borderless: false },
+  }}
+>
+</Tab.Navigator>
+```
+
 #### `tabBarPressColor`
 
-Color for material ripple (Android >= 5.0 only).
+Color for material ripple.
+
+Only supported on Android.
 
 #### `tabBarPressOpacity`
 
-Opacity for pressed tab (iOS and Android < 5.0 only).
+Opacity for pressed tab.
+
+Only supported on iOS.
 
 #### `tabBarBounces`
 

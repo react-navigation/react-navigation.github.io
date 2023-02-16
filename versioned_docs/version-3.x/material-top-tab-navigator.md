@@ -27,7 +27,7 @@ The route configs object is a mapping from route name to a route config.
 * `animationEnabled` - Whether to animate when changing tabs.
 * `lazy` - Defaults to `false`. If `true`, tabs are rendered only when they are made active or on peek swipe. When `false`, all tabs are rendered immediately.
 * `optimizationsEnabled` - Whether to wrap scenes into [`<ResourceSavingScene />`](https://github.com/react-navigation/react-navigation-tabs/blob/master/src/views/ResourceSavingScene.js) to move the scene out of the screen once it's unfocused, it improves memory usage.
-* `initialLayout` - Optional object containing the initial `height` and `width`, can be passed to prevent the one frame delay in [react-native-tab-view](https://github.com/react-native-community/react-native-tab-view#avoid-one-frame-delay) rendering.
+* `initialLayout` - Optional object containing the initial `height` and `width`, can be passed to prevent the one frame delay in [react-native-tab-view](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view#avoid-one-frame-delay) rendering.
 * `tabBarComponent` - Optional, override the component to use as the tab bar.
 * `tabBarOptions` - An object with the following properties:
   * `activeTintColor` - Label and icon color of the active tab.

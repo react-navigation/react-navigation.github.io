@@ -21,8 +21,6 @@ Each callback registered as an event listener receive an event object as its arg
 - `target` - The route key for the screen that should receive the event. For some events, this maybe `undefined` if the event wasn't related to a specific screen.
 - `preventDefault` - For some events, there may be a `preventDefault` method on the event object. Calling this method will prevent the default action performed by the event (such as switching tabs on `tabPress`). Support for preventing actions are only available for certain events like `tabPress` and won't work for all events.
 
-One thing to keep in mind is that you can only listen to events from the immediate parent navigator. For example, if you try to add a listener in a screen is inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use `navigation.getParent()` to get a reference to parent navigator's navigation prop and add a listener.
-
 There are 2 ways to listen to events:
 
 ### `navigation.addListener`
@@ -77,6 +75,8 @@ class Profile extends React.Component {
   }
 }
 ```
+
+One thing to keep in mind is that you can only listen to events from the immediate navigator with `addListener`. For example, if you try to add a listener in a screen that's inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use `navigation.getParent()` to get a reference to parent navigator's navigation prop and add a listener.
 
 ### `listeners` prop on `Screen`
 

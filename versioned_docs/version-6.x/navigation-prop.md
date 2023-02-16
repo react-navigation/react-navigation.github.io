@@ -358,6 +358,7 @@ To use an ID for a navigator, first pass a unique `id` prop:
 Then when using `getParent`, instead of:
 
 ```js
+// Avoid this
 const drawerNavigation = navigation.getParent().getParent();
 
 // ...
@@ -368,6 +369,7 @@ drawerNavigation?.openDrawer();
 You can do:
 
 ```js
+// Do this
 const drawerNavigation = navigation.getParent('LeftDrawer');
 
 // ...

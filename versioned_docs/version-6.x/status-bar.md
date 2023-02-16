@@ -14,14 +14,30 @@ This is a simple task when using a stack. You can render the `StatusBar` compone
 
 ```js
 import * as React from 'react';
-import { Text, StatusBar, Button, StyleSheet } from 'react-native';
+import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 function Screen1({ navigation }) {
+  const insets = useSafeAreaInsets();
+
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: '#6a51ae' }]}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: '#6a51ae',
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        },
+      ]}
+    >
       <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
       <Text style={{ color: '#fff' }}>Light Screen</Text>
       <Button
@@ -29,20 +45,33 @@ function Screen1({ navigation }) {
         onPress={() => navigation.navigate('Screen2')}
         color="#fff"
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
 function Screen2({ navigation }) {
+  const insets = useSafeAreaInsets();
+
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: '#ecf0f1',
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        },
+      ]}
+    >
       <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       <Text>Dark Screen</Text>
       <Button
         title="Next screen"
         onPress={() => navigation.navigate('Screen1')}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -62,7 +91,11 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 ```
 
@@ -90,8 +123,21 @@ Now, our screens (both `Screen1.js` and `Screen2.js`) will use the `FocusAwareSt
 
 ```jsx
 function Screen1({ navigation }) {
+  const insets = useSafeAreaInsets();
+
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: '#6a51ae' }]}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: '#6a51ae',
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        },
+      ]}
+    >
       <FocusAwareStatusBar barStyle="light-content" backgroundColor="#6a51ae" />
       <Text style={{ color: '#fff' }}>Light Screen</Text>
       <Button
@@ -99,20 +145,33 @@ function Screen1({ navigation }) {
         onPress={() => navigation.navigate('Screen2')}
         color="#fff"
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
 function Screen2({ navigation }) {
+  const insets = useSafeAreaInsets();
+
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: '#ecf0f1',
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        },
+      ]}
+    >
       <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       <Text>Dark Screen</Text>
       <Button
         title="Next screen"
         onPress={() => navigation.navigate('Screen1')}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 ```

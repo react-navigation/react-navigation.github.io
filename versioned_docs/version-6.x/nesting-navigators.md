@@ -87,10 +87,14 @@ For example, if you have a stack navigator nested inside a tab navigator, the sc
 To receive events from parent navigator, you can explicitly listen to parent's events with [`navigation.getParent`](navigation-prop.md#getparent):
 
 ```js
-const unsubscribe = navigation.getParent().addListener('tabPress', (e) => {
-  // Do something
-});
+const unsubscribe = navigation
+  .getParent('MyTabs')
+  .addListener('tabPress', (e) => {
+    // Do something
+  });
 ```
+
+Here `'MyTabs'` refers to the value you pass in the `id` prop of the parent `Tab.Navigator` whose event you want to listen to.
 
 ### Parent navigator's UI is rendered on top of child navigator
 
