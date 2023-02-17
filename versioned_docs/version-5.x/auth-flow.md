@@ -23,6 +23,8 @@ We can define different screens based on some condition. For example, if the use
 
 For example:
 
+<samp id="conditional-screens" />
+
 ```js
 isSignedIn ? (
   <>
