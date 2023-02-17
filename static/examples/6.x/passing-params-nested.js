@@ -4,17 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
-
-function Home() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Feed" component={FeedScreen} />
-    </Tab.Navigator>
-  );
-}
-
 function FeedScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -41,6 +30,17 @@ function ProfileScreen({ navigation }) {
         title="Go to Feed with params"
       />
     </View>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+function Home() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Feed" component={FeedScreen} />
+    </Tab.Navigator>
   );
 }
 

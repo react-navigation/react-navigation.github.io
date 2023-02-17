@@ -27,7 +27,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} initialParams={{ itemId: 42 }}/>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          initialParams={{ itemId: 42 }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

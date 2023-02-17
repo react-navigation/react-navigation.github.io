@@ -16,10 +16,10 @@ function Profile({ navigation }) {
   );
 }
 
-function EditPost({ navigation }) {
+function EmptyScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Post Edit Screen</Text>
+      <Text>Empty Screen</Text>
     </View>
   );
 }
@@ -31,7 +31,7 @@ function Home() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Profile" component={Profile} />
-      <Tab.Screen name="Settings" />
+      <Tab.Screen name="Settings" component={EmptyScreen} />
     </Tab.Navigator>
   );
 }
@@ -45,7 +45,7 @@ function App() {
           component={Home}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="EditPost" component={EditPost} />
+        <Stack.Screen name="EditPost" component={EmptyScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -28,6 +28,14 @@ function Home({ navigation }) {
   );
 }
 
+function EmptyScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Empty Screen</Text>
+    </View>
+  );
+}
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -35,8 +43,8 @@ function Root() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Profile" />
-      <Tab.Screen name="Settings" />
+      <Tab.Screen name="Profile" component={EmptyScreen} />
+      <Tab.Screen name="Settings" component={EmptyScreen} />
     </Tab.Navigator>
   );
 }
@@ -51,7 +59,7 @@ function App() {
           component={Root}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Feed" />
+        <Stack.Screen name="Feed" component={EmptyScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

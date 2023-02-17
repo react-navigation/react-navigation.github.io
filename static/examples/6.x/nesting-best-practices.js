@@ -7,10 +7,7 @@ function Home({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        onPress={() => navigation.navigate('Help')}
-        title="Go to Help"
-      />
+      <Button onPress={() => navigation.navigate('Help')} title="Go to Help" />
       <Button
         onPress={() => navigation.navigate('Profile')}
         title="Go to Profile"
@@ -29,6 +26,14 @@ function Help({ navigation }) {
   );
 }
 
+function EmptyScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Empty Screen</Text>
+    </View>
+  );
+}
+
 const Stack = createStackNavigator();
 
 function App() {
@@ -41,19 +46,19 @@ function App() {
           // Screens for logged in users
           <Stack.Group>
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Profile" />
+            <Stack.Screen name="Profile" component={EmptyScreen} />
           </Stack.Group>
         ) : (
           // Auth screens
           <Stack.Group screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="SignIn" />
-            <Stack.Screen name="SignUp" />
+            <Stack.Screen name="SignIn" component={EmptyScreen} />
+            <Stack.Screen name="SignUp" component={EmptyScreen} />
           </Stack.Group>
         )}
         {/* Common modal screens */}
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen name="Help" component={Help} />
-          <Stack.Screen name="Invite" />
+          <Stack.Screen name="Invite" component={EmptyScreen} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
