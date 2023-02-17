@@ -115,14 +115,16 @@ In your app, you will probably use these patterns depending on the behavior you 
 
 Consider the following example:
 
+<samp id="nested-navigator-screen" />
+
 ```js
 function Root() {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Settings" component={Settings} />
-    </Drawer.Navigator>
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Profile" />
+      <Tab.Screen name="Settings" />
+    </Tab.Navigator>
   );
 }
 
@@ -130,12 +132,13 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="Start" component={Start} />
         <Stack.Screen
           name="Root"
           component={Root}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Feed" component={Feed} />
+        <Stack.Screen name="Feed" />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -216,6 +219,8 @@ To achieve this, you can hide the header in the screen containing the navigator 
 
 For example:
 
+<samp id="multiple-navigators" />
+
 ```js
 function Home() {
   return (
@@ -277,6 +282,8 @@ We recommend to reduce nesting navigators to minimal. Try to achieve the behavio
 - With excessive nesting, code becomes difficult to follow when navigating to nested screens, configuring deep link etc.
 
 Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, instead of using separate navigators, you can use the [`Group`](group.md) component.
+
+<samp id="nesting-best-practices" />
 
 ```js
 <Stack.Navigator>
