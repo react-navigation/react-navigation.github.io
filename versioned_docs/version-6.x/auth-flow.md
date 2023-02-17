@@ -64,6 +64,8 @@ In our navigator, we can conditionally define appropriate screens. For our case,
 
 So our navigator will look like:
 
+<samp id="conditional-screens-adv" />
+
 ```js
 if (state.isLoading) {
   // We haven't finished checking for the token yet
