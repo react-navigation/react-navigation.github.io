@@ -68,7 +68,7 @@ So our navigator will look like:
 
 ```js
 if (state.isLoading) {
-  // We haven't finished checking for the token yet
+  // We haven't finished checking the token yet
   return <SplashScreen />;
 }
 
