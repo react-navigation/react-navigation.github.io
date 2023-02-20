@@ -120,11 +120,11 @@ Consider the following example:
 ```js
 function Root() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Profile" />
-      <Tab.Screen name="Settings" />
-    </Tab.Navigator>
+    <Drawer.Navigator>
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Settings" component={Settings} />
+    </Drawer.Navigator>
   );
 }
 
@@ -132,13 +132,12 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Start" component={Start} />
         <Stack.Screen
           name="Root"
           component={Root}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Feed" />
+        <Stack.Screen name="Feed" component={Feed} />
       </Stack.Navigator>
     </NavigationContainer>
   );

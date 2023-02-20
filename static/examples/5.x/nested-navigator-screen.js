@@ -2,31 +2,7 @@ import * as React from 'react';
 import { Button, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-function Start({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Start Screen</Text>
-      <Button
-        onPress={() => navigation.navigate('Root', { screen: 'Settings' })}
-        title="Go to Root, Settings"
-      />
-    </View>
-  );
-}
-
-function Home({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-        onPress={() => navigation.navigate('Start')}
-        title="Go to Start"
-      />
-    </View>
-  );
-}
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 function EmptyScreen() {
   return (
@@ -36,16 +12,38 @@ function EmptyScreen() {
   );
 }
 
-const Tab = createBottomTabNavigator();
+function Feed({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Feed Screen</Text>
+      <Button title="Go to Root" onPress={() => navigation.navigate('Root')} />
+      <Button
+        title="Go to Root, Profile"
+        onPress={() => navigation.navigate('Root', { screen: 'Profile' })}
+      />
+    </View>
+  );
+}
+
+function Home({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button title="Go to Feed" onPress={() => navigation.navigate('Feed')} />
+    </View>
+  );
+}
+
+const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
 function Root() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Profile" component={EmptyScreen} />
-      <Tab.Screen name="Settings" component={EmptyScreen} />
-    </Tab.Navigator>
+    <Drawer.Navigator useLegacyImplementation={true}>
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Profile" component={EmptyScreen} />
+      <Stack.Screen name="Settings" component={EmptyScreen} />
+    </Drawer.Navigator>
   );
 }
 
@@ -53,13 +51,12 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Start" component={Start} />
         <Stack.Screen
           name="Root"
           component={Root}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Feed" component={EmptyScreen} />
+        <Stack.Screen name="Feed" component={Feed} />
       </Stack.Navigator>
     </NavigationContainer>
   );
