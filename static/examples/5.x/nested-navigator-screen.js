@@ -39,7 +39,7 @@ const Stack = createStackNavigator();
 
 function Root() {
   return (
-    <Drawer.Navigator useLegacyImplementation={true}>
+    <Drawer.Navigator useLegacyImplementation>
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Profile" component={EmptyScreen} />
       <Stack.Screen name="Settings" component={EmptyScreen} />
