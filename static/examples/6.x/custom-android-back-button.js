@@ -42,37 +42,34 @@ function ScreenWithCustomBackBehavior() {
 
   return (
     <View style={styles.container}>
-      {listData.map((item) => {
-        console.log(item);
-        console.log(`Selected: ${selected}`);
-        return (
-          <>
-            {isSelectionModeEnabled ? (
-              <Pressable
-                onPress={() => {
-                  setSelected(item.key);
-                }}
+      {listData.map((item) => (
+        <>
+          {isSelectionModeEnabled ? (
+            <Pressable
+              onPress={() => {
+                setSelected(item.key);
+              }}
+              style={{
+                textDecorationLine: item.key === selected ? 'underline' : '',
+              }}
+            >
+              <Text
                 style={{
                   textDecorationLine: item.key === selected ? 'underline' : '',
-                }}>
-                <Text
-                  style={{
-                    textDecorationLine:
-                      item.key === selected ? 'underline' : '',
-                    ...styles.text,
-                  }}>
-                  {item.key}
-                </Text>
-              </Pressable>
-            ) : (
-              <Text style={styles.text}>
-                {item.key === selected ? 'Selected: ' : ''}
+                  ...styles.text,
+                }}
+              >
                 {item.key}
               </Text>
-            )}
-          </>
-        );
-      })}
+            </Pressable>
+          ) : (
+            <Text style={styles.text}>
+              {item.key === selected ? 'Selected: ' : ''}
+              {item.key}
+            </Text>
+          )}
+        </>
+      ))}
       <Button
         title="Toggle selection mode"
         onPress={() => setIsSelectionModeEnabled(!isSelectionModeEnabled)}
