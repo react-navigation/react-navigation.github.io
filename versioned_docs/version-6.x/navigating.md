@@ -51,6 +51,12 @@ function HomeScreen({ navigation }) {
 // ... other code from the previous section
 ```
 
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/stack/simple-details.mov" />
+  </video>
+</div>
+
 Let's break this down:
 
 - `navigation` - the `navigation` prop is passed in to every **screen component** ([definition](glossary-of-terms.md#screen-component)) in the native stack navigator (more about this later in ["The navigation prop in depth"](navigation-prop.md)).
@@ -92,7 +98,7 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 ```
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
     <source src="/assets/navigators/stack/stack-push.mov" />
   </video>
 </div>
@@ -123,6 +129,12 @@ function DetailsScreen({ navigation }) {
 }
 ```
 
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/stack/back-home.mov" />
+  </video>
+</div>
+
 > On Android, React Navigation hooks in to the hardware back button and fires the `goBack()` function for you when the user presses it, so it behaves as the user would expect.
 
 Another common requirement is to be able to go back _multiple_ screens -- for example, if you are several screens deep in a stack and want to dismiss all of them to go back to the first screen. In this case, we know that we want to go back to `Home` so we can use `navigate('Home')` (not `push`! try that out and see the difference). Another alternative would be `navigation.popToTop()`, which goes back to the first screen in the stack.
@@ -148,6 +160,12 @@ function DetailsScreen({ navigation }) {
   );
 }
 ```
+
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/stack/pop-to-top.mov" />
+  </video>
+</div>
 
 ## Summary
 

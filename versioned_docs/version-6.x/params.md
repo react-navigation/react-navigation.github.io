@@ -60,7 +60,11 @@ function DetailsScreen({ route, navigation }) {
 }
 ```
 
-![Screen with passed parameters](/assets/navigators/passing_params.png)
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/passing-params.mov" />
+  </video>
+</div>
 
 ## Updating params
 
