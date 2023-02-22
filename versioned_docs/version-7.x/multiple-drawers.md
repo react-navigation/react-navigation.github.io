@@ -10,6 +10,8 @@ Sometimes we want to have multiple drawers on the same screen: one on the left a
 
 Here we have 2 drawers nested inside each other, one is positioned on left and the other on the right:
 
+<samp id="multiple-drawers-issue"/>
+
 ```js
 import * as React from 'react';
 import { Button, View } from 'react-native';
