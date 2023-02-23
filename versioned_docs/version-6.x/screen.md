@@ -95,9 +95,49 @@ Callback to return an unique ID to use for the screen. It receives an object wit
 />
 ```
 
-By default, calling `navigate('ScreenName', params)` identifies the screen by its name, and navigates to the existing screen instead of adding a new one. If you specify `getId` and it doesn't return `undefined`, the screen is identified by both the screen name and the returned ID.
+By default, `navigate('ScreenName', params)` identifies the screen by its name. So if you're on `ScreenName` and navigate to `ScreenName` again, it won't add a new screen even if the params are different - it'll update the current screen with the new params instead:
 
-This is useful for preventing multiple instances of the same screen in the navigator, e.g. - when `params.userId` is used as an ID, subsequent navigation to the screen with the same `userId` will navigate to the existing screen instead of adding a new one to the stack. If the navigation was with a different `userId`, then it'll add a new screen.
+```js
+// Let's say you're on `Home` screen
+// Then you navigate to `Profile` screen with `userId: 1`
+navigation.navigate('Profile', { userId: 1 });
+
+// Now the stack will have: `Home` -> `Profile` with `userId: 1`
+
+// Then you navigate to `Profile` screen again with `userId: 2`
+navigation.navigate('Profile', { userId: 2 });
+
+// The stack will now have: `Home` -> `Profile` with `userId: 2`
+```
+
+If you specify `getId` and it doesn't return `undefined`, the screen is identified by both the screen name and the returned ID. Which means that if you're on `ScreenName` and navigate to `ScreenName` again with different params - and return a different ID from the `getId` callback, it'll add a new screen to the stack:
+
+```js
+// Let's say you're on `Home` screen
+// Then you navigate to `Profile` screen with `userId: 1`
+navigation.navigate('Profile', { userId: 1 });
+
+// Now the stack will have: `Home` -> `Profile` with `userId: 1`
+
+// Then you navigate to `Profile` screen again with `userId: 2`
+navigation.navigate('Profile', { userId: 2 });
+
+// The stack will now have: `Home` -> `Profile` with `userId: 1` -> `Profile` with `userId: 2`
+```
+
+The `getId` callback can also be used to ensure that the screen with the same ID doesn't appear multiple times in the stack:
+
+```js
+// Let's say you have a stack with the screens: `Home` -> `Profile` with `userId: 1` -> `Settings`
+// Then you navigate to `Profile` screen with `userId: 1` again
+navigation.navigate('Profile', { userId: 1 });
+
+// Now the stack will have: `Home` -> `Profile` with `userId: 1`
+```
+
+In the above examples, `params.userId` is used as an ID, subsequent navigation to the screen with the same `userId` will navigate to the existing screen instead of adding a new one to the stack. If the navigation was with a different `userId`, then it'll add a new screen.
+
+If `getId` is specified in a tab or drawer navigator, the screen will remount if the ID changes.
 
 ### `component`
 
