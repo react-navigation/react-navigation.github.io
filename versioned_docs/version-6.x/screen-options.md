@@ -14,6 +14,8 @@ There are 3 ways of specifying options for screens:
 
 You can pass a prop named `options` to the `Screen` component to configure a screen, where you can specify an object with different options for that screen:
 
+<samp id="screen-options"/>
+
 ```js
 <Stack.Navigator>
   <Stack.Screen
