@@ -104,6 +104,8 @@ Example:
 
 Similar to `options`, you can also pass a function to `screenOptions`. The function will receive the [`navigation` prop](navigation-prop.md) and the [`route` prop](route-prop.md) for each screen. This can be useful if you want to configure options for all the screens in one place based on the route:
 
+<samp id="screen-options-navigator" />
+
 ```js
 <Tab.Navigator
   screenOptions={({ route }) => ({
