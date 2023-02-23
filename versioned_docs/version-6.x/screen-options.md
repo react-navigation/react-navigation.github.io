@@ -52,6 +52,8 @@ You can pass a prop named `screenOptions` to the `Group` component to configure 
 
 Example:
 
+<samp id="screen-options-group" />
+
 ```js
 <Stack.Navigator>
   <Stack.Group
