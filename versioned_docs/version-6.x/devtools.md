@@ -65,7 +65,7 @@ Now, you'll be able to use the React Navigation devtools in Flipper whenever you
 
 ### `useReduxDevToolsExtension`
 
-This hook provides integration with [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension). It also works with [`React Native Debugger app`](https://github.com/jhen0409/react-native-debugger) which includes this extension.
+This hook provides integration with [Redux DevTools Extension](https://github.com/reduxjs/redux-devtools). It also works with [`React Native Debugger app`](https://github.com/jhen0409/react-native-debugger) which includes this extension.
 
 **Usage:**
 
