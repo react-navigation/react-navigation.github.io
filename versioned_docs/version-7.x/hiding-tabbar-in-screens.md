@@ -19,11 +19,13 @@ function HomeStack() {
 
 function App() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeStack} />
-      <Tab.Screen name="Feed" component={Feed} />
-      <Tab.Screen name="Notifications" component={Notifications} />
-    </Tab.Navigator>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeStack} />
+        <Tab.Screen name="Feed" component={Feed} />
+        <Tab.Screen name="Notifications" component={Notifications} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 ```

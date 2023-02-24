@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { View, Text, Button } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function HomeScreen({ navigation }) {
   return (
@@ -18,11 +18,7 @@ function HomeScreen({ navigation }) {
 }
 
 function EmptyScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Empty Screen</Text>
-    </View>
-  );
+  return <View />;
 }
 
 export default function App() {

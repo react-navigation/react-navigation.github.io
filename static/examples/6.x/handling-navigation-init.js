@@ -6,10 +6,10 @@ import {
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export const navigationRef = createNavigationContainerRef();
+const navigationRef = createNavigationContainerRef();
 const Stack = createNativeStackNavigator();
 
-export function navigate(name, params) {
+function navigate(name, params) {
   if (navigationRef.isReady()) {
     // Perform navigation if the react navigation is ready to handle actions
     navigationRef.navigate(name, params);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/stack';
 
 function Home({ navigation }) {
   return (
@@ -27,14 +27,10 @@ function Help({ navigation }) {
 }
 
 function EmptyScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Empty Screen</Text>
-    </View>
-  );
+  return <View />;
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function App() {
   const isLoggedIn = true;

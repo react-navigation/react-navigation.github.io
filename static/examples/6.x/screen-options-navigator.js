@@ -7,11 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
 
 function EmptyScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Empty Screen</Text>
-    </View>
-  );
+  return <View />;
 }
 
 export default function App() {

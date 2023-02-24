@@ -135,10 +135,8 @@ Similar to `options`, you can also pass a function to `screenOptions`. The funct
 The `navigation` prop has a `setOptions` method that lets you update the options for a screen from within a component. See [navigation prop's docs](navigation-prop.md#setoptions) more details.
 
 ```js
-<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-  <Button
-    title="Update options"
-    onPress={() => navigation.setOptions({ title: 'Updated!' })}
-  />
-</View>
+<Button
+  title="Update options"
+  onPress={() => navigation.setOptions({ title: 'Updated!' })}
+/>
 ```

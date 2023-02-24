@@ -1,15 +1,11 @@
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 function EmptyScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Empty Screen</Text>
-    </View>
-  );
+  return <View />;
 }
 
 function Feed({ navigation }) {
@@ -35,7 +31,7 @@ function Home({ navigation }) {
 }
 
 const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function Root() {
   return (

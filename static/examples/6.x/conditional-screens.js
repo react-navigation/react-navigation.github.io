@@ -10,6 +10,10 @@ const getIsSignedIn = () => {
   return true;
 };
 
+function EmptyScreen() {
+  return <View />;
+}
+
 export default function App() {
   const isSignedIn = getIsSignedIn();
 
@@ -18,14 +22,14 @@ export default function App() {
       <Stack.Navigator>
         {isSignedIn ? (
           <>
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Profile" component={ProfileScreen} />
-            <Stack.Screen name="Settings" component={SettingsScreen} />
+            <Stack.Screen name="Home" component={EmptyScreen} />
+            <Stack.Screen name="Profile" component={EmptyScreen} />
+            <Stack.Screen name="Settings" component={EmptyScreen} />
           </>
         ) : (
           <>
-            <Stack.Screen name="SignIn" component={SignInScreen} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
+            <Stack.Screen name="SignIn" component={EmptyScreen} />
+            <Stack.Screen name="SignUp" component={EmptyScreen} />
           </>
         )}
       </Stack.Navigator>

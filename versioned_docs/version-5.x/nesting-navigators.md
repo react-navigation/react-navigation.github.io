@@ -87,11 +87,9 @@ To receive events from parent navigator, you can explicitly listen to parent's e
 <samp id="nested-navigators-events" />
 
 ```js
-const unsubscribe = navigation
-  .getParent()
-  .addListener('tabPress', (e) => {
-    // Do something
-  });
+const unsubscribe = navigation.getParent().addListener('tabPress', (e) => {
+  // Do something
+});
 ```
 
 ### Parent navigator's UI is rendered on top of child navigator
@@ -114,25 +112,20 @@ Consider the following example:
 ```js
 function Root() {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Profile" component={Profile} />
+    <Stack.Navigator>
+      <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Settings" component={Settings} />
-    </Drawer.Navigator>
+    </Stack.Navigator>
   );
 }
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Root"
-          component={Root}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Feed" component={Feed} />
-      </Stack.Navigator>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Root" component={Root} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }

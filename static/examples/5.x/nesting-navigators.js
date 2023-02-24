@@ -47,14 +47,10 @@ const Stack = createStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Profile" component={Profile} />
-      </Stack.Navigator>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Root" component={Root} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }

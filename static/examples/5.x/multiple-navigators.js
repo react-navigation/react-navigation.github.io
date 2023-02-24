@@ -17,11 +17,7 @@ function Profile({ navigation }) {
 }
 
 function EmptyScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Empty Screen</Text>
-    </View>
-  );
+  return <View />;
 }
 
 const Tab = createBottomTabNavigator();

@@ -5,31 +5,21 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 function EmptyScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Empty Screen</Text>
-    </View>
-  );
-}
-
-function Feed({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Feed Screen</Text>
-      <Button title="Go to Root" onPress={() => navigation.navigate('Root')} />
-      <Button
-        title="Go to Root, Profile"
-        onPress={() => navigation.navigate('Root', { screen: 'Profile' })}
-      />
-    </View>
-  );
+  return <View />;
 }
 
 function Home({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button title="Go to Feed" onPress={() => navigation.navigate('Feed')} />
+      <Button
+        title="Go to Root, Profile"
+        onPress={() => navigation.navigate('Root', { screen: 'Profile' })}
+      />
+      <Button
+        title="Go to Root, Settings"
+        onPress={() => navigation.navigate('Root', { screen: 'Settings' })}
+      />
     </View>
   );
 }
@@ -39,25 +29,20 @@ const Stack = createStackNavigator();
 
 function Root() {
   return (
-    <Drawer.Navigator useLegacyImplementation>
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Profile" component={EmptyScreen} />
+    <Stack.Navigator>
+      <Stack.Screen name="Profile" component={EmptyScreen} />
       <Stack.Screen name="Settings" component={EmptyScreen} />
-    </Drawer.Navigator>
+    </Stack.Navigator>
   );
 }
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Root"
-          component={Root}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Feed" component={Feed} />
-      </Stack.Navigator>
+      <Drawer.Navigator useLegacyImplementation>
+        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Root" component={Root} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }

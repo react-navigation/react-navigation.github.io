@@ -8,9 +8,9 @@ import {
   StyleSheet,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/native-stack';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 const styles = StyleSheet.create({
   input: {
