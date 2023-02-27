@@ -373,7 +373,6 @@ Supported values:
 - `default`: use the platform default animation
 - `fade`: fade screen in or out
 - `fade_from_bottom`: fade the new screen from bottom
-- `simple_push`: default animation, but without shadow and native header transition
 - `slide_from_bottom`: slide in the new screen from bottom
 - `slide_from_right`: slide in the new screen from right
 - `slide_from_left`: slide in the new screen from left
