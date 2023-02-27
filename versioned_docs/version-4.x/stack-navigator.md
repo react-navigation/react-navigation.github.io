@@ -313,6 +313,25 @@ You can also specify `{ backgroundColor: 'transparent' }` to make the previous s
 
 Whether transition animation should be enabled the screen. If you set it to `false`, the screen won't animate when pushing or popping. Defaults to `true`.
 
+#### `animation`
+
+How the screen should animate when pushed or popped.
+
+Supported values:
+
+- `default`: use the platform default animation
+- `fade`: fade screen in or out
+- `fade_from_bottom`: fade the new screen from bottom
+- `simple_push`: default animation, but without shadow and native header transition
+- `slide_from_bottom`: slide in the new screen from bottom
+- `slide_from_right`: slide in the new screen from right
+- `slide_from_left`: slide in the new screen from left
+- `none`: don't animate the screen
+
+If `animation` is set, it overrides `cardStyleInterpolator` property.
+
+Only supported on Android and iOS.
+
 #### `animationTypeForReplace`
 
 The type of animation to use when this screen replaces another screen. It takes the following values:
