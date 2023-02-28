@@ -87,4 +87,4 @@ So our component will look like this:
 
 This is not possible. We don't support it because it's too easy to shoot yourself in the foot and slow down / break your app.
 
-However it's possible to use [`redux-devtools-extension`](https://github.com/zalmoxisus/redux-devtools-extension) to inspect the [navigation state](navigation-state.md) and actions, as well as perform time travel debugging by using the [`devtools` package](devtools.md).
+However it's possible to use [`redux-devtools-extension`](https://github.com/reduxjs/redux-devtools) to inspect the [navigation state](navigation-state.md) and actions, as well as perform time travel debugging by using the [`devtools` package](devtools.md).

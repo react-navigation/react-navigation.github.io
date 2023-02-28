@@ -14,7 +14,7 @@ const Stack = createStackNavigator(); // Stack contains Screen & Navigator prope
 
 After creating the navigator, it can be used as children of the `Navigator` component:
 
-<samp id="api-group" />
+<samp id="api-group"/>
 
 ```js
 <Stack.Navigator>
