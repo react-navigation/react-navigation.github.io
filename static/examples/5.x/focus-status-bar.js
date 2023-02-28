@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native';
 import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
@@ -68,7 +68,7 @@ function Screen2({ navigation }) {
   );
 }
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
   return (

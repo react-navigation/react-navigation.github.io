@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 function HomeScreen({ route, navigation }) {
   const { itemId } = route.params;
@@ -21,7 +21,7 @@ function HomeScreen({ route, navigation }) {
   );
 }
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
