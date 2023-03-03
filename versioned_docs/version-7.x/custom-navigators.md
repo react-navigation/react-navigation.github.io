@@ -341,7 +341,7 @@ function BottomTabNavigator({
         navigation={navigation}
         descriptors={descriptors}
       />
-    <NavigationContent>
+    </NavigationContent>
   );
 }
 
