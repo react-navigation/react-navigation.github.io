@@ -106,7 +106,6 @@
     ],
     "Meta": [
       "version-6.x/pitch",
-      "version-6.x/alternatives",
       "version-6.x/used-by",
       "version-6.x/contributing"
     ]

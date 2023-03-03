@@ -113,7 +113,6 @@
     ],
     "Meta": [
       "version-7.x/pitch",
-      "version-7.x/alternatives",
       "version-7.x/used-by",
       "version-7.x/contributing"
     ]
