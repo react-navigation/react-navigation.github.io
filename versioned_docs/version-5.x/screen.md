@@ -6,7 +6,7 @@ sidebar_label: Screen
 
 `Screen` components are used to configure various aspects of screens inside a navigator.
 
-A `Screen` is returned from a `createNavigatorX` function:
+A `Screen` is returned from a `createXNavigator` function:
 
 ```js
 const Stack = createStackNavigator(); // Stack contains Screen & Navigator properties
