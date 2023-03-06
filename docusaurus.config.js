@@ -18,18 +18,15 @@ module.exports = {
       id: 'support_ukraine',
       content:
         'Support Ukraine 🇺🇦 <a target="_blank" rel="noopener noreferrer" href="https://opensource.facebook.com/support-ukraine"> Help Provide Humanitarian Aid to Ukraine</a>.',
-      backgroundColor: '#20232a',
-      textColor: '#fff',
-      isCloseable: false,
-    },
-    googleAnalytics: {
-      trackingID: 'UA-10128745-16',
+      backgroundColor: '#e4e0f0',
+      textColor: '#000',
     },
     prism: {
       theme: require('prism-react-renderer/themes/github'),
       darkTheme: require('prism-react-renderer/themes/dracula'),
     },
     algolia: {
+      appId: 'bh4d9od16a',
       apiKey: '2378e3838ac984c220a994bfc0e0420f',
       indexName: 'react-navigation',
       algoliaOptions: {},
@@ -159,9 +156,11 @@ module.exports = {
           includeCurrentVersion: false,
           lastVersion: '6.x',
         },
-        sidebarCollapsible: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
+        },
+        googleAnalytics: {
+          trackingID: 'UA-10128745-16',
         },
       },
     ],
