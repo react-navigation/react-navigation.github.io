@@ -8,11 +8,11 @@ sidebar_label: Community Navigators and Libraries
 
 ## Fluid Transitions
 
-Fluid Transitions is a library that provides Shared Element Transitions during navigation between screens using react-navigation. 
+Fluid Transitions is a library that provides Shared Element Transitions during navigation between screens using react-navigation.
 
 A Shared Element Transition is the visualization of an element in one screen being transformed into a corresponding element in another screen during the navigation transition.
 
-The library implements a custom navigator called `FluidNavigator` that makes all this and more possible. 
+The library implements a custom navigator called `FluidNavigator` that makes all this and more possible.
 
 #### Links
 

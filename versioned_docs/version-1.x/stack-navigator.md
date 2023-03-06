@@ -63,7 +63,7 @@ Visual options:
   * `uikit` - An approximation of the default behavior for iOS.
 * `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
 * `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
-https://github.com/react-navigation/react-navigation/blob/1.x/flow/react-navigation.js)). Provided function will be passed the following arguments:
+<https://github.com/react-navigation/react-navigation/blob/1.x/flow/react-navigation.js>)). Provided function will be passed the following arguments:
   * `transitionProps` - Transition props for the new screen.
   * `prevTransitionProps` - Transitions props for the old screen.
   * `isModal` - Boolean specifying if screen is modal.
@@ -162,7 +162,6 @@ The navigator component created by `StackNavigator(...)` takes the following pro
 
 * `screenProps` - Pass down extra options to child screens, for example:
 
-
 ```js
 const SomeStack = StackNavigator({
   // config
@@ -227,8 +226,7 @@ Header transitions can also be configured using `headerLeftInterpolator`, `heade
 
 The navigator component created by `StackNavigator(...)` takes the following props:
 
-- `screenProps` - Pass down extra options to child screens and navigation options, for example:
-
+* `screenProps` - Pass down extra options to child screens and navigation options, for example:
 
  ```js
  const StackNav = StackNavigator({

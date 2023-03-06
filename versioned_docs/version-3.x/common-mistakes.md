@@ -114,6 +114,7 @@ In previous version of React Navigation, the library used to dig through your co
 ## Wrapping AppContainer in a View without flex
 
  If you wrap the `AppContainer` in a `View`, make sure the `View` is using flex.
+
 ```javascript
 import React from 'react';
 import { Text, View } from 'react-native';

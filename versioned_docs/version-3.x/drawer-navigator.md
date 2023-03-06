@@ -88,7 +88,7 @@ const CustomDrawerContentComponent = props => {
 - `inactiveLabelStyle` - style object to overwrite `Text` style of the inactive label, when your label is a string (merged with `labelStyle`)
 - `iconContainerStyle` - style object to overwrite `View` icon container styles.
 
-#### Example:
+#### Example
 
 ```js
 contentOptions: {

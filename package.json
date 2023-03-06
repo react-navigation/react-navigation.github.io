@@ -39,5 +39,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "markdownlint": "^0.27.0",
+    "markdownlint-cli2": "^0.6.0"
   }
 }

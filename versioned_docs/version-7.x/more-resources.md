@@ -4,7 +4,7 @@ title: More Resources
 sidebar_label: More Resources
 ---
 
-# Talks
+## Talks
 
 - [Mobile App Development with React Native at Harvard Extension School](https://cs50.harvard.edu/mobile/2018/): Lecture 6 covers React Navigation, includes exercises, slides, and video.
 

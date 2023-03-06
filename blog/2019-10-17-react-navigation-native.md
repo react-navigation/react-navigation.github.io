@@ -31,7 +31,7 @@ After years of growing development, we need to admit that we’re not always abl
 
 ## **Native reveal**
 
-…so, we have decided to export native stack (*FragmentTransaction *on Android and *UINavigationController *on iOS) in order to deliver an even better experience.
+…so, we have decided to export native stack (*FragmentTransaction*on Android and *UINavigationController*on iOS) in order to deliver an even better experience.
 
 Thanks to the great work of Krzysztof Magiera for [React Native Screens](https://github.com/kmagiera/react-native-screens) library now we can use truly native components instead of JS replicas.
 

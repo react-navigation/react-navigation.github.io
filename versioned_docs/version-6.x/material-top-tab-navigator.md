@@ -299,7 +299,7 @@ Color for the icon and label in the inactive tabs.
 
 Spacing between the tab items in the tab bar.
 
-Example: 
+Example:
 
 ```js
 <Tab.Navigator
@@ -315,7 +315,7 @@ Example:
 
 Allows to customize the android ripple effect.
 
-Example: 
+Example:
 
 ```js
 <Tab.Navigator

@@ -4,7 +4,7 @@ title: Redux integration
 sidebar_label: Redux integration
 ---
 
-It is extremely easy to use Redux in an app with React Navigation. It's basically no different than without React Navigation. The following example shows how to do it end to end: https://snack.expo.io/@react-navigation/redux-example. The most important piece from it is the following:
+It is extremely easy to use Redux in an app with React Navigation. It's basically no different than without React Navigation. The following example shows how to do it end to end: <https://snack.expo.io/@react-navigation/redux-example>. The most important piece from it is the following:
 
 ```js
 let RootStack = createStackNavigator({
@@ -58,7 +58,7 @@ class Counter extends React.Component {
 
 ### Pass the state you care about as a param to the screen
 
-If the value isn't expected to change, you can just pass it from a `connect`ed component to the other screen as a param. 
+If the value isn't expected to change, you can just pass it from a `connect`ed component to the other screen as a param.
 
 ```js
 <Button

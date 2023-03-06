@@ -101,7 +101,7 @@ Let's look at the code above in detail. You can also check the equivalent dynami
 
    The component returned by `createStaticNavigation` is similar to the `NavigationContainer` and accepts the [same props](navigation-container.md#props). See [Static API Reference](static-api-reference.md#createstaticnavigation) for more details.
 
-2. If you're using TypeScript, there's one last step to do to for automatic type-checking when using `useNavigation`:
+1. If you're using TypeScript, there's one last step to do to for automatic type-checking when using `useNavigation`:
 
    ```js
    type RootStackParamList = StaticParamList<typeof RootStack>;

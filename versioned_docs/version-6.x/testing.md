@@ -8,7 +8,6 @@ Testing code using React Navigation may require some setup since we need to mock
 
 ## Mocking native modules
 
-
 To be able to test React Navigation components, certain dependencies will need to be mocked depending on which components are being used.
 
 If you're using `@react-navigation/drawer`, you will need to mock:

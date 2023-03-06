@@ -12,7 +12,6 @@ DrawerNavigator(RouteConfigs, DrawerNavigatorConfig)
 
 The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.md#routeconfigs) from `StackNavigator`.
 
-
 ### DrawerNavigatorConfig
 
 - `drawerWidth` - Width of the drawer or a function returning it.
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
 - `labelStyle` - style object to overwrite `Text` style inside content section, when your label is a string
 - `iconContainerStyle` - style object to overwrite `View` icon container styles.
 
-#### Example:
+#### Example
 
 ```js
 contentOptions: {
@@ -103,7 +102,6 @@ The navigator component created by `DrawerNavigator(...)` takes the following pr
 
 - `screenProps` - Pass down extra options to child screens, for example:
 
-
  ```jsx
  const DrawerNav = DrawerNavigator({
    // config
@@ -114,6 +112,6 @@ The navigator component created by `DrawerNavigator(...)` takes the following pr
  />
  ```
 
- ### Nesting `DrawerNavigation`
+### Nesting `DrawerNavigation`
 
 Please bear in mind that if you nest the DrawerNavigation, the drawer will show below the parent navigation.

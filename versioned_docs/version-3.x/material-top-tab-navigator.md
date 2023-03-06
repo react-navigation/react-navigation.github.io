@@ -102,5 +102,5 @@ tapped one) starts.
 
 Callback to handle long press events; the argument is an object containing:
 
-- `navigation`: navigation prop for the screen
-- `defaultHandler`: the default handler for tab press
+* `navigation`: navigation prop for the screen
+* `defaultHandler`: the default handler for tab press

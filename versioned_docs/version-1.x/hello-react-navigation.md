@@ -37,6 +37,7 @@ export default StackNavigator({
   },
 });
 ```
+
 <a href="https://snack.expo.io/@react-navigation/hello-world" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 If you run this code, you will see a screen with an empty navigation bar and a grey content area containing your `HomeScreen` component. The styles you see for the navigation bar and the content area are the default configuration for a `StackNavigator`, we'll learn how to configure those later.
@@ -95,7 +96,7 @@ const RootStack = StackNavigator(
 // Other code for App component here...
 ```
 
-Now our stack has two *routes*, a `Home` route and a `Details` route. The `Home` route corresponds to the `HomeScreen` component, and the `Details` route corresponds to the `DetailsScreen` component. The initial route for the stack is the `Home` route. The natural question at this point is: "how do I move from the Home route to the Details route?". That is covered in the next section.
+Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home` route corresponds to the `HomeScreen` component, and the `Details` route corresponds to the `DetailsScreen` component. The initial route for the stack is the `Home` route. The natural question at this point is: "how do I move from the Home route to the Details route?". That is covered in the next section.
 
 ## Summary
 

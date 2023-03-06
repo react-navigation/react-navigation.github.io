@@ -66,7 +66,6 @@ xcrun simctl openurl booted exp://127.0.0.1:19004/--/chat/Eric
 
 ```
 
-
 ### Android
 
 To test the intent handling in Android (Expo client app ), run the following:
@@ -138,6 +137,7 @@ To test the URI on a real device, open Safari and type `mychat://chat/Eric`.
 To configure the external linking in Android, you can create a new intent in the manifest.
 
 In `SimpleApp/android/app/src/main/AndroidManifest.xml`, do these followings adjustments:
+
 1. Set `launchMode` of `MainActivity` to `singleTask` in order to receive intent on existing `MainActivity`. It is useful if you want to perform navigation using deep link you have been registered - [details](http://developer.android.com/training/app-indexing/deep-linking.html#adding-filters)
 2. Add the new `intent-filter` inside the `MainActivity` entry with a `VIEW` type action:
 

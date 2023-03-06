@@ -165,7 +165,7 @@ Usage:
 
 ### `HeaderTitle`
 
-A component used to show the title text in header. It's the default for [`headerTitle`](#headerTitle). It accepts the same props as an [`Text`](https://reactnative.dev/docs/Text).
+A component used to show the title text in header. It's the default for [`headerTitle`](#headertitle). It accepts the same props as an [`Text`](https://reactnative.dev/docs/Text).
 
 The color of title defaults to the [theme text color](themes.md). You can override it by passing a `tintColor` prop.
 
@@ -177,7 +177,7 @@ Usage:
 
 ### `HeaderBackButton`
 
-A component used to show the back button header. It's the default for [`headerLeft`](#headerLeft) in the [stack navigator](stack-navigator.md). It accepts the following props:
+A component used to show the back button header. It's the default for [`headerLeft`](#headerleft) in the [stack navigator](stack-navigator.md). It accepts the following props:
 
 - `disabled` - Boolean which controls Whether the button is disabled.
 - `onPress` - Callback to call when the button is pressed.

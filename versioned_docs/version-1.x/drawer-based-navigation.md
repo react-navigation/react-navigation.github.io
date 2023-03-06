@@ -49,6 +49,7 @@ const MyDrawerNavigator = new DrawerNavigator(
 
 export default MyDrawerNavigator;
 ```
+
 <a href="https://snack.expo.io/@react-navigation/basic-drawer-v1" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 To open and close drawer, navigate to `'DrawerOpen'` and `'DrawerClose'` respectively.
@@ -57,6 +58,7 @@ To open and close drawer, navigate to `'DrawerOpen'` and `'DrawerClose'` respect
 this.props.navigation.navigate('DrawerOpen'); // open drawer
 this.props.navigation.navigate('DrawerClose'); // close drawer
 ```
+
 If you would like to toggle the drawer you can navigate to `'DrawerToggle'`, and this will choose which navigation is appropriate for you given the drawers current state.
 
 ```js

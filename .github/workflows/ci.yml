@@ -14,5 +14,8 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      - name: Lint markdown
+        run: yarn markdownlint-cli2
+
       - name: Build pages
         run: yarn build

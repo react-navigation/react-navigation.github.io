@@ -47,6 +47,7 @@ navigation.dispatch(
 In a [stack navigator](stack-navigator.md), calling `navigate` with a screen name will result in different behavior based on if the screen is already present or not. If the screen is already present in the stack's history, it'll go back to that screen and remove any screens after that. If the screen is not present, it'll push a new screen.
 
 By default, the screen is identified by its name. But you can also customize it to take the params into account by using the [`getId`](screen.md#getid) prop.
+
 ### reset
 
 The `reset` action allows to reset the [navigation state](navigation-state.md) to the given state. It takes the following arguments:

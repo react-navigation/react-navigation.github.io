@@ -65,8 +65,6 @@ If you run this code, you will see a screen with an empty navigation bar and a g
 
 > The casing of the route name doesn't matter -- you can use lowercase `home` or capitalized `Home`, it's up to you. We prefer capitalizing our route names.
 
-> The only required configuration for a screen is the `name` and `component` props. You can read more about the other options available in the [stack navigator reference](stack-navigator.md).
-
 ### Configuring the navigator
 
 All of the route configuration is specified as props to our navigator. We haven't passed any props to our navigator, so it just uses the default configuration.

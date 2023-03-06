@@ -118,9 +118,9 @@ Title string of a tab displayed in the tab bar or React Element or a function th
 
 Callback to handle tap events; the argument is an object containing:
 
-* the `previousScene: { route, index }` which is the scene we are leaving
-* the `scene: { route, index }` that was tapped
-* the `jumpToIndex` method that can perform the navigation for you
+- the `previousScene: { route, index }` which is the scene we are leaving
+- the `scene: { route, index }` that was tapped
+- the `jumpToIndex` method that can perform the navigation for you
 
 Useful for adding a custom logic before the transition to the next scene (the tapped one) starts.
 
@@ -131,7 +131,6 @@ Define this callback without ever invoking `jumpToIndex` to prevent any navigati
 The navigator component created by `TabNavigator(...)` takes the following props:
 
 - `screenProps` - Pass down extra options to child screens and navigation options, for example:
-
 
  ```js
  const TabNav = TabNavigator({

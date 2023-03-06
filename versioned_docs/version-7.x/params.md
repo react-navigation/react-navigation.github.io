@@ -92,7 +92,6 @@ navigation.setParams({
 
 > Note: Avoid using `setParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-prop.md#setoptions) instead.
 
-
 ## Passing params to a previous screen
 
 Params aren't only useful for passing some data to a new screen, but they can also be useful to pass data to a previous screen too. For example, let's say you have a screen with a create post button, and the create post button opens a new screen to create a post. After creating the post, you want to pass the data for the post back to previous screen.

@@ -26,7 +26,6 @@ class MyNavigator extends React.Component {
 
 ![Routers manage the relationship between URIs, actions, and navigation state](./assets/routers/routers-concept-map.png)
 
-
 ### `getStateForAction(action, state)`
 
 Defines the navigation state in response to a given action. This function will be run when an action gets passed into `props.navigation.dispatch(`, or when any of the helper functions are called, like `navigation.navigate(`.
@@ -60,6 +59,7 @@ If the router has handled the action externally, or wants to swallow it without 
 Returns the child component or navigator for the given route name.
 
 Say a router `getStateForAction` outputs a state like this:
+
 ```js
 {
   index: 1,
@@ -95,6 +95,7 @@ Used to retrieve the navigation options for a screen. Must provide the screen's 
 - `navigationOptions` - The previous set of options that are default or provided by the previous configurer
 
 Inside an example view, perhaps you need to fetch the configured title:
+
 ```js
 // First, prepare a navigation prop for your child, or re-use one if already available.
 const screenNavigation = addNavigationHelpers({

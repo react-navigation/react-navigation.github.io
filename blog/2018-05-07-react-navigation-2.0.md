@@ -7,7 +7,7 @@ author_image_url: https://avatars0.githubusercontent.com/u/90494?s=200&v=4
 tags: [release, announcement]
 ---
 
-The documentation is now live at https://reactnavigation.org, and v1 lives [here](/docs/1.x/getting-started).
+The documentation is now live at <https://reactnavigation.org>, and v1 lives [here](/docs/1.x/getting-started).
 
 <!--truncate-->
 
@@ -63,7 +63,7 @@ Given that we only exposed generic helpers (`navigate`, `goBack`) and helpers sp
 
 One of the big improvements you get from this is that you can now add your own helpers to the `navigation` prop!  Read more in [RFC 6](https://github.com/react-navigation/rfcs/blob/master/text/0006-action-creators.md) and in [pull 3392](https://github.com/react-navigation/react-navigation/pull/3392).
 
- ### NavigationActions no longer have `toString()` implementations ([related](https://github.com/react-navigation/react-navigation/issues/4072))
+### NavigationActions no longer have `toString()` implementations ([related](https://github.com/react-navigation/react-navigation/issues/4072))
 
 This change was intended to simplify the implementation of actions. We may go back on this, however, and apologize in advance if this thrasing causes you trouble.
 
@@ -73,7 +73,7 @@ If you are using `NavigationActions.push` or other stack-specific actions, youâ€
 
 ## Deprecations
 
-###  XNavigator(...) is now createXNavigator(...)
+### XNavigator(...) is now createXNavigator(...)
 
 `StackNavigator`, `TabNavigator` and `DrawerNavigator` are now deprecated in favour of `createStackNavigator`, `createTabNavigator`, and `createDrawerNavigator`, which are functionally identical but more clearly communicate that they are functions and that they return a component. The `XNavigator` style will removed in 3.0.
 
