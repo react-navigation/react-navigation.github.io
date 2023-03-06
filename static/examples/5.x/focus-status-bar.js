@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { StatusBar } from 'react-native';
 import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { NavigationContainer } from '@react-navigation/native';
