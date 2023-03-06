@@ -58,11 +58,7 @@ function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator id="RootNavigator">
-        <Tab.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
+        <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Profile" component={Profile} />
       </Tab.Navigator>
     </NavigationContainer>
