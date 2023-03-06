@@ -53,7 +53,7 @@ const linking = {
 };
 ```
 
-Note that the `prefix` option is not supported on Web. The host & domain names will be automatically determined from the Website URL in the browser. If your app runs only on Web, then you can omit this option from the config.
+Note that the `prefixes` option is not supported on Web. The host & domain names will be automatically determined from the Website URL in the browser. If your app runs only on Web, then you can omit this option from the config.
 
 ### Multiple subdomains​
 
@@ -412,7 +412,9 @@ const state = {
           {
             name: 'Settings',
             state: {
-              routes: [{ name: 'InvalidSettings', path: '/settings/notification' }],
+              routes: [
+                { name: 'InvalidSettings', path: '/settings/notification' },
+              ],
             },
           },
         ],
@@ -430,7 +432,7 @@ function NotFoundScreen({ route }) {
     return <WebView source={{ uri: `https://mywebsite.com/${route.path}` }} />;
   }
 
-  return <Text>This screen doesn't exist!</Text>
+  return <Text>This screen doesn't exist!</Text>;
 }
 ```
 
