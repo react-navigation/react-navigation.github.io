@@ -6,7 +6,7 @@ sidebar_label: Nesting navigators
 
 Nesting navigators means rendering a navigator inside a screen of another navigator, for example:
 
-<samp id="nested-navigators" />
+<samp id="nesting-navigators" />
 
 ```js
 function Home() {
@@ -153,7 +153,7 @@ This may look very different from the way navigation used to work with nested sc
 
 You can also pass params by specifying a `params` key:
 
-<samp id="params-nested-navigators" />
+<samp id="nest-navigators" />
 
 ```js
 navigation.navigate('Root', {

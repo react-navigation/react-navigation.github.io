@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 function Feed({ navigation }) {
   return (
@@ -17,13 +17,14 @@ function Feed({ navigation }) {
 }
 
 function Messages({ navigation }) {
-  React.useEffect(
-    () =>
-      navigation.getParent('RootNavigator').addListener('tabPress', (e) => {
-        alert('Listener added');
-      }),
-    []
-  );
+  React.useEffect(() => {
+    const unsubscribe = navigation.getParent().addListener('tabPress', (e) => {
+      // Do something
+      alert('Tab pressed!');
+    });
+
+    return unsubscribe;
+  }, []);
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -41,7 +42,7 @@ function Profile() {
   );
 }
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function Home() {

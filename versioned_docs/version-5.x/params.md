@@ -87,11 +87,10 @@ Basic usage:
 ```js
 navigation.setParams({
   query: 'someText',
-})
+});
 ```
 
 > Note: Avoid using `setParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-prop.md#setoptions) instead.
-
 
 ## Passing params to a previous screen
 
@@ -154,8 +153,6 @@ Here, after you press "Done", the home screen's `route.params` will be updated t
 ## Passing params to nested navigators
 
 If you have nested navigators, you need to pass params a bit differently. For example, say you have a navigator inside the `Account` screen, and want to pass params to the `Settings` screen inside that navigator. Then you can pass params as following:
-
-<samp id="params-nested-navigators" />
 
 ```js
 navigation.navigate('Account', {

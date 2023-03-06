@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ route, navigation }) {
+function HomeScreen({ route }) {
   const { itemId } = route.params;
 
   return (
