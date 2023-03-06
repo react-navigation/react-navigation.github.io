@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -10,10 +10,6 @@ const getIsSignedIn = () => {
   return true;
 };
 
-function EmptyScreen() {
-  return <View />;
-}
-
 export default function App() {
   const isSignedIn = getIsSignedIn();
 
@@ -22,17 +18,37 @@ export default function App() {
       <Stack.Navigator>
         {isSignedIn ? (
           <>
-            <Stack.Screen name="Home" component={EmptyScreen} />
-            <Stack.Screen name="Profile" component={EmptyScreen} />
-            <Stack.Screen name="Settings" component={EmptyScreen} />
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="Settings" component={SettingsScreen} />
           </>
         ) : (
           <>
-            <Stack.Screen name="SignIn" component={EmptyScreen} />
-            <Stack.Screen name="SignUp" component={EmptyScreen} />
+            <Stack.Screen name="SignIn" component={SignInScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
           </>
         )}
       </Stack.Navigator>
     </NavigationContainer>
   );
+}
+
+function HomeScreen() {
+  return <View />;
+}
+
+function ProfileScreen() {
+  return <View />;
+}
+
+function SettingsScreen() {
+  return <View />;
+}
+
+function SignInScreen() {
+  return <View />;
+}
+
+function SignUpScreen() {
+  return <View />;
 }
