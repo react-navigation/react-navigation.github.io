@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkreact_navigation_website_next=self.webpackChunkreact_navigation_website_next||[]).push([[44157],{52844:function(n){n.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"/blog/tags/announcement","name":"announcement","count":12,"permalink":"/blog/tags/announcement"}')}}]);
