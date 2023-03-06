@@ -47,11 +47,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Root"
-          component={Root}
-          options={{ headerShown: false }}
-        />
+        <Stack.Screen name="Root" component={Root} />
         <Stack.Screen name="Feed" component={Feed} />
       </Stack.Navigator>
     </NavigationContainer>
