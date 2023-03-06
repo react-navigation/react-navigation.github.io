@@ -26,6 +26,8 @@
   --ifm-home-color-white: #f7f7ff;
 
   --ifm-menu-color-background-active: rgb(107, 82, 174, 0.1);
+
+  --docusaurus-highlighted-code-line-bg: #ebebeb;
 }
 
 :root[data-theme='dark'] {
@@ -42,6 +44,8 @@
   --ifm-home-color-background-secondary: #585b82;
   --ifm-home-color-highlight: #9692ff;
   --ifm-home-color-border: #f7f7ff;
+
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.07);
 }
 
 .menu {
