@@ -12,6 +12,8 @@ Each `screen` component in your app is provided with the `route` prop automatica
   - `path` - An optional string containing the path that opened the screen, exists when the screen was opened via a deep link.
   - `params` - An optional object containing params which is defined while navigating e.g. `navigate('Twitter', { user: 'Dan Abramov' })`.
 
+<samp id="route-prop" />
+
 ```js
 function ProfileScreen({ route }) {
   return (

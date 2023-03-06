@@ -23,6 +23,8 @@ We can define different screens based on some condition. For example, if the use
 
 For example:
 
+<samp id="conditional-screens" />
+
 ```js
 isSignedIn ? (
   <>
@@ -61,6 +63,8 @@ In our navigator, we can conditionally define appropriate screens. For our case,
 - `Home` - This is the screen we show if the user is already signed in.
 
 So our navigator will look like:
+
+<samp id="conditional-screens-advanced" />
 
 ```js
 if (state.isLoading) {

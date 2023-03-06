@@ -97,6 +97,8 @@ For an example, consider the following scenario, you have a screen somewhere in 
 
 To avoid this, you can use the `isReady()` method available on the ref as shown in the above examples.
 
+<samp id="handling-navigation-init"/>
+
 ```js
 // RootNavigation.js
 

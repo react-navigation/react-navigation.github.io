@@ -6,6 +6,8 @@ sidebar_label: Nesting navigators
 
 Nesting navigators means rendering a navigator inside a screen of another navigator, for example:
 
+<samp id="nested-navigators" />
+
 ```js
 function Home() {
   return (
@@ -86,6 +88,8 @@ For example, if you have a stack navigator nested inside a tab navigator, the sc
 
 To receive events from parent navigator, you can explicitly listen to parent's events with [`navigation.getParent`](navigation-prop.md#getparent):
 
+<samp id="nested-navigators-events" />
+
 ```js
 const unsubscribe = navigation
   .getParent('MyTabs')
@@ -110,6 +114,8 @@ In your app, you will probably use these patterns depending on the behavior you 
 ## Navigating to a screen in a nested navigator
 
 Consider the following example:
+
+<samp id="nested-navigator-screen" />
 
 ```js
 function Root() {
@@ -160,7 +166,7 @@ This may look very different from the way navigation used to work with nested sc
 
 You can also pass params by specifying a `params` key:
 
-<samp id="nest-navigators" />
+<samp id="params-nested-navigators" />
 
 ```js
 navigation.navigate('Root', {
@@ -211,6 +217,8 @@ When nesting multiple stack, drawer or bottom tab navigator, headers from both c
 To achieve this, you can hide the header in the screen containing the navigator using the `headerShown: false` option.
 
 For example:
+
+<samp id="multiple-navigators" />
 
 ```js
 function Home() {
@@ -273,6 +281,8 @@ We recommend to reduce nesting navigators to minimal. Try to achieve the behavio
 - With excessive nesting, code becomes difficult to follow when navigating to nested screens, configuring deep link etc.
 
 Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, instead of using separate navigators, you can use the [`Group`](group.md) component.
+
+<samp id="nesting-best-practices" />
 
 ```js
 <Stack.Navigator>

@@ -62,11 +62,27 @@ function DetailsScreen({ route, navigation }) {
 
 ![Screen with passed parameters](/assets/navigators/passing_params.png)
 
+## Initial params
+
+You can also pass some initial params to a screen. If you didn't specify any params when navigating to this screen, the initial params will be used. They are also shallow merged with any params that you pass. Initial params can be specified with an `initialParams` prop:
+
+<samp id="initial-params" />
+
+```js
+<Stack.Screen
+  name="Details"
+  component={DetailsScreen}
+  initialParams={{ itemId: 42 }}
+/>
+```
+
 ## Updating params
 
 Screens can also update their params, like they can update their state. The `navigation.setParams` method lets you update the params of a screen. Refer to the [API reference for `setParams`](navigation-prop.md#setparams) for more details.
 
 Basic usage:
+
+<samp id="updating-params" />
 
 ```js
 navigation.setParams({
@@ -76,17 +92,6 @@ navigation.setParams({
 
 > Note: Avoid using `setParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-prop.md#setoptions) instead.
 
-## Initial params
-
-You can also pass some initial params to a screen. If you didn't specify any params when navigating to this screen, the initial params will be used. They are also shallow merged with any params that you pass. Initial params can be specified with an `initialParams` prop:
-
-```js
-<Stack.Screen
-  name="Details"
-  component={DetailsScreen}
-  initialParams={{ itemId: 42 }}
-/>
-```
 
 ## Passing params to a previous screen
 
@@ -149,6 +154,8 @@ Here, after you press "Done", the home screen's `route.params` will be updated t
 ## Passing params to nested navigators
 
 If you have nested navigators, you need to pass params a bit differently. For example, say you have a navigator inside the `Account` screen, and want to pass params to the `Settings` screen inside that navigator. Then you can pass params as following:
+
+<samp id="params-nested-navigators" />
 
 ```js
 navigation.navigate('Account', {

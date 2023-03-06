@@ -156,7 +156,6 @@ Example:
 
 ```js
 <NavigationContainer
-  onStateChange={(state) => console.log('New state is', state)}
   initialState={initialState}
 >
   {/* ... */}
@@ -185,12 +184,32 @@ Function that gets called every time [navigation state](navigation-state.md) cha
 
 You can use it to track the focused screen, persist the navigation state etc.
 
+Example:
+
+```js
+<NavigationContainer
+  onStateChange={(state) => console.log('New state is', state)}
+>
+  {/* ... */}
+</NavigationContainer>
+```
+
 ### `onReady`
 
 Function which is called after the navigation container and all its children finish mounting for the first time. You can use it for:
 
 - Making sure that the `ref` is usable. See [docs regarding initialization of the ref](navigating-without-navigation-prop.md#handling-initialization) for more details.
 - Hiding your native splash screen
+
+Example:
+
+```js
+<NavigationContainer
+  onReady={() => console.log('Navigation container is ready')}
+>
+  {/* ... */}
+</NavigationContainer>
+```
 
 ### `onUnhandledAction`
 

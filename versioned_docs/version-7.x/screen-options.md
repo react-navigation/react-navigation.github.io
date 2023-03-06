@@ -14,6 +14,8 @@ There are 3 ways of specifying options for screens:
 
 You can pass a prop named `options` to the `Screen` component to configure a screen, where you can specify an object with different options for that screen:
 
+<samp id="screen-options"/>
+
 ```js
 <Stack.Navigator>
   <Stack.Screen
@@ -49,6 +51,8 @@ You can also pass a function to `options`. The function will receive the [`navig
 You can pass a prop named `screenOptions` to the `Group` component to configure screens inside the group, where you can specify an object with different options. The options specified in `screenOptions` apply to all of the screens in the group.
 
 Example:
+
+<samp id="screen-options-group" />
 
 ```js
 <Stack.Navigator>
@@ -100,6 +104,8 @@ Example:
 
 Similar to `options`, you can also pass a function to `screenOptions`. The function will receive the [`navigation` prop](navigation-prop.md) and the [`route` prop](route-prop.md) for each screen. This can be useful if you want to configure options for all the screens in one place based on the route:
 
+<samp id="screen-options-navigator" />
+
 ```js
 <Tab.Navigator
   screenOptions={({ route }) => ({
@@ -126,4 +132,11 @@ Similar to `options`, you can also pass a function to `screenOptions`. The funct
 
 ### `navigation.setOptions` method
 
-The `navigation` prop has a `setOptions` method that lets you update the options for a screen from within a component. See [navigation prop's docs](navigation-prop.md#setoptions) more details.
+The `navigation` prop has a `setOptions` method that lets you update the options for a screen from within a component. See [navigation prop's docs](navigation-prop.md#setoptions) for more details.
+
+```js
+<Button
+  title="Update options"
+  onPress={() => navigation.setOptions({ title: 'Updated!' })}
+/>
+```

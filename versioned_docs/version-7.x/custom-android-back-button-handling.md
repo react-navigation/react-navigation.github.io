@@ -10,6 +10,8 @@ As an example, consider a screen where user is selecting items in a list, and a 
 
 Returning `true` from `onBackPress` denotes that we have handled the event, and react-navigation's listener will not get called, thus not popping the screen. Returning `false` will cause the event to bubble up and react-navigation's listener will pop the screen.
 
+<samp id="custom-android-back-button"/>
+
 ```js
 function ScreenWithCustomBackBehavior() {
   // ...
