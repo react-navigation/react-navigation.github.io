@@ -247,8 +247,6 @@ We recommend to reduce nesting navigators to minimal. Try to achieve the behavio
 
 Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, instead of using separate navigators, consider doing something like this:
 
-<samp id="nesting-best-practices" />
-
 ```js
 // Define multiple groups of screens in objects like this
 const commonScreens = {
