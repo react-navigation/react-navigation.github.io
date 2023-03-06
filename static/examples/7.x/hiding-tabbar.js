@@ -41,13 +41,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeTabs}
-          options={{
-            headerShown: false,
-          }}
-        />
+        <Stack.Screen name="Home" component={HomeTabs} />
         <Stack.Screen name="Profile" component={EmptyScreen} />
         <Stack.Screen name="Settings" component={EmptyScreen} />
       </Stack.Navigator>
