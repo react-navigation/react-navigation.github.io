@@ -267,7 +267,7 @@ function TabNavigator({
 
               if (!event.defaultPrevented) {
                 navigation.dispatch({
-                  ...CommonActions.navigate({ name: route.name, merge: true }),
+                  ...CommonActions.navigate(route),
                   target: state.key,
                 });
               }
