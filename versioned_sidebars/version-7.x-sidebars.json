@@ -108,12 +108,11 @@
     ],
     "Additional Resources": [
       "version-7.x/migration-guides",
-      "version-7.x/community-libraries-and-navigators",
+      "version-7.x/navigation-solutions-and-community-libraries",
       "version-7.x/more-resources"
     ],
     "Meta": [
       "version-7.x/pitch",
-      "version-7.x/alternatives",
       "version-7.x/used-by",
       "version-7.x/contributing"
     ]
