@@ -51,6 +51,8 @@ export default function (props) {
 
 If you require offset to scroll position you can wrap and decorate passed reference:
 
+<samp id="use-scroll-to-top-offset" />
+
 ```js
 import * as React from 'react';
 import { ScrollView } from 'react-native';
