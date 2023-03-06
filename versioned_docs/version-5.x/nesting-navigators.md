@@ -153,7 +153,7 @@ This may look very different from the way navigation used to work with nested sc
 
 You can also pass params by specifying a `params` key:
 
-<samp id="nest-navigators" />
+<samp id="params-nested-navigators" />
 
 ```js
 navigation.navigate('Root', {
