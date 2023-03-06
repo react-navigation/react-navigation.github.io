@@ -1,38 +1,44 @@
 ---
-id: community-libraries-and-navigators
-title: Community-developed Navigators and Libraries
-sidebar_label: Community Navigators and Libraries
+id: navigation-solutions-and-community-libraries
+title: Navigation Solutions and Community Libraries
+sidebar_label: Navigation Solutions and Community Libraries
 ---
 
 > Libraries listed in this guide may not have been updated to work with the latest version of React Navigation. Please refer to the library's documentation to see which version of React Navigation it supports.
 
-# Navigators
+# Solutions built on top of React Navigation
 
-## Fluid Transitions
+## Solito
 
-Fluid Transitions is a library that provides Shared Element Transitions during navigation between screens using react-navigation.
-
-A Shared Element Transition is the visualization of an element in one screen being transformed into a corresponding element in another screen during the navigation transition.
-
-The library implements a custom navigator called `FluidNavigator` that makes all this and more possible.
+A tiny wrapper around React Navigation and Next.js that lets you share navigation code across platforms. Also, it provides a set of patterns and examples for building cross-platform apps with React Native + Next.js.
 
 #### Links
 
-[github.com/fram-x/FluidTransitions](https://github.com/fram-x/FluidTransitions)
+[Documentation](https://solito.dev/)
 
-# Libraries
+[github.com/nandorojo/solito](https://github.com/nandorojo/solito)
 
-## react-navigation-collapsible
+## Expo Router
 
-react-navigation-collapsible is a library and a `Higher Order Component` that adjusts your screen options and makes your screen header collapsible.
-
-Since react-navigation's header is designed as `Animated` component, you can animate the header by passing `Animated.Value` from your `ScrollView` or `FlatList` to the header.
+File-based router for React Native apps.
 
 #### Links
 
-[github.com/benevbright/react-navigation-collapsible](https://github.com/benevbright/react-navigation-collapsible)
+[Documentation](https://expo.github.io/router/docs)
 
-[Demo on Snack](https://snack.expo.io/@benevbright/react-navigation-collapsible)
+[github.com/expo/router](https://github.com/expo/router)
+
+## Navio
+
+A navigation library built on top of React Navigation. It's main goal is to improve DX by building the app layout in one place and using the power of TypeScript to provide route names autocompletion.
+
+#### Links
+
+[github.com/kanzitelli/rn-navio](https://github.com/kanzitelli/rn-navio)
+
+[Demo on Snack](https://snack.expo.dev/@kanzitelli/rn-navio-snack)
+
+# Community libraries
 
 ## react-native-screens
 
@@ -59,12 +65,3 @@ Provides simple HOCs that map react-navigation props to your screen components d
 #### Links
 
 [github.com/vonovak/react-navigation-props-mapper](https://github.com/vonovak/react-navigation-props-mapper)
-
-## react-navigation-backhandler
-
-Easily handle Android back button behavior with React-Navigation with a component based API.
-
-#### Links
-
-[github.com/vonovak/react-navigation-backhandler](https://github.com/vonovak/react-navigation-backhandler)
-
