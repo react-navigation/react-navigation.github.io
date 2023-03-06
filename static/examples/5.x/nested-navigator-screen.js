@@ -39,7 +39,7 @@ function Root() {
 function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator useLegacyImplementation>
+      <Drawer.Navigator>
         <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Root" component={Root} />
       </Drawer.Navigator>
