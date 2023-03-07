@@ -48,9 +48,9 @@ Then, you need to install and configure the libraries that are required by the d
 
 3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-  ```sh
-  npx pod-install ios
-  ```
+```sh
+npx pod-install ios
+```
 
 ## API Definition
 
@@ -85,7 +85,7 @@ Optional unique ID for the navigator. This can be used with [`navigation.getPare
 
 #### `initialRouteName`
 
-The name of the route to render on first load of the navigator.
+The name of the route to render on the first load of the navigator.
 
 #### `screenOptions`
 
@@ -107,7 +107,7 @@ It supports the following values:
 
 The default status of the drawer - whether the drawer should stay `open` or `closed` by default.
 
-When this is set to `open`, the drawer will be open from the initial render. It can be closed normally using gestures or programmatically. However, when going back, drawer will re-open if it was closed. This is essentially the opposite of the default behavior of the drawer where it starts `closed`, and back button closes an open drawer.
+When this is set to `open`, the drawer will be open from the initial render. It can be closed normally using gestures or programmatically. However, when going back, the drawer will re-open if it was closed. This is essentially the opposite of the default behavior of the drawer where it starts `closed`, and the back button closes an open drawer.
 
 #### `detachInactiveScreens`
 
@@ -117,7 +117,7 @@ Boolean used to indicate whether inactive screens should be detached from the vi
 
 Whether to use the legacy implementation based on Reanimated 1. The new implementation based on Reanimated 2 will perform better, but you need additional configuration and need to use Hermes with Flipper to debug.
 
-This defaults to `true` in following cases:
+This defaults to `true` in the following cases:
 
 - Reanimated 2 is not configured
 - App is connected to Chrome debugger (Reanimated 2 cannot be used with Chrome debugger)
@@ -129,7 +129,7 @@ Otherwise, it defaults to `false`
 
 Function that returns React element to render as the content of the drawer, for example, navigation items
 
-The content component receives following props by default:
+The content component receives the following props by default:
 
 - `state` - The [navigation state](navigation-state.md) of the navigator.
 - `navigation` - The navigation object for the navigator.
@@ -139,7 +139,7 @@ The content component receives following props by default:
 
 The default component for the drawer is scrollable and only contains links for the routes in the RouteConfig. You can easily override the default component to add a header, footer, or other content to the drawer. The default content component is exported as `DrawerContent`. It renders a `DrawerItemList` component inside a `ScrollView`.
 
-By default the drawer is scrollable and supports devices with notches. If you customize the content, you can use `DrawerContentScrollView` to handle this automatically:
+By default, the drawer is scrollable and supports devices with notches. If you customize the content, you can use `DrawerContentScrollView` to handle this automatically:
 
 ```js
 import {
@@ -241,7 +241,7 @@ The following [options](screen-options.md) can be used to configure the screens 
 
 #### `title`
 
-Generic title that can be used as a fallback for `headerTitle` and `drawerLabel`.
+A generic title that can be used as a fallback for `headerTitle` and `drawerLabel`.
 
 #### `lazy`
 
@@ -314,7 +314,7 @@ Options are `left` or `right`. Defaults to `left` for LTR languages and `right` 
 
 Type of the drawer. It determines how the drawer looks and animates.
 
-- `front`: Traditional drawer which covers the screen with a overlay behind it.
+- `front`: Traditional drawer which covers the screen with an overlay behind it.
 - `back`: The drawer is revealed behind the screen on swipe.
 - `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.
 - `permanent`: A permanent drawer is shown as a sidebar. Useful for having always visible drawer on larger screens.
@@ -553,7 +553,7 @@ navigation.toggleDrawer();
 
 #### `jumpTo`
 
-Navigates to an existing screen in the drawer navigator. The method accepts following arguments:
+Navigates to an existing screen in the drawer navigator. The method accepts the following arguments:
 
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to pass to the destination route.
@@ -643,4 +643,4 @@ class Profile extends React.Component {
 
 ## Nesting drawer navigators inside others
 
-If a drawer navigator is nested inside of another navigator that provides some UI, for example a tab navigator or stack navigator, then the drawer will be rendered below the UI from those navigators. The drawer will appear below the tab bar and below the header of the stack. You will need to make the drawer navigator the parent of any navigator where the drawer should be rendered on top of its UI.
+If a drawer navigator is nested inside of another navigator that provides some UI, for example, a tab navigator or stack navigator, then the drawer will be rendered below the UI from those navigators. The drawer will appear below the tab bar and below the header of the stack. You will need to make the drawer navigator the parent of any navigator where the drawer should be rendered on top of its UI.
