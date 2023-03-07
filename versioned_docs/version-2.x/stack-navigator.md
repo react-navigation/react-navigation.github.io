@@ -69,7 +69,7 @@ Visual options:
   * `center` - Center the title, this is the default on iOS.
 * `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
 * `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
-https://github.com/react-navigation/react-navigation/blob/2.x/flow/react-navigation.js)). Provided function will be passed the following arguments:
+<https://github.com/react-navigation/react-navigation/blob/2.x/flow/react-navigation.js>)). Provided function will be passed the following arguments:
   * `transitionProps` - Transition props for the new screen.
   * `prevTransitionProps` - Transitions props for the old screen.
   * `isModal` - Boolean specifying if screen is modal.
@@ -204,8 +204,8 @@ Whether you can use gestures to dismiss this screen. Defaults to true on iOS, fa
 
 Object to override the distance of touch start from the edge of the screen to recognize gestures. It takes the following properties:
 
-* `horizontal` - _number_ - Distance for horizontal direction. Defaults to 25.
-* `vertical` - _number_ - Distance for vertical direction. Defaults to 135.
+* `horizontal` - *number* - Distance for horizontal direction. Defaults to 25.
+* `vertical` - *number* - Distance for vertical direction. Defaults to 135.
 
 #### `gestureDirection`
 
@@ -216,7 +216,6 @@ String to override the direction for dismiss gesture. `default` for normal behav
 The navigator component created by `StackNavigator(...)` takes the following props:
 
 * `screenProps` - Pass down extra options to child screens, for example:
-
 
 ```js
 const SomeStack = createStackNavigator({

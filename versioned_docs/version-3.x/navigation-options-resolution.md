@@ -148,7 +148,6 @@ const HomeStack = createStackNavigator({ A }, {
 
 Navigators are initialized with `create*Navigator(routeConfig, navigatorConfig)`. Inside of `navigatorConfig` we can add a `defaultNavigationOptions` property. These `defaultNavigationOptions` are the default options for screens within that navigator ([read more about sharing common navigationOptions](headers.md#sharing-common-navigationoptions-across-screens)), they do not refer to the `navigationOptions` for that navigator &mdash; as we have seen above, we set the `navigationOptions` property directly on the navigator for that use case.
 
-
 # A stack contains a tab navigator and you want to set the title on the stack header
 
 Imagine the following configuration:

@@ -14,14 +14,19 @@ module.exports = {
     '/js/code-block-buttons.js',
   ],
   themeConfig: {
-    googleAnalytics: {
-      trackingID: 'UA-10128745-16',
+    announcementBar: {
+      id: 'support_ukraine',
+      content:
+        'Support Ukraine 🇺🇦 <a target="_blank" rel="noopener noreferrer" href="https://opensource.facebook.com/support-ukraine"> Help Provide Humanitarian Aid to Ukraine</a>.',
+      backgroundColor: '#e4e0f0',
+      textColor: '#000',
     },
     prism: {
       theme: require('prism-react-renderer/themes/github'),
       darkTheme: require('prism-react-renderer/themes/dracula'),
     },
     algolia: {
+      appId: 'bh4d9od16a',
       apiKey: '2378e3838ac984c220a994bfc0e0420f',
       indexName: 'react-navigation',
       algoliaOptions: {},
@@ -86,17 +91,15 @@ module.exports = {
             },
             {
               label: 'Get help on Stack Overflow',
-              href:
-                'https://stackoverflow.com/questions/tagged/react-navigation',
+              href: 'https://stackoverflow.com/questions/tagged/react-navigation',
             },
             {
               label: 'Request a feature on Canny',
               href: 'https://react-navigation.canny.io/feature-requests',
             },
             {
-              label: 'Report a bug on Github',
-              href:
-                'https://github.com/react-navigation/react-navigation/issues/new/choose',
+              label: 'Report a bug on GitHub',
+              href: 'https://github.com/react-navigation/react-navigation/issues/new/choose',
             },
           ],
         },
@@ -151,11 +154,13 @@ module.exports = {
             'https://github.com/react-navigation/react-navigation.github.io/edit/main/',
           remarkPlugins: [require('./src/plugins/remark-npm2yarn')],
           includeCurrentVersion: false,
-          lastVersion: '6.x'
+          lastVersion: '6.x',
         },
-        sidebarCollapsible: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
+        },
+        googleAnalytics: {
+          trackingID: 'UA-10128745-16',
         },
       },
     ],

@@ -77,7 +77,7 @@ The latest drawer and tabs depend on [`react-native-gesture-handler`](https://gi
 In your project directory, run the following:
 
 ```sh
-expo install react-native-gesture-handler react-native-reanimated
+npx expo install react-native-gesture-handler react-native-reanimated
 ```
 
 This will install versions of these libraries that are compatible.
@@ -148,7 +148,7 @@ To upgrade `react-navigation-tabs`, run:
 npm install react-navigation-tabs
 ```
 
-This version upgrades [`react-native-tab-view`](https://github.com/react-native-community/react-native-tab-view) to 2.x. As a result, the animations in `createMaterialTopTabNavigator` now use the [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated) library.
+This version upgrades [`react-native-tab-view`](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view) to 2.x. As a result, the animations in `createMaterialTopTabNavigator` now use the [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated) library.
 
 ##### Breaking changes
 
@@ -289,7 +289,7 @@ The following components now receive different set of props, so if you use them,
 
 ##### Removal of `Transitioner`
 
-The old `Transitioner` component has been removed as a result of rewrite of the animation logic. We're not going to expose the new animation logic since it's internal implementation detail and we want to be able to change it without breaking your code. If you need `Transitioner` in your project for some reason, you can copy the old files into your project https://github.com/react-navigation/stack/blob/1.0/src/views/Transitioner.tsx
+The old `Transitioner` component has been removed as a result of rewrite of the animation logic. We're not going to expose the new animation logic since it's internal implementation detail and we want to be able to change it without breaking your code. If you need `Transitioner` in your project for some reason, you can copy the old files into your project <https://github.com/react-navigation/stack/blob/1.0/src/views/Transitioner.tsx>
 
 ## TypeScript
 

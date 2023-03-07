@@ -63,9 +63,7 @@ export default App;
 
 If you run this code, you will see a screen with an empty navigation bar and a grey content area containing your `HomeScreen` component (shown above). The styles you see for the navigation bar and the content area are the default configuration for a stack navigator, we'll learn how to configure those later.
 
-> The casing of the route name doesn't matter -- you can use lowercase `home` or capitalized `Home`, it's up to you. We prefer capitalizing our route names.
-
-> The only required configuration for a screen is the `name` and `component` props. You can read more about the other options available in the [native stack navigator reference](native-stack-navigator.md).
+> The casing of the route name doesn't matter -- you can use lowercase `home` or capitalized `Home`, it's up to you. We prefer capitalizing our route names.(native-stack-navigator.md).
 
 ### Configuring the navigator
 
@@ -129,7 +127,7 @@ Sometimes we might want to pass additional props to a screen. We can do that wit
 
    ```js
    <Stack.Screen name="Home">
-     {props => <HomeScreen {...props} extraData={someData} />}
+     {(props) => <HomeScreen {...props} extraData={someData} />}
    </Stack.Screen>
    ```
 

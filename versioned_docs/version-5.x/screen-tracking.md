@@ -13,12 +13,11 @@ To get notified of state changes, we can use the `onStateChange` prop on `Naviga
 
 ## Example
 
-This example shows how to do screen tracking and send to Firebase Analytics using [expo-firebase-analytics](https://docs.expo.io/versions/latest/sdk/firebase-analytics/). The approach can be adapted to any other analytics SDK.
+This example shows how the approach can be adapted to any mobile analytics SDK.
 
- <samp id="screen-tracking-for-analytics" />
+<samp id="screen-tracking-for-analytics" />
 
 ```js
-import * as Analytics from 'expo-firebase-analytics';
 import { useRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -35,12 +34,13 @@ export default () => {
       onStateChange={async () => {
         const previousRouteName = routeNameRef.current;
         const currentRouteName = navigationRef.current.getCurrentRoute().name;
+        const trackScreenView = () => {
+          // Your implementation of analytics goes here!
+        };
 
         if (previousRouteName !== currentRouteName) {
-          // The line below uses the expo-firebase-analytics tracker
-          // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
-          // Change this line to use another Mobile analytics SDK
-          await Analytics.setCurrentScreen(currentRouteName);
+          // Replace the line below to add the tracker from a mobile analytics SDK
+          await trackScreenView(currentRouteName);
         }
 
         // Save the current route name for later comparison
@@ -51,5 +51,4 @@ export default () => {
     </NavigationContainer>
   );
 };
-
 ```

@@ -87,8 +87,8 @@ There are some important things to notice here:
 - The `mode` configuration for `StackNavigator` can be either `card` (default) or `modal`. The `modal` behavior slides the screen in the from the bottom on iOS and allows the user to scope down from the top to dismiss it. The `modal` configuration has no effect on Android because full-screen modals don't have any different transition behavior on the platform.
 - When we call `navigate` we don't have to specify anything except the route that we'd like to navigate to. There is no need to qualify which stack it belongs to (the arbitrarily named 'root' or the 'main' stack) &mdash; React Navigation attempts to find the route on the closest navigator and then performs the action there. To visualize this, look again at the above tree diagram and imagine the `navigate` action flowing up from `HomeScreen` to `MainStack`, we know that `MainStack` can't handle the route `MyModal`, so it then flows it up to `RootStack`, which can handle that route and so it does.
 
-  ## Summary
+## Summary
 
-* To change the type of transition on a `StackNavigator` you can use the `mode` configuration. When set to `modal`, all screens animate-in from bottom to top rather than right to left. This applies to that entire `StackNavigator`, so to use right to left transitions on other screens, we add another navigation stack with the default configuration.
-* `this.props.navigation.navigate` traverses up the navigator tree to find a navigator that can handle the `navigate` action.
-* [Full source of what we have built so far](https://snack.expo.io/@react-navigation/full-screen-modal)
+- To change the type of transition on a `StackNavigator` you can use the `mode` configuration. When set to `modal`, all screens animate-in from bottom to top rather than right to left. This applies to that entire `StackNavigator`, so to use right to left transitions on other screens, we add another navigation stack with the default configuration.
+- `this.props.navigation.navigate` traverses up the navigator tree to find a navigator that can handle the `navigate` action.
+- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/full-screen-modal)

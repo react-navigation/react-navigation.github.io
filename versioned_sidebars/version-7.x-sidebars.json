@@ -1,0 +1,120 @@
+{
+  "version-7.x/docs": {
+    "Fundamentals": [
+      "version-7.x/getting-started",
+      "version-7.x/hello-react-navigation",
+      "version-7.x/navigating",
+      "version-7.x/params",
+      "version-7.x/headers",
+      "version-7.x/header-buttons",
+      "version-7.x/nesting-navigators",
+      "version-7.x/navigation-lifecycle",
+      "version-7.x/next-steps",
+      "version-7.x/glossary-of-terms",
+      "version-7.x/troubleshooting",
+      "version-7.x/limitations"
+    ],
+    "Guides": [
+      "version-7.x/tab-based-navigation",
+      "version-7.x/drawer-based-navigation",
+      "version-7.x/auth-flow",
+      "version-7.x/handling-safe-area",
+      "version-7.x/hiding-tabbar-in-screens",
+      "version-7.x/status-bar",
+      "version-7.x/modal",
+      "version-7.x/multiple-drawers",
+      "version-7.x/screen-options-resolution",
+      "version-7.x/custom-android-back-button-handling",
+      "version-7.x/preventing-going-back",
+      "version-7.x/function-after-focusing-screen",
+      "version-7.x/connecting-navigation-prop",
+      "version-7.x/navigating-without-navigation-prop",
+      "version-7.x/deep-linking",
+      "version-7.x/configuring-links",
+      "version-7.x/web-support",
+      "version-7.x/server-rendering",
+      "version-7.x/screen-tracking",
+      "version-7.x/themes",
+      "version-7.x/state-persistence",
+      "version-7.x/testing",
+      "version-7.x/typescript",
+      "version-7.x/redux-integration",
+      "version-7.x/MST-integration",
+      "version-7.x/upgrading-from-6.x"
+    ],
+    "Static configuration": [
+      "version-7.x/static-configuration",
+      "version-7.x/static-api-reference",
+      "version-7.x/static-typescript",
+      "version-7.x/static-authentication",
+      "version-7.x/static-combine-with-dynamic"
+    ],
+    "API Reference": [
+      "version-7.x/navigation-container",
+      "version-7.x/server-container",
+      "version-7.x/group",
+      "version-7.x/screen",
+      "version-7.x/screen-options",
+      "version-7.x/route-prop",
+      "version-7.x/navigation-prop",
+      "version-7.x/navigation-context",
+      "version-7.x/navigation-events",
+      "version-7.x/navigation-state",
+      "version-7.x/link",
+      "version-7.x/devtools",
+      "version-7.x/elements",
+      {
+        "type": "category",
+        "label": "Navigators",
+        "items": [
+          "version-7.x/stack-navigator",
+          "version-7.x/native-stack-navigator",
+          "version-7.x/drawer-navigator",
+          "version-7.x/bottom-tab-navigator",
+          "version-7.x/material-bottom-tab-navigator",
+          "version-7.x/material-top-tab-navigator"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Hooks",
+        "items": [
+          "version-7.x/use-navigation",
+          "version-7.x/use-route",
+          "version-7.x/use-navigation-state",
+          "version-7.x/use-focus-effect",
+          "version-7.x/use-is-focused",
+          "version-7.x/use-link-to",
+          "version-7.x/use-link-props",
+          "version-7.x/use-link-builder",
+          "version-7.x/use-scroll-to-top",
+          "version-7.x/use-theme"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Actions",
+        "items": [
+          "version-7.x/navigation-actions",
+          "version-7.x/stack-actions",
+          "version-7.x/drawer-actions",
+          "version-7.x/tab-actions"
+        ]
+      }
+    ],
+    "Build your own Navigator": [
+      "version-7.x/custom-routers",
+      "version-7.x/custom-navigators"
+    ],
+    "Additional Resources": [
+      "version-7.x/migration-guides",
+      "version-7.x/navigation-solutions-and-community-libraries",
+      "version-7.x/more-resources"
+    ],
+    "Meta": [
+      "version-7.x/pitch",
+      "version-7.x/used-by",
+      "version-7.x/contributing"
+    ]
+  }
+}

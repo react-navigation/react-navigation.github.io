@@ -39,7 +39,6 @@ When we define our button this way, the `this` variable in `options` is _not_ th
 
 > Note that there is a community-developed solution for rendering header buttons that takes care of the correct styling - see [react-navigation-header-buttons](https://github.com/vonovak/react-navigation-header-buttons)
 
-
 ## Header interaction with its screen component
 
 To be able to interact with the screen component, we need to use `navigation.setOptions` to define our button instead of the `options` prop. By using `navigation.setOptions` inside the screen component, we get access to screen's props, state, context etc.

@@ -22,7 +22,7 @@ The easiest way to get running with `react-navigation` is to initialize a projec
 - If you'd like a [bare React Native project](https://docs.expo.io/versions/latest/introduction/managed-vs-bare/#bare-workflow), then choose `minimal` under the Bare workflow heading.
 - In both cases you can pick the TypeScript version of the template if you prefer &mdash; React Navigation ships with TypeScript types.
 
-Once the project is initialized, in the project directory run `expo install react-navigation react-native-gesture-handler react-native-reanimated react-native-screens`, and you're ready to go! You can now continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.
+Once the project is initialized, in the project directory run `npx expo install react-navigation react-native-gesture-handler react-native-reanimated react-native-screens`, and you're ready to go! You can now continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.
 
 ## Install into an existing project
 
@@ -41,7 +41,7 @@ The libraries we will install now are [`react-native-gesture-handler`](https://g
 In your project directory, run:
 
 ```sh
-expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+npx expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 ```
 
 This will install versions of these libraries that are compatible.

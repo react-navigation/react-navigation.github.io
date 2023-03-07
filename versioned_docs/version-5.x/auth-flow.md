@@ -23,6 +23,8 @@ We can define different screens based on some condition. For example, if the use
 
 For example:
 
+<samp id="conditional-screens" />
+
 ```js
 isSignedIn ? (
   <>
@@ -50,7 +52,7 @@ By conditionally defining different screens based on a variable, we can implemen
 
 ## Don't manually navigate when conditionally rendering screens
 
-It's important to note that when using such a setup, you **don't manually navigate** to the `Home` screen by calling `navigation.navigate('Home')` or any other method. **React Navigation will automatically navigate to the correct screen** when `isSigned` in changes - `Home` screen when `isSignedIn` becomes `true`, and to `SignIn` screen when `isSignedIn` becomes `false`. You'll get an error if you attempt to navigate manually.
+It's important to note that when using such a setup, you **don't manually navigate** to the `Home` screen by calling `navigation.navigate('Home')` or any other method. **React Navigation will automatically navigate to the correct screen** when `isSignedIn` changes - `Home` screen when `isSignedIn` becomes `true`, and to `SignIn` screen when `isSignedIn` becomes `false`. You'll get an error if you attempt to navigate manually.
 
 ## Define our screens
 
@@ -62,9 +64,11 @@ In our navigator, we can conditionally define appropriate screens. For our case,
 
 So our navigator will look like:
 
+<samp id="conditional-screens-advanced" />
+
 ```js
 if (state.isLoading) {
-  // We haven't finished checking for the token yet
+  // We haven't finished checking the token yet
   return <SplashScreen />;
 }
 

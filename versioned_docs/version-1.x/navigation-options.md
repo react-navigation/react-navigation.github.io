@@ -100,6 +100,7 @@ class ProfileScreen extends React.Component {
 List of available navigation options depends on the `navigator` the screen is added to.
 
 Check available options for:
+
 - [`drawer navigator`](drawer-navigator.md#screen-navigation-options)
 - [`stack navigator`](stack-navigator.md#screen-navigation-options)
 - [`tab navigator`](tab-navigator.md#screen-navigation-options)

@@ -38,7 +38,7 @@ class Albums extends React.Component {
 }
 
 // Wrap and export
-export default function(props) {
+export default function (props) {
   const ref = React.useRef(null);
 
   useScrollToTop(ref);
@@ -59,11 +59,12 @@ import { useScrollToTop } from '@react-navigation/native';
 function Albums() {
   const ref = React.useRef(null);
 
-  useScrollToTop(React.useRef({
-    scrollToTop: () => ref.current?.scrollToOffset({ offset: -100 }),
-  }));
+  useScrollToTop(
+    React.useRef({
+      scrollToTop: () => ref.current?.scrollTo({ y: 100 }),
+    })
+  );
 
   return <ScrollView ref={ref}>{/* content */}</ScrollView>;
 }
-
 ```

@@ -50,6 +50,7 @@ class HomeScreen extends React.Component {
   }
 }
 ```
+
 <a href="https://snack.expo.io/@react-navigation/screen-components-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 The ["Navigation prop reference"](navigation-prop.md) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `this.props.navigation`.
@@ -83,7 +84,6 @@ The state of a navigator generally looks something like this:
 ```
 
 For this navigation state, there are two routes (which may be tabs, or cards in a stack). The index indicates the active route, which is "B".
-
 
 ## Route
 

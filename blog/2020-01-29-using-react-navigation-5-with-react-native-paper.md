@@ -59,7 +59,7 @@ expo install react-native-gesture-handler react-native-reanimated react-native-s
 
 After you run these two commands you should be ready to go. Let's start implementing the app!
 
-## React Navigation and React Native Paper initial setup.
+## React Navigation and React Native Paper initial setup
 
 Both these libraries require minimal setup.
 
@@ -758,7 +758,7 @@ What's more, it even animates icon change properly even though we haven't implem
 
 Nowadays, supporting the Light/Dark theme is no longer a fancy way to stand out from other apps, but it has become a standard. Happily, both React Navigation v5 and React Native Paper supports theming and in this section I'll guide you through setting it up.
 
-#### React Navigation
+### React Navigation
 
 React Navigation exports two themes:
 
@@ -778,7 +778,7 @@ export default function App() {
 }
 ```
 
-#### React Native Paper
+### React Native Paper
 
 React Native Paper similarly to React Navigation also exports two themes:
 
@@ -806,7 +806,7 @@ export default function Main() {
 }
 ```
 
-#### Combining themes
+### Combining themes
 
 Since both React Navigation and React Native Paper follows the same pattern for theming and structure of the theme object is very similar, we can combine them into one object:
 

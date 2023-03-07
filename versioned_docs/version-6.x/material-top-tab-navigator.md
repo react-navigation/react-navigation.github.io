@@ -6,7 +6,7 @@ sidebar_label: Material Top Tabs
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the tabs or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
-This wraps [`react-native-tab-view`](https://github.com/react-native-community/react-native-tab-view).
+This wraps [`react-native-tab-view`](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view).
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
@@ -22,18 +22,24 @@ To use this navigator, ensure that you have [`@react-navigation/native` and its 
 npm install @react-navigation/material-top-tabs react-native-tab-view
 ```
 
-You also need to install [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view).
+Then, you need to install [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) which is required by the navigator.
 
 If you have a Expo managed project, in your project directory, run:
 
 ```sh
-expo install react-native-pager-view
+npx expo install react-native-pager-view
 ```
 
 If you have a bare React Native project, in your project directory, run:
 
 ```bash npm2yarn
 npm install react-native-pager-view
+```
+
+If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+
+```sh
+npx pod-install ios
 ```
 
 ## API Definition
@@ -63,6 +69,10 @@ function MyTabs() {
 
 The `Tab.Navigator` component accepts following props:
 
+#### `id`
+
+Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
+
 #### `initialRouteName`
 
 The name of the route to render on first load of the navigator.
@@ -73,14 +83,14 @@ Default options to use for the screens in the navigator.
 
 #### `backBehavior`
 
-This controls how going back in the navigator is handled. This includes when the back button is pressed/back gesture is performed, or `goBack` is called.
+This controls what happens when `goBack` is called in the navigator. This includes pressing the device's back button or back gesture on Android.
 
 It supports the following values:
 
-- `firstRoute` - return to the first tab (default)
-- `initialRoute` - return to initial tab
-- `order` - return to previous tab (in the order they are shown in the tab bar)
-- `history` - return to last visited tab
+- `firstRoute` - return to the first screen defined in the navigator (default)
+- `initialRoute` - return to initial screen passed in `initialRouteName` prop, if not passed, defaults to the first screen
+- `order` - return to screen defined before the focused screen
+- `history` - return to last visited screen in the navigator; if the same screen is visited multiple times, the older entries are dropped from the history
 - `none` - do not handle back button
 
 #### `tabBarPosition`
@@ -100,7 +110,9 @@ String indicating whether the keyboard gets dismissed in response to a drag gest
 Object containing the initial height and width of the screens. Passing this will improve the initial rendering performance. For most apps, this is a good default:
 
 ```js
-{ width: Dimensions.get('window').width }}
+{
+  width: Dimensions.get('window').width;
+}
 ```
 
 #### `sceneContainerStyle`
@@ -283,13 +295,49 @@ Color for the icon and label in the active tab.
 
 Color for the icon and label in the inactive tabs.
 
+#### `tabBarGap`
+
+Spacing between the tab items in the tab bar.
+
+Example:
+
+```js
+<Tab.Navigator
+  //...
+  screenOptions={{
+    tabBarGap: 10,
+  }}
+>
+</Tab.Navigator>
+```
+
+#### `tabBarAndroidRipple`
+
+Allows to customize the android ripple effect.
+
+Example:
+
+```js
+<Tab.Navigator
+  //...
+  screenOptions={{
+    tabBarAndroidRipple: { borderless: false },
+  }}
+>
+</Tab.Navigator>
+```
+
 #### `tabBarPressColor`
 
-Color for material ripple (Android >= 5.0 only).
+Color for material ripple.
+
+Only supported on Android.
 
 #### `tabBarPressOpacity`
 
-Opacity for pressed tab (iOS and Android < 5.0 only).
+Opacity for pressed tab.
+
+Only supported on iOS.
 
 #### `tabBarBounces`
 
@@ -319,7 +367,7 @@ Style object for the view containing the tab items.
 
 #### `tabBarStyle`
 
-Style object for the the tab bar.
+Style object for the tab bar.
 
 #### `swipeEnabled`
 
@@ -362,7 +410,7 @@ To prevent the default behavior, you can call `event.preventDefault`:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('tabPress', e => {
+  const unsubscribe = navigation.addListener('tabPress', (e) => {
     // Prevent default behavior
     e.preventDefault();
 
@@ -382,7 +430,7 @@ Example:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('tabLongPress', e => {
+  const unsubscribe = navigation.addListener('tabLongPress', (e) => {
     // Do something
   });
 

@@ -1,4 +1,4 @@
-name: Build
+name: CI
 
 on: [pull_request]
 
@@ -8,23 +8,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Use Node.js 12.13
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12.13
+      - name: Setup
+        uses: ./.github/actions/setup
 
-    - name: Restore yarn cache
-      id: yarn-cache
-      uses: actions/cache@master
-      with:
-        path: '**/node_modules'
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Lint markdown
+        run: yarn markdownlint-cli2
 
-    - name: Install dependencies
-      if: steps.yarn-cache.outputs.cache-hit != 'true'
-      run: yarn install --frozen-lockfile
-
-    - name: Build pages
-      run: yarn build
+      - name: Build pages
+        run: yarn build

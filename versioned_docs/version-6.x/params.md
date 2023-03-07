@@ -6,7 +6,7 @@ sidebar_label: Passing parameters to routes
 
 Remember when I said "more on that later when we talk about `params`!"? Well, the time has come.
 
-Now that we know how to [create a native stack navigator with some routes](hello-react-navigation.md) and [navigate between those routes](navigating.md), let's look at how we can pass data to routes when we navigate to them.
+Now that we know how to [create a stack navigator with some routes](hello-react-navigation.md) and [navigate between those routes](navigating.md), let's look at how we can pass data to routes when we navigate to them.
 
 There are two pieces to this:
 
@@ -62,23 +62,11 @@ function DetailsScreen({ route, navigation }) {
 
 ![Screen with passed parameters](/assets/navigators/passing_params.png)
 
-## Updating params
-
-Screens can also update their params, like they can update their state. The `navigation.setParams` method lets you update the params of a screen. Refer to the [API reference for `setParams`](navigation-prop.md#setparams) for more details.
-
-Basic usage:
-
-```js
-navigation.setParams({
-  query: 'someText',
-});
-```
-
-> Note: Avoid using `setParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-prop.md#setoptions) instead.
-
 ## Initial params
 
-You can also pass some initial params to a screen. If you didn't specify any params when navigating to this screen, the initial params will be used. They are also shallow merged with any params that you pass. Initial params can be specified with an `initialParams` prop:
+You can pass some initial params to a screen. If you didn't specify any params when navigating to this screen, the initial params will be used. They are also shallow merged with any params that you pass. Initial params can be specified with an `initialParams` prop:
+
+<samp id="initial-params" />
 
 ```js
 <Stack.Screen
@@ -87,6 +75,22 @@ You can also pass some initial params to a screen. If you didn't specify any par
   initialParams={{ itemId: 42 }}
 />
 ```
+
+## Updating params
+
+Screens can also update their params, like they can update their state. The `navigation.setParams` method lets you update the params of a screen. Refer to the [API reference for `setParams`](navigation-prop.md#setparams) for more details.
+
+Basic usage:
+
+<samp id="updating-params" />
+
+```js
+navigation.setParams({
+  query: 'someText',
+});
+```
+
+> Note: Avoid using `setParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-prop.md#setoptions) instead.
 
 ## Passing params to a previous screen
 
@@ -150,6 +154,8 @@ Here, after you press "Done", the home screen's `route.params` will be updated t
 
 If you have nested navigators, you need to pass params a bit differently. For example, say you have a navigator inside the `Account` screen, and want to pass params to the `Settings` screen inside that navigator. Then you can pass params as following:
 
+<samp id="params-nested-navigators" />
+
 ```js
 navigation.navigate('Account', {
   screen: 'Settings',
@@ -161,7 +167,7 @@ See [Nesting navigators](nesting-navigators.md) for more details on nesting.
 
 ## What should be in params
 
-It's important to understand what kind of data should be in params. Params are like options for a screen. They should only contain information to configure what's displayed in the screen. Avoid passing the full data which will be displayed on the screen itself (e.g. pass an user id instead of user object). Also avoid passing data which is used by multiple screens, such data should be in a global store.
+It's important to understand what kind of data should be in params. Params are like options for a screen. They should only contain information to configure what's displayed in the screen. Avoid passing the full data which will be displayed on the screen itself (e.g. pass a user id instead of user object). Also avoid passing data which is used by multiple screens, such data should be in a global store.
 
 You can also think of the route object like a URL. If your screen had a URL, what should be in the URL? Params shouldn't contain data that you think should not be in the URL. This often means that you should keep as little data as possible needed to determine what the screen is. Think of visiting a shopping website, when you are seeing product listings, the URL usually contains category name, type of sort, any filters etc., it doesn't contain the actual list of products displayed on the screen.
 
@@ -181,7 +187,7 @@ navigation.navigate('Profile', {
 
 This looks convenient, and lets you access the user objects with `route.params.user` without any extra work.
 
-However, this is an anti-pattern. Data such as user objects should be in your global store instead of the navigation state. Otherwise you have the same data duplicated in multiple places. This can leads to bugs such as the profile screen showing outdated data even if the user object has changed after navigation.
+However, this is an anti-pattern. Data such as user objects should be in your global store instead of the navigation state. Otherwise you have the same data duplicated in multiple places. This can lead to bugs such as the profile screen showing outdated data even if the user object has changed after navigation.
 
 It also becomes problematic to link to the screen via deep linking or on the Web, since:
 

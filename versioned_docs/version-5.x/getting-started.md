@@ -34,7 +34,7 @@ The libraries we will install now are [`react-native-gesture-handler`](https://g
 In your project directory, run:
 
 ```sh
-expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+npx expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 ```
 
 This will install versions of these libraries that are compatible.
@@ -50,8 +50,6 @@ npm install react-native-reanimated react-native-gesture-handler react-native-sc
 ```
 
 > Note: You might get warnings related to peer dependencies after installation. They are usually caused by incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.
-
-> Note: If using this project with [react-native-windows](https://github.com/microsoft/react-native-windows), omit `react-native-gesture-handler`.
 
 From React Native 0.60 and higher, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md). So you **don't need to run** `react-native link`.
 

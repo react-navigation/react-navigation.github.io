@@ -1,0 +1,8 @@
+globs:
+  - '**/*.md'
+ignores:
+  - node_modules
+  - versioned_docs/version-1.x
+  - versioned_docs/version-2.x
+  - versioned_docs/version-3.x
+  - versioned_docs/version-4.x

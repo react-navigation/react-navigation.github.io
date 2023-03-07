@@ -95,7 +95,7 @@ The `Replace` action replaces the route at the given key with another route.
 * `routeName` - _string - `routeName` to use for replacement route.
 * `params` - _object_ - Parameters to pass in to the replacement route.
 * `action` - _object_ - Optional sub-action.
-* `immediate`* - _boolean_ - *Currently has no effect*, this is a placeholder for when `StackNavigator` supports animated replace (it currently does not).
+* `immediate`* - _boolean_ - _Currently has no effect_, this is a placeholder for when `StackNavigator` supports animated replace (it currently does not).
 
 ### Back
 

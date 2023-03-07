@@ -7,6 +7,7 @@ sidebar_label: StackActions
 `StackActions` is an object containing methods for generating actions specific to stack-based navigators. Its methods expand upon the actions available in [`NavigationActions`](navigation-actions.md).
 
 The following actions are supported:
+
 * [Reset](#reset) - Replace current state with a new state
 * [Replace](#replace) - Replace a route at a given key with another route
 * [Push](#push) - Add a route on the top of the stack, and navigate forward to it
@@ -60,7 +61,7 @@ The `replace` action replaces the route at the given key with another route.
 * `routeName` - _string_ - `routeName` to use for replacement route.
 * `params` - _object_ - Parameters to pass in to the replacement route.
 * `action` - _object_ - Optional sub-action.
-* `immediate`* - _boolean_ - *Currently has no effect, this is a placeholder for when stack navigator supports animated replace (it currently does not).
+* `immediate`*- _boolean_ -*Currently has no effect, this is a placeholder for when stack navigator supports animated replace (it currently does not).
 
 ### push
 

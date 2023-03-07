@@ -18,7 +18,6 @@ When going back from B to A, `componentWillUnmount` of B is called, but `compone
 
 Similar results can be observed (in combination) with other navigators as well. Consider a tab navigator with two tabs, where each tab is a stack navigator:
 
-
 ```jsx
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
