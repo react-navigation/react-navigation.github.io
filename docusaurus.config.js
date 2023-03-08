@@ -27,7 +27,7 @@ module.exports = {
     },
     algolia: {
       appId: 'QCWXRU195A',
-      apiKey: '2378e3838ac984c220a994bfc0e0420f',
+      apiKey: 'bad995329370d9a9ba50cc4b840a3884',
       indexName: 'react-navigation',
       algoliaOptions: {},
     },
