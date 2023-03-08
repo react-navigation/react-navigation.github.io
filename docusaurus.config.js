@@ -26,7 +26,7 @@ module.exports = {
       darkTheme: require('prism-react-renderer/themes/dracula'),
     },
     algolia: {
-      appId: 'bh4d9od16a',
+      appId: 'QCWXRU195A',
       apiKey: '2378e3838ac984c220a994bfc0e0420f',
       indexName: 'react-navigation',
       algoliaOptions: {},
