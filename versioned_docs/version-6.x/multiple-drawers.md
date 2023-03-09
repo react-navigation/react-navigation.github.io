@@ -55,6 +55,12 @@ export default function App() {
 }
 ```
 
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/drawer/drawer-multiple.mp4" />
+  </video>
+</div>
+
 But there is one problem. When we call `navigation.openDrawer()` in our `HomeScreen`, it always opens the left drawer since it's the immediate parent of the screen.
 
 To solve this, we need to use [`navigation.getParent`](navigation-prop.md#getparent) to refer to the right drawer which is the parent of the left drawer. So our code would look like:

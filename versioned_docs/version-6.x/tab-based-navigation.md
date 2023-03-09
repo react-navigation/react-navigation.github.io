@@ -54,6 +54,9 @@ export default function App() {
 }
 ```
 
+![Tabs minimal](/assets/navigators/tabs/tabs-minimal.png)
+
+
 ## Customizing the appearance
 
 This is similar to how you would customize a stack navigator &mdash; there are some properties that are set when you initialize the tab navigator and others that can be customized per-screen in `options`.
@@ -147,6 +150,12 @@ function SettingsScreen({ navigation }) {
 }
 ```
 
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/tabs/tabs-navigate.mp4" />
+  </video>
+</div>
+
 ## A stack navigator for each tab
 
 Usually tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
@@ -227,6 +236,12 @@ export default function App() {
   );
 }
 ```
+
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/tabs/tabs-with-stack.mp4" />
+  </video>
+</div>
 
 ## Why do we need a TabNavigator instead of TabBarIOS or some other component?
 
