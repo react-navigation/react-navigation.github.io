@@ -99,12 +99,19 @@ To customize the back button image, you can use `headerBackImageSource` ([read m
 
 ```js
 <Stack.Navigator>
-  <Stack.Screen name="Home" component={HomeScreen} />
-  <Stack.Screen name="Details" component={DetailsScreen} options={
+  <Stack.Screen 
+    name="Home" 
+    component={HomeScreen}
+  />
+  <Stack.Screen 
+  name="Details" 
+  component={DetailsScreen} 
+  options={
     {
       headerBackTitle: 'Custom Back',
       headerBackTitleStyle: {fontSize: 30}
-    }}/>
+    }}
+  />
 </Stack.Navigator>
 ```
 
