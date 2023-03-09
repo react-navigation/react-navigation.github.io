@@ -71,7 +71,7 @@ The following breaking changes may break your app if you're using the related AP
 
 - Material Top Tab Navigator: These changes affect users of `@react-navigation/material-top-tabs` package.
 
-  - [Material Top Tabs now uses `ViewPager` instead of Reanimated and Gesture Handler](#drawer-now-uses-viewpager-instead-of-reanimated-and-gesture-handler)
+  - [Material Top Tabs now uses `ViewPager` instead of Reanimated and Gesture Handler](#material-top-tabs-now-uses-viewpager-instead-of-reanimated-and-gesture-handler)
 
 - Material Bottom Tab Navigator: These changes affect users of `@react-navigation/material-bottom-tabs` package.
 

@@ -107,7 +107,6 @@ There's a working example app with Redux [here](https://github.com/react-navigat
 
 To make jest tests work with your React Navigation app, you need to change the jest preset in the `package.json`, see [here](https://facebook.github.io/jest/docs/tutorial-react-native.html#transformignorepatterns-customization):
 
-
 ```json
 "jest": {
   "preset": "react-native",

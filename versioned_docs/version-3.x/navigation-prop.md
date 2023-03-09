@@ -33,7 +33,6 @@ If the navigator is a stack navigator, several alternatives to `navigate` and `g
   * `reset` - wipe the navigator state and replace it with the result of several actions
   * `dismiss` - dismiss the current stack
 
-
 If the navigator is a drawer navigator, the following are also available:
 
 * `this.props.navigation`

@@ -12,7 +12,6 @@ createDrawerNavigator(RouteConfigs, DrawerNavigatorConfig)
 
 The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.md#routeconfigs) from `createStackNavigator`.
 
-
 ### DrawerNavigatorConfig
 
 - `drawerWidth` - Width of the drawer or a function returning it.
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
 - `inactiveLabelStyle` - style object to overwrite `Text` style of the inactive label, when your label is a string (merged with `labelStyle`)
 - `iconContainerStyle` - style object to overwrite `View` icon container styles.
 
-#### Example:
+#### Example
 
 ```js
 contentOptions: {
@@ -99,6 +98,6 @@ React Element or a function, that given `{ focused: boolean, tintColor: string }
 
 Specifies the [lock mode](https://reactnative.dev/docs/drawerlayoutandroid.html#drawerlockmode) of the drawer. This can also update dynamically by using screenProps.drawerLockMode on your top level router.
 
- ### Nesting drawer navigators inside others
+### Nesting drawer navigators inside others
 
 If a drawer navigator is nested inside of another navigator that provides some UI, for example a tab navigator or stack navigator, then the drawer will be rendered below the UI from those navigators. The drawer will appear below the tab bar and below the header of the stack. You will need to make the drawer navigator the parent of any navigator where the drawer should be rendered on top of its UI.

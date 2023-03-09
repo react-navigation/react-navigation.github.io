@@ -55,7 +55,7 @@ export default function Help () {
                post a question to StackOverflow
             </a>.
           </p>
-          
+
         </div>
         {supportLinks && supportLinks.length && (
           <section className="margin-vert--xl">

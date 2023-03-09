@@ -102,7 +102,7 @@ We also have JSDoc for the built-in methods and options, so you get their descri
 
 ### Redux DevTools integration
 
-If you use [React Native Debugger](https://github.com/jhen0409/react-native-debugger) or [Redux Devtools Extension](https://github.com/zalmoxisus/redux-devtools-extension), you can see navigation actions in the devtools along with the current navigation state. It also supports time-travel debugging!
+If you use [React Native Debugger](https://github.com/jhen0409/react-native-debugger) or [Redux Devtools Extension](https://github.com/reduxjs/redux-devtools), you can see navigation actions in the devtools along with the current navigation state. It also supports time-travel debugging!
 
 ![Redux Devtools in action](/assets/blog/announcing-5.0/redux-devtools.gif)
 

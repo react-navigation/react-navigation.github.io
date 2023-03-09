@@ -128,6 +128,8 @@ function FocusAwareStatusBar(props) {
 
 Now, our screens (both `Screen1.js` and `Screen2.js`) will use the `FocusAwareStatusBar` component instead of the `StatusBar` component from React Native:
 
+<samp id="focus-status-bar"/>
+
 ```jsx
 function Screen1({ navigation }) {
   const insets = useSafeAreaInsets();

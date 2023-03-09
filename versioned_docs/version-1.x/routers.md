@@ -13,7 +13,6 @@ Routers define a component's navigation state, and they allow the developer to d
 - [StackRouter](https://github.com/react-navigation/react-navigation/blob/1.x/src/routers/StackRouter.js)
 - [TabRouter](https://github.com/react-navigation/react-navigation/blob/1.x/src/routers/TabRouter.js)
 
-
 ## Using Routers
 
 To make a navigator manually, put a static `router` on a component.
@@ -92,7 +91,6 @@ MyStackRouter.router.getStateForAction = (action, state) => {
   return defaultGetStateForAction(action, state);
 };
 ```
-
 
 ### Handling Custom URIs
 

@@ -49,6 +49,7 @@ class DetailsScreen extends React.Component {
   /* render function, etc */
 }
 ```
+
 <a href="https://snack.expo.io/@react-navigation/using-params-in-title" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 The argument that is passed in to the `navigationOptions` function is an object with the following properties:
@@ -97,9 +98,11 @@ class HomeScreen extends React.Component {
   /* render function, etc */
 }
 ```
+
 <a href="https://snack.expo.io/@react-navigation/setting-header-styles" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 There are a couple of things to notice here:
+
 1. On iOS the status bar text and icons are black, and this doesn't look great over a dark colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.md).
 2. The configuration we set only applies to the home screen; when we navigate to the details screen, the default styles are back. We'll look at how to share `navigationOptions` between screens now.
 
@@ -143,6 +146,7 @@ const RootStack = StackNavigator(
   }
 );
 ```
+
 <a href="https://snack.expo.io/@react-navigation/sharing-header-styles" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 Now, any screen that belongs to the `RootStack` will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
@@ -150,7 +154,6 @@ Now, any screen that belongs to the `RootStack` will have our wonderful branded 
 ## Overriding shared `navigationOptions`
 
 The `navigationOptions` specified on your screen component are merged together with those of its parent `StackNavigator`, with the options on the screen component taking precedence. Let's use this knowledge to invert the background and tint colors on the details screen.
-
 
 ```js
 class DetailsScreen extends React.Component {
@@ -170,6 +173,7 @@ class DetailsScreen extends React.Component {
   /* render function, etc */
 }
 ```
+
 <a href="https://snack.expo.io/@react-navigation/overriding-shared-header-styles" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 ## Replacing the title with a custom component
@@ -197,6 +201,7 @@ class HomeScreen extends React.Component {
   /* render function, etc */
 }
 ```
+
 <a href="https://snack.expo.io/@react-navigation/custom-header-title-component" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 > You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to a `StackNavigator`, the `headerTitle` defaults to a `Text` component that displays the `title`.

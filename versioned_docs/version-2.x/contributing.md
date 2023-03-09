@@ -85,7 +85,7 @@ If you ever find yourself making a change to the project's public interface (the
 
 The libdef (located at `flow/react-navigation.js`) will need to be updated such that running `flow` in the `examples/NavigationPlayground` folder produces no errors.
 
-1. Follow the instructions in the [Run the Example App](#Run-the-Example-App) section to prepare the `NavigationPlayground` example and install `flow` into the example's local `node_modules/.bin` folder.
+1. Follow the instructions in the [Run the Example App](#run-the-example-app) section to prepare the `NavigationPlayground` example and install `flow` into the example's local `node_modules/.bin` folder.
 2. Run `flow` to see any current errors.
 3. If no errors occur as a result of an API change, that indicates that we don't have any coverage in the `NavigationPlayground` example project for your API change. This is frequently the case - for instance, if you add a new navigation option. In this case, you must add an example use of your new feature to `NavigationPlayground` so that you can test your libdef changes, and so that we can keep your feature properly tested and typed in perpetuity.
 4. Once you are seeing errors, go ahead and update the libdef (located at `flow/react-navigation.js`) so that there are no longer any errors when you run `flow` from within `examples/NavigationPlayground`.

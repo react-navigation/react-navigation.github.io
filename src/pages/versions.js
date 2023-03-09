@@ -11,8 +11,9 @@ import versions from '../../versions.json';
 function Version() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
-  const latestVersion = versions[0];
-  const pastVersions = versions.slice(1, versions.length);
+  const latestVersion = '6.x';
+  const pastVersions = versions.slice(versions.indexOf(latestVersion) + 1, versions.length);
+  const nextVersions = versions.slice(0, versions.indexOf(latestVersion));
   const repoUrl = `https://github.com/${siteConfig.organizationName}/${siteConfig.projectName}`;
 
   return (
@@ -37,11 +38,34 @@ function Version() {
             </tbody>
           </table>
         </div>
+        {nextVersions.length > 0 && (
+          <div className="margin-bottom--lg">
+            <h3 id="archive">Upcoming versions (Unstable)</h3>
+            <p>
+              Here you can find the documentation for the next unstable version of
+              React Navigation.
+            </p>
+            <table>
+              <tbody>
+                {nextVersions.map(version => (
+                  <tr key={version}>
+                    <th>{version}</th>
+                    <td>
+                      <Link to={useBaseUrl(`/docs/${version}/getting-started`)}>
+                        Documentation
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
         {pastVersions.length > 0 && (
           <div className="margin-bottom--lg">
-            <h3 id="archive">Past Versions</h3>
+            <h3 id="archive">Past versions</h3>
             <p>
-              Here you can find documentation for previous versions of
+              Here you can find the documentation for previous versions of
               React Navigation.
             </p>
             <table>

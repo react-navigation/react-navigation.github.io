@@ -57,7 +57,6 @@ Assuming that your app users will need to authorize before getting to the home s
 
 Open [./src/navigation/auth.navigator.tsx`](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/auth.navigator.tsx) file and paste the following code:
 
-
 ```js
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -192,7 +191,7 @@ export const AppNavigator = (props): React.ReactElement => (
 
 Sometimes you may want your app to contain tabs at the bottom. Here is the main semantic difference regarding the tabs at the top: while they should represent the content of the same type, the bottom tabs could be used to show any content of your application. This is where we're going to use `createBottomTabNavigator` and `BottomNavigation`.
 
-Let's start by creating another navigator for the second tab. The first one will be used for Todo screens. Open [./src/navigation/profile.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/profile.navigator.tsx) file and paste the following code: 
+Let's start by creating another navigator for the second tab. The first one will be used for Todo screens. Open [./src/navigation/profile.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/profile.navigator.tsx) file and paste the following code:
 
 ```js
 import React from 'react';
@@ -440,7 +439,7 @@ export const TodoTabBar = (props): SafeAreaLayoutElement => {
 
 ### TypeScript
 
-The new React Navigation has great TypeScript support and exports type definitions for navigators and custom navigation components. Sometimes you may want to type-check the params you're passing when navigating between routes. You also may want to make autocomplete work when working with navigation props. 
+The new React Navigation has great TypeScript support and exports type definitions for navigators and custom navigation components. Sometimes you may want to type-check the params you're passing when navigating between routes. You also may want to make autocomplete work when working with navigation props.
 
 Let's add some type definitions for Auth screens. For this purpose, open [./src/navigation/auth.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/auth.navigator.tsx) and paste the following code:
 

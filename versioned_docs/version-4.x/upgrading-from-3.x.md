@@ -289,7 +289,7 @@ The following components now receive different set of props, so if you use them,
 
 ##### Removal of `Transitioner`
 
-The old `Transitioner` component has been removed as a result of rewrite of the animation logic. We're not going to expose the new animation logic since it's internal implementation detail and we want to be able to change it without breaking your code. If you need `Transitioner` in your project for some reason, you can copy the old files into your project https://github.com/react-navigation/stack/blob/1.0/src/views/Transitioner.tsx
+The old `Transitioner` component has been removed as a result of rewrite of the animation logic. We're not going to expose the new animation logic since it's internal implementation detail and we want to be able to change it without breaking your code. If you need `Transitioner` in your project for some reason, you can copy the old files into your project <https://github.com/react-navigation/stack/blob/1.0/src/views/Transitioner.tsx>
 
 ## TypeScript
 

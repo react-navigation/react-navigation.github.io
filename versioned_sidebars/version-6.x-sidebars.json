@@ -101,12 +101,11 @@
     ],
     "Additional Resources": [
       "version-6.x/migration-guides",
-      "version-6.x/community-libraries-and-navigators",
+      "version-6.x/navigation-solutions-and-community-libraries",
       "version-6.x/more-resources"
     ],
     "Meta": [
       "version-6.x/pitch",
-      "version-6.x/alternatives",
       "version-6.x/used-by",
       "version-6.x/contributing"
     ]

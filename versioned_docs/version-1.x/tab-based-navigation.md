@@ -196,6 +196,7 @@ export default TabNavigator(
   }
 );
 ```
+
 <a href="https://snack.expo.io/@react-navigation/stacks-in-tabs" target="blank" class="run-code-button">&rarr; Run this code</a>
 
 ## Why do we need a TabNavigator instead of TabBarIOS or some other component?
@@ -204,8 +205,8 @@ It's common to attempt to use a standalone tab bar component without integrating
 
 For example, React Navigation's `TabNavigator` takes care of handling the Android back button for you, while standalone components typically do not. Additionally, it is more difficult for you (as the developer) to perform actions such as "jump to this tab and then go to this screen" if you need to call into two distinct APIs for it. Lastly, mobile user interfaces have numerous small design details that require that certain components are aware of the layout or presence of other components &mdash; for example, if you have a translucent tab bar, content should scroll underneath it and the scroll view should have an inset on the bottom equal to the height of the tab bar so you can see all of the content. Double tapping the tab bar should make the active navigation stack pop to the top of the stack, and doing it again should scroll the active scroll view in that stack scroll to the top. While not all of these behaviors are implemented out of the box yet with React Navigation, they will be and you will not get any of this if you use a standalone tab view component.
 
-
 ## A tab icon that doesn't navigate
+
 If you want a tab icon that never actually opens a stack navigator, simple provide the `tabBarOnPress` callback for the tab's `navigationOptions` without invoking the provided `jumpToIndex` method.
 
 ```js

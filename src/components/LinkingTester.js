@@ -5,7 +5,7 @@ import Editor from 'react-simple-code-editor';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import github from 'prism-react-renderer/themes/github';
 import dracula from 'prism-react-renderer/themes/dracula';
-import ThemeContext from '@theme/ThemeContext';
+import {useColorMode} from '@docusaurus/theme-common';
 import RouteMap from './RouteMap';
 
 const parse = (value) => eval(`(function() { return ${value}; }())`);
@@ -29,8 +29,8 @@ function Code({ code, theme, language }) {
 }
 
 export default function LinkingTester() {
-  const { isDarkTheme } = React.useContext(ThemeContext);
-  const theme = isDarkTheme ? dracula : github;
+  const {colorMode} = useColorMode();
+  const theme = colorMode === 'dark' ? dracula : github;
 
   const [rawConfig, setRawConfig] = React.useState(
     `{

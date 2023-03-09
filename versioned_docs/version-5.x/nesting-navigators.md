@@ -6,6 +6,8 @@ sidebar_label: Nesting navigators
 
 Nesting navigators means rendering a navigator inside a screen of another navigator, for example:
 
+<samp id="nesting-navigators" />
+
 ```js
 function Home() {
   return (
@@ -82,12 +84,12 @@ For example, if you have a stack navigator nested inside a tab navigator, the sc
 
 To receive events from parent navigator, you can explicitly listen to parent's events with `navigation.getParent()`:
 
+<samp id="nested-navigators-events" />
+
 ```js
-const unsubscribe = navigation
-  .getParent()
-  .addListener('tabPress', (e) => {
-    // Do something
-  });
+const unsubscribe = navigation.getParent().addListener('tabPress', (e) => {
+  // Do something
+});
 ```
 
 ### Parent navigator's UI is rendered on top of child navigator
@@ -104,6 +106,8 @@ In your app, you will probably use these patterns depending on the behavior you 
 ## Navigating to a screen in a nested navigator
 
 Consider the following example:
+
+<samp id="nested-navigator-screen" />
 
 ```js
 function Root() {
@@ -149,7 +153,7 @@ This may look very different from the way navigation used to work with nested sc
 
 You can also pass params by specifying a `params` key:
 
-<samp id="nest-navigators" />
+<samp id="params-nested-navigators" />
 
 ```js
 navigation.navigate('Root', {
@@ -198,6 +202,8 @@ When nesting multiple stack or drawer navigator, headers from both child and par
 To achieve this, you can hide the header in the screen containing the navigator using the `headerShown: false` option.
 
 For example:
+
+<samp id="multiple-navigators" />
 
 ```js
 function Home() {

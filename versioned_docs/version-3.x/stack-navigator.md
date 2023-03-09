@@ -47,8 +47,9 @@ Options for the router:
 * `initialRouteName` - Sets the default screen of the stack. Must match one of the keys in route configs.
 * `initialRouteParams` - The params for the initial route
 * `initialRouteKey` - Optional identifier of the initial route
-- `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
-- `defaultNavigationOptions` - Default navigation options to use for screens
+* `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
+* `defaultNavigationOptions` - Default navigation options to use for screens
+
 * `paths` - A mapping of overrides for the paths set in the route configs
 * `disableKeyboardHandling` - If true, the keyboard will NOT automatically dismiss when navigating to a new screen. Defaults to false. This is ignored in the web platform.
 
@@ -72,7 +73,7 @@ Visual options:
 * `cardShadowEnabled` - Use this prop to have visible shadows during transitions. Defaults to `true`
 * `cardOverlayEnabled` - Use this prop to have visible stack card overlays during transitions. Defaults to `false`.
 * `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
-https://github.com/react-navigation/react-navigation/blob/3.x/flow/react-navigation.js)). Provided function will be passed the following arguments:
+<https://github.com/react-navigation/react-navigation/blob/3.x/flow/react-navigation.js>)). Provided function will be passed the following arguments:
   * `transitionProps` - Transition props for the new screen.
   * `prevTransitionProps` - Transitions props for the old screen.
   * `isModal` - Boolean specifying if screen is modal.
@@ -217,8 +218,8 @@ Whether you can use gestures to dismiss this screen. Defaults to true on iOS, fa
 
 Object to override the distance of touch start from the edge of the screen to recognize gestures. It takes the following properties:
 
-* `horizontal` - _number_ - Distance for horizontal direction. Defaults to 25.
-* `vertical` - _number_ - Distance for vertical direction. Defaults to 135.
+* `horizontal` - *number* - Distance for horizontal direction. Defaults to 25.
+* `vertical` - *number* - Distance for vertical direction. Defaults to 135.
 
 #### `gestureDirection`
 
@@ -240,7 +241,6 @@ const Store = createStackNavigator({
 The navigator component created by `createStackNavigator(...)` takes the following props:
 
 * `screenProps` - Pass down extra options to child screens, for example:
-
 
 ```js
 const SomeStack = createStackNavigator({

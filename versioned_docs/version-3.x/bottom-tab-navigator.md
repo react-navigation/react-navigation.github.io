@@ -14,7 +14,6 @@ createBottomTabNavigator(RouteConfigs, BottomTabNavigatorConfig);
 
 ## RouteConfigs
 
-
 The route configs object is a mapping from route name to a route config, which tells the navigator what to present for that route, see [example](stack-navigator.md#routeconfigs) from stack navigator.
 
 ## BottomTabNavigatorConfig
@@ -75,7 +74,6 @@ const TabScreens = createBottomTabNavigator(
 );
 ```
 
-
 ## `navigationOptions` for screens inside of the navigator
 
 #### `title`
@@ -122,5 +120,5 @@ Define this callback without ever invoking `defaultHandler` to prevent any navig
 
 Callback to handle long press events; the argument is an object containing:
 
-- `navigation`: navigation prop for the screen
-- `defaultHandler`: the default handler for tab press
+* `navigation`: navigation prop for the screen
+* `defaultHandler`: the default handler for tab press

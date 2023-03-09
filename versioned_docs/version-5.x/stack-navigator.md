@@ -90,8 +90,6 @@ String that can be used as a fallback for `headerTitle`.
 
 #### `header`
 
-
-
 Custom header to use instead of the default header.
 
 This accepts a function that returns a React Element to display as a header. The function receives an object containing the following properties as the argument:

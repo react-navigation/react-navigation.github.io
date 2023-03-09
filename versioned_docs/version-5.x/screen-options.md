@@ -14,6 +14,8 @@ There are 3 ways of specifying options for screens:
 
 You can pass a prop named `options` to the `Screen` component to configure a screen, where you can specify an object with different options for that screen:
 
+<samp id="screen-options"/>
+
 ```js
 <Stack.Navigator>
   <Stack.Screen
@@ -88,3 +90,10 @@ Similar to `options`, you can also pass a function to `screenOptions`. The funct
 ### `navigation.setOptions` method
 
 The `navigation` prop has a `setOptions` method that lets you update the options for a screen from within a component. See [navigation prop's docs](navigation-prop.md#setoptions) more details.
+
+```js
+<Button
+  title="Update options"
+  onPress={() => navigation.setOptions({ title: 'Updated!' })}
+/>
+```
