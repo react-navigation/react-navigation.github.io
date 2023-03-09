@@ -177,7 +177,6 @@ function StackScreen() {
 
 ![Basic app using stack navigator](/assets/headers/header-custom-title.png)
 
-
 > You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to stack navigators, the `headerTitle` defaults to a `Text` component that displays the `title`.
 
 ## Additional configuration

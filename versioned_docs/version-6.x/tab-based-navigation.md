@@ -56,7 +56,6 @@ export default function App() {
 
 ![Tabs minimal](/assets/navigators/tabs/tabs-minimal.png)
 
-
 ## Customizing the appearance
 
 This is similar to how you would customize a stack navigator &mdash; there are some properties that are set when you initialize the tab navigator and others that can be customized per-screen in `options`.

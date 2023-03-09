@@ -204,4 +204,3 @@ Although not necessary, you can use the `FocusAwareStatusBar` component in the s
     <source src="/assets/statusbar/status-tab-android.mp4" />
   </video>
 </div>
-
