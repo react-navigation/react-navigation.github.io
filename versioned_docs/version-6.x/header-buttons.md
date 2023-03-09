@@ -35,7 +35,7 @@ function StackScreen() {
 }
 ```
 
-![Basic app using stack navigator](/assets/headers/header-button.png)
+![Header button](/assets/headers/header-button.png)
 
 When we define our button this way, the `this` variable in `options` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
 
@@ -115,7 +115,7 @@ To customize the back button image, you can use `headerBackImageSource` ([read m
 </Stack.Navigator>
 ```
 
-![Basic app using stack navigator](/assets/headers/header-back-custom.png)
+![Header custom back](/assets/headers/header-back-custom.png)
 
 ## Overriding the back button
 

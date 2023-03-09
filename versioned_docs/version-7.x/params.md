@@ -60,7 +60,11 @@ function DetailsScreen({ route, navigation }) {
 }
 ```
 
-![Screen with passed parameters](/assets/navigators/passing_params.png)
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/passing-params.mov" />
+  </video>
+</div>
 
 ## Initial params
 
@@ -147,6 +151,12 @@ function CreatePostScreen({ navigation, route }) {
   );
 }
 ```
+
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/params-to-parent.mov" />
+  </video>
+</div>
 
 Here, after you press "Done", the home screen's `route.params` will be updated to reflect the post text that you passed in `navigate`.
 
