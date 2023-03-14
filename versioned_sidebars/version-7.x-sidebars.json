@@ -49,7 +49,21 @@
       "version-7.x/static-authentication",
       "version-7.x/static-combine-with-dynamic"
     ],
-    "API Reference": [
+    "Navigators": [
+      "version-7.x/stack-navigator",
+      "version-7.x/native-stack-navigator",
+      "version-7.x/drawer-navigator",
+      "version-7.x/bottom-tab-navigator",
+      "version-7.x/material-bottom-tab-navigator",
+      "version-7.x/material-top-tab-navigator"
+    ],
+    "Libraries": [
+      "version-7.x/devtools",
+      "version-7.x/elements",
+      "version-7.x/tab-view",
+      "version-7.x/drawer-layout"
+    ],
+    "API reference": [
       "version-7.x/navigation-container",
       "version-7.x/server-container",
       "version-7.x/group",
@@ -61,20 +75,6 @@
       "version-7.x/navigation-events",
       "version-7.x/navigation-state",
       "version-7.x/link",
-      "version-7.x/devtools",
-      "version-7.x/elements",
-      {
-        "type": "category",
-        "label": "Navigators",
-        "items": [
-          "version-7.x/stack-navigator",
-          "version-7.x/native-stack-navigator",
-          "version-7.x/drawer-navigator",
-          "version-7.x/bottom-tab-navigator",
-          "version-7.x/material-bottom-tab-navigator",
-          "version-7.x/material-top-tab-navigator"
-        ]
-      },
       {
         "type": "category",
         "label": "Hooks",
@@ -106,7 +106,7 @@
       "version-7.x/custom-routers",
       "version-7.x/custom-navigators"
     ],
-    "Additional Resources": [
+    "Additional resources": [
       "version-7.x/migration-guides",
       "version-7.x/navigation-solutions-and-community-libraries",
       "version-7.x/more-resources"

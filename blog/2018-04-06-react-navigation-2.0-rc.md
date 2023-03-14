@@ -11,7 +11,7 @@ Exactly two months after the release of React Navigation 1.0, we are close to an
 
 <!--truncate-->
 
-```sh
+```bash
 yarn add react-navigation@^2.0.0-rc.1
 ```
 

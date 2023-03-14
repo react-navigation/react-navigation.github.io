@@ -726,7 +726,7 @@ In the example app, you will use the Expo managed workflow. The guide will focus
 
 First, you need to decide the navigation structure of your app. To keep it simple, the main navigator will be bottom-tabs navigator with two screens. Its first screen will be a simple stack navigator, called `HomeStack`, with two screens: `Home` and `Profile`, and the second tabs screen will be just a simple one without any nested navigators, called `Settings`:
 
-```sh
+```bash
 BottomTabs
 ├── Stack (HomeStack)
 │   ├── Home

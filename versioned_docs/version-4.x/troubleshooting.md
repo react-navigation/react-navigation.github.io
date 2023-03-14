@@ -19,13 +19,13 @@ If the module points to a local file (i.e. the name of the module starts with `.
 
 If you're using Expo, run:
 
-```sh
+```bash
 expo start -c
 ```
 
 If you're not using Expo, run:
 
-```sh
+```bash
 npx react-native start --reset-cache
 ```
 
@@ -43,13 +43,13 @@ This and some similar errors might occur if you didn't link the [`react-native-g
 
   On newer versions of React Native, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md), so if you have linked the library manually, first unlink it:
 
-  ```sh
+  ```bash
   react-native unlink react-native-gesture-handler
   ```
 
   If you're testing on iOS and use Mac, make sure you have run `pod install` in the `ios/` folder:
 
-  ```sh
+  ```bash
   cd ios; pod install; cd ..
   ```
 
@@ -57,7 +57,7 @@ This and some similar errors might occur if you didn't link the [`react-native-g
 
   If you're on an older React Native version, you need to manually link the library. To do that, run:
 
-  ```sh
+  ```bash
   react-native link react-native-gesture-handler
   ```
 
@@ -67,7 +67,7 @@ Now rebuild the app and test on your device or simulator.
 
 This error can often happen if you have a Babel plugin that compiles the code in a non-spec compliant way. For example:
 
-```sh
+```bash
 ["@babel/plugin-proposal-class-properties", { "loose": true}]
 ```
 
@@ -91,13 +91,13 @@ If you have additional options configured here, try removing them to see if it f
 
 If you're using Expo, run:
 
-```sh
+```bash
 expo start -c
 ```
 
 If you're not using Expo, run:
 
-```sh
+```bash
 npx react-native start --reset-cache
 ```
 

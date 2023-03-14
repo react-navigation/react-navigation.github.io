@@ -111,7 +111,7 @@ Much like the issue template, the [pull request template](https://github.com/rea
 - Fork the [`repo`](https://github.com/react-navigation/react-navigation) on GitHub
 - Run these commands in the terminal to download locally and install it:
 
-```sh
+```bash
 git clone https://github.com/<USERNAME>/navigation-ex.git
 cd navigation-ex
 git remote add upstream https://github.com/react-navigation/react-navigation.git
@@ -124,25 +124,25 @@ The project uses a monorepo structure for the packages managed by [yarn workspac
 
 Look around. Match the style of the rest of the codebase. This project uses ESLint to ensure consistency throughout the project. You can check your project by running:
 
-```sh
+```bash
 yarn lint
 ```
 
 If any errors occur you'll either have to manually fix them or you can attempt to automatically fix them by running:
 
-```sh
+```bash
 yarn lint --fix
 ```
 
 The codebase is written in TypeScript, and must pass typecheck. To typecheck files, run:
 
-```sh
+```bash
 yarn typescript
 ```
 
 It's useful to run typechecking in watch mode when working on the project. To do it, run:
 
-```sh
+```bash
 yarn typescript --watch
 ```
 
@@ -152,7 +152,7 @@ The [example app](https://github.com/react-navigation/react-navigation/tree/main
 
 While developing, you can run the [example app](https://github.com/react-navigation/react-navigation/tree/main/example) with [Expo](https://expo.io/) to test your changes:
 
-```sh
+```bash
 yarn example start
 ```
 
@@ -160,13 +160,13 @@ yarn example start
 
 React Navigation has tests implemented in [Jest](https://facebook.github.io/jest/). To run either of these, from the React Navigation directory, run either of the following commands (after installing the `node_modules`) to run tests or type-checking.
 
-```sh
+```bash
 yarn test
 ```
 
 It's useful to run tests in watch mode when working on the project. To do it, run:
 
-```sh
+```bash
 yarn test --watch
 ```
 

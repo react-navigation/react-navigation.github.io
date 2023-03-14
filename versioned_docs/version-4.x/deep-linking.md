@@ -101,7 +101,7 @@ The reason that is necessary to use `Linking.createURL` is that the scheme will 
 
 To test the URI on the simulator in the Expo client app, run the following:
 
-```sh
+```bash
 xcrun simctl openurl booted [ put your URI prefix in here ]
 
 // for example
@@ -113,7 +113,7 @@ xcrun simctl openurl booted exp://127.0.0.1:19000/--/chat/Eric
 
 To test the intent handling in the Expo client app on Android, run the following:
 
-```sh
+```bash
 adb shell am start -W -a android.intent.action.VIEW -d "[ put your URI prefix in here ]" host.exp.exponent
 
 # for example
@@ -145,7 +145,7 @@ Let's configure the native iOS app to open based on the `mychat://` URI scheme.
 
 In `SimpleApp/ios/SimpleApp/AppDelegate.m`:
 
-```sh
+```bash
 // Add the header at the top of the file:
 #import <React/RCTLinkingManager.h>
 
@@ -163,13 +163,13 @@ In Xcode, open the project at `SimpleApp/ios/SimpleApp.xcodeproj`. Select the pr
 
 Now you can press play in Xcode, or re-build on the command line:
 
-```sh
+```bash
 react-native run-ios
 ```
 
 To test the URI on the simulator, run the following:
 
-```sh
+```bash
 xcrun simctl openurl booted mychat://chat/Eric
 ```
 
@@ -184,7 +184,7 @@ In `SimpleApp/android/app/src/main/AndroidManifest.xml`, do these followings adj
 1. Set `launchMode` of `MainActivity` to `singleTask` in order to receive intent on existing `MainActivity`. It is useful if you want to perform navigation using deep link you have been registered - [details](http://developer.android.com/training/app-indexing/deep-linking.html#adding-filters)
 2. Add the new `intent-filter` inside the `MainActivity` entry with a `VIEW` type action:
 
-```sh
+```bash
 <activity
     android:name=".MainActivity"
     android:launchMode="singleTask">
@@ -203,13 +203,13 @@ In `SimpleApp/android/app/src/main/AndroidManifest.xml`, do these followings adj
 
 Now, re-install the app:
 
-```sh
+```bash
 react-native run-android
 ```
 
 To test the intent handling in Android, run the following:
 
-```sh
+```bash
 adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/Eric" com.simpleapp
 ```
 

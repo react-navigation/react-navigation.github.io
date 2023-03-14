@@ -40,7 +40,7 @@
       "version-4.x/react-native-screens",
       "version-4.x/upgrading-from-3.x"
     ],
-    "API Reference": [
+    "API reference": [
       "version-4.x/navigation-prop",
       "version-4.x/navigation-context",
       "version-4.x/navigation-events",
@@ -85,7 +85,7 @@
       "version-4.x/custom-routers",
       "version-4.x/navigation-views"
     ],
-    "Additional Resources": [
+    "Additional resources": [
       "version-4.x/supported-react-native-versions",
       "version-4.x/community-libraries-and-navigators",
       "version-4.x/more-resources"

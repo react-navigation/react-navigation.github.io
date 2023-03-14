@@ -16,7 +16,7 @@
       "version-2.x/react-native-screens",
       "version-2.x/limitations"
     ],
-    "Assorted Guides": [
+    "Assorted guides": [
       "version-2.x/tab-based-navigation",
       "version-2.x/drawer-based-navigation",
       "version-2.x/auth-flow",
@@ -41,7 +41,7 @@
       "version-2.x/navigation-views",
       "version-2.x/transitioner"
     ],
-    "Related Resources": [
+    "Related resources": [
       "version-2.x/community-libraries-and-navigators",
       "version-2.x/more-resources"
     ],
@@ -52,7 +52,7 @@
     ]
   },
   "version-2.x-api": {
-    "API Reference": [
+    "API reference": [
       "version-2.x/api-reference",
       "version-2.x/navigation-prop",
       "version-2.x/navigation-actions",

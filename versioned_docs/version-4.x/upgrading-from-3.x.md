@@ -76,7 +76,7 @@ The latest drawer and tabs depend on [`react-native-gesture-handler`](https://gi
 
 In your project directory, run the following:
 
-```sh
+```bash
 npx expo install react-native-gesture-handler react-native-reanimated
 ```
 
@@ -94,7 +94,7 @@ Next, we need to link these libraries. The steps depends on your React Native ve
 
   To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
 
-  ```sh
+  ```bash
   cd ios
   pod install
   cd ..
@@ -104,7 +104,7 @@ Next, we need to link these libraries. The steps depends on your React Native ve
 
   If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
 
-  ```sh
+  ```bash
   react-native link react-native-reanimated
   react-native link react-native-gesture-handler
   ```

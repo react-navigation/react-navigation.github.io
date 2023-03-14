@@ -39,7 +39,7 @@ The libraries we will install now are [`react-native-screens`](https://github.co
 
 In your project directory, run:
 
-```sh
+```bash
 npx expo install react-native-screens react-native-safe-area-context
 ```
 
@@ -61,7 +61,7 @@ From React Native 0.60 and higher, [linking is automatic](https://github.com/rea
 
 If you're on a Mac and developing for iOS, you need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-```sh
+```bash
 npx pod-install ios
 ```
 

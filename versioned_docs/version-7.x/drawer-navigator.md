@@ -4,13 +4,15 @@ title: Drawer Navigator
 sidebar_label: Drawer
 ---
 
-Component that renders a navigation drawer which can be opened and closed via gestures.
+Drawer Navigator renders a navigation drawer on the side of the screen which can be opened and closed via gestures.
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
     <source src="/assets/navigators/drawer/drawer.mov" />
   </video>
 </div>
+
+This wraps [`react-native-drawer-layout`](drawer-layout.md). If you want to use the tab view without React Navigation integration, use the library directly instead.
 
 ## Installation
 
@@ -26,7 +28,7 @@ Then, you need to install and configure the libraries that are required by the d
 
    If you have a Expo managed project, in your project directory, run:
 
-   ```sh
+   ```bash
    npx expo install react-native-gesture-handler react-native-reanimated
    ```
 
@@ -48,7 +50,7 @@ Then, you need to install and configure the libraries that are required by the d
 
 3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-```sh
+```bash
 npx pod-install ios
 ```
 

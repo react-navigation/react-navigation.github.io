@@ -1,14 +1,16 @@
 ---
 id: elements
 title: Elements Library
-sidebar_label: Elements Library
+sidebar_label: Elements
 ---
 
 A component library containing the UI elements and helpers used in React Navigation. It can be useful if you're building your own navigator, or want to reuse a default functionality in your app.
 
+## Installation
+
 To use this package, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/elements`](https://github.com/react-navigation/react-navigation/tree/main/packages/elements):
 
-```sh npm2yarn
+```bash npm2yarn
 npm install @react-navigation/elements
 ```
 

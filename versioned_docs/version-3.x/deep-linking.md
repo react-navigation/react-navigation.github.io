@@ -155,7 +155,7 @@ In Xcode, open the project at `SimpleApp/ios/SimpleApp.xcodeproj`. Select the pr
 
 Now you can press play in Xcode, or re-build on the command line:
 
-```sh
+```bash
 react-native run-ios
 ```
 
@@ -195,7 +195,7 @@ In `SimpleApp/android/app/src/main/AndroidManifest.xml`, do these followings adj
 
 Now, re-install the app:
 
-```sh
+```bash
 react-native run-android
 ```
 

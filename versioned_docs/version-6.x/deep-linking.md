@@ -29,7 +29,7 @@ First, you will want to specify a URL scheme for your app. This corresponds to t
 
 Next, install `expo-linking` which we'd need to get the deep link prefix:
 
-```sh
+```bash
 npx expo install expo-linking
 ```
 
@@ -103,7 +103,7 @@ Now you need to add the scheme to your project configuration.
 
 The easiest way to do this is with the `uri-scheme` package by running the following:
 
-```sh
+```bash
 npx uri-scheme add mychat --ios
 ```
 
@@ -193,13 +193,13 @@ Before testing deep links, make sure that you rebuild and install the app in you
 
 If you're testing on iOS, run:
 
-```sh
+```bash
 npx react-native run-ios
 ```
 
 If you're testing on Android, run:
 
-```sh
+```bash
 npx react-native run-android
 ```
 
@@ -211,19 +211,19 @@ If you want to test with your custom scheme in your Expo app, you will need rebu
 
 The `uri-scheme` package is a command line tool that can be used to test deep links on both iOS & Android. It can be used as follows:
 
-```sh
+```bash
 npx uri-scheme open [your deep link] --[ios|android]
 ```
 
 For example:
 
-```sh
+```bash
 npx uri-scheme open "mychat://chat/jane" --ios
 ```
 
 Or if using Expo client:
 
-```sh
+```bash
 npx uri-scheme open "exp://127.0.0.1:19000/--/chat/jane" --ios
 ```
 
@@ -231,13 +231,13 @@ npx uri-scheme open "exp://127.0.0.1:19000/--/chat/jane" --ios
 
 The `xcrun` command can be used as follows to test deep links with the iOS simulator:
 
-```sh
+```bash
 xcrun simctl openurl booted [your deep link]
 ```
 
 For example:
 
-```sh
+```bash
 xcrun simctl openurl booted "mychat://chat/jane"
 ```
 
@@ -245,19 +245,19 @@ xcrun simctl openurl booted "mychat://chat/jane"
 
 The `adb` command can be used as follows to test deep links with the Android emulator or a connected device:
 
-```sh
+```bash
 adb shell am start -W -a android.intent.action.VIEW -d [your deep link] [your android package name]
 ```
 
 For example:
 
-```sh
+```bash
 adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/jane" com.simpleapp
 ```
 
 Or if using Expo client:
 
-```sh
+```bash
 adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:19000/--/chat/jane" host.exp.exponent
 ```
 

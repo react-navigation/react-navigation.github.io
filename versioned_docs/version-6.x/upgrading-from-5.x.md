@@ -27,13 +27,13 @@ To upgrade `react-native-safe-area-context` and `react-native-screens` to the la
 
 For Expo managed projects:
 
-```sh
+```bash
 npx expo install react-native-safe-area-context react-native-screens
 ```
 
 For bare React Native projects:
 
-```sh npm2yarn
+```bash npm2yarn
 npm install react-native-safe-area-context react-native-screens
 ```
 
@@ -133,7 +133,7 @@ These following changes are in the core library. You'll need to address this cha
 
 To install the 6.x version of `@react-navigation/native`, run:
 
-```sh npm2yarn
+```bash npm2yarn
 npm install @react-navigation/native
 ```
 
@@ -332,7 +332,7 @@ The following changes are in the `@react-navigation/stack` package.
 
 To install the 6.x version of `@react-navigation/stack`, run:
 
-```sh npm2yarn
+```bash npm2yarn
 npm install @react-navigation/stack
 ```
 
@@ -448,7 +448,7 @@ The `@react-navigation/native-stack` package is back. We made few changes to the
 
 To install the 6.x version of `@react-navigation/native-stack`, run:
 
-```sh npm2yarn
+```bash npm2yarn
 npm install @react-navigation/native-stack
 ```
 
@@ -488,7 +488,7 @@ The following changes are in the `@react-navigation/bottom-tabs` package.
 
 To install the 6.x version of `@react-navigation/bottom-tabs`, run:
 
-```sh npm2yarn
+```bash npm2yarn
 npm install @react-navigation/bottom-tabs
 ```
 
@@ -545,7 +545,7 @@ The following changes are in the `@react-navigation/material-top-tabs` package.
 
 To install the 6.x version of `@react-navigation/material-top-tabs`, run:
 
-```sh npm2yarn
+```bash npm2yarn
 npm install @react-navigation/material-top-tabs react-native-tab-view
 ```
 
@@ -553,13 +553,13 @@ To upgrade `react-native-pager-view` to the latest supported version, do the fol
 
 For Expo managed projects:
 
-```sh
+```bash
 npx expo install react-native-pager-view
 ```
 
 For bare React Native projects:
 
-```sh npm2yarn
+```bash npm2yarn
 npm install react-native-pager-view
 ```
 
@@ -608,7 +608,7 @@ The following changes are in the `@react-navigation/material-bottom-tabs` packag
 
 To install the 6.x version of `@react-navigation/material-bottom-tabs`, run:
 
-```sh npm2yarn
+```bash npm2yarn
 npm install @react-navigation/material-bottom-tabs
 ```
 
@@ -622,7 +622,7 @@ The following changes are in the `@react-navigation/drawer` package.
 
 To install the 6.x version of `@react-navigation/drawer`, run:
 
-```sh npm2yarn
+```bash npm2yarn
 npm install @react-navigation/drawer
 ```
 
@@ -706,7 +706,7 @@ Similar to bottom tabs, the `lazy` prop is now moved to `options` for drawer.
 
 We have a new package which contains various UI elements related to navigation, such as a `Header` component. This means that we can now use these components in all navigators. You can also install the library to import components such as `Header` to use in any navigator:
 
-```sh npm2yarn
+```bash npm2yarn
 npm install @react-navigation/elements
 ```
 

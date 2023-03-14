@@ -44,7 +44,7 @@ Next, if you are not using the Expo managed workflow then you need to link these
 
   On iOS, to complete the linking, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
 
-  ```sh
+  ```bash
   cd ios
   pod install
   cd ..
@@ -56,7 +56,7 @@ Next, if you are not using the Expo managed workflow then you need to link these
 
   If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
 
-  ```sh
+  ```bash
   react-native link react-native-reanimated
   react-native link react-native-gesture-handler
   ```

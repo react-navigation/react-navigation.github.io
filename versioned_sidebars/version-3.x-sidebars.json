@@ -38,7 +38,7 @@
       "version-3.x/web-support",
       "version-3.x/function-after-focusing-screen"
     ],
-    "API Reference": [
+    "API reference": [
       "version-3.x/navigation-prop",
       "version-3.x/navigation-context",
       "version-3.x/navigation-events",
@@ -83,7 +83,7 @@
       "version-3.x/navigation-views",
       "version-3.x/transitioner"
     ],
-    "Related Resources": [
+    "Related resources": [
       "version-3.x/community-libraries-and-navigators",
       "version-3.x/more-resources"
     ],

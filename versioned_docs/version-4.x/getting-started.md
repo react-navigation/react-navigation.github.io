@@ -40,7 +40,7 @@ The libraries we will install now are [`react-native-gesture-handler`](https://g
 
 In your project directory, run:
 
-```sh
+```bash
 npx expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 ```
 
@@ -66,7 +66,7 @@ Next, we need to link these libraries. The steps depends on your React Native ve
 
   If you're on a Mac and developing for iOS, you need to install pods to complete the linking. Make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
 
-  ```sh
+  ```bash
   cd ios; pod install; cd ..
   ```
 
@@ -74,7 +74,7 @@ Next, we need to link these libraries. The steps depends on your React Native ve
 
   If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
 
-  ```sh
+  ```bash
   react-native link react-native-reanimated
   react-native link react-native-gesture-handler
   react-native link react-native-screens
@@ -99,7 +99,7 @@ Next, we need to link these libraries. The steps depends on your React Native ve
 
   Now, run the `postinstall` script manually:
 
-  ```sh
+  ```bash
   npm run postinstall
   ```
 

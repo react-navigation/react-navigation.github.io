@@ -95,7 +95,7 @@ const linking = {
 
 To test the URI on the simulator in the Expo client app, run the following:
 
-```sh
+```bash
 npx uri-scheme open [ put your uri prefix in here] --ios
 
 # for example
@@ -105,7 +105,7 @@ npx uri-scheme open exp://127.0.0.1:19000/--/chat/jan --ios
 
 or use `xcrun` directly:
 
-```sh
+```bash
 xcrun simctl openurl booted [ put your URI prefix in here ]
 
 # for example
@@ -117,7 +117,7 @@ xcrun simctl openurl booted exp://127.0.0.1:19000/--/chat/jane
 
 To test the intent handling in the Expo client app on Android, run the following:
 
-```sh
+```bash
 npx uri-scheme open "[ put your URI prefix in here ]" --/chat/jan --android
 
 # for example
@@ -127,7 +127,7 @@ npx uri-scheme open exp://127.0.0.1:19000/--/chat/jan --android
 
 or use `adb` directly:
 
-```sh
+```bash
 adb shell am start -W -a android.intent.action.VIEW -d "[ put your URI prefix in here ]" host.exp.exponent
 
 # for example
@@ -200,19 +200,19 @@ If you want to do it manually, open the project at `SimpleApp/ios/SimpleApp.xcod
 
 Now you can press play in Xcode, or re-build on the command line:
 
-```sh
+```bash
 npx react-native run-ios
 ```
 
 To test the URI on the simulator, run the following:
 
-```sh
+```bash
 npx uri-scheme open mychat://chat/jane --ios
 ```
 
 or use `xcrun` directly:
 
-```sh
+```bash
 xcrun simctl openurl booted mychat://chat/jane
 ```
 
@@ -248,19 +248,19 @@ If you want to add it manually, open up `SimpleApp/android/app/src/main/AndroidM
 
 Now, re-install the app:
 
-```sh
+```bash
 react-native run-android
 ```
 
 To test the intent handling in Android, run the following:
 
-```sh
+```bash
 npx uri-scheme open mychat://chat/jane --android
 ```
 
 or use `adb` directly:
 
-```sh
+```bash
 adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/jane" com.simpleapp
 ```
 

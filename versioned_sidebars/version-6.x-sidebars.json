@@ -42,7 +42,21 @@
       "version-6.x/MST-integration",
       "version-6.x/upgrading-from-5.x"
     ],
-    "API Reference": [
+    "Navigators": [
+      "version-6.x/stack-navigator",
+      "version-6.x/native-stack-navigator",
+      "version-6.x/drawer-navigator",
+      "version-6.x/bottom-tab-navigator",
+      "version-6.x/material-bottom-tab-navigator",
+      "version-6.x/material-top-tab-navigator"
+    ],
+    "Libraries": [
+      "version-6.x/devtools",
+      "version-6.x/elements",
+      "version-6.x/tab-view",
+      "version-6.x/drawer-layout"
+    ],
+    "API reference": [
       "version-6.x/navigation-container",
       "version-6.x/server-container",
       "version-6.x/group",
@@ -54,20 +68,6 @@
       "version-6.x/navigation-events",
       "version-6.x/navigation-state",
       "version-6.x/link",
-      "version-6.x/devtools",
-      "version-6.x/elements",
-      {
-        "type": "category",
-        "label": "Navigators",
-        "items": [
-          "version-6.x/stack-navigator",
-          "version-6.x/native-stack-navigator",
-          "version-6.x/drawer-navigator",
-          "version-6.x/bottom-tab-navigator",
-          "version-6.x/material-bottom-tab-navigator",
-          "version-6.x/material-top-tab-navigator"
-        ]
-      },
       {
         "type": "category",
         "label": "Hooks",
@@ -99,7 +99,7 @@
       "version-6.x/custom-routers",
       "version-6.x/custom-navigators"
     ],
-    "Additional Resources": [
+    "Additional resources": [
       "version-6.x/migration-guides",
       "version-6.x/navigation-solutions-and-community-libraries",
       "version-6.x/more-resources"
