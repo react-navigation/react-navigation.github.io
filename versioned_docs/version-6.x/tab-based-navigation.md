@@ -237,3 +237,25 @@ For example, React Navigation's tab navigator takes care of handling the Android
 ## A tab navigator contains a stack and you want to hide the tab bar on specific screens
 
 [See the documentation here](hiding-tabbar-in-screens.md)
+
+## A tab navigator contains a stack and you want to use KeyboardAvoidingView to prevent hidden TextInput
+
+Make sure you to wrap KeyboardAvoidingView around the main tab navigator
+
+```js
+function TabNavigator() {
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{ flex: 1 }}>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarHideOnKeyboard: true,
+          headerShown: false,
+        }}>
+        <Tab.Screen name="Tab" component={StackContainer} />
+      </Tab.Navigator>
+    </KeyboardAvoidingView>
+  );
+}
+```
