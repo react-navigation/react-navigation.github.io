@@ -27,15 +27,19 @@ There are several additional functions present on `navigation` prop based on the
 If the navigator is a stack navigator, several alternatives to `navigate` and `goBack` are provided and you can use whichever you prefer. The functions are:
 
 - `navigation`
-  - `replace` - replace the current route with a new one
-  - `push` - push a new route onto the stack
+  - `replace` - replace the current screen with a new one
+  - `push` - push a new screen onto the stack
   - `pop` - go back in the stack
   - `popToTop` - go to the top of the stack
+
+See [Stack navigator helpers](stack-navigator.md#helpers) and [Native Stack navigator helpers](native-stack-navigator.md#helpers) for more details on these methods.
 
 If the navigator is a tab navigator, the following are also available:
 
 - `navigation`
   - `jumpTo` - go to a specific screen in the tab navigator
+
+See [Bottom Tab navigator helpers](bottom-tab-navigator.md#helpers), [Material Top Tab navigator helpers](material-top-tab-navigator.md#helpers) and [Material Bottom Tab navigator helpers](material-bottom-tab-navigator.md#helpers) for more details on these methods.
 
 If the navigator is a drawer navigator, the following are also available:
 
@@ -45,7 +49,7 @@ If the navigator is a drawer navigator, the following are also available:
   - `closeDrawer` - close the drawer
   - `toggleDrawer` - toggle the state, ie. switch from closed to open and vice versa
 
-You can find more details about navigator dependent functions in the documentation for the navigator that you're using.
+See [Drawer navigator helpers](drawer-navigator.md#helpers) for more details on these methods.
 
 ## Common API reference
 

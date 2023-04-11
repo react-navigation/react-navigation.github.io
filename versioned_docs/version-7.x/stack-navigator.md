@@ -451,14 +451,23 @@ React.useEffect(() => {
 
 The stack navigator adds the following methods to the navigation prop:
 
+#### `replace`
+
+Replaces the current screen with a new screen in the stack. The method accepts following arguments:
+
+- `name` - _string_ - Name of the route to push onto the stack.
+- `params` - _object_ - Screen params to pass to the destination route.
+
+```js
+navigation.push('Profile', { owner: 'Michaś' });
+```
+
 #### `push`
 
 Pushes a new screen to top of the stack and navigate to it. The method accepts following arguments:
 
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to pass to the destination route.
-
-<samp id="stack-with-options" />
 
 ```js
 navigation.push('Profile', { owner: 'Michaś' });
@@ -468,8 +477,6 @@ navigation.push('Profile', { owner: 'Michaś' });
 
 Pops the current screen from the stack and navigates back to the previous screen. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
 
-<samp id="stack-with-options" />
-
 ```js
 navigation.pop();
 ```
@@ -477,8 +484,6 @@ navigation.pop();
 #### `popToTop`
 
 Pops all of the screens in the stack except the first one and navigates to it.
-
-<samp id="stack-with-options" />
 
 ```js
 navigation.popToTop();
