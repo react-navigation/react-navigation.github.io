@@ -48,7 +48,20 @@ Then, you need to install and configure the libraries that are required by the d
 
    > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
 
-3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+3. Optionally, you can also install [`@react-native-masked-view/masked-view`](https://github.com/react-native-masked-view/masked-view). This is needed if you want to use UIKit style animations for the header ([`HeaderStyleInterpolators.forUIKit`](#headerstyleinterpolators)).
+
+   If you have a Expo managed project, in your project directory, run:
+
+   ```bash
+   npx expo install @react-native-masked-view/masked-view
+   ```
+
+   If you have a bare React Native project, in your project directory, run:
+
+   ```bash npm2yarn
+   npm install @react-native-masked-view/masked-view
+
+4. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
 ```bash
 npx pod-install ios
