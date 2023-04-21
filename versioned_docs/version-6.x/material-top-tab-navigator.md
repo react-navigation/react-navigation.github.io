@@ -123,6 +123,14 @@ Style to apply to the view wrapping each screen. You can pass this to override s
 
 Style to apply to the tab view container.
 
+#### `overScrollMode`
+
+Used to override default value of overScroll mode in Android.
+
+- `'auto'`: Allow a user to over-scroll this view only if the content is large enough to meaningfully scroll.
+- `'always'`: Always allow a user to over-scroll this view.
+- `'never'`:  Never allow a user to over-scroll this view.
+
 #### `tabBar`
 
 Function that returns a React element to display as the tab bar.
