@@ -370,6 +370,10 @@ A callback that gets called when the cancel button is pressed.
 
 A callback that gets called when the text changes. It receives the current text value of the search bar.
 
+##### `onSearchButtonPress`
+
+A callback that gets called when the search button is pressed. It receives the current text value of the search bar.
+
 Example:
 
 ```js
