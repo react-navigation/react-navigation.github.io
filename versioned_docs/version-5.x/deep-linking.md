@@ -298,7 +298,7 @@ const linking = {
 
     // Next, you would need to get the initial URL from your third-party integration
     // It depends on the third-party SDK you use
-    // For example, to get to get the initial URL for branch.io:
+    // For example, to get the initial URL for branch.io:
     const params = branch.getFirstReferringParams();
 
     return params?.$canonical_url;

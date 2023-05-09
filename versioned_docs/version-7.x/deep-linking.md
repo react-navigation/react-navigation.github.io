@@ -275,7 +275,7 @@ const linking = {
   async getInitialURL() {
     // First, you would need to get the initial URL from your third-party integration
     // The exact usage depend on the third-party SDK you use
-    // For example, to get to get the initial URL for Firebase Dynamic Links:
+    // For example, to get the initial URL for Firebase Dynamic Links:
     const { isAvailable } = utils().playServicesAvailability;
 
     if (isAvailable) {
