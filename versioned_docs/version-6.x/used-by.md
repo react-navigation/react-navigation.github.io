@@ -38,7 +38,6 @@ It's impossible to list every single app that uses React Navigation, but below a
 - [JustCash](https://justcash.app/) ([Android](https://play.google.com/store/apps/details?id=com.justcash&hl=en&gl=US))
 - [NMF.earth](https://nmf.earth/) ([Source Code](https://github.com/NMF-earth/nmf-app)) ([iOS](https://apps.apple.com/us/app/nmf-earth/id1494561829)) ([Android](https://play.google.com/store/apps/details?id=nmf.earth))
 - [Pickyourtrail](https://apps.apple.com/us/app/pickyourtrail/id1400253672)
-- [Prep: University Companion](https://prep.surf) ([iOS](http://tiny.cc/q4lliz)) ([Android](http://tiny.cc/14lliz)) ([Web](https://app.prep.surf/))
 - [Rocket.Chat](https://rocket.chat/) ([Source Code](https://github.com/RocketChat/Rocket.Chat.ReactNative)) ([iOS](https://apps.apple.com/us/app/rocket-chat/id1148741252)) ([Android](https://play.google.com/store/apps/details?id=chat.rocket.android))
 - [Saffron](https://www.mysaffronapp.com/) ([iOS](https://apps.apple.com/us/app/saffron-your-digital-cookbook/id1438683531)) ([Android](https://play.google.com/store/apps/details?id=com.awad.saffron))
 - [Single Origin 2](https://singleoriginapp.com/)
@@ -49,6 +48,7 @@ It's impossible to list every single app that uses React Navigation, but below a
 - [Sweepy](https://sweepy.app/)
 - [Tracker Network for Fortnite](https://apps.apple.com/us/app/tracker-network-for-fortnite/id1287696482)
 - [Vrbo](https://www.vrbo.com/mobile/)
+- [Flick Live](https://www.flick.live/) ([iOS]([https://apps.apple.com/us/app/surely/id1586633713](https://apps.apple.com/za/app/flick-live-stream-shopping/id1631991215))) ([Web](https://www.flick.live/))
 
 ## Your app?
 
