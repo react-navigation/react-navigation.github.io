@@ -35,6 +35,7 @@ It's impossible to list every single app that uses React Navigation, but below a
 - [Driversnote](https://www.driversnote.com/)
 - [Disprz](https://www.disprz.com/) ([iOS](https://apps.apple.com/us/app/disprz/id1458716803#?platform=iphone)) ([Android](https://play.google.com/store/apps/details?id=com.disprz&hl=en_IN&gl=US))
 - [Fin](https://tryfin.app/)
+- [Flick Live](https://www.flick.live/) ([iOS](https://apps.apple.com/za/app/flick-live-stream-shopping/id1631991215)) ([Android](https://play.google.com/store/apps/details?id=com.shopstarlive)) ([Web](https://www.flick.live/))
 - [JustCash](https://justcash.app/) ([Android](https://play.google.com/store/apps/details?id=com.justcash&hl=en&gl=US))
 - [NMF.earth](https://nmf.earth/) ([Source Code](https://github.com/NMF-earth/nmf-app)) ([iOS](https://apps.apple.com/us/app/nmf-earth/id1494561829)) ([Android](https://play.google.com/store/apps/details?id=nmf.earth))
 - [Pickyourtrail](https://apps.apple.com/us/app/pickyourtrail/id1400253672)
@@ -48,7 +49,6 @@ It's impossible to list every single app that uses React Navigation, but below a
 - [Sweepy](https://sweepy.app/)
 - [Tracker Network for Fortnite](https://apps.apple.com/us/app/tracker-network-for-fortnite/id1287696482)
 - [Vrbo](https://www.vrbo.com/mobile/)
-- [Flick Live](https://www.flick.live/) ([iOS](https://apps.apple.com/za/app/flick-live-stream-shopping/id1631991215)) ([Android](https://play.google.com/store/apps/details?id=com.shopstarlive)) ([Web](https://www.flick.live/))
 
 ## Your app?
 
