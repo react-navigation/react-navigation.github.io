@@ -48,7 +48,7 @@ It's impossible to list every single app that uses React Navigation, but below a
 - [Sweepy](https://sweepy.app/)
 - [Tracker Network for Fortnite](https://apps.apple.com/us/app/tracker-network-for-fortnite/id1287696482)
 - [Vrbo](https://www.vrbo.com/mobile/)
-- [Flick Live](https://www.flick.live/) ([iOS]([https://apps.apple.com/us/app/surely/id1586633713](https://apps.apple.com/za/app/flick-live-stream-shopping/id1631991215))) ([Web](https://www.flick.live/))
+- [Flick Live](https://www.flick.live/) ([iOS](https://apps.apple.com/za/app/flick-live-stream-shopping/id1631991215)) ([Android](https://play.google.com/store/apps/details?id=com.shopstarlive)) ([Web](https://www.flick.live/))
 
 ## Your app?
 
