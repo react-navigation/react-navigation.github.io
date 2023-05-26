@@ -14,6 +14,15 @@ It follows material design guidelines by default, but you can also use your own 
 
 This package doesn't integrate with React Navigation. If you want to integrate the tab view with React Navigation's navigation system, e.g. want to show screens in the tab bar and be able to navigate between them using `navigation.navigate` etc, use [Material Top Tab Navigator](material-top-tab-navigator.md) instead.
 
+## React Native Compatibility
+
+To use this library you need to ensure you are using the correct version of React Native. If you are using a version of React Native that is lower than `0.63` you will need to upgrade that before attempting to use this library.
+
+| `react-native-tab-view` Version | Required React Native Version |
+| ------------------------------- | ----------------------------- |
+| `2.x.x`                         | `< 0.63`                      |
+| `3.x.x`                         | `>= 0.63`                     |
+
 ## Installation
 
 To use this package, open a Terminal in the project root and run:
@@ -262,9 +271,7 @@ When you enable lazy rendering for a screen, it will usually take some time to r
 You can also pass a boolean to enable lazy for all of the scenes:
 
 ```js
-<TabView
-  lazy
-/>
+<TabView lazy />
 ```
 
 ##### `lazyPreloadDistance`
