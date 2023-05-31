@@ -274,7 +274,7 @@ function App() {
 
 ## Best practices when nesting
 
-We recommend to reduce nesting navigators to minimal. Try to achieve the behavior you want with as little nesting as possible. Nesting has many downsides:
+We recommend to nest navigators as minimally as possible. Try to achieve the behavior you want with as little nesting as possible. Nesting has many downsides:
 
 - It results in deeply nested view hierarchy which can cause memory and performance issues in lower end devices
 - Nesting same type of navigators (e.g. tabs inside tabs, drawer inside drawer etc.) might lead to a confusing UX
