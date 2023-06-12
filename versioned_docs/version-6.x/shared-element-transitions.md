@@ -115,6 +115,6 @@ You can find a full Shared Element Transitions reference in the [React Native Re
 
 ## Alternatives
 
-Alternatively, you can use [`react-native-shared-element`](https://github.com/IjzerenHein/react-native-shared-element) library with a [React Navigation binding](https://github.com/IjzerenHein/react-navigation-shared-element) which implements Shared Element Transitions in a JS stack.
+Alternatively, you can use [`react-native-shared-element`](https://github.com/IjzerenHein/react-native-shared-element) library with a [React Navigation binding](https://github.com/IjzerenHein/react-navigation-shared-element) which implements Shared Element Transitions in a JS based Stack navigator. This solution, however, isn't actively maintained.
 
-Also, [`react-native-navigation`](https://github.com/wix/react-native-navigation) comes with a support of Shared Element Transitions. You can read more about it [here](https://wix.github.io/react-native-navigation/docs/style-animations#shared-element-transitions).
+The [`react-native-navigation`](https://github.com/wix/react-native-navigation) also comes with a support of Shared Element Transitions. You can read more about it [here](https://wix.github.io/react-native-navigation/docs/style-animations#shared-element-transitions).
