@@ -97,7 +97,7 @@ const customTransition = SharedTransition.custom((values) => {
   };
 });
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
   return (
     <Animated.Image
       style={{ width: 300, height: 300 }}
