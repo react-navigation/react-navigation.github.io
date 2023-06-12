@@ -14,7 +14,7 @@ Before continuing, make sure to install and configure [`react-native-reanimated`
 
 ## Minimal example
 
-To create a shared transition, simply assign the same `sharedTransitionTag` to elements on different screens in a native stack. This prop is a string that uniquely identifies an element between screens. Similarly to [`key`](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key) property, that tells React which element in the list is which, `sharedElementTag` allows Reanimated to identify and animate elements. Components that you'd like to animate have to be `Animated` versions imported from `react-native-reanimated`. Animation will start automatically when you navigate between screens.
+To create a shared transition, simply assign the same `sharedTransitionTag` to elements on different screens in a native stack. This prop is a string that uniquely identifies an element between screens. Similarly to the [`key`](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key) property, which tells React which element in the list is which, `sharedElementTag` allows Reanimated to identify and animate elements. Components that you'd like to animate have to be `Animated` versions imported from `react-native-reanimated`. The animation will start automatically when you navigate between screens.
 
 ```jsx
 import * as React from 'react';
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 
 ## Customizing the transition
 
-By default, the transition animates the `width`, `height`, `originX`, `originY` and `transform` properties using `withTiming` with a 500 ms duration. You can easily customize `width`, `height`, `originX`, `originY` props. Customizing `transform` is also possible but it's far beyond the scope of this guide.
+By default, the transition animates the `width`, `height`, `originX`, `originY` and `transform` properties using `withTiming` with a 500 ms duration. You can easily customize `width`, `height`, `originX`, and `originY` props. Customizing `transform` is also possible but it's far beyond the scope of this guide.
 
 > Note: Custom SharedTransition API is not finalized and might change in a future release.
 
@@ -115,6 +115,6 @@ You can find a full Shared Element Transitions reference in the [React Native Re
 
 ## Alternatives
 
-Alternatively, you can use [`react-native-shared-element`](https://github.com/IjzerenHein/react-native-shared-element) library with a [React Navigation binding](https://github.com/IjzerenHein/react-navigation-shared-element) which implements Shared Element Transitions in a JS based Stack navigator. This solution, however, isn't actively maintained.
+Alternatively, you can use [`react-native-shared-element`](https://github.com/IjzerenHein/react-native-shared-element) library with a [React Navigation binding](https://github.com/IjzerenHein/react-navigation-shared-element) which implements Shared Element Transitions in a JS-based Stack navigator. This solution, however, isn't actively maintained.
 
-The [`react-native-navigation`](https://github.com/wix/react-native-navigation) also comes with a support of Shared Element Transitions. You can read more about it [here](https://wix.github.io/react-native-navigation/docs/style-animations#shared-element-transitions).
+The [`react-native-navigation`](https://github.com/wix/react-native-navigation) also comes with support for Shared Element Transitions. You can read more about it [here](https://wix.github.io/react-native-navigation/docs/style-animations#shared-element-transitions).
