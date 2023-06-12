@@ -4,7 +4,7 @@ This guide covers how to animate elements between screens. This feature is known
 
 Before continuing, make sure to install and configure [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
 
-> Note: Shared Element Transitions require React Native Reanimated v3.0.0 or higher and as of writing this guide it's considered an experimental feature not recommended for production use.
+> Note: Shared Element Transitions require React Native Reanimated v3.0.0 or higher, and as of writing this guide, it's considered an experimental feature not recommended for production use.
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
@@ -14,7 +14,7 @@ Before continuing, make sure to install and configure [`react-native-reanimated`
 
 ## Minimal example
 
-To create a shared transition, simply assign the same `sharedTransitionTag` to elements on different screens in a native stack. This prop is a string that uniquely identifies an element between screens. Similarly to the [`key`](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key) property, which tells React which element in the list is which, `sharedElementTag` allows Reanimated to identify and animate elements. Components that you'd like to animate have to be `Animated` versions imported from `react-native-reanimated`. The animation will start automatically when you navigate between screens.
+To create a shared transition, simply assign the same `sharedTransitionTag` to elements on different screens in a native stack. This prop is a string that has to be unique in the context of a single screen, but has to match elements between screens. Similarly to the [`key`](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key) property, which tells React which element in the list is which, `sharedElementTag` allows Reanimated to identify and animate elements. Components that you'd like to animate have to be `Animated` versions imported from `react-native-reanimated`. The animation will start automatically when you navigate between screens.
 
 ```jsx
 import * as React from 'react';
@@ -97,7 +97,7 @@ const customTransition = SharedTransition.custom((values) => {
   };
 });
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
   return (
     <Animated.Image
       style={{ width: 300, height: 300 }}
