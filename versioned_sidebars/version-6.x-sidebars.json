@@ -25,6 +25,7 @@
       "version-6.x/multiple-drawers",
       "version-6.x/screen-options-resolution",
       "version-6.x/custom-android-back-button-handling",
+      "version-6.x/shared-element-transitions",
       "version-6.x/preventing-going-back",
       "version-6.x/function-after-focusing-screen",
       "version-6.x/connecting-navigation-prop",
