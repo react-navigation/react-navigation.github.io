@@ -660,7 +660,7 @@ Replaces the current screen with a new screen in the stack. The method accepts f
 - `params` - _object_ - Screen params to pass to the destination route.
 
 ```js
-navigation.push('Profile', { owner: 'Michaś' });
+navigation.replace('Profile', { owner: 'Michaś' });
 ```
 
 #### `push`
