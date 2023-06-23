@@ -856,7 +856,7 @@ You can spread these presets in `options` to customize the animation for a scree
 <samp id="stack-modal-slide-from-bottom" />
 
 ```js
-import { TransitionPresets } from '@react-navigation/stack';
+import { TransitionPresets } from '@react-navigation/native-stack';
 
 // ...
 
