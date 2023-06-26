@@ -52,7 +52,7 @@ export default function App() {
   useFlipper(navigationRef);
 
   return (
-    <NavigationContainer ref={navigationRef}>{/* ... */}</NavigationContainer>
+    <NavigationContainer ref={navigationRef}>{/* enter here */}</NavigationContainer>
   );
 }
 ```
