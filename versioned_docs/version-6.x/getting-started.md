@@ -62,7 +62,7 @@ From React Native 0.60 and higher, [linking is automatic](https://github.com/rea
 If you're on a Mac and developing for iOS, you need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
 ```bash
-npx pod-install ios
+npx pod-install
 ```
 
 `react-native-screens` package requires one additional configuration step to properly
