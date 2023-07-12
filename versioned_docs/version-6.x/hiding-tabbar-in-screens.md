@@ -59,3 +59,55 @@ function App() {
 ```
 
 After re-organizing the navigation structure, now if we navigate to the `Profile` or `Settings` screens, the tab bar won't be visible over the screen anymore.
+
+### Alternative Options - Hiding the bar via stylea
+
+Use cases
+1. Screens must be nested within the tabs instead of in reverse.
+2. There are multiple nested tab implementations such as a backgroundTab that deeply nested another tab.
+
+Code
+
+```js
+import { StyleSheet } from 'react-native'
+
+const styles = StyleSheet.create({
+  hiddenTabBar: {
+    width: 0,
+    height: 0,
+    position: 'absolute',
+    zIndex: -999, // prevents tab from clipping into view (android+ios)
+    elevation: -999, // prevents tab from clipping into view (android)
+  },
+})
+
+function HomeStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Settings" component={Settings} />
+    </Stack.Navigator>
+  );
+}
+
+function App() {
+  /** 
+   * @description this could be global state context
+   */
+  const globalStore = { bottomTabVisibility: false }
+
+  const screenOptions = useMemo(() => ({ tabBarStyle: globalStore?.bottomTabVisibility
+                    ? undefined
+                    : styles.hiddenTabBar}),[globalStore?.bottomTabVisibility])
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={screenOptions}>
+        <Stack.Screen name="Home" component={HomeTabs} />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Settings" component={Settings} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
