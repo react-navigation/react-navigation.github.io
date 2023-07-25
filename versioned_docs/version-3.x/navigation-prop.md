@@ -323,10 +323,7 @@ Be sure to always check that the call returns a valid value.
 class UserCreateScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const parent = navigation.dangerouslyGetParent();
-    const gesturesEnabled =
-      parent &&
-      parent.state &&
-      parent.state.routeName === 'StackWithEnabledGestures';
+    const gesturesEnabled = parent?.state?.routeName === 'StackWithEnabledGestures';
 
     return {
       title: 'New User',
