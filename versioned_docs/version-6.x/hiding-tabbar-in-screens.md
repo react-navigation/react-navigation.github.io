@@ -60,7 +60,7 @@ function App() {
 
 After re-organizing the navigation structure, now if we navigate to the `Profile` or `Settings` screens, the tab bar won't be visible over the screen anymore.
 
-### Alternative Options - Hiding the bar via stylea
+### Alternative Options - Hiding the bar via styles
 
 Use cases
 1. Screens must be nested within the tabs instead of in reverse.
