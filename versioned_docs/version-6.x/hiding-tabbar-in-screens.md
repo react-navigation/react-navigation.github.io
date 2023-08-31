@@ -63,6 +63,7 @@ After re-organizing the navigation structure, now if we navigate to the `Profile
 ### Alternative Options - Hiding the bar via styles
 
 Use cases
+
 1. Screens must be nested within the tabs instead of in reverse.
 2. There are multiple nested tab implementations such as a backgroundTab that deeply nested another tab.
 
