@@ -16,7 +16,6 @@ We include some commonly needed navigators such as:
 - [`createDrawerNavigator`](drawer-navigator.md) - Provides a drawer that slides in from the left of the screen by default.
 - [`createBottomTabNavigator`](bottom-tab-navigator.md) - Renders a tab bar that lets the user switch between several screens.
 - [`createMaterialTopTabNavigator`](material-top-tab-navigator.md) - Renders tab view which lets the user switch between several screens using swipe gesture or the tab bar.
-- [`createMaterialBottomTabNavigator`](material-bottom-tab-navigator.md) - Renders tab view which lets the user switch between several screens using swipe gesture or the tab bar.
 
 ## API for building custom navigators
 

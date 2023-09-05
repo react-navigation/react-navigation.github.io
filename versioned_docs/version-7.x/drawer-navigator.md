@@ -19,7 +19,7 @@ This wraps [`react-native-drawer-layout`](drawer-layout.md). If you want to use 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
 
 ```bash npm2yarn
-npm install @react-navigation/drawer
+npm install @react-navigation/drawer@next
 ```
 
 Then, you need to install and configure the libraries that are required by the drawer navigator:

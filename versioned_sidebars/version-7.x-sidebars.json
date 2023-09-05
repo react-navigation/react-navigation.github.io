@@ -55,7 +55,6 @@
       "version-7.x/native-stack-navigator",
       "version-7.x/drawer-navigator",
       "version-7.x/bottom-tab-navigator",
-      "version-7.x/material-bottom-tab-navigator",
       "version-7.x/material-top-tab-navigator"
     ],
     "Libraries": [

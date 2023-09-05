@@ -142,6 +142,17 @@ module.exports = {
   },
   plugins: [
     path.resolve(__dirname, './src/plugins/docusaurus-plugin-redirect-html'),
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            from: '/next',
+            to: '/docs/7.x/getting-started',
+          },
+        ],
+      },
+    ],
   ],
   presets: [
     [

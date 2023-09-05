@@ -6,12 +6,10 @@ sidebar_label: Tab navigation
 
 Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top below the header (or even instead of a header).
 
-This guide covers [`createBottomTabNavigator`](bottom-tab-navigator.md). You may also use [`createMaterialBottomTabNavigator`](material-bottom-tab-navigator.md) and [`createMaterialTopTabNavigator`](material-top-tab-navigator.md) to add tabs to your application.
-
-Before continuing, first install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/bottom-tabs):
+This guide covers [`createBottomTabNavigator`](bottom-tab-navigator.md). Before continuing, first install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/bottom-tabs):
 
 ```bash npm2yarn
-npm install @react-navigation/bottom-tabs
+npm install @react-navigation/bottom-tabs@next
 ```
 
 ## Minimal example of tab-based navigation
