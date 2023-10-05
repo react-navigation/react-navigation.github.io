@@ -177,5 +177,6 @@ The static API is a convenience wrapper around the dynamic API, not a full-repla
 
 - The navigation tree is static with the static API, i.e. the configuration can't be changed dynamically (e.g. updating list of screens or options based on external data).
 - The static configuration doesn't have access to context or props, so you can't use them in options, listeners etc. specified in the static configuration.
+- The navigation object is no longer passed to your screens and you'll need to use the `useNavigation()` hook
 
 The dynamic API is still the primary API and isn't going away. So we recommend to avoid rewriting your app to use the static API if you have type-checking and deep linking setup already. Instead, consider using the static API in new projects where you know you won't need to change the configuration dynamically.
