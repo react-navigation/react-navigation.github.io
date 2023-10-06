@@ -479,6 +479,7 @@ const state = {
   ],
 };
 ```
+
 The `initialRouteName` property is also valid as a top-level key, this is useful if you want to add a base screen to a top-level route
 
 ```js
