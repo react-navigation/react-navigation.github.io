@@ -479,6 +479,21 @@ const state = {
   ],
 };
 ```
+The `initialRouteName` property is also valid as a top-level key, this is useful if you want to add a base screen to a top-level route
+
+```js
+const config = {
+  initialRouteName: 'Feed',
+  screens: {
+    Home: {
+      screens: {
+        Profile: 'users/:id',
+        Settings: 'settings',
+      },
+    },
+  },
+};
+```
 
 It's not possible to pass params to the initial screen through the URL. So make sure that your initial route doesn't need any params or specify `initialParams` to pass required params.
 
