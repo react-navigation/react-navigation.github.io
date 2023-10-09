@@ -67,7 +67,7 @@ function StackScreen() {
 function HomeScreen({ navigation }) {
   const [count, setCount] = React.useState(0);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     // Use `setOptions` to update the button that we previously specified
     // Now the button includes an `onPress` handler to update the count
     navigation.setOptions({
