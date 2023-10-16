@@ -93,7 +93,7 @@ This change is required to avoid crashes related to View state being not persist
 
 ## Wrapping your app in `NavigationContainer`
 
-Now, we need to wrap the whole app in `NavigationContainer`. Usually you'd do this in your entry file, such as `index.js` or `App.js`:
+Now, we need to wrap the whole app in `NavigationContainer`. Usually you'd do this in your entry file, such as `index.js`, `App.js` or `App.tsx`:
 
 ```js
 import * as React from 'react';
