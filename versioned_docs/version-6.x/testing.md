@@ -54,3 +54,35 @@ Then we need to use this setup file in our jest config. You can add it under `se
 Make sure that the path to the file in `setupFiles` is correct. Jest will run these files before running your tests, so it's the best place to put your global mocks.
 
 If you're not using Jest, then you'll need to mock these modules according to the test framework you are using.
+
+## Writing tests
+
+We recommend using [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) along with [`jest-native`](https://github.com/testing-library/jest-native) to write your tests.
+
+Example:
+
+```js
+import * as React from 'react';
+import { screen, render, fireEvent } from '@testing-library/react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { RootNavigator } from './RootNavigator';
+
+test('shows profile screen when View Profile is pressed', () => {
+  render(
+    <NavigationContainer>
+      <RootNavigator />
+    </NavigationContainer>
+  );
+
+  fireEvent.press(screen.getByText('View Profile'));
+
+  expect(screen.getByText('My Profile')).toBeOnTheScreen();
+});
+```
+
+## Best practices
+
+There are a couple of things to keep in mind when writing tests for components using React Navigation:
+
+1. Avoid mocking React Navigation. Instead, use a real navigator in your tests.
+2. Don't check for navigation actions. Instead, check for the result of the navigation such as the screen being rendered.
