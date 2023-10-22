@@ -77,22 +77,23 @@ function TabNavigator({
           <Pressable
             key={route.key}
             onPress={() => {
+              const isFocused = state.index === index;
               const event = navigation.emit({
                 type: 'tabPress',
                 target: route.key,
                 canPreventDefault: true,
               });
 
-              if (!event.defaultPrevented) {
+              if (!isFocused && !event.defaultPrevented) {
                 navigation.dispatch({
-                  ...TabActions.jumpTo(route.name),
+                  ...TabActions.jumpTo(route.name, route.params),
                   target: state.key,
                 });
               }
             }}
             style={{ flex: 1 }}
           >
-            <Text>{descriptors[route.key].options.title || route.name}</Text>
+            <Text>{descriptors[route.key].options.title ?? route.name}</Text>
           </Pressable>
         ))}
       </View>
@@ -251,20 +252,21 @@ function TabNavigator({
   return (
     <NavigationContent>
       <View style={[{ flexDirection: 'row' }, tabBarStyle]}>
-        {state.routes.map((route) => (
+        {state.routes.map((route, index) => (
           <Pressable
             key={route.key}
             onPress={() => {
+              const isFocused = state.index === index;
               const event = navigation.emit({
                 type: 'tabPress',
                 target: route.key,
                 canPreventDefault: true,
                 data: {
-                  isAlreadyFocused: route.key === state.routes[state.index].key,
+                  isAlreadyFocused: isFocused,
                 },
               });
 
-              if (!event.defaultPrevented) {
+              if (!isFocused && !event.defaultPrevented) {
                 navigation.dispatch({
                   ...CommonActions.navigate(route),
                   target: state.key,
