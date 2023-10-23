@@ -263,4 +263,4 @@ function MyTabs() {
 
 ## Using with `react-native-paper` (optional)
 
-You can use the theming support in `react-native-paper` to customize the material bottom navigation by wrapping your app in [`Provider` from `react-native-paper`](https://callstack.github.io/react-native-paper/getting-started.html). A common use case for this can be to customize the background color for the screens when your app has a dark theme. Follow the [instructions on `react-native-paper`'s documentation](https://callstack.github.io/react-native-paper/theming.html) to learn how to customize the theme.
+You can use the theming support in `react-native-paper` to customize the material bottom navigation by wrapping your app in [`Provider` from `react-native-paper`](https://callstack.github.io/react-native-paper/docs/guides/getting-started). A common use case for this can be to customize the background color for the screens when your app has a dark theme. Follow the [instructions on `react-native-paper`'s documentation](https://callstack.github.io/react-native-paper/docs/guides/theming) to learn how to customize the theme.
