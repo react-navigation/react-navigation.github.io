@@ -114,9 +114,25 @@ When you use a navigator (such as stack navigator), you'll need to follow the in
 
 :::
 
-## Wrapping your app in `NavigationContainer`
+## Setting up React Navigation
 
-Now, we need to wrap the whole app in `NavigationContainer`. Usually you'd do this in your entry file, such as `index.js` or `App.js`:
+Once you've installed and configured the dependencies, you can move on to setting up your project to use React Navigation.
+
+When using React Navigation, you configure [**navigators**](glossary-of-terms.md#navigator) in your app. Navigators handle the transition between screens in your app and provide UI such as header, tab bar etc.
+
+There are 2 primary ways to configure the navigators:
+
+### Static configuration
+
+The static configuration API has reduced boilerplate and simplifies things such as TypeScript types and deep linking. If you're staring a new project or are new to React Navigation, this is the **recommended way** to set up your app.
+
+To get started with static configuration, continue to ["Getting started with static API"](hello-react-navigation-static.md).
+
+### Dynamic configuration
+
+The dynamic configuration allows for more flexibility, but requires more boilerplate and configuration.
+
+To get started with dynamic configuration, first we need to wrap your app in `NavigationContainer`. Usually you'd do this in your entry file, such as `index.js` or `App.js`:
 
 ```js
 import * as React from 'react';
@@ -135,6 +151,4 @@ In a typical React Native app, the `NavigationContainer` should be only used onc
 
 :::
 
-Now you are ready to build and run your app on the device/simulator.
-
-Continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.
+Continue to ["Getting started with dynamic API"](hello-react-navigation.md) to start writing some code.

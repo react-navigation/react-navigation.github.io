@@ -1,7 +1,7 @@
 ---
 id: hello-react-navigation
-title: Hello React Navigation
-sidebar_label: Hello React Navigation
+title: Dynamic configuration
+sidebar_label: Dynamic configuration
 ---
 
 In a web browser, you can link to different pages using an anchor (`<a>`) tag. When the user clicks on a link, the URL is pushed to the browser history stack. When the user presses the back button, the browser pops the item from the top of the history stack, so the active page is now the previously visited page. React Native doesn't have a built-in idea of a global history stack like a web browser does -- this is where React Navigation enters the story.
@@ -155,4 +155,4 @@ The natural question at this point is: "how do I go from the `Home` route to the
 - `Stack.Navigator` is a component that takes route configuration as its children with additional props for configuration and renders our content.
 - Each `Stack.Screen` component takes a `name` prop which refers to the name of the route and `component` prop which specifies the component to render for the route. These are the 2 required props.
 - To specify what the initial route in a stack is, provide an `initialRouteName` as the prop for the navigator.
-- To specify screen-specific options, we can pass an `options` prop to `Stack.Screen`, and for common options, we can pass `screenOptions` to `Stack.Navigator`
+- To specify screen-specific options, we can pass an `options` prop to `Stack.Screen`, and for common options, we can pass `screenOptions` to `Stack.Navigator`.

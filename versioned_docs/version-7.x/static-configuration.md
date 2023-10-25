@@ -1,7 +1,7 @@
 ---
 id: static-configuration
-title: Getting started with static API
-sidebar_label: Getting started
+title: Overview of static API
+sidebar_label: Overview
 ---
 
 React Navigation primarily uses a dynamic component based API. This provides a lot of flexibility, however there are a few drawbacks:
