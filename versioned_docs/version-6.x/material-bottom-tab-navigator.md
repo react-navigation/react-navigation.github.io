@@ -3,7 +3,6 @@ id: material-bottom-tab-navigator
 title: Material Bottom Tabs Navigator
 sidebar_label: Material Bottom Tabs
 ---
-
 > The `material-bottom-tabs` navigator is moved to [`react-native-paper`](https://reactnativepaper.com/). Refer to [`react-native-paper`'s documentation](https://callstack.github.io/react-native-paper/docs/components/BottomNavigation/createMaterialBottomTabNavigator) for API and usage. For any issues with the navigator, please open an issue in [`react-native-paper`'s repository](https://github.com/callstack/react-native-paper/).
 
 A material-design themed tab bar on the bottom of the screen that lets you switch between different routes with animation. Routes are lazily initialized - their screen components are not mounted until they are first focused.
@@ -147,7 +146,7 @@ Color for the tab bar when the tab corresponding to the screen is active. Used f
 
 #### `tabBarLabel`
 
-Title string of a tab displayed in the tab bar. When undefined, scene `title` is used. To hide, see `labeled` option in the previous section.
+Title string of a tab displayed in the tab bar. When undefined, scene `title` is used. To hide, see `labelled` option in the previous section.
 
 #### `tabBarBadge`
 
