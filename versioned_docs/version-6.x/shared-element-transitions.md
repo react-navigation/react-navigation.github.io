@@ -15,7 +15,7 @@ This guide covers how to animate elements between screens. This feature is known
 Before continuing this guide make sure your app meets these criteria:
 
 - You are using [`@react-navigation/native-stack`](/docs/native-stack-navigator). The Shared Element Transitions feature isn't supported in JS-based [`@react-navigation/stack`](/docs/stack-navigator).
-- You have [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation) **v3.0.0 or higher** installed and configured.
+- You have [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started) **v3.0.0 or higher** installed and configured.
 
 ## Minimal example
 
