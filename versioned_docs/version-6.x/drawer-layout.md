@@ -38,7 +38,7 @@ Then, you need to install and configure the libraries that are required by the d
    npm install react-native-gesture-handler react-native-reanimated
    ```
 
-   The Drawer supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/2.x/fundamentals/installation).
+   The Drawer supports the latest version of Reanimated. Make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
 2. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
 

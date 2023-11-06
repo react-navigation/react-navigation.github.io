@@ -123,7 +123,7 @@ function HomeScreen() {
 
 ## Reference
 
-You can find a full Shared Element Transitions reference in the [React Native Reanimated documentation](https://docs.swmansion.com/react-native-reanimated/docs/api/sharedElementTransitions).
+You can find a full Shared Element Transitions reference in the [React Native Reanimated documentation](https://docs.swmansion.com/react-native-reanimated/docs/shared-element-transitions/overview/).
 
 ## Alternatives
 
