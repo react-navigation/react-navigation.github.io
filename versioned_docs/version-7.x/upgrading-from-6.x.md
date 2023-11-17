@@ -10,7 +10,9 @@ This guides lists all the breaking changes and new features in React Navigation 
 
 ## Minimum Requirements
 
-TODO
+- `react-native` >= 0.72.0
+- `expo` >= 49 (if you use Expo)
+- `typescript` >= 5.0.0 (if you use TypeScript)
 
 ## Breaking changes
 
@@ -26,9 +28,7 @@ Due to these issues, we have a special API to navigate to a nested screen (`navi
 From these release, this is no longer the default behavior. If you're relying on this behavior in your app, you can pass the `navigationInChildEnabled` prop to `NavigationContainer` to keep the behavior until you are able to migrate:
 
 ```js
-<NavigationContainer navigationInChildEnabled>
-  {/* ... */}
-</NavigationContainer>
+<NavigationContainer navigationInChildEnabled>{/* ... */}</NavigationContainer>
 ```
 
 The `navigationInChildEnabled` prop will be removed in the next major.
@@ -116,6 +116,23 @@ So we've removed this prop instead of a `NavigationIndependentTree` component wh
 
 This way, the responsibility no longer lies on the miniapp developer, but on the parent app. It's also harder for beginners to accidentally add this.
 
+### The `theme` prop now accepts a `fonts` property
+
+Previously, the `theme` prop on `NavigationContainer` accepted a `colors` property to customize the colors used by various UI elements from React Navigation. We have now added a `fonts` property to customize the fonts as well. If you are passing a custom theme in the `theme` prop, you'll need to update it to include the `fonts` property.
+
+```diff
+import { DefaultTheme } from '@react-navigation/native';
+
+const theme = {
+  colors: {
+    // ...
+  },
++ fonts: DefaultTheme.fonts,
+};
+```
+
+If you want to customize the fonts, see [the themes guide](themes.md) for more details.
+
 ### The `Link` component and `useLinkProps` hook now use screen names instead of paths
 
 Previously, the `Link` component and `useLinkProps` hook were designed to work with path strings via the `to` prop. But it had few issues:
@@ -152,6 +169,83 @@ const action = buildAction('/details?foo=42'); // { type: 'NAVIGATE', payload: {
 
 Note that this hook is intended to be used by custom navigators and not by end users. For end users, the `Link` component and `useLinkProps` are the recommended way to navigate.
 
+### The flipper devtools plugin is now removed
+
+Previously, we added a Flipper plugin for React Navigation to make debugging navigation easier. However, it has added significant maintenance overhead for us. The Flipper team hasn't been focused on React Native recently, so the overall experience of using Flipper with React Native has been poor.
+
+> Currently, the Flipper team has been focused on native developer experience, so we are going back to the drawing board. We have created a new pillar within our team focused on Developer Experience. We are currently investigating improved Chrome Debugger protocol support from the Hermes team as well as migrating the debugging experience from Flipper to Chrome DevTools so we can deliver a debugging experience that meets our standard.
+>
+> [react-native-community/discussions-and-proposals#546 (comment)](https://github.com/react-native-community/discussions-and-proposals/discussions/546#discussioncomment-4178951)
+
+Since the React Native team migrating away from Flipper, it doesn't make much sense for us to spend additional resources to keep supporting it. So we've removed the Flipper plugin from `@react-navigation/devtools`.
+
+### Various deprecated APIs are removed
+
+We have removed all of the previously deprecated APIs. These APIs were deprecated in React Navigation 6 and showed a warning when used. So make sure that you have addressed all the warnings before upgrading.
+
+Here is the full list of removed APIs:
+
+- `@react-navigation/stack`
+  - Removed `mode` prop - use `presentation` option instead
+  - Removed `headerMode` prop - use `headerMode` and `headerShown` options instead
+  - Removed `keyboardHandlingEnabled` prop - use `keyboardHandlingEnabled` option instead
+- `@react-navigation/drawer`
+  - Removed `openByDefault` prop - use `defaultStatus` prop instead
+  - Removed `lazy` prop - use `lazy` option instead
+  - Removed `drawerContentOptions` prop which contained following options:
+    - `drawerPosition` - use `drawerPosition` option instead
+    - `drawerType` - use `drawerType` option instead
+    - `edgeWidth` - use `swipeEdgeWidth` option instead
+    - `hideStatusBar` - use `drawerHideStatusBarOnOpen` option instead
+    - `keyboardDismissMode` - use `keyboardDismissMode` option instead
+    - `minSwipeDistance` - use `swipeMinDistance` option instead
+    - `overlayColor` - use `overlayColor` option instead
+    - `statusBarAnimation` - use `drawerStatusBarAnimation` option instead
+    - `gestureHandlerProps` - use `gestureHandlerProps` option instead
+- `@react-navigation/bottom-tabs`
+  - Removed `lazy` prop - use `lazy` option instead
+  - Removed `tabBarOptions` prop which contained following options:
+    - `keyboardHidesTabBar` - use `tabBarHideOnKeyboard` option instead
+    - `activeTintColor` - use `tabBarActiveTintColor` option instead
+    - `inactiveTintColor` - use `tabBarInactiveTintColor` option instead
+    - `activeBackgroundColor` - use `tabBarActiveBackgroundColor` option instead
+    - `inactiveBackgroundColor` - use `tabBarInactiveBackgroundColor` option instead
+    - `allowFontScaling` - use `tabBarAllowFontScaling` option instead
+    - `showLabel` - use `tabBarShowLabel` option instead
+    - `labelStyle` - use `tabBarLabelStyle` option instead
+    - `iconStyle` - use `tabBarIconStyle` option instead
+    - `tabStyle` - use `tabBarItemStyle` option instead
+    - `labelPosition` and `adapative` - use `tabBarLabelPosition` option instead
+    - `tabBarVisible` - use `display: 'none'` `tabBarStyle` option instead
+- `@react-navigation/material-top-tabs`
+  - Removed `swipeEnabled` prop - use `swipeEnabled` option instead
+  - Removed `lazy` prop - use `lazy` option instead
+  - Removed `lazyPlaceholder` prop - use `lazyPlaceholder` option instead
+  - Removed `lazyPreloadDistance` prop - use `lazyPreloadDistance` option instead
+  - Removed `tabBarOptions` prop which contained following options:
+    - `renderBadge` - use `tabBarBadge` option instead
+    - `renderIndicator` - use `tabBarIndicator` option instead
+    - `activeTintColor` - use `tabBarActiveTintColor` option instead
+    - `inactiveTintColor` - use `tabBarInactiveTintColor` option instead
+    - `pressColor` - use `tabBarPressColor` option instead
+    - `pressOpacity` - use `tabBarPressOpacity` option instead
+    - `showLabel` - use `tabBarShowLabel` option instead
+    - `showIcon` - use `tabBarShowIcon` option instead
+    - `allowFontScaling` - use `tabBarAllowFontScaling` option instead
+    - `bounces` - use `tabBarBounces` option instead
+    - `scrollEnabled` - use `tabBarScrollEnabled` option instead
+    - `iconStyle` - use `tabBarIconStyle` option instead
+    - `labelStyle` - use `tabBarLabelStyle` option instead
+    - `tabStyle` - use `tabBarItemStyle` option instead
+    - `indicatorStyle` - use `tabBarIndicatorStyle` option instead
+    - `indicatorContainerStyle` - use `tabBarIndicatorContainerStyle` option instead
+    - `contentContainerStyle` - use `tabBarContentContainerStyle` option instead
+    - `style` - use `tabBarStyle` option instead
+
+### `customAnimationOnGesture` is renamed to `animationMatchesGesture` in Native Stack Navigator
+
+TODO
+
 ### Material Top Tab Navigator no longers requires installing `react-native-tab-view`
 
 Previously, `@react-navigation/material-top-tabs` required installing `react-native-tab-view` as a dependency in the project. We have now moved this package to the React Navigation monorepo and able to coordinate the releases together, so it's no longer necessary to install it separately.
@@ -171,19 +265,45 @@ If you are using `@react-navigation/material-bottom-tabs` in your project, you c
 + import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 ```
 
-### The flipper devtools plugin is now removed
+### The `tabBarTestID` option is renamed to `tabBarButtonTestID` in Bottom Tab Navigator
 
-Previously, we added a Flipper plugin for React Navigation to make debugging navigation easier. However, it has added significant maintenance overhead for us. The Flipper team hasn't been focused on React Native recently, so the overall experience of using Flipper with React Native has been poor.
+TODO
 
-> Currently, the Flipper team has been focused on native developer experience, so we are going back to the drawing board. We have created a new pillar within our team focused on Developer Experience. We are currently investigating improved Chrome Debugger protocol support from the Hermes team as well as migrating the debugging experience from Flipper to Chrome DevTools so we can deliver a debugging experience that meets our standard.
->
-> [react-native-community/discussions-and-proposals#546 (comment)](https://github.com/react-native-community/discussions-and-proposals/discussions/546#discussioncomment-4178951)
+### Drawer Navigator no longer supports Reanimated 1
 
-Since the React Native team migrating away from Flipper, it doesn't make much sense for us to spend additional resources to keep supporting it. So we've removed the Flipper plugin from `@react-navigation/devtools`.
+TODO
 
 ## New features
 
 ### Navigators now support a static configuration API
+
+TODO
+
+### Support a top-level `path` configuration in linking config
+
+TODO
+
+### Support custom `layout` prop for Navigators
+
+TODO
+
+### Add experimental API for handling deep link after authentication
+
+TODO
+
+### Add a `Button` component to Elements
+
+TODO
+
+### Add `useAnimatedHeaderHeight` hook to Native Stack Navigator
+
+TODO
+
+### Bottom Tab Navigator now supports animations
+
+TODO
+
+### Bottom Tab Navigator can now show tabs on the side
 
 TODO
 
