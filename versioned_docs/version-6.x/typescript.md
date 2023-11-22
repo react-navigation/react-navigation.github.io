@@ -209,23 +209,33 @@ type ProfileScreenNavigationProp = CompositeNavigationProp<
 
 ### Annotating `useNavigation`
 
+:::danger
+
+Annotating `useNavigation` isn't type-safe because the type parameter cannot be statically verified.
+Prefer [specifying a default type](#specifying-default-types-for-usenavigation-link-ref-etc) instead.
+
+:::
+
 To annotate the `navigation` prop that we get from `useNavigation`, we can use a type parameter:
 
 ```ts
 const navigation = useNavigation<ProfileScreenNavigationProp>();
 ```
 
-It's important to note that this isn't completely type-safe because the type parameter you use may not be correct and we cannot statically verify it.
-
 ### Annotating `useRoute`
+
+:::danger
+
+Annotating `useRoute` isn't type-safe because the type parameter cannot be statically verified.
+Prefer using the [`route` prop](route-prop.md) instead when possible. Use `useRoute` for generic code that doesn't need specific route type.
+
+:::
 
 To annotate the `route` prop that we get from `useRoute`, we can use a type parameter:
 
 ```ts
 const route = useRoute<ProfileScreenRouteProp>();
 ```
-
-It's important to note that this isn't completely type-safe, similar to `useNavigation`.
 
 ### Annotating `options` and `screenOptions`
 
