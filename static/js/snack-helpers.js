@@ -1,6 +1,6 @@
 const DEFAULT_PLATFORM = 'android';
 const DEPS_VERSIONS = {
-  '4': [
+  4: [
     '@expo/vector-icons@*',
     '@react-native-community/masked-view@*',
     'react-navigation@^4.4.0',
@@ -12,15 +12,15 @@ const DEPS_VERSIONS = {
     'react-native-safe-area-context@*',
     'react-native-screens@*',
   ],
-  '5': [
+  5: [
     '@expo/vector-icons@*',
     '@react-native-community/masked-view@*',
-    "@react-navigation/bottom-tabs@^5.11.15",
-    "@react-navigation/drawer@^5.12.9",
-    "@react-navigation/material-bottom-tabs@^5.3.19",
-    "@react-navigation/material-top-tabs@^5.3.19",
-    "@react-navigation/native@^5.9.8",
-    "@react-navigation/stack@^5.14.9",
+    '@react-navigation/bottom-tabs@^5.11.15',
+    '@react-navigation/drawer@^5.12.9',
+    '@react-navigation/material-bottom-tabs@^5.3.19',
+    '@react-navigation/material-top-tabs@^5.3.19',
+    '@react-navigation/native@^5.9.8',
+    '@react-navigation/stack@^5.14.9',
     'react-native-paper@^4.0.1',
     'react-native-reanimated@*',
     'react-native-safe-area-context@*',
@@ -28,7 +28,7 @@ const DEPS_VERSIONS = {
     'react-native-screens@*',
     'react-native-tab-view@^2.15.1',
   ],
-  '6': [
+  6: [
     '@expo/vector-icons@*',
     '@react-native-community/masked-view@*',
     'react-native-gesture-handler@*',
@@ -47,7 +47,7 @@ const DEPS_VERSIONS = {
     '@react-navigation/native@6.0.10',
     '@react-navigation/stack@6.2.1',
   ],
-  '7': [
+  7: [
     '@expo/vector-icons@*',
     '@react-native-community/masked-view@*',
     'react-native-gesture-handler@*',
@@ -65,13 +65,16 @@ const DEPS_VERSIONS = {
     '@react-navigation/native@7.0.0-alpha.1',
     '@react-navigation/stack@7.0.0-alpha.1',
   ],
-  next: [],
 };
 
 function getVersion() {
-  if (window.__reactNavigationVersion) {
-    return window.__reactNavigationVersion;
+  const maybeVersion = window.location.pathname.split('/')[1];
+
+  if (/(\d+)\.x/.test(maybeVersion)) {
+    return maybeVersion;
   }
+
+  return '6.x';
 }
 
 function getSnackUrl(options) {
@@ -79,8 +82,8 @@ function getSnackUrl(options) {
   let label = options.label || document.title;
   let code = options.code;
   let templateId = options.templateId;
-  const currentMajorVersion =
-    currentVersion === 'next' ? 'next' : currentVersion.match(/(\d+)\./)[1];
+
+  const currentMajorVersion = currentVersion.match(/(\d+)\./)[1];
 
   let baseUrl =
     `https://snack.expo.io?platform=${DEFAULT_PLATFORM}&name=` +
@@ -110,7 +113,8 @@ function findNearestCodeBlock(node) {
   while (nextElement) {
     if (
       nextElement.tagName === 'DIV' &&
-      ( nextElement.className.includes('mdxCodeBlock') || nextElement.className.includes('codeBlockContainer'))
+      (nextElement.className.includes('mdxCodeBlock') ||
+        nextElement.className.includes('codeBlockContainer'))
     ) {
       return nextElement;
     } else {
@@ -130,6 +134,10 @@ function appendSnackLink() {
   }
 
   samples.forEach((samp) => {
+    if (samp.dataset.handled) {
+      return;
+    }
+
     let codeBlock = findNearestCodeBlock(samp);
 
     if (!codeBlock) {
@@ -161,10 +169,18 @@ function appendSnackLink() {
 
     link.href = href;
 
-    codeBlock.insertAdjacentElement('afterend', link);
+    // The code block seems to get removed from the DOM - messing up the position of the link
+    // So we get a reference to the next element and insert the link before it
+    const nextSibling = codeBlock.nextElementSibling;
+
+    if (nextSibling) {
+      nextSibling.insertAdjacentElement('beforebegin', link);
+    } else {
+      codeBlock.insertAdjacentElement('afterend', link);
+    }
 
     // Don't try to add the link more than once!
-    samp.remove();
+    samp.remove()
   });
 }
 
@@ -179,13 +195,11 @@ function transformExistingSnackLinks() {
   });
 }
 
-let mutationObserver;
-
-export function initializeSnackObservers() {
+function initializeSnackObservers() {
   appendSnackLink();
   transformExistingSnackLinks();
 
-  mutationObserver = new MutationObserver((mutations) => {
+  const mutationObserver = new MutationObserver((mutations) => {
     mutations.forEach(appendSnackLink);
     mutations.forEach(transformExistingSnackLinks);
   });
@@ -196,7 +210,4 @@ export function initializeSnackObservers() {
   });
 }
 
-export function removeSnackObservers() {
-  mutationObserver && mutationObserver.disconnect();
-  mutationObserver = null;
-}
+document.addEventListener('DOMContentLoaded', initializeSnackObservers);

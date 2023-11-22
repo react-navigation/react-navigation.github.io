@@ -1,73 +1,73 @@
 {
   "version-2.x-docs": {
     "Fundamentals": [
-      "version-2.x/getting-started",
-      "version-2.x/hello-react-navigation",
-      "version-2.x/supported-react-native-versions",
-      "version-2.x/navigating",
-      "version-2.x/navigation-lifecycle",
-      "version-2.x/params",
-      "version-2.x/headers",
-      "version-2.x/header-buttons",
-      "version-2.x/modal",
-      "version-2.x/next-steps",
-      "version-2.x/glossary-of-terms",
-      "version-2.x/common-mistakes",
-      "version-2.x/react-native-screens",
-      "version-2.x/limitations"
+      "getting-started",
+      "hello-react-navigation",
+      "supported-react-native-versions",
+      "navigating",
+      "navigation-lifecycle",
+      "params",
+      "headers",
+      "header-buttons",
+      "modal",
+      "next-steps",
+      "glossary-of-terms",
+      "common-mistakes",
+      "react-native-screens",
+      "limitations"
     ],
     "Assorted guides": [
-      "version-2.x/tab-based-navigation",
-      "version-2.x/drawer-based-navigation",
-      "version-2.x/auth-flow",
-      "version-2.x/handling-iphonex",
-      "version-2.x/status-bar",
-      "version-2.x/navigation-options-resolution",
-      "version-2.x/custom-android-back-button-handling",
-      "version-2.x/connecting-navigation-prop",
-      "version-2.x/navigating-without-navigation-prop",
-      "version-2.x/navigation-key",
-      "version-2.x/deep-linking",
-      "version-2.x/screen-tracking",
-      "version-2.x/state-persistence",
-      "version-2.x/app-containers",
-      "version-2.x/redux-integration"
+      "tab-based-navigation",
+      "drawer-based-navigation",
+      "auth-flow",
+      "handling-iphonex",
+      "status-bar",
+      "navigation-options-resolution",
+      "custom-android-back-button-handling",
+      "connecting-navigation-prop",
+      "navigating-without-navigation-prop",
+      "navigation-key",
+      "deep-linking",
+      "screen-tracking",
+      "state-persistence",
+      "app-containers",
+      "redux-integration"
     ],
     "Build your own Navigator": [
-      "version-2.x/custom-navigator-overview",
-      "version-2.x/routers",
-      "version-2.x/custom-navigators",
-      "version-2.x/custom-routers",
-      "version-2.x/navigation-views",
-      "version-2.x/transitioner"
+      "custom-navigator-overview",
+      "routers",
+      "custom-navigators",
+      "custom-routers",
+      "navigation-views",
+      "transitioner"
     ],
     "Related resources": [
-      "version-2.x/community-libraries-and-navigators",
-      "version-2.x/more-resources"
+      "community-libraries-and-navigators",
+      "more-resources"
     ],
     "Meta": [
-      "version-2.x/pitch",
-      "version-2.x/alternatives",
-      "version-2.x/contributing"
+      "pitch",
+      "alternatives",
+      "contributing"
     ]
   },
   "version-2.x-api": {
     "API reference": [
-      "version-2.x/api-reference",
-      "version-2.x/navigation-prop",
-      "version-2.x/navigation-actions",
-      "version-2.x/stack-actions",
-      "version-2.x/drawer-actions",
-      "version-2.x/stack-navigator",
-      "version-2.x/switch-navigator",
-      "version-2.x/drawer-navigator",
-      "version-2.x/tab-navigator",
-      "version-2.x/bottom-tab-navigator",
-      "version-2.x/material-bottom-tab-navigator",
-      "version-2.x/material-top-tab-navigator",
-      "version-2.x/with-navigation",
-      "version-2.x/with-navigation-focus",
-      "version-2.x/navigation-events"
+      "api-reference",
+      "navigation-prop",
+      "navigation-actions",
+      "stack-actions",
+      "drawer-actions",
+      "stack-navigator",
+      "switch-navigator",
+      "drawer-navigator",
+      "tab-navigator",
+      "bottom-tab-navigator",
+      "material-bottom-tab-navigator",
+      "material-top-tab-navigator",
+      "with-navigation",
+      "with-navigation-focus",
+      "navigation-events"
     ]
   }
 }
