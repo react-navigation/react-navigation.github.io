@@ -81,7 +81,7 @@ URL integration isn't enough to have proper web support. The navigators also nee
 
 The first change is using anchor tags. When you use built-in navigators such as drawer navigator and tab navigator, they render anchor tags for the drawer and tab items respectively when you have linking configured. This means that they behave the same as normal links on the web.
 
-<img src="/assets/blog/web-support/link-right-click.png" height="427"/>
+<img src="/assets/blog/web-support/link-right-click.png" height="427" alt="Demo for Right Click on links" />
 
 ### No gestures and animations
 
