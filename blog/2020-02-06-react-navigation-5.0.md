@@ -112,8 +112,8 @@ You don't need to use Redux in your apps for this to work and it works without a
 
 Traditionally, we have written our navigators in JavaScript for greater customizability. It fits a lot of use cases, but sometimes you want the exact native feel and the performance of native navigation. Now, we have added a new native stack navigator that uses native navigation primitives for navigation using the [`react-native-screens`](https://github.com/kmagiera/react-native-screens) library. Under the hood, it just uses native components which might be obvious choice for native development and might be a good pick in the most cases.
 
-<img src="/assets/blog/android-native-stack.gif" height="530" />
-<img src="/assets/blog/ios-native-stack.gif" height="530" />
+<img src="/assets/blog/android-native-stack.gif" height="530" alt="Native Stack on Android" />
+<img src="/assets/blog/ios-native-stack.gif" height="530" alt="Native Stack on iOS" />
 
 ### Native backends for Material top tab navigator
 

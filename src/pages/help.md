@@ -4,7 +4,7 @@ description: Resources to get help with React Navigation.
 hide_table_of_contents: true
 ---
 
-# Need help?
+## Need help?
 
 If you've encountered a bug with React Navigation, please [post an issue](https://github.com/react-navigation/react-navigation/issues) and be sure to fill out the issue template.
 
