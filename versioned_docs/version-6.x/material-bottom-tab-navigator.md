@@ -4,7 +4,11 @@ title: Material Bottom Tabs Navigator
 sidebar_label: Material Bottom Tabs
 ---
 
-> The `material-bottom-tabs` navigator is moved to [`react-native-paper`](https://reactnativepaper.com/). Refer to [`react-native-paper`'s documentation](https://callstack.github.io/react-native-paper/docs/components/BottomNavigation/createMaterialBottomTabNavigator) for API and usage. For any issues with the navigator, please open an issue in [`react-native-paper`'s repository](https://github.com/callstack/react-native-paper/).
+:::warning
+
+The `material-bottom-tabs` navigator is moved to [`react-native-paper`](https://reactnativepaper.com/). Refer to [`react-native-paper`'s documentation](https://callstack.github.io/react-native-paper/docs/components/BottomNavigation/createMaterialBottomTabNavigator) for API and usage. For any issues with the navigator, please open an issue in [`react-native-paper`'s repository](https://github.com/callstack/react-native-paper/).
+
+:::
 
 A material-design themed tab bar on the bottom of the screen that lets you switch between different routes with animation. Routes are lazily initialized - their screen components are not mounted until they are first focused.
 
@@ -47,7 +51,11 @@ function MyTabs() {
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+:::note
+
+For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+
+:::
 
 ## RouteConfigs
 

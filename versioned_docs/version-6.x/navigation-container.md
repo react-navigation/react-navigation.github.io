@@ -178,7 +178,11 @@ See [state persistence guide](state-persistence.md) for more details on how to p
 
 ### `onStateChange`
 
-> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the navigation state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+:::warning
+
+Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+
+:::
 
 Function that gets called every time [navigation state](navigation-state.md) changes. It receives the new navigation state as the argument.
 

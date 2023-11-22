@@ -22,7 +22,11 @@ The package exposes the following APIs:
 
 This hook provides integration with [Flipper](https://fbflipper.com/) for React Native apps.
 
-> This doesn't work in Expo managed apps since they don't support Flipper.
+:::warning
+
+This doesn't work in Expo managed apps since they don't support Flipper.
+
+:::
 
 To be able to use this hook, you need to:
 

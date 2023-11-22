@@ -11,7 +11,11 @@ Most apps require that a user authenticate in some way to have access to data as
 - When the state has loaded, the user is presented with either authentication screens or the main app, depending on whether valid authentication state was loaded.
 - When the user signs out, we clear the authentication state and send them back to authentication screens.
 
-> Note: We say "authentication screens" because usually there is more than one. You may have a main screen with a username and password field, another for "forgot password", and another set for sign up.
+:::note
+
+We say "authentication screens" because usually there is more than one. You may have a main screen with a username and password field, another for "forgot password", and another set for sign up.
+
+:::
 
 ## What we need
 
@@ -136,11 +140,19 @@ const RootStack = createNativeStackNavigator({
 });
 ```
 
-> If you have both your login-related screens and rest of the screens in Stack navigators, we recommend to use a single Stack navigator and place the conditional inside instead of using 2 different navigators. This makes it possible to have a proper transition animation during login/logout.
+:::tip
+
+If you have both your login-related screens and rest of the screens in Stack navigators, we recommend to use a single Stack navigator and place the conditional inside instead of using 2 different navigators. This makes it possible to have a proper transition animation during login/logout.
+
+:::
 
 ## Implement the logic for restoring the token
 
-> Note: The following is just an example of how you might implement the logic for authentication in your app. You don't need to follow it as is.
+:::note
+
+The following is just an example of how you might implement the logic for authentication in your app. You don't need to follow it as is.
+
+:::
 
 From the previous snippet, we can see that we need 2 state variables:
 

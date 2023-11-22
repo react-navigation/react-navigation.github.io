@@ -2,7 +2,11 @@
 
 This guide covers how to animate elements between screens. This feature is known as a [Shared Element Transition](https://docs.swmansion.com/react-native-reanimated/docs/api/sharedElementTransitions) and it's implemented in the [`@react-navigation/native-stack`](<(/docs/native-stack-navigator)>) with [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/).
 
-> Note: As of writing this guide, Shared Element Transitions are considered an experimental feature not recommended for production use.
+:::warning
+
+As of writing this guide, Shared Element Transitions are considered an experimental feature not recommended for production use.
+
+:::
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
@@ -92,7 +96,11 @@ const styles = StyleSheet.create({
 
 By default, the transition animates the `width`, `height`, `originX`, `originY` and `transform` properties using `withTiming` with a 500 ms duration. You can easily customize `width`, `height`, `originX`, and `originY` props. Customizing `transform` is also possible but it's far beyond the scope of this guide.
 
-> Note: Custom SharedTransition API is not finalized and might change in a future release.
+:::warning
+
+Custom SharedTransition API is not finalized and might change in a future release.
+
+:::
 
 To customize the transition you need to pass all the properties besides `transform`.
 
