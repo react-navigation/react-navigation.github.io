@@ -7,7 +7,7 @@ author_image_url: https://avatars0.githubusercontent.com/u/90494?s=200&v=4
 tags: [release, announcement]
 ---
 
-The documentation is now live at <https://reactnavigation.org>, and v1 lives [here](/docs/1.x/getting-started).
+The documentation is now live at [reactnavigation.org](https://reactnavigation.org), and v1 lives [here](/docs/1.x/getting-started).
 
 <!--truncate-->
 

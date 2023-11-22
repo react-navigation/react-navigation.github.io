@@ -68,8 +68,7 @@ Visual options:
   * `left` - Anchor the title to the left, near the back button or other left component. This is the default on Android. When used on iOS, the header back title is hidden. Content from the left component will overflow underneath the title, if you need to adjust this you can use `headerLeftContainerStyle` and `headerTitleContainerStyle`. Additionally, this alignment is incompatible with `headerTransitionPreset: 'uikit'`.
   * `center` - Center the title, this is the default on iOS.
 * `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
-* `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
-<https://github.com/react-navigation/react-navigation/blob/2.x/flow/react-navigation.js>)). Provided function will be passed the following arguments:
+* `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](https://github.com/react-navigation/react-navigation/blob/2.x/flow/react-navigation.js)). Provided function will be passed the following arguments:
   * `transitionProps` - Transition props for the new screen.
   * `prevTransitionProps` - Transitions props for the old screen.
   * `isModal` - Boolean specifying if screen is modal.
