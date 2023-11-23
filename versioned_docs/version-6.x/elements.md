@@ -136,6 +136,7 @@ For example, you can use this with `headerTransparent` to render a blur view to 
 
 ```js
 import { BlurView } from 'expo-blur';
+import { StyleSheet } from 'react-native';
 
 // ...
 
