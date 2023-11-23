@@ -4,9 +4,9 @@ title: Material Bottom Tabs Navigator
 sidebar_label: Material Bottom Tabs
 ---
 
-:::warning
+:::danger
 
-The `material-bottom-tabs` navigator is moved to [`react-native-paper`](https://reactnativepaper.com/). Refer to [`react-native-paper`'s documentation](https://callstack.github.io/react-native-paper/docs/components/BottomNavigation/createMaterialBottomTabNavigator) for API and usage. For any issues with the navigator, please open an issue in [`react-native-paper`'s repository](https://github.com/callstack/react-native-paper/).
+The `material-bottom-tabs` navigator is moved to [`react-native-paper`](https://reactnativepaper.com/). Refer to [`react-native-paper`'s documentation](https://callstack.github.io/react-native-paper/docs/guides/bottom-navigation) instead for installation instructions, usage guide and API reference. For any issues with the navigator, please open an issue in [`react-native-paper`'s repository](https://github.com/callstack/react-native-paper/).
 
 :::
 
