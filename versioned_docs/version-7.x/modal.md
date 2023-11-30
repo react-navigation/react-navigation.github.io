@@ -8,7 +8,7 @@ sidebar_label: Opening a modal
 
 A modal displays content that temporarily blocks interactions with the main view.
 
-A modal is like a popup &mdash; it's not part of your primary navigation flow &mdash; it usually has a different transition, a different way to dismiss it, and is intended to focus on one particular piece of content or interaction.
+A modal is like a popup &mdash; it usually has a different transition animation, and is intended to focus on one particular interaction or piece of content.
 
 ## Creating a stack with modal screens
 
@@ -67,4 +67,14 @@ Instead of specifying this option for a group, it's also possible to specify it 
 
 ## Summary
 
-- To change the type of transition on a stack navigator you can use the `presentation` option. When set to `modal`, all modal screens animate-in from bottom to top rather than right to left by default. This applies to that entire group, so to use non-modal transitions on other screens, we add another group with the default configuration.
+- To change the type of transition on a stack navigator you can use the `presentation` option.
+- When `presentation` is set to `modal`, the screens behave like a modal, i.e. they have a bottom to top transition and may show part of the previous screen in the background.
+- Setting `presentation: 'modal'` on a group makes all the screens in the group modals, so to use non-modal transitions on other screens, we add another group with the default configuration.
+
+## Best practices
+
+Since modals are intended to be on top of other content, there are a couple of things to keep in mind when using modals:
+
+- Avoid nesting them inside other navigators like tab or drawer. Modal screens should be defined as part of the root stack.
+- Modal screens should be the last in the stack - avoid pushing regular screens on top of modals.
+- The first screen in a stack appears as a regular screen even if configured as a modal, since there is no screen before it to show behind. So always make sure that modal screens are pushed on top of a regular screen or another modal screen.
