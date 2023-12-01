@@ -72,6 +72,12 @@ All of these methods will act as if they were called inside the currently focuse
 
 In addition to these methods, the ref object also includes the following special methods:
 
+#### `isReady`
+
+The `isReady` method returns a `boolean` indicating whether the navigation tree is ready. The navigation tree is ready when the `NavigationContainer` contains at least one navigator and all of the navigators have finished mounting.
+
+This can be used to determine whether it's safe to dispatch navigation actions without getting an error. See [handling initialization](navigating-without-navigation-prop.md#handling-initialization) for more details.
+
 #### `resetRoot`
 
 The `resetRoot` method lets you reset the state of the navigation tree to the specified state object:
