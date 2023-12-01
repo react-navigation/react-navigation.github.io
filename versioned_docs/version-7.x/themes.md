@@ -4,9 +4,9 @@ title: Themes
 sidebar_label: Themes
 ---
 
-Themes allow you to change the colors of various components provided by React Navigation. You can use themes to:
+Themes allow you to change the colors and fonts of various components provided by React Navigation. You can use themes to:
 
-- Customize the colors match your brand
+- Customize the colors and fonts to match your brand
 - Provide light and dark themes based on the time of the day or user preference
 
 ## Basic usage
@@ -36,22 +36,37 @@ export default function App() {
 
 You can change the theme prop dynamically and all the components will automatically update to reflect the new theme. If you haven't provided a `theme` prop, the default theme will be used.
 
+## Properties
+
 A theme is a JS object containing a list of colors to use. It contains the following properties:
 
 - `dark` (`boolean`): Whether this is a dark theme or a light theme
 - `colors` (`object`): Various colors used by react navigation components:
   - `primary` (`string`): The primary color of the app used to tint various elements. Usually you'll want to use your brand color for this.
-  - `background` (`string`): The color of various backgrounds, such as background color for the screens.
+  - `background` (`string`): The color of various backgrounds, such as the background color for the screens.
   - `card` (`string`): The background color of card-like elements, such as headers, tab bars etc.
   - `text` (`string`): The text color of various elements.
   - `border` (`string`): The color of borders, e.g. header border, tab bar border etc.
-  - `notification` (`string`): The color of Tab Navigator badge.
+  - `notification` (`string`): The color of notifications and badge (e.g. badge in bottom tabs).
+- `fonts` (`object`): Various fonts used by react navigation components:
+  - `regular` (`object`): Style object for the primary font used in the app.
+  - `medium` (`object`): Style object for the semi-bold variant of the primary font.
+  - `bold` (`object`): Style object for the bold variant of the primary font.
+  - `heavy` (`object`): Style object for the extra-bold variant of the primary font.
+
+The style objects for fonts contain the following properties:
+
+- `fontFamily` (`string`): The name of the font family (or font stack on Web) to use, e.g. `Roboto` or `Helvetica Neue`. The system fonts are used by default.
+- `fontWeight` (`string`): The font weight to use. Valid values are `normal`, `bold`, `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900`.
 
 When creating a custom theme, you will need to provide all of these properties.
 
 Example theme:
 
 ```js
+const WEB_FONT_STACK =
+  'system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
+
 const MyTheme = {
   dark: false,
   colors: {
@@ -62,6 +77,62 @@ const MyTheme = {
     border: 'rgb(199, 199, 204)',
     notification: 'rgb(255, 69, 58)',
   },
+  fonts: Platform.select({
+    web: {
+      regular: {
+        fontFamily: WEB_FONT_STACK,
+        fontWeight: '400',
+      },
+      medium: {
+        fontFamily: WEB_FONT_STACK,
+        fontWeight: '500',
+      },
+      bold: {
+        fontFamily: WEB_FONT_STACK,
+        fontWeight: '600',
+      },
+      heavy: {
+        fontFamily: WEB_FONT_STACK,
+        fontWeight: '700',
+      },
+    },
+    ios: {
+      regular: {
+        fontFamily: 'System',
+        fontWeight: '400',
+      },
+      medium: {
+        fontFamily: 'System',
+        fontWeight: '500',
+      },
+      bold: {
+        fontFamily: 'System',
+        fontWeight: '600',
+      },
+      heavy: {
+        fontFamily: 'System',
+        fontWeight: '700',
+      },
+    },
+    default: {
+      regular: {
+        fontFamily: 'sans-serif',
+        fontWeight: 'normal',
+      },
+      medium: {
+        fontFamily: 'sans-serif-medium',
+        fontWeight: 'normal',
+      },
+      bold: {
+        fontFamily: 'sans-serif',
+        fontWeight: '600',
+      },
+      heavy: {
+        fontFamily: 'sans-serif',
+        fontWeight: '700',
+      },
+    },
+  }),
 };
 ```
 
