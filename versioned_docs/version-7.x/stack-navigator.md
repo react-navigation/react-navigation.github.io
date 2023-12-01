@@ -68,9 +68,9 @@ Then, you need to install and configure the libraries that are required by the s
 
 4. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-  ```bash
-  npx pod-install ios
-  ```
+```bash
+npx pod-install ios
+```
 
 ## API Definition
 
@@ -457,7 +457,7 @@ The stack navigator adds the following methods to the navigation prop:
 
 #### `replace`
 
-Replaces the current screen with a new screen in the stack. The method accepts following arguments:
+Replaces the current screen with a new screen in the stack. The method accepts the following arguments:
 
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to pass to the destination route.
@@ -468,7 +468,7 @@ navigation.replace('Profile', { owner: 'Michaś' });
 
 #### `push`
 
-Pushes a new screen to top of the stack and navigate to it. The method accepts following arguments:
+Pushes a new screen to the top of the stack and navigate to it. The method accepts the following arguments:
 
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to pass to the destination route.
@@ -483,6 +483,19 @@ Pops the current screen from the stack and navigates back to the previous screen
 
 ```js
 navigation.pop();
+```
+
+#### `popTo`
+
+Navigates back to a previous screen in the stack by popping screens after it. The method accepts the following arguments:
+
+- `name` - _string_ - Name of the route to navigate to.
+- `params` - _object_ - Screen params to pass to the destination route.
+
+If a matching screen is not found in the stack, this will pop the current screen and add a new screen with the specified name and params.
+
+```js
+navigation.popTo('Profile', { owner: 'Michaś' });
 ```
 
 #### `popToTop`

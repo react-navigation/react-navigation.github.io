@@ -30,6 +30,7 @@ If the navigator is a stack navigator, several alternatives to `navigate` and `g
   - `replace` - replace the current screen with a new one
   - `push` - push a new screen onto the stack
   - `pop` - go back in the stack
+  - `popTo` - go back to a specific screen in the stack
   - `popToTop` - go to the top of the stack
 
 See [Stack navigator helpers](stack-navigator.md#helpers) and [Native Stack navigator helpers](native-stack-navigator.md#helpers) for more details on these methods.
@@ -82,9 +83,11 @@ function HomeScreen({ navigation: { navigate } }) {
 }
 ```
 
-In a [native stack navigator](native-stack-navigator.md), calling `navigate` with a screen name will result in different behavior based on if the screen is already present or not. If the screen is already present in the stack's history, it'll go back to that screen and remove any screens after that. If the screen is not present, it'll push a new screen.
+In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack-navigator.md)), calling `navigate` with a screen name will have the following behavior:
 
-For example, if you have a stack with the history `Home > Profile > Settings` and you call `navigate(Profile)`, the resulting screens will be `Home > Profile` as it goes back to `Profile` and removes the `Settings` screen.
+- If you're already on a screen with the same name, it will update its params and not push a new screen.
+- If you're on a different screen, it will push the new screen onto the stack.
+- If the [`getId`](screen.md#getid) prop is specified, and another screen in the stack has the same ID, it will navigate to that screen and update its params instead.
 
 By default, the screen is identified by its name. But you can also customize it to take the params into account by using the [`getId`](screen.md#getid) prop.
 
@@ -113,26 +116,6 @@ function ProfileScreen({ navigation: { goBack } }) {
   );
 }
 ```
-
-#### Going back from a specific screen
-
-Consider the following navigation stack history:
-
-```javascript
-navigation.navigate({ name: SCREEN, key: SCREEN_KEY_A });
-navigation.navigate({ name: SCREEN, key: SCREEN_KEY_B });
-navigation.navigate({ name: SCREEN, key: SCREEN_KEY_C });
-navigation.navigate({ name: SCREEN, key: SCREEN_KEY_D });
-```
-
-Now you are on _screen D_ and want to go back to _screen A_ (popping D, C, and B).
-Then you can use `navigate`:
-
-```js
-navigation.navigate({ key: SCREEN_KEY_A }); // will go to screen A FROM screen D
-```
-
-Alternatively, as _screen A_ is the top of the stack, you can use `navigation.popToTop()`.
 
 ### `reset`
 

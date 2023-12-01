@@ -133,7 +133,7 @@ On Android, React Navigation hooks in to the hardware back button and fires the 
 
 :::
 
-Another common requirement is to be able to go back _multiple_ screens -- for example, if you are several screens deep in a stack and want to dismiss all of them to go back to the first screen. In this case, we know that we want to go back to `Home` so we can use `navigate('Home')` (not `push`! try that out and see the difference). Another alternative would be `navigation.popToTop()`, which goes back to the first screen in the stack.
+Another common requirement is to be able to go back _multiple_ screens -- for example, if you are several screens deep in a stack and want to dismiss all of them to go back to the first screen. In this case, we know that we want to go back to `Home` so we can use `popTo('Home')`. Another alternative would be `navigation.popToTop()`, which goes back to the first screen in the stack.
 
 <samp id="pop-to-top" />
 
@@ -146,7 +146,7 @@ function DetailsScreen({ navigation }) {
         title="Go to Details... again"
         onPress={() => navigation.push('Details')}
       />
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button title="Go to Home" onPress={() => navigation.popTo('Home')} />
       <Button title="Go back" onPress={() => navigation.goBack()} />
       <Button
         title="Go back to first screen in stack"
@@ -162,5 +162,5 @@ function DetailsScreen({ navigation }) {
 - `navigation.navigate('RouteName')` pushes a new route to the native stack navigator if it's not already in the stack, otherwise it jumps to that screen.
 - We can call `navigation.push('RouteName')` as many times as we like and it will continue pushing routes.
 - The header bar will automatically show a back button, but you can programmatically go back by calling `navigation.goBack()`. On Android, the hardware back button just works as expected.
-- You can go back to an existing screen in the stack with `navigation.navigate('RouteName')`, and you can go back to the first screen in the stack with `navigation.popToTop()`.
+- You can go back to an existing screen in the stack with `navigation.popTo('RouteName')`, and you can go back to the first screen in the stack with `navigation.popToTop()`.
 - The `navigation` prop is available to all screen components (components defined as screens in route configuration and rendered by React Navigation as a route).

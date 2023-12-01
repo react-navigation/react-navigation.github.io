@@ -23,11 +23,8 @@ The library exports several action creators under the `CommonActions` namespace.
 
 The `navigate` action allows to navigate to a specific route. It takes the following arguments:
 
-- `name` - _string_ - A destination name of the route that has been registered somewhere..
-- `key` - _string_ - The identifier for the route to navigate to. Navigate back to this route if it already exists..
-- `params` - _object_ - Params to merge into the destination route..
-
-The options object passed should at least contain a `key` or `name` property, and optionally `params`. If both `key` and `name` are passed, stack navigator will create a new route with the specified key if no matches were found.
+- `name` - _string_ - A destination name of the screen in the current or a parent navigator.
+- `params` - _object_ - Params to use for the destination route.
 
 <samp id="common-actions" />
 
@@ -44,9 +41,18 @@ navigation.dispatch(
 );
 ```
 
-In a [stack navigator](stack-navigator.md), calling `navigate` with a screen name will result in different behavior based on if the screen is already present or not. If the screen is already present in the stack's history, it'll go back to that screen and remove any screens after that. If the screen is not present, it'll push a new screen.
+In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack-navigator.md)), calling `navigate` with a screen name will have the following behavior:
 
-By default, the screen is identified by its name. But you can also customize it to take the params into account by using the [`getId`](screen.md#getid) prop.
+- If you're already on a screen with the same name, it will update its params and not push a new screen.
+- If you're on a different screen, it will push the new screen onto the stack.
+- If the [`getId`](screen.md#getid) prop is specified, and another screen in the stack has the same ID, it will navigate to that screen and update its params instead.
+
+The `navigate` action can also accepts an object as the argument with the following properties:
+
+- `name` - _string_ - A destination name of the screen in the current or a parent navigator
+- `params` - _object_ - Params to use for the destination route.
+- `merge` - _boolean_ - Whether we should merge the params of the current route with the provided `params`. Defaults to `false`.
+- `path` - _string_ - The path (from deep link or universal link) to associate with the screen.
 
 ### reset
 

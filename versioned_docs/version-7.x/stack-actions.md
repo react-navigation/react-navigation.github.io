@@ -76,6 +76,27 @@ const popAction = StackActions.pop(1);
 navigation.dispatch(popAction);
 ```
 
+### popTo
+
+The `popTo` action takes you back to a previous screen in the stack by the name. It also allows you to pass params to the route.
+
+If a matching screen is not found in the stack, this will pop the current screen and add a new screen with the specified name and params. This behavior is useful when the screen was opened from a deep link etc. and a previous screen with the name may or may not already be in the stack.
+
+The method accepts the following arguments:
+
+- `name` - _string_ - Name of the route to navigate to.
+- `params` - _object_ - Screen params to pass to the destination route.
+
+If a matching screen is not found in the stack, this will pop the current screen and add a new screen with the specified name and params. This behavior is useful when the screen was opened from a deep link and a previous screen with the name may or may not already be in the stack.
+
+```js
+import { StackActions } from '@react-navigation/native';
+
+const popToAction = StackActions.popTo('Profile', { user: 'jane' });
+
+navigation.dispatch(popToAction);
+```
+
 ### popToTop
 
 The `popToTop` action takes you back to the first screen in the stack, dismissing all the others. It's functionally identical to `StackActions.pop({n: currentIndex})`.

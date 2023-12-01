@@ -37,7 +37,7 @@ The `navigationInChildEnabled` prop will be removed in the next major.
 
 Previously, `navigate` method navigated back if the screen already exists in the stack. We have seen many people get confused by this behavior.
 
-To avoid this confusion, we have removed the going back behavior from `navigate` and added a new method `popTo` to explicitly go back to a specific screen in the stack:
+To avoid this confusion, we have removed the going back behavior from `navigate` and added a [new method `popTo`](stack-actions.md#popto) to explicitly go back to a specific screen in the stack:
 
 ```diff
 - navigation.navigate('PreviousScreen', { foo: 42 });
