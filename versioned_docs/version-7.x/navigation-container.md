@@ -4,7 +4,7 @@ title: NavigationContainer
 sidebar_label: NavigationContainer
 ---
 
-The `NavigationContainer` is responsible for managing your app state and linking your top-level navigator to the app environment.
+The `NavigationContainer` is responsible for managing your app's navigation state and linking your top-level navigator to the app environment.
 
 The container takes care of platform specific integration and provides various useful functionality:
 
@@ -38,16 +38,17 @@ Example:
 <samp id="using-refs" />
 
 ```js
-import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 
 function App() {
   const navigationRef = useNavigationContainerRef(); // You can also use a regular ref with `React.useRef()`
 
   return (
     <View style={{ flex: 1 }}>
-      <Button onPress={() => navigationRef.navigate('Home')}>
-        Go home
-      </Button>
+      <Button onPress={() => navigationRef.navigate('Home')}>Go home</Button>
       <NavigationContainer ref={navigationRef}>{/* ... */}</NavigationContainer>
     </View>
   );
@@ -155,9 +156,7 @@ Prop that accepts initial state for the navigator. This can be useful for cases 
 Example:
 
 ```js
-<NavigationContainer
-  initialState={initialState}
->
+<NavigationContainer initialState={initialState}>
   {/* ... */}
 </NavigationContainer>
 ```
@@ -417,7 +416,7 @@ import messaging from '@react-native-firebase/messaging';
   }}
 >
   {/* content */}
-</NavigationContainer>
+</NavigationContainer>;
 ```
 
 This option is not available on Web.
@@ -469,7 +468,7 @@ import messaging from '@react-native-firebase/messaging';
   }}
 >
   {/* content */}
-</NavigationContainer>
+</NavigationContainer>;
 ```
 
 This option is not available on Web.
@@ -569,8 +568,52 @@ function App() {
 
 Custom theme to use for the navigation components such as the header, tab bar etc. See [theming guide](themes.md) for more details and usage guide.
 
-### `independent`
+### `navigationInChildEnabled`
 
-Whether this navigation container should be independent of parent containers. If this is not set to `true`, this container cannot be nested inside another container. Setting it to `true` disconnects any children navigators from parent container.
+:::warning
 
-You probably don't want to set this to `true` in a typical React Native app. This is only useful if you have navigation trees that work like their own mini-apps and don't need to navigate to the screens outside of them.
+This prop exists for backward compatibility reasons. It's not recommended to use it in new projects. It will be removed in a future release.
+
+:::
+
+In previous versions of React Navigation, it was possible to navigate to a screen in a nested navigator without specifying the name of the parent screen, i.e. `navigation.navigate(ScreenName)` instead of `navigation.navigate(ParentScreenName, { screen: ScreenName })`.
+
+However, it has a few issues:
+
+- It only works if the navigator is already mounted - making navigation coupled to other logic.
+- It doesn't work with the TypeScript types.
+
+The `navigationInChildEnabled` prop allows you to opt-in to this behavior to make it easier to migrate legacy code. It's disabled by default.
+
+For new code, see [navigating to a screen in a nested navigator](nesting-navigators.md#navigating-to-a-screen-in-a-nested-navigator) instead.
+
+## Independent navigation containers
+
+:::warning
+
+This is an advanced use case. Don't use this unless you are 100% sure that you need it.
+
+:::
+
+In most apps, there will be only a single `NavigationContainer`. Nesting multiple `NavigationContainer`s will throw an error. However, in rare cases, it may be useful to have multiple independent navigation trees, e.g. including a mini-app inside a larger app.
+
+You can wrap the nested `NavigationContainer` with the `NavigationIndependentTree` component to make it independent from the parent navigation tree:
+
+```js
+import {
+  NavigationContainer,
+  NavigationIndependentTree,
+} from '@react-navigation/native';
+
+function NestedApp() {
+  return (
+    <NavigationIndependentTree>
+      <NavigationContainer>{/* content */}</NavigationContainer>
+    </NavigationIndependentTree>
+  );
+}
+```
+
+Doing this disconnects any children navigators from the parent container and doesn't allow navigation between them.
+
+Avoid using this if you need to integrate with third-party components such as modals or bottom sheets. Consider using a [custom navigator](custom-navigators.md) instead.
