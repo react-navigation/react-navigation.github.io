@@ -70,7 +70,7 @@ npx pod-install ios
 ```
 
 `react-native-screens` package requires one additional configuration step to properly
-work on Android devices. Edit `MainActivity.kt` file which is located in `android/app/src/main/java/<your package name>/MainActivity.kt`.
+work on Android devices. Edit `MainActivity.kt` or `MainActivity.java` file which is located under `android/app/src/main/java/<your package name>/`.
 
 Add the highlighted code to the body of `MainActivity` class:
 
