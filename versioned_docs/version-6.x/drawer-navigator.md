@@ -12,7 +12,7 @@ Drawer Navigator renders a navigation drawer on the side of the screen which can
   </video>
 </div>
 
-This wraps [`react-native-drawer-layout`](drawer-layout.md). If you want to use the tab view without React Navigation integration, use the library directly instead.
+This wraps [`react-native-drawer-layout`](drawer-layout.md). If you want to use the drawer without React Navigation integration, use the library directly instead.
 
 ## Installation
 
