@@ -40,7 +40,7 @@ const LeftDrawerScreen = () => {
 };
 
 function RightDrawerScreen() {
-  const [letDrawerOpen, setLeftDrawerOpen] = React.useState(false);
+  const [rightDrawerOpen, setRightDrawerOpen] = React.useState(false);
 
   return (
     <Drawer
@@ -101,7 +101,7 @@ const LeftDrawerScreen = () => {
 };
 
 function RightDrawerScreen() {
-  const [letDrawerOpen, setLeftDrawerOpen] = React.useState(false);
+  const [rightDrawerOpen, setRightDrawerOpen] = React.useState(false);
 
   const value = React.useMemo(
     () => ({

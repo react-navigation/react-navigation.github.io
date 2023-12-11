@@ -40,7 +40,7 @@ const LeftDrawerScreen = () => {
 };
 
 function RightDrawerScreen() {
-  const [letDrawerOpen, setLeftDrawerOpen] = React.useState(false);
+  const [rightDrawerOpen, setRightDrawerOpen] = React.useState(false);
 
   return (
     <Drawer
@@ -101,7 +101,7 @@ const LeftDrawerScreen = () => {
 };
 
 function RightDrawerScreen() {
-  const [letDrawerOpen, setLeftDrawerOpen] = React.useState(false);
+  const [rightDrawerOpen, setRightDrawerOpen] = React.useState(false);
 
   const value = React.useMemo(
     () => ({
@@ -281,5 +281,5 @@ Here, we are passing `"LeftDrawer"` and `"RightDrawer"` strings (you can use any
 
 - To have multiple drawers, you can use [`react-native-drawer-layout`](drawer-layout.md) directly in combination with a drawer navigator.
 - The [`drawerPosition`](drawer-layout.md#drawerposition) prop can be used to position the drawer on the right.
-- The methods to control the drawer can be passed down using context API.
+- The methods to control the drawer can be passed down using context API when using [`react-native-drawer-layout`](drawer-layout.md).
 - When nesting multiple navigators, you can use [`navigation.getParent`](navigation-prop.md#getparent) in combination with the [`id` prop](drawer-navigator.md#id) to refer to the desired drawer.
