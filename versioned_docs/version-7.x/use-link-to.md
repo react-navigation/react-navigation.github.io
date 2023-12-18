@@ -22,7 +22,13 @@ function Home() {
 }
 ```
 
-This is a low-level hook used to build more complex behavior on top. We recommended to use the [`useLinkProps` hook](use-link-props.md) to build your custom link components instead of using this hook directly. It will ensure that your component is properly accessible on the web.
+This is a low-level hook used to build more complex behavior on top. We recommended using the [`useLinkProps` hook](use-link-props.md) to build your custom link components instead of using this hook directly. It will ensure that your component is properly accessible on the web.
+
+:::warning
+
+Navigating via `href` strings is not type-safe. If you want to navigate to a screen with type-safety, it's recommended to use screen names directly.
+
+:::
 
 ## Using with class component
 

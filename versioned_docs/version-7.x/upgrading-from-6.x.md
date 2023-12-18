@@ -156,18 +156,20 @@ or
 
 With this change, you'd now have full type-safety when using the `Link` component given that you have [configured the global type](typescript.md#specifying-default-types-for-usenavigation-link-ref-etc).
 
-### The `useLinkTo` and `useLinkBuilder` hooks are merged into `useLinkTools`
+### The `useLinkBuilder` hooks now returns an object instead of a function
 
-Previously, the `useLinkTo` and `useLinkBuilder` hooks could be used to build a path for a screen or action for a path respectively. This was primarily useful for building custom navigators. Now, both of these hooks are merged into a single `useLinkTools` hook:
+Previously, the `useLinkBuilder` hooks returned a function to build a `href` for a screen - which is primarily useful for building custom navigators. Now, it returns an object with `buildHref` and `buildAction` methods:
 
 ```js
-const { buildHref, buildAction } = useLinkTools();
+const { buildHref, buildAction } = useLinkBuilder();
 
 const href = buildHref('Details', { foo: 42 }); // '/details?foo=42'
 const action = buildAction('/details?foo=42'); // { type: 'NAVIGATE', payload: { name: 'Details', params: { foo: 42 } } }
 ```
 
-Note that this hook is intended to be used by custom navigators and not by end users. For end users, the `Link` component and `useLinkProps` are the recommended way to navigate.
+The `buildHref` method acts the same as the previously returned function. The new `buildAction` method can be used to build a navigation action from a `href` string.
+
+Note that this hook is intended to be primarily used by custom navigators and not by end users. For end users, the `Link` component and `useLinkProps` are the recommended way to navigate.
 
 ### The flipper devtools plugin is now removed
 
