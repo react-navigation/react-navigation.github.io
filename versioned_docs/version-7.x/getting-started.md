@@ -4,6 +4,9 @@ title: Getting started
 sidebar_label: Getting started
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 What follows within the _Fundamentals_ section of this documentation is a tour of the most important aspects of React Navigation. It should cover enough for you to know how to build your typical small mobile application, and give you the background that you need to dive deeper into the more advanced parts of React Navigation.
 
 ## Pre-requisites
@@ -124,15 +127,15 @@ There are 2 primary ways to configure the navigators:
 
 ### Static configuration
 
-The static configuration API has reduced boilerplate and simplifies things such as TypeScript types and deep linking. If you're staring a new project or are new to React Navigation, this is the **recommended way** to set up your app.
+The static configuration API has reduced boilerplate and simplifies things such as TypeScript types and deep linking. If you're starting a new project or are new to React Navigation, this is the **recommended way** to set up your app.
 
-To get started with static configuration, continue to ["Getting started with static API"](hello-react-navigation-static.md).
+Continue to ["Hello React Navigation"](hello-react-navigation.md?config=static) to start writing some code with the Static API.
 
 ### Dynamic configuration
 
-The dynamic configuration allows for more flexibility, but requires more boilerplate and configuration.
+The dynamic configuration allows for more flexibility but requires more boilerplate and configuration.
 
-To get started with dynamic configuration, first we need to wrap your app in `NavigationContainer`. Usually you'd do this in your entry file, such as `index.js` or `App.js`:
+To get started with dynamic configuration, first, we need to wrap your app in `NavigationContainer`. Usually, you'd do this in your entry file, such as `index.js` or `App.js`:
 
 ```js
 import * as React from 'react';
@@ -151,4 +154,4 @@ In a typical React Native app, the `NavigationContainer` should be only used onc
 
 :::
 
-Continue to ["Getting started with dynamic API"](hello-react-navigation.md) to start writing some code.
+Continue to ["Hello React Navigation"](hello-react-navigation.md?config=dynamic) to start writing some code with the Dynamic API.

@@ -4,6 +4,9 @@ title: Passing parameters to routes
 sidebar_label: Passing parameters to routes
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Remember when I said "more on that later when we talk about `params`!"? Well, the time has come.
 
 Now that we know how to create a stack navigator with some routes and [navigate between those routes](navigating.md), let's look at how we can pass data to routes when we navigate to them.
@@ -71,9 +74,10 @@ function DetailsScreen({ route }) {
 
 ## Initial params
 
-You can also pass some initial params to a screen. If you didn't specify any params when navigating to this screen, the initial params will be used. They are also shallow merged with any params that you pass. Initial params can be specified with an `initialParams` prop:
+You can also pass some initial params to a screen. If you didn't specify any params when navigating to this screen, the initial params will be used. They are also shallow merged with any params that you pass. Initial params can be specified in `initialParams`:
 
-For static configuration:
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
 ```js
 {
@@ -84,7 +88,8 @@ For static configuration:
 }
 ```
 
-For dynamic configuration:
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 <samp id="initial-params" />
 
@@ -95,6 +100,9 @@ For dynamic configuration:
   initialParams={{ itemId: 42 }}
 />
 ```
+
+</TabItem>
+</Tabs>
 
 ## Updating params
 
