@@ -106,7 +106,7 @@ You can also pass some initial params to a screen. If you didn't specify any par
 
 ## Updating params
 
-Screens can also update their params, like they can update their state. The `navigation.setParams` method lets you update the params of a screen. Refer to the [API reference for `setParams`](navigation-prop.md#setparams) for more details.
+Screens can also update their params, like they can update their state. The `navigation.setParams` method lets you update the params of a screen. Refer to the [API reference for `setParams`](navigation-object.md#setparams) for more details.
 
 Basic usage:
 
@@ -120,7 +120,7 @@ navigation.setParams({
 
 :::note
 
-Avoid using `setParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-prop.md#setoptions) instead.
+Avoid using `setParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-object.md#setoptions) instead.
 
 :::
 

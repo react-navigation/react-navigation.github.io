@@ -49,7 +49,7 @@ Options to configure how the screens inside the group get presented in the navig
 </Stack.Group>
 ```
 
-When you pass a function, it'll receive the [`route`](route-prop.md) and [`navigation`](navigation-prop.md):
+When you pass a function, it'll receive the [`route`](route-object.md) and [`navigation`](navigation-object.md):
 
 ```js
 <Stack.Group

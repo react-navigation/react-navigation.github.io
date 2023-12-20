@@ -108,5 +108,5 @@ If you want to render different things based on if the screen is focused or not,
 
 ## Summary
 
-- While React's lifecycle methods are still valid, React Navigation adds more events that you can subscribe to through the `navigation` prop.
+- While React's lifecycle methods are still valid, React Navigation adds more events that you can subscribe to through the `navigation` object.
 - You may also use the `useFocusEffect` or `useIsFocused` hooks.

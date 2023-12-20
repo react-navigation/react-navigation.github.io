@@ -91,7 +91,7 @@ The `Drawer.Navigator` component accepts following props:
 
 #### `id`
 
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
+Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-object.md#getparent) to refer to this navigator in a child navigator.
 
 #### `initialRouteName`
 
@@ -529,7 +529,7 @@ If you have custom drawer content, make sure to emit this event.
 
 ### Helpers
 
-The drawer navigator adds the following methods to the navigation prop:
+The drawer navigator adds the following methods to the navigation object:
 
 #### `openDrawer`
 

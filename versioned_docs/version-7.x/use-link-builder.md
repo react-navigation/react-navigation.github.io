@@ -42,7 +42,7 @@ There are couple of important things to note:
 
 ## `buildAction`
 
-The `buildAction` method lets us parse a `href` string into an action object that can be used with [`navigation.dispatch`](navigation-prop.md#dispatch) to navigate to the relevant screen.
+The `buildAction` method lets us parse a `href` string into an action object that can be used with [`navigation.dispatch`](navigation-object.md#dispatch) to navigate to the relevant screen.
 
 ```js
 import { Link, CommonActions, useLinkBuilder } from '@react-navigation/native';

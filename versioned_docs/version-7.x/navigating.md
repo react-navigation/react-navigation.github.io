@@ -24,7 +24,7 @@ Another way to write this would be:
 </a>
 ```
 
-We'll do something similar to the latter, but rather than using a `window.location` global, we'll use the `navigation` prop that is passed down to our screen components.
+We'll do something similar to the latter, but rather than using a `window.location` global, we'll use the `navigation` object that's accessible in our screen components.
 
 ## Navigating to a new screen
 
@@ -55,7 +55,7 @@ function HomeScreen() {
 
 Let's break this down:
 
-- `navigation` - the `navigation` object is returned from the [`useNavigation`](use-navigation.md) hook (more about this later in ["The navigation prop in depth"](navigation-prop.md)).
+- `navigation` - the `navigation` object is returned from the [`useNavigation`](use-navigation.md) hook (more about this later in ["The navigation object in depth"](navigation-object.md)).
 - `navigate('Details')` - we call the `navigate` function (on the `navigation` object &mdash; naming is hard!) with the name of the route that we'd like to move the user to.
 
 :::note
@@ -171,4 +171,4 @@ function DetailsScreen() {
 - We can call `navigation.push('RouteName')` as many times as we like and it will continue pushing routes.
 - The header bar will automatically show a back button, but you can programmatically go back by calling `navigation.goBack()`. On Android, the hardware back button just works as expected.
 - You can go back to an existing screen in the stack with `navigation.popTo('RouteName')`, and you can go back to the first screen in the stack with `navigation.popToTop()`.
-- The `navigation` prop is available to all screen components (components defined as screens in route configuration and rendered by React Navigation as a route).
+- The `navigation` object is available to all screen components with the [`useNavigation`](use-navigation.md) hook.

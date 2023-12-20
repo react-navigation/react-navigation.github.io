@@ -53,8 +53,8 @@ function StackScreen() {
 
 The argument that is passed in to the `options` function is an object with the following properties:
 
-- `navigation` - The [navigation prop](navigation-prop.md) for the screen.
-- `route` - The [route prop](route-prop.md) for the screen
+- `navigation` - The [navigation object](navigation-object.md) for the screen.
+- `route` - The [route object](route-object.md) for the screen
 
 We only needed the `route` prop in the above example but you may in some cases want to use `navigation` as well.
 

@@ -4,11 +4,9 @@ title: useNavigation
 sidebar_label: useNavigation
 ---
 
-`useNavigation` is a hook which gives access to `navigation` object. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
+`useNavigation` is a hook that gives access to `navigation` object. It's useful when you cannot pass the `navigation` object as a prop to the component directly, or don't want to pass it in case of a deeply nested child.
 
-`useNavigation()` returns the `navigation` prop of the screen it's inside.
-
-## Example
+The `useNavigation` hook returns the `navigation` object of the screen where it's used:
 
 <samp id="use-navigation-example" />
 
@@ -31,7 +29,7 @@ function MyBackButton() {
 }
 ```
 
-See the documentation for the [`navigation` prop](navigation-prop.md) for more info.
+See the documentation for the [`navigation` object](navigation-object.md) for more info.
 
 ## Using with class component
 

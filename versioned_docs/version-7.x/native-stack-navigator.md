@@ -49,7 +49,7 @@ The `Stack.Navigator` component accepts following props:
 
 #### `id`
 
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
+Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-object.md#getparent) to refer to this navigator in a child navigator.
 
 #### `initialRouteName`
 
@@ -650,7 +650,7 @@ React.useEffect(() => {
 
 ### Helpers
 
-The nativestack navigator adds the following methods to the navigation prop:
+The nativestack navigator adds the following methods to the navigation object:
 
 #### `replace`
 

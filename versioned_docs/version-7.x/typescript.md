@@ -220,7 +220,7 @@ Prefer [specifying a default type](#specifying-default-types-for-usenavigation-l
 
 :::
 
-To annotate the `navigation` prop that we get from `useNavigation`, we can use a type parameter:
+To annotate the `navigation` object that we get from `useNavigation`, we can use a type parameter:
 
 ```ts
 const navigation = useNavigation<ProfileScreenNavigationProp>();
@@ -231,7 +231,7 @@ const navigation = useNavigation<ProfileScreenNavigationProp>();
 :::danger
 
 Annotating `useRoute` isn't type-safe because the type parameter cannot be statically verified.
-Prefer using the [`route` prop](route-prop.md) instead when possible. Use `useRoute` for generic code that doesn't need specific route type.
+Prefer using the [`route` prop](route-object.md) instead when possible. Use `useRoute` for generic code that doesn't need specific route type.
 
 :::
 

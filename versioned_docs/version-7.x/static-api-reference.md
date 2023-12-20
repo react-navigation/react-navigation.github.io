@@ -136,7 +136,7 @@ const RootStack = createNativeStackNavigator({
 });
 ```
 
-The screen components defined with the static configuration receive the [`route`](route-prop.md) prop. Unlike the dynamic API, the `navigation` object must be accessed via the [`useNavigation`](use-navigation.md) hook.
+The screen components defined with the static configuration receive the [`route`](route-object.md) prop. Unlike the dynamic API, they don't get the `navigation` object as prop and it must be accessed via the [`useNavigation`](use-navigation.md) hook.
 
 #### `linking`
 
@@ -225,7 +225,7 @@ const RootStack = createNativeStackNavigator({
 });
 ```
 
-When you pass a function, it'll receive the [`route`](route-prop.md) and [`navigation`](navigation-prop.md):
+When you pass a function, it'll receive the [`route`](route-object.md) and [`navigation`](navigation-object.md):
 
 ```js
 const RootStack = createNativeStackNavigator({

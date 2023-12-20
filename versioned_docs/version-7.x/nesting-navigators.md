@@ -72,11 +72,11 @@ For example, if you're calling `navigation.goBack()` in a nested screen, it'll o
 
 ### Navigator specific methods are available in the navigators nested inside
 
-For example, if you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer`, `toggleDrawer` methods etc. will also be available on the `navigation` prop in the screen's inside the stack navigator. But say you have a stack navigator as the parent of the drawer, then the screens inside the stack navigator won't have access to these methods, because they aren't nested inside the drawer.
+For example, if you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer`, `toggleDrawer` methods etc. will also be available on the `navigation` object in the screens inside the stack navigator. But say you have a stack navigator as the parent of the drawer, then the screens inside the stack navigator won't have access to these methods, because they aren't nested inside the drawer.
 
-Similarly, if you have a tab navigator inside stack navigator, the screens in the tab navigator will get the `push` and `replace` methods for stack in their `navigation` prop.
+Similarly, if you have a tab navigator inside stack navigator, the screens in the tab navigator will get the `push` and `replace` methods for stack in their `navigation` object.
 
-If you need to dispatch actions to the nested child navigators from a parent, you can use [`navigation.dispatch`](navigation-prop.md#dispatch):
+If you need to dispatch actions to the nested child navigators from a parent, you can use [`navigation.dispatch`](navigation-object.md#dispatch):
 
 ```js
 navigation.dispatch(DrawerActions.toggleDrawer());
@@ -86,7 +86,7 @@ navigation.dispatch(DrawerActions.toggleDrawer());
 
 For example, if you have a stack navigator nested inside a tab navigator, the screens in the stack navigator won't receive the events emitted by the parent tab navigator such as (`tabPress`) when using `navigation.addListener`.
 
-To receive events from parent navigator, you can explicitly listen to parent's events with [`navigation.getParent`](navigation-prop.md#getparent):
+To receive events from parent navigator, you can explicitly listen to parent's events with [`navigation.getParent`](navigation-object.md#getparent):
 
 <samp id="nested-navigators-events" />
 
@@ -195,7 +195,7 @@ In the above case, you're navigating to the `Media` screen, which is in a naviga
 
 ### Rendering initial route defined in the navigator
 
-By default, when you navigate a screen in the nested navigator, the specified screen is used as the initial screen and the initial route prop on the navigator is ignored. This behaviour is different from the React Navigation 4.
+By default, when you navigate a screen in the nested navigator, the specified screen is used as the initial screen and the `initialRouteName` prop on the navigator is ignored. This behaviour is different from the React Navigation 4.
 
 If you need to render the initial route specified in the navigator, you can disable the behaviour of using the specified screen as the initial screen by setting `initial: false`:
 

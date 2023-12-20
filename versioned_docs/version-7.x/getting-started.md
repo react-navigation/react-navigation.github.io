@@ -129,7 +129,7 @@ There are 2 primary ways to configure the navigators:
 
 The static configuration API has reduced boilerplate and simplifies things such as TypeScript types and deep linking. If you're starting a new project or are new to React Navigation, this is the **recommended way** to set up your app.
 
-Continue to ["Hello React Navigation"](hello-react-navigation.md?config=static) to start writing some code with the Static API.
+Continue to ["Hello React Navigation"](hello-react-navigation.md?config=static) to start writing some code with the static API.
 
 ### Dynamic configuration
 
@@ -154,4 +154,4 @@ In a typical React Native app, the `NavigationContainer` should be only used onc
 
 :::
 
-Continue to ["Hello React Navigation"](hello-react-navigation.md?config=dynamic) to start writing some code with the Dynamic API.
+Continue to ["Hello React Navigation"](hello-react-navigation.md?config=dynamic) to start writing some code with the dynamic API.

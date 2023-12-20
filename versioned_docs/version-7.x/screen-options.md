@@ -31,7 +31,7 @@ You can pass a prop named `options` to the `Screen` component to configure a scr
 </Stack.Navigator>
 ```
 
-You can also pass a function to `options`. The function will receive the [`navigation` prop](navigation-prop.md) and the [`route` prop](route-prop.md) for that screen. This can be useful if you want to perform navigation in your options:
+You can also pass a function to `options`. The function will receive the [`navigation` object](navigation-object.md) and the [`route` prop](route-object.md) for that screen. This can be useful if you want to perform navigation in your options:
 
 ```js
 <Stack.Screen
@@ -69,7 +69,7 @@ Example:
 </Stack.Navigator>
 ```
 
-Similar to `options`, you can also pass a function to `screenOptions`. The function will receive the [`navigation` prop](navigation-prop.md) and the [`route` prop](route-prop.md) for each screen. This can be useful if you want to configure options for all the screens in one place based on the route:
+Similar to `options`, you can also pass a function to `screenOptions`. The function will receive the [`navigation` object](navigation-object.md) and the [`route` object](route-object.md) for each screen. This can be useful if you want to configure options for all the screens in one place based on the route:
 
 ```js
 <Stack.Navigator>
@@ -102,7 +102,7 @@ Example:
 </Stack.Navigator>
 ```
 
-Similar to `options`, you can also pass a function to `screenOptions`. The function will receive the [`navigation` prop](navigation-prop.md) and the [`route` prop](route-prop.md) for each screen. This can be useful if you want to configure options for all the screens in one place based on the route:
+Similar to `options`, you can also pass a function to `screenOptions`. The function will receive the [`navigation` object](navigation-object.md) and the [`route` object](route-object.md) for each screen. This can be useful if you want to configure options for all the screens in one place based on the route:
 
 <samp id="screen-options-navigator" />
 
@@ -132,7 +132,7 @@ Similar to `options`, you can also pass a function to `screenOptions`. The funct
 
 ### `navigation.setOptions` method
 
-The `navigation` prop has a `setOptions` method that lets you update the options for a screen from within a component. See [navigation prop's docs](navigation-prop.md#setoptions) for more details.
+The `navigation` object has a `setOptions` method that lets you update the options for a screen from within a component. See [navigation object's docs](navigation-object.md#setoptions) for more details.
 
 ```js
 <Button
