@@ -401,6 +401,12 @@ const RootStack = createStackNavigator({
     EditPost,
   },
 });
+
+const Navigation = createStaticNavigation(RootStack);
+
+function App() {
+  return <Navigation />;
+}
 ```
 
 </TabItem>
