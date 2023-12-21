@@ -21,7 +21,11 @@ The libraries we've installed so far are the building blocks and shared foundati
 npm install @react-navigation/native-stack@next
 ```
 
-> 💡 `@react-navigation/native-stack` depends on `react-native-screens` and the other libraries that we installed in [Getting started](getting-started.md). If you haven't installed those yet, head over to that page and follow the installation instructions.
+:::info
+
+`@react-navigation/native-stack` depends on `react-native-screens` and the other libraries that we installed in [Getting started](getting-started.md). If you haven't installed those yet, head over to that page and follow the installation instructions.
+
+:::
 
 ### Creating a native stack navigator
 

@@ -20,7 +20,11 @@ npm install @react-navigation/native-stack@next
 
 ## API Definition
 
-> 💡 If you encounter any bugs while using `createNativeStackNavigator`, please open issues on [`react-native-screens`](https://github.com/software-mansion/react-native-screens) rather than the `react-navigation` repository!
+:::info
+
+If you encounter any bugs while using `createNativeStackNavigator`, please open issues on [`react-native-screens`](https://github.com/software-mansion/react-native-screens) rather than the `react-navigation` repository!
+
+:::
 
 To use this navigator, import it from `@react-navigation/native-stack`:
 
