@@ -44,7 +44,11 @@ function Home() {
   const { siteConfig = {} } = context;
 
   return (
-    <Layout title={siteConfig.title} description={siteConfig.tagline}>
+    <Layout
+      title={siteConfig.title}
+      description={siteConfig.tagline}
+      wrapperClassName="full-width"
+    >
       <Splash />
       <Features />
       <Sponsors />

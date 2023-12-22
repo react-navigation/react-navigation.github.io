@@ -44,6 +44,7 @@
       "navigation-events",
       {
         "type": "category",
+        "collapsible": true,
         "label": "Navigators",
         "items": [
           "stack-navigator",
@@ -57,6 +58,7 @@
       },
       {
         "type": "category",
+        "collapsible": true,
         "label": "Actions",
         "items": [
           "navigation-actions",
@@ -67,6 +69,7 @@
       },
       {
         "type": "category",
+        "collapsible": true,
         "label": "Helpers",
         "items": ["with-navigation", "with-navigation-focus", "scrollables"]
       }

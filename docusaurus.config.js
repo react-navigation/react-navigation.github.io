@@ -154,6 +154,7 @@ export default {
           includeCurrentVersion: false,
           lastVersion: '6.x',
           breadcrumbs: false,
+          sidebarCollapsed: false,
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
           rehypePlugins: [
             [rehypeCodeblockMeta, { match: { snack: true, lang: true } }],

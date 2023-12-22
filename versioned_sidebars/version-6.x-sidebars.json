@@ -66,6 +66,7 @@
       "link",
       {
         "type": "category",
+        "collapsible": true,
         "label": "Hooks",
         "items": [
           "use-navigation",
@@ -82,6 +83,7 @@
       },
       {
         "type": "category",
+        "collapsible": true,
         "label": "Actions",
         "items": [
           "navigation-actions",
