@@ -116,7 +116,7 @@ When you use a navigator (such as stack navigator), you'll need to follow the in
 
 ## Wrapping your app in `NavigationContainer`
 
-Now, we need to wrap the whole app in `NavigationContainer`. Usually you'd do this in your entry file, such as `index.js` or `App.js`:
+Now, we need to wrap the whole app in `NavigationContainer`. Usually you'd do this in your entry file, such as `index.js`, `App.js` or `App.tsx`:
 
 ```js
 import * as React from 'react';
