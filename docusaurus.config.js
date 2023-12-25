@@ -47,7 +47,6 @@ export default {
       ],
     },
     footer: {
-      style: 'dark',
       links: [
         {
           title: 'Docs',
@@ -146,6 +145,7 @@ export default {
             'https://github.com/react-navigation/react-navigation.github.io/edit/main/',
           includeCurrentVersion: false,
           lastVersion: '6.x',
+          breadcrumbs: false,
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
           rehypePlugins: [
             [rehypeCodeblockMeta, { match: { snack: true } }],

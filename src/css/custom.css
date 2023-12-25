@@ -13,10 +13,10 @@
   --ifm-color-primary-light: #7a63b6;
   --ifm-color-primary-lighter: #816cba;
   --ifm-color-primary-lightest: #9886c6;
-  --ifm-code-font-size: 95%;
+
   --ifm-hero-background-color: #6b52ae;
   --ifm-hero-text-color: #fff;
-
+  --ifm-footer-background-color:  #f7f7ff;
   --ifm-home-color-text: #414360;
   --ifm-home-color-background: #f7f7ff;
   --ifm-home-color-background-secondary: #d5d6f5;
@@ -25,9 +25,11 @@
   --ifm-home-color-black: #25292e;
   --ifm-home-color-white: #f7f7ff;
 
-  --ifm-menu-color-background-active: rgb(107, 82, 174, 0.1);
+  --ifm-menu-color-background-active: rgba(107, 82, 174, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(107, 82, 174, 0.1);
 
-  --docusaurus-highlighted-code-line-bg: #ebebeb;
+  --ifm-tabs-padding-vertical: 0.5rem;
+  --ifm-alert-border-left-width: 0;
 }
 
 :root[data-theme='dark'] {
@@ -39,6 +41,7 @@
   --ifm-color-primary-lighter: #c5bbdf;
   --ifm-color-primary-lightest: #e4e0f0;
 
+  --ifm-footer-background-color: #25292f;
   --ifm-home-color-text: #f7f7ff;
   --ifm-home-color-background: #414360;
   --ifm-home-color-background-secondary: #585b82;
@@ -61,24 +64,40 @@
 }
 
 .menu__link--sublist-caret:after {
-  background: var(--ifm-menu-link-sublist-icon) 50% / 1.5rem 1.5rem;
+  background: var(--ifm-menu-link-sublist-icon) 50% / 1.25rem 1.25rem;
+  opacity: 0.5;
 }
 
-.docusaurus-highlight-code-line {
-  background-color: rgb(72, 77, 91);
-  display: block;
-  margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
+.theme-doc-sidebar-container {
+  border-right: none !important;
 }
 
-blockquote {
-  background-color: rgba(226, 232, 125, 0.2);
-  border-left: 5px solid rgba(226, 232, 125, 0.5);
+.table-of-contents__left-border {
+  border-left: none;
 }
 
-[data-theme='dark'] blockquote {
-  background-color: #1c1c1c;
-  border-left: 5px solid var(--ifm-color-primary);
+.pagination-nav__link {
+  border: none;
+}
+
+.pagination-nav__label::before, .pagination-nav__label::after {
+  display: none;
+}
+
+.pagination-nav__link--next .pagination-nav__sublabel::after {
+  content: ' →';
+}
+
+.pagination-nav__link--prev .pagination-nav__sublabel::before {
+  content: '← ';
+}
+
+.tabs__item {
+  border-bottom-width: 2px;
+}
+
+.theme-edit-this-page svg, .theme-admonition svg {
+  transform: scale(0.8);
 }
 
 samp {
