@@ -1,5 +1,6 @@
 import path from 'path';
 import remarkNpm2Yarn from '@docusaurus/remark-plugin-npm2yarn';
+import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.mjs';
 
 export default {
   title: 'React Navigation',
@@ -146,6 +147,9 @@ export default {
           includeCurrentVersion: false,
           lastVersion: '6.x',
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
+          rehypePlugins: [
+            [rehypeCodeblockMeta, { match: { snack: true } }],
+          ],
         },
         blog: {
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
