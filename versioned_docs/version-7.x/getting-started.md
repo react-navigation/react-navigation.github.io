@@ -78,29 +78,37 @@ work on Android devices. Edit `MainActivity.kt` or `MainActivity.java` file whic
 Add the highlighted code to the body of `MainActivity` class:
 
 <Tabs>
-  <TabItem value='kotlin' label='Kotlin' default>
-    ```kotlin {3-5}
-    class MainActivity: ReactActivity() {
-      // ...
-      override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(null)
-      }
-      // ...
-    }
-    ```
+<TabItem value='kotlin' label='Kotlin' default>
+
+```kotlin
+class MainActivity: ReactActivity() {
+  // ...
+  // highlight-start
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(null)
+  }
+  // highlight-end
+  // ...
+}
+```
+
   </TabItem>
   <TabItem value='java' label='Java'>
-    ```java {3-6}
-    public class MainActivity extends ReactActivity {
-      // ...
-      @Override
-      protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(null);
-      }
-      // ...
-    }
-    ```
-  </TabItem>
+
+```java
+public class MainActivity extends ReactActivity {
+  // ...
+  // highlight-start
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(null);
+  }
+  // highlight-end
+  // ...
+}
+```
+
+</TabItem>
 </Tabs>
 
 and make sure to add the following import statement at the top of this file below your package statement:
@@ -139,6 +147,7 @@ To get started with dynamic configuration, first, we need to wrap your app in `N
 
 ```js
 import * as React from 'react';
+// highlight-next-line
 import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
