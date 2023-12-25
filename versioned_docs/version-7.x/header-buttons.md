@@ -4,16 +4,45 @@ title: Header buttons
 sidebar_label: Header buttons
 ---
 
-Now that we know how to customize the look of our headers, let's make them sentient! Actually perhaps that's ambitious, let's just make them able to respond to our touches in very well defined ways.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Now that we know how to customize the look of our headers, let's make them sentient! Actually perhaps that's ambitious, let's just make them able to respond to our touches in very well-defined ways.
 
 ## Adding a button to the header
 
 The most common way to interact with a header is by tapping on a button either to the left or the right of the title. Let's add a button to the right side of the header (one of the most difficult places to touch on your entire screen, depending on finger and phone size, but also a normal place to put buttons).
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const MyStack = createStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        headerTitle: (props) => <LogoTitle {...props} />,
+        headerRight: () => (
+          <Button
+            onPress={() => alert('This is a button!')}
+            title="Info"
+            color="#fff"
+          />
+        ),
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 <samp id="simple-header-button">header button</samp>
 
 ```js
-function StackScreen() {
+function MyStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -35,18 +64,62 @@ function StackScreen() {
 }
 ```
 
-When we define our button this way, the `this` variable in `options` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
+</TabItem>
+</Tabs>
 
-> 💡 Please note that a community-developed library for rendering buttons in the header with the correct styling is available: [react-navigation-header-buttons](https://github.com/vonovak/react-navigation-header-buttons).
+When we define our button this way, the `this` variable in `options` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
+
+:::tip
+
+Note that a community-developed library for rendering buttons in the header with the correct styling is available: [react-navigation-header-buttons](https://github.com/vonovak/react-navigation-header-buttons).
+
+:::
 
 ## Header interaction with its screen component
 
 In some cases, components in the header need to interact with the screen component. For this use case, we need to use `navigation.setOptions` to update our options. By using `navigation.setOptions` inside the screen component, we get access to screen's props, state, context etc.
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const MyStack = createStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        headerTitle: (props) => <LogoTitle {...props} />,
+        // Add a placeholder button without the `onPress` to avoid flicker
+        headerRight: () => <Button title="Update count" />,
+      },
+    },
+  },
+});
+
+function HomeScreen({ navigation }) {
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    // Use `setOptions` to update the button that we previously specified
+    // Now the button includes an `onPress` handler to update the count
+    navigation.setOptions({
+      headerRight: () => (
+        <Button onPress={() => setCount((c) => c + 1)} title="Update count" />
+      ),
+    });
+  }, [navigation]);
+
+  return <Text>Count: {count}</Text>;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 <samp id="header-interaction">header interaction</samp>
 
 ```js
-function StackScreen() {
+function MyStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -55,9 +128,7 @@ function StackScreen() {
         options={({ navigation, route }) => ({
           headerTitle: (props) => <LogoTitle {...props} />,
           // Add a placeholder button without the `onPress` to avoid flicker
-          headerRight: () => (
-            <Button title="Update count" />
-          ),
+          headerRight: () => <Button title="Update count" />,
         })}
       />
     </Stack.Navigator>
@@ -80,6 +151,9 @@ function HomeScreen({ navigation }) {
   return <Text>Count: {count}</Text>;
 }
 ```
+
+</TabItem>
+</Tabs>
 
 Here we update the `headerRight` with a button with `onPress` handler that has access to the component's state and can update it.
 

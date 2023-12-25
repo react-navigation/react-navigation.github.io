@@ -4,7 +4,44 @@ title: Nesting navigators
 sidebar_label: Nesting navigators
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Nesting navigators means rendering a navigator inside a screen of another navigator, for example:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Home = createBottomTabNavigator({
+  screens: {
+    Feed,
+    Messages,
+  },
+});
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: {
+      screen: Home,
+      options: {
+        headerShown: false,
+      },
+    },
+    Profile,
+    Settings,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 <samp id="nested-navigators" />
 
@@ -18,31 +55,40 @@ function Home() {
   );
 }
 
+function RootStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Settings" component={Settings} />
+    </Stack.Navigator>
+  );
+}
+
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="Settings" component={Settings} />
-      </Stack.Navigator>
+      <RootStack />
     </NavigationContainer>
   );
 }
 ```
 
-In the above example, the `Home` component contains a tab navigator. The `Home` component is also used for the `Home` screen in your stack navigator inside the `App` component. So here, a tab navigator is nested inside a stack navigator:
+</TabItem>
+</Tabs>
 
-- `Stack.Navigator`
-  - `Home` (`Tab.Navigator`)
-    - `Feed` (`Screen`)
-    - `Messages` (`Screen`)
-  - `Profile` (`Screen`)
-  - `Settings` (`Screen`)
+In the above example, the `Home` screen contains a tab navigator. It is also used for the `Home` screen in your stack navigator in `RootStack`. So here, a tab navigator is nested inside a stack navigator:
+
+- `RootStack` (Stack navigator)
+  - `Home` (Tab navigator)
+    - `Feed` (screen)
+    - `Messages` (screen)
+  - `Profile` (screen)
+  - `Settings` (screen)
 
 Nesting navigators work very much like nesting regular components. To achieve the behavior you want, it's often necessary to nest multiple navigators.
 
@@ -62,7 +108,7 @@ If you want to achieve this behavior, see the guide for [screen options with nes
 
 ### Each screen in a navigator has its own params
 
-For example, any `params` passed to a screen in a nested navigator are in the `route` prop of that screen and aren't accessible from a screen in a parent or child navigator.
+For example, any `params` passed to a screen in a nested navigator are in the `route` object of that screen and aren't accessible from a screen in a parent or child navigator.
 
 If you need to access params of the parent screen from a child screen, you can use [React Context](https://reactjs.org/docs/context.html) to expose params to children.
 
@@ -72,11 +118,11 @@ For example, if you're calling `navigation.goBack()` in a nested screen, it'll o
 
 ### Navigator specific methods are available in the navigators nested inside
 
-For example, if you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer`, `toggleDrawer` methods etc. will also be available on the `navigation` prop in the screen's inside the stack navigator. But say you have a stack navigator as the parent of the drawer, then the screens inside the stack navigator won't have access to these methods, because they aren't nested inside the drawer.
+For example, if you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer`, `toggleDrawer` methods etc. will also be available on the `navigation` object in the screens inside the stack navigator. But say you have a stack navigator as the parent of the drawer, then the screens inside the stack navigator won't have access to these methods, because they aren't nested inside the drawer.
 
-Similarly, if you have a tab navigator inside stack navigator, the screens in the tab navigator will get the `push` and `replace` methods for stack in their `navigation` prop.
+Similarly, if you have a tab navigator inside stack navigator, the screens in the tab navigator will get the `push` and `replace` methods for stack in their `navigation` object.
 
-If you need to dispatch actions to the nested child navigators from a parent, you can use [`navigation.dispatch`](navigation-prop.md#dispatch):
+If you need to dispatch actions to the nested child navigators from a parent, you can use [`navigation.dispatch`](navigation-object.md#dispatch):
 
 ```js
 navigation.dispatch(DrawerActions.toggleDrawer());
@@ -86,7 +132,7 @@ navigation.dispatch(DrawerActions.toggleDrawer());
 
 For example, if you have a stack navigator nested inside a tab navigator, the screens in the stack navigator won't receive the events emitted by the parent tab navigator such as (`tabPress`) when using `navigation.addListener`.
 
-To receive events from parent navigator, you can explicitly listen to parent's events with [`navigation.getParent`](navigation-prop.md#getparent):
+To receive events from parent navigator, you can explicitly listen to parent's events with [`navigation.getParent`](navigation-object.md#getparent):
 
 <samp id="nested-navigators-events" />
 
@@ -115,10 +161,44 @@ In your app, you will probably use these patterns depending on the behavior you 
 
 Consider the following example:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const MyDrawer = createDrawerNavigator({
+  screens: {
+    Home,
+    Profile,
+    Settings,
+  },
+});
+
+const RootStack = createStackNavigator({
+  screens: {
+    MyDrawer: {
+      screen: MyDrawer,
+      options: {
+        headerShown: false,
+      },
+    },
+    Feed,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 <samp id="nested-navigator-screen" />
 
 ```js
-function Root() {
+function MyDrawer() {
   return (
     <Drawer.Navigator>
       <Drawer.Screen name="Home" component={Home} />
@@ -128,39 +208,44 @@ function Root() {
   );
 }
 
+function RootStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="MyDrawer"
+        component={MyDrawer}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="Feed" component={Feed} />
+    </Stack.Navigator>
+  );
+}
+
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Root"
-          component={Root}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Feed" component={Feed} />
-      </Stack.Navigator>
+      <SRootStack />
     </NavigationContainer>
   );
 }
 ```
 
-Here, you might want to navigate to the `Root` screen from your `Feed` component:
+</TabItem>
+</Tabs>
+
+Here, you might want to navigate to the `MyDrawer` screen from your `Feed` component:
 
 ```js
-navigation.navigate('Root');
+navigation.navigate('MyDrawer');
 ```
 
-It works, and the initial screen inside the `Root` component is shown, which is `Home`. But sometimes you may want to control the screen that should be shown upon navigation. To achieve it, you can pass the name of the screen in params:
+It works, and the initial screen inside the `MyDrawer` component is shown, which is `Home`. But sometimes you may want to control the screen that should be shown upon navigation. To achieve it, you can pass the name of the screen in params:
 
 ```js
-navigation.navigate('Root', { screen: 'Profile' });
+navigation.navigate('MyDrawer', { screen: 'Profile' });
 ```
 
 Now, the `Profile` screen will be rendered instead of `Home` upon navigation.
-
-<summary>
-This may look very different from the way navigation used to work with nested screens previously. The difference is that in the previous versions, all configuration was static, so React Navigation could statically find the list of all the navigators and their screens by recursing into nested configurations. But with dynamic configuration, React Navigation doesn't know which screens are available and where until the navigator containing the screen renders. Normally, a screen doesn't render its contents until you navigate to it, so the configuration of navigators which haven't rendered is not yet available. This makes it necessary to specify the hierarchy you're navigating to. This is also why you should have as little nesting of navigators as possible to keep your code simpler.
-</summary>
 
 ### Passing params to a screen in a nested navigator
 
@@ -195,7 +280,7 @@ In the above case, you're navigating to the `Media` screen, which is in a naviga
 
 ### Rendering initial route defined in the navigator
 
-By default, when you navigate a screen in the nested navigator, the specified screen is used as the initial screen and the initial route prop on the navigator is ignored. This behaviour is different from the React Navigation 4.
+By default, when you navigate a screen in the nested navigator, the specified screen is used as the initial screen and the `initialRouteName` prop on the navigator is ignored. This behaviour is different from the React Navigation 4.
 
 If you need to render the initial route specified in the navigator, you can disable the behaviour of using the specified screen as the initial screen by setting `initial: false`:
 
@@ -218,9 +303,44 @@ To achieve this, you can hide the header in the screen containing the navigator 
 
 For example:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Home = createBottomTabNavigator({
+  screens: {
+    Profile,
+    Settings,
+  },
+});
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: {
+      screen: Home,
+      options: {
+        headerShown: false,
+      },
+    },
+    EditPost,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 <samp id="multiple-navigators" />
 
 ```js
+const Tab = createBottomTabNavigator();
+
 function Home() {
   return (
     <Tab.Navigator>
@@ -230,27 +350,71 @@ function Home() {
   );
 }
 
+const Stack = createStackNavigator();
+
+function RootStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="EditPost" component={EditPost} />
+    </Stack.Navigator>
+  );
+}
+
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="EditPost" component={EditPost} />
-      </Stack.Navigator>
+      <RootStack />
     </NavigationContainer>
   );
 }
 ```
 
+</TabItem>
+</Tabs>
+
 In these examples, we have used a bottom tab navigator directly nested inside another stack navigator, but the same principle applies when there are other navigators in the middle, for example: stack navigator inside a tab navigator which is inside another stack navigator, stack navigator inside drawer navigator etc.
 
 If you don't want headers in any of the navigators, you can specify `headerShown: false` in all of the navigators:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
 ```js
+const Home = createBottomTabNavigator({
+  screens: {
+    Profile,
+    Settings,
+  },
+});
+
+const RootStack = createStackNavigator({
+  screenOptions: {
+    headerShown: false,
+  },
+  screens: {
+    Home,
+    EditPost,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const Tab = createBottomTabNavigator();
+
 function Home() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
@@ -260,17 +424,28 @@ function Home() {
   );
 }
 
+const Stack = createStackNavigator();
+
+function RootStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="EditPost" component={EditPost} />
+    </Stack.Navigator>
+  );
+}
+
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="EditPost" component={EditPost} />
-      </Stack.Navigator>
+      <RootStack />
     </NavigationContainer>
   );
 }
 ```
+
+</TabItem>
+</Tabs>
 
 ## Best practices when nesting
 
@@ -280,7 +455,49 @@ We recommend to reduce nesting navigators to minimal. Try to achieve the behavio
 - Nesting same type of navigators (e.g. tabs inside tabs, drawer inside drawer etc.) might lead to a confusing UX
 - With excessive nesting, code becomes difficult to follow when navigating to nested screens, configuring deep link etc.
 
-Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, instead of using separate navigators, you can use the [`Group`](group.md) component.
+Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, instead of using separate navigators, you can use the [`Group`](group.md) component for dynamic configuration or [`groups` property](static-api-reference.md#groups) for static configuration.
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const MyStack = createStackNavigator({
+  screens: {
+    // Common screens
+  },
+  groups: {
+    // Common modal screens
+    Modal: {
+      screenOptions: {
+        presentation: 'modal',
+      },
+      screens: {
+        Help,
+        Invite,
+      },
+    },
+    // Screens for logged in users
+    User: {
+      if: useIsLoggedIn,
+      screens: {
+        Home,
+        Profile,
+      },
+    },
+    // Auth screens
+    Guest: {
+      if: useIsGuest,
+      screens: {
+        SignIn,
+        SignUp,
+      },
+    },
+  }
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 <samp id="nesting-best-practices" />
 
@@ -306,3 +523,6 @@ Think of nesting navigators as a way to achieve the UI you want rather than a wa
   </Stack.Group>
 </Stack.Navigator>
 ```
+
+</TabItem>
+</Tabs>

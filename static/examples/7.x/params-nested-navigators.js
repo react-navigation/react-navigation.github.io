@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-function SettingsScreen({ route, navigation }) {
+function SettingsScreen({ route }) {
+  const navigation = useNavigation();
+
   const { user } = route.params;
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -18,7 +20,9 @@ function SettingsScreen({ route, navigation }) {
   );
 }
 
-function ProfileScreen({ navigation }) {
+function ProfileScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
@@ -26,7 +30,9 @@ function ProfileScreen({ navigation }) {
   );
 }
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>

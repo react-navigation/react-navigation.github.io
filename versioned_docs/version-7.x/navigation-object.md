@@ -1,10 +1,10 @@
 ---
-id: navigation-prop
-title: Navigation prop reference
-sidebar_label: Navigation prop
+id: navigation-object
+title: Navigation object reference
+sidebar_label: Navigation object
 ---
 
-Each `screen` component in your app is provided with the `navigation` prop automatically. The prop contains various convenience functions that dispatch navigation actions. It looks like this:
+The `navigation` object contains various convenience functions that dispatch navigation actions. It looks like this:
 
 - `navigation`
   - `navigate` - go to another screen, figures out the action it needs to take to do it
@@ -16,13 +16,17 @@ Each `screen` component in your app is provided with the `navigation` prop autom
   - `isFocused` - check whether the screen is focused
   - `addListener` - subscribe to updates to events from the navigators
 
-It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do any magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`useNavigation`](use-navigation.md) hook.
+The `navigation` object can be accessed inside any screen component with the [`useNavigation`](use-navigation.md) hook. It's also passed as a prop only to screens components defined with the dynamic API.
 
-> `setParams`/`setOptions` etc. should only be called in `useEffect`/`useLayoutEffect`/`componentDidMount`/`componentDidUpdate` etc. Not during render or in constructor.
+:::warning
+
+`setParams`/`setOptions` etc. should only be called in event listeners or `useEffect`/`useLayoutEffect`/`componentDidMount`/`componentDidUpdate` etc. Not during render or in constructor.
+
+:::
 
 ### Navigator-dependent functions
 
-There are several additional functions present on `navigation` prop based on the kind of the current navigator.
+There are several additional functions present on `navigation` object based on the kind of the current navigator.
 
 If the navigator is a stack navigator, several alternatives to `navigate` and `goBack` are provided and you can use whichever you prefer. The functions are:
 
@@ -54,7 +58,7 @@ See [Drawer navigator helpers](drawer-navigator.md#helpers) for more details on 
 
 ## Common API reference
 
-The vast majority of your interactions with the `navigation` prop will involve `navigate`, `goBack`, and `setParams`.
+The vast majority of your interactions with the `navigation` object will involve `navigate`, `goBack`, and `setParams`.
 
 ### `navigate`
 
@@ -209,7 +213,7 @@ You can also use `React.useLayoutEffect` to reduce the delay in updating the opt
 
 ## Navigation events
 
-Screens can add listeners on the `navigation` prop with the `addListener` method. For example, to listen to the `focus` event:
+Screens can add listeners on the `navigation` object with the `addListener` method. For example, to listen to the `focus` event:
 
 <samp id="simple-focus-and-blur" />
 
@@ -338,7 +342,7 @@ Don't use this method for rendering content as this will not trigger a re-render
 
 ### `getParent`
 
-This method returns the navigation prop from the parent navigator that the current navigator is nested in. For example, if you have a stack navigator and a tab navigator nested inside the stack, then you can use `getParent` inside a screen of the tab navigator to get the navigation prop passed from the stack navigator.
+This method returns the navigation object from the parent navigator that the current navigator is nested in. For example, if you have a stack navigator and a tab navigator nested inside the stack, then you can use `getParent` inside a screen of the tab navigator to get the navigation object passed from the stack navigator.
 
 It accepts an optional ID parameter to refer to a specific parent navigator. For example, if your screen is nested with multiple levels of nesting somewhere under a drawer navigator with the `id` prop as `"LeftDrawer"`, you can directly refer to it without calling `getParent` multiple times.
 

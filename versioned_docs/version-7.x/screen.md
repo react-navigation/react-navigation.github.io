@@ -39,7 +39,7 @@ This name is used to navigate to the screen:
 navigation.navigate('Profile');
 ```
 
-It is also used for the `name` property in the [`route`](route-prop.md).
+It is also used for the `name` property in the [`route`](route-object.md).
 
 While it is supported, we recommend to avoid spaces or special characters in screen names and keep them simple.
 
@@ -57,7 +57,7 @@ Options to configure how the screen gets presented in the navigator. It accepts 
 />
 ```
 
-When you pass a function, it'll receive the [`route`](route-prop.md) and [`navigation`](navigation-prop.md):
+When you pass a function, it'll receive the [`route`](route-object.md) and [`navigation`](navigation-object.md):
 
 ```js
 <Stack.Screen

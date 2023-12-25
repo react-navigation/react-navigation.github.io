@@ -42,7 +42,7 @@ You can listen to events with the following APIs:
 
 ### `navigation.addListener`
 
-Inside a screen, you can add listeners on the `navigation` prop with the `addListener` method. The `addListener` method takes 2 arguments: type of the event, and a callback to be called on the event. It returns a function that can be called to unsubscribe from the event.
+Inside a screen, you can add listeners on the `navigation` object with the `addListener` method. The `addListener` method takes 2 arguments: type of the event, and a callback to be called on the event. It returns a function that can be called to unsubscribe from the event.
 
 Example:
 
@@ -93,7 +93,7 @@ class Profile extends React.Component {
 }
 ```
 
-One thing to keep in mind is that you can only listen to events from the immediate navigator with `addListener`. For example, if you try to add a listener in a screen that's inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use [`navigation.getParent`](navigation-prop.md#getparent) to get a reference to parent navigator's navigation prop and add a listener.
+One thing to keep in mind is that you can only listen to events from the immediate navigator with `addListener`. For example, if you try to add a listener in a screen that's inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use [`navigation.getParent`](navigation-object.md#getparent) to get a reference to the parent screen's navigation object and add a listener.
 
 ```js
 const unsubscribe = navigation
@@ -164,7 +164,7 @@ Example:
 </Stack.Navigator>
 ```
 
-Similar to `listeners`, you can also pass a function to `screenListeners`. The function will receive the [`navigation` prop](navigation-prop.md) and the [`route` prop](route-prop.md) for each screen. This can be useful if you need access to the `navigation` object.
+Similar to `listeners`, you can also pass a function to `screenListeners`. The function will receive the [`navigation` object](navigation-object.md) and the [`route` object](route-object.md) for each screen. This can be useful if you need access to the `navigation` object.
 
 ```js
 <Tab.Navigator

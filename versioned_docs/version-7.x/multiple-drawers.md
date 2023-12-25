@@ -64,7 +64,7 @@ export default function App() {
 }
 ```
 
-But there is one problem. When we call `navigation.openDrawer()` in our `HomeScreen`, it always opens the left drawer. We don't have access to the right drawer via the `navigation` prop since it's not a navigator.
+But there is one problem. When we call `navigation.openDrawer()` in our `HomeScreen`, it always opens the left drawer. We don't have access to the right drawer via the `navigation` object since it's not a navigator.
 
 To solve this, we need to use context API to pass down a function to control the right drawer:
 
@@ -192,7 +192,7 @@ export default function App() {
 
 But there is one problem. When we call `navigation.openDrawer()` in our `HomeScreen`, it always opens the left drawer since it's the immediate parent of the screen.
 
-To solve this, we need to use [`navigation.getParent`](navigation-prop.md#getparent) to refer to the right drawer which is the parent of the left drawer. So our code would look like:
+To solve this, we need to use [`navigation.getParent`](navigation-object.md#getparent) to refer to the right drawer which is the parent of the left drawer. So our code would look like:
 
 ```js
 <Button onPress={() => navigation.openDrawer()} title="Open left drawer" />
@@ -282,4 +282,4 @@ Here, we are passing `"LeftDrawer"` and `"RightDrawer"` strings (you can use any
 - To have multiple drawers, you can use [`react-native-drawer-layout`](drawer-layout.md) directly in combination with a drawer navigator.
 - The [`drawerPosition`](drawer-layout.md#drawerposition) prop can be used to position the drawer on the right.
 - The methods to control the drawer can be passed down using context API when using [`react-native-drawer-layout`](drawer-layout.md).
-- When nesting multiple navigators, you can use [`navigation.getParent`](navigation-prop.md#getparent) in combination with the [`id` prop](drawer-navigator.md#id) to refer to the desired drawer.
+- When nesting multiple navigators, you can use [`navigation.getParent`](navigation-object.md#getparent) in combination with the [`id` prop](drawer-navigator.md#id) to refer to the desired drawer.

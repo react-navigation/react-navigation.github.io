@@ -31,7 +31,7 @@ export default function App() {
 
 ## Ref
 
-It's also possible to attach a [`ref`](https://reactjs.org/docs/refs-and-the-dom.html#creating-refs) to the container to get access to various helper methods, for example, dispatch navigation actions. This should be used in rare cases when you don't have access to the `navigation` prop, such as a Redux middleware.
+It's also possible to attach a [`ref`](https://reactjs.org/docs/refs-and-the-dom.html#creating-refs) to the container to get access to various helper methods, for example, dispatch navigation actions. This should be used in rare cases when you don't have access to the [`navigation` object](navigation-object.md), such as a Redux middleware.
 
 Example:
 

@@ -4,14 +4,16 @@ title: Passing parameters to routes
 sidebar_label: Passing parameters to routes
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Remember when I said "more on that later when we talk about `params`!"? Well, the time has come.
 
-Now that we know how to [create a stack navigator with some routes](hello-react-navigation.md) and [navigate between those routes](navigating.md), let's look at how we can pass data to routes when we navigate to them.
+Now that we know how to create a stack navigator with some routes and [navigate between those routes](navigating.md), let's look at how we can pass data to routes when we navigate to them.
 
 There are two pieces to this:
 
 1. Pass params to a route by putting them in an object as a second parameter to the `navigation.navigate` function: `navigation.navigate('RouteName', { /* params go here */ })`
-
 2. Read the params in your screen component: `route.params`.
 
 :::note
@@ -23,7 +25,9 @@ We recommend that the params you pass are JSON-serializable. That way, you'll be
 <samp id="passing-params" />
 
 ```js
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
@@ -41,7 +45,9 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function DetailsScreen({ route, navigation }) {
+function DetailsScreen({ route }) {
+  const navigation = useNavigation();
+
   /* 2. Get the param */
   const { itemId, otherParam } = route.params;
   return (
@@ -68,7 +74,22 @@ function DetailsScreen({ route, navigation }) {
 
 ## Initial params
 
-You can also pass some initial params to a screen. If you didn't specify any params when navigating to this screen, the initial params will be used. They are also shallow merged with any params that you pass. Initial params can be specified with an `initialParams` prop:
+You can also pass some initial params to a screen. If you didn't specify any params when navigating to this screen, the initial params will be used. They are also shallow merged with any params that you pass. Initial params can be specified in `initialParams`:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+{
+  Details: {
+    screen: DetailsScreen,
+    initialParams: { itemId: 42 },
+  },
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 <samp id="initial-params" />
 
@@ -80,9 +101,12 @@ You can also pass some initial params to a screen. If you didn't specify any par
 />
 ```
 
+</TabItem>
+</Tabs>
+
 ## Updating params
 
-Screens can also update their params, like they can update their state. The `navigation.setParams` method lets you update the params of a screen. Refer to the [API reference for `setParams`](navigation-prop.md#setparams) for more details.
+Screens can also update their params, like they can update their state. The `navigation.setParams` method lets you update the params of a screen. Refer to the [API reference for `setParams`](navigation-object.md#setparams) for more details.
 
 Basic usage:
 
@@ -96,7 +120,7 @@ navigation.setParams({
 
 :::note
 
-Avoid using `setParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-prop.md#setoptions) instead.
+Avoid using `setParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-object.md#setoptions) instead.
 
 :::
 
@@ -109,7 +133,9 @@ To achieve this, you can use the `navigate` method, which acts like `goBack` if 
 <samp id="passing-params-back" />
 
 ```js
-function HomeScreen({ navigation, route }) {
+function HomeScreen({ route }) {
+  const navigation = useNavigation();
+
   React.useEffect(() => {
     if (route.params?.post) {
       // Post updated, do something with `route.params.post`
@@ -128,7 +154,8 @@ function HomeScreen({ navigation, route }) {
   );
 }
 
-function CreatePostScreen({ navigation, route }) {
+function CreatePostScreen({ route }) {
+  const navigation = useNavigation();
   const [postText, setPostText] = React.useState('');
 
   return (

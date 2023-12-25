@@ -9,10 +9,7 @@
       "header-buttons",
       "nesting-navigators",
       "navigation-lifecycle",
-      "next-steps",
-      "glossary-of-terms",
-      "troubleshooting",
-      "limitations"
+      "next-steps"
     ],
     "Guides": [
       "tab-based-navigation",
@@ -28,7 +25,6 @@
       "shared-element-transitions",
       "preventing-going-back",
       "function-after-focusing-screen",
-      "connecting-navigation-prop",
       "navigating-without-navigation-prop",
       "deep-linking",
       "configuring-links",
@@ -41,10 +37,10 @@
       "typescript",
       "redux-integration",
       "MST-integration",
+      "troubleshooting",
       "upgrading-from-6.x"
     ],
     "Static configuration": [
-      "static-configuration",
       "static-api-reference",
       "static-typescript",
       "static-authentication",
@@ -69,8 +65,8 @@
       "group",
       "screen",
       "screen-options",
-      "route-prop",
-      "navigation-prop",
+      "route-object",
+      "navigation-object",
       "navigation-context",
       "navigation-events",
       "navigation-state",
@@ -112,7 +108,9 @@
       "more-resources"
     ],
     "Meta": [
+      "glossary-of-terms",
       "pitch",
+      "limitations",
       "used-by",
       "contributing"
     ]

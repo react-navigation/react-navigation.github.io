@@ -4,9 +4,9 @@ title: useRoute
 sidebar_label: useRoute
 ---
 
-`useRoute` is a hook which gives access to `route` object. It's useful when you cannot pass the `route` prop into the component directly, or don't want to pass it in case of a deeply nested child.
+`useRoute` is a hook which gives access to `route` object. It's useful when you cannot pass down the `route` object from props to the component, or don't want to pass it in case of a deeply nested child.
 
-`useRoute()` returns the `route` prop of the screen it's inside.
+`useRoute()` returns the `route` object of the screen it's inside.
 
 ## Example
 
@@ -24,7 +24,7 @@ function MyText() {
 }
 ```
 
-See the documentation for the [`route` prop](route-prop.md) for more info.
+See the documentation for the [`route` object](route-object.md) for more info.
 
 ## Using with class component
 

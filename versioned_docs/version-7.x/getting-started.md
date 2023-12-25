@@ -4,6 +4,9 @@ title: Getting started
 sidebar_label: Getting started
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 What follows within the _Fundamentals_ section of this documentation is a tour of the most important aspects of React Navigation. It should cover enough for you to know how to build your typical small mobile application, and give you the background that you need to dive deeper into the more advanced parts of React Navigation.
 
 ## Pre-requisites
@@ -114,9 +117,25 @@ When you use a navigator (such as stack navigator), you'll need to follow the in
 
 :::
 
-## Wrapping your app in `NavigationContainer`
+## Setting up React Navigation
 
-Now, we need to wrap the whole app in `NavigationContainer`. Usually you'd do this in your entry file, such as `index.js` or `App.js`:
+Once you've installed and configured the dependencies, you can move on to setting up your project to use React Navigation.
+
+When using React Navigation, you configure [**navigators**](glossary-of-terms.md#navigator) in your app. Navigators handle the transition between screens in your app and provide UI such as header, tab bar etc.
+
+There are 2 primary ways to configure the navigators:
+
+### Static configuration
+
+The static configuration API has reduced boilerplate and simplifies things such as TypeScript types and deep linking. If you're starting a new project or are new to React Navigation, this is the **recommended way** to set up your app. If you need more flexibility in the future, you can always mix and match with the dynamic configuration.
+
+Continue to ["Hello React Navigation"](hello-react-navigation.md?config=static) to start writing some code with the static API.
+
+### Dynamic configuration
+
+The dynamic configuration allows for more flexibility but requires more boilerplate and configuration (e.g. for deep links, typescript etc.).
+
+To get started with dynamic configuration, first, we need to wrap your app in `NavigationContainer`. Usually, you'd do this in your entry file, such as `index.js` or `App.js`:
 
 ```js
 import * as React from 'react';
@@ -135,6 +154,4 @@ In a typical React Native app, the `NavigationContainer` should be only used onc
 
 :::
 
-Now you are ready to build and run your app on the device/simulator.
-
-Continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.
+Continue to ["Hello React Navigation"](hello-react-navigation.md?config=dynamic) to start writing some code with the dynamic API.

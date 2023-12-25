@@ -4,6 +4,9 @@ title: Navigation lifecycle
 sidebar_label: Navigation lifecycle
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 In a previous section, we worked with a stack navigator that has two screens (`Home` and `Details`) and learned how to use `navigation.navigate('RouteName')` to navigate between the routes.
 
 An important question in this context is: what happens with `Home` when we navigate away from it, or when we come back to it? How does a route find out that a user is leaving it or coming back to it?
@@ -17,6 +20,36 @@ Consider a stack navigator with screens A and B. After navigating to A, its `com
 When going back from B to A, `componentWillUnmount` of B is called, but `componentDidMount` of A is not because A remained mounted the whole time.
 
 Similar results can be observed (in combination) with other navigators as well. Consider a tab navigator with two tabs, where each tab is a stack navigator:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const SettingsStack = createStackNavigator({
+  Settings: SettingsScreen,
+  Profile: ProfileScreen,
+});
+
+const HomeStack = createStackNavigator({
+  Home: HomeScreen,
+  Details: DetailsScreen,
+});
+
+const MyTabs = createBottomTabNavigator({
+  First: SettingsStack,
+  Second: HomeStack,
+});
+
+
+const Navigation = createStaticNavigation(MyTabs);
+
+function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 <samp id="navigation-lifecycle" />
 
@@ -49,6 +82,9 @@ function App() {
   );
 }
 ```
+
+</TabItem>
+</Tabs>
 
 We start on the `HomeScreen` and navigate to `DetailsScreen`. Then we use the tab bar to switch to the `SettingsScreen` and navigate to `ProfileScreen`. After this sequence of operations is done, all 4 of the screens are mounted! If you use the tab bar to switch back to the `HomeStack`, you'll notice you'll be presented with the `DetailsScreen` - the navigation state of the `HomeStack` has been preserved!
 
@@ -108,5 +144,5 @@ If you want to render different things based on if the screen is focused or not,
 
 ## Summary
 
-- While React's lifecycle methods are still valid, React Navigation adds more events that you can subscribe to through the `navigation` prop.
+- While React's lifecycle methods are still valid, React Navigation adds more events that you can subscribe to through the `navigation` object.
 - You may also use the `useFocusEffect` or `useIsFocused` hooks.

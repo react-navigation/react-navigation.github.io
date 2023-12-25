@@ -182,7 +182,7 @@ const MyTabRouter = options => {
 };
 ```
 
-Instead of writing a custom router to handle custom actions, you can [pass a function to `dispatch`](navigation-prop.md#dispatch) instead. It's cleaner and recommended instead of overriding routers.
+Instead of writing a custom router to handle custom actions, you can [pass a function to `dispatch`](navigation-object.md#dispatch) instead. It's cleaner and recommended instead of overriding routers.
 
 ### Blocking Navigation Actions
 
