@@ -31,7 +31,7 @@ You can pass a prop named `options` to the `Screen` component to configure a scr
 </Stack.Navigator>
 ```
 
-You can also pass a function to `options`. The function will receive the [`navigation` object](navigation-object.md) and the [`route` prop](route-object.md) for that screen. This can be useful if you want to perform navigation in your options:
+You can also pass a function to `options`. The function will receive the [`navigation` object](navigation-object.md) and the [`route` object](route-object.md) for that screen. This can be useful if you want to perform navigation in your options:
 
 ```js
 <Stack.Screen

@@ -41,7 +41,6 @@
       "upgrading-from-6.x"
     ],
     "Static configuration": [
-      "static-configuration",
       "static-api-reference",
       "static-typescript",
       "static-authentication",

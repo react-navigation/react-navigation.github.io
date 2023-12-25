@@ -127,13 +127,13 @@ There are 2 primary ways to configure the navigators:
 
 ### Static configuration
 
-The static configuration API has reduced boilerplate and simplifies things such as TypeScript types and deep linking. If you're starting a new project or are new to React Navigation, this is the **recommended way** to set up your app.
+The static configuration API has reduced boilerplate and simplifies things such as TypeScript types and deep linking. If you're starting a new project or are new to React Navigation, this is the **recommended way** to set up your app. If you need more flexibility in the future, you can always mix and match with the dynamic configuration.
 
 Continue to ["Hello React Navigation"](hello-react-navigation.md?config=static) to start writing some code with the static API.
 
 ### Dynamic configuration
 
-The dynamic configuration allows for more flexibility but requires more boilerplate and configuration.
+The dynamic configuration allows for more flexibility but requires more boilerplate and configuration (e.g. for deep links, typescript etc.).
 
 To get started with dynamic configuration, first, we need to wrap your app in `NavigationContainer`. Usually, you'd do this in your entry file, such as `index.js` or `App.js`:
 

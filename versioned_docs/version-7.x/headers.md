@@ -107,7 +107,7 @@ The argument that is passed in to the `options` function is an object with the f
 - `navigation` - The [navigation object](navigation-object.md) for the screen.
 - `route` - The [route object](route-object.md) for the screen
 
-We only needed the `route` prop in the above example but you may in some cases want to use `navigation` as well.
+We only needed the `route` object in the above example but you may in some cases want to use `navigation` as well.
 
 ## Updating `options` with `setOptions`
 
@@ -193,7 +193,7 @@ There are a couple of things to notice here:
 
 ## Sharing common `options` across screens
 
-It is common to want to configure the header in a similar way across many screens. For example, your company brand color might be red and so you want the header background color to be red and tint color to be white. Conveniently, these are the colors we're using in our running example, and you'll notice that when you navigate to the `DetailsScreen` the colors go back to the defaults. Wouldn't it be awful if we had to copy the `options` header style properties from `Home` to `Details`, and for every single screen we use in our app? Thankfully, we do not. We can instead move the configuration up to the native stack navigator under `screenOptions`:
+It is common to want to configure the header in a similar way across many screens. For example, your company brand color might be red and so you want the header background color to be red and the tint color to be white. Conveniently, these are the colors we're using in our running example, and you'll notice that when you navigate to the `DetailsScreen` the colors go back to the defaults. Wouldn't it be awful if we had to copy the `options` header style properties from `Home` to `Details`, and for every single screen we use in our app? Thankfully, we do not. We can instead move the configuration up to the native stack navigator under `screenOptions`:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>

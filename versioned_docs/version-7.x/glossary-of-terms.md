@@ -66,7 +66,7 @@ This object can be accessed with the [`useNavigation`](use-navigation.md) hook. 
 
 For more details, see the ["Navigation object docs"](navigation-object.md).
 
-The ["Route object reference"](route-object.md) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `route` prop.
+The ["Route object reference"](route-object.md) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `route` object.
 
 ## Route object
 

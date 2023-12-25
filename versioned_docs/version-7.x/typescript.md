@@ -60,7 +60,7 @@ The type containing the mappings must be a type alias (e.g. `type RootStackParam
 
 ### Type checking screens
 
-To type check our screens, we need to annotate the `navigation` prop and the `route` prop received by a screen. The navigator packages in React Navigation export a generic types to define types for both the `navigation` and `route` props from the corresponding navigator.
+To type check our screens, we need to annotate the `navigation` and the `route` props received by a screen. The navigator packages in React Navigation export generic types to define types for both the `navigation` and `route` props from the corresponding navigator.
 
 For example, you can use `NativeStackScreenProps` for the Native Stack Navigator.
 
@@ -120,7 +120,7 @@ type ProfileScreenNavigationProp = Props['navigation'];
 type ProfileScreenRouteProp = Props['route'];
 ```
 
-Alternatively, you can also annotate the `navigation` and `route` props separately.
+Alternatively, you can also annotate the `navigation` and `route` objects separately.
 
 To get the type for the `navigation` prop, we need to import the corresponding type from the navigator. For example, `NativeStackNavigationProp` for `@react-navigation/native-stack`:
 
@@ -135,7 +135,7 @@ type ProfileScreenNavigationProp = NativeStackNavigationProp<
 
 Similarly, you can import `StackNavigationProp` from `@react-navigation/stack`, `DrawerNavigationProp` from `@react-navigation/drawer`, `BottomTabNavigationProp` from `@react-navigation/bottom-tabs` etc.
 
-To get the type for the `route` prop, we need to use the `RouteProp` type from `@react-navigation/native`:
+To get the type for the `route` object, we need to use the `RouteProp` type from `@react-navigation/native`:
 
 ```tsx
 import type { RouteProp } from '@react-navigation/native';
@@ -231,11 +231,11 @@ const navigation = useNavigation<ProfileScreenNavigationProp>();
 :::danger
 
 Annotating `useRoute` isn't type-safe because the type parameter cannot be statically verified.
-Prefer using the [`route` prop](route-object.md) instead when possible. Use `useRoute` for generic code that doesn't need specific route type.
+Prefer using the [`route` object](route-object.md) from the screen component's props instead when possible. Use `useRoute` for generic code that doesn't need specific route type.
 
 :::
 
-To annotate the `route` prop that we get from `useRoute`, we can use a type parameter:
+To annotate the `route` object that we get from `useRoute`, we can use a type parameter:
 
 ```ts
 const route = useRoute<ProfileScreenRouteProp>();
@@ -257,7 +257,7 @@ const options: StackNavigationOptions = {
 
 Similarly, you can import `DrawerNavigationOptions` from `@react-navigation/drawer`, `BottomTabNavigationOptions` from `@react-navigation/bottom-tabs` etc.
 
-When using the function form of `options` and `screenOptions`, you can annotate the arguments with the same type you used to annotate the `navigation` and `route` props.
+When using the function form of `options` and `screenOptions`, you can annotate the arguments with the same type you used to annotate the `navigation` and `route` objects from the [Type checking screens](#type-checking-screens) section.
 
 ### Annotating `ref` on `NavigationContainer`
 

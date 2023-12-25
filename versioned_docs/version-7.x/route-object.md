@@ -4,7 +4,7 @@ title: Route object reference
 sidebar_label: Route object
 ---
 
-Each `screen` component in your app is provided with the `route` prop automatically. The prop contains various information regarding current route (place in navigation hierarchy component lives).
+Each `screen` component in your app is provided with the `route` object as a prop automatically. The prop contains various information regarding current route (place in navigation hierarchy component lives).
 
 - `route`
   - `key` - Unique key of the screen. Created automatically or added while navigating to this screen.
