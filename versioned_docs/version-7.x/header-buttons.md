@@ -16,32 +16,64 @@ The most common way to interact with a header is by tapping on a button either t
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js
-const MyStack = createStackNavigator({
+```js name="Header button" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyStack = createNativeStackNavigator({
   screens: {
     Home: {
       screen: HomeScreen,
       options: {
-        headerTitle: (props) => <LogoTitle {...props} />,
+        // highlight-start
         headerRight: () => (
-          <Button
-            onPress={() => alert('This is a button!')}
-            title="Info"
-            color="#fff"
-          />
+          <Button onPress={() => alert('This is a button!')} title="Info" />
         ),
+        // highlight-end
       },
     },
   },
 });
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-<samp id="simple-header-button">header button</samp>
+```js name="Header button" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+// codeblock-focus-start
 function MyStack() {
   return (
     <Stack.Navigator>
@@ -49,17 +81,23 @@ function MyStack() {
         name="Home"
         component={HomeScreen}
         options={{
-          headerTitle: (props) => <LogoTitle {...props} />,
+          // highlight-start
           headerRight: () => (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="Info"
-              color="#fff"
-            />
+            <Button onPress={() => alert('This is a button!')} title="Info" />
           ),
+          // highlight-end
         }}
       />
     </Stack.Navigator>
+  );
+}
+// codeblock-focus-end
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
   );
 }
 ```
@@ -82,73 +120,110 @@ In some cases, components in the header need to interact with the screen compone
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js
-const MyStack = createStackNavigator({
-  screens: {
-    Home: {
-      screen: HomeScreen,
-      options: {
-        headerTitle: (props) => <LogoTitle {...props} />,
-        // Add a placeholder button without the `onPress` to avoid flicker
-        headerRight: () => <Button title="Update count" />,
-      },
-    },
-  },
-});
+```js name="Header button" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function HomeScreen({ navigation }) {
+// codeblock-focus-start
+function HomeScreen() {
+  const navigation = useNavigation();
   const [count, setCount] = React.useState(0);
 
   React.useEffect(() => {
     // Use `setOptions` to update the button that we previously specified
     // Now the button includes an `onPress` handler to update the count
+    // highlight-start
     navigation.setOptions({
       headerRight: () => (
         <Button onPress={() => setCount((c) => c + 1)} title="Update count" />
       ),
     });
+    // highlight-end
   }, [navigation]);
 
   return <Text>Count: {count}</Text>;
+}
+
+const MyStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        // Add a placeholder button without the `onPress` to avoid flicker
+        // highlight-next-line
+        headerRight: () => <Button title="Update count" />,
+      },
+    },
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
 }
 ```
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-<samp id="header-interaction">header interaction</samp>
+```js name="Header button" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
+const Stack = createNativeStackNavigator();
+
+// codeblock-focus-start
+function HomeScreen() {
+  const navigation = useNavigation();
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    // Use `setOptions` to update the button that we previously specified
+    // Now the button includes an `onPress` handler to update the count
+    // highlight-start
+    navigation.setOptions({
+      headerRight: () => (
+        <Button onPress={() => setCount((c) => c + 1)} title="Update count" />
+      ),
+    });
+    // highlight-end
+  }, [navigation]);
+
+  return <Text>Count: {count}</Text>;
+}
+
 function MyStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={({ navigation, route }) => ({
-          headerTitle: (props) => <LogoTitle {...props} />,
+        options={{
           // Add a placeholder button without the `onPress` to avoid flicker
+          // highlight-next-line
           headerRight: () => <Button title="Update count" />,
-        })}
+        }}
       />
     </Stack.Navigator>
   );
 }
+// codeblock-focus-end
 
-function HomeScreen({ navigation }) {
-  const [count, setCount] = React.useState(0);
-
-  React.useEffect(() => {
-    // Use `setOptions` to update the button that we previously specified
-    // Now the button includes an `onPress` handler to update the count
-    navigation.setOptions({
-      headerRight: () => (
-        <Button onPress={() => setCount((c) => c + 1)} title="Update count" />
-      ),
-    });
-  }, [navigation]);
-
-  return <Text>Count: {count}</Text>;
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
 }
 ```
 
