@@ -196,9 +196,9 @@ Avoid using `setParams` to update screen options such as `title` etc. If you nee
 
 ## Passing params to a previous screen
 
-Params aren't only useful for passing some data to a new screen, but they can also be useful to pass data to a previous screen too. For example, let's say you have a screen with a create post button, and the create post button opens a new screen to create a post. After creating the post, you want to pass the data for the post back to previous screen.
+Params aren't only useful for passing some data to a new screen, but they can also be useful to pass data to a previous screen as well. For example, let's say you have a screen with a "Create post" button, and the button opens a new screen to create a post. After creating the post, you want to pass the data for the post back to the previous screen.
 
-To achieve this, you can use the `navigate` method, which acts like `goBack` if the screen already exists. You can pass the `params` with `navigate` to pass the data back:
+To achieve this, you can use the `popTo` method to go back to the previous screen as well as pass params to it:
 
 ```js name="Passing params back" snack version=7
 import * as React from 'react';
@@ -213,13 +213,16 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 function HomeScreen({ route }) {
   const navigation = useNavigation();
 
+  // Use an effect to monitor the update to params
+  // highlight-start
   React.useEffect(() => {
     if (route.params?.post) {
       // Post updated, do something with `route.params.post`
       // For example, send the post to the server
-      console.log('Post', route.params?.post);
+      alert('New post: ' + route.params?.post);
     }
   }, [route.params?.post]);
+  // highlight-end
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -248,12 +251,9 @@ function CreatePostScreen({ route }) {
       <Button
         title="Done"
         onPress={() => {
-          // Pass and merge params back to home screen
-          navigation.navigate({
-            name: 'Home',
-            params: { post: postText },
-            merge: true,
-          });
+          // Pass params back to home screen
+          // highlight-next-line
+          navigation.popTo('Home', { post: postText });
         }}
       />
     </>
