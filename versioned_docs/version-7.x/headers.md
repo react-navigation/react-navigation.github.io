@@ -16,34 +16,84 @@ Each screen has `options` which is either an object or a function that returns a
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js
-const MyStack = createStackNavigator({
+```js name="Setting header title" snack version=7
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyStack = createNativeStackNavigator({
   screens: {
     Home: {
       screen: HomeScreen,
+      // highlight-start
       options: {
         title: 'My home',
       },
+      // highlight-end
     },
   },
 });
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-<samp id="basic-header-config">header title</samp>
+```js name="Setting header title" snack version=7
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+// codeblock-focus-start
 function MyStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: 'My home' }}
+        // highlight-start
+        options={{
+          title: 'My home',
+        }}
+        // highlight-end
       />
     </Stack.Navigator>
+  );
+}
+// codeblock-focus-end
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
   );
 }
 ```
@@ -58,8 +108,42 @@ In order to use params in the title, we need to make `options` for the screen a 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js
-const MyStack = createStackNavigator({
+```js name="Using params in the title" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        title="Go to Profile"
+        onPress={() =>
+          navigation.navigate('Profile', {
+            name: 'Jane',
+          })
+        }
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyStack = createNativeStackNavigator({
   screens: {
     Home: {
       screen: HomeScreen,
@@ -69,18 +153,60 @@ const MyStack = createStackNavigator({
     },
     Profile: {
       screen: ProfileScreen,
-      options: ({ route }) => ({ title: route.params.name }),
+      // highlight-start
+      options: ({ route }) => ({
+        title: route.params.name,
+      }),
+      // highlight-end
     },
   },
 });
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-<samp id="params-in-title">params in title</samp>
+```js name="Using params in the title" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        title="Go to Profile"
+        onPress={() =>
+          navigation.navigate('Profile', {
+            name: 'Jane',
+          })
+        }
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+// codeblock-focus-start
 function MyStack() {
   return (
     <Stack.Navigator>
@@ -92,9 +218,22 @@ function MyStack() {
       <Stack.Screen
         name="Profile"
         component={ProfileScreen}
-        options={({ route }) => ({ title: route.params.name })}
+        // highlight-start
+        options={({ route }) => ({
+          title: route.params.name,
+        })}
+        // highlight-end
       />
     </Stack.Navigator>
+  );
+}
+// codeblock-focus-end
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
   );
 }
 ```
@@ -113,13 +252,50 @@ We only needed the `route` object in the above example but you may in some cases
 
 It's often necessary to update the `options` configuration for the active screen from the mounted screen component itself. We can do this using `navigation.setOptions`
 
-<samp id="updating-options-with-setoptions">updating navigation options</samp>
+```js name="Updating options" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
-<Button
-  title="Update the title"
-  onPress={() => navigation.setOptions({ title: 'Updated!' })}
-/>
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      // codeblock-focus-start
+      <Button
+        title="Update the title"
+        onPress={() =>
+          // highlight-next-line
+          navigation.setOptions({ title: 'Updated!' })
+        }
+      />
+      // codeblock-focus-end
+    </View>
+  );
+}
+
+const MyStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        title: 'My home',
+      },
+    },
+  },
+});
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 ## Adjusting header styles
@@ -133,13 +309,28 @@ There are three key properties to use when customizing the style of your header:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js
-const MyStack = createStackNavigator({
+```js name="Header styles" snack version=7
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyStack = createNativeStackNavigator({
   screens: {
     Home: {
       screen: HomeScreen,
       options: {
         title: 'My home',
+        // highlight-start
         headerStyle: {
           backgroundColor: '#f4511e',
         },
@@ -147,18 +338,40 @@ const MyStack = createStackNavigator({
         headerTitleStyle: {
           fontWeight: 'bold',
         },
+        // highlight-end
       },
     },
   },
 });
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-<samp id="header-styles">header styles</samp>
+```js name="Header styles" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+// codeblock-focus-start
 function MyStack() {
   return (
     <Stack.Navigator>
@@ -167,6 +380,7 @@ function MyStack() {
         component={HomeScreen}
         options={{
           title: 'My home',
+          // highlight-start
           headerStyle: {
             backgroundColor: '#f4511e',
           },
@@ -174,9 +388,19 @@ function MyStack() {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
+          // highlight-end
         }}
       />
     </Stack.Navigator>
+  );
+}
+// codeblock-focus-end
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
   );
 }
 ```
@@ -198,8 +422,40 @@ It is common to want to configure the header in a similar way across many screen
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js
-const MyStack = createStackNavigator({
+```js name="Common screen options" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
+}
+
+function DetailsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyStack = createNativeStackNavigator({
+  // highlight-start
   screenOptions: {
     headerStyle: {
       backgroundColor: '#f4511e',
@@ -209,6 +465,7 @@ const MyStack = createStackNavigator({
       fontWeight: 'bold',
     },
   },
+  // highlight-end
   screens: {
     Home: {
       screen: HomeScreen,
@@ -218,17 +475,53 @@ const MyStack = createStackNavigator({
     },
   },
 });
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-<samp id="sharing-header-styles">sharing header styles</samp>
+```js name="Common screen options" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
+}
+
+function DetailsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+// codeblock-focus-start
 function MyStack() {
   return (
     <Stack.Navigator
+      // highlight-start
       screenOptions={{
         headerStyle: {
           backgroundColor: '#f4511e',
@@ -238,13 +531,24 @@ function MyStack() {
           fontWeight: 'bold',
         },
       }}
+      // highlight-end
     >
       <Stack.Screen
         name="Home"
         component={HomeScreen}
         options={{ title: 'My home' }}
       />
+      <Stack.Screen name="Details" component={DetailsScreen} />
     </Stack.Navigator>
+  );
+}
+// codeblock-focus-end
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
   );
 }
 ```
@@ -261,7 +565,21 @@ Sometimes you need more control than just changing the text and styles of your t
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js
+```js name="Custom title" snack version=7
+import * as React from 'react';
+import { Text, View, Image } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
 function LogoTitle() {
   return (
     <Image
@@ -271,24 +589,46 @@ function LogoTitle() {
   );
 }
 
-const MyStack = createStackNavigator({
+const MyStack = createNativeStackNavigator({
   screens: {
     Home: {
       screen: HomeScreen,
       options: {
+        // highlight-next-line
         headerTitle: (props) => <LogoTitle {...props} />,
       },
     },
   },
 });
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-<samp id="custom-header-title-component">custom header title component</samp>
+```js name="Custom title" snack version=7
+import * as React from 'react';
+import { Text, View, Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+// codeblock-focus-start
 function LogoTitle() {
   return (
     <Image
@@ -304,9 +644,21 @@ function MyStack() {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{ headerTitle: (props) => <LogoTitle {...props} /> }}
+        options={{
+          // highlight-next-line
+          headerTitle: (props) => <LogoTitle {...props} />,
+        }}
       />
     </Stack.Navigator>
+  );
+}
+// codeblock-focus-end
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
   );
 }
 ```
