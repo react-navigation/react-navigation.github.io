@@ -22,9 +22,16 @@ We recommend that the params you pass are JSON-serializable. That way, you'll be
 
 :::
 
-<samp id="passing-params" />
+```js name="Passing params" snack version=7
+import * as React from 'react';
+import { Button, View, Text } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
+// codeblock-focus-start
 function HomeScreen() {
   const navigation = useNavigation();
 
@@ -35,10 +42,12 @@ function HomeScreen() {
         title="Go to Details"
         onPress={() => {
           /* 1. Navigate to the Details route with params */
+          // highlight-start
           navigation.navigate('Details', {
             itemId: 86,
             otherParam: 'anything you want here',
           });
+          // highlight-end
         }}
       />
     </View>
@@ -49,7 +58,9 @@ function DetailsScreen({ route }) {
   const navigation = useNavigation();
 
   /* 2. Get the param */
+  // highlight-next-line
   const { itemId, otherParam } = route.params;
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Details Screen</Text>
@@ -57,16 +68,33 @@ function DetailsScreen({ route }) {
       <Text>otherParam: {JSON.stringify(otherParam)}</Text>
       <Button
         title="Go to Details... again"
-        onPress={() =>
-          navigation.push('Details', {
-            itemId: Math.floor(Math.random() * 100),
-          })
+        onPress={
+          () =>
+            // highlight-start
+            navigation.push('Details', {
+              itemId: Math.floor(Math.random() * 100),
+            })
+          // highlight-end
         }
       />
       <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
       <Button title="Go back" onPress={() => navigation.goBack()} />
     </View>
   );
+}
+// codeblock-focus-end
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Details: DetailsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
 }
 ```
 
@@ -83,6 +111,7 @@ You can also pass some initial params to a screen. If you didn't specify any par
 {
   Details: {
     screen: DetailsScreen,
+    // highlight-next-line
     initialParams: { itemId: 42 },
   },
 }
@@ -97,6 +126,7 @@ You can also pass some initial params to a screen. If you didn't specify any par
 <Stack.Screen
   name="Details"
   component={DetailsScreen}
+  // highlight-next-line
   initialParams={{ itemId: 42 }}
 />
 ```
@@ -110,12 +140,52 @@ Screens can also update their params, like they can update their state. The `nav
 
 Basic usage:
 
-<samp id="updating-params" />
+```js name="Updating params" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
-navigation.setParams({
-  query: 'someText',
+function HomeScreen({ route }) {
+  const navigation = useNavigation();
+  const { itemId } = route.params;
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Text>itemId: {JSON.stringify(itemId)}</Text>
+      <Button
+        title="Update param"
+        onPress={
+          () =>
+            // codeblock-focus-start
+            navigation.setParams({
+              itemId: Math.floor(Math.random() * 100),
+            })
+          // codeblock-focus-end
+        }
+      />
+    </View>
+  );
+}
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      initialParams: { itemId: 42 },
+    },
+  },
 });
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 :::note
@@ -130,9 +200,16 @@ Params aren't only useful for passing some data to a new screen, but they can al
 
 To achieve this, you can use the `navigate` method, which acts like `goBack` if the screen already exists. You can pass the `params` with `navigate` to pass the data back:
 
-<samp id="passing-params-back" />
+```js name="Passing params back" snack version=7
+import * as React from 'react';
+import { Text, View, TextInput, Button } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
+// codeblock-focus-start
 function HomeScreen({ route }) {
   const navigation = useNavigation();
 
@@ -140,6 +217,7 @@ function HomeScreen({ route }) {
     if (route.params?.post) {
       // Post updated, do something with `route.params.post`
       // For example, send the post to the server
+      console.log('Post', route.params?.post);
     }
   }, [route.params?.post]);
 
@@ -181,21 +259,103 @@ function CreatePostScreen({ route }) {
     </>
   );
 }
+// codeblock-focus-end
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    CreatePost: CreatePostScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 Here, after you press "Done", the home screen's `route.params` will be updated to reflect the post text that you passed in `navigate`.
 
-## Passing params to nested navigators
+## Passing params to a nested screen
 
-If you have nested navigators, you need to pass params a bit differently. For example, say you have a navigator inside the `Account` screen, and want to pass params to the `Settings` screen inside that navigator. Then you can pass params as following:
+If you have nested navigators, you need to pass params a bit differently. For example, say you have a navigator inside the `More` screen and want to pass params to the `Settings` screen inside that navigator. Then you can pass params as the following:
 
-<samp id="params-nested-navigators" />
+```js name="Passing params to nested screen" snack version=7
+import * as React from 'react';
+import { Text, View, TextInput, Button } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-```js
-navigation.navigate('Account', {
-  screen: 'Settings',
-  params: { user: 'jane' },
+function SettingsScreen({ route }) {
+  const navigation = useNavigation();
+  const { user } = route.params;
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+      <Text>userParam: {JSON.stringify(user)}</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Settings"
+        onPress={
+          () =>
+            // codeblock-focus-start
+            navigation.navigate('More', {
+              screen: 'Settings',
+              params: { user: 'jane' },
+            })
+          // codeblock-focus-end
+        }
+      />
+    </View>
+  );
+}
+
+const MoreStack = createNativeStackNavigator({
+  screens: {
+    Settings: SettingsScreen,
+    Profile: ProfileScreen,
+  },
 });
+
+const RootTabs = createBottomTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    More: MoreStack,
+  },
+});
+
+const Navigation = createStaticNavigation(RootTabs);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 See [Nesting navigators](nesting-navigators.md) for more details on nesting.
@@ -220,14 +380,14 @@ navigation.navigate('Profile', {
 });
 ```
 
-This looks convenient, and lets you access the user objects with `route.params.user` without any extra work.
+This looks convenient and lets you access the user objects with `route.params.user` without any extra work.
 
-However, this is an anti-pattern. Data such as user objects should be in your global store instead of the navigation state. Otherwise you have the same data duplicated in multiple places. This can lead to bugs such as the profile screen showing outdated data even if the user object has changed after navigation.
+However, this is an anti-pattern. Data such as user objects should be in your global store instead of the navigation state. Otherwise, you have the same data duplicated in multiple places. This can lead to bugs such as the profile screen showing outdated data even if the user object has changed after navigation.
 
 It also becomes problematic to link to the screen via deep linking or on the Web, since:
 
 1. The URL is a representation of the screen, so it also needs to contain the params, i.e. full user object, which can make the URL very long and unreadable
-2. Since the user object is in the URL, it's possible to pass a random user object representing a user which doesn't exist, or has incorrect data in the profile
+2. Since the user object is in the URL, it's possible to pass a random user object representing a user which doesn't exist or has incorrect data in the profile
 3. If the user object isn't passed, or improperly formatted, this could result in crashes as the screen won't know how to handle it
 
 A better way is to pass only the ID of the user in params:
