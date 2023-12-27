@@ -28,12 +28,14 @@ We'll do something similar to the latter, but rather than using a `window.locati
 
 ## Navigating to a new screen
 
-<samp id="new-screen" />
-
-```js
+```js name="Navigating to a new screen" snack version=7
+// codeblock-focus-start
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function HomeScreen() {
@@ -51,6 +53,29 @@ function HomeScreen() {
 }
 
 // ... other code from the previous section
+// codeblock-focus-end
+
+function DetailsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+    </View>
+  );
+}
+
+const RootStack = createNativeStackNavigator({
+  initialRouteName: 'Home',
+  screens: {
+    Home: HomeScreen,
+    Details: DetailsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 Let's break this down:
@@ -66,11 +91,32 @@ If we call `navigation.navigate` with a route name that we haven't defined in a 
 
 So we now have a stack with two routes: 1) the `Home` route 2) the `Details` route. What would happen if we navigated to the `Details` route again, from the `Details` screen?
 
-## Navigate to a route multiple times
+## Navigate to a screen multiple times
 
-<samp id="multiple-navigate" />
+```js name="Navigate to a screen multiple times" snack version=7
+import * as React from 'react';
+import { Button, View, Text } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
+}
+
+// codeblock-focus-start
 function DetailsScreen() {
   const navigation = useNavigation();
 
@@ -84,19 +130,79 @@ function DetailsScreen() {
     </View>
   );
 }
+// codeblock-focus-end
+
+const RootStack = createNativeStackNavigator({
+  initialRouteName: 'Home',
+  screens: {
+    Home: HomeScreen,
+    Details: DetailsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
-If you run this code, you'll notice that when you tap "Go to Details... again" that it doesn't do anything! This is because we are already on the Details route. The `navigate` function roughly means "go to this screen", and if you are already on that screen then it makes sense that it would do nothing.
+If you run this code, you'll notice that when you tap "Go to Details... again", it doesn't do anything! This is because we are already on the Details route. The `navigate` function roughly means "go to this screen", and if you are already on that screen then it makes sense that it would do nothing.
 
 Let's suppose that we actually _want_ to add another details screen. This is pretty common in cases where you pass in some unique data to each route (more on that later when we talk about `params`!). To do this, we can change `navigate` to `push`. This allows us to express the intent to add another route regardless of the existing navigation history.
 
-<samp id="multiple-push" />
+```js name="Navigate to a screen multiple times" snack version=7
+import * as React from 'react';
+import { Button, View, Text } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
-<Button
-  title="Go to Details... again"
-  onPress={() => navigation.push('Details')}
-/>
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
+}
+
+function DetailsScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+      // codeblock-focus-start
+      <Button
+        title="Go to Details... again"
+        onPress={() => navigation.push('Details')}
+      />
+      // codeblock-focus-end
+    </View>
+  );
+}
+
+const RootStack = createNativeStackNavigator({
+  initialRouteName: 'Home',
+  screens: {
+    Home: HomeScreen,
+    Details: DetailsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
@@ -111,11 +217,32 @@ Each time you call `push` we add a new route to the navigation stack. When you c
 
 The header provided by the native stack navigator will automatically include a back button when it is possible to go back from the active screen (if there is only one screen in the navigation stack, there is nothing that you can go back to, and so there is no back button).
 
-Sometimes you'll want to be able to programmatically trigger this behavior, and for that you can use `navigation.goBack();`.
+Sometimes you'll want to be able to programmatically trigger this behavior, and for that, you can use `navigation.goBack()`.
 
-<samp id="go-back" />
+```js name="Going back" snack version=7
+import * as React from 'react';
+import { Button, View, Text } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
+}
+
+// codeblock-focus-start
 function DetailsScreen() {
   const navigation = useNavigation();
 
@@ -126,10 +253,26 @@ function DetailsScreen() {
         title="Go to Details... again"
         onPress={() => navigation.push('Details')}
       />
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      // highlight-start
       <Button title="Go back" onPress={() => navigation.goBack()} />
+      // highlight-end
     </View>
   );
+}
+// codeblock-focus-end
+
+const RootStack = createNativeStackNavigator({
+  initialRouteName: 'Home',
+  screens: {
+    Home: HomeScreen,
+    Details: DetailsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
 }
 ```
 
@@ -141,9 +284,30 @@ On Android, React Navigation hooks in to the hardware back button and fires the 
 
 Another common requirement is to be able to go back _multiple_ screens -- for example, if you are several screens deep in a stack and want to dismiss all of them to go back to the first screen. In this case, we know that we want to go back to `Home` so we can use `popTo('Home')`. Another alternative would be `navigation.popToTop()`, which goes back to the first screen in the stack.
 
-<samp id="pop-to-top" />
+```js name="Going back to specific screen" snack version=7
+import * as React from 'react';
+import { Button, View, Text } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-```js
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
+}
+
+// codeblock-focus-start
 function DetailsScreen() {
   const navigation = useNavigation();
 
@@ -154,14 +318,31 @@ function DetailsScreen() {
         title="Go to Details... again"
         onPress={() => navigation.push('Details')}
       />
-      <Button title="Go to Home" onPress={() => navigation.popTo('Home')} />
       <Button title="Go back" onPress={() => navigation.goBack()} />
+      // highlight-start
+      <Button title="Go to Home" onPress={() => navigation.popTo('Home')} />
       <Button
         title="Go back to first screen in stack"
         onPress={() => navigation.popToTop()}
       />
+      // highlight-end
     </View>
   );
+}
+// codeblock-focus-end
+
+const RootStack = createNativeStackNavigator({
+  initialRouteName: 'Home',
+  screens: {
+    Home: HomeScreen,
+    Details: DetailsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
 }
 ```
 
