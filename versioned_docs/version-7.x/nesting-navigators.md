@@ -798,11 +798,9 @@ navigation.navigate('Root', {
 
 This affects what happens when pressing the back button. When there's an initial screen, the back button will take the user there.
 
-## Nesting multiple navigators
+## Avoiding multiple headers when nesting
 
-It's sometimes useful to nest multiple navigators such as stack, drawer or tabs.
-
-When nesting multiple stack, drawer or bottom tab navigator, headers from both child and parent navigators would be shown. However, usually it's more desirable to show the header in the child navigator and hide the header in the screen of the parent navigator.
+When nesting multiple stack, drawer or bottom tab navigators, headers from both child and parent navigators would be shown. However, usually it's more desirable to show the header in the child navigator and hide the header in the screen of the parent navigator.
 
 To achieve this, you can hide the header in the screen containing the navigator using the `headerShown: false` option.
 

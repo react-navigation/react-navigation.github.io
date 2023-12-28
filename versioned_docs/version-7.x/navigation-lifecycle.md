@@ -308,6 +308,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 function ProfileScreen() {
   const navigation = useNavigation();
 
+  // highlight-start
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       // Screen was focused
@@ -318,7 +319,9 @@ function ProfileScreen() {
 
     return unsubscribe;
   }, [navigation]);
+  // highlight-end
 
+  // highlight-start
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('blur', () => {
       console.log('ProfileScreen blurred');
@@ -326,6 +329,7 @@ function ProfileScreen() {
 
     return unsubscribe;
   }, [navigation]);
+  // highlight-end
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -392,6 +396,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 function ProfileScreen() {
   const navigation = useNavigation();
 
+
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       // Screen was focused
@@ -402,7 +407,9 @@ function ProfileScreen() {
 
     return unsubscribe;
   }, [navigation]);
+  // highlight-end
 
+  // highlight-start
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('blur', () => {
       console.log('ProfileScreen blurred');
@@ -410,6 +417,7 @@ function ProfileScreen() {
 
     return unsubscribe;
   }, [navigation]);
+  // highlight-end
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -493,8 +501,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFocusEffect } from '@react-navigation/native';
 
 function ProfileScreen() {
-  const navigation = useNavigation();
-
+  // highlight-start
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
@@ -507,6 +514,7 @@ function ProfileScreen() {
       };
     }, [])
   );
+  // highlight-end
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -556,8 +564,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFocusEffect } from '@react-navigation/native';
 
 function ProfileScreen() {
-  const navigation = useNavigation();
-
+  // highlight-start
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
@@ -570,6 +577,7 @@ function ProfileScreen() {
       };
     }, [])
   );
+  // highlight-end
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
