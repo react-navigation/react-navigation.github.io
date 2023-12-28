@@ -308,28 +308,25 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 function ProfileScreen() {
   const navigation = useNavigation();
 
-  // highlight-start
   React.useEffect(() => {
+    // highlight-start
     const unsubscribe = navigation.addListener('focus', () => {
-      // Screen was focused
-      // Do something
-
       console.log('ProfileScreen focused');
     });
+    // highlight-end
 
     return unsubscribe;
   }, [navigation]);
-  // highlight-end
 
-  // highlight-start
   React.useEffect(() => {
+    // highlight-start
     const unsubscribe = navigation.addListener('blur', () => {
       console.log('ProfileScreen blurred');
     });
+    // highlight-end
 
     return unsubscribe;
   }, [navigation]);
-  // highlight-end
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -396,28 +393,25 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 function ProfileScreen() {
   const navigation = useNavigation();
 
-
   React.useEffect(() => {
+    // highlight-start
     const unsubscribe = navigation.addListener('focus', () => {
-      // Screen was focused
-      // Do something
-
       console.log('ProfileScreen focused');
     });
+    // highlight-end
 
     return unsubscribe;
   }, [navigation]);
-  // highlight-end
 
-  // highlight-start
   React.useEffect(() => {
+    // highlight-start
     const unsubscribe = navigation.addListener('blur', () => {
       console.log('ProfileScreen blurred');
     });
+    // highlight-end
 
     return unsubscribe;
   }, [navigation]);
-  // highlight-end
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
