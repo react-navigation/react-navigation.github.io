@@ -95,6 +95,7 @@
 
 .tabs__item {
   border-bottom-width: 2px;
+  border-radius: 0;
 }
 
 .theme-edit-this-page svg, .theme-admonition svg {
@@ -126,4 +127,6 @@ button[class*=DocSearch-Button] {
 .badge {
   border-radius: 0;
 }
+
+
 
