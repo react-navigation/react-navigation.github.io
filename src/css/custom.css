@@ -6,6 +6,8 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  --ifm-code-border-radius: 0;
+  --ifm-alert-border-radius: 0;
   --ifm-color-primary: #6b52ae;
   --ifm-color-primary-dark: #60499d;
   --ifm-color-primary-darker: #5b4594;
@@ -25,7 +27,6 @@
   --ifm-home-color-black: #25292e;
   --ifm-home-color-white: #f7f7ff;
 
-  --ifm-menu-color-background-active: rgba(107, 82, 174, 0.1);
   --docusaurus-highlighted-code-line-bg: rgba(107, 82, 174, 0.1);
 
   --ifm-tabs-padding-vertical: 0.5rem;
@@ -109,3 +110,20 @@ samp {
   margin-bottom: 25px;
   margin-top: -8px;
 }
+
+button[class*=DocSearch-Button] {
+  flex: 1;
+  font-weight: 400;
+  padding-left: 16px;
+  width: 100%;
+  border-radius: 0!important;
+}
+
+.menu__link {
+  border-radius: 0;
+}
+
+.badge {
+  border-radius: 0;
+}
+
