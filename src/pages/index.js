@@ -39,6 +39,25 @@ const features = [
   },
 ];
 
+function Logo() {
+  return (
+    <>
+    <div className="logo_outercircle logo_outeranimate">
+      <div className="logo_innercircle logo_inner1"/>
+      <div className="logo_innercircle logo_inner2"/>
+      <div className="logo_innercircle logo_inner3"/>
+    </div>
+    <div className="logo_outercircle logo_outeranimate">
+      <div className="logo_innercircle logo_inner1c"/>
+      <div className="logo_innercircle logo_inner2c"/>
+      <div className="logo_innercircle logo_inner3c"/>
+    </div>
+    <div className="logo_outercircle">
+      <div className="logo_innercircle"/>
+    </div>
+    </>
+  )
+}
 function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
@@ -46,6 +65,7 @@ function Home() {
   return (
     <Layout title={siteConfig.title} description={siteConfig.tagline}>
       <Splash />
+      <Logo/>
       <Features />
       <Sponsors />
     </Layout>

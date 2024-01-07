@@ -109,3 +109,190 @@ samp {
   margin-bottom: 25px;
   margin-top: -8px;
 }
+
+.logo_outercircle {
+  border-width: 4px;
+  border-color: #6b52ae;
+  border-style: solid;
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  margin: 30px;
+}
+
+.logo_outeranimate {
+  animation: widthbreathing 5s ease-out infinite normal;
+
+}
+
+@keyframes breathing {
+  0% {
+    transform: scaleX(1);
+  }
+
+  35% {
+    transform: scaleX(1.3);
+  }
+
+  50% {
+    transform: scaleX(1.3) ;
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes breathing1 {
+  0% {
+    transform: rotate(120deg)  scaleX(1);
+  }
+
+  35% {
+    transform: rotate(120deg) scaleX(1.3);
+  }
+
+  50% {
+    transform: rotate(120deg) scaleX(1.3) ;
+  }
+
+  100% {
+    transform:  rotate(120deg)  scaleX(1);
+  }
+}
+
+@keyframes breathing2 {
+  0% {
+    transform: rotate(240deg)  scaleX(1);
+  }
+
+  35% {
+    transform: rotate(240deg) scaleX(1.3);
+  }
+
+  50% {
+    transform: rotate(240deg) scaleX(1.3) ;
+  }
+
+  100% {
+    transform:  rotate(240deg)  scaleX(1);
+  }
+}
+
+@keyframes cbreathing {
+  0% {
+    transform: scaleX(1);
+  }
+
+  35% {
+    transform: scaleX(1.3);
+  }
+
+  50% {
+    transform: scaleX(1.3) ;
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes cbreathing1 {
+  0% {
+    transform: scaleX(1);
+  }
+
+  35% {
+    transform: rotate(120deg) scaleX(1.3);
+  }
+
+  50% {
+    transform: rotate(120deg) scaleX(1.3) ;
+  }
+
+  100% {
+    transform:  scaleX(1);
+  }
+}
+
+@keyframes cbreathing2 {
+  0% {
+    transform: scaleX(1);
+  }
+
+  35% {
+    transform: rotate(240deg) scaleX(1.3);
+  }
+
+  50% {
+    transform: rotate(240deg) scaleX(1.3) ;
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes widthbreathing {
+  0% {
+    border-width: 4px;
+  }
+
+  50% {
+    border-width: 3px;
+  }
+
+  50% {
+    border-width: 3px;
+  }
+
+  100% {
+    border-width: 4px;
+  }
+}
+
+.logo_innercircle {
+  border-width: 4px;
+  border-color: #6b52ae;
+  border-style: solid;
+  border-radius: 50px;
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  margin: auto;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.logo_inner2 {
+  animation: breathing1 5s ease-out infinite normal,
+  widthbreathing 5s ease-out infinite normal;
+}
+
+.logo_inner1 {
+  animation: breathing 5s ease-out infinite normal,
+  widthbreathing 5s ease-out infinite normal;
+}
+
+.logo_inner3 {
+  animation: breathing2 5s ease-out infinite normal,
+  widthbreathing 5s ease-out infinite normal;
+}
+
+.logo_inner2c {
+  animation: cbreathing1 5s ease-out infinite normal,
+  widthbreathing 5s ease-out infinite normal;
+}
+
+.logo_inner1c {
+  animation: breathing 5s ease-out infinite normal,
+  widthbreathing 5s ease-out infinite normal;
+}
+
+.logo_inner3c {
+  animation: cbreathing2 5s ease-out infinite normal,
+  widthbreathing 5s ease-out infinite normal;
+}
