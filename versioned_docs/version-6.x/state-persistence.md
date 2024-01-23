@@ -26,7 +26,7 @@ import { NavigationContainer } from '@react-navigation/native';
 const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
 
 export default function App() {
-  const [isReady, setIsReady] = React.useState(false);
+  const [isReady, setIsReady] = React.useState(Platform.OS === 'web'); // Don't persist state on web since it's based on URL
   const [initialState, setInitialState] = React.useState();
 
   React.useEffect(() => {
@@ -34,10 +34,12 @@ export default function App() {
       try {
         const initialUrl = await Linking.getInitialURL();
 
-        if (Platform.OS !== 'web' && initialUrl == null) {
-          // Only restore state if there's no deep link and we're not on web
+        if (initialUrl == null) {
+          // Only restore state if there's no deep link
           const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
-          const state = savedStateString ? JSON.parse(savedStateString) : undefined;
+          const state = savedStateString
+            ? JSON.parse(savedStateString)
+            : undefined;
 
           if (state !== undefined) {
             setInitialState(state);
