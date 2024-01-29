@@ -110,7 +110,7 @@ This change is required to avoid crashes related to View state being not persist
 
 #### Alternative approach
 
-The above fix removes all state from the app which for some products might not be the best behaviour. To work around this you can turn off react-native-screens for Android speicifcally using the code below
+The above fix removes all state from the app which for some products might not be the best behaviour. To work around this you can turn off react-native-screens for Android only using the code below
 
 ```js
 enableScreens(Platform.select({ android: false, ios: true })
