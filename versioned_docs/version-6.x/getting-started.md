@@ -108,6 +108,14 @@ import android.os.Bundle;
 
 This change is required to avoid crashes related to View state being not persisted consistently across Activity restarts.
 
+#### Alternative approach
+
+The above fix removes all state from the app which for some products might not be the best behaviour. To work around this you can turn off react-native-screens for Android speicifcally using the code below
+
+```js
+enableScreens(Platform.select({ android: false, ios: true })
+```
+
 :::info
 
 When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional dependencies. If you're getting an error "Unable to resolve module", you need to install that module in your project.
