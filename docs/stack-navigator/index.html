@@ -14,7 +14,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="React Navigation" href="/opensearch.xml">
 
 <script src="/js/snack-helpers.js"></script><link rel="stylesheet" href="/assets/css/styles.a8f3f06b.css">
-<script src="/assets/js/runtime~main.8cf1b4bb.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.0ed6a5f5.js" defer="defer"></script>
 <script src="/assets/js/main.c6567798.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -66,8 +66,6 @@
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="detachinactivescreens"><code>detachInactiveScreens</code><a href="#detachinactivescreens" class="hash-link" aria-label="Direct link to detachinactivescreens" title="Direct link to detachinactivescreens">​</a></h4>
 <p>Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with <a href="https://github.com/software-mansion/react-native-screens" target="_blank" rel="noopener noreferrer">react-native-screens</a>. Defaults to <code>true</code>.</p>
 <p>If you need to disable this optimization for specific screens (e.g. you want to screen to stay in view even when unfocused) <a href="#detachpreviousscreen"><code>detachPreviousScreen</code></a> option.</p>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="keyboardhandlingenabled"><code>keyboardHandlingEnabled</code><a href="#keyboardhandlingenabled" class="hash-link" aria-label="Direct link to keyboardhandlingenabled" title="Direct link to keyboardhandlingenabled">​</a></h4>
-<p>If <code>false</code>, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to <code>true</code>.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="options">Options<a href="#options" class="hash-link" aria-label="Direct link to Options" title="Direct link to Options">​</a></h3>
 <p>The following <a href="/docs/screen-options">options</a> can be used to configure the screens in the navigator. These can be specified under <code>screenOptions</code> prop of <code>Stack.navigator</code> or <code>options</code> prop of <code>Stack.Screen</code>.</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="title"><code>title</code><a href="#title" class="hash-link" aria-label="Direct link to title" title="Direct link to title">​</a></h4>
@@ -137,6 +135,8 @@
 <p>Interpolated styles for various parts of the card. Refer the <a href="#animations">Animations section</a> for details.</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="headerstyleinterpolator"><code>headerStyleInterpolator</code><a href="#headerstyleinterpolator" class="hash-link" aria-label="Direct link to headerstyleinterpolator" title="Direct link to headerstyleinterpolator">​</a></h4>
 <p>Interpolated styles for various parts of the header. Refer the <a href="#animations">Animations section</a> for details.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="keyboardhandlingenabled"><code>keyboardHandlingEnabled</code><a href="#keyboardhandlingenabled" class="hash-link" aria-label="Direct link to keyboardhandlingenabled" title="Direct link to keyboardhandlingenabled">​</a></h4>
+<p>If <code>false</code>, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to <code>true</code>.</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="detachpreviousscreen"><code>detachPreviousScreen</code><a href="#detachpreviousscreen" class="hash-link" aria-label="Direct link to detachpreviousscreen" title="Direct link to detachpreviousscreen">​</a></h4>
 <p>Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to <code>false</code> if you need the previous screen to be seen through the active screen. Only applicable if <code>detachInactiveScreens</code> isn&#x27;t set to <code>false</code>.</p>
 <p>This is automatically adjusted when using <a href="#presentation"><code>presentation</code></a> as <code>transparentModal</code> or <code>modal</code> to keep the required screens visible. Defaults to <code>true</code> in other cases.</p>
