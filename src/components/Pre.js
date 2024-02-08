@@ -73,7 +73,21 @@ export default function Pre({
     }
 
     const dependencies = deps
-      ? Object.fromEntries(deps.split(',').map((entry) => entry.split('@')))
+      ? Object.fromEntries(
+          deps.split(',').map((entry) => {
+            let prefix = '';
+
+            // Handles scoped packages, e.g. @expo/vector-icons
+            if (entry.startsWith('@')) {
+              prefix = '@';
+              entry = entry.slice(1);
+            }
+
+            const [name, version = '*'] = entry.split('@');
+
+            return [prefix + name, version];
+          })
+        )
       : {};
 
     Object.assign(
@@ -118,6 +132,11 @@ export default function Pre({
           ].every((comment) => line.trim() !== comment)
         )
         .join('\n')
+        // Use expo/vector-icons instead of react-native-vector-icons for snack
+        .replace(
+          /import (.*) from 'react-native-vector-icons\/(.*)'/g,
+          'import $1 from "@expo/vector-icons/$2"'
+        )
     );
 
     url.searchParams.set(
