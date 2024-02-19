@@ -4,6 +4,9 @@ title: Multiple drawers
 sidebar_label: Multiple drawers
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Sometimes we want to have multiple drawers on the same screen: one on the left and one on the right. This can be achieved in 2 ways:
 
 1. By using [`react-native-drawer-layout`](drawer-layout.md) directly (Recommended).
@@ -14,6 +17,64 @@ Sometimes we want to have multiple drawers on the same screen: one on the left a
 When we have multiple drawers, only one of them shows the list of screens. The second drawer may often be used to show some additional information such as the list of users etc.
 
 In such cases, we can use [`react-native-drawer-layout`](drawer-layout.md) directly to render the second drawer. The drawer navigator will be used to render the first drawer and can be nested inside the second drawer:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+import * as React from 'react';
+import { Button, View } from 'react-native';
+import { Drawer } from 'react-native-drawer-layout';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.openDrawer()} title="Open drawer" />
+    </View>
+  );
+}
+
+const LeftDrawerScreen = createDrawerNavigator({
+  screenOptions: {
+    drawerPosition: 'left',
+  },
+  screens: {
+    Home: HomeScreen,
+  },
+});
+
+function RightDrawerScreen() {
+  const [rightDrawerOpen, setRightDrawerOpen] = React.useState(false);
+
+  return (
+    <Drawer
+      open={rightDrawerOpen}
+      onOpen={() => setRightDrawerOpen(true)}
+      onClose={() => setRightDrawerOpen(false)}
+      drawerPosition="right"
+      renderDrawerContent={() => <>{/* Right drawer content */}</>}
+    >
+      <LeftDrawerScreen />
+    </Drawer>
+  );
+}
+
+const Navigation = createStaticNavigation(RightDrawerScreen);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
 
 ```js
 import * as React from 'react';
@@ -64,9 +125,87 @@ export default function App() {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 But there is one problem. When we call `navigation.openDrawer()` in our `HomeScreen`, it always opens the left drawer. We don't have access to the right drawer via the `navigation` object since it's not a navigator.
 
 To solve this, we need to use context API to pass down a function to control the right drawer:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+import * as React from 'react';
+import { Button, View } from 'react-native';
+import { Drawer } from 'react-native-drawer-layout';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  useNavigation,
+  createStaticNavigation,
+} from '@react-navigation/native';
+
+const RightDrawerContext = React.createContext();
+
+function HomeScreen() {
+  const { openRightDrawer } = React.useContext(RightDrawerContext);
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        onPress={() => navigation.openDrawer()}
+        title="Open left drawer"
+      />
+      <Button onPress={() => openRightDrawer()} title="Open right drawer" />
+    </View>
+  );
+}
+
+const LeftDrawerScreen = createDrawerNavigator({
+  screenOptions: {
+    drawerPosition: 'left',
+  },
+  screens: {
+    Home: HomeScreen,
+  },
+});
+
+function RightDrawerScreen() {
+  const [rightDrawerOpen, setRightDrawerOpen] = React.useState(false);
+
+  const value = React.useMemo(
+    () => ({
+      openRightDrawer: () => setRightDrawerOpen(true),
+      closeRightDrawer: () => setRightDrawerOpen(false),
+    }),
+    []
+  );
+
+  return (
+    <Drawer
+      open={rightDrawerOpen}
+      onOpen={() => setRightDrawerOpen(true)}
+      onClose={() => setRightDrawerOpen(false)}
+      drawerPosition="right"
+      renderDrawerContent={() => <>{/* Right drawer content */}</>}
+    >
+      <RightDrawerContext.Provider value={value}>
+        <LeftDrawerScreen />
+      </RightDrawerContext.Provider>
+    </Drawer>
+  );
+}
+
+const Navigation = createStaticNavigation(RightDrawerScreen);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
 
 ```js
 import * as React from 'react';
@@ -135,6 +274,9 @@ export default function App() {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 Here, we are using the `RightDrawerContext` to pass down the `openRightDrawer` function to the `HomeScreen`. Then we use `openRightDrawer` to open the right drawer.
 
 ## Nesting 2 drawer navigators
@@ -143,9 +285,58 @@ An alternative approach is to nest 2 [drawer navigators](drawer-navigator.md) in
 
 Here we have 2 drawer navigators nested inside each other, one is positioned on left and the other on the right:
 
-<samp id="multiple-drawers-issue"/>
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Multiple drawers" snack version=7
+import * as React from 'react';
+import { Button, View } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.openDrawer()} title="Open drawer" />
+    </View>
+  );
+}
+
+const LeftDrawerScreen = createDrawerNavigator({
+  screenOptions: {
+    drawerPosition: 'left',
+  },
+  screens: {
+    Home: HomeScreen,
+  },
+});
+
+const RightDrawerScreen = createDrawerNavigator({
+  screenOptions: {
+    drawerPosition: 'right',
+    headerShown: false,
+  },
+  screens: {
+    HomeDrawer: LeftDrawerScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RightDrawerScreen);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="Multiple drawers" snack version=7
 import * as React from 'react';
 import { Button, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -190,6 +381,9 @@ export default function App() {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 But there is one problem. When we call `navigation.openDrawer()` in our `HomeScreen`, it always opens the left drawer since it's the immediate parent of the screen.
 
 To solve this, we need to use [`navigation.getParent`](navigation-object.md#getparent) to refer to the right drawer which is the parent of the left drawer. So our code would look like:
@@ -205,9 +399,76 @@ To customize the contents of the drawer, we can use the [`drawerContent` prop](d
 
 The final code would look like this:
 
-<samp id="multiple-drawers" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Multiple drawers navigators" snack version=7
+import * as React from 'react';
+import { Button, Text, View } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        onPress={() => navigation.getParent('LeftDrawer').openDrawer()}
+        title="Open left drawer"
+      />
+      <Button
+        onPress={() => navigation.getParent('RightDrawer').openDrawer()}
+        title="Open right drawer"
+      />
+    </View>
+  );
+}
+
+function RightDrawerContent() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>This is the right drawer</Text>
+    </View>
+  );
+}
+
+const LeftDrawerScreen = createDrawerNavigator({
+  id: 'LeftDrawer',
+  screenOptions: {
+    drawerPosition: 'left',
+  },
+  screens: {
+    Home: HomeScreen,
+  },
+});
+
+const RightDrawerScreen = createDrawerNavigator({
+  id: 'RightDrawer',
+  drawerContent: (props) => <RightDrawerContent {...props} />,
+  screenOptions: {
+    drawerPosition: 'right',
+    headerShown: false,
+  },
+  screens: {
+    HomeDrawer: LeftDrawerScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RightDrawerScreen);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="Multiple drawers navigators" snack version=7
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -274,6 +535,9 @@ export default function App() {
   );
 }
 ```
+
+</TabItem>
+</Tabs>
 
 Here, we are passing `"LeftDrawer"` and `"RightDrawer"` strings (you can use any string here) in the `id` prop of the drawer navigators. Then we use `navigation.getParent('LeftDrawer').openDrawer()` to open the left drawer and `navigation.getParent('RightDrawer').openDrawer()` to open the right drawer.
 

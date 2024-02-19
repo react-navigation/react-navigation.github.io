@@ -4,6 +4,9 @@ title: Drawer navigation
 sidebar_label: Drawer navigation
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Common pattern in navigation is to use drawer from left (sometimes right) side for navigating between screens.
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
@@ -19,9 +22,59 @@ Before continuing, first install and configure [`@react-navigation/drawer`](http
 To use this drawer navigator, import it from `@react-navigation/drawer`:
 (swipe right to open)
 
-<samp id="drawer-based-navigation" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Drawer navigation" snack version=7
+import * as React from 'react';
+import { Button, View } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        onPress={() => navigation.navigate('Notifications')}
+        title="Go to notifications"
+      />
+    </View>
+  );
+}
+
+function NotificationsScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    </View>
+  );
+}
+
+const Drawer = createDrawerNavigator({
+  screens: {
+    Home: HomeScreen,
+    Notifications: NotificationsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(Drawer);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="Drawer navigation" snack version=7
 import * as React from 'react';
 import { Button, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -60,30 +113,27 @@ export default function App() {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 ## Opening and closing drawer
 
 To open and close drawer, use the following helpers:
 
-<samp id="drawer-open-close-toggle" />
-
-```js
+```js name="Drawer open and close"
 navigation.openDrawer();
 navigation.closeDrawer();
 ```
 
 If you would like to toggle the drawer you call the following:
 
-<samp id="drawer-open-close-toggle" />
-
-```js
+```js name="Drawer toggle"
 navigation.toggleDrawer();
 ```
 
 Each of these functions, behind the scenes, are simply dispatching actions:
 
-<samp id="drawer-dispatch" />
-
-```js
+```js name="Navigation dispatcher"
 navigation.dispatch(DrawerActions.openDrawer());
 navigation.dispatch(DrawerActions.closeDrawer());
 navigation.dispatch(DrawerActions.toggleDrawer());
@@ -91,7 +141,7 @@ navigation.dispatch(DrawerActions.toggleDrawer());
 
 If you would like to determine if drawer is open or closed, you can do the following:
 
-```js
+```js name="Drawer hook"
 import { useDrawerStatus } from '@react-navigation/drawer';
 
 // ...

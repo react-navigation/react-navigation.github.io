@@ -4,6 +4,9 @@ title: Authentication flows
 sidebar_label: Authentication flows
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Most apps require that a user authenticates in some way to have access to data associated with a user or other private content. Typically the flow will look like this:
 
 - The user opens the app.
@@ -27,22 +30,145 @@ We can define different screens based on some condition. For example, if the use
 
 For example:
 
-<samp id="conditional-screens" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static">
 
-```js
-isSignedIn ? (
-  <>
-    <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="Profile" component={ProfileScreen} />
-    <Stack.Screen name="Settings" component={SettingsScreen} />
-  </>
-) : (
-  <>
-    <Stack.Screen name="SignIn" component={SignInScreen} />
-    <Stack.Screen name="SignUp" component={SignUpScreen} />
-  </>
-);
+```js name="Customizing tabs appearance" snack version=7
+import * as React from 'react';
+import { View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const useIsSignedIn = () => {
+  return true;
+};
+
+const useIsSignedOut = () => {
+  return false;
+};
+
+const signedInTabs = createBottomTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+    Settings: SettingsScreen,
+  },
+});
+
+const signedOutTabs = createBottomTabNavigator({
+  screens: {
+    SignIn: SignInScreen,
+    SignUp: SignUpScreen,
+  },
+});
+
+// codeblock-focus-start
+const RootStack = createNativeStackNavigator({
+  screens: {
+    LoggedIn: {
+      if: useIsSignedIn,
+      screen: signedInTabs,
+    },
+    LoggedOut: {
+      if: useIsSignedOut,
+      screen: signedOutTabs,
+    },
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+
+function HomeScreen() {
+  return <View />;
+}
+
+function ProfileScreen() {
+  return <View />;
+}
+
+function SettingsScreen() {
+  return <View />;
+}
+
+function SignInScreen() {
+  return <View />;
+}
+
+function SignUpScreen() {
+  return <View />;
+}
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Customizing tabs appearance" snack version=7
+import * as React from 'react';
+import { View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
+
+const getIsSignedIn = () => {
+  // custom logic
+  return true;
+};
+
+export default function App() {
+  const isSignedIn = getIsSignedIn();
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        // codeblock-focus-start
+        {isSignedIn ? (
+          <>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="Settings" component={SettingsScreen} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="SignIn" component={SignInScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
+          </>
+        )}
+        // codeblock-focus-end
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+function HomeScreen() {
+  return <View />;
+}
+
+function ProfileScreen() {
+  return <View />;
+}
+
+function SettingsScreen() {
+  return <View />;
+}
+
+function SignInScreen() {
+  return <View />;
+}
+
+function SignUpScreen() {
+  return <View />;
+}
+```
+
+</TabItem>
+</Tabs>
 
 When we define screens like this, when `isSignedIn` is `true`, React Navigation will only see the `Home`, `Profile` and `Settings` screens, and when it's `false`, React Navigation will see the `SignIn` and `SignUp` screens. This makes it impossible to navigate to the `Home`, `Profile` and `Settings` screens when the user is not signed in, and to `SignIn` and `SignUp` screens when the user is signed in.
 
@@ -107,6 +233,27 @@ The main thing to notice is that we're conditionally defining screens based on t
 
 Here, we're conditionally defining one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly, for the screens accessible after signing in, you probably have more than one screen. We can use `React.Fragment` to define multiple screens:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    LoggedIn: {
+      if: state.userToken != null,
+      screen: signedInTabs,
+    },
+    LoggedOut: {
+      if: state.userToken == null,
+      screen: signedOutTabs,
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
 ```js
 state.userToken == null ? (
   <>
@@ -121,6 +268,9 @@ state.userToken == null ? (
   </>
 );
 ```
+
+</TabItem>
+</Tabs>
 
 :::tip
 
