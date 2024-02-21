@@ -4,6 +4,9 @@ title: Testing with Jest
 sidebar_label: Testing with Jest
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Testing code using React Navigation may require some setup since we need to mock native dependencies used in the navigators. We recommend using [Jest](https://jestjs.io) to write unit tests.
 
 ## Mocking native modules
@@ -45,9 +48,7 @@ Then we need to use this setup file in our jest config. You can add it under `se
 ```json
 {
   "preset": "react-native",
-  "setupFiles": [
-    "<rootDir>/jest/setup.js"
-  ],
+  "setupFiles": ["<rootDir>/jest/setup.js"]
 }
 ```
 
@@ -61,7 +62,30 @@ We recommend using [React Native Testing Library](https://callstack.github.io/re
 
 Example:
 
-```js
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static">
+
+```js name='Testing with jest'
+import * as React from 'react';
+import { screen, render, fireEvent } from '@testing-library/react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { RootNavigator } from './RootNavigator';
+
+const Navigation = createStaticNavigation(RootNavigator);
+
+test('shows profile screen when View Profile is pressed', () => {
+  render(<Navigation />);
+
+  fireEvent.press(screen.getByText('View Profile'));
+
+  expect(screen.getByText('My Profile')).toBeOnTheScreen();
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name='Testing with jest'
 import * as React from 'react';
 import { screen, render, fireEvent } from '@testing-library/react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -79,6 +103,9 @@ test('shows profile screen when View Profile is pressed', () => {
   expect(screen.getByText('My Profile')).toBeOnTheScreen();
 });
 ```
+
+</TabItem>
+</Tabs>
 
 ## Best practices
 
