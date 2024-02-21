@@ -117,7 +117,7 @@ function SettingsStackScreen() {
 
 export default function App() {
   return (
-    <NavigationContainer screenOptions={{ headerShown: false }}>
+    <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeStackScreen} />
         <Tab.Screen name="Settings" component={SettingsStackScreen} />
@@ -231,7 +231,7 @@ function SettingsStackScreen() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Navigator>
         <Tab.Screen
           name="Home"
           component={HomeStackScreen}
@@ -298,9 +298,6 @@ function SettingsScreen() {
 
 // codeblock-focus-start
 const HomeTabs = createBottomTabNavigator({
-  screenOptions: {
-    headerShown: false,
-  },
   screens: {
     Feed: FeedScreen,
     Profile: ProfileScreen,
@@ -361,7 +358,7 @@ const Tab = createBottomTabNavigator();
 
 function HomeTabs() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator>
       <Tab.Screen name="Feed" component={FeedScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
       <Tab.Screen name="Account" component={AccountScreen} />
@@ -659,7 +656,6 @@ const HomeTabs = createBottomTabNavigator({
 });
 
 const RootStack = createNativeStackNavigator({
-  headerShown: false,
   screens: {
     Home: HomeTabs,
     Settings: SettingsScreen,
@@ -743,11 +739,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <RootStack.Navigator>
-        <RootStack.Screen
-          name="Home"
-          component={HomeTabs}
-          screenOptions={{ headerShown: false }}
-        />
+        <RootStack.Screen name="Home" component={HomeTabs} />
         <RootStack.Screen name="Settings" component={SettingsScreen} />
       </RootStack.Navigator>
     </NavigationContainer>
