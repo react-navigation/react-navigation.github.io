@@ -63,8 +63,18 @@ function DetailsScreen() {
 
 const HomeStack = createStackNavigator({
   screens: {
-    Home: HomeScreen,
-    Details: DetailsScreen,
+    Home: {
+      screen: HomeScreen,
+      options: {
+        headerShown: false,
+      },
+    },
+    Details: {
+      screen: DetailsScreen,
+      options: {
+        headerShown: false,
+      },
+    },
   },
 });
 
