@@ -1,3 +1,9 @@
+---
+id: shared-element-transitions
+title: Animating elements between screens
+sidebar_label: Animating elements between screens
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
