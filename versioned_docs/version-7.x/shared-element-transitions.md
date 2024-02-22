@@ -7,8 +7,6 @@ sidebar_label: Animating elements between screens
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Animating elements between screens
-
 This guide covers how to animate elements between screens. This feature is known as a [Shared Element Transition](https://docs.swmansion.com/react-native-reanimated/docs/api/sharedElementTransitions) and it's implemented in the [`@react-navigation/native-stack`](native-stack-navigator.md) with [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/).
 
 :::warning
