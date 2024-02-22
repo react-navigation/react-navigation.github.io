@@ -4,6 +4,9 @@ title: Type checking with TypeScript
 sidebar_label: Type checking with TypeScript
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 React Navigation is written with TypeScript and exports type definitions for TypeScript projects.
 
 ### Type checking the navigator
@@ -30,15 +33,53 @@ Specifying `undefined` means that the route doesn't have params. A union type wi
 
 After we have defined the mappings, we need to tell our navigator to use it. To do that, we can pass it as a generic to the `createXNavigator` functions:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```tsx
+import { createStackNavigator } from '@react-navigation/stack';
+
+const RootStack = createStackNavigator<RootStackParamList>({
+  screens: {
+    /* content */
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 ```tsx
 import { createStackNavigator } from '@react-navigation/stack';
 
 const RootStack = createStackNavigator<RootStackParamList>();
 ```
 
+</TabItem>
+</Tabs>
+
 And then we can use it:
 
-```tsx
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```tsx name="Navigation with Typescript"
+const RootStack = createStackNavigator<RootStackParamList>({
+  screens: {
+    Home: Home,
+    Profile: {
+      screen: Profile,
+      initialParams: { userId: user.id },
+    },
+    Feed: Feed,
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```tsx name="Navigation with Typescript"
 <RootStack.Navigator initialRouteName="Home">
   <RootStack.Screen name="Home" component={Home} />
   <RootStack.Screen
@@ -49,6 +90,9 @@ And then we can use it:
   <RootStack.Screen name="Feed" component={Feed} />
 </RootStack.Navigator>
 ```
+
+</TabItem>
+</Tabs>
 
 This will provide type checking and intelliSense for props of the `Navigator` and `Screen` components.
 
@@ -370,6 +414,22 @@ declare global {
 
 Now, when annotating your components, you can write:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```ts
+import { useNavigation } from '@react-navigation/native';
+import type { HomeTabScreenProps } from './navigation/types';
+
+function PopularScreen({ route }: HomeTabScreenProps<'Popular'>) {
+  const navigation = useNavigation();
+  // ...
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
 ```ts
 import type { HomeTabScreenProps } from './navigation/types';
 
@@ -377,6 +437,9 @@ function PopularScreen({ navigation, route }: HomeTabScreenProps<'Popular'>) {
   // ...
 }
 ```
+
+</TabItem>
+</Tabs>
 
 If you're using hooks such as `useRoute`, you can write:
 
