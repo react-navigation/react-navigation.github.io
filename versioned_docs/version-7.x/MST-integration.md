@@ -4,6 +4,9 @@ title: Integrating with MobX State Tree
 sidebar_label: MobX State Tree integration
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 :::note
 
 This guide is incomplete. Please help improve this by sending pull requests.
@@ -32,11 +35,26 @@ At this point, you're probably wondering how to connect your MST objects with th
 
 Use `Provider` to wrap what you return from your root component's render method:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+<Provider myObject={this.myObject}>
+  <Navigation />
+</Provider>
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
 ```js
 <Provider myObject={this.myObject}>
   <NavigationContainer>{/* Screen configuration */}</NavigationContainer>
 </Provider>
 ```
+
+</TabItem>
+</Tabs>
 
 this will allow you to access `myObject` from any React component in the application through the `inject` function which can be quite useful.
 
