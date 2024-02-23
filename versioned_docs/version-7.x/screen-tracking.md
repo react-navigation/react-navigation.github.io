@@ -18,14 +18,12 @@ To get notified of state changes, we can use the `onStateChange` prop on `Naviga
 
 This example shows how the approach can be adapted to any mobile analytics SDK.
 
-<samp id="screen-tracking-for-analytics" />
-
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
 ```js name="Screen tracking for analytics" snack version=7
 import * as React from 'react';
-import { View, Button } from 'react-native';
+import { View } from 'react-native';
 // codeblock-focus-start
 import {
   createStaticNavigation,
@@ -33,6 +31,7 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 // codeblock-focus-end
+import { Button } from '@react-navigation/elements';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function Home() {
@@ -40,10 +39,9 @@ function Home() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -53,7 +51,7 @@ function Settings() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
     </View>
   );
 }
@@ -76,9 +74,9 @@ export default function App() {
   return (
     <Navigation
       ref={navigationRef}
-      onReady={() =>
-        (routeNameRef.current = navigationRef.current.getCurrentRoute().name)
-      }
+      onReady={() => {
+        routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+      }}
       onStateChange={() => {
         const previousRouteName = routeNameRef.current;
         const currentRouteName = navigationRef.current.getCurrentRoute().name;
@@ -102,22 +100,22 @@ export default function App() {
 
 ```js name="Screen tracking for anylytics" snack version=7
 import * as React from 'react';
-import { View, Button } from 'react-native';
+import { View } from 'react-native';
 // codeblock-focus-start
 import {
   NavigationContainer,
   useNavigationContainerRef,
 } from '@react-navigation/native';
 // codeblock-focus-end
+import { Button } from '@react-navigation/elements';
 import { createStackNavigator } from '@react-navigation/stack';
 
 function Home({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -125,7 +123,7 @@ function Home({ navigation }) {
 function Settings({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
     </View>
   );
 }
@@ -141,9 +139,9 @@ export default function App() {
   return (
     <NavigationContainer
       ref={navigationRef}
-      onReady={() =>
-        (routeNameRef.current = navigationRef.current.getCurrentRoute().name)
-      }
+      onReady={() => {
+        routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+      }}
       onStateChange={() => {
         const previousRouteName = routeNameRef.current;
         const currentRouteName = navigationRef.current.getCurrentRoute().name;
