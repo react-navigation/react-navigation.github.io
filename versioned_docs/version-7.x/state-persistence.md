@@ -4,6 +4,9 @@ title: State persistence
 sidebar_label: State persistence
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 You might want to save the user's location in the app, so that they are immediately returned to the same location after the app is restarted.
 
 This is especially valuable during development because it allows the developer to stay on the same screen when they refresh the app.
@@ -17,16 +20,195 @@ To be able to persist the [navigation state](navigation-state.md), we can use th
 
 <samp id="state-persistance" />
 
-```js
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Persisting the navigation state" snack version=7
 import * as React from 'react';
-import { Linking, Platform } from 'react-native';
+// codeblock-focus-start
+import { Platform, View, Button, Linking } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  useNavigation,
+  createStaticNavigation,
+} from '@react-navigation/native';
+// codeblock-focus-end
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function A() {
+  return <View />;
+}
+
+function B() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button title="Go to C" onPress={() => navigation.navigate('C')} />
+    </View>
+  );
+}
+
+function C() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button title="Go to D" onPress={() => navigation.navigate('D')} />
+    </View>
+  );
+}
+
+function D() {
+  return <View />;
+}
+
+const HomeStackScreen = createNativeStackNavigator({
+  screens: {
+    A: A,
+  },
+});
+
+const SettingsStackScreen = createNativeStackNavigator({
+  screens: {
+    B: B,
+    C: C,
+    D: D,
+  },
+});
+
+// codeblock-focus-start
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
 
 export default function App() {
-  const [isReady, setIsReady] = React.useState(Platform.OS === 'web'); // Don't persist state on web since it's based on URL
+  const [isReady, setIsReady] = React.useState(false);
+  const [initialState, setInitialState] = React.useState();
+
+  React.useEffect(() => {
+    const restoreState = async () => {
+      try {
+        const initialUrl = await Linking.getInitialURL();
+
+        if (Platform.OS !== 'web' && initialUrl == null) {
+          const savedState = await AsyncStorage.getItem(PERSISTENCE_KEY);
+          const state = savedState ? JSON.parse(savedState) : undefined;
+
+          if (state !== undefined) {
+            setInitialState(state);
+          }
+        }
+      } finally {
+        setIsReady(true);
+      }
+    };
+
+    if (!isReady) {
+      restoreState();
+    }
+  }, [isReady]);
+
+  if (!isReady) {
+    return null;
+  }
+  const Tab = createBottomTabNavigator({
+    screens: {
+      Home: {
+        screen: HomeStackScreen,
+        options: {
+          headerShown: false,
+          tabBarLabel: 'Home!',
+        },
+      },
+      Settings: {
+        screen: SettingsStackScreen,
+        options: {
+          headerShown: false,
+          tabBarLabel: 'Settings!',
+        },
+      },
+    },
+  });
+  const Navigation = createStaticNavigation(Tab);
+
+  return (
+    <Navigation
+      initialState={initialState}
+      onStateChange={(state) =>
+        AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+      }
+    />
+  );
+}
+// codeblock-focus-end
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="Persisting the navigation state" snack version=7
+import * as React from 'react';
+// codeblock-focus-start
+import { Platform, View, Button, Linking } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationContainer } from '@react-navigation/native';
+// codeblock-focus-end
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Tab = createBottomTabNavigator();
+const HomeStack = createNativeStackNavigator();
+const SettingsStack = createNativeStackNavigator();
+
+function A() {
+  return <View />;
+}
+
+function B({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button title="Go to C" onPress={() => navigation.navigate('C')} />
+    </View>
+  );
+}
+
+function C({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button title="Go to D" onPress={() => navigation.navigate('D')} />
+    </View>
+  );
+}
+
+function D() {
+  return <View />;
+}
+
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="A" component={A} />
+    </HomeStack.Navigator>
+  );
+}
+
+function SettingsStackScreen() {
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen name="B" component={B} />
+      <SettingsStack.Screen name="C" component={C} />
+      <SettingsStack.Screen name="D" component={D} />
+    </SettingsStack.Navigator>
+  );
+}
+
+// codeblock-focus-start
+
+const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
+
+export default function App() {
+  const [isReady, setIsReady] = React.useState(false);
   const [initialState, setInitialState] = React.useState();
 
   React.useEffect(() => {
@@ -66,11 +248,26 @@ export default function App() {
         AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
       }
     >
-      {/* ... */}
+      <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Screen
+          name="Home"
+          component={HomeStackScreen}
+          options={{ tabBarLabel: 'Home!' }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsStackScreen}
+          options={{ tabBarLabel: 'Settings!' }}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
+// codeblock-focus-end
 ```
+
+</TabItem>
+</Tabs>
 
 ### Development Mode
 
