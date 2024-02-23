@@ -4,9 +4,6 @@ title: Tab navigation
 sidebar_label: Tab navigation
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top below the header (or even instead of a header).
 
 This guide covers [`createBottomTabNavigator`](bottom-tab-navigator.md). Before continuing, first install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/bottom-tabs):
@@ -20,10 +17,11 @@ npm install @react-navigation/bottom-tabs@next
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Tab-based navigation" snack version=7
-import { Text, View } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+```js name="Tab based navigation" snack version=7
+import * as React from 'react';
+import { View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 function HomeScreen() {
   return (
@@ -41,14 +39,14 @@ function SettingsScreen() {
   );
 }
 
-const MyTabs = createBottomTabNavigator({
+const RootTabs = createBottomTabNavigator({
   screens: {
     Home: HomeScreen,
     Settings: SettingsScreen,
   },
 });
 
-const Navigation = createStaticNavigation(MyTabs);
+const Navigation = createStaticNavigation(RootTabs);
 
 export default function App() {
   return <Navigation />;
@@ -58,7 +56,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Tab-based navigation" snack version=7
+```js name="Tab based navigation" snack version=7
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -82,13 +80,19 @@ function SettingsScreen() {
 
 const Tab = createBottomTabNavigator();
 
+function RootTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+    </Tab.Navigator>
+  );
+}
+
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
+      <RootTabs />
     </NavigationContainer>
   );
 }
@@ -102,19 +106,17 @@ export default function App() {
 This is similar to how you would customize a stack navigator &mdash; there are some properties that are set when you initialize the tab navigator and others that can be customized per-screen in `options`.
 
 <Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static">
+<TabItem value="static" label="Static" default>
 
-```js name="Customizing tabs appearance" snack version=7
-// You can import Ionicons from @expo/vector-icons if you use Expo or
-// react-native-vector-icons/Ionicons otherwise.
+```js name="Tab based navigation" snack version=7 dependencies=@expo/vector-icons,@expo/vector-icons/Ionicons
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // codeblock-focus-start
-import { Ionicons } from '@expo/vector-icons';
-
-// (...)
+// You can import Ionicons from @expo/vector-icons/Ionicons if you use Expo or
+// react-native-vector-icons/Ionicons otherwise.
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // codeblock-focus-end
 
@@ -135,8 +137,9 @@ function SettingsScreen() {
 }
 
 // codeblock-focus-start
-const MyTabs = createBottomTabNavigator({
+const RootTabs = createBottomTabNavigator({
   screenOptions: ({ route }) => ({
+    // highlight-start
     tabBarIcon: ({ focused, color, size }) => {
       let iconName;
 
@@ -148,8 +151,10 @@ const MyTabs = createBottomTabNavigator({
         iconName = focused ? 'ios-list' : 'ios-list-outline';
       }
 
+      // You can return any component that you like here!
       return <Ionicons name={iconName} size={size} color={color} />;
     },
+    // highlight-end
     tabBarActiveTintColor: 'tomato',
     tabBarInactiveTintColor: 'gray',
   }),
@@ -158,31 +163,27 @@ const MyTabs = createBottomTabNavigator({
     Settings: SettingsScreen,
   },
 });
+// codeblock-focus-end
 
-const Navigation = createStaticNavigation(MyTabs);
+const Navigation = createStaticNavigation(RootTabs);
 
 export default function App() {
   return <Navigation />;
 }
-// codeblock-focus-end
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="Customizing tabs appearance" snack version=7
-// You can import Ionicons from @expo/vector-icons if you use Expo or
-// react-native-vector-icons/Ionicons otherwise.
+```js name="Tab based navigation" snack version=7 dependencies=@expo/vector-icons,@expo/vector-icons/Ionicons
 import * as React from 'react';
 import { Text, View } from 'react-native';
-// codeblock-focus-start
-import { Ionicons } from '@expo/vector-icons';
-// codeblock-focus-end
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // codeblock-focus-start
-
-//(...)
+// You can import Ionicons from @expo/vector-icons/Ionicons if you use Expo or
+// react-native-vector-icons/Ionicons otherwise.
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // codeblock-focus-end
 
@@ -205,36 +206,44 @@ function SettingsScreen() {
 const Tab = createBottomTabNavigator();
 
 // codeblock-focus-start
-export default function App() {
+function RootTabs() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        // highlight-start
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
 
-            if (route.name === 'Home') {
-              iconName = focused
-                ? 'ios-information-circle'
-                : 'ios-information-circle-outline';
-            } else if (route.name === 'Settings') {
-              iconName = focused ? 'ios-list-box' : 'ios-list';
-            }
+          if (route.name === 'Home') {
+            iconName = focused
+              ? 'ios-information-circle'
+              : 'ios-information-circle-outline';
+          } else if (route.name === 'Settings') {
+            iconName = focused ? 'ios-list' : 'ios-list-outline';
+          }
 
-            // You can return any component that you like here!
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: 'tomato',
-          tabBarInactiveTintColor: 'gray',
-        })}
-      >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+          // You can return any component that you like here!
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        // highlight-end
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
+      })}
+    >
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+    </Tab.Navigator>
   );
 }
 // codeblock-focus-end
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <RootTabs />
+    </NavigationContainer>
+  );
+}
 ```
 
 </TabItem>
@@ -253,14 +262,11 @@ Sometimes we want to add badges to some icons. You can use the [`tabBarBadge` op
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Icon badges" snack version=7
-// You can import Ionicons from @expo/vector-icons if you use Expo or
-// react-native-vector-icons/Ionicons otherwise.
+```js name="Tab based navigation" snack version=7
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 function HomeScreen() {
   return (
@@ -279,42 +285,22 @@ function SettingsScreen() {
 }
 
 // codeblock-focus-start
-const MyTabs = createBottomTabNavigator({
-  // (...)
-  // codeblock-focus-end
-  screenOptions: ({ route }) => ({
-    tabBarIcon: ({ focused, color, size }) => {
-      let iconName;
-
-      if (route.name === 'Home') {
-        iconName = focused
-          ? 'ios-information-circle'
-          : 'ios-information-circle-outline';
-      } else if (route.name === 'Settings') {
-        iconName = focused ? 'ios-list' : 'ios-list-outline';
-      }
-
-      return <Ionicons name={iconName} size={size} color={color} />;
-    },
-    tabBarActiveTintColor: 'tomato',
-    tabBarInactiveTintColor: 'gray',
-  }),
-  // codeblock-focus-start
+const RootTabs = createBottomTabNavigator({
   screens: {
     Home: {
       screen: HomeScreen,
-      // highlight-start
       options: {
+        // highlight-start
         tabBarBadge: 3,
+        // highlight-end
       },
-      // highlight-end
     },
     Settings: SettingsScreen,
   },
 });
 // codeblock-focus-end
 
-const Navigation = createStaticNavigation(MyTabs);
+const Navigation = createStaticNavigation(RootTabs);
 
 export default function App() {
   return <Navigation />;
@@ -324,10 +310,9 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Icon badges" snack version=7
+```js name="Tab based navigation" snack version=7
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -349,47 +334,29 @@ function SettingsScreen() {
 
 const Tab = createBottomTabNavigator();
 
+// codeblock-focus-start
+function RootTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          // highlight-start
+          tabBarBadge: 3,
+          // highlight-end
+        }}
+      />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+    </Tab.Navigator>
+  );
+}
+// codeblock-focus-end
+
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            if (route.name === 'Home') {
-              return (
-                <Ionicons
-                  name={
-                    focused
-                      ? 'ios-information-circle'
-                      : 'ios-information-circle-outline'
-                  }
-                  size={size}
-                  color={color}
-                />
-              );
-            } else if (route.name === 'Settings') {
-              return (
-                <Ionicons
-                  name={focused ? 'ios-list-box' : 'ios-list'}
-                  size={size}
-                  color={color}
-                />
-              );
-            }
-          },
-          tabBarInactiveTintColor: 'gray',
-          tabBarActiveTintColor: 'tomato',
-        })}
-      >
-        // codeblock-focus-start
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ tabBarBadge: 3 }}
-        />
-        // codeblock-focus-end
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
+      <RootTabs />
     </NavigationContainer>
   );
 }
@@ -406,69 +373,9 @@ From UI perspective this component is ready to use, but you still need to find s
 
 Switching from one tab to another has a familiar API &mdash; `navigation.navigate`.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<samp id="tab-based-navigation-switching" />
 
-```js name="Moving between screens" snack version=7
-import * as React from 'react';
-import { Button, Text, View } from 'react-native';
-import {
-  useNavigation,
-  createStaticNavigation,
-} from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-// codeblock-focus-start
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-    </View>
-  );
-}
-// codeblock-focus-end
-
-const MyTabs = createBottomTabNavigator({
-  screens: {
-    Home: HomeScreen,
-    Settings: SettingsScreen,
-  },
-});
-
-const Navigation = createStaticNavigation(MyTabs);
-
-export default function App() {
-  return <Navigation />;
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
-
-```js name="Moving between screens" snack version=7
-import * as React from 'react';
-import { Button, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-// codeblock-focus-start
+```js
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -489,106 +396,15 @@ function SettingsScreen({ navigation }) {
     </View>
   );
 }
-// codeblock-focus-end
-
-const Tab = createBottomTabNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-}
 ```
-
-</TabItem>
-</Tabs>
 
 ## A stack navigator for each tab
 
 Usually tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<samp id="tab-based-navigation-stack" />
 
-```js name="Nesting navigators" snack version=7
-import * as React from 'react';
-import { Button, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-function DetailsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Details!</Text>
-    </View>
-  );
-}
-
-function HomeScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-    </View>
-  );
-}
-
-function SettingsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-    </View>
-  );
-}
-
-const HomeStackScreen = createNativeStackNavigator({
-  screens: {
-    Home: HomeScreen,
-    Details: DetailsScreen,
-  },
-});
-
-const SettingsStackScreen = createNativeStackNavigator({
-  screens: {
-    Settings: SettingsScreen,
-    Details: DetailsScreen,
-  },
-});
-
-const MyTabs = createBottomTabNavigator({
-  screenOptions: {
-    headerShown: false,
-  },
-  screens: {
-    Home: HomeStackScreen,
-    Settings: SettingsStackScreen,
-  },
-});
-
-const Navigation = createStaticNavigation(MyTabs);
-
-export default function App() {
-  return <Navigation />;
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
-
-```js name="Nesting navigators" snack version=7
+```js
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -662,9 +478,6 @@ export default function App() {
   );
 }
 ```
-
-</TabItem>
-</Tabs>
 
 ## Why do we need a TabNavigator instead of TabBarIOS or some other component?
 

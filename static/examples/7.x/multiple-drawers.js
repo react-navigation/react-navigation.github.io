@@ -31,9 +31,9 @@ const LeftDrawer = createDrawerNavigator();
 function LeftDrawerScreen() {
   return (
     <LeftDrawer.Navigator
-      useLegacyImplementation
       id="LeftDrawer"
-      screenOptions={{ drawerPosition: 'left' }}>
+      screenOptions={{ drawerPosition: 'left' }}
+    >
       <LeftDrawer.Screen name="Home" component={HomeScreen} />
     </LeftDrawer.Navigator>
   );
@@ -44,13 +44,13 @@ const RightDrawer = createDrawerNavigator();
 function RightDrawerScreen() {
   return (
     <RightDrawer.Navigator
-      useLegacyImplementation
       id="RightDrawer"
       drawerContent={(props) => <RightDrawerContent {...props} />}
       screenOptions={{
         drawerPosition: 'right',
         headerShown: false,
-      }}>
+      }}
+    >
       <RightDrawer.Screen name="HomeDrawer" component={LeftDrawerScreen} />
     </RightDrawer.Navigator>
   );
