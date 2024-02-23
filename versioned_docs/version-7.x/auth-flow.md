@@ -36,7 +36,6 @@ For example:
 ```js name="Customizing tabs appearance" snack version=7
 import * as React from 'react';
 import { View } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -48,7 +47,7 @@ const useIsSignedOut = () => {
   return false;
 };
 
-const signedInTabs = createBottomTabNavigator({
+const signedInStack = createNativeStackNavigator({
   screens: {
     Home: HomeScreen,
     Profile: ProfileScreen,
@@ -56,7 +55,7 @@ const signedInTabs = createBottomTabNavigator({
   },
 });
 
-const signedOutTabs = createBottomTabNavigator({
+const signedOutStack = createNativeStackNavigator({
   screens: {
     SignIn: SignInScreen,
     SignUp: SignUpScreen,
@@ -68,11 +67,17 @@ const RootStack = createNativeStackNavigator({
   screens: {
     LoggedIn: {
       if: useIsSignedIn,
-      screen: signedInTabs,
+      screen: signedInStack,
+      options: {
+        headerShown: false,
+      },
     },
     LoggedOut: {
       if: useIsSignedOut,
-      screen: signedOutTabs,
+      screen: signedOutStack,
+      options: {
+        headerShown: false,
+      },
     },
   },
 });
@@ -194,35 +199,257 @@ In our navigator, we can conditionally define appropriate screens. For our case,
 
 So our navigator will look like:
 
-<samp id="conditional-screens-advanced" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
-if (state.isLoading) {
-  // We haven't finished checking for the token yet
-  return <SplashScreen />;
+```js name="Conditional rendering of screens" snack version=7
+import * as React from 'react';
+import {
+  Text,
+  TextInput,
+  View,
+  Button,
+  ActivityIndicator,
+  StyleSheet,
+} from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const SignInContext = React.createContext();
+
+function useIsSignedIn() {
+  const isSignedIn = React.useContext(SignInContext);
+  return isSignedIn;
 }
 
-return (
-  <Stack.Navigator>
-    {state.userToken == null ? (
-      // No token found, user isn't signed in
-      <Stack.Screen
-        name="SignIn"
-        component={SignInScreen}
-        options={{
-          title: 'Sign in',
-          // When logging out, a pop animation feels intuitive
-          // You can remove this if you want the default 'push' animation
-          animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-        }}
+function useIsSignedOut() {
+  const isSignedIn = React.useContext(SignInContext);
+  return !isSignedIn;
+}
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+});
+
+function SplashScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Getting token...</Text>
+      <ActivityIndicator size="large" />
+    </View>
+  );
+}
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+function SimpleSignInScreen({ route }) {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const { setUserToken } = route.params;
+
+  return (
+    <View>
+      <Text>Email</Text>
+      <TextInput style={styles.input} onChangeText={setEmail} />
+      <Text>Password</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={setPassword}
+        placeholder="Password"
+        secureTextEntry={true}
       />
-    ) : (
-      // User is signed in
-      <Stack.Screen name="Home" component={HomeScreen} />
-    )}
-  </Stack.Navigator>
-);
+      <Button title="Sign Up" onPress={() => setUserToken('token')} />
+    </View>
+  );
+}
+
+export default function App() {
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [userToken, setUserToken] = React.useState(null);
+
+  const getUserToken = async () => {
+    // testing purposes
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    try {
+      // custom logic
+      await sleep(2000);
+      const token = null;
+      setUserToken(token);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  React.useEffect(() => {
+    getUserToken();
+  }, []);
+
+  // codeblock-focus-start
+  if (isLoading) {
+    // We haven't finished checking for the token yet
+    return <SplashScreen />;
+  }
+  const RootStack = createNativeStackNavigator({
+    screens: {
+      Home: {
+        if: useIsSignedIn,
+        screen: HomeScreen,
+      },
+      SignIn: {
+        screen: SimpleSignInScreen,
+        initialParams: {
+          setUserToken,
+        },
+        options: {
+          title: 'Sign in',
+        },
+        if: useIsSignedOut,
+      },
+    },
+  });
+
+  const Navigation = createStaticNavigation(RootStack);
+
+  const isSignedIn = userToken != null;
+
+  return (
+    <SignInContext.Provider value={isSignedIn}>
+      <Navigation />
+    </SignInContext.Provider>
+  );
+}
+// codeblock-focus-end
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Conditional rendering of screens" snack version=7
+import * as React from 'react';
+import {
+  Text,
+  TextInput,
+  View,
+  Button,
+  ActivityIndicator,
+  StyleSheet,
+} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+});
+
+function SplashScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Getting token...</Text>
+      <ActivityIndicator size="large" />
+    </View>
+  );
+}
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+function SimpleSignInScreen({ navigation, route }) {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const { setUserToken } = route.params;
+
+  return (
+    <View>
+      <Text>Email</Text>
+      <TextInput style={styles.input} onChangeText={setEmail} />
+      <Text>Password</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={setPassword}
+        placeholder="Password"
+        secureTextEntry={true}
+      />
+      <Button title="Sign Up" onPress={() => setUserToken('token')} />
+    </View>
+  );
+}
+
+export default function App() {
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [userToken, setUserToken] = React.useState(null);
+
+  const getUserToken = async () => {
+    // testing purposes
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    try {
+      // custom logic
+      await sleep(2000);
+      const token = null;
+      setUserToken(token);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  React.useEffect(() => {
+    getUserToken();
+  }, []);
+
+  // codeblock-focus-start
+  if (isLoading) {
+    // We haven't finished checking for the token yet
+    return <SplashScreen />;
+  }
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        {userToken == null ? (
+          // No token found, user isn't signed in
+          <Stack.Screen
+            name="SignIn"
+            component={SimpleSignInScreen}
+            options={{
+              title: 'Sign in',
+            }}
+            initialParams={{ setUserToken }}
+          />
+        ) : (
+          // User is signed in
+          <Stack.Screen name="Home" component={HomeScreen} />
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+  // codeblock-focus-end
+}
+```
+
+</TabItem>
+</Tabs>
 
 In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `SecureStore` and validating the token. After we get the token and if it's valid, we need to set the `userToken`. We also have another state called `isSignout` to have a different animation on sign out.
 
@@ -237,18 +464,31 @@ Here, we're conditionally defining one screen for each case. But you could also 
 <TabItem value="static" label="Static" default>
 
 ```js
-const RootStack = createNativeStackNavigator({
-  screens: {
-    LoggedIn: {
-      if: state.userToken != null,
-      screen: signedInTabs,
-    },
-    LoggedOut: {
-      if: state.userToken == null,
-      screen: signedOutTabs,
-    },
-  },
-});
+const SignInContext = React.createContext();
+
+function useIsSignedIn() {
+  const isSignedIn = React.useContext(SignInContext);
+  return isSignedIn;
+}
+
+function useIsSignedOut() {
+  const isSignedIn = React.useContext(SignInContext);
+  return !isSignedIn;
+}
+
+/* content */
+
+export default function App() {
+  /* content */
+
+  const isSignedIn = userToken != null;
+
+  return (
+    <SignInContext.Provider value={isSignedIn}>
+      <Navigation />
+    </SignInContext.Provider>
+  );
+}
 ```
 
 </TabItem>
@@ -314,14 +554,74 @@ In our component, we will:
 - Expose the methods for sign in and sign out to child components using `AuthContext`
 
 So our component will look like this:
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static">
 
-<samp id="auth-flow" />
-
-```js
+```js name="Signing in and signing out with AuthContext" snack version=7
 import * as React from 'react';
-import * as SecureStore from 'expo-secure-store';
+import { Button, Text, TextInput, View } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function App({ navigation }) {
+const AuthContext = React.createContext();
+
+const SignInContext = React.createContext();
+
+function useIsSignedIn() {
+  const isSignedIn = React.useContext(SignInContext);
+  return isSignedIn;
+}
+
+function useIsSignedOut() {
+  const isSignedIn = React.useContext(SignInContext);
+  return !isSignedIn;
+}
+
+function SplashScreen() {
+  return (
+    <View>
+      <Text>Loading...</Text>
+    </View>
+  );
+}
+
+function HomeScreen() {
+  const { signOut } = React.useContext(AuthContext);
+
+  return (
+    <View>
+      <Text>Signed in!</Text>
+      <Button title="Sign out" onPress={signOut} />
+    </View>
+  );
+}
+
+function SignInScreen() {
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const { signIn } = React.useContext(AuthContext);
+
+  return (
+    <View>
+      <TextInput
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
+      />
+      <TextInput
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      <Button title="Sign in" onPress={() => signIn({ username, password })} />
+    </View>
+  );
+}
+
+// codeblock-focus-start
+export default function App() {
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
@@ -358,13 +658,13 @@ export default function App({ navigation }) {
       let userToken;
 
       try {
-        userToken = await SecureStore.getItemAsync('userToken');
+        // Restore token stored in `SecureStore` or any other encrypted storage
+        // userToken = await SecureStore.getItemAsync('userToken');
       } catch (e) {
         // Restoring token failed
       }
 
       // After restoring token, we may need to validate it in production apps
-      // ...
 
       // This will switch to the App screen or Auth screen and this loading
       // screen will be unmounted and thrown away.
@@ -379,7 +679,7 @@ export default function App({ navigation }) {
       signIn: async (data) => {
         // In a production app, we need to send some data (usually username, password) to server and get a token
         // We will also need to handle errors if sign in failed
-        // After getting token, we need to persist the token using `SecureStore`
+        // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
         // In the example, we'll use a dummy token
 
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
@@ -388,7 +688,7 @@ export default function App({ navigation }) {
       signUp: async (data) => {
         // In a production app, we need to send user data to server and get a token
         // We will also need to handle errors if sign up failed
-        // After getting token, we need to persist the token using `SecureStore`
+        // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
         // In the example, we'll use a dummy token
 
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
@@ -398,22 +698,212 @@ export default function App({ navigation }) {
   );
 
   if (state.isLoading) {
+    // We haven't finished checking for the token yet
     return <SplashScreen />;
   }
 
+  const RootStack = createNativeStackNavigator({
+    screens: {
+      Home: {
+        if: useIsSignedIn,
+        screen: HomeScreen,
+      },
+      SignIn: {
+        screen: SignInScreen,
+        options: {
+          title: 'Sign in',
+          animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+        },
+        if: useIsSignedOut,
+      },
+    },
+  });
+
+  const Navigation = createStaticNavigation(RootStack);
+
+  if (state.isLoading) {
+    return <SplashScreen />;
+  }
+
+  const isSignedIn = state.userToken != null;
+
   return (
     <AuthContext.Provider value={authContext}>
-      <Stack.Navigator>
-        {state.userToken == null ? (
-          <Stack.Screen name="SignIn" component={SignInScreen} />
-        ) : (
-          <Stack.Screen name="Home" component={HomeScreen} />
-        )}
-      </Stack.Navigator>
+      <SignInContext.Provider value={isSignedIn}>
+        <Navigation />
+      </SignInContext.Provider>
     </AuthContext.Provider>
   );
 }
+
+// codeblock-focus-end
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="Signing in and signing out with AuthContext" snack version=7
+import * as React from 'react';
+import { Button, Text, TextInput, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const AuthContext = React.createContext();
+
+function SplashScreen() {
+  return (
+    <View>
+      <Text>Loading...</Text>
+    </View>
+  );
+}
+
+function HomeScreen() {
+  const { signOut } = React.useContext(AuthContext);
+
+  return (
+    <View>
+      <Text>Signed in!</Text>
+      <Button title="Sign out" onPress={signOut} />
+    </View>
+  );
+}
+
+function SignInScreen() {
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const { signIn } = React.useContext(AuthContext);
+
+  return (
+    <View>
+      <TextInput
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
+      />
+      <TextInput
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      <Button title="Sign in" onPress={() => signIn({ username, password })} />
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+// codeblock-focus-start
+export default function App() {
+  const [state, dispatch] = React.useReducer(
+    (prevState, action) => {
+      switch (action.type) {
+        case 'RESTORE_TOKEN':
+          return {
+            ...prevState,
+            userToken: action.token,
+            isLoading: false,
+          };
+        case 'SIGN_IN':
+          return {
+            ...prevState,
+            isSignout: false,
+            userToken: action.token,
+          };
+        case 'SIGN_OUT':
+          return {
+            ...prevState,
+            isSignout: true,
+            userToken: null,
+          };
+      }
+    },
+    {
+      isLoading: true,
+      isSignout: false,
+      userToken: null,
+    }
+  );
+
+  React.useEffect(() => {
+    // Fetch the token from storage then navigate to our appropriate place
+    const bootstrapAsync = async () => {
+      let userToken;
+
+      try {
+        // Restore token stored in `SecureStore` or any other encrypted storage
+        // userToken = await SecureStore.getItemAsync('userToken');
+      } catch (e) {
+        // Restoring token failed
+      }
+
+      // After restoring token, we may need to validate it in production apps
+
+      // This will switch to the App screen or Auth screen and this loading
+      // screen will be unmounted and thrown away.
+      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
+    };
+
+    bootstrapAsync();
+  }, []);
+
+  const authContext = React.useMemo(
+    () => ({
+      signIn: async (data) => {
+        // In a production app, we need to send some data (usually username, password) to server and get a token
+        // We will also need to handle errors if sign in failed
+        // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
+        // In the example, we'll use a dummy token
+
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+      },
+      signOut: () => dispatch({ type: 'SIGN_OUT' }),
+      signUp: async (data) => {
+        // In a production app, we need to send user data to server and get a token
+        // We will also need to handle errors if sign up failed
+        // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
+        // In the example, we'll use a dummy token
+
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+      },
+    }),
+    []
+  );
+
+  return (
+    <AuthContext.Provider value={authContext}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          {state.isLoading ? (
+            // We haven't finished checking for the token yet
+            <Stack.Screen name="Splash" component={SplashScreen} />
+          ) : state.userToken == null ? (
+            // No token found, user isn't signed in
+            <Stack.Screen
+              name="SignIn"
+              component={SignInScreen}
+              options={{
+                title: 'Sign in',
+                // When logging out, a pop animation feels intuitive
+                animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+              }}
+            />
+          ) : (
+            // User is signed in
+            <Stack.Screen name="Home" component={HomeScreen} />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthContext.Provider>
+  );
+}
+// codeblock-focus-end
+```
+
+</TabItem>
+</Tabs>
 
 ## Fill in other components
 
@@ -451,6 +941,49 @@ You can similarly fill in the other screens according to your requirements.
 
 Consider the following example:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static">
+
+```js
+const signedInStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+    Help: HelpScreen,
+  },
+});
+
+const signedOutStack = createNativeStackNavigator({
+  screens: {
+    SignIn: SignInScreen,
+    SignUp: SignUpScreen,
+    Help: HelpScreen,
+  },
+});
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    LoggedIn: {
+      if: useIsSignedIn,
+      screen: signedInStack,
+      options: {
+        headerShown: false,
+      },
+    },
+    LoggedOut: {
+      if: useIsSignedOut,
+      screen: signedOutStack,
+      options: {
+        headerShown: false,
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
 ```js
 isSignedIn ? (
   <>
@@ -467,11 +1000,59 @@ isSignedIn ? (
 );
 ```
 
+</TabItem>
+</Tabs>
+
 Here we have specific screens such as `SignIn`, `Home` etc. which are only shown depending on the sign in state. But we also have the `Help` screen which can be shown in both cases. This also means that if the signin state changes when the user is in the `Help` screen, they'll stay on the `Help` screen.
 
 This can be a problem, we probably want the user to be taken to the `SignIn` screen or `Home` screen instead of keeping them on the `Help` screen. To make this work, we can use the [`navigationKey` prop](screen.md#navigationkey). When the `navigationKey` changes, React Navigation will remove all the screen.
 
 So our updated code will look like following:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static">
+
+```js
+const signedInStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const signedOutStack = createNativeStackNavigator({
+  screens: {
+    SignIn: SignInScreen,
+    SignUp: SignUpScreen,
+  },
+});
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    LoggedIn: {
+      if: useIsSignedIn,
+      screen: signedInStack,
+      options: {
+        headerShown: false,
+      },
+    },
+    LoggedOut: {
+      if: useIsSignedOut,
+      screen: signedOutStack,
+      options: {
+        headerShown: false,
+      },
+    },
+    Help: {
+      screen: HelpScreen,
+      navigationKey: isSignedIn ? 'user' : 'guest',
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
 
 ```js
 <>
@@ -494,7 +1075,63 @@ So our updated code will look like following:
 </>
 ```
 
+</TabItem>
+</Tabs>
+
 If you have a bunch of shared screens, you can also use [`navigationKey` with a `Group`](group.md#navigationkey) to remove all of the screens in the group. For example:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static">
+
+```js
+const signedInStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const signedOutStack = createNativeStackNavigator({
+  screens: {
+    SignIn: SignInScreen,
+    SignUp: SignUpScreen,
+  },
+});
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    LoggedIn: {
+      if: useIsSignedIn,
+      screen: signedInStack,
+      options: {
+        headerShown: false,
+      },
+    },
+    LoggedOut: {
+      if: useIsSignedOut,
+      screen: signedOutStack,
+      options: {
+        headerShown: false,
+      },
+    },
+  },
+  groups: {
+    Common: {
+      navigationKey: isSignedIn ? 'user' : 'guest',
+      screenOptions: {
+        headerShown: false,
+      },
+      screens: {
+        Help: HelpScreen,
+        About: AboutScreen,
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
 
 ```js
 <>
@@ -515,3 +1152,6 @@ If you have a bunch of shared screens, you can also use [`navigationKey` with a 
   </Stack.Group>
 </>
 ```
+
+</TabItem>
+</Tabs>
