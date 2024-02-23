@@ -1,4 +1,11 @@
-# Animating elements between screens
+---
+id: shared-element-transitions
+title: Animating elements between screens
+sidebar_label: Animating elements between screens
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 This guide covers how to animate elements between screens. This feature is known as a [Shared Element Transition](https://docs.swmansion.com/react-native-reanimated/docs/api/sharedElementTransitions) and it's implemented in the [`@react-navigation/native-stack`](native-stack-navigator.md) with [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/).
 
@@ -29,7 +36,82 @@ To create a shared transition:
 2. Assign the same `sharedTransitionTag` to elements on different screens.
 3. Navigate between screens. The transition will start automatically.
 
-```jsx
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Shared transition"
+import * as React from 'react';
+import { View, Button, StyleSheet } from 'react-native';
+import {
+  useNavigation,
+  createStaticNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import Animated from 'react-native-reanimated';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={styles.container}>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+      <Animated.Image
+        source={{ uri: 'https://picsum.photos/id/39/200' }}
+        style={{ width: 300, height: 300 }}
+        // highlight-next-line
+        sharedTransitionTag="tag"
+      />
+    </View>
+  );
+}
+
+function DetailsScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={styles.container}>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Animated.Image
+        source={{ uri: 'https://picsum.photos/id/39/200' }}
+        style={{ width: 100, height: 100 }}
+        // highlight-next-line
+        sharedTransitionTag="tag"
+      />
+    </View>
+  );
+}
+
+// highlight-start
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Details: DetailsScreen,
+  },
+});
+// highlight-end
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="Shared transition"
 import * as React from 'react';
 import { View, Button, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -89,6 +171,9 @@ const styles = StyleSheet.create({
   },
 });
 ```
+
+</TabItem>
+</Tabs>
 
 `sharedTransitionTag` is a string that has to be unique in the context of a single screen, but has to match elements between screens. This prop allows Reanimated to identify and animate the elements, similarly to the [`key`](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key) property, which tells React which element in the list is which.
 
