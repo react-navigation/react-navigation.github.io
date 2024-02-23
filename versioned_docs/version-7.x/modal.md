@@ -4,6 +4,9 @@ title: Opening a modal
 sidebar_label: Opening a modal
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ![Modal shown on screen](/assets/modal/modal-demo.gif)
 
 A modal displays content that temporarily blocks interactions with the main view.
@@ -12,10 +15,22 @@ A modal is like a popup &mdash; it usually has a different transition animation,
 
 ## Creating a stack with modal screens
 
-<samp id="modal" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
-function HomeScreen({ navigation }) {
+```js name="Modal" snack version=7
+import * as React from 'react';
+import { View, Text, Button } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+// codeblock-focus-start
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontSize: 30 }}>This is the home screen!</Text>
@@ -27,10 +42,92 @@ function HomeScreen({ navigation }) {
   );
 }
 
+function ModalScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ fontSize: 30 }}>This is a modal!</Text>
+      <Button onPress={() => navigation.goBack()} title="Dismiss" />
+    </View>
+  );
+}
+
 function DetailsScreen() {
   return (
     <View>
       <Text>Details</Text>
+    </View>
+  );
+}
+
+const HomeStack = createStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        headerShown: false,
+      },
+    },
+    Details: {
+      screen: DetailsScreen,
+      options: {
+        headerShown: false,
+      },
+    },
+  },
+});
+
+const RootStack = createStackNavigator({
+  screens: {},
+  groups: {
+    Home: {
+      screens: {
+        App: {
+          screen: HomeStack,
+          options: { title: 'My App' },
+        },
+      },
+    },
+    // highlight-start
+    Modal: {
+      screenOptions: {
+        presentation: 'modal',
+      },
+      screens: {
+        MyModal: ModalScreen,
+      },
+    },
+    // highlight-end
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+// codeblock-focus-end
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="Modal" snack version=7
+import * as React from 'react';
+import { View, Text, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+// codeblock-focus-start
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ fontSize: 30 }}>This is the home screen!</Text>
+      <Button
+        onPress={() => navigation.navigate('MyModal')}
+        title="Open Modal"
+      />
     </View>
   );
 }
@@ -44,22 +141,40 @@ function ModalScreen({ navigation }) {
   );
 }
 
-const RootStack = createStackNavigator();
-
-function RootStackScreen() {
+function DetailsScreen() {
   return (
-    <RootStack.Navigator>
-      <RootStack.Group>
-        <RootStack.Screen name="Home" component={HomeScreen} />
-        <RootStack.Screen name="Details" component={DetailsScreen} />
-      </RootStack.Group>
-      <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-        <RootStack.Screen name="MyModal" component={ModalScreen} />
-      </RootStack.Group>
-    </RootStack.Navigator>
+    <View>
+      <Text>Details</Text>
+    </View>
   );
 }
+
+const RootStack = createStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <RootStack.Navigator>
+        <RootStack.Group>
+          <RootStack.Screen name="Home" component={HomeScreen} />
+          <RootStack.Screen name="Details" component={DetailsScreen} />
+        </RootStack.Group>
+        // highlight-start
+        <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+          <RootStack.Screen name="MyModal" component={ModalScreen} />
+        </RootStack.Group>
+        // highlight-end
+      </RootStack.Navigator>
+    </NavigationContainer>
+  );
+}
+// codeblock-focus-end
+
+export default App;
 ```
+
+</TabItem>
+</Tabs>
 
 Here, we are creating 2 groups of screens using the `RootStack.Group` component. The first group is for our regular screens, and the second group is for our modal screens. For the modal group, we have specified `presentation: 'modal'` in `screenOptions`. This will apply this option to all the screens inside the group. This option will change the animation for the screens to animate from bottom-to-top rather than right to left. The `presentation` option for stack navigator can be either `card` (default) or `modal`. The `modal` behavior slides the screen in from the bottom and allows the user to swipe down from the top to dismiss it on iOS.
 

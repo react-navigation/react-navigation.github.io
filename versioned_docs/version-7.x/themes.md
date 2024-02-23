@@ -4,6 +4,9 @@ title: Themes
 sidebar_label: Themes
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Themes allow you to change the colors and fonts of various components provided by React Navigation. You can use themes to:
 
 - Customize the colors and fonts to match your brand
@@ -13,26 +16,199 @@ Themes allow you to change the colors and fonts of various components provided b
 
 To pass a custom theme, you can pass the `theme` prop to the navigation container.
 
-<samp id="simple-theme" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Simple theme" snack version=7
+// codeblock-focus-start
 import * as React from 'react';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import {
+  useNavigation,
+  createStaticNavigation,
+  DefaultTheme,
+} from '@react-navigation/native';
+// codeblock-focus-end
+import { Button, View, Text } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+// codeblock-focus-start
 
 const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
+    background: 'rgb(140, 201, 125)',
     primary: 'rgb(255, 45, 85)',
   },
 };
+// codeblock-focus-end
+
+function SettingsScreen({ route }) {
+  const navigation = useNavigation();
+  const { user } = route.params;
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+      <Text>userParam: {JSON.stringify(user)}</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Settings"
+        onPress={() =>
+          navigation.navigate('Panel', {
+            screen: 'Settings',
+            params: { user: 'jane' },
+          })
+        }
+      />
+    </View>
+  );
+}
+
+const PanelStack = createNativeStackNavigator({
+  screens: {
+    Profile: ProfileScreen,
+    Settings: SettingsScreen,
+  },
+});
+
+const Drawer = createDrawerNavigator({
+  initialRouteName: 'Panel',
+  screens: {
+    Home: HomeScreen,
+    Panel: PanelStack,
+  },
+});
+
+// codeblock-focus-start
+
+const Navigation = createStaticNavigation(Drawer);
+
+export default function App() {
+  // highlight-next-line
+  return <Navigation theme={MyTheme} />;
+}
+// codeblock-focus-end
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="Simple theme" snack version=7
+// codeblock-focus-start
+import * as React from 'react';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+// codeblock-focus-end
+import { Button, View, Text } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+// codeblock-focus-start
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: 'rgb(140, 201, 125)',
+    primary: 'rgb(255, 45, 85)',
+  },
+};
+// codeblock-focus-end
+
+function SettingsScreen({ route, navigation }) {
+  const { user } = route.params;
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+      <Text>userParam: {JSON.stringify(user)}</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Settings"
+        onPress={() =>
+          navigation.navigate('Root', {
+            screen: 'Settings',
+            params: { user: 'jane' },
+          })
+        }
+      />
+    </View>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
+
+function Root() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
+    </Stack.Navigator>
+  );
+}
+
+// codeblock-focus-start
 
 export default function App() {
   return (
-    <NavigationContainer theme={MyTheme}>{/* content */}</NavigationContainer>
+    // highlight-next-line
+    <NavigationContainer theme={MyTheme}>
+      <Drawer.Navigator useLegacyImplementation initialRouteName="Root">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen
+          name="Root"
+          component={Root}
+          options={{ headerShown: false }}
+        />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
+// codeblock-focus-start
 ```
+
+</TabItem>
+</Tabs>
 
 You can change the theme prop dynamically and all the components will automatically update to reflect the new theme. If you haven't provided a `theme` prop, the default theme will be used.
 
@@ -152,39 +328,53 @@ import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 On iOS 13+ and Android 10+, you can get user's preferred color scheme (`'dark'` or `'light'`) with the ([Appearance API](https://reactnative.dev/docs/appearance)).
 
-<samp id="system-themes" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static">
 
-```js
-import { useColorScheme } from 'react-native';
+```js name="Operating system color theme" snack version=7
+import * as React from 'react';
+// codeblock-focus-start
 import {
-  NavigationContainer,
+  useNavigation,
+  createStaticNavigation,
   DefaultTheme,
   DarkTheme,
+  useTheme,
 } from '@react-navigation/native';
+import { Button, View, Text, TouchableOpacity, Appearance } from 'react-native';
+// codeblock-focus-end
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-export default () => {
-  const scheme = useColorScheme();
+function SettingsScreen({ route }) {
+  const navigation = useNavigation();
+  const { user } = route.params;
+  const { colors } = useTheme();
 
   return (
-    <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-      {/* content */}
-    </NavigationContainer>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ color: colors.text }}>Settings Screen</Text>
+      <Text style={{ color: colors.text }}>
+        userParam: {JSON.stringify(user)}
+      </Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
   );
-};
-```
+}
 
-## Using the current theme in your own components
+function ProfileScreen() {
+  const { colors } = useTheme();
 
-To gain access to the theme in any component that is rendered inside the navigation container:, you can use the `useTheme` hook. It returns the theme object:
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ color: colors.text }}>Profile Screen</Text>
+    </View>
+  );
+}
 
-<samp id="system-themes" />
-
-```js
-import * as React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import { useTheme } from '@react-navigation/native';
-
-// Black background and white text in light theme, inverted on dark theme
 function MyButton() {
   const { colors } = useTheme();
 
@@ -194,4 +384,389 @@ function MyButton() {
     </TouchableOpacity>
   );
 }
+
+function HomeScreen() {
+  const navigation = useNavigation();
+  const { colors } = useTheme();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ color: colors.text }}>Home Screen</Text>
+      <MyButton />
+      <Button
+        title="Go to Settings"
+        onPress={() =>
+          navigation.navigate('Root', {
+            screen: 'Settings',
+            params: { user: 'jane' },
+          })
+        }
+      />
+    </View>
+  );
+}
+
+const PanelStack = createNativeStackNavigator({
+  screens: {
+    Profile: ProfileScreen,
+    Settings: SettingsScreen,
+  },
+});
+
+const Drawer = createDrawerNavigator({
+  initialRouteName: 'Panel',
+  screens: {
+    Home: HomeScreen,
+    Panel: PanelStack,
+  },
+});
+
+// codeblock-focus-start
+
+const Navigation = createStaticNavigation(Drawer);
+
+export default function App() {
+  // highlight-next-line
+  const scheme = Appearance.getColorScheme();
+
+  // highlight-next-line
+  return <Navigation theme={scheme === 'dark' ? DarkTheme : DefaultTheme} />;
+}
+
+// codeblock-focus-end
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="Operating system color theme" snack version=7
+import * as React from 'react';
+// codeblock-focus-start
+import { Button, View, Text, TouchableOpacity, Appearance } from 'react-native';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+  useTheme,
+} from '@react-navigation/native';
+// codeblock-focus-end
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+function SettingsScreen({ route, navigation }) {
+  const { user } = route.params;
+  const { colors } = useTheme();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ color: colors.text }}>Settings Screen</Text>
+      <Text style={{ color: colors.text }}>
+        userParam: {JSON.stringify(user)}
+      </Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const { colors } = useTheme();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ color: colors.text }}>Profile Screen</Text>
+    </View>
+  );
+}
+
+function MyButton() {
+  const { colors } = useTheme();
+
+  return (
+    <TouchableOpacity style={{ backgroundColor: colors.card }}>
+      <Text style={{ color: colors.text }}>Button!</Text>
+    </TouchableOpacity>
+  );
+}
+
+function HomeScreen({ navigation }) {
+  const { colors } = useTheme();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ color: colors.text }}>Home Screen</Text>
+      <MyButton />
+      <Button
+        title="Go to Settings"
+        onPress={() =>
+          navigation.navigate('Root', {
+            screen: 'Settings',
+            params: { user: 'jane' },
+          })
+        }
+      />
+    </View>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
+
+function Root() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
+    </Stack.Navigator>
+  );
+}
+
+// codeblock-focus-start
+
+export default function App() {
+  // highlight-next-line
+  const scheme = Appearance.getColorScheme();
+
+  return (
+    // highlight-next-line
+    <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <Drawer.Navigator useLegacyImplementation>
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen
+          name="Root"
+          component={Root}
+          options={{ headerShown: false }}
+        />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
+// codeblock-focus-end
+```
+
+</TabItem>
+</Tabs>
+
+## Using the current theme in your own components
+
+To gain access to the theme in any component that is rendered inside the navigation container:, you can use the `useTheme` hook. It returns the theme object:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static">
+
+```js name="System themes" snack version=7
+import * as React from 'react';
+// codeblock-focus-start
+import {
+  useNavigation,
+  createStaticNavigation,
+  DefaultTheme,
+  DarkTheme,
+  useTheme,
+} from '@react-navigation/native';
+import { Button, View, Text, TouchableOpacity, Appearance } from 'react-native';
+// codeblock-focus-end
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+function SettingsScreen({ route }) {
+  const navigation = useNavigation();
+  const { user } = route.params;
+  const { colors } = useTheme();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ color: colors.text }}>Settings Screen</Text>
+      <Text style={{ color: colors.text }}>
+        userParam: {JSON.stringify(user)}
+      </Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const { colors } = useTheme();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ color: colors.text }}>Profile Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+
+function MyButton() {
+  // highlight-next-line
+  const { colors } = useTheme();
+
+  return (
+    <TouchableOpacity style={{ backgroundColor: colors.card }}>
+      <Text style={{ color: colors.text }}>Button!</Text>
+    </TouchableOpacity>
+  );
+}
+// codeblock-focus-end
+
+function HomeScreen() {
+  const navigation = useNavigation();
+  const { colors } = useTheme();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ color: colors.text }}>Home Screen</Text>
+      <MyButton />
+      <Button
+        title="Go to Settings"
+        onPress={() =>
+          navigation.navigate('Root', {
+            screen: 'Settings',
+            params: { user: 'jane' },
+          })
+        }
+      />
+    </View>
+  );
+}
+
+const PanelStack = createNativeStackNavigator({
+  screens: {
+    Profile: ProfileScreen,
+    Settings: SettingsScreen,
+  },
+});
+
+const Drawer = createDrawerNavigator({
+  initialRouteName: 'Panel',
+  screens: {
+    Home: HomeScreen,
+    Panel: PanelStack,
+  },
+});
+
+const Navigation = createStaticNavigation(Drawer);
+
+export default function App() {
+  const scheme = Appearance.getColorScheme();
+
+  return <Navigation theme={scheme === 'dark' ? DarkTheme : DefaultTheme} />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="System themes" snack version=7
+import * as React from 'react';
+// codeblock-focus-start
+import { Button, View, Text, TouchableOpacity, Appearance } from 'react-native';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+  useTheme,
+} from '@react-navigation/native';
+// codeblock-focus-end
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+function SettingsScreen({ route, navigation }) {
+  const { colors } = useTheme();
+  const { user } = route.params;
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ color: colors.text }}>Settings Screen</Text>
+      <Text style={{ color: colors.text }}>
+        userParam: {JSON.stringify(user)}
+      </Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const { colors } = useTheme();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ color: colors.text }}>Profile Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+
+function MyButton() {
+  // highlight-next-line
+  const { colors } = useTheme();
+
+  return (
+    <TouchableOpacity style={{ backgroundColor: colors.card }}>
+      <Text style={{ color: colors.text }}>Button!</Text>
+    </TouchableOpacity>
+  );
+}
+// codeblock-focus-end
+
+function HomeScreen({ navigation }) {
+  const { colors } = useTheme();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ color: colors.text }}>Home Screen</Text>
+      <MyButton />
+      <Button
+        title="Go to Settings"
+        onPress={() =>
+          navigation.navigate('Root', {
+            screen: 'Settings',
+            params: { user: 'jane' },
+          })
+        }
+      />
+    </View>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
+
+function Root() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
+    </Stack.Navigator>
+  );
+}
+
+export default function App() {
+  const scheme = Appearance.getColorScheme();
+
+  return (
+    <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <Drawer.Navigator useLegacyImplementation initialRouteName="Root">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen
+          name="Root"
+          component={Root}
+          options={{ headerShown: false }}
+        />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>

@@ -4,6 +4,9 @@ title: Supporting safe areas
 sidebar_label: Supporting safe areas
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 By default, React Navigation tries to ensure that the elements of the navigators display correctly on devices with notches (e.g. iPhone X) and UI elements which may overlap the app content. Such items include:
 
 - Physical notches
@@ -39,9 +42,68 @@ React Navigation handles safe area in the default header. However, if you're usi
 
 For example, if I render nothing for the `header` or `tabBar`, nothing renders
 
-<samp id="hidden-components" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```jsx
+```js name="Hidden components" snack version=7
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function Demo() {
+  return (
+    <View
+      style={{ flex: 1, justifyContent: 'space-between', alignItems: 'center' }}
+    >
+      <Text>This is top text.</Text>
+      <Text>This is bottom text.</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyTabs = createBottomTabNavigator({
+  initialRouteName: 'Analitics',
+  // highlight-start
+  tabBar: () => null,
+  screenOptions: {
+    headerShown: false,
+  },
+  // highlight-end
+  screens: {
+    Analitics: Demo,
+    Profile: Demo,
+  },
+});
+
+const RootStack = createNativeStackNavigator({
+  initialRouteName: 'Home',
+  // highlight-start
+  screenOptions: {
+    headerShown: false,
+  },
+  // highlight-end
+  screens: {
+    Home: MyTabs,
+    Settings: Demo,
+  },
+});
+
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="Hidden components" snack version=7
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -88,18 +150,28 @@ export default function App() {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 ![Text hidden by iPhoneX UI elements](/assets/iphoneX/02-iphonex-content-hidden.png)
 
 To fix this issue you can apply safe area insets on your content. This can be achieved using the `useSafeAreaInsets` hook from the `react-native-safe-area-context` library:
 
-<samp id="safe-area-example" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```jsx
+```js name="Safe area example" snack version=7
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
+// codeblock-focus-start
 function Demo() {
   const insets = useSafeAreaInsets();
 
@@ -109,8 +181,6 @@ function Demo() {
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center',
-
-        // Paddings to handle safe area
         paddingTop: insets.top,
         paddingBottom: insets.bottom,
         paddingLeft: insets.left,
@@ -122,15 +192,120 @@ function Demo() {
     </View>
   );
 }
+// codeblock-focus-end
+
+const MyTabs = createBottomTabNavigator({
+  initialRouteName: 'Analitics',
+  tabBar: () => null,
+  screenOptions: {
+    headerShown: false,
+  },
+  screens: {
+    Analitics: Demo,
+    Profile: Demo,
+  },
+});
+
+const RootStack = createNativeStackNavigator({
+  initialRouteName: 'Home',
+  screenOptions: {
+    headerShown: false,
+  },
+  screens: {
+    Home: MyTabs,
+    Settings: Demo,
+  },
+});
+
+// codeblock-focus-start
+
+const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
   return (
     <SafeAreaProvider>
-      <NavigationContainer>{/*(...) */}</NavigationContainer>
+      <Navigation />
     </SafeAreaProvider>
   );
 }
+// codeblock-focus-end
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="Safe area example" snack version=7
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
+
+// codeblock-focus-start
+function Demo() {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+        paddingLeft: insets.left,
+        paddingRight: insets.right,
+      }}
+    >
+      <Text>This is top text.</Text>
+      <Text>This is bottom text.</Text>
+    </View>
+  );
+}
+// codeblock-focus-end
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+// codeblock-focus-start
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <NavigationContainer>
+        {/*(...) */}
+        // codeblock-focus-end
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="Home">
+            {() => (
+              <Tab.Navigator
+                initialRouteName="Analitics"
+                tabBar={() => null}
+                screenOptions={{ headerShown: false }}
+              >
+                <Tab.Screen name="Analitics" component={Demo} />
+                <Tab.Screen name="Profile" component={Demo} />
+              </Tab.Navigator>
+            )}
+          </Stack.Screen>
+          <Stack.Screen name="Settings" component={Demo} />
+        </Stack.Navigator>
+        // codeblock-focus-start
+      </NavigationContainer>
+    </SafeAreaProvider>
+  );
+}
+// codeblock-focus-end
+```
+
+</TabItem>
+</Tabs>
 
 Make sure to wrap your app in `SafeAreaProvider` as per the instructions [here](https://github.com/th3rdwave/react-native-safe-area-context#usage).
 
@@ -152,14 +327,23 @@ To fix this you can, once again, apply safe area insets to your content. This wi
 
 In some cases you might need more control over which paddings are applied. For example, you can only apply the top and the bottom padding by changing the `style` object:
 
-<samp id="use-safe-area" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static">
 
-```jsx
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+```js name="useSafeAreaInsets hook" snack version=7
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// codeblock-focus-start
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 function Demo() {
   const insets = useSafeAreaInsets();
-
   return (
     <View
       style={{
@@ -176,7 +360,114 @@ function Demo() {
     </View>
   );
 }
+// codeblock-focus-end
+
+const MyTabs = createBottomTabNavigator({
+  initialRouteName: 'Analitics',
+  tabBar: () => null,
+  screenOptions: {
+    headerShown: false,
+  },
+  screens: {
+    Analitics: Demo,
+    Profile: Demo,
+  },
+});
+
+const RootStack = createNativeStackNavigator({
+  initialRouteName: 'Home',
+  screenOptions: {
+    headerShown: false,
+  },
+  screens: {
+    Home: MyTabs,
+    Settings: Demo,
+  },
+});
+
+// codeblock-focus-start
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <Navigation />
+    </SafeAreaProvider>
+  );
+}
+// codeblock-focus-end
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="useSafeAreaInsets hook" snack version=7
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+// codeblock-focus-start
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
+
+function Demo() {
+  const insets = useSafeAreaInsets();
+  return (
+    <View
+      style={{
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
+    >
+      <Text>This is top text.</Text>
+      <Text>This is bottom text.</Text>
+    </View>
+  );
+}
+// codeblock-focus-end
+
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="Home">
+            {() => (
+              <Tab.Navigator
+                initialRouteName="Analitics"
+                tabBar={() => null}
+                screenOptions={{ headerShown: false }}
+              >
+                <Tab.Screen name="Analitics" component={Demo} />
+                <Tab.Screen name="Profile" component={Demo} />
+              </Tab.Navigator>
+            )}
+          </Stack.Screen>
+
+          <Stack.Screen name="Settings" component={Demo} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
 
 Similarly, you could apply these paddings in `contentContainerStyle` of `FlatList` to have the content avoid the safe areas, but still show them under the statusbar and navigation bar when scrolling.
 

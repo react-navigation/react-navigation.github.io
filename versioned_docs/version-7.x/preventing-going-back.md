@@ -4,31 +4,44 @@ title: Preventing going back
 sidebar_label: Preventing going back
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Sometimes you may want to prevent the user from leaving a screen, for example, if there are unsaved changes, you might want to show a confirmation dialog. You can achieve it by using the `beforeRemove` event.
 
 The event listener receives the `action` that triggered it. You can dispatch this action again after confirmation, or check the action object to determine what to do.
 
 Example:
 
-<samp id="prevent-going-back" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
-function EditText({ navigation }) {
+```js name="Prevent going back" snack version=7
+import * as React from 'react';
+import { Button, Alert, View, TextInput, StyleSheet } from 'react-native';
+import {
+  useNavigation,
+  createStaticNavigation,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+// codeblock-focus-start
+const EditTextScreen = () => {
   const [text, setText] = React.useState('');
+  const navigation = useNavigation();
+
   const hasUnsavedChanges = Boolean(text);
 
   React.useEffect(
     () =>
       navigation.addListener('beforeRemove', (e) => {
+        const action = e.data.action;
         if (!hasUnsavedChanges) {
-          // If we don't have unsaved changes, then we don't need to do anything
           return;
         }
 
-        // Prevent default behavior of leaving the screen
         e.preventDefault();
 
-        // Prompt the user before leaving the screen
         Alert.alert(
           'Discard changes?',
           'You have unsaved changes. Are you sure to discard them and leave the screen?',
@@ -37,25 +50,185 @@ function EditText({ navigation }) {
             {
               text: 'Discard',
               style: 'destructive',
-              // If the user confirmed, then we dispatch the action we blocked earlier
-              // This will continue the action that had triggered the removal of the screen
               onPress: () => navigation.dispatch(e.data.action),
             },
           ]
         );
       }),
-    [navigation, hasUnsavedChanges]
+    [hasUnsavedChanges, navigation]
   );
 
   return (
-    <TextInput
-      value={text}
-      placeholder="Type something…"
-      onChangeText={setText}
-    />
+    <View style={styles.content}>
+      <TextInput
+        autoFocus
+        style={styles.input}
+        value={text}
+        placeholder="Type something…"
+        onChangeText={setText}
+      />
+    </View>
+  );
+};
+// codeblock-focus-end
+
+const HomeScreen = () => {
+  const navigation = useNavigation();
+
+  return (
+    <View style={styles.buttons}>
+      <Button
+        title={'Push EditText'}
+        onPress={() => navigation.push('EditText')}
+        style={styles.button}
+      />
+    </View>
+  );
+};
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    EditText: EditTextScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+
+const styles = StyleSheet.create({
+  content: {
+    flex: 1,
+    padding: 16,
+  },
+  input: {
+    margin: 8,
+    padding: 10,
+    borderRadius: 3,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(0, 0, 0, 0.08)',
+    backgroundColor: 'white',
+  },
+  buttons: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 8,
+  },
+  button: {
+    margin: 8,
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="Prevent going back" snack version=7
+import * as React from 'react';
+import { Button, Alert, View, TextInput, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+// codeblock-focus-start
+const EditTextScreen = ({ navigation }) => {
+  const [text, setText] = React.useState('');
+
+  const hasUnsavedChanges = Boolean(text);
+
+  React.useEffect(
+    () =>
+      navigation.addListener('beforeRemove', (e) => {
+        const action = e.data.action;
+        if (!hasUnsavedChanges) {
+          return;
+        }
+
+        e.preventDefault();
+
+        Alert.alert(
+          'Discard changes?',
+          'You have unsaved changes. Are you sure to discard them and leave the screen?',
+          [
+            { text: "Don't leave", style: 'cancel', onPress: () => {} },
+            {
+              text: 'Discard',
+              style: 'destructive',
+              onPress: () => navigation.dispatch(e.data.action),
+            },
+          ]
+        );
+      }),
+    [hasUnsavedChanges, navigation]
+  );
+
+  return (
+    <View style={styles.content}>
+      <TextInput
+        autoFocus
+        style={styles.input}
+        value={text}
+        placeholder="Type something…"
+        onChangeText={setText}
+      />
+    </View>
+  );
+};
+// codeblock-focus-end
+
+const HomeScreen = ({ navigation }) => {
+  return (
+    <View style={styles.buttons}>
+      <Button
+        title={'Push EditText'}
+        onPress={() => navigation.push('EditText')}
+        style={styles.button}
+      />
+    </View>
+  );
+};
+
+const Stack = createStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="EditText" component={EditTextScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  content: {
+    flex: 1,
+    padding: 16,
+  },
+  input: {
+    margin: 8,
+    padding: 10,
+    borderRadius: 3,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(0, 0, 0, 0.08)',
+    backgroundColor: 'white',
+  },
+  buttons: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 8,
+  },
+  button: {
+    margin: 8,
+  },
+});
 ```
+
+</TabItem>
+</Tabs>
 
 Previously, the way to do this was to:
 
