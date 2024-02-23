@@ -4,6 +4,9 @@ title: Deep linking
 sidebar_label: Deep linking
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 This guide will describe how to configure your app to handle deep links on various platforms. To handle incoming links, you need to handle 2 scenarios:
 
 1. If the app wasn't previously open, the deep link needs to set the initial state
@@ -35,6 +38,28 @@ npx expo install expo-linking
 
 Then, let's configure React Navigation to use the `scheme` for parsing incoming deep links:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+import * as Linking from 'expo-linking';
+
+const prefix = Linking.createURL('/');
+
+/* content */
+
+function App() {
+  const linking = {
+    prefixes: [prefix],
+  };
+
+  return <Navigation linking={linking} />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
 ```js
 import * as Linking from 'expo-linking';
 
@@ -52,6 +77,9 @@ function App() {
   );
 }
 ```
+
+</TabItem>
+</Tabs>
 
 The reason that is necessary to use `Linking.createURL` is that the scheme will differ depending on whether you're in the client app or in a standalone app.
 
