@@ -77,13 +77,16 @@ export default function App() {
       onReady={() => {
         routeNameRef.current = navigationRef.current.getCurrentRoute().name;
       }}
-      onStateChange={() => {
+      onStateChange={async () => {
         const previousRouteName = routeNameRef.current;
         const currentRouteName = navigationRef.current.getCurrentRoute().name;
+        const trackScreenView = () => {
+          // Your implementation of analytics goes here!
+        };
 
         if (previousRouteName !== currentRouteName) {
           // Replace the line below to add the tracker from a mobile analytics SDK
-          alert(`The route changed to ${currentRouteName}`);
+          await trackScreenView(currentRouteName);
         }
 
         // Save the current route name for later comparison
@@ -142,13 +145,16 @@ export default function App() {
       onReady={() => {
         routeNameRef.current = navigationRef.current.getCurrentRoute().name;
       }}
-      onStateChange={() => {
+      onStateChange={async () => {
         const previousRouteName = routeNameRef.current;
         const currentRouteName = navigationRef.current.getCurrentRoute().name;
+        const trackScreenView = () => {
+          // Your implementation of analytics goes here!
+        };
 
         if (previousRouteName !== currentRouteName) {
           // Replace the line below to add the tracker from a mobile analytics SDK
-          alert(`The route changed to ${currentRouteName}`);
+          await trackScreenView(currentRouteName);
         }
 
         // Save the current route name for later comparison
