@@ -66,7 +66,7 @@ function Root() {
 export default function App() {
   return (
     <NavigationContainer theme={MyTheme}>
-      <Drawer.Navigator useLegacyImplementation initialRouteName="Root">
+      <Drawer.Navigator initialRouteName="Root">
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen
           name="Root"
