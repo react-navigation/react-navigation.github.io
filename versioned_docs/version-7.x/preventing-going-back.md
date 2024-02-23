@@ -18,17 +18,17 @@ Example:
 
 ```js name="Prevent going back" snack version=7
 import * as React from 'react';
-import { Alert, View, TextInput, StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, Alert, View, TextInput, StyleSheet } from 'react-native';
 import {
-  createStaticNavigation,
   useNavigation,
+  createStaticNavigation,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // codeblock-focus-start
-const EditTextScreen = ({ navigation }) => {
+const EditTextScreen = () => {
   const [text, setText] = React.useState('');
+  const navigation = useNavigation();
 
   const hasUnsavedChanges = Boolean(text);
 
@@ -50,7 +50,7 @@ const EditTextScreen = ({ navigation }) => {
             {
               text: 'Discard',
               style: 'destructive',
-              onPress: () => navigation.dispatch(action),
+              onPress: () => navigation.dispatch(e.data.action),
             },
           ]
         );
@@ -78,12 +78,10 @@ const HomeScreen = () => {
   return (
     <View style={styles.buttons}>
       <Button
-        mode="contained"
+        title={'Push EditText'}
         onPress={() => navigation.push('EditText')}
         style={styles.button}
-      >
-        Push EditText
-      </Button>
+      />
     </View>
   );
 };
@@ -130,8 +128,7 @@ const styles = StyleSheet.create({
 
 ```js name="Prevent going back" snack version=7
 import * as React from 'react';
-import { Alert, View, TextInput, StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, Alert, View, TextInput, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -159,7 +156,7 @@ const EditTextScreen = ({ navigation }) => {
             {
               text: 'Discard',
               style: 'destructive',
-              onPress: () => navigation.dispatch(action),
+              onPress: () => navigation.dispatch(e.data.action),
             },
           ]
         );
@@ -185,12 +182,10 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.buttons}>
       <Button
-        mode="contained"
+        title={'Push EditText'}
         onPress={() => navigation.push('EditText')}
         style={styles.button}
-      >
-        Push EditText
-      </Button>
+      />
     </View>
   );
 };
