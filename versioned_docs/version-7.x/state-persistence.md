@@ -21,16 +21,17 @@ To be able to persist the [navigation state](navigation-state.md), we can use th
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Persisting the navigation state" snack version=7
+```js name="Persisting the navigation state" snack version=7 dependencies=@react-native-async-storage/async-storage
 import * as React from 'react';
 // codeblock-focus-start
-import { Platform, View, Button, Linking } from 'react-native';
+import { Platform, View, Linking } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   useNavigation,
   createStaticNavigation,
 } from '@react-navigation/native';
 // codeblock-focus-end
+import { Button } from '@react-navigation/elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -43,7 +44,7 @@ function B() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Go to C" onPress={() => navigation.navigate('C')} />
+      <Button onPress={() => navigation.navigate('C')}>Go to C</Button>
     </View>
   );
 }
@@ -53,7 +54,7 @@ function C() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Go to D" onPress={() => navigation.navigate('D')} />
+      <Button onPress={() => navigation.navigate('D')}>Go to D</Button>
     </View>
   );
 }
@@ -145,13 +146,14 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic" default>
 
-```js name="Persisting the navigation state" snack version=7
+```js name="Persisting the navigation state" snack version=7 dependencies=@react-native-async-storage/async-storage
 import * as React from 'react';
 // codeblock-focus-start
-import { Platform, View, Button, Linking } from 'react-native';
+import { Platform, View, Linking } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 // codeblock-focus-end
+import { Button } from '@react-navigation/elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -166,7 +168,9 @@ function A() {
 function B({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Go to C" onPress={() => navigation.navigate('C')} />
+      <Button title="" onPress={() => navigation.navigate('C')}>
+        Go to C
+      </Button>
     </View>
   );
 }
@@ -174,7 +178,7 @@ function B({ navigation }) {
 function C({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Go to D" onPress={() => navigation.navigate('D')} />
+      <Button onPress={() => navigation.navigate('D')}>Go to D</Button>
     </View>
   );
 }
