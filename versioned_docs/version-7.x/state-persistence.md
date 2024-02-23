@@ -18,8 +18,6 @@ To be able to persist the [navigation state](navigation-state.md), we can use th
 - `onStateChange` - This prop notifies us of any state changes. We can persist the state in this callback.
 - `initialState` - This prop allows us to pass an initial state to use for [navigation state](navigation-state.md). We can pass the restored state in this prop.
 
-<samp id="state-persistance" />
-
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
