@@ -82,7 +82,7 @@ const SettingsStackScreen = createNativeStackNavigator({
 const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
 
 export default function App() {
-  const [isReady, setIsReady] = React.useState(false);
+  const [isReady, setIsReady] = React.useState(Platform.OS === 'web'); // Don't persist state on web since it's based on URL
   const [initialState, setInitialState] = React.useState();
 
   React.useEffect(() => {
@@ -168,9 +168,7 @@ function A() {
 function B({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="" onPress={() => navigation.navigate('C')}>
-        Go to C
-      </Button>
+      <Button onPress={() => navigation.navigate('C')}>Go to C</Button>
     </View>
   );
 }
@@ -210,7 +208,7 @@ function SettingsStackScreen() {
 const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
 
 export default function App() {
-  const [isReady, setIsReady] = React.useState(false);
+  const [isReady, setIsReady] = React.useState(Platform.OS === 'web'); // Don't persist state on web since it's based on URL
   const [initialState, setInitialState] = React.useState();
 
   React.useEffect(() => {
