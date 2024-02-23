@@ -295,7 +295,59 @@ React Native's `Linking` isn't the only way to handle deep linking. You might al
 
 To achieve this, you'd need to override how React Navigation subscribes to incoming links. To do so, you can provide your own [`getInitialURL`](navigation-container.md#linkinggetinitialurl) and [`subscribe`](navigation-container.md#linkingsubscribe) functions:
 
-```js
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Third-party integrations"
+const linking = {
+  prefixes: ['myapp://', 'https://myapp.com'],
+
+  // Custom function to get the URL which was used to open the app
+  async getInitialURL() {
+    // First, you would need to get the initial URL from your third-party integration
+    // The exact usage depend on the third-party SDK you use
+    // For example, to get the initial URL for Firebase Dynamic Links:
+    const { isAvailable } = utils().playServicesAvailability;
+
+    if (isAvailable) {
+      const initialLink = await dynamicLinks().getInitialLink();
+
+      if (initialLink) {
+        return initialLink.url;
+      }
+    }
+
+    // As a fallback, you may want to do the default deep link handling
+    const url = await Linking.getInitialURL();
+
+    return url;
+  },
+
+  // Custom function to subscribe to incoming links
+  subscribe(listener) {
+    // Listen to incoming links from Firebase Dynamic Links
+    const unsubscribeFirebase = dynamicLinks().onLink(({ url }) => {
+      listener(url);
+    });
+
+    // Listen to incoming links from deep linking
+    const linkingSubscription = Linking.addEventListener('url', ({ url }) => {
+      listener(url);
+    });
+
+    return () => {
+      // Clean up the event listeners
+      unsubscribeFirebase();
+      linkingSubscription.remove();
+    };
+  },
+};
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Third-party integrations"
 const linking = {
   prefixes: ['myapp://', 'https://myapp.com'],
 
@@ -344,5 +396,8 @@ const linking = {
   },
 };
 ```
+
+</TabItem>
+</Tabs>
 
 Similar to the above example, you can integrate any API that provides a way to get the initial URL and to subscribe to new incoming URLs using the `getInitialURL` and `subscribe` options.
