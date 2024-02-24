@@ -10,42 +10,42 @@ const peers = {
 
 const versions = {
   7: {
-    '@react-navigation/bottom-tabs': ['7.0.0-alpha.7', peers],
+    '@react-navigation/bottom-tabs': ['7.0.0-alpha.11', peers],
     '@react-navigation/core': '7.0.0-alpha.6',
-    '@react-navigation/native': '7.0.0-alpha.6',
+    '@react-navigation/native': '7.0.0-alpha.10',
     '@react-navigation/drawer': [
-      '7.0.0-alpha.7',
+      '7.0.0-alpha.11',
       {
         ...peers,
         'react-native-reanimated': '*',
       },
     ],
-    '@react-navigation/elements': ['2.0.0-alpha.4', peers],
+    '@react-navigation/elements': ['2.0.0-alpha.8', peers],
     '@react-navigation/material-top-tabs': [
-      '7.0.0-alpha.6',
+      '7.0.0-alpha.10',
       {
         ...peers,
         'react-native-pager-view': '*',
       },
     ],
-    '@react-navigation/native-stack': ['7.0.0-alpha.7', peers],
+    '@react-navigation/native-stack': ['7.0.0-alpha.11', peers],
     '@react-navigation/routers': '7.0.0-alpha.4',
     '@react-navigation/stack': [
-      '7.0.0-alpha.7',
+      '7.0.0-alpha.11',
       {
         ...peers,
         'react-native-gesture-handler': '*',
       },
     ],
     'react-native-drawer-layout': [
-      '4.0.0-alpha.3',
+      '4.0.0-alpha.5',
       {
         'react-native-gesture-handler': '*',
         'react-native-reanimated': '*',
       },
     ],
     'react-native-tab-view': [
-      '4.0.0-alpha.2',
+      '4.0.0-alpha.5',
       {
         'react-native-pager-view': '*',
       },
@@ -110,8 +110,7 @@ export default function Pre({
       }, {})
     );
 
-    // FIXME: use staging for now since react-navigation fails to build on prod
-    const url = new URL('https://staging-snack.expo.dev');
+    const url = new URL('https://snack.expo.dev');
 
     if (name) {
       url.searchParams.set('name', name);
