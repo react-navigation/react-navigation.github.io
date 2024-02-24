@@ -499,13 +499,18 @@ For example, if we have `Catalog` screen inside `Home` screen and want it to han
 
 ```js
 const RootStack = createNativeStackNavigator({
-  Home: {
-    screens: {
-      Catalog: {
-        screen: Catalog,
-        path: 'item/:id',
-        parse: {
-          id: Number,
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      screens: {
+        Catalog: {
+          screen: Catalog,
+          linking: {
+            path: 'item/:id',
+            parse: {
+              id: Number,
+            },
+          },
         },
       },
     },
@@ -543,9 +548,13 @@ The options for parsing can be an object or a string:
 
 ```js
 const RootStack = createNativeStackNavigator({
-  Catalog: {
-    screen: Catalog,
-    path: 'item/:id',
+  screens: {
+    Catalog: {
+      screen: Catalog,
+      linking: {
+        path: 'item/:id',
+      },
+    },
   },
 });
 ```
@@ -570,6 +579,34 @@ The `path` option is a pattern to match against the path. Any segments starting 
 
 The `initialRouteName` option ensures that the route name passed there will be present in the state for the navigator, e.g. for config:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      initialRouteName: 'Feed',
+      screen: HomeScreen,
+      linking: {
+        screens: {
+          Catalog: {
+            path: 'item/:id',
+            parse: {
+              id: Number,
+            },
+          },
+          Feed: 'feed',
+        },
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
 ```js
 {
   screens: {
@@ -588,6 +625,9 @@ The `initialRouteName` option ensures that the route name passed there will be p
   }
 }
 ```
+
+</TabItem>
+</Tabs>
 
 and URL : `/item/42`, the state will look like this:
 
@@ -615,6 +655,34 @@ and URL : `/item/42`, the state will look like this:
 
 The `parse` option controls how the params are parsed. Here, you can provide the name of the param to parse as a key, and a function which takes the string value for the param and returns a parsed value:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      initialRouteName: 'Feed',
+      screen: HomeScreen,
+      linking: {
+        screens: {
+          Catalog: {
+            path: 'item/:id',
+            parse: {
+              id: Number,
+            },
+          },
+          Feed: 'feed',
+        },
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
 ```js
 {
   screens: {
@@ -627,6 +695,9 @@ The `parse` option controls how the params are parsed. Here, you can provide the
   }
 }
 ```
+
+</TabItem>
+</Tabs>
 
 If no custom function is provided for parsing a param, it'll be parsed as a string.
 
@@ -649,10 +720,12 @@ For example, you could do something like following to handle both deep linking a
 import messaging from '@react-native-firebase/messaging';
 
 const RootStack = createNativeStackNavigator({
-  Chat: {
-    screen: Chat,
-    linking: {
-      path: 'feed/:sort',
+  screens: {
+    Chat: {
+      screen: Chat,
+      linking: {
+        path: 'feed/:sort',
+      },
     },
   },
 });
@@ -736,10 +809,12 @@ For example, you could do something like following to handle both deep linking a
 import messaging from '@react-native-firebase/messaging';
 
 const RootStack = createNativeStackNavigator({
-  Chat: {
-    screen: Chat,
-    linking: {
-      path: 'feed/:sort',
+  screens: {
+    Chat: {
+      screen: Chat,
+      linking: {
+        path: 'feed/:sort',
+      },
     },
   },
 });
@@ -847,10 +922,12 @@ Example:
 import messaging from '@react-native-firebase/messaging';
 
 const RootStack = createNativeStackNavigator({
-  Chat: {
-    screen: Chat,
-    linking: {
-      path: 'feed/:sort',
+  screens: {
+    Chat: {
+      screen: Chat,
+      linking: {
+        path: 'feed/:sort',
+      },
     },
   },
 });
@@ -907,10 +984,12 @@ Example:
 import messaging from '@react-native-firebase/messaging';
 
 const RootStack = createNativeStackNavigator({
-  Chat: {
-    screen: Chat,
-    linking: {
-      path: 'feed/:sort',
+  screens: {
+    Chat: {
+      screen: Chat,
+      linking: {
+        path: 'feed/:sort',
+      },
     },
   },
 });
