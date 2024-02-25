@@ -17,6 +17,7 @@ const versions = {
       '7.0.0-alpha.11',
       {
         ...peers,
+        'react-native-gesture-handler': '*',
         'react-native-reanimated': '*',
       },
     ],
