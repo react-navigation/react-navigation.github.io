@@ -180,8 +180,8 @@ Initial params to use for the screen. If a screen is used as `initialRouteName`,
 ```js
 const Stack = createNativeStackNavigator({
   screens: {
-    Profile: {
-      screen: ProfileScreen,
+    Details: {
+      screen: DetailsScreen,
       initialParams: { itemId: 42 },
     },
   },
