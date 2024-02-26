@@ -840,7 +840,7 @@ function ProfileScreen({ route }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <TextInput
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-        onChangeText={(text) => onChangeText(text)}
+        onChangeText={onChangeText}
         value={value}
       />
       <Button onPress={() => navigation.goBack()}>Go back</Button>
@@ -906,7 +906,7 @@ function ProfileScreen({ navigation, route }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <TextInput
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-        onChangeText={(text) => onChangeText(text)}
+        onChangeText={onChangeText}
         value={value}
       />
       <Button onPress={() => navigation.goBack()}>Go back</Button>
