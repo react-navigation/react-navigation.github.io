@@ -21,12 +21,12 @@ import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
+import { NavigationContext } from '@react-navigation/native';
+// codeblock-focus-end
 import {
   useNavigation,
   createStaticNavigation,
-  NavigationContext,
 } from '@react-navigation/native';
-// codeblock-focus-end
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function HomeScreen() {
@@ -85,11 +85,9 @@ import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
-import {
-  NavigationContainer,
-  NavigationContext,
-} from '@react-navigation/native';
+import { NavigationContext } from '@react-navigation/native';
 // codeblock-focus-end
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function HomeScreen() {
