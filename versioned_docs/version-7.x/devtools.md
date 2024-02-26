@@ -4,6 +4,9 @@ title: Developer tools
 sidebar_label: Developer tools
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Developer tools to make debugging easier when using React Navigation.
 
 To use the developer tools, install [`@react-navigation/devtools`](https://github.com/react-navigation/react-navigation/tree/master/packages/devtools):
@@ -26,9 +29,38 @@ This hook provides integration with [Redux DevTools Extension](https://github.co
 
 To use the hook, import it and pass a `ref` to the `NavigationContainer` as its argument:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
 ```js
 import * as React from 'react';
-import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+import {
+  createStaticNavigation,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
+import { useReduxDevToolsExtension } from '@react-navigation/devtools';
+
+/* content */
+
+export default function App() {
+  const navigationRef = useNavigationContainerRef();
+
+  useReduxDevToolsExtension(navigationRef);
+
+  return <Navigation ref={navigationRef} />;
+}
+```
+
+</TabItem>
+
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js
+import * as React from 'react';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import { useReduxDevToolsExtension } from '@react-navigation/devtools';
 
 export default function App() {
@@ -41,5 +73,8 @@ export default function App() {
   );
 }
 ```
+
+</TabItem>
+</Tabs>
 
 Now, you'll be able to see logs from React Navigation in Redux DevTools Extension, e.g. when you're debugging your app with React Native Debugger app.
