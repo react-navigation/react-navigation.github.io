@@ -93,16 +93,14 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
       <Button
-        onPress={
-          () =>
-            // highlight-start
-            navigation.navigate('Profile', {
-              names: ['Brent', 'Satya', 'Michaś'],
-            })
+        onPress={() => {
+          // highlight-start
+          navigation.navigate('Profile', {
+            names: ['Brent', 'Satya', 'Michaś'],
+          });
           // highlight-end
-        }
+        }}
       >
-        {' '}
         Go to Brent's profile
       </Button>
     </View>
@@ -120,7 +118,7 @@ function ProfileScreen({ route }) {
       <Text>{route.params.names[0]}</Text>
       <Text>{route.params.names[1]}</Text>
       <Text>{route.params.names[2]}</Text>
-      <Button onPress={() => navigation.goBack()}>Go back </Button>
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -158,14 +156,12 @@ function HomeScreen({ navigation: { navigate } }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
       <Button
-        onPress={
-          () =>
-            // highlight-start
-            navigate('Profile', { names: ['Brent', 'Satya', 'Michaś'] })
+        onPress={() => {
+          // highlight-start
+          navigate('Profile', { names: ['Brent', 'Satya', 'Michaś'] });
           // highlight-end
-        }
+        }}
       >
-        {' '}
         Go to Brent's profile
       </Button>
     </View>
@@ -270,13 +266,12 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
       <Button
-        onPress={() =>
+        onPress={() => {
           navigation.navigate('Profile', {
             names: ['Brent', 'Satya', 'Michaś'],
-          })
-        }
+          });
+        }}
       >
-        {' '}
         Go to Brent's profile
       </Button>
     </View>
@@ -295,7 +290,7 @@ function ProfileScreen({ route }) {
       <Text>{route.params.names[1]}</Text>
       <Text>{route.params.names[2]}</Text>
       // highlight-next-line
-      <Button onPress={() => navigation.goBack()}>Go back </Button>
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -333,11 +328,10 @@ function HomeScreen({ navigation: { navigate } }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
       <Button
-        onPress={() =>
-          navigate('Profile', { names: ['Brent', 'Satya', 'Michaś'] })
-        }
+        onPress={() => {
+          navigate('Profile', { names: ['Brent', 'Satya', 'Michaś'] });
+        }}
       >
-        {' '}
         Go to Brent's profile
       </Button>
     </View>
@@ -354,7 +348,7 @@ function ProfileScreen({ navigation, route }) {
       <Text>{route.params.names[1]}</Text>
       <Text>{route.params.names[2]}</Text>
       // highlight-next-line
-      <Button onPress={() => navigation.goBack()}>Go back </Button>
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -403,13 +397,13 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
       <Button
-        onPress={() =>
+        onPress={() => {
           navigation.navigate('Profile', {
             names: ['Brent', 'Satya', 'Michaś'],
-          })
-        }
+          });
+        }}
       >
-        Go to Brents profile{' '}
+        Go to Brents profile
       </Button>
     </View>
   );
@@ -427,31 +421,30 @@ function ProfileScreen({ route }) {
       <Text>{route.params.names[2]}</Text>
       <Button onPress={() => navigation.goBack()}>Go back</Button>
       <Button
-        onPress={() =>
+        onPress={() => {
           navigation.replace('Settings', {
             someParam: 'Param',
-          })
-        }
+          });
+        }}
       >
         Replace this screen with Settings
       </Button>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.reset({
-              index: 0,
-              routes: [
-                {
-                  name: 'Settings',
-                  params: { someParam: 'Param1' },
-                },
-              ],
-            })
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.reset({
+            index: 0,
+            routes: [
+              {
+                name: 'Settings',
+                params: { someParam: 'Param1' },
+              },
+            ],
+          });
           // codeblock-focus-end
-        }
+        }}
       >
-        Reset navigator state to Settings{' '}
+        Reset navigator state to Settings
       </Button>
       <Button onPress={() => navigation.navigate('Home')}> Go to Home </Button>
       <Button
@@ -470,13 +463,13 @@ function SettingsScreen({ route }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings screen</Text>
       <Text>{route.params.someParam}</Text>
-      <Button onPress={() => navigation.goBack()}> Go back </Button>
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
       <Button
-        onPress={() =>
+        onPress={() => {
           navigation.navigate('Profile', {
             names: ['Brent', 'Satya', 'Michaś'],
-          })
-        }
+          });
+        }}
       >
         Go to Brents profile
       </Button>
@@ -517,11 +510,11 @@ function HomeScreen({ navigation: { navigate } }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
       <Button
-        onPress={() =>
-          navigate('Profile', { names: ['Brent', 'Satya', 'Michaś'] })
-        }
+        onPress={() => {
+          navigate('Profile', { names: ['Brent', 'Satya', 'Michaś'] });
+        }}
       >
-        Go to Brents profile{' '}
+        Go to Brents profile
       </Button>
     </View>
   );
@@ -546,22 +539,21 @@ function ProfileScreen({ navigation, route }) {
         Replace this screen with Settings
       </Button>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.reset({
-              index: 0,
-              routes: [
-                {
-                  name: 'Settings',
-                  params: { someParam: 'Param1' },
-                },
-              ],
-            })
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.reset({
+            index: 0,
+            routes: [
+              {
+                name: 'Settings',
+                params: { someParam: 'Param1' },
+              },
+            ],
+          });
           // codeblock-focus-end
-        }
+        }}
       >
-        Reset navigator state to Settings{' '}
+        Reset navigator state to Settings
       </Button>
       <Button onPress={() => navigation.navigate('Home')}> Go to Home </Button>
       <Button
@@ -579,16 +571,15 @@ function SettingsScreen({ navigation, route }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings screen</Text>
       <Text>{route.params.someParam}</Text>
-      <Button onPress={() => navigation.goBack()}> Go back </Button>
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
       <Button
-        onPress={() =>
+        onPress={() => {
           navigation.navigate('Profile', {
             names: ['Brent', 'Satya', 'Michaś'],
-          })
-        }
+          });
+        }}
       >
-        {' '}
-        Go to Brents profile{' '}
+        Go to Brents profile
       </Button>
     </View>
   );
@@ -646,12 +637,12 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
       <Button
-        onPress={() =>
+        onPress={() => {
           navigation.navigate('Profile', {
             friends: ['Brent', 'Satya', 'Michaś'],
             title: "Brent's Profile",
-          })
-        }
+          });
+        }}
       >
         Go to Brents profile
       </Button>
@@ -671,21 +662,20 @@ function ProfileScreen({ route }) {
       <Text>{route.params.friends[1]}</Text>
       <Text>{route.params.friends[2]}</Text>
       <Button
-        onPress={
-          () =>
-            // highlight-start
-            navigation.setParams({
-              friends:
-                route.params.friends[0] === 'Brent'
-                  ? ['Wojciech', 'Szymon', 'Jakub']
-                  : ['Brent', 'Satya', 'Michaś'],
-              title:
-                route.params.title === "Brent's Profile"
-                  ? "Lucy's Profile"
-                  : "Brent's Profile",
-            })
+        onPress={() => {
+          // highlight-start
+          navigation.setParams({
+            friends:
+              route.params.friends[0] === 'Brent'
+                ? ['Wojciech', 'Szymon', 'Jakub']
+                : ['Brent', 'Satya', 'Michaś'],
+            title:
+              route.params.title === "Brent's Profile"
+                ? "Lucy's Profile"
+                : "Brent's Profile",
+          });
           // highlight-end
-        }
+        }}
       >
         Swap title and friends
       </Button>
@@ -730,12 +720,12 @@ function HomeScreen({ navigation: { navigate } }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
       <Button
-        onPress={() =>
+        onPress={() => {
           navigate('Profile', {
             friends: ['Brent', 'Satya', 'Michaś'],
             title: "Brent's Profile",
-          })
-        }
+          });
+        }}
       >
         Go to Brents profile
       </Button>
@@ -753,21 +743,20 @@ function ProfileScreen({ navigation, route }) {
       <Text>{route.params.friends[1]}</Text>
       <Text>{route.params.friends[2]}</Text>
       <Button
-        onPress={
-          () =>
-            // highlight-start
-            navigation.setParams({
-              friends:
-                route.params.friends[0] === 'Brent'
-                  ? ['Wojciech', 'Szymon', 'Jakub']
-                  : ['Brent', 'Satya', 'Michaś'],
-              title:
-                route.params.title === "Brent's Profile"
-                  ? "Lucy's Profile"
-                  : "Brent's Profile",
-            })
+        onPress={() => {
+          // highlight-start
+          navigation.setParams({
+            friends:
+              route.params.friends[0] === 'Brent'
+                ? ['Wojciech', 'Szymon', 'Jakub']
+                : ['Brent', 'Satya', 'Michaś'],
+            title:
+              route.params.title === "Brent's Profile"
+                ? "Lucy's Profile"
+                : "Brent's Profile",
+          });
           // highlight-end
-        }
+        }}
       >
         Swap title and friends
       </Button>
@@ -824,9 +813,9 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
       <Button
-        onPress={() =>
-          navigation.navigate('Profile', { title: "Brent's profile" })
-        }
+        onPress={() => {
+          navigation.navigate('Profile', { title: "Brent's profile" });
+        }}
       >
         Go to Profile
       </Button>
