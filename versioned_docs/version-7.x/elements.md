@@ -54,7 +54,7 @@ const RootStack = createNativeStackNavigator({
       screen: HomeScreen,
       options: {
         headerLeft: (props) => (
-          <MyButtom {...props} onPress={() => {
+          <MyButton {...props} onPress={() => {
             // Do something
           }}>
         )
