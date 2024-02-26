@@ -37,7 +37,7 @@ function HomeScreen() {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Home Screen</Text>
       <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile{' '}
+        Go to Profile
       </Button>
     </View>
   );
@@ -49,7 +49,7 @@ function ProfileScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.navigate('Home')}> Go to Home </Button>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
     </View>
   );
 }
@@ -63,7 +63,6 @@ const Stack = createNativeStackNavigator({
         title: 'Awesome app',
       },
     },
-
     Profile: {
       screen: ProfileScreen,
       options: {
@@ -98,7 +97,7 @@ function HomeScreen({ navigation }) {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Home Screen</Text>
       <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile{' '}
+        Go to Profile
       </Button>
     </View>
   );
@@ -108,7 +107,7 @@ function ProfileScreen({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.navigate('Home')}> Go to Home </Button>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
     </View>
   );
 }
@@ -230,7 +229,7 @@ function ScreenWithButton(screenName, navigateTo) {
     const navigation = useNavigation();
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>`{screenName} Screen`</Text>
+        <Text>{screenName} Screen</Text>
         {navigateTo && (
           <Button onPress={() => navigation.navigate(navigateTo)}>
             Go to {navigateTo}
@@ -262,7 +261,7 @@ function ScreenWithButton(screenName, navigateTo) {
   return function ({ navigation }) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>`{screenName} Screen`</Text>
+        <Text>{screenName} Screen</Text>
         {navigateTo && (
           <Button onPress={() => navigation.navigate(navigateTo)}>
             Go to {navigateTo}
@@ -368,7 +367,7 @@ Example:
 const Stack = createNativeStackNavigator({
   screenOptions: {
     headerStyle: {
-      backgroudColor: 'papayawhip',
+      backgroundColor: 'papayawhip',
     },
   },
   screens: {
@@ -398,7 +397,7 @@ Similar to `options`, you can also pass a function to `screenOptions`. The funct
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Screen options for tab navigator" snack version=7
+```js name="Screen options for tab navigator" snack version=7 dependencies=@expo/vector-icons
 import * as React from 'react';
 import { View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -444,7 +443,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic" default>
 
-```js name="Screen options for tab navigator" snack version=7
+```js name="Screen options for tab navigator" snack version=7 dependencies=@expo/vector-icons
 import * as React from 'react';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
