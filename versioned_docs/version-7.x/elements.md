@@ -4,6 +4,9 @@ title: Elements Library
 sidebar_label: Elements
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 A component library containing the UI elements and helpers used in React Navigation. It can be useful if you're building your own navigator, or want to reuse a default functionality in your app.
 
 ## Installation
@@ -41,6 +44,29 @@ Whether header title font should scale to respect Text Size accessibility settin
 
 Function which returns a React Element to display on the left side of the header. You can use it to implement your custom left button, for example:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        headerLeft: (props) => (
+          <MyButton {...props} onPress={() => {
+            // Do something
+          }}>
+        )
+      }
+    }
+  }
+})
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
 ```js
 <Stack.Screen
   name="Home"
@@ -57,6 +83,9 @@ Function which returns a React Element to display on the left side of the header
   }}
 />
 ```
+
+</TabItem>
+</Tabs>
 
 #### `headerRight`
 
@@ -132,24 +161,138 @@ Function which returns a React Element to render as the background of the header
 
 For example, you can use this with `headerTransparent` to render a blur view to create a translucent header.
 
-<samp id="header-blur" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Header blur" snack version=7 dependencies=expo-blur@~12.9.1
+import * as React from 'react';
+import { Button, View, StyleSheet } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { BlurView } from 'expo-blur';
 
-// ...
+function HomeScreen() {
+  const navigation = useNavigation();
 
-<Stack.Screen
-  name="Home"
-  component={HomeScreen}
-  options={{
-    headerTransparent: true,
-    headerBackground: () => (
-      <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />
-    ),
-  }}
-/>;
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const Stack = createStackNavigator({
+  initialRouteName: 'Home',
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        headerTransparent: true,
+        headerBackground: () => (
+          <BlurView
+            tint="dark"
+            intensity={100}
+            style={StyleSheet.absoluteFill}
+          />
+        ),
+      },
+    },
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(Stack);
+
+function App() {
+  return <Navigation />;
+}
+
+export default App;
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="Header blur" snack version=7 dependencies=expo-blur@~12.9.1
+import * as React from 'react';
+import { Button, View, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+// codeblock-focus-start
+import { BlurView } from 'expo-blur';
+
+// codeblock-focus-end
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        // codeblock-focus-start
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            headerTransparent: true,
+            headerBackground: () => (
+              <BlurView
+                tint="dark"
+                intensity={100}
+                style={StyleSheet.absoluteFill}
+              />
+            ),
+          }}
+        />
+        // codeblock-focus-end
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
+```
+
+</TabItem>
+</Tabs>
 
 #### `headerStatusBarHeight`
 
