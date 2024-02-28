@@ -1,7 +1,7 @@
 ---
-id: static-api-reference
-title: Static API Reference
-sidebar_label: API Reference
+id: static-configuration
+title: Static configuration
+sidebar_label: Static configuration
 ---
 
 The bulk of the static configuration is done using the `createXNavigator` functions, e.g. [`createNativeStackNavigator`](native-stack-navigator.md), [`createBottomTabNavigator`](bottom-tab-navigator.md), [`createDrawerNavigator`](drawer-navigator.md) etc. We'll refer to these functions as `createXNavigator` in the rest of this guide.
@@ -167,7 +167,7 @@ const RootStack = createNativeStackNavigator({
 
 The `linking` object supports the same configuration options described in [Configuring links](configuring-links.md) such as `parse`, `stringify` and `exact`.
 
-To make deep links work on native apps, you also need to [configure your app](deep-linking.md) and pass `prefixes` to the navigation component returned by [`createStaticNavigation`](static-api-reference.md#createstaticnavigation):
+To make deep links work on native apps, you also need to [configure your app](deep-linking.md) and pass `prefixes` to the navigation component returned by [`createStaticNavigation`](static-configuration.md#createstaticnavigation):
 
 ```js
 const Navigation = createStaticNavigation(RootStack);
@@ -206,7 +206,7 @@ const RootStack = createNativeStackNavigator({
 
 The above example will only render the `HomeScreen` if the user is logged in.
 
-For more details, see [Authentication flow with static API](static-authentication.md).
+For more details, see [Authentication flow](auth-flow.md?config=static).
 
 #### `options`
 
@@ -322,7 +322,7 @@ const RootStackNavigator = createComponentForStaticNavigation(RootStack, 'RootNa
 
 The returned component doesn't take any props. All of the configuration is inferred from the static config. It's essentially the same as defining a component using the dynamic API.
 
-This looks similar to `createStaticNavigation` however they are very different. When using static configuration, you'd never use this function directly. The only time you'd use this is if you're migrating away from static configuration and want to reuse existing code you wrote instead of rewriting it to the dynamic API. See [Combining static and dynamic APIs](static-combine-with-dynamic.md) for more details.
+This looks similar to `createStaticNavigation` however they are very different. When using static configuration, you'd never use this function directly. The only time you'd use this is if you're migrating away from static configuration and want to reuse existing code you wrote instead of rewriting it to the dynamic API. See [Combining static and dynamic APIs](combine-static-with-dynamic.md) for more details.
 
 ## `createPathConfigForStaticNavigation`
 
@@ -338,4 +338,4 @@ const config = {
 };
 ```
 
-Similar to `createComponentForStaticNavigation`, this is intended to be used when migrating away from static configuration. See [Combining static and dynamic APIs](static-combine-with-dynamic.md) for more details.
+Similar to `createComponentForStaticNavigation`, this is intended to be used when migrating away from static configuration. See [Combining static and dynamic APIs](combine-static-with-dynamic.md) for more details.

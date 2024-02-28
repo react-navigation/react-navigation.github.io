@@ -33,17 +33,13 @@
       "screen-tracking",
       "themes",
       "state-persistence",
+      "combine-static-with-dynamic",
       "testing",
       "typescript",
       "redux-integration",
       "MST-integration",
       "troubleshooting",
       "upgrading-from-6.x"
-    ],
-    "Static configuration": [
-      "static-api-reference",
-      "static-authentication",
-      "static-combine-with-dynamic"
     ],
     "Navigators": [
       "stack-navigator",
@@ -59,6 +55,7 @@
       "drawer-layout"
     ],
     "API reference": [
+      "static-configuration",
       "navigation-container",
       "server-container",
       "group",
