@@ -42,7 +42,6 @@
     ],
     "Static configuration": [
       "static-api-reference",
-      "static-typescript",
       "static-authentication",
       "static-combine-with-dynamic"
     ],
