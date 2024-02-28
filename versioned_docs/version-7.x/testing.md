@@ -63,7 +63,7 @@ We recommend using [React Native Testing Library](https://callstack.github.io/re
 Example:
 
 <Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static">
+<TabItem value="static" label="Static" default>
 
 ```js name='Testing with jest'
 import * as React from 'react';

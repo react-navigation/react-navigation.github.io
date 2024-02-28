@@ -33,7 +33,7 @@ We want the following behavior from our authentication flow:
 We can configure different screens to be available based on some condition. For example, if the user is signed in, we can define `Home`, `Profile`, `Settings` etc. If the user is not signed in, we can define `SignIn` and `SignUp` screens.
 
 <Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static">
+<TabItem value="static" label="Static" default>
 
 To do this, we need a couple of things:
 
@@ -449,9 +449,9 @@ In our component, we will:
 
 So our component will look like this:
 <Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static">
+<TabItem value="static" label="Static" default>
 
-```js name="Signing in and signing out with AuthContext" snack version=7
+```js name="Signing in and signing out with AuthContext" snack version=7 dependencies=expo-secure-store
 // codeblock-focus-start
 import * as React from 'react';
 import * as SecureStore from 'expo-secure-store';
@@ -625,7 +625,6 @@ const RootStack = createNativeStackNavigator({
       screen: SignInScreen,
       options: {
         title: 'Sign in',
-        animationTypeForReplace: state.isSignout ? 'pop' : 'push',
       },
       if: useIsSignedOut,
     },
@@ -639,7 +638,7 @@ const Navigation = createStaticNavigation(RootStack);
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Signing in and signing out with AuthContext" snack version=7
+```js name="Signing in and signing out with AuthContext" snack version=7 dependencies=expo-secure-store
 // codeblock-focus-start
 import * as React from 'react';
 import * as SecureStore from 'expo-secure-store';
@@ -843,7 +842,7 @@ You can similarly fill in the other screens according to your requirements.
 Consider the following example:
 
 <Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static">
+<TabItem value="static" label="Static" default>
 
 ```js
 const RootStack = createNativeStackNavigator({
@@ -898,7 +897,7 @@ This can be a problem, we probably want the user to be taken to the `SignIn` scr
 So our updated code will look like following:
 
 <Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static">
+<TabItem value="static" label="Static" default>
 
 ```js
 const RootStack = createNativeStackNavigator({
@@ -957,7 +956,7 @@ const RootStack = createNativeStackNavigator({
 If you have a bunch of shared screens, you can also use [`navigationKey` with a `Group`](group.md#navigationkey) to remove all of the screens in the group. For example:
 
 <Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static">
+<TabItem value="static" label="Static" default>
 
 ```js
 const RootStack = createNativeStackNavigator({

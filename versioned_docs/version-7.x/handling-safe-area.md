@@ -328,7 +328,7 @@ To fix this you can, once again, apply safe area insets to your content. This wi
 In some cases you might need more control over which paddings are applied. For example, you can only apply the top and the bottom padding by changing the `style` object:
 
 <Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static">
+<TabItem value="static" label="Static" default>
 
 ```js name="useSafeAreaInsets hook" snack version=7
 import * as React from 'react';

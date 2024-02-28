@@ -164,7 +164,7 @@ For example, you can use this with `headerTransparent` to render a blur view to 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Header blur" snack version=7 dependencies=expo-blur@~12.9.1
+```js name="Header blur" snack version=7 dependencies=expo-blur
 import * as React from 'react';
 import { Button, View, StyleSheet } from 'react-native';
 import {
@@ -231,7 +231,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Header blur" snack version=7 dependencies=expo-blur@~12.9.1
+```js name="Header blur" snack version=7 dependencies=expo-blur
 import * as React from 'react';
 import { Button, View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';

@@ -79,7 +79,7 @@ export function navigate(name, params) {
 Then, in any of your javascript modules, import the `RootNavigation` and call functions which you exported from it. You may use this approach outside of your React components and, in fact, it works as well when used from within them.
 
 <Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static">
+<TabItem value="static" label="Static" default>
 
 ```js name="Using navigate in any js module" snack version=7
 import * as React from 'react';
@@ -237,7 +237,7 @@ For an example, consider the following scenario, you have a screen somewhere in 
 To avoid this, you can use the `isReady()` method available on the ref as shown in the above examples.
 
 <Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static">
+<TabItem value="static" label="Static" default>
 
 ```js name="Handling navigation init" snack version=7
 import * as React from 'react';

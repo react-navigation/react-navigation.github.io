@@ -120,7 +120,7 @@ export default function App() {
 
 To open and close drawer, use the following helpers:
 <Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static">
+<TabItem value="static" label="Static" default>
 
 ```js name="Drawer open and close" snack version=7
 import * as React from 'react';
@@ -432,7 +432,7 @@ export default function App() {
 Each of these functions, behind the scenes, are simply dispatching actions:
 
 <Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static">
+<TabItem value="static" label="Static" default>
 
 ```js name="Navigation dispatcher" snack version=7
 import * as React from 'react';

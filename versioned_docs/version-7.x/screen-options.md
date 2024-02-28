@@ -20,7 +20,7 @@ You can pass a prop named `options` to the `Screen` component to configure a scr
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Screen title option" snack version=7 dependencies=@react-navigation/elements
+```js name="Screen title option" snack version=7
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import Button from '@react-navigation/elements';
@@ -83,7 +83,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Screen title option" snack version=7 dependencies=@react-navigation/elements
+```js name="Screen title option" snack version=7
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import Button from '@react-navigation/elements';
@@ -186,7 +186,7 @@ Example:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Screen options for group" snack version=7 dependencies=@react-navigation/elements
+```js name="Screen options for group" snack version=7
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -248,7 +248,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Screen options for group" snack version=7 dependencies=@react-navigation/elements
+```js name="Screen options for group" snack version=7
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';

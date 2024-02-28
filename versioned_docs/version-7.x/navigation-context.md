@@ -16,7 +16,7 @@ Example:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigation context" snack version=7 dependencies=@react-navigation/elements
+```js name="Navigation context" snack version=7
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -80,7 +80,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigation context" snack version=7 dependencies=@react-navigation/elements
+```js name="Navigation context" snack version=7
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';

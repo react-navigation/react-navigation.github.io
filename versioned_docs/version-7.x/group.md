@@ -40,7 +40,7 @@ After creating the navigator, it can be used as children of the `Navigator` comp
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Stack groups" snack version=7 dependencies=@react-navigation/elements
+```js name="Stack groups" snack version=7
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -105,7 +105,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Stack groups" snack version=7 dependencies=@react-navigation/elements
+```js name="Stack groups" snack version=7
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';

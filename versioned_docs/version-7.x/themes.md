@@ -329,7 +329,7 @@ import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 On iOS 13+ and Android 10+, you can get user's preferred color scheme (`'dark'` or `'light'`) with the ([Appearance API](https://reactnative.dev/docs/appearance)).
 
 <Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static">
+<TabItem value="static" label="Static" default>
 
 ```js name="Operating system color theme" snack version=7
 import * as React from 'react';
@@ -554,7 +554,7 @@ export default function App() {
 To gain access to the theme in any component that is rendered inside the navigation container:, you can use the `useTheme` hook. It returns the theme object:
 
 <Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static">
+<TabItem value="static" label="Static" default>
 
 ```js name="System themes" snack version=7
 import * as React from 'react';
