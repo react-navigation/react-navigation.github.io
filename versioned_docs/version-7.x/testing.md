@@ -83,7 +83,7 @@ test('shows profile screen when View Profile is pressed', () => {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name='Testing with jest'
 import * as React from 'react';

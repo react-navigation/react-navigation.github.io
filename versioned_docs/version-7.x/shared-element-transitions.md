@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Shared transition"
 import * as React from 'react';

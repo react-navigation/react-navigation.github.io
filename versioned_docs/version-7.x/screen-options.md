@@ -81,7 +81,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Screen title option" snack version=7 dependencies=@react-navigation/elements
 import * as React from 'react';
@@ -159,7 +159,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Stack.Screen
@@ -246,7 +246,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Screen options for group" snack version=7 dependencies=@react-navigation/elements
 import * as React from 'react';
@@ -333,7 +333,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Stack.Navigator>
@@ -378,7 +378,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Stack.Navigator
@@ -441,7 +441,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Screen options for tab navigator" snack version=7 dependencies=@expo/vector-icons
 import * as React from 'react';

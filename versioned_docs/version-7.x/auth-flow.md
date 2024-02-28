@@ -492,7 +492,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 state.userToken == null ? (
@@ -740,7 +740,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Signing in and signing out with AuthContext" snack version=7
 import * as React from 'react';
@@ -982,7 +982,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 isSignedIn ? (
@@ -1052,7 +1052,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <>
@@ -1131,7 +1131,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <>

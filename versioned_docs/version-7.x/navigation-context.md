@@ -78,7 +78,7 @@ export default App;
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Navigation context" snack version=7 dependencies=@react-navigation/elements
 import * as React from 'react';

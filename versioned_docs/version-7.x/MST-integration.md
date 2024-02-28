@@ -45,7 +45,7 @@ Use `Provider` to wrap what you return from your root component's render method:
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Provider myObject={this.myObject}>

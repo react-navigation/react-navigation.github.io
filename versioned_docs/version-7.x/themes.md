@@ -113,7 +113,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Simple theme" snack version=7
 // codeblock-focus-start
@@ -437,7 +437,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Operating system color theme" snack version=7
 import * as React from 'react';
@@ -660,7 +660,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="System themes" snack version=7
 import * as React from 'react';

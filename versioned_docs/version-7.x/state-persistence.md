@@ -144,7 +144,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Persisting the navigation state" snack version=7 dependencies=@react-native-async-storage/async-storage
 import * as React from 'react';

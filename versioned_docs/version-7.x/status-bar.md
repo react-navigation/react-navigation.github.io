@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 
 </TabItem>
 
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Different status bar" snack version=7
 import * as React from 'react';
@@ -328,7 +328,7 @@ const styles = StyleSheet.create({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Different status bar based on tabs" snack version=7
 import * as React from 'react';

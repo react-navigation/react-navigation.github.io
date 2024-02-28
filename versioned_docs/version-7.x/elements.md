@@ -65,7 +65,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Stack.Screen
@@ -229,7 +229,7 @@ export default App;
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Header blur" snack version=7 dependencies=expo-blur@~12.9.1
 import * as React from 'react';

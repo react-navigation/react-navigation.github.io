@@ -58,7 +58,7 @@ function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 import * as Linking from 'expo-linking';

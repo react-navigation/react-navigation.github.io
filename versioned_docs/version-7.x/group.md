@@ -26,7 +26,7 @@ const Stack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 const Stack = createStackNavigator(); // Stack contains Screen & Navigator properties
@@ -103,7 +103,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Stack groups" snack version=7 dependencies=@react-navigation/elements
 import * as React from 'react';
@@ -180,7 +180,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Stack.Group
@@ -215,7 +215,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Stack.Group
@@ -253,7 +253,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Stack.Group navigationKey={isSignedIn ? 'user' : 'guest'}>

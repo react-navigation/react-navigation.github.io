@@ -76,7 +76,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Focus event listener" snack version=7
 // codeblock-focus-start
@@ -183,7 +183,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="useFocusEffect hook" snack version=7
 import * as React from 'react';

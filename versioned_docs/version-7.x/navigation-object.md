@@ -141,7 +141,7 @@ export default App;
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Navigate method" snack version=7 dependencies=@react-navigation/elements
 import * as React from 'react';
@@ -226,7 +226,7 @@ const Tabs = createBottomTabNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Tab.Screen
@@ -314,7 +314,7 @@ export default App;
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Navigate method" snack version=7 dependencies=@react-navigation/elements
 import * as React from 'react';
@@ -496,7 +496,7 @@ export default App;
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Navigate - replace and reset" snack version=7 dependencies=@react-navigation/elements
 import * as React from 'react';
@@ -706,7 +706,7 @@ export default App;
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Navigate - setParams" snack version=7 dependencies=@react-navigation/elements
 import * as React from 'react';
@@ -870,7 +870,7 @@ export default App;
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Navigate - setOptions" snack version=7 dependencies=@react-navigation/elements
 import * as React from 'react';
@@ -1020,7 +1020,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Navigation events" snack version=7 dependencies=@react-navigation/elements
 import * as React from 'react';
@@ -1210,7 +1210,7 @@ const Drawer = createDrawerNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Drawer.Navigator id="LeftDrawer">{/* .. */}</Drawer.Navigator>

@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Prevent going back" snack version=7
 import * as React from 'react';
