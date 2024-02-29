@@ -79,7 +79,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="useScrollToTop hook" snack version=7
 import * as React from 'react';
@@ -241,7 +241,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="useScrollToTop hook - providing scroll offset" snack version=7
 import * as React from 'react';

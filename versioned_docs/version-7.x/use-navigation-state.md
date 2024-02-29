@@ -142,7 +142,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="useNavigationState hook" snack version=7
 import * as React from 'react';
