@@ -151,6 +151,7 @@ import { View, Text } from 'react-native';
 import {
   NavigationContainer,
   useRoute,
+  useNavigation,
   useNavigationState,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -174,7 +175,8 @@ function usePreviousRouteName() {
 }
 // codeblock-focus-end
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
   const isFirstRoute = useIsFirstRouteInParent();
   const previousRouteName = usePreviousRouteName();
   return (
@@ -189,7 +191,8 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation }) {
+function ProfileScreen() {
+  const navigation = useNavigation();
   const isFirstRoute = useIsFirstRouteInParent();
   const previousRouteName = usePreviousRouteName();
   return (
@@ -204,7 +207,8 @@ function ProfileScreen({ navigation }) {
   );
 }
 
-function SettingsScreen({ navigation }) {
+function SettingsScreen() {
+  const navigation = useNavigation();
   const isFirstRoute = useIsFirstRouteInParent();
   const previousRouteName = usePreviousRouteName();
   return (

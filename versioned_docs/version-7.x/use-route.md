@@ -16,7 +16,7 @@ import TabItem from '@theme/TabItem';
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="useRoute hook" snack version=7 dependencies=@react-navigation/elements
+```js name="useRoute hook" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -82,11 +82,11 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic" default>
 
-```js name="useRoute hook" snack version=7 dependencies=@react-navigation/elements
+```js name="useRoute hook" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // codeblock-focus-start
 import { useRoute } from '@react-navigation/native';
@@ -99,7 +99,9 @@ function MyText() {
 }
 // codeblock-focus-end
 
-function HomeScreen({ navigation: { navigate } }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>

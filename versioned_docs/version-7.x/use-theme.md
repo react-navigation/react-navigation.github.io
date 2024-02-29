@@ -134,12 +134,14 @@ import {
   DefaultTheme,
   DarkTheme,
   useTheme,
+  useNavigation,
 } from '@react-navigation/native';
 // codeblock-focus-end
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-function SettingsScreen({ route, navigation }) {
+function SettingsScreen({ route }) {
+  const navigation = useNavigation();
   const { user } = route.params;
   const { colors } = useTheme();
 
@@ -177,7 +179,8 @@ function MyButton() {
   );
 }
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
   const { colors } = useTheme();
 
   return (
