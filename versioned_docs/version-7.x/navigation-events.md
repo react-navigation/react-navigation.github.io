@@ -4,6 +4,9 @@ title: Navigation events
 sidebar_label: Navigation events
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 You can listen to various events emitted by React Navigation to get notified of certain events, and in some cases, override the default action. There are few core events such as `focus`, `blur` etc. (documented below) that work for every navigator, as well as navigator specific events that work only for certain navigators.
 
 Apart from the core events, each navigator can emit their own custom events. For example, stack navigator emits `transitionStart` and `transitionEnd` events, tab navigator emits `tabPress` event etc. You can find details about the events emitted on the individual navigator's documentation.
@@ -55,23 +58,131 @@ const unsubscribe = navigation.addListener('tabPress', (e) => {
 
 Normally, you'd add an event listener in `React.useEffect` for function components. For example:
 
-<samp id="simple-focus-and-blur" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
-function Profile() {
+```js name="navigation.addListener with focus" snack version=7 dependencies=@react-navigation/elements
+import * as React from 'react';
+import { Button } from '@react-navigation/elements';
+import { View, Text } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function SettingsScreen() {
   const navigation = useNavigation();
 
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      // do something
-    });
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
 
-    return unsubscribe;
-  }, [navigation]);
+// codeblock-focus-start
+function ProfileScreen() {
+  const navigation = useNavigation();
 
-  return <ProfileContent />;
+  React.useEffect(
+    () => navigation.addListener('focus', () => alert('Screen was focused')),
+    []
+  );
+
+  React.useEffect(
+    () => navigation.addListener('blur', () => alert('Screen was unfocused')),
+    []
+  );
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
+    </View>
+  );
+}
+// codeblock-focus-end
+
+const SettingsStack = createNativeStackNavigator({
+  screens: {
+    Settings: SettingsScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(SettingsStack);
+
+export default function App() {
+  return <Navigation />;
 }
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="navigation.addListener with focus" snack version=7 dependencies=@react-navigation/elements
+import * as React from 'react';
+import { Button } from '@react-navigation/elements';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function SettingsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+function ProfileScreen({ navigation }) {
+  React.useEffect(
+    () => navigation.addListener('focus', () => alert('Screen was focused')),
+    []
+  );
+
+  React.useEffect(
+    () => navigation.addListener('blur', () => alert('Screen was unfocused')),
+    []
+  );
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
+    </View>
+  );
+}
+// codeblock-focus-end
+
+const SettingsStack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <SettingsStack.Navigator>
+        <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+        <SettingsStack.Screen name="Profile" component={ProfileScreen} />
+      </SettingsStack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
 
 The `unsubscribe` function can be returned as the cleanup function in the effect.
 
@@ -113,6 +224,28 @@ Sometimes you might want to add a listener from the component where you defined 
 
 Example:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Tab = createBottomTabNavigatior({
+  screens: {
+    Chat: {
+      screen: Chat,
+      listeners: {
+        tabPress: (e) => {
+          // Prevent default action
+          e.preventDefault;
+        },
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
 ```js
 <Tab.Screen
   name="Chat"
@@ -126,9 +259,36 @@ Example:
 />
 ```
 
+</TabItem>
+</Tabs>
+
 You can also pass a callback which returns the object with listeners. It'll receive `navigation` and `route` as the arguments.
 
 Example:
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Tab = createBottomTabNavigatior({
+  screens: {
+    Chat: {
+      screen: Chat,
+      listeners: ({ navigation, route }) => ({
+        tabPress: (e) => {
+          // Prevent default action
+          e.preventDefault;
+
+          // Do something with the `navigation` object
+          navigation.navigate('AnotherPlace');
+        },
+      }),
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
 
 ```js
 <Tab.Screen
@@ -146,11 +306,35 @@ Example:
 />
 ```
 
+</TabItem>
+</Tabs>
+
 ### `screenListeners` prop on the navigator
 
 You can pass a prop named `screenListeners` to the navigator component, where you can specify listeners for events from all screens for this navigator. This can be useful if you want to listen to specific events regardless of the screen, or want to listen to common events such as `state` which is emitted to all screens.
 
 Example:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Stack = createNativeStackNavigator({
+  screenListeners: {
+    state: (e) => {
+      // Do something with the state
+      console.log('state changed', e.data);
+    },
+  },
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
 
 ```js
 <Stack.Navigator
@@ -166,7 +350,36 @@ Example:
 </Stack.Navigator>
 ```
 
+</TabItem>
+</Tabs>
+
 Similar to `listeners`, you can also pass a function to `screenListeners`. The function will receive the [`navigation` object](navigation-object.md) and the [`route` object](route-object.md) for each screen. This can be useful if you need access to the `navigation` object.
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Tab = createBottomTabNavigatior({
+  screenListeners: ({ navigation }) => ({
+    state: (e) => {
+      // Do something with the state
+      console.log('state changed', e.data);
+
+      // Do something with the `navigation` object
+      if (!navigation.canGoBack()) {
+        console.log("we're on the initial screen");
+      }
+    },
+  }),
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
 
 ```js
 <Tab.Navigator
@@ -186,3 +399,6 @@ Similar to `listeners`, you can also pass a function to `screenListeners`. The f
   <Tab.Screen name="Profile" component={ProfileScreen} />
 </Tab.Navigator>
 ```
+
+</TabItem>
+</Tabs>
