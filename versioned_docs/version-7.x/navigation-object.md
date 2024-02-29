@@ -147,18 +147,22 @@ export default App;
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // codeblock-focus-start
-function HomeScreen({ navigation: { navigate } }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
       <Button
         onPress={() => {
           // highlight-start
-          navigate('Profile', { names: ['Brent', 'Satya', 'Michaś'] });
+          navigation.navigate('Profile', {
+            names: ['Brent', 'Satya', 'Michaś'],
+          });
           // highlight-end
         }}
       >
@@ -169,7 +173,9 @@ function HomeScreen({ navigation: { navigate } }) {
 }
 // codeblock-focus-end
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
@@ -320,16 +326,20 @@ export default App;
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function HomeScreen({ navigation: { navigate } }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
       <Button
         onPress={() => {
-          navigate('Profile', { names: ['Brent', 'Satya', 'Michaś'] });
+          navigation.navigate('Profile', {
+            names: ['Brent', 'Satya', 'Michaś'],
+          });
         }}
       >
         Go to Brent's profile
@@ -339,7 +349,9 @@ function HomeScreen({ navigation: { navigate } }) {
 }
 
 // codeblock-focus-start
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
@@ -502,16 +514,20 @@ export default App;
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function HomeScreen({ navigation: { navigate } }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
       <Button
         onPress={() => {
-          navigate('Profile', { names: ['Brent', 'Satya', 'Michaś'] });
+          navigation.navigate('Profile', {
+            names: ['Brent', 'Satya', 'Michaś'],
+          });
         }}
       >
         Go to Brents profile
@@ -520,7 +536,9 @@ function HomeScreen({ navigation: { navigate } }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
@@ -566,7 +584,9 @@ function ProfileScreen({ navigation, route }) {
   );
 }
 
-function SettingsScreen({ navigation, route }) {
+function SettingsScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings screen</Text>
@@ -712,16 +732,18 @@ export default App;
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function HomeScreen({ navigation: { navigate } }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
       <Button
         onPress={() => {
-          navigate('Profile', {
+          navigation.navigate('Profile', {
             friends: ['Brent', 'Satya', 'Michaś'],
             title: "Brent's Profile",
           });
@@ -734,7 +756,9 @@ function HomeScreen({ navigation: { navigate } }) {
 }
 
 // codeblock-focus-start
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
@@ -876,10 +900,12 @@ export default App;
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { Button } from '@react-navigation/elements';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function HomeScreen({ navigation: { navigate } }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
@@ -891,7 +917,8 @@ function HomeScreen({ navigation: { navigate } }) {
 }
 
 // codeblock-focus-start
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
   const [value, onChangeText] = React.useState(route.params.title);
 
   React.useEffect(() => {
@@ -1026,10 +1053,12 @@ export default function App() {
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function SettingsScreen({ navigation }) {
+function SettingsScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings Screen</Text>
@@ -1041,7 +1070,9 @@ function SettingsScreen({ navigation }) {
 }
 
 // codeblock-focus-start
-function ProfileScreen({ navigation }) {
+function ProfileScreen() {
+  const navigation = useNavigation();
+
   React.useEffect(
     () => navigation.addListener('focus', () => alert('Screen was focused')),
     [navigation]

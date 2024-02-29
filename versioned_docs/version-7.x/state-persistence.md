@@ -151,7 +151,7 @@ import * as React from 'react';
 // codeblock-focus-start
 import { Platform, View, Linking } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 // codeblock-focus-end
 import { Button } from '@react-navigation/elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -165,7 +165,9 @@ function A() {
   return <View />;
 }
 
-function B({ navigation }) {
+function B() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button onPress={() => navigation.navigate('C')}>Go to C</Button>
@@ -173,7 +175,9 @@ function B({ navigation }) {
   );
 }
 
-function C({ navigation }) {
+function C() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button onPress={() => navigation.navigate('D')}>Go to D</Button>

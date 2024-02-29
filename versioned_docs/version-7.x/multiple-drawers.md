@@ -80,9 +80,12 @@ export default function App() {
 import * as React from 'react';
 import { Button, View } from 'react-native';
 import { Drawer } from 'react-native-drawer-layout';
+import { useNavigation } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button onPress={() => navigation.openDrawer()} title="Open drawer" />
@@ -211,11 +214,13 @@ export default function App() {
 import * as React from 'react';
 import { Button, View } from 'react-native';
 import { Drawer } from 'react-native-drawer-layout';
+import { useNavigation } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const RightDrawerContext = React.createContext();
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
   const { openRightDrawer } = React.useContext(RightDrawerContext);
 
   return (
@@ -340,9 +345,11 @@ export default function App() {
 import * as React from 'react';
 import { Button, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button onPress={() => navigation.openDrawer()} title="Open drawer" />
@@ -472,9 +479,11 @@ export default function App() {
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button

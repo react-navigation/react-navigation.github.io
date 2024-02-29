@@ -111,7 +111,9 @@ function SomeComponent() {
   );
 }
 
-function ProfileScreen({ navigation }) {
+function ProfileScreen() {
+  const navigation = React.useContext(NavigationContext);
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button onPress={() => navigation.goBack()}>Go back</Button>

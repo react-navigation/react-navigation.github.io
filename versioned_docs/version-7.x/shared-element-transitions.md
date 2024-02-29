@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
 ```js name="Shared transition"
 import * as React from 'react';
 import { View, Button, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Animated from 'react-native-reanimated';
@@ -122,7 +122,9 @@ import Animated from 'react-native-reanimated';
 // highlight-next-line
 const Stack = createNativeStackNavigator();
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Button
@@ -139,7 +141,9 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function DetailsScreen({ navigation }) {
+function DetailsScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Button title="Go back" onPress={() => navigation.goBack()} />

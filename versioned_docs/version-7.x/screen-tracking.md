@@ -107,13 +107,16 @@ import { View } from 'react-native';
 // codeblock-focus-start
 import {
   NavigationContainer,
+  useNavigation,
   useNavigationContainerRef,
 } from '@react-navigation/native';
 // codeblock-focus-end
 import { Button } from '@react-navigation/elements';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function Home({ navigation }) {
+function Home() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button onPress={() => navigation.navigate('Settings')}>
@@ -123,7 +126,9 @@ function Home({ navigation }) {
   );
 }
 
-function Settings({ navigation }) {
+function Settings() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>

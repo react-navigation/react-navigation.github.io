@@ -116,11 +116,13 @@ export default function App() {
 ```js name="Modal" snack version=7
 import * as React from 'react';
 import { View, Text, Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // codeblock-focus-start
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontSize: 30 }}>This is the home screen!</Text>
@@ -132,7 +134,9 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ModalScreen({ navigation }) {
+function ModalScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontSize: 30 }}>This is a modal!</Text>

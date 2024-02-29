@@ -84,11 +84,13 @@ import * as React from 'react';
 import { View } from 'react-native';
 
 // codeblock-focus-end
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // codeblock-focus-start
-function ProfileScreen({ navigation }) {
+function ProfileScreen() {
+  const navigation = useNavigation();
+
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       alert('Screen is focused');

@@ -234,14 +234,16 @@ export default App;
 ```js name="Header blur" snack version=7 dependencies=expo-blur
 import * as React from 'react';
 import { Button, View, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 // codeblock-focus-start
 import { BlurView } from 'expo-blur';
 
 // codeblock-focus-end
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button
@@ -252,7 +254,9 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation }) {
+function ProfileScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button title="Go back" onPress={() => navigation.goBack()} />

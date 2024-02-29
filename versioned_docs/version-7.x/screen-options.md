@@ -87,12 +87,14 @@ export default function App() {
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import Button from '@react-navigation/elements';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Home Screen</Text>
@@ -103,7 +105,9 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation }) {
+function ProfileScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Profile Screen</Text>
@@ -252,13 +256,15 @@ export default function App() {
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
 function ScreenWithButton(screenName, navigateTo) {
-  return function ({ navigation }) {
+  return function () {
+    const navigation = useNavigation();
+
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>{screenName} Screen</Text>
@@ -272,6 +278,11 @@ function ScreenWithButton(screenName, navigateTo) {
   };
 }
 
+const HomeScreen = ScreenWithButton('Home', 'Profile');
+const ProfileScreen = ScreenWithButton('Profile', 'Settings');
+const SettingsScreen = ScreenWithButton('Settings', 'Share');
+const ShareScreen = ScreenWithButton('Share');
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -282,19 +293,19 @@ export default function App() {
         >
           <Stack.Screen
             name="Home"
-            component={ScreenWithButton('Home', 'Profile')}
+            component={HomeScreen}
           />
           <Stack.Screen
             name="Profile"
-            component={ScreenWithButton('Profile', 'Settings')}
+            component={ProfileScreen}
           />
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen
             name="Settings"
-            component={ScreenWithButton('Settings', 'Share')}
+            component={SettingsScreen}
           />
-          <Stack.Screen name="Share" component={ScreenWithButton('Share')} />
+          <Stack.Screen name="Share" component={ShareScreen} />
         </Stack.Group>
       </Stack.Navigator>
       // codeblock-focus-end

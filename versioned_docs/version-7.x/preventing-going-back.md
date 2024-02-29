@@ -129,11 +129,12 @@ const styles = StyleSheet.create({
 ```js name="Prevent going back" snack version=7
 import * as React from 'react';
 import { Button, Alert, View, TextInput, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // codeblock-focus-start
-const EditTextScreen = ({ navigation }) => {
+const EditTextScreen = () => {
+  const navigation = useNavigation();
   const [text, setText] = React.useState('');
 
   const hasUnsavedChanges = Boolean(text);
@@ -178,7 +179,9 @@ const EditTextScreen = ({ navigation }) => {
 };
 // codeblock-focus-end
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.buttons}>
       <Button

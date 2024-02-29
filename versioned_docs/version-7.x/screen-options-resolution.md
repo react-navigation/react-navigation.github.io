@@ -326,11 +326,13 @@ export default function App() {
 ```js name="Parent options from a child" snack version=7
 import * as React from 'react';
 import { View, Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function FeedScreen({ navigation }) {
+function FeedScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button
@@ -506,6 +508,7 @@ import * as React from 'react';
 import { View, Button } from 'react-native';
 import {
   NavigationContainer,
+  useNavigation,
   getFocusedRouteNameFromRoute,
 } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -527,7 +530,9 @@ function getHeaderTitle(route) {
   }
 }
 
-function FeedScreen({ navigation }) {
+function FeedScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button
@@ -676,11 +681,13 @@ export default function App() {
 ```js name="Reorganized navigators" snack version=7
 import * as React from 'react';
 import { View, Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function FeedScreen({ navigation }) {
+function FeedScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button

@@ -112,14 +112,15 @@ const styles = StyleSheet.create({
 ```js name="Different status bar" snack version=7
 import * as React from 'react';
 import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-function Screen1({ navigation }) {
+function Screen1() {
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
   return (
@@ -147,7 +148,8 @@ function Screen1({ navigation }) {
   );
 }
 
-function Screen2({ navigation }) {
+function Screen2() {
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
   return (
@@ -334,7 +336,7 @@ const styles = StyleSheet.create({
 import * as React from 'react';
 import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   SafeAreaProvider,
@@ -348,7 +350,8 @@ function FocusAwareStatusBar(props) {
 }
 
 // codeblock-focus-start
-function Screen1({ navigation }) {
+function Screen1() {
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
   return (
@@ -374,7 +377,8 @@ function Screen1({ navigation }) {
   );
 }
 
-function Screen2({ navigation }) {
+function Screen2() {
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
   return (

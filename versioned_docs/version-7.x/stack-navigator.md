@@ -1040,10 +1040,11 @@ import {
   Button,
   StyleSheet,
 } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import { useTheme, useNavigation } from '@react-navigation/native';
 import { useCardAnimation } from '@react-navigation/stack';
 
-function ModalScreen({ navigation }) {
+function ModalScreen() {
+  const navigation = useNavigation();
   const { colors } = useTheme();
   const { current } = useCardAnimation();
 

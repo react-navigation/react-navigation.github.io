@@ -118,7 +118,7 @@ export default function App() {
 ```js name="Simple theme" snack version=7
 // codeblock-focus-start
 import * as React from 'react';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, useNavigation } from '@react-navigation/native';
 // codeblock-focus-end
 import { Button, View, Text } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -136,8 +136,10 @@ const MyTheme = {
 };
 // codeblock-focus-end
 
-function SettingsScreen({ route, navigation }) {
+function SettingsScreen({ route }) {
+  const navigation = useNavigation();
   const { user } = route.params;
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings Screen</Text>
@@ -150,7 +152,9 @@ function SettingsScreen({ route, navigation }) {
   );
 }
 
-function ProfileScreen({ navigation }) {
+function ProfileScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
@@ -158,7 +162,9 @@ function ProfileScreen({ navigation }) {
   );
 }
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
@@ -491,7 +497,8 @@ function MyButton() {
   );
 }
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
   const { colors } = useTheme();
 
   return (
@@ -671,6 +678,7 @@ import {
   DefaultTheme,
   DarkTheme,
   useTheme,
+  useNavigation,
 } from '@react-navigation/native';
 // codeblock-focus-end
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -718,7 +726,8 @@ function MyButton() {
 }
 // codeblock-focus-end
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
   const { colors } = useTheme();
 
   return (

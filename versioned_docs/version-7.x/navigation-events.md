@@ -58,7 +58,9 @@ Normally, you'd add an event listener in `React.useEffect` for function componen
 <samp id="simple-focus-and-blur" />
 
 ```js
-function Profile({ navigation }) {
+function Profile() {
+  const navigation = useNavigation();
+
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       // do something
