@@ -18,7 +18,7 @@ The `openDrawer` action can be used to open the drawer pane.
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Drawer Actions - openDrawer" snack version=7 dependencies=@react-navigation/elements
+```js name="Drawer Actions - openDrawer" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -102,13 +102,17 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="Drawer Actions - openDrawer" snack version=7 dependencies=@react-navigation/elements
+```js name="Drawer Actions - openDrawer" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, DrawerActions } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DrawerActions,
+  useNavigation,
+} from '@react-navigation/native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -116,7 +120,8 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
   const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
 
   return (
@@ -193,7 +198,7 @@ The `closeDrawer` action can be used to close the drawer pane.
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Drawer Actions - closeDrawer" snack version=7 dependencies=@react-navigation/elements
+```js name="Drawer Actions - closeDrawer" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -275,13 +280,17 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic" >
 
-```js name="Drawer Actions - closeDrawer" snack version=7 dependencies=@react-navigation/elements
+```js name="Drawer Actions - closeDrawer" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, DrawerActions } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DrawerActions,
+  useNavigation,
+} from '@react-navigation/native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -289,7 +298,8 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
   const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
 
   return (
@@ -364,7 +374,7 @@ The `toggleDrawer` action can be used to open the drawer pane if closed, or clos
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Drawer Actions - toggleDrawer" snack version=7 dependencies=@react-navigation/elements
+```js name="Drawer Actions - toggleDrawer" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -448,13 +458,17 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="Drawer Actions - toggleDrawer" snack version=7 dependencies=@react-navigation/elements
+```js name="Drawer Actions - toggleDrawer" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, DrawerActions } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DrawerActions,
+  useNavigation,
+} from '@react-navigation/native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -462,7 +476,8 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
   const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
 
   return (
@@ -542,7 +557,7 @@ The `jumpTo` action can be used to jump to an existing route in the drawer navig
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Drawer Actions - jumpTo" snack version=7 dependencies=@react-navigation/elements
+```js name="Drawer Actions - jumpTo" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -626,13 +641,17 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="Drawer Actions - jumpTo" snack version=7 dependencies=@react-navigation/elements
+```js name="Drawer Actions - jumpTo" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, DrawerActions } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DrawerActions,
+  useNavigation,
+} from '@react-navigation/native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -640,7 +659,8 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
   const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
 
   return (

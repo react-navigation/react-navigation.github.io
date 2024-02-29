@@ -21,7 +21,7 @@ The `jumpTo` action can be used to jump to an existing route in the tab navigato
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Tab Actions - jumpTo" snack version=7 dependencies=@react-navigation/elements
+```js name="Tab Actions - jumpTo" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -76,17 +76,22 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="Tab Actions - jumpTo" snack version=7 dependencies=@react-navigation/elements
+```js name="Tab Actions - jumpTo" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, TabActions } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  TabActions,
+  useNavigation,
+} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // codeblock-focus-start
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
   // highlight-next-line
   const jumpToAction = TabActions.jumpTo('Profile', { user: 'Satya' });
 
