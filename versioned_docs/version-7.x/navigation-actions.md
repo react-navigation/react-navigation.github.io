@@ -32,7 +32,7 @@ The `navigate` action allows to navigate to a specific route. It takes the follo
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common actions navigate" snack version=7 dependencies=@react-navigation/elements
+```js name="Common actions navigate" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -148,16 +148,22 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="Common actions navigate" snack version=7 dependencies=@react-navigation/elements
+```js name="Common actions navigate" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, CommonActions } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  CommonActions,
+  useNavigation,
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
@@ -185,7 +191,9 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
@@ -283,7 +291,7 @@ The `reset` action allows to reset the [navigation state](navigation-state.md) t
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common actions reset" snack version=7 dependencies=@react-navigation/elements
+```js name="Common actions reset" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -399,16 +407,22 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="Common actions reset" snack version=7 dependencies=@react-navigation/elements
+```js name="Common actions reset" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, CommonActions } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  CommonActions,
+  useNavigation,
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
@@ -433,7 +447,9 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
@@ -554,7 +570,7 @@ The `goBack` action creator allows to go back to the previous route in history. 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common actions goBack" snack version=7 dependencies=@react-navigation/elements
+```js name="Common actions goBack" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -674,16 +690,22 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="Common actions goBack" snack version=7 dependencies=@react-navigation/elements
+```js name="Common actions goBack" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, CommonActions } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  CommonActions,
+  useNavigation,
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
@@ -715,7 +737,9 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
@@ -796,7 +820,7 @@ If you want to go back from a particular route, you can add a `source` property 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common actions goBack" snack version=7 dependencies=@react-navigation/elements
+```js name="Common actions goBack" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -914,14 +938,20 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic" default>
 
-```js name="Common actions goBack" snack version=7 dependencies=@react-navigation/elements
+```js name="Common actions goBack" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, CommonActions } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  CommonActions,
+  useNavigation,
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
@@ -946,7 +976,9 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
@@ -1036,7 +1068,7 @@ The `setParams` action allows to update params for a certain route. It takes the
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common actions setParams" snack version=7 dependencies=@react-navigation/elements
+```js name="Common actions setParams" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -1152,16 +1184,18 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="Common actions setParams" snack version=7 dependencies=@react-navigation/elements
+```js name="Common actions setParams" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, CommonActions } from '@react-navigation/native';
+import { NavigationContainer, CommonActions, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
@@ -1186,7 +1220,9 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
@@ -1271,7 +1307,7 @@ If you want to set params for a particular route, you can add a `source` propert
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common actions setParams" snack version=7 dependencies=@react-navigation/elements
+```js name="Common actions setParams" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -1387,16 +1423,22 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="Common actions setParams" snack version=7 dependencies=@react-navigation/elements
+```js name="Common actions setParams" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, CommonActions } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  CommonActions,
+  useNavigation,
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
@@ -1421,7 +1463,9 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
