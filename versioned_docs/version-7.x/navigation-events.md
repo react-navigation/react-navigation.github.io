@@ -61,7 +61,7 @@ Normally, you'd add an event listener in `React.useEffect` for function componen
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="navigation.addListener with focus" snack version=7 dependencies=@react-navigation/elements
+```js name="navigation.addListener with focus" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -124,16 +124,18 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="navigation.addListener with focus" snack version=7 dependencies=@react-navigation/elements
+```js name="navigation.addListener with focus" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function SettingsScreen({ navigation }) {
+function SettingsScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings Screen</Text>
@@ -145,7 +147,9 @@ function SettingsScreen({ navigation }) {
 }
 
 // codeblock-focus-start
-function ProfileScreen({ navigation }) {
+function ProfileScreen() {
+  const navigation = useNavigation();
+
   React.useEffect(
     () => navigation.addListener('focus', () => alert('Screen was focused')),
     []
@@ -244,7 +248,7 @@ const Tab = createBottomTabNavigatior({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Tab.Screen
@@ -288,7 +292,7 @@ const Tab = createBottomTabNavigatior({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Tab.Screen
@@ -334,7 +338,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Stack.Navigator
@@ -379,7 +383,7 @@ const Tab = createBottomTabNavigatior({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Tab.Navigator
