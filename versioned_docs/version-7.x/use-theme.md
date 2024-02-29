@@ -12,7 +12,7 @@ The `useTheme` hook lets us access the currently active theme. You can use it in
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="useTheme hook" snack version=7 dependencies=@react-navigation/elements
+```js name="useTheme hook" snack version=7
 import * as React from 'react';
 // codeblock-focus-start
 import {
@@ -125,7 +125,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic" default>
 
-```js name="useTheme hook" snack version=7 dependencies=@react-navigation/elements
+```js name="useTheme hook" snack version=7
 import * as React from 'react';
 // codeblock-focus-start
 import { Button, View, Text, TouchableOpacity, Appearance } from 'react-native';
