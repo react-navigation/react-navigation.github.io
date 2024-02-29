@@ -4,29 +4,108 @@ title: useFocusEffect
 sidebar_label: useFocusEffect
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Sometimes we want to run side-effects when a screen is focused. A side effect may involve things like adding an event listener, fetching data, updating document title, etc. While this can be achieved using `focus` and `blur` events, it's not very ergonomic.
 
 To make this easier, the library exports a `useFocusEffect` hook:
 
-<samp id="simple-focus-effect" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
-import { useFocusEffect } from '@react-navigation/native';
+```js name="useFocusEffect hook" snack version=7
+import * as React from 'react';
+import { View } from 'react-native';
+import {
+  createStaticNavigation,
+  useFocusEffect,
+} from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-function Profile({ userId }) {
-  const [user, setUser] = React.useState(null);
-
+// codeblock-focus-start
+function ProfileScreen() {
   useFocusEffect(
     React.useCallback(() => {
-      const unsubscribe = API.subscribe(userId, user => setUser(user));
-
-      return () => unsubscribe();
-    }, [userId])
+      alert('Screen was focused');
+      // Do something when the screen is focused
+      return () => {
+        alert('Screen was unfocused');
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
   );
 
-  return <ProfileContent user={user} />;
+  return <View />;
+}
+// codeblock-focus-end
+
+function HomeScreen() {
+  return <View />;
+}
+
+const Tab = createBottomTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(Tab);
+
+export default function App() {
+  return <Navigation />;
 }
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic" default>
+
+```js name="useFocusEffect hook" snack version=7
+import * as React from 'react';
+import { View } from 'react-native';
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+// codeblock-focus-start
+function ProfileScreen() {
+  useFocusEffect(
+    React.useCallback(() => {
+      alert('Screen was focused');
+      // Do something when the screen is focused
+      return () => {
+        alert('Screen was unfocused');
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
+
+  return <View />;
+}
+// codeblock-focus-end
+
+function HomeScreen() {
+  return <View />;
+}
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
 
 :::warning
 
@@ -107,7 +186,7 @@ useFocusEffect(
   React.useCallback(() => {
     return () => {
       // Do something that should run on blur
-    }
+    };
   }, [])
 );
 ```
@@ -116,7 +195,7 @@ The cleanup function runs whenever the effect needs to cleanup, i.e. on `blur`, 
 
 ```js
 React.useEffect(() => {
-    const unsubscribe = navigation.addListener('blur', () => {
+  const unsubscribe = navigation.addListener('blur', () => {
     // Do something when the screen blurs
   });
 
@@ -146,7 +225,7 @@ function FetchUserData({ userId, onUpdate }) {
 // ...
 
 class Profile extends React.Component {
-  _handleUpdate = user => {
+  _handleUpdate = (user) => {
     // Do something with user object
   };
 
