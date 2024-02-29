@@ -4,13 +4,15 @@ title: Drawer Navigator
 sidebar_label: Drawer
 ---
 
-Component that renders a navigation drawer which can be opened and closed via gestures.
+Drawer Navigator renders a navigation drawer on the side of the screen which can be opened and closed via gestures.
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
     <source src="/assets/navigators/drawer/drawer.mov" />
   </video>
 </div>
+
+This wraps [`react-native-drawer-layout`](drawer-layout.md). If you want to use the drawer without React Navigation integration, use the library directly instead.
 
 ## Installation
 
@@ -26,7 +28,7 @@ Then, you need to install and configure the libraries that are required by the d
 
    If you have a Expo managed project, in your project directory, run:
 
-   ```sh
+   ```bash
    npx expo install react-native-gesture-handler react-native-reanimated
    ```
 
@@ -36,7 +38,7 @@ Then, you need to install and configure the libraries that are required by the d
    npm install react-native-gesture-handler react-native-reanimated
    ```
 
-   The Drawer Navigator supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+   The Drawer supports both Reanimated 1 and the latest version of Reanimated. If you want to use the latest version of Reanimated, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
 2. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
 
@@ -44,11 +46,15 @@ Then, you need to install and configure the libraries that are required by the d
    import 'react-native-gesture-handler';
    ```
 
-   > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+   :::warning
+
+   If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+
+   :::
 
 3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-```sh
+```bash
 npx pod-install ios
 ```
 
@@ -73,7 +79,11 @@ function MyDrawer() {
 }
 ```
 
-> For a complete usage guide please visit [Drawer Navigation](drawer-based-navigation.md).
+:::note
+
+For a complete usage guide please visit [Drawer Navigation](drawer-based-navigation.md).
+
+:::
 
 ### Props
 

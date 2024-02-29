@@ -30,7 +30,7 @@ Then, you need to install and configure the libraries that are required by the s
 
    If you have a Expo managed project, in your project directory, run:
 
-   ```sh
+   ```bash
    npx expo install react-native-gesture-handler
    ```
 
@@ -46,13 +46,17 @@ Then, you need to install and configure the libraries that are required by the s
    import 'react-native-gesture-handler';
    ```
 
-   > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+   :::warning
+
+   If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+
+   :::
 
 3. Optionally, you can also install [`@react-native-masked-view/masked-view`](https://github.com/react-native-masked-view/masked-view). This is needed if you want to use UIKit style animations for the header ([`HeaderStyleInterpolators.forUIKit`](#headerstyleinterpolators)).
 
    If you have a Expo managed project, in your project directory, run:
 
-   ```sh
+   ```bash
    npx expo install @react-native-masked-view/masked-view
    ```
 
@@ -64,7 +68,7 @@ Then, you need to install and configure the libraries that are required by the s
 
 4. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-  ```sh
+  ```bash
   npx pod-install ios
   ```
 
@@ -112,10 +116,6 @@ Default options to use for the screens in the navigator.
 Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
 
 If you need to disable this optimization for specific screens (e.g. you want to screen to stay in view even when unfocused) [`detachPreviousScreen`](#detachpreviousscreen) option.
-
-#### `keyboardHandlingEnabled`
-
-If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to `true`.
 
 ### Options
 
@@ -219,6 +219,10 @@ Interpolated styles for various parts of the card. Refer the [Animations section
 #### `headerStyleInterpolator`
 
 Interpolated styles for various parts of the header. Refer the [Animations section](#animations) for details.
+
+#### `keyboardHandlingEnabled`
+
+If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to `true`.
 
 #### `detachPreviousScreen`
 
@@ -451,14 +455,23 @@ React.useEffect(() => {
 
 The stack navigator adds the following methods to the navigation prop:
 
+#### `replace`
+
+Replaces the current screen with a new screen in the stack. The method accepts following arguments:
+
+- `name` - _string_ - Name of the route to push onto the stack.
+- `params` - _object_ - Screen params to pass to the destination route.
+
+```js
+navigation.replace('Profile', { owner: 'Michaś' });
+```
+
 #### `push`
 
 Pushes a new screen to top of the stack and navigate to it. The method accepts following arguments:
 
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to pass to the destination route.
-
-<samp id="stack-with-options" />
 
 ```js
 navigation.push('Profile', { owner: 'Michaś' });
@@ -468,8 +481,6 @@ navigation.push('Profile', { owner: 'Michaś' });
 
 Pops the current screen from the stack and navigates back to the previous screen. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
 
-<samp id="stack-with-options" />
-
 ```js
 navigation.pop();
 ```
@@ -477,8 +488,6 @@ navigation.pop();
 #### `popToTop`
 
 Pops all of the screens in the stack except the first one and navigates to it.
-
-<samp id="stack-with-options" />
 
 ```js
 navigation.popToTop();
@@ -831,7 +840,11 @@ import { HeaderStyleInterpolators } from '@react-navigation/stack';
 />;
 ```
 
-> Note: Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
+:::warning
+
+Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
+
+:::
 
 #### `TransitionPresets`
 

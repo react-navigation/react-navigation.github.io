@@ -13,9 +13,9 @@ If you're already familiar with JavaScript, React and React Native, then you'll 
 Here are some resources to help you out:
 
 1. [React Native Express](https://www.reactnative.express) (Sections 1 to 4)
-2. [Main Concepts of React](https://reactjs.org/docs/hello-world.html)
-3. [React Hooks](https://reactjs.org/docs/hooks-intro.html)
-4. [React Context](https://reactjs.org/docs/context.html) (Advanced)
+2. [Main Concepts of React](https://react.dev/learn)
+3. [React Hooks](https://react.dev/reference/react)
+4. [React Context](https://react.dev/learn/passing-data-deeply-with-context) (Advanced)
 
 ## Minimum requirements
 
@@ -39,7 +39,7 @@ The libraries we will install now are [`react-native-screens`](https://github.co
 
 In your project directory, run:
 
-```sh
+```bash
 npx expo install react-native-screens react-native-safe-area-context
 ```
 
@@ -55,31 +55,50 @@ In your project directory, run:
 npm install react-native-screens react-native-safe-area-context
 ```
 
-> Note: You might get warnings related to peer dependencies after installation. They are usually caused by incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.
+:::note
+
+You might get warnings related to peer dependencies after installation. They are usually caused by incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.
+
+:::
 
 From React Native 0.60 and higher, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md). So you **don't need to run** `react-native link`.
 
 If you're on a Mac and developing for iOS, you need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-```sh
+```bash
 npx pod-install ios
 ```
 
 `react-native-screens` package requires one additional configuration step to properly
-work on Android devices. Edit `MainActivity.java` file which is located in `android/app/src/main/java/<your package name>/MainActivity.java`.
+work on Android devices. Edit `MainActivity.kt` or `MainActivity.java` file which is located under `android/app/src/main/java/<your package name>/`.
 
 Add the highlighted code to the body of `MainActivity` class:
 
-```java {3-6}
-public class MainActivity extends ReactActivity {
-  // ...
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(null);
-  }
-  // ...
-}
-```
+<Tabs>
+  <TabItem value='kotlin' label='Kotlin' default>
+    ```kotlin {3-5}
+    class MainActivity: ReactActivity() {
+      // ...
+      override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(null)
+      }
+      // ...
+    }
+    ```
+  </TabItem>
+  <TabItem value='java' label='Java'>
+    ```java {3-6}
+    public class MainActivity extends ReactActivity {
+      // ...
+      @Override
+      protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(null);
+      }
+      // ...
+    }
+    ```
+  </TabItem>
+</Tabs>
 
 and make sure to add the following import statement at the top of this file below your package statement:
 
@@ -89,7 +108,11 @@ import android.os.Bundle;
 
 This change is required to avoid crashes related to View state being not persisted consistently across Activity restarts.
 
-> Note: When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional dependencies. If you're getting an error "Unable to resolve module", you need to install that module in your project.
+:::info
+
+When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional dependencies. If you're getting an error "Unable to resolve module", you need to install that module in your project.
+
+:::
 
 ## Wrapping your app in `NavigationContainer`
 
@@ -106,7 +129,11 @@ export default function App() {
 }
 ```
 
-> Note: In a typical React Native app, the `NavigationContainer` should be only used once in your app at the root. You shouldn't nest multiple `NavigationContainer`s unless you have a specific use case for them.
+:::warning
+
+In a typical React Native app, the `NavigationContainer` should be only used once in your app at the root. You shouldn't nest multiple `NavigationContainer`s unless you have a specific use case for them.
+
+:::
 
 Now you are ready to build and run your app on the device/simulator.
 

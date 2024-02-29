@@ -4,6 +4,9 @@ title: Troubleshooting
 sidebar_label: Troubleshooting
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 This section attempts to outline issues that users frequently encounter when first getting accustomed to using React Navigation. These issues may or may not be related to React Navigation itself.
 
 Before troubleshooting an issue, make sure that you have upgraded to **the latest available versions** of the packages. You can install the latest versions by installing the packages again (e.g. `npm install package-name`).
@@ -18,19 +21,19 @@ If the module points to a local file (i.e. the name of the module starts with `.
 
 If you're using Expo, run:
 
-```sh
+```bash
 expo start -c
 ```
 
 If you're not using Expo, run:
 
-```sh
+```bash
 npx react-native start --reset-cache
 ```
 
 If that doesn't work, you can also try the following:
 
-```sh
+```bash
 rm -rf $TMPDIR/metro-bundler-cache-*
 ```
 
@@ -48,7 +51,7 @@ Sometimes it might even be due to a corrupt installation. If clearing cache didn
 
 Sometimes the error may look like this:
 
-```sh
+```bash
 Error: While trying to resolve module "@react-navigation/native" from file "/path/to/src/App.js", the package "/path/to/node_modules/@react-navigation/native/package.json" was successfully found. However, this package itself specifies a "main" module field that could not be resolved ("/path/to/node_modules/@react-navigation/native/src/index.tsx"
 ```
 
@@ -64,13 +67,13 @@ If it's missing these extensions, add them and then clear metro cache as shown i
 
 This might happen if you have an old version of the `metro-react-native-babel-preset` package. Try upgrading it to the latest version.
 
-```sh npm2yarn
+```bash npm2yarn
 npm install --save-dev metro-react-native-babel-preset
 ```
 
 If you have `@babel/core` installed, also upgrade it to latest version.
 
-```sh npm2yarn
+```bash npm2yarn
 npm install --save-dev @babel/core
 ```
 
@@ -78,7 +81,7 @@ If upgrading the packages don't help, you can also try deleting your `node_modul
 
 If you use `npm`:
 
-```sh
+```bash
 rm -rf node_modules
 rm package-lock.json
 npm install
@@ -86,7 +89,7 @@ npm install
 
 If you use `yarn`:
 
-```sh
+```bash
 rm -rf node_modules
 rm yarn.lock
 yarn
@@ -98,7 +101,7 @@ After upgrading or reinstalling the packages, you should also clear Metro bundle
 
 This might happen if you have an old version of TypeScript in your project. You can try upgrading it:
 
-```sh npm2yarn
+```bash npm2yarn
 npm install --save-dev typescript
 ```
 
@@ -108,13 +111,13 @@ This and some similar errors might occur if you have a bare React Native project
 
 Linking is automatic from React Native 0.60, so if you have linked the library manually, first unlink it:
 
-```sh
+```bash
 react-native unlink react-native-gesture-handler
 ```
 
 If you're testing on iOS and use Mac, make sure you have run `pod install` in the `ios/` folder:
 
-```sh
+```bash
 cd ios
 pod install
 cd ..
@@ -128,13 +131,13 @@ This and some similar errors might occur if you have a bare React Native project
 
 Linking is automatic from React Native 0.60, so if you have linked the library manually, first unlink it:
 
-```sh
+```bash
 react-native unlink react-native-safe-area-context
 ```
 
 If you're testing on iOS and use Mac, make sure you have run `pod install` in the `ios/` folder:
 
-```sh
+```bash
 cd ios
 pod install
 cd ..
@@ -148,7 +151,7 @@ This might occur if you have multiple versions of [`react-native-safe-area-conte
 
 If you're using Expo managed workflow, it's likely that you have installed an incompatible version. To install the correct version, run:
 
-```sh
+```bash
 npx expo install react-native-safe-area-context
 ```
 
@@ -156,13 +159,13 @@ If it didn't fix the error or you're not using Expo managed workflow, you'll nee
 
 If you use `yarn`, run:
 
-```sh
+```bash
 yarn why react-native-safe-area-context
 ```
 
 If you use `npm`, run:
 
-```sh
+```bash
 npm ls react-native-safe-area-context
 ```
 
@@ -180,13 +183,13 @@ If you use `yarn`, you can also temporarily override the version being installed
 
 And then run:
 
-```sh
+```bash
 yarn
 ```
 
 If you're on iOS and not using Expo managed workflow, also run:
 
-```sh
+```bash
 cd ios
 pod install
 cd ..
@@ -197,6 +200,30 @@ Now rebuild the app and test on your device or simulator.
 ## Nothing is visible on the screen after adding a `View`
 
 If you wrap the container in a `View`, make sure the `View` stretches to fill the container using `flex: 1`:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+import * as React from 'react';
+import { View } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+
+/* ... */
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return (
+    <View style={{ flex: 1 }}>
+      <Navigation />
+    </View>
+  );
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 import * as React from 'react';
@@ -211,6 +238,9 @@ export default function App() {
   );
 }
 ```
+
+</TabItem>
+</Tabs>
 
 ## I get the warning "Non-serializable values were found in the navigation state"
 
@@ -239,6 +269,25 @@ LogBox.ignoreLogs([
 
 This can happen when you pass a React component to an option that accepts a function returning a react element. For example, the [`headerTitle` option in native stack navigator](native-stack-navigator.md#headerTitle) expects a function returning a react element:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Stack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: Home,
+      options: {
+        headerTitle: (props) => <MyTitle {...props} />,
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 ```js
 <Stack.Screen
   name="Home"
@@ -247,7 +296,30 @@ This can happen when you pass a React component to an option that accepts a func
 />
 ```
 
+</TabItem>
+</Tabs>
+
 If you directly pass a function here, you'll get this error when using hooks:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Stack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: Home,
+      options: {
+        // This is not correct
+        headerTitle: MyTitle,
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Stack.Screen
@@ -260,6 +332,9 @@ If you directly pass a function here, you'll get this error when using hooks:
 />
 ```
 
+</TabItem>
+</Tabs>
+
 The same applies to other options like `headerLeft`, `headerRight`, `tabBarIcon` etc. as well as props such as `tabBar`, `drawerContent` etc.
 
 ## Screens are unmounting/remounting during navigation
@@ -267,6 +342,28 @@ The same applies to other options like `headerLeft`, `headerRight`, `tabBarIcon`
 Sometimes you might have noticed that your screens unmount/remount, or your local component state or the navigation state resets when you navigate. This might happen if you are creating React components during render.
 
 The simplest example is something like following:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: () => {
+      return <SomeComponent />;
+    },
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 function App() {
@@ -283,11 +380,38 @@ function App() {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 The `component` prop expects a React Component, but in the example, it's getting a function returning an React Element. While superficially a component and a function returning a React Element look the exact same, they don't behave the same way when used.
 
 Here, every time the component re-renders, a new function will be created and passed to the `component` prop. React will see a new component and unmount the previous component before rendering the new one. This will cause any local state in the old component to be lost. React Navigation will detect and warn for this specific case but there can be other ways you might be creating components during render which it can't detect.
 
 Another easy to identify example of this is when you create a component inside another component:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+function App() {
+  const Home = () => {
+    return <SomeComponent />;
+  };
+
+  const RootStack = createNativeStackNavigator({
+    screens: {
+      Home: Home,
+    },
+  });
+
+  const Navigation = createStaticNavigation(RootStack);
+
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 function App() {
@@ -303,7 +427,34 @@ function App() {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 Or when you use a higher order component (such as `connect` from Redux, or `withX` functions that accept a component) inside another component:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+function App() {
+  const Home = () => {
+    return <SomeComponent />;
+  };
+
+  const RootStack = createNativeStackNavigator({
+    screens: {
+      Home: withSomeData(Home),
+    },
+  });
+
+  const Navigation = createStaticNavigation(RootStack);
+
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 function App() {
@@ -315,7 +466,33 @@ function App() {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 If you're unsure, it's always best to make sure that the components you are using as screens are defined outside of a React component. They could be defined in another file and imported, or defined at the top level scope in the same file:
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Home = () => {
+  return <SomeComponent />;
+};
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: Home,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 const Home = () => {
@@ -330,6 +507,9 @@ function App() {
   );
 }
 ```
+
+</TabItem>
+</Tabs>
 
 This is not React Navigation specific, but related to React in general. You should always avoid creating components during render, whether you are using React Navigation or not.
 

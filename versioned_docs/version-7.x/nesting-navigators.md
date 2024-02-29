@@ -4,45 +4,170 @@ title: Nesting navigators
 sidebar_label: Nesting navigators
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Nesting navigators means rendering a navigator inside a screen of another navigator, for example:
 
-<samp id="nested-navigators" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
-function Home() {
+```js name="Nested navigators" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+function FeedScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Feed Screen</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function MessagesScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Messages Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const HomeTabs = createBottomTabNavigator({
+  screens: {
+    Feed: FeedScreen,
+    Messages: MessagesScreen,
+  },
+});
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      // highlight-next-line
+      screen: HomeTabs,
+      options: {
+        headerShown: false,
+      },
+    },
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Nested navigators" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+function FeedScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Feed Screen</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function MessagesScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Messages Screen</Text>
+    </View>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+// codeblock-focus-start
+function HomeTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Feed" component={Feed} />
-      <Tab.Screen name="Messages" component={Messages} />
+      <Tab.Screen name="Feed" component={FeedScreen} />
+      <Tab.Screen name="Messages" component={MessagesScreen} />
     </Tab.Navigator>
   );
 }
 
-function App() {
+function RootStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        // highlight-next-line
+        component={HomeTabs}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
+  );
+}
+// codeblock-focus-end
+
+export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="Settings" component={Settings} />
-      </Stack.Navigator>
+      <RootStack />
     </NavigationContainer>
   );
 }
 ```
 
-In the above example, the `Home` component contains a tab navigator. The `Home` component is also used for the `Home` screen in your stack navigator inside the `App` component. So here, a tab navigator is nested inside a stack navigator:
+</TabItem>
+</Tabs>
 
-- `Stack.Navigator`
-  - `Home` (`Tab.Navigator`)
-    - `Feed` (`Screen`)
-    - `Messages` (`Screen`)
-  - `Profile` (`Screen`)
-  - `Settings` (`Screen`)
+In the above example, `HomeTabs` contains a tab navigator. It is also used for the `Home` screen in your stack navigator in `RootStack`. So here, a tab navigator is nested inside a stack navigator:
+
+- `RootStack` (Stack navigator)
+  - `HomeTabs` (Tab navigator)
+    - `Feed` (screen)
+    - `Messages` (screen)
+  - `Profile` (screen)
 
 Nesting navigators work very much like nesting regular components. To achieve the behavior you want, it's often necessary to nest multiple navigators.
 
@@ -62,7 +187,7 @@ If you want to achieve this behavior, see the guide for [screen options with nes
 
 ### Each screen in a navigator has its own params
 
-For example, any `params` passed to a screen in a nested navigator are in the `route` prop of that screen and aren't accessible from a screen in a parent or child navigator.
+For example, any `params` passed to a screen in a nested navigator are in the `route` object of that screen and aren't accessible from a screen in a parent or child navigator.
 
 If you need to access params of the parent screen from a child screen, you can use [React Context](https://reactjs.org/docs/context.html) to expose params to children.
 
@@ -72,11 +197,11 @@ For example, if you're calling `navigation.goBack()` in a nested screen, it'll o
 
 ### Navigator specific methods are available in the navigators nested inside
 
-For example, if you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer`, `toggleDrawer` methods etc. will also be available on the `navigation` prop in the screen's inside the stack navigator. But say you have a stack navigator as the parent of the drawer, then the screens inside the stack navigator won't have access to these methods, because they aren't nested inside the drawer.
+For example, if you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer`, `toggleDrawer` methods etc. will also be available on the `navigation` object in the screens inside the stack navigator. But say you have a stack navigator as the parent of the drawer, then the screens inside the stack navigator won't have access to these methods, because they aren't nested inside the drawer.
 
-Similarly, if you have a tab navigator inside stack navigator, the screens in the tab navigator will get the `push` and `replace` methods for stack in their `navigation` prop.
+Similarly, if you have a tab navigator inside stack navigator, the screens in the tab navigator will get the `push` and `replace` methods for stack in their `navigation` object.
 
-If you need to dispatch actions to the nested child navigators from a parent, you can use [`navigation.dispatch`](navigation-prop.md#dispatch):
+If you need to dispatch actions to the nested child navigators from a parent, you can use [`navigation.dispatch`](navigation-object.md#dispatch):
 
 ```js
 navigation.dispatch(DrawerActions.toggleDrawer());
@@ -86,19 +211,186 @@ navigation.dispatch(DrawerActions.toggleDrawer());
 
 For example, if you have a stack navigator nested inside a tab navigator, the screens in the stack navigator won't receive the events emitted by the parent tab navigator such as (`tabPress`) when using `navigation.addListener`.
 
-To receive events from parent navigator, you can explicitly listen to parent's events with [`navigation.getParent`](navigation-prop.md#getparent):
+To receive events from the parent navigator, you can explicitly listen to parent's events with [`navigation.getParent`](navigation-object.md#getparent):
 
-<samp id="nested-navigators-events" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
-const unsubscribe = navigation
-  .getParent('MyTabs')
-  .addListener('tabPress', (e) => {
-    // Do something
-  });
+```js name="Events from parent" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+function FeedScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Feed Screen</Text>
+      <Button
+        title="Go to Messages"
+        onPress={() => navigation.navigate('Messages')}
+      />
+    </View>
+  );
+}
+
+function MessagesScreen() {
+  const navigation = useNavigation();
+
+  React.useEffect(() => {
+    // codeblock-focus-start
+    const unsubscribe = navigation
+      .getParent('MyTabs')
+      .addListener('tabPress', (e) => {
+        // Do something
+        alert('Tab pressed!');
+      });
+    // codeblock-focus-end
+
+    return unsubscribe;
+  }, [navigation]);
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Messages Screen</Text>
+    </View>
+  );
+}
+
+const HomeStack = createNativeStackNavigator({
+  screens: {
+    Feed: FeedScreen,
+    Messages: MessagesScreen,
+  },
+});
+
+const RootTabs = createBottomTabNavigator({
+  id: 'MyTabs',
+  screens: {
+    Home: {
+      screen: HomeStack,
+      options: {
+        headerShown: false,
+      },
+    },
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootTabs);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
-Here `'MyTabs'` refers to the value you pass in the `id` prop of the parent `Tab.Navigator` whose event you want to listen to.
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Events from parent" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+function FeedScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Feed Screen</Text>
+      <Button
+        title="Go to Messages"
+        onPress={() => navigation.navigate('Messages')}
+      />
+    </View>
+  );
+}
+
+function MessagesScreen() {
+  const navigation = useNavigation();
+
+  React.useEffect(() => {
+    // codeblock-focus-start
+    const unsubscribe = navigation
+      .getParent('MyTabs')
+      .addListener('tabPress', (e) => {
+        // Do something
+        alert('Tab pressed!');
+      });
+    // codeblock-focus-end
+
+    return unsubscribe;
+  }, [navigation]);
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Messages Screen</Text>
+    </View>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+function HomeStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Feed" component={FeedScreen} />
+      <Stack.Screen name="Messages" component={MessagesScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function RootTabs() {
+  return (
+    <Tab.Navigator id="MyTabs">
+      <Tab.Screen
+        name="Home"
+        component={HomeStack}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <RootTabs />
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+Here `'MyTabs'` refers to the value you pass in the `id` of the parent tab navigator whose event you want to listen to.
 
 ### Parent navigator's UI is rendered on top of child navigator
 
@@ -115,72 +407,370 @@ In your app, you will probably use these patterns depending on the behavior you 
 
 Consider the following example:
 
-<samp id="nested-navigator-screen" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
-function Root() {
+```js name="Navigating to nested screen" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Settings" component={Settings} />
-    </Drawer.Navigator>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button title="Go to More" onPress={() => navigation.navigate('More')} />
+      <Button
+        title="Go to Messages"
+        onPress={() => navigation.navigate('More', { screen: 'Messages' })}
+      />
+    </View>
   );
 }
 
-function App() {
+function FeedScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Feed Screen</Text>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+function MessagesScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Messages Screen</Text>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MoreTabs = createBottomTabNavigator({
+  screens: {
+    Feed: FeedScreen,
+    Messages: MessagesScreen,
+  },
+});
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    More: {
+      screen: MoreTabs,
+      options: {
+        headerShown: false,
+      },
+    },
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Navigating to nested screen" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button title="Go to More" onPress={() => navigation.navigate('More')} />
+      <Button
+        title="Go to Messages"
+        onPress={() => navigation.navigate('More', { screen: 'Messages' })}
+      />
+    </View>
+  );
+}
+
+function FeedScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Feed Screen</Text>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+function MessagesScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Messages Screen</Text>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+// codeblock-focus-start
+function MoreTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Feed" component={FeedScreen} />
+      <Tab.Screen name="Messages" component={MessagesScreen} />
+    </Tab.Navigator>
+  );
+}
+
+function RootStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="More"
+        component={MoreTabs}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
+// codeblock-focus-end
+
+export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Root"
-          component={Root}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Feed" component={Feed} />
-      </Stack.Navigator>
+      <RootStack />
     </NavigationContainer>
   );
 }
 ```
 
-Here, you might want to navigate to the `Root` screen from your `Feed` component:
+</TabItem>
+</Tabs>
+
+Here, you might want to navigate to the `More` screen (which contains `MoreTabs`) from your `HomeScreen` component:
 
 ```js
-navigation.navigate('Root');
+navigation.navigate('More');
 ```
 
-It works, and the initial screen inside the `Root` component is shown, which is `Home`. But sometimes you may want to control the screen that should be shown upon navigation. To achieve it, you can pass the name of the screen in params:
+It works, and the initial screen inside the `MoreTabs` component is shown, which is `Feed`. But sometimes you may want to control the screen that should be shown upon navigation. To achieve it, you can pass the name of the screen in params:
 
 ```js
-navigation.navigate('Root', { screen: 'Profile' });
+navigation.navigate('More', { screen: 'Messages' });
 ```
 
-Now, the `Profile` screen will be rendered instead of `Home` upon navigation.
-
-<summary>
-This may look very different from the way navigation used to work with nested screens previously. The difference is that in the previous versions, all configuration was static, so React Navigation could statically find the list of all the navigators and their screens by recursing into nested configurations. But with dynamic configuration, React Navigation doesn't know which screens are available and where until the navigator containing the screen renders. Normally, a screen doesn't render its contents until you navigate to it, so the configuration of navigators which haven't rendered is not yet available. This makes it necessary to specify the hierarchy you're navigating to. This is also why you should have as little nesting of navigators as possible to keep your code simpler.
-</summary>
+Now, the `Messages` screen will be rendered instead of `Feed` upon navigation.
 
 ### Passing params to a screen in a nested navigator
 
 You can also pass params by specifying a `params` key:
 
-<samp id="params-nested-navigators" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
-navigation.navigate('Root', {
-  screen: 'Profile',
-  params: { user: 'jane' },
+```js name="Navigating to nested screen" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Messages"
+        onPress={
+          () =>
+            // codeblock-focus-start
+            navigation.navigate('More', {
+              screen: 'Messages',
+              params: { user: 'jane' },
+            })
+          // codeblock-focus-end
+        }
+      />
+    </View>
+  );
+}
+
+function FeedScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Feed Screen</Text>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+function MessagesScreen({ route }) {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Messages Screen</Text>
+      <Text>User: {route.params.user}</Text>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+const MoreTabs = createBottomTabNavigator({
+  screens: {
+    Feed: FeedScreen,
+    Messages: MessagesScreen,
+  },
 });
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    More: {
+      screen: MoreTabs,
+      options: {
+        headerShown: false,
+      },
+    },
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Navigating to nested screen" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Messages"
+        onPress={
+          () =>
+            // codeblock-focus-start
+            navigation.navigate('More', {
+              screen: 'Messages',
+              params: { user: 'jane' },
+            })
+          // codeblock-focus-end
+        }
+      />
+    </View>
+  );
+}
+
+function FeedScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Feed Screen</Text>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+function MessagesScreen({ route }) {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Messages Screen</Text>
+      <Text>User: {route.params.user}</Text>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+function MoreTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Feed" component={FeedScreen} />
+      <Tab.Screen name="Messages" component={MessagesScreen} />
+    </Tab.Navigator>
+  );
+}
+
+function RootStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="More"
+        component={MoreTabs}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <RootStack />
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
 
 If the navigator was already rendered, navigating to another screen will push a new screen in case of stack navigator.
 
-You can follow similar approach for deeply nested screens. Note that the second argument to `navigate` here is just `params`, so you can do something like:
+You can follow a similar approach for deeply nested screens. Note that the second argument to `navigate` here is just `params`, so you can do something like:
 
 ```js
-navigation.navigate('Root', {
+navigation.navigate('Home', {
   screen: 'Settings',
   params: {
     screen: 'Sound',
@@ -195,7 +785,7 @@ In the above case, you're navigating to the `Media` screen, which is in a naviga
 
 ### Rendering initial route defined in the navigator
 
-By default, when you navigate a screen in the nested navigator, the specified screen is used as the initial screen and the initial route prop on the navigator is ignored. This behaviour is different from the React Navigation 4.
+By default, when you navigate a screen in the nested navigator, the specified screen is used as the initial screen and the `initialRouteName` prop on the navigator is ignored.
 
 If you need to render the initial route specified in the navigator, you can disable the behaviour of using the specified screen as the initial screen by setting `initial: false`:
 
@@ -208,69 +798,238 @@ navigation.navigate('Root', {
 
 This affects what happens when pressing the back button. When there's an initial screen, the back button will take the user there.
 
-## Nesting multiple navigators
+## Avoiding multiple headers when nesting
 
-It's sometimes useful to nest multiple navigators such as stack, drawer or tabs.
-
-When nesting multiple stack, drawer or bottom tab navigator, headers from both child and parent navigators would be shown. However, usually it's more desirable to show the header in the child navigator and hide the header in the screen of the parent navigator.
+When nesting multiple stack, drawer or bottom tab navigators, headers from both child and parent navigators would be shown. However, usually it's more desirable to show the header in the child navigator and hide the header in the screen of the parent navigator.
 
 To achieve this, you can hide the header in the screen containing the navigator using the `headerShown: false` option.
 
 For example:
 
-<samp id="multiple-navigators" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
-function Home() {
+```js name="Nested navigators" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+function FeedScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Feed Screen</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function MessagesScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Messages Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const HomeTabs = createBottomTabNavigator({
+  screens: {
+    Feed: FeedScreen,
+    Messages: MessagesScreen,
+  },
+});
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeTabs,
+      options: {
+        // highlight-next-line
+        headerShown: false,
+      },
+    },
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Nested navigators" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+function FeedScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Feed Screen</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function MessagesScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Messages Screen</Text>
+    </View>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+// codeblock-focus-start
+function HomeTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Profile" component={Profile} />
-      <Tab.Screen name="Settings" component={Settings} />
+      <Tab.Screen name="Feed" component={FeedScreen} />
+      <Tab.Screen name="Messages" component={MessagesScreen} />
     </Tab.Navigator>
   );
 }
 
-function App() {
+function RootStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={HomeTabs}
+        options={{
+          // highlight-next-line
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
+  );
+}
+// codeblock-focus-end
+
+export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="EditPost" component={EditPost} />
-      </Stack.Navigator>
+      <RootStack />
     </NavigationContainer>
   );
 }
 ```
+
+</TabItem>
+</Tabs>
 
 In these examples, we have used a bottom tab navigator directly nested inside another stack navigator, but the same principle applies when there are other navigators in the middle, for example: stack navigator inside a tab navigator which is inside another stack navigator, stack navigator inside drawer navigator etc.
 
 If you don't want headers in any of the navigators, you can specify `headerShown: false` in all of the navigators:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
 ```js
-function Home() {
+const HomeTabs = createBottomTabNavigator({
+  // highlight-start
+  screenOptions: {
+    headerShown: false,
+  },
+  // highlight-end
+  screens: {
+    Feed: FeedScreen,
+    Messages: MessagesScreen,
+  },
+});
+
+const RootStack = createStackNavigator({
+  // highlight-start
+  screenOptions: {
+    headerShown: false,
+  },
+  // highlight-end
+  screens: {
+    Home: HomeTabs,
+    Profile: ProfileScreen,
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+function HomeTabs() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen name="Profile" component={Profile} />
-      <Tab.Screen name="Settings" component={Settings} />
+    <Tab.Navigator
+      // highlight-start
+      screenOptions={{
+        headerShown: false,
+      }}
+      // highlight-end
+    >
+      <Tab.Screen name="Feed" component={FeedScreen} />
+      <Tab.Screen name="Messages" component={MessagesScreen} />
     </Tab.Navigator>
   );
 }
 
-function App() {
+function RootStack() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="EditPost" component={EditPost} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator
+      // highlight-start
+      screenOptions={{
+        headerShown: false,
+      }}
+      // highlight-end
+    >
+      <Stack.Screen name="Home" component={HomeTabs} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
   );
 }
 ```
+
+</TabItem>
+</Tabs>
 
 ## Best practices when nesting
 
@@ -280,9 +1039,49 @@ We recommend to reduce nesting navigators to minimal. Try to achieve the behavio
 - Nesting same type of navigators (e.g. tabs inside tabs, drawer inside drawer etc.) might lead to a confusing UX
 - With excessive nesting, code becomes difficult to follow when navigating to nested screens, configuring deep link etc.
 
-Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, instead of using separate navigators, you can use the [`Group`](group.md) component.
+Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, instead of using separate navigators, you can use the [`Group`](group.md) component for dynamic configuration or [`groups` property](static-configuration.md#groups) for static configuration.
 
-<samp id="nesting-best-practices" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const MyStack = createStackNavigator({
+  screens: {
+    // Common screens
+  },
+  groups: {
+    // Common modal screens
+    Modal: {
+      screenOptions: {
+        presentation: 'modal',
+      },
+      screens: {
+        Help,
+        Invite,
+      },
+    },
+    // Screens for logged in users
+    User: {
+      if: useIsLoggedIn,
+      screens: {
+        Home,
+        Profile,
+      },
+    },
+    // Auth screens
+    Guest: {
+      if: useIsGuest,
+      screens: {
+        SignIn,
+        SignUp,
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Stack.Navigator>
@@ -306,3 +1105,6 @@ Think of nesting navigators as a way to achieve the UI you want rather than a wa
   </Stack.Group>
 </Stack.Navigator>
 ```
+
+</TabItem>
+</Tabs>

@@ -6,49 +6,121 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #6b52ae;
-  --ifm-color-primary-dark: #60499d;
-  --ifm-color-primary-darker: #5b4594;
-  --ifm-color-primary-darkest: #4b397a;
-  --ifm-color-primary-light: #7a63b6;
-  --ifm-color-primary-lighter: #816cba;
-  --ifm-color-primary-lightest: #9886c6;
-  --ifm-code-font-size: 95%;
-  --ifm-hero-background-color: #6b52ae;
-  --ifm-hero-text-color: #fff;
+  --primary-hue: 256.3;
+  --primary-saturation: 53.2%;
+  --primary-lightness: 50.2%;
 
+  --ifm-color-primary: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    var(--primary-lightness)
+  );
+
+  --ifm-color-primary-dark: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    45.1%
+  );
+
+  --ifm-color-primary-darker: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    40.1%
+  );
+
+  --ifm-color-primary-darkest: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    35.1%
+  );
+
+  --ifm-color-primary-light: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    55.2%
+  );
+
+  --ifm-color-primary-lighter: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    60.2%
+  );
+
+  --ifm-color-primary-lightest: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    77.6%
+  );
+
+  --ifm-hero-background-color: var(--ifm-color-primary);
+  --ifm-footer-background-color: #f7f7ff;
   --ifm-home-color-text: #414360;
   --ifm-home-color-background: #f7f7ff;
   --ifm-home-color-background-secondary: #d5d6f5;
-  --ifm-home-color-highlight: #8c90e0;
+  --ifm-home-color-highlight: hsl(var(--primary-hue), 57.5%, 71.4%);
   --ifm-home-color-border: #414360;
   --ifm-home-color-black: #25292e;
   --ifm-home-color-white: #f7f7ff;
 
-  --ifm-menu-color-background-active: rgb(107, 82, 174, 0.1);
+  --ifm-menu-color-background-active: rgba(107, 82, 174, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(107, 82, 174, 0.1);
 
-  --docusaurus-highlighted-code-line-bg: #ebebeb;
+  --ifm-tabs-padding-vertical: 0.5rem;
+  --ifm-alert-border-left-width: 0;
 }
 
 :root[data-theme='dark'] {
-  --ifm-color-primary: #a697ce;
-  --ifm-color-primary-dark: #917fc3;
-  --ifm-color-primary-darker: #8773bd;
-  --ifm-color-primary-darkest: #6950aa;
-  --ifm-color-primary-light: #bbafd9;
-  --ifm-color-primary-lighter: #c5bbdf;
-  --ifm-color-primary-lightest: #e4e0f0;
+  --primary-saturation: 35.9%;
+  --primary-lightness: 70%;
 
+  --ifm-color-primary-dark: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    63.1%
+  );
+
+  --ifm-color-primary-darker: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    59.6%
+  );
+
+  --ifm-color-primary-darkest: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    49%
+  );
+
+  --ifm-color-primary-light: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    76.9%
+  );
+
+  --ifm-color-primary-lighter: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    80.4%
+  );
+
+  --ifm-color-primary-lightest: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    91%
+  );
+
+  --ifm-footer-background-color: #25292f;
   --ifm-home-color-text: #f7f7ff;
   --ifm-home-color-background: #414360;
   --ifm-home-color-background-secondary: #585b82;
-  --ifm-home-color-highlight: #9692ff;
+  --ifm-home-color-highlight: hsl(var(--primary-hue), 100%, 78.6%);
   --ifm-home-color-border: #f7f7ff;
 
   --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.07);
 }
 
 .menu {
+  font-size: 93.75%;
   font-weight: var(--ifm-font-weight-normal);
 }
 
@@ -58,27 +130,50 @@
 
 .menu__list-item-collapsible > .menu__link {
   font-weight: var(--ifm-font-weight-semibold);
+  color: var(--ifm-color-emphasis-1000);
+}
+
+.menu__list-item-collapsible > .menu__link--active {
+  color: var(--ifm-color-primary);
 }
 
 .menu__link--sublist-caret:after {
-  background: var(--ifm-menu-link-sublist-icon) 50% / 1.5rem 1.5rem;
+  background: var(--ifm-menu-link-sublist-icon) 50% / 1.25rem 1.25rem;
+  opacity: 0.5;
 }
 
-.docusaurus-highlight-code-line {
-  background-color: rgb(72, 77, 91);
-  display: block;
-  margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
+.theme-doc-sidebar-container {
+  border-right: none !important;
 }
 
-blockquote {
-  background-color: rgba(226, 232, 125, 0.2);
-  border-left: 5px solid rgba(226, 232, 125, 0.5);
+.table-of-contents__left-border {
+  border-left: none;
 }
 
-[data-theme='dark'] blockquote {
-  background-color: #1c1c1c;
-  border-left: 5px solid var(--ifm-color-primary);
+.pagination-nav__link {
+  border: none;
+}
+
+.pagination-nav__label::before,
+.pagination-nav__label::after {
+  display: none;
+}
+
+.pagination-nav__link--next .pagination-nav__sublabel::after {
+  content: ' →';
+}
+
+.pagination-nav__link--prev .pagination-nav__sublabel::before {
+  content: '← ';
+}
+
+.tabs__item {
+  border-bottom-width: 2px;
+}
+
+.theme-edit-this-page svg,
+.theme-admonition svg {
+  transform: scale(0.8);
 }
 
 samp {

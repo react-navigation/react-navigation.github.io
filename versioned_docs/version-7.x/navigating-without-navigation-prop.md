@@ -4,7 +4,10 @@ title: Navigating without the navigation prop
 sidebar_label: Navigating without the navigation prop
 ---
 
-Sometimes you need to trigger a navigation action from places where you do not have access to the `navigation` prop, such as a Redux middleware. For such cases, you can dispatch navigation actions use a [`ref` on the navigation container](navigation-container.md#ref).
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Sometimes you need to trigger a navigation action from places where you do not have access to the `navigation` object, such as a Redux middleware. For such cases, you can dispatch navigation actions use a [`ref` on the navigation container](navigation-container.md#ref).
 
 **Do not** use the `ref` if:
 
@@ -22,9 +25,26 @@ Note that it's usually better to trigger navigation from user actions such as bu
 
 You can get access to the root navigation object through a `ref` and pass it to the `RootNavigation` which we will later use to navigate.
 
-```js
-// App.js
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
+```js
+import { createStaticNavigation } from '@react-navigation/native';
+import { navigationRef } from './RootNavigation';
+
+/* ... */
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation ref={navigationRef} />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
 import { NavigationContainer } from '@react-navigation/native';
 import { navigationRef } from './RootNavigation';
 
@@ -35,6 +55,9 @@ export default function App() {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 In the next step, we define `RootNavigation`, which is a simple module with functions that dispatch user-defined navigation actions.
 
 ```js
@@ -42,7 +65,7 @@ In the next step, we define `RootNavigation`, which is a simple module with func
 
 import { createNavigationContainerRef } from '@react-navigation/native';
 
-export const navigationRef = createNavigationContainerRef()
+export const navigationRef = createNavigationContainerRef();
 
 export function navigate(name, params) {
   if (navigationRef.isReady()) {
@@ -55,16 +78,132 @@ export function navigate(name, params) {
 
 Then, in any of your javascript modules, import the `RootNavigation` and call functions which you exported from it. You may use this approach outside of your React components and, in fact, it works as well when used from within them.
 
- <samp id="no-nav-prop" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
-// any js module
-import * as RootNavigation from './path/to/RootNavigation.js';
+```js name="Using navigate in any js module" snack version=7
+import * as React from 'react';
+import { View, Button, Text } from 'react-native';
+import {
+  createStaticNavigation,
+  createNavigationContainerRef,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const navigationRef = createNavigationContainerRef();
+
+// codeblock-focus-start
+function navigate(name, params) {
+  if (navigationRef.isReady()) {
+    navigationRef.navigate(name, params);
+  }
+}
+
+// Example of usage in any of js modules
+//import * as RootNavigation from './path/to/RootNavigation.js';
 
 // ...
 
-RootNavigation.navigate('ChatScreen', { userName: 'Lucy' });
+// RootNavigation.navigate('ChatScreen', { userName: 'Lucy' });
+
+function Home() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        title="Go to Settings"
+        onPress={() => navigate('Settings', { userName: 'Lucy' })}
+      />
+    </View>
+  );
+}
+// codeblock-focus-end
+
+function Settings({ route }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Hello {route.params.userName}</Text>
+      <Button title="Go to Home" onPress={() => navigate('Home')} />
+    </View>
+  );
+}
+
+const RootStack = createNativeStackNavigator({
+  Home: Home,
+  Settings: Settings,
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation ref={navigationRef} />;
+}
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Using navigate in any js module" snack version=7
+import * as React from 'react';
+import { View, Button, Text } from 'react-native';
+import {
+  NavigationContainer,
+  createNavigationContainerRef,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const navigationRef = createNavigationContainerRef();
+
+// codeblock-focus-start
+function navigate(name, params) {
+  if (navigationRef.isReady()) {
+    navigationRef.navigate(name, params);
+  }
+}
+
+// Example of usage in any of js modules
+//import * as RootNavigation from './path/to/RootNavigation.js';
+
+// ...
+
+// RootNavigation.navigate('ChatScreen', { userName: 'Lucy' });
+
+function Home() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        title="Go to Settings"
+        onPress={() => navigate('Settings', { userName: 'Lucy' })}
+      />
+    </View>
+  );
+}
+// codeblock-focus-end
+
+function Settings({ route }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Hello {route.params.userName}</Text>
+      <Button title="Go to Home" onPress={() => navigate('Home')} />
+    </View>
+  );
+}
+
+const RootStack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer ref={navigationRef}>
+      <RootStack.Navigator>
+        <RootStack.Screen name="Home" component={Home} />
+        <RootStack.Screen name="Settings" component={Settings} />
+      </RootStack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
 
 Apart from `navigate`, you can add other navigation actions:
 
@@ -97,16 +236,22 @@ For an example, consider the following scenario, you have a screen somewhere in 
 
 To avoid this, you can use the `isReady()` method available on the ref as shown in the above examples.
 
-<samp id="handling-navigation-init"/>
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
-// RootNavigation.js
-
+```js name="Handling navigation init" snack version=7
 import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import {
+  createStaticNavigation,
+  createNavigationContainerRef,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export const navigationRef = createNavigationContainerRef()
+// codeblock-focus-start
+const navigationRef = createNavigationContainerRef();
 
-export function navigate(name, params) {
+function navigate(name, params) {
   if (navigationRef.isReady()) {
     // Perform navigation if the react navigation is ready to handle actions
     navigationRef.navigate(name, params);
@@ -115,6 +260,96 @@ export function navigate(name, params) {
     // You can ignore this, or add these actions to a queue you can call later
   }
 }
+// codeblock-focus-end
+
+function Home() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home</Text>
+      <Button title="Go to Profile" onPress={() => navigate('Profile')} />
+    </View>
+  );
+}
+
+function Profile() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile</Text>
+    </View>
+  );
+}
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: Home,
+    Profile: Profile,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation ref={navigationRef} />;
+}
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Handling navigation init" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import {
+  NavigationContainer,
+  createNavigationContainerRef,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
+// codeblock-focus-start
+const navigationRef = createNavigationContainerRef();
+
+function navigate(name, params) {
+  if (navigationRef.isReady()) {
+    // Perform navigation if the react navigation is ready to handle actions
+    navigationRef.navigate(name, params);
+  } else {
+    // You can decide what to do if react navigation is not ready
+    // You can ignore this, or add these actions to a queue you can call later
+  }
+}
+// codeblock-focus-end
+
+function Home() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home</Text>
+      <Button title="Go to Profile" onPress={() => navigate('Profile')} />
+    </View>
+  );
+}
+
+function Profile() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer ref={navigationRef}>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Profile" component={Profile} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
 
 If you're unsure if a navigator is rendered, you can call `navigationRef.current.getRootState()`, and it'll return a valid state object if any navigators are rendered, otherwise it will return `undefined`.

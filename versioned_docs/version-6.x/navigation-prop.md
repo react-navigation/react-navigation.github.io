@@ -27,15 +27,19 @@ There are several additional functions present on `navigation` prop based on the
 If the navigator is a stack navigator, several alternatives to `navigate` and `goBack` are provided and you can use whichever you prefer. The functions are:
 
 - `navigation`
-  - `replace` - replace the current route with a new one
-  - `push` - push a new route onto the stack
+  - `replace` - replace the current screen with a new one
+  - `push` - push a new screen onto the stack
   - `pop` - go back in the stack
   - `popToTop` - go to the top of the stack
+
+See [Stack navigator helpers](stack-navigator.md#helpers) and [Native Stack navigator helpers](native-stack-navigator.md#helpers) for more details on these methods.
 
 If the navigator is a tab navigator, the following are also available:
 
 - `navigation`
   - `jumpTo` - go to a specific screen in the tab navigator
+
+See [Bottom Tab navigator helpers](bottom-tab-navigator.md#helpers), [Material Top Tab navigator helpers](material-top-tab-navigator.md#helpers) and [Material Bottom Tab navigator helpers](material-bottom-tab-navigator.md#helpers) for more details on these methods.
 
 If the navigator is a drawer navigator, the following are also available:
 
@@ -45,7 +49,7 @@ If the navigator is a drawer navigator, the following are also available:
   - `closeDrawer` - close the drawer
   - `toggleDrawer` - toggle the state, ie. switch from closed to open and vice versa
 
-You can find more details about navigator dependent functions in the documentation for the navigator that you're using.
+See [Drawer navigator helpers](drawer-navigator.md#helpers) for more details on these methods.
 
 ## Common API reference
 
@@ -145,7 +149,11 @@ navigation.reset({
 
 The state object specified in `reset` replaces the existing [navigation state](navigation-state.md) with the new one, i.e. removes existing screens and add new ones. If you want to preserve the existing screens when changing the state, you can use [`CommonActions.reset`](navigation-actions.md#reset) with [`dispatch`](#dispatch) instead.
 
-> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+:::warning
+
+Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+
+:::
 
 ### `setParams`
 
@@ -210,7 +218,11 @@ When using `navigation.setOptions`, we recommend specifying a placeholder in the
 
 You can also use `React.useLayoutEffect` to reduce the delay in updating the options. But we recommend against doing it if you support web and do server side rendering.
 
-> Note: `navigation.setOptions` is intended to provide the ability to update existing options when necessary. It's not a replacement for the `options` prop on the screen. Make sure to use `navigation.setOptions` sparingly only when absolutely necessary.
+:::note
+
+`navigation.setOptions` is intended to provide the ability to update existing options when necessary. It's not a replacement for the `options` prop on the screen. Make sure to use `navigation.setOptions` sparingly only when absolutely necessary.
+
+:::
 
 ## Navigation events
 
@@ -383,7 +395,11 @@ This method will return `undefined` if there is no matching parent navigator. Be
 
 ### `getState`
 
-> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+:::warning
+
+Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+
+:::
 
 This method returns the state object of the navigator which contains the screen. Getting the navigator state could be useful in very rare situations. You most likely don't need to use this method. If you do, make sure you have a good reason.
 

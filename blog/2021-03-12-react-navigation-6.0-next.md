@@ -29,7 +29,7 @@ We'll share few highlights of the release in this blog post. If you're looking f
 
 If you'd like to try it out, add `@^6.x` to the package, you're installing. For example:
 
-```sh npm2yarn
+```bash npm2yarn
 npm install @react-navigation/native@^6.x @react-navigation/stack@^6.x
 ```
 

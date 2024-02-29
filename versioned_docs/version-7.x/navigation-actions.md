@@ -23,11 +23,8 @@ The library exports several action creators under the `CommonActions` namespace.
 
 The `navigate` action allows to navigate to a specific route. It takes the following arguments:
 
-- `name` - _string_ - A destination name of the route that has been registered somewhere..
-- `key` - _string_ - The identifier for the route to navigate to. Navigate back to this route if it already exists..
-- `params` - _object_ - Params to merge into the destination route..
-
-The options object passed should at least contain a `key` or `name` property, and optionally `params`. If both `key` and `name` are passed, stack navigator will create a new route with the specified key if no matches were found.
+- `name` - _string_ - A destination name of the screen in the current or a parent navigator.
+- `params` - _object_ - Params to use for the destination route.
 
 <samp id="common-actions" />
 
@@ -44,9 +41,18 @@ navigation.dispatch(
 );
 ```
 
-In a [stack navigator](stack-navigator.md), calling `navigate` with a screen name will result in different behavior based on if the screen is already present or not. If the screen is already present in the stack's history, it'll go back to that screen and remove any screens after that. If the screen is not present, it'll push a new screen.
+In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack-navigator.md)), calling `navigate` with a screen name will have the following behavior:
 
-By default, the screen is identified by its name. But you can also customize it to take the params into account by using the [`getId`](screen.md#getid) prop.
+- If you're already on a screen with the same name, it will update its params and not push a new screen.
+- If you're on a different screen, it will push the new screen onto the stack.
+- If the [`getId`](screen.md#getid) prop is specified, and another screen in the stack has the same ID, it will navigate to that screen and update its params instead.
+
+The `navigate` action can also accepts an object as the argument with the following properties:
+
+- `name` - _string_ - A destination name of the screen in the current or a parent navigator
+- `params` - _object_ - Params to use for the destination route.
+- `merge` - _boolean_ - Whether we should merge the params of the current route with the provided `params`. Defaults to `false`.
+- `path` - _string_ - The path (from deep link or universal link) to associate with the screen.
 
 ### reset
 
@@ -81,8 +87,9 @@ If you want to preserve the existing screens but only want to modify the state, 
 import { CommonActions } from '@react-navigation/native';
 
 navigation.dispatch(state => {
-  // Remove the home route from the stack
-  const routes = state.routes.filter(r => r.name !== 'Home');
+  // Remove all the screens after `Profile`
+  const index = state.routes.findIndex(r => r.name === 'Profile');
+  const routes = state.routes.slice(0, index + 1);
 
   return CommonActions.reset({
     ...state,
@@ -92,7 +99,20 @@ navigation.dispatch(state => {
 });
 ```
 
-> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+:::warning
+
+Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+
+:::
+
+#### Rewriting the history with `reset`
+
+Since the `reset` action can update the navigation state with a new state object, it can be used to rewrite the navigation history. However, rewriting the history to alter the back stack is not recommended in most cases:
+
+- It can lead to a confusing user experience, as users expect to be able to go back to the screen they were on before.
+- When supporting the Web platform, the browser's history will still reflect the old navigation state, so users will see the old screen if they use the browser's back button - resulting in 2 different experiences depending on which back button the user presses.
+
+So if you have such a use case, consider a different approach - e.g. updating the history once the user navigates back to the screen that has changed.
 
 ### goBack
 

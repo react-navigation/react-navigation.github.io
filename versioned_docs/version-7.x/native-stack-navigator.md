@@ -15,18 +15,70 @@ One thing to keep in mind is that while `@react-navigation/native-stack` offers 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/native-stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/native-stack):
 
 ```bash npm2yarn
-npm install @react-navigation/native-stack
+npm install @react-navigation/native-stack@next
 ```
 
-## API Definition
-
-> 💡 If you encounter any bugs while using `createNativeStackNavigator`, please open issues on [`react-native-screens`](https://github.com/software-mansion/react-native-screens) rather than the `react-navigation` repository!
+## Usage
 
 To use this navigator, import it from `@react-navigation/native-stack`:
 
-<samp id="simple-native-stack" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Native Stack Navigator" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { createStaticNavigation, useNavigation } from '@react-navigation/native';
+// codeblock-focus-start
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+// codeblock-focus-end
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Native Stack Navigator" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+// codeblock-focus-start
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
@@ -34,14 +86,54 @@ const Stack = createNativeStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Notifications" component={Notifications} />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
   );
 }
+// codeblock-focus-end
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+}
 ```
+
+</TabItem>
+</Tabs>
+
+:::info
+
+If you encounter any bugs while using `createNativeStackNavigator`, please open issues on [`react-native-screens`](https://github.com/software-mansion/react-native-screens) rather than the `react-navigation` repository!
+
+:::
+
+## API Definition
 
 ### Props
 
@@ -49,7 +141,7 @@ The `Stack.Navigator` component accepts following props:
 
 #### `id`
 
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
+Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-object.md#getparent) to refer to this navigator in a child navigator.
 
 #### `initialRouteName`
 
@@ -650,11 +742,22 @@ React.useEffect(() => {
 
 ### Helpers
 
-The native stack navigator adds the following methods to the navigation prop:
+The nativestack navigator adds the following methods to the navigation object:
+
+#### `replace`
+
+Replaces the current screen with a new screen in the stack. The method accepts the following arguments:
+
+- `name` - _string_ - Name of the route to push onto the stack.
+- `params` - _object_ - Screen params to pass to the destination route.
+
+```js
+navigation.replace('Profile', { owner: 'Michaś' });
+```
 
 #### `push`
 
-Pushes a new screen to top of the stack and navigate to it. The method accepts following arguments:
+Pushes a new screen to the top of the stack and navigate to it. The method accepts the following arguments:
 
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to pass to the destination route.
@@ -669,6 +772,19 @@ Pops the current screen from the stack and navigates back to the previous screen
 
 ```js
 navigation.pop();
+```
+
+#### `popTo`
+
+Navigates back to a previous screen in the stack by popping screens after it. The method accepts the following arguments:
+
+- `name` - _string_ - Name of the route to navigate to.
+- `params` - _object_ - Screen params to pass to the destination route.
+
+If a matching screen is not found in the stack, this will pop the current screen and add a new screen with the specified name and params.
+
+```js
+navigation.popTo('Profile', { owner: 'Michaś' });
 ```
 
 #### `popToTop`

@@ -4,25 +4,30 @@ title: Different status bar configuration based on route
 sidebar_label: Different status bar configuration based on route
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 If you don't have a navigation header, or your navigation header changes color based on the route, you'll want to ensure that the correct color is used for the content.
 
 ## Stack
 
 This is a simple task when using a stack. You can render the `StatusBar` component, which is exposed by React Native, and set your config.
 
-<samp id="status-bar" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Different status bar" snack version=7
 import * as React from 'react';
 import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-function Screen1({ navigation }) {
+function Screen1() {
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
   return (
@@ -38,18 +43,20 @@ function Screen1({ navigation }) {
         },
       ]}
     >
+      // highlight-start
       <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+      // highlight-end
       <Text style={{ color: '#fff' }}>Light Screen</Text>
       <Button
         title="Next screen"
         onPress={() => navigation.navigate('Screen2')}
-        color="#fff"
       />
     </View>
   );
 }
 
-function Screen2({ navigation }) {
+function Screen2() {
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
   return (
@@ -65,7 +72,102 @@ function Screen2({ navigation }) {
         },
       ]}
     >
+      // highlight-start
       <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
+      // highlight-end
+      <Text>Dark Screen</Text>
+      <Button
+        title="Next screen"
+        onPress={() => navigation.navigate('Screen1')}
+      />
+    </View>
+  );
+}
+
+const RootStack = createNativeStackNavigator({
+  screenOptions: {
+    headerShown: false,
+  },
+  screens: {
+    Screen1: Screen1,
+    Screen2: Screen2,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+});
+```
+
+</TabItem>
+
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Different status bar" snack version=7
+import * as React from 'react';
+import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
+
+function Screen1() {
+  const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: '#6a51ae',
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        },
+      ]}
+    >
+      // highlight-start
+      <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+      // highlight-end
+      <Text style={{ color: '#fff' }}>Light Screen</Text>
+      <Button
+        title="Next screen"
+        onPress={() => navigation.navigate('Screen2')}
+      />
+    </View>
+  );
+}
+
+function Screen2() {
+  const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: '#ecf0f1',
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        },
+      ]}
+    >
+      // highlight-start
+      <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
+      // highlight-end
       <Text>Dark Screen</Text>
       <Button
         title="Next screen"
@@ -107,6 +209,10 @@ const styles = StyleSheet.create({
     <source src="/assets/statusbar/status-stack-android.mp4" />
   </video>
 </div>
+</TabItem>
+</Tabs>
+
+![StackNavigator with different StatusBar configs](/assets/statusbar/statusbar-stack-demo.gif)
 
 ## Tabs and Drawer
 
@@ -130,8 +236,29 @@ Now, our screens (both `Screen1.js` and `Screen2.js`) will use the `FocusAwareSt
 
 <samp id="focus-status-bar"/>
 
-```jsx
-function Screen1({ navigation }) {
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Different status bar based on tabs" snack version=7
+import * as React from 'react';
+import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+function FocusAwareStatusBar(props) {
+  const isFocused = useIsFocused();
+
+  return isFocused ? <StatusBar {...props} /> : null;
+}
+
+// codeblock-focus-start
+function Screen1() {
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
   return (
@@ -152,13 +279,13 @@ function Screen1({ navigation }) {
       <Button
         title="Next screen"
         onPress={() => navigation.navigate('Screen2')}
-        color="#fff"
       />
     </View>
   );
 }
 
-function Screen2({ navigation }) {
+function Screen2() {
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
   return (
@@ -183,7 +310,135 @@ function Screen2({ navigation }) {
     </View>
   );
 }
+// codeblock-focus-end
+
+const RootStack = createNativeStackNavigator({
+  screenOptions: {
+    headerShown: false,
+  },
+  screens: {
+    Screen1: Screen1,
+    Screen2: Screen2,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Different status bar based on tabs" snack version=7
+import * as React from 'react';
+import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
+
+function FocusAwareStatusBar(props) {
+  const isFocused = useIsFocused();
+
+  return isFocused ? <StatusBar {...props} /> : null;
+}
+
+// codeblock-focus-start
+function Screen1() {
+  const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: '#6a51ae',
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        },
+      ]}
+    >
+      <FocusAwareStatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+      <Text style={{ color: '#fff' }}>Light Screen</Text>
+      <Button
+        title="Next screen"
+        onPress={() => navigation.navigate('Screen2')}
+      />
+    </View>
+  );
+}
+
+function Screen2() {
+  const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: '#ecf0f1',
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        },
+      ]}
+    >
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
+      <Text>Dark Screen</Text>
+      <Button
+        title="Next screen"
+        onPress={() => navigation.navigate('Screen1')}
+      />
+    </View>
+  );
+}
+// codeblock-focus-end
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Screen1" component={Screen1} />
+          <Stack.Screen name="Screen2" component={Screen2} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+```
+
+</TabItem>
+</Tabs>
 
 Although not necessary, you can use the `FocusAwareStatusBar` component in the screens of the native stack navigator as well.
 

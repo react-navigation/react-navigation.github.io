@@ -62,8 +62,7 @@ Visual options:
   * `fade-in-place` - Header components cross-fade without moving, similar to the Twitter, Instagram, and Facebook app for iOS. This is the default value.
   * `uikit` - An approximation of the default behavior for iOS.
 * `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
-* `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
-<https://github.com/react-navigation/react-navigation/blob/1.x/flow/react-navigation.js>)). Provided function will be passed the following arguments:
+* `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](https://github.com/react-navigation/react-navigation/blob/1.x/flow/react-navigation.js)). Provided function will be passed the following arguments:
   * `transitionProps` - Transition props for the new screen.
   * `prevTransitionProps` - Transitions props for the old screen.
   * `isModal` - Boolean specifying if screen is modal.

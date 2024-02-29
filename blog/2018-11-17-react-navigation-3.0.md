@@ -7,7 +7,7 @@ author_image_url: https://avatars0.githubusercontent.com/u/90494?s=200&v=4
 tags: [release, announcement]
 ---
 
-The documentation is now live at <https://reactnavigation.org>, and v2 lives [here](/docs/2.x/getting-started).
+The documentation is now live at [reactnavigation.org](https://reactnavigation.org), and v2 lives [here](/docs/2.x/getting-started).
 
 This is the first release where React Navigation depends on a native module outside of React Native core: it now depends on react-native-gesture-handler. This library provides an excellent set of primitives for leveraging the operating systems’ native gesture APIs and has enabled us to fix a variety of issues with stack and drawer navigators. React Navigation also depends on react-native-screens, but you don’t need to install the native module if you prefer not to use it (we have a blog post coming soon that will explain what react-native-screens is and why you may want to use it, or you can watch [this talk](https://www.youtube.com/watch?v=Z0Jl1KCWiag) by the author of the library).
 
@@ -23,7 +23,7 @@ First, install the library using your favorite package manager: `yarn add react-
 
 Next, install react-native-gesture-handler. If you’re using Expo you don’t need to do anything here, it’s included in the SDK. Otherwise, follow [these installation instructions](https://kmagiera.github.io/react-native-gesture-handler/docs/getting-started.html#installation).
 
-Optionally, you can install react-native-screens. If you’re using Expo you don’t need to do anything here, it’s included in SDK 30 and higher. Otherwise, follow the instructions in the README on <https://github.com/kmagiera/react-native-screens>.
+Optionally, you can install react-native-screens. If you’re using Expo you don’t need to do anything here, it’s included in SDK 30 and higher. Otherwise, follow the instructions in the README on [`react-native-screens`](https://github.com/software-mansion/react-native-screens).
 
 > **Warning**: if you have manually installed any navigators in your project, for example react-navigation-material-bottom-tabs, you will need to update those to a version that is compatible with 3.0.0. In the case of react-navigation-material-bottom-tabs, 1.0.0 is compatible.
 
@@ -150,16 +150,16 @@ const Store = createStackNavigator({
 - Basic support for hooks in `react-navigation-hooks` (although this isn't too useful yet without a stable react-native build that supports hooks, you can play with it on the web!).
 - `headerBackgroundTransitionPreset: 'toggle' | 'fade' | 'translate'` lets you choose how to transition your custom `headerBackground` components between screens.
 - Add options to opt in/out of the stack card overlay and shadow that are visible during transitions: `cardShadowEnabled` defaults to `true` and `cardOverlayEnabled` defaults to `false`.
-- Export `StackGestureContext` and `DrawerGestureContext` from react-navigation-stack and react-navigation-drawer, so you can use the ref from the corresponding gestures with other gesture handlers (eg: <https://github.com/react-navigation/react-navigation-drawer/blob/bf4bdba7f6a4fbc12192f5d5ba2285f6280431b7/example/src/GestureInteraction.js>).
+- Export `StackGestureContext` and `DrawerGestureContext` from react-navigation-stack and react-navigation-drawer, so you can use the ref from the corresponding gestures with other gesture handlers (eg: [GestureInteraction.js](https://github.com/react-navigation/react-navigation-drawer/blob/bf4bdba7f6a4fbc12192f5d5ba2285f6280431b7/example/src/GestureInteraction.js)).
 - Tab navigators support `tabBarOnLongPress` configuration option, which defaults to the same as the tab press event.
 
 ## Assorted fixes & improvements
 
 - Stack transition performance improved greatly by removing the shadow from the entire card and rendering it only on the slice where it is needed. The card opacity is also no longer directly animated but instead an overlay is put on top to create a similar effect but with better performance.
-- Fix long-standing issues with stack that led to quietly re-mounting screens when navigating quickly in certain patterns: <https://github.com/react-navigation/react-navigation/issues/4155>
+- Fix long-standing issues with stack that led to quietly re-mounting screens when navigating quickly in certain patterns: [react-navigation/issues/4155](https://github.com/react-navigation/react-navigation/issues/4155)
 - Support inverted gesture in modals.
 - Stack card gesture uses react-native-gesture-handler and native driver so the gesture runs on the UI thread (except when the gesture ends, then it calls back to JS).
-- Fix a variety of issues with drawer navigator, including issues around nesting (<https://github.com/react-navigation/react-navigation/issues/4154>) and bugs with firing open / close (eg: <https://github.com/react-navigation/react-navigation/issues/5146>).
+- Fix a variety of issues with drawer navigator, including issues around nesting ([react-navigation/issues/4154](https://github.com/react-navigation/react-navigation/issues/4154)) and bugs with firing open / close (eg: [react-navigation/react-navigation/issues/5146](https://github.com/react-navigation/react-navigation/issues/5146)).
 - Fix accessibility voiceover for tabs and stack back button.
 
 ## Ecosystem and web support
@@ -234,4 +234,4 @@ See a simple web app with Create React App [here](https://github.com/react-navig
 
 ---
 
-Thanks for reading, please post any issues you encounter to <https://github.com/react-navigation/react-navigation/issues>!
+Thanks for reading, please post any issues you encounter to [react-navigation/issues](https://github.com/react-navigation/react-navigation/issues)!

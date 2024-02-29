@@ -21,7 +21,7 @@ One thing to keep in mind is that while `@react-navigation/stack` is extremely c
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/stack):
 
 ```bash npm2yarn
-npm install @react-navigation/stack
+npm install @react-navigation/stack@next
 ```
 
 Then, you need to install and configure the libraries that are required by the stack navigator:
@@ -30,7 +30,7 @@ Then, you need to install and configure the libraries that are required by the s
 
    If you have a Expo managed project, in your project directory, run:
 
-   ```sh
+   ```bash
    npx expo install react-native-gesture-handler
    ```
 
@@ -46,13 +46,17 @@ Then, you need to install and configure the libraries that are required by the s
    import 'react-native-gesture-handler';
    ```
 
-   > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+   :::warning
+
+   If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+
+   :::
 
 3. Optionally, you can also install [`@react-native-masked-view/masked-view`](https://github.com/react-native-masked-view/masked-view). This is needed if you want to use UIKit style animations for the header ([`HeaderStyleInterpolators.forUIKit`](#headerstyleinterpolators)).
 
    If you have a Expo managed project, in your project directory, run:
 
-   ```sh
+   ```bash
    npx expo install @react-native-masked-view/masked-view
    ```
 
@@ -64,17 +68,71 @@ Then, you need to install and configure the libraries that are required by the s
 
 4. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-  ```sh
-  npx pod-install ios
-  ```
+```bash
+npx pod-install ios
+```
 
-## API Definition
+## Usage
 
 To use this navigator, import it from `@react-navigation/stack`:
 
-<samp id="simple-stack" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Stack Navigator" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { createStaticNavigation, useNavigation } from '@react-navigation/native';
+// codeblock-focus-start
+import { createStackNavigator } from '@react-navigation/stack';
+
+// codeblock-focus-end
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyStack = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Stack Navigator" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+// codeblock-focus-start
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
@@ -82,14 +140,48 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Notifications" component={Notifications} />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
   );
 }
+// codeblock-focus-end
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+}
 ```
+
+</TabItem>
+</Tabs>
+
+## API Definition
 
 ### Props
 
@@ -97,7 +189,7 @@ The `Stack.Navigator` component accepts following props:
 
 #### `id`
 
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
+Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-object.md#getparent) to refer to this navigator in a child navigator.
 
 #### `initialRouteName`
 
@@ -112,10 +204,6 @@ Default options to use for the screens in the navigator.
 Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
 
 If you need to disable this optimization for specific screens (e.g. you want to screen to stay in view even when unfocused) [`detachPreviousScreen`](#detachpreviousscreen) option.
-
-#### `keyboardHandlingEnabled`
-
-If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to `true`.
 
 ### Options
 
@@ -219,6 +307,10 @@ Interpolated styles for various parts of the card. Refer the [Animations section
 #### `headerStyleInterpolator`
 
 Interpolated styles for various parts of the header. Refer the [Animations section](#animations) for details.
+
+#### `keyboardHandlingEnabled`
+
+If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to `true`.
 
 #### `detachPreviousScreen`
 
@@ -449,16 +541,25 @@ React.useEffect(() => {
 
 ### Helpers
 
-The stack navigator adds the following methods to the navigation prop:
+The stack navigator adds the following methods to the navigation object:
 
-#### `push`
+#### `replace`
 
-Pushes a new screen to top of the stack and navigate to it. The method accepts following arguments:
+Replaces the current screen with a new screen in the stack. The method accepts the following arguments:
 
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to pass to the destination route.
 
-<samp id="stack-with-options" />
+```js
+navigation.replace('Profile', { owner: 'Michaś' });
+```
+
+#### `push`
+
+Pushes a new screen to the top of the stack and navigate to it. The method accepts the following arguments:
+
+- `name` - _string_ - Name of the route to push onto the stack.
+- `params` - _object_ - Screen params to pass to the destination route.
 
 ```js
 navigation.push('Profile', { owner: 'Michaś' });
@@ -468,17 +569,26 @@ navigation.push('Profile', { owner: 'Michaś' });
 
 Pops the current screen from the stack and navigates back to the previous screen. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
 
-<samp id="stack-with-options" />
-
 ```js
 navigation.pop();
+```
+
+#### `popTo`
+
+Navigates back to a previous screen in the stack by popping screens after it. The method accepts the following arguments:
+
+- `name` - _string_ - Name of the route to navigate to.
+- `params` - _object_ - Screen params to pass to the destination route.
+
+If a matching screen is not found in the stack, this will pop the current screen and add a new screen with the specified name and params.
+
+```js
+navigation.popTo('Profile', { owner: 'Michaś' });
 ```
 
 #### `popToTop`
 
 Pops all of the screens in the stack except the first one and navigates to it.
-
-<samp id="stack-with-options" />
 
 ```js
 navigation.popToTop();
@@ -831,7 +941,11 @@ import { HeaderStyleInterpolators } from '@react-navigation/stack';
 />;
 ```
 
-> Note: Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
+:::warning
+
+Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
+
+:::
 
 #### `TransitionPresets`
 
@@ -926,10 +1040,11 @@ import {
   Button,
   StyleSheet,
 } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import { useTheme, useNavigation } from '@react-navigation/native';
 import { useCardAnimation } from '@react-navigation/stack';
 
-function ModalScreen({ navigation }) {
+function ModalScreen() {
+  const navigation = useNavigation();
   const { colors } = useTheme();
   const { current } = useCardAnimation();
 

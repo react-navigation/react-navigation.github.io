@@ -37,7 +37,11 @@ function App() {
 
 When you specify the `linking` prop, React Navigation will handle incoming links automatically. On Android and iOS, it'll use React Native's [`Linking` module](https://reactnative.dev/docs/linking) to handle incoming links, both when the app was opened with the link, and when new links are received when the app is open. On the Web, it'll use the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to sync the URL with the browser.
 
-> Note: Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android. We add a timeout to avoid getting stuck forever, but it means that the link might not be handled in some cases.
+:::warning
+
+Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android. We add a timeout to avoid getting stuck forever, but it means that the link might not be handled in some cases.
+
+:::
 
 You can also pass a [`fallback`](navigation-container.md#fallback) prop to `NavigationContainer` which controls what's displayed when React Navigation is trying to resolve the initial deep link URL.
 
@@ -480,7 +484,13 @@ const state = {
 };
 ```
 
-It's not possible to pass params to the initial screen through the URL. So make sure that your initial route doesn't need any params or specify `initialParams` to pass required params.
+:::warning
+
+The `initialRouteName` will add the screen to React Navigation's state only. If your app is running on the Web, the browser's history will not contain this screen as the user has never visited it. So, if the user presses the browser's back button, it'll not go back to this screen.
+
+:::
+
+Another thing to keep in mind is that it's not possible to pass params to the initial screen through the URL. So make sure that your initial route doesn't need any params or specify `initialParams` in the screen configuration to pass the required params.
 
 In this case, any params in the URL are only passed to the `Profile` screen which matches the path pattern `users/:id`, and the `Feed` screen doesn't receive any params. If you want to have the same params in the `Feed` screen, you can specify a [custom `getStateFromPath` function](navigation-container.md#linkinggetstatefrompath) and copy those params.
 
@@ -726,7 +736,7 @@ In the example app, you will use the Expo managed workflow. The guide will focus
 
 First, you need to decide the navigation structure of your app. To keep it simple, the main navigator will be bottom-tabs navigator with two screens. Its first screen will be a simple stack navigator, called `HomeStack`, with two screens: `Home` and `Profile`, and the second tabs screen will be just a simple one without any nested navigators, called `Settings`:
 
-```sh
+```bash
 BottomTabs
 ├── Stack (HomeStack)
 │   ├── Home

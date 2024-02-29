@@ -652,6 +652,17 @@ React.useEffect(() => {
 
 The native stack navigator adds the following methods to the navigation prop:
 
+#### `replace`
+
+Replaces the current screen with a new screen in the stack. The method accepts following arguments:
+
+- `name` - _string_ - Name of the route to push onto the stack.
+- `params` - _object_ - Screen params to pass to the destination route.
+
+```js
+navigation.replace('Profile', { owner: 'Michaś' });
+```
+
 #### `push`
 
 Pushes a new screen to top of the stack and navigate to it. The method accepts following arguments:

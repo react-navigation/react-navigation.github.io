@@ -18,19 +18,19 @@ If the module points to a local file (i.e. the name of the module starts with `.
 
 If you're using Expo, run:
 
-```sh
+```bash
 expo start -c
 ```
 
 If you're not using Expo, run:
 
-```sh
+```bash
 npx react-native start --reset-cache
 ```
 
 If that doesn't work, you can also try the following:
 
-```sh
+```bash
 rm -rf $TMPDIR/metro-bundler-cache-*
 ```
 
@@ -48,7 +48,7 @@ Sometimes it might even be due to a corrupt installation. If clearing cache didn
 
 Sometimes the error may look like this:
 
-```sh
+```bash
 Error: While trying to resolve module "@react-navigation/native" from file "/path/to/src/App.js", the package "/path/to/node_modules/@react-navigation/native/package.json" was successfully found. However, this package itself specifies a "main" module field that could not be resolved ("/path/to/node_modules/@react-navigation/native/src/index.tsx"
 ```
 
@@ -64,13 +64,13 @@ If it's missing these extensions, add them and then clear metro cache as shown i
 
 This might happen if you have an old version of the `metro-react-native-babel-preset` package. Try upgrading it to the latest version.
 
-```sh npm2yarn
+```bash npm2yarn
 npm install --save-dev metro-react-native-babel-preset
 ```
 
 If you have `@babel/core` installed, also upgrade it to latest version.
 
-```sh npm2yarn
+```bash npm2yarn
 npm install --save-dev @babel/core
 ```
 
@@ -78,7 +78,7 @@ If upgrading the packages don't help, you can also try deleting your `node_modul
 
 If you use `npm`:
 
-```sh
+```bash
 rm -rf node_modules
 rm package-lock.json
 npm install
@@ -86,7 +86,7 @@ npm install
 
 If you use `yarn`:
 
-```sh
+```bash
 rm -rf node_modules
 rm yarn.lock
 yarn
@@ -98,7 +98,7 @@ After upgrading or reinstalling the packages, you should also clear Metro bundle
 
 This might happen if you have an old version of TypeScript in your project. You can try upgrading it:
 
-```sh npm2yarn
+```bash npm2yarn
 npm install --save-dev typescript
 ```
 
@@ -108,13 +108,13 @@ This and some similar errors might occur if you have a bare React Native project
 
 Linking is automatic from React Native 0.60, so if you have linked the library manually, first unlink it:
 
-```sh
+```bash
 react-native unlink react-native-gesture-handler
 ```
 
 If you're testing on iOS and use Mac, make sure you have run `pod install` in the `ios/` folder:
 
-```sh
+```bash
 cd ios
 pod install
 cd ..
@@ -128,13 +128,13 @@ This and some similar errors might occur if you have a bare React Native project
 
 Linking is automatic from React Native 0.60, so if you have linked the library manually, first unlink it:
 
-```sh
+```bash
 react-native unlink react-native-safe-area-context
 ```
 
 If you're testing on iOS and use Mac, make sure you have run `pod install` in the `ios/` folder:
 
-```sh
+```bash
 cd ios
 pod install
 cd ..
@@ -148,7 +148,7 @@ This might occur if you have multiple versions of [`react-native-safe-area-conte
 
 If you're using Expo managed workflow, it's likely that you have installed an incompatible version. To install the correct version, run:
 
-```sh
+```bash
 npx expo install react-native-safe-area-context
 ```
 
@@ -156,13 +156,13 @@ If it didn't fix the error or you're not using Expo managed workflow, you'll nee
 
 If you use `yarn`, run:
 
-```sh
+```bash
 yarn why react-native-safe-area-context
 ```
 
 If you use `npm`, run:
 
-```sh
+```bash
 npm ls react-native-safe-area-context
 ```
 
@@ -180,13 +180,13 @@ If you use `yarn`, you can also temporarily override the version being installed
 
 And then run:
 
-```sh
+```bash
 yarn
 ```
 
 If you're on iOS and not using Expo managed workflow, also run:
 
-```sh
+```bash
 cd ios
 pod install
 cd ..

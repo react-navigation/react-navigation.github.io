@@ -11,11 +11,11 @@ Exactly two months after the release of React Navigation 1.0, we are close to an
 
 <!--truncate-->
 
-```sh
+```bash
 yarn add react-navigation@^2.0.0-rc.1
 ```
 
-The documentation for 2.0 is available at <https://reactnavigation.org/>
+The documentation for 2.0 is available at [reactnavigation.org](https://reactnavigation.org)
 
 We’re bumping the major version because some of the changes in this release are backwards incompatible. That said, this should be a fairly easy upgrade. We are improving React Navigation incrementally because we don't want to leave developers feeling stranded in an old version. If you use React Navigation in a conventional way and don't have any custom navigators, I can't imagine this update would take you more than an hour.
 
@@ -77,5 +77,5 @@ This change was made to improve the ease of learning and understanding the libra
 ## New feature highlights
 
 - State persistence - automatically save state and reload it when the app restarts. See [state persistence docs](docs/state-persistence)
-- Transitions between screens in stack with headers and without headers now animates as expected on iOS. <https://github.com/react-navigation/react-navigation/pull/3821>. Thanks [skevy](https://github.com/skevy)!
+- Transitions between screens in stack with headers and without headers now animates as expected on iOS. [#3821](https://github.com/react-navigation/react-navigation/pull/3821). Thanks [skevy](https://github.com/skevy)!
 - As mentioned above, `createMaterialBottomNavigator` is a new navigator type that provides the material design bottom tab bar pattern.

@@ -33,7 +33,7 @@ The libraries we will install now are [`react-native-gesture-handler`](https://g
 
 In your project directory, run:
 
-```sh
+```bash
 npx expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 ```
 
@@ -55,7 +55,7 @@ From React Native 0.60 and higher, [linking is automatic](https://github.com/rea
 
 If you're on a Mac and developing for iOS, you need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-```sh
+```bash
 npx pod-install ios
 ```
 

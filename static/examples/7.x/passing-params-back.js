@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Text, TextInput, View, Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function HomeScreen({ navigation, route }) {
+function HomeScreen({ route }) {
+  const navigation = useNavigation();
+
   React.useEffect(() => {
     if (route.params?.post) {
       // Post updated, do something with `route.params.post`
@@ -22,7 +24,8 @@ function HomeScreen({ navigation, route }) {
   );
 }
 
-function CreatePostScreen({ navigation, route }) {
+function CreatePostScreen({ route }) {
+  const navigation = useNavigation();
   const [postText, setPostText] = React.useState('');
 
   return (

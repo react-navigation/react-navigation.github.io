@@ -17,8 +17,6 @@ Before you follow the guide, make sure that your app already renders fine on ser
 - Node is configured to be able to `require` asset files such as images and fonts. You can try [webpack-isomorphic-tools](https://github.com/catamphetamine/webpack-isomorphic-tools) to do that.
 - `react-native` is aliased to `react-native-web`. You can do it with [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver).
 
-> Note: Some of the libraries in React Navigation don't work well on Web, such as `@react-navigation/material-top-tabs`. SSR also doesn't work if you're using Expo libraries.
-
 ## Rendering the app
 
 First, let's take a look at an example of how you'd do [server rendering with React Native Web](http://necolas.github.io/react-native-web/docs/?path=/docs/guides-server-side--page) without involving React Navigation:

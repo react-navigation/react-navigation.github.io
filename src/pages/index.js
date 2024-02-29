@@ -8,7 +8,6 @@ import sponsors from '../data/sponsors';
 import Splash from './home/Splash';
 import Features from './home/Features';
 import Sponsors from './home/Sponsors';
-import BLM from './home/BLM';
 
 const features = [
   {
@@ -49,7 +48,6 @@ function Home() {
       <Splash />
       <Features />
       <Sponsors />
-      <BLM />
     </Layout>
   );
 }

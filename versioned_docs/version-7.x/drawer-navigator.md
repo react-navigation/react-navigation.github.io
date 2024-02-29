@@ -4,7 +4,7 @@ title: Drawer Navigator
 sidebar_label: Drawer
 ---
 
-Component that renders a navigation drawer which can be opened and closed via gestures.
+Drawer Navigator renders a navigation drawer on the side of the screen which can be opened and closed via gestures.
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
@@ -12,12 +12,14 @@ Component that renders a navigation drawer which can be opened and closed via ge
   </video>
 </div>
 
+This wraps [`react-native-drawer-layout`](drawer-layout.md). If you want to use the drawer without React Navigation integration, use the library directly instead.
+
 ## Installation
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
 
 ```bash npm2yarn
-npm install @react-navigation/drawer
+npm install @react-navigation/drawer@next
 ```
 
 Then, you need to install and configure the libraries that are required by the drawer navigator:
@@ -26,7 +28,7 @@ Then, you need to install and configure the libraries that are required by the d
 
    If you have a Expo managed project, in your project directory, run:
 
-   ```sh
+   ```bash
    npx expo install react-native-gesture-handler react-native-reanimated
    ```
 
@@ -36,7 +38,7 @@ Then, you need to install and configure the libraries that are required by the d
    npm install react-native-gesture-handler react-native-reanimated
    ```
 
-   The Drawer Navigator supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+   The Drawer supports both Reanimated 1 and the latest version of Reanimated. If you want to use the latest version of Reanimated, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
 2. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
 
@@ -44,21 +46,85 @@ Then, you need to install and configure the libraries that are required by the d
    import 'react-native-gesture-handler';
    ```
 
-   > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+   :::warning
+
+   If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+
+   :::
 
 3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-```sh
+```bash
 npx pod-install ios
 ```
 
-## API Definition
+## Usage
 
-To use this drawer navigator, import it from `@react-navigation/drawer`:
+To use this navigator, import it from `@react-navigation/drawer`:
 
-<samp id="simple-drawer" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Drawer Navigator" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { createStaticNavigation, useNavigation } from '@react-navigation/native';
+// codeblock-focus-start
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+// codeblock-focus-end
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      <Button
+        title="Go to Home"
+        onPress={() => navigation.navigate('Home')}
+      />
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyDrawer = createDrawerNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyDrawer);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Drawer Navigator" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+// codeblock-focus-start
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
@@ -66,14 +132,60 @@ const Drawer = createDrawerNavigator();
 function MyDrawer() {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="Feed" component={Feed} />
-      <Drawer.Screen name="Article" component={Article} />
+      <Drawer.Screen name="Home" component={HomeScreen} />
+      <Drawer.Screen name="Profile" component={ProfileScreen} />
     </Drawer.Navigator>
+  );
+}
+// codeblock-focus-end
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      <Button
+        title="Go to Home"
+        onPress={() => navigation.navigate('Home')}
+      />
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyDrawer />
+    </NavigationContainer>
   );
 }
 ```
 
-> For a complete usage guide please visit [Drawer Navigation](drawer-based-navigation.md).
+</TabItem>
+</Tabs>
+
+:::note
+
+For a complete usage guide see [Drawer Navigation](drawer-based-navigation.md).
+
+:::
+
+## API Definition
 
 ### Props
 
@@ -81,7 +193,7 @@ The `Drawer.Navigator` component accepts following props:
 
 #### `id`
 
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
+Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-object.md#getparent) to refer to this navigator in a child navigator.
 
 #### `initialRouteName`
 
@@ -519,7 +631,7 @@ If you have custom drawer content, make sure to emit this event.
 
 ### Helpers
 
-The drawer navigator adds the following methods to the navigation prop:
+The drawer navigator adds the following methods to the navigation object:
 
 #### `openDrawer`
 

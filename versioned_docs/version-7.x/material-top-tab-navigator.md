@@ -6,27 +6,27 @@ sidebar_label: Material Top Tabs
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the tabs or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
-This wraps [`react-native-tab-view`](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view).
-
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
     <source src="/assets/navigators/tabs/material-top-tabs.mov" />
   </video>
 </div>
 
+This wraps [`react-native-tab-view`](tab-view.md). If you want to use the tab view without React Navigation integration, use the library directly instead.
+
 ## Installation
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/material-top-tabs):
 
 ```bash npm2yarn
-npm install @react-navigation/material-top-tabs react-native-tab-view
+npm install @react-navigation/material-top-tabs@next
 ```
 
 Then, you need to install [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) which is required by the navigator.
 
 If you have a Expo managed project, in your project directory, run:
 
-```sh
+```bash
 npx expo install react-native-pager-view
 ```
 
@@ -38,17 +38,77 @@ npm install react-native-pager-view
 
 If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-```sh
+```bash
 npx pod-install ios
 ```
 
-## API Definition
+## Usage
 
-To use this tab navigator, import it from `@react-navigation/material-top-tabs`:
+To use this navigator, import it from `@react-navigation/material-top-tabs`:
 
-<samp id="material-top-tab-based-navigation-minimal" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Material Top Tab Navigator" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { createStaticNavigation, useNavigation } from '@react-navigation/native';
+// codeblock-focus-start
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+// codeblock-focus-end
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      <Button
+        title="Go to Home"
+        onPress={() => navigation.navigate('Home')}
+      />
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyTabs = createMaterialTopTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyTabs);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Material Top Tab Navigator" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+// codeblock-focus-start
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const Tab = createMaterialTopTabNavigator();
@@ -57,13 +117,53 @@ function MyTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
+  );
+}
+// codeblock-focus-end
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      <Button
+        title="Go to Home"
+        onPress={() => navigation.navigate('Home')}
+      />
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
   );
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+</TabItem>
+</Tabs>
+
+## API Definition
 
 ### Props
 
@@ -71,7 +171,7 @@ The `Tab.Navigator` component accepts following props:
 
 #### `id`
 
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
+Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-object.md#getparent) to refer to this navigator in a child navigator.
 
 #### `initialRouteName`
 
@@ -404,7 +504,7 @@ React.useEffect(() => {
 
 ### Helpers
 
-The tab navigator adds the following methods to the navigation prop:
+The tab navigator adds the following methods to the navigation object:
 
 #### `jumpTo`
 

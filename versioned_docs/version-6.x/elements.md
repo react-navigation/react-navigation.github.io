@@ -1,14 +1,16 @@
 ---
 id: elements
 title: Elements Library
-sidebar_label: Elements Library
+sidebar_label: Elements
 ---
 
 A component library containing the UI elements and helpers used in React Navigation. It can be useful if you're building your own navigator, or want to reuse a default functionality in your app.
 
+## Installation
+
 To use this package, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/elements`](https://github.com/react-navigation/react-navigation/tree/main/packages/elements):
 
-```sh npm2yarn
+```bash npm2yarn
 npm install @react-navigation/elements
 ```
 
@@ -155,7 +157,7 @@ Extra padding to add at the top of header to account for translucent status bar.
 
 ### `HeaderBackground`
 
-A component containing the styles used in the background of the header, such as the background color and shadow. It's the default for [`headerBackground`](#headerbackground). It accepts the same props as an [`View`](https://reactnative.dev/docs/view).
+A component containing the styles used in the background of the header, such as the background color and shadow. It's the default for [`headerBackground`](#headerbackground). It accepts the same props as a [`View`](https://reactnative.dev/docs/view).
 
 Usage:
 
@@ -165,7 +167,7 @@ Usage:
 
 ### `HeaderTitle`
 
-A component used to show the title text in header. It's the default for [`headerTitle`](#headertitle). It accepts the same props as an [`Text`](https://reactnative.dev/docs/Text).
+A component used to show the title text in header. It's the default for [`headerTitle`](#headertitle). It accepts the same props as a [`Text`](https://reactnative.dev/docs/Text).
 
 The color of title defaults to the [theme text color](themes.md). You can override it by passing a `tintColor` prop.
 

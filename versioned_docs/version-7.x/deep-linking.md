@@ -4,6 +4,9 @@ title: Deep linking
 sidebar_label: Deep linking
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 This guide will describe how to configure your app to handle deep links on various platforms. To handle incoming links, you need to handle 2 scenarios:
 
 1. If the app wasn't previously open, the deep link needs to set the initial state
@@ -29,11 +32,33 @@ First, you will want to specify a URL scheme for your app. This corresponds to t
 
 Next, install `expo-linking` which we'd need to get the deep link prefix:
 
-```sh
+```bash
 npx expo install expo-linking
 ```
 
 Then, let's configure React Navigation to use the `scheme` for parsing incoming deep links:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+import * as Linking from 'expo-linking';
+
+const prefix = Linking.createURL('/');
+
+/* content */
+
+function App() {
+  const linking = {
+    prefixes: [prefix],
+  };
+
+  return <Navigation linking={linking} />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 import * as Linking from 'expo-linking';
@@ -52,6 +77,9 @@ function App() {
   );
 }
 ```
+
+</TabItem>
+</Tabs>
 
 The reason that is necessary to use `Linking.createURL` is that the scheme will differ depending on whether you're in the client app or in a standalone app.
 
@@ -103,7 +131,7 @@ Now you need to add the scheme to your project configuration.
 
 The easiest way to do this is with the `uri-scheme` package by running the following:
 
-```sh
+```bash
 npx uri-scheme add mychat --ios
 ```
 
@@ -193,13 +221,13 @@ Before testing deep links, make sure that you rebuild and install the app in you
 
 If you're testing on iOS, run:
 
-```sh
+```bash
 npx react-native run-ios
 ```
 
 If you're testing on Android, run:
 
-```sh
+```bash
 npx react-native run-android
 ```
 
@@ -211,19 +239,19 @@ If you want to test with your custom scheme in your Expo app, you will need rebu
 
 The `uri-scheme` package is a command line tool that can be used to test deep links on both iOS & Android. It can be used as follows:
 
-```sh
+```bash
 npx uri-scheme open [your deep link] --[ios|android]
 ```
 
 For example:
 
-```sh
+```bash
 npx uri-scheme open "mychat://chat/jane" --ios
 ```
 
 Or if using Expo client:
 
-```sh
+```bash
 npx uri-scheme open "exp://127.0.0.1:19000/--/chat/jane" --ios
 ```
 
@@ -231,13 +259,13 @@ npx uri-scheme open "exp://127.0.0.1:19000/--/chat/jane" --ios
 
 The `xcrun` command can be used as follows to test deep links with the iOS simulator:
 
-```sh
+```bash
 xcrun simctl openurl booted [your deep link]
 ```
 
 For example:
 
-```sh
+```bash
 xcrun simctl openurl booted "mychat://chat/jane"
 ```
 
@@ -245,19 +273,19 @@ xcrun simctl openurl booted "mychat://chat/jane"
 
 The `adb` command can be used as follows to test deep links with the Android emulator or a connected device:
 
-```sh
+```bash
 adb shell am start -W -a android.intent.action.VIEW -d [your deep link] [your android package name]
 ```
 
 For example:
 
-```sh
+```bash
 adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/jane" com.simpleapp
 ```
 
 Or if using Expo client:
 
-```sh
+```bash
 adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:19000/--/chat/jane" host.exp.exponent
 ```
 
@@ -267,7 +295,10 @@ React Native's `Linking` isn't the only way to handle deep linking. You might al
 
 To achieve this, you'd need to override how React Navigation subscribes to incoming links. To do so, you can provide your own [`getInitialURL`](navigation-container.md#linkinggetinitialurl) and [`subscribe`](navigation-container.md#linkingsubscribe) functions:
 
-```js
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Third-party integrations"
 const linking = {
   prefixes: ['myapp://', 'https://myapp.com'],
 
@@ -275,7 +306,56 @@ const linking = {
   async getInitialURL() {
     // First, you would need to get the initial URL from your third-party integration
     // The exact usage depend on the third-party SDK you use
-    // For example, to get to get the initial URL for Firebase Dynamic Links:
+    // For example, to get the initial URL for Firebase Dynamic Links:
+    const { isAvailable } = utils().playServicesAvailability;
+
+    if (isAvailable) {
+      const initialLink = await dynamicLinks().getInitialLink();
+
+      if (initialLink) {
+        return initialLink.url;
+      }
+    }
+
+    // As a fallback, you may want to do the default deep link handling
+    const url = await Linking.getInitialURL();
+
+    return url;
+  },
+
+  // Custom function to subscribe to incoming links
+  subscribe(listener) {
+    // Listen to incoming links from Firebase Dynamic Links
+    const unsubscribeFirebase = dynamicLinks().onLink(({ url }) => {
+      listener(url);
+    });
+
+    // Listen to incoming links from deep linking
+    const linkingSubscription = Linking.addEventListener('url', ({ url }) => {
+      listener(url);
+    });
+
+    return () => {
+      // Clean up the event listeners
+      unsubscribeFirebase();
+      linkingSubscription.remove();
+    };
+  },
+};
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Third-party integrations"
+const linking = {
+  prefixes: ['myapp://', 'https://myapp.com'],
+
+  // Custom function to get the URL which was used to open the app
+  async getInitialURL() {
+    // First, you would need to get the initial URL from your third-party integration
+    // The exact usage depend on the third-party SDK you use
+    // For example, to get the initial URL for Firebase Dynamic Links:
     const { isAvailable } = utils().playServicesAvailability;
 
     if (isAvailable) {
@@ -316,5 +396,8 @@ const linking = {
   },
 };
 ```
+
+</TabItem>
+</Tabs>
 
 Similar to the above example, you can integrate any API that provides a way to get the initial URL and to subscribe to new incoming URLs using the `getInitialURL` and `subscribe` options.

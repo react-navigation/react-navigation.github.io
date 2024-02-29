@@ -81,8 +81,9 @@ If you want to preserve the existing screens but only want to modify the state, 
 import { CommonActions } from '@react-navigation/native';
 
 navigation.dispatch(state => {
-  // Remove the home route from the stack
-  const routes = state.routes.filter(r => r.name !== 'Home');
+  // Remove all the screens after `Profile`
+  const index = state.routes.findIndex(r => r.name === 'Profile');
+  const routes = state.routes.slice(0, index + 1);
 
   return CommonActions.reset({
     ...state,
@@ -92,7 +93,20 @@ navigation.dispatch(state => {
 });
 ```
 
-> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+:::warning
+
+Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+
+:::
+
+#### Rewriting the history with `reset`
+
+Since the `reset` action can update the navigation state with a new state object, it can be used to rewrite the navigation history. However, rewriting the history to alter the back stack is not recommended in most cases:
+
+- It can lead to a confusing user experience, as users expect to be able to go back to the screen they were on before.
+- When supporting the Web platform, the browser's history will still reflect the old navigation state, so users will see the old screen if they use the browser's back button - resulting in 2 different experiences depending on which back button the user presses.
+
+So if you have such a use case, consider a different approach - e.g. updating the history once the user navigates back to the screen that has changed.
 
 ### goBack
 

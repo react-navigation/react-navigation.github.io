@@ -4,7 +4,9 @@ title: useLinkProps
 sidebar_label: useLinkProps
 ---
 
-The `useLinkProps` hook let's build our custom link components which let us navigate to a screen using a path instead of a screen name based on the [`linking` options](navigation-container.md#linking). It takes a path and returns an object with some props that you can pass to a component.
+The `useLinkProps` hook lets us build our custom link component. The link component can be used as a button to navigate to a screen. On the web, it will be rendered as an anchor tag (`<a>`) with the `href` attribute so that all the accessibility features of a link are preserved, e.g. - such as `Right click -> Open link in new tab"`, `Ctrl+Click`/`⌘+Click` etc.
+
+It returns an object with some props that you can pass to a component.
 
 Example:
 
@@ -13,82 +15,54 @@ import { useLinkProps } from '@react-navigation/native';
 
 // ...
 
-const LinkButton = ({ to, action, children, ...rest }) => {
-  const { onPress, ...props } = useLinkProps({ to, action });
+const LinkButton = ({ screen, params, action, href, children, ...rest }) => {
+  const props = useLinkProps({ screen, params, action, href });
 
   const [isHovered, setIsHovered] = React.useState(false);
 
-  if (Platform.OS === 'web') {
-    // It's important to use a `View` or `Text` on web instead of `TouchableX`
-    // Otherwise React Native for Web omits the `onClick` prop that's passed
-    // You'll also need to pass `onPress` as `onClick` to the `View`
-    // You can add hover effects using `onMouseEnter` and `onMouseLeave`
-    return (
-      <View
-        onClick={onPress}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        style={{ transitionDuration: '150ms', opacity: isHovered ? 0.5 : 1 }}
-        {...props}
-        {...rest}
-      >
-        <Text>{children}</Text>
-      </View>
-    );
-  }
-
   return (
-    <TouchableOpacity onPress={onPress} {...props} {...rest}>
+    <Pressable {...props} {...rest}>
       <Text>{children}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
-
-function Home() {
-  return <LinkButton to={{ screen: 'Profile', params: { id: 'jane' } }}>Go to Jane's profile</LinkButton>;
-}
 ```
 
 Then you can use the `LinkButton` component elsewhere in your app:
 
 ```js
 function Home() {
-  return <LinkButton to={{ screen: 'Profile', params: { id: 'jane' } }}>Go to Jane's profile</LinkButton>;
-}
-```
-
-The `props` object returned by `useLinkProps` contains the required props for accessible link components. When we use these props on `View`, `Text` etc., the link component responds to user actions such as `Ctrl+Click`/`⌘+Click` to open links in new tab while keeping regular clicks within the same web page.
-
-There are couple of important things to note when using `useLinkProps` with current version of React Native for Web:
-
-1. You must explicitly pass `onPress` as the `onClick` prop, otherwise in-page navigation won't work
-2. You can only use `View` or `Text` with `useLinkProps`. The `TouchableX` components don't support a correct `onClick` event which we need
-
-In a future version of React Native for Web, these won't be an issue and you'll be able to have the same code for links on Web, iOS and Android. But until then, you need to write platform specific code for Web and native.
-
-## Options
-
-### `to`
-
-You can pass an object with a `screen` property:
-
-```js
-function Home() {
   return (
-    <LinkButton
-      to={{ screen: 'Profile', params: { id: 'jane' } }}
-    >
+    <LinkButton screen="Profile" params={{ id: 'jane' }}>
       Go to Jane's profile
     </LinkButton>
   );
 }
 ```
 
-The syntax of this object is the same as [navigating to a screen in a nested navigators](nesting-navigators.md#navigating-to-a-screen-in-a-nested-navigator). This uses a `navigate` action for navigation by default, unless you specify a different action.
+## Options
 
-Alternatively, you can also pass an absolute path to the screen, e.g. - `/profile/jane`.
+### `screen` and `params`
 
-This will be used for the `href` prop as well as for in-page navigation.
+You can pass `screen` and `params` to navigate to a screen on press:
+
+```js
+function Home() {
+  return (
+    <LinkButton screen="Profile" params={{ id: 'jane' }}>
+      Go to Jane's profile
+    </LinkButton>
+  );
+}
+```
+
+If you want to navigate to a nested screen, you can pass the name of the `screen` in `params` similar to [navigating to a screen in a nested navigator](nesting-navigators.md#navigating-to-a-screen-in-a-nested-navigator):
+
+```js
+<LinkButton screen="Root" params={{ screen: 'Post', params: { id: 123 } }}>
+  Go to post 123
+</LinkButton>
+```
 
 ### `action`
 
@@ -104,7 +78,8 @@ import { StackActions } from '@react-navigation/native';
 function Home() {
   return (
     <LinkButton
-      to={{ screen: 'Profile', params: { id: 'jane' } }}
+      screen="Profile"
+      params={{ id: 'jane' }}
       action={StackActions.replace('Profile', { id: 'jane' })}
     >
       Go to Jane's profile
@@ -113,4 +88,23 @@ function Home() {
 }
 ```
 
-If the `action` prop is not specified, the path provided to the `to` prop will be used and dispatched as a `navigate` action.
+The `screen` and `params` props can be omitted if the `action` prop is specified. In that case, we recommend specifying the `href` prop as well to ensure that the link is accessible.
+
+### `href`
+
+The `href` is used for the `href` attribute of the anchor tag on the Web to make the links accessible. By default, this is automatically determined based on the [`linking` options](navigation-container.md#linking) using the `screen` and `params` props.
+
+If you want to use a custom `href`, you can pass it as the `href` prop:
+
+```js
+function Home() {
+  return (
+    <LinkButton
+      action={StackActions.replace('Profile', { id: 'jane' })}
+      href="/users/jane"
+    >
+      Getting Started
+    </LinkButton>
+  );
+}
+```

@@ -41,7 +41,11 @@ function MyTabs() {
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+:::note
+
+For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+
+:::
 
 ### Props
 
@@ -112,8 +116,7 @@ function MyTabBar({ state, descriptors, navigation }) {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({ name: route.name, merge: true });
+            navigation.navigate(route.name, route.params);
           }
         };
 

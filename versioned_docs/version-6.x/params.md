@@ -14,7 +14,11 @@ There are two pieces to this:
 
 2. Read the params in your screen component: `route.params`.
 
-> We recommend that the params you pass are JSON-serializable. That way, you'll be able to use [state persistence](state-persistence.md) and your screen components will have the right contract for implementing [deep linking](deep-linking.md).
+:::note
+
+We recommend that the params you pass are JSON-serializable. That way, you'll be able to use [state persistence](state-persistence.md) and your screen components will have the right contract for implementing [deep linking](deep-linking.md).
+
+:::
 
 <samp id="passing-params" />
 
@@ -94,7 +98,11 @@ navigation.setParams({
 });
 ```
 
-> Note: Avoid using `setParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-prop.md#setoptions) instead.
+:::note
+
+Avoid using `setParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-prop.md#setoptions) instead.
+
+:::
 
 ## Passing params to a previous screen
 

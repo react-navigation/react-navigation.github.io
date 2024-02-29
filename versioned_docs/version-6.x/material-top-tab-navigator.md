@@ -6,13 +6,13 @@ sidebar_label: Material Top Tabs
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the tabs or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
-This wraps [`react-native-tab-view`](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view).
-
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
     <source src="/assets/navigators/tabs/material-top-tabs.mov" />
   </video>
 </div>
+
+This wraps [`react-native-tab-view`](tab-view.md). If you want to use the tab view without React Navigation integration, use the library directly instead.
 
 ## Installation
 
@@ -26,7 +26,7 @@ Then, you need to install [`react-native-pager-view`](https://github.com/callsta
 
 If you have a Expo managed project, in your project directory, run:
 
-```sh
+```bash
 npx expo install react-native-pager-view
 ```
 
@@ -38,7 +38,7 @@ npm install react-native-pager-view
 
 If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-```sh
+```bash
 npx pod-install ios
 ```
 
@@ -63,7 +63,11 @@ function MyTabs() {
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+:::note
+
+For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+
+:::
 
 ### Props
 
@@ -156,8 +160,7 @@ function MyTabBar({ state, descriptors, navigation, position }) {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({ name: route.name, merge: true });
+            navigation.navigate(route.name, route.params);
           }
         };
 

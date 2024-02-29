@@ -76,7 +76,7 @@ The latest drawer and tabs depend on [`react-native-gesture-handler`](https://gi
 
 In your project directory, run the following:
 
-```sh
+```bash
 npx expo install react-native-gesture-handler react-native-reanimated
 ```
 
@@ -94,7 +94,7 @@ Next, we need to link these libraries. The steps depends on your React Native ve
 
   To complete the linking on iOS, make sure you have [Cocoapods](https://cocoapods.org/) installed. Then run:
 
-  ```sh
+  ```bash
   cd ios
   pod install
   cd ..
@@ -104,7 +104,7 @@ Next, we need to link these libraries. The steps depends on your React Native ve
 
   If you're on an older React Native version, you need to manually link the dependencies. To do that, run:
 
-  ```sh
+  ```bash
   react-native link react-native-reanimated
   react-native link react-native-gesture-handler
   ```
@@ -289,7 +289,7 @@ The following components now receive different set of props, so if you use them,
 
 ##### Removal of `Transitioner`
 
-The old `Transitioner` component has been removed as a result of rewrite of the animation logic. We're not going to expose the new animation logic since it's internal implementation detail and we want to be able to change it without breaking your code. If you need `Transitioner` in your project for some reason, you can copy the old files into your project <https://github.com/react-navigation/stack/blob/1.0/src/views/Transitioner.tsx>
+The old `Transitioner` component has been removed as a result of rewrite of the animation logic. We're not going to expose the new animation logic since it's internal implementation detail and we want to be able to change it without breaking your code. If you need `Transitioner` in your project for some reason, you can copy the old files into your project [Transitioner.tsx](https://github.com/react-navigation/stack/blob/1.0/src/views/Transitioner.tsx).
 
 ## TypeScript
 

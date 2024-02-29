@@ -1,6 +1,8 @@
-const path = require('path');
+import path from 'path';
+import remarkNpm2Yarn from '@docusaurus/remark-plugin-npm2yarn';
+import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.mjs';
 
-module.exports = {
+export default {
   title: 'React Navigation',
   tagline: 'Routing and navigation for your React Native apps',
   url: 'https://reactnavigation.org/',
@@ -8,22 +10,11 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'react-navigation',
   projectName: 'react-navigation.github.io',
-  scripts: [
-    'https://buttons.github.io/buttons.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js',
-    '/js/code-block-buttons.js',
-  ],
+  scripts: ['/js/snack-helpers.js'],
   themeConfig: {
-    announcementBar: {
-      id: 'support_ukraine',
-      content:
-        'Support Ukraine 🇺🇦 <a target="_blank" rel="noopener noreferrer" href="https://opensource.facebook.com/support-ukraine"> Help Provide Humanitarian Aid to Ukraine</a>.',
-      backgroundColor: '#e4e0f0',
-      textColor: '#000',
-    },
     prism: {
-      theme: require('prism-react-renderer/themes/github'),
-      darkTheme: require('prism-react-renderer/themes/dracula'),
+      theme: require('prism-react-renderer').themes.github,
+      darkTheme: require('prism-react-renderer').themes.dracula,
     },
     algolia: {
       appId: 'QCWXRU195A',
@@ -52,18 +43,10 @@ module.exports = {
         {
           type: 'docsVersionDropdown',
           position: 'left',
-          dropdownActiveClassDisabled: true,
-          dropdownItemsAfter: [
-            {
-              to: '/versions',
-              label: 'All versions',
-            },
-          ],
         },
       ],
     },
     footer: {
-      style: 'dark',
       links: [
         {
           title: 'Docs',
@@ -141,20 +124,38 @@ module.exports = {
     },
   },
   plugins: [
-    path.resolve(__dirname, './src/plugins/docusaurus-plugin-redirect-html'),
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            from: '/next',
+            to: '/docs/7.x/getting-started',
+          },
+        ],
+      },
+    ],
   ],
   presets: [
     [
       '@docusaurus/preset-classic',
       {
         docs: {
-          docLayoutComponent: require.resolve('./src/pages/layouts/DocPage.js'),
-          docItemComponent: require.resolve('./src/pages/layouts/DocItem.js'),
           editUrl:
             'https://github.com/react-navigation/react-navigation.github.io/edit/main/',
-          remarkPlugins: [require('./src/plugins/remark-npm2yarn')],
           includeCurrentVersion: false,
           lastVersion: '6.x',
+          breadcrumbs: false,
+          remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
+          rehypePlugins: [
+            [rehypeCodeblockMeta, { match: { snack: true } }],
+          ],
+        },
+        blog: {
+          remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
+        },
+        pages: {
+          remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

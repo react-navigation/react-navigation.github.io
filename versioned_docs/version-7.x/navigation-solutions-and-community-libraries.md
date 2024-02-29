@@ -4,7 +4,11 @@ title: Navigation Solutions and Community Libraries
 sidebar_label: Navigation Solutions and Community Libraries
 ---
 
-> Libraries listed in this guide may not have been updated to work with the latest version of React Navigation. Please refer to the library's documentation to see which version of React Navigation it supports.
+:::note
+
+Libraries listed in this guide may not have been updated to work with the latest version of React Navigation. Please refer to the library's documentation to see which version of React Navigation it supports.
+
+:::
 
 ## Solutions built on top of React Navigation
 
