@@ -21,7 +21,7 @@ The `replace` action allows to replace a route in the [navigation state](navigat
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Stack actions replace" snack version=7 dependencies=@react-navigation/elements
+```js name="Stack actions replace" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -98,16 +98,22 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="Stack actions replace" snack version=7 dependencies=@react-navigation/elements
+```js name="Stack actions replace" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  StackActions,
+  useNavigation,
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
@@ -134,7 +140,8 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
@@ -199,7 +206,7 @@ The `push` action adds a route on top of the stack and navigates forward to it. 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Stack actions push" snack version=7 dependencies=@react-navigation/elements
+```js name="Stack actions push" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -278,16 +285,21 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="Stack actions push" snack version=7 dependencies=@react-navigation/elements
+```js name="Stack actions push" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  StackActions,
+  useNavigation,
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
@@ -316,7 +328,8 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
@@ -362,7 +375,7 @@ The `pop` action takes you back to a previous screen in the stack. It takes one 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Stack actions pop" snack version=7 dependencies=@react-navigation/elements
+```js name="Stack actions pop" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -443,16 +456,22 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="Stack actions pop" snack version=7 dependencies=@react-navigation/elements
+```js name="Stack actions pop" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  StackActions,
+  useNavigation,
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
@@ -476,7 +495,9 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
@@ -550,7 +571,7 @@ The `popToTop` action takes you back to the first screen in the stack, dismissin
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Stack actions popToTop" snack version=7 dependencies=@react-navigation/elements
+```js name="Stack actions popToTop" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -631,16 +652,21 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
+<TabItem value="dynamic" label="Dynamic">
 
-```js name="Stack actions pop" snack version=7 dependencies=@react-navigation/elements
+```js name="Stack actions pop" snack version=7
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import {
+  createStaticNavigation,
+  useNavigation,
+  StackActions,
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
@@ -664,7 +690,8 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
