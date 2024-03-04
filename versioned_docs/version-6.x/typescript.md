@@ -143,7 +143,7 @@ import type { RouteProp } from '@react-navigation/native';
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'Profile'>;
 ```
 
-We recommend creating a separate `types.tsx` file where you keep the types and import them in your component files instead of repeating them in each file.
+We recommend creating a separate `types.ts` file where you keep the types and import them in your component files instead of repeating them in each file.
 
 ### Nesting navigators
 
