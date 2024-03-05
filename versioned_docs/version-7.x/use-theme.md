@@ -26,6 +26,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 // codeblock-focus-start
 import { useTheme } from '@react-navigation/native';
+
 // codeblock-focus-end
 
 function SettingsScreen({ route }) {
@@ -47,9 +48,7 @@ function SettingsScreen({ route }) {
   );
 }
 
-// codeblock-focus-start
 function ProfileScreen() {
-  // highlight-next-line
   const { colors } = useTheme();
 
   return (
@@ -58,9 +57,10 @@ function ProfileScreen() {
     </View>
   );
 }
-// codeblock-focus-end
 
+// codeblock-focus-start
 function MyButton() {
+  // highlight-next-line
   const { colors } = useTheme();
 
   return (
@@ -69,6 +69,7 @@ function MyButton() {
     </TouchableOpacity>
   );
 }
+// codeblock-focus-end
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -136,8 +137,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 // codeblock-focus-start
 import { useTheme } from '@react-navigation/native';
-// codeblock-focus-end
 
+// codeblock-focus-end
 function SettingsScreen({ route }) {
   const navigation = useNavigation();
   const { user } = route.params;
@@ -156,9 +157,7 @@ function SettingsScreen({ route }) {
     </View>
   );
 }
-// codeblock-focus-start
 function ProfileScreen() {
-  // highlight-next-line
   const { colors } = useTheme();
 
   return (
@@ -167,9 +166,10 @@ function ProfileScreen() {
     </View>
   );
 }
-// codeblock-focus-end
 
+// codeblock-focus-start
 function MyButton() {
+  // highlight-next-line
   const { colors } = useTheme();
 
   return (
@@ -178,6 +178,7 @@ function MyButton() {
     </TouchableOpacity>
   );
 }
+// codeblock-focus-end
 
 function HomeScreen() {
   const navigation = useNavigation();
