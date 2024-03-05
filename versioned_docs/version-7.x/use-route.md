@@ -84,8 +84,8 @@ export default App;
 
 ```js name="useRoute hook" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // codeblock-focus-start
