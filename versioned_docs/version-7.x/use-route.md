@@ -18,8 +18,8 @@ import TabItem from '@theme/TabItem';
 
 ```js name="useRoute hook" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
@@ -43,9 +43,9 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
       <Button
-        onPress={() =>
-          navigation.navigate('Profile', { caption: 'Some caption' })
-        }
+        onPress={() => {
+          navigation.navigate('Profile', { caption: 'Some caption' });
+        }}
       >
         Go to Profile
       </Button>
@@ -99,13 +99,15 @@ function MyText() {
 }
 // codeblock-focus-end
 
-function HomeScreen() {
-  const navigation = useNavigation();
-
+function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is the home screen of the app</Text>
-      <Button onPress={() => navigate('Profile', { caption: 'Some caption' })}>
+      <Button
+        onPress={() => {
+          navigation.navigate('Profile', { caption: 'Some caption' });
+        }}
+      >
         Go to Profile
       </Button>
     </View>
