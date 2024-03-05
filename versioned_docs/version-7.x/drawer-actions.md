@@ -42,12 +42,11 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.dispatch(DrawerActions.openDrawer())
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(DrawerActions.openDrawer());
           // codeblock-focus-end
-        }
+        }}
       >
         Open Drawer
       </Button>
@@ -128,12 +127,11 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.dispatch(DrawerActions.openDrawer())
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(DrawerActions.openDrawer());
           // codeblock-focus-end
-        }
+        }}
       >
         Open Drawer
       </Button>
@@ -243,18 +241,17 @@ function ProfileScreen({ route }) {
   );
 }
 
-function CustomDrawerContent(props) {
+function CustomDrawerContent({ navigation }) {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
       <DrawerItem
         label="Close drawer"
-        onPress={
-          () =>
-            // codeblock-focus-start
-            props.navigation.dispatch(DrawerActions.closeDrawer())
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(DrawerActions.closeDrawer());
           // codeblock-focus-end
-        }
+        }}
       />
       <DrawerItem
         label="Toggle drawer"
@@ -327,18 +324,17 @@ function ProfileScreen({ route }) {
   );
 }
 
-function CustomDrawerContent(props) {
+function CustomDrawerContent({ navigation }) {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
       <DrawerItem
         label="Close drawer"
-        onPress={
-          () =>
-            // codeblock-focus-start
-            props.navigation.dispatch(DrawerActions.closeDrawer())
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(DrawerActions.closeDrawer());
           // codeblock-focus-end
-        }
+        }}
       />
       <DrawerItem
         label="Toggle drawer"
@@ -401,12 +397,11 @@ function HomeScreen() {
         Open Drawer
       </Button>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.dispatch(DrawerActions.toggleDrawer())
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(DrawerActions.toggleDrawer());
           // codeblock-focus-end
-        }
+        }}
       >
         Toggle Drawer
       </Button>
@@ -476,8 +471,7 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 
-function HomeScreen() {
-  const navigation = useNavigation();
+function HomeScreen({ navigation }) {
   const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
 
   return (
@@ -487,12 +481,11 @@ function HomeScreen() {
         Open Drawer
       </Button>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.dispatch(DrawerActions.toggleDrawer())
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(DrawerActions.toggleDrawer());
           // codeblock-focus-end
-        }
+        }}
       >
         Toggle Drawer
       </Button>
@@ -587,12 +580,11 @@ function HomeScreen() {
         Toggle Drawer
       </Button>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.dispatch(jumpToAction)
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(jumpToAction);
           // codeblock-focus-end
-        }
+        }}
       >
         Jump to Profile
       </Button>
@@ -659,8 +651,7 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 
-function HomeScreen() {
-  const navigation = useNavigation();
+function HomeScreen({ navigation }) {
   const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
 
   return (
@@ -673,12 +664,11 @@ function HomeScreen() {
         Toggle Drawer
       </Button>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.dispatch(jumpToAction)
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(jumpToAction);
           // codeblock-focus-end
-        }
+        }}
       >
         Jump to Profile
       </Button>
