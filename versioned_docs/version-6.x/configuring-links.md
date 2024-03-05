@@ -134,7 +134,7 @@ const config = {
 };
 
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://mychat.com', 'mychat:/'],
   config,
 };
 
