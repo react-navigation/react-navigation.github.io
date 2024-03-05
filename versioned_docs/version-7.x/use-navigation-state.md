@@ -58,11 +58,11 @@ import {
   createStaticNavigation,
   useNavigation,
   useRoute,
-  useNavigationState,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 // codeblock-focus-start
+import { useNavigationState } from '@react-navigation/native';
+
 function useIsFirstRouteInParent() {
   const route = useRoute();
   const isFirstRouteInParent = useNavigationState(
@@ -152,11 +152,12 @@ import {
   NavigationContainer,
   useRoute,
   useNavigation,
-  useNavigationState,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // codeblock-focus-start
+import { useNavigationState } from '@react-navigation/native';
+
 function useIsFirstRouteInParent() {
   const route = useRoute();
   const isFirstRouteInParent = useNavigationState(
@@ -175,8 +176,7 @@ function usePreviousRouteName() {
 }
 // codeblock-focus-end
 
-function HomeScreen() {
-  const navigation = useNavigation();
+function HomeScreen({ navigation }) {
   const isFirstRoute = useIsFirstRouteInParent();
   const previousRouteName = usePreviousRouteName();
   return (
@@ -191,8 +191,7 @@ function HomeScreen() {
   );
 }
 
-function ProfileScreen() {
-  const navigation = useNavigation();
+function ProfileScreen({ navigation }) {
   const isFirstRoute = useIsFirstRouteInParent();
   const previousRouteName = usePreviousRouteName();
   return (
@@ -207,8 +206,7 @@ function ProfileScreen() {
   );
 }
 
-function SettingsScreen() {
-  const navigation = useNavigation();
+function SettingsScreen({ navigation }) {
   const isFirstRoute = useIsFirstRouteInParent();
   const previousRouteName = usePreviousRouteName();
   return (
