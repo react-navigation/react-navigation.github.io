@@ -14,18 +14,19 @@ The `useTheme` hook lets us access the currently active theme. You can use it in
 
 ```js name="useTheme hook" snack version=7
 import * as React from 'react';
-// codeblock-focus-start
 import {
   useNavigation,
   createStaticNavigation,
   DefaultTheme,
   DarkTheme,
-  useTheme,
 } from '@react-navigation/native';
 import { Button, View, Text, TouchableOpacity, Appearance } from 'react-native';
-// codeblock-focus-end
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+
+// codeblock-focus-start
+import { useTheme } from '@react-navigation/native';
+// codeblock-focus-end
 
 function SettingsScreen({ route }) {
   const navigation = useNavigation();
@@ -46,7 +47,9 @@ function SettingsScreen({ route }) {
   );
 }
 
+// codeblock-focus-start
 function ProfileScreen() {
+  // highlight-next-line
   const { colors } = useTheme();
 
   return (
@@ -55,6 +58,7 @@ function ProfileScreen() {
     </View>
   );
 }
+// codeblock-focus-end
 
 function MyButton() {
   const { colors } = useTheme();
@@ -107,19 +111,12 @@ const Drawer = createDrawerNavigator({
   },
 });
 
-// codeblock-focus-start
-
 const Navigation = createStaticNavigation(Drawer);
 
 export default function App() {
-  // highlight-next-line
   const scheme = Appearance.getColorScheme();
-
-  // highlight-next-line
   return <Navigation theme={scheme === 'dark' ? DarkTheme : DefaultTheme} />;
 }
-
-// codeblock-focus-end
 ```
 
 </TabItem>
@@ -127,18 +124,19 @@ export default function App() {
 
 ```js name="useTheme hook" snack version=7
 import * as React from 'react';
-// codeblock-focus-start
 import { Button, View, Text, TouchableOpacity, Appearance } from 'react-native';
 import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
-  useTheme,
   useNavigation,
 } from '@react-navigation/native';
-// codeblock-focus-end
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+
+// codeblock-focus-start
+import { useTheme } from '@react-navigation/native';
+// codeblock-focus-end
 
 function SettingsScreen({ route }) {
   const navigation = useNavigation();
@@ -158,8 +156,9 @@ function SettingsScreen({ route }) {
     </View>
   );
 }
-
+// codeblock-focus-start
 function ProfileScreen() {
+  // highlight-next-line
   const { colors } = useTheme();
 
   return (
@@ -168,6 +167,7 @@ function ProfileScreen() {
     </View>
   );
 }
+// codeblock-focus-end
 
 function MyButton() {
   const { colors } = useTheme();
@@ -212,14 +212,10 @@ function Root() {
   );
 }
 
-// codeblock-focus-start
-
 export default function App() {
-  // highlight-next-line
   const scheme = Appearance.getColorScheme();
 
   return (
-    // highlight-next-line
     <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Drawer.Navigator useLegacyImplementation>
         <Drawer.Screen name="Home" component={HomeScreen} />
@@ -232,7 +228,6 @@ export default function App() {
     </NavigationContainer>
   );
 }
-// codeblock-focus-end
 ```
 
 </TabItem>
