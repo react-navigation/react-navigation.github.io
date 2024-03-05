@@ -17,20 +17,16 @@ To make this easier, the library exports a `useFocusEffect` hook:
 ```js name="useFocusEffect hook" snack version=7
 import * as React from 'react';
 import { View } from 'react-native';
-import {
-  createStaticNavigation,
-  useFocusEffect,
-} from '@react-navigation/native';
+import { createStaticNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 // codeblock-focus-start
+import { useFocusEffect } from '@react-navigation/native';
+
 function ProfileScreen() {
   useFocusEffect(
     React.useCallback(() => {
-      alert('Screen was focused');
       // Do something when the screen is focused
       return () => {
-        alert('Screen was unfocused');
         // Do something when the screen is unfocused
         // Useful for cleanup functions
       };
@@ -65,17 +61,17 @@ export default function App() {
 ```js name="useFocusEffect hook" snack version=7
 import * as React from 'react';
 import { View } from 'react-native';
-import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // codeblock-focus-start
+import { useFocusEffect } from '@react-navigation/native';
+
 function ProfileScreen() {
   useFocusEffect(
     React.useCallback(() => {
-      alert('Screen was focused');
       // Do something when the screen is focused
       return () => {
-        alert('Screen was unfocused');
         // Do something when the screen is unfocused
         // Useful for cleanup functions
       };
