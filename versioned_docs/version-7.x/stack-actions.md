@@ -23,8 +23,8 @@ The `replace` action allows to replace a route in the [navigation state](navigat
 
 ```js name="Stack actions replace" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
@@ -38,21 +38,20 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
-        onPress={() =>
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
-        }
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+        }}
       >
         Push Profile on the stack
       </Button>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.dispatch(
-              StackActions.replace('Profile', { user: 'Wojtek' })
-            )
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(
+            StackActions.replace('Profile', { user: 'Wojtek' })
+          );
           // codeblock-focus-end
-        }
+        }}
       >
         Replace with Profile
       </Button>
@@ -70,9 +69,9 @@ function ProfileScreen({ route }) {
         Push same screen on the stack
       </Button>
       <Button
-        onPress={() =>
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
-        }
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+        }}
       >
         Pop one screen from stack
       </Button>
@@ -102,8 +101,8 @@ export default function App() {
 
 ```js name="Stack actions replace" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   NavigationContainer,
   StackActions,
@@ -111,28 +110,25 @@ import {
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen() {
-  const navigation = useNavigation();
-
+function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
-        onPress={() =>
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
-        }
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+        }}
       >
         Push Profile on the stack
       </Button>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.dispatch(
-              StackActions.replace('Profile', { user: 'Wojtek' })
-            )
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(
+            StackActions.replace('Profile', { user: 'Wojtek' })
+          );
           // codeblock-focus-end
-        }
+        }}
       >
         Replace with Profile
       </Button>
@@ -150,9 +146,9 @@ function ProfileScreen({ route }) {
         Push same screen on the stack
       </Button>
       <Button
-        onPress={() =>
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
-        }
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+        }}
       >
         Pop one screen from stack
       </Button>
@@ -208,8 +204,8 @@ The `push` action adds a route on top of the stack and navigates forward to it. 
 
 ```js name="Stack actions push" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
@@ -223,23 +219,20 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.dispatch(
-              StackActions.push('Profile', { user: 'Wojtek' })
-            )
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
           // codeblock-focus-end
-        }
+        }}
       >
         Push Profile on the stack
       </Button>
       <Button
-        onPress={() =>
+        onPress={() => {
           navigation.dispatch(
             StackActions.replace('Profile', { user: 'Wojtek' })
-          )
-        }
+          );
+        }}
       >
         Replace with Profile
       </Button>
@@ -257,9 +250,9 @@ function ProfileScreen({ route }) {
         Push same screen on the stack
       </Button>
       <Button
-        onPress={() =>
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
-        }
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+        }}
       >
         Pop one screen from stack
       </Button>
@@ -304,23 +297,20 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.dispatch(
-              StackActions.push('Profile', { user: 'Wojtek' })
-            )
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
           // codeblock-focus-end
-        }
+        }}
       >
         Push Profile on the stack
       </Button>
       <Button
-        onPress={() =>
+        onPress={() => {
           navigation.dispatch(
             StackActions.replace('Profile', { user: 'Wojtek' })
-          )
-        }
+          );
+        }}
       >
         Replace with Profile
       </Button>
@@ -338,9 +328,9 @@ function ProfileScreen({ route }) {
         Push same screen on the stack
       </Button>
       <Button
-        onPress={() =>
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
-        }
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+        }}
       >
         Pop one screen from stack
       </Button>
@@ -392,18 +382,18 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
-        onPress={() =>
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
-        }
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+        }}
       >
         Push Profile on the stack
       </Button>
       <Button
-        onPress={() =>
+        onPress={() => {
           navigation.dispatch(
             StackActions.replace('Profile', { user: 'Wojtek' })
-          )
-        }
+          );
+        }}
       >
         Replace with Profile
       </Button>
@@ -418,19 +408,18 @@ function ProfileScreen({ route }) {
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.dispatch(StackActions.pop(1))
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(StackActions.pop(1));
           // codeblock-focus-end
-        }
+        }}
       >
         Push same screen on the stack
       </Button>
       <Button
-        onPress={() =>
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
-        }
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+        }}
       >
         Pop one screen from stack
       </Button>
@@ -469,25 +458,23 @@ import {
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen() {
-  const navigation = useNavigation();
-
+function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
-        onPress={() =>
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
-        }
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+        }}
       >
         Push Profile on the stack
       </Button>
       <Button
-        onPress={() =>
+        onPress={() => {
           navigation.dispatch(
             StackActions.replace('Profile', { user: 'Wojtek' })
-          )
-        }
+          );
+        }}
       >
         Replace with Profile
       </Button>
@@ -495,27 +482,24 @@ function HomeScreen() {
   );
 }
 
-function ProfileScreen({ route }) {
-  const navigation = useNavigation();
-
+function ProfileScreen({ navigation, route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.dispatch(StackActions.pop(1))
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(StackActions.pop(1));
           // codeblock-focus-end
-        }
+        }}
       >
         Push same screen on the stack
       </Button>
       <Button
-        onPress={() =>
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
-        }
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+        }}
       >
         Pop one screen from stack
       </Button>
@@ -573,8 +557,8 @@ The `popToTop` action takes you back to the first screen in the stack, dismissin
 
 ```js name="Stack actions popToTop" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
@@ -588,18 +572,18 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
-        onPress={() =>
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
-        }
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+        }}
       >
         Push Profile on the stack
       </Button>
       <Button
-        onPress={() =>
+        onPress={() => {
           navigation.dispatch(
             StackActions.replace('Profile', { user: 'Wojtek' })
-          )
-        }
+          );
+        }}
       >
         Replace with Profile
       </Button>
@@ -617,19 +601,18 @@ function ProfileScreen({ route }) {
         Push same screen on the stack
       </Button>
       <Button
-        onPress={() =>
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
-        }
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+        }}
       >
         Pop one screen from stack
       </Button>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.dispatch(StackActions.popToTop())
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(StackActions.popToTop());
           // codeblock-focus-end
-        }
+        }}
       >
         Pop to top
       </Button>
@@ -656,8 +639,8 @@ export default function App() {
 
 ```js name="Stack actions pop" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
@@ -665,24 +648,23 @@ import {
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen() {
-  const navigation = useNavigation();
+function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
-        onPress={() =>
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
-        }
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+        }}
       >
         Push Profile on the stack
       </Button>
       <Button
-        onPress={() =>
+        onPress={() => {
           navigation.dispatch(
             StackActions.replace('Profile', { user: 'Wojtek' })
-          )
-        }
+          );
+        }}
       >
         Replace with Profile
       </Button>
@@ -690,8 +672,7 @@ function HomeScreen() {
   );
 }
 
-function ProfileScreen({ route }) {
-  const navigation = useNavigation();
+function ProfileScreen({ navigation, route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
@@ -700,19 +681,18 @@ function ProfileScreen({ route }) {
         Push same screen on the stack
       </Button>
       <Button
-        onPress={() =>
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
-        }
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+        }}
       >
         Pop one screen from stack
       </Button>
       <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.dispatch(StackActions.popToTop())
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(StackActions.popToTop());
           // codeblock-focus-end
-        }
+        }}
       >
         Pop to top
       </Button>
