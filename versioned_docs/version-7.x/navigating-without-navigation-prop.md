@@ -128,8 +128,10 @@ function Settings({ route }) {
 }
 
 const RootStack = createNativeStackNavigator({
-  Home: Home,
-  Settings: Settings,
+  screens: {
+    Home: Home,
+    Settings: Settings,
+  },
 });
 
 const Navigation = createStaticNavigation(RootStack);
