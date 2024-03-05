@@ -15,9 +15,10 @@ We might want to render different content based on the current focus state of th
 ```js name="useIsFocused hook" snack version=7
 import * as React from 'react';
 import { View, Text } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 // codeblock-focus-start
-import { createStaticNavigation, useIsFocused } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 
 function ProfileScreen() {
   // This hook returns `true` if the screen is focused, `false` otherwise
@@ -56,9 +57,10 @@ export default function App() {
 ```js name="useIsFocused hook" snack version=7
 import * as React from 'react';
 import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 // codeblock-focus-start
-import { NavigationContainer, useIsFocused } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 
 function ProfileScreen() {
   // This hook returns `true` if the screen is focused, `false` otherwise
