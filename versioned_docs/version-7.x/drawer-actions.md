@@ -20,8 +20,8 @@ The `openDrawer` action can be used to open the drawer pane.
 
 ```js name="Drawer Actions - openDrawer" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
@@ -105,8 +105,8 @@ export default function App() {
 
 ```js name="Drawer Actions - openDrawer" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   NavigationContainer,
   DrawerActions,
@@ -198,8 +198,8 @@ The `closeDrawer` action can be used to close the drawer pane.
 
 ```js name="Drawer Actions - closeDrawer" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
@@ -281,8 +281,8 @@ export default function App() {
 
 ```js name="Drawer Actions - closeDrawer" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   NavigationContainer,
   DrawerActions,
@@ -372,8 +372,8 @@ The `toggleDrawer` action can be used to open the drawer pane if closed, or clos
 
 ```js name="Drawer Actions - toggleDrawer" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
@@ -457,8 +457,8 @@ export default function App() {
 
 ```js name="Drawer Actions - toggleDrawer" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   NavigationContainer,
   DrawerActions,
@@ -552,8 +552,8 @@ The `jumpTo` action can be used to jump to an existing route in the drawer navig
 
 ```js name="Drawer Actions - jumpTo" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
@@ -637,8 +637,8 @@ export default function App() {
 
 ```js name="Drawer Actions - jumpTo" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   NavigationContainer,
   DrawerActions,

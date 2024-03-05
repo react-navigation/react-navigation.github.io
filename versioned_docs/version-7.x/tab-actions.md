@@ -23,8 +23,8 @@ The `jumpTo` action can be used to jump to an existing route in the tab navigato
 
 ```js name="Tab Actions - jumpTo" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
@@ -42,8 +42,10 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
-        // highlight-next-line
-        onPress={() => navigation.dispatch(jumpToAction)}
+        onPress={() => {
+          // highlight-next-line
+          navigation.dispatch(jumpToAction);
+        }}
       >
         Jump to Profile
       </Button>
@@ -80,8 +82,8 @@ export default function App() {
 
 ```js name="Tab Actions - jumpTo" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   NavigationContainer,
   TabActions,
@@ -99,8 +101,10 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
-        // highlight-next-line
-        onPress={() => navigation.dispatch(jumpToAction)}
+        onPress={() => {
+          // highlight-next-line
+          navigation.dispatch(jumpToAction);
+        }}
       >
         Jump to Profile
       </Button>
