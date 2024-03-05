@@ -19,12 +19,11 @@ Example:
 ```js name="useScrollToTop hook" snack version=7
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStaticNavigation } from '@react-navigation/native';
+import { View, Image } from 'react-native';
 // codeblock-focus-start
-import { View, ScrollView, Image } from 'react-native';
-import {
-  createStaticNavigation,
-  useScrollToTop,
-} from '@react-navigation/native';
+import { ScrollView } from 'react-native';
+import { useScrollToTop } from '@react-navigation/native';
 
 function Albums() {
   const ref = React.useRef(null);
@@ -34,7 +33,7 @@ function Albums() {
 
   return (
     <ScrollView ref={ref}>
-      {/*content*/}
+      {/* content */}
       // codeblock-focus-end
       <Image
         source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
@@ -84,9 +83,11 @@ export default function App() {
 ```js name="useScrollToTop hook" snack version=7
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 // codeblock-focus-start
-import { View, ScrollView, Image } from 'react-native';
-import { NavigationContainer, useScrollToTop } from '@react-navigation/native';
+import { ScrollView } from 'react-native';
+import { useScrollToTop } from '@react-navigation/native';
 
 function Albums() {
   const ref = React.useRef(null);
@@ -176,12 +177,12 @@ If you require offset to scroll position you can wrap and decorate passed refere
 ```js name="useScrollToTop hook - providing scroll offset" snack version=7
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, Image } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+
 // codeblock-focus-start
-import { View, ScrollView, Image } from 'react-native';
-import {
-  createStaticNavigation,
-  useScrollToTop,
-} from '@react-navigation/native';
+import { ScrollView } from 'react-native';
+import { useScrollToTop } from '@react-navigation/native';
 
 function Albums() {
   const ref = React.useRef(null);
@@ -246,9 +247,11 @@ export default function App() {
 ```js name="useScrollToTop hook - providing scroll offset" snack version=7
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 // codeblock-focus-start
-import { View, ScrollView, Image } from 'react-native';
-import { NavigationContainer, useScrollToTop } from '@react-navigation/native';
+import { ScrollView } from 'react-native';
+import { useScrollToTop } from '@react-navigation/native';
 
 function Albums() {
   const ref = React.useRef(null);
