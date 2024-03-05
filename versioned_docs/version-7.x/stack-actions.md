@@ -136,8 +136,7 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ route }) {
-  const navigation = useNavigation();
+function ProfileScreen({ navigation, route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
@@ -291,8 +290,7 @@ import {
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen() {
-  const navigation = useNavigation();
+function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
@@ -318,8 +316,7 @@ function HomeScreen() {
   );
 }
 
-function ProfileScreen({ route }) {
-  const navigation = useNavigation();
+function ProfileScreen({ navigation, route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
