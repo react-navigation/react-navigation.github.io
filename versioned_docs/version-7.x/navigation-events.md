@@ -63,8 +63,8 @@ Normally, you'd add an event listener in `React.useEffect` for function componen
 
 ```js name="navigation.addListener with focus" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
@@ -88,16 +88,22 @@ function SettingsScreen() {
 function ProfileScreen() {
   const navigation = useNavigation();
 
-  React.useEffect(
-    () => navigation.addListener('focus', () => alert('Screen was focused')),
-    []
-  );
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // Screen was focused
+    });
+    return unsubscribe;
+  }, [navigation]);
 
-  React.useEffect(
-    () => navigation.addListener('blur', () => alert('Screen was unfocused')),
-    []
-  );
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+      // Screen was unfocused
+    });
+    return unsubscribe;
+  }, [navigation]);
 
+  // Rest of the component
+  // codeblock-focus-end
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
@@ -106,6 +112,7 @@ function ProfileScreen() {
       </Button>
     </View>
   );
+  // codeblock-focus-start
 }
 // codeblock-focus-end
 
@@ -128,14 +135,12 @@ export default function App() {
 
 ```js name="navigation.addListener with focus" snack version=7
 import * as React from 'react';
-import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function SettingsScreen() {
-  const navigation = useNavigation();
-
+function SettingsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings Screen</Text>
@@ -147,19 +152,23 @@ function SettingsScreen() {
 }
 
 // codeblock-focus-start
-function ProfileScreen() {
-  const navigation = useNavigation();
+function ProfileScreen({ navigation }) {
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // Screen was focused
+    });
+    return unsubscribe;
+  }, [navigation]);
 
-  React.useEffect(
-    () => navigation.addListener('focus', () => alert('Screen was focused')),
-    []
-  );
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+      // Screen was unfocused
+    });
+    return unsubscribe;
+  }, [navigation]);
 
-  React.useEffect(
-    () => navigation.addListener('blur', () => alert('Screen was unfocused')),
-    []
-  );
-
+  // Rest of the component
+  // codeblock-focus-end
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
@@ -168,6 +177,7 @@ function ProfileScreen() {
       </Button>
     </View>
   );
+  // codeblock-focus-start
 }
 // codeblock-focus-end
 
