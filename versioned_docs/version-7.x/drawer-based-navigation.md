@@ -9,6 +9,12 @@ import TabItem from '@theme/TabItem';
 
 Common pattern in navigation is to use drawer from left (sometimes right) side for navigating between screens.
 
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/drawer/drawer.mp4" />
+  </video>
+</div>
+
 Before continuing, first install and configure [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer) and its dependencies following the [installation instructions](drawer-navigator.md#installation).
 
 ## Minimal example of drawer-based navigation
@@ -111,11 +117,6 @@ export default function App() {
 }
 ```
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
-    <source src="/assets/navigators/drawer/drawer.mp4" />
-  </video>
-</div>
 </TabItem>
 </Tabs>
 

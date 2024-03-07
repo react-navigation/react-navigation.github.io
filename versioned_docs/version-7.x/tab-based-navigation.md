@@ -98,9 +98,10 @@ export default function App() {
 }
 ```
 
-![Tabs minimal](/assets/navigators/tabs/tabs-minimal.png)
 </TabItem>
 </Tabs>
+
+![Tabs minimal](/assets/navigators/tabs/tabs-minimal.png)
 
 ## Customizing the appearance
 

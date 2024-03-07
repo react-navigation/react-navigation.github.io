@@ -248,13 +248,6 @@ function HomeScreen() {
   );
 }
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
-    <source src="/assets/navigators/stack/back-home.mov" />
-  </video>
-</div>
-
-> On Android, React Navigation hooks in to the hardware back button and fires the `goBack()` function for you when the user presses it, so it behaves as the user would expect.
 // codeblock-focus-start
 function DetailsScreen() {
   const navigation = useNavigation();
@@ -288,6 +281,12 @@ export default function App() {
   return <Navigation />;
 }
 ```
+
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/stack/back-home.mov" />
+  </video>
+</div>
 
 :::note
 

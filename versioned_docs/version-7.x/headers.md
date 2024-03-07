@@ -98,9 +98,10 @@ export default function App() {
 }
 ```
 
-![Header title](/assets/headers/header-title.png)
 </TabItem>
 </Tabs>
+
+![Header title](/assets/headers/header-title.png)
 
 ## Using params in the title
 
