@@ -57,6 +57,12 @@ function EditText({ navigation }) {
 }
 ```
 
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/behavior/prevent-closing.mp4" />
+  </video>
+</div>
+
 Previously, the way to do this was to:
 
 - Override back button in header

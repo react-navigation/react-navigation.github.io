@@ -177,6 +177,11 @@ function App() {
 export default App;
 ```
 
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/modal/modal.mp4" />
+  </video>
+</div>
 </TabItem>
 </Tabs>
 

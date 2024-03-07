@@ -201,6 +201,14 @@ const styles = StyleSheet.create({
 });
 ```
 
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/statusbar/status-stack-ios.mp4" />
+  </video>
+<video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/statusbar/status-stack-android.mp4" />
+  </video>
+</div>
 </TabItem>
 </Tabs>
 
@@ -434,6 +442,20 @@ const styles = StyleSheet.create({
 
 Although not necessary, you can use the `FocusAwareStatusBar` component in the screens of the native stack navigator as well.
 
-![DrawerNavigator with different StatusBar configs](/assets/statusbar/statusbar-drawer-demo.gif)
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/statusbar/status-drawer-ios.mp4" />
+  </video>
+<video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/statusbar/status-drawer-android.mp4" />
+  </video>
+</div>
 
-![TabNavigator with different StatusBar configs](/assets/statusbar/statusbar-tab-demo.gif)
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/statusbar/status-tab-ios.mp4" />
+  </video>
+<video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/statusbar/status-tab-android.mp4" />
+  </video>
+</div>

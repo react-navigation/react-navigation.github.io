@@ -98,6 +98,7 @@ export default function App() {
 }
 ```
 
+![Header title](/assets/headers/header-title.png)
 </TabItem>
 </Tabs>
 
@@ -663,6 +664,9 @@ export default function App() {
 }
 ```
 
+![Header custom title](/assets/headers/header-custom-title.png)
+
+You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to stack navigators, the `headerTitle` defaults to a `Text` component that displays the `title`.
 </TabItem>
 </Tabs>
 

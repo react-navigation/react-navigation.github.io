@@ -78,6 +78,12 @@ export default function App() {
 }
 ```
 
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/stack/simple-details.mov" />
+  </video>
+</div>
+
 Let's break this down:
 
 - `navigation` - the `navigation` object is returned from the [`useNavigation`](use-navigation.md) hook (more about this later in ["The navigation object in depth"](navigation-object.md)).
@@ -206,7 +212,7 @@ export default function App() {
 ```
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
     <source src="/assets/navigators/stack/stack-push.mov" />
   </video>
 </div>
@@ -242,6 +248,13 @@ function HomeScreen() {
   );
 }
 
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/stack/back-home.mov" />
+  </video>
+</div>
+
+> On Android, React Navigation hooks in to the hardware back button and fires the `goBack()` function for you when the user presses it, so it behaves as the user would expect.
 // codeblock-focus-start
 function DetailsScreen() {
   const navigation = useNavigation();
@@ -345,6 +358,12 @@ export default function App() {
   return <Navigation />;
 }
 ```
+
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/stack/pop-to-top.mov" />
+  </video>
+</div>
 
 ## Summary
 

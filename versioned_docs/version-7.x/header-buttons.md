@@ -102,6 +102,9 @@ export default function App() {
 }
 ```
 
+![Header button](/assets/headers/header-button.png)
+
+When we define our button this way, the `this` variable in `options` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
 </TabItem>
 </Tabs>
 
@@ -170,6 +173,11 @@ export default function App() {
 }
 ```
 
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/headers/header-update-screen.mov" />
+  </video>
+</div>
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
@@ -239,6 +247,22 @@ Here we update the `headerRight` with a button with `onPress` handler that has a
 You can change the label behavior with `headerBackTitle` and style it with `headerBackTitleStyle` ([read more](native-stack-navigator.md#headerbacktitle)).
 
 To customize the back button image, you can use `headerBackImageSource` ([read more](native-stack-navigator.md#headerbackimagesource)).
+
+```js
+<Stack.Navigator>
+  <Stack.Screen name="Home" component={HomeScreen} />
+  <Stack.Screen
+    name="Details"
+    component={DetailsScreen}
+    options={{
+      headerBackTitle: 'Custom Back',
+      headerBackTitleStyle: { fontSize: 30 },
+    }}
+  />
+</Stack.Navigator>
+```
+
+![Header custom back](/assets/headers/header-back-custom.png)
 
 ## Overriding the back button
 

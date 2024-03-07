@@ -279,6 +279,11 @@ export default function App() {
 }
 ```
 
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/lifecycle.mov" />
+  </video>
+</div>
 </TabItem>
 </Tabs>
 
@@ -546,6 +551,11 @@ export default function App() {
 }
 ```
 
+<div style={{ display: 'flex', margin: '16px 0' }}>
+  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
+    <source src="/assets/navigators/lifecycle-focus.mov" />
+  </video>
+</div>
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
