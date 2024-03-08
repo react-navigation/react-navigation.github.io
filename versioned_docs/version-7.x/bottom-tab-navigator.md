@@ -623,7 +623,7 @@ Supported values for `animation` are:
 - `shift` - Shifting animation for the screen transition where the screens slightly shift to left/right.
 
   <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/tabs/bottom-tabs-shifting.mp4" />
+    <source src="/assets/navigators/tabs/bottom-tabs-shift.mp4" />
   </video>
 
 - `none` - The screen transition doesn't have any animation. This is the default value.
@@ -1013,8 +1013,8 @@ We also export various configs from the library with ready-made configs that you
 
 #### `TransitionSpecs`
 
-- `CrossFadeSpec` - Configuration for a cross-fade animation between screens.
-- `ShiftingSpec` - Configuration for a shifting animation between screens.
+- `FadeSpec` - Configuration for a cross-fade animation between screens.
+- `ShiftSpec` - Configuration for a shifting animation between screens.
 
 Example:
 
@@ -1051,7 +1051,7 @@ import { TransitionSpecs } from '@react-navigation/bottom-tabs';
   component={Profile}
   options={{
     // highlight-start
-    transitionSpec: TransitionSpecs.CrossFadeSpec,
+    transitionSpec: TransitionSpecs.FadeSpec,
     // highlight-end
   }}
 />;
@@ -1063,7 +1063,7 @@ import { TransitionSpecs } from '@react-navigation/bottom-tabs';
 #### `SceneStyleInterpolators`
 
 - `forFade` - Cross-fade animation for the screen transition where the new screen fades in and the old screen fades out.
-- `forShifting` - Shifting animation for the screen transition where the screens slightly shift to left/right.
+- `forShift` - Shifting animation for the screen transition where the screens slightly shift to left/right.
 
 Example:
 
@@ -1114,7 +1114,7 @@ import { SceneStyleInterpolators } from '@react-navigation/bottom-tabs';
 We export transition presets that bundle various sets of these options together. A transition preset is an object containing a few animation-related screen options exported under `TransitionPresets`. Currently the following presets are available:
 
 - `FadeTransition` - Cross-fade animation for the screen transition where the new screen fades in and the old screen fades out.
-- `ShiftingTransition` - Shifting animation for the screen transition where the screens slightly shift to left/right.
+- `ShiftTransition` - Shifting animation for the screen transition where the screens slightly shift to left/right.
 
 You can spread these presets in `options` to customize the animation for a screen:
 
