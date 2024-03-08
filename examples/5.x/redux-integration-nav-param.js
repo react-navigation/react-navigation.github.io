@@ -60,7 +60,7 @@ function StaticCounter({ route }) {
 }
 
 // Connect the screens to Redux
-let CounterContainer = connect(state => ({ count: state.count }))(Counter);
+let CounterContainer = connect((state) => ({ count: state.count }))(Counter);
 
 // Create our stack navigator
 let RootStack = createStackNavigator();

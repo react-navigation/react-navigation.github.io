@@ -13,8 +13,8 @@
 
 <link rel="search" type="application/opensearchdescription+xml" title="React Navigation" href="/opensearch.xml">
 
-<script src="/js/snack-helpers.js"></script><link rel="stylesheet" href="/assets/css/styles.b893e040.css">
-<script src="/assets/js/runtime~main.973a3978.js" defer="defer"></script>
+<script src="/js/snack-helpers.js"></script><link rel="stylesheet" href="/assets/css/styles.ef7ef83b.css">
+<script src="/assets/js/runtime~main.28314679.js" defer="defer"></script>
 <script src="/assets/js/main.9cf23db7.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -40,7 +40,7 @@
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="navigation-actions-api-overhaul">Navigation actions API overhaul<a href="#navigation-actions-api-overhaul" class="hash-link" aria-label="Direct link to Navigation actions API overhaul" title="Direct link to Navigation actions API overhaul">​</a></h3>
 <p>In 1.x, functions on the <code>navigation</code> were not contextual - they would be the same regardless of whether your screen was inside of a drawer, a stack, a tab navigator, etc. In 2.0 the functions that are available to you on the <code>navigation</code> prop depend on the navigators that it corresponds to. If your screen is inside of both a stack and a drawer navigator, you will have helpers for both -- <code>push</code> and <code>openDrawer</code>, for example.</p>
 <p>Given that we only exposed generic helpers (<code>navigate</code>, <code>goBack</code>) and helpers specific to the stack in 1.x, this would only impact you if you attempted to use the stack helpers from outside of a stack. For example, if you had a tab navigator with a stack in tab A and just a plain screen in tab B, then tried to <code>push</code> a route from the screen in tab B, <code>push</code> would not be available. Keep this in mind when you update your app if it follows this type of structure.</p>
-<p>One of the big improvements you get from this is that you can now add your own helpers to the <code>navigation</code> prop!  Read more in <a href="https://github.com/react-navigation/rfcs/blob/master/text/0006-action-creators.md" target="_blank" rel="noopener noreferrer">RFC 6</a>.</p>
+<p>One of the big improvements you get from this is that you can now add your own helpers to the <code>navigation</code> prop! Read more in <a href="https://github.com/react-navigation/rfcs/blob/master/text/0006-action-creators.md" target="_blank" rel="noopener noreferrer">RFC 6</a>.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="deprecations">Deprecations<a href="#deprecations" class="hash-link" aria-label="Direct link to Deprecations" title="Direct link to Deprecations">​</a></h2>
 <p>The following APIs are deprecated and will be removed in 3.0.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="xnavigator-is-now-named-createxnavigator">XNavigator is now named createXNavigator<a href="#xnavigator-is-now-named-createxnavigator" class="hash-link" aria-label="Direct link to XNavigator is now named createXNavigator" title="Direct link to XNavigator is now named createXNavigator">​</a></h3>

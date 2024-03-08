@@ -56,8 +56,8 @@ function StaticCounter({ count }) {
 }
 
 // Connect the screens to Redux
-let CounterContainer = connect(state => ({ count: state.count }))(Counter);
-let StaticCounterContainer = connect(state => ({ count: state.count }))(
+let CounterContainer = connect((state) => ({ count: state.count }))(Counter);
+let StaticCounterContainer = connect((state) => ({ count: state.count }))(
   StaticCounter
 );
 

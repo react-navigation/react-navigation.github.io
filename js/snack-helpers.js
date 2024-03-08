@@ -180,7 +180,7 @@ function appendSnackLink() {
     }
 
     // Don't try to add the link more than once!
-    samp.remove()
+    samp.remove();
   });
 }
 
