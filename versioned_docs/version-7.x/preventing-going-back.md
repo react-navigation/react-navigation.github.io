@@ -230,13 +230,12 @@ const styles = StyleSheet.create({
 });
 ```
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
-    <source src="/assets/behavior/prevent-closing.mp4" />
-  </video>
-</div>
 </TabItem>
 </Tabs>
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/behavior/prevent-closing.mp4" />
+</video>
 
 Previously, the way to do this was to:
 

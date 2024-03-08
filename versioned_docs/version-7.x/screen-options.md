@@ -291,20 +291,11 @@ export default function App() {
         <Stack.Group
           screenOptions={{ headerStyle: { backgroundColor: 'papayawhip' } }}
         >
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-          />
-          <Stack.Screen
-            name="Profile"
-            component={ProfileScreen}
-          />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
-          <Stack.Screen
-            name="Settings"
-            component={SettingsScreen}
-          />
+          <Stack.Screen name="Settings" component={SettingsScreen} />
           <Stack.Screen name="Share" component={ShareScreen} />
         </Stack.Group>
       </Stack.Navigator>

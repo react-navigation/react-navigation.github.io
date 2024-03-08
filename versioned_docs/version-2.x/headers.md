@@ -63,11 +63,11 @@ We only needed the `navigation` prop in the above example but you may in some ca
 It's often necessary to update the `navigationOptions` configuration for the active screen from the mounted screen component itself. We can do this using `this.props.navigation.setParams`
 
 ```js
-  /* Inside of render() */
-  <Button
-    title="Update the title"
-    onPress={() => this.props.navigation.setParams({otherParam: 'Updated!'})}
-  />
+/* Inside of render() */
+<Button
+  title="Update the title"
+  onPress={() => this.props.navigation.setParams({ otherParam: 'Updated!' })}
+/>
 ```
 
 <a href="https://snack.expo.io/@react-navigation/updating-navigationoptions-with-setparams-v2" target="blank" class="run-code-button">&rarr; Run this code</a>

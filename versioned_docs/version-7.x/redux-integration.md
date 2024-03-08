@@ -14,9 +14,7 @@ import { NavigationContainer } from '@react-navigation/native';
 export default function App() {
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        {/* Screen configuration */}
-      </NavigationContainer>
+      <NavigationContainer>{/* Screen configuration */}</NavigationContainer>
     </Provider>
   );
 }
@@ -35,7 +33,7 @@ function Counter({ value }) {
   return <Text>Count: {value}</Text>;
 }
 
-const CounterContainer = connect(state => ({ value: state.count }))(Counter);
+const CounterContainer = connect((state) => ({ value: state.count }))(Counter);
 ```
 
 ```js

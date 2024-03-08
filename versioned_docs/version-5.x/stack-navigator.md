@@ -8,11 +8,9 @@ Provides a way for your app to transition between screens where each new screen 
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/stack/stack.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/stack.mov" />
+</video>
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/stack):
 
@@ -115,8 +113,8 @@ header: ({ scene, previous, navigation }) => {
     options.headerTitle !== undefined
       ? options.headerTitle
       : options.title !== undefined
-      ? options.title
-      : scene.route.name;
+        ? options.title
+        : scene.route.name;
 
   return (
     <MyHeader
@@ -947,9 +945,7 @@ import { TransitionPresets } from '@react-navigation/stack';
     gestureEnabled: true,
     cardOverlayEnabled: true,
     headerStatusBarHeight:
-      navigation
-        .getState()
-        .routes.findIndex((r) => r.key === route.key) > 0
+      navigation.getState().routes.findIndex((r) => r.key === route.key) > 0
         ? 0
         : undefined,
     ...TransitionPresets.ModalPresentationIOS,

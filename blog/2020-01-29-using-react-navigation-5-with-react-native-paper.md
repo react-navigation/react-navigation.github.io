@@ -366,8 +366,8 @@ const Header = ({ scene, previous, navigation }) => {
     options.headerTitle !== undefined
       ? options.headerTitle
       : options.title !== undefined
-      ? options.title
-      : scene.route.name;
+        ? options.title
+        : scene.route.name;
 
   return (
     <Appbar.Header theme={{ colors: { primary: theme.colors.surface } }}>
@@ -385,8 +385,7 @@ const Header = ({ scene, previous, navigation }) => {
           <Avatar.Image
             size={40}
             source={{
-              uri:
-                'https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg',
+              uri: 'https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg',
             }}
           />
         </TouchableOpacity>
@@ -688,7 +687,7 @@ import { Notifications } from './notifications';
 
 const Tab = createMaterialBottomTabNavigator();
 
-export const BottomTabs = props => {
+export const BottomTabs = (props) => {
   // Get a name of current screen
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
   const isFocused = useIsFocused();
@@ -874,7 +873,7 @@ export default function Main() {
 
   function toggleTheme() {
     // We will pass this function to Drawer and invoke it on theme switch press
-    setIsDarkTheme(isDark => !isDark);
+    setIsDarkTheme((isDark) => !isDark);
   }
 
   return (

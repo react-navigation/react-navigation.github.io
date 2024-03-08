@@ -80,9 +80,9 @@ If you want to preserve the existing screens but only want to modify the state, 
 ```js
 import { CommonActions } from '@react-navigation/native';
 
-navigation.dispatch(state => {
+navigation.dispatch((state) => {
   // Remove all the screens after `Profile`
-  const index = state.routes.findIndex(r => r.name === 'Profile');
+  const index = state.routes.findIndex((r) => r.name === 'Profile');
   const routes = state.routes.slice(0, index + 1);
 
   return CommonActions.reset({

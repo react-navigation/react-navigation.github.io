@@ -51,11 +51,9 @@ function HomeScreen({ navigation }) {
 // ... other code from the previous section
 ```
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
-    <source src="/assets/navigators/stack/simple-details.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/simple-details.mov" />
+</video>
 
 Let's break this down:
 
@@ -101,11 +99,9 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 />
 ```
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
-    <source src="/assets/navigators/stack/stack-push.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/stack-push.mov" />
+</video>
 
 Each time you call `push` we add a new route to the navigation stack. When you call `navigate` it first tries to find an existing route with that name, and only pushes a new route if there isn't yet one on the stack.
 
@@ -133,11 +129,9 @@ function DetailsScreen({ navigation }) {
 }
 ```
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
-    <source src="/assets/navigators/stack/back-home.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/back-home.mov" />
+</video>
 
 :::note
 
@@ -169,11 +163,9 @@ function DetailsScreen({ navigation }) {
 }
 ```
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
-    <source src="/assets/navigators/stack/pop-to-top.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/pop-to-top.mov" />
+</video>
 
 ## Summary
 

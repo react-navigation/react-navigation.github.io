@@ -156,7 +156,7 @@ Now we have added a [`useNavigationState`](use-navigation-state.md) which addres
 function useIsFirstRouteInParent() {
   const route = useRoute();
   const isFirstRouteInParent = useNavigationState(
-    state => state.routes[0].key === route.key
+    (state) => state.routes[0].key === route.key
   );
 
   return isFirstRouteInParent;
@@ -288,7 +288,7 @@ To achieve the previous use cases for these events where you added listeners wit
   name="Chat"
   component={Chat}
   listeners={({ navigation, route }) => ({
-    tabPress: e => {
+    tabPress: (e) => {
       // Prevent default action
       e.preventDefault();
 

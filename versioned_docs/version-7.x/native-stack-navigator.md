@@ -28,7 +28,10 @@ To use this navigator, import it from `@react-navigation/native-stack`:
 ```js name="Native Stack Navigator" snack version=7
 import * as React from 'react';
 import { Text, View, Button } from 'react-native';
-import { createStaticNavigation, useNavigation } from '@react-navigation/native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
 // codeblock-focus-start
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 

@@ -6,11 +6,9 @@ sidebar_label: Bottom Tabs
 
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/tabs/bottom-tabs-demo.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/tabs/bottom-tabs-demo.mov" />
+</video>
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/bottom-tabs):
 
@@ -242,7 +240,9 @@ Style object for the tab bar. You can configure styles such as background color 
 To show your screen under the tab bar, you can set the `position` style to absolute:
 
 ```js
-style: { position: 'absolute' }
+style: {
+  position: 'absolute';
+}
 ```
 
 You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar. React Navigation won't do it automatically.

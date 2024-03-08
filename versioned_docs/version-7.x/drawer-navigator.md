@@ -6,11 +6,9 @@ sidebar_label: Drawer
 
 Drawer Navigator renders a navigation drawer on the side of the screen which can be opened and closed via gestures.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/drawer/drawer.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/drawer/drawer.mov" />
+</video>
 
 This wraps [`react-native-drawer-layout`](drawer-layout.md). If you want to use the drawer without React Navigation integration, use the library directly instead.
 
@@ -68,7 +66,10 @@ To use this navigator, import it from `@react-navigation/drawer`:
 ```js name="Drawer Navigator" snack version=7
 import * as React from 'react';
 import { Text, View, Button } from 'react-native';
-import { createStaticNavigation, useNavigation } from '@react-navigation/native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
 // codeblock-focus-start
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -93,10 +94,7 @@ function ProfileScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
-      <Button
-        title="Go to Home"
-        onPress={() => navigation.navigate('Home')}
-      />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
     </View>
   );
 }
@@ -159,10 +157,7 @@ function ProfileScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
-      <Button
-        title="Go to Home"
-        onPress={() => navigation.navigate('Home')}
-      />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
     </View>
   );
 }

@@ -147,9 +147,7 @@ export default {
           lastVersion: '6.x',
           breadcrumbs: false,
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
-          rehypePlugins: [
-            [rehypeCodeblockMeta, { match: { snack: true } }],
-          ],
+          rehypePlugins: [[rehypeCodeblockMeta, { match: { snack: true } }]],
         },
         blog: {
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],

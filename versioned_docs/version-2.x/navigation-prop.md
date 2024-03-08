@@ -6,16 +6,16 @@ sidebar_label: Navigation prop
 
 Each `screen` component in your app is provided with the `navigation` prop automatically. The prop contains various convenience functions that dispatch navigation actions on the route's router. It looks like this:
 
-* `this.props.navigation`
-  * `navigate` - go to another screen, figures out the action it needs to take to do it
-  * `goBack` - close active screen and move back in the stack
-  * `addListener` - subscribe to updates to navigation lifecycle
-  * `isFocused` - function that returns `true` if the screen is focused and `false` otherwise.
-  * `state` - current state/routes
-  * `setParams` - make changes to route's params
-  * `getParam` - get a specific param with fallback
-  * `dispatch` - send an action to router
-  * `dangerouslyGetParent` - function that returns the parent navigator, if any
+- `this.props.navigation`
+  - `navigate` - go to another screen, figures out the action it needs to take to do it
+  - `goBack` - close active screen and move back in the stack
+  - `addListener` - subscribe to updates to navigation lifecycle
+  - `isFocused` - function that returns `true` if the screen is focused and `false` otherwise.
+  - `state` - current state/routes
+  - `setParams` - make changes to route's params
+  - `getParam` - get a specific param with fallback
+  - `dispatch` - send an action to router
+  - `dangerouslyGetParent` - function that returns the parent navigator, if any
 
 It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`withNavigation`](with-navigation.md) HOC.
 
@@ -25,20 +25,20 @@ There are several additional functions present on `this.props.navigation` based 
 
 If the navigator is a stack navigator, several alternatives to `navigate` and `goBack` are provided and you can use whichever you prefer. The functions are:
 
-* `this.props.navigation`
-  * `push` - push a new route onto the stack
-  * `pop` - go back in the stack
-  * `popToTop` - go to the top of the stack
-  * `replace` - replace the current route with a new one
-  * `reset` - wipe the navigator state and replace it with the result of several actions
-  * `dismiss` - dismiss the current stack
+- `this.props.navigation`
+  - `push` - push a new route onto the stack
+  - `pop` - go back in the stack
+  - `popToTop` - go to the top of the stack
+  - `replace` - replace the current route with a new one
+  - `reset` - wipe the navigator state and replace it with the result of several actions
+  - `dismiss` - dismiss the current stack
 
 If the navigator is a drawer navigator, the following are also available:
 
-* `this.props.navigation`
-  * `openDrawer` - open the drawer
-  * `closeDrawer` - close the drawer
-  * `toggleDrawer` - toggle the state, ie. switch from closed to open and vice versa
+- `this.props.navigation`
+  - `openDrawer` - open the drawer
+  - `closeDrawer` - close the drawer
+  - `toggleDrawer` - toggle the state, ie. switch from closed to open and vice versa
 
 ## Common API reference
 
@@ -54,10 +54,10 @@ OR
 
 `navigation.navigate(routeName, params, action)`
 
-* `routeName` - A destination routeName that has been registered somewhere in the app's router
-* `params` - Params to merge into the destination route
-* `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions.md) for a full list of supported actions.
-* `key` - Optional identifier of what route to navigate to. Navigate **back** to this route, if it already exists
+- `routeName` - A destination routeName that has been registered somewhere in the app's router
+- `params` - Params to merge into the destination route
+- `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions.md) for a full list of supported actions.
+- `key` - Optional identifier of what route to navigate to. Navigate **back** to this route, if it already exists
 
 ```js
 class HomeScreen extends React.Component {
@@ -106,10 +106,10 @@ class HomeScreen extends React.Component {
 Consider the following navigation stack history:
 
 ```javascript
-navigation.navigate({routeName: SCREEN, key: SCREEN_KEY_A});
-navigation.navigate({routeName: SCREEN, key: SCREEN_KEY_B});
-navigation.navigate({routeName: SCREEN, key: SCREEN_KEY_C});
-navigation.navigate({routeName: SCREEN, key: SCREEN_KEY_D});
+navigation.navigate({ routeName: SCREEN, key: SCREEN_KEY_A });
+navigation.navigate({ routeName: SCREEN, key: SCREEN_KEY_B });
+navigation.navigate({ routeName: SCREEN, key: SCREEN_KEY_C });
+navigation.navigate({ routeName: SCREEN, key: SCREEN_KEY_D });
 ```
 
 Now you are on _screen D_ and want to go back to _screen A_ (popping D, C, and B).
@@ -125,17 +125,17 @@ Alternatively, as _screen A_ is the top of the stack, you can use `navigation.po
 
 React Navigation emits events to screen components that subscribe to them:
 
-* `willFocus` - the screen will focus
-* `didFocus` - the screen focused (if there was a transition, the transition completed)
-* `willBlur` - the screen will be unfocused
-* `didBlur` - the screen unfocused (if there was a transition, the transition completed)
+- `willFocus` - the screen will focus
+- `didFocus` - the screen focused (if there was a transition, the transition completed)
+- `willBlur` - the screen will be unfocused
+- `didBlur` - the screen unfocused (if there was a transition, the transition completed)
 
 Example:
 
 ```javascript
 const didBlurSubscription = this.props.navigation.addListener(
   'didBlur',
-  payload => {
+  (payload) => {
     console.debug('didBlur', payload);
   }
 );
@@ -239,19 +239,19 @@ The following actions will work within any stack navigator:
 Similar to navigate, push will move you forward to a new route in the stack. This differs from `navigate` in that `navigate` will pop back to earlier in the stack if a route of the given name is already present there. `push` will always add on top, so a route can be present multiple times.
 
 ```js
-navigation.push(routeName, params, action)
+navigation.push(routeName, params, action);
 ```
 
-* `routeName` - A destination routeName that has been registered somewhere in the app's router.
-* `params` - Params to merge into the destination route.
-* `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions.md) for a full list of supported actions.
+- `routeName` - A destination routeName that has been registered somewhere in the app's router.
+- `params` - Params to merge into the destination route.
+- `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions.md) for a full list of supported actions.
 
 ### Pop
 
 Take you to the previous screen in the stack. If you provide a number, `n`, it will specify how many screens to take you back within the stack.
 
 ```js
-navigation.pop(n)
+navigation.pop(n);
 ```
 
 ### PopToTop
@@ -259,7 +259,7 @@ navigation.pop(n)
 Call this to jump back to the top route in the stack, dismissing all other screens.
 
 ```js
-navigation.popToTop()
+navigation.popToTop();
 ```
 
 ### Replace
@@ -267,7 +267,7 @@ navigation.popToTop()
 Call this to replace the current screen with the given route, with params and sub-action.
 
 ```js
-navigation.replace(routeName, params, action)
+navigation.replace(routeName, params, action);
 ```
 
 ### Reset
@@ -275,7 +275,7 @@ navigation.replace(routeName, params, action)
 Wipe the navigator state and replace it with the result of several actions.
 
 ```js
-navigation.reset([NavigationActions.navigate({ routeName: 'Profile' })], 0)
+navigation.reset([NavigationActions.navigate({ routeName: 'Profile' })], 0);
 ```
 
 ### Dismiss
@@ -283,7 +283,7 @@ navigation.reset([NavigationActions.navigate({ routeName: 'Profile' })], 0)
 Call this if you're in a nested (child) stack and want to dismiss the entire stack, returning to the parent stack.
 
 ```js
-navigation.dismiss()
+navigation.dismiss();
 ```
 
 ## Advanced API Reference
@@ -330,9 +330,8 @@ class UserCreateScreen extends Component {
 
     return {
       title: 'New User',
-      gesturesEnabled
+      gesturesEnabled,
     };
   };
 }
-
 ```

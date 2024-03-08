@@ -78,10 +78,7 @@ This also applies to the `index` property: `index` should be the last route in a
 ```js
 navigation.reset({
   index: 0,
-  routes: [
-    { name: 'Home' },
-    { name: 'Profile' }
-  ],
+  routes: [{ name: 'Home' }, { name: 'Profile' }],
 });
 ```
 

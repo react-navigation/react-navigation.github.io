@@ -54,11 +54,9 @@ export default function App() {
 }
 ```
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
-    <source src="/assets/navigators/drawer/drawer.mp4" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/drawer/drawer.mp4" />
+</video>
 
 ## Opening and closing drawer
 

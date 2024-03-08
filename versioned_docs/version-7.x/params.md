@@ -98,11 +98,9 @@ export default function App() {
 }
 ```
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
-    <source src="/assets/navigators/passing-params.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/passing-params.mov" />
+</video>
 
 ## Initial params
 
@@ -279,11 +277,9 @@ export default function App() {
 }
 ```
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
-    <source src="/assets/navigators/params-to-parent.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/params-to-parent.mov" />
+</video>
 
 Here, after you press "Done", the home screen's `route.params` will be updated to reflect the post text that you passed in `navigate`.
 

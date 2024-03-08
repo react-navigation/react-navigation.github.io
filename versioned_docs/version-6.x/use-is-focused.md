@@ -35,7 +35,7 @@ class Profile extends React.Component {
 }
 
 // Wrap and export
-export default function(props) {
+export default function (props) {
   const isFocused = useIsFocused();
 
   return <Profile {...props} isFocused={isFocused} />;

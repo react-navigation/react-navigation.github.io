@@ -8,11 +8,9 @@ As of writing this guide, Shared Element Transitions are considered an experimen
 
 :::
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/shared-element-transitions/shared-element-transitions.mp4" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/shared-element-transitions/shared-element-transitions.mp4" />
+</video>
 
 ## Pre-requisites
 

@@ -30,7 +30,7 @@ Inside a screen, you can add listeners on the `navigation` prop with the `addLis
 Example:
 
 ```js
-const unsubscribe = navigation.addListener('tabPress', e => {
+const unsubscribe = navigation.addListener('tabPress', (e) => {
   // Prevent default action
   e.preventDefault();
 });
@@ -89,7 +89,7 @@ Example:
   name="Chat"
   component={Chat}
   listeners={{
-    tabPress: e => {
+    tabPress: (e) => {
       // Prevent default action
       e.preventDefault();
     },
@@ -106,7 +106,7 @@ Example:
   name="Chat"
   component={Chat}
   listeners={({ navigation, route }) => ({
-    tabPress: e => {
+    tabPress: (e) => {
       // Prevent default action
       e.preventDefault();
 

@@ -45,7 +45,11 @@ const LinkButton = ({ to, action, children, ...rest }) => {
 };
 
 function Home() {
-  return <LinkButton to={{ screen: 'Profile', params: { id: 'jane' } }}>Go to Jane's profile</LinkButton>;
+  return (
+    <LinkButton to={{ screen: 'Profile', params: { id: 'jane' } }}>
+      Go to Jane's profile
+    </LinkButton>
+  );
 }
 ```
 
@@ -53,7 +57,11 @@ Then you can use the `LinkButton` component elsewhere in your app:
 
 ```js
 function Home() {
-  return <LinkButton to={{ screen: 'Profile', params: { id: 'jane' } }}>Go to Jane's profile</LinkButton>;
+  return (
+    <LinkButton to={{ screen: 'Profile', params: { id: 'jane' } }}>
+      Go to Jane's profile
+    </LinkButton>
+  );
 }
 ```
 
@@ -75,9 +83,7 @@ You can pass an object with a `screen` property:
 ```js
 function Home() {
   return (
-    <LinkButton
-      to={{ screen: 'Profile', params: { id: 'jane' } }}
-    >
+    <LinkButton to={{ screen: 'Profile', params: { id: 'jane' } }}>
       Go to Jane's profile
     </LinkButton>
   );

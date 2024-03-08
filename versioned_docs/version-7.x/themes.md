@@ -118,7 +118,11 @@ export default function App() {
 ```js name="Simple theme" snack version=7
 // codeblock-focus-start
 import * as React from 'react';
-import { NavigationContainer, DefaultTheme, useNavigation } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  useNavigation,
+} from '@react-navigation/native';
 // codeblock-focus-end
 import { Button, View, Text } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

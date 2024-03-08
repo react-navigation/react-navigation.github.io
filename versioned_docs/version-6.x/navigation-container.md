@@ -38,16 +38,17 @@ Example:
 <samp id="using-refs" />
 
 ```js
-import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 
 function App() {
   const navigationRef = useNavigationContainerRef(); // You can also use a regular ref with `React.useRef()`
 
   return (
     <View style={{ flex: 1 }}>
-      <Button onPress={() => navigationRef.navigate('Home')}>
-        Go home
-      </Button>
+      <Button onPress={() => navigationRef.navigate('Home')}>Go home</Button>
       <NavigationContainer ref={navigationRef}>{/* ... */}</NavigationContainer>
     </View>
   );
@@ -161,9 +162,7 @@ Prop that accepts initial state for the navigator. This can be useful for cases 
 Example:
 
 ```js
-<NavigationContainer
-  initialState={initialState}
->
+<NavigationContainer initialState={initialState}>
   {/* ... */}
 </NavigationContainer>
 ```
@@ -423,7 +422,7 @@ import messaging from '@react-native-firebase/messaging';
   }}
 >
   {/* content */}
-</NavigationContainer>
+</NavigationContainer>;
 ```
 
 This option is not available on Web.

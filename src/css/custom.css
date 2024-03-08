@@ -176,6 +176,17 @@
   transform: scale(0.8);
 }
 
+article video {
+  max-width: 100%;
+  width: 300px;
+  height: auto;
+  margin: 16px 0;
+}
+
+article video:has(+ video) {
+  margin-right: 32px;
+}
+
 samp {
   display: none;
 }

@@ -20,7 +20,7 @@ function StackScreen() {
         name="Home"
         component={HomeScreen}
         options={{
-          headerTitle: props => <LogoTitle {...props} />,
+          headerTitle: (props) => <LogoTitle {...props} />,
           headerRight: () => (
             <Button
               onPress={() => alert('This is a button!')}
@@ -53,7 +53,7 @@ function StackScreen() {
         name="Home"
         component={HomeScreen}
         options={({ navigation, route }) => ({
-          headerTitle: props => <LogoTitle {...props} />,
+          headerTitle: (props) => <LogoTitle {...props} />,
         })}
       />
     </Stack.Navigator>
@@ -66,7 +66,7 @@ function HomeScreen({ navigation }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button onPress={() => setCount(c => c + 1)} title="Update count" />
+        <Button onPress={() => setCount((c) => c + 1)} title="Update count" />
       ),
     });
   }, [navigation]);

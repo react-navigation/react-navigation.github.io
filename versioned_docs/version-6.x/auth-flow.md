@@ -323,7 +323,11 @@ So our updated code will look like following:
       <Stack.Screen name="SignUp" component={SignUpScreen} />
     </>
   )}
-  <Stack.Screen navigationKey={isSignedIn ? 'user' : 'guest'} name="Help" component={HelpScreen} />
+  <Stack.Screen
+    navigationKey={isSignedIn ? 'user' : 'guest'}
+    name="Help"
+    component={HelpScreen}
+  />
 </>
 ```
 

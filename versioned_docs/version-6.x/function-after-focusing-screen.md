@@ -61,7 +61,7 @@ function Profile({ userId }) {
 
   useFocusEffect(
     React.useCallback(() => {
-      const unsubscribe = API.subscribe(userId, user => setUser(data));
+      const unsubscribe = API.subscribe(userId, (user) => setUser(data));
 
       return () => unsubscribe();
     }, [userId])

@@ -39,15 +39,15 @@ Create a component, `connect` it to the store, then use that component in the `t
 ```js
 class Count extends React.Component {
   render() {
-    return <Text>Count: {this.props.value}</Text>
+    return <Text>Count: {this.props.value}</Text>;
   }
 }
 
-let CountContainer = connect(state => ({ value: state.count }))(Count);
+let CountContainer = connect((state) => ({ value: state.count }))(Count);
 
 class Counter extends React.Component {
   static navigationOptions = {
-    title: <CountContainer />
+    title: <CountContainer />,
   };
 
   /* .. the rest of the code */

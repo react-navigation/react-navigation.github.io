@@ -94,7 +94,7 @@ function TabNavigator({
             }}
             style={{ flex: 1 }}
           >
-            <Text>{descriptors[route.key].options.title ??  route.name}</Text>
+            <Text>{descriptors[route.key].options.title ?? route.name}</Text>
           </Pressable>
         ))}
       </View>

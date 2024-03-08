@@ -91,7 +91,11 @@ By default, the screen is identified by its name. But you can also customize it 
 For example, say you have specified a `getId` prop for `Profile` screen:
 
 ```js
-<Tab.Screen name={Profile} component={ProfileScreen} getId={({ params }) => params.userId} />
+<Tab.Screen
+  name={Profile}
+  component={ProfileScreen}
+  getId={({ params }) => params.userId}
+/>
 ```
 
 Now, if you have a stack with the history `Home > Profile (userId: bob) > Settings` and you call `navigate(Profile, { userId: 'alice' })`, the resulting screens will be `Home > Profile (userId: bob) > Settings > Profile (userId: alice)` since it'll add a new `Profile` screen as no matching screen was found.
@@ -362,9 +366,7 @@ It accepts an optional ID parameter to refer to a specific parent navigator. For
 To use an ID for a navigator, first pass a unique `id` prop:
 
 ```js
-<Drawer.Navigator id="LeftDrawer">
-  {/* .. */}
-</Drawer.Navigator>
+<Drawer.Navigator id="LeftDrawer">{/* .. */}</Drawer.Navigator>
 ```
 
 Then when using `getParent`, instead of:

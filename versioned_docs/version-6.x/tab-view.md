@@ -262,9 +262,7 @@ When you enable lazy rendering for a screen, it will usually take some time to r
 You can also pass a boolean to enable lazy for all of the scenes:
 
 ```js
-<TabView
-  lazy
-/>
+<TabView lazy />
 ```
 
 ##### `lazyPreloadDistance`

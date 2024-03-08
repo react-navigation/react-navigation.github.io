@@ -25,16 +25,16 @@ export default function App() {
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Home">
-        {() => (
-          <Tab.Navigator
-            initialRouteName="Analitics"
-            tabBar={() => null}
-            screenOptions={{ headerShown: false }}
-          >
-            <Tab.Screen name="Analitics" component={Demo} />
-            <Tab.Screen name="Profile" component={Demo} />
-          </Tab.Navigator>
-        )}
+          {() => (
+            <Tab.Navigator
+              initialRouteName="Analitics"
+              tabBar={() => null}
+              screenOptions={{ headerShown: false }}
+            >
+              <Tab.Screen name="Analitics" component={Demo} />
+              <Tab.Screen name="Profile" component={Demo} />
+            </Tab.Navigator>
+          )}
         </Stack.Screen>
 
         <Stack.Screen name="Settings" component={Demo} />

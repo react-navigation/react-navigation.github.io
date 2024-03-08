@@ -24,5 +24,8 @@ jobs:
       - name: Fix lint issues
         run: yarn markdownlint-cli2-fix
 
+      - name: Prettify code
+        run: yarn prettier --write .
+
       - name: Autofix
         uses: autofix-ci/action@8106fde54b877517c9af2c3d68918ddeaa7bed64

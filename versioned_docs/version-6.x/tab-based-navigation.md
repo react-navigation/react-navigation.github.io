@@ -149,11 +149,9 @@ function SettingsScreen({ navigation }) {
 }
 ```
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
-    <source src="/assets/navigators/tabs/tabs-navigate.mp4" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/tabs/tabs-navigate.mp4" />
+</video>
 
 ## A stack navigator for each tab
 
@@ -236,11 +234,9 @@ export default function App() {
 }
 ```
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
-    <source src="/assets/navigators/tabs/tabs-with-stack.mp4" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/tabs/tabs-with-stack.mp4" />
+</video>
 
 ## Why do we need a TabNavigator instead of TabBarIOS or some other component?
 

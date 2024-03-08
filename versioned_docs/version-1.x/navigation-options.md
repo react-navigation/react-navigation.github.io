@@ -38,7 +38,7 @@ The screenProps are passed in at render-time. If this screen was hosted in a Sim
 
 ```js
 <SimpleApp
-  screenProps={{tintColor: 'blue'}}
+  screenProps={{ tintColor: 'blue' }}
   // navigation={{state, dispatch}} // optionally control the app
 />
 ```
@@ -84,7 +84,7 @@ const MyTabNavigator = TabNavigator({
 });
 ```
 
-Note that you can still decide to **also** specify the `navigationOptions` on the screens at the leaf level - e.g.  the `ProfileScreen` above. The `navigationOptions` from the screen will be merged key-by-key with the default options coming from the navigator. Whenever both the navigator and screen define the same option (e.g. `headerTintColor`), the screen wins. Therefore, you could change the tint color when `ProfileScreen` is active by doing the following:
+Note that you can still decide to **also** specify the `navigationOptions` on the screens at the leaf level - e.g. the `ProfileScreen` above. The `navigationOptions` from the screen will be merged key-by-key with the default options coming from the navigator. Whenever both the navigator and screen define the same option (e.g. `headerTintColor`), the screen wins. Therefore, you could change the tint color when `ProfileScreen` is active by doing the following:
 
 ```js
 class ProfileScreen extends React.Component {

@@ -8,11 +8,9 @@ Stack Navigator provides a way for your app to transition between screens where 
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, use OS default animation on Android. But the [animations can be customized](#animation-related-options) to match your needs.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/stack/stack.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/stack.mov" />
+</video>
 
 One thing to keep in mind is that while `@react-navigation/stack` is extremely customizable, it's implemented in JavaScript. While it runs animations and gestures using natively, the performance may not be as fast as a native implementation. This may not be an issue for a lot of apps, but if you're experiencing performance issues during navigation, consider using [`@react-navigation/native-stack`](native-stack-navigator.md) instead - which uses native navigation primitives.
 
@@ -82,7 +80,10 @@ To use this navigator, import it from `@react-navigation/stack`:
 ```js name="Stack Navigator" snack version=7
 import * as React from 'react';
 import { Text, View, Button } from 'react-native';
-import { createStaticNavigation, useNavigation } from '@react-navigation/native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
 // codeblock-focus-start
 import { createStackNavigator } from '@react-navigation/stack';
 

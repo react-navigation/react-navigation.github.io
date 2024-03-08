@@ -232,11 +232,9 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
-    <source src="/assets/headers/header-update-screen.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop >
+  <source src="/assets/headers/header-update-screen.mov" />
+</video>
 
 Here we update the `headerRight` with a button with `onPress` handler that has access to the component's state and can update it.
 

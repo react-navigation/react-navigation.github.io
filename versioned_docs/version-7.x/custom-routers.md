@@ -155,7 +155,7 @@ Let's say you want to add a custom action to clear the history:
 ```js
 import { TabRouter } from '@react-navigation/native';
 
-const MyTabRouter = options => {
+const MyTabRouter = (options) => {
   const router = TabRouter(options);
 
   return {
@@ -191,7 +191,7 @@ Sometimes you may want to prevent some navigation activity, depending on your ro
 ```js
 import { StackRouter } from '@react-navigation/native';
 
-const MyStackRouter = options => {
+const MyStackRouter = (options) => {
   const router = StackRouter(options);
 
   return {

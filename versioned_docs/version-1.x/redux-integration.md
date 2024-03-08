@@ -8,7 +8,7 @@ Some folks like to have their navigation state stored in the same place as the r
 
 ## Warning
 
-*You probably do not need to do this!* Storing your React Navigation state in your own Redux store is likely to give you a very difficult time if you don't know what you're doing. You lose out on some performance optimizations that React Navigation can do for you, for example. Please do not integrate your state into Redux without first ensuring that you can do what you need to do without it!
+_You probably do not need to do this!_ Storing your React Navigation state in your own Redux store is likely to give you a very difficult time if you don't know what you're doing. You lose out on some performance optimizations that React Navigation can do for you, for example. Please do not integrate your state into Redux without first ensuring that you can do what you need to do without it!
 
 ## Overview
 
@@ -142,23 +142,21 @@ To make jest tests work with your react-navigation app, you need to change the j
 By using the following snippet, your nav component will be aware of the back button press actions and will correctly interact with your stack. This is really useful on Android.
 
 ```es6
-import React from "react";
-import { BackHandler } from "react-native";
-import { addNavigationHelpers, NavigationActions } from "react-navigation";
+import React from 'react';
+import { BackHandler } from 'react-native';
+import { addNavigationHelpers, NavigationActions } from 'react-navigation';
 
-const AppNavigation = TabNavigator(
-  {
-    Home: { screen: HomeScreen },
-    Settings: { screen: SettingScreen }
-  }
-);
+const AppNavigation = TabNavigator({
+  Home: { screen: HomeScreen },
+  Settings: { screen: SettingScreen },
+});
 
 class ReduxNavigation extends React.Component {
   componentDidMount() {
-    BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
   }
   componentWillUnmount() {
-    BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {
     const { dispatch, nav } = this.props;

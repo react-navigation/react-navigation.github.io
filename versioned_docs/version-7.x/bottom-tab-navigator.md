@@ -6,11 +6,9 @@ sidebar_label: Bottom Tabs
 
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/tabs/bottom-tabs-demo.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/tabs/bottom-tabs-demo.mov" />
+</video>
 
 ## Installation
 
@@ -30,7 +28,10 @@ To use this navigator, import it from `@react-navigation/bottom-tabs`:
 ```js name="Bottom Tab Navigator" snack version=7
 import * as React from 'react';
 import { Text, View, Button } from 'react-native';
-import { createStaticNavigation, useNavigation } from '@react-navigation/native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
 // codeblock-focus-start
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -55,10 +56,7 @@ function ProfileScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
-      <Button
-        title="Go to Home"
-        onPress={() => navigation.navigate('Home')}
-      />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
     </View>
   );
 }
@@ -121,10 +119,7 @@ function ProfileScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
-      <Button
-        title="Go to Home"
-        onPress={() => navigation.navigate('Home')}
-      />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
     </View>
   );
 }

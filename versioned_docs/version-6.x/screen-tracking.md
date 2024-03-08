@@ -43,7 +43,7 @@ export default () => {
         if (previousRouteName !== currentRouteName) {
           // Save the current route name for later comparison
           routeNameRef.current = currentRouteName;
-          
+
           // Replace the line below to add the tracker from a mobile analytics SDK
           await trackScreenView(currentRouteName);
         }

@@ -7,7 +7,7 @@ author_image_url: https://avatars2.githubusercontent.com/u/1174278?s=200&v=4
 tags: [release, announcement]
 ---
 
-We're excited to announce that we finally have a prerelease version  of React Navigation 6. We released React Navigation 5 more than half a year ago, and it brought a lot of new possibilities with the new dynamic API, and was met with overwhelmingly positive reaction. Since then, we've been working on incremental improvements and refinements to the library and thinking about how to make it even better. This brings us to the next major version of React Navigation.
+We're excited to announce that we finally have a prerelease version of React Navigation 6. We released React Navigation 5 more than half a year ago, and it brought a lot of new possibilities with the new dynamic API, and was met with overwhelmingly positive reaction. Since then, we've been working on incremental improvements and refinements to the library and thinking about how to make it even better. This brings us to the next major version of React Navigation.
 
 <!--truncate-->
 

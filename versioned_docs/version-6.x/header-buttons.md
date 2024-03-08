@@ -57,9 +57,7 @@ function StackScreen() {
         options={({ navigation, route }) => ({
           headerTitle: (props) => <LogoTitle {...props} />,
           // Add a placeholder button without the `onPress` to avoid flicker
-          headerRight: () => (
-            <Button title="Update count" />
-          ),
+          headerRight: () => <Button title="Update count" />,
         })}
       />
     </Stack.Navigator>
@@ -83,11 +81,9 @@ function HomeScreen({ navigation }) {
 }
 ```
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop style={{ maxWidth: '280px' }}>
-    <source src="/assets/headers/header-update-screen.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/headers/header-update-screen.mov" />
+</video>
 
 Here we update the `headerRight` with a button with `onPress` handler that has access to the component's state and can update it.
 
@@ -101,17 +97,13 @@ To customize the back button image, you can use `headerBackImageSource` ([read m
 
 ```js
 <Stack.Navigator>
-  <Stack.Screen 
-    name="Home" 
-    component={HomeScreen}
-  />
-  <Stack.Screen 
-  name="Details" 
-  component={DetailsScreen} 
-  options={
-    {
+  <Stack.Screen name="Home" component={HomeScreen} />
+  <Stack.Screen
+    name="Details"
+    component={DetailsScreen}
+    options={{
       headerBackTitle: 'Custom Back',
-      headerBackTitleStyle: {fontSize: 30}
+      headerBackTitleStyle: { fontSize: 30 },
     }}
   />
 </Stack.Navigator>

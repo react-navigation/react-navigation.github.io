@@ -95,20 +95,12 @@
         ]
       }
     ],
-    "Build your own Navigator": [
-      "custom-routers",
-      "custom-navigators"
-    ],
+    "Build your own Navigator": ["custom-routers", "custom-navigators"],
     "Additional resources": [
       "supported-react-native-versions",
       "community-libraries-and-navigators",
       "more-resources"
     ],
-    "Meta": [
-      "pitch",
-      "alternatives",
-      "used-by",
-      "contributing"
-    ]
+    "Meta": ["pitch", "alternatives", "used-by", "contributing"]
   }
 }

@@ -29,7 +29,7 @@ function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ headerTitle: props => <LogoTitle {...props} /> }}
+          options={{ headerTitle: (props) => <LogoTitle {...props} /> }}
         />
       </Stack.Navigator>
     </NavigationContainer>

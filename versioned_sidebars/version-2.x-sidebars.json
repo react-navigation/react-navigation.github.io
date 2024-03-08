@@ -45,11 +45,7 @@
       "community-libraries-and-navigators",
       "more-resources"
     ],
-    "Meta": [
-      "pitch",
-      "alternatives",
-      "contributing"
-    ]
+    "Meta": ["pitch", "alternatives", "contributing"]
   },
   "version-2.x-api": {
     "API reference": [

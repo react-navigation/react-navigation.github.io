@@ -6,11 +6,9 @@ sidebar_label: Drawer
 
 Component that renders a navigation drawer which can be opened and closed via gestures.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/drawer/drawer.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/drawer/drawer.mov" />
+</video>
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
 
@@ -398,8 +396,8 @@ header: ({ scene }) => {
     options.headerTitle !== undefined
       ? options.headerTitle
       : options.title !== undefined
-      ? options.title
-      : scene.route.name;
+        ? options.title
+        : scene.route.name;
 
   return (
     <MyHeader

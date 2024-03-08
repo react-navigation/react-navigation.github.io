@@ -104,14 +104,14 @@ const RootStack = createNativeStackNavigator({
       },
       screens: {
         // ...
-      }
+      },
     },
     User: {
       if: useIsUser,
       screens: {
         // ...
-      }
-    }
+      },
+    },
   },
 });
 ```
@@ -317,7 +317,10 @@ This is intended to be rendered once at the root of your app similar to how you'
 The `createComponentForStaticNavigation` function takes the static config returned by `createXNavigator` functions and returns a React component to render. The second argument is a name for the component that'd be used in React DevTools:
 
 ```js
-const RootStackNavigator = createComponentForStaticNavigation(RootStack, 'RootNavigator');
+const RootStackNavigator = createComponentForStaticNavigation(
+  RootStack,
+  'RootNavigator'
+);
 ```
 
 The returned component doesn't take any props. All of the configuration is inferred from the static config. It's essentially the same as defining a component using the dynamic API.

@@ -51,12 +51,7 @@
       "material-bottom-tab-navigator",
       "material-top-tab-navigator"
     ],
-    "Libraries": [
-      "devtools",
-      "elements",
-      "tab-view",
-      "drawer-layout"
-    ],
+    "Libraries": ["devtools", "elements", "tab-view", "drawer-layout"],
     "API reference": [
       "navigation-container",
       "server-container",
@@ -96,19 +91,12 @@
         ]
       }
     ],
-    "Build your own Navigator": [
-      "custom-routers",
-      "custom-navigators"
-    ],
+    "Build your own Navigator": ["custom-routers", "custom-navigators"],
     "Additional resources": [
       "migration-guides",
       "navigation-solutions-and-community-libraries",
       "more-resources"
     ],
-    "Meta": [
-      "pitch",
-      "used-by",
-      "contributing"
-    ]
+    "Meta": ["pitch", "used-by", "contributing"]
   }
 }

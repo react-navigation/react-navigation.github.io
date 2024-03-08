@@ -71,11 +71,7 @@
       {
         "type": "category",
         "label": "Helpers",
-        "items": [
-          "with-navigation",
-          "with-navigation-focus",
-          "scrollables"
-        ]
+        "items": ["with-navigation", "with-navigation-focus", "scrollables"]
       }
     ],
     "Build your own Navigator": [
@@ -90,10 +86,6 @@
       "community-libraries-and-navigators",
       "more-resources"
     ],
-    "Meta": [
-      "pitch",
-      "alternatives",
-      "contributing"
-    ]
+    "Meta": ["pitch", "alternatives", "contributing"]
   }
 }
