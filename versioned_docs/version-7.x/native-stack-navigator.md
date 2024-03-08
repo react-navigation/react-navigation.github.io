@@ -6,6 +6,14 @@ sidebar_label: Native Stack
 
 Native Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack-android.mp4" />
+</video>
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack-ios.mp4" />
+</video>
+
 This navigator uses the native APIs `UINavigationController` on iOS and `Fragment` on Android so that navigation built with `createNativeStackNavigator` will behave exactly the same and have the same performance characteristics as apps built natively on top of those APIs. It also offers basic Web support using [`react-native-web`](https://github.com/necolas/react-native-web).
 
 One thing to keep in mind is that while `@react-navigation/native-stack` offers native performance and exposes native features such as large title on iOS etc., it may not be as customizable as [`@react-navigation/stack`](stack-navigator.md) depending on your needs. So if you need more customization than what's possible in this navigator, consider using `@react-navigation/stack` instead - which is a more customizable JavaScript based implementation.

@@ -44,8 +44,8 @@
     "Navigators": [
       "stack-navigator",
       "native-stack-navigator",
-      "drawer-navigator",
       "bottom-tab-navigator",
+      "drawer-navigator",
       "material-top-tab-navigator"
     ],
     "Libraries": ["devtools", "elements", "tab-view", "drawer-layout"],

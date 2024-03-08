@@ -181,6 +181,7 @@ article video {
   width: 300px;
   height: auto;
   margin: 16px 0;
+  vertical-align: top;
 }
 
 article video:has(+ video) {
