@@ -9,7 +9,7 @@ const peers = {
 
 const versions = {
   7: {
-    '@react-navigation/bottom-tabs': ['7.0.0-alpha.14', peers],
+    '@react-navigation/bottom-tabs': ['7.0.0-alpha.15', peers],
     '@react-navigation/core': '7.0.0-alpha.11',
     '@react-navigation/native': '7.0.0-alpha.12',
     '@react-navigation/drawer': [
