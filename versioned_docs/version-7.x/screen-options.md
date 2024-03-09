@@ -202,7 +202,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // codeblock-focus-start
 const Stack = createNativeStackNavigator({
-  screens: {},
   groups: {
     App: {
       screenOptions: {

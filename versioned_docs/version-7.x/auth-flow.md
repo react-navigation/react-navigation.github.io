@@ -864,7 +864,6 @@ const RootStack = createNativeStackNavigator({
       },
     },
   },
-  screens: {},
 });
 ```
 
@@ -983,7 +982,6 @@ const RootStack = createNativeStackNavigator({
       },
     },
   },
-  screens: {},
 });
 ```
 

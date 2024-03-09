@@ -79,7 +79,6 @@ const HomeStack = createStackNavigator({
 });
 
 const RootStack = createStackNavigator({
-  screens: {},
   groups: {
     Home: {
       screens: {

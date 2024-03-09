@@ -9,29 +9,29 @@ const peers = {
 
 const versions = {
   7: {
-    '@react-navigation/bottom-tabs': ['7.0.0-alpha.15', peers],
-    '@react-navigation/core': '7.0.0-alpha.11',
-    '@react-navigation/native': '7.0.0-alpha.12',
+    '@react-navigation/bottom-tabs': ['7.0.0-alpha.16', peers],
+    '@react-navigation/core': '7.0.0-alpha.12',
+    '@react-navigation/native': '7.0.0-alpha.13',
     '@react-navigation/drawer': [
-      '7.0.0-alpha.13',
+      '7.0.0-alpha.14',
       {
         ...peers,
         'react-native-gesture-handler': '*',
         'react-native-reanimated': '*',
       },
     ],
-    '@react-navigation/elements': ['2.0.0-alpha.10', peers],
+    '@react-navigation/elements': ['2.0.0-alpha.11', peers],
     '@react-navigation/material-top-tabs': [
-      '7.0.0-alpha.12',
+      '7.0.0-alpha.13',
       {
         ...peers,
         'react-native-pager-view': '*',
       },
     ],
-    '@react-navigation/native-stack': ['7.0.0-alpha.13', peers],
+    '@react-navigation/native-stack': ['7.0.0-alpha.14', peers],
     '@react-navigation/routers': '7.0.0-alpha.4',
     '@react-navigation/stack': [
-      '7.0.0-alpha.13',
+      '7.0.0-alpha.14',
       {
         ...peers,
         'react-native-gesture-handler': '*',
