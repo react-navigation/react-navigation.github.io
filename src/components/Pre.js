@@ -9,31 +9,52 @@ const peers = {
 
 const versions = {
   7: {
-    '@react-navigation/bottom-tabs': ['7.0.0-alpha.17', peers],
+    '@react-navigation/bottom-tabs': [
+      '7.0.0-alpha.17',
+      {
+        ...peers,
+        '@react-navigation/native': '*',
+      },
+    ],
     '@react-navigation/core': '7.0.0-alpha.13',
     '@react-navigation/native': '7.0.0-alpha.14',
     '@react-navigation/drawer': [
       '7.0.0-alpha.15',
       {
         ...peers,
+        '@react-navigation/native': '*',
         'react-native-gesture-handler': '*',
         'react-native-reanimated': '*',
       },
     ],
-    '@react-navigation/elements': ['2.0.0-alpha.12', peers],
+    '@react-navigation/elements': [
+      '2.0.0-alpha.12',
+      {
+        ...peers,
+        '@react-navigation/native': '*',
+      },
+    ],
     '@react-navigation/material-top-tabs': [
       '7.0.0-alpha.14',
       {
         ...peers,
+        '@react-navigation/native': '*',
         'react-native-pager-view': '*',
       },
     ],
-    '@react-navigation/native-stack': ['7.0.0-alpha.15', peers],
+    '@react-navigation/native-stack': [
+      '7.0.0-alpha.15',
+      {
+        ...peers,
+        '@react-navigation/native': '*',
+      },
+    ],
     '@react-navigation/routers': '7.0.0-alpha.4',
     '@react-navigation/stack': [
       '7.0.0-alpha.15',
       {
         ...peers,
+        '@react-navigation/native': '*',
         'react-native-gesture-handler': '*',
       },
     ],
@@ -95,11 +116,23 @@ export default function Pre({
       Object.entries(versions[version]).reduce((acc, [key, value]) => {
         if (code.includes(`from '${key}'`)) {
           if (Array.isArray(value)) {
-            const [version, peers] = value;
+            const [v, peers] = value;
 
             Object.assign(acc, {
-              [key]: version,
-              ...peers,
+              [key]: v,
+              ...Object.fromEntries(
+                Object.entries(peers).map(([key, value]) => {
+                  const meta = versions[version][key];
+
+                  if (value === '*' && meta) {
+                    const v = Array.isArray(meta) ? meta[0] : meta;
+
+                    return [key, v];
+                  }
+
+                  return [key, value];
+                })
+              ),
             });
           } else {
             acc[key] = value;

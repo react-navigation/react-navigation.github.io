@@ -18,7 +18,47 @@ npm install @react-navigation/elements
 
 ### `Header`
 
-A component that can be used as a header. It accepts the following props:
+A component that can be used as a header. This is used by all the navigators by default.
+
+Usage:
+
+```js
+import { Header } from '@react-navigation/elements';
+
+function MyHeader() {
+  return <Header title="My app" />;
+}
+```
+
+To use the header in a navigator, you can use the `header` option in the screen options:
+
+```js
+import { Header, getHeaderTitle } from '@react-navigation/elements';
+
+const Stack = createNativeStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        header: ({ options, route }) => (
+          <Header {...options} title={getHeaderTitle(options, route.name)} />
+        ),
+      }}
+    >
+      <Stack.Screen name="Home" component={HomeScreen} />
+    </Stack.Navigator>
+  );
+}
+```
+
+:::note
+
+This doesn't replicate the behavior of the header in stack and native stack navigators as the stack navigator also includes animations, and the native stack navigator header is provided by the native platform.
+
+:::
+
+It accepts the following props:
 
 #### `headerTitle`
 
