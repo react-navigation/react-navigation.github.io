@@ -213,7 +213,7 @@ After adding them, it should look like this:
 </activity>
 ```
 
-Then, you need to [declare the association](https://developer.android.com/training/app-links/verify-site-associations#web-assoc) between your website and your intent filters by hosting a Digital Asset Links JSON file.
+Then, you need to [declare the association](https://developer.android.com/training/app-links/verify-android-applinks#web-assoc) between your website and your intent filters by hosting a Digital Asset Links JSON file.
 
 ## Testing deep links
 
