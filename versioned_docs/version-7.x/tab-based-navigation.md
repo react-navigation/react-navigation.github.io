@@ -485,8 +485,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={{ headerShown: false }}>
-        <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen name="Settings" component={SettingsStackScreen} />
+        <Tab.Screen name="HomeTab" component={HomeStackScreen} options={{
+          tabBarLabel: "Home"
+        }}/>
+        <Tab.Screen name="SettingsTab" component={SettingsStackScreen} options={{
+          tabBarLabel: "Settings"
+        }}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
