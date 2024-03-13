@@ -197,3 +197,44 @@ samp {
   margin-bottom: 25px;
   margin-top: -8px;
 }
+
+/**
+ * use magic comments to mark diff blocks
+ */
+.code-block-diff-add-line {
+  background-color: var(--ifm-color-success-contrast-background);
+  display: block;
+  margin: 0 -2em;
+  padding: 0 2em;
+}
+
+.code-block-diff-add-line::before {
+  position: absolute;
+  left: 8px;
+  padding-right: 8px;
+  content: '+';
+  color: var(--ifm-color-success-dark);
+}
+
+.code-block-diff-remove-line {
+  background-color: var(--ifm-color-danger-contrast-background);
+  display: block;
+  margin: 0 -2em;
+  padding: 0 2em;
+}
+
+.code-block-diff-remove-line::before {
+  position: absolute;
+  left: 8px;
+  padding-right: 8px;
+  content: '-';
+  color: var(--ifm-color-danger-dark);
+}
+
+pre code:has(.code-block-diff-add-line) {
+  padding-left: 2em !important;
+}
+
+pre code:has(.code-block-diff-remove-line) {
+  padding-left: 2em !important;
+}

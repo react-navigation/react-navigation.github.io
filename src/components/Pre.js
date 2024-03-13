@@ -80,12 +80,52 @@ export default function Pre({
   'data-snack': snack,
   'data-version': version,
   'data-dependencies': deps,
+  'data-lang': lang,
   ...rest
 }) {
   const { colorMode } = useColorMode();
+  const child = React.Children.only(children);
 
+  // Handle diffs with language
+  if (child.props.className === 'language-diff' && lang) {
+    const code = child.props.children;
+
+    if (typeof code !== 'string') {
+      throw new Error(
+        'Diff code must be a string, but received ' + typeof code
+      );
+    }
+
+    // Replace + and - with magic comments
+    // Need to add following in docusaurus.config.js
+    // themeConfig.prims.magicComments: [
+    //   { className: 'code-block-diff-add-line', line: 'diff-add' },
+    //   { className: 'code-block-diff-remove-line', line: 'diff-remove' },
+    // ],
+    const content = code
+      .split('\n')
+      .map((line) => {
+        if (line.startsWith('+ ')) {
+          return `// diff-add\n${line.replace(/^\+ /, '')}`;
+        } else if (line.startsWith('- ')) {
+          return `// diff-remove\n${line.replace(/^- /, '')}`;
+        }
+
+        return line;
+      })
+      .join('\n');
+
+    children = React.cloneElement(child, {
+      className: `language-${lang}`,
+      children: content,
+    });
+
+    return <MDXPre {...rest}>{children}</MDXPre>;
+  }
+
+  // Handle snack demos
   if (snack) {
-    const code = React.Children.only(children).props.children;
+    const code = child.props.children;
 
     if (typeof code !== 'string') {
       throw new Error(
@@ -228,8 +268,8 @@ export default function Pre({
         }
       }
 
-      children = React.Children.map(children, (child) =>
-        React.cloneElement(child, { children: content })
+      children = React.Children.map(children, (c) =>
+        React.cloneElement(c, { children: content })
       );
     }
 

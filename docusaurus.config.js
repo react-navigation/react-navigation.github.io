@@ -1,4 +1,3 @@
-import path from 'path';
 import remarkNpm2Yarn from '@docusaurus/remark-plugin-npm2yarn';
 import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.mjs';
 
@@ -15,6 +14,15 @@ export default {
     prism: {
       theme: require('prism-react-renderer').themes.github,
       darkTheme: require('prism-react-renderer').themes.dracula,
+      magicComments: [
+        {
+          className: 'theme-code-block-highlighted-line',
+          line: 'highlight-next-line',
+          block: { start: 'highlight-start', end: 'highlight-end' },
+        },
+        { className: 'code-block-diff-add-line', line: 'diff-add' },
+        { className: 'code-block-diff-remove-line', line: 'diff-remove' },
+      ],
     },
     algolia: {
       appId: 'QCWXRU195A',
@@ -147,7 +155,9 @@ export default {
           lastVersion: '6.x',
           breadcrumbs: false,
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
-          rehypePlugins: [[rehypeCodeblockMeta, { match: { snack: true } }]],
+          rehypePlugins: [
+            [rehypeCodeblockMeta, { match: { snack: true, lang: true } }],
+          ],
         },
         blog: {
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
