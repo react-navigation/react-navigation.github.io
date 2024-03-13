@@ -31,11 +31,11 @@ function ProfileScreen({ navigation, route }) {
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
-        title="Push same screen on the stack"
+        title="Pop one screen from stack"
         onPress={() => navigation.dispatch(StackActions.pop(1))}
       />
       <Button
-        title="Pop one screen from stack"
+        title="Push same screen on the stack"
         onPress={() =>
           navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
         }
