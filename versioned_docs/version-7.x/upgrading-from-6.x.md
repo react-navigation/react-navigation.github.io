@@ -27,7 +27,7 @@ Due to these issues, we have a special API to navigate to a nested screen (`navi
 
 From these release, this is no longer the default behavior. If you're relying on this behavior in your app, you can pass the `navigationInChildEnabled` prop to `NavigationContainer` to keep the behavior until you are able to migrate:
 
-```js
+```jsx
 <NavigationContainer navigationInChildEnabled>{/* ... */}</NavigationContainer>
 ```
 
@@ -39,7 +39,7 @@ Previously, `navigate` method navigated back if the screen already exists in the
 
 To avoid this confusion, we have removed the going back behavior from `navigate` and added a [new method `popTo`](stack-actions.md#popto) to explicitly go back to a specific screen in the stack:
 
-```diff
+```diff lang=js
 - navigation.navigate('PreviousScreen', { foo: 42 });
 + navigation.popTo('PreviousScreen', { foo: 42 });
 ```
@@ -53,7 +53,7 @@ To achieve a behavior similar to before with `navigate`, you can use the [`getId
 
 To help with the migration, we have added a new method called `navigateDeprecated` which will behave like the old `navigate` method. You can replace your current `navigate` calls with `navigateDeprecated` to gradually migrate to the new behavior:
 
-```diff
+```diff lang=js
 - navigation.navigate('SomeScreen');
 + navigation.navigateDeprecated('SomeScreen');
 ```
@@ -103,15 +103,15 @@ However, there are issues with this approach:
 
 So we've removed this prop instead of a `NavigationIndependentTree` component which you can use to wrap the navigation container:
 
-```diff
--<NavigationContainer independent>
--  {/* ... */}
--</NavigationContainer>
-+<NavigationIndependentTree>
-+  <NavigationContainer>
-+    {/* ... */}
-+  </NavigationContainer>
-+</NavigationIndependentTree>
+```diff lang=jsx
+- <NavigationContainer independent>
+-   {/* ... */}
+- </NavigationContainer>
++ <NavigationIndependentTree>
++   <NavigationContainer>
++     {/* ... */}
++   </NavigationContainer>
++ </NavigationIndependentTree>
 ```
 
 This way, the responsibility no longer lies on the miniapp developer, but on the parent app. It's also harder for beginners to accidentally add this.
@@ -120,14 +120,14 @@ This way, the responsibility no longer lies on the miniapp developer, but on the
 
 Previously, the `theme` prop on `NavigationContainer` accepted a `colors` property to customize the colors used by various UI elements from React Navigation. We have now added a `fonts` property to customize the fonts as well. If you are passing a custom theme in the `theme` prop, you'll need to update it to include the `fonts` property.
 
-```diff
+```diff lang=js
 import { DefaultTheme } from '@react-navigation/native';
 
 const theme = {
   colors: {
     // ...
   },
-+ fonts: DefaultTheme.fonts,
++   fonts: DefaultTheme.fonts,
 };
 ```
 
@@ -142,16 +142,16 @@ Previously, the `Link` component and `useLinkProps` hook were designed to work w
 
 Now, instead of the `to` prop that took a path string, they now accept `screen` and `params` props, as well as an optional `href` prop to use instead of the generated path:
 
-```diff
--<Link to="/details?foo=42">Go to Details</Link>
-+<Link screen="Details" params={{ foo: 42 }}>Go to Details</Link>
+```diff lang=jsx
+- <Link to="/details?foo=42">Go to Details</Link>
++ <Link screen="Details" params={{ foo: 42 }}>Go to Details</Link>
 ```
 
 or
 
-```diff
--const props = useLinkProps({ to: '/details?foo=42' });
-+const props = useLinkProps({ screen: 'Details', params: { foo: 42 } });
+```diff lang=js
+- const props = useLinkProps({ to: '/details?foo=42' });
++ const props = useLinkProps({ screen: 'Details', params: { foo: 42 } });
 ```
 
 With this change, you'd now have full type-safety when using the `Link` component given that you have [configured the global type](typescript.md#specifying-default-types-for-usenavigation-link-ref-etc).
@@ -262,7 +262,7 @@ The `@react-navigation/material-bottom-tabs` package provided React Navigation i
 
 If you are using `@react-navigation/material-bottom-tabs` in your project, you can remove it from your dependencies and change the imports to `react-native-paper/react-navigation` instead:
 
-```diff
+```diff lang=js
 - import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 + import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 ```
