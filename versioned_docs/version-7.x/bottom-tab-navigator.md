@@ -617,13 +617,13 @@ Supported values for `animation` are:
 - `fade` - Cross-fade animation for the screen transition where the new screen fades in and the old screen fades out.
 
   <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/tabs/bottom-tabs-fade.mp4" />
+    <source src="/assets/7.x/bottom-tabs-fade.mp4" />
   </video>
 
 - `shift` - Shifting animation for the screen transition where the screens slightly shift to left/right.
 
   <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/tabs/bottom-tabs-shift.mp4" />
+    <source src="/assets/7.x/bottom-tabs-shift.mp4" />
   </video>
 
 - `none` - The screen transition doesn't have any animation. This is the default value.
