@@ -233,7 +233,7 @@ export default function App() {
 </Tabs>
 
 <video playsInline autoPlay muted loop >
-  <source src="/assets/headers/header-update-screen.mov" />
+  <source src="/assets/headers/header-update-screen.mp4" />
 </video>
 
 Here we update the `headerRight` with a button with `onPress` handler that has access to the component's state and can update it.

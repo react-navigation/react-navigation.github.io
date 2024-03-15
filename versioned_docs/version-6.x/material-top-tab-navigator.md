@@ -7,7 +7,7 @@ sidebar_label: Material Top Tabs
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the tabs or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/tabs/material-top-tabs.mov" />
+  <source src="/assets/navigators/tabs/material-top-tabs.mp4" />
 </video>
 
 This wraps [`react-native-tab-view`](tab-view.md). If you want to use the tab view without React Navigation integration, use the library directly instead.

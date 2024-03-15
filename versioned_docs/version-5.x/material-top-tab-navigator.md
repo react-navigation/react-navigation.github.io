@@ -9,7 +9,7 @@ A material-design themed tab bar on the top of the screen that lets you switch b
 This wraps [`react-native-tab-view`](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view).
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/tabs/material-top-tabs.mov" />
+  <source src="/assets/navigators/tabs/material-top-tabs.mp4" />
 </video>
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/material-top-tabs):

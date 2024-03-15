@@ -51,7 +51,7 @@ function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/lifecycle.mov" />
+  <source src="/assets/navigators/lifecycle.mp4" />
 </video>
 
 We start on the `HomeScreen` and navigate to `DetailsScreen`. Then we use the tab bar to switch to the `SettingsScreen` and navigate to `ProfileScreen`. After this sequence of operations is done, all 4 of the screens are mounted! If you use the tab bar to switch back to the `HomeStack`, you'll notice you'll be presented with the `DetailsScreen` - the navigation state of the `HomeStack` has been preserved!
@@ -109,7 +109,7 @@ function Profile() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/lifecycle-focus.mov" />
+  <source src="/assets/navigators/lifecycle-focus.mp4" />
 </video>
 
 If you want to render different things based on if the screen is focused or not, you can use the [`useIsFocused`](use-is-focused.md) hook which returns a boolean indicating whether the screen is focused.

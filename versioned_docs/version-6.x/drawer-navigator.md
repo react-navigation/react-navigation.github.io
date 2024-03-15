@@ -7,7 +7,7 @@ sidebar_label: Drawer
 Drawer Navigator renders a navigation drawer on the side of the screen which can be opened and closed via gestures.
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/drawer/drawer.mov" />
+  <source src="/assets/navigators/drawer/drawer.mp4" />
 </video>
 
 This wraps [`react-native-drawer-layout`](drawer-layout.md). If you want to use the drawer without React Navigation integration, use the library directly instead.

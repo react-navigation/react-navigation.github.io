@@ -52,7 +52,7 @@ function HomeScreen({ navigation }) {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/simple-details.mov" />
+  <source src="/assets/navigators/stack/simple-details.mp4" />
 </video>
 
 Let's break this down:
@@ -100,7 +100,7 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/stack-push.mov" />
+  <source src="/assets/navigators/stack/stack-push.mp4" />
 </video>
 
 Each time you call `push` we add a new route to the navigation stack. When you call `navigate` it first tries to find an existing route with that name, and only pushes a new route if there isn't yet one on the stack.
@@ -130,7 +130,7 @@ function DetailsScreen({ navigation }) {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/back-home.mov" />
+  <source src="/assets/navigators/stack/back-home.mp4" />
 </video>
 
 :::note
@@ -164,7 +164,7 @@ function DetailsScreen({ navigation }) {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/pop-to-top.mov" />
+  <source src="/assets/navigators/stack/pop-to-top.mp4" />
 </video>
 
 ## Summary

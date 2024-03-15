@@ -92,7 +92,7 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/stack-push.mov" />
+  <source src="/assets/navigators/stack/stack-push.mp4" />
 </video>
 
 Each time you call `push` we add a new route to the navigation stack. When you call `navigate` it first tries to find an existing route with that name, and only pushes a new route if there isn't yet one on the stack.

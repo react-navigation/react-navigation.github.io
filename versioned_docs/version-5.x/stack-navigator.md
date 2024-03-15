@@ -9,7 +9,7 @@ Provides a way for your app to transition between screens where each new screen 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, fade in from the bottom on Android. On iOS the stack navigator can also be configured to a modal style where screens slide in from the bottom.
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/stack.mov" />
+  <source src="/assets/navigators/stack/stack.mp4" />
 </video>
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/stack):
