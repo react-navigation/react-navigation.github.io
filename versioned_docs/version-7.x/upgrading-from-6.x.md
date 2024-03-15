@@ -133,6 +133,33 @@ const theme = {
 
 If you want to customize the fonts, see [the themes guide](themes.md) for more details.
 
+### Encoding of params in path position is now more relaxed
+
+Previously, params were always URL encoded with `encodeURIComponent` regardless of their position (e.g. query position such as `?user=jane` or path position such as `/users/jane`) when generating a link for a screen (e.g. URL on the Web). This made it hard to use special characters in the params.
+
+Now, only the params in the query position are URL encoded. For the params in the path position, we only encode the characters that are not allowed in the path position.
+
+With this change, it's easier to use special characters such as `@` in the path. For example, to have a URL such as `profile/@username`, you can use the following in the linking config:
+
+```js
+const config = {
+  prefixes: ['https://mysite.com'],
+  config: {
+    screens: {
+      Profile: {
+        path: 'profile/:username',
+        parse: {
+          username: (username) => username.replace(/^@/, ''),
+        },
+        stringify: {
+          username: (username) => `@${username}`,
+        },
+      },
+    },
+  },
+};
+```
+
 ### The `Link` component and `useLinkProps` hook now use screen names instead of paths
 
 Previously, the `Link` component and `useLinkProps` hook were designed to work with path strings via the `to` prop. But it had few issues:
@@ -281,6 +308,31 @@ Here is the full list of removed APIs:
     - `contentContainerStyle` - use `tabBarContentContainerStyle` option instead
     - `style` - use `tabBarStyle` option instead
 
+### Various UI elements now follow Material Design 3 guidelines
+
+Previously, the UI elements in React Navigation such as the header on platforms other than iOS, drawer, material top tabs etc. were following the Material Design 2 guidelines. We have now updated them to follow the Material Design 3 guidelines.
+
+### Screens pushed on top of modals are now shown as modals in the Stack and Native Stack navigators
+
+Previously, screens pushed on top of modals were shown as regular screens in the Stack and Native Stack navigators. This often caused glitchy animation on Stack Navigator and appeared behind the modal on Native Stack Navigator. This can be especially confusing if the user came to the screen from a deep link.
+
+Now, screens pushed on top of modals are automatically shown as modals to avoid these issues. This behavior can be disabled by explicitly setting the `presentation` option to `card`:
+
+```jsx
+<Stack.Screen
+  name="MyModal"
+  component={MyModalScreen}
+  options={{
+    // highlight-next-line
+    presentation: 'card',
+  }}
+/>
+```
+
+### `animationEnabled` option is removed in favor of `animation` option in Stack Navigator
+
+TODO
+
 ### `customAnimationOnGesture` is renamed to `animationMatchesGesture` in Native Stack Navigator
 
 The `customAnimationOnGesture` option in Native Stack Navigator is renamed to `animationMatchesGesture` to better reflect its purpose. If you are using `customAnimationOnGesture` in your project, you can rename it to `animationMatchesGesture`:
@@ -290,7 +342,7 @@ The `customAnimationOnGesture` option in Native Stack Navigator is renamed to `a
 + <Stack.Navigator options={{ animationMatchesGesture: true }}>
 ```
 
-### Material Top Tab Navigator no longers requires installing `react-native-tab-view`
+### Material Top Tab Navigator no longer requires installing `react-native-tab-view`
 
 Previously, `@react-navigation/material-top-tabs` required installing `react-native-tab-view` as a dependency in the project. We have now moved this package to the React Navigation monorepo and able to coordinate the releases together, so it's no longer necessary to install it separately.
 
@@ -309,6 +361,10 @@ If you are using `@react-navigation/material-bottom-tabs` in your project, you c
 + import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 ```
 
+### The `unmountOnBlur` option is removed in favor of `popToTopOnBlur` in Bottom Tab Navigator
+
+TODO
+
 ### The `tabBarTestID` option is renamed to `tabBarButtonTestID` in Bottom Tab Navigator
 
 The `tabBarTestID` option in Bottom Tab Navigator is renamed to `tabBarButtonTestID` to better reflect its purpose. If you are using `tabBarTestID` in your project, you can rename it to `tabBarButtonTestID`:
@@ -326,9 +382,9 @@ If you are using Reanimated 1 in your project, you'll need to upgrade to Reanima
 
 If you're using Drawer Navigator on the Web, it'll now use CSS transitions instead of Reanimated for a smaller bundle size.
 
-### Various UI elements now follow Material Design 3 guidelines
+### React Native Tab View now has a new API to specify various options
 
-Previously, the UI elements in React Navigation such as the header on platforms other than iOS, drawer, material top tabs etc. were following the Material Design 2 guidelines. We have now updated them to follow the Material Design 3 guidelines.
+TODO
 
 ## New features
 
@@ -372,7 +428,43 @@ You can see examples for both the static and dynamic configuration APIs in the d
 
 Go to ["Hello React Navigation"](hello-react-navigation.md?config=static) to start writing some code with the static API.
 
-### Support a top-level `path` configuration in linking config
+### Improved TypeScript support for `options`, `listeners` etc
+
+Previously, the `navigation` object received in `options` and `listeners` callbacks were typed as `any` and required manual type annotation. Now, the `navigation` object has a more accurate type based on the navigator it's used in, and the type annotation is no longer required.
+
+We also export a new `XOptionsArgs` (where `X` is the navigator name, e.g. `StackOptionsArgs`, `BottomTabOptionsArgs` etc.) type which can be used to type the arguments of the `options` callback. This can be useful if you want to define the options callback separately.
+
+```ts
+const options = ({
+  route,
+}: StackOptionsArgs<RootStackParamList, 'Details'>) => {
+  return {
+    title: route.params.title,
+  };
+};
+```
+
+### The `options` callback now receives `theme` in its arguments
+
+The `options` callback now receives the `theme` object to allow customizing the UI elements specified in the options:
+
+```jsx
+<Stack.Screen
+  name="Details"
+  component={DetailsScreen}
+  options={({ theme }) => ({
+    headerRight: () => (
+      <IconButton
+        icon="dots-horizontal"
+        onPress={() => {}}
+        color={theme.colors.primary}
+      />
+    ),
+  })}
+/>
+```
+
+### Linking config now supports a top-level `path` property
 
 The linking configuration now supports a top-level `path` configuration to define the base path for all the screens in the navigator:
 
@@ -392,7 +484,11 @@ const linking = {
 
 This can be useful if your app lives under a subpath on the web. For example, if your app lives under `https://mysite.com/app`, you can define the `path` as `app` and the `Details` screen will be accessible at `https://mysite.com/app/details/42`.
 
-### Add a `layout` prop for Navigators
+### There's a new `usePreventRemove` hook that works with Native Stack Navigator
+
+TODO
+
+### Navigators now support a `layout` prop
 
 Navigators now support a `layout` prop. It can be useful for augmenting the navigators with additional UI with a wrapper. The difference from adding a regular wrapper is that the code in `layout` callback has access to the navigator's state, options etc.:
 
@@ -411,7 +507,7 @@ Navigators now support a `layout` prop. It can be useful for augmenting the navi
 </Stack.Navigator>
 ```
 
-### Add `layout` and `screenLayout` props for screens
+### Screens now support a `layout` and `screenLayout` props
 
 The `layout` prop makes it easier to provide things such as a global error boundary and suspense fallback for a group of screens without having to manually add HOCs for every screen separately.
 
@@ -463,9 +559,41 @@ Or with a group or navigator with `screenLayout`:
 </Stack.Group>
 ```
 
-### Add a `Button` component to Elements
+### Many navigators now support preloading screens
 
-The `@react-navigation/elements` package now includes a `Button` component. It has built-in support for navigating to screens, and renders an anchor tag on the Web when used for navigation:
+Many navigators now support preloading screens prior to navigating to them. This can be useful to improve the perceived performance of the app by preloading the screens that the user is likely to navigate to next. Preloading a screen will render it off-screen and execute its side-effects such as data fetching.
+
+To preload a screen, you can use the `preload` method on the navigation object:
+
+```js
+navigation.preload('Details', { id: 42 });
+```
+
+Preloading is supported in the following navigators:
+
+- Stack Navigator
+- Bottom Tab Navigator
+- Material Top Tab Navigator
+- Drawer Navigator
+
+The Native Stack navigator doesn't currently support preloading screens.
+
+### More UI elements are now links on the Web
+
+More built-in UI elements that trigger navigation now render `a` tags on the Web for better accessibility and SEO. This includes:
+
+- Back button in the header
+- The tab buttons in material top tab navigator
+
+UI elements such as the bottom tab bar and drawer items already rendered `a` tags on the Web.
+
+### Elements library now includes many new components
+
+The `@react-navigation/elements` package now includes new components that can be used in your app:
+
+#### `Button`
+
+The `Button` component has built-in support for navigating to screens, and renders an anchor tag on the Web when used for navigation:
 
 ```jsx
 <Button screen="Profile" params={{ userId: 'jane' }}>
@@ -487,18 +615,52 @@ It can also be used as a regular button:
 
 The button follows the [Material Design 3 guidelines](https://m3.material.io/components/buttons/overview).
 
-### Add `useAnimatedHeaderHeight` hook to Native Stack Navigator
+#### `HeaderButton`
 
-The `@react-navigation/native-stack` package now exports a `useAnimatedHeaderHeight` hook. It can be used to animate content based on the header height changes - such as when the large title shrinks to a small title on iOS:
+The `HeaderButton` component can be used to render buttons in the header with appropriate styling:
+
+```js
+headerRight: ({ tintColor }) => (
+  <HeaderButton
+    accessibilityLabel="More options"
+    onPress={() => {
+      /* do something */
+    }}
+  >
+    <MaterialCommunityIcons
+      name="dots-horizontal-circle-outline"
+      size={24}
+      color={tintColor}
+    />
+  </HeaderButton>
+),
+```
+
+#### `Label`
+
+The `Label` component can be used to render label text, such as the label in a tab bar button:
 
 ```jsx
-const headerHeight = useAnimatedHeaderHeight();
+<Label>Home</Label>
+```
 
-return (
-  <Animated.View style={{ transform: { translateY: headerHeight } }}>
-    {/* ... */}
-  </Animated.View>
-);
+### Bottom Tab Navigator can now show tabs on the side and top
+
+The `@react-navigation/bottom-tabs` package now supports showing tabs on the side. This will make it easier to build responsive UIs for where you want to show tabs on the bottom on smaller screens and switch to a sidebar on larger screens.
+
+Similarly, showing tabs on the top is also supported which can be useful for Android TV or Apple TV apps.
+
+You can use the `tabBarPosition` option to customize the position of the tabs:
+
+```jsx
+<Tab.Navigator
+  screenOptions={{
+    // highlight-next-line
+    tabBarPosition: 'left',
+  }}
+>
+  {/* ... */}
+</Tab.Navigator>
 ```
 
 ### Bottom Tab Navigator now supports animations
@@ -518,22 +680,38 @@ You can use the `animation` option to customize the animations for the tab trans
 </Tab.Navigator>
 ```
 
-### Bottom Tab Navigator can now show tabs on the side
+### Stack Navigator now supports an `animation` option
 
-The `@react-navigation/bottom-tabs` package now supports showing tabs on the side. This will make it easier to build responsive UIs for where you want to show tabs on the bottom on smaller screens and switch to a sidebar on larger screens.
-
-You can use the `tabBarPosition` option to customize the position of the tabs:
+The `@react-navigation/stack` package now supports an `animation` option to customize the animations for the screen transitions:
 
 ```jsx
-<Tab.Navigator
+<Stack.Navigator
   screenOptions={{
     // highlight-next-line
-    tabBarPosition: 'left',
+    animation: 'slide_from_right',
   }}
 >
   {/* ... */}
-</Tab.Navigator>
+</Stack.Navigator>
 ```
+
+The `animation` option is an alternative to the `TransitionPresets` API, and is intended to make migrating between JS stack and native stack navigators easier.
+
+### Native Stack Navigator now exports a `useAnimatedHeaderHeight` hook
+
+The `@react-navigation/native-stack` package now exports a `useAnimatedHeaderHeight` hook. It can be used to animate content based on the header height changes - such as when the large title shrinks to a small title on iOS:
+
+```jsx
+const headerHeight = useAnimatedHeaderHeight();
+
+return (
+  <Animated.View style={{ transform: { translateY: headerHeight } }}>
+    {/* ... */}
+  </Animated.View>
+);
+```
+
+### Drawer Navigator now
 
 ### The drawer implementation is now available in `react-native-drawer-layout` as a standalone package
 
