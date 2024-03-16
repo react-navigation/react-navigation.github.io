@@ -69,6 +69,40 @@ const linking = {
 };
 ```
 
+### Filtering certain paths
+
+Sometimes we may not want to handle all incoming links. For example, we may want to filter out links meant for authentication (e.g. `expo-auth-session`) or other purposes instead of navigating to a specific screen.
+
+To achieve this, you can use the `filter` option:
+
+```js
+const linking = {
+  prefixes: ['mychat://', 'https://mychat.com'],
+  // highlight-next-line
+  filter: (url) => !url.includes('+expo-auth-session'),
+};
+```
+
+This is not supported on Web as we always need to handle the URL of the page.
+
+### Apps under subpaths
+
+If your app is hosted under a subpath, you can specify the subpath at the top-level of the `config`. For example, if your app is hosted at `https://mychat.com/app`, you can specify the `path` as `app`:
+
+```js
+const linking = {
+  prefixes: ['mychat://', 'https://mychat.com'],
+  config: {
+    // highlight-next-line
+    path: 'app',
+
+    // ...
+  },
+};
+```
+
+It's not possible to specify params here since this doesn't belong to a screen, e.g. `app/:id` won't work.
+
 ## Mapping path to route names
 
 To handle a link, you need to translate it to a valid [navigation state](navigation-state.md) and vice versa. For example, the path `/rooms/chat?user=jane` may be translated to a state object like this:

@@ -230,7 +230,7 @@ function MyTabBar({ state, descriptors, navigation }) {
             accessibilityRole="button"
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
+            testID={options.tabBarButtonTestID}
             onPress={onPress}
             onLongPress={onLongPress}
             style={{ flex: 1 }}
@@ -319,10 +319,6 @@ Style for the badge on the tab icon. You can specify a background color or text 
 
 Accessibility label for the tab button. This is read by the screen reader when the user taps the tab. It's recommended to set this if you don't have a label for the tab.
 
-#### `tabBarTestID`
-
-ID to locate this tab button in tests.
-
 #### `tabBarButton`
 
 Function which returns a React element to render as the tab bar button. It wraps the icon and label. Renders `Pressable` by default.
@@ -332,6 +328,10 @@ You can specify a custom implementation here:
 ```js
 tabBarButton: (props) => <TouchableOpacity {...props} />;
 ```
+
+#### `tabBarButtonTestID`
+
+ID to locate this tab button in tests.
 
 #### `tabBarActiveTintColor`
 

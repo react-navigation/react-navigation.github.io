@@ -20,7 +20,13 @@ import {
   DefaultTheme,
   DarkTheme,
 } from '@react-navigation/native';
-import { Button, View, Text, TouchableOpacity, Appearance } from 'react-native';
+import {
+  Button,
+  View,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -115,7 +121,7 @@ const Drawer = createDrawerNavigator({
 const Navigation = createStaticNavigation(Drawer);
 
 export default function App() {
-  const scheme = Appearance.getColorScheme();
+  const scheme = useColorScheme();
   return <Navigation theme={scheme === 'dark' ? DarkTheme : DefaultTheme} />;
 }
 ```
@@ -125,7 +131,13 @@ export default function App() {
 
 ```js name="useTheme hook" snack version=7
 import * as React from 'react';
-import { Button, View, Text, TouchableOpacity, Appearance } from 'react-native';
+import {
+  Button,
+  View,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+} from 'react-native';
 import {
   NavigationContainer,
   DefaultTheme,
@@ -214,7 +226,7 @@ function Root() {
 }
 
 export default function App() {
-  const scheme = Appearance.getColorScheme();
+  const scheme = useColorScheme();
 
   return (
     <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>

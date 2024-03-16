@@ -69,6 +69,21 @@ const linking = {
 };
 ```
 
+### Filtering certain paths
+
+Sometimes we may not want to handle all incoming links. For example, we may want to filter out links meant for authentication (e.g. `expo-auth-session`) or other purposes instead of navigating to a specific screen.
+
+To achieve this, you can use the `filter` option:
+
+```js
+const linking = {
+  prefixes: ['mychat://', 'https://mychat.com'],
+  filter: (url) => !url.includes('+expo-auth-session'),
+};
+```
+
+This is not supported on Web as we always need to handle the URL of the page.
+
 ## Mapping path to route names
 
 To handle a link, you need to translate it to a valid [navigation state](navigation-state.md) and vice versa. For example, the path `/rooms/chat?user=jane` may be translated to a state object like this:

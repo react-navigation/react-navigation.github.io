@@ -134,7 +134,7 @@ const Stack = createNativeStackNavigator({
 </TabItem>
 </Tabs>
 
-When you pass a function, it'll receive the [`route`](route-object.md) and [`navigation`](navigation-object.md):
+When you pass a function, it'll receive the [`route`](route-object.md), [`navigation`](navigation-object.md) and [`theme`](themes.md) as arguments:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -144,7 +144,7 @@ const Stack = createNativeStackNavigator({
   screens: {
     Profile: {
       screen: ProfileScreen,
-      options: ({ route, navigation }) => ({
+      options: ({ route, navigation, theme }) => ({
         title: route.params.userId,
       }),
     },

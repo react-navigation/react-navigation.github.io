@@ -246,6 +246,16 @@ const Tabs = createBottomTabNavigator({
 </Tabs>
 Now, if you have a stack with the history `Home > Profile (userId: bob) > Settings` and you call `navigate(Profile, { userId: 'alice' })`, the resulting screens will be `Home > Profile (userId: bob) > Settings > Profile (userId: alice)` since it'll add a new `Profile` screen as no matching screen was found.
 
+### `navigateDeprecated`
+
+:::warning
+
+This method is deprecated and will be removed in a future release. It only exists for compatibility purposes. Use `navigate` instead.
+
+:::
+
+TODO
+
 ### `goBack`
 
 The `goBack` method lets us go back to the previous screen in the navigator.

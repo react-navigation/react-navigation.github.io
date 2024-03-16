@@ -225,14 +225,14 @@ const RootStack = createNativeStackNavigator({
 });
 ```
 
-When you pass a function, it'll receive the [`route`](route-object.md) and [`navigation`](navigation-object.md):
+When you pass a function, it'll receive the [`route`](route-object.md), [`navigation`](navigation-object.md) and [`theme`](themes.md) as arguments:
 
 ```js
 const RootStack = createNativeStackNavigator({
   screens: {
     Profile: {
       screen: ProfileScreen,
-      options: ({ route, navigation }) => ({
+      options: ({ route, navigation, theme }) => ({
         title: route.params.userId,
       }),
     },

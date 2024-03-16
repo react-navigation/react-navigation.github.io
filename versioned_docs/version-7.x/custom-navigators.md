@@ -145,7 +145,9 @@ import {
 
 // ...
 
-export const createMyNavigator = createNavigatorFactory(TabNavigator);
+export function createMyNavigator(config) {
+  return createNavigatorFactory(TabNavigator)(config);
+}
 ```
 
 Then it can be used like this:
@@ -181,19 +183,22 @@ import {
   View,
   Text,
   Pressable,
-  StyleProp,
-  ViewStyle,
+  type StyleProp,
+  type ViewStyle,
   StyleSheet,
 } from 'react-native';
 import {
   createNavigatorFactory,
-  DefaultNavigatorOptions,
-  ParamListBase,
   CommonActions,
-  TabActionHelpers,
-  TabNavigationState,
+  type DefaultNavigatorOptions,
+  type NavigatorTypeBagBase,
+  type ParamListBase,
+  type StaticConfig,
+  type TabActionHelpers,
+  type TabNavigationState,
   TabRouter,
-  TabRouterOptions,
+  type TabRouterOptions,
+  type TypedNavigator,
   useNavigationBuilder,
 } from '@react-navigation/native';
 
@@ -298,12 +303,30 @@ function TabNavigator({
   );
 }
 
-export default createNavigatorFactory<
-  TabNavigationState<ParamListBase>,
-  TabNavigationOptions,
-  TabNavigationEventMap,
-  typeof TabNavigator
->(TabNavigator);
+export function createMyNavigator<
+  ParamList extends ParamListBase,
+  NavigatorID extends string | undefined = undefined,
+  TypeBag extends NavigatorTypeBagBase = {
+    ParamList: ParamList;
+    NavigatorID: NavigatorID;
+    State: TabNavigationState<ParamList>;
+    ScreenOptions: TabNavigationOptions;
+    EventMap: TabNavigationEventMap;
+    NavigationList: {
+      [RouteName in keyof ParamList]: TabNavigationProp<
+        ParamList,
+        RouteName,
+        NavigatorID
+      >;
+    };
+    Navigator: typeof TabNavigator;
+  },
+  Config extends StaticConfig<TypeBag> | undefined =
+    | StaticConfig<TypeBag>
+    | undefined,
+>(config?: Config): TypedNavigator<TypeBag, Config> {
+  return createNavigatorFactory(TabNavigator)(config);
+}
 ```
 
 ## Extending Navigators
@@ -346,7 +369,9 @@ function BottomTabNavigator({
   );
 }
 
-export default createNavigatorFactory(BottomTabNavigator);
+export function createMyNavigator(config) {
+  return createNavigatorFactory(TabNavigator)(config);
+}
 ```
 
 Now, we can customize it to add additional functionality or change the behavior. For example, use a [custom router](custom-routers.md) instead of the default `TabRouter`:

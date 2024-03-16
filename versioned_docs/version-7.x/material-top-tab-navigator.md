@@ -274,7 +274,7 @@ function MyTabBar({ state, descriptors, navigation, position }) {
             accessibilityRole="button"
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
+            testID={options.tabBarButtonTestID}
             onPress={onPress}
             onLongPress={onLongPress}
             style={{ flex: 1 }}
@@ -378,7 +378,7 @@ Style object for the tab bar indicator.
 
 Style object for the view containing the tab bar indicator.
 
-#### `tabBarTestID`
+#### `tabBarButtonTestID`
 
 ID to locate this tab button in tests.
 

@@ -579,7 +579,7 @@ Only supported on Android.
 
 Style object for the scene content.
 
-#### `customAnimationOnGesture`
+#### `animationMatchesGesture`
 
 Whether the gesture to dismiss should use animation provided to `animation` prop. Defaults to `false`.
 

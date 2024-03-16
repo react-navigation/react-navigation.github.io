@@ -336,7 +336,7 @@ import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 ## Using the operating system preferences
 
-On iOS 13+ and Android 10+, you can get user's preferred color scheme (`'dark'` or `'light'`) with the ([Appearance API](https://reactnative.dev/docs/appearance)).
+On iOS 13+ and Android 10+, you can get user's preferred color scheme (`'dark'` or `'light'`) with the ([`useColorScheme` hook](https://reactnative.dev/docs/usecolorscheme)).
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -351,7 +351,13 @@ import {
   DarkTheme,
   useTheme,
 } from '@react-navigation/native';
-import { Button, View, Text, TouchableOpacity, Appearance } from 'react-native';
+import {
+  Button,
+  View,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+} from 'react-native';
 // codeblock-focus-end
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -437,7 +443,7 @@ const Navigation = createStaticNavigation(Drawer);
 
 export default function App() {
   // highlight-next-line
-  const scheme = Appearance.getColorScheme();
+  const scheme = useColorScheme();
 
   // highlight-next-line
   return <Navigation theme={scheme === 'dark' ? DarkTheme : DefaultTheme} />;
@@ -452,7 +458,13 @@ export default function App() {
 ```js name="Operating system color theme" snack version=7
 import * as React from 'react';
 // codeblock-focus-start
-import { Button, View, Text, TouchableOpacity, Appearance } from 'react-native';
+import {
+  Button,
+  View,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+} from 'react-native';
 import {
   NavigationContainer,
   DefaultTheme,
@@ -538,7 +550,7 @@ function Root() {
 
 export default function App() {
   // highlight-next-line
-  const scheme = Appearance.getColorScheme();
+  const scheme = useColorScheme();
 
   return (
     // highlight-next-line
@@ -577,7 +589,13 @@ import {
   DarkTheme,
   useTheme,
 } from '@react-navigation/native';
-import { Button, View, Text, TouchableOpacity, Appearance } from 'react-native';
+import {
+  Button,
+  View,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+} from 'react-native';
 // codeblock-focus-end
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -664,7 +682,7 @@ const Drawer = createDrawerNavigator({
 const Navigation = createStaticNavigation(Drawer);
 
 export default function App() {
-  const scheme = Appearance.getColorScheme();
+  const scheme = useColorScheme();
 
   return <Navigation theme={scheme === 'dark' ? DarkTheme : DefaultTheme} />;
 }
@@ -676,7 +694,13 @@ export default function App() {
 ```js name="System themes" snack version=7
 import * as React from 'react';
 // codeblock-focus-start
-import { Button, View, Text, TouchableOpacity, Appearance } from 'react-native';
+import {
+  Button,
+  View,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+} from 'react-native';
 import {
   NavigationContainer,
   DefaultTheme,
@@ -764,7 +788,7 @@ function Root() {
 }
 
 export default function App() {
-  const scheme = Appearance.getColorScheme();
+  const scheme = useColorScheme();
 
   return (
     <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>

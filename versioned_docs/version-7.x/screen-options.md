@@ -141,7 +141,7 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-You can also pass a function to `options`. The function will receive the [`navigation` object](navigation-object.md) and the [`route` object](route-object.md) for that screen. This can be useful if you want to perform navigation in your options:
+You can also pass a function to `options`. The function will receive the [`navigation` object](navigation-object.md) and the [`route` object](route-object.md) for that screen, as well as the [`theme` object](themes.md). This can be useful if you want to perform navigation in your options:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>

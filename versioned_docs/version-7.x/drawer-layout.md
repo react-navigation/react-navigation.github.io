@@ -22,7 +22,7 @@ npm install react-native-drawer-layout
 
 Then, you need to install and configure the libraries that are required by the drawer:
 
-1. First, install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
+1. First, install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) (at least version 2 or 3).
 
    If you have a Expo managed project, in your project directory, run:
 
@@ -36,9 +36,9 @@ Then, you need to install and configure the libraries that are required by the d
    npm install react-native-gesture-handler react-native-reanimated
    ```
 
-   The Drawer supports both Reanimated 1 and the latest version of Reanimated. If you want to use the latest version of Reanimated, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
+2. Configure the Reanimated Babel Plugin in your project following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
-2. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+3. To finalize the installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
 
    ```js
    import 'react-native-gesture-handler';
@@ -50,7 +50,7 @@ Then, you need to install and configure the libraries that are required by the d
 
    :::
 
-3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+4. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
 ```bash
 npx pod-install ios

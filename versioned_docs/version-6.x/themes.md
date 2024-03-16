@@ -79,7 +79,7 @@ import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 ## Using the operating system preferences
 
-On iOS 13+ and Android 10+, you can get user's preferred color scheme (`'dark'` or `'light'`) with the ([Appearance API](https://reactnative.dev/docs/appearance)).
+On iOS 13+ and Android 10+, you can get user's preferred color scheme (`'dark'` or `'light'`) with the ([`useColorScheme` hook](https://reactnative.dev/docs/usecolorscheme)).
 
 <samp id="system-themes" />
 

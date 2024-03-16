@@ -380,7 +380,20 @@ const options: StackNavigationOptions = {
 
 Similarly, you can import `DrawerNavigationOptions` from `@react-navigation/drawer`, `BottomTabNavigationOptions` from `@react-navigation/bottom-tabs` etc.
 
-When using the function form of `options` and `screenOptions`, you can annotate the arguments with the same type you used to annotate the `navigation` and `route` objects from the [Type checking screens](#type-checking-screens) section.
+When using the function form of `options` and `screenOptions`, you can annotate the arguments with a type exported from the navigator, e.g. `StackOptionsArgs` for `@react-navigation/stack`, `DrawerOptionsArgs` for `@react-navigation/drawer`, `BottomTabOptionsArgs` for `@react-navigation/bottom-tabs` etc.:
+
+```ts
+import type {
+  StackNavigationOptions,
+  StackOptionsArgs,
+} from '@react-navigation/stack';
+
+const options = ({ route }: StackOptionsArgs): StackNavigationOptions => {
+  return {
+    headerTitle: route.name,
+  };
+};
+```
 
 ### Annotating `ref` on `NavigationContainer`
 

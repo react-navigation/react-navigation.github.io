@@ -25,13 +25,15 @@ Due to backward compatibility reasons, React Navigation 5 and 6 support navigati
 
 Due to these issues, we have a special API to navigate to a nested screen (`navigation.navigate(ParentScreenName, { screen: ScreenName })`).
 
-From these release, this is no longer the default behavior. If you're relying on this behavior in your app, you can pass the `navigationInChildEnabled` prop to `NavigationContainer` to keep the behavior until you are able to migrate:
+From these release, this is no longer the default behavior. If you're relying on this behavior in your app, you can pass the [`navigationInChildEnabled`](navigation-container.md#navigationinchildenabled) prop to `NavigationContainer` to keep the behavior until you are able to migrate:
 
 ```jsx
 <NavigationContainer navigationInChildEnabled>{/* ... */}</NavigationContainer>
 ```
 
 The `navigationInChildEnabled` prop will be removed in the next major.
+
+See [`navigate`](navigation-object.md#navigate) for updated usage.
 
 ### The `navigate` method no longer goes back, use `popTo` instead
 
@@ -49,9 +51,11 @@ The methods now behave as follows:
 - `navigate(screenName)` will stay on the current screen if the screen is already focused, otherwise push a new screen to the stack.
 - `popTo(screenName)` will go back to the screen if it exists in the stack, otherwise pop the current screen and add this screen to the stack.
 
+See [`popTo`](stack-actions.md#popto) for more details.
+
 To achieve a behavior similar to before with `navigate`, you can use the [`getId`](screen.md#getid) prop in which case it'll go to the screen with the matching ID and push or pop screens accordingly.
 
-To help with the migration, we have added a new method called `navigateDeprecated` which will behave like the old `navigate` method. You can replace your current `navigate` calls with `navigateDeprecated` to gradually migrate to the new behavior:
+To help with the migration, we have added a new method called `navigateDeprecated` which will behave like the old `navigate` method. You can replace your current `navigate` calls with [`navigateDeprecated`](navigation-object.md#navigatedeprecated) to gradually migrate to the new behavior:
 
 ```diff lang=js
 - navigation.navigate('SomeScreen');
@@ -79,6 +83,8 @@ library.
 
 So the `key` option is now being removed from the `navigate` action.
 
+See [`navigate`](navigation-object.md#navigate) for updated usage.
+
 ### The `onReady` callback on `NavigationContainer` now fires only when there are navigators rendered
 
 Previously, the `onReady` prop and `navigationRef.isReady()` worked slightly differently:
@@ -91,6 +97,8 @@ This is important to know since if no navigator is rendered, we can't dispatch a
 This changes `onReady` to work similar to `navigationRef.isReady()`. The `onReady` callback will now fire only when there are navigators rendered - reflecting the value of `navigationRef.isReady()`.
 
 This change is not breaking for most users, so you may not need to do anything.
+
+See [`onReady`](navigation-container.md#onready) for usage.
 
 ### The `independent` prop on `NavigationContainer` is removed in favor of `NavigationIndependentTree` component
 
@@ -115,6 +123,8 @@ So we've removed this prop instead of a `NavigationIndependentTree` component wh
 ```
 
 This way, the responsibility no longer lies on the miniapp developer, but on the parent app. It's also harder for beginners to accidentally add this.
+
+See [Independent navigation containers](navigation-container.md#independent-navigation-containers) for usage.
 
 ### The `theme` prop now accepts a `fonts` property
 
@@ -160,6 +170,8 @@ const config = {
 };
 ```
 
+See [Configuring links](configuring-links.md) for usage of the linking config.
+
 ### The `Link` component and `useLinkProps` hook now use screen names instead of paths
 
 Previously, the `Link` component and `useLinkProps` hook were designed to work with path strings via the `to` prop. But it had few issues:
@@ -183,6 +195,8 @@ or
 
 With this change, you'd now have full type-safety when using the `Link` component given that you have [configured the global type](typescript.md#specifying-default-types-for-usenavigation-link-ref-etc).
 
+See [`Link`](link.md) and [`useLinkProps`](use-link-props.md) for usage.
+
 ### The `useLinkBuilder` hooks now returns an object instead of a function
 
 Previously, the `useLinkBuilder` hooks returned a function to build a `href` for a screen - which is primarily useful for building custom navigators. Now, it returns an object with `buildHref` and `buildAction` methods:
@@ -197,6 +211,8 @@ const action = buildAction('/details?foo=42'); // { type: 'NAVIGATE', payload: {
 The `buildHref` method acts the same as the previously returned function. The new `buildAction` method can be used to build a navigation action from a `href` string.
 
 Note that this hook is intended to be primarily used by custom navigators and not by end users. For end users, the `Link` component and `useLinkProps` are the recommended way to navigate.
+
+See [`useLinkBuilder`](use-link-builder.md) for usage.
 
 ### Custom navigators now require more type information
 
@@ -234,6 +250,8 @@ Custom navigators now require more type information to work correctly so that we
 +   return createNavigatorFactory(MyNavigator)(config);
 + }
 ```
+
+See [Custom navigators](custom-navigators.md) for usage.
 
 ### The flipper devtools plugin is now removed
 
@@ -329,9 +347,26 @@ Now, screens pushed on top of modals are automatically shown as modals to avoid 
 />
 ```
 
+See [Stack Navigator](stack-navigator.md#presentation) and [Native Stack Navigator](native-stack-navigator.md#presentation) docs for usage.
+
 ### `animationEnabled` option is removed in favor of `animation` option in Stack Navigator
 
-TODO
+Previously, `animationEnabled: false` was used to disable the animation for the screen transition in Stack Navigator.
+
+There's now a new `animation` prop to configure animations similar to the Native Stack. So you can now use `animation: 'none'` to disable the animation instead:
+
+```diff lang=js
+<Stack.Screen
+  name="Details"
+  component={DetailsScreen}
+  options={{
+-     animationEnabled: false,
++     animation: 'none',
+  }}
+/>
+```
+
+See [Stack Navigator animation](stack-navigator.md#animation) for usage.
 
 ### `customAnimationOnGesture` is renamed to `animationMatchesGesture` in Native Stack Navigator
 
@@ -342,6 +377,8 @@ The `customAnimationOnGesture` option in Native Stack Navigator is renamed to `a
 + <Stack.Navigator options={{ animationMatchesGesture: true }}>
 ```
 
+See [Native Stack Navigator](native-stack-navigator.md#animationmatchesgesture) for usage.
+
 ### Material Top Tab Navigator no longer requires installing `react-native-tab-view`
 
 Previously, `@react-navigation/material-top-tabs` required installing `react-native-tab-view` as a dependency in the project. We have now moved this package to the React Navigation monorepo and able to coordinate the releases together, so it's no longer necessary to install it separately.
@@ -349,6 +386,8 @@ Previously, `@react-navigation/material-top-tabs` required installing `react-nat
 If you use `@react-navigation/material-top-tabs` and don't use `react-native-tab-view` anywhere else in your project, you can remove it from your dependencies after upgrading.
 
 If you need to enforce a specific version of `react-native-tab-view` for some reason, we recommend using [Yarn resolutions](https://classic.yarnpkg.com/lang/en/docs/selective-version-resolutions/) or [npm overrides](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#overrides) to do so.
+
+See [Material Top Tab Navigator](material-top-tab-navigator.md) for usage.
 
 ### Material Bottom Tab Navigator now lives in `react-native-paper` package
 
@@ -361,18 +400,22 @@ If you are using `@react-navigation/material-bottom-tabs` in your project, you c
 + import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 ```
 
+See [Material Bottom Tab Navigator](https://callstack.github.io/react-native-paper/docs/guides/bottom-navigation/) for usage.
+
 ### The `unmountOnBlur` option is removed in favor of `popToTopOnBlur` in Bottom Tab Navigator
 
 TODO
 
-### The `tabBarTestID` option is renamed to `tabBarButtonTestID` in Bottom Tab Navigator
+### The `tabBarTestID` option is renamed to `tabBarButtonTestID` in Bottom Tab Navigator and Material Top Tab Navigator
 
-The `tabBarTestID` option in Bottom Tab Navigator is renamed to `tabBarButtonTestID` to better reflect its purpose. If you are using `tabBarTestID` in your project, you can rename it to `tabBarButtonTestID`:
+The `tabBarTestID` option in `@react-navigation/bottom-tabs` and `@react-navigation/material-top-tabs` is renamed to `tabBarButtonTestID` to better reflect its purpose. If you are using `tabBarTestID` in your project, you can rename it to `tabBarButtonTestID`:
 
 ```diff lang=js
 - <Tab.Navigator tabBarOptions={{ tabBarTestID: 'test-id' }}>
 + <Tab.Navigator tabBarOptions={{ tabBarButtonTestID: 'test-id' }}>
 ```
+
+See [Bottom Tab Navigator](bottom-tab-navigator.md#tabbarbuttontestid) and [Material Top Tab Navigator](material-top-tab-navigator.md#tabbarbuttontestid) docs for usage.
 
 ### Drawer Navigator now requires Reanimated 2 or 3 on native platforms
 
@@ -382,9 +425,13 @@ If you are using Reanimated 1 in your project, you'll need to upgrade to Reanima
 
 If you're using Drawer Navigator on the Web, it'll now use CSS transitions instead of Reanimated for a smaller bundle size.
 
+See [Drawer Navigator](drawer-navigator.md) for usage.
+
 ### React Native Tab View now has a new API to specify various options
 
 TODO
+
+See [React Native Tab View](tab-view.md) for usage.
 
 ## New features
 
@@ -464,6 +511,8 @@ The `options` callback now receives the `theme` object to allow customizing the 
 />
 ```
 
+See [Screen options](screen-options.md) for usage.
+
 ### Linking config now supports a top-level `path` property
 
 The linking configuration now supports a top-level `path` configuration to define the base path for all the screens in the navigator:
@@ -483,6 +532,8 @@ const linking = {
 ```
 
 This can be useful if your app lives under a subpath on the web. For example, if your app lives under `https://mysite.com/app`, you can define the `path` as `app` and the `Details` screen will be accessible at `https://mysite.com/app/details/42`.
+
+See [Configuring links](configuring-links.md#apps-under-subpaths) for usage.
 
 ### There's a new `usePreventRemove` hook that works with Native Stack Navigator
 
@@ -680,6 +731,8 @@ You can use the `animation` option to customize the animations for the tab trans
 </Tab.Navigator>
 ```
 
+See [Bottom Tab Navigator animation](bottom-tab-navigator.md#animation) for usage.
+
 ### Stack Navigator now supports an `animation` option
 
 The `@react-navigation/stack` package now supports an `animation` option to customize the animations for the screen transitions:
@@ -696,6 +749,8 @@ The `@react-navigation/stack` package now supports an `animation` option to cust
 ```
 
 The `animation` option is an alternative to the `TransitionPresets` API, and is intended to make migrating between JS stack and native stack navigators easier.
+
+See [Stack Navigator animation](stack-navigator.md#animation) for usage.
 
 ### Native Stack Navigator now exports a `useAnimatedHeaderHeight` hook
 
@@ -722,3 +777,5 @@ You can install it with:
 ```bash npm2yarn
 npm install react-native-drawer-layout
 ```
+
+See [`react-native-drawer-layout`](drawer-layout.md) for usage.

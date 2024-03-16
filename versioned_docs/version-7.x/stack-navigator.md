@@ -255,10 +255,6 @@ This is shortcut option which configures several options to configure the style 
 
 See [Transparent modals](#transparent-modals) for more details on how to customize `transparentModal`.
 
-#### `animationEnabled`
-
-Whether transition animation should be enabled on the screen. If you set it to `false`, the screen won't animate when pushing or popping. Defaults to `true` on iOS and Android, `false` on Web.
-
 #### `animationTypeForReplace`
 
 The type of animation to use when this screen replaces another screen. It takes the following values:
@@ -645,6 +641,22 @@ function MyStack() {
 ```
 
 ## Animations
+
+You can specify the `animation` option to customize the transition animation for screens being pushed or popped.
+
+Supported values for `animation` are:
+
+- `default` - Default animation based on the platform and OS version.
+- `fade` - Simple fade animation for dialogs.
+- `fade_from_bottom` - Standard Android-style fade in from the bottom for Android Oreo.
+- `reveal_from_bottom` - Standard Android-style reveal from the bottom for Android Pie.
+- `scale_from_center` - Scale animation from the center.
+- `slide_from_right` - Standard iOS-style slide in from the right.
+- `slide_from_left` - Similar to `slide_from_right`, but the screen will slide in from the left.
+- `slide_from_bottom` - Slide animation from the bottom for modals and bottom sheets.
+- `none` - The screens are pushed or popped immediately without any animation.
+
+By default, Android and iOS use the `default` animation and other platforms use `none`.
 
 ### Animation related options
 
