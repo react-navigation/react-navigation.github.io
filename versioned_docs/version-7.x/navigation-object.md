@@ -10,14 +10,18 @@ import TabItem from '@theme/TabItem';
 The `navigation` object contains various convenience functions that dispatch navigation actions. It looks like this:
 
 - `navigation`
-  - `navigate` - go to another screen, figures out the action it needs to take to do it
-  - `reset` - wipe the navigator state and replace it with a new route
-  - `goBack` - close active screen and move back in the stack
-  - `setParams` - make changes to route's params
+  - `navigate` - go to the given screen, this will behave differently based on the navigator
+  - `goBack` - go back to the previous screen, this will pop the current screen when used in a stack
+  - `reset` - replace the navigation state of the navigator with the given state
+  - `setParams` - merge new params onto the route's params
   - `dispatch` - send an action object to update the [navigation state](navigation-state.md)
   - `setOptions` - update the screen's options
   - `isFocused` - check whether the screen is focused
-  - `addListener` - subscribe to updates to events from the navigators
+  - `canGoBack` - check whether it's possible to go back from the current screen
+  - `getState` - get the navigation state of the navigator
+  - `getParent` - get the navigation object of the parent screen, if any
+  - `addListener` - subscribe to events for the screen
+  - `removeListener` - unsubscribe from events for the screen
 
 The `navigation` object can be accessed inside any screen component with the [`useNavigation`](use-navigation.md) hook. It's also passed as a prop only to screens components defined with the dynamic API.
 
