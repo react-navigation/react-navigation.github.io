@@ -658,6 +658,8 @@ Supported values for `animation` are:
 
 By default, Android and iOS use the `default` animation and other platforms use `none`.
 
+If you need more control over the animation, you can customize individual parts of the animation using the various animation-related options:
+
 ### Animation related options
 
 Stack Navigator exposes various options to configure the transition animation when a screen is added or removed. These transition animations can be customized on a per-screen basis by specifying the options in the `options` prop for each screen.
