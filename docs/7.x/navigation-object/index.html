@@ -14,7 +14,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="React Navigation" href="/opensearch.xml">
 
 <script src="/js/snack-helpers.js"></script><link rel="stylesheet" href="/assets/css/styles.29e0703f.css">
-<script src="/assets/js/runtime~main.c1db18cf.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.5af26082.js" defer="defer"></script>
 <script src="/assets/js/main.c638dca1.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -22,14 +22,18 @@
 <ul>
 <li><code>navigation</code>
 <ul>
-<li><code>navigate</code> - go to another screen, figures out the action it needs to take to do it</li>
-<li><code>reset</code> - replace the navigation state of the navigator to the given state</li>
-<li><code>goBack</code> - close active screen and move back in the stack</li>
-<li><code>setParams</code> - make changes to route&#x27;s params</li>
+<li><code>navigate</code> - go to the given screen, this will behave differently based on the navigator</li>
+<li><code>goBack</code> - go back to the previous screen, this will pop the current screen when used in a stack</li>
+<li><code>reset</code> - replace the navigation state of the navigator with the given state</li>
+<li><code>setParams</code> - merge new params onto the route&#x27;s params</li>
 <li><code>dispatch</code> - send an action object to update the <a href="/docs/7.x/navigation-state">navigation state</a></li>
 <li><code>setOptions</code> - update the screen&#x27;s options</li>
 <li><code>isFocused</code> - check whether the screen is focused</li>
-<li><code>addListener</code> - subscribe to updates to events from the navigators</li>
+<li><code>canGoBack</code> - check whether it&#x27;s possible to go back from the current screen</li>
+<li><code>getState</code> - get the navigation state of the navigator</li>
+<li><code>getParent</code> - get the navigation object of the parent screen, if any</li>
+<li><code>addListener</code> - subscribe to events for the screen</li>
+<li><code>removeListener</code> - unsubscribe from events for the screen</li>
 </ul>
 </li>
 </ul>
