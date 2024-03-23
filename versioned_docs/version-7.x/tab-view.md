@@ -8,9 +8,9 @@ React Native Tab View is a cross-platform Tab View component for React Native im
 
 It follows material design guidelines by default, but you can also use your own custom tab bar or position the tab bar at the bottom.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <img src="/assets/libraries/tab-view.gif" width="360px" alt="React Native Tab View Demo" />
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/tab-view.mp4" />
+</video>
 
 This package doesn't integrate with React Navigation. If you want to integrate the tab view with React Navigation's navigation system, e.g. want to show screens in the tab bar and be able to navigate between them using `navigation.navigate` etc, use [Material Top Tab Navigator](material-top-tab-navigator.md) instead.
 
@@ -40,11 +40,13 @@ We're done! Now you can build and run the app on your device/simulator.
 
 ## Quick start
 
-```js
+```js name="React Native Tab View" snack version=7
+// codeblock-focus-start
 import * as React from 'react';
 import { View, useWindowDimensions } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
+// codeblock-focus-end
 const FirstRoute = () => (
   <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
 );
@@ -53,19 +55,20 @@ const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
 );
 
+// codeblock-focus-start
 const renderScene = SceneMap({
   first: FirstRoute,
   second: SecondRoute,
 });
 
+const routes = [
+  { key: 'first', title: 'First' },
+  { key: 'second', title: 'Second' },
+];
+
 export default function TabViewExample() {
   const layout = useWindowDimensions();
-
   const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: 'first', title: 'First' },
-    { key: 'second', title: 'Second' },
-  ]);
 
   return (
     <TabView
@@ -76,9 +79,8 @@ export default function TabViewExample() {
     />
   );
 }
+// codeblock-focus-end
 ```
-
-[Try this example on Snack](https://snack.expo.io/@satya164/react-native-tab-view-quick-start)
 
 ## More examples on Snack
 
