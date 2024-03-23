@@ -10,6 +10,15 @@
   --primary-saturation: 53.2%;
   --primary-lightness: 50.2%;
 
+  --ifm-font-family-monospace: ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, Liberation Mono, Courier New, monospace;
+  --ifm-font-family-base: ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+    Noto Color Emoji;
+
+  --ifm-code-font-size: 85%;
+
   --ifm-color-primary: hsl(
     var(--primary-hue),
     var(--primary-saturation),
@@ -192,10 +201,41 @@ samp {
   display: none;
 }
 
+.theme-code-block:has(+ .snack-sample-link) {
+  margin-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.theme-code-block + .snack-sample-link {
+  display: block;
+  font-size: var(--ifm-code-font-size);
+  text-align: right;
+  margin-top: 0;
+  margin-bottom: var(--ifm-leading);
+  padding: calc(var(--ifm-pre-padding) / 2) var(--ifm-pre-padding);
+  background-color: #f6f8fa;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: var(--ifm-color-gray-200);
+  border-bottom-left-radius: var(--ifm-pre-border-radius);
+  border-bottom-right-radius: var(--ifm-pre-border-radius);
+  box-shadow: var(--ifm-global-shadow-lw);
+}
+
+[data-theme='dark'] .theme-code-block + .snack-sample-link {
+  background-color: #282a35;
+  border-top-color: rgba(255, 255, 255, 0.07);
+}
+
 .snack-sample-link {
   display: block;
   margin-bottom: 25px;
   margin-top: -8px;
+}
+
+.snack-sample-link svg {
+  margin-left: 8px;
 }
 
 /**

@@ -282,7 +282,7 @@ export default function Pre({
           target="_blank"
           href={url.href}
         >
-          Try this example on Snack{' '}
+          Try on <b>Snack</b>
           <svg
             width="14px"
             height="14px"
