@@ -155,9 +155,9 @@ function appendSnackLink() {
     link.target = '_blank';
 
     if (label) {
-      link.innerHTML = `Try the "${label}" example on Snack ${openIcon}`;
+      link.innerHTML = `Try the "${label}" example on <b>Snack</b>${openIcon}`;
     } else {
-      link.innerHTML = `Try this example on Snack ${openIcon}`;
+      link.innerHTML = `Try this example on <b>Snack</b>${openIcon}`;
     }
 
     // Add the href and append the link element if we have some code
