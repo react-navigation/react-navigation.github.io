@@ -189,8 +189,10 @@ article video {
   max-width: 100%;
   width: 300px;
   height: auto;
-  margin: 16px 0;
   vertical-align: top;
+  margin: var(--ifm-leading) 0;
+  border-radius: var(--ifm-pre-border-radius);
+  box-shadow: var(--ifm-global-shadow-lw);
 }
 
 article video:has(+ video) {
