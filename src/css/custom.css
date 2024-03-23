@@ -196,7 +196,11 @@ article video {
 }
 
 article video:has(+ video) {
-  margin-right: 32px;
+  margin-right: var(--ifm-leading);
+}
+
+article p + video {
+  margin-top: 0;
 }
 
 samp {
