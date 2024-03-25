@@ -331,12 +331,7 @@ Similar to `NavigationContainer`, the component returned by `createStaticNavigat
    }
    ```
 
-   Automatic path generation works as follows:
-
-   - Screens with an explicit `linking` property are not used for path generation and will be added as-is.
-   - Screen names will be converted from `PascalCase` to `kebab-case` to use as the path (e.g. `NewsFeed` -> `news-feed`).
-   - Unless a screen has explicit empty path (`path: ''`) to use for the homepage, the first leaf screen encountered will be used as the homepage.
-   - Path generation only handles leaf screens, i.e. no path is generated for screens containing nested navigators. It's still possible to specify a path for them with an explicit `linking` property.
+   See [How does automatic path generation work](configuring-links.md#how-does-automatic-path-generation-work) for more details.
 
 ## `createComponentForStaticNavigation`
 
