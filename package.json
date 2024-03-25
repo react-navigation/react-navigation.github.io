@@ -20,7 +20,7 @@
     "@docusaurus/preset-classic": "3.0.0",
     "@docusaurus/remark-plugin-npm2yarn": "3.0.0",
     "@octokit/graphql": "^7.0.2",
-    "@react-navigation/core": "^7.0.0-alpha.2",
+    "@react-navigation/core": "^7.0.0-alpha.17",
     "escape-html": "^1.0.3",
     "mkdirp": "^3.0.1",
     "netlify-plugin-cache": "^1.0.3",

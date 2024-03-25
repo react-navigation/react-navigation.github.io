@@ -2583,28 +2583,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/core@npm:^7.0.0-alpha.2":
-  version: 7.0.0-alpha.6
-  resolution: "@react-navigation/core@npm:7.0.0-alpha.6"
+"@react-navigation/core@npm:^7.0.0-alpha.17":
+  version: 7.0.0-alpha.17
+  resolution: "@react-navigation/core@npm:7.0.0-alpha.17"
   dependencies:
-    "@react-navigation/routers": "npm:^7.0.0-alpha.4"
+    "@react-navigation/routers": "npm:^7.0.0-alpha.6"
     escape-string-regexp: "npm:^4.0.0"
-    nanoid: "npm:3.3.6"
+    nanoid: "npm:3.3.7"
     query-string: "npm:^7.1.3"
     react-is: "npm:^18.2.0"
     use-latest-callback: "npm:^0.1.9"
   peerDependencies:
     react: "*"
-  checksum: 14bf0e9637602d94d13ff805ecdf84cda78cb54ff3a73fbad6bd3851f068ff181e9e099fa5cf55034359cbd645c8a0dcad21188201fa642da4ca863172b212ef
+  checksum: d0e2f50a26b8ef390358cf795916fdcb412c44a17437eb884106482164cb213b3d1bb6f62a4a3d71a0275fe26766b962b0fd9ccf4c531a6915c266f5011586cb
   languageName: node
   linkType: hard
 
-"@react-navigation/routers@npm:^7.0.0-alpha.4":
-  version: 7.0.0-alpha.4
-  resolution: "@react-navigation/routers@npm:7.0.0-alpha.4"
+"@react-navigation/routers@npm:^7.0.0-alpha.6":
+  version: 7.0.0-alpha.6
+  resolution: "@react-navigation/routers@npm:7.0.0-alpha.6"
   dependencies:
-    nanoid: "npm:3.3.6"
-  checksum: 9126eb7059823577d2fe94cc03b28f60bc668bebe017c47ab4ea075bec81f1b1b49b30b2f98b581458727fe0cde3ce5140c099699fe8b8a13165470d55e1898e
+    nanoid: "npm:3.3.7"
+  checksum: e0106a21c031bc2c5a3a773252147c8e75017a0362cbd8cc6419d0f66079e5b440b6663b993c5c6a0634afb590379b4436dd8e3a1ab966f69210c4a4ad476522
   languageName: node
   linkType: hard
 
@@ -8723,16 +8723,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:3.3.6":
-  version: 3.3.6
-  resolution: "nanoid@npm:3.3.6"
-  bin:
-    nanoid: bin/nanoid.cjs
-  checksum: 606b355960d0fcbe3d27924c4c52ef7d47d3b57208808ece73279420d91469b01ec1dce10fae512b6d4a8c5a5432b352b228336a8b2202a6ea68e67fa348e2ee
-  languageName: node
-  linkType: hard
-
-"nanoid@npm:^3.3.6":
+"nanoid@npm:3.3.7, nanoid@npm:^3.3.6":
   version: 3.3.7
   resolution: "nanoid@npm:3.3.7"
   bin:
@@ -10166,7 +10157,7 @@ __metadata:
     "@docusaurus/preset-classic": "npm:3.0.0"
     "@docusaurus/remark-plugin-npm2yarn": "npm:3.0.0"
     "@octokit/graphql": "npm:^7.0.2"
-    "@react-navigation/core": "npm:^7.0.0-alpha.2"
+    "@react-navigation/core": "npm:^7.0.0-alpha.17"
     escape-html: "npm:^1.0.3"
     markdownlint: "npm:^0.32.1"
     markdownlint-cli2: "npm:^0.11.0"
