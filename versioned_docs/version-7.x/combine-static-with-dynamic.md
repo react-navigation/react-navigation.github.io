@@ -75,10 +75,12 @@ const RootStack = createNativeStackNavigator({
       screen: FeedScreen,
       linking: {
         path: 'feed',
+        // highlight-start
         screens: {
           Latest: 'latest',
           Popular: 'popular',
         },
+        // highlight-end
       },
     },
   },
@@ -100,8 +102,10 @@ type FeedParamList = {
   Popular: undefined;
 };
 
+// highlight-next-line
 type Props = StaticScreenProps<NavigatorScreenParams<FeedParamList>>;
 
+// highlight-next-line
 function FeedScreen(_: Props) {
   // ...
 }
@@ -119,4 +123,93 @@ This is based on how we'd define the type for a screen with a nested navigator w
 
 This is useful if you already have a dynamic configuration, but want to migrate to the static API. This way you can migrate one navigator at a time.
 
-TODO
+Let's consider the following example:
+
+- You have a root stack navigator that contains a tab navigator in a screen.
+- The root stack navigator is defined using the dynamic API.
+
+Our dynamic configuration would look like this:
+
+```js
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const RootStack = createNativeStackNavigator();
+
+function RootStackScreen() {
+  return (
+    <RootStack.Navigator>
+      <RootStack.Screen name="Home" component={HomeScreen} />
+      <RootStack.Screen name="Feed" component={FeedScreen} />
+    </RootStack.Navigator>
+  );
+}
+```
+
+Here, `FeedScreen` is a component that renders a tab navigator and is defined using the static API:
+
+```js
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const FeedTabs = createBottomTabNavigator({
+  screens: {
+    Latest: {
+      screen: LatestScreen,
+    },
+    Popular: {
+      screen: PopularScreen,
+    },
+  },
+});
+```
+
+To use the `FeedTabs` navigator for the `Feed` screen, we need to use the `createComponentForStaticNavigation` function:
+
+```js
+import { createComponentForStaticNavigation } from '@react-navigation/native';
+
+// highlight-next-line
+const FeedScreen = createComponentForStaticNavigation(FeedTabs, 'Feed');
+```
+
+In addition, we can generate the TypeScript types for the `FeedTabs` navigator and use it in the types of `RootStack` without needing to write them manually:
+
+```tsx
+import {
+  StaticParamList,
+  NavigatorScreenParams,
+} from '@react-navigation/native';
+
+// highlight-next-line
+type FeedTabsParamList = StaticParamList<typeof FeedTabs>;
+
+type RootStackParamList = {
+  Home: undefined;
+  // highlight-next-line
+  Feed: NavigatorScreenParams<FeedTabsParamList>;
+};
+```
+
+Similarly, we can generate the linking configuration for the `FeedTabs` navigator and use it in the linking configuration passed to `NavigationContainer`:
+
+```js
+import { createPathConfigForStaticNavigation } from '@react-navigation/native';
+
+// highlight-next-line
+const feedScreens = createPathConfigForStaticNavigation(FeedTabs);
+
+const linking = {
+  prefixes: ['https://mychat.com', 'mychat://'],
+  config: {
+    screens: {
+      Home: '',
+      Feed: {
+        path: 'feed',
+        // highlight-next-line
+        screens: feedScreens,
+      },
+    },
+  },
+};
+```
+
+This will generate the linking configuration for the `Feed` screen based on the configuration of the `FeedTabs` navigator.
