@@ -214,4 +214,4 @@ const MyStackRouter = (options) => {
 };
 ```
 
-If you want to prevent going back, the recommended approach is to use the [`beforeRemove` event](preventing-going-back.md).
+If you want to prevent going back, the recommended approach is to use the [`usePreventRemove` hook](preventing-going-back.md).

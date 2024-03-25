@@ -31,7 +31,50 @@ This event is emitted when the navigator's state changes. This event receives th
 
 ### `beforeRemove`
 
-This event is emitted when the user is leaving the screen, there's a chance to [prevent the user from leaving](preventing-going-back.md).
+This event is emitted when the user is leaving the screen due to a navigation action. It is possible to prevent the user from leaving the screen by calling `e.preventDefault()` in the event listener.
+
+```js
+React.useEffect(
+  () =>
+    navigation.addListener('beforeRemove', (e) => {
+      if (!hasUnsavedChanges) {
+        return;
+      }
+
+      // Prevent default behavior of leaving the screen
+      e.preventDefault();
+
+      // Prompt the user before leaving the screen
+      Alert.alert(
+        'Discard changes?',
+        'You have unsaved changes. Are you sure to discard them and leave the screen?',
+        [
+          {
+            text: "Don't leave",
+            style: 'cancel',
+            onPress: () => {
+              // Do nothing
+            },
+          },
+          {
+            text: 'Discard',
+            style: 'destructive',
+            // If the user confirmed, then we dispatch the action we blocked earlier
+            // This will continue the action that had triggered the removal of the screen
+            onPress: () => navigation.dispatch(e.data.action),
+          },
+        ]
+      );
+    }),
+  [navigation, hasUnsavedChanges]
+);
+```
+
+:::note
+
+Preventing the action in this event doesn't work properly with [`@react-navigation/native-stack`](native-stack-navigator.md). We recommend using the [`usePreventRemove` hook](preventing-going-back.md) instead.
+
+:::
 
 ## Listening to events
 

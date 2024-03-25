@@ -537,7 +537,11 @@ See [Configuring links](configuring-links.md#apps-under-subpaths) for usage.
 
 ### There's a new `usePreventRemove` hook that works with Native Stack Navigator
 
-TODO
+Previously, the only way to prevent a screen from being removed from the stack was to use the `beforeRemove` event. This didn't work well with the Native Stack Navigator.
+
+The new `usePreventRemove` hook is an alternative to `beforeRemove` that works with the Native Stack Navigator.
+
+See [`usePreventRemove`](use-prevent-remove.md) for usage.
 
 ### Navigators now support a `layout` prop
 
