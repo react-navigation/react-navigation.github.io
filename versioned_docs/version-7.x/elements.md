@@ -148,7 +148,60 @@ It accepts the following props:
 
 #### `headerTitle`
 
-String or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is specified, it receives an object containing `allowFontScaling`, `tintColor`, `style` and `children` properties. The `children` property contains the title string.
+String or a function that returns a React Element to be used by the header. Defaults to scene `title`.
+
+When a function is specified, it receives an object containing following properties:
+
+- `allowFontScaling`: Whether it scale to respect Text Size accessibility settings.
+- `tintColor`: Text color of the header title.
+- `style`: Style object for the `Text` component.
+- `children`: The title string (from `title` in `options`).
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        headerTitle: ({ allowFontScaling, tintColor, style, children }) => (
+          <Text
+            style={[style, { color: tintColor }]}
+            allowFontScaling={allowFontScaling}
+          >
+            {children}
+          </Text>
+        ),
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<Stack.Screen
+  name="Home"
+  component={HomeScreen}
+  options={{
+    headerTitle: ({ allowFontScaling, tintColor, style, children }) => (
+      <Text
+        style={[style, { color: tintColor }]}
+        allowFontScaling={allowFontScaling}
+      >
+        {children}
+      </Text>
+    ),
+  }}
+/>
+```
+
+</TabItem>
+</Tabs>
 
 #### `headerTitleAlign`
 
@@ -161,11 +214,21 @@ Defaults to `center` on iOS and `left` on Android.
 
 #### `headerTitleAllowFontScaling`
 
-Whether header title font should scale to respect Text Size accessibility settings. Defaults to false.
+Whether header title font should scale to respect Text Size accessibility settings. Defaults to `false`.
 
 #### `headerLeft`
 
-Function which returns a React Element to display on the left side of the header. You can use it to implement your custom left button, for example:
+Function which returns a React Element to display on the left side of the header.
+
+It receives an object containing following properties:
+
+- `tintColor`: The color of the icon and label.
+- `pressColor`: The color of the material ripple (Android >= 5.0 only).
+- `pressOpacity`: The opacity of the button when it's pressed (Android < 5.0, and iOS).
+- `labelVisible`: Whether the label text is visible. Defaults to `true` on iOS and `false` on Android.
+- `href`: The URL to open when the button is pressed on the Web.
+
+You can use it to implement your custom left button, for example:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -213,6 +276,55 @@ const RootStack = createNativeStackNavigator({
 #### `headerRight`
 
 Function which returns a React Element to display on the right side of the header.
+
+It receives an object containing following properties:
+
+- `tintColor`: The color of the icon and label.
+- `pressColor`: The color of the material ripple (Android >= 5.0 only).
+- `pressOpacity`: The opacity of the button when it's pressed (Android < 5.0, and iOS).
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        headerLeft: (props) => (
+          <MyButton {...props} onPress={() => {
+            // Do something
+          }}>
+        )
+      }
+    }
+  }
+})
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<Stack.Screen
+  name="Home"
+  component={HomeScreen}
+  options={{
+    headerLeft: (props) => (
+      <MyButton
+        {...props}
+        onPress={() => {
+          // Do something
+        }}
+      />
+    ),
+  }}
+/>
+```
+
+</TabItem>
+</Tabs>
 
 #### `headerShadowVisible`
 
@@ -447,6 +559,36 @@ Usage:
 <HeaderTitle>Hello</HeaderTitle>
 ```
 
+### `HeaderButton`
+
+A component used to show a button in header. It can be used for both left and right buttons. It accepts the following props:
+
+- `onPress` - Callback to call when the button is pressed.
+- `href` - The `href` to use for the anchor tag on web.
+- `disabled` - Boolean which controls whether the button is disabled.
+- `accessibilityLabel` - Accessibility label for the button for screen readers.
+- `testID` - ID to locate this button in tests.
+- `tintColor` - Tint color for the header button.
+- `pressColor` - Color for material ripple (Android >= 5.0 only).
+- `pressOpacity` - Opacity when the button is pressed if material ripple isn't supported by the platform.
+- `style` - Style object for the button.
+- `children` - Content to render for the button. Usually the icon.
+
+Usage:
+
+```js
+<HeaderButton
+  accessibilityLabel="More options"
+  onPress={() => console.log('button pressed')}
+>
+  <MaterialCommunityIcons
+    name="dots-horizontal-circle-outline"
+    size={24}
+    color={tintColor}
+  />
+</HeaderButton>
+```
+
 ### `HeaderBackButton`
 
 A component used to show the back button header. It's the default for [`headerLeft`](#headerleft) in the [stack navigator](stack-navigator.md). It accepts the following props:
@@ -489,6 +631,45 @@ A component which provides an abstraction on top of [`Pressable`](https://reactn
 
 - `pressColor` - Color of material ripple on Android when it's pressed
 - `pressOpacity` - Opacity when it's pressed if material ripple isn't supported by the platform
+
+### `Button`
+
+A component that renders a button. In addition to [`PlatformPressable`](#platformpressable)'s props, it accepts following additional props:
+
+- `variant` - Variant of the button. Possible values are:
+  - `tinted` (default)
+  - `plain`
+  - `filled`
+- `color` - Color of the button. Defaults to the [theme](themes.md)'s primary color.
+- `children` - Content to render inside the button.
+
+In addition, the button integrates with React Navigation and accepts the same props as [`useLinkProps`](use-link-props.md#options) hook.
+
+It can be used to navigate between screens by specifying a screen name and params:
+
+```js
+<Button title="Go to Profile" screen="Profile" params={{ userId: 'jane' }} />
+```
+
+Or as a regular button:
+
+```js
+<Button title="Press me" onPress={() => console.log('button pressed')} />
+```
+
+### `Label`
+
+The `Label` component is used to render small text. It is used in [Bottom Tab Navigator](bottom-tab-navigator.md) to render the label for each tab.
+
+In addition to the standard [`Text`](https://reactnative.dev/docs/text) props, it accepts the following props:
+
+- `tintColor` - Color of the label. Defaults to the [theme](themes.md)'s text color.
+
+Usage:
+
+```jsx
+<Label>Home</Label>
+```
 
 ### `ResourceSavingView`
 

@@ -742,6 +742,8 @@ It can also be used as a regular button:
 
 The button follows the [Material Design 3 guidelines](https://m3.material.io/components/buttons/overview).
 
+See [`Button`](elements.md#button) for usage.
+
 #### `HeaderButton`
 
 The `HeaderButton` component can be used to render buttons in the header with appropriate styling:
@@ -763,6 +765,8 @@ headerRight: ({ tintColor }) => (
 ),
 ```
 
+See [`HeaderButton`](elements.md#headerbutton) for usage.
+
 #### `Label`
 
 The `Label` component can be used to render label text, such as the label in a tab bar button:
@@ -770,6 +774,8 @@ The `Label` component can be used to render label text, such as the label in a t
 ```jsx
 <Label>Home</Label>
 ```
+
+See [`Label`](elements.md#label) for usage.
 
 ### `react-native-drawer-layout` package
 
