@@ -189,9 +189,13 @@ Example:
 <samp id="custom-tab-bar" />
 
 ```js
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Platform } from 'react-native';
+import { useLinkBuilder, useTheme } from '@react-navigation/native';
 
 function MyTabBar({ state, descriptors, navigation }) {
+  const { colors } = useTheme();
+  const { buildHref } = useLinkBuilder();
+
   return (
     <View style={{ flexDirection: 'row' }}>
       {state.routes.map((route, index) => {
@@ -200,8 +204,8 @@ function MyTabBar({ state, descriptors, navigation }) {
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
-            ? options.title
-            : route.name;
+              ? options.title
+              : route.name;
 
         const isFocused = state.index === index;
 
@@ -213,8 +217,7 @@ function MyTabBar({ state, descriptors, navigation }) {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({ name: route.name, merge: true });
+            navigation.navigate(route.name, route.params);
           }
         };
 
@@ -227,7 +230,8 @@ function MyTabBar({ state, descriptors, navigation }) {
 
         return (
           <TouchableOpacity
-            accessibilityRole="button"
+            href={buildHref(route.name, route.params)}
+            accessibilityRole={Platform.OS === 'web' ? 'link' : 'button'}
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarButtonTestID}
@@ -235,7 +239,7 @@ function MyTabBar({ state, descriptors, navigation }) {
             onLongPress={onLongPress}
             style={{ flex: 1 }}
           >
-            <Text style={{ color: isFocused ? '#673ab7' : '#222' }}>
+            <Text style={{ color: isFocused ? colors.primary : colors.text }}>
               {label}
             </Text>
           </TouchableOpacity>
@@ -247,9 +251,9 @@ function MyTabBar({ state, descriptors, navigation }) {
 
 // ...
 
-<Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
-  {...}
-</Tab.Navigator>
+<Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
+  {/* ... */}
+</Tab.Navigator>;
 ```
 
 This example will render a basic tab bar with labels.
