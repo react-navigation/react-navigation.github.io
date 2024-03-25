@@ -457,8 +457,8 @@ const MyStack = createNativeStackNavigator({
 
 The static configuration API provides the following benefits:
 
-- Simpler type-checking with TypeScript, it's not necessary to specify screens and their params separately.
-- Easier deep linking setup, the linking configuration can be defined next to the screen.
+- **Simpler type-checking with TypeScript**: It's not necessary to specify screens and their params separately. See [Type checking with TypeScript](typescript.md?config=static) for more details.
+- **Easier deep linking setup**: Paths can be generated automatically. Linking configuration can be defined next to the screen for explicit configuration. See [Configuring links](configuring-links.md?config=static) for more details.
 
 It's also possible to mix the static and dynamic configuration APIs. For example, you can use the static configuration API for the top-level navigators and the dynamic configuration API for the nested navigators where you need more flexibility.
 

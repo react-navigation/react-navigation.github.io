@@ -4,6 +4,9 @@ title: Configuring links
 sidebar_label: Configuring links
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 In this guide, we will configure React Navigation to handle external links. This is necessary if you want to:
 
 1. Handle deep links in React Native apps on Android and iOS
@@ -12,11 +15,45 @@ In this guide, we will configure React Navigation to handle external links. This
 
 Make sure that you have [configured deep links](deep-linking.md) in your app before proceeding. If you have an Android or iOS app, remember to specify the [`prefixes`](navigation-container.md#linkingprefixes) option.
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+The [`Navigation`](static-configuration.md#createstaticnavigation) component accepts a [`linking`](static-configuration.md#differences-in-the-linking-prop) prop that makes it easier to handle incoming links:
+
+```js
+import { createStaticNavigation } from '@react-navigation/native';
+
+// highlight-start
+const linking = {
+  enabled: 'auto' /* Automatically generate paths for all screens */,
+  prefixes: [
+    /* your linking prefixes */
+  ],
+};
+// highlight-end
+
+function App() {
+  return (
+    <Navigation
+      // highlight-next-line
+      linking={linking}
+      fallback={<Text>Loading...</Text>}
+    />
+  );
+}
+
+const Navigation = createStaticNavigation(RootStack);
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 The `NavigationContainer` accepts a [`linking`](navigation-container.md#linking) prop that makes it easier to handle incoming links. The 2 of the most important properties you can specify in the `linking` prop are `prefixes` and `config`:
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';
 
+// highlight-start
 const linking = {
   prefixes: [
     /* your linking prefixes */
@@ -25,15 +62,23 @@ const linking = {
     /* configuration for matching screens with paths */
   },
 };
+// highlight-end
 
 function App() {
   return (
-    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
+    <NavigationContainer
+      // highlight-next-line
+      linking={linking}
+      fallback={<Text>Loading...</Text>}
+    >
       {/* content */}
     </NavigationContainer>
   );
 }
 ```
+
+</TabItem>
+</Tabs>
 
 When you specify the `linking` prop, React Navigation will handle incoming links automatically. On Android and iOS, it'll use React Native's [`Linking` module](https://reactnative.dev/docs/linking) to handle incoming links, both when the app was opened with the link, and when new links are received when the app is open. On the Web, it'll use the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to sync the URL with the browser.
 
@@ -43,7 +88,7 @@ Currently there seems to be bug ([facebook/react-native#25675](https://github.co
 
 :::
 
-You can also pass a [`fallback`](navigation-container.md#fallback) prop to `NavigationContainer` which controls what's displayed when React Navigation is trying to resolve the initial deep link URL.
+You can also pass a [`fallback`](navigation-container.md#fallback) prop that controls what's displayed when React Navigation is trying to resolve the initial deep link URL.
 
 ## Prefixes
 
@@ -69,7 +114,7 @@ const linking = {
 };
 ```
 
-### Filtering certain paths
+## Filtering certain paths
 
 Sometimes we may not want to handle all incoming links. For example, we may want to filter out links meant for authentication (e.g. `expo-auth-session`) or other purposes instead of navigating to a specific screen.
 
@@ -85,7 +130,7 @@ const linking = {
 
 This is not supported on Web as we always need to handle the URL of the page.
 
-### Apps under subpaths
+## Apps under subpaths
 
 If your app is hosted under a subpath, you can specify the subpath at the top-level of the `config`. For example, if your app is hosted at `https://mychat.com/app`, you can specify the `path` as `app`:
 

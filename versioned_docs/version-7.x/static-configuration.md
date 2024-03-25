@@ -308,9 +308,35 @@ function App() {
 }
 ```
 
-This component is a wrapper around the `NavigationContainer` component and accepts the [same props and ref as the `NavigationContainer`](navigation-container.md) component. There's however one difference - the `linking` prop accepted by this component doesn't take a `config` property. Instead, the linking config is automatically inferred from the static config.
+This component is a wrapper around the `NavigationContainer` component and accepts the [same props and ref as the `NavigationContainer`](navigation-container.md) component. It is intended to be rendered once at the root of your app similar to how you'd use `NavigationContainer` component.
 
-This is intended to be rendered once at the root of your app similar to how you'd use `NavigationContainer` component.
+### Differences in the `linking` prop
+
+Similar to `NavigationContainer`, the component returned by `createStaticNavigation` also accepts a [`linking`](navigation-container.md#linking) prop. However, there are some key differences:
+
+1. It's not possible to pass a full `config` object to the `linking` prop. It can only accept [`path`](configuring-links.md#apps-under-subpaths) and an [`initialRouteName` for the root navigator](configuring-links.md#rendering-an-initial-route).
+2. The linking config is collected from the [`linking`](#linking) properties specified in the screen configuration.
+3. It's possible to pass `enabled: 'auto'` to automatically generate paths for all leaf screens:
+
+   ```js
+   const Navigation = createStaticNavigation(RootStack);
+
+   const linking = {
+     enabled: 'auto',
+     prefixes: ['https://example.com', 'example://'],
+   };
+
+   function App() {
+     return <Navigation linking={linking} />;
+   }
+   ```
+
+   Automatic path generation works as follows:
+
+   - Screens with an explicit `linking` property are not used for path generation and will be added as-is.
+   - Screen names will be converted from `PascalCase` to `kebab-case` to use as the path (e.g. `NewsFeed` -> `news-feed`).
+   - Unless a screen has explicit empty path (`path: ''`) to use for the homepage, the first leaf screen encountered will be used as the homepage.
+   - Path generation only handles leaf screens, i.e. no path is generated for screens containing nested navigators. It's still possible to specify a path for them with an explicit `linking` property.
 
 ## `createComponentForStaticNavigation`
 
