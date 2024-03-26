@@ -662,6 +662,8 @@ You can use the `tabBarPosition` option to customize the position of the tabs:
 </Tab.Navigator>
 ```
 
+See [Bottom Tab Navigator options](bottom-tab-navigator.md#tabbarposition) for usage.
+
 #### Bottom Tab Navigator now supports animations
 
 The `@react-navigation/bottom-tabs` package now supports animations. This was one of the most requested features on our Canny board: [TabNavigator Custom Transition](https://react-navigation.canny.io/feature-requests/p/tabnavigator-custom-transition).

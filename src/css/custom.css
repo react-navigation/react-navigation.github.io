@@ -186,13 +186,26 @@
 }
 
 article video {
-  max-width: 100%;
   width: 300px;
   height: auto;
+  max-width: 100%;
   vertical-align: top;
   margin: var(--ifm-leading) 0;
   border-radius: var(--ifm-pre-border-radius);
   box-shadow: var(--ifm-global-shadow-lw);
+}
+
+article video[data-landscape] {
+  width: auto;
+  height: 373px;
+}
+
+@media (max-width: 320px) {
+  article video,
+  article video[data-landscape] {
+    width: 100%;
+    height: auto;
+  }
 }
 
 article video:has(+ video) {

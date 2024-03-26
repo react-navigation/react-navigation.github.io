@@ -422,6 +422,29 @@ import { BlurView } from 'expo-blur';
 
 When using `BlurView`, make sure to set `position: 'absolute'` in `tabBarStyle` as well. You'd also need to use `useBottomTabBarHeight()` to add a bottom padding to your content.
 
+#### `tabBarPosition`
+
+Position of the tab bar. Available values are:
+
+- `bottom` (Default)
+- `top`
+- `left`
+- `right`
+
+When the tab bar is positioned on the `left` or `right`, it is styled as a sidebar. This can be useful when you want to show a sidebar on larger screens and a bottom tab bar on smaller screens:
+
+```js
+<Tab.Navigator
+  screenOptions={{
+    tabBarPosition: dimensions.width < 600 ? 'bottom' : 'left',
+  }}
+>
+```
+
+<video playsInline autoPlay muted loop data-landscape>
+  <source src="/assets/7.x/bottom-tabs-side.mp4" />
+</video>
+
 #### `lazy`
 
 Whether this screens should render the first time it's accessed. Defaults to `true`. Set it to `false` if you want to render the screen on initial render.
