@@ -15,13 +15,13 @@ To solve this, we’re adding a new static API to React Navigation 7. It’s not
 
 :::note
 
-The static API it’s an additional optional API. The dynamic API isn’t going away and will remain a first class API of React Navigation. In fact, the static API is written entirely on top of the dynamic API.
+The static API it’s an additional optional API. The dynamic API isn’t going away and will remain a first-class API of React Navigation. In fact, the static API is written entirely on top of the dynamic API.
 
 :::
 
 ## Overview
 
-With the dynamic API, first we import a function such as `createStackNavigator`, then we use it to define screens - each screen has a `name` and a `component`:
+With the dynamic API, first, we import a function such as `createStackNavigator`, and then we use it to define screens - each screen has a `name` and a `component`:
 
 ```js
 const Stack = createStackNavigator();
@@ -40,7 +40,7 @@ function RootStack() {
 The static API follows the same principles. Here we are specifying screens in a property called `screens`, the name of the screen is a key in the configuration object and the value contains the component to render:
 
 ```js
-const RootStack = {
+const RootStack = createStackNavigator({
   screens: {
     Home: {
       screen: Home,
@@ -52,10 +52,10 @@ const RootStack = {
       screen: Settings,
     },
   },
-};
+});
 ```
 
-Then after writing our navigation config, we call `createStaticNavigation` and render the returned the component:
+Then after writing our navigation config, we call `createStaticNavigation` and render the returned component:
 
 ```js
 const Navigation = createStaticNavigation(RootStack);
@@ -96,7 +96,7 @@ There are 2 improvements to deep linking API:
    const RootStack = createStackNavigator({
      screens: {
        Profile: {
-         screen: Profile,
+         screen: ProfileScreen,
          // highlight-start
          linking: {
            path: 'user/:id',
@@ -104,7 +104,7 @@ There are 2 improvements to deep linking API:
          // highlight-end
        },
        Settings: {
-         screen: Settings,
+         screen: SettingsScreen,
          // highlight-start
          linking: {
            path: 'settings',
@@ -120,14 +120,17 @@ There are 2 improvements to deep linking API:
    ```js
    const RootStack = createStackNavigator({
      screens: {
+       // Generated path: ''
        Home: {
-         screen: Home, // Generated path: ''
+         screen: HomeScreen,
        },
+       // Generated path: 'profile'
        Profile: {
-         screen: Profile, // Generated path: 'profile'
+         screen: ProfileScreen,
        },
+       // Generated path: 'news-feed'
        NewsFeed: {
-         screen: Settings, // Generated path: 'news-feed'
+         screen: NewsFeedScreen,
        },
      },
    });
@@ -138,7 +141,7 @@ There are 2 improvements to deep linking API:
      return (
        <Navigation
          linking={{
-           prefix: ['https://mychat.com', 'mychat://'],
+           prefixes: ['https://mychat.com', 'mychat://'],
            // highlight-next-line
            enabled: 'auto',
          }}
@@ -153,7 +156,7 @@ See [Configuring links](/docs/7.x/configuring-links?config=static) for more deta
 
 ## Authentication Flow
 
-One of the nice things about the dynamic APIs is declarative authentication flow. You declaratively define which screens are available for logged in and guest users, and React Navigation would handle showing the appropriate screens automatically. To keep a similar experience, we added some dynamism to the new static API with the if property:
+One of the nice things about the dynamic APIs is the declarative authentication flow. You declaratively define which screens are available for logged-in and guest users, and React Navigation would handle showing the appropriate screens automatically. To keep a similar experience, we added some dynamism to the new static API with the if property:
 
 ```js
 const RootStack = createNativeStackNavigator({
@@ -190,4 +193,4 @@ yarn add @react-navigation/native@next @react-navigation/native-stack@next
 
 In addition to the static API, React Navigation 7 also includes a lot of other improvements and new features. Make sure to go through the [upgrade guide](/docs/7.x/upgrading-from-6.x) to see all the changes.
 
-We would love to get feedback from the community on how it works for you and catch any issues before the stable release. If you have any feedback or suggestions, please let us know on our [GitHub Discussions forum](https://github.com/react-navigation/react-navigation/discussions). Or if you find any issues, please report them on our [GitHub issues](https://github.com/react-navigation/react-navigation/issues).
+We would love to get feedback from the community on how it works for you and catch any issues before the stable release. If you have any feedback or suggestions, please let us know on our [GitHub Discussions forum](https://github.com/react-navigation/react-navigation/discussions). If you find any issues, please report them on our [GitHub issues](https://github.com/react-navigation/react-navigation/issues).
