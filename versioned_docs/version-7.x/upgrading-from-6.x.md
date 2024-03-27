@@ -641,6 +641,8 @@ Preloading is supported in the following navigators:
 
 The Native Stack navigator doesn't currently support preloading screens.
 
+See [`preload`](navigation-object.md#preload) for usage.
+
 ### Improvements to navigators
 
 #### Bottom Tab Navigator can now show tabs on the side and top

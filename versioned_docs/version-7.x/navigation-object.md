@@ -13,6 +13,7 @@ The `navigation` object contains various convenience functions that dispatch nav
   - `navigate` - go to the given screen, this will behave differently based on the navigator
   - `goBack` - go back to the previous screen, this will pop the current screen when used in a stack
   - `reset` - replace the navigation state of the navigator with the given state
+  - `preload` - preload a screen in the background before navigating to it
   - `setParams` - merge new params onto the route's params
   - `dispatch` - send an action object to update the [navigation state](navigation-state.md)
   - `setOptions` - update the screen's options
@@ -94,7 +95,14 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>This is the home screen of the app</Text>
       <Button
         onPress={() => {
@@ -116,7 +124,14 @@ function ProfileScreen({ route }) {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile Screen</Text>
       <Text>Friends: </Text>
       <Text>{route.params.names[0]}</Text>
@@ -159,7 +174,14 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>This is the home screen of the app</Text>
       <Button
         onPress={() => {
@@ -181,7 +203,14 @@ function ProfileScreen({ route }) {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile Screen</Text>
       <Text>Friends: </Text>
       <Text>{route.params.names[0]}</Text>
@@ -283,7 +312,14 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>This is the home screen of the app</Text>
       <Button
         onPress={() => {
@@ -303,7 +339,14 @@ function ProfileScreen({ route }) {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile Screen</Text>
       <Text>Friends: </Text>
       <Text>{route.params.names[0]}</Text>
@@ -347,7 +390,14 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>This is the home screen of the app</Text>
       <Button
         onPress={() => {
@@ -367,7 +417,14 @@ function ProfileScreen({ route }) {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile Screen</Text>
       <Text>Friends: </Text>
       <Text>{route.params.names[0]}</Text>
@@ -420,7 +477,14 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>This is the home screen of the app</Text>
       <Button
         onPress={() => {
@@ -439,7 +503,14 @@ function ProfileScreen({ route }) {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile Screen</Text>
       <Text>Friends: </Text>
       <Text>{route.params.names[0]}</Text>
@@ -486,7 +557,14 @@ function SettingsScreen({ route }) {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Settings screen</Text>
       <Text>{route.params.someParam}</Text>
       <Button onPress={() => navigation.goBack()}>Go back</Button>
@@ -535,7 +613,14 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>This is the home screen of the app</Text>
       <Button
         onPress={() => {
@@ -554,7 +639,14 @@ function ProfileScreen({ route }) {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile Screen</Text>
       <Text>Friends: </Text>
       <Text>{route.params.names[0]}</Text>
@@ -602,7 +694,14 @@ function SettingsScreen({ route }) {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Settings screen</Text>
       <Text>{route.params.someParam}</Text>
       <Button onPress={() => navigation.goBack()}>Go back</Button>
@@ -647,6 +746,243 @@ Consider the navigator's state object to be internal and subject to change in a 
 
 :::
 
+### `preload`
+
+The `preload` method allows preloading a screen in the background before navigating to it. It takes the following arguments:
+
+- `name` - _string_ - A destination name of the screen in the current or a parent navigator.
+- `params` - _object_ - Params to use for the destination route.
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Common actions preload" snack version=7
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+  CommonActions,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
+
+// codeblock-focus-start
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Home!</Text>
+      <Button
+        onPress={() => {
+          // highlight-next-line
+          navigation.preload('Profile', { user: 'jane' });
+        }}
+      >
+        Preload Profile
+      </Button>
+      <Button
+        onPress={() => {
+          navigation.navigate('Profile', { user: 'jane' });
+        }}
+      >
+        Navigate to Profile
+      </Button>
+    </View>
+  );
+}
+// codeblock-focus-end
+
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+  const [startTime] = React.useState(Date.now());
+  const [endTime, setEndTime] = React.useState(null);
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setEndTime(Date.now());
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [navigation]);
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile!</Text>
+      <Text>{route.params.user}'s profile</Text>
+      <Text>Preloaded for: {endTime ? endTime - startTime : 'N/A'}ms</Text>
+    </View>
+  );
+}
+
+const Stack = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(Stack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Common actions preload" snack version=7
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import {
+  NavigationContainer,
+  CommonActions,
+  useNavigation,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
+
+// codeblock-focus-start
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Home!</Text>
+      <Button
+        onPress={() => {
+          // highlight-next-line
+          navigation.preload('Profile', { user: 'jane' });
+        }}
+      >
+        Preload Profile
+      </Button>
+      <Button
+        onPress={() => {
+          navigation.navigate('Profile', { user: 'jane' });
+        }}
+      >
+        Navigate to Profile
+      </Button>
+    </View>
+  );
+}
+// codeblock-focus-end
+
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+  const [startTime] = React.useState(Date.now());
+  const [endTime, setEndTime] = React.useState(null);
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setEndTime(Date.now());
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [navigation]);
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile!</Text>
+      <Text>{route.params.user}'s profile</Text>
+      <Text>Preloaded for: {endTime ? endTime - startTime : 'N/A'}ms</Text>
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+Preloading a screen means that the screen will be rendered in the background. All the components in the screen will be mounted and the `useEffect` hooks will be called. This can be useful when you want to improve the perceived performance by hiding the delay in mounting heavy components or loading data.
+
+Depending on the navigator, `preload` may work slightly differently:
+
+- In a stack navigator ([stack](stack-navigator.md)), the screen will be rendered off-screen and animated in when you navigate to it. If [`getId`](screen.md#getid) is specified, it'll be used for the navigation to identify the preloaded screen.
+- In a tab or drawer navigator ([bottom tabs](bottom-tab-navigator.md), [material top tabs](material-top-tab-navigator.md), [drawer](drawer-navigator.md), etc.), the existing screen will be rendered as if `lazy` was set to `false`. Calling `preload` on a screen that is already rendered will not have any effect.
+
+:::warning
+
+Preloading screens is currently not supported in the [native stack navigator](native-stack-navigator.md).
+
+:::
+
+When a screen is preloaded in a stack navigator, it will have a few limitations:
+
+- It can't dispatch navigation actions (e.g. `navigate`, `goBack`, etc.).
+- It can't update options with `navigation.setOptions`.
+- It can't listen to events from the navigator (e.g. `focus`, `tabPress`, etc.).
+
+The `navigation` object will be updated once you navigate to the screen. So if you have an event listener in a `useEffect` hook, and have a dependency on `navigation`, it will add any listeners when the screen is navigated to:
+
+```js
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('tabPress', () => {
+    // do something
+  });
+
+  return () => {
+    unsubscribe();
+  };
+}, [navigation]);
+```
+
+Similarly, for dispatching actions or updating options, you can check if the screen is focused before doing so:
+
+```js
+if (navigation.isFocused()) {
+  navigation.setOptions({ title: 'Updated title' });
+}
+```
+
 ### `setParams`
 
 The `setParams` method lets us update the params (`route.params`) of the current screen. `setParams` works like React's `setState` - it shallow merges the provided params object with the current params.
@@ -668,7 +1004,14 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>This is the home screen of the app</Text>
       <Button
         onPress={() => {
@@ -689,7 +1032,14 @@ function ProfileScreen({ route }) {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile Screen</Text>
       <Text>Friends: </Text>
       <Text>{route.params.friends[0]}</Text>
@@ -753,7 +1103,14 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>This is the home screen of the app</Text>
       <Button
         onPress={() => {
@@ -774,7 +1131,14 @@ function ProfileScreen({ route }) {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile Screen</Text>
       <Text>Friends: </Text>
       <Text>{route.params.friends[0]}</Text>
@@ -848,7 +1212,14 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>This is the home screen of the app</Text>
       <Button
         onPress={() => {
@@ -875,7 +1246,14 @@ function ProfileScreen({ route }) {
   }, [navigation, value]);
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <TextInput
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
         onChangeText={onChangeText}
@@ -921,7 +1299,14 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>This is the home screen of the app</Text>
       <Button onPress={() => navigate('Profile', { title: "Brent's profile" })}>
         Go to Profile
@@ -944,7 +1329,14 @@ function ProfileScreen({ route }) {
   }, [navigation, value]);
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <TextInput
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
         onChangeText={onChangeText}
@@ -1012,7 +1404,14 @@ function SettingsScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Settings Screen</Text>
       <Button onPress={() => navigation.navigate('Profile')}>
         Go to Profile
@@ -1036,7 +1435,14 @@ function ProfileScreen() {
   );
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile Screen</Text>
       <Button onPress={() => navigation.navigate('Settings')}>
         Go to Settings
@@ -1074,7 +1480,14 @@ function SettingsScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Settings Screen</Text>
       <Button onPress={() => navigation.navigate('Profile')}>
         Go to Profile
@@ -1098,7 +1511,14 @@ function ProfileScreen() {
   );
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile Screen</Text>
       <Button onPress={() => navigation.navigate('Settings')}>
         Go to Settings

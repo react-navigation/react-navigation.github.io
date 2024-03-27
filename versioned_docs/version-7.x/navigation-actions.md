@@ -11,7 +11,7 @@ A navigation action is an object containing at least a `type` property. Internal
 
 Each navigation actions can contain at least the following properties:
 
-- `type` (required) - A string which represents the name of the action.
+- `type` (required) - A string that represents the name of the action.
 - `payload` (options) - An object containing additional information about the action. For example, it will contain `name` and `params` for `navigate`.
 - `source` (optional) - The key of the route which should be considered as the source of the action. This is used for some actions to determine which route to apply the action on. By default, `navigation.dispatch` adds the key of the route that dispatched the action.
 - `target` (optional) - The key of the [navigation state](navigation-state.md) the action should be applied on.
@@ -47,18 +47,20 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Home!</Text>
       <Button
         onPress={() => {
           // codeblock-focus-start
           navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Profile',
-              params: {
-                user: 'jane',
-              },
-            })
+            CommonActions.navigate('Profile', { user: 'jane' })
           );
           // codeblock-focus-end
         }}
@@ -75,16 +77,19 @@ function HomeScreen() {
 function ProfileScreen({ route }) {
   const navigation = useNavigation();
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Home',
-            })
-          );
+          navigation.dispatch(CommonActions.navigate('Home'));
         }}
       >
         Navigate to Home
@@ -160,20 +165,24 @@ import {
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Home!</Text>
       <Button
         onPress={() => {
           // codeblock-focus-start
           navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Profile',
-              params: {
-                user: 'jane',
-              },
-            })
+            CommonActions.navigate('Profile', { user: 'jane' })
           );
           // codeblock-focus-end
         }}
@@ -187,18 +196,23 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Home',
-            })
-          );
+          navigation.dispatch(CommonActions.navigate('Home'));
         }}
       >
         Navigate to Home
@@ -300,17 +314,19 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Home!</Text>
       <Button
         onPress={() => {
           navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Profile',
-              params: {
-                user: 'jane',
-              },
-            })
+            CommonActions.navigate('Profile', { user: 'jane' })
           );
         }}
       >
@@ -326,16 +342,19 @@ function HomeScreen() {
 function ProfileScreen({ route }) {
   const navigation = useNavigation();
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Home',
-            })
-          );
+          navigation.dispatch(CommonActions.navigate('Home'));
         }}
       >
         Navigate to Home
@@ -413,19 +432,23 @@ import {
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Home!</Text>
       <Button
         onPress={() => {
           navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Profile',
-              params: {
-                user: 'jane',
-              },
-            })
+            CommonActions.navigate('Profile', { user: 'jane' })
           );
         }}
       >
@@ -438,9 +461,18 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
@@ -573,17 +605,19 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Home!</Text>
       <Button
         onPress={() => {
           navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Profile',
-              params: {
-                user: 'jane',
-              },
-            })
+            CommonActions.navigate('Profile', { user: 'jane' })
           );
         }}
       >
@@ -605,16 +639,19 @@ function HomeScreen() {
 function ProfileScreen({ route }) {
   const navigation = useNavigation();
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Home',
-            })
-          );
+          navigation.dispatch(CommonActions.navigate('Home'));
         }}
       >
         Navigate to Home
@@ -690,19 +727,23 @@ import {
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Home!</Text>
       <Button
         onPress={() => {
           navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Profile',
-              params: {
-                user: 'jane',
-              },
-            })
+            CommonActions.navigate('Profile', { user: 'jane' })
           );
         }}
       >
@@ -721,9 +762,18 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
@@ -817,17 +867,19 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Home!</Text>
       <Button
         onPress={() => {
           navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Profile',
-              params: {
-                user: 'jane',
-              },
-            })
+            CommonActions.navigate('Profile', { user: 'jane' })
           );
         }}
       >
@@ -843,16 +895,19 @@ function HomeScreen() {
 function ProfileScreen({ route }) {
   const navigation = useNavigation();
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Home',
-            })
-          );
+          navigation.dispatch(CommonActions.navigate('Home'));
         }}
       >
         Navigate to Home
@@ -930,19 +985,23 @@ import {
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Home!</Text>
       <Button
         onPress={() => {
           navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Profile',
-              params: {
-                user: 'jane',
-              },
-            })
+            CommonActions.navigate('Profile', { user: 'jane' })
           );
         }}
       >
@@ -955,18 +1014,23 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Home',
-            })
-          );
+          navigation.dispatch(CommonActions.navigate('Home'));
         }}
       >
         Navigate to Home
@@ -1033,7 +1097,250 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-By default, the key of the route which dispatched the action is passed as the `source` property and the `target` property is `undefined`.
+By default, the key of the route that dispatched the action is passed as the `source` property and the `target` property is `undefined`.
+
+### preload
+
+The `preload` action allows preloading a screen in the background before navigating to it. It takes the following arguments:
+
+- `name` - _string_ - A destination name of the screen in the current or a parent navigator.
+- `params` - _object_ - Params to use for the destination route.
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Common actions preload" snack version=7
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+  CommonActions,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Home!</Text>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(
+            CommonActions.preload('Profile', { user: 'jane' })
+          );
+          // codeblock-focus-end
+        }}
+      >
+        Preload Profile
+      </Button>
+      <Button
+        onPress={() => {
+          navigation.dispatch(
+            CommonActions.navigate('Profile', { user: 'jane' })
+          );
+        }}
+      >
+        Navigate to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+  const [startTime] = React.useState(Date.now());
+  const [endTime, setEndTime] = React.useState(null);
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setEndTime(Date.now());
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [navigation]);
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile!</Text>
+      <Text>{route.params.user}'s profile</Text>
+      <Text>Preloaded for: {endTime ? endTime - startTime : 'N/A'}ms</Text>
+    </View>
+  );
+}
+
+const Stack = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(Stack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Common actions preload" snack version=7
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import {
+  NavigationContainer,
+  CommonActions,
+  useNavigation,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Home!</Text>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(
+            CommonActions.preload('Profile', { user: 'jane' })
+          );
+          // codeblock-focus-end
+        }}
+      >
+        Preload Profile
+      </Button>
+      <Button
+        onPress={() => {
+          navigation.dispatch(
+            CommonActions.navigate('Profile', { user: 'jane' })
+          );
+        }}
+      >
+        Navigate to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+  const [startTime] = React.useState(Date.now());
+  const [endTime, setEndTime] = React.useState(null);
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setEndTime(Date.now());
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [navigation]);
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile!</Text>
+      <Text>{route.params.user}'s profile</Text>
+      <Text>Preloaded for: {endTime ? endTime - startTime : 'N/A'}ms</Text>
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+Preloading a screen means that the screen will be rendered in the background. All the components in the screen will be mounted and the `useEffect` hooks will be called. This can be useful when you want to improve the perceived performance by hiding the delay in mounting heavy components or loading data.
+
+Depending on the navigator, `preload` may work slightly differently:
+
+- In a stack navigator ([stack](stack-navigator.md)), the screen will be rendered off-screen and animated in when you navigate to it. If [`getId`](screen.md#getid) is specified, it'll be used for the navigation to identify the preloaded screen.
+- In a tab or drawer navigator ([bottom tabs](bottom-tab-navigator.md), [material top tabs](material-top-tab-navigator.md), [drawer](drawer-navigator.md), etc.), the existing screen will be rendered as if `lazy` was set to `false`. Calling `preload` on a screen that is already rendered will not have any effect.
+
+:::warning
+
+Preloading screens is currently not supported in the [native stack navigator](native-stack-navigator.md).
+
+:::
+
+When a screen is preloaded in a stack navigator, it will have a few limitations:
+
+- It can't dispatch navigation actions (e.g. `navigate`, `goBack`, etc.).
+- It can't update options with `navigation.setOptions`.
+- It can't listen to events from the navigator (e.g. `focus`, `tabPress`, etc.).
+
+The `navigation` object will be updated once you navigate to the screen. So if you have an event listener in a `useEffect` hook, and have a dependency on `navigation`, it will add any listeners when the screen is navigated to:
+
+```js
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('tabPress', () => {
+    // do something
+  });
+
+  return () => {
+    unsubscribe();
+  };
+}, [navigation]);
+```
+
+Similarly, for dispatching actions or updating options, you can check if the screen is focused before doing so:
+
+```js
+if (navigation.isFocused()) {
+  navigation.setOptions({ title: 'Updated title' });
+}
+```
 
 ### setParams
 
@@ -1059,17 +1366,19 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Home!</Text>
       <Button
         onPress={() => {
           navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Profile',
-              params: {
-                user: 'jane',
-              },
-            })
+            CommonActions.navigate('Profile', { user: 'jane' })
           );
         }}
       >
@@ -1085,16 +1394,19 @@ function HomeScreen() {
 function ProfileScreen({ route }) {
   const navigation = useNavigation();
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Home',
-            })
-          );
+          navigation.dispatch(CommonActions.navigate('Home'));
         }}
       >
         Navigate to Home
@@ -1172,19 +1484,23 @@ import {
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Home!</Text>
       <Button
         onPress={() => {
           navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Profile',
-              params: {
-                user: 'jane',
-              },
-            })
+            CommonActions.navigate('Profile', { user: 'jane' })
           );
         }}
       >
@@ -1197,18 +1513,23 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Home',
-            })
-          );
+          navigation.dispatch(CommonActions.navigate('Home'));
         }}
       >
         Navigate to Home
@@ -1295,17 +1616,19 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Home!</Text>
       <Button
         onPress={() => {
           navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Profile',
-              params: {
-                user: 'jane',
-              },
-            })
+            CommonActions.navigate('Profile', { user: 'jane' })
           );
         }}
       >
@@ -1321,16 +1644,19 @@ function HomeScreen() {
 function ProfileScreen({ route }) {
   const navigation = useNavigation();
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Home',
-            })
-          );
+          navigation.dispatch(CommonActions.navigate('Home'));
         }}
       >
         Navigate to Home
@@ -1408,19 +1734,23 @@ import {
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Home!</Text>
       <Button
         onPress={() => {
           navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Profile',
-              params: {
-                user: 'jane',
-              },
-            })
+            CommonActions.navigate('Profile', { user: 'jane' })
           );
         }}
       >
@@ -1433,18 +1763,23 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function ProfileScreen({ navigation, route }) {
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Home',
-            })
-          );
+          navigation.dispatch(CommonActions.navigate('Home'));
         }}
       >
         Navigate to Home
