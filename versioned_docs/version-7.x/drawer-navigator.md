@@ -671,38 +671,6 @@ Navigates to an existing screen in the drawer navigator. The method accepts the 
 navigation.jumpTo('Profile', { owner: 'Satya' });
 ```
 
-## Example
-
-<samp id="drawer-example" />
-
-```js
-import { createDrawerNavigator } from '@react-navigation/drawer';
-
-const Drawer = createDrawerNavigator();
-
-function MyDrawer() {
-  return (
-    <Drawer.Navigator initialRouteName="Feed">
-      <Drawer.Screen
-        name="Feed"
-        component={Feed}
-        options={{ drawerLabel: 'Home' }}
-      />
-      <Drawer.Screen
-        name="Notifications"
-        component={Notifications}
-        options={{ drawerLabel: 'Updates' }}
-      />
-      <Drawer.Screen
-        name="Profile"
-        component={Profile}
-        options={{ drawerLabel: 'Profile' }}
-      />
-    </Drawer.Navigator>
-  );
-}
-```
-
 ## Checking if the drawer is open
 
 You can check if the drawer is open by using the `useDrawerStatus` hook.

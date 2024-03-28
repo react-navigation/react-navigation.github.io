@@ -595,51 +595,6 @@ Pops all of the screens in the stack except the first one and navigates to it.
 navigation.popToTop();
 ```
 
-## Example
-
-<samp id="stack-with-options" />
-
-```js
-import { createStackNavigator } from '@react-navigation/stack';
-
-const Stack = createStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerMode: 'screen',
-        headerTintColor: 'white',
-        headerStyle: { backgroundColor: 'tomato' },
-      }}
-    >
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          title: 'Awesome app',
-        }}
-      />
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          title: 'My profile',
-        }}
-      />
-      <Stack.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          gestureEnabled: false,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-```
-
 ## Animations
 
 You can specify the `animation` option to customize the transition animation for screens being pushed or popped.
