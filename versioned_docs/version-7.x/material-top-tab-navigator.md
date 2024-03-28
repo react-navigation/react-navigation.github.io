@@ -517,3 +517,31 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 ```js
 navigation.jumpTo('Profile', { name: 'Michaś' });
 ```
+
+### Hooks
+
+The material top tab navigator exports the following hooks:
+
+#### `useTabAnimation`
+
+This hook returns an object containing an animated value that represents the current position of the tabs. This can be used to animate elements based on the swipe position of the tabs, such as the tab indicator:
+
+```js
+import { Animated } from 'react-native';
+import { useTabAnimation } from '@react-navigation/material-top-tabs';
+
+function MyView() {
+  const { position } = useTabAnimation();
+
+  return (
+    <Animated.View
+      style={{
+        width: '50%',
+        height: 2,
+        backgroundColor: 'tomato',
+        transform: [{ translateX: position }],
+      }}
+    />
+  );
+}
+```

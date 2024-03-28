@@ -805,3 +805,33 @@ Pops all of the screens in the stack except the first one and navigates to it.
 ```js
 navigation.popToTop();
 ```
+
+### Hooks
+
+The native stack navigator exports the following hooks:
+
+#### `useAnimatedHeaderHeight`
+
+The hook returns an animated value representing the height of the header. This is similar to [`useHeaderHeight`](elements.md#useheaderheight) but returns an animated value that changed as the header height changes, e.g. when expanding or collapsing large title or search bar on iOS.
+
+It can be used to animated content along with header height changes.
+
+```js
+import { Animated } from 'react-native';
+import { useAnimatedHeaderHeight } from '@react-navigation/native-stack';
+
+const MyView = () => {
+  const headerHeight = useAnimatedHeaderHeight();
+
+  return (
+    <Animated.View
+      style={{
+        height: 100,
+        aspectRatio: 1,
+        backgroundColor: 'tomato',
+        transform: [{ translateY: headerHeight }],
+      }}
+    />
+  );
+};
+```

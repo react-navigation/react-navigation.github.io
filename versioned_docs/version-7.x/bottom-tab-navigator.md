@@ -375,31 +375,7 @@ To show your screen under the tab bar, you can set the `position` style to absol
 >
 ```
 
-You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar. React Navigation won't do it automatically.
-
-To get the height of the bottom tab bar, you can use `BottomTabBarHeightContext` with [React's Context API](https://reactjs.org/docs/context.html#contextconsumer) or `useBottomTabBarHeight`:
-
-```js
-import { BottomTabBarHeightContext } from '@react-navigation/bottom-tabs';
-
-// ...
-
-<BottomTabBarHeightContext.Consumer>
-  {tabBarHeight => (
-    /* render something */
-  )}
-</BottomTabBarHeightContext.Consumer>
-```
-
-or
-
-```js
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-
-// ...
-
-const tabBarHeight = useBottomTabBarHeight();
-```
+You also might need to add a bottom margin to your content if you have an absolutely positioned tab bar. React Navigation won't do it automatically. See [`useBottomTabBarHeight`](#usebottomtabbarheight) for more details.
 
 #### `tabBarBackground`
 
@@ -420,7 +396,7 @@ import { BlurView } from 'expo-blur';
 >
 ```
 
-When using `BlurView`, make sure to set `position: 'absolute'` in `tabBarStyle` as well. You'd also need to use `useBottomTabBarHeight()` to add a bottom padding to your content.
+When using `BlurView`, make sure to set `position: 'absolute'` in `tabBarStyle` as well. You'd also need to use [`useBottomTabBarHeight`](#usebottomtabbarheight) to add a bottom padding to your content.
 
 #### `tabBarPosition`
 
@@ -579,6 +555,44 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 
 ```js
 navigation.jumpTo('Profile', { owner: 'Michaś' });
+```
+
+### Hooks
+
+The bottom tab navigator exports the following hooks:
+
+#### `useBottomTabBarHeight`
+
+This hook returns the height of the bottom tab bar. By default, the screen content doesn't go under the tab bar. However, if you want to make the tab bar absolutely positioned and have the content go under it (e.g. to show a blur effect), it's necessary to adjust the content to take the tab bar height into account.
+
+Example:
+
+```js
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+
+function MyComponent() {
+  const tabBarHeight = useBottomTabBarHeight();
+
+  return (
+    <ScrollView contentStyle={{ paddingBottom: tabBarHeight }}>
+      {/* Content */}
+    </ScrollView>
+  );
+}
+```
+
+Alternatively, you can use the `BottomTabBarHeightContext` directly if you are using a class component or need it in a reusable component that can be used outside the bottom tab navigator:
+
+```js
+import { BottomTabBarHeightContext } from '@react-navigation/bottom-tabs';
+
+// ...
+
+<BottomTabBarHeightContext.Consumer>
+  {tabBarHeight => (
+    /* render something */
+  )}
+</BottomTabBarHeightContext.Consumer>
 ```
 
 ## Animations

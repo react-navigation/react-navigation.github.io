@@ -595,6 +595,28 @@ Pops all of the screens in the stack except the first one and navigates to it.
 navigation.popToTop();
 ```
 
+### Hooks
+
+The stack navigator exports the following hooks:
+
+#### `useCardAnimation`
+
+This hook returns values related to the screen's animation. It contains the following properties:
+
+- `current` - Values for the current screen:
+  - `progress` - Animated node representing the progress value of the current screen.
+- `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
+  - `progress` - Animated node representing the progress value of the next screen.
+- `closing` - Animated node representing whether the card is closing. `1` when closing, `0` if not.
+- `swiping` - Animated node representing whether the card is being swiped. `1` when swiping, `0` if not.
+- `inverted` - Animated node representing whether the card is inverted. `-1` when inverted, `1` if not.
+- `index` - The index of the card in the stack.
+- `layouts` - Layout measurements for various items we use for animation.
+  - `screen` - Layout of the whole screen. Contains `height` and `width` properties.
+- `insets` - Layout of the safe area insets. Contains `top`, `right`, `bottom` and `left` properties.
+
+See [Transparent modals](#transparent-modals) for an example of how to use this hook.
+
 ## Animations
 
 You can specify the `animation` option to customize the transition animation for screens being pushed or popped.
@@ -800,7 +822,7 @@ Stack Navigator exposes various options to configure the transition animation wh
     - `title` - Layout of the title element. Might be `undefined` when not rendering a title.
     - `leftLabel` - Layout of the back button label. Might be `undefined` when not rendering a back button label.
 
-  A config which just fades the elements looks like this:
+  A config that just fades the elements looks like this:
 
   ```js
   const forFade = ({ current, next }) => {
