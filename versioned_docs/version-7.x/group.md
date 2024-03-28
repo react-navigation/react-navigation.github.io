@@ -42,7 +42,7 @@ function EmptyScreen() {
 }
 
 // codeblock-focus-start
-const Stack = createNativeStackNavigator({
+const MyStack = createNativeStackNavigator({
   groups: {
     App: {
       screenOptions: {
@@ -145,7 +145,7 @@ Options to configure how the screens inside the group get presented in the navig
 <TabItem value="static" label="Static" default>
 
 ```js
-const Stack = createNativeStackNavigator({
+const MyStack = createNativeStackNavigator({
   groups: {
     Modal: {
       screenOptions: {
@@ -181,7 +181,7 @@ When you pass a function, it'll receive the [`route`](route-object.md) and [`nav
 <TabItem value="static" label="Static" default>
 
 ```js
-const Stack = createNativeStackNavigator({
+const MyStack = createNativeStackNavigator({
   groups: {
     Modal: {
       screenOptions: ({ route, navigation }) => ({
@@ -225,7 +225,7 @@ Optional key for a group of screens. If the key changes, all existing screens in
 The name of the group is used as the `navigationKey`:
 
 ```js
-const Stack = createNativeStackNavigator({
+const MyStack = createNativeStackNavigator({
   groups: {
     User: {
       screens: {

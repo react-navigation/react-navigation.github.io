@@ -162,19 +162,7 @@ export default function App() {
 
 ### Props
 
-The `Tab.Navigator` component accepts following props:
-
-#### `id`
-
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-object.md#getparent) to refer to this navigator in a child navigator.
-
-#### `initialRouteName`
-
-The name of the route to render on first load of the navigator.
-
-#### `screenOptions`
-
-Default options to use for the screens in the navigator.
+In addition to the [common props](navigator.md#configuration) shared by all navigators, the material top tabs navigator component accepts the following additional props:
 
 #### `backBehavior`
 

@@ -53,6 +53,7 @@
       "static-configuration",
       "navigation-container",
       "server-container",
+      "navigator",
       "group",
       "screen",
       "screen-options",

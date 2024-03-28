@@ -10,7 +10,7 @@ The bulk of the static configuration is done using the `createXNavigator` functi
 
 The `createXNavigator` functions take one argument, which is an object with the following properties:
 
-- Same props as the navigator component, e.g. `id`, `initialRouteName`, `screenOptions` etc. See the docs for each navigator for more details on the props they accept.
+- Same props as the navigator component, e.g. `id`, `initialRouteName`, `screenOptions` etc. See [Navigator](navigator.md) as well as the docs for each navigator for more details on the props they accept.
 - `screens` - an object containing configuration for each screen in the navigator.
 - `groups` - an optional object containing groups of screens (equivalent to [`Group`](group.md) in the dynamic API).
 
