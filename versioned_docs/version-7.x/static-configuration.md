@@ -82,10 +82,11 @@ The `screens` object can contain key value pairs where the key is the name of th
 
 ### `groups`
 
-The `groups` object can contain key value pairs where the key is the name of the group and the value is the group configuration. The group configuration can contain the following properties:
+The `groups` object can contain key-value pairs where the key is the name of the group and the value is the group configuration.
+
+The configuration object for a screen accepts the [properties described in the Group page](group.md). In addition, the following properties are available when using static configuration:
 
 - `if` - this can be used to conditionally render the group and works the same as the [`if` property in the screen configuration](#if).
-- `screenOptions` - default options for all screens under this group.
 - `screens` - an object containing configuration for each screen in the group. The configuration is the same as the [`screens` object in the navigator configuration](#screens).
 
 Example:
@@ -116,27 +117,9 @@ const RootStack = createNativeStackNavigator({
 });
 ```
 
-The keys of the `groups` object (e.g. `Guest`, `User`) are used as the [`navigationKey`](group.md#navigationkey) for the group - this means if a screen is defined in 2 groups and the groups use the [`if`](#if) property, the screen will remount if the condition changes resulting in one group being removed and other group being used. You can use any string as the key.
-
 ### Screen configuration
 
-The configuration object for a screen can contain the following properties:
-
-#### `screen`
-
-The React component or navigator to render for the screen:
-
-```js
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Home: {
-      screen: HomeScreen,
-    },
-  },
-});
-```
-
-The screen components defined with the static configuration receive the [`route`](route-object.md) prop. Unlike the dynamic API, they don't get the `navigation` object as prop and it must be accessed via the [`useNavigation`](use-navigation.md) hook.
+The configuration object for a screen accepts the [properties described in the Screen page](screen.md). In addition, the following properties are available when using static configuration:
 
 #### `linking`
 
@@ -207,94 +190,6 @@ const RootStack = createNativeStackNavigator({
 The above example will only render the `HomeScreen` if the user is logged in.
 
 For more details, see [Authentication flow](auth-flow.md?config=static).
-
-#### `options`
-
-Options to configure how the screen gets presented in the navigator. It accepts either an object or a function returning an object:
-
-```js
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Home: {
-      screen: HomeScreen,
-      options: {
-        title: 'Awesome app',
-      },
-    },
-  },
-});
-```
-
-When you pass a function, it'll receive the [`route`](route-object.md), [`navigation`](navigation-object.md) and [`theme`](themes.md) as arguments:
-
-```js
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Profile: {
-      screen: ProfileScreen,
-      options: ({ route, navigation, theme }) => ({
-        title: route.params.userId,
-      }),
-    },
-  },
-});
-```
-
-See [Options for screens](screen-options.md) for more details and examples.
-
-#### `initialParams`
-
-Initial params to use for the screen. If a screen is used as `initialRouteName`, it'll contain the params from `initialParams`. If you navigate to a new screen, the params passed are shallow merged with the initial params.
-
-```js
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Details: {
-      screen: DetailsScreen,
-      initialParams: { itemId: 5 },
-    },
-  },
-});
-```
-
-#### `getId`
-
-Callback to return an unique ID to use for the screen. It receives an object with the route params:
-
-```js
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Profile: {
-      screen: ProfileScreen,
-      getId: ({ params }) => params.userId,
-    },
-  },
-});
-```
-
-By default, calling `navigate('ScreenName', params)` identifies the screen by its name, and navigates to the existing screen instead of adding a new one. If you specify `getId` and it doesn't return `undefined`, the screen is identified by both the screen name and the returned ID.
-
-This is useful for preventing multiple instances of the same screen in the navigator, e.g. - when `params.userId` is used as an ID, subsequent navigation to the screen with the same `userId` will navigate to the existing screen instead of adding a new one to the stack. If the navigation was with a different `userId`, then it'll add a new screen.
-
-#### `listeners`
-
-Event listeners to subscribe to. It takes an object with the event names as keys and the listener callbacks as values:
-
-```js
-const BottomTab = createBottomTabNavigator({
-  screens: {
-    Chat: {
-      screen: ChatScreen,
-      listeners: {
-        tabPress: (e) => {
-          // Prevent default action
-          e.preventDefault();
-        },
-      },
-    },
-  },
-});
-```
 
 ## `createStaticNavigation`
 

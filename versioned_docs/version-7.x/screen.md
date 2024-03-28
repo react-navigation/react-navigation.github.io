@@ -7,38 +7,15 @@ sidebar_label: Screen
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`Screen` components are used to configure various aspects of screens inside a navigator.
-
-A `Screen` is returned from a `createXNavigator` function:
+A screen represents routes in a navigator. A screen's configuration contains the component for the route, options, event listeners, etc.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js
-const Stack = createNativeStackNavigator({
-  screens: {
-    /* content */
-  },
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
+Screens can be defined under the `screens` key in the navigator configuration:
 
 ```js
-const Stack = createNativeStackNavigator(); // Stack contains Screen & Navigator properties
-```
-
-</TabItem>
-</Tabs>
-
-After creating the navigator, it can be used as children of the `Navigator` component:
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-const Stack = createNativeStackNavigator({
+const MyStack = createNativeStackNavigator({
   screens: {
     Home: HomeScreen,
     Profile: ProfileScreen,
@@ -49,26 +26,36 @@ const Stack = createNativeStackNavigator({
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
+A `Screen` component is returned from a `createXNavigator` function. After creating the navigator, it can be used as children of the `Navigator` component:
+
 ```js
-<Stack.Navigator>
-  <Stack.Screen name="Home" component={HomeScreen} />
-  <Stack.Screen name="Profile" component={ProfileScreen} />
-</Stack.Navigator>
+const Stack = createNativeStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
+  );
+}
 ```
+
+You need to provide at least a name and a component to render for each screen.
 
 </TabItem>
 </Tabs>
 
-You need to provide at least a name and a component to render for each screen.
+## Configuration
 
-## Props
+### Name
 
-### `name`
-
-The name to use for the screen. In dynamic approach it accepts a string:
+The name to use for the screen.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
+
+The key in the `screens` object is used as the name:
 
 ```js
 const Stack = createNativeStackNavigator({
@@ -80,6 +67,8 @@ const Stack = createNativeStackNavigator({
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
+
+It can be passed in the `name` prop to the `Screen` component:
 
 ```js
 <Stack.Screen name="Profile" component={ProfileScreen} />
@@ -96,11 +85,11 @@ navigation.navigate('Profile');
 
 It is also used for the `name` property in the [`route`](route-object.md).
 
-While it is supported, we recommend to avoid spaces or special characters in screen names and keep them simple.
+While it is supported, we recommend avoiding spaces or special characters in screen names and keeping them simple.
 
-### `options`
+### Options
 
-Options to configure how the screen gets presented in the navigator. It accepts either an object or a function returning an object:
+Options are used to configure how the screen gets presented in the navigator. It accepts either an object or a function returning an object:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -170,9 +159,9 @@ const Stack = createNativeStackNavigator({
 
 See [Options for screens](screen-options.md) for more details and examples.
 
-### `initialParams`
+### Initial params
 
-Initial params to use for the screen. If a screen is used as `initialRouteName`, it'll contain the params from `initialParams`. If you navigate to a new screen, the params passed are shallow merged with the initial params.
+Initial params are used as the default params for the screen. If a screen is used as `initialRouteName`, it'll contain the params from `initialParams`. If you navigate to a new screen, the params passed are shallow merged with the initial params.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -202,9 +191,11 @@ const Stack = createNativeStackNavigator({
 </TabItem>
 </Tabs>
 
-### `getId`
+### ID
 
-Callback to return an unique ID to use for the screen. It receives an object with the route params:
+A screen can have an ID to identify it uniquely. This is useful when you want to ensure that the screen with the same ID doesn't appear multiple times in the stack.
+
+This can be done by specifying the `getId` callback. It receives an object with the route params:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -278,48 +269,39 @@ In the above examples, `params.userId` is used as an ID, subsequent navigation t
 
 If `getId` is specified in a tab or drawer navigator, the screen will remount if the ID changes.
 
-### `component`
+### Component
 
-The React Component to render for the screen:
+Each screen must specify a component to render for that route.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
+It can be passed under the `screen` property in the screen configuration:
+
 ```js
 const Stack = createNativeStackNavigator({
   screens: {
-    Profile: ProfileScreen,
+    Profile: {
+      screen: ProfileScreen,
+    },
   },
 });
 ```
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
+
+#### `component`
+
+It can be passed in the `component` prop to the `Screen` component:
 
 ```js
 <Stack.Screen name="Profile" component={ProfileScreen} />
 ```
 
-</TabItem>
-</Tabs>
+#### `getComponent`
 
-### `getComponent`
-
-Callback to return the React Component to render for the screen:
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-const Stack = createNativeStackNavigator({
-  screens: {
-    Profile: () => require('./ProfileScreen').default,
-  },
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
+It's also possible to pass a function in the `getComponent` prop to lazily evaluate the component:
 
 ```js
 <Stack.Screen
@@ -328,14 +310,11 @@ const Stack = createNativeStackNavigator({
 />
 ```
 
-</TabItem>
-</Tabs>
-
 You can use this approach instead of the `component` prop if you want the `ProfileScreen` module to be lazily evaluated when needed. This is especially useful when using [ram bundles](https://reactnative.dev/docs/ram-bundles-inline-requires) to improve initial load.
 
-### `children`
+#### `children`
 
-Render callback to return React Element to use for the screen:
+Another way is to pass a render callback to return React Element to use for the screen:
 
 ```js
 <Stack.Screen name="Profile">
@@ -351,11 +330,14 @@ By default, React Navigation applies optimizations to screen components to preve
 
 :::
 
-### `navigationKey`
+</TabItem>
+</Tabs>
 
-Optional key for this screen. This doesn't need to be unique. If the key changes, existing screens with this name will be removed (if used in a stack navigator) or reset (if used in a tab or drawer navigator).
+### Navigation key
 
-This can be useful when we have some screens which we want to be removed or reset when the condition changes:
+A navigation key is an optional key for this screen. This doesn't need to be unique. If the key changes, existing screens with this name will be removed (if used in a stack navigator) or reset (if used in a tab or drawer navigator).
+
+This can be useful when we have some screens that we want to be removed or reset when the condition changes:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -385,6 +367,6 @@ const Stack = createNativeStackNavigator({
 </TabItem>
 </Tabs>
 
-### `listeners`
+### Event listeners
 
-Event listeners to subscribe to. See [`listeners` prop on `Screen`](navigation-events.md#listeners-prop-on-screen) for more details.
+Event listeners can be used to subscribe to various events emitted for the screen. See [`listeners` prop on `Screen`](navigation-events.md#listeners-prop-on-screen) for more details.
