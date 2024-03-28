@@ -57,17 +57,25 @@ import {
 } from '@react-navigation/native';
 
 function TabNavigator({
+  id,
   initialRouteName,
   children,
+  layout,
+  screenListeners,
   screenOptions,
+  screenLayout,
   tabBarStyle,
   contentStyle,
 }) {
   const { state, navigation, descriptors, NavigationContent } =
     useNavigationBuilder(TabRouter, {
-      children,
-      screenOptions,
+      id,
       initialRouteName,
+      children,
+      layout,
+      screenListeners,
+      screenOptions,
+      screenLayout,
     });
 
   return (
@@ -235,9 +243,14 @@ type Props = DefaultNavigatorOptions<
   TabNavigationConfig;
 
 function TabNavigator({
+  id,
   initialRouteName,
   children,
+  layout,
+  screenListeners,
   screenOptions,
+  screenLayout,
+  backBehavior,
   tabBarStyle,
   contentStyle,
 }: Props) {
@@ -249,9 +262,14 @@ function TabNavigator({
       TabNavigationOptions,
       TabNavigationEventMap
     >(TabRouter, {
-      children,
-      screenOptions,
+      id,
       initialRouteName,
+      children,
+      layout,
+      screenListeners,
+      screenOptions,
+      screenLayout,
+      backBehavior,
     });
 
   return (
@@ -343,18 +361,26 @@ import {
 import { BottomTabView } from '@react-navigation/bottom-tabs';
 
 function BottomTabNavigator({
+  id,
   initialRouteName,
-  backBehavior,
   children,
+  layout,
+  screenListeners,
   screenOptions,
+  screenLayout,
+  backBehavior,
   ...rest
 }) {
   const { state, descriptors, navigation, NavigationContent } =
     useNavigationBuilder(TabRouter, {
+      id,
       initialRouteName,
-      backBehavior,
       children,
+      layout,
+      screenListeners,
       screenOptions,
+      screenLayout,
+      backBehavior,
     });
 
   return (
@@ -383,10 +409,14 @@ import MyRouter from './MyRouter';
 
 const { state, descriptors, navigation, NavigationContent } =
   useNavigationBuilder(MyRouter, {
+    id,
     initialRouteName,
-    backBehavior,
     children,
+    layout,
+    screenListeners,
     screenOptions,
+    screenLayout,
+    backBehavior,
   });
 
 // ...

@@ -60,7 +60,10 @@ The key in the `screens` object is used as the name:
 ```js
 const Stack = createNativeStackNavigator({
   screens: {
-    Profile: ProfileScreen,
+    // highlight-next-line
+    Profile: {
+      screen: ProfileScreen,
+    },
   },
 });
 ```
@@ -70,8 +73,12 @@ const Stack = createNativeStackNavigator({
 
 It can be passed in the `name` prop to the `Screen` component:
 
-```js
-<Stack.Screen name="Profile" component={ProfileScreen} />
+```jsx
+<Stack.Screen
+  // highlight-next-line
+  name="Profile"
+  component={ProfileScreen}
+/>
 ```
 
 </TabItem>
@@ -99,9 +106,11 @@ const Stack = createNativeStackNavigator({
   screens: {
     Profile: {
       screen: ProfileScreen,
+      // highlight-start
       options: {
         title: 'Awesome app',
       },
+      // highlight-end
     },
   },
 });
@@ -110,13 +119,15 @@ const Stack = createNativeStackNavigator({
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js
+```jsx
 <Stack.Screen
   name="Profile"
   component={ProfileScreen}
+  // highlight-start
   options={{
     title: 'Awesome app',
   }}
+  // highlight-end
 />
 ```
 
@@ -133,9 +144,11 @@ const Stack = createNativeStackNavigator({
   screens: {
     Profile: {
       screen: ProfileScreen,
+      // highlight-start
       options: ({ route, navigation, theme }) => ({
         title: route.params.userId,
       }),
+      // highlight-end
     },
   },
 });
@@ -144,13 +157,15 @@ const Stack = createNativeStackNavigator({
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js
+```jsx
 <Stack.Screen
   name="Profile"
   component={ProfileScreen}
+  // highlight-start
   options={({ route, navigation }) => ({
     title: route.params.userId,
   })}
+  // highlight-end
 />
 ```
 
@@ -171,6 +186,7 @@ const Stack = createNativeStackNavigator({
   screens: {
     Details: {
       screen: DetailsScreen,
+      // highlight-next-line
       initialParams: { itemId: 42 },
     },
   },
@@ -180,10 +196,11 @@ const Stack = createNativeStackNavigator({
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js
+```jsx
 <Stack.Screen
   name="Details"
   component={DetailsScreen}
+  // highlight-next-line
   initialParams={{ itemId: 42 }}
 />
 ```
@@ -205,6 +222,7 @@ const Stack = createNativeStackNavigator({
   screens: {
     Profile: {
       screen: ProfileScreen,
+      // highlight-next-line
       getId: ({ params }) => params.userId,
     },
   },
@@ -214,10 +232,11 @@ const Stack = createNativeStackNavigator({
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js
+```jsx
 <Stack.Screen
   name="Profile"
   component={ProfileScreen}
+  // highlight-next-line
   getId={({ params }) => params.userId}
 />
 ```
@@ -240,7 +259,7 @@ navigation.navigate('Profile', { userId: 2 });
 // The stack will now have: `Home` -> `Profile` with `userId: 2`
 ```
 
-If you specify `getId` and it doesn't return `undefined`, the screen is identified by both the screen name and the returned ID. Which means that if you're on `ScreenName` and navigate to `ScreenName` again with different params - and return a different ID from the `getId` callback, it'll add a new screen to the stack:
+If you specify `getId` and it doesn't return `undefined`, the screen is identified by both the screen name and the returned ID. That means that if you're on `ScreenName` and navigate to `ScreenName` again with different params - and return a different ID from the `getId` callback, it'll add a new screen to the stack:
 
 ```js
 // Let's say you're on `Home` screen
@@ -282,6 +301,7 @@ It can be passed under the `screen` property in the screen configuration:
 const Stack = createNativeStackNavigator({
   screens: {
     Profile: {
+      // highlight-next-line
       screen: ProfileScreen,
     },
   },
@@ -295,17 +315,22 @@ const Stack = createNativeStackNavigator({
 
 It can be passed in the `component` prop to the `Screen` component:
 
-```js
-<Stack.Screen name="Profile" component={ProfileScreen} />
+```jsx
+<Stack.Screen
+  name="Profile"
+  // highlight-next-line
+  component={ProfileScreen}
+/>
 ```
 
 #### `getComponent`
 
 It's also possible to pass a function in the `getComponent` prop to lazily evaluate the component:
 
-```js
+```jsx
 <Stack.Screen
   name="Profile"
+  // highlight-next-line
   getComponent={() => require('./ProfileScreen').default}
 />
 ```
@@ -316,8 +341,9 @@ You can use this approach instead of the `component` prop if you want the `Profi
 
 Another way is to pass a render callback to return React Element to use for the screen:
 
-```js
+```jsx
 <Stack.Screen name="Profile">
+  // highlight-next-line
   {(props) => <ProfileScreen {...props} />}
 </Stack.Screen>
 ```
@@ -329,6 +355,68 @@ You can use this approach instead of the `component` prop if you need to pass ad
 By default, React Navigation applies optimizations to screen components to prevent unnecessary renders. Using a render callback removes those optimizations. So if you use a render callback, you'll need to ensure that you use [`React.memo`](https://reactjs.org/docs/react-api.html#reactmemo) or [`React.PureComponent`](https://reactjs.org/docs/react-api.html#reactpurecomponent) for your screen components to avoid performance issues.
 
 :::
+
+</TabItem>
+</Tabs>
+
+### Layout
+
+A layout is a wrapper around the screen. It makes it easier to provide things such as an error boundary and suspense fallback for a screen:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Stack = createNativeStackNavigator({
+  screens: {
+    Profile: {
+      screen: ProfileScreen,
+      // highlight-start
+      layout: ({ children }) => (
+        <ErrorBoundary>
+          <React.Suspense
+            fallback={
+              <View style={styles.fallback}>
+                <Text style={styles.text}>Loading…</Text>
+              </View>
+            }
+          >
+            {children}
+          </React.Suspense>
+        </ErrorBoundary>
+      ),
+      // highlight-end
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```jsx
+<Stack.Screen
+  name="MyScreen"
+  component={MyScreenComponent}
+  // highlight-start
+  layout={({ children }) => (
+    <ErrorBoundary>
+      <React.Suspense
+        fallback={
+          <View style={styles.fallback}>
+            <Text style={styles.text}>Loading…</Text>
+          </View>
+        }
+      >
+        {children}
+      </React.Suspense>
+    </ErrorBoundary>
+  )}
+  // highlight-end
+/>
+```
+
+To specify a layout for all multiple screens, you can use `screenLayout` in a [group](group.md#screen-layout) or [navigator](navigator.md#screen-layout).
 
 </TabItem>
 </Tabs>
@@ -347,17 +435,21 @@ const Stack = createNativeStackNavigator({
   screens: {
     Profile: {
       screen: ProfileScreen,
+      // highlight-next-line
       navigationKey: isSignedIn ? 'user' : 'guest',
     },
   },
 });
 ```
 
+For the static API, we recommend using the [`groups`](group.md#navigation-key) instead of the `navigationKey` for each screen as you can dynamically add or remove groups with the [`if`](static-configuration.md#if) property.
+
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js
+```jsx
 <Stack.Screen
+  // highlight-next-line
   navigationKey={isSignedIn ? 'user' : 'guest'}
   name="Profile"
   component={ProfileScreen}

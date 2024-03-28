@@ -570,11 +570,13 @@ Navigators now support a `layout` prop. It can be useful for augmenting the navi
 </Stack.Navigator>
 ```
 
+See [Navigator layout](navigator.md#layout) for usage.
+
 #### For screens and groups
 
 The `layout` prop makes it easier to provide things such as a global error boundary and suspense fallback for a group of screens without having to manually add HOCs for every screen separately.
 
-It can be used for a single screen with `layout`:
+It can be used for a single screen with [`layout`](screen.md#layout):
 
 ```jsx
 <Stack.Screen
@@ -598,7 +600,7 @@ It can be used for a single screen with `layout`:
 />
 ```
 
-Or with a group or navigator with `screenLayout`:
+Or with a [group](group.md#screen-layout) or [navigator](navigator.md#screen-layout) with `screenLayout`:
 
 ```jsx
 <Stack.Group

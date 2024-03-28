@@ -57,6 +57,7 @@ Optional unique ID for the navigator. This can be used with [`navigation.getPare
 
 ```js
 const MyStack = createNativeStackNavigator({
+  // highlight-next-line
   id: 'RootStack',
   screens: {
     Home: HomeScreen,
@@ -73,7 +74,10 @@ const Stack = createNativeStackNavigator();
 
 function MyStack() {
   return (
-    <Stack.Navigator id="RootStack">
+    <Stack.Navigator
+      // highlight-next-line
+      id="RootStack"
+    >
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
@@ -93,6 +97,7 @@ The name of the route to render on the first load of the navigator.
 
 ```js
 const MyStack = createNativeStackNavigator({
+  // highlight-next-line
   initialRouteName: 'Home',
   screens: {
     Home: HomeScreen,
@@ -109,7 +114,72 @@ const Stack = createNativeStackNavigator();
 
 function MyStack() {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator
+      // highlight-next-line
+      initialRouteName="Home"
+    >
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Layout
+
+A layout is a wrapper around the navigator. It can be useful for augmenting the navigators with additional UI with a wrapper.
+
+The difference from adding a wrapper around the navigator manually is that the code in a layout callback has access to the navigator's state, options etc.:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const MyStack = createNativeStackNavigator({
+  // highlight-start
+  layout: ({ children, state, descriptors, navigation }) => (
+    <View style={styles.container}>
+      <Breadcrumbs
+        state={state}
+        descriptors={descriptors}
+        navigation={navigation}
+      />
+      {children}
+    </View>
+  ),
+  // highlight-end
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const Stack = createNativeStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator
+      // highlight-start
+      layout={({ children, state, descriptors, navigation }) => (
+        <View style={styles.container}>
+          <Breadcrumbs
+            state={state}
+            descriptors={descriptors}
+            navigation={navigation}
+          />
+          {children}
+        </View>
+      )}
+      // highlight-end
+    >
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
@@ -129,9 +199,11 @@ Default options to use for all the screens in the navigator. It accepts either a
 
 ```js
 const MyStack = createNativeStackNavigator({
+  // highlight-start
   screenOptions: {
     headerShown: false,
   },
+  // highlight-end
   screens: {
     Home: HomeScreen,
     Profile: ProfileScreen,
@@ -147,7 +219,11 @@ const Stack = createNativeStackNavigator();
 
 function MyStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      // highlight-start
+      screenOptions={{ headerShown: false }}
+      // highlight-end
+    >
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
@@ -159,3 +235,73 @@ function MyStack() {
 </Tabs>
 
 See [Options for screens](screen-options.md) for more details and examples.
+
+### Screen listeners
+
+Event listeners can be used to subscribe to various events emitted for the screen. See [`screenListeners` prop on the navigator](navigation-events.md#screenlisteners-prop-on-the-navigator) for more details.
+
+### Screen layout
+
+A screen layout is a wrapper around each screen in the navigator. It makes it easier to provide things such as a common error boundary and suspense fallback for all screens in the navigator:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const MyStack = createNativeStackNavigator({
+  // highlight-start
+  screenLayout: ({ children }) => (
+    <ErrorBoundary>
+      <React.Suspense
+        fallback={
+          <View style={styles.fallback}>
+            <Text style={styles.text}>Loading…</Text>
+          </View>
+        }
+      >
+        {children}
+      </React.Suspense>
+    </ErrorBoundary>
+  ),
+  // highlight-end
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const Stack = createNativeStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator
+      // highlight-start
+      screenLayout={({ children }) => (
+        <ErrorBoundary>
+          <React.Suspense
+            fallback={
+              <View style={styles.fallback}>
+                <Text style={styles.text}>Loading…</Text>
+              </View>
+            }
+          >
+            {children}
+          </React.Suspense>
+        </ErrorBoundary>
+      )}
+      // highlight-end
+    >
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
