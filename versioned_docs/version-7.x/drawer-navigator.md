@@ -220,18 +220,6 @@ When this is set to `open`, the drawer will be open from the initial render. It 
 
 Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
 
-#### `useLegacyImplementation`
-
-Whether to use the legacy implementation based on Reanimated 1. The new implementation based on Reanimated 2 will perform better, but you need additional configuration and need to use Hermes with Flipper to debug.
-
-This defaults to `true` in the following cases:
-
-- Reanimated 2 is not configured
-- App is connected to Chrome debugger (Reanimated 2 cannot be used with Chrome debugger)
-- App is running on Web
-
-Otherwise, it defaults to `false`
-
 #### `drawerContent`
 
 Function that returns React element to render as the content of the drawer, for example, navigation items
@@ -293,30 +281,6 @@ The `DrawerItem` component accepts the following props:
 - `inactiveBackgroundColor`: Background color for item when it's inactive.
 - `labelStyle`: Style object for the label `Text`.
 - `style`: Style object for the wrapper `View`.
-
-The `progress` object can be used to do interesting animations in your `drawerContent`, such as parallax motion of the drawer contents:
-
-<samp id="animated-drawer-content" />
-
-```js
-function CustomDrawerContent(props) {
-  const progress = useDrawerProgress();
-
-  // If you are on react-native-reanimated 1.x, use `Animated.interpolate` instead of `Animated.interpolateNode`
-  const translateX = Animated.interpolateNode(progress, {
-    inputRange: [0, 1],
-    outputRange: [-100, 0],
-  });
-
-  return (
-    <Animated.View style={{ transform: [{ translateX }] }}>
-      {/* ... drawer contents */}
-    </Animated.View>
-  );
-}
-```
-
-The `progress` object is a Reanimated `Node` if you're using Reanimated 1 (see [`useLegacyImplementation`](#uselegacyimplementation)), otherwise a `SharedValue`. It represents the animated position of the drawer (0 is closed; 1 is open).
 
 Note that you **cannot** use the `useNavigation` hook inside the `drawerContent` since `useNavigation` is only available inside screens. You get a `navigation` prop for your `drawerContent` which you can use instead:
 
@@ -671,7 +635,132 @@ Navigates to an existing screen in the drawer navigator. The method accepts the 
 navigation.jumpTo('Profile', { owner: 'Satya' });
 ```
 
-## Checking if the drawer is open
+### Hooks
+
+The drawer navigator exports the following hooks:
+
+#### `useDrawerProgress`
+
+This hook returns the progress of the drawer. It is available in the screen components rendered by the drawer navigator as well as in the [custom drawer content](#drawercontent).
+
+The `progress` object is a `SharedValue` that represents the animated position of the drawer (`0` is closed; `1` is open). It can be used to animate elements based on the animation of the drawer with [Reanimated](https://docs.swmansion.com/react-native-reanimated/):
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Drawer animation progress" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+// codeblock-focus-start
+import {
+  createDrawerNavigator,
+  useDrawerProgress,
+} from '@react-navigation/drawer';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+
+function HomeScreen() {
+  // highlight-next-line
+  const progress = useDrawerProgress();
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: progress.value * -100 }],
+  }));
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Animated.View
+        style={[
+          {
+            height: 100,
+            aspectRatio: 1,
+            backgroundColor: 'tomato',
+          },
+          animatedStyle,
+        ]}
+      />
+    </View>
+  );
+}
+// codeblock-focus-end
+
+const MyDrawer = createDrawerNavigator({
+  screens: {
+    Home: HomeScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyDrawer);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Drawer animation progress" snack version=7
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+// codeblock-focus-start
+import {
+  createDrawerNavigator,
+  useDrawerProgress,
+} from '@react-navigation/drawer';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+
+function HomeScreen() {
+  // highlight-next-line
+  const progress = useDrawerProgress();
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: progress.value * -100 }],
+  }));
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Animated.View
+        style={[
+          {
+            height: 100,
+            aspectRatio: 1,
+            backgroundColor: 'tomato',
+          },
+          animatedStyle,
+        ]}
+      />
+    </View>
+  );
+}
+// codeblock-focus-end
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Home" component={HomeScreen} />
+    </Drawer.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyDrawer />
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+This hook is not supported on Web.
+
+#### `useDrawerStatus`
 
 You can check if the drawer is open by using the `useDrawerStatus` hook.
 
@@ -693,7 +782,7 @@ import { getDrawerStatusFromState } from '@react-navigation/drawer';
 const isDrawerOpen = getDrawerStatusFromState(navigation.getState()) === 'open';
 ```
 
-For class components, you can listen to the `state` event to check if drawer was opened or closed:
+For class components, you can listen to the `state` event to check if the drawer was opened or closed:
 
 ```js
 class Profile extends React.Component {
