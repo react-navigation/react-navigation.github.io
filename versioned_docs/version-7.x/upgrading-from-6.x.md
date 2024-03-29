@@ -387,9 +387,39 @@ Previously, the UI elements in React Navigation such as the header on platforms 
 
 #### React Native Tab View now has a new API to specify various options
 
-TODO
+The API for the `TabBar` component in `react-native-tab-view` has been revamped. Previously, it took the following props:
 
-See [React Native Tab View](tab-view.md) for usage.
+- `getLabelText`
+- `getAccessible`
+- `getAccessibilityLabel`
+- `getTestID`
+- `renderIcon`
+- `renderLabel`
+- `renderBadge`
+
+These props have been replaced with `commonOptions` and `options` props:
+
+```js
+<TabBar
+  commonOptions={{
+    icon: ({ route, focused, color }) => (
+      <Icon name={route.icon} color={color} />
+    ),
+  }}
+  options={{
+    albums: {
+      labelText: 'Albums',
+    },
+    profile: {
+      labelText: 'Profile',
+    },
+  }}
+/>
+```
+
+The new API will make it easier for us to improve re-rendering performance of the tab bar items in the library.
+
+See [React Native Tab View](tab-view.md#options) for usage.
 
 #### Custom navigators now require more type information
 

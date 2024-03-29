@@ -250,7 +250,7 @@ Position of the tab bar in the tab view. Possible values are `'top'` and `'botto
 
 Function which takes an object with the current route and returns a boolean to indicate whether to lazily render the scenes.
 
-By default all scenes are rendered to provide a smoother swipe experience. But you might want to defer the rendering of unfocused scenes until the user sees them. To enable lazy rendering for a particular scene, return `true` from `getLazy` for that `route`:
+By default all scenes are rendered to provide a smoother swipe experience. But you might want to defer the rendering of unfocused scenes until the user sees them. To enable lazy rendering for a particular scene, return `true` from `lazy` for that `route`:
 
 ```js
 <TabView
@@ -358,72 +358,103 @@ return (
 
 #### TabBar Props
 
-##### `getLabelText`
+##### Options
 
-Function which takes an object with the current route and returns the label text for the tab. Uses `route.title` by default.
+Options describe how each tab should be rendered. There are 2 ways to specify options:
+
+- `commonOptions`: Options that apply to all tabs.
+- `options`: Options that apply to specific tabs. It has the route key as the key and the object with options.
+
+Example:
 
 ```js
 <TabBar
-  getLabelText={({ route }) => route.title}
-  ...
+  commonOptions={{
+    icon: ({ route, focused, color }) => (
+      <Icon name={route.icon} color={color} />
+    ),
+  }}
+  options={{
+    albums: {
+      labelText: 'Albums',
+    },
+    profile: {
+      labelText: 'Profile',
+    },
+  }}
 />
 ```
 
-##### `getAccessible`
+The following options are available:
 
-Function which takes an object with the current route and returns a boolean to indicate whether to mark a tab as `accessible`. Defaults to `true`.
+###### `accessibilityLabel`
 
-##### `getAccessibilityLabel`
+Accessibility label for the tab button. Uses `route.accessibilityLabel` by default if specified, otherwise uses the route title.
 
-Function which takes an object with the current route and returns a accessibility label for the tab button. Uses `route.accessibilityLabel` by default if specified, otherwise uses the route title.
+###### `accessible`
+
+Whether to mark the tab as `accessible`. Defaults to `true`.
+
+###### `testID`
+
+Test ID for the tab button. Uses `route.testID` by default.
+
+###### `labelText`
+
+Label text for the tab button. Uses `route.title` by default.
+
+###### `labelAllowFontScaling`
+
+Whether label font should scale to respect Text Size accessibility settings. Defaults to `true`.
+
+###### `href`
+
+URL to use for the anchor tag for the tab button on the Web.
+
+###### `label`
+
+A function that returns a custom React Element to be used as a label. The function receives an object with the following properties:
+
+- `route` - The route object for the tab.
+- `labelText` - The label text for the tab specified in the `labelText` option or the `route title`.
+- `focused` - Whether the label is for the focused state.
+- `color` - The color of the label.
+- `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings.
+- `style` - The style object for the label.
 
 ```js
-<TabBar
-  getAccessibilityLabel={({ route }) => route.accessibilityLabel}
-  ...
-/>
+label: ({ route, labelText, focused, color }) => (
+  <Text style={{ color, margin: 8 }}>{labelText ?? route.name}</Text>
+);
 ```
 
-##### `getTestID`
+###### `icon`
 
-Function which takes an object with the current route and returns a test id for the tab button to locate this tab button in tests. Uses `route.testID` by default.
+A function that returns a custom React Element to be used as an icon. The function receives an object with the following properties:
+
+- `route` - The route object for the tab.
+- `focused` - Whether the icon is for the focused state.
+- `color` - The color of the icon.
+- `size` - The size of the icon.
 
 ```js
-<TabBar
-  getTestID={({ route }) => route.testID}
-  ...
-/>
+icon: ({ route, focused, color }) => (
+  <Icon name={focused ? 'albums' : 'albums-outlined'} color={color} />
+);
 ```
 
-##### `renderIcon`
+###### `badge`
 
-Function which takes an object with the current route, focused status and color and returns a custom React Element to be used as a icon.
+A function that returns a custom React Element to be used as a badge. The function receives an object with the following properties:
 
-```js
-<TabBar
-  renderIcon={({ route, focused, color }) => (
-    <Icon
-      name={focused ? 'albums' : 'albums-outlined'}
-      color={color}
-    />
-  )}
-  ...
-/>
-```
-
-##### `renderLabel`
-
-Function which takes an object with the current route, focused status and color and returns a custom React Element to be used as a label.
+- `route` - The route object for the tab.
 
 ```js
-<TabBar
-  renderLabel={({ route, focused, color }) => (
-    <Text style={{ color, margin: 8 }}>
-      {route.title}
-    </Text>
-  )}
-  ...
-/>
+badge: ({ route }) => (
+  <View
+    style={{ backgroundColor: 'red', width: 20, height: 20, borderRadius: 10 }}
+  />
+);
 ```
 
 ##### `renderTabBarItem`
@@ -433,10 +464,6 @@ Function which takes a `TabBarItemProps` object and returns a custom React Eleme
 ##### `renderIndicator`
 
 Function which takes an object with the current route and returns a custom React Element to be used as a tab indicator.
-
-##### `renderBadge`
-
-Function which takes an object with the current route and returns a custom React Element to be used as a badge.
 
 ##### `onTabPress`
 
@@ -515,11 +542,11 @@ Style to apply to the tab bar container.
 
 ##### `gap`
 
-Define a spacing between tabs.
+Spacing between the tab items.
 
-##### `testID`
+##### `testID` (`TabBar`)
 
-Test id for the tabBar. Can be used for scrolling the tab bar in tests
+Test ID for the tab bar. Can be used for scrolling the tab bar in tests
 
 ## Optimization Tips
 
