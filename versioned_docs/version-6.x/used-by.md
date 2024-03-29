@@ -49,6 +49,7 @@ It's impossible to list every single app that uses React Navigation, but below a
 - [Sweepy](https://sweepy.app/)
 - [Tracker Network for Fortnite](https://apps.apple.com/us/app/tracker-network-for-fortnite/id1287696482)
 - [Vrbo](https://www.vrbo.com/mobile/)
+- [Myfxhelper](https://www.myfxhelper.com/) ([iOS](https://apps.apple.com/id/app/myfxhelper-forex-signal/id1490556445)) ([Android](https://play.google.com/store/apps/details?id=com.mhfcorp.myfxhelper&hl=en&gl=US))
 
 ## Your app?
 
