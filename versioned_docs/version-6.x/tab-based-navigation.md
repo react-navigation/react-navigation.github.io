@@ -155,7 +155,7 @@ function SettingsScreen({ navigation }) {
 
 ## A stack navigator for each tab
 
-Usually tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
+Often tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
 
 <samp id="tab-based-navigation-stack" />
 
@@ -226,8 +226,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={{ headerShown: false }}>
-        <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen name="Settings" component={SettingsStackScreen} />
+        <Tab.Screen name="HomeStack" component={HomeStackScreen} />
+        <Tab.Screen name="SettingsStack" component={SettingsStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
