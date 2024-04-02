@@ -582,7 +582,7 @@ This is an advanced use case. Don't use this unless you are 100% sure that you n
 
 :::
 
-Whether this navigation container should be independent of parent containers. If this is not set to `true`, this container cannot be nested inside another container. Setting it to `true` disconnects any children navigators from the parent container and doesn't allow navigation between them.
+Whether this navigation container should be independent of parent containers. If this is set to `true`, this container cannot be nested inside another container. Setting it to `true` disconnects any children navigators from the parent container and doesn't allow navigation between them.
 
 You probably don't want to set this to `true` in a typical React Native app. This is only useful if you have navigation trees that work like their own mini-apps and don't need to navigate to the screens outside of them.
 
