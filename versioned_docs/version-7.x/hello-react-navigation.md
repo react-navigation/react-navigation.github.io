@@ -504,6 +504,13 @@ By default, React Navigation applies optimizations to screen components to preve
 
 The natural question at this point is: "how do I go from the `Home` route to the `Details` route?". That is covered in the [next section](navigating.md).
 
+<details>
+<summary>Using with TypeScript</summary>
+
+If you are using TypeScript, you will need to specify the types accordingly. You can check [Type checking with TypeScript](typescript.md) after going through the fundamentals for more details. For now, we won't be covering TypeScript in the examples.
+
+</details>
+
 ## Summary
 
 <Tabs groupId="config" queryString="config">
