@@ -89,7 +89,7 @@ Similar to `options`, you can also pass a function to `screenOptions`. The funct
 
 ### `screenOptions` prop on the navigator
 
-You can pass a prop named `screenOptions` to the navigator component, where you can specify an object with different options. The options specified in `screenOptions` apply to all of the screens in the navigator. So this is a good place to add specify options that you want to configure for the whole navigator.
+You can pass a prop named `screenOptions` to the navigator component, where you can specify an object with different options. The options specified in `screenOptions` apply to all of the screens in the navigator. So this is a good place to specify options that you want to configure for the whole navigator.
 
 Example:
 
