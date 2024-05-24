@@ -37,7 +37,7 @@ The `navigationInChildEnabled` prop will be removed in the next major.
 
 See [`navigate`](navigation-object.md#navigate) for updated usage.
 
-#### The `navigate` method no longer goes back in, use `popTo` instead
+#### The `navigate` method no longer goes back, use `popTo` instead
 
 Previously, `navigate` method navigated back if the screen already exists in the stack. We have seen many people get confused by this behavior.
 
