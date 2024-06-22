@@ -331,6 +331,8 @@ Previously, we added a Flipper plugin for React Navigation to make debugging nav
 
 Since the React Native team migrating away from Flipper, it doesn't make much sense for us to spend additional resources to keep supporting it. So we've removed the Flipper plugin from `@react-navigation/devtools`.
 
+As an alternative, you can use [React Navigation devtools plugin for Expo](https://docs.expo.dev/debugging/devtools-plugins/#react-navigation) if you are using [Expo](https://expo.dev).
+
 #### Various deprecated APIs are removed
 
 We have removed all of the previously deprecated APIs. These APIs were deprecated in React Navigation 6 and showed a warning when used. So make sure that you have addressed all the warnings before upgrading.
