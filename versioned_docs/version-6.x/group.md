@@ -4,7 +4,7 @@ title: Group
 sidebar_label: Group
 ---
 
-`Group` components are used to group several [screens](screen.md) inside a navigator.
+`Group` components are used to group several [screens](screen.md) inside a navigator for organizational purposes. They can also be used to apply the same options such as header styles to a group of screens.
 
 A `Group` is returned from a `createXNavigator` function:
 

@@ -7,7 +7,7 @@ sidebar_label: Group
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-A group contains several [screens](screen.md) inside a navigator.
+A group contains several [screens](screen.md) inside a navigator for organizational purposes. They can also be used to apply the same options such as header styles to a group of screens, or to define a common layout etc.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
