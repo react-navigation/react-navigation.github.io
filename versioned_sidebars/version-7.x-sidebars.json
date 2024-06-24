@@ -36,8 +36,6 @@
       "combine-static-with-dynamic",
       "testing",
       "typescript",
-      "redux-integration",
-      "MST-integration",
       "troubleshooting",
       "upgrading-from-6.x"
     ],
