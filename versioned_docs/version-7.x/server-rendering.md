@@ -4,6 +4,9 @@ title: Server rendering
 sidebar_label: Server rendering
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 This guide will cover how to server render your React Native app using React Native for Web and React Navigation. We'll cover the following cases:
 
 1. Rendering the correct layout depending on the request URL
@@ -130,15 +133,58 @@ app.use(async (ctx) => {
 });
 ```
 
-Make sure that you have specified a `title` option in your screens:
+Make sure that you have specified a `title` option for your screens:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
 ```js
-<Stack.Screen
-  name="Profile"
-  component={ProfileScreen}
-  options={{ title: 'My profile' }}
-/>
+const Stack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        // highlight-next-line
+        title: 'My App',
+      },
+    },
+    Profile: {
+      screen: ProfileScreen,
+      options: ({ route }) => ({
+        // highlight-next-line
+        title: `${route.params.name}'s Profile`,
+      }),
+    },
+  },
+});
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<Stack.Navigator>
+  <Stack.Screen
+    name="Home"
+    component={HomeScreen}
+    options={{
+      // highlight-next-line
+      title: 'My App',
+    }}
+  />
+  <Stack.Screen
+    name="Profile"
+    component={ProfileScreen}
+    options={({ route }) => ({
+      // highlight-next-line
+      title: `${route.params.name}'s Profile`,
+    })}
+  />
+</Stack.Navigator>
+```
+
+</TabItem>
+</Tabs>
 
 ## Handling 404 or other status codes
 
