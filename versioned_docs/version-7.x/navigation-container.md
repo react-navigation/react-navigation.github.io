@@ -20,6 +20,8 @@ Usage:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
+When using the static API, the component returned by [`createStaticNavigation`](static-configuration.md#createstaticnavigation) is equivalent to the `NavigationContainer` component.
+
 ```js
 import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -60,7 +62,7 @@ export default function App() {
 
 ## Ref
 
-It's also possible to attach a [`ref`](https://reactjs.org/docs/refs-and-the-dom.html#creating-refs) to the container to get access to various helper methods, for example, dispatch navigation actions. This should be used in rare cases when you don't have access to the [`navigation` object](navigation-object.md), such as a Redux middleware.
+It's possible to pass a [`ref`](https://reactjs.org/docs/refs-and-the-dom.html#creating-refs) to the container to get access to various helper methods, for example, dispatch navigation actions. This should be used in rare cases when you don't have access to the [`navigation` object](navigation-object.md), such as a Redux middleware.
 
 Example:
 
@@ -100,6 +102,7 @@ const Navigation = createStaticNavigation(Stack);
 // codeblock-focus-start
 
 export default function App() {
+  // highlight-next-line
   const navigationRef = useNavigationContainerRef(); // You can also use a regular ref with `React.useRef()`
 
   return (
@@ -140,6 +143,7 @@ function HomeScreen() {
 // codeblock-focus-start
 
 export default function App() {
+  // highlight-next-line
   const navigationRef = useNavigationContainerRef(); // You can also use a regular ref with `React.useRef()`
 
   return (
@@ -266,11 +270,32 @@ Prop that accepts initial state for the navigator. This can be useful for cases 
 
 Example:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
 ```js
-<NavigationContainer initialState={initialState}>
+<Navigation
+  // highlight-next-line
+  initialState={initialState}
+/>
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<NavigationContainer
+  // highlight-next-line
+  initialState={initialState}
+>
   {/* ... */}
 </NavigationContainer>
 ```
+
+</TabItem>
+</Tabs>
+
+See [Navigation state reference](navigation-state.md) for more details on the structure of the state object.
 
 Providing a custom initial state object will override the initial state object obtained via linking configuration or from browser's URL. If you're providing an initial state object, make sure that you don't pass it on web and that there's no deep link to handle.
 
@@ -303,7 +328,10 @@ Example:
 <TabItem value="static" label="Static" default>
 
 ```js
-<Navigation onStateChange={(state) => console.log('New state is', state)} />
+<Navigation
+  // highlight-next-line
+  onStateChange={(state) => console.log('New state is', state)}
+/>
 ```
 
 </TabItem>
@@ -311,6 +339,7 @@ Example:
 
 ```js
 <NavigationContainer
+  // highlight-next-line
   onStateChange={(state) => console.log('New state is', state)}
 >
   {/* ... */}
@@ -333,7 +362,10 @@ Example:
 <TabItem value="static" label="Static" default>
 
 ```js
-<Navigation onReady={() => console.log('Navigation container is ready')} />
+<Navigation
+  // highlight-next-line
+  onReady={() => console.log('Navigation container is ready')}
+/>
 ```
 
 </TabItem>
@@ -341,6 +373,7 @@ Example:
 
 ```js
 <NavigationContainer
+  // highlight-next-line
   onReady={() => console.log('Navigation container is ready')}
 >
   {/* ... */}
@@ -358,7 +391,34 @@ The current status can be obtained with the [`isReady`](#isready) method on the 
 
 Function which is called when a navigation action is not handled by any of the navigators.
 
-By default, React Navigation will show a development-only error message when an action was not handled. You can override the default behavior by providing a custom function.
+By default, React Navigation will show a development-only error message when an action is not handled. You can override the default behavior by providing a custom function.
+
+Example:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+<Navigation
+  // highlight-next-line
+  onUnhandledAction={(action) => console.error('Unhandled action', action)}
+/>
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<NavigationContainer
+  // highlight-next-line
+  onUnhandledAction={(action) => console.error('Unhandled action', action)}
+>
+  {/* ... */}
+</NavigationContainer>
+```
+
+</TabItem>
+</Tabs>
 
 ### `linking`
 
@@ -391,7 +451,13 @@ function App() {
     prefixes: ['https://mychat.com', 'mychat://'],
   };
 
-  return <Navigation linking={linking} fallback={<Text>Loading...</Text>} />;
+  return (
+    <Navigation
+      // highlight-next-line
+      linking={linking}
+      fallback={<Text>Loading...</Text>}
+    />
+  );
 }
 ```
 
@@ -412,7 +478,11 @@ function App() {
   };
 
   return (
-    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
+    <NavigationContainer
+      // highlight-next-line
+      linking={linking}
+      fallback={<Text>Loading...</Text>}
+    >
       {/* content */}
     </NavigationContainer>
   );
@@ -437,32 +507,13 @@ Example:
 <TabItem value="static" label="Static" default>
 
 ```js
-import { createStaticNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Chat: {
-      screen: Chat,
-      linking: {
-        path: 'feed/:sort',
-      },
-    },
-  },
-});
-
-const Navigation = createStaticNavigation(RootStack);
-
-function App() {
-  return (
-    <Navigation
-      linking={{
-        prefixes: ['https://mychat.com', 'mychat://'],
-      }}
-      fallback={<Text>Loading...</Text>}
-    />
-  );
-}
+<Navigation
+  linking={{
+    // highlight-next-line
+    prefixes: ['https://mychat.com', 'mychat://'],
+  }}
+  fallback={<Text>Loading...</Text>}
+/>
 ```
 
 </TabItem>
@@ -471,11 +522,10 @@ function App() {
 ```js
 <NavigationContainer
   linking={{
+    // highlight-next-lineP
     prefixes: ['https://mychat.com', 'mychat://'],
     config: {
-      screens: {
-        Chat: 'feed/:sort',
-      },
+      // ...
     },
   }}
 >
@@ -490,220 +540,17 @@ This is only supported on iOS and Android.
 
 ##### `linking.config`
 
-Config to fine-tune how to parse the path. The config object should represent the structure of the navigators in the app.
+Config to fine-tune how to parse the path.
 
-For example, if we have `Catalog` screen inside `Home` screen and want it to handle the `item/:id` pattern:
+When using dynamic API, the config object should represent the structure of the navigators in the app.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Home: {
-      screen: HomeScreen,
-      screens: {
-        Catalog: {
-          screen: Catalog,
-          linking: {
-            path: 'item/:id',
-            parse: {
-              id: Number,
-            },
-          },
-        },
-      },
-    },
-  },
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-{
-  screens: {
-    Home: {
-      screens: {
-        Catalog: {
-          path: 'item/:id',
-          parse: {
-            id: Number,
-          },
-        },
-      },
-    },
-  }
-}
-```
-
-</TabItem>
-</Tabs>
-
-The options for parsing can be an object or a string:
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Catalog: {
-      screen: Catalog,
-      linking: {
-        path: 'item/:id',
-      },
-    },
-  },
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-{
-  screens: {
-    Catalog: 'item/:id',
-  }
-}
-```
-
-</TabItem>
-</Tabs>
-
-When a string is specified, it's equivalent to providing the `path` option.
-
-The `path` option is a pattern to match against the path. Any segments starting with `:` are recognized as a param with the same name. For example `item/42` will be parsed to `{ name: 'item', params: { id: '42' } }`.
-
-The `initialRouteName` option ensures that the route name passed there will be present in the state for the navigator, e.g. for config:
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Home: {
-      initialRouteName: 'Feed',
-      screen: HomeScreen,
-      linking: {
-        screens: {
-          Catalog: {
-            path: 'item/:id',
-            parse: {
-              id: Number,
-            },
-          },
-          Feed: 'feed',
-        },
-      },
-    },
-  },
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-{
-  screens: {
-    Home: {
-      initialRouteName: 'Feed',
-      screens: {
-        Catalog: {
-          path: 'item/:id',
-          parse: {
-            id: Number,
-          },
-        },
-        Feed: 'feed',
-      },
-    },
-  }
-}
-```
-
-</TabItem>
-</Tabs>
-
-and URL : `/item/42`, the state will look like this:
-
-```js
-{
-  routes: [
-    {
-      name: 'Home',
-      state: {
-        index: 1,
-        routes: [
-          {
-            name: 'Feed'
-          },
-          {
-            name: 'Catalog',
-            params: { id: 42 },
-          },
-        ],
-      },
-    },
-  ],
-}
-```
-
-The `parse` option controls how the params are parsed. Here, you can provide the name of the param to parse as a key, and a function which takes the string value for the param and returns a parsed value:
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Home: {
-      initialRouteName: 'Feed',
-      screen: HomeScreen,
-      linking: {
-        screens: {
-          Catalog: {
-            path: 'item/:id',
-            parse: {
-              id: Number,
-            },
-          },
-          Feed: 'feed',
-        },
-      },
-    },
-  },
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-{
-  screens: {
-    Catalog: {
-      path: 'item/:id',
-      parse: {
-        id: id => parseInt(id, 10),
-      },
-    },
-  }
-}
-```
-
-</TabItem>
-</Tabs>
-
-If no custom function is provided for parsing a param, it'll be parsed as a string.
+See the [configuring links guide](configuring-links.md) for more details on how to configure deep links and URL integration.
 
 ##### `linking.enabled`
 
 Optional boolean to enable or disable the linking integration. Defaults to `true` if the `linking` prop is specified.
+
+When using the static API, it's possible to pass `'auto'` to automatically generate the config based on the navigator's structure. See the [configuring links guide](configuring-links.md) for more details.
 
 ##### `linking.getInitialURL`
 
@@ -719,57 +566,10 @@ For example, you could do something like following to handle both deep linking a
 ```js
 import messaging from '@react-native-firebase/messaging';
 
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Chat: {
-      screen: Chat,
-      linking: {
-        path: 'feed/:sort',
-      },
-    },
-  },
-});
-
-const Navigation = createStaticNavigation(RootStack);
-
-export default function App() {
-  <Navigation
-    linking={{
-      prefixes: ['https://mychat.com', 'mychat://'],
-      async getInitialURL() {
-        // Check if app was opened from a deep link
-        const url = await Linking.getInitialURL();
-
-        if (url != null) {
-          return url;
-        }
-
-        // Check if there is an initial firebase notification
-        const message = await messaging().getInitialNotification();
-
-        // Get the `url` property from the notification which corresponds to a screen
-        // This property needs to be set on the notification payload when sending it
-        return message?.data?.url;
-      },
-    }}
-  />;
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-import messaging from '@react-native-firebase/messaging';
-
-<NavigationContainer
+<Navigation
   linking={{
     prefixes: ['https://mychat.com', 'mychat://'],
-    config: {
-      screens: {
-        Chat: 'feed/:sort',
-      },
-    },
+    // highlight-start
     async getInitialURL() {
       // Check if app was opened from a deep link
       const url = await Linking.getInitialURL();
@@ -785,6 +585,40 @@ import messaging from '@react-native-firebase/messaging';
       // This property needs to be set on the notification payload when sending it
       return message?.data?.url;
     },
+    // highlight-end
+  }}
+/>;
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+import messaging from '@react-native-firebase/messaging';
+
+<NavigationContainer
+  linking={{
+    prefixes: ['https://mychat.com', 'mychat://'],
+    config: {
+      // ...
+    },
+    // highlight-start
+    async getInitialURL() {
+      // Check if app was opened from a deep link
+      const url = await Linking.getInitialURL();
+
+      if (url != null) {
+        return url;
+      }
+
+      // Check if there is an initial firebase notification
+      const message = await messaging().getInitialNotification();
+
+      // Get the `url` property from the notification which corresponds to a screen
+      // This property needs to be set on the notification payload when sending it
+      return message?.data?.url;
+    },
+    // highlight-end
   }}
 >
   {/* content */}
@@ -808,69 +642,10 @@ For example, you could do something like following to handle both deep linking a
 ```js
 import messaging from '@react-native-firebase/messaging';
 
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Chat: {
-      screen: Chat,
-      linking: {
-        path: 'feed/:sort',
-      },
-    },
-  },
-});
-
-const Navigation = createStaticNavigation(RootStack);
-
-export default function App() {
-  <Navigation
-    linking={{
-      prefixes: ['https://mychat.com', 'mychat://'],
-      subscribe(listener) {
-        const onReceiveURL = ({ url }: { url: string }) => listener(url);
-
-        // Listen to incoming links from deep linking
-        const subscription = Linking.addEventListener('url', onReceiveURL);
-
-        // Listen to firebase push notifications
-        const unsubscribeNotification = messaging().onNotificationOpenedApp(
-          (message) => {
-            const url = message.data?.url;
-
-            if (url) {
-              // Any custom logic to check whether the URL needs to be handled
-              //...
-
-              // Call the listener to let React Navigation handle the URL
-              listener(url);
-            }
-          }
-        );
-
-        return () => {
-          // Clean up the event listeners
-          subscription.remove();
-          unsubscribeNotification();
-        };
-      },
-    }}
-  />;
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-import messaging from '@react-native-firebase/messaging';
-
-<NavigationContainer
+<Navigation
   linking={{
     prefixes: ['https://mychat.com', 'mychat://'],
-    config: {
-      screens: {
-        Chat: 'feed/:sort',
-      },
-    },
+    // highlight-start
     subscribe(listener) {
       const onReceiveURL = ({ url }: { url: string }) => listener(url);
 
@@ -898,6 +673,52 @@ import messaging from '@react-native-firebase/messaging';
         unsubscribeNotification();
       };
     },
+    // highlight-end
+  }}
+/>
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+import messaging from '@react-native-firebase/messaging';
+
+<NavigationContainer
+  linking={{
+    prefixes: ['https://mychat.com', 'mychat://'],
+    config: {
+      // ...
+    },
+    // highlight-start
+    subscribe(listener) {
+      const onReceiveURL = ({ url }: { url: string }) => listener(url);
+
+      // Listen to incoming links from deep linking
+      const subscription = Linking.addEventListener('url', onReceiveURL);
+
+      // Listen to firebase push notifications
+      const unsubscribeNotification = messaging().onNotificationOpenedApp(
+        (message) => {
+          const url = message.data?.url;
+
+          if (url) {
+            // Any custom logic to check whether the URL needs to be handled
+            //...
+
+            // Call the listener to let React Navigation handle the URL
+            listener(url);
+          }
+        }
+      );
+
+      return () => {
+        // Clean up the event listeners
+        subscription.remove();
+        unsubscribeNotification();
+      };
+    },
+    // highlight-end
   }}
 >
   {/* content */}
@@ -919,32 +740,17 @@ Example:
 <TabItem value="static" label="Static" default>
 
 ```js
-import messaging from '@react-native-firebase/messaging';
-
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Chat: {
-      screen: Chat,
-      linking: {
-        path: 'feed/:sort',
-      },
+<Navigation
+  linking={{
+    prefixes: ['https://mychat.com', 'mychat://'],
+    // highlight-start
+    getStateFromPath(path, config) {
+      // Return a state object here
+      // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
     },
-  },
-});
-
-const Navigation = createStaticNavigation(RootStack);
-
-export default function App() {
-  <Navigation
-    linking={{
-      prefixes: ['https://mychat.com', 'mychat://'],
-      getStateFromPath(path, config) {
-        // Return a state object here
-        // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
-      },
-    }}
-  />;
-}
+    // highlight-end
+  }}
+/>
 ```
 
 </TabItem>
@@ -955,14 +761,14 @@ export default function App() {
   linking={{
     prefixes: ['https://mychat.com', 'mychat://'],
     config: {
-      screens: {
-        Chat: 'feed/:sort',
-      },
+      // ...
     },
+    // highlight-start
     getStateFromPath(path, config) {
       // Return a state object here
       // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
     },
+    // highlight-end
   }}
 >
   {/* content */}
@@ -981,32 +787,17 @@ Example:
 <TabItem value="static" label="Static" default>
 
 ```js
-import messaging from '@react-native-firebase/messaging';
-
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Chat: {
-      screen: Chat,
-      linking: {
-        path: 'feed/:sort',
-      },
+<Navigation
+  linking={{
+    prefixes: ['https://mychat.com', 'mychat://'],
+    // highlight-start
+    getPathFromState(state, config) {
+      // Return a path string here
+      // You can also reuse the default logic by importing `getPathFromState` from `@react-navigation/native`
     },
-  },
-});
-
-const Navigation = createStaticNavigation(RootStack);
-
-export default function App() {
-  <Navigation
-    linking={{
-      prefixes: ['https://mychat.com', 'mychat://'],
-      getPathFromState(state, config) {
-        // Return a path string here
-        // You can also reuse the default logic by importing `getPathFromState` from `@react-navigation/native`
-      },
-    }}
-  />;
-}
+    // highlight-end
+  }}
+/>
 ```
 
 </TabItem>
@@ -1017,14 +808,14 @@ export default function App() {
   linking={{
     prefixes: ['https://mychat.com', 'mychat://'],
     config: {
-      screens: {
-        Chat: 'feed/:sort',
-      },
+      // ...
     },
+    // highlight-start
     getPathFromState(state, config) {
       // Return a path string here
       // You can also reuse the default logic by importing `getPathFromState` from `@react-navigation/native`
     },
+    // highlight-end
   }}
 >
   {/* content */}
@@ -1037,6 +828,31 @@ export default function App() {
 ### `fallback`
 
 React Element to use as a fallback while we resolve deep links. Defaults to `null`.
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+<Navigation
+  // highlight-next-line
+  fallback={<Text>Loading...</Text>}
+/>
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<NavigationContainer
+  // highlight-next-line
+  fallback={<Text>Loading...</Text>}
+>
+  {/* content */}
+</NavigationContainer>
+```
+
+</TabItem>
+</Tabs>
 
 If you have a native splash screen, please use [`onReady`](#onready) instead of `fallback` prop.
 
@@ -1062,42 +878,30 @@ Example:
 <TabItem value="static" label="Static" default>
 
 ```js
-import { createStaticNavigation } from '@react-navigation/native';
-
-/* content */
-
-const Navigation = createStaticNavigation(RootStack);
-
-function App() {
-  return (
-    <Navigation
-      documentTitle={{
-        formatter: (options, route) =>
-          `${options?.title ?? route?.name} - My Cool App`,
-      }}
-    />
-  );
-}
+<Navigation
+  // highlight-start
+  documentTitle={{
+    formatter: (options, route) =>
+      `${options?.title ?? route?.name} - My Cool App`,
+  }}
+  // highlight-end
+/>
 ```
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
 ```js
-import { NavigationContainer } from '@react-navigation/native';
-
-function App() {
-  return (
-    <NavigationContainer
-      documentTitle={{
-        formatter: (options, route) =>
-          `${options?.title ?? route?.name} - My Cool App`,
-      }}
-    >
-      {/* content */}
-    </NavigationContainer>
-  );
-}
+<NavigationContainer
+  // highlight-start
+  documentTitle={{
+    formatter: (options, route) =>
+      `${options?.title ?? route?.name} - My Cool App`,
+  }}
+  // highlight-end
+>
+  {/* content */}
+</NavigationContainer>
 ```
 
 </TabItem>
@@ -1153,9 +957,11 @@ const Navigation = createStaticNavigation(RootStack);
 
 function NestedApp() {
   return (
+    // highlight-start
     <NavigationIndependentTree>
       <Navigation />
     </NavigationIndependentTree>
+    // highlight-end
   );
 }
 ```
@@ -1171,9 +977,11 @@ import {
 
 function NestedApp() {
   return (
+    // highlight-start
     <NavigationIndependentTree>
       <NavigationContainer>{/* content */}</NavigationContainer>
     </NavigationIndependentTree>
+    // highlight-end
   );
 }
 ```
