@@ -14,7 +14,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="React Navigation" href="/opensearch.xml">
 
 <script src="/js/snack-helpers.js"></script><link rel="stylesheet" href="/assets/css/styles.d5e2ea99.css">
-<script src="/assets/js/runtime~main.83ff0def.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.0af842f5.js" defer="defer"></script>
 <script src="/assets/js/main.c55f5687.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -119,14 +119,14 @@
 <video playsinline="" autoplay="" muted="" loop="" data-landscape="true"><source src="/assets/7.x/bottom-tabs-side.mp4"></video>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="lazy"><code>lazy</code><a href="#lazy" class="hash-link" aria-label="Direct link to lazy" title="Direct link to lazy">​</a></h4>
 <p>Whether this screens should render the first time it&#x27;s accessed. Defaults to <code>true</code>. Set it to <code>false</code> if you want to render the screen on initial render.</p>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="unmountonblur"><code>unmountOnBlur</code><a href="#unmountonblur" class="hash-link" aria-label="Direct link to unmountonblur" title="Direct link to unmountonblur">​</a></h4>
-<p>Whether this screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to <code>false</code>.</p>
-<p>Normally, we don&#x27;t recommend enabling this prop as users don&#x27;t expect their navigation history to be lost when switching tabs. If you enable this prop, please consider if this will actually provide a better experience for the user.</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="freezeonblur"><code>freezeOnBlur</code><a href="#freezeonblur" class="hash-link" aria-label="Direct link to freezeonblur" title="Direct link to freezeonblur">​</a></h4>
 <p>Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to <code>false</code>.
 Defaults to <code>true</code> when <code>enableFreeze()</code> from <code>react-native-screens</code> package is run at the top of the application.</p>
 <p>Requires <code>react-native-screens</code> version &gt;=3.16.0.</p>
 <p>Only supported on iOS and Android.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="poptotoponblur"><code>popToTopOnBlur</code><a href="#poptotoponblur" class="hash-link" aria-label="Direct link to poptotoponblur" title="Direct link to poptotoponblur">​</a></h4>
+<p>Boolean indicating whether any nested stack should be popped to the top of the stack when navigating away from this tab. Defaults to <code>false</code>.</p>
+<p>It only works when there is a stack navigator (e.g. <a href="/docs/7.x/stack-navigator">stack navigator</a> or <a href="/docs/7.x/native-stack-navigator">native stack navigator</a>) nested under the tab navigator.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="header-related-options">Header related options<a href="#header-related-options" class="hash-link" aria-label="Direct link to Header related options" title="Direct link to Header related options">​</a></h3>
 <p>You can find the list of header related options <a href="/docs/7.x/elements#header">here</a>. These <a href="/docs/7.x/screen-options">options</a> can be specified under <code>screenOptions</code> prop of <code>Tab.navigator</code> or <code>options</code> prop of <code>Tab.Screen</code>. You don&#x27;t have to be using <code>@react-navigation/elements</code> directly to use these options, they are just documented in that page.</p>
 <p>In addition to those, the following options are also supported in bottom tabs:</p>

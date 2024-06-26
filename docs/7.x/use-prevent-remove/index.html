@@ -14,7 +14,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="React Navigation" href="/opensearch.xml">
 
 <script src="/js/snack-helpers.js"></script><link rel="stylesheet" href="/assets/css/styles.d5e2ea99.css">
-<script src="/assets/js/runtime~main.83ff0def.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.0af842f5.js" defer="defer"></script>
 <script src="/assets/js/main.c55f5687.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -45,7 +45,6 @@
 <ul>
 <li>The user closes the app (e.g. by pressing the back button on the home screen, closing the tab in the browser, closing it from the app switcher etc.). You can additionally use <a href="https://reactnative.dev/docs/backhandler" target="_blank" rel="noopener noreferrer"><code>hardwareBackPress</code></a> event on Android, <a href="https://developer.mozilla.org/en-US/docs/web/api/window/beforeunload_event" target="_blank" rel="noopener noreferrer"><code>beforeunload</code></a> event on the Web etc. to handle some of these cases. See <a href="/docs/7.x/preventing-going-back#prevent-the-user-from-leaving-the-app">Prevent the user from leaving the app</a> for more details.</li>
 <li>A screen gets unmounted due to conditional rendering, or due to a parent component being unmounted.</li>
-<li>A screen gets unmounted due to the usage of <code>unmountOnBlur</code> options with <a href="/docs/7.x/bottom-tab-navigator"><code>@react-navigation/bottom-tabs</code></a>, <a href="/docs/7.x/drawer-navigator"><code>@react-navigation/drawer</code></a> etc.</li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="ux-considerations">UX considerations<a href="#ux-considerations" class="hash-link" aria-label="Direct link to UX considerations" title="Direct link to UX considerations">​</a></h2>
 <p>Generally, we recommend using this hook sparingly. A better approach is to persist the unsaved data into <a href="https://github.com/react-native-async-storage/async-storage" target="_blank" rel="noopener noreferrer"><code>AsyncStorage</code></a> or similar persistent storage and prompt to restore it when the user returns to the screen.</p>
