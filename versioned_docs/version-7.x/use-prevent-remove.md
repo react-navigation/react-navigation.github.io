@@ -286,7 +286,6 @@ It also **does not prevent** a screen from being removed when the user is exitin
 
 - The user closes the app (e.g. by pressing the back button on the home screen, closing the tab in the browser, closing it from the app switcher etc.). You can additionally use [`hardwareBackPress`](https://reactnative.dev/docs/backhandler) event on Android, [`beforeunload`](https://developer.mozilla.org/en-US/docs/web/api/window/beforeunload_event) event on the Web etc. to handle some of these cases. See [Prevent the user from leaving the app](preventing-going-back.md#prevent-the-user-from-leaving-the-app) for more details.
 - A screen gets unmounted due to conditional rendering, or due to a parent component being unmounted.
-- A screen gets unmounted due to the usage of `unmountOnBlur` options with [`@react-navigation/bottom-tabs`](bottom-tab-navigator.md), [`@react-navigation/drawer`](drawer-navigator.md) etc.
 
 ## UX considerations
 

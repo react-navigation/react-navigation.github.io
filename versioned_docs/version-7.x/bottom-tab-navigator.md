@@ -413,12 +413,6 @@ When the tab bar is positioned on the `left` or `right`, it is styled as a sideb
 
 Whether this screens should render the first time it's accessed. Defaults to `true`. Set it to `false` if you want to render the screen on initial render.
 
-#### `unmountOnBlur`
-
-Whether this screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
-
-Normally, we don't recommend enabling this prop as users don't expect their navigation history to be lost when switching tabs. If you enable this prop, please consider if this will actually provide a better experience for the user.
-
 #### `freezeOnBlur`
 
 Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to `false`.
@@ -427,6 +421,12 @@ Defaults to `true` when `enableFreeze()` from `react-native-screens` package is 
 Requires `react-native-screens` version >=3.16.0.
 
 Only supported on iOS and Android.
+
+#### `popToTopOnBlur`
+
+Boolean indicating whether any nested stack should be popped to the top of the stack when navigating away from this tab. Defaults to `false`.
+
+It only works when there is a stack navigator (e.g. [stack navigator](stack-navigator.md) or [native stack navigator](native-stack-navigator.md)) nested under the tab navigator.
 
 ### Header related options
 

@@ -281,9 +281,28 @@ If you need to enforce a specific version of `react-native-tab-view` for some re
 
 See [Material Top Tab Navigator](material-top-tab-navigator.md) for usage.
 
-#### The `unmountOnBlur` option is removed in favor of `popToTopOnBlur` in Bottom Tab Navigator
+#### The `unmountOnBlur` option is removed in favor of `popToTopOnBlur` in Bottom Tab Navigator and Drawer Navigator
 
-TODO
+In many cases, the desired behavior is to return to the first screen of the stack nested in a tab or drawer navigator after it's unfocused. Previously, the `unmountOnBlur` option was used to achieve this behavior. However, it had some issues:
+
+- It destroyed the local state of the screen in the stack.
+- It was slow to remount the nested navigator on tab navigation.
+
+The `popToTopOnBlur` option provides an alternative approach - it pops the screens on a nested stack to go back to the first screen in the stack and doesn't have the above issues.
+
+See [Bottom Tab Navigator](bottom-tab-navigator.md#poptoptoponblur) and [Drawer Navigator](drawer-navigator.md#poptoptoponblur) docs for usage.
+
+It's still possible to achieve the old behavior of `unmountOnBlur` by using the useIsFocused hook in the screen:
+
+```js
+const isFocused = useIsFocused();
+
+if (!isFocused) {
+  return null;
+}
+```
+
+This could also be combined with the new [layout props](#new-layout-props) to specify it at the screen configuration level.
 
 #### The `tabBarTestID` option is renamed to `tabBarButtonTestID` in Bottom Tab Navigator and Material Top Tab Navigator
 
