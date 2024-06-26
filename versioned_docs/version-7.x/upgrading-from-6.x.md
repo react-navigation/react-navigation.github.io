@@ -539,6 +539,14 @@ const options = ({
 };
 ```
 
+### Improved RTL support
+
+Previously, various UI elements used the `I18nManager` API to determine the writing direction. However, this API doesn't work well on the Web as the writing direction can be different for a specific subtree and hence can't be determined globally.
+
+The `NavigationContainer` now accepts a `direction` prop to specify the direction of the layout instead of relying on the `I18nManager` API. It also exposes this value via `useLocale` hook for use in your own components.
+
+See the [navigation container docs](navigation-container.md#direction) for usage.
+
 ### The `options` callback gets `theme`
 
 The `options` callback now receives the `theme` object to allow customizing the UI elements specified in the options:
