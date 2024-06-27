@@ -39,7 +39,7 @@ We're planning to update our documentation to recommend [native-stack](/docs/nat
 
 ## Sponsor us
 
-If React Navigation helps you to deliver value to your customers, it'd awesome a lot if you could sponsor us. Sponsorships will help us to move more quickly towards our goal of building the best cross-platform navigation library and continue to provide timely support for bug reports in our GitHub issues.
+If React Navigation helps you to deliver value to your customers, it'd mean a lot if you could sponsor us. Sponsorships will help us to move more quickly towards our goal of building the best cross-platform navigation library and continue to provide timely support for bug reports in our GitHub issues.
 
 👉 [Visit our GitHub Sponsors page](https://github.com/sponsors/react-navigation) 👈
 
