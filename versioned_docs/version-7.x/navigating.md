@@ -31,12 +31,13 @@ We'll do something similar to the latter, but rather than using a `window.locati
 ```js name="Navigating to a new screen" snack version=7
 // codeblock-focus-start
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -44,10 +45,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <Button onPress={() => navigation.navigate('Details')}>
+        Go to Details
+      </Button>
     </View>
   );
 }
@@ -99,12 +99,13 @@ So we now have a stack with two routes: 1) the `Home` route 2) the `Details` rou
 
 ```js name="Navigate to a screen multiple times" snack version=7
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -112,10 +113,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <Button onPress={() => navigation.navigate('Details')}>
+        Go to Details
+      </Button>
     </View>
   );
 }
@@ -127,10 +127,9 @@ function DetailsScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <Button onPress={() => navigation.navigate('Details')}>
+        Go to Details... again
+      </Button>
     </View>
   );
 }
@@ -157,12 +156,13 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 
 ```js name="Navigate to a screen multiple times" snack version=7
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -170,10 +170,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <Button onPress={() => navigation.navigate('Details')}>
+        Go to Details
+      </Button>
     </View>
   );
 }
@@ -185,10 +184,9 @@ function DetailsScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Details Screen</Text>
       // codeblock-focus-start
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.push('Details')}
-      />
+      <Button onPress={() => navigation.push('Details')}>
+        Go to Details... again
+      </Button>
       // codeblock-focus-end
     </View>
   );
@@ -223,12 +221,13 @@ Sometimes you'll want to be able to programmatically trigger this behavior, and 
 
 ```js name="Going back" snack version=7
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -236,10 +235,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <Button onPress={() => navigation.navigate('Details')}>
+        Go to Details
+      </Button>
     </View>
   );
 }
@@ -251,12 +249,11 @@ function DetailsScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.push('Details')}
-      />
+      <Button onPress={() => navigation.push('Details')}>
+        Go to Details... again
+      </Button>
       // highlight-start
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
       // highlight-end
     </View>
   );
@@ -292,12 +289,13 @@ Another common requirement is to be able to go back _multiple_ screens -- for ex
 
 ```js name="Going back to specific screen" snack version=7
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -305,10 +303,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <Button onPress={() => navigation.navigate('Details')}>
+        Go to Details
+      </Button>
     </View>
   );
 }
@@ -320,17 +317,15 @@ function DetailsScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.push('Details')}
-      />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button onPress={() => navigation.push('Details')}>
+        Go to Details... again
+      </Button>
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
       // highlight-start
-      <Button title="Go to Home" onPress={() => navigation.popTo('Home')} />
-      <Button
-        title="Go back to first screen in stack"
-        onPress={() => navigation.popToTop()}
-      />
+      <Button onPress={() => navigation.popTo('Home')}>Go to Home</Button>
+      <Button onPress={() => navigation.popToTop()}>
+        Go back to first screen in stack
+      </Button>
       // highlight-end
     </View>
   );

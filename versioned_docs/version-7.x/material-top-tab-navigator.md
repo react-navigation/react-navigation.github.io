@@ -49,11 +49,12 @@ To use this navigator, import it from `@react-navigation/material-top-tabs`:
 
 ```js name="Material Top Tab Navigator" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
@@ -64,10 +65,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -78,7 +78,7 @@ function ProfileScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
     </View>
   );
 }
@@ -104,8 +104,9 @@ export default function App() {
 
 ```js name="Material Top Tab Navigator" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
@@ -127,10 +128,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -141,7 +141,7 @@ function ProfileScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
     </View>
   );
 }
@@ -296,12 +296,14 @@ Note that you **cannot** use the `useNavigation` hook inside the `tabBar` since 
 function MyTabBar({ navigation }) {
   return (
     <Button
-      title="Go somewhere"
       onPress={() => {
         // Navigate using the `navigation` prop that you received
+        // highlight-next-line
         navigation.navigate('SomeScreen');
       }}
-    />
+    >
+      Go somewhere
+    </Button>
   );
 }
 ```

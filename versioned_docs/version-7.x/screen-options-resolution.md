@@ -263,23 +263,23 @@ Imagine the following configuration:
 
 ```js name="Parent options from a child" snack version=7
 import * as React from 'react';
-import { View, Button } from 'react-native';
+import { View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function FeedScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -325,20 +325,20 @@ export default function App() {
 
 ```js name="Parent options from a child" snack version=7
 import * as React from 'react';
-import { View, Button } from 'react-native';
+import { View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function FeedScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -418,7 +418,7 @@ Then we can use this function with the `options` prop on `Screen`:
 
 ```js name="Parent options from a child" snack version=7
 import * as React from 'react';
-import { View, Button } from 'react-native';
+import { View } from 'react-native';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import {
   createStaticNavigation,
@@ -426,6 +426,7 @@ import {
 } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function getHeaderTitle(route) {
   // If the focused route is not found, we need to assume it's the initial screen
@@ -448,10 +449,9 @@ function FeedScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -505,7 +505,7 @@ export default function App() {
 
 ```js name="Parent options from a child" snack version=7
 import * as React from 'react';
-import { View, Button } from 'react-native';
+import { View } from 'react-native';
 import {
   NavigationContainer,
   useNavigation,
@@ -513,6 +513,7 @@ import {
 } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function getHeaderTitle(route) {
   // If the focused route is not found, we need to assume it's the initial screen
@@ -535,10 +536,9 @@ function FeedScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -609,23 +609,23 @@ For example, for the above use case, instead of adding a tab navigator inside a 
 
 ```js name="Reorganized navigators" snack version=7
 import * as React from 'react';
-import { View, Button } from 'react-native';
+import { View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function FeedScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -680,20 +680,20 @@ export default function App() {
 
 ```js name="Reorganized navigators" snack version=7
 import * as React from 'react';
-import { View, Button } from 'react-native';
+import { View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function FeedScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
     </View>
   );
 }

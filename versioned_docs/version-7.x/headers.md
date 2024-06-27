@@ -112,12 +112,13 @@ In order to use params in the title, we need to make `options` for the screen a 
 
 ```js name="Using params in the title" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -125,13 +126,14 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button
-        title="Go to Profile"
         onPress={() =>
           navigation.navigate('Profile', {
             name: 'Jane',
           })
         }
-      />
+      >
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -177,9 +179,10 @@ export default function App() {
 
 ```js name="Using params in the title" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -187,13 +190,14 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button
-        title="Go to Profile"
         onPress={() =>
           navigation.navigate('Profile', {
             name: 'Jane',
           })
         }
-      />
+      >
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -256,12 +260,13 @@ It's often necessary to update the `options` configuration for the active screen
 
 ```js name="Updating options" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -271,12 +276,13 @@ function HomeScreen() {
       <Text>Home Screen</Text>
       // codeblock-focus-start
       <Button
-        title="Update the title"
         onPress={() =>
           // highlight-next-line
           navigation.setOptions({ title: 'Updated!' })
         }
-      />
+      >
+        Update the title
+      </Button>
       // codeblock-focus-end
     </View>
   );
@@ -359,7 +365,7 @@ export default function App() {
 
 ```js name="Header styles" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -426,12 +432,13 @@ It is common to want to configure the header in a similar way across many screen
 
 ```js name="Common screen options" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -439,10 +446,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <Button onPress={() => navigation.navigate('Details')}>
+        Go to Details
+      </Button>
     </View>
   );
 }
@@ -491,9 +497,10 @@ export default function App() {
 
 ```js name="Common screen options" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -501,10 +508,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <Button onPress={() => navigation.navigate('Details')}>
+        Go to Details
+      </Button>
     </View>
   );
 }

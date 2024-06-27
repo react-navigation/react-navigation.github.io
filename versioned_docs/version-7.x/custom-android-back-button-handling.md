@@ -20,17 +20,11 @@ Returning `true` from `onBackPress` denotes that we have handled the event, and 
 
 ```js name="Custom android back button" snack version=7
 import * as React from 'react';
-import {
-  Pressable,
-  Text,
-  View,
-  Button,
-  BackHandler,
-  StyleSheet,
-} from 'react-native';
+import { Text, View, BackHandler, StyleSheet } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
 import { useFocusEffect } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { PlatformPressable, Button } from '@react-navigation/elements';
 
 const listData = [{ key: 'Apple' }, { key: 'Orange' }, { key: 'Carrot' }];
 
@@ -70,7 +64,7 @@ function ScreenWithCustomBackBehavior() {
       {listData.map((item) => (
         <>
           {isSelectionModeEnabled ? (
-            <Pressable
+            <PlatformPressable
               onPress={() => {
                 setSelected(item.key);
               }}
@@ -86,7 +80,7 @@ function ScreenWithCustomBackBehavior() {
               >
                 {item.key}
               </Text>
-            </Pressable>
+            </PlatformPressable>
           ) : (
             <Text style={styles.text}>
               {item.key === selected ? 'Selected: ' : ''}
@@ -96,9 +90,10 @@ function ScreenWithCustomBackBehavior() {
         </>
       ))}
       <Button
-        title="Toggle selection mode"
         onPress={() => setIsSelectionModeEnabled(!isSelectionModeEnabled)}
-      />
+      >
+        Toggle selection mode
+      </Button>
       <Text>Selection mode: {isSelectionModeEnabled ? 'ON' : 'OFF'}</Text>
     </View>
   );
@@ -138,17 +133,11 @@ const styles = StyleSheet.create({
 
 ```js name="Custom android back button" snack version=7
 import * as React from 'react';
-import {
-  Pressable,
-  Text,
-  View,
-  Button,
-  BackHandler,
-  StyleSheet,
-} from 'react-native';
+import { Text, View, BackHandler, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { useFocusEffect } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { PlatformPressable, Button } from '@react-navigation/elements';
 
 const Stack = createNativeStackNavigator();
 
@@ -190,7 +179,7 @@ function ScreenWithCustomBackBehavior() {
       {listData.map((item) => (
         <>
           {isSelectionModeEnabled ? (
-            <Pressable
+            <PlatformPressable
               onPress={() => {
                 setSelected(item.key);
               }}
@@ -206,7 +195,7 @@ function ScreenWithCustomBackBehavior() {
               >
                 {item.key}
               </Text>
-            </Pressable>
+            </PlatformPressable>
           ) : (
             <Text style={styles.text}>
               {item.key === selected ? 'Selected: ' : ''}
@@ -216,9 +205,10 @@ function ScreenWithCustomBackBehavior() {
         </>
       ))}
       <Button
-        title="Toggle selection mode"
         onPress={() => setIsSelectionModeEnabled(!isSelectionModeEnabled)}
-      />
+      >
+        Toggle selection mode
+      </Button>
       <Text>Selection mode: {isSelectionModeEnabled ? 'ON' : 'OFF'}</Text>
     </View>
   );

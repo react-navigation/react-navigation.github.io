@@ -75,13 +75,14 @@ But if we want to show the tab bar only on the `Home`, `Feed` and `Notifications
 
 ```js name="Hiding tabbar" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from '@react-navigation/elements';
 
 function EmptyScreen() {
   return <View />;
@@ -93,14 +94,12 @@ function Home() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -136,10 +135,11 @@ export default function App() {
 
 ```js name="Hiding tabbar" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from '@react-navigation/elements';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -154,14 +154,12 @@ function Home() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
     </View>
   );
 }

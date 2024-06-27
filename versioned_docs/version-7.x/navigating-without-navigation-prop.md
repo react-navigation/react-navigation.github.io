@@ -83,12 +83,13 @@ Then, in any of your javascript modules, import the `RootNavigation` and call fu
 
 ```js name="Using navigate in any js module" snack version=7
 import * as React from 'react';
-import { View, Button, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
   createNavigationContainerRef,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 const navigationRef = createNavigationContainerRef();
 
@@ -109,10 +110,9 @@ function navigate(name, params) {
 function Home() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigate('Settings', { userName: 'Lucy' })}
-      />
+      <Button onPress={() => navigate('Settings', { userName: 'Lucy' })}>
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -122,7 +122,7 @@ function Settings({ route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Hello {route.params.userName}</Text>
-      <Button title="Go to Home" onPress={() => navigate('Home')} />
+      <Button onPress={() => navigate('Home')}>Go to Home</Button>
     </View>
   );
 }
@@ -146,12 +146,13 @@ export default function App() {
 
 ```js name="Using navigate in any js module" snack version=7
 import * as React from 'react';
-import { View, Button, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   NavigationContainer,
   createNavigationContainerRef,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 const navigationRef = createNavigationContainerRef();
 
@@ -172,10 +173,9 @@ function navigate(name, params) {
 function Home() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigate('Settings', { userName: 'Lucy' })}
-      />
+      <Button onPress={() => navigate('Settings', { userName: 'Lucy' })}>
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -185,7 +185,7 @@ function Settings({ route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Hello {route.params.userName}</Text>
-      <Button title="Go to Home" onPress={() => navigate('Home')} />
+      <Button onPress={() => navigate('Home')}>Go to Home</Button>
     </View>
   );
 }
@@ -243,12 +243,13 @@ To avoid this, you can use the `isReady()` method available on the ref as shown 
 
 ```js name="Handling navigation init" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   createNavigationContainerRef,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
 const navigationRef = createNavigationContainerRef();
@@ -268,7 +269,7 @@ function Home() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home</Text>
-      <Button title="Go to Profile" onPress={() => navigate('Profile')} />
+      <Button onPress={() => navigate('Profile')}>Go to Profile</Button>
     </View>
   );
 }
@@ -300,12 +301,13 @@ export default function App() {
 
 ```js name="Handling navigation init" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   NavigationContainer,
   createNavigationContainerRef,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 const Stack = createNativeStackNavigator();
 // codeblock-focus-start
@@ -326,7 +328,7 @@ function Home() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home</Text>
-      <Button title="Go to Profile" onPress={() => navigate('Profile')} />
+      <Button onPress={() => navigate('Profile')}>Go to Profile</Button>
     </View>
   );
 }

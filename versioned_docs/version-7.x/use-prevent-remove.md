@@ -23,20 +23,14 @@ Example:
 
 ```js name="usePreventRemove hook" snack version=7
 import * as React from 'react';
-import {
-  Button,
-  Alert,
-  View,
-  TextInput,
-  Platform,
-  StyleSheet,
-} from 'react-native';
+import { Alert, View, TextInput, Platform, StyleSheet } from 'react-native';
 import {
   useNavigation,
   usePreventRemove,
   createStaticNavigation,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
 const EditTextScreen = () => {
@@ -89,11 +83,9 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.buttons}>
-      <Button
-        title={'Push EditText'}
-        onPress={() => navigation.push('EditText')}
-        style={styles.button}
-      />
+      <Button onPress={() => navigation.push('EditText')} style={styles.button}>
+        Push EditText
+      </Button>
     </View>
   );
 };
@@ -140,20 +132,14 @@ const styles = StyleSheet.create({
 
 ```js name="usePreventRemove hook" snack version=7
 import * as React from 'react';
-import {
-  Button,
-  Alert,
-  View,
-  TextInput,
-  Platform,
-  StyleSheet,
-} from 'react-native';
+import { Alert, View, TextInput, Platform, StyleSheet } from 'react-native';
 import {
   NavigationContainer,
   useNavigation,
   usePreventRemove,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
 const EditTextScreen = () => {
@@ -214,11 +200,9 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.buttons}>
-      <Button
-        title={'Push EditText'}
-        onPress={() => navigation.push('EditText')}
-        style={styles.button}
-      />
+      <Button onPress={() => navigation.push('EditText')} style={styles.button}>
+        Push EditText
+      </Button>
     </View>
   );
 };

@@ -401,12 +401,13 @@ For example, you can use this with `headerTransparent` to render a blur view to 
 
 ```js name="Header blur" snack version=7 dependencies=expo-blur
 import * as React from 'react';
-import { Button, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
 import { BlurView } from 'expo-blur';
 
 function HomeScreen() {
@@ -414,10 +415,9 @@ function HomeScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -427,7 +427,7 @@ function ProfileScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -468,9 +468,10 @@ export default App;
 
 ```js name="Header blur" snack version=7 dependencies=expo-blur
 import * as React from 'react';
-import { Button, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
 import { BlurView } from 'expo-blur';
 
@@ -481,10 +482,9 @@ function HomeScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -494,7 +494,7 @@ function ProfileScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -648,13 +648,15 @@ In addition, the button integrates with React Navigation and accepts the same pr
 It can be used to navigate between screens by specifying a screen name and params:
 
 ```js
-<Button title="Go to Profile" screen="Profile" params={{ userId: 'jane' }} />
+<Button screen="Profile" params={{ userId: 'jane' }}>
+  Go to Profile
+</Button>
 ```
 
 Or as a regular button:
 
 ```js
-<Button title="Press me" onPress={() => console.log('button pressed')} />
+<Button onPress={() => console.log('button pressed')}>Press me</Button>
 ```
 
 ### `Label`

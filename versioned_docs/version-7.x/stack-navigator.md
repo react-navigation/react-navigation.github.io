@@ -83,11 +83,12 @@ To use this navigator, import it from `@react-navigation/stack`:
 
 ```js name="Stack Navigator" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -98,10 +99,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -135,8 +135,9 @@ export default function App() {
 
 ```js name="Stack Navigator" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -158,10 +159,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -613,7 +613,8 @@ Supported values for `animation` are:
 
 - `default` - Default animation based on the platform and OS version.
 - `fade` - Simple fade animation for dialogs.
-- `fade_from_bottom` - Standard Android-style fade in from the bottom for Android Oreo.
+- `fade_from_bottom` - Standard Android-style fade-in from the bottom for Android Oreo.
+- `fade_from_right` - Standard Android-style fade-in from the right for Android 14.
 - `reveal_from_bottom` - Standard Android-style reveal from the bottom for Android Pie.
 - `scale_from_center` - Scale animation from the center.
 - `slide_from_right` - Standard iOS-style slide in from the right.
@@ -1016,16 +1017,10 @@ If you want to further customize how the dialog animates, or want to close the s
 Example:
 
 ```js
-import {
-  Animated,
-  View,
-  Text,
-  Pressable,
-  Button,
-  StyleSheet,
-} from 'react-native';
+import { Animated, View, Text, Pressable, StyleSheet } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useCardAnimation } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
 
 function ModalScreen() {
   const navigation = useNavigation();
@@ -1077,11 +1072,12 @@ function ModalScreen() {
           pantry ten times.
         </Text>
         <Button
-          title="Okay"
           color={colors.primary}
           style={{ alignSelf: 'flex-end' }}
           onPress={navigation.goBack}
-        />
+        >
+          Okay
+        </Button>
       </Animated.View>
     </View>
   );

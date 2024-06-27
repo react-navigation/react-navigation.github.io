@@ -35,11 +35,12 @@ To use this navigator, import it from `@react-navigation/native-stack`:
 
 ```js name="Native Stack Navigator" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -50,10 +51,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -87,8 +87,9 @@ export default function App() {
 
 ```js name="Native Stack Navigator" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -110,10 +111,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -741,7 +741,7 @@ React.useEffect(() => {
 
 ### Helpers
 
-The nativestack navigator adds the following methods to the navigation object:
+The native stack navigator adds the following methods to the navigation object:
 
 #### `replace`
 

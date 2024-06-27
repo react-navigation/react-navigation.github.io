@@ -24,12 +24,13 @@ We recommend that the params you pass are JSON-serializable. That way, you'll be
 
 ```js name="Passing params" snack version=7
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
 function HomeScreen() {
@@ -39,7 +40,6 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
       <Button
-        title="Go to Details"
         onPress={() => {
           /* 1. Navigate to the Details route with params */
           // highlight-start
@@ -49,7 +49,9 @@ function HomeScreen() {
           });
           // highlight-end
         }}
-      />
+      >
+        Go to Details
+      </Button>
     </View>
   );
 }
@@ -67,7 +69,6 @@ function DetailsScreen({ route }) {
       <Text>itemId: {JSON.stringify(itemId)}</Text>
       <Text>otherParam: {JSON.stringify(otherParam)}</Text>
       <Button
-        title="Go to Details... again"
         onPress={
           () =>
             // highlight-start
@@ -76,9 +77,11 @@ function DetailsScreen({ route }) {
             })
           // highlight-end
         }
-      />
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      >
+        Go to Details... again
+      </Button>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -144,12 +147,13 @@ Basic usage:
 
 ```js name="Updating params" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen({ route }) {
   const navigation = useNavigation();
@@ -160,7 +164,6 @@ function HomeScreen({ route }) {
       <Text>Home Screen</Text>
       <Text>itemId: {JSON.stringify(itemId)}</Text>
       <Button
-        title="Update param"
         onPress={
           () =>
             // codeblock-focus-start
@@ -169,7 +172,9 @@ function HomeScreen({ route }) {
             })
           // codeblock-focus-end
         }
-      />
+      >
+        Update param
+      </Button>
     </View>
   );
 }
@@ -204,12 +209,13 @@ To achieve this, you can use the `popTo` method to go back to the previous scree
 
 ```js name="Passing params back" snack version=7
 import * as React from 'react';
-import { Text, View, TextInput, Button } from 'react-native';
+import { Text, View, TextInput } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
 function HomeScreen({ route }) {
@@ -228,10 +234,9 @@ function HomeScreen({ route }) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Create post"
-        onPress={() => navigation.navigate('CreatePost')}
-      />
+      <Button onPress={() => navigation.navigate('CreatePost')}>
+        Create post
+      </Button>
       <Text style={{ margin: 10 }}>Post: {route.params?.post}</Text>
     </View>
   );
@@ -251,13 +256,14 @@ function CreatePostScreen({ route }) {
         onChangeText={setPostText}
       />
       <Button
-        title="Done"
         onPress={() => {
           // Pass params back to home screen
           // highlight-next-line
           navigation.popTo('Home', { post: postText });
         }}
-      />
+      >
+        Done
+      </Button>
     </>
   );
 }
@@ -289,13 +295,14 @@ If you have nested navigators, you need to pass params a bit differently. For ex
 
 ```js name="Passing params to nested screen" snack version=7
 import * as React from 'react';
-import { Text, View, TextInput, Button } from 'react-native';
+import { Text, View, TextInput } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from '@react-navigation/elements';
 
 function SettingsScreen({ route }) {
   const navigation = useNavigation();
@@ -305,10 +312,9 @@ function SettingsScreen({ route }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings Screen</Text>
       <Text>userParam: {JSON.stringify(user)}</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -328,7 +334,6 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
       <Button
-        title="Go to Settings"
         onPress={
           () =>
             // codeblock-focus-start
@@ -338,7 +343,9 @@ function HomeScreen() {
             })
           // codeblock-focus-end
         }
-      />
+      >
+        Go to Settings
+      </Button>
     </View>
   );
 }

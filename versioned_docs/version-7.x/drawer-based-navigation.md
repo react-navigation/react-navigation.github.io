@@ -25,22 +25,22 @@ To use this drawer navigator, import it from `@react-navigation/drawer`:
 
 ```js name="Drawer navigation" snack version=7
 import * as React from 'react';
-import { Button, View } from 'react-native';
+import { View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
+      <Button onPress={() => navigation.navigate('Notifications')}>
+        Go to notifications
+      </Button>
     </View>
   );
 }
@@ -50,7 +50,7 @@ function NotificationsScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
+      <Button onPress={() => navigation.goBack()}>Go back home</Button>
     </View>
   );
 }
@@ -74,19 +74,19 @@ export default function App() {
 
 ```js name="Drawer navigation" snack version=7
 import * as React from 'react';
-import { Button, View } from 'react-native';
+import { View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
+      <Button onPress={() => navigation.navigate('Notifications')}>
+        Go to notifications
+      </Button>
     </View>
   );
 }
@@ -96,7 +96,7 @@ function NotificationsScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
+      <Button onPress={() => navigation.goBack()}>Go back home</Button>
     </View>
   );
 }
@@ -126,7 +126,7 @@ To open and close drawer, use the following helpers:
 
 ```js name="Drawer open and close" snack version=7
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   useNavigation,
   createStaticNavigation,
@@ -137,6 +137,7 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import { Button } from '@react-navigation/elements';
 
 function Feed() {
   const navigation = useNavigation();
@@ -145,9 +146,9 @@ function Feed() {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Feed Screen</Text>
       // codeblock-focus-start
-      <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
+      <Button onPress={() => navigation.openDrawer()}>Open drawer</Button>
       // codeblock-focus-end
-      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
+      <Button onPress={() => navigation.toggleDrawer()}>Toggle drawer</Button>
     </View>
   );
 }
@@ -204,7 +205,7 @@ export default function App() {
 
 ```js name="Drawer open and close" snack version=7
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import {
   createDrawerNavigator,
@@ -212,6 +213,7 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import { Button } from '@react-navigation/elements';
 
 function Feed() {
   const navigation = useNavigation();
@@ -220,9 +222,9 @@ function Feed() {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Feed Screen</Text>
       // codeblock-focus-start
-      <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
+      <Button onPress={() => navigation.openDrawer()}>Open drawer</Button>
       // codeblock-focus-end
-      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
+      <Button onPress={() => navigation.toggleDrawer()}>Toggle drawer</Button>
     </View>
   );
 }
@@ -292,7 +294,7 @@ If you would like to toggle the drawer you call the following:
 
 ```js name="Drawer toggle" snack version=7
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   useNavigation,
   createStaticNavigation,
@@ -303,6 +305,7 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import { Button } from '@react-navigation/elements';
 
 function Feed() {
   const navigation = useNavigation();
@@ -310,9 +313,9 @@ function Feed() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
+      <Button onPress={() => navigation.openDrawer()}>Open drawer</Button>
       // codeblock-focus-start
-      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
+      <Button onPress={() => navigation.toggleDrawer()}>Toggle drawer</Button>
       // codeblock-focus-end
     </View>
   );
@@ -362,7 +365,7 @@ export default function App() {
 
 ```js name="Drawer toggle" snack version=7
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import {
   createDrawerNavigator,
@@ -370,6 +373,7 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import { Button } from '@react-navigation/elements';
 
 function Feed() {
   const navigation = useNavigation();
@@ -377,9 +381,9 @@ function Feed() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
+      <Button onPress={() => navigation.openDrawer()}>Open drawer</Button>
       // codeblock-focus-start
-      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
+      <Button onPress={() => navigation.toggleDrawer()}>Toggle drawer</Button>
       // codeblock-focus-end
     </View>
   );
@@ -442,7 +446,7 @@ Each of these functions, behind the scenes, are simply dispatching actions:
 
 ```js name="Navigation dispatcher" snack version=7
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
@@ -454,6 +458,7 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import { Button } from '@react-navigation/elements';
 
 function Feed() {
   const navigation = useNavigation();
@@ -462,15 +467,13 @@ function Feed() {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Feed Screen</Text>
       // codeblock-focus-start
-      <Button
-        title="Open drawer"
-        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-      />
+      <Button onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+        Open drawer
+      </Button>
       // codeblock-focus-end
-      <Button
-        title="Toggle drawer"
-        onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-      />
+      <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
+        Toggle drawer
+      </Button>
     </View>
   );
 }
@@ -527,7 +530,7 @@ export default function App() {
 
 ```js name="Navigation dispatcher" snack version=7
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   NavigationContainer,
   useNavigation,
@@ -539,6 +542,7 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import { Button } from '@react-navigation/elements';
 
 function Feed() {
   const navigation = useNavigation();
@@ -547,15 +551,13 @@ function Feed() {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Feed Screen</Text>
       // codeblock-focus-start
-      <Button
-        title="Open drawer"
-        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-      />
+      <Button onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+        Open drawer
+      </Button>
       // codeblock-focus-end
-      <Button
-        title="Toggle drawer"
-        onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-      />
+      <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
+        Toggle drawer
+      </Button>
     </View>
   );
 }

@@ -384,10 +384,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Home!</Text>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -398,7 +397,7 @@ function SettingsScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Settings!</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
     </View>
   );
 }
@@ -416,10 +415,11 @@ Often tabs don't just display one screen &mdash; for example, on your Twitter fe
 
 ```js
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from '@react-navigation/elements';
 
 function DetailsScreen() {
   return (
@@ -435,10 +435,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Home screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <Button onPress={() => navigation.navigate('Details')}>
+        Go to Details
+      </Button>
     </View>
   );
 }
@@ -449,10 +448,9 @@ function SettingsScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Settings screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <Button onPress={() => navigation.navigate('Details')}>
+        Go to Details
+      </Button>
     </View>
   );
 }

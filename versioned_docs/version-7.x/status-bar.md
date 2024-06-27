@@ -18,12 +18,13 @@ This is a simple task when using a stack. You can render the `StatusBar` compone
 
 ```js name="Different status bar" snack version=7
 import * as React from 'react';
-import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
+import { View, Text, StatusBar, StyleSheet } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function Screen1() {
@@ -47,10 +48,9 @@ function Screen1() {
       <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
       // highlight-end
       <Text style={{ color: '#fff' }}>Light Screen</Text>
-      <Button
-        title="Next screen"
-        onPress={() => navigation.navigate('Screen2')}
-      />
+      <Button onPress={() => navigation.navigate('Screen2')}>
+        Next screen
+      </Button>
     </View>
   );
 }
@@ -76,10 +76,9 @@ function Screen2() {
       <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       // highlight-end
       <Text>Dark Screen</Text>
-      <Button
-        title="Next screen"
-        onPress={() => navigation.navigate('Screen1')}
-      />
+      <Button onPress={() => navigation.navigate('Screen1')}>
+        Next screen
+      </Button>
     </View>
   );
 }
@@ -111,9 +110,10 @@ const styles = StyleSheet.create({
 
 ```js name="Different status bar" snack version=7
 import * as React from 'react';
-import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
+import { View, Text, StatusBar, StyleSheet } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
@@ -140,10 +140,9 @@ function Screen1() {
       <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
       // highlight-end
       <Text style={{ color: '#fff' }}>Light Screen</Text>
-      <Button
-        title="Next screen"
-        onPress={() => navigation.navigate('Screen2')}
-      />
+      <Button onPress={() => navigation.navigate('Screen2')}>
+        Next screen
+      </Button>
     </View>
   );
 }
@@ -169,10 +168,9 @@ function Screen2() {
       <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       // highlight-end
       <Text>Dark Screen</Text>
-      <Button
-        title="Next screen"
-        onPress={() => navigation.navigate('Screen1')}
-      />
+      <Button onPress={() => navigation.navigate('Screen1')}>
+        Next screen
+      </Button>
     </View>
   );
 }
@@ -239,13 +237,14 @@ Now, our screens (both `Screen1.js` and `Screen2.js`) will use the `FocusAwareSt
 
 ```js name="Different status bar based on tabs" snack version=7
 import * as React from 'react';
-import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
+import { View, Text, StatusBar, StyleSheet } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function FocusAwareStatusBar(props) {
@@ -274,10 +273,9 @@ function Screen1() {
     >
       <FocusAwareStatusBar barStyle="light-content" backgroundColor="#6a51ae" />
       <Text style={{ color: '#fff' }}>Light Screen</Text>
-      <Button
-        title="Next screen"
-        onPress={() => navigation.navigate('Screen2')}
-      />
+      <Button onPress={() => navigation.navigate('Screen2')}>
+        Next screen
+      </Button>
     </View>
   );
 }
@@ -301,10 +299,9 @@ function Screen2() {
     >
       <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       <Text>Dark Screen</Text>
-      <Button
-        title="Next screen"
-        onPress={() => navigation.navigate('Screen1')}
-      />
+      <Button onPress={() => navigation.navigate('Screen1')}>
+        Next screen
+      </Button>
     </View>
   );
 }
@@ -340,10 +337,11 @@ const styles = StyleSheet.create({
 
 ```js name="Different status bar based on tabs" snack version=7
 import * as React from 'react';
-import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
+import { View, Text, StatusBar, StyleSheet } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
@@ -375,10 +373,9 @@ function Screen1() {
     >
       <FocusAwareStatusBar barStyle="light-content" backgroundColor="#6a51ae" />
       <Text style={{ color: '#fff' }}>Light Screen</Text>
-      <Button
-        title="Next screen"
-        onPress={() => navigation.navigate('Screen2')}
-      />
+      <Button onPress={() => navigation.navigate('Screen2')}>
+        Next screen
+      </Button>
     </View>
   );
 }
@@ -402,10 +399,9 @@ function Screen2() {
     >
       <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       <Text>Dark Screen</Text>
-      <Button
-        title="Next screen"
-        onPress={() => navigation.navigate('Screen1')}
-      />
+      <Button onPress={() => navigation.navigate('Screen1')}>
+        Next screen
+      </Button>
     </View>
   );
 }

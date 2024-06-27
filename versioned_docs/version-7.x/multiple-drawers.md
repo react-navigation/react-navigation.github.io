@@ -23,20 +23,21 @@ In such cases, we can use [`react-native-drawer-layout`](drawer-layout.md) direc
 
 ```js
 import * as React from 'react';
-import { Button, View } from 'react-native';
+import { View } from 'react-native';
 import { Drawer } from 'react-native-drawer-layout';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.openDrawer()} title="Open drawer" />
+      <Button onPress={() => navigation.openDrawer()}>Open drawer</Button>
     </View>
   );
 }
@@ -78,17 +79,18 @@ export default function App() {
 
 ```js
 import * as React from 'react';
-import { Button, View } from 'react-native';
+import { View } from 'react-native';
 import { Drawer } from 'react-native-drawer-layout';
 import { useNavigation } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.openDrawer()} title="Open drawer" />
+      <Button onPress={() => navigation.openDrawer()}>Open drawer</Button>
     </View>
   );
 }
@@ -140,13 +142,14 @@ To solve this, we need to use context API to pass down a function to control the
 
 ```js
 import * as React from 'react';
-import { Button, View } from 'react-native';
+import { View } from 'react-native';
 import { Drawer } from 'react-native-drawer-layout';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
   useNavigation,
   createStaticNavigation,
 } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 
 const RightDrawerContext = React.createContext();
 
@@ -156,11 +159,8 @@ function HomeScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.openDrawer()}
-        title="Open left drawer"
-      />
-      <Button onPress={() => openRightDrawer()} title="Open right drawer" />
+      <Button onPress={() => navigation.openDrawer()}>Open left drawer</Button>
+      <Button onPress={() => openRightDrawer()}>Open right drawer</Button>
     </View>
   );
 }
@@ -212,10 +212,11 @@ export default function App() {
 
 ```js
 import * as React from 'react';
-import { Button, View } from 'react-native';
+import { View } from 'react-native';
 import { Drawer } from 'react-native-drawer-layout';
 import { useNavigation } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Button } from '@react-navigation/elements';
 
 const RightDrawerContext = React.createContext();
 
@@ -225,11 +226,8 @@ function HomeScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.openDrawer()}
-        title="Open left drawer"
-      />
-      <Button onPress={() => openRightDrawer()} title="Open right drawer" />
+      <Button onPress={() => navigation.openDrawer()}>Open left drawer</Button>
+      <Button onPress={() => openRightDrawer()}>Open right drawer</Button>
     </View>
   );
 }
@@ -295,19 +293,20 @@ Here we have 2 drawer navigators nested inside each other, one is positioned on 
 
 ```js name="Multiple drawers" snack version=7
 import * as React from 'react';
-import { Button, View } from 'react-native';
+import { View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.openDrawer()} title="Open drawer" />
+      <Button onPress={() => navigation.openDrawer()}>Open drawer</Button>
     </View>
   );
 }
@@ -343,16 +342,17 @@ export default function App() {
 
 ```js name="Multiple drawers" snack version=7
 import * as React from 'react';
-import { Button, View } from 'react-native';
+import { View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.openDrawer()} title="Open drawer" />
+      <Button onPress={() => navigation.openDrawer()}>Open drawer</Button>
     </View>
   );
 }
@@ -400,8 +400,8 @@ But there is one problem. When we call `navigation.openDrawer()` in our `HomeScr
 To solve this, we need to use [`navigation.getParent`](navigation-object.md#getparent) to refer to the right drawer which is the parent of the left drawer. So our code would look like:
 
 ```js
-<Button onPress={() => navigation.openDrawer()} title="Open left drawer" />
-<Button onPress={() => navigation.getParent().openDrawer()} title="Open right drawer" />
+<Button onPress={() => navigation.openDrawer()} >Open left drawer</Button>
+<Button onPress={() => navigation.getParent().openDrawer()}>Open right drawer</Button>
 ```
 
 However, this means that our button needs to know about the parent navigators, which isn't ideal. If our button is further nested inside other navigators, it'd need multiple `getParent()` calls. To address this, we can use the [`id` prop](drawer-navigator.md#id) to identify the parent navigator.
@@ -415,26 +415,25 @@ The final code would look like this:
 
 ```js name="Multiple drawers navigators" snack version=7
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.getParent('LeftDrawer').openDrawer()}
-        title="Open left drawer"
-      />
-      <Button
-        onPress={() => navigation.getParent('RightDrawer').openDrawer()}
-        title="Open right drawer"
-      />
+      <Button onPress={() => navigation.getParent('LeftDrawer').openDrawer()}>
+        Open left drawer
+      </Button>
+      <Button onPress={() => navigation.getParent('RightDrawer').openDrawer()}>
+        Open right drawer
+      </Button>
     </View>
   );
 }
@@ -481,23 +480,22 @@ export default function App() {
 
 ```js name="Multiple drawers navigators" snack version=7
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.getParent('LeftDrawer').openDrawer()}
-        title="Open left drawer"
-      />
-      <Button
-        onPress={() => navigation.getParent('RightDrawer').openDrawer()}
-        title="Open right drawer"
-      />
+      <Button onPress={() => navigation.getParent('LeftDrawer').openDrawer()}>
+        Open left drawer
+      </Button>
+      <Button onPress={() => navigation.getParent('RightDrawer').openDrawer()}>
+        Open right drawer
+      </Button>
     </View>
   );
 }

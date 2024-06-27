@@ -39,12 +39,13 @@ To create a shared transition:
 
 ```js name="Shared transition"
 import * as React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import {
   useNavigation,
   createStaticNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 import Animated from 'react-native-reanimated';
 
@@ -53,10 +54,9 @@ function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <Button onPress={() => navigation.navigate('Details')}>
+        Go to Details
+      </Button>
       <Animated.Image
         source={{ uri: 'https://picsum.photos/id/39/200' }}
         style={{ width: 300, height: 300 }}
@@ -72,7 +72,7 @@ function DetailsScreen() {
 
   return (
     <View style={styles.container}>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
       <Animated.Image
         source={{ uri: 'https://picsum.photos/id/39/200' }}
         style={{ width: 100, height: 100 }}
@@ -111,9 +111,10 @@ const styles = StyleSheet.create({
 
 ```js name="Shared transition"
 import * as React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 import Animated from 'react-native-reanimated';
 
@@ -125,10 +126,9 @@ function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <Button onPress={() => navigation.navigate('Details')}>
+        Go to Details
+      </Button>
       <Animated.Image
         source={{ uri: 'https://picsum.photos/id/39/200' }}
         style={{ width: 300, height: 300 }}
@@ -144,7 +144,7 @@ function DetailsScreen() {
 
   return (
     <View style={styles.container}>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
       <Animated.Image
         source={{ uri: 'https://picsum.photos/id/39/200' }}
         style={{ width: 100, height: 100 }}

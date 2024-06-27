@@ -14,13 +14,14 @@ Nesting navigators means rendering a navigator inside a screen of another naviga
 
 ```js name="Nested navigators" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from '@react-navigation/elements';
 
 function ProfileScreen() {
   return (
@@ -36,10 +37,9 @@ function FeedScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -86,10 +86,11 @@ export default function App() {
 
 ```js name="Nested navigators" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from '@react-navigation/elements';
 
 function ProfileScreen() {
   return (
@@ -105,10 +106,9 @@ function FeedScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -218,13 +218,14 @@ To receive events from the parent navigator, you can explicitly listen to parent
 
 ```js name="Events from parent" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from '@react-navigation/elements';
 
 function ProfileScreen() {
   return (
@@ -240,10 +241,9 @@ function FeedScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button
-        title="Go to Messages"
-        onPress={() => navigation.navigate('Messages')}
-      />
+      <Button onPress={() => navigation.navigate('Messages')}>
+        Go to Messages
+      </Button>
     </View>
   );
 }
@@ -303,10 +303,11 @@ export default function App() {
 
 ```js name="Events from parent" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from '@react-navigation/elements';
 
 function ProfileScreen() {
   return (
@@ -322,10 +323,9 @@ function FeedScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button
-        title="Go to Messages"
-        onPress={() => navigation.navigate('Messages')}
-      />
+      <Button onPress={() => navigation.navigate('Messages')}>
+        Go to Messages
+      </Button>
     </View>
   );
 }
@@ -412,13 +412,14 @@ Consider the following example:
 
 ```js name="Navigating to nested screen" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -426,11 +427,12 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button title="Go to More" onPress={() => navigation.navigate('More')} />
+      <Button onPress={() => navigation.navigate('More')}>Go to More</Button>
       <Button
-        title="Go to Messages"
         onPress={() => navigation.navigate('More', { screen: 'Messages' })}
-      />
+      >
+        Go to Messages
+      </Button>
     </View>
   );
 }
@@ -441,7 +443,7 @@ function FeedScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -452,7 +454,7 @@ function MessagesScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Messages Screen</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -490,10 +492,11 @@ export default function App() {
 
 ```js name="Navigating to nested screen" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -501,11 +504,12 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button title="Go to More" onPress={() => navigation.navigate('More')} />
+      <Button onPress={() => navigation.navigate('More')}>Go to More</Button>
       <Button
-        title="Go to Messages"
         onPress={() => navigation.navigate('More', { screen: 'Messages' })}
-      />
+      >
+        Go to Messages
+      </Button>
     </View>
   );
 }
@@ -516,7 +520,7 @@ function FeedScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -527,7 +531,7 @@ function MessagesScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Messages Screen</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -594,13 +598,14 @@ You can also pass params by specifying a `params` key:
 
 ```js name="Navigating to nested screen" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -609,7 +614,6 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
       <Button
-        title="Go to Messages"
         onPress={
           () =>
             // codeblock-focus-start
@@ -619,7 +623,9 @@ function HomeScreen() {
             })
           // codeblock-focus-end
         }
-      />
+      >
+        Go to Messages
+      </Button>
     </View>
   );
 }
@@ -630,7 +636,7 @@ function FeedScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -642,7 +648,7 @@ function MessagesScreen({ route }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Messages Screen</Text>
       <Text>User: {route.params.user}</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -678,10 +684,11 @@ export default function App() {
 
 ```js name="Navigating to nested screen" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -690,7 +697,6 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
       <Button
-        title="Go to Messages"
         onPress={
           () =>
             // codeblock-focus-start
@@ -700,7 +706,9 @@ function HomeScreen() {
             })
           // codeblock-focus-end
         }
-      />
+      >
+        Go to Messages
+      </Button>
     </View>
   );
 }
@@ -711,7 +719,7 @@ function FeedScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -723,7 +731,7 @@ function MessagesScreen({ route }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Messages Screen</Text>
       <Text>User: {route.params.user}</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -811,13 +819,14 @@ For example:
 
 ```js name="Nested navigators" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from '@react-navigation/elements';
 
 function ProfileScreen() {
   return (
@@ -833,10 +842,9 @@ function FeedScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -883,10 +891,11 @@ export default function App() {
 
 ```js name="Nested navigators" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from '@react-navigation/elements';
 
 function ProfileScreen() {
   return (
@@ -902,10 +911,9 @@ function FeedScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }

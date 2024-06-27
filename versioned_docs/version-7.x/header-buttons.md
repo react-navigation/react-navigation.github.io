@@ -18,9 +18,10 @@ The most common way to interact with a header is by tapping on a button either t
 
 ```js name="Header button" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   return (
@@ -38,7 +39,7 @@ const MyStack = createNativeStackNavigator({
       options: {
         // highlight-start
         headerRight: () => (
-          <Button onPress={() => alert('This is a button!')} title="Info" />
+          <Button onPress={() => alert('This is a button!')}>Info</Button>
         ),
         // highlight-end
       },
@@ -59,9 +60,10 @@ export default function App() {
 
 ```js name="Header button" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   return (
@@ -83,7 +85,7 @@ function MyStack() {
         options={{
           // highlight-start
           headerRight: () => (
-            <Button onPress={() => alert('This is a button!')} title="Info" />
+            <Button onPress={() => alert('This is a button!')}>Info</Button>
           ),
           // highlight-end
         }}
@@ -124,12 +126,13 @@ In some cases, components in the header need to interact with the screen compone
 
 ```js name="Header button" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
 function HomeScreen() {
@@ -142,7 +145,7 @@ function HomeScreen() {
     // highlight-start
     navigation.setOptions({
       headerRight: () => (
-        <Button onPress={() => setCount((c) => c + 1)} title="Update count" />
+        <Button onPress={() => setCount((c) => c + 1)}>Update count</Button>
       ),
     });
     // highlight-end
@@ -158,7 +161,7 @@ const MyStack = createNativeStackNavigator({
       options: {
         // Add a placeholder button without the `onPress` to avoid flicker
         // highlight-next-line
-        headerRight: () => <Button title="Update count" />,
+        headerRight: () => <Button>Update count</Button>,
       },
     },
   },
@@ -177,9 +180,10 @@ export default function App() {
 
 ```js name="Header button" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 const Stack = createNativeStackNavigator();
 
@@ -194,7 +198,7 @@ function HomeScreen() {
     // highlight-start
     navigation.setOptions({
       headerRight: () => (
-        <Button onPress={() => setCount((c) => c + 1)} title="Update count" />
+        <Button onPress={() => setCount((c) => c + 1)}>Update count</Button>
       ),
     });
     // highlight-end
@@ -212,7 +216,7 @@ function MyStack() {
         options={{
           // Add a placeholder button without the `onPress` to avoid flicker
           // highlight-next-line
-          headerRight: () => <Button title="Update count" />,
+          headerRight: () => <Button>Update count</Button>,
         }}
       />
     </Stack.Navigator>

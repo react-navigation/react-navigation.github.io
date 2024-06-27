@@ -65,11 +65,12 @@ To use this navigator, import it from `@react-navigation/drawer`:
 
 ```js name="Drawer Navigator" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -80,10 +81,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -94,7 +94,7 @@ function ProfileScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
     </View>
   );
 }
@@ -120,8 +120,9 @@ export default function App() {
 
 ```js name="Drawer Navigator" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -143,10 +144,9 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -157,7 +157,7 @@ function ProfileScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile Screen</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
     </View>
   );
 }
@@ -276,12 +276,13 @@ Note that you **cannot** use the `useNavigation` hook inside the `drawerContent`
 function CustomDrawerContent({ navigation }) {
   return (
     <Button
-      title="Go somewhere"
       onPress={() => {
         // Navigate using the `navigation` prop that you received
         navigation.navigate('SomeScreen');
       }}
-    />
+    >
+      Go somewhere
+    </Button>
   );
 }
 ```
@@ -638,8 +639,9 @@ The `progress` object is a `SharedValue` that represents the animated position o
 
 ```js name="Drawer animation progress" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
 import {
   createDrawerNavigator,
@@ -690,8 +692,9 @@ export default function App() {
 
 ```js name="Drawer animation progress" snack version=7
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
 import {
   createDrawerNavigator,

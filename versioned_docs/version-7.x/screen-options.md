@@ -496,8 +496,7 @@ export default function App() {
 The `navigation` object has a `setOptions` method that lets you update the options for a screen from within a component. See [navigation object's docs](navigation-object.md#setoptions) for more details.
 
 ```js
-<Button
-  title="Update options"
-  onPress={() => navigation.setOptions({ title: 'Updated!' })}
-/>
+<Button onPress={() => navigation.setOptions({ title: 'Updated!' })}>
+  Update options
+</Button>
 ```

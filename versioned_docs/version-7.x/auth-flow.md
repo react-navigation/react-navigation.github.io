@@ -457,9 +457,10 @@ import * as React from 'react';
 import * as SecureStore from 'expo-secure-store';
 
 // codeblock-focus-end
-import { Button, Text, TextInput, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 const AuthContext = React.createContext();
 
@@ -489,7 +490,7 @@ function HomeScreen() {
   return (
     <View>
       <Text>Signed in!</Text>
-      <Button title="Sign out" onPress={signOut} />
+      <Button onPress={signOut}>Sign out</Button>
     </View>
   );
 }
@@ -513,7 +514,7 @@ function SignInScreen() {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button title="Sign in" onPress={() => signIn({ username, password })} />
+      <Button onPress={() => signIn({ username, password })}>Sign in</Button>
     </View>
   );
 }
@@ -644,9 +645,10 @@ import * as React from 'react';
 import * as SecureStore from 'expo-secure-store';
 
 // codeblock-focus-end
-import { Button, Text, TextInput, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 const AuthContext = React.createContext();
 
@@ -664,7 +666,7 @@ function HomeScreen() {
   return (
     <View>
       <Text>Signed in!</Text>
-      <Button title="Sign out" onPress={signOut} />
+      <Button onPress={signOut}>Sign out</Button>
     </View>
   );
 }
@@ -688,7 +690,7 @@ function SignInScreen() {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button title="Sign in" onPress={() => signIn({ username, password })} />
+      <Button onPress={() => signIn({ username, password })}>Sign in</Button>
     </View>
   );
 }
@@ -829,7 +831,7 @@ function SignInScreen() {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button title="Sign in" onPress={() => signIn({ username, password })} />
+      <Button onPress={() => signIn({ username, password })}>Sign in</Button>
     </View>
   );
 }

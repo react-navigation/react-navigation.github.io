@@ -62,8 +62,9 @@ We're done! Now you can build and run the app on your device/simulator.
 
 ```js
 import * as React from 'react';
-import { Button, Text } from 'react-native';
+import { Text } from 'react-native';
 import { Drawer } from 'react-native-drawer-layout';
+import { Button } from '@react-navigation/elements';
 
 export default function DrawerExample() {
   const [open, setOpen] = React.useState(false);

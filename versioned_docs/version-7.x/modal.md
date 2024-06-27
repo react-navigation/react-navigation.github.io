@@ -20,12 +20,13 @@ A modal is like a popup &mdash; it usually has a different transition animation,
 
 ```js name="Modal" snack version=7
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
 function HomeScreen() {
@@ -34,10 +35,7 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontSize: 30 }}>This is the home screen!</Text>
-      <Button
-        onPress={() => navigation.navigate('MyModal')}
-        title="Open Modal"
-      />
+      <Button onPress={() => navigation.navigate('MyModal')}>Open Modal</Button>
     </View>
   );
 }
@@ -48,7 +46,7 @@ function ModalScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontSize: 30 }}>This is a modal!</Text>
-      <Button onPress={() => navigation.goBack()} title="Dismiss" />
+      <Button onPress={() => navigation.goBack()}>Dismiss</Button>
     </View>
   );
 }
@@ -114,9 +112,10 @@ export default function App() {
 
 ```js name="Modal" snack version=7
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
 function HomeScreen() {
@@ -125,10 +124,7 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontSize: 30 }}>This is the home screen!</Text>
-      <Button
-        onPress={() => navigation.navigate('MyModal')}
-        title="Open Modal"
-      />
+      <Button onPress={() => navigation.navigate('MyModal')}>Open Modal</Button>
     </View>
   );
 }
@@ -139,7 +135,7 @@ function ModalScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontSize: 30 }}>This is a modal!</Text>
-      <Button onPress={() => navigation.goBack()} title="Dismiss" />
+      <Button onPress={() => navigation.goBack()}>Dismiss</Button>
     </View>
   );
 }

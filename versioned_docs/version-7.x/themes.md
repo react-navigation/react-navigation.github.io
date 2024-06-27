@@ -28,9 +28,10 @@ import {
   DefaultTheme,
 } from '@react-navigation/native';
 // codeblock-focus-end
-import { Button, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
 
@@ -51,10 +52,9 @@ function SettingsScreen({ route }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings Screen</Text>
       <Text>userParam: {JSON.stringify(user)}</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -74,14 +74,15 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
       <Button
-        title="Go to Settings"
         onPress={() =>
           navigation.navigate('Panel', {
             screen: 'Settings',
             params: { user: 'jane' },
           })
         }
-      />
+      >
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -124,9 +125,10 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 // codeblock-focus-end
-import { Button, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
 
@@ -148,10 +150,9 @@ function SettingsScreen({ route }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings Screen</Text>
       <Text>userParam: {JSON.stringify(user)}</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -173,14 +174,15 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
       <Button
-        title="Go to Settings"
         onPress={() =>
           navigation.navigate('Root', {
             screen: 'Settings',
             params: { user: 'jane' },
           })
         }
-      />
+      >
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -351,16 +353,11 @@ import {
   DarkTheme,
   useTheme,
 } from '@react-navigation/native';
-import {
-  Button,
-  View,
-  Text,
-  TouchableOpacity,
-  useColorScheme,
-} from 'react-native';
+import { View, Text, TouchableOpacity, useColorScheme } from 'react-native';
 // codeblock-focus-end
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Button } from '@react-navigation/elements';
 
 function SettingsScreen({ route }) {
   const navigation = useNavigation();
@@ -373,10 +370,9 @@ function SettingsScreen({ route }) {
       <Text style={{ color: colors.text }}>
         userParam: {JSON.stringify(user)}
       </Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -410,14 +406,15 @@ function HomeScreen() {
       <Text style={{ color: colors.text }}>Home Screen</Text>
       <MyButton />
       <Button
-        title="Go to Settings"
         onPress={() =>
           navigation.navigate('Root', {
             screen: 'Settings',
             params: { user: 'jane' },
           })
         }
-      />
+      >
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -458,13 +455,7 @@ export default function App() {
 ```js name="Operating system color theme" snack version=7
 import * as React from 'react';
 // codeblock-focus-start
-import {
-  Button,
-  View,
-  Text,
-  TouchableOpacity,
-  useColorScheme,
-} from 'react-native';
+import { View, Text, TouchableOpacity, useColorScheme } from 'react-native';
 import {
   NavigationContainer,
   DefaultTheme,
@@ -474,6 +465,7 @@ import {
 // codeblock-focus-end
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Button } from '@react-navigation/elements';
 
 function SettingsScreen({ route, navigation }) {
   const { user } = route.params;
@@ -485,10 +477,9 @@ function SettingsScreen({ route, navigation }) {
       <Text style={{ color: colors.text }}>
         userParam: {JSON.stringify(user)}
       </Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -522,14 +513,15 @@ function HomeScreen() {
       <Text style={{ color: colors.text }}>Home Screen</Text>
       <MyButton />
       <Button
-        title="Go to Settings"
         onPress={() =>
           navigation.navigate('Root', {
             screen: 'Settings',
             params: { user: 'jane' },
           })
         }
-      />
+      >
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -589,16 +581,11 @@ import {
   DarkTheme,
   useTheme,
 } from '@react-navigation/native';
-import {
-  Button,
-  View,
-  Text,
-  TouchableOpacity,
-  useColorScheme,
-} from 'react-native';
+import { View, Text, TouchableOpacity, useColorScheme } from 'react-native';
 // codeblock-focus-end
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Button } from '@react-navigation/elements';
 
 function SettingsScreen({ route }) {
   const navigation = useNavigation();
@@ -611,10 +598,9 @@ function SettingsScreen({ route }) {
       <Text style={{ color: colors.text }}>
         userParam: {JSON.stringify(user)}
       </Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -652,14 +638,15 @@ function HomeScreen() {
       <Text style={{ color: colors.text }}>Home Screen</Text>
       <MyButton />
       <Button
-        title="Go to Settings"
         onPress={() =>
           navigation.navigate('Root', {
             screen: 'Settings',
             params: { user: 'jane' },
           })
         }
-      />
+      >
+        Go to Settings
+      </Button>
     </View>
   );
 }
@@ -694,13 +681,7 @@ export default function App() {
 ```js name="System themes" snack version=7
 import * as React from 'react';
 // codeblock-focus-start
-import {
-  Button,
-  View,
-  Text,
-  TouchableOpacity,
-  useColorScheme,
-} from 'react-native';
+import { View, Text, TouchableOpacity, useColorScheme } from 'react-native';
 import {
   NavigationContainer,
   DefaultTheme,
@@ -722,10 +703,9 @@ function SettingsScreen({ route, navigation }) {
       <Text style={{ color: colors.text }}>
         userParam: {JSON.stringify(user)}
       </Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
     </View>
   );
 }
@@ -763,14 +743,15 @@ function HomeScreen() {
       <Text style={{ color: colors.text }}>Home Screen</Text>
       <MyButton />
       <Button
-        title="Go to Settings"
         onPress={() =>
           navigation.navigate('Root', {
             screen: 'Settings',
             params: { user: 'jane' },
           })
         }
-      />
+      >
+        Go to Settings
+      </Button>
     </View>
   );
 }
