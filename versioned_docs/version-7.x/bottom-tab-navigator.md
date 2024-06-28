@@ -398,6 +398,22 @@ Position of the tab bar. Available values are:
 
 When the tab bar is positioned on the `left` or `right`, it is styled as a sidebar. This can be useful when you want to show a sidebar on larger screens and a bottom tab bar on smaller screens:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Tabs = createBottomTabNavigator({
+  screenOptions: {
+    tabBarPosition: dimensions.width < 600 ? 'bottom' : 'left',
+  },
+
+  // ...
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 ```js
 <Tab.Navigator
   screenOptions={{
@@ -406,9 +422,43 @@ When the tab bar is positioned on the `left` or `right`, it is styled as a sideb
 >
 ```
 
-<video playsInline autoPlay muted loop data-landscape>
-  <source src="/assets/7.x/bottom-tabs-side.mp4" />
-</video>
+</TabItem>
+</Tabs>
+
+<img src="/assets/7.x/bottom-tabs-side.png" alt="Sidebar" data-landscape></img>
+
+You can also render a compact sidebar by placing the label below the icon:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Tabs = createBottomTabNavigator({
+  screenOptions: {
+    tabBarPosition: dimensions.width < 600 ? 'bottom' : 'left',
+    tabBarLabelPosition: 'below-icon',
+  },
+
+  // ...
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<Tab.Navigator
+  screenOptions={{
+    tabBarPosition: dimensions.width < 600 ? 'bottom' : 'left',
+    tabBarLabelPosition: 'below-icon',
+  }}
+>
+```
+
+</TabItem>
+</Tabs>
+
+![Sidebar](/assets/7.x/bottom-tabs-side-compact.png)
 
 #### `lazy`
 

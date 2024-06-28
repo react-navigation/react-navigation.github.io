@@ -185,6 +185,14 @@
   transform: scale(0.8);
 }
 
+article img {
+  max-width: 100%;
+  vertical-align: top;
+  margin: var(--ifm-leading) 0;
+  border-radius: var(--ifm-pre-border-radius);
+  box-shadow: var(--ifm-global-shadow-lw);
+}
+
 article video {
   width: 300px;
   height: auto;
