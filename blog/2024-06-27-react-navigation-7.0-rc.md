@@ -82,7 +82,7 @@ See [`react-native-drawer-layout`](/docs/7.x/drawer-layout) for usage.
 If you'd like to try it out, add `@next` to the package, you're installing. For example:
 
 ```sh npm2yarn
-npm install @react-navigation/nativ@next @react-navigation/bottom-tabs@next
+npm install @react-navigation/native@next @react-navigation/bottom-tabs@next
 ```
 
 This is the best time to try it out and provide feedback before the final release. If you encounter any issues or have any feedback or suggestions, please let us know on [GitHub issues](https://github.com/react-navigation/react-navigation/issues) or our [GitHub Discussions forum](https://github.com/react-navigation/react-navigation/discussions).
