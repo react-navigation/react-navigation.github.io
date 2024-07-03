@@ -404,7 +404,7 @@ When the tab bar is positioned on the `left` or `right`, it is styled as a sideb
 ```js
 const Tabs = createBottomTabNavigator({
   screenOptions: {
-    tabBarPosition: dimensions.width < 600 ? 'bottom' : 'left',
+    tabBarPosition: isLargeScreen ? 'left' ? 'bottom',
   },
 
   // ...
@@ -417,7 +417,7 @@ const Tabs = createBottomTabNavigator({
 ```js
 <Tab.Navigator
   screenOptions={{
-    tabBarPosition: dimensions.width < 600 ? 'bottom' : 'left',
+    tabBarPosition: isLargeScreen ? 'left' ? 'bottom',
   }}
 >
 ```
@@ -427,7 +427,7 @@ const Tabs = createBottomTabNavigator({
 
 <img src="/assets/7.x/bottom-tabs-side.png" alt="Sidebar" data-landscape></img>
 
-You can also render a compact sidebar by placing the label below the icon:
+You can also render a compact sidebar by placing the label below the icon. This is only supported when the [`tabBarVariant`](#tabbarvariant) is set to `material`:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -435,7 +435,8 @@ You can also render a compact sidebar by placing the label below the icon:
 ```js
 const Tabs = createBottomTabNavigator({
   screenOptions: {
-    tabBarPosition: dimensions.width < 600 ? 'bottom' : 'left',
+    tabBarPosition: isLargeScreen ? 'left' ? 'bottom',
+    tabBarVariant: isLargeScreen ? 'material' : 'uikit',
     tabBarLabelPosition: 'below-icon',
   },
 
@@ -458,11 +459,22 @@ const Tabs = createBottomTabNavigator({
 </TabItem>
 </Tabs>
 
-![Sidebar](/assets/7.x/bottom-tabs-side-compact.png)
+![Compact sidebar](/assets/7.x/bottom-tabs-side-compact.png)
+
+#### `tabBarVariant`
+
+Variant of the tab bar. Available values are:
+
+- `uikit` (Default) - The tab bar will be styled according to the iOS UIKit guidelines.
+- `material` - The tab bar will be styled according to the Material Design guidelines.
+
+The `material` variant is currently only supported when the [`tabBarPosition`](#tabbarposition) is set to `left` or `right`.
+
+![Material sidebar](/assets/7.x/bottom-tabs-side-material.png)
 
 #### `lazy`
 
-Whether this screens should render the first time it's accessed. Defaults to `true`. Set it to `false` if you want to render the screen on initial render.
+Whether this screen should render only after the first time it's accessed. Defaults to `true`. Set it to `false` if you want to render the screen on the initial render of the navigator.
 
 #### `freezeOnBlur`
 
