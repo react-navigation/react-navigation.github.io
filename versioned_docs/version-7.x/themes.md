@@ -336,6 +336,24 @@ You can import the default and dark themes like so:
 import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 ```
 
+## Keeping the native theme in sync
+
+If you're changing the theme in the app, native UI elements such as Alert, ActionSheet etc. won't reflect the new theme. You can do the following to keep the native theme in sync:
+
+```js
+React.useEffect(() => {
+  const colorScheme = theme.dark ? 'dark' : 'light';
+
+  if (Platform.OS === 'web') {
+    document.documentElement.style.colorScheme = colorScheme;
+  } else {
+    Appearance.setColorScheme(colorScheme);
+  }
+}, [theme.dark]);
+```
+
+Alternatively, you can use the [`useColorScheme`](#using-the-operating-system-preferences) hook to get the current native color scheme and update the theme accordingly.
+
 ## Using the operating system preferences
 
 On iOS 13+ and Android 10+, you can get user's preferred color scheme (`'dark'` or `'light'`) with the ([`useColorScheme` hook](https://reactnative.dev/docs/usecolorscheme)).
