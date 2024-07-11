@@ -436,7 +436,7 @@ const Stack = createNativeStackNavigator({
     Profile: {
       screen: ProfileScreen,
       // highlight-next-line
-      navigationKey: isSignedIn ? 'user' : 'guest',
+      navigationKey: 'user',
     },
   },
 });
