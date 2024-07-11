@@ -854,7 +854,6 @@ const RootStack = createNativeStackNavigator({
       screens: {
         Home: HomeScreen,
         Profile: ProfileScreen,
-        Help: HelpScreen,
       },
     },
     LoggedOut: {
@@ -862,9 +861,11 @@ const RootStack = createNativeStackNavigator({
       screens: {
         SignIn: SignInScreen,
         SignUp: SignUpScreen,
-        Help: HelpScreen,
       },
     },
+  },
+  screens: {
+    Help: HelpScreen,
   },
 });
 ```
@@ -891,14 +892,16 @@ isSignedIn ? (
 </TabItem>
 </Tabs>
 
-Here we have specific screens such as `SignIn`, `Home` etc. which are only shown depending on the sign in state. But we also have the `Help` screen which can be shown in both cases. This also means that if the signin state changes when the user is in the `Help` screen, they'll stay on the `Help` screen.
+Here we have specific screens such as `SignIn`, `Home` etc. which are only shown depending on the sign in state. But we also have the `Help` screen which can be shown regardless of the login status. This also means that if the sign in state changes when the user is in the `Help` screen, they'll stay on the `Help` screen.
 
-This can be a problem, we probably want the user to be taken to the `SignIn` screen or `Home` screen instead of keeping them on the `Help` screen. To make this work, we can use [`navigationKey`](screen.md#navigation-key). When the `navigationKey` changes, React Navigation will remove all the screen.
-
-So our updated code will look like following:
+This can be a problem, we probably want the user to be taken to the `SignIn` screen or `Home` screen instead of keeping them on the `Help` screen.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
+
+To make this work, we can move the `Help` screen to both of the groups instead of keeping it outside. This will ensure that the [`navigationKey`](screen.md#navigation-key) (the name of the group) for the screen changes when the sign in state changes.
+
+So our updated code will look like the following:
 
 ```js
 const RootStack = createNativeStackNavigator({
@@ -908,6 +911,7 @@ const RootStack = createNativeStackNavigator({
       screens: {
         Home: HomeScreen,
         Profile: ProfileScreen,
+        Help: HelpScreen,
       },
     },
     LoggedOut: {
@@ -915,13 +919,8 @@ const RootStack = createNativeStackNavigator({
       screens: {
         SignIn: SignInScreen,
         SignUp: SignUpScreen,
+        Help: HelpScreen,
       },
-    },
-  },
-  screens: {
-    Help: {
-      screen: HelpScreen,
-      navigationKey: isSignedIn ? 'user' : 'guest',
     },
   },
 });
@@ -929,6 +928,10 @@ const RootStack = createNativeStackNavigator({
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
+
+To make this work, we can use [`navigationKey`](screen.md#navigation-key). When the `navigationKey` changes, React Navigation will remove all the screen.
+
+So our updated code will look like the following:
 
 ```js
 <>
@@ -951,44 +954,7 @@ const RootStack = createNativeStackNavigator({
 </>
 ```
 
-</TabItem>
-</Tabs>
-
 If you have a bunch of shared screens, you can also use [`navigationKey` with a `Group`](group.md#navigation-key) to remove all of the screens in the group. For example:
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-const RootStack = createNativeStackNavigator({
-  groups: {
-    LoggedIn: {
-      if: useIsSignedIn,
-      screens: {
-        Home: HomeScreen,
-        Profile: ProfileScreen,
-      },
-    },
-    LoggedOut: {
-      if: useIsSignedOut,
-      screens: {
-        SignIn: SignInScreen,
-        SignUp: SignUpScreen,
-      },
-    },
-    Common: {
-      navigationKey: isSignedIn ? 'user' : 'guest',
-      screens: {
-        Help: HelpScreen,
-        About: AboutScreen,
-      },
-    },
-  },
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <>
