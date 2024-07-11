@@ -10,16 +10,16 @@ const peers = {
 const versions = {
   7: {
     '@react-navigation/bottom-tabs': [
-      '7.0.0-rc.18',
+      '7.0.0-rc.19',
       {
         ...peers,
         '@react-navigation/native': '*',
       },
     ],
-    '@react-navigation/core': '7.0.0-rc.9',
-    '@react-navigation/native': '7.0.0-rc.11',
+    '@react-navigation/core': '7.0.0-rc.10',
+    '@react-navigation/native': '7.0.0-rc.12',
     '@react-navigation/drawer': [
-      '7.0.0-rc.16',
+      '7.0.0-rc.17',
       {
         ...peers,
         '@react-navigation/native': '*',
@@ -28,14 +28,14 @@ const versions = {
       },
     ],
     '@react-navigation/elements': [
-      '2.0.0-rc.12',
+      '2.0.0-rc.13',
       {
         ...peers,
         '@react-navigation/native': '*',
       },
     ],
     '@react-navigation/material-top-tabs': [
-      '7.0.0-rc.12',
+      '7.0.0-rc.13',
       {
         ...peers,
         '@react-navigation/native': '*',
@@ -43,15 +43,15 @@ const versions = {
       },
     ],
     '@react-navigation/native-stack': [
-      '7.0.0-rc.13',
+      '7.0.0-rc.14',
       {
         ...peers,
         '@react-navigation/native': '*',
       },
     ],
-    '@react-navigation/routers': '7.0.0-rc.5',
+    '@react-navigation/routers': '7.0.0-rc.6',
     '@react-navigation/stack': [
-      '7.0.0-rc.13',
+      '7.0.0-rc.14',
       {
         ...peers,
         '@react-navigation/native': '*',
@@ -59,14 +59,14 @@ const versions = {
       },
     ],
     'react-native-drawer-layout': [
-      '4.0.0-rc.6',
+      '4.0.0-rc.7',
       {
         'react-native-gesture-handler': '*',
         'react-native-reanimated': '*',
       },
     ],
     'react-native-tab-view': [
-      '4.0.0-rc.6',
+      '4.0.0-rc.7',
       {
         'react-native-pager-view': '*',
       },
