@@ -38,11 +38,24 @@ Then, you need to install and configure the libraries that are required by the d
 
    The Drawer supports both Reanimated 1 and the latest version of Reanimated. If you want to use the latest version of Reanimated, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
-2. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+2. To finalize the installation of `react-native-gesture-handler`, we need to conditionally import it. To do this, create 2 files:
 
-   ```js
+   ```js title="gesture-handler.native.js"
+   // Only import react-native-gesture-handler on native platforms
    import 'react-native-gesture-handler';
    ```
+
+   ```js title="gesture-handler.js"
+   // Don't import react-native-gesture-handler on web
+   ```
+
+   Now, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+
+   ```js
+   import './gesture-handler';
+   ```
+
+   Since the drawer navigator doesn't use `react-native-gesture-handler` on the web, this avoids unnecessarily increasing the bundle size.
 
    :::warning
 
@@ -52,9 +65,9 @@ Then, you need to install and configure the libraries that are required by the d
 
 3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-```bash
-npx pod-install ios
-```
+   ```bash
+   npx pod-install ios
+   ```
 
 ## API Definition
 
