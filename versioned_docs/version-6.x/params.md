@@ -158,6 +158,12 @@ function CreatePostScreen({ navigation, route }) {
 }
 ```
 
+:::note
+
+Add `merge: true` to the `params` in the CreatePostScreen component to merge the old state (without post) with the new state (with post).
+
+:::
+
 <video playsInline autoPlay muted loop>
   <source src="/assets/navigators/params-to-parent.mp4" />
 </video>
