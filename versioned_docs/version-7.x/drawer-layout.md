@@ -4,7 +4,7 @@ title: React Native Drawer Layout
 sidebar_label: Drawer Layout
 ---
 
-A cross-platform Drawer component for React Native implemented using [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
+A cross-platform Drawer component for React Native implemented using [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) on native platforms and CSS transitions on Web.
 
 <video playsInline autoPlay muted loop>
   <source src="/assets/7.x/drawer-layout.mp4" />
@@ -55,7 +55,7 @@ Then, you need to install and configure the libraries that are required by the d
    import './gesture-handler';
    ```
 
-   Since the drawer layout doesn't use `react-native-gesture-handler` on the web, this avoids unnecessarily increasing the bundle size.
+   Since the drawer layout doesn't use `react-native-gesture-handler` on Web, this avoids unnecessarily increasing the bundle size.
 
    :::warning
 
@@ -106,7 +106,7 @@ The package exports a `Drawer` component which is the one you'd use to render th
 
 ### `Drawer`
 
-Component responsible for rendering a drawer with animations and gestures.
+Component is responsible for rendering a drawer sidebar with animations and gestures.
 
 #### Drawer Props
 
@@ -212,7 +212,7 @@ Content that the drawer should wrap.
 
 ### `useDrawerProgress`
 
-The `useDrawerProgress` hook returns a Reanimated SharedValue (with modern implementation) or Reanimated Node (with legacy implementation) which represents the progress of the drawer. It can be used to animate the content of the screen.
+The `useDrawerProgress` hook returns a Reanimated `SharedValue` which represents the progress of the drawer. It can be used to animate the content of the screen.
 
 Example with modern implementation:
 
@@ -239,31 +239,6 @@ function MyComponent() {
 }
 ```
 
-Example with legacy implementation:
-
-```js
-import { Animated } from 'react-native-reanimated';
-import { useDrawerProgress } from 'react-native-drawer-layout';
-
-// ...
-
-function MyComponent() {
-  const progress = useDrawerProgress();
-
-  // If you are on react-native-reanimated 1.x, use `Animated.interpolate` instead of `Animated.interpolateNode`
-  const translateX = Animated.interpolateNode(progress, {
-    inputRange: [0, 1],
-    outputRange: [-100, 0],
-  });
-
-  return (
-    <Animated.View style={{ transform: [{ translateX }] }}>
-      {/* ... */}
-    </Animated.View>
-  );
-}
-```
-
 If you are using class components, you can use the `DrawerProgressContext` to get the progress value.
 
 ```js
@@ -281,3 +256,9 @@ class MyComponent extends React.Component {
   }
 }
 ```
+
+:::warning
+
+The `useDrawerProgress` hook (or `DrawerProgressContext`) will return a mock value on Web since Reanimated is not used on Web. The mock value can only represent the open state of the drawer (`0` when closed, `1` when open), and not the progress of the drawer.
+
+:::

@@ -762,7 +762,13 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-This hook is not supported on Web.
+If you are using class components, you can use the `DrawerProgressContext` to get the progress value.
+
+:::warning
+
+The `useDrawerProgress` hook (or `DrawerProgressContext`) will return a mock value on Web since Reanimated is not used on Web. The mock value can only represent the open state of the drawer (`0` when closed, `1` when open), and not the progress of the drawer.
+
+:::
 
 #### `useDrawerStatus`
 
