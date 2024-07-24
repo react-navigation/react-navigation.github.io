@@ -55,7 +55,7 @@ Then, you need to install and configure the libraries that are required by the d
    import './gesture-handler';
    ```
 
-   Since the drawer navigator doesn't use `react-native-gesture-handler` on the web, this avoids unnecessarily increasing the bundle size.
+   Since the drawer navigator doesn't use `react-native-gesture-handler` on Web, this avoids unnecessarily increasing the bundle size.
 
    :::warning
 
