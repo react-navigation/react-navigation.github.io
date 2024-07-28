@@ -75,15 +75,13 @@ To handle redirects on Vercel, add the following in the `vercel.json` file at th
 
 ```json
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
 ```
 
 ### GitHub Pages
 
-GitHub pages doesn't support such redirection configuration for SPAs. There are a couple of ways to work around this:
+GitHub Pages doesn't support such redirection configuration for SPAs. There are a couple of ways to work around this:
 
 - Rename your `index.html` to `404.html`. This will serve the `404.html` file for all routes. However, this will cause a 404 status code to be returned for all routes. So it's not ideal for SEO.
-- Write a script that generates copies the `index.html` file to all routes in the build output. For example, if your app has routes `/`, `/about`, and `/contact`, you can copy the `index.html` file to `about.html` and `contact.html`.
+- Write a script that copies the `index.html` file to all routes in the build output. For example, if your app has routes `/`, `/about`, and `/contact`, you can copy the `index.html` file to `about.html` and `contact.html`.
