@@ -27,7 +27,7 @@ npm install @react-navigation/native-stack@next
 
 :::
 
-### Creating a native stack navigator
+## Creating a native stack navigator
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -120,7 +120,7 @@ The casing of the route name doesn't matter -- you can use lowercase `home` or c
 
 :::
 
-### Configuring the navigator
+## Configuring the navigator
 
 All of the route configuration is specified as props to our navigator. We haven't passed any props to our navigator, so it just uses the default configuration.
 
@@ -232,7 +232,7 @@ When using the dynamic API, the `component` prop accepts a component, not a rend
 
 Here, the `Home` route corresponds to the `HomeScreen` component, and the `Details` route corresponds to the `DetailsScreen` component. The initial route for the stack is the `Home` route. Try changing it to `Details` and reload the app (React Native's Fast Refresh won't update changes from `initialRouteName`, as you might expect), notice that you will now see the `Details` screen. Then change it back to `Home` and reload once more.
 
-### Specifying options
+## Specifying options
 
 Each screen in the navigator can specify some options for the navigator, such as the title to render in the header.
 
@@ -469,7 +469,7 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-### Passing additional props
+## Passing additional props
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>

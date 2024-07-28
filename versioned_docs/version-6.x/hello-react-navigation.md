@@ -20,7 +20,7 @@ npm install @react-navigation/native-stack
 
 > 💡 `@react-navigation/native-stack` depends on `react-native-screens` and the other libraries that we installed in [Getting started](getting-started.md). If you haven't installed those yet, head over to that page and follow the installation instructions.
 
-### Creating a native stack navigator
+## Creating a native stack navigator
 
 `createNativeStackNavigator` is a function that returns an object containing 2 properties: `Screen` and `Navigator`. Both of them are React components used for configuring the navigator. The `Navigator` should contain `Screen` elements as its children to define the configuration for routes.
 
@@ -69,7 +69,7 @@ The casing of the route name doesn't matter -- you can use lowercase `home` or c
 
 :::
 
-### Configuring the navigator
+## Configuring the navigator
 
 All of the route configuration is specified as props to our navigator. We haven't passed any props to our navigator, so it just uses the default configuration.
 
@@ -110,7 +110,7 @@ The `component` prop accepts component, not a render function. Don't pass an inl
 
 :::
 
-### Specifying options
+## Specifying options
 
 Each screen in the navigator can specify some options for the navigator, such as the title to render in the header. These options can be passed in the `options` prop for each screen component:
 
@@ -126,7 +126,7 @@ Each screen in the navigator can specify some options for the navigator, such as
 
 Sometimes we will want to specify the same options for all of the screens in the navigator. For that, we can pass a `screenOptions` prop to the navigator.
 
-### Passing additional props
+## Passing additional props
 
 Sometimes we might want to pass additional props to a screen. We can do that with 2 approaches:
 
