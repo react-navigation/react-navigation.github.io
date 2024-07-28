@@ -12,6 +12,12 @@ This guide will cover how to server render your React Native app using React Nat
 1. Rendering the correct layout depending on the request URL
 2. Setting appropriate page metadata based on the focused screen
 
+::: warning
+
+Server rendering support is currently limited. It's not possible to provide a seamless SSR experience due to a lack of APIs such as media queries. In addition, many third-party libraries often don't work well with server rendering.
+
+:::
+
 ## Pre-requisites
 
 Before you follow the guide, make sure that your app already renders fine on server. To do that, you will need to ensure the following:
