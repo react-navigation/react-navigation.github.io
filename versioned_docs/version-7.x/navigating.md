@@ -40,14 +40,17 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
+  // highlight-next-line
   const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
+      // highlight-start
       <Button onPress={() => navigation.navigate('Details')}>
         Go to Details
       </Button>
+      // highlight-end
     </View>
   );
 }
@@ -127,9 +130,11 @@ function DetailsScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Details Screen</Text>
+      // highlight-start
       <Button onPress={() => navigation.navigate('Details')}>
         Go to Details... again
       </Button>
+      // highlight-end
     </View>
   );
 }
