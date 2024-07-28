@@ -27,6 +27,14 @@ npm install @react-navigation/native-stack@next
 
 :::
 
+## Installing the elements library
+
+The [`@react-navigation/elements`](elements.md) library provides a set of components that are designed to work well with React Navigation. We'll use a few of these components in this guide. So let's install it first:
+
+```bash npm2yarn
+npm install @react-navigation/elements@next
+```
+
 ## Creating a native stack navigator
 
 <Tabs groupId="config" queryString="config">
