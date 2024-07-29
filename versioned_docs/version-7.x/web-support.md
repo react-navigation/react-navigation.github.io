@@ -1,8 +1,11 @@
 ---
 id: web-support
-title: React Navigation on the Web
+title: React Navigation on Web
 sidebar_label: Web support
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 React Navigation has built-in support for the Web platform. This allows you to use the same navigation logic in your React Native app as well as on the web. The navigators require using [React Native for Web](https://github.com/necolas/react-native-web) to work on the web.
 
@@ -27,6 +30,69 @@ While Web support works out of the box, there are some things to configure to en
 In React Navigation 4, it was necessary to install a separate package called `@react-navigation/web` to use web integration. This package is no longer needed in recent versions of React Navigation. If you have it installed, make sure to uninstall it to avoid conflicts.
 
 :::
+
+## Lazy loading screens
+
+By default, screen components are bundled in the main bundle. This can lead to a large bundle size if you have many screens. It's important to keep the bundle size small on the web for faster loading times.
+
+To reduce the bundle size, you can use [dynamic `import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) with [`React.lazy`](https://react.dev/reference/react/lazy) to lazy load screens:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Lazy loading screens" snack version=7
+import { Suspense, lazy } from 'react';
+
+const MyStack = createNativeStackNavigator({
+  screenLayout: ({ children }) => (
+    <Suspense fallback={<Loading />}>{children}</Suspense>
+  ),
+  screens: {
+    Home: {
+      component: lazy(() => import('./HomeScreen')),
+    },
+    Profile: {
+      component: lazy(() => import('./ProfileScreen')),
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Lazy loading screens" snack version=7
+import { Suspense, lazy } from 'react';
+
+const HomeScreen = lazy(() => import('./HomeScreen'));
+const ProfileScreen = lazy(() => import('./ProfileScreen'));
+
+function MyStack() {
+  return (
+    <Stack.Navigator
+      screenLayout={({ children }) => (
+        <Suspense fallback={<Loading />}>{children}</Suspense>
+      )}
+    >
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
+  );
+}
+```
+
+:::warning
+
+Make sure to use `React.lazy` **outside** the component containing the navigator configuration. Otherwise, it will return a new component on each render, causing the [screen to be unmounted and remounted](troubleshooting.md#screens-are-unmountingremounting-during-navigation) every time the component rerenders.
+
+:::
+
+</TabItem>
+</Tabs>
+
+This will split the screen components into separate chunks (depending on your bundler) which are loaded on-demand when the screen is rendered. This can significantly reduce the initial bundle size.
+
+In addition, you can use the [`screenLayout`](navigator.md#screen-layout) to wrap your screens in a [`<Suspense>`](https://react.dev/reference/react/Suspense) boundary. The suspense fallback can be used to show a loading indicator and will be shown while the screen component is being loaded.
 
 ## Web-specific behavior
 
