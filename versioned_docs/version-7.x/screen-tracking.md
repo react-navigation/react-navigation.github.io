@@ -1,7 +1,7 @@
 ---
 id: screen-tracking
 title: Screen tracking for analytics
-sidebar_label: Screen tracking for analytics
+sidebar_label: Screen tracking
 ---
 
 import Tabs from '@theme/Tabs';

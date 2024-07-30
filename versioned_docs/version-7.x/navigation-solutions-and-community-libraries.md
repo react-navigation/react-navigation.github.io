@@ -1,7 +1,7 @@
 ---
 id: navigation-solutions-and-community-libraries
 title: Navigation Solutions and Community Libraries
-sidebar_label: Navigation Solutions and Community Libraries
+sidebar_label: Community Libraries
 ---
 
 :::note

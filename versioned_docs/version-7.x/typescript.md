@@ -1,7 +1,7 @@
 ---
 id: typescript
 title: Type checking with TypeScript
-sidebar_label: Type checking with TypeScript
+sidebar_label: Configuring TypeScript
 ---
 
 import Tabs from '@theme/Tabs';

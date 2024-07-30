@@ -1,7 +1,7 @@
 ---
 id: hiding-tabbar-in-screens
 title: Hiding tab bar in specific screens
-sidebar_label: Hiding tab bar in specific screens
+sidebar_label: Hiding tab bar in screens
 ---
 
 import Tabs from '@theme/Tabs';

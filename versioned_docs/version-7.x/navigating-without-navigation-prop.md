@@ -1,7 +1,7 @@
 ---
 id: navigating-without-navigation-prop
 title: Navigating without the navigation prop
-sidebar_label: Navigating without the navigation prop
+sidebar_label: Navigation Ref
 ---
 
 import Tabs from '@theme/Tabs';

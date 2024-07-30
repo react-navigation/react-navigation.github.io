@@ -1,7 +1,7 @@
 ---
 id: combine-static-with-dynamic
 title: Combining static and dynamic APIs
-sidebar_label: Combining static and dynamic APIs
+sidebar_label: Static and dynamic APIs
 ---
 
 While the static API has many advantages, it doesn't fit use cases where the navigation configuration needs to be dynamic. So React Navigation supports interop between the static and dynamic APIs.

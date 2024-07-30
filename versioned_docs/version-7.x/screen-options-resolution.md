@@ -1,7 +1,7 @@
 ---
 id: screen-options-resolution
 title: Screen options with nested navigators
-sidebar_label: Screen options with nested navigators
+sidebar_label: Options with nested navigators
 ---
 
 import Tabs from '@theme/Tabs';

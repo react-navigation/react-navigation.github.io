@@ -1,7 +1,7 @@
 ---
 id: custom-android-back-button-handling
 title: Custom Android back button behavior
-sidebar_label: Custom Android back button behavior
+sidebar_label: Android back button behavior
 ---
 
 import Tabs from '@theme/Tabs';

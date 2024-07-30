@@ -1,7 +1,7 @@
 ---
 id: function-after-focusing-screen
 title: Call a function when focused screen changes
-sidebar_label: Call a function when focused screen changes
+sidebar_label: Call a function on focus
 ---
 
 import Tabs from '@theme/Tabs';
