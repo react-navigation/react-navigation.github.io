@@ -308,22 +308,24 @@ footer {
   transform: scale(0.8);
 }
 
-article img {
-  max-width: 100%;
+article img,
+article video {
   vertical-align: top;
   margin: var(--ifm-leading) 0;
   border-radius: var(--ifm-pre-border-radius);
-  box-shadow: var(--ifm-global-shadow-lw);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    var(--ifm-global-shadow-lw);
+}
+
+article img {
+  max-width: 100%;
 }
 
 article video {
   width: 300px;
   height: auto;
   max-width: 100%;
-  vertical-align: top;
-  margin: var(--ifm-leading) 0;
-  border-radius: var(--ifm-pre-border-radius);
-  box-shadow: var(--ifm-global-shadow-lw);
 }
 
 article video[data-landscape] {
