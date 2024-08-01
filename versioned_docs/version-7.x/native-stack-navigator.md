@@ -594,7 +594,13 @@ The type of animation to use when this screen replaces another screen. Defaults 
 Supported values:
 
 - `push`: the new screen will perform push animation.
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/native-stack/animationTypeForReplace/push.mp4" />
+  </video>
 - `pop`: the new screen will perform pop animation.
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/native-stack/animationTypeForReplace/pop.mp4" />
+  </video>
 
 #### `animation`
 
