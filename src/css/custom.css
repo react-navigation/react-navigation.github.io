@@ -345,7 +345,7 @@ article video:has(+ video) {
   margin-right: var(--ifm-leading);
 }
 
-article p + video {
+article p ~ video {
   margin-top: 0;
 }
 
