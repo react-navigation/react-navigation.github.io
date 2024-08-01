@@ -182,6 +182,8 @@ Title string used by the back button on iOS. Defaults to the previous scene's ti
 
 Only supported on iOS.
 
+<img src="/assets/7.x/native-stack/headerBackTitle/headerBackTitle.jpeg" height="700" alt="Header back title" />
+
 #### `headerBackTitleVisible`
 
 Whether the back button title should be visible or not.
@@ -196,6 +198,8 @@ Style object for header back title. Supported properties:
 - `fontSize`
 
 Only supported on iOS.
+
+<img src="/assets/7.x/native-stack/headerBackTitleStyle/headerBackTitleStyle.png" width="500" alt="Header back title style" />
 
 #### `headerBackImageSource`
 
