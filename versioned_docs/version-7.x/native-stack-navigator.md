@@ -210,7 +210,6 @@ export function NativeStack() {
         component={NewsFeedScreen}
         options={{
           title: 'Feed',
-          animationTypeForReplace: 'pop',
           headerBackTitle: 'Back title example',
           headerBackTitleStyle: {
             fontSize: 14,
