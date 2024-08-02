@@ -166,9 +166,7 @@ Requires `react-native-screens` version >=3.3.0.
 
 Only supported on iOS.
 
-  <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/headerBackButtonMenuEnabled.mp4" />
-  </video>
+<img src="/assets/7.x/native-stack/headerBackButtonMenuEnabled.png" width="500" alt="Header back button menu enabled" />
 
 #### `headerBackVisible`
 
@@ -182,7 +180,7 @@ Title string used by the back button on iOS. Defaults to the previous scene's ti
 
 Only supported on iOS.
 
-<img src="/assets/7.x/native-stack/headerBackTitle.jpeg" height="700" alt="Header back title" />
+<img src="/assets/7.x/native-stack/headerBackTitle.jpeg" width="500" alt="Header back title" />
 
 #### `headerBackTitleVisible`
 
