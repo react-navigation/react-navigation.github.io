@@ -211,12 +211,13 @@ Supported properties:
 Only supported on iOS.
 
 <video playsInline autoPlay muted loop style={{ width: "500px" }}>
+
   <source src="/assets/7.x/native-stack/headerLargeStyle.mp4" />
 </video>
 
 #### `headerLargeTitle`
 
-Whether to enable header with large title which collapses to regular header on scroll. 
+Whether to enable header with large title which collapses to regular header on scroll.
 Defaults to `false`.
 
 For large title to collapse on scroll, the content of the screen should be wrapped in a scrollable view such as `ScrollView` or `FlatList`. If the scrollable area doesn't fill the screen, the large title won't collapse on scroll. You also need to specify `contentInsetAdjustmentBehavior="automatic"` in your `ScrollView`, `FlatList` etc.
@@ -224,6 +225,7 @@ For large title to collapse on scroll, the content of the screen should be wrapp
 Only supported on iOS.
 
 <video playsInline autoPlay muted loop style={{ width: "500px" }}>
+
   <source src="/assets/7.x/native-stack/headerLargeTitle.mp4" />
 </video>
 
@@ -266,6 +268,7 @@ Style object for header. Supported properties:
 - `backgroundColor`
 
 <video playsInline autoPlay muted loop style={{ width: "500px" }}>
+
   <source src="/assets/7.x/native-stack/headerStyle.mp4" />
 </video>
 
@@ -336,7 +339,7 @@ Function which returns a React Element to render as the background of the header
 
   <img src="/assets/7.x/native-stack/headerBackground.png" width="500" alt="Header background"/>
 
-  Example:
+Example:
 
 ```js
      headerBackground: () => (
@@ -670,12 +673,21 @@ Whether you can use gestures to dismiss this screen. Defaults to `true`. Only su
 
 #### `animationTypeForReplace`
 
-The type of animation to use when this screen replaces another screen. Defaults to `pop`.
+The type of animation to use when this screen replaces another screen. Defaults to `push`.
 
 Supported values:
 
 - `push`: the new screen will perform push animation.
+
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/native-stack/animationTypeForReplace-push.mp4" />
+  </video>
+
 - `pop`: the new screen will perform pop animation.
+
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/native-stack/animationTypeForReplace-pop.mp4" />
+  </video>
 
 #### `animation`
 
