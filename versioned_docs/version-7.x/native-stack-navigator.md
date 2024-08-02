@@ -202,24 +202,10 @@ Only supported on iOS.
 Example:
 
 ```js
-export function NativeStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="NewsFeed"
-        component={NewsFeedScreen}
-        options={{
-          title: 'Feed',
-          headerBackTitle: 'Back title example',
-          headerBackTitleStyle: {
-            fontSize: 14,
-            fontFamily: 'Georgia',
-          },
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
+  headerBackTitleStyle: {
+      fontSize: 14,
+      fontFamily: 'Georgia',
+  },
 ```
 
 #### `headerBackImageSource`
