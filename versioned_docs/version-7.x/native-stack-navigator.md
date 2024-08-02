@@ -334,7 +334,7 @@ Only supported on iOS.
 
 Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
 
-  <img src="/assets/7.x/native-stack/headerBackground.png" width="500" alt="Header background" />
+  <img src="/assets/7.x/native-stack/headerBackground.png" width="500" alt="Header background"/>
 
   Example:
 
@@ -359,9 +359,31 @@ Tint color for the header. Changes the color of back button and title.
 
 Function which returns a React Element to display on the left side of the header. This replaces the back button. See `headerBackVisible` to show the back button along side left element.
 
+<img src="/assets/7.x/native-stack/headerLeft.png" width="500" alt="Header right"/>
+
+Example:
+
+```js
+    headerLeft: () => (
+      <MaterialCommunityIcons name="map" color="gray" size={36} />
+    ),
+    headerBackVisible: true,
+    headerBackTitle: 'Back',
+```
+
 #### `headerRight`
 
 Function which returns a React Element to display on the right side of the header.
+
+  <img src="/assets/7.x/native-stack/headerRight.png" width="500" alt="Header right"/>
+
+Example:
+
+```js
+  headerRight: () => (
+    <MaterialCommunityIcons name="map" color="blue" size={36} />
+  )
+```
 
 #### `headerTitle`
 
