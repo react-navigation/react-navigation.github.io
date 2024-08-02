@@ -199,11 +199,10 @@ Only supported on iOS.
 
 <img src="/assets/7.x/native-stack/headerBackTitleStyle.png" width="500" alt="Header back title style" />
 
-Example: 
+Example:
 
 ```js
 export function NativeStack() {
-
   return (
     <Stack.Navigator>
       <Stack.Screen
