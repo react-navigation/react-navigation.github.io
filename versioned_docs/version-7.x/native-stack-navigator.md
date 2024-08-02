@@ -167,7 +167,7 @@ Requires `react-native-screens` version >=3.3.0.
 Only supported on iOS.
 
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/headerBackButtonMenuEnabled/headerBackButtonMenuEnabled.mp4" />
+   <source src="/assets/7.x/native-stack/headerBackButtonMenuEnabled.mp4" />
   </video>
 
 #### `headerBackVisible`
@@ -182,7 +182,7 @@ Title string used by the back button on iOS. Defaults to the previous scene's ti
 
 Only supported on iOS.
 
-<img src="/assets/7.x/native-stack/headerBackTitle/headerBackTitle.jpeg" height="700" alt="Header back title" />
+<img src="/assets/7.x/native-stack/headerBackTitle.jpeg" height="700" alt="Header back title" />
 
 #### `headerBackTitleVisible`
 
@@ -199,7 +199,7 @@ Style object for header back title. Supported properties:
 
 Only supported on iOS.
 
-<img src="/assets/7.x/native-stack/headerBackTitleStyle/headerBackTitleStyle.png" width="500" alt="Header back title style" />
+<img src="/assets/7.x/native-stack/headerBackTitleStyle.png" width="500" alt="Header back title style" />
 
 #### `headerBackImageSource`
 
@@ -614,47 +614,47 @@ Supported values:
 
 - `default`: use the platform default animation
   <video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/animation/native-stack-animation-default.mp4" />
+  <source src="/assets/7.x/native-stack/native-stack-animation-default.mp4" />
   </video>
 
 - `fade`: fade screen in or out
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/animation/native-stack-animation-fade.mp4" />
+   <source src="/assets/7.x/native-stack/native-stack-animation-fade.mp4" />
   </video>
 
 - `fade_from_bottom`: fade the new screen from bottom
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/animation/native-stack-animation-fade-from-bottom.mp4" />
+   <source src="/assets/7.x/native-stack/native-stack-animation-fade-from-bottom.mp4" />
   </video>
 
 - `flip`: flip the screen, requires `presentation: "modal"` (iOS only)
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/animation/native-stack-animation-flip.mp4" />
+   <source src="/assets/7.x/native-stack/native-stack-animation-flip.mp4" />
   </video>
 
 - `simple_push`: default animation, but without shadow and native header transition (iOS only, uses default animation on Android)
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/animation/native-stack-animation-simple-push.mp4" />
+   <source src="/assets/7.x/native-stack/native-stack-animation-simple-push.mp4" />
   </video>
 
 - `slide_from_bottom`: slide in the new screen from bottom
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/animation/native-stack-animation-slide-from-bottom.mp4" />
+   <source src="/assets/7.x/native-stack/native-stack-animation-slide-from-bottom.mp4" />
   </video>
 
 - `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/animation/native-stack-animation-slide-from-right.mp4" />
+   <source src="/assets/7.x/native-stack/native-stack-animation-slide-from-right.mp4" />
   </video>
 
 - `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/animation/native-stack-animation-slide-from-left.mp4" />
+   <source src="/assets/7.x/native-stack/native-stack-animation-slide-from-left.mp4" />
   </video>
 
 - `none`: don't animate the screen
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/animation/native-stack-animation-none.mp4" />
+   <source src="/assets/7.x/native-stack/native-stack-animation-none.mp4" />
   </video>
 
 #### `presentation`
