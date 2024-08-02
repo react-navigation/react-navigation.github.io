@@ -298,10 +298,20 @@ Blur effect for the translucent header. The `headerTransparent` option needs to 
 Supported values:
 
 - `extraLight`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-extralight.png" width="500" alt="Header blur effect extraLight" />
+
 - `light`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-light.png" width="500" alt="Header blur effect light" />
+
 - `dark`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-dark.png" width="500" alt="Header blur effect dark" />
+
 - `regular`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-regular.png" width="500" alt="Header blur effect regular" />
+
 - `prominent`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-prominent.png" width="500" alt="Header blur effect prominent" />
+
 - `systemUltraThinMaterial`
 - `systemThinMaterial`
 - `systemMaterial`
@@ -324,9 +334,26 @@ Only supported on iOS.
 
 Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
 
+  <img src="/assets/7.x/native-stack/headerBackground.png" width="500" alt="Header background" />
+
+  Example:
+
+```js
+     headerBackground: () => (
+      <LinearGradient
+        colors={['#c17388', '#90306f']}
+        style={{ flex: 1 }}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+      />
+      ),
+```
+
 #### `headerTintColor`
 
 Tint color for the header. Changes the color of back button and title.
+
+  <img src="/assets/7.x/native-stack/headerTintColor.png" width="500" alt="Header tint color" />
 
 #### `headerLeft`
 
