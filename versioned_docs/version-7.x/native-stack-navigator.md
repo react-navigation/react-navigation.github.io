@@ -383,9 +383,7 @@ Function which returns a React Element to display on the right side of the heade
 Example:
 
 ```js
-  headerRight: () => (
-    <MaterialCommunityIcons name="map" color="blue" size={36} />
-  )
+headerRight: () => <MaterialCommunityIcons name="map" color="blue" size={36} />;
 ```
 
 #### `headerTitle`
