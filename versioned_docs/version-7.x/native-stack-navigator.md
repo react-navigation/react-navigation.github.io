@@ -609,7 +609,6 @@ Supported values:
 
 How the screen should animate when pushed or popped.
 
-Only supported on Android and iOS.
 
 Supported values:
 
@@ -622,6 +621,8 @@ Supported values:
 - `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
 - `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)
 - `none`: don't animate the screen
+
+Only supported on Android and iOS
 
 #### `presentation`
 
