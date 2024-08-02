@@ -589,12 +589,21 @@ Whether you can use gestures to dismiss this screen. Defaults to `true`. Only su
 
 #### `animationTypeForReplace`
 
-The type of animation to use when this screen replaces another screen. Defaults to `pop`.
+The type of animation to use when this screen replaces another screen. Defaults to `push`.
 
 Supported values:
 
 - `push`: the new screen will perform push animation.
+
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/native-stack/animationTypeForReplace-push.mp4" />
+  </video>
+
 - `pop`: the new screen will perform pop animation.
+
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/native-stack/animationTypeForReplace-pop.mp4" />
+  </video>
 
 #### `animation`
 
