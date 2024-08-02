@@ -594,13 +594,13 @@ The type of animation to use when this screen replaces another screen. Defaults 
 Supported values:
 
 - `push`: the new screen will perform push animation.
-  
+
   <video playsInline autoPlay muted loop>
     <source src="/assets/7.x/native-stack/animationTypeForReplace-push.mp4" />
   </video>
 
 - `pop`: the new screen will perform pop animation.
-  
+
   <video playsInline autoPlay muted loop>
     <source src="/assets/7.x/native-stack/animationTypeForReplace-pop.mp4" />
   </video>
@@ -609,19 +609,54 @@ Supported values:
 
 How the screen should animate when pushed or popped.
 
+Only supported on Android and iOS.
+
 Supported values:
 
 - `default`: use the platform default animation
-- `fade`: fade screen in or out
-- `fade_from_bottom`: fade the new screen from bottom
-- `flip`: flip the screen, requires `presentation: "modal"` (iOS only)
-- `simple_push`: default animation, but without shadow and native header transition (iOS only, uses default animation on Android)
-- `slide_from_bottom`: slide in the new screen from bottom
-- `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
-- `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)
-- `none`: don't animate the screen
+  <video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/native-stack-animation-default.mp4" />
+  </video>
 
-Only supported on Android and iOS.
+- `fade`: fade screen in or out
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-fade.mp4" />
+  </video>
+
+- `fade_from_bottom`: fade the new screen from bottom
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-fade-from-bottom.mp4" />
+  </video>
+
+- `flip`: flip the screen, requires `presentation: "modal"` (iOS only)
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-flip.mp4" />
+  </video>
+
+- `simple_push`: default animation, but without shadow and native header transition (iOS only, uses default animation on Android)
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-simple-push.mp4" />
+  </video>
+
+- `slide_from_bottom`: slide in the new screen from bottom
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-slide-from-bottom.mp4" />
+  </video>
+
+- `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-slide-from-right.mp4" />
+  </video>
+
+- `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-slide-from-left.mp4" />
+  </video>
+
+- `none`: don't animate the screen
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-none.mp4" />
+  </video>
 
 #### `presentation`
 
