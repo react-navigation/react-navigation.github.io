@@ -199,6 +199,31 @@ Only supported on iOS.
 
 <img src="/assets/7.x/native-stack/headerBackTitleStyle.png" width="500" alt="Header back title style" />
 
+Example: 
+
+```js
+export function NativeStack() {
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="NewsFeed"
+        component={NewsFeedScreen}
+        options={{
+          title: 'Feed',
+          animationTypeForReplace: 'pop',
+          headerBackTitle: 'Back title example',
+          headerBackTitleStyle: {
+            fontSize: 14,
+            fontFamily: 'Georgia',
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+```
+
 #### `headerBackImageSource`
 
 Image to display in the header as the icon in the back button. Defaults to back icon image for the platform
