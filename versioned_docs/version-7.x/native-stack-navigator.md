@@ -210,13 +210,22 @@ Supported properties:
 
 Only supported on iOS.
 
+<video playsInline autoPlay muted loop style={{ width: "500px" }}>
+  <source src="/assets/7.x/native-stack/headerLargeStyle.mp4" />
+</video>
+
 #### `headerLargeTitle`
 
-Whether to enable header with large title which collapses to regular header on scroll.
+Whether to enable header with large title which collapses to regular header on scroll. 
+Defaults to `false`.
 
 For large title to collapse on scroll, the content of the screen should be wrapped in a scrollable view such as `ScrollView` or `FlatList`. If the scrollable area doesn't fill the screen, the large title won't collapse on scroll. You also need to specify `contentInsetAdjustmentBehavior="automatic"` in your `ScrollView`, `FlatList` etc.
 
 Only supported on iOS.
+
+<video playsInline autoPlay muted loop style={{ width: "500px" }}>
+  <source src="/assets/7.x/native-stack/headerLargeTitle.mp4" />
+</video>
 
 #### `headerLargeTitleShadowVisible`
 
@@ -233,6 +242,19 @@ Style object for large title in header. Supported properties:
 
 Only supported on iOS.
 
+<img src="/assets/7.x/native-stack/headerLargeTitleStyle.png" width="500" alt="Header large title style" />
+
+Example:
+
+```js
+    headerLargeTitleStyle: {
+      fontFamily: 'Georgia',
+      fontSize: 22,
+      fontWeight: '500',
+      color: 'blue',
+    },
+```
+
 #### `headerShown`
 
 Whether to show the header. The header is shown by default. Setting this to `false` hides the header.
@@ -243,9 +265,19 @@ Style object for header. Supported properties:
 
 - `backgroundColor`
 
+<video playsInline autoPlay muted loop style={{ width: "500px" }}>
+  <source src="/assets/7.x/native-stack/headerStyle.mp4" />
+</video>
+
 #### `headerShadowVisible`
 
 Whether to hide the elevation shadow (Android) or the bottom border (iOS) on the header.
+
+Android:
+<img src="/assets/7.x/native-stack/headerShadowVisible-Android.png" width="500" alt="Header shadow visible Android" />
+
+iOS:
+<img src="/assets/7.x/native-stack/headerShadowVisible-iOS.png" width="500" alt="Header shadow visible iOS" />
 
 #### `headerTransparent`
 
