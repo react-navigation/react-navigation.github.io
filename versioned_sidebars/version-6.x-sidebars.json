@@ -9,10 +9,7 @@
       "header-buttons",
       "nesting-navigators",
       "navigation-lifecycle",
-      "next-steps",
-      "glossary-of-terms",
-      "troubleshooting",
-      "limitations"
+      "next-steps"
     ],
     "Guides": [
       "tab-based-navigation",
@@ -41,6 +38,7 @@
       "typescript",
       "redux-integration",
       "MST-integration",
+      "troubleshooting",
       "upgrading-from-5.x"
     ],
     "Navigators": [
@@ -99,6 +97,12 @@
       "navigation-solutions-and-community-libraries",
       "more-resources"
     ],
-    "Meta": ["pitch", "used-by", "contributing"]
+    "Meta": [
+      "glossary-of-terms",
+      "pitch",
+      "limitations",
+      "used-by",
+      "contributing"
+    ]
   }
 }
