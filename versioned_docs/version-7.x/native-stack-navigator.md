@@ -428,7 +428,10 @@ Note that if you render a custom element by passing a function, animations for t
 How to align the header title. Possible values:
 
 - `left`
+  <img src="/assets/7.x/native-stack/headerTitleAlign-left.png" width="500" alt="Header title align left"/>
+
 - `center`
+  <img src="/assets/7.x/native-stack/headerTitleAlign-center.png" width="500" alt="Header title align center"/>
 
 Defaults to `left` on platforms other than iOS.
 
@@ -442,6 +445,19 @@ Style object for header title. Supported properties:
 - `fontSize`
 - `fontWeight`
 - `color`
+  
+  <img src="/assets/7.x/native-stack/headerTitleStyle.png" width="500" alt="Header title style"/>
+
+Example:
+
+```js
+    headerTitleStyle: {
+      color: 'blue',
+      fontSize: 22,
+      fontFamily: 'Georgia',
+      fontWeight: 300,
+    },
+```
 
 #### `headerSearchBarOptions`
 
