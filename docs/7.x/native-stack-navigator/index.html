@@ -14,7 +14,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="React Navigation" href="/opensearch.xml">
 
 <script src="/js/snack-helpers.js"></script><link rel="stylesheet" href="/assets/css/styles.b4c56cd5.css">
-<script src="/assets/js/runtime~main.a4ffb13a.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.b496e0e0.js" defer="defer"></script>
 <script src="/assets/js/main.3035de39.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -41,12 +41,14 @@
 <p>Boolean indicating whether to show the menu on longPress of iOS &gt;= 14 back button. Defaults to <code>true</code>.</p>
 <p>Requires <code>react-native-screens</code> version &gt;=3.3.0.</p>
 <p>Only supported on iOS.</p>
+<img src="/assets/7.x/native-stack/headerBackButtonMenuEnabled.png" width="500" alt="Header back button menu enabled">
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="headerbackvisible"><code>headerBackVisible</code><a href="#headerbackvisible" class="hash-link" aria-label="Direct link to headerbackvisible" title="Direct link to headerbackvisible">​</a></h4>
 <p>Whether the back button is visible in the header. You can use it to show a back button alongside <code>headerLeft</code> if you have specified it.</p>
 <p>This will have no effect on the first screen in the stack.</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="headerbacktitle"><code>headerBackTitle</code><a href="#headerbacktitle" class="hash-link" aria-label="Direct link to headerbacktitle" title="Direct link to headerbacktitle">​</a></h4>
 <p>Title string used by the back button on iOS. Defaults to the previous scene&#x27;s title, or &quot;Back&quot; if there&#x27;s not enough space. Use <code>headerBackTitleVisible: false</code> to hide it.</p>
 <p>Only supported on iOS.</p>
+<img src="/assets/7.x/native-stack/headerBackTitle.jpeg" width="500" alt="Header back title">
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="headerbacktitlevisible"><code>headerBackTitleVisible</code><a href="#headerbacktitlevisible" class="hash-link" aria-label="Direct link to headerbacktitlevisible" title="Direct link to headerbacktitlevisible">​</a></h4>
 <p>Whether the back button title should be visible or not.</p>
 <p>Only supported on iOS.</p>
@@ -57,6 +59,9 @@
 <li><code>fontSize</code></li>
 </ul>
 <p>Only supported on iOS.</p>
+<img src="/assets/7.x/native-stack/headerBackTitleStyle.png" width="500" alt="Header back title style">
+<p>Example:</p>
+<div class="language-js codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-js codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token literal-property property" style="color:#36acaa">headerBackTitleStyle</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token literal-property property" style="color:#36acaa">fontSize</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">14</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token literal-property property" style="color:#36acaa">fontFamily</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&#x27;Georgia&#x27;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="headerbackimagesource"><code>headerBackImageSource</code><a href="#headerbackimagesource" class="hash-link" aria-label="Direct link to headerbackimagesource" title="Direct link to headerbackimagesource">​</a></h4>
 <p>Image to display in the header as the icon in the back button. Defaults to back icon image for the platform</p>
 <ul>
@@ -385,7 +390,7 @@ Possible values:</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="navigationbarhidden"><code>navigationBarHidden</code><a href="#navigationbarhidden" class="hash-link" aria-label="Direct link to navigationbarhidden" title="Direct link to navigationbarhidden">​</a></h4>
 <p>Boolean indicating whether the navigation bar should be hidden. Defaults to <code>false</code>.</p>
 <p>Only supported on Android.</p>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="freezeonblur"><code>freezeOnBlur</code><a href="#freezeonblur" class="hash-link" aria-label="Direct link to freezeonblur" title="Direct link to freezeonblur"> ​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="freezeonblur"><code>freezeOnBlur</code><a href="#freezeonblur" class="hash-link" aria-label="Direct link to freezeonblur" title="Direct link to freezeonblur">​</a></h4>
 <p>Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to <code>false</code>.
 Defaults to <code>true</code> when <code>enableFreeze()</code> from <code>react-native-screens</code> package is run at the top of the application.</p>
 <p>Requires <code>react-native-screens</code> version &gt;=3.16.0.</p>
