@@ -166,6 +166,8 @@ Requires `react-native-screens` version >=3.3.0.
 
 Only supported on iOS.
 
+<img src="/assets/7.x/native-stack/headerBackButtonMenuEnabled.png" width="500" alt="Header back button menu enabled" />
+
 #### `headerBackVisible`
 
 Whether the back button is visible in the header. You can use it to show a back button alongside `headerLeft` if you have specified it.
@@ -177,6 +179,8 @@ This will have no effect on the first screen in the stack.
 Title string used by the back button on iOS. Defaults to the previous scene's title, or "Back" if there's not enough space. Use `headerBackTitleVisible: false` to hide it.
 
 Only supported on iOS.
+
+<img src="/assets/7.x/native-stack/headerBackTitle.jpeg" width="500" alt="Header back title" />
 
 #### `headerBackTitleVisible`
 
@@ -192,6 +196,17 @@ Style object for header back title. Supported properties:
 - `fontSize`
 
 Only supported on iOS.
+
+<img src="/assets/7.x/native-stack/headerBackTitleStyle.png" width="500" alt="Header back title style" />
+
+Example:
+
+```js
+  headerBackTitleStyle: {
+      fontSize: 14,
+      fontFamily: 'Georgia',
+  },
+```
 
 #### `headerBackImageSource`
 
