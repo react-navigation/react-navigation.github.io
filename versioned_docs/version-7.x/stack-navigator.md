@@ -435,15 +435,23 @@ Function which returns a React Element to display custom image in header's back 
 
 #### `headerBackTitle`
 
-Title string used by the back button on iOS. Defaults to the previous scene's `headerTitle`.
-
-#### `headerBackTitleVisible`
-
-A reasonable default is supplied for whether the back button title should be visible or not, but if you want to override that you can use `true` or `false` in this option.
+Title string used by the back button on iOS. Defaults to the previous scene's title. Use `headerBackButtonDisplayMode` to customize the behavior.
 
 #### `headerTruncatedBackTitle`
 
 Title string used by the back button when `headerBackTitle` doesn't fit on the screen. `"Back"` by default.
+
+#### `headerBackButtonDisplayMode`
+
+How the back button displays icon and title.
+
+Supported values:
+
+- `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
+- `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon).
+- `minimal`: Always displays only the icon without a title.
+
+Defaults to `default` on iOS, and `minimal` on Android.
 
 #### `headerBackTitleStyle`
 
