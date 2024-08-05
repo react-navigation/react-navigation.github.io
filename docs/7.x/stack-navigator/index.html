@@ -14,7 +14,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="React Navigation" href="/opensearch.xml">
 
 <script src="/js/snack-helpers.js"></script><link rel="stylesheet" href="/assets/css/styles.b4c56cd5.css">
-<script src="/assets/js/runtime~main.b496e0e0.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.e33b5326.js" defer="defer"></script>
 <script src="/assets/js/main.3035de39.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -187,11 +187,18 @@ Defaults to <code>true</code> when <code>enableFreeze()</code> from <code>react-
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="headerbackimage"><code>headerBackImage</code><a href="#headerbackimage" class="hash-link" aria-label="Direct link to headerbackimage" title="Direct link to headerbackimage">​</a></h4>
 <p>Function which returns a React Element to display custom image in header&#x27;s back button. When a function is used, it receives the <code>tintColor</code> in it&#x27;s argument object. Defaults to Image component with back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="headerbacktitle"><code>headerBackTitle</code><a href="#headerbacktitle" class="hash-link" aria-label="Direct link to headerbacktitle" title="Direct link to headerbacktitle">​</a></h4>
-<p>Title string used by the back button on iOS. Defaults to the previous scene&#x27;s <code>headerTitle</code>.</p>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="headerbacktitlevisible"><code>headerBackTitleVisible</code><a href="#headerbacktitlevisible" class="hash-link" aria-label="Direct link to headerbacktitlevisible" title="Direct link to headerbacktitlevisible">​</a></h4>
-<p>A reasonable default is supplied for whether the back button title should be visible or not, but if you want to override that you can use <code>true</code> or <code>false</code> in this option.</p>
+<p>Title string used by the back button on iOS. Defaults to the previous scene&#x27;s title. Use <code>headerBackButtonDisplayMode</code> to customize the behavior.</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="headertruncatedbacktitle"><code>headerTruncatedBackTitle</code><a href="#headertruncatedbacktitle" class="hash-link" aria-label="Direct link to headertruncatedbacktitle" title="Direct link to headertruncatedbacktitle">​</a></h4>
 <p>Title string used by the back button when <code>headerBackTitle</code> doesn&#x27;t fit on the screen. <code>&quot;Back&quot;</code> by default.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="headerbackbuttondisplaymode"><code>headerBackButtonDisplayMode</code><a href="#headerbackbuttondisplaymode" class="hash-link" aria-label="Direct link to headerbackbuttondisplaymode" title="Direct link to headerbackbuttondisplaymode">​</a></h4>
+<p>How the back button displays icon and title.</p>
+<p>Supported values:</p>
+<ul>
+<li><code>default</code>: Displays one of the following depending on the available space: previous screen&#x27;s title, generic title (e.g. &#x27;Back&#x27;) or no title (only icon).</li>
+<li><code>generic</code>: Displays one of the following depending on the available space: generic title (e.g. &#x27;Back&#x27;) or no title (only icon).</li>
+<li><code>minimal</code>: Always displays only the icon without a title.</li>
+</ul>
+<p>Defaults to <code>default</code> on iOS, and <code>minimal</code> on Android.</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="headerbacktitlestyle"><code>headerBackTitleStyle</code><a href="#headerbacktitlestyle" class="hash-link" aria-label="Direct link to headerbacktitlestyle" title="Direct link to headerbacktitlestyle">​</a></h4>
 <p>Style object for the back title.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="events">Events<a href="#events" class="hash-link" aria-label="Direct link to Events" title="Direct link to Events">​</a></h3>
