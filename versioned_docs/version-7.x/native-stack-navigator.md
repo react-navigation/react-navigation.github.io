@@ -443,7 +443,7 @@ Style object for header title. Supported properties:
 - `fontSize`
 - `fontWeight`
 - `color`
-  
+
   <img src="/assets/7.x/native-stack/headerTitleStyle.png" width="500" alt="Header title style"/>
 
 Example:
