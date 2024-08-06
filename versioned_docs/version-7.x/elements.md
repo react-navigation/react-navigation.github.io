@@ -25,7 +25,7 @@ A component that can be used as a header. This is used by all the navigators by 
 
 Usage:
 
-```js name="React Navigation Elements Header" snack version=7
+```js name="React Navigation Elements Header" snack
 import * as React from 'react';
 import { SafeAreaProviderCompat } from '@react-navigation/elements';
 import { NavigationContainer } from '@react-navigation/native';
@@ -53,7 +53,7 @@ To use the header in a navigator, you can use the `header` option in the screen 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Header with Native Stack" snack version=7
+```js name="Header with Native Stack" snack
 import * as React from 'react';
 import { Text, View, Button } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -93,7 +93,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Header with Native Stack" snack version=7
+```js name="Header with Native Stack" snack
 import * as React from 'react';
 import { Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -399,7 +399,7 @@ For example, you can use this with `headerTransparent` to render a blur view to 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Header blur" snack version=7 dependencies=expo-blur
+```js name="Header blur" snack dependencies=expo-blur
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
@@ -466,7 +466,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Header blur" snack version=7 dependencies=expo-blur
+```js name="Header blur" snack dependencies=expo-blur
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';

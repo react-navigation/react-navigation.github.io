@@ -16,7 +16,7 @@ Each screen has `options` which is either an object or a function that returns a
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Setting header title" snack version=7
+```js name="Setting header title" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -55,7 +55,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Setting header title" snack version=7
+```js name="Setting header title" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -110,7 +110,7 @@ In order to use params in the title, we need to make `options` for the screen a 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Using params in the title" snack version=7
+```js name="Using params in the title" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -177,7 +177,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Using params in the title" snack version=7
+```js name="Using params in the title" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -258,7 +258,7 @@ We only needed the `route` object in the above example but you may in some cases
 
 It's often necessary to update the `options` configuration for the active screen from the mounted screen component itself. We can do this using `navigation.setOptions`
 
-```js name="Updating options" snack version=7
+```js name="Updating options" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -317,7 +317,7 @@ There are three key properties to use when customizing the style of your header:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Header styles" snack version=7
+```js name="Header styles" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -363,7 +363,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Header styles" snack version=7
+```js name="Header styles" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -430,7 +430,7 @@ It is common to want to configure the header in a similar way across many screen
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common screen options" snack version=7
+```js name="Common screen options" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -495,7 +495,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Common screen options" snack version=7
+```js name="Common screen options" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -573,7 +573,7 @@ Sometimes you need more control than just changing the text and styles of your t
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Custom title" snack version=7
+```js name="Custom title" snack
 import * as React from 'react';
 import { Text, View, Image } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -620,7 +620,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Custom title" snack version=7
+```js name="Custom title" snack
 import * as React from 'react';
 import { Text, View, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';

@@ -14,7 +14,7 @@ A group contains several [screens](screen.md) inside a navigator for organizatio
 
 Groups can be defined using the `groups` property in the navigator configuration:
 
-```js name="Stack groups" snack version=7
+```js name="Stack groups" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -82,7 +82,7 @@ The keys of the `groups` object (e.g. `Guest`, `User`) are used as the [`navigat
 
 A `Group` component is returned from a `createXNavigator` function. After creating the navigator, it can be used as children of the `Navigator` component:
 
-```js name="Stack groups" snack version=7
+```js name="Stack groups" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';

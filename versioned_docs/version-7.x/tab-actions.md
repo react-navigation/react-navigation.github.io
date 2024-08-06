@@ -21,7 +21,7 @@ The `jumpTo` action can be used to jump to an existing route in the tab navigato
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Tab Actions - jumpTo" snack version=7
+```js name="Tab Actions - jumpTo" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -80,7 +80,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Tab Actions - jumpTo" snack version=7
+```js name="Tab Actions - jumpTo" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';

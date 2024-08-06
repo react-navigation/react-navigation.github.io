@@ -40,7 +40,7 @@ We're done! Now you can build and run the app on your device/simulator.
 
 ## Quick start
 
-```js name="React Native Tab View" snack version=7
+```js name="React Native Tab View" snack
 // codeblock-focus-start
 import * as React from 'react';
 import { View, useWindowDimensions } from 'react-native';

@@ -14,7 +14,7 @@ To make this easier, the library exports a `useFocusEffect` hook:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="useFocusEffect hook" snack version=7
+```js name="useFocusEffect hook" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -58,7 +58,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="useFocusEffect hook" snack version=7
+```js name="useFocusEffect hook" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';

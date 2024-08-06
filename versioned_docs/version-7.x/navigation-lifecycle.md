@@ -24,7 +24,7 @@ Similar results can be observed (in combination) with other navigators as well. 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigation lifecycle" snack version=7
+```js name="Navigation lifecycle" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -147,7 +147,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigation lifecycle" snack version=7
+```js name="Navigation lifecycle" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -293,7 +293,7 @@ Example:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Focus and blur" snack version=7
+```js name="Focus and blur" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -381,7 +381,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Focus and blur" snack version=7
+```js name="Focus and blur" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -481,7 +481,7 @@ Example:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Focus effect" snack version=7
+```js name="Focus effect" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -547,7 +547,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Focus effect" snack version=7
+```js name="Focus effect" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';

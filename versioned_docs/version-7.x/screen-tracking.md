@@ -21,7 +21,7 @@ This example shows how the approach can be adapted to any mobile analytics SDK.
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Screen tracking for analytics" snack version=7
+```js name="Screen tracking for analytics" snack
 import * as React from 'react';
 import { View } from 'react-native';
 // codeblock-focus-start
@@ -101,7 +101,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Screen tracking for anylytics" snack version=7
+```js name="Screen tracking for anylytics" snack
 import * as React from 'react';
 import { View } from 'react-native';
 // codeblock-focus-start

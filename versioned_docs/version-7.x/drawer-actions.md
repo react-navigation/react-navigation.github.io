@@ -18,7 +18,7 @@ The `openDrawer` action can be used to open the drawer pane.
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Drawer Actions - openDrawer" snack version=7
+```js name="Drawer Actions - openDrawer" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -103,7 +103,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Drawer Actions - openDrawer" snack version=7
+```js name="Drawer Actions - openDrawer" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -196,7 +196,7 @@ The `closeDrawer` action can be used to close the drawer pane.
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Drawer Actions - closeDrawer" snack version=7
+```js name="Drawer Actions - closeDrawer" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -279,7 +279,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic" >
 
-```js name="Drawer Actions - closeDrawer" snack version=7
+```js name="Drawer Actions - closeDrawer" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -370,7 +370,7 @@ The `toggleDrawer` action can be used to open the drawer pane if closed, or clos
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Drawer Actions - toggleDrawer" snack version=7
+```js name="Drawer Actions - toggleDrawer" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -455,7 +455,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Drawer Actions - toggleDrawer" snack version=7
+```js name="Drawer Actions - toggleDrawer" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -550,7 +550,7 @@ The `jumpTo` action can be used to jump to an existing route in the drawer navig
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Drawer Actions - jumpTo" snack version=7
+```js name="Drawer Actions - jumpTo" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -635,7 +635,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Drawer Actions - jumpTo" snack version=7
+```js name="Drawer Actions - jumpTo" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';

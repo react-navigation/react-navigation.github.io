@@ -73,7 +73,7 @@ But if we want to show the tab bar only on the `Home`, `Feed` and `Notifications
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Hiding tabbar" snack version=7
+```js name="Hiding tabbar" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -133,7 +133,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Hiding tabbar" snack version=7
+```js name="Hiding tabbar" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';

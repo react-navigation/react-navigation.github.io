@@ -21,7 +21,7 @@ Example:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="usePreventRemove hook" snack version=7
+```js name="usePreventRemove hook" snack
 import * as React from 'react';
 import { Alert, View, TextInput, Platform, StyleSheet } from 'react-native';
 import {
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="usePreventRemove hook" snack version=7
+```js name="usePreventRemove hook" snack
 import * as React from 'react';
 import { Alert, View, TextInput, Platform, StyleSheet } from 'react-native';
 import {

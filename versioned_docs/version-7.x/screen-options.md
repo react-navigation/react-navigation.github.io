@@ -20,7 +20,7 @@ You can pass a prop named `options` to the `Screen` component to configure a scr
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Screen title option" snack version=7
+```js name="Screen title option" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import Button from '@react-navigation/elements';
@@ -83,7 +83,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Screen title option" snack version=7
+```js name="Screen title option" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import Button from '@react-navigation/elements';
@@ -190,7 +190,7 @@ Example:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Screen options for group" snack version=7
+```js name="Screen options for group" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -251,7 +251,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Screen options for group" snack version=7
+```js name="Screen options for group" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -398,7 +398,7 @@ Similar to `options`, you can also pass a function to `screenOptions`. The funct
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Screen options for tab navigator" snack version=7 dependencies=@expo/vector-icons
+```js name="Screen options for tab navigator" snack dependencies=@expo/vector-icons
 import * as React from 'react';
 import { View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -444,7 +444,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Screen options for tab navigator" snack version=7 dependencies=@expo/vector-icons
+```js name="Screen options for tab navigator" snack dependencies=@expo/vector-icons
 import * as React from 'react';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';

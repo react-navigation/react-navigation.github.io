@@ -33,7 +33,7 @@ To use this navigator, import it from `@react-navigation/native-stack`:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Native Stack Navigator" snack version=7
+```js name="Native Stack Navigator" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -85,7 +85,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Native Stack Navigator" snack version=7
+```js name="Native Stack Navigator" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';

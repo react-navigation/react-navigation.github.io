@@ -19,7 +19,7 @@ To pass a custom theme, you can pass the `theme` prop to the navigation containe
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Simple theme" snack version=7
+```js name="Simple theme" snack
 // codeblock-focus-start
 import * as React from 'react';
 import {
@@ -116,7 +116,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Simple theme" snack version=7
+```js name="Simple theme" snack
 // codeblock-focus-start
 import * as React from 'react';
 import {
@@ -361,7 +361,7 @@ On iOS 13+ and Android 10+, you can get user's preferred color scheme (`'dark'` 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Operating system color theme" snack version=7
+```js name="Operating system color theme" snack
 import * as React from 'react';
 // codeblock-focus-start
 import {
@@ -470,7 +470,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Operating system color theme" snack version=7
+```js name="Operating system color theme" snack
 import * as React from 'react';
 // codeblock-focus-start
 import { View, Text, TouchableOpacity, useColorScheme } from 'react-native';
@@ -589,7 +589,7 @@ To gain access to the theme in any component that is rendered inside the navigat
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="System themes" snack version=7
+```js name="System themes" snack
 import * as React from 'react';
 // codeblock-focus-start
 import {
@@ -696,7 +696,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="System themes" snack version=7
+```js name="System themes" snack
 import * as React from 'react';
 // codeblock-focus-start
 import { View, Text, TouchableOpacity, useColorScheme } from 'react-native';

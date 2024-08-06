@@ -25,7 +25,7 @@ To use this navigator, import it from `@react-navigation/bottom-tabs`:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Bottom Tab Navigator" snack version=7
+```js name="Bottom Tab Navigator" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -80,7 +80,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Bottom Tab Navigator" snack version=7
+```js name="Bottom Tab Navigator" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -669,7 +669,7 @@ Supported values for `animation` are:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Bottom Tabs animation" snack version=7
+```js name="Bottom Tabs animation" snack
 import * as React from 'react';
 import { View, Text, Easing } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -715,7 +715,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Bottom Tabs animation" snack version=7
+```js name="Bottom Tabs animation" snack
 import * as React from 'react';
 import { Text, View, Easing } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -922,7 +922,7 @@ Putting these together, you can customize the transition animation for a screen:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Bottom Tabs custom animation" snack version=7
+```js name="Bottom Tabs custom animation" snack
 import * as React from 'react';
 import { View, Text, Easing } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -980,7 +980,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Bottom Tabs custom animation" snack version=7
+```js name="Bottom Tabs custom animation" snack
 import * as React from 'react';
 import { Text, View, Easing } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';

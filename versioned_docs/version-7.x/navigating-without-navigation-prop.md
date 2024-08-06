@@ -81,7 +81,7 @@ Then, in any of your javascript modules, import the `RootNavigation` and call fu
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Using navigate in any js module" snack version=7
+```js name="Using navigate in any js module" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -144,7 +144,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Using navigate in any js module" snack version=7
+```js name="Using navigate in any js module" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -241,7 +241,7 @@ To avoid this, you can use the `isReady()` method available on the ref as shown 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Handling navigation init" snack version=7
+```js name="Handling navigation init" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -299,7 +299,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Handling navigation init" snack version=7
+```js name="Handling navigation init" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {

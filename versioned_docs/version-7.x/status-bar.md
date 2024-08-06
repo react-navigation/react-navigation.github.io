@@ -16,7 +16,7 @@ This is a simple task when using a stack. You can render the `StatusBar` compone
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Different status bar" snack version=7
+```js name="Different status bar" snack
 import * as React from 'react';
 import { View, Text, StatusBar, StyleSheet } from 'react-native';
 import {
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
 
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Different status bar" snack version=7
+```js name="Different status bar" snack
 import * as React from 'react';
 import { View, Text, StatusBar, StyleSheet } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -235,7 +235,7 @@ Now, our screens (both `Screen1.js` and `Screen2.js`) will use the `FocusAwareSt
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Different status bar based on tabs" snack version=7
+```js name="Different status bar based on tabs" snack
 import * as React from 'react';
 import { View, Text, StatusBar, StyleSheet } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Different status bar based on tabs" snack version=7
+```js name="Different status bar based on tabs" snack
 import * as React from 'react';
 import { View, Text, StatusBar, StyleSheet } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';

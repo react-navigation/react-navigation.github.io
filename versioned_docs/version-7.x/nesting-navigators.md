@@ -12,7 +12,7 @@ Nesting navigators means rendering a navigator inside a screen of another naviga
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Nested navigators" snack version=7
+```js name="Nested navigators" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -84,7 +84,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Nested navigators" snack version=7
+```js name="Nested navigators" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -216,7 +216,7 @@ To receive events from the parent navigator, you can explicitly listen to parent
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Events from parent" snack version=7
+```js name="Events from parent" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -301,7 +301,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Events from parent" snack version=7
+```js name="Events from parent" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -410,7 +410,7 @@ Consider the following example:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigating to nested screen" snack version=7
+```js name="Navigating to nested screen" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -490,7 +490,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigating to nested screen" snack version=7
+```js name="Navigating to nested screen" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -596,7 +596,7 @@ You can also pass params by specifying a `params` key:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigating to nested screen" snack version=7
+```js name="Navigating to nested screen" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -682,7 +682,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigating to nested screen" snack version=7
+```js name="Navigating to nested screen" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -817,7 +817,7 @@ For example:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Nested navigators" snack version=7
+```js name="Nested navigators" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -889,7 +889,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Nested navigators" snack version=7
+```js name="Nested navigators" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';

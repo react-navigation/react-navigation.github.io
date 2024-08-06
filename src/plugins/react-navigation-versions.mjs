@@ -3,7 +3,7 @@ export default function friendsPlugin(context, options) {
     name: 'react-navigation-versions',
     async contentLoaded({ content, actions }) {
       const queries = {
-        7: {
+        '7.x': {
           tag: 'next',
           packages: [
             '@react-navigation/bottom-tabs',

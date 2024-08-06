@@ -16,7 +16,7 @@ The most common way to interact with a header is by tapping on a button either t
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Header button" snack version=7
+```js name="Header button" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -58,7 +58,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Header button" snack version=7
+```js name="Header button" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -124,7 +124,7 @@ In some cases, components in the header need to interact with the screen compone
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Header button" snack version=7
+```js name="Header button" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -178,7 +178,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Header button" snack version=7
+```js name="Header button" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';

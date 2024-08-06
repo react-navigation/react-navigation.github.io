@@ -16,7 +16,7 @@ import TabItem from '@theme/TabItem';
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="useRoute hook" snack version=7
+```js name="useRoute hook" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -82,7 +82,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="useRoute hook" snack version=7
+```js name="useRoute hook" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';

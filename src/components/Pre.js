@@ -1,3 +1,4 @@
+import { useActiveVersion } from '@docusaurus/plugin-content-docs/client';
 import { useColorMode } from '@docusaurus/theme-common';
 import { usePluginData } from '@docusaurus/useGlobalData';
 import MDXPre from '@theme-original/MDXComponents/Pre';
@@ -7,12 +8,12 @@ export default function Pre({
   children,
   'data-name': name,
   'data-snack': snack,
-  'data-version': version,
   'data-dependencies': deps,
   'data-lang': lang,
   ...rest
 }) {
   const { colorMode } = useColorMode();
+  const activeVersion = useActiveVersion();
   const { versions } = usePluginData('react-navigation-versions');
 
   const child = React.Children.only(children);
@@ -81,6 +82,12 @@ export default function Pre({
           })
         )
       : {};
+
+    const version = activeVersion?.name;
+
+    if (version == null || versions[version] == null) {
+      throw new Error(`Invalid version: ${version}`);
+    }
 
     Object.assign(
       dependencies,
