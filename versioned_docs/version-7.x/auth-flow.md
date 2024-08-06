@@ -68,7 +68,7 @@ function useIsSignedOut() {
 
 We'll discuss how to expose the context value later.
 
-```js name="Customizing tabs appearance" snack version=7
+```js name="Customizing tabs appearance" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -150,7 +150,7 @@ function SignUpScreen() {
 
 For example:
 
-```js name="Customizing tabs appearance" snack version=7
+```js name="Customizing tabs appearance" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -451,7 +451,7 @@ So our component will look like this:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Signing in and signing out with AuthContext" snack version=7 dependencies=expo-secure-store
+```js name="Signing in and signing out with AuthContext" snack dependencies=expo-secure-store
 // codeblock-focus-start
 import * as React from 'react';
 import * as SecureStore from 'expo-secure-store';
@@ -639,7 +639,7 @@ const Navigation = createStaticNavigation(RootStack);
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Signing in and signing out with AuthContext" snack version=7 dependencies=expo-secure-store
+```js name="Signing in and signing out with AuthContext" snack dependencies=expo-secure-store
 // codeblock-focus-start
 import * as React from 'react';
 import * as SecureStore from 'expo-secure-store';

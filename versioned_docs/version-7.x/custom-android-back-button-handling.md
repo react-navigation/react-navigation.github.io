@@ -18,7 +18,7 @@ Returning `true` from `onBackPress` denotes that we have handled the event, and 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Custom android back button" snack version=7
+```js name="Custom android back button" snack
 import * as React from 'react';
 import { Text, View, BackHandler, StyleSheet } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Custom android back button" snack version=7
+```js name="Custom android back button" snack
 import * as React from 'react';
 import { Text, View, BackHandler, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';

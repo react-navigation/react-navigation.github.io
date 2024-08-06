@@ -44,7 +44,7 @@ npm install @react-navigation/elements@next
 
 `createStaticNavigation` is a function that takes the navigator defined earlier and returns a component that can be rendered in the app. It's only called once in the app.
 
-```js name="Native Stack Example" snack version=7
+```js name="Native Stack Example" snack
 // In App.js in a new project
 
 import * as React from 'react';
@@ -80,7 +80,7 @@ export default function App() {
 
 `NavigationContainer` is a component that manages our navigation tree and contains the [navigation state](navigation-state.md). This component must wrap all the navigators in the app. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
 
-```js name="Native Stack Example" snack version=7
+```js name="Native Stack Example" snack
 // In App.js in a new project
 
 import * as React from 'react';
@@ -137,7 +137,7 @@ Let's add a second screen to our native stack navigator and configure the `Home`
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Native Stack Example" snack version=7
+```js name="Native Stack Example" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -182,7 +182,7 @@ Now our stack has two _routes_, a `Home` route and a `Details` route. A route ca
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Native Stack Example" snack version=7
+```js name="Native Stack Example" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -266,7 +266,7 @@ This will let us specify additional options for the screen.
 
 Now, we can add an `options` property:
 
-```js name="Options for Screen" snack version=7
+```js name="Options for Screen" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -314,7 +314,7 @@ export default function App() {
 
 Sometimes we will want to specify the same options for all of the screens in the navigator. For that, we can add a `screenOptions` property to the configuration:
 
-```js name="Common options for Screens" snack version=7
+```js name="Common options for Screens" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -368,7 +368,7 @@ export default function App() {
 
 Any customization options can be passed in the `options` prop for each screen component:
 
-```js name="Options for Screen" snack version=7
+```js name="Options for Screen" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -419,7 +419,7 @@ export default function App() {
 
 Sometimes we will want to specify the same options for all of the screens in the navigator. For that, we can pass a `screenOptions` prop to the navigator:
 
-```js name="Common options for Screens" snack version=7
+```js name="Common options for Screens" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';

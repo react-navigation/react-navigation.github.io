@@ -12,7 +12,7 @@ We might want to render different content based on the current focus state of th
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="useIsFocused hook" snack version=7
+```js name="useIsFocused hook" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -54,7 +54,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="useIsFocused hook" snack version=7
+```js name="useIsFocused hook" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';

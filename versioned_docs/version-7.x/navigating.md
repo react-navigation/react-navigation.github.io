@@ -28,7 +28,7 @@ We'll do something similar to the latter, but rather than using a `window.locati
 
 ## Navigating to a new screen
 
-```js name="Navigating to a new screen" snack version=7
+```js name="Navigating to a new screen" snack
 // codeblock-focus-start
 import * as React from 'react';
 import { View, Text } from 'react-native';
@@ -100,7 +100,7 @@ So we now have a stack with two routes: 1) the `Home` route 2) the `Details` rou
 
 ## Navigate to a screen multiple times
 
-```js name="Navigate to a screen multiple times" snack version=7
+```js name="Navigate to a screen multiple times" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -159,7 +159,7 @@ If you run this code, you'll notice that when you tap "Go to Details... again", 
 
 Let's suppose that we actually _want_ to add another details screen. This is pretty common in cases where you pass in some unique data to each route (more on that later when we talk about `params`!). To do this, we can change `navigate` to `push`. This allows us to express the intent to add another route regardless of the existing navigation history.
 
-```js name="Navigate to a screen multiple times" snack version=7
+```js name="Navigate to a screen multiple times" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -224,7 +224,7 @@ The header provided by the native stack navigator will automatically include a b
 
 Sometimes you'll want to be able to programmatically trigger this behavior, and for that, you can use `navigation.goBack()`.
 
-```js name="Going back" snack version=7
+```js name="Going back" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -292,7 +292,7 @@ On Android, React Navigation hooks in to the hardware back button and fires the 
 
 Another common requirement is to be able to go back _multiple_ screens -- for example, if you are several screens deep in a stack and want to dismiss all of them to go back to the first screen. In this case, we know that we want to go back to `Home` so we can use `popTo('Home')`. Another alternative would be `navigation.popToTop()`, which goes back to the first screen in the stack.
 
-```js name="Going back to specific screen" snack version=7
+```js name="Going back to specific screen" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {

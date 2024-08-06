@@ -104,7 +104,7 @@ Normally, you'd add an event listener in `React.useEffect` for function componen
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="navigation.addListener with focus" snack version=7
+```js name="navigation.addListener with focus" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -176,7 +176,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="navigation.addListener with focus" snack version=7
+```js name="navigation.addListener with focus" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';

@@ -21,7 +21,7 @@ To be able to persist the [navigation state](navigation-state.md), we can use th
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Persisting the navigation state" snack version=7 dependencies=@react-native-async-storage/async-storage
+```js name="Persisting the navigation state" snack dependencies=@react-native-async-storage/async-storage
 import * as React from 'react';
 // codeblock-focus-start
 import { Platform, View, Linking } from 'react-native';
@@ -146,7 +146,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Persisting the navigation state" snack version=7 dependencies=@react-native-async-storage/async-storage
+```js name="Persisting the navigation state" snack dependencies=@react-native-async-storage/async-storage
 import * as React from 'react';
 // codeblock-focus-start
 import { Platform, View, Linking } from 'react-native';

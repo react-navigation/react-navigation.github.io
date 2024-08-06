@@ -26,7 +26,7 @@ Example:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Focus event listener" snack version=7
+```js name="Focus event listener" snack
 // codeblock-focus-start
 import * as React from 'react';
 import { View } from 'react-native';
@@ -78,7 +78,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Focus event listener" snack version=7
+```js name="Focus event listener" snack
 // codeblock-focus-start
 import * as React from 'react';
 import { View } from 'react-native';
@@ -140,7 +140,7 @@ This is particularly handy when we are trying to stop something when the page is
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="useFocusEffect hook" snack version=7
+```js name="useFocusEffect hook" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import {
@@ -187,7 +187,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="useFocusEffect hook" snack version=7
+```js name="useFocusEffect hook" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
@@ -245,7 +245,7 @@ The `useIsFocused` hook will cause our component to re-render when we focus and 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="useIsFocused hook" snack version=7
+```js name="useIsFocused hook" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { useIsFocused, createStaticNavigation } from '@react-navigation/native';
@@ -287,7 +287,7 @@ export default function App() {
 </TabItem>
 <TabItem value='dynamic' label='Dynamic' default>
 
-```js name="useIsFocused hook" snack version=7
+```js name="useIsFocused hook" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer, useIsFocused } from '@react-navigation/native';

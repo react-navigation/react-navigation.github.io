@@ -76,7 +76,7 @@ To use this navigator, import it from `@react-navigation/drawer`:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Drawer Navigator" snack version=7
+```js name="Drawer Navigator" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -131,7 +131,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Drawer Navigator" snack version=7
+```js name="Drawer Navigator" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -721,7 +721,7 @@ The `progress` object is a `SharedValue` that represents the animated position o
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Drawer animation progress" snack version=7
+```js name="Drawer animation progress" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -774,7 +774,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Drawer animation progress" snack version=7
+```js name="Drawer animation progress" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';

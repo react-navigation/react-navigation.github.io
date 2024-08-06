@@ -17,7 +17,7 @@ npm install @react-navigation/bottom-tabs@next
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Tab based navigation" snack version=7
+```js name="Tab based navigation" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -56,7 +56,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Tab based navigation" snack version=7
+```js name="Tab based navigation" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -110,7 +110,7 @@ This is similar to how you would customize a stack navigator &mdash; there are s
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Tab based navigation" snack version=7 dependencies=@expo/vector-icons,@expo/vector-icons/Ionicons
+```js name="Tab based navigation" snack dependencies=@expo/vector-icons,@expo/vector-icons/Ionicons
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -177,7 +177,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Tab based navigation" snack version=7 dependencies=@expo/vector-icons,@expo/vector-icons/Ionicons
+```js name="Tab based navigation" snack dependencies=@expo/vector-icons,@expo/vector-icons/Ionicons
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -264,7 +264,7 @@ Sometimes we want to add badges to some icons. You can use the [`tabBarBadge` op
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Tab based navigation" snack version=7
+```js name="Tab based navigation" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -312,7 +312,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Tab based navigation" snack version=7
+```js name="Tab based navigation" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';

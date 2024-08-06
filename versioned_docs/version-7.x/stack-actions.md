@@ -21,7 +21,7 @@ The `replace` action allows to replace a route in the [navigation state](navigat
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Stack actions replace" snack version=7
+```js name="Stack actions replace" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -99,7 +99,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Stack actions replace" snack version=7
+```js name="Stack actions replace" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -201,7 +201,7 @@ The `push` action adds a route on top of the stack and navigates forward to it. 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Stack actions push" snack version=7
+```js name="Stack actions push" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -279,7 +279,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Stack actions push" snack version=7
+```js name="Stack actions push" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -362,7 +362,7 @@ The `pop` action takes you back to a previous screen in the stack. It takes one 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Stack actions pop" snack version=7
+```js name="Stack actions pop" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -444,7 +444,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Stack actions pop" snack version=7
+```js name="Stack actions pop" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -550,7 +550,7 @@ The `popToTop` action takes you back to the first screen in the stack, dismissin
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Stack actions popToTop" snack version=7
+```js name="Stack actions popToTop" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -632,7 +632,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Stack actions pop" snack version=7
+```js name="Stack actions pop" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';

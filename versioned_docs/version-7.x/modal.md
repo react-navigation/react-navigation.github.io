@@ -18,7 +18,7 @@ A modal is like a popup &mdash; it usually has a different transition animation,
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Modal" snack version=7
+```js name="Modal" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -110,7 +110,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Modal" snack version=7
+```js name="Modal" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';

@@ -16,7 +16,7 @@ Let's take for example a tab navigator that contains a native stack in each tab.
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Tabs with native stack" snack version=7
+```js name="Tabs with native stack" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -72,7 +72,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Tabs with native stack" snack version=7
+```js name="Tabs with native stack" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -136,7 +136,7 @@ As we mentioned earlier, you can only modify navigation options for a navigator 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Tabs with native stack" snack version=7
+```js name="Tabs with native stack" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -192,7 +192,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Tabs with native stack" snack version=7
+```js name="Tabs with native stack" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -261,7 +261,7 @@ Imagine the following configuration:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Parent options from a child" snack version=7
+```js name="Parent options from a child" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import {
@@ -323,7 +323,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Parent options from a child" snack version=7
+```js name="Parent options from a child" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -416,7 +416,7 @@ Then we can use this function with the `options` prop on `Screen`:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Parent options from a child" snack version=7
+```js name="Parent options from a child" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
@@ -503,7 +503,7 @@ export default function App() {
 
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Parent options from a child" snack version=7
+```js name="Parent options from a child" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import {
@@ -607,7 +607,7 @@ For example, for the above use case, instead of adding a tab navigator inside a 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Reorganized navigators" snack version=7
+```js name="Reorganized navigators" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import {
@@ -678,7 +678,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Reorganized navigators" snack version=7
+```js name="Reorganized navigators" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';

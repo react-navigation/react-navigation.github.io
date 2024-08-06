@@ -23,7 +23,7 @@ To use this drawer navigator, import it from `@react-navigation/drawer`:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Drawer navigation" snack version=7
+```js name="Drawer navigation" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -72,7 +72,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Drawer navigation" snack version=7
+```js name="Drawer navigation" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -124,7 +124,7 @@ To open and close drawer, use the following helpers:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Drawer open and close" snack version=7
+```js name="Drawer open and close" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -203,7 +203,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Drawer open and close" snack version=7
+```js name="Drawer open and close" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -292,7 +292,7 @@ If you would like to toggle the drawer you call the following:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Drawer toggle" snack version=7
+```js name="Drawer toggle" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -363,7 +363,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Drawer toggle" snack version=7
+```js name="Drawer toggle" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -444,7 +444,7 @@ Each of these functions, behind the scenes, are simply dispatching actions:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigation dispatcher" snack version=7
+```js name="Navigation dispatcher" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -528,7 +528,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigation dispatcher" snack version=7
+```js name="Navigation dispatcher" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {

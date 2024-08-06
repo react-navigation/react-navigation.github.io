@@ -40,7 +40,7 @@ To reduce the bundle size, you can use [dynamic `import()`](https://developer.mo
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Lazy loading screens" snack version=7
+```js name="Lazy loading screens" snack
 import { Suspense, lazy } from 'react';
 
 const MyStack = createNativeStackNavigator({
@@ -61,7 +61,7 @@ const MyStack = createNativeStackNavigator({
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Lazy loading screens" snack version=7
+```js name="Lazy loading screens" snack
 import { Suspense, lazy } from 'react';
 
 const HomeScreen = lazy(() => import('./HomeScreen'));

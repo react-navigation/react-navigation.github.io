@@ -16,7 +16,7 @@ Example:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="useScrollToTop hook" snack version=7
+```js name="useScrollToTop hook" snack
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -80,7 +80,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="useScrollToTop hook" snack version=7
+```js name="useScrollToTop hook" snack
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Image } from 'react-native';
@@ -174,7 +174,7 @@ If you require offset to scroll position you can wrap and decorate passed refere
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="useScrollToTop hook - providing scroll offset" snack version=7
+```js name="useScrollToTop hook - providing scroll offset" snack
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Image } from 'react-native';
@@ -244,7 +244,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="useScrollToTop hook - providing scroll offset" snack version=7
+```js name="useScrollToTop hook - providing scroll offset" snack
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Image } from 'react-native';

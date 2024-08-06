@@ -50,7 +50,7 @@ In this example, even if you push a new screen, this text won't update. If you u
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="useNavigation hook" snack version=7
+```js name="useNavigation hook" snack
 import * as React from 'react';
 import Button from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -144,7 +144,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="useNavigationState hook" snack version=7
+```js name="useNavigationState hook" snack
 import * as React from 'react';
 import Button from '@react-navigation/elements';
 import { View, Text } from 'react-native';

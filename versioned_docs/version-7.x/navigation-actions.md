@@ -32,7 +32,7 @@ The `navigate` action allows to navigate to a specific route. It takes the follo
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common actions navigate" snack version=7
+```js name="Common actions navigate" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -154,7 +154,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Common actions navigate" snack version=7
+```js name="Common actions navigate" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -299,7 +299,7 @@ The `reset` action allows to reset the [navigation state](navigation-state.md) t
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common actions reset" snack version=7
+```js name="Common actions reset" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -421,7 +421,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Common actions reset" snack version=7
+```js name="Common actions reset" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -590,7 +590,7 @@ The `goBack` action creator allows to go back to the previous route in history. 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common actions goBack" snack version=7
+```js name="Common actions goBack" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -716,7 +716,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Common actions goBack" snack version=7
+```js name="Common actions goBack" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -852,7 +852,7 @@ If you want to go back from a particular route, you can add a `source` property 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common actions goBack" snack version=7
+```js name="Common actions goBack" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -974,7 +974,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic" default>
 
-```js name="Common actions goBack" snack version=7
+```js name="Common actions goBack" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -1109,7 +1109,7 @@ The `preload` action allows preloading a screen in the background before navigat
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common actions preload" snack version=7
+```js name="Common actions preload" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -1205,7 +1205,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Common actions preload" snack version=7
+```js name="Common actions preload" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -1351,7 +1351,7 @@ The `setParams` action allows to update params for a certain route. It takes the
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common actions setParams" snack version=7
+```js name="Common actions setParams" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -1473,7 +1473,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Common actions setParams" snack version=7
+```js name="Common actions setParams" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -1601,7 +1601,7 @@ If you want to set params for a particular route, you can add a `source` propert
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common actions setParams" snack version=7
+```js name="Common actions setParams" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -1723,7 +1723,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Common actions setParams" snack version=7
+```js name="Common actions setParams" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';

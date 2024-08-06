@@ -80,7 +80,7 @@ The `navigate` method lets us navigate to another screen in your app. It takes t
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigate method" snack version=7
+```js name="Navigate method" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -162,7 +162,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigate method" snack version=7
+```js name="Navigate method" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -298,7 +298,7 @@ By default, `goBack` will go back from the screen that it is called from:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigate method" snack version=7
+```js name="Navigate method" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -379,7 +379,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigate method" snack version=7
+```js name="Navigate method" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -463,7 +463,7 @@ The `reset` method lets us replace the navigator state with a new state:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigate - replace and reset" snack version=7
+```js name="Navigate - replace and reset" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -602,7 +602,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigate - replace and reset" snack version=7
+```js name="Navigate - replace and reset" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -756,7 +756,7 @@ The `preload` method allows preloading a screen in the background before navigat
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Common actions preload" snack version=7
+```js name="Common actions preload" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -849,7 +849,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Common actions preload" snack version=7
+```js name="Common actions preload" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -990,7 +990,7 @@ The `setParams` method lets us update the params (`route.params`) of the current
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigate - setParams" snack version=7
+```js name="Navigate - setParams" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -1092,7 +1092,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigate - setParams" snack version=7
+```js name="Navigate - setParams" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -1198,7 +1198,7 @@ The `setOptions` method lets us set screen options from within the component. Th
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigate - setOptions" snack version=7
+```js name="Navigate - setOptions" snack
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -1288,7 +1288,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigate - setOptions" snack version=7
+```js name="Navigate - setOptions" snack
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -1390,7 +1390,7 @@ Screens can add listeners on the `navigation` object with the `addListener` meth
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigation events" snack version=7
+```js name="Navigation events" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -1469,7 +1469,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigation events" snack version=7
+```js name="Navigation events" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';

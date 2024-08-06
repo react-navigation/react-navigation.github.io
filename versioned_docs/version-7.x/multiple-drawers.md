@@ -291,7 +291,7 @@ Here we have 2 drawer navigators nested inside each other, one is positioned on 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Multiple drawers" snack version=7
+```js name="Multiple drawers" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -340,7 +340,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Multiple drawers" snack version=7
+```js name="Multiple drawers" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -413,7 +413,7 @@ The final code would look like this:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Multiple drawers navigators" snack version=7
+```js name="Multiple drawers navigators" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -478,7 +478,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Multiple drawers navigators" snack version=7
+```js name="Multiple drawers navigators" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';

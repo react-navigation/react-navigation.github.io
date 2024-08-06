@@ -45,7 +45,7 @@ For example, if I render nothing for the `header` or `tabBar`, nothing renders
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Hidden components" snack version=7
+```js name="Hidden components" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -103,7 +103,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Hidden components" snack version=7
+```js name="Hidden components" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -160,7 +160,7 @@ To fix this issue you can apply safe area insets on your content. This can be ac
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Safe area example" snack version=7
+```js name="Safe area example" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -234,7 +234,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Safe area example" snack version=7
+```js name="Safe area example" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -330,7 +330,7 @@ In some cases you might need more control over which paddings are applied. For e
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="useSafeAreaInsets hook" snack version=7
+```js name="useSafeAreaInsets hook" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -402,7 +402,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="useSafeAreaInsets hook" snack version=7
+```js name="useSafeAreaInsets hook" snack
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
