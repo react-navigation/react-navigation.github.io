@@ -693,17 +693,43 @@ Supported values:
 
 How should the screen be presented.
 
+Only supported on Android and iOS.
+
 Supported values:
 
 - `card`: the new screen will be pushed onto a stack, which means the default animation will be slide from the side on iOS, the animation on Android will vary depending on the OS version and theme.
-- `modal`: the new screen will be presented modally. this also allows for a nested stack to be rendered inside the screen.
-- `transparentModal`: the new screen will be presented modally, but in addition, the previous screen will stay so that the content below can still be seen if the screen has translucent background.
-- `containedModal`: will use "UIModalPresentationCurrentContext" modal style on iOS and will fallback to "modal" on Android.
-- `containedTransparentModal`: will use "UIModalPresentationOverCurrentContext" modal style on iOS and will fallback to "transparentModal" on Android.
-- `fullScreenModal`: will use "UIModalPresentationFullScreen" modal style on iOS and will fallback to "modal" on Android. A screen using this presentation style can't be dismissed by gesture.
-- `formSheet`: will use "UIModalPresentationFormSheet" modal style on iOS and will fallback to "modal" on Android.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-card.mp4" />
+  </video>
 
-Only supported on Android and iOS.
+- `modal`: the new screen will be presented modally. this also allows for a nested stack to be rendered inside the screen.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-modal.mp4" />
+  </video>
+
+- `transparentModal`: the new screen will be presented modally, but in addition, the previous screen will stay so that the content below can still be seen if the screen has translucent background.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-transparentModal.mp4" />
+  </video>
+
+- `containedModal`: will use "UIModalPresentationCurrentContext" modal style on iOS and will fallback to "modal" on Android.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-containedModal.mp4" />
+  </video>
+
+- `containedTransparentModal`: will use "UIModalPresentationOverCurrentContext" modal style on iOS and will fallback to "transparentModal" on Android.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-containedTransparentModal.mp4" />
+  </video>
+
+- `fullScreenModal`: will use "UIModalPresentationFullScreen" modal style on iOS and will fallback to "modal" on Android. A screen using this presentation style can't be dismissed by gesture.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-fullScreenModal.mp4" />
+  </video>
+- `formSheet`: will use "UIModalPresentationFormSheet" modal style on iOS and will fallback to "modal" on Android.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-formSheet.mp4" />
+  </video>
 
 #### `orientation`
 
