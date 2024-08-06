@@ -299,8 +299,38 @@ footer {
   content: '← ';
 }
 
+.tabs {
+  font-weight: var(--ifm-font-weight-semibold);
+}
+
 .tabs__item {
-  border-bottom-width: 2px;
+  border-bottom: 1px solid var(--ifm-toc-border-color);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.tabs__item--active,
+.tabs__item--active:hover {
+  border-bottom-color: var(--ifm-tabs-color-active-border);
+  background-color: var(--ifm-menu-color-background-active);
+}
+
+.table-of-contents__link--active {
+  position: relative;
+}
+
+.table-of-contents__link--active::before {
+  content: '';
+  position: absolute;
+  left: calc(-1rem - 1px);
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: var(--ifm-color-primary);
+}
+
+.table-of-contents > li > ul > li > .table-of-contents__link--active::before {
+  left: calc(-2rem - 1px);
 }
 
 .theme-edit-this-page svg,
