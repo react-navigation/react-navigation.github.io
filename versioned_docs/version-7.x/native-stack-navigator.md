@@ -176,15 +176,21 @@ This will have no effect on the first screen in the stack.
 
 #### `headerBackTitle`
 
-Title string used by the back button on iOS. Defaults to the previous scene's title, or "Back" if there's not enough space. Use `headerBackTitleVisible: false` to hide it.
+Title string used by the back button on iOS. Defaults to the previous scene's title, or "Back" if there's not enough space. Use `headerBackButtonDisplayMode` to customize the behavior.
 
 Only supported on iOS.
 
 <img src="/assets/7.x/native-stack/headerBackTitle.jpeg" width="500" alt="Header back title" />
 
-#### `headerBackTitleVisible`
+#### `headerBackButtonDisplayMode`
 
-Whether the back button title should be visible or not.
+How the back button displays icon and title.
+
+Supported values:
+
+- `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
+- `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon). iOS >= 14 only, falls back to "default" on older iOS versions.
+- `minimal`: Always displays only the icon without a title.
 
 Only supported on iOS.
 
@@ -391,11 +397,15 @@ The search field background color. By default bar tint color is translucent.
 
 Only supported on iOS.
 
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-barTintColor.png" width="500" alt="Header search bar options - Bar tint color" />
+
 ##### `tintColor`
 
 The color for the cursor caret and cancel button text.
 
 Only supported on iOS.
+
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-tintColor.png" width="500" alt="Header search bar options - Tint color" />
 
 ##### `cancelButtonText`
 
@@ -446,17 +456,23 @@ Text displayed when search field is empty.
 
 The color of the text in the search field.
 
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-textColor.png" width="500" alt="Header search bar options - Text color" />
+
 ##### `hintTextColor`
 
 The color of the hint text in the search field.
 
 Only supported on Android.
 
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-hintTextColor.png" width="500" alt="Header search bar options - Hint text color" />
+
 ##### `headerIconColor`
 
 The color of the search and close icons shown in the header
 
 Only supported on Android.
+
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-headerIconColor.png" width="500" alt="Header search bar options - Header icon color" />
 
 ##### `shouldShowHintSearchIcon`
 

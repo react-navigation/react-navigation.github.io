@@ -241,6 +241,23 @@ Now, screens pushed on top of modals are automatically shown as modals to avoid 
 
 See [Stack Navigator](stack-navigator.md#presentation) and [Native Stack Navigator](native-stack-navigator.md#presentation) docs for usage.
 
+#### `headerBackTitleVisible` is removed in favor of `headerBackButtonDisplayMode` in Stack and Native Stack navigators
+
+Previously, `headerBackTitleVisible` could be used to control whether the back button title is shown in the header. It's now removed in favor of `headerBackButtonDisplayMode` which provides more flexibility.
+
+The previous behavior can be achieved by setting `headerBackButtonDisplayMode` to `default` and `minimal` for showing and hiding the back button title respectively:
+
+```diff lang=js
+<Stack.Screen
+  name="Details"
+  component={DetailsScreen}
+  options={{
+-     headerBackTitleVisible: false,
++     headerBackButtonDisplayMode: 'minimal',
+  }}
+/>
+```
+
 #### `animationEnabled` option is removed in favor of `animation` option in Stack Navigator
 
 Previously, `animationEnabled: false` was used to disable the animation for the screen transition in Stack Navigator.
