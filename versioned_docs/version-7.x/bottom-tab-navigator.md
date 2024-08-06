@@ -294,7 +294,7 @@ By default, the position is chosen automatically based on device width.
 #### `tabBarLabelStyle`
 
 Style object for the tab label.
-  <img src="/assets/7.x/bottom-tabs/tabBarLabelStyle.png" width="500" alt="Tab bar label style" />
+<img src="/assets/7.x/bottom-tabs/tabBarLabelStyle.png" width="500" alt="Tab bar label style" />
 
 Example:
 
