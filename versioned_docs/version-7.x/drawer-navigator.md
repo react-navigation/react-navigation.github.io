@@ -388,8 +388,20 @@ Options are `left` or `right`. Defaults to `left` for LTR languages and `right` 
 Type of the drawer. It determines how the drawer looks and animates.
 
 - `front`: Traditional drawer which covers the screen with an overlay behind it.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/drawer/drawerType-front.mp4" />
+  </video>
+
 - `back`: The drawer is revealed behind the screen on swipe.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/drawer/drawerType-back.mp4" />
+  </video>
+
 - `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/drawer/drawerType-slide.mp4" />
+  </video>
+
 - `permanent`: A permanent drawer is shown as a sidebar. Useful for having always visible drawer on larger screens.
 
 Defaults to `slide` on iOS and `front` on other platforms.
@@ -418,6 +430,10 @@ function MyDrawer() {
 ```
 
 You can also specify other props such as `drawerStyle` based on screen size to customize the behavior. For example, you can combine it with `defaultStatus="open"` to achieve a master-detail layout:
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/drawer/drawerType-masterDetail.mp4" />
+</video>
 
 ```js
 import { useWindowDimensions } from 'react-native';
@@ -451,19 +467,33 @@ When set to `true`, Drawer will hide the OS status bar whenever the drawer is pu
 
 #### `drawerStatusBarAnimation`
 
-Animation of the statusbar when hiding it. use in combination with `hideStatusBar`.
+Animation of the statusbar when hiding it. use in combination with `drawerHideStatusBarOnOpen`.
+
+This is only supported on iOS. Defaults to `slide`.
 
 Supported values:
 
 - `slide`
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/drawer/drawerStatusBarAnimation-slide.mp4" />
+  </video>
+
 - `fade`
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/drawer/drawerStatusBarAnimation-fade.mp4" />
+  </video>
+
 - `none`
 
-This is only supported on iOS. Defaults to `slide`.
+
 
 #### `overlayColor`
 
 Color overlay to be displayed on top of the content view when drawer gets open. The opacity is animated from `0` to `1` when the drawer opens.
+
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/drawer/overlayColor.mp4" />
+  </video>
 
 #### `sceneContainerStyle`
 
