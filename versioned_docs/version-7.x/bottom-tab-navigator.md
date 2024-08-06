@@ -283,14 +283,28 @@ Whether the tab label should be visible. Defaults to `true`.
 
 Whether the label is shown below the icon or beside the icon.
 
-- `below-icon`: the label is shown below the icon (typical for iPhones)
-- `beside-icon` the label is shown next to the icon (typical for iPad)
-
 By default, the position is chosen automatically based on device width.
+
+- `below-icon`: the label is shown below the icon (typical for iPhones)
+  <img src="/assets/7.x/bottom-tabs/tabBarLabelPosition-below.png" width="400" alt="Tab bar label position - below" />
+
+- `beside-icon` the label is shown next to the icon (typical for iPad)
+  <img src="/assets/7.x/bottom-tabs/tabBarLabelPosition-beside.png" width="700" alt="Tab bar label position - beside" />
 
 #### `tabBarLabelStyle`
 
 Style object for the tab label.
+  <img src="/assets/7.x/bottom-tabs/tabBarLabelStyle.png" width="500" alt="Tab bar label style" />
+
+Example:
+
+```js
+    tabBarLabelStyle: {
+      fontSize: 16,
+      fontFamily: 'Georgia',
+      fontWeight: 300,
+    },
+```
 
 #### `tabBarIcon`
 
@@ -304,9 +318,22 @@ Style object for the tab icon.
 
 Text to show in a badge on the tab icon. Accepts a `string` or a `number`.
 
+<img src="/assets/7.x/bottom-tabs/tabBarBadge.png" width="500" alt="Tab bar badge" />
+
 #### `tabBarBadgeStyle`
 
 Style for the badge on the tab icon. You can specify a background color or text color here.
+
+<img src="/assets/7.x/bottom-tabs/tabBarBadgeStyle.png" width="500" alt="Tab bar badge style" />
+
+Example:
+
+```js
+    tabBarBadgeStyle: {
+      color: 'black',
+      backgroundColor: 'yellow',
+    },
+```
 
 #### `tabBarAccessibilityLabel`
 
@@ -329,10 +356,12 @@ ID to locate this tab button in tests.
 #### `tabBarActiveTintColor`
 
 Color for the icon and label in the active tab.
+<img src="/assets/7.x/bottom-tabs/tabBarActiveTintColor.png" width="500" alt="Tab bar active tint color" />
 
 #### `tabBarInactiveTintColor`
 
 Color for the icon and label in the inactive tabs.
+<img src="/assets/7.x/bottom-tabs/tabBarInactiveTintColor.png" width="500" alt="Tab bar inactive tint color" />
 
 #### `tabBarActiveBackgroundColor`
 
@@ -386,6 +415,8 @@ import { BlurView } from 'expo-blur';
 ```
 
 When using `BlurView`, make sure to set `position: 'absolute'` in `tabBarStyle` as well. You'd also need to use [`useBottomTabBarHeight`](#usebottomtabbarheight) to add bottom padding to your content.
+
+<img src="/assets/7.x/bottom-tabs/tabBarBackground.png" width="500" alt="Tab bar background" />
 
 #### `tabBarPosition`
 
