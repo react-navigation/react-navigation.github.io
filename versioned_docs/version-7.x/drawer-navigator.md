@@ -332,9 +332,21 @@ Function, that given `{ focused: boolean, color: string, size: number }` returns
 
 Color for the icon and label in the active item in the drawer.
 
+<img src="/assets/7.x/drawer/drawerActiveTintColor.png" width="500" alt="Drawer active tint color" />
+
+```js
+   drawerActiveTintColor: 'green',
+```
+
 #### `drawerActiveBackgroundColor`
 
 Background color for the active item in the drawer.
+
+<img src="/assets/7.x/drawer/drawerActiveBackgroundColor.png" width="500" alt="Drawer active background color" />
+
+```js
+   drawerActiveBackgroundColor: '#939B6C',
+```
 
 #### `drawerInactiveTintColor`
 
@@ -348,9 +360,34 @@ Background color for the inactive items in the drawer.
 
 Style object for the single item, which can contain an icon and/or a label.
 
+<img src="/assets/7.x/drawer/drawerItemStyle.png" width="500" alt="Drawer item style" />
+
+Example:
+
+```js
+   drawerItemStyle: {
+    backgroundColor: '#9dd3c8',
+    borderColor: 'black',
+    orderWidth: 2,
+    opacity: 0.6,
+  },
+```
+
 #### `drawerLabelStyle`
 
 Style object to apply to the `Text` style inside content section which renders a label.
+
+<img src="/assets/7.x/drawer/drawerLabelStyle.png" width="500" alt="Drawer label style" />
+
+Example:
+
+```js
+   drawerLabelStyle: {
+      color: 'black',
+      fontSize: 20,
+      fontFamily: 'Georgia',
+    },
+```
 
 #### `drawerContentContainerStyle`
 
@@ -364,7 +401,7 @@ Style object for the wrapper view.
 
 Style object for the drawer component. You can pass a custom background color for a drawer or a custom width here.
 
-<samp id="drawer-with-style" />
+<img src="/assets/7.x/drawer/drawerStyle.png" width="500" alt="Drawer style" />
 
 ```js
 <Drawer.Navigator
