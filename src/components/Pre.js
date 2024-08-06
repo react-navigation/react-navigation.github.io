@@ -1,78 +1,7 @@
 import { useColorMode } from '@docusaurus/theme-common';
+import { usePluginData } from '@docusaurus/useGlobalData';
 import MDXPre from '@theme-original/MDXComponents/Pre';
 import React from 'react';
-
-const peers = {
-  'react-native-safe-area-context': '*',
-  'react-native-screens': '*',
-};
-
-const versions = {
-  7: {
-    '@react-navigation/bottom-tabs': [
-      '7.0.0-rc.20',
-      {
-        ...peers,
-        '@react-navigation/native': '*',
-      },
-    ],
-    '@react-navigation/core': '7.0.0-rc.10',
-    '@react-navigation/native': '7.0.0-rc.13',
-    '@react-navigation/drawer': [
-      '7.0.0-rc.18',
-      {
-        ...peers,
-        '@react-navigation/native': '*',
-        'react-native-gesture-handler': '*',
-        'react-native-reanimated': '*',
-      },
-    ],
-    '@react-navigation/elements': [
-      '2.0.0-rc.14',
-      {
-        ...peers,
-        '@react-navigation/native': '*',
-      },
-    ],
-    '@react-navigation/material-top-tabs': [
-      '7.0.0-rc.14',
-      {
-        ...peers,
-        '@react-navigation/native': '*',
-        'react-native-pager-view': '*',
-      },
-    ],
-    '@react-navigation/native-stack': [
-      '7.0.0-rc.15',
-      {
-        ...peers,
-        '@react-navigation/native': '*',
-      },
-    ],
-    '@react-navigation/routers': '7.0.0-rc.6',
-    '@react-navigation/stack': [
-      '7.0.0-rc.15',
-      {
-        ...peers,
-        '@react-navigation/native': '*',
-        'react-native-gesture-handler': '*',
-      },
-    ],
-    'react-native-drawer-layout': [
-      '4.0.0-rc.7',
-      {
-        'react-native-gesture-handler': '*',
-        'react-native-reanimated': '*',
-      },
-    ],
-    'react-native-tab-view': [
-      '4.0.0-rc.7',
-      {
-        'react-native-pager-view': '*',
-      },
-    ],
-  },
-};
 
 export default function Pre({
   children,
@@ -84,6 +13,8 @@ export default function Pre({
   ...rest
 }) {
   const { colorMode } = useColorMode();
+  const { versions } = usePluginData('react-navigation-versions');
+
   const child = React.Children.only(children);
 
   // Handle diffs with language

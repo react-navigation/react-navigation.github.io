@@ -132,6 +132,7 @@ export default {
     },
   },
   plugins: [
+    './src/plugins/react-navigation-versions.mjs',
     [
       '@docusaurus/plugin-client-redirects',
       {
