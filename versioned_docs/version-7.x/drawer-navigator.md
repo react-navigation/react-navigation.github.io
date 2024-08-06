@@ -522,8 +522,6 @@ Supported values:
 
 - `none`
 
-
-
 #### `overlayColor`
 
 Color overlay to be displayed on top of the content view when drawer gets open. The opacity is animated from `0` to `1` when the drawer opens.
