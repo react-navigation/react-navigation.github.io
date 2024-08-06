@@ -345,7 +345,13 @@ Background color for the active item in the drawer.
 <img src="/assets/7.x/drawer/drawerActiveBackgroundColor.png" width="500" alt="Drawer active background color" />
 
 ```js
-   drawerActiveBackgroundColor: '#939B6C',
+    screenOptions={{
+      drawerActiveTintColor: 'white',
+      drawerActiveBackgroundColor: '#003CB3',
+      drawerLabelStyle: {
+        color: 'white',
+      },
+    }}
 ```
 
 #### `drawerInactiveTintColor`
