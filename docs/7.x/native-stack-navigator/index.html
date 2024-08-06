@@ -14,7 +14,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="React Navigation" href="/opensearch.xml">
 
 <script src="/js/snack-helpers.js"></script><link rel="stylesheet" href="/assets/css/styles.b4c56cd5.css">
-<script src="/assets/js/runtime~main.5dc8ee51.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.2a9db0e6.js" defer="defer"></script>
 <script src="/assets/js/main.3035de39.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -354,17 +354,38 @@ Possible values:</p>
 </ul>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="presentation"><code>presentation</code><a href="#presentation" class="hash-link" aria-label="Direct link to presentation" title="Direct link to presentation">​</a></h4>
 <p>How should the screen be presented.</p>
+<p>Only supported on Android and iOS.</p>
 <p>Supported values:</p>
 <ul>
-<li><code>card</code>: the new screen will be pushed onto a stack, which means the default animation will be slide from the side on iOS, the animation on Android will vary depending on the OS version and theme.</li>
-<li><code>modal</code>: the new screen will be presented modally. this also allows for a nested stack to be rendered inside the screen.</li>
-<li><code>transparentModal</code>: the new screen will be presented modally, but in addition, the previous screen will stay so that the content below can still be seen if the screen has translucent background.</li>
-<li><code>containedModal</code>: will use &quot;UIModalPresentationCurrentContext&quot; modal style on iOS and will fallback to &quot;modal&quot; on Android.</li>
-<li><code>containedTransparentModal</code>: will use &quot;UIModalPresentationOverCurrentContext&quot; modal style on iOS and will fallback to &quot;transparentModal&quot; on Android.</li>
-<li><code>fullScreenModal</code>: will use &quot;UIModalPresentationFullScreen&quot; modal style on iOS and will fallback to &quot;modal&quot; on Android. A screen using this presentation style can&#x27;t be dismissed by gesture.</li>
-<li><code>formSheet</code>: will use &quot;UIModalPresentationFormSheet&quot; modal style on iOS and will fallback to &quot;modal&quot; on Android.</li>
+<li>
+<p><code>card</code>: the new screen will be pushed onto a stack, which means the default animation will be slide from the side on iOS, the animation on Android will vary depending on the OS version and theme.</p>
+<video playsinline="" autoplay="" muted="" loop=""><source src="/assets/7.x/native-stack/presentation-card.mp4"></video>
+</li>
+<li>
+<p><code>modal</code>: the new screen will be presented modally. this also allows for a nested stack to be rendered inside the screen.</p>
+<video playsinline="" autoplay="" muted="" loop=""><source src="/assets/7.x/native-stack/presentation-modal.mp4"></video>
+</li>
+<li>
+<p><code>transparentModal</code>: the new screen will be presented modally, but in addition, the previous screen will stay so that the content below can still be seen if the screen has translucent background.</p>
+<video playsinline="" autoplay="" muted="" loop=""><source src="/assets/7.x/native-stack/presentation-transparentModal.mp4"></video>
+</li>
+<li>
+<p><code>containedModal</code>: will use &quot;UIModalPresentationCurrentContext&quot; modal style on iOS and will fallback to &quot;modal&quot; on Android.</p>
+<video playsinline="" autoplay="" muted="" loop=""><source src="/assets/7.x/native-stack/presentation-containedModal.mp4"></video>
+</li>
+<li>
+<p><code>containedTransparentModal</code>: will use &quot;UIModalPresentationOverCurrentContext&quot; modal style on iOS and will fallback to &quot;transparentModal&quot; on Android.</p>
+<video playsinline="" autoplay="" muted="" loop=""><source src="/assets/7.x/native-stack/presentation-containedTransparentModal.mp4"></video>
+</li>
+<li>
+<p><code>fullScreenModal</code>: will use &quot;UIModalPresentationFullScreen&quot; modal style on iOS and will fallback to &quot;modal&quot; on Android. A screen using this presentation style can&#x27;t be dismissed by gesture.</p>
+<video playsinline="" autoplay="" muted="" loop=""><source src="/assets/7.x/native-stack/presentation-fullScreenModal.mp4"></video>
+</li>
+<li>
+<p><code>formSheet</code>: will use &quot;UIModalPresentationFormSheet&quot; modal style on iOS and will fallback to &quot;modal&quot; on Android.</p>
+<video playsinline="" autoplay="" muted="" loop=""><source src="/assets/7.x/native-stack/presentation-formSheet.mp4"></video>
+</li>
 </ul>
-<p>Only supported on Android and iOS.</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="orientation"><code>orientation</code><a href="#orientation" class="hash-link" aria-label="Direct link to orientation" title="Direct link to orientation">​</a></h4>
 <p>The display orientation to use for the screen.</p>
 <p>Supported values:</p>
