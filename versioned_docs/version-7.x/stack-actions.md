@@ -600,7 +600,7 @@ function ProfileScreen({ route }) {
           navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
         }}
       >
-       Push same screen on the stack
+        Push same screen on the stack
       </Button>
       <Button
         onPress={() => {
