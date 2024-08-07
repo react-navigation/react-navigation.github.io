@@ -273,7 +273,7 @@ To show your screen under the tab bar, you can set the `position` style to absol
 
 You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar. React Navigation won't do it automatically.
 
-To get the height of the bottom tab bar, you can use `BottomTabBarHeightContext` with [React's Context API](https://react.dev/reference/react/useContext#contextconsumer) or `useBottomTabBarHeight`:
+To get the height of the bottom tab bar, you can use `BottomTabBarHeightContext` with [React's Context API](https://reactjs.org/docs/context.html#contextconsumer) or `useBottomTabBarHeight`:
 
 ```js
 import { BottomTabBarHeightContext } from '@react-navigation/bottom-tabs';
