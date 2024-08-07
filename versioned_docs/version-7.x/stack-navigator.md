@@ -706,53 +706,62 @@ Supported values for `animation` are:
 - `default` - Default animation based on the platform and OS version.
 <video playsInline autoPlay muted loop>
   <source src="/assets/7.x/stack/animation-default.mp4" />
+
 </video>
 
 - `fade` - Simple fade animation for dialogs.
 <video playsInline autoPlay muted loop>
   <source src="/assets/7.x/stack/animation-fade.mp4" />
+
 </video>
 
 - `fade_from_bottom` - Standard Android-style fade-in from the bottom for Android Oreo.
 <video playsInline autoPlay muted loop>
   <source src="/assets/7.x/stack/animation-fade_from_bottom.mp4" />
+
 </video>
 
 - `fade_from_right` - Standard Android-style fade-in from the right for Android 14.
 <video playsInline autoPlay muted loop>
   <source src="/assets/7.x/stack/animation-fade_from_right.mp4" />
+
 </video>
 
 - `reveal_from_bottom` - Standard Android-style reveal from the bottom for Android Pie.
 <video playsInline autoPlay muted loop>
   <source src="/assets/7.x/stack/animation-reveal_from_bottom.mp4" />
+
 </video>
 
 - `scale_from_center` - Scale animation from the center.
 <video playsInline autoPlay muted loop>
   <source src="/assets/7.x/stack/animation-scale_from_center.mp4" />
+
 </video>
 
 - `slide_from_right` - Standard iOS-style slide in from the right.
 <video playsInline autoPlay muted loop>
   <source src="/assets/7.x/stack/animation-slide_from_right.mp4" />
+
 </video>
 
 - `slide_from_left` - Similar to `slide_from_right`, but the screen will slide in from the left.
 <video playsInline autoPlay muted loop>
   <source src="/assets/7.x/stack/animation-slide_from_left.mp4" />
+
 </video>
 
 - `slide_from_bottom` - Slide animation from the bottom for modals and bottom sheets.
 <video playsInline autoPlay muted loop>
   <source src="/assets/7.x/stack/animation-slide_from_bottom.mp4" />
+
 </video>
 
 - `none` - The screens are pushed or popped immediately without any animation.
 <video playsInline autoPlay muted loop>
   <source src="/assets/7.x/stack/animation-none.mp4" />
-</video>
 
+</video>
 
 By default, Android and iOS use the `default` animation and other platforms use `none`.
 
