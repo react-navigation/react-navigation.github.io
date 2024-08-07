@@ -15,7 +15,7 @@ Here are some resources to help you out:
 1. [React Native Express](http://reactnativeexpress.com/) (Sections 1 to 4)
 2. [Main Concepts of React](https://reactjs.org/docs/hello-world.html)
 3. [React Hooks](https://reactjs.org/docs/hooks-intro.html)
-4. [React Context](https://react.dev/reference/react/useContext) (Advanced)
+4. [React Context](https://reactjs.org/docs/context.html) (Advanced)
 
 ## Installation
 
