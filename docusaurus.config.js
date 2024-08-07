@@ -37,20 +37,60 @@ export default {
         src: 'img/spiro.svg',
       },
       items: [
-        { to: 'docs/getting-started', label: 'Docs', position: 'left' },
-        { to: 'blog', label: 'Blog', position: 'left' },
         {
-          href: 'https://github.com/react-navigation',
-          label: 'GitHub',
+          type: 'docsVersionDropdown',
           position: 'right',
         },
         {
-          to: 'help',
-          label: 'Help',
+          to: 'docs/getting-started',
+          label: 'Docs',
+          position: 'right',
         },
         {
-          type: 'docsVersionDropdown',
-          position: 'left',
+          to: 'blog',
+          label: 'Blog',
+          position: 'right',
+        },
+        {
+          type: 'dropdown',
+          label: 'Help',
+          items: [
+            {
+              label: 'Issues',
+              href: 'https://github.com/react-navigation/react-navigation/issues',
+            },
+            {
+              label: 'Feature Requests',
+              href: 'https://react-navigation.canny.io/feature-requests',
+            },
+            {
+              label: 'Reactiflux Discord',
+              href: 'https://www.reactiflux.com',
+            },
+            {
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/questions/tagged/react-navigation',
+            },
+            {
+              label: 'Troubleshooting',
+              to: 'docs/troubleshooting',
+            },
+          ],
+          position: 'right',
+        },
+        {
+          href: 'https://x.com/reactnavigation',
+          position: 'right',
+          className: 'navbar-social-link navbar-social-link-x',
+          'aria-label': 'X',
+          position: 'right',
+        },
+        {
+          href: 'https://github.com/react-navigation',
+          position: 'right',
+          className: 'navbar-social-link navbar-social-link-github',
+          'aria-label': 'GitHub',
+          position: 'right',
         },
       ],
     },
