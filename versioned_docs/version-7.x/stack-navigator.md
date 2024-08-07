@@ -231,6 +231,20 @@ Use this prop to have a semi-transparent dark overlay visible under the card dur
 
 Function which returns a React Element to display as the overlay for the card. Make sure to set `cardOverlayEnabled` to `true` when using this.
 
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/cardOverlay.mp4" />
+</video>
+
+Example:
+```js
+    screenOptions={{
+      cardOverlayEnabled: true,
+      cardOverlay: () => (
+        <View style={{ flex: 1, backgroundColor: 'gray', opacity: 0.5 }} />
+      ),
+    }}
+```
+
 #### `cardStyle`
 
 Style object for the card in stack. You can provide a custom background color to use instead of the default background here.
@@ -244,26 +258,45 @@ On Web, the height of the screen isn't limited to the height of the viewport. Th
 This is shortcut option which configures several options to configure the style for rendering and transitions:
 
 - `card`: Use the default OS animations for iOS and Android screen transitions.
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/stack/presentation-card.mp4" />
+  </video>
+
 - `modal`: Use Modal animations. This changes a few things:
   - Sets `headerMode` to `screen` for the screen unless specified otherwise.
   - Changes the screen animation to match the platform behavior for modals.
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/stack/presentation-modal.mp4" />
+  </video>
+
 - `transparentModal`: Similar to `modal`. This changes following things:
   - Sets `headerMode` to `screen` for the screen unless specified otherwise.
   - Sets background color of the screen to transparent, so previous screen is visible
   - Adjusts the `detachPreviousScreen` option so that the previous screen stays rendered.
   - Prevents the previous screen from animating from its last position.
   - Changes the screen animation to a vertical slide animation.
+  
+  See [Transparent modals](#transparent-modals) for more details on how to customize `transparentModal`.
 
-See [Transparent modals](#transparent-modals) for more details on how to customize `transparentModal`.
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/stack/presentation-transparentModal.mp4" />
+  </video>
+
+
 
 #### `animationTypeForReplace`
 
 The type of animation to use when this screen replaces another screen. It takes the following values:
 
-- `push` - The animation of a new screen being pushed will be used
-- `pop` - The animation of a screen being popped will be used
+- `push` - (default) The animation of a new screen being pushed will be used
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animationTypeForReplace-push.mp4" />
+</video>
 
-Defaults to `push`.
+- `pop` - The animation of a screen being popped will be used
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animationTypeForReplace-pop.mp4" />
+</video>
 
 When `pop` is used, the `pop` animation is applied to the screen being replaced.
 
@@ -415,7 +448,14 @@ return (
 Specifies how the header should be rendered:
 
 - `float` - Render a single header that stays at the top and animates as screens are changed. This is default on iOS.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/headerMode-float.mp4" />
+</video>
+
 - `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is default on other platforms.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/headerMode-screen.mp4" />
+</video>
 
 #### `headerShown`
 
@@ -432,6 +472,18 @@ Accessibility label for the header back button.
 #### `headerBackImage`
 
 Function which returns a React Element to display custom image in header's back button. When a function is used, it receives the `tintColor` in it's argument object. Defaults to Image component with back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
+
+<img src="/assets/7.x/stack/headerBackImage.png" width="500" alt="Header back image" />
+
+```js
+      headerBackImage: ({ tintColor }) => (
+       <Ionicons
+          tyle={{ color: tintColor }}
+          size={26}
+          name="arrow-back-circle"
+        />
+      ),
+```
 
 #### `headerBackTitle`
 
