@@ -8,7 +8,6 @@ import sponsors from '../data/sponsors';
 import Splash from './home/Splash';
 import Features from './home/Features';
 import Sponsors from './home/Sponsors';
-import BLM from './home/BLM';
 
 const features = [
   {
@@ -45,11 +44,14 @@ function Home() {
   const { siteConfig = {} } = context;
 
   return (
-    <Layout title={siteConfig.title} description={siteConfig.tagline}>
+    <Layout
+      title={siteConfig.title}
+      description={siteConfig.tagline}
+      wrapperClassName="full-width"
+    >
       <Splash />
       <Features />
       <Sponsors />
-      <BLM />
     </Layout>
   );
 }

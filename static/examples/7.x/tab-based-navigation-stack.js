@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import * as React from 'react';
+import { Button, Text, View } from 'react-native';
 
 function DetailsScreen() {
   return (
@@ -64,8 +64,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={{ headerShown: false }}>
-        <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen name="Settings" component={SettingsStackScreen} />
+        <Tab.Screen name="HomeStack" component={HomeStackScreen} />
+        <Tab.Screen name="SettingsStack" component={SettingsStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );

@@ -155,7 +155,7 @@ Let's say you want to add a custom action to clear the history:
 ```js
 import { TabRouter } from '@react-navigation/native';
 
-const MyTabRouter = options => {
+const MyTabRouter = (options) => {
   const router = TabRouter(options);
 
   return {
@@ -182,7 +182,7 @@ const MyTabRouter = options => {
 };
 ```
 
-Instead of writing a custom router to handle custom actions, you can [pass a function to `dispatch`](navigation-prop.md#dispatch) instead. It's cleaner and recommended instead of overriding routers.
+Instead of writing a custom router to handle custom actions, you can [pass a function to `dispatch`](navigation-object.md#dispatch) instead. It's cleaner and recommended instead of overriding routers.
 
 ### Blocking Navigation Actions
 
@@ -191,7 +191,7 @@ Sometimes you may want to prevent some navigation activity, depending on your ro
 ```js
 import { StackRouter } from '@react-navigation/native';
 
-const MyStackRouter = options => {
+const MyStackRouter = (options) => {
   const router = StackRouter(options);
 
   return {
@@ -214,4 +214,4 @@ const MyStackRouter = options => {
 };
 ```
 
-If you want to prevent going back, the recommended approach is to use the [`beforeRemove` event](preventing-going-back.md).
+If you want to prevent going back, the recommended approach is to use the [`usePreventRemove` hook](preventing-going-back.md).

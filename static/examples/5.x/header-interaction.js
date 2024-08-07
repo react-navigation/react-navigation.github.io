@@ -18,7 +18,7 @@ function HomeScreen({ navigation }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button onPress={() => setCount(c => c + 1)} title="Update count" />
+        <Button onPress={() => setCount((c) => c + 1)} title="Update count" />
       ),
     });
   }, [navigation, setCount]);
@@ -36,7 +36,7 @@ function App() {
           name="Home"
           component={HomeScreen}
           options={({ navigation, route }) => ({
-            headerTitle: props => <LogoTitle {...props} />,
+            headerTitle: (props) => <LogoTitle {...props} />,
           })}
         />
       </Stack.Navigator>

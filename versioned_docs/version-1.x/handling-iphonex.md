@@ -39,12 +39,8 @@ class App extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={styles.paragraph}>
-          This is top text.
-        </Text>
-        <Text style={styles.paragraph}>
-          This is bottom text.
-        </Text>
+        <Text style={styles.paragraph}>This is top text.</Text>
+        <Text style={styles.paragraph}>This is bottom text.</Text>
       </SafeAreaView>
     );
   }

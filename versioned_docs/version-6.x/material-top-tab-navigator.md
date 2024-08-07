@@ -6,11 +6,9 @@ sidebar_label: Material Top Tabs
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the tabs or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/tabs/material-top-tabs.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/tabs/material-top-tabs.mp4" />
+</video>
 
 This wraps [`react-native-tab-view`](tab-view.md). If you want to use the tab view without React Navigation integration, use the library directly instead.
 
@@ -63,7 +61,11 @@ function MyTabs() {
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+:::note
+
+For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+
+:::
 
 ### Props
 
@@ -156,8 +158,7 @@ function MyTabBar({ state, descriptors, navigation, position }) {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({ name: route.name, merge: true });
+            navigation.navigate(route.name, route.params);
           }
         };
 
@@ -307,8 +308,7 @@ Example:
   screenOptions={{
     tabBarGap: 10,
   }}
->
-</Tab.Navigator>
+></Tab.Navigator>
 ```
 
 #### `tabBarAndroidRipple`
@@ -323,8 +323,7 @@ Example:
   screenOptions={{
     tabBarAndroidRipple: { borderless: false },
   }}
->
-</Tab.Navigator>
+></Tab.Navigator>
 ```
 
 #### `tabBarPressColor`

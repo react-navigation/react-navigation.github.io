@@ -35,7 +35,7 @@ const Stack = createNativeStackNavigator();
 
 function Root() {
   return (
-    <Drawer.Navigator useLegacyImplementation>
+    <Drawer.Navigator>
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Profile" component={EmptyScreen} />
       <Stack.Screen name="Settings" component={EmptyScreen} />

@@ -10,7 +10,9 @@ We've been taking `createAppContainer` for granted so far, so let's explain them
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-const RootStack = createStackNavigator({ /* your routes here */ });
+const RootStack = createStackNavigator({
+  /* your routes here */
+});
 const AppContainer = createAppContainer(RootStack);
 
 // Now AppContainer is the main component for React to render
@@ -54,7 +56,7 @@ class App extends React.Component {
   render() {
     return (
       <AppContainer
-        ref={nav => {
+        ref={(nav) => {
           this.navigator = nav;
         }}
       />

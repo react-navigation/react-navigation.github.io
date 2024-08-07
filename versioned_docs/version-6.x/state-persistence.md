@@ -26,7 +26,7 @@ import { NavigationContainer } from '@react-navigation/native';
 const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
 
 export default function App() {
-  const [isReady, setIsReady] = React.useState(false);
+  const [isReady, setIsReady] = React.useState(Platform.OS === 'web'); // Don't persist state on web since it's based on URL
   const [initialState, setInitialState] = React.useState();
 
   React.useEffect(() => {
@@ -34,10 +34,12 @@ export default function App() {
       try {
         const initialUrl = await Linking.getInitialURL();
 
-        if (Platform.OS !== 'web' && initialUrl == null) {
-          // Only restore state if there's no deep link and we're not on web
+        if (initialUrl == null) {
+          // Only restore state if there's no deep link
           const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
-          const state = savedStateString ? JSON.parse(savedStateString) : undefined;
+          const state = savedStateString
+            ? JSON.parse(savedStateString)
+            : undefined;
 
           if (state !== undefined) {
             setInitialState(state);
@@ -70,6 +72,12 @@ export default function App() {
 }
 ```
 
+:::warning
+
+It is recommended to use an [error boundary](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary) in your app and clear the persisted state if an error occurs. This will ensure that the app doesn't get stuck in an error state if a screen crashes.
+
+:::
+
 ### Development Mode
 
 This feature is particularly useful in development mode. You can enable it selectively using the following approach:
@@ -78,7 +86,7 @@ This feature is particularly useful in development mode. You can enable it selec
 const [isReady, setIsReady] = React.useState(__DEV__ ? false : true);
 ```
 
-While it can be used for production as well, use it with caution as it can make the app unusable if the app is crashing on a particular screen - as the user will still be on the same screen after restarting.
+While it can be used for production as well, use it with caution as it can make the app unusable if the app is crashing on a particular screen - as the user will still be on the same screen after restarting. So if you are using it in production, make sure to clear the persisted state if an error occurs.
 
 ### Loading View
 

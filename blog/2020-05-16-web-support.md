@@ -25,6 +25,7 @@ The first step for web support is to have proper URL integration. This means:
 - Buttons that navigate to other screens in the app should be links, and users should be able use standard shortcuts with them
 
 <video playsInline autoPlay muted loop style={{ maxWidth: '100%', marginBottom: 32 }}>
+
   <source src="/assets/blog/web-support/url-integration.mp4" type="video/mp4" />
 </video>
 
@@ -42,7 +43,7 @@ const linking = {
       Home: '',
       Profile: ':id/profile',
       Settings: ':id/blog',
-    }
+    },
   },
 };
 
@@ -81,7 +82,7 @@ URL integration isn't enough to have proper web support. The navigators also nee
 
 The first change is using anchor tags. When you use built-in navigators such as drawer navigator and tab navigator, they render anchor tags for the drawer and tab items respectively when you have linking configured. This means that they behave the same as normal links on the web.
 
-<img src="/assets/blog/web-support/link-right-click.png" height="427"/>
+<img src="/assets/blog/web-support/link-right-click.png" height="427" alt="Demo for Right Click on links" />
 
 ### No gestures and animations
 
@@ -96,6 +97,7 @@ Phones have small screens, so it's important to maximize the use of available sc
 It's especially important in case of the [stack navigator](/docs/stack-navigator) because not only we have the browser's address bar, but also the header at the top which is taking vertical space. Now we'll automatically adjust the styles of the stack navigator to get this behavior without you having to write any special code.
 
 <video playsInline autoPlay muted loop style={{ maxWidth: '100%' }}>
+
   <source src="/assets/blog/web-support/hide-addressbar.mp4" type="video/mp4" />
 </video>
 
@@ -104,6 +106,7 @@ It's especially important in case of the [stack navigator](/docs/stack-navigator
 Another way we can make maximum use of the available screen size is by making our UIs adapt to different screen sizes. For example, we may want to show a sidebar for navigation on large screens while switching to a drawer on smaller screens. You can now specify `drawerType` as `permanent` to show an always visible sidebar. See the [documentation for `drawerType`](/docs/drawer-navigator#drawertype) for example code on how to achieve it.
 
 <video playsInline autoPlay muted loop style={{ maxWidth: '100%' }}>
+
   <source src="/assets/blog/web-support/permanent-drawer.mp4" type="video/mp4" />
 </video>
 

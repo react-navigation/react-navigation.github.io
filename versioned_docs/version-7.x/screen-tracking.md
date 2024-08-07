@@ -1,8 +1,11 @@
 ---
 id: screen-tracking
 title: Screen tracking for analytics
-sidebar_label: Screen tracking for analytics
+sidebar_label: Screen tracking
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 To track the currently active screen, we need to:
 
@@ -15,42 +18,166 @@ To get notified of state changes, we can use the `onStateChange` prop on `Naviga
 
 This example shows how the approach can be adapted to any mobile analytics SDK.
 
-<samp id="screen-tracking-for-analytics" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Screen tracking for analytics" snack
+import * as React from 'react';
+import { View } from 'react-native';
+// codeblock-focus-start
 import {
-  NavigationContainer,
+  createStaticNavigation,
   useNavigationContainerRef,
+  useNavigation,
 } from '@react-navigation/native';
+// codeblock-focus-end
+import { Button } from '@react-navigation/elements';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default () => {
-  const navigationRef = useNavigationContainerRef();
-  const routeNameRef = useRef();
+function Home() {
+  const navigation = useNavigation();
 
   return (
-    <NavigationContainer
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
+    </View>
+  );
+}
+
+function Settings() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
+    </View>
+  );
+}
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: Home,
+    Settings: Settings,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+// codeblock-focus-start
+
+export default function App() {
+  const navigationRef = useNavigationContainerRef();
+  const routeNameRef = React.useRef();
+
+  return (
+    <Navigation
       ref={navigationRef}
       onReady={() => {
-        routeNameRef.current = navigationRef.getCurrentRoute().name;
+        routeNameRef.current = navigationRef.current.getCurrentRoute().name;
       }}
       onStateChange={async () => {
         const previousRouteName = routeNameRef.current;
-        const currentRouteName = navigationRef.getCurrentRoute().name;
+        const currentRouteName = navigationRef.current.getCurrentRoute().name;
         const trackScreenView = () => {
           // Your implementation of analytics goes here!
         };
 
         if (previousRouteName !== currentRouteName) {
-          // Save the current route name for later comparison
-          routeNameRef.current = currentRouteName;
-          
           // Replace the line below to add the tracker from a mobile analytics SDK
           await trackScreenView(currentRouteName);
         }
+
+        // Save the current route name for later comparison
+        routeNameRef.current = currentRouteName;
+      }}
+    />
+  );
+}
+// codeblock-focus-end
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Screen tracking for anylytics" snack
+import * as React from 'react';
+import { View } from 'react-native';
+// codeblock-focus-start
+import {
+  NavigationContainer,
+  useNavigation,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
+// codeblock-focus-end
+import { Button } from '@react-navigation/elements';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function Home() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.navigate('Settings')}>
+        Go to Settings
+      </Button>
+    </View>
+  );
+}
+
+function Settings() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+// codeblock-focus-start
+
+export default function App() {
+  const navigationRef = useNavigationContainerRef();
+  const routeNameRef = React.useRef();
+
+  return (
+    <NavigationContainer
+      ref={navigationRef}
+      onReady={() => {
+        routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+      }}
+      onStateChange={async () => {
+        const previousRouteName = routeNameRef.current;
+        const currentRouteName = navigationRef.current.getCurrentRoute().name;
+        const trackScreenView = () => {
+          // Your implementation of analytics goes here!
+        };
+
+        if (previousRouteName !== currentRouteName) {
+          // Replace the line below to add the tracker from a mobile analytics SDK
+          await trackScreenView(currentRouteName);
+        }
+
+        // Save the current route name for later comparison
+        routeNameRef.current = currentRouteName;
       }}
     >
       {/* ... */}
+      // codeblock-focus-end
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Settings" component={Settings} />
+      </Stack.Navigator>
+      // codeblock-focus-start
     </NavigationContainer>
   );
-};
+}
+// codeblock-focus-end
 ```
+
+</TabItem>
+</Tabs>

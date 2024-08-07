@@ -14,7 +14,7 @@ Example:
 ```js
 import * as React from 'react';
 import { ScrollView } from 'react-native';
-import { useLinking , NavigationContainer } from '@react-navigation/native';
+import { useLinking, NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   const ref = React.useRef();
@@ -24,7 +24,7 @@ export default function App() {
     config: {
       screens: {
         Chat: 'feed/:sort',
-      }
+      },
     },
   });
 
@@ -34,7 +34,7 @@ export default function App() {
   React.useEffect(() => {
     getInitialState()
       .catch(() => {})
-      .then(state => {
+      .then((state) => {
         if (state !== undefined) {
           setInitialState(state);
         }
@@ -73,7 +73,7 @@ useLinking(ref, {
   config: {
     screens: {
       Chat: 'feed/:sort',
-    }
+    },
   },
 });
 ```
@@ -195,12 +195,12 @@ useLinking(ref, {
   config: {
     screens: {
       Chat: 'feed/:sort',
-    }
+    },
   },
   getStateFromPath(path, config) {
     // Return a state object here
     // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
-  }
+  },
 });
 ```
 
@@ -216,11 +216,11 @@ useLinking(ref, {
   config: {
     screens: {
       Chat: 'feed/:sort',
-    }
+    },
   },
   getPathFromState(state, config) {
     // Return a path string here
     // You can also reuse the default logic by importing `getPathFromState` from `@react-navigation/native`
-  }
+  },
 });
 ```

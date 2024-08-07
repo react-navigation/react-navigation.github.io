@@ -5,7 +5,7 @@ sidebar_label: TabNavigator
 ---
 
 ```js
-TabNavigator(RouteConfigs, TabNavigatorConfig)
+TabNavigator(RouteConfigs, TabNavigatorConfig);
 ```
 
 ## RouteConfigs
@@ -15,8 +15,8 @@ The route configs object is a mapping from route name to a route config, which t
 ## TabNavigatorConfig
 
 - `tabBarComponent` - Component to use as the tab bar, e.g. `TabBarBottom`
-(this is the default on iOS), `TabBarTop`
-(this is the default on Android).
+  (this is the default on iOS), `TabBarTop`
+  (this is the default on Android).
 - `tabBarPosition` - Position of the tab bar, can be `'top'` or `'bottom'`.
 - `swipeEnabled` - Whether to allow swiping between tabs.
 - `animationEnabled` - Whether to animate when changing tabs.
@@ -84,7 +84,7 @@ tabBarOptions: {
     fontSize: 12,
   },
   tabStyle: {
-    width: 100,    
+    width: 100,
   },
   style: {
     backgroundColor: 'blue',
@@ -132,12 +132,12 @@ The navigator component created by `TabNavigator(...)` takes the following props
 
 - `screenProps` - Pass down extra options to child screens and navigation options, for example:
 
- ```js
- const TabNav = TabNavigator({
-   // config
- });
+```js
+const TabNav = TabNavigator({
+  // config
+});
 
- <TabNav
-   screenProps={/* this prop will get passed to the screen components as this.props.screenProps */}
- />
- ```
+<TabNav
+  screenProps={/* this prop will get passed to the screen components as this.props.screenProps */}
+/>
+```

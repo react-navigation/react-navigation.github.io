@@ -1,18 +1,15 @@
-import * as React from 'react';
+import { useColorMode } from '@docusaurus/theme-common';
 import { getActionFromState, getStateFromPath } from '@react-navigation/core';
-import escape from 'escape-html';
+import { Highlight, themes } from 'prism-react-renderer';
+import * as React from 'react';
 import Editor from 'react-simple-code-editor';
-import Highlight, { defaultProps } from 'prism-react-renderer';
-import github from 'prism-react-renderer/themes/github';
-import dracula from 'prism-react-renderer/themes/dracula';
-import {useColorMode} from '@docusaurus/theme-common';
 import RouteMap from './RouteMap';
 
 const parse = (value) => eval(`(function() { return ${value}; }())`);
 
 function Code({ code, theme, language }) {
   return (
-    <Highlight {...defaultProps} code={code} theme={theme} language={language}>
+    <Highlight code={code} theme={theme} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre className={className} style={{ ...style, ...styles.json }}>
           {tokens.map((line, i) => (
@@ -29,8 +26,8 @@ function Code({ code, theme, language }) {
 }
 
 export default function LinkingTester() {
-  const {colorMode} = useColorMode();
-  const theme = colorMode === 'dark' ? dracula : github;
+  const { colorMode } = useColorMode();
+  const theme = colorMode === 'dark' ? themes.dracula : themes.github;
 
   const [rawConfig, setRawConfig] = React.useState(
     `{
@@ -91,7 +88,7 @@ export default function LinkingTester() {
           }
         }}
         highlight={(code) => (
-          <Highlight {...defaultProps} code={code} theme={theme} language="jsx">
+          <Highlight code={code} theme={theme} language="jsx">
             {({ tokens, getLineProps, getTokenProps }) =>
               tokens.map((line, i) => (
                 <div {...getLineProps({ line, key: i })}>

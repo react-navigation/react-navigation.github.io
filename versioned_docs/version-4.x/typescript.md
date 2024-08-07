@@ -98,10 +98,9 @@ type Params = { userId: string };
 
 type ScreenProps = { language: string };
 
-const ProfileScreen: NavigationStackScreenComponent<
-  Params,
-  ScreenProps
-> = props => {
+const ProfileScreen: NavigationStackScreenComponent<Params, ScreenProps> = (
+  props
+) => {
   // ...
 };
 

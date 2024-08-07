@@ -88,7 +88,7 @@ import { navigationRef, isReadyRef } from './RootNavigation';
 export default function App() {
   React.useEffect(() => {
     return () => {
-      isReadyRef.current = false
+      isReadyRef.current = false;
     };
   }, []);
 

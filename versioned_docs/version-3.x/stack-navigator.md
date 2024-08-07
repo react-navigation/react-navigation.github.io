@@ -44,42 +44,41 @@ createStackNavigator({
 
 Options for the router:
 
-* `initialRouteName` - Sets the default screen of the stack. Must match one of the keys in route configs.
-* `initialRouteParams` - The params for the initial route
-* `initialRouteKey` - Optional identifier of the initial route
-* `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
-* `defaultNavigationOptions` - Default navigation options to use for screens
+- `initialRouteName` - Sets the default screen of the stack. Must match one of the keys in route configs.
+- `initialRouteParams` - The params for the initial route
+- `initialRouteKey` - Optional identifier of the initial route
+- `navigationOptions` - Navigation options for the navigator itself, to configure a parent navigator
+- `defaultNavigationOptions` - Default navigation options to use for screens
 
-* `paths` - A mapping of overrides for the paths set in the route configs
-* `disableKeyboardHandling` - If true, the keyboard will NOT automatically dismiss when navigating to a new screen. Defaults to false. This is ignored in the web platform.
+- `paths` - A mapping of overrides for the paths set in the route configs
+- `disableKeyboardHandling` - If true, the keyboard will NOT automatically dismiss when navigating to a new screen. Defaults to false. This is ignored in the web platform.
 
 Visual options:
 
-* `mode` - Defines the style for rendering and transitions:
-  * `card` - Use the standard iOS and Android screen transitions. This is the default.
-  * `modal` - Make the screens slide in from the bottom which is a common iOS pattern. Only works on iOS, has no effect on Android.
-* `headerMode` - Specifies how the header should be rendered:
-  * `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
-  * `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
-  * `none` - No header will be rendered.
-* `headerBackTitleVisible` - A reasonable default is supplied for whether the back button title should be visible or not, but if you want to override that you can use `true` or `false` in this option.
-* `headerTransitionPreset` - Specifies how the header should transition from one screen to another when `headerMode: float` is enabled.
-  * `fade-in-place` - Header components cross-fade without moving, similar to the Twitter, Instagram, and Facebook app for iOS. This is the default value.
-  * `uikit` - An approximation of the default behavior for iOS.
-* `headerLayoutPreset` - Specifies how to lay out the header components.
-  * `left` - Anchor the title to the left, near the back button or other left component. This is the default on Android. When used on iOS, the header back title is hidden. Content from the left component will overflow underneath the title, if you need to adjust this you can use `headerLeftContainerStyle` and `headerTitleContainerStyle`. Additionally, this alignment is incompatible with `headerTransitionPreset: 'uikit'`.
-  * `center` - Center the title, this is the default on iOS.
-* `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
-* `cardShadowEnabled` - Use this prop to have visible shadows during transitions. Defaults to `true`
-* `cardOverlayEnabled` - Use this prop to have visible stack card overlays during transitions. Defaults to `false`.
-* `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](
-<https://github.com/react-navigation/react-navigation/blob/3.x/flow/react-navigation.js>)). Provided function will be passed the following arguments:
-  * `transitionProps` - Transition props for the new screen.
-  * `prevTransitionProps` - Transitions props for the old screen.
-  * `isModal` - Boolean specifying if screen is modal.
-* `onTransitionStart` - Function to be invoked when the card transition animation is about to start.
-* `onTransitionEnd` - Function to be invoked once the card transition animation completes.
-* `transparentCard` - *Experimental* - Prop to keep all cards in the stack visible and add a transparent background instead of a white one. This is useful to implement things like modal dialogs where the previous scene should still be visible underneath the current one.
+- `mode` - Defines the style for rendering and transitions:
+  - `card` - Use the standard iOS and Android screen transitions. This is the default.
+  - `modal` - Make the screens slide in from the bottom which is a common iOS pattern. Only works on iOS, has no effect on Android.
+- `headerMode` - Specifies how the header should be rendered:
+  - `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
+  - `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
+  - `none` - No header will be rendered.
+- `headerBackTitleVisible` - A reasonable default is supplied for whether the back button title should be visible or not, but if you want to override that you can use `true` or `false` in this option.
+- `headerTransitionPreset` - Specifies how the header should transition from one screen to another when `headerMode: float` is enabled.
+  - `fade-in-place` - Header components cross-fade without moving, similar to the Twitter, Instagram, and Facebook app for iOS. This is the default value.
+  - `uikit` - An approximation of the default behavior for iOS.
+- `headerLayoutPreset` - Specifies how to lay out the header components.
+  - `left` - Anchor the title to the left, near the back button or other left component. This is the default on Android. When used on iOS, the header back title is hidden. Content from the left component will overflow underneath the title, if you need to adjust this you can use `headerLeftContainerStyle` and `headerTitleContainerStyle`. Additionally, this alignment is incompatible with `headerTransitionPreset: 'uikit'`.
+  - `center` - Center the title, this is the default on iOS.
+- `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
+- `cardShadowEnabled` - Use this prop to have visible shadows during transitions. Defaults to `true`
+- `cardOverlayEnabled` - Use this prop to have visible stack card overlays during transitions. Defaults to `false`.
+- `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](https://github.com/react-navigation/react-navigation/blob/3.x/flow/react-navigation.js)). Provided function will be passed the following arguments:
+  - `transitionProps` - Transition props for the new screen.
+  - `prevTransitionProps` - Transitions props for the old screen.
+  - `isModal` - Boolean specifying if screen is modal.
+- `onTransitionStart` - Function to be invoked when the card transition animation is about to start.
+- `onTransitionEnd` - Function to be invoked once the card transition animation completes.
+- `transparentCard` - _Experimental_ - Prop to keep all cards in the stack visible and add a transparent background instead of a white one. This is useful to implement things like modal dialogs where the previous scene should still be visible underneath the current one.
 
 ### `navigationOptions` for screens inside of the navigator
 
@@ -117,7 +116,7 @@ StackNavigator({
     screen: AScreen,
     navigationOptions: () => ({
       title: `A`,
-      headerBackTitle: null
+      headerBackTitle: null,
     }),
   },
   B: {
@@ -125,7 +124,7 @@ StackNavigator({
     navigationOptions: () => ({
       title: `B`,
     }),
-  }
+  },
 });
 ```
 
@@ -140,7 +139,7 @@ StackNavigator({
     navigationOptions: () => ({
       title: `A`,
       headerBackTitle: 'A much too long text for back button from B to A',
-      headerTruncatedBackTitle: `to A`
+      headerTruncatedBackTitle: `to A`,
     }),
   },
   B: {
@@ -148,7 +147,7 @@ StackNavigator({
     navigationOptions: () => ({
       title: `B`,
     }),
-  }
+  },
 });
 ```
 
@@ -218,8 +217,8 @@ Whether you can use gestures to dismiss this screen. Defaults to true on iOS, fa
 
 Object to override the distance of touch start from the edge of the screen to recognize gestures. It takes the following properties:
 
-* `horizontal` - *number* - Distance for horizontal direction. Defaults to 25.
-* `vertical` - *number* - Distance for vertical direction. Defaults to 135.
+- `horizontal` - _number_ - Distance for horizontal direction. Defaults to 25.
+- `vertical` - _number_ - Distance for vertical direction. Defaults to 135.
 
 #### `gestureDirection`
 
@@ -240,7 +239,7 @@ const Store = createStackNavigator({
 
 The navigator component created by `createStackNavigator(...)` takes the following props:
 
-* `screenProps` - Pass down extra options to child screens, for example:
+- `screenProps` - Pass down extra options to child screens, for example:
 
 ```js
 const SomeStack = createStackNavigator({
@@ -278,7 +277,7 @@ const ModalNavigator = createStackNavigator(
         easing: Easing.out(Easing.poly(4)),
         timing: Animated.timing,
       },
-      screenInterpolator: sceneProps => {
+      screenInterpolator: (sceneProps) => {
         const { layout, position, scene } = sceneProps;
         const { index } = scene;
 
@@ -307,17 +306,21 @@ Header transitions can also be configured using `headerLeftInterpolator`, `heade
 We can't set the `StackNavigatorConfig`'s `mode` dynamically. Instead we are going to use a custom `transitionConfig` to render the specific transition we want - modal or card - on a screen by screen basis.
 
 ```js
-import { createStackNavigator, StackViewTransitionConfigs } from 'react-navigation';
+import {
+  createStackNavigator,
+  StackViewTransitionConfigs,
+} from 'react-navigation';
 
 /* The screens you add to IOS_MODAL_ROUTES will have the modal transition.  */
 const IOS_MODAL_ROUTES = ['OptionsScreen'];
 
 let dynamicModalTransition = (transitionProps, prevTransitionProps) => {
   const isModal = IOS_MODAL_ROUTES.some(
-    screenName =>
+    (screenName) =>
       screenName === transitionProps.scene.route.routeName ||
-      (prevTransitionProps && screenName === prevTransitionProps.scene.route.routeName)
-  )
+      (prevTransitionProps &&
+        screenName === prevTransitionProps.scene.route.routeName)
+  );
   return StackViewTransitionConfigs.defaultTransitionConfig(
     transitionProps,
     prevTransitionProps,

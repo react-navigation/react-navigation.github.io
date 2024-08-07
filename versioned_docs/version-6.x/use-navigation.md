@@ -46,7 +46,7 @@ class MyBackButton extends React.Component {
 }
 
 // Wrap and export
-export default function(props) {
+export default function (props) {
   const navigation = useNavigation();
 
   return <MyBackButton {...props} navigation={navigation} />;

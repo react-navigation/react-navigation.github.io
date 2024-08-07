@@ -78,10 +78,7 @@ This also applies to the `index` property: `index` should be the last route in a
 ```js
 navigation.reset({
   index: 0,
-  routes: [
-    { name: 'Home' },
-    { name: 'Profile' }
-  ],
+  routes: [{ name: 'Home' }, { name: 'Profile' }],
 });
 ```
 
@@ -115,6 +112,10 @@ Here, React Navigation filled in the missing bits such as keys, route names, ind
 
 It's also possible to provide invalid data such as non-existent screens and it'll be fixed automatically. While it's not recommended to write code with invalid state objects, it can be super useful if you do things like [state persistence](state-persistence.md), where the configured screens might have changed after an update, which could cause problems if React Navigation didn't fix the state object automatically.
 
-> If you want React Navigation to fix invalid state, you need to make sure that you don't have `stale: false` in the state object. State objects with `stale: false` are assumed to be valid state objects and React Navigation won't attempt to fix them.
+:::tip
+
+If you want React Navigation to fix invalid state, you need to make sure that you don't have `stale: false` in the state object. State objects with `stale: false` are assumed to be valid state objects and React Navigation won't attempt to fix them.
+
+:::
 
 When you're providing a state object in [`initialState`](navigation-container.md#initial-state), React Navigation will always assume that it's a stale state object, which makes sure that things like state persistence work smoothly without extra manipulation of the state object.

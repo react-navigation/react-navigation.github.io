@@ -97,8 +97,8 @@ header: ({ scene, previous, navigation }) => {
     options.headerTitle !== undefined
       ? options.headerTitle
       : options.title !== undefined
-      ? options.title
-      : scene.route.routeName;
+        ? options.title
+        : scene.route.routeName;
 
   return (
     <MyHeader

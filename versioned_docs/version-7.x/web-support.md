@@ -1,25 +1,153 @@
 ---
 id: web-support
-title: React Navigation on the Web
+title: React Navigation on Web
 sidebar_label: Web support
 ---
 
-> Note: Support for web is experimental and a work in progress. It has bugs, is missing many features and the API for web integration may change in minor versions. Please help us test it and open bug reports if you encounter a bug.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-React Navigation's web support currently requires using [React Native for Web](https://github.com/necolas/react-native-web). This approach lets us reuse the same code on both React Native and Web.
+React Navigation has built-in support for the Web platform. This allows you to use the same navigation logic in your React Native app as well as on the web. The navigators require using [React Native for Web](https://github.com/necolas/react-native-web) to work on the web.
 
-Currently, the following features are available:
+## Pre-requisites
 
-- [URL integration in browser](configuring-links.md)
-- [Accessible links](link.md)
-- [Server rendering](server-rendering.md)
+While Web support works out of the box, there are some things to configure to ensure a good experience on the web:
 
-It's important to use links as the primary way of navigation instead of navigation actions such as `navigation.navigate`. It'll ensure that your links are properly usable on web.
+1. [**Configure linking**](configuring-links.md)
 
-Some of the navigators are also configured differently on web or provide additional web specific features:
+   Configuring linking allows React Navigation to integrate with the browser's URL bar. This is crucial for web apps to have proper URLs for each screen.
 
-1. The [drawer](drawer-navigator.md) and [bottom tab](bottom-tab-navigator.md) navigators show hyperlinks in the drawer sidebar and tab bar respectively.
-2. Swipe gestures are not available on [drawer](drawer-navigator.md) and [stack](stack-navigator.md) navigators when using on the web.
-3. By default, [stack](stack-navigator.md) navigator disables page transition animations, but it can be re-enabled by specifying `animationEnabled: true`.
+2. [**Use Button or Link components**](link.md)
 
-> Note: Unlike React Navigation 4, you don't need to install a separate package to use web integration when using React Native for Web. If you have the `@react-navigation/web` package installed, please uninstall it because it cannot be used with React Navigation 6.
+   You may be familiar with using `navigation.navigate` to navigate between screens. But it's important to avoid using it when supporting the web. Instead, use the `Link` or [`Button`](elements.md#button) components to navigate between screens. This ensures that an anchor tag is rendered which provides the expected behavior on the web.
+
+3. [**Server rendering**](server-rendering.md)
+
+   Currently, React Navigation works best with fully client-side rendered apps. However, minimal server-side rendering support is available. So you can optionally choose to server render your app.
+
+:::note
+
+In React Navigation 4, it was necessary to install a separate package called `@react-navigation/web` to use web integration. This package is no longer needed in recent versions of React Navigation. If you have it installed, make sure to uninstall it to avoid conflicts.
+
+:::
+
+## Lazy loading screens
+
+By default, screen components are bundled in the main bundle. This can lead to a large bundle size if you have many screens. It's important to keep the bundle size small on the web for faster loading times.
+
+To reduce the bundle size, you can use [dynamic `import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) with [`React.lazy`](https://react.dev/reference/react/lazy) to lazy load screens:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Lazy loading screens" snack
+import { Suspense, lazy } from 'react';
+
+const MyStack = createNativeStackNavigator({
+  screenLayout: ({ children }) => (
+    <Suspense fallback={<Loading />}>{children}</Suspense>
+  ),
+  screens: {
+    Home: {
+      component: lazy(() => import('./HomeScreen')),
+    },
+    Profile: {
+      component: lazy(() => import('./ProfileScreen')),
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Lazy loading screens" snack
+import { Suspense, lazy } from 'react';
+
+const HomeScreen = lazy(() => import('./HomeScreen'));
+const ProfileScreen = lazy(() => import('./ProfileScreen'));
+
+function MyStack() {
+  return (
+    <Stack.Navigator
+      screenLayout={({ children }) => (
+        <Suspense fallback={<Loading />}>{children}</Suspense>
+      )}
+    >
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
+  );
+}
+```
+
+:::warning
+
+Make sure to use `React.lazy` **outside** the component containing the navigator configuration. Otherwise, it will return a new component on each render, causing the [screen to be unmounted and remounted](troubleshooting.md#screens-are-unmountingremounting-during-navigation) every time the component rerenders.
+
+:::
+
+</TabItem>
+</Tabs>
+
+This will split the screen components into separate chunks (depending on your bundler) which are loaded on-demand when the screen is rendered. This can significantly reduce the initial bundle size.
+
+In addition, you can use the [`screenLayout`](navigator.md#screen-layout) to wrap your screens in a [`<Suspense>`](https://react.dev/reference/react/Suspense) boundary. The suspense fallback can be used to show a loading indicator and will be shown while the screen component is being loaded.
+
+## Web-specific behavior
+
+Some of the navigators have different behavior on the web compared to native platforms:
+
+1. [**Native Stack Navigator**](stack-navigator.md)
+
+   Native Stack Navigator uses the platform's primitives to handle animations and gestures on native platforms. However, animations and gestures are not supported on the web.
+
+2. [**Stack Navigator**](stack-navigator.md)
+
+   Stack Navigator uses [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) to handle swipe gestures on native platforms. However, gestures are not supported on the web.
+
+   In addition, screen transitions are disabled by default on the web. You can enable them by setting `animationEnabled: true` in the navigator's options.
+
+3. [**Drawer Navigator**](drawer-navigator.md)
+
+   Drawer Navigator uses [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) to handle swipe gestures and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) for animations on native platforms. However, gestures are not supported on the web, and animations are handled using CSS transitions.
+
+In addition, navigators render hyperlinks on the web when possible, such as in the drawer sidebar, tab bar, stack navigator's back button, etc.
+
+Since `react-native-gesture-handler` and `react-native-reanimated` are not used on the web, avoid importing them in your own code to reduce the bundle size unless you need them for your components. You can use `.native.js` or `.native.ts` extensions for code specific to native platforms.
+
+## Configuring hosting providers
+
+React Navigation is designed for Single Page Applications (SPAs). This usually means that the `index.html` file needs to be served for all routes.
+
+During development, the bundler such as Webpack or Metro automatically handles this. However, when deploying the site, you may need to configure redirects to ensure that the `index.html` file is served for all routes to avoid 404 errors.
+
+Here are instructions for some of the popular hosting providers:
+
+### Netlify
+
+To handle redirects on Netlify, add the following in the `netlify.toml` file at the root of your project:
+
+```toml
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+```
+
+### Vercel
+
+To handle redirects on Vercel, add the following in the `vercel.json` file at the root of your project:
+
+```json
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
+```
+
+### GitHub Pages
+
+GitHub Pages doesn't support such redirection configuration for SPAs. There are a couple of ways to work around this:
+
+- Rename your `index.html` to `404.html`. This will serve the `404.html` file for all routes. However, this will cause a 404 status code to be returned for all routes. So it's not ideal for SEO.
+- Write a script that copies the `index.html` file to all routes in the build output. For example, if your app has routes `/`, `/about`, and `/contact`, you can copy the `index.html` file to `about.html` and `contact.html`.

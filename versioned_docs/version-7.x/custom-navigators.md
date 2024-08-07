@@ -16,7 +16,6 @@ We include some commonly needed navigators such as:
 - [`createDrawerNavigator`](drawer-navigator.md) - Provides a drawer that slides in from the left of the screen by default.
 - [`createBottomTabNavigator`](bottom-tab-navigator.md) - Renders a tab bar that lets the user switch between several screens.
 - [`createMaterialTopTabNavigator`](material-top-tab-navigator.md) - Renders tab view which lets the user switch between several screens using swipe gesture or the tab bar.
-- [`createMaterialBottomTabNavigator`](material-bottom-tab-navigator.md) - Renders tab view which lets the user switch between several screens using swipe gesture or the tab bar.
 
 ## API for building custom navigators
 
@@ -41,7 +40,7 @@ The hook returns an object with following properties:
 - `navigation` - The navigation object containing various helper methods for the navigator to manipulate the [navigation state](navigation-state.md). This isn't the same as the navigation object for the screen and includes some helpers such as `emit` to emit events to the screens.
 - `descriptors` - This is an object containing descriptors for each route with the route keys as its properties. The descriptor for a route can be accessed by `descriptors[route.key]`. Each descriptor contains the following properties:
 
-  - `navigation` - The navigation prop for the screen. You don't need to pass this to the screen manually. But it's useful if we're rendering components outside the screen that need to receive `navigation` prop as well, such as a header component.
+  - `navigation` - The navigation object for the screen. You don't need to pass this to the screen manually. But it's useful if we're rendering components outside the screen that need to receive `navigation` prop as well, such as a header component.
   - `options` - A getter which returns the options such as `title` for the screen if they are specified.
   - `render` - A function which can be used to render the actual screen. Calling `descriptors[route.key].render()` will return a React element containing the screen content. It's important to use this method to render a screen, otherwise any child navigators won't be connected to the navigation tree properly.
 
@@ -58,17 +57,25 @@ import {
 } from '@react-navigation/native';
 
 function TabNavigator({
+  id,
   initialRouteName,
   children,
+  layout,
+  screenListeners,
   screenOptions,
+  screenLayout,
   tabBarStyle,
   contentStyle,
 }) {
   const { state, navigation, descriptors, NavigationContent } =
     useNavigationBuilder(TabRouter, {
-      children,
-      screenOptions,
+      id,
       initialRouteName,
+      children,
+      layout,
+      screenListeners,
+      screenOptions,
+      screenLayout,
     });
 
   return (
@@ -78,22 +85,23 @@ function TabNavigator({
           <Pressable
             key={route.key}
             onPress={() => {
+              const isFocused = state.index === index;
               const event = navigation.emit({
                 type: 'tabPress',
                 target: route.key,
                 canPreventDefault: true,
               });
 
-              if (!event.defaultPrevented) {
+              if (!isFocused && !event.defaultPrevented) {
                 navigation.dispatch({
-                  ...TabActions.jumpTo(route.name),
+                  ...TabActions.jumpTo(route.name, route.params),
                   target: state.key,
                 });
               }
             }}
             style={{ flex: 1 }}
           >
-            <Text>{descriptors[route.key].options.title || route.name}</Text>
+            <Text>{descriptors[route.key].options.title ?? route.name}</Text>
           </Pressable>
         ))}
       </View>
@@ -145,7 +153,9 @@ import {
 
 // ...
 
-export const createMyNavigator = createNavigatorFactory(TabNavigator);
+export function createMyNavigator(config) {
+  return createNavigatorFactory(TabNavigator)(config);
+}
 ```
 
 Then it can be used like this:
@@ -181,19 +191,22 @@ import {
   View,
   Text,
   Pressable,
-  StyleProp,
-  ViewStyle,
+  type StyleProp,
+  type ViewStyle,
   StyleSheet,
 } from 'react-native';
 import {
   createNavigatorFactory,
-  DefaultNavigatorOptions,
-  ParamListBase,
   CommonActions,
-  TabActionHelpers,
-  TabNavigationState,
+  type DefaultNavigatorOptions,
+  type NavigatorTypeBagBase,
+  type ParamListBase,
+  type StaticConfig,
+  type TabActionHelpers,
+  type TabNavigationState,
   TabRouter,
-  TabRouterOptions,
+  type TabRouterOptions,
+  type TypedNavigator,
   useNavigationBuilder,
 } from '@react-navigation/native';
 
@@ -230,9 +243,14 @@ type Props = DefaultNavigatorOptions<
   TabNavigationConfig;
 
 function TabNavigator({
+  id,
   initialRouteName,
   children,
+  layout,
+  screenListeners,
   screenOptions,
+  screenLayout,
+  backBehavior,
   tabBarStyle,
   contentStyle,
 }: Props) {
@@ -244,28 +262,34 @@ function TabNavigator({
       TabNavigationOptions,
       TabNavigationEventMap
     >(TabRouter, {
-      children,
-      screenOptions,
+      id,
       initialRouteName,
+      children,
+      layout,
+      screenListeners,
+      screenOptions,
+      screenLayout,
+      backBehavior,
     });
 
   return (
     <NavigationContent>
       <View style={[{ flexDirection: 'row' }, tabBarStyle]}>
-        {state.routes.map((route) => (
+        {state.routes.map((route, index) => (
           <Pressable
             key={route.key}
             onPress={() => {
+              const isFocused = state.index === index;
               const event = navigation.emit({
                 type: 'tabPress',
                 target: route.key,
                 canPreventDefault: true,
                 data: {
-                  isAlreadyFocused: route.key === state.routes[state.index].key,
+                  isAlreadyFocused: isFocused,
                 },
               });
 
-              if (!event.defaultPrevented) {
+              if (!isFocused && !event.defaultPrevented) {
                 navigation.dispatch({
                   ...CommonActions.navigate(route),
                   target: state.key,
@@ -297,12 +321,28 @@ function TabNavigator({
   );
 }
 
-export default createNavigatorFactory<
-  TabNavigationState<ParamListBase>,
-  TabNavigationOptions,
-  TabNavigationEventMap,
-  typeof TabNavigator
->(TabNavigator);
+export function createMyNavigator<
+  const ParamList extends ParamListBase,
+  const NavigatorID extends string | undefined = undefined,
+  const TypeBag extends NavigatorTypeBagBase = {
+    ParamList: ParamList;
+    NavigatorID: NavigatorID;
+    State: TabNavigationState<ParamList>;
+    ScreenOptions: TabNavigationOptions;
+    EventMap: TabNavigationEventMap;
+    NavigationList: {
+      [RouteName in keyof ParamList]: TabNavigationProp<
+        ParamList,
+        RouteName,
+        NavigatorID
+      >;
+    };
+    Navigator: typeof TabNavigator;
+  },
+  const Config extends StaticConfig<TypeBag> = StaticConfig<TypeBag>,
+>(config?: Config): TypedNavigator<TypeBag, Config> {
+  return createNavigatorFactory(TabNavigator)(config);
+}
 ```
 
 ## Extending Navigators
@@ -319,18 +359,26 @@ import {
 import { BottomTabView } from '@react-navigation/bottom-tabs';
 
 function BottomTabNavigator({
+  id,
   initialRouteName,
-  backBehavior,
   children,
+  layout,
+  screenListeners,
   screenOptions,
+  screenLayout,
+  backBehavior,
   ...rest
 }) {
   const { state, descriptors, navigation, NavigationContent } =
     useNavigationBuilder(TabRouter, {
+      id,
       initialRouteName,
-      backBehavior,
       children,
+      layout,
+      screenListeners,
       screenOptions,
+      screenLayout,
+      backBehavior,
     });
 
   return (
@@ -345,7 +393,9 @@ function BottomTabNavigator({
   );
 }
 
-export default createNavigatorFactory(BottomTabNavigator);
+export function createMyNavigator(config) {
+  return createNavigatorFactory(TabNavigator)(config);
+}
 ```
 
 Now, we can customize it to add additional functionality or change the behavior. For example, use a [custom router](custom-routers.md) instead of the default `TabRouter`:
@@ -357,10 +407,14 @@ import MyRouter from './MyRouter';
 
 const { state, descriptors, navigation, NavigationContent } =
   useNavigationBuilder(MyRouter, {
+    id,
     initialRouteName,
-    backBehavior,
     children,
+    layout,
+    screenListeners,
     screenOptions,
+    screenLayout,
+    backBehavior,
   });
 
 // ...

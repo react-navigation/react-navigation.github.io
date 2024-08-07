@@ -40,7 +40,7 @@ class MyButton extends React.Component {
 }
 
 // Wrap and export
-export default function(props) {
+export default function (props) {
   const theme = useTheme();
 
   return <MyButton {...props} theme={theme} />;

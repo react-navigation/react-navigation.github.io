@@ -88,13 +88,16 @@ We also know that `createStackNavigator` and related functions return React comp
 Navigators are initialized with `create*Navigator(routeConfig, navigatorConfig)`. Inside of `navigatorConfig` we can add a `navigationOptions` property. These `navigationOptions` are the default options for screens within that navigator ([read more about sharing common navigationOptions](headers.md#sharing-common-navigationoptions-across-screens)), they do not refer to the `navigationOptions` for that navigator &mdash; as we have seen above, we set the `navigationOptions` property directly on the navigator for that use case.
 
 ```js
-const HomeStack = createStackNavigator({ A }, {
-  // This is the default for screens in the stack, so `A` will
-  // use this title unless it overrides it
-  navigationOptions: {
-    title: 'Welcome'
+const HomeStack = createStackNavigator(
+  { A },
+  {
+    // This is the default for screens in the stack, so `A` will
+    // use this title unless it overrides it
+    navigationOptions: {
+      title: 'Welcome',
+    },
   }
-})
+);
 
 // These are the options that are used by the navigator that renders
 // the HomeStack, in our example above this is a tab navigator.

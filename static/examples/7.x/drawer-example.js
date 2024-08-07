@@ -31,7 +31,7 @@ const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
   return (
-    <Drawer.Navigator useLegacyImplementation initialRouteName="Feed">
+    <Drawer.Navigator initialRouteName="Feed">
       <Drawer.Screen
         name="Feed"
         component={Feed}

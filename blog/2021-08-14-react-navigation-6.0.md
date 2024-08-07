@@ -69,7 +69,7 @@ We simplified many APIs with React Navigation 6 to address common use cases. For
 
 ### New `Group` component for organization
 
-The [`Group`](/docs/group) component helps you organize screens inside your navigators and share common `screenOptions` between the `Group`s.  Passing `screenOptions` to a group configures all the screens inside that group to use these options. You can override `Group` options by passing `options` to each Screen component, similar to how you can with `screenOptions` on Navigator. You can also nest `Group` components inside other `Group` components. They are lightweight and don’t render anything - like fragments, so they won’t affect performance.
+The [`Group`](/docs/group) component helps you organize screens inside your navigators and share common `screenOptions` between the `Group`s. Passing `screenOptions` to a group configures all the screens inside that group to use these options. You can override `Group` options by passing `options` to each Screen component, similar to how you can with `screenOptions` on Navigator. You can also nest `Group` components inside other `Group` components. They are lightweight and don’t render anything - like fragments, so they won’t affect performance.
 
 In this code snippet, you can see that we group regular screens under one group and modal screens under another group:
 
@@ -82,10 +82,7 @@ function App() {
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen
-          name="CreatePost"
-          component={CreatePostScreen}
-        />
+        <Stack.Screen name="CreatePost" component={CreatePostScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );

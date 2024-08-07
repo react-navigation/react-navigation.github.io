@@ -22,7 +22,11 @@ The package exposes the following APIs:
 
 This hook provides integration with [Flipper](https://fbflipper.com/) for React Native apps.
 
-> This doesn't work in Expo managed apps since they don't support Flipper.
+:::warning
+
+This doesn't work in Expo managed apps since they don't support Flipper.
+
+:::
 
 To be able to use this hook, you need to:
 
@@ -43,7 +47,10 @@ To use the hook, import it and pass a `ref` to the `NavigationContainer` as its 
 
 ```js
 import * as React from 'react';
-import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import { useFlipper } from '@react-navigation/devtools';
 
 export default function App() {
@@ -73,7 +80,10 @@ To use the hook, import it and pass a `ref` to the `NavigationContainer` as its 
 
 ```js
 import * as React from 'react';
-import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import { useReduxDevToolsExtension } from '@react-navigation/devtools';
 
 export default function App() {

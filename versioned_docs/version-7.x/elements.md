@@ -4,6 +4,9 @@ title: Elements Library
 sidebar_label: Elements
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 A component library containing the UI elements and helpers used in React Navigation. It can be useful if you're building your own navigator, or want to reuse a default functionality in your app.
 
 ## Installation
@@ -11,18 +14,194 @@ A component library containing the UI elements and helpers used in React Navigat
 To use this package, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/elements`](https://github.com/react-navigation/react-navigation/tree/main/packages/elements):
 
 ```bash npm2yarn
-npm install @react-navigation/elements
+npm install @react-navigation/elements@next
 ```
 
 ## Components
 
 ### `Header`
 
-A component that can be used as a header. It accepts the following props:
+A component that can be used as a header. This is used by all the navigators by default.
+
+Usage:
+
+```js name="React Navigation Elements Header" snack
+import * as React from 'react';
+import { SafeAreaProviderCompat } from '@react-navigation/elements';
+import { NavigationContainer } from '@react-navigation/native';
+// codeblock-focus-start
+import { Header } from '@react-navigation/elements';
+
+function MyHeader() {
+  return <Header title="My app" />;
+}
+// codeblock-focus-end
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <SafeAreaProviderCompat>
+        <MyHeader />
+      </SafeAreaProviderCompat>
+    </NavigationContainer>
+  );
+}
+```
+
+To use the header in a navigator, you can use the `header` option in the screen options:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Header with Native Stack" snack
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// codeblock-focus-start
+import { Header, getHeaderTitle } from '@react-navigation/elements';
+
+// codeblock-focus-end
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyStack = createNativeStackNavigator({
+  screenOptions: {
+    header: ({ options, route }) => (
+      <Header {...options} title={getHeaderTitle(options, route.name)} />
+    ),
+  },
+  screens: {
+    Home: HomeScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Header with Native Stack" snack
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// codeblock-focus-start
+import { Header, getHeaderTitle } from '@react-navigation/elements';
+
+const Stack = createNativeStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        header: ({ options, route }) => (
+          <Header {...options} title={getHeaderTitle(options, route.name)} />
+        ),
+      }}
+    >
+      <Stack.Screen name="Home" component={HomeScreen} />
+    </Stack.Navigator>
+  );
+}
+// codeblock-focus-end
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+:::note
+
+This doesn't replicate the behavior of the header in stack and native stack navigators as the stack navigator also includes animations, and the native stack navigator header is provided by the native platform.
+
+:::
+
+It accepts the following props:
 
 #### `headerTitle`
 
-String or a function that returns a React Element to be used by the header. Defaults to scene `title`. When a function is specified, it receives an object containing `allowFontScaling`, `tintColor`, `style` and `children` properties. The `children` property contains the title string.
+String or a function that returns a React Element to be used by the header. Defaults to scene `title`.
+
+When a function is specified, it receives an object containing following properties:
+
+- `allowFontScaling`: Whether it scale to respect Text Size accessibility settings.
+- `tintColor`: Text color of the header title.
+- `style`: Style object for the `Text` component.
+- `children`: The title string (from `title` in `options`).
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        headerTitle: ({ allowFontScaling, tintColor, style, children }) => (
+          <Text
+            style={[style, { color: tintColor }]}
+            allowFontScaling={allowFontScaling}
+          >
+            {children}
+          </Text>
+        ),
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<Stack.Screen
+  name="Home"
+  component={HomeScreen}
+  options={{
+    headerTitle: ({ allowFontScaling, tintColor, style, children }) => (
+      <Text
+        style={[style, { color: tintColor }]}
+        allowFontScaling={allowFontScaling}
+      >
+        {children}
+      </Text>
+    ),
+  }}
+/>
+```
+
+</TabItem>
+</Tabs>
 
 #### `headerTitleAlign`
 
@@ -35,11 +214,44 @@ Defaults to `center` on iOS and `left` on Android.
 
 #### `headerTitleAllowFontScaling`
 
-Whether header title font should scale to respect Text Size accessibility settings. Defaults to false.
+Whether header title font should scale to respect Text Size accessibility settings. Defaults to `false`.
 
 #### `headerLeft`
 
-Function which returns a React Element to display on the left side of the header. You can use it to implement your custom left button, for example:
+Function which returns a React Element to display on the left side of the header.
+
+It receives an object containing following properties:
+
+- `tintColor`: The color of the icon and label.
+- `pressColor`: The color of the material ripple (Android >= 5.0 only).
+- `pressOpacity`: The opacity of the button when it's pressed (Android < 5.0, and iOS).
+- `labelVisible`: Whether the label text is visible. Defaults to `true` on iOS and `false` on Android.
+- `href`: The URL to open when the button is pressed on the Web.
+
+You can use it to implement your custom left button, for example:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        headerLeft: (props) => (
+          <MyButton {...props} onPress={() => {
+            // Do something
+          }}>
+        )
+      }
+    }
+  }
+})
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Stack.Screen
@@ -58,9 +270,61 @@ Function which returns a React Element to display on the left side of the header
 />
 ```
 
+</TabItem>
+</Tabs>
+
 #### `headerRight`
 
 Function which returns a React Element to display on the right side of the header.
+
+It receives an object containing following properties:
+
+- `tintColor`: The color of the icon and label.
+- `pressColor`: The color of the material ripple (Android >= 5.0 only).
+- `pressOpacity`: The opacity of the button when it's pressed (Android < 5.0, and iOS).
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        headerLeft: (props) => (
+          <MyButton {...props} onPress={() => {
+            // Do something
+          }}>
+        )
+      }
+    }
+  }
+})
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<Stack.Screen
+  name="Home"
+  component={HomeScreen}
+  options={{
+    headerLeft: (props) => (
+      <MyButton
+        {...props}
+        onPress={() => {
+          // Do something
+        }}
+      />
+    ),
+  }}
+/>
+```
+
+</TabItem>
+</Tabs>
 
 #### `headerShadowVisible`
 
@@ -132,24 +396,142 @@ Function which returns a React Element to render as the background of the header
 
 For example, you can use this with `headerTransparent` to render a blur view to create a translucent header.
 
-<samp id="header-blur" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Header blur" snack dependencies=expo-blur
+import * as React from 'react';
+import { View, StyleSheet } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
 import { BlurView } from 'expo-blur';
 
-// ...
+function HomeScreen() {
+  const navigation = useNavigation();
 
-<Stack.Screen
-  name="Home"
-  component={HomeScreen}
-  options={{
-    headerTransparent: true,
-    headerBackground: () => (
-      <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />
-    ),
-  }}
-/>;
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const Stack = createStackNavigator({
+  initialRouteName: 'Home',
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        headerTransparent: true,
+        headerBackground: () => (
+          <BlurView
+            tint="dark"
+            intensity={100}
+            style={StyleSheet.absoluteFill}
+          />
+        ),
+      },
+    },
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(Stack);
+
+function App() {
+  return <Navigation />;
+}
+
+export default App;
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Header blur" snack dependencies=expo-blur
+import * as React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
+// codeblock-focus-start
+import { BlurView } from 'expo-blur';
+
+// codeblock-focus-end
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        // codeblock-focus-start
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            headerTransparent: true,
+            headerBackground: () => (
+              <BlurView
+                tint="dark"
+                intensity={100}
+                style={StyleSheet.absoluteFill}
+              />
+            ),
+          }}
+        />
+        // codeblock-focus-end
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
+```
+
+</TabItem>
+</Tabs>
 
 #### `headerStatusBarHeight`
 
@@ -157,7 +539,7 @@ Extra padding to add at the top of header to account for translucent status bar.
 
 ### `HeaderBackground`
 
-A component containing the styles used in the background of the header, such as the background color and shadow. It's the default for [`headerBackground`](#headerbackground). It accepts the same props as an [`View`](https://reactnative.dev/docs/view).
+A component containing the styles used in the background of the header, such as the background color and shadow. It's the default for [`headerBackground`](#headerbackground). It accepts the same props as a [`View`](https://reactnative.dev/docs/view).
 
 Usage:
 
@@ -167,7 +549,7 @@ Usage:
 
 ### `HeaderTitle`
 
-A component used to show the title text in header. It's the default for [`headerTitle`](#headertitle). It accepts the same props as an [`Text`](https://reactnative.dev/docs/Text).
+A component used to show the title text in header. It's the default for [`headerTitle`](#headertitle). It accepts the same props as a [`Text`](https://reactnative.dev/docs/Text).
 
 The color of title defaults to the [theme text color](themes.md). You can override it by passing a `tintColor` prop.
 
@@ -175,6 +557,36 @@ Usage:
 
 ```js
 <HeaderTitle>Hello</HeaderTitle>
+```
+
+### `HeaderButton`
+
+A component used to show a button in header. It can be used for both left and right buttons. It accepts the following props:
+
+- `onPress` - Callback to call when the button is pressed.
+- `href` - The `href` to use for the anchor tag on web.
+- `disabled` - Boolean which controls whether the button is disabled.
+- `accessibilityLabel` - Accessibility label for the button for screen readers.
+- `testID` - ID to locate this button in tests.
+- `tintColor` - Tint color for the header button.
+- `pressColor` - Color for material ripple (Android >= 5.0 only).
+- `pressOpacity` - Opacity when the button is pressed if material ripple isn't supported by the platform.
+- `style` - Style object for the button.
+- `children` - Content to render for the button. Usually the icon.
+
+Usage:
+
+```js
+<HeaderButton
+  accessibilityLabel="More options"
+  onPress={() => console.log('button pressed')}
+>
+  <MaterialCommunityIcons
+    name="dots-horizontal-circle-outline"
+    size={24}
+    color={tintColor}
+  />
+</HeaderButton>
 ```
 
 ### `HeaderBackButton`
@@ -219,6 +631,47 @@ A component which provides an abstraction on top of [`Pressable`](https://reactn
 
 - `pressColor` - Color of material ripple on Android when it's pressed
 - `pressOpacity` - Opacity when it's pressed if material ripple isn't supported by the platform
+
+### `Button`
+
+A component that renders a button. In addition to [`PlatformPressable`](#platformpressable)'s props, it accepts following additional props:
+
+- `variant` - Variant of the button. Possible values are:
+  - `tinted` (default)
+  - `plain`
+  - `filled`
+- `color` - Color of the button. Defaults to the [theme](themes.md)'s primary color.
+- `children` - Content to render inside the button.
+
+In addition, the button integrates with React Navigation and accepts the same props as [`useLinkProps`](use-link-props.md#options) hook.
+
+It can be used to navigate between screens by specifying a screen name and params:
+
+```js
+<Button screen="Profile" params={{ userId: 'jane' }}>
+  Go to Profile
+</Button>
+```
+
+Or as a regular button:
+
+```js
+<Button onPress={() => console.log('button pressed')}>Press me</Button>
+```
+
+### `Label`
+
+The `Label` component is used to render small text. It is used in [Bottom Tab Navigator](bottom-tab-navigator.md) to render the label for each tab.
+
+In addition to the standard [`Text`](https://reactnative.dev/docs/text) props, it accepts the following props:
+
+- `tintColor` - Color of the label. Defaults to the [theme](themes.md)'s text color.
+
+Usage:
+
+```jsx
+<Label>Home</Label>
+```
 
 ### `ResourceSavingView`
 

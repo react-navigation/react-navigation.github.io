@@ -8,14 +8,14 @@ sidebar_label: DrawerActions
 
 The following actions are supported:
 
-* [openDrawer](#openDrawer) - open the drawer
-* [closeDrawer](#closeDrawer) - close the drawer
-* [toggleDrawer](#toggleDrawer) - toggle the state, ie. switch from closed to open and vice versa
+- [openDrawer](#openDrawer) - open the drawer
+- [closeDrawer](#closeDrawer) - close the drawer
+- [toggleDrawer](#toggleDrawer) - toggle the state, ie. switch from closed to open and vice versa
 
 ### Usage
 
 ```js
 import { DrawerActions } from 'react-navigation-drawer';
 
-this.props.navigation.dispatch(DrawerActions.toggleDrawer())
+this.props.navigation.dispatch(DrawerActions.toggleDrawer());
 ```

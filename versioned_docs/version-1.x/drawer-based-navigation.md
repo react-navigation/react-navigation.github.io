@@ -10,7 +10,8 @@ class HomeScreen extends React.Component {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('DrawerOpen')}>
+          onPress={() => this.props.navigation.navigate('DrawerOpen')}
+        >
           <Text>Open Drawer</Text>
         </TouchableOpacity>
         <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Home</Text>
@@ -24,7 +25,8 @@ class SettingsScreen extends React.Component {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('DrawerOpen')}>
+          onPress={() => this.props.navigation.navigate('DrawerOpen')}
+        >
           <Text>Open Drawer</Text>
         </TouchableOpacity>
         <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Settings</Text>

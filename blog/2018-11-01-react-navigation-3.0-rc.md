@@ -23,7 +23,7 @@ First, install the library using your favorite package manager: `yarn add react-
 
 Next, install react-native-gesture-handler. If you’re using Expo you don’t need to do anything here, it’s included in the SDK. Otherwise: `yarn add react-native-gesture-handler && react-native link`
 
-Optionally, you can install react-native-screens. If you’re using Expo you don’t need to do anything here, it’s included in SDK 30 and higher. Otherwise, follow the instructions in the README on <https://github.com/kmagiera/react-native-screens>.
+Optionally, you can install react-native-screens. If you’re using Expo you don’t need to do anything here, it’s included in SDK 30 and higher. Otherwise, follow the instructions in the README on [`react-native-screens`](https://github.com/software-mansion/react-native-screens).
 
 > **Warning**: if you have manually installed any navigators in your project, for example react-navigation-material-bottom-tabs, you will need to update those to a version that is compatible with 3.0.0. In the case of react-navigation-material-bottom-tabs, 1.0.0-alpha.2 is compatible.
 
@@ -46,40 +46,46 @@ const App = createAppContainer(MainNavigator);
 
 This should be an easy change - import `createAppContainer` in the root of your app and use it to wrap the root navigator.
 
-> **Warning**: if you have any custom navigators, you may have used  `createNavigationContainer`, you can remove this now because it’s only used at the root of the app and provided by the user.
+> **Warning**: if you have any custom navigators, you may have used `createNavigationContainer`, you can remove this now because it’s only used at the root of the app and provided by the user.
 
 ### Renamed navigationOptions in navigator configuration
 
 When configuring navigators it’s often useful to pass in default navigation options for the screens inside of that navigator. For example in a stack you might want to set a background color and tint color for each screen. Previously, you would write something like this:
 
 ```js
-const Home = createStackNavigator({
-  Feed: ExampleScreen,
-  Profile: ExampleScreen,
-}, {
-  navigationOptions: {
-    headerTintColor: '#fff',
-    headerStyle: {
-      backgroundColor: '#000',
+const Home = createStackNavigator(
+  {
+    Feed: ExampleScreen,
+    Profile: ExampleScreen,
+  },
+  {
+    navigationOptions: {
+      headerTintColor: '#fff',
+      headerStyle: {
+        backgroundColor: '#000',
+      },
     },
   }
-});
+);
 ```
 
 As of this release, `navigationOptions` in navigator configuration like this has been renamed to `defaultNavigationOptions`.
 
 ```js
-const Home = createStackNavigator({
-  Feed: ExampleScreen,
-  Profile: ExampleScreen,
-}, {
-  defaultNavigationOptions: {
-    headerTintColor: '#fff',
-    headerStyle: {
-      backgroundColor: '#000',
-    },
+const Home = createStackNavigator(
+  {
+    Feed: ExampleScreen,
+    Profile: ExampleScreen,
   },
-});
+  {
+    defaultNavigationOptions: {
+      headerTintColor: '#fff',
+      headerStyle: {
+        backgroundColor: '#000',
+      },
+    },
+  }
+);
 ```
 
 Sometimes you need to configure the `navigationOptions` for a navigator itself. Typically you’d do something like this:
@@ -91,20 +97,23 @@ Home.navigationOptions = { tabBarLabel: 'Home!' };
 As of this release, you can use `navigationOptions` in the navigator config for this instead.
 
 ```js
-const Home = createStackNavigator({
-  Feed: ExampleScreen,
-  Profile: ExampleScreen,
-}, {
-  defaultNavigationOptions: {
-    headerTintColor: '#fff',
-    headerStyle: {
-      backgroundColor: '#000',
+const Home = createStackNavigator(
+  {
+    Feed: ExampleScreen,
+    Profile: ExampleScreen,
+  },
+  {
+    defaultNavigationOptions: {
+      headerTintColor: '#fff',
+      headerStyle: {
+        backgroundColor: '#000',
+      },
     },
-  },
-  navigationOptions: {
-    tabBarLabel: 'Home!',
-  },
-});
+    navigationOptions: {
+      tabBarLabel: 'Home!',
+    },
+  }
+);
 
 const Tabs = createBottomTabNavigator({ Home });
 ```
@@ -132,16 +141,16 @@ const Store = createStackNavigator({
 
 - Basic support for hooks in `react-navigation-hooks`
 - `headerBackgroundTransitionPreset: 'toggle' | 'fade' | 'translate'` lets you choose how to transition your custom `headerBackground` components between screens.
-- Add options to opt in/out of the stack card overlay and shadow that are visible during transitions: `cardShadowEnabled` defaults to `true` and  `cardOverlayEnabled` defaults to `false`.
-- Export `StackGestureContext` and `DrawerGestureContext` from react-navigation-stack and react-navigation-drawer, so you can use the ref from the corresponding gestures with other gesture handlers (eg: <https://github.com/react-navigation/react-navigation-drawer/blob/bf4bdba7f6a4fbc12192f5d5ba2285f6280431b7/example/src/GestureInteraction.js>).
+- Add options to opt in/out of the stack card overlay and shadow that are visible during transitions: `cardShadowEnabled` defaults to `true` and `cardOverlayEnabled` defaults to `false`.
+- Export `StackGestureContext` and `DrawerGestureContext` from react-navigation-stack and react-navigation-drawer, so you can use the ref from the corresponding gestures with other gesture handlers (eg: [GestureInteraction.js](https://github.com/react-navigation/react-navigation-drawer/blob/bf4bdba7f6a4fbc12192f5d5ba2285f6280431b7/example/src/GestureInteraction.js)).
 
 ## Assorted fixes & improvements
 
 - Stack transition performance improved greatly by removing the shadow from the entire card and rendering it only on the slice where it is needed. The card opacity is also no longer directly animated but instead an overlay is put on top to create a similar effect but with better performance.
-- Fix long-standing issues with stack that led to quietly re-mounting screens when navigating quickly in certain patterns: <https://github.com/react-navigation/react-navigation/issues/4155>
+- Fix long-standing issues with stack that led to quietly re-mounting screens when navigating quickly in certain patterns: [react-navigation/issues/415](https://github.com/react-navigation/react-navigation/issues/4155)
 - Support inverted gesture in modals.
 - Stack card gesture uses react-native-gesture-handler and native driver so the gesture runs on the UI thread (except when the gesture ends, then it calls back to JS).
-- Fix a variety of issues with drawer navigator, including issues around nesting (<https://github.com/react-navigation/react-navigation/issues/4154>) and bugs with firing open / close (eg: <https://github.com/react-navigation/react-navigation/issues/5146>).
+- Fix a variety of issues with drawer navigator, including issues around nesting ([react-navigation/issues/4154](https://github.com/react-navigation/react-navigation/issues/4154)) and bugs with firing open / close (eg: [react-navigation/issues/5146](https://github.com/react-navigation/react-navigation/issues/5146)).
 
 ## Ecosystem and web support
 
@@ -171,7 +180,7 @@ To keep the experience as simple as possible the `react-navigation` package will
 
 Now that the core of React Navigation can be used outside of React Native, we can provide first-class web support to anyone using React.js on the web, including those who do not want to use `react-native-web`.
 
-Here is an example web app which demonstrates the new `createBrowserApp` container and the built-in  `Link` component:
+Here is an example web app which demonstrates the new `createBrowserApp` container and the built-in `Link` component:
 
 ```js
 import { createSwitchNavigator } from "@react-navigation/core";
@@ -209,10 +218,10 @@ export default App;
 ```
 
 The above `Link` tag will render to:
- `<a href=``"``/profile/Brent?view=photos``"``>Brent's Photos</a>`
+`<a href=``"``/profile/Brent?view=photos``"``>Brent's Photos</a>`
 
 See a simple web app with Create React App [here](https://github.com/react-navigation/example-web). Or take a look at [this razzle app](https://github.com/react-navigation/web-server-example) for a more complicated example including server rendering.
 
-----------
+---
 
-Thanks for reading, please post any issues you encounter to <https://github.com/react-navigation/react-navigation/issues>!
+Thanks for reading, please post any issues you encounter to [react-navigation/issues](https://github.com/react-navigation/react-navigation/issues)!

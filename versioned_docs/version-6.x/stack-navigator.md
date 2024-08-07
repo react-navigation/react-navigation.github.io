@@ -8,11 +8,9 @@ Stack Navigator provides a way for your app to transition between screens where 
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, use OS default animation on Android. But the [animations can be customized](#animation-related-options) to match your needs.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/stack/stack.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/stack.mp4" />
+</video>
 
 One thing to keep in mind is that while `@react-navigation/stack` is extremely customizable, it's implemented in JavaScript. While it runs animations and gestures using natively, the performance may not be as fast as a native implementation. This may not be an issue for a lot of apps, but if you're experiencing performance issues during navigation, consider using [`@react-navigation/native-stack`](native-stack-navigator.md) instead - which uses native navigation primitives.
 
@@ -40,13 +38,30 @@ Then, you need to install and configure the libraries that are required by the s
    npm install react-native-gesture-handler
    ```
 
-2. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+2. To finalize the installation of `react-native-gesture-handler`, we need to conditionally import it. To do this, create 2 files:
 
-   ```js
+   ```js title="gesture-handler.native.js"
+   // Only import react-native-gesture-handler on native platforms
    import 'react-native-gesture-handler';
    ```
 
-   > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+   ```js title="gesture-handler.js"
+   // Don't import react-native-gesture-handler on web
+   ```
+
+   Now, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+
+   ```js
+   import './gesture-handler';
+   ```
+
+   Since the stack navigator doesn't use `react-native-gesture-handler` on Web, this avoids unnecessarily increasing the bundle size.
+
+   :::warning
+
+   If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+
+   :::
 
 3. Optionally, you can also install [`@react-native-masked-view/masked-view`](https://github.com/react-native-masked-view/masked-view). This is needed if you want to use UIKit style animations for the header ([`HeaderStyleInterpolators.forUIKit`](#headerstyleinterpolators)).
 
@@ -64,9 +79,9 @@ Then, you need to install and configure the libraries that are required by the s
 
 4. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-  ```bash
-  npx pod-install ios
-  ```
+   ```bash
+   npx pod-install ios
+   ```
 
 ## API Definition
 
@@ -112,10 +127,6 @@ Default options to use for the screens in the navigator.
 Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
 
 If you need to disable this optimization for specific screens (e.g. you want to screen to stay in view even when unfocused) [`detachPreviousScreen`](#detachpreviousscreen) option.
-
-#### `keyboardHandlingEnabled`
-
-If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to `true`.
 
 ### Options
 
@@ -219,6 +230,10 @@ Interpolated styles for various parts of the card. Refer the [Animations section
 #### `headerStyleInterpolator`
 
 Interpolated styles for various parts of the header. Refer the [Animations section](#animations) for details.
+
+#### `keyboardHandlingEnabled`
+
+If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to `true`.
 
 #### `detachPreviousScreen`
 
@@ -459,7 +474,7 @@ Replaces the current screen with a new screen in the stack. The method accepts f
 - `params` - _object_ - Screen params to pass to the destination route.
 
 ```js
-navigation.push('Profile', { owner: 'Michaś' });
+navigation.replace('Profile', { owner: 'Michaś' });
 ```
 
 #### `push`
@@ -836,7 +851,11 @@ import { HeaderStyleInterpolators } from '@react-navigation/stack';
 />;
 ```
 
-> Note: Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
+:::warning
+
+Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
+
+:::
 
 #### `TransitionPresets`
 

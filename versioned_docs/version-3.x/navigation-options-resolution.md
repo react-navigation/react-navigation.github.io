@@ -32,10 +32,12 @@ class B extends React.Component {
 const HomeStack = createStackNavigator({ A });
 const SettingsStack = createStackNavigator({ B });
 
-export default createAppContainer(createBottomTabNavigator({
-  HomeStack,
-  SettingsStack,
-}));
+export default createAppContainer(
+  createBottomTabNavigator({
+    HomeStack,
+    SettingsStack,
+  })
+);
 ```
 
 <a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-wrong-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
@@ -54,10 +56,12 @@ SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings!',
 };
 
-export default createAppContainer(createBottomTabNavigator({
-  HomeStack,
-  SettingsStack,
-}));
+export default createAppContainer(
+  createBottomTabNavigator({
+    HomeStack,
+    SettingsStack,
+  })
+);
 ```
 
 <a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-correct-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
@@ -84,13 +88,16 @@ MyOtherComponent.navigationOptions = {
 We also know that `createStackNavigator` and related functions return React components. So when we set the `navigationOptions` directly on the `HomeStack` and `SettingsStack` component, it allows us to control the `navigationOptions` for its parent navigator when its used as a screen component. In this case, the `navigationOptions` on our stack components configure the label in the tab navigator that renders the stacks.
 
 ```js
-const HomeStack = createStackNavigator({ A }, {
-  // This is the default for screens in the stack, so `A` will
-  // use this title unless it overrides it
-  defaultNavigationOptions: {
-    title: 'Welcome'
+const HomeStack = createStackNavigator(
+  { A },
+  {
+    // This is the default for screens in the stack, so `A` will
+    // use this title unless it overrides it
+    defaultNavigationOptions: {
+      title: 'Welcome',
+    },
   }
-})
+);
 
 // These are the options that are used by the navigator that renders
 // the HomeStack, in our example above this is a tab navigator.
@@ -102,16 +109,19 @@ HomeStack.navigationOptions = {
 Another way you could write this is:
 
 ```js
-const HomeStack = createStackNavigator({ A }, {
-  // This applies to the parent navigator
-  navigationOptions: {
-    tabBarLabel: 'Home!',
-  },
-  // This applies to child routes
-  defaultNavigationOptions: {
-    title: 'Welcome'
+const HomeStack = createStackNavigator(
+  { A },
+  {
+    // This applies to the parent navigator
+    navigationOptions: {
+      tabBarLabel: 'Home!',
+    },
+    // This applies to child routes
+    defaultNavigationOptions: {
+      title: 'Welcome',
+    },
   }
-});
+);
 ```
 
 <a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-title-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
@@ -132,14 +142,17 @@ class A extends React.Component {
   }
 }
 
-const HomeStack = createStackNavigator({ A }, {
-  navigationOptions: ({ navigation, screenProps }) => ({
-    // you can put fallback values before here, eg: a default tabBarLabel
-    ...getActiveChildNavigationOptions(navigation, screenProps),
-    // put other navigationOptions that you don't want the active child to
-    // be able to override here!
-  })
-});
+const HomeStack = createStackNavigator(
+  { A },
+  {
+    navigationOptions: ({ navigation, screenProps }) => ({
+      // you can put fallback values before here, eg: a default tabBarLabel
+      ...getActiveChildNavigationOptions(navigation, screenProps),
+      // put other navigationOptions that you don't want the active child to
+      // be able to override here!
+    }),
+  }
+);
 ```
 
 <a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-active-child-v3" target="blank" class="run-code-button">&rarr; Run this code</a>

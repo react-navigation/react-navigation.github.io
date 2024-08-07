@@ -6,6 +6,14 @@ sidebar_label: Native Stack
 
 Native Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack-android.mp4" />
+</video>
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack-ios.mp4" />
+</video>
+
 This navigator uses the native APIs `UINavigationController` on iOS and `Fragment` on Android so that navigation built with `createNativeStackNavigator` will behave exactly the same and have the same performance characteristics as apps built natively on top of those APIs. It also offers basic Web support using [`react-native-web`](https://github.com/necolas/react-native-web).
 
 One thing to keep in mind is that while `@react-navigation/native-stack` offers native performance and exposes native features such as large title on iOS etc., it may not be as customizable as [`@react-navigation/stack`](stack-navigator.md) depending on your needs. So if you need more customization than what's possible in this navigator, consider using `@react-navigation/stack` instead - which is a more customizable JavaScript based implementation.
@@ -15,18 +23,74 @@ One thing to keep in mind is that while `@react-navigation/native-stack` offers 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/native-stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/native-stack):
 
 ```bash npm2yarn
-npm install @react-navigation/native-stack
+npm install @react-navigation/native-stack@next
 ```
 
-## API Definition
-
-> 💡 If you encounter any bugs while using `createNativeStackNavigator`, please open issues on [`react-native-screens`](https://github.com/software-mansion/react-native-screens) rather than the `react-navigation` repository!
+## Usage
 
 To use this navigator, import it from `@react-navigation/native-stack`:
 
-<samp id="simple-native-stack" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Native Stack Navigator" snack
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+// codeblock-focus-start
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+// codeblock-focus-end
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Native Stack Navigator" snack
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+// codeblock-focus-start
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
@@ -34,30 +98,57 @@ const Stack = createNativeStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Notifications" component={Notifications} />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
+  );
+}
+// codeblock-focus-end
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
   );
 }
 ```
 
+</TabItem>
+</Tabs>
+
+:::info
+
+If you encounter any bugs while using `createNativeStackNavigator`, please open issues on [`react-native-screens`](https://github.com/software-mansion/react-native-screens) rather than the `react-navigation` repository!
+
+:::
+
+## API Definition
+
 ### Props
 
-The `Stack.Navigator` component accepts following props:
-
-#### `id`
-
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
-
-#### `initialRouteName`
-
-The name of the route to render on first load of the navigator.
-
-#### `screenOptions`
-
-Default options to use for the screens in the navigator.
+The native stack navigator accepts the [common props](navigator.md#configuration) shared by all navigators.
 
 ### Options
 
@@ -75,6 +166,8 @@ Requires `react-native-screens` version >=3.3.0.
 
 Only supported on iOS.
 
+<img src="/assets/7.x/native-stack/headerBackButtonMenuEnabled.png" width="500" alt="Header back button menu enabled" />
+
 #### `headerBackVisible`
 
 Whether the back button is visible in the header. You can use it to show a back button alongside `headerLeft` if you have specified it.
@@ -83,13 +176,21 @@ This will have no effect on the first screen in the stack.
 
 #### `headerBackTitle`
 
-Title string used by the back button on iOS. Defaults to the previous scene's title, or "Back" if there's not enough space. Use `headerBackTitleVisible: false` to hide it.
+Title string used by the back button on iOS. Defaults to the previous scene's title, or "Back" if there's not enough space. Use `headerBackButtonDisplayMode` to customize the behavior.
 
 Only supported on iOS.
 
-#### `headerBackTitleVisible`
+<img src="/assets/7.x/native-stack/headerBackTitle.jpeg" width="500" alt="Header back title" />
 
-Whether the back button title should be visible or not.
+#### `headerBackButtonDisplayMode`
+
+How the back button displays icon and title.
+
+Supported values:
+
+- `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
+- `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon). iOS >= 14 only, falls back to "default" on older iOS versions.
+- `minimal`: Always displays only the icon without a title.
 
 Only supported on iOS.
 
@@ -101,6 +202,17 @@ Style object for header back title. Supported properties:
 - `fontSize`
 
 Only supported on iOS.
+
+<img src="/assets/7.x/native-stack/headerBackTitleStyle.png" width="500" alt="Header back title style" />
+
+Example:
+
+```js
+  headerBackTitleStyle: {
+      fontSize: 14,
+      fontFamily: 'Georgia',
+  },
+```
 
 #### `headerBackImageSource`
 
@@ -285,11 +397,15 @@ The search field background color. By default bar tint color is translucent.
 
 Only supported on iOS.
 
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-barTintColor.png" width="500" alt="Header search bar options - Bar tint color" />
+
 ##### `tintColor`
 
 The color for the cursor caret and cancel button text.
 
 Only supported on iOS.
+
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-tintColor.png" width="500" alt="Header search bar options - Tint color" />
 
 ##### `cancelButtonText`
 
@@ -340,17 +456,23 @@ Text displayed when search field is empty.
 
 The color of the text in the search field.
 
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-textColor.png" width="500" alt="Header search bar options - Text color" />
+
 ##### `hintTextColor`
 
 The color of the hint text in the search field.
 
 Only supported on Android.
 
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-hintTextColor.png" width="500" alt="Header search bar options - Hint text color" />
+
 ##### `headerIconColor`
 
 The color of the search and close icons shown in the header
 
 Only supported on Android.
+
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-headerIconColor.png" width="500" alt="Header search bar options - Header icon color" />
 
 ##### `shouldShowHintSearchIcon`
 
@@ -476,7 +598,7 @@ Only supported on Android.
 
 Style object for the scene content.
 
-#### `customAnimationOnGesture`
+#### `animationMatchesGesture`
 
 Whether the gesture to dismiss should use animation provided to `animation` prop. Defaults to `false`.
 
@@ -498,46 +620,116 @@ Whether you can use gestures to dismiss this screen. Defaults to `true`. Only su
 
 #### `animationTypeForReplace`
 
-The type of animation to use when this screen replaces another screen. Defaults to `pop`.
+The type of animation to use when this screen replaces another screen. Defaults to `push`.
 
 Supported values:
 
 - `push`: the new screen will perform push animation.
+
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/native-stack/animationTypeForReplace-push.mp4" />
+  </video>
+
 - `pop`: the new screen will perform pop animation.
+
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/native-stack/animationTypeForReplace-pop.mp4" />
+  </video>
 
 #### `animation`
 
 How the screen should animate when pushed or popped.
 
+Only supported on Android and iOS.
+
 Supported values:
 
 - `default`: use the platform default animation
-- `fade`: fade screen in or out
-- `fade_from_bottom`: fade the new screen from bottom
-- `flip`: flip the screen, requires `presentation: "modal"` (iOS only)
-- `simple_push`: default animation, but without shadow and native header transition (iOS only, uses default animation on Android)
-- `slide_from_bottom`: slide in the new screen from bottom
-- `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
-- `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)
-- `none`: don't animate the screen
+  <video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/native-stack-animation-default.mp4" />
+  </video>
 
-Only supported on Android and iOS.
+- `fade`: fade screen in or out
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-fade.mp4" />
+  </video>
+
+- `fade_from_bottom`: fade the new screen from bottom
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-fade-from-bottom.mp4" />
+  </video>
+
+- `flip`: flip the screen, requires `presentation: "modal"` (iOS only)
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-flip.mp4" />
+  </video>
+
+- `simple_push`: default animation, but without shadow and native header transition (iOS only, uses default animation on Android)
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-simple-push.mp4" />
+  </video>
+
+- `slide_from_bottom`: slide in the new screen from bottom
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-slide-from-bottom.mp4" />
+  </video>
+
+- `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-slide-from-right.mp4" />
+  </video>
+
+- `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-slide-from-left.mp4" />
+  </video>
+
+- `none`: don't animate the screen
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/native-stack-animation-none.mp4" />
+  </video>
 
 #### `presentation`
 
 How should the screen be presented.
 
+Only supported on Android and iOS.
+
 Supported values:
 
 - `card`: the new screen will be pushed onto a stack, which means the default animation will be slide from the side on iOS, the animation on Android will vary depending on the OS version and theme.
-- `modal`: the new screen will be presented modally. this also allows for a nested stack to be rendered inside the screen.
-- `transparentModal`: the new screen will be presented modally, but in addition, the previous screen will stay so that the content below can still be seen if the screen has translucent background.
-- `containedModal`: will use "UIModalPresentationCurrentContext" modal style on iOS and will fallback to "modal" on Android.
-- `containedTransparentModal`: will use "UIModalPresentationOverCurrentContext" modal style on iOS and will fallback to "transparentModal" on Android.
-- `fullScreenModal`: will use "UIModalPresentationFullScreen" modal style on iOS and will fallback to "modal" on Android. A screen using this presentation style can't be dismissed by gesture.
-- `formSheet`: will use "UIModalPresentationFormSheet" modal style on iOS and will fallback to "modal" on Android.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-card.mp4" />
+  </video>
 
-Only supported on Android and iOS.
+- `modal`: the new screen will be presented modally. this also allows for a nested stack to be rendered inside the screen.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-modal.mp4" />
+  </video>
+
+- `transparentModal`: the new screen will be presented modally, but in addition, the previous screen will stay so that the content below can still be seen if the screen has translucent background.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-transparentModal.mp4" />
+  </video>
+
+- `containedModal`: will use "UIModalPresentationCurrentContext" modal style on iOS and will fallback to "modal" on Android.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-containedModal.mp4" />
+  </video>
+
+- `containedTransparentModal`: will use "UIModalPresentationOverCurrentContext" modal style on iOS and will fallback to "transparentModal" on Android.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-containedTransparentModal.mp4" />
+  </video>
+
+- `fullScreenModal`: will use "UIModalPresentationFullScreen" modal style on iOS and will fallback to "modal" on Android. A screen using this presentation style can't be dismissed by gesture.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-fullScreenModal.mp4" />
+  </video>
+- `formSheet`: will use "UIModalPresentationFormSheet" modal style on iOS and will fallback to "modal" on Android.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-formSheet.mp4" />
+  </video>
 
 #### `orientation`
 
@@ -650,20 +842,22 @@ React.useEffect(() => {
 
 ### Helpers
 
+The native stack navigator adds the following methods to the navigation object:
+
 #### `replace`
 
-Replaces the current screen with a new screen in the stack. The method accepts following arguments:
+Replaces the current screen with a new screen in the stack. The method accepts the following arguments:
 
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to pass to the destination route.
 
 ```js
-navigation.push('Profile', { owner: 'Michaś' });
+navigation.replace('Profile', { owner: 'Michaś' });
 ```
 
 #### `push`
 
-Pushes a new screen to top of the stack and navigate to it. The method accepts following arguments:
+Pushes a new screen to the top of the stack and navigate to it. The method accepts the following arguments:
 
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to pass to the destination route.
@@ -680,6 +874,19 @@ Pops the current screen from the stack and navigates back to the previous screen
 navigation.pop();
 ```
 
+#### `popTo`
+
+Navigates back to a previous screen in the stack by popping screens after it. The method accepts the following arguments:
+
+- `name` - _string_ - Name of the route to navigate to.
+- `params` - _object_ - Screen params to pass to the destination route.
+
+If a matching screen is not found in the stack, this will pop the current screen and add a new screen with the specified name and params.
+
+```js
+navigation.popTo('Profile', { owner: 'Michaś' });
+```
+
 #### `popToTop`
 
 Pops all of the screens in the stack except the first one and navigates to it.
@@ -688,44 +895,32 @@ Pops all of the screens in the stack except the first one and navigates to it.
 navigation.popToTop();
 ```
 
-## Example
+### Hooks
+
+The native stack navigator exports the following hooks:
+
+#### `useAnimatedHeaderHeight`
+
+The hook returns an animated value representing the height of the header. This is similar to [`useHeaderHeight`](elements.md#useheaderheight) but returns an animated value that changed as the header height changes, e.g. when expanding or collapsing large title or search bar on iOS.
+
+It can be used to animated content along with header height changes.
 
 ```js
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Animated } from 'react-native';
+import { useAnimatedHeaderHeight } from '@react-navigation/native-stack';
 
-const Stack = createNativeStackNavigator();
+const MyView = () => {
+  const headerHeight = useAnimatedHeaderHeight();
 
-function MyStack() {
   return (
-    <Stack.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerTintColor: 'white',
-        headerStyle: { backgroundColor: 'tomato' },
+    <Animated.View
+      style={{
+        height: 100,
+        aspectRatio: 1,
+        backgroundColor: 'tomato',
+        transform: [{ translateY: headerHeight }],
       }}
-    >
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          title: 'Awesome app',
-        }}
-      />
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          title: 'My profile',
-        }}
-      />
-      <Stack.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          gestureEnabled: false,
-        }}
-      />
-    </Stack.Navigator>
+    />
   );
-}
+};
 ```

@@ -17,14 +17,14 @@ Lets start by demonstrating the most common navigator, `createStackNavigator`.
 ```javascript
 // In App.js in a new project
 
-import React from "react";
-import { View, Text } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import React from 'react';
+import { View, Text } from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 class HomeScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Home Screen</Text>
       </View>
     );
@@ -33,8 +33,8 @@ class HomeScreen extends React.Component {
 
 const AppNavigator = createStackNavigator({
   Home: {
-    screen: HomeScreen
-  }
+    screen: HomeScreen,
+  },
 });
 
 export default createAppContainer(AppNavigator);
@@ -66,7 +66,7 @@ Given that the only route configuration we have for `Home` is the screen compone
 
 ```js
 const AppNavigator = createStackNavigator({
-  Home: HomeScreen
+  Home: HomeScreen,
 });
 ```
 
@@ -80,7 +80,7 @@ The `<AppContainer />` component doesn't accept any props -- all configuration i
 class DetailsScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Details Screen</Text>
       </View>
     );
@@ -90,10 +90,10 @@ class DetailsScreen extends React.Component {
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
-    Details: DetailsScreen
+    Details: DetailsScreen,
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: 'Home',
   }
 );
 

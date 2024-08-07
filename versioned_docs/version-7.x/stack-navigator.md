@@ -8,11 +8,13 @@ Stack Navigator provides a way for your app to transition between screens where 
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, use OS default animation on Android. But the [animations can be customized](#animation-related-options) to match your needs.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/stack/stack.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack-android.mp4" />
+</video>
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack-ios.mp4" />
+</video>
 
 One thing to keep in mind is that while `@react-navigation/stack` is extremely customizable, it's implemented in JavaScript. While it runs animations and gestures using natively, the performance may not be as fast as a native implementation. This may not be an issue for a lot of apps, but if you're experiencing performance issues during navigation, consider using [`@react-navigation/native-stack`](native-stack-navigator.md) instead - which uses native navigation primitives.
 
@@ -21,7 +23,7 @@ One thing to keep in mind is that while `@react-navigation/stack` is extremely c
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/stack):
 
 ```bash npm2yarn
-npm install @react-navigation/stack
+npm install @react-navigation/stack@next
 ```
 
 Then, you need to install and configure the libraries that are required by the stack navigator:
@@ -40,13 +42,30 @@ Then, you need to install and configure the libraries that are required by the s
    npm install react-native-gesture-handler
    ```
 
-2. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+2. To finalize the installation of `react-native-gesture-handler`, we need to conditionally import it. To do this, create 2 files:
 
-   ```js
+   ```js title="gesture-handler.native.js"
+   // Only import react-native-gesture-handler on native platforms
    import 'react-native-gesture-handler';
    ```
 
-   > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+   ```js title="gesture-handler.js"
+   // Don't import react-native-gesture-handler on web
+   ```
+
+   Now, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+
+   ```js
+   import './gesture-handler';
+   ```
+
+   Since the stack navigator doesn't use `react-native-gesture-handler` on Web, this avoids unnecessarily increasing the bundle size.
+
+   :::warning
+
+   If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+
+   :::
 
 3. Optionally, you can also install [`@react-native-masked-view/masked-view`](https://github.com/react-native-masked-view/masked-view). This is needed if you want to use UIKit style animations for the header ([`HeaderStyleInterpolators.forUIKit`](#headerstyleinterpolators)).
 
@@ -64,17 +83,75 @@ Then, you need to install and configure the libraries that are required by the s
 
 4. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-  ```bash
-  npx pod-install ios
-  ```
+   ```bash
+   npx pod-install ios
+   ```
 
-## API Definition
+## Usage
 
 To use this navigator, import it from `@react-navigation/stack`:
 
-<samp id="simple-stack" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Stack Navigator" snack
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+// codeblock-focus-start
+import { createStackNavigator } from '@react-navigation/stack';
+
+// codeblock-focus-end
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyStack = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Stack Navigator" snack
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+// codeblock-focus-start
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
@@ -82,40 +159,57 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Notifications" component={Notifications} />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
+  );
+}
+// codeblock-focus-end
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
   );
 }
 ```
 
+</TabItem>
+</Tabs>
+
+## API Definition
+
 ### Props
 
-The `Stack.Navigator` component accepts following props:
-
-#### `id`
-
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
-
-#### `initialRouteName`
-
-The name of the route to render on first load of the navigator.
-
-#### `screenOptions`
-
-Default options to use for the screens in the navigator.
+In addition to the [common props](navigator.md#configuration) shared by all navigators, the stack navigator accepts the following additional props:
 
 #### `detachInactiveScreens`
 
 Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
 
 If you need to disable this optimization for specific screens (e.g. you want to screen to stay in view even when unfocused) [`detachPreviousScreen`](#detachpreviousscreen) option.
-
-#### `keyboardHandlingEnabled`
-
-If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to `true`.
 
 ### Options
 
@@ -161,10 +255,6 @@ This is shortcut option which configures several options to configure the style 
   - Changes the screen animation to a vertical slide animation.
 
 See [Transparent modals](#transparent-modals) for more details on how to customize `transparentModal`.
-
-#### `animationEnabled`
-
-Whether transition animation should be enabled on the screen. If you set it to `false`, the screen won't animate when pushing or popping. Defaults to `true` on iOS and Android, `false` on Web.
 
 #### `animationTypeForReplace`
 
@@ -219,6 +309,10 @@ Interpolated styles for various parts of the card. Refer the [Animations section
 #### `headerStyleInterpolator`
 
 Interpolated styles for various parts of the header. Refer the [Animations section](#animations) for details.
+
+#### `keyboardHandlingEnabled`
+
+If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to `true`.
 
 #### `detachPreviousScreen`
 
@@ -341,15 +435,23 @@ Function which returns a React Element to display custom image in header's back 
 
 #### `headerBackTitle`
 
-Title string used by the back button on iOS. Defaults to the previous scene's `headerTitle`.
-
-#### `headerBackTitleVisible`
-
-A reasonable default is supplied for whether the back button title should be visible or not, but if you want to override that you can use `true` or `false` in this option.
+Title string used by the back button on iOS. Defaults to the previous scene's title. Use `headerBackButtonDisplayMode` to customize the behavior.
 
 #### `headerTruncatedBackTitle`
 
 Title string used by the back button when `headerBackTitle` doesn't fit on the screen. `"Back"` by default.
+
+#### `headerBackButtonDisplayMode`
+
+How the back button displays icon and title.
+
+Supported values:
+
+- `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
+- `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon).
+- `minimal`: Always displays only the icon without a title.
+
+Defaults to `default` on iOS, and `minimal` on Android.
 
 #### `headerBackTitleStyle`
 
@@ -449,22 +551,22 @@ React.useEffect(() => {
 
 ### Helpers
 
-The stack navigator adds the following methods to the navigation prop:
+The stack navigator adds the following methods to the navigation object:
 
 #### `replace`
 
-Replaces the current screen with a new screen in the stack. The method accepts following arguments:
+Replaces the current screen with a new screen in the stack. The method accepts the following arguments:
 
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to pass to the destination route.
 
 ```js
-navigation.push('Profile', { owner: 'Michaś' });
+navigation.replace('Profile', { owner: 'Michaś' });
 ```
 
 #### `push`
 
-Pushes a new screen to top of the stack and navigate to it. The method accepts following arguments:
+Pushes a new screen to the top of the stack and navigate to it. The method accepts the following arguments:
 
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to pass to the destination route.
@@ -481,6 +583,19 @@ Pops the current screen from the stack and navigates back to the previous screen
 navigation.pop();
 ```
 
+#### `popTo`
+
+Navigates back to a previous screen in the stack by popping screens after it. The method accepts the following arguments:
+
+- `name` - _string_ - Name of the route to navigate to.
+- `params` - _object_ - Screen params to pass to the destination route.
+
+If a matching screen is not found in the stack, this will pop the current screen and add a new screen with the specified name and params.
+
+```js
+navigation.popTo('Profile', { owner: 'Michaś' });
+```
+
 #### `popToTop`
 
 Pops all of the screens in the stack except the first one and navigates to it.
@@ -489,52 +604,48 @@ Pops all of the screens in the stack except the first one and navigates to it.
 navigation.popToTop();
 ```
 
-## Example
+### Hooks
 
-<samp id="stack-with-options" />
+The stack navigator exports the following hooks:
 
-```js
-import { createStackNavigator } from '@react-navigation/stack';
+#### `useCardAnimation`
 
-const Stack = createStackNavigator();
+This hook returns values related to the screen's animation. It contains the following properties:
 
-function MyStack() {
-  return (
-    <Stack.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerMode: 'screen',
-        headerTintColor: 'white',
-        headerStyle: { backgroundColor: 'tomato' },
-      }}
-    >
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          title: 'Awesome app',
-        }}
-      />
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          title: 'My profile',
-        }}
-      />
-      <Stack.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          gestureEnabled: false,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-```
+- `current` - Values for the current screen:
+  - `progress` - Animated node representing the progress value of the current screen.
+- `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
+  - `progress` - Animated node representing the progress value of the next screen.
+- `closing` - Animated node representing whether the card is closing. `1` when closing, `0` if not.
+- `swiping` - Animated node representing whether the card is being swiped. `1` when swiping, `0` if not.
+- `inverted` - Animated node representing whether the card is inverted. `-1` when inverted, `1` if not.
+- `index` - The index of the card in the stack.
+- `layouts` - Layout measurements for various items we use for animation.
+  - `screen` - Layout of the whole screen. Contains `height` and `width` properties.
+- `insets` - Layout of the safe area insets. Contains `top`, `right`, `bottom` and `left` properties.
+
+See [Transparent modals](#transparent-modals) for an example of how to use this hook.
 
 ## Animations
+
+You can specify the `animation` option to customize the transition animation for screens being pushed or popped.
+
+Supported values for `animation` are:
+
+- `default` - Default animation based on the platform and OS version.
+- `fade` - Simple fade animation for dialogs.
+- `fade_from_bottom` - Standard Android-style fade-in from the bottom for Android Oreo.
+- `fade_from_right` - Standard Android-style fade-in from the right for Android 14.
+- `reveal_from_bottom` - Standard Android-style reveal from the bottom for Android Pie.
+- `scale_from_center` - Scale animation from the center.
+- `slide_from_right` - Standard iOS-style slide in from the right.
+- `slide_from_left` - Similar to `slide_from_right`, but the screen will slide in from the left.
+- `slide_from_bottom` - Slide animation from the bottom for modals and bottom sheets.
+- `none` - The screens are pushed or popped immediately without any animation.
+
+By default, Android and iOS use the `default` animation and other platforms use `none`.
+
+If you need more control over the animation, you can customize individual parts of the animation using the various animation-related options:
 
 ### Animation related options
 
@@ -721,7 +832,7 @@ Stack Navigator exposes various options to configure the transition animation wh
     - `title` - Layout of the title element. Might be `undefined` when not rendering a title.
     - `leftLabel` - Layout of the back button label. Might be `undefined` when not rendering a back button label.
 
-  A config which just fades the elements looks like this:
+  A config that just fades the elements looks like this:
 
   ```js
   const forFade = ({ current, next }) => {
@@ -836,7 +947,11 @@ import { HeaderStyleInterpolators } from '@react-navigation/stack';
 />;
 ```
 
-> Note: Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
+:::warning
+
+Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
+
+:::
 
 #### `TransitionPresets`
 
@@ -923,18 +1038,13 @@ If you want to further customize how the dialog animates, or want to close the s
 Example:
 
 ```js
-import {
-  Animated,
-  View,
-  Text,
-  Pressable,
-  Button,
-  StyleSheet,
-} from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import { Animated, View, Text, Pressable, StyleSheet } from 'react-native';
+import { useTheme, useNavigation } from '@react-navigation/native';
 import { useCardAnimation } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
 
-function ModalScreen({ navigation }) {
+function ModalScreen() {
+  const navigation = useNavigation();
   const { colors } = useTheme();
   const { current } = useCardAnimation();
 
@@ -983,11 +1093,12 @@ function ModalScreen({ navigation }) {
           pantry ten times.
         </Text>
         <Button
-          title="Okay"
           color={colors.primary}
           style={{ alignSelf: 'flex-end' }}
           onPress={navigation.goBack}
-        />
+        >
+          Okay
+        </Button>
       </Animated.View>
     </View>
   );

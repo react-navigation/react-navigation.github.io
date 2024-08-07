@@ -35,8 +35,8 @@ After years of growing development, we need to admit that we’re not always abl
 
 Thanks to the great work of Krzysztof Magiera for [React Native Screens](https://github.com/kmagiera/react-native-screens) library now we can use truly native components instead of JS replicas.
 
-<img src="/assets/blog/android-native-stack.gif" height="530" />
-<img src="/assets/blog/ios-native-stack.gif" height="530" />
+<img src="/assets/blog/android-native-stack.gif" height="530" alt="Native Stack on Android" />
+<img src="/assets/blog/ios-native-stack.gif" height="530" alt="Native Stack on iOS" />
 
 We believe you will find it useful in your projects and strongly encourage you to get acquainted with our [documentation](https://github.com/kmagiera/react-native-screens/native-stack). Things that I’m the most excited about are iOS header animations!
 

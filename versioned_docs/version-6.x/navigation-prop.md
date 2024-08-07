@@ -7,14 +7,18 @@ sidebar_label: Navigation prop
 Each `screen` component in your app is provided with the `navigation` prop automatically. The prop contains various convenience functions that dispatch navigation actions. It looks like this:
 
 - `navigation`
-  - `navigate` - go to another screen, figures out the action it needs to take to do it
-  - `reset` - wipe the navigator state and replace it with a new route
-  - `goBack` - close active screen and move back in the stack
-  - `setParams` - make changes to route's params
+  - `navigate` - go to the given screen, this will behave differently based on the navigator
+  - `goBack` - go back to the previous screen, this will pop the current screen when used in a stack
+  - `reset` - replace the navigation state of the navigator with the given state
+  - `setParams` - merge new params onto the route's params
   - `dispatch` - send an action object to update the [navigation state](navigation-state.md)
   - `setOptions` - update the screen's options
   - `isFocused` - check whether the screen is focused
-  - `addListener` - subscribe to updates to events from the navigators
+  - `canGoBack` - check whether it's possible to go back from the current screen
+  - `getState` - get the navigation state of the navigator
+  - `getParent` - get the navigation object of the parent screen, if any
+  - `addListener` - subscribe to events for the screen
+  - `removeListener` - unsubscribe from events for the screen
 
 It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do any magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it. If, however, you wish to access the `navigation` prop in any of your components, you may use the [`useNavigation`](use-navigation.md) hook.
 
@@ -91,7 +95,11 @@ By default, the screen is identified by its name. But you can also customize it 
 For example, say you have specified a `getId` prop for `Profile` screen:
 
 ```js
-<Tab.Screen name={Profile} component={ProfileScreen} getId={({ params }) => params.userId} />
+<Tab.Screen
+  name={Profile}
+  component={ProfileScreen}
+  getId={({ params }) => params.userId}
+/>
 ```
 
 Now, if you have a stack with the history `Home > Profile (userId: bob) > Settings` and you call `navigate(Profile, { userId: 'alice' })`, the resulting screens will be `Home > Profile (userId: bob) > Settings > Profile (userId: alice)` since it'll add a new `Profile` screen as no matching screen was found.
@@ -149,7 +157,11 @@ navigation.reset({
 
 The state object specified in `reset` replaces the existing [navigation state](navigation-state.md) with the new one, i.e. removes existing screens and add new ones. If you want to preserve the existing screens when changing the state, you can use [`CommonActions.reset`](navigation-actions.md#reset) with [`dispatch`](#dispatch) instead.
 
-> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+:::warning
+
+Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+
+:::
 
 ### `setParams`
 
@@ -214,7 +226,11 @@ When using `navigation.setOptions`, we recommend specifying a placeholder in the
 
 You can also use `React.useLayoutEffect` to reduce the delay in updating the options. But we recommend against doing it if you support web and do server side rendering.
 
-> Note: `navigation.setOptions` is intended to provide the ability to update existing options when necessary. It's not a replacement for the `options` prop on the screen. Make sure to use `navigation.setOptions` sparingly only when absolutely necessary.
+:::note
+
+`navigation.setOptions` is intended to provide the ability to update existing options when necessary. It's not a replacement for the `options` prop on the screen. Make sure to use `navigation.setOptions` sparingly only when absolutely necessary.
+
+:::
 
 ## Navigation events
 
@@ -354,9 +370,7 @@ It accepts an optional ID parameter to refer to a specific parent navigator. For
 To use an ID for a navigator, first pass a unique `id` prop:
 
 ```js
-<Drawer.Navigator id="LeftDrawer">
-  {/* .. */}
-</Drawer.Navigator>
+<Drawer.Navigator id="LeftDrawer">{/* .. */}</Drawer.Navigator>
 ```
 
 Then when using `getParent`, instead of:
@@ -387,7 +401,11 @@ This method will return `undefined` if there is no matching parent navigator. Be
 
 ### `getState`
 
-> Note: Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+:::warning
+
+Consider the navigator's state object to be internal and subject to change in a minor release. Avoid using properties from the [navigation state](navigation-state.md) state object except `index` and `routes`, unless you really need it. If there is some functionality you cannot achieve without relying on the structure of the state object, please open an issue.
+
+:::
 
 This method returns the state object of the navigator which contains the screen. Getting the navigator state could be useful in very rare situations. You most likely don't need to use this method. If you do, make sure you have a good reason.
 

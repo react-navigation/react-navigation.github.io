@@ -4,31 +4,110 @@ title: useFocusEffect
 sidebar_label: useFocusEffect
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Sometimes we want to run side-effects when a screen is focused. A side effect may involve things like adding an event listener, fetching data, updating document title, etc. While this can be achieved using `focus` and `blur` events, it's not very ergonomic.
 
 To make this easier, the library exports a `useFocusEffect` hook:
 
-<samp id="simple-focus-effect" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="useFocusEffect hook" snack
+import * as React from 'react';
+import { View } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// codeblock-focus-start
 import { useFocusEffect } from '@react-navigation/native';
 
-function Profile({ userId }) {
-  const [user, setUser] = React.useState(null);
-
+function ProfileScreen() {
   useFocusEffect(
     React.useCallback(() => {
-      const unsubscribe = API.subscribe(userId, user => setUser(user));
-
-      return () => unsubscribe();
-    }, [userId])
+      // Do something when the screen is focused
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
   );
 
-  return <ProfileContent user={user} />;
+  return <View />;
+}
+// codeblock-focus-end
+
+function HomeScreen() {
+  return <View />;
+}
+
+const Tab = createBottomTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(Tab);
+
+export default function App() {
+  return <Navigation />;
 }
 ```
 
-> Note: To avoid the running the effect too often, it's important to wrap the callback in `useCallback` before passing it to `useFocusEffect` as shown in the example.
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="useFocusEffect hook" snack
+import * as React from 'react';
+import { View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+// codeblock-focus-start
+import { useFocusEffect } from '@react-navigation/native';
+
+function ProfileScreen() {
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
+
+  return <View />;
+}
+// codeblock-focus-end
+
+function HomeScreen() {
+  return <View />;
+}
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+:::warning
+
+To avoid the running the effect too often, it's important to wrap the callback in `useCallback` before passing it to `useFocusEffect` as shown in the example.
+
+:::
 
 The `useFocusEffect` is analogous to React's `useEffect` hook. The only difference is that it only runs if the screen is currently focused.
 
@@ -103,7 +182,7 @@ useFocusEffect(
   React.useCallback(() => {
     return () => {
       // Do something that should run on blur
-    }
+    };
   }, [])
 );
 ```
@@ -112,7 +191,7 @@ The cleanup function runs whenever the effect needs to cleanup, i.e. on `blur`, 
 
 ```js
 React.useEffect(() => {
-    const unsubscribe = navigation.addListener('blur', () => {
+  const unsubscribe = navigation.addListener('blur', () => {
     // Do something when the screen blurs
   });
 
@@ -142,7 +221,7 @@ function FetchUserData({ userId, onUpdate }) {
 // ...
 
 class Profile extends React.Component {
-  _handleUpdate = user => {
+  _handleUpdate = (user) => {
     // Do something with user object
   };
 

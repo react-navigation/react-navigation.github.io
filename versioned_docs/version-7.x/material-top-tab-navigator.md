@@ -6,11 +6,9 @@ sidebar_label: Material Top Tabs
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the tabs or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/tabs/material-top-tabs.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/material-top-tabs.mp4" />
+</video>
 
 This wraps [`react-native-tab-view`](tab-view.md). If you want to use the tab view without React Navigation integration, use the library directly instead.
 
@@ -19,7 +17,7 @@ This wraps [`react-native-tab-view`](tab-view.md). If you want to use the tab vi
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/material-top-tabs):
 
 ```bash npm2yarn
-npm install @react-navigation/material-top-tabs react-native-tab-view
+npm install @react-navigation/material-top-tabs@next
 ```
 
 Then, you need to install [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) which is required by the navigator.
@@ -42,13 +40,74 @@ If you're on a Mac and developing for iOS, you also need to install the pods (vi
 npx pod-install ios
 ```
 
-## API Definition
+## Usage
 
-To use this tab navigator, import it from `@react-navigation/material-top-tabs`:
+To use this navigator, import it from `@react-navigation/material-top-tabs`:
 
-<samp id="material-top-tab-based-navigation-minimal" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
+```js name="Material Top Tab Navigator" snack
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+// codeblock-focus-start
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+// codeblock-focus-end
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyTabs = createMaterialTopTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyTabs);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Material Top Tab Navigator" snack
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+// codeblock-focus-start
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const Tab = createMaterialTopTabNavigator();
@@ -57,29 +116,53 @@ function MyTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
+  );
+}
+// codeblock-focus-end
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
   );
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+</TabItem>
+</Tabs>
+
+## API Definition
 
 ### Props
 
-The `Tab.Navigator` component accepts following props:
-
-#### `id`
-
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
-
-#### `initialRouteName`
-
-The name of the route to render on first load of the navigator.
-
-#### `screenOptions`
-
-Default options to use for the screens in the navigator.
+In addition to the [common props](navigator.md#configuration) shared by all navigators, the material top tabs navigator component accepts the following additional props:
 
 #### `backBehavior`
 
@@ -132,9 +215,13 @@ Example:
 <samp id="material-top-tab-custom-tab-bar" />
 
 ```js
-import { Animated, View, TouchableOpacity } from 'react-native';
+import { Animated, View, TouchableOpacity, Platform } from 'react-native';
+import { useLinkBuilder, useTheme } from '@react-navigation/native';
 
 function MyTabBar({ state, descriptors, navigation, position }) {
+  const { colors } = useTheme();
+  const { buildHref } = useLinkBuilder();
+
   return (
     <View style={{ flexDirection: 'row' }}>
       {state.routes.map((route, index) => {
@@ -143,8 +230,8 @@ function MyTabBar({ state, descriptors, navigation, position }) {
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
-            ? options.title
-            : route.name;
+              ? options.title
+              : route.name;
 
         const isFocused = state.index === index;
 
@@ -156,8 +243,7 @@ function MyTabBar({ state, descriptors, navigation, position }) {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({ name: route.name, merge: true });
+            navigation.navigate(route.name, route.params);
           }
         };
 
@@ -171,20 +257,21 @@ function MyTabBar({ state, descriptors, navigation, position }) {
         const inputRange = state.routes.map((_, i) => i);
         const opacity = position.interpolate({
           inputRange,
-          outputRange: inputRange.map(i => (i === index ? 1 : 0)),
+          outputRange: inputRange.map((i) => (i === index ? 1 : 0)),
         });
 
         return (
           <TouchableOpacity
-            accessibilityRole="button"
+            href={buildHref(route.name, route.params)}
+            accessibilityRole={Platform.OS === 'web' ? 'link' : 'button'}
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
+            testID={options.tabBarButtonTestID}
             onPress={onPress}
             onLongPress={onLongPress}
             style={{ flex: 1 }}
           >
-            <Animated.Text style={{ opacity }}>
+            <Animated.Text style={{ opacity, color: colors.text }}>
               {label}
             </Animated.Text>
           </TouchableOpacity>
@@ -196,9 +283,9 @@ function MyTabBar({ state, descriptors, navigation, position }) {
 
 // ...
 
-<Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
-  {...}
-</Tab.Navigator>
+<Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
+  {/* ... */}
+</Tab.Navigator>;
 ```
 
 This example will render a basic tab bar with labels.
@@ -209,12 +296,14 @@ Note that you **cannot** use the `useNavigation` hook inside the `tabBar` since 
 function MyTabBar({ navigation }) {
   return (
     <Button
-      title="Go somewhere"
       onPress={() => {
         // Navigate using the `navigation` prop that you received
+        // highlight-next-line
         navigation.navigate('SomeScreen');
       }}
-    />
+    >
+      Go somewhere
+    </Button>
   );
 }
 ```
@@ -283,7 +372,7 @@ Style object for the tab bar indicator.
 
 Style object for the view containing the tab bar indicator.
 
-#### `tabBarTestID`
+#### `tabBarButtonTestID`
 
 ID to locate this tab button in tests.
 
@@ -404,7 +493,7 @@ React.useEffect(() => {
 
 ### Helpers
 
-The tab navigator adds the following methods to the navigation prop:
+The tab navigator adds the following methods to the navigation object:
 
 #### `jumpTo`
 
@@ -419,41 +508,30 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 navigation.jumpTo('Profile', { name: 'Michaś' });
 ```
 
-## Example
+### Hooks
 
-<samp id="material-top-tab-example" />
+The material top tab navigator exports the following hooks:
+
+#### `useTabAnimation`
+
+This hook returns an object containing an animated value that represents the current position of the tabs. This can be used to animate elements based on the swipe position of the tabs, such as the tab indicator:
 
 ```js
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { Animated } from 'react-native';
+import { useTabAnimation } from '@react-navigation/material-top-tabs';
 
-const Tab = createMaterialTopTabNavigator();
+function MyView() {
+  const { position } = useTabAnimation();
 
-function MyTabs() {
   return (
-    <Tab.Navigator
-      initialRouteName="Feed"
-      screenOptions={{
-        tabBarActiveTintColor: '#e91e63',
-        tabBarLabelStyle: { fontSize: 12 },
-        tabBarStyle: { backgroundColor: 'powderblue' },
+    <Animated.View
+      style={{
+        width: '50%',
+        height: 2,
+        backgroundColor: 'tomato',
+        transform: [{ translateX: position }],
       }}
-    >
-      <Tab.Screen
-        name="Feed"
-        component={Feed}
-        options={{ tabBarLabel: 'Home' }}
-      />
-      <Tab.Screen
-        name="Notifications"
-        component={Notifications}
-        options={{ tabBarLabel: 'Updates' }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{ tabBarLabel: 'Profile' }}
-      />
-    </Tab.Navigator>
+    />
   );
 }
 ```

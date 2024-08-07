@@ -4,6 +4,9 @@ title: Troubleshooting
 sidebar_label: Troubleshooting
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 This section attempts to outline issues that users frequently encounter when first getting accustomed to using React Navigation. These issues may or may not be related to React Navigation itself.
 
 Before troubleshooting an issue, make sure that you have upgraded to **the latest available versions** of the packages. You can install the latest versions by installing the packages again (e.g. `npm install package-name`).
@@ -198,6 +201,30 @@ Now rebuild the app and test on your device or simulator.
 
 If you wrap the container in a `View`, make sure the `View` stretches to fill the container using `flex: 1`:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+import * as React from 'react';
+import { View } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+
+/* ... */
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return (
+    <View style={{ flex: 1 }}>
+      <Navigation />
+    </View>
+  );
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 ```js
 import * as React from 'react';
 import { View } from 'react-native';
@@ -211,6 +238,9 @@ export default function App() {
   );
 }
 ```
+
+</TabItem>
+</Tabs>
 
 ## I get the warning "Non-serializable values were found in the navigation state"
 
@@ -239,6 +269,25 @@ LogBox.ignoreLogs([
 
 This can happen when you pass a React component to an option that accepts a function returning a react element. For example, the [`headerTitle` option in native stack navigator](native-stack-navigator.md#headerTitle) expects a function returning a react element:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Stack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: Home,
+      options: {
+        headerTitle: (props) => <MyTitle {...props} />,
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 ```js
 <Stack.Screen
   name="Home"
@@ -247,7 +296,30 @@ This can happen when you pass a React component to an option that accepts a func
 />
 ```
 
+</TabItem>
+</Tabs>
+
 If you directly pass a function here, you'll get this error when using hooks:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Stack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: Home,
+      options: {
+        // This is not correct
+        headerTitle: MyTitle,
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 <Stack.Screen
@@ -260,6 +332,9 @@ If you directly pass a function here, you'll get this error when using hooks:
 />
 ```
 
+</TabItem>
+</Tabs>
+
 The same applies to other options like `headerLeft`, `headerRight`, `tabBarIcon` etc. as well as props such as `tabBar`, `drawerContent` etc.
 
 ## Screens are unmounting/remounting during navigation
@@ -267,6 +342,28 @@ The same applies to other options like `headerLeft`, `headerRight`, `tabBarIcon`
 Sometimes you might have noticed that your screens unmount/remount, or your local component state or the navigation state resets when you navigate. This might happen if you are creating React components during render.
 
 The simplest example is something like following:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: () => {
+      return <SomeComponent />;
+    },
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 function App() {
@@ -283,11 +380,38 @@ function App() {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 The `component` prop expects a React Component, but in the example, it's getting a function returning an React Element. While superficially a component and a function returning a React Element look the exact same, they don't behave the same way when used.
 
 Here, every time the component re-renders, a new function will be created and passed to the `component` prop. React will see a new component and unmount the previous component before rendering the new one. This will cause any local state in the old component to be lost. React Navigation will detect and warn for this specific case but there can be other ways you might be creating components during render which it can't detect.
 
 Another easy to identify example of this is when you create a component inside another component:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+function App() {
+  const Home = () => {
+    return <SomeComponent />;
+  };
+
+  const RootStack = createNativeStackNavigator({
+    screens: {
+      Home: Home,
+    },
+  });
+
+  const Navigation = createStaticNavigation(RootStack);
+
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 function App() {
@@ -303,7 +427,34 @@ function App() {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 Or when you use a higher order component (such as `connect` from Redux, or `withX` functions that accept a component) inside another component:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+function App() {
+  const Home = () => {
+    return <SomeComponent />;
+  };
+
+  const RootStack = createNativeStackNavigator({
+    screens: {
+      Home: withSomeData(Home),
+    },
+  });
+
+  const Navigation = createStaticNavigation(RootStack);
+
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 function App() {
@@ -315,7 +466,33 @@ function App() {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 If you're unsure, it's always best to make sure that the components you are using as screens are defined outside of a React component. They could be defined in another file and imported, or defined at the top level scope in the same file:
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Home = () => {
+  return <SomeComponent />;
+};
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: Home,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 const Home = () => {
@@ -330,6 +507,9 @@ function App() {
   );
 }
 ```
+
+</TabItem>
+</Tabs>
 
 This is not React Navigation specific, but related to React in general. You should always avoid creating components during render, whether you are using React Navigation or not.
 

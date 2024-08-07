@@ -52,7 +52,11 @@ And then we can use it:
 
 This will provide type checking and intelliSense for props of the `Navigator` and `Screen` components.
 
-> Note: The type containing the mappings must be a type alias (e.g. `type RootStackParamList = { ... }`). It cannot be an interface (e.g. `interface RootStackParamList { ... }`). It also shouldn't extend `ParamListBase` (e.g. `interface RootStackParamList extends ParamListBase { ... }`). Doing so will result in incorrect type checking where it allows you to pass incorrect route names.
+:::note
+
+The type containing the mappings must be a type alias (e.g. `type RootStackParamList = { ... }`). It cannot be an interface (e.g. `interface RootStackParamList { ... }`). It also shouldn't extend `ParamListBase` (e.g. `interface RootStackParamList extends ParamListBase { ... }`). Doing so will result in incorrect type checking where it allows you to pass incorrect route names.
+
+:::
 
 ### Type checking screens
 
@@ -209,23 +213,33 @@ type ProfileScreenNavigationProp = CompositeNavigationProp<
 
 ### Annotating `useNavigation`
 
+:::danger
+
+Annotating `useNavigation` isn't type-safe because the type parameter cannot be statically verified.
+Prefer [specifying a default type](#specifying-default-types-for-usenavigation-link-ref-etc) instead.
+
+:::
+
 To annotate the `navigation` prop that we get from `useNavigation`, we can use a type parameter:
 
 ```ts
 const navigation = useNavigation<ProfileScreenNavigationProp>();
 ```
 
-It's important to note that this isn't completely type-safe because the type parameter you use may not be correct and we cannot statically verify it.
-
 ### Annotating `useRoute`
+
+:::danger
+
+Annotating `useRoute` isn't type-safe because the type parameter cannot be statically verified.
+Prefer using the [`route` prop](route-prop.md) instead when possible. Use `useRoute` for generic code that doesn't need specific route type.
+
+:::
 
 To annotate the `route` prop that we get from `useRoute`, we can use a type parameter:
 
 ```ts
 const route = useRoute<ProfileScreenRouteProp>();
 ```
-
-It's important to note that this isn't completely type-safe, similar to `useNavigation`.
 
 ### Annotating `options` and `screenOptions`
 

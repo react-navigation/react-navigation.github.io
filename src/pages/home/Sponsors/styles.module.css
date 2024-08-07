@@ -1,5 +1,5 @@
 .wrapper {
-  background-color: var(--ifm-home-color-background);
+  background-color: var(--ifm-home-color-background-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
