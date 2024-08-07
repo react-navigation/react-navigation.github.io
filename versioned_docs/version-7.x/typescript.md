@@ -16,46 +16,51 @@ There are 2 steps to configure TypeScript with the static API:
 
 1. Each screen component needs to specify the type of the `route.params` prop that it accepts. The `StaticScreenProps` type makes it simpler:
 
-```ts
-import type { StaticScreenProps } from '@react-navigation/native';
+   ```ts
+   import type { StaticScreenProps } from '@react-navigation/native';
 
-type Props = StaticScreenProps<{
-  username: string;
-}>;
+   // highlight-start
+   type Props = StaticScreenProps<{
+     username: string;
+   }>;
+   // highlight-end
 
-function ProfileScreen({ route }: Props) {
-  // ...
-}
-```
+   function ProfileScreen({ route }: Props) {
+     // ...
+   }
+   ```
 
-1. Generate the `ParamList` type for the root navigator and specify it as the default type for the `RootParamList` type:
+2. Generate the `ParamList` type for the root navigator and specify it as the default type for the `RootParamList` type:
 
-```ts
-import type { StaticParamList } from '@react-navigation/native';
+   ```ts
+   import type { StaticParamList } from '@react-navigation/native';
 
-const HomeTabs = createBottomTabNavigator({
-  screens: {
-    Feed: FeedScreen,
-    Profile: ProfileScreen,
-  },
-});
+   const HomeTabs = createBottomTabNavigator({
+     screens: {
+       Feed: FeedScreen,
+       Profile: ProfileScreen,
+     },
+   });
 
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Home: HomeTabs,
-  },
-});
+   const RootStack = createNativeStackNavigator({
+     screens: {
+       Home: HomeTabs,
+     },
+   });
 
-type RootStackParamList = StaticParamList<typeof RootStack>;
+   // highlight-next-line
+   type RootStackParamList = StaticParamList<typeof RootStack>;
 
-declare global {
-  namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
-  }
-}
-```
+   // highlight-start
+   declare global {
+     namespace ReactNavigation {
+       interface RootParamList extends RootStackParamList {}
+     }
+   }
+   // highlight-end
+   ```
 
-This is needed to type-check the `useNavigation` hook.
+   This is needed to type-check the `useNavigation` hook.
 
 ## Navigator specific types
 
@@ -106,10 +111,13 @@ type HomeTabsParamList = {
   Profile: undefined;
 };
 
+// highlight-start
 type HomeTabsProps = StaticScreenProps<
   NavigatorScreenParams<HomeTabsParamList>
 >;
+// highlight-end
 
+// highlight-next-line
 function HomeTabs(_: HomeTabsProps) {
   return (
     <Tab.Navigator>
