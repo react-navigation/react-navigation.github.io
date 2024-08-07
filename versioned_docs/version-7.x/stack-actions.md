@@ -66,14 +66,14 @@ function ProfileScreen({ route }) {
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button onPress={() => navigation.dispatch(StackActions.pop(1))}>
-        Push same screen on the stack
+        Pop one screen from stack
       </Button>
       <Button
         onPress={() => {
           navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
         }}
       >
-        Pop one screen from stack
+        Push same screen on the stack
       </Button>
       <Button onPress={() => navigation.dispatch(StackActions.popToTop())}>
         Pop to top
@@ -142,14 +142,14 @@ function ProfileScreen({ navigation, route }) {
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button onPress={() => navigation.dispatch(StackActions.pop(1))}>
-        Push same screen on the stack
+         Pop one screen from stack
       </Button>
       <Button
         onPress={() => {
           navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
         }}
       >
-        Pop one screen from stack
+       Push same screen on the stack
       </Button>
       <Button onPress={() => navigation.dispatch(StackActions.popToTop())}>
         Pop to top
@@ -246,14 +246,14 @@ function ProfileScreen({ route }) {
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button onPress={() => navigation.dispatch(StackActions.pop(1))}>
-        Push same screen on the stack
+        Pop one screen from stack
       </Button>
       <Button
         onPress={() => {
           navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
         }}
       >
-        Pop one screen from stack
+        Push same screen on the stack
       </Button>
       <Button onPress={() => navigation.dispatch(StackActions.popToTop())}>
         Pop to top
@@ -322,14 +322,14 @@ function ProfileScreen({ navigation, route }) {
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button onPress={() => navigation.dispatch(StackActions.pop(1))}>
-        Push same screen on the stack
+        Pop one screen from stack
       </Button>
       <Button
         onPress={() => {
           navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
         }}
       >
-        Pop one screen from stack
+        Push same screen on the stack
       </Button>
       <Button onPress={() => navigation.dispatch(StackActions.popToTop())}>
         Pop to top
@@ -411,14 +411,14 @@ function ProfileScreen({ route }) {
           // codeblock-focus-end
         }}
       >
-        Push same screen on the stack
+      Pop one screen from stack
       </Button>
       <Button
         onPress={() => {
           navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
         }}
       >
-        Pop one screen from stack
+      Push same screen on the stack
       </Button>
       <Button onPress={() => navigation.dispatch(StackActions.popToTop())}>
         Pop to top
@@ -491,14 +491,14 @@ function ProfileScreen({ navigation, route }) {
           // codeblock-focus-end
         }}
       >
-        Push same screen on the stack
+        Pop one screen from stack
       </Button>
       <Button
         onPress={() => {
           navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
         }}
       >
-        Pop one screen from stack
+        Push same screen on the stack
       </Button>
       <Button onPress={() => navigation.dispatch(StackActions.popToTop())}>
         Pop to top
@@ -593,14 +593,14 @@ function ProfileScreen({ route }) {
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button onPress={() => navigation.dispatch(StackActions.pop(1))}>
-        Push same screen on the stack
+       Pop one screen from stack
       </Button>
       <Button
         onPress={() => {
           navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
         }}
       >
-        Pop one screen from stack
+        Push same screen on the stack
       </Button>
       <Button
         onPress={() => {
@@ -673,14 +673,14 @@ function ProfileScreen({ navigation, route }) {
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button onPress={() => navigation.dispatch(StackActions.pop(1))}>
-        Push same screen on the stack
+        Pop one screen from stack
       </Button>
       <Button
         onPress={() => {
           navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
         }}
       >
-        Pop one screen from stack
+        Push same screen on the stack
       </Button>
       <Button
         onPress={() => {
