@@ -489,7 +489,7 @@ Passing additional props to a screen is not supported in the static API.
 
 Sometimes we might want to pass additional props to a screen. We can do that with 2 approaches:
 
-1. Use [React context](https://reactjs.org/docs/context.html) and wrap the navigator with a context provider to pass data to the screens (recommended).
+1. Use [React context](https://react.dev/reference/react/useContext) and wrap the navigator with a context provider to pass data to the screens (recommended).
 2. Use a render callback for the screen instead of specifying a `component` prop:
 
    ```js
