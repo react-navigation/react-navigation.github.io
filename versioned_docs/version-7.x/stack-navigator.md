@@ -500,14 +500,28 @@ How the back button displays icon and title.
 Supported values:
 
 - `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
+  <img src="/assets/7.x/stack/headerBackButtonDisplayMode-default.png" width="500" alt="Header back button dispaly mode - default" />
 - `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon).
+  <img src="/assets/7.x/stack/headerBackButtonDisplayMode-generic.png" width="500" alt="Header back button dispaly mode - generic" />
 - `minimal`: Always displays only the icon without a title.
+  <img src="/assets/7.x/stack/headerBackButtonDisplayMode-minimal.png" width="500" alt="Header back button dispaly mode - minimal" />
 
 Defaults to `default` on iOS, and `minimal` on Android.
 
 #### `headerBackTitleStyle`
 
 Style object for the back title.
+
+<img src="/assets/7.x/stack/headerBackTitleStyle.png" width="500" alt="Header back title style" />
+
+Example:
+
+```js
+  headerBackTitleStyle: {
+      fontSize: 14,
+      fontFamily: 'Georgia',
+  },
+```
 
 ### Events
 
@@ -685,15 +699,55 @@ You can specify the `animation` option to customize the transition animation for
 Supported values for `animation` are:
 
 - `default` - Default animation based on the platform and OS version.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-default.mp4" />
+</video>
+
 - `fade` - Simple fade animation for dialogs.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-fade.mp4" />
+</video>
+
 - `fade_from_bottom` - Standard Android-style fade-in from the bottom for Android Oreo.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-fade_from_bottom.mp4" />
+</video>
+
 - `fade_from_right` - Standard Android-style fade-in from the right for Android 14.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-fade_from_right.mp4" />
+</video>
+
 - `reveal_from_bottom` - Standard Android-style reveal from the bottom for Android Pie.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-reveal_from_bottom.mp4" />
+</video>
+
 - `scale_from_center` - Scale animation from the center.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-scale_from_center.mp4" />
+</video>
+
 - `slide_from_right` - Standard iOS-style slide in from the right.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-slide_from_right.mp4" />
+</video>
+
 - `slide_from_left` - Similar to `slide_from_right`, but the screen will slide in from the left.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-slide_from_left.mp4" />
+</video>
+
 - `slide_from_bottom` - Slide animation from the bottom for modals and bottom sheets.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-slide_from_bottom.mp4" />
+</video>
+
 - `none` - The screens are pushed or popped immediately without any animation.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-none.mp4" />
+</video>
+
 
 By default, Android and iOS use the `default` animation and other platforms use `none`.
 
