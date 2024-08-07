@@ -19,6 +19,10 @@
 
   --ifm-code-font-size: 85%;
 
+  --ifm-heading-font-weight: 700;
+  --ifm-heading-line-height: 1.618;
+  --ifm-heading-margin-top: 1.618rem;
+
   --ifm-color-primary: hsl(
     var(--primary-hue),
     var(--primary-saturation),
@@ -132,45 +136,31 @@
 h1 {
   font-size: 2.618rem;
   letter-spacing: -0.02em;
-  line-height: 1.618;
-  margin-bottom: 0.5rem;
+  margin-top: 0;
+  margin-left: -0.09rem;
 }
 
 h2 {
   font-size: 1.618rem;
   letter-spacing: -0.02em;
-  font-weight: 700;
-  line-height: 1.618;
-  margin: 2.618rem 0 0 -0.09rem;
+  margin-left: -0.09rem;
 }
 
 h3 {
   font-size: 1.382rem;
   letter-spacing: -0.01em;
-  font-weight: 700;
-  line-height: 1.618;
-  margin: 1.618rem 0 0 0;
 }
 
 h4 {
   font-size: 1.145rem;
-  font-weight: 700;
-  line-height: 1.618;
-  margin: 1.618rem 0 0 0;
 }
 
 h5 {
   font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.618;
-  margin: 1.618rem 0 0 0;
 }
 
 h6 {
   font-size: 0.85rem;
-  font-weight: 700;
-  line-height: 1.618;
-  margin: 1.618rem 0 0 0;
 }
 
 p {
