@@ -100,4 +100,4 @@ class Screen extends React.Component {
 }
 ```
 
-You can run this example in [this Snack](https://snack.expo.io/@react-navigation/localization-example). Again, you may want to go further than just passing this through `screenProps` if you want to make it easier to access the `t` function or the other `screenProps` from any React component (and not just screen components that are rendered by React Navigation). Refer to [themes](themes.md) and the [React documentation on context](https://reactjs.org/docs/context.html) for help with that.
+You can run this example in [this Snack](https://snack.expo.io/@react-navigation/localization-example). Again, you may want to go further than just passing this through `screenProps` if you want to make it easier to access the `t` function or the other `screenProps` from any React component (and not just screen components that are rendered by React Navigation). Refer to [themes](themes.md) and the [React documentation on context](https://react.dev/reference/react/useContext) for help with that.

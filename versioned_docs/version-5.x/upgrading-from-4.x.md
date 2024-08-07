@@ -383,7 +383,7 @@ However, using `screenProps` had some disadvantages:
 - When using a type-checker like TypeScript, it was necessary to annotate `screenProps` every time we want to use it, which wasn't type-safe or convenient.
 - You could only access `screenProps` in screens. To access them in child components, you needed to pass them down as props manually. It's very inconvenient for things like translation where we often use it in a lot of components.
 
-Due to the component based API of React Navigation 5.x, we have a much better alternative to `screenProps` which doesn't have these disadvantages: [React Context](https://reactjs.org/docs/context.html). Using React Context, it's possible to pass data to any child component in a performant and type-safe way, and we don't need to learn a new API!
+Due to the component based API of React Navigation 5.x, we have a much better alternative to `screenProps` which doesn't have these disadvantages: [React Context](https://react.dev/reference/react/useContext). Using React Context, it's possible to pass data to any child component in a performant and type-safe way, and we don't need to learn a new API!
 
 ## Themes
 
