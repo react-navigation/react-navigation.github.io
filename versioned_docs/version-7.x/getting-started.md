@@ -157,7 +157,7 @@ export default function App() {
 
 :::warning
 
-In a typical React Native app, the `NavigationContainer` should be only used once in your app at the root. You shouldn't nest multiple `NavigationContainers` unless you have a specific use case for them.
+In a typical React Native app, the `NavigationContainer` should be only used once in your app at the root. You shouldn't nest multiple `NavigationContainer`s unless you have a specific use case for them.
 
 :::
 
