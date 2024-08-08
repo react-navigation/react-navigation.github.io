@@ -173,7 +173,7 @@ p {
 @media (min-width: 82.5rem) {
   .main-wrapper:not(.full-width),
   .navbar__inner,
-  footer .container {
+  .footer .container {
     max-width: 82.5rem;
     margin: auto;
   }
@@ -197,7 +197,7 @@ p {
   }
 }
 
-footer {
+.footer {
   border-top: 1px solid var(--ifm-toc-border-color);
 }
 
