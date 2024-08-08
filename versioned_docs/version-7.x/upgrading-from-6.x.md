@@ -796,6 +796,25 @@ return (
 );
 ```
 
+#### All navigators with headers now support `headerSearchBarOptions`
+
+The `Header` component from `@react-navigation/elements` now supports a `headerSearchBarOptions` prop. This means all navigators that use the `Header` component now support a search bar in the header as well on all platforms. Previously, this was only available in the Native Stack Navigator on iOS and Android.
+
+```js
+React.useLayoutEffect(() => {
+  navigation.setOptions({
+    headerSearchBarOptions: {
+      placeholder: 'Search',
+      onChangeText: (text) => {
+        // Do something
+      },
+    },
+  });
+}, [navigation]);
+```
+
+See [`headerSearchBarOptions`](elements.md#headersearchbaroptions) for usage.
+
 ### New components in elements library
 
 The `@react-navigation/elements` package now includes new components that can be used in your app:

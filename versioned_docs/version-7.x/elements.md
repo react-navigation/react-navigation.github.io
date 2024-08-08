@@ -73,8 +73,12 @@ function HomeScreen() {
 // codeblock-focus-start
 const MyStack = createNativeStackNavigator({
   screenOptions: {
-    header: ({ options, route }) => (
-      <Header {...options} title={getHeaderTitle(options, route.name)} />
+    header: ({ options, route, back }) => (
+      <Header
+        {...options}
+        back={back}
+        title={getHeaderTitle(options, route.name)}
+      />
     ),
   },
   screens: {
@@ -107,8 +111,12 @@ function MyStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        header: ({ options, route }) => (
-          <Header {...options} title={getHeaderTitle(options, route.name)} />
+        header: ({ options, route, back }) => (
+          <Header
+            {...options}
+            back={back}
+            title={getHeaderTitle(options, route.name)}
+          />
         ),
       }}
     >
@@ -325,6 +333,35 @@ const RootStack = createNativeStackNavigator({
 
 </TabItem>
 </Tabs>
+
+#### `headerSearchBarOptions`
+
+Options for the search bar in the header. When this is specified, the header will contain a button to show a search input.
+
+It can contain the following properties:
+
+- `autoCapitalize`: The auto-capitalization behavior. Possible values: `none`, `words`, `sentences`, `characters`.
+- `autoFocus`: Automatically focus search input on mount.
+- `cancelButtonText`: Text to be used instead of default `Cancel` button text (iOS only).
+- `inputType`: Type of the input. Possible values: `text`, `phone`, `number`, `email`.
+- `onBlur`: Callback that gets called when search input has lost focus.
+- `onChangeText`: Callback that gets called when the text changes.
+- `onClose`: Callback that gets called when search input is closed.
+- `onFocus`: Callback that gets called when search input has received focus.
+- `placeholder`: Text displayed when search input is empty.
+
+```js
+React.useLayoutEffect(() => {
+  navigation.setOptions({
+    headerSearchBarOptions: {
+      placeholder: 'Search',
+      onChangeText: (text) => {
+        // Do something
+      },
+    },
+  });
+}, [navigation]);
+```
 
 #### `headerShadowVisible`
 
