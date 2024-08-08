@@ -222,7 +222,7 @@ p {
 }
 
 .navbar div[class*='colorModeToggle'] {
-  margin: 0 0.5em;
+  margin: 0 0.5rem;
 }
 
 .navbar .DocSearch-Button {
@@ -232,6 +232,10 @@ p {
 .navbar .DocSearch-Button svg {
   width: 16px;
   height: 16px;
+}
+
+.navbar__logo {
+  margin-right: .75rem;
 }
 
 @media (min-width: 997px) {
