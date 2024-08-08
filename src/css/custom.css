@@ -306,18 +306,26 @@ p {
 }
 
 .menu > .menu__list > .menu__list-item {
+  position: relative;
   padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-bottom: 1rem;
 }
 
-.menu > .menu__list > .menu__list-item:not(:last-child) {
-  border-bottom: 1px solid var(--ifm-toc-border-color);
+.menu > .menu__list > .menu__list-item:not(:last-child)::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0.5rem;
+  width: calc(100% - 1.5rem);
+  height: 1px;
+  background-color: var(--ifm-toc-border-color);
 }
 
 @media (min-width: 85rem) {
   .menu > .menu__list > .menu__list-item {
     padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 1.75rem;
   }
 }
 
