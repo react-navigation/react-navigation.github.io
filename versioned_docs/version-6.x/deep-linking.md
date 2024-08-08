@@ -153,7 +153,7 @@ If you want to add it manually, open up `SimpleApp/android/app/src/main/AndroidM
 </activity>
 ```
 
-Similar to Universal Links on iOS, you can also use a domain to associate the app with your website on Android by [verifying Android App Links](https://developer.android.com/training/app-links/verify-site-associations). First, you need to configure your `AndroidManifest.xml`:
+Similar to Universal Links on iOS, you can also use a domain to associate the app with your website on Android by [verifying Android App Links](https://developer.android.com/training/app-links/verify-android-applinks). First, you need to configure your `AndroidManifest.xml`:
 
 1. Add `android:autoVerify="true"` to your `<intent-filter>` entry.
 2. Add your domain's `scheme` and `host` in a new `<data>` entry inside the `<intent-filter>`.
