@@ -235,7 +235,7 @@ p {
 }
 
 .navbar__logo {
-  margin-right: .75rem;
+  margin-right: 0.75rem;
 }
 
 @media (min-width: 997px) {
@@ -245,6 +245,27 @@ p {
     );
     box-shadow: 1px 0 0 0 var(--ifm-toc-border-color);
   }
+}
+
+@media (max-width: 996px) {
+  .navbar__inner .navbar__brand {
+    position: relative;
+    margin: auto;
+    left: -1rem;
+  }
+}
+
+.navbar__toggle svg {
+  display: none;
+}
+
+.navbar__toggle::after {
+  content: '';
+  width: 24px;
+  height: 24px;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='M21 6H3M15 12H3M17 18H3'/%3E%3C/svg%3E")
+    no-repeat;
+  background-color: currentColor;
 }
 
 .navbar-social-link::before {
