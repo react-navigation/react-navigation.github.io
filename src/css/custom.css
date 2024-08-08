@@ -66,7 +66,7 @@
   );
 
   --ifm-hero-background-color: var(--ifm-color-primary);
-  --ifm-footer-background-color: #f7f7ff;
+  --ifm-footer-background-color: var(--ifm-background-surface-color);
   --ifm-home-color-text: #414360;
   --ifm-home-color-background: #f7f7ff;
   --ifm-home-color-background-secondary: #d5d6f5;
@@ -79,6 +79,8 @@
   --ifm-menu-color-background-active: rgba(107, 82, 174, 0.1);
   --docusaurus-highlighted-code-line-bg: rgba(107, 82, 174, 0.1);
 
+  --ifm-footer-padding-horizontal: var(--ifm-spacing-horizontal);
+  --ifm-footer-padding-vertical: var(--ifm-spacing-vertical);
   --ifm-tabs-padding-vertical: 0.5rem;
   --ifm-alert-border-left-width: 0;
 }

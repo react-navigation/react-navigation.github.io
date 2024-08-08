@@ -43,6 +43,7 @@ export default {
         },
         {
           to: 'docs/getting-started',
+          activeBasePath: 'docs',
           label: 'Docs',
           position: 'right',
         },
@@ -75,19 +76,21 @@ export default {
               label: 'Troubleshooting',
               to: 'docs/troubleshooting',
             },
+            {
+              label: 'Contributing',
+              to: 'docs/contributing',
+            },
           ],
           position: 'right',
         },
         {
           href: 'https://x.com/reactnavigation',
-          position: 'right',
           className: 'navbar-social-link navbar-social-link-x',
           'aria-label': 'X',
           position: 'right',
         },
         {
-          href: 'https://github.com/react-navigation',
-          position: 'right',
+          href: 'https://github.com/react-navigation/react-navigation',
           className: 'navbar-social-link navbar-social-link-github',
           'aria-label': 'GitHub',
           position: 'right',
@@ -95,80 +98,7 @@ export default {
       ],
     },
     footer: {
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Getting Started',
-              to: 'docs/getting-started',
-            },
-            {
-              label: 'Building your own Navigator',
-              to: 'docs/custom-navigators',
-            },
-            {
-              label: 'Contributing',
-              to: 'docs/contributing',
-            },
-          ],
-        },
-        {
-          title: 'Support',
-          items: [
-            {
-              label: 'Chat in our Discord channel',
-              href: 'https://discord.gg/reactiflux',
-            },
-            {
-              label: 'Get help on Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/react-navigation',
-            },
-            {
-              label: 'Request a feature on Canny',
-              href: 'https://react-navigation.canny.io/feature-requests',
-            },
-            {
-              label: 'Report a bug on GitHub',
-              href: 'https://github.com/react-navigation/react-navigation/issues/new/choose',
-            },
-          ],
-        },
-        {
-          title: 'Social',
-          items: [
-            {
-              label: 'Blog',
-              to: 'blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/react-navigation/react-navigation',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/reactnavigation',
-            },
-          ],
-        },
-        {
-          title: 'Built with',
-          items: [
-            {
-              label: 'Docusaurus',
-              to: 'https://docusaurus.io/',
-            },
-            {
-              label: 'GitHub Pages',
-              href: 'https://pages.github.com/',
-            },
-            {
-              label: 'Netlify',
-              href: 'https://www.netlify.com/',
-            },
-          ],
-        },
-      ],
+      copyright: `Copyright © ${new Date().getFullYear()} React Navigation. Built with <a target="_blank" rel="noreferrer noopener" href="https://docusaurus.io/">Docusaurus</a>, <a target="_blank" rel="noreferrer noopener" href="https://pages.github.com/">GitHub Pages</a>, and <a target="_blank" rel="noreferrer noopener" href="https://www.netlify.com/">Netlify</a>.`,
     },
   },
   plugins: [
