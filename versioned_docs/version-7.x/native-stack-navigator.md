@@ -301,7 +301,6 @@ Blur effect for the translucent header. The `headerTransparent` option needs to 
 Supported values:
 
 - `extraLight`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-extralight.png" width="500" alt="Header blur effect extraLight" />
 
 - `light`
   <img src="/assets/7.x/native-stack/headerBlurEffect-light.png" width="500" alt="Header blur effect light" />
