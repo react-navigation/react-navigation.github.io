@@ -26,8 +26,8 @@ export default function App() {
         <Stack.Navigator initialRouteName="Home" headerMode="none">
           <Stack.Screen name="Home">
             {() => (
-              <Tab.Navigator initialRouteName="Analitics" tabBar={() => null}>
-                <Tab.Screen name="Analitics" component={Demo} />
+              <Tab.Navigator initialRouteName="Analytics" tabBar={() => null}>
+                <Tab.Screen name="Analytics" component={Demo} />
                 <Tab.Screen name="Profile" component={Demo} />
               </Tab.Navigator>
             )}
