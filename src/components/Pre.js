@@ -3,12 +3,22 @@ import { useColorMode } from '@docusaurus/theme-common';
 import { usePluginData } from '@docusaurus/useGlobalData';
 import MDXPre from '@theme-original/MDXComponents/Pre';
 import React from 'react';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+const SUPPORTED_TABS = {
+  config: [
+    { value: 'static', label: 'Static', default: true },
+    { value: 'dynamic', label: 'Dynamic' },
+  ],
+};
 
 export default function Pre({
   children,
   'data-name': name,
   'data-snack': snack,
   'data-dependencies': deps,
+  'data-tabs': tabs,
   'data-lang': lang,
   ...rest
 }) {
@@ -17,6 +27,62 @@ export default function Pre({
   const { versions } = usePluginData('react-navigation-versions');
 
   const child = React.Children.only(children);
+
+  // If we encounter tabs, we need to render 2 code blocks
+  if (tabs && tabs in SUPPORTED_TABS) {
+    return (
+      <Tabs groupId="config" queryString="config">
+        {SUPPORTED_TABS[tabs].map((tab) => {
+          const code = child.props.children;
+
+          if (typeof code !== 'string') {
+            throw new Error(
+              'Code to display in tabs must be a string, but received ' +
+                typeof code
+            );
+          }
+
+          const lines = code.split('\n');
+
+          let content = '';
+          let exclude = false;
+          let indent;
+
+          for (const line of lines) {
+            if (line.trim().startsWith('// codeblock-tabs=')) {
+              exclude = line.trim() !== `// codeblock-tabs=${tab.value}`;
+            } else if (line.trim() === '// codeblock-tabs-end') {
+              exclude = false;
+            } else if (!exclude) {
+              content += line + '\n';
+            }
+          }
+
+          return (
+            <TabItem
+              key={tab.value}
+              value={tab.value}
+              label={tab.label}
+              default={tab.default}
+            >
+              <Pre
+                {...rest}
+                data-name={name}
+                data-snack={snack}
+                data-dependencies={deps}
+                data-lang={lang}
+              >
+                {React.cloneElement(children, {
+                  ...child.props,
+                  children: content.trim(),
+                })}
+              </Pre>
+            </TabItem>
+          );
+        })}
+      </Tabs>
+    );
+  }
 
   // Handle diffs with language
   if (child.props.className === 'language-diff' && lang) {
