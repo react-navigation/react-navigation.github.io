@@ -9,7 +9,7 @@ export default {
   favicon: 'img/favicon.ico',
   organizationName: 'react-navigation',
   projectName: 'react-navigation.github.io',
-  scripts: ['/js/snack-helpers.js'],
+  scripts: ['/js/snack-helpers.js', '/js/toc-fixes.js'],
   themeConfig: {
     prism: {
       theme: require('prism-react-renderer').themes.github,
