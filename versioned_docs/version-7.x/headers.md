@@ -671,8 +671,6 @@ export default function App() {
 }
 ```
 
-
-
 </TabItem>
 </Tabs>
 
