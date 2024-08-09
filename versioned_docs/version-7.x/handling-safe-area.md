@@ -65,7 +65,7 @@ function Demo() {
 
 // codeblock-focus-start
 const MyTabs = createBottomTabNavigator({
-  initialRouteName: 'Analitics',
+  initialRouteName: 'Analytics',
   // highlight-start
   tabBar: () => null,
   screenOptions: {
@@ -73,7 +73,7 @@ const MyTabs = createBottomTabNavigator({
   },
   // highlight-end
   screens: {
-    Analitics: Demo,
+    Analytics: Demo,
     Profile: Demo,
   },
 });
@@ -133,11 +133,11 @@ export default function App() {
         <Stack.Screen name="Home">
           {() => (
             <Tab.Navigator
-              initialRouteName="Analitics"
+              initialRouteName="Analytics"
               tabBar={() => null}
               screenOptions={{ headerShown: false }}
             >
-              <Tab.Screen name="Analitics" component={Demo} />
+              <Tab.Screen name="Analytics" component={Demo} />
               <Tab.Screen name="Profile" component={Demo} />
             </Tab.Navigator>
           )}
@@ -195,13 +195,13 @@ function Demo() {
 // codeblock-focus-end
 
 const MyTabs = createBottomTabNavigator({
-  initialRouteName: 'Analitics',
+  initialRouteName: 'Analytics',
   tabBar: () => null,
   screenOptions: {
     headerShown: false,
   },
   screens: {
-    Analitics: Demo,
+    Analytics: Demo,
     Profile: Demo,
   },
 });
@@ -285,11 +285,11 @@ export default function App() {
           <Stack.Screen name="Home">
             {() => (
               <Tab.Navigator
-                initialRouteName="Analitics"
+                initialRouteName="Analytics"
                 tabBar={() => null}
                 screenOptions={{ headerShown: false }}
               >
-                <Tab.Screen name="Analitics" component={Demo} />
+                <Tab.Screen name="Analytics" component={Demo} />
                 <Tab.Screen name="Profile" component={Demo} />
               </Tab.Navigator>
             )}
@@ -363,13 +363,13 @@ function Demo() {
 // codeblock-focus-end
 
 const MyTabs = createBottomTabNavigator({
-  initialRouteName: 'Analitics',
+  initialRouteName: 'Analytics',
   tabBar: () => null,
   screenOptions: {
     headerShown: false,
   },
   screens: {
-    Analitics: Demo,
+    Analytics: Demo,
     Profile: Demo,
   },
 });
@@ -448,11 +448,11 @@ export default function App() {
           <Stack.Screen name="Home">
             {() => (
               <Tab.Navigator
-                initialRouteName="Analitics"
+                initialRouteName="Analytics"
                 tabBar={() => null}
                 screenOptions={{ headerShown: false }}
               >
-                <Tab.Screen name="Analitics" component={Demo} />
+                <Tab.Screen name="Analytics" component={Demo} />
                 <Tab.Screen name="Profile" component={Demo} />
               </Tab.Navigator>
             )}
