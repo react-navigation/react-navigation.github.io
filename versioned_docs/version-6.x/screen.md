@@ -170,7 +170,7 @@ Render callback to return React Element to use for the screen:
 </Stack.Screen>
 ```
 
-You can use this approach instead of the `component` prop if you need to pass additional props. Though we recommend using [React context](https://reactjs.org/docs/context.html) for passing data instead.
+You can use this approach instead of the `component` prop if you need to pass additional props. Though we recommend using [React context](https://react.dev/reference/react/useContext) for passing data instead.
 
 :::warning
 

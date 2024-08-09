@@ -64,7 +64,7 @@ If you want to achieve this behavior, see the guide for [screen options with nes
 
 For example, any `params` passed to a screen in a nested navigator are in the `route` prop of that screen and aren't accessible from a screen in a parent or child navigator.
 
-If you need to access params of the parent screen from a child screen, you can use [React Context](https://reactjs.org/docs/context.html) to expose params to children.
+If you need to access params of the parent screen from a child screen, you can use [React Context](https://react.dev/reference/react/useContext) to expose params to children.
 
 ### Navigation actions are handled by current navigator and bubble up if couldn't be handled
 
