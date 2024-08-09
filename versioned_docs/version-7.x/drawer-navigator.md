@@ -187,12 +187,6 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-:::note
-
-For a complete usage guide see [Drawer Navigation](drawer-based-navigation.md).
-
-:::
-
 ## API Definition
 
 ### Props
