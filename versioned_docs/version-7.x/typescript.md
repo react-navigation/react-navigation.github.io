@@ -60,7 +60,7 @@ There are 2 steps to configure TypeScript with the static API:
    // highlight-end
    ```
 
-   This is needed to type-check the `useNavigation` hook.
+   This is needed to type-check the [`useNavigation`](use-navigation.md) hook. 
 
 ## Navigator specific types
 
@@ -157,7 +157,7 @@ type RootStackParamList = {
 
 Specifying `undefined` means that the route doesn't have params. A union type with `undefined` (e.g. `SomeType | undefined`) means that params are optional.
 
-After we have defined the mapping, we need to tell our navigator to use it. To do that, we can pass it as a generic to the `createXNavigator` functions:
+After we have defined the mapping, we need to tell our navigator to use it. To do that, we can pass it as a generic to the [`createXNavigator`](static-configuration.md#createxnavigator)
 
 ```tsx
 import { createStackNavigator } from '@react-navigation/stack';
@@ -217,7 +217,7 @@ If you have an `id` prop for your navigator, you can do:
 type Props = NativeStackScreenProps<RootStackParamList, 'Profile', 'MyStack'>;
 ```
 
-This allows us to type check route names and params which you're navigating using `navigate`, `push` etc. The name of the current route is necessary to type check the params in `route.params` and when you call `setParams`.
+This allows us to type check route names and params which you're navigating using `navigate`, `push` etc. The name of the current route is necessary to type check the params in `route.params` and when you call [`setParams`](navigation-actions#setparams).   
 
 Similarly, you can import `StackScreenProps` for `@react-navigation/stack`, `DrawerScreenProps` from `@react-navigation/drawer`, `BottomTabScreenProps` from `@react-navigation/bottom-tabs` and so on.
 
