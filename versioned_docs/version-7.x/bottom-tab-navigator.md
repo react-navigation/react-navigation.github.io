@@ -136,12 +136,6 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-:::note
-
-For a complete usage guide see [Tab Navigation](tab-based-navigation.md).
-
-:::
-
 ## API Definition
 
 ### Props
@@ -177,6 +171,7 @@ Example:
 <samp id="custom-tab-bar" />
 
 ```js
+// codeblock-focus-start
 import { View, Text, TouchableOpacity, Platform } from 'react-native';
 import { useLinkBuilder, useTheme } from '@react-navigation/native';
 
@@ -236,6 +231,7 @@ function MyTabBar({ state, descriptors, navigation }) {
     </View>
   );
 }
+// codeblock-focus-end
 
 // ...
 
