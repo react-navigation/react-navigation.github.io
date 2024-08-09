@@ -59,7 +59,7 @@ function App() {
 export default App;
 ```
 
-![Basic app using stack navigator](/assets/navigators/stack/basic_stack_nav.png)
+<img src="/assets/7.x/fundamentals/basicAppUsingStackNavigator.jpeg" width="300" alt="Basic app using stack navigator" />
 
 If you run this code, you will see a screen with an empty navigation bar and a grey content area containing your `HomeScreen` component (shown above). The styles you see for the navigation bar and the content area are the default configuration for a stack navigator, we'll learn how to configure those later.
 
