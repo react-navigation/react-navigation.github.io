@@ -166,14 +166,27 @@ Style object for the component wrapping the screen content.
 
 Function that returns a React element to display as the tab bar.
 
+The function receives an object containing the following properties as the argument:
+
+- `state` - The state object for the tab navigator.
+- `descriptors` - The descriptors object containing options for the tab navigator.
+- `navigation` - The navigation object for the tab navigator.
+
+The `state.routes` array contains all the routes defined in the navigator. Each route's options can be accessed using `descriptors[route.key].options`.
+
 Example:
 
-<samp id="custom-tab-bar" />
-
-```js
+```js name="Custom tab bar" snack tabs=config
+import * as React from 'react';
+import {
+  createStaticNavigation,
+  NavigationContainer,
+} from '@react-navigation/native';
 // codeblock-focus-start
-import { View, Text, TouchableOpacity, Platform } from 'react-native';
+import { View, Platform } from 'react-native';
 import { useLinkBuilder, useTheme } from '@react-navigation/native';
+import { Text, PlatformPressable } from '@react-navigation/elements';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 function MyTabBar({ state, descriptors, navigation }) {
   const { colors } = useTheme();
@@ -212,9 +225,8 @@ function MyTabBar({ state, descriptors, navigation }) {
         };
 
         return (
-          <TouchableOpacity
+          <PlatformPressable
             href={buildHref(route.name, route.params)}
-            accessibilityRole={Platform.OS === 'web' ? 'link' : 'button'}
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarButtonTestID}
@@ -225,19 +237,75 @@ function MyTabBar({ state, descriptors, navigation }) {
             <Text style={{ color: isFocused ? colors.primary : colors.text }}>
               {label}
             </Text>
-          </TouchableOpacity>
+          </PlatformPressable>
         );
       })}
     </View>
   );
 }
+
 // codeblock-focus-end
 
-// ...
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
 
-<Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
-  {/* ... */}
-</Tab.Navigator>;
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-tabs=static
+// codeblock-focus-start
+const MyTabs = createBottomTabNavigator({
+  // highlight-next-line
+  tabBar: (props) => <MyTabBar {...props} />,
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyTabs);
+
+export default function App() {
+  return <Navigation />;
+}
+// codeblock-tabs-end
+
+// codeblock-tabs=dynamic
+const Tab = createBottomTabNavigator();
+
+// codeblock-focus-start
+function MyTabs() {
+  return (
+    <Tab.Navigator
+      // highlight-next-line
+      tabBar={(props) => <MyTabBar {...props} />}
+    >
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+}
+// codeblock-focus-end
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
+  );
+}
+// codeblock-tabs-end
 ```
 
 This example will render a basic tab bar with labels.
