@@ -281,7 +281,7 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/back-home.mp4" />
+  <source src="/assets/7.x/fundamentals/navigateGoBack.mp4" />
 </video>
 
 :::note
@@ -353,7 +353,7 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/pop-to-top.mp4" />
+  <source src="/assets/7.x/fundamentals/navigatePopToTop.mp4" />
 </video>
 
 ## Summary
