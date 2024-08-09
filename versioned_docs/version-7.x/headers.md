@@ -101,7 +101,7 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-![Header title](/assets/headers/header-title.png)
+<img src="/assets/7.x/fundamentals/headerTitle.png" width="500" alt="Header title" />
 
 ## Using params in the title
 
@@ -416,7 +416,7 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-![Custom header styles](/assets/headers/custom_headers.png)
+<img src="/assets/7.x/fundamentals/adjustHeaderStyle.png" width="500" alt="Adjust header style" />
 
 There are a couple of things to notice here:
 
@@ -671,11 +671,12 @@ export default function App() {
 }
 ```
 
-![Header custom title](/assets/headers/header-custom-title.png)
 
-You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to stack navigators, the `headerTitle` defaults to a `Text` component that displays the `title`.
+
 </TabItem>
 </Tabs>
+
+<img src="/assets/7.x/fundamentals/headerCustomComponent.png" width="500" alt="Header custom component" />
 
 :::note
 
