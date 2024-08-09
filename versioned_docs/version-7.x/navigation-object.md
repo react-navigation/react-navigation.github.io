@@ -244,7 +244,8 @@ In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack
 
 - If you're already on a screen with the same name, it will update its params and not push a new screen.
 - If you're on a different screen, it will push the new screen onto the stack.
-- If the [`getId`](screen.md#getid) prop is specified, and another screen in the stack has the same ID, it will navigate to that screen and update its params instead.
+- If the [`getId`](screen.md#getid) prop is specified, and another screen in the stack has the same ID, it will bring that screen to focus and update its params instead.
+- If none of the above conditions match, it'll push a new screen to the stack.
 
 By default, the screen is identified by its name. But you can also customize it to take the params into account by using the [`getId`](screen.md#getid) prop.
 
@@ -277,7 +278,10 @@ const Tabs = createBottomTabNavigator({
 
 </TabItem>
 </Tabs>
+
 Now, if you have a stack with the history `Home > Profile (userId: bob) > Settings` and you call `navigate(Profile, { userId: 'alice' })`, the resulting screens will be `Home > Profile (userId: bob) > Settings > Profile (userId: alice)` since it'll add a new `Profile` screen as no matching screen was found.
+
+In a tab or drawer navigator, calling `navigate` will switch to the relevant screen if it's not focused already and update the params of the screen.
 
 ### `navigateDeprecated`
 
@@ -287,7 +291,23 @@ This method is deprecated and will be removed in a future release. It only exist
 
 :::
 
-TODO
+The `navigateDeprecated` action implements the old behavior of `navigate` from previous versions.
+
+It takes the following arguments:
+
+`navigation.navigateDeprecated(name, params)`
+
+- `name` - A destination name of the route that has been defined somewhere
+- `params` - Params to pass to the destination route.
+
+In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack-navigator.md)), calling `navigate` with a screen name will have the following behavior:
+
+- If you're already on a screen with the same name, it will update its params and not push a new screen.
+- If a screen with the same name already exists in the stack, it will pop all the screens after it to go back to the existing screen.
+- If the [`getId`](screen.md#getid) prop is specified, and another screen in the stack has the same ID, it will pop any screens to navigate to that screen and update its params instead.
+- If none of the above conditions match, it'll push a new screen to the stack.
+
+In a tab or drawer navigator, calling `navigate` will switch to the relevant screen if it's not focused already and update the params of the screen.
 
 ### `goBack`
 
