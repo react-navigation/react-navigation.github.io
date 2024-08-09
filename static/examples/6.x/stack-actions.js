@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { View, Button, Text } from 'react-native';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import * as React from 'react';
+import { Button, Text, View } from 'react-native';
 
 function HomeScreen({ navigation }) {
   return (
@@ -31,11 +31,11 @@ function ProfileScreen({ navigation, route }) {
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
       <Button
-        title="Push same screen on the stack"
+        title="Pop one screen from stack"
         onPress={() => navigation.dispatch(StackActions.pop(1))}
       />
       <Button
-        title="Pop one screen from stack"
+        title="Push same screen on the stack"
         onPress={() =>
           navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }))
         }
