@@ -64,7 +64,9 @@ function ProfileScreen({ route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
-      <Text>{route?.params?.user ? route.params.user : 'No one'}'s profile</Text>
+      <Text>
+        {route?.params?.user ? route.params.user : 'No one'}'s profile
+      </Text>
     </View>
   );
 }
@@ -149,7 +151,9 @@ function ProfileScreen({ route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
-      <Text>{route?.params?.user ? route.params.user : 'No one'}'s profile</Text>
+      <Text>
+        {route?.params?.user ? route.params.user : 'No one'}'s profile
+      </Text>
     </View>
   );
 }
@@ -236,7 +240,9 @@ function ProfileScreen({ route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
-      <Text>{route?.params?.user ? route.params.user : 'No one'}'s profile</Text>
+      <Text>
+        {route?.params?.user ? route.params.user : 'No one'}'s profile
+      </Text>
     </View>
   );
 }
@@ -319,7 +325,9 @@ function ProfileScreen({ route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
-      <Text>{route?.params?.user ? route.params.user : 'No one'}'s profile</Text>
+      <Text>
+        {route?.params?.user ? route.params.user : 'No one'}'s profile
+      </Text>
     </View>
   );
 }
@@ -416,7 +424,9 @@ function ProfileScreen({ route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
-      <Text>{route?.params?.user ? route.params.user : 'No one'}'s profile</Text>
+      <Text>
+        {route?.params?.user ? route.params.user : 'No one'}'s profile
+      </Text>
     </View>
   );
 }
@@ -500,7 +510,9 @@ function ProfileScreen({ route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
-      <Text>{route?.params?.user ? route.params.user : 'No one'}'s profile</Text>
+      <Text>
+        {route?.params?.user ? route.params.user : 'No one'}'s profile
+      </Text>
     </View>
   );
 }
@@ -596,7 +608,9 @@ function ProfileScreen({ route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
-      <Text>{route?.params?.user ? route.params.user : 'No one'}'s profile</Text>
+      <Text>
+        {route?.params?.user ? route.params.user : 'No one'}'s profile
+      </Text>
     </View>
   );
 }
@@ -680,7 +694,9 @@ function ProfileScreen({ route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
-      <Text>{route?.params?.user ? route.params.user : 'No one'}'s profile</Text>
+      <Text>
+        {route?.params?.user ? route.params.user : 'No one'}'s profile
+      </Text>
     </View>
   );
 }
