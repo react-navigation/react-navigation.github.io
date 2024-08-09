@@ -128,7 +128,10 @@ export default {
           sidebarCollapsed: false,
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
           rehypePlugins: [
-            [rehypeCodeblockMeta, { match: { snack: true, lang: true } }],
+            [
+              rehypeCodeblockMeta,
+              { match: { snack: true, lang: true, tabs: true } },
+            ],
           ],
         },
         blog: {
