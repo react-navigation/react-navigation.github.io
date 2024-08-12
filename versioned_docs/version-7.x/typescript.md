@@ -157,7 +157,7 @@ type RootStackParamList = {
 
 Specifying `undefined` means that the route doesn't have params. A union type with `undefined` (e.g. `SomeType | undefined`) means that params are optional.
 
-After we have defined the mapping, we need to tell our navigator to use it. To do that, we can pass it as a generic to the [`createXNavigator`](static-configuration.md#createxnavigator)
+After we have defined the mapping, we need to tell our navigator to use it. To do that, we can pass it as a generic to the `createXNavigator` functions:
 
 ```tsx
 import { createStackNavigator } from '@react-navigation/stack';
