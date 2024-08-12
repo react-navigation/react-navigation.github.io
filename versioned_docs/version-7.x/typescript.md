@@ -60,7 +60,7 @@ There are 2 steps to configure TypeScript with the static API:
    // highlight-end
    ```
 
-   This is needed to type-check the [`useNavigation`](use-navigation.md) hook. 
+   This is needed to type-check the [`useNavigation`](use-navigation.md) hook.
 
 ## Navigator specific types
 
@@ -217,7 +217,7 @@ If you have an `id` prop for your navigator, you can do:
 type Props = NativeStackScreenProps<RootStackParamList, 'Profile', 'MyStack'>;
 ```
 
-This allows us to type check route names and params which you're navigating using `navigate`, `push` etc. The name of the current route is necessary to type check the params in `route.params` and when you call [`setParams`](navigation-actions#setparams).   
+This allows us to type check route names and params which you're navigating using `navigate`, `push` etc. The name of the current route is necessary to type check the params in `route.params` and when you call [`setParams`](navigation-actions#setparams).
 
 Similarly, you can import `StackScreenProps` for `@react-navigation/stack`, `DrawerScreenProps` from `@react-navigation/drawer`, `BottomTabScreenProps` from `@react-navigation/bottom-tabs` and so on.
 
