@@ -566,13 +566,19 @@ Function which returns a React Element to display custom image in header's back 
 <img src="/assets/7.x/stack/headerBackImage.png" width="500" alt="Header back image" />
 
 ```js
+ <Stack.Screen
+    name="NewsFeed"
+    component={NewsFeedScreen}
+    options={{
       headerBackImage: ({ tintColor }) => (
-       <Ionicons
+        <Ionicons
           tyle={{ color: tintColor }}
           size={26}
           name="arrow-back-circle"
         />
-      ),
+    ),
+   }}
+/>
 ```
 
 #### `headerBackTitle`
@@ -607,10 +613,17 @@ Style object for the back title.
 Example:
 
 ```js
-  headerBackTitleStyle: {
+<Stack.Screen
+  name="NewsFeed"
+  component={NewsFeedScreen}
+  options={{
+    headerBackTitleStyle: {
       fontSize: 14,
       fontFamily: 'Georgia',
-  },
+  }
+  }}
+/>
+
 ```
 
 ### Events
