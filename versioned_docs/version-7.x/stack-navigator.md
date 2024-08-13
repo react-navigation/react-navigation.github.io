@@ -213,7 +213,9 @@ If you need to disable this optimization for specific screens (e.g. you want to 
 
 ### Options
 
-The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Stack.navigator` or `options` prop of `Stack.Screen`.
+The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under: 
+* [`screenOptions`](screen-options.md#options-prop-on-screen) prop of `Stack.navigator` or 
+* [`options`](screen-options.md#screenoptions-prop-on-the-navigator) prop of `Stack.Screen`.
 
 #### `title`
 
