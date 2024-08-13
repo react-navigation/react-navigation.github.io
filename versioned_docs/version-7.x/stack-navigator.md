@@ -220,85 +220,97 @@ The following [options](screen-options.md) can be used to configure the screens 
 
 - [`screenOptions`](screen-options.md#options-prop-on-screen) prop of `Stack.navigator`
 
-Example:
+  Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+  <Tabs groupId="config" queryString="config">
+  <TabItem value="static" label="Static" default>
 
-```js
-const Stack = createNativeStackNavigator({
-  screenOptions: {
-    headerStyle: {
-      backgroundColor: 'papayawhip',
+  ```js
+  const Stack = createNativeStackNavigator({
+    // highlight-start
+    screenOptions: {
+      headerStyle: {
+        backgroundColor: 'papayawhip',
+      },
     },
-  },
-  screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
-  },
-});
-```
+    // highlight-end
+    screens: {
+      Home: HomeScreen,
+      Profile: ProfileScreen,
+    },
+  });
+  ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
+  </TabItem>
+  <TabItem value="dynamic" label="Dynamic">
 
-```js
-<Stack.Navigator
-  screenOptions={{ headerStyle: { backgroundColor: 'papayawhip' } }}
->
-  <Stack.Screen name="Home" component={HomeScreen} />
-  <Stack.Screen name="Profile" component={ProfileScreen} />
-</Stack.Navigator>
-```
+  ```js
+  <Stack.Navigator
+  // highlight-start
+    screenOptions={{ headerStyle: { backgroundColor: 'papayawhip' } }}
+    // highlight-end
+  >
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="Profile" component={ProfileScreen} />
+  </Stack.Navigator>
+  ```
 
-</TabItem>
-</Tabs>
+  </TabItem>
+  </Tabs>
 
 - [`options`](screen-options.md#screenoptions-prop-on-the-navigator) prop of `Stack.Screen`.
 
-Example:
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+  Example:
+  <Tabs groupId="config" queryString="config">
+  <TabItem value="static" label="Static" default>
 
-```js name="Screen title option"
-const Stack = createNativeStackNavigator({
-  screens: {
-    Home: {
-      screen: HomeScreen,
-      options: {
-        title: 'Awesome app',
+  ```js name="Screen title option"
+  const Stack = createNativeStackNavigator({
+    screens: {
+      Home: {
+        screen: HomeScreen,
+        // highlight-start
+        options: {
+          title: 'Awesome app',
+        },
+        // highlight-end
+      },
+      Profile: {
+        screen: ProfileScreen,
+        // highlight-start
+        options: {
+          title: 'My profile',
+        },
+        // highlight-end
       },
     },
-    Profile: {
-      screen: ProfileScreen,
-      options: {
-        title: 'My profile',
-      },
-    },
-  },
-});
-```
+  });
+  ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
+  </TabItem>
+  <TabItem value="dynamic" label="Dynamic">
 
-```js name="Screen title option"
-<Stack.Navigator>
-  <Stack.Screen
-    name="Home"
-    component={HomeScreen}
-    options={{ title: 'Awesome app' }}
-  />
-  <Stack.Screen
-    name="Profile"
-    component={ProfileScreen}
-    options={{ title: 'My profile' }}
-  />
-</Stack.Navigator>
-```
+  ```js name="Screen title option"
+  <Stack.Navigator>
+    <Stack.Screen
+      name="Home"
+      component={HomeScreen}
+      // highlight-start
+      options={{ title: 'Awesome app' }}
+      // highlight-end
+    />
+    <Stack.Screen
+      name="Profile"
+      component={ProfileScreen}
+      // highlight-start
+      options={{ title: 'My profile' }}
+      // highlight-end
+    />
+  </Stack.Navigator>
+  ```
 
-</TabItem>
-</Tabs>
+  </TabItem>
+  </Tabs>
 
 #### `title`
 
