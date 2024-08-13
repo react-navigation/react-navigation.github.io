@@ -143,6 +143,8 @@ export default App;
 </TabItem>
 </Tabs>
 
+Check how to setup `useNavigation` with TypeScript [here](typescript.md#annotating-usenavigation).
+
 See the documentation for the [`navigation` object](navigation-object.md) for more info.
 
 ## Using with class component
