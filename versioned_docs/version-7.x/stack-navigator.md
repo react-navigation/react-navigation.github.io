@@ -216,8 +216,9 @@ If you need to disable this optimization for specific screens (e.g. you want to 
 
 ### Options
 
-The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under: 
-* [`screenOptions`](screen-options.md#options-prop-on-screen) prop of `Stack.navigator`
+The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under:
+
+- [`screenOptions`](screen-options.md#options-prop-on-screen) prop of `Stack.navigator`
 
 Example:
 
@@ -253,14 +254,13 @@ const Stack = createNativeStackNavigator({
 </TabItem>
 </Tabs>
 
-
-* [`options`](screen-options.md#screenoptions-prop-on-the-navigator) prop of `Stack.Screen`.
+- [`options`](screen-options.md#screenoptions-prop-on-the-navigator) prop of `Stack.Screen`.
 
 Example:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Screen title option" 
+```js name="Screen title option"
 const Stack = createNativeStackNavigator({
   screens: {
     Home: {
