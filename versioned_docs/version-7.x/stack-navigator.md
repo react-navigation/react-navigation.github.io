@@ -4,6 +4,9 @@ title: Stack Navigator
 sidebar_label: Stack
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, use OS default animation on Android. But the [animations can be customized](#animation-related-options) to match your needs.
@@ -214,8 +217,88 @@ If you need to disable this optimization for specific screens (e.g. you want to 
 ### Options
 
 The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under: 
-* [`screenOptions`](screen-options.md#options-prop-on-screen) prop of `Stack.navigator` or 
+* [`screenOptions`](screen-options.md#options-prop-on-screen) prop of `Stack.navigator`
+
+Example:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const Stack = createNativeStackNavigator({
+  screenOptions: {
+    headerStyle: {
+      backgroundColor: 'papayawhip',
+    },
+  },
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<Stack.Navigator
+  screenOptions={{ headerStyle: { backgroundColor: 'papayawhip' } }}
+>
+  <Stack.Screen name="Home" component={HomeScreen} />
+  <Stack.Screen name="Profile" component={ProfileScreen} />
+</Stack.Navigator>
+```
+
+</TabItem>
+</Tabs>
+
+
 * [`options`](screen-options.md#screenoptions-prop-on-the-navigator) prop of `Stack.Screen`.
+
+Example:
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Screen title option" 
+const Stack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        title: 'Awesome app',
+      },
+    },
+    Profile: {
+      screen: ProfileScreen,
+      options: {
+        title: 'My profile',
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Screen title option"
+<Stack.Navigator>
+  <Stack.Screen
+    name="Home"
+    component={HomeScreen}
+    options={{ title: 'Awesome app' }}
+  />
+  <Stack.Screen
+    name="Profile"
+    component={ProfileScreen}
+    options={{ title: 'My profile' }}
+  />
+</Stack.Navigator>
+```
+
+</TabItem>
+</Tabs>
 
 #### `title`
 
