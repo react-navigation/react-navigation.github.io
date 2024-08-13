@@ -96,12 +96,12 @@ function Profile() {
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
-      Alert.alert("ProfileScreen focus effect");
-      
+      Alert.alert('ProfileScreen focus effect');
+
       return () => {
         // Do something when the screen is unfocused
         // Useful for cleanup functions
-        Alert.alert("ProfileScreen focus effect cleanup");
+        Alert.alert('ProfileScreen focus effect cleanup');
       };
     }, [])
   );
