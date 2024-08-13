@@ -50,7 +50,7 @@ And then we can use it:
 </RootStack.Navigator>
 ```
 
-This will provide type checking and intelliSense for props of the [`Navigator`](navigator.md) and [`Screen`](screen.md) components.
+This will provide type checking and intelliSense for props of the `Navigator` and [`Screen`](screen.md) components.
 
 :::note
 
