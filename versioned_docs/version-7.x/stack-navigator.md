@@ -246,7 +246,7 @@ The following [options](screen-options.md) can be used to configure the screens 
 
   ```js
   <Stack.Navigator
-  // highlight-start
+    // highlight-start
     screenOptions={{ headerStyle: { backgroundColor: 'papayawhip' } }}
     // highlight-end
   >
