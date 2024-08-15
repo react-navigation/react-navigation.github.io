@@ -471,26 +471,24 @@ Custom navigators now require more type information to work correctly so that we
 -   typeof MyNavigator
 - >(MyNavigator);
 + export function createMyNavigator<
-+   ParamList extends ParamListBase,
-+   NavigatorID extends string | undefined = undefined,
-+   TypeBag extends NavigatorTypeBagBase = {
++   const ParamList extends ParamListBase,
++   const NavigatorID extends string | undefined = undefined,
++   const TypeBag extends NavigatorTypeBagBase = {
 +     ParamList: ParamList;
 +     NavigatorID: NavigatorID;
-+     State: MyNavigationState<ParamList>;
-+     ScreenOptions: MyNavigationOptions;
-+     EventMap: MyNavigationEventMap;
++     State: TabNavigationState<ParamList>;
++     ScreenOptions: TabNavigationOptions;
++     EventMap: TabNavigationEventMap;
 +     NavigationList: {
-+       [RouteName in keyof ParamList]: MyNavigationProp<
++       [RouteName in keyof ParamList]: TabNavigationProp<
 +         ParamList,
 +         RouteName,
 +         NavigatorID
 +       >;
 +     };
-+     Navigator: typeof MyNavigator;
++     Navigator: typeof TabNavigator;
 +   },
-+   Config extends StaticConfig<TypeBag> | undefined =
-+     | StaticConfig<TypeBag>
-+     | undefined,
++   const Config extends StaticConfig<TypeBag> = StaticConfig<TypeBag>,
 + >(config?: Config): TypedNavigator<TypeBag, Config> {
 +   return createNavigatorFactory(MyNavigator)(config);
 + }
