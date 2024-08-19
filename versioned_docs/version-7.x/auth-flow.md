@@ -601,9 +601,6 @@ export default function App() {
     return <SplashScreen />;
   }
 
-  if (state.isLoading) {
-    return <SplashScreen />;
-  }
 
   const isSignedIn = state.userToken != null;
 
