@@ -97,9 +97,6 @@ export default {
         },
       ],
     },
-    footer: {
-      copyright: `Copyright © ${new Date().getFullYear()} React Navigation. Built with <a target="_blank" rel="noreferrer noopener" href="https://docusaurus.io/">Docusaurus</a>, <a target="_blank" rel="noreferrer noopener" href="https://pages.github.com/">GitHub Pages</a>, and <a target="_blank" rel="noreferrer noopener" href="https://www.netlify.com/">Netlify</a>.`,
-    },
   },
   plugins: [
     './src/plugins/react-navigation-versions.mjs',
@@ -128,7 +125,10 @@ export default {
           sidebarCollapsed: false,
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
           rehypePlugins: [
-            [rehypeCodeblockMeta, { match: { snack: true, lang: true } }],
+            [
+              rehypeCodeblockMeta,
+              { match: { snack: true, lang: true, tabs: true } },
+            ],
           ],
         },
         blog: {
