@@ -11,6 +11,8 @@ Each screen can configure various aspects about how it gets presented in the nav
 
 In the [configuring the header bar](headers.md) section of the fundamentals documentation we explain the basics of how this works. Also see the [screen options resolution guide](screen-options-resolution.md) to get an idea of how they work when there are multiple navigators.
 
+See [our docs](typescript.md#annotating-options-and-screenoptions) to learn more about how to use TypeScript with `screenOptions` and `options`.
+
 There are 3 ways of specifying options for screens:
 
 ### `options` prop on `Screen`
