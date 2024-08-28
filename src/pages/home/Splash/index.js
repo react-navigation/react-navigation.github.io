@@ -1,11 +1,11 @@
-import React from 'react';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import React from 'react';
 
-import styles from './styles.module.css';
-import Spiro from '/img/spiro_header.svg';
 import SplashLeftIllustration from './SplashLeftIllustration';
 import SplashRightIllustration from './SplashRightIllustration';
+import styles from './styles.module.css';
+import Spiro from '/img/spiro_header.svg';
 
 export default function Splash() {
   return (
@@ -22,12 +22,12 @@ export default function Splash() {
               Routing and navigation for Expo and React Native apps.
             </h3>
             <div className={styles.buttonContainer}>
-              <a
-                href={useBaseUrl('/docs/getting-started')}
+              <Link
+                to={useBaseUrl('/docs/getting-started')}
                 className={styles.button}
               >
                 Read Docs
-              </a>
+              </Link>
               <a
                 href="https://github.com/react-navigation/react-navigation/tree/main/example"
                 className={`${styles.button} ${styles.buttonPrimary}`}

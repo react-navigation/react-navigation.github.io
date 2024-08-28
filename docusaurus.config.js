@@ -9,7 +9,7 @@ export default {
   favicon: 'img/favicon.ico',
   organizationName: 'react-navigation',
   projectName: 'react-navigation.github.io',
-  scripts: ['/js/snack-helpers.js'],
+  scripts: ['/js/snack-helpers.js', '/js/toc-fixes.js'],
   themeConfig: {
     prism: {
       theme: require('prism-react-renderer').themes.github,
@@ -37,96 +37,63 @@ export default {
         src: 'img/spiro.svg',
       },
       items: [
-        { to: 'docs/getting-started', label: 'Docs', position: 'left' },
-        { to: 'blog', label: 'Blog', position: 'left' },
         {
-          href: 'https://github.com/react-navigation',
-          label: 'GitHub',
+          type: 'docsVersionDropdown',
           position: 'right',
         },
         {
-          to: 'help',
+          to: 'docs/getting-started',
+          activeBasePath: 'docs',
+          label: 'Docs',
+          position: 'right',
+        },
+        {
+          to: 'blog',
+          label: 'Blog',
+          position: 'right',
+        },
+        {
+          type: 'dropdown',
           label: 'Help',
-        },
-        {
-          type: 'docsVersionDropdown',
-          position: 'left',
-        },
-      ],
-    },
-    footer: {
-      links: [
-        {
-          title: 'Docs',
           items: [
             {
-              label: 'Getting Started',
-              to: 'docs/getting-started',
+              label: 'Issues',
+              href: 'https://github.com/react-navigation/react-navigation/issues',
             },
             {
-              label: 'Building your own Navigator',
-              to: 'docs/custom-navigators',
+              label: 'Feature Requests',
+              href: 'https://react-navigation.canny.io/feature-requests',
+            },
+            {
+              label: 'Reactiflux Discord',
+              href: 'https://www.reactiflux.com',
+            },
+            {
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/questions/tagged/react-navigation',
+            },
+            {
+              label: 'Troubleshooting',
+              to: 'docs/troubleshooting',
             },
             {
               label: 'Contributing',
               to: 'docs/contributing',
             },
           ],
+          position: 'right',
         },
         {
-          title: 'Support',
-          items: [
-            {
-              label: 'Chat in our Discord channel',
-              href: 'https://discord.gg/reactiflux',
-            },
-            {
-              label: 'Get help on Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/react-navigation',
-            },
-            {
-              label: 'Request a feature on Canny',
-              href: 'https://react-navigation.canny.io/feature-requests',
-            },
-            {
-              label: 'Report a bug on GitHub',
-              href: 'https://github.com/react-navigation/react-navigation/issues/new/choose',
-            },
-          ],
+          href: 'https://x.com/reactnavigation',
+          className: 'navbar-social-link navbar-social-link-x',
+          'aria-label': 'X',
+          position: 'right',
         },
         {
-          title: 'Social',
-          items: [
-            {
-              label: 'Blog',
-              to: 'blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/react-navigation/react-navigation',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/reactnavigation',
-            },
-          ],
-        },
-        {
-          title: 'Built with',
-          items: [
-            {
-              label: 'Docusaurus',
-              to: 'https://docusaurus.io/',
-            },
-            {
-              label: 'GitHub Pages',
-              href: 'https://pages.github.com/',
-            },
-            {
-              label: 'Netlify',
-              href: 'https://www.netlify.com/',
-            },
-          ],
+          href: 'https://github.com/react-navigation/react-navigation',
+          className: 'navbar-social-link navbar-social-link-github',
+          'aria-label': 'GitHub',
+          position: 'right',
         },
       ],
     },
@@ -158,7 +125,10 @@ export default {
           sidebarCollapsed: false,
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
           rehypePlugins: [
-            [rehypeCodeblockMeta, { match: { snack: true, lang: true } }],
+            [
+              rehypeCodeblockMeta,
+              { match: { snack: true, lang: true, tabs: true } },
+            ],
           ],
         },
         blog: {

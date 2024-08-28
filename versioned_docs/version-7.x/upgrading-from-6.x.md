@@ -37,7 +37,7 @@ The `navigationInChildEnabled` prop will be removed in the next major.
 
 See [`navigate`](navigation-object.md#navigate) for updated usage.
 
-#### The `navigate` method no longer goes back in, use `popTo` instead
+#### The `navigate` method no longer goes back, use `popTo` instead
 
 Previously, `navigate` method navigated back if the screen already exists in the stack. We have seen many people get confused by this behavior.
 
@@ -471,26 +471,24 @@ Custom navigators now require more type information to work correctly so that we
 -   typeof MyNavigator
 - >(MyNavigator);
 + export function createMyNavigator<
-+   ParamList extends ParamListBase,
-+   NavigatorID extends string | undefined = undefined,
-+   TypeBag extends NavigatorTypeBagBase = {
++   const ParamList extends ParamListBase,
++   const NavigatorID extends string | undefined = undefined,
++   const TypeBag extends NavigatorTypeBagBase = {
 +     ParamList: ParamList;
 +     NavigatorID: NavigatorID;
-+     State: MyNavigationState<ParamList>;
-+     ScreenOptions: MyNavigationOptions;
-+     EventMap: MyNavigationEventMap;
++     State: TabNavigationState<ParamList>;
++     ScreenOptions: TabNavigationOptions;
++     EventMap: TabNavigationEventMap;
 +     NavigationList: {
-+       [RouteName in keyof ParamList]: MyNavigationProp<
++       [RouteName in keyof ParamList]: TabNavigationProp<
 +         ParamList,
 +         RouteName,
 +         NavigatorID
 +       >;
 +     };
-+     Navigator: typeof MyNavigator;
++     Navigator: typeof TabNavigator;
 +   },
-+   Config extends StaticConfig<TypeBag> | undefined =
-+     | StaticConfig<TypeBag>
-+     | undefined,
++   const Config extends StaticConfig<TypeBag> = StaticConfig<TypeBag>,
 + >(config?: Config): TypedNavigator<TypeBag, Config> {
 +   return createNavigatorFactory(MyNavigator)(config);
 + }
@@ -795,6 +793,25 @@ return (
   </Animated.View>
 );
 ```
+
+#### All navigators with headers now support `headerSearchBarOptions`
+
+The `Header` component from `@react-navigation/elements` now supports a `headerSearchBarOptions` prop. This means all navigators that use the `Header` component now support a search bar in the header as well on all platforms. Previously, this was only available in the Native Stack Navigator on iOS and Android.
+
+```js
+React.useLayoutEffect(() => {
+  navigation.setOptions({
+    headerSearchBarOptions: {
+      placeholder: 'Search',
+      onChangeText: (text) => {
+        // Do something
+      },
+    },
+  });
+}, [navigation]);
+```
+
+See [`headerSearchBarOptions`](elements.md#headersearchbaroptions) for usage.
 
 ### New components in elements library
 

@@ -12,10 +12,9 @@
       "next-steps"
     ],
     "Guides": [
-      "tab-based-navigation",
-      "drawer-based-navigation",
       "auth-flow",
       "handling-safe-area",
+      "customizing-tabbar",
       "hiding-tabbar-in-screens",
       "status-bar",
       "modal",

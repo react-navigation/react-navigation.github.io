@@ -231,13 +231,24 @@ Supported properties:
 
 Only supported on iOS.
 
+<video playsInline autoPlay muted loop style={{ width: "500px" }}>
+
+  <source src="/assets/7.x/native-stack/headerLargeStyle.mp4" />
+</video>
+
 #### `headerLargeTitle`
 
 Whether to enable header with large title which collapses to regular header on scroll.
+Defaults to `false`.
 
 For large title to collapse on scroll, the content of the screen should be wrapped in a scrollable view such as `ScrollView` or `FlatList`. If the scrollable area doesn't fill the screen, the large title won't collapse on scroll. You also need to specify `contentInsetAdjustmentBehavior="automatic"` in your `ScrollView`, `FlatList` etc.
 
 Only supported on iOS.
+
+<video playsInline autoPlay muted loop style={{ width: "500px" }}>
+
+  <source src="/assets/7.x/native-stack/headerLargeTitle.mp4" />
+</video>
 
 #### `headerLargeTitleShadowVisible`
 
@@ -254,6 +265,19 @@ Style object for large title in header. Supported properties:
 
 Only supported on iOS.
 
+<img src="/assets/7.x/native-stack/headerLargeTitleStyle.png" width="500" alt="Header large title style" />
+
+Example:
+
+```js
+    headerLargeTitleStyle: {
+      fontFamily: 'Georgia',
+      fontSize: 22,
+      fontWeight: '500',
+      color: 'blue',
+    },
+```
+
 #### `headerShown`
 
 Whether to show the header. The header is shown by default. Setting this to `false` hides the header.
@@ -264,9 +288,20 @@ Style object for header. Supported properties:
 
 - `backgroundColor`
 
+<video playsInline autoPlay muted loop style={{ width: "500px" }}>
+
+  <source src="/assets/7.x/native-stack/headerStyle.mp4" />
+</video>
+
 #### `headerShadowVisible`
 
 Whether to hide the elevation shadow (Android) or the bottom border (iOS) on the header.
+
+Android:
+<img src="/assets/7.x/native-stack/headerShadowVisible-Android.png" width="500" alt="Header shadow visible Android" />
+
+iOS:
+<img src="/assets/7.x/native-stack/headerShadowVisible-iOS.png" width="500" alt="Header shadow visible iOS" />
 
 #### `headerTransparent`
 
@@ -287,25 +322,61 @@ Blur effect for the translucent header. The `headerTransparent` option needs to 
 Supported values:
 
 - `extraLight`
+
 - `light`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-light.png" width="500" alt="Header blur effect light" />
+
 - `dark`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-dark.png" width="500" alt="Header blur effect dark" />
+
 - `regular`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-regular.png" width="500" alt="Header blur effect regular" />
+
 - `prominent`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterial.png" width="500" alt="Header blur effect systemUltraThinMaterial" />
+
 - `systemUltraThinMaterial`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterial.png" width="500" alt="Header blur effect systemUltraThinMaterial" />
+
 - `systemThinMaterial`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThinMaterial.png" width="500" alt="Header blur effect systemThinMaterial" />
+
 - `systemMaterial`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemMaterial.png" width="500" alt="Header blur effect systemMaterial" />
+
 - `systemThickMaterial`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThickMaterial.png" width="500" alt="Header blur effect systemThickMaterial" />
+
 - `systemChromeMaterial`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemChromeMaterial.png" width="500" alt="Header blur effect systemChromeMaterial" />
+
 - `systemUltraThinMaterialLight`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterialLight.png" width="500" alt="Header blur effect systemUltraThinMaterialLight" />
+
 - `systemThinMaterialLight`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThinMaterialLight.png" width="500" alt="Header blur effect systemThinMaterialLight" />
+
 - `systemMaterialLight`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemMaterialLight.png" width="500" alt="Header blur effect systemMaterialLight" />
+
 - `systemThickMaterialLight`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThickMaterialLight.png" width="500" alt="Header blur effect systemThickMaterialLight" />
+
 - `systemChromeMaterialLight`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemChromeMaterialLight.png" width="500" alt="Header blur effect systemChromeMaterialLight" />
+
 - `systemUltraThinMaterialDark`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterialDark.png" width="500" alt="Header blur effect systemUltraThinMaterialDark" />
 - `systemThinMaterialDark`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThinMaterialDark.png" width="500" alt="Header blur effect systemThinMaterialDark" />
+
 - `systemMaterialDark`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemMaterialDark.png" width="500" alt="Header blur effect systemMaterialDark" />
 - `systemThickMaterialDark`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThickMaterialDark.png" width="500" alt="Header blur effect systemThickMaterialDark" />
+
 - `systemChromeMaterialDark`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemChromeMaterialDark.png" width="500" alt="Header blur effect systemChromeMaterialDark" />
 
 Only supported on iOS.
 
@@ -313,17 +384,54 @@ Only supported on iOS.
 
 Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
 
+  <img src="/assets/7.x/native-stack/headerBackground.png" width="500" alt="Header background"/>
+
+Example:
+
+```js
+     headerBackground: () => (
+      <LinearGradient
+        colors={['#c17388', '#90306f']}
+        style={{ flex: 1 }}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+      />
+      ),
+```
+
 #### `headerTintColor`
 
 Tint color for the header. Changes the color of back button and title.
+
+  <img src="/assets/7.x/native-stack/headerTintColor.png" width="500" alt="Header tint color" />
 
 #### `headerLeft`
 
 Function which returns a React Element to display on the left side of the header. This replaces the back button. See `headerBackVisible` to show the back button along side left element.
 
+<img src="/assets/7.x/native-stack/headerLeft.png" width="500" alt="Header right"/>
+
+Example:
+
+```js
+    headerLeft: () => (
+      <MaterialCommunityIcons name="map" color="gray" size={36} />
+    ),
+    headerBackVisible: true,
+    headerBackTitle: 'Back',
+```
+
 #### `headerRight`
 
 Function which returns a React Element to display on the right side of the header.
+
+  <img src="/assets/7.x/native-stack/headerRight.png" width="500" alt="Header right"/>
+
+Example:
+
+```js
+headerRight: () => <MaterialCommunityIcons name="map" color="blue" size={36} />;
+```
 
 #### `headerTitle`
 
@@ -338,7 +446,10 @@ Note that if you render a custom element by passing a function, animations for t
 How to align the header title. Possible values:
 
 - `left`
+  <img src="/assets/7.x/native-stack/headerTitleAlign-left.png" width="500" alt="Header title align left"/>
+
 - `center`
+  <img src="/assets/7.x/native-stack/headerTitleAlign-center.png" width="500" alt="Header title align center"/>
 
 Defaults to `left` on platforms other than iOS.
 
@@ -353,11 +464,24 @@ Style object for header title. Supported properties:
 - `fontWeight`
 - `color`
 
+  <img src="/assets/7.x/native-stack/headerTitleStyle.png" width="500" alt="Header title style"/>
+
+Example:
+
+```js
+    headerTitleStyle: {
+      color: 'blue',
+      fontSize: 22,
+      fontFamily: 'Georgia',
+      fontWeight: 300,
+    },
+```
+
 #### `headerSearchBarOptions`
 
-Options to render a native search bar on iOS. Search bars are rarely static so normally it is controlled by passing an object to `headerSearchBarOptions` navigation option in the component's body. You also need to specify `contentInsetAdjustmentBehavior="automatic"` in your `ScrollView`, `FlatList` etc. If you don't have a `ScrollView`, specify `headerTransparent: false`.
+Options to render a native search bar on iOS. Search bars are rarely static so normally it is controlled by passing an object to `headerSearchBarOptions` navigation option in the component's body.
 
-Only supported on iOS and Android.
+You also need to specify `contentInsetAdjustmentBehavior="automatic"` in your `ScrollView`, `FlatList` etc. If you don't have a `ScrollView`, specify `headerTransparent: false`.
 
 Example:
 

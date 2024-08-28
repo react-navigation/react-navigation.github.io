@@ -125,8 +125,6 @@ You can also pass some initial params to a screen. If you didn't specify any par
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-<samp id="initial-params" />
-
 ```js
 <Stack.Screen
   name="Details"
