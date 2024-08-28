@@ -915,11 +915,11 @@ Custom theme to use for the navigation components such as the header, tab bar et
 
 ### `direction`
 
-The direction of the text in the app. Defaults to `'rtl'` when `I18nManager.getConstants().isRTL` is `true`, otherwise `'ltr'`.
+The direction of the text configured in the app. Defaults to `'rtl'` when `I18nManager.getConstants().isRTL` returns `true`, otherwise `'ltr'`.
 
 This is used in various navigators to adjust the content according to the text direction, for example, the drawer in the [drawer navigator](drawer-navigator.md) is positioned on the right side in RTL languages.
 
-If you intend to support RTL languages, it's important to set this prop to the correct value. If it doesn't match the actual text direction, the layout might be incorrect.
+This prop informs React Navigation about the text direction in the app, it doesn't change the text direction by itself. If you intend to support RTL languages, it's important to set this prop to the correct value that's configured in the app. If it doesn't match the actual text direction, the layout might be incorrect.
 
 On the Web, it may also be necessary to set the `dir` attribute on the root element of the app to ensure that the text direction is correct:
 
