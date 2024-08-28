@@ -166,6 +166,8 @@ export default function App() {
 
 If you're using a regular ref object, keep in mind that the ref may be initially `null` in some situations (such as when linking is enabled). To make sure that the ref is initialized, you can use the [`onReady`](#onready) callback to get notified when the navigation container finishes mounting.
 
+Check how to setup `ref` with TypeScript [here](typescript.md#annotating-ref-on-navigationcontainer).
+
 See the [Navigating without the navigation prop](navigating-without-navigation-prop.md) guide for more details.
 
 ### Methods on the ref

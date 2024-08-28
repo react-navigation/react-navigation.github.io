@@ -142,6 +142,8 @@ export default App;
 </TabItem>
 </Tabs>
 
+Check how to setup `useRoute` with TypeScript [here](typescript.md#annotating-useroute).
+
 See the documentation for the [`route` object](route-object.md) for more info.
 
 ## Using with class component
