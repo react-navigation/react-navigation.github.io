@@ -164,7 +164,7 @@ This is useful if you want to render a semi-transparent header or a blurred back
 
 Note that if you don't want your content to appear under the header, you need to manually add a top margin to your content. React Navigation won't do it automatically.
 
-To get the height of the header, you can use [`HeaderHeightContext`](#headerheightcontext) with [React's Context API](https://reactjs.org/docs/context.html#contextconsumer) or [`useHeaderHeight`](#useheaderheight).
+To get the height of the header, you can use [`HeaderHeightContext`](#headerheightcontext) with [React's Context API](https://react.dev/reference/react/useContext) or [`useHeaderHeight`](#useheaderheight).
 
 #### `headerBackground`
 
