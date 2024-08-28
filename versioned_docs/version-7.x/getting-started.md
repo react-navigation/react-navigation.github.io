@@ -15,7 +15,7 @@ If you're already familiar with JavaScript, React and React Native, then you'll 
 
 Here are some resources to help you out:
 
-1. [React Native Express](https://www.reactnative.express) (Sections 1 to 4)
+1. [React Native](https://reactnative.dev/docs/getting-started)
 2. [Main Concepts of React](https://react.dev/learn)
 3. [React Hooks](https://react.dev/reference/react)
 4. [React Context](https://react.dev/learn/passing-data-deeply-with-context) (Advanced)

@@ -130,7 +130,7 @@ Sometimes we will want to specify the same options for all of the screens in the
 
 Sometimes we might want to pass additional props to a screen. We can do that with 2 approaches:
 
-1. Use [React context](https://reactjs.org/docs/context.html) and wrap the navigator with a context provider to pass data to the screens (recommended).
+1. Use [React context](https://react.dev/reference/react/useContext) and wrap the navigator with a context provider to pass data to the screens (recommended).
 2. Use a render callback for the screen instead of specifying a `component` prop:
 
    ```js
@@ -141,7 +141,7 @@ Sometimes we might want to pass additional props to a screen. We can do that wit
 
 :::warning
 
-By default, React Navigation applies optimizations to screen components to prevent unnecessary renders. Using a render callback removes those optimizations. So if you use a render callback, you'll need to ensure that you use [`React.memo`](https://reactjs.org/docs/react-api.html#reactmemo) or [`React.PureComponent`](https://reactjs.org/docs/react-api.html#reactpurecomponent) for your screen components to avoid performance issues.
+By default, React Navigation applies optimizations to screen components to prevent unnecessary renders. Using a render callback removes those optimizations. So if you use a render callback, you'll need to ensure that you use [`React.memo`](https://react.dev/reference/react/memo) or [`React.PureComponent`](https://react.dev/reference/react/PureComponent) for your screen components to avoid performance issues.
 
 :::
 
