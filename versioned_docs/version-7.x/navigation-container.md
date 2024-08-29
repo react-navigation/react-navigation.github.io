@@ -917,6 +917,38 @@ Custom theme to use for the navigation components such as the header, tab bar et
 
 The direction of the text configured in the app. Defaults to `'rtl'` when `I18nManager.getConstants().isRTL` returns `true`, otherwise `'ltr'`.
 
+Supported values:
+
+- `'ltr'`: Left-to-right text direction for languages like English, French etc.
+- `'rtl'`: Right-to-left text direction for languages like Arabic, Hebrew etc.
+
+Example:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+<Navigation
+  // highlight-next-line
+  direction="rtl"
+/>
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<NavigationContainer
+  // highlight-next-line
+  direction="rtl"
+>
+  {/* content */}
+</NavigationContainer>
+```
+
+</TabItem>
+</Tabs>
+
 This is used in various navigators to adjust the content according to the text direction, for example, the drawer in the [drawer navigator](drawer-navigator.md) is positioned on the right side in RTL languages.
 
 This prop informs React Navigation about the text direction in the app, it doesn't change the text direction by itself. If you intend to support RTL languages, it's important to set this prop to the correct value that's configured in the app. If it doesn't match the actual text direction, the layout might be incorrect.
