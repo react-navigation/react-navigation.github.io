@@ -1,3 +1,34 @@
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
+
+const CACHE_DIR = join(
+  process.cwd(),
+  'node_modules',
+  '.cache',
+  'react-navigation-versions'
+);
+
+const query = async (name, tag) => {
+  const cached = join(CACHE_DIR, `${name}-${tag}.json`);
+
+  let pkg;
+
+  try {
+    pkg = await fetch(`https://registry.npmjs.org/${name}/${tag}`).then((res) =>
+      res.json()
+    );
+
+    await mkdir(dirname(cached), { recursive: true });
+    await writeFile(cached, JSON.stringify(pkg));
+  } catch (e) {
+    const data = await readFile(cached, 'utf-8');
+
+    pkg = JSON.parse(data);
+  }
+
+  return pkg;
+};
+
 export default function friendsPlugin(context, options) {
   return {
     name: 'react-navigation-versions',
@@ -26,10 +57,7 @@ export default function friendsPlugin(context, options) {
           Object.entries(queries).map(async ([version, { tag, packages }]) => {
             const items = await Promise.all(
               packages.map(async (name) => {
-                const pkg = await fetch(
-                  `https://registry.npmjs.org/${name}/${tag}`
-                ).then((res) => res.json());
-
+                const pkg = await query(name, tag);
                 const peers = Object.fromEntries(
                   Object.entries(pkg.peerDependencies || {}).map(([name]) => [
                     name,
