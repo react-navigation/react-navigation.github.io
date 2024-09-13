@@ -32,6 +32,7 @@ export default () => {
       ref={navigationRef}
       onReady={() => {
         routeNameRef.current = navigationRef.getCurrentRoute().name;
+        await trackScreenView(routeNameRef.current);
       }}
       onStateChange={async () => {
         const previousRouteName = routeNameRef.current;
