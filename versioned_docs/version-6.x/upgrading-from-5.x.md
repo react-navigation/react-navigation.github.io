@@ -136,7 +136,7 @@ These following changes are in the core library. You'll need to address this cha
 To install the 6.x version of `@react-navigation/native`, run:
 
 ```bash npm2yarn
-npm install @react-navigation/native
+npm install @react-navigation/native@^6.x
 ```
 
 ### Params are now overwritten on navigation instead of merging
@@ -335,7 +335,7 @@ The following changes are in the `@react-navigation/stack` package.
 To install the 6.x version of `@react-navigation/stack`, run:
 
 ```bash npm2yarn
-npm install @react-navigation/stack
+npm install @react-navigation/stack@^6.x
 ```
 
 ### `keyboardHandlingEnabled` is moved to options
@@ -451,7 +451,7 @@ The `@react-navigation/native-stack` package is back. We made few changes to the
 To install the 6.x version of `@react-navigation/native-stack`, run:
 
 ```bash npm2yarn
-npm install @react-navigation/native-stack
+npm install @react-navigation/native-stack@^6.x
 ```
 
 ### Breaking changes from `react-native-screens/native-stack`
@@ -491,7 +491,7 @@ The following changes are in the `@react-navigation/bottom-tabs` package.
 To install the 6.x version of `@react-navigation/bottom-tabs`, run:
 
 ```bash npm2yarn
-npm install @react-navigation/bottom-tabs
+npm install @react-navigation/bottom-tabs@^6.x
 ```
 
 ### A header is shown by default in tab screens
@@ -548,7 +548,7 @@ The following changes are in the `@react-navigation/material-top-tabs` package.
 To install the 6.x version of `@react-navigation/material-top-tabs`, run:
 
 ```bash npm2yarn
-npm install @react-navigation/material-top-tabs react-native-tab-view
+npm install @react-navigation/material-top-tabs@^6.x react-native-tab-view
 ```
 
 To upgrade `react-native-pager-view` to the latest supported version, do the following:
@@ -611,7 +611,7 @@ The following changes are in the `@react-navigation/material-bottom-tabs` packag
 To install the 6.x version of `@react-navigation/material-bottom-tabs`, run:
 
 ```bash npm2yarn
-npm install @react-navigation/material-bottom-tabs
+npm install @react-navigation/material-bottom-tabs@^6.x
 ```
 
 ### Material Bottom Tabs now uses `react-native-safe-area-context` to apply safe area insets
@@ -625,7 +625,7 @@ The following changes are in the `@react-navigation/drawer` package.
 To install the 6.x version of `@react-navigation/drawer`, run:
 
 ```bash npm2yarn
-npm install @react-navigation/drawer
+npm install @react-navigation/drawer@^6.x
 ```
 
 ### Drawer now uses Reanimated 2 if available
@@ -709,7 +709,7 @@ Similar to bottom tabs, the `lazy` prop is now moved to `options` for drawer.
 We have a new package which contains various UI elements related to navigation, such as a `Header` component. This means that we can now use these components in all navigators. You can also install the library to import components such as `Header` to use in any navigator:
 
 ```bash npm2yarn
-npm install @react-navigation/elements
+npm install @react-navigation/elements@^6.x
 ```
 
 Now you can import items from there:

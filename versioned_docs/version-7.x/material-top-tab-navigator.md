@@ -17,7 +17,7 @@ This wraps [`react-native-tab-view`](tab-view.md). If you want to use the tab vi
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/material-top-tabs):
 
 ```bash npm2yarn
-npm install @react-navigation/material-top-tabs@next
+npm install @react-navigation/material-top-tabs
 ```
 
 Then, you need to install [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) which is required by the navigator.
