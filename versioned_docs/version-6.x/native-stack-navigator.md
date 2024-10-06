@@ -384,6 +384,22 @@ React.useLayoutEffect(() => {
 }, [navigation]);
 ```
 
+### `onSearchButtonPress`
+
+A callback that gets called when the search button is pressed.
+
+```js
+const [search, setSearch] = React.useState('');
+
+React.useLayoutEffect(() => {
+  navigation.setOptions({
+    headerSearchBarOptions: {
+      onSearchButtonPress: (event) => setSearch(event?.nativeEvent?.text),
+    },
+  });
+}, [navigation]);
+```
+
 #### `header`
 
 Custom header to use instead of the default header.
