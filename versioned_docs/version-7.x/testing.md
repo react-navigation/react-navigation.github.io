@@ -48,7 +48,7 @@ Then we need to use this setup file in our jest config. You can add it under `se
 
 Make sure that the path to the file in `setupFiles` is correct. Jest will run these files before running your tests, so it's the best place to put your global mocks.
 
-If your configuration works correctly, you can skip this section, but in some unusual cases you will need to mock `react-native-screen` as well. To do so add the following code in `jest/setup.js` file:
+If your configuration works correctly, you can skip this section, but in some unusual cases you will need to mock `react-native-screens` as well. To do so add the following code in `jest/setup.js` file:
 
 ```js
 // Include this section form mocking react-native-screens
@@ -74,7 +74,7 @@ If you're not using Jest, then you'll need to mock these modules according to th
 
 We recommend using [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) along with [`jest-native`](https://github.com/testing-library/jest-native) to write your tests.
 
-We are going to write example tests illustrating difference between navigate and push functions using Root Navigator defined below:
+We are going to write example tests illustrating the difference between navigate and push functions using Root Navigator defined below:
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -147,10 +147,13 @@ Navigate function test example:
 ```js
 import { expect, test } from '@jest/globals';
 import { fireEvent, render, screen } from '@testing-library/react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  createNavigationContainerRef,
+  NavigationContainer,
+} from '@react-navigation/native';
 import { RootNavigator } from './RootNavigator';
 
-test('navigates to settings screen twice', async () => {
+test('navigates to settings screen twice', () => {
   const navigation = createNavigationContainerRef();
   render(
     <NavigationContainer ref={navigation}>
@@ -188,10 +191,13 @@ Push function test example:
 ```js
 import { expect, test } from '@jest/globals';
 import { fireEvent, render, screen } from '@testing-library/react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  createNavigationContainerRef,
+  NavigationContainer,
+} from '@react-navigation/native';
 import { RootNavigator } from './RootNavigator';
 
-test('pushes settings screen twice', async () => {
+test('pushes settings screen twice', () => {
   const navigation = createNavigationContainerRef();
   render(
     <NavigationContainer ref={navigation}>
@@ -272,7 +278,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootNavigator } from './RootNavigator';
 
-test('navigates to settings screen after 10000 ms delay', async () => {
+test('navigates to settings screen after 10000 ms delay', () => {
   // Enable fake timers
   jest.useFakeTimers();
 
@@ -287,7 +293,7 @@ test('navigates to settings screen after 10000 ms delay', async () => {
   expect(screen.queryByText('Profile')).toBeOnTheScreen();
   expect(screen.queryByText('Settings')).not.toBeOnTheScreen();
 
-  // jest.runAllTimers causes React state updates
+  // jest.advanceTimersByTime causes React state updates
   // So it should be wrapped into act
   act(() => jest.advanceTimersByTime(10000));
 
