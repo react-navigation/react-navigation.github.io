@@ -74,7 +74,7 @@ If you're not using Jest, then you'll need to mock these modules according to th
 
 We recommend using [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) along with [`jest-native`](https://github.com/testing-library/jest-native) to write your tests.
 
-We are going to write example tests for Root Navigator defined below:
+We are going to write example tests illustrating difference between navigate and push functions using Root Navigator defined below:
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -97,6 +97,10 @@ const Profile = ({ navigation }) => {
       <Button
         onPress={() => navigation.navigate('Settings')}
         title="Navigate to Settings"
+      />
+      <Button
+        onPress={() => navigation.push('Settings')}
+        title="Push Settings"
       />
       <Button
         onPress={() => setTimeout(() => navigation.navigate('Settings'), 10000)}
@@ -128,7 +132,7 @@ export const RootNavigator = () => {
 </TabItem>
 </Tabs>
 
-Test Example:
+Navigate function test example:
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -146,15 +150,64 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootNavigator } from './RootNavigator';
 
-test('shows settings screen when Navigate to Settings is pressed', () => {
+test('navigates to settings screen twice', async () => {
+  const navigation = createNavigationContainerRef();
   render(
-    <NavigationContainer>
+    <NavigationContainer ref={navigation}>
       <RootNavigator />
     </NavigationContainer>
   );
 
-  fireEvent.press(screen.getByText('Navigate to Settings'));
-  expect(screen.getByText('Settings')).toBeOnTheScreen();
+  const button = screen.getByText('Navigate to Settings');
+  fireEvent.press(button);
+  fireEvent.press(button);
+
+  expect(navigation.getState().routes.map((route) => route.name)).toStrictEqual(
+    ['Profile', 'Settings']
+  );
+  expect(screen.queryByText('Profile')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Settings')).toBeOnTheScreen();
+});
+```
+
+</TabItem>
+</Tabs>
+
+Push function test example:
+
+<Tabs groupId="example" queryString="example">
+<TabItem value="static" label="Static" default>
+
+```js
+
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+import { expect, test } from '@jest/globals';
+import { fireEvent, render, screen } from '@testing-library/react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { RootNavigator } from './RootNavigator';
+
+test('pushes settings screen twice', async () => {
+  const navigation = createNavigationContainerRef();
+  render(
+    <NavigationContainer ref={navigation}>
+      <RootNavigator />
+    </NavigationContainer>
+  );
+
+  const button = screen.getByText('Push Settings');
+  fireEvent.press(button);
+  fireEvent.press(button);
+
+  expect(navigation.getState().routes.map((route) => route.name)).toStrictEqual(
+    ['Profile', 'Settings', 'Settings']
+  );
+  expect(screen.queryByText('Profile')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Settings')).toBeOnTheScreen();
 });
 ```
 
@@ -163,7 +216,45 @@ test('shows settings screen when Navigate to Settings is pressed', () => {
 
 For writing tests that include times functions you will need to use [Fake Timers](https://jestjs.io/docs/timer-mocks). They will replace times function implementation to use time from the fake clock.
 
-Test Example:
+Let's add another button to the Profile screen which uses `setTimeout`:
+
+<Tabs groupId="example" queryString="example">
+<TabItem value="static" label="Static" default>
+
+```js
+
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const Profile = ({ navigation }) => {
+  return (
+    <View>
+      <Text>Profile</Text>
+      <Button
+        onPress={() => navigation.navigate('Settings')}
+        title="Navigate to Settings"
+      />
+      <Button
+        onPress={() => navigation.push('Settings')}
+        title="Push Settings"
+      />
+      // Added button
+      <Button
+        onPress={() => setTimeout(() => navigation.navigate('Settings'), 10000)}
+        title="Navigate to Settings with 10000 ms delay"
+      />
+    </View>
+  );
+};
+```
+
+</TabItem>
+</Tabs>
+
+Fake timers test example:
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
