@@ -74,7 +74,7 @@ If you're not using Jest, then you'll need to mock these modules according to th
 
 We recommend using [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) along with [`jest-native`](https://github.com/testing-library/jest-native) to write your tests.
 
-We are going to write example tests illustrating the difference between navigate and push functions using Root Navigator defined below:
+We are going to write example tests illustrating the difference between `navigate` and `push` functions using Root Navigator defined below:
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -132,7 +132,7 @@ export const RootNavigator = () => {
 </TabItem>
 </Tabs>
 
-Navigate function test example:
+`navigate` function test example:
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -176,7 +176,7 @@ test('navigates to settings screen twice', () => {
 </TabItem>
 </Tabs>
 
-Push function test example:
+`push` function test example:
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
