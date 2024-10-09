@@ -374,12 +374,14 @@ test('navigates to settings screen after 10000 ms delay', () => {
 
   fireEvent.press(screen.getByText('Navigate to Settings with 10000 ms delay'));
 
+  // jest.advanceTimersByTime causes React state updates
+  // So it should be wrapped into act
+  act(() => jest.advanceTimersByTime(5000));
+
   expect(screen.queryByText('Profile')).toBeOnTheScreen();
   expect(screen.queryByText('Settings')).not.toBeOnTheScreen();
 
-  // jest.advanceTimersByTime causes React state updates
-  // So it should be wrapped into act
-  act(() => jest.advanceTimersByTime(10000));
+  act(() => jest.advanceTimersByTime(5000));
 
   expect(screen.queryByText('Profile')).not.toBeOnTheScreen();
   expect(screen.queryByText('Settings')).toBeOnTheScreen();
@@ -407,12 +409,14 @@ test('navigates to settings screen after 10000 ms delay', () => {
 
   fireEvent.press(screen.getByText('Navigate to Settings with 10000 ms delay'));
 
+  // jest.advanceTimersByTime causes React state updates
+  // So it should be wrapped into act
+  act(() => jest.advanceTimersByTime(5000));
+
   expect(screen.queryByText('Profile')).toBeOnTheScreen();
   expect(screen.queryByText('Settings')).not.toBeOnTheScreen();
 
-  // jest.advanceTimersByTime causes React state updates
-  // So it should be wrapped into act
-  act(() => jest.advanceTimersByTime(10000));
+  act(() => jest.advanceTimersByTime(5000));
 
   expect(screen.queryByText('Profile')).not.toBeOnTheScreen();
   expect(screen.queryByText('Settings')).toBeOnTheScreen();
