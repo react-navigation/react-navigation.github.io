@@ -95,7 +95,7 @@ const Profile = () => {
   const navigation = useNavigation();
   return (
     <View>
-      <Text>Profile</Text>
+      <Text>Profile Screen</Text>
       <Button
         onPress={() => navigation.navigate('Settings')}
         title="Navigate to Settings"
@@ -111,7 +111,7 @@ const Profile = () => {
 const Settings = () => {
   return (
     <View>
-      <Text>Settings</Text>
+      <Text>Settings Screen</Text>
     </View>
   );
 };
@@ -134,7 +134,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Profile = ({ navigation }) => {
   return (
     <View>
-      <Text>Profile</Text>
+      <Text>Profile Screen</Text>
       <Button
         onPress={() => navigation.navigate('Settings')}
         title="Navigate to Settings"
@@ -150,7 +150,7 @@ const Profile = ({ navigation }) => {
 const Settings = () => {
   return (
     <View>
-      <Text>Settings</Text>
+      <Text>Settings Screen</Text>
     </View>
   );
 };
@@ -195,8 +195,8 @@ test('navigates to settings screen twice', () => {
   expect(navigation.getState().routes.map((route) => route.name)).toStrictEqual(
     ['Profile', 'Settings']
   );
-  expect(screen.queryByText('Profile')).not.toBeOnTheScreen();
-  expect(screen.queryByText('Settings')).toBeOnTheScreen();
+  expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
 });
 ```
 
@@ -227,8 +227,8 @@ test('navigates to settings screen twice', () => {
   expect(navigation.getState().routes.map((route) => route.name)).toStrictEqual(
     ['Profile', 'Settings']
   );
-  expect(screen.queryByText('Profile')).not.toBeOnTheScreen();
-  expect(screen.queryByText('Settings')).toBeOnTheScreen();
+  expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
 });
 ```
 
@@ -261,8 +261,8 @@ test('pushes settings screen twice', () => {
   expect(navigation.getState().routes.map((route) => route.name)).toStrictEqual(
     ['Profile', 'Settings', 'Settings']
   );
-  expect(screen.queryByText('Profile')).not.toBeOnTheScreen();
-  expect(screen.queryByText('Settings')).toBeOnTheScreen();
+  expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
 });
 ```
 
@@ -293,8 +293,8 @@ test('pushes settings screen twice', () => {
   expect(navigation.getState().routes.map((route) => route.name)).toStrictEqual(
     ['Profile', 'Settings', 'Settings']
   );
-  expect(screen.queryByText('Profile')).not.toBeOnTheScreen();
-  expect(screen.queryByText('Settings')).toBeOnTheScreen();
+  expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
 });
 ```
 
@@ -596,7 +596,7 @@ const Profile = () => {
   const navigation = useNavigation();
   return (
     <View>
-      <Text>Profile</Text>
+      <Text>Profile Screen</Text>
       <Button
         onPress={() => navigation.navigate('Settings')}
         title="Navigate to Settings"
@@ -622,7 +622,7 @@ const Profile = () => {
 const Profile = ({ navigation }) => {
   return (
     <View>
-      <Text>Profile</Text>
+      <Text>Profile Screen</Text>
       <Button
         onPress={() => navigation.navigate('Settings')}
         title="Navigate to Settings"
@@ -668,13 +668,13 @@ test('navigates to settings screen after 10000 ms delay', () => {
   // So it should be wrapped into act
   act(() => jest.advanceTimersByTime(5000));
 
-  expect(screen.queryByText('Profile')).toBeOnTheScreen();
-  expect(screen.queryByText('Settings')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Profile Screen')).toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).not.toBeOnTheScreen();
 
   act(() => jest.advanceTimersByTime(5000));
 
-  expect(screen.queryByText('Profile')).not.toBeOnTheScreen();
-  expect(screen.queryByText('Settings')).toBeOnTheScreen();
+  expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
 });
 ```
 
@@ -703,13 +703,13 @@ test('navigates to settings screen after 10000 ms delay', () => {
   // So it should be wrapped into act
   act(() => jest.advanceTimersByTime(5000));
 
-  expect(screen.queryByText('Profile')).toBeOnTheScreen();
-  expect(screen.queryByText('Settings')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Profile Screen')).toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).not.toBeOnTheScreen();
 
   act(() => jest.advanceTimersByTime(5000));
 
-  expect(screen.queryByText('Profile')).not.toBeOnTheScreen();
-  expect(screen.queryByText('Settings')).toBeOnTheScreen();
+  expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
 });
 ```
 
