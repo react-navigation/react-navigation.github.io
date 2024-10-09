@@ -87,10 +87,7 @@ We are going to write example tests illustrating the difference between `navigat
 ```js
 import { Button, Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {
-  createStaticNavigation,
-  useNavigation,
-} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const Profile = () => {
   const navigation = useNavigation();
@@ -117,14 +114,12 @@ const Settings = () => {
   );
 };
 
-const RootStack = createNativeStackNavigator({
+export const RootNavigator = createNativeStackNavigator({
   screens: {
     Profile,
     Settings,
   },
 });
-
-export const RootNavigator = createStaticNavigation(RootStack);
 ```
 
 </TabItem>
@@ -180,12 +175,16 @@ export const RootNavigator = () => {
 ```js
 import { expect, test } from '@jest/globals';
 import { fireEvent, render, screen } from '@testing-library/react-native';
-import { createNavigationContainerRef } from '@react-navigation/native';
+import {
+  createNavigationContainerRef,
+  createStaticNavigation,
+} from '@react-navigation/native';
 import { RootNavigator } from './RootNavigator';
 
 test('navigates to settings screen twice', () => {
+  const RootNavigation = createStaticNavigation(RootNavigator);
   const navigation = createNavigationContainerRef();
-  render(<RootNavigator ref={navigation} />);
+  render(<RootNavigation ref={navigation} />);
 
   const button = screen.getByText('Navigate to Settings');
   fireEvent.press(button);
@@ -241,13 +240,17 @@ test('navigates to settings screen twice', () => {
 
 ```js
 import { expect, test } from '@jest/globals';
-import { createNavigationContainerRef } from '@react-navigation/native';
+import {
+  createNavigationContainerRef,
+  createStaticNavigation,
+} from '@react-navigation/native';
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import { RootNavigator } from './RootNavigator';
 
 test('pushes settings screen twice', () => {
+  const RootNavigation = createStaticNavigation(RootNavigator);
   const navigation = createNavigationContainerRef();
-  render(<RootNavigator ref={navigation} />);
+  render(<RootNavigation ref={navigation} />);
 
   const button = screen.getByText('Push Settings');
   fireEvent.press(button);
@@ -364,13 +367,15 @@ Fake timers test example:
 ```js
 import { expect, jest, test } from '@jest/globals';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { createStaticNavigation } from '@react-navigation/native';
 import { RootNavigator } from './RootNavigator';
 
 test('navigates to settings screen after 10000 ms delay', () => {
   // Enable fake timers
   jest.useFakeTimers();
 
-  render(<RootNavigator />);
+  const RootNavigation = createStaticNavigation(RootNavigator);
+  render(<RootNavigation />);
 
   fireEvent.press(screen.getByText('Navigate to Settings with 10000 ms delay'));
 
