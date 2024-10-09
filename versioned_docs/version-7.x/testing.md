@@ -492,6 +492,8 @@ test('navigates to settings with previous preload', () => {
 
   expect(renderCounter).toBe(0);
 
+  // navigate.preload causes React state updates
+  // So it should be wrapped into act
   act(() => navigation.preload('Settings'));
 
   expect(screen.queryByText('Profile Screen')).toBeOnTheScreen();
@@ -563,6 +565,8 @@ test('navigates to settings with previous preload', () => {
 
   expect(renderCounter).toBe(0);
 
+  // navigation.preload causes React state updates
+  // So it should be wrapped into act
   act(() => navigation.preload('Settings'));
 
   expect(screen.queryByText('Profile Screen')).toBeOnTheScreen();
