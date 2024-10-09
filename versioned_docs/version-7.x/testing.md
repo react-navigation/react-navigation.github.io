@@ -79,7 +79,9 @@ If you're not using Jest, then you'll need to mock these modules according to th
 
 We recommend using [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) along with [`jest-native`](https://github.com/testing-library/jest-native) to write your tests.
 
-We are going to write example tests illustrating the difference between `navigate` and `push` functions using `RootNavigator` defined below:
+We are going to write example tests illustrating the difference between `navigate` and `push` functions, drawer's screens `preload` and times functions in tests.
+
+To show the difference between `navigate` and `push` functions, we will use `RootNavigator` defined below:
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -293,6 +295,285 @@ test('pushes settings screen twice', () => {
   );
   expect(screen.queryByText('Profile')).not.toBeOnTheScreen();
   expect(screen.queryByText('Settings')).toBeOnTheScreen();
+});
+```
+
+</TabItem>
+</Tabs>
+
+To show how drawer's screens `preload` works, we will compare two tests - with and without preloading.
+
+Without preloading test example:
+
+<Tabs groupId="example" queryString="example">
+<TabItem value="static" label="Static" default>
+
+```js
+import { expect, test } from '@jest/globals';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  createNavigationContainerRef,
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
+import { Button, Text, View } from 'react-native';
+
+const Profile = () => {
+  const navigation = useNavigation();
+  return (
+    <View>
+      <Text>Profile Screen</Text>
+      <Button
+        onPress={() => navigation.navigate('Settings')}
+        title="Navigate to Settings"
+      />
+    </View>
+  );
+};
+
+let renderCounter = 0;
+
+const Settings = () => {
+  renderCounter++;
+  return (
+    <View>
+      <Text>Settings Screen</Text>
+    </View>
+  );
+};
+
+const Drawer = createDrawerNavigator({
+  screens: {
+    Profile,
+    Settings,
+  },
+});
+
+const DrawerNavigation = createStaticNavigation(Drawer);
+
+test('navigates to settings without previous preload', () => {
+  const navigation = createNavigationContainerRef();
+  render(<DrawerNavigation ref={navigation} />);
+
+  expect(screen.queryByText('Profile Screen')).toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).not.toBeOnTheScreen();
+  expect(renderCounter).toBe(0);
+
+  fireEvent.press(screen.queryByText('Navigate to Settings'));
+
+  expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
+  expect(renderCounter).toBe(1);
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+import { expect, test } from '@jest/globals';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  createNavigationContainerRef,
+  NavigationContainer,
+} from '@react-navigation/native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
+import { Button, Text, View } from 'react-native';
+
+const Profile = ({ navigation }) => {
+  return (
+    <View>
+      <Text>Profile Screen</Text>
+      <Button
+        onPress={() => navigation.navigate('Settings')}
+        title="Navigate to Settings"
+      />
+    </View>
+  );
+};
+
+let renderCounter = 0;
+
+const Settings = () => {
+  renderCounter++;
+  return (
+    <View>
+      <Text>Settings Screen</Text>
+    </View>
+  );
+};
+
+const Drawer = createDrawerNavigator();
+
+const DrawerNavigation = () => {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Profile" component={Profile} />
+      <Drawer.Screen name="Settings" component={Settings} />
+    </Drawer.Navigator>
+  );
+};
+
+test('navigates to settings without previous preload', () => {
+  const navigation = createNavigationContainerRef();
+  render(
+    <NavigationContainer ref={navigation}>
+      <DrawerNavigation />
+    </NavigationContainer>
+  );
+
+  expect(screen.queryByText('Profile Screen')).toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).not.toBeOnTheScreen();
+  expect(renderCounter).toBe(0);
+
+  fireEvent.press(screen.queryByText('Navigate to Settings'));
+
+  expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
+  expect(renderCounter).toBe(1);
+});
+```
+
+</TabItem>
+</Tabs>
+
+With preloading test example:
+<Tabs groupId="example" queryString="example">
+<TabItem value="static" label="Static" default>
+
+```js
+import { expect, test } from '@jest/globals';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  createNavigationContainerRef,
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { Button, Text, View } from 'react-native';
+
+const Profile = () => {
+  const navigation = useNavigation();
+  return (
+    <View>
+      <Text>Profile Screen</Text>
+      <Button
+        onPress={() => navigation.navigate('Settings')}
+        title="Navigate to Settings"
+      />
+    </View>
+  );
+};
+
+let renderCounter = 0;
+
+const Settings = () => {
+  renderCounter++;
+  return (
+    <View>
+      <Text>Settings Screen</Text>
+    </View>
+  );
+};
+
+const Drawer = createDrawerNavigator({
+  screens: {
+    Profile,
+    Settings,
+  },
+});
+
+const DrawerNavigation = createStaticNavigation(Drawer);
+
+test('navigates to settings with previous preload', () => {
+  const navigation = createNavigationContainerRef();
+  render(<DrawerNavigation ref={navigation} />);
+
+  expect(renderCounter).toBe(0);
+
+  act(() => navigation.preload('Settings'));
+
+  expect(screen.queryByText('Profile Screen')).toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).not.toBeOnTheScreen();
+  expect(renderCounter).toBe(1);
+
+  fireEvent.press(screen.queryByText('Navigate to Settings'));
+
+  expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
+  expect(renderCounter).toBe(1);
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+import { expect, test } from '@jest/globals';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  createNavigationContainerRef,
+  NavigationContainer,
+} from '@react-navigation/native';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { Button, Text, View } from 'react-native';
+
+const Profile = ({ navigation }) => {
+  return (
+    <View>
+      <Text>Profile Screen</Text>
+      <Button
+        onPress={() => navigation.navigate('Settings')}
+        title="Navigate to Settings"
+      />
+    </View>
+  );
+};
+
+let renderCounter = 0;
+
+const Settings = () => {
+  renderCounter++;
+  return (
+    <View>
+      <Text>Settings Screen</Text>
+    </View>
+  );
+};
+
+const Drawer = createDrawerNavigator();
+
+const DrawerNavigation = () => {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Profile" component={Profile} />
+      <Drawer.Screen name="Settings" component={Settings} />
+    </Drawer.Navigator>
+  );
+};
+
+test('navigates to settings with previous preload', () => {
+  const navigation = createNavigationContainerRef();
+  render(
+    <NavigationContainer ref={navigation}>
+      <DrawerNavigation />
+    </NavigationContainer>
+  );
+
+  expect(renderCounter).toBe(0);
+
+  act(() => navigation.preload('Settings'));
+
+  expect(screen.queryByText('Profile Screen')).toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).not.toBeOnTheScreen();
+  expect(renderCounter).toBe(1);
+
+  fireEvent.press(screen.queryByText('Navigate to Settings'));
+
+  expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
+  expect(renderCounter).toBe(1);
 });
 ```
 
