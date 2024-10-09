@@ -79,7 +79,8 @@ If you're not using Jest, then you'll need to mock these modules according to th
 
 We recommend using [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) along with [`jest-native`](https://github.com/testing-library/jest-native) to write your tests.
 
-We are going to write example tests illustrating the difference between `navigate` and `push` functions, drawer's screens `preload` and times functions in tests.
+We are going to write example tests illustrating the difference between `navigate` and `push` functions, how drawer's screens `preload`
+works and what you have to do to use times functions in tests.
 
 To show the difference between `navigate` and `push` functions, we will use `RootNavigator` defined below:
 
@@ -439,6 +440,7 @@ test('navigates to settings without previous preload', () => {
 </Tabs>
 
 With preloading test example:
+
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
 
@@ -584,7 +586,7 @@ test('navigates to settings with previous preload', () => {
 </TabItem>
 </Tabs>
 
-For writing tests that include times functions you will need to use [Fake Timers](https://jestjs.io/docs/timer-mocks). They will replace times function implementation to use time from the fake clock.
+For writing tests that include times functions we will have to use [Fake Timers](https://jestjs.io/docs/timer-mocks). They will replace times function implementation to use time from the fake clock.
 
 Let's add another button to the Profile screen, which uses `setTimeout`:
 
