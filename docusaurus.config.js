@@ -11,6 +11,11 @@ export default {
   projectName: 'react-navigation.github.io',
   scripts: ['/js/snack-helpers.js', '/js/toc-fixes.js'],
   themeConfig: {
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
+    },
     prism: {
       theme: require('prism-react-renderer').themes.github,
       darkTheme: require('prism-react-renderer').themes.dracula,
