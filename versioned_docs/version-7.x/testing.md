@@ -302,6 +302,136 @@ test('pushes settings screen twice', () => {
 </TabItem>
 </Tabs>
 
+For writing tests that include times functions we will have to use [Fake Timers](https://jestjs.io/docs/timer-mocks). They will replace times function implementation to use time from the fake clock.
+
+Let's add another button, which uses `setTimeout`, to the previously defined `Profile` screen:
+
+<Tabs groupId="example" queryString="example">
+<TabItem value="static" label="Static" default>
+
+```js
+const ProfileScreen = () => {
+  const navigation = useNavigation();
+  return (
+    <View>
+      <Text>Profile Screen</Text>
+      <Button
+        onPress={() => navigation.navigate('Settings')}
+        title="Navigate to Settings"
+      />
+      <Button
+        onPress={() => navigation.push('Settings')}
+        title="Push Settings"
+      />
+      {/* Added button */}
+      <Button
+        onPress={() => setTimeout(() => navigation.navigate('Settings'), 10000)}
+        title="Navigate to Settings with 10000 ms delay"
+      />
+    </View>
+  );
+};
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const ProfileScreen = ({ navigation }) => {
+  return (
+    <View>
+      <Text>Profile Screen</Text>
+      <Button
+        onPress={() => navigation.navigate('Settings')}
+        title="Navigate to Settings"
+      />
+      <Button
+        onPress={() => navigation.push('Settings')}
+        title="Push Settings"
+      />
+      {/* Added button */}
+      <Button
+        onPress={() => setTimeout(() => navigation.navigate('Settings'), 10000)}
+        title="Navigate to Settings with 10000 ms delay"
+      />
+    </View>
+  );
+};
+```
+
+</TabItem>
+</Tabs>
+
+Fake timers test example:
+
+<Tabs groupId="example" queryString="example">
+<TabItem value="static" label="Static" default>
+
+```js
+import { expect, jest, test } from '@jest/globals';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { RootNavigator } from './RootNavigator';
+
+test('navigates to settings screen after 10000 ms delay', () => {
+  // Enable fake timers
+  jest.useFakeTimers();
+
+  const RootNavigation = createStaticNavigation(RootNavigator);
+  render(<RootNavigation />);
+
+  fireEvent.press(screen.getByText('Navigate to Settings with 10000 ms delay'));
+
+  act(() => jest.advanceTimersByTime(5000));
+
+  expect(screen.queryByText('Profile Screen')).toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).not.toBeOnTheScreen();
+
+  act(() => jest.advanceTimersByTime(5000));
+
+  expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+import { expect, jest, test } from '@jest/globals';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { RootNavigator } from './RootNavigator';
+
+test('navigates to settings screen after 10000 ms delay', () => {
+  // Enable fake timers
+  jest.useFakeTimers();
+
+  render(
+    <NavigationContainer>
+      <RootNavigator />
+    </NavigationContainer>
+  );
+
+  fireEvent.press(screen.getByText('Navigate to Settings with 10000 ms delay'));
+
+  // jest.advanceTimersByTime causes React state updates
+  // So it should be wrapped into act
+  act(() => jest.advanceTimersByTime(5000));
+
+  expect(screen.queryByText('Profile Screen')).toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).not.toBeOnTheScreen();
+
+  act(() => jest.advanceTimersByTime(5000));
+
+  expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
+});
+```
+
+</TabItem>
+</Tabs>
+
 To show how drawer's screens `preload` works, we will compare two tests - with and without preloading.
 
 Without preloading test example:
@@ -574,138 +704,6 @@ test('navigates to settings with previous preload', () => {
   expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
   expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
   expect(renderCounter).toBe(1);
-});
-```
-
-</TabItem>
-</Tabs>
-
-For writing tests that include times functions we will have to use [Fake Timers](https://jestjs.io/docs/timer-mocks). They will replace times function implementation to use time from the fake clock.
-
-Let's add another button to the Profile screen, which uses `setTimeout`:
-
-<Tabs groupId="example" queryString="example">
-<TabItem value="static" label="Static" default>
-
-```js
-const ProfileScreen = () => {
-  const navigation = useNavigation();
-  return (
-    <View>
-      <Text>Profile Screen</Text>
-      <Button
-        onPress={() => navigation.navigate('Settings')}
-        title="Navigate to Settings"
-      />
-      <Button
-        onPress={() => navigation.push('Settings')}
-        title="Push Settings"
-      />
-      {/* Added button */}
-      <Button
-        onPress={() => setTimeout(() => navigation.navigate('Settings'), 10000)}
-        title="Navigate to Settings with 10000 ms delay"
-      />
-    </View>
-  );
-};
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-const ProfileScreen = ({ navigation }) => {
-  return (
-    <View>
-      <Text>Profile Screen</Text>
-      <Button
-        onPress={() => navigation.navigate('Settings')}
-        title="Navigate to Settings"
-      />
-      <Button
-        onPress={() => navigation.push('Settings')}
-        title="Push Settings"
-      />
-      {/* Added button */}
-      <Button
-        onPress={() => setTimeout(() => navigation.navigate('Settings'), 10000)}
-        title="Navigate to Settings with 10000 ms delay"
-      />
-    </View>
-  );
-};
-```
-
-</TabItem>
-</Tabs>
-
-Fake timers test example:
-
-<Tabs groupId="example" queryString="example">
-<TabItem value="static" label="Static" default>
-
-```js
-import { expect, jest, test } from '@jest/globals';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import { createStaticNavigation } from '@react-navigation/native';
-import { RootNavigator } from './RootNavigator';
-
-test('navigates to settings screen after 10000 ms delay', () => {
-  // Enable fake timers
-  jest.useFakeTimers();
-
-  const RootNavigation = createStaticNavigation(RootNavigator);
-  render(<RootNavigation />);
-
-  fireEvent.press(screen.getByText('Navigate to Settings with 10000 ms delay'));
-
-  // jest.advanceTimersByTime causes React state updates
-  // So it should be wrapped into act
-  act(() => jest.advanceTimersByTime(5000));
-
-  expect(screen.queryByText('Profile Screen')).toBeOnTheScreen();
-  expect(screen.queryByText('Settings Screen')).not.toBeOnTheScreen();
-
-  act(() => jest.advanceTimersByTime(5000));
-
-  expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
-  expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-import { expect, jest, test } from '@jest/globals';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { RootNavigator } from './RootNavigator';
-
-test('navigates to settings screen after 10000 ms delay', () => {
-  // Enable fake timers
-  jest.useFakeTimers();
-
-  render(
-    <NavigationContainer>
-      <RootNavigator />
-    </NavigationContainer>
-  );
-
-  fireEvent.press(screen.getByText('Navigate to Settings with 10000 ms delay'));
-
-  // jest.advanceTimersByTime causes React state updates
-  // So it should be wrapped into act
-  act(() => jest.advanceTimersByTime(5000));
-
-  expect(screen.queryByText('Profile Screen')).toBeOnTheScreen();
-  expect(screen.queryByText('Settings Screen')).not.toBeOnTheScreen();
-
-  act(() => jest.advanceTimersByTime(5000));
-
-  expect(screen.queryByText('Profile Screen')).not.toBeOnTheScreen();
-  expect(screen.queryByText('Settings Screen')).toBeOnTheScreen();
 });
 ```
 
