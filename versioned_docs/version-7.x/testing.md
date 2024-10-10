@@ -92,7 +92,7 @@ import { Button, Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 
-const Profile = () => {
+const ProfileScreen = () => {
   const navigation = useNavigation();
   return (
     <View>
@@ -109,7 +109,7 @@ const Profile = () => {
   );
 };
 
-const Settings = () => {
+const SettingsScreen = () => {
   return (
     <View>
       <Text>Settings Screen</Text>
@@ -119,8 +119,8 @@ const Settings = () => {
 
 export const RootNavigator = createNativeStackNavigator({
   screens: {
-    Profile,
-    Settings,
+    Profile: ProfileScreen,
+    Settings: SettingsScreen,
   },
 });
 ```
@@ -132,7 +132,7 @@ export const RootNavigator = createNativeStackNavigator({
 import { Button, Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Profile = ({ navigation }) => {
+const ProfileScreen = ({ navigation }) => {
   return (
     <View>
       <Text>Profile Screen</Text>
@@ -148,7 +148,7 @@ const Profile = ({ navigation }) => {
   );
 };
 
-const Settings = () => {
+const SettingsScreen = () => {
   return (
     <View>
       <Text>Settings Screen</Text>
@@ -160,8 +160,8 @@ export const RootNavigator = () => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
     </Stack.Navigator>
   );
 };
@@ -320,7 +320,7 @@ import {
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import { Button, Text, View } from 'react-native';
 
-const Profile = () => {
+const ProfileScreen = () => {
   const navigation = useNavigation();
   return (
     <View>
@@ -335,7 +335,7 @@ const Profile = () => {
 
 let renderCounter = 0;
 
-const Settings = () => {
+const SettingsScreen = () => {
   renderCounter++;
   return (
     <View>
@@ -346,8 +346,8 @@ const Settings = () => {
 
 const Drawer = createDrawerNavigator({
   screens: {
-    Profile,
-    Settings,
+    Profile: ProfileScreen,
+    Settings: SettingsScreen,
   },
 });
 
@@ -382,7 +382,7 @@ import {
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import { Button, Text, View } from 'react-native';
 
-const Profile = ({ navigation }) => {
+const ProfileScreen = ({ navigation }) => {
   return (
     <View>
       <Text>Profile Screen</Text>
@@ -396,7 +396,7 @@ const Profile = ({ navigation }) => {
 
 let renderCounter = 0;
 
-const Settings = () => {
+const SettingsScreen = () => {
   renderCounter++;
   return (
     <View>
@@ -410,8 +410,8 @@ const Drawer = createDrawerNavigator();
 const DrawerNavigation = () => {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="Profile" component={Profile} />
-      <Drawer.Screen name="Settings" component={Settings} />
+      <Drawer.Screen name="Profile" component={ProfileScreen} />
+      <Drawer.Screen name="Settings" component={SettingsScreen} />
     </Drawer.Navigator>
   );
 };
@@ -455,7 +455,7 @@ import {
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { Button, Text, View } from 'react-native';
 
-const Profile = () => {
+const ProfileScreen = () => {
   const navigation = useNavigation();
   return (
     <View>
@@ -470,7 +470,7 @@ const Profile = () => {
 
 let renderCounter = 0;
 
-const Settings = () => {
+const SettingsScreen = () => {
   renderCounter++;
   return (
     <View>
@@ -481,8 +481,8 @@ const Settings = () => {
 
 const Drawer = createDrawerNavigator({
   screens: {
-    Profile,
-    Settings,
+    Profile: ProfileScreen,
+    Settings: SettingsScreen,
   },
 });
 
@@ -523,7 +523,7 @@ import {
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { Button, Text, View } from 'react-native';
 
-const Profile = ({ navigation }) => {
+const ProfileScreen = ({ navigation }) => {
   return (
     <View>
       <Text>Profile Screen</Text>
@@ -537,7 +537,7 @@ const Profile = ({ navigation }) => {
 
 let renderCounter = 0;
 
-const Settings = () => {
+const SettingsScreen = () => {
   renderCounter++;
   return (
     <View>
@@ -551,8 +551,8 @@ const Drawer = createDrawerNavigator();
 const DrawerNavigation = () => {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="Profile" component={Profile} />
-      <Drawer.Screen name="Settings" component={Settings} />
+      <Drawer.Screen name="Profile" component={ProfileScreen} />
+      <Drawer.Screen name="Settings" component={SettingsScreen} />
     </Drawer.Navigator>
   );
 };
@@ -594,7 +594,7 @@ Let's add another button to the Profile screen, which uses `setTimeout`:
 <TabItem value="static" label="Static" default>
 
 ```js
-const Profile = () => {
+const ProfileScreen = () => {
   const navigation = useNavigation();
   return (
     <View>
@@ -621,7 +621,7 @@ const Profile = () => {
 <TabItem value="dynamic" label="Dynamic">
 
 ```js
-const Profile = ({ navigation }) => {
+const ProfileScreen = ({ navigation }) => {
   return (
     <View>
       <Text>Profile Screen</Text>
