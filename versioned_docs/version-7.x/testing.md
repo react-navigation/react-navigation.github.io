@@ -313,7 +313,6 @@ Without preloading test example:
 import { expect, test } from '@jest/globals';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
-  createNavigationContainerRef,
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
@@ -354,8 +353,7 @@ const Drawer = createDrawerNavigator({
 const DrawerNavigation = createStaticNavigation(Drawer);
 
 test('navigates to settings without previous preload', () => {
-  const navigation = createNavigationContainerRef();
-  render(<DrawerNavigation ref={navigation} />);
+  render(<DrawerNavigation />);
 
   expect(screen.queryByText('Profile Screen')).toBeOnTheScreen();
   expect(screen.queryByText('Settings Screen')).not.toBeOnTheScreen();
@@ -375,10 +373,7 @@ test('navigates to settings without previous preload', () => {
 ```js
 import { expect, test } from '@jest/globals';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import {
-  createNavigationContainerRef,
-  NavigationContainer,
-} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import { Button, Text, View } from 'react-native';
 
@@ -417,9 +412,8 @@ const DrawerNavigation = () => {
 };
 
 test('navigates to settings without previous preload', () => {
-  const navigation = createNavigationContainerRef();
   render(
-    <NavigationContainer ref={navigation}>
+    <NavigationContainer>
       <DrawerNavigation />
     </NavigationContainer>
   );
