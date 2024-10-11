@@ -700,22 +700,13 @@ Or with a [group](group.md#screen-layout) or [navigator](navigator.md#screen-lay
 
 ### Preloading screens
 
-Many navigators now support preloading screens prior to navigating to them. This can be useful to improve the perceived performance of the app by preloading the screens that the user is likely to navigate to next. Preloading a screen will render it off-screen and execute its side-effects such as data fetching.
+All built-in navigators now support preloading screens prior to navigating to them. This can be useful to improve the perceived performance of the app by preloading the screens that the user is likely to navigate to next. Preloading a screen will render it off-screen and execute its side-effects such as data fetching.
 
 To preload a screen, you can use the `preload` method on the navigation object:
 
 ```js
 navigation.preload('Details', { id: 42 });
 ```
-
-Preloading is supported in the following navigators:
-
-- Stack Navigator
-- Bottom Tab Navigator
-- Material Top Tab Navigator
-- Drawer Navigator
-
-The Native Stack navigator doesn't currently support preloading screens.
 
 See [`preload`](navigation-object.md#preload) for usage.
 
