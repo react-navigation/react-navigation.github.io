@@ -11,7 +11,7 @@ This guides lists all the breaking changes and new features in React Navigation 
 ## Minimum Requirements
 
 - `react-native` >= 0.72.0
-- `expo` >= 49 (if you use Expo)
+- `expo` >= 52 (if you use [Expo Go](https://expo.dev/go))
 - `typescript` >= 5.0.0 (if you use TypeScript)
 
 ## Breaking changes

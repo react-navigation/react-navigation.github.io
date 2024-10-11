@@ -20,7 +20,7 @@ Here are some resources to help you out:
 ## Minimum requirements
 
 - `react-native` >= 0.63.0
-- `expo` >= 41 (if you use [Expo](https://expo.io))
+- `expo` >= 41 (if you use [Expo Go](https://expo.dev/go))
 - `typescript` >= 4.1.0 (if you use [TypeScript](https://www.typescriptlang.org))
 
 ## Installation
