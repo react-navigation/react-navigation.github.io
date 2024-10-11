@@ -966,14 +966,8 @@ Preloading a screen means that the screen will be rendered in the background. Al
 
 Depending on the navigator, `preload` may work slightly differently:
 
-- In a stack navigator ([stack](stack-navigator.md)), the screen will be rendered off-screen and animated in when you navigate to it. If [`getId`](screen.md#getid) is specified, it'll be used for the navigation to identify the preloaded screen.
+- In a stack navigator ([stack](stack-navigator.md), [native stack](native-stack-navigator.md)), the screen will be rendered off-screen and animated in when you navigate to it. If [`getId`](screen.md#getid) is specified, it'll be used for the navigation to identify the preloaded screen.
 - In a tab or drawer navigator ([bottom tabs](bottom-tab-navigator.md), [material top tabs](material-top-tab-navigator.md), [drawer](drawer-navigator.md), etc.), the existing screen will be rendered as if `lazy` was set to `false`. Calling `preload` on a screen that is already rendered will not have any effect.
-
-:::warning
-
-Preloading screens is currently not supported in the [native stack navigator](native-stack-navigator.md).
-
-:::
 
 When a screen is preloaded in a stack navigator, it will have a few limitations:
 
