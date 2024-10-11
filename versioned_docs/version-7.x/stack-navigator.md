@@ -325,8 +325,6 @@ This is automatically adjusted when using [`presentation`](#presentation) as `tr
 Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to `false`.
 Defaults to `true` when `enableFreeze()` from `react-native-screens` package is run at the top of the application.
 
-Requires `react-native-screens` version >=3.16.0.
-
 Only supported on iOS and Android.
 
 ### Header related options
