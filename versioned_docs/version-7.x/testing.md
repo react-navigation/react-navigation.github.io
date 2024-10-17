@@ -208,7 +208,7 @@ test('navigates to settings by "Go to Settings" button press', () => {
 </TabItem>
 </Tabs>
 
-We use `FireEvent` to press button and `expect` to check if rendered screen's content matches settings.
+We use `FireEvent` to press button and `expect` to check if rendered screen's content matches settings screen.
 
 ### Example 2
 
@@ -346,10 +346,10 @@ test('navigates to settings by tab bar button press', () => {
 
 We get settings tab bar button, press it and check if rendered content is correct.
 
-To find settings tab button you cannot use `queryByText`, because there is no text that can be queried. You can use `getByRole` instead and pass object with `name` prop as the second argument.
+To find settings tab bar button you cannot use `queryByText`, because there is no text that can be queried. You can use `getByRole` instead and pass object with `name` prop as the second argument.
 
 ```js
-// Pass name of settings tab
+// Pass object with settings tab name
 const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
 ```
 
@@ -361,7 +361,7 @@ const event = {};
 fireEvent.press(button, event);
 ```
 
-While writing tests containing navigation with animations you need to wait until animations finish before querying components. To do so, you have to use `fake timers`. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of times function to use fake clock ticks. They allow you to instantly skip animation time. To avoid getting state change error wrap `runAllTimers` with `act`.
+While writing tests containing navigation with animations you need to wait until animations finish before querying components. To do so, you have to use `fake timers`. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of times function to use fake clock. They allow you to instantly skip animation time. To avoid getting state change error, wrap `runAllTimers` in `act`.
 
 ```js
 // Enable fake timers
@@ -369,14 +369,14 @@ jest.useFakeTimers();
 
 // ...
 
-// Wrap jest.runAllTimers to prevent state change error
+// Wrap jest.runAllTimers in act to prevent state change error
 // Skip all timers including animations
 act(() => jest.runAllTimers());
 ```
 
 ### Example 3
 
-Always displays settings screen after tab bar settings button press.
+Always displays settings screen after settings tab bar button press.
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -410,7 +410,7 @@ function SettingsScreen() {
   );
 }
 
-const DetailsScreen = () => {
+function DetailsScreen() {
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -425,7 +425,7 @@ const DetailsScreen = () => {
       <Text>Details screen</Text>
     </View>
   );
-};
+}
 
 const SettingsNavigator = createStackNavigator({
   screens: {
@@ -474,7 +474,7 @@ function SettingsScreen({ navigation }) {
   );
 }
 
-const DetailsScreen = ({ navigation }) => {
+function DetailsScreen({ navigation }) {
   useEffect(() => {
     const unsubscribe = navigation.getParent().addListener('tabPress', (e) => {
       navigation.popToTop();
@@ -487,7 +487,7 @@ const DetailsScreen = ({ navigation }) => {
       <Text>Details screen</Text>
     </View>
   );
-};
+}
 
 const SettingsStack = createStackNavigator();
 
@@ -525,7 +525,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react-native';
 
 import { TabNavigator } from './TabNavigator';
 
-test('always displays settings screen after tab bar settings button press', () => {
+test('always displays settings screen after settings tab bar button press', () => {
   jest.useFakeTimers();
 
   const TabNavigation = createStaticNavigation(TabNavigator);
@@ -569,7 +569,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react-native';
 
 import { TabNavigator } from './TabNavigator';
 
-test('always displays settings screen after tab bar settings button press', () => {
+test('always displays settings screen after settings tab bar button press', () => {
   jest.useFakeTimers();
 
   render(
@@ -653,6 +653,7 @@ function ProfileScreen() {
       };
     }, [])
   );
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       {loading && <Text>Loading</Text>}
@@ -712,6 +713,7 @@ function ProfileScreen() {
       };
     }, [])
   );
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       {loading && <Text>Loading</Text>}
@@ -859,7 +861,7 @@ test('Display loading state while waiting for data and then fetched profile nick
 </TabItem>
 </Tabs>
 
-We query tab buttons and mock fetch function using `spyOn` and `mockImplementation`. We navigate to profile screen and check if loading state is rendered correctly. Then, to check if fetched data is displayed, we use `findByText` - we need to wait for the fetch to finish before checking it's result. To ensure that operation will succeed on every focus, we navigate back to home, then to settings and check loading state and fetched data again.
+We query tab buttons and mock fetch function using `spyOn` and `mockImplementation`. We navigate to profile screen and check if loading state is rendered correctly. Then, to check if fetched data is displayed, we use `findByText` - we need to wait for the fetch to finish before checking it's result. To ensure that operation will succeed not only on first focus, we navigate back to home, then to settings and check loading state and fetched data again.
 
 To make test deterministic and isolate it from the real backend you can mock fetch function. You can use `spyOn` to override real implementation of fetch with `mockedFetch`.
 
