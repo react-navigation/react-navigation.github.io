@@ -79,13 +79,11 @@ If you're not using Jest, then you'll need to mock these modules according to th
 
 We recommend using [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) along with [`jest-native`](https://github.com/testing-library/jest-native) to write your tests.
 
-We will go through some real-world case test code examples. Each code example consist of navigator and test code file.
+We will go through some real-world case test code examples. Each code example consists of navigator and test code file.
 
 ### Example 1
 
-Navigate to another screen by button press.
-
-Navigator:
+Navigate to settings screen by button press.
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -166,8 +164,6 @@ export const StackNavigator = () => {
 </TabItem>
 </Tabs>
 
-Test:
-
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
 
@@ -180,7 +176,6 @@ import { StackNavigator } from './StackNavigator';
 
 test('navigates to settings by button press', () => {
   const StackNavigation = createStaticNavigation(StackNavigator);
-
   render(<StackNavigation />);
 
   fireEvent.press(screen.queryByText('Go to Settings'));
@@ -213,13 +208,11 @@ test('navigates to settings by button press', () => {
 </TabItem>
 </Tabs>
 
-We simulate user’s button press by `FireEvent` and call `expect` to check if rendered content is correct.
+We press button by `FireEvent` to navigate to settings screen and call `expect` to check if rendered content is correct.
 
 ### Example 2
 
-Navigate to another tab caused by tab bar button press.
-
-Navigator:
+Navigate to settings screen by tab bar button press.
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -246,18 +239,8 @@ const SettingsScreen = () => {
 
 export const TabNavigator = createBottomTabNavigator({
   screens: {
-    Home: {
-      screen: HomeScreen,
-      options: {
-        tabBarButtonTestID: 'home-tab',
-      },
-    },
-    Settings: {
-      screen: SettingsScreen,
-      options: {
-        tabBarButtonTestID: 'settings-tab',
-      },
-    },
+    Home: HomeScreen,
+    Settings: SettingsScreen,
   },
   screenOptions: {
     headerShown: false,
@@ -293,20 +276,8 @@ const Tab = createBottomTabNavigator();
 export const TabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarButtonTestID: 'home-tab',
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={SettingsScreen}
-        options={{
-          tabBarButtonTestID: 'settings-tab',
-        }}
-      />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );
 };
@@ -314,8 +285,6 @@ export const TabNavigator = () => {
 
 </TabItem>
 </Tabs>
-
-Test:
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -328,18 +297,17 @@ import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { TabNavigator } from './TabNavigator';
 
 test('navigates to settings by tab bar button press', () => {
-  const TabNavigation = createStaticNavigation(TabNavigator);
   jest.useFakeTimers();
 
+  const TabNavigation = createStaticNavigation(TabNavigator);
   render(<TabNavigation />);
 
   act(() => jest.runAllTimers());
 
-  const button = screen.queryByTestId('settings-tab');
+  const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
 
-  // You need to pass event object to fireEvent to prevent error
-
-  fireEvent.press(button);
+  const event = {};
+  fireEvent.press(button, event);
 
   expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
 });
@@ -366,9 +334,8 @@ test('navigates to settings by tab bar button press', () => {
 
   act(() => jest.runAllTimers());
 
-  const button = screen.queryByTestId('settings-tab');
+  const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
 
-  // You need to pass event object to fireEvent to prevent error
   const event = {};
   fireEvent.press(button, event);
 
@@ -379,22 +346,121 @@ test('navigates to settings by tab bar button press', () => {
 </TabItem>
 </Tabs>
 
-We use `id` to query for tab buttons, simulate button press by `FireEvent` and check if rendered content is correct.
+We get settings tab bar button, press by `FireEvent` and check if rendered content is correct.
 
-To setup tab `id` you need to add `tabBarButtonTestID` in settings tab screen `options` defined in `TabNavigator`.
+To find settings tab button you cannot use query by text, because there is no text you can use to do that. You can use `getByRole` instead and pass `name` prop.
+
+```js
+// Pass name of tab as second prop
+const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
+```
 
 Bottom tabs bar buttons `handlePress` function expects `GestureResponderEvent`. To avoid error you should pass `event` object as the second argument of `fireEvent`.
 
+```js
+// Pass event object to fireEvent to prevent error
+const event = {};
+fireEvent.press(button, event);
+```
+
 Sometimes navigation animations need some time to finish and render screen's content. You need to wait until animations finish before querying components. Therefore, you have to use `fake timers`. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of times function to use fake clock ticks. They allow you to instantly skip animation time and avoid getting state change error.
+
+<Tabs>
+<TabItem value="static" label="Static">
+
+```js
+// Enable fake timers
+jest.useFakeTimers();
+
+// ...
+
+// Skip all timers including animations
+act(() => jest.runAllTimers());
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+
+```
+
+</TabItem>
+</Tabs>
 
 ### Example 3
 
-Always display first screen of the settings stack nested in tab after settings stack tab focus.
-
-Navigator:
+Always displays settings screen after tab bar settings button press.
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
+
+```js
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useEffect } from 'react';
+import { Button, Text, View } from 'react-native';
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home screen</Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
+}
+
+const DetailsScreen = () => {
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const unsubscribe = navigation.getParent().addListener('tabPress', (e) => {
+      navigation.popToTop();
+    });
+    return unsubscribe;
+  }, [navigation]);
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Details screen</Text>
+    </View>
+  );
+};
+
+const SettingsNavigator = createStackNavigator({
+  screens: {
+    Settings: SettingsScreen,
+    Details: DetailsScreen,
+  },
+});
+
+export const TabNavigator = createBottomTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    SettingsStack: SettingsNavigator,
+  },
+  screenOptions: {
+    headerShown: false,
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -453,125 +519,44 @@ const Tab = createBottomTabNavigator();
 export function TabNavigator() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ tabBarButtonTestID: 'home-tab' }}
-      />
-      <Tab.Screen
-        name="SettingsStack"
-        component={SettingsStackScreen}
-        options={{ tabBarButtonTestID: 'settings-tab' }}
-      />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="SettingsStack" component={SettingsStackScreen} />
     </Tab.Navigator>
   );
 }
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useEffect } from 'react';
-import { Button, Text, View } from 'react-native';
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home screen</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-    </View>
-  );
-}
-
-const DetailsScreen = () => {
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    const unsubscribe = navigation.getParent().addListener('tabPress', (e) => {
-      navigation.popToTop();
-    });
-    return unsubscribe;
-  }, [navigation]);
-
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Details screen</Text>
-    </View>
-  );
-};
-
-const SettingsNavigator = createStackNavigator({
-  screens: {
-    Settings: SettingsScreen,
-    Details: DetailsScreen,
-  },
-});
-
-export const TabNavigator = createBottomTabNavigator({
-  screens: {
-    Home: {
-      screen: HomeScreen,
-      options: {
-        tabBarButtonTestID: 'home-tab',
-      },
-    },
-    SettingsStack: {
-      screen: SettingsNavigator,
-      options: {
-        tabBarButtonTestID: 'settings-tab',
-      },
-    },
-  },
-  screenOptions: {
-    headerShown: false,
-  },
-});
-```
-
-</TabItem>
 </Tabs>
-
-Test:
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
 
 ```js
+import '@testing-library/react-native/extend-expect';
+
 import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 
 import { TabNavigator } from './TabNavigator';
 
-test('always displays first screen in settings stack after tab bar settings button press', async () => {
-  const TabNavigation = createStaticNavigation(TabNavigator);
+test('always displays settings screen after tab bar settings button press', async () => {
   jest.useFakeTimers();
 
+  const TabNavigation = createStaticNavigation(TabNavigator);
   render(<TabNavigation />);
 
   act(() => jest.runAllTimers());
 
-  const homeTabButton = screen.queryByTestId('home-tab');
-  const settingsTabButton = screen.queryByTestId('settings-tab');
+  const homeTabButton = screen.getByRole('button', {
+    name: 'Home, tab, 1 of 2',
+  });
 
-  // You need to pass event object to fireEvent to prevent error
+  const settingsTabButton = screen.getByRole('button', {
+    name: 'SettingsStack, tab, 2 of 2',
+  });
+
   const event = {};
 
   fireEvent.press(settingsTabButton, event);
@@ -592,13 +577,15 @@ test('always displays first screen in settings stack after tab bar settings butt
 <TabItem value="dynamic" label="Dynamic">
 
 ```js
+import '@testing-library/react-native/extend-expect';
+
 import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 
 import { TabNavigator } from './TabNavigator';
 
-test('always displays first screen in settings stack after tab bar settings button press', async () => {
+test('always displays settings screen after tab bar settings button press', async () => {
   jest.useFakeTimers();
 
   render(
@@ -609,10 +596,13 @@ test('always displays first screen in settings stack after tab bar settings butt
 
   act(() => jest.runAllTimers());
 
-  const homeTabButton = screen.queryByTestId('home-tab');
-  const settingsTabButton = screen.queryByTestId('settings-tab');
+  const homeTabButton = screen.getByRole('button', {
+    name: 'Home, tab, 1 of 2',
+  });
+  const settingsTabButton = screen.getByRole('button', {
+    name: 'SettingsStack, tab, 2 of 2',
+  });
 
-  // You need to pass event object to fireEvent to prevent error
   const event = {};
 
   fireEvent.press(settingsTabButton, event);
@@ -632,13 +622,11 @@ test('always displays first screen in settings stack after tab bar settings butt
 </TabItem>
 </Tabs>
 
-We query tab buttons, simulating button presses and check if rendered screens are correct.
+We query tab bar buttons, press buttons and check if rendered screens are correct.
 
 ### Example 4
 
-Display loading state while waiting for data and then fetched nick on every profile screen focus.
-
-Navigator:
+Display loading state while waiting for data and then fetched profile nick on every profile screen focus.
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -657,7 +645,7 @@ function HomeScreen() {
   );
 }
 
-const url = 'your_url';
+const url = 'place_your_url';
 
 function ProfileScreen() {
   const [loading, setLoading] = useState(true);
@@ -668,7 +656,7 @@ function ProfileScreen() {
     useCallback(() => {
       fetch(url)
         .then((res) => res.json())
-        .then((res) => setData(res))
+        .then((data) => setData(data))
         .catch((error) => setError(error))
         .finally(() => setLoading(false));
 
@@ -690,18 +678,8 @@ function ProfileScreen() {
 
 export const TabNavigator = createBottomTabNavigator({
   screens: {
-    Home: {
-      screen: HomeScreen,
-      options: {
-        tabBarButtonTestID: 'home-tab',
-      },
-    },
-    Profile: {
-      screen: ProfileScreen,
-      options: {
-        tabBarButtonTestID: 'profile-tab',
-      },
-    },
+    Home: HomeScreen,
+    Profile: ProfileScreen,
   },
   screenOptions: {
     headerShown: false,
@@ -726,7 +704,7 @@ function HomeScreen() {
   );
 }
 
-const url = 'your_url';
+const url = 'place_url_here';
 
 function ProfileScreen() {
   const [loading, setLoading] = useState(true);
@@ -737,7 +715,7 @@ function ProfileScreen() {
     useCallback(() => {
       fetch(url)
         .then((res) => res.json())
-        .then((res) => setData(res))
+        .then((data) => setData(data))
         .catch((error) => setError(error))
         .finally(() => setLoading(false));
 
@@ -762,16 +740,8 @@ const Tab = createBottomTabNavigator();
 export function TabNavigator() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ tabBarButtonTestID: 'home-tab' }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{ tabBarButtonTestID: 'profile-tab' }}
-      />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 }
@@ -780,12 +750,12 @@ export function TabNavigator() {
 </TabItem>
 </Tabs>
 
-Test:
-
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
 
 ```js
+import '@testing-library/react-native/extend-expect';
+
 import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
@@ -807,30 +777,33 @@ async function mockedFetch() {
   };
 }
 
-test('fetches profile data on profile screen focus', async () => {
-  const TabNavigation = createStaticNavigation(TabNavigator);
+test('Display loading state while waiting for data and then fetched profile nick on every profile screen focus', async () => {
   jest.useFakeTimers();
 
+  const TabNavigation = createStaticNavigation(TabNavigator);
   render(<TabNavigation />);
 
   act(() => jest.runAllTimers());
 
   const spy = jest.spyOn(window, 'fetch').mockImplementation(mockedFetch);
 
-  const homeTabButton = screen.queryByTestId('home-tab');
-  const dogsTabButton = screen.queryByTestId('profile-tab');
+  const homeTabButton = screen.getByRole('button', {
+    name: 'Home, tab, 1 of 2',
+  });
 
-  // You need to pass event object to fireEvent to prevent error
+  const profileTabButton = screen.getByRole('button', {
+    name: 'Profile, tab, 2 of 2',
+  });
+
   const event = {};
-
-  fireEvent.press(dogsTabButton, event);
+  fireEvent.press(profileTabButton, event);
 
   expect(screen.queryByText('Loading')).toBeOnTheScreen();
   expect(spy).toHaveBeenCalled();
   expect(await screen.findByText('CookieDough')).toBeOnTheScreen();
 
   fireEvent.press(homeTabButton, event);
-  fireEvent.press(dogsTabButton, event);
+  fireEvent.press(profileTabButton, event);
 
   expect(screen.queryByText('Loading')).toBeOnTheScreen();
   expect(spy).toHaveBeenCalled();
@@ -842,6 +815,8 @@ test('fetches profile data on profile screen focus', async () => {
 <TabItem value="dynamic" label="Dynamic">
 
 ```js
+import '@testing-library/react-native/extend-expect';
+
 import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
@@ -863,7 +838,7 @@ async function mockedFetch() {
   };
 }
 
-test('fetches profile data on profile screen focus', async () => {
+test('Display loading state while waiting for data and then fetched profile nick on every profile screen focus', async () => {
   jest.useFakeTimers();
 
   render(
@@ -876,20 +851,22 @@ test('fetches profile data on profile screen focus', async () => {
 
   const spy = jest.spyOn(window, 'fetch').mockImplementation(mockedFetch);
 
-  const homeTabButton = screen.queryByTestId('home-tab');
-  const dogsTabButton = screen.queryByTestId('profile-tab');
+  const homeTabButton = screen.getByRole('button', {
+    name: 'Home, tab, 1 of 2',
+  });
+  const profileTabButton = screen.getByRole('button', {
+    name: 'Profile, tab, 2 of 2',
+  });
 
-  // You need to pass event object to fireEvent to prevent error
   const event = {};
-
-  fireEvent.press(dogsTabButton, event);
+  fireEvent.press(profileTabButton, event);
 
   expect(screen.queryByText('Loading')).toBeOnTheScreen();
   expect(spy).toHaveBeenCalled();
   expect(await screen.findByText('CookieDough')).toBeOnTheScreen();
 
   fireEvent.press(homeTabButton, event);
-  fireEvent.press(dogsTabButton, event);
+  fireEvent.press(profileTabButton, event);
 
   expect(screen.queryByText('Loading')).toBeOnTheScreen();
   expect(spy).toHaveBeenCalled();
@@ -900,9 +877,41 @@ test('fetches profile data on profile screen focus', async () => {
 </TabItem>
 </Tabs>
 
-We query bottoms tabs buttons and mock fetch function using `spyOn` and `mockImplementation`. Then, we navigate to profile screen and checks if loading state displays correctly. To check if fetched data is displayed we add `await` to query - we need to wait for the fetch to finish before checking if fetched data is correct. To ensure that operation will succeed on every focus, we cause it again by navigating back to home, again to settings and check rendered content again.
+We query tab buttons and mock fetch function using `spyOn` and `mockImplementation`. We navigate to profile screen and check if loading state is rendered correctly. Then, to check if fetched data is displayed correctly we use `findByText` - we need to wait for the fetch to finish before checking it's result. To ensure that operation will succeed on every focus, we navigate back to home, then to settings and check rendered content again.
 
-It a good practice to use mocks while testing API functions. `mockedFetch` will override real implementation of fetch and enable us to make test deterministic. Thanks to `spyOnYou` you can check if mocked function was called using `toHaveBeenCalled` assertion.
+To make test deterministic and isolate it from the real backend you can mock fetch function. `mockedFetch` will override real implementation of fetch and `spyOn` will enable you to check number of function calls.
+
+```js
+// Mock implementation of fetch function
+async function mockedFetch() {
+  const mockResponse = {
+    profile: {
+      nick: 'CookieDough',
+    },
+  };
+  return {
+    ok: true,
+    status: 200,
+    json: async () => {
+      return mockResponse;
+    },
+  };
+}
+
+test('display loading state while waiting for data and then fetched profile nick on every profile screen focus', async () => {
+  // ...
+
+  // Replace fetch implementation with mock
+  const spy = jest.spyOn(window, 'fetch').mockImplementation(mockedFetch);
+
+  // ...
+
+  // Check number of mock fetch calls
+  expect(spy).toHaveBeenCalled();
+
+  // ...
+});
+```
 
 ## Best practices
 
