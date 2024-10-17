@@ -879,7 +879,7 @@ test('Display loading state while waiting for data and then fetched profile nick
 
 We query tab buttons and mock fetch function using `spyOn` and `mockImplementation`. We navigate to profile screen and check if loading state is rendered correctly. Then, to check if fetched data is displayed correctly we use `findByText` - we need to wait for the fetch to finish before checking it's result. To ensure that operation will succeed on every focus, we navigate back to home, then to settings and check rendered content again.
 
-To make test deterministic and isolate it from the real backend you can mock fetch function. `mockedFetch` will override real implementation of fetch and `spyOn` will enable you to check number of function calls.
+To make test deterministic and isolate it from the real backend you can mock fetch function. You can use `spyOn` to override real implementation of fetch with `mockedFetch`.
 
 ```js
 // Mock implementation of fetch function
@@ -906,7 +906,7 @@ test('display loading state while waiting for data and then fetched profile nick
 
   // ...
 
-  // Check number of mock fetch calls
+  // Check if mock fetch was called
   expect(spy).toHaveBeenCalled();
 
   // ...
