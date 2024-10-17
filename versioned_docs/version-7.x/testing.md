@@ -79,6 +79,12 @@ If you're not using Jest, then you'll need to mock these modules according to th
 
 We recommend using [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) along with [`jest-native`](https://github.com/testing-library/jest-native) to write your tests.
 
+We will go through some real-world case test code examples. Each code example consist of navigator and test code file.
+
+### Example 1
+
+Navigate to another screen by button press.
+
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
 
@@ -95,6 +101,34 @@ We recommend using [React Native Testing Library](https://callstack.github.io/re
 
 </TabItem>
 </Tabs>
+
+We simulate user’s button press by `FireEvent` and call `expect` to check if rendered content is correct.
+
+### Example 2
+
+Navigate to another tab caused by tab bar button press.
+
+We use `id` to query for tab buttons, simulate button press by `FireEvent` and check if rendered content is correct.
+
+To setup tab `id` you need to add `tabBarButtonTestID` in settings tab screen `options` defined in `TabNavigator`.
+
+Bottom tabs bar buttons `handlePress` function expects `GestureResponderEvent`. To avoid error you should pass `event` object as the second argument of `fireEvent`.
+
+Sometimes navigation animations need some time to finish and render screen's content. You need to wait until animations finish before querying components. Therefore, you have to use `fake timers`. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of times function to use fake clock ticks. They allow you to instantly skip animation time and avoid getting state change error.
+
+### Example 3
+
+Always display first screen of the settings stack nested in tab after settings stack tab focus.
+
+We query tab buttons, simulating button presses and check if rendered screens are correct.
+
+### Example 4
+
+Display loading state while waiting for data and then fetched nick on every profile screen focus.
+
+We query bottoms tabs buttons and mock fetch function using `spyOn` and `mockImplementation`. Then, we navigate to profile screen and checks if loading state displays correctly. To check if fetched data is displayed we add `await` to query - we need to wait for the fetch to finish before checking if fetched data is correct. To ensure that operation will succeed on every focus, we cause it again by navigating back to home, again to settings and check rendered content again.
+
+It a good practice to use mocks while testing API functions. `mockedFetch` will override real implementation of fetch and enable us to make test deterministic. Thanks to `spyOnYou` you can check if mocked function was called using `toHaveBeenCalled` assertion.
 
 ## Best practices
 
