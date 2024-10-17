@@ -79,11 +79,11 @@ If you're not using Jest, then you'll need to mock these modules according to th
 
 We recommend using [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) along with [`jest-native`](https://github.com/testing-library/jest-native) to write your tests.
 
-We will go through some real-world case test code examples. Each code example consists of navigator and test code file.
+We will go through some real-world case test code examples. Each code example consists of tested navigator and test code file.
 
 ### Example 1
 
-Navigate to settings screen by button press.
+Navigate to settings screen by "Go to Settings" button press.
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -174,7 +174,7 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 
 import { StackNavigator } from './StackNavigator';
 
-test('navigates to settings by button press', () => {
+test('navigates to settings by "Go to Settings" button press', () => {
   const StackNavigation = createStaticNavigation(StackNavigator);
   render(<StackNavigation />);
 
@@ -193,7 +193,7 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 
 import { StackNavigator } from './StackNavigator';
 
-test('navigates to settings by button press', () => {
+test('navigates to settings by "Go to Settings" button press', () => {
   render(
     <NavigationContainer>
       <StackNavigator />
@@ -208,7 +208,7 @@ test('navigates to settings by button press', () => {
 </TabItem>
 </Tabs>
 
-We press button by `FireEvent` to navigate to settings screen and call `expect` to check if rendered content is correct.
+We use `FireEvent` to press button and `expect` to check if rendered screen's content matches settings.
 
 ### Example 2
 
@@ -344,24 +344,24 @@ test('navigates to settings by tab bar button press', () => {
 </TabItem>
 </Tabs>
 
-We get settings tab bar button, press by `FireEvent` and check if rendered content is correct.
+We get settings tab bar button, press it and check if rendered content is correct.
 
-To find settings tab button you cannot use query by text, because there is no text you can use to do that. You can use `getByRole` instead and pass `name` prop.
+To find settings tab button you cannot use `queryByText`, because there is no text that can be queried. You can use `getByRole` instead and pass object with `name` prop as the second argument.
 
 ```js
-// Pass name of tab as second prop
+// Pass name of settings tab
 const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
 ```
 
-Bottom tabs bar buttons `handlePress` function expects `GestureResponderEvent`. To avoid error you should pass `event` object as the second argument of `fireEvent`.
+Tab bar buttons `handlePress` function expects to receive `GestureResponderEvent`. To avoid error you should pass `event` object as the second argument of `fireEvent`.
 
 ```js
-// Pass event object to fireEvent to prevent error
+// Pass event object to avoid error
 const event = {};
 fireEvent.press(button, event);
 ```
 
-Sometimes navigation animations need some time to finish. You need to wait until animations finish before querying components. Therefore, you have to use `fake timers`. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of times function to use fake clock ticks. They allow you to instantly skip animations time and avoid getting state change error.
+While writing tests containing navigation with animations you need to wait until animations finish before querying components. To do so, you have to use `fake timers`. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of times function to use fake clock ticks. They allow you to instantly skip animation time. To avoid getting state change error wrap `runAllTimers` with `act`.
 
 ```js
 // Enable fake timers
@@ -369,6 +369,7 @@ jest.useFakeTimers();
 
 // ...
 
+// Wrap jest.runAllTimers to prevent state change error
 // Skip all timers including animations
 act(() => jest.runAllTimers());
 ```
@@ -449,7 +450,7 @@ export const TabNavigator = createBottomTabNavigator({
 
 ```js
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect } from 'react';
 import { Button, Text, View } from 'react-native';
 
@@ -488,7 +489,7 @@ const DetailsScreen = ({ navigation }) => {
   );
 };
 
-const SettingsStack = createNativeStackNavigator();
+const SettingsStack = createStackNavigator();
 
 function SettingsStackScreen() {
   return (
@@ -541,8 +542,8 @@ test('always displays settings screen after tab bar settings button press', () =
   const event = {};
 
   fireEvent.press(settingsTabButton, event);
-  expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
   act(() => jest.runAllTimers());
+  expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
 
   fireEvent.press(screen.queryByText('Go to Details'), event);
   act(() => jest.runAllTimers());
@@ -630,7 +631,7 @@ function HomeScreen() {
   );
 }
 
-const url = 'place_your_url';
+const url = 'place_your_url_here';
 
 function ProfileScreen() {
   const [loading, setLoading] = useState(true);
@@ -689,7 +690,7 @@ function HomeScreen() {
   );
 }
 
-const url = 'place_url_here';
+const url = 'place_your_url_here';
 
 function ProfileScreen() {
   const [loading, setLoading] = useState(true);
@@ -858,7 +859,7 @@ test('Display loading state while waiting for data and then fetched profile nick
 </TabItem>
 </Tabs>
 
-We query tab buttons and mock fetch function using `spyOn` and `mockImplementation`. We navigate to profile screen and check if loading state is rendered correctly. Then, to check if fetched data is displayed correctly we use `findByText` - we need to wait for the fetch to finish before checking it's result. To ensure that operation will succeed on every focus, we navigate back to home, then to settings and check rendered content again.
+We query tab buttons and mock fetch function using `spyOn` and `mockImplementation`. We navigate to profile screen and check if loading state is rendered correctly. Then, to check if fetched data is displayed, we use `findByText` - we need to wait for the fetch to finish before checking it's result. To ensure that operation will succeed on every focus, we navigate back to home, then to settings and check loading state and fetched data again.
 
 To make test deterministic and isolate it from the real backend you can mock fetch function. You can use `spyOn` to override real implementation of fetch with `mockedFetch`.
 
