@@ -631,7 +631,7 @@ function HomeScreen() {
   );
 }
 
-const url = 'place_your_url_here';
+const url = 'placeholder_url';
 
 function ProfileScreen() {
   const [loading, setLoading] = useState(true);
@@ -690,7 +690,7 @@ function HomeScreen() {
   );
 }
 
-const url = 'place_your_url_here';
+const url = 'placeholder_url';
 
 function ProfileScreen() {
   const [loading, setLoading] = useState(true);
