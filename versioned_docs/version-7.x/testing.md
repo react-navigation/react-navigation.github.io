@@ -346,7 +346,7 @@ test('navigates to settings by tab bar button press', () => {
 
 We get settings tab bar button, press it and check if rendered content is correct.
 
-To find settings tab bar button you cannot use `queryByText`, because there is no text that can be queried. You can use `getByRole` instead and pass object with `name` prop as the second argument.
+To find settings tab bar button you cannot use `queryByText`, because there is no text that can be queried. You can use `getByRole` instead and pass object with `name` as the second argument.
 
 ```js
 // Pass object with settings tab name
@@ -861,7 +861,7 @@ test('Display loading state while waiting for data and then fetched profile nick
 </TabItem>
 </Tabs>
 
-We query tab buttons and mock fetch function using `spyOn` and `mockImplementation`. We navigate to profile screen and check if loading state is rendered correctly. Then, to check if fetched data is displayed, we use `findByText` - we need to wait for the fetch to finish before checking it's result. To ensure that operation will succeed not only on first focus, we navigate back to home, then to settings and check loading state and fetched data again.
+We query tab buttons and mock fetch function using `spyOn` and `mockImplementation`. We navigate to profile screen and check if loading state is rendered correctly. Then, to check if fetched data is displayed, we use `findByText` - we need to wait for the fetch to finish before checking it's result. To ensure that operation will succeed not only on the first focus, we navigate back to home, then to settings and check loading state and fetched data again.
 
 To make test deterministic and isolate it from the real backend you can mock fetch function. You can use `spyOn` to override real implementation of fetch with `mockedFetch`.
 
