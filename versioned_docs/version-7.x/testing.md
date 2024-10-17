@@ -302,12 +302,11 @@ test('navigates to settings by tab bar button press', () => {
   const TabNavigation = createStaticNavigation(TabNavigator);
   render(<TabNavigation />);
 
-  act(() => jest.runAllTimers());
-
   const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
 
   const event = {};
   fireEvent.press(button, event);
+  act(() => jest.runAllTimers());
 
   expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
 });
@@ -332,12 +331,11 @@ test('navigates to settings by tab bar button press', () => {
     </NavigationContainer>
   );
 
-  act(() => jest.runAllTimers());
-
   const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
 
   const event = {};
   fireEvent.press(button, event);
+  act(() => jest.runAllTimers());
 
   expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
 });
@@ -363,10 +361,7 @@ const event = {};
 fireEvent.press(button, event);
 ```
 
-Sometimes navigation animations need some time to finish and render screen's content. You need to wait until animations finish before querying components. Therefore, you have to use `fake timers`. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of times function to use fake clock ticks. They allow you to instantly skip animation time and avoid getting state change error.
-
-<Tabs>
-<TabItem value="static" label="Static">
+Sometimes navigation animations need some time to finish. You need to wait until animations finish before querying components. Therefore, you have to use `fake timers`. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of times function to use fake clock ticks. They allow you to instantly skip animations time and avoid getting state change error.
 
 ```js
 // Enable fake timers
@@ -377,16 +372,6 @@ jest.useFakeTimers();
 // Skip all timers including animations
 act(() => jest.runAllTimers());
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-
-```
-
-</TabItem>
-</Tabs>
 
 ### Example 3
 
@@ -533,21 +518,17 @@ export function TabNavigator() {
 <TabItem value="static" label="Static" default>
 
 ```js
-import '@testing-library/react-native/extend-expect';
-
 import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 
 import { TabNavigator } from './TabNavigator';
 
-test('always displays settings screen after tab bar settings button press', async () => {
+test('always displays settings screen after tab bar settings button press', () => {
   jest.useFakeTimers();
 
   const TabNavigation = createStaticNavigation(TabNavigator);
   render(<TabNavigation />);
-
-  act(() => jest.runAllTimers());
 
   const homeTabButton = screen.getByRole('button', {
     name: 'Home, tab, 1 of 2',
@@ -561,14 +542,18 @@ test('always displays settings screen after tab bar settings button press', asyn
 
   fireEvent.press(settingsTabButton, event);
   expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
+  act(() => jest.runAllTimers());
 
   fireEvent.press(screen.queryByText('Go to Details'), event);
+  act(() => jest.runAllTimers());
   expect(screen.queryByText('Details screen')).toBeOnTheScreen();
 
   fireEvent.press(homeTabButton, event);
+  act(() => jest.runAllTimers());
   expect(screen.queryByText('Home screen')).toBeOnTheScreen();
 
   fireEvent.press(settingsTabButton, event);
+  act(() => jest.runAllTimers());
   expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
 });
 ```
@@ -577,15 +562,13 @@ test('always displays settings screen after tab bar settings button press', asyn
 <TabItem value="dynamic" label="Dynamic">
 
 ```js
-import '@testing-library/react-native/extend-expect';
-
 import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 
 import { TabNavigator } from './TabNavigator';
 
-test('always displays settings screen after tab bar settings button press', async () => {
+test('always displays settings screen after tab bar settings button press', () => {
   jest.useFakeTimers();
 
   render(
@@ -593,8 +576,6 @@ test('always displays settings screen after tab bar settings button press', asyn
       <TabNavigator />
     </NavigationContainer>
   );
-
-  act(() => jest.runAllTimers());
 
   const homeTabButton = screen.getByRole('button', {
     name: 'Home, tab, 1 of 2',
@@ -606,15 +587,19 @@ test('always displays settings screen after tab bar settings button press', asyn
   const event = {};
 
   fireEvent.press(settingsTabButton, event);
+  act(() => jest.runAllTimers());
   expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
 
   fireEvent.press(screen.queryByText('Go to Details'), event);
+  act(() => jest.runAllTimers());
   expect(screen.queryByText('Details screen')).toBeOnTheScreen();
 
   fireEvent.press(homeTabButton, event);
+  act(() => jest.runAllTimers());
   expect(screen.queryByText('Home screen')).toBeOnTheScreen();
 
   fireEvent.press(settingsTabButton, event);
+  act(() => jest.runAllTimers());
   expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
 });
 ```
@@ -754,8 +739,6 @@ export function TabNavigator() {
 <TabItem value="static" label="Static" default>
 
 ```js
-import '@testing-library/react-native/extend-expect';
-
 import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
@@ -783,8 +766,6 @@ test('Display loading state while waiting for data and then fetched profile nick
   const TabNavigation = createStaticNavigation(TabNavigator);
   render(<TabNavigation />);
 
-  act(() => jest.runAllTimers());
-
   const spy = jest.spyOn(window, 'fetch').mockImplementation(mockedFetch);
 
   const homeTabButton = screen.getByRole('button', {
@@ -797,6 +778,7 @@ test('Display loading state while waiting for data and then fetched profile nick
 
   const event = {};
   fireEvent.press(profileTabButton, event);
+  act(() => jest.runAllTimers());
 
   expect(screen.queryByText('Loading')).toBeOnTheScreen();
   expect(spy).toHaveBeenCalled();
@@ -804,6 +786,7 @@ test('Display loading state while waiting for data and then fetched profile nick
 
   fireEvent.press(homeTabButton, event);
   fireEvent.press(profileTabButton, event);
+  act(() => jest.runAllTimers());
 
   expect(screen.queryByText('Loading')).toBeOnTheScreen();
   expect(spy).toHaveBeenCalled();
@@ -815,8 +798,6 @@ test('Display loading state while waiting for data and then fetched profile nick
 <TabItem value="dynamic" label="Dynamic">
 
 ```js
-import '@testing-library/react-native/extend-expect';
-
 import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
@@ -847,8 +828,6 @@ test('Display loading state while waiting for data and then fetched profile nick
     </NavigationContainer>
   );
 
-  act(() => jest.runAllTimers());
-
   const spy = jest.spyOn(window, 'fetch').mockImplementation(mockedFetch);
 
   const homeTabButton = screen.getByRole('button', {
@@ -860,6 +839,7 @@ test('Display loading state while waiting for data and then fetched profile nick
 
   const event = {};
   fireEvent.press(profileTabButton, event);
+  act(() => jest.runAllTimers());
 
   expect(screen.queryByText('Loading')).toBeOnTheScreen();
   expect(spy).toHaveBeenCalled();
@@ -867,6 +847,7 @@ test('Display loading state while waiting for data and then fetched profile nick
 
   fireEvent.press(homeTabButton, event);
   fireEvent.press(profileTabButton, event);
+  act(() => jest.runAllTimers());
 
   expect(screen.queryByText('Loading')).toBeOnTheScreen();
   expect(spy).toHaveBeenCalled();
