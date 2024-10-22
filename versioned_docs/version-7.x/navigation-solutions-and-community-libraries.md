@@ -38,6 +38,12 @@ A navigation library built on top of React Navigation. It's main goal is to impr
 
 ## Community libraries
 
+### react-native-paper
+
+The [React Native Paper](https://callstack.github.io/react-native-paper/) library provides React Navigation integration for its Material Bottom Tabs. Material Bottom Tabs is a material-design themed tab bar on the bottom of the screen that lets you switch between different routes with animation.
+
+[callstack.github.io/react-native-paper/docs/guides/bottom-navigation](https://callstack.github.io/react-native-paper/docs/guides/bottom-navigation/)
+
 ### react-native-screens
 
 This project aims to expose native navigation container components to React Native and React Navigation can integrate with it since version 2.14.0. Using `react-native-screens` brings several benefits, such as support for the ["reachability feature"](https://www.cnet.com/how-to/how-to-use-reachability-on-iphone-6-6-plus/) on iOS, and improved memory consumption on both platforms.
