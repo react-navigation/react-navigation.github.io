@@ -57,3 +57,9 @@ Helps you to render buttons in the navigation bar and handle the styling so you 
 Provides simple HOCs that map react-navigation props to your screen components directly - ie. instead of `const user = this.props.route.params.activeUser`, you'd write `const user = this.props.activeUser`.
 
 [github.com/vonovak/react-navigation-props-mapper](https://github.com/vonovak/react-navigation-props-mapper)
+
+## react-native-bottom-tabs
+
+This project aims to expose the native Bottom Tabs component to React Native. It exposes SwiftUI's TabView on iOS and the material design tab bar on Android. Using `react-native-bottom-tabs` can bring several benefits, including multi-platform support and improved memory consumption.
+
+[github.com/okwasniewski/react-native-bottom-tabs](https://github.com/okwasniewski/react-native-bottom-tabs)
