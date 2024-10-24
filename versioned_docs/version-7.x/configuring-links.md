@@ -583,7 +583,7 @@ const state = {
   routes: [
     {
       name: 'Profile',
-      params: { id: 'user-jane', section: 'settings
+      params: { id: 'user-jane', section: 'settings' }
     },
   ],
 };
