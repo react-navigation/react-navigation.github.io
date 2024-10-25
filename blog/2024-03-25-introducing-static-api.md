@@ -162,11 +162,11 @@ One of the nice things about the dynamic APIs is the declarative authentication 
 const RootStack = createNativeStackNavigator({
   screens: {
     Home: {
-      if: useIsSignedIn,
+      if: userIsSignedIn,
       screen: HomeScreen,
     },
     SignIn: {
-      if: useIsSignedOut,
+      if: userIsSignedOut,
       screen: SignInScreen,
     },
   },
