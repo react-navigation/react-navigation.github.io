@@ -367,7 +367,11 @@ Previously, we added a Flipper plugin for React Navigation to make debugging nav
 
 Since the React Native team migrating away from Flipper, it doesn't make much sense for us to spend additional resources to keep supporting it. So we've removed the Flipper plugin from `@react-navigation/devtools`.
 
-As an alternative, you can use [React Navigation devtools plugin for Expo](https://docs.expo.dev/debugging/devtools-plugins/#react-navigation) if you are using [Expo](https://expo.dev).
+Alternatively, you can use the following developer tools:
+
+- [Logger](devtools.md#uselogger)
+- [Integration for Redux DevTools Extension](devtools.md#usereduxdevtoolsextension)
+- [Devtools plugin for Expo](https://docs.expo.dev/debugging/devtools-plugins/#react-navigation) if you are using [Expo](https://expo.dev).
 
 #### Various deprecated APIs are removed
 
@@ -878,3 +882,9 @@ npm install react-native-drawer-layout
 ```
 
 See [`react-native-drawer-layout`](drawer-layout.md) for usage.
+
+### `useLogger` devtool
+
+The `@react-navigation/devtools` package now exports a `useLogger` hook. It can be used to log navigation actions to the console:
+
+See [`useLogger`](devtools.md#uselogger) for usage.
