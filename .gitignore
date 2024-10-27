@@ -2,6 +2,7 @@ node_modules
 .DS_Store
 .docusaurus
 .history
+.idea
 
 build/
 translated_docs/

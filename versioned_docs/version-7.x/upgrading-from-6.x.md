@@ -288,6 +288,12 @@ The `customAnimationOnGesture` option in Native Stack Navigator is renamed to `a
 
 See [Native Stack Navigator](native-stack-navigator.md#animationmatchesgesture) for usage.
 
+#### Native Stack now requires `react-native-screens` 4
+
+`@react-navigation/native-stack` now requires `react-native-screens` 4 and will break when using an earlier version. If you are using Native Stack Navigator in your project, make sure to upgrade `react-native-screens` to version 4.
+
+See [Native Stack Navigator](native-stack-navigator.md) for usage.
+
 #### Material Top Tab Navigator no longer requires installing `react-native-tab-view`
 
 Previously, `@react-navigation/material-top-tabs` required installing `react-native-tab-view` as a dependency in the project. We have now moved this package to the React Navigation monorepo and able to coordinate the releases together, so it's no longer necessary to install it separately.
