@@ -66,6 +66,6 @@ Provides simple HOCs that map react-navigation props to your screen components d
 
 ## react-native-bottom-tabs
 
-This project aims to expose the native Bottom Tabs component to React Native. It exposes SwiftUI's TabView on iOS and the material design tab bar on Android. Using `react-native-bottom-tabs` can bring several benefits, including multi-platform support and improved memory consumption.
+This project aims to expose the native Bottom Tabs component to React Native. It exposes SwiftUI's TabView on iOS and the material design tab bar on Android. Using `react-native-bottom-tabs` can bring several benefits, including multi-platform support and a native-feeling tab bar.
 
 [github.com/okwasniewski/react-native-bottom-tabs](https://github.com/okwasniewski/react-native-bottom-tabs)
