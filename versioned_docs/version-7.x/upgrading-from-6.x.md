@@ -338,6 +338,19 @@ The `tabBarTestID` option in `@react-navigation/bottom-tabs` and `@react-navigat
 
 See [Bottom Tab Navigator](bottom-tab-navigator.md#tabbarbuttontestid) and [Material Top Tab Navigator](material-top-tab-navigator.md#tabbarbuttontestid) docs for usage.
 
+### The `sceneContainerStyle` prop and option are removed from Bottom Tab Navigator, Material Top Tab Navigator and Drawer Navigator in favor of `sceneStyle`
+
+Previously, the Bottom Tab Navigator and Material Top Tab Navigator accepted a `sceneContainerStyle` prop to style the container of the scene. This was inflexible as it didn't allow different styles for different screens. Now, the `sceneStyle` option is added to these navigators to style individual screens.
+
+Similarly, the `sceneContainerStyle` option in Drawer Navigator is renamed to `sceneStyle` for consistency.
+
+If you are using `sceneContainerStyle` prop, you can pass `sceneStyle` in `screenOptions` instead to keep the same behavior:
+
+```diff lang=js
+- <Tab.Navigator sceneContainerStyle={{ backgroundColor: 'white' }}>
++ <Tab.Navigator screenOptions={{ sceneStyle: { backgroundColor: 'white' } }}>
+```
+
 #### Drawer Navigator now requires Reanimated 2 or 3 on native platforms
 
 Previously, `@react-navigation/drawer` supported both Reanimated 1 and Reanimated 2 APIs with the `useLegacyImplementation` option. This is now no longer supported and the `useLegacyImplementation` option is removed.
