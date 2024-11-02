@@ -318,10 +318,6 @@ Object containing the initial height and width of the screens. Passing this will
 
 Used to override default value of pager's overScroll mode. Can be `auto`, `always` or `never` (Android only).
 
-##### `sceneContainerStyle`
-
-Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping:
-
 ##### `pagerStyle`
 
 Style to apply to the pager view wrapping all the scenes.
@@ -357,105 +353,6 @@ return (
 ```
 
 #### TabBar Props
-
-##### Options
-
-Options describe how each tab should be rendered. There are 2 ways to specify options:
-
-- `commonOptions`: Options that apply to all tabs.
-- `options`: Options that apply to specific tabs. It has the route key as the key and the object with options.
-
-Example:
-
-```js
-<TabBar
-  commonOptions={{
-    icon: ({ route, focused, color }) => (
-      <Icon name={route.icon} color={color} />
-    ),
-  }}
-  options={{
-    albums: {
-      labelText: 'Albums',
-    },
-    profile: {
-      labelText: 'Profile',
-    },
-  }}
-/>
-```
-
-The following options are available:
-
-###### `accessibilityLabel`
-
-Accessibility label for the tab button. Uses `route.accessibilityLabel` by default if specified, otherwise uses the route title.
-
-###### `accessible`
-
-Whether to mark the tab as `accessible`. Defaults to `true`.
-
-###### `testID`
-
-Test ID for the tab button. Uses `route.testID` by default.
-
-###### `labelText`
-
-Label text for the tab button. Uses `route.title` by default.
-
-###### `labelAllowFontScaling`
-
-Whether label font should scale to respect Text Size accessibility settings. Defaults to `true`.
-
-###### `href`
-
-URL to use for the anchor tag for the tab button on the Web.
-
-###### `label`
-
-A function that returns a custom React Element to be used as a label. The function receives an object with the following properties:
-
-- `route` - The route object for the tab.
-- `labelText` - The label text for the tab specified in the `labelText` option or the `route title`.
-- `focused` - Whether the label is for the focused state.
-- `color` - The color of the label.
-- `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings.
-- `style` - The style object for the label.
-
-```js
-label: ({ route, labelText, focused, color }) => (
-  <Text style={{ color, margin: 8 }}>{labelText ?? route.name}</Text>
-);
-```
-
-###### `icon`
-
-A function that returns a custom React Element to be used as an icon. The function receives an object with the following properties:
-
-- `route` - The route object for the tab.
-- `focused` - Whether the icon is for the focused state.
-- `color` - The color of the icon.
-- `size` - The size of the icon.
-
-```js
-icon: ({ route, focused, color }) => (
-  <Icon name={focused ? 'albums' : 'albums-outlined'} color={color} />
-);
-```
-
-###### `badge`
-
-A function that returns a custom React Element to be used as a badge. The function receives an object with the following properties:
-
-- `route` - The route object for the tab.
-
-```js
-badge: ({ route }) => (
-  <View
-    style={{ backgroundColor: 'red', width: 20, height: 20, borderRadius: 10 }}
-  />
-);
-```
 
 ##### `renderTabBarItem`
 
@@ -547,6 +444,109 @@ Spacing between the tab items.
 ##### `testID` (`TabBar`)
 
 Test ID for the tab bar. Can be used for scrolling the tab bar in tests
+
+#### Options
+
+Options describe how each tab should be configured. There are 2 ways to specify options:
+
+- `commonOptions`: Options that apply to all tabs.
+- `options`: Options that apply to specific tabs. It has the route key as the key and the object with options.
+
+Example:
+
+```js
+<TabView
+  commonOptions={{
+    icon: ({ route, focused, color }) => (
+      <Icon name={route.icon} color={color} />
+    ),
+  }}
+  options={{
+    albums: {
+      labelText: 'Albums',
+    },
+    profile: {
+      labelText: 'Profile',
+    },
+  }}
+/>
+```
+
+The following options are available:
+
+##### `accessibilityLabel`
+
+Accessibility label for the tab button. Uses `route.accessibilityLabel` by default if specified, otherwise uses the route title.
+
+##### `accessible`
+
+Whether to mark the tab as `accessible`. Defaults to `true`.
+
+##### `testID`
+
+Test ID for the tab button. Uses `route.testID` by default.
+
+##### `labelText`
+
+Label text for the tab button. Uses `route.title` by default.
+
+##### `labelAllowFontScaling`
+
+Whether label font should scale to respect Text Size accessibility settings. Defaults to `true`.
+
+##### `href`
+
+URL to use for the anchor tag for the tab button on the Web.
+
+##### `label`
+
+A function that returns a custom React Element to be used as a label. The function receives an object with the following properties:
+
+- `route` - The route object for the tab.
+- `labelText` - The label text for the tab specified in the `labelText` option or the `route title`.
+- `focused` - Whether the label is for the focused state.
+- `color` - The color of the label.
+- `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings.
+- `style` - The style object for the label.
+
+```js
+label: ({ route, labelText, focused, color }) => (
+  <Text style={{ color, margin: 8 }}>{labelText ?? route.name}</Text>
+);
+```
+
+##### `icon`
+
+A function that returns a custom React Element to be used as an icon. The function receives an object with the following properties:
+
+- `route` - The route object for the tab.
+- `focused` - Whether the icon is for the focused state.
+- `color` - The color of the icon.
+- `size` - The size of the icon.
+
+```js
+icon: ({ route, focused, color }) => (
+  <Icon name={focused ? 'albums' : 'albums-outlined'} color={color} />
+);
+```
+
+##### `badge`
+
+A function that returns a custom React Element to be used as a badge. The function receives an object with the following properties:
+
+- `route` - The route object for the tab.
+
+```js
+badge: ({ route }) => (
+  <View
+    style={{ backgroundColor: 'red', width: 20, height: 20, borderRadius: 10 }}
+  />
+);
+```
+
+##### `sceneStyle`
+
+Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping.
 
 ## Optimization Tips
 
