@@ -18,7 +18,7 @@ Let's start by demonstrating the most common navigator, `createNativeStackNaviga
 The libraries we've installed so far are the building blocks and shared foundations for navigators, and each navigator in React Navigation lives in its own library. To use the native stack navigator, we need to install [`@react-navigation/native-stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/native-stack) :
 
 ```bash npm2yarn
-npm install @react-navigation/native-stack@next
+npm install @react-navigation/native-stack
 ```
 
 :::info
@@ -32,7 +32,7 @@ npm install @react-navigation/native-stack@next
 The [`@react-navigation/elements`](elements.md) library provides a set of components that are designed to work well with React Navigation. We'll use a few of these components in this guide. So let's install it first:
 
 ```bash npm2yarn
-npm install @react-navigation/elements@next
+npm install @react-navigation/elements
 ```
 
 ## Creating a native stack navigator

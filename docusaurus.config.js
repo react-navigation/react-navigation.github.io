@@ -111,9 +111,17 @@ export default {
         redirects: [
           {
             from: '/next',
-            to: '/docs/7.x/getting-started',
+            to: '/docs/migration-guides',
           },
         ],
+        createRedirects(existingPath) {
+          if (
+            existingPath.includes('/docs/') &&
+            !/\/docs\/\d+\.x/.test(existingPath)
+          ) {
+            return existingPath.replace('/docs/', '/docs/7.x/');
+          }
+        },
       },
     ],
   ],
@@ -125,7 +133,7 @@ export default {
           editUrl:
             'https://github.com/react-navigation/react-navigation.github.io/edit/main/',
           includeCurrentVersion: false,
-          lastVersion: '6.x',
+          lastVersion: '7.x',
           breadcrumbs: false,
           sidebarCollapsed: false,
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],

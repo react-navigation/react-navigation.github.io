@@ -13,7 +13,7 @@ This release includes a new static API that simplifies the configuration of navi
 
 <!--truncate-->
 
-You can read the full list of changes in the [upgrade guide](/docs/7.x/upgrading-from-6.x). Here are some highlights:
+You can read the full list of changes in the [upgrade guide](/docs/upgrading-from-6.x). Here are some highlights:
 
 ## Highlights
 
@@ -75,7 +75,7 @@ You can install it with:
 npm install react-native-drawer-layout@next
 ```
 
-See [`react-native-drawer-layout`](/docs/7.x/drawer-layout) for usage.
+See [`react-native-drawer-layout`](/docs/drawer-layout) for usage.
 
 ## Try it out
 

@@ -19,7 +19,7 @@ One thing to keep in mind is that while `@react-navigation/stack` is extremely c
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/stack):
 
 ```bash npm2yarn
-npm install @react-navigation/stack
+npm install @react-navigation/stack@^6.x
 ```
 
 Then, you need to install and configure the libraries that are required by the stack navigator:
