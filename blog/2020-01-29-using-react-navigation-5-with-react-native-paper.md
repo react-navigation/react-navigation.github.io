@@ -1,9 +1,6 @@
 ---
 title: React Navigation v5 + React Native Paper = ❤️
-author: Dawid Urbaniak
-author_url: https://twitter.com/trensik
-author_title: Paper Team
-author_image_url: https://avatars0.githubusercontent.com/u/18584155?s=200&v=4
+authors: dawid
 tags: [tutorial, react-native-paper]
 ---
 

@@ -1,9 +1,6 @@
 ---
 title: Using React Navigation 5 with UI Kitten
-author: Artur Yorsh
-author_url: https://twitter.com/artyorsh
-author_title: UI Kitten Team
-author_image_url: https://avatars0.githubusercontent.com/u/10753921?s=200&v=4
+authors: artur
 tags: [tutorial, ui-kitten]
 ---
 

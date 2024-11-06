@@ -1,9 +1,6 @@
 ---
 title: React Navigation 5.0 - A new way to navigate
-author: Satyajit Sahoo, Michał Osadnik
-author_url: https://twitter.com/reactnavigation
-author_title: Core Team
-author_image_url: https://avatars1.githubusercontent.com/u/29647600?s=200&v=4
+authors: [satya, michal]
 tags: [release, announcement]
 ---
 
