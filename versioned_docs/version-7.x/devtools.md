@@ -12,7 +12,7 @@ Developer tools to make debugging easier when using React Navigation.
 To use the developer tools, install [`@react-navigation/devtools`](https://github.com/react-navigation/react-navigation/tree/master/packages/devtools):
 
 ```bash npm2yarn
-npm install @react-navigation/devtools@next
+npm install @react-navigation/devtools
 ```
 
 Hooks from this package only work during development and are disabled in production. You don't need to do anything special to remove them from the production build.

@@ -23,7 +23,7 @@ One thing to keep in mind is that while `@react-navigation/native-stack` offers 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/native-stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/native-stack):
 
 ```bash npm2yarn
-npm install @react-navigation/native-stack@next
+npm install @react-navigation/native-stack
 ```
 
 ## Usage
