@@ -338,7 +338,7 @@ The `tabBarTestID` option in `@react-navigation/bottom-tabs` and `@react-navigat
 
 See [Bottom Tab Navigator](bottom-tab-navigator.md#tabbarbuttontestid) and [Material Top Tab Navigator](material-top-tab-navigator.md#tabbarbuttontestid) docs for usage.
 
-### The `sceneContainerStyle` prop and option are removed from Bottom Tab Navigator, Material Top Tab Navigator and Drawer Navigator in favor of `sceneStyle`
+#### The `sceneContainerStyle` prop and option are removed from Bottom Tab Navigator, Material Top Tab Navigator and Drawer Navigator in favor of `sceneStyle`
 
 Previously, the Bottom Tab Navigator and Material Top Tab Navigator accepted a `sceneContainerStyle` prop to style the container of the scene. This was inflexible as it didn't allow different styles for different screens. Now, the `sceneStyle` option is added to these navigators to style individual screens.
 
@@ -518,6 +518,14 @@ Custom navigators now require more type information to work correctly so that we
 ```
 
 See [Custom navigators](custom-navigators.md) for usage.
+
+#### Packages now use ESM and package exports
+
+All the packages in React Navigation now use ESM exports. While it shouldn't affect most users, there are some changes to be aware of:
+
+- If you are importing internal files from the packages, they might now be restricted by your bundler and it won't be possible to import them directly. You should use the public API instead.
+- If you're patching the packages using `patch-package`, `yarn patch` etc., you'll need to patch the built files under `lib/` folders instead of the source files under `src/` as the source files are no longer exported.
+- If you're using Webpack, it maybe necessary to enable [`resolve.fullySpecified`](https://webpack.js.org/configuration/module/#resolvefullyspecified) for bundling to work.
 
 ## New features
 
