@@ -527,7 +527,7 @@ All the packages in React Navigation now use ESM exports. While it shouldn't aff
 
 - If you are importing internal files from the packages, they might now be restricted by your bundler and it won't be possible to import them directly. You should use the public API instead.
 - If you're patching the packages using `patch-package`, `yarn patch` etc., you'll need to patch the built files under `lib/` folders instead of the source files under `src/` as the source files are no longer exported.
-- If you're using Webpack, it maybe necessary to enable [`resolve.fullySpecified`](https://webpack.js.org/configuration/module/#resolvefullyspecified) for bundling to work.
+- If you're using Webpack, it maybe necessary to set [`resolve.fullySpecified`](https://webpack.js.org/configuration/module/#resolvefullyspecified) to `false` for bundling to work.
 
 ## New features
 
