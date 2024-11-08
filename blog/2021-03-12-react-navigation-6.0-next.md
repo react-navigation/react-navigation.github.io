@@ -1,9 +1,6 @@
 ---
 title: On the way to React Navigation 6.0
-author: Satyajit Sahoo
-author_url: https://twitter.com/satya164
-author_title: Core Team
-author_image_url: https://avatars2.githubusercontent.com/u/1174278?s=200&v=4
+authors: satya
 tags: [release, announcement]
 ---
 
