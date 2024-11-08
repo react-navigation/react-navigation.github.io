@@ -43,7 +43,7 @@
 <p>👉 <a href="https://github.com/sponsors/react-navigation" target="_blank" rel="noopener noreferrer">Visit our GitHub Sponsors page</a> 👈</p>]]></content>
         <author>
             <name>Satyajit Sahoo</name>
-            <uri>https://twitter.com/satya164</uri>
+            <uri>https://satya164.page</uri>
         </author>
         <category label="announcement" term="announcement"/>
     </entry>
@@ -92,7 +92,7 @@
 <p>👉 <a href="https://github.com/sponsors/react-navigation" target="_blank" rel="noopener noreferrer">Visit our GitHub Sponsors page</a> 👈</p>]]></content>
         <author>
             <name>Satyajit Sahoo</name>
-            <uri>https://twitter.com/satya164</uri>
+            <uri>https://satya164.page</uri>
         </author>
         <category label="announcement" term="announcement"/>
     </entry>
@@ -147,7 +147,7 @@
 <p>We would love to get feedback from the community on how it works for you and catch any issues before the stable release. If you have any feedback or suggestions, please let us know on our <a href="https://github.com/react-navigation/react-navigation/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions forum</a>. If you find any issues, please report them on our <a href="https://github.com/react-navigation/react-navigation/issues" target="_blank" rel="noopener noreferrer">GitHub issues</a>.</p>]]></content>
         <author>
             <name>Satyajit Sahoo</name>
-            <uri>https://twitter.com/satya164</uri>
+            <uri>https://satya164.page</uri>
         </author>
         <category label="announcement" term="announcement"/>
     </entry>
@@ -213,7 +213,7 @@
 <p>👉 <a href="https://github.com/sponsors/react-navigation" target="_blank" rel="noopener noreferrer">Visit our GitHub Sponsors page</a> 👈</p>]]></content>
         <author>
             <name>Satyajit Sahoo</name>
-            <uri>https://twitter.com/satya164</uri>
+            <uri>https://satya164.page</uri>
         </author>
         <category label="release" term="release"/>
         <category label="announcement" term="announcement"/>
@@ -249,7 +249,7 @@
 <p>We hope you find this release useful. Make sure to try the release out and provide feedback on what we can improve. You can open an issue in the <a href="https://github.com/react-navigation/react-navigation" target="_blank" rel="noopener noreferrer">GitHub rep</a> or tweet to us <a href="https://twitter.com/reactnavigation" target="_blank" rel="noopener noreferrer">@reactnavigation</a>.</p>]]></content>
         <author>
             <name>Satyajit Sahoo</name>
-            <uri>https://twitter.com/satya164</uri>
+            <uri>https://satya164.page</uri>
         </author>
         <category label="release" term="release"/>
         <category label="announcement" term="announcement"/>
@@ -282,7 +282,7 @@
 <p>We appreciate any support you can provide, but please only donate if you have the financial means to do so comfortably!</p>]]></content>
         <author>
             <name>Brent Vatne</name>
-            <uri>https://twitter.com/notbrent</uri>
+            <uri>https://bsky.app/profile/notbrent.bsky.social</uri>
         </author>
         <category label="announcement" term="announcement"/>
         <category label="web" term="web"/>
@@ -336,7 +336,7 @@
 <p>Take a look at the <a href="https://reactnavigation.org/docs/web-support">documentation</a> to give it a try and let us know what you think. You can also <a href="https://react-navigation-example.netlify.app/" target="_blank" rel="noopener noreferrer">check the example app</a> to see a live demo of web support.</p>]]></content>
         <author>
             <name>Satyajit Sahoo</name>
-            <uri>https://twitter.com/satya164</uri>
+            <uri>https://satya164.page</uri>
         </author>
         <category label="announcement" term="announcement"/>
         <category label="web" term="web"/>
@@ -418,8 +418,11 @@ This made it necessary to rewrite the core of the library, which allowed us to m
 <p>Additionally, I would like to mention how important is the community's influence on building this project. Without you, your support, your readiness to test and apply the next versions of the libraries, it wouldn't be possible at all, and despite mentioning a few people by name, at no stage do we forget that this is a community activity and will respond to its needs. We are incredibly grateful for the opportunity to work on such an unusual project, which facilitates the work of a large number of users.</p>
 <p>Thanks again and hope you will find this release useful.</p>]]></content>
         <author>
-            <name>Satyajit Sahoo, Michał Osadnik</name>
-            <uri>https://twitter.com/reactnavigation</uri>
+            <name>Satyajit Sahoo</name>
+            <uri>https://satya164.page</uri>
+        </author>
+        <author>
+            <name>Michał Osadnik</name>
         </author>
         <category label="release" term="release"/>
         <category label="announcement" term="announcement"/>
@@ -592,7 +595,6 @@ What's more, it even animates icon change properly even though we haven't implem
 <p>At the end I want to thank <a href="https://twitter.com/satya164" target="_blank" rel="noopener noreferrer">@satya164</a> and the whole <a href="https://callstack.com/" target="_blank" rel="noopener noreferrer">Callstack</a> team for their help with the article.</p>]]></content>
         <author>
             <name>Dawid Urbaniak</name>
-            <uri>https://twitter.com/trensik</uri>
         </author>
         <category label="tutorial" term="tutorial"/>
         <category label="react-native-paper" term="react-native-paper"/>
@@ -676,7 +678,6 @@ In this blog post, we'll show a step-by-step guide on using React Navigation 5 w
 </ul>]]></content>
         <author>
             <name>Artur Yorsh</name>
-            <uri>https://twitter.com/artyorsh</uri>
         </author>
         <category label="tutorial" term="tutorial"/>
         <category label="ui-kitten" term="ui-kitten"/>
@@ -707,7 +708,6 @@ In this blog post, we'll show a step-by-step guide on using React Navigation 5 w
 <p>Native Stack is available in the new 5.0 alpha API and with <a href="https://github.com/satya164" target="_blank" rel="noopener noreferrer">Satyajit</a>’s help, I have managed to release the first version of the <a href="https://www.npmjs.com/package/@react-navigation/native-stack" target="_blank" rel="noopener noreferrer">library</a> a few days ago. It’s in alpha so don’t expect everything to be perfect, but… don’t hesitate to submit a <a href="https://github.com/react-navigation/react-navigation/pulls" target="_blank" rel="noopener noreferrer">PR</a> and help us grow React Navigation!</p>]]></content>
         <author>
             <name>Michał Osadnik</name>
-            <uri>https://twitter.com/mosdnk</uri>
         </author>
         <category label="announcement" term="announcement"/>
     </entry>
@@ -733,7 +733,7 @@ In this blog post, we'll show a step-by-step guide on using React Navigation 5 w
 <p>Thanks for reading, please post any issues you encounter to <a href="https://github.com/react-navigation/react-navigation/issues" target="_blank" rel="noopener noreferrer">react-navigation/issues</a>!</p>]]></content>
         <author>
             <name>Satyajit Sahoo</name>
-            <uri>https://twitter.com/satya164</uri>
+            <uri>https://satya164.page</uri>
         </author>
         <category label="release" term="release"/>
         <category label="announcement" term="announcement"/>
@@ -833,7 +833,7 @@ In this blog post, we'll show a step-by-step guide on using React Navigation 5 w
 <p>Thanks for reading, please post any issues you encounter to <a href="https://github.com/react-navigation/react-navigation/issues" target="_blank" rel="noopener noreferrer">react-navigation/issues</a>!</p>]]></content>
         <author>
             <name>Brent Vatne</name>
-            <uri>https://twitter.com/notbrent</uri>
+            <uri>https://bsky.app/profile/notbrent.bsky.social</uri>
         </author>
         <category label="release" term="release"/>
         <category label="announcement" term="announcement"/>
@@ -928,7 +928,7 @@ In this blog post, we'll show a step-by-step guide on using React Navigation 5 w
 <p>Thanks for reading, please post any issues you encounter to <a href="https://github.com/react-navigation/react-navigation/issues" target="_blank" rel="noopener noreferrer">react-navigation/issues</a>!</p>]]></content>
         <author>
             <name>Brent Vatne</name>
-            <uri>https://twitter.com/notbrent</uri>
+            <uri>https://bsky.app/profile/notbrent.bsky.social</uri>
         </author>
         <category label="release" term="release"/>
         <category label="announcement" term="announcement"/>
@@ -1002,7 +1002,7 @@ In this blog post, we'll show a step-by-step guide on using React Navigation 5 w
 <p>We’ve <a href="https://github.com/react-navigation/react-navigation/issues/3686" target="_blank" rel="noopener noreferrer">started to plan for 3.0</a>. Please get involved by <a href="https://react-navigation.canny.io/feature-requests" target="_blank" rel="noopener noreferrer">posting your feature requests to Canny</a>, <a href="https://github.com/react-navigation/rfcs/issues" target="_blank" rel="noopener noreferrer">opening a RFC</a>, or letting us know about bugs with a well-formulated <a href="https://github.com/react-navigation/react-navigation/issues/new" target="_blank" rel="noopener noreferrer">issue</a>!</p>]]></content>
         <author>
             <name>Brent Vatne</name>
-            <uri>https://twitter.com/notbrent</uri>
+            <uri>https://bsky.app/profile/notbrent.bsky.social</uri>
         </author>
         <category label="release" term="release"/>
         <category label="announcement" term="announcement"/>
@@ -1051,7 +1051,7 @@ In this blog post, we'll show a step-by-step guide on using React Navigation 5 w
 </ul>]]></content>
         <author>
             <name>Brent Vatne</name>
-            <uri>https://twitter.com/notbrent</uri>
+            <uri>https://bsky.app/profile/notbrent.bsky.social</uri>
         </author>
         <category label="release" term="release"/>
         <category label="announcement" term="announcement"/>
@@ -1068,7 +1068,7 @@ In this blog post, we'll show a step-by-step guide on using React Navigation 5 w
 <p><a href="https://reactnavigation.org/docs/1.x/getting-started">Give React Navigation 1.0 a try</a>, <a href="https://react-navigation.canny.io/feature-requests" target="_blank" rel="noopener noreferrer">post a feature request</a> if you think something is missing, <a href="https://github.com/react-navigation/rfcs" target="_blank" rel="noopener noreferrer">open a RFC</a> if you have an idea of how to implement it, <a href="https://github.com/react-navigation/react-navigation/issues" target="_blank" rel="noopener noreferrer">file a detailed bug report</a> when you encounter problems (or <a href="https://github.com/react-navigation/react-navigation/pulls" target="_blank" rel="noopener noreferrer">open a pull request</a> if you know how to fix them)! Updating your existing installation should be easy if you have tracked releases over recent months — <a href="https://github.com/react-navigation/react-navigation/releases/tag/1.0.0" target="_blank" rel="noopener noreferrer">read the brief release notes</a> for more information.</p>]]></content>
         <author>
             <name>Brent Vatne</name>
-            <uri>https://twitter.com/notbrent</uri>
+            <uri>https://bsky.app/profile/notbrent.bsky.social</uri>
         </author>
         <category label="release" term="release"/>
         <category label="announcement" term="announcement"/>
