@@ -20,15 +20,20 @@
     "@docusaurus/plugin-google-analytics": "3.6.1",
     "@docusaurus/preset-classic": "3.6.1",
     "@docusaurus/remark-plugin-npm2yarn": "3.6.1",
-    "@octokit/graphql": "^7.0.2",
-    "@react-navigation/core": "^7.0.0-alpha.17",
+    "@octokit/graphql": "^7.1.0",
+    "@react-navigation/core": "7.0.0-alpha.17",
     "escape-html": "^1.0.3",
     "mkdirp": "^3.0.1",
     "netlify-plugin-cache": "^1.0.3",
-    "prism-react-renderer": "^2.3.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-simple-code-editor": "^0.13.1"
+    "prism-react-renderer": "^2.4.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-simple-code-editor": "^0.14.1"
+  },
+  "devDependencies": {
+    "markdownlint": "^0.36.1",
+    "markdownlint-cli2": "^0.14.0",
+    "prettier": "^3.3.3"
   },
   "browserslist": {
     "production": [
@@ -41,11 +46,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "markdownlint": "^0.32.1",
-    "markdownlint-cli2": "^0.11.0",
-    "prettier": "^3.2.5"
   },
   "packageManager": "yarn@4.0.2"
 }
