@@ -76,6 +76,6 @@ This change was made to improve the ease of learning and understanding the libra
 
 ## New feature highlights
 
-- State persistence - automatically save state and reload it when the app restarts. See [state persistence docs](docs/state-persistence)
+- State persistence - automatically save state and reload it when the app restarts. See [state persistence docs](/docs/state-persistence)
 - Transitions between screens in stack with headers and without headers now animates as expected on iOS. [#3821](https://github.com/react-navigation/react-navigation/pull/3821). Thanks [skevy](https://github.com/skevy)!
 - As mentioned above, `createMaterialBottomNavigator` is a new navigator type that provides the material design bottom tab bar pattern.
