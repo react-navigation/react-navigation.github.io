@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkreact_navigation_website_next=self.webpackChunkreact_navigation_website_next||[]).push([[60205],{43672:e=>{e.exports=JSON.parse('{"label":"release","permalink":"/blog/tags/release","allTagsPath":"/blog/tags","count":9,"unlisted":false}')}}]);
