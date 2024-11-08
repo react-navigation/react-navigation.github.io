@@ -2,6 +2,9 @@ import remarkNpm2Yarn from '@docusaurus/remark-plugin-npm2yarn';
 import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.mjs';
 
 export default {
+  future: {
+    experimental_faster: true,
+  },
   title: 'React Navigation',
   tagline: 'Routing and navigation for your React Native apps',
   url: 'https://reactnavigation.org/',
