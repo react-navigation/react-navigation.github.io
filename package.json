@@ -14,11 +14,12 @@
     "fetch-sponsors": "node scripts/fetch-sponsors.js"
   },
   "dependencies": {
-    "@docusaurus/core": "3.3.2",
-    "@docusaurus/plugin-client-redirects": "3.3.2",
-    "@docusaurus/plugin-google-analytics": "3.3.2",
-    "@docusaurus/preset-classic": "3.3.2",
-    "@docusaurus/remark-plugin-npm2yarn": "3.3.2",
+    "@docusaurus/core": "3.6.1",
+    "@docusaurus/faster": "3.6.1",
+    "@docusaurus/plugin-client-redirects": "3.6.1",
+    "@docusaurus/plugin-google-analytics": "3.6.1",
+    "@docusaurus/preset-classic": "3.6.1",
+    "@docusaurus/remark-plugin-npm2yarn": "3.6.1",
     "@octokit/graphql": "^7.0.2",
     "@react-navigation/core": "^7.0.0-alpha.17",
     "escape-html": "^1.0.3",
