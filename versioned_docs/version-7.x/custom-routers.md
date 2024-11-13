@@ -11,13 +11,19 @@ The router is responsible for handling actions dispatched by calling methods on 
 You can make your own router by building an object with the following functions:
 
 - `type` - String representing the type of the router, e.g. `'stack'`, `'tab'`, `'drawer'` etc.
-- `getInitialState` - Function which returns the initial state for the navigator. Receives an options object with `routeNames` and `routeParamList` properties.
-- `getRehydratedState` - Function which rehydrates the full [navigation state](navigation-state.md) from a given partial state. Receives a partial state object and an options object with `routeNames` and `routeParamList` properties.
-- `getStateForRouteNamesChange` - Function which takes the current state and updated list of route names, and returns a new state. Receives the state object and an options object with `routeNames` and `routeParamList` properties.
-- `getStateForAction` - function which takes the current state and action along with an options object with `routeNames` and `routeParamList` properties, and returns a new state. If the action cannot be handled, it should return `null`.
-- `getStateForRouteFocus` - Function which takes the current state and key of a route, and returns a new state with that route focused.
-- `shouldActionChangeFocus` - Function which determines whether the action should also change focus in parent navigator. Some actions such as `NAVIGATE` can change focus in the parent.
+- `getInitialState` - Function that returns the initial state for the navigator. Receives an options object with `routeNames` and `routeParamList` properties.
+- `getRehydratedState` - Function that rehydrates the full [navigation state](navigation-state.md) from a given partial state. Receives a partial state object and an options object with `routeNames` and `routeParamList` properties.
+- `getStateForRouteNamesChange` - Function that takes the current state and updated list of route names, and returns a new state. Receives the state object and an options object with `routeNames` and `routeParamList` properties.
+- `getStateForAction` - Reducer function that takes the current state and action along with an options object with `routeNames` and `routeParamList` properties, and returns a new state. If the action cannot be handled, it should return `null`.
+- `getStateForRouteFocus` - Function that takes the current state and key of a route, and returns a new state with that route focused.
+- `shouldActionChangeFocus` - Function that determines whether the action should also change focus in parent navigator. Some actions such as `NAVIGATE` can change focus in the parent.
 - `actionCreators` - Optional object containing a list of action creators, such as `push`, `pop` etc. These will be used to add helper methods to the `navigation` object to dispatch those actions.
+
+:::info
+
+The functions in the router object should be pure functions, i.e. they should not have any side-effects, mutate parameters or external variables, and should return the same output for the same input.
+
+:::
 
 Example:
 
