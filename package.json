@@ -35,6 +35,10 @@
     "markdownlint-cli2": "^0.14.0",
     "prettier": "^3.3.3"
   },
+  "resolutions": {
+    "@rspack/core": "1.0.14"
+  },
+  "packageManager": "yarn@4.0.2",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -46,6 +50,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "packageManager": "yarn@4.0.2"
+  }
 }
