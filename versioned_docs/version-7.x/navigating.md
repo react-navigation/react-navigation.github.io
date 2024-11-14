@@ -216,7 +216,7 @@ export default function App() {
   <source src="/assets/navigators/stack/stack-push.mp4" />
 </video>
 
-Each time you call `push` we add a new route to the navigation stack. When you call `navigate` it first tries to find an existing route with that name, and only pushes a new route if there isn't yet one on the stack.
+Each time you call `push` we add a new route to the navigation stack. When you call `navigate` it only pushes a new route if you're not already on that route.
 
 ## Going back
 
@@ -358,7 +358,7 @@ export default function App() {
 
 ## Summary
 
-- `navigation.navigate('RouteName')` pushes a new route to the native stack navigator if it's not already in the stack, otherwise it jumps to that screen.
+- `navigation.navigate('RouteName')` pushes a new route to the native stack navigator if you're not already on that route.
 - We can call `navigation.push('RouteName')` as many times as we like and it will continue pushing routes.
 - The header bar will automatically show a back button, but you can programmatically go back by calling `navigation.goBack()`. On Android, the hardware back button just works as expected.
 - You can go back to an existing screen in the stack with `navigation.popTo('RouteName')`, and you can go back to the first screen in the stack with `navigation.popToTop()`.
