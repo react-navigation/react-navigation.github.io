@@ -65,10 +65,10 @@ If it's missing these extensions, add them and then clear metro cache as shown i
 
 ## I'm getting "SyntaxError in @react-navigation/xxx/xxx.tsx" or "SyntaxError: /xxx/@react-navigation/xxx/xxx.tsx: Unexpected token"
 
-This might happen if you have an old version of the `metro-react-native-babel-preset` package. Try upgrading it to the latest version.
+This might happen if you have an old version of the `@react-native/babel-preset` package. Try upgrading it to the latest version.
 
 ```bash npm2yarn
-npm install --save-dev metro-react-native-babel-preset
+npm install --save-dev @react-native/babel-preset
 ```
 
 If you have `@babel/core` installed, also upgrade it to latest version.
@@ -77,7 +77,7 @@ If you have `@babel/core` installed, also upgrade it to latest version.
 npm install --save-dev @babel/core
 ```
 
-If upgrading the packages don't help, you can also try deleting your `node_modules` as well as lock the file and reinstall your dependencies.
+If upgrading the packages don't help, you can also try deleting your `node_modules` and then the lock the file and reinstall your dependencies.
 
 If you use `npm`:
 
@@ -94,6 +94,12 @@ rm -rf node_modules
 rm yarn.lock
 yarn
 ```
+
+:::warning
+
+Deleting the lockfile is generally not recommended as it may upgrade your dependencies to versions that haven't been tested with your project. So only use this as a last resort.
+
+:::
 
 After upgrading or reinstalling the packages, you should also clear Metro bundler's cache following the instructions earlier in the page.
 
@@ -215,6 +221,7 @@ const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
   return (
+    // highlight-next-line
     <View style={{ flex: 1 }}>
       <Navigation />
     </View>
@@ -232,6 +239,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (
+    // highlight-next-line
     <View style={{ flex: 1 }}>
       <NavigationContainer>{/* ... */}</NavigationContainer>
     </View>
@@ -278,6 +286,7 @@ const Stack = createNativeStackNavigator({
     Home: {
       screen: Home,
       options: {
+        // highlight-next-line
         headerTitle: (props) => <MyTitle {...props} />,
       },
     },
@@ -292,7 +301,10 @@ const Stack = createNativeStackNavigator({
 <Stack.Screen
   name="Home"
   component={Home}
-  option={{ headerTitle: (props) => <MyTitle {...props} /> }}
+  option={{
+    // highlight-next-line
+    headerTitle: (props) => <MyTitle {...props} />,
+  }}
 />
 ```
 
@@ -311,6 +323,7 @@ const Stack = createNativeStackNavigator({
       screen: Home,
       options: {
         // This is not correct
+        // highlight-next-line
         headerTitle: MyTitle,
       },
     },
@@ -327,6 +340,7 @@ const Stack = createNativeStackNavigator({
   component={Home}
   option={{
     // This is not correct
+    // highlight-next-line
     headerTitle: MyTitle,
   }}
 />
@@ -343,28 +357,6 @@ Sometimes you might have noticed that your screens unmount/remount, or your loca
 
 The simplest example is something like following:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Home: () => {
-      return <SomeComponent />;
-    },
-  },
-});
-
-const Navigation = createStaticNavigation(RootStack);
-
-function App() {
-  return <Navigation />;
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
 ```js
 function App() {
   return (
@@ -379,9 +371,6 @@ function App() {
   );
 }
 ```
-
-</TabItem>
-</Tabs>
 
 The `component` prop expects a React Component, but in the example, it's getting a function returning an React Element. While superficially a component and a function returning a React Element look the exact same, they don't behave the same way when used.
 
@@ -432,30 +421,6 @@ function App() {
 
 Or when you use a higher order component (such as `connect` from Redux, or `withX` functions that accept a component) inside another component:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-function App() {
-  const Home = () => {
-    return <SomeComponent />;
-  };
-
-  const RootStack = createNativeStackNavigator({
-    screens: {
-      Home: withSomeData(Home),
-    },
-  });
-
-  const Navigation = createStaticNavigation(RootStack);
-
-  return <Navigation />;
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
 ```js
 function App() {
   return (
@@ -466,15 +431,15 @@ function App() {
 }
 ```
 
-</TabItem>
-</Tabs>
-
 If you're unsure, it's always best to make sure that the components you are using as screens are defined outside of a React component. They could be defined in another file and imported, or defined at the top level scope in the same file:
+
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
 ```js
 const Home = () => {
+  // ...
+
   return <SomeComponent />;
 };
 
@@ -496,6 +461,8 @@ function App() {
 
 ```js
 const Home = () => {
+  // ...
+
   return <SomeComponent />;
 };
 
