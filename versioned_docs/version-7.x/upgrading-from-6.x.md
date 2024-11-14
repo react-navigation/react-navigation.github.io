@@ -288,6 +288,17 @@ The `customAnimationOnGesture` option in Native Stack Navigator is renamed to `a
 
 See [Native Stack Navigator](native-stack-navigator.md#animationmatchesgesture) for usage.
 
+#### `statusBarColor` is renamed to `statusBarBackgroundColor` in Native Stack Navigator
+
+The `statusBarColor` option in Native Stack Navigator is renamed to `statusBarBackgroundColor` to better reflect its purpose. If you are using `statusBarColor` in your project, you can rename it to `statusBarBackgroundColor`:
+
+```diff lang=js
+- <Stack.Navigator options={{ statusBarColor: 'tomato' }}>
++ <Stack.Navigator options={{ statusBarBackgroundColor: 'tomato' }}>
+```
+
+See [Native Stack Navigator](native-stack-navigator.md#statusbarbackgroundcolor) for usage.
+
 #### Native Stack now requires `react-native-screens` 4
 
 `@react-navigation/native-stack` now requires `react-native-screens` 4 and will break when using an earlier version. If you are using Native Stack Navigator in your project, make sure to upgrade `react-native-screens` to version 4.
