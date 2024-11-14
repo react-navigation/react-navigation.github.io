@@ -704,9 +704,9 @@ Requires setting `View controller-based status bar appearance -> YES` (or removi
 
 Only supported on Android and iOS.
 
-#### `statusBarColor`
+#### `statusBarBackgroundColor`
 
-Sets the status bar color (similar to the `StatusBar` component). Defaults to initial status bar color.
+Sets the background color of the status bar (similar to the `StatusBar` component).
 
 Only supported on Android.
 
@@ -735,6 +735,12 @@ Whether the gesture to dismiss should work on the whole screen. Using gesture to
 Doesn't affect the behavior of screens presented modally.
 
 Only supported on iOS.
+
+#### `fullScreenGestureShadowEnabled`
+
+Whether the full screen dismiss gesture has shadow under view during transition. Defaults to `true`.
+
+This does not affect the behavior of transitions that don't use gestures enabled by `fullScreenGestureEnabled` prop.
 
 #### `gestureEnabled`
 
