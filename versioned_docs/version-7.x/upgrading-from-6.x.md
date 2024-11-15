@@ -379,6 +379,7 @@ See [Drawer Navigator](drawer-navigator.md) for usage.
 Previously, `labelVisible` could be used to control whether the back button title is shown in the header. It's now removed in favor of `displayMode` which provides more flexibility.
 
 The new possible values are:
+
 - `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
 - `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon). iOS >= 14 only, falls back to "default" on older iOS versions.
 - `minimal`: Always displays only the icon without a title.
