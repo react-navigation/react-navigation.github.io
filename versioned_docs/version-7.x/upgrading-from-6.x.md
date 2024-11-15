@@ -372,6 +372,27 @@ If you're using Drawer Navigator on the Web, it'll now use CSS transitions inste
 
 See [Drawer Navigator](drawer-navigator.md) for usage.
 
+### Changes to elements
+
+#### `labelVisible` is removed in favor of `displayMode` in `headerLeft` and `HeaderBackButton` elements
+
+Previously, `labelVisible` could be used to control whether the back button title is shown in the header. It's now removed in favor of `displayMode` which provides more flexibility.
+
+The new possible values are:
+
+- `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
+- `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon). iOS >= 14 only, falls back to "default" on older iOS versions.
+- `minimal`: Always displays only the icon without a title.
+
+The previous behavior can be achieved by setting `displayMode` to `default` or `generic` for showing and `minimal` for hiding the back button title respectively:
+
+```diff lang=js
+<HeaderBackButton
+-   labelVisible={false}
++   displayMode="minimal"
+/>
+```
+
 ### Deprecations and removals
 
 #### Material Bottom Tab Navigator now lives in `react-native-paper` package

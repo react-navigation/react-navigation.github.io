@@ -233,7 +233,10 @@ It receives an object containing following properties:
 - `tintColor`: The color of the icon and label.
 - `pressColor`: The color of the material ripple (Android >= 5.0 only).
 - `pressOpacity`: The opacity of the button when it's pressed (Android < 5.0, and iOS).
-- `labelVisible`: Whether the label text is visible. Defaults to `true` on iOS and `false` on Android.
+- `displayMode`: How the element displays icon and title. Defaults to `default` on iOS and `minimal` on Android. Possible values:
+  - `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
+  - `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon). iOS >= 14 only, falls back to "default" on older iOS versions.
+  - `minimal`: Always displays only the icon without a title.
 - `href`: The URL to open when the button is pressed on the Web.
 
 You can use it to implement your custom left button, for example:
@@ -637,7 +640,10 @@ A component used to show the back button header. It's the default for [`headerLe
 - `tintColor` - Tint color for the header.
 - `label` - Label text for the button. Usually the title of the previous screen. By default, this is only shown on iOS.
 - `truncatedLabel` - Label text to show when there isn't enough space for the full label.
-- `labelVisible` - Whether the label text is visible. Defaults to `true` on iOS and `false` on Android.
+- `displayMode`: How the back button displays icon and title. Defaults to `default` on iOS and `minimal` on Android. Possible values:
+  - `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
+  - `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon). iOS >= 14 only, falls back to "default" on older iOS versions.
+  - `minimal`: Always displays only the icon without a title.
 - `labelStyle` - Style object for the label.
 - `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings.
 - `onLabelLayout` - Callback to trigger when the size of the label changes.
