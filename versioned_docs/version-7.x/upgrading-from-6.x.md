@@ -388,8 +388,8 @@ The previous behavior can be achieved by setting `displayMode` to `default` or `
 
 ```diff lang=js
 <HeaderBackButton
--  labelVisible={false}
-+  displayMode="minimal"
+-   labelVisible={false}
++   displayMode="minimal"
 />
 ```
 
