@@ -143,7 +143,7 @@ Type of the drawer. It determines how the drawer looks and animates.
 - `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.
 - `permanent`: A permanent drawer is shown as a sidebar.
 
-Defaults to `slide` on iOS and `front` on other platforms.
+Defaults to `front`.
 
 ##### `drawerStyle`
 
