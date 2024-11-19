@@ -343,6 +343,12 @@ Options for the search bar in the header. When this is specified, the header wil
 
 It can contain the following properties:
 
+- `ref`: Ref to manipulate the search input imperatively. It contains the following methods:
+  - `focus` - focuses the search bar
+  - `blur` - removes focus from the search bar
+  - `setText` - sets the search bar's content to given value
+  - `clearText` - removes any text present in the search bar input field
+  - `cancelSearch` - cancel the search and close the search bar
 - `autoCapitalize`: The auto-capitalization behavior. Possible values: `none`, `words`, `sentences`, `characters`.
 - `autoFocus`: Automatically focus search input on mount.
 - `cancelButtonText`: Text to be used instead of default `Cancel` button text (iOS only).

@@ -259,7 +259,17 @@ React.useLayoutEffect(() => {
 }, [navigation]);
 ```
 
-Supported properties are described below.
+Supported properties are:
+
+##### `ref`
+
+Ref to manipulate the search input imperatively. It contains the following methods:
+
+- `focus` - focuses the search bar
+- `blur` - removes focus from the search bar
+- `setText` - sets the search bar's content to given value
+- `clearText` - removes any text present in the search bar input field
+- `cancelSearch` - cancel the search and close the search bar
 
 ##### `autoCapitalize`
 
