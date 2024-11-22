@@ -404,7 +404,7 @@ To solve this, we need to use [`navigation.getParent`](navigation-object.md#getp
 <Button onPress={() => navigation.getParent().openDrawer()}>Open right drawer</Button>
 ```
 
-However, this means that our button needs to know about the parent navigators, which isn't ideal. If our button is further nested inside other navigators, it'd need multiple `getParent()` calls. To address this, we can use the [`id` prop](drawer-navigator.md#id) to identify the parent navigator.
+However, this means that our button needs to know about the parent navigators, which isn't ideal. If our button is further nested inside other navigators, it'd need multiple `getParent()` calls. To address this, we can use the [`id` prop](navigator.md#id) to identify the parent navigator.
 
 To customize the contents of the drawer, we can use the [`drawerContent` prop](drawer-navigator.md#drawercontent) to pass in a function that renders a custom component.
 
@@ -557,4 +557,4 @@ Here, we are passing `"LeftDrawer"` and `"RightDrawer"` strings (you can use any
 - To have multiple drawers, you can use [`react-native-drawer-layout`](drawer-layout.md) directly in combination with a drawer navigator.
 - The [`drawerPosition`](drawer-layout.md#drawerposition) prop can be used to position the drawer on the right.
 - The methods to control the drawer can be passed down using context API when using [`react-native-drawer-layout`](drawer-layout.md).
-- When nesting multiple navigators, you can use [`navigation.getParent`](navigation-object.md#getparent) in combination with the [`id` prop](drawer-navigator.md#id) to refer to the desired drawer.
+- When nesting multiple navigators, you can use [`navigation.getParent`](navigation-object.md#getparent) in combination with the [`id` prop](navigator.md#id) to refer to the desired drawer.

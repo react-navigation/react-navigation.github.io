@@ -108,7 +108,7 @@ HomeStack.navigationOptions = {
 
 We understand that overloading the naming here is a little bit confusing. Please [open a RFC](https://github.com/react-navigation/rfcs) if you have a suggestion about how we can make this API easier to learn and work with.
 
-# A stack contains a tab navigator and you want to set the title on the stack header
+## A stack contains a tab navigator and you want to set the title on the stack header
 
 Imagine the following configuration:
 
@@ -177,7 +177,7 @@ Using this configuration, the `headerTitle` or `title` from `navigationOptions` 
 
 Additionally, you can push new screens to the feed and profile stacks without hiding the tab bar by adding more routes to those stacks. If you want to push screens on top of the tab bar, then you can add them to the `AppNavigator` stack.
 
-# A tab navigator contains a stack and you want to hide the tab bar on specific screens
+## A tab navigator contains a stack and you want to hide the tab bar on specific screens
 
 Similar to the example above where a stack contains a tab navigator, we can solve this in two ways: add `navigationOptions` to our tab navigator to set the tab bar to hidden depending on which route is active in the child stack, or we can move the tab navigator inside of the stack.
 
@@ -247,7 +247,7 @@ const AppNavigator = createSwitchNavigator({
 });
 ```
 
-# A drawer has a stack inside of it and you want to lock the drawer on certain screens
+## A drawer has a stack inside of it and you want to lock the drawer on certain screens
 
 This is conceptually identical to having a tab with a stack inside of it (read that above if you have not already), where you want to hide the tab bar on certain screens. The only difference is that rather than using `tabBarVisible` you will use `drawerLockMode`.
 

@@ -53,7 +53,7 @@ Hooks are great for stateful logic and code organization. Now we have several ho
 
 ### Update options from component
 
-We’ve added a new [`setOptions`](/docs/5.x/navigation-prop#setoptions---update-screen-options-from-the-component) method on the `navigation` prop to make configuring screen navigation options more intuitive than its `static navigationOptions` predecessor. It lets us **easily set screen options based on props, state or context without messing with params**. Instead of using static options, we can call it anytime to configure the screen.
+We’ve added a new [`setOptions`](/docs/5.x/navigation-prop#setoptions) method on the `navigation` prop to make configuring screen navigation options more intuitive than its `static navigationOptions` predecessor. It lets us **easily set screen options based on props, state or context without messing with params**. Instead of using static options, we can call it anytime to configure the screen.
 
 ```js
 navigation.setOptions({

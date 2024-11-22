@@ -244,10 +244,10 @@ In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack
 
 - If you're already on a screen with the same name, it will update its params and not push a new screen.
 - If you're on a different screen, it will push the new screen onto the stack.
-- If the [`getId`](screen.md#getid) prop is specified, and another screen in the stack has the same ID, it will bring that screen to focus and update its params instead.
+- If the [`getId`](screen.md#id) prop is specified, and another screen in the stack has the same ID, it will bring that screen to focus and update its params instead.
 - If none of the above conditions match, it'll push a new screen to the stack.
 
-By default, the screen is identified by its name. But you can also customize it to take the params into account by using the [`getId`](screen.md#getid) prop.
+By default, the screen is identified by its name. But you can also customize it to take the params into account by using the [`getId`](screen.md#id) prop.
 
 For example, say you have specified a `getId` prop for `Profile` screen:
 
@@ -304,7 +304,7 @@ In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack
 
 - If you're already on a screen with the same name, it will update its params and not push a new screen.
 - If a screen with the same name already exists in the stack, it will pop all the screens after it to go back to the existing screen.
-- If the [`getId`](screen.md#getid) prop is specified, and another screen in the stack has the same ID, it will pop any screens to navigate to that screen and update its params instead.
+- If the [`getId`](screen.md#id) prop is specified, and another screen in the stack has the same ID, it will pop any screens to navigate to that screen and update its params instead.
 - If none of the above conditions match, it'll push a new screen to the stack.
 
 In a tab or drawer navigator, calling `navigate` will switch to the relevant screen if it's not focused already and update the params of the screen.
@@ -966,7 +966,7 @@ Preloading a screen means that the screen will be rendered in the background. Al
 
 Depending on the navigator, `preload` may work slightly differently:
 
-- In a stack navigator ([stack](stack-navigator.md), [native stack](native-stack-navigator.md)), the screen will be rendered off-screen and animated in when you navigate to it. If [`getId`](screen.md#getid) is specified, it'll be used for the navigation to identify the preloaded screen.
+- In a stack navigator ([stack](stack-navigator.md), [native stack](native-stack-navigator.md)), the screen will be rendered off-screen and animated in when you navigate to it. If [`getId`](screen.md#id) is specified, it'll be used for the navigation to identify the preloaded screen.
 - In a tab or drawer navigator ([bottom tabs](bottom-tab-navigator.md), [material top tabs](material-top-tab-navigator.md), [drawer](drawer-navigator.md), etc.), the existing screen will be rendered as if `lazy` was set to `false`. Calling `preload` on a screen that is already rendered will not have any effect.
 
 When a screen is preloaded in a stack navigator, it will have a few limitations:

@@ -177,10 +177,10 @@ function StackScreen() {
 
 ## Additional configuration
 
-You can read the full list of available `options` for screens inside of a stack navigator in the [`createStackNavigator` reference](stack-navigator.md#navigationoptions-used-by-stacknavigator).
+You can read the full list of available `options` for screens inside of a stack navigator in the [`createStackNavigator` reference](stack-navigator.md#options).
 
 ## Summary
 
-- You can customize the header inside of the `options` prop of your screen components. Read the full list of options [in the API reference](stack-navigator.md#navigationoptions-used-by-stacknavigator).
+- You can customize the header inside of the `options` prop of your screen components. Read the full list of options [in the API reference](stack-navigator.md#options).
 - The `options` prop can be an object or a function. When it is a function, it is provided with an object with the `navigation` and `route` prop.
 - You can also specify shared `screenOptions` in the stack navigator configuration when you initialize it. The prop takes precedence over that configuration.

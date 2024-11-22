@@ -395,11 +395,11 @@ The `headerMode` option supports 2 values: `screen` and `float`.
 
 ### Header is now taller in modals on iOS
 
-The header is now 56dp tall in modals to match the native iOS style. If you are using the [`useHeaderHeight`](elements.md#use-header-height) hook to get the height of the header, then you won't need to change any code.
+The header is now 56dp tall in modals to match the native iOS style. If you are using the [`useHeaderHeight`](elements.md#useheaderheight) hook to get the height of the header, then you won't need to change any code.
 
 ### The header height from hidden header is now ignored
 
-Previously, the [`useHeaderHeight`](elements.md#use-header-height) hook returned `0` if the header was hidden in a Stack Navigator. Now it returns the height of the closes visible header instead.
+Previously, the [`useHeaderHeight`](elements.md#useheaderheight) hook returned `0` if the header was hidden in a Stack Navigator. Now it returns the height of the closes visible header instead.
 
 ### Custom header now uses 'headerMode: screen' by default
 
