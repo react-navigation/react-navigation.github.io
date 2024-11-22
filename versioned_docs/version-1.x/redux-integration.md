@@ -14,7 +14,7 @@ _You probably do not need to do this!_ Storing your React Navigation state in yo
 
 1. To handle your app's navigation state in Redux, you can pass your own `navigation` prop to a navigator.
 
-2. Once you pass your own navigation prop to the navigator, the default [`navigation`](navigation-prop.md) prop gets destroyed. You must construct your own `navigation` prop with [`state`](navigation-prop.md#state-the-screen-s-current-state-route), [`dispatch`](navigation-prop.md#dispatch-send-an-action-to-the-router), and `addListener` properties.
+2. Once you pass your own navigation prop to the navigator, the default [`navigation`](navigation-prop.md) prop gets destroyed. You must construct your own `navigation` prop with [`state`](navigation-prop.md#state---the-screens-current-stateroute), [`dispatch`](navigation-prop.md#dispatch---send-an-action-to-the-router), and `addListener` properties.
 
 3. The `state` will be fed from the reducer assigned to handle navigation state and the `dispatch` will be Redux's default `dispatch`. Thus you will be able to dispatch normal redux actions using `this.props.navigation.dispatch(ACTION)`, reducer will update the navigation state on the basis of dispatched action, the new navigation state will then be passed to the navigator.
 

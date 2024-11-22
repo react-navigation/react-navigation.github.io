@@ -12,6 +12,8 @@ export default {
   favicon: 'img/favicon.ico',
   organizationName: 'react-navigation',
   projectName: 'react-navigation.github.io',
+  onBrokenAnchors: 'throw',
+  onBrokenMarkdownLinks: 'throw',
   scripts: ['/js/snack-helpers.js', '/js/toc-fixes.js'],
   themeConfig: {
     colorMode: {
