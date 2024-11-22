@@ -218,7 +218,7 @@ export default function App() {
 
   return (
     <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Drawer.Navigator useLegacyImplementation>
+      <Drawer.Navigator>
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen
           name="Root"
