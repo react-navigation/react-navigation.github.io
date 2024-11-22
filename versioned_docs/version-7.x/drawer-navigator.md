@@ -530,7 +530,7 @@ Color overlay to be displayed on top of the content view when drawer gets open. 
     <source src="/assets/7.x/drawer/overlayColor.mp4" />
   </video>
 
-#### `sceneContainerStyle`
+#### `sceneStyle`
 
 Style object for the component wrapping the screen content.
 

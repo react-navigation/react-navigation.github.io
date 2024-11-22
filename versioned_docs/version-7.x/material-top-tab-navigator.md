@@ -198,10 +198,6 @@ Object containing the initial height and width of the screens. Passing this will
 }
 ```
 
-#### `sceneContainerStyle`
-
-Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping.
-
 #### `style`
 
 Style to apply to the tab view container.
@@ -443,6 +439,10 @@ Function that returns a React element to render if this screen hasn't been rende
 This view is usually only shown for a split second. Keep it lightweight.
 
 By default, this renders `null`.
+
+#### `sceneStyle`
+
+Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping.
 
 ### Events
 

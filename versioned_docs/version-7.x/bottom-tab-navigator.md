@@ -158,10 +158,6 @@ It supports the following values:
 
 Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
 
-#### `sceneContainerStyle`
-
-Style object for the component wrapping the screen content.
-
 #### `tabBar`
 
 Function that returns a React element to display as the tab bar.
@@ -583,6 +579,10 @@ Only supported on iOS and Android.
 Boolean indicating whether any nested stack should be popped to the top of the stack when navigating away from this tab. Defaults to `false`.
 
 It only works when there is a stack navigator (e.g. [stack navigator](stack-navigator.md) or [native stack navigator](native-stack-navigator.md)) nested under the tab navigator.
+
+#### `sceneStyle`
+
+Style object for the component wrapping the screen content.
 
 ### Header related options
 
