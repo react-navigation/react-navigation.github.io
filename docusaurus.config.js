@@ -107,6 +107,7 @@ export default {
     },
   },
   plugins: [
+    './src/plugins/disable-fully-specified.mjs',
     './src/plugins/react-navigation-versions.mjs',
     [
       '@docusaurus/plugin-client-redirects',
