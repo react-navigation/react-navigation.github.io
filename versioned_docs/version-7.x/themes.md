@@ -205,7 +205,7 @@ export default function App() {
   return (
     // highlight-next-line
     <NavigationContainer theme={MyTheme}>
-      <Drawer.Navigator useLegacyImplementation initialRouteName="Root">
+      <Drawer.Navigator initialRouteName="Root">
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen
           name="Root"
@@ -565,7 +565,7 @@ export default function App() {
   return (
     // highlight-next-line
     <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Drawer.Navigator useLegacyImplementation>
+      <Drawer.Navigator>
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen
           name="Root"
@@ -791,7 +791,7 @@ export default function App() {
 
   return (
     <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Drawer.Navigator useLegacyImplementation initialRouteName="Root">
+      <Drawer.Navigator initialRouteName="Root">
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen
           name="Root"
