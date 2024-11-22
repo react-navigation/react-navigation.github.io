@@ -403,14 +403,14 @@ state.userToken == null ? (
 );
 ```
 
-</TabItem>
-</Tabs>
-
 :::tip
 
 If you have both your login-related screens and rest of the screens in two different Stack navigators, we recommend to use a single Stack navigator and place the conditional inside instead of using 2 different navigators. This makes it possible to have a proper transition animation during login/logout.
 
 :::
+
+</TabItem>
+</Tabs>
 
 ## Implement the logic for restoring the token
 
