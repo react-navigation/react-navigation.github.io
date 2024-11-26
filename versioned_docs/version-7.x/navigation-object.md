@@ -74,8 +74,9 @@ The `navigate` method lets us navigate to another screen in your app. It takes t
 
 `navigation.navigate(name, params)`
 
-- `name` - A destination name of the route that has been defined somewhere
-- `params` - Params to pass to the destination route.
+- `name` - _string_ - A destination name of the screen in the current or a parent navigator.
+- `params` - _object_ - Params to use for the destination route.
+- `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -297,8 +298,8 @@ It takes the following arguments:
 
 `navigation.navigateDeprecated(name, params)`
 
-- `name` - A destination name of the route that has been defined somewhere
-- `params` - Params to pass to the destination route.
+- `name` - _string_ - A destination name of the screen in the current or a parent navigator.
+- `params` - _object_ - Params to use for the destination route.
 
 In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack-navigator.md)), calling `navigate` with a screen name will have the following behavior:
 

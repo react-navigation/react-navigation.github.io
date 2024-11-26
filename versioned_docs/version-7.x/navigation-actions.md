@@ -28,6 +28,7 @@ The `navigate` action allows to navigate to a specific route. It takes the follo
 
 - `name` - _string_ - A destination name of the screen in the current or a parent navigator.
 - `params` - _object_ - Params to use for the destination route.
+- `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -283,12 +284,19 @@ In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack
 - If you're on a different screen, it will push the new screen onto the stack.
 - If the [`getId`](screen.md#id) prop is specified, and another screen in the stack has the same ID, it will navigate to that screen and update its params instead.
 
+<details>
+<summary>Advanced usage</summary>
+
 The `navigate` action can also accepts an object as the argument with the following properties:
 
 - `name` - _string_ - A destination name of the screen in the current or a parent navigator
 - `params` - _object_ - Params to use for the destination route.
-- `merge` - _boolean_ - Whether we should merge the params of the current route with the provided `params`. Defaults to `false`.
+- `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
 - `path` - _string_ - The path (from deep link or universal link) to associate with the screen.
+
+This is primarily used internally to associate a path with a screen when it's from a URL.
+
+</details>
 
 ### reset
 
