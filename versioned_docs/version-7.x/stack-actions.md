@@ -534,6 +534,7 @@ The method accepts the following arguments:
 
 - `name` - _string_ - Name of the route to navigate to.
 - `params` - _object_ - Screen params to pass to the destination route.
+- `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
 
 ```js
 import { StackActions } from '@react-navigation/native';
