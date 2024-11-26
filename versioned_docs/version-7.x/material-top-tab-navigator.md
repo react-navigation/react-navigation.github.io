@@ -398,10 +398,6 @@ Boolean indicating whether to make the tab bar scrollable.
 
 If you set this to `true`, you should also specify a width in `tabBarItemStyle` to improve the performance of initial render.
 
-#### `tabBarIconStyle`
-
-Style object for the tab icon container.
-
 #### `tabBarLabelStyle`
 
 Style object for the tab label.
