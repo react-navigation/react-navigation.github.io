@@ -291,7 +291,7 @@ adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:19000/--
 
 ## Third-party integrations
 
-React Native's `Linking` isn't the only way to handle deep linking. You might also want to integrate other services such as [Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links), [Branch](https://help.branch.io/developers-hub/docs/react-native) etc. which provide their own API for getting notified of incoming links.
+React Native's `Linking` isn't the only way to handle deep linking. You might also want to integrate other services such as [Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links)(Firebase will shut down Dynamic links on August 25, 2025), [Airbridge](https://help.airbridge.io/en/developers/deep-link-plan-react-native-sdk-v4), [Branch](https://help.branch.io/developers-hub/docs/react-native) etc. which provide their own API for getting notified of incoming links.
 
 To achieve this, you'd need to override how React Navigation subscribes to incoming links. To do so, you can provide your own [`getInitialURL`](navigation-container.md#linkinggetinitialurl) and [`subscribe`](navigation-container.md#linkingsubscribe) functions:
 
