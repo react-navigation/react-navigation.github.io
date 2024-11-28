@@ -425,10 +425,6 @@ Style to apply to the active indicator.
 
 Style to apply to the container view for the indicator.
 
-##### `labelStyle`
-
-Style to apply to the tab item label.
-
 ##### `contentContainerStyle`
 
 Style to apply to the inner container for tabs.
@@ -514,6 +510,10 @@ label: ({ route, labelText, focused, color }) => (
   <Text style={{ color, margin: 8 }}>{labelText ?? route.name}</Text>
 );
 ```
+
+##### `labelStyle`
+
+Style to apply to the tab item label.
 
 ##### `icon`
 
