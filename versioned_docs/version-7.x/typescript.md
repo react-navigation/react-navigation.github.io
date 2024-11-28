@@ -9,6 +9,12 @@ import TabItem from '@theme/TabItem';
 
 React Navigation can be configured to type-check screens and their params, as well as various other APIs using TypeScript. This provides better intelliSense and type safety when working with React Navigation.
 
+:::note
+
+React Navigation is designed to work with [`strict`](https://www.typescriptlang.org/tsconfig/#strict) mode in TypeScript. If you are not using `strict` mode, some things might not work as expected.
+
+:::
+
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
@@ -187,6 +193,12 @@ The type containing the mapping must be a type alias (e.g. `type RootStackParamL
 
 :::
 
+If you have an [`id`](./navigator.md#id) prop for your navigator, you will also need to pass it as a generic:
+
+```tsx
+const RootStack = createStackNavigator<RootStackParamList, 'MyStack'>();
+```
+
 ## Type checking screens
 
 To typecheck our screens, we need to annotate the `navigation` and the `route` props received by a screen. The navigator packages in React Navigation export generic types to define types for both the `navigation` and `route` props from the corresponding navigator.
@@ -211,7 +223,7 @@ The type takes 3 generics:
 - The name of the route the screen belongs to
 - The ID of the navigator (optional)
 
-If you have an `id` prop for your navigator, you can do:
+If you have an [`id`](./navigator.md#id) prop for your navigator, you can do:
 
 ```ts
 type Props = NativeStackScreenProps<RootStackParamList, 'Profile', 'MyStack'>;
