@@ -386,11 +386,19 @@ This is a short-hand for the following styles:
 }
 ```
 
-If the above styles are specified in `headerStyle` along with `headerShadowVisible: false`, then `headerShadowVisible: false` will take precedence.
+If any of the above styles are specified in `headerStyle` along with `headerShadowVisible: false`, then the styles in `headerStyle` will take precedence.
 
 #### `headerStyle`
 
-Style object for the header. You can specify a custom background color here, for example.
+Style object for the header. You can specify a custom background color here, for example:
+
+```js
+{
+  backgroundColor: 'tomato',
+}
+```
+
+Note that `headerStyle` won't take effect if you are also using [`headerBackground`](#headerbackground). In that case, you should style the element returned from `headerBackground` instead.
 
 #### `headerTitleStyle`
 
