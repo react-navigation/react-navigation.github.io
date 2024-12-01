@@ -26,6 +26,20 @@ Here are some resources to help you out:
 - `expo` >= 52 (if you use [Expo Go](https://expo.dev/go))
 - `typescript` >= 5.0.0 (if you use TypeScript)
 
+## Starter template
+
+If you're starting a new project, you can use the [React Navigation template](https://github.com/react-navigation/template) to quickly set up a new project with [Static configuration](#static-configuration):
+
+```bash
+npx create-expo-app@latest --template https://github.com/react-navigation/template
+```
+
+See the project's `README.md` for more information on how to get started.
+
+If you created a new project using the template, you can skip the installation steps below and move on to ["Hello React Navigation"](hello-react-navigation.md?config=static).
+
+Otherwise, you can follow the instructions below to install React Navigation into your existing project.
+
 ## Installation
 
 Install the required packages in your React Native project:
