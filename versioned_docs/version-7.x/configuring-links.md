@@ -1246,6 +1246,52 @@ const config = {
 
 Depending on your requirements, you can use this functionality to parse and stringify more complex data.
 
+## Matching regular expressions
+
+If you need more complex matching logic, you can use regular expressions to match the path. For example, if you want to use the pattern `@username` to match a user's profile, you can use a regular expression to match the path.
+
+Regular expressions can be specified between parentheses `(` and `)` in the after a param name. For example:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Profile: {
+      screen: ProfileScreen,
+      linking: {
+        path: ':username(@[A-Za-z0-9_]+)',
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const config = {
+  screens: {
+    Profile: ':username(@[A-Za-z0-9_]+)',
+  },
+};
+```
+
+</TabItem>
+</Tabs>
+
+This will only match the path if it starts with `@` followed by alphanumeric characters or underscores. For example, the URL `/@jane` will match the `Profile` screen, but `/jane` won't.
+
+Regular expressions are intended to only match path segments, not the entire path. So avoid using `/`, `^`, `$`, etc. in the regular expressions.
+
+:::warning
+
+Regular expressions are an advanced feature. They cannot be validated to warn you about potential issues, so it's up to you to ensure that the regular expression is correct.
+
+:::
+
 ## Advanced cases
 
 For some advanced cases, specifying the mapping may not be sufficient. To handle such cases, you can specify a custom function to parse the URL into a state object ([`getStateFromPath`](navigation-container.md#linkinggetstatefrompath)), and a custom function to serialize the state object into an URL ([`getPathFromState`](navigation-container.md#linkinggetpathfromstate)).
