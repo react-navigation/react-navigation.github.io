@@ -1248,7 +1248,7 @@ Depending on your requirements, you can use this functionality to parse and stri
 
 ## Matching regular expressions
 
-If you need more complex matching logic, you can use regular expressions to match the path. For example, if you want to use the pattern `@username` to match a user's profile, you can use a regular expression to match the path.
+If you need more complex matching logic, you can use regular expressions to match the path. For example, if you want to use the pattern `@username` to match a user's profile, you can use a regular expression to match the path. This allows you to have the same path pattern for multiple screens, but fine-tune the matching logic to be more specific for a particular screen.
 
 Regular expressions can be specified between parentheses `(` and `)` in the after a param name. For example:
 
@@ -1258,6 +1258,12 @@ Regular expressions can be specified between parentheses `(` and `)` in the afte
 ```js
 const RootStack = createStackNavigator({
   screens: {
+    Feed: {
+      screen: FeedScreen,
+      linking: {
+        path: ':sort(latest|popular)',
+      },
+    },
     Profile: {
       screen: ProfileScreen,
       linking: {
@@ -1274,6 +1280,7 @@ const RootStack = createStackNavigator({
 ```js
 const config = {
   screens: {
+    Feed: ':sort(latest|popular)',
     Profile: ':username(@[A-Za-z0-9_]+)',
   },
 };
@@ -1291,6 +1298,56 @@ Regular expressions are intended to only match path segments, not the entire pat
 Regular expressions are an advanced feature. They cannot be validated to warn you about potential issues, so it's up to you to ensure that the regular expression is correct.
 
 :::
+
+## Alias for paths
+
+If you want to have multiple paths for the same screen, you can use the `alias` property to specify an array of paths. This can be useful to keep backward compatibility with old URLs while transitioning to a new URL structure.
+
+For example, if you want to match both `/users/:id` and `/:id` to the `Profile` screen, you can do this:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Profile: {
+      screen: ProfileScreen,
+      linking: {
+        path: ':id',
+        alias: ['users/:id'],
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const config = {
+  screens: {
+    Profile: {
+      path: ':id',
+      alias: ['users/:id'],
+    },
+  },
+};
+```
+
+</TabItem>
+</Tabs>
+
+In this case, when the URL is `/users/jane` or `/jane`, it'll match the `Profile` screen. The `path` is the primary pattern that will be used to generate the URL, e.g. when navigating to the `Profile` screen in the app on the Web. The patterns in `alias` will be ignored when generating URLs. The `alias` patterns are not used for matching any child screens in nested navigators.
+
+On the web, if a screen containing an alias contains a nested navigator, the URL matching the alias will only be used to match the screen, and will be updated to the URL of the focused child screen once the app renders.
+
+Each item in the `alias` array can be a string matching the syntax of the `path` property, or an object with the following properties:
+
+- `path` (required) - The path pattern to match.
+- `exact` - Whether to match the path exactly. Defaults to `false`. See [Matching exact paths](#matching-exact-paths) for more details.
+- `parse` - Function to parse path segments into param values. See [Passing params](#passing-params) for more details.
 
 ## Advanced cases
 
