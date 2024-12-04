@@ -48,12 +48,6 @@
   border-bottom-right-radius: 0.5rem;
 }
 
-.spiroContainer {
-  color: var(--ifm-home-color-background-secondary);
-  position: absolute;
-  z-index: 0;
-}
-
 .mainContent {
   position: relative;
 }
@@ -62,12 +56,14 @@
   font-size: 4.375rem;
   color: var(--ifm-home-color-text);
   font-weight: 900;
+  margin-bottom: 0;
 }
 
 .subText {
   font-size: 1.5rem;
   color: var(--ifm-home-color-text);
   font-weight: 600;
+  margin-top: 0;
 }
 
 .buttonContainer {
