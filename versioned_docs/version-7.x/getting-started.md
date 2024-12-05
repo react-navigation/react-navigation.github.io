@@ -31,7 +31,7 @@ Here are some resources to help you out:
 If you're starting a new project, you can use the [React Navigation template](https://github.com/react-navigation/template) to quickly set up a new project with [Static configuration](#static-configuration):
 
 ```bash
-npx create-expo-app@latest --template https://github.com/react-navigation/template
+npx create-expo-app@latest --template react-navigation/template
 ```
 
 See the project's `README.md` for more information on how to get started.
