@@ -200,11 +200,15 @@ Minimum swipe velocity that should activate opening the drawer. Defaults to `500
 
 This is only supported on iOS and Android.
 
-##### `gestureHandlerProps`
+#### `configureGestureHandler`
 
-Props to pass to the underlying pan gesture handler.
+Callback to configure the underlying [gesture from `react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/gesture). It receives the `gesture` object as an argument:
 
-This is only supported on iOS and Android.
+```js
+configureGestureHandler={({ gesture }) => {
+  return gesture.enableTrackpadTwoFingerGesture(false);
+}}
+```
 
 ##### `children`
 

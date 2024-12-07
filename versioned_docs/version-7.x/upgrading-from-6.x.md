@@ -451,7 +451,7 @@ We have removed all of the previously deprecated APIs. These APIs were deprecate
     - `minSwipeDistance` - use `swipeMinDistance` option instead
     - `overlayColor` - use `overlayColor` option instead
     - `statusBarAnimation` - use `drawerStatusBarAnimation` option instead
-    - `gestureHandlerProps` - use `gestureHandlerProps` option instead
+    - `gestureHandlerProps` - use `configureGestureHandler` option instead
 - `@react-navigation/bottom-tabs`
   - Removed `lazy` prop - use `lazy` option instead
   - Removed `tabBarOptions` prop which contained following options:
