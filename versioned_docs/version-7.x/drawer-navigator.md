@@ -534,9 +534,15 @@ Color overlay to be displayed on top of the content view when drawer gets open. 
 
 Style object for the component wrapping the screen content.
 
-#### `gestureHandlerProps`
+#### `configureGestureHandler`
 
-Props to pass to the underlying pan gesture handler.
+Callback to configure the underlying [gesture from `react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/gesture). It receives the `gesture` object as an argument:
+
+```js
+configureGestureHandler: ({ gesture }) => {
+  return gesture.enableTrackpadTwoFingerGesture(false);
+},
+```
 
 This is not supported on Web.
 
