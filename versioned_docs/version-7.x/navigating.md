@@ -82,7 +82,7 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/simple-details.mp4" />
+  <source src="/assets/7.x/fundamentals/NavigateBasic.mp4" />
 </video>
 
 Let's break this down:
@@ -213,7 +213,7 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/stack-push.mp4" />
+  <source src="/assets/7.x/fundamentals/navigateAgain.mp4" />
 </video>
 
 Each time you call `push` we add a new route to the navigation stack. When you call `navigate` it only pushes a new route if you're not already on that route.
@@ -281,7 +281,7 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/back-home.mp4" />
+  <source src="/assets/7.x/fundamentals/navigateGoBack.mp4" />
 </video>
 
 :::note
@@ -353,7 +353,7 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/pop-to-top.mp4" />
+  <source src="/assets/7.x/fundamentals/navigatePopToTop.mp4" />
 </video>
 
 ## Summary
