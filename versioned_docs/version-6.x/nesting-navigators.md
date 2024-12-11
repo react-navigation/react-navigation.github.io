@@ -193,6 +193,12 @@ navigation.navigate('Root', {
 
 In the above case, you're navigating to the `Media` screen, which is in a navigator nested inside the `Sound` screen, which is in a navigator nested inside the `Settings` screen.
 
+:::warning
+
+The `screen` and related params are reserved for internal use and are managed by React Navigation. While you can access `route.params.screen` etc. in the parent screens, relying on them may lead to unexpected behavior.
+
+:::
+
 ### Rendering initial route defined in the navigator
 
 By default, when you navigate a screen in the nested navigator, the specified screen is used as the initial screen and the initial route prop on the navigator is ignored. This behaviour is different from the React Navigation 4.
