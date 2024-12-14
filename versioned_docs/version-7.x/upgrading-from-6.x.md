@@ -27,7 +27,7 @@ Due to backward compatibility reasons, React Navigation 5 and 6 support navigati
 
 Due to these issues, we have a special API to navigate to a nested screen (`navigation.navigate(ParentScreenName, { screen: ScreenName })`).
 
-From these release, this is no longer the default behavior. If you're relying on this behavior in your app, you can pass the [`navigationInChildEnabled`](navigation-container.md#navigationinchildenabled) prop to `NavigationContainer` to keep the behavior until you are able to migrate:
+From this release moving forward, this is no longer the default behavior. If you're relying on this behavior in your app, you can pass the [`navigationInChildEnabled`](navigation-container.md#navigationinchildenabled) prop to `NavigationContainer` to keep the behavior until you are able to migrate:
 
 ```jsx
 <NavigationContainer navigationInChildEnabled>{/* ... */}</NavigationContainer>
