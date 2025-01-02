@@ -58,7 +58,7 @@ If you're not using Jest, then you'll need to mock these modules according to th
 
 ## Writing tests
 
-We recommend using [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) along with [`jest-native`](https://github.com/testing-library/jest-native) to write your tests.
+We recommend using [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) to write your tests.
 
 Example:
 
