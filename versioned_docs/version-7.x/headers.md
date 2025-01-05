@@ -681,7 +681,6 @@ You might be wondering, why `headerTitle` when we provide a component and not `t
 </TabItem>
 </Tabs>
 
-
 ## Additional configuration
 
 You can read the full list of available `options` for screens inside of a native stack navigator in the [`createNativeStackNavigator` reference](native-stack-navigator.md#options).
