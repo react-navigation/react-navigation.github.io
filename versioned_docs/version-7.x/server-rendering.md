@@ -213,7 +213,7 @@ function NotFound() {
   const status = React.useContext(StatusCodeContext);
 
   if (status) {
-    staus.code = 404;
+    status.code = 404;
   }
 
   return (
