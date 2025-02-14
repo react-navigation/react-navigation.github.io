@@ -1013,4 +1013,4 @@ function ModalScreen({ navigation }) {
 }
 ```
 
-Here we animate the scale of the dialog, and also add an overlay to close the dialog.
+Here we animate the scale of the dialog, and also add an overlay to close the dialog create via reanimated.
