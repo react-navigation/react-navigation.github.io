@@ -411,6 +411,8 @@ act(() => jest.runAllTimers());
 
 If we hadn't used fake timers in this example, the test would have failed.
 
+In the previous example we didn't use fake timers because `BottomTabNavigator` by default does not use any animations for the transition.
+
 ### Example 3
 
 Always displays settings screen after settings tab bar button press.
