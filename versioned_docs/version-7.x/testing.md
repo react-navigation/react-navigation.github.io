@@ -356,7 +356,7 @@ test('surprise text appears after transition to surprise screen is complete', ()
   const StackNavigation = createStaticNavigation(StackNavigator);
   render(<StackNavigation />);
 
-  fireEvent.press(screen.queryByText('Click here!'));
+  fireEvent.press(screen.getByText('Click here!'));
 
   expect(screen.queryByText('Surprise!')).not.toBeOnTheScreen();
   act(() => jest.runAllTimers());
@@ -383,7 +383,7 @@ test('surprise text appears after transition to surprise screen is complete', ()
     </NavigationContainer>
   );
 
-  fireEvent.press(screen.queryByText('Click here!'));
+  fireEvent.press(screen.getByText('Click here!'));
 
   expect(screen.queryByText('Surprise!')).not.toBeOnTheScreen();
   act(() => jest.runAllTimers());
