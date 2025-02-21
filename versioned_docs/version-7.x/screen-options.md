@@ -502,3 +502,8 @@ The `navigation` object has a `setOptions` method that lets you update the optio
   Update options
 </Button>
 ```
+
+
+Futhermore, `navigation.setOptions()` can be used to set Custom header components for `headerLeft`, `headerTitle` and `headerRight`
+
+
