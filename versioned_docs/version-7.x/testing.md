@@ -475,8 +475,18 @@ const SettingsNavigator = createStackNavigator({
 
 export const TabNavigator = createBottomTabNavigator({
   screens: {
-    Home: HomeScreen,
-    SettingsStack: SettingsNavigator,
+    Home: {
+      screen: HomeScreen,
+      options: {
+        tabBarButtonTestID: 'homeTabBarButton',
+      },
+    },
+    SettingsStack: {
+      screen: SettingsNavigator,
+      options: {
+        tabBarButtonTestID: 'settingsTabBarButton',
+      },
+    },
   },
   screenOptions: {
     headerShown: false,
@@ -544,8 +554,16 @@ const Tab = createBottomTabNavigator();
 export function TabNavigator() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="SettingsStack" component={SettingsStackScreen} />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ tabBarButtonTestID: 'homeTabBarButton' }}
+      />
+      <Tab.Screen
+        name="SettingsStack"
+        component={SettingsStackScreen}
+        options={{ tabBarButtonTestID: 'settingsTabBarButton' }}
+      />
     </Tab.Navigator>
   );
 }
@@ -558,43 +576,33 @@ export function TabNavigator() {
 <TabItem value="static" label="Static" default>
 
 ```js
-import { expect, jest, test } from '@jest/globals';
+import { expect, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 
 import { TabNavigator } from './TabNavigator';
 
 test('always displays settings screen after settings tab bar button press', () => {
-  jest.useFakeTimers();
-
   const TabNavigation = createStaticNavigation(TabNavigator);
   render(<TabNavigation />);
 
-  const homeTabButton = screen.getByRole('button', {
-    name: 'Home, tab, 1 of 2',
-  });
+  const homeTabButton = screen.getByTestId('homeTabBarButton');
 
-  const settingsTabButton = screen.getByRole('button', {
-    name: 'SettingsStack, tab, 2 of 2',
-  });
+  const settingsTabButton = screen.getByTestId('settingsTabBarButton');
 
   const event = {};
 
   fireEvent.press(settingsTabButton, event);
-  act(() => jest.runAllTimers());
-  expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
+  expect(screen.getByText('Settings screen')).toBeOnTheScreen();
 
-  fireEvent.press(screen.queryByText('Go to Details'), event);
-  act(() => jest.runAllTimers());
-  expect(screen.queryByText('Details screen')).toBeOnTheScreen();
+  fireEvent.press(screen.getByText('Go to Details'), event);
+  expect(screen.getByText('Details screen')).toBeOnTheScreen();
 
   fireEvent.press(homeTabButton, event);
-  act(() => jest.runAllTimers());
-  expect(screen.queryByText('Home screen')).toBeOnTheScreen();
+  expect(screen.getByText('Home screen')).toBeOnTheScreen();
 
   fireEvent.press(settingsTabButton, event);
-  act(() => jest.runAllTimers());
-  expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
+  expect(screen.getByText('Settings screen')).toBeOnTheScreen();
 });
 ```
 
@@ -602,52 +610,43 @@ test('always displays settings screen after settings tab bar button press', () =
 <TabItem value="dynamic" label="Dynamic">
 
 ```js
-import { expect, jest, test } from '@jest/globals';
+import { expect, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 
 import { TabNavigator } from './TabNavigator';
 
 test('always displays settings screen after settings tab bar button press', () => {
-  jest.useFakeTimers();
-
   render(
     <NavigationContainer>
       <TabNavigator />
     </NavigationContainer>
   );
 
-  const homeTabButton = screen.getByRole('button', {
-    name: 'Home, tab, 1 of 2',
-  });
-  const settingsTabButton = screen.getByRole('button', {
-    name: 'SettingsStack, tab, 2 of 2',
-  });
+  const homeTabButton = screen.getByTestId('homeTabBarButton');
+
+  const settingsTabButton = screen.getByTestId('settingsTabBarButton');
 
   const event = {};
 
   fireEvent.press(settingsTabButton, event);
-  act(() => jest.runAllTimers());
-  expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
+  expect(screen.getByText('Settings screen')).toBeOnTheScreen();
 
-  fireEvent.press(screen.queryByText('Go to Details'), event);
-  act(() => jest.runAllTimers());
-  expect(screen.queryByText('Details screen')).toBeOnTheScreen();
+  fireEvent.press(screen.getByText('Go to Details'), event);
+  expect(screen.getByText('Details screen')).toBeOnTheScreen();
 
   fireEvent.press(homeTabButton, event);
-  act(() => jest.runAllTimers());
-  expect(screen.queryByText('Home screen')).toBeOnTheScreen();
+  expect(screen.getByText('Home screen')).toBeOnTheScreen();
 
   fireEvent.press(settingsTabButton, event);
-  act(() => jest.runAllTimers());
-  expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
+  expect(screen.getByText('Settings screen')).toBeOnTheScreen();
 });
 ```
 
 </TabItem>
 </Tabs>
 
-We query tab bar buttons, press buttons and check if rendered screens are correct.
+We get tab bar buttons, press buttons and check if rendered screens are correct.
 
 ### Example 4
 
