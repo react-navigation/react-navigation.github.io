@@ -502,3 +502,27 @@ The `navigation` object has a `setOptions` method that lets you update the optio
   Update options
 </Button>
 ```
+
+Futhermore, `navigation.setOptions()` can be used to set Custom header components for `headerLeft`, `headerTitle` and `headerRight`
+
+```js name="setOptions for navigation" snack dependencies=@expo/vector-icons
+import React, { useEffect } from 'react';
+
+const MyScreen = ({ navigation, route, ...props }) => {
+  useEffect(() => {
+    // Setting custom header components
+    navigation.setOptions({
+      headerLeft: <CustomHeaderLeftComponent {...props} />,  // Custom component on the left
+      headerTitle: <CustomHeaderTitleComponent {...props} />, // Custom title component
+      headerRight: <CustomHeaderRightComponent {...props} />, // Custom component on the right
+    });
+  }, [navigation, props]); // Adding 'props' as a dependency if required
+
+  return (
+    // Your screen content
+    <View>
+      <Text>My Screen Content</Text>
+    </View>
+  );
+};
+```
