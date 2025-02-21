@@ -83,135 +83,6 @@ We will go through some real-world case test code examples. Each code example co
 
 ### Example 1
 
-Navigate to settings screen by "Go to Settings" button press.
-
-<Tabs groupId="example" queryString="example">
-<TabItem value="static" label="Static" default>
-
-```js
-import { useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Button, Text, View } from 'react-native';
-
-const HomeScreen = () => {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home screen</Text>
-      <Button
-        onPress={() => navigation.navigate('Settings')}
-        title="Go to Settings"
-      />
-    </View>
-  );
-};
-
-const SettingsScreen = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings screen</Text>
-    </View>
-  );
-};
-
-export const StackNavigator = createStackNavigator({
-  screens: {
-    Home: HomeScreen,
-    Settings: SettingsScreen,
-  },
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-import { createStackNavigator } from '@react-navigation/stack';
-import { Button, Text, View } from 'react-native';
-
-const HomeScreen = ({ navigation }) => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home screen</Text>
-      <Button
-        onPress={() => navigation.navigate('Settings')}
-        title="Go to Settings"
-      />
-    </View>
-  );
-};
-
-const SettingsScreen = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings screen</Text>
-    </View>
-  );
-};
-
-export const StackNavigator = () => {
-  const Stack = createStackNavigator();
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Settings" component={SettingsScreen} />
-    </Stack.Navigator>
-  );
-};
-```
-
-</TabItem>
-</Tabs>
-
-<Tabs groupId="example" queryString="example">
-<TabItem value="static" label="Static" default>
-
-```js
-import { expect, test } from '@jest/globals';
-import { createStaticNavigation } from '@react-navigation/native';
-import { fireEvent, render, screen } from '@testing-library/react-native';
-
-import { StackNavigator } from './StackNavigator';
-
-test('navigates to settings by "Go to Settings" button press', () => {
-  const StackNavigation = createStaticNavigation(StackNavigator);
-  render(<StackNavigation />);
-
-  fireEvent.press(screen.queryByText('Go to Settings'));
-  expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-import { expect, test } from '@jest/globals';
-import { NavigationContainer } from '@react-navigation/native';
-import { fireEvent, render, screen } from '@testing-library/react-native';
-
-import { StackNavigator } from './StackNavigator';
-
-test('navigates to settings by "Go to Settings" button press', () => {
-  render(
-    <NavigationContainer>
-      <StackNavigator />
-    </NavigationContainer>
-  );
-
-  fireEvent.press(screen.queryByText('Go to Settings'));
-  expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
-});
-```
-
-</TabItem>
-</Tabs>
-
-We use `FireEvent` to press button and `expect` to check if rendered screen's content matches settings screen.
-
-### Example 2
-
 Navigate to settings screen by tab bar button press.
 
 <Tabs groupId="example" queryString="example">
@@ -239,8 +110,18 @@ const SettingsScreen = () => {
 
 export const TabNavigator = createBottomTabNavigator({
   screens: {
-    Home: HomeScreen,
-    Settings: SettingsScreen,
+    Home: {
+      screen: HomeScreen,
+      options: {
+        tabBarButtonTestID: 'homeTabBarButton',
+      },
+    },
+    Settings: {
+      screen: SettingsScreen,
+      options: {
+        tabBarButtonTestID: 'settingsTabBarButton',
+      },
+    },
   },
   screenOptions: {
     headerShown: false,
@@ -276,9 +157,182 @@ const Tab = createBottomTabNavigator();
 export const TabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarButtonTestID: 'homeTabBarButton',
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          tabBarButtonTestID: 'settingsTabBarButton',
+        }}
+      />
     </Tab.Navigator>
+  );
+};
+```
+
+</TabItem>
+</Tabs>
+
+<Tabs groupId="example" queryString="example">
+<TabItem value="static" label="Static" default>
+
+```js
+import { expect, test } from '@jest/globals';
+import { createStaticNavigation } from '@react-navigation/native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
+
+import { TabNavigator } from './TabNavigator';
+
+test('navigates to settings by tab bar button press', () => {
+  const TabNavigation = createStaticNavigation(TabNavigator);
+  render(<TabNavigation />);
+
+  const button = screen.getByTestId('settingsTabBarButton');
+
+  const event = {};
+  fireEvent.press(button, event);
+
+  expect(screen.getByText('Settings screen')).toBeOnTheScreen();
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+import { expect, test } from '@jest/globals';
+import { NavigationContainer } from '@react-navigation/native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
+
+import { TabNavigator } from './TabNavigator';
+
+test('navigates to settings by tab bar button press', () => {
+  render(
+    <NavigationContainer>
+      <TabNavigator />
+    </NavigationContainer>
+  );
+
+  const button = screen.getByTestId('settingsTabBarButton');
+
+  const event = {};
+  fireEvent.press(button, event);
+
+  expect(screen.getByText('Settings screen')).toBeOnTheScreen();
+});
+```
+
+</TabItem>
+</Tabs>
+
+We get the settings tab bar button using a `testID` assigned to it, press it using `fireEvent` and check if rendered content is correct.
+
+Tab bar buttons `handlePress` function expects to receive `GestureResponderEvent`. To avoid error you should pass `event` object as the second argument of `fireEvent`.
+
+```js
+// Pass event object to avoid error
+const event = {};
+fireEvent.press(button, event);
+```
+
+### Example 2
+
+Show text on another screen after transition to it ends.
+
+<Tabs groupId="example" queryString="example">
+<TabItem value="static" label="Static" default>
+
+```js
+import { useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Button, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+
+const HomeScreen = () => {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home screen</Text>
+      <Button
+        onPress={() => navigation.navigate('Surprise')}
+        title="Click here!"
+      />
+    </View>
+  );
+};
+
+const SurpriseScreen = () => {
+  const navigation = useNavigation();
+
+  const [textVisible, setTextVisible] = useState(false);
+
+  useEffect(() => {
+    navigation.addListener('transitionEnd', () => setTextVisible(true));
+  }, [navigation]);
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      {textVisible ? <Text>Surprise!</Text> : ''}
+    </View>
+  );
+};
+
+export const StackNavigator = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Surprise: SurpriseScreen,
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+import { createStackNavigator } from '@react-navigation/stack';
+import { useEffect, useState } from 'react';
+import { Button, Text, View } from 'react-native';
+
+const HomeScreen = ({ navigation }) => {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home screen</Text>
+      <Button
+        onPress={() => navigation.navigate('Surprise')}
+        title="Click here!"
+      />
+    </View>
+  );
+};
+
+const SurpriseScreen = ({ navigation }) => {
+  const [textVisible, setTextVisible] = useState(false);
+
+  useEffect(() => {
+    navigation.addListener('transitionEnd', () => setTextVisible(true));
+  }, [navigation]);
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      {textVisible ? <Text>Surprise!</Text> : ''}
+    </View>
+  );
+};
+
+export const StackNavigator = () => {
+  const Stack = createStackNavigator();
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Surprise" component={SurpriseScreen} />
+    </Stack.Navigator>
   );
 };
 ```
@@ -294,21 +348,19 @@ import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 
-import { TabNavigator } from './TabNavigator';
+import { StackNavigator } from './StackNavigator';
 
-test('navigates to settings by tab bar button press', () => {
+test('surprise text appears after transition to surprise screen is complete', () => {
   jest.useFakeTimers();
 
-  const TabNavigation = createStaticNavigation(TabNavigator);
-  render(<TabNavigation />);
+  const StackNavigation = createStaticNavigation(StackNavigator);
+  render(<StackNavigation />);
 
-  const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
+  fireEvent.press(screen.queryByText('Click here!'));
 
-  const event = {};
-  fireEvent.press(button, event);
+  expect(screen.queryByText('Surprise!')).not.toBeOnTheScreen();
   act(() => jest.runAllTimers());
-
-  expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
+  expect(screen.getByText('Surprise!')).toBeOnTheScreen();
 });
 ```
 
@@ -320,48 +372,31 @@ import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 
-import { TabNavigator } from './TabNavigator';
+import { StackNavigator } from './StackNavigator';
 
-test('navigates to settings by tab bar button press', () => {
+test('surprise text appears after transition to surprise screen is complete', () => {
   jest.useFakeTimers();
 
   render(
     <NavigationContainer>
-      <TabNavigator />
+      <StackNavigator />
     </NavigationContainer>
   );
 
-  const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
+  fireEvent.press(screen.queryByText('Click here!'));
 
-  const event = {};
-  fireEvent.press(button, event);
+  expect(screen.queryByText('Surprise!')).not.toBeOnTheScreen();
   act(() => jest.runAllTimers());
-
-  expect(screen.queryByText('Settings screen')).toBeOnTheScreen();
+  expect(screen.getByText('Surprise!')).toBeOnTheScreen();
 });
 ```
 
 </TabItem>
 </Tabs>
 
-We get settings tab bar button, press it and check if rendered content is correct.
+We press the "Click here!" button using `fireEvent` and check that the text does not appear right away but only after the transition between screens ends.
 
-To find settings tab bar button you cannot use `queryByText`, because there is no text that can be queried. You can use `getByRole` instead and pass object with `name` as the second argument.
-
-```js
-// Pass object with settings tab name
-const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
-```
-
-Tab bar buttons `handlePress` function expects to receive `GestureResponderEvent`. To avoid error you should pass `event` object as the second argument of `fireEvent`.
-
-```js
-// Pass event object to avoid error
-const event = {};
-fireEvent.press(button, event);
-```
-
-While writing tests containing navigation with animations you need to wait until animations finish before querying components. To do so, you have to use `fake timers`. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of times function to use fake clock. They allow you to instantly skip animation time. To avoid getting state change error, wrap `runAllTimers` in `act`.
+While writing tests containing navigation with animations (in this example we have a `StackNavigator`, which uses an animation for the transition based on the platform and OS version) you need to wait until animations finish before proceeding further. To do so, you have to use `fake timers`. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of times function to use fake clock. They allow you to instantly skip animation time. To avoid getting state change error, wrap `runAllTimers` in `act`.
 
 ```js
 // Enable fake timers
@@ -373,6 +408,8 @@ jest.useFakeTimers();
 // Skip all timers including animations
 act(() => jest.runAllTimers());
 ```
+
+If we hadn't used fake timers in this example, the test would have failed.
 
 ### Example 3
 
