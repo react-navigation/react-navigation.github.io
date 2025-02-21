@@ -502,3 +502,14 @@ The `navigation` object has a `setOptions` method that lets you update the optio
   Update options
 </Button>
 ```
+Furthermore, to Set Navigation headers using `navigation.setOptions`, it majorly accepts `headerTitle`, `headerLeft` and `headerRight`
+```js
+ useEffect(() => {
+    // Adding custom header components 
+    navigation.setOptions({
+      headerLeft: <CustomHeaderLeftComponent {...props} />,
+      headerTitle: <CustomHeaderTitleComponent {...props} />,
+      headerRight: <CustomHeaderRightComponent {...props} />,
+    });
+  }, []);
+```
