@@ -848,6 +848,8 @@ async function mockedFetch() {
 }
 
 test('on every profile screen focus, displays loading state while waiting for data and then shows fetched profile', async () => {
+  jest.useFakeTimers();
+
   const TabNavigation = createStaticNavigation(TabNavigator);
   render(<TabNavigation />);
 
@@ -898,6 +900,8 @@ async function mockedFetch() {
 }
 
 test('on every profile screen focus, displays loading state while waiting for data and then shows fetched profile', async () => {
+  jest.useFakeTimers();
+
   render(
     <NavigationContainer>
       <TabNavigator />
