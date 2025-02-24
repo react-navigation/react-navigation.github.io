@@ -886,6 +886,10 @@ Works only when `presentation` is set to `formSheet`.
 
 :::
 
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/formSheet-sheetAllowedDetents.mp4" />
+</video>
+
 Describes heights where a sheet can rest.
 
 Supported values:
@@ -908,6 +912,10 @@ Works only when `presentation` is set to `formSheet`.
 
 :::
 
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/formSheet-sheetElevation.mp4" />
+</video>
+
 Integer value describing elevation of the sheet, impacting shadow on the top edge of the sheet.
 
 Not dynamic - changing it after the component is rendered won't have an effect.
@@ -923,6 +931,10 @@ Only supported on Android.
 Works only when `presentation` is set to `formSheet`.
 
 :::
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/formSheet-sheetExpandsWhenScrolledToEdge.mp4" />
+</video>
 
 Whether the sheet should expand to larger detent when scrolling.
 
@@ -944,6 +956,10 @@ Works only when `presentation` is set to `formSheet`.
 
 :::
 
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/formSheet-sheetCornerRadius.mp4" />
+</video>
+
 The corner radius that the sheet will try to render with.
 
 If set to non-negative value it will try to render sheet with provided radius, else it will apply system default.
@@ -959,6 +975,10 @@ Only supported on Android and iOS.
 Works only when `presentation` is set to `formSheet`.
 
 :::
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/formSheet-sheetInitialDetentIndex.mp4" />
+</video>
 
 **Index** of the detent the sheet should expand to after being opened.
 
@@ -978,6 +998,10 @@ Works only when `presentation` is set to `formSheet`.
 
 :::
 
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/formSheet-sheetGrabberVisible.mp4" />
+</video>
+
 Boolean indicating whether the sheet shows a grabber at the top.
 
 Defaults to `false`.
@@ -991,6 +1015,10 @@ Only supported on iOS.
 Works only when `presentation` is set to `formSheet`.
 
 :::
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/formSheet-sheetLargestUndimmedDetentIndex.mp4" />
+</video>
 
 The largest sheet detent for which a view underneath won't be dimmed.
 
