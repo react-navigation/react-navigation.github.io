@@ -648,6 +648,8 @@ test('always displays settings screen after settings tab bar button press', () =
 
 We get tab bar buttons, press buttons and check if rendered screens are correct.
 
+In this example, we don't need to use fake timers because text from the next screen is available using `getByText` even before the animation ends.
+
 ### Example 4
 
 On every profile screen focus, display loading state while waiting for data and then show fetched profile.
