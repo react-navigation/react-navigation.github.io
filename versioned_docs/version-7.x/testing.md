@@ -650,7 +650,7 @@ We get tab bar buttons, press buttons and check if rendered screens are correct.
 
 ### Example 4
 
-Display loading state while waiting for data and then fetched profile nick on every profile screen focus.
+On every profile screen focus, display loading state while waiting for data and then show fetched profile.
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -678,16 +678,29 @@ function ProfileScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) => setData(data))
-        .catch((error) => setError(error))
-        .finally(() => setLoading(false));
+      let isActive = true;
+
+      const fetchUser = async () => {
+        try {
+          const data = await (await fetch(url)).json();
+
+          if (isActive) {
+            setData(data);
+            setLoading(false);
+          }
+        } catch (error) {
+          setError(error);
+          setLoading(false);
+        }
+      };
+
+      fetchUser();
 
       return () => {
         setData(undefined);
         setError(undefined);
         setLoading(true);
+        isActive = false;
       };
     }, [])
   );
@@ -703,8 +716,18 @@ function ProfileScreen() {
 
 export const TabNavigator = createBottomTabNavigator({
   screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
+    Home: {
+      screen: HomeScreen,
+      options: {
+        tabBarButtonTestID: 'homeTabBarButton',
+      },
+    },
+    Profile: {
+      screen: ProfileScreen,
+      options: {
+        tabBarButtonTestID: 'profileTabBarButton',
+      },
+    },
   },
   screenOptions: {
     headerShown: false,
@@ -738,16 +761,29 @@ function ProfileScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) => setData(data))
-        .catch((error) => setError(error))
-        .finally(() => setLoading(false));
+      let isActive = true;
+
+      const fetchUser = async () => {
+        try {
+          const data = await (await fetch(url)).json();
+
+          if (isActive) {
+            setData(data);
+            setLoading(false);
+          }
+        } catch (error) {
+          setError(error);
+          setLoading(false);
+        }
+      };
+
+      fetchUser();
 
       return () => {
         setData(undefined);
         setError(undefined);
         setLoading(true);
+        isActive = false;
       };
     }, [])
   );
@@ -766,8 +802,16 @@ const Tab = createBottomTabNavigator();
 export function TabNavigator() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ tabBarButtonTestID: 'homeTabBarButton' }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{ tabBarButtonTestID: 'profileTabBarButton' }}
+      />
     </Tab.Navigator>
   );
 }
@@ -782,7 +826,7 @@ export function TabNavigator() {
 ```js
 import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 
 import { TabNavigator } from './TabNavigator';
 
@@ -801,25 +845,17 @@ async function mockedFetch() {
   };
 }
 
-test('Display loading state while waiting for data and then fetched profile nick on every profile screen focus', async () => {
-  jest.useFakeTimers();
-
+test('on every profile screen focus, displays loading state while waiting for data and then shows fetched profile', async () => {
   const TabNavigation = createStaticNavigation(TabNavigator);
   render(<TabNavigation />);
 
   const spy = jest.spyOn(window, 'fetch').mockImplementation(mockedFetch);
 
-  const homeTabButton = screen.getByRole('button', {
-    name: 'Home, tab, 1 of 2',
-  });
-
-  const profileTabButton = screen.getByRole('button', {
-    name: 'Profile, tab, 2 of 2',
-  });
+  const homeTabButton = screen.getByTestId('homeTabBarButton');
+  const profileTabButton = screen.getByTestId('profileTabBarButton');
 
   const event = {};
   fireEvent.press(profileTabButton, event);
-  act(() => jest.runAllTimers());
 
   expect(screen.queryByText('Loading')).toBeOnTheScreen();
   expect(spy).toHaveBeenCalled();
@@ -827,7 +863,6 @@ test('Display loading state while waiting for data and then fetched profile nick
 
   fireEvent.press(homeTabButton, event);
   fireEvent.press(profileTabButton, event);
-  act(() => jest.runAllTimers());
 
   expect(screen.queryByText('Loading')).toBeOnTheScreen();
   expect(spy).toHaveBeenCalled();
@@ -841,7 +876,7 @@ test('Display loading state while waiting for data and then fetched profile nick
 ```js
 import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 
 import { TabNavigator } from './TabNavigator';
 
@@ -860,9 +895,7 @@ async function mockedFetch() {
   };
 }
 
-test('Display loading state while waiting for data and then fetched profile nick on every profile screen focus', async () => {
-  jest.useFakeTimers();
-
+test('on every profile screen focus, displays loading state while waiting for data and then shows fetched profile', async () => {
   render(
     <NavigationContainer>
       <TabNavigator />
@@ -871,26 +904,20 @@ test('Display loading state while waiting for data and then fetched profile nick
 
   const spy = jest.spyOn(window, 'fetch').mockImplementation(mockedFetch);
 
-  const homeTabButton = screen.getByRole('button', {
-    name: 'Home, tab, 1 of 2',
-  });
-  const profileTabButton = screen.getByRole('button', {
-    name: 'Profile, tab, 2 of 2',
-  });
+  const homeTabButton = screen.getByTestId('homeTabBarButton');
+  const profileTabButton = screen.getByTestId('profileTabBarButton');
 
   const event = {};
   fireEvent.press(profileTabButton, event);
-  act(() => jest.runAllTimers());
 
-  expect(screen.queryByText('Loading')).toBeOnTheScreen();
+  expect(screen.getByText('Loading')).toBeOnTheScreen();
   expect(spy).toHaveBeenCalled();
   expect(await screen.findByText('CookieDough')).toBeOnTheScreen();
 
   fireEvent.press(homeTabButton, event);
   fireEvent.press(profileTabButton, event);
-  act(() => jest.runAllTimers());
 
-  expect(screen.queryByText('Loading')).toBeOnTheScreen();
+  expect(screen.getByText('Loading')).toBeOnTheScreen();
   expect(spy).toHaveBeenCalled();
   expect(await screen.findByText('CookieDough')).toBeOnTheScreen();
 });
@@ -899,7 +926,7 @@ test('Display loading state while waiting for data and then fetched profile nick
 </TabItem>
 </Tabs>
 
-We query tab buttons and mock fetch function using `spyOn` and `mockImplementation`. We navigate to profile screen and check if loading state is rendered correctly. Then, to check if fetched data is displayed, we use `findByText` - we need to wait for the fetch to finish before checking it's result. To ensure that operation will succeed not only on the first focus, we navigate back to home, then to settings and check loading state and fetched data again.
+We query tab buttons and mock fetch function using `spyOn` and `mockImplementation`. We navigate to profile screen and check if loading state is rendered correctly. Then, to check if fetched data is displayed, we use `findByText` - we need to wait for the fetch to finish before checking its result. To ensure that operation will succeed not only on the first focus, we navigate back to home, then to settings and check loading state and fetched data again.
 
 To make test deterministic and isolate it from the real backend you can mock fetch function. You can use `spyOn` to override real implementation of fetch with `mockedFetch`.
 
@@ -920,7 +947,7 @@ async function mockedFetch() {
   };
 }
 
-test('display loading state while waiting for data and then fetched profile nick on every profile screen focus', async () => {
+test('on every profile screen focus, displays loading state while waiting for data and then shows fetched profile', async () => {
   // ...
 
   // Replace fetch implementation with mock
@@ -941,3 +968,4 @@ There are a couple of things to keep in mind when writing tests for components u
 
 1. Avoid mocking React Navigation. Instead, use a real navigator in your tests.
 2. Don't check for navigation actions. Instead, check for the result of the navigation such as the screen being rendered.
+3. Remember to use fake timers when testing code that involves animations (e.g. transitions between screens with `StackNavigator`).
