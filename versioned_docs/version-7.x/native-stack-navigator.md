@@ -864,9 +864,12 @@ Supported values:
   <video playsInline autoPlay muted loop>
    <source src="/assets/7.x/native-stack/presentation-fullScreenModal.mp4" />
   </video>
-- `formSheet`: will use "UIModalPresentationFormSheet" modal style on iOS and will fallback to "modal" on Android.
+- `formSheet`: will use "BottomSheetBehavior" on Android and "UIModalPresentationFormSheet" modal style on iOS.
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/presentation-formSheet.mp4" />
+   <source src="/assets/7.x/native-stack/presentation-formSheet-android.mp4" />
+  </video>
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/native-stack/presentation-formSheet-ios.mp4" />
   </video>
 
 :::warning
