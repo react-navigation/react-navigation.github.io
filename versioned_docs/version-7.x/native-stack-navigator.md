@@ -947,7 +947,7 @@ Only supported on iOS.
 
 :::warning
 
-Please note that for this interaction to work, the ScrollView must be "first-child-chain" descendant of the Screen component. This is a platform defined behaviour.
+Please note that for this interaction to work, the ScrollView must be "first-subview-chain" descendant of the Screen component. This restriction is due to platform requirements.
 
 :::
 
