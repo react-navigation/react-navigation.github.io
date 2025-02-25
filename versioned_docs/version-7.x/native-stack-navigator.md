@@ -874,7 +874,7 @@ Supported values:
 
 :::warning
 
-Due to architectural problems (lack of support of synchronous layout on UI thread by RN), `presentation: 'formSheet'` on Android has limited support for `flex: 1`. The tradeoff is necessary to prevent "sheet flickering" problem. There are also some problems with getting nested ScrollViews to work properly.
+Due to technical issues in platform component integration with `react-native`, `presentation: 'formSheet'` on Android has limited support for `flex: 1`. The tradeoff is necessary to prevent "sheet flickering" problem. There are also some problems with getting nested ScrollViews to work properly.
 
 Currently, you should avoid using `flex: 1` on top level content container you pass to the sheet.
 
