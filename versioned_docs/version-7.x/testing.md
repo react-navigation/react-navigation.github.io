@@ -85,7 +85,7 @@ We recommend using [React Native Testing Library](https://callstack.github.io/re
 
 We will go through some real-world case test code examples. Each code example consists of tested navigator and test code file.
 
-### Example 1
+### Example 1 - Navigation between tabs
 
 Navigate to settings screen by tab bar button press.
 
@@ -245,9 +245,9 @@ const event = {};
 fireEvent.press(button, event);
 ```
 
-### Example 2
+### Example 2 - Reacting to navigation events
 
-Show text on another screen after transition to it ends.
+Show text on another screen after transition is completed.
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -415,11 +415,11 @@ act(() => jest.runAllTimers());
 
 If we hadn't used fake timers in this example, the test would have failed.
 
-In the previous example we didn't use fake timers because `BottomTabNavigator` by default does not use any animations for the transition.
+In the previous example we didn't use fake timers because `BottomTabNavigator` by default does not use any transition animations.
 
-### Example 3
+### Example 3 - Enforce navigator state in response to navigation event
 
-Always displays settings screen after settings tab bar button press.
+Always display settings screen after settings tab bar button is pressed.
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -654,7 +654,7 @@ We get tab bar buttons, press buttons and check if rendered screens are correct.
 
 In this example, we don't need to use fake timers because text from the next screen is available using `getByText` even before the animation ends.
 
-### Example 4
+### Example 4 - `useFocusEffect` hook and data fetching
 
 On every profile screen focus, display loading state while waiting for data and then show fetched profile.
 
