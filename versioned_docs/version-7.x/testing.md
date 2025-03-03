@@ -29,7 +29,9 @@ To add the mocks, create a file `jest/setup.js` (or any other file name of your 
 import 'react-native-gesture-handler/jestSetup';
 
 // Include this section for mocking react-native-reanimated
-require('react-native-reanimated').setUpTests();
+import { setUpTests } from 'react-native-reanimated';
+
+setUpTests();
 
 // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
@@ -45,12 +47,6 @@ Then we need to use this setup file in our jest config. You can add it under `se
 ```
 
 Make sure that the path to the file in `setupFilesAfterEnv` is correct. Jest will run these files before running your tests, so it's the best place to put your global mocks.
-
-:::info
-
-Depending on the versions of React Native Reanimated and Jest you're using, mocking Reanimated might require different configuration - please refer to [the docs of Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/guides/testing#setup) for details.
-
-:::
 
 If your configuration works correctly, you can skip this section, but in some unusual cases you will need to mock `react-native-screens` as well. To add mock of the particular component, e.g. `Screen`, add the following code in `jest/setup.js` file:
 
