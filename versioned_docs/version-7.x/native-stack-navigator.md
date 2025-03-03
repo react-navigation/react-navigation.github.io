@@ -864,6 +864,7 @@ Supported values:
   <video playsInline autoPlay muted loop>
    <source src="/assets/7.x/native-stack/presentation-fullScreenModal.mp4" />
   </video>
+
 - `formSheet`: will use "BottomSheetBehavior" on Android and "UIModalPresentationFormSheet" modal style on iOS.
   <video playsInline autoPlay muted loop>
    <source src="/assets/7.x/native-stack/presentation-formSheet-android.mp4" />
@@ -871,6 +872,169 @@ Supported values:
   <video playsInline autoPlay muted loop>
    <source src="/assets/7.x/native-stack/presentation-formSheet-ios.mp4" />
   </video>
+
+##### Using Form Sheet
+
+To use Form Sheet for your screen, add `presentation: 'formSheet'` to the `options`.
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Form Sheet" snack
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+
+// codeblock-focus-start
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+// codeblock-focus-end
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ padding: 15 }}>
+      <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Profile Screen</Text>
+      <Text style={{ marginTop: 10 }}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan
+        euismod enim, quis porta ligula egestas sed. Maecenas vitae consequat
+        odio, at dignissim lorem. Ut euismod eros ac mi ultricies, vel pharetra
+        tortor commodo. Interdum et malesuada fames ac ante ipsum primis in
+        faucibus. Nullam at urna in metus iaculis aliquam at sed quam. In
+        ullamcorper, ex ut facilisis commodo, urna diam posuere urna, at
+        condimentum mi orci ac ipsum. In hac habitasse platea dictumst. Donec
+        congue pharetra ipsum in finibus. Nulla blandit finibus turpis, non
+        vulputate elit viverra a. Curabitur in laoreet nisl.
+      </Text>
+      <Button onPress={() => navigation.goBack()} style={{ marginTop: 15 }}>
+        Go back
+      </Button>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+    },
+    Profile: {
+      screen: ProfileScreen,
+      options: {
+        presentation: 'formSheet',
+        headerShown: false,
+        sheetAllowedDetents: 'fitToContents',
+      },
+    },
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Form Sheet" snack
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+// codeblock-focus-start
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          presentation: 'formSheet',
+          headerShown: false,
+          sheetAllowedDetents: 'fitToContents',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+// codeblock-focus-end
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ padding: 15 }}>
+      <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Profile Screen</Text>
+      <Text style={{ marginTop: 10 }}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan
+        euismod enim, quis porta ligula egestas sed. Maecenas vitae consequat
+        odio, at dignissim lorem. Ut euismod eros ac mi ultricies, vel pharetra
+        tortor commodo. Interdum et malesuada fames ac ante ipsum primis in
+        faucibus. Nullam at urna in metus iaculis aliquam at sed quam. In
+        ullamcorper, ex ut facilisis commodo, urna diam posuere urna, at
+        condimentum mi orci ac ipsum. In hac habitasse platea dictumst. Donec
+        congue pharetra ipsum in finibus. Nulla blandit finibus turpis, non
+        vulputate elit viverra a. Curabitur in laoreet nisl.
+      </Text>
+      <Button onPress={() => navigation.goBack()} style={{ marginTop: 15 }}>
+        Go back
+      </Button>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
 
 :::warning
 
