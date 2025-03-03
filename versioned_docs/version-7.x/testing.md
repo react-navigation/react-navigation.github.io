@@ -415,7 +415,7 @@ In the previous example we didn't use fake timers because `BottomTabNavigator` b
 
 ### Example 3 - Enforce navigator state in response to navigation event
 
-Always display settings screen after settings tab bar button is pressed.
+Display settings screen after settings tab bar button is pressed.
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -582,7 +582,7 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 
 import { TabNavigator } from './TabNavigator';
 
-test('always displays settings screen after settings tab bar button press', () => {
+test('displays settings screen after settings tab bar button press', () => {
   const TabNavigation = createStaticNavigation(TabNavigator);
   render(<TabNavigation />);
 
@@ -616,7 +616,7 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 
 import { TabNavigator } from './TabNavigator';
 
-test('always displays settings screen after settings tab bar button press', () => {
+test('displays settings screen after settings tab bar button press', () => {
   render(
     <NavigationContainer>
       <TabNavigator />
