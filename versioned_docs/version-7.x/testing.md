@@ -215,14 +215,28 @@ test('navigates to settings by tab bar button press', async () => {
 </TabItem>
 </Tabs>
 
-We get the settings tab bar button using a `testID` assigned to it, press it using `fireEvent` and check if rendered content is correct.
-
-Tab bar buttons `handlePress` function expects to receive `GestureResponderEvent`. To avoid error you should pass `event` object as the second argument of `fireEvent`.
+First, we need to create a User Event object instance from `react-native-testing-library` in order to be able to trigger user events.
 
 ```js
-// Pass event object to avoid error
-const event = {};
-fireEvent.press(button, event);
+// Create User Event object instance
+const user = userEvent.setup();
+```
+
+After we create and render our tabs, we get the settings tab bar button using an accessibility label assigned to it and press it using `user.press(button)`.
+
+```js
+// Get the setting tab bar button
+const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
+
+// Simulate user pressing the button
+await user.press(button);
+```
+
+We expect that after pressing the button, the screen will change and `'Settings screen'` will be visible.
+
+```js
+// Assert that Settings screen is visible
+expect(screen.getByText('Settings screen')).toBeVisible();
 ```
 
 ### Example 2 - Reacting to navigation events
@@ -358,7 +372,7 @@ import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
 import { act, render, screen, userEvent } from '@testing-library/react-native';
 
-// import { MyStack } from './MyStack';
+import { MyStack } from './MyStack';
 
 jest.useFakeTimers();
 
@@ -382,9 +396,9 @@ test('surprise text appears after transition to surprise screen is complete', as
 </TabItem>
 </Tabs>
 
-We press the "Click here!" button using `fireEvent` and check that the text does not appear right away but only after the transition between screens ends.
+We press the "Click here!" button using `user.press()` and check that the text does not appear right away but only after the transition between screens ends.
 
-While writing tests containing navigation with animations (in this example we have a `StackNavigator`, which uses an animation for the transition based on the platform and OS version) you need to wait until animations finish before proceeding further. To do so, you have to use `fake timers`. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of times function to use fake clock. They allow you to instantly skip animation time. To avoid getting state change error, wrap `runAllTimers` in `act`.
+<!-- When writing tests containing navigation with animations (in this example we have a `StackNavigator`, which uses an animation for the transition based on the platform and OS version) you need to wait until animations finish before proceeding further. To do so, you have to use `fake timers`. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of times function to use fake clock. They allow you to instantly skip animation time. To avoid getting state change error, wrap `runAllTimers` in `act`.
 
 ```js
 // Enable fake timers
@@ -399,7 +413,7 @@ act(() => jest.runAllTimers());
 
 If we hadn't used fake timers in this example, the test would have failed.
 
-In the previous example we didn't use fake timers because `BottomTabNavigator` by default does not use any transition animations.
+In the previous example we didn't use fake timers because `BottomTabNavigator` by default does not use any transition animations. -->
 
 ### Example 3 - Enforce navigator state in response to navigation event
 
@@ -632,13 +646,13 @@ test('displays settings screen after settings tab bar button press', async () =>
 </TabItem>
 </Tabs>
 
-We get tab bar buttons, press buttons and check if rendered screens are correct.
+We get tab bar buttons, press them and check if rendered screens are correct.
 
-In this example, we don't need to use fake timers because text from the next screen is available using `getByText` even before the animation ends.
+<!-- In this example, we don't need to use fake timers because text from the next screen is available using `getByText` even before the animation ends. -->
 
 ### Example 4 - `useFocusEffect` hook and data fetching
 
-On every profile screen focus, display loading state while waiting for data and then show fetched profile.
+On profile screen focus, display loading state while waiting for data and then show fetched profile on every refocus.
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
@@ -816,6 +830,25 @@ export function MyTabs() {
 </TabItem>
 </Tabs>
 
+To make the test deterministic and isolate it from the real backend, you can mock the `fetch` function. For this purpose you can use [Mock Service Worker](https://mswjs.io/). Please refer to the documentation of the library to learn more about setting it up in your project ([Getting started](https://mswjs.io/docs/getting-started), [React Native integration](https://mswjs.io/docs/integrations/react-native)).
+
+```js
+import { delay, http, HttpResponse } from 'msw';
+
+export const handlers = [
+  http.get('https://pokeapi.co/api/v2/pokemon/ditto', async () => {
+    await delay(1000);
+
+    return HttpResponse.json({
+      id: 132,
+      name: 'ditto',
+    });
+  }),
+];
+```
+
+Before writing the test, we setup a handler that mocks responses from the API (for this example we're using [PokéAPI](https://pokeapi.co/)). Additionally, we `delay` the response by 1000 ms.
+
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
 
@@ -908,41 +941,7 @@ test('on profile screen focus, displays loading state while waiting for data and
 </TabItem>
 </Tabs>
 
-We query tab buttons and mock fetch function using `spyOn` and `mockImplementation`. We navigate to profile screen and check if loading state is rendered correctly. Then, to check if fetched data is displayed, we use `findByText` - we need to wait for the fetch to finish before checking its result. To ensure that operation will succeed not only on the first focus, we navigate back to home, then to settings and check loading state and fetched data again.
-
-To make test deterministic and isolate it from the real backend you can mock fetch function. You can use `spyOn` to override real implementation of fetch with `mockedFetch`.
-
-```js
-// Mock implementation of fetch function
-async function mockedFetch() {
-  const mockResponse = {
-    profile: {
-      nick: 'CookieDough',
-    },
-  };
-  return {
-    ok: true,
-    status: 200,
-    json: async () => {
-      return mockResponse;
-    },
-  };
-}
-
-test('on every profile screen focus, displays loading state while waiting for data and then shows fetched profile', async () => {
-  // ...
-
-  // Replace fetch implementation with mock
-  const spy = jest.spyOn(window, 'fetch').mockImplementation(mockedFetch);
-
-  // ...
-
-  // Check if mock fetch was called
-  expect(spy).toHaveBeenCalled();
-
-  // ...
-});
-```
+We navigate to profile screen and check if loading state is rendered correctly. Then we use fake timers to skip the delay and check if fetched data is displayed on the screen. To ensure expected behavior not only on the first focus, we navigate back to home, then to settings and check that the data is present without unnecessary fetch.
 
 ## Best practices
 
