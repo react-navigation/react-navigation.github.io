@@ -110,20 +110,10 @@ const SettingsScreen = () => {
   );
 };
 
-export const TabNavigator = createBottomTabNavigator({
+export const MyTabs = createBottomTabNavigator({
   screens: {
-    Home: {
-      screen: HomeScreen,
-      options: {
-        tabBarButtonTestID: 'homeTabBarButton',
-      },
-    },
-    Settings: {
-      screen: SettingsScreen,
-      options: {
-        tabBarButtonTestID: 'settingsTabBarButton',
-      },
-    },
+    Home: HomeScreen,
+    Settings: SettingsScreen,
   },
   screenOptions: {
     headerShown: false,
@@ -156,23 +146,11 @@ const SettingsScreen = () => {
 
 const Tab = createBottomTabNavigator();
 
-export const TabNavigator = () => {
+export const MyTabs = () => {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarButtonTestID: 'homeTabBarButton',
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={SettingsScreen}
-        options={{
-          tabBarButtonTestID: 'settingsTabBarButton',
-        }}
-      />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );
 };
@@ -185,22 +163,24 @@ export const TabNavigator = () => {
 <TabItem value="static" label="Static" default>
 
 ```js
-import { expect, test } from '@jest/globals';
+import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { render, screen, userEvent } from '@testing-library/react-native';
 
-import { TabNavigator } from './TabNavigator';
+import { MyTabs } from './MyTabs';
 
-test('navigates to settings by tab bar button press', () => {
-  const TabNavigation = createStaticNavigation(TabNavigator);
-  render(<TabNavigation />);
+jest.useFakeTimers();
 
-  const button = screen.getByTestId('settingsTabBarButton');
+test('navigates to settings by tab bar button press', async () => {
+  const user = userEvent.setup();
 
-  const event = {};
-  fireEvent.press(button, event);
+  const MyTabNavigation = createStaticNavigation(MyTabs);
+  render(<MyTabNavigation />);
 
-  expect(screen.getByText('Settings screen')).toBeOnTheScreen();
+  const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
+  await user.press(button);
+
+  expect(screen.getByText('Settings screen')).toBeVisible();
 });
 ```
 
@@ -208,25 +188,27 @@ test('navigates to settings by tab bar button press', () => {
 <TabItem value="dynamic" label="Dynamic">
 
 ```js
-import { expect, test } from '@jest/globals';
+import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { render, screen, userEvent } from '@testing-library/react-native';
 
-import { TabNavigator } from './TabNavigator';
+import { MyTabs } from './MyTabs';
 
-test('navigates to settings by tab bar button press', () => {
+jest.useFakeTimers();
+
+test('navigates to settings by tab bar button press', async () => {
+  const user = userEvent.setup();
+
   render(
     <NavigationContainer>
-      <TabNavigator />
+      <MyTabs />
     </NavigationContainer>
   );
 
-  const button = screen.getByTestId('settingsTabBarButton');
+  const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
+  await user.press(button);
 
-  const event = {};
-  fireEvent.press(button, event);
-
-  expect(screen.getByText('Settings screen')).toBeOnTheScreen();
+  expect(screen.getByText('Settings screen')).toBeVisible();
 });
 ```
 
@@ -286,7 +268,7 @@ const SurpriseScreen = () => {
   );
 };
 
-export const StackNavigator = createStackNavigator({
+export const MyStack = createStackNavigator({
   screens: {
     Home: HomeScreen,
     Surprise: SurpriseScreen,
@@ -328,7 +310,7 @@ const SurpriseScreen = ({ navigation }) => {
   );
 };
 
-export const StackNavigator = () => {
+export const MyStack = () => {
   const Stack = createStackNavigator();
   return (
     <Stack.Navigator>
@@ -348,21 +330,23 @@ export const StackNavigator = () => {
 ```js
 import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, render, screen, userEvent } from '@testing-library/react-native';
 
-import { StackNavigator } from './StackNavigator';
+import { MyStack } from './MyStack';
 
-test('surprise text appears after transition to surprise screen is complete', () => {
-  jest.useFakeTimers();
+jest.useFakeTimers();
 
-  const StackNavigation = createStaticNavigation(StackNavigator);
-  render(<StackNavigation />);
+test('surprise text appears after transition to surprise screen is complete', async () => {
+  const user = userEvent.setup();
 
-  fireEvent.press(screen.getByText('Click here!'));
+  const MyStackNavigation = createStaticNavigation(MyStack);
+  render(<MyStackNavigation />);
 
-  expect(screen.queryByText('Surprise!')).not.toBeOnTheScreen();
+  await user.press(screen.getByRole('button', { name: 'Click here!' }));
+
+  expect(screen.queryByText('Surprise!')).not.toBeVisible();
   act(() => jest.runAllTimers());
-  expect(screen.getByText('Surprise!')).toBeOnTheScreen();
+  expect(screen.getByText('Surprise!')).toBeVisible();
 });
 ```
 
@@ -372,24 +356,26 @@ test('surprise text appears after transition to surprise screen is complete', ()
 ```js
 import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, render, screen, userEvent } from '@testing-library/react-native';
 
-import { StackNavigator } from './StackNavigator';
+// import { MyStack } from './MyStack';
 
-test('surprise text appears after transition to surprise screen is complete', () => {
-  jest.useFakeTimers();
+jest.useFakeTimers();
+
+test('surprise text appears after transition to surprise screen is complete', async () => {
+  const user = userEvent.setup();
 
   render(
     <NavigationContainer>
-      <StackNavigator />
+      <MyStack />
     </NavigationContainer>
   );
 
-  fireEvent.press(screen.getByText('Click here!'));
+  await user.press(screen.getByRole('button', { name: 'Click here!' }));
 
-  expect(screen.queryByText('Surprise!')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Surprise!')).not.toBeVisible();
   act(() => jest.runAllTimers());
-  expect(screen.getByText('Surprise!')).toBeOnTheScreen();
+  expect(screen.getByText('Surprise!')).toBeVisible();
 });
 ```
 
@@ -455,9 +441,12 @@ function DetailsScreen() {
   const navigation = useNavigation();
 
   useEffect(() => {
-    const unsubscribe = navigation.getParent().addListener('tabPress', (e) => {
-      navigation.popToTop();
-    });
+    const unsubscribe = navigation
+      .getParent('MyTabs')
+      .addListener('tabPress', (e) => {
+        navigation.popToTop();
+      });
+
     return unsubscribe;
   }, [navigation]);
 
@@ -468,27 +457,18 @@ function DetailsScreen() {
   );
 }
 
-const SettingsNavigator = createStackNavigator({
+const MyStack = createStackNavigator({
   screens: {
     Settings: SettingsScreen,
     Details: DetailsScreen,
   },
 });
 
-export const TabNavigator = createBottomTabNavigator({
+export const MyTabs = createBottomTabNavigator({
+  id: 'MyTabs',
   screens: {
-    Home: {
-      screen: HomeScreen,
-      options: {
-        tabBarButtonTestID: 'homeTabBarButton',
-      },
-    },
-    SettingsStack: {
-      screen: SettingsNavigator,
-      options: {
-        tabBarButtonTestID: 'settingsTabBarButton',
-      },
-    },
+    Home: HomeScreen,
+    SettingsStack: MyStack,
   },
   screenOptions: {
     headerShown: false,
@@ -542,7 +522,7 @@ function DetailsScreen({ navigation }) {
 
 const SettingsStack = createStackNavigator();
 
-function SettingsStackScreen() {
+function MyStack() {
   return (
     <SettingsStack.Navigator>
       <SettingsStack.Screen name="Settings" component={SettingsScreen} />
@@ -553,19 +533,11 @@ function SettingsStackScreen() {
 
 const Tab = createBottomTabNavigator();
 
-export function TabNavigator() {
+export function MyTabs() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ tabBarButtonTestID: 'homeTabBarButton' }}
-      />
-      <Tab.Screen
-        name="SettingsStack"
-        component={SettingsStackScreen}
-        options={{ tabBarButtonTestID: 'settingsTabBarButton' }}
-      />
+    <Tab.Navigator id="MyTabs" screenOptions={{ headerShown: false }}>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="SettingsStack" component={MyStack} />
     </Tab.Navigator>
   );
 }
@@ -578,33 +550,39 @@ export function TabNavigator() {
 <TabItem value="static" label="Static" default>
 
 ```js
-import { expect, test } from '@jest/globals';
+import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { render, screen, userEvent } from '@testing-library/react-native';
 
-import { TabNavigator } from './TabNavigator';
+import { MyTabs } from './MyTabs';
 
-test('displays settings screen after settings tab bar button press', () => {
-  const TabNavigation = createStaticNavigation(TabNavigator);
-  render(<TabNavigation />);
+jest.useFakeTimers();
 
-  const homeTabButton = screen.getByTestId('homeTabBarButton');
+test('displays settings screen after settings tab bar button press', async () => {
+  const user = userEvent.setup();
 
-  const settingsTabButton = screen.getByTestId('settingsTabBarButton');
+  const MyTabNavigation = createStaticNavigation(MyTabs);
+  render(<MyTabNavigation />);
 
-  const event = {};
+  const homeTabButton = screen.getByRole('button', {
+    name: 'Home, tab, 1 of 2',
+  });
 
-  fireEvent.press(settingsTabButton, event);
-  expect(screen.getByText('Settings screen')).toBeOnTheScreen();
+  const settingsTabButton = screen.getByRole('button', {
+    name: 'SettingsStack, tab, 2 of 2',
+  });
 
-  fireEvent.press(screen.getByText('Go to Details'), event);
-  expect(screen.getByText('Details screen')).toBeOnTheScreen();
+  await user.press(settingsTabButton);
+  expect(screen.getByText('Settings screen')).toBeVisible();
 
-  fireEvent.press(homeTabButton, event);
-  expect(screen.getByText('Home screen')).toBeOnTheScreen();
+  await user.press(screen.getByText('Go to Details'));
+  expect(screen.getByText('Details screen')).toBeVisible();
 
-  fireEvent.press(settingsTabButton, event);
-  expect(screen.getByText('Settings screen')).toBeOnTheScreen();
+  await user.press(homeTabButton);
+  expect(screen.getByText('Home screen')).toBeVisible();
+
+  await user.press(settingsTabButton);
+  expect(screen.getByText('Settings screen')).toBeVisible();
 });
 ```
 
@@ -612,36 +590,42 @@ test('displays settings screen after settings tab bar button press', () => {
 <TabItem value="dynamic" label="Dynamic">
 
 ```js
-import { expect, test } from '@jest/globals';
+import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { render, screen, userEvent } from '@testing-library/react-native';
 
-import { TabNavigator } from './TabNavigator';
+import { MyTabs } from './MyTabs';
 
-test('displays settings screen after settings tab bar button press', () => {
+jest.useFakeTimers();
+
+test('displays settings screen after settings tab bar button press', async () => {
+  const user = userEvent.setup();
+
   render(
     <NavigationContainer>
-      <TabNavigator />
+      <MyTabs />
     </NavigationContainer>
   );
 
-  const homeTabButton = screen.getByTestId('homeTabBarButton');
+  const homeTabButton = screen.getByRole('button', {
+    name: 'Home, tab, 1 of 2',
+  });
 
-  const settingsTabButton = screen.getByTestId('settingsTabBarButton');
+  const settingsTabButton = screen.getByRole('button', {
+    name: 'SettingsStack, tab, 2 of 2',
+  });
 
-  const event = {};
+  await user.press(settingsTabButton);
+  expect(screen.getByText('Settings screen')).toBeVisible();
 
-  fireEvent.press(settingsTabButton, event);
-  expect(screen.getByText('Settings screen')).toBeOnTheScreen();
+  await user.press(screen.getByText('Go to Details'));
+  expect(screen.getByText('Details screen')).toBeVisible();
 
-  fireEvent.press(screen.getByText('Go to Details'), event);
-  expect(screen.getByText('Details screen')).toBeOnTheScreen();
+  await user.press(homeTabButton);
+  expect(screen.getByText('Home screen')).toBeVisible();
 
-  fireEvent.press(homeTabButton, event);
-  expect(screen.getByText('Home screen')).toBeOnTheScreen();
-
-  fireEvent.press(settingsTabButton, event);
-  expect(screen.getByText('Settings screen')).toBeOnTheScreen();
+  await user.press(settingsTabButton);
+  expect(screen.getByText('Settings screen')).toBeVisible();
 });
 ```
 
@@ -673,65 +657,68 @@ function HomeScreen() {
   );
 }
 
-const url = 'placeholder_url';
+const url = 'https://pokeapi.co/api/v2/pokemon/ditto';
+
+type PokemonData = {
+  id: number;
+  name: string;
+};
+
+type Result =
+  | { status: 'loading' }
+  | { status: 'success'; data: PokemonData }
+  | { status: 'error' };
 
 function ProfileScreen() {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState();
-  const [error, setError] = useState();
+  const [profileData, setProfileData] = useState<Result>({ status: 'loading' });
 
   useFocusEffect(
     useCallback(() => {
-      let isActive = true;
+      if (profileData.status !== 'success') {
+        setProfileData({ status: 'loading' });
 
-      const fetchUser = async () => {
-        try {
-          const data = await (await fetch(url)).json();
+        const controller = new AbortController();
+        const signal = controller.signal;
 
-          if (isActive) {
-            setData(data);
-            setLoading(false);
+        const fetchUser = async () => {
+          try {
+            const response = await fetch(url, { signal });
+            const data = await response.json();
+
+            setProfileData({ status: 'success', data: data });
+          } catch (error) {
+            setProfileData({ status: 'error' });
           }
-        } catch (error) {
-          setError(error);
-          setLoading(false);
-        }
-      };
+        };
 
-      fetchUser();
+        fetchUser();
 
-      return () => {
-        setData(undefined);
-        setError(undefined);
-        setLoading(true);
-        isActive = false;
-      };
-    }, [])
+        return () => {
+          controller.abort();
+        };
+      } else {
+        return () => {};
+      }
+    }, [profileData.status])
   );
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {loading && <Text>Loading</Text>}
-      {!loading && error && <Text>{error.message}</Text>}
-      {!loading && !error && <Text>{data.profile.nick}</Text>}
+      {profileData.status === 'loading' ? (
+        <Text>Loading...</Text>
+      ) : profileData.status === 'error' ? (
+        <Text>Error!</Text>
+      ) : profileData.status === 'success' ? (
+        <Text>{profileData.data.name}</Text>
+      ) : null}
     </View>
   );
 }
 
-export const TabNavigator = createBottomTabNavigator({
+export const MyTabs = createBottomTabNavigator({
   screens: {
-    Home: {
-      screen: HomeScreen,
-      options: {
-        tabBarButtonTestID: 'homeTabBarButton',
-      },
-    },
-    Profile: {
-      screen: ProfileScreen,
-      options: {
-        tabBarButtonTestID: 'profileTabBarButton',
-      },
-    },
+    Home: HomeScreen,
+    Profile: ProfileScreen,
   },
   screenOptions: {
     headerShown: false,
@@ -756,66 +743,71 @@ function HomeScreen() {
   );
 }
 
-const url = 'placeholder_url';
+const url = 'https://pokeapi.co/api/v2/pokemon/ditto';
+
+type PokemonData = {
+  id: number;
+  name: string;
+};
+
+type Result =
+  | { status: 'loading' }
+  | { status: 'success'; data: PokemonData }
+  | { status: 'error' };
 
 function ProfileScreen() {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState();
-  const [error, setError] = useState();
+  const [profileData, setProfileData] = useState<Result>({ status: 'loading' });
 
   useFocusEffect(
     useCallback(() => {
-      let isActive = true;
+      if (profileData.status !== 'success') {
+        setProfileData({ status: 'loading' });
 
-      const fetchUser = async () => {
-        try {
-          const data = await (await fetch(url)).json();
+        const controller = new AbortController();
+        const signal = controller.signal;
 
-          if (isActive) {
-            setData(data);
-            setLoading(false);
+        const fetchUser = async () => {
+          try {
+            const response = await fetch(url, { signal });
+            const data = await response.json();
+
+            setProfileData({ status: 'success', data: data });
+          } catch (error) {
+            setProfileData({ status: 'error' });
           }
-        } catch (error) {
-          setError(error);
-          setLoading(false);
-        }
-      };
+        };
 
-      fetchUser();
+        fetchUser();
 
-      return () => {
-        setData(undefined);
-        setError(undefined);
-        setLoading(true);
-        isActive = false;
-      };
-    }, [])
+        return () => {
+          controller.abort();
+        };
+      } else {
+        return () => {};
+      }
+    }, [profileData.status])
   );
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {loading && <Text>Loading</Text>}
-      {!loading && error && <Text>{error.message}</Text>}
-      {!loading && !error && <Text>{data.profile.nick}</Text>}
+      {profileData.status === 'loading' ? (
+        <Text>Loading...</Text>
+      ) : profileData.status === 'error' ? (
+        <Text>Error!</Text>
+      ) : profileData.status === 'success' ? (
+        <Text>{profileData.data.name}</Text>
+      ) : null}
     </View>
   );
 }
 
 const Tab = createBottomTabNavigator();
 
-export function TabNavigator() {
+export function MyTabs() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ tabBarButtonTestID: 'homeTabBarButton' }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{ tabBarButtonTestID: 'profileTabBarButton' }}
-      />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 }
@@ -830,49 +822,40 @@ export function TabNavigator() {
 ```js
 import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { act, render, screen, userEvent } from '@testing-library/react-native';
 
-import { TabNavigator } from './TabNavigator';
+import { MyTabs } from './MyTabs';
 
-async function mockedFetch() {
-  const mockResponse = {
-    profile: {
-      nick: 'CookieDough',
-    },
-  };
-  return {
-    ok: true,
-    status: 200,
-    json: async () => {
-      return mockResponse;
-    },
-  };
-}
+jest.useFakeTimers();
 
-test('on every profile screen focus, displays loading state while waiting for data and then shows fetched profile', async () => {
-  jest.useFakeTimers();
+test('on profile screen focus, displays loading state while waiting for data and then shows fetched profile on every refocus', async () => {
+  const user = userEvent.setup();
 
-  const TabNavigation = createStaticNavigation(TabNavigator);
-  render(<TabNavigation />);
+  const MyTabNavigation = createStaticNavigation(MyTabs);
+  render(<MyTabNavigation />);
 
-  const spy = jest.spyOn(window, 'fetch').mockImplementation(mockedFetch);
+  const homeTabButton = screen.getByRole('button', {
+    name: 'Home, tab, 1 of 2',
+  });
 
-  const homeTabButton = screen.getByTestId('homeTabBarButton');
-  const profileTabButton = screen.getByTestId('profileTabBarButton');
+  const profileTabButton = screen.getByRole('button', {
+    name: 'Profile, tab, 2 of 2',
+  });
 
-  const event = {};
-  fireEvent.press(profileTabButton, event);
+  await user.press(profileTabButton);
+  expect(screen.getByText('Loading...')).toBeVisible();
 
-  expect(screen.queryByText('Loading')).toBeOnTheScreen();
-  expect(spy).toHaveBeenCalled();
-  expect(await screen.findByText('CookieDough')).toBeOnTheScreen();
+  await act(() => jest.runAllTimers());
 
-  fireEvent.press(homeTabButton, event);
-  fireEvent.press(profileTabButton, event);
+  expect(screen.getByText('ditto')).toBeVisible();
 
-  expect(screen.queryByText('Loading')).toBeOnTheScreen();
-  expect(spy).toHaveBeenCalled();
-  expect(await screen.findByText('CookieDough')).toBeOnTheScreen();
+  await user.press(homeTabButton);
+  await user.press(profileTabButton);
+  expect(screen.queryByText('Loading...')).not.toBeVisible();
+
+  await act(() => jest.runAllTimers());
+
+  expect(screen.getByText('ditto')).toBeVisible();
 });
 ```
 
@@ -882,52 +865,43 @@ test('on every profile screen focus, displays loading state while waiting for da
 ```js
 import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { act, render, screen, userEvent } from '@testing-library/react-native';
 
-import { TabNavigator } from './TabNavigator';
+import { MyTabs } from './MyTabs';
 
-async function mockedFetch() {
-  const mockResponse = {
-    profile: {
-      nick: 'CookieDough',
-    },
-  };
-  return {
-    ok: true,
-    status: 200,
-    json: async () => {
-      return mockResponse;
-    },
-  };
-}
+jest.useFakeTimers();
 
-test('on every profile screen focus, displays loading state while waiting for data and then shows fetched profile', async () => {
-  jest.useFakeTimers();
+test('on profile screen focus, displays loading state while waiting for data and then shows fetched profile on every refocus', async () => {
+  const user = userEvent.setup();
 
   render(
     <NavigationContainer>
-      <TabNavigator />
+      <MyTabs />
     </NavigationContainer>
   );
 
-  const spy = jest.spyOn(window, 'fetch').mockImplementation(mockedFetch);
+  const homeTabButton = screen.getByRole('button', {
+    name: 'Home, tab, 1 of 2',
+  });
 
-  const homeTabButton = screen.getByTestId('homeTabBarButton');
-  const profileTabButton = screen.getByTestId('profileTabBarButton');
+  const profileTabButton = screen.getByRole('button', {
+    name: 'Profile, tab, 2 of 2',
+  });
 
-  const event = {};
-  fireEvent.press(profileTabButton, event);
+  await user.press(profileTabButton);
+  expect(screen.getByText('Loading...')).toBeVisible();
 
-  expect(screen.getByText('Loading')).toBeOnTheScreen();
-  expect(spy).toHaveBeenCalled();
-  expect(await screen.findByText('CookieDough')).toBeOnTheScreen();
+  await act(() => jest.runAllTimers());
 
-  fireEvent.press(homeTabButton, event);
-  fireEvent.press(profileTabButton, event);
+  expect(screen.getByText('ditto')).toBeVisible();
 
-  expect(screen.getByText('Loading')).toBeOnTheScreen();
-  expect(spy).toHaveBeenCalled();
-  expect(await screen.findByText('CookieDough')).toBeOnTheScreen();
+  await user.press(homeTabButton);
+  await user.press(profileTabButton);
+  expect(screen.queryByText('Loading...')).not.toBeVisible();
+
+  await act(() => jest.runAllTimers());
+
+  expect(screen.getByText('ditto')).toBeVisible();
 });
 ```
 
