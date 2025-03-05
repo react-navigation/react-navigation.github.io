@@ -192,7 +192,7 @@ After adding them, it should look like this:
 <activity
     android:name=".MainActivity"
     android:launchMode="singleTask">
-    <intent-filter android:autoVerify="true">
+    <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
     </intent-filter>
@@ -202,7 +202,7 @@ After adding them, it should look like this:
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:scheme="mychat" />
     </intent-filter>
-    <intent-filter>
+    <intent-filter android:autoVerify="true">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
