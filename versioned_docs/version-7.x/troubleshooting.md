@@ -257,7 +257,7 @@ This can happen if you are passing non-serializable values such as class instanc
 Example of some use cases for passing functions in params are the following:
 
 - To pass a callback to use in a header button. This can be achieved using `navigation.setOptions` instead. See the [guide for header buttons](header-buttons.md#header-interaction-with-its-screen-component) for examples.
-- To pass a callback to the next screen which it can call to pass some data back. You can usually achieve it using `navigate` instead. See the [guide for params](params.md) for examples.
+- To pass a callback to the next screen which it can call to pass some data back. You can usually achieve it using `popTo` instead. See [passing params to a previous screen](params.md#passing-params-to-a-previous-screen) for examples.
 - To pass complex data to another screen. Instead of passing the data `params`, you can store that complex data somewhere else (like a global store), and pass an id instead. Then the screen can get the data from the global store using the id. See [what should be in params](params.md#what-should-be-in-params).
 - Pass data, callbacks etc. from a parent to child screens. You can either use React Context, or pass a children callback to pass these down instead of using params. See [passing additional props](hello-react-navigation.md#passing-additional-props).
 
