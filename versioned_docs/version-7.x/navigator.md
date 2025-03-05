@@ -132,7 +132,9 @@ function MyStack() {
 
 A layout is a wrapper around the navigator. It can be useful for augmenting the navigators with additional UI with a wrapper.
 
-The difference from adding a wrapper around the navigator manually is that the code in a layout callback has access to the navigator's state, options etc.:
+The difference from adding a wrapper around the navigator manually is that the code in a layout callback has access to the navigator's state, options etc.
+
+It takes a function that returns a React element:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -242,7 +244,9 @@ Event listeners can be used to subscribe to various events emitted for the scree
 
 ### Screen layout
 
-A screen layout is a wrapper around each screen in the navigator. It makes it easier to provide things such as a common error boundary and suspense fallback for all screens in the navigator:
+A screen layout is a wrapper around each screen in the navigator. It makes it easier to provide things such as an error boundary and suspense fallback for all screens in the navigator, or wrap each screen with additional UI.
+
+It takes a function that returns a React element:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>

@@ -361,7 +361,9 @@ By default, React Navigation applies optimizations to screen components to preve
 
 ### Layout
 
-A layout is a wrapper around the screen. It makes it easier to provide things such as an error boundary and suspense fallback for a screen:
+A layout is a wrapper around the screen. It makes it easier to provide things such as an error boundary and suspense fallback for a screen, or wrap the screen with additional UI.
+
+It takes a function that returns a React element:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
