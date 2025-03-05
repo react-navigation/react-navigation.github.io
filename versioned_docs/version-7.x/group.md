@@ -225,7 +225,9 @@ See [Options for screens](screen-options.md) for more details and examples.
 
 ### Screen layout
 
-A screen layout is a wrapper around each screen in the group. It makes it easier to provide things such as a common error boundary and suspense fallback for all screens in a group:
+A screen layout is a wrapper around each screen in the group. It makes it easier to provide things such as an error boundary and suspense fallback for all screens in the group, or wrap each screen with additional UI.
+
+It takes a function that returns a React element:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
