@@ -50,10 +50,10 @@ Then we need to use this setup file in our jest config. You can add it under `se
 
 Make sure that the path to the file in `setupFilesAfterEnv` is correct. Jest will run these files before running your tests, so it's the best place to put your global mocks.
 
-If your configuration works correctly, you can skip this section, but in some unusual cases you will need to mock `react-native-screens` as well. To add mock of the particular component, e.g. `Screen`, add the following code in `jest/setup.js` file:
+If you find yourself in a need to mock `react-native-screens` component for some reason, you should do it by adding following code in `jest/setup.js` file:
 
 ```js
-// Include this section form mocking react-native-screens
+// Include this section for mocking react-native-screens
 jest.mock('react-native-screens', () => {
   // Require actual module instead of a mock
   let screens = jest.requireActual('react-native-screens');
@@ -66,7 +66,8 @@ jest.mock('react-native-screens', () => {
     Object.getOwnPropertyDescriptors(screens)
   );
 
-  // Add mock of the Screen component
+  // Add mock of the component you need
+  // Here is the example of mocking the Screen component as a View
   Object.defineProperty(screens, 'Screen', {
     value: require('react-native').View,
   });
