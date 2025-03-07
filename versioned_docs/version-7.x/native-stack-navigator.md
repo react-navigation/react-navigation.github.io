@@ -1038,11 +1038,13 @@ export default function App() {
 
 :::warning
 
-Due to technical issues in platform component integration with `react-native`, `presentation: 'formSheet'` on Android has limited support for `flex: 1`. The tradeoff is necessary to prevent "sheet flickering" problem. There are also some problems with getting nested ScrollViews to work properly.
+Due to technical issues in platform component integration with `react-native`, `presentation: 'formSheet'` has limited support for `flex: 1`. The tradeoff is necessary to prevent ["sheet flickering" problem on iOS](https://github.com/software-mansion/react-native-screens/issues/1722). Work on the problem is [in progress](https://github.com/software-mansion/react-native-screens/pull/2748).
 
-Currently, you should avoid using `flex: 1` on top level content container you pass to the sheet.
+Currently on Android, using `flex: 1` on a top-level content container passed to a `formSheet` with `showAllowedDetents: 'fitToContents'` causes the sheet to not display at all, leaving only the dimmed background visible.
 
-When there is less content than max screen height, you might end up with "truncated sheet" problem. The workaround is to set `backgroundColor` in the `contentStyle` prop of the given screen.
+Unfortunately, even if you don't use `flex: 1` but the content's height is less than max screen height, the rest of the sheet might become translucent or use the default theme background color (you can see this happening on the screenshots in the descrption of [this PR](https://github.com/software-mansion/react-native-screens/pull/2462)). To match the sheet to the background of your content, set `backgroundColor` in the `contentStyle` prop of the given screen.
+
+On Android, there are also some problems with getting nested ScrollViews to work properly. The solution is to set `nestedScrollEnabled` on the `ScrollView`, but this does not work if the content's height is less than the `ScrollView`'s height. Please see [this PR](https://github.com/facebook/react-native/pull/44099) for details and suggested [workaround](https://github.com/facebook/react-native/pull/44099#issuecomment-2058469661).
 :::
 
 #### `sheetAllowedDetents`
