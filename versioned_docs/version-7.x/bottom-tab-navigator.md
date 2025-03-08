@@ -495,7 +495,7 @@ When the tab bar is positioned on the `left` or `right`, it is styled as a sideb
 ```js
 const Tabs = createBottomTabNavigator({
   screenOptions: {
-    tabBarPosition: isLargeScreen ? 'left' ? 'bottom',
+    tabBarPosition: isLargeScreen ? 'left' : 'bottom',
   },
 
   // ...
