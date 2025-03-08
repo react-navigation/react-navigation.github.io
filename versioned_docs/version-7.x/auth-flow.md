@@ -278,7 +278,7 @@ In the above snippet, `isLoading` means that we're still checking if we have a t
 
 Next, we're exposing the sign in status via the `SignInContext` so that it's available to the `useIsSignedIn` and `useIsSignedOut` hooks.
 
-In the above example, we're have one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly for the screens accessible after sign in, you probably have more than one screen. We can use [`groups`](static-configuration.md#groups) to define multiple screens:
+In the above example, we have one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly for the screens accessible after sign in, you probably have more than one screen. We can use [`groups`](static-configuration.md#groups) to define multiple screens:
 
 ```js
 const RootStack = createNativeStackNavigator({
