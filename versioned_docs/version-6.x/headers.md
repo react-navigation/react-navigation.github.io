@@ -26,7 +26,7 @@ function StackScreen() {
 }
 ```
 
-![Header title](/assets/headers/header-title.png)
+<img src="/assets/7.x/fundamentals/headerTitle.png" width="500" alt="Header title" />
 
 ## Using params in the title
 
@@ -107,7 +107,7 @@ function StackScreen() {
 }
 ```
 
-![Custom header styles](/assets/headers/custom_headers.png)
+<img src="/assets/7.x/fundamentals/adjustHeaderStyle.png" width="500" alt="Adjust header style" />
 
 There are a couple of things to notice here:
 
@@ -175,7 +175,7 @@ function StackScreen() {
 }
 ```
 
-![Header custom title](/assets/headers/header-custom-title.png)
+<img src="/assets/7.x/fundamentals/headerCustomComponent.png" width="500" alt="Header custom component" />
 
 :::note
 
