@@ -4,6 +4,9 @@ title: Stack Navigator
 sidebar_label: Stack
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, use OS default animation on Android. But the [animations can be customized](#animation-related-options) to match your needs.
@@ -213,7 +216,101 @@ If you need to disable this optimization for specific screens (e.g. you want to 
 
 ### Options
 
-The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Stack.navigator` or `options` prop of `Stack.Screen`.
+The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under:
+
+- [`screenOptions`](screen-options.md#options-prop-on-screen) prop of `Stack.navigator`
+
+  Example:
+
+  <Tabs groupId="config" queryString="config">
+  <TabItem value="static" label="Static" default>
+
+  ```js
+  const Stack = createNativeStackNavigator({
+    // highlight-start
+    screenOptions: {
+      headerStyle: {
+        backgroundColor: 'papayawhip',
+      },
+    },
+    // highlight-end
+    screens: {
+      Home: HomeScreen,
+      Profile: ProfileScreen,
+    },
+  });
+  ```
+
+  </TabItem>
+  <TabItem value="dynamic" label="Dynamic">
+
+  ```js
+  <Stack.Navigator
+    // highlight-start
+    screenOptions={{ headerStyle: { backgroundColor: 'papayawhip' } }}
+    // highlight-end
+  >
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="Profile" component={ProfileScreen} />
+  </Stack.Navigator>
+  ```
+
+  </TabItem>
+  </Tabs>
+
+- [`options`](screen-options.md#screenoptions-prop-on-the-navigator) prop of `Stack.Screen`.
+
+  Example:
+  <Tabs groupId="config" queryString="config">
+  <TabItem value="static" label="Static" default>
+
+  ```js name="Screen title option"
+  const Stack = createNativeStackNavigator({
+    screens: {
+      Home: {
+        screen: HomeScreen,
+        // highlight-start
+        options: {
+          title: 'Awesome app',
+        },
+        // highlight-end
+      },
+      Profile: {
+        screen: ProfileScreen,
+        // highlight-start
+        options: {
+          title: 'My profile',
+        },
+        // highlight-end
+      },
+    },
+  });
+  ```
+
+  </TabItem>
+  <TabItem value="dynamic" label="Dynamic">
+
+  ```js name="Screen title option"
+  <Stack.Navigator>
+    <Stack.Screen
+      name="Home"
+      component={HomeScreen}
+      // highlight-start
+      options={{ title: 'Awesome app' }}
+      // highlight-end
+    />
+    <Stack.Screen
+      name="Profile"
+      component={ProfileScreen}
+      // highlight-start
+      options={{ title: 'My profile' }}
+      // highlight-end
+    />
+  </Stack.Navigator>
+  ```
+
+  </TabItem>
+  </Tabs>
 
 #### `title`
 
@@ -231,6 +328,21 @@ Use this prop to have a semi-transparent dark overlay visible under the card dur
 
 Function which returns a React Element to display as the overlay for the card. Make sure to set `cardOverlayEnabled` to `true` when using this.
 
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/cardOverlay.mp4" />
+</video>
+
+Example:
+
+```js
+    screenOptions={{
+      cardOverlayEnabled: true,
+      cardOverlay: () => (
+        <View style={{ flex: 1, backgroundColor: 'gray', opacity: 0.5 }} />
+      ),
+    }}
+```
+
 #### `cardStyle`
 
 Style object for the card in stack. You can provide a custom background color to use instead of the default background here.
@@ -244,26 +356,47 @@ On Web, the height of the screen isn't limited to the height of the viewport. Th
 This is shortcut option which configures several options to configure the style for rendering and transitions:
 
 - `card`: Use the default OS animations for iOS and Android screen transitions.
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/stack/presentation-card.mp4" />
+  </video>
+
 - `modal`: Use Modal animations. This changes a few things:
+
   - Sets `headerMode` to `screen` for the screen unless specified otherwise.
   - Changes the screen animation to match the platform behavior for modals.
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/stack/presentation-modal.mp4" />
+  </video>
+
 - `transparentModal`: Similar to `modal`. This changes following things:
+
   - Sets `headerMode` to `screen` for the screen unless specified otherwise.
   - Sets background color of the screen to transparent, so previous screen is visible
   - Adjusts the `detachPreviousScreen` option so that the previous screen stays rendered.
   - Prevents the previous screen from animating from its last position.
   - Changes the screen animation to a vertical slide animation.
 
-See [Transparent modals](#transparent-modals) for more details on how to customize `transparentModal`.
+  See [Transparent modals](#transparent-modals) for more details on how to customize `transparentModal`.
+
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/stack/presentation-transparentModal.mp4" />
+  </video>
 
 #### `animationTypeForReplace`
 
 The type of animation to use when this screen replaces another screen. It takes the following values:
 
-- `push` - The animation of a new screen being pushed will be used
-- `pop` - The animation of a screen being popped will be used
+- `push` - (default) The animation of a new screen being pushed will be used
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animationTypeForReplace-push.mp4" />
 
-Defaults to `push`.
+</video>
+
+- `pop` - The animation of a screen being popped will be used
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animationTypeForReplace-pop.mp4" />
+
+</video>
 
 When `pop` is used, the `pop` animation is applied to the screen being replaced.
 
@@ -413,7 +546,16 @@ return (
 Specifies how the header should be rendered:
 
 - `float` - Render a single header that stays at the top and animates as screens are changed. This is default on iOS.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/headerMode-float.mp4" />
+
+</video>
+
 - `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is default on other platforms.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/headerMode-screen.mp4" />
+
+</video>
 
 #### `headerShown`
 
@@ -431,6 +573,24 @@ Accessibility label for the header back button.
 
 Function which returns a React Element to display custom image in header's back button. When a function is used, it receives the `tintColor` in it's argument object. Defaults to Image component with back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
 
+<img src="/assets/7.x/stack/headerBackImage.png" width="500" alt="Header back image" />
+
+```js
+<Stack.Screen
+  name="NewsFeed"
+  component={NewsFeedScreen}
+  options={{
+    headerBackImage: ({ tintColor }) => (
+      <Ionicons
+        tyle={{ color: tintColor }}
+        size={26}
+        name="arrow-back-circle"
+      />
+    ),
+  }}
+/>
+```
+
 #### `headerBackTitle`
 
 Title string used by the back button on iOS. Defaults to the previous scene's title. Use `headerBackButtonDisplayMode` to customize the behavior.
@@ -446,14 +606,34 @@ How the back button displays icon and title.
 Supported values:
 
 - `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
+  <img src="/assets/7.x/stack/headerBackButtonDisplayMode-default.png" width="500" alt="Header back button dispaly mode - default" />
 - `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon).
+  <img src="/assets/7.x/stack/headerBackButtonDisplayMode-generic.png" width="500" alt="Header back button dispaly mode - generic" />
 - `minimal`: Always displays only the icon without a title.
+  <img src="/assets/7.x/stack/headerBackButtonDisplayMode-minimal.png" width="500" alt="Header back button dispaly mode - minimal" />
 
 Defaults to `default` on iOS, and `minimal` on Android.
 
 #### `headerBackTitleStyle`
 
 Style object for the back title.
+
+<img src="/assets/7.x/stack/headerBackTitleStyle.png" width="500" alt="Header back title style" />
+
+Example:
+
+```js
+<Stack.Screen
+  name="NewsFeed"
+  component={NewsFeedScreen}
+  options={{
+    headerBackTitleStyle: {
+      fontSize: 14,
+      fontFamily: 'Georgia',
+    },
+  }}
+/>
+```
 
 ### Events
 
@@ -632,15 +812,64 @@ You can specify the `animation` option to customize the transition animation for
 Supported values for `animation` are:
 
 - `default` - Default animation based on the platform and OS version.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-default.mp4" />
+
+</video>
+
 - `fade` - Simple fade animation for dialogs.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-fade.mp4" />
+
+</video>
+
 - `fade_from_bottom` - Standard Android-style fade-in from the bottom for Android Oreo.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-fade_from_bottom.mp4" />
+
+</video>
+
 - `fade_from_right` - Standard Android-style fade-in from the right for Android 14.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-fade_from_right.mp4" />
+
+</video>
+
 - `reveal_from_bottom` - Standard Android-style reveal from the bottom for Android Pie.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-reveal_from_bottom.mp4" />
+
+</video>
+
 - `scale_from_center` - Scale animation from the center.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-scale_from_center.mp4" />
+
+</video>
+
 - `slide_from_right` - Standard iOS-style slide in from the right.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-slide_from_right.mp4" />
+
+</video>
+
 - `slide_from_left` - Similar to `slide_from_right`, but the screen will slide in from the left.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-slide_from_left.mp4" />
+
+</video>
+
 - `slide_from_bottom` - Slide animation from the bottom for modals and bottom sheets.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-slide_from_bottom.mp4" />
+
+</video>
+
 - `none` - The screens are pushed or popped immediately without any animation.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/stack/animation-none.mp4" />
+
+</video>
 
 By default, Android and iOS use the `default` animation and other platforms use `none`.
 
