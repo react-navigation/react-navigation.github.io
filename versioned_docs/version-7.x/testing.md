@@ -166,7 +166,7 @@ export const MyTabs = () => {
 ```js
 import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
-import { render, screen, userEvent } from '@testing-library/react-native';
+import { act, render, screen, userEvent } from '@testing-library/react-native';
 
 import { MyTabs } from './MyTabs';
 
@@ -181,6 +181,8 @@ test('navigates to settings by tab bar button press', async () => {
   const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
   await user.press(button);
 
+  act(() => jest.runAllTimers());
+
   expect(screen.getByText('Settings screen')).toBeVisible();
 });
 ```
@@ -191,7 +193,7 @@ test('navigates to settings by tab bar button press', async () => {
 ```js
 import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
-import { render, screen, userEvent } from '@testing-library/react-native';
+import { act, render, screen, userEvent } from '@testing-library/react-native';
 
 import { MyTabs } from './MyTabs';
 
@@ -209,6 +211,8 @@ test('navigates to settings by tab bar button press', async () => {
   const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
   await user.press(button);
 
+  act(() => jest.runAllTimers());
+
   expect(screen.getByText('Settings screen')).toBeVisible();
 });
 ```
@@ -216,14 +220,29 @@ test('navigates to settings by tab bar button press', async () => {
 </TabItem>
 </Tabs>
 
-First, we need to create a User Event object instance from `react-native-testing-library` in order to be able to trigger user events.
+When writing tests containing navigation with animations, you need to wait until animations finish before proceeding further. To do so, you have to use **fake timers**. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of the native timer functions (e.g. `setTimeout()`, `setInterval()`) with a custom implementation that uses a fake clock. They allow you to instantly skip animation time using `jest.runAllTimers()`. To avoid getting state change error, wrap `runAllTimers` in `act`.
+
+```js
+// Enable fake timers
+jest.useFakeTimers();
+
+// ...
+
+// Wrap jest.runAllTimers in act to prevent state change error
+// Skip all timers including animations
+act(() => jest.runAllTimers());
+```
+
+Even though `BottomTabNavigator` by default does not use any animations, some components of the tab bar do so. If you don't use fake timers in this example, the tests might still pass but you will get a warning from `react-native-tesing-library` about React state updates.
+
+After we setup fake timers, we need to create a User Event object instance from `react-native-testing-library` in order to be able to trigger user events.
 
 ```js
 // Create User Event object instance
 const user = userEvent.setup();
 ```
 
-After we create and render our tabs, we get the settings tab bar button using an accessibility label assigned to it and press it using `user.press(button)`.
+After we create and render our tabs, we get the settings tab bar button using an accessibility label assigned to it and press it using `user.press(button)`. We use fake timers to skip the animations.
 
 ```js
 // Get the setting tab bar button
@@ -231,6 +250,9 @@ const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
 
 // Simulate user pressing the button
 await user.press(button);
+
+// Skip tab bar animations
+act(() => jest.runAllTimers());
 ```
 
 We expect that after pressing the button, the screen will change and `'Settings screen'` will be visible.
@@ -399,23 +421,6 @@ test('surprise text appears after transition to surprise screen is complete', as
 
 We press the "Click here!" button using `user.press()` and check that the text does not appear right away but only after the transition between screens ends.
 
-<!-- When writing tests containing navigation with animations (in this example we have a `StackNavigator`, which uses an animation for the transition based on the platform and OS version) you need to wait until animations finish before proceeding further. To do so, you have to use `fake timers`. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of times function to use fake clock. They allow you to instantly skip animation time. To avoid getting state change error, wrap `runAllTimers` in `act`.
-
-```js
-// Enable fake timers
-jest.useFakeTimers();
-
-// ...
-
-// Wrap jest.runAllTimers in act to prevent state change error
-// Skip all timers including animations
-act(() => jest.runAllTimers());
-```
-
-If we hadn't used fake timers in this example, the test would have failed.
-
-In the previous example we didn't use fake timers because `BottomTabNavigator` by default does not use any transition animations. -->
-
 ### Example 3 - Enforce navigator state in response to navigation event
 
 Display settings screen after settings tab bar button is pressed.
@@ -567,7 +572,7 @@ export function MyTabs() {
 ```js
 import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
-import { render, screen, userEvent } from '@testing-library/react-native';
+import { act, render, screen, userEvent } from '@testing-library/react-native';
 
 import { MyTabs } from './MyTabs';
 
@@ -588,15 +593,19 @@ test('displays settings screen after settings tab bar button press', async () =>
   });
 
   await user.press(settingsTabButton);
+  act(() => jest.runAllTimers());
   expect(screen.getByText('Settings screen')).toBeVisible();
 
   await user.press(screen.getByText('Go to Details'));
+  act(() => jest.runAllTimers());
   expect(screen.getByText('Details screen')).toBeVisible();
 
   await user.press(homeTabButton);
+  act(() => jest.runAllTimers());
   expect(screen.getByText('Home screen')).toBeVisible();
 
   await user.press(settingsTabButton);
+  act(() => jest.runAllTimers());
   expect(screen.getByText('Settings screen')).toBeVisible();
 });
 ```
@@ -607,7 +616,7 @@ test('displays settings screen after settings tab bar button press', async () =>
 ```js
 import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
-import { render, screen, userEvent } from '@testing-library/react-native';
+import { act, render, screen, userEvent } from '@testing-library/react-native';
 
 import { MyTabs } from './MyTabs';
 
@@ -631,15 +640,19 @@ test('displays settings screen after settings tab bar button press', async () =>
   });
 
   await user.press(settingsTabButton);
+  act(() => jest.runAllTimers());
   expect(screen.getByText('Settings screen')).toBeVisible();
 
   await user.press(screen.getByText('Go to Details'));
+  act(() => jest.runAllTimers());
   expect(screen.getByText('Details screen')).toBeVisible();
 
   await user.press(homeTabButton);
+  act(() => jest.runAllTimers());
   expect(screen.getByText('Home screen')).toBeVisible();
 
   await user.press(settingsTabButton);
+  act(() => jest.runAllTimers());
   expect(screen.getByText('Settings screen')).toBeVisible();
 });
 ```
@@ -648,8 +661,6 @@ test('displays settings screen after settings tab bar button press', async () =>
 </Tabs>
 
 We get tab bar buttons, press them and check if rendered screens are correct.
-
-<!-- In this example, we don't need to use fake timers because text from the next screen is available using `getByText` even before the animation ends. -->
 
 ### Example 4 - `useFocusEffect` hook and data fetching
 
@@ -884,6 +895,8 @@ test('on profile screen focus, displays loading state while waiting for data and
   expect(screen.getByText('ditto')).toBeVisible();
 
   await user.press(homeTabButton);
+  await act(() => jest.runAllTimers());
+
   await user.press(profileTabButton);
   expect(screen.queryByText('Loading...')).not.toBeVisible();
 
@@ -930,6 +943,8 @@ test('on profile screen focus, displays loading state while waiting for data and
   expect(screen.getByText('ditto')).toBeVisible();
 
   await user.press(homeTabButton);
+  await act(() => jest.runAllTimers());
+
   await user.press(profileTabButton);
   expect(screen.queryByText('Loading...')).not.toBeVisible();
 
