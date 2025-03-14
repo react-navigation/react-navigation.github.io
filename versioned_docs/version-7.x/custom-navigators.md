@@ -81,7 +81,7 @@ function TabNavigator({
   return (
     <NavigationContent>
       <View style={[{ flexDirection: 'row' }, tabBarStyle]}>
-        {state.routes.map((route) => (
+        {state.routes.map((route, index) => (
           <Pressable
             key={route.key}
             onPress={() => {
