@@ -335,8 +335,8 @@ return (
 
 Specifies how the header should be rendered:
 
-- `float` - Render a single header that stays at the top and animates as screens are changed. This is default on iOS.
-- `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is default on other platforms.
+- `float` - The header is rendered above the screen and animates independently of the screen. This is default on iOS for non-modals.
+- `screen` - The header is rendered as part of the screen and animates together with the screen. This is default on other platforms.
 
 #### `headerShown`
 
