@@ -69,8 +69,8 @@ Visual options:
     - Prevents last inactive screen from being detached so that it stays visible underneath the active screen
     - Make the screens slide in from the bottom on iOS which is a common iOS pattern.
 - `headerMode` - Specifies how the header should be rendered:
-  - `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
-  - `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
+  - `float` - The header is rendered above the screen and animates independently of the screen. This is default on iOS for non-modals.
+  - `screen` - The header is rendered as part of the screen and animates together with the screen. This is default on other platforms.
   - `none` - No header will be rendered.
 - `keyboardHandlingEnabled` - If `false`, the on screen keyboard will NOT automatically dismiss when navigating to a new screen. Defaults to `true`.
 
