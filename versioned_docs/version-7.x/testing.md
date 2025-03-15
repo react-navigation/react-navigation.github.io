@@ -1,25 +1,34 @@
 ---
 id: testing
-title: Testing with Jest
-sidebar_label: Testing with Jest
+title: Writing tests
+sidebar_label: Writing tests
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Testing code using React Navigation may require some setup since we need to mock native dependencies used in the navigators. We recommend using [Jest](https://jestjs.io) to write unit tests.
+React Navigation components can be tested in a similar way to other React components. This guide will cover how to write tests for components using React Navigation using [Jest](https://jestjs.io).
 
-## Mocking native modules
+## Guiding principles
+
+When writing tests, it's encouraged to write tests that closely resemble how users interact with your app. Keeping this in mind, here are some guiding principles to follow:
+
+- **Test the result, not the action**: Instead of checking if a specific navigation action was called, check if the expected components are rendered after navigation.
+- **Avoid mocking React Navigation**: Mocking React Navigation components can lead to tests that don't match the actual logic. Instead, use a real navigator in your tests.
+
+Following these principles will help you write tests that are more reliable and easier to maintain by avoiding testing implementation details.
+
+## Mocking native dependencies
 
 To be able to test React Navigation components, certain dependencies will need to be mocked depending on which components are being used.
+
+If you're using `@react-navigation/stack`, you will need to mock:
+
+- `react-native-gesture-handler`
 
 If you're using `@react-navigation/drawer`, you will need to mock:
 
 - `react-native-reanimated`
-- `react-native-gesture-handler`
-
-If you're using `@react-navigation/stack`, you will only need to mock:
-
 - `react-native-gesture-handler`
 
 To add the mocks, create a file `jest/setup.js` (or any other file name of your choice) and paste the following code in it:
@@ -50,7 +59,10 @@ Then we need to use this setup file in our jest config. You can add it under `se
 
 Make sure that the path to the file in `setupFilesAfterEnv` is correct. Jest will run these files before running your tests, so it's the best place to put your global mocks.
 
-If you find yourself in a need to mock `react-native-screens` component for some reason, you should do it by adding following code in `jest/setup.js` file:
+<details>
+<summary>Mocking `react-native-screens`</summary>
+
+This shouldn't be necessary in most cases. However, if you find yourself in a need to mock `react-native-screens` component for some reason, you should do it by adding following code in `jest/setup.js` file:
 
 ```js
 // Include this section for mocking react-native-screens
@@ -76,22 +88,60 @@ jest.mock('react-native-screens', () => {
 });
 ```
 
+</details>
+
 If you're not using Jest, then you'll need to mock these modules according to the test framework you are using.
 
-## Writing tests
+## Fake timers
 
-We recommend using [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) along with [`jest-native`](https://github.com/testing-library/jest-native) to write your tests.
+When writing tests containing navigation with animations, you need to wait until the animations finish. In such cases, we recommend using [`Fake Timers`](https://jestjs.io/docs/timer-mocks) to simulate the passage of time in your tests. This can be done by adding the following line at the beginning of your test file:
 
-We will go through some real-world case test code examples. Each code example consists of tested navigator and test code file.
+```js
+jest.useFakeTimers();
+```
 
-### Example 1 - Navigation between tabs
+Fake timers replace real implementation of the native timer functions (e.g. `setTimeout()`, `setInterval()` etc,) with a custom implementation that uses a fake clock. This lets you instantly skip animations and reduce the time needed to run your tests by calling methods such as `jest.runAllTimers()`.
 
-Navigate to settings screen by tab bar button press.
+Often, component state is updated after an animation completes. To avoid getting an error in such cases, wrap `jest.runAllTimers()` in `act`:
+
+```js
+import { act } from 'react-test-renderer';
+
+// ...
+
+act(() => jest.runAllTimers());
+```
+
+See the examples below for more details on how to use fake timers in tests involving navigation.
+
+## Navigation and visibility
+
+In React Navigation, the previous screen is not unmounted when navigating to a new screen. This means that the previous screen is still present in the component tree, but it's not visible.
+
+When writing tests, you should assert that the expected component is visible or hidden instead of checking if it's rendered or not. React Native Testing Library provides a `toBeVisible` matcher that can be used to check if an element is visible to the user.
+
+```js
+expect(screen.getByText('Settings screen')).toBeVisible();
+```
+
+This is in contrast to the `toBeOnTheScreen` matcher, which checks if the element is rendered in the component tree. This matcher is not recommended when writing tests involving navigation.
+
+By default, the queries from React Native Testing Library (e.g. `getByRole`, `getByText`, `getByLabelText` etc.) [only return visible elements](https://callstack.github.io/react-native-testing-library/docs/api/queries#includehiddenelements-option). So you don't need to do anything special. However, if you're using a different library for your tests, you'll need to account for this behavior.
+
+## Example tests
+
+We recommend using [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) to write your tests.
+
+In this guide, we will go through some example scenarios and show you how to write tests for them using Jest and React Native Testing Library:
+
+### Navigation between tabs
+
+In this example, we have a bottom tab navigator with two tabs: Home and Settings. We will write a test that asserts that we can navigate between these tabs by pressing the tab bar buttons.
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
 
-```js
+```js title="MyTabs.js"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, View } from 'react-native';
 
@@ -116,16 +166,13 @@ export const MyTabs = createBottomTabNavigator({
     Home: HomeScreen,
     Settings: SettingsScreen,
   },
-  screenOptions: {
-    headerShown: false,
-  },
 });
 ```
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js
+```js title="MyTabs.js"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, View } from 'react-native';
 
@@ -149,7 +196,7 @@ const Tab = createBottomTabNavigator();
 
 export const MyTabs = () => {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
@@ -163,7 +210,7 @@ export const MyTabs = () => {
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
 
-```js
+```js title="MyTabs.test.js"
 import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
 import { act, render, screen, userEvent } from '@testing-library/react-native';
@@ -175,10 +222,12 @@ jest.useFakeTimers();
 test('navigates to settings by tab bar button press', async () => {
   const user = userEvent.setup();
 
-  const MyTabNavigation = createStaticNavigation(MyTabs);
-  render(<MyTabNavigation />);
+  const Navigation = createStaticNavigation(MyTabs);
+
+  render(<Navigation />);
 
   const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
+
   await user.press(button);
 
   act(() => jest.runAllTimers());
@@ -190,7 +239,7 @@ test('navigates to settings by tab bar button press', async () => {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js
+```js title="MyTabs.test.js"
 import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
 import { act, render, screen, userEvent } from '@testing-library/react-native';
@@ -208,7 +257,8 @@ test('navigates to settings by tab bar button press', async () => {
     </NavigationContainer>
   );
 
-  const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
+  const button = screen.getByLabelText('Settings, tab, 2 of 2');
+
   await user.press(button);
 
   act(() => jest.runAllTimers());
@@ -220,56 +270,22 @@ test('navigates to settings by tab bar button press', async () => {
 </TabItem>
 </Tabs>
 
-When writing tests containing navigation with animations, you need to wait until animations finish before proceeding further. To do so, you have to use **fake timers**. [`Fake Timers`](https://jestjs.io/docs/timer-mocks) replace real implementation of the native timer functions (e.g. `setTimeout()`, `setInterval()`) with a custom implementation that uses a fake clock. They allow you to instantly skip animation time using `jest.runAllTimers()`. To avoid getting state change error, wrap `runAllTimers` in `act`.
+In the above test, we:
 
-```js
-// Enable fake timers
-jest.useFakeTimers();
+- Render the `MyTabs` navigator within a [NavigationContainer](navigation-container.md) in our test.
+- Get the tab bar button using the `getByLabelText` query that matches its accessibility label.
+- Press the button using `userEvent.press(button)` to simulate a user interaction.
+- Run all timers using `jest.runAllTimers()` to skip animations (e.g. animations in the `Pressable` for the button).
+- Assert that the `Settings screen` is visible after the navigation.
 
-// ...
+### Reacting to a navigation event
 
-// Wrap jest.runAllTimers in act to prevent state change error
-// Skip all timers including animations
-act(() => jest.runAllTimers());
-```
-
-Even though `BottomTabNavigator` by default does not use any animations, some components of the tab bar do so. If you don't use fake timers in this example, the tests might still pass but you will get a warning from `react-native-tesing-library` about React state updates.
-
-After we setup fake timers, we need to create a User Event object instance from `react-native-testing-library` in order to be able to trigger user events.
-
-```js
-// Create User Event object instance
-const user = userEvent.setup();
-```
-
-After we create and render our tabs, we get the settings tab bar button using an accessibility label assigned to it and press it using `user.press(button)`. We use fake timers to skip the animations.
-
-```js
-// Get the setting tab bar button
-const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
-
-// Simulate user pressing the button
-await user.press(button);
-
-// Skip tab bar animations
-act(() => jest.runAllTimers());
-```
-
-We expect that after pressing the button, the screen will change and `'Settings screen'` will be visible.
-
-```js
-// Assert that Settings screen is visible
-expect(screen.getByText('Settings screen')).toBeVisible();
-```
-
-### Example 2 - Reacting to navigation events
-
-Show text on another screen after transition is completed.
+In this example, we have a stack navigator with two screens: Home and Surprise. We will write a test that asserts that the text "Surprise!" is displayed after navigating to the Surprise screen.
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
 
-```js
+```js title="MyStack.js"
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Button, Text, View } from 'react-native';
@@ -316,12 +332,15 @@ export const MyStack = createStackNavigator({
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js
+```js title="MyStack.js"
+import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect, useState } from 'react';
 import { Button, Text, View } from 'react-native';
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Home screen</Text>
@@ -333,7 +352,9 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-const SurpriseScreen = ({ navigation }) => {
+const SurpriseScreen = () => {
+  const navigation = useNavigation();
+
   const [textVisible, setTextVisible] = useState(false);
 
   useEffect(() => {
@@ -347,8 +368,9 @@ const SurpriseScreen = ({ navigation }) => {
   );
 };
 
+const Stack = createStackNavigator();
+
 export const MyStack = () => {
-  const Stack = createStackNavigator();
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} />
@@ -364,7 +386,7 @@ export const MyStack = () => {
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
 
-```js
+```js title="MyStack.test.js"
 import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
 import { act, render, screen, userEvent } from '@testing-library/react-native';
@@ -373,16 +395,17 @@ import { MyStack } from './MyStack';
 
 jest.useFakeTimers();
 
-test('surprise text appears after transition to surprise screen is complete', async () => {
+test('shows surprise text after navigating to surprise screen', async () => {
   const user = userEvent.setup();
 
-  const MyStackNavigation = createStaticNavigation(MyStack);
-  render(<MyStackNavigation />);
+  const Navigation = createStaticNavigation(MyStack);
 
-  await user.press(screen.getByRole('button', { name: 'Click here!' }));
+  render(<Navigation />);
 
-  expect(screen.queryByText('Surprise!')).not.toBeVisible();
+  await user.press(screen.getByLabelText('Click here!'));
+
   act(() => jest.runAllTimers());
+
   expect(screen.getByText('Surprise!')).toBeVisible();
 });
 ```
@@ -390,7 +413,7 @@ test('surprise text appears after transition to surprise screen is complete', as
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js
+```js title="MyStack.test.js"
 import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
 import { act, render, screen, userEvent } from '@testing-library/react-native';
@@ -399,7 +422,7 @@ import { MyStack } from './MyStack';
 
 jest.useFakeTimers();
 
-test('surprise text appears after transition to surprise screen is complete', async () => {
+test('shows surprise text after navigating to surprise screen', async () => {
   const user = userEvent.setup();
 
   render(
@@ -408,10 +431,10 @@ test('surprise text appears after transition to surprise screen is complete', as
     </NavigationContainer>
   );
 
-  await user.press(screen.getByRole('button', { name: 'Click here!' }));
+  await user.press(screen.getByLabelText('Click here!'));
 
-  expect(screen.queryByText('Surprise!')).not.toBeVisible();
   act(() => jest.runAllTimers());
+
   expect(screen.getByText('Surprise!')).toBeVisible();
 });
 ```
@@ -419,257 +442,22 @@ test('surprise text appears after transition to surprise screen is complete', as
 </TabItem>
 </Tabs>
 
-We press the "Click here!" button using `user.press()` and check that the text does not appear right away but only after the transition between screens ends.
+In the above test, we:
 
-### Example 3 - Enforce navigator state in response to navigation event
+- Render the `MyStack` navigator within a [NavigationContainer](navigation-container.md) in our test.
+- Get the button using the `getByLabelText` query that matches its title.
+- Press the button using `userEvent.press(button)` to simulate a user interaction.
+- Run all timers using `jest.runAllTimers()` to skip animations (e.g. navigation animation between screens).
+- Assert that the `Surprise!` text is visible after the transition to the Surprise screen is complete.
 
-Display settings screen after settings tab bar button is pressed.
+### Fetching data `useFocusEffect`
 
-<Tabs groupId="example" queryString="example">
-<TabItem value="static" label="Static" default>
-
-```js
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useEffect } from 'react';
-import { Button, Text, View } from 'react-native';
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home screen</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-    </View>
-  );
-}
-
-function DetailsScreen() {
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    const unsubscribe = navigation
-      .getParent('MyTabs')
-      .addListener('tabPress', (e) => {
-        navigation.popToTop();
-      });
-
-    return unsubscribe;
-  }, [navigation]);
-
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Details screen</Text>
-    </View>
-  );
-}
-
-const MyStack = createStackNavigator({
-  screens: {
-    Settings: SettingsScreen,
-    Details: DetailsScreen,
-  },
-});
-
-export const MyTabs = createBottomTabNavigator({
-  id: 'MyTabs',
-  screens: {
-    Home: HomeScreen,
-    SettingsStack: MyStack,
-  },
-  screenOptions: {
-    headerShown: false,
-  },
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useEffect } from 'react';
-import { Button, Text, View } from 'react-native';
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home screen</Text>
-    </View>
-  );
-}
-
-function SettingsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-    </View>
-  );
-}
-
-function DetailsScreen({ navigation }) {
-  useEffect(() => {
-    const unsubscribe = navigation.getParent().addListener('tabPress', (e) => {
-      navigation.popToTop();
-    });
-    return unsubscribe;
-  }, [navigation]);
-
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Details screen</Text>
-    </View>
-  );
-}
-
-const SettingsStack = createStackNavigator();
-
-function MyStack() {
-  return (
-    <SettingsStack.Navigator>
-      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
-      <SettingsStack.Screen name="Details" component={DetailsScreen} />
-    </SettingsStack.Navigator>
-  );
-}
-
-const Tab = createBottomTabNavigator();
-
-export function MyTabs() {
-  return (
-    <Tab.Navigator id="MyTabs" screenOptions={{ headerShown: false }}>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="SettingsStack" component={MyStack} />
-    </Tab.Navigator>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
+In this example, we have a bottom tab navigator with two tabs: Home and Pokemon. We will write a test that asserts the data fetching logic on focus in the Pokemon screen.
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
 
-```js
-import { expect, jest, test } from '@jest/globals';
-import { createStaticNavigation } from '@react-navigation/native';
-import { act, render, screen, userEvent } from '@testing-library/react-native';
-
-import { MyTabs } from './MyTabs';
-
-jest.useFakeTimers();
-
-test('displays settings screen after settings tab bar button press', async () => {
-  const user = userEvent.setup();
-
-  const MyTabNavigation = createStaticNavigation(MyTabs);
-  render(<MyTabNavigation />);
-
-  const homeTabButton = screen.getByRole('button', {
-    name: 'Home, tab, 1 of 2',
-  });
-
-  const settingsTabButton = screen.getByRole('button', {
-    name: 'SettingsStack, tab, 2 of 2',
-  });
-
-  await user.press(settingsTabButton);
-  act(() => jest.runAllTimers());
-  expect(screen.getByText('Settings screen')).toBeVisible();
-
-  await user.press(screen.getByText('Go to Details'));
-  act(() => jest.runAllTimers());
-  expect(screen.getByText('Details screen')).toBeVisible();
-
-  await user.press(homeTabButton);
-  act(() => jest.runAllTimers());
-  expect(screen.getByText('Home screen')).toBeVisible();
-
-  await user.press(settingsTabButton);
-  act(() => jest.runAllTimers());
-  expect(screen.getByText('Settings screen')).toBeVisible();
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-import { expect, jest, test } from '@jest/globals';
-import { NavigationContainer } from '@react-navigation/native';
-import { act, render, screen, userEvent } from '@testing-library/react-native';
-
-import { MyTabs } from './MyTabs';
-
-jest.useFakeTimers();
-
-test('displays settings screen after settings tab bar button press', async () => {
-  const user = userEvent.setup();
-
-  render(
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
-  );
-
-  const homeTabButton = screen.getByRole('button', {
-    name: 'Home, tab, 1 of 2',
-  });
-
-  const settingsTabButton = screen.getByRole('button', {
-    name: 'SettingsStack, tab, 2 of 2',
-  });
-
-  await user.press(settingsTabButton);
-  act(() => jest.runAllTimers());
-  expect(screen.getByText('Settings screen')).toBeVisible();
-
-  await user.press(screen.getByText('Go to Details'));
-  act(() => jest.runAllTimers());
-  expect(screen.getByText('Details screen')).toBeVisible();
-
-  await user.press(homeTabButton);
-  act(() => jest.runAllTimers());
-  expect(screen.getByText('Home screen')).toBeVisible();
-
-  await user.press(settingsTabButton);
-  act(() => jest.runAllTimers());
-  expect(screen.getByText('Settings screen')).toBeVisible();
-});
-```
-
-</TabItem>
-</Tabs>
-
-We get tab bar buttons, press them and check if rendered screens are correct.
-
-### Example 4 - `useFocusEffect` hook and data fetching
-
-On profile screen focus, display loading state while waiting for data and then show fetched profile on every refocus.
-
-<Tabs groupId="example" queryString="example">
-<TabItem value="static" label="Static" default>
-
-```js
+```js title="MyTabs.js"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
@@ -685,58 +473,57 @@ function HomeScreen() {
 
 const url = 'https://pokeapi.co/api/v2/pokemon/ditto';
 
-type PokemonData = {
-  id: number;
-  name: string;
-};
-
-type Result =
-  | { status: 'loading' }
-  | { status: 'success'; data: PokemonData }
-  | { status: 'error' };
-
-function ProfileScreen() {
-  const [profileData, setProfileData] = useState<Result>({ status: 'loading' });
+function PokemonScreen() {
+  const [profileData, setProfileData] = useState({ status: 'loading' });
 
   useFocusEffect(
     useCallback(() => {
-      if (profileData.status !== 'success') {
-        setProfileData({ status: 'loading' });
-
-        const controller = new AbortController();
-        const signal = controller.signal;
-
-        const fetchUser = async () => {
-          try {
-            const response = await fetch(url, { signal });
-            const data = await response.json();
-
-            setProfileData({ status: 'success', data: data });
-          } catch (error) {
-            setProfileData({ status: 'error' });
-          }
-        };
-
-        fetchUser();
-
-        return () => {
-          controller.abort();
-        };
-      } else {
-        return () => {};
+      if (profileData.status === 'success') {
+        return;
       }
+
+      setProfileData({ status: 'loading' });
+
+      const controller = new AbortController();
+
+      const fetchUser = async () => {
+        try {
+          const response = await fetch(url, { signal: controller.signal });
+          const data = await response.json();
+
+          setProfileData({ status: 'success', data: data });
+        } catch (error) {
+          setProfileData({ status: 'error' });
+        }
+      };
+
+      fetchUser();
+
+      return () => {
+        controller.abort();
+      };
     }, [profileData.status])
   );
 
+  if (profileData.status === 'loading') {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+  if (profileData.status === 'error') {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>An error occurred!</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {profileData.status === 'loading' ? (
-        <Text>Loading...</Text>
-      ) : profileData.status === 'error' ? (
-        <Text>Error!</Text>
-      ) : profileData.status === 'success' ? (
-        <Text>{profileData.data.name}</Text>
-      ) : null}
+      <Text>{profileData.data.name}</Text>
     </View>
   );
 }
@@ -744,10 +531,7 @@ function ProfileScreen() {
 export const MyTabs = createBottomTabNavigator({
   screens: {
     Home: HomeScreen,
-    Profile: ProfileScreen,
-  },
-  screenOptions: {
-    headerShown: false,
+    Pokemon: PokemonScreen,
   },
 });
 ```
@@ -755,7 +539,7 @@ export const MyTabs = createBottomTabNavigator({
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js
+```js title="MyTabs.js"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
@@ -771,58 +555,57 @@ function HomeScreen() {
 
 const url = 'https://pokeapi.co/api/v2/pokemon/ditto';
 
-type PokemonData = {
-  id: number;
-  name: string;
-};
-
-type Result =
-  | { status: 'loading' }
-  | { status: 'success'; data: PokemonData }
-  | { status: 'error' };
-
-function ProfileScreen() {
-  const [profileData, setProfileData] = useState<Result>({ status: 'loading' });
+function PokemonInfoScreen() {
+  const [profileData, setProfileData] = useState({ status: 'loading' });
 
   useFocusEffect(
     useCallback(() => {
-      if (profileData.status !== 'success') {
-        setProfileData({ status: 'loading' });
-
-        const controller = new AbortController();
-        const signal = controller.signal;
-
-        const fetchUser = async () => {
-          try {
-            const response = await fetch(url, { signal });
-            const data = await response.json();
-
-            setProfileData({ status: 'success', data: data });
-          } catch (error) {
-            setProfileData({ status: 'error' });
-          }
-        };
-
-        fetchUser();
-
-        return () => {
-          controller.abort();
-        };
-      } else {
-        return () => {};
+      if (profileData.status === 'success') {
+        return;
       }
+
+      setProfileData({ status: 'loading' });
+
+      const controller = new AbortController();
+
+      const fetchUser = async () => {
+        try {
+          const response = await fetch(url, { signal: controller.signal });
+          const data = await response.json();
+
+          setProfileData({ status: 'success', data: data });
+        } catch (error) {
+          setProfileData({ status: 'error' });
+        }
+      };
+
+      fetchUser();
+
+      return () => {
+        controller.abort();
+      };
     }, [profileData.status])
   );
 
+  if (profileData.status === 'loading') {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+  if (profileData.status === 'error') {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>An error occurred!</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {profileData.status === 'loading' ? (
-        <Text>Loading...</Text>
-      ) : profileData.status === 'error' ? (
-        <Text>Error!</Text>
-      ) : profileData.status === 'success' ? (
-        <Text>{profileData.data.name}</Text>
-      ) : null}
+      <Text>{profileData.data.name}</Text>
     </View>
   );
 }
@@ -833,7 +616,7 @@ export function MyTabs() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Pokemon" component={PokemonScreen} />
     </Tab.Navigator>
   );
 }
@@ -842,9 +625,9 @@ export function MyTabs() {
 </TabItem>
 </Tabs>
 
-To make the test deterministic and isolate it from the real backend, you can mock the `fetch` function. For this purpose you can use [Mock Service Worker](https://mswjs.io/). Please refer to the documentation of the library to learn more about setting it up in your project ([Getting started](https://mswjs.io/docs/getting-started), [React Native integration](https://mswjs.io/docs/integrations/react-native)).
+To make the test deterministic and isolate it from the real backend, you can mock the network requests with a library such as [Mock Service Worker](https://mswjs.io/):
 
-```js
+```js title="msw-handlers.js"
 import { delay, http, HttpResponse } from 'msw';
 
 export const handlers = [
@@ -859,12 +642,25 @@ export const handlers = [
 ];
 ```
 
-Before writing the test, we setup a handler that mocks responses from the API (for this example we're using [PokéAPI](https://pokeapi.co/)). Additionally, we `delay` the response by 1000 ms.
+Here we setup a handler that mocks responses from the API (for this example we're using [PokéAPI](https://pokeapi.co/)). Additionally, we `delay` the response by 1000ms to simulate a network request delay.
+
+Then, we write a Node.js integration module to use the Mock Service Worker in our tests:
+
+```js title="msw-node.js"
+import { setupServer } from 'msw/node';
+import { handlers } from './msw-handlers';
+
+const server = setupServer(...handlers);
+```
+
+Refer to the documentation of the library to learn more about setting it up in your project - [Getting started](https://mswjs.io/docs/getting-started), [React Native integration](https://mswjs.io/docs/integrations/react-native).
 
 <Tabs groupId="example" queryString="example">
 <TabItem value="static" label="Static" default>
 
-```js
+```js title="MyTabs.test.js"
+import './msw-node';
+
 import { expect, jest, test } from '@jest/globals';
 import { createStaticNavigation } from '@react-navigation/native';
 import { act, render, screen, userEvent } from '@testing-library/react-native';
@@ -873,21 +669,18 @@ import { MyTabs } from './MyTabs';
 
 jest.useFakeTimers();
 
-test('on profile screen focus, displays loading state while waiting for data and then shows fetched profile on every refocus', async () => {
+test('loads data on Pokemon info screen after focus', async () => {
   const user = userEvent.setup();
 
-  const MyTabNavigation = createStaticNavigation(MyTabs);
-  render(<MyTabNavigation />);
+  const Navigation = createStaticNavigation(MyTabs);
 
-  const homeTabButton = screen.getByRole('button', {
-    name: 'Home, tab, 1 of 2',
-  });
+  render(<Navigation />);
 
-  const profileTabButton = screen.getByRole('button', {
-    name: 'Profile, tab, 2 of 2',
-  });
+  const homeTabButton = screen.getByLabelText('Home, tab, 1 of 2');
+  const profileTabButton = screen.getByLabelText('Profile, tab, 2 of 2');
 
   await user.press(profileTabButton);
+
   expect(screen.getByText('Loading...')).toBeVisible();
 
   await act(() => jest.runAllTimers());
@@ -895,13 +688,12 @@ test('on profile screen focus, displays loading state while waiting for data and
   expect(screen.getByText('ditto')).toBeVisible();
 
   await user.press(homeTabButton);
+
   await act(() => jest.runAllTimers());
 
   await user.press(profileTabButton);
+
   expect(screen.queryByText('Loading...')).not.toBeVisible();
-
-  await act(() => jest.runAllTimers());
-
   expect(screen.getByText('ditto')).toBeVisible();
 });
 ```
@@ -909,7 +701,9 @@ test('on profile screen focus, displays loading state while waiting for data and
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js
+```js title="MyTabs.test.js"
+import './msw-node';
+
 import { expect, jest, test } from '@jest/globals';
 import { NavigationContainer } from '@react-navigation/native';
 import { act, render, screen, userEvent } from '@testing-library/react-native';
@@ -918,7 +712,7 @@ import { MyTabs } from './MyTabs';
 
 jest.useFakeTimers();
 
-test('on profile screen focus, displays loading state while waiting for data and then shows fetched profile on every refocus', async () => {
+test('loads data on Pokemon info screen after focus', async () => {
   const user = userEvent.setup();
 
   render(
@@ -927,15 +721,11 @@ test('on profile screen focus, displays loading state while waiting for data and
     </NavigationContainer>
   );
 
-  const homeTabButton = screen.getByRole('button', {
-    name: 'Home, tab, 1 of 2',
-  });
-
-  const profileTabButton = screen.getByRole('button', {
-    name: 'Profile, tab, 2 of 2',
-  });
+  const homeTabButton = screen.getByLabelText('Home, tab, 1 of 2');
+  const profileTabButton = screen.getByLabelText('Profile, tab, 2 of 2');
 
   await user.press(profileTabButton);
+
   expect(screen.getByText('Loading...')).toBeVisible();
 
   await act(() => jest.runAllTimers());
@@ -943,13 +733,12 @@ test('on profile screen focus, displays loading state while waiting for data and
   expect(screen.getByText('ditto')).toBeVisible();
 
   await user.press(homeTabButton);
+
   await act(() => jest.runAllTimers());
 
   await user.press(profileTabButton);
+
   expect(screen.queryByText('Loading...')).not.toBeVisible();
-
-  await act(() => jest.runAllTimers());
-
   expect(screen.getByText('ditto')).toBeVisible();
 });
 ```
@@ -957,12 +746,18 @@ test('on profile screen focus, displays loading state while waiting for data and
 </TabItem>
 </Tabs>
 
-We navigate to profile screen and check if loading state is rendered correctly. Then we use fake timers to skip the delay and check if fetched data is displayed on the screen. To ensure expected behavior not only on the first focus, we navigate back to home, then to settings and check that the data is present without unnecessary fetch.
+In the above test, we:
 
-## Best practices
+- Assert that the `Loading...` text is visible while the data is being fetched.
+- Run all timers using `jest.runAllTimers()` to skip delays in the network request.
+- Assert that the `ditto` text is visible after the data is fetched.
+- Press the home tab button to navigate to the home screen.
+- Run all timers using `jest.runAllTimers()` to skip animations (e.g. animations in the `Pressable` for the button).
+- Press the profile tab button to navigate back to the Pokemon screen.
+- Ensure that cached data is shown by asserting that the `Loading...` text is not visible and the `ditto` text is visible.
 
-There are a couple of things to keep in mind when writing tests for components using React Navigation:
+:::note
 
-1. Avoid mocking React Navigation. Instead, use a real navigator in your tests.
-2. Don't check for navigation actions. Instead, check for the result of the navigation such as the screen being rendered.
-3. Remember to use fake timers when testing code that involves animations (e.g. transitions between screens with `StackNavigator`).
+In a production app, we recommend using a library like [React Query](https://react-query.tanstack.com/) to handle data fetching and caching. The above example is for demonstration purposes only.
+
+:::
