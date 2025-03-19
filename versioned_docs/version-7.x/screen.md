@@ -218,7 +218,7 @@ This can be done by specifying the `getId` callback. It receives an object with 
 <TabItem value="static" label="Static" default>
 
 ```js
-const Stack = createNativeStackNavigator({
+const Stack = createStackNavigator({
   screens: {
     Profile: {
       screen: ProfileScreen,
@@ -254,6 +254,12 @@ Let's say you have a stack with the history `Home > Profile (userId: bob) > Sett
   The resulting screens will be `Home > Profile (userId: bob) > Settings > Profile (userId: alice)` since it'll add a new `Profile` screen as no matching screen was found.
 
 If `getId` is specified in a tab or drawer navigator, the screen will remount if the ID changes.
+
+:::warning
+
+If you're using [`@react-navigation/native-stack`](native-stack-navigator.md), it doesn't work correctly with the `getId` callback. So it's recommended to avoid using it in that case.
+
+:::
 
 ### Component
 
