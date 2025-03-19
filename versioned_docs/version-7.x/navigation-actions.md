@@ -282,7 +282,7 @@ In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack
 
 - If you're already on a screen with the same name, it will update its params and not push a new screen.
 - If you're on a different screen, it will push the new screen onto the stack.
-- If the [`getId`](screen.md#id) prop is specified, and another screen in the stack has the same ID, it will navigate to that screen and update its params instead.
+- If the [`getId`](screen.md#id) prop is specified, and another screen in the stack has the same ID, it will bring that screen to focus and update its params instead.
 
 <details>
 <summary>Advanced usage</summary>
