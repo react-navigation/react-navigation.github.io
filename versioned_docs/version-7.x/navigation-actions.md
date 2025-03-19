@@ -28,7 +28,9 @@ The `navigate` action allows to navigate to a specific route. It takes the follo
 
 - `name` - _string_ - A destination name of the screen in the current or a parent navigator.
 - `params` - _object_ - Params to use for the destination route.
-- `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
+- `options` - Options object containing the following properties:
+  - `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
+  - `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen in the stack. Defaults to `false`.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -292,6 +294,7 @@ The `navigate` action can also accepts an object as the argument with the follow
 - `name` - _string_ - A destination name of the screen in the current or a parent navigator
 - `params` - _object_ - Params to use for the destination route.
 - `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
+- `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen in the stack. Defaults to `false`.
 - `path` - _string_ - The path (from deep link or universal link) to associate with the screen.
 
 This is primarily used internally to associate a path with a screen when it's from a URL.
