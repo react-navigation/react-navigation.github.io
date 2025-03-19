@@ -1351,7 +1351,8 @@ Navigates back to a previous screen in the stack by popping screens after it. Th
 
 - `name` - _string_ - Name of the route to navigate to.
 - `params` - _object_ - Screen params to pass to the destination route.
-- `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
+- `options` - Options object containing the following properties:
+  - `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
 
 If a matching screen is not found in the stack, this will pop the current screen and add a new screen with the specified name and params.
 
