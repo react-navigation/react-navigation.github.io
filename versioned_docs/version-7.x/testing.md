@@ -450,7 +450,7 @@ In the above test, we:
 - Run all timers using `jest.runAllTimers()` to skip animations (e.g. navigation animation between screens).
 - Assert that the `Surprise!` text is visible after the transition to the Surprise screen is complete.
 
-### Fetching data `useFocusEffect`
+### Fetching data with `useFocusEffect`
 
 In this example, we have a bottom tab navigator with two tabs: Home and Pokemon. We will write a test that asserts the data fetching logic on focus in the Pokemon screen.
 
