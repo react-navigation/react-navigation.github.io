@@ -398,7 +398,6 @@ However, this is an anti-pattern. There are many reasons why this is a bad idea:
 - The same data is duplicated in multiple places. This can lead to bugs such as the profile screen showing outdated data even if the user object has changed after navigation.
 - Each screen that navigates to the `Profile` screen now needs to know how to fetch the user object - which increases the complexity of the code.
 - URLs to the screen (browser URL on the web, or deep links on native) will contain the user object. This is problematic:
-
   1. Since the user object is in the URL, it's possible to pass a random user object representing a user that doesn't exist or has incorrect data in the profile.
   2. If the user object isn't passed or improperly formatted, this could result in crashes as the screen won't know how to handle it.
   3. The URL can become very long and unreadable.
@@ -409,11 +408,11 @@ A better way is to pass only the ID of the user in params:
 navigation.navigate('Profile', { userId: 'jane' });
 ```
 
-Now, you can use the passed `userId` to grab the user from your global store. This eliminates a host of issues such as outdated data, or problematic URLs.
+Now, you can use the passed `userId` to grab the user from your global cache or fetch it from the API. Using a library such as [React Query](https://tanstack.com/query/) can simplify this process since it makes it easy to fetch and cache your data. This approach helps to avoid the problems mentioned above.
 
 Some examples of what should be in params are:
 
-1. IDs like user id, item id etc., e.g. `navigation.navigate('Profile', { userId: 'Jane' })`
+1. IDs such as user id, item id etc., e.g. `navigation.navigate('Profile', { userId: 'Jane' })`
 2. Params for sorting, filtering data etc. when you have a list of items, e.g. `navigation.navigate('Feeds', { sortBy: 'latest' })`
 3. Timestamps, page numbers or cursors for pagination, e.g. `navigation.navigate('Chat', { beforeTime: 1603897152675 })`
 4. Data to fill inputs on a screen to compose something, e.g. `navigation.navigate('ComposeTweet', { title: 'Hello world!' })`
