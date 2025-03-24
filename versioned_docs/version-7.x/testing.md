@@ -758,6 +758,6 @@ In the above test, we:
 
 :::note
 
-In a production app, we recommend using a library like [React Query](https://react-query.tanstack.com/) to handle data fetching and caching. The above example is for demonstration purposes only.
+In a production app, we recommend using a library like [React Query](https://tanstack.com/query/) to handle data fetching and caching. The above example is for demonstration purposes only.
 
 :::
