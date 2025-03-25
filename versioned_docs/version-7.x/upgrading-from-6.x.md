@@ -151,6 +151,12 @@ const theme = {
 
 If you want to customize the fonts, see [the themes guide](themes.md) for more details.
 
+#### The navigation state is frozen in development mode
+
+The navigation state is now frozen in development mode to prevent accidental mutations. This includes the state object and all the nested objects such as `route` object etc. If you're mutating the navigation state directly, you may get an error like `Cannot assign to read only property 'key' of object`.
+
+Note that React Navigation relies on the immutability of the navigation state to detect changes and update the UI. Mutating the navigation state directly can cause issues and was never supported. So if you're mutating the navigation state directly, you'll need to use a different approach.
+
 ### Changes to linking
 
 #### Encoding of params in path position is now more relaxed
