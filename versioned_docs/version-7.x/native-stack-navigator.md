@@ -187,11 +187,13 @@ Only supported on iOS.
 How the back button displays icon and title.
 
 Supported values:
+
 - "default" - Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
 - "generic" – Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon).
 - "minimal" – Always displays only the icon without a title.
 
 The space-aware behavior is disabled when:
+
 - The iOS version is 13 or lower
 - Custom back title is set (e.g. with `headerBackTitle`)
 - Custom font family or size is set (e.g. with `headerBackTitleStyle`)
