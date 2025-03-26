@@ -174,7 +174,9 @@ This will have no effect on the first screen in the stack.
 
 #### `headerBackTitle`
 
-Title string used by the back button on iOS. Defaults to the previous scene's title, or "Back" if there's not enough space. Use `headerBackButtonDisplayMode` to customize the behavior.
+Title string used by the back button on iOS. Defaults to the previous scene's title.
+
+Use `headerBackButtonDisplayMode: "minimal"` to hide it.
 
 Only supported on iOS.
 
@@ -185,10 +187,17 @@ Only supported on iOS.
 How the back button displays icon and title.
 
 Supported values:
+- "default" - Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
+- "generic" – Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon).
+- "minimal" – Always displays only the icon without a title.
 
-- `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
-- `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon). iOS >= 14 only, falls back to "default" on older iOS versions.
-- `minimal`: Always displays only the icon without a title.
+The space-aware behavior is disabled when:
+- The iOS version is 13 or lower
+- Custom back title is set (e.g. with `headerBackTitle`)
+- Custom font family or size is set (e.g. with `headerBackTitleStyle`)
+- Back button menu is disabled (e.g. with `headerBackButtonMenuEnabled`)
+
+In such cases, a static title and icon are always displayed.
 
 Only supported on iOS.
 
