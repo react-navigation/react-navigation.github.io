@@ -74,7 +74,7 @@ npm install react-native-screens react-native-safe-area-context
 
 :::note
 
-You might get warnings related to peer dependencies after installation. They are usually caused by incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.
+You might get warnings related to peer dependencies after installation. They are usually caused by incorrect version ranges specified in some packages. You can safely ignore these warnings as long as your app builds and works as expected.
 
 :::
 

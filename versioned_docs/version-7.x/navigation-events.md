@@ -70,7 +70,7 @@ React.useEffect(
 );
 ```
 
-:::note
+:::warning
 
 Preventing the action in this event doesn't work properly with [`@react-navigation/native-stack`](native-stack-navigator.md). We recommend using the [`usePreventRemove` hook](preventing-going-back.md) instead.
 
