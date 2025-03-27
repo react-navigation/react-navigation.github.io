@@ -107,7 +107,7 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-![Header button](/assets/headers/header-button.png)
+<img src="/assets/7.x/fundamentals/buttonInHeader.png" width="500" alt="Button right in the header" />
 
 When we define our button this way, the `this` variable in `options` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
 
@@ -236,8 +236,8 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-<video playsInline autoPlay muted loop >
-  <source src="/assets/headers/header-update-screen.mp4" />
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/fundamentals/updateHeader.mp4" />
 </video>
 
 Here we update the `headerRight` with a button with `onPress` handler that has access to the component's state and can update it.
@@ -287,7 +287,7 @@ const MyStack = createNativeStackNavigator({
 </TabItem>
 </Tabs>
 
-![Header custom back](/assets/headers/header-back-custom.png)
+<img src="/assets/7.x/fundamentals/customBack.png" width="500" alt="Custom back button" />
 
 ## Overriding the back button
 
