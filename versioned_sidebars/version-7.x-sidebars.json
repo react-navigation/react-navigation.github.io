@@ -71,6 +71,7 @@
           "use-focus-effect",
           "use-is-focused",
           "use-prevent-remove",
+          "use-route-path",
           "use-link-to",
           "use-link-props",
           "use-link-builder",
