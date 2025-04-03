@@ -237,6 +237,19 @@ Note that the returned `options` object will be `undefined` if there are no navi
 
 The `addListener` method lets you listen to the following events:
 
+##### `ready`
+
+The event is triggered when the navigation tree is ready. This is useful for cases where you want to wait until the navigation tree is mounted:
+
+```js
+const unsubscribe = navigationRef.addListener('ready', () => {
+  // Get the initial state of the navigation tree
+  console.log(navigationRef.getRootState());
+});
+```
+
+This is analogous to the [`onReady`](#onready) method.
+
 ##### `state`
 
 The event is triggered whenever the [navigation state](navigation-state.md) changes in any navigator in the navigation tree:
