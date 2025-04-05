@@ -83,13 +83,13 @@ const RootStack = createNativeStackNavigator({
     },
   },
 });
-// codeblock-focus-end
 
 const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
   return <Navigation />;
 }
+// codeblock-focus-end
 
 function HomeScreen() {
   return <View />;
@@ -124,35 +124,38 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-const getIsSignedIn = () => {
-  // custom logic
+const useIsSignedIn = () => {
   return true;
 };
 
+const useIsSignedOut = () => {
+  return false;
+};
+
+// codeblock-focus-start
 export default function App() {
-  const isSignedIn = getIsSignedIn();
+  const isSignedIn = useIsSignedIn();
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        // codeblock-focus-start
         {isSignedIn ? (
-          <>
+          <Stack.Group>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="Settings" component={SettingsScreen} />
-          </>
+          </Stack.Group>
         ) : (
-          <>
+          <Stack.Group>
             <Stack.Screen name="SignIn" component={SignInScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
-          </>
+          </Stack.Group>
         )}
-        // codeblock-focus-end
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+// codeblock-focus-end
 
 function HomeScreen() {
   return <View />;
