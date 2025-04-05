@@ -35,39 +35,6 @@ We can configure different screens to be available based on some condition. For 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-To do this, we need a couple of things:
-
-1. Define two hooks: `useIsSignedIn` and `useIsSignedOut`, which return a boolean value indicating whether the user is signed in or not.
-2. Use the `useIsSignedIn` and `useIsSignedOut` along with the [`if`](static-configuration.md#if) property to define the screens that are available based on the condition.
-
-This tells React Navigation to show specific screens based on the signed in status. When the signed in status changes, React Navigation will automatically show the appropriate screen.
-
-## Define the hooks
-
-To implement the `useIsSignedIn` and `useIsSignedOut` hooks, we can start by creating a context to store the authentication state. Let's call it `SignInContext`:
-
-```js
-import * as React from 'react';
-
-const SignInContext = React.createContext();
-```
-
-Then we can implement the `useIsSignedIn` and `useIsSignedOut` hooks as follows:
-
-```js
-function useIsSignedIn() {
-  const isSignedIn = React.useContext(SignInContext);
-  return isSignedIn;
-}
-
-function useIsSignedOut() {
-  const isSignedIn = React.useContext(SignInContext);
-  return !isSignedIn;
-}
-```
-
-We'll discuss how to expose the context value later.
-
 ```js name="Customizing tabs appearance" snack
 import * as React from 'react';
 import { View } from 'react-native';
@@ -82,6 +49,7 @@ const useIsSignedOut = () => {
   return false;
 };
 
+// codeblock-focus-start
 const signedInStack = createNativeStackNavigator({
   screens: {
     Home: HomeScreen,
@@ -97,7 +65,6 @@ const signedOutStack = createNativeStackNavigator({
   },
 });
 
-// codeblock-focus-start
 const RootStack = createNativeStackNavigator({
   screens: {
     LoggedIn: {
@@ -146,9 +113,8 @@ function SignUpScreen() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
 
-For example:
+<TabItem value="dynamic" label="Dynamic">
 
 ```js name="Customizing tabs appearance" snack
 import * as React from 'react';
@@ -209,6 +175,9 @@ function SignUpScreen() {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 When we define screens like this, when `isSignedIn` is `true`, React Navigation will only see the `Home`, `Profile` and `Settings` screens, and when it's `false`, React Navigation will see the `SignIn` and `SignUp` screens. This makes it impossible to navigate to the `Home`, `Profile` and `Settings` screens when the user is not signed in, and to `SignIn` and `SignUp` screens when the user is signed in.
 
 This pattern has been in use by other routing libraries such as React Router for a long time, and is commonly known as "Protected routes". Here, our screens which need the user to be signed in are "protected" and cannot be navigated to by other means if the user is not signed in.
@@ -219,8 +188,38 @@ The example shows stack navigator, but you can use the same approach with any na
 
 By conditionally defining different screens based on a variable, we can implement auth flow in a simple way that doesn't require additional logic to make sure that the correct screen is shown.
 
-</TabItem>
-</Tabs>
+To do this, we need a couple of things:
+
+1. Define two hooks: `useIsSignedIn` and `useIsSignedOut`, which return a boolean value indicating whether the user is signed in or not.
+2. Use the `useIsSignedIn` and `useIsSignedOut` along with the [`if`](static-configuration.md#if) property to define the screens that are available based on the condition.
+
+This tells React Navigation to show specific screens based on the signed in status. When the signed in status changes, React Navigation will automatically show the appropriate screen.
+
+## Define the hooks
+
+To implement the `useIsSignedIn` and `useIsSignedOut` hooks, we can start by creating a context to store the authentication state. Let's call it `SignInContext`:
+
+```js
+import * as React from 'react';
+
+const SignInContext = React.createContext();
+```
+
+Then we can implement the `useIsSignedIn` and `useIsSignedOut` hooks as follows:
+
+```js
+function useIsSignedIn() {
+  const isSignedIn = React.useContext(SignInContext);
+  return isSignedIn;
+}
+
+function useIsSignedOut() {
+  const isSignedIn = React.useContext(SignInContext);
+  return !isSignedIn;
+}
+```
+
+We'll discuss how to expose the context value later.
 
 ## Define our screens
 
