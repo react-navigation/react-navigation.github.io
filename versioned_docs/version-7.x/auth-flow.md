@@ -319,12 +319,6 @@ const RootStack = createNativeStackNavigator({
 });
 ```
 
-:::tip
-
-If you have both your login-related screens and rest of the screens in Stack navigators, we recommend to use a single Stack navigator and place the conditional inside instead of using 2 different navigators. This makes it possible to have a proper transition animation during login/logout.
-
-:::
-
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
@@ -334,11 +328,12 @@ if (isLoading) {
   return <SplashScreen />;
 }
 
+const isSignedIn = userToken != null;
+
 return (
   <NavigationContainer>
     <Stack.Navigator>
-      {userToken == null ? (
-        // No token found, user isn't signed in
+      {isSignedIn ? (
         <Stack.Screen
           name="SignIn"
           component={SimpleSignInScreen}
@@ -348,16 +343,12 @@ return (
           initialParams={{ setUserToken }}
         />
       ) : (
-        // User is signed in
         <Stack.Screen name="Home" component={HomeScreen} />
       )}
     </Stack.Navigator>
   </NavigationContainer>
 );
 ```
-
-</TabItem>
-</Tabs>
 
 In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `SecureStore` and validating the token. After we get the token and if it's valid, we need to set the `userToken`. We also have another state called `isSignout` to have a different animation on sign out.
 
@@ -367,40 +358,6 @@ The main thing to notice is that we're conditionally defining screens based on t
 - `Home` screen is only defined if `userToken` is non-null (user is signed in)
 
 Here, we're conditionally defining one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly, for the screens accessible after signing in, you probably have more than one screen. We can use `React.Fragment` to define multiple screens:
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-const SignInContext = React.createContext();
-
-function useIsSignedIn() {
-  const isSignedIn = React.useContext(SignInContext);
-  return isSignedIn;
-}
-
-function useIsSignedOut() {
-  const isSignedIn = React.useContext(SignInContext);
-  return !isSignedIn;
-}
-
-/* content */
-
-export default function App() {
-  /* content */
-
-  const isSignedIn = userToken != null;
-
-  return (
-    <SignInContext.Provider value={isSignedIn}>
-      <Navigation />
-    </SignInContext.Provider>
-  );
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
 
 ```js
 state.userToken == null ? (
@@ -417,14 +374,14 @@ state.userToken == null ? (
 );
 ```
 
-:::tip
-
-If you have both your login-related screens and rest of the screens in two different Stack navigators, we recommend to use a single Stack navigator and place the conditional inside instead of using 2 different navigators. This makes it possible to have a proper transition animation during login/logout.
-
-:::
-
 </TabItem>
 </Tabs>
+
+:::tip
+
+If you have both your login-related screens and rest of the screens in Stack navigators, we recommend to use a single Stack navigator and place the conditional inside instead of using 2 different navigators. This makes it possible to have a proper transition animation during login/logout.
+
+:::
 
 ## Implement the logic for restoring the token
 
