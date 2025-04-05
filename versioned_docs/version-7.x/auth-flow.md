@@ -46,7 +46,7 @@ const useIsSignedIn = () => {
 };
 
 const useIsSignedOut = () => {
-  return false;
+  return !useIsSignedIn();
 };
 
 // codeblock-focus-start
@@ -83,13 +83,13 @@ const RootStack = createNativeStackNavigator({
     },
   },
 });
+// codeblock-focus-end
 
 const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
   return <Navigation />;
 }
-// codeblock-focus-end
 
 function HomeScreen() {
   return <View />;
@@ -129,11 +129,11 @@ const useIsSignedIn = () => {
 };
 
 const useIsSignedOut = () => {
-  return false;
+  return !useIsSignedIn();
 };
 
-// codeblock-focus-start
 export default function App() {
+  // codeblock-focus-start
   const isSignedIn = useIsSignedIn();
 
   return (
@@ -154,8 +154,8 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
+  // codeblock-focus-end
 }
-// codeblock-focus-end
 
 function HomeScreen() {
   return <View />;
@@ -181,11 +181,11 @@ function SignUpScreen() {
 </TabItem>
 </Tabs>
 
-When we define screens like this, when `isSignedIn` is `true`, React Navigation will only see the `Home`, `Profile` and `Settings` screens, and when it's `false`, React Navigation will see the `SignIn` and `SignUp` screens. This makes it impossible to navigate to the `Home`, `Profile` and `Settings` screens when the user is not signed in, and to `SignIn` and `SignUp` screens when the user is signed in.
+When `useIsSignedIn` returns `true`, React Navigation will only see the `Home`, `Profile` and `Settings` screens, and when it returns `false`, React Navigation will see the `SignIn` and `SignUp` screens. This makes it impossible to navigate to the `Home`, `Profile` and `Settings` screens when the user is not signed in, and to `SignIn` and `SignUp` screens when the user is signed in.
 
 This pattern has been in use by other routing libraries such as React Router for a long time, and is commonly known as "Protected routes". Here, our screens which need the user to be signed in are "protected" and cannot be navigated to by other means if the user is not signed in.
 
-The magic happens when the value of the `isSignedIn` variable changes. Let's say, initially `isSignedIn` is `false`. This means, either `SignIn` or `SignUp` screens are shown. After the user signs in, the value of `isSignedIn` will change to `true`. React Navigation will see that the `SignIn` and `SignUp` screens are no longer defined and so it will remove them. Then it'll show the `Home` screen automatically because that's the first screen defined when `isSignedIn` is `true`.
+The magic happens when the value returned by `useIsSignedin` changes. Let's say, initially `useIsSignedIn` returns `false`. This means, either `SignIn` or `SignUp` screens are shown. After the user signs in, the return value of `useIsSignedIn` will change to `true`. React Navigation will see that the `SignIn` and `SignUp` screens are no longer defined and so it will remove them. Then it'll show the `Home` screen automatically because that's the first screen defined when `useIsSignedIn` returns `true`.
 
 The example shows stack navigator, but you can use the same approach with any navigator.
 
@@ -193,9 +193,21 @@ By conditionally defining different screens based on a variable, we can implemen
 
 To do this, we need a couple of things:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
 1. Define two hooks: `useIsSignedIn` and `useIsSignedOut`, which return a boolean value indicating whether the user is signed in or not.
 2. Use the `useIsSignedIn` and `useIsSignedOut` along with the [`if`](static-configuration.md#if) property to define the screens that are available based on the condition.
 
+</TabItem>
+
+<TabItem value="dynamic" label="Dynamic">
+
+1. Define two hooks: `useIsSignedIn` and `useIsSignedOut`, which return a boolean value indicating whether the user is signed in or not.
+2. Use the `useIsSignedIn` and `useIsSignedOut` along with conditional rendering to define the screens that are available based on the condition.
+
+</TabItem>
+</Tabs>
 This tells React Navigation to show specific screens based on the signed in status. When the signed in status changes, React Navigation will automatically show the appropriate screen.
 
 ## Define the hooks
