@@ -92,13 +92,13 @@ You can also pass a [`fallback`](navigation-container.md#fallback) prop that con
 
 ## Prefixes
 
-The `prefixes` option can be used to specify custom schemes (e.g. `mychat://`) as well as host & domain names (e.g. `https://mychat.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
+The `prefixes` option can be used to specify custom schemes (e.g. `example://`) as well as host & domain names (e.g. `https://example.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
 
 For example:
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com'],
+  prefixes: ['example://', 'https://example.com'],
 };
 ```
 
@@ -106,11 +106,11 @@ Note that the `prefixes` option is not supported on Web. The host & domain names
 
 ### Multiple subdomains​
 
-To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*`. before the beginning of a specific domain. Note that an entry for `*.mychat.com` does not match `mychat.com` because of the period after the asterisk. To enable matching for both `*.mychat.com` and `mychat.com`, you need to provide a separate prefix entry for each.
+To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*`. before the beginning of a specific domain. Note that an entry for `*.example.com` does not match `example.com` because of the period after the asterisk. To enable matching for both `*.example.com` and `example.com`, you need to provide a separate prefix entry for each.
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com', 'https://*.mychat.com'],
+  prefixes: ['example://', 'https://example.com', 'https://*.example.com'],
 };
 ```
 
@@ -122,7 +122,7 @@ To achieve this, you can use the `filter` option:
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com'],
+  prefixes: ['example://', 'https://example.com'],
   // highlight-next-line
   filter: (url) => !url.includes('+expo-auth-session'),
 };
@@ -132,11 +132,11 @@ This is not supported on Web as we always need to handle the URL of the page.
 
 ## Apps under subpaths
 
-If your app is hosted under a subpath, you can specify the subpath at the top-level of the `config`. For example, if your app is hosted at `https://mychat.com/app`, you can specify the `path` as `app`:
+If your app is hosted under a subpath, you can specify the subpath at the top-level of the `config`. For example, if your app is hosted at `https://example.com/app`, you can specify the `path` as `app`:
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com'],
+  prefixes: ['example://', 'https://example.com'],
   config: {
     // highlight-next-line
     path: 'app',
@@ -322,7 +322,7 @@ const config = {
 };
 
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config,
 };
 
@@ -1357,7 +1357,7 @@ Example:
 
 ```js
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   getStateFromPath: (path, options) => {
     // Return a state object here
     // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
