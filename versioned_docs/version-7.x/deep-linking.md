@@ -20,12 +20,12 @@ Below, we'll go through required configurations so that the deep link integratio
 
 ## Setup with Expo projects
 
-First, you will want to specify a URL scheme for your app. This corresponds to the string before `://` in a URL, so if your scheme is `mychat` then a link to your app would be `mychat://`. You can register for a scheme in your `app.json` by adding a string under the scheme key:
+First, you will want to specify a URL scheme for your app. This corresponds to the string before `://` in a URL, so if your scheme is `example` then a link to your app would be `example://`. You can register for a scheme in your `app.json` by adding a string under the scheme key:
 
 ```json
 {
   "expo": {
-    "scheme": "mychat"
+    "scheme": "example"
   }
 }
 ```
@@ -97,7 +97,7 @@ const linking = {
 
 ### Setup on iOS
 
-Let's configure the native iOS app to open based on the `mychat://` URI scheme.
+Let's configure the native iOS app to open based on the `example://` URI scheme.
 
 You'll need to link `RCTLinking` to your project by following the steps described here. To be able to listen to incoming app links, you'll need to add the following lines to `AppDelegate.m` in your project:
 
@@ -132,12 +132,12 @@ Now you need to add the scheme to your project configuration.
 The easiest way to do this is with the `uri-scheme` package by running the following:
 
 ```bash
-npx uri-scheme add mychat --ios
+npx uri-scheme add example --ios
 ```
 
 If you want to do it manually, open the project (e.g. `SimpleApp/ios/SimpleApp.xcworkspace`) in Xcode. Select the project in sidebar and navigate to the info tab. Scroll down to "URL Types" and add one. In the new URL type, set the identifier and the URL scheme to your desired URL scheme.
 
-![Xcode project info URL types with mychat added](/assets/deep-linking/xcode-linking.png)
+![Xcode project info URL types with example added](/assets/deep-linking/xcode-linking.png)
 
 To make sure Universal Links work in your app, you also need to setup [Associated Domains](https://developer.apple.com/documentation/Xcode/supporting-associated-domains) on your server.
 
@@ -157,7 +157,7 @@ If you're using React Navigation within a hybrid app - an iOS app that has both 
 
 To configure the external linking in Android, you can create a new intent in the manifest.
 
-The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add mychat --android`.
+The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add example --android`.
 
 If you want to add it manually, open up `SimpleApp/android/app/src/main/AndroidManifest.xml`, and make the following adjustments:
 
@@ -176,7 +176,7 @@ If you want to add it manually, open up `SimpleApp/android/app/src/main/AndroidM
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="mychat" />
+        <data android:scheme="example" />
     </intent-filter>
 </activity>
 ```
@@ -200,7 +200,7 @@ After adding them, it should look like this:
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="mychat" />
+        <data android:scheme="example" />
     </intent-filter>
     <intent-filter android:autoVerify="true">
         <action android:name="android.intent.action.VIEW" />
@@ -246,7 +246,7 @@ npx uri-scheme open [your deep link] --[ios|android]
 For example:
 
 ```bash
-npx uri-scheme open "mychat://chat/jane" --ios
+npx uri-scheme open "example://chat/jane" --ios
 ```
 
 Or if using Expo client:
@@ -266,7 +266,7 @@ xcrun simctl openurl booted [your deep link]
 For example:
 
 ```bash
-xcrun simctl openurl booted "mychat://chat/jane"
+xcrun simctl openurl booted "example://chat/jane"
 ```
 
 ### Testing with `adb` on Android
@@ -280,7 +280,7 @@ adb shell am start -W -a android.intent.action.VIEW -d [your deep link] [your an
 For example:
 
 ```bash
-adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/jane" com.simpleapp
+adb shell am start -W -a android.intent.action.VIEW -d "example://chat/jane" com.simpleapp
 ```
 
 Or if using Expo client:

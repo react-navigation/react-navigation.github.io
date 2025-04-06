@@ -106,7 +106,7 @@ const config = {
 };
 
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config,
 };
 
@@ -616,7 +616,7 @@ Example:
 
 ```js
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config: {
     screens: {
       Chat: 'feed/:sort',
