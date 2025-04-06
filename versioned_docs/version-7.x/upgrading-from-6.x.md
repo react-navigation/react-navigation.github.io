@@ -573,7 +573,7 @@ All the packages in React Navigation now use ESM exports. While it shouldn't aff
 
 - If you are importing internal files from the packages, they might now be restricted by your bundler and it won't be possible to import them directly. You should use the public API instead.
 - If you're patching the packages using `patch-package`, `yarn patch` etc., you'll need to patch the built files under `lib/` folders instead of the source files under `src/` as the source files are no longer exported.
-- If you're using TypeScript with the `module` or `moduleResolution` option, it maybe necessary to set `moduleResolution` to `Bundler` to match [Metro's resolution behavior](https://reactnative.dev/blog/2023/06/21/package-exports-support#enabling-package-exports-beta).
+- If you're using TypeScript with the `module` or `moduleResolution` option, it maybe necessary to set `moduleResolution` to `bundler` to match [Metro's resolution behavior](https://reactnative.dev/blog/2023/06/21/package-exports-support#enabling-package-exports-beta).
 - If you're using Webpack for bundling code using React Navigation, it maybe necessary to set [`resolve.fullySpecified`](https://webpack.js.org/configuration/module/#resolvefullyspecified) to `false` for bundling to work.
 
 ## New features
