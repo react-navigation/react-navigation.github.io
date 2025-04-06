@@ -9,11 +9,10 @@ import TabItem from '@theme/TabItem';
 
 React Navigation can be configured to type-check screens and their params, as well as various other APIs using TypeScript. This provides better intelliSense and type safety when working with React Navigation.
 
-:::note
+For React Navigation to work correctly with TypeScript, make sure you have the following configuration in your `tsconfig.json` under `compilerOptions`:
 
-React Navigation is designed to work with [`strict`](https://www.typescriptlang.org/tsconfig/#strict) mode in TypeScript. If you are not using `strict` mode, some things might not work as expected.
-
-:::
+- `strict: true` or `strictNullChecks: true` - IntelliSense and type inference may not work correctly without strict mode.
+- `moduleResolution: "bundler"` - This is necessary to resolve the types correctly and match [Metro](https://metrobundler.dev/) and other bundler's behavior.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
