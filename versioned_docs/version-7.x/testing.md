@@ -18,7 +18,26 @@ When writing tests, it's encouraged to write tests that closely resemble how use
 
 Following these principles will help you write tests that are more reliable and easier to maintain by avoiding testing implementation details.
 
-## Mocking native dependencies
+## Setting up Jest
+
+### Compiling React Navigation
+
+React Navigation ships [ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules). However, Jest does not support ES modules natively.
+
+It's necessary to transform the code to CommonJS to use them in tests. The `react-native` preset for Jest does not transform the code in `node_modules` by default. To enable this, you need to add the [`transformIgnorePatterns`](https://jestjs.io/docs/configuration#transformignorepatterns-arraystring) option in your Jest configuration where you can specify a regexp pattern. To compile React Navigation packages, you can add `@react-navigation` to the regexp.
+
+This is usually done in a `jest.config.js` file or the `jest` key in `package.json`:
+
+```diff lang=json
+{
+  "preset": "react-native",
++   "transformIgnorePatterns": [
++     "node_modules/(?!(@react-native|react-native|@react-navigation)/)"
++   ]
+}
+```
+
+### Mocking native dependencies
 
 To be able to test React Navigation components, certain dependencies will need to be mocked depending on which components are being used.
 
@@ -48,16 +67,19 @@ import { jest } from '@jest/globals';
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 ```
 
-Then we need to use this setup file in our jest config. You can add it under `setupFilesAfterEnv` option in a `jest.config.js` file or the `jest` key in `package.json`:
+Then we need to use this setup file in our jest config. You can add it under [`setupFilesAfterEnv`](https://jestjs.io/docs/configuration#setupfilesafterenv-array) option in a `jest.config.js` file or the `jest` key in `package.json`:
 
-```json
+```diff lang=json
 {
   "preset": "react-native",
-  "setupFilesAfterEnv": ["<rootDir>/jest/setup.js"]
+  "transformIgnorePatterns": [
+    "node_modules/(?!(@react-native|react-native|@react-navigation)/)"
+  ],
++   "setupFilesAfterEnv": ["<rootDir>/jest/setup.js"]
 }
 ```
 
-Make sure that the path to the file in `setupFilesAfterEnv` is correct. Jest will run these files before running your tests, so it's the best place to put your global mocks.
+Jest will run the files specified in `setupFilesAfterEnv` before running your tests, so it's a good place to put your global mocks.
 
 <details>
 <summary>Mocking `react-native-screens`</summary>
