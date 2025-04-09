@@ -730,7 +730,7 @@ Only supported on Android and iOS.
 :::warning
 
 This option is deprecated and will be removed in a future release (for apps targeting Android SDK 35 or above edge-to-edge mode is enabled by default
-and it is expected that the edge-to-edge will be enforced in future SDKs, see: https://developer.android.com/about/versions/15/behavior-changes-15#ux).
+and it is expected that the edge-to-edge will be enforced in future SDKs, see [here](https://developer.android.com/about/versions/15/behavior-changes-15#ux) for more information).
 
 :::
 
@@ -743,7 +743,7 @@ Only supported on Android.
 :::warning
 
 This option is deprecated and will be removed in a future release (for apps targeting Android SDK 35 or above edge-to-edge mode is enabled by default
-and it is expected that the edge-to-edge will be enforced in future SDKs, see: https://developer.android.com/about/versions/15/behavior-changes-15#ux).
+and it is expected that the edge-to-edge will be enforced in future SDKs, see [here](https://developer.android.com/about/versions/15/behavior-changes-15#ux) for more information).
 
 :::
 
@@ -1278,7 +1278,7 @@ Only supported on iOS.
 :::warning
 
 This option is deprecated and will be removed in a future release (for apps targeting Android SDK 35 or above edge-to-edge mode is enabled by default
-and it is expected that the edge-to-edge will be enforced in future SDKs, see: https://developer.android.com/about/versions/15/behavior-changes-15#ux).
+and it is expected that the edge-to-edge will be enforced in future SDKs, see [here](https://developer.android.com/about/versions/15/behavior-changes-15#ux) for more information).
 
 :::
 
