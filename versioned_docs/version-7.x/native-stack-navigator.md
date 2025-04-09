@@ -727,11 +727,25 @@ Only supported on Android and iOS.
 
 #### `statusBarBackgroundColor`
 
+:::warning
+
+This option is deprecated and will be removed in a future release (for apps targeting Android SDK 35 or above edge-to-edge mode is enabled by default
+and it is expected that the edge-to-edge will be enforced in future SDKs, see: https://developer.android.com/about/versions/15/behavior-changes-15#ux).
+
+:::
+
 Sets the background color of the status bar (similar to the `StatusBar` component).
 
 Only supported on Android.
 
 #### `statusBarTranslucent`
+
+:::warning
+
+This option is deprecated and will be removed in a future release (for apps targeting Android SDK 35 or above edge-to-edge mode is enabled by default
+and it is expected that the edge-to-edge will be enforced in future SDKs, see: https://developer.android.com/about/versions/15/behavior-changes-15#ux).
+
+:::
 
 Sets the translucency of the status bar (similar to the `StatusBar` component). Defaults to `false`.
 
@@ -1260,6 +1274,13 @@ The duration of `default` and `flip` transitions isn't customizable.
 Only supported on iOS.
 
 #### `navigationBarColor`
+
+:::warning
+
+This option is deprecated and will be removed in a future release (for apps targeting Android SDK 35 or above edge-to-edge mode is enabled by default
+and it is expected that the edge-to-edge will be enforced in future SDKs, see: https://developer.android.com/about/versions/15/behavior-changes-15#ux).
+
+:::
 
 Sets the navigation bar color. Defaults to initial status bar color.
 
