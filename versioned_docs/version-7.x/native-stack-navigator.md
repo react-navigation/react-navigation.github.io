@@ -174,7 +174,7 @@ This will have no effect on the first screen in the stack.
 
 #### `headerBackTitle`
 
-Title string used by the back button on iOS. Defaults to the previous scene's title.
+Title string used by the back button on iOS. Defaults to the previous scene's title, "Back" or arrow icon depending on the available space. See `headerBackButtonDisplayMode` to read about limitations and customize the behavior.
 
 Use `headerBackButtonDisplayMode: "minimal"` to hide it.
 
@@ -195,7 +195,6 @@ Supported values:
 The space-aware behavior is disabled when:
 
 - The iOS version is 13 or lower
-- Custom back title is set (e.g. with `headerBackTitle`)
 - Custom font family or size is set (e.g. with `headerBackTitleStyle`)
 - Back button menu is disabled (e.g. with `headerBackButtonMenuEnabled`)
 
