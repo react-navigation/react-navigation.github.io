@@ -508,7 +508,7 @@ const Tabs = createBottomTabNavigator({
 ```js
 <Tab.Navigator
   screenOptions={{
-    tabBarPosition: isLargeScreen ? 'left' ? 'bottom',
+    tabBarPosition: isLargeScreen ? 'left' : 'bottom',
   }}
 >
 ```
@@ -526,7 +526,7 @@ You can also render a compact sidebar by placing the label below the icon. This 
 ```js
 const Tabs = createBottomTabNavigator({
   screenOptions: {
-    tabBarPosition: isLargeScreen ? 'left' ? 'bottom',
+    tabBarPosition: isLargeScreen ? 'left' : 'bottom',
     tabBarVariant: isLargeScreen ? 'material' : 'uikit',
     tabBarLabelPosition: 'below-icon',
   },
