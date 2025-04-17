@@ -30,17 +30,60 @@ We want the following behavior from our authentication flow:
 
 ## How it will work
 
-We can configure different screens to be available based on some condition. For example, if the user is signed in, we can define `Home`, `Profile`, `Settings` etc. If the user is not signed in, we can define `SignIn` and `SignUp` screens.
+We can configure different screens to be available based on some condition. For example, if the user is signed in, we want `Home` to be available. If the user is not signed in, we want `SignIn` to be available.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-To do this, we need a couple of things:
+```js name="Authentication flow" snack
+import * as React from 'react';
+import { View } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-1. Define two hooks: `useIsSignedIn` and `useIsSignedOut`, which return a boolean value indicating whether the user is signed in or not.
-2. Use the `useIsSignedIn` and `useIsSignedOut` along with the [`if`](static-configuration.md#if) property to define the screens that are available based on the condition.
+const useIsSignedIn = () => {
+  return true;
+};
 
-This tells React Navigation to show specific screens based on the signed in status. When the signed in status changes, React Navigation will automatically show the appropriate screen.
+const useIsSignedOut = () => {
+  return !useIsSignedIn();
+};
+
+// codeblock-focus-start
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      if: useIsSignedIn,
+      screen: HomeScreen,
+    },
+    SignIn: {
+      if: useIsSignedOut,
+      screen: SignInScreen,
+    },
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+
+function HomeScreen() {
+  return <View />;
+}
+
+function SignInScreen() {
+  return <View />;
+}
+```
+
+Here, for each screen, we have defined a condition using the `if` property which takes a hook. The hook returns a boolean value indicating whether the user is signed in or not. If the hook returns `true`, the screen will be available, otherwise it won't.
+
+When `useIsSignedIn` returns `true`, React Navigation will only use the `Home` screen, and when it returns `false`, React Navigation will use the `SignIn` screen. This makes it impossible to navigate to the `Home` when the user is not signed in, and to `SignIn` when the user is signed in.
+
+The magic happens when the value returned by `useIsSignedin` changes. Let's say, initially `useIsSignedIn` returns `false`. This means that `SignIn` screens is shown. After the user signs in, the return value of `useIsSignedIn` will change to `true`. React Navigation will see that the `SignIn` screen is no longer defined and so it will remove it. Then it'll show the `Home` screen automatically because that's the first screen defined when `useIsSignedIn` returns `true`.
 
 ## Define the hooks
 
@@ -66,91 +109,13 @@ function useIsSignedOut() {
 }
 ```
 
-We'll discuss how to expose the context value later.
-
-```js name="Customizing tabs appearance" snack
-import * as React from 'react';
-import { View } from 'react-native';
-import { createStaticNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-const useIsSignedIn = () => {
-  return true;
-};
-
-const useIsSignedOut = () => {
-  return false;
-};
-
-const signedInStack = createNativeStackNavigator({
-  screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
-    Settings: SettingsScreen,
-  },
-});
-
-const signedOutStack = createNativeStackNavigator({
-  screens: {
-    SignIn: SignInScreen,
-    SignUp: SignUpScreen,
-  },
-});
-
-// codeblock-focus-start
-const RootStack = createNativeStackNavigator({
-  screens: {
-    LoggedIn: {
-      if: useIsSignedIn,
-      screen: signedInStack,
-      options: {
-        headerShown: false,
-      },
-    },
-    LoggedOut: {
-      if: useIsSignedOut,
-      screen: signedOutStack,
-      options: {
-        headerShown: false,
-      },
-    },
-  },
-});
-// codeblock-focus-end
-
-const Navigation = createStaticNavigation(RootStack);
-
-export default function App() {
-  return <Navigation />;
-}
-
-function HomeScreen() {
-  return <View />;
-}
-
-function ProfileScreen() {
-  return <View />;
-}
-
-function SettingsScreen() {
-  return <View />;
-}
-
-function SignInScreen() {
-  return <View />;
-}
-
-function SignUpScreen() {
-  return <View />;
-}
-```
+We'll discuss how to provide the context value later.
 
 </TabItem>
+
 <TabItem value="dynamic" label="Dynamic">
 
-For example:
-
-```js name="Customizing tabs appearance" snack
+```js name="Authentication flow" snack
 import * as React from 'react';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -158,29 +123,17 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-const getIsSignedIn = () => {
-  // custom logic
-  return true;
-};
-
 export default function App() {
-  const isSignedIn = getIsSignedIn();
+  const isSignedIn = true;
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
         // codeblock-focus-start
         {isSignedIn ? (
-          <>
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Profile" component={ProfileScreen} />
-            <Stack.Screen name="Settings" component={SettingsScreen} />
-          </>
+          <Stack.Screen name="Home" component={HomeScreen} />
         ) : (
-          <>
-            <Stack.Screen name="SignIn" component={SignInScreen} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-          </>
+          <Stack.Screen name="SignIn" component={SignInScreen} />
         )}
         // codeblock-focus-end
       </Stack.Navigator>
@@ -192,39 +145,25 @@ function HomeScreen() {
   return <View />;
 }
 
-function ProfileScreen() {
-  return <View />;
-}
-
-function SettingsScreen() {
-  return <View />;
-}
-
 function SignInScreen() {
-  return <View />;
-}
-
-function SignUpScreen() {
   return <View />;
 }
 ```
 
-When we define screens like this, when `isSignedIn` is `true`, React Navigation will only see the `Home`, `Profile` and `Settings` screens, and when it's `false`, React Navigation will see the `SignIn` and `SignUp` screens. This makes it impossible to navigate to the `Home`, `Profile` and `Settings` screens when the user is not signed in, and to `SignIn` and `SignUp` screens when the user is signed in.
+Here, we have conditionally defined the screens based on the value of `isSignedIn`.
+
+When `isSignedIn` is `true`, React Navigation will only see the `Home` screen, and when it returns `false`, React Navigation will see the `SignIn` screen. This makes it impossible to navigate to the `Home` when the user is not signed in, and to `SignIn` when the user is signed in.
 
 This pattern has been in use by other routing libraries such as React Router for a long time, and is commonly known as "Protected routes". Here, our screens which need the user to be signed in are "protected" and cannot be navigated to by other means if the user is not signed in.
 
-The magic happens when the value of the `isSignedIn` variable changes. Let's say, initially `isSignedIn` is `false`. This means, either `SignIn` or `SignUp` screens are shown. After the user signs in, the value of `isSignedIn` will change to `true`. React Navigation will see that the `SignIn` and `SignUp` screens are no longer defined and so it will remove them. Then it'll show the `Home` screen automatically because that's the first screen defined when `isSignedIn` is `true`.
-
-The example shows stack navigator, but you can use the same approach with any navigator.
-
-By conditionally defining different screens based on a variable, we can implement auth flow in a simple way that doesn't require additional logic to make sure that the correct screen is shown.
+The magic happens when the value of `isSignedin` changes. Let's say, initially `isSignedIn` returns `false`. This means that `SignIn` screens is shown. After the user signs in, the value of `isSignedIn` will change to `true`. React Navigation will see that the `SignIn` screen is no longer defined and so it will remove it. Then it'll show the `Home` screen automatically because that's the first screen defined when `isSignedIn` is `true`.
 
 </TabItem>
 </Tabs>
 
-## Define our screens
+## Add more screens
 
-In our navigator, we can conditionally define appropriate screens. For our case, let's say we have 3 screens:
+For our case, let's say we have 3 screens:
 
 - `SplashScreen` - This will show a splash or loading screen when we're restoring the token.
 - `SignIn` - This is the screen we show if the user isn't signed in already (we couldn't find a token).
@@ -274,7 +213,7 @@ return (
 );
 ```
 
-In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `SecureStore` and validating the token. After we get the token and if it's valid, we need to set the `userToken`. We also have another state called `isSignout` to have a different animation on sign out.
+In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `SecureStore` and validating the token.
 
 Next, we're exposing the sign in status via the `SignInContext` so that it's available to the `useIsSignedIn` and `useIsSignedOut` hooks.
 
@@ -305,12 +244,6 @@ const RootStack = createNativeStackNavigator({
 });
 ```
 
-:::tip
-
-If you have both your login-related screens and rest of the screens in Stack navigators, we recommend to use a single Stack navigator and place the conditional inside instead of using 2 different navigators. This makes it possible to have a proper transition animation during login/logout.
-
-:::
-
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
@@ -320,11 +253,12 @@ if (isLoading) {
   return <SplashScreen />;
 }
 
+const isSignedIn = userToken != null;
+
 return (
   <NavigationContainer>
     <Stack.Navigator>
-      {userToken == null ? (
-        // No token found, user isn't signed in
+      {isSignedIn ? (
         <Stack.Screen
           name="SignIn"
           component={SimpleSignInScreen}
@@ -334,7 +268,6 @@ return (
           initialParams={{ setUserToken }}
         />
       ) : (
-        // User is signed in
         <Stack.Screen name="Home" component={HomeScreen} />
       )}
     </Stack.Navigator>
@@ -342,54 +275,17 @@ return (
 );
 ```
 
-</TabItem>
-</Tabs>
-
-In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `SecureStore` and validating the token. After we get the token and if it's valid, we need to set the `userToken`. We also have another state called `isSignout` to have a different animation on sign out.
+In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `SecureStore` and validating the token.
 
 The main thing to notice is that we're conditionally defining screens based on these state variables:
 
 - `SignIn` screen is only defined if `userToken` is `null` (user is not signed in)
 - `Home` screen is only defined if `userToken` is non-null (user is signed in)
 
-Here, we're conditionally defining one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly, for the screens accessible after signing in, you probably have more than one screen. We can use `React.Fragment` to define multiple screens:
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+Here, we're conditionally defining one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly, for the screens accessible after signing in, you probably have more than one screen. We can use [`React.Fragment`](https://react.dev/reference/react/Fragment) or [`Group`](group.md) to define multiple screens:
 
 ```js
-const SignInContext = React.createContext();
-
-function useIsSignedIn() {
-  const isSignedIn = React.useContext(SignInContext);
-  return isSignedIn;
-}
-
-function useIsSignedOut() {
-  const isSignedIn = React.useContext(SignInContext);
-  return !isSignedIn;
-}
-
-/* content */
-
-export default function App() {
-  /* content */
-
-  const isSignedIn = userToken != null;
-
-  return (
-    <SignInContext.Provider value={isSignedIn}>
-      <Navigation />
-    </SignInContext.Provider>
-  );
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-state.userToken == null ? (
+isSignedIn ? (
   <>
     <Stack.Screen name="SignIn" component={SignInScreen} />
     <Stack.Screen name="SignUp" component={SignUpScreen} />
@@ -405,7 +301,7 @@ state.userToken == null ? (
 
 :::tip
 
-If you have both your login-related screens and rest of the screens in two different Stack navigators, we recommend to use a single Stack navigator and place the conditional inside instead of using 2 different navigators. This makes it possible to have a proper transition animation during login/logout.
+If you have both your login-related screens and rest of the screens in two different Stack navigators and render them conditionally, we recommend to use a single Stack navigator and place the conditional inside instead of using 2 different navigators. This makes it possible to have a proper transition animation during login/logout.
 
 :::
 
@@ -422,8 +318,8 @@ The following is just an example of how you might implement the logic for authen
 
 From the previous snippet, we can see that we need 3 state variables:
 
-- `isLoading` - We set this to `true` when we're trying to check if we already have a token saved in `SecureStore`
-- `isSignout` - We set this to `true` when user is signing out, otherwise set it to `false`
+- `isLoading` - We set this to `true` when we're trying to check if we already have a token saved in `SecureStore`.
+- `isSignout` - We set this to `true` when user is signing out, otherwise set it to `false`. This can be used to customize the animation when signing out.
 - `userToken` - The token for the user. If it's non-null, we assume the user is logged in, otherwise not.
 
 So we need to:
@@ -619,11 +515,11 @@ const RootStack = createNativeStackNavigator({
       screen: HomeScreen,
     },
     SignIn: {
+      if: useIsSignedOut,
       screen: SignInScreen,
       options: {
         title: 'Sign in',
       },
-      if: useIsSignedOut,
     },
   },
 });
@@ -974,6 +870,10 @@ If you have a bunch of shared screens, you can also use [`navigationKey` with a 
 
 </TabItem>
 </Tabs>
+
+The examples above show stack navigator, but you can use the same approach with any navigator.
+
+By specifying a condition for our screens, we can implement auth flow in a simple way that doesn't require additional logic to make sure that the correct screen is shown.
 
 ## Don't manually navigate when conditionally rendering screens
 
