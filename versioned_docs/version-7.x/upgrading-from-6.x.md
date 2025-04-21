@@ -583,7 +583,7 @@ All the packages in React Navigation now use ESM exports. While it shouldn't aff
 React Navigation 5 introduced a dynamic API to support more flexible use cases. With React Navigation 7, we are re-introducing a static configuration API:
 
 ```js
-import { createNativeStackNavigator } from 'react-native-screens/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const MyStack = createNativeStackNavigator({
   screens: {
