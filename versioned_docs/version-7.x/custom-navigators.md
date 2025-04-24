@@ -56,27 +56,9 @@ import {
   TabActions,
 } from '@react-navigation/native';
 
-function TabNavigator({
-  id,
-  initialRouteName,
-  children,
-  layout,
-  screenListeners,
-  screenOptions,
-  screenLayout,
-  tabBarStyle,
-  contentStyle,
-}) {
+function TabNavigator({ tabBarStyle, contentStyle, ...rest }) {
   const { state, navigation, descriptors, NavigationContent } =
-    useNavigationBuilder(TabRouter, {
-      id,
-      initialRouteName,
-      children,
-      layout,
-      screenListeners,
-      screenOptions,
-      screenLayout,
-    });
+    useNavigationBuilder(TabRouter, rest);
 
   return (
     <NavigationContent>
@@ -210,7 +192,7 @@ import {
   useNavigationBuilder,
 } from '@react-navigation/native';
 
-// Props accepted by the view
+// Additional props accepted by the view
 type TabNavigationConfig = {
   tabBarStyle: StyleProp<ViewStyle>;
   contentStyle: StyleProp<ViewStyle>;
@@ -222,7 +204,6 @@ type TabNavigationOptions = {
 };
 
 // Map of event name and the type of data (in event.data)
-//
 // canPreventDefault: true adds the defaultPrevented property to the
 // emitted events.
 type TabNavigationEventMap = {
@@ -242,18 +223,7 @@ type Props = DefaultNavigatorOptions<
   TabRouterOptions &
   TabNavigationConfig;
 
-function TabNavigator({
-  id,
-  initialRouteName,
-  children,
-  layout,
-  screenListeners,
-  screenOptions,
-  screenLayout,
-  backBehavior,
-  tabBarStyle,
-  contentStyle,
-}: Props) {
+function TabNavigator({ tabBarStyle, contentStyle, ...rest }: Props) {
   const { state, navigation, descriptors, NavigationContent } =
     useNavigationBuilder<
       TabNavigationState<ParamListBase>,
@@ -261,16 +231,7 @@ function TabNavigator({
       TabActionHelpers<ParamListBase>,
       TabNavigationOptions,
       TabNavigationEventMap
-    >(TabRouter, {
-      id,
-      initialRouteName,
-      children,
-      layout,
-      screenListeners,
-      screenOptions,
-      screenLayout,
-      backBehavior,
-    });
+    >(TabRouter, rest);
 
   return (
     <NavigationContent>
@@ -321,6 +282,7 @@ function TabNavigator({
   );
 }
 
+// The factory function with generic types for type-inference
 export function createMyNavigator<
   const ParamList extends ParamListBase,
   const NavigatorID extends string | undefined = undefined,
