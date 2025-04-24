@@ -81,9 +81,21 @@ function SignInScreen() {
 
 Here, for each screen, we have defined a condition using the `if` property which takes a hook. The hook returns a boolean value indicating whether the user is signed in or not. If the hook returns `true`, the screen will be available, otherwise it won't.
 
-When `useIsSignedIn` returns `true`, React Navigation will only use the `Home` screen, and when it returns `false`, React Navigation will use the `SignIn` screen. This makes it impossible to navigate to the `Home` when the user is not signed in, and to `SignIn` when the user is signed in.
+This means:
 
-The magic happens when the value returned by `useIsSignedin` changes. Let's say, initially `useIsSignedIn` returns `false`. This means that `SignIn` screens is shown. After the user signs in, the return value of `useIsSignedIn` will change to `true`. React Navigation will see that the `SignIn` screen is no longer defined and so it will remove it. Then it'll show the `Home` screen automatically because that's the first screen defined when `useIsSignedIn` returns `true`.
+- When `useIsSignedIn` returns `true`, React Navigation will only use the `Home` screen, since it's the only screen matching the condition.
+- Similarly, when `useIsSignedOut` returns `true`, React Navigation will use the `SignIn` screen.
+
+This makes it impossible to navigate to the `Home` when the user is not signed in, and to `SignIn` when the user is signed in.
+
+When the values returned by `useIsSignedin` and `useIsSignedOut` change, the screens matching the condition will change:
+
+- Let's say, initially `useIsSignedOut` returns `true`. This means that `SignIn` screens is shown.
+- After the user signs in, the return value of `useIsSignedIn` will change to `true` and `useIsSignedOut` will change to `false`, which means:
+  - React Navigation will see that the `SignIn` screen is no longer matches the condition, so it will remove the screen.
+  - Then it'll show the `Home` screen automatically because that's the first screen available when `useIsSignedIn` returns `true`.
+
+The order of the screens matters when there are multiple screens matching the condition. For example, if there are two screens matching `useIsSignedIn`, the first screen will be shown when the condition is `true`.
 
 ## Define the hooks
 
@@ -104,8 +116,7 @@ function useIsSignedIn() {
 }
 
 function useIsSignedOut() {
-  const isSignedIn = React.useContext(SignInContext);
-  return !isSignedIn;
+  return !useIsSignedIn();
 }
 ```
 
@@ -152,11 +163,21 @@ function SignInScreen() {
 
 Here, we have conditionally defined the screens based on the value of `isSignedIn`.
 
-When `isSignedIn` is `true`, React Navigation will only see the `Home` screen, and when it returns `false`, React Navigation will see the `SignIn` screen. This makes it impossible to navigate to the `Home` when the user is not signed in, and to `SignIn` when the user is signed in.
+This means:
 
-This pattern has been in use by other routing libraries such as React Router for a long time, and is commonly known as "Protected routes". Here, our screens which need the user to be signed in are "protected" and cannot be navigated to by other means if the user is not signed in.
+- When `isSignedIn` is `true`, React Navigation will only see the `Home` screen, since it's the only screen defined based on the condition.
+- Similarly, when `isSignedIn` is `false`, React Navigation will only see the `SignIn` screen.
 
-The magic happens when the value of `isSignedin` changes. Let's say, initially `isSignedIn` returns `false`. This means that `SignIn` screens is shown. After the user signs in, the value of `isSignedIn` will change to `true`. React Navigation will see that the `SignIn` screen is no longer defined and so it will remove it. Then it'll show the `Home` screen automatically because that's the first screen defined when `isSignedIn` is `true`.
+This makes it impossible to navigate to the `Home` when the user is not signed in, and to `SignIn` when the user is signed in.
+
+When the value of `isSignedin` changes, the screens defined based on the condition will change:
+
+- Let's say, initially `isSignedin` is `false`. This means that `SignIn` screens is shown.
+- After the user signs in, the value of `isSignedin` will change to `true`, which means:
+  - React Navigation will see that the `SignIn` screen is no longer defined, so it will remove the screen.
+  - Then it'll show the `Home` screen automatically because that's the first screen defined when `isSignedin` returns `true`.
+
+The order of the screens matters when there are multiple screens matching the condition. For example, if there are two screens defined based on `isSignedin`, the first screen will be shown when the condition is `true`.
 
 </TabItem>
 </Tabs>
@@ -194,9 +215,45 @@ const RootStack = createNativeStackNavigator({
 const Navigation = createStaticNavigation(RootStack);
 ```
 
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  const isSignedIn = true;
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        {isSignedIn ? (
+          <Stack.Screen
+            name="SignIn"
+            component={SimpleSignInScreen}
+            options={{
+              title: 'Sign in',
+            }}
+            initialParams={{ setUserToken }}
+          />
+        ) : (
+          <Stack.Screen name="Home" component={HomeScreen} />
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
 Notice how we have only defined the `Home` and `SignIn` screens here, and not the `SplashScreen`. The `SplashScreen` should be rendered before we render any navigators so that we don't render incorrect screens before we know whether the user is signed in or not.
 
 When we use this in our component, it'd look something like this:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
 ```js
 if (isLoading) {
@@ -211,37 +268,6 @@ return (
     <Navigation />
   </SignInContext.Provider>
 );
-```
-
-In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `SecureStore` and validating the token.
-
-Next, we're exposing the sign in status via the `SignInContext` so that it's available to the `useIsSignedIn` and `useIsSignedOut` hooks.
-
-In the above example, we have one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly for the screens accessible after sign in, you probably have more than one screen. We can use [`groups`](static-configuration.md#groups) to define multiple screens:
-
-```js
-const RootStack = createNativeStackNavigator({
-  screens: {
-    // Common screens
-  },
-  groups: {
-    SignedIn: {
-      if: useIsSignedIn,
-      screens: {
-        Home: HomeScreen,
-        Profile: ProfileScreen,
-      },
-    },
-    SignedOut: {
-      if: useIsSignedOut,
-      screens: {
-        SignIn: SignInScreen,
-        SignUp: SignUpScreen,
-        ResetPassword: ResetPasswordScreen,
-      },
-    },
-  },
-});
 ```
 
 </TabItem>
@@ -275,14 +301,49 @@ return (
 );
 ```
 
+</TabItem>
+</Tabs>
+
 In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `SecureStore` and validating the token.
 
-The main thing to notice is that we're conditionally defining screens based on these state variables:
+Next, we're exposing the sign in status via the `SignInContext` so that it's available to the `useIsSignedIn` and `useIsSignedOut` hooks.
 
-- `SignIn` screen is only defined if `userToken` is `null` (user is not signed in)
-- `Home` screen is only defined if `userToken` is non-null (user is signed in)
+In the above example, we have one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly for the screens accessible after sign in, you probably have more than one screen.
 
-Here, we're conditionally defining one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly, for the screens accessible after signing in, you probably have more than one screen. We can use [`React.Fragment`](https://react.dev/reference/react/Fragment) or [`Group`](group.md) to define multiple screens:
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+We can use [`groups`](static-configuration.md#groups) to define multiple screens:
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    // Common screens
+  },
+  groups: {
+    SignedIn: {
+      if: useIsSignedIn,
+      screens: {
+        Home: HomeScreen,
+        Profile: ProfileScreen,
+      },
+    },
+    SignedOut: {
+      if: useIsSignedOut,
+      screens: {
+        SignIn: SignInScreen,
+        SignUp: SignUpScreen,
+        ResetPassword: ResetPasswordScreen,
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+We can use [`React.Fragment`](https://react.dev/reference/react/Fragment) or [`Group`](group.md) to define multiple screens:
 
 ```js
 isSignedIn ? (
@@ -301,7 +362,7 @@ isSignedIn ? (
 
 :::tip
 
-If you have both your login-related screens and rest of the screens in two different Stack navigators and render them conditionally, we recommend to use a single Stack navigator and place the conditional inside instead of using 2 different navigators. This makes it possible to have a proper transition animation during login/logout.
+Instead of having your login-related screens and rest of the screens in two different Stack navigators and render them conditionally, we recommend to use a single Stack navigator and place the conditional inside. This makes it possible to have a proper transition animation during login/logout.
 
 :::
 
@@ -368,8 +429,7 @@ function useIsSignedIn() {
 }
 
 function useIsSignedOut() {
-  const isSignedIn = React.useContext(SignInContext);
-  return !isSignedIn;
+  return !useIsSignedIn();
 }
 
 function SplashScreen() {
