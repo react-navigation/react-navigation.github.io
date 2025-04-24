@@ -783,3 +783,174 @@ In the above test, we:
 In a production app, we recommend using a library like [React Query](https://tanstack.com/query/) to handle data fetching and caching. The above example is for demonstration purposes only.
 
 :::
+
+### Re-usable components
+
+To make it easier to test components that don't depend on the navigation structure, we can create a light-weight test navigator:
+
+```js title="TestStackNavigator.js"
+import { useNavigationBuilder, StackRouter } from '@react-navigation/native';
+
+function TestStackNavigator(props) {
+  const { state, descriptors, NavigationContent } = useNavigationBuilder(
+    StackRouter,
+    props
+  );
+
+  return (
+    <NavigationContent>
+      {state.routes.map((route, index) => {
+        return (
+          <View key={route.key} aria-hidden={index !== state.index}>
+            {descriptors[route.key].render()}
+          </View>
+        );
+      })}
+    </NavigationContent>
+  );
+}
+
+export const createTestStackNavigator =
+  createNavigatorFactory(TestStackNavigator);
+```
+
+This lets us test React Navigation specific logic such as `useFocusEffect` without needing to set up a full navigator.
+
+We can use this test navigator in our tests like this:
+
+<Tabs groupId="example" queryString="example">
+<TabItem value="static" label="Static" default>
+
+```js title="MyComponent.test.js"
+import { act, render, screen } from '@testing-library/react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createTestStackNavigator } from './TestStackNavigator';
+import { MyComponent } from './MyComponent';
+
+test('does not show modal when not focused', () => {
+  const TestStack = createTestStackNavigator({
+    screens: {
+      A: MyComponent,
+      B: () => null,
+    },
+  });
+
+  const Navigation = createStaticNavigation(TestStack);
+
+  render(
+    <Navigation
+      initialState={{
+        routes: [{ name: 'A' }, { name: 'B' }],
+      }}
+    />
+  );
+
+  expect(screen.queryByText('Modal')).not.toBeVisible();
+});
+
+test('shows modal when focused', () => {
+  const TestStack = createTestStackNavigator({
+    screens: {
+      A: MyComponent,
+      B: () => null,
+    },
+  });
+
+  const Navigation = createStaticNavigation(TestStack);
+
+  render(
+    <Navigation
+      initialState={{
+        routes: [{ name: 'B' }, { name: 'A' }],
+      }}
+    />
+  );
+
+  expect(screen.getByText('Modal')).toBeVisible();
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js title="MyComponent.test.js"
+import { act, render, screen } from '@testing-library/react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createTestStackNavigator } from './TestStackNavigator';
+import { MyComponent } from './MyComponent';
+
+test('does not show modal when not focused', () => {
+  const Stack = createTestStackNavigator();
+
+  const TestStack = () => (
+    <Stack.Navigator>
+      <Stack.Screen name="A" component={MyComponent} />
+      <Stack.Screen name="B" component={() => null} />
+    </Stack.Navigator>
+  );
+
+  render(
+    <NavigationContainer
+      initialState={{
+        routes: [{ name: 'A' }, { name: 'B' }],
+      }}
+    >
+      <TestStack />
+    </NavigationContainer>
+  );
+
+  expect(screen.queryByText('Modal')).not.toBeVisible();
+});
+
+test('shows modal when focused', () => {
+  const Stack = createTestStackNavigator();
+
+  const TestStack = () => (
+    <Stack.Navigator>
+      <Stack.Screen name="A" component={MyComponent} />
+      <Stack.Screen name="B" component={() => null} />
+    </Stack.Navigator>
+  );
+
+  render(
+    <NavigationContainer
+      initialState={{
+        routes: [{ name: 'B' }, { name: 'A' }],
+      }}
+    >
+      <TestStack />
+    </NavigationContainer>
+  );
+
+  expect(screen.getByText('Modal')).toBeVisible();
+});
+```
+
+</TabItem>
+</Tabs>
+
+Here we create a test stack navigator using the `createTestStackNavigator` function. We then render the `MyComponent` component within the test navigator and assert that the modal is shown or hidden based on the focus state.
+
+The `initialState` prop is used to set the initial state of the navigator, i.e. which screens are rendered in the stack and which one is focused. See [navigation state](navigation-state.md) for more information on the structure of the state object.
+
+You can also pass a [`ref`](navigation-container.md#ref) to programmatically navigate in your tests.
+
+The test navigator is a simplified version of the stack navigator, but it's still a real navigator and behaves like one. This means that you can use it to test any other navigation logic.
+
+See [Custom navigators](custom-navigators.md) for more information on how to write custom navigators if you want adjust the behavior of the test navigator or add more functionality.
+
+## Best practices
+
+Generally, we recommend avoiding mocking React Navigation. Mocking can help you isolate the component you're testing, but when testing components with navigation logic, mocking means that your tests don't test for the navigation logic.
+
+- Mocking APIs such as `useFocusEffect` means you're not testing the focus logic in your component.
+- Mocking `navigation` prop or `useNavigation` means that the `navigation` object may not have the same shape as the real one.
+- Asserting `navigation.navigate` calls means you only test that the function was called, not that the call was correct based on the navigation structure.
+- etc.
+
+Avoiding mocks means additional work when writing tests, but it also means:
+
+- Refactors that don't change the logic won't break the tests, e.g. changing `navigation` prop to `useNavigation`, using a different navigation action that does the same thing, etc.
+- Library upgrades or refactor that actually change the behavior will correctly break the tests, surfacing actual regressions.
+
+Tests should break when there's a regression, not due to a refactor. Otherwise it leads to additional work to fix the tests, making it harder to know when a regression is introduced.
