@@ -810,8 +810,9 @@ function TestStackNavigator(props) {
   );
 }
 
-export const createTestStackNavigator =
-  createNavigatorFactory(TestStackNavigator);
+export function createTestStackNavigator(config) {
+  return createNavigatorFactory(TestStackNavigator)(config);
+}
 ```
 
 This lets us test React Navigation specific logic such as `useFocusEffect` without needing to set up a full navigator.
