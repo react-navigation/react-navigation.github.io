@@ -252,7 +252,7 @@ import { NavigationContainerRef } from '@react-navigation/native';
 
 // ...
 
-const navigationRef = React.useRef<NavigationContainerRef>(null);
+const navigationRef = React.useRef<NavigationContainerRef<{}>>(null);
 ```
 
 Example when using `React.createRef`:
