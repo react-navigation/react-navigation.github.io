@@ -435,7 +435,7 @@ Function which returns a React Element to display custom image in header's back 
 
 Title string used by the back button on iOS. Defaults to the previous scene's title. Use `headerBackButtonDisplayMode` to customize the behavior.
 
-#### `headerTruncatedBackTitle`
+#### `headerBackTruncatedTitle`
 
 Title string used by the back button when `headerBackTitle` doesn't fit on the screen. `"Back"` by default.
 
