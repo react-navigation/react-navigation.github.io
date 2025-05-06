@@ -68,7 +68,6 @@
             <name>Oskar Kwaśniewski</name>
         </author>
         <category label="tutorial" term="tutorial"/>
-        <category label="react-native-paper" term="react-native-paper"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[React Navigation 7.0]]></title>
