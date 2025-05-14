@@ -72,10 +72,7 @@ function App() {
 
   return (
     <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
-      {/* content */}
-    </NavigationContainer>
-  );
-}
+      {/* content */
 ```
 
 </TabItem>
@@ -124,6 +121,28 @@ If your app is using [Universal Links](https://developer.apple.com/ios/universal
  return [RCTLinkingManager application:application
                   continueUserActivity:userActivity
                     restorationHandler:restorationHandler];
+}
+```
+
+If you're using Swift, you'll need to add the following to your `AppDelegate.swift` file. You can find more information in the [React Native documentation](https://reactnative.dev/docs/linking?ios-language=swift).
+
+```swift
+// Add this to your AppDelegate.swift file
+
+import React
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    var window: UIWindow?
+
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return RCTLinkingManager.application(application, open: url, options: options)
+    }
+
+    // For Universal Links
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        return RCTLinkingManager.application(application, continue: userActivity, restorationHandler: restorationHandler)
+    }
 }
 ```
 
