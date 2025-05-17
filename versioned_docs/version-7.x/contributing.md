@@ -15,23 +15,9 @@ Here are some of the ways to contribute to the project:
   - [Bug Fixes](#bug-fixes)
   - [Suggesting a Feature](#suggesting-a-feature)
   - [Big Pull Requests](#big-pull-requests)
-- [Information](#information)
-  - [Issue Template](#issue-template)
-  - [Pull Request Template](#pull-request-template)
-  - [Forking the Repository](#forking-the-repository)
-  - [Code Review Guidelines](#code-review-guidelines)
-  - [Run the Example App](#run-the-example-app)
-  - [Run Tests](#run-tests)
 
 And here are a few helpful resources to aid in getting started:
 
-- [Contributing](#contributing)
-  - [Reporting Bugs](#reporting-bugs)
-  - [Improving the Documentation](#improving-the-documentation)
-  - [Responding to Issues](#responding-to-issues)
-  - [Bug Fixes](#bug-fixes)
-  - [Suggesting a Feature](#suggesting-a-feature)
-  - [Big Pull Requests](#big-pull-requests)
 - [Information](#information)
   - [Issue Template](#issue-template)
   - [Pull Request Template](#pull-request-template)
