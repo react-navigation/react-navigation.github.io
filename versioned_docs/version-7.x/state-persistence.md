@@ -77,6 +77,27 @@ const SettingsStackScreen = createNativeStackNavigator({
   },
 });
 
+const Tab = createBottomTabNavigator({
+  screens: {
+    Home: {
+      screen: HomeStackScreen,
+      options: {
+        headerShown: false,
+        tabBarLabel: 'Home!',
+      },
+    },
+    Settings: {
+      screen: SettingsStackScreen,
+      options: {
+        headerShown: false,
+        tabBarLabel: 'Settings!',
+      },
+    },
+  },
+});
+
+const Navigation = createStaticNavigation(Tab);
+
 // codeblock-focus-start
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
@@ -111,25 +132,6 @@ export default function App() {
   if (!isReady) {
     return null;
   }
-  const Tab = createBottomTabNavigator({
-    screens: {
-      Home: {
-        screen: HomeStackScreen,
-        options: {
-          headerShown: false,
-          tabBarLabel: 'Home!',
-        },
-      },
-      Settings: {
-        screen: SettingsStackScreen,
-        options: {
-          headerShown: false,
-          tabBarLabel: 'Settings!',
-        },
-      },
-    },
-  });
-  const Navigation = createStaticNavigation(Tab);
 
   return (
     <Navigation
@@ -207,6 +209,23 @@ function SettingsStackScreen() {
   );
 }
 
+function RootTabs() {
+  return (
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen
+        name="Home"
+        component={HomeStackScreen}
+        options={{ tabBarLabel: 'Home!' }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsStackScreen}
+        options={{ tabBarLabel: 'Settings!' }}
+      />
+    </Tab.Navigator>
+  );
+}
+
 // codeblock-focus-start
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
@@ -252,18 +271,7 @@ export default function App() {
         AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
       }
     >
-      <Tab.Navigator screenOptions={{ headerShown: false }}>
-        <Tab.Screen
-          name="Home"
-          component={HomeStackScreen}
-          options={{ tabBarLabel: 'Home!' }}
-        />
-        <Tab.Screen
-          name="Settings"
-          component={SettingsStackScreen}
-          options={{ tabBarLabel: 'Settings!' }}
-        />
-      </Tab.Navigator>
+      <RootTabs />
     </NavigationContainer>
   );
 }
