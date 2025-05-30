@@ -193,9 +193,11 @@ export default function App() {
 }
 ```
 
+The `setParams` method merges the new params with the existing ones. To replace the existing params, you can use [`replaceParams`](navigation-object.md#replaceparams) instead.
+
 :::note
 
-Avoid using `setParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-object.md#setoptions) instead.
+Avoid using `setParams` or `replaceParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-object.md#setoptions) instead.
 
 :::
 

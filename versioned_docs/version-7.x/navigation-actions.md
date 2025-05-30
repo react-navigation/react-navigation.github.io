@@ -70,9 +70,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
     </View>
   );
 }
@@ -90,52 +87,6 @@ function ProfileScreen({ route }) {
     >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
-      </Button>
     </View>
   );
 }
@@ -192,9 +143,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
     </View>
   );
 }
@@ -213,52 +161,6 @@ function ProfileScreen({ route }) {
     >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
-      </Button>
     </View>
   );
 }
@@ -343,9 +245,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
     </View>
   );
 }
@@ -365,13 +264,6 @@ function ProfileScreen({ route }) {
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
           // codeblock-focus-start
           navigation.dispatch(
             CommonActions.reset({
@@ -389,27 +281,6 @@ function ProfileScreen({ route }) {
         }}
       >
         Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
       </Button>
     </View>
   );
@@ -465,9 +336,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
     </View>
   );
 }
@@ -488,17 +356,6 @@ function ProfileScreen({ route }) {
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Home',
-            })
-          );
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
           // codeblock-focus-start
           navigation.dispatch(
             CommonActions.reset({
@@ -516,27 +373,6 @@ function ProfileScreen({ route }) {
         }}
       >
         Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
       </Button>
     </View>
   );
@@ -634,15 +470,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(CommonActions.goBack());
-          // codeblock-focus-end
-        }}
-      >
-        Go back
-      </Button>
     </View>
   );
 }
@@ -662,46 +489,9 @@ function ProfileScreen({ route }) {
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
+          // codeblock-focus-start
+          navigation.dispatch(CommonActions.goBack());
+          // codeblock-focus-end
         }}
       >
         Go back
@@ -760,15 +550,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(CommonActions.goBack());
-          // codeblock-focus-end
-        }}
-      >
-        Go back
-      </Button>
     </View>
   );
 }
@@ -789,50 +570,9 @@ function ProfileScreen({ route }) {
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Home',
-            })
-          );
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
+          // codeblock-focus-start
+          navigation.dispatch(CommonActions.goBack());
+          // codeblock-focus-end
         }}
       >
         Go back
@@ -896,9 +636,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
     </View>
   );
 }
@@ -918,46 +655,11 @@ function ProfileScreen({ route }) {
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
           // codeblock-focus-start
           navigation.dispatch({
             ...CommonActions.goBack(),
             source: route.key,
-            target: route?.params?.key,
+            target: navigation.getState().key,
           });
           // codeblock-focus-end
         }}
@@ -1018,9 +720,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
     </View>
   );
 }
@@ -1041,31 +740,6 @@ function ProfileScreen({ route }) {
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
           navigation.dispatch({
             ...CommonActions.setParams({ user: 'Wojtek' }),
             source: route.key,
@@ -1080,7 +754,7 @@ function ProfileScreen({ route }) {
           navigation.dispatch({
             ...CommonActions.goBack(),
             source: route.key,
-            target: route?.params?.key,
+            target: navigation.getState().key,
           });
           // codeblock-focus-end
         }}
@@ -1349,7 +1023,7 @@ if (navigation.isFocused()) {
 
 ### setParams
 
-The `setParams` action allows to update params for a certain route. It takes the following arguments:
+The `setParams` action allows to replace params for a certain route. It takes the following arguments:
 
 - `params` - _object_ - required - New params to be merged into existing route params.
 
@@ -1389,9 +1063,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
     </View>
   );
 }
@@ -1411,51 +1082,12 @@ function ProfileScreen({ route }) {
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
           // codeblock-focus-start
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            // codeblock-focus-end
-            source: route.key,
-          });
+          navigation.dispatch(CommonActions.setParams({ user: 'Wojtek' }));
+          // codeblock-focus-end
         }}
       >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
+        Set user param
       </Button>
     </View>
   );
@@ -1511,9 +1143,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
     </View>
   );
 }
@@ -1534,51 +1163,12 @@ function ProfileScreen({ route }) {
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
           // codeblock-focus-start
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            // codeblock-focus-end
-            source: route.key,
-          });
+          navigation.dispatch(CommonActions.setParams({ user: 'Wojtek' }));
+          // codeblock-focus-end
         }}
       >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
+        Set user param
       </Button>
     </View>
   );
@@ -1601,12 +1191,356 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-If you want to set params for a particular route, you can add a `source` property referring to the route key:
+If you want to replace params for a particular route, you can add a `source` property referring to the route key:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
 ```js name="Common actions setParams" snack
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
+import {
+  createStaticNavigation,
+  useNavigation,
+  CommonActions,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Home!</Text>
+      <Button
+        onPress={() => {
+          navigation.dispatch(
+            CommonActions.navigate('Profile', { user: 'jane' })
+          );
+        }}
+      >
+        Navigate to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile!</Text>
+      <Text>{route.params.user}'s profile</Text>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch({
+            ...CommonActions.setParams({ user: 'Wojtek' }),
+            source: route.key,
+          });
+          // codeblock-focus-end
+        }}
+      >
+        Set user param
+      </Button>
+    </View>
+  );
+}
+
+const Stack = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(Stack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Common actions setParams" snack
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
+import {
+  NavigationContainer,
+  CommonActions,
+  useNavigation,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Home!</Text>
+      <Button
+        onPress={() => {
+          navigation.dispatch(
+            CommonActions.navigate('Profile', { user: 'jane' })
+          );
+        }}
+      >
+        Navigate to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile!</Text>
+      <Text>{route.params.user}'s profile</Text>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch({
+            ...CommonActions.setParams({ user: 'Wojtek' }),
+            source: route.key,
+          });
+          // codeblock-focus-end
+        }}
+      >
+        Set user param
+      </Button>
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+If the `source` property is explicitly set to `undefined`, it'll replace the params for the focused route.
+
+### replaceParams
+
+The `replaceParams` action allows to replace params for a certain route. It takes the following arguments:
+
+- `params` - _object_ - required - New params to use for the route.
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Common actions replaceParams" snack
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
+import {
+  createStaticNavigation,
+  useNavigation,
+  CommonActions,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Home!</Text>
+      <Button
+        onPress={() => {
+          navigation.dispatch(
+            CommonActions.navigate('Profile', { user: 'jane' })
+          );
+        }}
+      >
+        Navigate to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile!</Text>
+      <Text>{route.params.user}'s profile</Text>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(CommonActions.replaceParams({ user: 'Wojtek' }));
+          // codeblock-focus-end
+        }}
+      >
+        Replace params with user
+      </Button>
+    </View>
+  );
+}
+
+const Stack = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(Stack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Common actions replaceParams" snack
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
+import {
+  NavigationContainer,
+  CommonActions,
+  useNavigation,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Home!</Text>
+      <Button
+        onPress={() => {
+          navigation.dispatch(
+            CommonActions.navigate('Profile', { user: 'jane' })
+          );
+        }}
+      >
+        Navigate to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile!</Text>
+      <Text>{route.params.user}'s profile</Text>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(CommonActions.replaceParams({ user: 'Wojtek' }));
+          // codeblock-focus-end
+        }}
+      >
+        Replace params with user
+      </Button>
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+If you want to replace params for a particular route, you can add a `source` property referring to the route key:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Common actions replaceParams" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -1661,51 +1595,15 @@ function ProfileScreen({ route }) {
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
           // codeblock-focus-start
           navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
+            ...CommonActions.replaceParams({ user: 'Wojtek' }),
             source: route.key,
           });
           // codeblock-focus-end
         }}
       >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
+        Replace params with user
       </Button>
     </View>
   );
@@ -1728,7 +1626,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Common actions setParams" snack
+```js name="Common actions replaceParams" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -1761,9 +1659,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
     </View>
   );
 }
@@ -1784,51 +1679,15 @@ function ProfileScreen({ route }) {
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
           // codeblock-focus-start
           navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
+            ...CommonActions.replaceParams({ user: 'Wojtek' }),
             source: route.key,
           });
           // codeblock-focus-end
         }}
       >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
+        Replace params with user
       </Button>
     </View>
   );
@@ -1851,4 +1710,4 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-If the `source` property is explicitly set to `undefined`, it'll set the params for the focused route.
+If the `source` property is explicitly set to `undefined`, it'll replace the params for the focused route.
