@@ -152,6 +152,7 @@ It supports the following values:
 - `initialRoute` - return to initial screen passed in `initialRouteName` prop, if not passed, defaults to the first screen
 - `order` - return to screen defined before the focused screen
 - `history` - return to last visited screen in the navigator; if the same screen is visited multiple times, the older entries are dropped from the history
+- `fullHistory` - return to last visited screen in the navigator; doesn't drop duplicate entries unlike `history` - this behavior is useful to match how web pages work
 - `none` - do not handle back button
 
 #### `detachInactiveScreens`
