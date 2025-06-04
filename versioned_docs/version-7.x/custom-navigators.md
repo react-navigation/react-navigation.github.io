@@ -213,12 +213,29 @@ type TabNavigationEventMap = {
   };
 };
 
+// The type of the navigation object for each screen
+type TabNavigationProp<
+  ParamList extends ParamListBase,
+  RouteName extends keyof ParamList = keyof ParamList,
+  NavigatorID extends string | undefined = undefined,
+> = NavigationProp<
+  ParamList,
+  RouteName,
+  NavigatorID,
+  TabNavigationState<ParamList>,
+  TabNavigationOptions,
+  TabNavigationEventMap
+> &
+  TabActionHelpers<ParamList>;
+
 // The props accepted by the component is a combination of 3 things
 type Props = DefaultNavigatorOptions<
   ParamListBase,
+  string | undefined,
   TabNavigationState<ParamListBase>,
   TabNavigationOptions,
-  TabNavigationEventMap
+  TabNavigationEventMap,
+  TabNavigationProp<ParamListBase>
 > &
   TabRouterOptions &
   TabNavigationConfig;
