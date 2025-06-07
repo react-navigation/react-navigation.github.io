@@ -25,6 +25,13 @@ While Web support works out of the box, there are some things to configure to en
 
    Currently, React Navigation works best with fully client-side rendered apps. However, minimal server-side rendering support is available. So you can optionally choose to server render your app.
 
+4. **Adapt to web-specific behavior**
+
+   Depending on your app's requirements and design, you may also want to tweak some of the navigators' behavior on the web. For example:
+
+   - Change `backBehavior` to `fullHistory` for [tabs](bottom-tab-navigator.md#backbehavior) and [drawer](drawer-navigator.md#backbehavior) on the web to always push a new entry to the browser history.
+   - Use sidebars on larger screens instead of [bottom tabs](bottom-tab-navigator.md#tabbarposition) - while not specific to web, responsive design much more important on the web.
+
 :::note
 
 In React Navigation 4, it was necessary to install a separate package called `@react-navigation/web` to use web integration. This package is no longer needed in recent versions of React Navigation. If you have it installed, make sure to uninstall it to avoid conflicts.
