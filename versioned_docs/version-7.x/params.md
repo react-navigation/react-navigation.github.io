@@ -373,6 +373,19 @@ export default function App() {
 
 See [Nesting navigators](nesting-navigators.md) for more details on nesting.
 
+:::warning
+
+Some param names are reserved by React Navigation as part of the API for nested navigators. The list of the reserved param names are as follows:
+
+- `screen`
+- `params`
+- `initial`
+- `state`
+
+You should avoid using these param names in your code unless navigating to a screen containing a nested navigator. Otherwise it will result in unexpected behavior, such as the screen not being able to access the params you passed. If you need to pass data to a nested screen, use a different names for the param.
+
+:::
+
 ## What should be in params
 
 Params are essentially options for a screen. They should contain the minimal data required to show a screen, nothing more. If the data is used by multiple screens, it should be in a global store or global cache. Params is not designed for state management.
