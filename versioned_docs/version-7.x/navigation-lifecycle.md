@@ -474,7 +474,7 @@ export default function App() {
 
 See [Navigation events](navigation-events.md) for more details on the available events and the API usage.
 
-Instead of adding event listeners manually, we can use the [`useFocusEffect`](use-focus-effect.md) hook to perform side effects. It's like React's `useEffect` hook, but it ties into the navigation lifecycle.
+For performing side effects, we can use the [`useFocusEffect`](use-focus-effect.md) hook instead of subscribing to events. It's like React's `useEffect` hook, but it ties into the navigation lifecycle.
 
 Example:
 
@@ -622,7 +622,11 @@ export default function App() {
 
 If you want to render different things based on if the screen is focused or not, you can use the [`useIsFocused`](use-is-focused.md) hook which returns a boolean indicating whether the screen is focused.
 
+If you want to know if the screen is focused or not inside of an event listener, you can use the [`navigation.isFocused()`](navigation-object.md#isfocused) method. Note that using this method doesn't trigger a re-render like the `useIsFocused` hook does, so it is not suitable for rendering different things based on focus state.
+
 ## Summary
 
-- While React's lifecycle methods are still valid, React Navigation adds more events that you can subscribe to through the `navigation` object.
-- You may also use the `useFocusEffect` or `useIsFocused` hooks.
+- React Navigation does not unmount screens when navigating away from them
+- The `useFocusEffect` hook is analogous to React's `useEffect` but is tied to the navigation lifecycle instead of the component lifecycle.
+- The `useIsFocused` hook and `navigation.isFocused` method can be used to determine if a screen is currently focused.
+- React Navigation emits `focus` and `blur` events that can be listened to when a screen comes into focus or goes out of focus.
