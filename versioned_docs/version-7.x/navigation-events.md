@@ -25,6 +25,12 @@ For most cases, the [`useFocusEffect`](use-focus-effect.md) hook might be approp
 
 This event is emitted when the screen goes out of focus.
 
+:::note
+
+In some cases, such as going back from a screen in [native-stack navigator](native-stack-navigator.md), the screen may not receive the `blur` event as the screen is unmounted immediately. For cleaning up resources, it's recommended to use the cleanup function of [`useFocusEffect`](use-focus-effect.md) hook instead that considers both blur and unmounting of the screen.
+
+:::
+
 ### `state`
 
 This event is emitted when the navigator's state changes. This event receives the navigator's state in the event data (`event.data.state`).
