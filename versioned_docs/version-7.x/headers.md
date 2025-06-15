@@ -689,6 +689,6 @@ You can read the full list of available `options` for screens inside of a native
 
 ## Summary
 
-- You can customize the header inside of the `options` property of your screens. Read the full list of options [in the API reference](native-stack-navigator.md#options).
-- The `options` property can be an object or a function. When it is a function, it is provided with an object with the `navigation` and `route` objects.
-- You can also specify shared `screenOptions` in the stack navigator configuration when you initialize it. This will apply to all screens in the navigator.
+- You can customize the header inside of the [`options`](screen-options.md) property of your screens. Read the full list of options [in the API reference](native-stack-navigator.md#options).
+- The `options` property can be an object or a function. When it is a function, it is provided with an object with the [`navigation`](navigation-object.md) and [`route`](route-object.md) objects.
+- You can also specify shared [`screenOptions`](screen-options.md#screenoptions-prop-on-the-navigator) in the stack navigator configuration when you initialize it. This will apply to all screens in the navigator.

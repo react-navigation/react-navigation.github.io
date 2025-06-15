@@ -473,6 +473,6 @@ Similarly, you could apply these paddings in `contentContainerStyle` of `FlatLis
 
 ## Summary
 
-- Use `useSafeAreaInsets` hook from `react-native-safe-area-context` instead of `SafeAreaView` component
+- Use [`useSafeAreaInsets`](https://appandflow.github.io/react-native-safe-area-context/api/use-safe-area-insets) hook from `react-native-safe-area-context` instead of [`SafeAreaView`](https://reactnative.dev/docs/safeareaview) component
 - Don't wrap your whole app in `SafeAreaView`, instead apply the styles to content inside your screens
 - Apply only specific insets using the `useSafeAreaInsets` hook for more control

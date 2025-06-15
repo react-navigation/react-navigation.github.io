@@ -358,8 +358,8 @@ export default function App() {
 
 ## Summary
 
-- `navigation.navigate('RouteName')` pushes a new route to the native stack navigator if you're not already on that route.
-- We can call `navigation.push('RouteName')` as many times as we like and it will continue pushing routes.
-- The header bar will automatically show a back button, but you can programmatically go back by calling `navigation.goBack()`. On Android, the hardware back button just works as expected.
-- You can go back to an existing screen in the stack with `navigation.popTo('RouteName')`, and you can go back to the first screen in the stack with `navigation.popToTop()`.
-- The `navigation` object is available to all screen components with the [`useNavigation`](use-navigation.md) hook.
+- [`navigation.navigate('RouteName')`](navigation-object.md#navigate) pushes a new route to the native stack navigator if you're not already on that route.
+- We can call [`navigation.push('RouteName')`](stack-actions.md#push) as many times as we like and it will continue pushing routes.
+- The header bar will automatically show a back button, but you can programmatically go back by calling [`navigation.goBack()`](navigation-object.md#goback). On Android, the hardware back button just works as expected.
+- You can go back to an existing screen in the stack with [`navigation.popTo('RouteName')`](stack-actions.md#popto), and you can go back to the first screen in the stack with [`navigation.popToTop()`](stack-actions.md#poptotop).
+- The [`navigation`](navigation-object.md) object is available to all screen components with the [`useNavigation`](use-navigation.md) hook.
