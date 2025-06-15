@@ -373,7 +373,7 @@ export default function App() {
 
 See [Nesting navigators](nesting-navigators.md) for more details on nesting.
 
-:::warning
+## Reserved param names
 
 Some param names are reserved by React Navigation as part of the API for nested navigators. The list of the reserved param names are as follows:
 
@@ -383,8 +383,6 @@ Some param names are reserved by React Navigation as part of the API for nested 
 - `state`
 
 You should avoid using these param names in your code unless navigating to a screen containing a nested navigator. Otherwise it will result in unexpected behavior, such as the screen not being able to access the params you passed. If you need to pass data to a nested screen, use a different names for the param.
-
-:::
 
 ## What should be in params
 
@@ -436,8 +434,9 @@ In essence, pass the least amount of data required to identify a screen in param
 
 ## Summary
 
-- `navigate` and `push` accept an optional second argument to let you pass parameters to the route you are navigating to. For example: `navigation.navigate('RouteName', { paramName: 'value' })`.
-- You can read the params through `route.params` inside a screen
-- You can update the screen's params with `navigation.setParams`
-- Initial params can be passed via the `initialParams` prop on `Screen`
+- [`navigate`](navigation-actions.md#navigate) and [`push`](stack-actions.md#push) accept an optional second argument to let you pass parameters to the route you are navigating to. For example: `navigation.navigate('RouteName', { paramName: 'value' })`.
+- You can read the params through [`route.params`](route-object.md) inside a screen
+- You can update the screen's params with [`navigation.setParams`](navigation-object.md#setparams) or [`navigation.replaceParams`](navigation-object.md#replaceparams)
+- Initial params can be passed via the [`initialParams`](screen.md#initial-params) prop on `Screen` or in the navigator config
 - Params should contain the minimal data required to show a screen, nothing more
+- Some [param names are reserved](#reserved-param-names) by React Navigation and should be avoided

@@ -627,6 +627,6 @@ If you want to know if the screen is focused or not inside of an event listener,
 ## Summary
 
 - React Navigation does not unmount screens when navigating away from them
-- The `useFocusEffect` hook is analogous to React's `useEffect` but is tied to the navigation lifecycle instead of the component lifecycle.
-- The `useIsFocused` hook and `navigation.isFocused` method can be used to determine if a screen is currently focused.
-- React Navigation emits `focus` and `blur` events that can be listened to when a screen comes into focus or goes out of focus.
+- The [`useFocusEffect`](use-focus-effect.md) hook is analogous to React's [`useEffect`](https://react.dev/reference/react/useEffect) but is tied to the navigation lifecycle instead of the component lifecycle.
+- The [`useIsFocused`](use-is-focused.md) hook and [`navigation.isFocused()`](navigation-object.md#isfocused) method can be used to determine if a screen is currently focused.
+- React Navigation emits [`focus`](navigation-events.md#focus) and [`blur`](navigation-events.md#blur) events that can be listened to when a screen comes into focus or goes out of focus.
