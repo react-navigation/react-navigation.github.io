@@ -36,6 +36,12 @@ If you are not using Expo, run the following:
 npm install react-native-pager-view
 ```
 
+If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+
+```bash
+npx pod-install ios
+```
+
 We're done! Now you can build and run the app on your device/simulator.
 
 ## Quick start
