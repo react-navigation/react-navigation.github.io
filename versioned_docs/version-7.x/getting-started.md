@@ -147,32 +147,14 @@ There are 2 primary ways to configure the navigators:
 
 ### Static configuration
 
-The static configuration API has reduced boilerplate and simplifies things such as TypeScript types and deep linking. If you're starting a new project or are new to React Navigation, this is the **recommended way** to set up your app. If you need more flexibility in the future, you can always mix and match with the dynamic configuration.
+The static configuration API lets you write your configuration in an object, and is defined statically, i.e. it cannot change at runtime. This has reduced boilerplate and simplifies things such as TypeScript types and deep linking.
+
+If you're starting a new project or are new to React Navigation, this is the **recommended way** to set up your app. If you need more flexibility in the future, you can always mix and match with the dynamic configuration.
 
 Continue to ["Hello React Navigation"](hello-react-navigation.md?config=static) to start writing some code with the static API.
 
 ### Dynamic configuration
 
-The dynamic configuration allows for more flexibility but requires more boilerplate and configuration (e.g. for deep links, typescript etc.).
-
-To get started with dynamic configuration, first, we need to wrap your app in `NavigationContainer`. Usually, you'd do this in your entry file, such as `index.js` or `App.js`:
-
-```js
-import * as React from 'react';
-// highlight-next-line
-import { NavigationContainer } from '@react-navigation/native';
-
-export default function App() {
-  return (
-    <NavigationContainer>{/* Rest of your app code */}</NavigationContainer>
-  );
-}
-```
-
-:::warning
-
-In a typical React Native app, the `NavigationContainer` should be only used once in your app at the root. You shouldn't nest multiple `NavigationContainer`s unless you have a specific use case for them.
-
-:::
+The dynamic configuration API lets you write your configuration in React components, and can change at runtime based on state or props. This allows for more flexibility but requires more boilerplate and configuration for Typescript types, deep linking etc.
 
 Continue to ["Hello React Navigation"](hello-react-navigation.md?config=dynamic) to start writing some code with the dynamic API.
