@@ -42,7 +42,7 @@ npm install @react-navigation/elements
 
 `createNativeStackNavigator` is a function that takes a configuration object containing the screens and customization options. The screens are React Components that render the content displayed by the navigator.
 
-`createStaticNavigation` is a function that takes the navigator defined earlier and returns a component that can be rendered in the app. It's only called once in the app.
+`createStaticNavigation` is a function that takes the navigator defined earlier and returns a component that can be rendered in the app. It's only called once in the app. Usually, we'd render the returned component at the root of our app, which is usually the component exported from `App.js`, `App.tsx` etc., or used with `AppRegistry.registerComponent`, `Expo.registerRootComponent` etc.
 
 ```js name="Native Stack Example" snack
 // In App.js in a new project
@@ -73,12 +73,18 @@ export default function App() {
 }
 ```
 
+:::warning
+
+In a typical React Native app, the `createStaticNavigation` function should be only used once in your app at the root.
+
+:::
+
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
 `createNativeStackNavigator` is a function that returns an object containing 2 properties: `Screen` and `Navigator`. Both of them are React components used for configuring the navigator. The `Navigator` should contain `Screen` elements as its children to define the configuration for routes.
 
-`NavigationContainer` is a component that manages our navigation tree and contains the [navigation state](navigation-state.md). This component must wrap all the navigators in the app. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
+`NavigationContainer` is a component that manages our navigation tree and contains the [navigation state](navigation-state.md). This component must wrap all the navigators in the app. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`, `App.tsx` etc., or used with `AppRegistry.registerComponent`, `Expo.registerRootComponent` etc.
 
 ```js name="Native Stack Example" snack
 // In App.js in a new project
@@ -114,6 +120,12 @@ export default function App() {
   );
 }
 ```
+
+:::warning
+
+In a typical React Native app, the `NavigationContainer` should be only used once in your app at the root. You shouldn't nest multiple `NavigationContainer`s unless you have a specific use case for them.
+
+:::
 
 </TabItem>
 </Tabs>
