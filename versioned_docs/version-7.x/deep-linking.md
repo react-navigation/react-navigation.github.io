@@ -81,7 +81,7 @@ function App() {
 </TabItem>
 </Tabs>
 
-The reason that is necessary to use `Linking.createURL` is that the scheme will differ depending on whether you're in the client app or in a standalone app.
+It is necessary to use `Linking.createURL` since the scheme differs between the [Expo Dev Client](https://docs.expo.dev/versions/latest/sdk/dev-client/) and standalone apps.
 
 The scheme specified in `app.json` only applies to standalone apps. In the Expo client app you can deep link using `exp://ADDRESS:PORT/--/` where `ADDRESS` is often `127.0.0.1` and `PORT` is often `19000` - the URL is printed when you run `expo start`. The `Linking.createURL` function abstracts it out so that you don't need to specify them manually.
 
@@ -92,6 +92,57 @@ const linking = {
   prefixes: [Linking.createURL('/'), 'https://app.example.com'],
 };
 ```
+
+### Universal Links on Expo
+
+To set up iOS universal Links in your Expo app, you need to configure your [app config](https://docs.expo.dev/workflow/configuration) to include the associated domains and entitlements:
+
+```json
+{
+  "expo": {
+    "ios": {
+      "associatedDomains": ["applinks:app.example.com"],
+      "entitlements": {
+        "com.apple.developer.associated-domains": ["applinks:app.example.com"]
+      }
+    }
+  }
+}
+```
+
+You will also need to setup [Associated Domains](https://developer.apple.com/documentation/Xcode/supporting-associated-domains) on your server.
+
+See [Expo's documentation on iOS Universal Links](https://docs.expo.dev/linking/ios-universal-links/) for more details.
+
+### App Links on Expo
+
+To set up Android App Links in your Expo app, you need to configure your [app config](https://docs.expo.dev/workflow/configuration) to include the `intentFilters`:
+
+```json
+{
+  "expo": {
+    "android": {
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "app.example.com"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
+    }
+  }
+}
+```
+
+You will also need to [declare the association](https://developer.android.com/training/app-links/verify-android-applinks#web-assoc) between your website and your intent filters by hosting a Digital Asset Links JSON file.
+
+See [Expo's documentation on Android App Links](https://docs.expo.dev/linking/android-app-links/) for more details.
 
 ## Set up with bare React Native projects
 
