@@ -38,32 +38,7 @@ Then, you need to install and configure the libraries that are required by the d
 
 2. Configure the Reanimated Babel Plugin in your project following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
-3. To finalize the installation of `react-native-gesture-handler`, we need to conditionally import it. To do this, create 2 files:
-
-   ```js title="gesture-handler.native.js"
-   // Only import react-native-gesture-handler on native platforms
-   import 'react-native-gesture-handler';
-   ```
-
-   ```js title="gesture-handler.js"
-   // Don't import react-native-gesture-handler on web
-   ```
-
-   Now, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
-
-   ```js
-   import './gesture-handler';
-   ```
-
-   Since the drawer navigator doesn't use `react-native-gesture-handler` on Web, this avoids unnecessarily increasing the bundle size.
-
-   :::warning
-
-   If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
-
-   :::
-
-4. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
    ```bash
    npx pod-install ios
@@ -203,6 +178,7 @@ It supports the following values:
 - `initialRoute` - return to initial screen passed in `initialRouteName` prop, if not passed, defaults to the first screen
 - `order` - return to screen defined before the focused screen
 - `history` - return to last visited screen in the navigator; if the same screen is visited multiple times, the older entries are dropped from the history
+- `fullHistory` - return to last visited screen in the navigator; doesn't drop duplicate entries unlike `history` - this behavior is useful to match how web pages work
 - `none` - do not handle back button
 
 #### `defaultStatus`

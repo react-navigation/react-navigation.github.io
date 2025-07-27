@@ -15,23 +15,9 @@ Here are some of the ways to contribute to the project:
   - [Bug Fixes](#bug-fixes)
   - [Suggesting a Feature](#suggesting-a-feature)
   - [Big Pull Requests](#big-pull-requests)
-- [Information](#information)
-  - [Issue Template](#issue-template)
-  - [Pull Request Template](#pull-request-template)
-  - [Forking the Repository](#forking-the-repository)
-  - [Code Review Guidelines](#code-review-guidelines)
-  - [Run the Example App](#run-the-example-app)
-  - [Run Tests](#run-tests)
 
 And here are a few helpful resources to aid in getting started:
 
-- [Contributing](#contributing)
-  - [Reporting Bugs](#reporting-bugs)
-  - [Improving the Documentation](#improving-the-documentation)
-  - [Responding to Issues](#responding-to-issues)
-  - [Bug Fixes](#bug-fixes)
-  - [Suggesting a Feature](#suggesting-a-feature)
-  - [Big Pull Requests](#big-pull-requests)
 - [Information](#information)
   - [Issue Template](#issue-template)
   - [Pull Request Template](#pull-request-template)
@@ -47,7 +33,7 @@ And here are a few helpful resources to aid in getting started:
 You can't write code without writing the occasional bug. Especially as React Navigation is moving quickly, bugs happen. When you think you've found one here's what to do:
 
 1. Search the existing issues for one like what you're seeing. If you see one, add a 👍 reaction (please no +1 comments). Read through the comments and see if you can provide any more valuable information to the thread
-2. If there are no other issues like yours then create a new one. Be sure to follow the [issue template](https://github.com/react-navigation/react-navigation/blob/main/.github/ISSUE_TEMPLATE.md).
+2. If there are no other issues like yours then create a new one. Be sure to follow the [issue template](https://github.com/react-navigation/react-navigation/blob/main/.github/ISSUE_TEMPLATE/bug-report.yml).
 
 Creating a high quality reproduction is critical. Without it we likely can't fix the bug and, in an ideal situation, you'll find out that it's not actually a bug of the library but simply done incorrectly in your project. Instant bug fix!
 
@@ -96,7 +82,7 @@ The reason we want to do this is to save everyone time. Maybe that feature alrea
 
 ### Issue Template
 
-Before submitting an issue, please take a look at the [issue template](https://github.com/react-navigation/react-navigation/blob/main/.github/ISSUE_TEMPLATE.md) and follow it. This is in place to help everyone better understand the issue you're having and reduce the back and forth to get the necessary information.
+Before submitting an issue, please take a look at the [issue template](https://github.com/react-navigation/react-navigation/blob/main/.github/ISSUE_TEMPLATE/bug-report.yml) and follow it. This is in place to help everyone better understand the issue you're having and reduce the back and forth to get the necessary information.
 
 Yes, it takes time and effort to complete the issue template. But that's the only way to ask high quality questions that actually get responses.
 
@@ -104,7 +90,7 @@ Would you rather take 1 minute to create an incomplete issue report and wait mon
 
 ### Pull Request Template
 
-Much like the issue template, the [pull request template](https://github.com/react-navigation/react-navigation/blob/main/.github/PULL_REQUEST.md) lays out instructions to ensure your pull request gets reviewed in a timely manner and reduces the back and forth. Make sure to look it over before you start writing any code.
+Much like the issue template, the [pull request template](https://github.com/react-navigation/react-navigation/blob/main/.github/PULL_REQUEST_TEMPLATE.md) lays out instructions to ensure your pull request gets reviewed in a timely manner and reduces the back and forth. Make sure to look it over before you start writing any code.
 
 ### Forking the Repository
 

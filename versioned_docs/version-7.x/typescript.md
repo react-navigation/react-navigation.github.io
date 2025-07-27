@@ -69,9 +69,11 @@ There are 2 steps to configure TypeScript with the static API:
 
 ## Navigator specific types
 
-Generally, we recommend using the default types for the [`useNavigation`](use-navigation.md) prop to access the navigation object in a navigator-agnostic manner. However, if you need to use navigator-specific APIs, you need to manually annotate [`useNavigation`](use-navigation.md):
+Generally, we recommend using the default types for the [`useNavigation`](use-navigation.md) prop to access the navigation object in a navigator-agnostic manner. However, if you need to use navigator-specific APIs, e.g. `setOptions` to update navigator options, `push`, `pop`, `popTo` etc. with stacks, `openDrawer`, `closeDrawer` etc. with drawer and so on, you need to manually annotate [`useNavigation`](use-navigation.md):
 
 ```ts
+import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+
 type BottomTabParamList = StaticParamList<typeof BottomTabNavigator>;
 type ProfileScreenNavigationProp = BottomTabNavigationProp<
   BottomTabParamList,
@@ -83,7 +85,13 @@ type ProfileScreenNavigationProp = BottomTabNavigationProp<
 const navigation = useNavigation<ProfileScreenNavigationProp>();
 ```
 
-Note that annotating [`useNavigation`](use-navigation.md) this way is not type-safe since we can't guarantee that the type you provided matches the type of the navigator.
+Similarly, you can import `NativeStackNavigationProp` from [`@react-navigation/native-stack`](native-stack-navigator.md), `StackNavigationProp` from [`@react-navigation/stack`](stack-navigator.md), `DrawerNavigationProp` from [`@react-navigation/drawer`](drawer-navigator.md) etc.
+
+:::danger
+
+Annotating [`useNavigation`](use-navigation.md) this way is not type-safe since we can't guarantee that the type you provided matches the type of the navigator. So try to keep manual annotations to a minimum and use the default types instead.
+
+:::
 
 ## Nesting navigator using dynamic API
 
@@ -228,7 +236,7 @@ If you have an [`id`](./navigator.md#id) prop for your navigator, you can do:
 type Props = NativeStackScreenProps<RootStackParamList, 'Profile', 'MyStack'>;
 ```
 
-This allows us to type check route names and params which you're navigating using [`navigate`](navigation-object.md#navigate), [`push`](stack-actions.md#push) etc. The name of the current route is necessary to type check the params in `route.params` and when you call [`setParams`](navigation-actions#setparams).
+This allows us to type check route names and params which you're navigating using [`navigate`](navigation-object.md#navigate), [`push`](stack-actions.md#push) etc. The name of the current route is necessary to type check the params in `route.params` and when you call [`setParams`](navigation-actions#setparams) or [`replaceParams`](navigation-actions#replaceparams).
 
 Similarly, you can import `StackScreenProps` from [`@react-navigation/stack`](stack-navigator.md), `DrawerScreenProps` from [`@react-navigation/drawer`](drawer-navigator.md), `BottomTabScreenProps` from [`@react-navigation/bottom-tabs`](bottom-tab-navigator.md) and so on.
 

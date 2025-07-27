@@ -457,14 +457,16 @@ Only supported on Android and iOS.
 
 #### `statusBarStyle`
 
-Sets the status bar color (similar to the `StatusBar` component). Defaults to `auto`.
+Sets the status bar color (similar to the `StatusBar` component).
 
 Supported values:
 
-- `"auto"`
+- `"auto"` (iOS only)
 - `"inverted"` (iOS only)
 - `"dark"`
 - `"light"`
+
+Defaults to `auto` on iOS and `light` on Android.
 
 Requires setting `View controller-based status bar appearance -> YES` (or removing the config) in your `Info.plist` file.
 
