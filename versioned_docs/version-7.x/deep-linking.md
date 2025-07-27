@@ -99,13 +99,23 @@ const linking = {
 
 Let's configure the native iOS app to open based on the `example://` URI scheme.
 
-You'll need to link `RCTLinking` to your project by following the steps described here. To be able to listen to incoming app links, you'll need to add the following lines to `AppDelegate.m` in your project:
+You'll need to add the `LinkingIOS` folder into your header search paths as described [here](https://reactnative.dev/docs/linking-libraries-ios#step-3). Then you'll need to add the following lines to your or `AppDelegate.swift` or `AppDelegate.mm` file:
+
+<Tabs>
+<TabItem value='swift' label='Swift' default>
+
+```swift
+override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+  return RCTLinkingManager.application(app, open: url, options: options)
+}
+```
+
+</TabItem>
+<TabItem value='objc' label='Objective-C'>
 
 ```objc
-// Add the header at the top of the file:
 #import <React/RCTLinkingManager.h>
 
-// Add this inside `@implementation AppDelegate` above `@end`:
 - (BOOL)application:(UIApplication *)application
    openURL:(NSURL *)url
    options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
@@ -114,10 +124,31 @@ You'll need to link `RCTLinking` to your project by following the steps describe
 }
 ```
 
+</TabItem>
+</Tabs>
+
 If your app is using [Universal Links](https://developer.apple.com/ios/universal-links/), you'll need to add the following code as well:
 
+<Tabs>
+<TabItem value='swift' label='Swift' default>
+
+```swift
+override func application(
+  _ application: UIApplication,
+  continue userActivity: NSUserActivity,
+  restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+    return RCTLinkingManager.application(
+      application,
+      continue: userActivity,
+      restorationHandler: restorationHandler
+    )
+  }
+```
+
+</TabItem>
+<TabItem value='objc' label='Objective-C'>
+
 ```objc
-// Add this inside `@implementation AppDelegate` above `@end`:
 - (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
  restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
 {
@@ -126,6 +157,9 @@ If your app is using [Universal Links](https://developer.apple.com/ios/universal
                     restorationHandler:restorationHandler];
 }
 ```
+
+</TabItem>
+</Tabs>
 
 Now you need to add the scheme to your project configuration.
 
