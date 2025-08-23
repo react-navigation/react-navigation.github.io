@@ -293,7 +293,7 @@ After adding them, it should look like this:
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:scheme="http" />
         <data android:scheme="https" />
-        <data android:host="www.example.com" />
+        <data android:host="app.example.com" />
     </intent-filter>
 </activity>
 ```
@@ -385,7 +385,7 @@ To achieve this, you'd need to override how React Navigation subscribes to incom
 
 ```js name="Third-party integrations"
 const linking = {
-  prefixes: ['myapp://', 'https://myapp.com'],
+  prefixes: ['example://', 'https://app.example.com'],
 
   // Custom function to get the URL which was used to open the app
   async getInitialURL() {
@@ -434,7 +434,7 @@ const linking = {
 
 ```js name="Third-party integrations"
 const linking = {
-  prefixes: ['myapp://', 'https://myapp.com'],
+  prefixes: ['example://', 'https://app.example.com'],
 
   // Custom function to get the URL which was used to open the app
   async getInitialURL() {
