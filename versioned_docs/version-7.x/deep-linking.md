@@ -374,56 +374,55 @@ Or if using Expo client:
 adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:19000/--/chat/jane" host.exp.exponent
 ```
 
-## Third-party integrations
+## Integrating with other tools
 
-React Native's `Linking` isn't the only way to handle deep linking. You might also want to integrate other services such as [Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links), [Branch](https://help.branch.io/developers-hub/docs/react-native) etc. which provide their own API for getting notified of incoming links.
+In addition to deep links and universal links with React Native's `Linking` API, you may also want to integrate other tools for handling incoming links, e.g. Push Notifications - so that tapping on a notification can open the app to a specific screen.
 
-To achieve this, you'd need to override how React Navigation subscribes to incoming links. To do so, you can provide your own [`getInitialURL`](navigation-container.md#linkinggetinitialurl) and [`subscribe`](navigation-container.md#linkingsubscribe) functions:
+To achieve this, you'd need to override how React Navigation subscribes to incoming links. To do so, you can provide your own [`getInitialURL`](navigation-container.md#linkinggetinitialurl) and [`subscribe`](navigation-container.md#linkingsubscribe) functions.
+
+Here is an example integration with [expo-notifications](https://docs.expo.dev/versions/latest/sdk/notifications):
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Third-party integrations"
+```js name="Expo Notifications"
 const linking = {
   prefixes: ['example://', 'https://app.example.com'],
 
   // Custom function to get the URL which was used to open the app
   async getInitialURL() {
-    // First, you would need to get the initial URL from your third-party integration
-    // The exact usage depend on the third-party SDK you use
-    // For example, to get the initial URL for Firebase Dynamic Links:
-    const { isAvailable } = utils().playServicesAvailability;
-
-    if (isAvailable) {
-      const initialLink = await dynamicLinks().getInitialLink();
-
-      if (initialLink) {
-        return initialLink.url;
-      }
-    }
-
-    // As a fallback, you may want to do the default deep link handling
+    // First, handle deep links
     const url = await Linking.getInitialURL();
 
-    return url;
+    if (url != null) {
+      return url;
+    }
+
+    // Handle URL from expo push notifications
+    const response = await Notifications.getLastNotificationResponseAsync();
+
+    return response?.notification.request.content.data.url;
   },
 
   // Custom function to subscribe to incoming links
   subscribe(listener) {
-    // Listen to incoming links from Firebase Dynamic Links
-    const unsubscribeFirebase = dynamicLinks().onLink(({ url }) => {
-      listener(url);
-    });
-
-    // Listen to incoming links from deep linking
+    // Listen to incoming links for deep links
     const linkingSubscription = Linking.addEventListener('url', ({ url }) => {
       listener(url);
     });
 
+    // Listen to expo push notifications when user interacts with them
+    const pushNotificationSubscription =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+        const url = response.notification.request.content.data.url;
+
+        listener(url);
+      });
+
     return () => {
       // Clean up the event listeners
-      unsubscribeFirebase();
       linkingSubscription.remove();
+      pushNotificationSubscription.remove();
     };
   },
 };
@@ -432,47 +431,44 @@ const linking = {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Third-party integrations"
+```js name="Expo Notifications"
 const linking = {
   prefixes: ['example://', 'https://app.example.com'],
 
   // Custom function to get the URL which was used to open the app
   async getInitialURL() {
-    // First, you would need to get the initial URL from your third-party integration
-    // The exact usage depend on the third-party SDK you use
-    // For example, to get the initial URL for Firebase Dynamic Links:
-    const { isAvailable } = utils().playServicesAvailability;
-
-    if (isAvailable) {
-      const initialLink = await dynamicLinks().getInitialLink();
-
-      if (initialLink) {
-        return initialLink.url;
-      }
-    }
-
-    // As a fallback, you may want to do the default deep link handling
+    // First, handle deep links
     const url = await Linking.getInitialURL();
 
-    return url;
+    if (url != null) {
+      return url;
+    }
+
+    // Handle URL from expo push notifications
+    const response = await Notifications.getLastNotificationResponseAsync();
+
+    return response?.notification.request.content.data.url;
   },
 
   // Custom function to subscribe to incoming links
   subscribe(listener) {
-    // Listen to incoming links from Firebase Dynamic Links
-    const unsubscribeFirebase = dynamicLinks().onLink(({ url }) => {
-      listener(url);
-    });
-
-    // Listen to incoming links from deep linking
+    // Listen to incoming links for deep links
     const linkingSubscription = Linking.addEventListener('url', ({ url }) => {
       listener(url);
     });
 
+    // Listen to expo push notifications when user interacts with them
+    const pushNotificationSubscription =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+        const url = response.notification.request.content.data.url;
+
+        listener(url);
+      });
+
     return () => {
       // Clean up the event listeners
-      unsubscribeFirebase();
       linkingSubscription.remove();
+      pushNotificationSubscription.remove();
     };
   },
 
