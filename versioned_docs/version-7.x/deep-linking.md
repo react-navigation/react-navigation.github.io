@@ -152,7 +152,7 @@ Let's configure the native iOS app to open based on the `example://` URI scheme.
 
 You'll need to add the `LinkingIOS` folder into your header search paths as described [here](https://reactnative.dev/docs/linking-libraries-ios#step-3). Then you'll need to add the following lines to your or `AppDelegate.swift` or `AppDelegate.mm` file:
 
-<Tabs>
+<Tabs groupId="ios-lang">
 <TabItem value='swift' label='Swift' default>
 
 ```swift
@@ -180,7 +180,7 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplication.Op
 
 If your app is using [Universal Links](https://developer.apple.com/ios/universal-links/), you'll need to add the following code as well:
 
-<Tabs>
+<Tabs groupId="ios-lang">
 <TabItem value='swift' label='Swift' default>
 
 ```swift
