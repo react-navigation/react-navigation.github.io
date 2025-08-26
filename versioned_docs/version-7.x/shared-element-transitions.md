@@ -7,11 +7,13 @@ sidebar_label: Shared element transitions
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide covers how to animate elements between screens. This feature is known as a [Shared Element Transition](https://docs.swmansion.com/react-native-reanimated/docs/api/sharedElementTransitions) and it's implemented in the [`@react-navigation/native-stack`](native-stack-navigator.md) with [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/).
+This guide covers how to animate elements between screens. This feature is known as a [Shared Element Transition](https://docs.swmansion.com/react-native-reanimated/docs/shared-element-transitions/overview/) and it's implemented in the [`@react-navigation/native-stack`](native-stack-navigator.md) with [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/).
 
 :::warning
 
 As of writing this guide, Shared Element Transitions are considered an experimental feature not recommended for production use.
+
+Shared Element Transitions are currently only supported on **old React Native architecture** (Paper).
 
 :::
 
