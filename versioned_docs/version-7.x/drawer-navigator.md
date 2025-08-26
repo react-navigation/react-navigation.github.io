@@ -27,13 +27,13 @@ Then, you need to install and configure the libraries that are required by the d
    If you have a Expo managed project, in your project directory, run:
 
    ```bash
-   npx expo install react-native-gesture-handler react-native-reanimated
+   npx expo install react-native-gesture-handler react-native-reanimated react-native-worklets
    ```
 
    If you have a bare React Native project, in your project directory, run:
 
    ```bash npm2yarn
-   npm install react-native-gesture-handler react-native-reanimated
+   npm install react-native-gesture-handler react-native-reanimated react-native-worklets
    ```
 
 2. Configure the Reanimated Babel Plugin in your project following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
