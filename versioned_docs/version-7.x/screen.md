@@ -218,7 +218,7 @@ This can be done by specifying the `getId` callback. It receives an object with 
 <TabItem value="static" label="Static" default>
 
 ```js
-const Stack = createNativeStackNavigator({
+const Stack = createStackNavigator({
   screens: {
     Profile: {
       screen: ProfileScreen,
@@ -244,49 +244,22 @@ const Stack = createNativeStackNavigator({
 </TabItem>
 </Tabs>
 
-By default, `navigate('ScreenName', params)` updates the current screen if the screen name matches, otherwise adds a new screen in a stack navigator. So if you're on `ScreenName` and navigate to `ScreenName` again, it won't add a new screen even if the params are different - it'll update the current screen with the new params instead:
+In the above example, `params.userId` is used as an ID for the `Profile` screen with `getId`. This changes how the navigation works to ensure that the screen with the same ID appears only once in the stack.
 
-```js
-// Let's say you're on `Home` screen
-// Then you navigate to `Profile` screen with `userId: 1`
-navigation.navigate('Profile', { userId: 1 });
+Let's say you have a stack with the history `Home > Profile (userId: bob) > Settings`, consider following scenarios:
 
-// Now the stack will have: `Home` -> `Profile` with `userId: 1`
-
-// Then you navigate to `Profile` screen again with `userId: 2`
-navigation.navigate('Profile', { userId: 2 });
-
-// The stack will now have: `Home` -> `Profile` with `userId: 2`
-```
-
-If you specify `getId` and it doesn't return `undefined`, the screen is identified by both the screen name and the returned ID. That means that if you're on `ScreenName` and navigate to `ScreenName` again with different params - and return a different ID from the `getId` callback, it'll add a new screen to the stack:
-
-```js
-// Let's say you're on `Home` screen
-// Then you navigate to `Profile` screen with `userId: 1`
-navigation.navigate('Profile', { userId: 1 });
-
-// Now the stack will have: `Home` -> `Profile` with `userId: 1`
-
-// Then you navigate to `Profile` screen again with `userId: 2`
-navigation.navigate('Profile', { userId: 2 });
-
-// The stack will now have: `Home` -> `Profile` with `userId: 1` -> `Profile` with `userId: 2`
-```
-
-The `getId` callback can also be used to ensure that the screen with the same ID doesn't appear multiple times in the stack:
-
-```js
-// Let's say you have a stack with the screens: `Home` -> `Profile` with `userId: 1` -> `Settings`
-// Then you navigate to `Profile` screen with `userId: 1` again
-navigation.navigate('Profile', { userId: 1 });
-
-// Now the stack will have: `Home` -> `Profile` with `userId: 1`
-```
-
-In the above examples, `params.userId` is used as an ID, subsequent navigation to the screen with the same `userId` will navigate to the existing screen instead of adding a new one to the stack. If the navigation was with a different `userId`, then it'll add a new screen.
+- You call `navigate(Profile, { userId: 'bob' })`:
+  The resulting screens will be `Home > Settings > Profile (userId: bob)` since the existing `Profile` screen matches the ID.
+- You call `navigate(Profile, { userId: 'alice' })`:
+  The resulting screens will be `Home > Profile (userId: bob) > Settings > Profile (userId: alice)` since it'll add a new `Profile` screen as no matching screen was found.
 
 If `getId` is specified in a tab or drawer navigator, the screen will remount if the ID changes.
+
+:::warning
+
+If you're using [`@react-navigation/native-stack`](native-stack-navigator.md), it doesn't work correctly with the `getId` callback. So it's recommended to avoid using it in that case.
+
+:::
 
 ### Component
 
@@ -361,7 +334,9 @@ By default, React Navigation applies optimizations to screen components to preve
 
 ### Layout
 
-A layout is a wrapper around the screen. It makes it easier to provide things such as an error boundary and suspense fallback for a screen:
+A layout is a wrapper around the screen. It makes it easier to provide things such as an error boundary and suspense fallback for a screen, or wrap the screen with additional UI.
+
+It takes a function that returns a React element:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>

@@ -185,7 +185,7 @@ Instead of specifying this option for a group, it's also possible to specify it 
 
 ## Summary
 
-- To change the type of transition on a stack navigator you can use the `presentation` option.
+- To change the type of transition on a stack navigator you can use the [`presentation`](native-stack-navigator.md#presentation) option.
 - When `presentation` is set to `modal`, the screens behave like a modal, i.e. they have a bottom to top transition and may show part of the previous screen in the background.
 - Setting `presentation: 'modal'` on a group makes all the screens in the group modals, so to use non-modal transitions on other screens, we add another group with the default configuration.
 

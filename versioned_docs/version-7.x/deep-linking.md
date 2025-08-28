@@ -20,12 +20,12 @@ Below, we'll go through required configurations so that the deep link integratio
 
 ## Setup with Expo projects
 
-First, you will want to specify a URL scheme for your app. This corresponds to the string before `://` in a URL, so if your scheme is `mychat` then a link to your app would be `mychat://`. You can register for a scheme in your `app.json` by adding a string under the scheme key:
+First, you will want to specify a URL scheme for your app. This corresponds to the string before `://` in a URL, so if your scheme is `example` then a link to your app would be `example://`. You can register for a scheme in your `app.json` by adding a string under the scheme key:
 
 ```json
 {
   "expo": {
-    "scheme": "mychat"
+    "scheme": "example"
   }
 }
 ```
@@ -81,7 +81,7 @@ function App() {
 </TabItem>
 </Tabs>
 
-The reason that is necessary to use `Linking.createURL` is that the scheme will differ depending on whether you're in the client app or in a standalone app.
+It is necessary to use `Linking.createURL` since the scheme differs between the [Expo Dev Client](https://docs.expo.dev/versions/latest/sdk/dev-client/) and standalone apps.
 
 The scheme specified in `app.json` only applies to standalone apps. In the Expo client app you can deep link using `exp://ADDRESS:PORT/--/` where `ADDRESS` is often `127.0.0.1` and `PORT` is often `19000` - the URL is printed when you run `expo start`. The `Linking.createURL` function abstracts it out so that you don't need to specify them manually.
 
@@ -93,19 +93,80 @@ const linking = {
 };
 ```
 
+### Universal Links on Expo
+
+To set up iOS universal Links in your Expo app, you need to configure your [app config](https://docs.expo.dev/workflow/configuration) to include the associated domains and entitlements:
+
+```json
+{
+  "expo": {
+    "ios": {
+      "associatedDomains": ["applinks:app.example.com"],
+      "entitlements": {
+        "com.apple.developer.associated-domains": ["applinks:app.example.com"]
+      }
+    }
+  }
+}
+```
+
+You will also need to setup [Associated Domains](https://developer.apple.com/documentation/Xcode/supporting-associated-domains) on your server.
+
+See [Expo's documentation on iOS Universal Links](https://docs.expo.dev/linking/ios-universal-links/) for more details.
+
+### App Links on Expo
+
+To set up Android App Links in your Expo app, you need to configure your [app config](https://docs.expo.dev/workflow/configuration) to include the `intentFilters`:
+
+```json
+{
+  "expo": {
+    "android": {
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "app.example.com"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
+    }
+  }
+}
+```
+
+You will also need to [declare the association](https://developer.android.com/training/app-links/verify-android-applinks#web-assoc) between your website and your intent filters by hosting a Digital Asset Links JSON file.
+
+See [Expo's documentation on Android App Links](https://docs.expo.dev/linking/android-app-links/) for more details.
+
 ## Set up with bare React Native projects
 
 ### Setup on iOS
 
-Let's configure the native iOS app to open based on the `mychat://` URI scheme.
+Let's configure the native iOS app to open based on the `example://` URI scheme.
 
-You'll need to link `RCTLinking` to your project by following the steps described here. To be able to listen to incoming app links, you'll need to add the following lines to `AppDelegate.m` in your project:
+You'll need to add the `LinkingIOS` folder into your header search paths as described [here](https://reactnative.dev/docs/linking-libraries-ios#step-3). Then you'll need to add the following lines to your or `AppDelegate.swift` or `AppDelegate.mm` file:
+
+<Tabs groupId="ios-lang">
+<TabItem value='swift' label='Swift' default>
+
+```swift
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+  return RCTLinkingManager.application(app, open: url, options: options)
+}
+```
+
+</TabItem>
+<TabItem value='objc' label='Objective-C'>
 
 ```objc
-// Add the header at the top of the file:
 #import <React/RCTLinkingManager.h>
 
-// Add this inside `@implementation AppDelegate` above `@end`:
 - (BOOL)application:(UIApplication *)application
    openURL:(NSURL *)url
    options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
@@ -114,10 +175,31 @@ You'll need to link `RCTLinking` to your project by following the steps describe
 }
 ```
 
+</TabItem>
+</Tabs>
+
 If your app is using [Universal Links](https://developer.apple.com/ios/universal-links/), you'll need to add the following code as well:
 
+<Tabs groupId="ios-lang">
+<TabItem value='swift' label='Swift' default>
+
+```swift
+func application(
+  _ application: UIApplication,
+  continue userActivity: NSUserActivity,
+  restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+    return RCTLinkingManager.application(
+      application,
+      continue: userActivity,
+      restorationHandler: restorationHandler
+    )
+  }
+```
+
+</TabItem>
+<TabItem value='objc' label='Objective-C'>
+
 ```objc
-// Add this inside `@implementation AppDelegate` above `@end`:
 - (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
  restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
 {
@@ -127,17 +209,20 @@ If your app is using [Universal Links](https://developer.apple.com/ios/universal
 }
 ```
 
+</TabItem>
+</Tabs>
+
 Now you need to add the scheme to your project configuration.
 
 The easiest way to do this is with the `uri-scheme` package by running the following:
 
 ```bash
-npx uri-scheme add mychat --ios
+npx uri-scheme add example --ios
 ```
 
 If you want to do it manually, open the project (e.g. `SimpleApp/ios/SimpleApp.xcworkspace`) in Xcode. Select the project in sidebar and navigate to the info tab. Scroll down to "URL Types" and add one. In the new URL type, set the identifier and the URL scheme to your desired URL scheme.
 
-![Xcode project info URL types with mychat added](/assets/deep-linking/xcode-linking.png)
+![Xcode project info URL types with example added](/assets/deep-linking/xcode-linking.png)
 
 To make sure Universal Links work in your app, you also need to setup [Associated Domains](https://developer.apple.com/documentation/Xcode/supporting-associated-domains) on your server.
 
@@ -157,7 +242,7 @@ If you're using React Navigation within a hybrid app - an iOS app that has both 
 
 To configure the external linking in Android, you can create a new intent in the manifest.
 
-The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add mychat --android`.
+The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add example --android`.
 
 If you want to add it manually, open up `SimpleApp/android/app/src/main/AndroidManifest.xml`, and make the following adjustments:
 
@@ -176,7 +261,7 @@ If you want to add it manually, open up `SimpleApp/android/app/src/main/AndroidM
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="mychat" />
+        <data android:scheme="example" />
     </intent-filter>
 </activity>
 ```
@@ -192,7 +277,7 @@ After adding them, it should look like this:
 <activity
     android:name=".MainActivity"
     android:launchMode="singleTask">
-    <intent-filter android:autoVerify="true">
+    <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
     </intent-filter>
@@ -200,15 +285,15 @@ After adding them, it should look like this:
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="mychat" />
+        <data android:scheme="example" />
     </intent-filter>
-    <intent-filter>
+    <intent-filter android:autoVerify="true">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:scheme="http" />
         <data android:scheme="https" />
-        <data android:host="www.example.com" />
+        <data android:host="app.example.com" />
     </intent-filter>
 </activity>
 ```
@@ -246,7 +331,7 @@ npx uri-scheme open [your deep link] --[ios|android]
 For example:
 
 ```bash
-npx uri-scheme open "mychat://chat/jane" --ios
+npx uri-scheme open "example://chat/jane" --ios
 ```
 
 Or if using Expo client:
@@ -266,7 +351,7 @@ xcrun simctl openurl booted [your deep link]
 For example:
 
 ```bash
-xcrun simctl openurl booted "mychat://chat/jane"
+xcrun simctl openurl booted "example://chat/jane"
 ```
 
 ### Testing with `adb` on Android
@@ -280,7 +365,7 @@ adb shell am start -W -a android.intent.action.VIEW -d [your deep link] [your an
 For example:
 
 ```bash
-adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/jane" com.simpleapp
+adb shell am start -W -a android.intent.action.VIEW -d "example://chat/jane" com.simpleapp
 ```
 
 Or if using Expo client:
@@ -289,56 +374,55 @@ Or if using Expo client:
 adb shell am start -W -a android.intent.action.VIEW -d "exp://127.0.0.1:19000/--/chat/jane" host.exp.exponent
 ```
 
-## Third-party integrations
+## Integrating with other tools
 
-React Native's `Linking` isn't the only way to handle deep linking. You might also want to integrate other services such as [Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links), [Branch](https://help.branch.io/developers-hub/docs/react-native) etc. which provide their own API for getting notified of incoming links.
+In addition to deep links and universal links with React Native's `Linking` API, you may also want to integrate other tools for handling incoming links, e.g. Push Notifications - so that tapping on a notification can open the app to a specific screen.
 
-To achieve this, you'd need to override how React Navigation subscribes to incoming links. To do so, you can provide your own [`getInitialURL`](navigation-container.md#linkinggetinitialurl) and [`subscribe`](navigation-container.md#linkingsubscribe) functions:
+To achieve this, you'd need to override how React Navigation subscribes to incoming links. To do so, you can provide your own [`getInitialURL`](navigation-container.md#linkinggetinitialurl) and [`subscribe`](navigation-container.md#linkingsubscribe) functions.
+
+Here is an example integration with [expo-notifications](https://docs.expo.dev/versions/latest/sdk/notifications):
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Third-party integrations"
+```js name="Expo Notifications"
 const linking = {
-  prefixes: ['myapp://', 'https://myapp.com'],
+  prefixes: ['example://', 'https://app.example.com'],
 
   // Custom function to get the URL which was used to open the app
   async getInitialURL() {
-    // First, you would need to get the initial URL from your third-party integration
-    // The exact usage depend on the third-party SDK you use
-    // For example, to get the initial URL for Firebase Dynamic Links:
-    const { isAvailable } = utils().playServicesAvailability;
-
-    if (isAvailable) {
-      const initialLink = await dynamicLinks().getInitialLink();
-
-      if (initialLink) {
-        return initialLink.url;
-      }
-    }
-
-    // As a fallback, you may want to do the default deep link handling
+    // First, handle deep links
     const url = await Linking.getInitialURL();
 
-    return url;
+    if (url != null) {
+      return url;
+    }
+
+    // Handle URL from expo push notifications
+    const response = await Notifications.getLastNotificationResponseAsync();
+
+    return response?.notification.request.content.data.url;
   },
 
   // Custom function to subscribe to incoming links
   subscribe(listener) {
-    // Listen to incoming links from Firebase Dynamic Links
-    const unsubscribeFirebase = dynamicLinks().onLink(({ url }) => {
-      listener(url);
-    });
-
-    // Listen to incoming links from deep linking
+    // Listen to incoming links for deep links
     const linkingSubscription = Linking.addEventListener('url', ({ url }) => {
       listener(url);
     });
 
+    // Listen to expo push notifications when user interacts with them
+    const pushNotificationSubscription =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+        const url = response.notification.request.content.data.url;
+
+        listener(url);
+      });
+
     return () => {
       // Clean up the event listeners
-      unsubscribeFirebase();
       linkingSubscription.remove();
+      pushNotificationSubscription.remove();
     };
   },
 };
@@ -347,47 +431,44 @@ const linking = {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Third-party integrations"
+```js name="Expo Notifications"
 const linking = {
-  prefixes: ['myapp://', 'https://myapp.com'],
+  prefixes: ['example://', 'https://app.example.com'],
 
   // Custom function to get the URL which was used to open the app
   async getInitialURL() {
-    // First, you would need to get the initial URL from your third-party integration
-    // The exact usage depend on the third-party SDK you use
-    // For example, to get the initial URL for Firebase Dynamic Links:
-    const { isAvailable } = utils().playServicesAvailability;
-
-    if (isAvailable) {
-      const initialLink = await dynamicLinks().getInitialLink();
-
-      if (initialLink) {
-        return initialLink.url;
-      }
-    }
-
-    // As a fallback, you may want to do the default deep link handling
+    // First, handle deep links
     const url = await Linking.getInitialURL();
 
-    return url;
+    if (url != null) {
+      return url;
+    }
+
+    // Handle URL from expo push notifications
+    const response = await Notifications.getLastNotificationResponseAsync();
+
+    return response?.notification.request.content.data.url;
   },
 
   // Custom function to subscribe to incoming links
   subscribe(listener) {
-    // Listen to incoming links from Firebase Dynamic Links
-    const unsubscribeFirebase = dynamicLinks().onLink(({ url }) => {
-      listener(url);
-    });
-
-    // Listen to incoming links from deep linking
+    // Listen to incoming links for deep links
     const linkingSubscription = Linking.addEventListener('url', ({ url }) => {
       listener(url);
     });
 
+    // Listen to expo push notifications when user interacts with them
+    const pushNotificationSubscription =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+        const url = response.notification.request.content.data.url;
+
+        listener(url);
+      });
+
     return () => {
       // Clean up the event listeners
-      unsubscribeFirebase();
       linkingSubscription.remove();
+      pushNotificationSubscription.remove();
     };
   },
 

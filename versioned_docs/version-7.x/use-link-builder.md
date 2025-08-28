@@ -4,14 +4,14 @@ title: useLinkBuilder
 sidebar_label: useLinkBuilder
 ---
 
-The `useLinkBuilder` hook returns helpers to build `href` or action based on the linking options. It returns an object with the following properties:
+The `useLinkBuilder` hook returns helpers to build `href` or action based on the [`linking` configuration](configuring-links.md). It returns an object with the following properties:
 
 - [`buildHref`](#buildhref)
 - [`buildAction`](#buildaction)
 
 ## `buildHref`
 
-The `buildHref` method lets us build a path to use for links for a screen in the current navigator's state. It returns a function that takes `name` and `params` for the screen to focus and returns path based on the [`linking` options](navigation-container.md#linking).
+The `buildHref` method lets us build a path to use for links for a screen in the current navigator's state. It returns a function that takes `name` and `params` for the screen to focus and returns path based on the [`linking` configuration](configuring-links.md).
 
 ```js
 import { useLinkBuilder } from '@react-navigation/native';

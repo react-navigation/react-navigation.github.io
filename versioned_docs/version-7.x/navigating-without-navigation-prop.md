@@ -13,7 +13,7 @@ Sometimes you need to trigger a navigation action from places where you do not h
 
 - You need to navigate from inside a component without needing to pass the `navigation` prop down, see [`useNavigation`](use-navigation.md) instead. The `ref` behaves differently, and many helper methods specific to screens aren't available.
 - You need to handle deep links or universal links. Doing this with the `ref` has many edge cases. See [configuring links](configuring-links.md) for more information on handling deep linking.
-- You need to integrate with third party libraries, such as push notifications, branch etc. See [third party integrations for deep linking](deep-linking.md#third-party-integrations) instead.
+- You need to integrate with third party libraries, such as push notifications, branch etc. See [Integrating with other tools](deep-linking.md#integrating-with-other-tools) instead.
 
 **Do** use the `ref` if:
 

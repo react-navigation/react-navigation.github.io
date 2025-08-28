@@ -20,7 +20,7 @@ export default function App() {
   const ref = React.useRef();
 
   const { getInitialState } = useLinking(ref, {
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
@@ -69,7 +69,7 @@ Example:
 
 ```js
 useLinking(ref, {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config: {
     screens: {
       Chat: 'feed/:sort',
@@ -191,7 +191,7 @@ Example:
 
 ```js
 useLinking(ref, {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config: {
     screens: {
       Chat: 'feed/:sort',
@@ -212,7 +212,7 @@ Example:
 
 ```js
 useLinking(ref, {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config: {
     screens: {
       Chat: 'feed/:sort',

@@ -25,6 +25,12 @@ For most cases, the [`useFocusEffect`](use-focus-effect.md) hook might be approp
 
 This event is emitted when the screen goes out of focus.
 
+:::note
+
+In some cases, such as going back from a screen in [native-stack navigator](native-stack-navigator.md), the screen may not receive the `blur` event as the screen is unmounted immediately. For cleaning up resources, it's recommended to use the cleanup function of [`useFocusEffect`](use-focus-effect.md) hook instead that considers both blur and unmounting of the screen.
+
+:::
+
 ### `state`
 
 This event is emitted when the navigator's state changes. This event receives the navigator's state in the event data (`event.data.state`).
@@ -70,7 +76,7 @@ React.useEffect(
 );
 ```
 
-:::note
+:::warning
 
 Preventing the action in this event doesn't work properly with [`@react-navigation/native-stack`](native-stack-navigator.md). We recommend using the [`usePreventRemove` hook](preventing-going-back.md) instead.
 
@@ -263,7 +269,7 @@ class Profile extends React.Component {
 }
 ```
 
-One thing to keep in mind is that you can only listen to events from the immediate navigator with `addListener`. For example, if you try to add a listener in a screen that's inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use [`navigation.getParent`](navigation-object.md#getparent) to get a reference to the parent screen's navigation object and add a listener.
+Keep in mind that you can only listen to events from the immediate navigator with `addListener`. For example, if you try to add a listener in a screen that's inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use [`navigation.getParent`](navigation-object.md#getparent) to get a reference to the parent screen's navigation object and add a listener.
 
 ```js
 const unsubscribe = navigation
@@ -274,6 +280,12 @@ const unsubscribe = navigation
 ```
 
 Here `'MyTabs'` refers to the value you pass in the `id` prop of the parent `Tab.Navigator` whose event you want to listen to.
+
+:::warning
+
+The component needs to be rendered for the listeners to be added in `useEffect` or `componentDidMount`. Navigators such as [bottom tabs](bottom-tab-navigator.md) and [drawer](drawer-navigator.md) lazily render the screen after navigating to it. So if your listener is not being called, double check that the component is rendered.
+
+:::
 
 ### `listeners` prop on `Screen`
 

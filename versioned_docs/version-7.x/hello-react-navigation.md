@@ -42,7 +42,7 @@ npm install @react-navigation/elements
 
 `createNativeStackNavigator` is a function that takes a configuration object containing the screens and customization options. The screens are React Components that render the content displayed by the navigator.
 
-`createStaticNavigation` is a function that takes the navigator defined earlier and returns a component that can be rendered in the app. It's only called once in the app.
+`createStaticNavigation` is a function that takes the navigator defined earlier and returns a component that can be rendered in the app. It's only called once in the app. Usually, we'd render the returned component at the root of our app, which is usually the component exported from `App.js`, `App.tsx` etc., or used with `AppRegistry.registerComponent`, `Expo.registerRootComponent` etc.
 
 ```js name="Native Stack Example" snack
 // In App.js in a new project
@@ -73,12 +73,18 @@ export default function App() {
 }
 ```
 
+:::warning
+
+In a typical React Native app, the `createStaticNavigation` function should be only used once in your app at the root.
+
+:::
+
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
 `createNativeStackNavigator` is a function that returns an object containing 2 properties: `Screen` and `Navigator`. Both of them are React components used for configuring the navigator. The `Navigator` should contain `Screen` elements as its children to define the configuration for routes.
 
-`NavigationContainer` is a component that manages our navigation tree and contains the [navigation state](navigation-state.md). This component must wrap all the navigators in the app. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
+`NavigationContainer` is a component that manages our navigation tree and contains the [navigation state](navigation-state.md). This component must wrap all the navigators in the app. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`, `App.tsx` etc., or used with `AppRegistry.registerComponent`, `Expo.registerRootComponent` etc.
 
 ```js name="Native Stack Example" snack
 // In App.js in a new project
@@ -114,6 +120,12 @@ export default function App() {
   );
 }
 ```
+
+:::warning
+
+In a typical React Native app, the `NavigationContainer` should be only used once in your app at the root. You shouldn't nest multiple `NavigationContainer`s unless you have a specific use case for them.
+
+:::
 
 </TabItem>
 </Tabs>
@@ -525,19 +537,19 @@ If you are using TypeScript, you will need to specify the types accordingly. You
 <TabItem value="static" label="Static" default>
 
 - React Native doesn't have a built-in API for navigation like a web browser does. React Navigation provides this for you, along with the iOS and Android gestures and animations to transition between screens.
-- `createNativeStackNavigator` is a function that takes the screens configuration and renders our content.
+- [`createNativeStackNavigator`](native-stack-navigator.md) is a function that takes the screens configuration and renders our content.
 - Each property under screens refers to the name of the route, and the value is the component to render for the route.
-- To specify what the initial route in a stack is, provide an `initialRouteName` option for the navigator.
-- To specify screen-specific options, we can specify an `options` property, and for common options, we can specify `screenOptions`.
+- To specify what the initial route in a stack is, provide an [`initialRouteName`](navigator.md#initial-route-name) option for the navigator.
+- To specify screen-specific options, we can specify an [`options`](screen-options.md#options-prop-on-screen) property, and for common options, we can specify [`screenOptions`](screen-options.md#screenoptions-prop-on-the-navigator).
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
 - React Native doesn't have a built-in API for navigation like a web browser does. React Navigation provides this for you, along with the iOS and Android gestures and animations to transition between screens.
-- `Stack.Navigator` is a component that takes route configuration as its children with additional props for configuration and renders our content.
-- Each `Stack.Screen` component takes a `name` prop which refers to the name of the route and `component` prop which specifies the component to render for the route. These are the 2 required props.
-- To specify what the initial route in a stack is, provide an `initialRouteName` as the prop for the navigator.
-- To specify screen-specific options, we can pass an `options` prop to `Stack.Screen`, and for common options, we can pass `screenOptions` to `Stack.Navigator`.
+- [`Stack.Navigator`](native-stack-navigator.md) is a component that takes route configuration as its children with additional props for configuration and renders our content.
+- Each [`Stack.Screen`](screen.md) component takes a [`name`](screen.md#name) prop which refers to the name of the route and [`component`](screen.md#component) prop which specifies the component to render for the route. These are the 2 required props.
+- To specify what the initial route in a stack is, provide an [`initialRouteName`](navigator.md#initial-route-name) as the prop for the navigator.
+- To specify screen-specific options, we can pass an [`options`](screen-options.md#options-prop-on-screen) prop to `Stack.Screen`, and for common options, we can pass [`screenOptions`](screen-options.md#screenoptions-prop-on-the-navigator) to `Stack.Navigator`.
 
 </TabItem>
 </Tabs>

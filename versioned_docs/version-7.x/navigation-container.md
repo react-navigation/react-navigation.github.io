@@ -237,6 +237,19 @@ Note that the returned `options` object will be `undefined` if there are no navi
 
 The `addListener` method lets you listen to the following events:
 
+##### `ready`
+
+The event is triggered when the navigation tree is ready. This is useful for cases where you want to wait until the navigation tree is mounted:
+
+```js
+const unsubscribe = navigationRef.addListener('ready', () => {
+  // Get the initial state of the navigation tree
+  console.log(navigationRef.getRootState());
+});
+```
+
+This is analogous to the [`onReady`](#onready) method.
+
 ##### `state`
 
 The event is triggered whenever the [navigation state](navigation-state.md) changes in any navigator in the navigation tree:
@@ -450,7 +463,7 @@ const Navigation = createStaticNavigation(RootStack);
 
 function App() {
   const linking = {
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
   };
 
   return (
@@ -471,7 +484,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 function App() {
   const linking = {
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Home: 'feed/:sort',
@@ -512,7 +525,7 @@ Example:
 <Navigation
   linking={{
     // highlight-next-line
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
   }}
   fallback={<Text>Loading...</Text>}
 />
@@ -525,7 +538,7 @@ Example:
 <NavigationContainer
   linking={{
     // highlight-next-lineP
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },
@@ -570,7 +583,7 @@ import messaging from '@react-native-firebase/messaging';
 
 <Navigation
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     // highlight-start
     async getInitialURL() {
       // Check if app was opened from a deep link
@@ -600,7 +613,7 @@ import messaging from '@react-native-firebase/messaging';
 
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },
@@ -646,7 +659,7 @@ import messaging from '@react-native-firebase/messaging';
 
 <Navigation
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     // highlight-start
     subscribe(listener) {
       const onReceiveURL = ({ url }: { url: string }) => listener(url);
@@ -688,7 +701,7 @@ import messaging from '@react-native-firebase/messaging';
 
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },
@@ -744,7 +757,7 @@ Example:
 ```js
 <Navigation
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     // highlight-start
     getStateFromPath(path, config) {
       // Return a state object here
@@ -761,7 +774,7 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },
@@ -791,7 +804,7 @@ Example:
 ```js
 <Navigation
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     // highlight-start
     getPathFromState(state, config) {
       // Return a path string here
@@ -808,7 +821,7 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },

@@ -28,7 +28,7 @@ While React Native exports a `SafeAreaView` component, this component only suppo
 
 :::warning
 
-The `react-native-safe-area-context` library also exports a `SafeAreaView` component. While it works on Android, it also has the same issues related to jumpy behavior when animating. So we recommend always using the `useSafeAreaInsets` hook instead and avoid using the `SafeAreaView` component.
+The `react-native-safe-area-context` library also exports a `SafeAreaView` component. While it works on Android, it also has the same issues with jumpy behavior on vertical animations. In addition, the `SafeAreaView` component and `useSafeAreaInsets` hook can update at different times, resulting in flickering when using them together. So we recommend always using the `useSafeAreaInsets` hook instead and avoid using the `SafeAreaView` component for consistent behavior.
 
 :::
 
@@ -473,6 +473,6 @@ Similarly, you could apply these paddings in `contentContainerStyle` of `FlatLis
 
 ## Summary
 
-- Use `useSafeAreaInsets` hook from `react-native-safe-area-context` instead of `SafeAreaView` component
+- Use [`useSafeAreaInsets`](https://appandflow.github.io/react-native-safe-area-context/api/use-safe-area-insets) hook from `react-native-safe-area-context` instead of [`SafeAreaView`](https://reactnative.dev/docs/safeareaview) component
 - Don't wrap your whole app in `SafeAreaView`, instead apply the styles to content inside your screens
 - Apply only specific insets using the `useSafeAreaInsets` hook for more control
