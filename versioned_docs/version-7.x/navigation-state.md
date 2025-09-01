@@ -71,7 +71,7 @@ It's important to note that even if there's a nested navigator, the `state` prop
 
 ## Stale state objects
 
-Earlier there was a mention of `stale` property in the navigation state. If the `stale` property is set to `true` or is missing, the state is assumed to be stale. A stale navigation state means that the state object may be partial, such as missing keys or routes, contain invalid routes, or may not be up-to-date. A stale state can be a result of [deep linking](deep-linking.md), r[estoring from a persisted state](state-persistence.md) etc.
+Earlier there was a mention of `stale` property in the navigation state. If the `stale` property is set to `true` or is missing, the state is assumed to be stale. A stale navigation state means that the state object may be partial, such as missing keys or routes, contain invalid routes, or may not be up-to-date. A stale state can be a result of [deep linking](deep-linking.md), [restoring from a persisted state](state-persistence.md) etc.
 
 If you're accessing the navigation state of a navigator using the built-in APIs such as [`useNavigationState()`](use-navigation-state.md), [`navigation.getState()`](navigation-object.md#getstate) etc., the state object is guaranteed to be complete and not stale. However, if you try to access a child navigator's state with the `state` property on the `route` object, it maybe a stale or partial state object. So it's not recommended to use this property directly.
 
