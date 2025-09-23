@@ -597,6 +597,20 @@ If left unset, system default is used.
 
 Only supported on iOS.
 
+##### `placement`
+
+Controls preferred placement of the search bar. Defaults to `automatic`.
+
+Supported values:
+- `automatic`
+- `stacked`
+- `inline` (**deprecated** starting from iOS 26, it is mapped to `integrated`)
+- `integrated` (available starting from iOS 26, on prior versions it is mapped to `inline`)
+- `integratedButton` (available starting from iOS 26, on prior versions it is mapped to `inline`)
+- `integratedCentered` (available starting from iOS 26, on prior versions it is mapped to `inline`)
+
+Only supported on iOS.
+
 ##### `placeholder`
 
 Text displayed when search field is empty.
