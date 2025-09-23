@@ -564,7 +564,9 @@ Only supported on Android.
 
 ##### `hideNavigationBar`
 
-Boolean indicating whether to hide the navigation bar during searching. Defaults to `true`.
+Boolean indicating whether to hide the navigation bar during searching.
+
+If left unset, system default is used.
 
 Only supported on iOS.
 
@@ -589,7 +591,11 @@ Only supported on Android.
 
 ##### `obscureBackground`
 
-Boolean indicating whether to obscure the underlying content with semi-transparent overlay. Defaults to `true`.
+Boolean indicating whether to obscure the underlying content with semi-transparent overlay.
+
+If left unset, system default is used.
+
+Only supported on iOS.
 
 ##### `placeholder`
 
