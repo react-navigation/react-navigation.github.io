@@ -514,6 +514,7 @@ Ref to manipulate the search input imperatively. It contains the following metho
 - `setText` - sets the search bar's content to given value
 - `clearText` - removes any text present in the search bar input field
 - `cancelSearch` - cancel the search and close the search bar
+- `toggleCancelButton` - depending on passed boolean value, hides or shows cancel button (only supported on iOS)
 
 ##### `autoCapitalize`
 
