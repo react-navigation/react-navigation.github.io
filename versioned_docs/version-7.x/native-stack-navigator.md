@@ -554,7 +554,7 @@ Only supported on iOS.
 
 The text to be used instead of default `Cancel` button text.
 
-Only supported on iOS.
+Only supported on iOS. **Deprecated** starting from iOS 26.
 
 ##### `disableBackButtonOverride`
 
