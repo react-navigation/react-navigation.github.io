@@ -611,6 +611,16 @@ Supported values:
 
 Only supported on iOS.
 
+##### `allowToolbarIntegration`
+
+Boolean indicating whether the system can place the search bar among other toolbar items on iPhone.
+
+Set this prop to `false` to prevent the search bar from appearing in the toolbar when `placement` is `automatic`, `integrated`, `integratedButton` or `integratedCentered`.
+
+Defaults to `true`. If `placement` is set to `stacked`, the value of this prop will be overridden with `false`.
+
+Only supported on iOS, starting from iOS 26.
+
 ##### `placeholder`
 
 Text displayed when search field is empty.
