@@ -602,6 +602,7 @@ Only supported on iOS.
 Controls preferred placement of the search bar. Defaults to `automatic`.
 
 Supported values:
+
 - `automatic`
 - `stacked`
 - `inline` (**deprecated** starting from iOS 26, it is mapped to `integrated`)
