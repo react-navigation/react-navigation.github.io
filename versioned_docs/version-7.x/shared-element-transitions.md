@@ -27,6 +27,7 @@ Before continuing this guide make sure your app meets these criteria:
 
 - You are using [`@react-navigation/native-stack`](native-stack-navigator.md). The Shared Element Transitions feature isn't supported in JS-based [`@react-navigation/stack`](stack-navigator.md).
 - You have [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started) **v3.0.0 or higher** installed and configured.
+- You are using the old React Native architecture. The current implementation does not support the new architecture (Fabric).
 
 ## Minimal example
 
