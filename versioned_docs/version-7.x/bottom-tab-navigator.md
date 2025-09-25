@@ -223,6 +223,7 @@ function MyTabBar({ state, descriptors, navigation }) {
 
         return (
           <PlatformPressable
+            key={label}
             href={buildHref(route.name, route.params)}
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
