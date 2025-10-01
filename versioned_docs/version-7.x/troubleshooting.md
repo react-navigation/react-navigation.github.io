@@ -252,7 +252,7 @@ export default function App() {
 
 ## I get the warning "Non-serializable values were found in the navigation state"
 
-This can happen if you are passing non-serializable values such as class instances, functions etc. in params. React Navigation warns you in this case because this can break other functionality such [state persistence](state-persistence.md), [deep linking](deep-linking.md) etc.
+This can happen if you are passing non-serializable values such as class instances, functions etc. in params. React Navigation warns you in this case because this can break other functionality such [state persistence](state-persistence.md), [deep linking](deep-linking.md), [web support](web-support.md) etc.
 
 Example of some use cases for passing functions in params are the following:
 
@@ -261,7 +261,7 @@ Example of some use cases for passing functions in params are the following:
 - To pass complex data to another screen. Instead of passing the data `params`, you can store that complex data somewhere else (like a global store), and pass an id instead. Then the screen can get the data from the global store using the id. See [what should be in params](params.md#what-should-be-in-params).
 - Pass data, callbacks etc. from a parent to child screens. You can either use React Context, or pass a children callback to pass these down instead of using params. See [passing additional props](hello-react-navigation.md#passing-additional-props).
 
-If you don't use state persistence or deep link to the screen which accepts functions in params, then the warning doesn't affect you and you can safely ignore it. To ignore the warning, you can use `LogBox.ignoreLogs`.
+We don't generally recommend passing functions in params. But if you don't use state persistence, deep links, or use React Navigation on Web, then you can choose to ignore it. To ignore the warning, you can use `LogBox.ignoreLogs`.
 
 Example:
 
