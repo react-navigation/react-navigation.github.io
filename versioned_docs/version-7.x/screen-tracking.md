@@ -181,3 +181,9 @@ export default function App() {
 
 </TabItem>
 </Tabs>
+
+:::note
+
+If you are building a library that wants to provide screen tracking integration with React Navigation, you can accept a [`ref`](navigation-container.md#ref) to the navigation container and use the [`ready`](navigation-container.md#ready) and [`state`](navigation-container.md#state) events instead of `onReady` and `onStateChange` props to keep your logic self-contained.
+
+:::

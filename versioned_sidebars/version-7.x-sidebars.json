@@ -92,12 +92,14 @@
       }
     ],
     "Build your own Navigator": ["custom-routers", "custom-navigators"],
-    "Additional resources": [
-      "migration-guides",
-      "navigation-solutions-and-community-libraries",
+    "Ecosystem": [
+      "community-solutions",
+      "community-navigators",
+      "community-libraries",
       "more-resources"
     ],
     "Meta": [
+      "migration-guides",
       "glossary-of-terms",
       "pitch",
       "limitations",
