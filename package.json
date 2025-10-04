@@ -11,7 +11,7 @@
     "deploy": "DEPLOYMENT_BRANCH=gh-pages docusaurus deploy",
     "crowdin-upload": "crowdin upload sources --auto-update -b main",
     "crowdin-download": "crowdin download -b main",
-    "fetch-sponsors": "node scripts/fetch-sponsors.js"
+    "fetch-sponsors": "node scripts/fetch-sponsors.js && prettier --write src/data/sponsors.js"
   },
   "dependencies": {
     "@docusaurus/core": "3.6.1",
