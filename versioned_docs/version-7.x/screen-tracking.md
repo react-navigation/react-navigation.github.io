@@ -101,7 +101,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Screen tracking for anylytics" snack
+```js name="Screen tracking for analytics" snack
 import * as React from 'react';
 import { View } from 'react-native';
 // codeblock-focus-start
