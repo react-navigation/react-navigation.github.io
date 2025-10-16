@@ -303,7 +303,7 @@ const RootStack = createNativeStackNavigator({
     Home: {
       screen: HomeScreen,
       options: {
-        headerLeft: (props) => (
+        headerRight: (props) => (
           <MyButton {...props} onPress={() => {
             // Do something
           }}>
@@ -322,7 +322,7 @@ const RootStack = createNativeStackNavigator({
   name="Home"
   component={HomeScreen}
   options={{
-    headerLeft: (props) => (
+    headerRight: (props) => (
       <MyButton
         {...props}
         onPress={() => {
