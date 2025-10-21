@@ -415,7 +415,12 @@ Tint color for the header. Changes the color of back button and title.
 
 #### `headerLeft`
 
-Function which returns a React Element to display on the left side of the header. This replaces the back button. See `headerBackVisible` to show the back button along side left element.
+Function which returns a React Element to display on the left side of the header. This replaces the back button. See `headerBackVisible` to show the back button along side left element. It receives the following properties in the arguments:
+
+- `tintColor` - The tint color to apply. Defaults to the [theme](themes.md)'s primary color.
+- `canGoBack` - Boolean indicating whether there is a screen to go back to.
+- `label` - Label text for the button. Usually the title of the previous screen.
+- `href` - The `href` to use for the anchor tag on web
 
 <img src="/assets/7.x/native-stack/headerLeft.png" width="500" alt="Header right"/>
 
@@ -429,9 +434,43 @@ Example:
     headerBackTitle: 'Back',
 ```
 
+#### `unstable_headerLeftItems`
+
+:::warning
+
+This option is experimental and may change in a minor release.
+
+:::
+
+Function which returns an array of items to display as on the left side of the header. This will override `headerLeft` if both are specified. It receives the following properties in the arguments:
+
+- `tintColor` - The tint color to apply. Defaults to the [theme](themes.md)'s primary color.
+- `canGoBack` - Boolean indicating whether there is a screen to go back to.
+
+Example:
+
+```js
+unstable_headerLeftItems: () => [
+  {
+    type: 'button',
+    title: 'Edit',
+    onPress: () => {
+      // Do something
+    },
+  },
+],
+```
+
+See [Header items](#header-items) for more information.
+
+Only supported on iOS.
+
 #### `headerRight`
 
-Function which returns a React Element to display on the right side of the header.
+Function which returns a React Element to display on the right side of the header. It receives the following properties in the arguments:
+
+- `tintColor` - The tint color to apply. Defaults to the [theme](themes.md)'s primary color.
+- `canGoBack` - Boolean indicating whether there is a screen to go back to.
 
   <img src="/assets/7.x/native-stack/headerRight.png" width="500" alt="Header right"/>
 
@@ -440,6 +479,37 @@ Example:
 ```js
 headerRight: () => <MaterialCommunityIcons name="map" color="blue" size={36} />;
 ```
+
+#### `unstable_headerRightItems`
+
+:::warning
+
+This option is experimental and may change in a minor release.
+
+:::
+
+Function which returns an array of items to display as on the right side of the header. This will override `headerRight` if both are specified. It receives the following properties in the arguments:
+
+- `tintColor` - The tint color to apply. Defaults to the [theme](themes.md)'s primary color.
+- `canGoBack` - Boolean indicating whether there is a screen to go back to.
+
+Example:
+
+```js
+unstable_headerRightItems: () => [
+  {
+    type: 'button',
+    title: 'Edit',
+    onPress: () => {
+      // Do something
+    },
+  },
+],
+```
+
+See [Header items](#header-items) for more information.
+
+Only supported on iOS.
 
 #### `headerTitle`
 
@@ -1430,3 +1500,185 @@ const MyView = () => {
   );
 };
 ```
+
+## Header items
+
+The [`unstable_headerLeftItems`](#unstable_headerleftitems) and [`unstable_headerRightItems`](#unstable_headerrightitems) options allow you to add header items to the left and right side of the header respectively. This items can show native buttons, menus or custom React elements.
+
+The header right items can also be collapsed into an overflow menu by the system when there is not enough space to show all items. Note that custom elements (with `type: 'custom'`) won't be collapsed into the overflow menu.
+
+<img src="/assets/header-items/header-items.png" width="300" alt="Header items" />
+
+<img src="/assets/header-items/header-items-menu.png" width="300" alt="Header item with menu" />
+
+There are 3 categories of items that can be displayed in the header:
+
+### Action
+
+A regular button that performs an action when pressed, or shows a menu.
+
+Common properties:
+
+- `type`: Must be `button` or `menu`.
+- `label`: Label of the item. The label is not shown if `icon` is specified. However, it is used by screen readers, or if the header items get collapsed due to lack of space.
+- `labelStyle`: Style object for the label. Supported properties:
+  - `fontFamily`
+  - `fontSize`
+  - `fontWeight`
+  - `color`
+- `icon`: Optional icon to show instead of the label.
+- `variant`: Visual variant of the button. Supported values:
+  - `plain` (default)
+  - `done`
+  - `prominent`
+- `tintColor`: Tint color to apply to the item.
+- `disabled`: Whether the item is disabled.
+- `width`: Width of the item.
+- `hidesSharedBackground` (iOS 26+): Whether the background this item may share with other items should be hidden. Setting this to `true` hides the liquid glass background.
+- `sharesBackground` (iOS 26+): Whether this item can share a background with other items.
+- `identifier` (iOS 26+) - An identifier used to match items across transitions.
+- `badge`: An optional badge to display alongside the item. Supported properties:
+  - `value`: The value to display in the badge. It can be a string or a number.
+  - `style`: Style object for the badge. Supported properties:
+    - `fontFamily`
+    - `fontSize`
+    - `fontWeight`
+    - `color`
+- `accessibilityLabel`: Accessibility label for the item.
+- `accessibilityHint`: Accessibility hint for the item.
+
+Supported properties when `type` is `button`:
+
+- `onPress`: Function to call when the button is pressed.
+- `selected`: Whether the button is in a selected state.
+
+Example:
+
+```js
+unstable_headerLeftItems: () => [
+  {
+    type: 'button',
+    label: 'Edit',
+    onPress: () => {
+      // Do something
+    },
+  },
+],
+```
+
+Supported properties when `type` is `menu`:
+
+- `menu`: An object containing the menu items. It contains the following properties:
+  - `title`: Optional title to show on top of the menu.
+  - `items`: An array of menu items. A menu item can be either an `action` or a `submenu`.
+    - `action`: An object with the following properties:
+      - `type`: Must be `action`.
+      - `label`: Label of the menu item.
+      - `icon`: Optional icon to show alongside the label.
+      - `onPress`: Function to call when the menu item is pressed.
+      - `state`: Optional state of the menu item. Supported values:
+        - `on`
+        - `off`
+        - `mixed`
+      - `disabled`: Whether the menu item is disabled.
+      - `destructive`: Whether the menu item is styled as destructive.
+      - `hidden`: Whether the menu item is hidden.
+      - `keepsMenuPresented`: Whether to keep the menu open after selecting this item. Defaults to `false`.
+      - `discoverabilityLabel`: An elaborated title that explains the purpose of the action.
+    - `submenu`: An object with the following properties:
+      - `type`: Must be `submenu`.
+      - `label`: Label of the submenu item.
+      - `icon`: Optional icon to show alongside the label.
+      - `items`: An array of menu items (can be either `action` or `submenu`).
+
+Example:
+
+```js
+unstable_headerLeftItems: () => [
+  {
+    type: 'menu',
+    label: 'Options',
+    menu: {
+      title: 'Options',
+      items: [
+        {
+          type: 'action',
+          label: 'Edit',
+          onPress: () => {
+            // Do something
+          },
+        },
+        {
+          type: 'submenu',
+          label: 'More',
+          items: [
+            {
+              type: 'action',
+              label: 'Delete',
+              destructive: true,
+              onPress: () => {
+                // Do something
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+],
+```
+
+### Spacing
+
+An item to add spacing between other items in the header.
+
+Supported properties:
+
+- `type`: Must be `spacing`.
+- `spacing`: Amount of spacing to add.
+
+```js
+unstable_headerLeftItems: () => [
+  {
+    type: 'button',
+    label: 'Edit',
+    onPress: () => {
+      // Do something
+    },
+  },
+  {
+    type: 'spacing',
+    spacing: 10,
+  },
+  {
+    type: 'button',
+    label: 'Delete',
+    onPress: () => {
+      // Do something
+    },
+  },
+],
+```
+
+### Custom
+
+A custom item to display any React Element in the header.
+
+Supported properties:
+
+- `type`: Must be `custom`.
+- `element`: A React Element to display as the item.
+- `hidesSharedBackground`: Whether the background this item may share with other items in the bar should be hidden. Setting this to `true` hides the liquid glass background on iOS 26+.
+
+Example:
+
+```js
+unstable_headerLeftItems: () => [
+  {
+    type: 'custom',
+    element: <MaterialCommunityIcons name="map" color="gray" size={36} />,
+  },
+],
+```
+
+The advantage of using this over [`headerLeft`](#headerleft) or [`headerRight`](#headerright) options is it supports features like shared background on iOS 26+.
