@@ -450,7 +450,7 @@ Function which returns an array of items to display as on the left side of the h
 Example:
 
 ```js
-unstable_headerLeftItems: () => [
+unstable_headerRightItems: () => [
   {
     type: 'button',
     title: 'Edit',
@@ -1527,6 +1527,25 @@ Common properties:
   - `fontWeight`
   - `color`
 - `icon`: Optional icon to show instead of the label.
+
+  The icon can be an image:
+
+  ```js
+  {
+  type: 'image',
+  source: require('./path/to/image.png'),
+  }
+  ```
+
+  Or a [SF Symbols](https://developer.apple.com/sf-symbols/) name:
+
+  ```js
+  {
+    type: 'sfsymbol',
+    name: 'heart',
+  }
+  ```
+
 - `variant`: Visual variant of the button. Supported values:
   - `plain` (default)
   - `done`
@@ -1555,10 +1574,14 @@ Supported properties when `type` is `button`:
 Example:
 
 ```js
-unstable_headerLeftItems: () => [
+unstable_headerRightItems: () => [
   {
     type: 'button',
     label: 'Edit',
+    icon: {
+      type: 'sfsymbol',
+      name: 'pencil',
+    },
     onPress: () => {
       // Do something
     },
@@ -1570,12 +1593,23 @@ Supported properties when `type` is `menu`:
 
 - `changesSelectionAsPrimaryAction`: Whether the menu is a selection menu. Tapping an item in a selection menu will add a checkmark to the selected item. Defaults to `false`.
 - `menu`: An object containing the menu items. It contains the following properties:
+
   - `title`: Optional title to show on top of the menu.
   - `items`: An array of menu items. A menu item can be either an `action` or a `submenu`.
+
     - `action`: An object with the following properties:
+
       - `type`: Must be `action`.
       - `label`: Label of the menu item.
-      - `icon`: Optional icon to show alongside the label.
+      - `icon`: Optional icon to show alongside the label. The icon can be a [SF Symbols](https://developer.apple.com/sf-symbols/) name:
+
+        ```js
+        {
+          type: 'sfsymbol',
+          name: 'trash',
+        }
+        ```
+
       - `onPress`: Function to call when the menu item is pressed.
       - `state`: Optional state of the menu item. Supported values:
         - `on`
@@ -1586,25 +1620,43 @@ Supported properties when `type` is `menu`:
       - `hidden`: Whether the menu item is hidden.
       - `keepsMenuPresented`: Whether to keep the menu open after selecting this item. Defaults to `false`.
       - `discoverabilityLabel`: An elaborated title that explains the purpose of the action.
+
     - `submenu`: An object with the following properties:
+
       - `type`: Must be `submenu`.
       - `label`: Label of the submenu item.
-      - `icon`: Optional icon to show alongside the label.
+      - `icon`: Optional icon to show alongside the label. The icon can be a [SF Symbols](https://developer.apple.com/sf-symbols/) name:
+
+        ```js
+        {
+          type: 'sfsymbol',
+          name: 'pencil',
+        }
+        ```
+
       - `items`: An array of menu items (can be either `action` or `submenu`).
 
 Example:
 
 ```js
-unstable_headerLeftItems: () => [
+unstable_headerRightItems: () => [
   {
     type: 'menu',
     label: 'Options',
+    icon: {
+      type: 'sfsymbol',
+      name: 'ellipsis',
+    },
     menu: {
       title: 'Options',
       items: [
         {
           type: 'action',
           label: 'Edit',
+          icon: {
+            type: 'sfsymbol',
+            name: 'pencil',
+          },
           onPress: () => {
             // Do something
           },
@@ -1639,7 +1691,7 @@ Supported properties:
 - `spacing`: Amount of spacing to add.
 
 ```js
-unstable_headerLeftItems: () => [
+unstable_headerRightItems: () => [
   {
     type: 'button',
     label: 'Edit',
@@ -1674,7 +1726,7 @@ Supported properties:
 Example:
 
 ```js
-unstable_headerLeftItems: () => [
+unstable_headerRightItems: () => [
   {
     type: 'custom',
     element: <MaterialCommunityIcons name="map" color="gray" size={36} />,
