@@ -1568,6 +1568,7 @@ unstable_headerLeftItems: () => [
 
 Supported properties when `type` is `menu`:
 
+- `changesSelectionAsPrimaryAction`: Whether the menu is a selection menu. Tapping an item in a selection menu will add a checkmark to the selected item. Defaults to `false`.
 - `menu`: An object containing the menu items. It contains the following properties:
   - `title`: Optional title to show on top of the menu.
   - `items`: An array of menu items. A menu item can be either an `action` or a `submenu`.
