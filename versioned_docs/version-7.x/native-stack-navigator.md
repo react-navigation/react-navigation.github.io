@@ -1505,7 +1505,7 @@ const MyView = () => {
 
 The [`unstable_headerLeftItems`](#unstable_headerleftitems) and [`unstable_headerRightItems`](#unstable_headerrightitems) options allow you to add header items to the left and right side of the header respectively. This items can show native buttons, menus or custom React elements.
 
-The header right items can also be collapsed into an overflow menu by the system when there is not enough space to show all items. Note that custom elements (with `type: 'custom'`) won't be collapsed into the overflow menu.
+On iOS 26+, the header right items can also be collapsed into an overflow menu by the system when there is not enough space to show all items. Note that custom elements (with `type: 'custom'`) won't be collapsed into the overflow menu.
 
 <img src="/assets/header-items/header-items.png" width="300" alt="Header items" />
 
@@ -1537,7 +1537,7 @@ Common properties:
 - `hidesSharedBackground` (iOS 26+): Whether the background this item may share with other items should be hidden. Setting this to `true` hides the liquid glass background.
 - `sharesBackground` (iOS 26+): Whether this item can share a background with other items.
 - `identifier` (iOS 26+) - An identifier used to match items across transitions.
-- `badge`: An optional badge to display alongside the item. Supported properties:
+- `badge` (iOS 26+): An optional badge to display alongside the item. Supported properties:
   - `value`: The value to display in the badge. It can be a string or a number.
   - `style`: Style object for the badge. Supported properties:
     - `fontFamily`
