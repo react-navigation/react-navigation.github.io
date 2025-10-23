@@ -1532,8 +1532,8 @@ Common properties:
 
   ```js
   {
-  type: 'image',
-  source: require('./path/to/image.png'),
+    type: 'image',
+    source: require('./path/to/image.png'),
   }
   ```
 
@@ -1541,7 +1541,7 @@ Common properties:
 
   ```js
   {
-    type: 'sfsymbol',
+    type: 'sfSymbol',
     name: 'heart',
   }
   ```
@@ -1579,7 +1579,7 @@ unstable_headerRightItems: () => [
     type: 'button',
     label: 'Edit',
     icon: {
-      type: 'sfsymbol',
+      type: 'sfSymbol',
       name: 'pencil',
     },
     onPress: () => {
@@ -1605,7 +1605,7 @@ Supported properties when `type` is `menu`:
 
         ```js
         {
-          type: 'sfsymbol',
+          type: 'sfSymbol',
           name: 'trash',
         }
         ```
@@ -1629,7 +1629,7 @@ Supported properties when `type` is `menu`:
 
         ```js
         {
-          type: 'sfsymbol',
+          type: 'sfSymbol',
           name: 'pencil',
         }
         ```
@@ -1644,7 +1644,7 @@ unstable_headerRightItems: () => [
     type: 'menu',
     label: 'Options',
     icon: {
-      type: 'sfsymbol',
+      type: 'sfSymbol',
       name: 'ellipsis',
     },
     menu: {
@@ -1654,7 +1654,7 @@ unstable_headerRightItems: () => [
           type: 'action',
           label: 'Edit',
           icon: {
-            type: 'sfsymbol',
+            type: 'sfSymbol',
             name: 'pencil',
           },
           onPress: () => {
@@ -1734,4 +1734,4 @@ unstable_headerRightItems: () => [
 ],
 ```
 
-The advantage of using this over [`headerLeft`](#headerleft) or [`headerRight`](#headerright) options is it supports features like shared background on iOS 26+.
+The advantage of using this over [`headerLeft`](#headerleft) or [`headerRight`](#headerright) options is that it supports features like shared background on iOS 26+.
