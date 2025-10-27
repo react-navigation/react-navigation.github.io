@@ -953,7 +953,7 @@ To achieve this, you can pass `UNSTABLE_routeNamesChangeBehavior="lastUnhandled"
 
 :::warning
 
-This option is experimental and may change in a minor release.
+This API is experimental and may change in a minor release.
 
 :::
 

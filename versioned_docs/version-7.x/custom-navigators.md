@@ -438,3 +438,14 @@ const { state, descriptors, navigation, NavigationContent } =
 
 // ...
 ```
+
+:::note
+
+Customizing built-in navigators like this is an advanced use case and generally not necessary. Consider alternatives such as:
+
+- [`layout`](navigator.md#layout) prop on navigators to add a wrapper around the navigator
+- [`UNSTABLE_router`](navigator.md#router) prop on navigators to customize the router behavior
+
+Also refer to the navigator's documentation to see if any existing API meets your needs.
+
+:::
