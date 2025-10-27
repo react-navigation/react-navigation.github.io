@@ -309,3 +309,77 @@ function MyStack() {
 
 </TabItem>
 </Tabs>
+
+### Router
+
+:::warning
+
+This API is experimental and may change in a minor release.
+
+:::
+
+Routers can be customized with the `UNSTABLE_router` prop on navigator to override how navigation actions are handled.
+
+It takes a function that receives the original router and returns an object with overrides:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const MyStack = createNativeStackNavigator({
+  // highlight-start
+  UNSTABLE_router: (original) => ({
+    getStateForAction(state, action) {
+      if (action.type === 'SOME_ACTION') {
+        // Custom logic
+      }
+
+      // Fallback to original behavior
+      return original.getStateForAction(state, action);
+    },
+  }),
+  // highlight-end
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const Stack = createNativeStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator
+      // highlight-start
+      UNSTABLE_router={(original) => ({
+        getStateForAction(state, action) {
+          if (action.type === 'SOME_ACTION') {
+            // Custom logic
+          }
+
+          // Fallback to original behavior
+          return original.getStateForAction(state, action);
+        },
+      })}
+      // highlight-end
+    >
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+The function passed to `UNSTABLE_router` **must be a pure function and cannot reference outside dynamic variables**.
+
+The overrides object is shallow merged with the original router. So you don't need to specify all properties of the router, only the ones you want to override.
+
+See [custom routers](custom-routers.md) for more details on routers.

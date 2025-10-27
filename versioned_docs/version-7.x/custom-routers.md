@@ -150,9 +150,10 @@ The library ships with a few standard routers:
 
 ## Customizing Routers
 
-You can reuse a router and override the router functions as per your needs, such as customizing how existing actions are handled, adding additional actions etc.
+There are two main ways to customize routers:
 
-See [custom navigators](custom-navigators.md) for details on how to override the router with a custom router in an existing navigator.
+- Override an existing router with the [`UNSTABLE_router`](navigator.md#router) prop on navigators
+- Customized navigators with a custom router, see [extending navigators](custom-navigators.md#extending-navigators)
 
 ### Custom Navigation Actions
 
