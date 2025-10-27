@@ -938,3 +938,65 @@ By specifying a condition for our screens, we can implement auth flow in a simpl
 ## Don't manually navigate when conditionally rendering screens
 
 It's important to note that when using such a setup, you **don't manually navigate** to the `Home` screen by calling `navigation.navigate('Home')` or any other method. **React Navigation will automatically navigate to the correct screen** when `isSignedIn` changes - `Home` screen when `isSignedIn` becomes `true`, and to `SignIn` screen when `isSignedIn` becomes `false`. You'll get an error if you attempt to navigate manually.
+
+## Handling deep links after auth
+
+When using deep links, you may want to handle the case where the user opens a deep link that requires authentication.
+
+Example scenario:
+
+- User opens a deep link to `myapp://profile` but is not signed in.
+- The app shows the `SignIn` screen.
+- After the user signs in, you want to navigate them to the `Profile` screen.
+
+To achieve this, you can pass `UNSTABLE_routeNamesChangeBehavior="lastUnhandled"`:
+
+:::warning
+
+This option is experimental and may change in a minor release.
+
+:::
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createNativeStackNavigator({
+  // highlight-next-line
+  UNSTABLE_routeNamesChangeBehavior: 'lastUnhandled',
+  screens: {
+    Home: {
+      if: useIsSignedIn,
+      screen: HomeScreen,
+    },
+    SignIn: {
+      if: useIsSignedOut,
+      screen: SignInScreen,
+      options: {
+        title: 'Sign in',
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<Stack.Navigator
+  // highlight-next-line
+  UNSTABLE_routeNamesChangeBehavior="lastUnhandled"
+>
+  {isSignedIn ? (
+    <Stack.Screen name="Home" component={HomeScreen} />
+  ) : (
+    <Stack.Screen name="SignIn" component={SignInScreen} />
+  )}
+</Stack.Navigator>
+```
+
+</TabItem>
+</Tabs>
+
+The `UNSTABLE_routeNamesChangeBehavior` option allows you to control how React Navigation handles navigation when the available screens change because of conditions such as authentication state. When `lastUnhandled` is specified, React Navigation will remember the last screen that couldn't be handled, and after the condition changes, it'll automatically navigate to that screen if it's now available.
