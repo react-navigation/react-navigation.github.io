@@ -304,7 +304,7 @@ It only works when there is a stack navigator (e.g. [stack navigator](stack-navi
 
 ### Header related options
 
-The navigator renders a native stack header. It supports most of the [header related options supported in `@react-navigation/native-stack`](native-stack-navigator.md#headerrelatedoptions) apart from the options related to the back button (prefixed with `headerBack`).
+The navigator renders a native stack header. It supports most of the [header related options supported in `@react-navigation/native-stack`](native-stack-navigator.md#header-related-options) apart from the options related to the back button (prefixed with `headerBack`).
 
 ### Events
 
