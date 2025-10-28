@@ -42,6 +42,7 @@
       "stack-navigator",
       "native-stack-navigator",
       "bottom-tab-navigator",
+      "native-bottom-tab-navigator",
       "drawer-navigator",
       "material-top-tab-navigator"
     ],
