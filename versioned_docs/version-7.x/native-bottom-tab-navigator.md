@@ -190,11 +190,11 @@ The icon can be of following types:
   }
   ```
 
-- Drawable resource name - Supported on Android
+- [Drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) name - Supported on Android
 
   ```js
   tabBarIcon: {
-    type: 'drawable',
+    type: 'drawableResource',
     name: 'sunny',
   }
   ```
@@ -221,7 +221,7 @@ tabBarIcon: Platform.select({
     name: 'heart',
   },
   android: {
-    type: 'drawable',
+    type: 'drawableResource',
     name: 'heart_icon',
   },
 });
