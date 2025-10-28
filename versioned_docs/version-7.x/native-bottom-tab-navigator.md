@@ -162,7 +162,7 @@ The icon can be of following types:
   tabBarIcon: {
     type: 'image',
     source: require('./path/to/icon.png'),
-    tinted: false, // defaults to false
+    tinted: false,
   }
   ```
 
