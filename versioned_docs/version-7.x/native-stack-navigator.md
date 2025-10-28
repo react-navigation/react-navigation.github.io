@@ -158,603 +158,6 @@ The following [options](screen-options.md) can be used to configure the screens 
 
 String that can be used as a fallback for `headerTitle`.
 
-#### `headerBackButtonMenuEnabled`
-
-Boolean indicating whether to show the menu on longPress of iOS >= 14 back button. Defaults to `true`.
-
-Only supported on iOS.
-
-<img src="/assets/7.x/native-stack/headerBackButtonMenuEnabled.png" width="500" alt="Header back button menu enabled" />
-
-#### `headerBackVisible`
-
-Whether the back button is visible in the header. You can use it to show a back button alongside `headerLeft` if you have specified it.
-
-This will have no effect on the first screen in the stack.
-
-#### `headerBackTitle`
-
-Title string used by the back button on iOS. Defaults to the previous scene's title, "Back" or arrow icon depending on the available space. See `headerBackButtonDisplayMode` to read about limitations and customize the behavior.
-
-Use `headerBackButtonDisplayMode: "minimal"` to hide it.
-
-Only supported on iOS.
-
-<img src="/assets/7.x/native-stack/headerBackTitle.jpeg" width="500" alt="Header back title" />
-
-#### `headerBackButtonDisplayMode`
-
-How the back button displays icon and title.
-
-Supported values:
-
-- "default" - Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
-- "generic" – Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon).
-- "minimal" – Always displays only the icon without a title.
-
-The space-aware behavior is disabled when:
-
-- The iOS version is 13 or lower
-- Custom font family or size is set (e.g. with `headerBackTitleStyle`)
-- Back button menu is disabled (e.g. with `headerBackButtonMenuEnabled`)
-
-In such cases, a static title and icon are always displayed.
-
-Only supported on iOS.
-
-#### `headerBackTitleStyle`
-
-Style object for header back title. Supported properties:
-
-- `fontFamily`
-- `fontSize`
-
-Only supported on iOS.
-
-<img src="/assets/7.x/native-stack/headerBackTitleStyle.png" width="500" alt="Header back title style" />
-
-Example:
-
-```js
-  headerBackTitleStyle: {
-      fontSize: 14,
-      fontFamily: 'Georgia',
-  },
-```
-
-#### `headerBackImageSource`
-
-Image to display in the header as the icon in the back button. Defaults to back icon image for the platform
-
-- A chevron on iOS
-- An arrow on Android
-
-#### `headerLargeStyle`
-
-Style of the header when a large title is shown. The large title is shown if `headerLargeTitle` is `true` and the edge of any scrollable content reaches the matching edge of the header.
-
-Supported properties:
-
-- backgroundColor
-
-Only supported on iOS.
-
-<video playsInline autoPlay muted loop style={{ width: "500px" }}>
-
-  <source src="/assets/7.x/native-stack/headerLargeStyle.mp4" />
-</video>
-
-#### `headerLargeTitle`
-
-Whether to enable header with large title which collapses to regular header on scroll.
-Defaults to `false`.
-
-For large title to collapse on scroll, the content of the screen should be wrapped in a scrollable view such as `ScrollView` or `FlatList`. If the scrollable area doesn't fill the screen, the large title won't collapse on scroll. You also need to specify `contentInsetAdjustmentBehavior="automatic"` in your `ScrollView`, `FlatList` etc.
-
-Only supported on iOS.
-
-<video playsInline autoPlay muted loop style={{ width: "500px" }}>
-
-  <source src="/assets/7.x/native-stack/headerLargeTitle.mp4" />
-</video>
-
-#### `headerLargeTitleShadowVisible`
-
-Whether drop shadow of header is visible when a large title is shown.
-
-#### `headerLargeTitleStyle`
-
-Style object for large title in header. Supported properties:
-
-- `fontFamily`
-- `fontSize`
-- `fontWeight`
-- `color`
-
-Only supported on iOS.
-
-<img src="/assets/7.x/native-stack/headerLargeTitleStyle.png" width="500" alt="Header large title style" />
-
-Example:
-
-```js
-    headerLargeTitleStyle: {
-      fontFamily: 'Georgia',
-      fontSize: 22,
-      fontWeight: '500',
-      color: 'blue',
-    },
-```
-
-#### `headerShown`
-
-Whether to show the header. The header is shown by default. Setting this to `false` hides the header.
-
-#### `headerStyle`
-
-Style object for header. Supported properties:
-
-- `backgroundColor`
-
-<video playsInline autoPlay muted loop style={{ width: "500px" }}>
-
-  <source src="/assets/7.x/native-stack/headerStyle.mp4" />
-</video>
-
-#### `headerShadowVisible`
-
-Whether to hide the elevation shadow (Android) or the bottom border (iOS) on the header.
-
-Android:
-<img src="/assets/7.x/native-stack/headerShadowVisible-Android.png" width="500" alt="Header shadow visible Android" />
-
-iOS:
-<img src="/assets/7.x/native-stack/headerShadowVisible-iOS.png" width="500" alt="Header shadow visible iOS" />
-
-#### `headerTransparent`
-
-Boolean indicating whether the navigation bar is translucent.
-
-Defaults to `false`. Setting this to `true` makes the header absolutely positioned - so that the header floats over the screen so that it overlaps the content underneath, and changes the background color to `transparent` unless specified in `headerStyle`.
-
-This is useful if you want to render a semi-transparent header or a blurred background.
-
-Note that if you don't want your content to appear under the header, you need to manually add a top margin to your content. React Navigation won't do it automatically.
-
-To get the height of the header, you can use [`HeaderHeightContext`](elements.md#headerheightcontext) with [React's Context API](https://react.dev/reference/react/useContext#contextconsumer) or [`useHeaderHeight`](elements.md#useheaderheight).
-
-#### `headerBlurEffect`
-
-Blur effect for the translucent header. The `headerTransparent` option needs to be set to `true` for this to work.
-
-Supported values:
-
-- `extraLight`
-
-- `light`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-light.png" width="500" alt="Header blur effect light" />
-
-- `dark`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-dark.png" width="500" alt="Header blur effect dark" />
-
-- `regular`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-regular.png" width="500" alt="Header blur effect regular" />
-
-- `prominent`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterial.png" width="500" alt="Header blur effect systemUltraThinMaterial" />
-
-- `systemUltraThinMaterial`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterial.png" width="500" alt="Header blur effect systemUltraThinMaterial" />
-
-- `systemThinMaterial`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThinMaterial.png" width="500" alt="Header blur effect systemThinMaterial" />
-
-- `systemMaterial`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemMaterial.png" width="500" alt="Header blur effect systemMaterial" />
-
-- `systemThickMaterial`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThickMaterial.png" width="500" alt="Header blur effect systemThickMaterial" />
-
-- `systemChromeMaterial`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemChromeMaterial.png" width="500" alt="Header blur effect systemChromeMaterial" />
-
-- `systemUltraThinMaterialLight`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterialLight.png" width="500" alt="Header blur effect systemUltraThinMaterialLight" />
-
-- `systemThinMaterialLight`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThinMaterialLight.png" width="500" alt="Header blur effect systemThinMaterialLight" />
-
-- `systemMaterialLight`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemMaterialLight.png" width="500" alt="Header blur effect systemMaterialLight" />
-
-- `systemThickMaterialLight`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThickMaterialLight.png" width="500" alt="Header blur effect systemThickMaterialLight" />
-
-- `systemChromeMaterialLight`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemChromeMaterialLight.png" width="500" alt="Header blur effect systemChromeMaterialLight" />
-
-- `systemUltraThinMaterialDark`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterialDark.png" width="500" alt="Header blur effect systemUltraThinMaterialDark" />
-- `systemThinMaterialDark`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThinMaterialDark.png" width="500" alt="Header blur effect systemThinMaterialDark" />
-
-- `systemMaterialDark`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemMaterialDark.png" width="500" alt="Header blur effect systemMaterialDark" />
-- `systemThickMaterialDark`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThickMaterialDark.png" width="500" alt="Header blur effect systemThickMaterialDark" />
-
-- `systemChromeMaterialDark`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemChromeMaterialDark.png" width="500" alt="Header blur effect systemChromeMaterialDark" />
-
-Only supported on iOS.
-
-#### `headerBackground`
-
-Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
-
-  <img src="/assets/7.x/native-stack/headerBackground.png" width="500" alt="Header background"/>
-
-Example:
-
-```js
-     headerBackground: () => (
-      <LinearGradient
-        colors={['#c17388', '#90306f']}
-        style={{ flex: 1 }}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-      />
-      ),
-```
-
-#### `headerTintColor`
-
-Tint color for the header. Changes the color of back button and title.
-
-  <img src="/assets/7.x/native-stack/headerTintColor.png" width="500" alt="Header tint color" />
-
-#### `headerLeft`
-
-Function which returns a React Element to display on the left side of the header. This replaces the back button. See `headerBackVisible` to show the back button along side left element. It receives the following properties in the arguments:
-
-- `tintColor` - The tint color to apply. Defaults to the [theme](themes.md)'s primary color.
-- `canGoBack` - Boolean indicating whether there is a screen to go back to.
-- `label` - Label text for the button. Usually the title of the previous screen.
-- `href` - The `href` to use for the anchor tag on web
-
-<img src="/assets/7.x/native-stack/headerLeft.png" width="500" alt="Header right"/>
-
-Example:
-
-```js
-    headerLeft: () => (
-      <MaterialCommunityIcons name="map" color="gray" size={36} />
-    ),
-    headerBackVisible: true,
-    headerBackTitle: 'Back',
-```
-
-#### `unstable_headerLeftItems`
-
-:::warning
-
-This option is experimental and may change in a minor release.
-
-:::
-
-Function which returns an array of items to display as on the left side of the header. This will override `headerLeft` if both are specified. It receives the following properties in the arguments:
-
-- `tintColor` - The tint color to apply. Defaults to the [theme](themes.md)'s primary color.
-- `canGoBack` - Boolean indicating whether there is a screen to go back to.
-
-Example:
-
-```js
-unstable_headerRightItems: () => [
-  {
-    type: 'button',
-    title: 'Edit',
-    onPress: () => {
-      // Do something
-    },
-  },
-],
-```
-
-See [Header items](#header-items) for more information.
-
-Only supported on iOS.
-
-#### `headerRight`
-
-Function which returns a React Element to display on the right side of the header. It receives the following properties in the arguments:
-
-- `tintColor` - The tint color to apply. Defaults to the [theme](themes.md)'s primary color.
-- `canGoBack` - Boolean indicating whether there is a screen to go back to.
-
-  <img src="/assets/7.x/native-stack/headerRight.png" width="500" alt="Header right"/>
-
-Example:
-
-```js
-headerRight: () => <MaterialCommunityIcons name="map" color="blue" size={36} />;
-```
-
-#### `unstable_headerRightItems`
-
-:::warning
-
-This option is experimental and may change in a minor release.
-
-:::
-
-Function which returns an array of items to display as on the right side of the header. This will override `headerRight` if both are specified. It receives the following properties in the arguments:
-
-- `tintColor` - The tint color to apply. Defaults to the [theme](themes.md)'s primary color.
-- `canGoBack` - Boolean indicating whether there is a screen to go back to.
-
-Example:
-
-```js
-unstable_headerRightItems: () => [
-  {
-    type: 'button',
-    title: 'Edit',
-    onPress: () => {
-      // Do something
-    },
-  },
-],
-```
-
-See [Header items](#header-items) for more information.
-
-Only supported on iOS.
-
-#### `headerTitle`
-
-String or a function that returns a React Element to be used by the header. Defaults to `title` or name of the screen.
-
-When a function is passed, it receives `tintColor` and`children` in the options object as an argument. The title string is passed in `children`.
-
-Note that if you render a custom element by passing a function, animations for the title won't work.
-
-#### `headerTitleAlign`
-
-How to align the header title. Possible values:
-
-- `left`
-  <img src="/assets/7.x/native-stack/headerTitleAlign-left.png" width="500" alt="Header title align left"/>
-
-- `center`
-  <img src="/assets/7.x/native-stack/headerTitleAlign-center.png" width="500" alt="Header title align center"/>
-
-Defaults to `left` on platforms other than iOS.
-
-Not supported on iOS. It's always `center` on iOS and cannot be changed.
-
-#### `headerTitleStyle`
-
-Style object for header title. Supported properties:
-
-- `fontFamily`
-- `fontSize`
-- `fontWeight`
-- `color`
-
-  <img src="/assets/7.x/native-stack/headerTitleStyle.png" width="500" alt="Header title style"/>
-
-Example:
-
-```js
-    headerTitleStyle: {
-      color: 'blue',
-      fontSize: 22,
-      fontFamily: 'Georgia',
-      fontWeight: 300,
-    },
-```
-
-#### `headerSearchBarOptions`
-
-Options to render a native search bar on iOS. Search bars are rarely static so normally it is controlled by passing an object to `headerSearchBarOptions` navigation option in the component's body.
-
-You also need to specify `contentInsetAdjustmentBehavior="automatic"` in your `ScrollView`, `FlatList` etc. If you don't have a `ScrollView`, specify `headerTransparent: false`.
-
-Example:
-
-```js
-React.useLayoutEffect(() => {
-  navigation.setOptions({
-    headerSearchBarOptions: {
-      // search bar options
-    },
-  });
-}, [navigation]);
-```
-
-Supported properties are:
-
-##### `ref`
-
-Ref to manipulate the search input imperatively. It contains the following methods:
-
-- `focus` - focuses the search bar
-- `blur` - removes focus from the search bar
-- `setText` - sets the search bar's content to given value
-- `clearText` - removes any text present in the search bar input field
-- `cancelSearch` - cancel the search and close the search bar
-
-##### `autoCapitalize`
-
-Controls whether the text is automatically auto-capitalized as it is entered by the user.
-Possible values:
-
-- `none`
-- `words`
-- `sentences`
-- `characters`
-
-Defaults to `sentences`.
-
-##### `autoFocus`
-
-Whether to automatically focus search bar when it's shown. Defaults to `false`.
-
-Only supported on Android.
-
-##### `barTintColor`
-
-The search field background color. By default bar tint color is translucent.
-
-Only supported on iOS.
-
-<img src="/assets/7.x/native-stack/headerSearchBarOptions-barTintColor.png" width="500" alt="Header search bar options - Bar tint color" />
-
-##### `tintColor`
-
-The color for the cursor caret and cancel button text.
-
-Only supported on iOS.
-
-<img src="/assets/7.x/native-stack/headerSearchBarOptions-tintColor.png" width="500" alt="Header search bar options - Tint color" />
-
-##### `cancelButtonText`
-
-The text to be used instead of default `Cancel` button text.
-
-Only supported on iOS.
-
-##### `disableBackButtonOverride`
-
-Whether the back button should close search bar's text input or not. Defaults to `false`.
-
-Only supported on Android.
-
-##### `hideNavigationBar`
-
-Boolean indicating whether to hide the navigation bar during searching. Defaults to `true`.
-
-Only supported on iOS.
-
-##### `hideWhenScrolling`
-
-Boolean indicating whether to hide the search bar when scrolling. Defaults to `true`.
-
-Only supported on iOS.
-
-##### `inputType`
-
-The type of the input. Defaults to `"text"`.
-
-Supported values:
-
-- `"text"`
-- `"phone"`
-- `"number"`
-- `"email"`
-
-Only supported on Android.
-
-##### `obscureBackground`
-
-Boolean indicating whether to obscure the underlying content with semi-transparent overlay. Defaults to `true`.
-
-##### `placeholder`
-
-Text displayed when search field is empty.
-
-##### `textColor`
-
-The color of the text in the search field.
-
-<img src="/assets/7.x/native-stack/headerSearchBarOptions-textColor.png" width="500" alt="Header search bar options - Text color" />
-
-##### `hintTextColor`
-
-The color of the hint text in the search field.
-
-Only supported on Android.
-
-<img src="/assets/7.x/native-stack/headerSearchBarOptions-hintTextColor.png" width="500" alt="Header search bar options - Hint text color" />
-
-##### `headerIconColor`
-
-The color of the search and close icons shown in the header
-
-Only supported on Android.
-
-<img src="/assets/7.x/native-stack/headerSearchBarOptions-headerIconColor.png" width="500" alt="Header search bar options - Header icon color" />
-
-##### `shouldShowHintSearchIcon`
-
-Whether to show the search hint icon when search bar is focused. Defaults to `true`.
-
-Only supported on Android.
-
-##### `onBlur`
-
-A callback that gets called when search bar has lost focus.
-
-##### `onCancelButtonPress`
-
-A callback that gets called when the cancel button is pressed.
-
-##### `onChangeText`
-
-A callback that gets called when the text changes. It receives the current text value of the search bar.
-
-Example:
-
-```js
-const [search, setSearch] = React.useState('');
-
-React.useLayoutEffect(() => {
-  navigation.setOptions({
-    headerSearchBarOptions: {
-      onChangeText: (event) => setSearch(event.nativeEvent.text),
-    },
-  });
-}, [navigation]);
-```
-
-#### `header`
-
-Custom header to use instead of the default header.
-
-This accepts a function that returns a React Element to display as a header. The function receives an object containing the following properties as the argument:
-
-- `navigation` - The navigation object for the current screen.
-- `route` - The route object for the current screen.
-- `options` - The options for the current screen
-- `back` - Options for the back button, contains an object with a `title` property to use for back button label.
-
-Example:
-
-```js
-import { getHeaderTitle } from '@react-navigation/elements';
-
-// ..
-
-header: ({ navigation, route, options, back }) => {
-  const title = getHeaderTitle(options, route.name);
-
-  return (
-    <MyHeader
-      title={title}
-      leftButton={
-        back ? <MyBackButton onPress={navigation.goBack} /> : undefined
-      }
-      style={options.headerStyle}
-    />
-  );
-};
-```
-
-To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
-
-Note that if you specify a custom header, the native functionality such as large title, search bar etc. won't work.
-
 #### `statusBarAnimation`
 
 Sets the status bar animation (similar to the `StatusBar` component). Defaults to `fade` on iOS and `none` on Android.
@@ -1369,6 +772,607 @@ Boolean indicating whether to prevent inactive screens from re-rendering. Defaul
 Defaults to `true` when `enableFreeze()` from `react-native-screens` package is run at the top of the application.
 
 Only supported on iOS and Android.
+
+### Header related options
+
+The navigator supports following options to configure the header:
+
+#### `headerBackButtonMenuEnabled`
+
+Boolean indicating whether to show the menu on longPress of iOS >= 14 back button. Defaults to `true`.
+
+Only supported on iOS.
+
+<img src="/assets/7.x/native-stack/headerBackButtonMenuEnabled.png" width="500" alt="Header back button menu enabled" />
+
+#### `headerBackVisible`
+
+Whether the back button is visible in the header. You can use it to show a back button alongside `headerLeft` if you have specified it.
+
+This will have no effect on the first screen in the stack.
+
+#### `headerBackTitle`
+
+Title string used by the back button on iOS. Defaults to the previous scene's title, "Back" or arrow icon depending on the available space. See `headerBackButtonDisplayMode` to read about limitations and customize the behavior.
+
+Use `headerBackButtonDisplayMode: "minimal"` to hide it.
+
+Only supported on iOS.
+
+<img src="/assets/7.x/native-stack/headerBackTitle.jpeg" width="500" alt="Header back title" />
+
+#### `headerBackButtonDisplayMode`
+
+How the back button displays icon and title.
+
+Supported values:
+
+- "default" - Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
+- "generic" – Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon).
+- "minimal" – Always displays only the icon without a title.
+
+The space-aware behavior is disabled when:
+
+- The iOS version is 13 or lower
+- Custom font family or size is set (e.g. with `headerBackTitleStyle`)
+- Back button menu is disabled (e.g. with `headerBackButtonMenuEnabled`)
+
+In such cases, a static title and icon are always displayed.
+
+Only supported on iOS.
+
+#### `headerBackTitleStyle`
+
+Style object for header back title. Supported properties:
+
+- `fontFamily`
+- `fontSize`
+
+Only supported on iOS.
+
+<img src="/assets/7.x/native-stack/headerBackTitleStyle.png" width="500" alt="Header back title style" />
+
+Example:
+
+```js
+  headerBackTitleStyle: {
+      fontSize: 14,
+      fontFamily: 'Georgia',
+  },
+```
+
+#### `headerBackImageSource`
+
+Image to display in the header as the icon in the back button. Defaults to back icon image for the platform
+
+- A chevron on iOS
+- An arrow on Android
+
+#### `headerLargeStyle`
+
+Style of the header when a large title is shown. The large title is shown if `headerLargeTitle` is `true` and the edge of any scrollable content reaches the matching edge of the header.
+
+Supported properties:
+
+- backgroundColor
+
+Only supported on iOS.
+
+<video playsInline autoPlay muted loop style={{ width: "500px" }}>
+
+  <source src="/assets/7.x/native-stack/headerLargeStyle.mp4" />
+</video>
+
+#### `headerLargeTitle`
+
+Whether to enable header with large title which collapses to regular header on scroll.
+Defaults to `false`.
+
+For large title to collapse on scroll, the content of the screen should be wrapped in a scrollable view such as `ScrollView` or `FlatList`. If the scrollable area doesn't fill the screen, the large title won't collapse on scroll. You also need to specify `contentInsetAdjustmentBehavior="automatic"` in your `ScrollView`, `FlatList` etc.
+
+Only supported on iOS.
+
+<video playsInline autoPlay muted loop style={{ width: "500px" }}>
+
+  <source src="/assets/7.x/native-stack/headerLargeTitle.mp4" />
+</video>
+
+#### `headerLargeTitleShadowVisible`
+
+Whether drop shadow of header is visible when a large title is shown.
+
+#### `headerLargeTitleStyle`
+
+Style object for large title in header. Supported properties:
+
+- `fontFamily`
+- `fontSize`
+- `fontWeight`
+- `color`
+
+Only supported on iOS.
+
+<img src="/assets/7.x/native-stack/headerLargeTitleStyle.png" width="500" alt="Header large title style" />
+
+Example:
+
+```js
+    headerLargeTitleStyle: {
+      fontFamily: 'Georgia',
+      fontSize: 22,
+      fontWeight: '500',
+      color: 'blue',
+    },
+```
+
+#### `headerStyle`
+
+Style object for header. Supported properties:
+
+- `backgroundColor`
+
+<video playsInline autoPlay muted loop style={{ width: "500px" }}>
+
+  <source src="/assets/7.x/native-stack/headerStyle.mp4" />
+</video>
+
+#### `headerShadowVisible`
+
+Whether to hide the elevation shadow (Android) or the bottom border (iOS) on the header.
+
+Android:
+<img src="/assets/7.x/native-stack/headerShadowVisible-Android.png" width="500" alt="Header shadow visible Android" />
+
+iOS:
+<img src="/assets/7.x/native-stack/headerShadowVisible-iOS.png" width="500" alt="Header shadow visible iOS" />
+
+#### `headerTransparent`
+
+Boolean indicating whether the navigation bar is translucent.
+
+Defaults to `false`. Setting this to `true` makes the header absolutely positioned - so that the header floats over the screen so that it overlaps the content underneath, and changes the background color to `transparent` unless specified in `headerStyle`.
+
+This is useful if you want to render a semi-transparent header or a blurred background.
+
+Note that if you don't want your content to appear under the header, you need to manually add a top margin to your content. React Navigation won't do it automatically.
+
+To get the height of the header, you can use [`HeaderHeightContext`](elements.md#headerheightcontext) with [React's Context API](https://react.dev/reference/react/useContext#contextconsumer) or [`useHeaderHeight`](elements.md#useheaderheight).
+
+#### `headerBlurEffect`
+
+Blur effect for the translucent header. The `headerTransparent` option needs to be set to `true` for this to work.
+
+Supported values:
+
+- `extraLight`
+
+- `light`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-light.png" width="500" alt="Header blur effect light" />
+
+- `dark`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-dark.png" width="500" alt="Header blur effect dark" />
+
+- `regular`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-regular.png" width="500" alt="Header blur effect regular" />
+
+- `prominent`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterial.png" width="500" alt="Header blur effect systemUltraThinMaterial" />
+
+- `systemUltraThinMaterial`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterial.png" width="500" alt="Header blur effect systemUltraThinMaterial" />
+
+- `systemThinMaterial`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThinMaterial.png" width="500" alt="Header blur effect systemThinMaterial" />
+
+- `systemMaterial`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemMaterial.png" width="500" alt="Header blur effect systemMaterial" />
+
+- `systemThickMaterial`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThickMaterial.png" width="500" alt="Header blur effect systemThickMaterial" />
+
+- `systemChromeMaterial`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemChromeMaterial.png" width="500" alt="Header blur effect systemChromeMaterial" />
+
+- `systemUltraThinMaterialLight`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterialLight.png" width="500" alt="Header blur effect systemUltraThinMaterialLight" />
+
+- `systemThinMaterialLight`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThinMaterialLight.png" width="500" alt="Header blur effect systemThinMaterialLight" />
+
+- `systemMaterialLight`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemMaterialLight.png" width="500" alt="Header blur effect systemMaterialLight" />
+
+- `systemThickMaterialLight`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThickMaterialLight.png" width="500" alt="Header blur effect systemThickMaterialLight" />
+
+- `systemChromeMaterialLight`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemChromeMaterialLight.png" width="500" alt="Header blur effect systemChromeMaterialLight" />
+
+- `systemUltraThinMaterialDark`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterialDark.png" width="500" alt="Header blur effect systemUltraThinMaterialDark" />
+- `systemThinMaterialDark`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThinMaterialDark.png" width="500" alt="Header blur effect systemThinMaterialDark" />
+
+- `systemMaterialDark`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemMaterialDark.png" width="500" alt="Header blur effect systemMaterialDark" />
+- `systemThickMaterialDark`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThickMaterialDark.png" width="500" alt="Header blur effect systemThickMaterialDark" />
+
+- `systemChromeMaterialDark`
+  <img src="/assets/7.x/native-stack/headerBlurEffect-systemChromeMaterialDark.png" width="500" alt="Header blur effect systemChromeMaterialDark" />
+
+Only supported on iOS.
+
+#### `headerBackground`
+
+Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
+
+  <img src="/assets/7.x/native-stack/headerBackground.png" width="500" alt="Header background"/>
+
+Example:
+
+```js
+     headerBackground: () => (
+      <LinearGradient
+        colors={['#c17388', '#90306f']}
+        style={{ flex: 1 }}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+      />
+      ),
+```
+
+#### `headerTintColor`
+
+Tint color for the header. Changes the color of back button and title.
+
+  <img src="/assets/7.x/native-stack/headerTintColor.png" width="500" alt="Header tint color" />
+
+#### `headerLeft`
+
+Function which returns a React Element to display on the left side of the header. This replaces the back button. See `headerBackVisible` to show the back button along side left element. It receives the following properties in the arguments:
+
+- `tintColor` - The tint color to apply. Defaults to the [theme](themes.md)'s primary color.
+- `canGoBack` - Boolean indicating whether there is a screen to go back to.
+- `label` - Label text for the button. Usually the title of the previous screen.
+- `href` - The `href` to use for the anchor tag on web
+
+<img src="/assets/7.x/native-stack/headerLeft.png" width="500" alt="Header right"/>
+
+Example:
+
+```js
+    headerLeft: () => (
+      <MaterialCommunityIcons name="map" color="gray" size={36} />
+    ),
+    headerBackVisible: true,
+    headerBackTitle: 'Back',
+```
+
+#### `unstable_headerLeftItems`
+
+:::warning
+
+This option is experimental and may change in a minor release.
+
+:::
+
+Function which returns an array of items to display as on the left side of the header. This will override `headerLeft` if both are specified. It receives the following properties in the arguments:
+
+- `tintColor` - The tint color to apply. Defaults to the [theme](themes.md)'s primary color.
+- `canGoBack` - Boolean indicating whether there is a screen to go back to.
+
+Example:
+
+```js
+unstable_headerRightItems: () => [
+  {
+    type: 'button',
+    title: 'Edit',
+    onPress: () => {
+      // Do something
+    },
+  },
+],
+```
+
+See [Header items](#header-items) for more information.
+
+Only supported on iOS.
+
+#### `headerRight`
+
+Function which returns a React Element to display on the right side of the header. It receives the following properties in the arguments:
+
+- `tintColor` - The tint color to apply. Defaults to the [theme](themes.md)'s primary color.
+- `canGoBack` - Boolean indicating whether there is a screen to go back to.
+
+  <img src="/assets/7.x/native-stack/headerRight.png" width="500" alt="Header right"/>
+
+Example:
+
+```js
+headerRight: () => <MaterialCommunityIcons name="map" color="blue" size={36} />;
+```
+
+#### `unstable_headerRightItems`
+
+:::warning
+
+This option is experimental and may change in a minor release.
+
+:::
+
+Function which returns an array of items to display as on the right side of the header. This will override `headerRight` if both are specified. It receives the following properties in the arguments:
+
+- `tintColor` - The tint color to apply. Defaults to the [theme](themes.md)'s primary color.
+- `canGoBack` - Boolean indicating whether there is a screen to go back to.
+
+Example:
+
+```js
+unstable_headerRightItems: () => [
+  {
+    type: 'button',
+    title: 'Edit',
+    onPress: () => {
+      // Do something
+    },
+  },
+],
+```
+
+See [Header items](#header-items) for more information.
+
+Only supported on iOS.
+
+#### `headerTitle`
+
+String or a function that returns a React Element to be used by the header. Defaults to `title` or name of the screen.
+
+When a function is passed, it receives `tintColor` and`children` in the options object as an argument. The title string is passed in `children`.
+
+Note that if you render a custom element by passing a function, animations for the title won't work.
+
+#### `headerTitleAlign`
+
+How to align the header title. Possible values:
+
+- `left`
+  <img src="/assets/7.x/native-stack/headerTitleAlign-left.png" width="500" alt="Header title align left"/>
+
+- `center`
+  <img src="/assets/7.x/native-stack/headerTitleAlign-center.png" width="500" alt="Header title align center"/>
+
+Defaults to `left` on platforms other than iOS.
+
+Not supported on iOS. It's always `center` on iOS and cannot be changed.
+
+#### `headerTitleStyle`
+
+Style object for header title. Supported properties:
+
+- `fontFamily`
+- `fontSize`
+- `fontWeight`
+- `color`
+
+  <img src="/assets/7.x/native-stack/headerTitleStyle.png" width="500" alt="Header title style"/>
+
+Example:
+
+```js
+    headerTitleStyle: {
+      color: 'blue',
+      fontSize: 22,
+      fontFamily: 'Georgia',
+      fontWeight: 300,
+    },
+```
+
+#### `headerSearchBarOptions`
+
+Options to render a native search bar on iOS. Search bars are rarely static so normally it is controlled by passing an object to `headerSearchBarOptions` navigation option in the component's body.
+
+You also need to specify `contentInsetAdjustmentBehavior="automatic"` in your `ScrollView`, `FlatList` etc. If you don't have a `ScrollView`, specify `headerTransparent: false`.
+
+Example:
+
+```js
+React.useLayoutEffect(() => {
+  navigation.setOptions({
+    headerSearchBarOptions: {
+      // search bar options
+    },
+  });
+}, [navigation]);
+```
+
+Supported properties are:
+
+##### `ref`
+
+Ref to manipulate the search input imperatively. It contains the following methods:
+
+- `focus` - focuses the search bar
+- `blur` - removes focus from the search bar
+- `setText` - sets the search bar's content to given value
+- `clearText` - removes any text present in the search bar input field
+- `cancelSearch` - cancel the search and close the search bar
+
+##### `autoCapitalize`
+
+Controls whether the text is automatically auto-capitalized as it is entered by the user.
+Possible values:
+
+- `none`
+- `words`
+- `sentences`
+- `characters`
+
+Defaults to `sentences`.
+
+##### `autoFocus`
+
+Whether to automatically focus search bar when it's shown. Defaults to `false`.
+
+Only supported on Android.
+
+##### `barTintColor`
+
+The search field background color. By default bar tint color is translucent.
+
+Only supported on iOS.
+
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-barTintColor.png" width="500" alt="Header search bar options - Bar tint color" />
+
+##### `tintColor`
+
+The color for the cursor caret and cancel button text.
+
+Only supported on iOS.
+
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-tintColor.png" width="500" alt="Header search bar options - Tint color" />
+
+##### `cancelButtonText`
+
+The text to be used instead of default `Cancel` button text.
+
+Only supported on iOS.
+
+##### `disableBackButtonOverride`
+
+Whether the back button should close search bar's text input or not. Defaults to `false`.
+
+Only supported on Android.
+
+##### `hideNavigationBar`
+
+Boolean indicating whether to hide the navigation bar during searching. Defaults to `true`.
+
+Only supported on iOS.
+
+##### `hideWhenScrolling`
+
+Boolean indicating whether to hide the search bar when scrolling. Defaults to `true`.
+
+Only supported on iOS.
+
+##### `inputType`
+
+The type of the input. Defaults to `"text"`.
+
+Supported values:
+
+- `"text"`
+- `"phone"`
+- `"number"`
+- `"email"`
+
+Only supported on Android.
+
+##### `obscureBackground`
+
+Boolean indicating whether to obscure the underlying content with semi-transparent overlay. Defaults to `true`.
+
+##### `placeholder`
+
+Text displayed when search field is empty.
+
+##### `textColor`
+
+The color of the text in the search field.
+
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-textColor.png" width="500" alt="Header search bar options - Text color" />
+
+##### `hintTextColor`
+
+The color of the hint text in the search field.
+
+Only supported on Android.
+
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-hintTextColor.png" width="500" alt="Header search bar options - Hint text color" />
+
+##### `headerIconColor`
+
+The color of the search and close icons shown in the header
+
+Only supported on Android.
+
+<img src="/assets/7.x/native-stack/headerSearchBarOptions-headerIconColor.png" width="500" alt="Header search bar options - Header icon color" />
+
+##### `shouldShowHintSearchIcon`
+
+Whether to show the search hint icon when search bar is focused. Defaults to `true`.
+
+Only supported on Android.
+
+##### `onBlur`
+
+A callback that gets called when search bar has lost focus.
+
+##### `onCancelButtonPress`
+
+A callback that gets called when the cancel button is pressed.
+
+##### `onChangeText`
+
+A callback that gets called when the text changes. It receives the current text value of the search bar.
+
+Example:
+
+```js
+const [search, setSearch] = React.useState('');
+
+React.useLayoutEffect(() => {
+  navigation.setOptions({
+    headerSearchBarOptions: {
+      onChangeText: (event) => setSearch(event.nativeEvent.text),
+    },
+  });
+}, [navigation]);
+```
+
+#### `headerShown`
+
+Whether to show the header. The header is shown by default. Setting this to `false` hides the header.
+
+#### `header`
+
+Custom header to use instead of the default header.
+
+This accepts a function that returns a React Element to display as a header. The function receives an object containing the following properties as the argument:
+
+- `navigation` - The navigation object for the current screen.
+- `route` - The route object for the current screen.
+- `options` - The options for the current screen
+- `back` - Options for the back button, contains an object with a `title` property to use for back button label.
+
+Example:
+
+```js
+import { getHeaderTitle } from '@react-navigation/elements';
+
+// ..
+
+header: ({ navigation, route, options, back }) => {
+  const title = getHeaderTitle(options, route.name);
+
+  return (
+    <MyHeader
+      title={title}
+      leftButton={
+        back ? <MyBackButton onPress={navigation.goBack} /> : undefined
+      }
+      style={options.headerStyle}
+    />
+  );
+};
+```
+
+To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
+
+Note that if you specify a custom header, the native functionality such as large title, search bar etc. won't work.
 
 ### Events
 
