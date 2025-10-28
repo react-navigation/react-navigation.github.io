@@ -92,7 +92,20 @@ Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`
 
 #### `tabBarSystemItem`
 
-Uses iOS built-in tab bar items with standard iOS styling and localized titles.
+Uses iOS built-in tab bar items with standard iOS styling and localized titles. Supported values:
+
+- `bookmarks`
+- `contacts`
+- `downloads`
+- `favorites`
+- `featured`
+- `history`
+- `more`
+- `mostRecent`
+- `mostViewed`
+- `recents`
+- `search`
+- `topRated`
 
 If set to `search`, it's positioned next to the tab bar on iOS 26 and above.
 
