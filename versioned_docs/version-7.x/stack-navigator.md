@@ -188,7 +188,7 @@ If you need to disable this optimization for specific screens (e.g. you want to 
 
 ### Options
 
-The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Stack.navigator` or `options` prop of `Stack.Screen`.
+The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Stack.Navigator` or `options` prop of `Stack.Screen`.
 
 #### `title`
 
@@ -304,7 +304,7 @@ Only supported on iOS and Android.
 
 ### Header related options
 
-You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Stack.navigator` or `options` prop of `Stack.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
+You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Stack.Navigator` or `options` prop of `Stack.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
 
 In addition to those, the following options are also supported in stack:
 
