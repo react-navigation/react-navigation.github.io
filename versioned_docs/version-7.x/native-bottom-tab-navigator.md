@@ -282,6 +282,39 @@ Style object for the tab bar. Supported properties:
 - `backgroundColor` - Only supported on Android and iOS 18 and below.
 - `shadowColor` - Only supported on iOS 18 and below.
 
+#### `tabBarBlurEffect`
+
+Blur effect applied to the tab bar on iOS 18 and lower when tab screen is selected.
+
+Supported values:
+
+- `none` - no blur effect
+- `systemDefault` - default blur effect applied by the system
+- `extraLight`
+- `light`
+- `dark`
+- `regular`
+- `prominent`
+- `systemUltraThinMaterial`
+- `systemThinMaterial`
+- `systemMaterial`
+- `systemThickMaterial`
+- `systemChromeMaterial`
+- `systemUltraThinMaterialLight`
+- `systemThinMaterialLight`
+- `systemMaterialLight`
+- `systemThickMaterialLight`
+- `systemChromeMaterialLight`
+- `systemUltraThinMaterialDark`
+- `systemThinMaterialDark`
+- `systemMaterialDark`
+- `systemThickMaterialDark`
+- `systemChromeMaterialDark`
+
+Defaults to `systemDefault`.
+
+Only supported on iOS 18 and below.
+
 #### `tabBarControllerMode`
 
 The display mode for the tab bar. Supported values:
