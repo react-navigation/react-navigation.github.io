@@ -14,6 +14,14 @@ Currently only iOS and Android are supported. Use [`createBottomTabNavigator`](b
 
 Native Bottom Tabs displays screens with a tab bar to switch between them.
 
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-bottom-tabs-android.mp4" />
+</video>
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-bottom-tabs-ios.mp4" />
+</video>
+
 The navigator uses native components on iOS and Android for better platform integration. On iOS, it uses `UITabBarController` and on Android, it uses `BottomNavigationView`.
 
 ## Installation
