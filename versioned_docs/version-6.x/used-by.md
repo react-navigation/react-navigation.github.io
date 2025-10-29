@@ -39,6 +39,7 @@ It's impossible to list every single app that uses React Navigation, but below a
 - [JustCash](https://justcash.app/) ([Android](https://play.google.com/store/apps/details?id=com.justcash&hl=en&gl=US))
 - [NMF.earth](https://nmf.earth/) ([Source Code](https://github.com/NMF-earth/nmf-app)) ([iOS](https://apps.apple.com/us/app/nmf-earth/id1494561829)) ([Android](https://play.google.com/store/apps/details?id=nmf.earth))
 - [Pickyourtrail](https://apps.apple.com/us/app/pickyourtrail/id1400253672)
+- [Play 29](https://apps.apple.com/us/app/play-29/id1550659960)
 - [Rocket.Chat](https://rocket.chat/) ([Source Code](https://github.com/RocketChat/Rocket.Chat.ReactNative)) ([iOS](https://apps.apple.com/us/app/rocket-chat/id1148741252)) ([Android](https://play.google.com/store/apps/details?id=chat.rocket.android))
 - [Saffron](https://www.mysaffronapp.com/) ([iOS](https://apps.apple.com/us/app/saffron-your-digital-cookbook/id1438683531)) ([Android](https://play.google.com/store/apps/details?id=com.awad.saffron))
 - [Single Origin 2](https://singleoriginapp.com/)
