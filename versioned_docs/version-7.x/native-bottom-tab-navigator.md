@@ -32,6 +32,8 @@ To use this navigator, ensure that you have [`@react-navigation/native` and its 
 npm install @react-navigation/bottom-tabs
 ```
 
+The navigator requires React Native 0.79 or above is required. If you're using [Expo](https://expo.dev/), it requires SDK 53 or above.
+
 ## Usage
 
 To use this navigator, import it from `@react-navigation/bottom-tabs/unstable`:
@@ -70,6 +72,11 @@ function MyTabs() {
 
 </TabItem>
 </Tabs>
+
+## Notes
+
+- Liquid Glass effect on iOS 26+ requires your app to be built with Xcode 26 or above.
+- On Android, at most 5 tabs are supported. This is a limitation of the underlying native component.
 
 ## API Definition
 
@@ -289,6 +296,8 @@ Style object for the tab bar. Supported properties:
 
 - `backgroundColor` - Only supported on Android and iOS 18 and below.
 - `shadowColor` - Only supported on iOS 18 and below.
+
+On iOS 26+, the background color automatically changes based on the content behind the tab bar and can't be overridden.
 
 #### `tabBarBlurEffect`
 
