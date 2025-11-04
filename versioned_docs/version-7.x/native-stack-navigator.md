@@ -1175,7 +1175,7 @@ Example:
 
 #### `headerSearchBarOptions`
 
-Options to render a native search bar on iOS. Search bars are rarely static so normally it is controlled by passing an object to `headerSearchBarOptions` navigation option in the component's body.
+Options to render a native search bar. Search bars are rarely static so normally it is controlled by passing an object to `headerSearchBarOptions` navigation option in the component's body.
 
 You also need to specify `contentInsetAdjustmentBehavior="automatic"` in your `ScrollView`, `FlatList` etc. If you don't have a `ScrollView`, specify `headerTransparent: false`.
 
@@ -1202,18 +1202,20 @@ Ref to manipulate the search input imperatively. It contains the following metho
 - `setText` - sets the search bar's content to given value
 - `clearText` - removes any text present in the search bar input field
 - `cancelSearch` - cancel the search and close the search bar
+- `toggleCancelButton` - depending on passed boolean value, hides or shows cancel button (only supported on iOS)
 
 ##### `autoCapitalize`
 
 Controls whether the text is automatically auto-capitalized as it is entered by the user.
 Possible values:
 
+- `systemDefault`
 - `none`
 - `words`
 - `sentences`
 - `characters`
 
-Defaults to `sentences`.
+Defaults to `systemDefault` which is the same as `sentences` on iOS and `none` on Android.
 
 ##### `autoFocus`
 
@@ -1241,7 +1243,7 @@ Only supported on iOS.
 
 The text to be used instead of default `Cancel` button text.
 
-Only supported on iOS.
+Only supported on iOS. **Deprecated** starting from iOS 26.
 
 ##### `disableBackButtonOverride`
 
@@ -1251,7 +1253,9 @@ Only supported on Android.
 
 ##### `hideNavigationBar`
 
-Boolean indicating whether to hide the navigation bar during searching. Defaults to `true`.
+Boolean indicating whether to hide the navigation bar during searching.
+
+If left unset, system default is used.
 
 Only supported on iOS.
 
@@ -1276,7 +1280,36 @@ Only supported on Android.
 
 ##### `obscureBackground`
 
-Boolean indicating whether to obscure the underlying content with semi-transparent overlay. Defaults to `true`.
+Boolean indicating whether to obscure the underlying content with semi-transparent overlay.
+
+If left unset, system default is used.
+
+Only supported on iOS.
+
+##### `placement`
+
+Controls preferred placement of the search bar. Defaults to `automatic`.
+
+Supported values:
+
+- `automatic`
+- `stacked`
+- `inline` (**deprecated** starting from iOS 26, it is mapped to `integrated`)
+- `integrated` (available starting from iOS 26, on prior versions it is mapped to `inline`)
+- `integratedButton` (available starting from iOS 26, on prior versions it is mapped to `inline`)
+- `integratedCentered` (available starting from iOS 26, on prior versions it is mapped to `inline`)
+
+Only supported on iOS.
+
+##### `allowToolbarIntegration`
+
+Boolean indicating whether the system can place the search bar among other toolbar items on iPhone.
+
+Set this prop to `false` to prevent the search bar from appearing in the toolbar when `placement` is `automatic`, `integrated`, `integratedButton` or `integratedCentered`.
+
+Defaults to `true`. If `placement` is set to `stacked`, the value of this prop will be overridden with `false`.
+
+Only supported on iOS, starting from iOS 26.
 
 ##### `placeholder`
 
