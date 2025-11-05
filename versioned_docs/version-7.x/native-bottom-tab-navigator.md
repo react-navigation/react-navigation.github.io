@@ -367,7 +367,9 @@ It only works when there is a stack navigator (e.g. [stack navigator](stack-navi
 
 ### Header related options
 
-The navigator renders a native stack header. It supports most of the [header related options supported in `@react-navigation/native-stack`](native-stack-navigator.md#header-related-options) apart from the options related to the back button (prefixed with `headerBack`).
+The navigator does not show a header by default. It renders a native stack header if `headerShown` is set to `true` in the screen options explicitly, or if a custom header is provided with the `header` option. Header related options require a header to be shown.
+
+It supports most of the [header related options supported in `@react-navigation/native-stack`](native-stack-navigator.md#header-related-options) apart from the options related to the back button (prefixed with `headerBack`).
 
 ### Events
 
