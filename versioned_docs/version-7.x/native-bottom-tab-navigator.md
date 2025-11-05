@@ -122,11 +122,27 @@ Uses iOS built-in tab bar items with standard iOS styling and localized titles. 
 - `search`
 - `topRated`
 
-If set to `search`, the tab is positioned as a separate item on the tab bar on iOS 26+.
-
-For the `search` item, when the tab is selected, the tab bar transforms into a search field if the screen in the tab navigator or a nested [native stack navigator](native-stack-navigator.md) has [`headerSearchBarOptions`](native-stack-navigator.md#headersearchbaroptions) configured and the native header is shown with [`headerShown: true`](native-stack-navigator.md#headershown). This won't work if a custom header is provided with the `header` option.
-
 The [`tabBarIcon`](#tabbaricon) and [`tabBarLabel`](#tabbarlabel) options will override the icon and label from the system item. If you want to keep the system behavior on iOS, but need to provide icon and label for other platforms, use `Platform.OS` or `Platform.select` to conditionally set `undefined` for `tabBarIcon` and `tabBarLabel` on iOS.
+
+##### Search tab on iOS 26+
+
+The `tabBarSystemItem` option has special styling and behavior when set to `search` on iOS 26+.
+
+Additionally, when the `search` tab is selected, the tab bar transforms into a search field if the screen in the tab navigator or a nested [native stack navigator](native-stack-navigator.md) has [`headerSearchBarOptions`](native-stack-navigator.md#headersearchbaroptions) configured and the native header is shown with [`headerShown: true`](native-stack-navigator.md#headershown). This won't work if a custom header is provided with the `header` option.
+
+Example:
+
+```js
+tabBarSystemItem: 'search',
+headerShown: true,
+headerSearchBarOptions: {
+  placeholder: 'Search',
+},
+```
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-bottom-tabs-ios-search.mp4" />
+</video>
 
 #### `tabBarLabel`
 
@@ -356,6 +372,10 @@ The minimize behavior for the tab bar. Supported values:
   when scrolling back down
 
 Only supported on iOS 26 and above.
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-bottom-tabs-ios-minimize.mp4" />
+</video>
 
 #### `lazy`
 
