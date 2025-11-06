@@ -84,22 +84,37 @@ If you're on a Mac and developing for iOS, you need to install the pods (via [Co
 npx pod-install ios
 ```
 
-`react-native-screens` package requires one additional configuration step to properly
-work on Android devices. Edit `MainActivity.kt` or `MainActivity.java` file which is located under `android/app/src/main/java/<your package name>/`.
+:::info
 
-Add the highlighted code to the body of `MainActivity` class:
+When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional dependencies. If you're getting an error "Unable to resolve module", you need to install that module in your project.
+
+:::
+
+#### Configuring `react-native-screens` on Android
+
+[`react-native-screens`](https://github.com/software-mansion/react-native-screens) requires one additional configuration to properly work on Android.
+
+Edit `MainActivity.kt` or `MainActivity.java` file under `android/app/src/main/java/<your package name>/`, and add the highlighted code to the body of `MainActivity` class:
 
 <Tabs>
 <TabItem value='kotlin' label='Kotlin' default>
 
 ```kotlin
+// highlight-start
+import android.os.Bundle
+import com.swmansion.rnscreens.fragment.restoration.RNScreensFragmentFactory
+// highlight-end
+
+// ...
+
 class MainActivity: ReactActivity() {
   // ...
-  // highlight-start
   override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(null)
+    // highlight-start
+    supportFragmentManager.fragmentFactory = RNScreensFragmentFactory()
+    super.onCreate(savedInstanceState)
+    // highlight-end
   }
-  // highlight-end
   // ...
 }
 ```
@@ -108,14 +123,22 @@ class MainActivity: ReactActivity() {
   <TabItem value='java' label='Java'>
 
 ```java
+// highlight-start
+import android.os.Bundle;
+import com.swmansion.rnscreens.fragment.restoration.RNScreensFragmentFactory;
+// highlight-end
+
+// ...
+
 public class MainActivity extends ReactActivity {
   // ...
-  // highlight-start
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(null);
+    // highlight-start
+    getSupportFragmentManager().setFragmentFactory(new RNScreensFragmentFactory());
+    super.onCreate(savedInstanceState);
+    // highlight-end
   }
-  // highlight-end
   // ...
 }
 ```
@@ -123,19 +146,22 @@ public class MainActivity extends ReactActivity {
 </TabItem>
 </Tabs>
 
-and make sure to add the following import statement at the top of this file below your package statement:
-
-```java
-import android.os.Bundle;
-```
-
 This change is required to avoid crashes related to View state being not persisted consistently across Activity restarts.
 
-:::info
+#### Opting-out of predictive back on Android
 
-When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional dependencies. If you're getting an error "Unable to resolve module", you need to install that module in your project.
+React Navigation doesn't yet support Android's predictive back gesture. Disabling it is necessary for the system back gesture to work properly with React Navigation.
 
-:::
+To opt out, in `AndroidManifest.xml`, in the `<application>` tag (or `<activity>` tag to opt-out at activity level), set the `android:enableOnBackInvokedCallback` flag to `false`:
+
+```xml
+<application
+  // highlight-next-line
+  android:enableOnBackInvokedCallback="false"
+  >
+  <!-- ... -->
+</application>
+```
 
 ## Setting up React Navigation
 
