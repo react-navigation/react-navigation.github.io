@@ -280,6 +280,8 @@ tabBarBadgeStyle: {
 },
 ```
 
+Only supported on Android.
+
 #### `tabBarActiveTintColor`
 
 Color for the icon and label in the active tab.
