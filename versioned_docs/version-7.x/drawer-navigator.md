@@ -20,29 +20,36 @@ To use this navigator, ensure that you have [`@react-navigation/native` and its 
 npm install @react-navigation/drawer
 ```
 
-Then, you need to install and configure the libraries that are required by the drawer navigator:
+The navigator depends on [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) for gestures and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) for animations.
 
-1. First, install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) (at least version 2 or 3).
+<Tabs groupId='framework' queryString="framework">
+<TabItem value='expo' label='Expo' default>
 
-   If you have a Expo managed project, in your project directory, run:
+If you have a Expo managed project, in your project directory, run:
 
-   ```bash
-   npx expo install react-native-gesture-handler react-native-reanimated react-native-worklets
-   ```
+```bash
+npx expo install react-native-gesture-handler react-native-reanimated react-native-worklets
+```
 
-   If you have a bare React Native project, in your project directory, run:
+</TabItem>
+<TabItem value='community-cli' label='Community CLI'>
 
-   ```bash npm2yarn
-   npm install react-native-gesture-handler react-native-reanimated react-native-worklets
-   ```
+If you have a bare React Native project, in your project directory, run:
 
-2. Configure the Reanimated Babel Plugin in your project following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
+```bash npm2yarn
+npm install react-native-gesture-handler react-native-reanimated react-native-worklets
+```
 
-3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+After installation, configure the Reanimated Babel Plugin in your project following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
-   ```bash
-   npx pod-install ios
-   ```
+</TabItem>
+</Tabs>
+
+If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
+
+```bash
+npx pod-install ios
+```
 
 ## Usage
 
