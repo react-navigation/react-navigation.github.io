@@ -349,7 +349,7 @@ If you're testing on Android, run:
 npx react-native run-android
 ```
 
-If you're using Expo managed workflow and testing on Expo client, you don't need to rebuild the app. However, you will need to use the correct address and port that's printed when you run `expo start` ([see above](#setup-with-expo-projects)), e.g. `exp://127.0.0.1:19000/--/`.
+If you're using Expo managed workflow and testing on Expo client, you don't need to rebuild the app. However, you will need to use the correct address and port that's printed when you run `expo start`, e.g. `exp://127.0.0.1:19000/--/`.
 
 If you want to test with your custom scheme in your Expo app, you will need rebuild your standalone app by running `expo build:ios -t simulator` or `expo build:android` and install the resulting binaries.
 
