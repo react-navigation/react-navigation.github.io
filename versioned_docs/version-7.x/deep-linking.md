@@ -18,7 +18,12 @@ While you don't need to use the `linking` prop from React Navigation, and can ha
 
 Below, we'll go through required configurations so that the deep link integration works.
 
-## Setup with Expo projects
+## Setting up deep links
+
+<Tabs groupId='framework' queryString="framework">
+<TabItem value='expo' label='Expo' default>
+
+### Configuring URL scheme
 
 First, you will want to specify a URL scheme for your app. This corresponds to the string before `://` in a URL, so if your scheme is `example` then a link to your app would be `example://`. You can register for a scheme in your `app.json` by adding a string under the scheme key:
 
@@ -36,54 +41,24 @@ Next, install `expo-linking` which we'd need to get the deep link prefix:
 npx expo install expo-linking
 ```
 
-Then, let's configure React Navigation to use the `scheme` for parsing incoming deep links:
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+Then you can use `Linking.createURL` to get the prefix for your app:
 
 ```js
-import * as Linking from 'expo-linking';
-
-const prefix = Linking.createURL('/');
-
-/* content */
-
-function App() {
-  const linking = {
-    prefixes: [prefix],
-  };
-
-  return <Navigation linking={linking} />;
-}
+const linking = {
+  prefixes: [Linking.createURL('/'),
+};
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
+See more details below at [Configuring React Navigation](#configuring-react-navigation).
 
-```js
-import * as Linking from 'expo-linking';
-
-const prefix = Linking.createURL('/');
-
-function App() {
-  const linking = {
-    prefixes: [prefix],
-  };
-
-  return (
-    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
-      {/* content */}
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
+<details>
+<summary>Why use `Linking.createURL`?</summary>
 
 It is necessary to use `Linking.createURL` since the scheme differs between the [Expo Dev Client](https://docs.expo.dev/versions/latest/sdk/dev-client/) and standalone apps.
 
 The scheme specified in `app.json` only applies to standalone apps. In the Expo client app you can deep link using `exp://ADDRESS:PORT/--/` where `ADDRESS` is often `127.0.0.1` and `PORT` is often `19000` - the URL is printed when you run `expo start`. The `Linking.createURL` function abstracts it out so that you don't need to specify them manually.
+
+</details>
 
 If you are using universal links, you need to add your domain to the prefixes as well:
 
@@ -93,7 +68,7 @@ const linking = {
 };
 ```
 
-### Universal Links on Expo
+### Universal Links on iOS
 
 To set up iOS universal Links in your Expo app, you need to configure your [app config](https://docs.expo.dev/workflow/configuration) to include the associated domains and entitlements:
 
@@ -114,7 +89,7 @@ You will also need to setup [Associated Domains](https://developer.apple.com/doc
 
 See [Expo's documentation on iOS Universal Links](https://docs.expo.dev/linking/ios-universal-links/) for more details.
 
-### App Links on Expo
+### App Links on Android
 
 To set up Android App Links in your Expo app, you need to configure your [app config](https://docs.expo.dev/workflow/configuration) to include the `intentFilters`:
 
@@ -144,7 +119,8 @@ You will also need to [declare the association](https://developer.android.com/tr
 
 See [Expo's documentation on Android App Links](https://docs.expo.dev/linking/android-app-links/) for more details.
 
-## Set up with bare React Native projects
+</TabItem>
+<TabItem value='community-cli' label='Community CLI'>
 
 ### Setup on iOS
 
@@ -299,6 +275,63 @@ After adding them, it should look like this:
 ```
 
 Then, you need to [declare the association](https://developer.android.com/training/app-links/verify-android-applinks#web-assoc) between your website and your intent filters by hosting a Digital Asset Links JSON file.
+
+</TabItem>
+</Tabs>
+
+## Configuring React Navigation
+
+To handle deep links, you need to configure React Navigation to use the `scheme` for parsing incoming deep links:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const linking = {
+  prefixes: [
+    'example://', // Or `Linking.createURL('/')` for Expo apps
+  ],
+};
+
+function App() {
+  return <Navigation linking={linking} />;
+}
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const linking = {
+  prefixes: [
+    'example://', // Or `Linking.createURL('/')` for Expo apps
+  ],
+};
+
+function App() {
+  return (
+    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
+      {/* content */}
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+If you are using universal links, you need to add your domain to the prefixes as well:
+
+```js
+const linking = {
+  prefixes: [
+    'example://', // Or `Linking.createURL('/')` for Expo apps
+    'https://app.example.com',
+  ],
+};
+```
+
+See [configuring links](configuring-links.md) to see further details on how to configure links in React Navigation.
 
 ## Testing deep links
 

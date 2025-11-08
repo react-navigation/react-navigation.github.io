@@ -20,7 +20,10 @@ To use this navigator, ensure that you have [`@react-navigation/native` and its 
 npm install @react-navigation/material-top-tabs
 ```
 
-Then, you need to install [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) which is required by the navigator.
+The navigator depends on [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) for rendering the pages.
+
+<Tabs groupId='framework' queryString="framework">
+<TabItem value='expo' label='Expo' default>
 
 If you have a Expo managed project, in your project directory, run:
 
@@ -28,13 +31,19 @@ If you have a Expo managed project, in your project directory, run:
 npx expo install react-native-pager-view
 ```
 
+</TabItem>
+<TabItem value='community-cli' label='Community CLI'>
+
 If you have a bare React Native project, in your project directory, run:
 
 ```bash npm2yarn
 npm install react-native-pager-view
 ```
 
-If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+</TabItem>
+</Tabs>
+
+If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
 
 ```bash
 npx pod-install ios

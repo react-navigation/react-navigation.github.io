@@ -42,17 +42,20 @@ Otherwise, you can follow the instructions below to install React Navigation int
 
 ## Installation
 
-Install the required packages in your React Native project:
+The `@react-navigation/native` package contains the core functionality of React Navigation.
+
+In your project directory, run:
 
 ```bash npm2yarn
 npm install @react-navigation/native
 ```
 
-React Navigation is made up of some core utilities and those are then used by navigators to create the navigation structure in your app. Don't worry too much about this for now, it'll become clear soon enough! To frontload the installation work, let's also install and configure dependencies used by most navigators, then we can move forward with starting to write some code.
+### Installing dependencies
 
-The libraries we will install now are [`react-native-screens`](https://github.com/software-mansion/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context). If you already have these libraries installed and at the latest version, you are done here! Otherwise, read on.
+Let's also install and configure dependencies used by most navigators. The libraries we will install now are [`react-native-screens`](https://github.com/software-mansion/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
 
-### Installing dependencies into an Expo managed project
+<Tabs groupId='framework' queryString="framework">
+<TabItem value='expo' label='Expo' default>
 
 In your project directory, run:
 
@@ -60,11 +63,10 @@ In your project directory, run:
 npx expo install react-native-screens react-native-safe-area-context
 ```
 
-This will install versions of these libraries that are compatible.
+This will install versions of these libraries that are compatible with your Expo SDK version.
 
-You can now continue to ["Hello React Navigation"](hello-react-navigation.md) to start writing some code.
-
-### Installing dependencies into a bare React Native project
+</TabItem>
+<TabItem value='community-cli' label='Community CLI'>
 
 In your project directory, run:
 
@@ -72,23 +74,11 @@ In your project directory, run:
 npm install react-native-screens react-native-safe-area-context
 ```
 
-:::note
-
-You might get warnings related to peer dependencies after installation. They are usually caused by incorrect version ranges specified in some packages. You can safely ignore these warnings as long as your app builds and works as expected.
-
-:::
-
 If you're on a Mac and developing for iOS, you need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
 ```bash
 npx pod-install ios
 ```
-
-:::info
-
-When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional dependencies. If you're getting an error "Unable to resolve module", you need to install that module in your project.
-
-:::
 
 #### Configuring `react-native-screens` on Android
 
@@ -119,8 +109,8 @@ class MainActivity: ReactActivity() {
 }
 ```
 
-  </TabItem>
-  <TabItem value='java' label='Java'>
+</TabItem>
+<TabItem value='java' label='Java'>
 
 ```java
 // highlight-start
@@ -163,11 +153,20 @@ To opt out, in `AndroidManifest.xml`, in the `<application>` tag (or `<activity>
 </application>
 ```
 
+</TabItem>
+</Tabs>
+
 ## Setting up React Navigation
 
 Once you've installed and configured the dependencies, you can move on to setting up your project to use React Navigation.
 
 When using React Navigation, you configure [**navigators**](glossary-of-terms.md#navigator) in your app. Navigators handle the transition between screens in your app and provide UI such as header, tab bar etc.
+
+:::info
+
+When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional dependencies.
+
+:::
 
 There are 2 primary ways to configure the navigators:
 

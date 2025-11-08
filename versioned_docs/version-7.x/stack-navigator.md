@@ -26,41 +26,34 @@ To use this navigator, ensure that you have [`@react-navigation/native` and its 
 npm install @react-navigation/stack
 ```
 
-Then, you need to install and configure the libraries that are required by the stack navigator:
+The navigator depends on [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) for gestures and optionally [`@react-native-masked-view/masked-view`](https://github.com/react-native-masked-view/masked-view) for [UIKit style animations for the header](#headerstyleinterpolator).
 
-1. First, install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/).
+<Tabs groupId='framework' queryString="framework">
+<TabItem value='expo' label='Expo' default>
 
-   If you have a Expo managed project, in your project directory, run:
+If you have a Expo managed project, in your project directory, run:
 
-   ```bash
-   npx expo install react-native-gesture-handler
-   ```
+```bash
+npx expo install react-native-gesture-handler @react-native-masked-view/masked-view
+```
 
-   If you have a bare React Native project, in your project directory, run:
+</TabItem>
+<TabItem value='community-cli' label='Community CLI'>
 
-   ```bash npm2yarn
-   npm install react-native-gesture-handler
-   ```
+If you have a bare React Native project, in your project directory, run:
 
-2. Optionally, you can also install [`@react-native-masked-view/masked-view`](https://github.com/react-native-masked-view/masked-view). This is needed if you want to use UIKit style animations for the header ([`HeaderStyleInterpolators.forUIKit`](#headerstyleinterpolators)).
+```bash npm2yarn
+npm install react-native-gesture-handler @react-native-masked-view/masked-view
+```
 
-   If you have a Expo managed project, in your project directory, run:
+</TabItem>
+</Tabs>
 
-   ```bash
-   npx expo install @react-native-masked-view/masked-view
-   ```
+If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
 
-   If you have a bare React Native project, in your project directory, run:
-
-   ```bash npm2yarn
-   npm install @react-native-masked-view/masked-view
-   ```
-
-3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
-
-   ```bash
-   npx pod-install ios
-   ```
+```bash
+npx pod-install ios
+```
 
 ## Usage
 
