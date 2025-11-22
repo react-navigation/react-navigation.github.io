@@ -838,18 +838,29 @@ Only supported on iOS.
 Example:
 
 ```js
-  headerBackTitleStyle: {
-      fontSize: 14,
-      fontFamily: 'Georgia',
-  },
+headerBackTitleStyle: {
+  fontSize: 14,
+  fontFamily: 'Georgia',
+},
 ```
 
-#### `headerBackImageSource`
+#### `headerBackIcon`
 
-Image to display in the header as the icon in the back button. Defaults to back icon image for the platform
+Icon to display in the header as the icon in the back button. Defaults to back icon image for the platform:
 
 - A chevron on iOS
 - An arrow on Android
+
+Currently only supports image sources.
+
+Example:
+
+```js
+headerBackIcon: {
+  type: 'image',
+  source: require('./path/to/icon.png'),
+}
+```
 
 #### `headerLargeStyle`
 
