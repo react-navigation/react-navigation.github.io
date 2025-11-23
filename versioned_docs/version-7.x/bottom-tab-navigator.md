@@ -402,7 +402,7 @@ Accessibility label for the tab button. This is read by the screen reader when t
 
 #### `tabBarButton`
 
-Function which returns a React element to render as the tab bar button. It wraps the icon and label. Renders `Pressable` by default.
+Function which returns a React element to render as the tab bar button. It wraps the icon and label. Renders `PlatformPressable` by default.
 
 You can specify a custom implementation here:
 
