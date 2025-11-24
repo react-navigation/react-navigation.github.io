@@ -776,6 +776,29 @@ Defaults to `true` when `enableFreeze()` from `react-native-screens` package is 
 
 Only supported on iOS and Android.
 
+#### `scrollEdgeEffects`
+
+Configures the scroll edge effect for the _content ScrollView_ (the ScrollView that is present in first descendants chain of the Screen).
+Depending on values set, it will blur the scrolling content below certain UI elements (e.g. header items, search bar) for the specified edge of the ScrollView.
+When set in nested containers, i.e. Native Stack inside Native Bottom Tabs, or the other way around, the ScrollView will use only the innermost one's config.
+
+Edge effects can be configured for each edge separately. The following values are currently supported:
+
+- `automatic` - the automatic scroll edge effect style,
+- `hard` - a scroll edge effect with a hard cutoff and dividing line,
+- `soft` - a soft-edged scroll edge effect,
+- `hidden` - no scroll edge effect.
+
+Defaults to `automatic` for each edge.
+
+:::note
+
+Using both `blurEffect` and `scrollEdgeEffects` (>= iOS 26) simultaneously may cause overlapping effects.
+
+:::
+
+Only supported on iOS, starting from iOS 26.
+
 ### Header related options
 
 The navigator supports following options to configure the header:
@@ -1014,6 +1037,12 @@ Supported values:
 
 - `systemChromeMaterialDark`
   <img src="/assets/7.x/native-stack/headerBlurEffect-systemChromeMaterialDark.png" width="500" alt="Header blur effect systemChromeMaterialDark" />
+
+:::note
+
+Using both `blurEffect` and `scrollEdgeEffects` (>= iOS 26) simultaneously may cause overlapping effects.
+
+:::
 
 Only supported on iOS.
 
