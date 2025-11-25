@@ -13,10 +13,7 @@ import TabItem from '@theme/TabItem';
 
 ## Example
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="useRoute hook" snack
+```js name="useRoute hook" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -62,7 +59,7 @@ function ProfileScreen() {
   );
 }
 
-const Stack = createNativeStackNavigator({
+const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
   screens: {
     Home: HomeScreen,
@@ -70,7 +67,7 @@ const Stack = createNativeStackNavigator({
   },
 });
 
-const Navigation = createStaticNavigation(Stack);
+const Navigation = createStaticNavigation(RootStack);
 
 function App() {
   return <Navigation />;
@@ -78,69 +75,6 @@ function App() {
 
 export default App;
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="useRoute hook" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// codeblock-focus-start
-import { useRoute } from '@react-navigation/native';
-
-function MyText() {
-  // highlight-next-line
-  const route = useRoute();
-
-  return <Text>{route.params.caption}</Text>;
-}
-// codeblock-focus-end
-
-function HomeScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>This is the home screen of the app</Text>
-      <Button
-        onPress={() => {
-          navigation.navigate('Profile', { caption: 'Some caption' });
-        }}
-      >
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <MyText />
-    </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
-export default App;
-```
-
-</TabItem>
-</Tabs>
 
 Check how to setup `useRoute` with TypeScript [here](typescript.md#annotating-useroute).
 

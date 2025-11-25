@@ -11,32 +11,22 @@ import TabItem from '@theme/TabItem';
 
 The following actions are supported:
 
-### openDrawer
+## openDrawer
 
 The `openDrawer` action can be used to open the drawer pane.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Drawer Actions - openDrawer" snack
+```js name="Drawer Actions - openDrawer" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
-  DrawerActions,
 } from '@react-navigation/native';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 function HomeScreen() {
   const navigation = useNavigation();
-  const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -50,157 +40,28 @@ function HomeScreen() {
       >
         Open Drawer
       </Button>
-      <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-        Toggle Drawer
-      </Button>
-      <Button onPress={() => navigation.dispatch(jumpToAction)}>
-        Jump to Profile
-      </Button>
     </View>
   );
 }
 
-function ProfileScreen({ route }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile!</Text>
-      <Text>
-        {route?.params?.user ? route.params.user : 'No one'}'s profile
-      </Text>
-    </View>
-  );
-}
-
-function CustomDrawerContent(props) {
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Close drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}
-      />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
-      />
-    </DrawerContentScrollView>
-  );
-}
-
-const Drawer = createDrawerNavigator({
-  drawerContent: (props) => <CustomDrawerContent {...props} />,
+const MyDrawer = createDrawerNavigator({
   screens: {
     Home: HomeScreen,
-    Profile: ProfileScreen,
   },
 });
 
-const Navigation = createStaticNavigation(Drawer);
+const Navigation = createStaticNavigation(MyDrawer);
 
 export default function App() {
   return <Navigation />;
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Drawer Actions - openDrawer" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-import {
-  NavigationContainer,
-  DrawerActions,
-  useNavigation,
-} from '@react-navigation/native';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
-
-function HomeScreen() {
-  const navigation = useNavigation();
-  const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home!</Text>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(DrawerActions.openDrawer());
-          // codeblock-focus-end
-        }}
-      >
-        Open Drawer
-      </Button>
-      <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-        Toggle Drawer
-      </Button>
-      <Button onPress={() => navigation.dispatch(jumpToAction)}>
-        Jump to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile!</Text>
-      <Text>
-        {route?.params?.user ? route.params.user : 'No one'}'s profile
-      </Text>
-    </View>
-  );
-}
-
-function CustomDrawerContent(props) {
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Close drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}
-      />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
-      />
-    </DrawerContentScrollView>
-  );
-}
-
-const Drawer = createDrawerNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
-      >
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Profile" component={ProfileScreen} />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
-### closeDrawer
+## closeDrawer
 
 The `closeDrawer` action can be used to close the drawer pane.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Drawer Actions - closeDrawer" snack
+```js name="Drawer Actions - closeDrawer" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -218,7 +79,6 @@ import {
 
 function HomeScreen() {
   const navigation = useNavigation();
-  const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -226,28 +86,13 @@ function HomeScreen() {
       <Button onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
         Open Drawer
       </Button>
-      <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-        Toggle Drawer
-      </Button>
-      <Button onPress={() => navigation.dispatch(jumpToAction)}>
-        Jump to Profile
-      </Button>
     </View>
   );
 }
 
-function ProfileScreen({ route }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile!</Text>
-      <Text>
-        {route?.params?.user ? route.params.user : 'No one'}'s profile
-      </Text>
-    </View>
-  );
-}
+function CustomDrawerContent(props) {
+  const { navigation } = props;
 
-function CustomDrawerContent({ navigation }) {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
@@ -259,126 +104,29 @@ function CustomDrawerContent({ navigation }) {
           // codeblock-focus-end
         }}
       />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
-      />
     </DrawerContentScrollView>
   );
 }
 
-const Drawer = createDrawerNavigator({
+const MyDrawer = createDrawerNavigator({
   drawerContent: (props) => <CustomDrawerContent {...props} />,
   screens: {
     Home: HomeScreen,
-    Profile: ProfileScreen,
   },
 });
 
-const Navigation = createStaticNavigation(Drawer);
+const Navigation = createStaticNavigation(MyDrawer);
 
 export default function App() {
   return <Navigation />;
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic" >
+## toggleDrawer
 
-```js name="Drawer Actions - closeDrawer" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-import {
-  NavigationContainer,
-  DrawerActions,
-  useNavigation,
-} from '@react-navigation/native';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
+The `toggleDrawer` action can be used to toggle the drawer pane.
 
-function HomeScreen() {
-  const navigation = useNavigation();
-  const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home!</Text>
-      <Button onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-        Open Drawer
-      </Button>
-      <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-        Toggle Drawer
-      </Button>
-      <Button onPress={() => navigation.dispatch(jumpToAction)}>
-        Jump to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile!</Text>
-      <Text>
-        {route?.params?.user ? route.params.user : 'No one'}'s profile
-      </Text>
-    </View>
-  );
-}
-
-function CustomDrawerContent({ navigation }) {
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Close drawer"
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(DrawerActions.closeDrawer());
-          // codeblock-focus-end
-        }}
-      />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
-      />
-    </DrawerContentScrollView>
-  );
-}
-
-const Drawer = createDrawerNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
-      >
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Profile" component={ProfileScreen} />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
-### toggleDrawer
-
-The `toggleDrawer` action can be used to open the drawer pane if closed, or close if open.
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Drawer Actions - toggleDrawer" snack
+```js name="Drawer Actions - toggleDrawer" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -396,173 +144,57 @@ import {
 
 function HomeScreen() {
   const navigation = useNavigation();
-  const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
-      <Button onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-        Open Drawer
-      </Button>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(DrawerActions.toggleDrawer());
-          // codeblock-focus-end
-        }}
-      >
+      <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
         Toggle Drawer
       </Button>
-      <Button onPress={() => navigation.dispatch(jumpToAction)}>
-        Jump to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile!</Text>
-      <Text>
-        {route?.params?.user ? route.params.user : 'No one'}'s profile
-      </Text>
     </View>
   );
 }
 
 function CustomDrawerContent(props) {
+  const { navigation } = props;
+
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
       <DrawerItem
-        label="Close drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}
-      />
-      <DrawerItem
         label="Toggle drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(DrawerActions.toggleDrawer());
+          // codeblock-focus-end
+        }}
       />
     </DrawerContentScrollView>
   );
 }
 
-const Drawer = createDrawerNavigator({
+const MyDrawer = createDrawerNavigator({
   drawerContent: (props) => <CustomDrawerContent {...props} />,
   screens: {
     Home: HomeScreen,
-    Profile: ProfileScreen,
   },
 });
 
-const Navigation = createStaticNavigation(Drawer);
+const Navigation = createStaticNavigation(MyDrawer);
 
 export default function App() {
   return <Navigation />;
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Drawer Actions - toggleDrawer" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-import {
-  NavigationContainer,
-  DrawerActions,
-  useNavigation,
-} from '@react-navigation/native';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
-
-function HomeScreen({ navigation }) {
-  const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home!</Text>
-      <Button onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-        Open Drawer
-      </Button>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(DrawerActions.toggleDrawer());
-          // codeblock-focus-end
-        }}
-      >
-        Toggle Drawer
-      </Button>
-      <Button onPress={() => navigation.dispatch(jumpToAction)}>
-        Jump to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile!</Text>
-      <Text>
-        {route?.params?.user ? route.params.user : 'No one'}'s profile
-      </Text>
-    </View>
-  );
-}
-
-function CustomDrawerContent(props) {
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Close drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}
-      />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
-      />
-    </DrawerContentScrollView>
-  );
-}
-
-const Drawer = createDrawerNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
-      >
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Profile" component={ProfileScreen} />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
-### jumpTo
+## jumpTo
 
 The `jumpTo` action can be used to jump to an existing route in the drawer navigator.
 
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to pass to the destination route.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Drawer Actions - jumpTo" snack
+```js name="Drawer Actions - jumpTo" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -571,30 +203,20 @@ import {
   useNavigation,
   DrawerActions,
 } from '@react-navigation/native';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 function HomeScreen() {
   const navigation = useNavigation();
-  const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
-      <Button onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-        Open Drawer
-      </Button>
-      <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-        Toggle Drawer
-      </Button>
       <Button
         onPress={() => {
           // codeblock-focus-start
-          navigation.dispatch(jumpToAction);
+          navigation.dispatch(
+            DrawerActions.jumpTo('Profile', { user: 'Satya' })
+          );
           // codeblock-focus-end
         }}
       >
@@ -608,130 +230,21 @@ function ProfileScreen({ route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
-      <Text>
-        {route?.params?.user ? route.params.user : 'No one'}'s profile
-      </Text>
+      <Text>{route?.params?.user ? route.params.user : 'Noone'}'s profile</Text>
     </View>
   );
 }
 
-function CustomDrawerContent(props) {
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Close drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}
-      />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
-      />
-    </DrawerContentScrollView>
-  );
-}
-
-const Drawer = createDrawerNavigator({
-  drawerContent: (props) => <CustomDrawerContent {...props} />,
+const MyDrawer = createDrawerNavigator({
   screens: {
     Home: HomeScreen,
     Profile: ProfileScreen,
   },
 });
 
-const Navigation = createStaticNavigation(Drawer);
+const Navigation = createStaticNavigation(MyDrawer);
 
 export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Drawer Actions - jumpTo" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-import {
-  NavigationContainer,
-  DrawerActions,
-  useNavigation,
-} from '@react-navigation/native';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
-
-function HomeScreen({ navigation }) {
-  const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home!</Text>
-      <Button onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-        Open Drawer
-      </Button>
-      <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-        Toggle Drawer
-      </Button>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(jumpToAction);
-          // codeblock-focus-end
-        }}
-      >
-        Jump to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile!</Text>
-      <Text>
-        {route?.params?.user ? route.params.user : 'No one'}'s profile
-      </Text>
-    </View>
-  );
-}
-
-function CustomDrawerContent(props) {
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Close drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}
-      />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
-      />
-    </DrawerContentScrollView>
-  );
-}
-
-const Drawer = createDrawerNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
-      >
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Profile" component={ProfileScreen} />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>

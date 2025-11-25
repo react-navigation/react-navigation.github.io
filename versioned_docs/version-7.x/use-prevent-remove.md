@@ -18,10 +18,7 @@ The callback receives a `data` object with the `action` that triggered the remov
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="usePreventRemove hook" snack
+```js name="usePreventRemove hook" snack static2dynamic
 import * as React from 'react';
 import { Alert, View, TextInput, Platform, StyleSheet } from 'react-native';
 import {
@@ -127,126 +124,6 @@ const styles = StyleSheet.create({
 });
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="usePreventRemove hook" snack
-import * as React from 'react';
-import { Alert, View, TextInput, Platform, StyleSheet } from 'react-native';
-import {
-  NavigationContainer,
-  useNavigation,
-  usePreventRemove,
-} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Button } from '@react-navigation/elements';
-
-// codeblock-focus-start
-const EditTextScreen = () => {
-  const navigation = useNavigation();
-  const [text, setText] = React.useState('');
-
-  const hasUnsavedChanges = Boolean(text);
-
-  usePreventRemove(hasUnsavedChanges, ({ data }) => {
-    if (Platform.OS === 'web') {
-      // Alert is not supported on web, so we can use confirm
-      const discard = confirm(
-        'You have unsaved changes. Discard them and leave the screen?'
-      );
-
-      if (discard) {
-        navigation.dispatch(data.action);
-      }
-    } else {
-      // Prompt the user before leaving the screen
-      Alert.alert(
-        'Discard changes?',
-        'You have unsaved changes. Discard them and leave the screen?',
-        [
-          {
-            text: "Don't leave",
-            style: 'cancel',
-            onPress: () => {
-              // Do nothingP
-            },
-          },
-          {
-            text: 'Discard',
-            style: 'destructive',
-            onPress: () => navigation.dispatch(data.action),
-          },
-        ]
-      );
-    }
-  });
-
-  return (
-    <View style={styles.content}>
-      <TextInput
-        autoFocus
-        style={styles.input}
-        value={text}
-        placeholder="Type something…"
-        onChangeText={setText}
-      />
-    </View>
-  );
-};
-// codeblock-focus-end
-
-const HomeScreen = () => {
-  const navigation = useNavigation();
-
-  return (
-    <View style={styles.buttons}>
-      <Button onPress={() => navigation.push('EditText')} style={styles.button}>
-        Push EditText
-      </Button>
-    </View>
-  );
-};
-
-const Stack = createStackNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="EditText" component={EditTextScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
-const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-    padding: 16,
-  },
-  input: {
-    margin: 8,
-    padding: 10,
-    borderRadius: 3,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(0, 0, 0, 0.08)',
-    backgroundColor: 'white',
-  },
-  buttons: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 8,
-  },
-  button: {
-    margin: 8,
-  },
-});
-```
-
-</TabItem>
-</Tabs>
-
 <video playsInline autoPlay muted loop>
   <source src="/assets/behavior/prevent-closing.mp4" />
 </video>
@@ -279,3 +156,4 @@ Doing so has several benefits:
 
 - This approach still works if the app is closed or crashes unexpectedly.
 - It's less intrusive to the user as they can still navigate away from the screen to check something and return without losing the data.
+```
