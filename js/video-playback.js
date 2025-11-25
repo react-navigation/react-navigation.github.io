@@ -42,5 +42,3 @@ document.addEventListener('DOMContentLoaded', () => {
     subtree: true,
   });
 });
-
-console.log('Video playback script loaded');
