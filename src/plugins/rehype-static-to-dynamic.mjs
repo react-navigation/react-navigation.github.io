@@ -53,8 +53,7 @@ function convertStaticToDynamic(code) {
     parser: require('recast/parsers/babel-ts'),
   });
 
-  let navigatorInfo = null;
-  let navigatorDeclarationIndex = -1;
+  let navigatorInfos = [];
   let staticNavigationIndices = [];
 
   // First pass: collect information and transform imports
@@ -125,7 +124,7 @@ function convertStaticToDynamic(code) {
               const navigatorType = declarator.init.callee.name; // e.g., "createStackNavigator"
               const config = declarator.init.arguments[0];
 
-              navigatorInfo = {
+              navigatorInfos.push({
                 componentName: navigatorVariable, // Keep original name for the component
                 type: navigatorType,
                 config: config,
@@ -133,9 +132,8 @@ function convertStaticToDynamic(code) {
                 leadingComments: node.comments || [],
                 trailingComments: node.trailingComments || [],
                 originalNode: node, // Keep reference to original node
-              };
-
-              navigatorDeclarationIndex = index;
+                index: index,
+              });
             }
 
             // Find createStaticNavigation usage
@@ -159,10 +157,13 @@ function convertStaticToDynamic(code) {
         t.isJSXIdentifier(path.node.openingElement.name) &&
         path.node.openingElement.name.name === 'Navigation' &&
         path.node.children.length === 0 &&
-        navigatorInfo
+        navigatorInfos.length > 0
       ) {
         // Preserve any props passed to Navigation
         const navigationProps = path.node.openingElement.attributes || [];
+
+        // Use the last navigator (which is passed to createStaticNavigation)
+        const mainNavigator = navigatorInfos[navigatorInfos.length - 1];
 
         // Replace with <NavigationContainer><MyStack /></NavigationContainer>
         // Pass the props from Navigation to NavigationContainer
@@ -176,7 +177,7 @@ function convertStaticToDynamic(code) {
             t.jsxText('\n  '),
             t.jsxElement(
               t.jsxOpeningElement(
-                t.jsxIdentifier(navigatorInfo.componentName),
+                t.jsxIdentifier(mainNavigator.componentName),
                 [],
                 true
               ),
@@ -197,108 +198,137 @@ function convertStaticToDynamic(code) {
   });
 
   // Second pass: manually transform the AST body
-  if (navigatorInfo && navigatorDeclarationIndex !== -1) {
-    const {
-      componentName,
-      type,
-      config,
-      leadingComments,
-      trailingComments,
-      originalNode,
-    } = navigatorInfo;
+  // Process all navigators
+  if (navigatorInfos.length > 0) {
+    const replacements = [];
 
-    // Extract navigator constant name from the type
-    // Get the last word before "Navigator"
-    // e.g., "createStackNavigator" -> "Stack"
-    // e.g., "createNativeStackNavigator" -> "Stack"
-    // e.g., "createBottomTabNavigator" -> "Tab"
-    // e.g., "createMaterialTopTabNavigator" -> "Tab"
-    const withoutCreate = type.replace(/^create/, ''); // "StackNavigator"
-    const withoutNavigator = withoutCreate.replace(/Navigator$/, ''); // "Stack"
-    // Find the last capitalized word (e.g., "NativeStack" -> "Stack", "MaterialTopTab" -> "Tab")
-    const match = withoutNavigator.match(/([A-Z][a-z]+)$/);
-    const navigatorConstName = match ? match[1] : withoutNavigator;
+    navigatorInfos.forEach((navigatorInfo) => {
+      const {
+        componentName,
+        type,
+        config,
+        leadingComments,
+        trailingComments,
+        originalNode,
+        index,
+      } = navigatorInfo;
 
-    // Parse the config object
-    const parsedConfig = parseNavigatorConfig(config);
+      // Extract navigator constant name from the type
+      // Get the last word before "Navigator"
+      // e.g., "createStackNavigator" -> "Stack"
+      // e.g., "createNativeStackNavigator" -> "Stack"
+      // e.g., "createBottomTabNavigator" -> "Tab"
+      // e.g., "createMaterialTopTabNavigator" -> "Tab"
+      const withoutCreate = type.replace(/^create/, ''); // "StackNavigator"
+      const withoutNavigator = withoutCreate.replace(/Navigator$/, ''); // "Stack"
+      // Find the last capitalized word (e.g., "NativeStack" -> "Stack", "MaterialTopTab" -> "Tab")
+      const match = withoutNavigator.match(/([A-Z][a-z]+)$/);
+      const navigatorConstName = match ? match[1] : withoutNavigator;
 
-    // Create: const Stack = createStackNavigator();
-    const navigatorConstDeclaration = t.variableDeclaration('const', [
-      t.variableDeclarator(
-        t.identifier(navigatorConstName),
-        t.callExpression(t.identifier(type), [])
-      ),
-    ]);
+      // Parse the config object
+      const parsedConfig = parseNavigatorConfig(config);
 
-    // Create the navigator component function (e.g., function MyStack() {...})
-    const navigatorComponent = createNavigatorComponent(
-      componentName, // function name: MyStack
-      navigatorConstName, // Stack.Navigator, Stack.Screen
-      parsedConfig
-    );
+      // Create: const Stack = createStackNavigator();
+      const navigatorConstDeclaration = t.variableDeclaration('const', [
+        t.variableDeclarator(
+          t.identifier(navigatorConstName),
+          t.callExpression(t.identifier(type), [])
+        ),
+      ]);
 
-    // Preserve all comments from the original node
-    if (originalNode.comments && originalNode.comments.length > 0) {
-      // Separate leading and trailing comments
-      const leadingComments = [];
-      const trailingCommentsFromNode = [];
+      // Create the navigator component function (e.g., function MyStack() {...})
+      const navigatorComponent = createNavigatorComponent(
+        componentName, // function name: MyStack
+        navigatorConstName, // Stack.Navigator, Stack.Screen
+        parsedConfig
+      );
 
-      originalNode.comments.forEach((comment) => {
-        // Recast marks comments with leading/trailing properties
-        if (comment.trailing) {
-          trailingCommentsFromNode.push(comment);
-        } else {
-          leadingComments.push(comment);
-        }
-      });
+      // Preserve all comments from the original node
+      if (originalNode.comments && originalNode.comments.length > 0) {
+        // Separate leading and trailing comments
+        const leadingComments = [];
+        const trailingCommentsFromNode = [];
 
-      // Attach leading comments to the const declaration
-      if (leadingComments.length > 0) {
-        // Mark as leading comments for proper placement
-        leadingComments.forEach((c) => {
-          c.leading = true;
-          c.trailing = false;
+        originalNode.comments.forEach((comment) => {
+          // Recast marks comments with leading/trailing properties
+          if (comment.trailing) {
+            trailingCommentsFromNode.push(comment);
+          } else {
+            leadingComments.push(comment);
+          }
         });
-        navigatorConstDeclaration.comments = leadingComments;
+
+        // Attach leading comments to the const declaration
+        if (leadingComments.length > 0) {
+          // Mark as leading comments for proper placement
+          leadingComments.forEach((c) => {
+            c.leading = true;
+            c.trailing = false;
+          });
+          navigatorConstDeclaration.comments = leadingComments;
+        }
+
+        // Attach trailing comments to the function component (after the function body)
+        if (trailingCommentsFromNode.length > 0) {
+          // Mark as trailing comments for proper placement
+          trailingCommentsFromNode.forEach((c) => {
+            c.leading = false;
+            c.trailing = true;
+          });
+          navigatorComponent.comments = trailingCommentsFromNode;
+        }
       }
 
-      // Attach trailing comments to the function component (after the function body)
-      if (trailingCommentsFromNode.length > 0) {
-        // Mark as trailing comments for proper placement
-        trailingCommentsFromNode.forEach((c) => {
+      // Also check for trailingComments property
+      if (trailingComments && trailingComments.length > 0) {
+        trailingComments.forEach((c) => {
           c.leading = false;
           c.trailing = true;
         });
-        navigatorComponent.comments = trailingCommentsFromNode;
+        navigatorComponent.comments = [
+          ...(navigatorComponent.comments || []),
+          ...trailingComments,
+        ];
       }
-    }
 
-    // Also check for trailingComments property
-    if (trailingComments && trailingComments.length > 0) {
-      trailingComments.forEach((c) => {
-        c.leading = false;
-        c.trailing = true;
+      // Store the replacement info
+      replacements.push({
+        index: index,
+        navigatorConstDeclaration,
+        navigatorComponent,
       });
-      navigatorComponent.comments = [
-        ...(navigatorComponent.comments || []),
-        ...trailingComments,
-      ];
-    }
+    });
 
-    // Replace the declaration by manipulating the body array directly
+    // Replace declarations in reverse order to maintain correct indices
+    replacements.sort((a, b) => b.index - a.index);
+
     const programBody = ast.program.body;
-    programBody.splice(
-      navigatorDeclarationIndex,
-      1,
-      navigatorConstDeclaration,
-      navigatorComponent
+    let indexShift = 0;
+
+    replacements.forEach(
+      ({ index, navigatorConstDeclaration, navigatorComponent }) => {
+        // Replace 1 node with 2 nodes
+        programBody.splice(
+          index,
+          1,
+          navigatorConstDeclaration,
+          navigatorComponent
+        );
+
+        // Track the shift for adjusting staticNavigation indices
+        indexShift++;
+      }
     );
 
     // Adjust indices for createStaticNavigation declarations
-    // Since we replaced 1 node with 2 nodes, indices after this point shift by +1
-    staticNavigationIndices = staticNavigationIndices.map((idx) =>
-      idx > navigatorDeclarationIndex ? idx + 1 : idx
-    );
+    // Account for the fact that we replaced each navigator (1 node) with 2 nodes
+    staticNavigationIndices = staticNavigationIndices.map((idx) => {
+      let shift = 0;
+      replacements.forEach(({ index }) => {
+        if (idx > index) shift++;
+      });
+      return idx + shift;
+    });
   }
 
   // Remove createStaticNavigation declarations (in reverse order to maintain indices)
