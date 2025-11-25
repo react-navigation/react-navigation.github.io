@@ -201,6 +201,7 @@ function convertStaticToDynamic(code) {
   // Process all navigators
   if (navigatorInfos.length > 0) {
     const replacements = [];
+    const navigatorConstNames = new Map(); // Track usage of navigator constant names
 
     navigatorInfos.forEach((navigatorInfo) => {
       const {
@@ -223,7 +224,19 @@ function convertStaticToDynamic(code) {
       const withoutNavigator = withoutCreate.replace(/Navigator$/, ''); // "Stack"
       // Find the last capitalized word (e.g., "NativeStack" -> "Stack", "MaterialTopTab" -> "Tab")
       const match = withoutNavigator.match(/([A-Z][a-z]+)$/);
-      const navigatorConstName = match ? match[1] : withoutNavigator;
+      const baseNavigatorConstName = match ? match[1] : withoutNavigator;
+
+      // Handle multiple navigators of the same type by adding suffixes (A, B, C, etc.)
+      let navigatorConstName = baseNavigatorConstName;
+      const currentCount = navigatorConstNames.get(baseNavigatorConstName) || 0;
+
+      if (currentCount > 0) {
+        // Add suffix: A for second occurrence, B for third, etc.
+        const suffix = String.fromCharCode(65 + currentCount - 1); // 65 is 'A'
+        navigatorConstName = baseNavigatorConstName + suffix;
+      }
+
+      navigatorConstNames.set(baseNavigatorConstName, currentCount + 1);
 
       // Parse the config object
       const parsedConfig = parseNavigatorConfig(config);
@@ -358,6 +371,7 @@ function convertStaticToDynamic(code) {
 function parseNavigatorConfig(configNode) {
   const result = {
     screens: {},
+    groups: {}, // Store groups
     navigatorProps: {}, // Store all navigator-level props
   };
 
@@ -372,7 +386,79 @@ function parseNavigatorConfig(configNode) {
 
     const keyName = prop.key.name || prop.key.value;
 
-    if (keyName === 'screens' && t.isObjectExpression(prop.value)) {
+    if (keyName === 'groups' && t.isObjectExpression(prop.value)) {
+      // Parse groups object
+      prop.value.properties.forEach((groupProp) => {
+        if (!t.isObjectProperty(groupProp)) return;
+
+        const groupKey = groupProp.key.name || groupProp.key.value;
+        const groupValue = groupProp.value;
+
+        if (t.isObjectExpression(groupValue)) {
+          const groupConfig = {
+            screens: {},
+            groupProps: {},
+          };
+
+          groupValue.properties.forEach((groupConfigProp) => {
+            if (!t.isObjectProperty(groupConfigProp)) return;
+
+            const configKey =
+              groupConfigProp.key.name || groupConfigProp.key.value;
+
+            if (
+              configKey === 'screens' &&
+              t.isObjectExpression(groupConfigProp.value)
+            ) {
+              // Parse screens within the group
+              groupConfigProp.value.properties.forEach((screenProp) => {
+                if (!t.isObjectProperty(screenProp)) return;
+
+                const screenName = screenProp.key.name || screenProp.key.value;
+                const screenValue = screenProp.value;
+
+                if (t.isIdentifier(screenValue)) {
+                  groupConfig.screens[screenName] = {
+                    component: screenValue.name,
+                    screenProps: {},
+                  };
+                } else if (t.isObjectExpression(screenValue)) {
+                  let component = null;
+                  const screenProps = {};
+
+                  screenValue.properties.forEach((screenConfigProp) => {
+                    if (!t.isObjectProperty(screenConfigProp)) return;
+
+                    const key =
+                      screenConfigProp.key.name || screenConfigProp.key.value;
+
+                    if (
+                      key === 'screen' &&
+                      t.isIdentifier(screenConfigProp.value)
+                    ) {
+                      component = screenConfigProp.value.name;
+                    } else {
+                      screenProps[key] = screenConfigProp.value;
+                    }
+                  });
+
+                  groupConfig.screens[screenName] = { component, screenProps };
+                }
+              });
+            } else {
+              // Store other group-level props (screenOptions, screenLayout, etc.)
+              groupConfig.groupProps[configKey] = {
+                key: configKey,
+                value: groupConfigProp.value,
+                isStringLiteral: t.isStringLiteral(groupConfigProp.value),
+              };
+            }
+          });
+
+          result.groups[groupKey] = groupConfig;
+        }
+      });
+    } else if (keyName === 'screens' && t.isObjectExpression(prop.value)) {
       // Parse screens object
       prop.value.properties.forEach((screenProp) => {
         if (!t.isObjectProperty(screenProp)) return;
@@ -455,6 +541,107 @@ function createNavigatorComponent(functionName, componentName, config) {
   // Create screen elements
   const screenElements = [];
 
+  // Handle groups if they exist
+  if (Object.keys(config.groups).length > 0) {
+    Object.entries(config.groups).forEach(([groupKey, groupConfig]) => {
+      const groupProps = [
+        t.jsxAttribute(
+          t.jsxIdentifier('navigationKey'),
+          t.stringLiteral(groupKey)
+        ),
+      ];
+
+      // Add group-level props (screenOptions, screenLayout, etc.)
+      Object.values(groupConfig.groupProps).forEach((propInfo) => {
+        if (propInfo.isStringLiteral) {
+          groupProps.push(
+            t.jsxAttribute(
+              t.jsxIdentifier(propInfo.key),
+              t.stringLiteral(propInfo.value.value)
+            )
+          );
+        } else {
+          groupProps.push(
+            t.jsxAttribute(
+              t.jsxIdentifier(propInfo.key),
+              t.jsxExpressionContainer(propInfo.value)
+            )
+          );
+        }
+      });
+
+      // Create screens for this group
+      const groupScreenElements = [];
+
+      Object.entries(groupConfig.screens).forEach(
+        ([screenName, screenConfig]) => {
+          const screenProps = [
+            t.jsxAttribute(
+              t.jsxIdentifier('name'),
+              t.stringLiteral(screenName)
+            ),
+            t.jsxAttribute(
+              t.jsxIdentifier('component'),
+              t.jsxExpressionContainer(t.identifier(screenConfig.component))
+            ),
+          ];
+
+          // Add all screen-level props
+          Object.entries(screenConfig.screenProps).forEach(([key, value]) => {
+            screenProps.push(
+              t.jsxAttribute(
+                t.jsxIdentifier(key),
+                t.jsxExpressionContainer(value)
+              )
+            );
+          });
+
+          const screenElement = t.jsxElement(
+            t.jsxOpeningElement(
+              t.jsxMemberExpression(
+                t.jsxIdentifier(componentName),
+                t.jsxIdentifier('Screen')
+              ),
+              screenProps,
+              true
+            ),
+            null,
+            [],
+            true
+          );
+
+          groupScreenElements.push(t.jsxText('\n    '));
+          groupScreenElements.push(screenElement);
+        }
+      );
+
+      groupScreenElements.push(t.jsxText('\n  '));
+
+      // Create the Group element
+      const groupElement = t.jsxElement(
+        t.jsxOpeningElement(
+          t.jsxMemberExpression(
+            t.jsxIdentifier(componentName),
+            t.jsxIdentifier('Group')
+          ),
+          groupProps
+        ),
+        t.jsxClosingElement(
+          t.jsxMemberExpression(
+            t.jsxIdentifier(componentName),
+            t.jsxIdentifier('Group')
+          )
+        ),
+        groupScreenElements,
+        false
+      );
+
+      screenElements.push(t.jsxText('\n  '));
+      screenElements.push(groupElement);
+    });
+  }
+
+  // Handle standalone screens (not in groups)
   Object.entries(config.screens).forEach(([screenName, screenConfig]) => {
     const screenProps = [
       t.jsxAttribute(t.jsxIdentifier('name'), t.stringLiteral(screenName)),
