@@ -161,9 +161,16 @@ function convertStaticToDynamic(code) {
         path.node.children.length === 0 &&
         navigatorInfo
       ) {
+        // Preserve any props passed to Navigation
+        const navigationProps = path.node.openingElement.attributes || [];
+
         // Replace with <NavigationContainer><MyStack /></NavigationContainer>
+        // Pass the props from Navigation to NavigationContainer
         const newElement = t.jsxElement(
-          t.jsxOpeningElement(t.jsxIdentifier('NavigationContainer'), []),
+          t.jsxOpeningElement(
+            t.jsxIdentifier('NavigationContainer'),
+            navigationProps
+          ),
           t.jsxClosingElement(t.jsxIdentifier('NavigationContainer')),
           [
             t.jsxText('\n  '),
