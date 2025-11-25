@@ -2202,6 +2202,95 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ffprobe-installer/darwin-arm64@npm:5.0.1":
+  version: 5.0.1
+  resolution: "@ffprobe-installer/darwin-arm64@npm:5.0.1"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@ffprobe-installer/darwin-x64@npm:5.1.0":
+  version: 5.1.0
+  resolution: "@ffprobe-installer/darwin-x64@npm:5.1.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@ffprobe-installer/ffprobe@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "@ffprobe-installer/ffprobe@npm:2.1.2"
+  dependencies:
+    "@ffprobe-installer/darwin-arm64": "npm:5.0.1"
+    "@ffprobe-installer/darwin-x64": "npm:5.1.0"
+    "@ffprobe-installer/linux-arm": "npm:5.2.0"
+    "@ffprobe-installer/linux-arm64": "npm:5.2.0"
+    "@ffprobe-installer/linux-ia32": "npm:5.2.0"
+    "@ffprobe-installer/linux-x64": "npm:5.2.0"
+    "@ffprobe-installer/win32-ia32": "npm:5.1.0"
+    "@ffprobe-installer/win32-x64": "npm:5.1.0"
+  dependenciesMeta:
+    "@ffprobe-installer/darwin-arm64":
+      optional: true
+    "@ffprobe-installer/darwin-x64":
+      optional: true
+    "@ffprobe-installer/linux-arm":
+      optional: true
+    "@ffprobe-installer/linux-arm64":
+      optional: true
+    "@ffprobe-installer/linux-ia32":
+      optional: true
+    "@ffprobe-installer/linux-x64":
+      optional: true
+    "@ffprobe-installer/win32-ia32":
+      optional: true
+    "@ffprobe-installer/win32-x64":
+      optional: true
+  checksum: d3a0e472c9a31bffe10facf6ee0ce4520b4df13d1cf3fdcf7e6ead367f895a348633481c6010c0d9f30a950fe89f791aade9755360047c8dd48d098dccd8414b
+  languageName: node
+  linkType: hard
+
+"@ffprobe-installer/linux-arm64@npm:5.2.0":
+  version: 5.2.0
+  resolution: "@ffprobe-installer/linux-arm64@npm:5.2.0"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@ffprobe-installer/linux-arm@npm:5.2.0":
+  version: 5.2.0
+  resolution: "@ffprobe-installer/linux-arm@npm:5.2.0"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@ffprobe-installer/linux-ia32@npm:5.2.0":
+  version: 5.2.0
+  resolution: "@ffprobe-installer/linux-ia32@npm:5.2.0"
+  conditions: os=linux & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@ffprobe-installer/linux-x64@npm:5.2.0":
+  version: 5.2.0
+  resolution: "@ffprobe-installer/linux-x64@npm:5.2.0"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@ffprobe-installer/win32-ia32@npm:5.1.0":
+  version: 5.1.0
+  resolution: "@ffprobe-installer/win32-ia32@npm:5.1.0"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@ffprobe-installer/win32-x64@npm:5.1.0":
+  version: 5.1.0
+  resolution: "@ffprobe-installer/win32-x64@npm:5.1.0"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@hapi/hoek@npm:^9.0.0":
   version: 9.3.0
   resolution: "@hapi/hoek@npm:9.3.0"
@@ -10517,6 +10606,7 @@ __metadata:
     "@docusaurus/plugin-google-analytics": "npm:3.6.1"
     "@docusaurus/preset-classic": "npm:3.6.1"
     "@docusaurus/remark-plugin-npm2yarn": "npm:3.6.1"
+    "@ffprobe-installer/ffprobe": "npm:^2.1.2"
     "@octokit/graphql": "npm:^7.1.0"
     "@react-navigation/core": "npm:^7.0.4"
     escape-html: "npm:^1.0.3"

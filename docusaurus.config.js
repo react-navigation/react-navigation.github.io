@@ -1,6 +1,7 @@
 import remarkNpm2Yarn from '@docusaurus/remark-plugin-npm2yarn';
 import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.mjs';
 import rehypeStaticToDynamic from './src/plugins/rehype-static-to-dynamic.mjs';
+import rehypeVideoAspectRatio from './src/plugins/rehype-video-aspect-ratio.mjs';
 
 export default {
   future: {
@@ -149,6 +150,7 @@ export default {
               rehypeCodeblockMeta,
               { match: { snack: true, lang: true, tabs: true } },
             ],
+            [rehypeVideoAspectRatio, { staticDir: 'static' }],
             rehypeStaticToDynamic,
           ],
         },
