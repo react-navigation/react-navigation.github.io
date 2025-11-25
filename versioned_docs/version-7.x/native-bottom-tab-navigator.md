@@ -38,10 +38,7 @@ The navigator requires React Native 0.79 or above is required. If you're using [
 
 To use this navigator, import it from `@react-navigation/bottom-tabs/unstable`:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Bottom Tab Navigator"
+```js name="Bottom Tab Navigator" static2dynamic
 import { createNativeBottomTabNavigator } from '@react-navigation/bottom-tabs/unstable';
 
 const MyTabs = createNativeBottomTabNavigator({
@@ -51,27 +48,6 @@ const MyTabs = createNativeBottomTabNavigator({
   },
 });
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Bottom Tab Navigator"
-import { createNativeBottomTabNavigator } from '@react-navigation/bottom-tabs/unstable';
-
-const Tab = createNativeBottomTabNavigator();
-
-function MyTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 ## Notes
 

@@ -31,9 +31,11 @@
     "react-simple-code-editor": "^0.14.1"
   },
   "devDependencies": {
+    "@babel/types": "^7.28.5",
     "markdownlint": "^0.36.1",
     "markdownlint-cli2": "^0.14.0",
-    "prettier": "^3.3.3"
+    "prettier": "^3.6.2",
+    "recast": "^0.23.11"
   },
   "resolutions": {
     "@rspack/core": "1.0.14"

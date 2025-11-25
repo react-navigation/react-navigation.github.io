@@ -1,5 +1,6 @@
 import remarkNpm2Yarn from '@docusaurus/remark-plugin-npm2yarn';
 import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.mjs';
+import rehypeStaticToDynamic from './src/plugins/rehype-static-to-dynamic.mjs';
 
 export default {
   future: {
@@ -148,6 +149,7 @@ export default {
               rehypeCodeblockMeta,
               { match: { snack: true, lang: true, tabs: true } },
             ],
+            rehypeStaticToDynamic,
           ],
         },
         blog: {

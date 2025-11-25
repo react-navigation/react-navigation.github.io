@@ -28,7 +28,6 @@ While Web support works out of the box, there are some things to configure to en
 4. **Adapt to web-specific behavior**
 
    Depending on your app's requirements and design, you may also want to tweak some of the navigators' behavior on the web. For example:
-
    - Change `backBehavior` to `fullHistory` for [tabs](bottom-tab-navigator.md#backbehavior) and [drawer](drawer-navigator.md#backbehavior) on the web to always push a new entry to the browser history.
    - Use sidebars on larger screens instead of [bottom tabs](bottom-tab-navigator.md#tabbarposition) - while not specific to web, responsive design much more important on the web.
 

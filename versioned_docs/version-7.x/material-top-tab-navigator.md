@@ -53,10 +53,7 @@ npx pod-install ios
 
 To use this navigator, import it from `@react-navigation/material-top-tabs`:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Material Top Tab Navigator" snack
+```js name="Material Top Tab Navigator" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -108,65 +105,6 @@ export default function App() {
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Material Top Tab Navigator" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
-const Tab = createMaterialTopTabNavigator();
-
-function MyTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
 ## API Definition
 
 ### Props
@@ -217,10 +155,7 @@ Function that returns a React element to display as the tab bar.
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Custom Tab Bar" snack
+```js name="Custom Tab Bar" snack static2dynamic
 import * as React from 'react';
 import { Animated, View, Platform, Text } from 'react-native';
 import {
@@ -327,124 +262,6 @@ export default function App() {
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Custom Tab Bar" snack
-import * as React from 'react';
-import { Animated, View, TouchableOpacity, Platform, Text } from 'react-native';
-import {
-  NavigationContainer,
-  useLinkBuilder,
-  useTheme,
-} from '@react-navigation/native';
-import { PlatformPressable } from '@react-navigation/elements';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Settings Screen</Text>
-    </View>
-  );
-}
-
-// codeblock-focus-start
-function MyTabBar({ state, descriptors, navigation, position }) {
-  const { colors } = useTheme();
-  const { buildHref } = useLinkBuilder();
-
-  return (
-    <View style={{ flexDirection: 'row' }}>
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-              ? options.title
-              : route.name;
-
-        const isFocused = state.index === index;
-
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-            canPreventDefault: true,
-          });
-
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name, route.params);
-          }
-        };
-
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-          });
-        };
-
-        const inputRange = state.routes.map((_, i) => i);
-        const opacity = position.interpolate({
-          inputRange,
-          outputRange: inputRange.map((i) => (i === index ? 1 : 0.5)),
-        });
-
-        return (
-          <PlatformPressable
-            key={route.key}
-            href={buildHref(route.name, route.params)}
-            aria-label={options.tabBarAccessibilityLabel}
-            aria-selected={isFocused}
-            testID={options.tabBarButtonTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            style={{ flex: 1, padding: 16, alignItems: 'center' }}
-          >
-            <Animated.Text style={{ opacity, color: colors.text }}>
-              {label}
-            </Animated.Text>
-          </PlatformPressable>
-        );
-      })}
-    </View>
-  );
-}
-
-const Tab = createMaterialTopTabNavigator();
-
-function MyTabs() {
-  return (
-    <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
-  );
-}
-// codeblock-focus-end
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
 This example will render a basic tab bar with labels.
 
 Note that you **cannot** use the `useNavigation` hook inside the `tabBar` since `useNavigation` is only available inside screens. You get a `navigation` prop for your `tabBar` which you can use instead:
@@ -471,10 +288,7 @@ The following [options](screen-options.md) can be used to configure the screens 
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Tab Navigator Options" snack
+```js name="Tab Navigator Options" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -527,73 +341,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Tab Navigator Options" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Settings Screen</Text>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-}
-
-// codeblock-focus-start
-const Tab = createMaterialTopTabNavigator();
-
-function MyTabs() {
-  return (
-    <Tab.Navigator
-      // highlight-start
-      screenOptions={{
-        tabBarLabelStyle: { fontSize: 12 },
-        tabBarItemStyle: { width: 100 },
-        tabBarStyle: { backgroundColor: 'powderblue' },
-      }}
-      // highlight-end
-    >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-}
-// codeblock-focus-end
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 #### `title`
 
@@ -726,10 +473,7 @@ This event is fired when the user presses the tab button for the current screen 
 
 To prevent the default behavior, you can call `event.preventDefault`:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Tab Press Event" snack
+```js name="Tab Press Event" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -787,73 +531,6 @@ export default function App() {
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Tab Press Event" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
-const Tab = createMaterialTopTabNavigator();
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  // codeblock-focus-start
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('tabPress', (e) => {
-      // Prevent default behavior
-      e.preventDefault();
-
-      // Do something manually
-      // ...
-    });
-
-    return unsubscribe;
-  }, [navigation]);
-  // codeblock-focus-end
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Text style={{ marginTop: 10, color: 'gray' }}>
-        Tab press event is prevented
-      </Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Settings Screen</Text>
-    </View>
-  );
-}
-
-function MyTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
 If you have a custom tab bar, make sure to emit this event.
 
 :::note
@@ -889,10 +566,7 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to pass to the destination route.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Tab Navigator - jumpTo" snack
+```js name="Tab Navigator - jumpTo" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -946,70 +620,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Tab Navigator - jumpTo" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
-const Tab = createMaterialTopTabNavigator();
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.jumpTo('Profile', { name: 'Michaś' })
-          // codeblock-focus-end
-        }
-      >
-        Jump to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      {route.params?.name && (
-        <Text style={{ marginTop: 10 }}>Name: {route.params.name}</Text>
-      )}
-    </View>
-  );
-}
-
-function MyTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 ### Hooks
 
