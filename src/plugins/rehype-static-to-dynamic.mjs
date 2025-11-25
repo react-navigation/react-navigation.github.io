@@ -307,6 +307,11 @@ function convertStaticToDynamic(code) {
     trailingComma: true,
   });
 
+  // Parse with Babel to verify syntax
+  recast.parse(output.code, {
+    parser: require('recast/parsers/babel-ts'),
+  });
+
   return output.code;
 }
 
