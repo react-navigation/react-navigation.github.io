@@ -22,10 +22,7 @@ npm install @react-navigation/bottom-tabs
 
 To use this navigator, import it from `@react-navigation/bottom-tabs`:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Bottom Tab Navigator" snack
+```js name="Bottom Tab Navigator" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -76,65 +73,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Bottom Tab Navigator" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-const Tab = createBottomTabNavigator();
-
-function MyTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 ## API Definition
 
@@ -651,10 +589,7 @@ This event is fired when the user presses the tab button for the current screen 
 
 To prevent the default behavior, you can call `event.preventDefault`:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Tab Press Event" snack
+```js name="Tab Press Event" snack static2dynamic
 import * as React from 'react';
 import { Alert, Text, View } from 'react-native';
 import {
@@ -712,73 +647,6 @@ export default function App() {
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Tab Press Event" snack
-import * as React from 'react';
-import { Alert, Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-const Tab = createBottomTabNavigator();
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  // codeblock-focus-start
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('tabPress', (e) => {
-      // Prevent default behavior
-      e.preventDefault();
-
-      // Do something manually
-      // ...
-    });
-
-    return unsubscribe;
-  }, [navigation]);
-  // codeblock-focus-end
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Text style={{ marginTop: 10, color: 'gray' }}>
-        Tab press event is prevented
-      </Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Settings Screen</Text>
-    </View>
-  );
-}
-
-function MyTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
 If you have a custom tab bar, make sure to emit this event.
 
 :::note
@@ -814,10 +682,7 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to use for the destination route.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Tab Navigator - jumpTo" snack
+```js name="Tab Navigator - jumpTo" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -871,70 +736,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Tab Navigator - jumpTo" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-const Tab = createBottomTabNavigator();
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-        onPress={
-          () =>
-            // codeblock-focus-start
-            navigation.jumpTo('Profile', { owner: 'Michaś' })
-          // codeblock-focus-end
-        }
-      >
-        Jump to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      {route.params?.owner && (
-        <Text style={{ marginTop: 10 }}>Owner: {route.params.owner}</Text>
-      )}
-    </View>
-  );
-}
-
-function MyTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 ### Hooks
 
@@ -994,10 +795,7 @@ Supported values for `animation` are:
 
 - `none` - The screen transition doesn't have any animation. This is the default value.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Bottom Tabs animation" snack
+```js name="Bottom Tabs animation" snack static2dynamic
 import * as React from 'react';
 import { View, Text, Easing } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -1040,62 +838,6 @@ export default function App() {
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Bottom Tabs animation" snack
-import * as React from 'react';
-import { Text, View, Easing } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Profile!</Text>
-    </View>
-  );
-}
-
-const Tab = createBottomTabNavigator();
-
-// codeblock-focus-start
-function RootTabs() {
-  return (
-    <Tab.Navigator
-      screenOptions={{
-        // highlight-start
-        animation: 'fade',
-        // highlight-end
-      }}
-    >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-}
-// codeblock-focus-end
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <RootTabs />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
 If you need more control over the animation, you can customize individual parts of the animation using the various animation-related options:
 
 ### Animation related options
@@ -1103,7 +845,6 @@ If you need more control over the animation, you can customize individual parts 
 Bottom Tab Navigator exposes various options to configure the transition animation when switching tabs. These transition animations can be customized on a per-screen basis by specifying the options in the `options` for each screen, or for all screens in the tab navigator by specifying them in the `screenOptions`.
 
 - `transitionSpec` - An object that specifies the animation type (`timing` or `spring`) and its options (such as `duration` for `timing`). It contains 2 properties:
-
   - `animation` - The animation function to use for the animation. Supported values are `timing` and `spring`.
   - `config` - The configuration object for the timing function. For `timing`, it can be `duration` and `easing`. For `spring`, it can be `stiffness`, `damping`, `mass`, `overshootClamping`, `restDisplacementThreshold` and `restSpeedThreshold`.
 
@@ -1168,11 +909,9 @@ Bottom Tab Navigator exposes various options to configure the transition animati
   </Tabs>
 
 - `sceneStyleInterpolator` - This is a function that specifies interpolated styles for various parts of the scene. It currently supports style for the view containing the screen:
-
   - `sceneStyle` - Style for the container view wrapping the screen content.
 
   The function receives the following properties in its argument:
-
   - `current` - Animation values for the current screen:
     - `progress` - Animated node representing the progress value of the current screen.
 
@@ -1190,7 +929,6 @@ Bottom Tab Navigator exposes various options to configure the transition animati
   ```
 
   The value of `current.progress` is as follows:
-
   - -1 if the index is lower than the active tab,
   - 0 if they're active,
   - 1 if the index is higher than the active tab
@@ -1247,10 +985,9 @@ Bottom Tab Navigator exposes various options to configure the transition animati
 
 Putting these together, you can customize the transition animation for a screen:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+Putting these together, you can customize the transition animation for a screen:
 
-```js name="Bottom Tabs custom animation" snack
+```js name="Bottom Tabs custom animation" snack static2dynamic
 import * as React from 'react';
 import { View, Text, Easing } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -1304,74 +1041,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Bottom Tabs custom animation" snack
-import * as React from 'react';
-import { Text, View, Easing } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Profile!</Text>
-    </View>
-  );
-}
-
-const Tab = createBottomTabNavigator();
-
-// codeblock-focus-start
-function RootTabs() {
-  return (
-    <Tab.Navigator
-      screenOptions={{
-        transitionSpec: {
-          animation: 'timing',
-          config: {
-            duration: 150,
-            easing: Easing.inOut(Easing.ease),
-          },
-        },
-        sceneStyleInterpolator: ({ current }) => ({
-          sceneStyle: {
-            opacity: current.progress.interpolate({
-              inputRange: [-1, 0, 1],
-              outputRange: [0, 1, 0],
-            }),
-          },
-        }),
-      }}
-    >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-}
-// codeblock-focus-end
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <RootTabs />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 ### Pre-made configs
 

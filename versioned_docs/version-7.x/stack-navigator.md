@@ -59,10 +59,7 @@ npx pod-install ios
 
 To use this navigator, import it from `@react-navigation/stack`:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Stack Navigator" snack
+```js name="Stack Navigator" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -110,62 +107,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Stack Navigator" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import { createStackNavigator } from '@react-navigation/stack';
-
-const Stack = createStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 ## API Definition
 
@@ -620,7 +561,6 @@ If you need more control over the animation, you can customize individual parts 
 Stack Navigator exposes various options to configure the transition animation when a screen is added or removed. These transition animations can be customized on a per-screen basis by specifying the options in the `options` prop for each screen.
 
 - `gestureDirection` - The direction of swipe gestures:
-
   - `horizontal` - The gesture to close the screen will start from the left, and from the right in RTL. For animations, screen will slide from the right with `SlideFromRightIOS`, and from the left in RTL.
   - `horizontal-inverted` - The gesture to close the screen will start from the right, and from the left in RTL. For animations, screen will slide from the left with `SlideFromRightIOS`, and from the right in RTL as the direction is inverted.
   - `vertical` - The gesture to close the screen will start from the top. For animations, screen will slide from the bottom.
@@ -629,12 +569,10 @@ Stack Navigator exposes various options to configure the transition animation wh
   You may want to specify a matching horizontal/vertical animation along with `gestureDirection` as well. For the animations included in the library, if you set `gestureDirection` to one of the inverted ones, it'll also flip the animation direction.
 
 - `transitionSpec` - An object which specifies the animation type (`timing` or `spring`) and their options (such as `duration` for `timing`). It takes 2 properties:
-
   - `open` - Configuration for the transition when adding a screen
   - `close` - Configuration for the transition when removing a screen.
 
   Each of the object should specify 2 properties:
-
   - `animation` - The animation function to use for the animation. Supported values are `timing` and `spring`.
   - `config` - The configuration object for the timing function. For `timing`, it can be `duration` and `easing`. For `spring`, it can be `stiffness`, `damping`, `mass`, `overshootClamping`, `restDisplacementThreshold` and `restSpeedThreshold`.
 
@@ -656,170 +594,83 @@ Stack Navigator exposes various options to configure the transition animation wh
 
   We can pass this config in the `transitionSpec` option:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+  ```js name="Custom Transition Config" snack static2dynamic
+  import * as React from 'react';
+  import { Text, View } from 'react-native';
+  import {
+    createStaticNavigation,
+    useNavigation,
+  } from '@react-navigation/native';
+  import { Button } from '@react-navigation/elements';
+  import { createStackNavigator } from '@react-navigation/stack';
 
-```js name="Custom Transition Config" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import {
-  createStaticNavigation,
-  useNavigation,
-} from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Easing } from 'react-native';
+  function HomeScreen() {
+    const navigation = useNavigation();
 
-function HomeScreen() {
-  const navigation = useNavigation();
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen</Text>
+        <Button onPress={() => navigation.navigate('Profile')}>
+          Go to Profile
+        </Button>
+      </View>
+    );
+  }
 
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
+  function ProfileScreen() {
+    const navigation = useNavigation();
 
-function ProfileScreen() {
-  const navigation = useNavigation();
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Profile Screen</Text>
+        <Button onPress={() => navigation.goBack()}>Go back</Button>
+      </View>
+    );
+  }
 
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-    </View>
-  );
-}
-
-// codeblock-focus-start
-const config = {
-  animation: 'spring',
-  config: {
-    stiffness: 1000,
-    damping: 500,
-    mass: 3,
-    overshootClamping: true,
-    restDisplacementThreshold: 0.01,
-    restSpeedThreshold: 0.01,
-  },
-};
-
-const MyStack = createStackNavigator({
-  screens: {
-    Home: HomeScreen,
-    Profile: {
-      screen: ProfileScreen,
-      options: {
-        transitionSpec: {
-          open: config,
-          close: config,
-        },
-      },
+  // codeblock-focus-start
+  const config = {
+    animation: 'spring',
+    config: {
+      stiffness: 1000,
+      damping: 500,
+      mass: 3,
+      overshootClamping: true,
+      restDisplacementThreshold: 0.01,
+      restSpeedThreshold: 0.01,
     },
-  },
-});
-// codeblock-focus-end
+  };
 
-const Navigation = createStaticNavigation(MyStack);
-
-export default function App() {
-  return <Navigation />;
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Custom Transition Config" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Easing } from 'react-native';
-
-// codeblock-focus-start
-const config = {
-  animation: 'spring',
-  config: {
-    stiffness: 1000,
-    damping: 500,
-    mass: 3,
-    overshootClamping: true,
-    restDisplacementThreshold: 0.01,
-    restSpeedThreshold: 0.01,
-  },
-};
-
-const Stack = createStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
+  const MyStack = createStackNavigator({
+    screens: {
+      Home: HomeScreen,
+      Profile: {
+        screen: ProfileScreen,
+        options: {
           transitionSpec: {
             open: config,
             close: config,
           },
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
+        },
+      },
+    },
+  });
+  // codeblock-focus-end
 
-function HomeScreen() {
-  const navigation = useNavigation();
+  const Navigation = createStaticNavigation(MyStack);
 
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
+  export default function App() {
+    return <Navigation />;
+  }
+  ```
 
 - `cardStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the card. This allows you to customize the transitions when navigating from screen to screen. It is expected to return at least empty object, possibly containing interpolated styles for container, the card itself, overlay and shadow. Supported properties are:
-
   - `containerStyle` - Style for the container view wrapping the card.
   - `cardStyle` - Style for the view representing the card.
   - `overlayStyle` - Style for the view representing the semi-transparent overlay below
   - `shadowStyle` - Style for the view representing the card shadow.
 
   The function receives the following properties in its argument:
-
   - `current` - Values for the current screen:
     - `progress` - Animated node representing the progress value of the current screen.
   - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
@@ -843,148 +694,66 @@ export default function App() {
 
   We can pass this function in `cardStyleInterpolator` option:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+  ```js name="Custom Card Style Interpolator" snack static2dynamic
+  import * as React from 'react';
+  import { Text, View } from 'react-native';
+  import {
+    createStaticNavigation,
+    useNavigation,
+  } from '@react-navigation/native';
+  import { Button } from '@react-navigation/elements';
+  import { createStackNavigator } from '@react-navigation/stack';
 
-```js name="Custom Card Style Interpolator" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import {
-  createStaticNavigation,
-  useNavigation,
-} from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-import { createStackNavigator } from '@react-navigation/stack';
+  function HomeScreen() {
+    const navigation = useNavigation();
 
-function HomeScreen() {
-  const navigation = useNavigation();
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen</Text>
+        <Button onPress={() => navigation.navigate('Profile')}>
+          Go to Profile
+        </Button>
+      </View>
+    );
+  }
 
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
+  function ProfileScreen() {
+    const navigation = useNavigation();
 
-function ProfileScreen() {
-  const navigation = useNavigation();
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Profile Screen</Text>
+        <Button onPress={() => navigation.goBack()}>Go back</Button>
+      </View>
+    );
+  }
 
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-    </View>
-  );
-}
+  // codeblock-focus-start
+  const forFade = ({ current }) => ({
+    cardStyle: {
+      opacity: current.progress,
+    },
+  });
 
-// codeblock-focus-start
-const forFade = ({ current }) => ({
-  cardStyle: {
-    opacity: current.progress,
-  },
-});
-
-const MyStack = createStackNavigator({
-  screens: {
-    Home: HomeScreen,
-    Profile: {
-      screen: ProfileScreen,
-      options: {
-        cardStyleInterpolator: forFade,
+  const MyStack = createStackNavigator({
+    screens: {
+      Home: HomeScreen,
+      Profile: {
+        screen: ProfileScreen,
+        options: {
+          cardStyleInterpolator: forFade,
+        },
       },
     },
-  },
-});
-// codeblock-focus-end
+  });
+  // codeblock-focus-end
 
-const Navigation = createStaticNavigation(MyStack);
+  const Navigation = createStaticNavigation(MyStack);
 
-export default function App() {
-  return <Navigation />;
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Custom Card Style Interpolator" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-import { createStackNavigator } from '@react-navigation/stack';
-
-// codeblock-focus-start
-const forFade = ({ current }) => ({
-  cardStyle: {
-    opacity: current.progress,
-  },
-});
-
-const Stack = createStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          cardStyleInterpolator: forFade,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
-```js
-<Stack.Screen
-  name="Profile"
-  component={Profile}
-  options={{ cardStyleInterpolator: forFade }}
-/>
-```
+  export default function App() {
+    return <Navigation />;
+  }
+  ```
 
 The interpolator will be called for each screen. For example, say you have a 2 screens in the stack, A & B. B is the new screen coming into focus and A is the previous screen. The interpolator will be called for each screen:
 
@@ -1055,7 +824,6 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
 ```
 
 - `headerStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the header. It is expected to return at least empty object, possibly containing interpolated styles for left label and button, right button, title and background. Supported properties are:
-
   - `leftLabelStyle` - Style for the label of the left button (back button label).
   - `leftButtonStyle` - Style for the left button (usually the back button).
   - `rightButtonStyle` - Style for the right button.
@@ -1063,7 +831,6 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
   - `backgroundStyle` - Style for the header background.
 
   The function receives the following properties in it's argument:
-
   - `current` - Values for the current screen (the screen which owns this header).
     - `progress` - Animated node representing the progress value of the current screen. `0` when screen should start coming into view, `0.5` when it's mid-way, `1` when it should be fully in view.
   - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
@@ -1096,168 +863,77 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
 
   We can pass this function in `headerStyleInterpolator` option:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+  ```js name="Custom Header Style Interpolator" snack static2dynamic
+  import * as React from 'react';
+  import { Text, View } from 'react-native';
+  import {
+    createStaticNavigation,
+    useNavigation,
+  } from '@react-navigation/native';
+  import { Button } from '@react-navigation/elements';
+  import { createStackNavigator } from '@react-navigation/stack';
 
-```js name="Custom Header Style Interpolator" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import {
-  createStaticNavigation,
-  useNavigation,
-} from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-import { createStackNavigator } from '@react-navigation/stack';
+  function HomeScreen() {
+    const navigation = useNavigation();
 
-function HomeScreen() {
-  const navigation = useNavigation();
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen</Text>
+        <Button onPress={() => navigation.navigate('Profile')}>
+          Go to Profile
+        </Button>
+      </View>
+    );
+  }
 
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
+  function ProfileScreen() {
+    const navigation = useNavigation();
 
-function ProfileScreen() {
-  const navigation = useNavigation();
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Profile Screen</Text>
+        <Button onPress={() => navigation.goBack()}>Go back</Button>
+      </View>
+    );
+  }
 
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-    </View>
-  );
-}
+  // codeblock-focus-start
+  const forFade = ({ current, next }) => {
+    const opacity = Animated.add(
+      current.progress,
+      next ? next.progress : 0
+    ).interpolate({
+      inputRange: [0, 1, 2],
+      outputRange: [0, 1, 0],
+    });
 
-// codeblock-focus-start
-const forFade = ({ current, next }) => {
-  const opacity = Animated.add(
-    current.progress,
-    next ? next.progress : 0
-  ).interpolate({
-    inputRange: [0, 1, 2],
-    outputRange: [0, 1, 0],
-  });
-
-  return {
-    leftButtonStyle: { opacity },
-    rightButtonStyle: { opacity },
-    titleStyle: { opacity },
-    backgroundStyle: { opacity },
+    return {
+      leftButtonStyle: { opacity },
+      rightButtonStyle: { opacity },
+      titleStyle: { opacity },
+      backgroundStyle: { opacity },
+    };
   };
-};
 
-const MyStack = createStackNavigator({
-  screens: {
-    Home: HomeScreen,
-    Profile: {
-      screen: ProfileScreen,
-      options: {
-        headerStyleInterpolator: forFade,
+  const MyStack = createStackNavigator({
+    screens: {
+      Home: HomeScreen,
+      Profile: {
+        screen: ProfileScreen,
+        options: {
+          headerStyleInterpolator: forFade,
+        },
       },
     },
-  },
-});
-// codeblock-focus-end
-
-const Navigation = createStaticNavigation(MyStack);
-
-export default function App() {
-  return <Navigation />;
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Custom Header Style Interpolator" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-import { createStackNavigator } from '@react-navigation/stack';
-
-// codeblock-focus-start
-const forFade = ({ current, next }) => {
-  const opacity = Animated.add(
-    current.progress,
-    next ? next.progress : 0
-  ).interpolate({
-    inputRange: [0, 1, 2],
-    outputRange: [0, 1, 0],
   });
+  // codeblock-focus-end
 
-  return {
-    leftButtonStyle: { opacity },
-    rightButtonStyle: { opacity },
-    titleStyle: { opacity },
-    backgroundStyle: { opacity },
-  };
-};
+  const Navigation = createStaticNavigation(MyStack);
 
-const Stack = createStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{ headerStyleInterpolator: forFade }}
-      />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
-```js
-<Stack.Screen
-  name="Profile"
-  component={Profile}
-  options={{ headerStyleInterpolator: forFade }}
-/>
-```
+  export default function App() {
+    return <Navigation />;
+  }
+  ```
 
 ### Pre-made configs
 
@@ -1299,10 +975,7 @@ import { TransitionSpecs } from '@react-navigation/stack';
 
 Example configuration for Android Oreo style vertical screen fade animation:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Card Style Interpolators" snack
+```js name="Card Style Interpolators" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -1363,78 +1036,6 @@ export default function App() {
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Card Style Interpolators" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import {
-  createStackNavigator,
-  CardStyleInterpolators,
-} from '@react-navigation/stack';
-// codeblock-focus-end
-
-// codeblock-focus-start
-const Stack = createStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          title: 'Profile',
-          cardStyleInterpolator:
-            CardStyleInterpolators.forFadeFromBottomAndroid,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
 #### `HeaderStyleInterpolators`
 
 - `forUIKit` - Standard UIKit style animation for the header where the title fades into the back button label.
@@ -1443,10 +1044,7 @@ export default function App() {
 
 Example configuration for default iOS animation for header elements where the title fades into the back button:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Header Style Interpolators" snack
+```js name="Header Style Interpolators" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -1507,77 +1105,6 @@ export default function App() {
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Header Style Interpolators" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import {
-  createStackNavigator,
-  HeaderStyleInterpolators,
-} from '@react-navigation/stack';
-// codeblock-focus-end
-
-// codeblock-focus-start
-const Stack = createStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          title: 'Profile',
-          headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
 :::warning
 
 Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
@@ -1599,10 +1126,7 @@ We export various transition presets which bundle various set of these options t
 
 You can spread these presets in `options` to customize the animation for a screen:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Transition Presets - Modal Slide" snack
+```js name="Transition Presets - Modal Slide" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -1663,85 +1187,11 @@ export default function App() {
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Transition Presets - Modal Slide" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import {
-  createStackNavigator,
-  TransitionPresets,
-} from '@react-navigation/stack';
-// codeblock-focus-end
-
-// codeblock-focus-start
-const Stack = createStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          title: 'Profile',
-          ...TransitionPresets.ModalSlideFromBottomIOS,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
 If you want to customize the transition animations for all of the screens in the navigator, you can specify it in `screenOptions` prop for the navigator.
 
 Example configuration for iOS modal presentation style:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Transition Presets - Modal Presentation" snack
+```js name="Transition Presets - Modal Presentation" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -1800,76 +1250,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Transition Presets - Modal Presentation" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import {
-  createStackNavigator,
-  TransitionPresets,
-} from '@react-navigation/stack';
-// codeblock-focus-end
-
-// codeblock-focus-start
-const Stack = createStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerShown: false,
-        ...TransitionPresets.ModalPresentationIOS,
-      }}
-    >
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 ### Transparent modals
 

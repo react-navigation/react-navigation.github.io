@@ -19,10 +19,7 @@ There are 3 ways of specifying options for screens:
 
 You can pass a prop named `options` to the `Screen` component to configure a screen, where you can specify an object with different options for that screen:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Screen title option" snack
+```js name="Screen title option" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import Button from '@react-navigation/elements';
@@ -81,67 +78,6 @@ export default function App() {
 }
 // codeblock-focus-end
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Screen title option" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import Button from '@react-navigation/elements';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-const Stack = createNativeStackNavigator();
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      // codeblock-focus-start
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: 'Awesome app' }}
-        />
-        <Stack.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{ title: 'My profile' }}
-        />
-      </Stack.Navigator>
-      // codeblock-focus-end
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 You can also pass a function to `options`. The function will receive the [`navigation` object](navigation-object.md) and the [`route` object](route-object.md) for that screen, as well as the [`theme` object](themes.md). This can be useful if you want to perform navigation in your options:
 

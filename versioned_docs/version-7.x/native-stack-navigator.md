@@ -30,10 +30,7 @@ npm install @react-navigation/native-stack
 
 To use this navigator, import it from `@react-navigation/native-stack`:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Native Stack Navigator" snack
+```js name="Native Stack Navigator" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -81,62 +78,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Native Stack Navigator" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-const Stack = createNativeStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 :::info
 
@@ -376,10 +317,7 @@ Supported values:
 
 To use Form Sheet for your screen, add `presentation: 'formSheet'` to the `options`.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Form Sheet" snack
+```js name="Form Sheet" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -454,86 +392,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Form Sheet" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-const Stack = createNativeStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          presentation: 'formSheet',
-          headerShown: false,
-          sheetAllowedDetents: 'fitToContents',
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ padding: 15 }}>
-      <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Profile Screen</Text>
-      <Text style={{ marginTop: 10 }}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan
-        euismod enim, quis porta ligula egestas sed. Maecenas vitae consequat
-        odio, at dignissim lorem. Ut euismod eros ac mi ultricies, vel pharetra
-        tortor commodo. Interdum et malesuada fames ac ante ipsum primis in
-        faucibus. Nullam at urna in metus iaculis aliquam at sed quam. In
-        ullamcorper, ex ut facilisis commodo, urna diam posuere urna, at
-        condimentum mi orci ac ipsum. In hac habitasse platea dictumst. Donec
-        congue pharetra ipsum in finibus. Nulla blandit finibus turpis, non
-        vulputate elit viverra a. Curabitur in laoreet nisl.
-      </Text>
-      <Button onPress={() => navigation.goBack()} style={{ marginTop: 15 }}>
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 :::warning
 
@@ -1673,12 +1531,9 @@ Supported properties when `type` is `menu`:
 
 - `changesSelectionAsPrimaryAction`: Whether the menu is a selection menu. Tapping an item in a selection menu will add a checkmark to the selected item. Defaults to `false`.
 - `menu`: An object containing the menu items. It contains the following properties:
-
   - `title`: Optional title to show on top of the menu.
   - `items`: An array of menu items. A menu item can be either an `action` or a `submenu`.
-
     - `action`: An object with the following properties:
-
       - `type`: Must be `action`.
       - `label`: Label of the menu item.
       - `icon`: Optional icon to show alongside the label. The icon can be a [SF Symbols](https://developer.apple.com/sf-symbols/) name:
@@ -1702,7 +1557,6 @@ Supported properties when `type` is `menu`:
       - `discoverabilityLabel`: An elaborated title that explains the purpose of the action.
 
     - `submenu`: An object with the following properties:
-
       - `type`: Must be `submenu`.
       - `label`: Label of the submenu item.
       - `icon`: Optional icon to show alongside the label. The icon can be a [SF Symbols](https://developer.apple.com/sf-symbols/) name:
