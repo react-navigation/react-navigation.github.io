@@ -651,23 +651,141 @@ This event is fired when the user presses the tab button for the current screen 
 
 To prevent the default behavior, you can call `event.preventDefault`:
 
-<samp id="bottom-tab-prevent-default" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
-React.useEffect(() => {
-  const unsubscribe = navigation.addListener('tabPress', (e) => {
-    // Prevent default behavior
-    e.preventDefault();
+```js name="Tab Press Event" snack
+import * as React from 'react';
+import { Alert, Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-    // Do something manually
-    // ...
-  });
+function HomeScreen() {
+  const navigation = useNavigation();
 
-  return unsubscribe;
-}, [navigation]);
+  // codeblock-focus-start
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('tabPress', (e) => {
+      // Prevent default behavior
+      e.preventDefault();
+
+      // Do something manually
+      // ...
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+  // codeblock-focus-end
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Text style={{ marginTop: 10, color: 'gray' }}>
+        Tab press event is prevented
+      </Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+    </View>
+  );
+}
+
+const MyTabs = createBottomTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    Settings: SettingsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyTabs);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Tab Press Event" snack
+import * as React from 'react';
+import { Alert, Text, View } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  // codeblock-focus-start
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('tabPress', (e) => {
+      // Prevent default behavior
+      e.preventDefault();
+
+      // Do something manually
+      // ...
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+  // codeblock-focus-end
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Text style={{ marginTop: 10, color: 'gray' }}>
+        Tab press event is prevented
+      </Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+    </View>
+  );
+}
+
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+    </Tab.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
 If you have a custom tab bar, make sure to emit this event.
+
+:::note
+
+By default, tabs are rendered lazily. So if you add a listener inside a screen component, it won't receive the event until the screen is focused for the first time. If you need to listen to this event before the screen is focused, you can specify the [listener in the screen config](navigation-events.md#listeners-prop-on-screen) instead.
+
+:::
 
 #### `tabLongPress`
 
@@ -696,11 +814,127 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to use for the destination route.
 
-<samp id="tab-jump-to" />
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
-```js
-navigation.jumpTo('Profile', { owner: 'Michaś' });
+```js name="Tab Navigator - jumpTo" snack
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        onPress={
+          () =>
+            // codeblock-focus-start
+            navigation.jumpTo('Profile', { owner: 'Michaś' })
+          // codeblock-focus-end
+        }
+      >
+        Jump to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen({ route }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      {route.params?.owner && (
+        <Text style={{ marginTop: 10 }}>Owner: {route.params.owner}</Text>
+      )}
+    </View>
+  );
+}
+
+const MyTabs = createBottomTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyTabs);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Tab Navigator - jumpTo" snack
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        onPress={
+          () =>
+            // codeblock-focus-start
+            navigation.jumpTo('Profile', { owner: 'Michaś' })
+          // codeblock-focus-end
+        }
+      >
+        Jump to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen({ route }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      {route.params?.owner && (
+        <Text style={{ marginTop: 10 }}>Owner: {route.params.owner}</Text>
+      )}
+    </View>
+  );
+}
+
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
 
 ### Hooks
 
