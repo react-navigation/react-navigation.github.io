@@ -16,7 +16,11 @@ export default {
   projectName: 'react-navigation.github.io',
   onBrokenAnchors: 'throw',
   onBrokenMarkdownLinks: 'throw',
-  scripts: ['/js/snack-helpers.js', '/js/toc-fixes.js'],
+  scripts: [
+    '/js/snack-helpers.js',
+    '/js/toc-fixes.js',
+    '/js/video-playback.js',
+  ],
   themeConfig: {
     colorMode: {
       defaultMode: 'light',
