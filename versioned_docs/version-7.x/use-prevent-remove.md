@@ -156,4 +156,3 @@ Doing so has several benefits:
 
 - This approach still works if the app is closed or crashes unexpectedly.
 - It's less intrusive to the user as they can still navigate away from the screen to check something and return without losing the data.
-```
