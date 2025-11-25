@@ -13,10 +13,7 @@ In order to achieve it we export `useScrollToTop` which accept ref to scrollable
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="useScrollToTop hook" snack
+```js name="useScrollToTop hook" snack static2dynamic
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -65,86 +62,19 @@ function HomeScreen() {
   return <View />;
 }
 
-const Tab = createBottomTabNavigator({
-  Home: HomeScreen,
-  Albums: Albums,
+const MyTabs = createBottomTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    Albums: Albums,
+  },
 });
 
-const Navigation = createStaticNavigation(Tab);
+const Navigation = createStaticNavigation(MyTabs);
 
 export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="useScrollToTop hook" snack
-import * as React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-// codeblock-focus-start
-import { ScrollView } from 'react-native';
-import { useScrollToTop } from '@react-navigation/native';
-
-function Albums() {
-  const ref = React.useRef(null);
-
-  // highlight-next-line
-  useScrollToTop(ref);
-
-  return (
-    <ScrollView ref={ref}>
-      {/* content */}
-      // codeblock-focus-end
-      <Image
-        source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
-        style={{ width: 400, height: 400 }}
-        key="1"
-      />
-      <Image
-        source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
-        style={{ width: 400, height: 400 }}
-        key="2"
-      />
-      <Image
-        source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
-        style={{ width: 400, height: 400 }}
-        key="3"
-      />
-      <Image
-        source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
-        style={{ width: 400, height: 400 }}
-        key="4"
-      />
-      // codeblock-focus-start
-    </ScrollView>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  return <View />;
-}
-
-const Tab = createBottomTabNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Albums" component={Albums} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 ## Using with class component
 
@@ -171,10 +101,7 @@ export default function (props) {
 
 If you require offset to scroll position you can wrap and decorate passed reference:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="useScrollToTop hook - providing scroll offset" snack
+```js name="useScrollToTop hook - providing scroll offset" snack static2dynamic
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Image } from 'react-native';
@@ -227,88 +154,16 @@ function HomeScreen() {
   return <View />;
 }
 
-const Tab = createBottomTabNavigator({
+const MyTab = createBottomTabNavigator({
   screens: {
     Home: HomeScreen,
     Albums: Albums,
   },
 });
 
-const Navigation = createStaticNavigation(Tab);
+const Navigation = createStaticNavigation(MyTab);
 
 export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="useScrollToTop hook - providing scroll offset" snack
-import * as React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-// codeblock-focus-start
-import { ScrollView } from 'react-native';
-import { useScrollToTop } from '@react-navigation/native';
-
-function Albums() {
-  const ref = React.useRef(null);
-
-  useScrollToTop(
-    React.useRef({
-      scrollToTop: () => ref.current?.scrollTo({ y: 100 }),
-    })
-  );
-
-  return (
-    <ScrollView ref={ref}>
-      {/* content */}
-      // codeblock-focus-end
-      <Image
-        source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
-        style={{ width: 400, height: 400 }}
-        key="1"
-      />
-      <Image
-        source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
-        style={{ width: 400, height: 400 }}
-        key="2"
-      />
-      <Image
-        source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
-        style={{ width: 400, height: 400 }}
-        key="3"
-      />
-      <Image
-        source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
-        style={{ width: 400, height: 400 }}
-        key="4"
-      />
-      // codeblock-focus-start
-    </ScrollView>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  return <View />;
-}
-
-const Tab = createBottomTabNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Albums" component={Albums} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
