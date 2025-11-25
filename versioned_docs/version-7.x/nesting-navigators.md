@@ -177,7 +177,7 @@ When nesting navigators, there are some things to keep in mind:
 
 ### Each navigator keeps its own navigation history
 
-For example, when you press the back button when inside a screen in a nested stack navigator, it'll go back to the previous screen inside the nested stack even if there's another navigator as the parent.
+For example, when you press the back button of a stack navigator nested within another navigator, it will go to the previous screen of the closest ancestor navigator, for which in this case it is the stack navigator.
 
 ### Each navigator has its own options
 
