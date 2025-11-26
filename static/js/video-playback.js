@@ -1,4 +1,25 @@
-function fadeInOnLoad(video) {
+function setupPlayer(video) {
+  const container = document.createElement('div');
+  const icon = document.createElement('div');
+
+  video.parentNode.insertBefore(container, video);
+
+  icon.classList.add('video-player-icon');
+
+  container.classList.add('video-player');
+  container.appendChild(video);
+  container.appendChild(icon);
+
+  container.addEventListener('click', () => {
+    if (video.paused) {
+      video.play();
+      container.classList.remove('paused');
+    } else {
+      video.pause();
+      container.classList.add('paused');
+    }
+  });
+
   if (video.readyState >= 3) {
     video.style.transition = 'opacity 1s';
     video.style.opacity = '1';
@@ -24,16 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
       video.dataset.seen = true;
 
       if (video.hasAttribute('playsinline')) {
-        video.addEventListener('click', () => {
-          if (video.paused) {
-            video.play();
-          } else {
-            video.pause();
-          }
-        });
+        setupPlayer(video);
       }
-
-      fadeInOnLoad(video);
     });
   });
 
