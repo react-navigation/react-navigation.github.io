@@ -745,7 +745,7 @@ headerBackIcon: {
 
 #### `headerLargeStyle`
 
-Style of the header when a large title is shown. The large title is shown if `headerLargeTitle` is `true` and the edge of any scrollable content reaches the matching edge of the header.
+Style of the header when a large title is shown. The large title is shown if `headerLargeTitleEnabled` is `true` and the edge of any scrollable content reaches the matching edge of the header.
 
 Supported properties:
 
@@ -758,7 +758,7 @@ Only supported on iOS.
   <source src="/assets/7.x/native-stack/headerLargeStyle.mp4" />
 </video>
 
-#### `headerLargeTitle`
+#### `headerLargeTitleEnabled`
 
 Whether to enable header with large title which collapses to regular header on scroll.
 Defaults to `false`.
