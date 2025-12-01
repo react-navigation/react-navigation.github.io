@@ -239,13 +239,13 @@ When nesting multiple stack navigators, we recommend nesting at most 2 stack nav
 
 ## Best practices when nesting
 
-We recommend to reduce nesting navigators to minimal. Try to achieve the behavior you want with as little nesting as possible. Nesting has many downsides:
+We recommend reducing navigator nesting to a minimum. Try to achieve the behavior you want with as little nesting as possible. Nesting has many downsides:
 
 - It results in deeply nested view hierarchy which can cause memory and performance issues in lower end devices
-- Nesting same type of navigators (e.g. tabs inside tabs, drawer inside drawer etc.) might lead to a confusing UX
+- Nesting the same type of navigator (e.g. tabs inside tabs, drawer inside drawer etc.) might lead to a confusing UX
 - With excessive nesting, code becomes difficult to follow when navigating to nested screens, configuring deep link etc.
 
-Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, instead of using separate navigators, consider doing something like this:
+Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate groups of screens for organization, instead of using separate navigators, consider doing something like this:
 
 ```js
 // Define multiple groups of screens in objects like this
