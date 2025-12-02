@@ -124,13 +124,15 @@ import com.swmansion.rnscreens.fragment.restoration.RNScreensFragmentFactory;
 
 public class MainActivity extends ReactActivity {
   // ...
+
+  // highlight-start
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    // highlight-start
     getSupportFragmentManager().setFragmentFactory(new RNScreensFragmentFactory());
     super.onCreate(savedInstanceState);
-    // highlight-end
   }
+  // highlight-end
+
   // ...
 }
 ```
