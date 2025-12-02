@@ -99,12 +99,14 @@ import com.swmansion.rnscreens.fragment.restoration.RNScreensFragmentFactory
 
 class MainActivity: ReactActivity() {
   // ...
+
+  // highlight-start
   override fun onCreate(savedInstanceState: Bundle?) {
-    // highlight-start
     supportFragmentManager.fragmentFactory = RNScreensFragmentFactory()
     super.onCreate(savedInstanceState)
-    // highlight-end
   }
+  // highlight-end
+
   // ...
 }
 ```
