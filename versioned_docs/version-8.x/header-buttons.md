@@ -13,14 +13,14 @@ Now that we know how to customize the look of our headers, let's make them senti
 
 The most common way to interact with a header is by tapping on a button either to the left or the right of the title. Let's add a button to the right side of the header (one of the most difficult places to touch on your entire screen, depending on finger and phone size, but also a normal place to put buttons).
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Header button" snack
+```js name="Header button" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
@@ -34,7 +34,7 @@ function HomeScreen() {
 // codeblock-focus-start
 const MyStack = createNativeStackNavigator({
   screens: {
-    Home: {
+    Home: createNativeStackScreen({
       screen: HomeScreen,
       options: {
         // highlight-start
@@ -43,7 +43,7 @@ const MyStack = createNativeStackNavigator({
         ),
         // highlight-end
       },
-    },
+    }),
   },
 });
 // codeblock-focus-end
@@ -54,58 +54,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Header button" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button } from '@react-navigation/elements';
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-// codeblock-focus-start
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          // highlight-start
-          headerRight: () => (
-            <Button onPress={() => alert('This is a button!')}>Info</Button>
-          ),
-          // highlight-end
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 ![Header button](/assets/headers/header-button.png)
 
@@ -121,22 +69,22 @@ Note that a community-developed library for rendering buttons in the header with
 
 In some cases, components in the header need to interact with the screen component. For this use case, we need to use `navigation.setOptions` to update our options. By using `navigation.setOptions` inside the screen component, we get access to screen's props, state, context etc.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Header button" snack
+```js name="Header button" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
   const [count, setCount] = React.useState(0);
 
   React.useEffect(() => {
@@ -156,14 +104,14 @@ function HomeScreen() {
 
 const MyStack = createNativeStackNavigator({
   screens: {
-    Home: {
+    Home: createNativeStackScreen({
       screen: HomeScreen,
       options: {
         // Add a placeholder button without the `onPress` to avoid flicker
         // highlight-next-line
         headerRight: () => <Button>Update count</Button>,
       },
-    },
+    }),
   },
 });
 // codeblock-focus-end
@@ -174,67 +122,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Header button" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button } from '@react-navigation/elements';
-
-const Stack = createNativeStackNavigator();
-
-// codeblock-focus-start
-function HomeScreen() {
-  const navigation = useNavigation();
-  const [count, setCount] = React.useState(0);
-
-  React.useEffect(() => {
-    // Use `setOptions` to update the button that we previously specified
-    // Now the button includes an `onPress` handler to update the count
-    // highlight-start
-    navigation.setOptions({
-      headerRight: () => (
-        <Button onPress={() => setCount((c) => c + 1)}>Update count</Button>
-      ),
-    });
-    // highlight-end
-  }, [navigation]);
-
-  return <Text>Count: {count}</Text>;
-}
-
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          // Add a placeholder button without the `onPress` to avoid flicker
-          // highlight-next-line
-          headerRight: () => <Button>Update count</Button>,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 <video playsInline autoPlay muted loop >
   <source src="/assets/headers/header-update-screen.mp4" />

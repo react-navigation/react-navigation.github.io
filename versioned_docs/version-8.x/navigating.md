@@ -4,6 +4,9 @@ title: Moving between screens
 sidebar_label: Moving between screens
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 In the previous section, we defined a stack navigator with two routes (`Home` and `Details`), but we didn't learn how to let a user navigate from `Home` to `Details` (although we did learn how to change the _initial_ route in our code, but forcing our users to clone our repository and change the route in our code in order to see another screen is arguably among the worst user experiences one could imagine).
 
 If this was a web browser, we'd be able to write something like this:
@@ -28,7 +31,7 @@ We'll do something similar to the latter, but rather than using a `window.locati
 
 ## Navigating to a new screen
 
-```js name="Navigating to a new screen" snack
+```js name="Navigating to a new screen" snack static2dynamic
 // codeblock-focus-start
 import * as React from 'react';
 import { View, Text } from 'react-native';
@@ -36,12 +39,15 @@ import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
   // highlight-next-line
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -69,8 +75,12 @@ function DetailsScreen() {
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
   screens: {
-    Home: HomeScreen,
-    Details: DetailsScreen,
+    Home: createNativeStackScreen({
+      screen: HomeScreen,
+    }),
+    Details: createNativeStackScreen({
+      screen: DetailsScreen,
+    }),
   },
 });
 
@@ -87,7 +97,7 @@ export default function App() {
 
 Let's break this down:
 
-- `navigation` - the `navigation` object is returned from the [`useNavigation`](use-navigation.md) hook (more about this later in ["The navigation object in depth"](navigation-object.md)).
+- `navigation` - the [`navigation`](navigation-object.md) object is returned from the [`useNavigation`](use-navigation.md) hook - it takes the name of the current route as an argument (in this case, `Home`).
 - `navigate('Details')` - we call the `navigate` function (on the `navigation` object &mdash; naming is hard!) with the name of the route that we'd like to move the user to.
 
 :::note
@@ -100,18 +110,21 @@ So we now have a stack with two routes: 1) the `Home` route 2) the `Details` rou
 
 ## Navigate to a screen multiple times
 
-```js name="Navigate to a screen multiple times" snack
+```js name="Navigate to a screen multiple times" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -125,7 +138,7 @@ function HomeScreen() {
 
 // codeblock-focus-start
 function DetailsScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Details');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -143,8 +156,12 @@ function DetailsScreen() {
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
   screens: {
-    Home: HomeScreen,
-    Details: DetailsScreen,
+    Home: createNativeStackScreen({
+      screen: HomeScreen,
+    }),
+    Details: createNativeStackScreen({
+      screen: DetailsScreen,
+    }),
   },
 });
 
@@ -159,18 +176,21 @@ If you run this code, you'll notice that when you tap "Go to Details... again", 
 
 Let's suppose that we actually _want_ to add another details screen. This is pretty common in cases where you pass in some unique data to each route (more on that later when we talk about `params`!). To do this, we can change `navigate` to `push`. This allows us to express the intent to add another route regardless of the existing navigation history.
 
-```js name="Navigate to a screen multiple times" snack
+```js name="Navigate to a screen multiple times" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -183,7 +203,7 @@ function HomeScreen() {
 }
 
 function DetailsScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Details');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -200,8 +220,12 @@ function DetailsScreen() {
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
   screens: {
-    Home: HomeScreen,
-    Details: DetailsScreen,
+    Home: createNativeStackScreen({
+      screen: HomeScreen,
+    }),
+    Details: createNativeStackScreen({
+      screen: DetailsScreen,
+    }),
   },
 });
 
@@ -224,18 +248,21 @@ The header provided by the native stack navigator will automatically include a b
 
 Sometimes you'll want to be able to programmatically trigger this behavior, and for that, you can use `navigation.goBack()`.
 
-```js name="Going back" snack
+```js name="Going back" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -249,7 +276,7 @@ function HomeScreen() {
 
 // codeblock-focus-start
 function DetailsScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Details');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -268,8 +295,12 @@ function DetailsScreen() {
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
   screens: {
-    Home: HomeScreen,
-    Details: DetailsScreen,
+    Home: createNativeStackScreen({
+      screen: HomeScreen,
+    }),
+    Details: createNativeStackScreen({
+      screen: DetailsScreen,
+    }),
   },
 });
 
@@ -292,18 +323,21 @@ On Android, React Navigation hooks in to the hardware back button and fires the 
 
 Another common requirement is to be able to go back _multiple_ screens -- for example, if you are several screens deep in a stack and want to dismiss all of them to go back to the first screen. In this case, we know that we want to go back to `Home` so we can use `popTo('Home')`. Another alternative would be `navigation.popToTop()`, which goes back to the first screen in the stack.
 
-```js name="Going back to specific screen" snack
+```js name="Going back to specific screen" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -317,7 +351,7 @@ function HomeScreen() {
 
 // codeblock-focus-start
 function DetailsScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Details');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -340,8 +374,12 @@ function DetailsScreen() {
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
   screens: {
-    Home: HomeScreen,
-    Details: DetailsScreen,
+    Home: createNativeStackScreen({
+      screen: HomeScreen,
+    }),
+    Details: createNativeStackScreen({
+      screen: DetailsScreen,
+    }),
   },
 });
 

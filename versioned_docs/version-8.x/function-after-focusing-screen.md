@@ -36,7 +36,10 @@ import {
   useNavigation,
   createStaticNavigation,
 } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  createBottomTabScreen,
+} from '@react-navigation/bottom-tabs';
 
 // codeblock-focus-start
 function ProfileScreen() {
@@ -63,8 +66,12 @@ function HomeScreen() {
 
 const MyTabs = createBottomTabNavigator({
   screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
+    Home: createBottomTabScreen({
+      screen: HomeScreen,
+    }),
+    Profile: createBottomTabScreen({
+      screen: ProfileScreen,
+    }),
   },
 });
 
@@ -147,7 +154,10 @@ import {
   useFocusEffect,
   createStaticNavigation,
 } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  createBottomTabScreen,
+} from '@react-navigation/bottom-tabs';
 
 // codeblock-focus-start
 function ProfileScreen() {
@@ -173,8 +183,12 @@ function HomeScreen() {
 
 const MyTabs = createBottomTabNavigator({
   screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
+    Home: createBottomTabScreen({
+      screen: HomeScreen,
+    }),
+    Profile: createBottomTabScreen({
+      screen: ProfileScreen,
+    }),
   },
 });
 const Navigation = createStaticNavigation(MyTabs);
@@ -249,7 +263,10 @@ The `useIsFocused` hook will cause our component to re-render when we focus and 
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { useIsFocused, createStaticNavigation } from '@react-navigation/native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import {
+  createMaterialTopTabNavigator,
+  createMaterialTopTabScreen,
+} from '@react-navigation/material-top-tabs';
 
 // codeblock-focus-start
 function ProfileScreen() {
@@ -272,8 +289,12 @@ function HomeScreen() {
 
 const MyTabs = createMaterialTopTabNavigator({
   screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
+    Home: createMaterialTopTabScreen({
+      screen: HomeScreen,
+    }),
+    Profile: createMaterialTopTabScreen({
+      screen: ProfileScreen,
+    }),
   },
 });
 

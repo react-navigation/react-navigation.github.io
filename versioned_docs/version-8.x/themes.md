@@ -326,6 +326,50 @@ const MyTheme = {
 
 Providing a theme will take care of styling of all the official navigators. React Navigation also provides several tools to help you make your customizations of those navigators and the screens within the navigators can use the theme too.
 
+## Using platform colors
+
+Theme colors support `ColorValue` type, which means you can use `PlatformColor`, `DynamicColorIOS` on native, and CSS custom properties on Web for more flexibility.
+
+Example theme using `PlatformColor`:
+
+```js
+import { Platform, PlatformColor } from 'react-native';
+import { DefaultTheme } from '@react-navigation/native';
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: Platform.select({
+    ios: () => ({
+      primary: PlatformColor('systemRed'),
+      background: PlatformColor('systemGroupedBackground'),
+      card: PlatformColor('tertiarySystemBackground'),
+      text: PlatformColor('label'),
+      border: PlatformColor('separator'),
+      notification: PlatformColor('systemRed'),
+    }),
+    android: () => ({
+      primary: PlatformColor('@android:color/system_primary_light'),
+      background: PlatformColor(
+        '@android:color/system_surface_container_light'
+      ),
+      card: PlatformColor('@android:color/system_background_light'),
+      text: PlatformColor('@android:color/system_on_surface_light'),
+      border: PlatformColor('@android:color/system_outline_variant_light'),
+      notification: PlatformColor('@android:color/holo_red_light'),
+    }),
+    default: () => DefaultTheme.colors,
+  })(),
+};
+```
+
+This allows your app's navigation UI to automatically adapt to system theme changes and use native colors.
+
+:::note
+
+When using dynamic colors like `PlatformColor` or `DynamicColorIOS`, React Navigation cannot automatically adjust colors in some scenarios (e.g., adjusting the text color based on background color). In these cases, it will fall back to pre-defined colors according to the theme.
+
+:::
+
 ## Built-in themes
 
 As operating systems add built-in support for light and dark modes, supporting dark mode is less about keeping hip to trends and more about conforming to the average user expectations for how apps should work. In order to provide support for light and dark mode in a way that is reasonably consistent with the OS defaults, these themes are built in to React Navigation.

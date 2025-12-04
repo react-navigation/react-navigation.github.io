@@ -9,10 +9,7 @@ import TabItem from '@theme/TabItem';
 
 Nesting navigators means rendering a navigator inside a screen of another navigator, for example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Nested navigators" snack
+```js name="Nested navigators" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -32,7 +29,7 @@ function ProfileScreen() {
 }
 
 function FeedScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Feed');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -55,21 +52,27 @@ function MessagesScreen() {
 // codeblock-focus-start
 const HomeTabs = createBottomTabNavigator({
   screens: {
-    Feed: FeedScreen,
-    Messages: MessagesScreen,
+    Feed: createBottomTabScreen({
+      screen: FeedScreen,
+    }),
+    Messages: createBottomTabScreen({
+      screen: MessagesScreen,
+    }),
   },
 });
 
 const RootStack = createNativeStackNavigator({
   screens: {
-    Home: {
+    Home: createNativeStackScreen({
       // highlight-next-line
       screen: HomeTabs,
       options: {
         headerShown: false,
       },
-    },
-    Profile: ProfileScreen,
+    }),
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+    }),
   },
 });
 // codeblock-focus-end
@@ -80,86 +83,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Nested navigators" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Button } from '@react-navigation/elements';
-
-function ProfileScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-}
-
-function FeedScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Feed Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function MessagesScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Messages Screen</Text>
-    </View>
-  );
-}
-
-const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
-
-// codeblock-focus-start
-function HomeTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Feed" component={FeedScreen} />
-      <Tab.Screen name="Messages" component={MessagesScreen} />
-    </Tab.Navigator>
-  );
-}
-
-function RootStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        // highlight-next-line
-        component={HomeTabs}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 In the above example, `HomeTabs` contains a tab navigator. It is also used for the `Home` screen in your stack navigator in `RootStack`. So here, a tab navigator is nested inside a stack navigator:
 
@@ -236,7 +159,7 @@ function ProfileScreen() {
 }
 
 function FeedScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Feed');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -249,12 +172,12 @@ function FeedScreen() {
 }
 
 function MessagesScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Messages');
 
   React.useEffect(() => {
     // codeblock-focus-start
     const unsubscribe = navigation
-      .getParent('MyTabs')
+      .getParent('Home')
       .addListener('tabPress', (e) => {
         // Do something
         alert('Tab pressed!');
@@ -279,7 +202,6 @@ const HomeStack = createNativeStackNavigator({
 });
 
 const RootTabs = createBottomTabNavigator({
-  id: 'MyTabs',
   screens: {
     Home: {
       screen: HomeStack,
@@ -318,7 +240,7 @@ function ProfileScreen() {
 }
 
 function FeedScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Feed');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -331,12 +253,12 @@ function FeedScreen() {
 }
 
 function MessagesScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Messages');
 
   React.useEffect(() => {
     // codeblock-focus-start
     const unsubscribe = navigation
-      .getParent('MyTabs')
+      .getParent('Home')
       .addListener('tabPress', (e) => {
         // Do something
         alert('Tab pressed!');
@@ -367,7 +289,7 @@ function HomeStack() {
 
 function RootTabs() {
   return (
-    <Tab.Navigator id="MyTabs">
+    <Tab.Navigator>
       <Tab.Screen
         name="Home"
         component={HomeStack}
@@ -390,7 +312,7 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-Here `'MyTabs'` refers to the value you pass in the `id` of the parent tab navigator whose event you want to listen to.
+Here `'Home'` refers to the name of the parent screen that contains the tab navigator whose event you want to listen to.
 
 ### Parent navigator's UI is rendered on top of child navigator
 
@@ -422,7 +344,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -438,7 +360,7 @@ function HomeScreen() {
 }
 
 function FeedScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Feed');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -449,7 +371,7 @@ function FeedScreen() {
 }
 
 function MessagesScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Messages');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -499,7 +421,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -515,7 +437,7 @@ function HomeScreen() {
 }
 
 function FeedScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Feed');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -526,7 +448,7 @@ function FeedScreen() {
 }
 
 function MessagesScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Messages');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -608,7 +530,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -631,7 +553,7 @@ function HomeScreen() {
 }
 
 function FeedScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Feed');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -642,7 +564,7 @@ function FeedScreen() {
 }
 
 function MessagesScreen({ route }) {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Messages');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -691,7 +613,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -714,7 +636,7 @@ function HomeScreen() {
 }
 
 function FeedScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Feed');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -725,7 +647,7 @@ function FeedScreen() {
 }
 
 function MessagesScreen({ route }) {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Messages');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -843,7 +765,7 @@ function ProfileScreen() {
 }
 
 function FeedScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Feed');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -912,7 +834,7 @@ function ProfileScreen() {
 }
 
 function FeedScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Feed');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

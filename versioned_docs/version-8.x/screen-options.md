@@ -56,18 +56,18 @@ function ProfileScreen() {
 // codeblock-focus-start
 const RootStack = createNativeStackNavigator({
   screens: {
-    Home: {
+    Home: createNativeStackScreen({
       screen: HomeScreen,
       options: {
         title: 'Awesome app',
       },
-    },
-    Profile: {
+    }),
+    Profile: createNativeStackScreen({
       screen: ProfileScreen,
       options: {
         title: 'My profile',
       },
-    },
+    }),
   },
 });
 
@@ -84,7 +84,7 @@ You can also pass a function to `options`. The function will receive the [`navig
 ```js static2dynamic
 const RootStack = createNativeStackNavigator({
   screens: {
-    Home: {
+    Home: createNativeStackScreen({
       screen: HomeScreen,
       options: ({ navigation }) => ({
         title: 'Awesome app',
@@ -92,7 +92,7 @@ const RootStack = createNativeStackNavigator({
           <DrawerButton onPress={() => navigation.toggleDrawer()} />;
         },
       }),
-    },
+    }),
   },
 });
 ```
@@ -114,7 +114,10 @@ import {
   useNavigation,
   createStaticNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 
 // codeblock-focus-start
 const RootStack = createNativeStackNavigator({
@@ -233,8 +236,12 @@ Similar to `options`, you can also pass a function to `screenOptions`. The funct
 ```js
 const Stack = createNativeStackNavigator({
   screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
+    Home: createNativeStackScreen({
+      screen: HomeScreen,
+    }),
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+    }),
   },
   groups: {
     Modal: {
@@ -243,8 +250,12 @@ const Stack = createNativeStackNavigator({
         headerLeft: () => <CancelButton onPress={navigation.goBack} />,
       },
       screens: {
-        Settings: Settings,
-        Share: Share,
+        Settings: createNativeStackScreen({
+          screen: Settings,
+        }),
+        Share: createNativeStackScreen({
+          screen: Share,
+        }),
       },
     },
   },
@@ -287,8 +298,12 @@ const RootStack = createNativeStackNavigator({
     },
   },
   screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
+    Home: createNativeStackScreen({
+      screen: HomeScreen,
+    }),
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+    }),
   },
 });
 ```
@@ -299,7 +314,10 @@ Similar to `options`, you can also pass a function to `screenOptions`. The funct
 import * as React from 'react';
 import { View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  createBottomTabScreen,
+} from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 // codeblock-focus-start
@@ -321,8 +339,12 @@ const MyTabs = createBottomTabNavigator({
     },
   }),
   screens: {
-    Home: EmptyScreen,
-    Profile: EmptyScreen,
+    Home: createBottomTabScreen({
+      screen: EmptyScreen,
+    }),
+    Profile: createBottomTabScreen({
+      screen: EmptyScreen,
+    }),
   },
 });
 // codeblock-focus-end
