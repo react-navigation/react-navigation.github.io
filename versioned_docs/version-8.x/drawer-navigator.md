@@ -450,7 +450,7 @@ function MyDrawer() {
       screenOptions={{
         drawerType: isLargeScreen ? 'permanent' : 'back',
         drawerStyle: isLargeScreen ? null : { width: '100%' },
-        overlayColor: 'transparent',
+        overlayStyle: { backgroundColor: 'transparent' },
       }}
     >
       {/* Screens */}
@@ -483,9 +483,15 @@ Supported values:
 
 - `none`
 
-#### `overlayColor`
+#### `overlayStyle`
 
-Color overlay to be displayed on top of the content view when drawer gets open. The opacity is animated from `0` to `1` when the drawer opens.
+Style for the overlay on top of the content view when drawer gets open. You can use this to customize the overlay color, opacity, and other properties:
+
+```js
+overlayStyle: {
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+}
+```
 
   <video playsInline autoPlay muted loop>
     <source src="/assets/7.x/drawer/overlayColor.mp4" />

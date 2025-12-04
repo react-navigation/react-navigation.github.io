@@ -4,10 +4,14 @@ title: Bottom Tabs Navigator
 sidebar_label: Bottom Tabs
 ---
 
-A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
+Bottom Tab Navigator displays a set of screens with a tab bar to switch between them.
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/bottom-tabs.mp4" />
+  <source src="/assets/7.x/native-bottom-tabs-android.mp4" />
+</video>
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-bottom-tabs-ios.mp4" />
 </video>
 
 ## Installation
@@ -80,6 +84,52 @@ export default function App() {
 
 In addition to the [common props](navigator.md#configuration) shared by all navigators, the bottom tab navigator accepts the following additional props:
 
+#### `implementation`
+
+The implementation to use for rendering the tab bar. Possible values:
+
+- `'native'` (default) - Uses native bottom tabs on iOS and Android. This allows matching the native design such as liquid glass effect on iOS 26.
+- `'custom'` - Uses a JavaScript-based implementation for the tab bar. Use this if you need more customization than what's possible with native tabs.
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+createBottomTabNavigator({
+  implementation: 'custom',
+  // ...
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<Tab.Navigator implementation="custom">{/* ... */}</Tab.Navigator>
+```
+
+</TabItem>
+</Tabs>
+
+When using native tabs, some options behave differently:
+
+- `tabBarShowLabel` is replaced with `tabBarLabelVisibilityMode` which accepts:
+  - `"auto"` (default)
+  - `"selected"`
+  - `"labeled"` - same as `tabBarShowLabel: true`
+  - `"unlabeled"` - same as `tabBarShowLabel: false`
+- `tabBarLabel` only accepts a `string`
+- `tabBarIcon` accepts a function that returns an icon object
+
+:::note
+
+- The `native` implementation uses `UITabBarController` on iOS and `BottomNavigationView` on Android.
+- Liquid Glass effect on iOS 26+ requires your app to be built with Xcode 26 or above.
+- On Android, at most 5 tabs are supported with `native` implementation. This is a limitation of the underlying native component.
+- The `native` implementation requires React Native 0.79 or above. If you're using [Expo](https://expo.dev/), it requires SDK 53 or above.
+
+:::
+
 #### `backBehavior`
 
 This controls what happens when `goBack` is called in the navigator. This includes pressing the device's back button or back gesture on Android.
@@ -97,9 +147,13 @@ It supports the following values:
 
 Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
 
+Only supported with `custom` implementation.
+
 #### `tabBar`
 
 Function that returns a React element to display as the tab bar.
+
+Only supported with `custom` implementation.
 
 The function receives an object containing the following properties as the argument:
 
@@ -272,11 +326,61 @@ Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`
 
 #### `tabBarLabel`
 
-Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarShowLabel`.
+Title string of a tab displayed in the tab bar. When undefined, scene `title` is used. To hide, see [`tabBarLabelVisibilityMode`](#tabbarlabelvisibilitymode).
 
-#### `tabBarShowLabel`
+Overrides the label provided by [`tabBarSystemItem`](#tabbarsystemitem) on iOS.
 
-Whether the tab label should be visible. Defaults to `true`.
+#### `tabBarSystemItem`
+
+Uses iOS built-in tab bar items with standard iOS styling and localized titles. Supported values:
+
+- `bookmarks`
+- `contacts`
+- `downloads`
+- `favorites`
+- `featured`
+- `history`
+- `more`
+- `mostRecent`
+- `mostViewed`
+- `recents`
+- `search`
+- `topRated`
+
+Only supported with `native` implementation on iOS.
+
+The [`tabBarIcon`](#tabbaricon) and [`tabBarLabel`](#tabbarlabel) options will override the icon and label from the system item. If you want to keep the system behavior on iOS, but need to provide icon and label for other platforms, use `Platform.OS` or `Platform.select` to conditionally set `undefined` for `tabBarIcon` and `tabBarLabel` on iOS.
+
+##### Search tab on iOS 26+
+
+The `tabBarSystemItem` option has special styling and behavior when set to `search` on iOS 26+.
+
+Additionally, when the `search` tab is selected, the tab bar transforms into a search field if the screen in the tab navigator or a nested [native stack navigator](native-stack-navigator.md) has [`headerSearchBarOptions`](native-stack-navigator.md#headersearchbaroptions) configured and the native header is shown with [`headerShown: true`](native-stack-navigator.md#headershown). This won't work if a custom header is provided with the `header` option.
+
+Example:
+
+```js
+tabBarSystemItem: 'search',
+headerShown: true,
+headerSearchBarOptions: {
+  placeholder: 'Search',
+},
+```
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-bottom-tabs-ios-search.mp4" />
+</video>
+
+#### `tabBarLabelVisibilityMode`
+
+The label visibility mode for the tab bar items. Supported values:
+
+- `auto` - decided based on platform and implementation (default)
+- `labeled` - labels are always shown
+- `unlabeled` - labels are never shown
+- `selected` - labels shown only for selected tab (only supported on Android with `native` implementation)
+
+Supported on all platforms with `custom` implementation. Only supported on Android with `native` implementation.
 
 #### `tabBarLabelPosition`
 
@@ -284,15 +388,29 @@ Whether the label is shown below the icon or beside the icon.
 
 By default, the position is chosen automatically based on device width.
 
+Only supported with `custom` implementation.
+
 - `below-icon`: the label is shown below the icon (typical for iPhones)
   <img src="/assets/7.x/bottom-tabs/tabBarLabelPosition-below.png" width="400" alt="Tab bar label position - below" />
 
 - `beside-icon` the label is shown next to the icon (typical for iPad)
   <img src="/assets/7.x/bottom-tabs/tabBarLabelPosition-beside.png" width="700" alt="Tab bar label position - beside" />
 
+#### `tabBarAllowFontScaling`
+
+Whether label font should scale to respect Text Size accessibility settings. Defaults to `true`.
+
+Only supported with `custom` implementation.
+
 #### `tabBarLabelStyle`
 
-Style object for the tab label.
+Style object for the tab label. Supported properties:
+
+- `fontFamily`
+- `fontSize`
+- `fontWeight`
+- `fontStyle`
+
 <img src="/assets/7.x/bottom-tabs/tabBarLabelStyle.png" width="500" alt="Tab bar label style" />
 
 Example:
@@ -309,9 +427,84 @@ Example:
 
 Function that given `{ focused: boolean, color: string, size: number }` returns a React.Node, to display in the tab bar.
 
+With `native` implementation, you can pass an icon object directly instead of a function. A React element is only supported with `custom` implementation.
+
+It overrides the icon provided by [`tabBarSystemItem`](#tabbarsystemitem) on iOS.
+
+The icon can be of following types with `native` implementation:
+
+- Local image - Supported on iOS and Android
+
+  ```js
+  tabBarIcon: {
+    type: 'image',
+    source: require('./path/to/icon.png'),
+  }
+  ```
+
+  On iOS, you can additionally pass a `tinted` property to control whether the icon should be tinted with the active/inactive color:
+
+  ```js
+  tabBarIcon: {
+    type: 'image',
+    source: require('./path/to/icon.png'),
+    tinted: false,
+  }
+  ```
+
+  The image is tinted by default.
+
+- [SF Symbols](https://developer.apple.com/sf-symbols/) name - Supported on iOS
+
+  ```js
+  tabBarIcon: {
+    type: 'sfSymbol',
+    name: 'heart',
+  }
+  ```
+
+- [Drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) name - Supported on Android
+
+  ```js
+  tabBarIcon: {
+    type: 'drawableResource',
+    name: 'sunny',
+  }
+  ```
+
+To render different icons for active and inactive states with `native` implementation, you can use a function:
+
+```js
+tabBarIcon: ({ focused }) => {
+  return {
+    type: 'sfSymbol',
+    name: focused ? 'heart.fill' : 'heart',
+  };
+},
+```
+
+This is only supported on iOS. On Android, the icon specified for inactive state will be used for both active and inactive states.
+
+To provide different icons for different platforms, you can use [`Platform.select`](https://reactnative.dev/docs/platform-specific-code):
+
+```js
+tabBarIcon: Platform.select({
+  ios: {
+    type: 'sfSymbol',
+    name: 'heart',
+  },
+  android: {
+    type: 'drawableResource',
+    name: 'heart_icon',
+  },
+});
+```
+
 #### `tabBarIconStyle`
 
 Style object for the tab icon.
+
+Only supported with `custom` implementation.
 
 #### `tabBarBadge`
 
@@ -321,7 +514,12 @@ Text to show in a badge on the tab icon. Accepts a `string` or a `number`.
 
 #### `tabBarBadgeStyle`
 
-Style for the badge on the tab icon. You can specify a background color or text color here.
+Style for the badge on the tab icon. Supported properties:
+
+- `backgroundColor`
+- `color`
+
+Only supported with `native` implementation on Android.
 
 <img src="/assets/7.x/bottom-tabs/tabBarBadgeStyle.png" width="500" alt="Tab bar badge style" />
 
@@ -338,9 +536,13 @@ Example:
 
 Accessibility label for the tab button. This is read by the screen reader when the user taps the tab. It's recommended to set this if you don't have a label for the tab.
 
+Only supported with `custom` implementation.
+
 #### `tabBarButton`
 
 Function which returns a React element to render as the tab bar button. It wraps the icon and label. Renders `Pressable` by default.
+
+Only supported with `custom` implementation.
 
 You can specify a custom implementation here:
 
@@ -352,6 +554,8 @@ tabBarButton: (props) => <TouchableOpacity {...props} />;
 
 ID to locate this tab button in tests.
 
+Only supported with `custom` implementation.
+
 #### `tabBarActiveTintColor`
 
 Color for the icon and label in the active tab.
@@ -362,27 +566,80 @@ Color for the icon and label in the active tab.
 Color for the icon and label in the inactive tabs.
 <img src="/assets/7.x/bottom-tabs/tabBarInactiveTintColor.png" width="500" alt="Tab bar inactive tint color" />
 
+#### `tabBarActiveIndicatorColor`
+
+Background color of the active indicator.
+
+Only supported with `native` implementation on Android.
+
+#### `tabBarActiveIndicatorEnabled`
+
+Whether the active indicator should be used. Defaults to `true`.
+
+Only supported with `native` implementation on Android.
+
+#### `tabBarRippleColor`
+
+Color of the ripple effect when pressing a tab.
+
+Only supported with `native` implementation on Android.
+
 #### `tabBarActiveBackgroundColor`
 
 Background color for the active tab.
+
+Only supported with `custom` implementation.
 
 #### `tabBarInactiveBackgroundColor`
 
 Background color for the inactive tabs.
 
+Only supported with `custom` implementation.
+
 #### `tabBarHideOnKeyboard`
 
 Whether the tab bar is hidden when the keyboard opens. Defaults to `false`.
+
+Only supported with `custom` implementation.
+
+#### `tabBarVisibilityAnimationConfig`
+
+Animation config for showing and hiding the tab bar when the keyboard is shown/hidden.
+
+Only supported with `custom` implementation.
+
+Example:
+
+```js
+tabBarVisibilityAnimationConfig: {
+  show: {
+    animation: 'timing',
+    config: {
+      duration: 200,
+    },
+  },
+  hide: {
+    animation: 'timing',
+    config: {
+      duration: 100,
+    },
+  },
+},
+```
 
 #### `tabBarItemStyle`
 
 Style object for the tab item container.
 
+Only supported with `custom` implementation.
+
 #### `tabBarStyle`
 
 Style object for the tab bar. You can configure styles such as background color here.
 
-To show your screen under the tab bar, you can set the `position` style to absolute:
+With `custom` implementation, this accepts any style properties. With `native` implementation, only `backgroundColor` and `shadowColor` (iOS 18 and below) are supported.
+
+To show your screen under the tab bar, you can set the `position` style to absolute (only with `custom` implementation):
 
 ```js
 <Tab.Navigator
@@ -396,7 +653,11 @@ You also might need to add a bottom margin to your content if you have an absolu
 
 #### `tabBarBackground`
 
-Function which returns a React Element to use as background for the tab bar. You could render an image, a gradient, blur view etc.:
+Function which returns a React Element to use as background for the tab bar. You could render an image, a gradient, blur view etc.
+
+Only supported with `custom` implementation.
+
+Example:
 
 ```js
 import { BlurView } from 'expo-blur';
@@ -425,6 +686,8 @@ Position of the tab bar. Available values are:
 - `top`
 - `left`
 - `right`
+
+Only supported with `custom` implementation.
 
 When the tab bar is positioned on the `left` or `right`, it is styled as a sidebar. This can be useful when you want to show a sidebar on larger screens and a bottom tab bar on smaller screens:
 
@@ -498,9 +761,76 @@ Variant of the tab bar. Available values are:
 - `uikit` (Default) - The tab bar will be styled according to the iOS UIKit guidelines.
 - `material` - The tab bar will be styled according to the Material Design guidelines.
 
+Only supported with `custom` implementation.
+
 The `material` variant is currently only supported when the [`tabBarPosition`](#tabbarposition) is set to `left` or `right`.
 
 ![Material sidebar](/assets/7.x/bottom-tabs-side-material.png)
+
+#### `tabBarBlurEffect`
+
+Blur effect applied to the tab bar on iOS 18 and lower when tab screen is selected.
+
+Supported values:
+
+- `none` - no blur effect
+- `systemDefault` - default blur effect applied by the system
+- `extraLight`
+- `light`
+- `dark`
+- `regular`
+- `prominent`
+- `systemUltraThinMaterial`
+- `systemThinMaterial`
+- `systemMaterial`
+- `systemThickMaterial`
+- `systemChromeMaterial`
+- `systemUltraThinMaterialLight`
+- `systemThinMaterialLight`
+- `systemMaterialLight`
+- `systemThickMaterialLight`
+- `systemChromeMaterialLight`
+- `systemUltraThinMaterialDark`
+- `systemThinMaterialDark`
+- `systemMaterialDark`
+- `systemThickMaterialDark`
+- `systemChromeMaterialDark`
+
+Defaults to `systemDefault`.
+
+Only supported with `native` implementation on iOS 18 and below.
+
+#### `tabBarControllerMode`
+
+The display mode for the tab bar. Supported values:
+
+- `auto` - the system sets the display mode based on the tab's content
+- `tabBar` - the system displays the content only as a tab bar
+- `tabSidebar` - the tab bar is displayed as a sidebar
+
+Supported on all platforms with `custom` implementation. By default:
+
+- `tabBar` is positioned at the bottom
+- `tabSidebar` is positioned on the left (LTR) or right (RTL)
+
+The [`tabBarPosition`](#tabbarposition) option can be used to override this in `custom` implementation.
+
+Supported on iOS 18 and above with `native` implementation. Not supported on tvOS.
+
+#### `tabBarMinimizeBehavior`
+
+The minimize behavior for the tab bar. Supported values:
+
+- `auto` - resolves to the system default minimize behavior
+- `never` - the tab bar does not minimize
+- `onScrollDown` - the tab bar minimizes when scrolling down and expands when scrolling back up
+- `onScrollUp` - the tab bar minimizes when scrolling up and expands when scrolling back down
+
+Only supported with `native` implementation on iOS 26 and above.
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-bottom-tabs-ios-minimize.mp4" />
+</video>
 
 #### `lazy`
 
@@ -525,7 +855,9 @@ Style object for the component wrapping the screen content.
 
 ### Header related options
 
-You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Tab.Navigator` or `options` prop of `Tab.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
+With `custom` implementation, you can find the list of header related options in the [Elements library documentation](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Tab.Navigator` or `options` prop of `Tab.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are documented in that page.
+
+With `native` implementation, the navigator does not show a header by default. It renders a native stack header if `headerShown` is set to `true` in the screen options explicitly, or if a custom header is provided with the `header` option. It supports most of the [header related options supported in `@react-navigation/native-stack`](native-stack-navigator.md#header-related-options) apart from the options related to the back button (prefixed with `headerBack`).
 
 In addition to those, the following options are also supported in bottom tabs:
 
@@ -587,7 +919,13 @@ This event is fired when the user presses the tab button for the current screen 
   - If the screen for the tab renders a scroll view, you can use [`useScrollToTop`](use-scroll-to-top.md) to scroll it to top
   - If the screen for the tab renders a stack navigator, a `popToTop` action is performed on the stack
 
-To prevent the default behavior, you can call `event.preventDefault`:
+To prevent the default behavior, you can call `event.preventDefault`.
+
+:::note
+
+Calling `event.preventDefault` is only supported with the `custom` implementation. With the `native` implementation, the default behavior cannot be prevented.
+
+:::
 
 ```js name="Tab Press Event" snack static2dynamic
 import * as React from 'react';
@@ -659,11 +997,45 @@ By default, tabs are rendered lazily. So if you add a listener inside a screen c
 
 This event is fired when the user presses the tab button for the current screen in the tab bar for an extended period. If you have a custom tab bar, make sure to emit this event.
 
+Only supported with the `custom` implementation.
+
 Example:
 
 ```js
 React.useEffect(() => {
   const unsubscribe = navigation.addListener('tabLongPress', (e) => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
+```
+
+#### `transitionStart`
+
+This event is fired when a transition animation starts when switching tabs.
+
+Example:
+
+```js
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('transitionStart', (e) => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
+```
+
+#### `transitionEnd`
+
+This event is fired when a transition animation ends when switching tabs.
+
+Example:
+
+```js
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('transitionEnd', (e) => {
     // Do something
   });
 
@@ -778,6 +1150,12 @@ import { BottomTabBarHeightContext } from '@react-navigation/bottom-tabs';
 ## Animations
 
 By default, switching between tabs doesn't have any animation. You can specify the `animation` option to customize the transition animation.
+
+:::note
+
+Animations are only supported with the `custom` implementation.
+
+:::
 
 Supported values for `animation` are:
 

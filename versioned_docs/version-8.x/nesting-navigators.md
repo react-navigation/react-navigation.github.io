@@ -254,7 +254,7 @@ function MessagesScreen() {
   React.useEffect(() => {
     // codeblock-focus-start
     const unsubscribe = navigation
-      .getParent('MyTabs')
+      .getParent('Home')
       .addListener('tabPress', (e) => {
         // Do something
         alert('Tab pressed!');
@@ -279,7 +279,6 @@ const HomeStack = createNativeStackNavigator({
 });
 
 const RootTabs = createBottomTabNavigator({
-  id: 'MyTabs',
   screens: {
     Home: {
       screen: HomeStack,
@@ -336,7 +335,7 @@ function MessagesScreen() {
   React.useEffect(() => {
     // codeblock-focus-start
     const unsubscribe = navigation
-      .getParent('MyTabs')
+      .getParent('Home')
       .addListener('tabPress', (e) => {
         // Do something
         alert('Tab pressed!');
@@ -367,7 +366,7 @@ function HomeStack() {
 
 function RootTabs() {
   return (
-    <Tab.Navigator id="MyTabs">
+    <Tab.Navigator>
       <Tab.Screen
         name="Home"
         component={HomeStack}
@@ -390,7 +389,7 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-Here `'MyTabs'` refers to the value you pass in the `id` of the parent tab navigator whose event you want to listen to.
+Here `'Home'` refers to the name of the parent screen that contains the tab navigator whose event you want to listen to.
 
 ### Parent navigator's UI is rendered on top of child navigator
 

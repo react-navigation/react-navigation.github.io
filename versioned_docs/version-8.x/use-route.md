@@ -9,9 +9,11 @@ import TabItem from '@theme/TabItem';
 
 `useRoute` is a hook which gives access to `route` object. It's useful when you cannot pass down the `route` object from props to the component, or don't want to pass it in case of a deeply nested child.
 
-`useRoute()` returns the `route` object of the screen it's inside.
+It can be used in two ways.
 
-## Example
+## Getting the route object by screen name
+
+The hook accepts the name of the current screen or any of its parent screens to get the corresponding route object:
 
 ```js name="useRoute hook" snack static2dynamic
 import * as React from 'react';
@@ -27,14 +29,14 @@ import { useRoute } from '@react-navigation/native';
 
 function MyText() {
   // highlight-next-line
-  const route = useRoute();
+  const route = useRoute('Profile');
 
   return <Text>{route.params.caption}</Text>;
 }
 // codeblock-focus-end
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -76,7 +78,19 @@ function App() {
 export default App;
 ```
 
-Check how to setup `useRoute` with TypeScript [here](typescript.md#annotating-useroute).
+## Getting the current route object
+
+You can also use `useRoute` without any arguments to get the route object for the current screen:
+
+```js
+function MyComponent() {
+  const route = useRoute();
+
+  return <Text>{route.name}</Text>;
+}
+```
+
+This is often useful for re-usable components that are used across multiple screens.
 
 See the documentation for the [`route` object](route-object.md) for more info.
 
@@ -94,7 +108,7 @@ class MyText extends React.Component {
 
 // Wrap and export
 export default function (props) {
-  const route = useRoute();
+  const route = useRoute('Profile');
 
   return <MyText {...props} route={route} />;
 }

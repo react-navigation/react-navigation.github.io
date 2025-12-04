@@ -730,14 +730,33 @@ Usage:
 <Label>Home</Label>
 ```
 
-### `ResourceSavingView`
+### `Badge`
 
-A component which aids in improving performance for inactive screens by utilizing [`removeClippedSubviews`](https://reactnative.dev/docs/view#removeclippedsubviews). It accepts a `visible` prop to indicate whether a screen should be clipped.
+A component that renders a badge, typically used to show a count or status indicator on tab icons.
+
+It accepts the following props:
+
+- `visible` - Whether the badge is visible.
+- `children` - Content of the badge (string or number).
+- `size` - Size of the badge. Defaults to `18`.
+- `style` - Style object for the badge.
 
 Usage:
 
-```js
-<ResourceSavingView visible={0}>{/* Content */}</ResourceSavingView>
+```jsx
+<Badge visible={true}>5</Badge>
+```
+
+### `Text`
+
+A themed text component that automatically applies the theme's text color and font styles.
+
+It accepts the same props as React Native's [`Text`](https://reactnative.dev/docs/text) component.
+
+Usage:
+
+```jsx
+<Text>Hello World</Text>
 ```
 
 ## Utilities
@@ -818,20 +837,6 @@ import { useHeaderHeight } from '@react-navigation/elements';
 const headerHeight = useHeaderHeight();
 ```
 
-### `getDefaultHeaderHeight`
-
-Helper that returns the default header height. It takes the following parameters:
-
-- `layout` - Layout of the screen, i.e. an object containing `height` and `width` properties.
-- `statusBarHeight` - height of the statusbar
-
-### `getHeaderTitle`
-
-Helper that returns the title text to use in header. It takes the following parameters:
-
-- `options` - The options object of the screen.
-- `fallback` - Fallback title string if no title was found in options.
-
 ### `useFrameSize`
 
 Hook that returns the size of the frame of the parent navigator. It accepts a selector function which receives the frame dimensions and returns a value:
@@ -845,3 +850,61 @@ const isLandscape = useFrameSize((frame) => frame.width > frame.height);
 ```
 
 The selector ensures that the component only re-renders when we need to.
+
+### `getDefaultHeaderHeight`
+
+Helper that returns the default header height. It takes an object with the following properties:
+
+- `landscape` - Whether the device is in landscape orientation.
+- `modalPresentation` - Whether the screen is presented as a modal.
+- `topInset` - The height of the top inset (status bar height).
+
+```js
+import { getDefaultHeaderHeight } from '@react-navigation/elements';
+
+// ...
+
+const headerHeight = getDefaultHeaderHeight({
+  landscape: false,
+  modalPresentation: false,
+  topInset: statusBarHeight,
+});
+```
+
+### `getHeaderTitle`
+
+Helper that returns the title text to use in header. It takes the following parameters:
+
+- `options` - The options object of the screen.
+- `fallback` - Fallback title string if no title was found in options.
+
+### `getLabel`
+
+Helper that returns the label text to use. It takes the following parameters:
+
+- `options` - An object with optional `label` and `title` properties.
+- `fallback` - Fallback label string if no label or title was found in options.
+
+```js
+import { getLabel } from '@react-navigation/elements';
+
+// ...
+
+const label = getLabel(options, route.name);
+```
+
+### `getDefaultSidebarWidth`
+
+Helper that returns the default sidebar width based on the screen dimensions. It follows Material Design 3 guidelines for navigation drawer specs.
+
+It takes an object with the following property:
+
+- `width` - The width of the screen.
+
+```js
+import { getDefaultSidebarWidth } from '@react-navigation/elements';
+
+// ...
+
+const sidebarWidth = getDefaultSidebarWidth({ width: screenWidth });
+```

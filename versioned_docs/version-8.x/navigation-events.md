@@ -279,7 +279,7 @@ const unsubscribe = navigation
   });
 ```
 
-Here `'MyTabs'` refers to the value you pass in the `id` prop of the parent `Tab.Navigator` whose event you want to listen to.
+Here `'MyTabs'` refers to the name of the parent screen in the tab navigator whose event you want to listen to.
 
 :::warning
 

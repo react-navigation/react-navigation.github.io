@@ -288,10 +288,7 @@ An alternative approach is to nest 2 [drawer navigators](drawer-navigator.md) in
 
 Here we have 2 drawer navigators nested inside each other, one is positioned on left and the other on the right:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Multiple drawers" snack
+```js name="Multiple drawers" snack static2dynamic
 import * as React from 'react';
 import { View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -336,60 +333,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Multiple drawers" snack
-import * as React from 'react';
-import { View } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.openDrawer()}>Open drawer</Button>
-    </View>
-  );
-}
-
-const LeftDrawer = createDrawerNavigator();
-
-const LeftDrawerScreen = () => {
-  return (
-    <LeftDrawer.Navigator screenOptions={{ drawerPosition: 'left' }}>
-      <LeftDrawer.Screen name="Home" component={HomeScreen} />
-    </LeftDrawer.Navigator>
-  );
-};
-
-const RightDrawer = createDrawerNavigator();
-
-const RightDrawerScreen = () => {
-  return (
-    <RightDrawer.Navigator
-      screenOptions={{ drawerPosition: 'right', headerShown: false }}
-    >
-      <RightDrawer.Screen name="HomeDrawer" component={LeftDrawerScreen} />
-    </RightDrawer.Navigator>
-  );
-};
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <RightDrawerScreen />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 <video playsInline autoPlay muted loop>
   <source src="/assets/navigators/drawer/drawer-multiple.mp4" />
@@ -404,16 +347,18 @@ To solve this, we need to use [`navigation.getParent`](navigation-object.md#getp
 <Button onPress={() => navigation.getParent().openDrawer()}>Open right drawer</Button>
 ```
 
-However, this means that our button needs to know about the parent navigators, which isn't ideal. If our button is further nested inside other navigators, it'd need multiple `getParent()` calls. To address this, we can use the [`id` prop](navigator.md#id) to identify the parent navigator.
+However, this means that our button needs to know about the parent navigators, which isn't ideal. If our button is further nested inside other navigators, it'd need multiple `getParent()` calls. To solve this, we can pass the name of the screen where the navigator is to the `getParent` method to directly refer to the desired navigator.
+
+In this case:
+
+- `navigation.getParent('Home').openDrawer()` opens the left drawer since `'Home'` is a screen in the left drawer navigator.
+- `navigation.getParent('HomeDrawer').openDrawer()` opens the right drawer since `'HomeDrawer'` is a screen in the right drawer navigator.
 
 To customize the contents of the drawer, we can use the [`drawerContent` prop](drawer-navigator.md#drawercontent) to pass in a function that renders a custom component.
 
 The final code would look like this:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Multiple drawers navigators" snack
+```js name="Multiple drawers navigators" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -428,10 +373,10 @@ function HomeScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.getParent('LeftDrawer').openDrawer()}>
+      <Button onPress={() => navigation.getParent('Home').openDrawer()}>
         Open left drawer
       </Button>
-      <Button onPress={() => navigation.getParent('RightDrawer').openDrawer()}>
+      <Button onPress={() => navigation.getParent('HomeDrawer').openDrawer()}>
         Open right drawer
       </Button>
     </View>
@@ -446,8 +391,7 @@ function RightDrawerContent() {
   );
 }
 
-const LeftDrawerScreen = createDrawerNavigator({
-  id: 'LeftDrawer',
+const LeftDrawer = createDrawerNavigator({
   screenOptions: {
     drawerPosition: 'left',
   },
@@ -456,105 +400,27 @@ const LeftDrawerScreen = createDrawerNavigator({
   },
 });
 
-const RightDrawerScreen = createDrawerNavigator({
-  id: 'RightDrawer',
+const RightDrawer = createDrawerNavigator({
   drawerContent: (props) => <RightDrawerContent {...props} />,
   screenOptions: {
     drawerPosition: 'right',
     headerShown: false,
   },
   screens: {
-    HomeDrawer: LeftDrawerScreen,
+    HomeDrawer: LeftDrawer,
   },
 });
 
-const Navigation = createStaticNavigation(RightDrawerScreen);
+const Navigation = createStaticNavigation(RightDrawer);
 
 export default function App() {
   return <Navigation />;
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Multiple drawers navigators" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.getParent('LeftDrawer').openDrawer()}>
-        Open left drawer
-      </Button>
-      <Button onPress={() => navigation.getParent('RightDrawer').openDrawer()}>
-        Open right drawer
-      </Button>
-    </View>
-  );
-}
-
-function RightDrawerContent() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>This is the right drawer</Text>
-    </View>
-  );
-}
-
-const LeftDrawer = createDrawerNavigator();
-
-function LeftDrawerScreen() {
-  return (
-    <LeftDrawer.Navigator
-      id="LeftDrawer"
-      screenOptions={{ drawerPosition: 'left' }}
-    >
-      <LeftDrawer.Screen name="Home" component={HomeScreen} />
-    </LeftDrawer.Navigator>
-  );
-}
-
-const RightDrawer = createDrawerNavigator();
-
-function RightDrawerScreen() {
-  return (
-    <RightDrawer.Navigator
-      id="RightDrawer"
-      drawerContent={(props) => <RightDrawerContent {...props} />}
-      screenOptions={{
-        drawerPosition: 'right',
-        headerShown: false,
-      }}
-    >
-      <RightDrawer.Screen name="HomeDrawer" component={LeftDrawerScreen} />
-    </RightDrawer.Navigator>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <RightDrawerScreen />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
-Here, we are passing `"LeftDrawer"` and `"RightDrawer"` strings (you can use any string here) in the `id` prop of the drawer navigators. Then we use `navigation.getParent('LeftDrawer').openDrawer()` to open the left drawer and `navigation.getParent('RightDrawer').openDrawer()` to open the right drawer.
-
 ## Summary
 
 - To have multiple drawers, you can use [`react-native-drawer-layout`](drawer-layout.md) directly in combination with a drawer navigator.
 - The [`drawerPosition`](drawer-layout.md#drawerposition) prop can be used to position the drawer on the right.
 - The methods to control the drawer can be passed down using context API when using [`react-native-drawer-layout`](drawer-layout.md).
-- When nesting multiple navigators, you can use [`navigation.getParent`](navigation-object.md#getparent) in combination with the [`id` prop](navigator.md#id) to refer to the desired drawer.
+- When nesting multiple navigators, you can use [`navigation.getParent`](navigation-object.md#getparent) with a screen name to refer to the desired drawer.

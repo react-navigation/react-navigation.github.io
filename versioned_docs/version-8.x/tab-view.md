@@ -205,7 +205,9 @@ props.jumpTo('albums');
 
 All the scenes rendered with `SceneMap` are optimized using `React.PureComponent` and don't re-render when parent's props or states change. If you need more control over how your scenes update (e.g. - triggering a re-render even if the `navigationState` didn't change), use `renderScene` directly instead of using `SceneMap`.
 
-**IMPORTANT:** **Do not** pass inline functions to `SceneMap`, for example, don't do the following:
+:::warning
+
+**Do not** pass inline functions to `SceneMap`, for example, don't do the following:
 
 ```js
 SceneMap({
@@ -213,6 +215,8 @@ SceneMap({
   second: SecondRoute,
 });
 ```
+
+:::
 
 Always define your components elsewhere in the top level of the file. If you pass inline functions, it'll re-create the component every render, which will cause the entire route to unmount and remount every change. It's very bad for performance and will also cause any local state to be lost.
 
@@ -303,6 +307,72 @@ String indicating whether the keyboard gets dismissed in response to a drag gest
 ##### `swipeEnabled`
 
 Boolean indicating whether to enable swipe gestures. Swipe gestures are enabled by default. Passing `false` will disable swipe gestures, but the user can still switch tabs by pressing the tab bar.
+
+##### `renderAdapter`
+
+A function that returns a custom adapter for rendering pages. By default, `react-native-tab-view` uses [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) for rendering pages on Android and iOS. However, it may not be suitable for all use cases.
+
+You can use built-in adapters or create your own custom adapter. For example, you can use `ScrollViewAdapter` to use a `ScrollView` for rendering pages:
+
+```js
+import React from 'react';
+import { TabView, ScrollViewAdapter } from 'react-native-tab-view';
+
+export default function TabViewExample() {
+  const [index, setIndex] = React.useState(0);
+
+  return (
+    <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      renderAdapter={ScrollViewAdapter}
+    />
+  );
+}
+```
+
+The following built-in adapters are available:
+
+- `PagerViewAdapter`: Uses [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) for rendering pages (default on Android & iOS).
+- `PanResponderAdapter`: Uses [`PanResponder`](https://reactnative.dev/docs/panresponder) for handling gestures (default on Web and other platforms).
+- `ScrollViewAdapter`: Uses [`ScrollView`](https://reactnative.dev/docs/scrollview) for rendering pages.
+
+You can also create your own custom adapter by implementing the required interface:
+
+```ts
+function MyAdapter({ navigationState, children }: AdapterProps) {
+  const { index, routes } = navigationState;
+
+  // Animated.Value containing the current position (index + offset)
+  // This should be updated as the user swipes between pages
+  const [position] = useState(() => new Animated.Value(index));
+
+  const subscribe = useCallback(
+    (callback: (event: { type: 'enter'; index: number }) => void) => {
+      // Subscribe to `enter` events and call the callback when the page comes into view
+      // This is used to render lazy loaded pages only when they come into view
+    },
+    []
+  );
+
+  const jumpTo = useCallback((key: string) => {
+    // Function to jump to a specific page by key of the route
+  }, []);
+
+  return children({
+    position,
+    subscribe,
+    jumpTo,
+    render: (children) => {
+      // Render the pages based on the `children` array
+      // The `children` array contains react elements for each route in the routes array
+    },
+  });
+}
+```
+
+Check out the [source code of the built-in adapters](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view/src) for reference.
 
 #### `animationEnabled`
 

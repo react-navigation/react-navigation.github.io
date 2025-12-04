@@ -22,9 +22,10 @@ Here are some resources to help you out:
 
 ## Minimum requirements
 
-- `react-native` >= 0.72.0
-- `expo` >= 52 (if you use [Expo Go](https://expo.dev/go))
-- `typescript` >= 5.0.0 (if you use TypeScript)
+- `react-native` >= 0.81
+- `expo` >= 54 (if you use [Expo Go](https://expo.dev/go))
+- `typescript` >= 5.9.2 (if you use TypeScript)
+- `react-native-web` >= 0.21.0 (if you support Web)
 
 ## Starter template
 
