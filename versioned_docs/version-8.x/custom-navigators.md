@@ -4,6 +4,9 @@ title: Custom navigators
 sidebar_label: Custom navigators
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 In essence, a navigator is a React component that takes a set of screens and options, and renders them based on its [navigation state](navigation-state.md), generally with additional UI such as headers, tab bars, or drawers.
 
 React Navigation provides a few built-in navigators, but they might not always fit your needs if you want a very custom behavior or UI. In such cases, you can build your own custom navigators using React Navigation's APIs.
@@ -19,7 +22,7 @@ The navigator component then uses this state to layout the screens appropriately
 A very basic example looks like this:
 
 ```js
-function MyStackNavigator(props) {
+function MyNavigator(props) {
   const { state, descriptors, NavigationContent } = useNavigationBuilder(
     StackRouter,
     props
@@ -31,14 +34,14 @@ function MyStackNavigator(props) {
   return <NavigationContent>{descriptor.render()}</NavigationContent>;
 }
 
-export const createMyStackNavigator = createNavigatorFactory(MyStackNavigator);
+export const createMyNavigator = createNavigatorFactory(MyNavigator);
 ```
 
 Now, we have an already working navigator, even though it doesn't do anything special yet.
 
 Let's break this down:
 
-- We define a `MyNavigator` component that contains our navigator logic. This is the component that's rendered when you render `<Stack.Navigator>` in your app with the `createMyStackNavigator` factory function.
+- We define a `MyNavigator` component that contains our navigator logic. This is the component that's rendered when you render the navigator in your app with the `createMyNavigator` factory function.
 - We use the `useNavigationBuilder` hook and pass it [`StackRouter`](custom-routers.md#built-in-routers), which would make our navigator behave like a stack navigator. Any other router such as `TabRouter`, `DrawerRouter`, or a custom router can be used here as well.
 - The hook returns the [navigation state](navigation-state.md) in the `state` property. This is the current state of the navigator. There's also a `descriptors` object which contains the data and helpers for each screen in the navigator.
 - We get the focused route from the state with `state.routes[state.index]` - as `state.index` is the index of the currently focused route in the `state.routes` array.
@@ -180,24 +183,27 @@ We can also do `export const createMyNavigator = createNavigatorFactory(MyNaviga
 
 Then it can be used like this:
 
-```js
+```js static2dynamic
+import { createStaticNavigation } from '@react-navigation/native';
 import { createMyNavigator } from './myNavigator';
 
-const My = createMyNavigator();
+const MyTabs = createMyNavigator({
+  screens: {
+    Home: HomeScreen,
+    Feed: FeedScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyTabs);
 
 function App() {
-  return (
-    <My.Navigator>
-      <My.Screen name="Home" component={HomeScreen} />
-      <My.Screen name="Feed" component={FeedScreen} />
-    </My.Navigator>
-  );
+  return <Navigation />;
 }
 ```
 
 ## Type-checking navigators
 
-To type-check navigators, we need to provide 3 types:
+To type-check navigators, we need to provide few types:
 
 - Type of the props accepted by the view
 - Type of supported screen options
@@ -222,6 +228,7 @@ import {
   type NavigatorTypeBagBase,
   type ParamListBase,
   type StaticConfig,
+  type StaticScreenConfig,
   type TabActionHelpers,
   type TabNavigationState,
   TabRouter,
@@ -337,28 +344,42 @@ function TabNavigator({ tabBarStyle, contentStyle, ...rest }: Props) {
   );
 }
 
-// The factory function with generic types for type-inference
+// Types required for type-checking the navigator
+type MyTabTypeBag<ParamList extends {}> = {
+  ParamList: ParamList;
+  State: TabNavigationState<ParamList>;
+  ScreenOptions: TabNavigationOptions;
+  EventMap: TabNavigationEventMap;
+  NavigationList: {
+    [RouteName in keyof ParamList]: TabNavigationProp<ParamList, RouteName>;
+  };
+  Navigator: typeof TabNavigator;
+};
+
+// The factory function with overloads for static and dynamic configuration
 export function createMyNavigator<
   const ParamList extends ParamListBase,
-  const NavigatorID extends string | undefined = undefined,
-  const TypeBag extends NavigatorTypeBagBase = {
-    ParamList: ParamList;
-    NavigatorID: NavigatorID;
-    State: TabNavigationState<ParamList>;
-    ScreenOptions: TabNavigationOptions;
-    EventMap: TabNavigationEventMap;
-    NavigationList: {
-      [RouteName in keyof ParamList]: TabNavigationProp<
-        ParamList,
-        RouteName,
-        NavigatorID
-      >;
-    };
-    Navigator: typeof TabNavigator;
-  },
-  const Config extends StaticConfig<TypeBag> = StaticConfig<TypeBag>,
->(config?: Config): TypedNavigator<TypeBag, Config> {
+>(): TypedNavigator<MyTabTypeBag<ParamList>, undefined>;
+export function createMyNavigator<
+  const Config extends StaticConfig<MyTabTypeBag<ParamListBase>>,
+>(
+  config: Config
+): TypedNavigator<MyTabTypeBag<StaticParamList<{ config: Config }>>, Config>;
+export function createMyNavigator(config?: unknown) {
   return createNavigatorFactory(TabNavigator)(config);
+}
+
+// Helper function for creating screen config with proper types for static configuration
+export function createMyScreen<const ScreenConfig>(
+  config: StaticScreenConfig<
+    ScreenConfig,
+    TabNavigationState<ParamListBase>,
+    TabNavigationOptions,
+    TabNavigationEventMap,
+    TabNavigationProp<ParamListBase>
+  >
+) {
+  return config;
 }
 ```
 
@@ -376,7 +397,6 @@ import {
 import { BottomTabView } from '@react-navigation/bottom-tabs';
 
 function BottomTabNavigator({
-  id,
   initialRouteName,
   children,
   layout,
@@ -388,7 +408,6 @@ function BottomTabNavigator({
 }) {
   const { state, descriptors, navigation, NavigationContent } =
     useNavigationBuilder(TabRouter, {
-      id,
       initialRouteName,
       children,
       layout,

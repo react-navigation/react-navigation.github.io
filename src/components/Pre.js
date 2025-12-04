@@ -2,9 +2,9 @@ import { useActiveVersion } from '@docusaurus/plugin-content-docs/client';
 import { useColorMode } from '@docusaurus/theme-common';
 import { usePluginData } from '@docusaurus/useGlobalData';
 import MDXPre from '@theme-original/MDXComponents/Pre';
-import React from 'react';
-import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+import React from 'react';
 
 const SUPPORTED_TABS = {
   config: [
@@ -152,7 +152,11 @@ export default function Pre({
     const version = activeVersion?.name;
 
     if (version == null || versions[version] == null) {
-      throw new Error(`Invalid version: ${version}`);
+      console.warn(
+        `No version information found for version "${version}", cannot resolve Snack dependencies automatically.`
+      );
+
+      return <MDXPre {...rest}>{children}</MDXPre>;
     }
 
     Object.assign(

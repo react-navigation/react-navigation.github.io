@@ -196,9 +196,18 @@ export default function App() {
 
 The `setParams` method merges the new params with the existing ones. To replace the existing params, you can use [`replaceParams`](navigation-object.md#replaceparams) instead.
 
+To update params and push a new entry to the history stack, you can use [`pushParams`](navigation-object.md#pushparams). This is useful for scenarios like:
+
+- A product listing page with filters, where changing filters should create a new history entry so users can go back to previous filter states
+- A screen with a custom modal component whose state should be reflected in the URL and history
+
+```js
+navigation.pushParams({ filter: 'new' });
+```
+
 :::note
 
-Avoid using `setParams` or `replaceParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-object.md#setoptions) instead.
+Avoid using `setParams`, `replaceParams`, or `pushParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-object.md#setoptions) instead.
 
 :::
 

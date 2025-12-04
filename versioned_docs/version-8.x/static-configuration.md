@@ -121,6 +121,42 @@ const RootStack = createNativeStackNavigator({
 
 The configuration object for a screen accepts the [properties described in the Screen page](screen.md). In addition, the following properties are available when using static configuration:
 
+#### `createXScreen`
+
+Each navigator exports a helper function to create screen configurations with proper TypeScript types. These helpers enable type inference for the params in the configuration.
+
+Example usage:
+
+```js
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator({
+  screens: {
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+      options: ({ route }) => {
+        const userId = route.params.userId;
+
+        return {
+          title: `${userId}'s profile`,
+        };
+      },
+    }),
+  },
+});
+```
+
+Each navigator exports its own helper function:
+
+- `createNativeStackScreen` from `@react-navigation/native-stack`
+- `createStackScreen` from `@react-navigation/stack`
+- `createBottomTabScreen` from `@react-navigation/bottom-tabs`
+- `createDrawerScreen` from `@react-navigation/drawer`
+- `createMaterialTopTabScreen` from `@react-navigation/material-top-tabs`
+
 #### `linking`
 
 [Linking configuration](configuring-links.md) for the screen. It can be either a string for a path or an object with the linking configuration:

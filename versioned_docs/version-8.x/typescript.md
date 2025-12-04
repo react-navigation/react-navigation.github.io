@@ -35,11 +35,9 @@ There are 2 steps to configure TypeScript with the static API:
    }
    ```
 
-2. Generate the `ParamList` type for the root navigator and specify it as the default type for the `RootParamList` type:
+2. Specify the navigator's type as the default type for the `RootNavigator`:
 
    ```ts
-   import type { StaticParamList } from '@react-navigation/native';
-
    const HomeTabs = createBottomTabNavigator({
      screens: {
        Feed: FeedScreen,
@@ -54,18 +52,71 @@ There are 2 steps to configure TypeScript with the static API:
    });
 
    // highlight-next-line
-   type RootStackParamList = StaticParamList<typeof RootStack>;
+   type RootStackType = typeof RootStack;
 
    // highlight-start
-   declare global {
-     namespace ReactNavigation {
-       interface RootParamList extends RootStackParamList {}
-     }
+   declare module '@react-navigation/core' {
+     interface RootNavigator extends RootStackType {}
    }
    // highlight-end
    ```
 
-   This is needed to type-check the [`useNavigation`](use-navigation.md) hook.
+   This is needed to type-check hooks such as [`useNavigation`](use-navigation.md), [`useRoute`](use-route.md), [`useNavigationState`](use-navigation-state.md) etc.
+
+## Type inference with screen names
+
+When using the static configuration, hooks like `useNavigation`, `useRoute`, and `useNavigationState` can accept a screen name to automatically infer types:
+
+```ts
+// Types are automatically inferred based on the screen name
+const navigation = useNavigation('Profile');
+const route = useRoute('Profile');
+const focusedRoute = useNavigationState(
+  'Profile',
+  (state) => state.routes[state.index]
+);
+```
+
+The `navigation` object will have proper types based on navigator nesting, including navigator-specific methods like `openDrawer` for drawer navigators or `push` for stack navigators - all without manual type annotations.
+
+The screen name can be for the current screen or any of its parent screens, making it possible to get params and navigation state for a parent screen without needing to set up context.
+
+## Type inference in screen configuration
+
+By default, the type of the `route` object cannot be inferred in screen configuration callbacks like `options`, `listeners`, etc. To enable type inference, you can use the `createXScreen` helper functions exported by each navigator:
+
+- `createNativeStackScreen` from `@react-navigation/native-stack`
+- `createStackScreen` from `@react-navigation/stack`
+- `createBottomTabScreen` from `@react-navigation/bottom-tabs`
+- `createDrawerScreen` from `@react-navigation/drawer`
+- `createMaterialTopTabScreen` from `@react-navigation/material-top-tabs`
+
+Example usage:
+
+```ts
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator({
+  screens: {
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+      options: ({ route }) => {
+        // route.params is correctly typed based on ProfileScreen's props
+        const userId = route.params.userId;
+
+        return {
+          title: `${userId}'s profile`,
+        };
+      },
+    }),
+  },
+});
+```
+
+See [Static configuration](static-configuration.md#createxscreen-helper-functions) for more details.
 
 ## Navigator specific types
 
@@ -73,6 +124,7 @@ Generally, we recommend using the default types for the [`useNavigation`](use-na
 
 ```ts
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import type { StaticParamList } from '@react-navigation/native';
 
 type BottomTabParamList = StaticParamList<typeof BottomTabNavigator>;
 type ProfileScreenNavigationProp = BottomTabNavigationProp<
@@ -82,7 +134,7 @@ type ProfileScreenNavigationProp = BottomTabNavigationProp<
 
 // ...
 
-const navigation = useNavigation<ProfileScreenNavigationProp>();
+const navigation = useNavigation() as ProfileScreenNavigationProp;
 ```
 
 Similarly, you can import `NativeStackNavigationProp` from [`@react-navigation/native-stack`](native-stack-navigator.md), `StackNavigationProp` from [`@react-navigation/stack`](stack-navigator.md), `DrawerNavigationProp` from [`@react-navigation/drawer`](drawer-navigator.md) etc.
@@ -368,30 +420,42 @@ type ProfileScreenNavigationProp = CompositeNavigationProp<
 
 :::danger
 
-Annotating `useNavigation` isn't type-safe because the type parameter cannot be statically verified.
+Annotating `useNavigation` isn't type-safe because we cannot verify that the provided type matches the actual navigators.
 Prefer [specifying a default type](#specifying-default-types-for-usenavigation-link-ref-etc) instead.
 
 :::
 
-To annotate the `navigation` object that we get from [`useNavigation`](use-navigation.md), we can use a type parameter:
+When using static configuration, common hooks like `useNavigation` can accept the name of the screen to automatically infer the correct types:
 
 ```ts
-const navigation = useNavigation<ProfileScreenNavigationProp>();
+const navigation = useNavigation('Profile');
+```
+
+If you're using dynamic configuration, or need to specify navigator-specific types manually, you can use `as` to annotate:
+
+```ts
+const navigation = useNavigation() as ProfileScreenNavigationProp;
 ```
 
 ## Annotating `useRoute`
 
 :::danger
 
-Annotating `useRoute` isn't type-safe because the type parameter cannot be statically verified.
+Annotating `useRoute` isn't type-safe because we cannot verify that the provided type matches the actual navigators.
 Prefer using the [`route` object](route-object.md) from the screen component's props instead when possible. Use `useRoute` for generic code that doesn't need specific route type.
 
 :::
 
-To annotate the `route` object that we get from [`useRoute`](use-route.md), we can use a type parameter:
+When using static configuration, `useRoute` can accept the name of the screen to automatically infer the correct types:
 
 ```ts
-const route = useRoute<ProfileScreenRouteProp>();
+const route = useRoute('Profile');
+```
+
+If you're using dynamic configuration, you can use `as` to annotate:
+
+```ts
+const route = useRoute() as RouteProp<RootStackParamList, 'Profile'>;
 ```
 
 ## Annotating `options` and `screenOptions`

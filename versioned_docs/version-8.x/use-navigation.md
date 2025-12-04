@@ -9,7 +9,11 @@ import TabItem from '@theme/TabItem';
 
 `useNavigation` is a hook that gives access to `navigation` object. It's useful when you cannot pass the `navigation` object as a prop to the component directly, or don't want to pass it in case of a deeply nested child.
 
-The `useNavigation` hook returns the `navigation` object of the screen where it's used:
+It can be used in two ways.
+
+## Getting the navigation object by screen name
+
+The hook accepts the name of the current screen or any of its parent screens to get the corresponding navigation object:
 
 ```js name="useNavigation hook" snack static2dynamic
 import * as React from 'react';
@@ -22,7 +26,7 @@ import { useNavigation } from '@react-navigation/native';
 
 function MyBackButton() {
   // highlight-next-line
-  const navigation = useNavigation();
+  const navigation = useNavigation('Profile');
 
   return (
     <Button
@@ -37,7 +41,7 @@ function MyBackButton() {
 // codeblock-focus-end
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -75,7 +79,19 @@ function App() {
 export default App;
 ```
 
-Check how to setup `useNavigation` with TypeScript [here](typescript.md#annotating-usenavigation).
+## Getting the current navigation object
+
+You can also use `useNavigation` without any arguments to get the navigation object for the current screen:
+
+```js
+function MyComponent() {
+  const navigation = useNavigation();
+
+  return <Button onPress={() => navigation.goBack()}>Go back</Button>;
+}
+```
+
+This is often useful for re-usable components that are used across multiple screens.
 
 See the documentation for the [`navigation` object](navigation-object.md) for more info.
 

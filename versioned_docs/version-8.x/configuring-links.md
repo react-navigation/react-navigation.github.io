@@ -13,7 +13,7 @@ In this guide, we will configure React Navigation to handle external links. This
 2. Enable URL integration in browser when using on web
 3. Use [`<Link />`](link.md) or [`useLinkTo`](use-link-to.md) to navigate using paths.
 
-Make sure that you have [configured deep links](deep-linking.md) in your app before proceeding. If you have an Android or iOS app, remember to specify the [`prefixes`](navigation-container.md#linkingprefixes) option.
+Make sure that you have [configured deep links](deep-linking.md) in your app before proceeding.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -23,20 +23,14 @@ The [`Navigation`](static-configuration.md#createstaticnavigation) component acc
 ```js
 import { createStaticNavigation } from '@react-navigation/native';
 
-// highlight-start
-const linking = {
-  enabled: 'auto' /* Automatically generate paths for all screens */,
-  prefixes: [
-    /* your linking prefixes */
-  ],
-};
-// highlight-end
-
 function App() {
   return (
     <Navigation
-      // highlight-next-line
-      linking={linking}
+      // highlight-start
+      linking={{
+        enabled: 'auto',
+      }}
+      // highlight-end
       fallback={<Text>Loading...</Text>}
     />
   );
@@ -55,9 +49,6 @@ import { NavigationContainer } from '@react-navigation/native';
 
 // highlight-start
 const linking = {
-  prefixes: [
-    /* your linking prefixes */
-  ],
   config: {
     /* configuration for matching screens with paths */
   },
@@ -80,19 +71,15 @@ function App() {
 </TabItem>
 </Tabs>
 
-When you specify the `linking` prop, React Navigation will handle incoming links automatically. On Android and iOS, it'll use React Native's [`Linking` module](https://reactnative.dev/docs/linking) to handle incoming links, both when the app was opened with the link, and when new links are received when the app is open. On the Web, it'll use the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to sync the URL with the browser.
+When you specify the `linking` prop, React Navigation will handle incoming links automatically.
 
-:::warning
-
-Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android. We add a timeout to avoid getting stuck forever, but it means that the link might not be handled in some cases.
-
-:::
+On Android and iOS, it'll use React Native's [`Linking` module](https://reactnative.dev/docs/linking) to handle incoming deep links and universal links, both when the app was opened with the link, and when new links are received when the app is open. On the Web, it'll use the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to sync the URL with the browser.
 
 You can also pass a [`fallback`](navigation-container.md#fallback) prop that controls what's displayed when React Navigation is trying to resolve the initial deep link URL.
 
 ## Prefixes
 
-The `prefixes` option can be used to specify custom schemes (e.g. `example://`) as well as host & domain names (e.g. `https://example.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
+The `prefixes` option can be optionally used to specify custom schemes (e.g. `example://`) as well as host & domain names (e.g. `https://example.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
 
 For example:
 
@@ -102,7 +89,9 @@ const linking = {
 };
 ```
 
-Note that the `prefixes` option is not supported on Web. The host & domain names will be automatically determined from the Website URL in the browser. If your app runs only on Web, then you can omit this option from the config.
+If not specified, it defaults to `['*']`, which will match any host starting with `http`, `https`, and custom schemes such as `myapp://`. You only need to specify `prefixes` if you're using **Expo Go** or want to restrict the URLs your app handles.
+
+Note that the `prefixes` option has no effect on Web. The host & domain names will be automatically determined from the Website URL in the browser.
 
 ### Multiple subdomains​
 

@@ -48,46 +48,6 @@ Different navigators accept different configuration options. You can find the li
 
 There is a set of common configurations that are shared across all navigators:
 
-### ID
-
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-object.md#getparent) to refer to this navigator in a child navigator.
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-const MyStack = createNativeStackNavigator({
-  // highlight-next-line
-  id: 'RootStack',
-  screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
-  },
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-const Stack = createNativeStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator
-      // highlight-next-line
-      id="RootStack"
-    >
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
 ### Initial route name
 
 The name of the route to render on the first load of the navigator.

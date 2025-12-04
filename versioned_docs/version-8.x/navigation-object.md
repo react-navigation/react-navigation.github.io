@@ -15,6 +15,8 @@ The `navigation` object contains various convenience functions that dispatch nav
   - `reset` - replace the navigation state of the navigator with the given state
   - `preload` - preload a screen in the background before navigating to it
   - `setParams` - merge new params onto the route's params
+  - `replaceParams` - replace the route's params with new params
+  - `pushParams` - update params and push a new entry to history stack
   - `dispatch` - send an action object to update the [navigation state](navigation-state.md)
   - `setOptions` - update the screen's options
   - `isFocused` - check whether the screen is focused
@@ -1381,6 +1383,25 @@ export default App;
 </TabItem>
 </Tabs>
 
+### `pushParams`
+
+The `pushParams` method lets us update the params (`route.params`) of the current screen and push a new entry to the history stack. Unlike `setParams` which merges the new params with the existing ones, `pushParams` uses the new params object as-is.
+
+`navigation.pushParams(params)`
+
+- `params` - _object_ - New params to use for the route.
+
+This is useful in scenarios like:
+
+- A product listing page with filters, where changing filters should create a new history entry so users can go back to previous filter states.
+- A screen with a custom modal component, where the modal is not a separate screen but its state should be reflected in the URL and history.
+
+```js
+navigation.pushParams({ filter: 'new' });
+```
+
+The action works in all navigators, including stack, tab, and drawer navigators.
+
 ### `setOptions`
 
 The `setOptions` method lets us set screen options from within the component. This is useful if we need to use the component's props, state or context to configure our screen.
@@ -1848,37 +1869,39 @@ Don't use this method for rendering content as this will not trigger a re-render
 
 This method returns the navigation object from the parent navigator that the current navigator is nested in. For example, if you have a stack navigator and a tab navigator nested inside the stack, then you can use `getParent` inside a screen of the tab navigator to get the navigation object passed from the stack navigator.
 
-It accepts an optional ID parameter to refer to a specific parent navigator. For example, if your screen is nested with multiple levels of nesting somewhere under a drawer navigator with the `id` prop as `"LeftDrawer"`, you can directly refer to it without calling `getParent` multiple times.
+It accepts an optional screen name parameter to refer to a specific parent screen. For example, if your screen is nested with multiple levels of nesting somewhere under a drawer navigator, you can directly refer to it by the name of the screen in the drawer navigator instead of calling `getParent` multiple times.
 
-To use an ID for a navigator, first pass a unique `id` prop:
+For example, consider the following structure:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-const Drawer = createDrawerNavigator({
-  id: 'LeftDrawer',
+```js static2dynamic
+const LeftDrawer = createDrawerNavigator({
   screens: {
-    /* content */
+    Feed: {
+      screen: FeedScreen,
+    },
+    Messages: {
+      screen: MessagesScreen,
+    },
+  },
+});
+
+const RootDrawer = createDrawerNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+    },
+    Dashboard: {
+      screen: LeftDrawer,
+    },
   },
 });
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-<Drawer.Navigator id="LeftDrawer">{/* .. */}</Drawer.Navigator>
-```
-
-</TabItem>
-</Tabs>
-
-Then when using `getParent`, instead of:
+Then when using `getParent` inside of `FeedScree`, instead of:
 
 ```js
 // Avoid this
-const drawerNavigation = navigation.getParent().getParent();
+const drawerNavigation = navigation.getParent();
 
 // ...
 
@@ -1889,16 +1912,18 @@ You can do:
 
 ```js
 // Do this
-const drawerNavigation = navigation.getParent('LeftDrawer');
+const drawerNavigation = navigation.getParent('Dashboard');
 
 // ...
 
 drawerNavigation?.openDrawer();
 ```
 
-This approach allows components to not have to know the nesting structure of the navigators. So it's highly recommended that use an `id` when using `getParent`.
+In this case, `'Dashboard'` refers to the name of a parent screen of `Feed` that's used in the parent drawer navigator.
 
-This method will return `undefined` if there is no matching parent navigator. Be sure to always check for `undefined` when using this method.
+This approach allows components to not have to know the nesting structure of the navigators. So it's highly recommended to use a screen name when using `getParent`.
+
+This method will return `undefined` if there is no matching parent navigator.
 
 ### `getState`
 

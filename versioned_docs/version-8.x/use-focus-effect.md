@@ -100,19 +100,21 @@ If you don't ignore the result, then you might end up with inconsistent data due
 
 The `useFocusEffect` hook runs the effect as soon as the screen comes into focus. This often means that if there is an animation for the screen change, it might not have finished yet.
 
-React Navigation runs its animations in native thread, so it's not a problem in many cases. But if the effect updates the UI or renders something expensive, then it can affect the animation performance. In such cases, we can use [`InteractionManager`](https://reactnative.dev/docs/interactionmanager) to defer our work until the animations or gestures have finished:
+The navigators in React Navigation run animations in native thread when possible, so it's not a problem in most cases. But if the effect updates the UI or renders something expensive, then it can affect the animation performance. In such cases, you can listen to the `transitionEnd` event to defer your work until the transition has finished:
 
 ```js
 useFocusEffect(
   React.useCallback(() => {
-    const task = InteractionManager.runAfterInteractions(() => {
-      // Expensive task
+    const unsubscribe = navigation.addListener('transitionEnd', () => {
+      // Expensive task after transition finishes
     });
 
-    return () => task.cancel();
-  }, [])
+    return unsubscribe;
+  }, [navigation])
 );
 ```
+
+Keep in mind that the `transitionEnd` event is specific to stack navigators. For other navigators, you may need to use different approaches or events.
 
 ## How is `useFocusEffect` different from adding a listener for `focus` event
 

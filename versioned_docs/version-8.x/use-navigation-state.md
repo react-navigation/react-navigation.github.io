@@ -15,17 +15,93 @@ Consider the navigator's state object to be internal and subject to change in a 
 
 :::
 
-It takes a selector function as an argument. The selector will receive the full [navigation state](navigation-state.md) and can return a specific value from the state:
+It can be used in two ways.
 
-```js
-const index = useNavigationState((state) => state.index);
+## Getting the navigation state by screen name
+
+The hook accepts the name of the current screen or any of its parent screens as the first argument to get the navigation state for the navigator containing that screen. The second argument is a selector function that receives the full [navigation state](navigation-state.md) and can return a specific value from the state:
+
+```js name="useNavigationState hook" snack static2dynamic
+import * as React from 'react';
+import { Button } from '@react-navigation/elements';
+import { View, Text } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// codeblock-focus-start
+import { useNavigationState } from '@react-navigation/native';
+
+function CurrentRouteDisplay() {
+  // highlight-start
+  const focusedRouteName = useNavigationState(
+    'Home',
+    (state) => state.routes[state.index]
+  );
+  // highlight-end
+
+  return <Text>Current route: {focusedRouteName}</Text>;
+}
+// codeblock-focus-end
+
+function HomeScreen() {
+  const navigation = useNavigation('Home');
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <CurrentRouteDisplay />
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation('Profile');
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      <CurrentRouteDisplay />
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
+    </View>
+  );
+}
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 The selector function helps to reduce unnecessary re-renders, so your screen will re-render only when that's something you care about. If you actually need the whole state object, you can do this explicitly:
 
 ```js
-const state = useNavigationState((state) => state);
+const state = useNavigationState('Home', (state) => state);
 ```
+
+## Getting the current navigation state
+
+You can also use `useNavigationState` without a screen name to get the navigation state for the current screen's navigator. In this case, it takes a selector function as the only argument:
+
+```js
+const focusedRouteName = useNavigationState(
+  (state) => state.routes[state.index].name
+);
+```
+
+This is often useful for re-usable components that are used across multiple screens.
 
 :::warning
 
