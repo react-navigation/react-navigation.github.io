@@ -14,14 +14,18 @@
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono,
     Courier New, monospace;
   --ifm-font-family-base:
-    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
-    Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
-    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+  --ifm-heading-font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
 
+  --ifm-font-size-base: 100%;
+  --ifm-line-height-base: 1.75;
   --ifm-code-font-size: 85%;
 
   --ifm-heading-font-weight: 700;
-  --ifm-heading-line-height: 1.618;
+  --ifm-heading-line-height: 1.25;
   --ifm-heading-margin-top: 1.618rem;
 
   --ifm-color-primary: hsl(
@@ -143,38 +147,82 @@
 }
 
 h1 {
-  font-size: 2.618rem;
-  letter-spacing: -0.02em;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 2.75rem;
+  letter-spacing: -0.022em;
   margin-top: 0;
-  margin-left: -0.09rem;
+  margin-bottom: 0.5rem;
+  margin-left: -0.05rem;
+  font-weight: 700;
+  line-height: 1.15;
 }
 
 h2 {
-  font-size: 1.618rem;
-  letter-spacing: -0.02em;
-  margin-left: -0.09rem;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 2rem;
+  letter-spacing: -0.018em;
+  margin-top: 2.25rem;
+  margin-bottom: 0.5rem;
+  margin-left: -0.04rem;
+  font-weight: 700;
+  line-height: 1.22;
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 h3 {
-  font-size: 1.382rem;
-  letter-spacing: -0.01em;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.5rem;
+  letter-spacing: -0.014em;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 h4 {
-  font-size: 1.145rem;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.25rem;
+  letter-spacing: -0.012em;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
 h5 {
-  font-size: 1rem;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 h6 {
-  font-size: 0.85rem;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1rem;
+  letter-spacing: -0.008em;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  line-height: 1.45;
 }
 
 p {
   font-size: 1rem;
   line-height: 1.75;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.003em;
+}
+
+article p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--ifm-font-color-base);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.003em;
 }
 
 @media (min-width: 90rem) {
@@ -457,6 +505,20 @@ p {
 
 article {
   text-wrap: pretty;
+}
+
+article > div > * + h2 {
+  margin-top: 3.5rem;
+}
+
+article > div > * + h3 {
+  margin-top: 3rem;
+}
+
+article h2 + p,
+article h3 + p,
+article h4 + p {
+  margin-top: 1rem;
 }
 
 article img,
