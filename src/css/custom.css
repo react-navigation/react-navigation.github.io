@@ -82,14 +82,18 @@
 
   --ifm-toc-border-color: var(--ifm-color-gray-200);
   --ifm-menu-color-background-active: rgba(107, 82, 174, 0.1);
-  --docusaurus-highlighted-code-line-bg: rgba(107, 82, 174, 0.1);
 
   --ifm-footer-padding-horizontal: var(--ifm-spacing-horizontal);
   --ifm-footer-padding-vertical: var(--ifm-spacing-vertical);
   --ifm-tabs-padding-vertical: 0.375rem;
 
   --ifm-alert-shadow: none;
-  --ifm-alert-border-left-width: 0;
+  --ifm-alert-border-width: 1px;
+  --ifm-alert-border-left-width: 1px;
+
+  --ifm-code-padding-horizontal: 0.3em;
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.07);
 
   --codeblock-background-color: #f6f8fa;
 }
@@ -464,7 +468,11 @@ article p {
   }
 
   & > .tabs {
-    box-shadow: inset 0 -2px 0 var(--ifm-toc-border-color);
+    border-width: 1px 1px 0 1px;
+    border-style: solid;
+    border-color: var(--ifm-toc-border-color);
+    border-top-left-radius: var(--ifm-code-border-radius);
+    border-top-right-radius: var(--ifm-code-border-radius);
   }
 
   & > .tabs > .tabs__item {
@@ -474,6 +482,11 @@ article p {
   & > .tabs > .tabs__item:not(:first-child) {
     border-top-left-radius: 0;
   }
+}
+
+[role='tabpanel'] > .theme-code-block:only-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .col:has(.table-of-contents) {
@@ -501,6 +514,10 @@ article p {
 .theme-edit-this-page svg,
 .theme-admonition svg {
   transform: scale(0.8);
+}
+
+.theme-code-block {
+  border: 1px solid var(--ifm-toc-border-color);
 }
 
 article {
@@ -620,9 +637,9 @@ samp {
   margin-bottom: var(--ifm-leading);
   padding: calc(var(--ifm-pre-padding) / 2) var(--ifm-pre-padding);
   background-color: var(--codeblock-background-color);
-  border-top-width: 1px;
-  border-top-style: solid;
-  border-top-color: var(--ifm-color-gray-200);
+  border-width: 0 1px 1px 1px;
+  border-style: solid;
+  border-color: var(--ifm-toc-border-color);
   border-bottom-left-radius: var(--ifm-pre-border-radius);
   border-bottom-right-radius: var(--ifm-pre-border-radius);
 }
@@ -680,4 +697,8 @@ pre code:has(.code-block-diff-add-line) {
 
 pre code:has(.code-block-diff-remove-line) {
   padding-left: 2em !important;
+}
+
+code {
+  border-width: 1px;
 }
