@@ -4,9 +4,6 @@ import rehypeStaticToDynamic from './src/plugins/rehype-static-to-dynamic.mjs';
 import rehypeVideoAspectRatio from './src/plugins/rehype-video-aspect-ratio.mjs';
 
 export default {
-  future: {
-    experimental_faster: true,
-  },
   title: 'React Navigation',
   tagline: 'Routing and navigation for your React Native apps',
   url: 'https://reactnavigation.org/',
@@ -14,13 +11,14 @@ export default {
   favicon: 'img/favicon.ico',
   organizationName: 'react-navigation',
   projectName: 'react-navigation.github.io',
+  onBrokenLinks: 'throw',
   onBrokenAnchors: 'throw',
-  onBrokenMarkdownLinks: 'throw',
-  scripts: [
-    '/js/snack-helpers.js',
-    '/js/toc-fixes.js',
-    '/js/video-playback.js',
-  ],
+  onDuplicateRoutes: 'throw',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
+  },
   themeConfig: {
     colorMode: {
       defaultMode: 'light',
@@ -177,5 +175,10 @@ export default {
         },
       },
     ],
+  ],
+  scripts: [
+    '/js/snack-helpers.js',
+    '/js/toc-fixes.js',
+    '/js/video-playback.js',
   ],
 };
