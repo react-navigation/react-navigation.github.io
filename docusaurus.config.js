@@ -146,6 +146,11 @@ export default {
             'https://github.com/react-navigation/react-navigation.github.io/edit/main/',
           includeCurrentVersion: false,
           lastVersion: '7.x',
+          versions: {
+            '7.x': {
+              badge: false,
+            },
+          },
           breadcrumbs: false,
           sidebarCollapsed: false,
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
