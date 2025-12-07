@@ -285,6 +285,10 @@ article p {
   z-index: -1;
 }
 
+[data-theme='dark'] .navbar::before {
+  background-color: rgba(32, 33, 37, 0.7);
+}
+
 .navbar__inner {
   padding: var(--ifm-navbar-padding-vertical)
     var(--ifm-navbar-padding-horizontal);
