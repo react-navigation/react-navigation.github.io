@@ -65,7 +65,7 @@ function DetailsScreen({ route, navigation }) {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/passing-params.mp4" />
+  <source src="/assets/7.x/fundamentals/navigatePassParams.mp4" />
 </video>
 
 ## Initial params
@@ -159,7 +159,7 @@ function CreatePostScreen({ navigation, route }) {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/params-to-parent.mp4" />
+  <source src="/assets/7.x/fundamentals/navigatePassParamsToPrevScreen.mp4" />
 </video>
 
 Here, after you press "Done", the home screen's `route.params` will be updated to reflect the post text that you passed in `navigate`.

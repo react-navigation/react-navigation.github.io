@@ -277,7 +277,7 @@ export default function App() {
 </Tabs>
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/lifecycle.mp4" />
+  <source src="/assets/7.x/fundamentals/navigationLifecycle.mp4" />
 </video>
 
 We start on the `HomeScreen` and navigate to `DetailsScreen`. Then we use the tab bar to switch to the `SettingsScreen` and navigate to `ProfileScreen`. After this sequence of operations is done, all 4 of the screens are mounted! If you use the tab bar to switch back to the `HomeStack`, you'll notice you'll be presented with the `DetailsScreen` - the navigation state of the `HomeStack` has been preserved!
@@ -295,7 +295,7 @@ Example:
 
 ```js name="Focus and blur" snack
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Alert } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
@@ -310,7 +310,7 @@ function ProfileScreen() {
   React.useEffect(() => {
     // highlight-start
     const unsubscribe = navigation.addListener('focus', () => {
-      console.log('ProfileScreen focused');
+      Alert.alert('ProfileScreen focused');
     });
     // highlight-end
 
@@ -320,7 +320,7 @@ function ProfileScreen() {
   React.useEffect(() => {
     // highlight-start
     const unsubscribe = navigation.addListener('blur', () => {
-      console.log('ProfileScreen blurred');
+      Alert.alert('ProfileScreen blurred');
     });
     // highlight-end
 
@@ -383,7 +383,7 @@ export default function App() {
 
 ```js name="Focus and blur" snack
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Alert } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
@@ -395,7 +395,7 @@ function ProfileScreen() {
   React.useEffect(() => {
     // highlight-start
     const unsubscribe = navigation.addListener('focus', () => {
-      console.log('ProfileScreen focused');
+      Alert.alert('ProfileScreen focused');
     });
     // highlight-end
 
@@ -405,7 +405,7 @@ function ProfileScreen() {
   React.useEffect(() => {
     // highlight-start
     const unsubscribe = navigation.addListener('blur', () => {
-      console.log('ProfileScreen blurred');
+      Alert.alert('ProfileScreen blurred');
     });
     // highlight-end
 
@@ -425,7 +425,7 @@ function HomeScreen() {
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      console.log('HomeScreen focused');
+      Alert.alert('HomeScreen focused');
     });
 
     return unsubscribe;
@@ -433,7 +433,7 @@ function HomeScreen() {
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('blur', () => {
-      console.log('HomeScreen blurred');
+      Alert.alert('HomeScreen blurred');
     });
 
     return unsubscribe;
@@ -483,7 +483,7 @@ Example:
 
 ```js name="Focus effect" snack
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Alert } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
@@ -498,12 +498,12 @@ function ProfileScreen() {
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
-      console.log('ProfileScreen focus effect');
+      Alert.alert('ProfileScreen focus effect');
 
       return () => {
         // Do something when the screen is unfocused
         // Useful for cleanup functions
-        console.log('ProfileScreen focus effect cleanup');
+        Alert.alert('ProfileScreen focus effect cleanup');
       };
     }, [])
   );
@@ -549,7 +549,7 @@ export default function App() {
 
 ```js name="Focus effect" snack
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Alert } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
@@ -561,12 +561,12 @@ function ProfileScreen() {
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
-      console.log('ProfileScreen focus effect');
+      Alert.alert('ProfileScreen focus effect');
 
       return () => {
         // Do something when the screen is unfocused
         // Useful for cleanup functions
-        console.log('ProfileScreen focus effect cleanup');
+        Alert.alert('ProfileScreen focus effect cleanup');
       };
     }, [])
   );
@@ -617,7 +617,7 @@ export default function App() {
 </Tabs>
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/lifecycle-focus.mp4" />
+  <source src="/assets/7.x/fundamentals/lifecycleEvents.mp4" />
 </video>
 
 If you want to render different things based on if the screen is focused or not, you can use the [`useIsFocused`](use-is-focused.md) hook which returns a boolean indicating whether the screen is focused.
