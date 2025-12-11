@@ -20,6 +20,8 @@ function setupPlayer(video) {
     }
   });
 
+  container.style.borderRadius = window.getComputedStyle(video).borderRadius;
+
   if (video.readyState >= 3) {
     video.style.transition = 'opacity 1s';
     video.style.opacity = '1';

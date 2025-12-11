@@ -1,6 +1,17 @@
 import * as t from '@babel/types';
+import { readFileSync } from 'fs';
+import { dirname, join } from 'path';
+import * as prettier from 'prettier';
 import * as recast from 'recast';
+import * as babelParser from 'recast/parsers/babel-ts.js';
 import { visit } from 'unist-util-visit';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const prettierConfig = JSON.parse(
+  readFileSync(join(__dirname, '..', '..', '.prettierrc.json'), 'utf-8')
+);
 
 /**
  * Plugin to automatically convert static config examples to dynamic config
@@ -9,7 +20,10 @@ import { visit } from 'unist-util-visit';
  * corresponding dynamic configuration examples wrapped in tabs.
  */
 export default function rehypeStaticToDynamic() {
-  return (tree) => {
+  return async (tree) => {
+    const promises = [];
+    const replacements = [];
+
     visit(tree, 'element', (node, index, parent) => {
       // Look for code blocks with static2dynamic in meta
       if (
@@ -34,29 +48,69 @@ export default function rehypeStaticToDynamic() {
           );
         }
 
-        const dynamicCode = convertStaticToDynamic(code);
-        const tabsElement = createTabsWithBothConfigs(code, dynamicCode, node);
-
-        // Replace the current pre element with the tabs
-        parent.children[index] = tabsElement;
+        // Queue async conversion
+        const promise = convertStaticToDynamic(code).then((dynamicCode) => {
+          const tabsElement = createTabsWithBothConfigs(
+            code,
+            dynamicCode,
+            node
+          );
+          replacements.push({ parent, index, tabsElement });
+        });
+        promises.push(promise);
       }
+    });
+
+    // Wait for all conversions to complete
+    await Promise.all(promises);
+
+    // Apply all replacements
+    replacements.forEach(({ parent, index, tabsElement }) => {
+      parent.children[index] = tabsElement;
     });
   };
 }
 
 /**
- * Convert static config code to dynamic config code
+ * Convert static config code to dynamic config code.
+ *
+ * Strategy:
+ * 1. Parse code to AST with comment attachment
+ * 2. First pass: Transform imports and collect navigator information
+ *    - Remove createStaticNavigation and createXScreen imports
+ *    - Add NavigationContainer import if needed
+ *    - Collect navigator declarations and their comments
+ * 3. Second pass: Transform navigator declarations
+ *    - Create const Stack = createStackNavigator() declarations
+ *    - Create function components with JSX (Stack.Navigator, Stack.Screen)
+ *    - Track comments for later injection
+ * 4. Format with Prettier
+ * 5. Post-process: Inject comments into formatted code
+ *    - Comments are injected as strings since Prettier may move/remove AST comments
  */
-function convertStaticToDynamic(code) {
-  // Parse the code into AST using recast
+async function convertStaticToDynamic(code) {
+  // Parse the code into AST using recast with comment attachment enabled
   const ast = recast.parse(code, {
-    parser: require('recast/parsers/babel-ts'),
+    parser: {
+      parse(source, options) {
+        return babelParser.parse(source, {
+          ...options,
+          tokens: true,
+          attachComment: true,
+        });
+      },
+    },
   });
 
   let navigatorInfos = [];
   let staticNavigationIndices = [];
 
-  // First pass: collect information and transform imports
+  // Track comments throughout the transformation
+  // We collect comments from the AST during transformation, then inject them
+  // after Prettier formatting (since Prettier may reformat/move AST comments)
+  const commentTracking = new Set();
+
+  // First pass: Collect navigator info and transform imports
   recast.visit(ast, {
     visitImportDeclaration(path) {
       const source = path.node.source.value;
@@ -102,6 +156,22 @@ function convertStaticToDynamic(code) {
             );
           }
         }
+      }
+
+      // Remove createXScreen imports from navigator packages
+      // e.g., createNativeStackScreen from @react-navigation/native-stack
+      if (source.startsWith('@react-navigation/')) {
+        path.node.specifiers = path.node.specifiers.filter((spec) => {
+          if (t.isImportSpecifier(spec)) {
+            const importedName = spec.imported.name;
+            // Remove imports that match createXScreen pattern
+            return !(
+              importedName.startsWith('create') &&
+              importedName.endsWith('Screen')
+            );
+          }
+          return true;
+        });
       }
 
       this.traverse(path);
@@ -160,7 +230,7 @@ function convertStaticToDynamic(code) {
         navigatorInfos.length > 0
       ) {
         // Preserve any props passed to Navigation
-        const navigationProps = path.node.openingElement.attributes || [];
+        const navigationProps = path.node.openingElement.attributes;
 
         // Use the last navigator (which is passed to createStaticNavigation)
         const mainNavigator = navigatorInfos[navigatorInfos.length - 1];
@@ -197,8 +267,10 @@ function convertStaticToDynamic(code) {
     },
   });
 
-  // Second pass: manually transform the AST body
-  // Process all navigators
+  // Second pass: Transform navigator declarations into const + function components
+  // Example: const MyStack = createStackNavigator({ screens: {...} })
+  //   becomes: const Stack = createStackNavigator();
+  //            function MyStack() { return <Stack.Navigator>...</Stack.Navigator> }
   if (navigatorInfos.length > 0) {
     const replacements = [];
     const navigatorConstNames = new Map(); // Track usage of navigator constant names
@@ -214,32 +286,14 @@ function convertStaticToDynamic(code) {
         index,
       } = navigatorInfo;
 
-      // Extract navigator constant name from the type
-      // Get the last word before "Navigator"
-      // e.g., "createStackNavigator" -> "Stack"
-      // e.g., "createNativeStackNavigator" -> "Stack"
-      // e.g., "createBottomTabNavigator" -> "Tab"
-      // e.g., "createMaterialTopTabNavigator" -> "Tab"
-      const withoutCreate = type.replace(/^create/, ''); // "StackNavigator"
-      const withoutNavigator = withoutCreate.replace(/Navigator$/, ''); // "Stack"
-      // Find the last capitalized word (e.g., "NativeStack" -> "Stack", "MaterialTopTab" -> "Tab")
-      const match = withoutNavigator.match(/([A-Z][a-z]+)$/);
-      const baseNavigatorConstName = match ? match[1] : withoutNavigator;
-
-      // Handle multiple navigators of the same type by adding suffixes (A, B, C, etc.)
-      let navigatorConstName = baseNavigatorConstName;
-      const currentCount = navigatorConstNames.get(baseNavigatorConstName) || 0;
-
-      if (currentCount > 0) {
-        // Add suffix: A for second occurrence, B for third, etc.
-        const suffix = String.fromCharCode(65 + currentCount - 1); // 65 is 'A'
-        navigatorConstName = baseNavigatorConstName + suffix;
-      }
-
-      navigatorConstNames.set(baseNavigatorConstName, currentCount + 1);
+      const baseNavigatorConstName = deriveNavigatorConstName(type);
+      const navigatorConstName = getUniqueNavigatorConstName(
+        baseNavigatorConstName,
+        navigatorConstNames
+      );
 
       // Parse the config object
-      const parsedConfig = parseNavigatorConfig(config);
+      const parsedConfig = parseNavigatorConfig(config, commentTracking);
 
       // Create: const Stack = createStackNavigator();
       const navigatorConstDeclaration = t.variableDeclaration('const', [
@@ -258,12 +312,11 @@ function convertStaticToDynamic(code) {
 
       // Preserve all comments from the original node
       if (originalNode.comments && originalNode.comments.length > 0) {
-        // Separate leading and trailing comments
+        // Separate leading and trailing comments based on recast markers
         const leadingComments = [];
         const trailingCommentsFromNode = [];
 
         originalNode.comments.forEach((comment) => {
-          // Recast marks comments with leading/trailing properties
           if (comment.trailing) {
             trailingCommentsFromNode.push(comment);
           } else {
@@ -271,37 +324,17 @@ function convertStaticToDynamic(code) {
           }
         });
 
-        // Attach leading comments to the const declaration
-        if (leadingComments.length > 0) {
-          // Mark as leading comments for proper placement
-          leadingComments.forEach((c) => {
-            c.leading = true;
-            c.trailing = false;
-          });
-          navigatorConstDeclaration.comments = leadingComments;
-        }
-
-        // Attach trailing comments to the function component (after the function body)
-        if (trailingCommentsFromNode.length > 0) {
-          // Mark as trailing comments for proper placement
-          trailingCommentsFromNode.forEach((c) => {
-            c.leading = false;
-            c.trailing = true;
-          });
-          navigatorComponent.comments = trailingCommentsFromNode;
-        }
+        attachCommentsToNode(navigatorConstDeclaration, leadingComments, false);
+        attachCommentsToNode(
+          navigatorComponent,
+          trailingCommentsFromNode,
+          true
+        );
       }
 
-      // Also check for trailingComments property
+      // Attach any additional trailing comments
       if (trailingComments && trailingComments.length > 0) {
-        trailingComments.forEach((c) => {
-          c.leading = false;
-          c.trailing = true;
-        });
-        navigatorComponent.comments = [
-          ...(navigatorComponent.comments || []),
-          ...trailingComments,
-        ];
+        attachCommentsToNode(navigatorComponent, trailingComments, true);
       }
 
       // Store the replacement info
@@ -316,7 +349,6 @@ function convertStaticToDynamic(code) {
     replacements.sort((a, b) => b.index - a.index);
 
     const programBody = ast.program.body;
-    let indexShift = 0;
 
     replacements.forEach(
       ({ index, navigatorConstDeclaration, navigatorComponent }) => {
@@ -327,14 +359,12 @@ function convertStaticToDynamic(code) {
           navigatorConstDeclaration,
           navigatorComponent
         );
-
-        // Track the shift for adjusting staticNavigation indices
-        indexShift++;
       }
     );
 
     // Adjust indices for createStaticNavigation declarations
     // Account for the fact that we replaced each navigator (1 node) with 2 nodes
+    // So indices after each replacement need to be shifted by 1
     staticNavigationIndices = staticNavigationIndices.map((idx) => {
       let shift = 0;
       replacements.forEach(({ index }) => {
@@ -344,7 +374,7 @@ function convertStaticToDynamic(code) {
     });
   }
 
-  // Remove createStaticNavigation declarations (in reverse order to maintain indices)
+  // Remove createStaticNavigation declarations (in reverse to maintain correct indices)
   staticNavigationIndices.sort((a, b) => b - a);
   staticNavigationIndices.forEach((index) => {
     ast.program.body.splice(index, 1);
@@ -357,35 +387,593 @@ function convertStaticToDynamic(code) {
     trailingComma: true,
   });
 
-  // Parse with Babel to verify syntax
-  recast.parse(output.code, {
-    parser: require('recast/parsers/babel-ts'),
+  // Format with prettier first
+  let formattedCode = await prettier.format(output.code, {
+    ...prettierConfig,
+    parser: 'babel',
+    singleQuote: true,
   });
 
-  return output.code;
+  // Remove trailing newline that prettier adds
+  formattedCode = formattedCode.trimEnd();
+
+  // Post-process: Inject tracked comments into the formatted code
+  // We do this after Prettier to ensure comments aren't moved/removed during formatting
+  // Comments are injected by searching for patterns in the string output
+  commentTracking.forEach((commentObj) => {
+    const {
+      screenName,
+      leadingComments,
+      trailingComments,
+      navigatorProp,
+      screenConfigProperty,
+    } = commentObj;
+
+    // Handle navigator property comments (e.g., screenOptions on Navigator)
+    if (navigatorProp) {
+      const lines = formattedCode.split('\n');
+
+      // Find the property line within a Navigator element context
+      const propLineIndex = findPropertyLine(
+        lines,
+        (line) =>
+          line.includes(navigatorProp) &&
+          (line.includes('=') || line.includes(':')),
+        (line) => line.includes('.Navigator'),
+        5 // Search 5 lines before/after for context
+      );
+
+      if (propLineIndex !== -1) {
+        const indent = getIndentation(lines[propLineIndex]);
+
+        // Inject leading comments before the property
+        const updatedLineIndex = injectComments(
+          lines,
+          leadingComments,
+          propLineIndex,
+          indent,
+          true // JSX context
+        );
+
+        // Find where the property value ends (}} for objects)
+        const closingIndex = findPropertyClosingLine(lines, updatedLineIndex);
+
+        // Inject trailing comments after the closing
+        injectComments(lines, trailingComments, closingIndex + 1, indent, true);
+
+        formattedCode = lines.join('\n');
+      }
+      return;
+    }
+
+    // Handle screen config property comments (options, listeners, etc.)
+    if (screenConfigProperty) {
+      const lines = formattedCode.split('\n');
+
+      // Map 'screen' property to 'component' in JSX
+      const jsxPropName =
+        screenConfigProperty === 'screen' ? 'component' : screenConfigProperty;
+
+      // Find the property line within the correct Screen element
+      const propLineIndex = findPropertyLine(
+        lines,
+        (line) =>
+          line.includes(`${jsxPropName}=`) || line.includes(`${jsxPropName}:{`),
+        (line) => lineMatchesScreenName(line, screenName),
+        10 // Search 10 lines before for screen context
+      );
+
+      if (propLineIndex !== -1) {
+        const indent = getIndentation(lines[propLineIndex], '        ');
+
+        // Inject leading comments before the property
+        const updatedLineIndex = injectComments(
+          lines,
+          leadingComments,
+          propLineIndex,
+          indent
+        );
+
+        // Find where the property value ends (}} or })})
+        const closingIndex = findPropertyClosingLine(lines, updatedLineIndex);
+
+        // Inject trailing comments after the closing
+        injectComments(lines, trailingComments, closingIndex + 1, indent);
+
+        formattedCode = lines.join('\n');
+      }
+      return;
+    }
+
+    // Process leading comments for screen elements (highlight-next-line, highlight-start)
+    if (leadingComments.length > 0) {
+      const lines = formattedCode.split('\n');
+      const screenLineIndex = findScreenElementLine(lines, screenName);
+
+      if (screenLineIndex !== -1) {
+        const indent = getIndentation(lines[screenLineIndex]);
+        injectComments(lines, leadingComments, screenLineIndex, indent, true);
+        formattedCode = lines.join('\n');
+      }
+    }
+
+    // Process trailing comments for screen elements (highlight-end)
+    if (trailingComments.length > 0) {
+      const lines = formattedCode.split('\n');
+      const screenLineIndex = findScreenClosingLine(lines, screenName);
+
+      if (screenLineIndex !== -1) {
+        const indent = getIndentation(lines[screenLineIndex]);
+        // Inject after the closing tag
+        injectComments(
+          lines,
+          trailingComments,
+          screenLineIndex + 1,
+          indent,
+          true
+        );
+        formattedCode = lines.join('\n');
+      }
+    }
+  });
+
+  return formattedCode;
 }
 
 /**
- * Parse navigator configuration object
+ * Extract screen config from a screen value node.
+ * Handles both direct object expressions and createXScreen function calls.
  */
-function parseNavigatorConfig(configNode) {
+function extractScreenConfig(screenValue) {
+  // Handle createXScreen function calls
+  // e.g., createNativeStackScreen({ screen: ProfileScreen, ... })
+  if (
+    t.isCallExpression(screenValue) &&
+    t.isIdentifier(screenValue.callee) &&
+    screenValue.callee.name.startsWith('create') &&
+    screenValue.callee.name.endsWith('Screen') &&
+    screenValue.arguments.length > 0 &&
+    t.isObjectExpression(screenValue.arguments[0])
+  ) {
+    // Extract the object argument from the createXScreen call
+    return screenValue.arguments[0];
+  }
+
+  // Return the value as-is for other cases
+  return screenValue;
+}
+
+/**
+ * Track comments on screen config properties (options, screen, listeners, etc.)
+ */
+function trackScreenConfigComments(screenValue, screenName, commentTracking) {
+  const configObject = extractScreenConfig(screenValue);
+
+  if (t.isObjectExpression(configObject)) {
+    configObject.properties.forEach((configProp) => {
+      if (
+        t.isObjectProperty(configProp) &&
+        (configProp.leadingComments || configProp.trailingComments)
+      ) {
+        const propName = configProp.key.name || configProp.key.value;
+        commentTracking.add({
+          originalNode: configProp,
+          screenName,
+          screenConfigProperty: propName,
+          leadingComments:
+            configProp.leadingComments?.map((c) => ({
+              value: c.value,
+              type: c.type,
+            })) || [],
+          trailingComments:
+            configProp.trailingComments?.map((c) => ({
+              value: c.value,
+              type: c.type,
+            })) || [],
+        });
+      }
+    });
+  }
+}
+
+/**
+ * Track comments on screen elements themselves
+ */
+function trackScreenComments(screenProp, screenName, commentTracking) {
+  if (screenProp.leadingComments || screenProp.trailingComments) {
+    commentTracking.add({
+      originalNode: screenProp,
+      screenName,
+      leadingComments:
+        screenProp.leadingComments?.map((c) => ({
+          value: c.value,
+          type: c.type,
+        })) || [],
+      trailingComments:
+        screenProp.trailingComments?.map((c) => ({
+          value: c.value,
+          type: c.type,
+        })) || [],
+      targetNode: null,
+    });
+  }
+}
+
+/**
+ * Find the line index of a Screen element's opening tag.
+ * Handles both single-line and multi-line Screen elements.
+ */
+function findScreenElementLine(lines, screenName) {
+  for (let i = 0; i < lines.length; i++) {
+    // Check if line contains Screen opening tag with the name attribute
+    if (
+      lines[i].includes('<') &&
+      lines[i].includes('.Screen') &&
+      lineMatchesScreenName(lines[i], screenName)
+    ) {
+      return i;
+    }
+
+    // For multiline Screen elements, check if opening tag is on this line
+    // and name attribute is on a subsequent line
+    if (lines[i].includes('<') && lines[i].includes('.Screen')) {
+      for (let j = i; j < Math.min(i + 5, lines.length); j++) {
+        if (lineMatchesScreenName(lines[j], screenName)) {
+          return i; // Return opening tag line, not name line
+        }
+      }
+    }
+  }
+  return -1;
+}
+
+/**
+ * Find the line index of a Screen element's closing tag.
+ * Looks for either self-closing /> or closing </X.Screen> tag.
+ */
+function findScreenClosingLine(lines, screenName) {
+  for (let i = 0; i < lines.length; i++) {
+    if (
+      (lines[i].includes('.Screen') && lines[i].includes('/>')) ||
+      (lines[i].includes('.Screen') && lines[i].includes('</'))
+    ) {
+      // Verify this is the correct screen by checking backward for the name
+      for (let j = Math.max(0, i - 10); j <= i; j++) {
+        if (lineMatchesScreenName(lines[j], screenName)) {
+          return i;
+        }
+      }
+    }
+  }
+  return -1;
+}
+
+/**
+ * Format a comment for injection into code
+ */
+function formatComment(comment, indent, isJSXContext = false) {
+  const commentValue = comment.value.trim();
+  if (comment.type === 'CommentLine') {
+    return `${indent}// ${commentValue}`;
+  }
+  // Block comments in JSX need to be wrapped in braces
+  return isJSXContext
+    ? `${indent}{/* ${commentValue} */}`
+    : `${indent}/* ${commentValue} */`;
+}
+
+/**
+ * Inject comments into lines array at specified position
+ */
+function injectComments(
+  lines,
+  comments,
+  lineIndex,
+  indent,
+  isJSXContext = false
+) {
+  let currentIndex = lineIndex;
+  comments.forEach((comment) => {
+    const commentText = formatComment(comment, indent, isJSXContext);
+    lines.splice(currentIndex, 0, commentText);
+    currentIndex++;
+  });
+  return currentIndex;
+}
+
+/**
+ * Check if a line contains a screen name attribute (with either quote style)
+ */
+function lineMatchesScreenName(line, screenName) {
+  return (
+    line.includes(`name='${screenName}'`) ||
+    line.includes(`name="${screenName}"`)
+  );
+}
+
+/**
+ * Extract indentation from a line
+ */
+function getIndentation(line, defaultIndent = '      ') {
+  return line.match(/^(\s*)/)?.[1] || defaultIndent;
+}
+
+/**
+ * Derive navigator constant name from navigator type string.
+ * Examples:
+ * - "createStackNavigator" -> "Stack"
+ * - "createNativeStackNavigator" -> "Stack"
+ * - "createBottomTabNavigator" -> "Tab"
+ * - "createMaterialTopTabNavigator" -> "Tab"
+ */
+function deriveNavigatorConstName(navigatorType) {
+  // Remove "create" prefix and "Navigator" suffix
+  const withoutCreate = navigatorType.replace(/^create/, '');
+  const withoutNavigator = withoutCreate.replace(/Navigator$/, '');
+  // Extract the last capitalized word (e.g., "NativeStack" -> "Stack", "MaterialTopTab" -> "Tab")
+  const match = withoutNavigator.match(/([A-Z][a-z]+)$/);
+  return match ? match[1] : withoutNavigator;
+}
+
+/**
+ * Generate unique navigator constant name by adding suffix if needed.
+ * Second occurrence gets 'A', third gets 'B', etc.
+ */
+function getUniqueNavigatorConstName(
+  baseNavigatorConstName,
+  navigatorConstNames
+) {
+  const currentCount = navigatorConstNames.get(baseNavigatorConstName) || 0;
+  navigatorConstNames.set(baseNavigatorConstName, currentCount + 1);
+
+  if (currentCount === 0) {
+    return baseNavigatorConstName;
+  }
+  // Add suffix: A for second occurrence, B for third, etc.
+  const suffix = String.fromCharCode(65 + currentCount - 1); // 65 is 'A'
+  return baseNavigatorConstName + suffix;
+}
+
+/**
+ * Attach comments to AST nodes with proper leading/trailing markers
+ */
+function attachCommentsToNode(node, comments, isTrailing = false) {
+  if (comments.length === 0) return;
+
+  comments.forEach((c) => {
+    c.leading = !isTrailing;
+    c.trailing = isTrailing;
+  });
+  node.comments = [...(node.comments || []), ...comments];
+}
+
+/**
+ * Find a property line within a context (searches nearby lines for context marker)
+ */
+function findPropertyLine(lines, propMatcher, contextMatcher, searchRange) {
+  for (let i = 0; i < lines.length; i++) {
+    if (propMatcher(lines[i])) {
+      // Check if this is within the right context by searching nearby lines
+      const startIdx = Math.max(0, i - searchRange);
+      const endIdx = Math.min(i + searchRange, lines.length);
+
+      for (let j = startIdx; j < endIdx; j++) {
+        if (contextMatcher(lines[j])) {
+          return i;
+        }
+      }
+    }
+  }
+  return -1;
+}
+
+/**
+ * Find the closing line for a JSX property value (looks for }} or })})
+ */
+function findPropertyClosingLine(lines, startLine, maxSearchLines = 10) {
+  for (
+    let i = startLine;
+    i < Math.min(startLine + maxSearchLines, lines.length);
+    i++
+  ) {
+    const line = lines[i];
+    // Look for closing patterns but not the Screen element closing
+    if (line.includes('}}') && !line.includes('/>')) {
+      return i;
+    }
+    // Also check for arrow function returning object: })}
+    if (line.includes('})}')) {
+      return i;
+    }
+  }
+  return startLine;
+}
+
+/**
+ * Create a JSX member expression (e.g., Stack.Navigator, Stack.Screen)
+ */
+function createJsxMemberExpression(componentName, memberName) {
+  return t.jsxMemberExpression(
+    t.jsxIdentifier(componentName),
+    t.jsxIdentifier(memberName)
+  );
+}
+
+/**
+ * Create JSX attributes from propInfo objects
+ */
+function createJsxAttributesFromProps(propsObject) {
+  return Object.values(propsObject).map((propInfo) => {
+    if (propInfo.isStringLiteral) {
+      return t.jsxAttribute(
+        t.jsxIdentifier(propInfo.key),
+        t.stringLiteral(propInfo.value.value)
+      );
+    }
+    return t.jsxAttribute(
+      t.jsxIdentifier(propInfo.key),
+      t.jsxExpressionContainer(propInfo.value)
+    );
+  });
+}
+
+/**
+ * Create a Screen JSX element
+ */
+function createScreenElement(componentName, screenName, screenConfig) {
+  const screenProps = [
+    t.jsxAttribute(t.jsxIdentifier('name'), t.stringLiteral(screenName)),
+    t.jsxAttribute(
+      t.jsxIdentifier('component'),
+      t.jsxExpressionContainer(t.identifier(screenConfig.component))
+    ),
+  ];
+
+  // Add all screen-level props
+  Object.entries(screenConfig.screenProps).forEach(([key, value]) => {
+    screenProps.push(
+      t.jsxAttribute(t.jsxIdentifier(key), t.jsxExpressionContainer(value))
+    );
+  });
+
+  return t.jsxElement(
+    t.jsxOpeningElement(
+      createJsxMemberExpression(componentName, 'Screen'),
+      screenProps,
+      true
+    ),
+    null,
+    [],
+    true
+  );
+}
+
+/**
+ * Parse a screen value and return component and screenProps.
+ * Handles identifiers, object expressions, and createXScreen calls.
+ */
+function parseScreenValue(screenValue) {
+  if (t.isIdentifier(screenValue)) {
+    // Simple screen: Home: HomeScreen
+    return {
+      component: screenValue.name,
+      screenProps: {},
+    };
+  }
+
+  // Extract config from createXScreen calls if present
+  const configNode = extractScreenConfig(screenValue);
+
+  if (t.isObjectExpression(configNode)) {
+    // Screen with config: Home: { screen: HomeScreen, options: {...}, listeners: {...} }
+    let component = null;
+    const screenProps = {};
+
+    configNode.properties.forEach((screenConfigProp) => {
+      if (!t.isObjectProperty(screenConfigProp)) return;
+
+      const configKey = screenConfigProp.key.name || screenConfigProp.key.value;
+
+      if (configKey === 'screen' && t.isIdentifier(screenConfigProp.value)) {
+        component = screenConfigProp.value.name;
+      } else {
+        // Store all other props (options, listeners, getId, linking, etc.)
+        // But skip 'linking' as it's only for static config
+        if (configKey !== 'linking') {
+          screenProps[configKey] = screenConfigProp.value;
+        }
+      }
+    });
+
+    return { component, screenProps };
+  }
+
+  return null;
+}
+
+/**
+ * Parse navigator configuration object.
+ * Extracts screens, groups, and navigator-level properties.
+ * Also tracks comments for later injection into the dynamic code.
+ */
+function parseNavigatorConfig(configNode, commentTracking) {
   const result = {
-    screens: {},
-    groups: {}, // Store groups
-    navigatorProps: {}, // Store all navigator-level props
+    screens: {}, // Standalone screens (not in groups)
+    groups: {}, // Screen groups with their own screens and props
+    navigatorProps: {}, // Navigator-level props (screenOptions, initialRouteName, etc.)
   };
 
   if (!t.isObjectExpression(configNode)) {
     return result;
   }
 
-  configNode.properties.forEach((prop) => {
-    if (!t.isObjectProperty(prop) && !t.isObjectMethod(prop)) {
-      return;
-    }
+  // Get all properties from the navigator config object
+  const props = configNode.properties.filter(
+    (prop) => t.isObjectProperty(prop) || t.isObjectMethod(prop)
+  );
 
+  props.forEach((prop, index) => {
     const keyName = prop.key.name || prop.key.value;
 
+    // Track comments on navigator-level properties (but not on screens/groups)
+    if (keyName !== 'screens' && keyName !== 'groups') {
+      const leadingComments =
+        prop.leadingComments?.map((c) => ({
+          value: c.value,
+          type: c.type,
+        })) || [];
+
+      // Collect trailing comments from both the property and its value
+      let trailingComments = [];
+      if (prop.trailingComments) {
+        trailingComments.push(
+          ...prop.trailingComments.map((c) => ({
+            value: c.value,
+            type: c.type,
+          }))
+        );
+      }
+      if (prop.value?.trailingComments) {
+        trailingComments.push(
+          ...prop.value.trailingComments.map((c) => ({
+            value: c.value,
+            type: c.type,
+          }))
+        );
+      }
+
+      // Heuristic: Check if the next property has leading comments that are actually
+      // trailing comments for this property (detected by -end or end suffix)
+      // This handles cases where Babel attaches multiline trailing comments as leading
+      const nextProp = props[index + 1];
+
+      if (nextProp?.leadingComments) {
+        nextProp.leadingComments.forEach((c) => {
+          // Only treat as trailing if the comment ends with -end or similar markers
+          if (
+            c.value.trim().endsWith('-end') ||
+            c.value.trim().endsWith('end')
+          ) {
+            trailingComments.push({
+              value: c.value,
+              type: c.type,
+            });
+          }
+        });
+      }
+
+      if (leadingComments.length > 0 || trailingComments.length > 0) {
+        const commentObj = {
+          originalNode: prop,
+          navigatorProp: keyName,
+          leadingComments,
+          trailingComments,
+        };
+        commentTracking.add(commentObj);
+      }
+    }
+
+    // Parse groups object (e.g., groups: { modal: { screens: {...}, screenOptions: {...} } })
     if (keyName === 'groups' && t.isObjectExpression(prop.value)) {
       // Parse groups object
       prop.value.properties.forEach((groupProp) => {
@@ -417,32 +1005,20 @@ function parseNavigatorConfig(configNode) {
                 const screenName = screenProp.key.name || screenProp.key.value;
                 const screenValue = screenProp.value;
 
-                if (t.isIdentifier(screenValue)) {
-                  groupConfig.screens[screenName] = {
-                    component: screenValue.name,
-                    screenProps: {},
-                  };
-                } else if (t.isObjectExpression(screenValue)) {
-                  let component = null;
-                  const screenProps = {};
+                // Track comments on any property inside the screen config
+                trackScreenConfigComments(
+                  screenValue,
+                  screenName,
+                  commentTracking
+                );
 
-                  screenValue.properties.forEach((screenConfigProp) => {
-                    if (!t.isObjectProperty(screenConfigProp)) return;
+                // Track comments on the screen element itself
+                trackScreenComments(screenProp, screenName, commentTracking);
 
-                    const key =
-                      screenConfigProp.key.name || screenConfigProp.key.value;
+                const parsed = parseScreenValue(screenValue);
 
-                    if (
-                      key === 'screen' &&
-                      t.isIdentifier(screenConfigProp.value)
-                    ) {
-                      component = screenConfigProp.value.name;
-                    } else {
-                      screenProps[key] = screenConfigProp.value;
-                    }
-                  });
-
-                  groupConfig.screens[screenName] = { component, screenProps };
+                if (parsed) {
+                  groupConfig.screens[screenName] = parsed;
                 }
               });
             } else {
@@ -458,6 +1034,7 @@ function parseNavigatorConfig(configNode) {
           result.groups[groupKey] = groupConfig;
         }
       });
+      // Parse top-level screens object (e.g., screens: { Home: HomeScreen, Profile: {...} })
     } else if (keyName === 'screens' && t.isObjectExpression(prop.value)) {
       // Parse screens object
       prop.value.properties.forEach((screenProp) => {
@@ -466,40 +1043,21 @@ function parseNavigatorConfig(configNode) {
         const screenName = screenProp.key.name || screenProp.key.value;
         const screenValue = screenProp.value;
 
-        if (t.isIdentifier(screenValue)) {
-          // Simple screen: Home: HomeScreen
-          result.screens[screenName] = {
-            component: screenValue.name,
-            screenProps: {}, // No additional props
-          };
-        } else if (t.isObjectExpression(screenValue)) {
-          // Screen with config: Home: { screen: HomeScreen, options: {...}, listeners: {...} }
-          let component = null;
-          const screenProps = {};
+        // Track comments on any property inside the screen config
+        trackScreenConfigComments(screenValue, screenName, commentTracking);
 
-          screenValue.properties.forEach((screenConfigProp) => {
-            if (!t.isObjectProperty(screenConfigProp)) return;
+        // Track comments on the screen element itself
+        trackScreenComments(screenProp, screenName, commentTracking);
 
-            const configKey =
-              screenConfigProp.key.name || screenConfigProp.key.value;
+        const parsed = parseScreenValue(screenValue);
 
-            if (
-              configKey === 'screen' &&
-              t.isIdentifier(screenConfigProp.value)
-            ) {
-              component = screenConfigProp.value.name;
-            } else {
-              // Store all other props (options, listeners, getId, etc.)
-              screenProps[configKey] = screenConfigProp.value;
-            }
-          });
-
-          result.screens[screenName] = { component, screenProps };
+        if (parsed) {
+          result.screens[screenName] = parsed;
         }
       });
     } else {
-      // All other props are navigator-level props
-      // Store both the key name and the AST node value
+      // Store all other navigator-level props (screenOptions, initialRouteName, etc.)
+      // Keep track of whether the value is a string literal to determine JSX attribute format
       result.navigatorProps[keyName] = {
         key: keyName,
         value: prop.value,
@@ -515,28 +1073,8 @@ function parseNavigatorConfig(configNode) {
  * Create navigator component function
  */
 function createNavigatorComponent(functionName, componentName, config) {
-  const navigatorProps = [];
-
   // Add all navigator-level props dynamically
-  Object.values(config.navigatorProps).forEach((propInfo) => {
-    if (propInfo.isStringLiteral) {
-      // String literals can be used directly as JSX string attributes
-      navigatorProps.push(
-        t.jsxAttribute(
-          t.jsxIdentifier(propInfo.key),
-          t.stringLiteral(propInfo.value.value)
-        )
-      );
-    } else {
-      // All other values need to be wrapped in JSX expression containers
-      navigatorProps.push(
-        t.jsxAttribute(
-          t.jsxIdentifier(propInfo.key),
-          t.jsxExpressionContainer(propInfo.value)
-        )
-      );
-    }
-  });
+  const navigatorProps = createJsxAttributesFromProps(config.navigatorProps);
 
   // Create screen elements
   const screenElements = [];
@@ -549,69 +1087,18 @@ function createNavigatorComponent(functionName, componentName, config) {
           t.jsxIdentifier('navigationKey'),
           t.stringLiteral(groupKey)
         ),
+        ...createJsxAttributesFromProps(groupConfig.groupProps),
       ];
-
-      // Add group-level props (screenOptions, screenLayout, etc.)
-      Object.values(groupConfig.groupProps).forEach((propInfo) => {
-        if (propInfo.isStringLiteral) {
-          groupProps.push(
-            t.jsxAttribute(
-              t.jsxIdentifier(propInfo.key),
-              t.stringLiteral(propInfo.value.value)
-            )
-          );
-        } else {
-          groupProps.push(
-            t.jsxAttribute(
-              t.jsxIdentifier(propInfo.key),
-              t.jsxExpressionContainer(propInfo.value)
-            )
-          );
-        }
-      });
 
       // Create screens for this group
       const groupScreenElements = [];
 
       Object.entries(groupConfig.screens).forEach(
         ([screenName, screenConfig]) => {
-          const screenProps = [
-            t.jsxAttribute(
-              t.jsxIdentifier('name'),
-              t.stringLiteral(screenName)
-            ),
-            t.jsxAttribute(
-              t.jsxIdentifier('component'),
-              t.jsxExpressionContainer(t.identifier(screenConfig.component))
-            ),
-          ];
-
-          // Add all screen-level props
-          Object.entries(screenConfig.screenProps).forEach(([key, value]) => {
-            screenProps.push(
-              t.jsxAttribute(
-                t.jsxIdentifier(key),
-                t.jsxExpressionContainer(value)
-              )
-            );
-          });
-
-          const screenElement = t.jsxElement(
-            t.jsxOpeningElement(
-              t.jsxMemberExpression(
-                t.jsxIdentifier(componentName),
-                t.jsxIdentifier('Screen')
-              ),
-              screenProps,
-              true
-            ),
-            null,
-            [],
-            true
-          );
-
           groupScreenElements.push(t.jsxText('\n    '));
-          groupScreenElements.push(screenElement);
+          groupScreenElements.push(
+            createScreenElement(componentName, screenName, screenConfig)
+          );
         }
       );
 
@@ -620,18 +1107,10 @@ function createNavigatorComponent(functionName, componentName, config) {
       // Create the Group element
       const groupElement = t.jsxElement(
         t.jsxOpeningElement(
-          t.jsxMemberExpression(
-            t.jsxIdentifier(componentName),
-            t.jsxIdentifier('Group')
-          ),
+          createJsxMemberExpression(componentName, 'Group'),
           groupProps
         ),
-        t.jsxClosingElement(
-          t.jsxMemberExpression(
-            t.jsxIdentifier(componentName),
-            t.jsxIdentifier('Group')
-          )
-        ),
+        t.jsxClosingElement(createJsxMemberExpression(componentName, 'Group')),
         groupScreenElements,
         false
       );
@@ -643,37 +1122,10 @@ function createNavigatorComponent(functionName, componentName, config) {
 
   // Handle standalone screens (not in groups)
   Object.entries(config.screens).forEach(([screenName, screenConfig]) => {
-    const screenProps = [
-      t.jsxAttribute(t.jsxIdentifier('name'), t.stringLiteral(screenName)),
-      t.jsxAttribute(
-        t.jsxIdentifier('component'),
-        t.jsxExpressionContainer(t.identifier(screenConfig.component))
-      ),
-    ];
-
-    // Add all screen-level props dynamically (options, listeners, getId, etc.)
-    Object.entries(screenConfig.screenProps).forEach(([key, value]) => {
-      screenProps.push(
-        t.jsxAttribute(t.jsxIdentifier(key), t.jsxExpressionContainer(value))
-      );
-    });
-
-    const screenElement = t.jsxElement(
-      t.jsxOpeningElement(
-        t.jsxMemberExpression(
-          t.jsxIdentifier(componentName),
-          t.jsxIdentifier('Screen')
-        ),
-        screenProps,
-        true
-      ),
-      null,
-      [],
-      true
-    );
-
     screenElements.push(t.jsxText('\n  '));
-    screenElements.push(screenElement);
+    screenElements.push(
+      createScreenElement(componentName, screenName, screenConfig)
+    );
   });
 
   screenElements.push(t.jsxText('\n'));
@@ -681,18 +1133,10 @@ function createNavigatorComponent(functionName, componentName, config) {
   // Create Navigator element
   const navigatorElement = t.jsxElement(
     t.jsxOpeningElement(
-      t.jsxMemberExpression(
-        t.jsxIdentifier(componentName),
-        t.jsxIdentifier('Navigator')
-      ),
+      createJsxMemberExpression(componentName, 'Navigator'),
       navigatorProps
     ),
-    t.jsxClosingElement(
-      t.jsxMemberExpression(
-        t.jsxIdentifier(componentName),
-        t.jsxIdentifier('Navigator')
-      )
-    ),
+    t.jsxClosingElement(createJsxMemberExpression(componentName, 'Navigator')),
     screenElements,
     false
   );
@@ -711,6 +1155,47 @@ function createNavigatorComponent(functionName, componentName, config) {
 }
 
 /**
+ * Create a TabItem element with code block
+ */
+function createTabItem(
+  value,
+  label,
+  code,
+  codeNode,
+  originalCodeBlock,
+  cleanData,
+  isDefault = false
+) {
+  return {
+    type: 'element',
+    tagName: 'TabItem',
+    properties: {
+      value,
+      label,
+      ...(isDefault && { default: true }),
+    },
+    children: [
+      { type: 'text', value: '\n\n' },
+      {
+        type: 'element',
+        tagName: 'pre',
+        properties: originalCodeBlock.properties || {},
+        children: [
+          {
+            type: 'element',
+            tagName: 'code',
+            properties: codeNode.properties || {},
+            data: cleanData,
+            children: [{ type: 'text', value: code }],
+          },
+        ],
+      },
+      { type: 'text', value: '\n\n' },
+    ],
+  };
+}
+
+/**
  * Create a Tabs element with both static and dynamic TabItems
  */
 function createTabsWithBothConfigs(staticCode, dynamicCode, originalCodeBlock) {
@@ -721,6 +1206,26 @@ function createTabsWithBothConfigs(staticCode, dynamicCode, originalCodeBlock) {
     codeNode.data?.meta?.replace(/\bstatic2dynamic\b\s*/g, '').trim() || '';
   const cleanData = { ...codeNode.data, meta: cleanMeta };
 
+  const tabItems = [
+    { value: 'static', label: 'Static', code: staticCode, isDefault: true },
+    { value: 'dynamic', label: 'Dynamic', code: dynamicCode, isDefault: false },
+  ];
+
+  const children = tabItems.flatMap((item) => [
+    { type: 'text', value: '\n' },
+    createTabItem(
+      item.value,
+      item.label,
+      item.code,
+      codeNode,
+      originalCodeBlock,
+      cleanData,
+      item.isDefault
+    ),
+  ]);
+
+  children.push({ type: 'text', value: '\n' });
+
   return {
     type: 'element',
     tagName: 'Tabs',
@@ -728,96 +1233,6 @@ function createTabsWithBothConfigs(staticCode, dynamicCode, originalCodeBlock) {
       groupId: 'config',
       queryString: 'config',
     },
-    children: [
-      {
-        type: 'text',
-        value: '\n',
-      },
-      // Static TabItem
-      {
-        type: 'element',
-        tagName: 'TabItem',
-        properties: {
-          value: 'static',
-          label: 'Static',
-          default: true,
-        },
-        children: [
-          {
-            type: 'text',
-            value: '\n\n',
-          },
-          {
-            type: 'element',
-            tagName: 'pre',
-            properties: originalCodeBlock.properties || {},
-            children: [
-              {
-                type: 'element',
-                tagName: 'code',
-                properties: codeNode.properties || {},
-                data: cleanData,
-                children: [
-                  {
-                    type: 'text',
-                    value: staticCode,
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            type: 'text',
-            value: '\n\n',
-          },
-        ],
-      },
-      {
-        type: 'text',
-        value: '\n',
-      },
-      // Dynamic TabItem
-      {
-        type: 'element',
-        tagName: 'TabItem',
-        properties: {
-          value: 'dynamic',
-          label: 'Dynamic',
-        },
-        children: [
-          {
-            type: 'text',
-            value: '\n\n',
-          },
-          {
-            type: 'element',
-            tagName: 'pre',
-            properties: originalCodeBlock.properties || {},
-            children: [
-              {
-                type: 'element',
-                tagName: 'code',
-                properties: codeNode.properties || {},
-                data: cleanData,
-                children: [
-                  {
-                    type: 'text',
-                    value: dynamicCode,
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            type: 'text',
-            value: '\n\n',
-          },
-        ],
-      },
-      {
-        type: 'text',
-        value: '\n',
-      },
-    ],
+    children,
   };
 }
