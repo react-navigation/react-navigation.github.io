@@ -567,13 +567,17 @@ article video:not(.video-player video),
 }
 
 article img {
+  display: inline-block;
   max-width: 100%;
 }
 
 article video {
+  display: inline-block;
+  vertical-align: top;
   width: 300px;
   height: auto;
   max-width: 100%;
+  border-radius: var(--ifm-global-radius);
 }
 
 article video[data-landscape] {
@@ -610,6 +614,7 @@ samp {
 .video-player {
   position: relative;
   display: inline-block;
+  border-radius: var(--ifm-global-radius);
 }
 
 .video-player-icon {
@@ -624,6 +629,7 @@ samp {
   background: rgba(0, 0, 0, 0.3);
   transition: 300ms opacity ease;
   opacity: 0;
+  border-radius: var(--ifm-global-radius);
 }
 
 .video-player-icon::after {

@@ -2,9 +2,9 @@ import { useActiveVersion } from '@docusaurus/plugin-content-docs/client';
 import { useColorMode } from '@docusaurus/theme-common';
 import { usePluginData } from '@docusaurus/useGlobalData';
 import MDXPre from '@theme-original/MDXComponents/Pre';
-import React from 'react';
-import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+import React from 'react';
 
 const SUPPORTED_TABS = {
   config: [
@@ -246,40 +246,9 @@ export default function Pre({
       );
     }
 
-    // Only keep the lines between `// codeblock-focus-{start,end} comments
-    if (code.includes('// codeblock-focus-start')) {
-      const lines = code.split('\n');
-
-      let content = '';
-      let focus = false;
-      let indent;
-
-      for (const line of lines) {
-        if (line.trim() === '// codeblock-focus-start') {
-          focus = true;
-        } else if (line.trim() === '// codeblock-focus-end') {
-          focus = false;
-        } else if (focus) {
-          if (indent === undefined) {
-            indent = line.match(/^\s*/)[0];
-          }
-
-          if (line.startsWith(indent)) {
-            content += line.slice(indent.length) + '\n';
-          } else {
-            content += line + '\n';
-          }
-        }
-      }
-
-      children = React.Children.map(children, (c) =>
-        React.cloneElement(c, { children: content })
-      );
-    }
-
     return (
       <>
-        <MDXPre {...rest}>{children}</MDXPre>
+        <FocusedCodeBlock {...rest}>{children}</FocusedCodeBlock>
         <a
           className="snack-sample-link"
           data-snack="true"
@@ -307,6 +276,44 @@ export default function Pre({
           </svg>
         </a>
       </>
+    );
+  }
+
+  return <FocusedCodeBlock {...rest}>{children}</FocusedCodeBlock>;
+}
+
+function FocusedCodeBlock({ children, ...rest }) {
+  const child = React.Children.only(children);
+  const code = child.props.children;
+
+  // Only keep the lines between `// codeblock-focus-{start,end} comments
+  if (code.includes('// codeblock-focus-start')) {
+    const lines = code.split('\n');
+
+    let content = '';
+    let focus = false;
+    let indent;
+
+    for (const line of lines) {
+      if (line.trim() === '// codeblock-focus-start') {
+        focus = true;
+      } else if (line.trim() === '// codeblock-focus-end') {
+        focus = false;
+      } else if (focus) {
+        if (indent === undefined) {
+          indent = line.match(/^\s*/)[0];
+        }
+
+        if (line.startsWith(indent)) {
+          content += line.slice(indent.length) + '\n';
+        } else {
+          content += line + '\n';
+        }
+      }
+    }
+
+    children = React.Children.map(children, (c) =>
+      React.cloneElement(c, { children: content })
     );
   }
 
