@@ -56,7 +56,7 @@ The library exports the following APIs:
   - `createCompatNavigatorFactory` - Takes a navigator with the v5 API and returns a `createXNavigator` with the v4 API.
   - `createCompatNavigationProp` - Takes the v5 `navigation` object along with a `route` object and returns a v4 `navigation` object.
 
-### What does it handle?
+## What does it handle?
 
 The compatibility layer handles various API differences between React Navigation 4 and 5:
 
@@ -65,7 +65,7 @@ The compatibility layer handles various API differences between React Navigation
 - Add support for `screenProps` which is removed in v5.
 - Export action creators such as `NavigationActions`, `StackActions`, `SwitchActions` with same signature as v4.
 
-### What doesn't it handle?
+## What doesn't it handle?
 
 Due to the dynamic API of React Navigation 5, some functionality possible with the static API of v4 are not possible anymore, and hence the compatibility layer doesn't handle them:
 
@@ -78,7 +78,7 @@ Due to the dynamic API of React Navigation 5, some functionality possible with t
 
 While we have tried our best to make the compatibility layer handle most of the differences, there might be something missing. So make sure to test the code that you've migrated.
 
-### Why should we use it?
+## Why should we use it?
 
 Using the compatibility layer allows us to migrate our code to the new version incrementally. Unfortunately we do have to change some code to get the compatibility layer working (see "What doesn't it handle") properly, but it still allows majority of our code to remain unchanged. Some of the advantages of using the compatibility layer include:
 

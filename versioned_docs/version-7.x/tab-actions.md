@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 The following actions are supported:
 
-### jumpTo
+## jumpTo
 
 The `jumpTo` action can be used to jump to an existing route in the tab navigator.
 

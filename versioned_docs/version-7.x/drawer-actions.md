@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 The following actions are supported:
 
-### openDrawer
+## openDrawer
 
 The `openDrawer` action can be used to open the drawer pane.
 
@@ -57,7 +57,7 @@ export default function App() {
 }
 ```
 
-### closeDrawer
+## closeDrawer
 
 The `closeDrawer` action can be used to close the drawer pane.
 
@@ -122,7 +122,7 @@ export default function App() {
 }
 ```
 
-### toggleDrawer
+## toggleDrawer
 
 The `toggleDrawer` action can be used to toggle the drawer pane.
 
@@ -187,7 +187,7 @@ export default function App() {
 }
 ```
 
-### jumpTo
+## jumpTo
 
 The `jumpTo` action can be used to jump to an existing route in the drawer navigator.
 
