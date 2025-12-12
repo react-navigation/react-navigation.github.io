@@ -32,7 +32,7 @@ The `navigation` object can be accessed inside any screen component with the [`u
 
 :::
 
-### Navigator-dependent functions
+## Navigator-dependent functions
 
 There are several additional functions present on `navigation` object based on the kind of the current navigator.
 

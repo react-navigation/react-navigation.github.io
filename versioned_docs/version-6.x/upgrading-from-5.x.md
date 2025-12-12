@@ -8,7 +8,7 @@ React Navigation 6 keeps the same API as React Navigation 5, however there are s
 
 This guide lists all the changes and new features that you need to keep in mind when upgrading.
 
-### Minimum Requirements
+## Minimum Requirements
 
 React Navigation 6 requires newer versions of following libraries:
 
