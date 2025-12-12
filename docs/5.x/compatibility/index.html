@@ -19,7 +19,7 @@
 <script src="/js/snack-helpers.js"></script>
 <script src="/js/toc-fixes.js"></script>
 <script src="/js/video-playback.js"></script><link rel="stylesheet" href="/assets/css/styles.862cf15a.css">
-<script src="/assets/js/runtime~main.33b67d4d.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.568460cb.js" defer="defer"></script>
 <script src="/assets/js/main.4fbb2ca5.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -64,7 +64,7 @@
 </ul>
 </li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-does-it-handle">What does it handle?<a href="#what-does-it-handle" class="hash-link" aria-label="Direct link to What does it handle?" title="Direct link to What does it handle?" translate="no">​</a></h3>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-does-it-handle">What does it handle?<a href="#what-does-it-handle" class="hash-link" aria-label="Direct link to What does it handle?" title="Direct link to What does it handle?" translate="no">​</a></h2>
 <p>The compatibility layer handles various API differences between React Navigation 4 and 5:</p>
 <ul>
 <li class="">Use static configuration API of v4 instead of the component based API.</li>
@@ -72,7 +72,7 @@
 <li class="">Add support for <code>screenProps</code> which is removed in v5.</li>
 <li class="">Export action creators such as <code>NavigationActions</code>, <code>StackActions</code>, <code>SwitchActions</code> with same signature as v4.</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-doesnt-it-handle">What doesn&#x27;t it handle?<a href="#what-doesnt-it-handle" class="hash-link" aria-label="Direct link to What doesn&#x27;t it handle?" title="Direct link to What doesn&#x27;t it handle?" translate="no">​</a></h3>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-doesnt-it-handle">What doesn&#x27;t it handle?<a href="#what-doesnt-it-handle" class="hash-link" aria-label="Direct link to What doesn&#x27;t it handle?" title="Direct link to What doesn&#x27;t it handle?" translate="no">​</a></h2>
 <p>Due to the dynamic API of React Navigation 5, some functionality possible with the static API of v4 are not possible anymore, and hence the compatibility layer doesn&#x27;t handle them:</p>
 <ul>
 <li class="">It doesn&#x27;t wrap navigator&#x27;s props or options. This basically means that the options you&#x27;re passing to a navigator might be different as per breaking changes in the navigators. Refer to the navigator&#x27;s docs for update options API.</li>
@@ -83,7 +83,7 @@
 <li class="">If you&#x27;re using advanced APIs like Redux integration, custom routers and actions etc., they aren&#x27;t supported anymore and you&#x27;ll need to remove Redux integration.</li>
 </ul>
 <p>While we have tried our best to make the compatibility layer handle most of the differences, there might be something missing. So make sure to test the code that you&#x27;ve migrated.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-should-we-use-it">Why should we use it?<a href="#why-should-we-use-it" class="hash-link" aria-label="Direct link to Why should we use it?" title="Direct link to Why should we use it?" translate="no">​</a></h3>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-should-we-use-it">Why should we use it?<a href="#why-should-we-use-it" class="hash-link" aria-label="Direct link to Why should we use it?" title="Direct link to Why should we use it?" translate="no">​</a></h2>
 <p>Using the compatibility layer allows us to migrate our code to the new version incrementally. Unfortunately we do have to change some code to get the compatibility layer working (see &quot;What doesn&#x27;t it handle&quot;) properly, but it still allows majority of our code to remain unchanged. Some of the advantages of using the compatibility layer include:</p>
 <ul>
 <li class="">It allows us to write new code with the new API while integrating with the code using the legacy API, i.e. you can navigate to screens defined with the legacy API from code written with the new API and vice versa.</li>
