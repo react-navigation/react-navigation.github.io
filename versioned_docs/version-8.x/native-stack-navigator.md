@@ -602,9 +602,12 @@ Only supported on iOS.
 
 #### `animationDuration`
 
-Changes the duration (in milliseconds) of `slide_from_bottom`, `fade_from_bottom`, `fade` and `simple_push` transitions on iOS. Defaults to `350`.
+Changes the duration (in milliseconds) of `slide_from_bottom`, `fade_from_bottom`, `fade` and `simple_push` transitions on iOS. Defaults to `500`.
 
-The duration of `default` and `flip` transitions isn't customizable.
+The duration is not customizable for:
+
+- Screens with `default` and `flip` animations
+- Screens with `presentation` set to `modal`, `formSheet`, `pageSheet` (regardless of animation)
 
 Only supported on iOS.
 
@@ -1249,9 +1252,9 @@ A callback that gets called when search bar has lost focus.
 
 A callback that gets called when the cancel button is pressed.
 
-##### `onChangeText`
+##### `onChange`
 
-A callback that gets called when the text changes. It receives the current text value of the search bar.
+A callback that gets called when the text changes. It receives en event containing the current text value of the search bar.
 
 Example:
 
@@ -1261,7 +1264,7 @@ const [search, setSearch] = React.useState('');
 React.useLayoutEffect(() => {
   navigation.setOptions({
     headerSearchBarOptions: {
-      onChangeText: (event) => setSearch(event.nativeEvent.text),
+      onChange: (event) => setSearch(event.nativeEvent.text),
     },
   });
 }, [navigation]);
@@ -1351,6 +1354,48 @@ React.useEffect(() => {
   return unsubscribe;
 }, [navigation]);
 ```
+
+#### `gestureCancel`
+
+This event is fired when a swipe back gesture is canceled on iOS.
+
+Example:
+
+```js
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('gestureCancel', (e) => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
+```
+
+Only supported on iOS.
+
+#### `sheetDetentChange`
+
+This event is fired when a screen with `presentation: 'formSheet'` changes its detent.
+
+Event data:
+
+- `e.data.index` - The current detent index in the `sheetAllowedDetents` array.
+- `e.data.stable` - On Android, `false` means the user is dragging the sheet or it is settling. On iOS, this is always `true`.
+
+Example:
+
+```js
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('sheetDetentChange', (e) => {
+    console.log('Detent index:', e.data.index);
+    console.log('Is stable:', e.data.stable);
+  });
+
+  return unsubscribe;
+}, [navigation]);
+```
+
+Only supported on Android and iOS.
 
 ### Helpers
 

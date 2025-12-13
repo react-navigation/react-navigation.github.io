@@ -22,9 +22,10 @@ Here are some resources to help you out:
 
 ## Minimum requirements
 
-- `react-native` >= 0.72.0
-- `expo` >= 52 (if you use [Expo Go](https://expo.dev/go))
-- `typescript` >= 5.0.0 (if you use TypeScript)
+- `react-native` >= 0.81
+- `expo` >= 54 (if you use [Expo Go](https://expo.dev/go))
+- `typescript` >= 5.9.2 (if you use TypeScript)
+- `react-native-web` >= 0.21.0 (if you support Web)
 
 ## Starter template
 
@@ -60,7 +61,7 @@ Let's also install and configure dependencies used by most navigators. The libra
 In your project directory, run:
 
 ```bash
-npx expo install react-native-screens react-native-safe-area-context
+npx expo install react-native-screens react-native-safe-area-context @callstack/liquid-glass
 ```
 
 This will install versions of these libraries that are compatible with your Expo SDK version.
@@ -71,7 +72,7 @@ This will install versions of these libraries that are compatible with your Expo
 In your project directory, run:
 
 ```bash npm2yarn
-npm install react-native-screens react-native-safe-area-context
+npm install react-native-screens react-native-safe-area-context @callstack/liquid-glass
 ```
 
 If you're on a Mac and developing for iOS, you need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.

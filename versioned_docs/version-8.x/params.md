@@ -11,10 +11,18 @@ Remember when I said "more on that later when we talk about `params`!"? Well, th
 
 Now that we know how to create a stack navigator with some routes and [navigate between those routes](navigating.md), let's look at how we can pass data to routes when we navigate to them.
 
-There are two pieces to this:
+## Passing params
 
-1. Pass params to a route by putting them in an object as a second parameter to the `navigation.navigate` function: `navigation.navigate('RouteName', { /* params go here */ })`
-2. Read the params in your screen component: `route.params`.
+Params can be passed to screens while navigating to them via various navigation methods such as [`navigate`](navigation-actions.md#navigate), [`push`](stack-actions.md#push), [`jumpTo`](tab-actions.md#jumpto) etc. Typically, params are passed as the second argument to these methods.
+
+For example, to pass params while navigating to a screen using `navigate`:
+
+```js
+navigation.navigate('Details', {
+  itemId: 86,
+  otherParam: 'anything you want here',
+});
+```
 
 :::note
 
@@ -22,19 +30,62 @@ We recommend that the params you pass are JSON-serializable. That way, you'll be
 
 :::
 
-```js name="Passing params" snack
+## Reading params
+
+Params can be read from the `params` property of the `route` object. There are 2 main ways to access the `route` object:
+
+1. Your screen component automatically receives the `route` object as a prop:
+
+   ```js
+   // highlight-next-line
+   function DetailsScreen({ route }) {
+     // Access params from route.params
+     const { itemId, otherParam } = route.params;
+
+     return (
+       // ...
+     );
+   }
+   ```
+
+2. You can also use the [`useRoute`](use-route.md) hook to access the `route` object in any component inside your screen:
+
+   ```js
+   import { useRoute } from '@react-navigation/native';
+
+   function SomeComponent() {
+     // highlight-next-line
+     const route = useRoute('Details');
+
+     // Access params from route.params
+     const { itemId, otherParam } = route.params;
+
+     return (
+       // ...
+     );
+   }
+   ```
+
+   The `useRoute` hook takes the name of the current screen or any parent screen as an argument, and returns the route object containing the params for that screen.
+
+In this example, the `HomeScreen` passes params to the `DetailsScreen`. The `DetailsScreen` then reads and displays those params:
+
+```js name="Passing params" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -57,7 +108,7 @@ function HomeScreen() {
 }
 
 function DetailsScreen({ route }) {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Details');
 
   /* 2. Get the param */
   // highlight-next-line
@@ -90,8 +141,12 @@ function DetailsScreen({ route }) {
 
 const RootStack = createNativeStackNavigator({
   screens: {
-    Home: HomeScreen,
-    Details: DetailsScreen,
+    Home: createNativeStackScreen({
+      screen: HomeScreen,
+    }),
+    Details: createNativeStackScreen({
+      screen: DetailsScreen,
+    }),
   },
 });
 
@@ -114,13 +169,13 @@ You can also pass some initial params to a screen. If you didn't specify any par
 <TabItem value="static" label="Static" default>
 
 ```js
-{
+createNativeStackScreen({
   Details: {
     screen: DetailsScreen,
     // highlight-next-line
     initialParams: { itemId: 42 },
   },
-}
+});
 ```
 
 </TabItem>
@@ -140,11 +195,17 @@ You can also pass some initial params to a screen. If you didn't specify any par
 
 ## Updating params
 
-Screens can also update their params, like they can update their state. The `navigation.setParams` method lets you update the params of a screen. Refer to the [API reference for `setParams`](navigation-object.md#setparams) for more details.
+Screens can also update their params, like they can update their state. There are few ways to do this:
+
+- [`setParams`](navigation-actions.md#setparams) - updates the params by merging new params object with existing params
+- [`replaceParams`](navigation-actions.md#replaceparams) - replaces the params with new params object
+- [`pushParams`](navigation-actions.md#pushparams) - pushes a new entry in the history stack with the new params object
+
+All of these methods are available on the `navigation` object and they take a params object as their argument.
 
 Basic usage:
 
-```js name="Updating params" snack
+```js name="Updating params" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -155,7 +216,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen({ route }) {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
   const { itemId } = route.params;
 
   return (
@@ -180,10 +241,10 @@ function HomeScreen({ route }) {
 
 const RootStack = createNativeStackNavigator({
   screens: {
-    Home: {
+    Home: createNativeStackScreen({
       screen: HomeScreen,
       initialParams: { itemId: 42 },
-    },
+    }),
   },
 });
 
@@ -194,11 +255,9 @@ export default function App() {
 }
 ```
 
-The `setParams` method merges the new params with the existing ones. To replace the existing params, you can use [`replaceParams`](navigation-object.md#replaceparams) instead.
-
 :::note
 
-Avoid using `setParams` or `replaceParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-object.md#setoptions) instead.
+Avoid using `setParams`, `replaceParams`, or `pushParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-object.md#setoptions) instead.
 
 :::
 
@@ -208,7 +267,7 @@ Params aren't only useful for passing some data to a new screen, but they can al
 
 To achieve this, you can use the `popTo` method to go back to the previous screen as well as pass params to it:
 
-```js name="Passing params back" snack
+```js name="Passing params back" snack static2dynamic
 import * as React from 'react';
 import { Text, View, TextInput } from 'react-native';
 import {
@@ -220,7 +279,7 @@ import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
 function HomeScreen({ route }) {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   // Use an effect to monitor the update to params
   // highlight-start
@@ -244,7 +303,7 @@ function HomeScreen({ route }) {
 }
 
 function CreatePostScreen({ route }) {
-  const navigation = useNavigation();
+  const navigation = useNavigation('CreatePost');
   const [postText, setPostText] = React.useState('');
 
   return (
@@ -272,8 +331,12 @@ function CreatePostScreen({ route }) {
 
 const RootStack = createNativeStackNavigator({
   screens: {
-    Home: HomeScreen,
-    CreatePost: CreatePostScreen,
+    Home: createNativeStackScreen({
+      screen: HomeScreen,
+    }),
+    CreatePost: createNativeStackScreen({
+      screen: CreatePostScreen,
+    }),
   },
 });
 
@@ -294,19 +357,25 @@ Here, after you press "Done", the home screen's `route.params` will be updated t
 
 If you have nested navigators, you need to pass params a bit differently. For example, say you have a navigator inside the `More` screen and want to pass params to the `Settings` screen inside that navigator. Then you can pass params as the following:
 
-```js name="Passing params to nested screen" snack
+```js name="Passing params to nested screen" snack static2dynamic
 import * as React from 'react';
 import { Text, View, TextInput } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
+import {
+  createBottomTabNavigator,
+  createBottomTabScreen,
+} from '@react-navigation/bottom-tabs';
 import { Button } from '@react-navigation/elements';
 
 function SettingsScreen({ route }) {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Settings');
   const { userId } = route.params;
 
   return (
@@ -329,7 +398,7 @@ function ProfileScreen() {
 }
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -353,15 +422,23 @@ function HomeScreen() {
 
 const MoreStack = createNativeStackNavigator({
   screens: {
-    Settings: SettingsScreen,
-    Profile: ProfileScreen,
+    Settings: createNativeStackScreen({
+      screen: SettingsScreen,
+    }),
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+    }),
   },
 });
 
 const RootTabs = createBottomTabNavigator({
   screens: {
-    Home: HomeScreen,
-    More: MoreStack,
+    Home: createBottomTabScreen({
+      screen: HomeScreen,
+    }),
+    More: createBottomTabScreen({
+      screen: MoreStack,
+    }),
   },
 });
 
@@ -440,7 +517,7 @@ Some examples of what should be in params are:
 
 - [`navigate`](navigation-actions.md#navigate) and [`push`](stack-actions.md#push) accept an optional second argument to let you pass parameters to the route you are navigating to. For example: `navigation.navigate('RouteName', { paramName: 'value' })`.
 - You can read the params through [`route.params`](route-object.md) inside a screen
-- You can update the screen's params with [`navigation.setParams`](navigation-object.md#setparams) or [`navigation.replaceParams`](navigation-object.md#replaceparams)
+- You can update the screen's params with [`navigation.setParams`](navigation-object.md#setparams), [`navigation.replaceParams`](navigation-object.md#replaceparams) or [`navigation.pushParams`](navigation-object.md#pushparams)
 - Initial params can be passed via the [`initialParams`](screen.md#initial-params) prop on `Screen` or in the navigator config
 - State such as sort order, filters etc. should be kept in params so that the state is reflected in the URL and can be shared/bookmarked.
 - Params should contain the least amount of data required to identify a screen; for most cases, this means passing the ID of an object instead of passing a full object.

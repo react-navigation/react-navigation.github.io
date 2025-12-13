@@ -607,10 +607,6 @@ samp {
   display: none;
 }
 
-.markdown li > p {
-  margin-bottom: 0;
-}
-
 .video-player {
   position: relative;
   display: inline-block;

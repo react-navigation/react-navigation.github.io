@@ -36,13 +36,12 @@
       "testing",
       "typescript",
       "troubleshooting",
-      "upgrading-from-6.x"
+      "upgrading-from-7.x"
     ],
     "Navigators": [
       "stack-navigator",
       "native-stack-navigator",
       "bottom-tab-navigator",
-      "native-bottom-tab-navigator",
       "drawer-navigator",
       "material-top-tab-navigator"
     ],

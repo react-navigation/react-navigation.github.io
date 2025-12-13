@@ -152,7 +152,11 @@ export default function Pre({
     const version = activeVersion?.name;
 
     if (version == null || versions[version] == null) {
-      throw new Error(`Invalid version: ${version}`);
+      console.warn(
+        `No version information found for version "${version}", cannot resolve Snack dependencies automatically.`
+      );
+
+      return <FocusedCodeBlock {...rest}>{children}</FocusedCodeBlock>;
     }
 
     Object.assign(

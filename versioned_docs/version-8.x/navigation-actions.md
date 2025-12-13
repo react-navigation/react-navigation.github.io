@@ -889,3 +889,116 @@ export default function App() {
 ```
 
 If the `source` property is explicitly set to `undefined`, it'll replace the params for the focused route.
+
+### pushParams
+
+The `pushParams` action allows to add a new entry to the history stack with new params. It takes the following arguments:
+
+- `params` - _object_ - required - New params to use for the route.
+
+```js name="Common actions pushParams" snack static2dynamic
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
+import {
+  createStaticNavigation,
+  useNavigation,
+  CommonActions,
+} from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function ProductListScreen({ route }) {
+  const navigation = useNavigation();
+  const filter = route.params?.filter || 'all';
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Product List</Text>
+      <Text>Filter: {filter}</Text>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(CommonActions.pushParams({ filter: 'popular' }));
+          // codeblock-focus-end
+        }}
+      >
+        Show popular
+      </Button>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(CommonActions.pushParams({ filter: 'new' }));
+          // codeblock-focus-end
+        }}
+      >
+        Show new
+      </Button>
+      <Button
+        onPress={() => {
+          navigation.dispatch(CommonActions.goBack());
+        }}
+      >
+        Go back
+      </Button>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Settings</Text>
+    </View>
+  );
+}
+
+const HomeTabs = createBottomTabNavigator({
+  screenOptions: {
+    backBehavior: 'history',
+  },
+  screens: {
+    ProductList: ProductListScreen,
+    Settings: SettingsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(HomeTabs);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+Unlike `setParams`, the `pushParams` action does not merge the new params with the existing ones. Instead, it uses the new params object as-is and adds a new entry to the history stack.
+
+The action works in all navigators, such as stack, tab, and drawer. This allows adding a new entry to the history stack without needing to push a new screen instance.
+
+This can be useful in various scenarios:
+
+- A product listing page with filters, where changing filters should create a new history entry so that users can go back to previous filter states.
+- A screen with a custom modal component, where the modal is not a separate screen in the navigator, but its state should be reflected in the URL and history.
+
+If you want to push params for a particular route, you can add a `source` property referring to the route key:
+
+```js
+navigation.dispatch({
+  ...CommonActions.pushParams({ filter: 'popular' }),
+  source: route.key,
+});
+```
+
+If the `source` property is explicitly set to `undefined`, it'll push params for the focused route.

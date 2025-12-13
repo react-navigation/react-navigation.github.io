@@ -48,46 +48,6 @@ Different navigators accept different configuration options. You can find the li
 
 There is a set of common configurations that are shared across all navigators:
 
-### ID
-
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-object.md#getparent) to refer to this navigator in a child navigator.
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-const MyStack = createNativeStackNavigator({
-  // highlight-next-line
-  id: 'RootStack',
-  screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
-  },
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-const Stack = createNativeStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator
-      // highlight-next-line
-      id="RootStack"
-    >
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
 ### Initial route name
 
 The name of the route to render on the first load of the navigator.
@@ -312,13 +272,7 @@ function MyStack() {
 
 ### Router
 
-:::warning
-
-This API is experimental and may change in a minor release.
-
-:::
-
-Routers can be customized with the `UNSTABLE_router` prop on navigator to override how navigation actions are handled.
+Routers can be customized with the `router` prop on navigator to override how navigation actions are handled.
 
 It takes a function that receives the original router and returns an object with overrides:
 
@@ -328,7 +282,7 @@ It takes a function that receives the original router and returns an object with
 ```js
 const MyStack = createNativeStackNavigator({
   // highlight-start
-  UNSTABLE_router: (original) => ({
+  router: (original) => ({
     getStateForAction(state, action) {
       if (action.type === 'SOME_ACTION') {
         // Custom logic
@@ -356,7 +310,7 @@ function MyStack() {
   return (
     <Stack.Navigator
       // highlight-start
-      UNSTABLE_router={(original) => ({
+      router={(original) => ({
         getStateForAction(state, action) {
           if (action.type === 'SOME_ACTION') {
             // Custom logic
@@ -378,7 +332,7 @@ function MyStack() {
 </TabItem>
 </Tabs>
 
-The function passed to `UNSTABLE_router` **must be a pure function and cannot reference outside dynamic variables**.
+The function passed to `router` **must be a pure function and cannot reference outside dynamic variables**.
 
 The overrides object is shallow merged with the original router. So you don't need to specify all properties of the router, only the ones you want to override.
 

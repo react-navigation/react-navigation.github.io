@@ -21,22 +21,25 @@ When we go back from `Profile` to `Home`, `Profile` is unmounted and its `useEff
 
 Similar results can be observed (in combination) with other navigators as well. Consider a tab navigator with two tabs, where each tab is a stack navigator:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Navigation lifecycle" snack
+```js name="Navigation lifecycle" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
+import {
+  createBottomTabNavigator,
+  createBottomTabScreen,
+} from '@react-navigation/bottom-tabs';
 import { Button } from '@react-navigation/elements';
 
 function SettingsScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Settings');
 
   React.useEffect(() => {
     console.log('SettingsScreen mounted');
@@ -55,7 +58,7 @@ function SettingsScreen() {
 }
 
 function ProfileScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Profile');
 
   React.useEffect(() => {
     console.log('ProfileScreen mounted');
@@ -74,7 +77,7 @@ function ProfileScreen() {
 }
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   React.useEffect(() => {
     console.log('HomeScreen mounted');
@@ -93,7 +96,7 @@ function HomeScreen() {
 }
 
 function DetailsScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Details');
 
   React.useEffect(() => {
     console.log('DetailsScreen mounted');
@@ -114,15 +117,23 @@ function DetailsScreen() {
 // codeblock-focus-start
 const SettingsStack = createNativeStackNavigator({
   screens: {
-    Settings: SettingsScreen,
-    Profile: ProfileScreen,
+    Settings: createNativeStackScreen({
+      screen: SettingsScreen,
+    }),
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+    }),
   },
 });
 
 const HomeStack = createNativeStackNavigator({
   screens: {
-    Home: HomeScreen,
-    Details: DetailsScreen,
+    Home: createNativeStackScreen({
+      screen: HomeScreen,
+    }),
+    Details: createNativeStackScreen({
+      screen: DetailsScreen,
+    }),
   },
 });
 
@@ -131,8 +142,12 @@ const MyTabs = createBottomTabNavigator({
     headerShown: false,
   },
   screens: {
-    First: SettingsStack,
-    Second: HomeStack,
+    First: createBottomTabScreen({
+      screen: SettingsStack,
+    }),
+    Second: createBottomTabScreen({
+      screen: HomeStack,
+    }),
   },
 });
 // codeblock-focus-end
@@ -143,138 +158,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Navigation lifecycle" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Button } from '@react-navigation/elements';
-
-function SettingsScreen() {
-  const navigation = useNavigation();
-
-  React.useEffect(() => {
-    console.log('SettingsScreen mounted');
-
-    return () => console.log('SettingsScreen unmounted');
-  }, []);
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Settings Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  React.useEffect(() => {
-    console.log('ProfileScreen mounted');
-
-    return () => console.log('ProfileScreen unmounted');
-  }, []);
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.navigate('Settings')}>
-        Go to Settings
-      </Button>
-    </View>
-  );
-}
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  React.useEffect(() => {
-    console.log('HomeScreen mounted');
-
-    return () => console.log('HomeScreen unmounted');
-  }, []);
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Details')}>
-        Go to Details
-      </Button>
-    </View>
-  );
-}
-
-function DetailsScreen() {
-  const navigation = useNavigation();
-
-  React.useEffect(() => {
-    console.log('DetailsScreen mounted');
-
-    return () => console.log('DetailsScreen unmounted');
-  }, []);
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button onPress={() => navigation.push('Details')}>
-        Go to Details... again
-      </Button>
-    </View>
-  );
-}
-
-const SettingsStack = createNativeStackNavigator();
-const HomeStack = createNativeStackNavigator();
-const MyTabs = createBottomTabNavigator();
-
-// codeblock-focus-start
-function FirstScreen() {
-  return (
-    <SettingsStack.Navigator>
-      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
-      <SettingsStack.Screen name="Profile" component={ProfileScreen} />
-    </SettingsStack.Navigator>
-  );
-}
-
-function SecondScreen() {
-  return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={HomeScreen} />
-      <HomeStack.Screen name="Details" component={DetailsScreen} />
-    </HomeStack.Navigator>
-  );
-}
-
-function Root() {
-  return (
-    <MyTabs.Navigator screenOptions={{ headerShown: false }}>
-      <MyTabs.Screen name="First" component={FirstScreen} />
-      <MyTabs.Screen name="Second" component={SecondScreen} />
-    </MyTabs.Navigator>
-  );
-}
-// codeblock-focus-end
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Root />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 <video playsInline autoPlay muted loop>
   <source src="/assets/navigators/lifecycle.mp4" />
@@ -290,10 +173,7 @@ React Navigation emits events to screen components that subscribe to them. We ca
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Focus and blur" snack
+```js name="Focus and blur" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -305,7 +185,7 @@ import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
 function ProfileScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Profile');
 
   React.useEffect(() => {
     // highlight-start
@@ -336,7 +216,7 @@ function ProfileScreen() {
 // codeblock-focus-end
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -377,100 +257,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Focus and blur" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button } from '@react-navigation/elements';
-
-// codeblock-focus-start
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  React.useEffect(() => {
-    // highlight-start
-    const unsubscribe = navigation.addListener('focus', () => {
-      console.log('ProfileScreen focused');
-    });
-    // highlight-end
-
-    return unsubscribe;
-  }, [navigation]);
-
-  React.useEffect(() => {
-    // highlight-start
-    const unsubscribe = navigation.addListener('blur', () => {
-      console.log('ProfileScreen blurred');
-    });
-    // highlight-end
-
-    return unsubscribe;
-  }, [navigation]);
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      console.log('HomeScreen focused');
-    });
-
-    return unsubscribe;
-  }, [navigation]);
-
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('blur', () => {
-      console.log('HomeScreen blurred');
-    });
-
-    return unsubscribe;
-  }, [navigation]);
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-function RootStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 See [Navigation events](navigation-events.md) for more details on the available events and the API usage.
 
@@ -478,10 +264,7 @@ For performing side effects, we can use the [`useFocusEffect`](use-focus-effect.
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Focus effect" snack
+```js name="Focus effect" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -518,7 +301,7 @@ function ProfileScreen() {
 // codeblock-focus-end
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -543,78 +326,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Focus effect" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import { useFocusEffect } from '@react-navigation/native';
-
-function ProfileScreen() {
-  // highlight-start
-  useFocusEffect(
-    React.useCallback(() => {
-      // Do something when the screen is focused
-      console.log('ProfileScreen focus effect');
-
-      return () => {
-        // Do something when the screen is unfocused
-        // Useful for cleanup functions
-        console.log('ProfileScreen focus effect cleanup');
-      };
-    }, [])
-  );
-  // highlight-end
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-function RootStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 <video playsInline autoPlay muted loop>
   <source src="/assets/navigators/lifecycle-focus.mp4" />
