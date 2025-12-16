@@ -748,16 +748,16 @@ function attachCommentsToNode(node, comments, isTrailing = false) {
 }
 
 /**
- * Find a property line within a context (searches nearby lines for context marker)
+ * Find a property line within a context (searches lines before for context marker)
  */
 function findPropertyLine(lines, propMatcher, contextMatcher, searchRange) {
   for (let i = 0; i < lines.length; i++) {
     if (propMatcher(lines[i])) {
-      // Check if this is within the right context by searching nearby lines
+      // Check if this is within the right context by searching lines before only
+      // We only look backwards because name= comes before component= in the output JSX
       const startIdx = Math.max(0, i - searchRange);
-      const endIdx = Math.min(i + searchRange, lines.length);
 
-      for (let j = startIdx; j < endIdx; j++) {
+      for (let j = startIdx; j <= i; j++) {
         if (contextMatcher(lines[j])) {
           return i;
         }
