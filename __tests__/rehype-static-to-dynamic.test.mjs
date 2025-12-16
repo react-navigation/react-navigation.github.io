@@ -939,6 +939,117 @@ describe('rehype-static-to-dynamic', () => {
     assert.strictEqual(output, expected);
   });
 
+  test('nested navigator with highlight on screen property', async () => {
+    const input = dedent /* javascript */ `
+      import { createNativeStackNavigator } from '@react-navigation/native-stack';
+      import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+      import { createStaticNavigation } from '@react-navigation/native';
+
+      const SearchStack = createNativeStackNavigator({
+        screens: {
+          FruitsList: {
+            screen: FruitsListScreen,
+            options: {
+              title: 'Search',
+            },
+          },
+        },
+      });
+
+      const HomeTabs = createBottomTabNavigator({
+        screens: {
+          Home: {
+            screen: HomeScreen,
+            options: {
+              tabBarIcon: {
+                type: 'sfSymbol',
+                name: 'house',
+              },
+            },
+          },
+          Search: {
+            // highlight-next-line
+            screen: SearchStack,
+            options: {
+              tabBarSystemItem: 'search',
+            },
+          },
+        },
+      });
+
+      const Navigation = createStaticNavigation(HomeTabs);
+
+      export default function App() {
+        return <Navigation />;
+      }
+    `;
+
+    const tree = createTestTree(input);
+    const plugin = rehypeStaticToDynamic();
+    await plugin(tree);
+
+    const output = extractTransformedCode(tree);
+
+    const expected = dedent /* javascript */ `
+      import { createNativeStackNavigator } from '@react-navigation/native-stack';
+      import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+      import { NavigationContainer } from '@react-navigation/native';
+
+      const Stack = createNativeStackNavigator();
+
+      function SearchStack() {
+        return (
+          <Stack.Navigator>
+            <Stack.Screen
+              name="FruitsList"
+              component={FruitsListScreen}
+              options={{
+                title: 'Search',
+              }}
+            />
+          </Stack.Navigator>
+        );
+      }
+
+      const Tab = createBottomTabNavigator();
+
+      function HomeTabs() {
+        return (
+          <Tab.Navigator>
+            <Tab.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{
+                tabBarIcon: {
+                  type: 'sfSymbol',
+                  name: 'house',
+                },
+              }}
+            />
+            <Tab.Screen
+              name="Search"
+              // highlight-next-line
+              component={SearchStack}
+              options={{
+                tabBarSystemItem: 'search',
+              }}
+            />
+          </Tab.Navigator>
+        );
+      }
+
+      export default function App() {
+        return (
+          <NavigationContainer>
+            <HomeTabs />
+          </NavigationContainer>
+        );
+      }
+    `;
+
+    assert.strictEqual(output, expected);
+  });
+
   test('mixed screen definitions', async () => {
     const input = dedent /* javascript */ `
       import { createNativeStackNavigator, createNativeStackScreen } from '@react-navigation/native-stack';
