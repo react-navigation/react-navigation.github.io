@@ -116,7 +116,8 @@ headerSearchBarOptions: {
 },
 ```
 
-<video playsInline autoPlay muted loop>
+<video playsInline autoPlay muted loop data-landscape style={{ maxWidth: '402px' }}>
+
   <source src="/assets/7.x/native-bottom-tabs-ios-search.mp4" />
 </video>
 
@@ -351,9 +352,42 @@ The minimize behavior for the tab bar. Supported values:
 
 Only supported on iOS 26 and above.
 
-<video playsInline autoPlay muted loop>
+<video playsInline autoPlay muted loop data-landscape style={{ maxWidth: '402px' }}>
+
   <source src="/assets/7.x/native-bottom-tabs-ios-minimize.mp4" />
 </video>
+
+#### `bottomAccessory`
+
+Function that returns a React element to display as an accessory view. The function receives an options object with a `placement` parameter that can be one of the following values:
+
+- `regular` - at bottom of the screen, above the tab bar if tab bar is at the bottom
+- `inline` - inline with the collapsed bottom tab bar (e.g., when minimized based on [`tabBarMinimizeBehavior`](#tabbarminimizebehavior))
+
+Example:
+
+```js
+bottomAccessory: ({ placement }) => {
+  return (
+    <View style={{ padding: 16 }}>
+      <Text>Placement: {placement}</Text>
+    </View>
+  );
+};
+```
+
+Only supported on iOS 26 and above.
+
+<video playsInline autoPlay muted loop data-landscape style={{ maxWidth: '402px' }}>
+
+  <source src="/assets/7.x/native-bottom-tabs-ios-bottom-accessory.mp4" />
+</video>
+
+:::note
+
+The content is rendered twice for both placements, but only one is visible at a time based on the tab bar state. Any shared state should be stored outside of the component to keep both versions in sync.
+
+:::
 
 #### `lazy`
 
