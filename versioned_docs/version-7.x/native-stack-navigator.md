@@ -1463,7 +1463,7 @@ Common properties:
   - `fontFamily`
   - `fontSize`
   - `fontWeight`
-  - `color`
+  - `color` (of type `ColorValue`)
 - `icon`: Optional icon to show instead of the label.
 
   The icon can be an image:
@@ -1472,6 +1472,7 @@ Common properties:
   {
     type: 'image',
     source: require('./path/to/image.png'),
+    tinted: true, // Whether to apply tint color to the icon. Defaults to true.
   }
   ```
 
@@ -1487,12 +1488,12 @@ Common properties:
 - `variant`: Visual variant of the button. Supported values:
   - `plain` (default)
   - `done`
-  - `prominent`
+  - `prominent` (iOS 26+)
 - `tintColor`: Tint color to apply to the item.
 - `disabled`: Whether the item is disabled.
 - `width`: Width of the item.
-- `hidesSharedBackground` (iOS 26+): Whether the background this item may share with other items should be hidden. Setting this to `true` hides the liquid glass background.
-- `sharesBackground` (iOS 26+): Whether this item can share a background with other items.
+- `hidesSharedBackground` (iOS 26+): Whether the background this item may share with other items in the bar should be hidden. Setting this to `true` hides the liquid glass background.
+- `sharesBackground` (iOS 26+): Whether this item can share a background with other items. Defaults to `true`.
 - `identifier` (iOS 26+) - An identifier used to match items across transitions.
 - `badge` (iOS 26+): An optional badge to display alongside the item. Supported properties:
   - `value`: The value to display in the badge. It can be a string or a number.
@@ -1501,6 +1502,7 @@ Common properties:
     - `fontSize`
     - `fontWeight`
     - `color`
+    - `backgroundColor`
 - `accessibilityLabel`: Accessibility label for the item.
 - `accessibilityHint`: Accessibility hint for the item.
 
@@ -1532,10 +1534,15 @@ Supported properties when `type` is `menu`:
 - `changesSelectionAsPrimaryAction`: Whether the menu is a selection menu. Tapping an item in a selection menu will add a checkmark to the selected item. Defaults to `false`.
 - `menu`: An object containing the menu items. It contains the following properties:
   - `title`: Optional title to show on top of the menu.
+  - `multiselectable`: Whether multiple items in the menu can be selected (i.e. in "on" state). Defaults to `false`.
+  - `layout`: How the menu items are displayed. Supported values:
+    - `default` (default): menu items are displayed normally.
+    - `palette`: menu items are displayed in a horizontal row.
   - `items`: An array of menu items. A menu item can be either an `action` or a `submenu`.
     - `action`: An object with the following properties:
       - `type`: Must be `action`.
       - `label`: Label of the menu item.
+      - `description`: The secondary text displayed alongside the label of the menu item.
       - `icon`: Optional icon to show alongside the label. The icon can be a [SF Symbols](https://developer.apple.com/sf-symbols/) name:
 
         ```js
@@ -1554,7 +1561,7 @@ Supported properties when `type` is `menu`:
       - `destructive`: Whether the menu item is styled as destructive.
       - `hidden`: Whether the menu item is hidden.
       - `keepsMenuPresented`: Whether to keep the menu open after selecting this item. Defaults to `false`.
-      - `discoverabilityLabel`: An elaborated title that explains the purpose of the action.
+      - `discoverabilityLabel`: An elaborated title that explains the purpose of the action. On iOS, the system displays this title in the discoverability heads-up display (HUD). If this is not set, the HUD displays the label property.
 
     - `submenu`: An object with the following properties:
       - `type`: Must be `submenu`.
@@ -1568,6 +1575,12 @@ Supported properties when `type` is `menu`:
         }
         ```
 
+      - `inline`: Whether the menu is displayed inline with the parent menu. By default, submenus are displayed after expanding the parent menu item. Inline menus are displayed as part of the parent menu as a section. Defaults to `false`.
+      - `layout`: How the submenu items are displayed. Supported values:
+        - `default` (default): menu items are displayed normally.
+        - `palette`: menu items are displayed in a horizontal row.
+      - `destructive`: Whether the submenu is styled as destructive.
+      - `multiselectable`: Whether multiple items in the submenu can be selected (i.e. in "on" state). Defaults to `false`.
       - `items`: An array of menu items (can be either `action` or `submenu`).
 
 Example:
