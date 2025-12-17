@@ -582,7 +582,7 @@ article video {
 
 article video[data-landscape] {
   width: auto;
-  height: 373px;
+  max-height: 373px;
 }
 
 @media (max-width: 320px) {
