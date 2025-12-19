@@ -155,6 +155,8 @@ When using the `createXScreen` API, the type of params are automatically inferre
 
 Each navigator exports its own helper function, e.g. `createNativeStackScreen` for Native Stack Navigator, `createBottomTabScreen` for Bottom Tab Navigator, `createDrawerScreen` for Drawer Navigator etc.
 
+Note that this is not a breaking change. It's not required to use this API and your existing code will continue to work as before. You can incrementally adopt this API for new screens to get proper types for `route` object in various callbacks such as `options`, `listeners`, etc.
+
 See [Static configuration docs](static-configuration.md#createxscreen) for more details.
 
 #### Custom navigators now require overloads for types
