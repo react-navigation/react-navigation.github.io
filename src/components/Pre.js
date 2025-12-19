@@ -103,10 +103,10 @@ export default function Pre({
     const content = code
       .split('\n')
       .map((line) => {
-        if (line.startsWith('+ ')) {
-          return `// diff-add\n${line.replace(/^\+ /, '')}`;
-        } else if (line.startsWith('- ')) {
-          return `// diff-remove\n${line.replace(/^- /, '')}`;
+        if (line.startsWith('+')) {
+          return `// diff-add\n${line.replace(/^\+\s?/, '')}`;
+        } else if (line.startsWith('-')) {
+          return `// diff-remove\n${line.replace(/^-\s?/, '')}`;
         }
 
         return line;
