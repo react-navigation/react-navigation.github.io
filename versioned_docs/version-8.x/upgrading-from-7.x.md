@@ -155,7 +155,11 @@ When using the `createXScreen` API, the type of params are automatically inferre
 
 Each navigator exports its own helper function, e.g. `createNativeStackScreen` for Native Stack Navigator, `createBottomTabScreen` for Bottom Tab Navigator, `createDrawerScreen` for Drawer Navigator etc.
 
-Note that this is not a breaking change. It's not required to use this API and your existing code will continue to work as before. You can incrementally adopt this API for new screens to get proper types for `route` object in various callbacks such as `options`, `listeners`, etc.
+:::note
+
+This is not a breaking change. It's not required to use this API and your existing code will continue to work as before. You can incrementally adopt this API for new screens to get proper types for `route` object in various callbacks such as `options`, `listeners`, etc.
+
+:::
 
 See [Static configuration docs](static-configuration.md#createxscreen) for more details.
 
@@ -238,9 +242,9 @@ See [Custom navigators](custom-navigators.md) for more details.
 
 #### Native Bottom Tabs are now default
 
-Previously, the Bottom Tab Navigator used a JavaScript-based implementation and a native implementation was available under `@react-navigation/bottom-tabs/unstable`. Native bottom tabs are not used by default on iOS and Android. This allows us to match the new native design such as liquid glass effect on iOS 26.
+Previously, the Bottom Tab Navigator used a JavaScript-based implementation and a native implementation was available under `@react-navigation/bottom-tabs/unstable`. The `@react-navigation/bottom-tabs/unstable` entry point has been removed and it has been merged into the main package.
 
-The `@react-navigation/bottom-tabs/unstable` entry point has been removed.
+Native bottom tabs are now used by default on iOS and Android. This allows us to match the new native design such as liquid glass effect on iOS 26.
 
 To keep the previous behavior with JavaScript-based tabs, you can pass `implementation: 'custom'` to the navigator:
 
@@ -275,13 +279,15 @@ As part of this change, some of the options have changed to work with native tab
   - `"labeled"` - same as `tabBarShowLabel: true`
   - `"unlabeled"` - same as `tabBarShowLabel: false`
 - `tabBarLabel` now only accepts a `string`
-- `tabBarIcon` now accepts an function that returns an icon object
+- `tabBarIcon` now accepts an function that can return an icon object, returning a react element still works with `custom` implementation
 
 The following props have been removed:
 
 - `safeAreaInsets` from the navigator props
 - `insets` from the bottom tab bar props
 - `layout` from the bottom tab bar props
+
+If you use `insets` and `layout` in your custom tab bar, you can use [`useSafeAreaInsets`](https://appandflow.github.io/react-native-safe-area-context/api/use-safe-area-insets/) and [`useSafeAreaFrame`](https://appandflow.github.io/react-native-safe-area-context/api/use-safe-area-frame/) from [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context) instead to get the same values.
 
 See the [Bottom Tab Navigator docs](bottom-tab-navigator.md) for all the available options.
 
