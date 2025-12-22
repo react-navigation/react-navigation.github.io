@@ -26,8 +26,8 @@ export default {
       respectPrefersColorScheme: true,
     },
     prism: {
-      theme: require('prism-react-renderer').themes.github,
-      darkTheme: require('prism-react-renderer').themes.dracula,
+      theme: require('prism-react-renderer').themes.oneLight,
+      darkTheme: require('prism-react-renderer').themes.oneDark,
       magicComments: [
         {
           className: 'theme-code-block-highlighted-line',
