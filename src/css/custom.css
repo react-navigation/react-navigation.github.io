@@ -244,7 +244,7 @@ article p {
 }
 
 @media (min-width: 85rem) {
-  .main-wrapper:not(.full-width) main:not(.blog-list-page main) {
+  .main-wrapper:not(.full-width) main:not(.blog-wrapper main) {
     padding: 2rem 0 2rem 2rem;
   }
 
@@ -254,7 +254,7 @@ article p {
 }
 
 @media (min-width: 95rem) {
-  .main-wrapper:not(.full-width) main:not(.blog-list-page main) {
+  .main-wrapper:not(.full-width) main:not(.blog-wrapper main) {
     padding: 3rem 0 3rem 4rem;
   }
 
