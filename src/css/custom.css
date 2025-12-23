@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 :root {
   --primary-hue: 256.3;
   --primary-saturation: 53.2%;
@@ -13,13 +11,12 @@
     Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', ui-sans-serif,
     system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
     Noto Color Emoji;
-  --ifm-heading-font-family: var(--ifm-font-family-base);
-
+  --ifm-heading-font-family: 'Google Sans', var(--ifm-font-family-base);
   --ifm-font-size-base: 100%;
   --ifm-line-height-base: 1.75;
   --ifm-code-font-size: 85%;
 
-  --ifm-heading-font-weight: 700;
+  --ifm-heading-font-weight: 600;
   --ifm-heading-line-height: 1.25;
   --ifm-heading-margin-top: 1.618rem;
 
@@ -151,81 +148,44 @@
 
 h1 {
   font-family: var(--ifm-heading-font-family);
+  font-weight: var(--ifm-heading-font-weight);
   font-size: 2rem;
-  letter-spacing: -0.022em;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
   margin-left: -0.05rem;
-  font-weight: 700;
-  line-height: 1.15;
 }
 
 h2 {
   font-family: var(--ifm-heading-font-family);
+  font-weight: var(--ifm-heading-font-weight);
   font-size: 1.5rem;
-  letter-spacing: -0.018em;
-  margin-top: 2.25rem;
-  margin-bottom: 0.5rem;
   margin-left: -0.04rem;
-  font-weight: 700;
-  line-height: 1.22;
-  border-bottom: none;
-  padding-bottom: 0;
 }
 
 h3 {
   font-family: var(--ifm-heading-font-family);
+  font-weight: var(--ifm-heading-font-weight);
   font-size: 1.25rem;
-  letter-spacing: -0.014em;
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-  line-height: 1.3;
 }
 
 h4 {
   font-family: var(--ifm-heading-font-family);
+  font-weight: var(--ifm-heading-font-weight);
   font-size: 1.125rem;
-  letter-spacing: -0.012em;
-  margin-top: 1.75rem;
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-  line-height: 1.35;
 }
 
 h5 {
   font-family: var(--ifm-heading-font-family);
+  font-weight: var(--ifm-heading-font-weight);
   font-size: 1.0625rem;
-  letter-spacing: -0.01em;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-  line-height: 1.4;
 }
 
 h6 {
   font-family: var(--ifm-heading-font-family);
+  font-weight: var(--ifm-heading-font-weight);
   font-size: 1rem;
-  letter-spacing: -0.008em;
-  margin-top: 1.25rem;
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-  line-height: 1.45;
 }
 
-p {
-  font-size: 1rem;
-  line-height: 1.75;
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.003em;
-}
-
-article p {
-  font-size: 1rem;
-  line-height: 1.75;
-  color: var(--ifm-font-color-base);
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.003em;
+header {
+  font-family: var(--ifm-heading-font-family);
 }
 
 .blog-wrapper .container {
@@ -435,6 +395,7 @@ article p {
 }
 
 .menu__list-item-collapsible > .menu__link {
+  font-size: 1rem;
   font-weight: var(--ifm-font-weight-bold);
   color: var(--ifm-color-emphasis-1000);
 }
@@ -743,7 +704,6 @@ code {
 .blog-wrapper article h2 {
   font-size: 2rem;
   line-height: 1.3;
-  letter-spacing: -0.02em;
 }
 
 .blog-wrapper article h2 a {
