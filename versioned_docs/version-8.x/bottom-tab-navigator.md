@@ -576,7 +576,9 @@ The icon can be of following types with `native` implementation:
   }
   ```
 
-  On iOS, you can additionally pass a `tinted` property to control whether the icon should be tinted with the active/inactive color:
+  It's necessary to provide icons for multiple screen densities (1x, 2x, 3x), e.g.: `icon.png`, `icon@2x.png`, `icon@3x.png` etc. as icons are not scaled automatically on iOS for the `native` implementation.
+
+  A `tinted` property can be used to control whether the icon should be tinted with the active/inactive color:
 
   ```js
   tabBarIcon: {
@@ -586,7 +588,9 @@ The icon can be of following types with `native` implementation:
   }
   ```
 
-  The image is tinted by default.
+  Set `tinted` to `false` if the image has its own colors that you want to preserve.
+
+  The image is tinted by default. Overriding is only supported on iOS for the `native` implementation, all platforms for the `custom` implementation.
 
 - [SF Symbols](https://developer.apple.com/sf-symbols/) name - Supported on iOS
 
@@ -617,7 +621,7 @@ tabBarIcon: ({ focused }) => {
 },
 ```
 
-This is only supported on iOS. On Android, the icon specified for inactive state will be used for both active and inactive states.
+This not supported on Android with `native` implementation, the icon specified for inactive state will be used for both active and inactive states.
 
 To provide different icons for different platforms, you can use [`Platform.select`](https://reactnative.dev/docs/platform-specific-code):
 

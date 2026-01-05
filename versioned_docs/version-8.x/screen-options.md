@@ -311,7 +311,7 @@ const RootStack = createNativeStackNavigator({
 
 Similar to `options`, you can also pass a function to `screenOptions`. The function will receive the [`navigation` object](navigation-object.md) and the [`route` object](route-object.md) for each screen. This can be useful if you want to configure options for all the screens in one place based on the route:
 
-```js name="Screen options for tab navigator" snack dependencies=@expo/vector-icons static2dynamic
+```js name="Screen options for tab navigator" snack static2dynamic
 import * as React from 'react';
 import { View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -319,26 +319,16 @@ import {
   createBottomTabNavigator,
   createBottomTabScreen,
 } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 // codeblock-focus-start
 const MyTabs = createBottomTabNavigator({
-  screenOptions: ({ route }) => ({
-    tabBarIcon: ({ color, size }) => {
-      const icons = {
-        Home: 'home',
-        Profile: 'account',
-      };
+  screenOptions: ({ route }) => {
+    const title = route.name === 'Home' ? 'Welcome' : `${route.name} screen`;
 
-      return (
-        <MaterialCommunityIcons
-          name={icons[route.name]}
-          color={color}
-          size={size}
-        />
-      );
-    },
-  }),
+    return {
+      headerTitle: title,
+    };
+  },
   screens: {
     Home: createBottomTabScreen({
       screen: EmptyScreen,
