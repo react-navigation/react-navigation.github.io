@@ -22,21 +22,34 @@ To use this package, open a Terminal in the project root and run:
 npm install react-native-tab-view
 ```
 
-Next, install [`react-native-pager-view`](https://github.com/callstack/react-native-viewpager) if you plan to support iOS and Android.
+The library depends on [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) for rendering the pages.
 
-If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
+<Tabs groupId='framework' queryString="framework">
+<TabItem value='expo' label='Expo' default>
+
+If you have a Expo managed project, in your project directory, run:
 
 ```bash
-expo install react-native-pager-view
+npx expo install react-native-pager-view
 ```
 
-If you are not using Expo, run the following:
+</TabItem>
+<TabItem value='community-cli' label='Community CLI'>
+
+If you have a bare React Native project, in your project directory, run:
 
 ```bash npm2yarn
 npm install react-native-pager-view
 ```
 
-We're done! Now you can build and run the app on your device/simulator.
+</TabItem>
+</Tabs>
+
+If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
+
+```bash
+npx pod-install ios
+```
 
 ## Quick start
 

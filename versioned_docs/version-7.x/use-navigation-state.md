@@ -47,12 +47,9 @@ function Profile() {
 
 In this example, even if you push a new screen, this text won't update. If you use the hook, it'll work as expected:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="useNavigation hook" snack
+```js name="useNavigation hook" snack static2dynamic
 import * as React from 'react';
-import Button from '@react-navigation/elements';
+import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
 import {
   createStaticNavigation,
@@ -126,7 +123,7 @@ function SettingsScreen() {
   );
 }
 
-const Stack = createNativeStackNavigator({
+const RootStack = createNativeStackNavigator({
   screens: {
     Home: HomeScreen,
     Profile: ProfileScreen,
@@ -134,113 +131,12 @@ const Stack = createNativeStackNavigator({
   },
 });
 
-const Navigation = createStaticNavigation(Stack);
+const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="useNavigationState hook" snack
-import * as React from 'react';
-import Button from '@react-navigation/elements';
-import { View, Text } from 'react-native';
-import {
-  NavigationContainer,
-  useRoute,
-  useNavigation,
-} from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-// codeblock-focus-start
-import { useNavigationState } from '@react-navigation/native';
-
-function useIsFirstRouteInParent() {
-  const route = useRoute();
-  const isFirstRouteInParent = useNavigationState(
-    (state) => state.routes[0].key === route.key
-  );
-
-  return isFirstRouteInParent;
-}
-
-function usePreviousRouteName() {
-  return useNavigationState((state) =>
-    state.routes[state.index - 1]?.name
-      ? state.routes[state.index - 1].name
-      : 'None'
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen({ navigation }) {
-  const isFirstRoute = useIsFirstRouteInParent();
-  const previousRouteName = usePreviousRouteName();
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>It is {isFirstRoute ? '' : 'not '}first route in navigator</Text>
-      <Text>Previous route name: {previousRouteName}</Text>
-
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ navigation }) {
-  const isFirstRoute = useIsFirstRouteInParent();
-  const previousRouteName = usePreviousRouteName();
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>It is {isFirstRoute ? '' : 'not '}first route in navigator</Text>
-      <Text>Previous route name: {previousRouteName}</Text>
-      <Button onPress={() => navigation.navigate('Settings')}>
-        Go to Settings
-      </Button>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-    </View>
-  );
-}
-
-function SettingsScreen({ navigation }) {
-  const isFirstRoute = useIsFirstRouteInParent();
-  const previousRouteName = usePreviousRouteName();
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>It is {isFirstRoute ? '' : 'not '}first route in navigator</Text>
-      <Text>Previous route name: {previousRouteName}</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-    </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-      <Stack.Screen name="Settings" component={SettingsScreen} />
-    </Stack.Navigator>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 So when do you use `navigation.getState()`? It's mostly useful within event listeners where you don't care about what's rendered. In most cases, using the hook should be preferred.
 

@@ -248,7 +248,7 @@ Here we update the `headerRight` with a button with `onPress` handler that has a
 
 You can change the label behavior with `headerBackTitle` and style it with `headerBackTitleStyle` ([read more](native-stack-navigator.md#headerbacktitle)).
 
-To customize the back button image, you can use `headerBackImageSource` ([read more](native-stack-navigator.md#headerbackimagesource)).
+To customize the back button icon, you can use [`headerBackIcon`](native-stack-navigator.md#headerbackicon).
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -298,5 +298,5 @@ Generally, this is what you want. But it's possible that in some circumstances t
 ## Summary
 
 - You can set buttons in the header through the [`headerLeft`](elements.md#headerleft) and [`headerRight`](elements.md#headerright) properties in [`options`](screen-options.md).
-- The back button is fully customizable with `headerLeft`, but if you only want to change the title or image, there are other `options` for that &mdash; [`headerBackTitle`](native-stack-navigator.md#headerbacktitle), [`headerBackTitleStyle`](native-stack-navigator.md#headerbacktitlestyle), and [`headerBackImageSource`](native-stack-navigator.md#headerbackimagesource).
+- The back button is fully customizable with `headerLeft`, but if you only want to change the title or image, there are other `options` for that &mdash; [`headerBackTitle`](native-stack-navigator.md#headerbacktitle), [`headerBackTitleStyle`](native-stack-navigator.md#headerbacktitlestyle), and [`headerBackIcon`](native-stack-navigator.md#headerbackicon).
 - You can use a callback for the options prop to access [`navigation`](navigation-object.md) and [`route`](route-object.md) objects.

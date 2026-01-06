@@ -304,7 +304,7 @@ const Tab = createBottomTabNavigatior({
       listeners: {
         tabPress: (e) => {
           // Prevent default action
-          e.preventDefault;
+          e.preventDefault();
         },
       },
     },
@@ -345,7 +345,7 @@ const Tab = createBottomTabNavigatior({
       listeners: ({ navigation, route }) => ({
         tabPress: (e) => {
           // Prevent default action
-          e.preventDefault;
+          e.preventDefault();
 
           // Do something with the `navigation` object
           navigation.navigate('AnotherPlace');
