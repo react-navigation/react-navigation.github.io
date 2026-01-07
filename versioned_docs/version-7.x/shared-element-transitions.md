@@ -16,7 +16,7 @@ Shared Element Transitions are an experimental feature not recommended for produ
 **Architecture support:**
 
 - **Reanimated 3** supports Shared Element Transitions on the **Old Architecture** (Paper).
-- **Reanimated 4** supports them on the **New Architecture** (Fabric) since 4.2.0, but the feature is behind a feature flag. You need to [enable the `ENABLE_SHARED_ELEMENT_TRANSITIONS` feature flag](https://docs.swmansion.com/react-native-reanimated/docs/guides/feature-flags#enable_shared_element_transitions) to use it.
+- **Reanimated 4** supports them on the **New Architecture** (Fabric) since **4.2.0**, but the feature is behind a feature flag. You need to [enable the `ENABLE_SHARED_ELEMENT_TRANSITIONS` feature flag](https://docs.swmansion.com/react-native-reanimated/docs/guides/feature-flags#enable_shared_element_transitions) to use it.
 
 Check [the Reanimated documentation](https://docs.swmansion.com/react-native-reanimated/docs/shared-element-transitions/overview/) for details and [send feedback to the Reanimated team](https://github.com/software-mansion/react-native-reanimated)
 
@@ -30,7 +30,7 @@ Check [the Reanimated documentation](https://docs.swmansion.com/react-native-rea
 
 Before continuing this guide make sure your app meets these criteria:
 
-- You are using [`@react-navigation/native-stack`](native-stack-navigator.md). The Shared Element Transitions feature isn't supported in JS-based [`@react-navigation/stack`](stack-navigator.md).
+- You are using [`@react-navigation/native-stack`](native-stack-navigator.md). JS-based [`@react-navigation/stack`](stack-navigator.md) or other navigators are not supported.
 - You have [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started) **v3.0.0 or higher** installed and configured.
 - If you are using **Reanimated 4** (New Architecture), you must [enable the `ENABLE_SHARED_ELEMENT_TRANSITIONS` feature flag](https://docs.swmansion.com/react-native-reanimated/docs/guides/feature-flags#enable_shared_element_transitions).
 
@@ -42,10 +42,7 @@ To create a shared transition:
 2. Assign the same `sharedTransitionTag` to elements on different screens.
 3. Navigate between screens. The transition will start automatically.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Shared transition"
+```js static2dynamic name="Shared transition"
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
@@ -91,14 +88,12 @@ function DetailsScreen() {
   );
 }
 
-// highlight-start
 const RootStack = createNativeStackNavigator({
   screens: {
     Home: HomeScreen,
     Details: DetailsScreen,
   },
 });
-// highlight-end
 
 const Navigation = createStaticNavigation(RootStack);
 
@@ -114,77 +109,6 @@ const styles = StyleSheet.create({
 });
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Shared transition"
-import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button } from '@react-navigation/elements';
-
-import Animated from 'react-native-reanimated';
-
-// highlight-next-line
-const Stack = createNativeStackNavigator();
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={styles.container}>
-      <Button onPress={() => navigation.navigate('Details')}>
-        Go to Details
-      </Button>
-      <Animated.Image
-        source={{ uri: 'https://picsum.photos/id/39/200' }}
-        style={{ width: 300, height: 300 }}
-        // highlight-next-line
-        sharedTransitionTag="tag"
-      />
-    </View>
-  );
-}
-
-function DetailsScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={styles.container}>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-      <Animated.Image
-        source={{ uri: 'https://picsum.photos/id/39/200' }}
-        style={{ width: 100, height: 100 }}
-        // highlight-next-line
-        sharedTransitionTag="tag"
-      />
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-});
-```
-
-</TabItem>
-</Tabs>
-
 `sharedTransitionTag` is a string that has to be unique in the context of a single screen, but has to match elements between screens. This prop allows Reanimated to identify and animate the elements, similarly to the [`key`](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key) property, which tells React which element in the list is which.
 
 ## Customizing the transition
@@ -193,8 +117,6 @@ You can customize the transition by passing a custom `SharedTransition` configur
 
 Custom transition configuration is not fully finalized and might change in a future release.
 
-:::
-
 ### Old Architecture (Reanimated 3)
 
 By default, the transition animates `width`, `height`, `originX`, `originY`, and `transform` using `withTiming` with a 500 ms duration. You can customize the transition using `SharedTransition.custom()`:
@@ -202,8 +124,10 @@ By default, the transition animates `width`, `height`, `originX`, `originY`, and
 ```jsx
 import { SharedTransition, withSpring } from 'react-native-reanimated';
 
+// highlight-start
 const customTransition = SharedTransition.custom((values) => {
   'worklet';
+
   return {
     height: withSpring(values.targetHeight),
     width: withSpring(values.targetWidth),
@@ -211,6 +135,7 @@ const customTransition = SharedTransition.custom((values) => {
     originY: withSpring(values.targetOriginY),
   };
 });
+// highlight-end
 
 function HomeScreen() {
   return (
@@ -233,7 +158,8 @@ Currently customization is more limited due to ongoing development. You can't de
 ```jsx
 import { SharedTransition } from 'react-native-reanimated';
 
-// Example: customize duration and use spring animation
+// Customize duration and use spring animation
+// highlight-next-line
 const customTransition = SharedTransition.duration(550).springify();
 
 function HomeScreen() {
@@ -254,10 +180,10 @@ You can find a full Shared Element Transitions reference in the [React Native Re
 
 ## Limitations
 
-Shared Element Transitions have several current limitations to be aware of:
+Shared Element Transitions currently have several limitations to be aware of:
 
-- Only the native stack navigator is supported
-- The Tab navigator is not supported
+- Only the [native stack navigator](native-stack-navigator.md) is supported
+- Other navigators such as JS stack, drawer, and bottom tabs are not supported
 - Transitions with native modals don't work properly on iOS
 
 ### New Architecture specific limitations (Reanimated 4)
@@ -271,9 +197,3 @@ The following limitations apply specifically when using Reanimated 4 on the New 
 - On iOS, you may encounter issues with vertical positioning due to header height information propagation
 
 The limitations will be addressed in future Reanimated releases.
-
-## Alternatives
-
-Alternatively, you can use [`react-native-shared-element`](https://github.com/IjzerenHein/react-native-shared-element) library with a [React Navigation binding](https://github.com/IjzerenHein/react-navigation-shared-element) which implements Shared Element Transitions in a JS-based `@react-navigation/stack` navigator. This solution, however, isn't actively maintained.
-
-The [`react-native-navigation`](https://github.com/wix/react-native-navigation) also comes with support for Shared Element Transitions. You can read more about it [here](https://wix.github.io/react-native-navigation/docs/style-animations#shared-element-transitions).

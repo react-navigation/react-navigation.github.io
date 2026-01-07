@@ -9,7 +9,7 @@ Shared Element Transitions are an experimental feature not recommended for produ
 **Architecture support:**
 
 - **Reanimated 3** supports Shared Element Transitions on the **Old Architecture** (Paper).
-- **Reanimated 4** supports them on the **New Architecture** (Fabric) since 4.2.0, but the feature is behind a feature flag. You need to [enable the `ENABLE_SHARED_ELEMENT_TRANSITIONS` feature flag](https://docs.swmansion.com/react-native-reanimated/docs/guides/feature-flags#enable_shared_element_transitions) to use it.
+- **Reanimated 4** supports them on the **New Architecture** (Fabric) since **4.2.0**, but the feature is behind a feature flag. You need to [enable the `ENABLE_SHARED_ELEMENT_TRANSITIONS` feature flag](https://docs.swmansion.com/react-native-reanimated/docs/guides/feature-flags#enable_shared_element_transitions) to use it.
 
 Check [the Reanimated documentation](https://docs.swmansion.com/react-native-reanimated/docs/shared-element-transitions/overview/) for details and [send feedback to the Reanimated team](https://github.com/software-mansion/react-native-reanimated)
 
@@ -23,7 +23,7 @@ Check [the Reanimated documentation](https://docs.swmansion.com/react-native-rea
 
 Before continuing this guide make sure your app meets these criteria:
 
-- You are using [`@react-navigation/native-stack`](native-stack-navigator.md). The Shared Element Transitions feature isn't supported in JS-based [`@react-navigation/stack`](stack-navigator.md).
+- You are using [`@react-navigation/native-stack`](native-stack-navigator.md). JS-based [`@react-navigation/stack`](stack-navigator.md) or other navigators are not supported.
 - You have [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started) **v3.0.0 or higher** installed and configured.
 - If you are using **Reanimated 4** (New Architecture), you must [enable the `ENABLE_SHARED_ELEMENT_TRANSITIONS` feature flag](https://docs.swmansion.com/react-native-reanimated/docs/guides/feature-flags#enable_shared_element_transitions).
 
@@ -104,8 +104,6 @@ You can customize the transition by passing a custom `SharedTransition` configur
 
 Custom transition configuration is not fully finalized and might change in a future release.
 
-:::
-
 ### Old Architecture (Reanimated 3)
 
 By default, the transition animates `width`, `height`, `originX`, `originY`, and `transform` using `withTiming` with a 500 ms duration. You can customize the transition using `SharedTransition.custom()`:
@@ -113,8 +111,10 @@ By default, the transition animates `width`, `height`, `originX`, `originY`, and
 ```jsx
 import { SharedTransition, withSpring } from 'react-native-reanimated';
 
+// highlight-start
 const customTransition = SharedTransition.custom((values) => {
   'worklet';
+
   return {
     height: withSpring(values.targetHeight),
     width: withSpring(values.targetWidth),
@@ -122,6 +122,7 @@ const customTransition = SharedTransition.custom((values) => {
     originY: withSpring(values.targetOriginY),
   };
 });
+// highlight-end
 
 function HomeScreen() {
   return (
@@ -144,7 +145,8 @@ Currently customization is more limited due to ongoing development. You can't de
 ```jsx
 import { SharedTransition } from 'react-native-reanimated';
 
-// Example: customize duration and use spring animation
+// Customize duration and use spring animation
+// highlight-next-line
 const customTransition = SharedTransition.duration(550).springify();
 
 function HomeScreen() {
@@ -165,10 +167,10 @@ You can find a full Shared Element Transitions reference in the [React Native Re
 
 ## Limitations
 
-Shared Element Transitions have several current limitations to be aware of:
+Shared Element Transitions currently have several limitations to be aware of:
 
-- Only the native stack navigator is supported
-- The Tab navigator is not supported
+- Only the [native stack navigator](native-stack-navigator.md) is supported
+- Other navigators such as JS stack, drawer, and bottom tabs are not supported
 - Transitions with native modals don't work properly on iOS
 
 ### New Architecture specific limitations (Reanimated 4)
