@@ -969,7 +969,7 @@ Function which returns an array of items to display as on the left side of the h
 Example:
 
 ```js
-unstable_headerRightItems: () => [
+unstable_headerLeftItems: () => [
   {
     type: 'button',
     title: 'Edit',
