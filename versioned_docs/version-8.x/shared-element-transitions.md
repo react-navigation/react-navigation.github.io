@@ -11,9 +11,14 @@ This guide covers how to animate elements between screens. This feature is known
 
 :::warning
 
-As of writing this guide, Shared Element Transitions are considered an experimental feature not recommended for production use.
+Shared Element Transitions are an experimental feature not recommended for production use yet.
 
-Shared Element Transitions are currently only supported on **old React Native architecture** (Paper).
+**Architecture support:**
+
+- **Reanimated 3** supports Shared Element Transitions on the **Old Architecture** (Paper).
+- **Reanimated 4** supports them on the **New Architecture** (Fabric) since 4.2.0, but the feature is behind a feature flag. You need to [enable the `ENABLE_SHARED_ELEMENT_TRANSITIONS` feature flag](https://docs.swmansion.com/react-native-reanimated/docs/guides/feature-flags#enable_shared_element_transitions) to use it.
+
+Check [the Reanimated documentation](https://docs.swmansion.com/react-native-reanimated/docs/shared-element-transitions/overview/) for details and [send feedback to the Reanimated team](https://github.com/software-mansion/react-native-reanimated)
 
 :::
 
@@ -27,6 +32,7 @@ Before continuing this guide make sure your app meets these criteria:
 
 - You are using [`@react-navigation/native-stack`](native-stack-navigator.md). The Shared Element Transitions feature isn't supported in JS-based [`@react-navigation/stack`](stack-navigator.md).
 - You have [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started) **v3.0.0 or higher** installed and configured.
+- If you are using **Reanimated 4** (New Architecture), you must [enable the `ENABLE_SHARED_ELEMENT_TRANSITIONS` feature flag](https://docs.swmansion.com/react-native-reanimated/docs/guides/feature-flags#enable_shared_element_transitions).
 
 ## Minimal example
 
@@ -183,18 +189,18 @@ const styles = StyleSheet.create({
 
 ## Customizing the transition
 
-By default, the transition animates the `width`, `height`, `originX`, `originY` and `transform` properties using `withTiming` with a 500 ms duration. You can easily customize `width`, `height`, `originX`, and `originY` props. Customizing `transform` is also possible but it's far beyond the scope of this guide.
+You can customize the transition by passing a custom `SharedTransition` configuration via the `sharedTransitionStyle` prop. Apply the same `sharedTransitionStyle` to the matching element on the target screen.
 
-:::warning
-
-Custom SharedTransition API is not finalized and might change in a future release.
+Custom transition configuration is not fully finalized and might change in a future release.
 
 :::
 
-To customize the transition you need to pass all the properties besides `transform`.
+### Old Architecture (Reanimated 3)
+
+By default, the transition animates `width`, `height`, `originX`, `originY`, and `transform` using `withTiming` with a 500 ms duration. You can customize the transition using `SharedTransition.custom()`:
 
 ```jsx
-import { SharedTransition } from 'react-native-reanimated';
+import { SharedTransition, withSpring } from 'react-native-reanimated';
 
 const customTransition = SharedTransition.custom((values) => {
   'worklet';
@@ -212,7 +218,31 @@ function HomeScreen() {
       style={{ width: 300, height: 300 }}
       sharedTransitionTag="tag"
       // highlight-next-line
-      sharedTransitionStyle={customTransition} // add this to both elements on both screens
+      sharedTransitionStyle={customTransition}
+    />
+  );
+}
+```
+
+### New Architecture (Reanimated 4)
+
+On the New Architecture, the default transition animates `width`, `height`, `originX`, `originY`, `transform`, `backgroundColor`, and `opacity` using `withTiming` with a 500 ms duration.
+
+Currently customization is more limited due to ongoing development. You can't define fully custom animation functions. Instead, use the `SharedTransition` builder class to configure duration and spring-based animations:
+
+```jsx
+import { SharedTransition } from 'react-native-reanimated';
+
+// Example: customize duration and use spring animation
+const customTransition = SharedTransition.duration(550).springify();
+
+function HomeScreen() {
+  return (
+    <Animated.Image
+      style={{ width: 300, height: 300 }}
+      sharedTransitionTag="tag"
+      // highlight-next-line
+      sharedTransitionStyle={customTransition}
     />
   );
 }
@@ -221,6 +251,26 @@ function HomeScreen() {
 ## Reference
 
 You can find a full Shared Element Transitions reference in the [React Native Reanimated documentation](https://docs.swmansion.com/react-native-reanimated/docs/shared-element-transitions/overview/).
+
+## Limitations
+
+Shared Element Transitions have several current limitations to be aware of:
+
+- Only the native stack navigator is supported
+- The Tab navigator is not supported
+- Transitions with native modals don't work properly on iOS
+
+### New Architecture specific limitations (Reanimated 4)
+
+The following limitations apply specifically when using Reanimated 4 on the New Architecture:
+
+- The feature must be enabled via the `ENABLE_SHARED_ELEMENT_TRANSITIONS` feature flag
+- Custom animation functions are not supported; you can only customize duration and use spring-based animations
+- Some properties (e.g., `backgroundColor`) are not supported in progress-based transitions (iOS back gesture)
+- There are performance bottlenecks with transforms being recalculated too eagerly
+- On iOS, you may encounter issues with vertical positioning due to header height information propagation
+
+The limitations will be addressed in future Reanimated releases.
 
 ## Alternatives
 
