@@ -678,7 +678,7 @@ Only supported with `custom` implementation.
 
 #### `tabBarButton`
 
-Function which returns a React element to render as the tab bar button. It wraps the icon and label. Renders `Pressable` by default.
+Function which returns a React element to render as the tab bar button. It wraps the icon and label. Renders [`PlatformPressable`](elements.md#platformpressable) by default.
 
 Only supported with `custom` implementation.
 
