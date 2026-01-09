@@ -401,6 +401,7 @@ Function which returns a React Element to use as background for the tab bar. You
 
 ```js
 import { BlurView } from 'expo-blur';
+import { StyleSheet } from 'react-native';
 
 // ...
 
