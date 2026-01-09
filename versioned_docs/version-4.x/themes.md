@@ -46,8 +46,8 @@ export default () => {
     <AppearanceProvider>
       <Navigation theme={theme} />
     </AppearanceProvider>
-  )
-}
+  );
+};
 ```
 
 If the version of React Native you are using doesn't support hooks yet, you can use the `Appearance.addChangeListener(cb)` and `Appearance.getColorScheme()` functions as described in the [usage section of the README](https://github.com/expo/react-native-appearance#usage).
@@ -91,10 +91,13 @@ import { ThemeContext } from 'react-navigation';
 function MyButton() {
   return (
     <ThemeContext.Consumer>
-      {theme => (
+      {(theme) => (
         <TouchableOpacity
-          style={{ backgroundColor: theme === 'light' ? '#000' : '#fff' }}>
-          <Text style={{ color: theme === 'light' ? '#fff' : '#000' }}>Button!</Text>
+          style={{ backgroundColor: theme === 'light' ? '#000' : '#fff' }}
+        >
+          <Text style={{ color: theme === 'light' ? '#fff' : '#000' }}>
+            Button!
+          </Text>
         </TouchableOpacity>
       )}
     </ThemeContext.Consumer>
@@ -341,10 +344,10 @@ Okay, that's a lot of code. There isn't much going on here aside from passing th
 A regrettable limitation of the current implementation of `navigationOptions` is that we are unable to access React context for use in properties such as `headerStyle` and `headerTintColor`. We can and should use them in properties that access React components, for example in `headerRight` we could provide a component like `ThemedHeaderButton`. To apply the theme to other properties we need to use `screenProps`.
 
 ```jsx
-import { 
+import {
   createAppContainer,
   createStackNavigator,
-  ThemeContext
+  ThemeContext,
 } from 'react-navigation';
 
 class HomeScreen extends React.Component {
@@ -413,7 +416,7 @@ import {
   createStackNavigator,
   createBottomTabNavigator,
   BottomTabBar,
-  ThemeContext
+  ThemeContext,
 } from 'react-navigation';
 
 const ThemeConstants = {

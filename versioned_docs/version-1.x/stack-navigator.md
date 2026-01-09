@@ -44,30 +44,30 @@ StackNavigator({
 
 Options for the router:
 
-* `initialRouteName` - Sets the default screen of the stack. Must match one of the keys in route configs.
-* `initialRouteParams` - The params for the initial route
-* `navigationOptions` - Default navigation options to use for screens
-* `paths` - A mapping of overrides for the paths set in the route configs
+- `initialRouteName` - Sets the default screen of the stack. Must match one of the keys in route configs.
+- `initialRouteParams` - The params for the initial route
+- `navigationOptions` - Default navigation options to use for screens
+- `paths` - A mapping of overrides for the paths set in the route configs
 
 Visual options:
 
-* `mode` - Defines the style for rendering and transitions:
-  * `card` - Use the standard iOS and Android screen transitions. This is the default.
-  * `modal` - Make the screens slide in from the bottom which is a common iOS pattern. Only works on iOS, has no effect on Android.
-* `headerMode` - Specifies how the header should be rendered:
-  * `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
-  * `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
-  * `none` - No header will be rendered.
-* `headerTransitionPreset` - Specifies how the header should transition from one screen to another when `headerMode: float` is enabled.
-  * `fade-in-place` - Header components cross-fade without moving, similar to the Twitter, Instagram, and Facebook app for iOS. This is the default value.
-  * `uikit` - An approximation of the default behavior for iOS.
-* `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
-* `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](https://github.com/react-navigation/react-navigation/blob/1.x/flow/react-navigation.js)). Provided function will be passed the following arguments:
-  * `transitionProps` - Transition props for the new screen.
-  * `prevTransitionProps` - Transitions props for the old screen.
-  * `isModal` - Boolean specifying if screen is modal.
-* `onTransitionStart` - Function to be invoked when the card transition animation is about to start.
-* `onTransitionEnd` - Function to be invoked once the card transition animation completes.
+- `mode` - Defines the style for rendering and transitions:
+  - `card` - Use the standard iOS and Android screen transitions. This is the default.
+  - `modal` - Make the screens slide in from the bottom which is a common iOS pattern. Only works on iOS, has no effect on Android.
+- `headerMode` - Specifies how the header should be rendered:
+  - `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
+  - `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
+  - `none` - No header will be rendered.
+- `headerTransitionPreset` - Specifies how the header should transition from one screen to another when `headerMode: float` is enabled.
+  - `fade-in-place` - Header components cross-fade without moving, similar to the Twitter, Instagram, and Facebook app for iOS. This is the default value.
+  - `uikit` - An approximation of the default behavior for iOS.
+- `cardStyle` - Use this prop to override or extend the default style for an individual card in stack.
+- `transitionConfig` - Function to return an object that is merged with the default screen transitions (take a look at TransitionConfig in [type definitions](https://github.com/react-navigation/react-navigation/blob/1.x/flow/react-navigation.js)). Provided function will be passed the following arguments:
+  - `transitionProps` - Transition props for the new screen.
+  - `prevTransitionProps` - Transitions props for the old screen.
+  - `isModal` - Boolean specifying if screen is modal.
+- `onTransitionStart` - Function to be invoked when the card transition animation is about to start.
+- `onTransitionEnd` - Function to be invoked once the card transition animation completes.
 
 ### `navigationOptions` used by `StackNavigator`
 
@@ -148,8 +148,8 @@ Whether you can use gestures to dismiss this screen. Defaults to true on iOS, fa
 
 Object to override the distance of touch start from the edge of the screen to recognize gestures. It takes the following properties:
 
-* `horizontal` - _number_ - Distance for horizontal direction. Defaults to 25.
-* `vertical` - _number_ - Distance for vertical direction. Defaults to 135.
+- `horizontal` - _number_ - Distance for horizontal direction. Defaults to 25.
+- `vertical` - _number_ - Distance for vertical direction. Defaults to 135.
 
 #### `gestureDirection`
 
@@ -159,7 +159,7 @@ String to override the direction for dismiss gesture. `default` for normal behav
 
 The navigator component created by `StackNavigator(...)` takes the following props:
 
-* `screenProps` - Pass down extra options to child screens, for example:
+- `screenProps` - Pass down extra options to child screens, for example:
 
 ```js
 const SomeStack = StackNavigator({
@@ -197,7 +197,7 @@ const ModalNavigator = StackNavigator(
         easing: Easing.out(Easing.poly(4)),
         timing: Animated.timing,
       },
-      screenInterpolator: sceneProps => {
+      screenInterpolator: (sceneProps) => {
         const { layout, position, scene } = sceneProps;
         const { index } = scene;
 
@@ -225,14 +225,14 @@ Header transitions can also be configured using `headerLeftInterpolator`, `heade
 
 The navigator component created by `StackNavigator(...)` takes the following props:
 
-* `screenProps` - Pass down extra options to child screens and navigation options, for example:
+- `screenProps` - Pass down extra options to child screens and navigation options, for example:
 
- ```js
- const StackNav = StackNavigator({
-   // config
- });
+```js
+const StackNav = StackNavigator({
+  // config
+});
 
- <StackNav
-   screenProps={/* this prop will get passed to the screen components as this.props.screenProps */}
- />
- ```
+<StackNav
+  screenProps={/* this prop will get passed to the screen components as this.props.screenProps */}
+/>
+```

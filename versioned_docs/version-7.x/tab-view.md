@@ -8,9 +8,9 @@ React Native Tab View is a cross-platform Tab View component for React Native im
 
 It follows material design guidelines by default, but you can also use your own custom tab bar or position the tab bar at the bottom.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <img src="/assets/libraries/tab-view.gif" width="360px" alt="React Native Tab View Demo" />
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/tab-view.mp4" />
+</video>
 
 This package doesn't integrate with React Navigation. If you want to integrate the tab view with React Navigation's navigation system, e.g. want to show screens in the tab bar and be able to navigate between them using `navigation.navigate` etc, use [Material Top Tab Navigator](material-top-tab-navigator.md) instead.
 
@@ -22,29 +22,44 @@ To use this package, open a Terminal in the project root and run:
 npm install react-native-tab-view
 ```
 
-Next, install [`react-native-pager-view`](https://github.com/callstack/react-native-viewpager) if you plan to support iOS and Android.
+The library depends on [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) for rendering the pages.
 
-If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
+<Tabs groupId='framework' queryString="framework">
+<TabItem value='expo' label='Expo' default>
+
+If you have a Expo managed project, in your project directory, run:
 
 ```bash
-expo install react-native-pager-view
+npx expo install react-native-pager-view
 ```
 
-If you are not using Expo, run the following:
+</TabItem>
+<TabItem value='community-cli' label='Community CLI'>
+
+If you have a bare React Native project, in your project directory, run:
 
 ```bash npm2yarn
 npm install react-native-pager-view
 ```
 
-We're done! Now you can build and run the app on your device/simulator.
+</TabItem>
+</Tabs>
+
+If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
+
+```bash
+npx pod-install ios
+```
 
 ## Quick start
 
-```js
+```js name="React Native Tab View" snack
+// codeblock-focus-start
 import * as React from 'react';
 import { View, useWindowDimensions } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
+// codeblock-focus-end
 const FirstRoute = () => (
   <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
 );
@@ -53,19 +68,20 @@ const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
 );
 
+// codeblock-focus-start
 const renderScene = SceneMap({
   first: FirstRoute,
   second: SecondRoute,
 });
 
+const routes = [
+  { key: 'first', title: 'First' },
+  { key: 'second', title: 'Second' },
+];
+
 export default function TabViewExample() {
   const layout = useWindowDimensions();
-
   const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: 'first', title: 'First' },
-    { key: 'second', title: 'Second' },
-  ]);
 
   return (
     <TabView
@@ -76,9 +92,8 @@ export default function TabViewExample() {
     />
   );
 }
+// codeblock-focus-end
 ```
-
-[Try this example on Snack](https://snack.expo.io/@satya164/react-native-tab-view-quick-start)
 
 ## More examples on Snack
 
@@ -248,7 +263,7 @@ Position of the tab bar in the tab view. Possible values are `'top'` and `'botto
 
 Function which takes an object with the current route and returns a boolean to indicate whether to lazily render the scenes.
 
-By default all scenes are rendered to provide a smoother swipe experience. But you might want to defer the rendering of unfocused scenes until the user sees them. To enable lazy rendering for a particular scene, return `true` from `getLazy` for that `route`:
+By default all scenes are rendered to provide a smoother swipe experience. But you might want to defer the rendering of unfocused scenes until the user sees them. To enable lazy rendering for a particular scene, return `true` from `lazy` for that `route`:
 
 ```js
 <TabView
@@ -262,9 +277,7 @@ When you enable lazy rendering for a screen, it will usually take some time to r
 You can also pass a boolean to enable lazy for all of the scenes:
 
 ```js
-<TabView
-  lazy
-/>
+<TabView lazy />
 ```
 
 ##### `lazyPreloadDistance`
@@ -318,10 +331,6 @@ Object containing the initial height and width of the screens. Passing this will
 
 Used to override default value of pager's overScroll mode. Can be `auto`, `always` or `never` (Android only).
 
-##### `sceneContainerStyle`
-
-Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping:
-
 ##### `pagerStyle`
 
 Style to apply to the pager view wrapping all the scenes.
@@ -358,74 +367,6 @@ return (
 
 #### TabBar Props
 
-##### `getLabelText`
-
-Function which takes an object with the current route and returns the label text for the tab. Uses `route.title` by default.
-
-```js
-<TabBar
-  getLabelText={({ route }) => route.title}
-  ...
-/>
-```
-
-##### `getAccessible`
-
-Function which takes an object with the current route and returns a boolean to indicate whether to mark a tab as `accessible`. Defaults to `true`.
-
-##### `getAccessibilityLabel`
-
-Function which takes an object with the current route and returns a accessibility label for the tab button. Uses `route.accessibilityLabel` by default if specified, otherwise uses the route title.
-
-```js
-<TabBar
-  getAccessibilityLabel={({ route }) => route.accessibilityLabel}
-  ...
-/>
-```
-
-##### `getTestID`
-
-Function which takes an object with the current route and returns a test id for the tab button to locate this tab button in tests. Uses `route.testID` by default.
-
-```js
-<TabBar
-  getTestID={({ route }) => route.testID}
-  ...
-/>
-```
-
-##### `renderIcon`
-
-Function which takes an object with the current route, focused status and color and returns a custom React Element to be used as a icon.
-
-```js
-<TabBar
-  renderIcon={({ route, focused, color }) => (
-    <Icon
-      name={focused ? 'albums' : 'albums-outlined'}
-      color={color}
-    />
-  )}
-  ...
-/>
-```
-
-##### `renderLabel`
-
-Function which takes an object with the current route, focused status and color and returns a custom React Element to be used as a label.
-
-```js
-<TabBar
-  renderLabel={({ route, focused, color }) => (
-    <Text style={{ color, margin: 8 }}>
-      {route.title}
-    </Text>
-  )}
-  ...
-/>
-```
-
 ##### `renderTabBarItem`
 
 Function which takes a `TabBarItemProps` object and returns a custom React Element to be used as a tab button.
@@ -433,10 +374,6 @@ Function which takes a `TabBarItemProps` object and returns a custom React Eleme
 ##### `renderIndicator`
 
 Function which takes an object with the current route and returns a custom React Element to be used as a tab indicator.
-
-##### `renderBadge`
-
-Function which takes an object with the current route and returns a custom React Element to be used as a badge.
 
 ##### `onTabPress`
 
@@ -501,10 +438,6 @@ Style to apply to the active indicator.
 
 Style to apply to the container view for the indicator.
 
-##### `labelStyle`
-
-Style to apply to the tab item label.
-
 ##### `contentContainerStyle`
 
 Style to apply to the inner container for tabs.
@@ -515,11 +448,118 @@ Style to apply to the tab bar container.
 
 ##### `gap`
 
-Define a spacing between tabs.
+Spacing between the tab items.
+
+##### `testID` (`TabBar`)
+
+Test ID for the tab bar. Can be used for scrolling the tab bar in tests
+
+#### Options
+
+Options describe how each tab should be configured. There are 2 ways to specify options:
+
+- `commonOptions`: Options that apply to all tabs.
+- `options`: Options that apply to specific tabs. It has the route key as the key and the object with options.
+
+Example:
+
+```js
+<TabView
+  commonOptions={{
+    icon: ({ route, focused, color }) => (
+      <Icon name={route.icon} color={color} />
+    ),
+  }}
+  options={{
+    albums: {
+      labelText: 'Albums',
+    },
+    profile: {
+      labelText: 'Profile',
+    },
+  }}
+/>
+```
+
+The following options are available:
+
+##### `accessibilityLabel`
+
+Accessibility label for the tab button. Uses `route.accessibilityLabel` by default if specified, otherwise uses the route title.
+
+##### `accessible`
+
+Whether to mark the tab as `accessible`. Defaults to `true`.
 
 ##### `testID`
 
-Test id for the tabBar. Can be used for scrolling the tab bar in tests
+Test ID for the tab button. Uses `route.testID` by default.
+
+##### `labelText`
+
+Label text for the tab button. Uses `route.title` by default.
+
+##### `labelAllowFontScaling`
+
+Whether label font should scale to respect Text Size accessibility settings. Defaults to `true`.
+
+##### `href`
+
+URL to use for the anchor tag for the tab button on the Web.
+
+##### `label`
+
+A function that returns a custom React Element to be used as a label. The function receives an object with the following properties:
+
+- `route` - The route object for the tab.
+- `labelText` - The label text for the tab specified in the `labelText` option or the `route title`.
+- `focused` - Whether the label is for the focused state.
+- `color` - The color of the label.
+- `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings.
+- `style` - The style object for the label.
+
+```js
+label: ({ route, labelText, focused, color }) => (
+  <Text style={{ color, margin: 8 }}>{labelText ?? route.name}</Text>
+);
+```
+
+##### `labelStyle`
+
+Style to apply to the tab item label.
+
+##### `icon`
+
+A function that returns a custom React Element to be used as an icon. The function receives an object with the following properties:
+
+- `route` - The route object for the tab.
+- `focused` - Whether the icon is for the focused state.
+- `color` - The color of the icon.
+- `size` - The size of the icon.
+
+```js
+icon: ({ route, focused, color }) => (
+  <Icon name={focused ? 'albums' : 'albums-outlined'} color={color} />
+);
+```
+
+##### `badge`
+
+A function that returns a custom React Element to be used as a badge. The function receives an object with the following properties:
+
+- `route` - The route object for the tab.
+
+```js
+badge: ({ route }) => (
+  <View
+    style={{ backgroundColor: 'red', width: 20, height: 20, borderRadius: 10 }}
+  />
+);
+```
+
+##### `sceneStyle`
+
+Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping.
 
 ## Optimization Tips
 

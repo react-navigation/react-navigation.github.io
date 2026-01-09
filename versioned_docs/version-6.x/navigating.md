@@ -51,6 +51,10 @@ function HomeScreen({ navigation }) {
 // ... other code from the previous section
 ```
 
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/simple-details.mp4" />
+</video>
+
 Let's break this down:
 
 - `navigation` - the `navigation` prop is passed in to every **screen component** ([definition](glossary-of-terms.md#screen-component)) in the native stack navigator (more about this later in ["The navigation prop in depth"](navigation-prop.md)).
@@ -95,11 +99,9 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 />
 ```
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/stack/stack-push.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/stack-push.mp4" />
+</video>
 
 Each time you call `push` we add a new route to the navigation stack. When you call `navigate` it first tries to find an existing route with that name, and only pushes a new route if there isn't yet one on the stack.
 
@@ -126,6 +128,10 @@ function DetailsScreen({ navigation }) {
   );
 }
 ```
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/back-home.mp4" />
+</video>
 
 :::note
 
@@ -156,6 +162,10 @@ function DetailsScreen({ navigation }) {
   );
 }
 ```
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/pop-to-top.mp4" />
+</video>
 
 ## Summary
 

@@ -11,7 +11,7 @@ English is only one of many languages people speak around the world (thanks a lo
 We'll need to use some kind of library to store our translations and provide a function that gives us access to them, along with handling fallbacks when we don't have a particular language defined. Localization and internationalization (i18n) are often used interchangeably, as in the example below where we get the current `locale` from `expo-localization` and use the `i18n-js` library for managing translations, for no particular reason other than it was available - use whatever you like.
 
 ```jsx
-import  * as Localization from 'expo-localization'; // or whatever library you want
+import * as Localization from 'expo-localization'; // or whatever library you want
 import i18n from 'i18n-js'; // or whatever library you want
 
 const en = {
@@ -41,7 +41,7 @@ export default class App extends React.Component {
     locale: Localization.locale,
   };
 
-  setLocale = locale => {
+  setLocale = (locale) => {
     this.setState({ locale });
   };
 

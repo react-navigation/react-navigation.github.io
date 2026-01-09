@@ -74,4 +74,3 @@ class DetailsScreen extends React.Component {
 - `navigate` and `push` accept an optional second argument to let you pass parameters to the route you are navigating to. For example: `this.props.navigation.navigate('RouteName', {paramName: 'value'})`.
 - You can read the params through `this.props.navigation.getParam`
 - As an alternative to `getParam`, you may use `this.props.navigation.state.params`. It is `null` if no parameters are specified.
-- [Full source of what we have built so far](#example/passing-params).

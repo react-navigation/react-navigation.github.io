@@ -57,6 +57,10 @@ function EditText({ navigation }) {
 }
 ```
 
+<video playsInline autoPlay muted loop>
+  <source src="/assets/behavior/prevent-closing.mp4" />
+</video>
+
 Previously, the way to do this was to:
 
 - Override back button in header

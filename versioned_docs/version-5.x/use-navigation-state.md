@@ -11,13 +11,13 @@ sidebar_label: useNavigationState
 It takes a selector function as an argument. The selector will receive the full [navigation state](navigation-state.md) and can return a specific value from the state:
 
 ```js
-const index = useNavigationState(state => state.index);
+const index = useNavigationState((state) => state.index);
 ```
 
 The selector function helps to reduce unnecessary re-renders, so your screen will re-render only when that's something you care about. If you actually need the whole state object, you can do this explicitly:
 
 ```js
-const state = useNavigationState(state => state);
+const state = useNavigationState((state) => state);
 ```
 
 > Note: This hook is useful for advanced cases and it's easy to introduce performance issues if you're not careful. For most of the cases, you don't need the navigator's state.
@@ -40,7 +40,7 @@ In this example, even if you push a new screen, this text won't update. If you u
 
 ```js
 function Profile() {
-  const routesLength = useNavigationState(state => state.routes.length);
+  const routesLength = useNavigationState((state) => state.routes.length);
 
   return <Text>Number of routes: {routesLength}</Text>;
 }
@@ -61,8 +61,8 @@ class Profile extends React.Component {
 }
 
 // Wrap and export
-export default function(props) {
-  const routesLength = useNavigationState(state => state.routes.length);
+export default function (props) {
+  const routesLength = useNavigationState((state) => state.routes.length);
 
   return <Profile {...props} routesLength={routesLength} />;
 }

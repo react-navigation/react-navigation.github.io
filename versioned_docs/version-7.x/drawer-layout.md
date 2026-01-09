@@ -4,13 +4,11 @@ title: React Native Drawer Layout
 sidebar_label: Drawer Layout
 ---
 
-A cross-platform Drawer component for React Native implemented using [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
+A cross-platform Drawer component for React Native implemented using [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) on native platforms and CSS transitions on Web.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/drawer/drawer.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/drawer-layout.mp4" />
+</video>
 
 This package doesn't integrate with React Navigation. If you want to integrate the drawer layout with React Navigation's navigation system, e.g. want to show screens in the drawer and be able to navigate between them using `navigation.navigate` etc, use [Drawer Navigator](drawer-navigator.md) instead.
 
@@ -22,50 +20,44 @@ To use this package, open a Terminal in the project root and run:
 npm install react-native-drawer-layout
 ```
 
-Then, you need to install and configure the libraries that are required by the drawer:
+The library depends on [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) for gestures and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) for animations.
 
-1. First, install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
+<Tabs groupId='framework' queryString="framework">
+<TabItem value='expo' label='Expo' default>
 
-   If you have a Expo managed project, in your project directory, run:
+If you have a Expo managed project, in your project directory, run:
 
-   ```bash
-   npx expo install react-native-gesture-handler react-native-reanimated
-   ```
+```bash
+npx expo install react-native-gesture-handler react-native-reanimated react-native-worklets
+```
 
-   If you have a bare React Native project, in your project directory, run:
+</TabItem>
+<TabItem value='community-cli' label='Community CLI'>
 
-   ```bash npm2yarn
-   npm install react-native-gesture-handler react-native-reanimated
-   ```
+If you have a bare React Native project, in your project directory, run:
 
-   The Drawer supports both Reanimated 1 and the latest version of Reanimated. If you want to use the latest version of Reanimated, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
+```bash npm2yarn
+npm install react-native-gesture-handler react-native-reanimated react-native-worklets
+```
 
-2. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+After installation, configure the Reanimated Babel Plugin in your project following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
-   ```js
-   import 'react-native-gesture-handler';
-   ```
+</TabItem>
+</Tabs>
 
-   :::warning
-
-   If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
-
-   :::
-
-3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
 
 ```bash
 npx pod-install ios
 ```
 
-We're done! Now you can build and run the app on your device/simulator.
-
 ## Quick start
 
 ```js
 import * as React from 'react';
-import { Button, Text } from 'react-native';
+import { Text } from 'react-native';
 import { Drawer } from 'react-native-drawer-layout';
+import { Button } from '@react-navigation/elements';
 
 export default function DrawerExample() {
   const [open, setOpen] = React.useState(false);
@@ -94,7 +86,7 @@ The package exports a `Drawer` component which is the one you'd use to render th
 
 ### `Drawer`
 
-Component responsible for rendering a drawer with animations and gestures.
+Component is responsible for rendering a drawer sidebar with animations and gestures.
 
 #### Drawer Props
 
@@ -131,7 +123,7 @@ Type of the drawer. It determines how the drawer looks and animates.
 - `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.
 - `permanent`: A permanent drawer is shown as a sidebar.
 
-Defaults to `slide` on iOS and `front` on other platforms.
+Defaults to `front`.
 
 ##### `drawerStyle`
 
@@ -188,11 +180,15 @@ Minimum swipe velocity that should activate opening the drawer. Defaults to `500
 
 This is only supported on iOS and Android.
 
-##### `gestureHandlerProps`
+#### `configureGestureHandler`
 
-Props to pass to the underlying pan gesture handler.
+Callback to configure the underlying [gesture from `react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/gesture). It receives the `gesture` object as an argument:
 
-This is only supported on iOS and Android.
+```js
+configureGestureHandler={({ gesture }) => {
+  return gesture.enableTrackpadTwoFingerGesture(false);
+}}
+```
 
 ##### `children`
 
@@ -200,7 +196,7 @@ Content that the drawer should wrap.
 
 ### `useDrawerProgress`
 
-The `useDrawerProgress` hook returns a Reanimated SharedValue (with modern implementation) or Reanimated Node (with legacy implementation) which represents the progress of the drawer. It can be used to animate the content of the screen.
+The `useDrawerProgress` hook returns a Reanimated `SharedValue` which represents the progress of the drawer. It can be used to animate the content of the screen.
 
 Example with modern implementation:
 
@@ -227,31 +223,6 @@ function MyComponent() {
 }
 ```
 
-Example with legacy implementation:
-
-```js
-import { Animated } from 'react-native-reanimated';
-import { useDrawerProgress } from 'react-native-drawer-layout';
-
-// ...
-
-function MyComponent() {
-  const progress = useDrawerProgress();
-
-  // If you are on react-native-reanimated 1.x, use `Animated.interpolate` instead of `Animated.interpolateNode`
-  const translateX = Animated.interpolateNode(progress, {
-    inputRange: [0, 1],
-    outputRange: [-100, 0],
-  });
-
-  return (
-    <Animated.View style={{ transform: [{ translateX }] }}>
-      {/* ... */}
-    </Animated.View>
-  );
-}
-```
-
 If you are using class components, you can use the `DrawerProgressContext` to get the progress value.
 
 ```js
@@ -269,3 +240,9 @@ class MyComponent extends React.Component {
   }
 }
 ```
+
+:::warning
+
+The `useDrawerProgress` hook (or `DrawerProgressContext`) will return a mock value on Web since Reanimated is not used on Web. The mock value can only represent the open state of the drawer (`0` when closed, `1` when open), and not the progress of the drawer.
+
+:::

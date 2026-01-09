@@ -1,9 +1,6 @@
 ---
 title: React Navigation on the Web
-author: Satyajit Sahoo
-author_url: https://twitter.com/satya164
-author_title: Core Team
-author_image_url: https://avatars2.githubusercontent.com/u/1174278?s=200&v=4
+authors: satya
 tags: [announcement, web]
 ---
 
@@ -25,6 +22,7 @@ The first step for web support is to have proper URL integration. This means:
 - Buttons that navigate to other screens in the app should be links, and users should be able use standard shortcuts with them
 
 <video playsInline autoPlay muted loop style={{ maxWidth: '100%', marginBottom: 32 }}>
+
   <source src="/assets/blog/web-support/url-integration.mp4" type="video/mp4" />
 </video>
 
@@ -36,13 +34,13 @@ Example:
 
 ```js
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config: {
     screens: {
       Home: '',
       Profile: ':id/profile',
       Settings: ':id/blog',
-    }
+    },
   },
 };
 
@@ -96,6 +94,7 @@ Phones have small screens, so it's important to maximize the use of available sc
 It's especially important in case of the [stack navigator](/docs/stack-navigator) because not only we have the browser's address bar, but also the header at the top which is taking vertical space. Now we'll automatically adjust the styles of the stack navigator to get this behavior without you having to write any special code.
 
 <video playsInline autoPlay muted loop style={{ maxWidth: '100%' }}>
+
   <source src="/assets/blog/web-support/hide-addressbar.mp4" type="video/mp4" />
 </video>
 
@@ -104,6 +103,7 @@ It's especially important in case of the [stack navigator](/docs/stack-navigator
 Another way we can make maximum use of the available screen size is by making our UIs adapt to different screen sizes. For example, we may want to show a sidebar for navigation on large screens while switching to a drawer on smaller screens. You can now specify `drawerType` as `permanent` to show an always visible sidebar. See the [documentation for `drawerType`](/docs/drawer-navigator#drawertype) for example code on how to achieve it.
 
 <video playsInline autoPlay muted loop style={{ maxWidth: '100%' }}>
+
   <source src="/assets/blog/web-support/permanent-drawer.mp4" type="video/mp4" />
 </video>
 

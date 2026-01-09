@@ -15,12 +15,12 @@ Below, we'll go through required configurations for each platform so that the de
 
 ## Set up with Expo projects
 
-First, you will want to specify a URL scheme for your app. This corresponds to the string before `://` in a URL, so if your scheme is `mychat` then a link to your app would be `mychat://`. The scheme only applies to standalone apps and you need to re-build the standalone app for the change to take effect. In the Expo client app you can deep link using `exp://ADDRESS:PORT` where `ADDRESS` is often `127.0.0.1` and `PORT` is often `19000` - the URL is printed when you run `expo start`. If you want to test with your custom scheme you will need to run `expo build:ios -t simulator` or `expo build:android` and install the resulting binaries in your emulators. You can register for a scheme in your `app.json` by adding a string under the scheme key:
+First, you will want to specify a URL scheme for your app. This corresponds to the string before `://` in a URL, so if your scheme is `example` then a link to your app would be `example://`. The scheme only applies to standalone apps and you need to re-build the standalone app for the change to take effect. In the Expo client app you can deep link using `exp://ADDRESS:PORT` where `ADDRESS` is often `127.0.0.1` and `PORT` is often `19000` - the URL is printed when you run `expo start`. If you want to test with your custom scheme you will need to run `expo build:ios -t simulator` or `expo build:android` and install the resulting binaries in your emulators. You can register for a scheme in your `app.json` by adding a string under the scheme key:
 
 ```json
 {
   "expo": {
-    "scheme": "mychat"
+    "scheme": "example"
   }
 }
 ```
@@ -143,7 +143,7 @@ Read the [Expo linking guide](https://docs.expo.io/versions/latest/guides/linkin
 
 ### iOS
 
-Let's configure the native iOS app to open based on the `mychat://` URI scheme.
+Let's configure the native iOS app to open based on the `example://` URI scheme.
 
 You'll need to link `RCTLinking` to your project by following the steps described here. To be able to listen to incoming app links, you'll need to add the following lines to `SimpleApp/ios/SimpleApp/AppDelegate.m`.
 
@@ -192,11 +192,11 @@ If your app is using Universal Links, you'll need to add the following code as w
 
 Now you need to add the scheme to your project configuration.
 
-The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add mychat --ios`.
+The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add example --ios`.
 
 If you want to do it manually, open the project at `SimpleApp/ios/SimpleApp.xcodeproj` in Xcode. Select the project in sidebar and navigate to the info tab. Scroll down to "URL Types" and add one. In the new URL type, set the identifier and the URL scheme to your desired URL scheme.
 
-![Xcode project info URL types with mychat added](/assets/deep-linking/xcode-linking.png)
+![Xcode project info URL types with example added](/assets/deep-linking/xcode-linking.png)
 
 Now you can press play in Xcode, or re-build on the command line:
 
@@ -207,22 +207,22 @@ npx react-native run-ios
 To test the URI on the simulator, run the following:
 
 ```bash
-npx uri-scheme open mychat://chat/jane --ios
+npx uri-scheme open example://chat/jane --ios
 ```
 
 or use `xcrun` directly:
 
 ```bash
-xcrun simctl openurl booted mychat://chat/jane
+xcrun simctl openurl booted example://chat/jane
 ```
 
-To test the URI on a real device, open Safari and type `mychat://chat/jane`.
+To test the URI on a real device, open Safari and type `example://chat/jane`.
 
 ### Android
 
 To configure the external linking in Android, you can create a new intent in the manifest.
 
-The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add mychat --android`.
+The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add example --android`.
 
 If you want to add it manually, open up `SimpleApp/android/app/src/main/AndroidManifest.xml`, and make the following adjustments:
 
@@ -241,7 +241,7 @@ If you want to add it manually, open up `SimpleApp/android/app/src/main/AndroidM
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="mychat" />
+        <data android:scheme="example" />
     </intent-filter>
 </activity>
 ```
@@ -255,13 +255,13 @@ react-native run-android
 To test the intent handling in Android, run the following:
 
 ```bash
-npx uri-scheme open mychat://chat/jane --android
+npx uri-scheme open example://chat/jane --android
 ```
 
 or use `adb` directly:
 
 ```bash
-adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/jane" com.simpleapp
+adb shell am start -W -a android.intent.action.VIEW -d "example://chat/jane" com.simpleapp
 ```
 
 ## Hybrid React Native and native iOS Applications (skip for React-Native-only projects)

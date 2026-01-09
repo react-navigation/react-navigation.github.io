@@ -5,7 +5,7 @@ sidebar_label: DrawerNavigator
 ---
 
 ```js
-DrawerNavigator(RouteConfigs, DrawerNavigatorConfig)
+DrawerNavigator(RouteConfigs, DrawerNavigatorConfig);
 ```
 
 ### RouteConfigs
@@ -37,7 +37,10 @@ import { DrawerItems, SafeAreaView } from 'react-navigation';
 
 const CustomDrawerContentComponent = (props) => (
   <ScrollView>
-    <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
+    <SafeAreaView
+      style={styles.container}
+      forceInset={{ top: 'always', horizontal: 'never' }}
+    >
       <DrawerItems {...props} />
     </SafeAreaView>
   </ScrollView>
@@ -102,15 +105,15 @@ The navigator component created by `DrawerNavigator(...)` takes the following pr
 
 - `screenProps` - Pass down extra options to child screens, for example:
 
- ```jsx
- const DrawerNav = DrawerNavigator({
-   // config
- });
+```jsx
+const DrawerNav = DrawerNavigator({
+  // config
+});
 
- <DrawerNav
-   screenProps={/* this prop will get passed to the screen components and nav options as props.screenProps */}
- />
- ```
+<DrawerNav
+  screenProps={/* this prop will get passed to the screen components and nav options as props.screenProps */}
+/>
+```
 
 ### Nesting `DrawerNavigation`
 

@@ -44,6 +44,7 @@
       "navigation-events",
       {
         "type": "category",
+        "collapsible": true,
         "label": "Navigators",
         "items": [
           "stack-navigator",
@@ -57,6 +58,7 @@
       },
       {
         "type": "category",
+        "collapsible": true,
         "label": "Actions",
         "items": [
           "navigation-actions",
@@ -67,12 +69,9 @@
       },
       {
         "type": "category",
+        "collapsible": true,
         "label": "Helpers",
-        "items": [
-          "with-navigation",
-          "with-navigation-focus",
-          "scrollables"
-        ]
+        "items": ["with-navigation", "with-navigation-focus", "scrollables"]
       }
     ],
     "Build your own Navigator": [
@@ -87,10 +86,6 @@
       "community-libraries-and-navigators",
       "more-resources"
     ],
-    "Meta": [
-      "pitch",
-      "alternatives",
-      "contributing"
-    ]
+    "Meta": ["pitch", "alternatives", "contributing"]
   }
 }

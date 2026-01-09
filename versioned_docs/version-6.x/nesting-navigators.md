@@ -64,7 +64,7 @@ If you want to achieve this behavior, see the guide for [screen options with nes
 
 For example, any `params` passed to a screen in a nested navigator are in the `route` prop of that screen and aren't accessible from a screen in a parent or child navigator.
 
-If you need to access params of the parent screen from a child screen, you can use [React Context](https://reactjs.org/docs/context.html) to expose params to children.
+If you need to access params of the parent screen from a child screen, you can use [React Context](https://react.dev/reference/react/useContext) to expose params to children.
 
 ### Navigation actions are handled by current navigator and bubble up if couldn't be handled
 
@@ -123,7 +123,7 @@ function Root() {
     <Drawer.Navigator>
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Settings" component={Settings} />
+      <Drawer.Screen name="Settings" component={Settings} />
     </Drawer.Navigator>
   );
 }
@@ -192,6 +192,12 @@ navigation.navigate('Root', {
 ```
 
 In the above case, you're navigating to the `Media` screen, which is in a navigator nested inside the `Sound` screen, which is in a navigator nested inside the `Settings` screen.
+
+:::warning
+
+The `screen` and related params are reserved for internal use and are managed by React Navigation. While you can access `route.params.screen` etc. in the parent screens, relying on them may lead to unexpected behavior.
+
+:::
 
 ### Rendering initial route defined in the navigator
 
@@ -274,13 +280,13 @@ function App() {
 
 ## Best practices when nesting
 
-We recommend to reduce nesting navigators to minimal. Try to achieve the behavior you want with as little nesting as possible. Nesting has many downsides:
+We recommend reducing navigator nesting to a minimum. Try to achieve the behavior you want with as little nesting as possible. Nesting has many downsides:
 
 - It results in deeply nested view hierarchy which can cause memory and performance issues in lower end devices
-- Nesting same type of navigators (e.g. tabs inside tabs, drawer inside drawer etc.) might lead to a confusing UX
+- Nesting the same type of navigator (e.g. tabs inside tabs, drawer inside drawer etc.) might lead to a confusing UX
 - With excessive nesting, code becomes difficult to follow when navigating to nested screens, configuring deep link etc.
 
-Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, instead of using separate navigators, you can use the [`Group`](group.md) component.
+Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate groups of screens for organization, instead of using separate navigators, you can use the [`Group`](group.md) component.
 
 <samp id="nesting-best-practices" />
 

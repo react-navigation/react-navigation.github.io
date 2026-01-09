@@ -6,11 +6,9 @@ sidebar_label: Material Top Tabs
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the tabs or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/tabs/material-top-tabs.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/material-top-tabs.mp4" />
+</video>
 
 This wraps [`react-native-tab-view`](tab-view.md). If you want to use the tab view without React Navigation integration, use the library directly instead.
 
@@ -19,10 +17,13 @@ This wraps [`react-native-tab-view`](tab-view.md). If you want to use the tab vi
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/material-top-tabs):
 
 ```bash npm2yarn
-npm install @react-navigation/material-top-tabs@next
+npm install @react-navigation/material-top-tabs
 ```
 
-Then, you need to install [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) which is required by the navigator.
+The navigator depends on [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) for rendering the pages.
+
+<Tabs groupId='framework' queryString="framework">
+<TabItem value='expo' label='Expo' default>
 
 If you have a Expo managed project, in your project directory, run:
 
@@ -30,60 +31,85 @@ If you have a Expo managed project, in your project directory, run:
 npx expo install react-native-pager-view
 ```
 
+</TabItem>
+<TabItem value='community-cli' label='Community CLI'>
+
 If you have a bare React Native project, in your project directory, run:
 
 ```bash npm2yarn
 npm install react-native-pager-view
 ```
 
-If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+</TabItem>
+</Tabs>
+
+If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
 
 ```bash
 npx pod-install ios
 ```
 
-## API Definition
+## Usage
 
-To use this tab navigator, import it from `@react-navigation/material-top-tabs`:
+To use this navigator, import it from `@react-navigation/material-top-tabs`:
 
-<samp id="material-top-tab-based-navigation-minimal" />
-
-```js
+```js name="Material Top Tab Navigator" snack static2dynamic
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+// codeblock-focus-start
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-const Tab = createMaterialTopTabNavigator();
+// codeblock-focus-end
+function HomeScreen() {
+  const navigation = useNavigation();
 
-function MyTabs() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
   );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyTabs = createMaterialTopTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyTabs);
+
+export default function App() {
+  return <Navigation />;
 }
 ```
 
-:::note
-
-For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
-
-:::
+## API Definition
 
 ### Props
 
-The `Tab.Navigator` component accepts following props:
-
-#### `id`
-
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
-
-#### `initialRouteName`
-
-The name of the route to render on first load of the navigator.
-
-#### `screenOptions`
-
-Default options to use for the screens in the navigator.
+In addition to the [common props](navigator.md#configuration) shared by all navigators, the material top tabs navigator component accepts the following additional props:
 
 #### `backBehavior`
 
@@ -119,10 +145,6 @@ Object containing the initial height and width of the screens. Passing this will
 }
 ```
 
-#### `sceneContainerStyle`
-
-Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping.
-
 #### `style`
 
 Style to apply to the tab view container.
@@ -133,12 +155,38 @@ Function that returns a React element to display as the tab bar.
 
 Example:
 
-<samp id="material-top-tab-custom-tab-bar" />
+```js name="Custom Tab Bar" snack static2dynamic
+import * as React from 'react';
+import { Animated, View, Platform, Text } from 'react-native';
+import {
+  createStaticNavigation,
+  useLinkBuilder,
+  useTheme,
+} from '@react-navigation/native';
+import { PlatformPressable } from '@react-navigation/elements';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-```js
-import { Animated, View, TouchableOpacity } from 'react-native';
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
 
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
 function MyTabBar({ state, descriptors, navigation, position }) {
+  const { colors } = useTheme();
+  const { buildHref } = useLinkBuilder();
+
   return (
     <View style={{ flexDirection: 'row' }}>
       {state.routes.map((route, index) => {
@@ -147,8 +195,8 @@ function MyTabBar({ state, descriptors, navigation, position }) {
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
-            ? options.title
-            : route.name;
+              ? options.title
+              : route.name;
 
         const isFocused = state.index === index;
 
@@ -160,8 +208,7 @@ function MyTabBar({ state, descriptors, navigation, position }) {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({ name: route.name, merge: true });
+            navigation.navigate(route.name, route.params);
           }
         };
 
@@ -175,34 +222,44 @@ function MyTabBar({ state, descriptors, navigation, position }) {
         const inputRange = state.routes.map((_, i) => i);
         const opacity = position.interpolate({
           inputRange,
-          outputRange: inputRange.map(i => (i === index ? 1 : 0)),
+          outputRange: inputRange.map((i) => (i === index ? 1 : 0.5)),
         });
 
         return (
-          <TouchableOpacity
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
+          <PlatformPressable
+            key={route.key}
+            href={buildHref(route.name, route.params)}
+            aria-label={options.tabBarAccessibilityLabel}
+            aria-selected={isFocused}
+            testID={options.tabBarButtonTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{ flex: 1 }}
+            style={{ flex: 1, padding: 16, alignItems: 'center' }}
           >
-            <Animated.Text style={{ opacity }}>
+            <Animated.Text style={{ opacity, color: colors.text }}>
               {label}
             </Animated.Text>
-          </TouchableOpacity>
+          </PlatformPressable>
         );
       })}
     </View>
   );
 }
 
-// ...
+const MyTabs = createMaterialTopTabNavigator({
+  tabBar: (props) => <MyTabBar {...props} />,
+  screens: {
+    Home: HomeScreen,
+    Settings: SettingsScreen,
+  },
+});
+// codeblock-focus-end
 
-<Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
-  {...}
-</Tab.Navigator>
+const Navigation = createStaticNavigation(MyTabs);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 This example will render a basic tab bar with labels.
@@ -213,12 +270,14 @@ Note that you **cannot** use the `useNavigation` hook inside the `tabBar` since 
 function MyTabBar({ navigation }) {
   return (
     <Button
-      title="Go somewhere"
       onPress={() => {
         // Navigate using the `navigation` prop that you received
+        // highlight-next-line
         navigation.navigate('SomeScreen');
       }}
-    />
+    >
+      Go somewhere
+    </Button>
   );
 }
 ```
@@ -229,18 +288,58 @@ The following [options](screen-options.md) can be used to configure the screens 
 
 Example:
 
-<samp id="material-top-tab-options" />
+```js name="Tab Navigator Options" snack static2dynamic
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-```js
-<Tab.Navigator
-  screenOptions={{
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyTabs = createMaterialTopTabNavigator({
+  // highlight-start
+  screenOptions: {
     tabBarLabelStyle: { fontSize: 12 },
     tabBarItemStyle: { width: 100 },
     tabBarStyle: { backgroundColor: 'powderblue' },
-  }}
->
-  {/* ... */}
-</Tab.Navigator>
+  },
+  // highlight-end
+  screens: {
+    Home: HomeScreen,
+    Settings: SettingsScreen,
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyTabs);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 #### `title`
@@ -287,7 +386,7 @@ Style object for the tab bar indicator.
 
 Style object for the view containing the tab bar indicator.
 
-#### `tabBarTestID`
+#### `tabBarButtonTestID`
 
 ID to locate this tab button in tests.
 
@@ -316,10 +415,6 @@ Boolean indicating whether the tab bar bounces when overscrolling.
 Boolean indicating whether to make the tab bar scrollable.
 
 If you set this to `true`, you should also specify a width in `tabBarItemStyle` to improve the performance of initial render.
-
-#### `tabBarIconStyle`
-
-Style object for the tab icon container.
 
 #### `tabBarLabelStyle`
 
@@ -359,6 +454,10 @@ This view is usually only shown for a split second. Keep it lightweight.
 
 By default, this renders `null`.
 
+#### `sceneStyle`
+
+Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping.
+
 ### Events
 
 The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
@@ -374,21 +473,71 @@ This event is fired when the user presses the tab button for the current screen 
 
 To prevent the default behavior, you can call `event.preventDefault`:
 
-<samp id="material-top-tab-prevent-default" />
+```js name="Tab Press Event" snack static2dynamic
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-```js
-React.useEffect(() => {
-  const unsubscribe = navigation.addListener('tabPress', (e) => {
-    // Prevent default behavior
-    e.preventDefault();
+function HomeScreen() {
+  const navigation = useNavigation();
 
-    // Do something manually
-    // ...
-  });
+  // codeblock-focus-start
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('tabPress', (e) => {
+      // Prevent default behavior
+      e.preventDefault();
 
-  return unsubscribe;
-}, [navigation]);
+      // Do something manually
+      // ...
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+  // codeblock-focus-end
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Text style={{ marginTop: 10, color: 'gray' }}>
+        Tab press event is prevented
+      </Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+    </View>
+  );
+}
+
+const MyTabs = createMaterialTopTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    Settings: SettingsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyTabs);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
+
+If you have a custom tab bar, make sure to emit this event.
+
+:::note
+
+By default, tabs are rendered lazily. So if you add a listener inside a screen component, it won't receive the event until the screen is focused for the first time. If you need to listen to this event before the screen is focused, you can specify the [listener in the screen config](navigation-events.md#listeners-prop-on-screen) instead.
+
+:::
 
 #### `tabLongPress`
 
@@ -408,7 +557,7 @@ React.useEffect(() => {
 
 ### Helpers
 
-The tab navigator adds the following methods to the navigation prop:
+The tab navigator adds the following methods to the navigation object:
 
 #### `jumpTo`
 
@@ -417,47 +566,85 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to pass to the destination route.
 
-<samp id="material-top-tab-jump-to" />
-
-```js
-navigation.jumpTo('Profile', { name: 'Michaś' });
-```
-
-## Example
-
-<samp id="material-top-tab-example" />
-
-```js
+```js name="Tab Navigator - jumpTo" snack static2dynamic
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-const Tab = createMaterialTopTabNavigator();
+function HomeScreen() {
+  const navigation = useNavigation();
 
-function MyTabs() {
   return (
-    <Tab.Navigator
-      initialRouteName="Feed"
-      screenOptions={{
-        tabBarActiveTintColor: '#e91e63',
-        tabBarLabelStyle: { fontSize: 12 },
-        tabBarStyle: { backgroundColor: 'powderblue' },
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        onPress={
+          () =>
+            // codeblock-focus-start
+            navigation.jumpTo('Profile', { name: 'Michaś' })
+          // codeblock-focus-end
+        }
+      >
+        Jump to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen({ route }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      {route.params?.name && (
+        <Text style={{ marginTop: 10 }}>Name: {route.params.name}</Text>
+      )}
+    </View>
+  );
+}
+
+const MyTabs = createMaterialTopTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyTabs);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+### Hooks
+
+The material top tab navigator exports the following hooks:
+
+#### `useTabAnimation`
+
+This hook returns an object containing an animated value that represents the current position of the tabs. This can be used to animate elements based on the swipe position of the tabs, such as the tab indicator:
+
+```js
+import { Animated } from 'react-native';
+import { useTabAnimation } from '@react-navigation/material-top-tabs';
+
+function MyView() {
+  const { position } = useTabAnimation();
+
+  return (
+    <Animated.View
+      style={{
+        width: '50%',
+        height: 2,
+        backgroundColor: 'tomato',
+        transform: [{ translateX: position }],
       }}
-    >
-      <Tab.Screen
-        name="Feed"
-        component={Feed}
-        options={{ tabBarLabel: 'Home' }}
-      />
-      <Tab.Screen
-        name="Notifications"
-        component={Notifications}
-        options={{ tabBarLabel: 'Updates' }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{ tabBarLabel: 'Profile' }}
-      />
-    </Tab.Navigator>
+    />
   );
 }
 ```

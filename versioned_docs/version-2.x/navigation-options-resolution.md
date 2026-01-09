@@ -88,13 +88,16 @@ We also know that `createStackNavigator` and related functions return React comp
 Navigators are initialized with `create*Navigator(routeConfig, navigatorConfig)`. Inside of `navigatorConfig` we can add a `navigationOptions` property. These `navigationOptions` are the default options for screens within that navigator ([read more about sharing common navigationOptions](headers.md#sharing-common-navigationoptions-across-screens)), they do not refer to the `navigationOptions` for that navigator &mdash; as we have seen above, we set the `navigationOptions` property directly on the navigator for that use case.
 
 ```js
-const HomeStack = createStackNavigator({ A }, {
-  // This is the default for screens in the stack, so `A` will
-  // use this title unless it overrides it
-  navigationOptions: {
-    title: 'Welcome'
+const HomeStack = createStackNavigator(
+  { A },
+  {
+    // This is the default for screens in the stack, so `A` will
+    // use this title unless it overrides it
+    navigationOptions: {
+      title: 'Welcome',
+    },
   }
-})
+);
 
 // These are the options that are used by the navigator that renders
 // the HomeStack, in our example above this is a tab navigator.
@@ -105,7 +108,7 @@ HomeStack.navigationOptions = {
 
 We understand that overloading the naming here is a little bit confusing. Please [open a RFC](https://github.com/react-navigation/rfcs) if you have a suggestion about how we can make this API easier to learn and work with.
 
-# A stack contains a tab navigator and you want to set the title on the stack header
+## A stack contains a tab navigator and you want to set the title on the stack header
 
 Imagine the following configuration:
 
@@ -174,7 +177,7 @@ Using this configuration, the `headerTitle` or `title` from `navigationOptions` 
 
 Additionally, you can push new screens to the feed and profile stacks without hiding the tab bar by adding more routes to those stacks. If you want to push screens on top of the tab bar, then you can add them to the `AppNavigator` stack.
 
-# A tab navigator contains a stack and you want to hide the tab bar on specific screens
+## A tab navigator contains a stack and you want to hide the tab bar on specific screens
 
 Similar to the example above where a stack contains a tab navigator, we can solve this in two ways: add `navigationOptions` to our tab navigator to set the tab bar to hidden depending on which route is active in the child stack, or we can move the tab navigator inside of the stack.
 
@@ -244,7 +247,7 @@ const AppNavigator = createSwitchNavigator({
 });
 ```
 
-# A drawer has a stack inside of it and you want to lock the drawer on certain screens
+## A drawer has a stack inside of it and you want to lock the drawer on certain screens
 
 This is conceptually identical to having a tab with a stack inside of it (read that above if you have not already), where you want to hide the tab bar on certain screens. The only difference is that rather than using `tabBarVisible` you will use `drawerLockMode`.
 

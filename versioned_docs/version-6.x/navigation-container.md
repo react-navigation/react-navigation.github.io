@@ -31,23 +31,24 @@ export default function App() {
 
 ## Ref
 
-It's also possible to attach a [`ref`](https://reactjs.org/docs/refs-and-the-dom.html#creating-refs) to the container to get access to various helper methods, for example, dispatch navigation actions. This should be used in rare cases when you don't have access to the `navigation` prop, such as a Redux middleware.
+It's also possible to attach a [`ref`](https://react.dev/learn/referencing-values-with-refs) to the container to get access to various helper methods, for example, dispatch navigation actions. This should be used in rare cases when you don't have access to the `navigation` prop, such as a Redux middleware.
 
 Example:
 
 <samp id="using-refs" />
 
 ```js
-import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 
 function App() {
   const navigationRef = useNavigationContainerRef(); // You can also use a regular ref with `React.useRef()`
 
   return (
     <View style={{ flex: 1 }}>
-      <Button onPress={() => navigationRef.navigate('Home')}>
-        Go home
-      </Button>
+      <Button onPress={() => navigationRef.navigate('Home')}>Go home</Button>
       <NavigationContainer ref={navigationRef}>{/* ... */}</NavigationContainer>
     </View>
   );
@@ -71,6 +72,12 @@ navigationRef.navigate(name, params);
 All of these methods will act as if they were called inside the currently focused screen. It's important note that there must be a navigator rendered to handle these actions.
 
 In addition to these methods, the ref object also includes the following special methods:
+
+#### `isReady`
+
+The `isReady` method returns a `boolean` indicating whether the navigation tree is ready. The navigation tree is ready when the `NavigationContainer` contains at least one navigator and all of the navigators have finished mounting.
+
+This can be used to determine whether it's safe to dispatch navigation actions without getting an error. See [handling initialization](navigating-without-navigation-prop.md#handling-initialization) for more details.
 
 #### `resetRoot`
 
@@ -155,9 +162,7 @@ Prop that accepts initial state for the navigator. This can be useful for cases 
 Example:
 
 ```js
-<NavigationContainer
-  initialState={initialState}
->
+<NavigationContainer initialState={initialState}>
   {/* ... */}
 </NavigationContainer>
 ```
@@ -232,7 +237,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 function App() {
   const linking = {
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Home: 'feed/:sort',
@@ -263,7 +268,7 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
@@ -393,7 +398,7 @@ import messaging from '@react-native-firebase/messaging';
 
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
@@ -417,7 +422,7 @@ import messaging from '@react-native-firebase/messaging';
   }}
 >
   {/* content */}
-</NavigationContainer>
+</NavigationContainer>;
 ```
 
 This option is not available on Web.
@@ -433,7 +438,7 @@ import messaging from '@react-native-firebase/messaging';
 
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
@@ -483,7 +488,7 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
@@ -508,7 +513,7 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
@@ -571,6 +576,14 @@ Custom theme to use for the navigation components such as the header, tab bar et
 
 ### `independent`
 
-Whether this navigation container should be independent of parent containers. If this is not set to `true`, this container cannot be nested inside another container. Setting it to `true` disconnects any children navigators from parent container.
+:::warning
+
+This is an advanced use case. Don't use this unless you are 100% sure that you need it.
+
+:::
+
+Whether this navigation container should be independent of parent containers. If this is set to `true`, this container cannot be nested inside another container. Setting it to `true` disconnects any children navigators from the parent container and doesn't allow navigation between them.
 
 You probably don't want to set this to `true` in a typical React Native app. This is only useful if you have navigation trees that work like their own mini-apps and don't need to navigate to the screens outside of them.
+
+Avoid using this if you need to integrate with third-party components such as modals or bottom sheets. Consider using a [custom navigator](custom-navigators.md) instead.

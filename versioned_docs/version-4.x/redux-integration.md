@@ -43,7 +43,7 @@ class Count extends React.Component {
   }
 }
 
-let CountContainer = connect(state => ({ value: state.count }))(Count);
+let CountContainer = connect((state) => ({ value: state.count }))(Count);
 
 class Counter extends React.Component {
   static navigationOptions = {

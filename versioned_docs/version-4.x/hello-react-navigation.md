@@ -115,4 +115,3 @@ Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home`
 - `createStackNavigator` is a function that takes a route configuration object and an options object and returns a React component.
 - The keys in the route configuration object are the route names and the values are the configuration for that route. The only required property on the configuration is the `screen` (the component to use for the route).
 - To specify what the initial route in a stack is, provide an `initialRouteName` on the stack options object.
-- [Full source of what we have built so far](#example/hello-react-navigation-full).

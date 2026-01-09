@@ -9,10 +9,7 @@
       "header-buttons",
       "nesting-navigators",
       "navigation-lifecycle",
-      "next-steps",
-      "glossary-of-terms",
-      "troubleshooting",
-      "limitations"
+      "next-steps"
     ],
     "Guides": [
       "tab-based-navigation",
@@ -41,6 +38,7 @@
       "typescript",
       "redux-integration",
       "MST-integration",
+      "troubleshooting",
       "upgrading-from-5.x"
     ],
     "Navigators": [
@@ -51,12 +49,7 @@
       "material-bottom-tab-navigator",
       "material-top-tab-navigator"
     ],
-    "Libraries": [
-      "devtools",
-      "elements",
-      "tab-view",
-      "drawer-layout"
-    ],
+    "Libraries": ["devtools", "elements", "tab-view", "drawer-layout"],
     "API reference": [
       "navigation-container",
       "server-container",
@@ -71,6 +64,7 @@
       "link",
       {
         "type": "category",
+        "collapsible": true,
         "label": "Hooks",
         "items": [
           "use-navigation",
@@ -87,6 +81,7 @@
       },
       {
         "type": "category",
+        "collapsible": true,
         "label": "Actions",
         "items": [
           "navigation-actions",
@@ -96,17 +91,16 @@
         ]
       }
     ],
-    "Build your own Navigator": [
-      "custom-routers",
-      "custom-navigators"
-    ],
+    "Build your own Navigator": ["custom-routers", "custom-navigators"],
     "Additional resources": [
       "migration-guides",
       "navigation-solutions-and-community-libraries",
       "more-resources"
     ],
     "Meta": [
+      "glossary-of-terms",
       "pitch",
+      "limitations",
       "used-by",
       "contributing"
     ]

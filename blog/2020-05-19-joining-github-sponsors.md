@@ -1,11 +1,7 @@
 ---
 title: React Navigation joins GitHub Sponsors
-author: Brent Vatne
-author_url: https://twitter.com/notbrent
-author_title: Assistant to the Regional Core Team Manager
-author_image_url: https://avatars3.githubusercontent.com/u/90494?s=200&v=4
 description: We joined GitHub Sponsors - https://github.com/sponsors/react-navigation!
-
+authors: brent
 tags: [announcement, web]
 ---
 

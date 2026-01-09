@@ -6,100 +6,112 @@ sidebar_label: Drawer
 
 Drawer Navigator renders a navigation drawer on the side of the screen which can be opened and closed via gestures.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/drawer/drawer.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/drawer.mp4" />
+</video>
 
-This wraps [`react-native-drawer-layout`](drawer-layout.md). If you want to use the tab view without React Navigation integration, use the library directly instead.
+This wraps [`react-native-drawer-layout`](drawer-layout.md). If you want to use the drawer without React Navigation integration, use the library directly instead.
 
 ## Installation
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
 
 ```bash npm2yarn
-npm install @react-navigation/drawer@next
+npm install @react-navigation/drawer
 ```
 
-Then, you need to install and configure the libraries that are required by the drawer navigator:
+The navigator depends on [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) for gestures and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) for animations.
 
-1. First, install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
+<Tabs groupId='framework' queryString="framework">
+<TabItem value='expo' label='Expo' default>
 
-   If you have a Expo managed project, in your project directory, run:
+If you have a Expo managed project, in your project directory, run:
 
-   ```bash
-   npx expo install react-native-gesture-handler react-native-reanimated
-   ```
+```bash
+npx expo install react-native-gesture-handler react-native-reanimated react-native-worklets
+```
 
-   If you have a bare React Native project, in your project directory, run:
+</TabItem>
+<TabItem value='community-cli' label='Community CLI'>
 
-   ```bash npm2yarn
-   npm install react-native-gesture-handler react-native-reanimated
-   ```
+If you have a bare React Native project, in your project directory, run:
 
-   The Drawer supports both Reanimated 1 and the latest version of Reanimated. If you want to use the latest version of Reanimated, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
+```bash npm2yarn
+npm install react-native-gesture-handler react-native-reanimated react-native-worklets
+```
 
-2. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+After installation, configure the Reanimated Babel Plugin in your project following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
-   ```js
-   import 'react-native-gesture-handler';
-   ```
+</TabItem>
+</Tabs>
 
-   :::warning
-
-   If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
-
-   :::
-
-3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
 
 ```bash
 npx pod-install ios
 ```
 
-## API Definition
+## Usage
 
-To use this drawer navigator, import it from `@react-navigation/drawer`:
+To use this navigator, import it from `@react-navigation/drawer`:
 
-<samp id="simple-drawer" />
-
-```js
+```js name="Drawer Navigator" snack static2dynamic
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+// codeblock-focus-start
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-const Drawer = createDrawerNavigator();
+// codeblock-focus-end
+function HomeScreen() {
+  const navigation = useNavigation();
 
-function MyDrawer() {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Feed" component={Feed} />
-      <Drawer.Screen name="Article" component={Article} />
-    </Drawer.Navigator>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
   );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyDrawer = createDrawerNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyDrawer);
+
+export default function App() {
+  return <Navigation />;
 }
 ```
 
-:::note
-
-For a complete usage guide please visit [Drawer Navigation](drawer-based-navigation.md).
-
-:::
+## API Definition
 
 ### Props
 
-The `Drawer.Navigator` component accepts following props:
-
-#### `id`
-
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
-
-#### `initialRouteName`
-
-The name of the route to render on the first load of the navigator.
-
-#### `screenOptions`
-
-Default options to use for the screens in the navigator.
+In addition to the [common props](navigator.md#configuration) shared by all navigators, the drawer navigator component accepts the following additional props:
 
 #### `backBehavior`
 
@@ -111,6 +123,7 @@ It supports the following values:
 - `initialRoute` - return to initial screen passed in `initialRouteName` prop, if not passed, defaults to the first screen
 - `order` - return to screen defined before the focused screen
 - `history` - return to last visited screen in the navigator; if the same screen is visited multiple times, the older entries are dropped from the history
+- `fullHistory` - return to last visited screen in the navigator; doesn't drop duplicate entries unlike `history` - this behavior is useful to match how web pages work
 - `none` - do not handle back button
 
 #### `defaultStatus`
@@ -122,18 +135,6 @@ When this is set to `open`, the drawer will be open from the initial render. It 
 #### `detachInactiveScreens`
 
 Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
-
-#### `useLegacyImplementation`
-
-Whether to use the legacy implementation based on Reanimated 1. The new implementation based on Reanimated 2 will perform better, but you need additional configuration and need to use Hermes with Flipper to debug.
-
-This defaults to `true` in the following cases:
-
-- Reanimated 2 is not configured
-- App is connected to Chrome debugger (Reanimated 2 cannot be used with Chrome debugger)
-- App is running on Web
-
-Otherwise, it defaults to `false`
 
 #### `drawerContent`
 
@@ -168,9 +169,34 @@ function CustomDrawerContent(props) {
 
 To add additional items in the drawer, you can use the `DrawerItem` component:
 
-<samp id="custom-drawer-content" />
+```js name="Custom Drawer Content" snack static2dynamic
+import * as React from 'react';
+import { Text, View, Linking } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from '@react-navigation/drawer';
 
-```js
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
@@ -181,6 +207,21 @@ function CustomDrawerContent(props) {
       />
     </DrawerContentScrollView>
   );
+}
+// codeblock-focus-end
+
+const MyDrawer = createDrawerNavigator({
+  drawerContent: (props) => <CustomDrawerContent {...props} />,
+  screens: {
+    Home: HomeScreen,
+    Settings: SettingsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyDrawer);
+
+export default function App() {
+  return <Navigation />;
 }
 ```
 
@@ -197,42 +238,19 @@ The `DrawerItem` component accepts the following props:
 - `labelStyle`: Style object for the label `Text`.
 - `style`: Style object for the wrapper `View`.
 
-The `progress` object can be used to do interesting animations in your `drawerContent`, such as parallax motion of the drawer contents:
-
-<samp id="animated-drawer-content" />
-
-```js
-function CustomDrawerContent(props) {
-  const progress = useDrawerProgress();
-
-  // If you are on react-native-reanimated 1.x, use `Animated.interpolate` instead of `Animated.interpolateNode`
-  const translateX = Animated.interpolateNode(progress, {
-    inputRange: [0, 1],
-    outputRange: [-100, 0],
-  });
-
-  return (
-    <Animated.View style={{ transform: [{ translateX }] }}>
-      {/* ... drawer contents */}
-    </Animated.View>
-  );
-}
-```
-
-The `progress` object is a Reanimated `Node` if you're using Reanimated 1 (see [`useLegacyImplementation`](#uselegacyimplementation)), otherwise a `SharedValue`. It represents the animated position of the drawer (0 is closed; 1 is open).
-
 Note that you **cannot** use the `useNavigation` hook inside the `drawerContent` since `useNavigation` is only available inside screens. You get a `navigation` prop for your `drawerContent` which you can use instead:
 
 ```js
 function CustomDrawerContent({ navigation }) {
   return (
     <Button
-      title="Go somewhere"
       onPress={() => {
         // Navigate using the `navigation` prop that you received
         navigation.navigate('SomeScreen');
       }}
-    />
+    >
+      Go somewhere
+    </Button>
   );
 }
 ```
@@ -247,7 +265,7 @@ To use the custom component, we need to pass it in the `drawerContent` prop:
 
 ### Options
 
-The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Drawer.navigator` or `options` prop of `Drawer.Screen`.
+The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Drawer.Navigator` or `options` prop of `Drawer.Screen`.
 
 #### `title`
 
@@ -269,9 +287,27 @@ Function, that given `{ focused: boolean, color: string, size: number }` returns
 
 Color for the icon and label in the active item in the drawer.
 
+<img src="/assets/7.x/drawer/drawerActiveTintColor.png" width="500" alt="Drawer active tint color" />
+
+```js
+   drawerActiveTintColor: 'green',
+```
+
 #### `drawerActiveBackgroundColor`
 
 Background color for the active item in the drawer.
+
+<img src="/assets/7.x/drawer/drawerActiveBackgroundColor.png" width="500" alt="Drawer active background color" />
+
+```js
+    screenOptions={{
+      drawerActiveTintColor: 'white',
+      drawerActiveBackgroundColor: '#003CB3',
+      drawerLabelStyle: {
+        color: 'white',
+      },
+    }}
+```
 
 #### `drawerInactiveTintColor`
 
@@ -285,9 +321,34 @@ Background color for the inactive items in the drawer.
 
 Style object for the single item, which can contain an icon and/or a label.
 
+<img src="/assets/7.x/drawer/drawerItemStyle.png" width="500" alt="Drawer item style" />
+
+Example:
+
+```js
+   drawerItemStyle: {
+    backgroundColor: '#9dd3c8',
+    borderColor: 'black',
+    borderWidth: 2,
+    opacity: 0.6,
+  },
+```
+
 #### `drawerLabelStyle`
 
 Style object to apply to the `Text` style inside content section which renders a label.
+
+<img src="/assets/7.x/drawer/drawerLabelStyle.png" width="500" alt="Drawer label style" />
+
+Example:
+
+```js
+   drawerLabelStyle: {
+      color: 'black',
+      fontSize: 20,
+      fontFamily: 'Georgia',
+    },
+```
 
 #### `drawerContentContainerStyle`
 
@@ -301,7 +362,7 @@ Style object for the wrapper view.
 
 Style object for the drawer component. You can pass a custom background color for a drawer or a custom width here.
 
-<samp id="drawer-with-style" />
+<img src="/assets/7.x/drawer/drawerStyle.png" width="500" alt="Drawer style" />
 
 ```js
 <Drawer.Navigator
@@ -325,8 +386,20 @@ Options are `left` or `right`. Defaults to `left` for LTR languages and `right` 
 Type of the drawer. It determines how the drawer looks and animates.
 
 - `front`: Traditional drawer which covers the screen with an overlay behind it.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/drawer/drawerType-front.mp4" />
+  </video>
+
 - `back`: The drawer is revealed behind the screen on swipe.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/drawer/drawerType-back.mp4" />
+  </video>
+
 - `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.
+  <video playsInline autoPlay muted loop>
+   <source src="/assets/7.x/drawer/drawerType-slide.mp4" />
+  </video>
+
 - `permanent`: A permanent drawer is shown as a sidebar. Useful for having always visible drawer on larger screens.
 
 Defaults to `slide` on iOS and `front` on other platforms.
@@ -355,6 +428,10 @@ function MyDrawer() {
 ```
 
 You can also specify other props such as `drawerStyle` based on screen size to customize the behavior. For example, you can combine it with `defaultStatus="open"` to achieve a master-detail layout:
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/drawer/drawerType-masterDetail.mp4" />
+</video>
 
 ```js
 import { useWindowDimensions } from 'react-native';
@@ -388,27 +465,45 @@ When set to `true`, Drawer will hide the OS status bar whenever the drawer is pu
 
 #### `drawerStatusBarAnimation`
 
-Animation of the statusbar when hiding it. use in combination with `hideStatusBar`.
+Animation of the statusbar when hiding it. use in combination with `drawerHideStatusBarOnOpen`.
+
+This is only supported on iOS. Defaults to `slide`.
 
 Supported values:
 
 - `slide`
-- `fade`
-- `none`
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/drawer/drawerStatusBarAnimation-slide.mp4" />
+  </video>
 
-This is only supported on iOS. Defaults to `slide`.
+- `fade`
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/drawer/drawerStatusBarAnimation-fade.mp4" />
+  </video>
+
+- `none`
 
 #### `overlayColor`
 
 Color overlay to be displayed on top of the content view when drawer gets open. The opacity is animated from `0` to `1` when the drawer opens.
 
-#### `sceneContainerStyle`
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/7.x/drawer/overlayColor.mp4" />
+  </video>
+
+#### `sceneStyle`
 
 Style object for the component wrapping the screen content.
 
-#### `gestureHandlerProps`
+#### `configureGestureHandler`
 
-Props to pass to the underlying pan gesture handler.
+Callback to configure the underlying [gesture from `react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/gesture). It receives the `gesture` object as an argument:
+
+```js
+configureGestureHandler: ({ gesture }) => {
+  return gesture.enableTrackpadTwoFingerGesture(false);
+},
+```
 
 This is not supported on Web.
 
@@ -432,24 +527,22 @@ Minimum swipe distance threshold that should activate opening the drawer.
 
 Whether the keyboard should be dismissed when the swipe gesture begins. Defaults to `'on-drag'`. Set to `'none'` to disable keyboard handling.
 
-#### `unmountOnBlur`
-
-Whether this screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
-
-Normally, we don't recommend enabling this prop as users don't expect their navigation history to be lost when switching screens. If you enable this prop, please consider if this will actually provide a better experience for the user.
-
 #### `freezeOnBlur`
 
 Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to `false`.
 Defaults to `true` when `enableFreeze()` from `react-native-screens` package is run at the top of the application.
 
-Requires `react-native-screens` version >=3.16.0.
-
 Only supported on iOS and Android.
+
+#### `popToTopOnBlur`
+
+Boolean indicating whether any nested stack should be popped to the top of the stack when navigating away from this drawer screen. Defaults to `false`.
+
+It only works when there is a stack navigator (e.g. [stack navigator](stack-navigator.md) or [native stack navigator](native-stack-navigator.md)) nested under the drawer navigator.
 
 ### Header related options
 
-You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Drawer.navigator` or `options` prop of `Drawer.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
+You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Drawer.Navigator` or `options` prop of `Drawer.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
 
 In addition to those, the following options are also supported in drawer:
 
@@ -529,23 +622,74 @@ If you have custom drawer content, make sure to emit this event.
 
 ### Helpers
 
-The drawer navigator adds the following methods to the navigation prop:
+The drawer navigator adds the following methods to the navigation object:
 
 #### `openDrawer`
 
 Opens the drawer pane.
 
-<samp id="drawer-open-close-toggle" />
+```js name="Drawer Helper Methods" snack static2dynamic
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-```js
-navigation.openDrawer();
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 8,
+      }}
+    >
+      <Text>Home Screen</Text>
+      <Button
+        onPress={
+          () =>
+            // codeblock-focus-start
+            navigation.openDrawer()
+          // codeblock-focus-end
+        }
+      >
+        Open Drawer
+      </Button>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+    </View>
+  );
+}
+
+const MyDrawer = createDrawerNavigator({
+  screens: {
+    Home: HomeScreen,
+    Settings: SettingsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyDrawer);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 #### `closeDrawer`
 
 Closes the drawer pane.
-
-<samp id="drawer-open-close-toggle" />
 
 ```js
 navigation.closeDrawer();
@@ -554,8 +698,6 @@ navigation.closeDrawer();
 #### `toggleDrawer`
 
 Opens the drawer pane if closed, closes the drawer pane if opened.
-
-<samp id="drawer-open-close-toggle" />
 
 ```js
 navigation.toggleDrawer();
@@ -568,45 +710,130 @@ Navigates to an existing screen in the drawer navigator. The method accepts the 
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to pass to the destination route.
 
-<samp id="drawer-jump-to" />
-
-```js
-navigation.jumpTo('Profile', { owner: 'Satya' });
-```
-
-## Example
-
-<samp id="drawer-example" />
-
-```js
+```js name="Drawer Navigator - jumpTo" snack static2dynamic
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-const Drawer = createDrawerNavigator();
+function HomeScreen() {
+  const navigation = useNavigation();
 
-function MyDrawer() {
   return (
-    <Drawer.Navigator initialRouteName="Feed">
-      <Drawer.Screen
-        name="Feed"
-        component={Feed}
-        options={{ drawerLabel: 'Home' }}
-      />
-      <Drawer.Screen
-        name="Notifications"
-        component={Notifications}
-        options={{ drawerLabel: 'Updates' }}
-      />
-      <Drawer.Screen
-        name="Profile"
-        component={Profile}
-        options={{ drawerLabel: 'Profile' }}
-      />
-    </Drawer.Navigator>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        onPress={
+          () =>
+            // codeblock-focus-start
+            navigation.jumpTo('Profile', { owner: 'Satya' })
+          // codeblock-focus-end
+        }
+      >
+        Jump to Profile
+      </Button>
+    </View>
   );
+}
+
+function ProfileScreen({ route }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      {route.params?.owner && (
+        <Text style={{ marginTop: 10 }}>Owner: {route.params.owner}</Text>
+      )}
+    </View>
+  );
+}
+
+const MyDrawer = createDrawerNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyDrawer);
+
+export default function App() {
+  return <Navigation />;
 }
 ```
 
-## Checking if the drawer is open
+### Hooks
+
+The drawer navigator exports the following hooks:
+
+#### `useDrawerProgress`
+
+This hook returns the progress of the drawer. It is available in the screen components rendered by the drawer navigator as well as in the [custom drawer content](#drawercontent).
+
+The `progress` object is a `SharedValue` that represents the animated position of the drawer (`0` is closed; `1` is open). It can be used to animate elements based on the animation of the drawer with [Reanimated](https://docs.swmansion.com/react-native-reanimated/):
+
+```js name="Drawer animation progress" snack static2dynamic
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+// codeblock-focus-start
+import {
+  createDrawerNavigator,
+  useDrawerProgress,
+} from '@react-navigation/drawer';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+
+function HomeScreen() {
+  // highlight-next-line
+  const progress = useDrawerProgress();
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: progress.value * -100 }],
+  }));
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Animated.View
+        style={[
+          {
+            height: 100,
+            aspectRatio: 1,
+            backgroundColor: 'tomato',
+          },
+          animatedStyle,
+        ]}
+      />
+    </View>
+  );
+}
+// codeblock-focus-end
+
+const MyDrawer = createDrawerNavigator({
+  screens: {
+    Home: HomeScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyDrawer);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+If you are using class components, you can use the `DrawerProgressContext` to get the progress value.
+
+:::warning
+
+The `useDrawerProgress` hook (or `DrawerProgressContext`) will return a mock value on Web since Reanimated is not used on Web. The mock value can only represent the open state of the drawer (`0` when closed, `1` when open), and not the progress of the drawer.
+
+:::
+
+#### `useDrawerStatus`
 
 You can check if the drawer is open by using the `useDrawerStatus` hook.
 
@@ -628,7 +855,7 @@ import { getDrawerStatusFromState } from '@react-navigation/drawer';
 const isDrawerOpen = getDrawerStatusFromState(navigation.getState()) === 'open';
 ```
 
-For class components, you can listen to the `state` event to check if drawer was opened or closed:
+For class components, you can listen to the `state` event to check if the drawer was opened or closed:
 
 ```js
 class Profile extends React.Component {

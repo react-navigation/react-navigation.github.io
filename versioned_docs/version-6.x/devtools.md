@@ -9,7 +9,7 @@ Developer tools to make debugging easier when using React Navigation.
 To use the developer tools, install [`@react-navigation/devtools`](https://github.com/react-navigation/react-navigation/tree/master/packages/devtools):
 
 ```bash npm2yarn
-npm install @react-navigation/devtools
+npm install @react-navigation/devtools@^6.x
 ```
 
 Hooks from this package only work during development and are disabled in production. You don't need to do anything special to remove them from the production build.
@@ -47,7 +47,10 @@ To use the hook, import it and pass a `ref` to the `NavigationContainer` as its 
 
 ```js
 import * as React from 'react';
-import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import { useFlipper } from '@react-navigation/devtools';
 
 export default function App() {
@@ -77,7 +80,10 @@ To use the hook, import it and pass a `ref` to the `NavigationContainer` as its 
 
 ```js
 import * as React from 'react';
-import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import { useReduxDevToolsExtension } from '@react-navigation/devtools';
 
 export default function App() {

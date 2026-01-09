@@ -44,9 +44,12 @@ The default component for the drawer is scrollable and only contains links for t
 ```js
 import { DrawerItems, SafeAreaView } from 'react-navigation';
 
-const CustomDrawerContentComponent = props => (
+const CustomDrawerContentComponent = (props) => (
   <ScrollView>
-    <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
+    <SafeAreaView
+      style={styles.container}
+      forceInset={{ top: 'always', horizontal: 'never' }}
+    >
       <DrawerItems {...props} />
     </SafeAreaView>
   </ScrollView>
@@ -62,13 +65,17 @@ const styles = StyleSheet.create({
 `contentComponent` also received a prop called `drawerOpenProgress` which is an [animated value](https://reactnative.dev/docs/animated#value) that represents the animated position of the drawer (0 is closed; 1 is open). This allows you to do interesting animations in your `contentComponent`, such as parallax motion of the drawer contents:
 
 ```js
-const CustomDrawerContentComponent = props => {
+const CustomDrawerContentComponent = (props) => {
   const translateX = props.drawerOpenProgress.interpolate({
     inputRange: [0, 1],
     outputRange: [-100, 0],
   });
 
-  return <Animated.View style={{ transform: [{ translateX }] }}>{/* ... drawer contents */}</Animated.View>;
+  return (
+    <Animated.View style={{ transform: [{ translateX }] }}>
+      {/* ... drawer contents */}
+    </Animated.View>
+  );
 };
 ```
 

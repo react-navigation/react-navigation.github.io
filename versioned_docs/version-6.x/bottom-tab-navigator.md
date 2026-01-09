@@ -6,18 +6,16 @@ sidebar_label: Bottom Tabs
 
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/tabs/bottom-tabs-demo.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/tabs/bottom-tabs-demo.mp4" />
+</video>
 
 ## Installation
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/bottom-tabs):
 
 ```bash npm2yarn
-npm install @react-navigation/bottom-tabs
+npm install @react-navigation/bottom-tabs@^6.x
 ```
 
 ## API Definition
@@ -275,7 +273,7 @@ To show your screen under the tab bar, you can set the `position` style to absol
 
 You also might need to add a bottom margin to your content if you have a absolutely positioned tab bar. React Navigation won't do it automatically.
 
-To get the height of the bottom tab bar, you can use `BottomTabBarHeightContext` with [React's Context API](https://reactjs.org/docs/context.html#contextconsumer) or `useBottomTabBarHeight`:
+To get the height of the bottom tab bar, you can use `BottomTabBarHeightContext` with [React's Context API](https://react.dev/reference/react/useContext) or `useBottomTabBarHeight`:
 
 ```js
 import { BottomTabBarHeightContext } from '@react-navigation/bottom-tabs';

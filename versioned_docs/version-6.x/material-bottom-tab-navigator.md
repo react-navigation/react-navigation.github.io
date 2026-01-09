@@ -4,9 +4,9 @@ title: Material Bottom Tabs Navigator
 sidebar_label: Material Bottom Tabs
 ---
 
-:::warning
+:::danger
 
-The `material-bottom-tabs` navigator is moved to [`react-native-paper`](https://reactnativepaper.com/). Refer to [`react-native-paper`'s documentation](https://callstack.github.io/react-native-paper/docs/components/BottomNavigation/createMaterialBottomTabNavigator) for API and usage. For any issues with the navigator, please open an issue in [`react-native-paper`'s repository](https://github.com/callstack/react-native-paper/).
+The `material-bottom-tabs` navigator is moved to [`react-native-paper`](https://reactnativepaper.com/). Refer to [`react-native-paper`'s documentation](https://callstack.github.io/react-native-paper/docs/guides/bottom-navigation) instead for installation instructions, usage guide and API reference. For any issues with the navigator, please open an issue in [`react-native-paper`'s repository](https://github.com/callstack/react-native-paper/).
 
 :::
 
@@ -21,7 +21,7 @@ This wraps the [`BottomNavigation`](https://callstack.github.io/react-native-pap
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/material-bottom-tabs):
 
 ```bash npm2yarn
-npm install @react-navigation/material-bottom-tabs react-native-paper react-native-vector-icons
+npm install @react-navigation/material-bottom-tabs@^6.x react-native-paper react-native-vector-icons
 ```
 
 This API also requires that you install `react-native-vector-icons`! If you are using Expo managed workflow, it will work without any extra steps. Otherwise, [follow these installation instructions](https://github.com/oblador/react-native-vector-icons#installation).

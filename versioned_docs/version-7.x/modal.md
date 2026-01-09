@@ -4,25 +4,45 @@ title: Opening a modal
 sidebar_label: Opening a modal
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ![Modal shown on screen](/assets/modal/modal-demo.gif)
 
 A modal displays content that temporarily blocks interactions with the main view.
 
-A modal is like a popup &mdash; it's not part of your primary navigation flow &mdash; it usually has a different transition, a different way to dismiss it, and is intended to focus on one particular piece of content or interaction.
+A modal is like a popup &mdash; it usually has a different transition animation, and is intended to focus on one particular interaction or piece of content.
 
 ## Creating a stack with modal screens
 
-<samp id="modal" />
+```js name="Modal" snack static2dynamic
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from '@react-navigation/elements';
 
-```js
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontSize: 30 }}>This is the home screen!</Text>
-      <Button
-        onPress={() => navigation.navigate('MyModal')}
-        title="Open Modal"
-      />
+      <Button onPress={() => navigation.navigate('MyModal')}>Open Modal</Button>
+    </View>
+  );
+}
+
+function ModalScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ fontSize: 30 }}>This is a modal!</Text>
+      <Button onPress={() => navigation.goBack()}>Dismiss</Button>
     </View>
   );
 }
@@ -35,31 +55,58 @@ function DetailsScreen() {
   );
 }
 
-function ModalScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 30 }}>This is a modal!</Text>
-      <Button onPress={() => navigation.goBack()} title="Dismiss" />
-    </View>
-  );
-}
+// codeblock-focus-start
+const HomeStack = createStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        headerShown: false,
+      },
+    },
+    Details: {
+      screen: DetailsScreen,
+      options: {
+        headerShown: false,
+      },
+    },
+  },
+});
 
-const RootStack = createStackNavigator();
+const RootStack = createStackNavigator({
+  groups: {
+    Home: {
+      screens: {
+        App: {
+          screen: HomeStack,
+          options: { title: 'My App' },
+        },
+      },
+    },
+    // highlight-start
+    Modal: {
+      screenOptions: {
+        presentation: 'modal',
+      },
+      screens: {
+        MyModal: ModalScreen,
+      },
+    },
+    // highlight-end
+  },
+});
 
-function RootStackScreen() {
-  return (
-    <RootStack.Navigator>
-      <RootStack.Group>
-        <RootStack.Screen name="Home" component={HomeScreen} />
-        <RootStack.Screen name="Details" component={DetailsScreen} />
-      </RootStack.Group>
-      <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-        <RootStack.Screen name="MyModal" component={ModalScreen} />
-      </RootStack.Group>
-    </RootStack.Navigator>
-  );
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
 }
+// codeblock-focus-end
 ```
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/modal/modal.mp4" />
+</video>
 
 Here, we are creating 2 groups of screens using the `RootStack.Group` component. The first group is for our regular screens, and the second group is for our modal screens. For the modal group, we have specified `presentation: 'modal'` in `screenOptions`. This will apply this option to all the screens inside the group. This option will change the animation for the screens to animate from bottom-to-top rather than right to left. The `presentation` option for stack navigator can be either `card` (default) or `modal`. The `modal` behavior slides the screen in from the bottom and allows the user to swipe down from the top to dismiss it on iOS.
 
@@ -67,4 +114,14 @@ Instead of specifying this option for a group, it's also possible to specify it 
 
 ## Summary
 
-- To change the type of transition on a stack navigator you can use the `presentation` option. When set to `modal`, all modal screens animate-in from bottom to top rather than right to left by default. This applies to that entire group, so to use non-modal transitions on other screens, we add another group with the default configuration.
+- To change the type of transition on a stack navigator you can use the [`presentation`](native-stack-navigator.md#presentation) option.
+- When `presentation` is set to `modal`, the screens behave like a modal, i.e. they have a bottom to top transition and may show part of the previous screen in the background.
+- Setting `presentation: 'modal'` on a group makes all the screens in the group modals, so to use non-modal transitions on other screens, we add another group with the default configuration.
+
+## Best practices
+
+Since modals are intended to be on top of other content, there are a couple of things to keep in mind when using modals:
+
+- Avoid nesting them inside other navigators like tab or drawer. Modal screens should be defined as part of the root stack.
+- Modal screens should be the last in the stack - avoid pushing regular screens on top of modals.
+- The first screen in a stack appears as a regular screen even if configured as a modal, since there is no screen before it to show behind. So always make sure that modal screens are pushed on top of a regular screen or another modal screen.

@@ -155,9 +155,9 @@ function appendSnackLink() {
     link.target = '_blank';
 
     if (label) {
-      link.innerHTML = `Try the "${label}" example on Snack ${openIcon}`;
+      link.innerHTML = `Try the "${label}" example on <b>Snack</b>${openIcon}`;
     } else {
-      link.innerHTML = `Try this example on Snack ${openIcon}`;
+      link.innerHTML = `Try this example on <b>Snack</b>${openIcon}`;
     }
 
     // Add the href and append the link element if we have some code
@@ -180,28 +180,15 @@ function appendSnackLink() {
     }
 
     // Don't try to add the link more than once!
-    samp.remove()
-  });
-}
-
-// This is used to update links like the following:
-// [Full source of what we have built so far](#example/full-screen-modal)
-function transformExistingSnackLinks() {
-  document.querySelectorAll('a[href*="#example/"]').forEach((a) => {
-    let urlParts = a.href.split('#example/');
-    let templateId = urlParts[urlParts.length - 1];
-    a.href = getSnackUrl({ templateId });
-    a.target = '_blank';
+    samp.remove();
   });
 }
 
 function initializeSnackObservers() {
   appendSnackLink();
-  transformExistingSnackLinks();
 
   const mutationObserver = new MutationObserver((mutations) => {
     mutations.forEach(appendSnackLink);
-    mutations.forEach(transformExistingSnackLinks);
   });
 
   mutationObserver.observe(document.documentElement, {

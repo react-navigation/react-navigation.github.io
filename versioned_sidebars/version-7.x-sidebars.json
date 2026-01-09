@@ -9,16 +9,12 @@
       "header-buttons",
       "nesting-navigators",
       "navigation-lifecycle",
-      "next-steps",
-      "glossary-of-terms",
-      "troubleshooting",
-      "limitations"
+      "next-steps"
     ],
     "Guides": [
-      "tab-based-navigation",
-      "drawer-based-navigation",
       "auth-flow",
       "handling-safe-area",
+      "customizing-tabbar",
       "hiding-tabbar-in-screens",
       "status-bar",
       "modal",
@@ -28,7 +24,6 @@
       "shared-element-transitions",
       "preventing-going-back",
       "function-after-focusing-screen",
-      "connecting-navigation-prop",
       "navigating-without-navigation-prop",
       "deep-linking",
       "configuring-links",
@@ -37,46 +32,38 @@
       "screen-tracking",
       "themes",
       "state-persistence",
+      "combine-static-with-dynamic",
       "testing",
       "typescript",
-      "redux-integration",
-      "MST-integration",
+      "troubleshooting",
       "upgrading-from-6.x"
-    ],
-    "Static configuration": [
-      "static-configuration",
-      "static-api-reference",
-      "static-typescript",
-      "static-authentication",
-      "static-combine-with-dynamic"
     ],
     "Navigators": [
       "stack-navigator",
       "native-stack-navigator",
-      "drawer-navigator",
       "bottom-tab-navigator",
+      "native-bottom-tab-navigator",
+      "drawer-navigator",
       "material-top-tab-navigator"
     ],
-    "Libraries": [
-      "devtools",
-      "elements",
-      "tab-view",
-      "drawer-layout"
-    ],
+    "Libraries": ["devtools", "elements", "tab-view", "drawer-layout"],
     "API reference": [
+      "static-configuration",
       "navigation-container",
       "server-container",
+      "navigator",
       "group",
       "screen",
       "screen-options",
-      "route-prop",
-      "navigation-prop",
+      "route-object",
+      "navigation-object",
       "navigation-context",
       "navigation-events",
       "navigation-state",
       "link",
       {
         "type": "category",
+        "collapsible": true,
         "label": "Hooks",
         "items": [
           "use-navigation",
@@ -84,6 +71,8 @@
           "use-navigation-state",
           "use-focus-effect",
           "use-is-focused",
+          "use-prevent-remove",
+          "use-route-path",
           "use-link-to",
           "use-link-props",
           "use-link-builder",
@@ -93,6 +82,7 @@
       },
       {
         "type": "category",
+        "collapsible": true,
         "label": "Actions",
         "items": [
           "navigation-actions",
@@ -102,17 +92,18 @@
         ]
       }
     ],
-    "Build your own Navigator": [
-      "custom-routers",
-      "custom-navigators"
-    ],
-    "Additional resources": [
-      "migration-guides",
-      "navigation-solutions-and-community-libraries",
+    "Build your own Navigator": ["custom-routers", "custom-navigators"],
+    "Ecosystem": [
+      "community-solutions",
+      "community-navigators",
+      "community-libraries",
       "more-resources"
     ],
     "Meta": [
+      "migration-guides",
+      "glossary-of-terms",
       "pitch",
+      "limitations",
       "used-by",
       "contributing"
     ]

@@ -1,5 +1,7 @@
-import path from 'path';
 import remarkNpm2Yarn from '@docusaurus/remark-plugin-npm2yarn';
+import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.mjs';
+import rehypeStaticToDynamic from './src/plugins/rehype-static-to-dynamic.mjs';
+import rehypeVideoAspectRatio from './src/plugins/rehype-video-aspect-ratio.mjs';
 
 export default {
   title: 'React Navigation',
@@ -9,11 +11,32 @@ export default {
   favicon: 'img/favicon.ico',
   organizationName: 'react-navigation',
   projectName: 'react-navigation.github.io',
-  scripts: ['/js/snack-helpers.js'],
+  onBrokenLinks: 'throw',
+  onBrokenAnchors: 'throw',
+  onDuplicateRoutes: 'throw',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
+  },
   themeConfig: {
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
+    },
     prism: {
-      theme: require('prism-react-renderer').themes.github,
-      darkTheme: require('prism-react-renderer').themes.dracula,
+      theme: require('prism-react-renderer').themes.oneLight,
+      darkTheme: require('prism-react-renderer').themes.oneDark,
+      magicComments: [
+        {
+          className: 'theme-code-block-highlighted-line',
+          line: 'highlight-next-line',
+          block: { start: 'highlight-start', end: 'highlight-end' },
+        },
+        { className: 'code-block-diff-add-line', line: 'diff-add' },
+        { className: 'code-block-diff-remove-line', line: 'diff-remove' },
+      ],
     },
     algolia: {
       appId: 'QCWXRU195A',
@@ -28,111 +51,87 @@ export default {
         src: 'img/spiro.svg',
       },
       items: [
-        { to: 'docs/getting-started', label: 'Docs', position: 'left' },
-        { to: 'blog', label: 'Blog', position: 'left' },
         {
-          href: 'https://github.com/react-navigation',
-          label: 'GitHub',
+          type: 'docsVersionDropdown',
           position: 'right',
         },
         {
-          to: 'help',
+          to: 'docs/getting-started',
+          activeBasePath: 'docs',
+          label: 'Docs',
+          position: 'right',
+        },
+        {
+          to: 'blog',
+          label: 'Blog',
+          position: 'right',
+        },
+        {
+          type: 'dropdown',
           label: 'Help',
-        },
-        {
-          type: 'docsVersionDropdown',
-          position: 'left',
-        },
-      ],
-    },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'Docs',
           items: [
             {
-              label: 'Getting Started',
-              to: 'docs/getting-started',
+              label: 'Issues',
+              href: 'https://github.com/react-navigation/react-navigation/issues',
             },
             {
-              label: 'Building your own Navigator',
-              to: 'docs/custom-navigators',
+              label: 'Feature Requests',
+              href: 'https://react-navigation.canny.io/feature-requests',
+            },
+            {
+              label: 'Reactiflux Discord',
+              href: 'https://www.reactiflux.com',
+            },
+            {
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/questions/tagged/react-navigation',
+            },
+            {
+              label: 'Troubleshooting',
+              to: 'docs/troubleshooting',
             },
             {
               label: 'Contributing',
               to: 'docs/contributing',
             },
           ],
+          position: 'right',
         },
         {
-          title: 'Support',
-          items: [
-            {
-              label: 'Chat in our Discord channel',
-              href: 'https://discord.gg/reactiflux',
-            },
-            {
-              label: 'Get help on Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/react-navigation',
-            },
-            {
-              label: 'Request a feature on Canny',
-              href: 'https://react-navigation.canny.io/feature-requests',
-            },
-            {
-              label: 'Report a bug on GitHub',
-              href: 'https://github.com/react-navigation/react-navigation/issues/new/choose',
-            },
-          ],
+          href: 'https://x.com/reactnavigation',
+          className: 'navbar-social-link navbar-social-link-x',
+          'aria-label': 'X',
+          position: 'right',
         },
         {
-          title: 'Social',
-          items: [
-            {
-              label: 'Blog',
-              to: 'blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/react-navigation/react-navigation',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/reactnavigation',
-            },
-          ],
-        },
-        {
-          title: 'Built with',
-          items: [
-            {
-              label: 'Docusaurus',
-              to: 'https://docusaurus.io/',
-            },
-            {
-              label: 'GitHub Pages',
-              href: 'https://pages.github.com/',
-            },
-            {
-              label: 'Netlify',
-              href: 'https://www.netlify.com/',
-            },
-          ],
+          href: 'https://github.com/react-navigation/react-navigation',
+          className: 'navbar-social-link navbar-social-link-github',
+          'aria-label': 'GitHub',
+          position: 'right',
         },
       ],
     },
   },
   plugins: [
+    './src/plugins/disable-fully-specified.mjs',
+    './src/plugins/react-navigation-versions.mjs',
     [
       '@docusaurus/plugin-client-redirects',
       {
         redirects: [
           {
             from: '/next',
-            to: '/docs/7.x/getting-started',
+            to: '/docs/migration-guides',
           },
         ],
+        createRedirects(existingPath) {
+          if (
+            existingPath.includes('/docs/') &&
+            !/\/docs\/\d+\.x/.test(existingPath)
+          ) {
+            return existingPath.replace('/docs/', '/docs/7.x/');
+          }
+        },
       },
     ],
   ],
@@ -144,8 +143,23 @@ export default {
           editUrl:
             'https://github.com/react-navigation/react-navigation.github.io/edit/main/',
           includeCurrentVersion: false,
-          lastVersion: '6.x',
+          lastVersion: '7.x',
+          versions: {
+            '7.x': {
+              badge: false,
+            },
+          },
+          breadcrumbs: false,
+          sidebarCollapsed: false,
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
+          rehypePlugins: [
+            [
+              rehypeCodeblockMeta,
+              { match: { snack: true, lang: true, tabs: true } },
+            ],
+            [rehypeVideoAspectRatio, { staticDir: 'static' }],
+            rehypeStaticToDynamic,
+          ],
         },
         blog: {
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
@@ -161,5 +175,34 @@ export default {
         },
       },
     ],
+  ],
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossOrigin: 'true',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet',
+      },
+    },
+  ],
+  scripts: [
+    '/js/snack-helpers.js',
+    '/js/toc-fixes.js',
+    '/js/video-playback.js',
   ],
 };

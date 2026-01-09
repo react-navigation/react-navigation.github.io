@@ -1,9 +1,6 @@
 ---
 title: 3.0 release candidate
-author: Brent Vatne
-author_url: https://twitter.com/notbrent
-author_title: Core Team
-author_image_url: https://avatars0.githubusercontent.com/u/90494?s=200&v=4
+authors: brent
 tags: [release, announcement]
 ---
 
@@ -46,40 +43,46 @@ const App = createAppContainer(MainNavigator);
 
 This should be an easy change - import `createAppContainer` in the root of your app and use it to wrap the root navigator.
 
-> **Warning**: if you have any custom navigators, you may have used  `createNavigationContainer`, you can remove this now because it’s only used at the root of the app and provided by the user.
+> **Warning**: if you have any custom navigators, you may have used `createNavigationContainer`, you can remove this now because it’s only used at the root of the app and provided by the user.
 
 ### Renamed navigationOptions in navigator configuration
 
 When configuring navigators it’s often useful to pass in default navigation options for the screens inside of that navigator. For example in a stack you might want to set a background color and tint color for each screen. Previously, you would write something like this:
 
 ```js
-const Home = createStackNavigator({
-  Feed: ExampleScreen,
-  Profile: ExampleScreen,
-}, {
-  navigationOptions: {
-    headerTintColor: '#fff',
-    headerStyle: {
-      backgroundColor: '#000',
+const Home = createStackNavigator(
+  {
+    Feed: ExampleScreen,
+    Profile: ExampleScreen,
+  },
+  {
+    navigationOptions: {
+      headerTintColor: '#fff',
+      headerStyle: {
+        backgroundColor: '#000',
+      },
     },
   }
-});
+);
 ```
 
 As of this release, `navigationOptions` in navigator configuration like this has been renamed to `defaultNavigationOptions`.
 
 ```js
-const Home = createStackNavigator({
-  Feed: ExampleScreen,
-  Profile: ExampleScreen,
-}, {
-  defaultNavigationOptions: {
-    headerTintColor: '#fff',
-    headerStyle: {
-      backgroundColor: '#000',
-    },
+const Home = createStackNavigator(
+  {
+    Feed: ExampleScreen,
+    Profile: ExampleScreen,
   },
-});
+  {
+    defaultNavigationOptions: {
+      headerTintColor: '#fff',
+      headerStyle: {
+        backgroundColor: '#000',
+      },
+    },
+  }
+);
 ```
 
 Sometimes you need to configure the `navigationOptions` for a navigator itself. Typically you’d do something like this:
@@ -91,20 +94,23 @@ Home.navigationOptions = { tabBarLabel: 'Home!' };
 As of this release, you can use `navigationOptions` in the navigator config for this instead.
 
 ```js
-const Home = createStackNavigator({
-  Feed: ExampleScreen,
-  Profile: ExampleScreen,
-}, {
-  defaultNavigationOptions: {
-    headerTintColor: '#fff',
-    headerStyle: {
-      backgroundColor: '#000',
+const Home = createStackNavigator(
+  {
+    Feed: ExampleScreen,
+    Profile: ExampleScreen,
+  },
+  {
+    defaultNavigationOptions: {
+      headerTintColor: '#fff',
+      headerStyle: {
+        backgroundColor: '#000',
+      },
     },
-  },
-  navigationOptions: {
-    tabBarLabel: 'Home!',
-  },
-});
+    navigationOptions: {
+      tabBarLabel: 'Home!',
+    },
+  }
+);
 
 const Tabs = createBottomTabNavigator({ Home });
 ```
@@ -132,7 +138,7 @@ const Store = createStackNavigator({
 
 - Basic support for hooks in `react-navigation-hooks`
 - `headerBackgroundTransitionPreset: 'toggle' | 'fade' | 'translate'` lets you choose how to transition your custom `headerBackground` components between screens.
-- Add options to opt in/out of the stack card overlay and shadow that are visible during transitions: `cardShadowEnabled` defaults to `true` and  `cardOverlayEnabled` defaults to `false`.
+- Add options to opt in/out of the stack card overlay and shadow that are visible during transitions: `cardShadowEnabled` defaults to `true` and `cardOverlayEnabled` defaults to `false`.
 - Export `StackGestureContext` and `DrawerGestureContext` from react-navigation-stack and react-navigation-drawer, so you can use the ref from the corresponding gestures with other gesture handlers (eg: [GestureInteraction.js](https://github.com/react-navigation/react-navigation-drawer/blob/bf4bdba7f6a4fbc12192f5d5ba2285f6280431b7/example/src/GestureInteraction.js)).
 
 ## Assorted fixes & improvements
@@ -171,7 +177,7 @@ To keep the experience as simple as possible the `react-navigation` package will
 
 Now that the core of React Navigation can be used outside of React Native, we can provide first-class web support to anyone using React.js on the web, including those who do not want to use `react-native-web`.
 
-Here is an example web app which demonstrates the new `createBrowserApp` container and the built-in  `Link` component:
+Here is an example web app which demonstrates the new `createBrowserApp` container and the built-in `Link` component:
 
 ```js
 import { createSwitchNavigator } from "@react-navigation/core";
@@ -209,10 +215,10 @@ export default App;
 ```
 
 The above `Link` tag will render to:
- `<a href=``"``/profile/Brent?view=photos``"``>Brent's Photos</a>`
+`<a href=``"``/profile/Brent?view=photos``"``>Brent's Photos</a>`
 
 See a simple web app with Create React App [here](https://github.com/react-navigation/example-web). Or take a look at [this razzle app](https://github.com/react-navigation/web-server-example) for a more complicated example including server rendering.
 
-----------
+---
 
 Thanks for reading, please post any issues you encounter to [react-navigation/issues](https://github.com/react-navigation/react-navigation/issues)!

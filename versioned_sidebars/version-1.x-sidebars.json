@@ -33,11 +33,7 @@
       "navigation-views",
       "transitioner"
     ],
-    "Meta": [
-      "pitch",
-      "alternatives",
-      "contributing"
-    ]
+    "Meta": ["pitch", "alternatives", "contributing"]
   },
   "api": {
     "API reference": [
