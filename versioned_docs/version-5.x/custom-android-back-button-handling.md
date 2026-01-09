@@ -42,6 +42,6 @@ The presented approach will work well for screens that are shown in a `StackNavi
 
 If instead of overriding system back button, you'd like to prevent going back from the screen, see docs for [preventing going back](preventing-going-back.md).
 
-### Why not use component lifecycle methods
+## Why not use component lifecycle methods
 
 At first, you may be inclined to use `componentDidMount` to subscribe for the back press event and `componentWillUnmount` to unsubscribe, or use `useEffect` to add the listener. This approach will not work - learn more about this in [navigation lifecycle](navigation-lifecycle.md).

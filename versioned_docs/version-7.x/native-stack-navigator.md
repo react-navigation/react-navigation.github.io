@@ -30,10 +30,7 @@ npm install @react-navigation/native-stack
 
 To use this navigator, import it from `@react-navigation/native-stack`:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Native Stack Navigator" snack
+```js name="Native Stack Navigator" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -81,62 +78,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Native Stack Navigator" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-const Stack = createNativeStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 :::info
 
@@ -376,10 +317,7 @@ Supported values:
 
 To use Form Sheet for your screen, add `presentation: 'formSheet'` to the `options`.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Form Sheet" snack
+```js name="Form Sheet" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -454,86 +392,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Form Sheet" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-const Stack = createNativeStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          presentation: 'formSheet',
-          headerShown: false,
-          sheetAllowedDetents: 'fitToContents',
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ padding: 15 }}>
-      <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Profile Screen</Text>
-      <Text style={{ marginTop: 10 }}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan
-        euismod enim, quis porta ligula egestas sed. Maecenas vitae consequat
-        odio, at dignissim lorem. Ut euismod eros ac mi ultricies, vel pharetra
-        tortor commodo. Interdum et malesuada fames ac ante ipsum primis in
-        faucibus. Nullam at urna in metus iaculis aliquam at sed quam. In
-        ullamcorper, ex ut facilisis commodo, urna diam posuere urna, at
-        condimentum mi orci ac ipsum. In hac habitasse platea dictumst. Donec
-        congue pharetra ipsum in finibus. Nulla blandit finibus turpis, non
-        vulputate elit viverra a. Curabitur in laoreet nisl.
-      </Text>
-      <Button onPress={() => navigation.goBack()} style={{ marginTop: 15 }}>
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 :::warning
 
@@ -776,6 +634,29 @@ Defaults to `true` when `enableFreeze()` from `react-native-screens` package is 
 
 Only supported on iOS and Android.
 
+#### `scrollEdgeEffects`
+
+Configures the scroll edge effect for the _content ScrollView_ (the ScrollView that is present in first descendants chain of the Screen).
+Depending on values set, it will blur the scrolling content below certain UI elements (e.g. header items, search bar) for the specified edge of the ScrollView.
+When set in nested containers, i.e. Native Stack inside Native Bottom Tabs, or the other way around, the ScrollView will use only the innermost one's config.
+
+Edge effects can be configured for each edge separately. The following values are currently supported:
+
+- `automatic` - the automatic scroll edge effect style,
+- `hard` - a scroll edge effect with a hard cutoff and dividing line,
+- `soft` - a soft-edged scroll edge effect,
+- `hidden` - no scroll edge effect.
+
+Defaults to `automatic` for each edge.
+
+:::note
+
+Using both `blurEffect` and `scrollEdgeEffects` (>= iOS 26) simultaneously may cause overlapping effects.
+
+:::
+
+Only supported on iOS, starting from iOS 26.
+
 ### Header related options
 
 The navigator supports following options to configure the header:
@@ -864,7 +745,7 @@ headerBackIcon: {
 
 #### `headerLargeStyle`
 
-Style of the header when a large title is shown. The large title is shown if `headerLargeTitle` is `true` and the edge of any scrollable content reaches the matching edge of the header.
+Style of the header when a large title is shown. The large title is shown if `headerLargeTitleEnabled` is `true` and the edge of any scrollable content reaches the matching edge of the header.
 
 Supported properties:
 
@@ -877,7 +758,7 @@ Only supported on iOS.
   <source src="/assets/7.x/native-stack/headerLargeStyle.mp4" />
 </video>
 
-#### `headerLargeTitle`
+#### `headerLargeTitleEnabled`
 
 Whether to enable header with large title which collapses to regular header on scroll.
 Defaults to `false`.
@@ -1015,6 +896,12 @@ Supported values:
 - `systemChromeMaterialDark`
   <img src="/assets/7.x/native-stack/headerBlurEffect-systemChromeMaterialDark.png" width="500" alt="Header blur effect systemChromeMaterialDark" />
 
+:::note
+
+Using both `blurEffect` and `scrollEdgeEffects` (>= iOS 26) simultaneously may cause overlapping effects.
+
+:::
+
 Only supported on iOS.
 
 #### `headerBackground`
@@ -1079,7 +966,7 @@ Function which returns an array of items to display as on the left side of the h
 Example:
 
 ```js
-unstable_headerRightItems: () => [
+unstable_headerLeftItems: () => [
   {
     type: 'button',
     title: 'Edit',
@@ -1576,7 +1463,7 @@ Common properties:
   - `fontFamily`
   - `fontSize`
   - `fontWeight`
-  - `color`
+  - `color` (of type `ColorValue`)
 - `icon`: Optional icon to show instead of the label.
 
   The icon can be an image:
@@ -1585,6 +1472,7 @@ Common properties:
   {
     type: 'image',
     source: require('./path/to/image.png'),
+    tinted: true, // Whether to apply tint color to the icon. Defaults to true.
   }
   ```
 
@@ -1600,12 +1488,12 @@ Common properties:
 - `variant`: Visual variant of the button. Supported values:
   - `plain` (default)
   - `done`
-  - `prominent`
+  - `prominent` (iOS 26+)
 - `tintColor`: Tint color to apply to the item.
 - `disabled`: Whether the item is disabled.
 - `width`: Width of the item.
-- `hidesSharedBackground` (iOS 26+): Whether the background this item may share with other items should be hidden. Setting this to `true` hides the liquid glass background.
-- `sharesBackground` (iOS 26+): Whether this item can share a background with other items.
+- `hidesSharedBackground` (iOS 26+): Whether the background this item may share with other items in the bar should be hidden. Setting this to `true` hides the liquid glass background.
+- `sharesBackground` (iOS 26+): Whether this item can share a background with other items. Defaults to `true`.
 - `identifier` (iOS 26+) - An identifier used to match items across transitions.
 - `badge` (iOS 26+): An optional badge to display alongside the item. Supported properties:
   - `value`: The value to display in the badge. It can be a string or a number.
@@ -1614,6 +1502,7 @@ Common properties:
     - `fontSize`
     - `fontWeight`
     - `color`
+    - `backgroundColor`
 - `accessibilityLabel`: Accessibility label for the item.
 - `accessibilityHint`: Accessibility hint for the item.
 
@@ -1644,14 +1533,16 @@ Supported properties when `type` is `menu`:
 
 - `changesSelectionAsPrimaryAction`: Whether the menu is a selection menu. Tapping an item in a selection menu will add a checkmark to the selected item. Defaults to `false`.
 - `menu`: An object containing the menu items. It contains the following properties:
-
   - `title`: Optional title to show on top of the menu.
+  - `multiselectable`: Whether multiple items in the menu can be selected (i.e. in "on" state). Defaults to `false`.
+  - `layout`: How the menu items are displayed. Supported values:
+    - `default` (default): menu items are displayed normally.
+    - `palette`: menu items are displayed in a horizontal row.
   - `items`: An array of menu items. A menu item can be either an `action` or a `submenu`.
-
     - `action`: An object with the following properties:
-
       - `type`: Must be `action`.
       - `label`: Label of the menu item.
+      - `description`: The secondary text displayed alongside the label of the menu item.
       - `icon`: Optional icon to show alongside the label. The icon can be a [SF Symbols](https://developer.apple.com/sf-symbols/) name:
 
         ```js
@@ -1670,10 +1561,9 @@ Supported properties when `type` is `menu`:
       - `destructive`: Whether the menu item is styled as destructive.
       - `hidden`: Whether the menu item is hidden.
       - `keepsMenuPresented`: Whether to keep the menu open after selecting this item. Defaults to `false`.
-      - `discoverabilityLabel`: An elaborated title that explains the purpose of the action.
+      - `discoverabilityLabel`: An elaborated title that explains the purpose of the action. On iOS, the system displays this title in the discoverability heads-up display (HUD). If this is not set, the HUD displays the label property.
 
     - `submenu`: An object with the following properties:
-
       - `type`: Must be `submenu`.
       - `label`: Label of the submenu item.
       - `icon`: Optional icon to show alongside the label. The icon can be a [SF Symbols](https://developer.apple.com/sf-symbols/) name:
@@ -1685,6 +1575,12 @@ Supported properties when `type` is `menu`:
         }
         ```
 
+      - `inline`: Whether the menu is displayed inline with the parent menu. By default, submenus are displayed after expanding the parent menu item. Inline menus are displayed as part of the parent menu as a section. Defaults to `false`.
+      - `layout`: How the submenu items are displayed. Supported values:
+        - `default` (default): menu items are displayed normally.
+        - `palette`: menu items are displayed in a horizontal row.
+      - `destructive`: Whether the submenu is styled as destructive.
+      - `multiselectable`: Whether multiple items in the submenu can be selected (i.e. in "on" state). Defaults to `false`.
       - `items`: An array of menu items (can be either `action` or `submenu`).
 
 Example:

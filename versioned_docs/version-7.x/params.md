@@ -22,7 +22,7 @@ We recommend that the params you pass are JSON-serializable. That way, you'll be
 
 :::
 
-```js name="Passing params" snack
+```js name="Passing params" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -144,7 +144,7 @@ Screens can also update their params, like they can update their state. The `nav
 
 Basic usage:
 
-```js name="Updating params" snack
+```js name="Updating params" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -208,7 +208,7 @@ Params aren't only useful for passing some data to a new screen, but they can al
 
 To achieve this, you can use the `popTo` method to go back to the previous screen as well as pass params to it:
 
-```js name="Passing params back" snack
+```js name="Passing params back" snack static2dynamic
 import * as React from 'react';
 import { Text, View, TextInput } from 'react-native';
 import {
@@ -294,7 +294,7 @@ Here, after you press "Done", the home screen's `route.params` will be updated t
 
 If you have nested navigators, you need to pass params a bit differently. For example, say you have a navigator inside the `More` screen and want to pass params to the `Settings` screen inside that navigator. Then you can pass params as the following:
 
-```js name="Passing params to nested screen" snack
+```js name="Passing params to nested screen" snack static2dynamic
 import * as React from 'react';
 import { Text, View, TextInput } from 'react-native';
 import {

@@ -8,7 +8,7 @@ sidebar_label: DrawerActions
 
 The following actions are supported:
 
-### openDrawer
+## openDrawer
 
 The `openDrawer` action can be used to open the drawer pane.
 
@@ -20,7 +20,7 @@ import { DrawerActions } from '@react-navigation/native';
 navigation.dispatch(DrawerActions.openDrawer());
 ```
 
-### closeDrawer
+## closeDrawer
 
 The `closeDrawer` action can be used to close the drawer pane.
 
@@ -32,7 +32,7 @@ import { DrawerActions } from '@react-navigation/native';
 navigation.dispatch(DrawerActions.closeDrawer());
 ```
 
-### toggleDrawer
+## toggleDrawer
 
 The `toggleDrawer` action can be used to open the drawer pane if closed, or close if open.
 
@@ -44,7 +44,7 @@ import { DrawerActions } from '@react-navigation/native';
 navigation.dispatch(DrawerActions.toggleDrawer());
 ```
 
-### jumpTo
+## jumpTo
 
 The `jumpTo` action can be used to jump to an existing route in the drawer navigator.
 
