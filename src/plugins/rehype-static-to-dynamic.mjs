@@ -1,7 +1,9 @@
 import * as t from '@babel/types';
 import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
-import * as prettier from 'prettier';
+import * as prettier from 'prettier/standalone';
+import * as prettierBabel from 'prettier/plugins/babel';
+import * as prettierEstree from 'prettier/plugins/estree';
 import * as recast from 'recast';
 import * as babelParser from 'recast/parsers/babel-ts.js';
 import { visit } from 'unist-util-visit';
@@ -392,6 +394,7 @@ async function convertStaticToDynamic(code) {
     ...prettierConfig,
     parser: 'babel',
     singleQuote: true,
+    plugins: [prettierBabel, prettierEstree],
   });
 
   // Remove trailing newline that prettier adds
