@@ -149,6 +149,9 @@ export default function App() {
       ref={navigationRef}
       onReady={() => {
         routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+
+        // Replace the line below to add the tracker from a mobile analytics SDK
+        await trackScreenView(routeNameRef.current);
       }}
       onStateChange={async () => {
         const previousRouteName = routeNameRef.current;
