@@ -13,6 +13,14 @@ const SUPPORTED_TABS = {
   ],
 };
 
+const COMMENTS = {
+  HIGHLIGHT_START: '// highlight-start',
+  HIGHLIGHT_END: '// highlight-end',
+  HIGHLIGHT_NEXT_LINE: '// highlight-next-line',
+  FOCUS_START: '// codeblock-focus-start',
+  FOCUS_END: '// codeblock-focus-end',
+};
+
 export default function Pre({
   children,
   'data-name': name,
@@ -22,6 +30,8 @@ export default function Pre({
   'data-lang': lang,
   ...rest
 }) {
+  const [isExpanded, setIsExpanded] = React.useState(false);
+
   const { colorMode } = useColorMode();
   const activeVersion = useActiveVersion();
   const { versions } = usePluginData('react-navigation-versions');
@@ -121,6 +131,44 @@ export default function Pre({
     return <MDXPre {...rest}>{children}</MDXPre>;
   }
 
+  const buttons = [];
+
+  if (child.props.children.includes?.(COMMENTS.FOCUS_START)) {
+    buttons.push(
+      <button
+        key="expand-button"
+        className="code-block-expand"
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <svg
+          width="14px"
+          height="14px"
+          viewBox="0 0 16 16"
+          style={{ verticalAlign: '-2px', marginRight: '4px' }}
+        >
+          <g stroke="currentColor" fill="currentColor">
+            <polyline
+              points={isExpanded ? '5 0 8 3 11 0' : '5 3 8 0 11 3'}
+              strokeWidth="1.5"
+              fill="none"
+            />
+            <line x1="8" y1="1" x2="8" y2="5" strokeWidth="1.5" />
+            <circle cx="8" cy="8" r="1" stroke="none" />
+            <circle cx="4" cy="8" r="1" stroke="none" />
+            <circle cx="12" cy="8" r="1" stroke="none" />
+            <line x1="8" y1="11" x2="8" y2="15" strokeWidth="1.5" />
+            <polyline
+              points={isExpanded ? '5 16 8 13 11 16' : '5 13 8 16 11 13'}
+              strokeWidth="1.5"
+              fill="none"
+            />
+          </g>
+        </svg>
+        {isExpanded ? 'Show relevant lines' : 'Show full code'}
+      </button>
+    );
+  }
+
   // Handle snack demos
   if (snack) {
     const code = child.props.children;
@@ -199,13 +247,7 @@ export default function Pre({
       code
         .split('\n')
         .filter((line) =>
-          [
-            '// highlight-start',
-            '// highlight-end',
-            '// highlight-next-line',
-            '// codeblock-focus-start',
-            '// codeblock-focus-end',
-          ].every((comment) => line.trim() !== comment)
+          Object.values(COMMENTS).every((comment) => line.trim() !== comment)
         )
         .join('\n')
         // Use expo/vector-icons instead of react-native-vector-icons for snack
@@ -246,68 +288,87 @@ export default function Pre({
       );
     }
 
-    return (
-      <>
-        <FocusedCodeBlock {...rest}>{children}</FocusedCodeBlock>
-        <a
-          className="snack-sample-link"
-          data-snack="true"
-          target="_blank"
-          href={url.href}
+    buttons.push(
+      <a
+        key="snack-link"
+        className="code-block-snack-link"
+        data-snack="true"
+        target="_blank"
+        href={url.href}
+      >
+        Try on <b>Snack</b>
+        <svg
+          width="14px"
+          height="14px"
+          viewBox="0 0 16 16"
+          style={{ verticalAlign: '-1px' }}
         >
-          Try on <b>Snack</b>
-          <svg
-            width="14px"
-            height="14px"
-            viewBox="0 0 16 16"
-            style={{ verticalAlign: '-1px' }}
-          >
-            <g stroke="none" strokeWidth="1" fill="none">
-              <polyline
-                stroke="currentColor"
-                points="8.5 0.5 15.5 0.5 15.5 7.5"
-              />
-              <path d="M8,8 L15.0710678,0.928932188" stroke="currentColor" />
-              <polyline
-                stroke="currentColor"
-                points="9.06944444 3.5 1.5 3.5 1.5 14.5 12.5 14.5 12.5 6.93055556"
-              />
-            </g>
-          </svg>
-        </a>
-      </>
+          <g stroke="none" strokeWidth="1" fill="none">
+            <polyline
+              stroke="currentColor"
+              points="8.5 0.5 15.5 0.5 15.5 7.5"
+            />
+            <path d="M8,8 L15.0710678,0.928932188" stroke="currentColor" />
+            <polyline
+              stroke="currentColor"
+              points="9.06944444 3.5 1.5 3.5 1.5 14.5 12.5 14.5 12.5 6.93055556"
+            />
+          </g>
+        </svg>
+      </a>
     );
   }
 
-  return <FocusedCodeBlock {...rest}>{children}</FocusedCodeBlock>;
+  return (
+    <>
+      <FocusedCodeBlock expanded={isExpanded} {...rest}>
+        {children}
+      </FocusedCodeBlock>
+      {buttons.length ? (
+        <div className="code-block-footer">{buttons}</div>
+      ) : null}
+    </>
+  );
 }
 
-function FocusedCodeBlock({ children, ...rest }) {
+function FocusedCodeBlock({ children, expanded, ...rest }) {
   const child = React.Children.only(children);
   const code = child.props.children;
 
-  // Only keep the lines between `// codeblock-focus-{start,end} comments
-  if (code.includes('// codeblock-focus-start')) {
-    const lines = code.split('\n');
-
+  // Only keep the lines between `// codeblock-focus-{start,end}` comments
+  if (code.includes(COMMENTS.FOCUS_START)) {
     let content = '';
-    let focus = false;
-    let indent;
 
-    for (const line of lines) {
-      if (line.trim() === '// codeblock-focus-start') {
-        focus = true;
-      } else if (line.trim() === '// codeblock-focus-end') {
-        focus = false;
-      } else if (focus) {
-        if (indent === undefined) {
-          indent = line.match(/^\s*/)[0];
-        }
+    if (expanded) {
+      content = code
+        .split('\n')
+        .filter((line) =>
+          [COMMENTS.FOCUS_START, COMMENTS.FOCUS_END].every(
+            (comment) => line.trim() !== comment
+          )
+        )
+        .join('\n');
+    } else {
+      const lines = code.split('\n');
 
-        if (line.startsWith(indent)) {
-          content += line.slice(indent.length) + '\n';
-        } else {
-          content += line + '\n';
+      let focus = false;
+      let indent;
+
+      for (const line of lines) {
+        if (line.trim() === COMMENTS.FOCUS_START) {
+          focus = true;
+        } else if (line.trim() === COMMENTS.FOCUS_END) {
+          focus = false;
+        } else if (focus) {
+          if (indent === undefined) {
+            indent = line.match(/^\s*/)[0];
+          }
+
+          if (line.startsWith(indent)) {
+            content += line.slice(indent.length) + '\n';
+          } else {
+            content += line + '\n';
+          }
         }
       }
     }
