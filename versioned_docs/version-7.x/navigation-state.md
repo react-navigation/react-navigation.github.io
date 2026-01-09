@@ -137,7 +137,7 @@ const state = {
   routeNames: ['Home', 'Profile', 'Settings'],
   routes: [
     { key: 'home-1', name: 'Home' },
-    { key: 'settings-1', name: 'Settings' },
+    { key: 'profile-1', name: 'Profile' },
   ],
   index: 1,
   stale: false,
