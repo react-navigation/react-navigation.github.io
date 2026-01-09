@@ -1,0 +1,110 @@
+{
+  "docs": {
+    "Fundamentals": [
+      "getting-started",
+      "hello-react-navigation",
+      "navigating",
+      "params",
+      "headers",
+      "header-buttons",
+      "nesting-navigators",
+      "navigation-lifecycle",
+      "next-steps"
+    ],
+    "Guides": [
+      "auth-flow",
+      "handling-safe-area",
+      "customizing-tabbar",
+      "hiding-tabbar-in-screens",
+      "status-bar",
+      "modal",
+      "multiple-drawers",
+      "screen-options-resolution",
+      "custom-android-back-button-handling",
+      "shared-element-transitions",
+      "preventing-going-back",
+      "function-after-focusing-screen",
+      "navigating-without-navigation-prop",
+      "deep-linking",
+      "configuring-links",
+      "web-support",
+      "server-rendering",
+      "screen-tracking",
+      "themes",
+      "state-persistence",
+      "combine-static-with-dynamic",
+      "testing",
+      "typescript",
+      "troubleshooting",
+      "upgrading-from-7.x"
+    ],
+    "Navigators": [
+      "stack-navigator",
+      "native-stack-navigator",
+      "bottom-tab-navigator",
+      "drawer-navigator",
+      "material-top-tab-navigator"
+    ],
+    "Libraries": ["devtools", "elements", "tab-view", "drawer-layout"],
+    "API reference": [
+      "static-configuration",
+      "navigation-container",
+      "server-container",
+      "navigator",
+      "group",
+      "screen",
+      "screen-options",
+      "route-object",
+      "navigation-object",
+      "navigation-context",
+      "navigation-events",
+      "navigation-state",
+      "link",
+      {
+        "type": "category",
+        "collapsible": true,
+        "label": "Hooks",
+        "items": [
+          "use-navigation",
+          "use-route",
+          "use-navigation-state",
+          "use-focus-effect",
+          "use-is-focused",
+          "use-prevent-remove",
+          "use-route-path",
+          "use-link-to",
+          "use-link-props",
+          "use-link-builder",
+          "use-scroll-to-top",
+          "use-theme"
+        ]
+      },
+      {
+        "type": "category",
+        "collapsible": true,
+        "label": "Actions",
+        "items": [
+          "navigation-actions",
+          "stack-actions",
+          "drawer-actions",
+          "tab-actions"
+        ]
+      }
+    ],
+    "Build your own Navigator": ["custom-routers", "custom-navigators"],
+    "Ecosystem": [
+      "community-solutions",
+      "community-navigators",
+      "community-libraries",
+      "more-resources"
+    ],
+    "Meta": [
+      "migration-guides",
+      "glossary-of-terms",
+      "pitch",
+      "limitations",
+      "used-by",
+      "contributing"
+    ]
+  }
+}

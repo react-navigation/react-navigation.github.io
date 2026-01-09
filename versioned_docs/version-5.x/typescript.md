@@ -6,7 +6,7 @@ sidebar_label: Type checking with TypeScript
 
 React Navigation is written with TypeScript and exports type definitions for TypeScript projects.
 
-### Type checking the navigator
+## Type checking the navigator
 
 To type check our route name and params, the first thing we need to do is to create an object type with mappings for route name to the params of the route. For example, say we have a route called `Profile` in our root navigator which should have a param `userId`:
 
@@ -52,7 +52,7 @@ And then we can use it:
 
 This will provide type checking and intelliSense for props of the `Navigator` and `Screen` components.
 
-### Type checking screens
+## Type checking screens
 
 To type check our screens, we need to annotate the `navigation` prop and the `route` prop received by a screen.
 
@@ -152,9 +152,9 @@ class ProfileScreen extends React.Component<Props> {
 
 We recommend creating a separate `types.tsx` file where you keep the types and import them in your component files instead of repeating them in each file.
 
-### Nesting navigators
+## Nesting navigators
 
-#### Type checking screens and params in nested navigator
+### Type checking screens and params in nested navigator
 
 You can [navigate to a screen in a nested navigator](nesting-navigators.md#navigating-to-a-screen-in-a-nested-navigator) by passing `screen` and `params` properties for the nested screen:
 
@@ -176,7 +176,7 @@ type TabParamList = {
 };
 ```
 
-#### Combining navigation props
+### Combining navigation props
 
 When you nest navigators, the navigation prop of the screen is a combination of multiple navigation props. For example, if we have a tab inside a stack, the `navigation` prop will have both `jumpTo` (from the tab navigator) and `push` (from the stack navigator). To make it easier to combine types from multiple navigator, you can use the `CompositeNavigationProp` type:
 
@@ -205,7 +205,7 @@ type ProfileScreenNavigationProp = CompositeNavigationProp<
 >;
 ```
 
-### Annotating `useNavigation`
+## Annotating `useNavigation`
 
 To annotate the `navigation` prop that we get from `useNavigation`, we can use a type parameter:
 
@@ -215,7 +215,7 @@ const navigation = useNavigation<ProfileScreenNavigationProp>();
 
 It's important to note that this isn't completely type-safe because the type parameter you use may not be correct and we cannot statically verify it.
 
-### Annotating `useRoute`
+## Annotating `useRoute`
 
 To annotate the `route` prop that we get from `useRoute`, we can use a type parameter:
 
@@ -225,7 +225,7 @@ const route = useRoute<ProfileScreenRouteProp>();
 
 It's important to note that this isn't completely type-safe, similar to `useNavigation`.
 
-### Annotating `options` and `screenOptions`
+## Annotating `options` and `screenOptions`
 
 When you pass the `options` to a `Screen` or `screenOptions` prop to a `Navigator` component, they are already type-checked and you don't need to do anything special. However, sometimes you might want to extract the options to a separate object, and you might want to annotate it.
 
@@ -241,7 +241,7 @@ const options: StackNavigationOptions = {
 
 Similarly, you can import `DrawerNavigationOptions` from `@react-navigation/drawer`, `BottomTabNavigationOptions` from `@react-navigation/bottom-tabs` etc.
 
-### Annotating `ref` on `NavigationContainer`
+## Annotating `ref` on `NavigationContainer`
 
 When adding a `ref` to `NavigationContainer`, you can use the `NavigationContainerRef` type to annotate it.
 

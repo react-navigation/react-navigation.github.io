@@ -457,14 +457,16 @@ Only supported on Android and iOS.
 
 #### `statusBarStyle`
 
-Sets the status bar color (similar to the `StatusBar` component). Defaults to `auto`.
+Sets the status bar color (similar to the `StatusBar` component).
 
 Supported values:
 
-- `"auto"`
+- `"auto"` (iOS only)
 - `"inverted"` (iOS only)
 - `"dark"`
 - `"light"`
+
+Defaults to `auto` on iOS and `light` on Android.
 
 Requires setting `View controller-based status bar appearance -> YES` (or removing the config) in your `Info.plist` file.
 
@@ -589,7 +591,7 @@ Only supported on iOS.
 
 Changes the duration (in milliseconds) of `slide_from_bottom`, `fade_from_bottom`, `fade` and `simple_push` transitions on iOS. Defaults to `350`.
 
-The duration of `default` and `flip` transitions isn't customizable.
+For screens with `default` and `flip` transitions, and for screens with `presentation` set to `modal`, `formSheet`, `pageSheet` (regardless of transition), the duration isn't customizable.
 
 Only supported on iOS.
 

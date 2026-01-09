@@ -309,3 +309,155 @@ function MyStack() {
 
 </TabItem>
 </Tabs>
+
+### Router
+
+:::warning
+
+This API is experimental and may change in a minor release.
+
+:::
+
+Routers can be customized with the `UNSTABLE_router` prop on navigator to override how navigation actions are handled.
+
+It takes a function that receives the original router and returns an object with overrides:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const MyStack = createNativeStackNavigator({
+  // highlight-start
+  UNSTABLE_router: (original) => ({
+    getStateForAction(state, action) {
+      if (action.type === 'SOME_ACTION') {
+        // Custom logic
+      }
+
+      // Fallback to original behavior
+      return original.getStateForAction(state, action);
+    },
+  }),
+  // highlight-end
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const Stack = createNativeStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator
+      // highlight-start
+      UNSTABLE_router={(original) => ({
+        getStateForAction(state, action) {
+          if (action.type === 'SOME_ACTION') {
+            // Custom logic
+          }
+
+          // Fallback to original behavior
+          return original.getStateForAction(state, action);
+        },
+      })}
+      // highlight-end
+    >
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+The function passed to `UNSTABLE_router` **must be a pure function and cannot reference outside dynamic variables**.
+
+The overrides object is shallow merged with the original router. So you don't need to specify all properties of the router, only the ones you want to override.
+
+See [custom routers](custom-routers.md) for more details on routers.
+
+### Route names change behavior
+
+:::warning
+
+This API is experimental and may change in a minor release.
+
+:::
+
+When the list of available routes in a navigator changes dynamically, e.g. based on conditional rendering, looping over data from an API etc., the navigator needs to update the [navigation state](navigation-state.md) according to the new list of routes.
+
+By default, it works as follows:
+
+- Any routes not present in the new available list of routes are removed from the navigation state
+- If the currently focused route is still present in the new available list of routes, it remains focused.
+- If the currently focused route has been removed, but the navigation state has other routes that are present in the new available list, the first route in from the list of rendered routes becomes focused.
+- If none of the routes in the navigation state are present in the new available list of routes, one of the following things can happen based on the `UNSTABLE_routeNamesChangeBehavior` prop:
+  - `'firstMatch'` - The first route defined in the new list of routes becomes focused. This is the default behavior based on [`getStateForRouteNamesChange`](custom-routers.md) in the router.
+  - `'lastUnhandled'` - The last state that was unhandled due to conditional rendering is restored.
+
+Example cases where state might have been unhandled:
+
+- Opened a deep link to a screen, but a login screen was shown.
+- Navigated to a screen containing a navigator, but a different screen was shown.
+- Reset the navigator to a state with different routes not matching the available list of routes.
+
+In these cases, specifying `'lastUnhandled'` will reuse the unhandled state if present. If there's no unhandled state, it will fallback to `'firstMatch'` behavior.
+
+Caveats:
+
+- Direct navigation is only handled for `NAVIGATE` actions.
+- Unhandled state is restored only if the current state becomes invalid, i.e. it doesn't contain any currently defined screens.
+
+Example usage:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createNativeStackNavigator({
+  // highlight-next-line
+  UNSTABLE_routeNamesChangeBehavior: 'lastUnhandled',
+  screens: {
+    Home: {
+      if: useIsSignedIn,
+      screen: HomeScreen,
+    },
+    SignIn: {
+      if: useIsSignedOut,
+      screen: SignInScreen,
+      options: {
+        title: 'Sign in',
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<Stack.Navigator
+  // highlight-next-line
+  UNSTABLE_routeNamesChangeBehavior="lastUnhandled"
+>
+  {isSignedIn ? (
+    <Stack.Screen name="Home" component={HomeScreen} />
+  ) : (
+    <Stack.Screen name="SignIn" component={SignInScreen} />
+  )}
+</Stack.Navigator>
+```
+
+</TabItem>
+</Tabs>
+
+The most common use case for this is to [show the correct screen based on authentication based on deep link](auth-flow.md#handling-deep-links-after-auth).

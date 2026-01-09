@@ -831,3 +831,17 @@ Helper that returns the title text to use in header. It takes the following para
 
 - `options` - The options object of the screen.
 - `fallback` - Fallback title string if no title was found in options.
+
+### `useFrameSize`
+
+Hook that returns the size of the frame of the parent navigator. It accepts a selector function which receives the frame dimensions and returns a value:
+
+```js
+import { useFrameSize } from '@react-navigation/elements';
+
+// ...
+
+const isLandscape = useFrameSize((frame) => frame.width > frame.height);
+```
+
+The selector ensures that the component only re-renders when we need to.

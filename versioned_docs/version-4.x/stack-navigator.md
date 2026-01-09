@@ -391,7 +391,6 @@ See the examples in the [example app](https://github.com/react-navigation/stack/
 Stack Navigator exposes various options to configure the transition animation when a screen is added or removed. These transition animations can be customized on a per-screen basis by specifying the options in the `options` prop for each screen.
 
 - `gestureDirection` - The direction of swipe gestures:
-
   - `horizontal` - The gesture to close the screen will start from the left, and from the right in RTL. For animations, screen will slide from the right with `SlideFromRightIOS`, and from the left in RTL.
   - `horizontal-inverted` - The gesture to close the screen will start from the right, and from the left in RTL. For animations, screen will slide from the left with `SlideFromRightIOS`, and from the right in RTL as the direction is inverted.
   - `vertical` - The gesture to close the screen will start from the top. For animations, screen will slide from the bottom.
@@ -400,12 +399,10 @@ Stack Navigator exposes various options to configure the transition animation wh
   You may want to specify a matching horizontal/vertical animation along with `gestureDirection` as well. For the animations included in the library, if you set `gestureDirection` to one of the inverted ones, it'll also flip the animation direction.
 
 - `transitionSpec` - An object which specifies the animation type (`timing` or `spring`) and their options (such as `duration` for `timing`). It takes 2 properties:
-
   - `open` - Configuration for the transition when adding a screen
   - `close` - Configuration for the transition when removing a screen.
 
   Each of the object should specify 2 properties:
-
   - `animation` - The animation function to use for the animation. Supported values are `timing` and `spring`.
   - `config` - The configuration object for the timing function. For `timing`, it can be `duration` and `easing`. For `spring`, it can be `stiffness`, `damping`, `mass`, `overshootClamping`, `restDisplacementThreshold` and `restSpeedThreshold`.
 
@@ -437,14 +434,12 @@ Stack Navigator exposes various options to configure the transition animation wh
   ```
 
 - `cardStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the card. Is expected to return at least empty object, possibly containing interpolated styles for container, the card itself, overlay and shadow. Supported properties are:
-
   - `containerStyle` - Style for the container view wrapping the card.
   - `cardStyle` - Style for the view representing the card.
   - `overlayStyle` - Style for the view representing the semi-transparent overlay below
   - `shadowStyle` - Style for the view representing the card shadow.
 
   The function receives the following properties in it's argument:
-
   - `current` - Values for the current screen:
     - `progress` - Animated node representing the progress value of the current screen. `0` when screen should start coming into view, `0.5` when it's mid-way, `1` when it should be fully in view.
   - `next` - Values for the current screen the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
@@ -473,7 +468,6 @@ Stack Navigator exposes various options to configure the transition animation wh
   ```
 
 - `headerStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the header. Is expected to return at least empty object, possibly containing interpolated styles for left label and button, right button, title and background. Supported properties are:
-
   - `leftLabelStyle` - Style for the label of the left button (back button label).
   - `leftButtonStyle` - Style for the left button (usually the back button).
   - `rightButtonStyle` - Style for the right button.
@@ -481,7 +475,6 @@ Stack Navigator exposes various options to configure the transition animation wh
   - `backgroundStyle` - Style for the header background.
 
   The function receives the following properties in it's argument:
-
   - `current` - Values for the current screen (the screen which owns this header).
     - `progress` - Animated node representing the progress value of the current screen.
   - `next` - Values for the current screen the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.

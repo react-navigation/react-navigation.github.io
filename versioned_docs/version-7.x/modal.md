@@ -15,10 +15,7 @@ A modal is like a popup &mdash; it usually has a different transition animation,
 
 ## Creating a stack with modal screens
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Modal" snack
+```js name="Modal" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -28,7 +25,6 @@ import {
 import { createStackNavigator } from '@react-navigation/stack';
 import { Button } from '@react-navigation/elements';
 
-// codeblock-focus-start
 function HomeScreen() {
   const navigation = useNavigation();
 
@@ -59,6 +55,7 @@ function DetailsScreen() {
   );
 }
 
+// codeblock-focus-start
 const HomeStack = createStackNavigator({
   screens: {
     Home: {
@@ -107,74 +104,6 @@ export default function App() {
 // codeblock-focus-end
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Modal" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Button } from '@react-navigation/elements';
-
-// codeblock-focus-start
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 30 }}>This is the home screen!</Text>
-      <Button onPress={() => navigation.navigate('MyModal')}>Open Modal</Button>
-    </View>
-  );
-}
-
-function ModalScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 30 }}>This is a modal!</Text>
-      <Button onPress={() => navigation.goBack()}>Dismiss</Button>
-    </View>
-  );
-}
-
-function DetailsScreen() {
-  return (
-    <View>
-      <Text>Details</Text>
-    </View>
-  );
-}
-
-const RootStack = createStackNavigator();
-
-function App() {
-  return (
-    <NavigationContainer>
-      <RootStack.Navigator>
-        <RootStack.Group>
-          <RootStack.Screen name="Home" component={HomeScreen} />
-          <RootStack.Screen name="Details" component={DetailsScreen} />
-        </RootStack.Group>
-        // highlight-start
-        <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-          <RootStack.Screen name="MyModal" component={ModalScreen} />
-        </RootStack.Group>
-        // highlight-end
-      </RootStack.Navigator>
-    </NavigationContainer>
-  );
-}
-// codeblock-focus-end
-
-export default App;
-```
-
-</TabItem>
-</Tabs>
-
 <video playsInline autoPlay muted loop>
   <source src="/assets/modal/modal.mp4" />
 </video>
@@ -185,7 +114,7 @@ Instead of specifying this option for a group, it's also possible to specify it 
 
 ## Summary
 
-- To change the type of transition on a stack navigator you can use the `presentation` option.
+- To change the type of transition on a stack navigator you can use the [`presentation`](native-stack-navigator.md#presentation) option.
 - When `presentation` is set to `modal`, the screens behave like a modal, i.e. they have a bottom to top transition and may show part of the previous screen in the background.
 - Setting `presentation: 'modal'` on a group makes all the screens in the group modals, so to use non-modal transitions on other screens, we add another group with the default configuration.
 

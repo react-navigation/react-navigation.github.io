@@ -1,12 +1,14 @@
 ---
 title: Bottom Tabs meet Native
 authors: oskar
-tags: [tutorial, react-native-paper]
+tags: [tutorial]
 ---
 
 This is a guest post by Oskar Kwaśniewski, creator of `react-native-bottom-tabs`, a library exposing native tab primitives that integrates with React Navigation. If you like this guide, check out the `react-native-bottom-tabs` [documentation](https://callstackincubator.github.io/react-native-bottom-tabs/) for more!
 
 This blog post will explain the differences between the JavaScript Bottom Tabs navigator and provide a step-by-step guide for integrating React Navigation with the Native Bottom Tabs Navigator.
+
+<!--truncate-->
 
 ## Introduction
 
@@ -75,7 +77,7 @@ TabView can turn in to a side bar on tvOS, iPadOS and macOS. The `sidebarAdaptab
 
 ## Getting started
 
-To get started follow the installation instructions in the `react-native-bottom-tabs` [documentation](https://callstackincubator.github.io/react-native-bottom-tabs/docs/getting-started/quick-start.html).
+To get started follow the installation instructions in the `react-native-bottom-tabs` [documentation](https://oss.callstack.com/react-native-bottom-tabs/docs/getting-started/quick-start).
 
 Native Bottom Tabs Navigation resembles JavaScript Tabs API as closely as possible. Making your migration straightforward.
 
