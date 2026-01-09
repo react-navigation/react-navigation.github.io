@@ -77,7 +77,7 @@ TabView can turn in to a side bar on tvOS, iPadOS and macOS. The `sidebarAdaptab
 
 ## Getting started
 
-To get started follow the installation instructions in the `react-native-bottom-tabs` [documentation](https://callstackincubator.github.io/react-native-bottom-tabs/docs/getting-started/quick-start.html).
+To get started follow the installation instructions in the `react-native-bottom-tabs` [documentation](https://oss.callstack.com/react-native-bottom-tabs/docs/getting-started/quick-start).
 
 Native Bottom Tabs Navigation resembles JavaScript Tabs API as closely as possible. Making your migration straightforward.
 
