@@ -11,10 +11,7 @@ Sometimes we want to run side-effects when a screen is focused. A side effect ma
 
 To make this easier, the library exports a `useFocusEffect` hook:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="useFocusEffect hook" snack
+```js name="useFocusEffect hook" snack static2dynamic
 import * as React from 'react';
 import { View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -41,67 +38,19 @@ function HomeScreen() {
   return <View />;
 }
 
-const Tab = createBottomTabNavigator({
+const MyTabs = createBottomTabNavigator({
   screens: {
     Home: HomeScreen,
     Profile: ProfileScreen,
   },
 });
 
-const Navigation = createStaticNavigation(Tab);
+const Navigation = createStaticNavigation(MyTabs);
 
 export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="useFocusEffect hook" snack
-import * as React from 'react';
-import { View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-// codeblock-focus-start
-import { useFocusEffect } from '@react-navigation/native';
-
-function ProfileScreen() {
-  useFocusEffect(
-    React.useCallback(() => {
-      // Do something when the screen is focused
-      return () => {
-        // Do something when the screen is unfocused
-        // Useful for cleanup functions
-      };
-    }, [])
-  );
-
-  return <View />;
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  return <View />;
-}
-
-const Tab = createBottomTabNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 :::warning
 

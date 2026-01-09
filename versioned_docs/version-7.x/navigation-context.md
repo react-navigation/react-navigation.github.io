@@ -13,10 +13,7 @@ Most of the time, you won't use `NavigationContext` directly, as the provided `u
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Navigation context" snack
+```js name="Navigation context" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -48,7 +45,9 @@ function SomeComponent() {
       </Button>
     </View>
   );
+  // codeblock-focus-start
 }
+// codeblock-focus-end
 
 function ProfileScreen() {
   const navigation = useNavigation();
@@ -60,7 +59,7 @@ function ProfileScreen() {
   );
 }
 
-const Stack = createNativeStackNavigator({
+const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
   screens: {
     Home: HomeScreen,
@@ -68,7 +67,7 @@ const Stack = createNativeStackNavigator({
   },
 });
 
-const Navigation = createStaticNavigation(Stack);
+const Navigation = createStaticNavigation(RootStack);
 
 function App() {
   return <Navigation />;
@@ -76,66 +75,3 @@ function App() {
 
 export default App;
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Navigation context" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import { NavigationContext } from '@react-navigation/native';
-// codeblock-focus-end
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-function HomeScreen() {
-  return <SomeComponent />;
-}
-
-// codeblock-focus-start
-
-function SomeComponent() {
-  // We can access navigation object via context
-  const navigation = React.useContext(NavigationContext);
-  // codeblock-focus-end
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Some component inside HomeScreen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = React.useContext(NavigationContext);
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-    </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
-export default App;
-```
-
-</TabItem>
-</Tabs>

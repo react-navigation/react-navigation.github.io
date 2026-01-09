@@ -206,7 +206,6 @@ However, this is an anti-pattern. There are many reasons why this is a bad idea:
 - The same data is duplicated in multiple places. This can lead to bugs such as the profile screen showing outdated data even if the user object has changed after navigation.
 - Each screen that navigates to the `Profile` screen now needs to know how to fetch the user object - which increases the complexity of the code.
 - URLs to the screen (browser URL on the web, or deep links on native) will contain the user object. This is problematic:
-
   1. Since the user object is in the URL, it's possible to pass a random user object representing a user that doesn't exist or has incorrect data in the profile.
   2. If the user object isn't passed or improperly formatted, this could result in crashes as the screen won't know how to handle it.
   3. The URL can become very long and unreadable.
