@@ -32,6 +32,7 @@ export default () => {
       ref={navigationRef}
       onReady={() => {
         routeNameRef.current = navigationRef.getCurrentRoute().name;
+
         // Replace the line below to add the tracker from a mobile analytics SDK
         await trackScreenView(routeNameRef.current);
       }}
