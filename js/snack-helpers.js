@@ -150,7 +150,7 @@ function appendSnackLink() {
     let templateId = samp.getAttribute('id');
 
     let link = document.createElement('a');
-    link.className = 'snack-sample-link';
+    link.className = 'code-block-snack-link';
     link.dataset.snack = true;
     link.target = '_blank';
 
