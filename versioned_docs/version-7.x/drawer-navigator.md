@@ -329,7 +329,7 @@ Example:
    drawerItemStyle: {
     backgroundColor: '#9dd3c8',
     borderColor: 'black',
-    orderWidth: 2,
+    borderWidth: 2,
     opacity: 0.6,
   },
 ```
