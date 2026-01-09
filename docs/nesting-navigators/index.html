@@ -22,7 +22,7 @@
 <script src="/js/snack-helpers.js"></script>
 <script src="/js/toc-fixes.js"></script>
 <script src="/js/video-playback.js"></script><link rel="stylesheet" href="/assets/css/styles.25d25572.css">
-<script src="/assets/js/runtime~main.f0b68818.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.27f13256.js" defer="defer"></script>
 <script src="/assets/js/main.e5abf6f7.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -49,7 +49,8 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-nesting-navigators-affects-the-behaviour">How nesting navigators affects the behaviour<a href="#how-nesting-navigators-affects-the-behaviour" class="hash-link" aria-label="Direct link to How nesting navigators affects the behaviour" title="Direct link to How nesting navigators affects the behaviour" translate="no">​</a></h2>
 <p>When nesting navigators, there are some things to keep in mind:</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="each-navigator-keeps-its-own-navigation-history">Each navigator keeps its own navigation history<a href="#each-navigator-keeps-its-own-navigation-history" class="hash-link" aria-label="Direct link to Each navigator keeps its own navigation history" title="Direct link to Each navigator keeps its own navigation history" translate="no">​</a></h3>
-<p>For example, when you press the back button when inside a screen in a nested stack navigator, it&#x27;ll go back to the previous screen inside the nested stack even if there&#x27;s another navigator as the parent.</p>
+<p>For example, lets say you have a stack navigator (lets call it <code>StackA</code>) nested within another navigator (lets call it <code>NavigatorB</code>). When you press the back button in a screen inside <code>StackA</code>, it will go to the previous screen of the closest ancestor navigator of the screen - i.e. <code>StackA</code>.</p>
+<p>If the current screen is the first screen in <code>StackA</code>, then pressing back will go to the previous screen in <code>NavigatorB</code>.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="each-navigator-has-its-own-options">Each navigator has its own options<a href="#each-navigator-has-its-own-options" class="hash-link" aria-label="Direct link to Each navigator has its own options" title="Direct link to Each navigator has its own options" translate="no">​</a></h3>
 <p>For example, specifying a <code>title</code> option in a screen nested in a child navigator won&#x27;t affect the title shown in a parent navigator.</p>
 <p>If you want to achieve this behavior, see the guide for <a class="" href="/docs/screen-options-resolution#setting-parent-screen-options-based-on-child-navigators-state">screen options with nested navigators</a>. this could be useful if you are rendering a tab navigator inside a stack navigator and want to show the title of the active screen inside the tab navigator in the header of the stack navigator.</p>
