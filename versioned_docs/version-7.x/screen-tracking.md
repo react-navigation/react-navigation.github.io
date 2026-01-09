@@ -181,3 +181,41 @@ export default function App() {
 
 </TabItem>
 </Tabs>
+
+:::note
+
+If you are building a library that wants to provide screen tracking integration with React Navigation, you can accept a [`ref`](navigation-container.md#ref) to the navigation container and use the [`ready`](navigation-container.md#ready) and [`state`](navigation-container.md#state) events instead of `onReady` and `onStateChange` props to keep your logic self-contained.
+
+:::
+
+## Libraries with built-in integration
+
+Here are some popular telemetry and analytics libraries that have built-in integration with React Navigation for screen tracking:
+
+### PostHog
+
+Open source product analytics platform with self-hosted and cloud-hosted options. [Learn more](https://posthog.com/docs/libraries/react-native).
+
+### Embrace
+
+Observability platform for mobile and web, powered by OpenTelemetry. [Learn more](https://embrace.io/docs/react-native/features/navigation/?packages=react-navigation%2Fnative).
+
+### Vexo
+
+Analytics for web and React Native. [Learn more](https://docs.vexo.co/react-native-guide/integration).
+
+### Datadog
+
+Real User Monitoring and error tracking platform. [Learn more](https://docs.datadoghq.com/real_user_monitoring/application_monitoring/react_native/integrated_libraries/).
+
+### Sentry
+
+Application performance monitoring and error tracking platform. [Learn more](https://docs.sentry.io/platforms/react-native/tracing/instrumentation/react-navigation/).
+
+### Segment
+
+Customer data platform that supports React Native. [Learn more](https://www.twilio.com/docs/segment/connections/sources/catalog/libraries/mobile/react-native#automatic-screen-tracking).
+
+### Luciq
+
+Mobile observability and experience platform. [Learn more](https://docs.luciq.ai/docs/react-native-repro-steps#react-navigation).

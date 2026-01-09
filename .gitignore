@@ -17,3 +17,6 @@ i18n/*
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# AI
+.claude/

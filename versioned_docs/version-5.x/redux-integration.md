@@ -22,7 +22,7 @@ export default function App() {
 
 Notice that we wrap our components in a `Provider` like we'd normally do with `react-redux`. Ta da! Now feel free to use `connect` throughout your app.
 
-### Use a component that is `connect`ed in `options`
+## Use a component that is `connect`ed in `options`
 
 Create a component, `connect` it to the store, then use that component in the `title`.
 
@@ -44,7 +44,7 @@ const CounterContainer = connect((state) => ({ value: state.count }))(Counter);
 />
 ```
 
-### Pass the state you care about as a param to the screen
+## Pass the state you care about as a param to the screen
 
 If the value isn't expected to change, you can just pass it from a connected component to the other screen as a param.
 

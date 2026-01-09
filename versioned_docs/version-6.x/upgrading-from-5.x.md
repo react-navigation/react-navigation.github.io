@@ -8,7 +8,7 @@ React Navigation 6 keeps the same API as React Navigation 5, however there are s
 
 This guide lists all the changes and new features that you need to keep in mind when upgrading.
 
-### Minimum Requirements
+## Minimum Requirements
 
 React Navigation 6 requires newer versions of following libraries:
 
@@ -50,7 +50,6 @@ The upgrade guide includes both new features as well as breaking changes across 
 The following breaking changes may break your app if you're using the related APIs. So you may need to change your code when upgrading.
 
 - General changes: These changes affect all React Navigation users.
-
   - [Params are now overwritten on navigation instead of merging](#params-are-now-overwritten-on-navigation-instead-of-merging)
   - [Dropped `dangerously` from `dangerouslyGetParent` and `dangerouslyGetState`](#dropped-dangerously-from-dangerouslygetparent-and-dangerouslygetstate)
   - [No more `state` property on the `route` prop](#no-more-state-property-on-the-route-prop)
@@ -60,7 +59,6 @@ The following breaking changes may break your app if you're using the related AP
   - [Stricter types for TypeScript](#stricter-types-for-typescript)
 
 - Stack Navigator: These changes affect users of `@react-navigation/stack` package.
-
   - [Custom header now uses `'headerMode: screen'` by default](#custom-header-now-uses-headermode-screen-by-default)
   - [Header now uses flexbox](#header-now-uses-flexbox)
   - [Props passed to custom header are streamlined](#props-passed-to-custom-header-are-streamlined)
@@ -68,19 +66,15 @@ The following breaking changes may break your app if you're using the related AP
   - [Some exports are now moved to the element library](#some-exports-are-now-moved-to-the-element-library)
 
 - Bottom Tab Navigator: These changes affect users of `@react-navigation/bottom-tabs` package.
-
   - [A header is shown by default in tab screens](#a-header-is-shown-by-default-in-tab-screens)
 
 - Material Top Tab Navigator: These changes affect users of `@react-navigation/material-top-tabs` package.
-
   - [Material Top Tabs now uses `ViewPager` instead of Reanimated and Gesture Handler](#material-top-tabs-now-uses-viewpager-instead-of-reanimated-and-gesture-handler)
 
 - Material Bottom Tab Navigator: These changes affect users of `@react-navigation/material-bottom-tabs` package.
-
   - [Material Bottom Tabs now uses `react-native-safe-area-context` to apply safe area insets](#material-bottom-tabs-now-uses-react-native-safe-area-context-to-apply-safe-area-insets)
 
 - Drawer Navigator: These changes affect users of `@react-navigation/drawer` package.
-
   - [A header is shown by default in drawer screens](#a-header-is-shown-by-default-in-drawer-screens)
   - [Slide animation is now default on iOS](#slide-animation-is-now-default-on-ios)
   - [Drawer status is now a string instead of a boolean](#drawer-status-is-now-a-string-instead-of-a-boolean)
@@ -91,26 +85,22 @@ The following breaking changes may break your app if you're using the related AP
 The following changes will show deprecation warnings if you're using the related APIs, but your code will continue to work and may be updated at a later date.
 
 - Stack Navigator: These changes affect users of `@react-navigation/stack` package.
-
   - [`headerMode="none"` is removed in favor of `headerShown: false`](#headermodenone-is-removed-in-favor-of-headershown-false)
   - [`headerMode` is moved to options](#headermode-is-moved-to-options)
   - [`mode="modal"` is removed in favor of `presentation: 'modal'`](#modemodal-is-removed-in-favor-of-presentation-modal)
   - [`keyboardHandlingEnabled` is moved to options](#keyboardhandlingenabled-is-moved-to-options)
 
 - Bottom Tab Navigator: These changes affect users of `@react-navigation/bottom-tabs` package.
-
   - [The `tabBarOptions` prop is removed in favor of more flexible `options` for bottom tabs](#the-tabbaroptions-prop-is-removed-in-favor-of-more-flexible-options-for-bottom-tabs)
   - [The `tabBarVisible` option is no longer present](#the-tabbarvisible-option-is-no-longer-present)
   - [The `lazy` prop is moved to `lazy` option for per-screen configuration for bottom tabs](#the-lazy-prop-is-moved-to-lazy-option-for-per-screen-configuration-for-bottom-tabs)
 
 - Material Top Tab Navigator: These changes affect users of `@react-navigation/material-top-tabs` package.
-
   - [The `tabBarOptions` prop is removed in favor of more flexible `options` for material top tabs](#the-tabbaroptions-prop-is-removed-in-favor-of-more-flexible-options-for-material-top-tabs)
   - [The `lazy` prop is moved to `lazy` option for per-screen configuration for material top tabs](#the-lazy-prop-is-moved-to-lazy-option-for-per-screen-configuration-for-material-top-tabs)
   - [The `lazyPlaceholder` prop is moved to `lazyPlaceholder` option for per-screen configuration for material top tabs](#the-lazyplaceholder-prop-is-moved-to-lazyplaceholder-option-for-per-screen-configuration-for-material-top-tabs)
 
 - Drawer Navigator: These changes affect users of `@react-navigation/drawer` package.
-
   - [The `drawerContentOptions` prop is removed in favor of more flexible `options` for drawer](#the-drawercontentoptions-prop-is-now-more-flexible-by-moving-to-options-for-drawer)
   - [The `lazy` prop is moved to `lazy` option for per-screen configuration for drawer](#the-lazy-prop-is-moved-to-lazy-option-for-per-screen-configuration-for-bottom-tabs)
 
@@ -119,12 +109,10 @@ The following changes will show deprecation warnings if you're using the related
 To make upgrading easier, it is possible to mix packages from the `6.x.x` and `5.x.x` version ranges. However, there are a few things you need to keep in mind:
 
 - If you're using `@react-navigation/native@5.x.x` and navigators with `6.x.x` version:
-
   - You need to have latest `5.x.x` version of `@react-navigation/native` package installed which includes some backported APIs.
   - You don't need to worry about any of the breaking changes under "General changes" section. They are only applicable when you upgrade `@react-navigation/native` package.
 
 - If you're using `@react-navigation/native@6.x.x` and any navigators with `5.x.x` version:
-
   - Make sure to pay attention to the breaking changes under "General changes" section. Everything else should work as expected.
 
 In both cases, if you use TypeScript, you may encounter type errors when using mixing `5.x.x` and `6.x.x` due to changes in types. We suggest ignoring those errors until you can upgrade your packages.

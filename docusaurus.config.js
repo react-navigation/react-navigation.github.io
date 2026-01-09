@@ -1,10 +1,9 @@
 import remarkNpm2Yarn from '@docusaurus/remark-plugin-npm2yarn';
 import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.mjs';
+import rehypeStaticToDynamic from './src/plugins/rehype-static-to-dynamic.mjs';
+import rehypeVideoAspectRatio from './src/plugins/rehype-video-aspect-ratio.mjs';
 
 export default {
-  future: {
-    experimental_faster: true,
-  },
   title: 'React Navigation',
   tagline: 'Routing and navigation for your React Native apps',
   url: 'https://reactnavigation.org/',
@@ -12,9 +11,14 @@ export default {
   favicon: 'img/favicon.ico',
   organizationName: 'react-navigation',
   projectName: 'react-navigation.github.io',
+  onBrokenLinks: 'throw',
   onBrokenAnchors: 'throw',
-  onBrokenMarkdownLinks: 'throw',
-  scripts: ['/js/snack-helpers.js', '/js/toc-fixes.js'],
+  onDuplicateRoutes: 'throw',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
+  },
   themeConfig: {
     colorMode: {
       defaultMode: 'light',
@@ -22,8 +26,8 @@ export default {
       respectPrefersColorScheme: true,
     },
     prism: {
-      theme: require('prism-react-renderer').themes.github,
-      darkTheme: require('prism-react-renderer').themes.dracula,
+      theme: require('prism-react-renderer').themes.oneLight,
+      darkTheme: require('prism-react-renderer').themes.oneDark,
       magicComments: [
         {
           className: 'theme-code-block-highlighted-line',
@@ -140,6 +144,11 @@ export default {
             'https://github.com/react-navigation/react-navigation.github.io/edit/main/',
           includeCurrentVersion: false,
           lastVersion: '7.x',
+          versions: {
+            '7.x': {
+              badge: false,
+            },
+          },
           breadcrumbs: false,
           sidebarCollapsed: false,
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
@@ -148,6 +157,8 @@ export default {
               rehypeCodeblockMeta,
               { match: { snack: true, lang: true, tabs: true } },
             ],
+            [rehypeVideoAspectRatio, { staticDir: 'static' }],
+            rehypeStaticToDynamic,
           ],
         },
         blog: {
@@ -164,5 +175,34 @@ export default {
         },
       },
     ],
+  ],
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossOrigin: 'true',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet',
+      },
+    },
+  ],
+  scripts: [
+    '/js/snack-helpers.js',
+    '/js/toc-fixes.js',
+    '/js/video-playback.js',
   ],
 };

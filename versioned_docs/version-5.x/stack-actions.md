@@ -8,7 +8,7 @@ sidebar_label: StackActions
 
 The following actions are supported:
 
-### replace
+## replace
 
 The `replace` action allows to replace a route in the [navigation state](navigation-state.md). It takes the following arguments:
 
@@ -45,7 +45,7 @@ navigation.dispatch({
 
 If the `source` property is explicitly set to `undefined`, it'll replace the focused route.
 
-### push
+## push
 
 The `push` action adds a route on top of the stack and navigates forward to it. This differs from `navigate` in that `navigate` will pop back to earlier in the stack if a route of the given name is already present there. `push` will always add on top, so a route can be present multiple times.
 
@@ -62,7 +62,7 @@ const pushAction = StackActions.push('Profile', { user: 'Wojtek' });
 navigation.dispatch(pushAction);
 ```
 
-### pop
+## pop
 
 The `pop` action takes you back to a previous screen in the stack. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
 
@@ -76,7 +76,7 @@ const popAction = StackActions.pop(1);
 navigation.dispatch(popAction);
 ```
 
-### popToTop
+## popToTop
 
 The `popToTop` action takes you back to the first screen in the stack, dismissing all the others. It's functionally identical to `StackActions.pop({n: currentIndex})`.
 
