@@ -29,7 +29,7 @@ There are few properties present in every navigation state object:
 - `routeNames` - Name of the screens defined in the navigator. This is an unique array containing strings for each screen.
 - `routes` - List of route objects (screens) which are rendered in the navigator. It also represents the history in a stack navigator. There should be at least one item present in this array.
 - `index` - Index of the focused route object in the `routes` array.
-- `history` - A list of visited items. This is an optional property and not present in all navigators. For example, it's only present in tab and drawer navigators in the core. The shape of the items in the `history` array can vary depending on the navigator. There should be at least one item present in this array.
+- `history` - An optional list of visited items. See [History stack](#history-stack) for more details.
 - `stale` - A navigation state is assumed to be stale unless the `stale` property is explicitly set to `false`. This means that the state object needs to be ["rehydrated"](#stale-state-objects).
 
 Each route object in a `routes` array may contain the following properties:
@@ -67,30 +67,60 @@ const state = {
 };
 ```
 
-It's important to note that even if there's a nested navigator, the `state` property on the `route` object is not added until a navigation happens, hence it's not guaranteed to exist.
+It's important to note that even if there's a nested navigator, the `state` property on the `route` object is not added until a navigation happens, hence it's not guaranteed to exist, or maybe [stale](#stale-state-objects).
+
+## History stack
+
+In React Navigation, each navigator may maintain a history stack to keep track of visited entries. This is used when navigating back, syncing with browser history on the Web, etc.
+
+Unlike Web, which has a linear history stack, React Navigation uses a nested history stack mirroring mobile navigation patterns. A parent navigator maintains its own history stack, while each child navigator also maintains its own history stack. When navigating back, it goes back in the history stack of the navigator where the "go back" action was triggered - and if that stack is empty, it bubbles up to the parent navigator's history stack. Any sibling navigators' history stacks are not affected.
+
+The history stack for a navigator is determined from `state.history` if present, otherwise `state.routes` is used.
+
+The content and shape of items in the `state.history` array can vary depending on the navigator. There should be at least one item present in this array. Among built-in navigators, this property is present only in tab and drawer navigators. For example, the `history` array in a drawer navigator looks like this:
+
+```js
+const state = {
+  history: [
+    { type: 'route', key: 'home-1' },
+    { type: 'route', key: 'settings-1' },
+    { type: 'drawer', status: 'open' },
+  ],
+
+  // ...
+};
+```
+
+This array is populated based on the `backBehavior` prop of the tab or drawer navigators:
+
+- `firstRoute` - the first route defined in the navigator and the focused route
+- `initialRoute` - the initial route defined in the navigator and the focused route
+- `order` - the focused route and any routes defined before it in the navigator, in the order they are defined
+- `history` - deduplicated list of previously visited routes in the navigator and the focused route
+- `fullHistory` - full list of previously visited routes in the navigator and the focused route
+- `none` - only the focused route
+
+[Custom routers](custom-routers.md) may also add different types of items to the `history` array to represent different kinds of history entries.
 
 ## Stale state objects
 
-Earlier there was a mention of `stale` property in the navigation state. If the `stale` property is set to `true` or is missing, the state is assumed to be stale. A stale navigation state means that the state object may be partial, such as missing keys or routes, contain invalid routes, or may not be up-to-date. A stale state can be a result of [deep linking](deep-linking.md), r[estoring from a persisted state](state-persistence.md) etc.
+Earlier there was a mention of `stale` property in the navigation state. If the `stale` property is set to `true` or is missing, the state is assumed to be stale. Typically this is not something to worry about unless you're using the navigation state object directly for advanced use-cases.
 
-If you're accessing the navigation state of a navigator using the built-in APIs such as [`useNavigationState()`](use-navigation-state.md), [`navigation.getState()`](navigation-object.md#getstate) etc., the state object is guaranteed to be complete and not stale. However, if you try to access a child navigator's state with the `state` property on the `route` object, it maybe a stale or partial state object. So it's not recommended to use this property directly.
+A stale navigation state means that the state object may be partial, such as missing keys or routes, contain invalid routes, or may not be up-to-date. A stale state can be a result of [deep linking](deep-linking.md), [restoring from a persisted state](state-persistence.md) etc.
 
-Using the [`ref.getRootState()`](navigation-container.md#getrootstate) API will always return a complete and up-to-date state object for the current navigation tree, including any nested child navigators.
+The state object is guaranteed to not be stale when accessing it with built-in APIs such as:
+
+- Navigator's state with [`useNavigationState()`](use-navigation-state.md) or [`navigation.getState()`](navigation-object.md#getstate) - not including child navigators.
+- Complete state of the navigation tree with [`ref.getRootState()`](navigation-container.md#getrootstate) including root navigator and all child navigators.
+-
+
+However, if you try to access a child navigator's state with the `state` property on the [`route`](route-object.md) object, it maybe a stale or partial state object. So it's not recommended to use this property directly.
 
 When React Navigation encounters stale or partial state, it will automatically fix it up before using it. This includes adding missing keys, removing any invalid routes, ensuring the `index` is correct etc. This process of fixing stale state is called **rehydration**. If you're writing a [custom router](custom-routers.md), the `getRehydratedState` method lets you write custom rehydration logic to fix up state objects.
 
-For example, `index` should be the last route in a stack, and if a different value was specified, React Navigation fixes it. For example, if you wanted to reset your app's navigation state to have it display the `Profile` route, and have the `Home` route displayed upon going back, and dispatched the following action:
+This feature comes handy when doing operations such as [reset](navigation-actions.md#reset), [providing a initial state](navigation-container.md#initialstate) etc., as you can safely omit many properties from the navigation state object and relying on React Navigation to add those properties for you, making your code simpler.
 
-```js
-navigation.reset({
-  index: 0,
-  routes: [{ name: 'Home' }, { name: 'Profile' }],
-});
-```
-
-React Navigation would correct `index` to `1` before the routes are displayed.
-
-This feature comes handy when doing operations such as [reset](navigation-actions.md#reset), [providing a initial state](navigation-container.md#initialstate) etc., as you can safely omit many properties from the navigation state object and relying on React Navigation to add those properties for you, making your code simpler. For example, you can only provide a `routes` array without any keys and React Navigation will automatically add everything that's needed to make it work:
+For example, you can only provide a state without `index`, `keys` etc. only with a `routes` array without any keys and React Navigation will automatically add everything that's needed to make it work:
 
 ```js
 const state = {
@@ -120,7 +150,7 @@ It's also possible to provide invalid data such as non-existent screens and it'l
 
 :::tip
 
-If you want React Navigation to fix invalid state, you need to make sure that you don't have `stale: false` in the state object. State objects with `stale: false` are assumed to be valid state objects and React Navigation won't attempt to fix them.
+If you want React Navigation to fix invalid state, make sure that you don't have `stale: false` in the state object. State objects with `stale: false` are assumed to be valid state objects and React Navigation won't attempt to fix them. If `stale` is missing or set to `true`, React Navigation will always try to rehydrate the state object.
 
 :::
 

@@ -44,9 +44,9 @@ npm install @react-navigation/elements
 
 `createStaticNavigation` is a function that takes the navigator defined earlier and returns a component that can be rendered in the app. It's only called once in the app. Usually, we'd render the returned component at the root of our app, which is usually the component exported from `App.js`, `App.tsx` etc., or used with `AppRegistry.registerComponent`, `Expo.registerRootComponent` etc.
 
-```js name="Native Stack Example" snack
-// In App.js in a new project
+To create a basic native stack navigator with a single screen, we can add the following code in the entry file of our app (e.g., `App.tsx`, `index.tsx` etc.):
 
+```js name="Native Stack Example" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -86,9 +86,9 @@ In a typical React Native app, the `createStaticNavigation` function should be o
 
 `NavigationContainer` is a component that manages our navigation tree and contains the [navigation state](navigation-state.md). This component must wrap all the navigators in the app. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`, `App.tsx` etc., or used with `AppRegistry.registerComponent`, `Expo.registerRootComponent` etc.
 
-```js name="Native Stack Example" snack
-// In App.js in a new project
+To create a basic native stack navigator with a single screen, we can add the following code in the entry file of our app (e.g., `App.tsx`, `index.tsx` etc.):
 
+```js name="Native Stack Example" snack
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';

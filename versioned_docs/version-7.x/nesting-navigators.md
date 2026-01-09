@@ -177,7 +177,9 @@ When nesting navigators, there are some things to keep in mind:
 
 ### Each navigator keeps its own navigation history
 
-For example, when you press the back button when inside a screen in a nested stack navigator, it'll go back to the previous screen inside the nested stack even if there's another navigator as the parent.
+For example, lets say you have a stack navigator (lets call it `StackA`) nested within another navigator (lets call it `NavigatorB`). When you press the back button in a screen inside `StackA`, it will go to the previous screen of the closest ancestor navigator of the screen - i.e. `StackA`.
+
+If the current screen is the first screen in `StackA`, then pressing back will go to the previous screen in `NavigatorB`.
 
 ### Each navigator has its own options
 
@@ -1047,13 +1049,13 @@ function RootStack() {
 
 ## Best practices when nesting
 
-We recommend to reduce nesting navigators to minimal. Try to achieve the behavior you want with as little nesting as possible. Nesting has many downsides:
+We recommend reducing navigator nesting to a minimum. Try to achieve the behavior you want with as little nesting as possible. Nesting has many downsides:
 
 - It results in deeply nested view hierarchy which can cause memory and performance issues in lower end devices
-- Nesting same type of navigators (e.g. tabs inside tabs, drawer inside drawer etc.) might lead to a confusing UX
+- Nesting the same type of navigator (e.g. tabs inside tabs, drawer inside drawer etc.) might lead to a confusing UX
 - With excessive nesting, code becomes difficult to follow when navigating to nested screens, configuring deep link etc.
 
-Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate group of screens for organization, instead of using separate navigators, you can use the [`Group`](group.md) component for dynamic configuration or [`groups` property](static-configuration.md#groups) for static configuration.
+Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate groups of screens for organization, instead of using separate navigators, you can use the [`Group`](group.md) component for dynamic configuration or [`groups` property](static-configuration.md#groups) for static configuration.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
