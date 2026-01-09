@@ -642,6 +642,8 @@ samp {
 }
 
 .code-block-footer {
+  height: 2.5em;
+  padding: 0 var(--ifm-pre-padding);
   margin-bottom: 25px;
   margin-top: -8px;
   justify-content: space-between;
@@ -652,13 +654,16 @@ samp {
   border: none;
   background: none;
   font-size: inherit;
-  margin: 0;
   cursor: pointer;
 }
 
 .code-block-expand,
 .code-block-snack-link {
-  padding: calc(var(--ifm-pre-padding) / 3) var(--ifm-pre-padding);
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  height: 100%;
 }
 
 .code-block-snack-link {
