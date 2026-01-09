@@ -230,25 +230,27 @@ export default function Pre({
         target="_blank"
         href={url.href}
       >
-        Try on <b>Snack</b>
-        <svg
-          width="14px"
-          height="14px"
-          viewBox="0 0 16 16"
-          style={{ verticalAlign: '-1px' }}
-        >
-          <g stroke="none" strokeWidth="1" fill="none">
-            <polyline
-              stroke="currentColor"
-              points="8.5 0.5 15.5 0.5 15.5 7.5"
-            />
-            <path d="M8,8 L15.0710678,0.928932188" stroke="currentColor" />
-            <polyline
-              stroke="currentColor"
-              points="9.06944444 3.5 1.5 3.5 1.5 14.5 12.5 14.5 12.5 6.93055556"
-            />
-          </g>
-        </svg>
+        <span>
+          Try on <b>Snack</b>
+          <svg
+            width="14px"
+            height="14px"
+            viewBox="0 0 16 16"
+            style={{ verticalAlign: '-1px' }}
+          >
+            <g stroke="none" strokeWidth="1" fill="none">
+              <polyline
+                stroke="currentColor"
+                points="8.5 0.5 15.5 0.5 15.5 7.5"
+              />
+              <path d="M8,8 L15.0710678,0.928932188" stroke="currentColor" />
+              <polyline
+                stroke="currentColor"
+                points="9.06944444 3.5 1.5 3.5 1.5 14.5 12.5 14.5 12.5 6.93055556"
+              />
+            </g>
+          </svg>
+        </span>
       </a>
     );
   }
