@@ -24,7 +24,7 @@ It's important to highlight the `navigation` prop is _not_ passed in to _all_ co
 
 > `setParams`/`setOptions` etc. should only be called in `useEffect`/`useLayoutEffect`/`componentDidMount`/`componentDidUpdate` etc. Not during render or in constructor.
 
-### Navigator-dependent functions
+## Navigator-dependent functions
 
 There are several additional functions present on `navigation` prop based on the kind of the current navigator.
 

@@ -54,12 +54,6 @@ export default [
   },
   {
     avatarUrl:
-      'https://avatars.githubusercontent.com/u/12868063?u=c6afaa685373053ab058c7899e2afe806920b038&v=4',
-    username: 'monkey0722',
-    name: 'Taku Kobachi',
-  },
-  {
-    avatarUrl:
       'https://avatars.githubusercontent.com/u/15199031?u=5a82dcb32237282ff576c0446567a1e2fe49b868&v=4',
     username: 'mrousavy',
     name: 'Marc Rousavy',

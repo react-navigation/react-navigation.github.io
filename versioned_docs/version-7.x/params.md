@@ -22,7 +22,7 @@ We recommend that the params you pass are JSON-serializable. That way, you'll be
 
 :::
 
-```js name="Passing params" snack
+```js name="Passing params" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -73,6 +73,7 @@ function DetailsScreen({ route }) {
           () =>
             // highlight-start
             navigation.push('Details', {
+              // Randomly generate an ID for demonstration purposes
               itemId: Math.floor(Math.random() * 100),
             })
           // highlight-end
@@ -143,7 +144,7 @@ Screens can also update their params, like they can update their state. The `nav
 
 Basic usage:
 
-```js name="Updating params" snack
+```js name="Updating params" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -207,7 +208,7 @@ Params aren't only useful for passing some data to a new screen, but they can al
 
 To achieve this, you can use the `popTo` method to go back to the previous screen as well as pass params to it:
 
-```js name="Passing params back" snack
+```js name="Passing params back" snack static2dynamic
 import * as React from 'react';
 import { Text, View, TextInput } from 'react-native';
 import {
@@ -293,7 +294,7 @@ Here, after you press "Done", the home screen's `route.params` will be updated t
 
 If you have nested navigators, you need to pass params a bit differently. For example, say you have a navigator inside the `More` screen and want to pass params to the `Settings` screen inside that navigator. Then you can pass params as the following:
 
-```js name="Passing params to nested screen" snack
+```js name="Passing params to nested screen" snack static2dynamic
 import * as React from 'react';
 import { Text, View, TextInput } from 'react-native';
 import {
@@ -306,12 +307,12 @@ import { Button } from '@react-navigation/elements';
 
 function SettingsScreen({ route }) {
   const navigation = useNavigation();
-  const { user } = route.params;
+  const { userId } = route.params;
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings Screen</Text>
-      <Text>userParam: {JSON.stringify(user)}</Text>
+      <Text>User ID: {JSON.stringify(userId)}</Text>
       <Button onPress={() => navigation.navigate('Profile')}>
         Go to Profile
       </Button>
@@ -339,7 +340,7 @@ function HomeScreen() {
             // codeblock-focus-start
             navigation.navigate('More', {
               screen: 'Settings',
-              params: { user: 'jane' },
+              params: { userId: 'jane' },
             })
           // codeblock-focus-end
         }
@@ -386,9 +387,14 @@ You should avoid using these param names in your code unless navigating to a scr
 
 ## What should be in params
 
-Params are essentially options for a screen. They should contain the minimal data required to show a screen, nothing more. If the data is used by multiple screens, it should be in a global store or global cache. Params is not designed for state management.
+Params serve two main purposes:
 
-You can think of the route object as a URL. If your screen had a URL, what should be in the URL? The same principles apply to params. Think of visiting a shopping website; when you see product listings, the URL usually contains category name, type of sort, any filters etc., not the actual list of products displayed on the screen.
+- Information required to identify and display data on a screen (e.g. id of an object to be displayed on the screen)
+- State specific to a screen (e.g. sort order, filters, page numbers etc. that can also be changed on the screen)
+
+Params should contain the minimal information required to show a screen, nothing more. The actual data (e.g. user objects) should be in a global store or global cache.
+
+You can think of the route object as a URL. The same principles apply to params. Think of visiting a shopping website; when you see product listings, the URL usually contains category name, type of sort, any filters etc., not the actual list of products displayed on the screen.
 
 For example, say if you have a `Profile` screen. When navigating to it, you might be tempted to pass the user object in the params:
 
@@ -425,12 +431,10 @@ Now, you can use the passed `userId` to grab the user from your global cache or 
 
 Some examples of what should be in params are:
 
-1. IDs such as user id, item id etc., e.g. `navigation.navigate('Profile', { userId: 'Jane' })`
-2. Params for sorting, filtering data etc. when you have a list of items, e.g. `navigation.navigate('Feeds', { sortBy: 'latest' })`
-3. Timestamps, page numbers or cursors for pagination, e.g. `navigation.navigate('Chat', { beforeTime: 1603897152675 })`
-4. Data to fill inputs on a screen to compose something, e.g. `navigation.navigate('ComposeTweet', { title: 'Hello world!' })`
-
-In essence, pass the least amount of data required to identify a screen in params, for a lot of cases, this simply means passing the ID of an object instead of passing a full object. Keep your application data separate from the navigation state.
+- IDs such as user id, item id etc., e.g. `navigation.navigate('Profile', { userId: 'Jane' })`
+- State for sorting, filtering data etc. when you have a list of items, e.g. `navigation.navigate('Feeds', { sortBy: 'latest' })`
+- Timestamps, page numbers or cursors for pagination, e.g. `navigation.navigate('Chat', { beforeTime: 1603897152675 })`
+- Data to fill inputs on a screen to compose something, e.g. `navigation.navigate('ComposeTweet', { title: 'Hello world!' })`
 
 ## Summary
 
@@ -438,5 +442,7 @@ In essence, pass the least amount of data required to identify a screen in param
 - You can read the params through [`route.params`](route-object.md) inside a screen
 - You can update the screen's params with [`navigation.setParams`](navigation-object.md#setparams) or [`navigation.replaceParams`](navigation-object.md#replaceparams)
 - Initial params can be passed via the [`initialParams`](screen.md#initial-params) prop on `Screen` or in the navigator config
-- Params should contain the minimal data required to show a screen, nothing more
+- State such as sort order, filters etc. should be kept in params so that the state is reflected in the URL and can be shared/bookmarked.
+- Params should contain the least amount of data required to identify a screen; for most cases, this means passing the ID of an object instead of passing a full object.
+- Don't keep application specific data or cached data in params; instead, use a global store or cache.
 - Some [param names are reserved](#reserved-param-names) by React Navigation and should be avoided

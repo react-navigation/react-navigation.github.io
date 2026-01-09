@@ -9,31 +9,37 @@
     "serve": "docusaurus serve",
     "swizzle": "docusaurus swizzle",
     "deploy": "DEPLOYMENT_BRANCH=gh-pages docusaurus deploy",
+    "test": "node --test --test-reporter=@voxpelli/node-test-pretty-reporter",
     "crowdin-upload": "crowdin upload sources --auto-update -b main",
     "crowdin-download": "crowdin download -b main",
-    "fetch-sponsors": "node scripts/fetch-sponsors.js"
+    "fetch-sponsors": "node scripts/fetch-sponsors.js && prettier --write src/data/sponsors.js"
   },
   "dependencies": {
-    "@docusaurus/core": "3.6.1",
-    "@docusaurus/faster": "3.6.1",
-    "@docusaurus/plugin-client-redirects": "3.6.1",
-    "@docusaurus/plugin-google-analytics": "3.6.1",
-    "@docusaurus/preset-classic": "3.6.1",
-    "@docusaurus/remark-plugin-npm2yarn": "3.6.1",
-    "@octokit/graphql": "^7.1.0",
-    "@react-navigation/core": "^7.0.4",
+    "@docusaurus/core": "3.9.2",
+    "@docusaurus/faster": "3.9.2",
+    "@docusaurus/plugin-client-redirects": "3.9.2",
+    "@docusaurus/plugin-google-analytics": "3.9.2",
+    "@docusaurus/preset-classic": "3.9.2",
+    "@docusaurus/remark-plugin-npm2yarn": "3.9.2",
+    "@octokit/graphql": "^9.0.3",
+    "@react-navigation/core": "^7.13.5",
+    "dedent": "^1.7.0",
     "escape-html": "^1.0.3",
     "mkdirp": "^3.0.1",
     "netlify-plugin-cache": "^1.0.3",
-    "prism-react-renderer": "^2.4.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "prism-react-renderer": "^2.4.1",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
     "react-simple-code-editor": "^0.14.1"
   },
   "devDependencies": {
-    "markdownlint": "^0.36.1",
-    "markdownlint-cli2": "^0.14.0",
-    "prettier": "^3.3.3"
+    "@babel/types": "^7.28.5",
+    "@ffprobe-installer/ffprobe": "^2.1.2",
+    "@voxpelli/node-test-pretty-reporter": "^1.1.2",
+    "markdownlint": "^0.40.0",
+    "markdownlint-cli2": "^0.19.1",
+    "prettier": "^3.7.4",
+    "recast": "^0.23.11"
   },
   "resolutions": {
     "@rspack/core": "1.0.14"

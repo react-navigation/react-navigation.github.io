@@ -55,8 +55,8 @@
 .mainText {
   font-size: 4.375rem;
   color: var(--ifm-home-color-text);
-  font-weight: 900;
-  margin-bottom: 0;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
 }
 
 .subText {
