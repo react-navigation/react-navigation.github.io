@@ -237,7 +237,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 function App() {
   const linking = {
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Home: 'feed/:sort',
@@ -268,7 +268,7 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
@@ -398,7 +398,7 @@ import messaging from '@react-native-firebase/messaging';
 
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
@@ -438,7 +438,7 @@ import messaging from '@react-native-firebase/messaging';
 
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
@@ -488,7 +488,7 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
@@ -513,7 +513,7 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',

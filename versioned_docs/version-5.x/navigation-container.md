@@ -199,7 +199,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 function App() {
   const linking = {
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Home: 'feed/:sort',
@@ -230,7 +230,7 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
@@ -358,7 +358,7 @@ For example, you could do something like following to handle both deep linking a
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
@@ -396,7 +396,7 @@ For example, you could do something like following to handle both deep linking a
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
@@ -446,7 +446,7 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
@@ -471,7 +471,7 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',

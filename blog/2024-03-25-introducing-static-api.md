@@ -138,7 +138,7 @@ There are 2 improvements to deep linking API:
      return (
        <Navigation
          linking={{
-           prefixes: ['https://mychat.com', 'mychat://'],
+           prefixes: ['https://example.com', 'example://'],
            // highlight-next-line
            enabled: 'auto',
          }}

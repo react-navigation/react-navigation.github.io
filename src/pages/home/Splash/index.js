@@ -1,6 +1,5 @@
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import React from 'react';
 
 import SplashLeftIllustration from './SplashLeftIllustration';
 import SplashRightIllustration from './SplashRightIllustration';
@@ -38,12 +37,12 @@ export default function Splash() {
         <SplashRightIllustration />
       </div>
       <div className={styles.migrationText}>
-        💡 Coming from an older version? Check out our{' '}
+        ✨ React Navigation 8 is coming. Check out the{' '}
         <Link
-          to={useBaseUrl('/docs/migration-guides')}
+          to={useBaseUrl('/blog/2025/12/19/react-navigation-8.0-alpha')}
           className={styles.linkText}
         >
-          migration guides
+          announcement
         </Link>
         .
       </div>

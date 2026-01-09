@@ -28,12 +28,11 @@ The `navigate` action allows to navigate to a specific route. It takes the follo
 
 - `name` - _string_ - A destination name of the screen in the current or a parent navigator.
 - `params` - _object_ - Params to use for the destination route.
-- `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
+- `options` - Options object containing the following properties:
+  - `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
+  - `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen in the stack. Defaults to `false`.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Common actions navigate" snack
+```js name="Common actions navigate" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -68,9 +67,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
     </View>
   );
 }
@@ -88,201 +84,29 @@ function ProfileScreen({ route }) {
     >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
-      </Button>
     </View>
   );
 }
 
-const Stack = createStackNavigator({
+const RootStack = createStackNavigator({
   screens: {
     Home: HomeScreen,
     Profile: ProfileScreen,
   },
 });
 
-const Navigation = createStaticNavigation(Stack);
+const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
   return <Navigation />;
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Common actions navigate" snack
-import * as React from 'react';
-import { Button } from '@react-navigation/elements';
-import { View, Text } from 'react-native';
-import {
-  NavigationContainer,
-  CommonActions,
-  useNavigation,
-} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Home!</Text>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(
-            CommonActions.navigate('Profile', { user: 'jane' })
-          );
-          // codeblock-focus-end
-        }}
-      >
-        Navigate to Profile
-      </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  const navigation = useNavigation();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Profile!</Text>
-      <Text>{route.params.user}'s profile</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-const Stack = createStackNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
 In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack-navigator.md)), calling `navigate` with a screen name will have the following behavior:
 
 - If you're already on a screen with the same name, it will update its params and not push a new screen.
 - If you're on a different screen, it will push the new screen onto the stack.
-- If the [`getId`](screen.md#id) prop is specified, and another screen in the stack has the same ID, it will navigate to that screen and update its params instead.
+- If the [`getId`](screen.md#id) prop is specified, and another screen in the stack has the same ID, it will bring that screen to focus and update its params instead.
 
 <details>
 <summary>Advanced usage</summary>
@@ -292,6 +116,7 @@ The `navigate` action can also accepts an object as the argument with the follow
 - `name` - _string_ - A destination name of the screen in the current or a parent navigator
 - `params` - _object_ - Params to use for the destination route.
 - `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
+- `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen in the stack. Defaults to `false`.
 - `path` - _string_ - The path (from deep link or universal link) to associate with the screen.
 
 This is primarily used internally to associate a path with a screen when it's from a URL.
@@ -304,10 +129,7 @@ The `reset` action allows to reset the [navigation state](navigation-state.md) t
 
 - `state` - _object_ - The new [navigation state](navigation-state.md) object to use.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Common actions reset" snack
+```js name="Common actions reset" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -340,9 +162,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
     </View>
   );
 }
@@ -360,13 +179,6 @@ function ProfileScreen({ route }) {
     >
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
       <Button
         onPress={() => {
           // codeblock-focus-start
@@ -387,174 +199,23 @@ function ProfileScreen({ route }) {
       >
         Reset navigation state
       </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
-      </Button>
     </View>
   );
 }
 
-const Stack = createStackNavigator({
+const RootStack = createStackNavigator({
   screens: {
     Home: HomeScreen,
     Profile: ProfileScreen,
   },
 });
 
-const Navigation = createStaticNavigation(Stack);
+const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Common actions reset" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-import {
-  NavigationContainer,
-  CommonActions,
-  useNavigation,
-} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Home!</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate('Profile', { user: 'jane' })
-          );
-        }}
-      >
-        Navigate to Profile
-      </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  const navigation = useNavigation();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Profile!</Text>
-      <Text>{route.params.user}'s profile</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Home',
-            })
-          );
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-          // codeblock-focus-end
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-const Stack = createStackNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 The state object specified in `reset` replaces the existing [navigation state](navigation-state.md) with the new one. This means that if you provide new route objects without a key, or route objects with a different key, it'll remove the existing screens for those routes and add new screens.
 
@@ -595,10 +256,7 @@ So if you have such a use case, consider a different approach - e.g. updating th
 
 The `goBack` action creator allows to go back to the previous route in history. It doesn't take any arguments.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Common actions goBack" snack
+```js name="Common actions goBack" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -631,15 +289,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(CommonActions.goBack());
-          // codeblock-focus-end
-        }}
-      >
-        Go back
-      </Button>
     </View>
   );
 }
@@ -659,46 +308,9 @@ function ProfileScreen({ route }) {
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
+          // codeblock-focus-start
+          navigation.dispatch(CommonActions.goBack());
+          // codeblock-focus-end
         }}
       >
         Go back
@@ -707,160 +319,23 @@ function ProfileScreen({ route }) {
   );
 }
 
-const Stack = createStackNavigator({
+const RootStack = createStackNavigator({
   screens: {
     Home: HomeScreen,
     Profile: ProfileScreen,
   },
 });
 
-const Navigation = createStaticNavigation(Stack);
+const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Common actions goBack" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-import {
-  NavigationContainer,
-  CommonActions,
-  useNavigation,
-} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Home!</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate('Profile', { user: 'jane' })
-          );
-        }}
-      >
-        Navigate to Profile
-      </Button>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(CommonActions.goBack());
-          // codeblock-focus-end
-        }}
-      >
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  const navigation = useNavigation();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Profile!</Text>
-      <Text>{route.params.user}'s profile</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'Home',
-            })
-          );
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-const Stack = createStackNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 If you want to go back from a particular route, you can add a `source` property referring to the route key and a `target` property referring to the `key` of the navigator which contains the route:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Common actions goBack" snack
+```js name="Common actions goBack" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -893,9 +368,6 @@ function HomeScreen() {
       >
         Navigate to Profile
       </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
     </View>
   );
 }
@@ -915,46 +387,11 @@ function ProfileScreen({ route }) {
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
           // codeblock-focus-start
           navigation.dispatch({
             ...CommonActions.goBack(),
             source: route.key,
-            target: route?.params?.key,
+            target: navigation.getState().key,
           });
           // codeblock-focus-end
         }}
@@ -965,145 +402,19 @@ function ProfileScreen({ route }) {
   );
 }
 
-const Stack = createStackNavigator({
+const RootStack = createStackNavigator({
   screens: {
     Home: HomeScreen,
     Profile: ProfileScreen,
   },
 });
 
-const Navigation = createStaticNavigation(Stack);
+const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic" default>
-
-```js name="Common actions goBack" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-import {
-  NavigationContainer,
-  CommonActions,
-  useNavigation,
-} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Home!</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate('Profile', { user: 'jane' })
-          );
-        }}
-      >
-        Navigate to Profile
-      </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  const navigation = useNavigation();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Profile!</Text>
-      <Text>{route.params.user}'s profile</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-          // codeblock-focus-end
-        }}
-      >
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-const Stack = createStackNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 By default, the key of the route that dispatched the action is passed as the `source` property and the `target` property is `undefined`.
 
@@ -1114,10 +425,7 @@ The `preload` action allows preloading a screen in the background before navigat
 - `name` - _string_ - A destination name of the screen in the current or a parent navigator.
 - `params` - _object_ - Params to use for the destination route.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Common actions preload" snack
+```js name="Common actions preload" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import {
@@ -1196,118 +504,19 @@ function ProfileScreen({ route }) {
   );
 }
 
-const Stack = createStackNavigator({
+const RootStack = createStackNavigator({
   screens: {
     Home: HomeScreen,
     Profile: ProfileScreen,
   },
 });
 
-const Navigation = createStaticNavigation(Stack);
+const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Common actions preload" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import {
-  NavigationContainer,
-  CommonActions,
-  useNavigation,
-} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Button } from '@react-navigation/elements';
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Home!</Text>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(
-            CommonActions.preload('Profile', { user: 'jane' })
-          );
-          // codeblock-focus-end
-        }}
-      >
-        Preload Profile
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate('Profile', { user: 'jane' })
-          );
-        }}
-      >
-        Navigate to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  const navigation = useNavigation();
-  const [startTime] = React.useState(Date.now());
-  const [endTime, setEndTime] = React.useState(null);
-
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      setEndTime(Date.now());
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, [navigation]);
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Profile!</Text>
-      <Text>{route.params.user}'s profile</Text>
-      <Text>Preloaded for: {endTime ? endTime - startTime : 'N/A'}ms</Text>
-    </View>
-  );
-}
-
-const Stack = createStackNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 Preloading a screen means that the screen will be rendered in the background. All the components in the screen will be mounted and the `useEffect` hooks will be called. This can be useful when you want to improve the perceived performance by hiding the delay in mounting heavy components or loading data.
 
@@ -1346,14 +555,257 @@ if (navigation.isFocused()) {
 
 ### setParams
 
-The `setParams` action allows to update params for a certain route. It takes the following arguments:
+The `setParams` action allows to replace params for a certain route. It takes the following arguments:
 
 - `params` - _object_ - required - New params to be merged into existing route params.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+```js name="Common actions setParams" snack static2dynamic
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
+import {
+  createStaticNavigation,
+  useNavigation,
+  CommonActions,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-```js name="Common actions setParams" snack
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Home!</Text>
+      <Button
+        onPress={() => {
+          navigation.dispatch(
+            CommonActions.navigate('Profile', { user: 'jane' })
+          );
+        }}
+      >
+        Navigate to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile!</Text>
+      <Text>{route.params.user}'s profile</Text>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(CommonActions.setParams({ user: 'Wojtek' }));
+          // codeblock-focus-end
+        }}
+      >
+        Set user param
+      </Button>
+    </View>
+  );
+}
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+If you want to replace params for a particular route, you can add a `source` property referring to the route key:
+
+```js name="Common actions setParams" snack static2dynamic
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
+import {
+  createStaticNavigation,
+  useNavigation,
+  CommonActions,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Home!</Text>
+      <Button
+        onPress={() => {
+          navigation.dispatch(
+            CommonActions.navigate('Profile', { user: 'jane' })
+          );
+        }}
+      >
+        Navigate to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile!</Text>
+      <Text>{route.params.user}'s profile</Text>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch({
+            ...CommonActions.setParams({ user: 'Wojtek' }),
+            source: route.key,
+          });
+          // codeblock-focus-end
+        }}
+      >
+        Set user param
+      </Button>
+    </View>
+  );
+}
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+If the `source` property is explicitly set to `undefined`, it'll replace the params for the focused route.
+
+### replaceParams
+
+The `replaceParams` action allows to replace params for a certain route. It takes the following arguments:
+
+- `params` - _object_ - required - New params to use for the route.
+
+```js name="Common actions replaceParams" snack static2dynamic
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
+import {
+  createStaticNavigation,
+  useNavigation,
+  CommonActions,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Home!</Text>
+      <Button
+        onPress={() => {
+          navigation.dispatch(
+            CommonActions.navigate('Profile', { user: 'jane' })
+          );
+        }}
+      >
+        Navigate to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile!</Text>
+      <Text>{route.params.user}'s profile</Text>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(CommonActions.replaceParams({ user: 'Wojtek' }));
+          // codeblock-focus-end
+        }}
+      >
+        Replace params with user
+      </Button>
+    </View>
+  );
+}
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+If you want to replace params for a particular route, you can add a `source` property referring to the route key:
+
+```js name="Common actions replaceParams" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -1408,444 +860,32 @@ function ProfileScreen({ route }) {
       <Text>{route.params.user}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
           // codeblock-focus-start
           navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            // codeblock-focus-end
+            ...CommonActions.replaceParams({ user: 'Wojtek' }),
             source: route.key,
           });
+          // codeblock-focus-end
         }}
       >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
+        Replace params with user
       </Button>
     </View>
   );
 }
 
-const Stack = createStackNavigator({
+const RootStack = createStackNavigator({
   screens: {
     Home: HomeScreen,
     Profile: ProfileScreen,
   },
 });
 
-const Navigation = createStaticNavigation(Stack);
+const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
   return <Navigation />;
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Common actions setParams" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-import {
-  NavigationContainer,
-  CommonActions,
-  useNavigation,
-} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Home!</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate('Profile', { user: 'jane' })
-          );
-        }}
-      >
-        Navigate to Profile
-      </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  const navigation = useNavigation();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Profile!</Text>
-      <Text>{route.params.user}'s profile</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            // codeblock-focus-end
-            source: route.key,
-          });
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-const Stack = createStackNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
-If you want to set params for a particular route, you can add a `source` property referring to the route key:
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Common actions setParams" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-import {
-  createStaticNavigation,
-  useNavigation,
-  CommonActions,
-} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Home!</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate('Profile', { user: 'jane' })
-          );
-        }}
-      >
-        Navigate to Profile
-      </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  const navigation = useNavigation();
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Profile!</Text>
-      <Text>{route.params.user}'s profile</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-          // codeblock-focus-end
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-const Stack = createStackNavigator({
-  screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
-  },
-});
-
-const Navigation = createStaticNavigation(Stack);
-
-export default function App() {
-  return <Navigation />;
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Common actions setParams" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-import {
-  NavigationContainer,
-  CommonActions,
-  useNavigation,
-} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Home!</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.navigate('Profile', { user: 'jane' })
-          );
-        }}
-      >
-        Navigate to Profile
-      </Button>
-      <Button onPress={() => navigation.dispatch(CommonActions.goBack())}>
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  const navigation = useNavigation();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Profile!</Text>
-      <Text>{route.params.user}'s profile</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(CommonActions.navigate('Home'));
-        }}
-      >
-        Navigate to Home
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
-                },
-                { name: 'Home' },
-              ],
-            })
-          );
-        }}
-      >
-        Reset navigation state
-      </Button>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch({
-            ...CommonActions.setParams({ user: 'Wojtek' }),
-            source: route.key,
-          });
-          // codeblock-focus-end
-        }}
-      >
-        Change user param
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch({
-            ...CommonActions.goBack(),
-            source: route.key,
-            target: route?.params?.key,
-          });
-        }}
-      >
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-const Stack = createStackNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
-If the `source` property is explicitly set to `undefined`, it'll set the params for the focused route.
+If the `source` property is explicitly set to `undefined`, it'll replace the params for the focused route.

@@ -237,6 +237,19 @@ Note that the returned `options` object will be `undefined` if there are no navi
 
 The `addListener` method lets you listen to the following events:
 
+##### `ready`
+
+The event is triggered when the navigation tree is ready. This is useful for cases where you want to wait until the navigation tree is mounted:
+
+```js
+const unsubscribe = navigationRef.addListener('ready', () => {
+  // Get the initial state of the navigation tree
+  console.log(navigationRef.getRootState());
+});
+```
+
+This is analogous to the [`onReady`](#onready) method.
+
 ##### `state`
 
 The event is triggered whenever the [navigation state](navigation-state.md) changes in any navigator in the navigation tree:
@@ -450,7 +463,7 @@ const Navigation = createStaticNavigation(RootStack);
 
 function App() {
   const linking = {
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
   };
 
   return (
@@ -471,7 +484,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 function App() {
   const linking = {
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Home: 'feed/:sort',
@@ -512,7 +525,7 @@ Example:
 <Navigation
   linking={{
     // highlight-next-line
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
   }}
   fallback={<Text>Loading...</Text>}
 />
@@ -525,7 +538,7 @@ Example:
 <NavigationContainer
   linking={{
     // highlight-next-lineP
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },
@@ -570,7 +583,7 @@ import messaging from '@react-native-firebase/messaging';
 
 <Navigation
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     // highlight-start
     async getInitialURL() {
       // Check if app was opened from a deep link
@@ -600,7 +613,7 @@ import messaging from '@react-native-firebase/messaging';
 
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },
@@ -646,7 +659,7 @@ import messaging from '@react-native-firebase/messaging';
 
 <Navigation
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     // highlight-start
     subscribe(listener) {
       const onReceiveURL = ({ url }: { url: string }) => listener(url);
@@ -688,7 +701,7 @@ import messaging from '@react-native-firebase/messaging';
 
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },
@@ -734,7 +747,7 @@ This option is not available on Web.
 
 ##### `linking.getStateFromPath`
 
-You can optionally override the way React Navigation parses links to a state object by providing your own implementation.
+React Navigation handles deep links and [URLs on Web](web-support.md) by parsing the path to a [navigation state](navigation-state.md) object based on the [linking config](#linkingconfig). You can optionally override the way the parsing happens by providing your own `getStateFromPath` function.
 
 Example:
 
@@ -744,7 +757,7 @@ Example:
 ```js
 <Navigation
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     // highlight-start
     getStateFromPath(path, config) {
       // Return a state object here
@@ -761,7 +774,7 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },
@@ -782,16 +795,19 @@ Example:
 
 ##### `linking.getPathFromState`
 
-You can optionally override the way React Navigation serializes state objects to link by providing your own implementation. This is necessary for proper web support if you have specified `getStateFromPath`.
+On Web, React Navigation automatically updates the [URL in the browser's address bar](web-support.md) to match the current navigation state by serializing the state to a path based on the [linking config](#linkingconfig). You can optionally override the way the serialization happens by providing your own `getPathFromState` function.
+
+If you provide a custom [`getStateFromPath`](#linkinggetstatefrompath), you should also provide a custom `getPathFromState` to ensure that the parsing and serialization are consistent with each other for Web support to work correctly.
 
 Example:
+
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
 ```js
 <Navigation
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     // highlight-start
     getPathFromState(state, config) {
       // Return a path string here
@@ -808,7 +824,7 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },
@@ -816,6 +832,56 @@ Example:
     getPathFromState(state, config) {
       // Return a path string here
       // You can also reuse the default logic by importing `getPathFromState` from `@react-navigation/native`
+    },
+    // highlight-end
+  }}
+>
+  {/* content */}
+</NavigationContainer>
+```
+
+</TabItem>
+</Tabs>
+
+##### `linking.getActionFromState`
+
+The state parsed with [`getStateFromPath`](#linkinggetstatefrompath) is used as the initial state of the navigator. But for subsequent deep links and URLs, the state is converted to a navigation action. Typically it is a [`navigate`](navigation-actions.md#navigate) action.
+
+You can provide a custom `getActionFromState` function to customize how the state is converted to an action.
+
+Example:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+<Navigation
+  linking={{
+    prefixes: ['https://example.com', 'example://'],
+    // highlight-start
+    getActionFromState(state, config) {
+      // Return a navigation action here
+      // You can also reuse the default logic by importing `getActionFromState` from `@react-navigation/native`
+    },
+    // highlight-end
+  }}
+/>
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<NavigationContainer
+  linking={{
+    prefixes: ['https://example.com', 'example://'],
+    config: {
+      // ...
+    },
+    // highlight-start
+    getActionFromState(state, config) {
+      // Return a navigation action here
+      // You can also reuse the default logic by importing `getActionFromState` from `@react-navigation/native`
     },
     // highlight-end
   }}

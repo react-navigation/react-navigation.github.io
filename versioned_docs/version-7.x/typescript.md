@@ -9,11 +9,10 @@ import TabItem from '@theme/TabItem';
 
 React Navigation can be configured to type-check screens and their params, as well as various other APIs using TypeScript. This provides better intelliSense and type safety when working with React Navigation.
 
-:::note
+First, make sure you have the following configuration in your `tsconfig.json` under `compilerOptions`:
 
-React Navigation is designed to work with [`strict`](https://www.typescriptlang.org/tsconfig/#strict) mode in TypeScript. If you are not using `strict` mode, some things might not work as expected.
-
-:::
+- `strict: true` or `strictNullChecks: true` - Necessary for intelliSense and type inference to work correctly.
+- `moduleResolution: "bundler"` - Necessary to resolve the types correctly and match the behavior of [Metro](https://metrobundler.dev/) and other bundlers.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -70,9 +69,11 @@ There are 2 steps to configure TypeScript with the static API:
 
 ## Navigator specific types
 
-Generally, we recommend using the default types for the [`useNavigation`](use-navigation.md) prop to access the navigation object in a navigator-agnostic manner. However, if you need to use navigator-specific APIs, you need to manually annotate [`useNavigation`](use-navigation.md):
+Generally, we recommend using the default types for the [`useNavigation`](use-navigation.md) prop to access the navigation object in a navigator-agnostic manner. However, if you need to use navigator-specific APIs, e.g. `setOptions` to update navigator options, `push`, `pop`, `popTo` etc. with stacks, `openDrawer`, `closeDrawer` etc. with drawer and so on, you need to manually annotate [`useNavigation`](use-navigation.md):
 
 ```ts
+import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+
 type BottomTabParamList = StaticParamList<typeof BottomTabNavigator>;
 type ProfileScreenNavigationProp = BottomTabNavigationProp<
   BottomTabParamList,
@@ -84,7 +85,13 @@ type ProfileScreenNavigationProp = BottomTabNavigationProp<
 const navigation = useNavigation<ProfileScreenNavigationProp>();
 ```
 
-Note that annotating [`useNavigation`](use-navigation.md) this way is not type-safe since we can't guarantee that the type you provided matches the type of the navigator.
+Similarly, you can import `NativeStackNavigationProp` from [`@react-navigation/native-stack`](native-stack-navigator.md), `StackNavigationProp` from [`@react-navigation/stack`](stack-navigator.md), `DrawerNavigationProp` from [`@react-navigation/drawer`](drawer-navigator.md) etc.
+
+:::danger
+
+Annotating [`useNavigation`](use-navigation.md) this way is not type-safe since we can't guarantee that the type you provided matches the type of the navigator. So try to keep manual annotations to a minimum and use the default types instead.
+
+:::
 
 ## Nesting navigator using dynamic API
 
@@ -229,7 +236,7 @@ If you have an [`id`](./navigator.md#id) prop for your navigator, you can do:
 type Props = NativeStackScreenProps<RootStackParamList, 'Profile', 'MyStack'>;
 ```
 
-This allows us to type check route names and params which you're navigating using [`navigate`](navigation-object.md#navigate), [`push`](stack-actions.md#push) etc. The name of the current route is necessary to type check the params in `route.params` and when you call [`setParams`](navigation-actions#setparams).
+This allows us to type check route names and params which you're navigating using [`navigate`](navigation-object.md#navigate), [`push`](stack-actions.md#push) etc. The name of the current route is necessary to type check the params in `route.params` and when you call [`setParams`](navigation-actions#setparams) or [`replaceParams`](navigation-actions#replaceparams).
 
 Similarly, you can import `StackScreenProps` from [`@react-navigation/stack`](stack-navigator.md), `DrawerScreenProps` from [`@react-navigation/drawer`](drawer-navigator.md), `BottomTabScreenProps` from [`@react-navigation/bottom-tabs`](bottom-tab-navigator.md) and so on.
 
@@ -312,7 +319,9 @@ type TabParamList = {
 
 ### Combining navigation props
 
-When you nest navigators, the navigation prop of the screen is a combination of multiple navigation props. For example, if we have a tab inside a stack, the `navigation` prop will have both [`jumpTo`](tab-actions.md#jumpto) (from the tab navigator) and [`push`](stack-actions.md#push) (from the stack navigator). To make it easier to combine types from multiple navigators, you can use the `CompositeScreenProps` type:
+When you nest navigators, the navigation prop of the screen is a combination of multiple navigation props. For example, if we have a tab inside a stack, the `navigation` prop will have both [`jumpTo`](tab-actions.md#jumpto) (from the tab navigator) and [`push`](stack-actions.md#push) (from the stack navigator). To make it easier to combine types from multiple navigators, you can use the `CompositeScreenProps` type.
+
+For example, if we have a `Profile` in a navigator, nested inside `Account` screen of a stack navigator, we can combine the types as follows:
 
 ```ts
 import type { CompositeScreenProps } from '@react-navigation/native';
@@ -321,20 +330,23 @@ import type { StackScreenProps } from '@react-navigation/stack';
 
 type ProfileScreenProps = CompositeScreenProps<
   BottomTabScreenProps<TabParamList, 'Profile'>,
-  StackScreenProps<StackParamList>
+  StackScreenProps<StackParamList, 'Account'>
 >;
 ```
 
-The `CompositeScreenProps` type takes 2 parameters, the first parameter is the type of props for the primary navigation (type for the navigator that owns this screen, in our case the tab navigator which contains the `Profile` screen) and the second parameter is the type of props for secondary navigation (type for a parent navigator). The primary type should always have the screen's route name as its second parameter.
+The `CompositeScreenProps` type takes 2 parameters:
 
-For multiple parent navigators, this secondary type should be nested:
+- The first parameter is the type for the navigator that owns this screen, in our case the tab navigator which contains the `Profile` screen
+- The second parameter is the type of props for a parent navigator, in our case the stack navigator which contains the `Account` screen
+
+For multiple parent navigators, this second parameter can nest another `CompositeScreenProps`:
 
 ```ts
 type ProfileScreenProps = CompositeScreenProps<
   BottomTabScreenProps<TabParamList, 'Profile'>,
   CompositeScreenProps<
-    StackScreenProps<StackParamList>,
-    DrawerScreenProps<DrawerParamList>
+    StackScreenProps<StackParamList, 'Account'>,
+    DrawerScreenProps<DrawerParamList, 'Home'>
   >
 >;
 ```
@@ -348,7 +360,7 @@ import type { StackNavigationProp } from '@react-navigation/stack';
 
 type ProfileScreenNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<TabParamList, 'Profile'>,
-  StackNavigationProp<StackParamList>
+  StackNavigationProp<StackParamList, 'Account'>
 >;
 ```
 
@@ -512,7 +524,7 @@ export type HomeTabParamList = {
 export type HomeTabScreenProps<T extends keyof HomeTabParamList> =
   CompositeScreenProps<
     BottomTabScreenProps<HomeTabParamList, T>,
-    RootStackScreenProps<keyof RootStackParamList>
+    RootStackScreenProps<keyof RootStackParamList, 'Home'>
   >;
 
 declare global {

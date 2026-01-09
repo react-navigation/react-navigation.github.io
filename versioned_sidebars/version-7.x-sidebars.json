@@ -42,6 +42,7 @@
       "stack-navigator",
       "native-stack-navigator",
       "bottom-tab-navigator",
+      "native-bottom-tab-navigator",
       "drawer-navigator",
       "material-top-tab-navigator"
     ],
@@ -71,6 +72,7 @@
           "use-focus-effect",
           "use-is-focused",
           "use-prevent-remove",
+          "use-route-path",
           "use-link-to",
           "use-link-props",
           "use-link-builder",
@@ -91,12 +93,14 @@
       }
     ],
     "Build your own Navigator": ["custom-routers", "custom-navigators"],
-    "Additional resources": [
-      "migration-guides",
-      "navigation-solutions-and-community-libraries",
+    "Ecosystem": [
+      "community-solutions",
+      "community-navigators",
+      "community-libraries",
       "more-resources"
     ],
     "Meta": [
+      "migration-guides",
       "glossary-of-terms",
       "pitch",
       "limitations",
