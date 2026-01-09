@@ -949,11 +949,11 @@ Example scenario:
 - The app shows the `SignIn` screen.
 - After the user signs in, you want to navigate them to the `Profile` screen.
 
-To achieve this, you can pass `UNSTABLE_routeNamesChangeBehavior="lastUnhandled"`:
+To achieve this, you can set [`UNSTABLE_routeNamesChangeBehavior`](navigator.md#route-names-change-behavior) to `"lastUnhandled"`:
 
 :::warning
 
-This option is experimental and may change in a minor release.
+This API is experimental and may change in a minor release.
 
 :::
 
