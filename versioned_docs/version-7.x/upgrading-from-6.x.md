@@ -268,6 +268,8 @@ The previous behavior can be achieved by setting `headerBackButtonDisplayMode` t
 />
 ```
 
+Similarly, the `headerTruncatedBackTitle` option in Stack Navigator is renamed to `headerBackTruncatedTitle` for consistency.
+
 #### `animationEnabled` option is removed in favor of `animation` option in Stack Navigator
 
 Previously, `animationEnabled: false` was used to disable the animation for the screen transition in Stack Navigator.
