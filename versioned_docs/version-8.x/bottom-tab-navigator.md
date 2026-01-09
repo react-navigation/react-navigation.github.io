@@ -188,7 +188,7 @@ The `state.routes` array contains all the routes defined in the navigator. Each 
 
 Example:
 
-```js name="Custom tab bar" snack tabs=config
+```js name="Custom tab bar" snack static2dynamic
 import * as React from 'react';
 import {
   createStaticNavigation,
@@ -275,7 +275,6 @@ function ProfileScreen() {
   );
 }
 
-// codeblock-tabs=static
 // codeblock-focus-start
 const MyTabs = createBottomTabNavigator({
   // highlight-next-line
@@ -292,33 +291,6 @@ const Navigation = createStaticNavigation(MyTabs);
 export default function App() {
   return <Navigation />;
 }
-// codeblock-tabs-end
-
-// codeblock-tabs=dynamic
-const Tab = createBottomTabNavigator();
-
-// codeblock-focus-start
-function MyTabs() {
-  return (
-    <Tab.Navigator
-      // highlight-next-line
-      tabBar={(props) => <MyTabBar {...props} />}
-    >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-}
-// codeblock-focus-end
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
-  );
-}
-// codeblock-tabs-end
 ```
 
 This example will render a basic tab bar with labels.
