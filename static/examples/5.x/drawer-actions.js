@@ -1,12 +1,11 @@
-import * as React from 'react';
-import { View, Button, Text } from 'react-native';
-import { NavigationContainer, DrawerActions } from '@react-navigation/native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
-  DrawerItemList,
   DrawerItem,
+  DrawerItemList,
 } from '@react-navigation/drawer';
+import { DrawerActions, NavigationContainer } from '@react-navigation/native';
+import { Button, Text, View } from 'react-native';
 
 function HomeScreen({ navigation }) {
   const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });

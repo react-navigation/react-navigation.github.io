@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { View, Button, Text } from 'react-native';
-import { NavigationContainer, TabActions } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer, TabActions } from '@react-navigation/native';
+import { Button, Text, View } from 'react-native';
 
 function HomeScreen({ navigation }) {
   const jumpToAction = TabActions.jumpTo('Profile', { user: 'Satya' });
