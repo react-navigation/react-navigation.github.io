@@ -32,7 +32,7 @@ The `navigation` object can be accessed inside any screen component with the [`u
 
 :::
 
-### Navigator-dependent functions
+## Navigator-dependent functions
 
 There are several additional functions present on `navigation` object based on the kind of the current navigator.
 
@@ -74,8 +74,11 @@ The `navigate` method lets us navigate to another screen in your app. It takes t
 
 `navigation.navigate(name, params)`
 
-- `name` - A destination name of the route that has been defined somewhere
-- `params` - Params to pass to the destination route.
+- `name` - _string_ - A destination name of the screen in the current or a parent navigator.
+- `params` - _object_ - Params to use for the destination route.
+- `options` - Options object containing the following properties:
+  - `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
+  - `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen in the stack. Defaults to `false`.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -244,42 +247,8 @@ In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack
 
 - If you're already on a screen with the same name, it will update its params and not push a new screen.
 - If you're on a different screen, it will push the new screen onto the stack.
-- If the [`getId`](screen.md#getid) prop is specified, and another screen in the stack has the same ID, it will bring that screen to focus and update its params instead.
+- If the [`getId`](screen.md#id) prop is specified, and another screen in the stack has the same ID, it will bring that screen to focus and update its params instead.
 - If none of the above conditions match, it'll push a new screen to the stack.
-
-By default, the screen is identified by its name. But you can also customize it to take the params into account by using the [`getId`](screen.md#getid) prop.
-
-For example, say you have specified a `getId` prop for `Profile` screen:
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-const Tabs = createBottomTabNavigator({
-  screens: {
-    Profile: {
-      screen: ProfileScreen,
-      getId: ({ params }) => params.userId,
-    },
-  },
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-<Tab.Screen
-  name={Profile}
-  component={ProfileScreen}
-  getId={({ params }) => params.userId}
-/>
-```
-
-</TabItem>
-</Tabs>
-
-Now, if you have a stack with the history `Home > Profile (userId: bob) > Settings` and you call `navigate(Profile, { userId: 'alice' })`, the resulting screens will be `Home > Profile (userId: bob) > Settings > Profile (userId: alice)` since it'll add a new `Profile` screen as no matching screen was found.
 
 In a tab or drawer navigator, calling `navigate` will switch to the relevant screen if it's not focused already and update the params of the screen.
 
@@ -297,15 +266,14 @@ It takes the following arguments:
 
 `navigation.navigateDeprecated(name, params)`
 
-- `name` - A destination name of the route that has been defined somewhere
-- `params` - Params to pass to the destination route.
+- `name` - _string_ - A destination name of the screen in the current or a parent navigator.
+- `params` - _object_ - Params to use for the destination route.
 
 In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack-navigator.md)), calling `navigate` with a screen name will have the following behavior:
 
 - If you're already on a screen with the same name, it will update its params and not push a new screen.
-- If a screen with the same name already exists in the stack, it will pop all the screens after it to go back to the existing screen.
-- If the [`getId`](screen.md#getid) prop is specified, and another screen in the stack has the same ID, it will pop any screens to navigate to that screen and update its params instead.
-- If none of the above conditions match, it'll push a new screen to the stack.
+- If you're on a different screen, it will push the new screen onto the stack.
+- If the [`getId`](screen.md#id) prop is specified, and another screen in the stack has the same ID, it will bring that screen to focus and update its params instead.
 
 In a tab or drawer navigator, calling `navigate` will switch to the relevant screen if it's not focused already and update the params of the screen.
 
@@ -483,7 +451,7 @@ The `reset` method lets us replace the navigator state with a new state:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigate - replace and reset" snack
+```js name="Navigation object replace and reset" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -622,7 +590,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigate - replace and reset" snack
+```js name="Navigation object replace and reset" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -966,14 +934,8 @@ Preloading a screen means that the screen will be rendered in the background. Al
 
 Depending on the navigator, `preload` may work slightly differently:
 
-- In a stack navigator ([stack](stack-navigator.md)), the screen will be rendered off-screen and animated in when you navigate to it. If [`getId`](screen.md#getid) is specified, it'll be used for the navigation to identify the preloaded screen.
+- In a stack navigator ([stack](stack-navigator.md), [native stack](native-stack-navigator.md)), the screen will be rendered off-screen and animated in when you navigate to it. If [`getId`](screen.md#id) is specified, it'll be used for the navigation to identify the preloaded screen.
 - In a tab or drawer navigator ([bottom tabs](bottom-tab-navigator.md), [material top tabs](material-top-tab-navigator.md), [drawer](drawer-navigator.md), etc.), the existing screen will be rendered as if `lazy` was set to `false`. Calling `preload` on a screen that is already rendered will not have any effect.
-
-:::warning
-
-Preloading screens is currently not supported in the [native stack navigator](native-stack-navigator.md).
-
-:::
 
 When a screen is preloaded in a stack navigator, it will have a few limitations:
 
@@ -1010,7 +972,7 @@ The `setParams` method lets us update the params (`route.params`) of the current
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigate - setParams" snack
+```js name="Navigation object setParams" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -1112,7 +1074,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigate - setParams" snack
+```js name="Navigation object setParams" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -1211,6 +1173,214 @@ export default App;
 </TabItem>
 </Tabs>
 
+### `replaceParams`
+
+The `replaceParams` method lets us replace the params (`route.params`) of the current screen with a new params object.
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Navigation object replaceParams" snack
+import * as React from 'react';
+import { Button } from '@react-navigation/elements';
+import { View, Text } from 'react-native';
+import {
+  useNavigation,
+  createStaticNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>This is the home screen of the app</Text>
+      <Button
+        onPress={() => {
+          navigation.navigate('Profile', {
+            friends: ['Brent', 'Satya', 'Michaś'],
+            title: "Brent's Profile",
+          });
+        }}
+      >
+        Go to Brents profile
+      </Button>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile Screen</Text>
+      <Text>Friends: </Text>
+      <Text>{route.params.friends[0]}</Text>
+      <Text>{route.params.friends[1]}</Text>
+      <Text>{route.params.friends[2]}</Text>
+      <Button
+        onPress={() => {
+          // highlight-start
+          navigation.replaceParams({
+            friends:
+              route.params.friends[0] === 'Brent'
+                ? ['Wojciech', 'Szymon', 'Jakub']
+                : ['Brent', 'Satya', 'Michaś'],
+            title:
+              route.params.title === "Brent's Profile"
+                ? "Lucy's Profile"
+                : "Brent's Profile",
+          });
+          // highlight-end
+        }}
+      >
+        Swap title and friends
+      </Button>
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
+    </View>
+  );
+}
+// codeblock-focus-end
+
+const Stack = createNativeStackNavigator({
+  initialRouteName: 'Home',
+  screens: {
+    Home: HomeScreen,
+    Profile: {
+      screen: ProfileScreen,
+      options: ({ route }) => ({ title: route.params.title }),
+    },
+  },
+});
+
+const Navigation = createStaticNavigation(Stack);
+
+function App() {
+  return <Navigation />;
+}
+
+export default App;
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Navigation object replaceParams" snack
+import * as React from 'react';
+import { Button } from '@react-navigation/elements';
+import { View, Text } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>This is the home screen of the app</Text>
+      <Button
+        onPress={() => {
+          navigation.navigate('Profile', {
+            friends: ['Brent', 'Satya', 'Michaś'],
+            title: "Brent's Profile",
+          });
+        }}
+      >
+        Go to Brents profile
+      </Button>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile Screen</Text>
+      <Text>Friends: </Text>
+      <Text>{route.params.friends[0]}</Text>
+      <Text>{route.params.friends[1]}</Text>
+      <Text>{route.params.friends[2]}</Text>
+      <Button
+        onPress={() => {
+          // highlight-start
+          navigation.replaceParams({
+            friends:
+              route.params.friends[0] === 'Brent'
+                ? ['Wojciech', 'Szymon', 'Jakub']
+                : ['Brent', 'Satya', 'Michaś'],
+            title:
+              route.params.title === "Brent's Profile"
+                ? "Lucy's Profile"
+                : "Brent's Profile",
+          });
+          // highlight-end
+        }}
+      >
+        Swap title and friends
+      </Button>
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
+    </View>
+  );
+}
+// codeblock-focus-end
+
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={({ route }) => ({ title: route.params.title })}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
+```
+
+</TabItem>
+</Tabs>
+
 ### `setOptions`
 
 The `setOptions` method lets us set screen options from within the component. This is useful if we need to use the component's props, state or context to configure our screen.
@@ -1218,7 +1388,7 @@ The `setOptions` method lets us set screen options from within the component. Th
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigate - setOptions" snack
+```js name="Navigation object setOptions" snack
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -1308,7 +1478,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigate - setOptions" snack
+```js name="Navigation object setOptions" snack
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { Button } from '@react-navigation/elements';

@@ -20,56 +20,36 @@ To use this package, open a Terminal in the project root and run:
 npm install react-native-drawer-layout
 ```
 
-Then, you need to install and configure the libraries that are required by the drawer:
+The library depends on [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) for gestures and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) for animations.
 
-1. First, install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) (at least version 2 or 3).
+<Tabs groupId='framework' queryString="framework">
+<TabItem value='expo' label='Expo' default>
 
-   If you have a Expo managed project, in your project directory, run:
+If you have a Expo managed project, in your project directory, run:
 
-   ```bash
-   npx expo install react-native-gesture-handler react-native-reanimated
-   ```
+```bash
+npx expo install react-native-gesture-handler react-native-reanimated react-native-worklets
+```
 
-   If you have a bare React Native project, in your project directory, run:
+</TabItem>
+<TabItem value='community-cli' label='Community CLI'>
 
-   ```bash npm2yarn
-   npm install react-native-gesture-handler react-native-reanimated
-   ```
+If you have a bare React Native project, in your project directory, run:
 
-2. Configure the Reanimated Babel Plugin in your project following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
+```bash npm2yarn
+npm install react-native-gesture-handler react-native-reanimated react-native-worklets
+```
 
-3. To finalize the installation of `react-native-gesture-handler`, we need to conditionally import it. To do this, create 2 files:
+After installation, configure the Reanimated Babel Plugin in your project following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
-   ```js title="gesture-handler.native.js"
-   // Only import react-native-gesture-handler on native platforms
-   import 'react-native-gesture-handler';
-   ```
+</TabItem>
+</Tabs>
 
-   ```js title="gesture-handler.js"
-   // Don't import react-native-gesture-handler on web
-   ```
+If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
 
-   Now, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
-
-   ```js
-   import './gesture-handler';
-   ```
-
-   Since the drawer layout doesn't use `react-native-gesture-handler` on Web, this avoids unnecessarily increasing the bundle size.
-
-   :::warning
-
-   If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
-
-   :::
-
-4. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
-
-   ```bash
-   npx pod-install ios
-   ```
-
-We're done! Now you can build and run the app on your device/simulator.
+```bash
+npx pod-install ios
+```
 
 ## Quick start
 
@@ -143,7 +123,7 @@ Type of the drawer. It determines how the drawer looks and animates.
 - `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.
 - `permanent`: A permanent drawer is shown as a sidebar.
 
-Defaults to `slide` on iOS and `front` on other platforms.
+Defaults to `front`.
 
 ##### `drawerStyle`
 
@@ -200,11 +180,15 @@ Minimum swipe velocity that should activate opening the drawer. Defaults to `500
 
 This is only supported on iOS and Android.
 
-##### `gestureHandlerProps`
+#### `configureGestureHandler`
 
-Props to pass to the underlying pan gesture handler.
+Callback to configure the underlying [gesture from `react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/gesture). It receives the `gesture` object as an argument:
 
-This is only supported on iOS and Android.
+```js
+configureGestureHandler={({ gesture }) => {
+  return gesture.enableTrackpadTwoFingerGesture(false);
+}}
+```
 
 ##### `children`
 

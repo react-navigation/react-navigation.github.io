@@ -13,7 +13,6 @@ The following actions are supported:
 - [Navigate](#navigate) - Navigate to another route
 - [Back](#back) - Go back to previous state
 - [Set Params](#setparams) - Set Params for given route
-- [Init](#init) - Used to initialize first state if state is undefined
 
 For actions specific to a StackNavigator, see [StackActions](stack-actions.md).
 

@@ -1,9 +1,6 @@
 ---
 title: React Navigation 5.0 - A new way to navigate
-author: Satyajit Sahoo, Michał Osadnik
-author_url: https://twitter.com/reactnavigation
-author_title: Core Team
-author_image_url: https://avatars1.githubusercontent.com/u/29647600?s=200&v=4
+authors: [satya, michal]
 tags: [release, announcement]
 ---
 
@@ -47,16 +44,16 @@ This made it necessary to rewrite the core of the library, which allowed us to m
 
 Hooks are great for stateful logic and code organization. Now we have several hooks for common use cases:
 
-- [`useNavigation`](/docs/use-navigation)
-- [`useRoute`](/docs/use-route)
-- [`useNavigationState`](/docs/use-navigation-state)
-- [`useFocusEffect`](/docs/use-focus-effect)
-- [`useIsFocused`](/docs/use-is-focused)
-- [`useScrollToTop`](/docs/use-scroll-to-top)
+- [`useNavigation`](/docs/5.x/use-navigation)
+- [`useRoute`](/docs/5.x/use-route)
+- [`useNavigationState`](/docs/5.x/use-navigation-state)
+- [`useFocusEffect`](/docs/5.x/use-focus-effect)
+- [`useIsFocused`](/docs/5.x/use-is-focused)
+- [`useScrollToTop`](/docs/5.x/use-scroll-to-top)
 
 ### Update options from component
 
-We’ve added a new [`setOptions`](/docs/navigation-prop#setoptions---update-screen-options-from-the-component) method on the `navigation` prop to make configuring screen navigation options more intuitive than its `static navigationOptions` predecessor. It lets us **easily set screen options based on props, state or context without messing with params**. Instead of using static options, we can call it anytime to configure the screen.
+We’ve added a new [`setOptions`](/docs/5.x/navigation-prop#setoptions) method on the `navigation` prop to make configuring screen navigation options more intuitive than its `static navigationOptions` predecessor. It lets us **easily set screen options based on props, state or context without messing with params**. Instead of using static options, we can call it anytime to configure the screen.
 
 ```js
 navigation.setOptions({
@@ -77,7 +74,7 @@ It can be used for things like adding a button in the header which needs to inte
 
 In React Navigation, we had basic theming support where you could specify whether to use a light or dark theme. It wasn't easy to customize the colors used by the built-in components such as header, tab bar etc. without extra code or repetition.
 
-Now, we have revamped the [theme system](/docs/themes) for easier customization. It is possible to provide a theme object with your desired colors for background, accent color etc. and it will automatically change the colors of all navigators without any extra code.
+Now, we have revamped the [theme system](/docs/5.x/themes) for easier customization. It is possible to provide a theme object with your desired colors for background, accent color etc. and it will automatically change the colors of all navigators without any extra code.
 
 ```js
 const MyTheme = {
@@ -98,7 +95,7 @@ The new version has been written from the ground-up with TypeScript. We now get 
 
 ![TypeScript in action](/assets/blog/announcing-5.0/typescript.gif)
 
-We also have JSDoc for the built-in methods and options, so you get their description directly in your editor. See [our typescript documentation](/docs/typescript) for more details on how to use it.
+We also have JSDoc for the built-in methods and options, so you get their description directly in your editor. See [our typescript documentation](/docs/5.x/typescript) for more details on how to use it.
 
 ### Redux DevTools integration
 
@@ -117,7 +114,7 @@ Traditionally, we have written our navigators in JavaScript for greater customiz
 
 ### Native backends for Material top tab navigator
 
-Similar to native stack, we also have [new backends](/docs/material-top-tab-navigator#pager) for Material top tab navigator based on [`react-native-viewpager`](https://github.com/react-native-community/react-native-viewpager) and [`ScrollView`](https://reactnative.dev/docs/scrollview).
+Similar to native stack, we also have [new backends](/docs/5.x/material-top-tab-navigator#pager) for Material top tab navigator based on [`react-native-viewpager`](https://github.com/react-native-community/react-native-viewpager) and [`ScrollView`](https://reactnative.dev/docs/5.x/scrollview).
 
 ```js
 import ViewPagerAdapter from 'react-native-tab-view-viewpager-adapter';
@@ -146,9 +143,9 @@ import { ScrollPager } from 'react-native-tab-view';
 In addition to these larger improvements, there are several smaller improvements to fit more use cases and make it easier to do certain tasks:
 
 - Revamped drawer navigator to make customizing the drawer sidebar content easier and more flexible.
-- Simpler API for [`reset` action](/docs/navigation-prop#reset) where you can pass the new state directly instead of a chain of actions.
-- More reliable [`focus` and `blur` events](/docs/navigation-lifecycle) to know when a screen's focus state changes.
-- Integration with [`InteractionManager`](https://reactnative.dev/docs/interactionmanager) to delay tasks until animation is complete.
+- Simpler API for [`reset` action](/docs/5.x/navigation-prop#reset) where you can pass the new state directly instead of a chain of actions.
+- More reliable [`focus` and `blur` events](/docs/5.x/navigation-lifecycle) to know when a screen's focus state changes.
+- Integration with [`InteractionManager`](https://reactnative.dev/docs/5.x/interactionmanager) to delay tasks until animation is complete.
 - Better safe area handling with [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
 
 ## Upgrading
@@ -165,7 +162,7 @@ If you were using React Navigation 5 when it was alpha, you might need to check 
 
 - If you have added `@react-navigation/core` to your dependencies, remove it, and replace all imports from `@react-navigation/core` with `@react-navigation/native`
 - If you were importing `NavigationNativeContainer`, change it to `NavigationContainer`, if you were using `NavigationContainer`, change it to `BaseNavigationContainer`
-- If you had deep linking configured, the config format has changed for nesting. Check the [deep linking docs](/docs/deep-linking) for details.
+- If you had deep linking configured, the config format has changed for nesting. Check the [deep linking docs](/docs/5.x/deep-linking) for details.
 
 ## Thanks to these wonderful people
 

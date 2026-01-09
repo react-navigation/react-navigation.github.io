@@ -1,9 +1,6 @@
 ---
 title: React Navigation meets native
-author: Michał Osadnik
-author_url: https://twitter.com/mosdnk
-author_title: Core Team
-author_image_url: https://avatars3.githubusercontent.com/u/25709300?s=460&v=4
+authors: michal
 tags: [announcement]
 ---
 

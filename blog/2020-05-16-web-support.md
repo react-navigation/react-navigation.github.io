@@ -1,9 +1,6 @@
 ---
 title: React Navigation on the Web
-author: Satyajit Sahoo
-author_url: https://twitter.com/satya164
-author_title: Core Team
-author_image_url: https://avatars2.githubusercontent.com/u/1174278?s=200&v=4
+authors: satya
 tags: [announcement, web]
 ---
 
@@ -37,7 +34,7 @@ Example:
 
 ```js
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config: {
     screens: {
       Home: '',

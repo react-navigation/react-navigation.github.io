@@ -5,3 +5,6 @@ MD013: false
 
 # Disable checks for inline HTML
 MD033: false
+
+# Descriptive link text
+MD059: false

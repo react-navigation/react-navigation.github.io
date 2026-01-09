@@ -1,9 +1,6 @@
 name: autofix.ci
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -22,10 +19,10 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Fix lint issues
-        run: yarn markdownlint-cli2-fix
+        run: yarn markdownlint-cli2 --fix
 
       - name: Prettify code
         run: yarn prettier --write .
 
       - name: Autofix
-        uses: autofix-ci/action@8106fde54b877517c9af2c3d68918ddeaa7bed64
+        uses: autofix-ci/action@635ffb0c9798bd160680f18fd73371e355b85f27

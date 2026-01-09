@@ -92,13 +92,13 @@ You can also pass a [`fallback`](navigation-container.md#fallback) prop that con
 
 ## Prefixes
 
-The `prefixes` option can be used to specify custom schemes (e.g. `mychat://`) as well as host & domain names (e.g. `https://mychat.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
+The `prefixes` option can be used to specify custom schemes (e.g. `example://`) as well as host & domain names (e.g. `https://example.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
 
 For example:
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com'],
+  prefixes: ['example://', 'https://example.com'],
 };
 ```
 
@@ -106,11 +106,11 @@ Note that the `prefixes` option is not supported on Web. The host & domain names
 
 ### Multiple subdomains​
 
-To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*`. before the beginning of a specific domain. Note that an entry for `*.mychat.com` does not match `mychat.com` because of the period after the asterisk. To enable matching for both `*.mychat.com` and `mychat.com`, you need to provide a separate prefix entry for each.
+To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*`. before the beginning of a specific domain. Note that an entry for `*.example.com` does not match `example.com` because of the period after the asterisk. To enable matching for both `*.example.com` and `example.com`, you need to provide a separate prefix entry for each.
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com', 'https://*.mychat.com'],
+  prefixes: ['example://', 'https://example.com', 'https://*.example.com'],
 };
 ```
 
@@ -122,7 +122,7 @@ To achieve this, you can use the `filter` option:
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com'],
+  prefixes: ['example://', 'https://example.com'],
   // highlight-next-line
   filter: (url) => !url.includes('+expo-auth-session'),
 };
@@ -132,11 +132,11 @@ This is not supported on Web as we always need to handle the URL of the page.
 
 ## Apps under subpaths
 
-If your app is hosted under a subpath, you can specify the subpath at the top-level of the `config`. For example, if your app is hosted at `https://mychat.com/app`, you can specify the `path` as `app`:
+If your app is hosted under a subpath, you can specify the subpath at the top-level of the `config`. For example, if your app is hosted at `https://example.com/app`, you can specify the `path` as `app`:
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com'],
+  prefixes: ['example://', 'https://example.com'],
   config: {
     // highlight-next-line
     path: 'app',
@@ -322,7 +322,7 @@ const config = {
 };
 
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config,
 };
 
@@ -583,7 +583,7 @@ const state = {
   routes: [
     {
       name: 'Profile',
-      params: { id: 'user-jane', section: 'settings
+      params: { id: 'user-jane', section: 'settings' },
     },
   ],
 };
@@ -1246,6 +1246,109 @@ const config = {
 
 Depending on your requirements, you can use this functionality to parse and stringify more complex data.
 
+## Matching regular expressions
+
+If you need more complex matching logic, you can use regular expressions to match the path. For example, if you want to use the pattern `@username` to match a user's profile, you can use a regular expression to match the path. This allows you to have the same path pattern for multiple screens, but fine-tune the matching logic to be more specific for a particular screen.
+
+Regular expressions can be specified between parentheses `(` and `)` in the after a param name. For example:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Feed: {
+      screen: FeedScreen,
+      linking: {
+        path: ':sort(latest|popular)',
+      },
+    },
+    Profile: {
+      screen: ProfileScreen,
+      linking: {
+        path: ':username(@[A-Za-z0-9_]+)',
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const config = {
+  screens: {
+    Feed: ':sort(latest|popular)',
+    Profile: ':username(@[A-Za-z0-9_]+)',
+  },
+};
+```
+
+</TabItem>
+</Tabs>
+
+This will only match the path if it starts with `@` followed by alphanumeric characters or underscores. For example, the URL `/@jane` will match the `Profile` screen, but `/jane` won't.
+
+Regular expressions are intended to only match path segments, not the entire path. So avoid using `/`, `^`, `$`, etc. in the regular expressions.
+
+:::warning
+
+Regular expressions are an advanced feature. They cannot be validated to warn you about potential issues, so it's up to you to ensure that the regular expression is correct.
+
+:::
+
+## Alias for paths
+
+If you want to have multiple paths for the same screen, you can use the `alias` property to specify an array of paths. This can be useful to keep backward compatibility with old URLs while transitioning to a new URL structure.
+
+For example, if you want to match both `/users/:id` and `/:id` to the `Profile` screen, you can do this:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Profile: {
+      screen: ProfileScreen,
+      linking: {
+        path: ':id',
+        alias: ['users/:id'],
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const config = {
+  screens: {
+    Profile: {
+      path: ':id',
+      alias: ['users/:id'],
+    },
+  },
+};
+```
+
+</TabItem>
+</Tabs>
+
+In this case, when the URL is `/users/jane` or `/jane`, it'll match the `Profile` screen. The `path` is the primary pattern that will be used to generate the URL, e.g. when navigating to the `Profile` screen in the app on the Web. The patterns in `alias` will be ignored when generating URLs. The `alias` patterns are not used for matching any child screens in nested navigators.
+
+On the web, if a screen containing an alias contains a nested navigator, the URL matching the alias will only be used to match the screen, and will be updated to the URL of the focused child screen once the app renders.
+
+Each item in the `alias` array can be a string matching the syntax of the `path` property, or an object with the following properties:
+
+- `path` (required) - The path pattern to match.
+- `exact` - Whether to match the path exactly. Defaults to `false`. See [Matching exact paths](#matching-exact-paths) for more details.
+- `parse` - Function to parse path segments into param values. See [Passing params](#passing-params) for more details.
+
 ## Advanced cases
 
 For some advanced cases, specifying the mapping may not be sufficient. To handle such cases, you can specify a custom function to parse the URL into a state object ([`getStateFromPath`](navigation-container.md#linkinggetstatefrompath)), and a custom function to serialize the state object into an URL ([`getPathFromState`](navigation-container.md#linkinggetpathfromstate)).
@@ -1254,7 +1357,7 @@ Example:
 
 ```js
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   getStateFromPath: (path, options) => {
     // Return a state object here
     // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`

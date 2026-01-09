@@ -15,7 +15,7 @@ One thing to keep in mind is that while `@react-navigation/native-stack` offers 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/native-stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/native-stack):
 
 ```bash npm2yarn
-npm install @react-navigation/native-stack
+npm install @react-navigation/native-stack@^6.x
 ```
 
 ## API Definition
@@ -259,7 +259,17 @@ React.useLayoutEffect(() => {
 }, [navigation]);
 ```
 
-Supported properties are described below.
+Supported properties are:
+
+##### `ref`
+
+Ref to manipulate the search input imperatively. It contains the following methods:
+
+- `focus` - focuses the search bar
+- `blur` - removes focus from the search bar
+- `setText` - sets the search bar's content to given value
+- `clearText` - removes any text present in the search bar input field
+- `cancelSearch` - cancel the search and close the search bar
 
 ##### `autoCapitalize`
 
@@ -447,14 +457,16 @@ Only supported on Android and iOS.
 
 #### `statusBarStyle`
 
-Sets the status bar color (similar to the `StatusBar` component). Defaults to `auto`.
+Sets the status bar color (similar to the `StatusBar` component).
 
 Supported values:
 
-- `"auto"`
+- `"auto"` (iOS only)
 - `"inverted"` (iOS only)
 - `"dark"`
 - `"light"`
+
+Defaults to `auto` on iOS and `light` on Android.
 
 Requires setting `View controller-based status bar appearance -> YES` (or removing the config) in your `Info.plist` file.
 
@@ -579,7 +591,7 @@ Only supported on iOS.
 
 Changes the duration (in milliseconds) of `slide_from_bottom`, `fade_from_bottom`, `fade` and `simple_push` transitions on iOS. Defaults to `350`.
 
-The duration of `default` and `flip` transitions isn't customizable.
+For screens with `default` and `flip` transitions, and for screens with `presentation` set to `modal`, `formSheet`, `pageSheet` (regardless of transition), the duration isn't customizable.
 
 Only supported on iOS.
 

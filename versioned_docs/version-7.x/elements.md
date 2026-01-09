@@ -14,7 +14,7 @@ A component library containing the UI elements and helpers used in React Navigat
 To use this package, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/elements`](https://github.com/react-navigation/react-navigation/tree/main/packages/elements):
 
 ```bash npm2yarn
-npm install @react-navigation/elements@next
+npm install @react-navigation/elements
 ```
 
 ## Components
@@ -233,7 +233,10 @@ It receives an object containing following properties:
 - `tintColor`: The color of the icon and label.
 - `pressColor`: The color of the material ripple (Android >= 5.0 only).
 - `pressOpacity`: The opacity of the button when it's pressed (Android < 5.0, and iOS).
-- `labelVisible`: Whether the label text is visible. Defaults to `true` on iOS and `false` on Android.
+- `displayMode`: How the element displays icon and title. Defaults to `default` on iOS and `minimal` on Android. Possible values:
+  - `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
+  - `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon). iOS >= 14 only, falls back to "default" on older iOS versions.
+  - `minimal`: Always displays only the icon without a title.
 - `href`: The URL to open when the button is pressed on the Web.
 
 You can use it to implement your custom left button, for example:
@@ -340,6 +343,12 @@ Options for the search bar in the header. When this is specified, the header wil
 
 It can contain the following properties:
 
+- `ref`: Ref to manipulate the search input imperatively. It contains the following methods:
+  - `focus` - focuses the search bar
+  - `blur` - removes focus from the search bar
+  - `setText` - sets the search bar's content to given value
+  - `clearText` - removes any text present in the search bar input field
+  - `cancelSearch` - cancel the search and close the search bar
 - `autoCapitalize`: The auto-capitalization behavior. Possible values: `none`, `words`, `sentences`, `characters`.
 - `autoFocus`: Automatically focus search input on mount.
 - `cancelButtonText`: Text to be used instead of default `Cancel` button text (iOS only).
@@ -377,11 +386,19 @@ This is a short-hand for the following styles:
 }
 ```
 
-If the above styles are specified in `headerStyle` along with `headerShadowVisible: false`, then `headerShadowVisible: false` will take precedence.
+If any of the above styles are specified in `headerStyle` along with `headerShadowVisible: false`, then the styles in `headerStyle` will take precedence.
 
 #### `headerStyle`
 
-Style object for the header. You can specify a custom background color here, for example.
+Style object for the header. You can specify a custom background color here, for example:
+
+```js
+{
+  backgroundColor: 'tomato',
+}
+```
+
+Note that `headerStyle` won't take effect if you are also using [`headerBackground`](#headerbackground). In that case, you should style the element returned from `headerBackground` instead.
 
 #### `headerTitleStyle`
 
@@ -637,7 +654,10 @@ A component used to show the back button header. It's the default for [`headerLe
 - `tintColor` - Tint color for the header.
 - `label` - Label text for the button. Usually the title of the previous screen. By default, this is only shown on iOS.
 - `truncatedLabel` - Label text to show when there isn't enough space for the full label.
-- `labelVisible` - Whether the label text is visible. Defaults to `true` on iOS and `false` on Android.
+- `displayMode`: How the back button displays icon and title. Defaults to `default` on iOS and `minimal` on Android. Possible values:
+  - `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
+  - `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon). iOS >= 14 only, falls back to "default" on older iOS versions.
+  - `minimal`: Always displays only the icon without a title.
 - `labelStyle` - Style object for the label.
 - `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings.
 - `onLabelLayout` - Callback to trigger when the size of the label changes.
@@ -811,3 +831,17 @@ Helper that returns the title text to use in header. It takes the following para
 
 - `options` - The options object of the screen.
 - `fallback` - Fallback title string if no title was found in options.
+
+### `useFrameSize`
+
+Hook that returns the size of the frame of the parent navigator. It accepts a selector function which receives the frame dimensions and returns a value:
+
+```js
+import { useFrameSize } from '@react-navigation/elements';
+
+// ...
+
+const isLandscape = useFrameSize((frame) => frame.width > frame.height);
+```
+
+The selector ensures that the component only re-renders when we need to.

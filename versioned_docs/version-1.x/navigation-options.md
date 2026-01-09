@@ -102,5 +102,5 @@ List of available navigation options depends on the `navigator` the screen is ad
 Check available options for:
 
 - [`drawer navigator`](drawer-navigator.md#screen-navigation-options)
-- [`stack navigator`](stack-navigator.md#screen-navigation-options)
-- [`tab navigator`](tab-navigator.md#screen-navigation-options)
+- [`stack navigator`](stack-navigator.md#navigationoptions-used-by-stacknavigator)
+- [`tab navigator`](tab-navigator.md#navigationoptions-used-by-tabnavigator)

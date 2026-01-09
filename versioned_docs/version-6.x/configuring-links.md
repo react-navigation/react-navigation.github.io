@@ -47,13 +47,13 @@ You can also pass a [`fallback`](navigation-container.md#fallback) prop to `Navi
 
 ## Prefixes
 
-The `prefixes` option can be used to specify custom schemes (e.g. `mychat://`) as well as host & domain names (e.g. `https://mychat.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
+The `prefixes` option can be used to specify custom schemes (e.g. `example://`) as well as host & domain names (e.g. `https://example.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
 
 For example:
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com'],
+  prefixes: ['example://', 'https://example.com'],
 };
 ```
 
@@ -61,11 +61,11 @@ Note that the `prefixes` option is not supported on Web. The host & domain names
 
 ### Multiple subdomains​
 
-To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*`. before the beginning of a specific domain. Note that an entry for `*.mychat.com` does not match `mychat.com` because of the period after the asterisk. To enable matching for both `*.mychat.com` and `mychat.com`, you need to provide a separate prefix entry for each.
+To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*`. before the beginning of a specific domain. Note that an entry for `*.example.com` does not match `example.com` because of the period after the asterisk. To enable matching for both `*.example.com` and `example.com`, you need to provide a separate prefix entry for each.
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com', 'https://*.mychat.com'],
+  prefixes: ['example://', 'https://example.com', 'https://*.example.com'],
 };
 ```
 
@@ -77,7 +77,7 @@ To achieve this, you can use the `filter` option:
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com'],
+  prefixes: ['example://', 'https://example.com'],
   filter: (url) => !url.includes('+expo-auth-session'),
 };
 ```
@@ -149,7 +149,7 @@ const config = {
 };
 
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config,
 };
 
@@ -679,7 +679,7 @@ Example:
 
 ```js
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config: {
     screens: {
       Chat: 'feed/:sort',

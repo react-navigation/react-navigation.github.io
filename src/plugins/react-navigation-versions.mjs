@@ -29,13 +29,29 @@ const query = async (name, tag) => {
   return pkg;
 };
 
-export default function friendsPlugin(context, options) {
+export default function reactNavigationVersionsPlugin(context, options) {
   return {
     name: 'react-navigation-versions',
     async contentLoaded({ content, actions }) {
       const queries = {
-        '7.x': {
+        '8.x': {
           tag: 'next',
+          packages: [
+            '@react-navigation/bottom-tabs',
+            '@react-navigation/core',
+            '@react-navigation/drawer',
+            '@react-navigation/elements',
+            '@react-navigation/material-top-tabs',
+            '@react-navigation/native-stack',
+            '@react-navigation/native',
+            '@react-navigation/routers',
+            '@react-navigation/stack',
+            'react-native-drawer-layout',
+            'react-native-tab-view',
+          ],
+        },
+        '7.x': {
+          tag: 'latest',
           packages: [
             '@react-navigation/bottom-tabs',
             '@react-navigation/core',

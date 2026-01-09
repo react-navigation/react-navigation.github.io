@@ -1,9 +1,6 @@
 ---
 title: Introducing Static API
-author: Satyajit Sahoo
-author_url: https://twitter.com/satya164
-author_title: Core Team
-author_image_url: https://avatars2.githubusercontent.com/u/1174278?s=200&v=4
+authors: satya
 tags: [announcement]
 ---
 
@@ -67,7 +64,7 @@ function App() {
 
 This component is similar to `NavigationContainer` and accepts most of the props accepted by `NavigationContainer`. So this is the place where you can do things like track for screen changes, persist navigation state etc.
 
-See [Static API reference](/docs/7.x/static-configuration?config=static) for more details.
+See [Static API reference](/docs/static-configuration?config=static) for more details.
 
 ## TypeScript
 
@@ -84,7 +81,7 @@ declare global {
 }
 ```
 
-See [Type checking with TypeScript](/docs/7.x/typescript?config=static) for more details.
+See [Type checking with TypeScript](/docs/typescript?config=static) for more details.
 
 ## Deep Linking
 
@@ -141,7 +138,7 @@ There are 2 improvements to deep linking API:
      return (
        <Navigation
          linking={{
-           prefixes: ['https://mychat.com', 'mychat://'],
+           prefixes: ['https://example.com', 'example://'],
            // highlight-next-line
            enabled: 'auto',
          }}
@@ -152,7 +149,7 @@ There are 2 improvements to deep linking API:
    }
    ```
 
-See [Configuring links](/docs/7.x/configuring-links?config=static) for more details.
+See [Configuring links](/docs/configuring-links?config=static) for more details.
 
 ## Authentication Flow
 
@@ -175,13 +172,13 @@ const RootStack = createNativeStackNavigator({
 
 The if property takes a hook that returns a boolean. When the hook returns true, the screen will be included in the navigation tree, and when it returns false, it won’t be included.
 
-See [Authentication flows](/docs/7.x/auth-flow?config=static) for more details.
+See [Authentication flows](/docs/auth-flow?config=static) for more details.
 
 ## Interoperability
 
 Since we have 2 different APIs in the same library, it's important that they both work together. This way you could start an app with the static API, but if you need flexibility for a specific navigator, you could use the dynamic API for that part. Or you may want to migrate to the static API to reduce the complexity, and with the interoperability, you can do that incrementally.
 
-See [Combining static and dynamic APIs](/docs/7.x/combine-static-with-dynamic) for more details.
+See [Combining static and dynamic APIs](/docs/combine-static-with-dynamic) for more details.
 
 ## Help us test
 
@@ -191,6 +188,6 @@ The Static API is currently available in React Navigation 7 alpha. You can try i
 yarn add @react-navigation/native@next @react-navigation/native-stack@next
 ```
 
-In addition to the static API, React Navigation 7 also includes a lot of other improvements and new features. Make sure to go through the [upgrade guide](/docs/7.x/upgrading-from-6.x) to see all the changes.
+In addition to the static API, React Navigation 7 also includes a lot of other improvements and new features. Make sure to go through the [upgrade guide](/docs/upgrading-from-6.x) to see all the changes.
 
 We would love to get feedback from the community on how it works for you and catch any issues before the stable release. If you have any feedback or suggestions, please let us know on our [GitHub Discussions forum](https://github.com/react-navigation/react-navigation/discussions). If you find any issues, please report them on our [GitHub issues](https://github.com/react-navigation/react-navigation/issues).

@@ -20,7 +20,7 @@ Here are some resources to help you out:
 ## Minimum requirements
 
 - `react-native` >= 0.63.0
-- `expo` >= 41 (if you use [Expo](https://expo.io))
+- `expo` >= 41 (if you use [Expo Go](https://expo.dev/go))
 - `typescript` >= 4.1.0 (if you use [TypeScript](https://www.typescriptlang.org))
 
 ## Installation
@@ -28,7 +28,7 @@ Here are some resources to help you out:
 Install the required packages in your React Native project:
 
 ```bash npm2yarn
-npm install @react-navigation/native
+npm install @react-navigation/native@^6.x
 ```
 
 React Navigation is made up of some core utilities and those are then used by navigators to create the navigation structure in your app. Don't worry too much about this for now, it'll become clear soon enough! To frontload the installation work, let's also install and configure dependencies used by most navigators, then we can move forward with starting to write some code.

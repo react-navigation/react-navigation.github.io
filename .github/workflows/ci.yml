@@ -17,5 +17,8 @@ jobs:
       - name: Lint markdown
         run: yarn markdownlint-cli2
 
+      - name: Run tests
+        run: yarn test
+
       - name: Build pages
         run: yarn build

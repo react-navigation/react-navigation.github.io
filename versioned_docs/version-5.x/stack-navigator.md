@@ -70,8 +70,8 @@ Defines the style for rendering and transitions:
 
 Specifies how the header should be rendered:
 
-- `float` - Render a single header that stays at the top and animates as screens are changed. This is a common pattern on iOS.
-- `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is a common pattern on Android.
+- `float` - The header is rendered above the screen and animates independently of the screen. This is default on iOS for non-modals.
+- `screen` - The header is rendered as part of the screen and animates together with the screen. This is default on other platforms.
 - `none` - No header will be shown. It's recommended to use [`headerShown`](#headershown) option instead for more granularity.
 
 #### `detachInactiveScreens`
@@ -598,7 +598,6 @@ function MyStack() {
 Stack Navigator exposes various options to configure the transition animation when a screen is added or removed. These transition animations can be customized on a per-screen basis by specifying the options in the `options` prop for each screen.
 
 - `gestureDirection` - The direction of swipe gestures:
-
   - `horizontal` - The gesture to close the screen will start from the left, and from the right in RTL. For animations, screen will slide from the right with `SlideFromRightIOS`, and from the left in RTL.
   - `horizontal-inverted` - The gesture to close the screen will start from the right, and from the left in RTL. For animations, screen will slide from the left with `SlideFromRightIOS`, and from the right in RTL as the direction is inverted.
   - `vertical` - The gesture to close the screen will start from the top. For animations, screen will slide from the bottom.
@@ -607,12 +606,10 @@ Stack Navigator exposes various options to configure the transition animation wh
   You may want to specify a matching horizontal/vertical animation along with `gestureDirection` as well. For the animations included in the library, if you set `gestureDirection` to one of the inverted ones, it'll also flip the animation direction.
 
 - `transitionSpec` - An object which specifies the animation type (`timing` or `spring`) and their options (such as `duration` for `timing`). It takes 2 properties:
-
   - `open` - Configuration for the transition when adding a screen
   - `close` - Configuration for the transition when removing a screen.
 
   Each of the object should specify 2 properties:
-
   - `animation` - The animation function to use for the animation. Supported values are `timing` and `spring`.
   - `config` - The configuration object for the timing function. For `timing`, it can be `duration` and `easing`. For `spring`, it can be `stiffness`, `damping`, `mass`, `overshootClamping`, `restDisplacementThreshold` and `restSpeedThreshold`.
 
@@ -650,14 +647,12 @@ Stack Navigator exposes various options to configure the transition animation wh
   ```
 
 - `cardStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the card. This allows you to customize the transitions when navigating from screen to screen. It is expected to return at least empty object, possibly containing interpolated styles for container, the card itself, overlay and shadow. Supported properties are:
-
   - `containerStyle` - Style for the container view wrapping the card.
   - `cardStyle` - Style for the view representing the card.
   - `overlayStyle` - Style for the view representing the semi-transparent overlay below
   - `shadowStyle` - Style for the view representing the card shadow.
 
   The function receives the following properties in its argument:
-
   - `current` - Values for the current screen:
     - `progress` - Animated node representing the progress value of the current screen.
   - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
@@ -692,7 +687,6 @@ Stack Navigator exposes various options to configure the transition animation wh
   ```
 
   The interpolator will be called for each screen. For example, say you have a 2 screens in the stack, A & B. B is the new screen coming into focus and A is the previous screen. The interpolator will be called for each screen:
-
   - The interpolator is called for `B`: Here, the `current.progress` value represents the progress of the transition, which will start at `0` and end at `1`. There won't be a `next.progress` since `B` is the last screen.
   - The interpolator is called for `A`: Here, the `current.progress` will stay at the value of `1` and won't change, since the current transition is running for `B`, not `A`. The `next.progress` value represents the progress of `B` and will start at `0` and end at `1`.
 
@@ -760,7 +754,6 @@ Stack Navigator exposes various options to configure the transition animation wh
   ```
 
 - `headerStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the header. It is expected to return at least empty object, possibly containing interpolated styles for left label and button, right button, title and background. Supported properties are:
-
   - `leftLabelStyle` - Style for the label of the left button (back button label).
   - `leftButtonStyle` - Style for the left button (usually the back button).
   - `rightButtonStyle` - Style for the right button.
@@ -768,7 +761,6 @@ Stack Navigator exposes various options to configure the transition animation wh
   - `backgroundStyle` - Style for the header background.
 
   The function receives the following properties in it's argument:
-
   - `current` - Values for the current screen (the screen which owns this header).
     - `progress` - Animated node representing the progress value of the current screen. `0` when screen should start coming into view, `0.5` when it's mid-way, `1` when it should be fully in view.
   - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.

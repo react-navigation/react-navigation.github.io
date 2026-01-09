@@ -11,10 +11,7 @@ import TabItem from '@theme/TabItem';
 
 The `useNavigation` hook returns the `navigation` object of the screen where it's used:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="useNavigation hook" snack
+```js name="useNavigation hook" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -61,7 +58,7 @@ function ProfileScreen() {
   );
 }
 
-const Stack = createNativeStackNavigator({
+const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
   screens: {
     Home: HomeScreen,
@@ -69,7 +66,7 @@ const Stack = createNativeStackNavigator({
   },
 });
 
-const Navigation = createStaticNavigation(Stack);
+const Navigation = createStaticNavigation(RootStack);
 
 function App() {
   return <Navigation />;
@@ -77,71 +74,6 @@ function App() {
 
 export default App;
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="useNavigation hook" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// codeblock-focus-start
-import { useNavigation } from '@react-navigation/native';
-
-function MyBackButton() {
-  // highlight-next-line
-  const navigation = useNavigation();
-
-  return (
-    <Button
-      onPress={() => {
-        navigation.goBack();
-      }}
-    >
-      Back
-    </Button>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen({ navigation: { navigate } }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>This is the home screen of the app</Text>
-      <Button onPress={() => navigate('Profile')}>Go to Profile</Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <MyBackButton />
-    </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
-export default App;
-```
-
-</TabItem>
-</Tabs>
 
 Check how to setup `useNavigation` with TypeScript [here](typescript.md#annotating-usenavigation).
 
