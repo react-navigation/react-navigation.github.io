@@ -1,8 +1,7 @@
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Text, View } from 'react-native';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
@@ -43,11 +42,11 @@ export default function App() {
           <Stack.Screen name="Home">
             {() => (
               <Tab.Navigator
-                initialRouteName="Analitics"
+                initialRouteName="Analytics"
                 tabBar={() => null}
                 screenOptions={{ headerShown: false }}
               >
-                <Tab.Screen name="Analitics" component={Demo} />
+                <Tab.Screen name="Analytics" component={Demo} />
                 <Tab.Screen name="Profile" component={Demo} />
               </Tab.Navigator>
             )}

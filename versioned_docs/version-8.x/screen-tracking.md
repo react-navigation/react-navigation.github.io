@@ -76,6 +76,9 @@ export default function App() {
       ref={navigationRef}
       onReady={() => {
         routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+
+        // Replace the line below to add the tracker from a mobile analytics SDK
+        await trackScreenView(currentRouteName);
       }}
       onStateChange={async () => {
         const previousRouteName = routeNameRef.current;
@@ -101,7 +104,7 @@ export default function App() {
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Screen tracking for anylytics" snack
+```js name="Screen tracking for analytics" snack
 import * as React from 'react';
 import { View } from 'react-native';
 // codeblock-focus-start
