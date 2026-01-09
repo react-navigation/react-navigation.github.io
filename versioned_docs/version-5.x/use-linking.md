@@ -57,9 +57,9 @@ export default function App() {
 
 See [deep linking guide](deep-linking.md) for a complete guide on how to configure deep linking.
 
-### Options
+## Options
 
-#### `prefixes`
+### `prefixes`
 
 URL prefixes to handle. You can provide multiple prefixes to support custom schemes as well as [universal links](https://developer.apple.com/ios/universal-links/).
 
@@ -80,7 +80,7 @@ useLinking(ref, {
 
 This is only supported on iOS and Android.
 
-#### `config`
+### `config`
 
 Config to fine-tune how to parse the path. The config object should represent the structure of the navigators in the app.
 
@@ -179,11 +179,11 @@ The `parse` option controls how the params are parsed. Here, you can provide the
 
 If no custom function is provided for parsing a param, it'll be parsed as a string.
 
-#### `enabled`
+### `enabled`
 
 Optional boolean to enable or disable the linking integration. Defaults to `true`.
 
-#### `getStateFromPath`
+### `getStateFromPath`
 
 You can optionally override the way React Navigation parses deep links to a state object by providing your own implementation.
 
@@ -204,7 +204,7 @@ useLinking(ref, {
 });
 ```
 
-#### `getPathFromState`
+### `getPathFromState`
 
 You can optionally override the way React Navigation serializes state objects to link by providing your own implementation. This is necessary for proper web support if you have specified `getStateFromPath`.
 

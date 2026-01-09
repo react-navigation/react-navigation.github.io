@@ -336,7 +336,7 @@ The `popToTopOnBlur` option provides an alternative approach - it pops the scree
 
 See [Bottom Tab Navigator](bottom-tab-navigator.md#poptotoponblur) and [Drawer Navigator](drawer-navigator.md#poptotoponblur) docs for usage.
 
-It's still possible to achieve the old behavior of `unmountOnBlur` by using the useIsFocused hook in the screen:
+It's still possible to achieve the old behavior of `unmountOnBlur` by using the [`useIsFocused`](use-is-focused.md) hook in the screen:
 
 ```js
 const isFocused = useIsFocused();
@@ -346,7 +346,45 @@ if (!isFocused) {
 }
 ```
 
-This could also be combined with the new [layout props](#new-layout-props) to specify it at the screen configuration level.
+This could also be combined with the new [layout props](#new-layout-props) to specify it at the screen configuration level to make the migration easier.
+
+To achieve this, define a component that uses the `useIsFocused` hook to conditionally render its children:
+
+```js
+function UnmountOnBlur({ children }) {
+  const isFocused = useIsFocused();
+
+  if (!isFocused) {
+    return null;
+  }
+
+  return children;
+}
+```
+
+Then use the component in `layout` prop of the screen:
+
+```diff lang=js
+<Tab.Screen
+  name="MyScreen"
+  component={MyScreen}
++   layout={({ children }) => <UnmountOnBlur>{children}</UnmountOnBlur>}
+  options={{
+-     unmountOnBlur: true,
+  }}
+/>
+```
+
+Or `screenLayout` prop of the navigator:
+
+```diff lang=js
+<Tab.Navigator
++   screenLayout={({ children }) => <UnmountOnBlur>{children}</UnmountOnBlur>}
+  screenOptions={{
+-     unmountOnBlur: true,
+  }}
+>
+```
 
 #### The `tabBarTestID` option is renamed to `tabBarButtonTestID` in Bottom Tab Navigator and Material Top Tab Navigator
 
@@ -494,17 +532,36 @@ Previously, the UI elements in React Navigation such as the header on platforms 
 
 #### React Native Tab View now has a new API to specify various options
 
-The API for the `TabView` and `TabBar` component in `react-native-tab-view` has been revamped. Previously, the `TabBar` took the following props:
+The API for the `TabView` and `TabBar` component in `react-native-tab-view` has been revamped.
 
-- `getLabelText`
-- `getAccessible`
-- `getAccessibilityLabel`
-- `getTestID`
-- `renderIcon`
-- `renderLabel`
-- `renderBadge`
+Some of props accepted by the `TabBar` have now been replaced with `commonOptions` and `options` props on `TabView`:
 
-These props have been replaced with `commonOptions` and `options` props on `TabView`:
+- `getLabelText` -> `labelText`
+- `getAccessible` -> `accessible`
+- `getAccessibilityLabel` -> `accessibilityLabel`
+- `getTestID` -> `testID`
+- `renderIcon` -> `icon`
+- `renderLabel` -> `label`
+- `renderBadge` -> `badge`
+- `labelStyle`
+- `sceneContainerStyle` -> `sceneStyle`
+
+To keep the same behavior when updating your existing code, move these props to `commonOptions` prop on `TabView`:
+
+```diff lang=js
+<TabView
+  renderTabBar={(props) => (
+-     <TabBar {...props} renderLabel={renderLabel} labelStyle={labelStyle} />
++     <TabBar {...props} />
+  )}
++   commonOptions={{
++     label: renderLabel,
++     labelStyle,
++   }}
+/>
+```
+
+The options can also be customized individually for each tab by passing an object to the `options` prop with the `route.key` as the key and the options as the value:
 
 ```js
 <TabView

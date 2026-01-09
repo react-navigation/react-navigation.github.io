@@ -20,63 +20,42 @@ To use this navigator, ensure that you have [`@react-navigation/native` and its 
 npm install @react-navigation/drawer
 ```
 
-Then, you need to install and configure the libraries that are required by the drawer navigator:
+The navigator depends on [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) for gestures and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) for animations.
 
-1. First, install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) (at least version 2 or 3).
+<Tabs groupId='framework' queryString="framework">
+<TabItem value='expo' label='Expo' default>
 
-   If you have a Expo managed project, in your project directory, run:
+If you have a Expo managed project, in your project directory, run:
 
-   ```bash
-   npx expo install react-native-gesture-handler react-native-reanimated
-   ```
+```bash
+npx expo install react-native-gesture-handler react-native-reanimated react-native-worklets
+```
 
-   If you have a bare React Native project, in your project directory, run:
+</TabItem>
+<TabItem value='community-cli' label='Community CLI'>
 
-   ```bash npm2yarn
-   npm install react-native-gesture-handler react-native-reanimated
-   ```
+If you have a bare React Native project, in your project directory, run:
 
-2. Configure the Reanimated Babel Plugin in your project following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
+```bash npm2yarn
+npm install react-native-gesture-handler react-native-reanimated react-native-worklets
+```
 
-3. To finalize the installation of `react-native-gesture-handler`, we need to conditionally import it. To do this, create 2 files:
+After installation, configure the Reanimated Babel Plugin in your project following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
-   ```js title="gesture-handler.native.js"
-   // Only import react-native-gesture-handler on native platforms
-   import 'react-native-gesture-handler';
-   ```
+</TabItem>
+</Tabs>
 
-   ```js title="gesture-handler.js"
-   // Don't import react-native-gesture-handler on web
-   ```
+If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
 
-   Now, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
-
-   ```js
-   import './gesture-handler';
-   ```
-
-   Since the drawer navigator doesn't use `react-native-gesture-handler` on Web, this avoids unnecessarily increasing the bundle size.
-
-   :::warning
-
-   If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
-
-   :::
-
-4. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
-
-   ```bash
-   npx pod-install ios
-   ```
+```bash
+npx pod-install ios
+```
 
 ## Usage
 
 To use this navigator, import it from `@react-navigation/drawer`:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Drawer Navigator" snack
+```js name="Drawer Navigator" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import {
@@ -128,65 +107,6 @@ export default function App() {
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Drawer Navigator" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import { createDrawerNavigator } from '@react-navigation/drawer';
-
-const Drawer = createDrawerNavigator();
-
-function MyDrawer() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Home" component={HomeScreen} />
-      <Drawer.Screen name="Profile" component={ProfileScreen} />
-    </Drawer.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyDrawer />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
 ## API Definition
 
 ### Props
@@ -203,6 +123,7 @@ It supports the following values:
 - `initialRoute` - return to initial screen passed in `initialRouteName` prop, if not passed, defaults to the first screen
 - `order` - return to screen defined before the focused screen
 - `history` - return to last visited screen in the navigator; if the same screen is visited multiple times, the older entries are dropped from the history
+- `fullHistory` - return to last visited screen in the navigator; doesn't drop duplicate entries unlike `history` - this behavior is useful to match how web pages work
 - `none` - do not handle back button
 
 #### `defaultStatus`
@@ -248,9 +169,34 @@ function CustomDrawerContent(props) {
 
 To add additional items in the drawer, you can use the `DrawerItem` component:
 
-<samp id="custom-drawer-content" />
+```js name="Custom Drawer Content" snack static2dynamic
+import * as React from 'react';
+import { Text, View, Linking } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from '@react-navigation/drawer';
 
-```js
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+    </View>
+  );
+}
+
+// codeblock-focus-start
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
@@ -261,6 +207,21 @@ function CustomDrawerContent(props) {
       />
     </DrawerContentScrollView>
   );
+}
+// codeblock-focus-end
+
+const MyDrawer = createDrawerNavigator({
+  drawerContent: (props) => <CustomDrawerContent {...props} />,
+  screens: {
+    Home: HomeScreen,
+    Settings: SettingsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyDrawer);
+
+export default function App() {
+  return <Navigation />;
 }
 ```
 
@@ -304,7 +265,7 @@ To use the custom component, we need to pass it in the `drawerContent` prop:
 
 ### Options
 
-The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Drawer.navigator` or `options` prop of `Drawer.Screen`.
+The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Drawer.Navigator` or `options` prop of `Drawer.Screen`.
 
 #### `title`
 
@@ -368,7 +329,7 @@ Example:
    drawerItemStyle: {
     backgroundColor: '#9dd3c8',
     borderColor: 'black',
-    orderWidth: 2,
+    borderWidth: 2,
     opacity: 0.6,
   },
 ```
@@ -581,7 +542,7 @@ It only works when there is a stack navigator (e.g. [stack navigator](stack-navi
 
 ### Header related options
 
-You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Drawer.navigator` or `options` prop of `Drawer.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
+You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Drawer.Navigator` or `options` prop of `Drawer.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
 
 In addition to those, the following options are also supported in drawer:
 
@@ -667,17 +628,68 @@ The drawer navigator adds the following methods to the navigation object:
 
 Opens the drawer pane.
 
-<samp id="drawer-open-close-toggle" />
+```js name="Drawer Helper Methods" snack static2dynamic
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-```js
-navigation.openDrawer();
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 8,
+      }}
+    >
+      <Text>Home Screen</Text>
+      <Button
+        onPress={
+          () =>
+            // codeblock-focus-start
+            navigation.openDrawer()
+          // codeblock-focus-end
+        }
+      >
+        Open Drawer
+      </Button>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+    </View>
+  );
+}
+
+const MyDrawer = createDrawerNavigator({
+  screens: {
+    Home: HomeScreen,
+    Settings: SettingsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyDrawer);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 #### `closeDrawer`
 
 Closes the drawer pane.
-
-<samp id="drawer-open-close-toggle" />
 
 ```js
 navigation.closeDrawer();
@@ -686,8 +698,6 @@ navigation.closeDrawer();
 #### `toggleDrawer`
 
 Opens the drawer pane if closed, closes the drawer pane if opened.
-
-<samp id="drawer-open-close-toggle" />
 
 ```js
 navigation.toggleDrawer();
@@ -700,10 +710,59 @@ Navigates to an existing screen in the drawer navigator. The method accepts the 
 - `name` - _string_ - Name of the route to jump to.
 - `params` - _object_ - Screen params to pass to the destination route.
 
-<samp id="drawer-jump-to" />
+```js name="Drawer Navigator - jumpTo" snack static2dynamic
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-```js
-navigation.jumpTo('Profile', { owner: 'Satya' });
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        onPress={
+          () =>
+            // codeblock-focus-start
+            navigation.jumpTo('Profile', { owner: 'Satya' })
+          // codeblock-focus-end
+        }
+      >
+        Jump to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen({ route }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      {route.params?.owner && (
+        <Text style={{ marginTop: 10 }}>Owner: {route.params.owner}</Text>
+      )}
+    </View>
+  );
+}
+
+const MyDrawer = createDrawerNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyDrawer);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 ### Hooks
@@ -716,10 +775,7 @@ This hook returns the progress of the drawer. It is available in the screen comp
 
 The `progress` object is a `SharedValue` that represents the animated position of the drawer (`0` is closed; `1` is open). It can be used to animate elements based on the animation of the drawer with [Reanimated](https://docs.swmansion.com/react-native-reanimated/):
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Drawer animation progress" snack
+```js name="Drawer animation progress" snack static2dynamic
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -768,68 +824,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Drawer animation progress" snack
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import {
-  createDrawerNavigator,
-  useDrawerProgress,
-} from '@react-navigation/drawer';
-import Animated, { useAnimatedStyle } from 'react-native-reanimated';
-
-function HomeScreen() {
-  // highlight-next-line
-  const progress = useDrawerProgress();
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: progress.value * -100 }],
-  }));
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Animated.View
-        style={[
-          {
-            height: 100,
-            aspectRatio: 1,
-            backgroundColor: 'tomato',
-          },
-          animatedStyle,
-        ]}
-      />
-    </View>
-  );
-}
-// codeblock-focus-end
-
-const Drawer = createDrawerNavigator();
-
-function MyDrawer() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Home" component={HomeScreen} />
-    </Drawer.Navigator>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyDrawer />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 If you are using class components, you can use the `DrawerProgressContext` to get the progress value.
 

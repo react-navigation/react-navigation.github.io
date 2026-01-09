@@ -32,7 +32,7 @@ The `navigation` object can be accessed inside any screen component with the [`u
 
 :::
 
-### Navigator-dependent functions
+## Navigator-dependent functions
 
 There are several additional functions present on `navigation` object based on the kind of the current navigator.
 
@@ -451,7 +451,7 @@ The `reset` method lets us replace the navigator state with a new state:
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigate - replace and reset" snack
+```js name="Navigation object replace and reset" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -590,7 +590,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigate - replace and reset" snack
+```js name="Navigation object replace and reset" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -972,7 +972,7 @@ The `setParams` method lets us update the params (`route.params`) of the current
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigate - setParams" snack
+```js name="Navigation object setParams" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -1074,7 +1074,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigate - setParams" snack
+```js name="Navigation object setParams" snack
 import * as React from 'react';
 import { Button } from '@react-navigation/elements';
 import { View, Text } from 'react-native';
@@ -1173,6 +1173,214 @@ export default App;
 </TabItem>
 </Tabs>
 
+### `replaceParams`
+
+The `replaceParams` method lets us replace the params (`route.params`) of the current screen with a new params object.
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js name="Navigation object replaceParams" snack
+import * as React from 'react';
+import { Button } from '@react-navigation/elements';
+import { View, Text } from 'react-native';
+import {
+  useNavigation,
+  createStaticNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>This is the home screen of the app</Text>
+      <Button
+        onPress={() => {
+          navigation.navigate('Profile', {
+            friends: ['Brent', 'Satya', 'Michaś'],
+            title: "Brent's Profile",
+          });
+        }}
+      >
+        Go to Brents profile
+      </Button>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile Screen</Text>
+      <Text>Friends: </Text>
+      <Text>{route.params.friends[0]}</Text>
+      <Text>{route.params.friends[1]}</Text>
+      <Text>{route.params.friends[2]}</Text>
+      <Button
+        onPress={() => {
+          // highlight-start
+          navigation.replaceParams({
+            friends:
+              route.params.friends[0] === 'Brent'
+                ? ['Wojciech', 'Szymon', 'Jakub']
+                : ['Brent', 'Satya', 'Michaś'],
+            title:
+              route.params.title === "Brent's Profile"
+                ? "Lucy's Profile"
+                : "Brent's Profile",
+          });
+          // highlight-end
+        }}
+      >
+        Swap title and friends
+      </Button>
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
+    </View>
+  );
+}
+// codeblock-focus-end
+
+const Stack = createNativeStackNavigator({
+  initialRouteName: 'Home',
+  screens: {
+    Home: HomeScreen,
+    Profile: {
+      screen: ProfileScreen,
+      options: ({ route }) => ({ title: route.params.title }),
+    },
+  },
+});
+
+const Navigation = createStaticNavigation(Stack);
+
+function App() {
+  return <Navigation />;
+}
+
+export default App;
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js name="Navigation object replaceParams" snack
+import * as React from 'react';
+import { Button } from '@react-navigation/elements';
+import { View, Text } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>This is the home screen of the app</Text>
+      <Button
+        onPress={() => {
+          navigation.navigate('Profile', {
+            friends: ['Brent', 'Satya', 'Michaś'],
+            title: "Brent's Profile",
+          });
+        }}
+      >
+        Go to Brents profile
+      </Button>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+function ProfileScreen({ route }) {
+  const navigation = useNavigation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        gap: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Profile Screen</Text>
+      <Text>Friends: </Text>
+      <Text>{route.params.friends[0]}</Text>
+      <Text>{route.params.friends[1]}</Text>
+      <Text>{route.params.friends[2]}</Text>
+      <Button
+        onPress={() => {
+          // highlight-start
+          navigation.replaceParams({
+            friends:
+              route.params.friends[0] === 'Brent'
+                ? ['Wojciech', 'Szymon', 'Jakub']
+                : ['Brent', 'Satya', 'Michaś'],
+            title:
+              route.params.title === "Brent's Profile"
+                ? "Lucy's Profile"
+                : "Brent's Profile",
+          });
+          // highlight-end
+        }}
+      >
+        Swap title and friends
+      </Button>
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
+    </View>
+  );
+}
+// codeblock-focus-end
+
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={({ route }) => ({ title: route.params.title })}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
+```
+
+</TabItem>
+</Tabs>
+
 ### `setOptions`
 
 The `setOptions` method lets us set screen options from within the component. This is useful if we need to use the component's props, state or context to configure our screen.
@@ -1180,7 +1388,7 @@ The `setOptions` method lets us set screen options from within the component. Th
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-```js name="Navigate - setOptions" snack
+```js name="Navigation object setOptions" snack
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -1270,7 +1478,7 @@ export default App;
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-```js name="Navigate - setOptions" snack
+```js name="Navigation object setOptions" snack
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { Button } from '@react-navigation/elements';
