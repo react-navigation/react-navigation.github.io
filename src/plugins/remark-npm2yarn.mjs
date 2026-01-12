@@ -24,7 +24,11 @@ function createTabItem({ code, node, pm }) {
     name: 'TabItem',
     attributes: [
       { type: 'mdxJsxAttribute', name: 'value', value: pm },
-      { type: 'mdxJsxAttribute', name: 'label', value: createLabelWithIcon(pm) },
+      {
+        type: 'mdxJsxAttribute',
+        name: 'label',
+        value: createLabelWithIcon(pm),
+      },
     ],
     children: [{ type: node.type, lang: node.lang, value: code }],
   };
