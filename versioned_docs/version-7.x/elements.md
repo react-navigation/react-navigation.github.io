@@ -434,10 +434,6 @@ Color for material ripple (Android >= 5.0 only)
 
 Press opacity for the buttons in header (Android < 5.0, and iOS)
 
-#### `headerBackTestID`
-
-TestID used on the back button. Useful for e2e testing with Detox.
-
 #### `headerTransparent`
 
 Defaults to `false`. If `true`, the header will not have a background unless you explicitly provide it with `headerBackground`. The header will also float over the screen so that it overlaps the content underneath.

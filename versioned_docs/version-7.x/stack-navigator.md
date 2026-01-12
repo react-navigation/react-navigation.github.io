@@ -364,6 +364,10 @@ Defaults to `default` on iOS, and `minimal` on Android.
 
 Style object for the back title.
 
+#### `headerBackTestID`
+
+Test ID for the back button for testing purposes.
+
 ### Events
 
 The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
