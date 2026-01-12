@@ -685,7 +685,7 @@ const linking = {
       Chat: 'feed/:sort',
     },
   },
-  getStateFromPath: (path, options) => {
+  getStateFromPath(path, options) {
     // Return a state object here
     // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
   },
