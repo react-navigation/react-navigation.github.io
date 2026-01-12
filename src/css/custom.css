@@ -703,22 +703,46 @@ header {
 
   & > .tabs > .tabs__item {
     border: none;
-    border-bottom: 2px solid transparent;
     border-radius: 0;
+    filter: saturate(0);
+    transition:
+      color var(--ifm-transition-fast) var(--ifm-transition-timing-default),
+      filter var(--ifm-transition-fast) var(--ifm-transition-timing-default);
 
     &:first-child {
       border-top-left-radius: calc(var(--ifm-code-border-radius) - 1px);
     }
 
     &:hover:not(.tabs__item--active) {
-      background-color: rgba(128, 128, 128, 0.1);
+      background-color: transparent;
+      color: var(--ifm-tabs-color-active);
+      filter: saturate(1);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - var(--ifm-tabs-padding-horizontal) * 2);
+      height: 2px;
+      border-radius: 2px 2px 0 0;
+      background-color: var(--ifm-tabs-color-active-border);
+      transform: translateX(-50%) translateY(50%) scaleY(0);
+      transition: transform var(--ifm-transition-fast)
+        var(--ifm-transition-timing-default);
     }
   }
 
   & > .tabs > .tabs__item--active,
   & > .tabs > .tabs__item--active:hover {
-    background-color: transparent;
     border-bottom-color: var(--ifm-tabs-color-active-border);
+    filter: saturate(1);
+
+    &::after {
+      transform: translateX(-50%) translateY(0%) scaleY(1);
+    }
   }
 
   & [role='tabpanel'] > .theme-code-block:first-child {
