@@ -12330,6 +12330,7 @@ __metadata:
     markdownlint-cli2: "npm:^0.19.1"
     mkdirp: "npm:^3.0.1"
     netlify-plugin-cache: "npm:^1.0.3"
+    postcss-nesting: "npm:^13.0.2"
     prettier: "npm:^3.7.4"
     prism-react-renderer: "npm:^2.4.1"
     react: "npm:^19.2.1"
