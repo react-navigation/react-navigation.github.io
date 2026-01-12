@@ -62,7 +62,10 @@ async function fetchAndWriteSponsorsAsync() {
     'data',
     'sponsors.js'
   );
-  fs.writeFileSync(sponsorsFilePath, `export default ${JSON.stringify(sponsors, null, 2)}`);
+  fs.writeFileSync(
+    sponsorsFilePath,
+    `export default ${JSON.stringify(sponsors, null, 2)}`
+  );
   console.log(`Wrote updated sponsors to ${sponsorsFilePath}`);
 }
 

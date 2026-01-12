@@ -39,7 +39,7 @@ export default () => (
         // change the tracker here to use other Mobile analytics SDK.
         await analytics().logScreenView({
           screen_name: currentRouteName,
-          screen_class: currentRouteName
+          screen_class: currentRouteName,
         });
       }
     }}

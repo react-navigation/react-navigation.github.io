@@ -32,10 +32,12 @@ class B extends React.Component {
 const HomeStack = createStackNavigator({ A });
 const SettingsStack = createStackNavigator({ B });
 
-export default createAppContainer(createBottomTabNavigator({
-  HomeStack,
-  SettingsStack,
-}));
+export default createAppContainer(
+  createBottomTabNavigator({
+    HomeStack,
+    SettingsStack,
+  })
+);
 ```
 
 <a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-wrong-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
@@ -54,10 +56,12 @@ SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings!',
 };
 
-export default createAppContainer(createBottomTabNavigator({
-  HomeStack,
-  SettingsStack,
-}));
+export default createAppContainer(
+  createBottomTabNavigator({
+    HomeStack,
+    SettingsStack,
+  })
+);
 ```
 
 <a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-correct-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
@@ -84,13 +88,16 @@ MyOtherComponent.navigationOptions = {
 We also know that `createStackNavigator` and related functions return React components. So when we set the `navigationOptions` directly on the `HomeStack` and `SettingsStack` component, it allows us to control the `navigationOptions` for its parent navigator when its used as a screen component. In this case, the `navigationOptions` on our stack components configure the label in the tab navigator that renders the stacks.
 
 ```js
-const HomeStack = createStackNavigator({ A }, {
-  // This is the default for screens in the stack, so `A` will
-  // use this title unless it overrides it
-  defaultNavigationOptions: {
-    title: 'Welcome'
+const HomeStack = createStackNavigator(
+  { A },
+  {
+    // This is the default for screens in the stack, so `A` will
+    // use this title unless it overrides it
+    defaultNavigationOptions: {
+      title: 'Welcome',
+    },
   }
-})
+);
 
 // These are the options that are used by the navigator that renders
 // the HomeStack, in our example above this is a tab navigator.
@@ -102,21 +109,24 @@ HomeStack.navigationOptions = {
 Another way you could write this is:
 
 ```js
-const HomeStack = createStackNavigator({ A }, {
-  // This applies to the parent navigator
-  navigationOptions: {
-    tabBarLabel: 'Home!',
-  },
-  // This applies to child routes
-  defaultNavigationOptions: {
-    title: 'Welcome'
+const HomeStack = createStackNavigator(
+  { A },
+  {
+    // This applies to the parent navigator
+    navigationOptions: {
+      tabBarLabel: 'Home!',
+    },
+    // This applies to child routes
+    defaultNavigationOptions: {
+      title: 'Welcome',
+    },
   }
-});
+);
 ```
 
 <a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-title-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-# getActiveChildNavigationOptions
+## getActiveChildNavigationOptions
 
 If you would like to get the `navigationOptions` from the active child of a navigator, you can do that with `getActiveChildNavigationOptions`. This makes it possible for you to set the `tabBarLabel` directly on a screen inside of a stack that is inside of a tab, for example.
 
@@ -132,23 +142,26 @@ class A extends React.Component {
   }
 }
 
-const HomeStack = createStackNavigator({ A }, {
-  navigationOptions: ({ navigation, screenProps }) => ({
-    // you can put fallback values before here, eg: a default tabBarLabel
-    ...getActiveChildNavigationOptions(navigation, screenProps),
-    // put other navigationOptions that you don't want the active child to
-    // be able to override here!
-  })
-});
+const HomeStack = createStackNavigator(
+  { A },
+  {
+    navigationOptions: ({ navigation, screenProps }) => ({
+      // you can put fallback values before here, eg: a default tabBarLabel
+      ...getActiveChildNavigationOptions(navigation, screenProps),
+      // put other navigationOptions that you don't want the active child to
+      // be able to override here!
+    }),
+  }
+);
 ```
 
 <a href="https://snack.expo.io/@react-navigation/nested-navigationoptions-active-child-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
 
-# **Note**: the navigationOptions property vs navigator configuration
+## **Note**: the navigationOptions property vs navigator configuration
 
 Navigators are initialized with `create*Navigator(routeConfig, navigatorConfig)`. Inside of `navigatorConfig` we can add a `defaultNavigationOptions` property. These `defaultNavigationOptions` are the default options for screens within that navigator ([read more about sharing common navigationOptions](headers.md#sharing-common-navigationoptions-across-screens)), they do not refer to the `navigationOptions` for that navigator &mdash; as we have seen above, we set the `navigationOptions` property directly on the navigator for that use case.
 
-# A stack contains a tab navigator and you want to set the title on the stack header
+## A stack contains a tab navigator and you want to set the title on the stack header
 
 Imagine the following configuration:
 
@@ -217,7 +230,7 @@ Using this configuration, the `headerTitle` or `title` from `navigationOptions` 
 
 Additionally, you can push new screens to the feed and profile stacks without hiding the tab bar by adding more routes to those stacks. If you want to push screens on top of the tab bar, then you can add them to the `AppNavigator` stack.
 
-# A tab navigator contains a stack and you want to hide the tab bar on specific screens
+## A tab navigator contains a stack and you want to hide the tab bar on specific screens
 
 Similar to the example above where a stack contains a tab navigator, we can solve this in two ways: add `navigationOptions` to our tab navigator to set the tab bar to hidden depending on which route is active in the child stack, or we can move the tab navigator inside of the stack.
 
@@ -287,7 +300,7 @@ const AppNavigator = createSwitchNavigator({
 });
 ```
 
-# A drawer has a stack inside of it and you want to lock the drawer on certain screens
+## A drawer has a stack inside of it and you want to lock the drawer on certain screens
 
 This is conceptually identical to having a tab with a stack inside of it (read that above if you have not already), where you want to hide the tab bar on certain screens. The only difference is that rather than using `tabBarVisible` you will use `drawerLockMode`.
 

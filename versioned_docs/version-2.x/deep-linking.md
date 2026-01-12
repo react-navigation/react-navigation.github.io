@@ -4,7 +4,7 @@ title: Deep linking
 sidebar_label: Deep linking
 ---
 
-In this guide we will set up our app to handle external URIs. Let's suppose that we want a URI like `mychat://chat/Eric` to open our app and link straight into a chat screen for some user named "Eric".
+In this guide we will set up our app to handle external URIs. Let's suppose that we want a URI like `example://chat/Eric` to open our app and link straight into a chat screen for some user named "Eric".
 
 ## Configuration
 
@@ -36,7 +36,7 @@ You need to specify a scheme for your app. You can register for a scheme in your
 ```json
 {
   "expo": {
-    "scheme": "mychat"
+    "scheme": "example"
   }
 }
 ```
@@ -90,14 +90,14 @@ Next, let's configure our navigation container to extract the path from the app'
 ```js
 const SimpleApp = createStackNavigator({...});
 
-const prefix = 'mychat://';
+const prefix = 'example://';
 
 const MainApp = () => <SimpleApp uriPrefix={prefix} />;
 ```
 
 ### iOS
 
-Let's configure the native iOS app to open based on the `mychat://` URI scheme.
+Let's configure the native iOS app to open based on the `example://` URI scheme.
 
 In `SimpleApp/ios/SimpleApp/AppDelegate.m`:
 
@@ -116,7 +116,7 @@ In `SimpleApp/ios/SimpleApp/AppDelegate.m`:
 
 In Xcode, open the project at `SimpleApp/ios/SimpleApp.xcodeproj`. Select the project in sidebar and navigate to the info tab. Scroll down to "URL Types" and add one. In the new URL type, set the identifier and the URL scheme to your desired URL scheme.
 
-![Xcode project info URL types with mychat added](/assets/deep-linking/xcode-linking.png)
+![Xcode project info URL types with example added](/assets/deep-linking/xcode-linking.png)
 
 Now you can press play in Xcode, or re-build on the command line:
 
@@ -127,10 +127,10 @@ react-native run-ios
 To test the URI on the simulator, run the following:
 
 ```
-xcrun simctl openurl booted mychat://chat/Eric
+xcrun simctl openurl booted example://chat/Eric
 ```
 
-To test the URI on a real device, open Safari and type `mychat://chat/Eric`.
+To test the URI on a real device, open Safari and type `example://chat/Eric`.
 
 ### Android
 
@@ -153,7 +153,7 @@ In `SimpleApp/android/app/src/main/AndroidManifest.xml`, do these followings adj
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="mychat" />
+        <data android:scheme="example" />
     </intent-filter>
 </activity>
 ```
@@ -167,7 +167,7 @@ react-native run-android
 To test the intent handling in Android, run the following:
 
 ```
-adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/Eric" com.simpleapp
+adb shell am start -W -a android.intent.action.VIEW -d "example://chat/Eric" com.simpleapp
 ```
 
 ## Disable deep linking

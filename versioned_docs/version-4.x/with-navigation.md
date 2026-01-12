@@ -42,5 +42,5 @@ export default withNavigation(MyBackButton);
 export default withNavigation(MyBackButton);
 
 // MyNavBar.ts
-<MyBackButton onRef={elem => (this.backButton = elem)} />;
+<MyBackButton onRef={(elem) => (this.backButton = elem)} />;
 ```

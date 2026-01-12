@@ -1,55 +1,51 @@
 {
-  "version-1.x/docs": {
+  "docs": {
     "Fundamentals": [
-      "version-1.x/getting-started",
-      "version-1.x/hello-react-navigation",
-      "version-1.x/supported-react-native-versions",
-      "version-1.x/navigating",
-      "version-1.x/params",
-      "version-1.x/headers",
-      "version-1.x/header-buttons",
-      "version-1.x/modal",
-      "version-1.x/next-steps",
-      "version-1.x/glossary-of-terms"
+      "getting-started",
+      "hello-react-navigation",
+      "supported-react-native-versions",
+      "navigating",
+      "params",
+      "headers",
+      "header-buttons",
+      "modal",
+      "next-steps",
+      "glossary-of-terms"
     ],
     "How do I do ...?": [
-      "version-1.x/tab-based-navigation",
-      "version-1.x/drawer-based-navigation",
-      "version-1.x/auth-flow",
-      "version-1.x/handling-iphonex",
-      "version-1.x/status-bar",
-      "version-1.x/custom-android-back-button-handling",
-      "version-1.x/connecting-navigation-prop",
-      "version-1.x/navigating-without-navigation-prop",
-      "version-1.x/deep-linking",
-      "version-1.x/screen-tracking",
-      "version-1.x/redux-integration"
+      "tab-based-navigation",
+      "drawer-based-navigation",
+      "auth-flow",
+      "handling-iphonex",
+      "status-bar",
+      "custom-android-back-button-handling",
+      "connecting-navigation-prop",
+      "navigating-without-navigation-prop",
+      "deep-linking",
+      "screen-tracking",
+      "redux-integration"
     ],
     "Build your own Navigator": [
-      "version-1.x/custom-navigator-overview",
-      "version-1.x/routers",
-      "version-1.x/custom-navigators",
-      "version-1.x/custom-routers",
-      "version-1.x/navigation-views",
-      "version-1.x/transitioner"
+      "custom-navigator-overview",
+      "routers",
+      "custom-navigators",
+      "custom-routers",
+      "navigation-views",
+      "transitioner"
     ],
-    "Meta": [
-      "version-1.x/pitch",
-      "version-1.x/alternatives",
-      "version-1.x/contributing"
-    ]
+    "Meta": ["pitch", "alternatives", "contributing"]
   },
   "api": {
     "API reference": [
-      "version-1.x/api-reference",
-      "version-1.x/navigation-prop",
-      "version-1.x/navigation-actions",
-      "version-1.x/stack-navigator",
-      "version-1.x/switch-navigator",
-      "version-1.x/tab-navigator",
-      "version-1.x/drawer-navigator",
-      "version-1.x/with-navigation",
-      "version-1.x/with-navigation-focus"
+      "api-reference",
+      "navigation-prop",
+      "navigation-actions",
+      "stack-navigator",
+      "switch-navigator",
+      "tab-navigator",
+      "drawer-navigator",
+      "with-navigation",
+      "with-navigation-focus"
     ]
   }
 }

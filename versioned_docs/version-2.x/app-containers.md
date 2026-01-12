@@ -58,7 +58,7 @@ class App extends React.Component {
   render() {
     return (
       <AppContainer
-        ref={nav => {
+        ref={(nav) => {
           this.navigator = nav;
         }}
       />

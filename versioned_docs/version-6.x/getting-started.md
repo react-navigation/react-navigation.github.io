@@ -12,7 +12,7 @@ If you're already familiar with JavaScript, React and React Native, then you'll 
 
 Here are some resources to help you out:
 
-1. [React Native Express](https://www.reactnative.express) (Sections 1 to 4)
+1. [React Native](https://reactnative.dev/docs/getting-started)
 2. [Main Concepts of React](https://react.dev/learn)
 3. [React Hooks](https://react.dev/reference/react)
 4. [React Context](https://react.dev/learn/passing-data-deeply-with-context) (Advanced)
@@ -20,7 +20,7 @@ Here are some resources to help you out:
 ## Minimum requirements
 
 - `react-native` >= 0.63.0
-- `expo` >= 41 (if you use [Expo](https://expo.io))
+- `expo` >= 41 (if you use [Expo Go](https://expo.dev/go))
 - `typescript` >= 4.1.0 (if you use [TypeScript](https://www.typescriptlang.org))
 
 ## Installation
@@ -28,7 +28,7 @@ Here are some resources to help you out:
 Install the required packages in your React Native project:
 
 ```bash npm2yarn
-npm install @react-navigation/native
+npm install @react-navigation/native@^6.x
 ```
 
 React Navigation is made up of some core utilities and those are then used by navigators to create the navigation structure in your app. Don't worry too much about this for now, it'll become clear soon enough! To frontload the installation work, let's also install and configure dependencies used by most navigators, then we can move forward with starting to write some code.
@@ -55,9 +55,11 @@ In your project directory, run:
 npm install react-native-screens react-native-safe-area-context
 ```
 
-> Note: You might get warnings related to peer dependencies after installation. They are usually caused by incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.
+:::note
 
-From React Native 0.60 and higher, [linking is automatic](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md). So you **don't need to run** `react-native link`.
+You might get warnings related to peer dependencies after installation. They are usually caused by incorrect version ranges specified in some packages. You can safely ignore most warnings as long as your app builds.
+
+:::
 
 If you're on a Mac and developing for iOS, you need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
@@ -66,20 +68,35 @@ npx pod-install ios
 ```
 
 `react-native-screens` package requires one additional configuration step to properly
-work on Android devices. Edit `MainActivity.java` file which is located in `android/app/src/main/java/<your package name>/MainActivity.java`.
+work on Android devices. Edit `MainActivity.kt` or `MainActivity.java` file which is located under `android/app/src/main/java/<your package name>/`.
 
 Add the highlighted code to the body of `MainActivity` class:
 
-```java {3-6}
-public class MainActivity extends ReactActivity {
-  // ...
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(null);
-  }
-  // ...
-}
-```
+<Tabs>
+  <TabItem value='kotlin' label='Kotlin' default>
+    ```kotlin {3-5}
+    class MainActivity: ReactActivity() {
+      // ...
+      override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(null)
+      }
+      // ...
+    }
+    ```
+  </TabItem>
+  <TabItem value='java' label='Java'>
+    ```java {3-6}
+    public class MainActivity extends ReactActivity {
+      // ...
+      @Override
+      protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(null);
+      }
+      // ...
+    }
+    ```
+  </TabItem>
+</Tabs>
 
 and make sure to add the following import statement at the top of this file below your package statement:
 
@@ -89,7 +106,11 @@ import android.os.Bundle;
 
 This change is required to avoid crashes related to View state being not persisted consistently across Activity restarts.
 
-> Note: When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional dependencies. If you're getting an error "Unable to resolve module", you need to install that module in your project.
+:::info
+
+When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional dependencies. If you're getting an error "Unable to resolve module", you need to install that module in your project.
+
+:::
 
 ## Wrapping your app in `NavigationContainer`
 
@@ -106,7 +127,11 @@ export default function App() {
 }
 ```
 
-> Note: In a typical React Native app, the `NavigationContainer` should be only used once in your app at the root. You shouldn't nest multiple `NavigationContainer`s unless you have a specific use case for them.
+:::warning
+
+In a typical React Native app, the `NavigationContainer` should be only used once in your app at the root. You shouldn't nest multiple `NavigationContainer`s unless you have a specific use case for them.
+
+:::
 
 Now you are ready to build and run your app on the device/simulator.
 

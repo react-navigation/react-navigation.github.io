@@ -4,6 +4,9 @@ title: Configuring links
 sidebar_label: Configuring links
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 In this guide, we will configure React Navigation to handle external links. This is necessary if you want to:
 
 1. Handle deep links in React Native apps on Android and iOS
@@ -12,11 +15,45 @@ In this guide, we will configure React Navigation to handle external links. This
 
 Make sure that you have [configured deep links](deep-linking.md) in your app before proceeding. If you have an Android or iOS app, remember to specify the [`prefixes`](navigation-container.md#linkingprefixes) option.
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+The [`Navigation`](static-configuration.md#createstaticnavigation) component accepts a [`linking`](static-configuration.md#differences-in-the-linking-prop) prop that makes it easier to handle incoming links:
+
+```js
+import { createStaticNavigation } from '@react-navigation/native';
+
+// highlight-start
+const linking = {
+  enabled: 'auto' /* Automatically generate paths for all screens */,
+  prefixes: [
+    /* your linking prefixes */
+  ],
+};
+// highlight-end
+
+function App() {
+  return (
+    <Navigation
+      // highlight-next-line
+      linking={linking}
+      fallback={<Text>Loading...</Text>}
+    />
+  );
+}
+
+const Navigation = createStaticNavigation(RootStack);
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 The `NavigationContainer` accepts a [`linking`](navigation-container.md#linking) prop that makes it easier to handle incoming links. The 2 of the most important properties you can specify in the `linking` prop are `prefixes` and `config`:
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';
 
+// highlight-start
 const linking = {
   prefixes: [
     /* your linking prefixes */
@@ -25,31 +62,43 @@ const linking = {
     /* configuration for matching screens with paths */
   },
 };
+// highlight-end
 
 function App() {
   return (
-    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
+    <NavigationContainer
+      // highlight-next-line
+      linking={linking}
+      fallback={<Text>Loading...</Text>}
+    >
       {/* content */}
     </NavigationContainer>
   );
 }
 ```
 
+</TabItem>
+</Tabs>
+
 When you specify the `linking` prop, React Navigation will handle incoming links automatically. On Android and iOS, it'll use React Native's [`Linking` module](https://reactnative.dev/docs/linking) to handle incoming links, both when the app was opened with the link, and when new links are received when the app is open. On the Web, it'll use the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to sync the URL with the browser.
 
-> Note: Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android. We add a timeout to avoid getting stuck forever, but it means that the link might not be handled in some cases.
+:::warning
 
-You can also pass a [`fallback`](navigation-container.md#fallback) prop to `NavigationContainer` which controls what's displayed when React Navigation is trying to resolve the initial deep link URL.
+Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android. We add a timeout to avoid getting stuck forever, but it means that the link might not be handled in some cases.
+
+:::
+
+You can also pass a [`fallback`](navigation-container.md#fallback) prop that controls what's displayed when React Navigation is trying to resolve the initial deep link URL.
 
 ## Prefixes
 
-The `prefixes` option can be used to specify custom schemes (e.g. `mychat://`) as well as host & domain names (e.g. `https://mychat.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
+The `prefixes` option can be used to specify custom schemes (e.g. `example://`) as well as host & domain names (e.g. `https://example.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
 
 For example:
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com'],
+  prefixes: ['example://', 'https://example.com'],
 };
 ```
 
@@ -57,54 +106,194 @@ Note that the `prefixes` option is not supported on Web. The host & domain names
 
 ### Multiple subdomains​
 
-To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*`. before the beginning of a specific domain. Note that an entry for `*.mychat.com` does not match `mychat.com` because of the period after the asterisk. To enable matching for both `*.mychat.com` and `mychat.com`, you need to provide a separate prefix entry for each.
+To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*`. before the beginning of a specific domain. Note that an entry for `*.example.com` does not match `example.com` because of the period after the asterisk. To enable matching for both `*.example.com` and `example.com`, you need to provide a separate prefix entry for each.
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com', 'https://*.mychat.com'],
+  prefixes: ['example://', 'https://example.com', 'https://*.example.com'],
 };
 ```
+
+## Filtering certain paths
+
+Sometimes we may not want to handle all incoming links. For example, we may want to filter out links meant for authentication (e.g. `expo-auth-session`) or other purposes instead of navigating to a specific screen.
+
+To achieve this, you can use the `filter` option:
+
+```js
+const linking = {
+  prefixes: ['example://', 'https://example.com'],
+  // highlight-next-line
+  filter: (url) => !url.includes('+expo-auth-session'),
+};
+```
+
+This is not supported on Web as we always need to handle the URL of the page.
+
+## Apps under subpaths
+
+If your app is hosted under a subpath, you can specify the subpath at the top-level of the `config`. For example, if your app is hosted at `https://example.com/app`, you can specify the `path` as `app`:
+
+```js
+const linking = {
+  prefixes: ['example://', 'https://example.com'],
+  config: {
+    // highlight-next-line
+    path: 'app',
+
+    // ...
+  },
+};
+```
+
+It's not possible to specify params here since this doesn't belong to a screen, e.g. `app/:id` won't work.
 
 ## Mapping path to route names
 
-To handle a link, you need to translate it to a valid [navigation state](navigation-state.md) and vice versa. For example, the path `/rooms/chat?user=jane` may be translated to a state object like this:
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+If you specify `enabled: 'auto'` in the `linking` prop, React Navigation will automatically generate paths for all screens. For example, if you have a `Profile` screen in the navigator, it'll automatically generate a path for it as `profile`.
+
+If you wish to handle the configuration manually, or want to override the generated path for a specific screen, you can specify `linking` property next to the screen in the navigator to map a path to a screen. For example:
 
 ```js
-const state = {
-  routes: [
-    {
-      name: 'rooms',
-      state: {
-        routes: [
-          {
-            name: 'chat',
-            params: { user: 'jane' },
-          },
-        ],
+const RootStack = createStackNavigator({
+  screens: {
+    Profile: {
+      screen: ProfileScreen,
+      // highlight-start
+      linking: {
+        path: 'user',
       },
+      // highlight-end
     },
-  ],
-};
+    Chat: {
+      screen: ChatScreen,
+      // highlight-start
+      linking: {
+        path: 'feed/:sort',
+      },
+      // highlight-end
+    },
+  },
+});
 ```
 
-By default, React Navigation will use the path segments as the route name when parsing the URL. But directly translating path segments to route names may not be the expected behavior.
+In this example:
 
-For example, you might want to parse the path `/feed/latest` to something like:
+- `Chat` screen that handles the URL `/feed` with the param `sort` (e.g. `/feed/latest` - the `Chat` screen will receive a param `sort` with the value `latest`).
+- `Profile` screen that handles the URL `/user`.
+
+Similarly, when you have a nested navigator, you can specify the `linking` property for the screens in the navigator to handle the path for the nested screens:
 
 ```js
-const state = {
-  routes: [
-    {
-      name: 'Chat',
-      params: {
-        sort: 'latest',
+const HomeTabs = createBottomTabNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      // highlight-start
+      linking: {
+        path: 'home',
       },
+      // highlight-end
     },
-  ];
-}
+    Settings: {
+      screen: SettingsScreen,
+      // highlight-start
+      linking: {
+        path: 'settings',
+      },
+      // highlight-end
+    },
+  },
+});
+
+const RootStack = createStackNavigator({
+  screens: {
+    HomeTabs: {
+      screen: HomeTabs,
+    },
+    Profile: {
+      screen: ProfileScreen,
+      // highlight-start
+      linking: {
+        path: 'user',
+      },
+      // highlight-end
+    },
+    Chat: {
+      screen: ChatScreen,
+      // highlight-start
+      linking: {
+        path: 'feed/:sort',
+      },
+      // highlight-end
+    },
+  },
+});
 ```
 
-You can specify the [`config`](navigation-container.md#linkingconfig) option in `linking` to control how the deep link is parsed to suit your needs.
+In the above example, the following path formats are handled:
+
+- `/home` navigates to the `HomeTabs` -> `Home` screen
+- `/settings` navigates to the `HomeTabs` -> `Settings` screen
+- `/user` navigates to the `Profile` screen
+- `/feed/:sort` navigates to the `Chat` screen with the param `sort`
+
+### How does automatic path generation work?
+
+When using automatic path generation with `enabled: 'auto'`, the following rules are applied:
+
+- Screens with an explicit `linking` property are not used for path generation and will be added as-is.
+- Screen names will be converted from `PascalCase` to `kebab-case` to use as the path (e.g. `NewsFeed` -> `news-feed`).
+- Unless a screen has explicit empty path (`path: ''`) to use for the homepage, the first leaf screen encountered will be used as the homepage.
+- Path generation only handles leaf screens, i.e. no path is generated for screens containing nested navigators. It's still possible to specify a path for them with an explicit `linking` property.
+
+Let's say we have the following navigation structure:
+
+```js
+const HomeTabs = createBottomTabNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+    },
+    Settings: {
+      screen: SettingsScreen,
+    },
+  },
+});
+
+const RootStack = createStackNavigator({
+  screens: {
+    HomeTabs: {
+      screen: HomeTabs,
+    },
+    Profile: {
+      screen: ProfileScreen,
+    },
+    Chat: {
+      screen: ChatScreen,
+    },
+  },
+});
+```
+
+With automatic path generation, the following paths will be generated:
+
+- `/` navigates to the `HomeTabs` -> `Home` screen
+- `/settings` navigates to the `HomeTabs` -> `Settings` screen
+- `/profile` navigates to the `Profile` screen
+- `/chat` navigates to the `Chat` screen
+
+If the URL contains a query string, it'll be passed as params to the screen. For example, the URL `/profile?user=jane` will pass the `user` param to the `Profile` screen.
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+If you specify a `linking` option, by default React Navigation will use the path segments as the route name when parsing the URL. However, directly translating path segments to route names may not be the expected behavior.
+
+You can specify the [`config`](navigation-container.md#linkingconfig) option in `linking` to control how the deep link is parsed to suit your needs. The config should specify the mapping between route names and path patterns:
 
 ```js
 const config = {
@@ -115,7 +304,10 @@ const config = {
 };
 ```
 
-Here `Chat` is the name of the screen that handles the URL `/feed`, and `Profile` handles the URL `/user`.
+In this example:
+
+- `Chat` screen that handles the URL `/feed` with the param `sort` (e.g. `/feed/latest` - the `Chat` screen will receive a param `sort` with the value `latest`).
+- `Profile` screen that handles the URL `/user`.
 
 The config option can then be passed in the `linking` prop to the container:
 
@@ -130,7 +322,7 @@ const config = {
 };
 
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config,
 };
 
@@ -177,7 +369,7 @@ function HomeScreen() {
 }
 ```
 
-For above structure, our configuration will look like this:
+For the above structure, our configuration will look like this:
 
 ```js
 const config = {
@@ -192,59 +384,167 @@ const config = {
 };
 ```
 
-Similarly, any nesting needs to be reflected in the configuration. See [handling nested navigators](#handling-nested-navigators) for more details.
+Similarly, any nesting needs to be reflected in the configuration.
+</TabItem>
+</Tabs>
+
+<details>
+<summary>How it works</summary>
+
+The linking works by translating the URL to a valid [navigation state](navigation-state.md) and vice versa using the configuration provided. For example, the path `/rooms/chat?user=jane` may be translated to a state object like this:
+
+```js
+const state = {
+  routes: [
+    {
+      name: 'rooms',
+      state: {
+        routes: [
+          {
+            name: 'chat',
+            params: { user: 'jane' },
+          },
+        ],
+      },
+    },
+  ],
+};
+```
+
+For example, you might want to parse the path `/feed/latest` to something like:
+
+```js
+const state = {
+  routes: [
+    {
+      name: 'Chat',
+      params: {
+        sort: 'latest',
+      },
+    },
+  ];
+}
+```
+
+See [Navigation State reference](navigation-state.md) for more details on how the state object is structured.
+
+</details>
 
 ## Passing params
 
 A common use case is to pass params to a screen to pass some data. For example, you may want the `Profile` screen to have an `id` param to know which user's profile it is. It's possible to pass params to a screen through a URL when handling deep links.
 
-By default, query params are parsed to get the params for a screen. For example, with the above example, the URL `/user?id=wojciech` will pass the `id` param to the `Profile` screen.
+By default, query params are parsed to get the params for a screen. For example, with the above example, the URL `/user?id=jane` will pass the `id` param to the `Profile` screen.
 
-You can also customize how the params are parsed from the URL. Let's say you want the URL to look like `/user/wojciech` where the `id` param is `wojciech` instead of having the `id` in query params. You can do this by specifying `user/:id` for the `path`. **When the path segment starts with `:`, it'll be treated as a param**. For example, the URL `/user/wojciech` would resolve to `Profile` screen with the string `wojciech` as a value of the `id` param and will be available in `route.params.id` in `Profile` screen.
+You can also customize how the params are parsed from the URL. Let's say you want the URL to look like `/user/jane` where the `id` param is `jane` instead of having the `id` in query params. You can do this by specifying `user/:id` for the `path`. **When the path segment starts with `:`, it'll be treated as a param**. For example, the URL `/user/jane` would resolve to `Profile` screen with the string `jane` as a value of the `id` param and will be available in `route.params.id` in `Profile` screen.
 
 By default, all params are treated as strings. You can also customize how to parse them by specifying a function in the `parse` property to parse the param, and a function in the `stringify` property to convert it back to a string.
 
-If you wanted to resolve `/user/wojciech/settings` to result in the params `{ id: 'user-wojciech' section: 'settings' }`, you could make `Profile`'s config to look like this:
+If you wanted to resolve `/user/@jane/settings` to result in the params `{ id: 'jane' section: 'settings' }`, you could make `Profile`'s config to look like this:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Profile: {
+      screen: ProfileScreen,
+      // highlight-start
+      linking: {
+        path: 'user/:id/:section',
+        parse: {
+          id: (id) => id.replace(/^@/, ''),
+        },
+        stringify: {
+          id: (id) => `@${id}`,
+        },
+      },
+      // highlight-end
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 const config = {
   screens: {
     Profile: {
+      // highlight-start
       path: 'user/:id/:section',
       parse: {
-        id: (id) => `user-${id}`,
+        id: (id) => id.replace(/^@/, ''),
       },
       stringify: {
-        id: (id) => id.replace(/^user-/, ''),
+        id: (id) => `@${id}`,
       },
+      // highlight-end
     },
   },
 };
 ```
 
-This will result in something like:
+</TabItem>
+</Tabs>
+
+<details>
+<summary>Result Navigation State</summary>
+
+With this configuration, the path `/user/@jane/settings` will resolve to the following state object:
 
 ```js
 const state = {
   routes: [
     {
       name: 'Profile',
-      params: { id: 'user-wojciech', section: 'settings' },
+      params: { id: 'jane', section: 'settings' },
     },
   ],
 };
 ```
 
+</details>
+
 ## Marking params as optional
 
-Sometimes a param may or may not be present in the URL depending on certain conditions. For example, in the above scenario, you may not always have the section parameter in the URL, i.e. both `/user/wojciech/settings` and `/user/wojciech` should go to the `Profile` screen, but the `section` param (with the value `settings` in this case) may or may not be present.
+Sometimes a param may or may not be present in the URL depending on certain conditions. For example, in the above scenario, you may not always have the section parameter in the URL, i.e. both `/user/jane/settings` and `/user/jane` should go to the `Profile` screen, but the `section` param (with the value `settings` in this case) may or may not be present.
 
 In this case, you would need to mark the `section` param as optional. You can do it by adding the `?` suffix after the param name:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Profile: {
+      screen: ProfileScreen,
+      linking: {
+        // highlight-next-line
+        path: 'user/:id/:section?',
+        parse: {
+          id: (id) => `user-${id}`,
+        },
+        stringify: {
+          id: (id) => id.replace(/^user-/, ''),
+        },
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 const config = {
   screens: {
     Profile: {
+      // highlight-next-line
       path: 'user/:id/:section?',
       parse: {
         id: (id) => `user-${id}`,
@@ -257,99 +557,88 @@ const config = {
 };
 ```
 
-With the URL `/users/wojciech`, this will result in:
+</TabItem>
+</Tabs>
+
+<details>
+<summary>Result Navigation State</summary>
+
+With this configuration, the path `/user/jane` will resolve to the following state object:
 
 ```js
 const state = {
   routes: [
     {
       name: 'Profile',
-      params: { id: 'user-wojciech' },
+      params: { id: 'user-jane' },
     },
   ],
 };
 ```
 
-If the URL contains a `section` param, e.g. `/users/wojciech/settings`, this will result in the following with the same config:
+If the URL contains a `section` param (e.g. `/user/jane/settings`), this will result in the following with the same config:
 
 ```js
 const state = {
   routes: [
     {
       name: 'Profile',
-      params: { id: 'user-wojciech', section: 'settings' },
+      params: { id: 'user-jane', section: 'settings' },
     },
   ],
 };
 ```
 
-## Handling nested navigators
-
-Sometimes you'll have the target navigator nested in other navigators which aren't part of the deep link. For example, let's say your navigation structure looks like this:
-
-```js
-function Home() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Profile" component={Profile} />
-      <Tab.Screen name="Feed" component={Feed} />
-    </Tab.Navigator>
-  );
-}
-
-function App() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Settings" component={Settings} />
-    </Stack.Navigator>
-  );
-}
-```
-
-Here you have a stack navigator in the root, and inside the `Home` screen of the root stack, you have a tab navigator with various screens. With this structure, let's say you want the path `/users/:id` to go to the `Profile` screen. You can express the nested config like so:
-
-```js
-const config = {
-  screens: {
-    Home: {
-      screens: {
-        Profile: 'users/:id',
-      },
-    },
-  },
-};
-```
-
-In this config, you specify that the `Profile` screen should be resolved for the `users/:id` pattern and it's nested inside the `Home` screen. Then parsing `users/jane` will result in the following state object:
-
-```js
-const state = {
-  routes: [
-    {
-      name: 'Home',
-      state: {
-        routes: [
-          {
-            name: 'Profile',
-            params: { id: 'jane' },
-          },
-        ],
-      },
-    },
-  ],
-};
-```
-
-It's important to note that the state object must match the hierarchy of nested navigators. Otherwise the state will be discarded.
+</details>
 
 ## Handling unmatched routes or 404
 
 If your app is opened with an invalid URL, most of the times you'd want to show an error page with some information. On the web, this is commonly known as 404 - or page not found error.
 
-To handle this, you'll need to define a catch-all route that will be rendered if no other routes match the path. You can do it by specifying `*` for the path matching pattern.
+To handle this, you'll need to define a catch-all route that will be rendered if no other routes match the path. You can do it by specifying `*` for the path matching pattern:
 
-For example:
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const HomeTabs = createBottomTabNavigator({
+  screens: {
+    Feed: {
+      screen: FeedScreen,
+    },
+    Profile: {
+      screen: HomeScreen,
+      linking: {
+        path: 'users/:id',
+      },
+    },
+    Settings: {
+      screen: SettingsScreen,
+      linking: {
+        path: 'settings',
+      },
+    },
+  },
+});
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeTabs,
+    },
+    NotFound: {
+      screen: NotFoundScreen,
+      linking: {
+        // highlight-next-line
+        path: '*',
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 const config = {
@@ -361,14 +650,23 @@ const config = {
         Settings: 'settings',
       },
     },
-    NotFound: '*',
+    NotFound: {
+      // highlight-start
+      path: '*',
+    },
   },
 };
 ```
 
+</TabItem>
+</Tabs>
+
 Here, we have defined a route named `NotFound` and set it to match `*` aka everything. If the path didn't match `user/:id` or `settings`, it'll be matched by this route.
 
-So, a path like `/library` or `/settings/notification` will resolve to the following state object:
+<details>
+<summary>Result Navigation State</summary>
+
+With this configuration, a path like `/library` or `/settings/notification` will resolve to the following state object:
 
 ```js
 const state = {
@@ -376,7 +674,66 @@ const state = {
 };
 ```
 
+</details>
+
 You can even go more specific, for example, say if you want to show a different screen for invalid paths under `/settings`, you can specify such a pattern under `Settings`:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const SettingsStack = createStackNavigator({
+  screens: {
+    UserSettings: {
+      screen: UserSettingsScreen,
+      linking: {
+        path: 'user-settings',
+      },
+    },
+    InvalidSettings: {
+      screen: InvalidSettingsScreen,
+      linking: {
+        // highlight-next-line
+        path: '*',
+      },
+    },
+  },
+});
+
+const HomeTabs = createBottomTabNavigator({
+  screens: {
+    Feed: {
+      screen: FeedScreen,
+    },
+    Profile: {
+      screen: HomeScreen,
+      linking: {
+        path: 'users/:id',
+      },
+    },
+    Settings: {
+      screen: SettingsStack,
+    },
+  },
+});
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeTabs,
+    },
+    NotFound: {
+      screen: NotFoundScreen,
+      linking: {
+        path: '*',
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 const config = {
@@ -397,6 +754,12 @@ const config = {
   },
 };
 ```
+
+</TabItem>
+</Tabs>
+
+<details>
+<summary>Result Navigation State</summary>
 
 With this configuration, the path `/settings/notification` will resolve to the following state object:
 
@@ -424,6 +787,8 @@ const state = {
 };
 ```
 
+</details>
+
 The `route` passed to the `NotFound` screen will contain a `path` property which corresponds to the path that opened the page. If you need, you can use this property to customize what's shown in this screen, e.g. load the page in a `WebView`:
 
 ```js
@@ -444,10 +809,57 @@ Sometimes you want to ensure that a certain screen will always be present as the
 
 In the above example, if you want the `Feed` screen to be the initial route in the navigator under `Home`, your config will look like this:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const HomeTabs = createBottomTabNavigator({
+  screens: {
+    Feed: {
+      screen: FeedScreen,
+    },
+    Profile: {
+      screen: HomeScreen,
+      linking: {
+        path: 'users/:id',
+      },
+    },
+    Settings: {
+      screen: SettingsScreen,
+      linking: {
+        path: 'settings',
+      },
+    },
+  },
+});
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeTabs,
+      linking: {
+        // highlight-next-line
+        initialRouteName: 'Feed',
+      },
+    },
+    NotFound: {
+      screen: NotFoundScreen,
+      linking: {
+        path: '*',
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 ```js
 const config = {
   screens: {
     Home: {
+      // highlight-next-line
       initialRouteName: 'Feed',
       screens: {
         Profile: 'users/:id',
@@ -458,7 +870,13 @@ const config = {
 };
 ```
 
-Then, the path `/users/42` will resolve to the following state object:
+</TabItem>
+</Tabs>
+
+<details>
+<summary>Result Navigation State</summary>
+
+With this configuration, the path `/users/42` will resolve to the following state object:
 
 ```js
 const state = {
@@ -480,15 +898,53 @@ const state = {
 };
 ```
 
-It's not possible to pass params to the initial screen through the URL. So make sure that your initial route doesn't need any params or specify `initialParams` to pass required params.
+</details>
+
+:::warning
+
+The `initialRouteName` will add the screen to React Navigation's state only. If your app is running on the Web, the browser's history will not contain this screen as the user has never visited it. So, if the user presses the browser's back button, it'll not go back to this screen.
+
+:::
+
+Another thing to keep in mind is that it's not possible to pass params to the initial screen through the URL. So make sure that your initial route doesn't need any params or specify `initialParams` in the screen configuration to pass the required params.
 
 In this case, any params in the URL are only passed to the `Profile` screen which matches the path pattern `users/:id`, and the `Feed` screen doesn't receive any params. If you want to have the same params in the `Feed` screen, you can specify a [custom `getStateFromPath` function](navigation-container.md#linkinggetstatefrompath) and copy those params.
 
-Similarly, if you want to access params of a parent screen from a child screen, you can use [React Context](https://reactjs.org/docs/context.html) to expose them.
+Similarly, if you want to access params of a parent screen from a child screen, you can use [React Context](https://react.dev/reference/react/useContext) to expose them.
 
 ## Matching exact paths
 
 By default, paths defined for each screen are matched against the URL relative to their parent screen's path. Consider the following config:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const ProfileTabs = createBottomTabNavigator({
+  screens: {
+    Profile: {
+      screen: HomeScreen,
+      linking: {
+        path: 'users/:id',
+      },
+    },
+  },
+});
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: {
+      screen: ProfileTabs,
+      linking: {
+        path: 'feed',
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 const config = {
@@ -503,11 +959,46 @@ const config = {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 Here, you have a `path` property defined for the `Home` screen, as well as the child `Profile` screen. The profile screen specifies the path `users/:id`, but since it's nested inside a screen with the path `feed`, it'll try to match the pattern `feed/users/:id`.
 
 This will result in the URL `/feed` navigating to `Home` screen, and `/feed/users/cal` navigating to the `Profile` screen.
 
 In this case, it makes more sense to navigate to the `Profile` screen using a URL like `/users/cal`, rather than `/feed/users/cal`. To achieve this, you can override the relative matching behavior to `exact` matching:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const ProfileTabs = createBottomTabNavigator({
+  screens: {
+    Profile: {
+      screen: HomeScreen,
+      linking: {
+        path: 'users/:id',
+        // highlight-next-line
+        exact: true,
+      },
+    },
+  },
+});
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: {
+      screen: ProfileTabs,
+      linking: {
+        path: 'feed',
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 const config = {
@@ -517,6 +1008,7 @@ const config = {
       screens: {
         Profile: {
           path: 'users/:id',
+          // highlight-next-line
           exact: true,
         },
       },
@@ -525,66 +1017,121 @@ const config = {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 With `exact` property set to `true`, `Profile` will ignore the parent screen's `path` config and you'll be able to navigate to `Profile` using a URL like `users/cal`.
 
 ## Omitting a screen from path
 
-Sometimes, you may not want to have the route name of a screen in the path. For example, let's say you have a `Home` screen and our [navigation state](navigation-state.md) looks like this:
+Sometimes, you may not want to have the route name of a screen in the path. For example, let's say you have a `Home` screen and the following config. When the page is opened in the browser you'll get `/home` as the URL:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
 ```js
-const state = {
-  routes: [{ name: 'Home' }],
-};
+const RootStack = createStackNavigator({
+  screens: {
+    Home: {
+      screen: ProfileScreen,
+      linking: {
+        path: 'home',
+      },
+    },
+    Profile: {
+      screen: HomeScreen,
+      linking: {
+        path: 'users/:id',
+      },
+    },
+  },
+});
 ```
 
-When this state is serialized to a path with the following config, you'll get `/home`:
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 const config = {
   screens: {
     Home: {
       path: 'home',
-      screens: {
-        Profile: 'users/:id',
-      },
     },
+    Profile: 'users/:id',
   },
 };
 ```
 
-But it'll be nicer if the URL was just `/` when visiting the home screen. You can specify an empty string as path or not specify a path at all, and React Navigation won't add the screen to the path (think of it like adding empty string to the path, which doesn't change anything):
+</TabItem>
+</Tabs>
+
+But it'll be nicer if the URL was just `/` when visiting the home screen.
+
+You can specify an empty string as path or not specify a path at all, and React Navigation won't add the screen to the path (think of it like adding empty string to the path, which doesn't change anything):
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Home: {
+      screen: ProfileScreen,
+      linking: {
+        path: '',
+      },
+    },
+    Profile: {
+      screen: HomeScreen,
+      linking: {
+        path: 'users/:id',
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 const config = {
   screens: {
     Home: {
       path: '',
-      screens: {
-        Profile: 'users/:id',
-      },
     },
+    Profile: 'users/:id',
   },
 };
 ```
+
+</TabItem>
+</Tabs>
 
 ## Serializing and parsing params
 
 Since URLs are strings, any params you have for routes are also converted to strings when constructing the path.
 
-For example, say you have a state like following:
+For example, say you have the URL `/chat/1589842744264` with the following config:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
 
 ```js
-const state = {
-  routes: [
-    {
-      name: 'Chat',
-      params: { at: 1589842744264 },
+const RootStack = createStackNavigator({
+  screens: {
+    Chat: {
+      screen: ChatScreen,
+      linking: {
+        path: 'chat/:date',
+      },
     },
-  ];
-}
+  },
+});
 ```
 
-It'll be converted to `chat/1589842744264` with the following config:
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 const config = {
@@ -594,20 +1141,38 @@ const config = {
 };
 ```
 
-When parsing this path, you'll get the following state:
+</TabItem>
+</Tabs>
 
-```js
-const state = {
-  routes: [
-    {
-      name: 'Chat',
-      params: { date: '1589842744264' },
-    },
-  ];
-}
+When handling the URL, your params will look like this:
+
+```json
+{ "date": "1589842744264" }
 ```
 
 Here, the `date` param was parsed as a string because React Navigation doesn't know that it's supposed to be a timestamp, and hence number. You can customize it by providing a custom function to use for parsing:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Chat: {
+      screen: ChatScreen,
+      linking: {
+        path: 'chat/:date',
+        parse: {
+          date: Number,
+        },
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 const config = {
@@ -622,7 +1187,39 @@ const config = {
 };
 ```
 
-You can also provide a custom function to serialize the params. For example, let's say that you want to use a DD-MM-YYYY format in the path instead of a timestamp:
+</TabItem>
+</Tabs>
+
+You can also provide a your own function to serialize the params. For example, let's say that you want to use a DD-MM-YYYY format in the path instead of a timestamp:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Chat: {
+      screen: ChatScreen,
+      linking: {
+        path: 'chat/:date',
+        parse: {
+          date: (date) => new Date(date).getTime(),
+        },
+        stringify: {
+          date: (date) => {
+            const d = new Date(date);
+
+            return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+          },
+        },
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
 
 ```js
 const config = {
@@ -644,7 +1241,113 @@ const config = {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 Depending on your requirements, you can use this functionality to parse and stringify more complex data.
+
+## Matching regular expressions
+
+If you need more complex matching logic, you can use regular expressions to match the path. For example, if you want to use the pattern `@username` to match a user's profile, you can use a regular expression to match the path. This allows you to have the same path pattern for multiple screens, but fine-tune the matching logic to be more specific for a particular screen.
+
+Regular expressions can be specified between parentheses `(` and `)` in the after a param name. For example:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Feed: {
+      screen: FeedScreen,
+      linking: {
+        path: ':sort(latest|popular)',
+      },
+    },
+    Profile: {
+      screen: ProfileScreen,
+      linking: {
+        path: ':username(@[A-Za-z0-9_]+)',
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const config = {
+  screens: {
+    Feed: ':sort(latest|popular)',
+    Profile: ':username(@[A-Za-z0-9_]+)',
+  },
+};
+```
+
+</TabItem>
+</Tabs>
+
+This will only match the path if it starts with `@` followed by alphanumeric characters or underscores. For example, the URL `/@jane` will match the `Profile` screen, but `/jane` won't.
+
+Regular expressions are intended to only match path segments, not the entire path. So avoid using `/`, `^`, `$`, etc. in the regular expressions.
+
+:::warning
+
+Regular expressions are an advanced feature. They cannot be validated to warn you about potential issues, so it's up to you to ensure that the regular expression is correct.
+
+:::
+
+## Alias for paths
+
+If you want to have multiple paths for the same screen, you can use the `alias` property to specify an array of paths. This can be useful to keep backward compatibility with old URLs while transitioning to a new URL structure.
+
+For example, if you want to match both `/users/:id` and `/:id` to the `Profile` screen, you can do this:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Profile: {
+      screen: ProfileScreen,
+      linking: {
+        path: ':id',
+        alias: ['users/:id'],
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+const config = {
+  screens: {
+    Profile: {
+      path: ':id',
+      alias: ['users/:id'],
+    },
+  },
+};
+```
+
+</TabItem>
+</Tabs>
+
+In this case, when the URL is `/users/jane` or `/jane`, it'll match the `Profile` screen. The `path` is the primary pattern that will be used to generate the URL, e.g. when navigating to the `Profile` screen in the app on the Web. The patterns in `alias` will be ignored when generating URLs. The `alias` patterns are not used for matching any child screens in nested navigators.
+
+On the web, if a screen containing an alias contains a nested navigator, the URL matching the alias will only be used to match the screen, and will be updated to the URL of the focused child screen once the app renders.
+
+Each item in the `alias` array can be a string matching the syntax of the `path` property, or an object with the following properties:
+
+- `path` (required) - The path pattern to match.
+- `exact` - Whether to match the path exactly. Defaults to `false`. See [Matching exact paths](#matching-exact-paths) for more details.
+- `parse` - Function to parse path segments into param values. See [Passing params](#passing-params) for more details.
 
 ## Advanced cases
 
@@ -654,12 +1357,7 @@ Example:
 
 ```js
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
-  config: {
-    screens: {
-      Chat: 'feed/:sort',
-    },
-  },
+  prefixes: ['https://example.com', 'example://'],
   getStateFromPath(path, options) {
     // Return a state object here
     // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
@@ -668,105 +1366,26 @@ const linking = {
     // Return a path string here
     // You can also reuse the default logic by importing `getPathFromState` from `@react-navigation/native`
   },
+
+  // ...
 };
 ```
-
-## Updating config
-
-Older versions of React Navigation had a slightly different configuration format for linking. The old config allowed a simple key value pair in the object regardless of nesting of navigators:
-
-```js
-const config = {
-  Home: 'home',
-  Feed: 'feed',
-  Profile: 'profile',
-  Settings: 'settings',
-};
-```
-
-Let's say, your `Feed` and `Profile` screens are nested inside `Home`. Even if you don't have such a nesting with the above configuration, as long as the URL was `/home/profile`, it would work. Furthermore, it would also treat path segments and route names the same, which means that you could deep link to a screen that's not specified in the configuration. For example, if you have a `Albums` screen inside `Home`, the deep link `/home/Albums` would navigate to that screen. While that may be desirable in some cases, there's no way to prevent access to specific screens. This approach also makes it impossible to have something like a 404 screen since any route name is a valid path.
-
-Latest versions of React Navigation use a different config format which is stricter in this regard:
-
-- The shape of the config must match the shape of the nesting in the navigation structure
-- Only screens defined in the config will be eligible for deep linking
-
-So, you'd refactor the above config to the following format:
-
-```js
-const config = {
-  screens: {
-    Home: {
-      path: 'home',
-      screens: {
-        Feed: 'feed',
-        Profile: 'profile',
-      },
-    },
-    Settings: 'settings',
-  },
-};
-```
-
-Here, there's a new `screens` property to the configuration object, and the `Feed` and `Profile` configs are now nested under `Home` to match the navigation structure.
-
-If you have the old format, it will continue to work without any changes. However, you won't be able to specify a wildcard pattern to handle unmatched screens or prevent screens from being deep linked. The old format will be removed in the next major release. So we recommend to migrate to the new format when you can.
 
 ## Playground
 
-You can play around with customizing the config and path below, and see how the path is parsed.
-
 import LinkingTester from '@site/src/components/LinkingTester'
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+Playground is not available for static config.
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+You can play around with customizing the config and path below, and see how the path is parsed.
 
 <LinkingTester />
 
-## Example App
-
-In the example app, you will use the Expo managed workflow. The guide will focus on creating the deep linking configuration and not on creating the components themselves, but you can always check the full implementation in the [github repo](https://github.com/react-navigation/deep-linking-example).
-
-First, you need to decide the navigation structure of your app. To keep it simple, the main navigator will be bottom-tabs navigator with two screens. Its first screen will be a simple stack navigator, called `HomeStack`, with two screens: `Home` and `Profile`, and the second tabs screen will be just a simple one without any nested navigators, called `Settings`:
-
-```bash
-BottomTabs
-├── Stack (HomeStack)
-│   ├── Home
-│   └── Profile
-└── Settings
-```
-
-After creating the navigation structure, you can create a config for deep linking, which will contain mappings for each screen to a path segment. For example:
-
-```js
-const config = {
-  screens: {
-    HomeStack: {
-      screens: {
-        Home: 'home',
-        Profile: 'user',
-      },
-    },
-    Settings: 'settings',
-  },
-};
-```
-
-As you can see, `Home` and `Profile` are nested in the `screens` property of `HomeStack`. This means that when you pass the `/home` URL, it will be resolved to a `HomeStack`->`Home` state object (similarly for `/user` it would be `HomeStack`->`Profile`). The nesting in this object should match the nesting of our navigators.
-
-Here, the `HomeStack` property contains a config object. The config can go as deep as you want, e.g. if `Home` was a navigator, you could make it an object with `screens` property, and put more screens or navigators inside it, making the URL string much more readable.
-
-What if you wanted a specific screen to used as the initial screen in the navigator? For example, if you had a URL that would open `Home` screen, you would like to be able to navigate to `Profile` from it by using navigation's `navigation.goBack()` method. It is possible by defining `initialRouteName` for a navigator. It would look like this:
-
-```js
-const config = {
-  screens: {
-    HomeStack: {
-      initialRouteName: 'Profile',
-      screens: {
-        Home: 'home',
-        Profile: 'user',
-      },
-    },
-    Settings: 'settings',
-  },
-};
-```
+</TabItem>
+</Tabs>

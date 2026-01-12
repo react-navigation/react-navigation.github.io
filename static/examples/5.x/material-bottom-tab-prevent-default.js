@@ -5,7 +5,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 function HomeScreen({ navigation }) {
   React.useEffect(() => {
-    const unsubscribe = navigation.addListener('tabPress', e => {
+    const unsubscribe = navigation.addListener('tabPress', (e) => {
       // Prevent default behavior
       e.preventDefault();
 

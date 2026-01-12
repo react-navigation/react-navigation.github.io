@@ -13,8 +13,8 @@ function MyTabBar({ state, descriptors, navigation, position }) {
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
-            ? options.title
-            : route.name;
+              ? options.title
+              : route.name;
 
         const isFocused = state.index === index;
 
@@ -39,7 +39,7 @@ function MyTabBar({ state, descriptors, navigation, position }) {
         const inputRange = state.routes.map((_, i) => i);
         const opacity = Animated.interpolate(position, {
           inputRange,
-          outputRange: inputRange.map(i => (i === index ? 1 : 0)),
+          outputRange: inputRange.map((i) => (i === index ? 1 : 0)),
         });
 
         return (
@@ -89,7 +89,7 @@ const Tab = createMaterialTopTabNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
+      <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />

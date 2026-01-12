@@ -13,11 +13,17 @@ Returning `true` from `onBackButtonPressAndroid` denotes that we have handled th
 ```js
 class ScreenWithCustomBackBehavior extends React.Component {
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
+    BackHandler.addEventListener(
+      'hardwareBackPress',
+      this.onBackButtonPressAndroid
+    );
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
+    BackHandler.removeEventListener(
+      'hardwareBackPress',
+      this.onBackButtonPressAndroid
+    );
   }
 
   onBackButtonPressAndroid = () => {

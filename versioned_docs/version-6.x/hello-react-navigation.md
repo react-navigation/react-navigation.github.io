@@ -15,12 +15,12 @@ Let's start by demonstrating the most common navigator, `createNativeStackNaviga
 The libraries we've installed so far are the building blocks and shared foundations for navigators, and each navigator in React Navigation lives in its own library. To use the native stack navigator, we need to install [`@react-navigation/native-stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/native-stack) :
 
 ```bash npm2yarn
-npm install @react-navigation/native-stack
+npm install @react-navigation/native-stack@^6.x
 ```
 
 > 💡 `@react-navigation/native-stack` depends on `react-native-screens` and the other libraries that we installed in [Getting started](getting-started.md). If you haven't installed those yet, head over to that page and follow the installation instructions.
 
-### Creating a native stack navigator
+## Creating a native stack navigator
 
 `createNativeStackNavigator` is a function that returns an object containing 2 properties: `Screen` and `Navigator`. Both of them are React components used for configuring the navigator. The `Navigator` should contain `Screen` elements as its children to define the configuration for routes.
 
@@ -63,9 +63,13 @@ export default App;
 
 If you run this code, you will see a screen with an empty navigation bar and a grey content area containing your `HomeScreen` component (shown above). The styles you see for the navigation bar and the content area are the default configuration for a stack navigator, we'll learn how to configure those later.
 
-> The casing of the route name doesn't matter -- you can use lowercase `home` or capitalized `Home`, it's up to you. We prefer capitalizing our route names.
+:::tip
 
-### Configuring the navigator
+The casing of the route name doesn't matter -- you can use lowercase `home` or capitalized `Home`, it's up to you. We prefer capitalizing our route names.
+
+:::
+
+## Configuring the navigator
 
 All of the route configuration is specified as props to our navigator. We haven't passed any props to our navigator, so it just uses the default configuration.
 
@@ -100,9 +104,13 @@ Now our stack has two _routes_, a `Home` route and a `Details` route. A route ca
 
 Here, the `Home` route corresponds to the `HomeScreen` component, and the `Details` route corresponds to the `DetailsScreen` component. The initial route for the stack is the `Home` route. Try changing it to `Details` and reload the app (React Native's Fast Refresh won't update changes from `initialRouteName`, as you might expect), notice that you will now see the `Details` screen. Then change it back to `Home` and reload once more.
 
-> Note: The `component` prop accepts component, not a render function. Don't pass an inline function (e.g. `component={() => <HomeScreen />}`), or your component will unmount and remount losing all state when the parent component re-renders. See [Passing additional props](#passing-additional-props) for alternatives.
+:::warning
 
-### Specifying options
+The `component` prop accepts component, not a render function. Don't pass an inline function (e.g. `component={() => <HomeScreen />}`), or your component will unmount and remount losing all state when the parent component re-renders. See [Passing additional props](#passing-additional-props) for alternatives.
+
+:::
+
+## Specifying options
 
 Each screen in the navigator can specify some options for the navigator, such as the title to render in the header. These options can be passed in the `options` prop for each screen component:
 
@@ -118,11 +126,11 @@ Each screen in the navigator can specify some options for the navigator, such as
 
 Sometimes we will want to specify the same options for all of the screens in the navigator. For that, we can pass a `screenOptions` prop to the navigator.
 
-### Passing additional props
+## Passing additional props
 
 Sometimes we might want to pass additional props to a screen. We can do that with 2 approaches:
 
-1. Use [React context](https://reactjs.org/docs/context.html) and wrap the navigator with a context provider to pass data to the screens (recommended).
+1. Use [React context](https://react.dev/reference/react/useContext) and wrap the navigator with a context provider to pass data to the screens (recommended).
 2. Use a render callback for the screen instead of specifying a `component` prop:
 
    ```js
@@ -131,7 +139,11 @@ Sometimes we might want to pass additional props to a screen. We can do that wit
    </Stack.Screen>
    ```
 
-> Note: By default, React Navigation applies optimizations to screen components to prevent unnecessary renders. Using a render callback removes those optimizations. So if you use a render callback, you'll need to ensure that you use [`React.memo`](https://reactjs.org/docs/react-api.html#reactmemo) or [`React.PureComponent`](https://reactjs.org/docs/react-api.html#reactpurecomponent) for your screen components to avoid performance issues.
+:::warning
+
+By default, React Navigation applies optimizations to screen components to prevent unnecessary renders. Using a render callback removes those optimizations. So if you use a render callback, you'll need to ensure that you use [`React.memo`](https://react.dev/reference/react/memo) or [`React.PureComponent`](https://react.dev/reference/react/PureComponent) for your screen components to avoid performance issues.
+
+:::
 
 ## What's next?
 

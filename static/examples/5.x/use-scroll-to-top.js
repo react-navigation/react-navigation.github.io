@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { View, ScrollView, Image } from 'react-native';
-import {
-  NavigationContainer,
-  useScrollToTop,
-} from '@react-navigation/native';
+import { NavigationContainer, useScrollToTop } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 function Albums() {

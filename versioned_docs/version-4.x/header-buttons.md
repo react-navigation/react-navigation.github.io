@@ -90,4 +90,3 @@ Generally, this is what you want. But it's possible that in some circumstances t
 
 - You can set buttons in the header through the `headerLeft` and `headerRight` properties in `navigationOptions`.
 - The back button is fully customizable with `headerLeft`, but if you just want to change the title or image, there are other `navigationOptions` for that &mdash; `headerBackTitle`, `headerTruncatedBackTitle`, and `headerBackImage`.
-- [Full source of what we have built so far](#example/header-interaction).
