@@ -6,17 +6,21 @@ sidebar_label: Authentication flows
 
 Most apps require that a user authenticate in some way to have access to data associated with a user or other private content. Typically the flow will look like this:
 
-* The user opens the app.
-* The app loads some authentication state from persistent storage (for example, `AsyncStorage`).
-* When the state has loaded, the user is presented with either authentication screens or the main app, depending on whether valid authentication state was loaded.
-* When the user signs out, we clear the authentication state and send them back to authentication screens.
+- The user opens the app.
+- The app loads some authentication state from persistent storage (for example, `AsyncStorage`).
+- When the state has loaded, the user is presented with either authentication screens or the main app, depending on whether valid authentication state was loaded.
+- When the user signs out, we clear the authentication state and send them back to authentication screens.
 
 > Note: we say "authentication screens" because usually there is more than one. You may have a main screen with a username and password field, another for "forgot password", and another set for sign up.
 
 ## Set up our navigators
 
 ```js
-import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
+import {
+  createSwitchNavigator,
+  createStackNavigator,
+  createAppContainer,
+} from 'react-navigation';
 
 // Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
 // goes here.
@@ -24,16 +28,18 @@ import { createSwitchNavigator, createStackNavigator, createAppContainer } from 
 const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen });
 const AuthStack = createStackNavigator({ SignIn: SignInScreen });
 
-export default createAppContainer(createSwitchNavigator(
-  {
-    AuthLoading: AuthLoadingScreen,
-    App: AppStack,
-    Auth: AuthStack,
-  },
-  {
-    initialRouteName: 'AuthLoading',
-  }
-));
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      AuthLoading: AuthLoadingScreen,
+      App: AppStack,
+      Auth: AuthStack,
+    },
+    {
+      initialRouteName: 'AuthLoading',
+    }
+  )
+);
 ```
 
 <a href="https://snack.expo.io/@react-navigation/auth-flow-v3" target="blank" class="run-code-button">&rarr; Run this code</a>

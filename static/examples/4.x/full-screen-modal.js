@@ -28,7 +28,11 @@ class HomeScreen extends React.Component {
         />
       ),
       headerRight: () => (
-        <Button onPress={params.increaseCount} title="+1" color={Platform.OS === 'ios' ? "#fff" : null} />
+        <Button
+          onPress={params.increaseCount}
+          title="+1"
+          color={Platform.OS === 'ios' ? '#fff' : null}
+        />
       ),
     };
   };
@@ -93,7 +97,8 @@ class DetailsScreen extends React.Component {
         <Button
           title="Update the title"
           onPress={() =>
-            this.props.navigation.setParams({ otherParam: 'Updated!' })}
+            this.props.navigation.setParams({ otherParam: 'Updated!' })
+          }
         />
         <Button
           title="Go to Details... again"

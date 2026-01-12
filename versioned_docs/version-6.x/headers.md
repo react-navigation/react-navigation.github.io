@@ -26,6 +26,8 @@ function StackScreen() {
 }
 ```
 
+![Header title](/assets/headers/header-title.png)
+
 ## Using params in the title
 
 In order to use params in the title, we need to make `options` prop for the screen a function that returns a configuration object. It might be tempting to try to use `this.props` inside of `options`, but because it is defined before the component is rendered, `this` does not refer to an instance of the component and therefore no props are available. Instead, if we make `options` a function then React Navigation will call it with an object containing `{ navigation, route }` - in this case, all we care about is `route`, which is the same object that is passed to your screen props as `route` prop. You may recall that we can get the params through `route.params`, and so we do this below to extract a param and use it as a title.
@@ -173,7 +175,13 @@ function StackScreen() {
 }
 ```
 
-> You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to stack navigators, the `headerTitle` defaults to a `Text` component that displays the `title`.
+![Header custom title](/assets/headers/header-custom-title.png)
+
+:::note
+
+You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to headers, whereas `title` will be used for tab bars, drawers etc. as well. The `headerTitle` defaults to a `Text` component that displays the `title`.
+
+:::
 
 ## Additional configuration
 

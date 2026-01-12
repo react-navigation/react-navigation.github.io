@@ -6,10 +6,10 @@ sidebar_label: Authentication flows
 
 Most apps require that a user authenticate in some way to have access to data associated with a user or other private content. Typically the flow will look like this:
 
-* The user opens the app.
-* The app loads some authentication state from persistent storage (for example, `AsyncStorage`).
-* When the state has loaded, the user is presented with either authentication screens or the main app, depending on whether valid authentication state was loaded.
-* When the user signs out, we clear the authentication state and send them back to authentication screens.
+- The user opens the app.
+- The app loads some authentication state from persistent storage (for example, `AsyncStorage`).
+- When the state has loaded, the user is presented with either authentication screens or the main app, depending on whether valid authentication state was loaded.
+- When the user signs out, we clear the authentication state and send them back to authentication screens.
 
 > Note: we say "authentication screens" because usually there is more than one. You may have a main screen with a username and password field, another for "forgot password", and another set for sign up.
 

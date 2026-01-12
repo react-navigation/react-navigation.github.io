@@ -14,7 +14,7 @@ sidebar_label: NavigationEvents
 - `onWillBlur` - event listener
 - `onDidBlur` - event listener
 
-The event listener is the same as the imperative [`navigation.addListener(...)`](navigation-prop.md#addlistener-subscribe-to-updates-to-navigation-lifecycle) API.
+The event listener is the same as the imperative [`navigation.addListener(...)`](navigation-prop.md#addlistener---subscribe-to-updates-to-navigation-lifecycle) API.
 
 ### Example
 
@@ -26,10 +26,10 @@ import { NavigationEvents } from 'react-navigation';
 const MyScreen = () => (
   <View>
     <NavigationEvents
-      onWillFocus={payload => console.log('will focus', payload)}
-      onDidFocus={payload => console.log('did focus', payload)}
-      onWillBlur={payload => console.log('will blur', payload)}
-      onDidBlur={payload => console.log('did blur', payload)}
+      onWillFocus={(payload) => console.log('will focus', payload)}
+      onDidFocus={(payload) => console.log('did focus', payload)}
+      onWillBlur={(payload) => console.log('will blur', payload)}
+      onDidBlur={(payload) => console.log('did blur', payload)}
     />
     {/*
       Your view code

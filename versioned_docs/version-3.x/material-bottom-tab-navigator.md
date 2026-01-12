@@ -19,7 +19,7 @@ This API also requires that you install `react-native-vector-icons`! If you are 
 To use this tab navigator, import it from `react-navigation-material-bottom-tabs`
 
 ```js
-import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 createMaterialBottomTabNavigator(
   RouteConfigs,
@@ -35,30 +35,33 @@ The route configs object is a mapping from route name to a route config.
 
 ## MaterialBottomTabNavigatorConfig
 
-* `shifting` - Whether the shifting style is used, the active tab appears wider and the inactive tabs won't have a label. By default, this is `true` when you have more than 3 tabs.
-* `labeled` - Whether to show labels in tabs. When `false`, only icons will be displayed.
-* `activeColor` - Custom color for icon and label in the active tab.
-* `inactiveColor` - Custom color for icon and label in the inactive tab.
-* `barStyle` - Style for the bottom navigation bar. You can set a bottom padding here if you have a translucent navigation bar on Android: `barStyle={{ paddingBottom: 48 }}`.
-* `initialRouteName` - The routeName for the initial tab route when first loading.
-* `order` - Array of routeNames which defines the order of the tabs.
-* `paths` - Provide a mapping of routeName to path config, which overrides the paths set in the routeConfigs.
-* `backBehavior` - `initialRoute` to return to initial tab, `order` to return to previous tab, `history` to return to last visited tab, or `none`.
+- `shifting` - Whether the shifting style is used, the active tab appears wider and the inactive tabs won't have a label. By default, this is `true` when you have more than 3 tabs.
+- `labeled` - Whether to show labels in tabs. When `false`, only icons will be displayed.
+- `activeColor` - Custom color for icon and label in the active tab.
+- `inactiveColor` - Custom color for icon and label in the inactive tab.
+- `barStyle` - Style for the bottom navigation bar. You can set a bottom padding here if you have a translucent navigation bar on Android: `barStyle={{ paddingBottom: 48 }}`.
+- `initialRouteName` - The routeName for the initial tab route when first loading.
+- `order` - Array of routeNames which defines the order of the tabs.
+- `paths` - Provide a mapping of routeName to path config, which overrides the paths set in the routeConfigs.
+- `backBehavior` - `initialRoute` to return to initial tab, `order` to return to previous tab, `history` to return to last visited tab, or `none`.
 
 Example:
 
 ```js
-export default createMaterialBottomTabNavigator({
-  Album: { screen: Album },
-  Library: { screen: Library },
-  History: { screen: History },
-  Cart: { screen: Cart },
-}, {
-  initialRouteName: 'Album',
-  activeColor: '#f0edf6',
-  inactiveColor: '#3e2465',
-  barStyle: { backgroundColor: '#694fad' },
-});
+export default createMaterialBottomTabNavigator(
+  {
+    Album: { screen: Album },
+    Library: { screen: Library },
+    History: { screen: History },
+    Cart: { screen: Cart },
+  },
+  {
+    initialRouteName: 'Album',
+    activeColor: '#f0edf6',
+    inactiveColor: '#3e2465',
+    barStyle: { backgroundColor: '#694fad' },
+  }
+);
 ```
 
 ## `navigationOptions` for screens inside of the navigator
@@ -91,8 +94,8 @@ ID to locate this tab button in tests.
 
 Callback to handle press events; the argument is an object containing:
 
-* `navigation`: navigation prop for the screen
-* `defaultHandler`: the default handler for tab press
+- `navigation`: navigation prop for the screen
+- `defaultHandler`: the default handler for tab press
 
 Useful for adding a custom logic before the transition to the next scene (the tapped one) starts.
 

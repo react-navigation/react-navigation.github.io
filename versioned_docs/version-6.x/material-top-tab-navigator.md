@@ -6,11 +6,9 @@ sidebar_label: Material Top Tabs
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the tabs or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/tabs/material-top-tabs.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/tabs/material-top-tabs.mp4" />
+</video>
 
 This wraps [`react-native-tab-view`](tab-view.md). If you want to use the tab view without React Navigation integration, use the library directly instead.
 
@@ -19,7 +17,7 @@ This wraps [`react-native-tab-view`](tab-view.md). If you want to use the tab vi
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/material-top-tabs):
 
 ```bash npm2yarn
-npm install @react-navigation/material-top-tabs react-native-tab-view
+npm install @react-navigation/material-top-tabs@^6.x react-native-tab-view
 ```
 
 Then, you need to install [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) which is required by the navigator.
@@ -63,7 +61,11 @@ function MyTabs() {
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+:::note
+
+For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+
+:::
 
 ### Props
 
@@ -104,6 +106,18 @@ String indicating whether the keyboard gets dismissed in response to a drag gest
 - `'auto'` (default): the keyboard is dismissed when the index changes.
 - `'on-drag'`: the keyboard is dismissed when a drag begins.
 - `'none'`: drags do not dismiss the keyboard.
+
+#### `overScrollMode`
+
+Used to override default value of pager's overScroll mode.
+
+Possible values:
+
+- `'auto'` (default): Allow a user to over-scroll this view only if the content is large enough to meaningfully scroll.
+- `'always'`: Always allow a user to over-scroll this view.
+- `'never'`: Never allow a user to over-scroll this view.
+
+Only supported on Android.
 
 #### `initialLayout`
 
@@ -156,8 +170,7 @@ function MyTabBar({ state, descriptors, navigation, position }) {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({ name: route.name, merge: true });
+            navigation.navigate(route.name, route.params);
           }
         };
 
@@ -307,8 +320,7 @@ Example:
   screenOptions={{
     tabBarGap: 10,
   }}
->
-</Tab.Navigator>
+></Tab.Navigator>
 ```
 
 #### `tabBarAndroidRipple`
@@ -323,8 +335,7 @@ Example:
   screenOptions={{
     tabBarAndroidRipple: { borderless: false },
   }}
->
-</Tab.Navigator>
+></Tab.Navigator>
 ```
 
 #### `tabBarPressColor`

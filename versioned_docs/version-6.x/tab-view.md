@@ -9,7 +9,7 @@ React Native Tab View is a cross-platform Tab View component for React Native im
 It follows material design guidelines by default, but you can also use your own custom tab bar or position the tab bar at the bottom.
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
-  <img src="/assets/libraries/tab-view.gif" width="360px" />
+  <img src="/assets/libraries/tab-view.gif" width="360px" alt="React Native Tab View Demo" />
 </div>
 
 This package doesn't integrate with React Navigation. If you want to integrate the tab view with React Navigation's navigation system, e.g. want to show screens in the tab bar and be able to navigate between them using `navigation.navigate` etc, use [Material Top Tab Navigator](material-top-tab-navigator.md) instead.
@@ -262,9 +262,7 @@ When you enable lazy rendering for a screen, it will usually take some time to r
 You can also pass a boolean to enable lazy for all of the scenes:
 
 ```js
-<TabView
-  lazy
-/>
+<TabView lazy />
 ```
 
 ##### `lazyPreloadDistance`
@@ -286,6 +284,18 @@ String indicating whether the keyboard gets dismissed in response to a drag gest
 - `'auto'` (default): the keyboard is dismissed when the index changes.
 - `'on-drag'`: the keyboard is dismissed when a drag begins.
 - `'none'`: drags do not dismiss the keyboard.
+
+##### `overScrollMode`
+
+Used to override default value of pager's overScroll mode.
+
+Possible values:
+
+- `'auto'` (default): Allow a user to over-scroll this view only if the content is large enough to meaningfully scroll.
+- `'always'`: Always allow a user to over-scroll this view.
+- `'never'`: Never allow a user to over-scroll this view.
+
+Only supported on Android.
 
 ##### `swipeEnabled`
 
@@ -313,10 +323,6 @@ Object containing the initial height and width of the screens. Passing this will
   ...
 />
 ```
-
-##### `overScrollMode`
-
-Used to override default value of pager's overScroll mode. Can be `auto`, `always` or `never` (Android only).
 
 ##### `sceneContainerStyle`
 

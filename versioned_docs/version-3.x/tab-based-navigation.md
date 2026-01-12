@@ -91,9 +91,9 @@ export default createBottomTabNavigator(
 
 Let's dissect this:
 
-* `tabBarIcon` is a property on `navigationOptions`, so we know we can use it on our screen components, but in this case chose to put it in the `createBottomTabNavigator` configuration in order to centralize the icon configuration for convenience.
-* `tabBarIcon` is a function that is given the `focused` state, `tintColor`, and `horizontal` param, which is a boolean. If you take a peek further down in the configuration you will see `tabBarOptions` and `activeTintColor` and `inactiveTintColor`. These default to the iOS platform defaults, but you can change them here. The `tintColor` that is passed through to the `tabBarIcon` is either the active or inactive one, depending on the `focused` state (focused is active). The orientation state `horizontal` is `true` when the device is in landscape, otherwise is `false` for portrait.
-* Read the [full API reference](bottom-tab-navigator.md) for further information on `createBottomTabNavigator` configuration options.
+- `tabBarIcon` is a property on `navigationOptions`, so we know we can use it on our screen components, but in this case chose to put it in the `createBottomTabNavigator` configuration in order to centralize the icon configuration for convenience.
+- `tabBarIcon` is a function that is given the `focused` state, `tintColor`, and `horizontal` param, which is a boolean. If you take a peek further down in the configuration you will see `tabBarOptions` and `activeTintColor` and `inactiveTintColor`. These default to the iOS platform defaults, but you can change them here. The `tintColor` that is passed through to the `tabBarIcon` is either the active or inactive one, depending on the `focused` state (focused is active). The orientation state `horizontal` is `true` when the device is in landscape, otherwise is `false` for portrait.
+- Read the [full API reference](bottom-tab-navigator.md) for further information on `createBottomTabNavigator` configuration options.
 
 ## Add badges to icons
 
@@ -106,21 +106,25 @@ export default class IconWithBadge extends React.Component {
     return (
       <View style={{ width: 24, height: 24, margin: 5 }}>
         <Ionicons name={name} size={size} color={color} />
-        { badgeCount > 0 && (
-          <View style={{
-            // If you're using react-native < 0.57 overflow outside of the parent
-            // will not work on Android, see https://git.io/fhLJ8
-            position: 'absolute',
-            right: -6,
-            top: -3,
-            backgroundColor: 'red',
-            borderRadius: 6,
-            width: 12,
-            height: 12,
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-            <Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>{badgeCount}</Text>
+        {badgeCount > 0 && (
+          <View
+            style={{
+              // If you're using react-native < 0.57 overflow outside of the parent
+              // will not work on Android, see https://git.io/fhLJ8
+              position: 'absolute',
+              right: -6,
+              top: -3,
+              backgroundColor: 'red',
+              borderRadius: 6,
+              width: 12,
+              height: 12,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>
+              {badgeCount}
+            </Text>
           </View>
         )}
       </View>
@@ -135,8 +139,8 @@ From UI perspective this component is ready to use, but you still need to find s
 const HomeIconWithBadge = (props) => {
   // You should pass down the badgeCount in some other ways like React Context API, Redux, MobX or event emitters.
   return <IconWithBadge {...props} badgeCount={3} />;
-}
-export default HomeIconWithBadge
+};
+export default HomeIconWithBadge;
 ```
 
 ## Jumping between tabs
@@ -236,15 +240,17 @@ const SettingsStack = createStackNavigator({
   Details: DetailsScreen,
 });
 
-export default createAppContainer(createBottomTabNavigator(
-  {
-    Home: HomeStack,
-    Settings: SettingsStack,
-  },
-  {
-    /* Other configuration remains unchanged */
-  }
-));
+export default createAppContainer(
+  createBottomTabNavigator(
+    {
+      Home: HomeStack,
+      Settings: SettingsStack,
+    },
+    {
+      /* Other configuration remains unchanged */
+    }
+  )
+);
 ```
 
 <a href="https://snack.expo.io/@react-navigation/stacks-in-tabs-v3" target="blank" class="run-code-button">&rarr; Run this code</a>

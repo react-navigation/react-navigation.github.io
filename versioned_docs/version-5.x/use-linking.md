@@ -14,17 +14,17 @@ Example:
 ```js
 import * as React from 'react';
 import { ScrollView } from 'react-native';
-import { useLinking , NavigationContainer } from '@react-navigation/native';
+import { useLinking, NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   const ref = React.useRef();
 
   const { getInitialState } = useLinking(ref, {
-    prefixes: ['https://mychat.com', 'mychat://'],
+    prefixes: ['https://example.com', 'example://'],
     config: {
       screens: {
         Chat: 'feed/:sort',
-      }
+      },
     },
   });
 
@@ -34,7 +34,7 @@ export default function App() {
   React.useEffect(() => {
     getInitialState()
       .catch(() => {})
-      .then(state => {
+      .then((state) => {
         if (state !== undefined) {
           setInitialState(state);
         }
@@ -57,9 +57,9 @@ export default function App() {
 
 See [deep linking guide](deep-linking.md) for a complete guide on how to configure deep linking.
 
-### Options
+## Options
 
-#### `prefixes`
+### `prefixes`
 
 URL prefixes to handle. You can provide multiple prefixes to support custom schemes as well as [universal links](https://developer.apple.com/ios/universal-links/).
 
@@ -69,18 +69,18 @@ Example:
 
 ```js
 useLinking(ref, {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config: {
     screens: {
       Chat: 'feed/:sort',
-    }
+    },
   },
 });
 ```
 
 This is only supported on iOS and Android.
 
-#### `config`
+### `config`
 
 Config to fine-tune how to parse the path. The config object should represent the structure of the navigators in the app.
 
@@ -179,11 +179,11 @@ The `parse` option controls how the params are parsed. Here, you can provide the
 
 If no custom function is provided for parsing a param, it'll be parsed as a string.
 
-#### `enabled`
+### `enabled`
 
 Optional boolean to enable or disable the linking integration. Defaults to `true`.
 
-#### `getStateFromPath`
+### `getStateFromPath`
 
 You can optionally override the way React Navigation parses deep links to a state object by providing your own implementation.
 
@@ -191,20 +191,20 @@ Example:
 
 ```js
 useLinking(ref, {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config: {
     screens: {
       Chat: 'feed/:sort',
-    }
+    },
   },
   getStateFromPath(path, config) {
     // Return a state object here
     // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
-  }
+  },
 });
 ```
 
-#### `getPathFromState`
+### `getPathFromState`
 
 You can optionally override the way React Navigation serializes state objects to link by providing your own implementation. This is necessary for proper web support if you have specified `getStateFromPath`.
 
@@ -212,15 +212,15 @@ Example:
 
 ```js
 useLinking(ref, {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config: {
     screens: {
       Chat: 'feed/:sort',
-    }
+    },
   },
   getPathFromState(state, config) {
     // Return a path string here
     // You can also reuse the default logic by importing `getPathFromState` from `@react-navigation/native`
-  }
+  },
 });
 ```

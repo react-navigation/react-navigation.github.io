@@ -33,7 +33,7 @@ class HomeScreen extends React.Component {
 
 export default createStackNavigator({
   Home: {
-    screen: HomeScreen
+    screen: HomeScreen,
   },
 });
 ```
@@ -51,7 +51,7 @@ In React Native, the component exported from `App.js` is the entry point (or roo
 ```js
 const RootStack = createStackNavigator({
   Home: {
-    screen: HomeScreen
+    screen: HomeScreen,
   },
 });
 
@@ -68,7 +68,7 @@ Given that the only route configuration we have for `Home` is the screen compone
 
 ```js
 const RootStack = createStackNavigator({
-  Home: HomeScreen
+  Home: HomeScreen,
 });
 ```
 
@@ -106,8 +106,8 @@ Now our stack has two _routes_, a `Home` route and a `Details` route. The `Home`
 
 ## Summary
 
-* React Native doesn't have a built-in API for navigation like a web browser does. React Navigation provides this for you, along with the iOS and Android gestures and animations to transition between screens.
-* `createStackNavigator` is a function that takes a route configuration object and an options object and returns a React component.
-* The keys in the route configuration object are the route names and the values are the configuration for that route. The only required property on the configuration is the `screen` (the component to use for the route).
-* To specify what the initial route in a stack is, provide an `initialRouteName` on the stack options object.
-* [Full source of what we have built so far](https://snack.expo.io/@react-navigation/hello-react-navigation-v2).
+- React Native doesn't have a built-in API for navigation like a web browser does. React Navigation provides this for you, along with the iOS and Android gestures and animations to transition between screens.
+- `createStackNavigator` is a function that takes a route configuration object and an options object and returns a React component.
+- The keys in the route configuration object are the route names and the values are the configuration for that route. The only required property on the configuration is the `screen` (the component to use for the route).
+- To specify what the initial route in a stack is, provide an `initialRouteName` on the stack options object.
+- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/hello-react-navigation-v2).

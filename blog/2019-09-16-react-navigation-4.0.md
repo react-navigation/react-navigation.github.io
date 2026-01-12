@@ -1,13 +1,10 @@
 ---
 title: React Navigation 4.0
-author: Satyajit Sahoo
-author_url: https://twitter.com/satya164
-author_title: Core Team
-author_image_url: https://avatars2.githubusercontent.com/u/1174278?s=200&v=4
+authors: satya
 tags: [release, announcement]
 ---
 
-The documentation is now live at <https://reactnavigation.org>, and v3 lives [here](/docs/3.x/getting-started).
+The documentation is now live at [reactnavigation.org](https://reactnavigation.org), and v3 lives [here](/docs/3.x/getting-started).
 
 In this release, we have removed the navigators from the react-navigation package. The navigators have lived in separate packages for quite a while and you could already use those packages manually, but we still bundled them in the react-navigation package. This made it difficult for us to release significant updates to navigators, because we had to then do a major version release of react-navigation too. By separating the navigator packages there is more freedom to update and improve navigators without any impact on folks that don't use them.
 
@@ -29,4 +26,4 @@ If you're using TypeScript, navigator specific types were also removed from the 
 
 ---
 
-Thanks for reading, please post any issues you encounter to <https://github.com/react-navigation/react-navigation/issues>!
+Thanks for reading, please post any issues you encounter to [react-navigation/issues](https://github.com/react-navigation/react-navigation/issues)!

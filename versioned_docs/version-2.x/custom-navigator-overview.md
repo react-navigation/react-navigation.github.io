@@ -24,7 +24,7 @@ The navigators render application screens which are just React components.
 To learn how to create screens, read about:
 
 - [Screen `navigation` prop](navigation-prop.md) to allow the screen to dispatch navigation actions, such as opening another screen
-- Screen `navigationOptions` to customize how the screen gets presented by the navigator (e.g. [header title](stack-navigator.md#navigationoptions-used-by-stacknavigator), tab label)
+- Screen `navigationOptions` to customize how the screen gets presented by the navigator (e.g. [header title](stack-navigator.md#navigationoptions-for-screens-inside-of-the-navigator), tab label)
 
 ### Calling Navigate on Top Level Component
 
@@ -38,13 +38,18 @@ const AppNavigator = createStackNavigator(SomeAppRouteConfigs);
 class App extends React.Component {
   someEvent() {
     // call navigate for AppNavigator here:
-    this.navigator && this.navigator.dispatch(
-      NavigationActions.navigate({ routeName: someRouteName })
-    );
+    this.navigator &&
+      this.navigator.dispatch(
+        NavigationActions.navigate({ routeName: someRouteName })
+      );
   }
   render() {
     return (
-      <AppNavigator ref={nav => { this.navigator = nav; }} />
+      <AppNavigator
+        ref={(nav) => {
+          this.navigator = nav;
+        }}
+      />
     );
   }
 }

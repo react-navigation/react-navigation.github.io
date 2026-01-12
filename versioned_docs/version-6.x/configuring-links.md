@@ -37,19 +37,23 @@ function App() {
 
 When you specify the `linking` prop, React Navigation will handle incoming links automatically. On Android and iOS, it'll use React Native's [`Linking` module](https://reactnative.dev/docs/linking) to handle incoming links, both when the app was opened with the link, and when new links are received when the app is open. On the Web, it'll use the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to sync the URL with the browser.
 
-> Note: Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android. We add a timeout to avoid getting stuck forever, but it means that the link might not be handled in some cases.
+:::warning
+
+Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android. We add a timeout to avoid getting stuck forever, but it means that the link might not be handled in some cases.
+
+:::
 
 You can also pass a [`fallback`](navigation-container.md#fallback) prop to `NavigationContainer` which controls what's displayed when React Navigation is trying to resolve the initial deep link URL.
 
 ## Prefixes
 
-The `prefixes` option can be used to specify custom schemes (e.g. `mychat://`) as well as host & domain names (e.g. `https://mychat.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
+The `prefixes` option can be used to specify custom schemes (e.g. `example://`) as well as host & domain names (e.g. `https://example.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
 
 For example:
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com'],
+  prefixes: ['example://', 'https://example.com'],
 };
 ```
 
@@ -57,13 +61,28 @@ Note that the `prefixes` option is not supported on Web. The host & domain names
 
 ### Multiple subdomains​
 
-To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*`. before the beginning of a specific domain. Note that an entry for `*.mychat.com` does not match `mychat.com` because of the period after the asterisk. To enable matching for both `*.mychat.com` and `mychat.com`, you need to provide a separate prefix entry for each.
+To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*`. before the beginning of a specific domain. Note that an entry for `*.example.com` does not match `example.com` because of the period after the asterisk. To enable matching for both `*.example.com` and `example.com`, you need to provide a separate prefix entry for each.
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com', 'https://*.mychat.com'],
+  prefixes: ['example://', 'https://example.com', 'https://*.example.com'],
 };
 ```
+
+### Filtering certain paths
+
+Sometimes we may not want to handle all incoming links. For example, we may want to filter out links meant for authentication (e.g. `expo-auth-session`) or other purposes instead of navigating to a specific screen.
+
+To achieve this, you can use the `filter` option:
+
+```js
+const linking = {
+  prefixes: ['example://', 'https://example.com'],
+  filter: (url) => !url.includes('+expo-auth-session'),
+};
+```
+
+This is not supported on Web as we always need to handle the URL of the page.
 
 ## Mapping path to route names
 
@@ -130,7 +149,7 @@ const config = {
 };
 
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config,
 };
 
@@ -480,11 +499,17 @@ const state = {
 };
 ```
 
-It's not possible to pass params to the initial screen through the URL. So make sure that your initial route doesn't need any params or specify `initialParams` to pass required params.
+:::warning
+
+The `initialRouteName` will add the screen to React Navigation's state only. If your app is running on the Web, the browser's history will not contain this screen as the user has never visited it. So, if the user presses the browser's back button, it'll not go back to this screen.
+
+:::
+
+Another thing to keep in mind is that it's not possible to pass params to the initial screen through the URL. So make sure that your initial route doesn't need any params or specify `initialParams` in the screen configuration to pass the required params.
 
 In this case, any params in the URL are only passed to the `Profile` screen which matches the path pattern `users/:id`, and the `Feed` screen doesn't receive any params. If you want to have the same params in the `Feed` screen, you can specify a [custom `getStateFromPath` function](navigation-container.md#linkinggetstatefrompath) and copy those params.
 
-Similarly, if you want to access params of a parent screen from a child screen, you can use [React Context](https://reactjs.org/docs/context.html) to expose them.
+Similarly, if you want to access params of a parent screen from a child screen, you can use [React Context](https://react.dev/reference/react/useContext) to expose them.
 
 ## Matching exact paths
 
@@ -654,13 +679,13 @@ Example:
 
 ```js
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
+  prefixes: ['https://example.com', 'example://'],
   config: {
     screens: {
       Chat: 'feed/:sort',
     },
   },
-  getStateFromPath: (path, options) => {
+  getStateFromPath(path, options) {
     // Return a state object here
     // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
   },

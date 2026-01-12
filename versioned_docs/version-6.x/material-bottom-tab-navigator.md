@@ -4,6 +4,12 @@ title: Material Bottom Tabs Navigator
 sidebar_label: Material Bottom Tabs
 ---
 
+:::danger
+
+The `material-bottom-tabs` navigator is moved to [`react-native-paper`](https://reactnativepaper.com/). Refer to [`react-native-paper`'s documentation](https://callstack.github.io/react-native-paper/docs/guides/bottom-navigation) instead for installation instructions, usage guide and API reference. For any issues with the navigator, please open an issue in [`react-native-paper`'s repository](https://github.com/callstack/react-native-paper/).
+
+:::
+
 A material-design themed tab bar on the bottom of the screen that lets you switch between different routes with animation. Routes are lazily initialized - their screen components are not mounted until they are first focused.
 
 This wraps the [`BottomNavigation`](https://callstack.github.io/react-native-paper/bottom-navigation.html) component from [`react-native-paper`](https://reactnativepaper.com). If you [configure the Babel plugin](https://callstack.github.io/react-native-paper/getting-started.html), it won't include the whole `react-native-paper` library in your bundle.
@@ -15,7 +21,7 @@ This wraps the [`BottomNavigation`](https://callstack.github.io/react-native-pap
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/material-bottom-tabs):
 
 ```bash npm2yarn
-npm install @react-navigation/material-bottom-tabs react-native-paper react-native-vector-icons
+npm install @react-navigation/material-bottom-tabs@^6.x react-native-paper react-native-vector-icons
 ```
 
 This API also requires that you install `react-native-vector-icons`! If you are using Expo managed workflow, it will work without any extra steps. Otherwise, [follow these installation instructions](https://github.com/oblador/react-native-vector-icons#installation).
@@ -45,7 +51,11 @@ function MyTabs() {
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+:::note
+
+For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+
+:::
 
 ## RouteConfigs
 

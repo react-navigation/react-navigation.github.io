@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { View, Button, Text } from 'react-native';
-import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  createNavigationContainerRef,
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const navigationRef = createNavigationContainerRef()
+const navigationRef = createNavigationContainerRef();
 
 function navigate(name, params) {
   if (navigationRef.isReady()) {
