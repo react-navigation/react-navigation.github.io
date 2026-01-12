@@ -229,7 +229,7 @@ A component used to show the back button header. It's the default for [`headerLe
 - `tintColor` - Tint color for the header.
 - `label` - Label text for the button. Usually the title of the previous screen. By default, this is only shown on iOS.
 - `truncatedLabel` - Label text to show when there isn't enough space for the full label.
-- `labelVisible` - Whether the label text is visible. Defaults to `true` on iOS and `false` on Android.
+- `labelVisible` - Whether the label text is visible. Defaults to `false` on iOS and Android.
 - `labelStyle` - Style object for the label.
 - `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings.
 - `onLabelLayout` - Callback to trigger when the size of the label changes.
