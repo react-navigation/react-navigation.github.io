@@ -1,4 +1,4 @@
-import remarkNpm2Yarn from '@docusaurus/remark-plugin-npm2yarn';
+import remarkNpm2Yarn from './src/plugins/remark-npm2yarn.mjs';
 import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.mjs';
 import rehypeStaticToDynamic from './src/plugins/rehype-static-to-dynamic.mjs';
 import rehypeVideoAspectRatio from './src/plugins/rehype-video-aspect-ratio.mjs';
