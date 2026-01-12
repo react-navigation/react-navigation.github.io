@@ -370,6 +370,10 @@ Title string used by the back button when `headerBackTitle` doesn't fit on the s
 
 Style object for the back title.
 
+#### `headerBackTestID`
+
+Test ID for the back button for testing purposes.
+
 ### Events
 
 The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
