@@ -25,7 +25,6 @@ function SomeComponent() {
   );
 }
 
-
 function ProfileScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

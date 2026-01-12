@@ -17,7 +17,7 @@ To be able to persist the [navigation state](navigation-state.md), we can use th
 - `onStateChange` - This prop notifies us of any state changes. We can persist the state in this callback.
 - `initialState` - This prop allows us to pass an initial state to use for [navigation state](navigation-state.md). We can pass the restored state in this prop.
 
- <samp id="state-persistance" />
+ <samp id="state-persistence" />
 
 ```js
 import * as React from 'react';
@@ -39,7 +39,9 @@ export default function App() {
         if (Platform.OS !== 'web' && initialUrl == null) {
           // Only restore state if there's no deep link and we're not on web
           const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
-          const state = savedStateString ? JSON.parse(savedStateString) : undefined;
+          const state = savedStateString
+            ? JSON.parse(savedStateString)
+            : undefined;
 
           if (state !== undefined) {
             setInitialState(state);

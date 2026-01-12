@@ -22,22 +22,20 @@ export function useFocusState() {
     const newState = focusStateOfEvent(e.type);
     newState && setFocusState(newState);
   }
-  useEffect(
-    () => {
-      const subsA = navigation.addListener('action', handleEvt);
-      const subsWF = navigation.addListener('willFocus', handleEvt);
-      const subsDF = navigation.addListener('didFocus', handleEvt);
-      const subsWB = navigation.addListener('willBlur', handleEvt);
-      const subsDB = navigation.addListener('didBlur', handleEvt);
-      return () => {
-        subsA.remove();
-        subsWF.remove();
-        subsDF.remove();
-        subsWB.remove();
-        subsDB.remove();
-      };
-    },
-  );
+  useEffect(() => {
+    const subsA = navigation.addListener('action', handleEvt);
+    const subsWF = navigation.addListener('willFocus', handleEvt);
+    const subsDF = navigation.addListener('didFocus', handleEvt);
+    const subsWB = navigation.addListener('willBlur', handleEvt);
+    const subsDB = navigation.addListener('didBlur', handleEvt);
+    return () => {
+      subsA.remove();
+      subsWF.remove();
+      subsDF.remove();
+      subsWB.remove();
+      subsDB.remove();
+    };
+  });
   return focusState;
 }
 ```

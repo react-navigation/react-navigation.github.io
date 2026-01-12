@@ -48,8 +48,8 @@ class HomeScreen extends React.Component {
 
 Let's break this down:
 
-* `this.props.navigation`: the `navigation` prop is passed in to every **screen component** ([definition](glossary-of-terms.md#screen-component)) in stack navigator (more about this later in ["The navigation prop in depth"](navigation-prop.md)).
-* `navigate('Details')`: we call the `navigate` function (on the `navigation` prop &mdash; naming is hard!) with the name of the route that we'd like to move the user to.
+- `this.props.navigation`: the `navigation` prop is passed in to every **screen component** ([definition](glossary-of-terms.md#screen-component)) in stack navigator (more about this later in ["The navigation prop in depth"](navigation-prop.md)).
+- `navigate('Details')`: we call the `navigate` function (on the `navigation` prop &mdash; naming is hard!) with the name of the route that we'd like to move the user to.
 
 > If we call `this.props.navigation.navigate` with a route name that we haven't defined on a stack navigator, nothing will happen. Said another way, we can only navigate to routes that have been defined on our stack navigator &mdash; we cannot navigate to an arbitrary component.
 
@@ -128,9 +128,9 @@ Another common requirement is to be able to go back _multiple_ screens -- for ex
 
 ## Summary
 
-* `this.props.navigation.navigate('RouteName')` pushes a new route to the stack navigator if it's not already in the stack, otherwise it jumps to that screen.
-* We can call `this.props.navigation.push('RouteName')` as many times as we like and it will continue pushing routes.
-* The header bar will automatically show a back button, but you can programmatically go back by calling `this.props.navigation.goBack()`. On Android, the hardware back button just works as expected.
-* You can go back to an existing screen in the stack with `this.props.navigation.navigate('RouteName')`, and you can go back to the first screen in the stack with `this.props.navigation.popToTop()`.
-* The `navigation` prop is available to all screen components (components defined as screens in route configuration and rendered by React Navigation as a route).
-* [Full source of what we have built so far](https://snack.expo.io/@react-navigation/going-back-v3).
+- `this.props.navigation.navigate('RouteName')` pushes a new route to the stack navigator if it's not already in the stack, otherwise it jumps to that screen.
+- We can call `this.props.navigation.push('RouteName')` as many times as we like and it will continue pushing routes.
+- The header bar will automatically show a back button, but you can programmatically go back by calling `this.props.navigation.goBack()`. On Android, the hardware back button just works as expected.
+- You can go back to an existing screen in the stack with `this.props.navigation.navigate('RouteName')`, and you can go back to the first screen in the stack with `this.props.navigation.popToTop()`.
+- The `navigation` prop is available to all screen components (components defined as screens in route configuration and rendered by React Navigation as a route).
+- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/going-back-v3).

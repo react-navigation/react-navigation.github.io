@@ -80,9 +80,9 @@ If you want to preserve the existing screens but only want to modify the state, 
 ```js
 import { CommonActions } from '@react-navigation/native';
 
-navigation.dispatch(state => {
+navigation.dispatch((state) => {
   // Remove the home route from the stack
-  const routes = state.routes.filter(r => r.name !== 'Home');
+  const routes = state.routes.filter((r) => r.name !== 'Home');
 
   return CommonActions.reset({
     ...state,

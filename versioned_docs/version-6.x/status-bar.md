@@ -99,7 +99,13 @@ const styles = StyleSheet.create({
 });
 ```
 
-![StackNavigator with different StatusBar configs](/assets/statusbar/statusbar-stack-demo.gif)
+<video playsInline autoPlay muted loop>
+  <source src="/assets/statusbar/status-stack-ios.mp4" />
+</video>
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/statusbar/status-stack-android.mp4" />
+</video>
 
 ## Tabs and Drawer
 
@@ -180,6 +186,20 @@ function Screen2({ navigation }) {
 
 Although not necessary, you can use the `FocusAwareStatusBar` component in the screens of the native stack navigator as well.
 
-![DrawerNavigator with different StatusBar configs](/assets/statusbar/statusbar-drawer-demo.gif)
+<div>
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/statusbar/status-drawer-ios.mp4" />
+  </video>
 
-![TabNavigator with different StatusBar configs](/assets/statusbar/statusbar-tab-demo.gif)
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/statusbar/status-drawer-android.mp4" />
+  </video>
+
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/statusbar/status-tab-ios.mp4" />
+  </video>
+
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/statusbar/status-tab-android.mp4" />
+  </video>
+</div>

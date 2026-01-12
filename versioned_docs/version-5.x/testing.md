@@ -33,7 +33,6 @@ jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
 // As of react-native@0.64.X file has moved
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
-
 ```
 
 Then we need to use this setup file in our jest config. You can add it under `setupFiles` option in a `jest.config.js` file or the `jest` key in `package.json`:
@@ -41,9 +40,7 @@ Then we need to use this setup file in our jest config. You can add it under `se
 ```json
 {
   "preset": "react-native",
-  "setupFiles": [
-    "<rootDir>/jest/setup.js"
-  ],
+  "setupFiles": ["<rootDir>/jest/setup.js"]
 }
 ```
 

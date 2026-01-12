@@ -5,7 +5,7 @@ sidebar_label: createDrawerNavigator
 ---
 
 ```js
-createDrawerNavigator(RouteConfigs, DrawerNavigatorConfig)
+createDrawerNavigator(RouteConfigs, DrawerNavigatorConfig);
 ```
 
 ### RouteConfigs
@@ -37,7 +37,10 @@ import { DrawerItems, SafeAreaView } from 'react-navigation';
 
 const CustomDrawerContentComponent = (props) => (
   <ScrollView>
-    <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
+    <SafeAreaView
+      style={styles.container}
+      forceInset={{ top: 'always', horizontal: 'never' }}
+    >
       <DrawerItems {...props} />
     </SafeAreaView>
   </ScrollView>

@@ -4,34 +4,80 @@ title: useNavigation
 sidebar_label: useNavigation
 ---
 
-`useNavigation` is a hook which gives access to `navigation` object. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-`useNavigation()` returns the `navigation` prop of the screen it's inside.
+`useNavigation` is a hook that gives access to `navigation` object. It's useful when you cannot pass the `navigation` object as a prop to the component directly, or don't want to pass it in case of a deeply nested child.
 
-## Example
+The `useNavigation` hook returns the `navigation` object of the screen where it's used:
 
-<samp id="use-navigation-example" />
-
-```js
+```js name="useNavigation hook" snack static2dynamic
 import * as React from 'react';
-import { Button } from 'react-native';
+import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// codeblock-focus-start
 import { useNavigation } from '@react-navigation/native';
 
 function MyBackButton() {
+  // highlight-next-line
   const navigation = useNavigation();
 
   return (
     <Button
-      title="Back"
       onPress={() => {
         navigation.goBack();
       }}
-    />
+    >
+      Back
+    </Button>
   );
 }
+// codeblock-focus-end
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>This is the home screen of the app</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      <MyBackButton />
+    </View>
+  );
+}
+
+const RootStack = createNativeStackNavigator({
+  initialRouteName: 'Home',
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+function App() {
+  return <Navigation />;
+}
+
+export default App;
 ```
 
-See the documentation for the [`navigation` prop](navigation-prop.md) for more info.
+Check how to setup `useNavigation` with TypeScript [here](typescript.md#annotating-usenavigation).
+
+See the documentation for the [`navigation` object](navigation-object.md) for more info.
 
 ## Using with class component
 
@@ -46,7 +92,7 @@ class MyBackButton extends React.Component {
 }
 
 // Wrap and export
-export default function(props) {
+export default function (props) {
   const navigation = useNavigation();
 
   return <MyBackButton {...props} navigation={navigation} />;

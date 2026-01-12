@@ -40,9 +40,7 @@ function App() {
           options={({ navigation, route }) => ({
             headerTitle: (props) => <LogoTitle {...props} />,
             // Add a placeholder button without the `onPress` to avoid flicker
-            headerRight: () => (
-              <Button title="Update count" />
-            ),
+            headerRight: () => <Button title="Update count" />,
           })}
         />
       </Stack.Navigator>

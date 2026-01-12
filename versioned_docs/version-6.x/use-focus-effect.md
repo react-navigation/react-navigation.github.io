@@ -18,7 +18,7 @@ function Profile({ userId }) {
 
   useFocusEffect(
     React.useCallback(() => {
-      const unsubscribe = API.subscribe(userId, user => setUser(user));
+      const unsubscribe = API.subscribe(userId, (user) => setUser(user));
 
       return () => unsubscribe();
     }, [userId])
@@ -28,7 +28,11 @@ function Profile({ userId }) {
 }
 ```
 
-> Note: To avoid the running the effect too often, it's important to wrap the callback in `useCallback` before passing it to `useFocusEffect` as shown in the example.
+:::warning
+
+To avoid the running the effect too often, it's important to wrap the callback in `useCallback` before passing it to `useFocusEffect` as shown in the example.
+
+:::
 
 The `useFocusEffect` is analogous to React's `useEffect` hook. The only difference is that it only runs if the screen is currently focused.
 
@@ -103,7 +107,7 @@ useFocusEffect(
   React.useCallback(() => {
     return () => {
       // Do something that should run on blur
-    }
+    };
   }, [])
 );
 ```
@@ -112,7 +116,7 @@ The cleanup function runs whenever the effect needs to cleanup, i.e. on `blur`, 
 
 ```js
 React.useEffect(() => {
-    const unsubscribe = navigation.addListener('blur', () => {
+  const unsubscribe = navigation.addListener('blur', () => {
     // Do something when the screen blurs
   });
 
@@ -142,7 +146,7 @@ function FetchUserData({ userId, onUpdate }) {
 // ...
 
 class Profile extends React.Component {
-  _handleUpdate = user => {
+  _handleUpdate = (user) => {
     // Do something with user object
   };
 

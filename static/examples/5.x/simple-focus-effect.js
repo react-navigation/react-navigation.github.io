@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import {
-  NavigationContainer,
-  useFocusEffect,
-} from '@react-navigation/native';
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 function ProfileScreen() {

@@ -1,13 +1,10 @@
 ---
 title: React Navigation 2.0
-author: Brent Vatne
-author_url: https://twitter.com/notbrent
-author_title: Core Team
-author_image_url: https://avatars0.githubusercontent.com/u/90494?s=200&v=4
+authors: brent
 tags: [release, announcement]
 ---
 
-The documentation is now live at <https://reactnavigation.org>, and v1 lives [here](/docs/1.x/getting-started).
+The documentation is now live at [reactnavigation.org](https://reactnavigation.org), and v1 lives [here](/docs/1.x/getting-started).
 
 <!--truncate-->
 
@@ -51,7 +48,7 @@ The following changes are considered “trivial” because you will only need ma
 
 ### Drawer routes have been replaced with actions
 
-Rather than opening a drawer with `navigation.navigate(‘DrawerOpen’)`, you can now call `navigation.openDrawer()`. Other methods are `closeDrawer()` and `toggleDrawer()`.  See [pull 3618](https://github.com/react-navigation/react-navigation/pull/3618).
+Rather than opening a drawer with `navigation.navigate(‘DrawerOpen’)`, you can now call `navigation.openDrawer()`. Other methods are `closeDrawer()` and `toggleDrawer()`. See [pull 3618](https://github.com/react-navigation/react-navigation/pull/3618).
 
 ### Navigation actions API overhaul
 
@@ -61,7 +58,7 @@ In 1.x, functions on the `navigation` were not contextual - they would be the sa
 
 Given that we only exposed generic helpers (`navigate`, `goBack`) and helpers specific to the stack in 1.x, this would only impact you if you attempted to use the stack helpers from outside of a stack. For example, if you had a tab navigator with a stack in tab A and just a plain screen in tab B, then tried to `push` a route from the screen in tab B, `push` would not be available. Keep this in mind when you update your app if it follows this type of structure.
 
-One of the big improvements you get from this is that you can now add your own helpers to the `navigation` prop!  Read more in [RFC 6](https://github.com/react-navigation/rfcs/blob/master/text/0006-action-creators.md) and in [pull 3392](https://github.com/react-navigation/react-navigation/pull/3392).
+One of the big improvements you get from this is that you can now add your own helpers to the `navigation` prop! Read more in [RFC 6](https://github.com/react-navigation/rfcs/blob/master/text/0006-action-creators.md) and in [pull 3392](https://github.com/react-navigation/react-navigation/pull/3392).
 
 ### NavigationActions no longer have `toString()` implementations ([related](https://github.com/react-navigation/react-navigation/issues/4072))
 
@@ -85,24 +82,24 @@ It is worth noting additionally that `createBottomTabNavigator` is different fro
 
 ## Enhancements
 
-* dangerouslyGetParent and dismiss helpers on navigation prop ([3669](https://github.com/react-navigation/react-navigation/pull/3669))
-* State persistence - automatically save state and reload it when the app restarts ([3716](https://github.com/react-navigation/react-navigation/pull/3716))
-* Smoothly transition header visibility in Stack ([3821](https://github.com/react-navigation/react-navigation/pull/3821))
-* Add initialRouteKey for StackRouter ([3540](https://github.com/react-navigation/react-navigation/pull/3540))
-* Make StackNavigator keyboard aware -- it hides automatically when you start to swipe back, and refocuses if you cancel the swipe back gesture ([3951](https://github.com/react-navigation/react-navigation/pull/3951))
-* Allow modification of SafeAreaView props in header ([3496](https://github.com/react-navigation/react-navigation/pull/3496))
-* Add `createMaterialBottomTabNavigator` for a material design style tab bar. (see [react-navigation-tabs](https://github.com/react-navigation/react-navigation-tabs)).
-* Use findIndex instead of map/indexOf in StateUtils ([commit](https://github.com/react-navigation/react-navigation/commit/47fe858d4ec339d2b1f4b96f3a5444aed8f6f900)
-* Warn when users have multiple stateful navigation containers ([commit](https://github.com/react-navigation/react-navigation/commit/68a2a106f370003dc1d46385fd8b5992be189ee2))
-* Remove almost all uses of React 16 deprecated lifecycle methods ([commit](https://github.com/react-navigation/react-navigation/commit/3f837c895e823de4d528b55fd70ee7ba167480d8))
-* Add `activeLabelStyle` and `inactiveLabelStyle` for `DrawerItem` ([commit](https://github.com/react-navigation/react-navigation/commit/7c488c8d4974028f85a4c5171d27209fa099170f))
+- dangerouslyGetParent and dismiss helpers on navigation prop ([3669](https://github.com/react-navigation/react-navigation/pull/3669))
+- State persistence - automatically save state and reload it when the app restarts ([3716](https://github.com/react-navigation/react-navigation/pull/3716))
+- Smoothly transition header visibility in Stack ([3821](https://github.com/react-navigation/react-navigation/pull/3821))
+- Add initialRouteKey for StackRouter ([3540](https://github.com/react-navigation/react-navigation/pull/3540))
+- Make StackNavigator keyboard aware -- it hides automatically when you start to swipe back, and refocuses if you cancel the swipe back gesture ([3951](https://github.com/react-navigation/react-navigation/pull/3951))
+- Allow modification of SafeAreaView props in header ([3496](https://github.com/react-navigation/react-navigation/pull/3496))
+- Add `createMaterialBottomTabNavigator` for a material design style tab bar. (see [react-navigation-tabs](https://github.com/react-navigation/react-navigation-tabs)).
+- Use findIndex instead of map/indexOf in StateUtils ([commit](https://github.com/react-navigation/react-navigation/commit/47fe858d4ec339d2b1f4b96f3a5444aed8f6f900)
+- Warn when users have multiple stateful navigation containers ([commit](https://github.com/react-navigation/react-navigation/commit/68a2a106f370003dc1d46385fd8b5992be189ee2))
+- Remove almost all uses of React 16 deprecated lifecycle methods ([commit](https://github.com/react-navigation/react-navigation/commit/3f837c895e823de4d528b55fd70ee7ba167480d8))
+- Add `activeLabelStyle` and `inactiveLabelStyle` for `DrawerItem` ([commit](https://github.com/react-navigation/react-navigation/commit/7c488c8d4974028f85a4c5171d27209fa099170f))
 
 ## Bugfixes
 
-* Avoid unnecessary navigation completion dispatches ([3902](https://github.com/react-navigation/react-navigation/pull/3902))
-* Use Header.HEIGHT instead of measuring to avoid flicker ([3940](https://github.com/react-navigation/react-navigation/pull/3940))
-* Implement paths on `SwitchRouter` ([commit](https://github.com/react-navigation/react-navigation/commit/5e4512f3ebef587bf90e4ec4d660708b72a0a865)).
-* `SwitchRouter` now returns `null` on idempotent navigation ([commit](https://github.com/react-navigation/react-navigation/commit/577d99c1658ef85c061c82d55bf349c38e161e97)).
+- Avoid unnecessary navigation completion dispatches ([3902](https://github.com/react-navigation/react-navigation/pull/3902))
+- Use Header.HEIGHT instead of measuring to avoid flicker ([3940](https://github.com/react-navigation/react-navigation/pull/3940))
+- Implement paths on `SwitchRouter` ([commit](https://github.com/react-navigation/react-navigation/commit/5e4512f3ebef587bf90e4ec4d660708b72a0a865)).
+- `SwitchRouter` now returns `null` on idempotent navigation ([commit](https://github.com/react-navigation/react-navigation/commit/577d99c1658ef85c061c82d55bf349c38e161e97)).
 
 ## Final notes
 

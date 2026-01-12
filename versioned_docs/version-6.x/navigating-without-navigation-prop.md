@@ -42,7 +42,7 @@ In the next step, we define `RootNavigation`, which is a simple module with func
 
 import { createNavigationContainerRef } from '@react-navigation/native';
 
-export const navigationRef = createNavigationContainerRef()
+export const navigationRef = createNavigationContainerRef();
 
 export function navigate(name, params) {
   if (navigationRef.isReady()) {
@@ -104,7 +104,7 @@ To avoid this, you can use the `isReady()` method available on the ref as shown 
 
 import * as React from 'react';
 
-export const navigationRef = createNavigationContainerRef()
+export const navigationRef = createNavigationContainerRef();
 
 export function navigate(name, params) {
   if (navigationRef.isReady()) {

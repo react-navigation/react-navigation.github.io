@@ -39,7 +39,7 @@ class MyText extends React.Component {
 }
 
 // Wrap and export
-export default function(props) {
+export default function (props) {
   const route = useRoute();
 
   return <MyText {...props} route={route} />;
