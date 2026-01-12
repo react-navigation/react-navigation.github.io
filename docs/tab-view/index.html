@@ -22,7 +22,7 @@
 <script src="/js/snack-helpers.js"></script>
 <script src="/js/toc-fixes.js"></script>
 <script src="/js/video-playback.js"></script><link rel="stylesheet" href="/assets/css/styles.f230a370.css">
-<script src="/assets/js/runtime~main.16915841.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.f18da887.js" defer="defer"></script>
 <script src="/assets/js/main.f09a5a40.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -122,6 +122,15 @@ The navigation state needs to be updated when it&#x27;s called, otherwise the ch
 <li class=""><code>&#x27;on-drag&#x27;</code>: the keyboard is dismissed when a drag begins.</li>
 <li class=""><code>&#x27;none&#x27;</code>: drags do not dismiss the keyboard.</li>
 </ul>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="overscrollmode"><code>overScrollMode</code><a href="#overscrollmode" class="hash-link" aria-label="Direct link to overscrollmode" title="Direct link to overscrollmode" translate="no">​</a></h5>
+<p>Used to override default value of pager&#x27;s overScroll mode.</p>
+<p>Possible values:</p>
+<ul>
+<li class=""><code>&#x27;auto&#x27;</code> (default): Allow a user to over-scroll this view only if the content is large enough to meaningfully scroll.</li>
+<li class=""><code>&#x27;always&#x27;</code>: Always allow a user to over-scroll this view.</li>
+<li class=""><code>&#x27;never&#x27;</code>: Never allow a user to over-scroll this view.</li>
+</ul>
+<p>Only supported on Android.</p>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="swipeenabled"><code>swipeEnabled</code><a href="#swipeenabled" class="hash-link" aria-label="Direct link to swipeenabled" title="Direct link to swipeenabled" translate="no">​</a></h5>
 <p>Boolean indicating whether to enable swipe gestures. Swipe gestures are enabled by default. Passing <code>false</code> will disable swipe gestures, but the user can still switch tabs by pressing the tab bar.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="animationenabled"><code>animationEnabled</code><a href="#animationenabled" class="hash-link" aria-label="Direct link to animationenabled" title="Direct link to animationenabled" translate="no">​</a></h4>
@@ -133,8 +142,6 @@ The navigation state needs to be updated when it&#x27;s called, otherwise the ch
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="initiallayout"><code>initialLayout</code><a href="#initiallayout" class="hash-link" aria-label="Direct link to initiallayout" title="Direct link to initiallayout" translate="no">​</a></h5>
 <p>Object containing the initial height and width of the screens. Passing this will improve the initial rendering performance. For most apps, this is a good default:</p>
 <div class="language-js codeBlockContainer_Ckt0 theme-code-block" style="--prism-background-color:hsl(230, 1%, 98%);--prism-color:hsl(230, 8%, 24%)"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-js codeBlock_bY9V thin-scrollbar" style="background-color:hsl(230, 1%, 98%);color:hsl(230, 8%, 24%)"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token operator" style="color:hsl(221, 87%, 60%)">&lt;</span><span class="token maybe-class-name">TabView</span><span class="token plain"></span><br></span><span class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">  initialLayout</span><span class="token operator" style="color:hsl(221, 87%, 60%)">=</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">{</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">{</span><span class="token plain"> </span><span class="token literal-property property" style="color:hsl(5, 74%, 59%)">width</span><span class="token operator" style="color:hsl(221, 87%, 60%)">:</span><span class="token plain"> </span><span class="token maybe-class-name">Dimensions</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token method function property-access" style="color:hsl(221, 87%, 60%)">get</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token string" style="color:hsl(119, 34%, 47%)">&#x27;window&#x27;</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">.</span><span class="token property-access">width</span><span class="token plain"> </span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">}</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">  </span><span class="token spread operator" style="color:hsl(221, 87%, 60%)">...</span><span class="token plain"></span><br></span><span class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token operator" style="color:hsl(221, 87%, 60%)">/</span><span class="token operator" style="color:hsl(221, 87%, 60%)">&gt;</span><br></span></code></pre></div></div>
-<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="overscrollmode"><code>overScrollMode</code><a href="#overscrollmode" class="hash-link" aria-label="Direct link to overscrollmode" title="Direct link to overscrollmode" translate="no">​</a></h5>
-<p>Used to override default value of pager&#x27;s overScroll mode. Can be <code>auto</code>, <code>always</code> or <code>never</code> (Android only).</p>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="pagerstyle"><code>pagerStyle</code><a href="#pagerstyle" class="hash-link" aria-label="Direct link to pagerstyle" title="Direct link to pagerstyle" translate="no">​</a></h5>
 <p>Style to apply to the pager view wrapping all the scenes.</p>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="style"><code>style</code><a href="#style" class="hash-link" aria-label="Direct link to style" title="Direct link to style" translate="no">​</a></h5>
