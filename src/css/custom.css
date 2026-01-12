@@ -378,10 +378,22 @@ header {
   }
 }
 
+@media (min-width: 40rem) {
+  .main-wrapper:not(.full-width) {
+    & main:not(.blog-wrapper main) {
+      padding: 1rem 0 1rem 1rem;
+    }
+
+    & .container > .row > :first-child {
+      padding-right: 2rem;
+    }
+  }
+}
+
 @media (min-width: 85rem) {
   .main-wrapper:not(.full-width) {
     & main:not(.blog-wrapper main) {
-      padding: 2rem 0 2rem 2rem;
+      padding: 1rem 0 2rem 2rem;
     }
 
     & .container > .row > :first-child {
