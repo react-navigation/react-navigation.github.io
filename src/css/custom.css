@@ -78,9 +78,99 @@
   --ifm-footer-padding-vertical: var(--ifm-spacing-vertical);
   --ifm-tabs-padding-vertical: 0.375rem;
 
+  --ifm-color-success-hue: 140;
+  --ifm-color-success-dark: hsl(var(--ifm-color-success-hue), 68%, 30%);
+  --ifm-color-success-darker: hsl(var(--ifm-color-success-hue), 72%, 24%);
+  --ifm-color-success-darkest: hsl(var(--ifm-color-success-hue), 85%, 16%);
+  --ifm-color-success-light: hsl(var(--ifm-color-success-hue), 55%, 41%);
+  --ifm-color-success-lighter: hsl(var(--ifm-color-success-hue), 52%, 53%);
+  --ifm-color-success-lightest: hsl(var(--ifm-color-success-hue), 52%, 70%);
+  --ifm-color-success-contrast-background: hsl(
+    var(--ifm-color-success-hue),
+    74%,
+    93%
+  );
+  --ifm-color-success-contrast-foreground: hsl(
+    var(--ifm-color-success-hue),
+    68%,
+    16%
+  );
+
+  --ifm-color-info-hue: 212;
+  --ifm-color-info-dark: hsl(var(--ifm-color-info-hue), 92%, 45%);
+  --ifm-color-info-darker: hsl(var(--ifm-color-info-hue), 92%, 35%);
+  --ifm-color-info-darkest: hsl(var(--ifm-color-info-hue), 92%, 28%);
+  --ifm-color-info-light: hsl(var(--ifm-color-info-hue), 100%, 56%);
+  --ifm-color-info-lighter: hsl(var(--ifm-color-info-hue), 100%, 66%);
+  --ifm-color-info-lightest: hsl(var(--ifm-color-info-hue), 100%, 75%);
+  --ifm-color-info-contrast-background: hsl(
+    var(--ifm-color-info-hue),
+    100%,
+    93%
+  );
+  --ifm-color-info-contrast-foreground: hsl(
+    var(--ifm-color-info-hue),
+    75%,
+    22%
+  );
+
+  --ifm-color-warning-hue: 40;
+  --ifm-color-warning-dark: hsl(var(--ifm-color-warning-hue), 100%, 30%);
+  --ifm-color-warning-darker: hsl(var(--ifm-color-warning-hue), 100%, 24%);
+  --ifm-color-warning-darkest: hsl(var(--ifm-color-warning-hue), 98%, 20%);
+  --ifm-color-warning-light: hsl(var(--ifm-color-warning-hue), 100%, 37%);
+  --ifm-color-warning-lighter: hsl(var(--ifm-color-warning-hue), 70%, 50%);
+  --ifm-color-warning-lightest: hsl(var(--ifm-color-warning-hue), 75%, 65%);
+  --ifm-color-warning-contrast-background: hsl(
+    var(--ifm-color-warning-hue),
+    100%,
+    93%
+  );
+  --ifm-color-warning-contrast-foreground: hsl(
+    var(--ifm-color-warning-hue),
+    100%,
+    15%
+  );
+
+  --ifm-color-danger-hue: 357;
+  --ifm-color-danger-dark: hsl(var(--ifm-color-danger-hue), 74%, 47%);
+  --ifm-color-danger-darker: hsl(var(--ifm-color-danger-hue), 82%, 35%);
+  --ifm-color-danger-darkest: hsl(var(--ifm-color-danger-hue), 87%, 27%);
+  --ifm-color-danger-light: hsl(var(--ifm-color-danger-hue), 94%, 62%);
+  --ifm-color-danger-lighter: hsl(var(--ifm-color-danger-hue), 100%, 75%);
+  --ifm-color-danger-lightest: hsl(var(--ifm-color-danger-hue), 100%, 83%);
+  --ifm-color-danger-contrast-background: hsl(
+    var(--ifm-color-danger-hue),
+    100%,
+    96%
+  );
+  --ifm-color-danger-contrast-foreground: hsl(
+    var(--ifm-color-danger-hue),
+    84%,
+    22%
+  );
+
+  --ifm-color-secondary-hue: 220;
+  --ifm-color-secondary-dark: hsl(var(--ifm-color-secondary-hue), 15%, 40%);
+  --ifm-color-secondary-darker: hsl(var(--ifm-color-secondary-hue), 15%, 32%);
+  --ifm-color-secondary-darkest: hsl(var(--ifm-color-secondary-hue), 15%, 25%);
+  --ifm-color-secondary-light: hsl(var(--ifm-color-secondary-hue), 12%, 50%);
+  --ifm-color-secondary-lighter: hsl(var(--ifm-color-secondary-hue), 10%, 60%);
+  --ifm-color-secondary-lightest: hsl(var(--ifm-color-secondary-hue), 8%, 75%);
+  --ifm-color-secondary-contrast-background: hsl(
+    var(--ifm-color-secondary-hue),
+    15%,
+    94%
+  );
+  --ifm-color-secondary-contrast-foreground: hsl(
+    var(--ifm-color-secondary-hue),
+    15%,
+    25%
+  );
+
   --ifm-alert-shadow: none;
-  --ifm-alert-border-width: 1px;
-  --ifm-alert-border-left-width: 1px;
+  --ifm-alert-border-radius: 0;
+  --ifm-alert-border-left-width: 3px;
 
   --ifm-code-padding-horizontal: 0.3em;
 
@@ -90,7 +180,7 @@
 }
 
 :root[data-theme='dark'] {
-  --primary-saturation: 35.9%;
+  --primary-saturation: 55%;
   --primary-lightness: 70%;
 
   --ifm-color-primary-dark: hsl(
@@ -129,12 +219,97 @@
     91%
   );
 
-  --ifm-footer-background-color: #25292f;
-  --ifm-home-color-text: #f7f7ff;
-  --ifm-home-color-background: #414360;
-  --ifm-home-color-background-secondary: #585b82;
+  --ifm-footer-background-color: #1e2530;
+  --ifm-home-color-text: #f0f4ff;
+  --ifm-home-color-background: #2d3a4f;
+  --ifm-home-color-background-secondary: #4a5a72;
   --ifm-home-color-highlight: hsl(var(--primary-hue), 100%, 78.6%);
   --ifm-home-color-border: #f7f7ff;
+
+  --ifm-color-success-dark: hsl(var(--ifm-color-success-hue), 40%, 55%);
+  --ifm-color-success-darker: hsl(var(--ifm-color-success-hue), 35%, 48%);
+  --ifm-color-success-darkest: hsl(var(--ifm-color-success-hue), 30%, 40%);
+  --ifm-color-success-light: hsl(var(--ifm-color-success-hue), 38%, 65%);
+  --ifm-color-success-lighter: hsl(var(--ifm-color-success-hue), 35%, 75%);
+  --ifm-color-success-lightest: hsl(var(--ifm-color-success-hue), 30%, 85%);
+  --ifm-color-success-contrast-background: hsl(
+    var(--ifm-color-success-hue),
+    35%,
+    18%
+  );
+  --ifm-color-success-contrast-foreground: hsl(
+    var(--ifm-color-success-hue),
+    40%,
+    85%
+  );
+
+  --ifm-color-info-dark: hsl(var(--ifm-color-info-hue), 60%, 60%);
+  --ifm-color-info-darker: hsl(var(--ifm-color-info-hue), 55%, 52%);
+  --ifm-color-info-darkest: hsl(var(--ifm-color-info-hue), 50%, 45%);
+  --ifm-color-info-light: hsl(var(--ifm-color-info-hue), 58%, 70%);
+  --ifm-color-info-lighter: hsl(var(--ifm-color-info-hue), 55%, 80%);
+  --ifm-color-info-lightest: hsl(var(--ifm-color-info-hue), 50%, 88%);
+  --ifm-color-info-contrast-background: hsl(
+    var(--ifm-color-info-hue),
+    45%,
+    18%
+  );
+  --ifm-color-info-contrast-foreground: hsl(
+    var(--ifm-color-info-hue),
+    55%,
+    85%
+  );
+
+  --ifm-color-warning-dark: hsl(var(--ifm-color-warning-hue), 60%, 52%);
+  --ifm-color-warning-darker: hsl(var(--ifm-color-warning-hue), 55%, 45%);
+  --ifm-color-warning-darkest: hsl(var(--ifm-color-warning-hue), 50%, 38%);
+  --ifm-color-warning-light: hsl(var(--ifm-color-warning-hue), 55%, 62%);
+  --ifm-color-warning-lighter: hsl(var(--ifm-color-warning-hue), 50%, 72%);
+  --ifm-color-warning-lightest: hsl(var(--ifm-color-warning-hue), 45%, 82%);
+  --ifm-color-warning-contrast-background: hsl(
+    var(--ifm-color-warning-hue),
+    45%,
+    15%
+  );
+  --ifm-color-warning-contrast-foreground: hsl(
+    var(--ifm-color-warning-hue),
+    50%,
+    85%
+  );
+
+  --ifm-color-danger-dark: hsl(var(--ifm-color-danger-hue), 55%, 60%);
+  --ifm-color-danger-darker: hsl(var(--ifm-color-danger-hue), 50%, 52%);
+  --ifm-color-danger-darkest: hsl(var(--ifm-color-danger-hue), 45%, 45%);
+  --ifm-color-danger-light: hsl(var(--ifm-color-danger-hue), 55%, 70%);
+  --ifm-color-danger-lighter: hsl(var(--ifm-color-danger-hue), 50%, 80%);
+  --ifm-color-danger-lightest: hsl(var(--ifm-color-danger-hue), 45%, 88%);
+  --ifm-color-danger-contrast-background: hsl(
+    var(--ifm-color-danger-hue),
+    40%,
+    15%
+  );
+  --ifm-color-danger-contrast-foreground: hsl(
+    var(--ifm-color-danger-hue),
+    50%,
+    85%
+  );
+
+  --ifm-color-secondary-dark: hsl(var(--ifm-color-secondary-hue), 12%, 65%);
+  --ifm-color-secondary-darker: hsl(var(--ifm-color-secondary-hue), 10%, 55%);
+  --ifm-color-secondary-darkest: hsl(var(--ifm-color-secondary-hue), 8%, 48%);
+  --ifm-color-secondary-light: hsl(var(--ifm-color-secondary-hue), 10%, 72%);
+  --ifm-color-secondary-lighter: hsl(var(--ifm-color-secondary-hue), 8%, 80%);
+  --ifm-color-secondary-lightest: hsl(var(--ifm-color-secondary-hue), 6%, 88%);
+  --ifm-color-secondary-contrast-background: hsl(
+    var(--ifm-color-secondary-hue),
+    12%,
+    18%
+  );
+  --ifm-color-secondary-contrast-foreground: hsl(
+    var(--ifm-color-secondary-hue),
+    10%,
+    85%
+  );
 
   --docusaurus-highlighted-code-line-bg: hsla(45, 77%, 25%, 0.3);
 
@@ -247,7 +422,7 @@ header {
 }
 
 [data-theme='dark'] .navbar::before {
-  background-color: rgba(32, 33, 37, 0.7);
+  background-color: rgba(24, 25, 26, 0.7);
 }
 
 .navbar__inner {
@@ -573,8 +748,77 @@ article p ~ .video-player {
   margin-top: 0;
 }
 
+details[class^='details_'] {
+  --ifm-alert-border-color: var(--ifm-toc-border-color);
+  --ifm-alert-background-color: transparent;
+  --ifm-alert-padding-vertical: 0.5rem;
+  --ifm-alert-padding-horizontal: 1rem;
+  --ifm-alert-border-radius: var(--ifm-global-radius);
+  --ifm-alert-foreground-color: inherit;
+  --ifm-link-color: inherit;
+  --ifm-link-hover-color: inherit;
+  --ifm-code-background: inherit;
+
+  & summary {
+    font-weight: var(--ifm-font-weight-semibold);
+
+    &::marker,
+    &:-webkit-details-marker {
+      display: none;
+    }
+
+    &::before {
+      --chevron-size: 0.5em;
+
+      content: '';
+      top: calc(var(--ifm-alert-padding-vertical) - var(--chevron-size) / 2);
+      left: calc(-1 * var(--ifm-alert-padding-horizontal) / 2);
+      width: var(--chevron-size);
+      height: var(--chevron-size);
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E")
+        no-repeat center;
+      mask-size: 100% 100%;
+      background-color: currentColor;
+      transition: transform var(--ifm-transition-fast)
+        var(--ifm-transition-timing-default);
+      transform-origin: center;
+    }
+  }
+
+  &[open] summary::before {
+    transform: rotate(90deg);
+  }
+
+  & a {
+    text-decoration-color: transparent;
+
+    &:hover {
+      text-decoration-thickness: var(--ifm-link-hover-decoration-thickness);
+      text-decoration-color: var(--ifm-link-hover-decoration-color);
+    }
+  }
+
+  & [class^='collapsibleContent'] {
+    margin: var(--ifm-alert-padding-vertical)
+      calc(var(--ifm-alert-padding-horizontal) / 2);
+  }
+}
+
 samp {
   display: none;
+}
+
+.theme-admonition {
+  --ifm-alert-padding-vertical: 0;
+  --ifm-alert-foreground-color: var(--ifm-alert-border-color);
+  --ifm-code-background: inherit;
+
+  background-color: transparent;
+  color: inherit;
+}
+
+.theme-admonition [class^='admonitionHeading'] {
+  color: var(--ifm-alert-foreground-color);
 }
 
 .video-player {
