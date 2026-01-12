@@ -376,6 +376,22 @@ A callback that gets called when search bar has lost focus.
 
 A callback that gets called when the cancel button is pressed.
 
+##### `onSearchButtonPress`
+
+A callback that gets called when the search button is pressed.
+
+```js
+const [search, setSearch] = React.useState('');
+
+React.useLayoutEffect(() => {
+  navigation.setOptions({
+    headerSearchBarOptions: {
+      onSearchButtonPress: (event) => setSearch(event?.nativeEvent?.text),
+    },
+  });
+}, [navigation]);
+```
+
 ##### `onChangeText`
 
 A callback that gets called when the text changes. It receives the current text value of the search bar.
