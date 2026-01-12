@@ -1,9 +1,6 @@
 ---
 title: React Navigation 1.0 (goodbye, beta!)
-author: Brent Vatne
-author_url: https://twitter.com/notbrent
-author_title: Core Team
-author_image_url: https://avatars0.githubusercontent.com/u/90494?s=200&v=4
+authors: brent
 tags: [release, announcement]
 ---
 

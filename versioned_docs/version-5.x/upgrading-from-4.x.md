@@ -8,17 +8,9 @@ sidebar_label: Upgrading from 4.x
 
 React Navigation 5 has a completely new component based API. While the main concepts are the same, the API is different. In this guide, we aim to document all the differences so that it's easier to upgrade your app.
 
-If you have not installed React Navigation 5 yet, you can do so following the [Getting Started guide](getting-started.md).
+If you have not installed React Navigation 5 yet, you can do so by following the [Getting](getting-started.md) Started guide](getting-started.md).
 
 To reuse code using the old API with minimal changes, you can use the [compatibility layer](compatibility.md).
-
-## Before you upgrade
-
-React Navigation 4 is still maintained and will stay compatible with the latest version of React Native. We'll accept small pull requests and release bug fixes. While we won't be actively working on new features for React Navigation 4, they may be occasionally backported.
-
-If React Navigation 4 is working well for you and you don't need any of the new capabilities of the new version, you can keep using it. You don't have to rewrite your navigation structure.
-
-However, if you're starting a new project, we recommend to use the latest version instead of React Navigation 4.
 
 If you are upgrading from older versions of navigators, you should take a look at the guide for [upgrading to React Navigation 4](../version-4.x/upgrading-from-3.x.md) first, especially the part for [upgrading packages](../version-4.x/upgrading-from-3.x.md#upgrading-packages).
 
@@ -156,7 +148,7 @@ Now we have added a [`useNavigationState`](use-navigation-state.md) which addres
 function useIsFirstRouteInParent() {
   const route = useRoute();
   const isFirstRouteInParent = useNavigationState(
-    state => state.routes[0].key === route.key
+    (state) => state.routes[0].key === route.key
   );
 
   return isFirstRouteInParent;
@@ -288,7 +280,7 @@ To achieve the previous use cases for these events where you added listeners wit
   name="Chat"
   component={Chat}
   listeners={({ navigation, route }) => ({
-    tabPress: e => {
+    tabPress: (e) => {
       // Prevent default action
       e.preventDefault();
 

@@ -28,7 +28,6 @@ This hook allows a component to hook into React Navigation. It accepts the follo
 
 - `createRouter` - A factory method which returns a router object (e.g. `StackRouter`, `TabRouter`).
 - `options` - Options for the hook and the router. The navigator should forward its props here so that user can provide props to configure the navigator. By default, the following options are accepted:
-
   - `children` (required) - The `children` prop should contain route configurations as `Screen` components.
   - `screenOptions` - The `screenOptions` prop should contain default options for all of the screens.
   - `initialRouteName` - The `initialRouteName` prop determines the screen to focus on initial render. This prop is forwarded to the router.
@@ -40,7 +39,6 @@ The hook returns an object with following properties:
 - `state` - The [navigation state](navigation-state.md) for the navigator. The component can take this state and decide how to render it.
 - `navigation` - The navigation object containing various helper methods for the navigator to manipulate the [navigation state](navigation-state.md). This isn't the same as the navigation object for the screen and includes some helpers such as `emit` to emit events to the screens.
 - `descriptors` - This is an object containing descriptors for each route with the route keys as its properties. The descriptor for a route can be accessed by `descriptors[route.key]`. Each descriptor contains the following properties:
-
   - `navigation` - The navigation prop for the screen. You don't need to pass this to the screen manually. But it's useful if we're rendering components outside the screen that need to receive `navigation` prop as well, such as a header component.
   - `options` - A getter which returns the options such as `title` for the screen if they are specified.
   - `render` - A function which can be used to render the actual screen. Calling `descriptors[route.key].render()` will return a React element containing the screen content. It's important to use this method to render a screen, otherwise any child navigators won't be connected to the navigation tree properly.
@@ -74,26 +72,27 @@ function TabNavigator({
   return (
     <NavigationContent>
       <View style={[{ flexDirection: 'row' }, tabBarStyle]}>
-        {state.routes.map((route) => (
+        {state.routes.map((route, index) => (
           <Pressable
             key={route.key}
             onPress={() => {
+              const isFocused = state.index === index;
               const event = navigation.emit({
                 type: 'tabPress',
                 target: route.key,
                 canPreventDefault: true,
               });
 
-              if (!event.defaultPrevented) {
+              if (!isFocused && !event.defaultPrevented) {
                 navigation.dispatch({
-                  ...TabActions.jumpTo(route.name),
+                  ...TabActions.jumpTo(route.name, route.params),
                   target: state.key,
                 });
               }
             }}
             style={{ flex: 1 }}
           >
-            <Text>{descriptors[route.key].options.title || route.name}</Text>
+            <Text>{descriptors[route.key].options.title ?? route.name}</Text>
           </Pressable>
         ))}
       </View>
@@ -252,20 +251,21 @@ function TabNavigator({
   return (
     <NavigationContent>
       <View style={[{ flexDirection: 'row' }, tabBarStyle]}>
-        {state.routes.map((route) => (
+        {state.routes.map((route, index) => (
           <Pressable
             key={route.key}
             onPress={() => {
+              const isFocused = state.index === index;
               const event = navigation.emit({
                 type: 'tabPress',
                 target: route.key,
                 canPreventDefault: true,
                 data: {
-                  isAlreadyFocused: route.key === state.routes[state.index].key,
+                  isAlreadyFocused: isFocused,
                 },
               });
 
-              if (!event.defaultPrevented) {
+              if (!isFocused && !event.defaultPrevented) {
                 navigation.dispatch({
                   ...CommonActions.navigate(route),
                   target: state.key,
@@ -274,7 +274,7 @@ function TabNavigator({
             }}
             style={{ flex: 1 }}
           >
-            <Text>{descriptors[route.key].options.title || route.name}</Text>
+            <Text>{descriptors[route.key].options.title ?? route.name}</Text>
           </Pressable>
         ))}
       </View>

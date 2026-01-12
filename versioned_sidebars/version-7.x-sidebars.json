@@ -1,120 +1,111 @@
 {
-  "version-7.x/docs": {
+  "docs": {
     "Fundamentals": [
-      "version-7.x/getting-started",
-      "version-7.x/hello-react-navigation",
-      "version-7.x/navigating",
-      "version-7.x/params",
-      "version-7.x/headers",
-      "version-7.x/header-buttons",
-      "version-7.x/nesting-navigators",
-      "version-7.x/navigation-lifecycle",
-      "version-7.x/next-steps",
-      "version-7.x/glossary-of-terms",
-      "version-7.x/troubleshooting",
-      "version-7.x/limitations"
+      "getting-started",
+      "hello-react-navigation",
+      "navigating",
+      "params",
+      "headers",
+      "header-buttons",
+      "nesting-navigators",
+      "navigation-lifecycle",
+      "next-steps"
     ],
     "Guides": [
-      "version-7.x/tab-based-navigation",
-      "version-7.x/drawer-based-navigation",
-      "version-7.x/auth-flow",
-      "version-7.x/handling-safe-area",
-      "version-7.x/hiding-tabbar-in-screens",
-      "version-7.x/status-bar",
-      "version-7.x/modal",
-      "version-7.x/multiple-drawers",
-      "version-7.x/screen-options-resolution",
-      "version-7.x/custom-android-back-button-handling",
-      "version-7.x/preventing-going-back",
-      "version-7.x/function-after-focusing-screen",
-      "version-7.x/connecting-navigation-prop",
-      "version-7.x/navigating-without-navigation-prop",
-      "version-7.x/deep-linking",
-      "version-7.x/configuring-links",
-      "version-7.x/web-support",
-      "version-7.x/server-rendering",
-      "version-7.x/screen-tracking",
-      "version-7.x/themes",
-      "version-7.x/state-persistence",
-      "version-7.x/testing",
-      "version-7.x/typescript",
-      "version-7.x/redux-integration",
-      "version-7.x/MST-integration",
-      "version-7.x/upgrading-from-6.x"
-    ],
-    "Static configuration": [
-      "version-7.x/static-configuration",
-      "version-7.x/static-api-reference",
-      "version-7.x/static-typescript",
-      "version-7.x/static-authentication",
-      "version-7.x/static-combine-with-dynamic"
+      "auth-flow",
+      "handling-safe-area",
+      "customizing-tabbar",
+      "hiding-tabbar-in-screens",
+      "status-bar",
+      "modal",
+      "multiple-drawers",
+      "screen-options-resolution",
+      "custom-android-back-button-handling",
+      "shared-element-transitions",
+      "preventing-going-back",
+      "function-after-focusing-screen",
+      "navigating-without-navigation-prop",
+      "deep-linking",
+      "configuring-links",
+      "web-support",
+      "server-rendering",
+      "screen-tracking",
+      "themes",
+      "state-persistence",
+      "combine-static-with-dynamic",
+      "testing",
+      "typescript",
+      "troubleshooting",
+      "upgrading-from-6.x"
     ],
     "Navigators": [
-      "version-7.x/stack-navigator",
-      "version-7.x/native-stack-navigator",
-      "version-7.x/drawer-navigator",
-      "version-7.x/bottom-tab-navigator",
-      "version-7.x/material-bottom-tab-navigator",
-      "version-7.x/material-top-tab-navigator"
+      "stack-navigator",
+      "native-stack-navigator",
+      "bottom-tab-navigator",
+      "native-bottom-tab-navigator",
+      "drawer-navigator",
+      "material-top-tab-navigator"
     ],
-    "Libraries": [
-      "version-7.x/devtools",
-      "version-7.x/elements",
-      "version-7.x/tab-view",
-      "version-7.x/drawer-layout"
-    ],
+    "Libraries": ["devtools", "elements", "tab-view", "drawer-layout"],
     "API reference": [
-      "version-7.x/navigation-container",
-      "version-7.x/server-container",
-      "version-7.x/group",
-      "version-7.x/screen",
-      "version-7.x/screen-options",
-      "version-7.x/route-prop",
-      "version-7.x/navigation-prop",
-      "version-7.x/navigation-context",
-      "version-7.x/navigation-events",
-      "version-7.x/navigation-state",
-      "version-7.x/link",
+      "static-configuration",
+      "navigation-container",
+      "server-container",
+      "navigator",
+      "group",
+      "screen",
+      "screen-options",
+      "route-object",
+      "navigation-object",
+      "navigation-context",
+      "navigation-events",
+      "navigation-state",
+      "link",
       {
         "type": "category",
+        "collapsible": true,
         "label": "Hooks",
         "items": [
-          "version-7.x/use-navigation",
-          "version-7.x/use-route",
-          "version-7.x/use-navigation-state",
-          "version-7.x/use-focus-effect",
-          "version-7.x/use-is-focused",
-          "version-7.x/use-link-to",
-          "version-7.x/use-link-props",
-          "version-7.x/use-link-builder",
-          "version-7.x/use-scroll-to-top",
-          "version-7.x/use-theme"
+          "use-navigation",
+          "use-route",
+          "use-navigation-state",
+          "use-focus-effect",
+          "use-is-focused",
+          "use-prevent-remove",
+          "use-route-path",
+          "use-link-to",
+          "use-link-props",
+          "use-link-builder",
+          "use-scroll-to-top",
+          "use-theme"
         ]
       },
       {
         "type": "category",
+        "collapsible": true,
         "label": "Actions",
         "items": [
-          "version-7.x/navigation-actions",
-          "version-7.x/stack-actions",
-          "version-7.x/drawer-actions",
-          "version-7.x/tab-actions"
+          "navigation-actions",
+          "stack-actions",
+          "drawer-actions",
+          "tab-actions"
         ]
       }
     ],
-    "Build your own Navigator": [
-      "version-7.x/custom-routers",
-      "version-7.x/custom-navigators"
-    ],
-    "Additional resources": [
-      "version-7.x/migration-guides",
-      "version-7.x/navigation-solutions-and-community-libraries",
-      "version-7.x/more-resources"
+    "Build your own Navigator": ["custom-routers", "custom-navigators"],
+    "Ecosystem": [
+      "community-solutions",
+      "community-navigators",
+      "community-libraries",
+      "more-resources"
     ],
     "Meta": [
-      "version-7.x/pitch",
-      "version-7.x/used-by",
-      "version-7.x/contributing"
+      "migration-guides",
+      "glossary-of-terms",
+      "pitch",
+      "limitations",
+      "used-by",
+      "contributing"
     ]
   }
 }

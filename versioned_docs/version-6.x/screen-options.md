@@ -10,7 +10,7 @@ In the [configuring the header bar](headers.md) section of the fundamentals docu
 
 There are 3 ways of specifying options for screens:
 
-### `options` prop on `Screen`
+## `options` prop on `Screen`
 
 You can pass a prop named `options` to the `Screen` component to configure a screen, where you can specify an object with different options for that screen:
 
@@ -46,7 +46,7 @@ You can also pass a function to `options`. The function will receive the [`navig
 />
 ```
 
-### `screenOptions` prop on `Group`
+## `screenOptions` prop on `Group`
 
 You can pass a prop named `screenOptions` to the `Group` component to configure screens inside the group, where you can specify an object with different options. The options specified in `screenOptions` apply to all of the screens in the group.
 
@@ -87,9 +87,9 @@ Similar to `options`, you can also pass a function to `screenOptions`. The funct
 </Stack.Navigator>
 ```
 
-### `screenOptions` prop on the navigator
+## `screenOptions` prop on the navigator
 
-You can pass a prop named `screenOptions` to the navigator component, where you can specify an object with different options. The options specified in `screenOptions` apply to all of the screens in the navigator. So this is a good place to add specify options that you want to configure for the whole navigator.
+You can pass a prop named `screenOptions` to the navigator component, where you can specify an object with different options. The options specified in `screenOptions` apply to all of the screens in the navigator. So this is a good place to specify options that you want to configure for the whole navigator.
 
 Example:
 
@@ -130,7 +130,7 @@ Similar to `options`, you can also pass a function to `screenOptions`. The funct
 </Tab.Navigator>
 ```
 
-### `navigation.setOptions` method
+## `navigation.setOptions` method
 
 The `navigation` prop has a `setOptions` method that lets you update the options for a screen from within a component. See [navigation prop's docs](navigation-prop.md#setoptions) more details.
 

@@ -18,7 +18,7 @@ function Profile({ userId }) {
 
   useFocusEffect(
     React.useCallback(() => {
-      const unsubscribe = API.subscribe(userId, user => setUser(user));
+      const unsubscribe = API.subscribe(userId, (user) => setUser(user));
 
       return () => unsubscribe();
     }, [userId])
@@ -43,17 +43,17 @@ When running asynchronous effects such as fetching data from server, it's import
 ```js
 useFocusEffect(
   React.useCallback(() => {
-    const abortController = new AbortController()
+    const abortController = new AbortController();
 
     const fetchUser = async () => {
       try {
         const user = await fetch(`https://example.com/users/${userId}`, {
-          signal: abortController.signal 
+          signal: abortController.signal,
         });
 
         setUser(user);
       } catch (e) {
-        if (e.name !== 'AbortError'){
+        if (e.name !== 'AbortError') {
           // Handle error
         }
       }
@@ -62,7 +62,7 @@ useFocusEffect(
     fetchUser();
 
     return () => {
-       abortController.abort()
+      abortController.abort();
     };
   }, [userId])
 );
@@ -114,7 +114,7 @@ function FetchUserData({ userId, onUpdate }) {
 // ...
 
 class Profile extends React.Component {
-  _handleUpdate = user => {
+  _handleUpdate = (user) => {
     // Do something with user object
   };
 

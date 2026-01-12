@@ -58,7 +58,7 @@ function Root() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Root" useLegacyImplementation>
+      <Drawer.Navigator initialRouteName="Root">
         <Drawer.Screen name="Root" component={Root} />
         <Drawer.Screen name="Home" component={HomeScreen} />
       </Drawer.Navigator>

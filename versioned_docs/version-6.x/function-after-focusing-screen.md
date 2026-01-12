@@ -47,7 +47,7 @@ In most cases, it's recommended to use the `useFocusEffect` hook instead of addi
 
 ## Triggering an action with the `useFocusEffect` hook
 
-React Navigation provides a [hook](https://reactjs.org/docs/hooks-intro.html) that runs an effect when the screen comes into focus and cleans it up when it goes out of focus. This is useful for cases such as adding event listeners, for fetching data with an API call when a screen becomes focused, or any other action that needs to happen once the screen comes into view.
+React Navigation provides a [hook](use-focus-effect.md) that runs an effect when the screen comes into focus and cleans it up when it goes out of focus. This is useful for cases such as adding event listeners, for fetching data with an API call when a screen becomes focused, or any other action that needs to happen once the screen comes into view.
 
 This is particularly handy when we are trying to stop something when the page is unfocused, like stopping a video or audio file from playing, or stopping the tracking of a user's location.
 
@@ -61,7 +61,7 @@ function Profile({ userId }) {
 
   useFocusEffect(
     React.useCallback(() => {
-      const unsubscribe = API.subscribe(userId, user => setUser(data));
+      const unsubscribe = API.subscribe(userId, (user) => setUser(data));
 
       return () => unsubscribe();
     }, [userId])
@@ -75,7 +75,7 @@ See the [`useFocusEffect`](https://reactnavigation.org/docs/use-focus-effect/) d
 
 ## Re-rendering screen with the `useIsFocused` hook
 
-React Navigation provides a [hook](https://reactjs.org/docs/hooks-intro.html) that returns a boolean indicating whether the screen is focused or not.
+React Navigation provides a [hook](use-is-focused.md) that returns a boolean indicating whether the screen is focused or not.
 
 The hook will return `true` when the screen is focused and `false` when our component is no longer focused. This enables us to render something conditionally based on whether the user is on the screen or not.
 

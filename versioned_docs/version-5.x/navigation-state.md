@@ -4,7 +4,7 @@ title: Navigation state reference
 sidebar_label: Navigation state
 ---
 
-The navigation state is the state where React Navigation stores the navigation structure and history of the app. It's useful to know about the structure of the navigation state if you need to do advanced operations such as [resetting the state](navigation-actions.md#reset), [providing a custom initial state](navigation-container.md#initial-state) etc.
+The navigation state is the state where React Navigation stores the navigation structure and history of the app. It's useful to know about the structure of the navigation state if you need to do advanced operations such as [resetting the state](navigation-actions.md#reset), [providing a custom initial state](navigation-container.md#initialstate) etc.
 
 It's a JavaScript object which looks like this:
 
@@ -78,16 +78,13 @@ This also applies to the `index` property: `index` should be the last route in a
 ```js
 navigation.reset({
   index: 0,
-  routes: [
-    { name: 'Home' },
-    { name: 'Profile' }
-  ],
+  routes: [{ name: 'Home' }, { name: 'Profile' }],
 });
 ```
 
 React Navigation would correct `index` to 1, and display the route and perform navigation as intended.
 
-This feature comes handy when doing operations such as [reset](navigation-actions.md#reset), [providing a initial state](navigation-container.md#initial-state) etc., as you can safely omit many properties from the navigation state object and relying on React Navigation to add those properties for you, making your code simpler. For example, you can only provide a `routes` array without any keys and React Navigation will automatically add everything that's needed to make it work:
+This feature comes handy when doing operations such as [reset](navigation-actions.md#reset), [providing a initial state](navigation-container.md#initialstate) etc., as you can safely omit many properties from the navigation state object and relying on React Navigation to add those properties for you, making your code simpler. For example, you can only provide a `routes` array without any keys and React Navigation will automatically add everything that's needed to make it work:
 
 ```js
 const state = {
@@ -117,4 +114,4 @@ It's also possible to provide invalid data such as non-existent screens and it'l
 
 > If you want React Navigation to fix invalid state, you need to make sure that you don't have `stale: false` in the state object. State objects with `stale: false` are assumed to be valid state objects and React Navigation won't attempt to fix them.
 
-When you're providing a state object in [`initialState`](navigation-container.md#initial-state), React Navigation will always assume that it's a stale state object, which makes sure that things like state persistence work smoothly without extra manipulation of the state object.
+When you're providing a state object in [`initialState`](navigation-container.md#initialstate), React Navigation will always assume that it's a stale state object, which makes sure that things like state persistence work smoothly without extra manipulation of the state object.

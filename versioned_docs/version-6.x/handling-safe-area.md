@@ -23,7 +23,11 @@ It's tempting to solve (a) by wrapping your entire app in a container with paddi
 
 While React Native exports a `SafeAreaView` component, this component only supports iOS 10+ with no support for older iOS versions or Android. In addition, it also has some issues, i.e. if a screen containing safe area is animating, it causes jumpy behavior. So we recommend to use the `useSafeAreaInsets` hook from the [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) library to handle safe areas in a more reliable way.
 
-> Note: The `react-native-safe-area-context` library also exports a `SafeAreaView` component. While it works on Android, it also has the same issues related to jumpy behavior when animating. So we recommend always using the `useSafeAreaInsets` hook instead and avoid using the `SafeAreaView` component.
+:::warning
+
+The `react-native-safe-area-context` library also exports a `SafeAreaView` component. While it works on Android, it also has the same issues related to jumpy behavior when animating. So we recommend always using the `useSafeAreaInsets` hook instead and avoid using the `SafeAreaView` component.
+
+:::
 
 The rest of this guide gives more information on how to support safe areas in React Navigation.
 
@@ -67,11 +71,11 @@ export default function App() {
         <Stack.Screen name="Home">
           {() => (
             <Tab.Navigator
-              initialRouteName="Analitics"
+              initialRouteName="Analytics"
               tabBar={() => null}
               screenOptions={{ headerShown: false }}
             >
-              <Tab.Screen name="Analitics" component={Demo} />
+              <Tab.Screen name="Analytics" component={Demo} />
               <Tab.Screen name="Profile" component={Demo} />
             </Tab.Navigator>
           )}

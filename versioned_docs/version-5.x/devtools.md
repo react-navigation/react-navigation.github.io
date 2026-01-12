@@ -26,7 +26,10 @@ To use the hook, import it and pass a `ref` to the `NavigationContainer` as its 
 
 ```js
 import * as React from 'react';
-import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import { useReduxDevToolsExtension } from '@react-navigation/devtools';
 
 export default function App() {

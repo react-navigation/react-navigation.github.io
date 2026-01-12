@@ -96,12 +96,12 @@ To help developers implement custom navigators, the following utilities are prov
 
 ### `createNavigator`
 
-> Note: The `createNavigator` API has changed in version 2. The old doc for v1 can be accessed here: <https://v1.reactnavigation.org/docs/custom-navigators.html>
+> Note: The `createNavigator` API has changed in version 2. The old doc for v1 can be accessed here: [v1.reactnavigation.org/docs/custom-navigators.html](https://v1.reactnavigation.org/docs/custom-navigators.html)
 
 This utility combines a [router](routers.md) and a [navigation view](navigation-views.md) together in a standard way:
 
 ```js
-import {createNavigator} from 'react-navigation';
+import { createNavigator } from 'react-navigation';
 
 const AppNavigator = createNavigator(NavigationView, router, navigationConfig);
 ```

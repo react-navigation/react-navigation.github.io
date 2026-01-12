@@ -26,7 +26,7 @@ export default class App extends React.Component {
   render() {
     return (
       <AppContainer
-        ref={navigatorRef => {
+        ref={(navigatorRef) => {
           NavigationService.setTopLevelNavigator(navigatorRef);
         }}
       />

@@ -135,7 +135,7 @@ Example:
 ```javascript
 const didBlurSubscription = this.props.navigation.addListener(
   'didBlur',
-  payload => {
+  (payload) => {
     console.debug('didBlur', payload);
   }
 );

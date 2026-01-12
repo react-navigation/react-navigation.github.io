@@ -1,14 +1,11 @@
-import React from 'react';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import sponsors from '../data/sponsors';
+import Layout from '@theme/Layout';
+import React from 'react';
 
-import Splash from './home/Splash';
 import Features from './home/Features';
+import Footer from './home/Footer';
+import Splash from './home/Splash';
 import Sponsors from './home/Sponsors';
-import BLM from './home/BLM';
 
 const features = [
   {
@@ -45,11 +42,15 @@ function Home() {
   const { siteConfig = {} } = context;
 
   return (
-    <Layout title={siteConfig.title} description={siteConfig.tagline}>
+    <Layout
+      title={siteConfig.title}
+      description={siteConfig.tagline}
+      wrapperClassName="full-width"
+    >
       <Splash />
       <Features />
       <Sponsors />
-      <BLM />
+      <Footer />
     </Layout>
   );
 }

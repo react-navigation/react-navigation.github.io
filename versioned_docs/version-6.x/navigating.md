@@ -51,12 +51,20 @@ function HomeScreen({ navigation }) {
 // ... other code from the previous section
 ```
 
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/simple-details.mp4" />
+</video>
+
 Let's break this down:
 
 - `navigation` - the `navigation` prop is passed in to every **screen component** ([definition](glossary-of-terms.md#screen-component)) in the native stack navigator (more about this later in ["The navigation prop in depth"](navigation-prop.md)).
 - `navigate('Details')` - we call the `navigate` function (on the `navigation` prop &mdash; naming is hard!) with the name of the route that we'd like to move the user to.
 
-> If we call `navigation.navigate` with a route name that we haven't defined in a navigator, it'll print an error in development builds and nothing will happen in production builds. Said another way, we can only navigate to routes that have been defined on our navigator &mdash; we cannot navigate to an arbitrary component.
+:::note
+
+If we call `navigation.navigate` with a route name that we haven't defined in a navigator, it'll print an error in development builds and nothing will happen in production builds. Said another way, we can only navigate to routes that have been defined on our navigator &mdash; we cannot navigate to an arbitrary component.
+
+:::
 
 So we now have a stack with two routes: 1) the `Home` route 2) the `Details` route. What would happen if we navigated to the `Details` route again, from the `Details` screen?
 
@@ -91,11 +99,9 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 />
 ```
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/stack/stack-push.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/stack-push.mp4" />
+</video>
 
 Each time you call `push` we add a new route to the navigation stack. When you call `navigate` it first tries to find an existing route with that name, and only pushes a new route if there isn't yet one on the stack.
 
@@ -123,7 +129,15 @@ function DetailsScreen({ navigation }) {
 }
 ```
 
-> On Android, React Navigation hooks in to the hardware back button and fires the `goBack()` function for you when the user presses it, so it behaves as the user would expect.
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/back-home.mp4" />
+</video>
+
+:::note
+
+On Android, React Navigation hooks in to the hardware back button and fires the `goBack()` function for you when the user presses it, so it behaves as the user would expect.
+
+:::
 
 Another common requirement is to be able to go back _multiple_ screens -- for example, if you are several screens deep in a stack and want to dismiss all of them to go back to the first screen. In this case, we know that we want to go back to `Home` so we can use `navigate('Home')` (not `push`! try that out and see the difference). Another alternative would be `navigation.popToTop()`, which goes back to the first screen in the stack.
 
@@ -148,6 +162,10 @@ function DetailsScreen({ navigation }) {
   );
 }
 ```
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/pop-to-top.mp4" />
+</video>
 
 ## Summary
 

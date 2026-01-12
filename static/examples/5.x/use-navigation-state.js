@@ -10,14 +10,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 function useIsFirstRouteInParent() {
   const route = useRoute();
   const isFirstRouteInParent = useNavigationState(
-    state => state.routes[0].key === route.key
+    (state) => state.routes[0].key === route.key
   );
 
   return isFirstRouteInParent;
 }
 
 function usePreviousRouteName() {
-  return useNavigationState(state =>
+  return useNavigationState((state) =>
     state.routes[state.index - 1]?.name
       ? state.routes[state.index - 1].name
       : 'None'

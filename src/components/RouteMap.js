@@ -9,7 +9,9 @@ export default function RouteMap({ routes, root = true }) {
     <div
       style={{
         ...styles.container,
-        ...(root ? { overflowX: 'auto', padding: 'calc(var(--ifm-pre-padding) / 2)' } : null),
+        ...(root
+          ? { overflowX: 'auto', padding: 'calc(var(--ifm-pre-padding) / 2)' }
+          : null),
       }}
     >
       {routes.map((route, i) => (

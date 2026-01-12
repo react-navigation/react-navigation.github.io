@@ -4,7 +4,7 @@ title: Redux integration
 sidebar_label: Redux integration
 ---
 
-It is extremely easy to use Redux in an app with React Navigation. It's basically no different than without React Navigation. The following example shows how to do it end to end: <https://snack.expo.io/@react-navigation/redux-example>. The most important piece from it is the following:
+It is extremely easy to use Redux in an app with React Navigation. It's basically no different than without React Navigation. The following example shows how to do it end to end: [snack.expo.io/@react-navigation/redux-example](https://snack.expo.io/@react-navigation/redux-example). The most important piece from it is the following:
 
 ```js
 let RootStack = createStackNavigator({
@@ -43,7 +43,7 @@ class Count extends React.Component {
   }
 }
 
-let CountContainer = connect(state => ({ value: state.count }))(Count);
+let CountContainer = connect((state) => ({ value: state.count }))(Count);
 
 class Counter extends React.Component {
   static navigationOptions = {

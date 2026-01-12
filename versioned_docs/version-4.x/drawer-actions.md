@@ -8,9 +8,9 @@ sidebar_label: DrawerActions
 
 The following actions are supported:
 
-- [openDrawer](#openDrawer) - open the drawer
-- [closeDrawer](#closeDrawer) - close the drawer
-- [toggleDrawer](#toggleDrawer) - toggle the state, ie. switches from closed to open and vice versa
+- openDrawer - open the drawer
+- closeDrawer - close the drawer
+- toggleDrawer - toggle the state, ie. switches from closed to open and vice versa
 
 ### Usage
 

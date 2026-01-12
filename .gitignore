@@ -2,9 +2,21 @@ node_modules
 .DS_Store
 .docusaurus
 .history
+.idea
 
 build/
 translated_docs/
 
 i18n/*
 !i18n/en.json
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# AI
+.claude/

@@ -1,11 +1,9 @@
-import React from 'react';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import styles from './styles.module.css';
-import Spiro from '/img/spiro_header.svg';
 import SplashLeftIllustration from './SplashLeftIllustration';
 import SplashRightIllustration from './SplashRightIllustration';
+import styles from './styles.module.css';
 
 export default function Splash() {
   return (
@@ -13,24 +11,22 @@ export default function Splash() {
       <div className={styles.container}>
         <SplashLeftIllustration />
         <div className={styles.main}>
-          <div className={styles.spiroContainer}>
-            <Spiro />
-          </div>
           <div className={styles.mainContent}>
             <h1 className={styles.mainText}>React Navigation</h1>
             <h3 className={styles.subText}>
-              Routing and navigation for Expo and React Native apps.
+              Routing and navigation for React Native and Web apps.
             </h3>
             <div className={styles.buttonContainer}>
-              <a
-                href={useBaseUrl('/docs/getting-started')}
-                className={styles.button}
+              <Link
+                to={useBaseUrl('/docs/getting-started')}
+                className={`${styles.button} ${styles.buttonPrimary}`}
               >
                 Read Docs
-              </a>
+              </Link>
               <a
+                target="_blank"
                 href="https://github.com/react-navigation/react-navigation/tree/main/example"
-                className={`${styles.button} ${styles.buttonPrimary}`}
+                className={`${styles.button}`}
               >
                 Try It
               </a>
@@ -41,12 +37,12 @@ export default function Splash() {
         <SplashRightIllustration />
       </div>
       <div className={styles.migrationText}>
-        💡 Coming from an older version? Check out our{' '}
+        ✨ React Navigation 8 is coming. Check out the{' '}
         <Link
-          to={useBaseUrl('/docs/migration-guides')}
+          to={useBaseUrl('/blog/2025/12/19/react-navigation-8.0-alpha')}
           className={styles.linkText}
         >
-          migration guides
+          announcement
         </Link>
         .
       </div>

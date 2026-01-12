@@ -6,25 +6,25 @@ sidebar_label: Navigation prop
 
 Each `screen` component in your app is provided with the `navigation` prop automatically. It looks like this:
 
-* `this.props.navigation`
-  * `navigate` - go to another screen, figures out the action it needs to take to do it
-  * `goBack` - close active screen and move back in the stack
-  * `addListener` - subscribe to updates to navigation lifecycle
-  * `isFocused` - function that returns `true` if the screen is focused and `false` otherwise.
-  * `state` - current state/routes
-  * `setParams` - make changes to route's params
-  * `getParam` - get a specific param with fallback
-  * `dispatch` - send an action to router
+- `this.props.navigation`
+  - `navigate` - go to another screen, figures out the action it needs to take to do it
+  - `goBack` - close active screen and move back in the stack
+  - `addListener` - subscribe to updates to navigation lifecycle
+  - `isFocused` - function that returns `true` if the screen is focused and `false` otherwise.
+  - `state` - current state/routes
+  - `setParams` - make changes to route's params
+  - `getParam` - get a specific param with fallback
+  - `dispatch` - send an action to router
 
 It's important to highlight the `navigation` prop is _not_ passed in to _all_ components; only `screen` components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a `MyBackButton` component and render it as a child of a screen component, you would not be able to access the `navigation` prop on it.
 
 There are several additional functions on `this.props.navigation` that only if the current navigator is a `StackNavigator`. These functions are alternatives to `navigate` and `goBack` and you can use whichever you prefer. The functions are:
 
-* `this.props.navigation`
-  * `push` - navigate forward to new route in stack
-  * `pop` - go back in the stack
-  * `popToTop` - go to the top of the stack
-  * `replace` - replace the current route with a new one
+- `this.props.navigation`
+  - `push` - navigate forward to new route in stack
+  - `pop` - go back in the stack
+  - `popToTop` - go to the top of the stack
+  - `replace` - replace the current route with a new one
 
 ## Common API reference
 
@@ -38,10 +38,10 @@ Call this to link to another screen in your app. Takes the following arguments:
 OR
 `navigation.navigate(routeName, params, action)`
 
-* `routeName` - A destination routeName that has been registered somewhere in the app's router
-* `params` - Params to merge into the destination route
-* `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions) for a full list of supported actions.
-* `key` - Optional identifier of what route to navigate to. Navigate **back** to this route, if it already exists
+- `routeName` - A destination routeName that has been registered somewhere in the app's router
+- `params` - Params to merge into the destination route
+- `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions) for a full list of supported actions.
+- `key` - Optional identifier of what route to navigate to. Navigate **back** to this route, if it already exists
 
 ```js
 class HomeScreen extends React.Component {
@@ -90,10 +90,10 @@ class HomeScreen extends React.Component {
 Consider the following navigation stack history:
 
 ```javascript
-navigation.navigate({routeName: SCREEN, key: SCREEN_KEY_A});
-navigation.navigate({routeName: SCREEN, key: SCREEN_KEY_B});
-navigation.navigate({routeName: SCREEN, key: SCREEN_KEY_C});
-navigation.navigate({routeName: SCREEN, key: SCREEN_KEY_D});
+navigation.navigate({ routeName: SCREEN, key: SCREEN_KEY_A });
+navigation.navigate({ routeName: SCREEN, key: SCREEN_KEY_B });
+navigation.navigate({ routeName: SCREEN, key: SCREEN_KEY_C });
+navigation.navigate({ routeName: SCREEN, key: SCREEN_KEY_D });
 ```
 
 Now you are on _screen D_ and want to go back to _screen A_ (popping D, C, and B).
@@ -107,17 +107,17 @@ navigation.goBack(SCREEN_KEY_B) // will go to screen A FROM screen B
 
 React Navigation emits events to screen components that subscribe to them:
 
-* `willBlur` - the screen will be unfocused
-* `willFocus` - the screen will focus
-* `didFocus` - the screen focused (if there was a transition, the transition completed)
-* `didBlur` - the screen unfocused (if there was a transition, the transition completed)
+- `willBlur` - the screen will be unfocused
+- `willFocus` - the screen will focus
+- `didFocus` - the screen focused (if there was a transition, the transition completed)
+- `didBlur` - the screen unfocused (if there was a transition, the transition completed)
 
 Example:
 
 ```javascript
 const didBlurSubscription = this.props.navigation.addListener(
   'didBlur',
-  payload => {
+  (payload) => {
     console.debug('didBlur', payload);
   }
 );
@@ -220,9 +220,9 @@ Similar to navigate, push will move you forward to a new route in the stack.
 
 `navigation.push(routeName, params, action)`
 
-* `routeName` - A destination routeName that has been registered somewhere in the app's router
-* `params` - Params to merge into the destination route
-* `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions) for a full list of supported actions.
+- `routeName` - A destination routeName that has been registered somewhere in the app's router
+- `params` - Params to merge into the destination route
+- `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator. See [Actions Doc](navigation-actions) for a full list of supported actions.
 
 ### Pop
 

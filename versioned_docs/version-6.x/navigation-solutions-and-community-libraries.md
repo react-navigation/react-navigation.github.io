@@ -4,7 +4,11 @@ title: Navigation Solutions and Community Libraries
 sidebar_label: Navigation Solutions and Community Libraries
 ---
 
-> Libraries listed in this guide may not have been updated to work with the latest version of React Navigation. Please refer to the library's documentation to see which version of React Navigation it supports.
+:::note
+
+Libraries listed in this guide may not have been updated to work with the latest version of React Navigation. Please refer to the library's documentation to see which version of React Navigation it supports.
+
+:::
 
 ## Solutions built on top of React Navigation
 
@@ -53,3 +57,9 @@ Helps you to render buttons in the navigation bar and handle the styling so you 
 Provides simple HOCs that map react-navigation props to your screen components directly - ie. instead of `const user = this.props.route.params.activeUser`, you'd write `const user = this.props.activeUser`.
 
 [github.com/vonovak/react-navigation-props-mapper](https://github.com/vonovak/react-navigation-props-mapper)
+
+## react-native-bottom-tabs
+
+This project aims to expose the native Bottom Tabs component to React Native. It also exposes SwiftUI's TabView on iOS and the material design tab bar on Android. Using `react-native-bottom-tabs` can bring several benefits, including multi-platform support and a native-feeling tab bar.
+
+[github.com/okwasniewski/react-native-bottom-tabs](https://github.com/okwasniewski/react-native-bottom-tabs)

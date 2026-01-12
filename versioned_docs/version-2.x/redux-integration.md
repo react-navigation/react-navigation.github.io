@@ -6,7 +6,7 @@ sidebar_label: Redux integration
 
 **Warning: in the next major version of React Navigation, to be released in Fall 2018, we will no longer provide any information about how to integrate with Redux and it may cease to work**. Issues related to Redux that are posted on the React Navigation issue tracker will be immediately closed. Redux integration may continue to work but it will not be tested against or considered when making any design decisions for the library.
 
-Some folks like to have their navigation state stored in the same place as the rest of their application state. *Think twice before you consider doing this, there is an incredibly good chance that you do not need to do this!*. Storing your React Navigation state in your own Redux store is likely to give you a very difficult time if you don't know what you're doing.
+Some folks like to have their navigation state stored in the same place as the rest of their application state. _Think twice before you consider doing this, there is an incredibly good chance that you do not need to do this!_. Storing your React Navigation state in your own Redux store is likely to give you a very difficult time if you don't know what you're doing.
 
 If your only reason for doing this is that you want to be able to perform navigation actions from outside of your components (eg: from a Redux middleware), you can learn more about this in [navigating without the navigation prop](navigating-without-navigation-prop.md).
 
@@ -125,7 +125,9 @@ If you want to replace `createNavigationReducer` reducer creator this is how you
 ```es6
 const AppNavigator = createStackNavigator(AppRouteConfigs);
 
-const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Login'));
+const initialState = AppNavigator.router.getStateForAction(
+  AppNavigator.router.getActionForPathAndParams('Login')
+);
 
 const navReducer = (state = initialState, action) => {
   const nextState = AppNavigator.router.getStateForAction(action, state);
@@ -140,19 +142,19 @@ const navReducer = (state = initialState, action) => {
 By using the following snippet, your nav component will be aware of the back button press actions and will correctly interact with your stack. This is really useful on Android.
 
 ```es6
-import React from "react";
-import { BackHandler } from "react-native";
-import { NavigationActions } from "react-navigation";
+import React from 'react';
+import { BackHandler } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 
 /* your other setup code here! this is not a runnable snippet */
 
 class ReduxNavigation extends React.Component {
   componentDidMount() {
-    BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
 
   onBackPress = () => {

@@ -11,7 +11,11 @@ Example
 ```jsx harmony
 import React from 'react';
 import { Text, View } from 'react-native';
-import { createBottomTabNavigator, createAppContainer, FlatList } from 'react-navigation';
+import {
+  createBottomTabNavigator,
+  createAppContainer,
+  FlatList,
+} from 'react-navigation';
 
 const data = new Array(150).fill(0);
 
