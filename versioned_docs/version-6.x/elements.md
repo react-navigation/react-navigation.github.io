@@ -11,14 +11,54 @@ A component library containing the UI elements and helpers used in React Navigat
 To use this package, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/elements`](https://github.com/react-navigation/react-navigation/tree/main/packages/elements):
 
 ```bash npm2yarn
-npm install @react-navigation/elements
+npm install @react-navigation/elements@^6.x
 ```
 
 ## Components
 
 ### `Header`
 
-A component that can be used as a header. It accepts the following props:
+A component that can be used as a header. This is used by all the navigators by default.
+
+Usage:
+
+```js
+import { Header } from '@react-navigation/elements';
+
+function MyHeader() {
+  return <Header title="My app" />;
+}
+```
+
+To use the header in a navigator, you can use the `header` option in the screen options:
+
+```js
+import { Header, getHeaderTitle } from '@react-navigation/elements';
+
+const Stack = createNativeStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        header: ({ options, route }) => (
+          <Header {...options} title={getHeaderTitle(options, route.name)} />
+        ),
+      }}
+    >
+      <Stack.Screen name="Home" component={HomeScreen} />
+    </Stack.Navigator>
+  );
+}
+```
+
+:::note
+
+This doesn't replicate the behavior of the header in stack and native stack navigators as the stack navigator also includes animations, and the native stack navigator header is provided by the native platform.
+
+:::
+
+It accepts the following props:
 
 #### `headerTitle`
 
@@ -124,7 +164,7 @@ This is useful if you want to render a semi-transparent header or a blurred back
 
 Note that if you don't want your content to appear under the header, you need to manually add a top margin to your content. React Navigation won't do it automatically.
 
-To get the height of the header, you can use [`HeaderHeightContext`](#headerheightcontext) with [React's Context API](https://reactjs.org/docs/context.html#contextconsumer) or [`useHeaderHeight`](#useheaderheight).
+To get the height of the header, you can use [`HeaderHeightContext`](#headerheightcontext) with [React's Context API](https://react.dev/reference/react/useContext) or [`useHeaderHeight`](#useheaderheight).
 
 #### `headerBackground`
 
@@ -136,6 +176,7 @@ For example, you can use this with `headerTransparent` to render a blur view to 
 
 ```js
 import { BlurView } from 'expo-blur';
+import { StyleSheet } from 'react-native';
 
 // ...
 
@@ -157,7 +198,7 @@ Extra padding to add at the top of header to account for translucent status bar.
 
 ### `HeaderBackground`
 
-A component containing the styles used in the background of the header, such as the background color and shadow. It's the default for [`headerBackground`](#headerbackground). It accepts the same props as an [`View`](https://reactnative.dev/docs/view).
+A component containing the styles used in the background of the header, such as the background color and shadow. It's the default for [`headerBackground`](#headerbackground). It accepts the same props as a [`View`](https://reactnative.dev/docs/view).
 
 Usage:
 
@@ -167,7 +208,7 @@ Usage:
 
 ### `HeaderTitle`
 
-A component used to show the title text in header. It's the default for [`headerTitle`](#headertitle). It accepts the same props as an [`Text`](https://reactnative.dev/docs/Text).
+A component used to show the title text in header. It's the default for [`headerTitle`](#headertitle). It accepts the same props as a [`Text`](https://reactnative.dev/docs/Text).
 
 The color of title defaults to the [theme text color](themes.md). You can override it by passing a `tintColor` prop.
 

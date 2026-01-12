@@ -9,7 +9,11 @@ function Screen1({ navigation }) {
     <SafeAreaView style={[styles.container, { backgroundColor: '#6a51ae' }]}>
       <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
       <Text style={{ color: '#fff' }}>Dark Screen</Text>
-      <Button title="Next screen" onPress={() => navigation.navigate('Screen2')} color="#000" />
+      <Button
+        title="Next screen"
+        onPress={() => navigation.navigate('Screen2')}
+        color="#000"
+      />
     </SafeAreaView>
   );
 }
@@ -19,7 +23,10 @@ function Screen2({ navigation }) {
     <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
       <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       <Text>Light Screen</Text>
-      <Button title="Next screen" onPress={() => navigation.navigate('Screen1')} />
+      <Button
+        title="Next screen"
+        onPress={() => navigation.navigate('Screen1')}
+      />
     </SafeAreaView>
   );
 }

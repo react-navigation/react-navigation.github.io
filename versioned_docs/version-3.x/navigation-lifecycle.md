@@ -29,12 +29,10 @@ const SettingsStack = createStackNavigator({
   Profile: ProfileScreen,
 });
 
-const TabNavigator = createBottomTabNavigator(
-  {
-    Home: HomeStack,
-    Settings: SettingsStack,
-  }
-);
+const TabNavigator = createBottomTabNavigator({
+  Home: HomeStack,
+  Settings: SettingsStack,
+});
 ```
 
 We start on the `HomeScreen` and navigate to `DetailsScreen`. Then we use the tab bar to switch to the `SettingsScreen` and navigate to `ProfileScreen`. After this sequence of operations is done, all 4 of the screens are mounted! If you use the tab bar to switch back to the `HomeStack`, you'll notice you'll be presented with the `DetailsScreen` - the navigation state of the `HomeStack` has been preserved!
@@ -43,7 +41,7 @@ We start on the `HomeScreen` and navigate to `DetailsScreen`. Then we use the ta
 
 Now that we understand how React lifecycle methods work in React Navigation, let's answer the question we asked at the beginning: "How do we find out that a user is leaving it or coming back to it?"
 
-React Navigation emits events to screen components that subscribe to them. There are four different events that you can subscribe to: `willFocus`, `willBlur`, `didFocus` and `didBlur`. Read more about them in the [API reference](navigation-prop.md#addlistener-subscribe-to-updates-to-navigation-lifecycle).
+React Navigation emits events to screen components that subscribe to them. There are four different events that you can subscribe to: `willFocus`, `willBlur`, `didFocus` and `didBlur`. Read more about them in the [API reference](navigation-prop.md#addlistener---subscribe-to-updates-to-navigation-lifecycle).
 
 Many of your use cases may be covered with the [`withNavigationFocus` HOC](with-navigation-focus.md) or the [`<NavigationEvents />` component](navigation-events.md) which are a little more straightforward to use.
 

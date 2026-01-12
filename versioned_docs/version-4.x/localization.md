@@ -41,7 +41,7 @@ export default class App extends React.Component {
     locale: Localization.locale,
   };
 
-  setLocale = locale => {
+  setLocale = (locale) => {
     this.setState({ locale });
   };
 

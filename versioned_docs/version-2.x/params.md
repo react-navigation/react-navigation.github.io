@@ -54,7 +54,8 @@ class DetailsScreen extends React.Component {
           onPress={() =>
             this.props.navigation.push('Details', {
               itemId: Math.floor(Math.random() * 100),
-            })}
+            })
+          }
         />
         <Button
           title="Go to Home"

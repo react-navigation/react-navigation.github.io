@@ -34,9 +34,7 @@ class AuthenticationScreen extends React.Component {
      * You should avoid this! It will have its own navigation state and be unable
      * To interact with any parent navigator, eg: it would not know the route "Home" exists
      */
-    return (
-      <AuthenticationContainer />
-    );
+    return <AuthenticationContainer />;
   }
 }
 
@@ -45,7 +43,7 @@ const AppNavigator = createSwitchNavigator({
   Home: HomeScreen,
 });
 
-const AppContainer = createAppContainer(AppNavigator)
+const AppContainer = createAppContainer(AppNavigator);
 ```
 
 The correct way to write this would be the following:
@@ -93,9 +91,7 @@ class AuthenticationScreen extends React.Component {
   static router = AuthenticationNavigator.router;
 
   render() {
-    return (
-      <AuthenticationNavigator navigation={this.props.navigation} />
-    );
+    return <AuthenticationNavigator navigation={this.props.navigation} />;
   }
 }
 
@@ -113,13 +109,13 @@ In previous version of React Navigation, the library used to dig through your co
 
 ## Wrapping AppContainer in a View without flex
 
- If you wrap the `AppContainer` in a `View`, make sure the `View` is using flex.
+If you wrap the `AppContainer` in a `View`, make sure the `View` is using flex.
 
 ```javascript
 import React from 'react';
 import { Text, View } from 'react-native';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
- class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -128,7 +124,7 @@ import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
     );
   }
 }
- class SettingsScreen extends React.Component {
+class SettingsScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -137,11 +133,15 @@ import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
     );
   }
 }
- const TabNavigator = createBottomTabNavigator({
+const TabNavigator = createBottomTabNavigator({
   Home: HomeScreen,
   Settings: SettingsScreen,
 });
- const AppContainer = createAppContainer(TabNavigator)
- // without the style you will see a blank screen
-export default ()=><View style={{flex: 1}}><AppContainer/></View>;
+const AppContainer = createAppContainer(TabNavigator);
+// without the style you will see a blank screen
+export default () => (
+  <View style={{ flex: 1 }}>
+    <AppContainer />
+  </View>
+);
 ```

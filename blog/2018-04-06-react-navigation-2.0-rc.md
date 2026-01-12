@@ -1,9 +1,6 @@
 ---
 title: 2.0 release candidate
-author: Brent Vatne
-author_url: https://twitter.com/notbrent
-author_title: Core Team
-author_image_url: https://avatars0.githubusercontent.com/u/90494?s=200&v=4
+authors: brent
 tags: [release, announcement]
 ---
 
@@ -15,7 +12,7 @@ Exactly two months after the release of React Navigation 1.0, we are close to an
 yarn add react-navigation@^2.0.0-rc.1
 ```
 
-The documentation for 2.0 is available at <https://reactnavigation.org/>
+The documentation for 2.0 is available at [reactnavigation.org](https://reactnavigation.org)
 
 We’re bumping the major version because some of the changes in this release are backwards incompatible. That said, this should be a fairly easy upgrade. We are improving React Navigation incrementally because we don't want to leave developers feeling stranded in an old version. If you use React Navigation in a conventional way and don't have any custom navigators, I can't imagine this update would take you more than an hour.
 
@@ -55,7 +52,7 @@ In 1.x, functions on the `navigation` were not contextual - they would be the sa
 
 Given that we only exposed generic helpers (`navigate`, `goBack`) and helpers specific to the stack in 1.x, this would only impact you if you attempted to use the stack helpers from outside of a stack. For example, if you had a tab navigator with a stack in tab A and just a plain screen in tab B, then tried to `push` a route from the screen in tab B, `push` would not be available. Keep this in mind when you update your app if it follows this type of structure.
 
-One of the big improvements you get from this is that you can now add your own helpers to the `navigation` prop!  Read more in [RFC 6](https://github.com/react-navigation/rfcs/blob/master/text/0006-action-creators.md).
+One of the big improvements you get from this is that you can now add your own helpers to the `navigation` prop! Read more in [RFC 6](https://github.com/react-navigation/rfcs/blob/master/text/0006-action-creators.md).
 
 ## Deprecations
 
@@ -76,6 +73,6 @@ This change was made to improve the ease of learning and understanding the libra
 
 ## New feature highlights
 
-- State persistence - automatically save state and reload it when the app restarts. See [state persistence docs](docs/state-persistence)
-- Transitions between screens in stack with headers and without headers now animates as expected on iOS. <https://github.com/react-navigation/react-navigation/pull/3821>. Thanks [skevy](https://github.com/skevy)!
+- State persistence - automatically save state and reload it when the app restarts. See [state persistence docs](/docs/state-persistence)
+- Transitions between screens in stack with headers and without headers now animates as expected on iOS. [#3821](https://github.com/react-navigation/react-navigation/pull/3821). Thanks [skevy](https://github.com/skevy)!
 - As mentioned above, `createMaterialBottomNavigator` is a new navigator type that provides the material design bottom tab bar pattern.

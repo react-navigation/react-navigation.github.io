@@ -23,14 +23,14 @@ Each callback registered as an event listener receive an event object as its arg
 
 There are 2 ways to listen to events:
 
-### `navigation.addListener`
+## `navigation.addListener`
 
 Inside a screen, you can add listeners on the `navigation` prop with the `addListener` method. The `addListener` method takes 2 arguments: type of the event, and a callback to be called on the event. It returns a function that can be called to unsubscribe from the event.
 
 Example:
 
 ```js
-const unsubscribe = navigation.addListener('tabPress', e => {
+const unsubscribe = navigation.addListener('tabPress', (e) => {
   // Prevent default action
   e.preventDefault();
 });
@@ -78,7 +78,7 @@ class Profile extends React.Component {
 
 One thing to keep in mind is that you can only listen to events from the immediate navigator with `addListener`. For example, if you try to add a listener in a screen that's inside a stack that's nested in a tab, it won't get the `tabPress` event. If you need to listen to an event from a parent navigator, you may use `navigation.getParent()` to get a reference to parent navigator's navigation prop and add a listener.
 
-### `listeners` prop on `Screen`
+## `listeners` prop on `Screen`
 
 Sometimes you might want to add a listener from the component where you defined the navigator rather than inside the screen. You can use the `listeners` prop on the `Screen` component to add listeners. The `listeners` prop takes an object with the event names as keys and the listener callbacks as values.
 
@@ -89,7 +89,7 @@ Example:
   name="Chat"
   component={Chat}
   listeners={{
-    tabPress: e => {
+    tabPress: (e) => {
       // Prevent default action
       e.preventDefault();
     },
@@ -106,7 +106,7 @@ Example:
   name="Chat"
   component={Chat}
   listeners={({ navigation, route }) => ({
-    tabPress: e => {
+    tabPress: (e) => {
       // Prevent default action
       e.preventDefault();
 

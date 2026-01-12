@@ -71,7 +71,8 @@ function MyButton() {
 
   return (
     <TouchableOpacity
-      style={{ backgroundColor: theme === 'light' ? '#000' : '#fff' }}>
+      style={{ backgroundColor: theme === 'light' ? '#000' : '#fff' }}
+    >
       <Text style={{ color: theme === 'light' ? '#fff' : '#000' }}>
         Button!
       </Text>
@@ -112,7 +113,8 @@ class MyButton extends React.Component {
   render() {
     return (
       <TouchableOpacity
-        style={{ backgroundColor: theme === 'light' ? '#000' : '#fff' }}>
+        style={{ backgroundColor: theme === 'light' ? '#000' : '#fff' }}
+      >
         <Text style={{ color: theme === 'light' ? '#fff' : '#000' }}>
           Button!
         </Text>
@@ -271,7 +273,8 @@ export default class AppContainer extends React.Component {
   render() {
     return (
       <ThemeContext.Provider
-        value={{ theme: this.state.theme, toggleTheme: this.toggleTheme }}>
+        value={{ theme: this.state.theme, toggleTheme: this.toggleTheme }}
+      >
         <HomeScreen />
       </ThemeContext.Provider>
     );
@@ -282,7 +285,8 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <ThemedView
-        style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+      >
         <ThemeContext.Consumer>
           {({ toggleTheme }) => (
             <ThemedButton title="Toggle theme" onPress={toggleTheme} />
@@ -352,7 +356,8 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <ThemedView
-        style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+      >
         <ThemeContext.Consumer>
           {({ toggleTheme }) => (
             <ThemedButton title="Toggle theme" onPress={toggleTheme} />
@@ -380,7 +385,8 @@ export default class AppContainer extends React.Component {
   render() {
     return (
       <ThemeContext.Provider
-        value={{ theme: this.state.theme, toggleTheme: this.toggleTheme }}>
+        value={{ theme: this.state.theme, toggleTheme: this.toggleTheme }}
+      >
         <Navigation screenProps={{ theme: this.state.theme }} />
       </ThemeContext.Provider>
     );

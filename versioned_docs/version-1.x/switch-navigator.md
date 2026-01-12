@@ -5,7 +5,7 @@ sidebar_label: SwitchNavigator
 ---
 
 ```js
-SwitchNavigator(RouteConfigs, SwitchNavigatorConfig)
+SwitchNavigator(RouteConfigs, SwitchNavigatorConfig);
 ```
 
 ## RouteConfigs

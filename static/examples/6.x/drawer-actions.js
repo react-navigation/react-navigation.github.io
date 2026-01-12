@@ -1,12 +1,11 @@
-import * as React from 'react';
-import { View, Button, Text } from 'react-native';
-import { NavigationContainer, DrawerActions } from '@react-navigation/native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
-  DrawerItemList,
   DrawerItem,
+  DrawerItemList,
 } from '@react-navigation/drawer';
+import { DrawerActions, NavigationContainer } from '@react-navigation/native';
+import { Button, Text, View } from 'react-native';
 
 function HomeScreen({ navigation }) {
   const jumpToAction = DrawerActions.jumpTo('Profile', { user: 'Satya' });
@@ -34,7 +33,9 @@ function ProfileScreen({ route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
-      <Text>{route?.params?.user ? route.params.user : 'Noone'}'s profile</Text>
+      <Text>
+        {route?.params?.user ? route.params.user : 'No one'}'s profile
+      </Text>
     </View>
   );
 }
@@ -61,7 +62,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        useLegacyImplementation
         drawerContent={(props) => <CustomDrawerContent {...props} />}
       >
         <Drawer.Screen name="Home" component={HomeScreen} />

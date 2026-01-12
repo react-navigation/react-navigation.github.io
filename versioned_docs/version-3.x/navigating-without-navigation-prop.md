@@ -14,7 +14,9 @@ You can get access to a navigator through a `ref` and pass it to the `Navigation
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import NavigationService from './NavigationService';
 
-const TopLevelNavigator = createStackNavigator({ /* ... */ })
+const TopLevelNavigator = createStackNavigator({
+  /* ... */
+});
 
 const AppContainer = createAppContainer(TopLevelNavigator);
 
@@ -24,7 +26,7 @@ export default class App extends React.Component {
   render() {
     return (
       <AppContainer
-        ref={navigatorRef => {
+        ref={(navigatorRef) => {
           NavigationService.setTopLevelNavigator(navigatorRef);
         }}
       />

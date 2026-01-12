@@ -274,7 +274,7 @@ const ModalNavigator = createStackNavigator(
         easing: Easing.out(Easing.poly(4)),
         timing: Animated.timing,
       },
-      screenInterpolator: sceneProps => {
+      screenInterpolator: (sceneProps) => {
         const { layout, position, scene } = sceneProps;
         const { index } = scene;
 
@@ -313,7 +313,7 @@ const IOS_MODAL_ROUTES = ['OptionsScreen'];
 
 let dynamicModalTransition = (transitionProps, prevTransitionProps) => {
   const isModal = IOS_MODAL_ROUTES.some(
-    screenName =>
+    (screenName) =>
       screenName === transitionProps.scene.route.routeName ||
       (prevTransitionProps &&
         screenName === prevTransitionProps.scene.route.routeName)

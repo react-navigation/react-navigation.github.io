@@ -14,7 +14,14 @@ export default class MyBackButton extends React.Component {
   render() {
     // This will throw an 'undefined is not a function' exception because the navigation
     // prop is undefined.
-    return <Button title="Back" onPress={() => { this.props.navigation.goBack() }} />;
+    return (
+      <Button
+        title="Back"
+        onPress={() => {
+          this.props.navigation.goBack();
+        }}
+      />
+    );
   }
 }
 ```
@@ -30,7 +37,14 @@ import { withNavigation } from 'react-navigation';
 
 class MyBackButton extends React.Component {
   render() {
-    return <Button title="Back" onPress={() => { this.props.navigation.goBack() }} />;
+    return (
+      <Button
+        title="Back"
+        onPress={() => {
+          this.props.navigation.goBack();
+        }}
+      />
+    );
   }
 }
 

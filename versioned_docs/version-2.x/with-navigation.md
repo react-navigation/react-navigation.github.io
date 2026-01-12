@@ -17,7 +17,14 @@ import { withNavigation } from 'react-navigation';
 
 class MyBackButton extends React.Component {
   render() {
-    return <Button title="Back" onPress={() => { this.props.navigation.goBack() }} />;
+    return (
+      <Button
+        title="Back"
+        onPress={() => {
+          this.props.navigation.goBack();
+        }}
+      />
+    );
   }
 }
 

@@ -8,11 +8,9 @@ Stack Navigator provides a way for your app to transition between screens where 
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, use OS default animation on Android. But the [animations can be customized](#animation-related-options) to match your needs.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/stack/stack.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/stack/stack.mp4" />
+</video>
 
 One thing to keep in mind is that while `@react-navigation/stack` is extremely customizable, it's implemented in JavaScript. While it runs animations and gestures using natively, the performance may not be as fast as a native implementation. This may not be an issue for a lot of apps, but if you're experiencing performance issues during navigation, consider using [`@react-navigation/native-stack`](native-stack-navigator.md) instead - which uses native navigation primitives.
 
@@ -21,7 +19,7 @@ One thing to keep in mind is that while `@react-navigation/stack` is extremely c
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/stack):
 
 ```bash npm2yarn
-npm install @react-navigation/stack
+npm install @react-navigation/stack@^6.x
 ```
 
 Then, you need to install and configure the libraries that are required by the stack navigator:
@@ -40,13 +38,30 @@ Then, you need to install and configure the libraries that are required by the s
    npm install react-native-gesture-handler
    ```
 
-2. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+2. To finalize the installation of `react-native-gesture-handler`, we need to conditionally import it. To do this, create 2 files:
 
-   ```js
+   ```js title="gesture-handler.native.js"
+   // Only import react-native-gesture-handler on native platforms
    import 'react-native-gesture-handler';
    ```
 
-   > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+   ```js title="gesture-handler.js"
+   // Don't import react-native-gesture-handler on web
+   ```
+
+   Now, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+
+   ```js
+   import './gesture-handler';
+   ```
+
+   Since the stack navigator doesn't use `react-native-gesture-handler` on Web, this avoids unnecessarily increasing the bundle size.
+
+   :::warning
+
+   If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+
+   :::
 
 3. Optionally, you can also install [`@react-native-masked-view/masked-view`](https://github.com/react-native-masked-view/masked-view). This is needed if you want to use UIKit style animations for the header ([`HeaderStyleInterpolators.forUIKit`](#headerstyleinterpolators)).
 
@@ -64,9 +79,9 @@ Then, you need to install and configure the libraries that are required by the s
 
 4. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-  ```bash
-  npx pod-install ios
-  ```
+   ```bash
+   npx pod-install ios
+   ```
 
 ## API Definition
 
@@ -112,10 +127,6 @@ Default options to use for the screens in the navigator.
 Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
 
 If you need to disable this optimization for specific screens (e.g. you want to screen to stay in view even when unfocused) [`detachPreviousScreen`](#detachpreviousscreen) option.
-
-#### `keyboardHandlingEnabled`
-
-If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to `true`.
 
 ### Options
 
@@ -220,6 +231,10 @@ Interpolated styles for various parts of the card. Refer the [Animations section
 
 Interpolated styles for various parts of the header. Refer the [Animations section](#animations) for details.
 
+#### `keyboardHandlingEnabled`
+
+If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to `true`.
+
 #### `detachPreviousScreen`
 
 Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`.
@@ -320,8 +335,8 @@ return (
 
 Specifies how the header should be rendered:
 
-- `float` - Render a single header that stays at the top and animates as screens are changed. This is default on iOS.
-- `screen` - Each screen has a header attached to it and the header fades in and out together with the screen. This is default on other platforms.
+- `float` - The header is rendered above the screen and animates independently of the screen. This is default on iOS for non-modals.
+- `screen` - The header is rendered as part of the screen and animates together with the screen. This is default on other platforms.
 
 #### `headerShown`
 
@@ -459,7 +474,7 @@ Replaces the current screen with a new screen in the stack. The method accepts f
 - `params` - _object_ - Screen params to pass to the destination route.
 
 ```js
-navigation.push('Profile', { owner: 'Michaś' });
+navigation.replace('Profile', { owner: 'Michaś' });
 ```
 
 #### `push`
@@ -541,7 +556,6 @@ function MyStack() {
 Stack Navigator exposes various options to configure the transition animation when a screen is added or removed. These transition animations can be customized on a per-screen basis by specifying the options in the `options` prop for each screen.
 
 - `gestureDirection` - The direction of swipe gestures:
-
   - `horizontal` - The gesture to close the screen will start from the left, and from the right in RTL. For animations, screen will slide from the right with `SlideFromRightIOS`, and from the left in RTL.
   - `horizontal-inverted` - The gesture to close the screen will start from the right, and from the left in RTL. For animations, screen will slide from the left with `SlideFromRightIOS`, and from the right in RTL as the direction is inverted.
   - `vertical` - The gesture to close the screen will start from the top. For animations, screen will slide from the bottom.
@@ -550,12 +564,10 @@ Stack Navigator exposes various options to configure the transition animation wh
   You may want to specify a matching horizontal/vertical animation along with `gestureDirection` as well. For the animations included in the library, if you set `gestureDirection` to one of the inverted ones, it'll also flip the animation direction.
 
 - `transitionSpec` - An object which specifies the animation type (`timing` or `spring`) and their options (such as `duration` for `timing`). It takes 2 properties:
-
   - `open` - Configuration for the transition when adding a screen
   - `close` - Configuration for the transition when removing a screen.
 
   Each of the object should specify 2 properties:
-
   - `animation` - The animation function to use for the animation. Supported values are `timing` and `spring`.
   - `config` - The configuration object for the timing function. For `timing`, it can be `duration` and `easing`. For `spring`, it can be `stiffness`, `damping`, `mass`, `overshootClamping`, `restDisplacementThreshold` and `restSpeedThreshold`.
 
@@ -593,14 +605,12 @@ Stack Navigator exposes various options to configure the transition animation wh
   ```
 
 - `cardStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the card. This allows you to customize the transitions when navigating from screen to screen. It is expected to return at least empty object, possibly containing interpolated styles for container, the card itself, overlay and shadow. Supported properties are:
-
   - `containerStyle` - Style for the container view wrapping the card.
   - `cardStyle` - Style for the view representing the card.
   - `overlayStyle` - Style for the view representing the semi-transparent overlay below
   - `shadowStyle` - Style for the view representing the card shadow.
 
   The function receives the following properties in its argument:
-
   - `current` - Values for the current screen:
     - `progress` - Animated node representing the progress value of the current screen.
   - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
@@ -635,7 +645,6 @@ Stack Navigator exposes various options to configure the transition animation wh
   ```
 
   The interpolator will be called for each screen. For example, say you have a 2 screens in the stack, A & B. B is the new screen coming into focus and A is the previous screen. The interpolator will be called for each screen:
-
   - The interpolator is called for `B`: Here, the `current.progress` value represents the progress of the transition, which will start at `0` and end at `1`. There won't be a `next.progress` since `B` is the last screen.
   - The interpolator is called for `A`: Here, the `current.progress` will stay at the value of `1` and won't change, since the current transition is running for `B`, not `A`. The `next.progress` value represents the progress of `B` and will start at `0` and end at `1`.
 
@@ -703,7 +712,6 @@ Stack Navigator exposes various options to configure the transition animation wh
   ```
 
 - `headerStyleInterpolator` - This is a function which specifies interpolated styles for various parts of the header. It is expected to return at least empty object, possibly containing interpolated styles for left label and button, right button, title and background. Supported properties are:
-
   - `leftLabelStyle` - Style for the label of the left button (back button label).
   - `leftButtonStyle` - Style for the left button (usually the back button).
   - `rightButtonStyle` - Style for the right button.
@@ -711,7 +719,6 @@ Stack Navigator exposes various options to configure the transition animation wh
   - `backgroundStyle` - Style for the header background.
 
   The function receives the following properties in it's argument:
-
   - `current` - Values for the current screen (the screen which owns this header).
     - `progress` - Animated node representing the progress value of the current screen. `0` when screen should start coming into view, `0.5` when it's mid-way, `1` when it should be fully in view.
   - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
@@ -836,7 +843,11 @@ import { HeaderStyleInterpolators } from '@react-navigation/stack';
 />;
 ```
 
-> Note: Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
+:::warning
+
+Always define your animation configuration at the top-level of the file to ensure that the references don't change across re-renders. This is important for smooth and reliable transition animations.
+
+:::
 
 #### `TransitionPresets`
 

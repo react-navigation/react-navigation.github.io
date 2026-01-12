@@ -27,7 +27,6 @@ The route configs object is a mapping from route name to a route config, which t
 - `drawerBackgroundColor` - Use the Drawer background for some color. The Default is `white`.
 - `drawerPosition` - Options are `left` or `right`. Default is `left` position.
 - `drawerType` - Type of the drawer. It determines how the drawer looks and animates.
-
   - `front`: Traditional drawer which covers the screen with a overlay behind it.
   - `back`: The drawer is revealed behind the screen on swipe.
   - `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.

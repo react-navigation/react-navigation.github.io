@@ -6,20 +6,18 @@ sidebar_label: Drawer
 
 Drawer Navigator renders a navigation drawer on the side of the screen which can be opened and closed via gestures.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/drawer/drawer.mov" />
-  </video>
-</div>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/drawer/drawer.mp4" />
+</video>
 
-This wraps [`react-native-drawer-layout`](drawer-layout.md). If you want to use the tab view without React Navigation integration, use the library directly instead.
+This wraps [`react-native-drawer-layout`](drawer-layout.md). If you want to use the drawer without React Navigation integration, use the library directly instead.
 
 ## Installation
 
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
 
 ```bash npm2yarn
-npm install @react-navigation/drawer
+npm install @react-navigation/drawer@^6.x
 ```
 
 Then, you need to install and configure the libraries that are required by the drawer navigator:
@@ -35,24 +33,41 @@ Then, you need to install and configure the libraries that are required by the d
    If you have a bare React Native project, in your project directory, run:
 
    ```bash npm2yarn
-   npm install react-native-gesture-handler react-native-reanimated
+   npm install react-native-gesture-handler react-native-reanimated@^2
    ```
 
-   The Drawer Navigator supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+   The Drawer supports both Reanimated 1 and the latest version of Reanimated. If you want to use the latest version of Reanimated, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
-2. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+2. To finalize the installation of `react-native-gesture-handler`, we need to conditionally import it. To do this, create 2 files:
 
-   ```js
+   ```js title="gesture-handler.native.js"
+   // Only import react-native-gesture-handler on native platforms
    import 'react-native-gesture-handler';
    ```
 
-   > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+   ```js title="gesture-handler.js"
+   // Don't import react-native-gesture-handler on web
+   ```
+
+   Now, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+
+   ```js
+   import './gesture-handler';
+   ```
+
+   Since the drawer navigator doesn't use `react-native-gesture-handler` on Web, this avoids unnecessarily increasing the bundle size.
+
+   :::warning
+
+   If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+
+   :::
 
 3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
 
-```bash
-npx pod-install ios
-```
+   ```bash
+   npx pod-install ios
+   ```
 
 ## API Definition
 
@@ -75,7 +90,11 @@ function MyDrawer() {
 }
 ```
 
-> For a complete usage guide please visit [Drawer Navigation](drawer-based-navigation.md).
+:::note
+
+For a complete usage guide please visit [Drawer Navigation](drawer-based-navigation.md).
+
+:::
 
 ### Props
 

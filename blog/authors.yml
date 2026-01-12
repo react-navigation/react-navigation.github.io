@@ -1,0 +1,49 @@
+satya:
+  name: Satyajit Sahoo
+  url: https://satya164.page
+  image_url: https://avatars2.githubusercontent.com/u/1174278
+  title: Core Team
+  socials:
+    x: satya164
+    github: satya164
+
+michal:
+  name: Michał Osadnik
+  image_url: https://avatars3.githubusercontent.com/u/25709300
+  title: Core Team
+  socials:
+    x: mosdnk
+    github: osdnk
+
+brent:
+  name: Brent Vatne
+  url: https://bsky.app/profile/notbrent.bsky.social
+  image_url: https://avatars0.githubusercontent.com/u/90494
+  title: Core Team
+  socials:
+    x: notbrent
+    github: brentvatne
+
+artur:
+  name: Artur Yorsh
+  image_url: https://pbs.twimg.com/profile_images/1668375708962357248/ntCXYm7e_400x400.jpg
+  title: UI Kitten Team
+  socials:
+    x: artyorsh
+    github: artyorsh
+
+dawid:
+  name: Dawid Urbaniak
+  image_url: https://avatars0.githubusercontent.com/u/18584155
+  title: React Native Paper Team
+  socials:
+    x: trensik
+    github: Trancever
+
+oskar:
+  name: Oskar Kwaśniewski
+  image_url: https://avatars.githubusercontent.com/u/52801365
+  title: Callstack
+  socials:
+    x: o_kwasniewski
+    github: okwasniewsk
