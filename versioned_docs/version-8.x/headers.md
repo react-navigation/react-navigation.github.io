@@ -7,11 +7,11 @@ sidebar_label: Configuring the header bar
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-We've seen how to configure the header title already, but let's go over that again before moving on to some other options &mdash; repetition is key to learning!
+We've seen how to configure the header title already, but let's go over that again before moving on to some other options.
 
 ## Setting the header title
 
-Each screen has `options` which is either an object or a function that returns an object, that contains various configuration options. The one we use for the header title is `title`, as shown in the following example.
+Each screen has an `options` property (an object or function returning an object) for configuring the navigator. For the header title, we can use the `title` option:
 
 ```js name="Setting header title" snack static2dynamic
 import * as React from 'react';
@@ -56,7 +56,7 @@ export default function App() {
 
 ## Using params in the title
 
-In order to use params in the title, we need to make `options` for the screen a function that returns a configuration object. If we make `options` a function then React Navigation will call it with an object containing `{ navigation, route }` - in this case, all we care about is `route`, which is the same object that is passed to your screen props as `route` prop. You may recall that we can get the params through `route.params`, and so we do this below to extract a param and use it as a title.
+To use params in the title, make `options` a function that returns a configuration object. React Navigation calls this function with `{ navigation, route }` - so you can use `route.params` to access the params:
 
 ```js name="Using params in the title" snack static2dynamic
 import * as React from 'react';
@@ -131,7 +131,7 @@ We only needed the `route` object in the above example but you may in some cases
 
 ## Updating `options` with `setOptions`
 
-It's often necessary to update the `options` configuration for the active screen from the mounted screen component itself. We can do this using `navigation.setOptions`
+We can update the header from within a screen using `navigation.setOptions`:
 
 ```js name="Updating options" snack static2dynamic
 import * as React from 'react';
@@ -183,11 +183,11 @@ export default function App() {
 
 ## Adjusting header styles
 
-There are three key properties to use when customizing the style of your header: `headerStyle`, `headerTintColor`, and `headerTitleStyle`.
+There are three key properties to use when customizing the style of your header:
 
-- `headerStyle`: a style object that will be applied to the view that wraps the header. If you set `backgroundColor` on it, that will be the color of your header.
-- `headerTintColor`: the back button and title both use this property as their color. In the example below, we set the tint color to white (`#fff`) so the back button and the header title would be white.
-- `headerTitleStyle`: if we want to customize the `fontFamily`, `fontWeight` and other `Text` style properties for the title, we can use this to do it.
+- `headerStyle`: A style object that will be applied to the view that wraps the header. If you set `backgroundColor` on it, that will be the color of your header.
+- `headerTintColor`: The back button and title both use this property as their color. In the example below, we set the tint color to white (`#fff`) so the back button and the header title would be white.
+- `headerTitleStyle`: If we want to customize the `fontFamily`, `fontWeight` and other `Text` style properties for the title, we can use this to do it.
 
 ```js name="Header styles" snack static2dynamic
 import * as React from 'react';
@@ -236,12 +236,12 @@ export default function App() {
 
 There are a couple of things to notice here:
 
-1. On iOS, the status bar text and icons are black, and this doesn't look great over a dark-colored background. We won't discuss it here, but you should be sure to configure the status bar to fit with your screen colors [as described in the status bar guide](status-bar.md).
-2. The configuration we set only applies to the home screen; when we navigate to the details screen, the default styles are back. We'll look at how to share `options` between screens now.
+1. On iOS, the status bar text and icons are black by default, which doesn't look great over a dark background. We won't discuss it here, but see the [status bar guide](status-bar.md) to configure it.
+2. The configuration we set only applies to the home screen; when we navigate to the details screen, the default styles are back. We'll look at how to share `options` between screens next.
 
 ## Sharing common `options` across screens
 
-It is common to want to configure the header in a similar way across many screens. For example, your company brand color might be red and so you want the header background color to be red and the tint color to be white. Conveniently, these are the colors we're using in our running example, and you'll notice that when you navigate to the `DetailsScreen` the colors go back to the defaults. Wouldn't it be awful if we had to copy the `options` header style properties from `Home` to `Details`, and for every single screen we use in our app? Thankfully, we do not. We can instead move the configuration up to the native stack navigator under `screenOptions`:
+Often we want to apply the same options to all screens in a navigator. Instead of repeating the same options for each screen, we can use `screenOptions` on the navigator.
 
 ```js name="Common screen options" snack static2dynamic
 import * as React from 'react';
@@ -305,11 +305,11 @@ export default function App() {
 }
 ```
 
-Now, any screen that belongs to this navigator will have our wonderful branded styles. Surely though, there must be a way to override these options if we need to?
+All screens in this navigator will now share these styles. Individual screens can still override them in their own `options`.
 
 ## Replacing the title with a custom component
 
-Sometimes you need more control than just changing the text and styles of your title -- for example, you may want to render an image in place of the title, or make the title into a button. In these cases you can completely override the component used for the title and provide your own.
+Sometimes you need more control than just changing the text and styles of your title -- for example, you may want to render an image in place of the title, or make the title into a button. In these cases, you can completely override the component used for the title and provide your own.
 
 ```js name="Custom title" snack static2dynamic
 import * as React from 'react';
@@ -359,16 +359,16 @@ export default function App() {
 
 :::note
 
-You might be wondering, why `headerTitle` when we provide a component and not `title`, like before? The reason is that `headerTitle` is a property that is specific to headers, whereas `title` will be used for tab bars, drawers etc. as well. The `headerTitle` defaults to a `Text` component that displays the `title`.
+`headerTitle` is header-specific, while `title` is also used by tab bars and drawers, or as page title on web. `headerTitle` defaults to displaying the `title` in a `Text` component.
 
 :::
 
 ## Additional configuration
 
-You can read the full list of available `options` for screens inside of a native stack navigator in the [`createNativeStackNavigator` reference](native-stack-navigator.md#options).
+See the full list of header options in the [`createNativeStackNavigator` reference](native-stack-navigator.md#options).
 
 ## Summary
 
-- You can customize the header inside of the [`options`](screen-options.md) property of your screens. Read the full list of options [in the API reference](native-stack-navigator.md#options).
-- The `options` property can be an object or a function. When it is a function, it is provided with an object with the [`navigation`](navigation-object.md) and [`route`](route-object.md) objects.
-- You can also specify shared [`screenOptions`](screen-options.md#screenoptions-prop-on-the-navigator) in the stack navigator configuration when you initialize it. This will apply to all screens in the navigator.
+- Headers can be customized via the [`options`](screen-options.md) property on screens
+- The `options` property can be an object or a function that receives the [`navigation`](navigation-object.md) and [`route`](route-object.md) objects
+- The [`screenOptions`](screen-options.md#screenoptions-prop-on-the-navigator) property on the navigator can be used to apply shared styles across all screens

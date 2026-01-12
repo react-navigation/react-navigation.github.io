@@ -7,18 +7,14 @@ sidebar_label: Getting started
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-What follows within the _Fundamentals_ section of this documentation is a tour of the most important aspects of React Navigation. It should cover enough for you to know how to build your typical small mobile application, and give you the background that you need to dive deeper into the more advanced parts of React Navigation.
+The _Fundamentals_ section covers the most important aspects of React Navigation. It should be enough to build a typical mobile application and give you the background to dive deeper into the more advanced topics.
 
 ## Pre-requisites
 
-If you're already familiar with JavaScript, React and React Native, then you'll be able to get moving with React Navigation quickly! If not, we highly recommend you to gain some basic knowledge first, then come back here when you're done.
+If you're already familiar with JavaScript, React and React Native, you'll be able to get moving with React Navigation quickly! If not, we recommend gaining some basic knowledge first, then coming back here when you're done.
 
-Here are some resources to help you out:
-
-1. [Main Concepts of React](https://react.dev/learn)
-2. [Getting started with React Native](https://reactnative.dev/docs/getting-started)
-3. [React Hooks](https://react.dev/reference/react/hooks)
-4. [React Context](https://react.dev/learn/passing-data-deeply-with-context)
+1. [React Documentation](https://react.dev/learn)
+2. [React Native Documentation](https://reactnative.dev/docs/getting-started)
 
 ## Minimum requirements
 
@@ -39,7 +35,7 @@ npm install @react-navigation/native@next
 
 ### Installing dependencies
 
-Let's also install and configure dependencies used by most navigators. The libraries we will install now are [`react-native-screens`](https://github.com/software-mansion/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
+Next, install the dependencies used by most navigators: [`react-native-screens`](https://github.com/software-mansion/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
 
 <Tabs groupId='framework' queryString="framework">
 <TabItem value='expo' label='Expo' default>
@@ -54,7 +50,7 @@ This will install versions of these libraries that are compatible with your Expo
 
 :::warning
 
-[Expo Go](https://expo.dev/go) does not include all native dependencies required by React Navigation. So it will not reflect the actual behavior of your app in production. To properly test your app, you need to create a [development build](https://docs.expo.dev/development/introduction/) of your app.
+[Expo Go](https://expo.dev/go) doesn't include all native dependencies required by React Navigation, so it won't reflect your app's actual behavior. Use a [development build](https://docs.expo.dev/development/introduction/) to properly test your app.
 
 :::
 
@@ -67,7 +63,7 @@ In your project directory, run:
 npm install react-native-screens react-native-safe-area-context @callstack/liquid-glass
 ```
 
-If you're on a Mac and developing for iOS, you need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+If you're on a Mac and developing for iOS, install the pods via [Cocoapods](https://cocoapods.org/) to complete the linking:
 
 ```bash
 npx pod-install ios
@@ -77,7 +73,7 @@ npx pod-install ios
 
 [`react-native-screens`](https://github.com/software-mansion/react-native-screens) requires one additional configuration to properly work on Android.
 
-Edit `MainActivity.kt` or `MainActivity.java` file under `android/app/src/main/java/<your package name>/`, and add the highlighted code to the body of `MainActivity` class:
+Edit `MainActivity.kt` or `MainActivity.java` under `android/app/src/main/java/<your package name>/` and add the highlighted code:
 
 <Tabs>
 <TabItem value='kotlin' label='Kotlin' default>
@@ -133,13 +129,13 @@ public class MainActivity extends ReactActivity {
 </TabItem>
 </Tabs>
 
-This change is required to avoid crashes related to View state being not persisted consistently across Activity restarts.
+This avoids crashes related to View state not being persisted across Activity restarts.
 
 #### Opting-out of predictive back on Android
 
-React Navigation doesn't yet support Android's predictive back gesture. Disabling it is necessary for the system back gesture to work properly with React Navigation.
+React Navigation doesn't yet support Android's predictive back gesture, so you need to disable it for the system back gesture to work properly.
 
-To opt out, in `AndroidManifest.xml`, in the `<application>` tag (or `<activity>` tag to opt-out at activity level), set the `android:enableOnBackInvokedCallback` flag to `false`:
+In `AndroidManifest.xml`, set `android:enableOnBackInvokedCallback` to `false` in the `<application>` tag (or `<activity>` tag to opt-out at activity level):
 
 ```xml
 <application
@@ -155,28 +151,26 @@ To opt out, in `AndroidManifest.xml`, in the `<application>` tag (or `<activity>
 
 ## Setting up React Navigation
 
-Once you've installed and configured the dependencies, you can move on to setting up your project to use React Navigation.
-
-When using React Navigation, you configure [**navigators**](glossary-of-terms.md#navigator) in your app. Navigators handle the transition between screens in your app and provide UI such as header, tab bar etc.
+When using React Navigation, you configure [**navigators**](glossary-of-terms.md#navigator) in your app. Navigators handle transitions between screens and provide UI such as headers, tab bars, etc.
 
 :::info
 
-When you use a navigator (such as stack navigator), you'll need to follow the installation instructions of that navigator for any additional dependencies.
+When you use a navigator (such as stack navigator), you'll need to follow that navigator's installation instructions for any additional dependencies.
 
 :::
 
-There are 2 primary ways to configure the navigators:
+There are 2 ways to configure navigators:
 
 ### Static configuration
 
-The static configuration API lets you write your configuration in an object, and is defined statically, though some aspects of the configuration can still can be changed dynamically. This has reduced boilerplate and simplifies things such as TypeScript types and deep linking.
+The static configuration API lets you write your navigation configuration in an object. This reduces boilerplate and simplifies TypeScript types and deep linking. Some aspects can still be changed dynamically.
 
-If you're starting a new project or are new to React Navigation, this is the **recommended way** to set up your app. If you need more flexibility in the future, you can always mix and match with the dynamic configuration.
+This is the **recommended way** to set up your app. If you need more flexibility later, you can mix and match with the dynamic configuration.
 
 Continue to ["Hello React Navigation"](hello-react-navigation.md?config=static) to start writing some code with the static API.
 
 ### Dynamic configuration
 
-The dynamic configuration API lets you write your configuration in React components, and can change at runtime based on state or props. This allows for more flexibility but requires significantly more boilerplate and configuration for Typescript types, deep linking etc.
+The dynamic configuration API lets you write your navigation configuration using React components that can change at runtime based on state or props. This offers more flexibility but requires significantly more boilerplate for TypeScript types, deep linking, etc.
 
 Continue to ["Hello React Navigation"](hello-react-navigation.md?config=dynamic) to start writing some code with the dynamic API.
