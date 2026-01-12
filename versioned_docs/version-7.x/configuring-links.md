@@ -1146,8 +1146,8 @@ const config = {
 
 When handling the URL, your params will look like this:
 
-```yml
-{ date: '1589842744264' }
+```json
+{ "date": "1589842744264" }
 ```
 
 Here, the `date` param was parsed as a string because React Navigation doesn't know that it's supposed to be a timestamp, and hence number. You can customize it by providing a custom function to use for parsing:

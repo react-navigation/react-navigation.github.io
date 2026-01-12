@@ -1,7 +1,7 @@
-import remarkNpm2Yarn from './src/plugins/remark-npm2yarn.mjs';
 import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.mjs';
 import rehypeStaticToDynamic from './src/plugins/rehype-static-to-dynamic.mjs';
 import rehypeVideoAspectRatio from './src/plugins/rehype-video-aspect-ratio.mjs';
+import remarkNpm2Yarn from './src/plugins/remark-npm2yarn.mjs';
 
 export default {
   title: 'React Navigation',
@@ -28,6 +28,17 @@ export default {
     prism: {
       theme: require('prism-react-renderer').themes.oneLight,
       darkTheme: require('prism-react-renderer').themes.oneDark,
+      additionalLanguages: [
+        'bash',
+        'json',
+        'java',
+        'kotlin',
+        'groovy',
+        'ruby',
+        'swift',
+        'objectivec',
+        'toml',
+      ],
       magicComments: [
         {
           className: 'theme-code-block-highlighted-line',
