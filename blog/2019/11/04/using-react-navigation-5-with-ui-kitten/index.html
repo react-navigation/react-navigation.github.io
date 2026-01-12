@@ -22,8 +22,8 @@
 <script src="/js/snack-helpers.js"></script>
 <script src="/js/toc-fixes.js"></script>
 <script src="/js/video-playback.js"></script><link rel="stylesheet" href="/assets/css/styles.f230a370.css">
-<script src="/assets/js/runtime~main.3a8f56cb.js" defer="defer"></script>
-<script src="/assets/js/main.a9ee0251.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.6a197a1e.js" defer="defer"></script>
+<script src="/assets/js/main.f09a5a40.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -43,7 +43,7 @@ In this blog post, we&#x27;ll show a step-by-step guide on using React Navigatio
 <p>Unlike the previous React Navigation versions, all the screens used inside a navigator are passed as child elements with wrapping it to a <code>Screen</code> component. If you need to set up additional navigator configuration like configuration of the header, you can simply pass corresponding props directly to the <code>Navigator</code> component.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="getting-started">Getting started<a href="#getting-started" class="hash-link" aria-label="Direct link to Getting started" title="Direct link to Getting started" translate="no">​</a></h2>
 <p>Clone the project from GitHub. It contains all the required source code for the initial setup.</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-background-color:hsl(230, 1%, 98%);--prism-color:hsl(230, 8%, 24%)"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="background-color:hsl(230, 1%, 98%);color:hsl(230, 8%, 24%)"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">git clone https://github.com/artyorsh/react-navigation-ex-demo</span><br></span></code></pre></div></div>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-background-color:hsl(230, 1%, 98%);--prism-color:hsl(230, 8%, 24%)"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="background-color:hsl(230, 1%, 98%);color:hsl(230, 8%, 24%)"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token function" style="color:hsl(221, 87%, 60%)">git</span><span class="token plain"> clone https://github.com/artyorsh/react-navigation-ex-demo</span><br></span></code></pre></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="step-1-authentication-flow">Step 1. Authentication flow<a href="#step-1-authentication-flow" class="hash-link" aria-label="Direct link to Step 1. Authentication flow" title="Direct link to Step 1. Authentication flow" translate="no">​</a></h3>
 <p>Assuming that your app users will need to authorize before getting to the home screen, we will need to create both Authentication and Home navigators. Then we&#x27;re going to combine it with simple stack navigation and pick the initial screen depending on the user authorization status.</p>
 <p>Open <a href="https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/auth.navigator.tsx" target="_blank" rel="noopener noreferrer" class="">./src/navigation/auth.navigator.tsx`</a> file and paste the following code:</p>
