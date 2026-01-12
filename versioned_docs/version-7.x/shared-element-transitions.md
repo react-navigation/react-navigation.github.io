@@ -54,6 +54,7 @@ import { Button } from '@react-navigation/elements';
 
 import Animated from 'react-native-reanimated';
 
+// codeblock-focus-start
 function HomeScreen() {
   const navigation = useNavigation();
 
@@ -87,6 +88,7 @@ function DetailsScreen() {
     </View>
   );
 }
+// codeblock-focus-end
 
 const RootStack = createNativeStackNavigator({
   screens: {
@@ -117,7 +119,34 @@ You can customize the transition by passing a custom `SharedTransition` configur
 
 Custom transition configuration is not fully finalized and might change in a future release.
 
-### Old Architecture (Reanimated 3)
+<Tabs groupId="architecture" queryString="architecture">
+<TabItem value="new" label="New Architecture (Reanimated 4)">
+
+On the New Architecture, the default transition animates `width`, `height`, `originX`, `originY`, `transform`, `backgroundColor`, and `opacity` using `withTiming` with a 500 ms duration.
+
+Currently customization is more limited due to ongoing development. You can't define fully custom animation functions. Instead, use the `SharedTransition` builder class to configure duration and spring-based animations:
+
+```jsx
+import { SharedTransition } from 'react-native-reanimated';
+
+// Customize duration and use spring animation
+// highlight-next-line
+const customTransition = SharedTransition.duration(550).springify();
+
+function HomeScreen() {
+  return (
+    <Animated.Image
+      style={{ width: 300, height: 300 }}
+      sharedTransitionTag="tag"
+      // highlight-next-line
+      sharedTransitionStyle={customTransition}
+    />
+  );
+}
+```
+
+</TabItem>
+<TabItem value="old" label="Old Architecture (Reanimated 3)" default>
 
 By default, the transition animates `width`, `height`, `originX`, `originY`, and `transform` using `withTiming` with a 500 ms duration. You can customize the transition using `SharedTransition.custom()`:
 
@@ -149,30 +178,8 @@ function HomeScreen() {
 }
 ```
 
-### New Architecture (Reanimated 4)
-
-On the New Architecture, the default transition animates `width`, `height`, `originX`, `originY`, `transform`, `backgroundColor`, and `opacity` using `withTiming` with a 500 ms duration.
-
-Currently customization is more limited due to ongoing development. You can't define fully custom animation functions. Instead, use the `SharedTransition` builder class to configure duration and spring-based animations:
-
-```jsx
-import { SharedTransition } from 'react-native-reanimated';
-
-// Customize duration and use spring animation
-// highlight-next-line
-const customTransition = SharedTransition.duration(550).springify();
-
-function HomeScreen() {
-  return (
-    <Animated.Image
-      style={{ width: 300, height: 300 }}
-      sharedTransitionTag="tag"
-      // highlight-next-line
-      sharedTransitionStyle={customTransition}
-    />
-  );
-}
-```
+</TabItem>
+</Tabs>
 
 ## Reference
 

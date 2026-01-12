@@ -54,6 +54,7 @@ import { Button } from '@react-navigation/elements';
 
 import Animated from 'react-native-reanimated';
 
+// codeblock-focus-start
 function HomeScreen() {
   const navigation = useNavigation();
 
@@ -87,6 +88,7 @@ function DetailsScreen() {
     </View>
   );
 }
+// codeblock-focus-end
 
 const RootStack = createNativeStackNavigator({
   screens: {
