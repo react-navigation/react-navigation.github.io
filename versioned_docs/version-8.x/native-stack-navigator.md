@@ -1357,7 +1357,7 @@ React.useEffect(() => {
 
 #### `gestureCancel`
 
-This event is fired when a swipe back gesture is canceled on iOS.
+This event is fired when the swipe back gesture is canceled. Only supported on iOS.
 
 Example:
 
@@ -1371,31 +1371,26 @@ React.useEffect(() => {
 }, [navigation]);
 ```
 
-Only supported on iOS.
-
 #### `sheetDetentChange`
 
-This event is fired when a screen with `presentation: 'formSheet'` changes its detent.
+This event is fired when the screen has [`presentation`](#presentation) set to `formSheet` and the sheet detent changes.
 
 Event data:
 
-- `e.data.index` - The current detent index in the `sheetAllowedDetents` array.
-- `e.data.stable` - On Android, `false` means the user is dragging the sheet or it is settling. On iOS, this is always `true`.
+- `e.data.index` - Index of the current detent in the `sheetAllowedDetents` array.
+- `e.data.stable` - Boolean indicating whether the sheet is being dragged or settling. Only supported on Android. On iOS, this is always `true`.
 
 Example:
 
 ```js
 React.useEffect(() => {
   const unsubscribe = navigation.addListener('sheetDetentChange', (e) => {
-    console.log('Detent index:', e.data.index);
-    console.log('Is stable:', e.data.stable);
+    // Do something
   });
 
   return unsubscribe;
 }, [navigation]);
 ```
-
-Only supported on Android and iOS.
 
 ### Helpers
 

@@ -1352,6 +1352,43 @@ React.useEffect(() => {
 }, [navigation]);
 ```
 
+#### `gestureCancel`
+
+This event is fired when the swipe back gesture is canceled. Only supported on iOS.
+
+Example:
+
+```js
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('gestureCancel', (e) => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
+```
+
+#### `sheetDetentChange`
+
+This event is fired when the screen has [`presentation`](#presentation) set to `formSheet` and the sheet detent changes.
+
+Event data:
+
+- `e.data.index` - Index of the current detent in the `sheetAllowedDetents` array.
+- `e.data.stable` - Boolean indicating whether the sheet is being dragged or settling. Only supported on Android. On iOS, this is always `true`.
+
+Example:
+
+```js
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('sheetDetentChange', (e) => {
+    // Do something
+  });
+
+  return unsubscribe;
+}, [navigation]);
+```
+
 ### Helpers
 
 The native stack navigator adds the following methods to the navigation object:
