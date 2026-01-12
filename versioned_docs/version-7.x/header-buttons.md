@@ -7,11 +7,11 @@ sidebar_label: Header buttons
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Now that we know how to customize the look of our headers, let's make them sentient! Actually perhaps that's ambitious, let's just make them able to respond to our touches in very well-defined ways.
+Now that we know how to customize the look of our headers, let's make them interactive!
 
 ## Adding a button to the header
 
-The most common way to interact with a header is by tapping on a button either to the left or the right of the title. Let's add a button to the right side of the header (one of the most difficult places to touch on your entire screen, depending on finger and phone size, but also a normal place to put buttons).
+The most common way to interact with a header is by tapping a button to the left or right of the title. Let's add a button to the right side of the header:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -109,17 +109,11 @@ export default function App() {
 
 ![Header button](/assets/headers/header-button.png)
 
-When we define our button this way, the `this` variable in `options` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
-
-:::tip
-
-Note that a community-developed library for rendering buttons in the header with the correct styling is available: [react-navigation-header-buttons](https://github.com/vonovak/react-navigation-header-buttons).
-
-:::
+When we define our button this way, you can't access or update the screen component's state in it. This is pretty important because it's common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
 
 ## Header interaction with its screen component
 
-In some cases, components in the header need to interact with the screen component. For this use case, we need to use `navigation.setOptions` to update our options. By using `navigation.setOptions` inside the screen component, we get access to screen's props, state, context etc.
+To make header buttons interact with screen state, we can use [`navigation.setOptions`](navigation-object.md#setoptions) inside the screen component:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -240,20 +234,21 @@ export default function App() {
   <source src="/assets/headers/header-update-screen.mp4" />
 </video>
 
-Here we update the `headerRight` with a button with `onPress` handler that has access to the component's state and can update it.
+Here we update `headerRight` with a button that has `onPress` handler that can access and update the component's state, since it's defined inside the component.
 
 ## Customizing the back button
 
-`createNativeStackNavigator` provides the platform-specific defaults for the back button. On iOS this includes a label next to the button, which shows the title of the previous screen when the title fits in the available space, otherwise it says "Back".
+The back button is rendered automatically in a stack navigator whenever there another screen to go back to.
 
-You can change the label behavior with `headerBackTitle` and style it with `headerBackTitleStyle` ([read more](native-stack-navigator.md#headerbacktitle)).
+The native stack navigator provides platform-specific defaults for this back button. On older iOS versions, this may includes a label next to the button showing the previous screen's title when space allows.
 
-To customize the back button icon, you can use [`headerBackIcon`](native-stack-navigator.md#headerbackicon).
+You can customize the back button using various options such as:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+- `headerBackTitle`: Change the back button label (iOS)
+- `headerBackTitleStyle`: Style the back button label
+- `headerBackIcon`: Custom back button icon
 
-```js
+```js static2dynamic
 const MyStack = createNativeStackNavigator({
   screens: {
     Home: {
@@ -267,36 +262,12 @@ const MyStack = createNativeStackNavigator({
 });
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-<Stack.Navigator>
-  <Stack.Screen name="Home" component={HomeScreen} />
-  <Stack.Screen
-    name="Details"
-    component={DetailsScreen}
-    options={{
-      headerBackTitle: 'Custom Back',
-      headerBackTitleStyle: { fontSize: 30 },
-    }}
-  />
-</Stack.Navigator>
-```
-
-</TabItem>
-</Tabs>
-
 ![Header custom back](/assets/headers/header-back-custom.png)
 
-## Overriding the back button
-
-The back button will be rendered automatically in a stack navigator whenever it is possible for the user to go back from their current screen &mdash; in other words, the back button will be rendered whenever there is more than one screen in the stack.
-
-Generally, this is what you want. But it's possible that in some circumstances that you want to customize the back button more than you can through the options mentioned above, in which case you can set the `headerLeft` option to a React Element that will be rendered, just as we did with `headerRight`. Alternatively, the `headerLeft` option also accepts a React Component, which can be used, for example, for overriding the onPress behavior of the back button. Read more about this in the [api reference](native-stack-navigator.md#headerleft).
+If you want to customize it beyond what the above options allow, you can use `headerLeft` to render your own component instead. The `headerLeft` option accepts a React Component, which you can use to override the onPress behavior or replace the button entirely. See the [API reference](native-stack-navigator.md#headerleft) for details.
 
 ## Summary
 
-- You can set buttons in the header through the [`headerLeft`](elements.md#headerleft) and [`headerRight`](elements.md#headerright) properties in [`options`](screen-options.md).
-- The back button is fully customizable with `headerLeft`, but if you only want to change the title or image, there are other `options` for that &mdash; [`headerBackTitle`](native-stack-navigator.md#headerbacktitle), [`headerBackTitleStyle`](native-stack-navigator.md#headerbacktitlestyle), and [`headerBackIcon`](native-stack-navigator.md#headerbackicon).
-- You can use a callback for the options prop to access [`navigation`](navigation-object.md) and [`route`](route-object.md) objects.
+- Buttons can be added to the header using [`headerLeft`](elements.md#headerleft) and [`headerRight`](elements.md#headerright) in [`options`](screen-options.md)
+- The back button can be customized with [`headerBackTitle`](native-stack-navigator.md#headerbacktitle), [`headerBackTitleStyle`](native-stack-navigator.md#headerbacktitlestyle), [`headerBackIcon`](native-stack-navigator.md#headerbackicon), or replaced entirely with `headerLeft`
+- To make header buttons interact with screen state, use [`navigation.setOptions`](navigation-object.md#setoptions) inside the screen component

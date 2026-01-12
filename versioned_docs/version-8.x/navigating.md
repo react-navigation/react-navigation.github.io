@@ -7,7 +7,7 @@ sidebar_label: Moving between screens
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-In the previous section, we defined a stack navigator with two routes (`Home` and `Details`), but we didn't learn how to let a user navigate from `Home` to `Details` (although we did learn how to change the _initial_ route in our code, but forcing our users to clone our repository and change the route in our code in order to see another screen is arguably among the worst user experiences one could imagine).
+In the previous section, we defined a stack navigator with two routes (`Home` and `Details`), but we didn't learn how to let a user navigate from `Home` to `Details`.
 
 If this was a web browser, we'd be able to write something like this:
 
@@ -15,7 +15,7 @@ If this was a web browser, we'd be able to write something like this:
 <a href="details.html">Go to Details</a>
 ```
 
-It's also possible to programmatically change the URL using JavaScript:
+Or programmatically in JavaScript:
 
 ```js
 window.location.href = 'details.html';
@@ -25,7 +25,7 @@ So how do we do this in React Navigation? There are two main ways to navigate be
 
 ## Using `Link` or `Button` components
 
-The simplest way to navigate is by using the [`Link`](link.md) component from `@react-navigation/native` or the [`Button`](elements.md#button) component from `@react-navigation/elements`:
+The simplest way to navigate is using the [`Link`](link.md) component from `@react-navigation/native` or the [`Button`](elements.md#button) component from `@react-navigation/elements`:
 
 ```js name="Navigation with Link and Button" snack static2dynamic
 import * as React from 'react';
@@ -79,16 +79,11 @@ export default function App() {
 }
 ```
 
-Let's break this down:
-
-- The `Link` and `Button` components accept a `screen` prop that specifies the name of the screen to navigate to when pressed.
-- When the user taps on the `Link` or `Button`, React Navigation automatically navigates to the specified screen.
-
-[When using on the web](web-support.md), they also render as anchor tags (`<a>`) with `href` attribute, which is essential to preserve native browser behaviors like "Right click → Open link in new tab".
+The `Link` and `Button` components accept a `screen` prop specifying where to navigate when pressed. [On the web](web-support.md), they render as anchor tags (`<a>`) with proper `href` attributes.
 
 :::note
 
-The built-in `Link` and `Button` components come with their own styling. But it's likely that you'll want to create your own custom link or button component to match your app's design. See [`useLinkProps`](use-link-props.md) hook on how to create custom link components.
+The built-in `Link` and `Button` components have their own styling. To create custom link or button components matching your app's design, see the [`useLinkProps`](use-link-props.md) hook.
 
 :::
 
@@ -163,20 +158,17 @@ export default function App() {
   <source src="/assets/navigators/stack/simple-details.mp4" />
 </video>
 
-Let's break this down:
-
-- The [`navigation`](navigation-object.md) object is returned from the [`useNavigation`](use-navigation.md) hook - it takes the name of the current route as an argument (in this case, `Home`).
-- We call the `navigate` function (on the `navigation` object &mdash; naming is hard!) with the name of the route that we'd like to move the user to.
+The [`useNavigation`](use-navigation.md) hook takes the current route name as an argument. We can call `navigate` with the route name we want to go to.
 
 :::note
 
-If you call `navigation.navigate` with a route name that you haven't defined in your navigator, you'll see an error in development builds and nothing will happen in production builds. You can only navigate to routes that have been defined in your navigator.
+Calling `navigation.navigate` with an incorrect route name shows an error in development and does nothing in production.
 
 :::
 
 ## Navigate to a screen multiple times
 
-So we now have a stack with two routes: the `Home` route and the `Details` route. What would happen if we navigated to the `Details` route again from the `Details` screen?
+What happens if we navigate to `Details` again while already on the `Details` screen?
 
 ```js name="Navigate to a screen multiple times" snack static2dynamic
 import * as React from 'react';
@@ -240,9 +232,9 @@ export default function App() {
 }
 ```
 
-If you run this code, you'll notice that when you tap "Go to Details... again", it doesn't do anything! This is because we are already on the Details route. The `navigate` function roughly means "go to this screen", and if you are already on that screen then it makes sense that it would do nothing.
+Tapping "Go to Details... again" does nothing because we're already on that route. The `navigate` function means "go to this screen" - if you're already there, it does nothing.
 
-Let's suppose that we actually _want_ to add another details screen. This is pretty common in cases where you pass in some unique data to each route (more on that later when we talk about `params`!). To do this, we can change `navigate` to `push`. This allows us to express the intent to add another route regardless of the existing navigation history.
+Let's say we actually _want_ to add another Details screen. This is common when you pass unique data to each route (more on that when we talk about `params`!). To do this, use `push` instead of `navigate`. This adds another route regardless of the existing navigation history:
 
 ```js name="Navigate to a screen multiple times" snack static2dynamic
 import * as React from 'react';
@@ -308,13 +300,13 @@ export default function App() {
   <source src="/assets/navigators/stack/stack-push.mp4" />
 </video>
 
-Each time you call `push` we add a new route to the navigation stack. When you call `navigate` it only pushes a new route if you're not already on that route.
+Each `push` call adds a new route to the stack, while `navigate` only pushes if you're not already on that route.
 
 ## Going back
 
-The header provided by the native stack navigator will automatically include a back button when it is possible to go back from the active screen (if there is only one screen in the navigation stack, there is nothing that you can go back to, and so there is no back button).
+The native stack navigator's header automatically shows a back button when there's a screen to go back to.
 
-Sometimes you'll want to be able to programmatically trigger this behavior, and for that, you can use `navigation.goBack()`.
+You can use `navigation.goBack()` to trigger going back programmatically from your own buttons:
 
 ```js name="Going back" snack static2dynamic
 import * as React from 'react';
@@ -385,11 +377,11 @@ export default function App() {
 
 :::note
 
-On Android, React Navigation hooks into the hardware back button and automatically calls `goBack()` when the user presses it, so it behaves as expected.
+On Android, React Navigation calls `goBack()` automatically on hardware back button press or back gesture.
 
 :::
 
-Sometimes you need to go back _multiple_ screens at once. For example, if you're several screens deep in a stack and want to go back to the first screen. You have two options:
+Sometimes you need to go back multiple screens at once. For example, if you're several screens deep in a stack and want to go back to the first screen. You have two options:
 
 - `navigation.popTo('Home')` - Go back to a specific screen (in this case, Home)
 - `navigation.popToTop()` - Go back to the first screen in the stack

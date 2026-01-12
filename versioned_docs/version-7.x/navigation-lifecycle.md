@@ -7,19 +7,19 @@ sidebar_label: Navigation lifecycle
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-In a previous section, we worked with a stack navigator that has two screens (`Home` and `Profile`) and learned how to use `navigation.navigate('RouteName')` to navigate between the screens.
+If you're coming from a web background, you might expect that when navigating from route A to route B, A unmounts and remounts when you return. React Navigation works differently - this is driven by the more complex needs of mobile navigation.
 
-An important question in this context is: what happens with `Home` when we navigate away from it, or when we come back to it? How does a screen find out that a user is leaving it or coming back to it?
+Unlike web browsers, React Navigation doesn't unmount screens when navigating away. When you navigate from `Home` to `Profile`:
 
-If you are coming to react-navigation from a web background, you may assume that when the user navigates from route `A` to route `B`, `A` will unmount (its `componentWillUnmount` is called) and `A` will mount again when the user comes back to it. While these React lifecycle methods are still valid and are used in React Navigation, their usage differs from the web. This is driven by the more complex needs of mobile navigation.
+- `Profile` mounts
+- `Home` stays mounted
 
-## Example scenario
+When going back from `Profile` to `Home`:
 
-Consider a stack navigator with 2 screens: `Home` and `Profile`. When we first render the navigator, the `Home` screen is mounted, i.e. its `useEffect` or `componentDidMount` is called. When we navigate to `Profile`, now `Profile` is mounted and its `useEffect` or `componentDidMount` is called. But nothing happens to `Home` - it remains mounted in the stack. The cleanup function returned by `useEffect` or `componentWillUnmount` is not called.
+- `Profile` unmounts
+- `Home` is not remounted, existing instance is shown
 
-When we go back from `Profile` to `Home`, `Profile` is unmounted and its `useEffect` cleanup or `componentWillUnmount` is called. But `Home` is not mounted again - it remained mounted the whole time - and its `useEffect` or `componentDidMount` is not called.
-
-Similar results can be observed (in combination) with other navigators as well. Consider a tab navigator with two tabs, where each tab is a stack navigator:
+Similar behavior can be observed (in combination) with other navigators as well. Consider a tab navigator with two tabs, where each tab is a stack navigator:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -284,11 +284,9 @@ We start on the `HomeScreen` and navigate to `DetailsScreen`. Then we use the ta
 
 ## React Navigation lifecycle events
 
-Now that we understand how React lifecycle methods work in React Navigation, let's answer the question we asked at the beginning: "How do we find out that a user is leaving (blur) it or coming back to it (focus)?"
+Now that we understand how React lifecycle methods work in React Navigation, let's answer an important question: "How do we find out that a user is leaving (blur) it or coming back to it (focus)?"
 
-React Navigation emits events to screen components that subscribe to them. We can listen to `focus` and `blur` events to know when a screen comes into focus or goes out of focus respectively.
-
-Example:
+To detect when a screen gains or loses focus, we can listen to `focus` and `blur` events:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -472,11 +470,9 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-See [Navigation events](navigation-events.md) for more details on the available events and the API usage.
+See [Navigation events](navigation-events.md) for more details.
 
-For performing side effects, we can use the [`useFocusEffect`](use-focus-effect.md) hook instead of subscribing to events. It's like React's `useEffect` hook, but it ties into the navigation lifecycle.
-
-Example:
+For performing side effects, we can use the [`useFocusEffect`](use-focus-effect.md) - it's like `useEffect` but ties to the navigation lifecycle -- it runs the effect when the screen comes into focus and cleans it up when the screen goes out of focus:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -620,13 +616,13 @@ export default function App() {
   <source src="/assets/navigators/lifecycle-focus.mp4" />
 </video>
 
-If you want to render different things based on if the screen is focused or not, you can use the [`useIsFocused`](use-is-focused.md) hook which returns a boolean indicating whether the screen is focused.
+To render different things based on whether the screen is focused, we can use the [`useIsFocused`](use-is-focused.md) hook which returns a boolean indicating whether the screen is focused.
 
-If you want to know if the screen is focused or not inside of an event listener, you can use the [`navigation.isFocused()`](navigation-object.md#isfocused) method. Note that using this method doesn't trigger a re-render like the `useIsFocused` hook does, so it is not suitable for rendering different things based on focus state.
+To know the focus state inside of an event listener, we can use the [`navigation.isFocused()`](navigation-object.md#isfocused) method. Note that using this method doesn't trigger a re-render like the `useIsFocused` hook does, so it is not suitable for rendering different things based on focus state.
 
 ## Summary
 
-- React Navigation does not unmount screens when navigating away from them
-- The [`useFocusEffect`](use-focus-effect.md) hook is analogous to React's [`useEffect`](https://react.dev/reference/react/useEffect) but is tied to the navigation lifecycle instead of the component lifecycle.
-- The [`useIsFocused`](use-is-focused.md) hook and [`navigation.isFocused()`](navigation-object.md#isfocused) method can be used to determine if a screen is currently focused.
-- React Navigation emits [`focus`](navigation-events.md#focus) and [`blur`](navigation-events.md#blur) events that can be listened to when a screen comes into focus or goes out of focus.
+- Screens stay mounted when navigating away from them
+- The [`useFocusEffect`](use-focus-effect.md) hook is like [`useEffect`](https://react.dev/reference/react/useEffect) but tied to the navigation lifecycle instead of the component lifecycle
+- The [`useIsFocused`](use-is-focused.md) hook and [`navigation.isFocused()`](navigation-object.md#isfocused) method can be used to determine if a screen is currently focused
+- The [`focus`](navigation-events.md#focus) and [`blur`](navigation-events.md#blur) events can be used to know when a screen gains or loses focus

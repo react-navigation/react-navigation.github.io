@@ -7,14 +7,12 @@ sidebar_label: Passing parameters to routes
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Remember when I said "more on that later when we talk about `params`!"? Well, the time has come.
-
 Now that we know how to create a stack navigator with some routes and [navigate between those routes](navigating.md), let's look at how we can pass data to routes when we navigate to them.
 
 There are two pieces to this:
 
-1. Pass params to a route by putting them in an object as a second parameter to the `navigation.navigate` function: `navigation.navigate('RouteName', { /* params go here */ })`
-2. Read the params in your screen component: `route.params`.
+1. Pass params as the second argument to navigation methods: `navigation.navigate('RouteName', { /* params go here */ })`
+2. Read params from `route.params` inside the screen component.
 
 :::note
 
@@ -108,7 +106,7 @@ export default function App() {
 
 ## Initial params
 
-You can also pass some initial params to a screen. If you didn't specify any params when navigating to this screen, the initial params will be used. They are also shallow merged with any params that you pass. Initial params can be specified in `initialParams`:
+Initial params can be specified in `initialParams`. These are used when navigating to the screen without params, and are shallow merged with any params that you pass:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -140,9 +138,7 @@ You can also pass some initial params to a screen. If you didn't specify any par
 
 ## Updating params
 
-Screens can also update their params, like they can update their state. The `navigation.setParams` method lets you update the params of a screen. Refer to the [API reference for `setParams`](navigation-object.md#setparams) for more details.
-
-Basic usage:
+Screens can update their params using [`navigation.setParams`](navigation-object.md#setparams):
 
 ```js name="Updating params" snack static2dynamic
 import * as React from 'react';
@@ -194,19 +190,19 @@ export default function App() {
 }
 ```
 
-The `setParams` method merges the new params with the existing ones. To replace the existing params, you can use [`replaceParams`](navigation-object.md#replaceparams) instead.
+`setParams` merges new params with existing ones. To replace params entirely, use [`replaceParams`](navigation-object.md#replaceparams).
 
 :::note
 
-Avoid using `setParams` or `replaceParams` to update screen options such as `title` etc. If you need to update options, use [`setOptions`](navigation-object.md#setoptions) instead.
+Avoid using `setParams` or `replaceParams` to update screen options like `title`. Use [`setOptions`](navigation-object.md#setoptions) instead.
 
 :::
 
 ## Passing params to a previous screen
 
-Params aren't only useful for passing some data to a new screen, but they can also be useful to pass data to a previous screen as well. For example, let's say you have a screen with a "Create post" button, and the button opens a new screen to create a post. After creating the post, you want to pass the data for the post back to the previous screen.
+Params can be passed to a previous screen as well, for example, when you have a "Create post" button that opens a new screen and you want to pass the post data back.
 
-To achieve this, you can use the `popTo` method to go back to the previous screen as well as pass params to it:
+Use `popTo` to go back to the previous screen and pass params to it:
 
 ```js name="Passing params back" snack static2dynamic
 import * as React from 'react';
@@ -288,11 +284,11 @@ export default function App() {
   <source src="/assets/navigators/params-to-parent.mp4" />
 </video>
 
-Here, after you press "Done", the home screen's `route.params` will be updated to reflect the post text that you passed in `navigate`.
+After pressing "Done", the home screen's `route.params` will be updated with the post text.
 
 ## Passing params to a nested screen
 
-If you have nested navigators, you need to pass params a bit differently. For example, say you have a navigator inside the `More` screen and want to pass params to the `Settings` screen inside that navigator. Then you can pass params as the following:
+If you have nested navigators, pass params using the same pattern as [navigating to a nested screen](nesting-navigators.md#navigating-to-a-screen-in-a-nested-navigator):
 
 ```js name="Passing params to nested screen" snack static2dynamic
 import * as React from 'react';
@@ -376,27 +372,25 @@ See [Nesting navigators](nesting-navigators.md) for more details on nesting.
 
 ## Reserved param names
 
-Some param names are reserved by React Navigation as part of the API for nested navigators. The list of the reserved param names are as follows:
+Some param names are reserved by React Navigation for nested navigator APIs:
 
 - `screen`
 - `params`
 - `initial`
 - `state`
 
-You should avoid using these param names in your code unless navigating to a screen containing a nested navigator. Otherwise it will result in unexpected behavior, such as the screen not being able to access the params you passed. If you need to pass data to a nested screen, use a different names for the param.
+Avoid using these param names in your code. Trying to read these params in parent screens is not recommended and will cause unexpected behavior.
 
 ## What should be in params
 
-Params serve two main purposes:
+Params should contain the minimal information required to show a screen:
 
-- Information required to identify and display data on a screen (e.g. id of an object to be displayed on the screen)
-- State specific to a screen (e.g. sort order, filters, page numbers etc. that can also be changed on the screen)
+- Data to identify what to display (e.g. user id, item id)
+- Screen-specific state (e.g. sort order, filters, page numbers)
 
-Params should contain the minimal information required to show a screen, nothing more. The actual data (e.g. user objects) should be in a global store or global cache.
+Think of params like URL query parameters - they should contain identifiers and state, not actual data objects. The actual data should come from a global store or cache.
 
-You can think of the route object as a URL. The same principles apply to params. Think of visiting a shopping website; when you see product listings, the URL usually contains category name, type of sort, any filters etc., not the actual list of products displayed on the screen.
-
-For example, say if you have a `Profile` screen. When navigating to it, you might be tempted to pass the user object in the params:
+For example, say you have a `Profile` screen. You might be tempted to pass the user object in params:
 
 ```js
 // Don't do this
@@ -410,39 +404,32 @@ navigation.navigate('Profile', {
 });
 ```
 
-This looks convenient and lets you access the user objects with `route.params.user` without any extra work.
+This is an anti-pattern because:
 
-However, this is an anti-pattern. There are many reasons why this is a bad idea:
+- Data is duplicated, leading to stale data bugs
+- Each screen navigating here needs to know how to fetch the user
+- URLs/deep links would contain the full object, causing issues
 
-- The same data is duplicated in multiple places. This can lead to bugs such as the profile screen showing outdated data even if the user object has changed after navigation.
-- Each screen that navigates to the `Profile` screen now needs to know how to fetch the user object - which increases the complexity of the code.
-- URLs to the screen (browser URL on the web, or deep links on native) will contain the user object. This is problematic:
-  1. Since the user object is in the URL, it's possible to pass a random user object representing a user that doesn't exist or has incorrect data in the profile.
-  2. If the user object isn't passed or improperly formatted, this could result in crashes as the screen won't know how to handle it.
-  3. The URL can become very long and unreadable.
-
-A better way is to pass only the ID of the user in params:
+Instead, pass only the ID:
 
 ```js
 navigation.navigate('Profile', { userId: 'jane' });
 ```
 
-Now, you can use the passed `userId` to grab the user from your global cache or fetch it from the API. Using a library such as [React Query](https://tanstack.com/query/) can simplify this process since it makes it easy to fetch and cache your data. This approach helps to avoid the problems mentioned above.
+Then fetch the user data using the ID from a global cache or API. Libraries like [React Query](https://tanstack.com/query/) can help with fetching and caching.
 
-Some examples of what should be in params are:
+Good examples of params:
 
-- IDs such as user id, item id etc., e.g. `navigation.navigate('Profile', { userId: 'Jane' })`
-- State for sorting, filtering data etc. when you have a list of items, e.g. `navigation.navigate('Feeds', { sortBy: 'latest' })`
-- Timestamps, page numbers or cursors for pagination, e.g. `navigation.navigate('Chat', { beforeTime: 1603897152675 })`
-- Data to fill inputs on a screen to compose something, e.g. `navigation.navigate('ComposeTweet', { title: 'Hello world!' })`
+- IDs: `navigation.navigate('Profile', { userId: 'jane' })`
+- Sorting/filtering: `navigation.navigate('Feeds', { sortBy: 'latest' })`
+- Pagination: `navigation.navigate('Chat', { beforeTime: 1603897152675 })`
+- Input data: `navigation.navigate('ComposeTweet', { title: 'Hello world!' })`
 
 ## Summary
 
-- [`navigate`](navigation-actions.md#navigate) and [`push`](stack-actions.md#push) accept an optional second argument to let you pass parameters to the route you are navigating to. For example: `navigation.navigate('RouteName', { paramName: 'value' })`.
-- You can read the params through [`route.params`](route-object.md) inside a screen
-- You can update the screen's params with [`navigation.setParams`](navigation-object.md#setparams) or [`navigation.replaceParams`](navigation-object.md#replaceparams)
-- Initial params can be passed via the [`initialParams`](screen.md#initial-params) prop on `Screen` or in the navigator config
-- State such as sort order, filters etc. should be kept in params so that the state is reflected in the URL and can be shared/bookmarked.
-- Params should contain the least amount of data required to identify a screen; for most cases, this means passing the ID of an object instead of passing a full object.
-- Don't keep application specific data or cached data in params; instead, use a global store or cache.
-- Some [param names are reserved](#reserved-param-names) by React Navigation and should be avoided
+- Params can be passed to screens as the second argument to navigation methods like [`navigate`](navigation-actions.md#navigate) and [`push`](stack-actions.md#push)
+- Params can be read from the `params` property of the [`route`](route-object.md) object
+- Params can be updated with [`navigation.setParams`](navigation-object.md#setparams) or [`navigation.replaceParams`](navigation-object.md#replaceparams)
+- Initial params can be passed via the [`initialParams`](screen.md#initial-params) prop
+- Params should contain the minimal data needed to identify a screen (e.g. IDs instead of full objects)
+- Some [param names are reserved](#reserved-param-names) by React Navigation
