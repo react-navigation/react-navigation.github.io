@@ -107,6 +107,18 @@ String indicating whether the keyboard gets dismissed in response to a drag gest
 - `'on-drag'`: the keyboard is dismissed when a drag begins.
 - `'none'`: drags do not dismiss the keyboard.
 
+#### `overScrollMode`
+
+Used to override default value of pager's overScroll mode.
+
+Possible values:
+
+- `'auto'` (default): Allow a user to over-scroll this view only if the content is large enough to meaningfully scroll.
+- `'always'`: Always allow a user to over-scroll this view.
+- `'never'`: Never allow a user to over-scroll this view.
+
+Only supported on Android.
+
 #### `initialLayout`
 
 Object containing the initial height and width of the screens. Passing this will improve the initial rendering performance. For most apps, this is a good default:
@@ -124,14 +136,6 @@ Style to apply to the view wrapping each screen. You can pass this to override s
 #### `style`
 
 Style to apply to the tab view container.
-
-#### `overScrollMode`
-
-Used to override default value of overScroll mode in Android.
-
-- `'auto'`: Allow a user to over-scroll this view only if the content is large enough to meaningfully scroll.
-- `'always'`: Always allow a user to over-scroll this view.
-- `'never'`:  Never allow a user to over-scroll this view.
 
 #### `tabBar`
 

@@ -304,6 +304,18 @@ String indicating whether the keyboard gets dismissed in response to a drag gest
 - `'on-drag'`: the keyboard is dismissed when a drag begins.
 - `'none'`: drags do not dismiss the keyboard.
 
+##### `overScrollMode`
+
+Used to override default value of pager's overScroll mode.
+
+Possible values:
+
+- `'auto'` (default): Allow a user to over-scroll this view only if the content is large enough to meaningfully scroll.
+- `'always'`: Always allow a user to over-scroll this view.
+- `'never'`: Never allow a user to over-scroll this view.
+
+Only supported on Android.
+
 ##### `swipeEnabled`
 
 Boolean indicating whether to enable swipe gestures. Swipe gestures are enabled by default. Passing `false` will disable swipe gestures, but the user can still switch tabs by pressing the tab bar.
@@ -396,10 +408,6 @@ Object containing the initial height and width of the screens. Passing this will
   ...
 />
 ```
-
-##### `overScrollMode`
-
-Used to override default value of pager's overScroll mode. Can be `auto`, `always` or `never` (Android only).
 
 ##### `pagerStyle`
 
