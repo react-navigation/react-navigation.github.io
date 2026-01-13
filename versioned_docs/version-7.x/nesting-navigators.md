@@ -161,7 +161,7 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-In the above example, `HomeTabs` contains a tab navigator. It is also used for the `Home` screen in your stack navigator in `RootStack`. So here, a tab navigator is nested inside a stack navigator:
+In this example, a tab navigator (`HomeTabs`) is nested inside a stack navigator (`RootStack`) under the `Home` screen. The structure looks like this:
 
 - `RootStack` (Stack navigator)
   - `HomeTabs` (Tab navigator)
@@ -169,7 +169,7 @@ In the above example, `HomeTabs` contains a tab navigator. It is also used for t
     - `Messages` (screen)
   - `Profile` (screen)
 
-Nesting navigators work very much like nesting regular components. To achieve the behavior you want, it's often necessary to nest multiple navigators.
+Nesting navigators work like nesting regular components. To achieve the behavior you want, it's often necessary to nest multiple navigators.
 
 ## How nesting navigators affects the behaviour
 
@@ -177,31 +177,25 @@ When nesting navigators, there are some things to keep in mind:
 
 ### Each navigator keeps its own navigation history
 
-For example, lets say you have a stack navigator (lets call it `StackA`) nested within another navigator (lets call it `NavigatorB`). When you press the back button in a screen inside `StackA`, it will go to the previous screen of the closest ancestor navigator of the screen - i.e. `StackA`.
-
-If the current screen is the first screen in `StackA`, then pressing back will go to the previous screen in `NavigatorB`.
+For example, when you press the back button in a screen inside a stack navigator nested within another navigator, it will go to the previous screen of the closest ancestor navigator of the screen. If it's the first screen in the nested stack, pressing back goes to the previous screen in the parent navigator.
 
 ### Each navigator has its own options
 
 For example, specifying a `title` option in a screen nested in a child navigator won't affect the title shown in a parent navigator.
 
-If you want to achieve this behavior, see the guide for [screen options with nested navigators](screen-options-resolution.md#setting-parent-screen-options-based-on-child-navigators-state). this could be useful if you are rendering a tab navigator inside a stack navigator and want to show the title of the active screen inside the tab navigator in the header of the stack navigator.
+If you want to set parent navigator options based on the active screen in a child navigator, see [screen options with nested navigators](screen-options-resolution.md#setting-parent-screen-options-based-on-child-navigators-state).
 
 ### Each screen in a navigator has its own params
 
-For example, any `params` passed to a screen in a nested navigator are in the `route` object of that screen and aren't accessible from a screen in a parent or child navigator.
-
-If you need to access params of the parent screen from a child screen, you can use [React Context](https://react.dev/reference/react/useContext) to expose params to children.
+Params passed to a screen in a nested navigator are in that screen's `route` object and aren't accessible from parent or child navigators. Use [React Context](https://react.dev/reference/react/useContext) to share data with child screens if needed.
 
 ### Navigation actions are handled by current navigator and bubble up if couldn't be handled
 
-For example, if you're calling `navigation.goBack()` in a nested screen, it'll only go back in the parent navigator if you're already on the first screen of the navigator. Other actions such as `navigate` work similarly, i.e. navigation will happen in the nested navigator and if the nested navigator couldn't handle it, then the parent navigator will try to handle it. In the above example, when calling `navigate('Messages')`, inside `Feed` screen, the nested tab navigator will handle it, but if you call `navigate('Settings')`, the parent stack navigator will handle it.
+Navigation actions first go to the current navigator. If it can't handle them, they bubble up to the parent. For example, calling `goBack()` in a nested screen goes back in the nested navigator first, then the parent if already on the first screen.
 
 ### Navigator specific methods are available in the navigators nested inside
 
-For example, if you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer`, `toggleDrawer` methods etc. will also be available on the `navigation` object in the screens inside the stack navigator. But say you have a stack navigator as the parent of the drawer, then the screens inside the stack navigator won't have access to these methods, because they aren't nested inside the drawer.
-
-Similarly, if you have a tab navigator inside stack navigator, the screens in the tab navigator will get the `push` and `replace` methods for stack in their `navigation` object.
+If you have a stack inside a drawer navigator, the drawer's `openDrawer`, `closeDrawer`, `toggleDrawer` methods etc. are available on the `navigation` object in the screens inside the stack navigator. Similarly, if you have a tab navigator inside stack navigator, the screens in the tab navigator will get the `push` and `replace` methods for stack in their `navigation` object.
 
 If you need to dispatch actions to the nested child navigators from a parent, you can use [`navigation.dispatch`](navigation-object.md#dispatch):
 
@@ -211,9 +205,7 @@ navigation.dispatch(DrawerActions.toggleDrawer());
 
 ### Nested navigators don't receive parent's events
 
-For example, if you have a stack navigator nested inside a tab navigator, the screens in the stack navigator won't receive the events emitted by the parent tab navigator such as (`tabPress`) when using `navigation.addListener`.
-
-To receive events from the parent navigator, you can explicitly listen to parent's events with [`navigation.getParent`](navigation-object.md#getparent):
+Screens in a nested navigator don't receive events from the parent navigator (like `tabPress`). To listen to parent's events, use [`navigation.getParent`](navigation-object.md#getparent):
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -392,13 +384,13 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-Here `'MyTabs'` refers to the value you pass in the `id` of the parent tab navigator whose event you want to listen to.
+Here `'MyTabs'` is the `id` of the parent navigator whose events you want to listen to.
 
 ### Parent navigator's UI is rendered on top of child navigator
 
-For example, when you nest a stack navigator inside a drawer navigator, you'll see that the drawer appears above the stack navigator's header. However, if you nest the drawer navigator inside a stack, the drawer will appear below the header of the stack. This is an important point to consider when deciding how to nest your navigators.
+The parent navigator's UI renders on top of the child. For example, a drawer nested inside a stack appears below the stack's header, while a stack nested inside a drawer appears below the drawer.
 
-In your app, you will probably use these patterns depending on the behavior you want:
+Common patterns:
 
 - Tab navigator nested inside the initial screen of stack navigator - New screens cover the tab bar when you push them.
 - Drawer navigator nested inside the initial screen of stack navigator with the initial screen's stack header hidden - The drawer can only be opened from the first screen of the stack.
@@ -577,19 +569,19 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-Here, you might want to navigate to the `More` screen (which contains `MoreTabs`) from your `HomeScreen` component:
+To navigate to the `More` screen (which contains `MoreTabs`) from your `HomeScreen`:
 
 ```js
 navigation.navigate('More');
 ```
 
-It works, and the initial screen inside the `MoreTabs` component is shown, which is `Feed`. But sometimes you may want to control the screen that should be shown upon navigation. To achieve it, you can pass the name of the screen in params:
+This shows the initial screen inside `MoreTabs` (in this case, `Feed`). To navigate to a specific screen inside the nested navigator, pass the screen name in params:
 
 ```js
 navigation.navigate('More', { screen: 'Messages' });
 ```
 
-Now, the `Messages` screen will be rendered instead of `Feed` upon navigation.
+Now `Messages` will be shown instead of `Feed`.
 
 ### Passing params to a screen in a nested navigator
 
@@ -816,11 +808,7 @@ This affects what happens when pressing the back button. When there's an initial
 
 ## Avoiding multiple headers when nesting
 
-When nesting multiple stack, drawer or bottom tab navigators, headers from both child and parent navigators would be shown. However, usually it's more desirable to show the header in the child navigator and hide the header in the screen of the parent navigator.
-
-To achieve this, you can hide the header in the screen containing the navigator using the `headerShown: false` option.
-
-For example:
+When nesting navigators, you may see headers from both parent and child. To show only the child navigator's header, set `headerShown: false` on the parent screen:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -976,9 +964,7 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-In these examples, we have used a bottom tab navigator directly nested inside another stack navigator, but the same principle applies when there are other navigators in the middle, for example: stack navigator inside a tab navigator which is inside another stack navigator, stack navigator inside drawer navigator etc.
-
-If you don't want headers in any of the navigators, you can specify `headerShown: false` in all of the navigators:
+This applies regardless of the nesting structure. If you don't want headers in any of the navigators, specify `headerShown: false` in all of them:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -1049,13 +1035,13 @@ function RootStack() {
 
 ## Best practices when nesting
 
-We recommend reducing navigator nesting to a minimum. Try to achieve the behavior you want with as little nesting as possible. Nesting has many downsides:
+Minimize nesting as much as possible. Nesting has many downsides:
 
-- It results in deeply nested view hierarchy which can cause memory and performance issues in lower end devices
-- Nesting the same type of navigator (e.g. tabs inside tabs, drawer inside drawer etc.) might lead to a confusing UX
-- With excessive nesting, code becomes difficult to follow when navigating to nested screens, configuring deep link etc.
+- Deeply nested view hierarchy can cause memory and performance issues on lower end devices
+- Nesting the same type of navigator (e.g. tabs inside tabs, drawer inside drawer etc.) leads to a confusing UX
+- With excessive nesting, code becomes difficult to follow when navigating to nested screens, configuring deep links etc.
 
-Think of nesting navigators as a way to achieve the UI you want rather than a way to organize your code. If you want to create separate groups of screens for organization, instead of using separate navigators, you can use the [`Group`](group.md) component for dynamic configuration or [`groups` property](static-configuration.md#groups) for static configuration.
+Think of nesting as a way to achieve the UI you want, not a way to organize your code. To group screens for organization, use the [`Group`](group.md) component for dynamic configuration or [`groups` property](static-configuration.md#groups) for static configuration.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
