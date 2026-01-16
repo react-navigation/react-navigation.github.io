@@ -7,9 +7,9 @@ sidebar_label: Hello React Navigation
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-In a web browser, you link to different pages using an anchor (`<a>`) tag. When the user clicks a link, the URL is pushed to the browser history stack. When the user presses the back button, the browser pops from the history stack, making the previous page active again. React Native doesn't have a built-in global history stack like a web browser -- this is where React Navigation comes in.
+In a web browser, clicking a link pushes a page onto the browser's history stack, and pressing the back button pops the page from the stack, making the previous page active again. React Native doesn't have a built-in history like a web browser - this is where React Navigation comes in.
 
-React Navigation's native stack navigator lets your app transition between screens and manage navigation history. It works similarly to a browser's navigation state - pushing and popping items from the stack as users interact with it. The key difference is that React Navigation provides the gestures and animations you'd expect on Android and iOS.
+The native stack navigator keeps track of visited screens in a history stack. It also provides UI elements such as headers, native gestures, and animations to transition between screens etc. that you'd expect in a mobile app.
 
 ## Installing the native stack navigator library
 
