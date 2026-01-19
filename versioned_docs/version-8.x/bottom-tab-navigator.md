@@ -136,16 +136,6 @@ createBottomTabNavigator({
 </TabItem>
 </Tabs>
 
-When using native tabs, some options behave differently:
-
-- `tabBarShowLabel` is replaced with `tabBarLabelVisibilityMode` which accepts:
-  - `"auto"` (default)
-  - `"selected"`
-  - `"labeled"` - same as `tabBarShowLabel: true`
-  - `"unlabeled"` - same as `tabBarShowLabel: false`
-- `tabBarLabel` only accepts a `string`
-- `tabBarIcon` accepts a function that returns an icon object
-
 #### `backBehavior`
 
 This controls what happens when `goBack` is called in the navigator. This includes pressing the device's back button or back gesture on Android.
@@ -334,7 +324,7 @@ Uses iOS built-in tab bar items with standard iOS styling and localized titles. 
 - `search`
 - `topRated`
 
-Only supported with `native` implementation on iOS.
+Only supported on iOS with `native` implementation.
 
 The [`tabBarIcon`](#tabbaricon) and [`tabBarLabel`](#tabbarlabel) options will override the icon and label from the system item. If you want to keep the system behavior on iOS, but need to provide icon and label for other platforms, use `Platform.OS` or `Platform.select` to conditionally set `undefined` for `tabBarIcon` and `tabBarLabel` on iOS.
 
@@ -520,11 +510,11 @@ Style object for the tab label. Supported properties:
 Example:
 
 ```js
-    tabBarLabelStyle: {
-      fontSize: 16,
-      fontFamily: 'Georgia',
-      fontWeight: 300,
-    },
+tabBarLabelStyle: {
+  fontSize: 16,
+  fontFamily: 'Georgia',
+  fontWeight: 300,
+},
 ```
 
 #### `tabBarIcon`
@@ -648,10 +638,10 @@ Supported on all platforms with `custom` implementation. Only supported with `na
 Example:
 
 ```js
-    tabBarBadgeStyle: {
-      color: 'black',
-      backgroundColor: 'yellow',
-    },
+tabBarBadgeStyle: {
+  color: 'black',
+  backgroundColor: 'yellow',
+},
 ```
 
 #### `tabBarAccessibilityLabel`
