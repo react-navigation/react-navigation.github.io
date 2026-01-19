@@ -103,8 +103,10 @@ export default function Pre({
     );
   }
 
+  const version = activeVersion?.name;
+
   // Handle snack demos
-  if (snack) {
+  if (snack && versions[version] != null) {
     const code = child.props.children;
 
     if (typeof code !== 'string') {
@@ -130,12 +132,6 @@ export default function Pre({
           })
         )
       : {};
-
-    const version = activeVersion?.name;
-
-    if (version == null || versions[version] == null) {
-      throw new Error(`Invalid version: ${version}`);
-    }
 
     Object.assign(
       dependencies,
