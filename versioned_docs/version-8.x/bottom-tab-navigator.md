@@ -146,15 +146,6 @@ When using native tabs, some options behave differently:
 - `tabBarLabel` only accepts a `string`
 - `tabBarIcon` accepts a function that returns an icon object
 
-:::note
-
-- The `native` implementation uses `UITabBarController` on iOS and `BottomNavigationView` on Android.
-- Liquid Glass effect on iOS 26+ requires your app to be built with Xcode 26 or above.
-- On Android, at most 5 tabs are supported with `native` implementation. This is a limitation of the underlying native component.
-- The `native` implementation requires React Native 0.79 or above. If you're using [Expo](https://expo.dev/), it requires SDK 53 or above.
-
-:::
-
 #### `backBehavior`
 
 This controls what happens when `goBack` is called in the navigator. This includes pressing the device's back button or back gesture on Android.
@@ -448,10 +439,16 @@ const HomeTabs = createBottomTabNavigator({
     Home: {
       screen: HomeScreen,
       options: {
-        tabBarIcon: {
-          type: 'sfSymbol',
-          name: 'house',
-        },
+        tabBarIcon: Platform.select({
+          ios: {
+            type: 'sfSymbol',
+            name: 'house',
+          },
+          android: {
+            type: 'materialSymbol',
+            name: 'home',
+          },
+        }),
       },
     },
     Search: {
@@ -532,15 +529,16 @@ Example:
 
 #### `tabBarIcon`
 
-Function that given `{ focused: boolean, color: string, size: number }` returns a React.Node, to display in the tab bar.
+Function that given `{ focused: boolean, color: string, size: number }` returns an icon to display in the tab bar. It can be one of the following:
 
-With `native` implementation, you can pass an icon object directly instead of a function. A React element is only supported with `custom` implementation.
+- An icon object with both `native` and `custom` implementations
+- A React element with `custom` implementation only
 
 It overrides the icon provided by [`tabBarSystemItem`](#tabbarsystemitem) on iOS.
 
-The icon can be of following types with `native` implementation:
+The icon object can be one of the following types:
 
-- Local image - Supported on iOS and Android
+- Local image - Supported on all platforms
 
   ```js
   tabBarIcon: {
@@ -574,6 +572,15 @@ The icon can be of following types with `native` implementation:
   }
   ```
 
+- [Material Symbols](https://fonts.google.com/icons) name - Supported on Android
+
+  ```js
+  tabBarIcon: {
+    type: 'materialSymbol',
+    name: 'favorite',
+  }
+  ```
+
 - [Drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) name - Supported on Android
 
   ```js
@@ -583,7 +590,7 @@ The icon can be of following types with `native` implementation:
   }
   ```
 
-To render different icons for active and inactive states with `native` implementation, you can use a function:
+To render different icons for active and inactive states, you can use a function:
 
 ```js
 tabBarIcon: ({ focused }) => {
@@ -605,8 +612,12 @@ tabBarIcon: Platform.select({
     name: 'heart',
   },
   android: {
-    type: 'drawableResource',
-    name: 'heart_icon',
+    type: 'materialSymbol',
+    name: 'favorite',
+  },
+  default: {
+    type: 'image',
+    source: require('./path/to/icon.png'),
   },
 });
 ```

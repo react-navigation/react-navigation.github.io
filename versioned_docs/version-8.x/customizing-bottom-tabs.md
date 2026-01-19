@@ -57,6 +57,10 @@ const RootTabs = createBottomTabNavigator({
             type: 'sfSymbol',
             name: 'house',
           },
+          android: {
+            type: 'materialSymbol',
+            name: 'home',
+          },
           default: {
             type: 'image',
             source: require('./path/to/home-icon.png'),
@@ -73,6 +77,10 @@ const RootTabs = createBottomTabNavigator({
           ios: {
             type: 'sfSymbol',
             name: 'gear',
+          },
+          android: {
+            type: 'materialSymbol',
+            name: 'settings',
           },
           default: {
             type: 'image',
@@ -98,6 +106,7 @@ Let's dissect this:
 - [`tabBarIcon`](bottom-tab-navigator.md#tabbaricon) is a supported option in bottom tab navigator. So we know we can use it on our screen components in the `options` prop.
 - `tabBarIcon` is an object specifying the icon to display.
   - For iOS, you can use SF Symbols by setting `type: 'sfSymbol'` and providing the symbol `name`.
+  - For Android, you can use Material Symbols by setting `type: 'materialSymbol'` and providing the symbol `name`.
   - For other platforms, use `type: 'image'` with a `source` pointing to your image file. Image files must be provided for multiple screen densities (1x, 2x, 3x), e.g.: `home-icon.png`, `home-icon@2x.png`, `home-icon@3x.png`.
 - [`Platform.select`](https://reactnative.dev/docs/platform#select) can be used to provide different icons based on the platform.
 - The `tabBarActiveTintColor` and `tabBarInactiveTintColor` options in `screenOptions` control the icon and label colors. These default to the iOS platform defaults, but you can change them as shown above.
