@@ -18,31 +18,16 @@ Make sure that you have [configured deep links](deep-linking.md) in your app bef
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-The [`Navigation`](static-configuration.md#createstaticnavigation) component accepts a [`linking`](static-configuration.md#differences-in-the-linking-prop) prop that makes it easier to handle incoming links:
+React Navigation handles incoming links by default when using [static configuration](static-configuration.md). All leaf screens in the navigator will be assigned a path based on their name automatically. No additional configuration is necessary.
 
-```js
-import { createStaticNavigation } from '@react-navigation/native';
-
-function App() {
-  return (
-    <Navigation
-      // highlight-start
-      linking={{
-        enabled: 'auto',
-      }}
-      // highlight-end
-      fallback={<Text>Loading...</Text>}
-    />
-  );
-}
-
-const Navigation = createStaticNavigation(RootStack);
-```
+This is equivalent to specifying [`linking`](navigation-container.md#linking) prop on [`Navigation`](static-configuration.md#createstaticnavigation) with `enabled: 'auto'`.
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-The `NavigationContainer` accepts a [`linking`](navigation-container.md#linking) prop that makes it easier to handle incoming links. The 2 of the most important properties you can specify in the `linking` prop are `prefixes` and `config`:
+The [`NavigationContainer`](navigation-container.md) component accepts a [`linking`](navigation-container.md#linking) prop that makes it easier to handle incoming links.
+
+The `config` option in the `linking` prop lets you specify how paths map to screens in your navigation structure:
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';
@@ -60,6 +45,55 @@ function App() {
     <NavigationContainer
       // highlight-next-line
       linking={linking}
+    >
+      {/* content */}
+    </NavigationContainer>
+  );
+}
+```
+
+When you specify the `linking` prop, React Navigation will handle incoming links automatically.
+
+</TabItem>
+</Tabs>
+
+On Android and iOS, it'll use React Native's [`Linking` module](https://reactnative.dev/docs/linking) to handle incoming deep links and universal links. On the Web, it'll use the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to sync the URL with the browser.
+
+You can also pass a [`fallback`](navigation-container.md#fallback) prop that controls what's displayed when React Navigation is trying to resolve the initial deep link URL:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+import { createStaticNavigation } from '@react-navigation/native';
+
+function App() {
+  return (
+    <Navigation
+      // highlight-next-line
+      fallback={<Text>Loading...</Text>}
+    />
+  );
+}
+
+const Navigation = createStaticNavigation(RootStack);
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+import { NavigationContainer } from '@react-navigation/native';
+
+const linking = {
+  // ...
+};
+
+function App() {
+  return (
+    <NavigationContainer
+      linking={linking}
+      // highlight-next-line
       fallback={<Text>Loading...</Text>}
     >
       {/* content */}
@@ -71,11 +105,7 @@ function App() {
 </TabItem>
 </Tabs>
 
-When you specify the `linking` prop, React Navigation will handle incoming links automatically.
-
-On Android and iOS, it'll use React Native's [`Linking` module](https://reactnative.dev/docs/linking) to handle incoming deep links and universal links, both when the app was opened with the link, and when new links are received when the app is open. On the Web, it'll use the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to sync the URL with the browser.
-
-You can also pass a [`fallback`](navigation-container.md#fallback) prop that controls what's displayed when React Navigation is trying to resolve the initial deep link URL.
+The behavior can be customized further by specifying additional options in the `linking` prop as described below.
 
 ## Prefixes
 

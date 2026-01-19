@@ -565,6 +565,22 @@ The `prefixes` default to `['*']`, which will match any host starting with `http
 
 See [Configuring links](configuring-links.md) for more details.
 
+#### Deep links are now enabled by default in Static Configuration
+
+Previously, deep linking needs to be explicitly enabled by setting `linking.enabled` to `auto` or by passing a `linking` prop. The additional step was necessary since we also needed `prefixes` to be specified in the linking config.
+
+In React Navigation 8, it now defaults to `auto`, so deep linking is enabled by default with automatic path generation based on screen names when using static configuration:
+
+If you don't want to enable deep linking, you can set `linking.enabled` to `false`:
+
+```diff lang=js
+<Navigation
++   linking={{
++     enabled: false,
++   }}
+>
+```
+
 #### Some exports are removed from `@react-navigation/elements`
 
 The `@react-navigation/elements` package has exported some components that were primarily intended for internal usage. These components have been removed from the public API:

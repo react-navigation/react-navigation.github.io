@@ -264,6 +264,8 @@ Similar to `NavigationContainer`, the component returned by `createStaticNavigat
 
    See [How does automatic path generation work](configuring-links.md#how-does-automatic-path-generation-work) for more details.
 
+By default, linking is enabled in static configuration with automatic path generation. It needs to be explicitly disabled by passing `enabled: false` to the `linking` prop if you don't want linking support.
+
 ## `createComponentForStaticNavigation`
 
 The `createComponentForStaticNavigation` function takes the static config returned by `createXNavigator` functions and returns a React component to render. The second argument is a name for the component that'd be used in React DevTools:
