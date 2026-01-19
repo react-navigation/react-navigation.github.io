@@ -26,8 +26,8 @@ export default {
       respectPrefersColorScheme: true,
     },
     prism: {
-      theme: require('prism-react-renderer').themes.oneLight,
-      darkTheme: require('prism-react-renderer').themes.oneDark,
+      theme: require('./src/themes/react-navigation-light.js'),
+      darkTheme: require('./src/themes/react-navigation-dark.js'),
       additionalLanguages: [
         'bash',
         'json',

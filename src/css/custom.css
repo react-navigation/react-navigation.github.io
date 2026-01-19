@@ -178,7 +178,7 @@
 
   --docusaurus-highlighted-code-line-bg: hsla(45, 97%, 72%, 0.3);
 
-  --codeblock-background-color: #fafafa;
+  --codeblock-background-color: hsl(256, 12%, 98%);
   --codeblock-border-color: var(--ifm-color-emphasis-300);
 }
 
@@ -318,7 +318,7 @@
 
   --docusaurus-highlighted-code-line-bg: hsla(45, 77%, 25%, 0.3);
 
-  --codeblock-background-color: #292c33;
+  --codeblock-background-color: hsl(240, 5%, 10%);
   --codeblock-border-color: var(--ifm-color-emphasis-200);
 }
 
