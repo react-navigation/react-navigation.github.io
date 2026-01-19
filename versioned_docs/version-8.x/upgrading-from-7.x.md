@@ -37,7 +37,7 @@ Additionally, React Navigation now uses [`@callstack/liquid-glass`](https://gith
 
 :::warning
 
-[Expo Go](https://expo.dev/go) does not include all native dependencies required by React Navigation. So it will not reflect the actual behavior of your app in production. To properly test your app, you need to create a [development build](https://docs.expo.dev/development/introduction/) of your app.
+[Expo Go](https://expo.dev/go) doesn't support React Navigation 8. So you need to create a [development build](https://docs.expo.dev/development/introduction/) of your app to use React Navigation 8 with Expo.
 
 :::
 

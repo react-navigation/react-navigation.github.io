@@ -23,7 +23,7 @@ If you're already familiar with JavaScript, React and React Native, you'll be ab
 <summary>Minimum requirements</summary>
 
 - `react-native` >= 0.81
-- `expo` >= 54
+- `expo` >= 54 ([development build](https://docs.expo.dev/development/introduction/) is required)
 - `typescript` >= 5.9.2 (if you use TypeScript)
 - `react-native-web` >= 0.21.0 (if you support Web)
 
