@@ -406,9 +406,25 @@ Note that `headerStyle` won't take effect if you are also using [`headerBackgrou
 
 Style object for the title component
 
+#### `headerLeftBackgroundVisible`
+
+Whether the liquid glass background is visible for the item.
+
+Only supported on iOS 26.0 and later. Older versions of iOS and other platforms never show the background.
+
+Defaults to `true`.
+
 #### `headerLeftContainerStyle`
 
 Customize the style for the container of the `headerLeft` component, for example to add padding.
+
+#### `headerRightBackgroundVisible`
+
+Whether the liquid glass background is visible for the item.
+
+Only supported on iOS 26.0 and later. Older versions of iOS and other platforms never show the background.\
+
+Defaults to `true`.
 
 #### `headerRightContainerStyle`
 

@@ -953,6 +953,14 @@ Example:
     headerBackTitle: 'Back',
 ```
 
+#### `headerLeftBackgroundVisible`
+
+Whether the liquid glass background is visible for the item.
+
+Only supported on iOS 26.0 and later. Older versions of iOS and other platforms never show the background.
+
+Defaults to `true`.
+
 #### `unstable_headerLeftItems`
 
 :::warning
@@ -998,6 +1006,14 @@ Example:
 ```js
 headerRight: () => <MaterialCommunityIcons name="map" color="blue" size={36} />;
 ```
+
+#### `headerRightBackgroundVisible`
+
+Whether the liquid glass background is visible for the item.
+
+Only supported on iOS 26.0 and later. Older versions of iOS and other platforms never show the background.\
+
+Defaults to `true`.
 
 #### `unstable_headerRightItems`
 
