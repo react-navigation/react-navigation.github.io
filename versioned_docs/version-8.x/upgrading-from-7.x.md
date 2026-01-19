@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 :::warning
 
-React Navigation 8 is still in pre-release stage. The API may still change before the stable release. The upgrade guide will be updated accordingly when we release the stable version.
+React Navigation 8 is still in pre-release stage. The API may still change before the stable release. Please provide any feedback or suggestions on [GitHub Discussions](https://github.com/react-navigation/react-navigation/discussions).
 
 :::
 
