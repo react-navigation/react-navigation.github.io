@@ -25,7 +25,7 @@ The minimum required version of React Native, Expo, and TypeScript have been bum
 
 The minimum required version of various peer dependencies have also been bumped:
 
-- `react-native-screens` >= 4.19.0
+- `react-native-screens` >= 4.20.0
 - `react-native-safe-area-context` >= 5.5.0
 - `react-native-reanimated` >= 4.0.0
 - `react-native-pager-view` >= 7.0.0 (8.0.0 is recommended)
