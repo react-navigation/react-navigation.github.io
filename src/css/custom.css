@@ -818,11 +818,11 @@ header {
     border-color: var(--codeblock-border-color);
     border-bottom-left-radius: var(--ifm-pre-border-radius);
     border-bottom-right-radius: var(--ifm-pre-border-radius);
-
-    [data-theme='dark'] & {
-      border-top-color: rgba(255, 255, 255, 0.07);
-    }
   }
+}
+
+[data-theme='dark'] .theme-code-block + .code-block-footer {
+  border-top-color: rgba(255, 255, 255, 0.07);
 }
 
 article {

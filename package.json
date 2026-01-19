@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@docusaurus/core": "3.9.2",
-    "@docusaurus/faster": "3.9.2",
+    "@docusaurus/faster": "^3.9.2",
     "@docusaurus/plugin-client-redirects": "3.9.2",
     "@docusaurus/plugin-google-analytics": "3.9.2",
     "@docusaurus/preset-classic": "3.9.2",
@@ -41,9 +41,6 @@
     "postcss-nesting": "^13.0.2",
     "prettier": "^3.7.4",
     "recast": "^0.23.11"
-  },
-  "resolutions": {
-    "@rspack/core": "1.0.14"
   },
   "packageManager": "yarn@4.0.2",
   "browserslist": {

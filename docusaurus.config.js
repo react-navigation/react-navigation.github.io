@@ -9,6 +9,10 @@ export default {
   url: 'https://reactnavigation.org/',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
+  future: {
+    v4: true,
+    experimental_faster: true,
+  },
   organizationName: 'react-navigation',
   projectName: 'react-navigation.github.io',
   onBrokenLinks: 'throw',
