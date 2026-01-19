@@ -22,8 +22,8 @@
 <script src="/js/snack-helpers.js"></script>
 <script src="/js/toc-fixes.js"></script>
 <script src="/js/video-playback.js"></script><link rel="stylesheet" href="/assets/css/styles.75ef0bac.css">
-<script src="/assets/js/runtime~main.b86b7f2c.js" defer="defer"></script>
-<script src="/assets/js/main.5947bd12.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.449f985f.js" defer="defer"></script>
+<script src="/assets/js/main.e3caed0a.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -110,6 +110,7 @@
 <p>See <a class="" href="/docs/8.x/configuring-links#how-does-automatic-path-generation-work">How does automatic path generation work</a> for more details.</p>
 </li>
 </ol>
+<p>By default, linking is enabled in static configuration with automatic path generation. It needs to be explicitly disabled by passing <code>enabled: false</code> to the <code>linking</code> prop if you don&#x27;t want linking support.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="createcomponentforstaticnavigation"><code>createComponentForStaticNavigation</code><a href="#createcomponentforstaticnavigation" class="hash-link" aria-label="Direct link to createcomponentforstaticnavigation" title="Direct link to createcomponentforstaticnavigation" translate="no">​</a></h2>
 <p>The <code>createComponentForStaticNavigation</code> function takes the static config returned by <code>createXNavigator</code> functions and returns a React component to render. The second argument is a name for the component that&#x27;d be used in React DevTools:</p>
 <div class="language-js codeBlockContainer_Ckt0 theme-code-block" style="--prism-background-color:hsl(230, 1%, 98%);--prism-color:hsl(230, 8%, 24%)"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-js codeBlock_bY9V thin-scrollbar" style="background-color:hsl(230, 1%, 98%);color:hsl(230, 8%, 24%)"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token keyword" style="color:hsl(301, 63%, 40%)">const</span><span class="token plain"> </span><span class="token maybe-class-name">RootStackNavigator</span><span class="token plain"> </span><span class="token operator" style="color:hsl(221, 87%, 60%)">=</span><span class="token plain"> </span><span class="token function" style="color:hsl(221, 87%, 60%)">createComponentForStaticNavigation</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">  </span><span class="token maybe-class-name">RootStack</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain">  </span><span class="token string" style="color:hsl(119, 34%, 47%)">&#x27;RootNavigator&#x27;</span><span class="token plain"></span><br></span><span class="token-line" style="color:hsl(230, 8%, 24%)"><span class="token plain"></span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">)</span><span class="token punctuation" style="color:hsl(119, 34%, 47%)">;</span><br></span></code></pre></div></div>
