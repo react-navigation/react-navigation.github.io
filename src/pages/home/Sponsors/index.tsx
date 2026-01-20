@@ -21,8 +21,7 @@ export default function Sponsors() {
               key={sponsor.username}
               href={`https://github.com/${sponsor.username}`}
               target="_blank"
-              rel="noopener"
-              rel="noreferrer"
+              rel="noreferrer noopener"
             >
               <img
                 alt={`${sponsor.name} (${sponsor.username})`}

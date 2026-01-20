@@ -4,7 +4,20 @@ const indigo = '#3F51B5';
 const teal = '#009688';
 const pink = '#E91E63';
 
-export default function RouteMap({ routes, root = true }) {
+type Route = {
+  name: string;
+  params?: Record<string, unknown>;
+  state?: {
+    routes: Route[];
+  };
+};
+
+type Props = {
+  routes: Route[];
+  root?: boolean;
+};
+
+export default function RouteMap({ routes, root = true }: Props) {
   return (
     <div
       style={{
@@ -51,7 +64,7 @@ export default function RouteMap({ routes, root = true }) {
   );
 }
 
-const styles = {
+const styles: Record<string, React.CSSProperties> = {
   container: {
     display: 'flex',
     flexDirection: 'column',

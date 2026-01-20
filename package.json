@@ -8,6 +8,7 @@
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "swizzle": "docusaurus swizzle",
+    "typecheck": "tsc",
     "deploy": "DEPLOYMENT_BRANCH=gh-pages docusaurus deploy",
     "test": "node --test --test-reporter=@voxpelli/node-test-pretty-reporter",
     "crowdin-upload": "crowdin upload sources --auto-update -b main",
@@ -34,13 +35,17 @@
   },
   "devDependencies": {
     "@babel/types": "^7.28.5",
+    "@docusaurus/tsconfig": "^3.9.2",
     "@ffprobe-installer/ffprobe": "^2.1.2",
+    "@types/react": "^19.2.8",
+    "@types/react-dom": "^19.2.3",
     "@voxpelli/node-test-pretty-reporter": "^1.1.2",
     "markdownlint": "^0.40.0",
     "markdownlint-cli2": "^0.19.1",
     "postcss-nesting": "^13.0.2",
     "prettier": "^3.7.4",
-    "recast": "^0.23.11"
+    "recast": "^0.23.11",
+    "typescript": "^5.9.3"
   },
   "packageManager": "yarn@4.0.2",
   "browserslist": {

@@ -5,17 +5,23 @@ import * as React from 'react';
 import Editor from 'react-simple-code-editor';
 import RouteMap from './RouteMap';
 
-const parse = (value) => eval(`(function() { return ${value}; }())`);
+const parse = (value: string) => eval(`(function() { return ${value}; }())`);
 
-function Code({ code, theme, language }) {
+type Props = {
+  code: string;
+  theme: typeof themes.dracula;
+  language: string;
+};
+
+function Code({ code, theme, language }: Props) {
   return (
     <Highlight code={code} theme={theme} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre className={className} style={{ ...style, ...styles.json }}>
           {tokens.map((line, i) => (
-            <div {...getLineProps({ line, key: i })}>
+            <div {...getLineProps({ line, key: i })} key={i}>
               {line.map((token, key) => (
-                <span {...getTokenProps({ token, key })} />
+                <span {...getTokenProps({ token, key })} key={key} />
               ))}
             </div>
           ))}
@@ -53,13 +59,15 @@ export default function LinkingTester() {
 
   const [path, setPath] = React.useState('/user/@vergil/edit');
   const [config, setConfig] = React.useState(() => parse(rawConfig));
-  const [pane, setPane] = React.useState('chart');
+  const [pane, setPane] = React.useState<'chart' | 'state' | 'action'>('chart');
 
   let state, action;
 
   try {
     state = getStateFromPath(path.replace(/(^\w+:|^)\/\//, ''), config);
-    action = getActionFromState(state, config);
+    if (state) {
+      action = getActionFromState(state, config);
+    }
   } catch (e) {
     // Ignore
   }
@@ -89,15 +97,17 @@ export default function LinkingTester() {
         }}
         highlight={(code) => (
           <Highlight code={code} theme={theme} language="jsx">
-            {({ tokens, getLineProps, getTokenProps }) =>
-              tokens.map((line, i) => (
-                <div {...getLineProps({ line, key: i })}>
-                  {line.map((token, key) => (
-                    <span {...getTokenProps({ token, key })} />
-                  ))}
-                </div>
-              ))
-            }
+            {({ tokens, getLineProps, getTokenProps }) => (
+              <>
+                {tokens.map((line, i) => (
+                  <div {...getLineProps({ line, key: i })} key={i}>
+                    {line.map((token, key) => (
+                      <span {...getTokenProps({ token, key })} key={key} />
+                    ))}
+                  </div>
+                ))}
+              </>
+            )}
           </Highlight>
         )}
         padding={16}
@@ -154,7 +164,7 @@ export default function LinkingTester() {
   );
 }
 
-const styles = {
+const styles: Record<string, React.CSSProperties> = {
   code: {
     display: 'block',
     fontFamily: 'var(--ifm-font-family-monospace)',
