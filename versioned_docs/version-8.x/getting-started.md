@@ -54,12 +54,6 @@ npx expo install react-native-screens react-native-safe-area-context @callstack/
 
 This will install versions of these libraries that are compatible with your Expo SDK version.
 
-:::warning
-
-[Expo Go](https://expo.dev/go) doesn't include all native dependencies required by React Navigation, so it won't reflect your app's actual behavior. Use a [development build](https://docs.expo.dev/development/introduction/) to properly test your app.
-
-:::
-
 </TabItem>
 <TabItem value='community-cli' label='Community CLI'>
 
