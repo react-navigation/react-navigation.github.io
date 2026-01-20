@@ -165,7 +165,8 @@
         "pitch",
         "limitations",
         "used-by",
-        "contributing"
+        "contributing",
+        "llms"
       ]
     }
   ]
