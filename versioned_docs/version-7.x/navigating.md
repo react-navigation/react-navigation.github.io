@@ -28,6 +28,7 @@ So how do we do this in React Navigation? There are two main ways to navigate be
 The simplest way to navigate is using the [`Link`](link.md) component from `@react-navigation/native` or the [`Button`](elements.md#button) component from `@react-navigation/elements`:
 
 ```js name="Navigation with Link and Button" snack static2dynamic
+// codeblock-focus-start
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -48,6 +49,9 @@ function HomeScreen() {
     </View>
   );
 }
+
+// ... other code from the previous section
+// codeblock-focus-end
 
 function DetailsScreen() {
   return (
