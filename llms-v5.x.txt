@@ -1,0 +1,112 @@
+# React Navigation 5.x
+
+> Routing and navigation for your React Native apps.
+
+## Documentation
+
+### Fundamentals
+
+- [Getting started](https://reactnavigation.org/docs/5.x/getting-started)
+- [Hello React Navigation](https://reactnavigation.org/docs/5.x/hello-react-navigation)
+- [Moving between screens](https://reactnavigation.org/docs/5.x/navigating)
+- [Passing parameters to routes](https://reactnavigation.org/docs/5.x/params)
+- [Configuring the header bar](https://reactnavigation.org/docs/5.x/headers)
+- [Header buttons](https://reactnavigation.org/docs/5.x/header-buttons)
+- [Nesting navigators](https://reactnavigation.org/docs/5.x/nesting-navigators)
+- [Navigation lifecycle](https://reactnavigation.org/docs/5.x/navigation-lifecycle)
+- [Opening a full-screen modal](https://reactnavigation.org/docs/5.x/modal)
+- [Next steps](https://reactnavigation.org/docs/5.x/next-steps)
+- [Glossary of terms](https://reactnavigation.org/docs/5.x/glossary-of-terms)
+- [Compatibility layer](https://reactnavigation.org/docs/5.x/compatibility)
+- [Troubleshooting](https://reactnavigation.org/docs/5.x/troubleshooting)
+- [Limitations](https://reactnavigation.org/docs/5.x/limitations)
+
+### Guides
+
+- [Tab navigation](https://reactnavigation.org/docs/5.x/tab-based-navigation)
+- [Drawer navigation](https://reactnavigation.org/docs/5.x/drawer-based-navigation)
+- [Authentication flows](https://reactnavigation.org/docs/5.x/auth-flow)
+- [Supporting safe areas](https://reactnavigation.org/docs/5.x/handling-safe-area)
+- [Hiding tab bar in specific screens](https://reactnavigation.org/docs/5.x/hiding-tabbar-in-screens)
+- [Different status bar configuration based on route](https://reactnavigation.org/docs/5.x/status-bar)
+- [Screen options with nested navigators](https://reactnavigation.org/docs/5.x/screen-options-resolution)
+- [Custom Android back button behavior](https://reactnavigation.org/docs/5.x/custom-android-back-button-handling)
+- [Preventing going back](https://reactnavigation.org/docs/5.x/preventing-going-back)
+- [Call a function when focused screen changes](https://reactnavigation.org/docs/5.x/function-after-focusing-screen)
+- [Access the navigation prop from any component](https://reactnavigation.org/docs/5.x/connecting-navigation-prop)
+- [Navigating without the navigation prop](https://reactnavigation.org/docs/5.x/navigating-without-navigation-prop)
+- [Deep linking](https://reactnavigation.org/docs/5.x/deep-linking)
+- [Configuring links](https://reactnavigation.org/docs/5.x/configuring-links)
+- [React Navigation on the Web](https://reactnavigation.org/docs/5.x/web-support)
+- [Server rendering](https://reactnavigation.org/docs/5.x/server-rendering)
+- [Screen tracking for analytics](https://reactnavigation.org/docs/5.x/screen-tracking)
+- [Themes](https://reactnavigation.org/docs/5.x/themes)
+- [State persistence](https://reactnavigation.org/docs/5.x/state-persistence)
+- [Testing with Jest](https://reactnavigation.org/docs/5.x/testing)
+- [Type checking with TypeScript](https://reactnavigation.org/docs/5.x/typescript)
+- [Redux integration](https://reactnavigation.org/docs/5.x/redux-integration)
+- [Integrating with MobX State Tree](https://reactnavigation.org/docs/5.x/MST-integration)
+- [Optimize memory usage and performance](https://reactnavigation.org/docs/5.x/react-native-screens)
+- [Upgrading from 4.x](https://reactnavigation.org/docs/5.x/upgrading-from-4.x)
+
+### API reference
+
+- [NavigationContainer](https://reactnavigation.org/docs/5.x/navigation-container)
+- [ServerContainer](https://reactnavigation.org/docs/5.x/server-container)
+- [Screen](https://reactnavigation.org/docs/5.x/screen)
+- [Options for screens](https://reactnavigation.org/docs/5.x/screen-options)
+- [Route prop reference](https://reactnavigation.org/docs/5.x/route-prop)
+- [Navigation prop reference](https://reactnavigation.org/docs/5.x/navigation-prop)
+- [NavigationContext](https://reactnavigation.org/docs/5.x/navigation-context)
+- [Navigation events](https://reactnavigation.org/docs/5.x/navigation-events)
+- [Navigation state reference](https://reactnavigation.org/docs/5.x/navigation-state)
+- [Link](https://reactnavigation.org/docs/5.x/link)
+- [Developer tools](https://reactnavigation.org/docs/5.x/devtools)
+
+#### Navigators
+
+- [Stack Navigator](https://reactnavigation.org/docs/5.x/stack-navigator)
+- [Native Stack Navigator](https://reactnavigation.org/docs/5.x/native-stack-navigator)
+- [Drawer Navigator](https://reactnavigation.org/docs/5.x/drawer-navigator)
+- [Bottom Tabs Navigator](https://reactnavigation.org/docs/5.x/bottom-tab-navigator)
+- [Material Bottom Tabs Navigator](https://reactnavigation.org/docs/5.x/material-bottom-tab-navigator)
+- [Material Top Tabs Navigator](https://reactnavigation.org/docs/5.x/material-top-tab-navigator)
+
+#### Hooks
+
+- [useNavigation](https://reactnavigation.org/docs/5.x/use-navigation)
+- [useRoute](https://reactnavigation.org/docs/5.x/use-route)
+- [useNavigationState](https://reactnavigation.org/docs/5.x/use-navigation-state)
+- [useFocusEffect](https://reactnavigation.org/docs/5.x/use-focus-effect)
+- [useIsFocused](https://reactnavigation.org/docs/5.x/use-is-focused)
+- [useLinkTo](https://reactnavigation.org/docs/5.x/use-link-to)
+- [useLinkProps](https://reactnavigation.org/docs/5.x/use-link-props)
+- [useLinkBuilder](https://reactnavigation.org/docs/5.x/use-link-builder)
+- [useLinking](https://reactnavigation.org/docs/5.x/use-linking)
+- [useScrollToTop](https://reactnavigation.org/docs/5.x/use-scroll-to-top)
+- [useTheme](https://reactnavigation.org/docs/5.x/use-theme)
+
+#### Actions
+
+- [CommonActions reference](https://reactnavigation.org/docs/5.x/navigation-actions)
+- [StackActions reference](https://reactnavigation.org/docs/5.x/stack-actions)
+- [DrawerActions reference](https://reactnavigation.org/docs/5.x/drawer-actions)
+- [TabActions reference](https://reactnavigation.org/docs/5.x/tab-actions)
+
+### Build your own Navigator
+
+- [Custom routers](https://reactnavigation.org/docs/5.x/custom-routers)
+- [Custom navigators](https://reactnavigation.org/docs/5.x/custom-navigators)
+
+### Additional resources
+
+- [Supported React Native versions](https://reactnavigation.org/docs/5.x/supported-react-native-versions)
+- [Community-developed Navigators and Libraries](https://reactnavigation.org/docs/5.x/community-libraries-and-navigators)
+- [More Resources](https://reactnavigation.org/docs/5.x/more-resources)
+
+### Meta
+
+- [Pitch & anti-pitch](https://reactnavigation.org/docs/5.x/pitch)
+- [Alternative libraries](https://reactnavigation.org/docs/5.x/alternatives)
+- [Apps using React Navigation](https://reactnavigation.org/docs/5.x/used-by)
+- [React Navigation contributor guide](https://reactnavigation.org/docs/5.x/contributing)

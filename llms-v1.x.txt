@@ -1,0 +1,47 @@
+# React Navigation 1.x
+
+> Routing and navigation for your React Native apps.
+
+## Documentation
+
+### Fundamentals
+
+- [Getting started](https://reactnavigation.org/docs/1.x/getting-started)
+- [Hello React Navigation](https://reactnavigation.org/docs/1.x/hello-react-navigation)
+- [Supported React Native versions](https://reactnavigation.org/docs/1.x/supported-react-native-versions)
+- [Moving between screens](https://reactnavigation.org/docs/1.x/navigating)
+- [Passing parameters to routes](https://reactnavigation.org/docs/1.x/params)
+- [Configuring the header bar](https://reactnavigation.org/docs/1.x/headers)
+- [Header buttons](https://reactnavigation.org/docs/1.x/header-buttons)
+- [Opening a full-screen modal](https://reactnavigation.org/docs/1.x/modal)
+- [Next steps](https://reactnavigation.org/docs/1.x/next-steps)
+- [Glossary of terms](https://reactnavigation.org/docs/1.x/glossary-of-terms)
+
+### How do I do ...?
+
+- [Tab navigation](https://reactnavigation.org/docs/1.x/tab-based-navigation)
+- [Drawer navigation](https://reactnavigation.org/docs/1.x/drawer-based-navigation)
+- [Authentication flows](https://reactnavigation.org/docs/1.x/auth-flow)
+- [iPhone X support](https://reactnavigation.org/docs/1.x/handling-iphonex)
+- [Different status bar configuration based on route](https://reactnavigation.org/docs/1.x/status-bar)
+- [Custom Android back button behavior](https://reactnavigation.org/docs/1.x/custom-android-back-button-handling)
+- [Access the navigation prop from any component](https://reactnavigation.org/docs/1.x/connecting-navigation-prop)
+- [Navigating without the navigation prop](https://reactnavigation.org/docs/1.x/navigating-without-navigation-prop)
+- [Deep linking](https://reactnavigation.org/docs/1.x/deep-linking)
+- [Screen tracking](https://reactnavigation.org/docs/1.x/screen-tracking)
+- [Redux integration](https://reactnavigation.org/docs/1.x/redux-integration)
+
+### Build your own Navigator
+
+- [Overview](https://reactnavigation.org/docs/1.x/custom-navigator-overview)
+- [Routers](https://reactnavigation.org/docs/1.x/routers)
+- [Custom navigators](https://reactnavigation.org/docs/1.x/custom-navigators)
+- [Custom routers](https://reactnavigation.org/docs/1.x/custom-routers)
+- [Navigation views](https://reactnavigation.org/docs/1.x/navigation-views)
+- [Transitioner](https://reactnavigation.org/docs/1.x/transitioner)
+
+### Meta
+
+- [Pitch & anti-pitch](https://reactnavigation.org/docs/1.x/pitch)
+- [Alternative libraries](https://reactnavigation.org/docs/1.x/alternatives)
+- [React Navigation contributor guide](https://reactnavigation.org/docs/1.x/contributing)

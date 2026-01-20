@@ -1,0 +1,60 @@
+# React Navigation 2.x
+
+> Routing and navigation for your React Native apps.
+
+## Documentation
+
+### Fundamentals
+
+- [Getting started](https://reactnavigation.org/docs/2.x/getting-started)
+- [Hello React Navigation](https://reactnavigation.org/docs/2.x/hello-react-navigation)
+- [Supported React Native versions](https://reactnavigation.org/docs/2.x/supported-react-native-versions)
+- [Moving between screens](https://reactnavigation.org/docs/2.x/navigating)
+- [Navigation lifecycle](https://reactnavigation.org/docs/2.x/navigation-lifecycle)
+- [Passing parameters to routes](https://reactnavigation.org/docs/2.x/params)
+- [Configuring the header bar](https://reactnavigation.org/docs/2.x/headers)
+- [Header buttons](https://reactnavigation.org/docs/2.x/header-buttons)
+- [Opening a full-screen modal](https://reactnavigation.org/docs/2.x/modal)
+- [Next steps](https://reactnavigation.org/docs/2.x/next-steps)
+- [Glossary of terms](https://reactnavigation.org/docs/2.x/glossary-of-terms)
+- [Common mistakes](https://reactnavigation.org/docs/2.x/common-mistakes)
+- [Optimize memory usage and performance](https://reactnavigation.org/docs/2.x/react-native-screens)
+- [Limitations](https://reactnavigation.org/docs/2.x/limitations)
+
+### Assorted guides
+
+- [Tab navigation](https://reactnavigation.org/docs/2.x/tab-based-navigation)
+- [Drawer navigation](https://reactnavigation.org/docs/2.x/drawer-based-navigation)
+- [Authentication flows](https://reactnavigation.org/docs/2.x/auth-flow)
+- [iPhone X support](https://reactnavigation.org/docs/2.x/handling-iphonex)
+- [Different status bar configuration based on route](https://reactnavigation.org/docs/2.x/status-bar)
+- [Navigation options resolution](https://reactnavigation.org/docs/2.x/navigation-options-resolution)
+- [Custom Android back button behavior](https://reactnavigation.org/docs/2.x/custom-android-back-button-handling)
+- [Access the navigation prop from any component](https://reactnavigation.org/docs/2.x/connecting-navigation-prop)
+- [Navigating without the navigation prop](https://reactnavigation.org/docs/2.x/navigating-without-navigation-prop)
+- [Using the navigation key](https://reactnavigation.org/docs/2.x/navigation-key)
+- [Deep linking](https://reactnavigation.org/docs/2.x/deep-linking)
+- [Screen tracking](https://reactnavigation.org/docs/2.x/screen-tracking)
+- [State persistence](https://reactnavigation.org/docs/2.x/state-persistence)
+- [App containers](https://reactnavigation.org/docs/2.x/app-containers)
+- [Redux integration](https://reactnavigation.org/docs/2.x/redux-integration)
+
+### Build your own Navigator
+
+- [Overview](https://reactnavigation.org/docs/2.x/custom-navigator-overview)
+- [Routers](https://reactnavigation.org/docs/2.x/routers)
+- [Custom navigators](https://reactnavigation.org/docs/2.x/custom-navigators)
+- [Custom routers](https://reactnavigation.org/docs/2.x/custom-routers)
+- [Navigation views](https://reactnavigation.org/docs/2.x/navigation-views)
+- [Transitioner](https://reactnavigation.org/docs/2.x/transitioner)
+
+### Related resources
+
+- [Community-developed Navigators and Libraries](https://reactnavigation.org/docs/2.x/community-libraries-and-navigators)
+- [More Resources](https://reactnavigation.org/docs/2.x/more-resources)
+
+### Meta
+
+- [Pitch & anti-pitch](https://reactnavigation.org/docs/2.x/pitch)
+- [Alternative libraries](https://reactnavigation.org/docs/2.x/alternatives)
+- [React Navigation contributor guide](https://reactnavigation.org/docs/2.x/contributing)
