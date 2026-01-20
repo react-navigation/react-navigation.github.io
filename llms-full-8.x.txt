@@ -33822,46 +33822,46 @@ In addition, we support the [llms.txt](https://llmstxt.org/) initiative and prov
 
 ## Latest stable version
 
-- [llms.txt](pathname:///llms.txt): A list of all available documentation for in markdown format.
+- [llms.txt](pathname:///llms.txt): A list of all available documentation in markdown format.
 - [llms-full.txt](pathname:///llms-full.txt): Complete documentation in a single file in markdown format.
 
 ## Upcoming 8.x version
 
-- [llms-v8.x.txt](pathname:///llms-v8.x.txt): A list of all available documentation for in markdown format.
-- [llms-full-v8.x.txt](pathname:///llms-full-v8.x.txt): Complete documentation in a single file in markdown format.
+- [llms-8.x.txt](pathname:///llms-8.x.txt)
+- [llms-full-8.x.txt](pathname:///llms-full-8.x.txt)
 
 <details>
 <summary>Older versions</summary>
 
 ## 6.x
 
-- [llms-v6.x.txt](pathname:///llms-v6.x.txt)
-- [llms-full-v6.x.txt](pathname:///llms-full-v6.x.txt)
+- [llms-6.x.txt](pathname:///llms-6.x.txt)
+- [llms-full-6.x.txt](pathname:///llms-full-6.x.txt)
 
 ## 5.x
 
-- [llms-v5.x.txt](pathname:///llms-v5.x.txt)
-- [llms-full-v5.x.txt](pathname:///llms-full-v5.x.txt)
+- [llms-5.x.txt](pathname:///llms-5.x.txt)
+- [llms-full-5.x.txt](pathname:///llms-full-5.x.txt)
 
 ## 4.x
 
-- [llms-v4.x.txt](pathname:///llms-v4.x.txt)
-- [llms-full-v4.x.txt](pathname:///llms-full-v4.x.txt)
+- [llms-4.x.txt](pathname:///llms-4.x.txt)
+- [llms-full-4.x.txt](pathname:///llms-full-4.x.txt)
 
 ## 3.x
 
-- [llms-v3.x.txt](pathname:///llms-v3.x.txt)
-- [llms-full-v3.x.txt](pathname:///llms-full-v3.x.txt)
+- [llms-3.x.txt](pathname:///llms-3.x.txt)
+- [llms-full-3.x.txt](pathname:///llms-full-3.x.txt)
 
 ## 2.x
 
-- [llms-v2.x.txt](pathname:///llms-v2.x.txt)
-- [llms-full-v2.x.txt](pathname:///llms-full-v2.x.txt)
+- [llms-2.x.txt](pathname:///llms-2.x.txt)
+- [llms-full-2.x.txt](pathname:///llms-full-2.x.txt)
 
 ## 1.x
 
-- [llms-v1.x.txt](pathname:///llms-v1.x.txt)
-- [llms-full-v1.x.txt](pathname:///llms-full-v1.x.txt)
+- [llms-1.x.txt](pathname:///llms-1.x.txt)
+- [llms-full-1.x.txt](pathname:///llms-full-1.x.txt)
 
 </details>
 
