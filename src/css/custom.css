@@ -1000,11 +1000,17 @@ samp {
 }
 
 .code-block-footer {
-  height: 2.5em;
-  padding: 0 var(--ifm-pre-padding);
-  margin-bottom: 25px;
-  margin-top: -8px;
+  height: 2.625rem;
   justify-content: space-between;
+}
+
+.code-block-expand,
+.code-block-snack-link {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 var(--ifm-pre-padding);
+  height: 100%;
 }
 
 .code-block-expand {
@@ -1013,15 +1019,8 @@ samp {
   background: none;
   font-size: inherit;
   cursor: pointer;
-}
-
-.code-block-expand,
-.code-block-snack-link {
-  display: flex;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-  height: 100%;
+  margin-left: -4px;
+  opacity: 0.7;
 }
 
 .code-block-snack-link {
