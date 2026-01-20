@@ -322,6 +322,10 @@
   --codeblock-border-color: var(--ifm-color-emphasis-200);
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 :not([data-theme='dark']) body {
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
@@ -399,6 +403,7 @@ header {
 @media (min-width: 85rem) {
   .main-wrapper:not(.full-width) {
     & main:not(.blog-wrapper main) {
+      width: 75rem;
       padding: 1rem 0 2rem 2rem;
     }
 
