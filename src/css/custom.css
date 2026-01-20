@@ -176,7 +176,7 @@
 
   --ifm-code-padding-horizontal: 0.3em;
 
-  --docusaurus-highlighted-code-line-bg: hsla(45, 97%, 72%, 0.3);
+  --docusaurus-highlighted-code-line-bg: rgba(255, 235, 59, 0.2);
 
   --codeblock-background-color: hsl(256, 12%, 98%);
   --codeblock-border-color: var(--ifm-color-emphasis-300);
@@ -316,7 +316,7 @@
 
   --ifm-toc-border-color: #31343a;
 
-  --docusaurus-highlighted-code-line-bg: hsla(45, 77%, 25%, 0.3);
+  --docusaurus-highlighted-code-line-bg: rgba(136, 104, 49, 0.4);
 
   --codeblock-background-color: hsl(240, 5%, 10%);
   --codeblock-border-color: var(--ifm-color-emphasis-200);
