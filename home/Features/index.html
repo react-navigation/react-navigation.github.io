@@ -1,15 +1,45 @@
-<!doctype html><html lang=en dir=ltr data-has-hydrated=false><head><meta charset=UTF-8><meta name=generator content="Docusaurus v3.9.2"><title data-rh=true>React Navigation</title><meta data-rh=true property=og:title content="React Navigation"/><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"/><meta data-rh=true name=twitter:card content=summary_large_image /><meta data-rh=true property=og:url content=https://reactnavigation.org/home/Features/ /><meta data-rh=true property=og:locale content=en /><meta data-rh=true name=docusaurus_locale content=en /><meta data-rh=true name=docusaurus_tag content=default /><meta data-rh=true name=docsearch:language content=en /><meta data-rh=true name=docsearch:docusaurus_tag content=default /><link data-rh=true rel=icon href=/img/favicon.ico /><link data-rh=true rel=canonical href=https://reactnavigation.org/home/Features/ /><link data-rh=true rel=alternate href=https://reactnavigation.org/home/Features/ hreflang=en /><link data-rh=true rel=alternate href=https://reactnavigation.org/home/Features/ hreflang=x-default /><link rel=alternate type=application/rss+xml href=/blog/rss.xml title="React Navigation RSS Feed"><link rel=alternate type=application/atom+xml href=/blog/atom.xml title="React Navigation Atom Feed"><link rel=preconnect href=https://www.google-analytics.com><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-10128745-16","auto"),ga("send","pageview")</script><script async src=https://www.google-analytics.com/analytics.js></script><link rel=search type=application/opensearchdescription+xml title="React Navigation" href=/opensearch.xml><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin=true><link rel=stylesheet href='https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet'><script src=/js/snack-helpers.js></script><script src=/js/toc-fixes.js></script><script src=/js/video-playback.js></script><link rel=stylesheet href=/assets/css/styles.f95803a0.css /><script src=/assets/js/runtime~main.d26926d0.js defer></script><script src=/assets/js/main.68723a6e.js defer></script></head><body class=navigation-with-keyboard><svg style="display: none;"><defs>
-<symbol id=theme-svg-external-link viewBox="0 0 24 24"><path fill=currentColor d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+<!doctype html>
+<html lang="en" dir="ltr" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">React Navigation</title><meta data-rh="true" property="og:title" content="React Navigation"><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://reactnavigation.org/home/Features/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://reactnavigation.org/home/Features/"><link data-rh="true" rel="alternate" href="https://reactnavigation.org/home/Features/" hreflang="en"><link data-rh="true" rel="alternate" href="https://reactnavigation.org/home/Features/" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="React Navigation RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="React Navigation Atom Feed">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-10128745-16","auto"),ga("send","pageview")</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+<link rel="search" type="application/opensearchdescription+xml" title="React Navigation" href="/opensearch.xml">
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&amp;family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap&quot; rel=&quot;stylesheet">
+<script src="/js/snack-helpers.js"></script>
+<script src="/js/toc-fixes.js"></script>
+<script src="/js/video-playback.js"></script><link rel="stylesheet" href="/assets/css/styles.1966a38b.css">
+<script src="/assets/js/runtime~main.2977dda6.js" defer="defer"></script>
+<script src="/assets/js/main.6b600070.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
 </defs></svg>
-<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{for(var[t,e]of new URLSearchParams(window.location.search).entries())if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id=__docusaurus><link rel=preload as=image href=/img/home_smile.svg /><link rel=preload as=image href=/img/home_devices.svg /><link rel=preload as=image href=/img/home_star.svg /><link rel=preload as=image href=/img/home_extend.svg /><section class=wrapper_jdxG><div class=container_SkMY><div class=feature_fHej><img src=/img/home_smile.svg /><h5 class=title_s7Vb>Easy to Use</h5><p class=description_Zpkr>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/home_smile.svg"><link rel="preload" as="image" href="/img/home_devices.svg"><link rel="preload" as="image" href="/img/home_star.svg"><link rel="preload" as="image" href="/img/home_extend.svg"><section class="wrapper_jdxG"><div class="container_SkMY"><div class="feature_fHej"><img src="/img/home_smile.svg"><h5 class="title_s7Vb">Easy to Use</h5><p class="description_Zpkr">
         Start quickly with built-in navigators that deliver a seamless
         out-of-the-box experience.
-      </div><div class=feature_fHej><img src=/img/home_devices.svg /><h5 class=title_s7Vb>Components built for iOS and Android</h5><p class=description_Zpkr>
+      </p></div><div class="feature_fHej"><img src="/img/home_devices.svg"><h5 class="title_s7Vb">Components built for iOS and Android</h5><p class="description_Zpkr">
         Platform-specific look-and-feel with smooth animations and gestures.
-      </div><div class=feature_fHej><img src=/img/home_star.svg /><h5 class=title_s7Vb>Completely customizable</h5><p class=description_Zpkr>
+      </p></div><div class="feature_fHej"><img src="/img/home_star.svg"><h5 class="title_s7Vb">Completely customizable</h5><p class="description_Zpkr">
         If you know how to write apps using JavaScript you can customize any
         part of React Navigation.
-      </div><div class=feature_fHej><img src=/img/home_extend.svg /><h5 class=title_s7Vb>Extensible platform</h5><p class=description_Zpkr>
+      </p></div><div class="feature_fHej"><img src="/img/home_extend.svg"><h5 class="title_s7Vb">Extensible platform</h5><p class="description_Zpkr">
         React Navigation is extensible at every layer— you can write your own
         navigators or even replace the user-facing API.
-      </div></div></section></div></body>
+      </p></div></div></section></div>
+</body>
+</html>
