@@ -1,0 +1,115 @@
+.container {
+  position: relative;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ifm-menu-color);
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 0;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  border-radius: var(--ifm-global-radius);
+  background-color: transparent;
+  transition: background-color var(--ifm-transition-fast)
+    var(--ifm-transition-timing-default);
+
+  &:hover {
+    background-color: var(--ifm-menu-color-background-hover);
+  }
+}
+
+.iconContainer {
+  position: relative;
+  width: 16px;
+  height: 16px;
+}
+
+.icon {
+  position: absolute;
+  inset: 0;
+  transition:
+    opacity 0.15s ease-out,
+    transform 0.15s ease-out;
+
+  &.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &.hidden {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+.chevron {
+  transition: transform 0.15s ease-out;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+  min-width: 160px;
+  margin-top: 0.25rem;
+  padding: 0.25rem 0;
+  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: var(--ifm-global-radius);
+  box-shadow: var(--ifm-global-shadow-md);
+  animation: dropdownFadeIn 0.15s ease-out;
+
+  &.closing {
+    animation: dropdownFadeOut 0.15s ease-out forwards;
+  }
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.item {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  color: var(--ifm-menu-color);
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--ifm-transition-fast)
+    var(--ifm-transition-timing-default);
+
+  &:focus {
+    background-color: var(--ifm-menu-color-background-hover);
+  }
+}
