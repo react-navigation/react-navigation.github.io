@@ -232,7 +232,7 @@ export default function (context, options) {
       versions.forEach((version) => {
         const isLatest = version === latestVersion;
         // Prefix: 'llms' for latest, 'llms-vX.x' for others
-        const outputPrefix = isLatest ? 'llms' : `llms-v${version}`;
+        const outputPrefix = isLatest ? 'llms' : `llms-${version}`;
 
         const files = generateForVersion(
           siteDir,
