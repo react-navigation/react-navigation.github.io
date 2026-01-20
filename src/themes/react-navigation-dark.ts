@@ -1,4 +1,6 @@
-const theme = {
+import type { PrismTheme } from 'prism-react-renderer';
+
+const theme: PrismTheme = {
   plain: {
     color: 'hsl(212, 45%, 90%)',
     backgroundColor: 'hsl(240, 5%, 10%)',
@@ -130,4 +132,4 @@ const theme = {
   ],
 };
 
-module.exports = theme;
+export default theme;

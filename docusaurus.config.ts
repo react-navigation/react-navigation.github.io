@@ -1,9 +1,14 @@
+import type * as Preset from '@docusaurus/preset-classic';
+import type { Config } from '@docusaurus/types';
+
 import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.mjs';
 import rehypeStaticToDynamic from './src/plugins/rehype-static-to-dynamic.mjs';
 import rehypeVideoAspectRatio from './src/plugins/rehype-video-aspect-ratio.mjs';
 import remarkNpm2Yarn from './src/plugins/remark-npm2yarn.mjs';
+import darkTheme from './src/themes/react-navigation-dark';
+import lightTheme from './src/themes/react-navigation-light';
 
-export default {
+const config: Config = {
   title: 'React Navigation',
   tagline: 'Routing and navigation for your React Native apps',
   url: 'https://reactnavigation.org/',
@@ -26,8 +31,8 @@ export default {
       respectPrefersColorScheme: true,
     },
     prism: {
-      theme: require('./src/themes/react-navigation-light.js'),
-      darkTheme: require('./src/themes/react-navigation-dark.js'),
+      theme: lightTheme,
+      darkTheme: darkTheme,
       additionalLanguages: [
         'bash',
         'json',
@@ -53,7 +58,6 @@ export default {
       appId: 'QCWXRU195A',
       apiKey: 'bad995329370d9a9ba50cc4b840a3884',
       indexName: 'react-navigation',
-      algoliaOptions: {},
     },
     navbar: {
       title: 'React Navigation',
@@ -122,7 +126,7 @@ export default {
         },
       ],
     },
-  },
+  } satisfies Preset.ThemeConfig,
   plugins: [
     './src/plugins/disable-fully-specified.mjs',
     './src/plugins/react-navigation-versions.mjs',
@@ -179,12 +183,12 @@ export default {
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: './src/css/custom.css',
         },
         googleAnalytics: {
           trackingID: 'UA-10128745-16',
         },
-      },
+      } satisfies Preset.Options,
     ],
   ],
   headTags: [
@@ -217,3 +221,5 @@ export default {
     '/js/video-playback.js',
   ],
 };
+
+export default config;

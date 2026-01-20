@@ -8,10 +8,10 @@ const links = [
 
 export default function Footer() {
   return (
-    <footer class="footer">
-      <div class="container container-fluid">
-        <div class="footer__bottom text--center">
-          <div class="footer__copyright">
+    <footer className="footer">
+      <div className="container container-fluid">
+        <div className="footer__bottom text--center">
+          <div className="footer__copyright">
             Copyright © 2024 React Navigation. Built with{' '}
             {links.map((link, index) => (
               <React.Fragment key={link.href}>

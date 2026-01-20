@@ -12,6 +12,14 @@ const COMMENTS = {
   FOCUS_END: '// codeblock-focus-end',
 };
 
+type Props = {
+  children: React.ReactElement<{ className?: string; children: string }>;
+  'data-name'?: string;
+  'data-snack'?: string | 'embed';
+  'data-dependencies'?: string;
+  'data-lang'?: string;
+};
+
 export default function Pre({
   children,
   'data-name': name,
@@ -19,12 +27,17 @@ export default function Pre({
   'data-dependencies': deps,
   'data-lang': lang,
   ...rest
-}) {
+}: Props) {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const { colorMode } = useColorMode();
-  const activeVersion = useActiveVersion();
-  const { versions } = usePluginData('react-navigation-versions');
+  const activeVersion = useActiveVersion(undefined);
+  const { versions } = usePluginData('react-navigation-versions') as {
+    versions: Record<
+      string,
+      Record<string, string | [string, Record<string, string>]>
+    >;
+  };
 
   const child = React.Children.only(children);
 
@@ -57,15 +70,17 @@ export default function Pre({
       })
       .join('\n');
 
-    children = React.cloneElement(child, {
-      className: `language-${lang}`,
-      children: content,
-    });
-
-    return <MDXPre {...rest}>{children}</MDXPre>;
+    return (
+      <MDXPre {...rest}>
+        {React.cloneElement(child, {
+          className: `language-${lang}`,
+          children: content,
+        })}
+      </MDXPre>
+    );
   }
 
-  const buttons = [];
+  const buttons: React.ReactNode[] = [];
 
   if (child.props.children.includes?.(COMMENTS.FOCUS_START)) {
     buttons.push(
@@ -106,7 +121,7 @@ export default function Pre({
   const version = activeVersion?.name;
 
   // Handle snack demos
-  if (snack && versions[version] != null) {
+  if (snack && version && versions[version] != null) {
     const code = child.props.children;
 
     if (typeof code !== 'string') {
@@ -115,7 +130,7 @@ export default function Pre({
       );
     }
 
-    const dependencies = deps
+    const dependencies: Record<string, string> = deps
       ? Object.fromEntries(
           deps.split(',').map((entry) => {
             let prefix = '';
@@ -135,34 +150,37 @@ export default function Pre({
 
     Object.assign(
       dependencies,
-      Object.entries(versions[version]).reduce((acc, [key, value]) => {
-        if (code.includes(`from '${key}'`)) {
-          if (Array.isArray(value)) {
-            const [v, peers] = value;
+      Object.entries(versions[version]).reduce(
+        (acc, [key, value]) => {
+          if (code.includes(`from '${key}'`)) {
+            if (Array.isArray(value)) {
+              const [v, peers] = value;
 
-            Object.assign(acc, {
-              [key]: v,
-              ...Object.fromEntries(
-                Object.entries(peers).map(([key, value]) => {
-                  const meta = versions[version][key];
+              Object.assign(acc, {
+                [key]: v,
+                ...Object.fromEntries(
+                  Object.entries(peers).map(([key, value]) => {
+                    const meta = versions[version][key];
 
-                  if (value === '*' && meta) {
-                    const v = Array.isArray(meta) ? meta[0] : meta;
+                    if (value === '*' && meta) {
+                      const v = Array.isArray(meta) ? meta[0] : meta;
 
-                    return [key, v];
-                  }
+                      return [key, v];
+                    }
 
-                  return [key, value];
-                })
-              ),
-            });
-          } else {
-            acc[key] = value;
+                    return [key, value];
+                  })
+                ),
+              });
+            } else {
+              acc[key] = value;
+            }
           }
-        }
 
-        return acc;
-      }, {})
+          return acc;
+        },
+        {} as Record<string, string>
+      )
     );
 
     const url = new URL('https://snack.expo.dev');
@@ -209,7 +227,6 @@ export default function Pre({
           style={{
             width: '100%',
             height: 660,
-            border: 'none',
             border: '1px solid var(--ifm-table-border-color)',
             borderRadius: 'var(--ifm-global-radius)',
             overflow: 'hidden',
@@ -263,7 +280,14 @@ export default function Pre({
   );
 }
 
-function FocusedCodeBlock({ children, expanded, ...rest }) {
+function FocusedCodeBlock({
+  children,
+  expanded,
+  ...rest
+}: {
+  children: React.ReactElement<{ children: string }>;
+  expanded: boolean;
+}) {
   const child = React.Children.only(children);
   const code = child.props.children;
 
@@ -274,7 +298,7 @@ function FocusedCodeBlock({ children, expanded, ...rest }) {
     if (expanded) {
       content = code
         .split('\n')
-        .filter((line) =>
+        .filter((line: string) =>
           [COMMENTS.FOCUS_START, COMMENTS.FOCUS_END].every(
             (comment) => line.trim() !== comment
           )
@@ -284,7 +308,7 @@ function FocusedCodeBlock({ children, expanded, ...rest }) {
       const lines = code.split('\n');
 
       let focus = false;
-      let indent;
+      let indent: string | undefined;
 
       for (const line of lines) {
         if (line.trim() === COMMENTS.FOCUS_START) {
@@ -293,10 +317,10 @@ function FocusedCodeBlock({ children, expanded, ...rest }) {
           focus = false;
         } else if (focus) {
           if (indent === undefined) {
-            indent = line.match(/^\s*/)[0];
+            indent = line.match(/^\s*/)?.[0];
           }
 
-          if (line.startsWith(indent)) {
+          if (indent && line.startsWith(indent)) {
             content += line.slice(indent.length) + '\n';
           } else {
             content += line + '\n';
@@ -305,8 +329,12 @@ function FocusedCodeBlock({ children, expanded, ...rest }) {
       }
     }
 
-    children = React.Children.map(children, (c) =>
-      React.cloneElement(c, { children: content })
+    return (
+      <MDXPre {...rest}>
+        {React.Children.map(children, (c) =>
+          React.cloneElement(c, { children: content })
+        )}
+      </MDXPre>
     );
   }
 

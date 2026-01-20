@@ -1,7 +1,7 @@
 import Category from '@theme-original/DocSidebarItem/Category';
 import { icons } from './icons';
 
-function svgToDataUri(svg) {
+function svgToDataUri(svg: string) {
   const encoded = encodeURIComponent(svg)
     .replace(/'/g, '%27')
     .replace(/"/g, "'");
@@ -9,8 +9,12 @@ function svgToDataUri(svg) {
   return `url("data:image/svg+xml,${encoded}")`;
 }
 
-export default function CategoryWrapper(props) {
-  const iconName = props.item.customProps?.icon;
+export default function CategoryWrapper(
+  props: React.ComponentProps<typeof Category>
+) {
+  const iconName = props.item.customProps?.icon as
+    | keyof typeof icons
+    | undefined;
   const svg = iconName ? icons[iconName] : null;
 
   if (!svg) {
@@ -21,7 +25,7 @@ export default function CategoryWrapper(props) {
     <Category
       {...props}
       data-category-icon
-      style={{ '--category-icon': svgToDataUri(svg) }}
+      style={{ '--category-icon': svgToDataUri(svg) } as React.CSSProperties}
     />
   );
 }

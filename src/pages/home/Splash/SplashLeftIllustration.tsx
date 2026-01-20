@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function SplashLeftIllustration() {
   return (
     <svg
@@ -17,12 +15,12 @@ export default function SplashLeftIllustration() {
         rx="21.109"
         fill="var(--ifm-home-color-background)"
         stroke="var(--ifm-home-color-border)"
-        stroke-width="10.132"
+        strokeWidth="10.132"
       />
       <path
         d="M236.286 118.078H51.792"
         stroke="var(--ifm-home-color-border)"
-        stroke-width="3.377"
+        strokeWidth="3.377"
       />
       <rect
         x="64.458"
@@ -35,19 +33,19 @@ export default function SplashLeftIllustration() {
       <path
         d="M236.286 343.524H51.792"
         stroke="var(--ifm-home-color-border)"
-        stroke-width="3.377"
+        strokeWidth="3.377"
       />
       <path
         d="M84 82l-6 5.5 6 5.5"
         stroke="var(--ifm-home-color-background)"
-        stroke-width="5.066"
-        stroke-linecap="round"
+        strokeWidth="5.066"
+        strokeLinecap="round"
       />
       <path
         d="M123 88h44M180.98 48.84h35.464M245.152 136.654V101.19M245.152 182.25v-35.464"
         stroke="var(--ifm-home-color-border)"
-        stroke-width="3.377"
-        stroke-linecap="round"
+        strokeWidth="3.377"
+        strokeLinecap="round"
       />
       <rect
         x="69.524"
@@ -86,8 +84,8 @@ export default function SplashLeftIllustration() {
         fill="var(--ifm-home-color-highlight)"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M195.713 364.478a.844.844 0 01.83-.689h2.651c.407 0 .755.289.83.689l.308 1.643c.112.6.805.886 1.308.541l1.392-.956a.844.844 0 011.075.099l1.878 1.878c.287.288.329.74.098 1.075l-.957 1.392a.845.845 0 00.541 1.309l1.645.307a.845.845 0 01.689.83v2.651a.844.844 0 01-.689.83l-1.645.307a.845.845 0 00-.54 1.309l.956 1.391a.846.846 0 01-.098 1.076l-1.878 1.877a.844.844 0 01-1.075.099l-1.391-.957a.844.844 0 00-1.308.54l-.309 1.646a.845.845 0 01-.83.689h-2.651a.845.845 0 01-.83-.689l-.307-1.645a.845.845 0 00-1.309-.541l-1.391.957a.846.846 0 01-1.076-.099l-1.878-1.878a.846.846 0 01-.099-1.075l.954-1.391a.845.845 0 00-.541-1.307l-1.641-.309a.844.844 0 01-.689-.83v-2.651c0-.407.29-.755.689-.83l1.643-.308a.844.844 0 00.54-1.308l-.955-1.392a.846.846 0 01.099-1.075l1.879-1.878a.844.844 0 011.075-.099l1.392.955a.845.845 0 001.308-.54l.307-1.643zm2.156 13.158a3.715 3.715 0 100-7.43 3.715 3.715 0 000 7.43z"
         fill="var(--ifm-home-color-background)"
       />
@@ -97,8 +95,8 @@ export default function SplashLeftIllustration() {
       />
       <path
         stroke="var(--ifm-home-color-background)"
-        stroke-width="3.377"
-        stroke-linecap="round"
+        strokeWidth="3.377"
+        strokeLinecap="round"
         d="M133.696 367.011h22.797M133.696 373.766h22.797M133.696 380.521h22.797"
       />
       <path
@@ -109,15 +107,15 @@ export default function SplashLeftIllustration() {
         d="M116.52 387.426a1.69 1.69 0 00-.266-3.367c-2.49.196-4.992 1.525-7.408 3.415-2.442 1.912-4.966 4.533-7.516 7.589-5.102 6.113-10.483 14.176-15.707 22.329-1.556 2.428-3.1 4.867-4.62 7.269v.001c-3.606 5.696-7.078 11.181-10.299 15.873-2.288 3.334-4.422 6.227-6.358 8.483-1.967 2.291-3.612 3.783-4.905 4.472a1.689 1.689 0 001.59 2.981c1.873-1 3.856-2.898 5.878-5.253 2.051-2.39 4.264-5.397 6.58-8.772 3.258-4.747 6.774-10.301 10.38-15.999l.007-.01c1.517-2.396 3.05-4.819 4.59-7.223 5.226-8.153 10.505-16.054 15.457-21.987 2.476-2.966 4.826-5.388 7.005-7.093 2.205-1.726 4.071-2.588 5.592-2.708z"
         fill="var(--ifm-home-color-border)"
         stroke="var(--ifm-home-color-background-secondary)"
-        stroke-width="1.689"
-        stroke-linecap="round"
+        strokeWidth="1.689"
+        strokeLinecap="round"
       />
       <path
         d="M31.809 19.44a1.689 1.689 0 00-1.407 3.07c.956.439 2.197 1.439 3.7 3.062 1.475 1.593 3.092 3.664 4.817 6.087 3.45 4.847 7.233 10.957 11.067 17.17l.298.484.01.014c3.716 6.025 7.472 12.113 10.953 17.085 1.79 2.556 3.528 4.848 5.172 6.703 1.624 1.831 3.245 3.34 4.813 4.218a1.689 1.689 0 001.65-2.947c-1.07-.6-2.391-1.77-3.936-3.512-1.523-1.719-3.18-3.895-4.932-6.4-3.421-4.886-7.131-10.898-10.87-16.959l-.284-.46c-3.818-6.188-7.662-12.4-11.19-17.355-1.765-2.479-3.476-4.68-5.09-6.423-1.586-1.713-3.195-3.114-4.771-3.837z"
         fill="var(--ifm-home-color-border)"
         stroke="var(--ifm-home-color-background)"
-        stroke-width="1.689"
-        stroke-linecap="round"
+        strokeWidth="1.689"
+        strokeLinecap="round"
       />
     </svg>
   );
