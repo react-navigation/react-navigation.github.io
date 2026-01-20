@@ -1,6 +1,11 @@
 name: CI
-
-on: [pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -16,6 +21,9 @@ jobs:
 
       - name: Lint markdown
         run: yarn markdownlint-cli2
+
+      - name: Run Typecheck
+        run: yarn typecheck
 
       - name: Run tests
         run: yarn test
