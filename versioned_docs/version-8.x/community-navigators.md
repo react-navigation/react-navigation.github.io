@@ -29,3 +29,11 @@ The library provides React Navigation integration for its Material Bottom Tabs. 
 [Documentation](https://callstack.github.io/react-native-paper/docs/guides/bottom-navigation/)
 
 [Repository](https://github.com/callstack/react-native-paper)
+
+## Sheet Navigator - TrueSheet
+
+This library provides a native bottom sheet with React Navigation integration. It allows you to present screens as sheets.
+
+[Documentation](https://sheet.lodev09.com/guides/navigation/)
+
+[Repository](https://github.com/lodev09/react-native-true-sheet)
