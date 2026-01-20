@@ -116,3 +116,4 @@
 - [Limitations](https://reactnavigation.org/docs/8.x/limitations)
 - [Apps using React Navigation](https://reactnavigation.org/docs/8.x/used-by)
 - [React Navigation contributor guide](https://reactnavigation.org/docs/8.x/contributing)
+- [Documentation for LLMs](https://reactnavigation.org/docs/8.x/llms)
