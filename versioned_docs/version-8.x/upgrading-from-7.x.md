@@ -157,7 +157,7 @@ Each navigator exports its own helper function, e.g. `createNativeStackScreen` f
 
 :::note
 
-This is not a breaking change. It's not required to use this API and your existing code will continue to work as before. You can incrementally adopt this API for new screens to get proper types for `route` object in various callbacks such as `options`, `listeners`, etc.
+This is technically not a breaking change. It's not required to use this API and your existing code will continue to work as before. You can incrementally adopt this API for new screens to get proper types for `route` object in various callbacks such as `options`, `listeners`, etc.
 
 :::
 
@@ -279,7 +279,7 @@ As part of this change, some of the options have changed to work with native tab
   - `"labeled"` - same as `tabBarShowLabel: true`
   - `"unlabeled"` - same as `tabBarShowLabel: false`
 - `tabBarLabel` now only accepts a `string`
-- `tabBarIcon` now accepts an function that can return an icon object, returning a react element still works with `custom` implementation
+- `tabBarIcon` now accepts an icon object or function that can return an icon object, returning a react element still works with `custom` implementation - so you don't need to change anything if you're using `custom` implementation.
 
 The following props have been removed:
 
@@ -324,6 +324,35 @@ createBottomTabNavigator({
 
 </TabItem>
 </Tabs>
+
+#### Preloaded screens now behave differently
+
+Previously, when a screen was preloaded in Stack and Native Stack Navigators, there were a few restrictions:
+
+- Options could not be updated with [`setOptions`](navigation-object.md#setoptions) until the screen became active.
+- Adding listeners with [`addListener`](navigation-object.md#navigation-events) did nothing until the screen became active.
+- Preloaded screens could not contain nested navigators.
+
+In addition, the `navigation` object received by preloaded screens was different from that of active screens. So it resulted in re-rendering the screen when it became active.
+
+We have reworked the implementation of preloaded screens to make it more consistent with active screens:
+
+- Options can now be updated with `setOptions` even when the screen is preloaded.
+- Listeners added with `addListener` will now be called even when the screen is preloaded.
+- Preloaded screens can now contain nested navigators.
+- The `navigation` object now does not change when the screen becomes active.
+
+While this is a breaking change, your existing code will likely continue to work as before if you were not relying on any of the special behaviors of preloaded screens for your logic.
+
+If your existing code checked `navigation.isFocused()` before calling `setOptions`, it will continue to work as before. However, you can now simplify such code by removing the check:
+
+```diff lang=js
+- if (navigation.isFocused()) {
+    navigation.setOptions({ title: 'New Title' });
+- }
+```
+
+See [`navigation.preload`](navigation-object.md#preload) for usage details.
 
 #### Navigators no longer accept an `id` prop
 
@@ -773,45 +802,6 @@ const MyStack = createNativeStackNavigator({
 
 See [`Navigator` docs](navigator.md#router) for more details.
 
-### `Header` from `@react-navigation/elements` has been reworked
-
-The `Header` component from `@react-navigation/elements` has been reworked with various improvements:
-
-- It uses the new liquid glass effect on iOS 26
-- It supports `ColorValue` and CSS custom properties for colors
-- It supports `headerBlurEffect` on Web (previously only supported on iOS in Native Stack Navigator)
-- It no longer needs the layout of the screen to render correctly
-
-To match the iOS 26 design, the back button title is no longer shown by default on iOS 26.
-
-See [Elements](elements.md) for more details.
-
-### `react-native-tab-view` now supports a `renderAdapter` prop for custom adapters
-
-By default, `react-native-tab-view` uses [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) for rendering pages on Android and iOS. However, it may not be suitable for all use cases.
-
-So it now supports a `renderAdapter` prop to provide a custom adapter for rendering pages. For example, you can use `ScrollViewAdapter` to use a `ScrollView` for rendering pages:
-
-```js
-import React from 'react';
-import { TabView, ScrollViewAdapter } from 'react-native-tab-view';
-
-export default function TabViewExample() {
-  const [index, setIndex] = React.useState(0);
-
-  return (
-    <TabView
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      renderAdapter={ScrollViewAdapter}
-    />
-  );
-}
-```
-
-You can also create your own custom adapter by implementing the required interface. See the [`react-native-tab-view` docs](tab-view.md) for more information.
-
 ### State persistence is simplified with the `persistor` prop
 
 Previously, state persistence could be implemented with `initialState` and `onStateChange` props, however it required some boilerplates and handling edge cases.
@@ -874,3 +864,65 @@ export default function App() {
 </Tabs>
 
 See [State persistence docs](state-persistence.md) for more details.
+
+### `Header` from `@react-navigation/elements` has been reworked
+
+The `Header` component from `@react-navigation/elements` has been reworked with various improvements:
+
+- It uses the new liquid glass effect on iOS 26
+- It supports `ColorValue` and CSS custom properties for colors
+- It supports `headerBlurEffect` on Web (previously only supported on iOS in Native Stack Navigator)
+- It no longer needs the layout of the screen to render correctly
+
+To match the iOS 26 design, the back button title is no longer shown by default on iOS 26.
+
+See [Elements](elements.md) for more details.
+
+### Bottom Tab Navigator now supports Material Symbols & SF Symbols icons
+
+The Bottom Tab Navigator now supports using [Material Symbols](https://fonts.google.com/icons) on Android and [SF Symbols](https://developer.apple.com/sf-symbols/) on iOS for tab bar icons.
+
+You can specify the icon as an object in `tabBarIcon` option:
+
+```js
+tabBarIcon: Platform.select({
+  ios: {
+    type: 'sfSymbol',
+    name: 'house',
+  },
+  android: {
+    type: 'materialSymbol',
+    name: 'home',
+  },
+}),
+```
+
+This is supported both in `native` and `custom` implementations of Bottom Tab Navigator.
+
+See [Bottom Tab Navigator docs](bottom-tab-navigator.md#tabbaricon) for more details.
+
+### `react-native-tab-view` now supports a `renderAdapter` prop for custom adapters
+
+By default, `react-native-tab-view` uses [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) for rendering pages on Android and iOS. However, it may not be suitable for all use cases.
+
+So it now supports a `renderAdapter` prop to provide a custom adapter for rendering pages. For example, you can use `ScrollViewAdapter` to use a `ScrollView` for rendering pages:
+
+```js
+import React from 'react';
+import { TabView, ScrollViewAdapter } from 'react-native-tab-view';
+
+export default function TabViewExample() {
+  const [index, setIndex] = React.useState(0);
+
+  return (
+    <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      renderAdapter={ScrollViewAdapter}
+    />
+  );
+}
+```
+
+You can also create your own custom adapter by implementing the required interface. See the [`react-native-tab-view` docs](tab-view.md) for more information.

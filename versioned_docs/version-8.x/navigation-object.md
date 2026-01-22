@@ -914,33 +914,7 @@ Depending on the navigator, `preload` may work slightly differently:
 - In a stack navigator ([stack](stack-navigator.md), [native stack](native-stack-navigator.md)), the screen will be rendered off-screen and animated in when you navigate to it. If [`getId`](screen.md#id) is specified, it'll be used for the navigation to identify the preloaded screen.
 - In a tab or drawer navigator ([bottom tabs](bottom-tab-navigator.md), [material top tabs](material-top-tab-navigator.md), [drawer](drawer-navigator.md), etc.), the existing screen will be rendered as if `lazy` was set to `false`. Calling `preload` on a screen that is already rendered will not have any effect.
 
-When a screen is preloaded in a stack navigator, it will have a few limitations:
-
-- It can't dispatch navigation actions (e.g. `navigate`, `goBack`, etc.).
-- It can't update options with `navigation.setOptions`.
-- It can't listen to events from the navigator (e.g. `focus`, `tabPress`, etc.).
-
-The `navigation` object will be updated once you navigate to the screen. So if you have an event listener in a `useEffect` hook, and have a dependency on `navigation`, it will add any listeners when the screen is navigated to:
-
-```js
-React.useEffect(() => {
-  const unsubscribe = navigation.addListener('tabPress', () => {
-    // do something
-  });
-
-  return () => {
-    unsubscribe();
-  };
-}, [navigation]);
-```
-
-Similarly, for dispatching actions or updating options, you can check if the screen is focused before doing so:
-
-```js
-if (navigation.isFocused()) {
-  navigation.setOptions({ title: 'Updated title' });
-}
-```
+When a screen is preloaded in a stack navigator, it can't dispatch navigation actions (e.g. `navigate`, `goBack`, etc.) until it becomes active.
 
 ### `setParams`
 

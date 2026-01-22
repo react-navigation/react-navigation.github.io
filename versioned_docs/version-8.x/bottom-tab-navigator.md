@@ -519,7 +519,7 @@ tabBarLabelStyle: {
 
 #### `tabBarIcon`
 
-Function that given `{ focused: boolean, color: string, size: number }` returns an icon to display in the tab bar. It can be one of the following:
+Icon object to display or a function that given `{ focused: boolean, color: string, size: number }` returns an icon to display in the tab bar. It can be one of the following:
 
 - An icon object with both `native` and `custom` implementations
 - A React element with `custom` implementation only
