@@ -36,6 +36,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_GITHUB_TOKEN }}
         run: yarn fetch-sponsors
 
+      - name: Install EnhanceDocs CLI
+        uses: enhancedocs/enhancedocs-github-action@0.0.2
+        with:
+          api-key: ${{ secrets.ENHANCEDOCS_API_KEY }}
+
+      - name: Build Docs
+        run: enhancedocs build versioned_docs/version-6.x
+
+      - name: Pushish Docs
+        run: enhancedocs publish
+
       - name: Publish to Github pages
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_GITHUB_TOKEN }}
