@@ -564,6 +564,42 @@ Defaults to `none`, indicating that the dimming view should be always present.
 
 Only supported on Android and iOS.
 
+#### `sheetShouldOverflowTopInset`
+
+:::note
+
+Works only when `presentation` is set to `formSheet`.
+
+:::
+
+Boolean indicating whether the sheet content should be rendered behind the **status bar** or **display cutouts**.
+
+When set to `true`, the sheet will extend to the physical edges of the stack, allowing content to be visible behind the status bar or display cutouts. Detent ratios in `sheetAllowedDetents` will be measured relative to the **full stack height**.
+
+When set to `false`, the sheet's layout will be constrained by the inset from the top and the detent ratios will then be measured relative to the **adjusted height** (excluding the top inset). This means that `sheetAllowedDetents` will result in different sheet heights depending on this prop.
+
+Defaults to `false`.
+
+Only supported on Android.
+
+#### `sheetDefaultResizeAnimationEnabled`
+
+:::note
+
+Works only when `presentation` is set to `formSheet`.
+
+:::
+
+Boolean indicating whether the default native animation should be used when the sheet's content size changes (specifically when using `fitToContents`).
+
+When set to `true`, the sheet uses internal logic to synchronize size updates and translation animations during entry, exit, or content updates. This ensures a smooth transition for standard, static content mounting/unmounting.
+
+When set to `false`, the internal animation and translation logic is ignored. This allows the sheet to adjust its size dynamically based on the current dimensions of the content provided by the developer, allowing implementing **custom resizing animations**.
+
+Defaults to `true`.
+
+Only supported on Android.
+
 #### `orientation`
 
 The display orientation to use for the screen.
