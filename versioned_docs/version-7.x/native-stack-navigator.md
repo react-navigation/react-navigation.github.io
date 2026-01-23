@@ -582,7 +582,7 @@ Defaults to `false`.
 
 Only supported on Android.
 
-#### `sheetDefaultResizeAnimationEnabled`
+#### `sheetResizeAnimationEnabled`
 
 :::note
 
