@@ -562,7 +562,7 @@ Additionaly there are following options available:
 
 :::warning
 
-When showing the keyboard for small detent, the system will temporarily resize the sheet above the defined detent, always showing dimming background, even if the user hasn't expanded it manually over the `sheetLargestUndimmedDetentIndex` value.
+On iOS, when showing the keyboard for small detent, the system will temporarily resize the sheet above the defined detent, always showing dimming background, even if the user hasn't expanded it manually over the `sheetLargestUndimmedDetentIndex` value.
 
 :::
 
