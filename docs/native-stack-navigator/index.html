@@ -23,7 +23,7 @@
 <script src="/js/snack-helpers.js"></script>
 <script src="/js/toc-fixes.js"></script>
 <script src="/js/video-playback.js"></script><link rel="stylesheet" href="/assets/css/styles.4bcc3b97.css">
-<script src="/assets/js/runtime~main.40d7e2b0.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.5493f25f.js" defer="defer"></script>
 <script src="/assets/js/main.ade73510.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -276,6 +276,20 @@ and it is expected that the edge-to-edge will be enforced in future SDKs, see <a
 <div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>warning</div><div class="admonitionContent_BuS1"><p>On iOS, the native implementation might resize the the sheet w/o explicitly changing the detent level, e.g. in case of keyboard appearance.</p><p>In case after such resize the sheet exceeds height for which in regular scenario a dimming view would be applied - it will be applied, even if the detent has not effectively been changed.</p></div></div>
 <p>Defaults to <code>none</code>, indicating that the dimming view should be always present.</p>
 <p>Only supported on Android and iOS.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="sheetshouldoverflowtopinset"><code>sheetShouldOverflowTopInset</code><a href="#sheetshouldoverflowtopinset" class="hash-link" aria-label="Direct link to sheetshouldoverflowtopinset" title="Direct link to sheetshouldoverflowtopinset" translate="no">​</a></h4>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Works only when <code>presentation</code> is set to <code>formSheet</code>.</p></div></div>
+<p>Boolean indicating whether the sheet content should be rendered behind the <strong>status bar</strong> or <strong>display cutouts</strong>.</p>
+<p>When set to <code>true</code>, the sheet will extend to the physical edges of the stack, allowing content to be visible behind the status bar or display cutouts. Detent ratios in <code>sheetAllowedDetents</code> will be measured relative to the <strong>full stack height</strong>.</p>
+<p>When set to <code>false</code>, the sheet&#x27;s layout will be constrained by the inset from the top and the detent ratios will then be measured relative to the <strong>adjusted height</strong> (excluding the top inset). This means that <code>sheetAllowedDetents</code> will result in different sheet heights depending on this prop.</p>
+<p>Defaults to <code>false</code>.</p>
+<p>Only supported on Android.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="sheetresizeanimationenabled"><code>sheetResizeAnimationEnabled</code><a href="#sheetresizeanimationenabled" class="hash-link" aria-label="Direct link to sheetresizeanimationenabled" title="Direct link to sheetresizeanimationenabled" translate="no">​</a></h4>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Works only when <code>presentation</code> is set to <code>formSheet</code>.</p></div></div>
+<p>Boolean indicating whether the default native animation should be used when the sheet&#x27;s content size changes (specifically when using <code>fitToContents</code>).</p>
+<p>When set to <code>true</code>, the sheet uses internal logic to synchronize size updates and translation animations during entry, exit, or content updates. This ensures a smooth transition for standard, static content mounting/unmounting.</p>
+<p>When set to <code>false</code>, the internal animation and translation logic is ignored. This allows the sheet to adjust its size dynamically based on the current dimensions of the content provided by the developer, allowing implementing <strong>custom resizing animations</strong>.</p>
+<p>Defaults to <code>true</code>.</p>
+<p>Only supported on Android.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="orientation"><code>orientation</code><a href="#orientation" class="hash-link" aria-label="Direct link to orientation" title="Direct link to orientation" translate="no">​</a></h4>
 <p>The display orientation to use for the screen.</p>
 <p>Supported values:</p>
