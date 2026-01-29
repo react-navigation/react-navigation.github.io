@@ -602,6 +602,12 @@ The icon object can be one of the following types:
   }
   ```
 
+  :::info
+
+  You'll need to rebuild your app after changing the font configuration in `package.json`.
+
+  :::
+
 - [Drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) name - Supported on Android
 
   ```js
