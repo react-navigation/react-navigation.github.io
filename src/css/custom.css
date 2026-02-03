@@ -720,7 +720,7 @@ header {
     border-radius: 0;
     filter: saturate(0);
     transition:
-      color var(--ifm-transition-fast) var(--ifm-transition-timing-default),
+      color,
       filter var(--ifm-transition-fast) var(--ifm-transition-timing-default);
 
     &:first-child {
@@ -1096,6 +1096,13 @@ code {
     box-shadow:
       0 0 0 1px rgba(0, 0, 0, 0.05),
       var(--ifm-global-shadow-lw);
+    transition: var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+
+    &:hover {
+      box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.05),
+        var(--ifm-global-shadow-md);
+    }
 
     & > .video-player {
       margin: 0;
