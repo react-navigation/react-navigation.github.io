@@ -18335,6 +18335,24 @@ export default function App() {
 }
 ```
 
+## Highlights
+
+<div className="feature-grid">
+
+- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-search.mp4" /></video>
+
+  [Search tab on iOS 26+](#search-tab-on-ios-26)
+
+- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-bottom-accessory.mp4" /></video>
+
+  [Bottom accessory](#bottomaccessory)
+
+- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-minimize.mp4" /></video>
+
+  [Minimize on scroll](#tabbarminimizebehavior)
+
+</div>
+
 ## Native vs Custom implementation
 
 The navigator provides 2 implementations that can be specified using the [`implementation`](#implementation) prop, `native` and `custom`. Many customization options are exclusive to one of the implementations. Make sure to check the documentation of each option to see which implementation it supports.
