@@ -1078,6 +1078,62 @@ code {
   border-width: 1px;
 }
 
+.feature-grid ul {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--ifm-spacing-horizontal);
+
+  li + li {
+    margin-top: 0;
+  }
+
+  li {
+    position: relative;
+    border-radius: var(--ifm-global-radius);
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.05),
+      var(--ifm-global-shadow-lw);
+
+    & > .video-player {
+      margin: 0;
+      box-shadow: none;
+      border-radius: 0 !important;
+      border-bottom: 1px solid var(--ifm-toc-border-color);
+
+      video {
+        aspect-ratio: 2 / 1;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 0;
+      }
+
+      .video-player-icon {
+        display: none;
+      }
+    }
+
+    & > p {
+      font-weight: var(--ifm-font-weight-semibold);
+      margin: calc(var(--ifm-spacing-vertical) / 2)
+        var(--ifm-spacing-horizontal);
+
+      & > a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      & > a::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+}
+
 .blog-wrapper {
   & .container aside nav {
     margin-top: 2.25rem;

@@ -49,6 +49,24 @@ const MyTabs = createNativeBottomTabNavigator({
 });
 ```
 
+## Highlights
+
+<div className="feature-grid">
+
+- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-search.mp4" /></video>
+
+  [Search tab on iOS 26+](#search-tab-on-ios-26)
+
+- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-bottom-accessory.mp4" /></video>
+
+  [Bottom accessory](#bottomaccessory)
+
+- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-minimize.mp4" /></video>
+
+  [Minimize on scroll](#tabbarminimizebehavior)
+
+</div>
+
 ## Notes
 
 - Liquid Glass effect on iOS 26+ requires your app to be built with Xcode 26 or above.
