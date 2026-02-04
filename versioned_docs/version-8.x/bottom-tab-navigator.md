@@ -597,11 +597,11 @@ The icon object can be one of the following types:
 
   See [Icons](icons.md#material-symbols) for more details.
 
-- [Drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) name - Supported on Android
+- Resource name - [Drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) on Android, [xcasset](https://developer.apple.com/documentation/xcode/adding-images-to-your-xcode-project) on iOS.
 
   ```js
   tabBarIcon: {
-    type: 'drawableResource',
+    type: 'resource',
     name: 'sunny',
   }
   ```

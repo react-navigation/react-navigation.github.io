@@ -218,11 +218,11 @@ The icon can be of following types:
   }
   ```
 
-- [Drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) name - Supported on Android
+- Resource name - [Drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) on Android, [xcasset](https://developer.apple.com/documentation/xcode/adding-images-to-your-xcode-project) on iOS.
 
   ```js
   tabBarIcon: {
-    type: 'drawableResource',
+    type: 'resource',
     name: 'sunny',
   }
   ```
@@ -249,7 +249,7 @@ tabBarIcon: Platform.select({
     name: 'heart',
   },
   android: {
-    type: 'drawableResource',
+    type: 'resource',
     name: 'heart_icon',
   },
 });
