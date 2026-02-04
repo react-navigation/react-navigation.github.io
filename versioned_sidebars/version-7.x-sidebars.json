@@ -25,6 +25,13 @@
         "icon": "guides"
       },
       "items": [
+        "themes",
+        "testing",
+        "typescript",
+        "deep-linking",
+        "configuring-links",
+        "state-persistence",
+        "web-support",
         "auth-flow",
         "handling-safe-area",
         "customizing-tabbar",
@@ -38,16 +45,9 @@
         "preventing-going-back",
         "function-after-focusing-screen",
         "navigating-without-navigation-prop",
-        "deep-linking",
-        "configuring-links",
-        "web-support",
         "server-rendering",
         "screen-tracking",
-        "themes",
-        "state-persistence",
         "combine-static-with-dynamic",
-        "testing",
-        "typescript",
         "troubleshooting",
         "upgrading-from-6.x"
       ]

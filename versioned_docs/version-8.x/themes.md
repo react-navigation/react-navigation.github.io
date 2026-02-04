@@ -1,7 +1,7 @@
 ---
 id: themes
 title: Themes
-sidebar_label: Themes
+sidebar_label: Customizing Themes
 ---
 
 import Tabs from '@theme/Tabs';
