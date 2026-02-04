@@ -231,12 +231,12 @@ A theme is a JS object containing a list of colors to use. It contains the follo
 
 - `dark` (`boolean`): Whether this is a dark theme or a light theme
 - `colors` (`object`): Various colors used by react navigation components:
-  - `primary` (`string`): The primary color of the app used to tint various elements. Usually you'll want to use your brand color for this.
-  - `background` (`string`): The color of various backgrounds, such as the background color for the screens.
-  - `card` (`string`): The background color of card-like elements, such as headers, tab bars etc.
-  - `text` (`string`): The text color of various elements.
-  - `border` (`string`): The color of borders, e.g. header border, tab bar border etc.
-  - `notification` (`string`): The color of notifications and badge (e.g. badge in bottom tabs).
+  - `primary` (`ColorValue`): The primary color of the app used to tint various elements. Usually you'll want to use your brand color for this.
+  - `background` (`ColorValue`): The color of various backgrounds, such as the background color for the screens.
+  - `card` (`ColorValue`): The background color of card-like elements, such as headers, tab bars etc.
+  - `text` (`ColorValue`): The text color of various elements.
+  - `border` (`ColorValue`): The color of borders, e.g. header border, tab bar border etc.
+  - `notification` (`ColorValue`): The color of notifications and badge (e.g. badge in bottom tabs).
 - `fonts` (`object`): Various fonts used by react navigation components:
   - `regular` (`object`): Style object for the primary font used in the app.
   - `medium` (`object`): Style object for the semi-bold variant of the primary font.
@@ -325,7 +325,32 @@ const MyTheme = {
 };
 ```
 
-Providing a theme will take care of styling of all the official navigators. React Navigation also provides several tools to help you make your customizations of those navigators and the screens within the navigators can use the theme too.
+Providing a theme will take care of styling of all the official navigators.
+
+## Built-in themes
+
+React Navigation provides basic light and dark themes:
+
+- `DefaultTheme`
+- `DarkTheme`
+
+On Android, it also provides themes based on Material Design:
+
+- `MaterialLightTheme`
+- `MaterialDarkTheme`
+
+The Material themes use platform colors to provide dynamic colors that adapt to the user's wallpaper and theme preferences.
+
+You can import the themes from the `@react-navigation/native` package:
+
+```js
+import {
+  DefaultTheme,
+  DarkTheme,
+  MaterialLightTheme,
+  MaterialDarkTheme,
+} from '@react-navigation/native';
+```
 
 ## Using platform colors
 
@@ -340,46 +365,34 @@ import { DefaultTheme } from '@react-navigation/native';
 const MyTheme = {
   ...DefaultTheme,
   colors: Platform.select({
-    ios: () => ({
+    ios: {
       primary: PlatformColor('systemRed'),
       background: PlatformColor('systemGroupedBackground'),
       card: PlatformColor('tertiarySystemBackground'),
       text: PlatformColor('label'),
       border: PlatformColor('separator'),
       notification: PlatformColor('systemRed'),
-    }),
-    android: () => ({
-      primary: PlatformColor('@android:color/system_primary_light'),
-      background: PlatformColor(
-        '@android:color/system_surface_container_light'
-      ),
-      card: PlatformColor('@android:color/system_background_light'),
-      text: PlatformColor('@android:color/system_on_surface_light'),
-      border: PlatformColor('@android:color/system_outline_variant_light'),
-      notification: PlatformColor('@android:color/holo_red_light'),
-    }),
-    default: () => DefaultTheme.colors,
-  })(),
+    },
+    android: {
+      primary: PlatformColor('@android:color/system_accent2_600'),
+      background: PlatformColor('@android:color/system_neutral2_50'),
+      card: PlatformColor('@android:color/system_neutral2_10'),
+      text: PlatformColor('@android:color/system_neutral2_900'),
+      border: PlatformColor('@android:color/system_neutral2_300'),
+      notification: PlatformColor('@android:color/system_error_600'),
+    },
+    default: DefaultTheme.colors,
+  }),
 };
 ```
 
 This allows your app's navigation UI to automatically adapt to system theme changes and use native colors.
 
-:::note
+:::info
 
-When using dynamic colors like `PlatformColor` or `DynamicColorIOS`, React Navigation cannot automatically adjust colors in some scenarios (e.g., adjusting the text color based on background color). In these cases, it will fall back to pre-defined colors according to the theme.
+When using dynamic colors like `PlatformColor` or `DynamicColorIOS`, React Navigation cannot automatically adjust colors in some scenarios (e.g., adjusting the text color based on background color). In these cases, it will fall back to pre-defined colors. You may need to pass appropriate colors for such components if needed via options.
 
 :::
-
-## Built-in themes
-
-As operating systems add built-in support for light and dark modes, supporting dark mode is less about keeping hip to trends and more about conforming to the average user expectations for how apps should work. In order to provide support for light and dark mode in a way that is reasonably consistent with the OS defaults, these themes are built in to React Navigation.
-
-You can import the default and dark themes like so:
-
-```js
-import { DefaultTheme, DarkTheme } from '@react-navigation/native';
-```
 
 ## Keeping the native theme in sync
 

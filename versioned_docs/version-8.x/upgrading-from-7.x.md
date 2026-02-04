@@ -955,6 +955,17 @@ export default function TabViewExample() {
 
 You can also create your own custom adapter by implementing the required interface. See the [`react-native-tab-view` docs](tab-view.md) for more information.
 
+### New built-in themes base on Material Design are now available
+
+The `@react-navigation/native` package now exports 2 new built-in themes based on Material Design:
+
+- `MaterialLightTheme`
+- `MaterialDarkTheme`
+
+These themes use platform colors to provide dynamic colors that adapt to the user's wallpaper and theme preferences.
+
+See [Themes](themes.md#built-in-themes) for more details.
+
 ### `useLogger` devtools now shows more information
 
 Previously, the `useLogger` devtools only showed navigation actions. It now shows the following additional information:
