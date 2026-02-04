@@ -18,6 +18,14 @@
 
 ### Guides
 
+- [Themes](https://reactnavigation.org/docs/8.x/themes)
+- [Icons](https://reactnavigation.org/docs/8.x/icons)
+- [Writing tests](https://reactnavigation.org/docs/8.x/testing)
+- [Type checking with TypeScript](https://reactnavigation.org/docs/8.x/typescript)
+- [Deep linking](https://reactnavigation.org/docs/8.x/deep-linking)
+- [Configuring links](https://reactnavigation.org/docs/8.x/configuring-links)
+- [State persistence](https://reactnavigation.org/docs/8.x/state-persistence)
+- [React Navigation on Web](https://reactnavigation.org/docs/8.x/web-support)
 - [Authentication flows](https://reactnavigation.org/docs/8.x/auth-flow)
 - [Supporting safe areas](https://reactnavigation.org/docs/8.x/handling-safe-area)
 - [Hiding tab bar in specific screens](https://reactnavigation.org/docs/8.x/hiding-tabbar-in-screens)
@@ -30,16 +38,9 @@
 - [Preventing going back](https://reactnavigation.org/docs/8.x/preventing-going-back)
 - [Call a function when focused screen changes](https://reactnavigation.org/docs/8.x/function-after-focusing-screen)
 - [Navigating without the navigation prop](https://reactnavigation.org/docs/8.x/navigating-without-navigation-prop)
-- [Deep linking](https://reactnavigation.org/docs/8.x/deep-linking)
-- [Configuring links](https://reactnavigation.org/docs/8.x/configuring-links)
-- [React Navigation on Web](https://reactnavigation.org/docs/8.x/web-support)
 - [Server rendering](https://reactnavigation.org/docs/8.x/server-rendering)
 - [Screen tracking for analytics](https://reactnavigation.org/docs/8.x/screen-tracking)
-- [Themes](https://reactnavigation.org/docs/8.x/themes)
-- [State persistence](https://reactnavigation.org/docs/8.x/state-persistence)
 - [Combining static and dynamic APIs](https://reactnavigation.org/docs/8.x/combine-static-with-dynamic)
-- [Writing tests](https://reactnavigation.org/docs/8.x/testing)
-- [Type checking with TypeScript](https://reactnavigation.org/docs/8.x/typescript)
 - [Troubleshooting](https://reactnavigation.org/docs/8.x/troubleshooting)
 - [Upgrading from 7.x](https://reactnavigation.org/docs/8.x/upgrading-from-7.x)
 

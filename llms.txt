@@ -18,6 +18,13 @@
 
 ### Guides
 
+- [Themes](https://reactnavigation.org/docs/themes)
+- [Writing tests](https://reactnavigation.org/docs/testing)
+- [Type checking with TypeScript](https://reactnavigation.org/docs/typescript)
+- [Deep linking](https://reactnavigation.org/docs/deep-linking)
+- [Configuring links](https://reactnavigation.org/docs/configuring-links)
+- [State persistence](https://reactnavigation.org/docs/state-persistence)
+- [React Navigation on Web](https://reactnavigation.org/docs/web-support)
 - [Authentication flows](https://reactnavigation.org/docs/auth-flow)
 - [Supporting safe areas](https://reactnavigation.org/docs/handling-safe-area)
 - [Hiding tab bar in specific screens](https://reactnavigation.org/docs/hiding-tabbar-in-screens)
@@ -30,16 +37,9 @@
 - [Preventing going back](https://reactnavigation.org/docs/preventing-going-back)
 - [Call a function when focused screen changes](https://reactnavigation.org/docs/function-after-focusing-screen)
 - [Navigating without the navigation prop](https://reactnavigation.org/docs/navigating-without-navigation-prop)
-- [Deep linking](https://reactnavigation.org/docs/deep-linking)
-- [Configuring links](https://reactnavigation.org/docs/configuring-links)
-- [React Navigation on Web](https://reactnavigation.org/docs/web-support)
 - [Server rendering](https://reactnavigation.org/docs/server-rendering)
 - [Screen tracking for analytics](https://reactnavigation.org/docs/screen-tracking)
-- [Themes](https://reactnavigation.org/docs/themes)
-- [State persistence](https://reactnavigation.org/docs/state-persistence)
 - [Combining static and dynamic APIs](https://reactnavigation.org/docs/combine-static-with-dynamic)
-- [Writing tests](https://reactnavigation.org/docs/testing)
-- [Type checking with TypeScript](https://reactnavigation.org/docs/typescript)
 - [Troubleshooting](https://reactnavigation.org/docs/troubleshooting)
 - [Upgrading from 6.x](https://reactnavigation.org/docs/upgrading-from-6.x)
 
