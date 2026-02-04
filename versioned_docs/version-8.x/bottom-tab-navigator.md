@@ -580,6 +580,8 @@ The icon object can be one of the following types:
   }
   ```
 
+  See [Icons](icons.md#sf-symbols) for more details.
+
 - [Material Symbols](https://fonts.google.com/icons) name - Supported on Android
 
   ```js
@@ -593,38 +595,7 @@ The icon object can be one of the following types:
   - `variant` - Supported values: `outlined`, `rounded`, `sharp`
   - `weight` - Supported values: `100`, `200`, `300`, `400`, `500`, `600`, `700`
 
-  To avoid bundling all the Material Symbols icons in your app, only the `outlined` variant and `400` weight are included by default. To use a different variant and weight, you can customize the font by setting a `"react-navigation"` key in your app's `package.json`:
-
-  ```json
-  "react-navigation": {
-    "material-symbols": {
-      "fonts": [
-        {
-          "variant": "rounded",
-          "weights": [300]
-        }
-      ]
-    }
-  }
-  ```
-
-  You don't need to specify `variant` and `weight` in the `tabBarIcon` option if you only include one variant and weight. The available variant and weight will be used automatically.
-
-  If you don't use Material Symbols and want to reduce your app size, you can also disable the font entirely by specifying an empty array for `fonts`:
-
-  ```json
-  "react-navigation": {
-    "material-symbols": {
-      "fonts": []
-    }
-  }
-  ```
-
-  :::info
-
-  You'll need to rebuild your app after changing the font configuration in `package.json`.
-
-  :::
+  See [Icons](icons.md#material-symbols) for more details.
 
 - [Drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) name - Supported on Android
 

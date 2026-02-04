@@ -279,7 +279,7 @@ As part of this change, some of the options have changed to work with native tab
   - `"labeled"` - same as `tabBarShowLabel: true`
   - `"unlabeled"` - same as `tabBarShowLabel: false`
 - `tabBarLabel` now only accepts a `string`
-- `tabBarIcon` now accepts an icon object or function that can return an icon object, returning a react element still works with `custom` implementation - so you don't need to change anything if you're using `custom` implementation.
+- `tabBarIcon` now [support more types](#bottom-tab-navigator-now-supports-material-symbols--sf-symbols-icons); returning a react element still works with `custom` implementation - so you don't need to change anything if you're using `custom` implementation
 
 The following props have been removed:
 
@@ -518,6 +518,29 @@ You can use [`react-native-edge-to-edge`](https://github.com/zoontek/react-nativ
 
 See [Native Stack Navigator](native-stack-navigator.md) for all available options.
 
+#### Stack & Native Stack Navigators now accept `headerBackIcon` option
+
+The `headerBackImage` and `headerBackImageSource` options in Stack and Native Stack Navigators has been replaced with `headerBackIcon` to support using [Material Symbols](https://fonts.google.com/icons) on Android and [SF Symbols](https://developer.apple.com/sf-symbols/) on iOS.
+
+If you're using a custom back image with `headerBackImageSource`, you can update your code as follows:
+
+```diff lang=js
+- headerBackImageSource: require('./path/to/my-back-icon.png'),
++ headerBackIcon: {
++   type: 'image',
++   source: require('./path/to/my-back-icon.png'),
++ },
+```
+
+If you're using a custom component with `headerBackImage` in Stack Navigator, you can rename the prop to `headerBackIcon`:
+
+```diff lang=js
+- headerBackImage: (props) => <MyCustomBackIcon {...props} />,
++ headerBackIcon: (props) => <MyCustomBackIcon {...props} />,
+```
+
+See [Stack Navigator](stack-navigator.md#headerbackicon) and [Native Stack Navigator](native-stack-navigator.md#headerbackicon) for more details.
+
 #### Stack Navigator now accepts a number for `gestureResponseDistance`
 
 Previously, the `gestureResponseDistance` option in Stack Navigator accepted an object with `horizontal` and `vertical` properties to specify the distance for gestures. Since it's not pssible to have both horizontal and vertical gestures at the same time, it now accepts a number to specify the distance for the current gesture direction:
@@ -722,7 +745,7 @@ const MyTheme = {
       card: PlatformColor('@android:color/system_background_light'),
       text: PlatformColor('@android:color/system_on_surface_light'),
       border: PlatformColor('@android:color/system_outline_variant_light'),
-      notification: PlatformColor('@android:color/holo_red_light'),
+      notification: PlatformColor('@android:color/system_error_light'),
     }),
     default: () => DefaultTheme.colors,
   })(),
@@ -876,13 +899,20 @@ The `Header` component from `@react-navigation/elements` has been reworked with 
 
 To match the iOS 26 design, the back button title is no longer shown by default on iOS 26.
 
+The `backImage` prop has been replaced with `backIcon` that accepts an icon object similar to `tabBarIcon` in Bottom Tab Navigator. It now supports using [Material Symbols](https://fonts.google.com/icons) on Android and [SF Symbols](https://developer.apple.com/sf-symbols/) on iOS.
+
 See [Elements](elements.md) for more details.
 
-### Bottom Tab Navigator now supports Material Symbols & SF Symbols icons
+### Material Symbols & SF Symbols are now supported for icons
 
-The Bottom Tab Navigator now supports using [Material Symbols](https://fonts.google.com/icons) on Android and [SF Symbols](https://developer.apple.com/sf-symbols/) on iOS for tab bar icons.
+Various navigators and components now support using [Material Symbols](https://fonts.google.com/icons) on Android and [SF Symbols](https://developer.apple.com/sf-symbols/) on iOS for icons.
 
-You can specify the icon as an object in `tabBarIcon` option:
+For example,
+
+- The `headerBackIcon` option in Stack and Native Stack Navigators
+- The `tabBarIcon` option in Bottom Tab Navigator
+
+Usage:
 
 ```js
 tabBarIcon: Platform.select({
@@ -897,9 +927,7 @@ tabBarIcon: Platform.select({
 }),
 ```
 
-This is supported both in `native` and `custom` implementations of Bottom Tab Navigator.
-
-See [Bottom Tab Navigator docs](bottom-tab-navigator.md#tabbaricon) for more details.
+In addition, new `SFSymbol` and `MaterialSymbol` components are exported from `@react-navigation/native` to render these icons directly. See [Icons](icons.md) for more details.
 
 ### `react-native-tab-view` now supports a `renderAdapter` prop for custom adapters
 
@@ -926,3 +954,14 @@ export default function TabViewExample() {
 ```
 
 You can also create your own custom adapter by implementing the required interface. See the [`react-native-tab-view` docs](tab-view.md) for more information.
+
+### `useLogger` devtools now shows more information
+
+Previously, the `useLogger` devtools only showed navigation actions. It now shows the following additional information:
+
+- Deep link received by React Navigation
+- Events emitted by navigators (e.g. `tabPress`)
+
+This should help with debugging issues with more complex use cases.
+
+See [Devtools docs](devtools.md#uselogger) for more details.

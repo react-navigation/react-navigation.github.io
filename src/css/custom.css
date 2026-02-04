@@ -175,6 +175,7 @@
   --ifm-toc-border-color: var(--ifm-color-emphasis-200);
 
   --ifm-code-padding-horizontal: 0.3em;
+  --ifm-list-left-padding: 1.25rem;
 
   --docusaurus-highlighted-code-line-bg: rgba(255, 235, 59, 0.2);
 
@@ -371,6 +372,15 @@ h6 {
 
 header {
   font-family: var(--ifm-heading-font-family);
+}
+
+.markdown :is(ul, ol) > li > p {
+  margin-bottom: var(--ifm-list-paragraph-margin);
+}
+
+.markdown :is(ul, ol) > li > p:first-child:has(> code:only-child) {
+  font-weight: 600;
+  font-size: 1.25em;
 }
 
 .blog-wrapper .container {

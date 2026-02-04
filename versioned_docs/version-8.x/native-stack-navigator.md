@@ -774,21 +774,47 @@ headerBackTitleStyle: {
 
 #### `headerBackIcon`
 
-Icon to display in the header as the icon in the back button. Defaults to back icon image for the platform:
+Icon to display in the header as the icon in the back button.
+
+It supports the following types:
+
+- `materialSymbol` (Android only)
+
+  ```js
+  headerBackIcon: {
+    type: 'materialSymbol',
+    name: 'arrow_back',
+  }
+  ```
+
+  See [Icons](icons.md#material-symbols) for more details.
+
+- `sfSymbol` (iOS only)
+
+  ```js
+  headerBackIcon: {
+    type: 'sfSymbol',
+    name: 'arrow.left',
+  }
+  ```
+
+  See [Icons](icons.md#sf-symbols) for more details.
+
+  This is only supported when using [`Header`](elements.md#header) from `@react-navigation/elements` as the header component. The native header doesn't support SF Symbols.
+
+- `image`
+
+  ```js
+  headerBackIcon: {
+    type: 'image',
+    source: require('./path/to/icon.png'),
+  }
+  ```
+
+Defaults to back icon image for the platform:
 
 - A chevron on iOS
 - An arrow on Android
-
-Currently only supports image sources.
-
-Example:
-
-```js
-headerBackIcon: {
-  type: 'image',
-  source: require('./path/to/icon.png'),
-}
-```
 
 #### `headerLargeStyle`
 

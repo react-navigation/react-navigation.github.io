@@ -336,9 +336,55 @@ Whether back button title font should scale to respect Text Size accessibility s
 
 Accessibility label for the header back button.
 
-#### `headerBackImage`
+#### `headerBackIcon`
 
-Function which returns a React Element to display custom image in header's back button. When a function is used, it receives the `tintColor` in it's argument object. Defaults to Image component with back image source, which is the default back icon image for the platform (a chevron on iOS and an arrow on Android).
+Icon to display in the header as the icon in the back button.
+
+It supports the following types:
+
+- `materialSymbol` (Android only)
+
+  ```js
+  headerBackIcon: {
+    type: 'materialSymbol',
+    name: 'arrow_back',
+  }
+  ```
+
+  See [Icons](icons.md#material-symbols) for more details.
+
+- `sfSymbol` (iOS only)
+
+  ```js
+  headerBackIcon: {
+    type: 'sfSymbol',
+    name: 'arrow.left',
+  }
+  ```
+
+  See [Icons](icons.md#sf-symbols) for more details.
+
+- `image`
+
+  ```js
+  headerBackIcon: {
+    type: 'image',
+    source: require('./path/to/icon.png'),
+  }
+  ```
+
+In addition to the icon object, you can also provide a function which returns a React Element to display as the back icon. It receives `tintColor` in its argument object:
+
+```js
+headerBackIcon: ({ tintColor }) => (
+  <MyCustomBackIcon color={tintColor} />
+),
+```
+
+Defaults to back icon image for the platform:
+
+- A chevron on iOS
+- An arrow on Android
 
 #### `headerBackTitle`
 
