@@ -279,7 +279,7 @@ As part of this change, some of the options have changed to work with native tab
   - `"labeled"` - same as `tabBarShowLabel: true`
   - `"unlabeled"` - same as `tabBarShowLabel: false`
 - `tabBarLabel` now only accepts a `string`
-- `tabBarIcon` now [support more types](#bottom-tab-navigator-now-supports-material-symbols--sf-symbols-icons); returning a react element still works with `custom` implementation - so you don't need to change anything if you're using `custom` implementation
+- `tabBarIcon` now [support more types](#material-symbols--sf-symbols-are-now-supported-for-icons); returning a react element still works with `custom` implementation - so you don't need to change anything if you're using `custom` implementation
 
 The following props have been removed:
 
