@@ -135,16 +135,16 @@ This not supported on Android with `native` [implementation](bottom-tab-navigato
 
 The React Native Vector Icons library provides a large set of icons. To use vector icons in your tab bar, we'd need to [get an image source](https://github.com/oblador/react-native-vector-icons?tab=readme-ov-file#usage-as-png-imagesource-object) from the icon component.
 
-First, make sure to install the appropriate icon package (e.g. `@react-native-vector-icons/material-design-icons`) and `@react-native-vector-icons/get-image` and rebuild the app after installation. Then, you can use the `getImageSourceSync` method to get the image source for the desired icon:
+First, make sure to install the appropriate icon package (e.g. `@react-native-vector-icons/lucide`) and `@react-native-vector-icons/get-image` and rebuild the app after installation. Then, you can use the `getImageSourceSync` method to get the image source for the desired icon:
 
 ```js
-import { MaterialDesignIcons } from '@react-native-vector-icons/material-design-icons';
+import { Lucide } from '@react-native-vector-icons/lucide';
 
 // ...
 
 tabBarIcon: {
   type: 'image',
-  source: MaterialDesignIcons.getImageSourceSync('home', 22),
+  source: Lucide.getImageSourceSync('heart', 22),
 },
 ```
 
