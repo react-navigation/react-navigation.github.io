@@ -651,7 +651,7 @@ And for `DrawerToggleButton`:
 + <DrawerToggleButton icon={{ type: 'image', source: require('./path/to/my-drawer-icon.png') }} />
 ```
 
-See [HeaderBackButton](elements.md#headerbackbutton) and [DrawerToggleButton](elements.md#drawertogglebutton) for more details.
+See [HeaderBackButton](elements.md#headerbackbutton) and [DrawerToggleButton](drawer-navigator.md#headerleft) for more details.
 
 #### Some exports are removed from `@react-navigation/elements`
 
