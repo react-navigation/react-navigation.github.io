@@ -11,9 +11,39 @@ Here are some common places where icons are used in React Navigation:
 - [`tabBarIcon`](bottom-tab-navigator.md#tabbaricon) option in Bottom Tab Navigator
 - [`headerBackIcon`](native-stack-navigator.md#headerbackicon) option in Native Stack Navigator
 - [`headerBackIcon`](stack-navigator.md#headerbackicon) option in Stack Navigator
-- [`backIcon`](elements.md#headerbackbutton) prop in `HeaderBackButton` component
+- [`icon`](elements.md#headerbackbutton) prop in `HeaderBackButton` component
+- [`icon`](drawer-navigator.md#headerleft) option in `DrawerToggleButton` component
 
-There are 2 types of icons supported natively:
+Typically, components accept an icon object with a `type` property:
+
+- [`sfSymbol`](#sf-symbols) (iOS only)
+
+  ```js
+  headerBackIcon: {
+    type: 'sfSymbol',
+    name: 'arrow.left',
+  }
+  ```
+
+- [`materialSymbol`](#material-symbols) (Android only)
+
+  ```js
+  headerBackIcon: {
+    type: 'materialSymbol',
+    name: 'arrow_back',
+  }
+  ```
+
+- `image`
+
+  ```js
+  headerBackIcon: {
+    type: 'image',
+    source: require('./path/to/icon.png'),
+  }
+  ```
+
+The `sfSymbol` and `materialSymbol` types use the respective system icon libraries on each platform. The `image` type allows you to use a custom image as an icon on any platform.
 
 ## SF Symbols
 
@@ -180,7 +210,7 @@ tabBarIcon: {
 }
 ```
 
-The behavior differs depending on the weights and variants included in the bundle. If there is a single variant and weight included, it will be used by default. You don't need to specify the variant or weight in the icon object.
+The behavior differs depending on the weights and variants included in the bundle. If there is a single variant and weight included, it will be used by default. You don't need to specify the variant or weight in the icon object. The built-in icons such as icons in the header will also use the included variant and weight automatically.
 
 If there are multiple variants or weights included, you can specify the `variant` and `weight` properties in the icon object to choose which one to use:
 

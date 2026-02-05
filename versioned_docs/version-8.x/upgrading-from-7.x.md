@@ -633,6 +633,26 @@ If you don't want to enable deep linking, you can set `linking.enabled` to `fals
 >
 ```
 
+#### `HeaderBackButton` and `DrawerToggleButton` components now accept an `icon` prop
+
+Previously, the `HeaderBackButton` and `DrawerToggleButton` components accepted `backImage` and `imageSource` props respectively. In order to support the new icons such as [Material Symbols](https://fonts.google.com/icons) and [SF Symbols](https://developer.apple.com/sf-symbols/), these props have been replaced with a new `icon` prop.
+
+If you're using a custom back image with `imageSource`, you can update your code as follows:
+
+```diff lang=js
+- <HeaderBackButton backImage={require('./path/to/my-back-icon.png')} />
++ <HeaderBackButton icon={{ type: 'image', source: require('./path/to/my-back-icon.png') }} />
+```
+
+And for `DrawerToggleButton`:
+
+```diff lang=js
+- <DrawerToggleButton imageSource={require('./path/to/my-drawer-icon.png')} />
++ <DrawerToggleButton icon={{ type: 'image', source: require('./path/to/my-drawer-icon.png') }} />
+```
+
+See [HeaderBackButton](elements.md#headerbackbutton) and [DrawerToggleButton](elements.md#drawertogglebutton) for more details.
+
 #### Some exports are removed from `@react-navigation/elements`
 
 The `@react-navigation/elements` package has exported some components that were primarily intended for internal usage. These components have been removed from the public API:
@@ -663,7 +683,20 @@ The `@react-navigation/elements` package has exported some components that were 
 
   You can copy the implementation from the [source code](https://github.com/react-navigation/react-navigation/blob/main/packages/elements/src/MissingIcon.tsx) if you need a placeholder icon.
 
-Some of these components are still available and exported at `@react-navigation/elements/internal`, so you can continue using them if you really need. However, since they are not part of the public API, they don't follow semver and may change without warning in future releases.
+- `Assets`
+
+  This was an array of assets to preload with `expo-asset`. However since the built-in icons now render [Material Symbols](https://fonts.google.com/icons) on Android and [SF Symbols](https://developer.apple.com/sf-symbols/) on iOS instead of images, this is no longer needed.
+
+  If you were using this, you can remove it from your code:
+
+  ```diff lang=js
+  - import { Assets } from '@react-navigation/elements';
+  - import { Asset } from 'expo-asset';
+  -
+  - Asset.loadAsync(Assets);
+  ```
+
+Some of these exports are still available and exported at `@react-navigation/elements/internal`, so you can continue using them if you really need. However, since they are not part of the public API, they don't follow semver and may change without warning in future releases.
 
 #### The `getDefaultHeaderHeight` utility now accepts an object instead of positional arguments
 
@@ -909,8 +942,11 @@ Various navigators and components now support using [Material Symbols](https://f
 
 For example,
 
-- The `headerBackIcon` option in Stack and Native Stack Navigators
-- The `tabBarIcon` option in Bottom Tab Navigator
+- [`tabBarIcon`](bottom-tab-navigator.md#tabbaricon) option in Bottom Tab Navigator
+- [`headerBackIcon`](native-stack-navigator.md#headerbackicon) option in Native Stack Navigator
+- [`headerBackIcon`](stack-navigator.md#headerbackicon) option in Stack Navigator
+- [`icon`](elements.md#headerbackbutton) prop in `HeaderBackButton` component
+- [`icon`](drawer-navigator.md#headerleft) option in `DrawerToggleButton` component
 
 Usage:
 
@@ -927,7 +963,9 @@ tabBarIcon: Platform.select({
 }),
 ```
 
-In addition, new `SFSymbol` and `MaterialSymbol` components are exported from `@react-navigation/native` to render these icons directly. See [Icons](icons.md) for more details.
+In addition, new `SFSymbol` and `MaterialSymbol` components are exported from `@react-navigation/native` to render these icons directly.
+
+See [Icons](icons.md) for more details.
 
 ### `react-native-tab-view` now supports a `renderAdapter` prop for custom adapters
 

@@ -596,6 +596,37 @@ Note that this style is not applied to the header by default since you control t
 
 Whether to show or hide the header for the screen. The header is shown by default. Setting this to `false` hides the header.
 
+#### `headerLeft`
+
+Custom element to display on the left side of the header. By default, renders a menu icon with the `DrawerToggleButton` component:
+
+```js
+import { DrawerToggleButton } from '@react-navigation/drawer';
+
+// ...
+
+headerLeft: (props) => <DrawerToggleButton {...props} />;
+```
+
+To customize the icon, you can use the `icon` prop of `DrawerToggleButton` component. It can be a function that returns a React Element or an icon object:
+
+```js
+import { DrawerToggleButton } from '@react-navigation/drawer';
+
+// ...
+
+headerLeft: (props) => (
+  <DrawerToggleButton
+    {...props}
+    icon={({ color, size }) => (
+      <MyCustomIcon name="menu" color={color} size={size} />
+    )}
+  />
+);
+```
+
+See [Icons](icons.md) documentation on how to use [SF Symbols](icons.md#sf-symbols) and [Material Symbols](icons.md#material-symbols).
+
 ### Events
 
 The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
