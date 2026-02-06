@@ -339,9 +339,18 @@ On Android, it also provides themes based on Material Design:
 - `MaterialLightTheme`
 - `MaterialDarkTheme`
 
-The Material themes use platform colors to provide dynamic colors that adapt to the user's wallpaper and theme preferences.
+The Material themes use platform colors to provide dynamic colors that adapt to the user's wallpaper and theme preferences, and are available on Android 14 (API level 34) and above.
 
-You can import the themes from the `@react-navigation/native` package:
+You can use the [`Platform`](https://reactnative.dev/docs/platform) API to fallback to a different theme on unsupported platforms or versions:
+
+```js
+const MyTheme =
+  Platform.OS === 'android' && Platform.Version >= 34
+    ? MaterialLightTheme
+    : DefaultTheme;
+```
+
+The themes can be imported from the `@react-navigation/native` package:
 
 ```js
 import {
