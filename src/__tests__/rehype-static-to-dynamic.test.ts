@@ -66,8 +66,7 @@ function extractTransformedCode(tree: Root): string {
 
   // Extract the code from the dynamic tab
   const preElement = dynamicTab.children.find(
-    (child): child is Element =>
-      isElement(child) && child.tagName === 'pre'
+    (child): child is Element => isElement(child) && child.tagName === 'pre'
   );
 
   if (!preElement) {
@@ -75,8 +74,7 @@ function extractTransformedCode(tree: Root): string {
   }
 
   const codeElement = preElement.children.find(
-    (child): child is Element =>
-      isElement(child) && child.tagName === 'code'
+    (child): child is Element => isElement(child) && child.tagName === 'code'
   );
 
   if (!codeElement) {
