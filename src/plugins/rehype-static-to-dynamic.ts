@@ -8,7 +8,7 @@ import * as recast from 'recast';
 import * as babelParser from 'recast/parsers/babel-ts.js';
 import { visit } from 'unist-util-visit';
 import { fileURLToPath } from 'url';
-import type { Element, Root } from 'hast';
+import type { Element, Root, Text } from 'hast';
 import type { Parent } from 'unist';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -21,6 +21,16 @@ type TrackedComment = {
   value: string;
   type: t.Comment['type'];
 };
+
+export type RehypeStaticToDynamicRoot = Root;
+
+export type RehypeStaticToDynamicElement = Element;
+
+export type RehypeStaticToDynamicText = Text;
+
+export type RehypeStaticToDynamicTreeChild = Root['children'][number];
+
+export type RehypeStaticToDynamicElementChild = Element['children'][number];
 
 type CommentWithMarkers = t.Comment & {
   leading?: boolean;
