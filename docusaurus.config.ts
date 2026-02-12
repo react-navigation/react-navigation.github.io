@@ -9,13 +9,12 @@ import remarkRawMarkdown from './src/plugins/remark-raw-markdown.mjs';
 import darkTheme from './src/themes/react-navigation-dark';
 import lightTheme from './src/themes/react-navigation-light';
 
-const url = 'https://reactnavigation.org';
 const latestVersion = '7.x';
 
 const config: Config = {
   title: 'React Navigation',
   tagline: 'Routing and navigation for your React Native apps',
-  url,
+  url: process.env.URL || 'https://reactnavigation.org',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
   organizationName: 'react-navigation',
@@ -134,7 +133,8 @@ const config: Config = {
   plugins: [
     './src/plugins/disable-fully-specified.mjs',
     './src/plugins/react-navigation-versions.mjs',
-    ['./src/plugins/llms-txt.mjs', { latestVersion, baseUrl: url }],
+    ['./src/plugins/llms-txt.mjs', { latestVersion }],
+    './src/plugins/og-image.ts',
     [
       '@docusaurus/plugin-client-redirects',
       {

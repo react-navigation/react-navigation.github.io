@@ -24,6 +24,7 @@
     "@docusaurus/remark-plugin-npm2yarn": "3.9.2",
     "@octokit/graphql": "^9.0.3",
     "@react-navigation/core": "^7.13.5",
+    "@resvg/resvg-js": "^2.6.2",
     "dedent": "^1.7.0",
     "escape-html": "^1.0.3",
     "mkdirp": "^3.0.1",
@@ -31,12 +32,14 @@
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "react-simple-code-editor": "^0.14.1"
+    "react-simple-code-editor": "^0.14.1",
+    "satori": "^0.19.2"
   },
   "devDependencies": {
     "@babel/types": "^7.28.5",
     "@docusaurus/tsconfig": "^3.9.2",
     "@ffprobe-installer/ffprobe": "^2.1.2",
+    "@types/node": "^25.2.3",
     "@types/react": "^19.2.8",
     "@types/react-dom": "^19.2.3",
     "@voxpelli/node-test-pretty-reporter": "^1.1.2",

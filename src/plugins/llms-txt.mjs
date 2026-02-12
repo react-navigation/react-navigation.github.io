@@ -217,14 +217,11 @@ export default function (context, options) {
   return {
     name: 'llms.txt',
     async postBuild({ siteDir, outDir }) {
-      const { latestVersion, baseUrl } = options;
+      const { latestVersion } = options;
+      const baseUrl = context.siteConfig.url;
 
       if (!latestVersion) {
         throw new Error('[llms.txt] "latestVersion" option is required.');
-      }
-
-      if (!baseUrl) {
-        throw new Error('[llms.txt] "baseUrl" option is required.');
       }
 
       const generatedFiles = [];
