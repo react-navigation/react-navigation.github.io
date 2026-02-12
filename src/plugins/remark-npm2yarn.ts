@@ -120,9 +120,7 @@ function createImportNode(): MdxNode {
   };
 }
 
-export default function remarkNpm2Yarn(
-  options: RemarkNpm2YarnOptions = {}
-) {
+export default function remarkNpm2Yarn(options: RemarkNpm2YarnOptions = {}) {
   const { sync = false, converters = defaultConverters } = options;
 
   return async (root: MdxNode) => {

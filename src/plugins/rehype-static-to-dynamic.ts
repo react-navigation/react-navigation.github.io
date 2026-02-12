@@ -124,7 +124,9 @@ function getMeta(data: Element['data'] | undefined): string | undefined {
   return typeof data.meta === 'string' ? data.meta : undefined;
 }
 
-function getDataObject(data: Element['data'] | undefined): Record<string, unknown> {
+function getDataObject(
+  data: Element['data'] | undefined
+): Record<string, unknown> {
   return isRecord(data) ? data : {};
 }
 
@@ -271,7 +273,9 @@ async function convertStaticToDynamic(code: string): Promise<string> {
         if (hasCreateStaticNavigation) {
           path.node.specifiers = specifiers.filter((spec) => {
             if (!t.isImportSpecifier(spec)) return true;
-            return getPropertyKeyName(spec.imported) !== 'createStaticNavigation';
+            return (
+              getPropertyKeyName(spec.imported) !== 'createStaticNavigation'
+            );
           });
 
           if (!hasNavigationContainer) {
@@ -406,14 +410,8 @@ async function convertStaticToDynamic(code: string): Promise<string> {
     const navigatorConstNames = new Map(); // Track usage of navigator constant names
 
     navigatorInfos.forEach((navigatorInfo) => {
-      const {
-        componentName,
-        type,
-        config,
-        comments,
-        trailingComments,
-        index,
-      } = navigatorInfo;
+      const { componentName, type, config, comments, trailingComments, index } =
+        navigatorInfo;
 
       const baseNavigatorConstName = deriveNavigatorConstName(type);
       const navigatorConstName = getUniqueNavigatorConstName(
@@ -428,10 +426,10 @@ async function convertStaticToDynamic(code: string): Promise<string> {
       const navigatorConstDeclaration: CommentedNode = t.variableDeclaration(
         'const',
         [
-        t.variableDeclarator(
-          t.identifier(navigatorConstName),
-          t.callExpression(t.identifier(type), [])
-        ),
+          t.variableDeclarator(
+            t.identifier(navigatorConstName),
+            t.callExpression(t.identifier(type), [])
+          ),
         ]
       );
 

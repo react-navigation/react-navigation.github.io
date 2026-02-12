@@ -92,11 +92,7 @@ export default function reactNavigationVersionsPlugin(
 ): Plugin {
   return {
     name: 'react-navigation-versions',
-    async contentLoaded({
-      actions,
-    }: {
-      actions: PluginContentLoadedActions;
-    }) {
+    async contentLoaded({ actions }: { actions: PluginContentLoadedActions }) {
       const queries: Record<string, VersionQuery> = {
         '7.x': {
           tag: 'latest',
