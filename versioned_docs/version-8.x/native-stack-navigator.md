@@ -1543,6 +1543,8 @@ If a matching screen is not found in the stack, this will pop the current screen
 navigation.popTo('Profile', { owner: 'Michaś' });
 ```
 
+If [`getId`](screen.md#id) is specified for the screen, `popTo` will match the screen by id instead of name.
+
 #### `popToTop`
 
 Pops all of the screens in the stack except the first one and navigates to it.

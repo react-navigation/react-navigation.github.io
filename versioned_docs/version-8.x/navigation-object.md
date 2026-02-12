@@ -74,13 +74,13 @@ The vast majority of your interactions with the `navigation` object will involve
 
 The `navigate` method lets us navigate to another screen in your app. It takes the following arguments:
 
-`navigation.navigate(name, params)`
+`navigation.navigate(name, params, options)`
 
 - `name` - _string_ - A destination name of the screen in the current or a parent navigator.
 - `params` - _object_ - Params to use for the destination route.
 - `options` - Options object containing the following properties:
   - `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
-  - `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen in the stack. Defaults to `false`.
+  - `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen (by name or id if `getId` is specified) in the stack. Defaults to `false`.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -249,8 +249,9 @@ In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack
 
 - If you're already on a screen with the same name, it will update its params and not push a new screen.
 - If you're on a different screen, it will push the new screen onto the stack.
-- If the [`getId`](screen.md#id) prop is specified, and another screen in the stack has the same ID, it will bring that screen to focus and update its params instead.
-- If none of the above conditions match, it'll push a new screen to the stack.
+- If the [`getId`](screen.md#id) prop is specified, it's treated similarly to the name,
+  - If you're already on a screen with the same id, it will update its params and not push a new screen.
+  - If you're on a different screen, it will push the new screen onto the stack.
 
 In a tab or drawer navigator, calling `navigate` will switch to the relevant screen if it's not focused already and update the params of the screen.
 

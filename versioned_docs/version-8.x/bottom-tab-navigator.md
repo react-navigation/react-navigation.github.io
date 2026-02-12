@@ -557,6 +557,15 @@ The icon object can be one of the following types:
 
   It's necessary to provide icons for multiple screen densities (1x, 2x, 3x), e.g.: `icon.png`, `icon@2x.png`, `icon@3x.png` etc. as icons are not scaled automatically on iOS for the `native` implementation.
 
+  It also supports [drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) on Android, [xcasset](https://developer.apple.com/documentation/xcode/adding-images-to-your-xcode-project) on iOS:
+
+  ```js
+  tabBarIcon: {
+    type: 'image',
+    source: { uri: 'icon_name' },
+  }
+  ```
+
   A `tinted` property can be used to control whether the icon should be tinted with the active/inactive color:
 
   ```js
@@ -596,15 +605,6 @@ The icon object can be one of the following types:
   - `weight` - Supported values: `100`, `200`, `300`, `400`, `500`, `600`, `700`
 
   See [Icons](icons.md#material-symbols) for more details.
-
-- Resource name - [Drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) on Android, [xcasset](https://developer.apple.com/documentation/xcode/adding-images-to-your-xcode-project) on iOS.
-
-  ```js
-  tabBarIcon: {
-    type: 'resource',
-    name: 'sunny',
-  }
-  ```
 
 To render different icons for active and inactive states, you can use a function:
 

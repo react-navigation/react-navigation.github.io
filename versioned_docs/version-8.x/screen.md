@@ -210,7 +210,10 @@ const Stack = createNativeStackNavigator({
 
 ### ID
 
-A screen can have an ID to identify it uniquely. This is useful when you want to ensure that the screen with the same ID doesn't appear multiple times in the stack.
+A screen can have an ID to identify it. The ID is used differently based on the navigator type.
+
+- In a stack navigator, the ID is treated similarly to the name.
+- In a tab or drawer navigator, the screen will remount if the ID changes.
 
 This can be done by specifying the `getId` callback. It receives an object with the route params:
 
@@ -244,22 +247,7 @@ const Stack = createStackNavigator({
 </TabItem>
 </Tabs>
 
-In the above example, `params.userId` is used as an ID for the `Profile` screen with `getId`. This changes how the navigation works to ensure that the screen with the same ID appears only once in the stack.
-
-Let's say you have a stack with the history `Home > Profile (userId: bob) > Settings`, consider following scenarios:
-
-- You call `navigate(Profile, { userId: 'bob' })`:
-  The resulting screens will be `Home > Settings > Profile (userId: bob)` since the existing `Profile` screen matches the ID.
-- You call `navigate(Profile, { userId: 'alice' })`:
-  The resulting screens will be `Home > Profile (userId: bob) > Settings > Profile (userId: alice)` since it'll add a new `Profile` screen as no matching screen was found.
-
-If `getId` is specified in a tab or drawer navigator, the screen will remount if the ID changes.
-
-:::warning
-
-If you're using [`@react-navigation/native-stack`](native-stack-navigator.md), it doesn't work correctly with the `getId` callback. So it's recommended to avoid using it in that case.
-
-:::
+In the above example, `params.userId` is used as an ID for the `Profile` screen with `getId`. So if you navigate to `Profile` with the same `userId`, it'll update the params of the existing screen instead of pushing a new one. If you navigate to `Profile` with a different `userId`, it'll push a new screen onto the stack.
 
 ### Component
 

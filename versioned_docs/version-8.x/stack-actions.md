@@ -287,6 +287,8 @@ The method accepts the following arguments:
 - `options` - Options object containing the following properties:
   - `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
 
+If [`getId`](screen.md#id) is specified for the screen, `popTo` will match the screen by id instead of name.
+
 ```js name="Stack actions popTo" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';

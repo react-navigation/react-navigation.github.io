@@ -106,7 +106,9 @@ In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack
 
 - If you're already on a screen with the same name, it will update its params and not push a new screen.
 - If you're on a different screen, it will push the new screen onto the stack.
-- If the [`getId`](screen.md#id) prop is specified, and another screen in the stack has the same ID, it will bring that screen to focus and update its params instead.
+- If the [`getId`](screen.md#id) prop is specified, it's treated similarly to the name,
+  - If you're already on a screen with the same id, it will update its params and not push a new screen.
+  - If you're on a different screen, it will push the new screen onto the stack.
 
 <details>
 <summary>Advanced usage</summary>
@@ -116,10 +118,8 @@ The `navigate` action can also accepts an object as the argument with the follow
 - `name` - _string_ - A destination name of the screen in the current or a parent navigator
 - `params` - _object_ - Params to use for the destination route.
 - `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
-- `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen in the stack. Defaults to `false`.
-- `path` - _string_ - The path (from deep link or universal link) to associate with the screen.
-
-This is primarily used internally to associate a path with a screen when it's from a URL.
+- `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen (by name or id if `getId` is specified) in the stack. Defaults to `false`.
+- `path` - _string_ - The path (from deep link or universal link) to associate with the screen. This is primarily used internally to associate a path with a screen when it's from a URL.
 
 </details>
 

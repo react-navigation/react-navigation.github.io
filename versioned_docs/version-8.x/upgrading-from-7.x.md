@@ -388,6 +388,14 @@ This way you have more control over how params are updated in tab and drawer nav
 
 See [`setParams` action docs](navigation-actions.md#setparams) for more details.
 
+#### `getId` no longer re-arranges screens in the stack to make the screen unique
+
+Previously, the ID returned by `getId` was treated as a unique identifier. When using `navigate` or `push` to go to a route with an ID that already existed in the stack, the stack would rearrange to bring the existing route to the front. However, this resulted in broken behavior with Native Stack Navigator.
+
+Since this was unusable, and resulted in hard to debug issues, we have changed the behavior of `getId` to treat it more like the route name - that is, it will match routes by ID without rearranging the stack. If you navigate to a route with an existing ID and `pop: true`, it will pop back to the matching route instead of moving it to the top.
+
+If you were relying on the previous behavior and are not using Native Stack Navigator, you can use the [`router` prop](#navigators-now-accept-a-router-prop) on the navigator to customize how each action updates the state, and implement the previous behavior.
+
 #### Navigators no longer use `InteractionManager`
 
 Previously, various navigators used `InteractionManager` to mark when animations and gestures were in progress. This was primarily used to defer code that should run after transitions, such as loading data or rendering heavy components.
