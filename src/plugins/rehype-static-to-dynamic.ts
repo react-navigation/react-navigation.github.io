@@ -8,12 +8,147 @@ import * as recast from 'recast';
 import * as babelParser from 'recast/parsers/babel-ts.js';
 import { visit } from 'unist-util-visit';
 import { fileURLToPath } from 'url';
+import type { Element, Root, Text } from 'hast';
+import type { Parent } from 'unist';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const prettierConfig = JSON.parse(
   readFileSync(join(__dirname, '..', '..', '.prettierrc.json'), 'utf-8')
 );
+
+type TrackedComment = {
+  value: string;
+  type: t.Comment['type'];
+};
+
+export type RehypeStaticToDynamicRoot = Root;
+
+export type RehypeStaticToDynamicElement = Element;
+
+export type RehypeStaticToDynamicText = Text;
+
+export type RehypeStaticToDynamicTreeChild = Root['children'][number];
+
+export type RehypeStaticToDynamicElementChild = Element['children'][number];
+
+type CommentWithMarkers = t.Comment & {
+  leading?: boolean;
+  trailing?: boolean;
+};
+
+type CommentedNode = t.Node & {
+  comments?: CommentWithMarkers[];
+};
+
+type CommentTrackingEntry = {
+  screenName?: string;
+  navigatorProp?: string;
+  screenConfigProperty?: string;
+  leadingComments: TrackedComment[];
+  trailingComments: TrackedComment[];
+};
+
+type NavigatorInfo = {
+  componentName: string;
+  type: string;
+  config: t.ObjectExpression;
+  comments: CommentWithMarkers[];
+  trailingComments: CommentWithMarkers[];
+  index: number;
+};
+
+type PropInfo = {
+  key: string;
+  value: t.Expression;
+};
+
+type ScreenConfig = {
+  component: string;
+  screenProps: Record<string, t.Expression>;
+};
+
+type GroupConfig = {
+  screens: Record<string, ScreenConfig>;
+  groupProps: Record<string, PropInfo>;
+};
+
+type ParsedNavigatorConfig = {
+  screens: Record<string, ScreenConfig>;
+  groups: Record<string, GroupConfig>;
+  navigatorProps: Record<string, PropInfo>;
+};
+
+type Replacement = {
+  parent: Parent;
+  index: number;
+  tabsElement: Element;
+};
+
+type CommentArrayKey = 'comments' | 'leadingComments' | 'trailingComments';
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function hasOwnProperty<T extends object, K extends PropertyKey>(
+  value: T,
+  key: K
+): value is T & Record<K, unknown> {
+  return Object.prototype.hasOwnProperty.call(value, key);
+}
+
+function isCommentWithMarkers(value: unknown): value is CommentWithMarkers {
+  return isRecord(value) && hasOwnProperty(value, 'type');
+}
+
+function getCommentArray(
+  node: t.Node,
+  key: CommentArrayKey
+): CommentWithMarkers[] {
+  if (!hasOwnProperty(node, key)) {
+    return [];
+  }
+
+  const value = node[key];
+
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value.filter(isCommentWithMarkers);
+}
+
+function toTrackedComments(comments: CommentWithMarkers[]): TrackedComment[] {
+  return comments.map((comment) => ({
+    value: comment.value,
+    type: comment.type,
+  }));
+}
+
+function getMeta(data: Element['data'] | undefined): string | undefined {
+  if (!isRecord(data) || !hasOwnProperty(data, 'meta')) {
+    return undefined;
+  }
+
+  return typeof data.meta === 'string' ? data.meta : undefined;
+}
+
+function getDataObject(
+  data: Element['data'] | undefined
+): Record<string, unknown> {
+  return isRecord(data) ? data : {};
+}
+
+function getFirstChildElement(node: Element): Element | null {
+  const [firstChild] = node.children;
+  return firstChild?.type === 'element' ? firstChild : null;
+}
+
+function getTextNodeValue(node: Element): string | null {
+  const [firstChild] = node.children;
+  return firstChild?.type === 'text' ? firstChild.value : null;
+}
 
 /**
  * Plugin to automatically convert static config examples to dynamic config
@@ -22,19 +157,25 @@ const prettierConfig = JSON.parse(
  * corresponding dynamic configuration examples wrapped in tabs.
  */
 export default function rehypeStaticToDynamic() {
-  return async (tree) => {
-    const promises = [];
-    const replacements = [];
+  return async (tree: Root) => {
+    const promises: Promise<void>[] = [];
+    const replacements: Replacement[] = [];
 
-    visit(tree, 'element', (node, index, parent) => {
+    visit(tree, 'element', (node: Element, index, parent) => {
       // Look for code blocks with static2dynamic in meta
       if (
         node.tagName === 'pre' &&
         node.children?.length === 1 &&
+        node.children[0].type === 'element' &&
         node.children[0].tagName === 'code'
       ) {
-        const codeNode = node.children[0];
-        const meta = codeNode.data?.meta;
+        const codeNode = getFirstChildElement(node);
+
+        if (!codeNode) {
+          return;
+        }
+
+        const meta = getMeta(codeNode.data);
 
         // Check if meta contains 'static2dynamic'
         if (!meta || !meta.includes('static2dynamic')) {
@@ -42,7 +183,7 @@ export default function rehypeStaticToDynamic() {
         }
 
         // Extract code from the code block
-        const code = codeNode?.children?.[0]?.value;
+        const code = getTextNodeValue(codeNode);
 
         if (!code) {
           throw new Error(
@@ -57,6 +198,7 @@ export default function rehypeStaticToDynamic() {
             dynamicCode,
             node
           );
+          if (!parent || typeof index !== 'number') return;
           replacements.push({ parent, index, tabsElement });
         });
         promises.push(promise);
@@ -90,7 +232,7 @@ export default function rehypeStaticToDynamic() {
  * 5. Post-process: Inject comments into formatted code
  *    - Comments are injected as strings since Prettier may move/remove AST comments
  */
-async function convertStaticToDynamic(code) {
+async function convertStaticToDynamic(code: string): Promise<string> {
   // Parse the code into AST using recast with comment attachment enabled
   const ast = recast.parse(code, {
     parser: {
@@ -104,17 +246,17 @@ async function convertStaticToDynamic(code) {
     },
   });
 
-  let navigatorInfos = [];
-  let staticNavigationIndices = [];
+  let navigatorInfos: NavigatorInfo[] = [];
+  let staticNavigationIndices: number[] = [];
 
   // Track comments throughout the transformation
   // We collect comments from the AST during transformation, then inject them
   // after Prettier formatting (since Prettier may reformat/move AST comments)
-  const commentTracking = new Set();
+  const commentTracking = new Set<CommentTrackingEntry>();
 
   // First pass: Collect navigator info and transform imports
   recast.visit(ast, {
-    visitImportDeclaration(path) {
+    visitImportDeclaration(path: any) {
       const source = path.node.source.value;
 
       // Transform @react-navigation/native imports
@@ -125,29 +267,26 @@ async function convertStaticToDynamic(code) {
         let hasCreateStaticNavigation = false;
 
         specifiers.forEach((spec) => {
-          if (
-            t.isImportSpecifier(spec) &&
-            spec.imported.name === 'NavigationContainer'
-          ) {
+          if (!t.isImportSpecifier(spec)) return;
+
+          const importedName = getPropertyKeyName(spec.imported);
+
+          if (importedName === 'NavigationContainer') {
             hasNavigationContainer = true;
           }
-          if (
-            t.isImportSpecifier(spec) &&
-            spec.imported.name === 'createStaticNavigation'
-          ) {
+          if (importedName === 'createStaticNavigation') {
             hasCreateStaticNavigation = true;
           }
         });
 
         // Remove createStaticNavigation and add NavigationContainer if needed
         if (hasCreateStaticNavigation) {
-          path.node.specifiers = specifiers.filter(
-            (spec) =>
-              !(
-                t.isImportSpecifier(spec) &&
-                spec.imported.name === 'createStaticNavigation'
-              )
-          );
+          path.node.specifiers = specifiers.filter((spec) => {
+            if (!t.isImportSpecifier(spec)) return true;
+            return (
+              getPropertyKeyName(spec.imported) !== 'createStaticNavigation'
+            );
+          });
 
           if (!hasNavigationContainer) {
             path.node.specifiers.push(
@@ -165,7 +304,7 @@ async function convertStaticToDynamic(code) {
       if (source.startsWith('@react-navigation/')) {
         path.node.specifiers = path.node.specifiers.filter((spec) => {
           if (t.isImportSpecifier(spec)) {
-            const importedName = spec.imported.name;
+            const importedName = getPropertyKeyName(spec.imported);
             // Remove imports that match createXScreen pattern
             return !(
               importedName.startsWith('create') &&
@@ -179,7 +318,7 @@ async function convertStaticToDynamic(code) {
       this.traverse(path);
     },
 
-    visitProgram(path) {
+    visitProgram(path: any) {
       // Find declarations by index to avoid scope issues
       path.node.body.forEach((node, index) => {
         if (t.isVariableDeclaration(node)) {
@@ -192,6 +331,10 @@ async function convertStaticToDynamic(code) {
               declarator.init.arguments.length > 0 &&
               t.isObjectExpression(declarator.init.arguments[0])
             ) {
+              if (!t.isIdentifier(declarator.id)) {
+                return;
+              }
+
               const navigatorVariable = declarator.id.name; // e.g., "MyStack"
               const navigatorType = declarator.init.callee.name; // e.g., "createStackNavigator"
               const config = declarator.init.arguments[0];
@@ -201,9 +344,8 @@ async function convertStaticToDynamic(code) {
                 type: navigatorType,
                 config: config,
                 // Store leading/trailing comments to preserve codeblock-focus
-                leadingComments: node.comments || [],
-                trailingComments: node.trailingComments || [],
-                originalNode: node, // Keep reference to original node
+                comments: getCommentArray(node, 'comments'),
+                trailingComments: getCommentArray(node, 'trailingComments'),
                 index: index,
               });
             }
@@ -223,7 +365,7 @@ async function convertStaticToDynamic(code) {
       this.traverse(path);
     },
 
-    visitJSXElement(path) {
+    visitJSXElement(path: any) {
       // Find <Navigation /> (created by createStaticNavigation)
       if (
         t.isJSXIdentifier(path.node.openingElement.name) &&
@@ -278,15 +420,8 @@ async function convertStaticToDynamic(code) {
     const navigatorConstNames = new Map(); // Track usage of navigator constant names
 
     navigatorInfos.forEach((navigatorInfo) => {
-      const {
-        componentName,
-        type,
-        config,
-        leadingComments,
-        trailingComments,
-        originalNode,
-        index,
-      } = navigatorInfo;
+      const { componentName, type, config, comments, trailingComments, index } =
+        navigatorInfo;
 
       const baseNavigatorConstName = deriveNavigatorConstName(type);
       const navigatorConstName = getUniqueNavigatorConstName(
@@ -298,27 +433,30 @@ async function convertStaticToDynamic(code) {
       const parsedConfig = parseNavigatorConfig(config, commentTracking);
 
       // Create: const Stack = createStackNavigator();
-      const navigatorConstDeclaration = t.variableDeclaration('const', [
-        t.variableDeclarator(
-          t.identifier(navigatorConstName),
-          t.callExpression(t.identifier(type), [])
-        ),
-      ]);
+      const navigatorConstDeclaration: CommentedNode = t.variableDeclaration(
+        'const',
+        [
+          t.variableDeclarator(
+            t.identifier(navigatorConstName),
+            t.callExpression(t.identifier(type), [])
+          ),
+        ]
+      );
 
       // Create the navigator component function (e.g., function MyStack() {...})
-      const navigatorComponent = createNavigatorComponent(
+      const navigatorComponent: CommentedNode = createNavigatorComponent(
         componentName, // function name: MyStack
         navigatorConstName, // Stack.Navigator, Stack.Screen
         parsedConfig
       );
 
       // Preserve all comments from the original node
-      if (originalNode.comments && originalNode.comments.length > 0) {
+      if (comments.length > 0) {
         // Separate leading and trailing comments based on recast markers
-        const leadingComments = [];
-        const trailingCommentsFromNode = [];
+        const leadingComments: CommentWithMarkers[] = [];
+        const trailingCommentsFromNode: CommentWithMarkers[] = [];
 
-        originalNode.comments.forEach((comment) => {
+        comments.forEach((comment) => {
           if (comment.trailing) {
             trailingCommentsFromNode.push(comment);
           } else {
@@ -523,11 +661,34 @@ async function convertStaticToDynamic(code) {
   return formattedCode;
 }
 
+function getPropertyKeyName(key: t.Expression | t.PrivateName): string {
+  if (t.isIdentifier(key)) return key.name;
+  if (t.isStringLiteral(key)) return key.value;
+  if (t.isNumericLiteral(key)) return String(key.value);
+  return '';
+}
+
+function getObjectPropertyValue(
+  prop: t.ObjectProperty | t.ObjectMethod
+): t.Expression | null {
+  if (t.isObjectProperty(prop)) {
+    return t.isExpression(prop.value) ? prop.value : null;
+  }
+
+  return t.functionExpression(
+    null,
+    prop.params,
+    prop.body,
+    prop.generator,
+    prop.async
+  );
+}
+
 /**
  * Extract screen config from a screen value node.
  * Handles both direct object expressions and createXScreen function calls.
  */
-function extractScreenConfig(screenValue) {
+function extractScreenConfig(screenValue: t.Node): t.Node {
   // Handle createXScreen function calls
   // e.g., createNativeStackScreen({ screen: ProfileScreen, ... })
   if (
@@ -549,30 +710,30 @@ function extractScreenConfig(screenValue) {
 /**
  * Track comments on screen config properties (options, screen, listeners, etc.)
  */
-function trackScreenConfigComments(screenValue, screenName, commentTracking) {
+function trackScreenConfigComments(
+  screenValue: t.Node,
+  screenName: string,
+  commentTracking: Set<CommentTrackingEntry>
+) {
   const configObject = extractScreenConfig(screenValue);
 
   if (t.isObjectExpression(configObject)) {
     configObject.properties.forEach((configProp) => {
       if (
         t.isObjectProperty(configProp) &&
-        (configProp.leadingComments || configProp.trailingComments)
+        (getCommentArray(configProp, 'leadingComments').length > 0 ||
+          getCommentArray(configProp, 'trailingComments').length > 0)
       ) {
-        const propName = configProp.key.name || configProp.key.value;
+        const propName = getPropertyKeyName(configProp.key);
         commentTracking.add({
-          originalNode: configProp,
           screenName,
           screenConfigProperty: propName,
-          leadingComments:
-            configProp.leadingComments?.map((c) => ({
-              value: c.value,
-              type: c.type,
-            })) || [],
-          trailingComments:
-            configProp.trailingComments?.map((c) => ({
-              value: c.value,
-              type: c.type,
-            })) || [],
+          leadingComments: toTrackedComments(
+            getCommentArray(configProp, 'leadingComments')
+          ),
+          trailingComments: toTrackedComments(
+            getCommentArray(configProp, 'trailingComments')
+          ),
         });
       }
     });
@@ -582,22 +743,23 @@ function trackScreenConfigComments(screenValue, screenName, commentTracking) {
 /**
  * Track comments on screen elements themselves
  */
-function trackScreenComments(screenProp, screenName, commentTracking) {
-  if (screenProp.leadingComments || screenProp.trailingComments) {
+function trackScreenComments(
+  screenProp: t.ObjectProperty,
+  screenName: string,
+  commentTracking: Set<CommentTrackingEntry>
+) {
+  if (
+    getCommentArray(screenProp, 'leadingComments').length > 0 ||
+    getCommentArray(screenProp, 'trailingComments').length > 0
+  ) {
     commentTracking.add({
-      originalNode: screenProp,
       screenName,
-      leadingComments:
-        screenProp.leadingComments?.map((c) => ({
-          value: c.value,
-          type: c.type,
-        })) || [],
-      trailingComments:
-        screenProp.trailingComments?.map((c) => ({
-          value: c.value,
-          type: c.type,
-        })) || [],
-      targetNode: null,
+      leadingComments: toTrackedComments(
+        getCommentArray(screenProp, 'leadingComments')
+      ),
+      trailingComments: toTrackedComments(
+        getCommentArray(screenProp, 'trailingComments')
+      ),
     });
   }
 }
@@ -606,7 +768,7 @@ function trackScreenComments(screenProp, screenName, commentTracking) {
  * Find the line index of a Screen element's opening tag.
  * Handles both single-line and multi-line Screen elements.
  */
-function findScreenElementLine(lines, screenName) {
+function findScreenElementLine(lines: string[], screenName: string) {
   for (let i = 0; i < lines.length; i++) {
     // Check if line contains Screen opening tag with the name attribute
     if (
@@ -634,7 +796,7 @@ function findScreenElementLine(lines, screenName) {
  * Find the line index of a Screen element's closing tag.
  * Looks for either self-closing /> or closing </X.Screen> tag.
  */
-function findScreenClosingLine(lines, screenName) {
+function findScreenClosingLine(lines: string[], screenName: string) {
   for (let i = 0; i < lines.length; i++) {
     if (
       (lines[i].includes('.Screen') && lines[i].includes('/>')) ||
@@ -654,7 +816,11 @@ function findScreenClosingLine(lines, screenName) {
 /**
  * Format a comment for injection into code
  */
-function formatComment(comment, indent, isJSXContext = false) {
+function formatComment(
+  comment: TrackedComment,
+  indent: string,
+  isJSXContext = false
+) {
   const commentValue = comment.value.trim();
   if (comment.type === 'CommentLine') {
     return `${indent}// ${commentValue}`;
@@ -669,10 +835,10 @@ function formatComment(comment, indent, isJSXContext = false) {
  * Inject comments into lines array at specified position
  */
 function injectComments(
-  lines,
-  comments,
-  lineIndex,
-  indent,
+  lines: string[],
+  comments: TrackedComment[],
+  lineIndex: number,
+  indent: string,
   isJSXContext = false
 ) {
   let currentIndex = lineIndex;
@@ -687,7 +853,7 @@ function injectComments(
 /**
  * Check if a line contains a screen name attribute (with either quote style)
  */
-function lineMatchesScreenName(line, screenName) {
+function lineMatchesScreenName(line: string, screenName: string) {
   return (
     line.includes(`name='${screenName}'`) ||
     line.includes(`name="${screenName}"`)
@@ -697,7 +863,7 @@ function lineMatchesScreenName(line, screenName) {
 /**
  * Extract indentation from a line
  */
-function getIndentation(line, defaultIndent = '      ') {
+function getIndentation(line: string, defaultIndent = '      ') {
   return line.match(/^(\s*)/)?.[1] || defaultIndent;
 }
 
@@ -709,7 +875,7 @@ function getIndentation(line, defaultIndent = '      ') {
  * - "createBottomTabNavigator" -> "Tab"
  * - "createMaterialTopTabNavigator" -> "Tab"
  */
-function deriveNavigatorConstName(navigatorType) {
+function deriveNavigatorConstName(navigatorType: string) {
   // Remove "create" prefix and "Navigator" suffix
   const withoutCreate = navigatorType.replace(/^create/, '');
   const withoutNavigator = withoutCreate.replace(/Navigator$/, '');
@@ -723,8 +889,8 @@ function deriveNavigatorConstName(navigatorType) {
  * Second occurrence gets 'A', third gets 'B', etc.
  */
 function getUniqueNavigatorConstName(
-  baseNavigatorConstName,
-  navigatorConstNames
+  baseNavigatorConstName: string,
+  navigatorConstNames: Map<string, number>
 ) {
   const currentCount = navigatorConstNames.get(baseNavigatorConstName) || 0;
   navigatorConstNames.set(baseNavigatorConstName, currentCount + 1);
@@ -740,7 +906,11 @@ function getUniqueNavigatorConstName(
 /**
  * Attach comments to AST nodes with proper leading/trailing markers
  */
-function attachCommentsToNode(node, comments, isTrailing = false) {
+function attachCommentsToNode(
+  node: CommentedNode,
+  comments: CommentWithMarkers[],
+  isTrailing = false
+) {
   if (comments.length === 0) return;
 
   comments.forEach((c) => {
@@ -753,7 +923,12 @@ function attachCommentsToNode(node, comments, isTrailing = false) {
 /**
  * Find a property line within a context (searches lines before for context marker)
  */
-function findPropertyLine(lines, propMatcher, contextMatcher, searchRange) {
+function findPropertyLine(
+  lines: string[],
+  propMatcher: (line: string) => boolean,
+  contextMatcher: (line: string) => boolean,
+  searchRange: number
+) {
   for (let i = 0; i < lines.length; i++) {
     if (propMatcher(lines[i])) {
       // Check if this is within the right context by searching lines before only
@@ -773,7 +948,11 @@ function findPropertyLine(lines, propMatcher, contextMatcher, searchRange) {
 /**
  * Find the closing line for a JSX property value (looks for }} or })})
  */
-function findPropertyClosingLine(lines, startLine, maxSearchLines = 10) {
+function findPropertyClosingLine(
+  lines: string[],
+  startLine: number,
+  maxSearchLines = 10
+) {
   for (
     let i = startLine;
     i < Math.min(startLine + maxSearchLines, lines.length);
@@ -795,7 +974,7 @@ function findPropertyClosingLine(lines, startLine, maxSearchLines = 10) {
 /**
  * Create a JSX member expression (e.g., Stack.Navigator, Stack.Screen)
  */
-function createJsxMemberExpression(componentName, memberName) {
+function createJsxMemberExpression(componentName: string, memberName: string) {
   return t.jsxMemberExpression(
     t.jsxIdentifier(componentName),
     t.jsxIdentifier(memberName)
@@ -805,9 +984,9 @@ function createJsxMemberExpression(componentName, memberName) {
 /**
  * Create JSX attributes from propInfo objects
  */
-function createJsxAttributesFromProps(propsObject) {
+function createJsxAttributesFromProps(propsObject: Record<string, PropInfo>) {
   return Object.values(propsObject).map((propInfo) => {
-    if (propInfo.isStringLiteral) {
+    if (t.isStringLiteral(propInfo.value)) {
       return t.jsxAttribute(
         t.jsxIdentifier(propInfo.key),
         t.stringLiteral(propInfo.value.value)
@@ -823,7 +1002,11 @@ function createJsxAttributesFromProps(propsObject) {
 /**
  * Create a Screen JSX element
  */
-function createScreenElement(componentName, screenName, screenConfig) {
+function createScreenElement(
+  componentName: string,
+  screenName: string,
+  screenConfig: ScreenConfig
+) {
   const screenProps = [
     t.jsxAttribute(t.jsxIdentifier('name'), t.stringLiteral(screenName)),
     t.jsxAttribute(
@@ -855,7 +1038,7 @@ function createScreenElement(componentName, screenName, screenConfig) {
  * Parse a screen value and return component and screenProps.
  * Handles identifiers, object expressions, and createXScreen calls.
  */
-function parseScreenValue(screenValue) {
+function parseScreenValue(screenValue: t.Node): ScreenConfig | null {
   if (t.isIdentifier(screenValue)) {
     // Simple screen: Home: HomeScreen
     return {
@@ -869,24 +1052,42 @@ function parseScreenValue(screenValue) {
 
   if (t.isObjectExpression(configNode)) {
     // Screen with config: Home: { screen: HomeScreen, options: {...}, listeners: {...} }
-    let component = null;
+    let component: string | null = null;
     const screenProps = {};
 
     configNode.properties.forEach((screenConfigProp) => {
-      if (!t.isObjectProperty(screenConfigProp)) return;
+      if (
+        !t.isObjectProperty(screenConfigProp) &&
+        !t.isObjectMethod(screenConfigProp)
+      ) {
+        return;
+      }
 
-      const configKey = screenConfigProp.key.name || screenConfigProp.key.value;
+      const configKey = getPropertyKeyName(screenConfigProp.key);
 
-      if (configKey === 'screen' && t.isIdentifier(screenConfigProp.value)) {
+      if (
+        configKey === 'screen' &&
+        t.isObjectProperty(screenConfigProp) &&
+        t.isIdentifier(screenConfigProp.value)
+      ) {
         component = screenConfigProp.value.name;
-      } else {
-        // Store all other props (options, listeners, getId, linking, etc.)
-        // But skip 'linking' as it's only for static config
-        if (configKey !== 'linking') {
-          screenProps[configKey] = screenConfigProp.value;
+        return;
+      }
+
+      // Store all other props (options, listeners, getId, linking, etc.)
+      // But skip 'linking' as it's only for static config
+      if (configKey !== 'linking') {
+        const propValue = getObjectPropertyValue(screenConfigProp);
+
+        if (propValue) {
+          screenProps[configKey] = propValue;
         }
       }
     });
+
+    if (!component) {
+      return null;
+    }
 
     return { component, screenProps };
   }
@@ -899,8 +1100,11 @@ function parseScreenValue(screenValue) {
  * Extracts screens, groups, and navigator-level properties.
  * Also tracks comments for later injection into the dynamic code.
  */
-function parseNavigatorConfig(configNode, commentTracking) {
-  const result = {
+function parseNavigatorConfig(
+  configNode: t.ObjectExpression,
+  commentTracking: Set<CommentTrackingEntry>
+): ParsedNavigatorConfig {
+  const result: ParsedNavigatorConfig = {
     screens: {}, // Standalone screens (not in groups)
     groups: {}, // Screen groups with their own screens and props
     navigatorProps: {}, // Navigator-level props (screenOptions, initialRouteName, etc.)
@@ -912,46 +1116,35 @@ function parseNavigatorConfig(configNode, commentTracking) {
 
   // Get all properties from the navigator config object
   const props = configNode.properties.filter(
-    (prop) => t.isObjectProperty(prop) || t.isObjectMethod(prop)
+    (prop): prop is t.ObjectProperty | t.ObjectMethod =>
+      t.isObjectProperty(prop) || t.isObjectMethod(prop)
   );
 
   props.forEach((prop, index) => {
-    const keyName = prop.key.name || prop.key.value;
+    const keyName = getPropertyKeyName(prop.key);
+    const propValue = getObjectPropertyValue(prop);
 
     // Track comments on navigator-level properties (but not on screens/groups)
     if (keyName !== 'screens' && keyName !== 'groups') {
-      const leadingComments =
-        prop.leadingComments?.map((c) => ({
-          value: c.value,
-          type: c.type,
-        })) || [];
+      const leadingComments = toTrackedComments(
+        getCommentArray(prop, 'leadingComments')
+      );
 
       // Collect trailing comments from both the property and its value
-      let trailingComments = [];
-      if (prop.trailingComments) {
-        trailingComments.push(
-          ...prop.trailingComments.map((c) => ({
-            value: c.value,
-            type: c.type,
-          }))
-        );
-      }
-      if (prop.value?.trailingComments) {
-        trailingComments.push(
-          ...prop.value.trailingComments.map((c) => ({
-            value: c.value,
-            type: c.type,
-          }))
-        );
-      }
+      const trailingComments = [
+        ...toTrackedComments(getCommentArray(prop, 'trailingComments')),
+        ...(t.isObjectProperty(prop)
+          ? toTrackedComments(getCommentArray(prop.value, 'trailingComments'))
+          : []),
+      ];
 
       // Heuristic: Check if the next property has leading comments that are actually
       // trailing comments for this property (detected by -end or end suffix)
       // This handles cases where Babel attaches multiline trailing comments as leading
       const nextProp = props[index + 1];
 
-      if (nextProp?.leadingComments) {
-        nextProp.leadingComments.forEach((c) => {
+      if (nextProp) {
+        getCommentArray(nextProp, 'leadingComments').forEach((c) => {
           // Only treat as trailing if the comment ends with -end or similar markers
           if (
             c.value.trim().endsWith('-end') ||
@@ -967,7 +1160,6 @@ function parseNavigatorConfig(configNode, commentTracking) {
 
       if (leadingComments.length > 0 || trailingComments.length > 0) {
         const commentObj = {
-          originalNode: prop,
           navigatorProp: keyName,
           leadingComments,
           trailingComments,
@@ -977,12 +1169,16 @@ function parseNavigatorConfig(configNode, commentTracking) {
     }
 
     // Parse groups object (e.g., groups: { modal: { screens: {...}, screenOptions: {...} } })
-    if (keyName === 'groups' && t.isObjectExpression(prop.value)) {
+    if (
+      keyName === 'groups' &&
+      t.isObjectProperty(prop) &&
+      t.isObjectExpression(prop.value)
+    ) {
       // Parse groups object
       prop.value.properties.forEach((groupProp) => {
         if (!t.isObjectProperty(groupProp)) return;
 
-        const groupKey = groupProp.key.name || groupProp.key.value;
+        const groupKey = getPropertyKeyName(groupProp.key);
         const groupValue = groupProp.value;
 
         if (t.isObjectExpression(groupValue)) {
@@ -992,20 +1188,26 @@ function parseNavigatorConfig(configNode, commentTracking) {
           };
 
           groupValue.properties.forEach((groupConfigProp) => {
-            if (!t.isObjectProperty(groupConfigProp)) return;
+            if (
+              !t.isObjectProperty(groupConfigProp) &&
+              !t.isObjectMethod(groupConfigProp)
+            ) {
+              return;
+            }
 
-            const configKey =
-              groupConfigProp.key.name || groupConfigProp.key.value;
+            const configKey = getPropertyKeyName(groupConfigProp.key);
+            const groupPropValue = getObjectPropertyValue(groupConfigProp);
 
             if (
               configKey === 'screens' &&
+              t.isObjectProperty(groupConfigProp) &&
               t.isObjectExpression(groupConfigProp.value)
             ) {
               // Parse screens within the group
               groupConfigProp.value.properties.forEach((screenProp) => {
                 if (!t.isObjectProperty(screenProp)) return;
 
-                const screenName = screenProp.key.name || screenProp.key.value;
+                const screenName = getPropertyKeyName(screenProp.key);
                 const screenValue = screenProp.value;
 
                 // Track comments on any property inside the screen config
@@ -1026,11 +1228,12 @@ function parseNavigatorConfig(configNode, commentTracking) {
               });
             } else {
               // Store other group-level props (screenOptions, screenLayout, etc.)
-              groupConfig.groupProps[configKey] = {
-                key: configKey,
-                value: groupConfigProp.value,
-                isStringLiteral: t.isStringLiteral(groupConfigProp.value),
-              };
+              if (groupPropValue) {
+                groupConfig.groupProps[configKey] = {
+                  key: configKey,
+                  value: groupPropValue,
+                };
+              }
             }
           });
 
@@ -1038,12 +1241,16 @@ function parseNavigatorConfig(configNode, commentTracking) {
         }
       });
       // Parse top-level screens object (e.g., screens: { Home: HomeScreen, Profile: {...} })
-    } else if (keyName === 'screens' && t.isObjectExpression(prop.value)) {
+    } else if (
+      keyName === 'screens' &&
+      t.isObjectProperty(prop) &&
+      t.isObjectExpression(prop.value)
+    ) {
       // Parse screens object
       prop.value.properties.forEach((screenProp) => {
         if (!t.isObjectProperty(screenProp)) return;
 
-        const screenName = screenProp.key.name || screenProp.key.value;
+        const screenName = getPropertyKeyName(screenProp.key);
         const screenValue = screenProp.value;
 
         // Track comments on any property inside the screen config
@@ -1061,11 +1268,12 @@ function parseNavigatorConfig(configNode, commentTracking) {
     } else {
       // Store all other navigator-level props (screenOptions, initialRouteName, etc.)
       // Keep track of whether the value is a string literal to determine JSX attribute format
-      result.navigatorProps[keyName] = {
-        key: keyName,
-        value: prop.value,
-        isStringLiteral: t.isStringLiteral(prop.value),
-      };
+      if (propValue) {
+        result.navigatorProps[keyName] = {
+          key: keyName,
+          value: propValue,
+        };
+      }
     }
   });
 
@@ -1075,7 +1283,11 @@ function parseNavigatorConfig(configNode, commentTracking) {
 /**
  * Create navigator component function
  */
-function createNavigatorComponent(functionName, componentName, config) {
+function createNavigatorComponent(
+  functionName: string,
+  componentName: string,
+  config: ParsedNavigatorConfig
+) {
   // Add all navigator-level props dynamically
   const navigatorProps = createJsxAttributesFromProps(config.navigatorProps);
 
@@ -1161,14 +1373,33 @@ function createNavigatorComponent(functionName, componentName, config) {
  * Create a TabItem element with code block
  */
 function createTabItem(
-  value,
-  label,
-  code,
-  codeNode,
-  originalCodeBlock,
-  cleanData,
+  value: string,
+  label: string,
+  code: string,
+  codeNode: Element,
+  originalCodeBlock: Element,
+  cleanData: Record<string, unknown>,
   isDefault = false
-) {
+): Element {
+  const children: Element['children'] = [
+    { type: 'text', value: '\n\n' },
+    {
+      type: 'element',
+      tagName: 'pre',
+      properties: originalCodeBlock.properties || {},
+      children: [
+        {
+          type: 'element',
+          tagName: 'code',
+          properties: codeNode.properties || {},
+          data: cleanData,
+          children: [{ type: 'text', value: code }],
+        },
+      ],
+    },
+    { type: 'text', value: '\n\n' },
+  ];
+
   return {
     type: 'element',
     tagName: 'TabItem',
@@ -1177,55 +1408,52 @@ function createTabItem(
       label,
       ...(isDefault && { default: true }),
     },
-    children: [
-      { type: 'text', value: '\n\n' },
-      {
-        type: 'element',
-        tagName: 'pre',
-        properties: originalCodeBlock.properties || {},
-        children: [
-          {
-            type: 'element',
-            tagName: 'code',
-            properties: codeNode.properties || {},
-            data: cleanData,
-            children: [{ type: 'text', value: code }],
-          },
-        ],
-      },
-      { type: 'text', value: '\n\n' },
-    ],
+    children,
   };
 }
 
 /**
  * Create a Tabs element with both static and dynamic TabItems
  */
-function createTabsWithBothConfigs(staticCode, dynamicCode, originalCodeBlock) {
-  const codeNode = originalCodeBlock.children[0];
+function createTabsWithBothConfigs(
+  staticCode: string,
+  dynamicCode: string,
+  originalCodeBlock: Element
+): Element {
+  const codeNode = getFirstChildElement(originalCodeBlock);
+
+  if (!codeNode) {
+    throw new Error(
+      'rehype-static-to-dynamic: Expected code element in code block'
+    );
+  }
 
   // Remove 'static2dynamic' from meta for the actual code blocks
-  const cleanMeta =
-    codeNode.data?.meta?.replace(/\bstatic2dynamic\b\s*/g, '').trim() || '';
-  const cleanData = { ...codeNode.data, meta: cleanMeta };
+  const rawMeta = getMeta(codeNode.data) ?? '';
+  const cleanMeta = rawMeta.replace(/\bstatic2dynamic\b\s*/g, '').trim();
+  const cleanData = { ...getDataObject(codeNode.data), meta: cleanMeta };
 
   const tabItems = [
     { value: 'static', label: 'Static', code: staticCode, isDefault: true },
     { value: 'dynamic', label: 'Dynamic', code: dynamicCode, isDefault: false },
   ];
 
-  const children = tabItems.flatMap((item) => [
-    { type: 'text', value: '\n' },
-    createTabItem(
-      item.value,
-      item.label,
-      item.code,
-      codeNode,
-      originalCodeBlock,
-      cleanData,
-      item.isDefault
-    ),
-  ]);
+  const children: Element['children'] = [];
+
+  tabItems.forEach((item) => {
+    children.push({ type: 'text', value: '\n' });
+    children.push(
+      createTabItem(
+        item.value,
+        item.label,
+        item.code,
+        codeNode,
+        originalCodeBlock,
+        cleanData,
+        item.isDefault
+      )
+    );
+  });
 
   children.push({ type: 'text', value: '\n' });
 

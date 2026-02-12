@@ -1,11 +1,15 @@
 import type * as Preset from '@docusaurus/preset-classic';
 import type { Config } from '@docusaurus/types';
 
-import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.mjs';
-import rehypeStaticToDynamic from './src/plugins/rehype-static-to-dynamic.mjs';
-import rehypeVideoAspectRatio from './src/plugins/rehype-video-aspect-ratio.mjs';
-import remarkNpm2Yarn from './src/plugins/remark-npm2yarn.mjs';
-import remarkRawMarkdown from './src/plugins/remark-raw-markdown.mjs';
+import disableFullySpecified from './src/plugins/disable-fully-specified.ts';
+import llmsTxt from './src/plugins/llms-txt.ts';
+import ogImage from './src/plugins/og-image.ts';
+import reactNavigationVersions from './src/plugins/react-navigation-versions.ts';
+import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.ts';
+import rehypeStaticToDynamic from './src/plugins/rehype-static-to-dynamic.ts';
+import rehypeVideoAspectRatio from './src/plugins/rehype-video-aspect-ratio.ts';
+import remarkNpm2Yarn from './src/plugins/remark-npm2yarn.ts';
+import remarkRawMarkdown from './src/plugins/remark-raw-markdown.ts';
 import darkTheme from './src/themes/react-navigation-dark';
 import lightTheme from './src/themes/react-navigation-light';
 
@@ -131,10 +135,10 @@ const config: Config = {
     },
   } satisfies Preset.ThemeConfig,
   plugins: [
-    './src/plugins/disable-fully-specified.mjs',
-    './src/plugins/react-navigation-versions.mjs',
-    ['./src/plugins/llms-txt.mjs', { latestVersion }],
-    './src/plugins/og-image.ts',
+    disableFullySpecified,
+    reactNavigationVersions,
+    [llmsTxt, { latestVersion }],
+    ogImage,
     [
       '@docusaurus/plugin-client-redirects',
       {

@@ -1,7 +1,103 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import util from 'node:util';
-import versions from '../../versions.json';
+import type { LoadContext, Plugin } from '@docusaurus/types';
+import versionsData from '../../versions.json';
+
+type FrontMatterData = Record<string, string>;
+
+type ParsedFrontMatter = {
+  data: FrontMatterData;
+  content: string;
+};
+
+type SidebarCategory = {
+  type: 'category';
+  label: string;
+  items: SidebarItem[];
+};
+
+type SidebarItem = string | SidebarCategory | Record<string, unknown>;
+
+type FullDoc = {
+  title: string;
+  url: string;
+  content: string;
+};
+
+type LlmsTxtOptions = {
+  latestVersion?: string;
+};
+
+type SidebarProcessResult = {
+  content: string;
+  docs: FullDoc[];
+};
+
+const versionsSource: unknown = versionsData;
+
+const versions = Array.isArray(versionsSource)
+  ? versionsSource.filter(
+      (version): version is string => typeof version === 'string'
+    )
+  : [];
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function hasOwnProperty<T extends object, K extends PropertyKey>(
+  value: T,
+  key: K
+): value is T & Record<K, unknown> {
+  return Object.prototype.hasOwnProperty.call(value, key);
+}
+
+function isSidebarItem(value: unknown): value is SidebarItem {
+  return typeof value === 'string' || isRecord(value);
+}
+
+function isSidebarCategory(item: SidebarItem): item is SidebarCategory {
+  if (!isRecord(item)) {
+    return false;
+  }
+
+  if (
+    !hasOwnProperty(item, 'type') ||
+    !hasOwnProperty(item, 'label') ||
+    !hasOwnProperty(item, 'items')
+  ) {
+    return false;
+  }
+
+  return (
+    item.type === 'category' &&
+    typeof item.label === 'string' &&
+    Array.isArray(item.items)
+  );
+}
+
+function normalizeRootItems(value: unknown): SidebarItem[] {
+  if (Array.isArray(value)) {
+    return value.filter(isSidebarItem);
+  }
+
+  if (isRecord(value)) {
+    const normalized: SidebarCategory[] = [];
+
+    for (const [label, items] of Object.entries(value)) {
+      normalized.push({
+        type: 'category',
+        label,
+        items: Array.isArray(items) ? items.filter(isSidebarItem) : [],
+      });
+    }
+
+    return normalized;
+  }
+
+  return [];
+}
 
 /**
  * Parses frontmatter from markdown content.
@@ -10,7 +106,7 @@ import versions from '../../versions.json';
  * @param {string} fileContent - Raw markdown file content.
  * @returns {{data: Object, content: string}} - Parsed data and stripped content.
  */
-function parseFrontMatter(fileContent) {
+function parseFrontMatter(fileContent: string): ParsedFrontMatter {
   const frontMatterRegex = /^---\n([\s\S]+?)\n---\n/;
   const match = fileContent.match(frontMatterRegex);
 
@@ -21,7 +117,7 @@ function parseFrontMatter(fileContent) {
   const frontMatterBlock = match[1];
   const content = fileContent.replace(frontMatterRegex, '');
 
-  const data = {};
+  const data: FrontMatterData = {};
 
   frontMatterBlock.split('\n').forEach((line) => {
     const parts = line.split(':');
@@ -59,15 +155,15 @@ function parseFrontMatter(fileContent) {
  * @returns {{content: string, docs: Array}} - Generated index content and list of doc objects.
  */
 function processSidebar(
-  items,
-  docsPath,
-  version,
-  isLatest,
-  baseUrl,
+  items: SidebarItem[],
+  docsPath: string,
+  version: string,
+  isLatest: boolean,
+  baseUrl: string,
   level = 0
-) {
+): SidebarProcessResult {
   let llmsContent = '';
-  let fullDocsList = [];
+  let fullDocsList: FullDoc[] = [];
 
   items.forEach((item) => {
     // Case 1: Item is a direct link (string ID)
@@ -99,7 +195,7 @@ function processSidebar(
       }
     }
     // Case 2: Item is a category object
-    else if (item.type === 'category') {
+    else if (isSidebarCategory(item)) {
       const label = item.label;
       const headingPrefix = '#'.repeat(level + 3); // Start at level 3 (###)
 
@@ -128,13 +224,13 @@ function processSidebar(
  * @returns {Array<string>} - List of generated filenames.
  */
 function generateForVersion(
-  siteDir,
-  outDir,
-  version,
-  outputPrefix,
-  isLatest,
-  baseUrl
-) {
+  siteDir: string,
+  outDir: string,
+  version: string,
+  outputPrefix: string,
+  isLatest: boolean,
+  baseUrl: string
+): string[] {
   const docsPath = path.join(siteDir, 'versioned_docs', `version-${version}`);
   const sidebarPath = path.join(
     siteDir,
@@ -147,25 +243,18 @@ function generateForVersion(
     return [];
   }
 
-  const sidebarConfig = JSON.parse(fs.readFileSync(sidebarPath, 'utf8'));
+  const sidebarConfig: unknown = JSON.parse(
+    fs.readFileSync(sidebarPath, 'utf8')
+  );
 
   // Handle different Docusaurus sidebar structures (root 'docs' key or first key)
-  let rootItems = sidebarConfig.docs || Object.values(sidebarConfig)[0] || [];
+  const rootItemsSource = isRecord(sidebarConfig)
+    ? hasOwnProperty(sidebarConfig, 'docs')
+      ? sidebarConfig.docs
+      : Object.values(sidebarConfig)[0]
+    : undefined;
 
-  // Normalize object-style sidebars (older Docusaurus versions) to array format
-  if (!Array.isArray(rootItems) && typeof rootItems === 'object') {
-    const normalized = [];
-
-    for (const [label, items] of Object.entries(rootItems)) {
-      normalized.push({
-        type: 'category',
-        label: label,
-        items: items,
-      });
-    }
-
-    rootItems = normalized;
-  }
+  const rootItems = normalizeRootItems(rootItemsSource);
 
   const { content: sidebarContent, docs } = processSidebar(
     rootItems,
@@ -213,7 +302,10 @@ function generateForVersion(
   return [summaryFilename, fullFilename];
 }
 
-export default function (context, options) {
+export default function llmsTxtPlugin(
+  context: LoadContext,
+  options: LlmsTxtOptions
+): Plugin {
   return {
     name: 'llms.txt',
     async postBuild({ siteDir, outDir }) {

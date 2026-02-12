@@ -1,22 +1,30 @@
 import dedent from 'dedent';
 import assert from 'node:assert';
 import { describe, test } from 'node:test';
-import rehypeStaticToDynamic from '../src/plugins/rehype-static-to-dynamic.mjs';
+import rehypeStaticToDynamic, {
+  type RehypeStaticToDynamicElement as Element,
+  type RehypeStaticToDynamicElementChild as ElementChild,
+  type RehypeStaticToDynamicRoot as Root,
+  type RehypeStaticToDynamicText as Text,
+  type RehypeStaticToDynamicTreeChild as TreeChild,
+} from '../plugins/rehype-static-to-dynamic.ts';
 
 /**
  * Helper function to create a test tree structure
  */
-function createTestTree(code) {
-  return {
+function createTestTree(code: string): Root {
+  const tree: Root = {
     type: 'root',
     children: [
       {
         type: 'element',
         tagName: 'pre',
+        properties: {},
         children: [
           {
             type: 'element',
             tagName: 'code',
+            properties: {},
             data: { meta: 'static2dynamic' },
             children: [
               {
@@ -29,23 +37,25 @@ function createTestTree(code) {
       },
     ],
   };
+
+  return tree;
 }
 
 /**
  * Helper function to extract the transformed code from the tree
  */
-function extractTransformedCode(tree) {
+function extractTransformedCode(tree: Root): string {
   // After transformation, the tree should have TabItem elements
   const tabsElement = tree.children[0];
 
-  if (!tabsElement || tabsElement.tagName !== 'Tabs') {
+  if (!isElement(tabsElement) || tabsElement.tagName !== 'Tabs') {
     throw new Error('Expected Tabs element not found');
   }
 
   // Find the "Dynamic" tab
   const dynamicTab = tabsElement.children.find(
-    (child) =>
-      child.type === 'element' &&
+    (child): child is Element =>
+      isElement(child) &&
       child.tagName === 'TabItem' &&
       child.properties?.value === 'dynamic'
   );
@@ -56,7 +66,7 @@ function extractTransformedCode(tree) {
 
   // Extract the code from the dynamic tab
   const preElement = dynamicTab.children.find(
-    (child) => child.type === 'element' && child.tagName === 'pre'
+    (child): child is Element => isElement(child) && child.tagName === 'pre'
   );
 
   if (!preElement) {
@@ -64,16 +74,26 @@ function extractTransformedCode(tree) {
   }
 
   const codeElement = preElement.children.find(
-    (child) => child.type === 'element' && child.tagName === 'code'
+    (child): child is Element => isElement(child) && child.tagName === 'code'
   );
 
   if (!codeElement) {
     throw new Error('Code element not found');
   }
 
-  const textNode = codeElement.children.find((child) => child.type === 'text');
+  const textNode = codeElement.children.find(isTextNode);
 
   return textNode?.value || '';
+}
+
+function isElement(
+  node: TreeChild | ElementChild | undefined
+): node is Element {
+  return Boolean(node && node.type === 'element');
+}
+
+function isTextNode(node: ElementChild): node is Text {
+  return node.type === 'text';
 }
 
 describe('rehype-static-to-dynamic', () => {

@@ -4,20 +4,85 @@ import fs from 'fs';
 import path from 'path';
 import { visit } from 'unist-util-visit';
 import { promisify } from 'util';
+import type { Node } from 'unist';
 
 const execAsync = promisify(exec);
+
+type MdxJsxAttribute = {
+  type: 'mdxJsxAttribute';
+  name: string;
+  value?: string | MdxJsxAttributeValueExpression;
+};
+
+type MdxJsxAttributeValueExpression = {
+  type: 'mdxJsxAttributeValueExpression';
+  data?: {
+    estree?: {
+      body?: Array<{
+        expression?: {
+          properties?: unknown[];
+        };
+      }>;
+    };
+  };
+};
+
+type MdxJsxFlowElement = {
+  type: 'mdxJsxFlowElement';
+  name?: string;
+  attributes?: MdxJsxAttribute[];
+  children?: MdxJsxFlowElement[];
+};
+
+type VFileLike = {
+  cwd: string;
+  dirname: string;
+};
+
+type VideoDimensions = {
+  width?: number;
+  height?: number;
+};
+
+type StyleEstreeData = {
+  estree: {
+    type: 'Program';
+    body: Array<{
+      type: 'ExpressionStatement';
+      expression: {
+        type: 'ObjectExpression';
+        properties: unknown[];
+      };
+    }>;
+  };
+};
+
+function isAttributeValueExpression(
+  value: MdxJsxAttribute['value']
+): value is MdxJsxAttributeValueExpression {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'type' in value &&
+    value.type === 'mdxJsxAttributeValueExpression'
+  );
+}
 
 /**
  * Rehype plugin to add aspect ratio preservation to video tags
  */
-export default function rehypeVideoAspectRatio({ staticDir }) {
-  return async (tree, file) => {
-    const promises = [];
+export default function rehypeVideoAspectRatio({
+  staticDir,
+}: {
+  staticDir: string;
+}) {
+  return async (tree: Node, file: VFileLike) => {
+    const promises: Promise<void>[] = [];
 
-    visit(tree, 'mdxJsxFlowElement', (node) => {
+    visit(tree, 'mdxJsxFlowElement', (node: MdxJsxFlowElement) => {
       if (node.name === 'video') {
         // Find video source - check src attribute or source children
-        let videoSrc = null;
+        let videoSrc: string | null = null;
 
         // Look for src in attributes
         if (node.attributes) {
@@ -25,7 +90,7 @@ export default function rehypeVideoAspectRatio({ staticDir }) {
             (attr) => attr.type === 'mdxJsxAttribute' && attr.name === 'src'
           );
 
-          if (srcAttr) {
+          if (srcAttr && typeof srcAttr.value === 'string') {
             videoSrc = srcAttr.value;
           }
         }
@@ -42,7 +107,7 @@ export default function rehypeVideoAspectRatio({ staticDir }) {
               (attr) => attr.type === 'mdxJsxAttribute' && attr.name === 'src'
             );
 
-            if (srcAttr) {
+            if (srcAttr && typeof srcAttr.value === 'string') {
               videoSrc = srcAttr.value;
             }
           }
@@ -83,8 +148,12 @@ export default function rehypeVideoAspectRatio({ staticDir }) {
 /**
  * Apply aspect ratio styles to a video node
  */
-function applyAspectRatio(node, width, height) {
-  const data = {
+function applyAspectRatio(
+  node: MdxJsxFlowElement,
+  width: number,
+  height: number
+) {
+  const data: StyleEstreeData = {
     estree: {
       type: 'Program',
       body: [
@@ -112,11 +181,13 @@ function applyAspectRatio(node, width, height) {
     (attr) => attr.type === 'mdxJsxAttribute' && attr.name === 'style'
   );
 
-  if (styleAttr) {
+  if (styleAttr && isAttributeValueExpression(styleAttr.value)) {
     const properties =
-      styleAttr.value?.data?.estree?.body?.[0]?.expression?.properties ?? [];
+      styleAttr.value.data?.estree?.body?.[0]?.expression?.properties;
 
-    data.estree.body[0].expression.properties.push(...properties);
+    if (Array.isArray(properties)) {
+      data.estree.body[0].expression.properties.push(...properties);
+    }
   }
 
   styleAttr = {
@@ -142,13 +213,13 @@ function applyAspectRatio(node, width, height) {
 /**
  * Get video dimensions using ffprobe
  */
-async function getVideoDimensions(filePath) {
+async function getVideoDimensions(filePath: string) {
   const { stdout } = await execAsync(
     `${ffprobe.path} -v error -of flat=s=_ -select_streams v:0 -show_entries stream=height,width "${filePath}"`
   );
 
   const lines = stdout.trim().split('\n');
-  const dimensions = {};
+  const dimensions: VideoDimensions = {};
 
   for (const line of lines) {
     if (line.includes('width')) {

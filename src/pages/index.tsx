@@ -12,7 +12,6 @@ export default function Home() {
 
   return (
     <Layout
-      // @ts-expect-error this are needed but don't exist in the type
       title={siteConfig.title}
       description={siteConfig.tagline}
       wrapperClassName="full-width"
