@@ -14554,7 +14554,9 @@ In React Navigation 8, we reworked the types to automatically determine the corr
 + const navigation = useNavigation('Profile');
 ```
 
-If you're using dynamic configuration, unfortunately we cannot currently infer the types automatically. So it still requires manual annotation. However, now you need to use `as` instead of generics to make it clearer that this is unsafe:
+If you're using dynamic configuration, there is limited support for automatic inference of types. The available screens, params etc. can be inferred, so actions such as `navigation.setParams`, `navigation.navigate` etc. will be properly typed. However, navigator specific types such as `push`, `setOptions`, `addListener` etc. cannot be inferred. So it still requires manual annotation for those cases.
+
+Additionally, now you need to use `as` instead of generics to make it clearer that this is unsafe:
 
 ```diff lang=ts
 - const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'Profile'>>();
