@@ -14855,6 +14855,14 @@ This way you have more control over how params are updated in tab and drawer nav
 
 See [`setParams` action docs](navigation-actions.md#setparams) for more details.
 
+#### `getId` no longer re-arranges screens in the stack to make the screen unique
+
+Previously, the ID returned by `getId` was treated as a unique identifier. When using `navigate` or `push` to go to a route with an ID that already existed in the stack, the stack would rearrange to bring the existing route to the front. However, this resulted in broken behavior with Native Stack Navigator.
+
+Since this was unusable, and resulted in hard to debug issues, we have changed the behavior of `getId` to treat it more like the route name - that is, it will match routes by ID without rearranging the stack. If you navigate to a route with an existing ID and `pop: true`, it will pop back to the matching route instead of moving it to the top.
+
+If you were relying on the previous behavior and are not using Native Stack Navigator, you can use the [`router` prop](#navigators-now-accept-a-router-prop) on the navigator to customize how each action updates the state, and implement the previous behavior.
+
 #### Navigators no longer use `InteractionManager`
 
 Previously, various navigators used `InteractionManager` to mark when animations and gestures were in progress. This was primarily used to defer code that should run after transitions, such as loading data or rendering heavy components.
@@ -18428,6 +18436,8 @@ If a matching screen is not found in the stack, this will pop the current screen
 navigation.popTo('Profile', { owner: 'Michaś' });
 ```
 
+If [`getId`](screen.md#id) is specified for the screen, `popTo` will match the screen by id instead of name.
+
 #### `popToTop`
 
 Pops all of the screens in the stack except the first one and navigates to it.
@@ -19269,6 +19279,15 @@ The icon object can be one of the following types:
 
   It's necessary to provide icons for multiple screen densities (1x, 2x, 3x), e.g.: `icon.png`, `icon@2x.png`, `icon@3x.png` etc. as icons are not scaled automatically on iOS for the `native` implementation.
 
+  It also supports [drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) on Android, [xcasset](https://developer.apple.com/documentation/xcode/adding-images-to-your-xcode-project) on iOS:
+
+  ```js
+  tabBarIcon: {
+    type: 'image',
+    source: { uri: 'icon_name' },
+  }
+  ```
+
   A `tinted` property can be used to control whether the icon should be tinted with the active/inactive color:
 
   ```js
@@ -19308,15 +19327,6 @@ The icon object can be one of the following types:
   - `weight` - Supported values: `100`, `200`, `300`, `400`, `500`, `600`, `700`
 
   See [Icons](icons.md#material-symbols) for more details.
-
-- Resource name - [Drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) on Android, [xcasset](https://developer.apple.com/documentation/xcode/adding-images-to-your-xcode-project) on iOS.
-
-  ```js
-  tabBarIcon: {
-    type: 'resource',
-    name: 'sunny',
-  }
-  ```
 
 To render different icons for active and inactive states, you can use a function:
 
@@ -19369,7 +19379,10 @@ Style for the badge on the tab icon. Supported properties:
 - `backgroundColor`
 - `color`
 
-Supported on all platforms with `custom` implementation. Only supported with `native` implementation on Android.
+With `native` implementation, limited customization is supported:
+
+- on iOS, you can only set the background color.
+- on Android, you can set both background and text colors.
 
 <img src="/assets/7.x/bottom-tabs/tabBarBadgeStyle.png" width="500" alt="Tab bar badge style" />
 
@@ -26614,7 +26627,10 @@ const Stack = createNativeStackNavigator({
 
 ### ID
 
-A screen can have an ID to identify it uniquely. This is useful when you want to ensure that the screen with the same ID doesn't appear multiple times in the stack.
+A screen can have an ID to identify it. The ID is used differently based on the navigator type.
+
+- In a stack navigator, the ID is treated similarly to the name.
+- In a tab or drawer navigator, the screen will remount if the ID changes.
 
 This can be done by specifying the `getId` callback. It receives an object with the route params:
 
@@ -26648,22 +26664,7 @@ const Stack = createStackNavigator({
 </TabItem>
 </Tabs>
 
-In the above example, `params.userId` is used as an ID for the `Profile` screen with `getId`. This changes how the navigation works to ensure that the screen with the same ID appears only once in the stack.
-
-Let's say you have a stack with the history `Home > Profile (userId: bob) > Settings`, consider following scenarios:
-
-- You call `navigate(Profile, { userId: 'bob' })`:
-  The resulting screens will be `Home > Settings > Profile (userId: bob)` since the existing `Profile` screen matches the ID.
-- You call `navigate(Profile, { userId: 'alice' })`:
-  The resulting screens will be `Home > Profile (userId: bob) > Settings > Profile (userId: alice)` since it'll add a new `Profile` screen as no matching screen was found.
-
-If `getId` is specified in a tab or drawer navigator, the screen will remount if the ID changes.
-
-:::warning
-
-If you're using [`@react-navigation/native-stack`](native-stack-navigator.md), it doesn't work correctly with the `getId` callback. So it's recommended to avoid using it in that case.
-
-:::
+In the above example, `params.userId` is used as an ID for the `Profile` screen with `getId`. So if you navigate to `Profile` with the same `userId`, it'll update the params of the existing screen instead of pushing a new one. If you navigate to `Profile` with a different `userId`, it'll push a new screen onto the stack.
 
 ### Component
 
@@ -27367,13 +27368,13 @@ The vast majority of your interactions with the `navigation` object will involve
 
 The `navigate` method lets us navigate to another screen in your app. It takes the following arguments:
 
-`navigation.navigate(name, params)`
+`navigation.navigate(name, params, options)`
 
 - `name` - _string_ - A destination name of the screen in the current or a parent navigator.
 - `params` - _object_ - Params to use for the destination route.
 - `options` - Options object containing the following properties:
   - `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
-  - `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen in the stack. Defaults to `false`.
+  - `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen (by name or id if `getId` is specified) in the stack. Defaults to `false`.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -27542,8 +27543,9 @@ In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack
 
 - If you're already on a screen with the same name, it will update its params and not push a new screen.
 - If you're on a different screen, it will push the new screen onto the stack.
-- If the [`getId`](screen.md#id) prop is specified, and another screen in the stack has the same ID, it will bring that screen to focus and update its params instead.
-- If none of the above conditions match, it'll push a new screen to the stack.
+- If the [`getId`](screen.md#id) prop is specified, it's treated similarly to the name,
+  - If you're already on a screen with the same id, it will update its params and not push a new screen.
+  - If you're on a different screen, it will push the new screen onto the stack.
 
 In a tab or drawer navigator, calling `navigate` will switch to the relevant screen if it's not focused already and update the params of the screen.
 
@@ -31514,7 +31516,9 @@ In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack
 
 - If you're already on a screen with the same name, it will update its params and not push a new screen.
 - If you're on a different screen, it will push the new screen onto the stack.
-- If the [`getId`](screen.md#id) prop is specified, and another screen in the stack has the same ID, it will bring that screen to focus and update its params instead.
+- If the [`getId`](screen.md#id) prop is specified, it's treated similarly to the name,
+  - If you're already on a screen with the same id, it will update its params and not push a new screen.
+  - If you're on a different screen, it will push the new screen onto the stack.
 
 <details>
 <summary>Advanced usage</summary>
@@ -31524,10 +31528,8 @@ The `navigate` action can also accepts an object as the argument with the follow
 - `name` - _string_ - A destination name of the screen in the current or a parent navigator
 - `params` - _object_ - Params to use for the destination route.
 - `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
-- `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen in the stack. Defaults to `false`.
-- `path` - _string_ - The path (from deep link or universal link) to associate with the screen.
-
-This is primarily used internally to associate a path with a screen when it's from a URL.
+- `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen (by name or id if `getId` is specified) in the stack. Defaults to `false`.
+- `path` - _string_ - The path (from deep link or universal link) to associate with the screen. This is primarily used internally to associate a path with a screen when it's from a URL.
 
 </details>
 
@@ -32673,6 +32675,8 @@ The method accepts the following arguments:
 - `params` - _object_ - Screen params to pass to the destination route.
 - `options` - Options object containing the following properties:
   - `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
+
+If [`getId`](screen.md#id) is specified for the screen, `popTo` will match the screen by id instead of name.
 
 ```js name="Stack actions popTo" snack static2dynamic
 import * as React from 'react';

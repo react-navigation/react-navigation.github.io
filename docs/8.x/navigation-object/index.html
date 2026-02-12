@@ -24,7 +24,7 @@
 <script src="/js/snack-helpers.js"></script>
 <script src="/js/toc-fixes.js"></script>
 <script src="/js/video-playback.js"></script><link rel="stylesheet" href="/assets/css/styles.d516c09b.css">
-<script src="/assets/js/runtime~main.5110eb75.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.1296d14d.js" defer="defer"></script>
 <script src="/assets/js/main.acf91cf9.js" defer="defer"></script>
     <meta property="og:image" content="https://reactnavigation.org/img/og-image.png">
     <meta name="twitter:image" content="https://reactnavigation.org/img/og-image.png">
@@ -97,14 +97,14 @@
 <p>The vast majority of your interactions with the <code>navigation</code> object will involve <code>navigate</code>, <code>goBack</code>, and <code>setParams</code>.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="navigate"><code>navigate</code><a href="#navigate" class="hash-link" aria-label="Direct link to navigate" title="Direct link to navigate" translate="no">​</a></h3>
 <p>The <code>navigate</code> method lets us navigate to another screen in your app. It takes the following arguments:</p>
-<p><code>navigation.navigate(name, params)</code></p>
+<p><code>navigation.navigate(name, params, options)</code></p>
 <ul>
 <li class=""><code>name</code> - <em>string</em> - A destination name of the screen in the current or a parent navigator.</li>
 <li class=""><code>params</code> - <em>object</em> - Params to use for the destination route.</li>
 <li class=""><code>options</code> - Options object containing the following properties:<!-- -->
 <ul>
 <li class=""><code>merge</code> - <em>boolean</em> - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to <code>false</code>.</li>
-<li class=""><code>pop</code> - <em>boolean</em> - Whether screens should be popped to navigate to a matching screen in the stack. Defaults to <code>false</code>.</li>
+<li class=""><code>pop</code> - <em>boolean</em> - Whether screens should be popped to navigate to a matching screen (by name or id if <code>getId</code> is specified) in the stack. Defaults to <code>false</code>.</li>
 </ul>
 </li>
 </ul>
@@ -113,8 +113,12 @@
 <ul>
 <li class="">If you&#x27;re already on a screen with the same name, it will update its params and not push a new screen.</li>
 <li class="">If you&#x27;re on a different screen, it will push the new screen onto the stack.</li>
-<li class="">If the <a class="" href="/docs/8.x/screen#id"><code>getId</code></a> prop is specified, and another screen in the stack has the same ID, it will bring that screen to focus and update its params instead.</li>
-<li class="">If none of the above conditions match, it&#x27;ll push a new screen to the stack.</li>
+<li class="">If the <a class="" href="/docs/8.x/screen#id"><code>getId</code></a> prop is specified, it&#x27;s treated similarly to the name,<!-- -->
+<ul>
+<li class="">If you&#x27;re already on a screen with the same id, it will update its params and not push a new screen.</li>
+<li class="">If you&#x27;re on a different screen, it will push the new screen onto the stack.</li>
+</ul>
+</li>
 </ul>
 <p>In a tab or drawer navigator, calling <code>navigate</code> will switch to the relevant screen if it&#x27;s not focused already and update the params of the screen.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="goback"><code>goBack</code><a href="#goback" class="hash-link" aria-label="Direct link to goback" title="Direct link to goback" translate="no">​</a></h3>
