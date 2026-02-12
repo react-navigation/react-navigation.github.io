@@ -1,14 +1,67 @@
 import npmToYarn from 'npm-to-yarn';
 import { Parser } from 'acorn';
 import acornJsx from 'acorn-jsx';
+import type { Node } from 'unist';
 
 const parser = Parser.extend(acornJsx());
 
-function parseExpression(code) {
+type PackageManager = 'npm' | 'yarn' | 'pnpm' | 'bun';
+
+type RemarkNpm2YarnOptions = {
+  sync?: boolean;
+  converters?: PackageManager[];
+};
+
+type MdxJsxAttributeValueExpression = {
+  type: 'mdxJsxAttributeValueExpression';
+  value: string;
+  data: {
+    estree: unknown;
+  };
+};
+
+type MdxJsxAttribute = {
+  type: 'mdxJsxAttribute';
+  name: string;
+  value?: string | MdxJsxAttributeValueExpression;
+};
+
+type MdxNode = Node & {
+  value?: string;
+  lang?: string;
+  meta?: string;
+  name?: string;
+  attributes?: MdxJsxAttribute[];
+  children?: MdxNode[];
+  data?: {
+    estree?: unknown;
+  };
+};
+
+type CodeNode = MdxNode & {
+  type: 'code';
+  value: string;
+};
+
+type CreateTabItemOptions = {
+  code: string;
+  node: MdxNode;
+  pm: PackageManager;
+};
+
+const defaultConverters: PackageManager[] = ['yarn', 'pnpm', 'bun'];
+
+function parseExpression(code: string): unknown {
   return parser.parse(code, { ecmaVersion: 'latest', sourceType: 'module' });
 }
 
-function createLabelWithIcon(pm) {
+function isCodeNode(node: MdxNode): node is CodeNode {
+  return node.type === 'code' && typeof node.value === 'string';
+}
+
+function createLabelWithIcon(
+  pm: PackageManager
+): MdxJsxAttributeValueExpression {
   const value = `<><img className="pm-icon" src="/assets/pm/${pm}.svg" alt="" />${pm}</>`;
 
   return {
@@ -18,7 +71,7 @@ function createLabelWithIcon(pm) {
   };
 }
 
-function createTabItem({ code, node, pm }) {
+function createTabItem({ code, node, pm }: CreateTabItemOptions): MdxNode {
   return {
     type: 'mdxJsxFlowElement',
     name: 'TabItem',
@@ -34,7 +87,11 @@ function createTabItem({ code, node, pm }) {
   };
 }
 
-function transformNode(node, sync, converters) {
+function transformNode(
+  node: CodeNode,
+  sync: boolean,
+  converters: PackageManager[]
+): MdxNode {
   const npmCode = node.value;
 
   return {
@@ -52,7 +109,7 @@ function transformNode(node, sync, converters) {
   };
 }
 
-function createImportNode() {
+function createImportNode(): MdxNode {
   const value =
     "import Tabs from '@theme/Tabs'\nimport TabItem from '@theme/TabItem'";
 
@@ -63,17 +120,23 @@ function createImportNode() {
   };
 }
 
-export default function remarkNpm2Yarn(options = {}) {
-  const { sync = false, converters = ['yarn', 'pnpm', 'bun'] } = options;
+export default function remarkNpm2Yarn(
+  options: RemarkNpm2YarnOptions = {}
+) {
+  const { sync = false, converters = defaultConverters } = options;
 
-  return async (root) => {
+  return async (root: MdxNode) => {
     const { visit } = await import('unist-util-visit');
 
     let transformed = false;
     let alreadyImported = false;
 
-    visit(root, (node) => {
-      if (node.type === 'mdxjsEsm' && node.value.includes('@theme/Tabs')) {
+    visit(root, (node: MdxNode) => {
+      if (
+        node.type === 'mdxjsEsm' &&
+        typeof node.value === 'string' &&
+        node.value.includes('@theme/Tabs')
+      ) {
         alreadyImported = true;
       }
 
@@ -81,7 +144,7 @@ export default function remarkNpm2Yarn(options = {}) {
         let i = 0;
         while (i < node.children.length) {
           const child = node.children[i];
-          if (child.type === 'code' && child.meta === 'npm2yarn') {
+          if (isCodeNode(child) && child.meta === 'npm2yarn') {
             node.children[i] = transformNode(child, sync, converters);
             transformed = true;
           }
@@ -90,7 +153,7 @@ export default function remarkNpm2Yarn(options = {}) {
       }
     });
 
-    if (transformed && !alreadyImported) {
+    if (transformed && !alreadyImported && Array.isArray(root.children)) {
       root.children.unshift(createImportNode());
     }
   };

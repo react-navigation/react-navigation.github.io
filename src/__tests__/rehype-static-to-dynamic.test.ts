@@ -1,7 +1,7 @@
 import dedent from 'dedent';
 import assert from 'node:assert';
 import { describe, test } from 'node:test';
-import rehypeStaticToDynamic from '../src/plugins/rehype-static-to-dynamic.mjs';
+import rehypeStaticToDynamic from '../plugins/rehype-static-to-dynamic.ts';
 
 /**
  * Helper function to create a test tree structure
