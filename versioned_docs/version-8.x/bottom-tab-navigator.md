@@ -657,7 +657,10 @@ Style for the badge on the tab icon. Supported properties:
 - `backgroundColor`
 - `color`
 
-Supported on all platforms with `custom` implementation. Only supported with `native` implementation on Android.
+With `native` implementation, limited customization is supported:
+
+- on iOS, you can only set the background color.
+- on Android, you can set both background and text colors.
 
 <img src="/assets/7.x/bottom-tabs/tabBarBadgeStyle.png" width="500" alt="Tab bar badge style" />
 
