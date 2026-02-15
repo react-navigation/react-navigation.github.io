@@ -352,6 +352,7 @@ It can contain the following properties:
 - `autoCapitalize`: The auto-capitalization behavior. Possible values: `none`, `words`, `sentences`, `characters`.
 - `autoFocus`: Automatically focus search input on mount.
 - `cancelButtonText`: Text to be used instead of default `Cancel` button text (iOS only).
+- `hideNavigationBar`: Boolean indicating whether to hide the navigation bar during searching. When unset, defers to native iOS behavior (navigation bar is hidden during search). Set to `false` to keep the header title and buttons visible while the search bar is active. (iOS only)
 - `inputType`: Type of the input. Possible values: `text`, `phone`, `number`, `email`.
 - `onBlur`: Callback that gets called when search input has lost focus.
 - `onChange`: Callback that gets called when the text changes.
