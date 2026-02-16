@@ -18865,6 +18865,7 @@ This is the default implementation on other platforms such as web, macOS and Win
 
 - Liquid Glass effect on iOS 26+ requires your app to be built with Xcode 26 or above.
 - On Android, at most 5 tabs are supported with the `native` implementation. This is a limitation of the underlying native component.
+- The experimental `SafeAreaView` component from `react-native-screens/experimental` can be used to avoid overlapping native tab bar.
 
 ## API Definition
 

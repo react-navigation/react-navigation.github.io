@@ -20161,6 +20161,8 @@ npm install @react-navigation/bottom-tabs
 
 The navigator requires React Native 0.79 or above is required. If you're using [Expo](https://expo.dev/), it requires SDK 53 or above.
 
+It also needs latest version of `react-native-screens`. If you're using Expo, make sure to use [development builds](https://docs.expo.dev/develop/development-builds/introduction/) instead of Expo Go to use the latest version of `react-native-screens`.
+
 ## Usage
 
 To use this navigator, import it from `@react-navigation/bottom-tabs/unstable`:
@@ -20198,6 +20200,7 @@ const MyTabs = createNativeBottomTabNavigator({
 
 - Liquid Glass effect on iOS 26+ requires your app to be built with Xcode 26 or above.
 - On Android, at most 5 tabs are supported. This is a limitation of the underlying native component.
+- The experimental `SafeAreaView` component from `react-native-screens/experimental` can be used to avoid overlapping tab bar.
 
 ## API Definition
 
