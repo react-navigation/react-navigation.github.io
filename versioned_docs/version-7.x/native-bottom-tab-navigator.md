@@ -197,7 +197,18 @@ The icon can be of following types:
   }
   ```
 
-  On iOS, you can additionally pass a `tinted` property to control whether the icon should be tinted with the active/inactive color:
+  It's necessary to provide icons for multiple screen densities (1x, 2x, 3x), e.g.: `icon.png`, `icon@2x.png`, `icon@3x.png` etc. as icons are not scaled automatically on iOS.
+
+  It also supports [drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) on Android, [xcasset](https://developer.apple.com/documentation/xcode/adding-images-to-your-xcode-project) on iOS:
+
+  ```js
+  tabBarIcon: {
+    type: 'image',
+    source: { uri: 'icon_name' },
+  }
+  ```
+
+  A `tinted` property can be used to control whether the icon should be tinted with the active/inactive color:
 
   ```js
   tabBarIcon: {
@@ -207,7 +218,7 @@ The icon can be of following types:
   }
   ```
 
-  The image is tinted by default.
+  The image is tinted by default. Set `tinted` to `false` if the image has its own colors that you want to preserve on iOS. On Android, the image is always tinted and the `tinted` property is ignored.
 
 - [SF Symbols](https://developer.apple.com/sf-symbols/) name - Supported on iOS
 
@@ -215,15 +226,6 @@ The icon can be of following types:
   tabBarIcon: {
     type: 'sfSymbol',
     name: 'heart',
-  }
-  ```
-
-- Resource name - [Drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) on Android, [xcasset](https://developer.apple.com/documentation/xcode/adding-images-to-your-xcode-project) on iOS.
-
-  ```js
-  tabBarIcon: {
-    type: 'resource',
-    name: 'sunny',
   }
   ```
 
@@ -249,8 +251,8 @@ tabBarIcon: Platform.select({
     name: 'heart',
   },
   android: {
-    type: 'resource',
-    name: 'heart_icon',
+    type: 'image',
+    source: require('./path/to/icon.png'),
   },
 });
 ```
