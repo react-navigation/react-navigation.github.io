@@ -1563,24 +1563,47 @@ Common properties:
   - `color` (of type `ColorValue`)
 - `icon`: Optional icon to show instead of the label.
 
-  The icon can be an image:
+  The icon can be of following types:
+  - Local image
 
-  ```js
-  {
-    type: 'image',
-    source: require('./path/to/image.png'),
-    tinted: true, // Whether to apply tint color to the icon. Defaults to true.
-  }
-  ```
+    ```js
+    {
+      type: 'image',
+      source: require('./path/to/image.png'),
+    }
+    ```
 
-  Or a [SF Symbols](https://developer.apple.com/sf-symbols/) name:
+    It's necessary to provide icons for multiple screen densities (1x, 2x, 3x), e.g.: `icon.png`, `icon@2x.png`, `icon@3x.png` etc. as icons are not scaled automatically.
 
-  ```js
-  {
-    type: 'sfSymbol',
-    name: 'heart',
-  }
-  ```
+    It also supports [xcasset](https://developer.apple.com/documentation/xcode/adding-images-to-your-xcode-project):
+
+    ```js
+    tabBarIcon: {
+      type: 'image',
+      source: { uri: 'icon_name' },
+    }
+    ```
+
+    A `tinted` property can be used to control whether the icon should be tinted with the active/inactive color:
+
+    ```js
+    tabBarIcon: {
+      type: 'image',
+      source: require('./path/to/icon.png'),
+      tinted: false,
+    }
+    ```
+
+    Set `tinted` to `false` if the image has its own colors that you want to preserve.
+
+  - [SF Symbols](https://developer.apple.com/sf-symbols/) name
+
+    ```js
+    {
+      type: 'sfSymbol',
+      name: 'heart',
+    }
+    ```
 
 - `variant`: Visual variant of the button. Supported values:
   - `plain` (default)
