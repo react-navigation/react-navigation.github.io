@@ -266,7 +266,7 @@ Style for the badge on the tab icon. Supported properties:
 - `backgroundColor`
 - `color`
 
-With `native` implementation, limited customization is supported:
+Different customization is supported based on the platform:
 
 - on iOS, you can only set the background color.
 - on Android, you can set both background and text colors.
