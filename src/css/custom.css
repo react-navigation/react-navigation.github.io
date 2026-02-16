@@ -378,7 +378,7 @@ header {
   margin-bottom: var(--ifm-list-paragraph-margin);
 }
 
-.markdown :is(ul, ol) > li > p:first-child:has(> code:only-child) {
+.markdown :is(ul, ol) > li > p:first-child:has(> code:only-child):has(+ p) {
   font-weight: 600;
   font-size: 1.25em;
 }
