@@ -57,7 +57,24 @@ After setting up the type for the root navigator, all we need to do is specify t
 
 This can be done in 2 ways:
 
-1. The type annotation for the component specified in `screen`:
+1. The path pattern specified in the linking config (e.g. for `path: 'profile/:userId'`, the type of `route.params` is `{ userId: string }`). The type can be further customized by using a [`parse` function in the linking config](configuring-links.md#passing-params):
+
+   ```ts
+   linking: {
+     // highlight-start
+     path: 'profile/:userId',
+     parse: {
+       userId: (id) => parseInt(id, 10),
+     },
+     // highlight-end
+   },
+   ```
+
+   The above example would make the type of `route.params` be `{ userId: number }` since the `parse` function converts the string from the URL to a number.
+
+   This is the recommended way to specify params for screens that are accessible via deep linking or if your app runs on the Web, as it ensures that the types of params are consistent with the URL.
+
+2. The type annotation for the component specified in `screen`:
 
    ```ts
    import type { StaticScreenProps } from '@react-navigation/native';
@@ -85,18 +102,9 @@ This can be done in 2 ways:
    }
    ```
 
-2. The path pattern specified in the linking config (e.g. for `linking: 'profile/:userId'`, the type of `route.params` is `{ userId: string }`). The type can be further customized by using a [`parse` function in the linking config](configuring-links.md#passing-params):
-
-   ```ts
-   linking: {
-     path: 'profile/:userId',
-     parse: {
-       userId: (id) => parseInt(id, 10),
-     },
-   },
-   ```
-
    The above example would make the type of `route.params` be `{ userId: number }` since the `parse` function converts the string from the URL to a number.
+
+   If your app supports deep linking or runs on the Web, you can use this pattern to specify any additional optional params that don't appear in the path pattern (e.g. query params). Make sure to add `| undefined` to the type of params to make them optional, as query params may not be present in the URL.
 
 If both `screen` and `linking` specify params, the final type of `route.params` is the intersection of both types.
 
@@ -119,8 +127,6 @@ const MyStack = createNativeStackNavigator({
   },
 });
 ```
-
-If your app supports deep linking or runs on the Web, it is recommended to specify params that appear in the path pattern in the linking config. Any additional params (e.g. query params) can be specified in the component's props.
 
 If you have specified the params in `linking`, it's recommended to not specify them again in the component's props, and use `useRoute('ScreenName')` instead to get the correctly typed `route` object.
 
