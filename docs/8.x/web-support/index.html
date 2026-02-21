@@ -24,7 +24,7 @@
 <script src="/js/snack-helpers.js"></script>
 <script src="/js/toc-fixes.js"></script>
 <script src="/js/video-playback.js"></script><link rel="stylesheet" href="/assets/css/styles.01c174f5.css">
-<script src="/assets/js/runtime~main.2ae478c8.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.f7bde21d.js" defer="defer"></script>
 <script src="/assets/js/main.a6efeaab.js" defer="defer"></script>
     <meta property="og:image" content="https://reactnavigation.org/img/og-image.png">
     <meta name="twitter:image" content="https://reactnavigation.org/img/og-image.png">
@@ -40,14 +40,17 @@
 <li class="">
 <p><a class="" href="/docs/8.x/configuring-links"><strong>Configure linking</strong></a></p>
 <p>Configuring linking allows React Navigation to integrate with the browser&#x27;s URL bar. This is crucial for web apps to have proper URLs for each screen.</p>
+<p>Automatic links are already enabled by default when using <a class="" href="/docs/8.x/static-configuration">Static configuration</a>. So if you&#x27;re using static configuration, you don&#x27;t need to do anything to enable linking.</p>
 </li>
 <li class="">
-<p><a class="" href="/docs/8.x/link"><strong>Use Button or Link components</strong></a></p>
-<p>You may be familiar with using <code>navigation.navigate</code> to navigate between screens. But it&#x27;s important to avoid using it when supporting the web. Instead, use the <code>Link</code> or <a class="" href="/docs/8.x/elements#button"><code>Button</code></a> components to navigate between screens. This ensures that an anchor tag is rendered which provides the expected behavior on the web.</p>
+<p><strong>Use Button or Link components</strong></p>
+<p>You may be familiar with using <code>navigation.navigate</code> to navigate between screens. But it&#x27;s important to avoid using it when supporting the web. Instead, use the <a class="" href="/docs/8.x/link"><code>Link</code></a> or <a class="" href="/docs/8.x/elements#button"><code>Button</code></a> components (or your own with <a class="" href="/docs/8.x/use-link-props"><code>useLinkProps</code></a>) to navigate between screens.</p>
+<p>This ensures that an anchor tag is rendered which provides the expected behavior on the web.</p>
 </li>
 <li class="">
 <p><a class="" href="/docs/8.x/server-rendering"><strong>Server rendering</strong></a></p>
-<p>Currently, React Navigation works best with fully client-side rendered apps. However, minimal server-side rendering support is available. So you can optionally choose to server render your app.</p>
+<p>Currently, React Navigation works best with fully client-side rendered apps.</p>
+<p>Limited server-side rendering support is available. So you can optionally choose to server render your app - however it requires using <a href="https://react.dev/reference/react-dom/server" target="_blank" rel="noopener noreferrer" class="">React&#x27;s server rendering APIs</a> on your server directly, so it&#x27;s not straightforward.</p>
 </li>
 <li class="">
 <p><strong>Adapt to web-specific behavior</strong></p>
@@ -70,19 +73,21 @@
 <ol>
 <li class="">
 <p><a class="" href="/docs/8.x/stack-navigator"><strong>Native Stack Navigator</strong></a></p>
-<p>Native Stack Navigator uses the platform&#x27;s primitives to handle animations and gestures on native platforms. However, animations and gestures are not supported on the web.</p>
+<p>Native Stack Navigator uses the platform&#x27;s primitives to handle animations and gestures on native platforms.</p>
+<p>On the Web, animations and gestures are not supported.</p>
 </li>
 <li class="">
 <p><a class="" href="/docs/8.x/stack-navigator"><strong>Stack Navigator</strong></a></p>
-<p>Stack Navigator uses <a href="https://docs.swmansion.com/react-native-gesture-handler/" target="_blank" rel="noopener noreferrer" class=""><code>react-native-gesture-handler</code></a> to handle swipe gestures on native platforms. However, gestures are not supported on the web.</p>
-<p>In addition, screen transitions are disabled by default on the web. You can enable them by setting <code>animationEnabled: true</code> in the navigator&#x27;s options.</p>
+<p>Stack Navigator uses <a href="https://docs.swmansion.com/react-native-gesture-handler/" target="_blank" rel="noopener noreferrer" class=""><code>react-native-gesture-handler</code></a> to handle swipe gestures on native platforms.</p>
+<p>Screen transition animations are disabled by default on the web. You can enable them by using the <a class="" href="/docs/8.x/stack-navigator#animations"><code>animation</code></a> option. Gestures are not supported on the web.</p>
 </li>
 <li class="">
 <p><a class="" href="/docs/8.x/drawer-navigator"><strong>Drawer Navigator</strong></a></p>
-<p>Drawer Navigator uses <a href="https://docs.swmansion.com/react-native-gesture-handler/" target="_blank" rel="noopener noreferrer" class=""><code>react-native-gesture-handler</code></a> to handle swipe gestures and <a href="https://docs.swmansion.com/react-native-reanimated/" target="_blank" rel="noopener noreferrer" class=""><code>react-native-reanimated</code></a> for animations on native platforms. However, gestures are not supported on the web, and animations are handled using CSS transitions.</p>
+<p>Drawer Navigator uses <a href="https://docs.swmansion.com/react-native-gesture-handler/" target="_blank" rel="noopener noreferrer" class=""><code>react-native-gesture-handler</code></a> to handle swipe gestures and <a href="https://docs.swmansion.com/react-native-reanimated/" target="_blank" rel="noopener noreferrer" class=""><code>react-native-reanimated</code></a> for animations on native platforms.</p>
+<p>On the Web, the animations are handled using CSS transitions instead, and gestures are not supported.</p>
 </li>
 </ol>
-<p>In addition, navigators render hyperlinks on the web when possible, such as in the drawer sidebar, tab bar, stack navigator&#x27;s back button, etc.</p>
+<p>In addition, navigators render hyperlinks on the web when possible, such as in the drawer sidebar, tab bar, stack navigator&#x27;s back button, etc. to provide the expected behavior on the web.</p>
 <p>Since <code>react-native-gesture-handler</code> and <code>react-native-reanimated</code> are not used on the web, avoid importing them in your own code to reduce the bundle size unless you need them for your components. You can use <code>.native.js</code> or <code>.native.ts</code> extensions for code specific to native platforms.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="configuring-hosting-providers">Configuring hosting providers<a href="#configuring-hosting-providers" class="hash-link" aria-label="Direct link to Configuring hosting providers" title="Direct link to Configuring hosting providers" translate="no">​</a></h2>
 <p>React Navigation is designed for Single Page Applications (SPAs). This usually means that the <code>index.html</code> file needs to be served for all routes.</p>

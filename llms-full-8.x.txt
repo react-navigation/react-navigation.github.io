@@ -5575,7 +5575,24 @@ After setting up the type for the root navigator, all we need to do is specify t
 
 This can be done in 2 ways:
 
-1. The type annotation for the component specified in `screen`:
+1. The path pattern specified in the linking config (e.g. for `path: 'profile/:userId'`, the type of `route.params` is `{ userId: string }`). The type can be further customized by using a [`parse` function in the linking config](configuring-links.md#passing-params):
+
+   ```ts
+   linking: {
+     // highlight-start
+     path: 'profile/:userId',
+     parse: {
+       userId: (id) => parseInt(id, 10),
+     },
+     // highlight-end
+   },
+   ```
+
+   The above example would make the type of `route.params` be `{ userId: number }` since the `parse` function converts the string from the URL to a number.
+
+   This is the recommended way to specify params for screens that are accessible via deep linking or if your app runs on the Web, as it ensures that the types of params are consistent with the URL.
+
+2. The type annotation for the component specified in `screen`:
 
    ```ts
    import type { StaticScreenProps } from '@react-navigation/native';
@@ -5603,18 +5620,9 @@ This can be done in 2 ways:
    }
    ```
 
-2. The path pattern specified in the linking config (e.g. for `linking: 'profile/:userId'`, the type of `route.params` is `{ userId: string }`). The type can be further customized by using a [`parse` function in the linking config](configuring-links.md#passing-params):
-
-   ```ts
-   linking: {
-     path: 'profile/:userId',
-     parse: {
-       userId: (id) => parseInt(id, 10),
-     },
-   },
-   ```
-
    The above example would make the type of `route.params` be `{ userId: number }` since the `parse` function converts the string from the URL to a number.
+
+   If your app supports deep linking or runs on the Web, you can use this pattern to specify any additional optional params that don't appear in the path pattern (e.g. query params). Make sure to add `| undefined` to the type of params to make them optional, as query params may not be present in the URL.
 
 If both `screen` and `linking` specify params, the final type of `route.params` is the intersection of both types.
 
@@ -5637,8 +5645,6 @@ const MyStack = createNativeStackNavigator({
   },
 });
 ```
-
-If your app supports deep linking or runs on the Web, it is recommended to specify params that appear in the path pattern in the linking config. Any additional params (e.g. query params) can be specified in the component's props.
 
 If you have specified the params in `linking`, it's recommended to not specify them again in the component's props, and use `useRoute('ScreenName')` instead to get the correctly typed `route` object.
 
@@ -8477,13 +8483,19 @@ While Web support works out of the box, there are some things to configure to en
 
    Configuring linking allows React Navigation to integrate with the browser's URL bar. This is crucial for web apps to have proper URLs for each screen.
 
-2. [**Use Button or Link components**](link.md)
+   Automatic links are already enabled by default when using [Static configuration](static-configuration.md). So if you're using static configuration, you don't need to do anything to enable linking.
 
-   You may be familiar with using `navigation.navigate` to navigate between screens. But it's important to avoid using it when supporting the web. Instead, use the `Link` or [`Button`](elements.md#button) components to navigate between screens. This ensures that an anchor tag is rendered which provides the expected behavior on the web.
+2. **Use Button or Link components**
+
+   You may be familiar with using `navigation.navigate` to navigate between screens. But it's important to avoid using it when supporting the web. Instead, use the [`Link`](link.md) or [`Button`](elements.md#button) components (or your own with [`useLinkProps`](use-link-props.md)) to navigate between screens.
+
+   This ensures that an anchor tag is rendered which provides the expected behavior on the web.
 
 3. [**Server rendering**](server-rendering.md)
 
-   Currently, React Navigation works best with fully client-side rendered apps. However, minimal server-side rendering support is available. So you can optionally choose to server render your app.
+   Currently, React Navigation works best with fully client-side rendered apps.
+
+   Limited server-side rendering support is available. So you can optionally choose to server render your app - however it requires using [React's server rendering APIs](https://react.dev/reference/react-dom/server) on your server directly, so it's not straightforward.
 
 4. **Adapt to web-specific behavior**
 
@@ -8566,19 +8578,23 @@ Some of the navigators have different behavior on the web compared to native pla
 
 1. [**Native Stack Navigator**](stack-navigator.md)
 
-   Native Stack Navigator uses the platform's primitives to handle animations and gestures on native platforms. However, animations and gestures are not supported on the web.
+   Native Stack Navigator uses the platform's primitives to handle animations and gestures on native platforms.
+
+   On the Web, animations and gestures are not supported.
 
 2. [**Stack Navigator**](stack-navigator.md)
 
-   Stack Navigator uses [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) to handle swipe gestures on native platforms. However, gestures are not supported on the web.
+   Stack Navigator uses [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) to handle swipe gestures on native platforms.
 
-   In addition, screen transitions are disabled by default on the web. You can enable them by setting `animationEnabled: true` in the navigator's options.
+   Screen transition animations are disabled by default on the web. You can enable them by using the [`animation`](stack-navigator.md#animations) option. Gestures are not supported on the web.
 
 3. [**Drawer Navigator**](drawer-navigator.md)
 
-   Drawer Navigator uses [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) to handle swipe gestures and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) for animations on native platforms. However, gestures are not supported on the web, and animations are handled using CSS transitions.
+   Drawer Navigator uses [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) to handle swipe gestures and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) for animations on native platforms.
 
-In addition, navigators render hyperlinks on the web when possible, such as in the drawer sidebar, tab bar, stack navigator's back button, etc.
+   On the Web, the animations are handled using CSS transitions instead, and gestures are not supported.
+
+In addition, navigators render hyperlinks on the web when possible, such as in the drawer sidebar, tab bar, stack navigator's back button, etc. to provide the expected behavior on the web.
 
 Since `react-native-gesture-handler` and `react-native-reanimated` are not used on the web, avoid importing them in your own code to reduce the bundle size unless you need them for your components. You can use `.native.js` or `.native.ts` extensions for code specific to native platforms.
 
