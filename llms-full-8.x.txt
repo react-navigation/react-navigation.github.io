@@ -15414,6 +15414,30 @@ export default function App() {
 
 See [State persistence docs](state-persistence.md) for more details.
 
+### `NavigationProvider` lets you provide `navigation` and `route` objects
+
+Previously, to provide the `navigation` and `route` objects to your custom components, it was necessary to use `NavigationContext.Provider` and `NavigationRouteContext.Provider` respectively.
+
+There is now a new `NavigationProvider` component that consolidates them, and adds support for [accessing route by screen name](#common-hooks-now-accept-name-of-the-screen) with `useRoute`:
+
+```diff lang=js
+- import { NavigationContext, NavigationRouteContext } from '@react-navigation/native';
++ import { NavigationProvider } from '@react-navigation/native';
+
+// ...
+
+- <NavigationContext.Provider value={navigation}>
+-   <NavigationRouteContext.Provider value={route}>
+-     {/* ... */}
+-   </NavigationRouteContext.Provider>
+- </NavigationContext.Provider>
++ <NavigationProvider navigation={navigation} route={route}>
++   {/* ... */}
++ </NavigationProvider>
+```
+
+This is only necessary if you have custom components rendered in a navigator, e.g. buttons in a custom tab bar. Components rendered as part of a screen will have access to the `navigation` and `route` objects without any additional setup.
+
 ### `Header` from `@react-navigation/elements` has been reworked
 
 The `Header` component from `@react-navigation/elements` has been reworked with various improvements:
