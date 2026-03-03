@@ -132,10 +132,6 @@ The default status of the drawer - whether the drawer should stay `open` or `clo
 
 When this is set to `open`, the drawer will be open from the initial render. It can be closed normally using gestures or programmatically. However, when going back, the drawer will re-open if it was closed. This is essentially the opposite of the default behavior of the drawer where it starts `closed`, and the back button closes an open drawer.
 
-#### `detachInactiveScreens`
-
-Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
-
 #### `drawerContent`
 
 Function that returns React element to render as the content of the drawer, for example, navigation items
@@ -267,13 +263,26 @@ To use the custom component, we need to pass it in the `drawerContent` prop:
 
 The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Drawer.Navigator` or `options` prop of `Drawer.Screen`.
 
-#### `title`
+#### `inactiveBehavior`
 
-A generic title that can be used as a fallback for `headerTitle` and `drawerLabel`.
+This controls what should happen when screens become inactive.
+
+It supports the following values:
+
+- `pause`: Effects are cleaned up - e.g. timers are cleared, subscriptions are removed, etc. This avoids unnecessary renders when the screen is inactive.
+- `none`: Screen renders normally.
+
+Defaults to `pause`.
+
+If you set [`lazy: false`](#lazy) or [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused. This makes sure that effects are run to initialize the screen.
 
 #### `lazy`
 
 Whether this screen should render the first time it's accessed. Defaults to `true`. Set it to `false` if you want to render the screen on initial render.
+
+#### `title`
+
+A generic title that can be used as a fallback for `headerTitle` and `drawerLabel`.
 
 #### `drawerLabel`
 

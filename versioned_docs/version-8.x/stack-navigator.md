@@ -110,19 +110,28 @@ export default function App() {
 
 ## API Definition
 
-### Props
-
-In addition to the [common props](navigator.md#configuration) shared by all navigators, the stack navigator accepts the following additional props:
-
-#### `detachInactiveScreens`
-
-Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
-
-If you need to disable this optimization for specific screens (e.g. you want to screen to stay in view even when unfocused) [`detachPreviousScreen`](#detachpreviousscreen) option.
-
 ### Options
 
 The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Stack.Navigator` or `options` prop of `Stack.Screen`.
+
+#### `inactiveBehavior`
+
+This controls what should happen when screens become inactive.
+
+It supports the following values:
+
+- `pause`: Effects are cleaned up - e.g. timers are cleared, subscriptions are removed, etc. This avoids unnecessary renders when the screen is inactive.
+- `none`: Screen renders normally.
+
+Defaults to `pause`.
+
+If you [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused. This makes sure that effects are run to initialize the screen.
+
+:::info
+
+React Navigation determines whether a screen is inactive based on various factors such as gestures, animations, and other interactions after it becomes unfocused.
+
+:::
 
 #### `title`
 
@@ -144,7 +153,7 @@ Function which returns a React Element to display as the overlay for the card. M
 
 Style object for the card in stack. You can provide a custom background color to use instead of the default background here.
 
-You can also specify `{ backgroundColor: 'transparent' }` to make the previous screen visible underneath (for transparent modals). This is useful to implement things like modal dialogs. You should also specify `presentation: 'modal'` in the options when using a transparent background so previous screens aren't detached and stay visible underneath.
+You can also specify `{ backgroundColor: 'transparent' }` to make the previous screen visible underneath (for transparent modals). This is useful to implement things like modal dialogs. You should also specify `presentation: 'modal'` in the options when using a transparent background so previous screens stay visible underneath.
 
 On Web, the height of the screen isn't limited to the height of the viewport. This is by design to allow the browser's address bar to hide when scrolling. If this isn't desirable behavior, you can set `cardStyle` to `{ flex: 1 }` to force the screen to fill the viewport.
 
@@ -159,7 +168,6 @@ This is shortcut option which configures several options to configure the style 
 - `transparentModal`: Similar to `modal`. This changes following things:
   - Sets `headerMode` to `screen` for the screen unless specified otherwise.
   - Sets background color of the screen to transparent, so previous screen is visible
-  - Adjusts the `detachPreviousScreen` option so that the previous screen stays rendered.
   - Prevents the previous screen from animating from its last position.
   - Changes the screen animation to a vertical slide animation.
 
@@ -222,12 +230,6 @@ Interpolated styles for various parts of the header. Refer the [Animations secti
 #### `keyboardHandlingEnabled`
 
 If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to `true`.
-
-#### `detachPreviousScreen`
-
-Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`.
-
-This is automatically adjusted when using [`presentation`](#presentation) as `transparentModal` or `modal` to keep the required screens visible. Defaults to `true` in other cases.
 
 #### `freezeOnBlur`
 

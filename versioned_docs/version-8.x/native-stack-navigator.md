@@ -95,6 +95,25 @@ The native stack navigator accepts the [common props](navigator.md#configuration
 
 The following [options](screen-options.md) can be used to configure the screens in the navigator:
 
+#### `inactiveBehavior`
+
+This controls what should happen when screens become inactive.
+
+It supports the following values:
+
+- `pause`: Effects are cleaned up - e.g. timers are cleared, subscriptions are removed, etc. This avoids unnecessary renders when the screen is inactive.
+- `none`: Screen renders normally.
+
+Defaults to `pause`.
+
+If you [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused. This makes sure that effects are run to initialize the screen.
+
+:::info
+
+React Navigation determines whether a screen is inactive based on various factors such as gestures, animations, and other interactions after it becomes unfocused.
+
+:::
+
 #### `title`
 
 String that can be used as a fallback for `headerTitle`.

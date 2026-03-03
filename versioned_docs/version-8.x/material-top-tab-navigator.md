@@ -354,6 +354,25 @@ export default function App() {
 }
 ```
 
+#### `inactiveBehavior`
+
+This controls what should happen when screens become inactive.
+
+It supports the following values:
+
+- `pause`: Effects are cleaned up - e.g. timers are cleared, subscriptions are removed, etc. This avoids unnecessary renders when the screen is inactive.
+- `none`: Screen renders normally.
+
+Defaults to `pause`.
+
+If you set [`lazy: false`](#lazy) or [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused. This makes sure that effects are run to initialize the screen.
+
+:::info
+
+React Navigation determines whether a screen is inactive based on various factors such as gestures, animations, and other interactions after it becomes unfocused.
+
+:::
+
 #### `title`
 
 Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`.

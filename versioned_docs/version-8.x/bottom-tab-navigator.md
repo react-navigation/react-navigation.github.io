@@ -168,12 +168,6 @@ It supports the following values:
 - `fullHistory` - return to last visited screen in the navigator; doesn't drop duplicate entries unlike `history` - this behavior is useful to match how web pages work
 - `none` - do not handle back button
 
-#### `detachInactiveScreens`
-
-Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
-
-Only supported with `custom` implementation.
-
 #### `tabBar`
 
 Function that returns a React element to display as the tab bar.
@@ -315,6 +309,29 @@ function MyTabBar({ navigation }) {
 ### Options
 
 The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Tab.Navigator` or `options` prop of `Tab.Screen`.
+
+#### `inactiveBehavior`
+
+This controls what should happen when screens become inactive.
+
+It supports the following values:
+
+- `pause`: Effects are cleaned up - e.g. timers are cleared, subscriptions are removed, etc. This avoids unnecessary renders when the screen is inactive.
+- `none`: Screen renders normally.
+
+Defaults to `pause`.
+
+If you set [`lazy: false`](#lazy) or [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused. This makes sure that effects are run to initialize the screen.
+
+:::info
+
+React Navigation determines whether a screen is inactive based on various factors such as gestures, animations, and other interactions after it becomes unfocused.
+
+:::
+
+#### `lazy`
+
+Whether this screen should render only after the first time it's accessed. Defaults to `true`. Set it to `false` if you want to render the screen on the initial render of the navigator.
 
 #### `title`
 
@@ -1025,10 +1042,6 @@ Edge effects can be configured for each edge separately. The following values ar
 Defaults to `automatic` for each edge.
 
 Only supported with `native` implementation on iOS 26 and above.
-
-#### `lazy`
-
-Whether this screen should render only after the first time it's accessed. Defaults to `true`. Set it to `false` if you want to render the screen on the initial render of the navigator.
 
 #### `popToTopOnBlur`
 
