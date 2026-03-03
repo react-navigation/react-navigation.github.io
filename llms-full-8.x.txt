@@ -22,8 +22,8 @@ If you're already familiar with JavaScript, React and React Native, you'll be ab
 <details>
 <summary>Minimum requirements</summary>
 
-- `react-native` >= 0.81
-- `expo` >= 54 ([development build](https://docs.expo.dev/development/introduction/) is required)
+- `react-native` >= 0.83
+- `expo` >= 55 ([development build](https://docs.expo.dev/development/introduction/) is required)
 - `typescript` >= 5.9.2 (if you use TypeScript)
 - `react-native-web` >= 0.21.0 (if you support Web)
 
@@ -5575,20 +5575,36 @@ After setting up the type for the root navigator, all we need to do is specify t
 
 This can be done in 2 ways:
 
-1. The path pattern specified in the linking config (e.g. for `path: 'profile/:userId'`, the type of `route.params` is `{ userId: string }`). The type can be further customized by using a [`parse` function in the linking config](configuring-links.md#passing-params):
+1. The path pattern specified in the linking config (e.g. for `path: 'profile/:userId'`, the type of `route.params` is `{ userId: string }`). The type can be further customized by:
+   - Using a `parse` function:
 
-   ```ts
-   linking: {
-     // highlight-start
-     path: 'profile/:userId',
-     parse: {
-       userId: (id) => parseInt(id, 10),
+     ```ts
+     linking: {
+       // highlight-start
+       path: 'profile/:userId',
+       parse: {
+         userId: (id) => parseInt(id, 10),
+       },
+       // highlight-end
      },
-     // highlight-end
-   },
-   ```
+     ```
 
-   The above example would make the type of `route.params` be `{ userId: number }` since the `parse` function converts the string from the URL to a number.
+   - Using a Standard Schema:
+
+     ```ts
+     import { z } from 'zod';
+
+     linking: {
+       // highlight-start
+       path: 'profile/:userId',
+       parse: {
+         userId: z.coerce.number(),
+       },
+       // highlight-end
+     },
+     ```
+
+   The above examples would also make the type of `route.params` be `{ userId: number }`. See [passing params](configuring-links.md#passing-params) for the API and [Parse function vs Standard Schema](#parse-function-vs-standard-schema) for the differences in type inference.
 
    This is the recommended way to specify params for screens that are accessible via deep linking or if your app runs on the Web, as it ensures that the types of params are consistent with the URL.
 
@@ -5620,10 +5636,6 @@ This can be done in 2 ways:
    }
    ```
 
-   The above example would make the type of `route.params` be `{ userId: number }` since the `parse` function converts the string from the URL to a number.
-
-   If your app supports deep linking or runs on the Web, you can use this pattern to specify any additional optional params that don't appear in the path pattern (e.g. query params). Make sure to add `| undefined` to the type of params to make them optional, as query params may not be present in the URL.
-
 If both `screen` and `linking` specify params, the final type of `route.params` is the intersection of both types.
 
 This is how the complete example would look like:
@@ -5646,7 +5658,29 @@ const MyStack = createNativeStackNavigator({
 });
 ```
 
-If you have specified the params in `linking`, it's recommended to not specify them again in the component's props, and use `useRoute('ScreenName')` instead to get the correctly typed `route` object.
+Or with a Standard Schema:
+
+```ts
+import { z } from 'zod';
+
+const MyStack = createNativeStackNavigator({
+  screens: {
+    // highlight-start
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+      linking: {
+        path: 'profile/:userId',
+        parse: {
+          userId: z.coerce.number(),
+        },
+      },
+    }),
+    // highlight-end
+  },
+});
+```
+
+If you have specified the params in `linking`, it's recommended to not specify them again in the component's props, and use [`useRoute('ScreenName')`](#using-typed-hooks) instead to get the correctly typed `route` object.
 
 The `createXScreen` helper functions enable type inference in screen configuration callbacks like `options`, `listeners`, etc. Each navigator exports its own version of the helper function:
 
@@ -5657,6 +5691,67 @@ The `createXScreen` helper functions enable type inference in screen configurati
 - `createMaterialTopTabScreen` from `@react-navigation/material-top-tabs`
 
 See [Static configuration](static-configuration.md#createxscreen) for more details.
+
+## Parse function vs Standard Schema
+
+Both parse functions and Standard Schemas infer param types from the `parse` config, but they differ in how they handle type inference for query params.
+
+### Path pattern params
+
+For params in path pattern, both approaches work the same way:
+
+- The return type of the function or the output type of the schema is used as the param type.
+- If the pattern includes the `?` suffix, it's inferred as optional.
+
+e.g. both of the following configs would make the type of `route.params` be `{ id: number }`:
+
+Parse function:
+
+```ts
+parse: {
+  id: Number,
+}
+```
+
+Standard Schema:
+
+```ts
+parse: {
+  id: z.coerce.number(),
+}
+```
+
+### Query params
+
+Query params are inferred differently based on whether you use a parse function or a Standard Schema.
+
+- With a parse function, query params are always inferred as optional since they may not be present in the URL:
+
+  ```ts
+  parse: {
+    sort: (value: string) => (value === 'new' ? 'new' : 'top'),
+  }
+  ```
+
+  Here `route.params` are inferred as `{ sort?: 'new' | 'top' }`.
+
+- With a Standard Schema, query params are inferred as required or optional based on the schema's output type:
+
+  ```ts
+  parse: {
+    sort: z.string(),
+  }
+  ```
+
+  Here `route.params` are inferred as `{ sort: string }`.
+
+  ```ts
+  parse: {
+    sort: z.string().optional(),
+  }
+  ```
+
+  Here `route.params` are inferred as `{ sort?: string | undefined }`.
 
 ## Using typed hooks
 
@@ -7258,9 +7353,13 @@ By default, query params are parsed to get the params for a screen. For example,
 
 You can also customize how the params are parsed from the URL. Let's say you want the URL to look like `/user/jane` where the `id` param is `jane` instead of having the `id` in query params. You can do this by specifying `user/:id` for the `path`. **When the path segment starts with `:`, it'll be treated as a param**. For example, the URL `/user/jane` would resolve to `Profile` screen with the string `jane` as a value of the `id` param and will be available in `route.params.id` in `Profile` screen.
 
-By default, all params are treated as strings. You can also customize how to parse them by specifying a function in the `parse` property to parse the param, and a function in the `stringify` property to convert it back to a string.
+By default, all params are parsed as strings. You can customize how to parse them by specifying a function or a [Standard Schema](https://standardschema.dev/) in the `parse` property, and a function in the `stringify` property to convert it back to a string.
 
-If you wanted to resolve `/user/@jane/settings` to result in the params `{ id: 'jane' section: 'settings' }`, you could make `Profile`'s config to look like this:
+### Using functions
+
+The `parse` property accepts a function that receives the string value from the URL and returns the parsed value. The `stringify` property accepts a function to convert the param back to a string.
+
+For example, to resolve `/user/@jane/settings` to the params `{ id: 'jane', section: 'settings' }`, you could use `parse` to strip the `@` prefix and `stringify` to add it back:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -7327,6 +7426,135 @@ const state = {
 ```
 
 </details>
+
+### Using Standard Schema
+
+The `parse` property also accepts a schema from a [Standard Schema](https://standardschema.dev/) compatible library such as [Zod](https://zod.dev/), [Valibot](https://valibot.dev/) or [ArkType](https://arktype.io/), which provides both parsing and validation in one step. The `stringify` property still accepts a function to convert the param back to a string.
+
+If the schema validation fails, the URL won't match the current screen and React Navigation will try the next matching config. This lets you use schemas to narrow down which screen handles a URL.
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+import { z } from 'zod';
+
+const RootStack = createStackNavigator({
+  screens: {
+    Profile: {
+      screen: ProfileScreen,
+      // highlight-start
+      linking: {
+        path: 'user/:id',
+        parse: {
+          id: z.string().startsWith('@'),
+        },
+      },
+      // highlight-end
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+import { z } from 'zod';
+
+const config = {
+  screens: {
+    Profile: {
+      // highlight-start
+      path: 'user/:id',
+      parse: {
+        id: z.string().startsWith('@'),
+      },
+      // highlight-end
+    },
+  },
+};
+```
+
+</TabItem>
+</Tabs>
+
+In this example, the `Profile` screen will only match if the `id` param starts with `@`. If the URL is `/user/jane`, it won't match because the schema validation fails, and React Navigation will try the next config.
+
+Here's another example that transforms a date string from the URL into a timestamp:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+import * as v from 'valibot';
+
+const RootStack = createStackNavigator({
+  screens: {
+    Chat: {
+      screen: ChatScreen,
+      // highlight-start
+      linking: {
+        path: 'chat/:date',
+        parse: {
+          date: v.pipe(
+            v.string(),
+            v.transform((input) => new Date(input).getTime()),
+            v.number()
+          ),
+        },
+        stringify: {
+          date: (date) => {
+            const d = new Date(date);
+
+            return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+          },
+        },
+      },
+      // highlight-end
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+import * as v from 'valibot';
+
+const config = {
+  screens: {
+    Chat: {
+      // highlight-start
+      path: 'chat/:date',
+      parse: {
+        date: v.pipe(
+          v.string(),
+          v.transform((input) => new Date(input).getTime()),
+          v.number()
+        ),
+      },
+      stringify: {
+        date: (date) => {
+          const d = new Date(date);
+
+          return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+        },
+      },
+      // highlight-end
+    },
+  },
+};
+```
+
+</TabItem>
+</Tabs>
+
+Using Standard Schema has a few advantages over using functions for parsing:
+
+- **Support for validation and fallback**: A parse function only parses the param. A schema can also validate the param. If the validation fails, the URL won't match the current screen and React Navigation will try the next matching config. This lets you use schemas to narrow down which screen handles a URL. Schemas are also called with `undefined` when a query param is missing, which lets them provide a fallback, while parse functions are not called when a query param is missing.
+- **Better Query Param handling with TypeScript**: When using [Static Configuration](static-configuration.md), query params (e.g. `?foo=bar`) are always inferred as optional with `parse` functions. With schemas, you can specify whether a query param is required (e.g. `z.string()`) or optional (e.g. `z.string().optional()`). See [Parse function vs Standard Schema](typescript.md#parse-function-vs-standard-schema) for more details.
 
 ## Marking params as optional
 
@@ -7930,7 +8158,7 @@ const config = {
 
 ## Serializing and parsing params
 
-Since URLs are strings, any params you have for routes are also converted to strings when constructing the path.
+Since URLs are strings, any params you have for routes are also converted to strings when constructing the path. You can customize parsing with [functions](#using-functions) or [Standard Schemas](#using-standard-schema).
 
 For example, say you have the URL `/chat/1589842744264` with the following config:
 
@@ -14502,8 +14730,8 @@ This guides lists all the breaking changes and new features in React Navigation 
 
 The minimum required version of React Native, Expo, and TypeScript have been bumped:
 
-- `react-native` >= 0.81 (planned to be bumped to 0.83)
-- `expo` >= 54 (planned to be bumped to 55)
+- `react-native` >= 0.83
+- `expo` >= 55 ([development build](https://docs.expo.dev/development/introduction/) is required)
 - `typescript` >= 5.9.2 (if you use TypeScript)
 
 The minimum required version of various peer dependencies have also been bumped:
@@ -15644,19 +15872,28 @@ export default function App() {
 
 ## API Definition
 
-### Props
-
-In addition to the [common props](navigator.md#configuration) shared by all navigators, the stack navigator accepts the following additional props:
-
-#### `detachInactiveScreens`
-
-Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
-
-If you need to disable this optimization for specific screens (e.g. you want to screen to stay in view even when unfocused) [`detachPreviousScreen`](#detachpreviousscreen) option.
-
 ### Options
 
 The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Stack.Navigator` or `options` prop of `Stack.Screen`.
+
+#### `inactiveBehavior`
+
+This controls what should happen when screens become inactive.
+
+It supports the following values:
+
+- `pause`: Effects are cleaned up - e.g. timers are cleared, subscriptions are removed, etc. This avoids unnecessary renders when the screen is inactive.
+- `none`: Screen renders normally.
+
+Defaults to `pause`.
+
+If you [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused. This makes sure that effects are run to initialize the screen.
+
+:::info
+
+React Navigation determines whether a screen is inactive based on various factors such as gestures, animations, and other interactions after it becomes unfocused.
+
+:::
 
 #### `title`
 
@@ -15678,7 +15915,7 @@ Function which returns a React Element to display as the overlay for the card. M
 
 Style object for the card in stack. You can provide a custom background color to use instead of the default background here.
 
-You can also specify `{ backgroundColor: 'transparent' }` to make the previous screen visible underneath (for transparent modals). This is useful to implement things like modal dialogs. You should also specify `presentation: 'modal'` in the options when using a transparent background so previous screens aren't detached and stay visible underneath.
+You can also specify `{ backgroundColor: 'transparent' }` to make the previous screen visible underneath (for transparent modals). This is useful to implement things like modal dialogs. You should also specify `presentation: 'modal'` in the options when using a transparent background so previous screens stay visible underneath.
 
 On Web, the height of the screen isn't limited to the height of the viewport. This is by design to allow the browser's address bar to hide when scrolling. If this isn't desirable behavior, you can set `cardStyle` to `{ flex: 1 }` to force the screen to fill the viewport.
 
@@ -15693,7 +15930,6 @@ This is shortcut option which configures several options to configure the style 
 - `transparentModal`: Similar to `modal`. This changes following things:
   - Sets `headerMode` to `screen` for the screen unless specified otherwise.
   - Sets background color of the screen to transparent, so previous screen is visible
-  - Adjusts the `detachPreviousScreen` option so that the previous screen stays rendered.
   - Prevents the previous screen from animating from its last position.
   - Changes the screen animation to a vertical slide animation.
 
@@ -15756,12 +15992,6 @@ Interpolated styles for various parts of the header. Refer the [Animations secti
 #### `keyboardHandlingEnabled`
 
 If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to `true`.
-
-#### `detachPreviousScreen`
-
-Boolean used to indicate whether to detach the previous screen from the view hierarchy to save memory. Set it to `false` if you need the previous screen to be seen through the active screen. Only applicable if `detachInactiveScreens` isn't set to `false`.
-
-This is automatically adjusted when using [`presentation`](#presentation) as `transparentModal` or `modal` to keep the required screens visible. Defaults to `true` in other cases.
 
 #### `freezeOnBlur`
 
@@ -17029,6 +17259,25 @@ The native stack navigator accepts the [common props](navigator.md#configuration
 ### Options
 
 The following [options](screen-options.md) can be used to configure the screens in the navigator:
+
+#### `inactiveBehavior`
+
+This controls what should happen when screens become inactive.
+
+It supports the following values:
+
+- `pause`: Effects are cleaned up - e.g. timers are cleared, subscriptions are removed, etc. This avoids unnecessary renders when the screen is inactive.
+- `none`: Screen renders normally.
+
+Defaults to `pause`.
+
+If you [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused. This makes sure that effects are run to initialize the screen.
+
+:::info
+
+React Navigation determines whether a screen is inactive based on various factors such as gestures, animations, and other interactions after it becomes unfocused.
+
+:::
 
 #### `title`
 
@@ -18955,12 +19204,6 @@ It supports the following values:
 - `fullHistory` - return to last visited screen in the navigator; doesn't drop duplicate entries unlike `history` - this behavior is useful to match how web pages work
 - `none` - do not handle back button
 
-#### `detachInactiveScreens`
-
-Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
-
-Only supported with `custom` implementation.
-
 #### `tabBar`
 
 Function that returns a React element to display as the tab bar.
@@ -19102,6 +19345,29 @@ function MyTabBar({ navigation }) {
 ### Options
 
 The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Tab.Navigator` or `options` prop of `Tab.Screen`.
+
+#### `inactiveBehavior`
+
+This controls what should happen when screens become inactive.
+
+It supports the following values:
+
+- `pause`: Effects are cleaned up - e.g. timers are cleared, subscriptions are removed, etc. This avoids unnecessary renders when the screen is inactive.
+- `none`: Screen renders normally.
+
+Defaults to `pause`.
+
+If you set [`lazy: false`](#lazy) or [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused. This makes sure that effects are run to initialize the screen.
+
+:::info
+
+React Navigation determines whether a screen is inactive based on various factors such as gestures, animations, and other interactions after it becomes unfocused.
+
+:::
+
+#### `lazy`
+
+Whether this screen should render only after the first time it's accessed. Defaults to `true`. Set it to `false` if you want to render the screen on the initial render of the navigator.
 
 #### `title`
 
@@ -19812,10 +20078,6 @@ Edge effects can be configured for each edge separately. The following values ar
 Defaults to `automatic` for each edge.
 
 Only supported with `native` implementation on iOS 26 and above.
-
-#### `lazy`
-
-Whether this screen should render only after the first time it's accessed. Defaults to `true`. Set it to `false` if you want to render the screen on the initial render of the navigator.
 
 #### `popToTopOnBlur`
 
@@ -20682,10 +20944,6 @@ The default status of the drawer - whether the drawer should stay `open` or `clo
 
 When this is set to `open`, the drawer will be open from the initial render. It can be closed normally using gestures or programmatically. However, when going back, the drawer will re-open if it was closed. This is essentially the opposite of the default behavior of the drawer where it starts `closed`, and the back button closes an open drawer.
 
-#### `detachInactiveScreens`
-
-Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
-
 #### `drawerContent`
 
 Function that returns React element to render as the content of the drawer, for example, navigation items
@@ -20817,13 +21075,26 @@ To use the custom component, we need to pass it in the `drawerContent` prop:
 
 The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Drawer.Navigator` or `options` prop of `Drawer.Screen`.
 
-#### `title`
+#### `inactiveBehavior`
 
-A generic title that can be used as a fallback for `headerTitle` and `drawerLabel`.
+This controls what should happen when screens become inactive.
+
+It supports the following values:
+
+- `pause`: Effects are cleaned up - e.g. timers are cleared, subscriptions are removed, etc. This avoids unnecessary renders when the screen is inactive.
+- `none`: Screen renders normally.
+
+Defaults to `pause`.
+
+If you set [`lazy: false`](#lazy) or [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused. This makes sure that effects are run to initialize the screen.
 
 #### `lazy`
 
 Whether this screen should render the first time it's accessed. Defaults to `true`. Set it to `false` if you want to render the screen on initial render.
+
+#### `title`
+
+A generic title that can be used as a fallback for `headerTitle` and `drawerLabel`.
 
 #### `drawerLabel`
 
@@ -21823,6 +22094,25 @@ export default function App() {
   return <Navigation />;
 }
 ```
+
+#### `inactiveBehavior`
+
+This controls what should happen when screens become inactive.
+
+It supports the following values:
+
+- `pause`: Effects are cleaned up - e.g. timers are cleared, subscriptions are removed, etc. This avoids unnecessary renders when the screen is inactive.
+- `none`: Screen renders normally.
+
+Defaults to `pause`.
+
+If you set [`lazy: false`](#lazy) or [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused. This makes sure that effects are run to initialize the screen.
+
+:::info
+
+React Navigation determines whether a screen is inactive based on various factors such as gestures, animations, and other interactions after it becomes unfocused.
+
+:::
 
 #### `title`
 
