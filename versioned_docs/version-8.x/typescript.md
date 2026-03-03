@@ -57,20 +57,36 @@ After setting up the type for the root navigator, all we need to do is specify t
 
 This can be done in 2 ways:
 
-1. The path pattern specified in the linking config (e.g. for `path: 'profile/:userId'`, the type of `route.params` is `{ userId: string }`). The type can be further customized by using a [`parse` function in the linking config](configuring-links.md#passing-params):
+1. The path pattern specified in the linking config (e.g. for `path: 'profile/:userId'`, the type of `route.params` is `{ userId: string }`). The type can be further customized by:
+   - Using a `parse` function:
 
-   ```ts
-   linking: {
-     // highlight-start
-     path: 'profile/:userId',
-     parse: {
-       userId: (id) => parseInt(id, 10),
+     ```ts
+     linking: {
+       // highlight-start
+       path: 'profile/:userId',
+       parse: {
+         userId: (id) => parseInt(id, 10),
+       },
+       // highlight-end
      },
-     // highlight-end
-   },
-   ```
+     ```
 
-   The above example would make the type of `route.params` be `{ userId: number }` since the `parse` function converts the string from the URL to a number.
+   - Using a Standard Schema:
+
+     ```ts
+     import { z } from 'zod';
+
+     linking: {
+       // highlight-start
+       path: 'profile/:userId',
+       parse: {
+         userId: z.coerce.number(),
+       },
+       // highlight-end
+     },
+     ```
+
+   The above examples would also make the type of `route.params` be `{ userId: number }`. See [passing params](configuring-links.md#passing-params) for the API and [Parse function vs Standard Schema](#parse-function-vs-standard-schema) for the differences in type inference.
 
    This is the recommended way to specify params for screens that are accessible via deep linking or if your app runs on the Web, as it ensures that the types of params are consistent with the URL.
 
@@ -102,10 +118,6 @@ This can be done in 2 ways:
    }
    ```
 
-   The above example would make the type of `route.params` be `{ userId: number }` since the `parse` function converts the string from the URL to a number.
-
-   If your app supports deep linking or runs on the Web, you can use this pattern to specify any additional optional params that don't appear in the path pattern (e.g. query params). Make sure to add `| undefined` to the type of params to make them optional, as query params may not be present in the URL.
-
 If both `screen` and `linking` specify params, the final type of `route.params` is the intersection of both types.
 
 This is how the complete example would look like:
@@ -128,7 +140,29 @@ const MyStack = createNativeStackNavigator({
 });
 ```
 
-If you have specified the params in `linking`, it's recommended to not specify them again in the component's props, and use `useRoute('ScreenName')` instead to get the correctly typed `route` object.
+Or with a Standard Schema:
+
+```ts
+import { z } from 'zod';
+
+const MyStack = createNativeStackNavigator({
+  screens: {
+    // highlight-start
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+      linking: {
+        path: 'profile/:userId',
+        parse: {
+          userId: z.coerce.number(),
+        },
+      },
+    }),
+    // highlight-end
+  },
+});
+```
+
+If you have specified the params in `linking`, it's recommended to not specify them again in the component's props, and use [`useRoute('ScreenName')`](#using-typed-hooks) instead to get the correctly typed `route` object.
 
 The `createXScreen` helper functions enable type inference in screen configuration callbacks like `options`, `listeners`, etc. Each navigator exports its own version of the helper function:
 
@@ -139,6 +173,67 @@ The `createXScreen` helper functions enable type inference in screen configurati
 - `createMaterialTopTabScreen` from `@react-navigation/material-top-tabs`
 
 See [Static configuration](static-configuration.md#createxscreen) for more details.
+
+## Parse function vs Standard Schema
+
+Both parse functions and Standard Schemas infer param types from the `parse` config, but they differ in how they handle type inference for query params.
+
+### Path pattern params
+
+For params in path pattern, both approaches work the same way:
+
+- The return type of the function or the output type of the schema is used as the param type.
+- If the pattern includes the `?` suffix, it's inferred as optional.
+
+e.g. both of the following configs would make the type of `route.params` be `{ id: number }`:
+
+Parse function:
+
+```ts
+parse: {
+  id: Number,
+}
+```
+
+Standard Schema:
+
+```ts
+parse: {
+  id: z.coerce.number(),
+}
+```
+
+### Query params
+
+Query params are inferred differently based on whether you use a parse function or a Standard Schema.
+
+- With a parse function, query params are always inferred as optional since they may not be present in the URL:
+
+  ```ts
+  parse: {
+    sort: (value: string) => (value === 'new' ? 'new' : 'top'),
+  }
+  ```
+
+  Here `route.params` are inferred as `{ sort?: 'new' | 'top' }`.
+
+- With a Standard Schema, query params are inferred as required or optional based on the schema's output type:
+
+  ```ts
+  parse: {
+    sort: z.string(),
+  }
+  ```
+
+  Here `route.params` are inferred as `{ sort: string }`.
+
+  ```ts
+  parse: {
+    sort: z.string().optional(),
+  }
+  ```
+
+  Here `route.params` are inferred as `{ sort?: string | undefined }`.
 
 ## Using typed hooks
 

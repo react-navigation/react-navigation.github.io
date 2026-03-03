@@ -457,9 +457,13 @@ By default, query params are parsed to get the params for a screen. For example,
 
 You can also customize how the params are parsed from the URL. Let's say you want the URL to look like `/user/jane` where the `id` param is `jane` instead of having the `id` in query params. You can do this by specifying `user/:id` for the `path`. **When the path segment starts with `:`, it'll be treated as a param**. For example, the URL `/user/jane` would resolve to `Profile` screen with the string `jane` as a value of the `id` param and will be available in `route.params.id` in `Profile` screen.
 
-By default, all params are treated as strings. You can also customize how to parse them by specifying a function in the `parse` property to parse the param, and a function in the `stringify` property to convert it back to a string.
+By default, all params are parsed as strings. You can customize how to parse them by specifying a function or a [Standard Schema](https://standardschema.dev/) in the `parse` property, and a function in the `stringify` property to convert it back to a string.
 
-If you wanted to resolve `/user/@jane/settings` to result in the params `{ id: 'jane' section: 'settings' }`, you could make `Profile`'s config to look like this:
+### Using functions
+
+The `parse` property accepts a function that receives the string value from the URL and returns the parsed value. The `stringify` property accepts a function to convert the param back to a string.
+
+For example, to resolve `/user/@jane/settings` to the params `{ id: 'jane', section: 'settings' }`, you could use `parse` to strip the `@` prefix and `stringify` to add it back:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -526,6 +530,135 @@ const state = {
 ```
 
 </details>
+
+### Using Standard Schema
+
+The `parse` property also accepts a schema from a [Standard Schema](https://standardschema.dev/) compatible library such as [Zod](https://zod.dev/), [Valibot](https://valibot.dev/) or [ArkType](https://arktype.io/), which provides both parsing and validation in one step. The `stringify` property still accepts a function to convert the param back to a string.
+
+If the schema validation fails, the URL won't match the current screen and React Navigation will try the next matching config. This lets you use schemas to narrow down which screen handles a URL.
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+import { z } from 'zod';
+
+const RootStack = createStackNavigator({
+  screens: {
+    Profile: {
+      screen: ProfileScreen,
+      // highlight-start
+      linking: {
+        path: 'user/:id',
+        parse: {
+          id: z.string().startsWith('@'),
+        },
+      },
+      // highlight-end
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+import { z } from 'zod';
+
+const config = {
+  screens: {
+    Profile: {
+      // highlight-start
+      path: 'user/:id',
+      parse: {
+        id: z.string().startsWith('@'),
+      },
+      // highlight-end
+    },
+  },
+};
+```
+
+</TabItem>
+</Tabs>
+
+In this example, the `Profile` screen will only match if the `id` param starts with `@`. If the URL is `/user/jane`, it won't match because the schema validation fails, and React Navigation will try the next config.
+
+Here's another example that transforms a date string from the URL into a timestamp:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+import * as v from 'valibot';
+
+const RootStack = createStackNavigator({
+  screens: {
+    Chat: {
+      screen: ChatScreen,
+      // highlight-start
+      linking: {
+        path: 'chat/:date',
+        parse: {
+          date: v.pipe(
+            v.string(),
+            v.transform((input) => new Date(input).getTime()),
+            v.number()
+          ),
+        },
+        stringify: {
+          date: (date) => {
+            const d = new Date(date);
+
+            return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+          },
+        },
+      },
+      // highlight-end
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+import * as v from 'valibot';
+
+const config = {
+  screens: {
+    Chat: {
+      // highlight-start
+      path: 'chat/:date',
+      parse: {
+        date: v.pipe(
+          v.string(),
+          v.transform((input) => new Date(input).getTime()),
+          v.number()
+        ),
+      },
+      stringify: {
+        date: (date) => {
+          const d = new Date(date);
+
+          return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+        },
+      },
+      // highlight-end
+    },
+  },
+};
+```
+
+</TabItem>
+</Tabs>
+
+Using Standard Schema has a few advantages over using functions for parsing:
+
+- **Support for validation and fallback**: A parse function only parses the param. A schema can also validate the param. If the validation fails, the URL won't match the current screen and React Navigation will try the next matching config. This lets you use schemas to narrow down which screen handles a URL. Schemas are also called with `undefined` when a query param is missing, which lets them provide a fallback, while parse functions are not called when a query param is missing.
+- **Better Query Param handling with TypeScript**: When using [Static Configuration](static-configuration.md), query params (e.g. `?foo=bar`) are always inferred as optional with `parse` functions. With schemas, you can specify whether a query param is required (e.g. `z.string()`) or optional (e.g. `z.string().optional()`). See [Parse function vs Standard Schema](typescript.md#parse-function-vs-standard-schema) for more details.
 
 ## Marking params as optional
 
@@ -1129,7 +1262,7 @@ const config = {
 
 ## Serializing and parsing params
 
-Since URLs are strings, any params you have for routes are also converted to strings when constructing the path.
+Since URLs are strings, any params you have for routes are also converted to strings when constructing the path. You can customize parsing with [functions](#using-functions) or [Standard Schemas](#using-standard-schema).
 
 For example, say you have the URL `/chat/1589842744264` with the following config:
 
