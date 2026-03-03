@@ -19,8 +19,8 @@ This guides lists all the breaking changes and new features in React Navigation 
 
 The minimum required version of React Native, Expo, and TypeScript have been bumped:
 
-- `react-native` >= 0.81 (planned to be bumped to 0.83)
-- `expo` >= 54 (planned to be bumped to 55)
+- `react-native` >= 0.83
+- `expo` >= 55 ([development build](https://docs.expo.dev/development/introduction/) is required)
 - `typescript` >= 5.9.2 (if you use TypeScript)
 
 The minimum required version of various peer dependencies have also been bumped:
