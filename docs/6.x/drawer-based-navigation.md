@@ -1,0 +1,93 @@
+# Drawer navigation
+
+Version: 6.x
+
+Sitemap: [llms-6.x.txt](https://reactnavigation.org/llms-6.x.txt)
+
+Common pattern in navigation is to use drawer from left (sometimes right) side for navigating between screens.
+
+Before continuing, first install and configure [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer) and its dependencies following the [installation instructions](drawer-navigator.md#installation).
+
+## Minimal example of drawer-based navigation
+
+To use this drawer navigator, import it from `@react-navigation/drawer`:
+(swipe right to open)
+
+<samp id="drawer-based-navigation" />
+
+```js
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        onPress={() => navigation.navigate('Notifications')}
+        title="Go to notifications"
+      />
+    </View>
+  );
+}
+
+function NotificationsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    </View>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/drawer/drawer.mp4" />
+</video>
+
+## Opening and closing drawer
+
+To open and close drawer, use the following helpers:
+
+<samp id="drawer-open-close-toggle" />
+
+```js
+navigation.openDrawer();
+navigation.closeDrawer();
+```
+
+If you would like to toggle the drawer you call the following:
+
+<samp id="drawer-open-close-toggle" />
+
+```js
+navigation.toggleDrawer();
+```
+
+Each of these functions, behind the scenes, are simply dispatching actions:
+
+<samp id="drawer-dispatch" />
+
+```js
+navigation.dispatch(DrawerActions.openDrawer());
+navigation.dispatch(DrawerActions.closeDrawer());
+navigation.dispatch(DrawerActions.toggleDrawer());
+```
+
+If you would like to determine if drawer is open or closed, you can do the following:
+
+```js
+
+// ...
+
+const isDrawerOpen = useDrawerStatus() === 'open';
+```

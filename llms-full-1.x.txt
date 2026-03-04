@@ -18,7 +18,7 @@ What follows within the _Fundamentals_ section of this documentation is a tour o
 
 Install the `react-navigation` package in your React Native project.
 
-```bash npm2yarn
+```bash
 npm install react-navigation
 ```
 
@@ -42,10 +42,6 @@ All we need to get started using React Navigation is a `StackNavigator`.
 
 ```javascript
 // In App.js in a new project
-
-import React from 'react';
-import { View, Text } from 'react-native';
-import { StackNavigator } from 'react-navigation';
 
 class HomeScreen extends React.Component {
   render() {
@@ -167,9 +163,6 @@ We'll do something similar to the latter, but rather than using a `document` glo
 ## Navigating to a new screen
 
 ```js
-import React from 'react';
-import { Button, View, Text } from 'react-native';
-import { StackNavigator } from 'react-navigation';
 
 class HomeScreen extends React.Component {
   render() {
@@ -820,9 +813,6 @@ Possibly the most common style of navigation in mobile apps is tab-based navigat
 ## Minimal example of tab-based navigation
 
 ```js
-import React from 'react';
-import { Text, View } from 'react-native';
-import { TabNavigator } from 'react-navigation';
 
 class HomeScreen extends React.Component {
   render() {
@@ -859,8 +849,6 @@ This is similar to how you would customize a `StackNavigator` &mdash; there are 
 ```js
 // You can import Ionicons from @expo/vector-icons if you use Expo or
 // react-native-vector-icons/Ionicons otherwise.
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
 
 export default TabNavigator(
   {
@@ -909,7 +897,6 @@ Let's dissect this:
 Switching from one tab to another has a familiar API &mdash; `this.props.navigation.navigate`.
 
 ```js
-import { Button, Text, View } from 'react-native';
 
 class HomeScreen extends React.Component {
   render() {
@@ -947,7 +934,6 @@ class SettingsScreen extends React.Component {
 Usually tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
 
 ```js
-import { TabNavigator, StackNavigator } from 'react-navigation';
 
 class DetailsScreen extends React.Component {
   render() {
@@ -1123,7 +1109,6 @@ Most apps require that a user authenticate in some way to have access to data as
 ## Set up our navigators
 
 ```js
-import { StackNavigator, SwitchNavigator } from 'react-navigation';
 
 // Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
 // goes here.
@@ -1152,14 +1137,6 @@ We set the `initialRouteName` to `'AuthLoading'` because we will fetch our authe
 ## Implement our authentication loading screen
 
 ```js
-import React from 'react';
-import {
-  ActivityIndicator,
-  AsyncStorage,
-  StatusBar,
-  StyleSheet,
-  View,
-} from 'react-native';
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -1280,7 +1257,6 @@ export default StackNavigator({
 To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from either `react-native` or `react-navigation`.
 
 ```javascript
-import { SafeAreaView } from 'react-navigation';
 
 class App extends Component {
   render() {
@@ -1507,8 +1483,6 @@ Source: https://reactnavigation.org/docs/1.x/connecting-navigation-prop
 [`withNavigation`](with-navigation.md) is a higher order component which passes the `navigation` prop into a wrapped Component. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
 
 ```javascript
-import React from 'react';
-import { Button } from 'react-native';
 
 export default class MyBackButton extends React.Component {
   render() {
@@ -1531,9 +1505,6 @@ To resolve this exception, you could pass the `navigation` prop in to `MyBackBut
 Alternatively, you can use the `withNavigation` function to provide the `navigation` prop automatically (through React context, if you're curious). This function behaves similarly to Redux's `connect` function, except rather than providing the `dispatch` prop to the component it wraps, it provides the `navigation` prop.
 
 ```js
-import React from 'react';
-import { Button } from 'react-native';
-import { withNavigation } from 'react-navigation';
 
 class MyBackButton extends React.Component {
   render() {
@@ -1568,8 +1539,6 @@ You can get access to a navigator through a `ref` and pass it to the `Navigation
 ```javascript
 // App.js
 
-import NavigationService from './NavigationService';
-
 const TopLevelNavigator = StackNavigator({ /* ... */ })
 
 class App extends React.Component {
@@ -1591,8 +1560,6 @@ In the next step, we define `NavigationService` which is a simple module with fu
 
 ```javascript
 // NavigationService.js
-
-import { NavigationActions } from 'react-navigation';
 
 let _navigator;
 
@@ -1622,7 +1589,6 @@ Then, in any of your javascript modules, just import the `NavigationService` and
 
 ```javascript
 // any js module
-import NavigationService from 'path-to-NavigationService.js';
 
 // ...
 
@@ -1818,7 +1784,6 @@ This example shows how to do screen tracking and send to Google Analytics. The a
 When using built-in navigation container, we can use `onNavigationStateChange` to track the screen.
 
 ```js
-import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge';
 
 const tracker = new GoogleAnalyticsTracker(GA_TRACKING_ID);
 
@@ -1859,8 +1824,6 @@ When using Redux, we can write a Redux middleware to track the screen. For this 
 we will reuse `getCurrentRouteName` from the previous section.
 
 ```js
-import { NavigationActions } from 'react-navigation';
-import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge';
 
 const tracker = new GoogleAnalyticsTracker(GA_TRACKING_ID);
 
@@ -1932,28 +1895,13 @@ _You probably do not need to do this!_ Storing your React Navigation state in yo
 
 First, you need to add the `react-navigation-redux-helpers` package to your project.
 
-```bash npm2yarn
+```bash
 npm install react-navigation-redux-helpers
 ```
 
 With Redux, your app's state is defined by a reducer. Each navigation router effectively has a reducer, called `getStateForAction`. The following is a minimal example of how you might use navigators within a Redux application:
 
 ```es6
-import {
-  StackNavigator,
-  addNavigationHelpers,
-} from 'react-navigation';
-import {
-  createStore,
-  applyMiddleware,
-  combineReducers,
-} from 'redux';
-import {
-  createReduxBoundAddListener,
-  createReactNavigationReduxMiddleware,
-} from 'react-navigation-redux-helpers';
-import { Provider, connect } from 'react-redux';
-import React from 'react';
 
 const AppNavigator = StackNavigator(AppRouteConfigs);
 
@@ -2050,9 +1998,6 @@ To make jest tests work with your react-navigation app, you need to change the j
 By using the following snippet, your nav component will be aware of the back button press actions and will correctly interact with your stack. This is really useful on Android.
 
 ```es6
-import React from 'react';
-import { BackHandler } from 'react-native';
-import { addNavigationHelpers, NavigationActions } from 'react-navigation';
 
 const AppNavigation = TabNavigator({
   Home: { screen: HomeScreen },
@@ -2120,7 +2065,6 @@ To learn how to create screens, read about:
 In case you want to use Navigator from the same level you declare it you can use react's [`ref`](https://facebook.github.io/react/docs/refs-and-the-dom.html#the-ref-callback-attribute) option:
 
 ```js
-import { NavigationActions } from 'react-navigation';
 
 const AppNavigator = StackNavigator(SomeAppRouteConfigs);
 
@@ -2235,7 +2179,6 @@ MyApp.router.getStateForAction = (action, state) => {
 Sometimes you may want to prevent some navigation activity, depending on your route.
 
 ```js
-import { NavigationActions } from 'react-navigation';
 
 const MyStackRouter = StackRouter(
   {
@@ -2269,7 +2212,6 @@ MyStackRouter.router.getStateForAction = (action, state) => {
 Perhaps your app has a unique URI which the built-in routers cannot handle. You can always extend the router `getActionForPathAndParams`.
 
 ```js
-import { NavigationActions } from 'react-navigation';
 
 const MyApp = StackNavigator(
   {

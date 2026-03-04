@@ -18,7 +18,7 @@ What follows within the _Fundamentals_ section of this documentation is a tour o
 
 Install the `react-navigation` package in your React Native project.
 
-```bash npm2yarn
+```bash
 npm install react-navigation
 ```
 
@@ -32,7 +32,7 @@ npx expo install react-native-gesture-handler react-native-reanimated
 
 Otherwise, just use yarn or npm directly:
 
-```bash npm2yarn
+```bash
 npm install react-native-gesture-handler react-native-reanimated
 ```
 
@@ -124,10 +124,6 @@ Lets start by demonstrating the most common navigator, `createStackNavigator`.
 
 ```javascript
 // In App.js in a new project
-
-import React from 'react';
-import { View, Text } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 class HomeScreen extends React.Component {
   render() {
@@ -255,9 +251,6 @@ We'll do something similar to the latter, but rather than using a `document` glo
 ## Navigating to a new screen
 
 ```js
-import React from 'react';
-import { Button, View, Text } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 class HomeScreen extends React.Component {
   render() {
@@ -853,7 +846,7 @@ Containers are responsible for managing your app state and linking your top-leve
 A quick example of `createAppContainer`:
 
 ```
-import { createAppContainer, createStackNavigator } from 'react-navigation';
+
 // you can also import from @react-navigation/native
 
 const AppNavigator = createStackNavigator(...);
@@ -1249,9 +1242,7 @@ In previous version of React Navigation, the library used to dig through your co
 If you wrap the `AppContainer` in a `View`, make sure the `View` is using flex.
 
 ```javascript
-import React from 'react';
-import { Text, View } from 'react-native';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+
 class HomeScreen extends React.Component {
   render() {
     return (
@@ -1299,7 +1290,7 @@ By default expo already included `react-native-screens`, all you need to do is p
 
 ```js
 // Before rendering any navigation stack
-import { useScreens } from 'react-native-screens';
+
 useScreens();
 ```
 
@@ -1383,9 +1374,6 @@ This guide covers [`createBottomTabNavigator`](bottom-tab-navigator.md). You may
 ## Minimal example of tab-based navigation
 
 ```js
-import React from 'react';
-import { Text, View } from 'react-native';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 class HomeScreen extends React.Component {
   render() {
@@ -1424,8 +1412,6 @@ This is similar to how you would customize a stack navigator &mdash; there are s
 ```js
 // You can import Ionicons from @expo/vector-icons if you use Expo or
 // react-native-vector-icons/Ionicons otherwise.
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 export default createBottomTabNavigator(
   {
@@ -1520,7 +1506,6 @@ export default HomeIconWithBadge;
 Switching from one tab to another has a familiar API &mdash; `this.props.navigation.navigate`.
 
 ```js
-import { Button, Text, View } from 'react-native';
 
 class HomeScreen extends React.Component {
   render() {
@@ -1558,11 +1543,6 @@ class SettingsScreen extends React.Component {
 Usually tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
 
 ```js
-import {
-  createBottomTabNavigator,
-  createStackNavigator,
-  createAppContainer,
-} from 'react-navigation';
 
 class DetailsScreen extends React.Component {
   render() {
@@ -1762,11 +1742,6 @@ Most apps require that a user authenticate in some way to have access to data as
 ## Set up our navigators
 
 ```js
-import {
-  createSwitchNavigator,
-  createStackNavigator,
-  createAppContainer,
-} from 'react-navigation';
 
 // Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
 // goes here.
@@ -1797,14 +1772,6 @@ We set the `initialRouteName` to `'AuthLoading'` because we will fetch our authe
 ## Implement our authentication loading screen
 
 ```js
-import React from 'react';
-import {
-  ActivityIndicator,
-  AsyncStorage,
-  StatusBar,
-  StyleSheet,
-  View,
-} from 'react-native';
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -1934,7 +1901,6 @@ export default createStackNavigator({
 To fix this issue you can wrap your content in a `SafeAreaView`, which can be imported from `react-navigation`. Recall that `SafeAreaView` should not wrap entire navigators, just the screen components or any content in them.
 
 ```jsx
-import { SafeAreaView } from 'react-navigation';
 
 class MyHomeScreen extends Component {
   render() {
@@ -1990,9 +1956,6 @@ React Native does not currently expose an API to access information about device
 - If the device has a notch, you may want to increase the status bar height known to the SafeAreaView by doing something like this:
 
 ```js
-import { Platform } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
-import DeviceInfo from 'react-native-device-info';
 
 if (Platform.OS === 'android' && DeviceInfo.hasNotch()) {
   SafeAreaView
@@ -2535,8 +2498,6 @@ As an example, consider a screen where user is selecting items in a list, and a 
 Returning `true` from `onBackButtonPressAndroid` denotes that we have handled the event, and react-navigation's listener will not get called, thus not popping the screen. Returning `false` will cause the event to bubble up and react-navigation's listener will pop the screen.
 
 ```
-import React from "react";
-import { BackHandler } from "react-native";
 
 class ScreenWithCustomBackBehavior extends React.Component {
   _didFocusSubscription;
@@ -2590,8 +2551,6 @@ Source: https://reactnavigation.org/docs/3.x/connecting-navigation-prop
 [`withNavigation`](with-navigation.md) is a higher order component which passes the `navigation` prop into a wrapped Component. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
 
 ```javascript
-import React from 'react';
-import { Button } from 'react-native';
 
 export default class MyBackButton extends React.Component {
   render() {
@@ -2614,9 +2573,6 @@ To resolve this exception, you could pass the `navigation` prop in to `MyBackBut
 Alternatively, you can use the `withNavigation` function to provide the `navigation` prop automatically (through React context, if you're curious). This function behaves similarly to Redux's `connect` function, except rather than providing the `dispatch` prop to the component it wraps, it provides the `navigation` prop.
 
 ```js
-import React from 'react';
-import { Button } from 'react-native';
-import { withNavigation } from 'react-navigation';
 
 class MyBackButton extends React.Component {
   render() {
@@ -2651,9 +2607,6 @@ You can get access to a navigator through a `ref` and pass it to the `Navigation
 ```javascript
 // App.js
 
-import { createStackNavigator, createAppContainer } from 'react-navigation';
-import NavigationService from './NavigationService';
-
 const TopLevelNavigator = createStackNavigator({
   /* ... */
 });
@@ -2679,8 +2632,6 @@ In the next step, we define `NavigationService` which is a simple module with fu
 
 ```javascript
 // NavigationService.js
-
-import { NavigationActions } from 'react-navigation';
 
 let _navigator;
 
@@ -2709,7 +2660,6 @@ Then, in any of your javascript modules, just import the `NavigationService` and
 
 ```javascript
 // any js module
-import NavigationService from 'path-to-NavigationService.js';
 
 // ...
 
@@ -3002,8 +2952,6 @@ This example shows how to do screen tracking and send to Google Analytics. The a
 ## Listening to State Changes
 
 ```js
-import { createAppContainer, createStackNavigator } from 'react-navigation';
-import analytics from '@react-native-firebase/analytics';
 
 // gets the current screen from navigation state
 function getActiveRouteName(navigationState) {
@@ -3073,7 +3021,6 @@ First, you need to install `react-native-appearance`. [Follow the instructions i
 Once you've installed it, set your root component up as follows:
 
 ```js
-import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 
 // Other navigation code goes here...
 let Navigation = createAppContainer(RootStack);
@@ -3100,9 +3047,6 @@ Two tools are available to gain access to the theme in any component that descen
 `useTheme` is a simple custom hook that returns the theme.
 
 ```js
-import * as React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import { useTheme } from 'react-navigation';
 
 // Black background and white text in light theme, inverted on dark theme
 function MyButton() {
@@ -3123,9 +3067,6 @@ function MyButton() {
 `ThemeContext` lets you access the theme using the `ThemeContext.Consumer` pattern or with `static contextType`.
 
 ```js
-import * as React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import { ThemeContext } from 'react-navigation';
 
 function MyButton() {
   return (
@@ -3142,9 +3083,6 @@ function MyButton() {
 ```
 
 ```js
-import * as React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import { ThemeContext } from 'react-navigation';
 
 class MyButton extends React.Component {
   static contextType = ThemeContext;
@@ -3168,9 +3106,6 @@ class MyButton extends React.Component {
 There is a small but perhaps useful list of colors that are used to style navigators according to the theme. This list of colors is exported under `ThemeColors`. See the TypeScript definition for a full list of colors.
 
 ```js
-import * as React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import { ThemeColors, useTheme } from 'react-navigation';
 
 function MyButton() {
   let theme = useTheme();
@@ -3189,9 +3124,6 @@ function MyButton() {
 Several components have defaults that are biased to a specific theme. `Text`, for example, defaults to black. `StatusBar` defaults to dark text. React Navigation provides themed alternatives to these.
 
 ```js
-import * as React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import { Themed } from 'react-navigation';
 
 function MyButton() {
   return (
@@ -3208,11 +3140,6 @@ function MyButton() {
 ## Built-in themes inside `navigationOptions`
 
 ```jsx
-import {
-  ThemeColors,
-  createAppContainer,
-  createStackNavigator,
-} from 'react-navigation';
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ theme }) => {
@@ -3283,8 +3210,6 @@ Building custom themes into an app with React Navigation is not too much differe
 React's context API allows you to share state from an ancestor component to any of its descendants without explicitly passing the value through layers and layers of components ("prop drilling"). This is a useful tool in order to build themes because we can define the theme at the root of the app, and then access it from anywhere else and re-render every themed component whenever the theme changes. If you are not familiar with how to use context already, you might want to read the [React documentation](https://reactjs.org/docs/context.html) for it before continuing.
 
 ```jsx
-import * as React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
 
 const ThemeContext = React.createContext(null);
 const ThemeConstants = {
@@ -3379,7 +3304,6 @@ Okay, that's a lot of code. There isn't much going on here aside from passing th
 A regrettable limitation of the current implementation of `navigationOptions` is that we are unable to access React context for use in properties such as `headerStyle` and `headerTintColor`. We can and should use them in properties that access React components, for example in `headerRight` we could provide a component like `ThemedHeaderButton`. To apply the theme to other properties we need to use `screenProps`.
 
 ```jsx
-import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ screenProps }) => {
@@ -3442,12 +3366,6 @@ Success! The stack header style now updates when the theme changes.
 Some navigators may have their styles configured in the navigator configuration object when they are initialized. While it may be best to update these navigators so that they can be configured more easily through `navigationOptions`, as long as they allow us to override the UI that they render with our own component and give us access to the default component, we can work with them just fine. We'll look at how to theme a bottom tab navigator.
 
 ```jsx
-import {
-  createAppContainer,
-  createStackNavigator,
-  createBottomTabNavigator,
-  BottomTabBar,
-} from 'react-navigation';
 
 const ThemeConstants = {
   light: {
@@ -3757,9 +3675,6 @@ This means that rather than sending the params from one screen to another (eg. w
 To give an example, the navigation store may look similar to this:
 
 ```js
-import { types, onSnapshot, getRoot } from 'mobx-state-tree';
-import { Product } from '../models/Product';
-import { User } from '../models/User';
 
 export const NavigationStore = types
   .model('NavigationStore', {
@@ -3914,8 +3829,6 @@ This approach requires that you rebuild the navigation views for your app (at le
 To set up a navigator in a React app, [(such as one created with create-react-app)](https://github.com/react-navigation/example-web):
 
 ```js
-import { createSwitchNavigator } from '@react-navigation/core';
-import { createBrowserApp } from '@react-navigation/web';
 
 const MyNavigator = createSwitchNavigator(routes);
 
@@ -4013,9 +3926,6 @@ For instance, if we are attempting to make an API call on focus to fetch some da
 ### Example
 
 ```js
-import React, { Component } from 'react';
-import { View } from 'react-native';
-import { withNavigationFocus } from 'react-navigation';
 
 class TabScreen extends Component {
   componentDidUpdate(prevProps) {
@@ -4046,9 +3956,6 @@ With this approach, we will only be able to call an action when the screen focus
 ### Example
 
 ```js
-import React, { Component } from 'react';
-import { View } from 'react-native';
-import { withNavigation } from 'react-navigation';
 
 class TabScreen extends Component {
   componentDidMount() {
@@ -4373,7 +4280,6 @@ Note that if you want to dispatch react-navigation actions you should use the ac
 See [Navigation Actions Docs](navigation-actions.md) for a full list of available actions.
 
 ```js
-import { NavigationActions } from 'react-navigation';
 
 const navigateAction = NavigationActions.navigate({
   routeName: 'Profile',
@@ -4423,8 +4329,6 @@ Most of the time, you won't use `NavigationContext` directly, as the provided `w
 ## Example with hooks
 
 ```js
-import { useState, useContext, useEffect } from 'react';
-import { NavigationContext } from '@react-navigation/core';
 
 export function useFocusState() {
   const navigation = useContext(NavigationContext);
@@ -4473,9 +4377,6 @@ The event listener is the same as the imperative [`navigation.addListener(...)`]
 ### Example
 
 ```jsx harmony
-import React from 'react';
-import { View } from 'react-native';
-import { NavigationEvents } from 'react-navigation';
 
 const MyScreen = () => (
   <View>
@@ -4802,10 +4703,6 @@ Header transitions can also be configured using `headerLeftInterpolator`, `heade
 We can't set the `StackNavigatorConfig`'s `mode` dynamically. Instead we are going to use a custom `transitionConfig` to render the specific transition we want - modal or card - on a screen by screen basis.
 
 ```js
-import {
-  createStackNavigator,
-  StackViewTransitionConfigs,
-} from 'react-navigation';
 
 /* The screens you add to IOS_MODAL_ROUTES will have the modal transition.  */
 const IOS_MODAL_ROUTES = ['OptionsScreen'];
@@ -4877,7 +4774,6 @@ To use this navigator, you need to install `react-native-reanimated >= 1.0.0`. I
 ## API Definition
 
 ```js
-import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
 
 createAnimatedSwitchNavigator(RouteConfigs, SwitchNavigatorConfig);
 ```
@@ -4893,8 +4789,6 @@ The switch navigator configs are identical to [createSwitchNavigator](switch-nav
 By default, the transition between screens is a cross-fade. You can customize the transition with an additional option `transition`:
 
 ```jsx
-import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
-import { Transition } from 'react-native-reanimated';
 
 const MySwitch = createAnimatedSwitchNavigator(
   {
@@ -4963,7 +4857,6 @@ Several options get passed to the underlying router to modify navigation logic:
 The default component for the drawer is scrollable and only contains links for the routes in the RouteConfig. You can easily override the default component to add a header, footer, or other content to the drawer. By default the drawer is scrollable and supports iPhone X safe area. If you customize the content, be sure to wrap the content in a SafeAreaView:
 
 ```js
-import { DrawerItems, SafeAreaView } from 'react-navigation';
 
 const CustomDrawerContentComponent = (props) => (
   <ScrollView>
@@ -5113,7 +5006,6 @@ tabBarOptions: {
 If you want to customize the `tabBarComponent`:
 
 ```js
-import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
 
 const TabBarComponent = (props) => <BottomTabBar {...props} />;
 
@@ -5185,7 +5077,7 @@ A material-design themed tab bar on the bottom of the screen that lets you switc
 
 To use this navigator, you need to install `react-navigation-material-bottom-tabs`
 
-```bash npm2yarn
+```bash
 npm install react-navigation-material-bottom-tabs react-native-paper
 ```
 
@@ -5194,7 +5086,6 @@ This API also requires that you install `react-native-vector-icons`! If you are 
 To use this tab navigator, import it from `react-navigation-material-bottom-tabs`
 
 ```js
-import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 createMaterialBottomTabNavigator(
   RouteConfigs,
@@ -5415,7 +5306,6 @@ The `navigate` action will update the current state with the result of a `naviga
 - `key` - _String_ - Optional - The identifier for the route to navigate to. Navigate back to this route if it already exists
 
 ```js
-import { NavigationActions } from 'react-navigation';
 
 const navigateAction = NavigationActions.navigate({
   routeName: 'Profile',
@@ -5435,7 +5325,6 @@ Go back to previous screen and close current screen. `back` action creator takes
 - `key` - _string or null_ - optional - If set, navigation will go back from the given key. If null, navigation will go back anywhere.
 
 ```js
-import { NavigationActions } from 'react-navigation';
 
 const backAction = NavigationActions.back({
   key: 'Profile',
@@ -5451,7 +5340,6 @@ When dispatching `setParams`, the router will produce a new state that has chang
 - `key` - _string_ - required - Route key that should get the new params
 
 ```js
-import { NavigationActions } from 'react-navigation';
 
 const setParamsAction = NavigationActions.setParams({
   params: { title: 'Hello' },
@@ -5485,7 +5373,6 @@ The `reset` action wipes the whole navigation state and replaces it with the res
 - `key` - _string or null_ - optional - If set, the navigator with the given key will reset. If null, the root navigator will reset.
 
 ```js
-import { StackActions, NavigationActions } from 'react-navigation';
 
 const resetAction = StackActions.reset({
   index: 0,
@@ -5502,7 +5389,6 @@ eg: given a basic stack navigation with two routes `Profile` and `Settings`.
 To reset the state to a point where the active screen was `Settings` but have it stacked on top of a `Profile` screen, you would do the following:
 
 ```js
-import { StackActions, NavigationActions } from 'react-navigation';
 
 const resetAction = StackActions.reset({
   index: 1,
@@ -5534,7 +5420,6 @@ The `push` action adds a route on top of the stack and navigates forward to it. 
 - `action` - (advanced) The sub-action to run in the child router, if the screen is a navigator.
 
 ```js
-import { StackActions } from 'react-navigation';
 
 const pushAction = StackActions.push({
   routeName: 'Profile',
@@ -5553,7 +5438,6 @@ The `pop` action takes you back to a previous screen in the stack. The `n` param
 - `n` - _number_ - The number of screens to pop back by.
 
 ```js
-import { StackActions } from 'react-navigation';
 
 const popAction = StackActions.pop({
   n: 1,
@@ -5567,7 +5451,6 @@ this.props.navigation.dispatch(popAction);
 The `popToTop` action takes you back to the first screen in the stack, dismissing all the others. It's functionally identical to `StackActions.pop({n: currentIndex})`.
 
 ```js
-import { StackActions } from 'react-navigation';
 
 this.props.navigation.dispatch(StackActions.popToTop());
 ```
@@ -5592,7 +5475,6 @@ The `jumpTo` action can be used to jump to an existing route in the switch navig
 - `key` - _string_ - optional - If set, the action will be scoped to the switch-based navigator with the given key.
 
 ```js
-import { SwitchActions } from 'react-navigation';
 
 this.props.navigation.dispatch(SwitchActions.jumpTo({ routeName }));
 ```
@@ -5614,7 +5496,6 @@ The following actions are supported:
 ### Usage
 
 ```js
-import { DrawerActions } from 'react-navigation-drawer';
 
 this.props.navigation.dispatch(DrawerActions.toggleDrawer());
 ```
@@ -5632,9 +5513,6 @@ Source: https://reactnavigation.org/docs/3.x/with-navigation
 ## Example
 
 ```js
-import React from 'react';
-import { Button } from 'react-native';
-import { withNavigation } from 'react-navigation';
 
 class MyBackButton extends React.Component {
   render() {
@@ -5679,9 +5557,6 @@ Source: https://reactnavigation.org/docs/3.x/with-navigation-focus
 ## Example
 
 ```js
-import React from 'react';
-import { Text } from 'react-native';
-import { withNavigationFocus } from 'react-navigation';
 
 class FocusStateLabel extends React.Component {
   render() {
@@ -5705,13 +5580,6 @@ React Navigation exports its own `ScrollView`, `FlatList`, and `SectionList`. Th
 Example
 
 ```jsx harmony
-import React from 'react';
-import { Text, View } from 'react-native';
-import {
-  createBottomTabNavigator,
-  createAppContainer,
-  FlatList,
-} from 'react-navigation';
 
 const data = new Array(150).fill(0);
 
@@ -5845,7 +5713,6 @@ MyApp.router.getStateForAction = (action, state) => {
 Sometimes you may want to prevent some navigation activity, depending on your route.
 
 ```js
-import { NavigationActions } from 'react-navigation';
 
 const MyStackRouter = StackRouter(
   {
@@ -5879,7 +5746,6 @@ MyStackRouter.router.getStateForAction = (action, state) => {
 Perhaps your app has a unique URI which the built-in routers cannot handle. You can always extend the router `getActionForPathAndParams`.
 
 ```js
-import { NavigationActions } from 'react-navigation';
 
 const MyApp = createStackNavigator(
   {
@@ -6015,7 +5881,6 @@ To help developers implement custom navigators, the following utilities are prov
 This utility combines a [router](routers.md) and a [navigation view](navigation-views.md) together in a standard way:
 
 ```js
-import { createNavigator } from 'react-navigation';
 
 const AppNavigator = createNavigator(NavigationView, router, navigationConfig);
 ```

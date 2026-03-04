@@ -1,0 +1,290 @@
+# State persistence
+
+Version: 7.x
+
+Sitemap: [llms.txt](https://reactnavigation.org/llms.txt)
+
+You might want to save the user's location in the app, so that they are immediately returned to the same location after the app is restarted.
+
+This is especially valuable during development because it allows the developer to stay on the same screen when they refresh the app.
+
+## Usage
+
+To be able to persist the [navigation state](navigation-state.md), we can use the `onStateChange` and `initialState` props of the container.
+
+- `onStateChange` - This prop notifies us of any state changes. We can persist the state in this callback.
+- `initialState` - This prop allows us to pass an initial state to use for [navigation state](navigation-state.md). We can pass the restored state in this prop.
+
+**Static:**
+
+```js dependencies=@react-native-async-storage/async-storage
+
+// codeblock-focus-start
+
+// codeblock-focus-end
+
+function A() {
+  return <View />;
+}
+
+function B() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.navigate('C')}>Go to C</Button>
+    </View>
+  );
+}
+
+function C() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.navigate('D')}>Go to D</Button>
+    </View>
+  );
+}
+
+function D() {
+  return <View />;
+}
+
+const HomeStackScreen = createNativeStackNavigator({
+  screens: {
+    A: A,
+  },
+});
+
+const SettingsStackScreen = createNativeStackNavigator({
+  screens: {
+    B: B,
+    C: C,
+    D: D,
+  },
+});
+
+const Tab = createBottomTabNavigator({
+  screens: {
+    Home: {
+      screen: HomeStackScreen,
+      options: {
+        headerShown: false,
+        tabBarLabel: 'Home!',
+      },
+    },
+    Settings: {
+      screen: SettingsStackScreen,
+      options: {
+        headerShown: false,
+        tabBarLabel: 'Settings!',
+      },
+    },
+  },
+});
+
+const Navigation = createStaticNavigation(Tab);
+
+// codeblock-focus-start
+
+const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
+
+export default function App() {
+  const [isReady, setIsReady] = React.useState(Platform.OS === 'web'); // Don't persist state on web since it's based on URL
+  const [initialState, setInitialState] = React.useState();
+
+  React.useEffect(() => {
+    const restoreState = async () => {
+      try {
+        const initialUrl = await Linking.getInitialURL();
+
+        if (Platform.OS !== 'web' && initialUrl == null) {
+          const savedState = await AsyncStorage.getItem(PERSISTENCE_KEY);
+          const state = savedState ? JSON.parse(savedState) : undefined;
+
+          if (state !== undefined) {
+            setInitialState(state);
+          }
+        }
+      } finally {
+        setIsReady(true);
+      }
+    };
+
+    if (!isReady) {
+      restoreState();
+    }
+  }, [isReady]);
+
+  if (!isReady) {
+    return null;
+  }
+
+  return (
+    <Navigation
+      initialState={initialState}
+      onStateChange={(state) =>
+        AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+      }
+    />
+  );
+}
+// codeblock-focus-end
+```
+
+**Dynamic:**
+
+```js dependencies=@react-native-async-storage/async-storage
+
+// codeblock-focus-start
+
+// codeblock-focus-end
+
+const Tab = createBottomTabNavigator();
+const HomeStack = createNativeStackNavigator();
+const SettingsStack = createNativeStackNavigator();
+
+function A() {
+  return <View />;
+}
+
+function B() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.navigate('C')}>Go to C</Button>
+    </View>
+  );
+}
+
+function C() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.navigate('D')}>Go to D</Button>
+    </View>
+  );
+}
+
+function D() {
+  return <View />;
+}
+
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="A" component={A} />
+    </HomeStack.Navigator>
+  );
+}
+
+function SettingsStackScreen() {
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen name="B" component={B} />
+      <SettingsStack.Screen name="C" component={C} />
+      <SettingsStack.Screen name="D" component={D} />
+    </SettingsStack.Navigator>
+  );
+}
+
+function RootTabs() {
+  return (
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen
+        name="Home"
+        component={HomeStackScreen}
+        options={{ tabBarLabel: 'Home!' }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsStackScreen}
+        options={{ tabBarLabel: 'Settings!' }}
+      />
+    </Tab.Navigator>
+  );
+}
+
+// codeblock-focus-start
+
+const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
+
+export default function App() {
+  const [isReady, setIsReady] = React.useState(Platform.OS === 'web'); // Don't persist state on web since it's based on URL
+  const [initialState, setInitialState] = React.useState();
+
+  React.useEffect(() => {
+    const restoreState = async () => {
+      try {
+        const initialUrl = await Linking.getInitialURL();
+
+        if (initialUrl == null) {
+          // Only restore state if there's no deep link
+          const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
+          const state = savedStateString
+            ? JSON.parse(savedStateString)
+            : undefined;
+
+          if (state !== undefined) {
+            setInitialState(state);
+          }
+        }
+      } finally {
+        setIsReady(true);
+      }
+    };
+
+    if (!isReady) {
+      restoreState();
+    }
+  }, [isReady]);
+
+  if (!isReady) {
+    return null;
+  }
+
+  return (
+    <NavigationContainer
+      initialState={initialState}
+      onStateChange={(state) =>
+        AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+      }
+    >
+      <RootTabs />
+    </NavigationContainer>
+  );
+}
+// codeblock-focus-end
+```
+
+> **Warning:**
+>
+> It is recommended to use an [error boundary](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary) in your app and clear the persisted state if an error occurs. This will ensure that the app doesn't get stuck in an error state if a screen crashes.
+### Development Mode
+
+This feature is particularly useful in development mode. You can enable it selectively using the following approach:
+
+```js
+const [isReady, setIsReady] = React.useState(__DEV__ ? false : true);
+```
+
+While it can be used for production as well, use it with caution as it can make the app unusable if the app is crashing on a particular screen - as the user will still be on the same screen after restarting. So if you are using it in production, make sure to clear the persisted state if an error occurs.
+
+### Loading View
+
+Because the state is restored asynchronously, the app must render an empty/loading view for a moment before we have the initial state. To handle this, we can return a loading view when `isReady` is `false`:
+
+```js
+if (!isReady) {
+  return <ActivityIndicator />;
+}
+```
+
+## Warning: Serializable State
+
+Each param, route, and navigation state must be fully serializable for this feature to work. Typically, you would serialize the state as a JSON string. This means that your routes and params must contain no functions, class instances, or recursive data structures. React Navigation already [warns you during development](troubleshooting.md#i-get-the-warning-non-serializable-values-were-found-in-the-navigation-state) if it encounters non-serializable data, so watch out for the warning if you plan to persist navigation state.
+
+You can modify the initial state object before passing it to container, but note that if your `initialState` isn't a [valid navigation state](navigation-state.md#stale-state-objects), React Navigation may not be able to handle the situation gracefully in some scenarios.
