@@ -252,17 +252,13 @@ async function generateForVersion(
     llmsFullTxt += `${doc.processedContent}\n\n---\n\n`;
   });
 
-  const fullFilename = isLatest
-    ? 'llms-full.txt'
-    : `llms-full-${version}.txt`;
+  const fullFilename = isLatest ? 'llms-full.txt' : `llms-full-${version}.txt`;
 
   fs.writeFileSync(path.join(outDir, fullFilename), llmsFullTxt);
 
   // 4. Generate individual .md files for each doc
   const mdFiles = processedDocs.map((doc) => {
-    const urlPath = isLatest
-      ? `/docs/${doc.id}`
-      : `/docs/${version}/${doc.id}`;
+    const urlPath = isLatest ? `/docs/${doc.id}` : `/docs/${version}/${doc.id}`;
 
     const mdFilePath = path.join(outDir, `${urlPath}.md`);
     const mdDir = path.dirname(mdFilePath);

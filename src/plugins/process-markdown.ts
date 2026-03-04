@@ -285,8 +285,14 @@ function renderTabsAsMarkdown(items: TabItem[]): string {
  */
 async function transformStatic2Dynamic(content: string): Promise<string> {
   // Match code fences with static2dynamic in meta
-  const fenceRegex = /^(```\w*)\s+([^\n]*static2dynamic[^\n]*)\n([\s\S]*?)^```$/gm;
-  const matches: { fullMatch: string; lang: string; meta: string; code: string }[] = [];
+  const fenceRegex =
+    /^(```\w*)\s+([^\n]*static2dynamic[^\n]*)\n([\s\S]*?)^```$/gm;
+  const matches: {
+    fullMatch: string;
+    lang: string;
+    meta: string;
+    code: string;
+  }[] = [];
 
   let match: RegExpExecArray | null;
 
@@ -308,10 +314,8 @@ async function transformStatic2Dynamic(content: string): Promise<string> {
         const langTag = m.lang || 'js';
         const metaSuffix = cleanMeta ? ` ${cleanMeta}` : '';
 
-        const staticSection =
-          `**Static:**\n\n\`\`\`${langTag}${metaSuffix}\n${m.code}\`\`\``;
-        const dynamicSection =
-          `**Dynamic:**\n\n\`\`\`${langTag}${metaSuffix}\n${dynamicCode}\n\`\`\``;
+        const staticSection = `**Static:**\n\n\`\`\`${langTag}${metaSuffix}\n${m.code}\`\`\``;
+        const dynamicSection = `**Dynamic:**\n\n\`\`\`${langTag}${metaSuffix}\n${dynamicCode}\n\`\`\``;
 
         return {
           original: m.fullMatch,
