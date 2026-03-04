@@ -9,7 +9,6 @@ import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.ts';
 import rehypeStaticToDynamic from './src/plugins/rehype-static-to-dynamic.ts';
 import rehypeVideoAspectRatio from './src/plugins/rehype-video-aspect-ratio.ts';
 import remarkNpm2Yarn from './src/plugins/remark-npm2yarn.ts';
-import remarkRawMarkdown from './src/plugins/remark-raw-markdown.ts';
 import darkTheme from './src/themes/react-navigation-dark';
 import lightTheme from './src/themes/react-navigation-light';
 
@@ -175,7 +174,7 @@ const config: Config = {
           },
           breadcrumbs: false,
           sidebarCollapsed: false,
-          remarkPlugins: [remarkRawMarkdown, [remarkNpm2Yarn, { sync: true }]],
+          remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
           rehypePlugins: [
             [
               rehypeCodeblockMeta,
@@ -186,10 +185,10 @@ const config: Config = {
           ],
         },
         blog: {
-          remarkPlugins: [remarkRawMarkdown, [remarkNpm2Yarn, { sync: true }]],
+          remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
         },
         pages: {
-          remarkPlugins: [remarkRawMarkdown, [remarkNpm2Yarn, { sync: true }]],
+          remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
         },
         theme: {
           customCss: './src/css/custom.css',

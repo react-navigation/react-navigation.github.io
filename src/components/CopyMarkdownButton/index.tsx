@@ -1,4 +1,3 @@
-import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import { useEffect, useRef, useState } from 'react';
 import styles from './styles.module.css';
 
@@ -10,21 +9,35 @@ const ACTIONS = [
 
 type ActionType = (typeof ACTIONS)[number];
 
+function getMdPath() {
+  return `${window.location.pathname.replace(/\/$/, '')}.md`;
+}
+
 export function CopyButton() {
-  const { frontMatter } = useDoc();
-
-  const markdown =
-    'rawMarkdown' in frontMatter && typeof frontMatter.rawMarkdown === 'string'
-      ? frontMatter.rawMarkdown
-      : null;
-
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  const markdownRef = useRef<Promise<string | null> | undefined>(undefined);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const loadMarkdown = () => {
+    const promise = fetch(getMdPath())
+      .then((res) => (res.ok ? res.text() : null))
+      .catch(() => null);
+
+    markdownRef.current = promise;
+
+    return promise;
+  };
+
+  // Preload the .md file on mount so it's ready when the user clicks copy
+  useEffect(() => {
+    loadMarkdown();
+  }, []);
 
   useEffect(() => {
     if (!isOpen) {
@@ -58,27 +71,29 @@ export function CopyButton() {
   };
 
   const onAction = (action: ActionType) => {
-    const prompt = `Read from ${window.location.href} so I can ask questions about it.`;
-
     switch (action.value) {
       case 'copy':
-        if (markdown) {
-          navigator.clipboard.writeText(markdown).then(() => {
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
+        (markdownRef.current ?? loadMarkdown())
+          .then((markdown) => markdown ?? loadMarkdown())
+          .then((markdown) => {
+            if (markdown) {
+              navigator.clipboard.writeText(markdown).then(() => {
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+              });
+            }
           });
-        }
 
         break;
       case 'chatgpt':
-      case 'claude':
-        window.open(
-          `${action.href}?q=${encodeURIComponent(prompt)}`,
+      case 'claude': {
+        const mdUrl = `${window.location.origin}${getMdPath()}`;
+        const prompt = `Read from ${mdUrl} so I can ask questions about it.`;
 
-          '_blank'
-        );
+        window.open(`${action.href}?q=${encodeURIComponent(prompt)}`, '_blank');
 
         break;
+      }
     }
 
     onClose();
@@ -126,10 +141,6 @@ export function CopyButton() {
       setIsVisible(true);
     }
   };
-
-  if (!markdown) {
-    return null;
-  }
 
   return (
     <div className={styles.container} ref={containerRef} onKeyDown={onKeyDown}>
