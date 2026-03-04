@@ -238,6 +238,8 @@ To work with the reworked TypeScript types, custom navigators now need to provid
 + }
 ```
 
+It's a bit verbose, but we don't have a better way due to limitations of TypeScript.
+
 See [Custom navigators](custom-navigators.md) for more details.
 
 ### Changes to navigators
@@ -455,6 +457,57 @@ import { useFrameSize } from '@react-navigation/elements';
 
 const isLandscape = useFrameSize((size) => size.width > size.height);
 ```
+
+#### `detachInactiveScreens` and `freezeOnBlur` have been replaced with `inactiveBehavior`
+
+Previously, Stack, Native Stack, Bottom Tab, and Drawer Navigators accepted a `detachInactiveScreens` prop - used to detach inactive screens from the native view hierarchy to save memory via [`react-native-screens`](https://github.com/software-mansion/react-native-screens). Additionally, Stack Navigator accepted a `detachPreviousScreen` option to detach the previous screen when navigating to a new screen.
+
+They also had an experimental `freezeOnBlur` option to freeze the screen when it's not focused - which would prevent it from re-rendering and running effects.
+
+These were a source of significant maintenance burden. So we're working on alternative and more integrated approaches.
+
+Now they have been replaced with a new `inactiveBehavior` screen option available in all navigators. It supports the following values:
+
+- `pause`: Effects are cleaned up - e.g. timers are cleared, subscriptions are removed, etc. This avoids unnecessary renders when the screen is inactive.
+- `none`: Screen renders normally.
+
+It defaults to `pause`.
+
+This is not a direct replacement as the behavior differs. For example, `freezeOnBlur` prevents screens from re-rendering entirely but keeps the effects running, while `inactiveBehavior: 'pause'` cleans up effects avoiding re-renders due to timers, subscriptions, etc., but the screen can still re-render at a lower priority due to changes in props, context etc.
+
+To update your code, remove `detachInactiveScreens`, `detachPreviousScreen`, and `freezeOnBlur` usage:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```diff lang=js
+createStackNavigator({
+-   detachInactiveScreens: true,
+  screenOptions: {
+-     detachPreviousScreen: true,
+-     freezeOnBlur: true,
+  },
+  // ...
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```diff lang=js
+<Stack.Navigator
+-   detachInactiveScreens={true}
+  screenOptions={{
+-     detachPreviousScreen: true,
+-     freezeOnBlur: true,
+  }}
+>
+```
+
+</TabItem>
+</Tabs>
+
+See [Stack Navigator](stack-navigator.md#inactivebehavior), [Native Stack Navigator](native-stack-navigator.md#inactivebehavior), [Bottom Tab Navigator](bottom-tab-navigator.md#inactivebehavior), [Drawer Navigator](drawer-navigator.md#inactivebehavior), and [Material Top Tab Navigator](material-top-tab-navigator.md#inactivebehavior) for more details.
 
 #### The `onChangeText` callback has been renamed to `onChange` for `headerSearchBarOptions`
 
@@ -796,6 +849,35 @@ const MyTheme = {
 ```
 
 See [Themes](themes.md#using-platform-colors) for more details.
+
+### Linking config now supports Standard Schema
+
+The `parse` property in the linking config now accepts schemas from [Standard Schema](https://standardschema.dev/) compatible libraries such as [Zod](https://zod.dev/), [Valibot](https://valibot.dev/) or [ArkType](https://arktype.io/) in addition to parse functions:
+
+```js
+import { z } from 'zod';
+
+const RootStack = createStackNavigator({
+  screens: {
+    Profile: {
+      screen: ProfileScreen,
+      linking: {
+        path: 'user/:id',
+        parse: {
+          id: z.coerce.number(),
+        },
+      },
+    },
+  },
+});
+```
+
+Compared to parse functions, schemas provide a few advantages:
+
+- **Support for validation and fallback**: A parse function only parses the param. A schema can also validate the param. If the validation fails, the URL won't match the current screen and React Navigation will try the next matching config. Schemas are also called with `undefined` when a query param is missing, which lets them provide a fallback, while parse functions are not called when a query param is missing.
+- **Better Query Param handling with TypeScript**: When using [Static Configuration](static-configuration.md), query params (e.g. `?foo=bar`) are always inferred as optional with `parse` functions. With schemas, you can specify whether a query param is required (e.g. `z.string()`) or optional (e.g. `z.string().optional()`).
+
+See [Configuring links](configuring-links.md#using-standard-schema) and [TypeScript](typescript.md#parse-function-vs-standard-schema) for more details.
 
 ### Groups now support `linking` option in static configuration
 

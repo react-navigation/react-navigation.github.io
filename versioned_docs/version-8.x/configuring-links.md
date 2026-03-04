@@ -260,6 +260,44 @@ In the above example, the following path formats are handled:
 - `/user` navigates to the `Profile` screen
 - `/feed/:sort` navigates to the `Chat` screen with the param `sort`
 
+In addition, if you are using [`groups`](group.md) in your navigator, you can specify the `linking` property for the group to apply it to all screens in the group. The path specified in the group will be used as a prefix for all screens in the group. For example:
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      linking: 'home',
+    },
+  },
+  groups: {
+    // highlight-start
+    Admin: {
+      linking: 'admin',
+      screens: {
+        Dashboard: {
+          screen: DashboardScreen,
+          linking: 'dashboard',
+        },
+        Settings: {
+          screen: SettingsScreen,
+          linking: 'settings',
+        },
+      },
+    },
+    // highlight-end
+  },
+});
+```
+
+This results in:
+
+- `/home` navigates to the `Home` screen
+- `/admin/dashboard` navigates to the `Dashboard` screen
+- `/admin/settings` navigates to the `Settings` screen
+
+Any other options specified for the group such as [`parse` and `stringify`](#passing-params) are shallow merged with the options specified for the screens. If the same option is specified in both the group and the screen, the one specified in the screen will take precedence.
+
 ### How does automatic path generation work?
 
 When using automatic path generation with `enabled: 'auto'`, the following rules are applied:
