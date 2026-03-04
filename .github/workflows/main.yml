@@ -32,6 +32,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_GITHUB_TOKEN }}
         run: yarn fetch-sponsors
 
+      - name: Generate translation files
+        run: yarn write-translations
+
+      - name: Download Crowdin translations
+        env:
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_DOCUSAURUS_PROJECT_ID }}
+          CROWDIN_DOCUSAURUS_API_KEY: ${{ secrets.CROWDIN_DOCUSAURUS_API_KEY }}
+        run: yarn crowdin-download
+
       - name: Build
         run: yarn build
 

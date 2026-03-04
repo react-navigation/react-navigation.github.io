@@ -11,8 +11,9 @@
     "typecheck": "tsc",
     "deploy": "DEPLOYMENT_BRANCH=gh-pages docusaurus deploy",
     "test": "node --test --test-reporter=@voxpelli/node-test-pretty-reporter",
-    "crowdin-upload": "crowdin upload sources --auto-update -b main",
-    "crowdin-download": "crowdin download -b main",
+    "crowdin-upload": "crowdin upload sources --auto-update",
+    "crowdin-download": "crowdin download",
+    "write-translations": "docusaurus write-translations",
     "fetch-sponsors": "node scripts/fetch-sponsors.js && prettier --write src/data/sponsors.js"
   },
   "dependencies": {
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@babel/types": "^7.28.5",
+    "@crowdin/cli": "^4.6.2",
     "@docusaurus/tsconfig": "^3.9.2",
     "@ffprobe-installer/ffprobe": "^2.1.2",
     "@types/node": "^25.2.3",

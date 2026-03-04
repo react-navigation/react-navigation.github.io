@@ -20,6 +20,10 @@ const config: Config = {
   url: process.env.URL || 'https://reactnavigation.org',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en'],
+  },
   organizationName: 'react-navigation',
   projectName: 'react-navigation.github.io',
   onBrokenLinks: 'throw',

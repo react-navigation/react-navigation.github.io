@@ -1,0 +1,14 @@
+project_id_env: CROWDIN_PROJECT_ID
+api_token_env: CROWDIN_DOCUSAURUS_API_KEY
+preserve_hierarchy: true
+base_path: '.'
+
+files:
+  - source: /docs/**/*.md
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/%original_path%/%original_file_name%
+
+  - source: /versioned_docs/**/*.md
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/%original_path%/%original_file_name%
+
+  - source: /i18n/en/**/*
+    translation: /i18n/%two_letters_code%/%original_path%/%original_file_name%
