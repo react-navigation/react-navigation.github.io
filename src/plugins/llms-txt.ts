@@ -138,8 +138,9 @@ function processSidebar(
         // Latest version uses /docs/id, others use /docs/version/id
         const urlPath = isLatest ? `/docs/${id}` : `/docs/${version}/${id}`;
         const fullUrl = `${baseUrl}${urlPath}`;
+        const mdUrl = `${fullUrl}.md`;
 
-        llmsContent += `- [${title}](${fullUrl})${
+        llmsContent += `- [${title}](${mdUrl})${
           description ? `: ${description}` : ''
         }\n`;
 
@@ -244,11 +245,11 @@ async function generateForVersion(
   );
 
   // 3. Generate Full Content (llms-full.txt)
-  let llmsFullTxt = `# React Navigation ${version} Documentation\n\n`;
+  let llmsFullTxt = '';
 
   processedDocs.forEach((doc) => {
-    llmsFullTxt += `## ${doc.title}\n\n`;
-    llmsFullTxt += `Source: ${doc.url}\n\n`;
+    llmsFullTxt += `# ${doc.title}\n\n`;
+    llmsFullTxt += `Source: ${doc.url}.md\n\n`;
     llmsFullTxt += `${doc.processedContent}\n\n---\n\n`;
   });
 
