@@ -232,7 +232,7 @@ export default function rehypeStaticToDynamic() {
  * 5. Post-process: Inject comments into formatted code
  *    - Comments are injected as strings since Prettier may move/remove AST comments
  */
-async function convertStaticToDynamic(code: string): Promise<string> {
+export async function convertStaticToDynamic(code: string): Promise<string> {
   // Parse the code into AST using recast with comment attachment enabled
   const ast = recast.parse(code, {
     parser: {

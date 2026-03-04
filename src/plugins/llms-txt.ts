@@ -1,15 +1,13 @@
+import type { LoadContext, Plugin } from '@docusaurus/types';
 import fs from 'node:fs';
 import path from 'node:path';
 import util from 'node:util';
-import type { LoadContext, Plugin } from '@docusaurus/types';
 import versionsData from '../../versions.json';
-
-type FrontMatterData = Record<string, string>;
-
-type ParsedFrontMatter = {
-  data: FrontMatterData;
-  content: string;
-};
+import {
+  buildMarkdownDocument,
+  parseFrontmatter,
+  processMarkdown,
+} from './process-markdown.ts';
 
 type SidebarCategory = {
   type: 'category';
@@ -20,6 +18,7 @@ type SidebarCategory = {
 type SidebarItem = string | SidebarCategory | Record<string, unknown>;
 
 type FullDoc = {
+  id: string;
   title: string;
   url: string;
   content: string;
@@ -100,49 +99,6 @@ function normalizeRootItems(value: unknown): SidebarItem[] {
 }
 
 /**
- * Parses frontmatter from markdown content.
- * Extracts metadata like title and description, and returns the cleaned content.
- *
- * @param {string} fileContent - Raw markdown file content.
- * @returns {{data: Object, content: string}} - Parsed data and stripped content.
- */
-function parseFrontMatter(fileContent: string): ParsedFrontMatter {
-  const frontMatterRegex = /^---\n([\s\S]+?)\n---\n/;
-  const match = fileContent.match(frontMatterRegex);
-
-  if (!match) {
-    return { data: {}, content: fileContent };
-  }
-
-  const frontMatterBlock = match[1];
-  const content = fileContent.replace(frontMatterRegex, '');
-
-  const data: FrontMatterData = {};
-
-  frontMatterBlock.split('\n').forEach((line) => {
-    const parts = line.split(':');
-
-    if (parts.length >= 2) {
-      const key = parts[0].trim();
-
-      let value = parts.slice(1).join(':').trim();
-
-      // Remove surrounding quotes if present
-      if (
-        (value.startsWith("'") && value.endsWith("'")) ||
-        (value.startsWith('"') && value.endsWith('"'))
-      ) {
-        value = value.slice(1, -1);
-      }
-
-      data[key] = value;
-    }
-  });
-
-  return { data, content };
-}
-
-/**
  * Recursively processes sidebar items to generate the LLM index and collect full docs.
  * Handles different sidebar structures (flat arrays, categories).
  *
@@ -173,7 +129,7 @@ function processSidebar(
 
       if (fs.existsSync(filePath)) {
         const fileContent = fs.readFileSync(filePath, 'utf8');
-        const { data, content } = parseFrontMatter(fileContent);
+        const { data, content } = parseFrontmatter(fileContent);
 
         const title = data.title || id;
         const description = data.description || '';
@@ -188,6 +144,7 @@ function processSidebar(
         }\n`;
 
         fullDocsList.push({
+          id,
           title,
           url: fullUrl,
           content,
@@ -219,18 +176,18 @@ function processSidebar(
 }
 
 /**
- * Generates the llms.txt and llms-full.txt files for a specific version.
+ * Generates the llms.txt, llms-full.txt, and individual .md files for a specific version.
  *
  * @returns {Array<string>} - List of generated filenames.
  */
-function generateForVersion(
+async function generateForVersion(
   siteDir: string,
   outDir: string,
   version: string,
   outputPrefix: string,
   isLatest: boolean,
   baseUrl: string
-): string[] {
+): Promise<string[]> {
   const docsPath = path.join(siteDir, 'versioned_docs', `version-${version}`);
   const sidebarPath = path.join(
     siteDir,
@@ -275,31 +232,106 @@ function generateForVersion(
 
   fs.writeFileSync(path.join(outDir, summaryFilename), llmsTxt);
 
-  // 2. Generate Full Content (llms-full.txt)
+  // The llms.txt URL for this version (used as sitemap link in .md files)
+  const llmsTxtUrl = `${baseUrl}/${summaryFilename}`;
+
+  // 2. Process all docs in parallel
+  const processedDocs = await Promise.all(
+    docs.map(async (doc) => {
+      const { content: processedContent } = await processMarkdown(doc.content);
+      return { ...doc, processedContent };
+    })
+  );
+
+  // 3. Generate Full Content (llms-full.txt)
   let llmsFullTxt = `# React Navigation ${version} Documentation\n\n`;
 
-  docs.forEach((doc) => {
+  processedDocs.forEach((doc) => {
     llmsFullTxt += `## ${doc.title}\n\n`;
     llmsFullTxt += `Source: ${doc.url}\n\n`;
-    llmsFullTxt += `${doc.content.trim()}\n\n---\n\n`;
+    llmsFullTxt += `${doc.processedContent}\n\n---\n\n`;
   });
 
-  // Determine full filename (e.g., llms-v8.x -> llms-full-v8.x.txt)
-  let fullFilename;
-
-  if (outputPrefix === 'llms') {
-    fullFilename = 'llms-full.txt';
-  } else {
-    if (outputPrefix.includes('llms-')) {
-      fullFilename = outputPrefix.replace('llms-', 'llms-full-') + '.txt';
-    } else {
-      fullFilename = outputPrefix + '-full.txt';
-    }
-  }
+  const fullFilename = isLatest ? 'llms-full.txt' : `llms-full-${version}.txt`;
 
   fs.writeFileSync(path.join(outDir, fullFilename), llmsFullTxt);
 
-  return [summaryFilename, fullFilename];
+  // 4. Generate individual .md files for each doc
+  const mdFiles = processedDocs.map((doc) => {
+    const urlPath = isLatest ? `/docs/${doc.id}` : `/docs/${version}/${doc.id}`;
+
+    const mdFilePath = path.join(outDir, `${urlPath}.md`);
+    const mdDir = path.dirname(mdFilePath);
+
+    fs.mkdirSync(mdDir, { recursive: true });
+
+    const mdContent = buildMarkdownDocument(doc.processedContent, {
+      title: doc.title,
+      version,
+      sitemapUrl: llmsTxtUrl,
+      sitemapLabel: summaryFilename,
+    });
+
+    fs.writeFileSync(mdFilePath, mdContent + '\n');
+
+    return `${urlPath}.md`;
+  });
+
+  return [summaryFilename, fullFilename, ...mdFiles];
+}
+
+async function serveMarkdown(
+  siteDir: string,
+  baseUrl: string,
+  latestVersion: string,
+  reqPath: string
+): Promise<string | null> {
+  // Parse URL: /docs/[version/]<id>.md
+  const match = reqPath.match(/^\/docs\/(.+)\.md$/);
+
+  if (!match) {
+    return null;
+  }
+
+  const pathPart = match[1];
+
+  // Check if first segment is a known version
+  let version = latestVersion;
+  let docId = pathPart;
+
+  const firstSlash = pathPart.indexOf('/');
+
+  if (firstSlash !== -1) {
+    const possibleVersion = pathPart.substring(0, firstSlash);
+
+    if (versions.includes(possibleVersion)) {
+      version = possibleVersion;
+      docId = pathPart.substring(firstSlash + 1);
+    }
+  }
+
+  const docsPath = path.join(siteDir, 'versioned_docs', `version-${version}`);
+  const filePath = path.join(docsPath, `${docId}.md`);
+
+  if (!fs.existsSync(filePath)) {
+    return null;
+  }
+
+  const fileContent = fs.readFileSync(filePath, 'utf8');
+  const { frontmatter, content } = await processMarkdown(fileContent);
+
+  const isLatest = version === latestVersion;
+  const summaryFilename = isLatest ? 'llms.txt' : `llms-${version}.txt`;
+  const llmsTxtUrl = `${baseUrl}/${summaryFilename}`;
+
+  return (
+    buildMarkdownDocument(content, {
+      title: frontmatter.title || docId,
+      version,
+      sitemapUrl: llmsTxtUrl,
+      sitemapLabel: summaryFilename,
+    }) + '\n'
+  );
 }
 
 export default function llmsTxtPlugin(
@@ -308,6 +340,55 @@ export default function llmsTxtPlugin(
 ): Plugin {
   return {
     name: 'llms.txt',
+
+    configureWebpack() {
+      const { latestVersion } = options;
+
+      if (!latestVersion) {
+        return {};
+      }
+
+      return {
+        devServer: {
+          setupMiddlewares(middlewares: unknown[]) {
+            middlewares.unshift({
+              name: 'llms-txt',
+              middleware: (
+                req: { originalUrl: string },
+                res: {
+                  type: (t: string) => void;
+                  status: (s: number) => typeof res;
+                  send: (b: string) => void;
+                  end: () => void;
+                },
+                next: () => void
+              ) => {
+                serveMarkdown(
+                  context.siteDir,
+                  context.siteConfig.url,
+                  latestVersion,
+                  req.originalUrl
+                )
+                  .then((content) => {
+                    if (content) {
+                      res.type('text/markdown');
+                      res.send(content);
+                    } else {
+                      next();
+                    }
+                  })
+                  .catch(() => {
+                    res.status(500).end();
+                  });
+              },
+            });
+
+            return middlewares;
+          },
+        },
+      } as Record<string, unknown>;
+    },
+
     async postBuild({ siteDir, outDir }) {
       const { latestVersion } = options;
       const baseUrl = context.siteConfig.url;
@@ -316,14 +397,14 @@ export default function llmsTxtPlugin(
         throw new Error('[llms.txt] "latestVersion" option is required.');
       }
 
-      const generatedFiles = [];
+      const generatedFiles: string[] = [];
 
-      versions.forEach((version) => {
+      for (const version of versions) {
         const isLatest = version === latestVersion;
         // Prefix: 'llms' for latest, 'llms-vX.x' for others
         const outputPrefix = isLatest ? 'llms' : `llms-${version}`;
 
-        const files = generateForVersion(
+        const files = await generateForVersion(
           siteDir,
           outDir,
           version,
@@ -333,7 +414,7 @@ export default function llmsTxtPlugin(
         );
 
         generatedFiles.push(...files);
-      });
+      }
 
       console.log(
         `${util.styleText(['magenta', 'bold'], '[llms.txt]')} Wrote ${generatedFiles.length} files in build output.`
