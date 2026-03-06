@@ -507,7 +507,7 @@ createStackNavigator({
 </TabItem>
 </Tabs>
 
-See [Stack Navigator](stack-navigator.md#inactivebehavior), [Native Stack Navigator](native-stack-navigator.md#inactivebehavior), [Bottom Tab Navigator](bottom-tab-navigator.md#inactivebehavior), [Drawer Navigator](drawer-navigator.md#inactivebehavior), and [Material Top Tab Navigator](material-top-tab-navigator.md#inactivebehavior) for more details.
+See [Inactive screens](navigation-lifecycle.md#inactive-screens) for more details.
 
 #### The `onChangeText` callback has been renamed to `onChange` for `headerSearchBarOptions`
 

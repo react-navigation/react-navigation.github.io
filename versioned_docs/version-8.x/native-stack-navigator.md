@@ -106,13 +106,9 @@ It supports the following values:
 
 Defaults to `pause`.
 
-If you [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused. This makes sure that effects are run to initialize the screen.
+If you [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused.
 
-:::info
-
-React Navigation determines whether a screen is inactive based on various factors such as gestures, animations, and other interactions after it becomes unfocused.
-
-:::
+See [Inactive screens](navigation-lifecycle.md#inactive-screens) for more details.
 
 #### `title`
 

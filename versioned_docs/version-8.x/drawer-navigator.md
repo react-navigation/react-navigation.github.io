@@ -274,7 +274,9 @@ It supports the following values:
 
 Defaults to `pause`.
 
-If you set [`lazy: false`](#lazy) or [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused. This makes sure that effects are run to initialize the screen.
+If you set [`lazy: false`](#lazy) or [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused.
+
+See [Inactive screens](navigation-lifecycle.md#inactive-screens) for more details.
 
 #### `lazy`
 

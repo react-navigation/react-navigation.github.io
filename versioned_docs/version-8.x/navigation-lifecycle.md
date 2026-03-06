@@ -165,7 +165,7 @@ export default function App() {
 
 We start on the `HomeScreen` and navigate to `DetailsScreen`. Then we use the tab bar to switch to the `SettingsScreen` and navigate to `ProfileScreen`. After this sequence of operations is done, all 4 of the screens are mounted! If you use the tab bar to switch back to the `HomeStack`, you'll notice you'll be presented with the `DetailsScreen` - the navigation state of the `HomeStack` has been preserved!
 
-## React Navigation lifecycle events
+## Lifecycle events
 
 Now that we understand how React lifecycle methods work in React Navigation, let's answer an important question: "How do we find out that a user is leaving (blur) it or coming back to it (focus)?"
 
@@ -331,9 +331,54 @@ To render different things based on whether the screen is focused, we can use th
 
 To know the focus state inside of an event listener, we can use the [`navigation.isFocused()`](navigation-object.md#isfocused) method. Note that using this method doesn't trigger a re-render like the `useIsFocused` hook does, so it is not suitable for rendering different things based on focus state.
 
+## Inactive screens
+
+Many navigators also have an `inactiveBehavior` option that lets you "pause" screens when they are inactive:
+
+```js static2dynamic
+const MyTabs = createBottomTabNavigator({
+  screenOptions: {
+    // highlight-next-line
+    inactiveBehavior: 'pause',
+  },
+  screens: {
+    Home: createBottomTabScreen({
+      screen: HomeScreen,
+    }),
+    Profile: createBottomTabScreen({
+      screen: ProfileScreen,
+    }),
+  },
+});
+```
+
+Here, "inactive" and "unfocused" have different meanings:
+
+- A screen becomes "unfocused" as soon as you navigate away from it
+- A screen becomes "inactive" based on various factors, such as gestures, animations, and other interactions after it becomes unfocused - without guarantees on timing
+- [Preloaded](navigation-actions.md#preload) screens don't become inactive until after the first time they become focused, so their effects can run to initialize the screen
+- Focus and blur are part of navigation lifecycle, but "inactive" is an optimization mechanism
+
+When a screen is paused, the following things happen:
+
+- Effects are cleaned up (similar to when a component unmounts)
+- Content stays rendered and the state is preserved
+- Content can still re-render at a lower priority
+
+This means event listeners, subscriptions, timers etc. get cleaned up. This reduces unnecessary re-renders and resource usage for paused screens.
+
+Side effects from events can still run. For example, if you have a audio player that emits progress updates, audio will keep playing and progress updates will keep coming in even when the screen is paused. To avoid this, you need to use [lifecycle events](#lifecycle-events) to pause the audio when the screen becomes unfocused.
+
+:::info
+
+Pausing screens is not a replacement for lifecycle events. Treat it as an optimization mechanism only. If you need guarantees on when things get cleaned up, use lifecycle events such as [`blur`](navigation-events.md#blur) or [`useFocusEffect`](use-focus-effect.md).
+
+:::
+
 ## Summary
 
 - Screens stay mounted when navigating away from them
 - The [`useFocusEffect`](use-focus-effect.md) hook is like [`useEffect`](https://react.dev/reference/react/useEffect) but tied to the navigation lifecycle instead of the component lifecycle
 - The [`useIsFocused`](use-is-focused.md) hook and [`navigation.isFocused()`](navigation-object.md#isfocused) method can be used to determine if a screen is currently focused
 - The [`focus`](navigation-events.md#focus) and [`blur`](navigation-events.md#blur) events can be used to know when a screen gains or loses focus
+- The `inactiveBehavior` option can be used to "pause" screens when they are inactive, which cleans up effects but keeps the content rendered and state preserved
