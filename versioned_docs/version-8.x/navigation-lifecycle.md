@@ -359,7 +359,7 @@ Here, "inactive" and "unfocused" have different meanings:
 - [Preloaded](navigation-actions.md#preload) screens don't become inactive until after the first time they become focused, so their effects can run to initialize the screen
 - Focus and blur are part of navigation lifecycle, but "inactive" is an optimization mechanism
 
-When a screen is paused, the following things happen:
+Paused screens internally use [`<Activity mode="hidden">`](https://react.dev/reference/react/Activity). When a screen is paused, the following things happen:
 
 - Effects are cleaned up (similar to when a component unmounts)
 - Content stays rendered and the state is preserved
@@ -374,6 +374,30 @@ Side effects from events can still run. For example, if you have a audio player 
 Pausing screens is not a replacement for lifecycle events. Treat it as an optimization mechanism only. If you need guarantees on when things get cleaned up, use lifecycle events such as [`blur`](navigation-events.md#blur) or [`useFocusEffect`](use-focus-effect.md).
 
 :::
+
+React doesn't provide a way to distinguish paused screens from unmounted screens, which presents some caveats:
+
+- APIs such as [`getRootState`](navigation-container.md#getrootstate) won't include state of navigators nested inside paused screens
+- When using [state persistence](state-persistence.md), state of navigators nested inside paused screens won't be persisted
+
+If you don't want this behavior, you can set `inactiveBehavior` to `none` to avoid pausing them:
+
+```js static2dynamic
+const MyTabs = createBottomTabNavigator({
+  screenOptions: {
+    // highlight-next-line
+    inactiveBehavior: 'none',
+  },
+  screens: {
+    Home: createBottomTabScreen({
+      screen: HomeScreen,
+    }),
+    Profile: createBottomTabScreen({
+      screen: ProfileScreen,
+    }),
+  },
+});
+```
 
 ## Summary
 
