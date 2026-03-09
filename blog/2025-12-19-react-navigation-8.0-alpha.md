@@ -271,7 +271,7 @@ function MyStack() {
 
 <video playsInline autoPlay muted loop style={{ width: '500px', aspectRatio: 1 / 1 }}>
 
-  <source src="/assets/blog/8.x/deep-link-auth.mp4" />
+  <source src="/assets/deep-linking/deep-link-auth.mp4" />
 </video>
 
 The navigator will remember the last unhandled action (such as an unhandled deep link) if `routeNamesChangeBehavior: 'lastUnhandled'` is specified. When the list of route names changes (e.g. new screens become available), it will try to handle the action again. See [`routeNamesChangeBehavior` docs](/docs/8.x/navigator#route-names-change-behavior) for more details.
