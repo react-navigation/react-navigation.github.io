@@ -102,11 +102,14 @@ This controls what should happen when screens become inactive.
 It supports the following values:
 
 - `pause`: Effects are cleaned up - e.g. timers are cleared, subscriptions are removed, etc. This avoids unnecessary renders when the screen is inactive.
+- `unmount`: The screen is unmounted when it becomes inactive.
 - `none`: Screen renders normally.
 
 Defaults to `pause`.
 
 If you [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused.
+
+If a screen contains a nested navigator, it won't be unmounted, but paused instead.
 
 See [Inactive screens](navigation-lifecycle.md#inactive-screens) for more details.
 

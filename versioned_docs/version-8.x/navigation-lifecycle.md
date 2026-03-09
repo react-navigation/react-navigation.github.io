@@ -333,7 +333,7 @@ To know the focus state inside of an event listener, we can use the [`navigation
 
 ## Inactive screens
 
-Many navigators also have an `inactiveBehavior` option that lets you "pause" screens when they are inactive:
+Many navigators also have an `inactiveBehavior` option that lets you "pause" or "unmount" screens when they are inactive:
 
 ```js static2dynamic
 const MyTabs = createBottomTabNavigator({
@@ -358,6 +358,8 @@ Here, "inactive" and "unfocused" have different meanings:
 - A screen becomes "inactive" based on various factors, such as gestures, animations, and other interactions after it becomes unfocused - without guarantees on timing
 - [Preloaded](navigation-actions.md#preload) screens don't become inactive until after the first time they become focused, so their effects can run to initialize the screen
 - Focus and blur are part of navigation lifecycle, but "inactive" is an optimization mechanism
+
+### Paused screens
 
 Paused screens internally use [`<Activity mode="hidden">`](https://react.dev/reference/react/Activity). When a screen is paused, the following things happen:
 
@@ -398,6 +400,39 @@ const MyTabs = createBottomTabNavigator({
   },
 });
 ```
+
+### Unmounted screens
+
+When `inactiveBehavior` is set to `unmount`, screens will be unmounted when they become inactive. This means their content will be unmounted and their local state will be lost.
+
+This is primarily useful for stack navigators where the list of screens can grow. Unmounting inactive screens can help free up resources.
+
+To unmount inactive screens, you can set `inactiveBehavior` to `unmount`:
+
+```js static2dynamic
+const MyStack = createNativeStackNavigator({
+  screenOptions: {
+    // highlight-next-line
+    inactiveBehavior: 'unmount',
+  },
+  screens: {
+    Home: createNativeStackScreen({
+      screen: HomeScreen,
+    }),
+    Details: createNativeStackScreen({
+      screen: DetailsScreen,
+    }),
+  },
+});
+```
+
+Also consider reworking your navigation flow to avoid growing the stack indefinitely if possible - e.g. by using `pop: true` option in [`navigate`](navigation-actions.md#navigate) or using [`replace`](stack-actions.md#replace) when relevant.
+
+:::info
+
+Screens containing nested navigators won't be unmounted even when `inactiveBehavior` is set to `unmount`, and will be paused instead. This avoids losing nested navigation state.
+
+:::
 
 ## Summary
 
