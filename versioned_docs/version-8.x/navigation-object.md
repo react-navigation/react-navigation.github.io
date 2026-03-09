@@ -1352,6 +1352,10 @@ navigation.pushParams({ filter: 'new' });
 
 The action works in all navigators, including stack, tab, and drawer navigators.
 
+<video playsInline autoPlay muted loop data-landscape style={{ '--ifm-global-radius': '10px' }}>
+  <source src="/assets/actions/push-params.mp4" />
+</video>
+
 ### `setOptions`
 
 The `setOptions` method lets us set screen options from within the component. This is useful if we need to use the component's props, state or context to configure our screen.

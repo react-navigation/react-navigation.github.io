@@ -361,6 +361,15 @@ import {
 } from '@react-navigation/native';
 ```
 
+<div className="image-grid" style={{ '--img-width': '360px' }}>
+
+![Material light theme screenshot 1](/assets/themes/material-light-1.png)
+![Material light theme screenshot 2](/assets/themes/material-light-2.png)
+![Material dark theme screenshot 1](/assets/themes/material-dark-1.png)
+![Material dark theme screenshot 2](/assets/themes/material-dark-2.png)
+
+</div>
+
 ## Using platform colors
 
 Theme colors support `ColorValue` type, which means you can use `PlatformColor`, `DynamicColorIOS` on native, and CSS custom properties on Web for more flexibility.

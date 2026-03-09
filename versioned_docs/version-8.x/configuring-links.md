@@ -695,7 +695,7 @@ const config = {
 
 Using Standard Schema has a few advantages over using functions for parsing:
 
-- **Support for validation and fallback**: A parse function only parses the param. A schema can also validate the param. If the validation fails, the URL won't match the current screen and React Navigation will try the next matching config. This lets you use schemas to narrow down which screen handles a URL. Schemas are also called with `undefined` when a query param is missing, which lets them provide a fallback, while parse functions are not called when a query param is missing.
+- **Support for validation and fallback**: A parse function only parses the param. A schema can also validate the param. If the validation fails, the URL won't match the current screen and React Navigation will try the next matching config. Schemas are also called with `undefined` when a query param is missing, which lets them provide a fallback, while parse functions are not called when a query param is missing.
 - **Better Query Param handling with TypeScript**: When using [Static Configuration](static-configuration.md), query params (e.g. `?foo=bar`) are always inferred as optional with `parse` functions. With schemas, you can specify whether a query param is required (e.g. `z.string()`) or optional (e.g. `z.string().optional()`). See [Parse function vs Standard Schema](typescript.md#parse-function-vs-standard-schema) for more details.
 
 ## Marking params as optional

@@ -1088,6 +1088,23 @@ code {
   border-width: 1px;
 }
 
+.image-grid > p {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(calc(var(--img-width, 50%) * 0.75), 1fr)
+  );
+  grid-auto-rows: auto;
+  gap: var(--ifm-spacing-horizontal);
+  margin: var(--ifm-leading) 0;
+
+  img {
+    height: auto;
+    border-radius: var(--ifm-global-radius);
+    margin: 0;
+  }
+}
+
 .feature-grid ul {
   list-style: none;
   padding-left: 0;

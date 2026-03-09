@@ -1,7 +1,7 @@
 ---
 title: React Navigation 8.0 Alpha
 authors: satya
-tags: [announcement]
+tags: [release, announcement]
 ---
 
 import Tabs from '@theme/Tabs';
@@ -194,7 +194,7 @@ The new `pushParams` API makes this possible. You can now push an entry to the h
 
 <video playsInline autoPlay muted loop data-landscape style={{ '--ifm-global-radius': '10px' }}>
 
-  <source src="/assets/blog/8.x/push-params.mp4" />
+  <source src="/assets/actions/push-params.mp4" />
 </video>
 
 This is especially important on the Web, where users expect that changing certain UI states should create a new history entry, so that they can use the browser back and forward buttons to navigate through these states.

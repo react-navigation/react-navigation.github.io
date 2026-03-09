@@ -68,6 +68,10 @@ function MyComponent() {
 }
 ```
 
+<video playsInline autoPlay muted loop style={{ width: '400px', aspectRatio: 4 / 5 }}>
+  <source src="/assets/icons/sf-symbol.mp4" />
+</video>
+
 The component accepts the following props:
 
 - `name`
@@ -232,6 +236,10 @@ function MyComponent() {
   return <MaterialSymbol name="star" size={24} />;
 }
 ```
+
+<video playsInline autoPlay muted loop style={{ width: '400px', aspectRatio: 4 / 5 }}>
+  <source src="/assets/icons/material-symbol.mp4" />
+</video>
 
 The component accepts the following props:
 
