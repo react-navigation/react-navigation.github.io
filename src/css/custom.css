@@ -862,9 +862,9 @@ article {
   & .video-player {
     vertical-align: top;
     margin: var(--ifm-leading) 0;
-    box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.05),
-      var(--ifm-global-shadow-lw);
+    outline: 1px solid rgba(0, 0, 0, 0.08);
+    outline-offset: -1px;
+    box-shadow: var(--ifm-global-shadow-lw);
   }
 
   & img {
@@ -1120,9 +1120,9 @@ code {
     position: relative;
     border-radius: var(--ifm-global-radius);
     overflow: hidden;
-    box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.05),
-      var(--ifm-global-shadow-lw);
+    outline: 1px solid rgba(0, 0, 0, 0.08);
+    outline-offset: -1px;
+    box-shadow: var(--ifm-global-shadow-lw);
     transition: var(--ifm-transition-fast) var(--ifm-transition-timing-default);
 
     &:hover {
