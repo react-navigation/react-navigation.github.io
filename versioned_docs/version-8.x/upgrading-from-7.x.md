@@ -469,6 +469,7 @@ These were a source of significant maintenance burden. So we're working on alter
 Now they have been replaced with a new `inactiveBehavior` screen option available in all navigators. It supports the following values:
 
 - `pause`: Effects are cleaned up - e.g. timers are cleared, subscriptions are removed, etc. This avoids unnecessary renders when the screen is inactive.
+- `unmount`: The screen is unmounted when inactive and remounted when it becomes active again. Only available in [Stack](stack-navigator.md) and [Native Stack](native-stack-navigator.md).
 - `none`: Screen renders normally.
 
 It defaults to `pause`.
@@ -625,6 +626,12 @@ Previously, the Drawer Navigator accepted an `overlayColor` prop to customize th
 See [Drawer Navigator](drawer-navigator.md) for more details.
 
 ### Miscellaneous
+
+#### Unfocused screens on Web now use `inert` attribute
+
+Previously, unfocused screens on the Web were hidden from assistive technologies using `aria-hidden`, but they could still receive focus and keyboard interaction unless hidden with `display: none`. While most navigators used `display: none` on the Web to hide unfocused screens, it wasn't possible for some navigators such as [Material Top Tabs](material-top-tab-navigator.md) because it won't play well with animations and swipe gesture, or when using `presentation: 'transparentModal'` in [Stack Navigator](stack-navigator.md#presentation) as the screen needs to be visible to show the content underneath.
+
+Now all navigators use the [`inert`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/inert) attribute on the Web to make unfocused screens non-interactive and hidden from assistive technologies without affecting their visibility.
 
 #### Various deprecated APIs have been removed
 
@@ -1119,6 +1126,25 @@ The `@react-navigation/native` package now exports 2 new built-in themes based o
 These themes use platform colors to provide dynamic colors that adapt to the user's wallpaper and theme preferences.
 
 See [Themes](themes.md#built-in-themes) for more details.
+
+### `UNSTABLE_CornerInset` component for iPadOS windowed mode
+
+A new `UNSTABLE_CornerInset` component has been added to handle the traffic light buttons (close, minimize, maximize) overlap in iPadOS windowed mode. It renders a spacer with the width or height of the traffic light area based on the content direction and the specified edge:
+
+```js
+import { UNSTABLE_CornerInset } from '@react-navigation/native';
+
+function MyHeader() {
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <UNSTABLE_CornerInset direction="horizontal" edge="left" />
+      {/* rest of your content */}
+    </View>
+  );
+}
+```
+
+It renders a plain `View` on non-iPadOS platforms.
 
 ### `useLogger` devtools now shows more information
 
