@@ -186,20 +186,6 @@ const RootStack = createNativeStackNavigator({
 
 The `linking` object supports the same configuration options described in [Configuring links](configuring-links.md) such as `parse`, `stringify` and `exact`.
 
-To make deep links work on native apps, you also need to [configure your app](deep-linking.md) and pass `prefixes` to the navigation component returned by [`createStaticNavigation`](static-configuration.md#createstaticnavigation):
-
-```js
-const Navigation = createStaticNavigation(RootStack);
-
-const linking = {
-  prefixes: ['https://example.com', 'example://'],
-};
-
-function App() {
-  return <Navigation linking={linking} />;
-}
-```
-
 #### `if`
 
 Callback to determine whether the screen should be rendered or not. It doesn't receive any arguments. This can be useful for conditional rendering of screens, e.g. - if you want to render a different screen for logged in users.
