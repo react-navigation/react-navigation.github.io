@@ -865,6 +865,7 @@ article {
     outline: 1px solid rgba(0, 0, 0, 0.08);
     outline-offset: -1px;
     box-shadow: var(--ifm-global-shadow-lw);
+    border-radius: var(--ifm-global-radius);
   }
 
   & img {
