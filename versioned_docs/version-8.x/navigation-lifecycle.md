@@ -115,17 +115,6 @@ function DetailsScreen() {
 }
 
 // codeblock-focus-start
-const SettingsStack = createNativeStackNavigator({
-  screens: {
-    Settings: createNativeStackScreen({
-      screen: SettingsScreen,
-    }),
-    Profile: createNativeStackScreen({
-      screen: ProfileScreen,
-    }),
-  },
-});
-
 const HomeStack = createNativeStackNavigator({
   screens: {
     Home: createNativeStackScreen({
@@ -137,16 +126,29 @@ const HomeStack = createNativeStackNavigator({
   },
 });
 
+const SettingsStack = createNativeStackNavigator({
+  screens: {
+    Settings: createNativeStackScreen({
+      screen: SettingsScreen,
+    }),
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+    }),
+  },
+});
+
 const MyTabs = createBottomTabNavigator({
   screenOptions: {
     headerShown: false,
   },
   screens: {
-    First: createBottomTabScreen({
-      screen: SettingsStack,
-    }),
-    Second: createBottomTabScreen({
+    HomeStack: createBottomTabScreen({
       screen: HomeStack,
+      options: { tabBarLabel: 'Home' },
+    }),
+    SettingsStack: createBottomTabScreen({
+      screen: SettingsStack,
+      options: { tabBarLabel: 'Settings' },
     }),
   },
 });
@@ -160,7 +162,7 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/lifecycle.mp4" />
+  <source src="/assets/fundamentals/lifecycle.mp4" />
 </video>
 
 We start on the `HomeScreen` and navigate to `DetailsScreen`. Then we use the tab bar to switch to the `SettingsScreen` and navigate to `ProfileScreen`. After this sequence of operations is done, all 4 of the screens are mounted! If you use the tab bar to switch back to the `HomeStack`, you'll notice you'll be presented with the `DetailsScreen` - the navigation state of the `HomeStack` has been preserved!
@@ -324,7 +326,7 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/lifecycle-focus.mp4" />
+  <source src="/assets/fundamentals/focus-effect.mp4" />
 </video>
 
 To render different things based on whether the screen is focused, we can use the [`useIsFocused`](use-is-focused.md) hook which returns a boolean indicating whether the screen is focused.

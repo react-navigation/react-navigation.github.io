@@ -870,6 +870,7 @@ article {
 
   & img {
     display: inline-block;
+    width: 300px;
     max-width: 100%;
   }
 
@@ -1100,6 +1101,7 @@ code {
   margin: var(--ifm-leading) 0;
 
   img {
+    width: auto;
     height: auto;
     border-radius: var(--ifm-global-radius);
     margin: 0;

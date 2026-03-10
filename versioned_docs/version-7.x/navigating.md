@@ -145,7 +145,7 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/simple-details.mp4" />
+  <source src="/assets/fundamentals/navigate.mp4" />
 </video>
 
 The [`useNavigation`](use-navigation.md) hook returns the navigation object. We can call `navigate` with the route name we want to go to.
@@ -273,7 +273,7 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/stack-push.mp4" />
+  <source src="/assets/fundamentals/stack-push.mp4" />
 </video>
 
 Each `push` call adds a new route to the stack, while `navigate` only pushes if you're not already on that route.
@@ -341,7 +341,7 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/back-home.mp4" />
+  <source src="/assets/fundamentals/go-back.mp4" />
 </video>
 
 :::note
@@ -416,7 +416,7 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/stack/pop-to-top.mp4" />
+  <source src="/assets/fundamentals/pop-to-top.mp4" />
 </video>
 
 ## Summary

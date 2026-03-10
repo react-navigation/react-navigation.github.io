@@ -434,23 +434,17 @@ function HomeScreen() {
 }
 
 function FeedScreen() {
-  const navigation = useNavigation();
-
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
 
 function MessagesScreen() {
-  const navigation = useNavigation();
-
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Messages Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -511,23 +505,17 @@ function HomeScreen() {
 }
 
 function FeedScreen() {
-  const navigation = useNavigation();
-
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
 
 function MessagesScreen() {
-  const navigation = useNavigation();
-
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Messages Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -627,24 +615,18 @@ function HomeScreen() {
 }
 
 function FeedScreen() {
-  const navigation = useNavigation();
-
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
 
 function MessagesScreen({ route }) {
-  const navigation = useNavigation();
-
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Messages Screen</Text>
       <Text>User: {route.params.user}</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -710,24 +692,18 @@ function HomeScreen() {
 }
 
 function FeedScreen() {
-  const navigation = useNavigation();
-
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Feed Screen</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
 
 function MessagesScreen({ route }) {
-  const navigation = useNavigation();
-
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Messages Screen</Text>
       <Text>User: {route.params.user}</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }

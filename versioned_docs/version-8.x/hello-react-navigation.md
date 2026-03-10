@@ -135,7 +135,7 @@ In a typical React Native app, the `NavigationContainer` should be only used onc
 </TabItem>
 </Tabs>
 
-![Basic app using stack navigator](/assets/navigators/stack/basic_stack_nav.png)
+![Basic app using stack navigator](/assets/fundamentals/basic-stack.png)
 
 If you run this code, you will see a screen with an empty navigation bar and a grey content area containing your `HomeScreen` component (shown above). These are the default styles for a stack navigator - we'll learn how to customize them later.
 

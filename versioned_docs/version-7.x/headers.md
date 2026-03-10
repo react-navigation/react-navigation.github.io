@@ -49,7 +49,7 @@ export default function App() {
 }
 ```
 
-![Header title](/assets/headers/header-title.png)
+![Header title](/assets/fundamentals/header-title.png)
 
 ## Using params in the title
 
@@ -229,7 +229,7 @@ export default function App() {
 }
 ```
 
-![Custom header styles](/assets/headers/custom_headers.png)
+![Custom header styles](/assets/fundamentals/header-styles.png)
 
 There are a couple of things to notice here:
 
@@ -352,7 +352,7 @@ export default function App() {
 }
 ```
 
-![Header custom title](/assets/headers/header-custom-title.png)
+![Header custom title](/assets/fundamentals/header-title-custom.png)
 
 :::note
 

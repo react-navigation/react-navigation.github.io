@@ -126,8 +126,6 @@ function DetailsScreen({ route }) {
       >
         Go to Details... again
       </Button>
-      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -152,7 +150,7 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/passing-params.mp4" />
+  <source src="/assets/fundamentals/passing-params.mp4" />
 </video>
 
 ## Initial params
@@ -206,7 +204,10 @@ import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen({ route }) {
@@ -268,7 +269,10 @@ import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 
 // codeblock-focus-start
@@ -342,10 +346,10 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/params-to-parent.mp4" />
+  <source src="/assets/fundamentals/passing-params-back.mp4" />
 </video>
 
-Here, after you press "Done", the home screen's `route.params` will be updated to reflect the post text that you passed in `navigate`.
+Here, after you press "Done", the home screen's `route.params` will be updated to reflect the post text that you passed in `popTo`.
 
 ## Passing params to a nested screen
 
@@ -353,7 +357,7 @@ If you have nested navigators, you need to pass params a bit differently. For ex
 
 ```js name="Passing params to nested screen" snack static2dynamic
 import * as React from 'react';
-import { Text, View, TextInput } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
@@ -369,16 +373,12 @@ import {
 import { Button } from '@react-navigation/elements';
 
 function SettingsScreen({ route }) {
-  const navigation = useNavigation('Settings');
   const { userId } = route.params;
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings Screen</Text>
       <Text>User ID: {JSON.stringify(userId)}</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
     </View>
   );
 }

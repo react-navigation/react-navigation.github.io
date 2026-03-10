@@ -112,17 +112,17 @@ function DetailsScreen() {
 }
 
 // codeblock-focus-start
-const SettingsStack = createNativeStackNavigator({
-  screens: {
-    Settings: SettingsScreen,
-    Profile: ProfileScreen,
-  },
-});
-
 const HomeStack = createNativeStackNavigator({
   screens: {
     Home: HomeScreen,
     Details: DetailsScreen,
+  },
+});
+
+const SettingsStack = createNativeStackNavigator({
+  screens: {
+    Settings: SettingsScreen,
+    Profile: ProfileScreen,
   },
 });
 
@@ -131,8 +131,14 @@ const MyTabs = createBottomTabNavigator({
     headerShown: false,
   },
   screens: {
-    First: SettingsStack,
-    Second: HomeStack,
+    HomeStack: {
+      screen: HomeStack,
+      options: { tabBarLabel: 'Home' },
+    },
+    SettingsStack: {
+      screen: SettingsStack,
+      options: { tabBarLabel: 'Settings' },
+    },
   },
 });
 // codeblock-focus-end
@@ -231,21 +237,12 @@ function DetailsScreen() {
   );
 }
 
-const SettingsStack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
+const SettingsStack = createNativeStackNavigator();
 const MyTabs = createBottomTabNavigator();
 
 // codeblock-focus-start
-function FirstScreen() {
-  return (
-    <SettingsStack.Navigator>
-      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
-      <SettingsStack.Screen name="Profile" component={ProfileScreen} />
-    </SettingsStack.Navigator>
-  );
-}
-
-function SecondScreen() {
+function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name="Home" component={HomeScreen} />
@@ -254,11 +251,20 @@ function SecondScreen() {
   );
 }
 
+function SettingsStackScreen() {
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+      <SettingsStack.Screen name="Profile" component={ProfileScreen} />
+    </SettingsStack.Navigator>
+  );
+}
+
 function Root() {
   return (
     <MyTabs.Navigator screenOptions={{ headerShown: false }}>
-      <MyTabs.Screen name="First" component={FirstScreen} />
-      <MyTabs.Screen name="Second" component={SecondScreen} />
+      <MyTabs.Screen name="HomeStack" component={HomeStackScreen} options={{ tabBarLabel: 'Home' }} />
+      <MyTabs.Screen name="SettingsStack" component={SettingsStackScreen} options={{ tabBarLabel: 'Settings' }} />
     </MyTabs.Navigator>
   );
 }
@@ -277,7 +283,7 @@ export default function App() {
 </Tabs>
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/lifecycle.mp4" />
+  <source src="/assets/fundamentals/lifecycle.mp4" />
 </video>
 
 We start on the `HomeScreen` and navigate to `DetailsScreen`. Then we use the tab bar to switch to the `SettingsScreen` and navigate to `ProfileScreen`. After this sequence of operations is done, all 4 of the screens are mounted! If you use the tab bar to switch back to the `HomeStack`, you'll notice you'll be presented with the `DetailsScreen` - the navigation state of the `HomeStack` has been preserved!
@@ -613,7 +619,7 @@ export default function App() {
 </Tabs>
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/lifecycle-focus.mp4" />
+  <source src="/assets/fundamentals/focus-effect.mp4" />
 </video>
 
 To render different things based on whether the screen is focused, we can use the [`useIsFocused`](use-is-focused.md) hook which returns a boolean indicating whether the screen is focused.
