@@ -340,12 +340,6 @@ See [custom routers](custom-routers.md) for more details on routers.
 
 ### Route names change behavior
 
-:::warning
-
-This API is experimental and may change in a minor release.
-
-:::
-
 When the list of available routes in a navigator changes dynamically, e.g. based on conditional rendering, looping over data from an API etc., the navigator needs to update the [navigation state](navigation-state.md) according to the new list of routes.
 
 By default, it works as follows:
