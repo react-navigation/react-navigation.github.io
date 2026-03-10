@@ -119,9 +119,11 @@ const linking = {
 };
 ```
 
-If not specified, it defaults to `['*']`, which will match any host starting with `http`, `https`, and custom schemes such as `myapp://`. You only need to specify `prefixes` if you're using **Expo Go** or want to restrict the URLs your app handles.
+If not specified, it defaults to `['*']`, which will match any host starting with `http`, `https`, and custom schemes such as `myapp://`.
 
-:::info
+You only need to specify `prefixes` if you're using **Expo Go** or want to restrict the URLs your app handles.
+
+:::note
 
 The `prefixes` option has no effect on Web. The host & domain names will be automatically determined from the Website URL in the browser.
 

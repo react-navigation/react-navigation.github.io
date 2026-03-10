@@ -102,7 +102,11 @@ const linking = {
 };
 ```
 
-Note that the `prefixes` option is not supported on Web. The host & domain names will be automatically determined from the Website URL in the browser. If your app runs only on Web, then you can omit this option from the config.
+:::note
+
+The `prefixes` option has no effect on Web. The host & domain names will be automatically determined from the Website URL in the browser.
+
+:::
 
 ### Multiple subdomains​
 

@@ -369,7 +369,7 @@ export default function App() {
 
 ## Using the current theme in your own components
 
-To gain access to the theme in any component that is rendered inside the navigation container:, you can use the `useTheme` hook. It returns the theme object:
+To gain access to the theme in any component that is rendered inside the navigation container, you can use the `useTheme` hook. It returns the theme object:
 
 ```js name="System themes" snack static2dynamic
 import * as React from 'react';
