@@ -47,6 +47,7 @@
         "navigating-without-navigation-prop",
         "server-rendering",
         "screen-tracking",
+        "static-vs-dynamic",
         "combine-static-with-dynamic",
         "troubleshooting",
         "upgrading-from-6.x"
