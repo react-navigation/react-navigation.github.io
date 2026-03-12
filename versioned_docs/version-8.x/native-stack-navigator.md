@@ -10,7 +10,7 @@ Native Stack Navigator provides a way for your app to transition between screens
 
 - <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/formsheet.mp4" /></video>
 
-  [Form sheet](#presentation)
+  [Form sheet](#form-sheets)
 
 - <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/search-bar.mp4" /></video>
 
@@ -343,308 +343,13 @@ Supported values:
    <source src="/assets/7.x/native-stack/presentation-fullScreenModal.mp4" />
   </video>
 
-- `formSheet`: will use "BottomSheetBehavior" on Android and "UIModalPresentationFormSheet" modal style on iOS.
+- `formSheet`: will use "BottomSheetBehavior" on Android and "UIModalPresentationFormSheet" modal style on iOS. See [Form Sheets](#form-sheets) for a detailed guide.
   <video playsInline autoPlay muted loop>
    <source src="/assets/7.x/native-stack/presentation-formSheet-android.mp4" />
   </video>
   <video playsInline autoPlay muted loop>
    <source src="/assets/7.x/native-stack/presentation-formSheet-ios.mp4" />
   </video>
-
-##### Using Form Sheet
-
-To use Form Sheet for your screen, add `presentation: 'formSheet'` to the `options`.
-
-```js name="Form Sheet" snack static2dynamic
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import {
-  createStaticNavigation,
-  useNavigation,
-} from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
-
-// codeblock-focus-start
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-// codeblock-focus-end
-
-function HomeScreen() {
-  const navigation = useNavigation('Home');
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  const navigation = useNavigation('Profile');
-
-  return (
-    <View style={{ padding: 15 }}>
-      <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Profile Screen</Text>
-      <Text style={{ marginTop: 10 }}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan
-        euismod enim, quis porta ligula egestas sed. Maecenas vitae consequat
-        odio, at dignissim lorem. Ut euismod eros ac mi ultricies, vel pharetra
-        tortor commodo. Interdum et malesuada fames ac ante ipsum primis in
-        faucibus. Nullam at urna in metus iaculis aliquam at sed quam. In
-        ullamcorper, ex ut facilisis commodo, urna diam posuere urna, at
-        condimentum mi orci ac ipsum. In hac habitasse platea dictumst. Donec
-        congue pharetra ipsum in finibus. Nulla blandit finibus turpis, non
-        vulputate elit viverra a. Curabitur in laoreet nisl.
-      </Text>
-      <Button onPress={() => navigation.goBack()} style={{ marginTop: 15 }}>
-        Go back
-      </Button>
-    </View>
-  );
-}
-
-// codeblock-focus-start
-const MyStack = createNativeStackNavigator({
-  screens: {
-    Home: {
-      screen: HomeScreen,
-    },
-    Profile: {
-      screen: ProfileScreen,
-      options: {
-        presentation: 'formSheet',
-        headerShown: false,
-        sheetAllowedDetents: 'fitToContents',
-      },
-    },
-  },
-});
-// codeblock-focus-end
-
-const Navigation = createStaticNavigation(MyStack);
-
-export default function App() {
-  return <Navigation />;
-}
-```
-
-:::warning
-
-Due to technical issues in platform component integration with `react-native`, `presentation: 'formSheet'` has limited support for `flex: 1`.
-
-On Android, using `flex: 1` on a top-level content container passed to a `formSheet` with `showAllowedDetents: 'fitToContents'` causes the sheet to not display at all, leaving only the dimmed background visible. This is because it is the sheet, not the parent who is source of the size. Setting fixed values for `sheetAllowedDetents`, e.g. `[0.4, 0.9]`, works correctly (content is aligned for the highest detent).
-
-On iOS, `flex: 1` with `showAllowedDetents: 'fitToContents'` works properly but setting a fixed value for `showAllowedDetents` causes the screen to not respect the `flex: 1` style - the height of the container does not fill the `formSheet` fully, but rather inherits intrinsic size of its contents. This tradeoff is _currently_ necessary to prevent ["sheet flickering" problem on iOS](https://github.com/software-mansion/react-native-screens/issues/1722).
-
-If you don't use `flex: 1` but the content's height is less than max screen height, the rest of the sheet might become translucent or use the default theme background color (you can see this happening on the screenshots in the descrption of [this PR](https://github.com/software-mansion/react-native-screens/pull/2462)). To match the sheet to the background of your content, set `backgroundColor` in the `contentStyle` prop of the given screen.
-
-On Android, there are also some problems with getting nested ScrollViews to work properly. The solution is to set `nestedScrollEnabled` on the `ScrollView`, but this does not work if the content's height is less than the `ScrollView`'s height. Please see [this PR](https://github.com/facebook/react-native/pull/44099) for details and suggested [workaround](https://github.com/facebook/react-native/pull/44099#issuecomment-2058469661).
-
-On Android, nested stack and `headerShown` prop are not currently supported for screens with `presentation: 'formSheet'`.
-
-:::
-
-#### `sheetAllowedDetents`
-
-:::note
-
-Works only when `presentation` is set to `formSheet`.
-
-:::
-
-<video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/formSheet-sheetAllowedDetents.mp4" />
-</video>
-
-Describes heights where a sheet can rest.
-
-Supported values:
-
-- `fitToContents` - intents to set the sheet height to the height of its contents.
-- Array of fractions, e.g. `[0.25, 0.5, 0.75]`:
-  - Heights should be described as fraction (a number from `[0, 1]` interval) of screen height / maximum detent height.
-  - The array **must** be sorted in ascending order. This invariant is verified only in developement mode, where violation results in error.
-  - iOS accepts any number of detents, while **Android is limited to three** - any surplus values, beside first three are ignored.
-
-Defaults to `[1.0]`.
-
-Only supported on Android and iOS.
-
-#### `sheetElevation`
-
-:::note
-
-Works only when `presentation` is set to `formSheet`.
-
-:::
-
-<video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/formSheet-sheetElevation.mp4" />
-</video>
-
-Integer value describing elevation of the sheet, impacting shadow on the top edge of the sheet.
-
-Not dynamic - changing it after the component is rendered won't have an effect.
-
-Defaults to `24`.
-
-Only supported on Android.
-
-#### `sheetExpandsWhenScrolledToEdge`
-
-:::note
-
-Works only when `presentation` is set to `formSheet`.
-
-:::
-
-<video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/formSheet-sheetExpandsWhenScrolledToEdge.mp4" />
-</video>
-
-Whether the sheet should expand to larger detent when scrolling.
-
-Defaults to `true`.
-
-Only supported on iOS.
-
-:::warning
-
-Please note that for this interaction to work, the ScrollView must be "first-subview-chain" descendant of the Screen component. This restriction is due to platform requirements.
-
-:::
-
-#### `sheetCornerRadius`
-
-:::note
-
-Works only when `presentation` is set to `formSheet`.
-
-:::
-
-<video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/formSheet-sheetCornerRadius.mp4" />
-</video>
-
-The corner radius that the sheet will try to render with.
-
-If set to non-negative value it will try to render sheet with provided radius, else it will apply system default.
-
-If left unset, system default is used.
-
-Only supported on Android and iOS.
-
-#### `sheetInitialDetentIndex`
-
-:::note
-
-Works only when `presentation` is set to `formSheet`.
-
-:::
-
-<video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/formSheet-sheetInitialDetentIndex.mp4" />
-</video>
-
-**Index** of the detent the sheet should expand to after being opened.
-
-If the specified index is out of bounds of `sheetAllowedDetents` array, in dev environment more errors will be thrown, in production the value will be reset to default value.
-
-Additionaly there is `last` value available, when set the sheet will expand initially to last (largest) detent.
-
-Defaults to `0` - which represents first detent in the detents array.
-
-Only supported on Android and iOS.
-
-#### `sheetGrabberVisible`
-
-:::note
-
-Works only when `presentation` is set to `formSheet`.
-
-:::
-
-<video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/formSheet-sheetGrabberVisible.mp4" />
-</video>
-
-Boolean indicating whether the sheet shows a grabber at the top.
-
-Defaults to `false`.
-
-Only supported on iOS.
-
-#### `sheetLargestUndimmedDetentIndex`
-
-:::note
-
-Works only when `presentation` is set to `formSheet`.
-
-:::
-
-<video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/formSheet-sheetLargestUndimmedDetentIndex.mp4" />
-</video>
-
-The largest sheet detent for which a view underneath won't be dimmed.
-
-This prop can be set to an number, which indicates index of detent in `sheetAllowedDetents` array for which there won't be a dimming view beneath the sheet.
-
-Additionaly there are following options available:
-
-- `none` - there will be dimming view for all detents levels,
-- `last` - there won't be a dimming view for any detent level.
-
-:::warning
-
-On iOS, the native implementation might resize the the sheet w/o explicitly changing the detent level, e.g. in case of keyboard appearance.
-
-In case after such resize the sheet exceeds height for which in regular scenario a dimming view would be applied - it will be applied, even if the detent has not effectively been changed.
-
-:::
-
-Defaults to `none`, indicating that the dimming view should be always present.
-
-Only supported on Android and iOS.
-
-#### `sheetShouldOverflowTopInset`
-
-:::note
-
-Works only when `presentation` is set to `formSheet`.
-
-:::
-
-Boolean indicating whether the sheet content should be rendered behind the **status bar** or **display cutouts**.
-
-When set to `true`, the sheet will extend to the physical edges of the stack, allowing content to be visible behind the status bar or display cutouts. Detent ratios in `sheetAllowedDetents` will be measured relative to the **full stack height**.
-
-When set to `false`, the sheet's layout will be constrained by the inset from the top and the detent ratios will then be measured relative to the **adjusted height** (excluding the top inset). This means that `sheetAllowedDetents` will result in different sheet heights depending on this prop.
-
-Defaults to `false`.
-
-Only supported on Android.
-
-#### `sheetResizeAnimationEnabled`
-
-:::note
-
-Works only when `presentation` is set to `formSheet`.
-
-:::
-
-Boolean indicating whether the default native animation should be used when the sheet's content size changes (specifically when using `fitToContents`).
-
-When set to `true`, the sheet uses internal logic to synchronize size updates and translation animations during entry, exit, or content updates. This ensures a smooth transition for standard, static content mounting/unmounting.
-
-When set to `false`, the internal animation and translation logic is ignored. This allows the sheet to adjust its size dynamically based on the current dimensions of the content provided by the developer, allowing implementing **custom resizing animations**.
-
-Defaults to `true`.
-
-Only supported on Android.
 
 #### `orientation`
 
@@ -741,6 +446,114 @@ Using both `blurEffect` and `scrollEdgeEffects` (>= iOS 26) simultaneously may c
 :::
 
 Only supported on iOS, starting from iOS 26.
+
+### Form sheet options
+
+The following options only work when [`presentation`](#presentation) is set to `formSheet`. See [Form Sheets](#form-sheets) for a detailed usage guide.
+
+#### `sheetAllowedDetents`
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/formSheet-sheetAllowedDetents.mp4" />
+</video>
+
+Describes heights where a sheet can rest.
+
+Supported values: `'fitToContents'` or an array of fractions (e.g. `[0.25, 0.5, 0.75]`). The array must be sorted in ascending order. This invariant is verified only in development mode, where violation results in an error. Android is limited to 3 detents.
+
+Defaults to `[1.0]`. Only supported on Android and iOS.
+
+See [Configuring sheet sizes](#configuring-sheet-sizes) for usage examples.
+
+#### `sheetElevation`
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/formSheet-sheetElevation.mp4" />
+</video>
+
+Integer value describing elevation of the sheet, impacting shadow on the top edge.
+
+Not dynamic - changing it after the component is rendered won't have an effect.
+
+Defaults to `24`. Only supported on Android.
+
+#### `sheetExpandsWhenScrolledToEdge`
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/formSheet-sheetExpandsWhenScrolledToEdge.mp4" />
+</video>
+
+Whether the sheet should expand to a larger detent when scrolling.
+
+The `ScrollView` must be reachable by following the first child view at each level of the view hierarchy from the screen component.
+
+Defaults to `true`. Only supported on iOS.
+
+See [Scroll behavior](#scroll-behavior) for more details.
+
+#### `sheetCornerRadius`
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/formSheet-sheetCornerRadius.mp4" />
+</video>
+
+The corner radius of the sheet. If set to a non-negative value it will use the provided radius, otherwise the system default is used.
+
+Only supported on Android and iOS.
+
+#### `sheetInitialDetentIndex`
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/formSheet-sheetInitialDetentIndex.mp4" />
+</video>
+
+Index of the detent the sheet should expand to after being opened. If the specified index is out of bounds of the `sheetAllowedDetents` array, an error will be thrown in development mode and the value will be reset to the default in production.
+
+Can also be set to `'last'` to open at the largest detent.
+
+Defaults to `0`. Only supported on Android and iOS.
+
+See [Configuring sheet sizes](#configuring-sheet-sizes) for usage examples.
+
+#### `sheetGrabberVisible`
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/formSheet-sheetGrabberVisible.mp4" />
+</video>
+
+Whether the sheet shows a grabber handle at the top.
+
+Defaults to `false`. Only supported on iOS.
+
+#### `sheetLargestUndimmedDetentIndex`
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/formSheet-sheetLargestUndimmedDetentIndex.mp4" />
+</video>
+
+The largest detent index for which the view underneath won't be dimmed.
+
+Can be set to a number (index into `sheetAllowedDetents`), `'none'` (always dim), or `'last'` (never dim).
+
+Defaults to `'none'`. Only supported on Android and iOS.
+
+See [Controlling dimming](#controlling-dimming) for usage examples.
+
+#### `sheetShouldOverflowTopInset`
+
+Whether the sheet content should be rendered behind the status bar or display cutouts.
+
+When `true`, detent ratios in `sheetAllowedDetents` are measured relative to the full stack height. When `false`, they are measured relative to the adjusted height (excluding the top inset).
+
+Defaults to `false`. Only supported on Android.
+
+#### `sheetResizeAnimationEnabled`
+
+Whether the default native animation should be used when the sheet's content size changes (specifically when using `fitToContents`).
+
+Set to `false` to implement custom resizing animations.
+
+Defaults to `true`. Only supported on Android.
 
 ### Header related options
 
@@ -1620,6 +1433,252 @@ const MyView = () => {
   );
 };
 ```
+
+## Form sheets
+
+Form sheets present content in a sheet that slides up from the bottom of the screen. They are commonly used for secondary actions, forms, or detail views that don't need to take over the full screen.
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/7.x/native-stack/presentation-formSheet-ios.mp4" />
+</video>
+
+To present a screen as a form sheet, set [`presentation`](#presentation) to `formSheet` in the screen's options:
+
+```js name="Form Sheet" snack static2dynamic
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+
+// codeblock-focus-start
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+// codeblock-focus-end
+
+function HomeScreen() {
+  const navigation = useNavigation('Home');
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation('Profile');
+
+  return (
+    <View style={{ padding: 15 }}>
+      <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Profile Screen</Text>
+      <Text style={{ marginTop: 10 }}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan
+        euismod enim, quis porta ligula egestas sed. Maecenas vitae consequat
+        odio, at dignissim lorem. Ut euismod eros ac mi ultricies, vel pharetra
+        tortor commodo. Interdum et malesuada fames ac ante ipsum primis in
+        faucibus. Nullam at urna in metus iaculis aliquam at sed quam. In
+        ullamcorper, ex ut facilisis commodo, urna diam posuere urna, at
+        condimentum mi orci ac ipsum. In hac habitasse platea dictumst. Donec
+        congue pharetra ipsum in finibus. Nulla blandit finibus turpis, non
+        vulputate elit viverra a. Curabitur in laoreet nisl.
+      </Text>
+      <Button onPress={() => navigation.goBack()} style={{ marginTop: 15 }}>
+        Go back
+      </Button>
+    </View>
+  );
+}
+
+// codeblock-focus-start
+const MyStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+    },
+    Profile: {
+      screen: ProfileScreen,
+      options: {
+        presentation: 'formSheet',
+        headerShown: false,
+        sheetAllowedDetents: 'fitToContents',
+      },
+    },
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(MyStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+### Configuring sheet sizes
+
+By default, a form sheet takes up the full screen height. You can customize the heights at which the sheet can rest using the [`sheetAllowedDetents`](#sheetalloweddetents) option:
+
+- Use `'fitToContents'` to size the sheet based on its content:
+
+  ```js
+  {
+    presentation: 'formSheet',
+    sheetAllowedDetents: 'fitToContents',
+  }
+  ```
+
+- Use an array of fractions to define specific heights as a fraction of the screen height. For example, to allow the sheet to rest at 25% and 75% of the screen:
+
+  ```js
+  {
+    presentation: 'formSheet',
+    sheetAllowedDetents: [0.25, 0.75],
+  }
+  ```
+
+  :::warning
+
+  The array must be sorted in ascending order. On Android, only up to 3 detents are supported - any additional values are ignored.
+
+  :::
+
+To control which detent the sheet opens at, use [`sheetInitialDetentIndex`](#sheetinitialdetentindex). By default, it opens at the first (smallest) detent:
+
+```js
+{
+  presentation: 'formSheet',
+  sheetAllowedDetents: [0.25, 0.5, 1],
+  // Open at 50% height initially
+  sheetInitialDetentIndex: 1,
+}
+```
+
+You can also use `'last'` to open at the largest detent.
+
+### Listening to detent changes
+
+You can listen to the [`sheetDetentChange`](#sheetdetentchange) event to know when the user drags the sheet to a different detent:
+
+```js
+navigation.addListener('sheetDetentChange', (e) => {
+  console.log('New detent index:', e.data.index);
+  console.log('Is stable:', e.data.stable);
+});
+```
+
+### Customizing appearance
+
+#### Grabber
+
+On iOS, you can show a grabber handle at the top of the sheet using [`sheetGrabberVisible`](#sheetgrabbervisible):
+
+```js
+{
+  presentation: 'formSheet',
+  sheetGrabberVisible: true,
+}
+```
+
+#### Corner radius
+
+Customize the corner radius of the sheet with [`sheetCornerRadius`](#sheetcornerradius). If not set, the system default is used:
+
+```js
+{
+  presentation: 'formSheet',
+  sheetCornerRadius: 20,
+}
+```
+
+#### Elevation (Android)
+
+On Android, control the sheet's shadow with [`sheetElevation`](#sheetelevation) (defaults to `24`):
+
+```js
+{
+  presentation: 'formSheet',
+  sheetElevation: 10,
+}
+```
+
+#### Background color
+
+If the content's height is less than the sheet's height, the remaining area may appear translucent or use the default theme background. To fix this, set `backgroundColor` in the `contentStyle` option:
+
+```js
+{
+  presentation: 'formSheet',
+  contentStyle: {
+    backgroundColor: 'white',
+  },
+}
+```
+
+### Controlling dimming
+
+By default, a dimmed overlay appears behind the sheet. Use [`sheetLargestUndimmedDetentIndex`](#sheetlargestundimmeddetentindex) to control when dimming is applied:
+
+- `'none'` (default) - always show the dimming overlay.
+- `'last'` - never show the dimming overlay.
+- A number - the index of the largest detent that should **not** have dimming. The dimming overlay is shown when the sheet is at a larger detent.
+
+For example, to only dim when the sheet is above the first detent:
+
+```js
+{
+  presentation: 'formSheet',
+  sheetAllowedDetents: [0.25, 0.5, 1],
+  // No dimming at 25%, dimming at 50% and 100%
+  sheetLargestUndimmedDetentIndex: 0,
+}
+```
+
+:::warning
+
+On iOS, the native implementation may resize the sheet without explicitly changing the detent level (e.g. when the keyboard appears). If the sheet exceeds the height for which a dimming view would normally be applied, the dimming view will appear even if the detent hasn't changed.
+
+:::
+
+### Scroll behavior
+
+By default on iOS, scrolling inside the sheet can expand it to a larger detent. Control this with [`sheetExpandsWhenScrolledToEdge`](#sheetexpandswhenscrolledtoedge):
+
+```js
+{
+  presentation: 'formSheet',
+  sheetAllowedDetents: [0.5, 1],
+  // Prevent scroll from expanding the sheet
+  sheetExpandsWhenScrolledToEdge: false,
+}
+```
+
+:::warning
+
+For this interaction to work, the `ScrollView` must be reachable by following the first child view at each level of the view hierarchy from the screen component. This is a platform requirement.
+
+:::
+
+### Platform considerations
+
+#### `flex: 1` limitations
+
+Due to platform component integration issues with `react-native`, `presentation: 'formSheet'` has limited support for `flex: 1`:
+
+- **Android**: Using `flex: 1` on a top-level content container with `sheetAllowedDetents: 'fitToContents'` causes the sheet to not display at all, leaving only the dimmed background visible. This is because the sheet, not the parent, is the source of the size. Use fixed detent values (e.g. `[0.4, 0.9]`) instead.
+- **iOS**: `flex: 1` with `'fitToContents'` works properly, but setting fixed detent values causes the content to not fill the sheet height - it inherits the intrinsic size of its contents instead. This tradeoff is _currently_ necessary to prevent the ["sheet flickering" problem on iOS](https://github.com/software-mansion/react-native-screens/issues/1722).
+
+If the content's height is less than the sheet's height, the remaining area may appear translucent or use the default theme background color. To fix this, set `backgroundColor` in the [`contentStyle`](#contentstyle) option.
+
+#### Android-specific limitations
+
+- Nested stack navigators and `headerShown` are not currently supported inside form sheet screens.
+- Nested `ScrollView` components need `nestedScrollEnabled` set to `true`, but this does not work if the content's height is less than the `ScrollView`'s height. See [this PR](https://github.com/facebook/react-native/pull/44099) for details and a suggested [workaround](https://github.com/facebook/react-native/pull/44099#issuecomment-2058469661).
 
 ## Header items
 
