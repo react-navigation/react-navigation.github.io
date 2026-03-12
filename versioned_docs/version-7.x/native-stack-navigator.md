@@ -6,13 +6,33 @@ sidebar_label: Native Stack
 
 Native Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
-<video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack-android.mp4" />
-</video>
+<div className="feature-grid">
 
-<video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack-ios.mp4" />
-</video>
+- <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/formsheet.mp4" /></video>
+
+  [Form sheet](#presentation)
+
+- <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/search-bar.mp4" /></video>
+
+  [Search bar](#headersearchbaroptions)
+
+- <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/large-title.mp4" /></video>
+
+  [Large title header](#headerlargetitleenabled)
+
+- <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/header-items.mp4" /></video>
+
+  [Header items](#header-items)
+
+- <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/transparent-modal.mp4" /></video>
+
+  [Transparent modal](#presentation)
+
+- <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/animation.mp4" /></video>
+
+  [Transition animations](#animation)
+
+</div>
 
 This navigator uses the native APIs `UINavigationController` on iOS and `Fragment` on Android so that navigation built with `createNativeStackNavigator` will behave exactly the same and have the same performance characteristics as apps built natively on top of those APIs. It also offers basic Web support using [`react-native-web`](https://github.com/necolas/react-native-web).
 

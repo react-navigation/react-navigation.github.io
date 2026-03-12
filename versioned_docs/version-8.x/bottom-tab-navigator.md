@@ -6,13 +6,21 @@ sidebar_label: Bottom Tabs
 
 Bottom Tab Navigator displays a set of screens with a tab bar to switch between them.
 
-<video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-bottom-tabs-android.mp4" />
-</video>
+<div className="feature-grid">
 
-<video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-bottom-tabs-ios.mp4" />
-</video>
+- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-search.mp4" /></video>
+
+  [Search tab on iOS 26+](#search-tab-on-ios-26)
+
+- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-bottom-accessory.mp4" /></video>
+
+  [Bottom accessory](#bottomaccessory)
+
+- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-minimize.mp4" /></video>
+
+  [Minimize on scroll](#tabbarminimizebehavior)
+
+</div>
 
 ## Installation
 
@@ -77,24 +85,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-## Highlights
-
-<div className="feature-grid">
-
-- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-search.mp4" /></video>
-
-  [Search tab on iOS 26+](#search-tab-on-ios-26)
-
-- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-bottom-accessory.mp4" /></video>
-
-  [Bottom accessory](#bottomaccessory)
-
-- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-minimize.mp4" /></video>
-
-  [Minimize on scroll](#tabbarminimizebehavior)
-
-</div>
 
 ## Native vs Custom implementation
 
