@@ -6,7 +6,11 @@ sidebar_label: LLMs
 
 We provide documentation in various formats that large language models (LLMs) can consume.
 
-On each page, you can click the "Copy page" button at the top to copy the content in markdown format.
+You can get the markdown version of any documentation page in the following ways:
+
+- Click the "Copy page" button at the top of any page to copy the content in markdown format.
+- Append `.md` to the path (e.g. [https://reactnavigation.org/docs/8.x/getting-started.md](https://reactnavigation.org/docs/8.x/getting-started.md)).
+- Send an `Accept: text/markdown` header to get the markdown version instead of HTML.
 
 In addition, we support the [llms.txt](https://llmstxt.org/) initiative and provide the following files for easy access.
 

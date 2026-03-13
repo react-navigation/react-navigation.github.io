@@ -222,6 +222,7 @@ See [Devtools documentation](/docs/8.x/devtools#uselogger) for more details.
 We have made many improvements to our documentation site to make it more LLM friendly:
 
 - Documentation pages now have a markdown version by appending `.md` to the path (e.g. [https://reactnavigation.org/docs/8.x/getting-started.md](https://reactnavigation.org/docs/8.x/getting-started.md))
+- If a client sends an `Accept: text/markdown` header, the markdown version of the page will be returned instead of HTML
 - Documentation pages now have a "Copy page" button to copy the content of the current page as markdown, or open in ChatGPT and Claude
 - A list of all documentation pages and full documentation content is available at [`llms.txt`](pathname:///llms.txt) and [`llms-full.txt`](pathname:///llms-full.txt) respectively
 
