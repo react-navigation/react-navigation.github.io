@@ -282,9 +282,62 @@ In addition, if you were using `navigationKey` to remove or remount screens on a
 
 ## Wrappers around navigators
 
-In the dynamic API, it's possible to wrap the navigator component. For example, to add context providers or additional UI around the navigator. Since the navigator configuration is not a component in static API, this is not possible.
+In the dynamic API, it's possible to wrap the navigator component. For example, to add context providers or additional UI around the navigator.
 
-However, in many cases, it may be possible to achieve the same result by using the [`layout`](navigator.md#layout) property:
+In most cases, it can be done in following ways with the static API:
+
+### `layout` on parent screen
+
+If the navigator is nested inside a screen in another navigator, you can use the [`layout`](screen.md#layout) property on the screen so it wraps the screen's content which includes the navigator:
+
+```js title="Dynamic API"
+const Tab = createBottomTabNavigator();
+
+function HomeTabs() {
+  return (
+    <SomeProvider>
+      <Tab.Navigator>
+        <Tab.Screen name="Feed" component={FeedScreen} />
+        <Tab.Screen name="Notifications" component={NotificationsScreen} />
+      </Tab.Navigator>
+    </SomeProvider>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+function RootStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeTabs} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
+  );
+}
+```
+
+```js title="Static API"
+const HomeTabs = createBottomTabNavigator({
+  screens: {
+    Feed: FeedScreen,
+    Notifications: NotificationsScreen,
+  },
+});
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: HomeTabs,
+      layout: ({ children }) => <SomeProvider>{children}</SomeProvider>,
+    },
+    Profile: ProfileScreen,
+  },
+});
+```
+
+### `layout` on the navigator
+
+You can also use the [`layout`](navigator.md#layout) property on the navigator to wrap the navigator's content:
 
 ```js title="Dynamic API"
 function RootStack() {
@@ -307,9 +360,9 @@ const RootStack = createNativeStackNavigator({
 });
 ```
 
-There are some subtle differences between the two approaches. A layout is rendered as part of the navigator and has access to the navigator's state and options, whereas a wrapper component is outside the navigator.
+A navigator's layout is rendered as part of the navigator and has access to the navigator's state and options, whereas a wrapper component, or a layout on a parent screen don't.
 
-This is also not possible if the wrapper component used props from the parent component. However, you can still achieve this by moving those props to React context.
+With both approaches, you can access the route params of the parent screen with the [`useRoute`](use-route.md) hook.
 
 ## Deep linking
 
