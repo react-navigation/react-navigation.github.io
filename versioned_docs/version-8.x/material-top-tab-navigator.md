@@ -310,6 +310,8 @@ function MyTabBar({ navigation }) {
 }
 ```
 
+Also see [icons documentation](icons.md) to use system icons such as [`SF Symbols`](https://developer.apple.com/sf-symbols/) and [Material Design Icons](https://material.io/resources/icons/) in your custom tab bar.
+
 ### Options
 
 The following [options](screen-options.md) can be used to configure the screens in the navigator:

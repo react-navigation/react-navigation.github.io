@@ -595,6 +595,8 @@ header: ({ navigation, route, options }) => {
 };
 ```
 
+Also see [icons documentation](icons.md) to use system icons such as [`SF Symbols`](https://developer.apple.com/sf-symbols/) and [Material Design Icons](https://material.io/resources/icons/) in your custom header.
+
 To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
 
 ##### Specify a `height` in `headerStyle`
