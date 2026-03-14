@@ -512,6 +512,16 @@ By default, all tab items take up the same pre-calculated width based on the wid
 
 Style to apply to the active indicator.
 
+The indicator takes the same width as the tab item by default. It can be customized in a few ways:
+
+- To make it smaller by a certain amount, you can add a horizontal margin, e.g. `{ marginHorizontal: 10 }`.
+- Adding specific width will position the indicator at the left of the tab, e.g. `{ width: 20 }`.
+- To center it in the tab when a custom width is specified, you can specify `margin` as `'auto'`, e.g. `{ width: 20, marginHorizontal: 'auto' }`.
+
+When the `tabStyle` has `width: 'auto'` and no explicit `width` is specified for the indicator, it is scaled to the width with `transform: [{ scaleX }]` for smooth animations. So specifying a `borderRadius` won't work as expected.
+
+If you need more control, you can use [`renderIndicator`](#renderindicator) to render a custom indicator instead.
+
 ##### `indicatorContainerStyle`
 
 Style to apply to the container view for the indicator.
