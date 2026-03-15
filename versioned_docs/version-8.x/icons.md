@@ -9,10 +9,14 @@ Many components in React Navigation accept icons to customize their appearance. 
 Here are some common places where icons are used in React Navigation:
 
 - [`tabBarIcon`](bottom-tab-navigator.md#tabbaricon) option in Bottom Tab Navigator
+- [`tabBarIcon`](material-top-tab-navigator.md#tabbaricon) option in Material Top Tabs Navigator
+- [`drawerIcon`](drawer-navigator.md#drawericon) option in Drawer Navigator
+- [`icon`](drawer-navigator.md#draweritem) prop in `DrawerItem` component
 - [`headerBackIcon`](native-stack-navigator.md#headerbackicon) option in Native Stack Navigator
 - [`headerBackIcon`](stack-navigator.md#headerbackicon) option in Stack Navigator
 - [`icon`](elements.md#headerbackbutton) prop in `HeaderBackButton` component
-- [`icon`](drawer-navigator.md#headerleft) option in `DrawerToggleButton` component
+- [`icon`](drawer-navigator.md#headerleft) prop in `DrawerToggleButton` component
+- [`icon`](native-stack-navigator.md#header-items) property in Native Stack header items (iOS only, `image` and `sfSymbol` only)
 
 Typically, components accept an icon object with a `type` property:
 
@@ -49,7 +53,7 @@ The `sfSymbol` and `materialSymbol` types use the respective system icon librari
 
 SF Symbols is a library of over 6,900 symbols designed to integrate well with the San Francisco system font on Apple platforms. It comes included with iOS and other Apple platforms.
 
-Options such as `tabBarIcon` and `headerBackIcon` accept an object with `type: 'sfSymbol'` and a `name` property to specify the SF Symbol to use:
+Where SF Symbols are supported, icon options and props accept an object with `type: 'sfSymbol'` and a `name` property to specify the SF Symbol to use:
 
 ```js
 tabBarIcon: {
@@ -205,7 +209,7 @@ You'll need to rebuild your app after changing the font configuration in `packag
 
 :::
 
-Options such as `tabBarIcon` and `headerBackIcon` accept an object with `type: 'materialSymbol'` and a `name` property to specify the Material Symbol to use:
+Where Material Symbols are supported, icon options and props accept an object with `type: 'materialSymbol'` and a `name` property to specify the Material Symbol to use:
 
 ```js
 tabBarIcon: {

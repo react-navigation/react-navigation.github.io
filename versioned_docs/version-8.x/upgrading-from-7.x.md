@@ -707,7 +707,7 @@ If you don't want to enable deep linking, you can set `linking.enabled` to `fals
 
 Previously, the `HeaderBackButton` and `DrawerToggleButton` components accepted `backImage` and `imageSource` props respectively. In order to support the new icons such as [Material Symbols](https://fonts.google.com/icons) and [SF Symbols](https://developer.apple.com/sf-symbols/), these props have been replaced with a new `icon` prop.
 
-If you're using a custom back image with `imageSource`, you can update your code as follows:
+If you're using a custom back image with `backImage`, you can update your code as follows:
 
 ```diff lang=js
 - <HeaderBackButton backImage={require('./path/to/my-back-icon.png')} />
@@ -1055,7 +1055,7 @@ The `Header` component from `@react-navigation/elements` has been reworked with 
 
 To match the iOS 26 design, the back button title is no longer shown by default on iOS 26.
 
-The `backImage` prop has been replaced with `backIcon` that accepts an icon object similar to `tabBarIcon` in Bottom Tab Navigator. It now supports using [Material Symbols](https://fonts.google.com/icons) on Android and [SF Symbols](https://developer.apple.com/sf-symbols/) on iOS.
+The `backImage` prop has been replaced with the `icon` prop that accepts an icon object similar to `tabBarIcon` in Bottom Tab Navigator. It now supports using [Material Symbols](https://fonts.google.com/icons) on Android and [SF Symbols](https://developer.apple.com/sf-symbols/) on iOS.
 
 See [Elements](elements.md) for more details.
 
@@ -1066,10 +1066,14 @@ Various navigators and components now support using [Material Symbols](https://f
 For example,
 
 - [`tabBarIcon`](bottom-tab-navigator.md#tabbaricon) option in Bottom Tab Navigator
+- [`tabBarIcon`](material-top-tab-navigator.md#tabbaricon) option in Material Top Tabs Navigator
+- [`drawerIcon`](drawer-navigator.md#drawericon) option in Drawer Navigator
+- [`icon`](drawer-navigator.md#draweritem) prop in `DrawerItem` component
 - [`headerBackIcon`](native-stack-navigator.md#headerbackicon) option in Native Stack Navigator
 - [`headerBackIcon`](stack-navigator.md#headerbackicon) option in Stack Navigator
 - [`icon`](elements.md#headerbackbutton) prop in `HeaderBackButton` component
-- [`icon`](drawer-navigator.md#headerleft) option in `DrawerToggleButton` component
+- [`icon`](drawer-navigator.md#headerleft) prop in `DrawerToggleButton` component
+- [`icon`](native-stack-navigator.md#header-items) property in Native Stack header items (iOS only, `image` and `sfSymbol` only)
 
 Usage:
 

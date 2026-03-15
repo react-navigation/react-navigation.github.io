@@ -1617,7 +1617,7 @@ If the content's height is less than the sheet's height, the remaining area may 
 
 ## Header items
 
-The [`unstable_headerLeftItems`](#unstable_headerleftitems) and [`unstable_headerRightItems`](#unstable_headerrightitems) options allow you to add header items to the left and right side of the header respectively. This items can show native buttons, menus or custom React elements.
+The [`unstable_headerLeftItems`](#unstable_headerleftitems) and [`unstable_headerRightItems`](#unstable_headerrightitems) options allow you to add header items to the left and right side of the header respectively. These items can show native buttons, menus or custom React elements.
 
 On iOS 26+, the header right items can also be collapsed into an overflow menu by the system when there is not enough space to show all items. Note that custom elements (with `type: 'custom'`) won't be collapsed into the overflow menu.
 
@@ -1642,7 +1642,7 @@ Common properties:
   - `color` (of type `ColorValue`)
 - `icon`: Optional icon to show instead of the label.
 
-  The icon can be of following types:
+  The icon can be one of the following types:
   - Local image
 
     ```js
@@ -1657,7 +1657,7 @@ Common properties:
     It also supports [xcasset](https://developer.apple.com/documentation/xcode/adding-images-to-your-xcode-project):
 
     ```js
-    tabBarIcon: {
+    icon: {
       type: 'image',
       source: { uri: 'icon_name' },
     }
@@ -1666,7 +1666,7 @@ Common properties:
     A `tinted` property can be used to control whether the icon should be tinted with the active/inactive color:
 
     ```js
-    tabBarIcon: {
+    icon: {
       type: 'image',
       source: require('./path/to/icon.png'),
       tinted: false,
@@ -1742,14 +1742,7 @@ Supported properties when `type` is `menu`:
       - `type`: Must be `action`.
       - `label`: Label of the menu item.
       - `description`: The secondary text displayed alongside the label of the menu item.
-      - `icon`: Optional icon to show alongside the label. The icon can be a [SF Symbols](https://developer.apple.com/sf-symbols/) name:
-
-        ```js
-        {
-          type: 'sfSymbol',
-          name: 'trash',
-        }
-        ```
+      - `icon`: Optional icon to show alongside the label. It accepts the same formats as `icon` above.
 
       - `onPress`: Function to call when the menu item is pressed.
       - `state`: Optional state of the menu item. Supported values:
@@ -1765,14 +1758,7 @@ Supported properties when `type` is `menu`:
     - `submenu`: An object with the following properties:
       - `type`: Must be `submenu`.
       - `label`: Label of the submenu item.
-      - `icon`: Optional icon to show alongside the label. The icon can be a [SF Symbols](https://developer.apple.com/sf-symbols/) name:
-
-        ```js
-        {
-          type: 'sfSymbol',
-          name: 'pencil',
-        }
-        ```
+      - `icon`: Optional icon to show alongside the label. It accepts the same formats as `icon` above.
 
       - `inline`: Whether the menu is displayed inline with the parent menu. By default, submenus are displayed after expanding the parent menu item. Inline menus are displayed as part of the parent menu as a section. Defaults to `false`.
       - `layout`: How the submenu items are displayed. Supported values:

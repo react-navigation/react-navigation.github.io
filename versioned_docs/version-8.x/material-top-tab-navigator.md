@@ -409,7 +409,86 @@ Whether the tab label should be visible. Defaults to `true`.
 
 #### `tabBarIcon`
 
-Function that given `{ focused: boolean, color: string }` returns a React.Node, to display in the tab bar.
+Icon object to display or a function that given `{ focused: boolean, color: string, size: number }` returns an icon to display in the tab bar.
+
+It supports the following types:
+
+- `materialSymbol` (Android only)
+
+  ```js
+  tabBarIcon: {
+    type: 'materialSymbol',
+    name: 'favorite',
+  }
+  ```
+
+  It also supports the following optional properties:
+  - `variant` - Supported values: `outlined`, `rounded`, `sharp`
+  - `weight` - Supported values: `100`, `200`, `300`, `400`, `500`, `600`, `700`
+
+  See [Icons](icons.md#material-symbols) for more details.
+
+- `sfSymbol` (iOS only)
+
+  ```js
+  tabBarIcon: {
+    type: 'sfSymbol',
+    name: 'heart',
+  }
+  ```
+
+  See [Icons](icons.md#sf-symbols) for more details.
+
+- `image`
+
+  ```js
+  tabBarIcon: {
+    type: 'image',
+    source: require('./path/to/icon.png'),
+  }
+  ```
+
+  It also supports [drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) on Android, [xcasset](https://developer.apple.com/documentation/xcode/adding-images-to-your-xcode-project) on iOS:
+
+  ```js
+  tabBarIcon: {
+    type: 'image',
+    source: { uri: 'icon_name' },
+  }
+  ```
+
+  A `tinted` property can be used to control whether the icon should be tinted with the active/inactive color:
+
+  ```js
+  tabBarIcon: {
+    type: 'image',
+    source: require('./path/to/icon.png'),
+    tinted: false,
+  }
+  ```
+
+  Set `tinted` to `false` if the image has its own colors that you want to preserve.
+
+  The image is tinted by default.
+
+In addition to the icon object, you can also provide a function which returns an icon object or a React element. It receives `focused`, `color`, and `size` in its argument object:
+
+```js
+tabBarIcon: ({ focused }) => {
+  return {
+    type: 'sfSymbol',
+    name: focused ? 'heart.fill' : 'heart',
+  };
+},
+```
+
+To render a custom React element, you can return it from the function:
+
+```js
+tabBarIcon: ({ color, size }) => (
+  <MyCustomIcon color={color} size={size} />
+),
+```
 
 #### `tabBarShowIcon`
 

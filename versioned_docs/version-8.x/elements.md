@@ -668,7 +668,7 @@ A component used to show the back button header. It's the default for [`headerLe
 - `disabled` - Boolean which controls Whether the button is disabled.
 - `onPress` - Callback to call when the button is pressed.
 - `pressColor` - Color for material ripple (Android >= 5.0 only).
-- `backIcon` - Icon to display custom icon in header's back button. See [Custom back icon](#custom-back-icon) section for more details.
+- `icon` - Icon to display custom icon in header's back button. See [Custom back icon](#custom-back-icon) section for more details.
 - `tintColor` - Tint color for the header.
 - `label` - Label text for the button. Usually the title of the previous screen. By default, this is only shown on iOS.
 - `truncatedLabel` - Label text to show when there isn't enough space for the full label.
@@ -694,17 +694,17 @@ Usage:
 
 #### Custom back icon
 
-The `backIcon` prop accepts an icon object for SF Symbols on iOS, Material Symbols on Android and image source on all platforms:
+The `icon` prop accepts an icon object for SF Symbols on iOS, Material Symbols on Android and image source on all platforms:
 
 ```js
 <HeaderBackButton
-  backIcon={Platform.select({
+  icon={Platform.select({
     ios: {
-      type: 'sf-symbol',
+      type: 'sfSymbol',
       name: 'arrow.left',
     },
     android: {
-      type: 'material-symbol',
+      type: 'materialSymbol',
       name: 'arrow_back',
     },
     default: {
@@ -722,7 +722,7 @@ It can also be a function that returns a React Element to render any component:
 
 ```js
 <HeaderBackButton
-  backIcon={({ tintColor }) => (
+  icon={({ tintColor }) => (
     <MyCustomBackIconComponent tintColor={tintColor} />
   )}
   onPress={() => console.log('back pressed')}

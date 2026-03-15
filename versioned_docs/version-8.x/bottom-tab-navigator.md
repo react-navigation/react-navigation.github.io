@@ -625,6 +625,14 @@ tabBarIcon: ({ focused }) => {
 
 This not supported on Android with `native` implementation, the icon specified for inactive state will be used for both active and inactive states.
 
+With `custom` implementation, you can also return a React element:
+
+```js
+tabBarIcon: ({ color, size }) => (
+  <MyCustomIcon color={color} size={size} />
+),
+```
+
 To provide different icons for different platforms, you can use [`Platform.select`](https://reactnative.dev/docs/platform-specific-code):
 
 ```js
