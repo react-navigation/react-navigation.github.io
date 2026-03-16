@@ -240,17 +240,14 @@ The type of animation to use when this screen replaces another screen. Defaults 
 
 Supported values:
 
-- `push`: the new screen will perform push animation.
+- `push`: the new screen will perform a push animation.
+- `pop`: the new screen will perform a pop animation.
 
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/native-stack/animationTypeForReplace-push.mp4" />
-  </video>
+This can be useful to provide appropriate animations, such as `push` for login and `pop` for logout.
 
-- `pop`: the new screen will perform pop animation.
-
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/native-stack/animationTypeForReplace-pop.mp4" />
-  </video>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/native-stack/animation-type-for-replace.mp4" />
+</video>
 
 #### `animation`
 
