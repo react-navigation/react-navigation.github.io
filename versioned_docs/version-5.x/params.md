@@ -60,7 +60,9 @@ function DetailsScreen({ route, navigation }) {
 }
 ```
 
-![Screen with passed parameters](/assets/navigators/passing_params.png)
+<video playsInline autoPlay muted loop>
+  <source src="/assets/fundamentals/passing-params.mp4" />
+</video>
 
 ## Initial params
 

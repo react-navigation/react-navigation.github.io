@@ -59,7 +59,7 @@ The Bottom Tab Navigator now supports showing tabs on the side by specifying `ta
 The Bottom Tab Navigator now supports animations when switching between tabs. You can customize the animation using the `animation` option.
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/bottom-tabs-shift.mp4" />
+  <source src="/assets/navigators/bottom-tabs/bottom-tabs-shift.mp4" />
 </video>
 
 ### `react-native-drawer-layout` package

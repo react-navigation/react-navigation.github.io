@@ -7,7 +7,7 @@ sidebar_label: Bottom Tabs
 A simple tab bar on the bottom of the screen that lets you switch between different routes. Routes are lazily initialized -- their screen components are not mounted until they are first focused.
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/bottom-tabs.mp4" />
+  <source src="/assets/navigators/bottom-tabs/7.x/bottom-tabs.mp4" />
 </video>
 
 ## Installation
@@ -258,15 +258,15 @@ Whether the label is shown below the icon or beside the icon.
 By default, the position is chosen automatically based on device width.
 
 - `below-icon`: the label is shown below the icon (typical for iPhones)
-  <img src="/assets/7.x/bottom-tabs/tabBarLabelPosition-below.png" width="400" alt="Tab bar label position - below" />
+  <img src="/assets/navigators/bottom-tabs/tabBarLabelPosition-below.png" width="400" alt="Tab bar label position - below" />
 
 - `beside-icon` the label is shown next to the icon (typical for iPad)
-  <img src="/assets/7.x/bottom-tabs/tabBarLabelPosition-beside.png" width="700" alt="Tab bar label position - beside" />
+  <img src="/assets/navigators/bottom-tabs/tabBarLabelPosition-beside.png" width="700" alt="Tab bar label position - beside" />
 
 #### `tabBarLabelStyle`
 
 Style object for the tab label.
-<img src="/assets/7.x/bottom-tabs/tabBarLabelStyle.png" width="500" alt="Tab bar label style" />
+<img src="/assets/navigators/bottom-tabs/tabBarLabelStyle.png" width="500" alt="Tab bar label style" />
 
 Example:
 
@@ -290,13 +290,13 @@ Style object for the tab icon.
 
 Text to show in a badge on the tab icon. Accepts a `string` or a `number`.
 
-<img src="/assets/7.x/bottom-tabs/tabBarBadge.png" width="500" alt="Tab bar badge" />
+<img src="/assets/navigators/bottom-tabs/tabBarBadge.png" width="500" alt="Tab bar badge" />
 
 #### `tabBarBadgeStyle`
 
 Style for the badge on the tab icon. You can specify a background color or text color here.
 
-<img src="/assets/7.x/bottom-tabs/tabBarBadgeStyle.png" width="500" alt="Tab bar badge style" />
+<img src="/assets/navigators/bottom-tabs/tabBarBadgeStyle.png" width="500" alt="Tab bar badge style" />
 
 Example:
 
@@ -328,12 +328,12 @@ ID to locate this tab button in tests.
 #### `tabBarActiveTintColor`
 
 Color for the icon and label in the active tab.
-<img src="/assets/7.x/bottom-tabs/tabBarActiveTintColor.png" width="500" alt="Tab bar active tint color" />
+<img src="/assets/navigators/bottom-tabs/tabBarActiveTintColor.png" width="500" alt="Tab bar active tint color" />
 
 #### `tabBarInactiveTintColor`
 
 Color for the icon and label in the inactive tabs.
-<img src="/assets/7.x/bottom-tabs/tabBarInactiveTintColor.png" width="500" alt="Tab bar inactive tint color" />
+<img src="/assets/navigators/bottom-tabs/tabBarInactiveTintColor.png" width="500" alt="Tab bar inactive tint color" />
 
 #### `tabBarActiveBackgroundColor`
 
@@ -389,7 +389,7 @@ import { StyleSheet } from 'react-native';
 
 When using `BlurView`, make sure to set `position: 'absolute'` in `tabBarStyle` as well. You'd also need to use [`useBottomTabBarHeight`](#usebottomtabbarheight) to add bottom padding to your content.
 
-<img src="/assets/7.x/bottom-tabs/tabBarBackground.png" width="500" alt="Tab bar background" />
+<img src="/assets/navigators/bottom-tabs/tabBarBackground.png" width="500" alt="Tab bar background" />
 
 #### `tabBarPosition`
 
@@ -429,7 +429,7 @@ const Tabs = createBottomTabNavigator({
 </TabItem>
 </Tabs>
 
-<img src="/assets/7.x/bottom-tabs-side.png" alt="Sidebar" data-landscape></img>
+<img src="/assets/navigators/bottom-tabs/bottom-tabs-side.png" alt="Sidebar" data-landscape></img>
 
 You can also render a compact sidebar by placing the label below the icon. This is only supported when the [`tabBarVariant`](#tabbarvariant) is set to `material`:
 
@@ -463,7 +463,7 @@ const Tabs = createBottomTabNavigator({
 </TabItem>
 </Tabs>
 
-![Compact sidebar](/assets/7.x/bottom-tabs-side-compact.png)
+![Compact sidebar](/assets/navigators/bottom-tabs/bottom-tabs-side-compact.png)
 
 #### `tabBarVariant`
 
@@ -474,7 +474,7 @@ Variant of the tab bar. Available values are:
 
 The `material` variant is currently only supported when the [`tabBarPosition`](#tabbarposition) is set to `left` or `right`.
 
-![Material sidebar](/assets/7.x/bottom-tabs-side-material.png)
+![Material sidebar](/assets/navigators/bottom-tabs/bottom-tabs-side-material.png)
 
 #### `lazy`
 
@@ -758,13 +758,13 @@ Supported values for `animation` are:
 - `fade` - Cross-fade animation for the screen transition where the new screen fades in and the old screen fades out.
 
   <video playsInline autoPlay muted loop>
-    <source src="/assets/7.x/bottom-tabs-fade.mp4" />
+    <source src="/assets/navigators/bottom-tabs/bottom-tabs-fade.mp4" />
   </video>
 
 - `shift` - Shifting animation for the screen transition where the screens slightly shift to left/right.
 
   <video playsInline autoPlay muted loop>
-    <source src="/assets/7.x/bottom-tabs-shift.mp4" />
+    <source src="/assets/navigators/bottom-tabs/bottom-tabs-shift.mp4" />
   </video>
 
 - `none` - The screen transition doesn't have any animation. This is the default value.

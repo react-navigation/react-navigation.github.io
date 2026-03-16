@@ -54,7 +54,7 @@ export default function App() {
 }
 ```
 
-![Tabs minimal](/assets/navigators/tabs/tabs-minimal.png)
+![Tabs minimal](/assets/navigators/bottom-tabs/6.x/tabs-minimal.png)
 
 ## Customizing the appearance
 
@@ -118,7 +118,7 @@ Sometimes we want to add badges to some icons. You can use the [`tabBarBadge` op
 
 From UI perspective this component is ready to use, but you still need to find some way to pass down the badge count properly from somewhere else, like using [React Context](https://react.dev/reference/react/useContext), [Redux](https://redux.js.org/), [MobX](https://mobx.js.org/) or [event emitters](https://github.com/facebook/react-native/blob/master/Libraries/vendor/emitter/EventEmitter.js).
 
-![Tabs with badges](/assets/navigators/tabs/tabs-badges.png)
+![Tabs with badges](/assets/navigators/bottom-tabs/tabs-badges.png)
 
 ## Jumping between tabs
 
@@ -150,7 +150,7 @@ function SettingsScreen({ navigation }) {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/tabs/tabs-navigate.mp4" />
+  <source src="/assets/navigators/bottom-tabs/6.x/tabs-navigate.mp4" />
 </video>
 
 ## A stack navigator for each tab
@@ -235,7 +235,7 @@ export default function App() {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/tabs/tabs-with-stack.mp4" />
+  <source src="/assets/navigators/bottom-tabs/6.x/tabs-with-stack.mp4" />
 </video>
 
 ## Why do we need a TabNavigator instead of TabBarIOS or some other component?

@@ -93,7 +93,7 @@ const MyTheme = {
 
 The new version has been written from the ground-up with TypeScript. We now get first class autocompletion and type-checking.
 
-![TypeScript in action](/assets/blog/announcing-5.0/typescript.gif)
+![TypeScript in action](/assets/blog/5.x/typescript.gif)
 
 We also have JSDoc for the built-in methods and options, so you get their description directly in your editor. See [our typescript documentation](/docs/5.x/typescript) for more details on how to use it.
 
@@ -101,7 +101,7 @@ We also have JSDoc for the built-in methods and options, so you get their descri
 
 If you use [React Native Debugger](https://github.com/jhen0409/react-native-debugger) or [Redux Devtools Extension](https://github.com/reduxjs/redux-devtools), you can see navigation actions in the devtools along with the current navigation state. It also supports time-travel debugging!
 
-![Redux Devtools in action](/assets/blog/announcing-5.0/redux-devtools.gif)
+![Redux Devtools in action](/assets/blog/5.x/redux-devtools.gif)
 
 You don't need to use Redux in your apps for this to work and it works without any extra setup!
 
@@ -109,8 +109,8 @@ You don't need to use Redux in your apps for this to work and it works without a
 
 Traditionally, we have written our navigators in JavaScript for greater customizability. It fits a lot of use cases, but sometimes you want the exact native feel and the performance of native navigation. Now, we have added a new native stack navigator that uses native navigation primitives for navigation using the [`react-native-screens`](https://github.com/kmagiera/react-native-screens) library. Under the hood, it just uses native components which might be obvious choice for native development and might be a good pick in the most cases.
 
-<img src="/assets/blog/android-native-stack.gif" height="530" alt="Native Stack on Android" />
-<img src="/assets/blog/ios-native-stack.gif" height="530" alt="Native Stack on iOS" />
+<img src="/assets/blog/5.x/android-native-stack.gif" height="530" alt="Native Stack on Android" />
+<img src="/assets/blog/5.x/ios-native-stack.gif" height="530" alt="Native Stack on iOS" />
 
 ### Native backends for Material top tab navigator
 

@@ -35,7 +35,7 @@ function StackScreen() {
 }
 ```
 
-![Header button](/assets/headers/header-button.png)
+![Header button](/assets/fundamentals/header-button.png)
 
 When we define our button this way, the `this` variable in `options` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
 
@@ -82,7 +82,7 @@ function HomeScreen({ navigation }) {
 ```
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/headers/header-update-screen.mp4" />
+  <source src="/assets/fundamentals/header-screen-interaction.mp4" />
 </video>
 
 Here we update the `headerRight` with a button with `onPress` handler that has access to the component's state and can update it.
@@ -109,7 +109,7 @@ To customize the back button image, you can use `headerBackImageSource` ([read m
 </Stack.Navigator>
 ```
 
-![Header custom back](/assets/headers/header-back-custom.png)
+![Header custom back](/assets/fundamentals/header-back-custom.png)
 
 ## Overriding the back button
 

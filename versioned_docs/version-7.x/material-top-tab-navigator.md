@@ -6,19 +6,19 @@ sidebar_label: Material Top Tabs
 
 <div className="feature-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/material-top-tabs/highlights/scrollable-tabbar.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/scrollable-tabbar.mp4" /></video>
 
   [Scrollable tab bar](#tabbarscrollenabled)
 
-- <video playsInline autoPlay muted loop><source src="/assets/material-top-tabs/highlights/badge.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/badge.mp4" /></video>
 
   [Badges](#tabbarbadge)
 
-- <video playsInline autoPlay muted loop><source src="/assets/material-top-tabs/highlights/custom-indicator.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/custom-indicator.mp4" /></video>
 
   [Custom indicator](#tabbarindicator)
 
-- <video playsInline autoPlay muted loop><source src="/assets/material-top-tabs/highlights/custom-tabbar.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/custom-tabbar.mp4" /></video>
 
   [Custom tab bar](#tabbar)
 

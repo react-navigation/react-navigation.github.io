@@ -6,19 +6,19 @@ sidebar_label: Stack
 
 <div className="feature-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/stack/highlights/gestures.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/highlights/gestures.mp4" /></video>
 
   [Gestures](#gestureenabled)
 
-- <video playsInline autoPlay muted loop><source src="/assets/stack/highlights/animation.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/highlights/animation.mp4" /></video>
 
   [Transition animations](#animation-related-options)
 
-- <video playsInline autoPlay muted loop><source src="/assets/stack/highlights/header-animation.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/highlights/header-animation.mp4" /></video>
 
   [Header animations](#headerstyleinterpolators)
 
-- <video playsInline autoPlay muted loop><source src="/assets/stack/highlights/search-bar.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/highlights/search-bar.mp4" /></video>
 
   [Search bar](elements.md#headersearchbaroptions)
 

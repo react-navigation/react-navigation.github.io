@@ -105,7 +105,7 @@ function StackScreen() {
 }
 ```
 
-![Custom header styles](/assets/headers/custom_headers.png)
+![Custom header styles](/assets/fundamentals/header-styles.png)
 
 There are a couple of things to notice here:
 

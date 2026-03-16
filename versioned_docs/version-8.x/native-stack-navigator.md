@@ -6,27 +6,27 @@ sidebar_label: Native Stack
 
 <div className="feature-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/formsheet.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/highlights/formsheet.mp4" /></video>
 
   [Form sheet](#form-sheets)
 
-- <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/search-bar.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/highlights/search-bar.mp4" /></video>
 
   [Search bar](#headersearchbaroptions)
 
-- <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/large-title.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/highlights/large-title.mp4" /></video>
 
   [Large title header](#headerlargetitleenabled)
 
-- <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/header-items.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/highlights/header-items.mp4" /></video>
 
   [Header items](#header-items)
 
-- <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/transparent-modal.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/highlights/transparent-modal.mp4" /></video>
 
   [Transparent modal](#presentation)
 
-- <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/animation.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/highlights/animation.mp4" /></video>
 
   [Transition animations](#animation)
 
@@ -243,13 +243,13 @@ Supported values:
 - `push`: the new screen will perform push animation.
 
   <video playsInline autoPlay muted loop>
-    <source src="/assets/7.x/native-stack/animationTypeForReplace-push.mp4" />
+    <source src="/assets/navigators/native-stack/animationTypeForReplace-push.mp4" />
   </video>
 
 - `pop`: the new screen will perform pop animation.
 
   <video playsInline autoPlay muted loop>
-    <source src="/assets/7.x/native-stack/animationTypeForReplace-pop.mp4" />
+    <source src="/assets/navigators/native-stack/animationTypeForReplace-pop.mp4" />
   </video>
 
 #### `animation`
@@ -262,47 +262,47 @@ Supported values:
 
 - `default`: use the platform default animation
   <video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/native-stack-animation-default.mp4" />
+  <source src="/assets/navigators/native-stack/native-stack-animation-default.mp4" />
   </video>
 
 - `fade`: fade screen in or out
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/native-stack-animation-fade.mp4" />
+   <source src="/assets/navigators/native-stack/native-stack-animation-fade.mp4" />
   </video>
 
 - `fade_from_bottom`: fade the new screen from bottom
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/native-stack-animation-fade-from-bottom.mp4" />
+   <source src="/assets/navigators/native-stack/native-stack-animation-fade-from-bottom.mp4" />
   </video>
 
 - `flip`: flip the screen, requires `presentation: "modal"` (iOS only)
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/native-stack-animation-flip.mp4" />
+   <source src="/assets/navigators/native-stack/native-stack-animation-flip.mp4" />
   </video>
 
 - `simple_push`: default animation, but without shadow and native header transition (iOS only, uses default animation on Android)
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/native-stack-animation-simple-push.mp4" />
+   <source src="/assets/navigators/native-stack/native-stack-animation-simple-push.mp4" />
   </video>
 
 - `slide_from_bottom`: slide in the new screen from bottom
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/native-stack-animation-slide-from-bottom.mp4" />
+   <source src="/assets/navigators/native-stack/native-stack-animation-slide-from-bottom.mp4" />
   </video>
 
 - `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/native-stack-animation-slide-from-right.mp4" />
+   <source src="/assets/navigators/native-stack/native-stack-animation-slide-from-right.mp4" />
   </video>
 
 - `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/native-stack-animation-slide-from-left.mp4" />
+   <source src="/assets/navigators/native-stack/native-stack-animation-slide-from-left.mp4" />
   </video>
 
 - `none`: don't animate the screen
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/native-stack-animation-none.mp4" />
+   <source src="/assets/navigators/native-stack/native-stack-animation-none.mp4" />
   </video>
 
 #### `presentation`
@@ -315,40 +315,40 @@ Supported values:
 
 - `card`: the new screen will be pushed onto a stack, which means the default animation will be slide from the side on iOS, the animation on Android will vary depending on the OS version and theme.
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/presentation-card.mp4" />
+   <source src="/assets/navigators/native-stack/presentation-card.mp4" />
   </video>
 
 - `modal`: the new screen will be presented modally. this also allows for a nested stack to be rendered inside the screen.
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/presentation-modal.mp4" />
+   <source src="/assets/navigators/native-stack/presentation-modal.mp4" />
   </video>
 
 - `transparentModal`: the new screen will be presented modally, but in addition, the previous screen will stay so that the content below can still be seen if the screen has translucent background.
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/presentation-transparentModal.mp4" />
+   <source src="/assets/navigators/native-stack/presentation-transparentModal.mp4" />
   </video>
 
 - `containedModal`: will use "UIModalPresentationCurrentContext" modal style on iOS and will fallback to "modal" on Android.
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/presentation-containedModal.mp4" />
+   <source src="/assets/navigators/native-stack/presentation-containedModal.mp4" />
   </video>
 
 - `containedTransparentModal`: will use "UIModalPresentationOverCurrentContext" modal style on iOS and will fallback to "transparentModal" on Android.
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/presentation-containedTransparentModal.mp4" />
+   <source src="/assets/navigators/native-stack/presentation-containedTransparentModal.mp4" />
   </video>
 
 - `fullScreenModal`: will use "UIModalPresentationFullScreen" modal style on iOS and will fallback to "modal" on Android. A screen using this presentation style can't be dismissed by gesture.
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/presentation-fullScreenModal.mp4" />
+   <source src="/assets/navigators/native-stack/presentation-fullScreenModal.mp4" />
   </video>
 
 - `formSheet`: will use "BottomSheetBehavior" on Android and "UIModalPresentationFormSheet" modal style on iOS. See [Form Sheets](#form-sheets) for a detailed guide.
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/presentation-formSheet-android.mp4" />
+   <source src="/assets/navigators/native-stack/presentation-formSheet-android.mp4" />
   </video>
   <video playsInline autoPlay muted loop>
-   <source src="/assets/7.x/native-stack/presentation-formSheet-ios.mp4" />
+   <source src="/assets/navigators/native-stack/presentation-formSheet-ios.mp4" />
   </video>
 
 #### `orientation`
@@ -454,7 +454,7 @@ The following options only work when [`presentation`](#presentation) is set to `
 #### `sheetAllowedDetents`
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/formSheet-sheetAllowedDetents.mp4" />
+  <source src="/assets/navigators/native-stack/formSheet-sheetAllowedDetents.mp4" />
 </video>
 
 Describes heights where a sheet can rest.
@@ -468,7 +468,7 @@ See [Configuring sheet sizes](#configuring-sheet-sizes) for usage examples.
 #### `sheetElevation`
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/formSheet-sheetElevation.mp4" />
+  <source src="/assets/navigators/native-stack/formSheet-sheetElevation.mp4" />
 </video>
 
 Integer value describing elevation of the sheet, impacting shadow on the top edge.
@@ -480,7 +480,7 @@ Defaults to `24`. Only supported on Android.
 #### `sheetExpandsWhenScrolledToEdge`
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/formSheet-sheetExpandsWhenScrolledToEdge.mp4" />
+  <source src="/assets/navigators/native-stack/formSheet-sheetExpandsWhenScrolledToEdge.mp4" />
 </video>
 
 Whether the sheet should expand to a larger detent when scrolling.
@@ -494,7 +494,7 @@ See [Scroll behavior](#scroll-behavior) for more details.
 #### `sheetCornerRadius`
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/formSheet-sheetCornerRadius.mp4" />
+  <source src="/assets/navigators/native-stack/formSheet-sheetCornerRadius.mp4" />
 </video>
 
 The corner radius of the sheet. If set to a non-negative value it will use the provided radius, otherwise the system default is used.
@@ -504,7 +504,7 @@ Only supported on Android and iOS.
 #### `sheetInitialDetentIndex`
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/formSheet-sheetInitialDetentIndex.mp4" />
+  <source src="/assets/navigators/native-stack/formSheet-sheetInitialDetentIndex.mp4" />
 </video>
 
 Index of the detent the sheet should expand to after being opened. If the specified index is out of bounds of the `sheetAllowedDetents` array, an error will be thrown in development mode and the value will be reset to the default in production.
@@ -518,7 +518,7 @@ See [Configuring sheet sizes](#configuring-sheet-sizes) for usage examples.
 #### `sheetGrabberVisible`
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/formSheet-sheetGrabberVisible.mp4" />
+  <source src="/assets/navigators/native-stack/formSheet-sheetGrabberVisible.mp4" />
 </video>
 
 Whether the sheet shows a grabber handle at the top.
@@ -528,7 +528,7 @@ Defaults to `false`. Only supported on iOS.
 #### `sheetLargestUndimmedDetentIndex`
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/formSheet-sheetLargestUndimmedDetentIndex.mp4" />
+  <source src="/assets/navigators/native-stack/formSheet-sheetLargestUndimmedDetentIndex.mp4" />
 </video>
 
 The largest detent index for which the view underneath won't be dimmed.
@@ -565,7 +565,7 @@ Boolean indicating whether to show the menu on longPress of iOS >= 14 back butto
 
 Only supported on iOS.
 
-<img src="/assets/7.x/native-stack/headerBackButtonMenuEnabled.png" width="500" alt="Header back button menu enabled" />
+<img src="/assets/navigators/native-stack/headerBackButtonMenuEnabled.png" width="500" alt="Header back button menu enabled" />
 
 #### `headerBackVisible`
 
@@ -581,7 +581,7 @@ Use `headerBackButtonDisplayMode: "minimal"` to hide it.
 
 Only supported on iOS.
 
-<img src="/assets/7.x/native-stack/headerBackTitle.jpeg" width="500" alt="Header back title" />
+<img src="/assets/navigators/native-stack/headerBackTitle.jpeg" width="500" alt="Header back title" />
 
 #### `headerBackButtonDisplayMode`
 
@@ -612,7 +612,7 @@ Style object for header back title. Supported properties:
 
 Only supported on iOS.
 
-<img src="/assets/7.x/native-stack/headerBackTitleStyle.png" width="500" alt="Header back title style" />
+<img src="/assets/navigators/native-stack/headerBackTitleStyle.png" width="500" alt="Header back title style" />
 
 Example:
 
@@ -679,7 +679,7 @@ Only supported on iOS.
 
 <video playsInline autoPlay muted loop style={{ width: "500px" }}>
 
-  <source src="/assets/7.x/native-stack/headerLargeStyle.mp4" />
+  <source src="/assets/navigators/native-stack/headerLargeStyle.mp4" />
 </video>
 
 #### `headerLargeTitleEnabled`
@@ -693,7 +693,7 @@ Only supported on iOS.
 
 <video playsInline autoPlay muted loop style={{ width: "500px" }}>
 
-  <source src="/assets/7.x/native-stack/headerLargeTitle.mp4" />
+  <source src="/assets/navigators/native-stack/headerLargeTitle.mp4" />
 </video>
 
 #### `headerLargeTitleShadowVisible`
@@ -711,7 +711,7 @@ Style object for large title in header. Supported properties:
 
 Only supported on iOS.
 
-<img src="/assets/7.x/native-stack/headerLargeTitleStyle.png" width="500" alt="Header large title style" />
+<img src="/assets/navigators/native-stack/headerLargeTitleStyle.png" width="500" alt="Header large title style" />
 
 Example:
 
@@ -732,7 +732,7 @@ Style object for header. Supported properties:
 
 <video playsInline autoPlay muted loop style={{ width: "500px" }}>
 
-  <source src="/assets/7.x/native-stack/headerStyle.mp4" />
+  <source src="/assets/navigators/native-stack/headerStyle.mp4" />
 </video>
 
 #### `headerShadowVisible`
@@ -740,10 +740,10 @@ Style object for header. Supported properties:
 Whether to hide the elevation shadow (Android) or the bottom border (iOS) on the header.
 
 Android:
-<img src="/assets/7.x/native-stack/headerShadowVisible-Android.png" width="500" alt="Header shadow visible Android" />
+<img src="/assets/navigators/native-stack/headerShadowVisible-Android.png" width="500" alt="Header shadow visible Android" />
 
 iOS:
-<img src="/assets/7.x/native-stack/headerShadowVisible-iOS.png" width="500" alt="Header shadow visible iOS" />
+<img src="/assets/navigators/native-stack/headerShadowVisible-iOS.png" width="500" alt="Header shadow visible iOS" />
 
 #### `headerTransparent`
 
@@ -766,59 +766,59 @@ Supported values:
 - `extraLight`
 
 - `light`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-light.png" width="500" alt="Header blur effect light" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-light.png" width="500" alt="Header blur effect light" />
 
 - `dark`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-dark.png" width="500" alt="Header blur effect dark" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-dark.png" width="500" alt="Header blur effect dark" />
 
 - `regular`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-regular.png" width="500" alt="Header blur effect regular" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-regular.png" width="500" alt="Header blur effect regular" />
 
 - `prominent`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterial.png" width="500" alt="Header blur effect systemUltraThinMaterial" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemUltraThinMaterial.png" width="500" alt="Header blur effect systemUltraThinMaterial" />
 
 - `systemUltraThinMaterial`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterial.png" width="500" alt="Header blur effect systemUltraThinMaterial" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemUltraThinMaterial.png" width="500" alt="Header blur effect systemUltraThinMaterial" />
 
 - `systemThinMaterial`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThinMaterial.png" width="500" alt="Header blur effect systemThinMaterial" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemThinMaterial.png" width="500" alt="Header blur effect systemThinMaterial" />
 
 - `systemMaterial`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemMaterial.png" width="500" alt="Header blur effect systemMaterial" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemMaterial.png" width="500" alt="Header blur effect systemMaterial" />
 
 - `systemThickMaterial`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThickMaterial.png" width="500" alt="Header blur effect systemThickMaterial" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemThickMaterial.png" width="500" alt="Header blur effect systemThickMaterial" />
 
 - `systemChromeMaterial`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemChromeMaterial.png" width="500" alt="Header blur effect systemChromeMaterial" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemChromeMaterial.png" width="500" alt="Header blur effect systemChromeMaterial" />
 
 - `systemUltraThinMaterialLight`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterialLight.png" width="500" alt="Header blur effect systemUltraThinMaterialLight" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemUltraThinMaterialLight.png" width="500" alt="Header blur effect systemUltraThinMaterialLight" />
 
 - `systemThinMaterialLight`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThinMaterialLight.png" width="500" alt="Header blur effect systemThinMaterialLight" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemThinMaterialLight.png" width="500" alt="Header blur effect systemThinMaterialLight" />
 
 - `systemMaterialLight`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemMaterialLight.png" width="500" alt="Header blur effect systemMaterialLight" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemMaterialLight.png" width="500" alt="Header blur effect systemMaterialLight" />
 
 - `systemThickMaterialLight`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThickMaterialLight.png" width="500" alt="Header blur effect systemThickMaterialLight" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemThickMaterialLight.png" width="500" alt="Header blur effect systemThickMaterialLight" />
 
 - `systemChromeMaterialLight`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemChromeMaterialLight.png" width="500" alt="Header blur effect systemChromeMaterialLight" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemChromeMaterialLight.png" width="500" alt="Header blur effect systemChromeMaterialLight" />
 
 - `systemUltraThinMaterialDark`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemUltraThinMaterialDark.png" width="500" alt="Header blur effect systemUltraThinMaterialDark" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemUltraThinMaterialDark.png" width="500" alt="Header blur effect systemUltraThinMaterialDark" />
 - `systemThinMaterialDark`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThinMaterialDark.png" width="500" alt="Header blur effect systemThinMaterialDark" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemThinMaterialDark.png" width="500" alt="Header blur effect systemThinMaterialDark" />
 
 - `systemMaterialDark`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemMaterialDark.png" width="500" alt="Header blur effect systemMaterialDark" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemMaterialDark.png" width="500" alt="Header blur effect systemMaterialDark" />
 - `systemThickMaterialDark`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemThickMaterialDark.png" width="500" alt="Header blur effect systemThickMaterialDark" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemThickMaterialDark.png" width="500" alt="Header blur effect systemThickMaterialDark" />
 
 - `systemChromeMaterialDark`
-  <img src="/assets/7.x/native-stack/headerBlurEffect-systemChromeMaterialDark.png" width="500" alt="Header blur effect systemChromeMaterialDark" />
+  <img src="/assets/navigators/native-stack/headerBlurEffect-systemChromeMaterialDark.png" width="500" alt="Header blur effect systemChromeMaterialDark" />
 
 :::note
 
@@ -832,7 +832,7 @@ Only supported on iOS.
 
 Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
 
-  <img src="/assets/7.x/native-stack/headerBackground.png" width="500" alt="Header background"/>
+  <img src="/assets/navigators/native-stack/headerBackground.png" width="500" alt="Header background"/>
 
 Example:
 
@@ -851,7 +851,7 @@ Example:
 
 Tint color for the header. Changes the color of back button and title.
 
-  <img src="/assets/7.x/native-stack/headerTintColor.png" width="500" alt="Header tint color" />
+  <img src="/assets/navigators/native-stack/headerTintColor.png" width="500" alt="Header tint color" />
 
 #### `headerLeft`
 
@@ -862,7 +862,7 @@ Function which returns a React Element to display on the left side of the header
 - `label` - Label text for the button. Usually the title of the previous screen.
 - `href` - The `href` to use for the anchor tag on web
 
-<img src="/assets/7.x/native-stack/headerLeft.png" width="500" alt="Header right"/>
+<img src="/assets/navigators/native-stack/headerLeft.png" width="500" alt="Header right"/>
 
 Example:
 
@@ -920,7 +920,7 @@ Function which returns a React Element to display on the right side of the heade
 - `tintColor` - The tint color to apply. Defaults to the [theme](themes.md)'s primary color.
 - `canGoBack` - Boolean indicating whether there is a screen to go back to.
 
-  <img src="/assets/7.x/native-stack/headerRight.png" width="500" alt="Header right"/>
+  <img src="/assets/navigators/native-stack/headerRight.png" width="500" alt="Header right"/>
 
 Example:
 
@@ -980,10 +980,10 @@ Note that if you render a custom element by passing a function, animations for t
 How to align the header title. Possible values:
 
 - `left`
-  <img src="/assets/7.x/native-stack/headerTitleAlign-left.png" width="500" alt="Header title align left"/>
+  <img src="/assets/navigators/native-stack/headerTitleAlign-left.png" width="500" alt="Header title align left"/>
 
 - `center`
-  <img src="/assets/7.x/native-stack/headerTitleAlign-center.png" width="500" alt="Header title align center"/>
+  <img src="/assets/navigators/native-stack/headerTitleAlign-center.png" width="500" alt="Header title align center"/>
 
 Defaults to `left` on platforms other than iOS.
 
@@ -998,7 +998,7 @@ Style object for header title. Supported properties:
 - `fontWeight`
 - `color`
 
-  <img src="/assets/7.x/native-stack/headerTitleStyle.png" width="500" alt="Header title style"/>
+  <img src="/assets/navigators/native-stack/headerTitleStyle.png" width="500" alt="Header title style"/>
 
 Example:
 
@@ -1067,7 +1067,7 @@ The search field background color. By default bar tint color is translucent.
 
 Only supported on iOS.
 
-<img src="/assets/7.x/native-stack/headerSearchBarOptions-barTintColor.png" width="500" alt="Header search bar options - Bar tint color" />
+<img src="/assets/navigators/native-stack/headerSearchBarOptions-barTintColor.png" width="500" alt="Header search bar options - Bar tint color" />
 
 ##### `tintColor`
 
@@ -1075,7 +1075,7 @@ The color for the cursor caret and cancel button text.
 
 Only supported on iOS.
 
-<img src="/assets/7.x/native-stack/headerSearchBarOptions-tintColor.png" width="500" alt="Header search bar options - Tint color" />
+<img src="/assets/navigators/native-stack/headerSearchBarOptions-tintColor.png" width="500" alt="Header search bar options - Tint color" />
 
 ##### `cancelButtonText`
 
@@ -1157,7 +1157,7 @@ Text displayed when search field is empty.
 
 The color of the text in the search field.
 
-<img src="/assets/7.x/native-stack/headerSearchBarOptions-textColor.png" width="500" alt="Header search bar options - Text color" />
+<img src="/assets/navigators/native-stack/headerSearchBarOptions-textColor.png" width="500" alt="Header search bar options - Text color" />
 
 ##### `hintTextColor`
 
@@ -1165,7 +1165,7 @@ The color of the hint text in the search field.
 
 Only supported on Android.
 
-<img src="/assets/7.x/native-stack/headerSearchBarOptions-hintTextColor.png" width="500" alt="Header search bar options - Hint text color" />
+<img src="/assets/navigators/native-stack/headerSearchBarOptions-hintTextColor.png" width="500" alt="Header search bar options - Hint text color" />
 
 ##### `headerIconColor`
 
@@ -1173,7 +1173,7 @@ The color of the search and close icons shown in the header
 
 Only supported on Android.
 
-<img src="/assets/7.x/native-stack/headerSearchBarOptions-headerIconColor.png" width="500" alt="Header search bar options - Header icon color" />
+<img src="/assets/navigators/native-stack/headerSearchBarOptions-headerIconColor.png" width="500" alt="Header search bar options - Header icon color" />
 
 ##### `shouldShowHintSearchIcon`
 
@@ -1441,7 +1441,7 @@ const MyView = () => {
 Form sheets present content in a sheet that slides up from the bottom of the screen. They are commonly used for secondary actions, forms, or detail views that don't need to take over the full screen.
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/native-stack/presentation-formSheet-ios.mp4" />
+  <source src="/assets/navigators/native-stack/presentation-formSheet-ios.mp4" />
 </video>
 
 To present a screen as a form sheet, set [`presentation`](#presentation) to `formSheet` in the screen's options:
@@ -1688,9 +1688,9 @@ The [`unstable_headerLeftItems`](#unstable_headerleftitems) and [`unstable_heade
 
 On iOS 26+, the header right items can also be collapsed into an overflow menu by the system when there is not enough space to show all items. Note that custom elements (with `type: 'custom'`) won't be collapsed into the overflow menu.
 
-<img src="/assets/header-items/header-items.png" width="300" alt="Header items" />
+<img src="/assets/navigators/native-stack/header-items.png" width="300" alt="Header items" />
 
-<img src="/assets/header-items/header-items-menu.png" width="300" alt="Header item with menu" />
+<img src="/assets/navigators/native-stack/header-items-menu.png" width="300" alt="Header item with menu" />
 
 There are 3 categories of items that can be displayed in the header:
 

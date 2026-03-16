@@ -9,7 +9,7 @@ React Native Tab View is a cross-platform Tab View component for React Native im
 It follows material design guidelines by default, but you can also use your own custom tab bar or position the tab bar at the bottom.
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/tab-view.mp4" />
+  <source src="/assets/libraries/tab-view/tab-view.mp4" />
 </video>
 
 This package doesn't integrate with React Navigation. If you want to integrate the tab view with React Navigation's navigation system, e.g. want to show screens in the tab bar and be able to navigate between them using `navigation.navigate` etc, use [Material Top Tab Navigator](material-top-tab-navigator.md) instead.

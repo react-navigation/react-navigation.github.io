@@ -287,4 +287,4 @@ React.useEffect(() => {
 }, [navigation, unreadMessagesCount]);
 ```
 
-![Tabs with badges](/assets/navigators/tabs/tabs-badges.png)
+![Tabs with badges](/assets/navigators/bottom-tabs/tabs-badges.png)

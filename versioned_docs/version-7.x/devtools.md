@@ -27,7 +27,7 @@ This hook provides a logger for React Navigation. It logs the navigation state a
 
 <video playsInline autoPlay muted loop style={{ width: "585px" }}>
 
-  <source src="/assets/7.x/devtool-logger.mp4" />
+  <source src="/assets/devtools/devtool-logger.mp4" />
 </video>
 
 **Usage:**
