@@ -345,10 +345,10 @@ Supported values:
 
 - `formSheet`: will use "BottomSheetBehavior" on Android and "UIModalPresentationFormSheet" modal style on iOS. See [Form Sheets](#form-sheets) for a detailed guide.
   <video playsInline autoPlay muted loop>
-   <source src="/assets/navigators/native-stack/presentation-formSheet-android.mp4" />
+   <source src="/assets/navigators/native-stack/presentation-formsheet-android.mp4" />
   </video>
   <video playsInline autoPlay muted loop>
-   <source src="/assets/navigators/native-stack/presentation-formSheet-ios.mp4" />
+   <source src="/assets/navigators/native-stack/presentation-formsheet-ios.mp4" />
   </video>
 
 #### `orientation`
@@ -454,7 +454,7 @@ The following options only work when [`presentation`](#presentation) is set to `
 #### `sheetAllowedDetents`
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/native-stack/formSheet-sheetAllowedDetents.mp4" />
+  <source src="/assets/navigators/native-stack/sheet-allowed-detents.mp4" />
 </video>
 
 Describes heights where a sheet can rest.
@@ -468,7 +468,7 @@ See [Configuring sheet sizes](#configuring-sheet-sizes) for usage examples.
 #### `sheetElevation`
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/native-stack/formSheet-sheetElevation.mp4" />
+  <source src="/assets/navigators/native-stack/sheet-elevation.mp4" />
 </video>
 
 Integer value describing elevation of the sheet, impacting shadow on the top edge.
@@ -480,7 +480,7 @@ Defaults to `24`. Only supported on Android.
 #### `sheetExpandsWhenScrolledToEdge`
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/native-stack/formSheet-sheetExpandsWhenScrolledToEdge.mp4" />
+  <source src="/assets/navigators/native-stack/sheet-expands-when-scrolled-to-edge.mp4" />
 </video>
 
 Whether the sheet should expand to a larger detent when scrolling.
@@ -494,7 +494,7 @@ See [Scroll behavior](#scroll-behavior) for more details.
 #### `sheetCornerRadius`
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/native-stack/formSheet-sheetCornerRadius.mp4" />
+  <source src="/assets/navigators/native-stack/sheet-corner-radius.mp4" />
 </video>
 
 The corner radius of the sheet. If set to a non-negative value it will use the provided radius, otherwise the system default is used.
@@ -504,7 +504,7 @@ Only supported on Android and iOS.
 #### `sheetInitialDetentIndex`
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/native-stack/formSheet-sheetInitialDetentIndex.mp4" />
+  <source src="/assets/navigators/native-stack/sheet-initial-detent-index.mp4" />
 </video>
 
 Index of the detent the sheet should expand to after being opened. If the specified index is out of bounds of the `sheetAllowedDetents` array, an error will be thrown in development mode and the value will be reset to the default in production.
@@ -518,7 +518,7 @@ See [Configuring sheet sizes](#configuring-sheet-sizes) for usage examples.
 #### `sheetGrabberVisible`
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/native-stack/formSheet-sheetGrabberVisible.mp4" />
+  <source src="/assets/navigators/native-stack/sheet-grabber-visible.mp4" />
 </video>
 
 Whether the sheet shows a grabber handle at the top.
@@ -528,7 +528,7 @@ Defaults to `false`. Only supported on iOS.
 #### `sheetLargestUndimmedDetentIndex`
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/native-stack/formSheet-sheetLargestUndimmedDetentIndex.mp4" />
+  <source src="/assets/navigators/native-stack/sheet-largest-undimmed-detent-index.mp4" />
 </video>
 
 The largest detent index for which the view underneath won't be dimmed.
@@ -1441,7 +1441,11 @@ const MyView = () => {
 Form sheets present content in a sheet that slides up from the bottom of the screen. They are commonly used for secondary actions, forms, or detail views that don't need to take over the full screen.
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/native-stack/presentation-formSheet-ios.mp4" />
+  <source src="/assets/navigators/native-stack/presentation-formsheet-android.mp4" />
+</video>
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/native-stack/presentation-formsheet-ios.mp4" />
 </video>
 
 To present a screen as a form sheet, set [`presentation`](#presentation) to `formSheet` in the screen's options:
