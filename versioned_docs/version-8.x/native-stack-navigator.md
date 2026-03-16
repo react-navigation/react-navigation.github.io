@@ -4,8 +4,6 @@ title: Native Stack Navigator
 sidebar_label: Native Stack
 ---
 
-Native Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
-
 <div className="feature-grid">
 
 - <video playsInline autoPlay muted loop><source src="/assets/native-stack/highlights/formsheet.mp4" /></video>
@@ -33,6 +31,8 @@ Native Stack Navigator provides a way for your app to transition between screens
   [Transition animations](#animation)
 
 </div>
+
+Native Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
 This navigator uses the native APIs `UINavigationController` on iOS and `Fragment` on Android so that navigation built with `createNativeStackNavigator` will behave exactly the same and have the same performance characteristics as apps built natively on top of those APIs. It also offers basic Web support using [`react-native-web`](https://github.com/necolas/react-native-web).
 

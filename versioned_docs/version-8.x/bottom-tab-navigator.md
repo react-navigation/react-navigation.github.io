@@ -4,23 +4,27 @@ title: Bottom Tabs Navigator
 sidebar_label: Bottom Tabs
 ---
 
-Bottom Tab Navigator displays a set of screens with a tab bar to switch between them.
-
 <div className="feature-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-search.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/bottom-tabs/highlights/search-tab.mp4" /></video>
 
   [Search tab on iOS 26+](#search-tab-on-ios-26)
 
-- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-bottom-accessory.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/bottom-tabs/highlights/bottom-accessory.mp4" /></video>
 
   [Bottom accessory](#bottomaccessory)
 
-- <video playsInline autoPlay muted loop><source src="/assets/7.x/native-bottom-tabs-ios-minimize.mp4" /></video>
+- <video playsInline autoPlay muted loop><source src="/assets/bottom-tabs/highlights/minimize-on-scroll.mp4" /></video>
 
   [Minimize on scroll](#tabbarminimizebehavior)
 
+- <video playsInline autoPlay muted loop><source src="/assets/bottom-tabs/highlights/sidebar.mp4" /></video>
+
+  [Sidebar](#tabbarcontrollermode)
+
 </div>
+
+Bottom Tab Navigator displays a set of screens with a tab bar to switch between them.
 
 ## Installation
 
@@ -486,7 +490,7 @@ export default function App() {
 
 <video playsInline autoPlay muted loop data-landscape style={{ maxWidth: '402px' }}>
 
-  <source src="/assets/7.x/native-bottom-tabs-ios-search.mp4" />
+  <source src="/assets/bottom-tabs/highlights/search-tab.mp4" />
 </video>
 
 #### `tabBarLabelVisibilityMode`
@@ -985,7 +989,7 @@ Only supported with `native` implementation on iOS 26 and above.
 
 <video playsInline autoPlay muted loop data-landscape style={{ maxWidth: '402px' }}>
 
-  <source src="/assets/7.x/native-bottom-tabs-ios-minimize.mp4" />
+  <source src="/assets/bottom-tabs/highlights/minimize-on-scroll.mp4" />
 </video>
 
 #### `bottomAccessory`
@@ -1013,7 +1017,7 @@ On Android, iOS 18 and below, nothing is rendered. You can either use the [`scre
 
 <video playsInline autoPlay muted loop data-landscape style={{ maxWidth: '402px' }}>
 
-  <source src="/assets/7.x/native-bottom-tabs-ios-bottom-accessory.mp4" />
+  <source src="/assets/bottom-tabs/highlights/bottom-accessory.mp4" />
 </video>
 
 :::note

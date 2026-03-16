@@ -4,17 +4,29 @@ title: Stack Navigator
 sidebar_label: Stack
 ---
 
+<div className="feature-grid">
+
+- <video playsInline autoPlay muted loop><source src="/assets/stack/highlights/gestures.mp4" /></video>
+
+  [Gestures](#gestureenabled)
+
+- <video playsInline autoPlay muted loop><source src="/assets/stack/highlights/animation.mp4" /></video>
+
+  [Transition animations](#animation-related-options)
+
+- <video playsInline autoPlay muted loop><source src="/assets/stack/highlights/header-animation.mp4" /></video>
+
+  [Header animations](#headerstyleinterpolators)
+
+- <video playsInline autoPlay muted loop><source src="/assets/stack/highlights/search-bar.mp4" /></video>
+
+  [Search bar](elements.md#headersearchbaroptions)
+
+</div>
+
 Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
 By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, use OS default animation on Android. But the [animations can be customized](#animation-related-options) to match your needs.
-
-<video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/stack-android.mp4" />
-</video>
-
-<video playsInline autoPlay muted loop>
-  <source src="/assets/7.x/stack-ios.mp4" />
-</video>
 
 One thing to keep in mind is that while `@react-navigation/stack` is extremely customizable, it's implemented in JavaScript. While it runs animations and gestures using natively, the performance may not be as fast as a native implementation. This may not be an issue for a lot of apps, but if you're experiencing performance issues during navigation, consider using [`@react-navigation/native-stack`](native-stack-navigator.md) instead - which uses native navigation primitives.
 
