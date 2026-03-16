@@ -1144,6 +1144,7 @@ code {
     }
 
     & > .video-player {
+      display: block;
       margin: 0;
       box-shadow: none;
       outline: none;

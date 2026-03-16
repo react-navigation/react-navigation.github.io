@@ -32,12 +32,17 @@ function setupPlayer(video) {
     video.loop = false;
 
     feature.addEventListener('mouseenter', () => {
+      video.removeEventListener('ended', pause);
       video.loop = true;
 
       play();
     });
 
-    feature.addEventListener('mouseleave', pause);
+    feature.addEventListener('mouseleave', () => {
+      video.loop = false;
+
+      video.addEventListener('ended', pause, { once: true });
+    });
   } else {
     container.addEventListener('click', () => {
       if (video.paused) {
@@ -50,14 +55,14 @@ function setupPlayer(video) {
 
   container.style.borderRadius = window.getComputedStyle(video).borderRadius;
 
-  if (video.readyState >= 3) {
-    video.style.transition = 'opacity 1s';
+  video.style.transition = 'opacity 150ms';
+
+  if (video.readyState >= 2) {
     video.style.opacity = '1';
   } else {
-    video.style.transition = 'opacity 1s';
     video.style.opacity = '0';
 
-    video.addEventListener('canplaythrough', () => {
+    video.addEventListener('loadeddata', () => {
       video.style.opacity = '1';
     });
   }
