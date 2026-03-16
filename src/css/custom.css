@@ -1182,6 +1182,45 @@ code {
   }
 }
 
+.options-grid ul {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--ifm-spacing-horizontal);
+
+  li + li {
+    margin-top: 0;
+  }
+
+  li {
+    & > img {
+      display: block;
+      margin: 0;
+      border: 1px solid var(--ifm-toc-border-color);
+      border-radius: var(--ifm-global-radius);
+      width: 100%;
+      height: auto;
+    }
+
+    & > p {
+      font-weight: 700;
+      margin: calc(var(--ifm-spacing-vertical) / 2) 0 var(--ifm-spacing-vertical);
+
+      & > a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      & > a::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+}
+
 .blog-wrapper {
   & .container aside nav {
     margin-top: 2.25rem;

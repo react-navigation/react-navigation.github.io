@@ -565,7 +565,9 @@ Boolean indicating whether to show the menu on longPress of iOS >= 14 back butto
 
 Only supported on iOS.
 
-<img src="/assets/navigators/native-stack/headerBackButtonMenuEnabled.png" width="500" alt="Header back button menu enabled" />
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/native-stack/header-back-button-menu-enabled.mp4" />
+</video>
 
 #### `headerBackVisible`
 
@@ -581,7 +583,7 @@ Use `headerBackButtonDisplayMode: "minimal"` to hide it.
 
 Only supported on iOS.
 
-<img src="/assets/navigators/native-stack/headerBackTitle.jpeg" width="500" alt="Header back title" />
+<img src="/assets/navigators/native-stack/header-back-title.png" width="500" alt="Header back title" />
 
 #### `headerBackButtonDisplayMode`
 
@@ -612,14 +614,14 @@ Style object for header back title. Supported properties:
 
 Only supported on iOS.
 
-<img src="/assets/navigators/native-stack/headerBackTitleStyle.png" width="500" alt="Header back title style" />
+<img src="/assets/navigators/native-stack/header-back-title-style.png" width="500" alt="Header back title style" />
 
 Example:
 
 ```js
 headerBackTitleStyle: {
-  fontSize: 14,
-  fontFamily: 'Georgia',
+  fontSize: 16,
+  fontFamily: 'RobotoSlab_400Regular',
 },
 ```
 
@@ -763,62 +765,89 @@ Blur effect for the translucent header. The `headerTransparent` option needs to 
 
 Supported values:
 
-- `extraLight`
+<div className="options-grid">
 
-- `light`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-light.png" width="500" alt="Header blur effect light" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-extra-light.png" width="500" alt="Header blur effect extraLight" />
 
-- `dark`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-dark.png" width="500" alt="Header blur effect dark" />
+  `extraLight`
 
-- `regular`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-regular.png" width="500" alt="Header blur effect regular" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-light.png" width="500" alt="Header blur effect light" />
 
-- `prominent`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemUltraThinMaterial.png" width="500" alt="Header blur effect systemUltraThinMaterial" />
+  `light`
 
-- `systemUltraThinMaterial`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemUltraThinMaterial.png" width="500" alt="Header blur effect systemUltraThinMaterial" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-regular.png" width="500" alt="Header blur effect regular" />
 
-- `systemThinMaterial`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemThinMaterial.png" width="500" alt="Header blur effect systemThinMaterial" />
+  `regular`
 
-- `systemMaterial`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemMaterial.png" width="500" alt="Header blur effect systemMaterial" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-prominent.png" width="500" alt="Header blur effect prominent" />
 
-- `systemThickMaterial`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemThickMaterial.png" width="500" alt="Header blur effect systemThickMaterial" />
+  `prominent`
 
-- `systemChromeMaterial`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemChromeMaterial.png" width="500" alt="Header blur effect systemChromeMaterial" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material.png" width="500" alt="Header blur effect systemUltraThinMaterial" />
 
-- `systemUltraThinMaterialLight`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemUltraThinMaterialLight.png" width="500" alt="Header blur effect systemUltraThinMaterialLight" />
+  `systemUltraThinMaterial`
 
-- `systemThinMaterialLight`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemThinMaterialLight.png" width="500" alt="Header blur effect systemThinMaterialLight" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-thin-material.png" width="500" alt="Header blur effect systemThinMaterial" />
 
-- `systemMaterialLight`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemMaterialLight.png" width="500" alt="Header blur effect systemMaterialLight" />
+  `systemThinMaterial`
 
-- `systemThickMaterialLight`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemThickMaterialLight.png" width="500" alt="Header blur effect systemThickMaterialLight" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-material.png" width="500" alt="Header blur effect systemMaterial" />
 
-- `systemChromeMaterialLight`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemChromeMaterialLight.png" width="500" alt="Header blur effect systemChromeMaterialLight" />
+  `systemMaterial`
 
-- `systemUltraThinMaterialDark`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemUltraThinMaterialDark.png" width="500" alt="Header blur effect systemUltraThinMaterialDark" />
-- `systemThinMaterialDark`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemThinMaterialDark.png" width="500" alt="Header blur effect systemThinMaterialDark" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-thick-material.png" width="500" alt="Header blur effect systemThickMaterial" />
 
-- `systemMaterialDark`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemMaterialDark.png" width="500" alt="Header blur effect systemMaterialDark" />
-- `systemThickMaterialDark`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemThickMaterialDark.png" width="500" alt="Header blur effect systemThickMaterialDark" />
+  `systemThickMaterial`
 
-- `systemChromeMaterialDark`
-  <img src="/assets/navigators/native-stack/headerBlurEffect-systemChromeMaterialDark.png" width="500" alt="Header blur effect systemChromeMaterialDark" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-chrome-material.png" width="500" alt="Header blur effect systemChromeMaterial" />
+
+  `systemChromeMaterial`
+
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material-light.png" width="500" alt="Header blur effect systemUltraThinMaterialLight" />
+
+  `systemUltraThinMaterialLight`
+
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-thin-material-light.png" width="500" alt="Header blur effect systemThinMaterialLight" />
+
+  `systemThinMaterialLight`
+
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-material-light.png" width="500" alt="Header blur effect systemMaterialLight" />
+
+  `systemMaterialLight`
+
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-thick-material-light.png" width="500" alt="Header blur effect systemThickMaterialLight" />
+
+  `systemThickMaterialLight`
+
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-chrome-material-light.png" width="500" alt="Header blur effect systemChromeMaterialLight" />
+
+  `systemChromeMaterialLight`
+
+- <img src="/assets/navigators/native-stack/header-blur-effect-dark.png" width="500" alt="Header blur effect dark" />
+
+  `dark`
+
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material-dark.png" width="500" alt="Header blur effect systemUltraThinMaterialDark" />
+
+  `systemUltraThinMaterialDark`
+
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-thin-material-dark.png" width="500" alt="Header blur effect systemThinMaterialDark" />
+
+  `systemThinMaterialDark`
+
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-material-dark.png" width="500" alt="Header blur effect systemMaterialDark" />
+
+  `systemMaterialDark`
+
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-thick-material-dark.png" width="500" alt="Header blur effect systemThickMaterialDark" />
+
+  `systemThickMaterialDark`
+
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-chrome-material-dark.png" width="500" alt="Header blur effect systemChromeMaterialDark" />
+
+  `systemChromeMaterialDark`
+
+</div>
 
 :::note
 
