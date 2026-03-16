@@ -260,50 +260,63 @@ Only supported on Android and iOS.
 
 Supported values:
 
-- `default`: use the platform default animation
-  <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/native-stack/native-stack-animation-default.mp4" />
-  </video>
+<div className="options-grid">
 
-- `fade`: fade screen in or out
-  <video playsInline autoPlay muted loop>
-   <source src="/assets/navigators/native-stack/native-stack-animation-fade.mp4" />
-  </video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-default.mp4" /></video>
 
-- `fade_from_bottom`: fade the new screen from bottom
-  <video playsInline autoPlay muted loop>
-   <source src="/assets/navigators/native-stack/native-stack-animation-fade-from-bottom.mp4" />
-  </video>
+  `default`
 
-- `flip`: flip the screen, requires `presentation: "modal"` (iOS only)
-  <video playsInline autoPlay muted loop>
-   <source src="/assets/navigators/native-stack/native-stack-animation-flip.mp4" />
-  </video>
+  Use the platform default animation.
 
-- `simple_push`: default animation, but without shadow and native header transition (iOS only, uses default animation on Android)
-  <video playsInline autoPlay muted loop>
-   <source src="/assets/navigators/native-stack/native-stack-animation-simple-push.mp4" />
-  </video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-fade.mp4" /></video>
 
-- `slide_from_bottom`: slide in the new screen from bottom
-  <video playsInline autoPlay muted loop>
-   <source src="/assets/navigators/native-stack/native-stack-animation-slide-from-bottom.mp4" />
-  </video>
+  `fade`
 
-- `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
-  <video playsInline autoPlay muted loop>
-   <source src="/assets/navigators/native-stack/native-stack-animation-slide-from-right.mp4" />
-  </video>
+  Fade the screen in or out.
 
-- `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)
-  <video playsInline autoPlay muted loop>
-   <source src="/assets/navigators/native-stack/native-stack-animation-slide-from-left.mp4" />
-  </video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-fade-from-bottom.mp4" /></video>
 
-- `none`: don't animate the screen
-  <video playsInline autoPlay muted loop>
-   <source src="/assets/navigators/native-stack/native-stack-animation-none.mp4" />
-  </video>
+  `fade_from_bottom`
+
+  Fade the new screen in from the bottom.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-flip.mp4" /></video>
+
+  `flip`
+
+  Flip the screen. Requires `presentation: "modal"` on iOS.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-simple-push.mp4" /></video>
+
+  `simple_push`
+
+  Use the default animation without the shadow and native header transition. On Android, this falls back to the default animation.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-slide-from-bottom.mp4" /></video>
+
+  `slide_from_bottom`
+
+  Slide the new screen in from the bottom.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-slide-from-right.mp4" /></video>
+
+  `slide_from_right`
+
+  Slide the new screen in from the right. On iOS, this falls back to the default animation.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-slide-from-left.mp4" /></video>
+
+  `slide_from_left`
+
+  Slide the new screen in from the left. On iOS, this falls back to the default animation.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-none.mp4" /></video>
+
+  `none`
+
+  Don't animate the screen.
+
+</div>
 
 #### `presentation`
 
