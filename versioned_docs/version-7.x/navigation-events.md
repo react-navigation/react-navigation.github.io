@@ -378,9 +378,17 @@ const Tab = createBottomTabNavigatior({
 </TabItem>
 </Tabs>
 
+:::warning
+
+The listeners added with the `listeners` prop are only active as long as the screen is in navigation state. So some events such as `transitionEnd` in stack may not fire when going back as screen is removed from the state before the transition ends.
+
+:::
+
 ### `screenListeners` prop on the navigator
 
-You can pass a prop named `screenListeners` to the navigator component, where you can specify listeners for events from all screens for this navigator. This can be useful if you want to listen to specific events regardless of the screen, or want to listen to common events such as `state` which is emitted to all screens.
+You can pass a prop named `screenListeners` to the navigator component, where you can specify listeners for events from all screens for this navigator. It behaves identically to the `listeners` prop on `Screen`.
+
+This can be useful if you want to listen to specific events regardless of the screen, or want to listen to common events such as `state` which is emitted to all screens.
 
 Example:
 
