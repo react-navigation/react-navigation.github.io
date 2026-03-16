@@ -1197,26 +1197,34 @@ code {
     & > img {
       display: block;
       margin: 0;
-      border: 1px solid var(--ifm-toc-border-color);
       border-radius: var(--ifm-global-radius);
       width: 100%;
       height: auto;
     }
 
-    & > p {
+    & > .video-player {
+      margin: 0;
+      border-radius: var(--ifm-global-radius) !important;
+      overflow: hidden;
+
+      video {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    & > p:first-of-type {
       font-weight: 700;
-      margin: calc(var(--ifm-spacing-vertical) / 2) 0 var(--ifm-spacing-vertical);
+      margin: calc(var(--ifm-spacing-vertical) / 2) 0 0;
+    }
 
-      & > a {
-        color: inherit;
-        text-decoration: none;
-      }
+    & > p + p {
+      margin: calc(var(--ifm-spacing-vertical) / 4) 0 0;
+    }
 
-      & > a::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-      }
+    & > p:last-of-type {
+      margin-bottom: var(--ifm-spacing-vertical);
     }
   }
 }
