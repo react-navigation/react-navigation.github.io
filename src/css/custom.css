@@ -862,9 +862,9 @@ article {
   & .video-player {
     vertical-align: top;
     margin: var(--ifm-leading) 0;
-    box-shadow:
-      inset 0 0 0 1px rgba(0, 0, 0, 0.08),
-      var(--ifm-global-shadow-lw);
+    outline: 1px solid rgba(0, 0, 0, 0.08);
+    outline-offset: -1px;
+    box-shadow: var(--ifm-global-shadow-lw);
     border-radius: var(--ifm-global-radius);
   }
 
@@ -1146,6 +1146,7 @@ code {
     & > .video-player {
       margin: 0;
       box-shadow: none;
+      outline: none;
       border-radius: 0 !important;
       border-bottom: 1px solid var(--ifm-toc-border-color);
 
@@ -1154,6 +1155,7 @@ code {
         width: 100%;
         object-fit: cover;
         border-radius: 0;
+        outline: none;
       }
 
       .video-player-icon {
