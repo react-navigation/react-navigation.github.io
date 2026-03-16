@@ -387,7 +387,7 @@ drawerIcon: ({ color, size }) => (
 
 Color for the icon and label in the active item in the drawer.
 
-<img src="/assets/navigators/drawer/drawerActiveTintColor.png" width="500" alt="Drawer active tint color" />
+![Drawer active tint color](/assets/navigators/drawer/drawerActiveTintColor.png)
 
 ```js
    drawerActiveTintColor: 'green',
@@ -397,7 +397,7 @@ Color for the icon and label in the active item in the drawer.
 
 Background color for the active item in the drawer.
 
-<img src="/assets/navigators/drawer/drawerActiveBackgroundColor.png" width="500" alt="Drawer active background color" />
+![Drawer active background color](/assets/navigators/drawer/drawerActiveBackgroundColor.png)
 
 ```js
     screenOptions={{
@@ -421,7 +421,7 @@ Background color for the inactive items in the drawer.
 
 Style object for the single item, which can contain an icon and/or a label.
 
-<img src="/assets/navigators/drawer/drawerItemStyle.png" width="500" alt="Drawer item style" />
+![Drawer item style](/assets/navigators/drawer/drawerItemStyle.png)
 
 Example:
 
@@ -438,7 +438,7 @@ Example:
 
 Style object to apply to the `Text` style inside content section which renders a label.
 
-<img src="/assets/navigators/drawer/drawerLabelStyle.png" width="500" alt="Drawer label style" />
+![Drawer label style](/assets/navigators/drawer/drawerLabelStyle.png)
 
 Example:
 
@@ -462,7 +462,7 @@ Style object for the wrapper view.
 
 Style object for the drawer component. You can pass a custom background color for a drawer or a custom width here.
 
-<img src="/assets/navigators/drawer/drawerStyle.png" width="500" alt="Drawer style" />
+![Drawer style](/assets/navigators/drawer/drawerStyle.png)
 
 ```js
 <Drawer.Navigator

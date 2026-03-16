@@ -870,14 +870,14 @@ article {
 
   & img {
     display: inline-block;
-    width: 300px;
+    width: 402px;
     max-width: 100%;
   }
 
   & video {
     display: inline-block;
     vertical-align: top;
-    width: 300px;
+    width: 402px;
     height: auto;
     max-width: 100%;
     border-radius: var(--ifm-global-radius);

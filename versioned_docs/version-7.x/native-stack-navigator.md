@@ -580,7 +580,7 @@ Use `headerBackButtonDisplayMode: "minimal"` to hide it.
 
 Only supported on iOS.
 
-<img src="/assets/navigators/native-stack/header-back-title.png" width="500" alt="Header back title" />
+![Header back title](/assets/navigators/native-stack/header-back-title.png)
 
 #### `headerBackButtonDisplayMode`
 
@@ -611,7 +611,7 @@ Style object for header back title. Supported properties:
 
 Only supported on iOS.
 
-<img src="/assets/navigators/native-stack/header-back-title-style.png" width="500" alt="Header back title style" />
+![Header back title style](/assets/navigators/native-stack/header-back-title-style.png)
 
 Example:
 
@@ -650,11 +650,6 @@ Supported properties:
 
 Only supported on iOS.
 
-<video playsInline autoPlay muted loop style={{ width: "500px" }}>
-
-  <source src="/assets/navigators/native-stack/headerLargeStyle.mp4" />
-</video>
-
 #### `headerLargeTitleEnabled`
 
 Whether to enable header with large title which collapses to regular header on scroll.
@@ -664,9 +659,8 @@ For large title to collapse on scroll, the content of the screen should be wrapp
 
 Only supported on iOS.
 
-<video playsInline autoPlay muted loop style={{ width: "500px" }}>
-
-  <source src="/assets/navigators/native-stack/headerLargeTitle.mp4" />
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/native-stack/highlights/large-title.mp4" />
 </video>
 
 #### `headerLargeTitleShadowVisible`
@@ -683,8 +677,6 @@ Style object for large title in header. Supported properties:
 - `color`
 
 Only supported on iOS.
-
-<img src="/assets/navigators/native-stack/headerLargeTitleStyle.png" width="500" alt="Header large title style" />
 
 Example:
 
@@ -703,20 +695,9 @@ Style object for header. Supported properties:
 
 - `backgroundColor`
 
-<video playsInline autoPlay muted loop style={{ width: "500px" }}>
-
-  <source src="/assets/navigators/native-stack/headerStyle.mp4" />
-</video>
-
 #### `headerShadowVisible`
 
 Whether to hide the elevation shadow (Android) or the bottom border (iOS) on the header.
-
-Android:
-<img src="/assets/navigators/native-stack/headerShadowVisible-Android.png" width="500" alt="Header shadow visible Android" />
-
-iOS:
-<img src="/assets/navigators/native-stack/headerShadowVisible-iOS.png" width="500" alt="Header shadow visible iOS" />
 
 #### `headerTransparent`
 
@@ -738,83 +719,83 @@ Supported values:
 
 <div className="options-grid">
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-extra-light.png" width="500" alt="Header blur effect extraLight" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-extra-light.png" alt="Header blur effect extraLight" />
 
   `extraLight`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-light.png" width="500" alt="Header blur effect light" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-light.png" alt="Header blur effect light" />
 
   `light`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-regular.png" width="500" alt="Header blur effect regular" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-regular.png" alt="Header blur effect regular" />
 
   `regular`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-prominent.png" width="500" alt="Header blur effect prominent" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-prominent.png" alt="Header blur effect prominent" />
 
   `prominent`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material.png" width="500" alt="Header blur effect systemUltraThinMaterial" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material.png" alt="Header blur effect systemUltraThinMaterial" />
 
   `systemUltraThinMaterial`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-thin-material.png" width="500" alt="Header blur effect systemThinMaterial" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-thin-material.png" alt="Header blur effect systemThinMaterial" />
 
   `systemThinMaterial`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-material.png" width="500" alt="Header blur effect systemMaterial" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-material.png" alt="Header blur effect systemMaterial" />
 
   `systemMaterial`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-thick-material.png" width="500" alt="Header blur effect systemThickMaterial" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-thick-material.png" alt="Header blur effect systemThickMaterial" />
 
   `systemThickMaterial`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-chrome-material.png" width="500" alt="Header blur effect systemChromeMaterial" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-chrome-material.png" alt="Header blur effect systemChromeMaterial" />
 
   `systemChromeMaterial`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material-light.png" width="500" alt="Header blur effect systemUltraThinMaterialLight" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material-light.png" alt="Header blur effect systemUltraThinMaterialLight" />
 
   `systemUltraThinMaterialLight`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-thin-material-light.png" width="500" alt="Header blur effect systemThinMaterialLight" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-thin-material-light.png" alt="Header blur effect systemThinMaterialLight" />
 
   `systemThinMaterialLight`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-material-light.png" width="500" alt="Header blur effect systemMaterialLight" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-material-light.png" alt="Header blur effect systemMaterialLight" />
 
   `systemMaterialLight`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-thick-material-light.png" width="500" alt="Header blur effect systemThickMaterialLight" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-thick-material-light.png" alt="Header blur effect systemThickMaterialLight" />
 
   `systemThickMaterialLight`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-chrome-material-light.png" width="500" alt="Header blur effect systemChromeMaterialLight" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-chrome-material-light.png" alt="Header blur effect systemChromeMaterialLight" />
 
   `systemChromeMaterialLight`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-dark.png" width="500" alt="Header blur effect dark" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-dark.png" alt="Header blur effect dark" />
 
   `dark`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material-dark.png" width="500" alt="Header blur effect systemUltraThinMaterialDark" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material-dark.png" alt="Header blur effect systemUltraThinMaterialDark" />
 
   `systemUltraThinMaterialDark`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-thin-material-dark.png" width="500" alt="Header blur effect systemThinMaterialDark" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-thin-material-dark.png" alt="Header blur effect systemThinMaterialDark" />
 
   `systemThinMaterialDark`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-material-dark.png" width="500" alt="Header blur effect systemMaterialDark" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-material-dark.png" alt="Header blur effect systemMaterialDark" />
 
   `systemMaterialDark`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-thick-material-dark.png" width="500" alt="Header blur effect systemThickMaterialDark" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-thick-material-dark.png" alt="Header blur effect systemThickMaterialDark" />
 
   `systemThickMaterialDark`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-chrome-material-dark.png" width="500" alt="Header blur effect systemChromeMaterialDark" />
+- <img src="/assets/navigators/native-stack/header-blur-effect-system-chrome-material-dark.png" alt="Header blur effect systemChromeMaterialDark" />
 
   `systemChromeMaterialDark`
 
@@ -822,7 +803,7 @@ Supported values:
 
 :::note
 
-Using both `blurEffect` and `scrollEdgeEffects` (>= iOS 26) simultaneously may cause overlapping effects.
+Using both [`headerBlurEffect`](#headerblureffect) and `scrollEdgeEffects` (>= iOS 26) simultaneously may cause overlapping effects.
 
 :::
 
@@ -831,8 +812,6 @@ Only supported on iOS.
 #### `headerBackground`
 
 Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
-
-  <img src="/assets/navigators/native-stack/headerBackground.png" width="500" alt="Header background"/>
 
 Example:
 
@@ -851,8 +830,6 @@ Example:
 
 Tint color for the header. Changes the color of back button and title.
 
-  <img src="/assets/navigators/native-stack/headerTintColor.png" width="500" alt="Header tint color" />
-
 #### `headerLeft`
 
 Function which returns a React Element to display on the left side of the header. This replaces the back button. See `headerBackVisible` to show the back button along side left element. It receives the following properties in the arguments:
@@ -861,8 +838,6 @@ Function which returns a React Element to display on the left side of the header
 - `canGoBack` - Boolean indicating whether there is a screen to go back to.
 - `label` - Label text for the button. Usually the title of the previous screen.
 - `href` - The `href` to use for the anchor tag on web
-
-<img src="/assets/navigators/native-stack/headerLeft.png" width="500" alt="Header right"/>
 
 Example:
 
@@ -911,8 +886,6 @@ Function which returns a React Element to display on the right side of the heade
 
 - `tintColor` - The tint color to apply. Defaults to the [theme](themes.md)'s primary color.
 - `canGoBack` - Boolean indicating whether there is a screen to go back to.
-
-  <img src="/assets/navigators/native-stack/headerRight.png" width="500" alt="Header right"/>
 
 Example:
 
@@ -964,10 +937,7 @@ Note that if you render a custom element by passing a function, animations for t
 How to align the header title. Possible values:
 
 - `left`
-  <img src="/assets/navigators/native-stack/headerTitleAlign-left.png" width="500" alt="Header title align left"/>
-
 - `center`
-  <img src="/assets/navigators/native-stack/headerTitleAlign-center.png" width="500" alt="Header title align center"/>
 
 Defaults to `left` on platforms other than iOS.
 
@@ -981,8 +951,6 @@ Style object for header title. Supported properties:
 - `fontSize`
 - `fontWeight`
 - `color`
-
-  <img src="/assets/navigators/native-stack/headerTitleStyle.png" width="500" alt="Header title style"/>
 
 Example:
 
@@ -1012,6 +980,10 @@ React.useLayoutEffect(() => {
   });
 }, [navigation]);
 ```
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/native-stack/highlights/search-bar.mp4" />
+</video>
 
 Supported properties are:
 
@@ -1051,15 +1023,11 @@ The search field background color. By default bar tint color is translucent.
 
 Only supported on iOS.
 
-<img src="/assets/navigators/native-stack/headerSearchBarOptions-barTintColor.png" width="500" alt="Header search bar options - Bar tint color" />
-
 ##### `tintColor`
 
 The color for the cursor caret and cancel button text.
 
 Only supported on iOS.
-
-<img src="/assets/navigators/native-stack/headerSearchBarOptions-tintColor.png" width="500" alt="Header search bar options - Tint color" />
 
 ##### `cancelButtonText`
 
@@ -1141,23 +1109,17 @@ Text displayed when search field is empty.
 
 The color of the text in the search field.
 
-<img src="/assets/navigators/native-stack/headerSearchBarOptions-textColor.png" width="500" alt="Header search bar options - Text color" />
-
 ##### `hintTextColor`
 
 The color of the hint text in the search field.
 
 Only supported on Android.
 
-<img src="/assets/navigators/native-stack/headerSearchBarOptions-hintTextColor.png" width="500" alt="Header search bar options - Hint text color" />
-
 ##### `headerIconColor`
 
 The color of the search and close icons shown in the header
 
 Only supported on Android.
-
-<img src="/assets/navigators/native-stack/headerSearchBarOptions-headerIconColor.png" width="500" alt="Header search bar options - Header icon color" />
 
 ##### `shouldShowHintSearchIcon`
 
@@ -1672,9 +1634,9 @@ The [`unstable_headerLeftItems`](#unstable_headerleftitems) and [`unstable_heade
 
 On iOS 26+, the header right items can also be collapsed into an overflow menu by the system when there is not enough space to show all items. Note that custom elements (with `type: 'custom'`) won't be collapsed into the overflow menu.
 
-<img src="/assets/navigators/native-stack/header-items.png" width="300" alt="Header items" />
-
-<img src="/assets/navigators/native-stack/header-items-menu.png" width="300" alt="Header item with menu" />
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/native-stack/highlights/header-items.mp4" />
+</video>
 
 There are 3 categories of items that can be displayed in the header:
 

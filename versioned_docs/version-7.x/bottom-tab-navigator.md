@@ -266,7 +266,7 @@ By default, the position is chosen automatically based on device width.
 #### `tabBarLabelStyle`
 
 Style object for the tab label.
-<img src="/assets/navigators/bottom-tabs/tabBarLabelStyle.png" width="500" alt="Tab bar label style" />
+![Tab bar label style](/assets/navigators/bottom-tabs/tabBarLabelStyle.png)
 
 Example:
 
@@ -290,13 +290,13 @@ Style object for the tab icon.
 
 Text to show in a badge on the tab icon. Accepts a `string` or a `number`.
 
-<img src="/assets/navigators/bottom-tabs/tabBarBadge.png" width="500" alt="Tab bar badge" />
+![Tab bar badge](/assets/navigators/bottom-tabs/tabBarBadge.png)
 
 #### `tabBarBadgeStyle`
 
 Style for the badge on the tab icon. You can specify a background color or text color here.
 
-<img src="/assets/navigators/bottom-tabs/tabBarBadgeStyle.png" width="500" alt="Tab bar badge style" />
+![Tab bar badge style](/assets/navigators/bottom-tabs/tabBarBadgeStyle.png)
 
 Example:
 
@@ -328,12 +328,12 @@ ID to locate this tab button in tests.
 #### `tabBarActiveTintColor`
 
 Color for the icon and label in the active tab.
-<img src="/assets/navigators/bottom-tabs/tabBarActiveTintColor.png" width="500" alt="Tab bar active tint color" />
+![Tab bar active tint color](/assets/navigators/bottom-tabs/tabBarActiveTintColor.png)
 
 #### `tabBarInactiveTintColor`
 
 Color for the icon and label in the inactive tabs.
-<img src="/assets/navigators/bottom-tabs/tabBarInactiveTintColor.png" width="500" alt="Tab bar inactive tint color" />
+![Tab bar inactive tint color](/assets/navigators/bottom-tabs/tabBarInactiveTintColor.png)
 
 #### `tabBarActiveBackgroundColor`
 
@@ -389,7 +389,7 @@ import { StyleSheet } from 'react-native';
 
 When using `BlurView`, make sure to set `position: 'absolute'` in `tabBarStyle` as well. You'd also need to use [`useBottomTabBarHeight`](#usebottomtabbarheight) to add bottom padding to your content.
 
-<img src="/assets/navigators/bottom-tabs/tabBarBackground.png" width="500" alt="Tab bar background" />
+![Tab bar background](/assets/navigators/bottom-tabs/tabBarBackground.png)
 
 #### `tabBarPosition`
 

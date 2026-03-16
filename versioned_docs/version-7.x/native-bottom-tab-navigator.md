@@ -131,7 +131,7 @@ headerSearchBarOptions: {
 },
 ```
 
-<video playsInline autoPlay muted loop data-landscape style={{ maxWidth: '402px' }}>
+<video playsInline autoPlay muted loop>
 
   <source src="/assets/navigators/bottom-tabs/highlights/search-tab.mp4" />
 </video>
@@ -372,7 +372,7 @@ The minimize behavior for the tab bar. Supported values:
 
 Only supported on iOS 26 and above.
 
-<video playsInline autoPlay muted loop data-landscape style={{ maxWidth: '402px' }}>
+<video playsInline autoPlay muted loop>
 
   <source src="/assets/navigators/bottom-tabs/highlights/minimize-on-scroll.mp4" />
 </video>
@@ -398,7 +398,7 @@ bottomAccessory: ({ placement }) => {
 
 Only supported on iOS 26 and above.
 
-<video playsInline autoPlay muted loop data-landscape style={{ maxWidth: '402px' }}>
+<video playsInline autoPlay muted loop>
 
   <source src="/assets/navigators/bottom-tabs/highlights/bottom-accessory.mp4" />
 </video>

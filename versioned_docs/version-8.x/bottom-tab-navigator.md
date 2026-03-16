@@ -488,8 +488,7 @@ export default function App() {
 }
 ```
 
-<video playsInline autoPlay muted loop data-landscape style={{ maxWidth: '402px' }}>
-
+<video playsInline autoPlay muted loop>
   <source src="/assets/navigators/bottom-tabs/highlights/search-tab.mp4" />
 </video>
 
@@ -533,7 +532,7 @@ Style object for the tab label. Supported properties:
 - `fontWeight`
 - `fontStyle`
 
-<img src="/assets/navigators/bottom-tabs/tabBarLabelStyle.png" width="500" alt="Tab bar label style" />
+![Tab bar label style](/assets/navigators/bottom-tabs/tabBarLabelStyle.png)
 
 Example:
 
@@ -666,7 +665,7 @@ Only supported with `custom` implementation.
 
 Text to show in a badge on the tab icon. Accepts a `string` or a `number`.
 
-<img src="/assets/navigators/bottom-tabs/tabBarBadge.png" width="500" alt="Tab bar badge" />
+![Tab bar badge](/assets/navigators/bottom-tabs/tabBarBadge.png)
 
 #### `tabBarBadgeStyle`
 
@@ -680,7 +679,7 @@ With `native` implementation, limited customization is supported:
 - on iOS, you can only set the background color.
 - on Android, you can set both background and text colors.
 
-<img src="/assets/navigators/bottom-tabs/tabBarBadgeStyle.png" width="500" alt="Tab bar badge style" />
+![Tab bar badge style](/assets/navigators/bottom-tabs/tabBarBadgeStyle.png)
 
 Example:
 
@@ -718,12 +717,12 @@ Only supported with `custom` implementation.
 #### `tabBarActiveTintColor`
 
 Color for the icon and label in the active tab.
-<img src="/assets/navigators/bottom-tabs/tabBarActiveTintColor.png" width="500" alt="Tab bar active tint color" />
+![Tab bar active tint color](/assets/navigators/bottom-tabs/tabBarActiveTintColor.png)
 
 #### `tabBarInactiveTintColor`
 
 Color for the icon and label in the inactive tabs.
-<img src="/assets/navigators/bottom-tabs/tabBarInactiveTintColor.png" width="500" alt="Tab bar inactive tint color" />
+![Tab bar inactive tint color](/assets/navigators/bottom-tabs/tabBarInactiveTintColor.png)
 
 #### `tabBarActiveIndicatorColor`
 
@@ -835,7 +834,7 @@ import { BlurView } from 'expo-blur';
 
 When using `BlurView`, make sure to set `position: 'absolute'` in `tabBarStyle` as well. You'd also need to use [`useBottomTabBarHeight`](#usebottomtabbarheight) to add bottom padding to your content.
 
-<img src="/assets/navigators/bottom-tabs/tabBarBackground.png" width="500" alt="Tab bar background" />
+![Tab bar background](/assets/navigators/bottom-tabs/tabBarBackground.png)
 
 #### `tabBarPosition`
 
@@ -987,7 +986,7 @@ The minimize behavior for the tab bar. Supported values:
 
 Only supported with `native` implementation on iOS 26 and above.
 
-<video playsInline autoPlay muted loop data-landscape style={{ maxWidth: '402px' }}>
+<video playsInline autoPlay muted loop>
 
   <source src="/assets/navigators/bottom-tabs/highlights/minimize-on-scroll.mp4" />
 </video>
@@ -1015,7 +1014,7 @@ Only supported with `native` implementation on iOS 26 and above.
 
 On Android, iOS 18 and below, nothing is rendered. You can either use the [`screenLayout`](navigator.md#screen-layout) or [`layout`](screen.md) props, or render content inside your screen component directly as a fallback.
 
-<video playsInline autoPlay muted loop data-landscape style={{ maxWidth: '402px' }}>
+<video playsInline autoPlay muted loop>
 
   <source src="/assets/navigators/bottom-tabs/highlights/bottom-accessory.mp4" />
 </video>
