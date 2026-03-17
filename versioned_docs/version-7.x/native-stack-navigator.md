@@ -688,12 +688,12 @@ Only supported on iOS.
 Example:
 
 ```js
-    headerLargeTitleStyle: {
-      fontFamily: 'Georgia',
-      fontSize: 22,
-      fontWeight: '500',
-      color: 'blue',
-    },
+headerLargeTitleStyle: {
+  fontFamily: 'Georgia',
+  fontSize: 22,
+  fontWeight: '500',
+  color: 'blue',
+},
 ```
 
 #### `headerStyle`
@@ -726,83 +726,83 @@ Supported values:
 
 <div className="options-grid">
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-extra-light.png" alt="Header blur effect extraLight" />
+- ![Header blur effect extraLight](/assets/navigators/native-stack/header-blur-effect-extra-light.png)
 
   `extraLight`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-light.png" alt="Header blur effect light" />
+- ![Header blur effect light](/assets/navigators/native-stack/header-blur-effect-light.png)
 
   `light`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-regular.png" alt="Header blur effect regular" />
+- ![Header blur effect regular](/assets/navigators/native-stack/header-blur-effect-regular.png)
 
   `regular`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-prominent.png" alt="Header blur effect prominent" />
+- ![Header blur effect prominent](/assets/navigators/native-stack/header-blur-effect-prominent.png)
 
   `prominent`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material.png" alt="Header blur effect systemUltraThinMaterial" />
+- ![Header blur effect systemUltraThinMaterial](/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material.png)
 
   `systemUltraThinMaterial`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-thin-material.png" alt="Header blur effect systemThinMaterial" />
+- ![Header blur effect systemThinMaterial](/assets/navigators/native-stack/header-blur-effect-system-thin-material.png)
 
   `systemThinMaterial`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-material.png" alt="Header blur effect systemMaterial" />
+- ![Header blur effect systemMaterial](/assets/navigators/native-stack/header-blur-effect-system-material.png)
 
   `systemMaterial`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-thick-material.png" alt="Header blur effect systemThickMaterial" />
+- ![Header blur effect systemThickMaterial](/assets/navigators/native-stack/header-blur-effect-system-thick-material.png)
 
   `systemThickMaterial`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-chrome-material.png" alt="Header blur effect systemChromeMaterial" />
+- ![Header blur effect systemChromeMaterial](/assets/navigators/native-stack/header-blur-effect-system-chrome-material.png)
 
   `systemChromeMaterial`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material-light.png" alt="Header blur effect systemUltraThinMaterialLight" />
+- ![Header blur effect systemUltraThinMaterialLight](/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material-light.png)
 
   `systemUltraThinMaterialLight`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-thin-material-light.png" alt="Header blur effect systemThinMaterialLight" />
+- ![Header blur effect systemThinMaterialLight](/assets/navigators/native-stack/header-blur-effect-system-thin-material-light.png)
 
   `systemThinMaterialLight`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-material-light.png" alt="Header blur effect systemMaterialLight" />
+- ![Header blur effect systemMaterialLight](/assets/navigators/native-stack/header-blur-effect-system-material-light.png)
 
   `systemMaterialLight`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-thick-material-light.png" alt="Header blur effect systemThickMaterialLight" />
+- ![Header blur effect systemThickMaterialLight](/assets/navigators/native-stack/header-blur-effect-system-thick-material-light.png)
 
   `systemThickMaterialLight`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-chrome-material-light.png" alt="Header blur effect systemChromeMaterialLight" />
+- ![Header blur effect systemChromeMaterialLight](/assets/navigators/native-stack/header-blur-effect-system-chrome-material-light.png)
 
   `systemChromeMaterialLight`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-dark.png" alt="Header blur effect dark" />
+- ![Header blur effect dark](/assets/navigators/native-stack/header-blur-effect-dark.png)
 
   `dark`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material-dark.png" alt="Header blur effect systemUltraThinMaterialDark" />
+- ![Header blur effect systemUltraThinMaterialDark](/assets/navigators/native-stack/header-blur-effect-system-ultra-thin-material-dark.png)
 
   `systemUltraThinMaterialDark`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-thin-material-dark.png" alt="Header blur effect systemThinMaterialDark" />
+- ![Header blur effect systemThinMaterialDark](/assets/navigators/native-stack/header-blur-effect-system-thin-material-dark.png)
 
   `systemThinMaterialDark`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-material-dark.png" alt="Header blur effect systemMaterialDark" />
+- ![Header blur effect systemMaterialDark](/assets/navigators/native-stack/header-blur-effect-system-material-dark.png)
 
   `systemMaterialDark`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-thick-material-dark.png" alt="Header blur effect systemThickMaterialDark" />
+- ![Header blur effect systemThickMaterialDark](/assets/navigators/native-stack/header-blur-effect-system-thick-material-dark.png)
 
   `systemThickMaterialDark`
 
-- <img src="/assets/navigators/native-stack/header-blur-effect-system-chrome-material-dark.png" alt="Header blur effect systemChromeMaterialDark" />
+- ![Header blur effect systemChromeMaterialDark](/assets/navigators/native-stack/header-blur-effect-system-chrome-material-dark.png)
 
   `systemChromeMaterialDark`
 
@@ -823,14 +823,14 @@ Function which returns a React Element to render as the background of the header
 Example:
 
 ```js
-     headerBackground: () => (
-      <LinearGradient
-        colors={['#c17388', '#90306f']}
-        style={{ flex: 1 }}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-      />
-      ),
+headerBackground: () => (
+  <LinearGradient
+    colors={['#c17388', '#90306f']}
+    style={{ flex: 1 }}
+    start={{ x: 0, y: 0 }}
+    end={{ x: 1, y: 0 }}
+  />
+),
 ```
 
 #### `headerTintColor`
@@ -849,11 +849,11 @@ Function which returns a React Element to display on the left side of the header
 Example:
 
 ```js
-    headerLeft: () => (
-      <MaterialCommunityIcons name="map" color="gray" size={36} />
-    ),
-    headerBackVisible: true,
-    headerBackTitle: 'Back',
+headerLeft: () => (
+  <MaterialCommunityIcons name="map" color="gray" size={36} />
+),
+headerBackVisible: true,
+headerBackTitle: 'Back',
 ```
 
 #### `unstable_headerLeftItems`
@@ -962,12 +962,12 @@ Style object for header title. Supported properties:
 Example:
 
 ```js
-    headerTitleStyle: {
-      color: 'blue',
-      fontSize: 22,
-      fontFamily: 'Georgia',
-      fontWeight: 300,
-    },
+headerTitleStyle: {
+  color: 'blue',
+  fontSize: 22,
+  fontFamily: 'Georgia',
+  fontWeight: 300,
+},
 ```
 
 #### `headerSearchBarOptions`

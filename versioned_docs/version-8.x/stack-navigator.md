@@ -27,7 +27,7 @@ sidebar_label: Stack
 Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
 <details>
-<summary>Comparison with [Native Stack](native-stack-navigator.md)</summary>
+<summary>Comparison with [Native Stack Navigator](native-stack-navigator.md)</summary>
 
 The Stack navigator is implemented in JavaScript and mimics the familiar iOS and Android look & feel. Since it's a custom implementation, it is extremely customizable.
 

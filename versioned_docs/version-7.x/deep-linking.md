@@ -207,11 +207,11 @@ To make sure Universal Links work in your app, you also need to setup [Associate
 If you're using React Navigation within a hybrid app - an iOS app that has both Swift/ObjC and React Native parts - you may be missing the `RCTLinkingIOS` subspec in your `Podfile`, which is installed by default in new React Native projects. To add this, ensure your `Podfile` looks like the following:
 
 ```pod
- pod 'React', :path => '../node_modules/react-native', :subspecs => [
-    . . . // other subspecs
-    'RCTLinkingIOS',
-    . . .
-  ]
+pod 'React', :path => '../node_modules/react-native', :subspecs => [
+  . . . // other subspecs
+  'RCTLinkingIOS',
+  . . .
+]
 ```
 
 ### Setup on Android

@@ -390,7 +390,7 @@ Color for the icon and label in the active item in the drawer.
 ![Drawer active tint color](/assets/navigators/drawer/drawerActiveTintColor.png)
 
 ```js
-   drawerActiveTintColor: 'green',
+drawerActiveTintColor: 'green',
 ```
 
 #### `drawerActiveBackgroundColor`
@@ -400,13 +400,13 @@ Background color for the active item in the drawer.
 ![Drawer active background color](/assets/navigators/drawer/drawerActiveBackgroundColor.png)
 
 ```js
-    screenOptions={{
-      drawerActiveTintColor: 'white',
-      drawerActiveBackgroundColor: '#003CB3',
-      drawerLabelStyle: {
-        color: 'white',
-      },
-    }}
+screenOptions={{
+  drawerActiveTintColor: 'white',
+  drawerActiveBackgroundColor: '#003CB3',
+  drawerLabelStyle: {
+    color: 'white',
+  },
+}}
 ```
 
 #### `drawerInactiveTintColor`
@@ -426,12 +426,12 @@ Style object for the single item, which can contain an icon and/or a label.
 Example:
 
 ```js
-   drawerItemStyle: {
-    backgroundColor: '#9dd3c8',
-    borderColor: 'black',
-    borderWidth: 2,
-    opacity: 0.6,
-  },
+drawerItemStyle: {
+  backgroundColor: '#9dd3c8',
+  borderColor: 'black',
+  borderWidth: 2,
+  opacity: 0.6,
+},
 ```
 
 #### `drawerLabelStyle`
@@ -443,11 +443,11 @@ Style object to apply to the `Text` style inside content section which renders a
 Example:
 
 ```js
-   drawerLabelStyle: {
-      color: 'black',
-      fontSize: 20,
-      fontFamily: 'Georgia',
-    },
+drawerLabelStyle: {
+  color: 'black',
+  fontSize: 20,
+  fontFamily: 'Georgia',
+},
 ```
 
 #### `drawerContentContainerStyle`

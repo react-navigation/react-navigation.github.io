@@ -271,11 +271,11 @@ Style object for the tab label.
 Example:
 
 ```js
-    tabBarLabelStyle: {
-      fontSize: 16,
-      fontFamily: 'Georgia',
-      fontWeight: 300,
-    },
+tabBarLabelStyle: {
+  fontSize: 16,
+  fontFamily: 'Georgia',
+  fontWeight: 300,
+},
 ```
 
 #### `tabBarIcon`
@@ -301,10 +301,10 @@ Style for the badge on the tab icon. You can specify a background color or text 
 Example:
 
 ```js
-    tabBarBadgeStyle: {
-      color: 'black',
-      backgroundColor: 'yellow',
-    },
+tabBarBadgeStyle: {
+  color: 'black',
+  backgroundColor: 'yellow',
+},
 ```
 
 #### `tabBarAccessibilityLabel`
