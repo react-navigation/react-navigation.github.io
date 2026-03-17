@@ -185,32 +185,6 @@ Requires setting `View controller-based status bar appearance -> YES` (or removi
 
 Only supported on Android and iOS.
 
-#### `statusBarBackgroundColor`
-
-:::warning
-
-This option is deprecated and will be removed in a future release (for apps targeting Android SDK 35 or above edge-to-edge mode is enabled by default
-and it is expected that the edge-to-edge will be enforced in future SDKs, see [here](https://developer.android.com/about/versions/15/behavior-changes-15#ux) for more information).
-
-:::
-
-Sets the background color of the status bar (similar to the `StatusBar` component).
-
-Only supported on Android.
-
-#### `statusBarTranslucent`
-
-:::warning
-
-This option is deprecated and will be removed in a future release (for apps targeting Android SDK 35 or above edge-to-edge mode is enabled by default
-and it is expected that the edge-to-edge will be enforced in future SDKs, see [here](https://developer.android.com/about/versions/15/behavior-changes-15#ux) for more information).
-
-:::
-
-Sets the translucency of the status bar (similar to the `StatusBar` component). Defaults to `false`.
-
-Only supported on Android.
-
 #### `contentStyle`
 
 Style object for the scene content.
@@ -421,19 +395,6 @@ The duration is not customizable for:
 - Screens with `presentation` set to `modal`, `formSheet`, `pageSheet` (regardless of animation)
 
 Only supported on iOS.
-
-#### `navigationBarColor`
-
-:::warning
-
-This option is deprecated and will be removed in a future release (for apps targeting Android SDK 35 or above edge-to-edge mode is enabled by default
-and it is expected that the edge-to-edge will be enforced in future SDKs, see [here](https://developer.android.com/about/versions/15/behavior-changes-15#ux) for more information).
-
-:::
-
-Sets the navigation bar color. Defaults to initial status bar color.
-
-Only supported on Android.
 
 #### `navigationBarHidden`
 
