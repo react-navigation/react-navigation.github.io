@@ -55,7 +55,11 @@ export default function App() {
 }
 ```
 
+<div className="device-frame">
+
 ![Header button](/assets/fundamentals/header-button.png)
+
+</div>
 
 When we define our button this way, you can't access or update the screen component's state in it. This is pretty important because it's common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
 
@@ -117,9 +121,11 @@ export default function App() {
 }
 ```
 
+<div className="device-frame">
 <video playsInline autoPlay muted loop >
   <source src="/assets/fundamentals/header-screen-interaction.mp4" />
 </video>
+</div>
 
 Here we update `headerRight` with a button that has `onPress` handler that can access and update the component's state, since it's defined inside the component. We also specify a placeholder button without `onPress` in the screen's `options` to reserve the header space and avoid a layout shift when `setOptions` replaces it on mount.
 

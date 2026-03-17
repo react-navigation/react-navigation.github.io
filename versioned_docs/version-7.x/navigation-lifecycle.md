@@ -263,8 +263,16 @@ function SettingsStackScreen() {
 function Root() {
   return (
     <MyTabs.Navigator screenOptions={{ headerShown: false }}>
-      <MyTabs.Screen name="HomeStack" component={HomeStackScreen} options={{ tabBarLabel: 'Home' }} />
-      <MyTabs.Screen name="SettingsStack" component={SettingsStackScreen} options={{ tabBarLabel: 'Settings' }} />
+      <MyTabs.Screen
+        name="HomeStack"
+        component={HomeStackScreen}
+        options={{ tabBarLabel: 'Home' }}
+      />
+      <MyTabs.Screen
+        name="SettingsStack"
+        component={SettingsStackScreen}
+        options={{ tabBarLabel: 'Settings' }}
+      />
     </MyTabs.Navigator>
   );
 }
@@ -282,9 +290,11 @@ export default function App() {
 </TabItem>
 </Tabs>
 
+<div className="device-frame">
 <video playsInline autoPlay muted loop>
   <source src="/assets/fundamentals/lifecycle.mp4" />
 </video>
+</div>
 
 We start on the `HomeScreen` and navigate to `DetailsScreen`. Then we use the tab bar to switch to the `SettingsScreen` and navigate to `ProfileScreen`. After this sequence of operations is done, all 4 of the screens are mounted! If you use the tab bar to switch back to the `HomeStack`, you'll notice you'll be presented with the `DetailsScreen` - the navigation state of the `HomeStack` has been preserved!
 
@@ -618,9 +628,11 @@ export default function App() {
 </TabItem>
 </Tabs>
 
+<div className="device-frame">
 <video playsInline autoPlay muted loop>
   <source src="/assets/fundamentals/focus-effect.mp4" />
 </video>
+</div>
 
 To render different things based on whether the screen is focused, we can use the [`useIsFocused`](use-is-focused.md) hook which returns a boolean indicating whether the screen is focused.
 

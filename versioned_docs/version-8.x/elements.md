@@ -722,9 +722,7 @@ It can also be a function that returns a React Element to render any component:
 
 ```js
 <HeaderBackButton
-  icon={({ tintColor }) => (
-    <MyCustomBackIconComponent tintColor={tintColor} />
-  )}
+  icon={({ tintColor }) => <MyCustomBackIconComponent tintColor={tintColor} />}
   onPress={() => console.log('back pressed')}
 />
 ```

@@ -1353,6 +1353,7 @@ navigation.pushParams({ filter: 'new' });
 The action works in all navigators, including stack, tab, and drawer navigators.
 
 <video playsInline autoPlay muted loop data-landscape style={{ '--ifm-global-radius': '10px' }}>
+
   <source src="/assets/actions/push-params.mp4" />
 </video>
 

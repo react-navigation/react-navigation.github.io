@@ -73,6 +73,7 @@ function MyComponent() {
 ```
 
 <video playsInline autoPlay muted loop style={{ width: '400px', aspectRatio: 4 / 5 }}>
+
   <source src="/assets/icons/sf-symbol.mp4" />
 </video>
 
@@ -242,6 +243,7 @@ function MyComponent() {
 ```
 
 <video playsInline autoPlay muted loop style={{ width: '400px', aspectRatio: 4 / 5 }}>
+
   <source src="/assets/icons/material-symbol.mp4" />
 </video>
 

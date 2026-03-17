@@ -98,9 +98,11 @@ export default function App() {
 }
 ```
 
+<div className="device-frame">
 <video playsInline autoPlay muted loop>
   <source src="/assets/fundamentals/passing-params.mp4" />
 </video>
+</div>
 
 ## Initial params
 
@@ -278,9 +280,11 @@ export default function App() {
 }
 ```
 
+<div className="device-frame">
 <video playsInline autoPlay muted loop>
   <source src="/assets/fundamentals/passing-params-back.mp4" />
 </video>
+</div>
 
 After pressing "Done", the home screen's `route.params` will be updated with the post text.
 

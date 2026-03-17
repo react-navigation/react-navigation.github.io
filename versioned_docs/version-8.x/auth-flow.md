@@ -1002,5 +1002,6 @@ const RootStack = createNativeStackNavigator({
 The `routeNamesChangeBehavior` option allows you to control how React Navigation handles navigation when the available screens change because of conditions such as authentication state. When `lastUnhandled` is specified, React Navigation will remember the last screen that couldn't be handled, and after the condition changes, it'll automatically navigate to that screen if it's now available.
 
 <video playsInline autoPlay muted loop style={{ width: '500px', aspectRatio: 1 / 1 }}>
+
   <source src="/assets/deep-linking/deep-link-auth.mp4" />
 </video>

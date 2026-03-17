@@ -52,7 +52,11 @@ export default function App() {
 }
 ```
 
+<div className="device-frame">
+
 ![Header title](/assets/fundamentals/header-title.png)
+
+</div>
 
 ## Using params in the title
 
@@ -235,7 +239,11 @@ export default function App() {
 }
 ```
 
+<div className="device-frame">
+
 ![Custom header styles](/assets/fundamentals/header-styles.png)
+
+</div>
 
 There are a couple of things to notice here:
 
@@ -358,7 +366,11 @@ export default function App() {
 }
 ```
 
+<div className="device-frame">
+
 ![Header custom title](/assets/fundamentals/header-title-custom.png)
+
+</div>
 
 :::note
 
