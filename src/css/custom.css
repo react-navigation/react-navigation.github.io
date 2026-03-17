@@ -1233,6 +1233,87 @@ code {
   }
 }
 
+.device-frame {
+  --device-frame-bezel: 10px;
+  --device-frame-radius: 52px;
+  --device-frame-screen-radius: calc(
+    var(--device-frame-radius) - var(--device-frame-bezel) - 2px
+  );
+
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: var(--ifm-leading) 0;
+  line-height: 0;
+  padding: var(--device-frame-bezel);
+  border-radius: var(--device-frame-radius);
+  border: 1px solid rgba(130, 137, 145, 0.5);
+  background: linear-gradient(
+    180deg,
+    #3a4048 0%,
+    #20242b 18%,
+    #050608 54%,
+    #292d34 100%
+  );
+  box-shadow:
+    0 0 0 1.5px #050608,
+    0 8px 18px rgba(15, 23, 42, 0.12),
+    0 -1px 0 rgba(255, 255, 255, 0.08) inset,
+    1px 0 0 rgba(255, 255, 255, 0.14) inset,
+    -1px 0 0 rgba(255, 255, 255, 0.08) inset;
+  vertical-align: top;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 6px;
+  }
+
+  &::before {
+    left: -6px;
+    top: 112px;
+    height: 198px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 198'%3E%3Crect width='6' height='30' rx='2' fill='%23171b20'/%3E%3Crect y='64' width='6' height='57' rx='2' fill='%23171b20'/%3E%3Crect y='141' width='6' height='57' rx='2' fill='%23171b20'/%3E%3C/svg%3E")
+      center / 100% 100% no-repeat;
+    filter: drop-shadow(-1px 0 0 rgba(255, 255, 255, 0.14))
+      drop-shadow(1px 0 0 rgba(0, 0, 0, 0.34));
+  }
+
+  &::after {
+    right: -6px;
+    top: 154px;
+    height: 84px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 84'%3E%3Crect width='6' height='84' rx='2' fill='%23171b20'/%3E%3C/svg%3E")
+      center / 100% 100% no-repeat;
+    filter: drop-shadow(1px 0 0 rgba(255, 255, 255, 0.14))
+      drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.34));
+  }
+
+  & > p {
+    margin: 0;
+  }
+
+  & > :is(img, video, .video-player),
+  & > p > :is(img, video, .video-player) {
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    outline: none;
+    box-shadow: none;
+    border-radius: var(--device-frame-screen-radius);
+    clip-path: inset(0 round var(--device-frame-screen-radius));
+    background: #000;
+  }
+
+  & .video-player .video-player-icon {
+    border-radius: var(--device-frame-screen-radius);
+  }
+}
+
 .blog-wrapper {
   & .container aside nav {
     margin-top: 2.25rem;
