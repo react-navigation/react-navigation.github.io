@@ -274,6 +274,183 @@ describe('processMarkdown', () => {
     assert.strictEqual(result, input);
   });
 
+  test('converts img tags to markdown images', async () => {
+    const input = dedent`
+      Some text.
+
+      <img src="/assets/blog/devtools.png" style={{ width: '425px' }} />
+
+      More text.
+    `;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.ok(!result.includes('<img'));
+    assert.ok(result.includes('![](/assets/blog/devtools.png)'));
+    assert.ok(result.includes('Some text.'));
+    assert.ok(result.includes('More text.'));
+  });
+
+  test('converts img tags with alt text', async () => {
+    const input = `<img src="/assets/screenshot.png" alt="App screenshot" />`;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.strictEqual(result, '![App screenshot](/assets/screenshot.png)');
+  });
+
+  test('converts video tags to source URLs', async () => {
+    const input = dedent`
+      Some text.
+
+      <video playsInline autoPlay muted loop style={{ width: '400px', aspectRatio: 4 / 5 }}>
+        <source src="/assets/icons/sf-symbol.mp4" />
+      </video>
+
+      More text.
+    `;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.ok(!result.includes('<video'));
+    assert.ok(!result.includes('<source'));
+    assert.ok(result.includes('/assets/icons/sf-symbol.mp4'));
+    assert.ok(result.includes('Some text.'));
+    assert.ok(result.includes('More text.'));
+  });
+
+  test('converts single-line video tags', async () => {
+    const input = `<video playsInline autoPlay muted loop><source src="/assets/demo.mp4" /></video>`;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.strictEqual(result, '/assets/demo.mp4');
+  });
+
+  test('strips device-frame wrapper divs', async () => {
+    const input = dedent`
+      <div className="device-frame">
+
+      ![Header button](/assets/fundamentals/header-button.png)
+
+      </div>
+    `;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.ok(!result.includes('<div'));
+    assert.ok(!result.includes('</div>'));
+    assert.ok(!result.includes('device-frame'));
+    assert.ok(
+      result.includes(
+        '![Header button](/assets/fundamentals/header-button.png)'
+      )
+    );
+  });
+
+  test('strips image-grid wrapper divs with style', async () => {
+    const input = dedent`
+      <div className="image-grid" style={{ '--img-width': '360px' }}>
+
+      ![Screenshot 1](/assets/themes/light-1.png)
+      ![Screenshot 2](/assets/themes/dark-1.png)
+
+      </div>
+    `;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.ok(!result.includes('<div'));
+    assert.ok(!result.includes('</div>'));
+    assert.ok(result.includes('![Screenshot 1](/assets/themes/light-1.png)'));
+    assert.ok(result.includes('![Screenshot 2](/assets/themes/dark-1.png)'));
+  });
+
+  test('strips device-frame div wrapping a video', async () => {
+    const input = dedent`
+      <div className="device-frame">
+      <video playsInline autoPlay muted loop>
+        <source src="/assets/fundamentals/navigate.mp4" />
+      </video>
+      </div>
+    `;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.ok(!result.includes('<div'));
+    assert.ok(!result.includes('<video'));
+    assert.ok(result.includes('/assets/fundamentals/navigate.mp4'));
+  });
+
+  test('strips nested decorative divs', async () => {
+    const input = dedent`
+      <div className="outer">
+      <div className="inner">
+
+      Content inside nested divs.
+
+      </div>
+      </div>
+    `;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.ok(!result.includes('<div'));
+    assert.ok(!result.includes('</div>'));
+    assert.ok(result.includes('Content inside nested divs.'));
+  });
+
+  test('strips feature-grid div with video list items', async () => {
+    const input = dedent`
+      <div className="feature-grid">
+
+      - <video playsInline autoPlay muted loop><source src="/assets/formsheet.mp4" /></video>
+
+        [Form sheet](#form-sheets)
+
+      - <video playsInline autoPlay muted loop><source src="/assets/search-bar.mp4" /></video>
+
+        [Search bar](#search-bar)
+
+      </div>
+    `;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.ok(!result.includes('<div'));
+    assert.ok(!result.includes('<video'));
+    assert.ok(result.includes('/assets/formsheet.mp4'));
+    assert.ok(result.includes('[Form sheet](#form-sheets)'));
+    assert.ok(result.includes('/assets/search-bar.mp4'));
+    assert.ok(result.includes('[Search bar](#search-bar)'));
+  });
+
+  test('preserves HTML inside code fences', async () => {
+    const input = dedent`
+      Some text.
+
+      \`\`\`jsx
+      function App() {
+        return (
+          <div className="container">
+            <img src="/logo.png" alt="Logo" />
+            <video autoPlay>
+              <source src="/intro.mp4" />
+            </video>
+          </div>
+        );
+      }
+      \`\`\`
+    `;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.ok(result.includes('<div className="container">'));
+    assert.ok(result.includes('<img src="/logo.png" alt="Logo" />'));
+    assert.ok(result.includes('<source src="/intro.mp4" />'));
+    assert.ok(result.includes('</div>'));
+  });
+
   test('strips frontmatter and returns parsed data', async () => {
     const input = dedent`
       ---

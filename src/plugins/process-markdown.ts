@@ -27,6 +27,9 @@ export type ProcessedMarkdown = {
  * - Converts static2dynamic code fences into static + dynamic sections
  * - Strips code fence meta attributes (snack, name, static2dynamic, npm2yarn, etc.)
  * - Converts Docusaurus admonitions (:::note, :::warning, etc.) to blockquotes
+ * - Converts HTML <img> tags to markdown image syntax
+ * - Converts HTML <video> tags to plain video URLs
+ * - Strips decorative HTML divs (device-frame, image-grid, feature-grid, etc.)
  * - Cleans up extra blank lines
  */
 export async function processMarkdown(
@@ -51,6 +54,15 @@ export async function processMarkdown(
 
   // Convert admonitions to blockquotes
   result = convertAdmonitions(result);
+
+  // Convert HTML media tags and strip decorative divs,
+  // protecting code fences from modification
+  result = withProtectedCodeFences(result, (text) => {
+    text = convertImageTags(text);
+    text = convertVideoTags(text);
+    text = stripDecorativeDivs(text);
+    return text;
+  });
 
   // Clean up extra blank lines (max 2 consecutive)
   result = result.replace(/\n{3,}/g, '\n\n');
@@ -369,6 +381,139 @@ function stripCodeFenceMeta(content: string): string {
       return cleaned ? `${lang} ${cleaned}` : lang;
     }
   );
+}
+
+/**
+ * Run a transform function on content while protecting code fences.
+ * Temporarily replaces code fences with placeholders, runs the transform,
+ * then restores the original code fences.
+ */
+function withProtectedCodeFences(
+  content: string,
+  transform: (text: string) => string
+): string {
+  const fences: string[] = [];
+
+  const placeholder = (i: number) => `\x00CODEFENCE${i}\x00`;
+
+  const protected_ = content.replace(/^```[^\n]*\n[\s\S]*?^```$/gm, (match) => {
+    fences.push(match);
+    return placeholder(fences.length - 1);
+  });
+
+  const transformed = transform(protected_);
+
+  return transformed.replace(/\x00CODEFENCE(\d+)\x00/g, (_match, i) => {
+    return fences[Number(i)];
+  });
+}
+
+/**
+ * Convert HTML <img> tags to markdown image syntax.
+ * Strips inline styles and other attributes, keeping only src and alt.
+ */
+function convertImageTags(content: string): string {
+  return content.replace(/<img\s+([^>]*?)\/?>/gi, (match, attrs: string) => {
+    const srcMatch = attrs.match(/\bsrc=["']([^"']+)["']/);
+
+    if (!srcMatch) {
+      return match;
+    }
+
+    const src = srcMatch[1];
+    const altMatch = attrs.match(/\balt=["']([^"']*)["']/);
+    const alt = altMatch ? altMatch[1] : '';
+
+    return `![${alt}](${src})`;
+  });
+}
+
+/**
+ * Convert HTML <video> tags to plain video source URLs.
+ */
+function convertVideoTags(content: string): string {
+  return content.replace(
+    /<video[^>]*>[\s\S]*?<source\s+src=["']([^"']+)["'][^>]*\/?>[\s\S]*?<\/video>/gi,
+    (_match, src: string) => src
+  );
+}
+
+/**
+ * Strip decorative HTML divs, keeping their inner content.
+ * Processes innermost divs first to handle nesting.
+ */
+function stripDecorativeDivs(content: string): string {
+  let result = content;
+  let iterations = 0;
+  const maxIterations = 50;
+
+  while (/<div[\s>]/i.test(result) && iterations < maxIterations) {
+    const transformed = stripInnermostDiv(result);
+
+    if (transformed === result) {
+      break;
+    }
+
+    result = transformed;
+    iterations++;
+  }
+
+  return result;
+}
+
+/**
+ * Find and strip the first innermost <div> (one with no nested divs).
+ * Returns original content if no strippable div is found.
+ */
+function stripInnermostDiv(content: string): string {
+  const divOpenRegex = /<div[\s>][^>]*>/gi;
+  let match: RegExpExecArray | null;
+
+  while ((match = divOpenRegex.exec(content)) !== null) {
+    const openStart = match.index;
+    const openEnd = openStart + match[0].length;
+
+    let depth = 1;
+    let pos = openEnd;
+    let closingStart = -1;
+
+    while (pos < content.length && depth > 0) {
+      const nextOpen = content.indexOf('<div', pos);
+      const nextClose = content.indexOf('</div>', pos);
+
+      if (nextClose === -1) {
+        break;
+      }
+
+      if (nextOpen !== -1 && nextOpen < nextClose) {
+        depth++;
+        pos = nextOpen + 4;
+      } else {
+        depth--;
+
+        if (depth === 0) {
+          closingStart = nextClose;
+        }
+
+        pos = nextClose + 6;
+      }
+    }
+
+    if (closingStart === -1) {
+      continue;
+    }
+
+    const innerContent = content.slice(openEnd, closingStart).trim();
+    const closingEnd = closingStart + '</div>'.length;
+
+    if (!innerContent.includes('<div')) {
+      return (
+        content.slice(0, openStart) + innerContent + content.slice(closingEnd)
+      );
+    }
+  }
+
+  return content;
 }
 
 /**
