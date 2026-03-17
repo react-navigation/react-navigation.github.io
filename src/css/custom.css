@@ -1198,12 +1198,17 @@ code {
   }
 
   li {
-    & > img {
+    & > img,
+    & > p:has(> img) > img {
       display: block;
       margin: 0;
       border-radius: var(--ifm-global-radius);
       width: 100%;
       height: auto;
+    }
+
+    & > p {
+      margin: 0;
     }
 
     & > .video-player {
@@ -1218,16 +1223,17 @@ code {
       }
     }
 
-    & > p:first-of-type {
+    & > p:not(:has(> img)):first-of-type,
+    & > p:has(> img) + p {
       font-weight: 700;
-      margin: calc(var(--ifm-spacing-vertical) / 2) 0 0;
+      margin-top: calc(var(--ifm-spacing-vertical) / 2);
     }
 
-    & > p + p {
-      margin: calc(var(--ifm-spacing-vertical) / 4) 0 0;
+    & > p:not(:has(> img)) + p:not(:has(> img)) {
+      margin-top: calc(var(--ifm-spacing-vertical) / 4);
     }
 
-    & > p:last-of-type {
+    & > p:last-of-type:not(:has(> img)) {
       margin-bottom: var(--ifm-spacing-vertical);
     }
   }
