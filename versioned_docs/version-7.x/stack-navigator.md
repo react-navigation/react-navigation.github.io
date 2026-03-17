@@ -26,9 +26,16 @@ sidebar_label: Stack
 
 Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
 
-By default the stack navigator is configured to have the familiar iOS and Android look & feel: new screens slide in from the right on iOS, use OS default animation on Android. But the [animations can be customized](#animation-related-options) to match your needs.
+<details>
+<summary>Comparison with [Native Stack](native-stack-navigator.md)</summary>
 
-One thing to keep in mind is that while `@react-navigation/stack` is extremely customizable, it's implemented in JavaScript. While it runs animations and gestures using natively, the performance may not be as fast as a native implementation. This may not be an issue for a lot of apps, but if you're experiencing performance issues during navigation, consider using [`@react-navigation/native-stack`](native-stack-navigator.md) instead - which uses native navigation primitives.
+The Stack navigator is implemented in JavaScript and mimics the familiar iOS and Android look & feel. Since it's a custom implementation, it is extremely customizable.
+
+However, even though it runs animations and gestures with native driver, the performance may not be as good as a native implementation. This may not be an issue for many apps, but [Native Stack Navigator](native-stack-navigator.md) - which uses native navigation primitives - will provide better performance and smoother animations.
+
+In addition, because it is a custom implementation, it may not support all the features and behaviors of the underlying platforms such large titles, form sheets, etc.
+
+</details>
 
 ## Installation
 

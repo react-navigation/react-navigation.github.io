@@ -26,7 +26,7 @@ sidebar_label: Material Top Tabs
 
 A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the tabs or swiping horizontally.
 
-This navigator wraps [`react-native-tab-view`](tab-view.md) to provide integration with React Navigation. If you want to use the tab view without React Navigation integration, use the library directly instead.
+This navigator provides React Navigation integration for [`react-native-tab-view`](tab-view.md). If you don't need React Navigation integration, use [`react-native-tab-view`](tab-view.md) directly instead.
 
 ## Installation
 
