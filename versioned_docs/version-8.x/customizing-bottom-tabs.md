@@ -199,6 +199,8 @@ export default function App() {
 }
 ```
 
+![Tab bar badge](/assets/navigators/bottom-tabs/tab-bar-badge.png)
+
 From UI perspective this component is ready to use, but you still need to find some way to pass down the badge count properly from somewhere else, like using [React Context](https://react.dev/reference/react/use):
 
 ```js
@@ -222,5 +224,3 @@ React.useEffect(() => {
   });
 }, [navigation, unreadMessagesCount]);
 ```
-
-![Tabs with badges](/assets/navigators/bottom-tabs/tabs-badges.png)

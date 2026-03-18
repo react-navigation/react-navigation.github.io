@@ -505,17 +505,25 @@ Supported on all platforms with `custom` implementation. Only supported on Andro
 
 #### `tabBarLabelPosition`
 
-Whether the label is shown below the icon or beside the icon.
-
-By default, the position is chosen automatically based on device width.
+Whether the label is shown below the icon or beside the icon. By default, the position is chosen automatically based on device width.
 
 Only supported with `custom` implementation.
 
-- `below-icon`: the label is shown below the icon (typical for iPhones)
-  <img src="/assets/navigators/bottom-tabs/tabBarLabelPosition-below.png" width="400" alt="Tab bar label position - below" />
+<div className="options-grid">
 
-- `beside-icon` the label is shown next to the icon (typical for iPad)
-  <img src="/assets/navigators/bottom-tabs/tabBarLabelPosition-beside.png" width="700" alt="Tab bar label position - beside" />
+- ![Tab bar label position - below icon](/assets/navigators/bottom-tabs/tab-bar-label-position-below-icon.png)
+
+  `below-icon`
+
+  The label is shown below the icon (typical for devices with smaller widths such as phones)
+
+- ![Tab bar label position - beside icon](/assets/navigators/bottom-tabs/tab-bar-label-position-beside-icon.png)
+
+  `beside-icon`
+
+  The label is shown next to the icon (typical for larger devices such as tablets)
+
+</div>
 
 #### `tabBarAllowFontScaling`
 
@@ -531,8 +539,6 @@ Style object for the tab label. Supported properties:
 - `fontSize`
 - `fontWeight`
 - `fontStyle`
-
-![Tab bar label style](/assets/navigators/bottom-tabs/tabBarLabelStyle.png)
 
 Example:
 
@@ -665,7 +671,7 @@ Only supported with `custom` implementation.
 
 Text to show in a badge on the tab icon. Accepts a `string` or a `number`.
 
-![Tab bar badge](/assets/navigators/bottom-tabs/tabBarBadge.png)
+![Tab bar badge](/assets/navigators/bottom-tabs/tab-bar-badge.png)
 
 #### `tabBarBadgeStyle`
 
@@ -678,8 +684,6 @@ With `native` implementation, limited customization is supported:
 
 - on iOS, you can only set the background color.
 - on Android, you can set both background and text colors.
-
-![Tab bar badge style](/assets/navigators/bottom-tabs/tabBarBadgeStyle.png)
 
 Example:
 
@@ -717,12 +721,10 @@ Only supported with `custom` implementation.
 #### `tabBarActiveTintColor`
 
 Color for the icon and label in the active tab.
-![Tab bar active tint color](/assets/navigators/bottom-tabs/tabBarActiveTintColor.png)
 
 #### `tabBarInactiveTintColor`
 
 Color for the icon and label in the inactive tabs.
-![Tab bar inactive tint color](/assets/navigators/bottom-tabs/tabBarInactiveTintColor.png)
 
 #### `tabBarActiveIndicatorColor`
 
@@ -834,7 +836,7 @@ import { BlurView } from 'expo-blur';
 
 When using `BlurView`, make sure to set `position: 'absolute'` in `tabBarStyle` as well. You'd also need to use [`useBottomTabBarHeight`](#usebottomtabbarheight) to add bottom padding to your content.
 
-![Tab bar background](/assets/navigators/bottom-tabs/tabBarBackground.png)
+![Tab bar background](/assets/navigators/bottom-tabs/tab-bar-background.png)
 
 #### `tabBarPosition`
 
@@ -876,7 +878,7 @@ const Tabs = createBottomTabNavigator({
 </TabItem>
 </Tabs>
 
-<img src="/assets/navigators/bottom-tabs/bottom-tabs-side.png" alt="Sidebar" data-landscape></img>
+<img src="/assets/navigators/bottom-tabs/bottom-tabs-side.png" alt="Sidebar" style={{ width: '100%' }} />
 
 You can also render a compact sidebar by placing the label below the icon. This is only supported when the [`tabBarVariant`](#tabbarvariant) is set to `material`:
 
@@ -910,7 +912,7 @@ const Tabs = createBottomTabNavigator({
 </TabItem>
 </Tabs>
 
-![Compact sidebar](/assets/navigators/bottom-tabs/bottom-tabs-side-compact.png)
+<img src="/assets/navigators/bottom-tabs/bottom-tabs-side-compact.png" alt="Compact sidebar" style={{ width: '100%' }} />
 
 #### `tabBarVariant`
 
@@ -923,7 +925,7 @@ Only supported with `custom` implementation.
 
 The `material` variant is currently only supported when the [`tabBarPosition`](#tabbarposition) is set to `left` or `right`.
 
-![Material sidebar](/assets/navigators/bottom-tabs/bottom-tabs-side-material.png)
+<img src="/assets/navigators/bottom-tabs/bottom-tabs-side-material.png" alt="Sidebar with material variant" style={{ width: '100%' }} />
 
 #### `tabBarBlurEffect`
 

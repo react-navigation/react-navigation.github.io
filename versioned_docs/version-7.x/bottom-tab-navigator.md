@@ -253,20 +253,27 @@ Whether the tab label should be visible. Defaults to `true`.
 
 #### `tabBarLabelPosition`
 
-Whether the label is shown below the icon or beside the icon.
+Whether the label is shown below the icon or beside the icon. By default, the position is chosen automatically based on device width.
 
-By default, the position is chosen automatically based on device width.
+<div className="options-grid">
 
-- `below-icon`: the label is shown below the icon (typical for iPhones)
-  <img src="/assets/navigators/bottom-tabs/tabBarLabelPosition-below.png" width="400" alt="Tab bar label position - below" />
+- ![Tab bar label position - below icon](/assets/navigators/bottom-tabs/tab-bar-label-position-below-icon.png)
 
-- `beside-icon` the label is shown next to the icon (typical for iPad)
-  <img src="/assets/navigators/bottom-tabs/tabBarLabelPosition-beside.png" width="700" alt="Tab bar label position - beside" />
+  `below-icon`
+
+  The label is shown below the icon (typical for devices with smaller widths such as phones)
+
+- ![Tab bar label position - beside icon](/assets/navigators/bottom-tabs/tab-bar-label-position-beside-icon.png)
+
+  `beside-icon`
+
+  The label is shown next to the icon (typical for larger devices such as tablets)
+
+</div>
 
 #### `tabBarLabelStyle`
 
 Style object for the tab label.
-![Tab bar label style](/assets/navigators/bottom-tabs/tabBarLabelStyle.png)
 
 Example:
 
@@ -290,13 +297,11 @@ Style object for the tab icon.
 
 Text to show in a badge on the tab icon. Accepts a `string` or a `number`.
 
-![Tab bar badge](/assets/navigators/bottom-tabs/tabBarBadge.png)
+![Tab bar badge](/assets/navigators/bottom-tabs/tab-bar-badge.png)
 
 #### `tabBarBadgeStyle`
 
 Style for the badge on the tab icon. You can specify a background color or text color here.
-
-![Tab bar badge style](/assets/navigators/bottom-tabs/tabBarBadgeStyle.png)
 
 Example:
 
@@ -328,12 +333,10 @@ ID to locate this tab button in tests.
 #### `tabBarActiveTintColor`
 
 Color for the icon and label in the active tab.
-![Tab bar active tint color](/assets/navigators/bottom-tabs/tabBarActiveTintColor.png)
 
 #### `tabBarInactiveTintColor`
 
 Color for the icon and label in the inactive tabs.
-![Tab bar inactive tint color](/assets/navigators/bottom-tabs/tabBarInactiveTintColor.png)
 
 #### `tabBarActiveBackgroundColor`
 
@@ -389,7 +392,7 @@ import { StyleSheet } from 'react-native';
 
 When using `BlurView`, make sure to set `position: 'absolute'` in `tabBarStyle` as well. You'd also need to use [`useBottomTabBarHeight`](#usebottomtabbarheight) to add bottom padding to your content.
 
-![Tab bar background](/assets/navigators/bottom-tabs/tabBarBackground.png)
+![Tab bar background](/assets/navigators/bottom-tabs/tab-bar-background.png)
 
 #### `tabBarPosition`
 
@@ -429,7 +432,7 @@ const Tabs = createBottomTabNavigator({
 </TabItem>
 </Tabs>
 
-<img src="/assets/navigators/bottom-tabs/bottom-tabs-side.png" alt="Sidebar" data-landscape></img>
+<img src="/assets/navigators/bottom-tabs/bottom-tabs-side.png" alt="Sidebar" style={{ width: '100%' }} />
 
 You can also render a compact sidebar by placing the label below the icon. This is only supported when the [`tabBarVariant`](#tabbarvariant) is set to `material`:
 
@@ -463,7 +466,7 @@ const Tabs = createBottomTabNavigator({
 </TabItem>
 </Tabs>
 
-![Compact sidebar](/assets/navigators/bottom-tabs/bottom-tabs-side-compact.png)
+<img src="/assets/navigators/bottom-tabs/bottom-tabs-side-compact.png" alt="Compact sidebar" style={{ width: '100%' }} />
 
 #### `tabBarVariant`
 
@@ -474,7 +477,7 @@ Variant of the tab bar. Available values are:
 
 The `material` variant is currently only supported when the [`tabBarPosition`](#tabbarposition) is set to `left` or `right`.
 
-![Material sidebar](/assets/navigators/bottom-tabs/bottom-tabs-side-material.png)
+<img src="/assets/navigators/bottom-tabs/bottom-tabs-side-material.png" alt="Sidebar with material variant" style={{ width: '100%' }} />
 
 #### `lazy`
 
