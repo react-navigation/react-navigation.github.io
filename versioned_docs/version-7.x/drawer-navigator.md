@@ -295,7 +295,7 @@ Function, that given `{ focused: boolean, color: string, size: number }` returns
 
 Color for the icon and label in the active item in the drawer.
 
-![Drawer active tint color](/assets/navigators/drawer/drawerActiveTintColor.png)
+![Drawer active tint color](/assets/navigators/drawer/drawer-active-tint-color.png)
 
 ```js
 drawerActiveTintColor: 'green',
@@ -305,7 +305,7 @@ drawerActiveTintColor: 'green',
 
 Background color for the active item in the drawer.
 
-![Drawer active background color](/assets/navigators/drawer/drawerActiveBackgroundColor.png)
+![Drawer active background color](/assets/navigators/drawer/drawer-active-background-color.png)
 
 ```js
 screenOptions={{
@@ -329,8 +329,6 @@ Background color for the inactive items in the drawer.
 
 Style object for the single item, which can contain an icon and/or a label.
 
-![Drawer item style](/assets/navigators/drawer/drawerItemStyle.png)
-
 Example:
 
 ```js
@@ -345,8 +343,6 @@ drawerItemStyle: {
 #### `drawerLabelStyle`
 
 Style object to apply to the `Text` style inside content section which renders a label.
-
-![Drawer label style](/assets/navigators/drawer/drawerLabelStyle.png)
 
 Example:
 
@@ -370,8 +366,6 @@ Style object for the wrapper view.
 
 Style object for the drawer component. You can pass a custom background color for a drawer or a custom width here.
 
-![Drawer style](/assets/navigators/drawer/drawerStyle.png)
-
 ```js
 <Drawer.Navigator
   screenOptions={{
@@ -393,22 +387,33 @@ Options are `left` or `right`. Defaults to `left` for LTR languages and `right` 
 
 Type of the drawer. It determines how the drawer looks and animates.
 
-- `front`: Traditional drawer which covers the screen with an overlay behind it.
-  <video playsInline autoPlay muted loop>
-   <source src="/assets/navigators/drawer/drawerType-front.mp4" />
-  </video>
+<div className="options-grid">
 
-- `back`: The drawer is revealed behind the screen on swipe.
-  <video playsInline autoPlay muted loop>
-   <source src="/assets/navigators/drawer/drawerType-back.mp4" />
-  </video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/drawer/drawer-type-front.mp4" /></video>
 
-- `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.
-  <video playsInline autoPlay muted loop>
-   <source src="/assets/navigators/drawer/drawerType-slide.mp4" />
-  </video>
+  `front`
 
-- `permanent`: A permanent drawer is shown as a sidebar. Useful for having always visible drawer on larger screens.
+  Traditional drawer which covers the screen with an overlay behind it.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/drawer/drawer-type-back.mp4" /></video>
+
+  `back`
+
+  The drawer is revealed behind the screen on swipe.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/drawer/drawer-type-slide.mp4" /></video>
+
+  `slide`
+
+  Both the screen and the drawer slide on swipe to reveal the drawer.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/drawer/drawer-type-permanent.mp4" /></video>
+
+  `permanent`
+
+  A permanent drawer is shown as a sidebar. Useful for having always visible drawer on larger screens.
+
+</div>
 
 Defaults to `slide` on iOS and `front` on other platforms.
 
@@ -438,33 +443,24 @@ function MyDrawer() {
 You can also specify other props such as `drawerStyle` based on screen size to customize the behavior. For example, you can combine it with `defaultStatus="open"` to achieve a master-detail layout:
 
 <video playsInline autoPlay muted loop>
-  <source src="/assets/navigators/drawer/drawerType-masterDetail.mp4" />
+  <source src="/assets/navigators/drawer/drawer-master-detail.mp4" />
 </video>
 
-```js
-import { useWindowDimensions } from 'react-native';
+```js static2dynamic
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-const Drawer = createDrawerNavigator();
-
-function MyDrawer() {
-  const dimensions = useWindowDimensions();
-
-  const isLargeScreen = dimensions.width >= 768;
-
-  return (
-    <Drawer.Navigator
-      defaultStatus="open"
-      screenOptions={{
-        drawerType: isLargeScreen ? 'permanent' : 'back',
-        drawerStyle: isLargeScreen ? null : { width: '100%' },
-        overlayColor: 'transparent',
-      }}
-    >
-      {/* Screens */}
-    </Drawer.Navigator>
-  );
-}
+const MyDrawer = createDrawerNavigator({
+  defaultStatus: 'open',
+  screenOptions: {
+    drawerType: 'back',
+    drawerStyle: { width: '100%' },
+    overlayColor: 'transparent',
+  },
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
 ```
 
 #### `drawerHideStatusBarOnOpen`
@@ -480,24 +476,12 @@ This is only supported on iOS. Defaults to `slide`.
 Supported values:
 
 - `slide`
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/drawer/drawerStatusBarAnimation-slide.mp4" />
-  </video>
-
 - `fade`
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/drawer/drawerStatusBarAnimation-fade.mp4" />
-  </video>
-
 - `none`
 
 #### `overlayColor`
 
 Color overlay to be displayed on top of the content view when drawer gets open. The opacity is animated from `0` to `1` when the drawer opens.
-
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/drawer/overlayColor.mp4" />
-  </video>
 
 #### `sceneStyle`
 

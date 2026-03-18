@@ -18,10 +18,7 @@ When we have multiple drawers, only one of them shows the list of screens. The s
 
 In such cases, we can use [`react-native-drawer-layout`](drawer-layout.md) directly to render the second drawer. The drawer navigator will be used to render the first drawer and can be nested inside the second drawer:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
+```js name="Multiple drawers with drawer layout" snack static2dynamic
 import * as React from 'react';
 import { View } from 'react-native';
 import { Drawer } from 'react-native-drawer-layout';
@@ -51,59 +48,7 @@ const LeftDrawerScreen = createDrawerNavigator({
   },
 });
 
-function RightDrawerScreen() {
-  const [rightDrawerOpen, setRightDrawerOpen] = React.useState(false);
-
-  return (
-    <Drawer
-      open={rightDrawerOpen}
-      onOpen={() => setRightDrawerOpen(true)}
-      onClose={() => setRightDrawerOpen(false)}
-      drawerPosition="right"
-      renderDrawerContent={() => <>{/* Right drawer content */}</>}
-    >
-      <LeftDrawerScreen />
-    </Drawer>
-  );
-}
-
-const Navigation = createStaticNavigation(RightDrawerScreen);
-
-export default function App() {
-  return <Navigation />;
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-import * as React from 'react';
-import { View } from 'react-native';
-import { Drawer } from 'react-native-drawer-layout';
-import { useNavigation } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Button } from '@react-navigation/elements';
-
-function HomeScreen() {
-  const navigation = useNavigation('Home');
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.openDrawer()}>Open drawer</Button>
-    </View>
-  );
-}
-
-const LeftDrawer = createDrawerNavigator();
-
-const LeftDrawerScreen = () => {
-  return (
-    <LeftDrawer.Navigator screenOptions={{ drawerPosition: 'left' }}>
-      <LeftDrawer.Screen name="Home" component={HomeScreen} />
-    </LeftDrawer.Navigator>
-  );
-};
+const Navigation = createStaticNavigation(LeftDrawerScreen);
 
 function RightDrawerScreen() {
   const [rightDrawerOpen, setRightDrawerOpen] = React.useState(false);
@@ -116,31 +61,21 @@ function RightDrawerScreen() {
       drawerPosition="right"
       renderDrawerContent={() => <>{/* Right drawer content */}</>}
     >
-      <LeftDrawerScreen />
+      <Navigation />
     </Drawer>
   );
 }
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <RightDrawerScreen />
-    </NavigationContainer>
-  );
+  return <RightDrawerScreen />;
 }
 ```
-
-</TabItem>
-</Tabs>
 
 But there is one problem. When we call `navigation.openDrawer()` in our `HomeScreen`, it always opens the left drawer. We don't have access to the right drawer via the `navigation` object since it's not a navigator.
 
 To solve this, we need to use context API to pass down a function to control the right drawer:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
+```js name="Multiple drawers with context" snack static2dynamic
 import * as React from 'react';
 import { View } from 'react-native';
 import { Drawer } from 'react-native-drawer-layout';
@@ -174,73 +109,7 @@ const LeftDrawerScreen = createDrawerNavigator({
   },
 });
 
-function RightDrawerScreen() {
-  const [rightDrawerOpen, setRightDrawerOpen] = React.useState(false);
-
-  const value = React.useMemo(
-    () => ({
-      openRightDrawer: () => setRightDrawerOpen(true),
-      closeRightDrawer: () => setRightDrawerOpen(false),
-    }),
-    []
-  );
-
-  return (
-    <Drawer
-      open={rightDrawerOpen}
-      onOpen={() => setRightDrawerOpen(true)}
-      onClose={() => setRightDrawerOpen(false)}
-      drawerPosition="right"
-      renderDrawerContent={() => <>{/* Right drawer content */}</>}
-    >
-      <RightDrawerContext.Provider value={value}>
-        <LeftDrawerScreen />
-      </RightDrawerContext.Provider>
-    </Drawer>
-  );
-}
-
-const Navigation = createStaticNavigation(RightDrawerScreen);
-
-export default function App() {
-  return <Navigation />;
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-import * as React from 'react';
-import { View } from 'react-native';
-import { Drawer } from 'react-native-drawer-layout';
-import { useNavigation } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Button } from '@react-navigation/elements';
-
-const RightDrawerContext = React.createContext();
-
-function HomeScreen() {
-  const navigation = useNavigation('Home');
-  const { openRightDrawer } = React.useContext(RightDrawerContext);
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.openDrawer()}>Open left drawer</Button>
-      <Button onPress={() => openRightDrawer()}>Open right drawer</Button>
-    </View>
-  );
-}
-
-const LeftDrawer = createDrawerNavigator();
-
-const LeftDrawerScreen = () => {
-  return (
-    <LeftDrawer.Navigator screenOptions={{ drawerPosition: 'left' }}>
-      <LeftDrawer.Screen name="Home" component={HomeScreen} />
-    </LeftDrawer.Navigator>
-  );
-};
+const Navigation = createStaticNavigation(LeftDrawerScreen);
 
 function RightDrawerScreen() {
   const [rightDrawerOpen, setRightDrawerOpen] = React.useState(false);
@@ -262,23 +131,16 @@ function RightDrawerScreen() {
       renderDrawerContent={() => <>{/* Right drawer content */}</>}
     >
       <RightDrawerContext.Provider value={value}>
-        <LeftDrawerScreen />
+        <Navigation />
       </RightDrawerContext.Provider>
     </Drawer>
   );
 }
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <RightDrawerScreen />
-    </NavigationContainer>
-  );
+  return <RightDrawerScreen />;
 }
 ```
-
-</TabItem>
-</Tabs>
 
 Here, we are using the `RightDrawerContext` to pass down the `openRightDrawer` function to the `HomeScreen`. Then we use `openRightDrawer` to open the right drawer.
 
