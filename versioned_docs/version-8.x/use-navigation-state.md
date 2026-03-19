@@ -4,9 +4,6 @@ title: useNavigationState
 sidebar_label: useNavigationState
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 `useNavigationState` is a hook which gives access to the [navigation state](navigation-state.md) of the navigator which contains the screen. It's useful in rare cases where you want to render something based on the navigation state.
 
 :::warning

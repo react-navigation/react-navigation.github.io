@@ -39,10 +39,7 @@ npm install @react-navigation/elements
 
 We can create a native stack navigator by using the `createNativeStackNavigator` function:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Native Stack Example" snack
+```js name="Native Stack Example" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -73,67 +70,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-`createNativeStackNavigator` takes a configuration object containing the screens to include, as well as various other options.
-
-`createNativeStackScreen` takes a configuration object for a screen, where the `screen` property is the component to render (or a nested navigator, which we'll cover later).
-
-`createStaticNavigation` takes the navigator and returns a component to render in the app. It should only be called once, typically at the root of your app (e.g., in `App.tsx`):
-
-:::warning
-
-In a typical React Native app, the `createStaticNavigation` function should be only used once in your app at the root.
-
-:::
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Native Stack Example" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-function RootStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-    </Stack.Navigator>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
-  );
-}
-```
-
-`createNativeStackNavigator` returns an object with `Screen` and `Navigator` components. The `Navigator` should render `Screen` elements as children to define routes.
-
-`NavigationContainer` manages the navigation tree and holds the [navigation state](navigation-state.md). It must wrap all navigators and should be rendered at the root of your app (e.g., in `App.tsx`):
-
-:::warning
-
-In a typical React Native app, the `NavigationContainer` should be only used once in your app at the root. You shouldn't nest multiple `NavigationContainer`s unless you have a specific use case for them.
-
-:::
-
-</TabItem>
-</Tabs>
 
 <div className="device-frame">
 

@@ -50,10 +50,7 @@ export default function App() {
 
 To use the header in a navigator, you can use the `header` option in the screen options:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Header with Native Stack" snack
+```js name="Header with Native Stack" snack static2dynamic
 import * as React from 'react';
 import { Text, View, Button } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
@@ -93,58 +90,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Header with Native Stack" snack
-import * as React from 'react';
-import { Text, View, Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// codeblock-focus-start
-import { Header, getHeaderTitle } from '@react-navigation/elements';
-
-const Stack = createNativeStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        header: ({ options, route, back }) => (
-          <Header
-            {...options}
-            back={back}
-            title={getHeaderTitle(options, route.name)}
-          />
-        ),
-      }}
-    >
-      <Stack.Screen name="Home" component={HomeScreen} />
-    </Stack.Navigator>
-  );
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 :::note
 

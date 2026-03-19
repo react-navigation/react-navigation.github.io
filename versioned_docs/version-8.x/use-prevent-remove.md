@@ -4,9 +4,6 @@ title: usePreventRemove
 sidebar_label: usePreventRemove
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 The `usePreventRemove` hook allows you to prevent the user from leaving a screen. For example, if there are unsaved changes, you might want to show a confirmation dialog before the user can navigate away.
 
 The hook takes 2 parameters:

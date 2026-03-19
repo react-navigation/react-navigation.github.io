@@ -4,9 +4,6 @@ title: Screen tracking for analytics
 sidebar_label: Screen tracking
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 To track the currently active screen, we need to:
 
 1. Add a callback to get notified of state changes
@@ -18,10 +15,7 @@ To get notified of state changes, we can use the `onStateChange` prop on `Naviga
 
 This example shows how the approach can be adapted to any mobile analytics SDK.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Screen tracking for analytics" snack
+```js name="Screen tracking for analytics" snack static2dynamic
 import * as React from 'react';
 import { View } from 'react-native';
 // codeblock-focus-start
@@ -97,90 +91,6 @@ export default function App() {
 }
 // codeblock-focus-end
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Screen tracking for analytics" snack
-import * as React from 'react';
-import { View } from 'react-native';
-// codeblock-focus-start
-import {
-  NavigationContainer,
-  useNavigation,
-  useNavigationContainerRef,
-} from '@react-navigation/native';
-// codeblock-focus-end
-import { Button } from '@react-navigation/elements';
-import { createStackNavigator } from '@react-navigation/stack';
-
-function Home() {
-  const navigation = useNavigation('Home');
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.navigate('Settings')}>
-        Go to Settings
-      </Button>
-    </View>
-  );
-}
-
-function Settings() {
-  const navigation = useNavigation('Settings');
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
-    </View>
-  );
-}
-
-const Stack = createStackNavigator();
-
-// codeblock-focus-start
-
-export default function App() {
-  const navigationRef = useNavigationContainerRef();
-  const routeNameRef = React.useRef();
-
-  return (
-    <NavigationContainer
-      ref={navigationRef}
-      onReady={async () => {
-        routeNameRef.current = navigationRef.current.getCurrentRoute().name;
-
-        // Replace the line below to add the tracker from a mobile analytics SDK
-        await trackScreenView(routeNameRef.current);
-      }}
-      onStateChange={async () => {
-        const previousRouteName = routeNameRef.current;
-        const currentRouteName = navigationRef.current.getCurrentRoute().name;
-
-        if (previousRouteName !== currentRouteName) {
-          // Replace the line below to add the tracker from a mobile analytics SDK
-          await trackScreenView(currentRouteName);
-        }
-
-        // Save the current route name for later comparison
-        routeNameRef.current = currentRouteName;
-      }}
-    >
-      {/* ... */}
-      // codeblock-focus-end
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Settings" component={Settings} />
-      </Stack.Navigator>
-      // codeblock-focus-start
-    </NavigationContainer>
-  );
-}
-// codeblock-focus-end
-```
-
-</TabItem>
-</Tabs>
 
 :::note
 

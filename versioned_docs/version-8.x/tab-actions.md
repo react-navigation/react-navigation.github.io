@@ -4,9 +4,6 @@ title: TabActions reference
 sidebar_label: TabActions
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 `TabActions` is an object containing methods for generating actions specific to tab-based navigators. Its methods expand upon the actions available in [`CommonActions`](navigation-actions.md).
 
 The following actions are supported:

@@ -4,9 +4,6 @@ title: useNavigation
 sidebar_label: useNavigation
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 `useNavigation` is a hook that gives access to `navigation` object. It's useful when you cannot pass the `navigation` object as a prop to the component directly, or don't want to pass it in case of a deeply nested child.
 
 It can be used in two ways.

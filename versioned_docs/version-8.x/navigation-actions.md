@@ -4,9 +4,6 @@ title: CommonActions reference
 sidebar_label: CommonActions
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 A navigation action is an object containing at least a `type` property. Internally, the action can be handled by [routers](custom-routers.md) with the `getStateForAction` method to return a new state from an existing [navigation state](navigation-state.md).
 
 Each navigation actions can contain at least the following properties:

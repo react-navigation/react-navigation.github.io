@@ -4,9 +4,6 @@ title: useRoute
 sidebar_label: useRoute
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 `useRoute` is a hook which gives access to `route` object. It's useful when you cannot pass down the `route` object from props to the component, or don't want to pass it in case of a deeply nested child.
 
 It can be used in two ways.

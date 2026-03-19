@@ -4,9 +4,6 @@ title: Preventing going back
 sidebar_label: Preventing going back
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 Sometimes you may want to prevent the user from leaving a screen to avoid losing unsaved changes. There are a couple of things you may want to do in this case:
 
 ## Prevent the user from leaving the screen

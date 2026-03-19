@@ -917,7 +917,7 @@ In React Navigation 7, we added an experimental `UNSTABLE_routeNamesChangeBehavi
 In React Navigation 8, we have dropped the `UNSTABLE_` prefix and made it a stable API.
 
 ```js static2dynamic
-const Stack = createNativeStackNavigator({
+const RootStack = createNativeStackNavigator({
   // highlight-start
   routeNamesChangeBehavior: 'lastUnhandled',
   // highlight-end

@@ -4,8 +4,6 @@ title: Themes
 sidebar_label: Customizing Themes
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 import ThemeColors from '@site/src/components/ThemeColors';
 
 Themes allow you to change the colors and fonts of various components provided by React Navigation. You can use themes to:

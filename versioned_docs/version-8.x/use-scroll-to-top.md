@@ -4,9 +4,6 @@ title: useScrollToTop
 sidebar_label: useScrollToTop
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 The expected native behavior of scrollable components is to respond to events from navigation that will scroll to top when tapping on the active tab as you would expect from native tab bars.
 
 In order to achieve it we export `useScrollToTop`, which accepts a ref to a scrollable component (e.g. `ScrollView` or `FlatList`).

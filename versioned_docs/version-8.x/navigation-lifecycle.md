@@ -4,9 +4,6 @@ title: Navigation lifecycle
 sidebar_label: Navigation lifecycle
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 If you're coming from a web background, you might expect that when navigating from route A to route B, A unmounts and remounts when you return. React Navigation works differently - this is driven by the more complex needs of mobile navigation.
 
 Unlike web browsers, React Navigation doesn't unmount screens when navigating away. When you navigate from `Home` to `Profile`:

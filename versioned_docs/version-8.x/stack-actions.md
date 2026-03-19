@@ -4,9 +4,6 @@ title: StackActions reference
 sidebar_label: StackActions
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 `StackActions` is an object containing methods for generating actions specific to stack-based navigators. Its methods expand upon the actions available in [`CommonActions`](navigation-actions.md).
 
 The following actions are supported:

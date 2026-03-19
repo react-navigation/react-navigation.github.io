@@ -4,9 +4,6 @@ title: Multiple drawers
 sidebar_label: Multiple drawers
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 Sometimes we want to have multiple drawers on the same screen: one on the left and one on the right. This can be achieved in 2 ways:
 
 1. By using [`react-native-drawer-layout`](drawer-layout.md) directly (Recommended).

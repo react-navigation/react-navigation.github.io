@@ -4,9 +4,6 @@ title: Configuring the header bar
 sidebar_label: Configuring the header bar
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 We've seen how to configure the header title already, but let's go over that again before moving on to some other options.
 
 ## Setting the header title

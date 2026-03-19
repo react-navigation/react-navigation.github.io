@@ -23,10 +23,7 @@ With this approach, we will only be able to call an action when the screen focus
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Focus event listener" snack
+```js name="Focus event listener" snack static2dynamic
 // codeblock-focus-start
 import * as React from 'react';
 import { View } from 'react-native';
@@ -82,58 +79,6 @@ export default function App() {
 }
 ```
 
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Focus event listener" snack
-// codeblock-focus-start
-import * as React from 'react';
-import { View } from 'react-native';
-
-// codeblock-focus-end
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-// codeblock-focus-start
-function ProfileScreen() {
-  const navigation = useNavigation('Profile');
-
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      alert('Screen is focused');
-      // The screen is focused
-      // Call any action
-    });
-
-    // Return the function to unsubscribe from the event so it gets removed on unmount
-    return unsubscribe;
-  }, [navigation]);
-
-  return <View />;
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  return <View />;
-}
-
-const Tab = createBottomTabNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
 See the [navigation events guide](navigation-events.md) for more details on the event listener API.
 
 In most cases, it's recommended to use the `useFocusEffect` hook instead of adding the listener manually. See below for details.
@@ -144,10 +89,7 @@ React Navigation provides a [hook](use-focus-effect.md) that runs an effect when
 
 This is particularly handy when we are trying to stop something when the page is unfocused, like stopping a video or audio file from playing, or stopping the tracking of a user's location.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="useFocusEffect hook" snack
+```js name="useFocusEffect hook" snack static2dynamic
 import * as React from 'react';
 import { View } from 'react-native';
 import {
@@ -197,54 +139,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="useFocusEffect hook" snack
-import * as React from 'react';
-import { View } from 'react-native';
-import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-// codeblock-focus-start
-function ProfileScreen() {
-  useFocusEffect(
-    React.useCallback(() => {
-      alert('Screen was focused');
-      // Do something when the screen is focused
-      return () => {
-        alert('Screen was unfocused');
-        // Do something when the screen is unfocused
-        // Useful for cleanup functions
-      };
-    }, [])
-  );
-
-  return <View />;
-}
-// codeblock-focus-end
-
-function HomeScreen() {
-  return <View />;
-}
-
-const Tab = createBottomTabNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 See the [`useFocusEffect`](https://reactnavigation.org/docs/use-focus-effect/) documentation for more details.
 

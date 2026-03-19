@@ -4,9 +4,6 @@ title: useTheme
 sidebar_label: useTheme
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 The `useTheme` hook lets us access the currently active theme. You can use it in your own components to have them respond to changes in the theme.
 
 ```js name="useTheme hook" snack static2dynamic

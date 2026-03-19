@@ -4,9 +4,6 @@ title: Header buttons
 sidebar_label: Header buttons
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 Now that we know how to customize the look of our headers, let's make them interactive!
 
 ## Adding a button to the header

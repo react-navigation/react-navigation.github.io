@@ -4,9 +4,6 @@ title: DrawerActions reference
 sidebar_label: DrawerActions
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 `DrawerActions` is an object containing methods for generating actions specific to drawer-based navigators. Its methods expand upon the actions available in [CommonActions](navigation-actions.md).
 
 The following actions are supported:

@@ -4,9 +4,6 @@ title: Opening a modal
 sidebar_label: Opening a modal
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 ![Modal shown on screen](/assets/modal/modal-demo.gif)
 
 A modal displays content that temporarily blocks interactions with the main view.

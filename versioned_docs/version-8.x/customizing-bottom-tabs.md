@@ -4,9 +4,6 @@ title: Customizing bottom tab bar
 sidebar_label: Customizing tab bar
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 This guide covers customizing the tab bar in [`createBottomTabNavigator`](bottom-tab-navigator.md). Make sure to install and configure the library according to the [installation instructions](bottom-tab-navigator.md#installation) first.
 
 ## Add icons for each tab

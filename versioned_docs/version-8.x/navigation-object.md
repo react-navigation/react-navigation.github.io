@@ -1556,10 +1556,7 @@ You can also use `React.useLayoutEffect` to reduce the delay in updating the opt
 
 Screens can add listeners on the `navigation` object with the `addListener` method. For example, to listen to the `focus` event:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Navigation events" snack
+```js name="Navigation events" snack static2dynamic
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '@react-navigation/elements';
@@ -1634,85 +1631,6 @@ export default function App() {
   return <Navigation />;
 }
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Navigation events" snack
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-function SettingsScreen() {
-  const navigation = useNavigation('Settings');
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Settings Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-// codeblock-focus-start
-function ProfileScreen() {
-  const navigation = useNavigation('Profile');
-
-  React.useEffect(
-    () => navigation.addListener('focus', () => alert('Screen was focused')),
-    [navigation]
-  );
-
-  React.useEffect(
-    () => navigation.addListener('blur', () => alert('Screen was unfocused')),
-    [navigation]
-  );
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        gap: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.navigate('Settings')}>
-        Go to Settings
-      </Button>
-    </View>
-  );
-}
-// codeblock-focus-end
-
-const SettingsStack = createNativeStackNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <SettingsStack.Navigator>
-        <SettingsStack.Screen name="Settings" component={SettingsScreen} />
-        <SettingsStack.Screen name="Profile" component={ProfileScreen} />
-      </SettingsStack.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
 
 See [Navigation events](navigation-events.md) for more details on the available events and the API usage.
 

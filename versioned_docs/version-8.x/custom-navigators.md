@@ -4,9 +4,6 @@ title: Custom navigators
 sidebar_label: Custom navigators
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 In essence, a navigator is a React component that takes a set of screens and options, and renders them based on its [navigation state](navigation-state.md), generally with additional UI such as headers, tab bars, or drawers.
 
 React Navigation provides a few built-in navigators, but they might not always fit your needs if you want a very custom behavior or UI. In such cases, you can build your own custom navigators using React Navigation's APIs.

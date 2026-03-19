@@ -4,9 +4,6 @@ title: useFocusEffect
 sidebar_label: useFocusEffect
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 Sometimes we want to run side-effects when a screen is focused. A side effect may involve things like adding an event listener, fetching data, updating document title, etc. While this can be achieved using `focus` and `blur` events, it's not very ergonomic.
 
 To make this easier, the library exports a `useFocusEffect` hook:

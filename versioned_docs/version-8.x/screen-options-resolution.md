@@ -258,10 +258,7 @@ When we set the `options` directly on `Screen` components containing the `HomeSt
 
 Imagine the following configuration:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js name="Parent options from a child" snack
+```js name="Parent options from a child" snack static2dynamic
 import * as React from 'react';
 import { View } from 'react-native';
 import {
@@ -319,73 +316,6 @@ export default function App() {
 }
 // codeblock-focus-end
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js name="Parent options from a child" snack
-import * as React from 'react';
-import { View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button } from '@react-navigation/elements';
-
-function FeedScreen() {
-  const navigation = useNavigation('Feed');
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.navigate('Settings')}>
-        Go to Settings
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  return <View />;
-}
-
-function AccountScreen() {
-  return <View />;
-}
-
-function SettingsScreen() {
-  return <View />;
-}
-
-// codeblock-focus-start
-const Tab = createBottomTabNavigator();
-
-function HomeTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Feed" component={FeedScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-      <Tab.Screen name="Account" component={AccountScreen} />
-    </Tab.Navigator>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeTabs} />
-        <Stack.Screen name="Settings" component={SettingsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
-// codeblock-focus-end
-```
-
-</TabItem>
-</Tabs>
 
 If we were to set the `headerTitle` with `options` for the `FeedScreen`, this would not work. This is because `App` stack will only look at its immediate children for configuration: `HomeTabs` and `SettingsScreen`.
 

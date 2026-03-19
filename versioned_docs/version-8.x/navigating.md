@@ -4,9 +4,6 @@ title: Moving between screens
 sidebar_label: Moving between screens
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 In the previous section, we defined a stack navigator with two routes (`Home` and `Details`), but we didn't learn how to let a user navigate from `Home` to `Details`.
 
 If this was a web browser, we'd be able to write something like this:
