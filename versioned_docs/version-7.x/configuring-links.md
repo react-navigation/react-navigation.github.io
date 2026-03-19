@@ -426,8 +426,8 @@ const state = {
         sort: 'latest',
       },
     },
-  ];
-}
+  ],
+};
 ```
 
 See [Navigation State reference](navigation-state.md) for more details on how the state object is structured.
@@ -611,7 +611,7 @@ const HomeTabs = createBottomTabNavigator({
       screen: FeedScreen,
     },
     Profile: {
-      screen: HomeScreen,
+      screen: ProfileScreen,
       linking: {
         path: 'users/:id',
       },
@@ -710,7 +710,7 @@ const HomeTabs = createBottomTabNavigator({
       screen: FeedScreen,
     },
     Profile: {
-      screen: HomeScreen,
+      screen: ProfileScreen,
       linking: {
         path: 'users/:id',
       },
@@ -823,7 +823,7 @@ const HomeTabs = createBottomTabNavigator({
       screen: FeedScreen,
     },
     Profile: {
-      screen: HomeScreen,
+      screen: ProfileScreen,
       linking: {
         path: 'users/:id',
       },
@@ -927,7 +927,7 @@ By default, paths defined for each screen are matched against the URL relative t
 const ProfileTabs = createBottomTabNavigator({
   screens: {
     Profile: {
-      screen: HomeScreen,
+      screen: ProfileScreen,
       linking: {
         path: 'users/:id',
       },
@@ -979,7 +979,7 @@ In this case, it makes more sense to navigate to the `Profile` screen using a UR
 const ProfileTabs = createBottomTabNavigator({
   screens: {
     Profile: {
-      screen: HomeScreen,
+      screen: ProfileScreen,
       linking: {
         path: 'users/:id',
         // highlight-next-line
@@ -1037,13 +1037,13 @@ Sometimes, you may not want to have the route name of a screen in the path. For 
 const RootStack = createStackNavigator({
   screens: {
     Home: {
-      screen: ProfileScreen,
+      screen: HomeScreen,
       linking: {
         path: 'home',
       },
     },
     Profile: {
-      screen: HomeScreen,
+      screen: ProfileScreen,
       linking: {
         path: 'users/:id',
       },
@@ -1080,13 +1080,13 @@ You can specify an empty string as path or not specify a path at all, and React 
 const RootStack = createStackNavigator({
   screens: {
     Home: {
-      screen: ProfileScreen,
+      screen: HomeScreen,
       linking: {
         path: '',
       },
     },
     Profile: {
-      screen: HomeScreen,
+      screen: ProfileScreen,
       linking: {
         path: 'users/:id',
       },
@@ -1194,7 +1194,7 @@ const config = {
 </TabItem>
 </Tabs>
 
-You can also provide a your own function to serialize the params. For example, let's say that you want to use a DD-MM-YYYY format in the path instead of a timestamp:
+You can also provide your own function to serialize the params. For example, let's say that you want to use a DD-MM-YYYY format in the path instead of a timestamp:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -1213,7 +1213,9 @@ const RootStack = createStackNavigator({
           date: (date) => {
             const d = new Date(date);
 
-            return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+            return (
+              d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
+            );
           },
         },
       },
@@ -1237,7 +1239,7 @@ const config = {
         date: (date) => {
           const d = new Date(date);
 
-          return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+          return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
         },
       },
     },
@@ -1254,7 +1256,7 @@ Depending on your requirements, you can use this functionality to parse and stri
 
 If you need more complex matching logic, you can use regular expressions to match the path. For example, if you want to use the pattern `@username` to match a user's profile, you can use a regular expression to match the path. This allows you to have the same path pattern for multiple screens, but fine-tune the matching logic to be more specific for a particular screen.
 
-Regular expressions can be specified between parentheses `(` and `)` in the after a param name. For example:
+Regular expressions can be specified between parentheses `(` and `)` after a param name. For example:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>

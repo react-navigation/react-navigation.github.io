@@ -22,8 +22,9 @@ import { PlatformPressable } from '@react-navigation/elements';
 function DrawerContent({ state, descriptors, navigation }) {
   const { buildHref } = useLinkBuilder();
 
-  return state.routes((route) => (
+  return state.routes.map((route) => (
     <PlatformPressable
+      key={route.key}
       href={buildHref(route.name, route.params)}
       onPress={() => navigation.navigate(route.name, route.params)}
     >
@@ -45,12 +46,13 @@ There are couple of important things to note:
 The `buildAction` method lets us parse a `href` string into an action object that can be used with [`navigation.dispatch`](navigation-object.md#dispatch) to navigate to the relevant screen.
 
 ```js
-import { Link, CommonActions, useLinkBuilder } from '@react-navigation/native';
+import { useNavigation, useLinkBuilder } from '@react-navigation/native';
 import { Button } from '@react-navigation/elements';
 
 // ...
 
 function MyComponent() {
+  const navigation = useNavigation();
   const { buildAction } = useLinkBuilder();
 
   return (

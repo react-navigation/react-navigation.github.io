@@ -457,7 +457,8 @@ const Tabs = createBottomTabNavigator({
 ```js
 <Tab.Navigator
   screenOptions={{
-    tabBarPosition: dimensions.width < 600 ? 'bottom' : 'left',
+    tabBarPosition: isLargeScreen ? 'left' : 'bottom',
+    tabBarVariant: isLargeScreen ? 'material' : 'uikit',
     tabBarLabelPosition: 'below-icon',
   }}
 >
@@ -731,7 +732,7 @@ function MyComponent() {
   const tabBarHeight = useBottomTabBarHeight();
 
   return (
-    <ScrollView contentStyle={{ paddingBottom: tabBarHeight }}>
+    <ScrollView contentContainerStyle={{ paddingBottom: tabBarHeight }}>
       {/* Content */}
     </ScrollView>
   );
@@ -961,7 +962,6 @@ Bottom Tab Navigator exposes various options to configure the transition animati
   </Tabs>
 
 Putting these together, you can customize the transition animation for a screen:
-
 Putting these together, you can customize the transition animation for a screen:
 
 ```js name="Bottom Tabs custom animation" snack static2dynamic
@@ -1043,7 +1043,7 @@ import { TransitionSpecs } from '@react-navigation/bottom-tabs';
     screen: Profile,
     options: {
       // highlight-start
-      transitionSpec: TransitionSpecs.CrossFadeSpec,
+      transitionSpec: TransitionSpecs.FadeSpec,
       // highlight-end
     },
   },

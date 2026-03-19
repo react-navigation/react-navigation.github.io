@@ -486,7 +486,7 @@ const state = {
       },
     },
   ],
-}
+};
 ```
 
 See [Navigation State reference](navigation-state.md) for more details on how the state object is structured.

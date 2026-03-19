@@ -12,7 +12,7 @@ A navigation action is an object containing at least a `type` property. Internal
 Each navigation actions can contain at least the following properties:
 
 - `type` (required) - A string that represents the name of the action.
-- `payload` (options) - An object containing additional information about the action. For example, it will contain `name` and `params` for `navigate`.
+- `payload` (optional) - An object containing additional information about the action. For example, it will contain `name` and `params` for `navigate`.
 - `source` (optional) - The key of the route which should be considered as the source of the action. This is used for some actions to determine which route to apply the action on. By default, `navigation.dispatch` adds the key of the route that dispatched the action.
 - `target` (optional) - The key of the [navigation state](navigation-state.md) the action should be applied on.
 
@@ -111,7 +111,7 @@ In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack
 <details>
 <summary>Advanced usage</summary>
 
-The `navigate` action can also accepts an object as the argument with the following properties:
+The `navigate` action can also accept an object as the argument with the following properties:
 
 - `name` - _string_ - A destination name of the screen in the current or a parent navigator
 - `params` - _object_ - Params to use for the destination route.
@@ -188,7 +188,7 @@ function ProfileScreen({ route }) {
               routes: [
                 {
                   name: 'Profile',
-                  params: { user: 'jane', key: route.params.key },
+                  params: { user: 'jane' },
                 },
                 { name: 'Home' },
               ],
@@ -555,7 +555,7 @@ if (navigation.isFocused()) {
 
 ### setParams
 
-The `setParams` action allows to replace params for a certain route. It takes the following arguments:
+The `setParams` action allows to merge params for a certain route. It takes the following arguments:
 
 - `params` - _object_ - required - New params to be merged into existing route params.
 

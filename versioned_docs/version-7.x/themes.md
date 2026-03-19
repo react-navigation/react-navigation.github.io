@@ -106,6 +106,8 @@ When creating a custom theme, you will need to provide all of these properties.
 <summary>Example theme</summary>
 
 ```js
+import { Platform } from 'react-native';
+
 const WEB_FONT_STACK =
   'system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
 

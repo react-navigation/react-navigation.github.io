@@ -28,22 +28,26 @@ The functions in the router object should be pure functions, i.e. they should no
 Example:
 
 ```js
+import { BaseRouter } from '@react-navigation/native';
+import { nanoid } from 'nanoid/non-secure';
+
 const router = {
   type: 'tab',
 
   getInitialState({ routeNames, routeParamList }) {
     const index =
-      options.initialRouteName === undefined
-        ? 0
-        : routeNames.indexOf(options.initialRouteName);
+      options.initialRouteName !== undefined &&
+      routeNames.includes(options.initialRouteName)
+        ? routeNames.indexOf(options.initialRouteName)
+        : 0;
 
     return {
       stale: false,
       type: 'tab',
-      key: shortid(),
+      key: nanoid(),
       index,
       routeNames,
-      routes: routeNames.map(name => ({
+      routes: routeNames.map((name) => ({
         name,
         key: name,
         params: routeParamList[name],
@@ -52,36 +56,32 @@ const router = {
   },
 
   getRehydratedState(partialState, { routeNames, routeParamList }) {
-    const state = partialState;
-
-    if (state.stale === false) {
-      return state as NavigationState;
+    if (partialState.stale === false) {
+      return partialState;
     }
 
-    const routes = state.routes
-      .filter(route => routeNames.includes(route.name))
-      .map(
-        route =>
-          ({
-            ...route,
-            key: route.key || `${route.name}-${shortid()}`,
-            params:
-              routeParamList[route.name] !== undefined
-                ? {
-                    ...routeParamList[route.name],
-                    ...route.params,
-                  }
-                : route.params,
-          } as Route<string>)
-      );
+    const routes = partialState.routes
+      .filter((route) => routeNames.includes(route.name))
+      .map((route) => ({
+        ...route,
+        key: route.key || `${route.name}-${nanoid()}`,
+        params:
+          routeParamList[route.name] !== undefined
+            ? {
+                ...routeParamList[route.name],
+                ...route.params,
+              }
+            : route.params,
+      }));
 
     return {
       stale: false,
       type: 'tab',
-      key: shortid(),
+      key: nanoid(),
       index:
-        typeof state.index === 'number' && state.index < routes.length
-          ? state.index
+        typeof partialState.index === 'number' &&
+        partialState.index < routes.length
+          ? partialState.index
           : 0,
       routeNames,
       routes,
@@ -89,7 +89,7 @@ const router = {
   },
 
   getStateForRouteNamesChange(state, { routeNames }) {
-    const routes = state.routes.filter(route =>
+    const routes = state.routes.filter((route) =>
       routeNames.includes(route.name)
     );
 
@@ -97,12 +97,12 @@ const router = {
       ...state,
       routeNames,
       routes,
-      index: Math.min(state.index, routes.length - 1),
+      index: Math.max(0, Math.min(state.index, routes.length - 1)),
     };
   },
 
   getStateForRouteFocus(state, key) {
-    const index = state.routes.findIndex(r => r.key === key);
+    const index = state.routes.findIndex((r) => r.key === key);
 
     if (index === -1 || index === state.index) {
       return state;
@@ -115,7 +115,7 @@ const router = {
     switch (action.type) {
       case 'NAVIGATE': {
         const index = state.routes.findIndex(
-          route => route.name === action.payload.name
+          (route) => route.name === action.payload.name
         );
 
         if (index === -1) {
@@ -172,7 +172,7 @@ const MyTabRouter = (options) => {
         case 'CLEAR_HISTORY':
           return {
             ...state,
-            routeKeyHistory: [],
+            history: [],
           };
         default:
           return router.getStateForAction(state, action, options);

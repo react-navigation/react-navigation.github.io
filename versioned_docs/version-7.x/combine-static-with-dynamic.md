@@ -39,7 +39,7 @@ const RootStack = createNativeStackNavigator({
 });
 ```
 
-Here, `FeedScreen` is a component that renders a tab navigator and is defined using the dynamic API:
+Here, `FeedScreen` is a component that renders a bottom tab navigator and is defined using the dynamic API:
 
 ```js
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -58,8 +58,8 @@ function FeedScreen() {
 
 This code will work, but we're missing 2 things:
 
-- Linking configuration for the screens in the top tab navigator.
-- TypeScript types for the screens in the top tab navigator.
+- Linking configuration for the screens in the bottom tab navigator.
+- TypeScript types for the screens in the bottom tab navigator.
 
 Since the nested navigator is defined using the dynamic API, we need to handle these manually. For the linking configuration, we can define the screens in the `linking` property of the `Feed` screen:
 

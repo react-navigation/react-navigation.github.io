@@ -98,8 +98,8 @@ Much like the issue template, the [pull request template](https://github.com/rea
 - Run these commands in the terminal to download locally and install it:
 
 ```bash
-git clone https://github.com/<USERNAME>/navigation-ex.git
-cd navigation-ex
+git clone https://github.com/<USERNAME>/react-navigation.git
+cd react-navigation
 git remote add upstream https://github.com/react-navigation/react-navigation.git
 yarn
 ```
@@ -134,7 +134,7 @@ yarn typescript --watch
 
 ### Run the Example App
 
-The [example app](https://github.com/react-navigation/react-navigation/tree/main/packages/example) includes a variety of patterns and is used as a simple way for contributors to manually integration test changes.
+The [example app](https://github.com/react-navigation/react-navigation/tree/main/example) includes a variety of patterns and is used as a simple way for contributors to manually integration test changes.
 
 While developing, you can run the [example app](https://github.com/react-navigation/react-navigation/tree/main/example) with [Expo](https://expo.io/) to test your changes:
 

@@ -68,7 +68,7 @@ const MyStack = createNativeStackNavigator({
 });
 // codeblock-focus-end
 
-const Navigation = createStaticNavigation(Stack);
+const Navigation = createStaticNavigation(MyStack);
 
 export default function App() {
   return <Navigation />;

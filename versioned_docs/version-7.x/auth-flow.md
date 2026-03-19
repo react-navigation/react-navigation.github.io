@@ -88,11 +88,11 @@ This means:
 
 This makes it impossible to navigate to the `Home` when the user is not signed in, and to `SignIn` when the user is signed in.
 
-When the values returned by `useIsSignedin` and `useIsSignedOut` change, the screens matching the condition will change:
+When the values returned by `useIsSignedIn` and `useIsSignedOut` change, the screens matching the condition will change:
 
-- Let's say, initially `useIsSignedOut` returns `true`. This means that `SignIn` screens is shown.
+- Let's say, initially `useIsSignedOut` returns `true`. This means that the `SignIn` screen is shown.
 - After the user signs in, the return value of `useIsSignedIn` will change to `true` and `useIsSignedOut` will change to `false`, which means:
-  - React Navigation will see that the `SignIn` screen is no longer matches the condition, so it will remove the screen.
+  - React Navigation will see that the `SignIn` screen no longer matches the condition, so it will remove the screen.
   - Then it'll show the `Home` screen automatically because that's the first screen available when `useIsSignedIn` returns `true`.
 
 The order of the screens matters when there are multiple screens matching the condition. For example, if there are two screens matching `useIsSignedIn`, the first screen will be shown when the condition is `true`.
@@ -170,14 +170,14 @@ This means:
 
 This makes it impossible to navigate to the `Home` when the user is not signed in, and to `SignIn` when the user is signed in.
 
-When the value of `isSignedin` changes, the screens defined based on the condition will change:
+When the value of `isSignedIn` changes, the screens defined based on the condition will change:
 
-- Let's say, initially `isSignedin` is `false`. This means that `SignIn` screens is shown.
-- After the user signs in, the value of `isSignedin` will change to `true`, which means:
+- Let's say, initially `isSignedIn` is `false`. This means that the `SignIn` screen is shown.
+- After the user signs in, the value of `isSignedIn` will change to `true`, which means:
   - React Navigation will see that the `SignIn` screen is no longer defined, so it will remove the screen.
-  - Then it'll show the `Home` screen automatically because that's the first screen defined when `isSignedin` returns `true`.
+  - Then it'll show the `Home` screen automatically because that's the first screen defined when `isSignedIn` returns `true`.
 
-The order of the screens matters when there are multiple screens matching the condition. For example, if there are two screens defined based on `isSignedin`, the first screen will be shown when the condition is `true`.
+The order of the screens matters when there are multiple screens matching the condition. For example, if there are two screens defined based on `isSignedIn`, the first screen will be shown when the condition is `true`.
 
 </TabItem>
 </Tabs>
@@ -228,16 +228,15 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         {isSignedIn ? (
+          <Stack.Screen name="Home" component={HomeScreen} />
+        ) : (
           <Stack.Screen
             name="SignIn"
-            component={SimpleSignInScreen}
+            component={SignInScreen}
             options={{
               title: 'Sign in',
             }}
-            initialParams={{ setUserToken }}
           />
-        ) : (
-          <Stack.Screen name="Home" component={HomeScreen} />
         )}
       </Stack.Navigator>
     </NavigationContainer>
@@ -285,16 +284,15 @@ return (
   <NavigationContainer>
     <Stack.Navigator>
       {isSignedIn ? (
+        <Stack.Screen name="Home" component={HomeScreen} />
+      ) : (
         <Stack.Screen
           name="SignIn"
-          component={SimpleSignInScreen}
+          component={SignInScreen}
           options={{
             title: 'Sign in',
           }}
-          initialParams={{ setUserToken }}
         />
-      ) : (
-        <Stack.Screen name="Home" component={HomeScreen} />
       )}
     </Stack.Navigator>
   </NavigationContainer>
@@ -348,14 +346,14 @@ We can use [`React.Fragment`](https://react.dev/reference/react/Fragment) or [`G
 ```js
 isSignedIn ? (
   <>
-    <Stack.Screen name="SignIn" component={SignInScreen} />
-    <Stack.Screen name="SignUp" component={SignUpScreen} />
-    <Stack.Screen name="ResetPassword" component={ResetPassword} />
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="Profile" component={ProfileScreen} />
   </>
 ) : (
   <>
-    <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="Profile" component={ProfileScreen} />
+    <Stack.Screen name="SignIn" component={SignInScreen} />
+    <Stack.Screen name="SignUp" component={SignUpScreen} />
+    <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
   </>
 );
 ```

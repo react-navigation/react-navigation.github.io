@@ -417,7 +417,7 @@ Type of the drawer. It determines how the drawer looks and animates.
 
 Defaults to `slide` on iOS and `front` on other platforms.
 
-You can conditionally specify the `drawerType` to show a permanent drawer on bigger screens and a traditional drawer drawer on small screens:
+You can conditionally specify the `drawerType` to show a permanent drawer on bigger screens and a traditional drawer on small screens:
 
 ```js
 import { useWindowDimensions } from 'react-native';

@@ -202,11 +202,13 @@ export default function App() {
 
 But there is one problem. When we call `navigation.openDrawer()` in our `HomeScreen`, it always opens the left drawer since it's the immediate parent of the screen.
 
-To solve this, we need to use [`navigation.getParent`](navigation-object.md#getparent) to refer to the right drawer which is the parent of the left drawer. So our code would look like:
+To solve this, we need to use [`navigation.getParent`](navigation-object.md#getparent) to refer to the right drawer, which is the parent of the left drawer. So our code would look like:
 
 ```js
-<Button onPress={() => navigation.openDrawer()} >Open left drawer</Button>
-<Button onPress={() => navigation.getParent().openDrawer()}>Open right drawer</Button>
+<Button onPress={() => navigation.openDrawer()}>Open left drawer</Button>
+<Button onPress={() => navigation.getParent().openDrawer()}>
+  Open right drawer
+</Button>
 ```
 
 However, this means that our button needs to know about the parent navigators, which isn't ideal. If our button is further nested inside other navigators, it'd need multiple `getParent()` calls. To address this, we can use the [`id` prop](navigator.md#id) to identify the parent navigator.

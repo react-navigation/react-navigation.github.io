@@ -366,7 +366,7 @@ With both approaches, you can access the route params of the parent screen with 
 
 ## Deep linking
 
-For deep links and dynamic links, the dynamic API requires a linking configuration that maps navigation structure to path patterns. In the static API, the paths can be generated based on the screen name and automatically by specifying `enabled: 'auto'`. Custom path patterns can be defined on each screen's `linking` property:
+For deep links and dynamic links, the dynamic API requires a linking configuration that maps navigation structure to path patterns. In the static API, the paths can be generated automatically based on the screen name by specifying `enabled: 'auto'`. Custom path patterns can be defined on each screen's `linking` property:
 
 ```js title="Dynamic API"
 const linking = {
