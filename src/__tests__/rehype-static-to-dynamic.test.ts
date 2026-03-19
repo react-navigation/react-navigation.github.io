@@ -4,6 +4,7 @@ import { describe, test } from 'node:test';
 import rehypeStaticToDynamic, {
   type RehypeStaticToDynamicElement as Element,
   type RehypeStaticToDynamicElementChild as ElementChild,
+  type RehypeStaticToDynamicMdxEsm as MdxEsm,
   type RehypeStaticToDynamicRoot as Root,
   type RehypeStaticToDynamicText as Text,
   type RehypeStaticToDynamicTreeChild as TreeChild,
@@ -12,10 +13,11 @@ import rehypeStaticToDynamic, {
 /**
  * Helper function to create a test tree structure
  */
-function createTestTree(code: string): Root {
+function createTestTree(code: string, extraChildren: MdxEsm[] = []): Root {
   const tree: Root = {
     type: 'root',
     children: [
+      ...extraChildren,
       {
         type: 'element',
         tagName: 'pre',
@@ -35,7 +37,7 @@ function createTestTree(code: string): Root {
           },
         ],
       },
-    ],
+    ] as Root['children'],
   };
 
   return tree;
@@ -46,7 +48,9 @@ function createTestTree(code: string): Root {
  */
 function extractTransformedCode(tree: Root): string {
   // After transformation, the tree should have TabItem elements
-  const tabsElement = tree.children[0];
+  const tabsElement = tree.children.find(
+    (child): child is Element => isElement(child) && child.tagName === 'Tabs'
+  );
 
   if (!isElement(tabsElement) || tabsElement.tagName !== 'Tabs') {
     throw new Error('Expected Tabs element not found');
@@ -90,6 +94,10 @@ function isElement(
   node: TreeChild | ElementChild | undefined
 ): node is Element {
   return Boolean(node && node.type === 'element');
+}
+
+function isMdxEsmNode(node: TreeChild | undefined): node is MdxEsm {
+  return Boolean(node && node.type === 'mdxjsEsm');
 }
 
 function isTextNode(node: ElementChild): node is Text {
@@ -147,6 +155,77 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     assert.strictEqual(output, expected);
+  });
+
+  test('adds Tabs imports when transforming static2dynamic code', async () => {
+    const input = dedent /* javascript */ `
+      import { createNativeStackNavigator } from '@react-navigation/native-stack';
+      import { createStaticNavigation } from '@react-navigation/native';
+
+      const RootStack = createNativeStackNavigator({
+        screens: {
+          Home: HomeScreen,
+        },
+      });
+
+      const Navigation = createStaticNavigation(RootStack);
+
+      export default function App() {
+        return <Navigation />;
+      }
+    `;
+
+    const tree = createTestTree(input);
+    const plugin = rehypeStaticToDynamic();
+    await plugin(tree);
+
+    const importNode = tree.children.find(isMdxEsmNode);
+
+    if (!importNode || !('value' in importNode)) {
+      throw new Error('Expected MDX import node not found');
+    }
+
+    assert.strictEqual(
+      importNode.value,
+      "import Tabs from '@theme/Tabs'\nimport TabItem from '@theme/TabItem'"
+    );
+  });
+
+  test('does not duplicate existing Tabs imports', async () => {
+    const input = dedent /* javascript */ `
+      import { createNativeStackNavigator } from '@react-navigation/native-stack';
+      import { createStaticNavigation } from '@react-navigation/native';
+
+      const RootStack = createNativeStackNavigator({
+        screens: {
+          Home: HomeScreen,
+        },
+      });
+
+      const Navigation = createStaticNavigation(RootStack);
+
+      export default function App() {
+        return <Navigation />;
+      }
+    `;
+
+    const tree = createTestTree(input, [
+      {
+        type: 'mdxjsEsm',
+        value:
+          "import Tabs from '@theme/Tabs'\nimport TabItem from '@theme/TabItem'",
+      },
+    ]);
+    const plugin = rehypeStaticToDynamic();
+    await plugin(tree);
+
+    const tabImportNodes = tree.children.filter(
+      (child) =>
+        isMdxEsmNode(child) &&
+        child.value.includes("import Tabs from '@theme/Tabs'")
+    );
+
+    assert.strictEqual(tabImportNodes.length, 1);
   });
 
   test('screen with options', async () => {
@@ -912,14 +991,14 @@ describe('rehype-static-to-dynamic', () => {
       import { createDrawerNavigator } from '@react-navigation/drawer';
       import { createStaticNavigation } from '@react-navigation/native';
 
-      const Drawer = createDrawerNavigator({
+      const RootDrawer = createDrawerNavigator({
         screens: {
           Home: HomeScreen,
           Profile: ProfileScreen,
         },
       });
 
-      const Navigation = createStaticNavigation(Drawer);
+      const Navigation = createStaticNavigation(RootDrawer);
 
       export default function App() {
         return <Navigation />;
@@ -938,7 +1017,7 @@ describe('rehype-static-to-dynamic', () => {
 
       const Drawer = createDrawerNavigator();
 
-      function Drawer() {
+      function RootDrawer() {
         return (
           <Drawer.Navigator>
             <Drawer.Screen name="Home" component={HomeScreen} />
@@ -950,13 +1029,40 @@ describe('rehype-static-to-dynamic', () => {
       export default function App() {
         return (
           <NavigationContainer>
-            <Drawer />
+            <RootDrawer />
           </NavigationContainer>
         );
       }
     `;
 
     assert.strictEqual(output, expected);
+  });
+
+  test('throws on colliding navigator component names', async () => {
+    const input = dedent /* javascript */ `
+      import { createNativeStackNavigator } from '@react-navigation/native-stack';
+      import { createStaticNavigation } from '@react-navigation/native';
+
+      const Stack = createNativeStackNavigator({
+        screens: {
+          Home: HomeScreen,
+        },
+      });
+
+      const Navigation = createStaticNavigation(Stack);
+
+      export default function App() {
+        return <Navigation />;
+      }
+    `;
+
+    const tree = createTestTree(input);
+    const plugin = rehypeStaticToDynamic();
+
+    await assert.rejects(
+      plugin(tree),
+      /Rename the static navigator to avoid colliding with the generated dynamic code\./
+    );
   });
 
   test('nested navigator with highlight on screen property', async () => {

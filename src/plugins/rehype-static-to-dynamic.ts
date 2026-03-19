@@ -1,4 +1,6 @@
 import * as t from '@babel/types';
+import { Parser } from 'acorn';
+import acornJsx from 'acorn-jsx';
 import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
 import * as prettier from 'prettier/standalone';
@@ -13,6 +15,7 @@ import type { Parent } from 'unist';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const acornParser = Parser.extend(acornJsx());
 const prettierConfig = JSON.parse(
   readFileSync(join(__dirname, '..', '..', '.prettierrc.json'), 'utf-8')
 );
@@ -22,13 +25,23 @@ type TrackedComment = {
   type: t.Comment['type'];
 };
 
+export type RehypeStaticToDynamicMdxEsm = {
+  type: 'mdxjsEsm';
+  value: string;
+  data?: {
+    estree?: unknown;
+  };
+};
+
 export type RehypeStaticToDynamicRoot = Root;
 
 export type RehypeStaticToDynamicElement = Element;
 
 export type RehypeStaticToDynamicText = Text;
 
-export type RehypeStaticToDynamicTreeChild = Root['children'][number];
+export type RehypeStaticToDynamicTreeChild =
+  | Root['children'][number]
+  | RehypeStaticToDynamicMdxEsm;
 
 export type RehypeStaticToDynamicElementChild = Element['children'][number];
 
@@ -50,7 +63,8 @@ type CommentTrackingEntry = {
 };
 
 type NavigatorInfo = {
-  componentName: string;
+  originalName: string;
+  navigatorConstName: string;
   type: string;
   config: t.ObjectExpression;
   comments: CommentWithMarkers[];
@@ -150,6 +164,82 @@ function getTextNodeValue(node: Element): string | null {
   return firstChild?.type === 'text' ? firstChild.value : null;
 }
 
+function parseModule(code: string): unknown {
+  return acornParser.parse(code, {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  });
+}
+
+function isMdxEsmNode(
+  node: RehypeStaticToDynamicTreeChild | undefined
+): node is RehypeStaticToDynamicMdxEsm {
+  return (
+    isRecord(node) && node.type === 'mdxjsEsm' && typeof node.value === 'string'
+  );
+}
+
+function isWhitespaceTextNode(
+  node: RehypeStaticToDynamicTreeChild | undefined
+): node is Text {
+  return node?.type === 'text' && node.value.trim() === '';
+}
+
+function createTabsImportNode(value: string): RehypeStaticToDynamicMdxEsm {
+  return {
+    type: 'mdxjsEsm',
+    value,
+    data: { estree: parseModule(value) },
+  };
+}
+
+function ensureTabsImports(tree: Root) {
+  let hasTabsImport = false;
+  let hasTabItemImport = false;
+
+  tree.children.forEach((child) => {
+    if (!isMdxEsmNode(child)) {
+      return;
+    }
+
+    hasTabsImport ||= child.value.includes('@theme/Tabs');
+    hasTabItemImport ||= child.value.includes('@theme/TabItem');
+  });
+
+  const missingImports = [];
+
+  if (!hasTabsImport) {
+    missingImports.push("import Tabs from '@theme/Tabs'");
+  }
+
+  if (!hasTabItemImport) {
+    missingImports.push("import TabItem from '@theme/TabItem'");
+  }
+
+  if (missingImports.length === 0) {
+    return;
+  }
+
+  let insertionIndex = 0;
+
+  while (insertionIndex < tree.children.length) {
+    const child = tree.children[insertionIndex];
+
+    if (isMdxEsmNode(child) || isWhitespaceTextNode(child)) {
+      insertionIndex += 1;
+      continue;
+    }
+
+    break;
+  }
+
+  tree.children.splice(
+    insertionIndex,
+    0,
+    createTabsImportNode(missingImports.join('\n')) as Root['children'][number]
+  );
+}
+
 /**
  * Plugin to automatically convert static config examples to dynamic config
  *
@@ -212,6 +302,10 @@ export default function rehypeStaticToDynamic() {
     replacements.forEach(({ parent, index, tabsElement }) => {
       parent.children[index] = tabsElement;
     });
+
+    if (replacements.length > 0) {
+      ensureTabsImports(tree);
+    }
   };
 }
 
@@ -340,7 +434,8 @@ export async function convertStaticToDynamic(code: string): Promise<string> {
               const config = declarator.init.arguments[0];
 
               navigatorInfos.push({
-                componentName: navigatorVariable, // Keep original name for the component
+                originalName: navigatorVariable,
+                navigatorConstName: '',
                 type: navigatorType,
                 config: config,
                 // Store leading/trailing comments to preserve codeblock-focus
@@ -361,6 +456,10 @@ export async function convertStaticToDynamic(code: string): Promise<string> {
           });
         }
       });
+
+      if (navigatorInfos.length > 0) {
+        planNavigatorNames(navigatorInfos, path.node.body);
+      }
 
       this.traverse(path);
     },
@@ -391,7 +490,7 @@ export async function convertStaticToDynamic(code: string): Promise<string> {
             t.jsxText('\n  '),
             t.jsxElement(
               t.jsxOpeningElement(
-                t.jsxIdentifier(mainNavigator.componentName),
+                t.jsxIdentifier(mainNavigator.originalName),
                 [],
                 true
               ),
@@ -417,17 +516,17 @@ export async function convertStaticToDynamic(code: string): Promise<string> {
   //            function MyStack() { return <Stack.Navigator>...</Stack.Navigator> }
   if (navigatorInfos.length > 0) {
     const replacements = [];
-    const navigatorConstNames = new Map(); // Track usage of navigator constant names
 
     navigatorInfos.forEach((navigatorInfo) => {
-      const { componentName, type, config, comments, trailingComments, index } =
-        navigatorInfo;
-
-      const baseNavigatorConstName = deriveNavigatorConstName(type);
-      const navigatorConstName = getUniqueNavigatorConstName(
-        baseNavigatorConstName,
-        navigatorConstNames
-      );
+      const {
+        originalName,
+        navigatorConstName,
+        type,
+        config,
+        comments,
+        trailingComments,
+        index,
+      } = navigatorInfo;
 
       // Parse the config object
       const parsedConfig = parseNavigatorConfig(config, commentTracking);
@@ -445,7 +544,7 @@ export async function convertStaticToDynamic(code: string): Promise<string> {
 
       // Create the navigator component function (e.g., function MyStack() {...})
       const navigatorComponent: CommentedNode = createNavigatorComponent(
-        componentName, // function name: MyStack
+        originalName, // function name: MyStack
         navigatorConstName, // Stack.Navigator, Stack.Screen
         parsedConfig
       );
@@ -867,6 +966,128 @@ function getIndentation(line: string, defaultIndent = '      ') {
   return line.match(/^(\s*)/)?.[1] || defaultIndent;
 }
 
+function collectPatternIdentifiers(
+  pattern: t.LVal | t.VoidPattern,
+  names: Set<string>
+) {
+  if (t.isVoidPattern(pattern)) {
+    return;
+  }
+
+  if (t.isIdentifier(pattern)) {
+    names.add(pattern.name);
+    return;
+  }
+
+  if (t.isObjectPattern(pattern)) {
+    pattern.properties.forEach((property) => {
+      if (t.isRestElement(property)) {
+        collectPatternIdentifiers(property.argument, names);
+        return;
+      }
+
+      if (t.isObjectProperty(property) && t.isLVal(property.value)) {
+        collectPatternIdentifiers(property.value, names);
+      }
+    });
+    return;
+  }
+
+  if (t.isArrayPattern(pattern)) {
+    pattern.elements.forEach((element) => {
+      if (!element) {
+        return;
+      }
+
+      if (t.isRestElement(element)) {
+        collectPatternIdentifiers(element.argument, names);
+        return;
+      }
+
+      if (t.isLVal(element)) {
+        collectPatternIdentifiers(element, names);
+      }
+    });
+    return;
+  }
+
+  if (t.isAssignmentPattern(pattern) && t.isLVal(pattern.left)) {
+    collectPatternIdentifiers(pattern.left, names);
+    return;
+  }
+
+  if (t.isRestElement(pattern)) {
+    collectPatternIdentifiers(pattern.argument, names);
+  }
+}
+
+function getTopLevelBindingNames(body: t.Program['body']) {
+  const bindingNames = new Set<string>();
+
+  body.forEach((node) => {
+    if (t.isImportDeclaration(node)) {
+      node.specifiers.forEach((specifier) => {
+        bindingNames.add(specifier.local.name);
+      });
+      return;
+    }
+
+    if (t.isVariableDeclaration(node)) {
+      node.declarations.forEach((declarator) => {
+        collectPatternIdentifiers(declarator.id, bindingNames);
+      });
+      return;
+    }
+
+    if (
+      (t.isFunctionDeclaration(node) || t.isClassDeclaration(node)) &&
+      node.id
+    ) {
+      bindingNames.add(node.id.name);
+    }
+  });
+
+  return bindingNames;
+}
+
+function getUniqueName(baseName: string, usedNames: Set<string>) {
+  let name = baseName;
+  let suffix = 2;
+
+  while (usedNames.has(name)) {
+    name = `${baseName}${suffix}`;
+    suffix += 1;
+  }
+
+  usedNames.add(name);
+
+  return name;
+}
+
+function planNavigatorNames(
+  navigatorInfos: NavigatorInfo[],
+  programBody: t.Program['body']
+) {
+  const usedNames = getTopLevelBindingNames(programBody);
+
+  navigatorInfos.forEach((navigatorInfo) => {
+    const baseNavigatorConstName = deriveNavigatorConstName(navigatorInfo.type);
+
+    if (navigatorInfo.originalName === baseNavigatorConstName) {
+      throw new Error(
+        `rehype-static-to-dynamic: Navigator name collision for "${navigatorInfo.originalName}". Rename the static navigator to avoid colliding with the generated dynamic code.`
+      );
+    }
+  });
+
+  navigatorInfos.forEach((navigatorInfo) => {
+    navigatorInfo.navigatorConstName = getUniqueName(
+      deriveNavigatorConstName(navigatorInfo.type),
+      usedNames
+    );
+  });
+}
+
 /**
  * Derive navigator constant name from navigator type string.
  * Examples:
@@ -882,25 +1103,6 @@ function deriveNavigatorConstName(navigatorType: string) {
   // Extract the last capitalized word (e.g., "NativeStack" -> "Stack", "MaterialTopTab" -> "Tab")
   const match = withoutNavigator.match(/([A-Z][a-z]+)$/);
   return match ? match[1] : withoutNavigator;
-}
-
-/**
- * Generate unique navigator constant name by adding suffix if needed.
- * Second occurrence gets 'A', third gets 'B', etc.
- */
-function getUniqueNavigatorConstName(
-  baseNavigatorConstName: string,
-  navigatorConstNames: Map<string, number>
-) {
-  const currentCount = navigatorConstNames.get(baseNavigatorConstName) || 0;
-  navigatorConstNames.set(baseNavigatorConstName, currentCount + 1);
-
-  if (currentCount === 0) {
-    return baseNavigatorConstName;
-  }
-  // Add suffix: A for second occurrence, B for third, etc.
-  const suffix = String.fromCharCode(65 + currentCount - 1); // 65 is 'A'
-  return baseNavigatorConstName + suffix;
 }
 
 /**
