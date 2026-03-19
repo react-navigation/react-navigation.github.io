@@ -163,11 +163,13 @@ You can specify default params for a screen using `initialParams`. These are use
 <TabItem value="static" label="Static" default>
 
 ```js
-createNativeStackScreen({
-  Details: {
-    screen: DetailsScreen,
-    // highlight-next-line
-    initialParams: { itemId: 42 },
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Details: createNativeStackScreen({
+      screen: DetailsScreen,
+      // highlight-next-line
+      initialParams: { itemId: 42 },
+    }),
   },
 });
 ```

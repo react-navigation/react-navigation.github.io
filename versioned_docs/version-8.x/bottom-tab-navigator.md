@@ -371,8 +371,11 @@ Example:
 
 ```js name="Search Tab on iOS 26" snack static2dynamic
 import * as React from 'react';
-import { View, Text, FlatList } from 'react-native';
-import { createStaticNavigation } from '@react-navigation/native';
+import { Platform, View, Text, FlatList } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -903,7 +906,8 @@ const Tabs = createBottomTabNavigator({
 ```js
 <Tab.Navigator
   screenOptions={{
-    tabBarPosition: dimensions.width < 600 ? 'bottom' : 'left',
+    tabBarPosition: isLargeScreen ? 'left' : 'bottom',
+    tabBarVariant: isLargeScreen ? 'material' : 'uikit',
     tabBarLabelPosition: 'below-icon',
   }}
 >
@@ -1326,7 +1330,7 @@ function MyComponent() {
   const tabBarHeight = useBottomTabBarHeight();
 
   return (
-    <ScrollView contentStyle={{ paddingBottom: tabBarHeight }}>
+    <ScrollView contentContainerStyle={{ paddingBottom: tabBarHeight }}>
       {/* Content */}
     </ScrollView>
   );
@@ -1563,8 +1567,6 @@ Bottom Tab Navigator exposes various options to configure the transition animati
 
 Putting these together, you can customize the transition animation for a screen:
 
-Putting these together, you can customize the transition animation for a screen:
-
 ```js name="Bottom Tabs custom animation" snack static2dynamic
 import * as React from 'react';
 import { View, Text, Easing } from 'react-native';
@@ -1644,7 +1646,7 @@ import { TransitionSpecs } from '@react-navigation/bottom-tabs';
     screen: Profile,
     options: {
       // highlight-start
-      transitionSpec: TransitionSpecs.CrossFadeSpec,
+      transitionSpec: TransitionSpecs.FadeSpec,
       // highlight-end
     },
   },

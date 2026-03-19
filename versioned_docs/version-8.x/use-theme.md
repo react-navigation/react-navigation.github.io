@@ -77,7 +77,7 @@ function HomeScreen() {
       <MyButton />
       <Button
         onPress={() =>
-          navigation.navigate('Root', {
+          navigation.navigate('Panel', {
             screen: 'Settings',
             params: { user: 'jane' },
           })

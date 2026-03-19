@@ -84,7 +84,7 @@ The `screens` object can contain key value pairs where the key is the name of th
 
 The `groups` object can contain key-value pairs where the key is the name of the group and the value is the group configuration.
 
-The configuration object for a screen accepts the [properties described in the Group page](group.md). In addition, the following properties are available when using static configuration:
+The configuration object for a group accepts the [properties described in the Group page](group.md). In addition, the following properties are available when using static configuration:
 
 - `if` - this can be used to conditionally render the group and works the same as the [`if` property in the screen configuration](#if).
 - `screens` - an object containing configuration for each screen in the group. The configuration is the same as the [`screens` object in the navigator configuration](#screens).

@@ -226,7 +226,7 @@ If you need to pass additional props, use a custom `renderScene` function:
 const renderScene = ({ route }) => {
   switch (route.key) {
     case 'first':
-      return <FirstRoute foo={this.props.foo} />;
+      return <FirstRoute foo={props.foo} />;
     case 'second':
       return <SecondRoute />;
     default:
@@ -386,7 +386,7 @@ function MyAdapter({ navigationState, children }: AdapterProps) {
 
 Check out the [source code of the built-in adapters](https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view/src) for reference.
 
-#### `animationEnabled`
+##### `animationEnabled`
 
 Enables animation when changing tab. By default it's true.
 

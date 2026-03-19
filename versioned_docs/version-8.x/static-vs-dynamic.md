@@ -148,7 +148,10 @@ All props passed to `<Stack.Screen>` except `name` and `component` become proper
 ```
 
 ```js title="Static API"
-import { createNativeStackScreen } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 
 const RootStack = createNativeStackNavigator({
   screens: {
@@ -370,7 +373,7 @@ With both approaches, you can access the route params of the parent screen with 
 
 ## Deep linking
 
-For deep links and dynamic links, the dynamic API requires a linking configuration that maps navigation structure to path patterns. In the static API, deep linking is automatic by default and paths are generated based on the screen name and automatically. Custom path patterns can be defined on each screen's `linking` property:
+For deep links and dynamic links, the dynamic API requires a linking configuration that maps navigation structure to path patterns. In the static API, deep linking is automatic by default and paths are generated based on the screen name. Custom path patterns can be defined on each screen's `linking` property:
 
 ```js title="Dynamic API"
 const linking = {

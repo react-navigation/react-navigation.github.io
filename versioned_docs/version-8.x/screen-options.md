@@ -88,9 +88,9 @@ const RootStack = createNativeStackNavigator({
       screen: HomeScreen,
       options: ({ navigation }) => ({
         title: 'Awesome app',
-        headerLeft: () => {
-          <DrawerButton onPress={() => navigation.toggleDrawer()} />;
-        },
+        headerLeft: () => (
+          <Button onPress={() => navigation.goBack()}>Back</Button>
+        ),
       }),
     }),
   },
@@ -246,10 +246,12 @@ const Stack = createNativeStackNavigator({
   },
   groups: {
     Modal: {
-      screenOptions: {
+      screenOptions: ({ navigation }) => ({
         presentation: 'modal',
-        headerLeft: () => <CancelButton onPress={navigation.goBack} />,
-      },
+        headerLeft: () => (
+          <Button onPress={() => navigation.goBack()}>Close</Button>
+        ),
+      }),
       screens: {
         Settings: createNativeStackScreen({
           screen: Settings,
@@ -273,7 +275,9 @@ const Stack = createNativeStackNavigator({
   <Stack.Group
     screenOptions={({ navigation }) => ({
       presentation: 'modal',
-      headerLeft: () => <CancelButton onPress={navigation.goBack} />,
+      headerLeft: () => (
+        <Button onPress={() => navigation.goBack()}>Close</Button>
+      ),
     })}
   >
     <Stack.Screen name="Settings" component={Settings} />

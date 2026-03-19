@@ -61,7 +61,7 @@ Here, `./src/App` is the file where you have `AppRegistry.registerComponent('App
 
 If you're using React Navigation in your app, this will render the screens rendered by your home page. However, if you have [configured links](configuring-links.md) in your app, you'd want to render the correct screens for the request URL on server so that it matches what'll be rendered on the client.
 
-We can use the [`ServerContainer`](server-container.md) to do that by passing this info in the `location` prop. For example, with Koa, you can use the `path` and `search` properties from the context argument:
+We can use the [`ServerContainer`](server-container.md) to do that by passing this info in the `location` prop. For example, with Koa, you can create a `URL` object from `ctx.url`:
 
 ```js
 app.use(async (ctx) => {
@@ -103,13 +103,10 @@ app.use(async (ctx) => {
 
   const { element, getStyleElement } = AppRegistry.getApplication('App');
 
-  const ref = React.createRef<ServerContainerRef>();
+  const ref = React.createRef();
 
   const html = ReactDOMServer.renderToString(
-    <ServerContainer
-      ref={ref}
-      location={location}
-    >
+    <ServerContainer ref={ref} location={location}>
       {element}
     </ServerContainer>
   );
@@ -128,7 +125,7 @@ app.use(async (ctx) => {
       content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1.00001, viewport-fit=cover"
     >
     ${css}
-    <title>${options.title}</title>
+    <title>${options?.title ?? 'My App'}</title>
     <body style="min-height: 100%">
     <div id="root" style="display: flex; min-height: 100vh">
     ${html}
@@ -252,5 +249,5 @@ You can follow a similar approach for other status codes too, for example, `401`
 ## Summary
 
 - Use the `location` prop on `ServerContainer` to render correct screens based on the incoming request.
-- Attach a `ref` to the `ServerContainer` get options for the current screen.
+- Attach a `ref` to the `ServerContainer` to get options for the current screen.
 - Use context to attach more information such as status code.

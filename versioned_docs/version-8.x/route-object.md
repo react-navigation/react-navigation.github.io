@@ -7,13 +7,13 @@ sidebar_label: Route object
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Each `screen` component in your app is provided with the `route` object as a prop automatically. The prop contains various information regarding current route (place in navigation hierarchy component lives).
+Each `screen` component in your app is provided with the `route` object as a prop automatically. The prop contains information about the current route.
 
 - `route`
   - `key` - Unique key of the screen. Created automatically or added while navigating to this screen.
   - `name` - Name of the screen. Defined in navigator component hierarchy.
-  - `path` - An optional string containing the path that opened the screen, exists when the screen was opened via a deep link.
-  - `params` - An optional object containing params which is defined while navigating e.g. `navigate('Twitter', { user: 'Dan Abramov' })`.
+  - `path` - An optional string containing the path that opened the screen. It exists when the screen was opened via a deep link.
+  - `params` - An optional object containing params defined while navigating, e.g. `navigate('Twitter', { user: 'Jane Doe' })`.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -26,7 +26,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator({
   screens: {
-    Profile: ProfileScreen,
+    Profile: {
+      screen: ProfileScreen,
+      initialParams: { user: 'Jane Doe' },
+    },
   },
 });
 
@@ -36,6 +39,8 @@ function ProfileScreen({ route }) {
     <View>
       <Text>This is the profile screen of the app</Text>
       <Text>{route.name}</Text>
+      <Text>{route.path ?? 'No path'}</Text>
+      <Text>{route.params?.user ?? 'No params'}</Text>
     </View>
   );
 }
@@ -65,6 +70,8 @@ function ProfileScreen({ route }) {
     <View>
       <Text>This is the profile screen of the app</Text>
       <Text>{route.name}</Text>
+      <Text>{route.path ?? 'No path'}</Text>
+      <Text>{route.params?.user ?? 'No params'}</Text>
     </View>
   );
 }
@@ -74,7 +81,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          initialParams={{ user: 'Jane Doe' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

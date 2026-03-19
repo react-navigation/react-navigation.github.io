@@ -12,8 +12,8 @@ Example:
 // Ref which will be populated with the screen options
 const ref = React.createRef();
 
-// Location object containing the `pathname` and `search` fields of the current URL
-const location = { pathname: '/profile', search: '?user=jane' };
+// Location object - can be a URL object or an object with `pathname` and `search` fields
+const location = new URL('/profile?user=jane', 'https://example.org/');
 
 // Get rendered HTML
 const html = ReactDOMServer.renderToString(
@@ -23,10 +23,10 @@ const html = ReactDOMServer.renderToString(
 );
 
 // Then you can access the options for the current screen in the ref
-const options = ref.current.getCurrentOptions(); // { title: 'My Profile' }
+const options = ref.current?.getCurrentOptions(); // { title: 'My Profile' }
 ```
 
-The `ServerContainer` component should wrap your entire app during server rendering. Note that you still need a `NavigationContainer` in your app, `ServerContainer` doesn't replace it.'
+The `ServerContainer` component should wrap your entire app during server rendering. Note that you still need a `NavigationContainer` in your app, `ServerContainer` doesn't replace it.
 
 See the [`server rendering guide`](server-rendering.md) for a detailed guide and examples.
 

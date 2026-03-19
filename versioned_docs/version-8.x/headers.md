@@ -147,7 +147,10 @@ import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
@@ -200,7 +203,10 @@ There are three key properties to use when customizing the style of your header:
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 
 function HomeScreen() {
   return (
@@ -261,7 +267,10 @@ import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 
 function HomeScreen() {
@@ -320,7 +329,7 @@ All screens in this navigator will now share these styles. Individual screens ca
 
 ## Replacing the title with a custom component
 
-Sometimes you need more control than just changing the text and styles of your title -- for example, you may want to render an image in place of the title, or make the title into a button. In these cases, you can completely override the component used for the title and provide your own.
+Sometimes you need more control than just changing the text and styles of your title - for example, you may want to render an image in place of the title, or make the title into a button. In these cases, you can completely override the component used for the title and provide your own.
 
 ```js name="Custom title" snack static2dynamic
 import * as React from 'react';

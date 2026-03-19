@@ -44,8 +44,10 @@ npx expo install expo-linking
 Then you can use `Linking.createURL` to get the prefix for your app:
 
 ```js
+import * as Linking from 'expo-linking';
+
 const linking = {
-  prefixes: [Linking.createURL('/'),
+  prefixes: [Linking.createURL('/')],
 };
 ```
 
@@ -351,7 +353,7 @@ npx react-native run-android
 
 If you're using Expo managed workflow and testing on Expo client, you don't need to rebuild the app. However, you will need to use the correct address and port that's printed when you run `expo start`, e.g. `exp://127.0.0.1:19000/--/`.
 
-If you want to test with your custom scheme in your Expo app, you will need rebuild your standalone app by running `expo build:ios -t simulator` or `expo build:android` and install the resulting binaries.
+If you want to test with your custom scheme in your Expo app, you will need rebuild your standalone app and install the resulting binaries.
 
 ### Testing with `npx uri-scheme`
 
@@ -468,6 +470,10 @@ const linking = {
 const linking = {
   prefixes: ['example://', 'https://app.example.com'],
 
+  config: {
+    // Deep link configuration
+  },
+
   // Custom function to get the URL which was used to open the app
   async getInitialURL() {
     // First, handle deep links
@@ -503,10 +509,6 @@ const linking = {
       linkingSubscription.remove();
       pushNotificationSubscription.remove();
     };
-  },
-
-  config: {
-    // Deep link configuration
   },
 };
 ```

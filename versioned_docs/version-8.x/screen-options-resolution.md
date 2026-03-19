@@ -180,7 +180,7 @@ const Tab = createBottomTabNavigator({
     },
   },
 });
-// codeblock-focus-start
+// codeblock-focus-end
 
 const Navigation = createStaticNavigation(Tab);
 

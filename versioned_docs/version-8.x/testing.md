@@ -333,12 +333,12 @@ const SurpriseScreen = () => {
   const [textVisible, setTextVisible] = useState(false);
 
   useEffect(() => {
-    navigation.addListener('transitionEnd', () => setTextVisible(true));
+    return navigation.addListener('transitionEnd', () => setTextVisible(true));
   }, [navigation]);
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {textVisible ? <Text>Surprise!</Text> : ''}
+      {textVisible ? <Text>Surprise!</Text> : null}
     </View>
   );
 };
@@ -380,12 +380,12 @@ const SurpriseScreen = () => {
   const [textVisible, setTextVisible] = useState(false);
 
   useEffect(() => {
-    navigation.addListener('transitionEnd', () => setTextVisible(true));
+    return navigation.addListener('transitionEnd', () => setTextVisible(true));
   }, [navigation]);
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {textVisible ? <Text>Surprise!</Text> : ''}
+      {textVisible ? <Text>Surprise!</Text> : null}
     </View>
   );
 };
@@ -638,7 +638,7 @@ export function MyTabs() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Pokemon" component={PokemonScreen} />
+      <Tab.Screen name="Pokemon" component={PokemonInfoScreen} />
     </Tab.Navigator>
   );
 }
@@ -699,9 +699,9 @@ test('loads data on Pokemon info screen after focus', async () => {
   render(<Navigation />);
 
   const homeTabButton = screen.getByLabelText('Home, tab, 1 of 2');
-  const profileTabButton = screen.getByLabelText('Profile, tab, 2 of 2');
+  const pokemonTabButton = screen.getByLabelText('Pokemon, tab, 2 of 2');
 
-  await user.press(profileTabButton);
+  await user.press(pokemonTabButton);
 
   expect(screen.getByText('Loading...')).toBeVisible();
 
@@ -713,7 +713,7 @@ test('loads data on Pokemon info screen after focus', async () => {
 
   await act(() => jest.runAllTimers());
 
-  await user.press(profileTabButton);
+  await user.press(pokemonTabButton);
 
   expect(screen.queryByText('Loading...')).not.toBeVisible();
   expect(screen.getByText('ditto')).toBeVisible();
@@ -744,9 +744,9 @@ test('loads data on Pokemon info screen after focus', async () => {
   );
 
   const homeTabButton = screen.getByLabelText('Home, tab, 1 of 2');
-  const profileTabButton = screen.getByLabelText('Profile, tab, 2 of 2');
+  const pokemonTabButton = screen.getByLabelText('Pokemon, tab, 2 of 2');
 
-  await user.press(profileTabButton);
+  await user.press(pokemonTabButton);
 
   expect(screen.getByText('Loading...')).toBeVisible();
 
@@ -758,7 +758,7 @@ test('loads data on Pokemon info screen after focus', async () => {
 
   await act(() => jest.runAllTimers());
 
-  await user.press(profileTabButton);
+  await user.press(pokemonTabButton);
 
   expect(screen.queryByText('Loading...')).not.toBeVisible();
   expect(screen.getByText('ditto')).toBeVisible();
@@ -789,7 +789,12 @@ In a production app, we recommend using a library like [React Query](https://tan
 To make it easier to test components that don't depend on the navigation structure, we can create a light-weight test navigator:
 
 ```js title="TestStackNavigator.js"
-import { useNavigationBuilder, StackRouter } from '@react-navigation/native';
+import {
+  createNavigatorFactory,
+  useNavigationBuilder,
+  StackRouter,
+} from '@react-navigation/native';
+import { View } from 'react-native';
 
 function TestStackNavigator(props) {
   const { state, descriptors, NavigationContent } = useNavigationBuilder(

@@ -674,6 +674,7 @@ Stack Navigator exposes various options to configure the transition animation wh
     useNavigation,
   } from '@react-navigation/native';
   import { Button } from '@react-navigation/elements';
+  import { Animated } from 'react-native';
   import { createStackNavigator } from '@react-navigation/stack';
 
   function HomeScreen() {
@@ -774,6 +775,7 @@ Stack Navigator exposes various options to configure the transition animation wh
     useNavigation,
   } from '@react-navigation/native';
   import { Button } from '@react-navigation/elements';
+  import { Animated } from 'react-native';
   import { createStackNavigator } from '@react-navigation/stack';
 
   function HomeScreen() {
@@ -902,7 +904,7 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
   - `titleStyle` - Style for the header title text.
   - `backgroundStyle` - Style for the header background.
 
-  The function receives the following properties in it's argument:
+  The function receives the following properties in its argument:
   - `current` - Values for the current screen (the screen which owns this header).
     - `progress` - Animated node representing the progress value of the current screen. `0` when screen should start coming into view, `0.5` when it's mid-way, `1` when it should be fully in view.
   - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
@@ -943,6 +945,7 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
     useNavigation,
   } from '@react-navigation/native';
   import { Button } from '@react-navigation/elements';
+  import { Animated } from 'react-native';
   import { createStackNavigator } from '@react-navigation/stack';
 
   function HomeScreen() {
