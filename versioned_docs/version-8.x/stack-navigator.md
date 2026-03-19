@@ -613,16 +613,69 @@ You can specify the `animation` option to customize the transition animation for
 
 Supported values for `animation` are:
 
-- `default` - Default animation based on the platform and OS version.
-- `fade` - Simple fade animation for dialogs.
-- `fade_from_bottom` - Standard Android-style fade-in from the bottom for Android Oreo.
-- `fade_from_right` - Standard Android-style fade-in from the right for Android 14.
-- `reveal_from_bottom` - Standard Android-style reveal from the bottom for Android Pie.
-- `scale_from_center` - Scale animation from the center.
-- `slide_from_right` - Standard iOS-style slide in from the right.
-- `slide_from_left` - Similar to `slide_from_right`, but the screen will slide in from the left.
-- `slide_from_bottom` - Slide animation from the bottom for modals and bottom sheets.
-- `none` - The screens are pushed or popped immediately without any animation.
+<div className="options-grid">
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-default.mp4" /></video>
+
+  `default`
+
+  Default animation based on the platform and OS version.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-fade.mp4" /></video>
+
+  `fade`
+
+  Simple fade animation for dialogs.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-fade-from-bottom.mp4" /></video>
+
+  `fade_from_bottom`
+
+  Standard Android-style fade-in from the bottom for Android Oreo.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-fade-from-right.mp4" /></video>
+
+  `fade_from_right`
+
+  Standard Android-style fade-in from the right for Android 14.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-reveal-from-bottom.mp4" /></video>
+
+  `reveal_from_bottom`
+
+  Standard Android-style reveal from the bottom for Android Pie.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-scale-from-center.mp4" /></video>
+
+  `scale_from_center`
+
+  Scale animation from the center.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-slide-from-right.mp4" /></video>
+
+  `slide_from_right`
+
+  Standard iOS-style slide in from the right.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-slide-from-left.mp4" /></video>
+
+  `slide_from_left`
+
+  Similar to `slide_from_right`, but the screen will slide in from the left.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-slide-from-bottom.mp4" /></video>
+
+  `slide_from_bottom`
+
+  Slide animation from the bottom for modals and bottom sheets.
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-none.mp4" /></video>
+
+  `none`
+
+  The screens are pushed or popped immediately without any animation.
+
+</div>
 
 By default, Android and iOS use the `default` animation and other platforms use `none`.
 
