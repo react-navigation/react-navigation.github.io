@@ -992,10 +992,11 @@ samp {
   border-radius: var(--ifm-global-radius);
 
   &.paused .video-player-icon::after {
-    background-image: url("data:image/svg+xml,<svg viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'><defs><mask id='play-mask'><circle cx='9' cy='9' r='9' fill='white'/><polygon points='7.5,6 7.5,12 12.5,9' fill='black'/></mask></defs><circle cx='9' cy='9' r='9' fill='white' mask='url(%23play-mask)'/></svg>");
+    background-image: url("data:image/svg+xml,<svg viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'><polygon points='6.5,4 6.5,14 14.5,9' fill='white'/></svg>");
   }
 
-  &:is(:hover, :focus, .paused) .video-player-icon {
+  &:hover .video-player-icon,
+  &.paused .video-player-icon {
     opacity: 1;
   }
 }
@@ -1005,20 +1006,21 @@ samp {
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-  transition: 300ms opacity ease;
+  top: 16px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  transition: 200ms opacity ease;
   opacity: 0;
-  border-radius: var(--ifm-global-radius);
+  border-radius: 50%;
 
   &::after {
     content: '';
-    height: 72px;
+    height: 24px;
     aspect-ratio: 1 / 1;
-    background-image: url("data:image/svg+xml,<svg viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'><defs><mask id='pause-mask'><circle cx='9' cy='9' r='9' fill='white'/><rect x='6' y='6' width='2' height='6' fill='black'/><rect x='10' y='6' width='2' height='6' fill='black'/></mask></defs><circle cx='9' cy='9' r='9' fill='white' mask='url(%23pause-mask)'/></svg>");
+    background-image: url("data:image/svg+xml,<svg viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'><rect x='5' y='4' width='2.5' height='10' rx='0.5' fill='white'/><rect x='10.5' y='4' width='2.5' height='10' rx='0.5' fill='white'/></svg>");
   }
 }
 
@@ -1316,10 +1318,6 @@ code {
     border-radius: var(--device-frame-screen-radius);
     clip-path: inset(0 round var(--device-frame-screen-radius));
     background: #000;
-  }
-
-  & .video-player .video-player-icon {
-    border-radius: var(--device-frame-screen-radius);
   }
 }
 
