@@ -172,6 +172,17 @@
   --ifm-alert-border-radius: 0;
   --ifm-alert-border-left-width: 3px;
 
+  --ifm-doc-version-banner-background: hsl(42, 72%, 96.5%);
+  --ifm-doc-version-banner-border: hsla(33, 28%, 48%, 0.2);
+  --ifm-doc-version-banner-text: hsl(28, 32%, 24%);
+  --ifm-doc-version-banner-link: hsl(29, 56%, 30%);
+  --ifm-doc-version-banner-link-hover: hsl(28, 42%, 18%);
+  --ifm-doc-version-banner-link-decoration: hsla(29, 56%, 30%, 0.24);
+
+  --ifm-doc-version-badge-background: hsl(0, 0%, 100%);
+  --ifm-doc-version-badge-border: hsla(220, 10%, 54%, 0.2);
+  --ifm-doc-version-badge-text: hsl(220, 15%, 18%);
+
   --ifm-toc-border-color: var(--ifm-color-emphasis-200);
 
   --ifm-code-padding-horizontal: 0.3em;
@@ -314,6 +325,17 @@
     10%,
     85%
   );
+
+  --ifm-doc-version-banner-background: hsla(32, 18%, 18%, 0.72);
+  --ifm-doc-version-banner-border: hsla(36, 22%, 46%, 0.24);
+  --ifm-doc-version-banner-text: hsl(42, 38%, 88%);
+  --ifm-doc-version-banner-link: hsl(41, 82%, 76%);
+  --ifm-doc-version-banner-link-hover: hsl(46, 96%, 86%);
+  --ifm-doc-version-banner-link-decoration: hsla(41, 82%, 76%, 0.28);
+
+  --ifm-doc-version-badge-background: hsl(225, 18%, 18%);
+  --ifm-doc-version-badge-border: hsla(220, 16%, 48%, 0.32);
+  --ifm-doc-version-badge-text: hsl(220, 20%, 92%);
 
   --ifm-toc-border-color: #31343a;
 
@@ -971,6 +993,54 @@ details[class^='details_'] {
 
 samp {
   display: none;
+}
+
+.theme-doc-version-banner {
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--ifm-doc-version-banner-border);
+  border-radius: var(--ifm-global-radius);
+  background: var(--ifm-doc-version-banner-background);
+  color: var(--ifm-doc-version-banner-text);
+
+  & > div {
+    max-width: 46rem;
+  }
+
+  & > .margin-top--md {
+    margin-top: 0 !important;
+  }
+
+  & b {
+    font-weight: 600;
+  }
+
+  & a {
+    color: var(--ifm-doc-version-banner-link);
+    text-decoration-color: var(--ifm-doc-version-banner-link-decoration);
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
+
+    &:hover {
+      color: var(--ifm-doc-version-banner-link-hover);
+      text-decoration-color: currentColor;
+    }
+  }
+}
+
+.theme-doc-version-badge {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--ifm-doc-version-badge-border);
+  border-radius: 999px;
+  background: var(--ifm-doc-version-badge-background);
+  color: var(--ifm-doc-version-badge-text);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .theme-doc-version-banner {
+    padding: 0.8125rem 0.9375rem;
+  }
 }
 
 .theme-admonition {
