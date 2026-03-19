@@ -60,7 +60,7 @@ function ScreenWithCustomBackBehavior() {
   return (
     <View style={styles.container}>
       {listData.map((item) => (
-        <>
+        <React.Fragment key={item.key}>
           {isSelectionModeEnabled ? (
             <PlatformPressable
               onPress={() => {
@@ -85,7 +85,7 @@ function ScreenWithCustomBackBehavior() {
               {item.key}
             </Text>
           )}
-        </>
+        </React.Fragment>
       ))}
       <Button
         onPress={() => setIsSelectionModeEnabled(!isSelectionModeEnabled)}
@@ -175,7 +175,7 @@ function ScreenWithCustomBackBehavior() {
   return (
     <View style={styles.container}>
       {listData.map((item) => (
-        <>
+        <React.Fragment key={item.key}>
           {isSelectionModeEnabled ? (
             <PlatformPressable
               onPress={() => {
@@ -200,7 +200,7 @@ function ScreenWithCustomBackBehavior() {
               {item.key}
             </Text>
           )}
-        </>
+        </React.Fragment>
       ))}
       <Button
         onPress={() => setIsSelectionModeEnabled(!isSelectionModeEnabled)}

@@ -37,7 +37,7 @@ function CurrentRouteDisplay() {
   // highlight-start
   const focusedRouteName = useNavigationState(
     'Home',
-    (state) => state.routes[state.index]
+    (state) => state.routes[state.index].name
   );
   // highlight-end
 

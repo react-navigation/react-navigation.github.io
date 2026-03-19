@@ -145,7 +145,7 @@ If you run this code, you will see a screen with an empty navigation bar and a g
 
 :::tip
 
-The casing of the route name doesn't matter -- you can use lowercase `home` or capitalized `Home`, it's up to you. We prefer capitalizing our route names.
+The casing of the route name doesn't matter - you can use lowercase `home` or capitalized `Home`, it's up to you. We prefer capitalizing our route names.
 
 :::
 

@@ -108,7 +108,7 @@ In addition, you can use the [`screenLayout`](navigator.md#screen-layout) to wra
 
 Some of the navigators have different behavior on the web compared to native platforms:
 
-1. [**Native Stack Navigator**](stack-navigator.md)
+1. [**Native Stack Navigator**](native-stack-navigator.md)
 
    Native Stack Navigator uses the platform's primitives to handle animations and gestures on native platforms.
 

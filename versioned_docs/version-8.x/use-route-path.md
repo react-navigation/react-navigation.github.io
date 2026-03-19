@@ -13,6 +13,7 @@ The `useRoutePath` hook can be used to get the path of a route based on the [`li
 
 ```js
 import { useRoutePath } from '@react-navigation/native';
+import { Text } from 'react-native';
 
 function MyComponent() {
   const path = useRoutePath();

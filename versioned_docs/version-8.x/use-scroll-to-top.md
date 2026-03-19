@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 The expected native behavior of scrollable components is to respond to events from navigation that will scroll to top when tapping on the active tab as you would expect from native tab bars.
 
-In order to achieve it we export `useScrollToTop` which accept ref to scrollable component (e,g. `ScrollView` or `FlatList`).
+In order to achieve it we export `useScrollToTop`, which accepts a ref to a scrollable component (e.g. `ScrollView` or `FlatList`).
 
 Example:
 
@@ -81,6 +81,10 @@ export default function App() {
 You can wrap your class component in a function component to use the hook:
 
 ```js
+import * as React from 'react';
+import { ScrollView } from 'react-native';
+import { useScrollToTop } from '@react-navigation/native';
+
 class Albums extends React.Component {
   render() {
     return <ScrollView ref={this.props.scrollRef}>{/* content */}</ScrollView>;

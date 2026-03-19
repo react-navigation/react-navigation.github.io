@@ -222,7 +222,7 @@ If you need to pass additional props, use a custom `renderScene` function:
 const renderScene = ({ route }) => {
   switch (route.key) {
     case 'first':
-      return <FirstRoute foo={this.props.foo} />;
+      return <FirstRoute foo={props.foo} />;
     case 'second':
       return <SecondRoute />;
     default:
@@ -316,7 +316,7 @@ Only supported on Android.
 
 Boolean indicating whether to enable swipe gestures. Swipe gestures are enabled by default. Passing `false` will disable swipe gestures, but the user can still switch tabs by pressing the tab bar.
 
-#### `animationEnabled`
+##### `animationEnabled`
 
 Enables animation when changing tab. By default it's true.
 

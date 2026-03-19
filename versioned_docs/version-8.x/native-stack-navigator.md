@@ -154,7 +154,7 @@ Supported values:
 - `"none"`
 - `"slide"`
 
-On Android, setting either `fade` or `slide` will set the transition of status bar color. On iOS, this option applies to the appereance animation of the status bar.
+On Android, setting either `fade` or `slide` will set the transition of status bar color. On iOS, this option applies to the appearance animation of the status bar.
 
 Requires setting `View controller-based status bar appearance -> YES` (or removing the config) in your `Info.plist` file.
 
@@ -1379,9 +1379,9 @@ The native stack navigator exports the following hooks:
 
 #### `useAnimatedHeaderHeight`
 
-The hook returns an animated value representing the height of the header. This is similar to [`useHeaderHeight`](elements.md#useheaderheight) but returns an animated value that changed as the header height changes, e.g. when expanding or collapsing large title or search bar on iOS.
+The hook returns an animated value representing the height of the header. This is similar to [`useHeaderHeight`](elements.md#useheaderheight) but returns an animated value that changes as the header height changes, e.g. when expanding or collapsing large title or search bar on iOS.
 
-It can be used to animated content along with header height changes.
+It can be used to animate content along with header height changes.
 
 ```js
 import { Animated } from 'react-native';

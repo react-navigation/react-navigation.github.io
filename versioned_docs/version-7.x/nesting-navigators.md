@@ -960,7 +960,7 @@ const HomeTabs = createBottomTabNavigator({
   },
 });
 
-const RootStack = createStackNavigator({
+const RootStack = createNativeStackNavigator({
   // highlight-start
   screenOptions: {
     headerShown: false,
@@ -1025,7 +1025,7 @@ Think of nesting as a way to achieve the UI you want, not a way to organize your
 <TabItem value="static" label="Static" default>
 
 ```js
-const MyStack = createStackNavigator({
+const MyStack = createNativeStackNavigator({
   screens: {
     // Common screens
   },

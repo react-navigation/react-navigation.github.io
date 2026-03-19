@@ -39,7 +39,7 @@ rm -rf $TMPDIR/metro-bundler-cache-*
 
 ### Missing peer dependency
 
-If the module points to an npm package (i.e. the name of the module doesn't with `./`), then it's probably due to a missing dependency. To fix this, install the dependency in your project:
+If the module points to an npm package (i.e. the name of the module doesn't start with `./`), then it's probably due to a missing dependency. To fix this, install the dependency in your project:
 
 ```bash npm2yarn
 npm install name-of-the-module
@@ -113,7 +113,7 @@ npm install --save-dev typescript
 
 ## I'm getting an error "null is not an object (evaluating 'RNGestureHandlerModule.default.Direction')"
 
-This and some similar errors might occur if you have a bare React Native project and the library [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) library isn't linked.
+This and some similar errors might occur if you have a bare React Native project and the library [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler) isn't linked.
 
 Linking is automatic from React Native 0.60, so if you have linked the library manually, first unlink it:
 
@@ -133,7 +133,7 @@ Now rebuild the app and test on your device or simulator.
 
 ## I'm getting an error "requireNativeComponent: "RNCSafeAreaProvider" was not found in the UIManager"
 
-This and some similar errors might occur if you have a bare React Native project and the library [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context) library isn't linked.
+This and some similar errors might occur if you have a bare React Native project and the library [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context) isn't linked.
 
 Linking is automatic from React Native 0.60, so if you have linked the library manually, first unlink it:
 
@@ -301,7 +301,7 @@ const Stack = createNativeStackNavigator({
 <Stack.Screen
   name="Home"
   component={Home}
-  option={{
+  options={{
     // highlight-next-line
     headerTitle: (props) => <MyTitle {...props} />,
   }}
@@ -338,7 +338,7 @@ const Stack = createNativeStackNavigator({
 <Stack.Screen
   name="Home"
   component={Home}
-  option={{
+  options={{
     // This is not correct
     // highlight-next-line
     headerTitle: MyTitle,

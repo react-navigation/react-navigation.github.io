@@ -251,14 +251,17 @@ const RootStack = createNativeStackNavigator({
       screen: HomeScreen,
       options: {
         headerLeft: (props) => (
-          <MyButton {...props} onPress={() => {
-            // Do something
-          }}>
-        )
-      }
-    }
-  }
-})
+          <MyButton
+            {...props}
+            onPress={() => {
+              // Do something
+            }}
+          />
+        ),
+      },
+    },
+  },
+});
 ```
 
 </TabItem>
@@ -303,15 +306,18 @@ const RootStack = createNativeStackNavigator({
     Home: {
       screen: HomeScreen,
       options: {
-        headerLeft: (props) => (
-          <MyButton {...props} onPress={() => {
-            // Do something
-          }}>
-        )
-      }
-    }
-  }
-})
+        headerRight: (props) => (
+          <MyButton
+            {...props}
+            onPress={() => {
+              // Do something
+            }}
+          />
+        ),
+      },
+    },
+  },
+});
 ```
 
 </TabItem>
@@ -322,7 +328,7 @@ const RootStack = createNativeStackNavigator({
   name="Home"
   component={HomeScreen}
   options={{
-    headerLeft: (props) => (
+    headerRight: (props) => (
       <MyButton
         {...props}
         onPress={() => {
@@ -816,7 +822,7 @@ Usage:
 
 ### `SafeAreaProviderCompat`
 
-A wrapper over the `SafeAreaProvider` component from [`react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) which includes initial values.
+A wrapper over the `SafeAreaProvider` component from [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context) which includes initial values.
 
 Usage:
 

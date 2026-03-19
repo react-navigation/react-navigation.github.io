@@ -4,7 +4,7 @@ title: Community navigators
 sidebar_label: Community navigators
 ---
 
-This guide lists various community navigators for React Navigation. These navigators offer provide UI components for navigation with the familiar React Navigation API.
+This guide lists various community navigators for React Navigation. These navigators provide UI components for navigation with the familiar React Navigation API.
 
 If you're looking to build your own navigator, check out the [custom navigators guide](custom-navigators.md).
 

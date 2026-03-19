@@ -7,6 +7,8 @@ sidebar_label: useLinkTo
 The `useLinkTo` hook lets us navigate to a screen using a path instead of a screen name based on the [`linking` options](navigation-container.md#linking). It returns a function that receives the path to navigate to.
 
 ```js
+import * as React from 'react';
+import { Button } from '@react-navigation/elements';
 import { useLinkTo } from '@react-navigation/native';
 
 // ...
@@ -35,10 +37,20 @@ Navigating via `href` strings is not type-safe. If you want to navigate to a scr
 You can wrap your class component in a function component to use the hook:
 
 ```js
+import * as React from 'react';
+import { Button } from '@react-navigation/elements';
+import { useLinkTo } from '@react-navigation/native';
+
 class Home extends React.Component {
   render() {
     // Get it from props
     const { linkTo } = this.props;
+
+    return (
+      <Button onPress={() => linkTo('/profile/jane')}>
+        Go to Jane's profile
+      </Button>
+    );
   }
 }
 
@@ -46,6 +58,6 @@ class Home extends React.Component {
 export default function (props) {
   const linkTo = useLinkTo();
 
-  return <Profile {...props} linkTo={linkTo} />;
+  return <Home {...props} linkTo={linkTo} />;
 }
 ```

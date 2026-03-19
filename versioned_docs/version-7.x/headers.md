@@ -314,7 +314,7 @@ All screens in this navigator will now share these styles. Individual screens ca
 
 ## Replacing the title with a custom component
 
-Sometimes you need more control than changing the text and styles of your title -- for example, you may want to render an image in place of the title, or make the title into a button. In these cases, you can completely override the component used for the title and provide your own.
+Sometimes you need more control than changing the text and styles of your title - for example, you may want to render an image in place of the title, or make the title into a button. In these cases, you can completely override the component used for the title and provide your own.
 
 ```js name="Custom title" snack static2dynamic
 import * as React from 'react';

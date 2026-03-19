@@ -389,7 +389,7 @@ export default function App() {
 
 ## popToTop
 
-The `popToTop` action takes you back to the first screen in the stack, dismissing all the others. It's functionally identical to `StackActions.pop({n: currentIndex})`.
+The `popToTop` action takes you back to the first screen in the stack, dismissing all the others.
 
 ```js name="Stack actions popToTop" snack static2dynamic
 import * as React from 'react';

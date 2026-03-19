@@ -221,7 +221,7 @@ function ProfileScreen({ route }) {
       <Text>{route.params.names[0]}</Text>
       <Text>{route.params.names[1]}</Text>
       <Text>{route.params.names[2]}</Text>
-      <Button onPress={() => navigation.goBack()}>Go back </Button>
+      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 }
@@ -459,7 +459,7 @@ function HomeScreen() {
           });
         }}
       >
-        Go to Brents profile
+        Go to Brent's profile
       </Button>
     </View>
   );
@@ -509,7 +509,7 @@ function ProfileScreen({ route }) {
       >
         Reset navigator state to Settings
       </Button>
-      <Button onPress={() => navigation.navigate('Home')}> Go to Home </Button>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
       <Button
         onPress={() => navigation.navigate('Settings', { someParam: 'Param1' })}
       >
@@ -541,7 +541,7 @@ function SettingsScreen({ route }) {
           });
         }}
       >
-        Go to Brents profile
+        Go to Brent's profile
       </Button>
     </View>
   );
@@ -595,7 +595,7 @@ function HomeScreen() {
           });
         }}
       >
-        Go to Brents profile
+        Go to Brent's profile
       </Button>
     </View>
   );
@@ -645,12 +645,11 @@ function ProfileScreen({ route }) {
       >
         Reset navigator state to Settings
       </Button>
-      <Button onPress={() => navigation.navigate('Home')}> Go to Home </Button>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
       <Button
         onPress={() => navigation.navigate('Settings', { someParam: 'Param1' })}
       >
-        {' '}
-        Go to Settings{' '}
+        Go to Settings
       </Button>
     </View>
   );
@@ -678,7 +677,7 @@ function SettingsScreen({ route }) {
           });
         }}
       >
-        Go to Brents profile
+        Go to Brent's profile
       </Button>
     </View>
   );
@@ -955,7 +954,7 @@ function HomeScreen() {
           });
         }}
       >
-        Go to Brents profile
+        Go to Brent's profile
       </Button>
     </View>
   );
@@ -1054,7 +1053,7 @@ function HomeScreen() {
           });
         }}
       >
-        Go to Brents profile
+        Go to Brent's profile
       </Button>
     </View>
   );
@@ -1163,7 +1162,7 @@ function HomeScreen() {
           });
         }}
       >
-        Go to Brents profile
+        Go to Brent's profile
       </Button>
     </View>
   );
@@ -1262,7 +1261,7 @@ function HomeScreen() {
           });
         }}
       >
-        Go to Brents profile
+        Go to Brent's profile
       </Button>
     </View>
   );
@@ -1725,7 +1724,7 @@ This method lets us check whether the screen is currently focused. Returns `true
 const isFocused = navigation.isFocused();
 ```
 
-This method doesn't re-render the screen when the value changes and mainly useful in callbacks. You probably want to use [useIsFocused](use-is-focused.md) instead of using this directly, it will return a boolean a prop to indicating if the screen is focused.
+This method doesn't re-render the screen when the value changes and is mainly useful in callbacks. You probably want to use [useIsFocused](use-is-focused.md) instead of using this directly, as the hook re-renders the screen when focus changes.
 
 ## Advanced API Reference
 
@@ -1762,8 +1761,8 @@ import { CommonActions } from '@react-navigation/native';
 
 navigation.dispatch({
   ...CommonActions.navigate('Profile'),
-  source: 'someRoutekey',
-  target: 'someStatekey',
+  source: 'someRouteKey',
+  target: 'someStateKey',
 });
 ```
 
@@ -1856,7 +1855,7 @@ const RootDrawer = createDrawerNavigator({
 });
 ```
 
-Then when using `getParent` inside of `FeedScree`, instead of:
+Then when using `getParent` inside of `FeedScreen`, instead of:
 
 ```js
 // Avoid this

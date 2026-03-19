@@ -13,7 +13,7 @@ React Navigation 8 is still in pre-release stage. The API may still change befor
 
 :::
 
-This guides lists all the breaking changes and new features in React Navigation 8 that you need to be aware of when upgrading from React Navigation 7.
+This guide lists all the breaking changes and new features in React Navigation 8 that you need to be aware of when upgrading from React Navigation 7.
 
 ## Dependency changes
 
@@ -607,7 +607,7 @@ See [Stack Navigator](stack-navigator.md#headerbackicon) and [Native Stack Navig
 
 #### Stack Navigator now accepts a number for `gestureResponseDistance`
 
-Previously, the `gestureResponseDistance` option in Stack Navigator accepted an object with `horizontal` and `vertical` properties to specify the distance for gestures. Since it's not pssible to have both horizontal and vertical gestures at the same time, it now accepts a number to specify the distance for the current gesture direction:
+Previously, the `gestureResponseDistance` option in Stack Navigator accepted an object with `horizontal` and `vertical` properties to specify the distance for gestures. Since it's not possible to have both horizontal and vertical gestures at the same time, it now accepts a number to specify the distance for the current gesture direction:
 
 ```diff lang=js
 - gestureResponseDistance: { horizontal: 50 }
@@ -654,7 +654,7 @@ Previously, the linking configuration required a `prefixes` option to specify th
 
 Since then, the recommended way to develop with Expo has been to use [Development Builds](https://docs.expo.dev/develop/development-builds/introduction/), which use the app's own URL scheme. So the `prefixes` option is not needed for most use cases.
 
-You can now omit the `prefixes` option in the linking configuration unless you're using Expo Go:
+You can now omit the `prefixes` option in the linking configuration:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>

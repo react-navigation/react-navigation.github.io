@@ -31,7 +31,7 @@ function B() {
   return <View />;
 }
 
-// codeblock-focus-start
+// codeblock-focus-end
 const HomeStackScreen = createNativeStackNavigator({
   screens: {
     A: {

@@ -447,7 +447,7 @@ import { useNavigationContainerRef } from '@react-navigation/native';
 const navigationRef = useNavigationContainerRef<RootStackParamList>();
 ```
 
-If you're using a regular `ref` object, you can pass a generic to the `NavigationContainerRef` type..
+If you're using a regular `ref` object, you can pass a generic to the `NavigationContainerRef` type.
 
 Example when using `React.useRef` hook:
 
@@ -524,7 +524,7 @@ export type HomeTabParamList = {
 export type HomeTabScreenProps<T extends keyof HomeTabParamList> =
   CompositeScreenProps<
     BottomTabScreenProps<HomeTabParamList, T>,
-    RootStackScreenProps<keyof RootStackParamList, 'Home'>
+    RootStackScreenProps<'Home'>
   >;
 
 declare global {

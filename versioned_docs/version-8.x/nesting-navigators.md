@@ -16,8 +16,14 @@ import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
+import {
+  createBottomTabNavigator,
+  createBottomTabScreen,
+} from '@react-navigation/bottom-tabs';
 import { Button } from '@react-navigation/elements';
 
 function ProfileScreen() {
@@ -100,7 +106,7 @@ When nesting navigators, there are some things to keep in mind:
 
 ### Each navigator keeps its own navigation history
 
-Lets say you have a stack navigator (lets call it `StackA`) nested within another navigator (lets call it `NavigatorB`). When you press the back button in a screen inside `StackA`, it will go to the previous screen of the closest ancestor navigator of the screen - i.e. `StackA`.
+Let's say you have a stack navigator (let's call it `StackA`) nested within another navigator (let's call it `NavigatorB`). When you press the back button in a screen inside `StackA`, it will go to the previous screen of the closest ancestor navigator of the screen - i.e. `StackA`.
 
 If the current screen is the first screen in `StackA`, then pressing back will go to the previous screen in `NavigatorB`.
 
@@ -805,7 +811,7 @@ const HomeTabs = createBottomTabNavigator({
   },
 });
 
-const RootStack = createStackNavigator({
+const RootStack = createNativeStackNavigator({
   // highlight-start
   screenOptions: {
     headerShown: false,
@@ -870,7 +876,7 @@ Think of nesting navigators as a way to achieve the UI you want, not as a way to
 <TabItem value="static" label="Static" default>
 
 ```js
-const MyStack = createStackNavigator({
+const MyStack = createNativeStackNavigator({
   screens: {
     // Common screens
   },

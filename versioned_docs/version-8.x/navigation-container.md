@@ -81,10 +81,14 @@ import {
 // codeblock-focus-end
 import { createStackNavigator } from '@react-navigation/stack';
 
+function EmptyScreen() {
+  return <View />;
+}
+
 const Stack = createStackNavigator({
   initialRouteName: 'Empty',
   screens: {
-    Empty: () => <View></View>,
+    Empty: EmptyScreen,
     Home: HomeScreen,
   },
 });
@@ -140,6 +144,10 @@ function HomeScreen() {
   );
 }
 
+function EmptyScreen() {
+  return <View />;
+}
+
 // codeblock-focus-start
 
 export default function App() {
@@ -151,7 +159,7 @@ export default function App() {
       <Button onPress={() => navigationRef.navigate('Home')}>Go home</Button>
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator initialRouteName="Empty">
-          <Stack.Screen name="Empty" component={() => <View></View>} />
+          <Stack.Screen name="Empty" component={EmptyScreen} />
           <Stack.Screen name="Home" component={HomeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
@@ -537,7 +545,7 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    // highlight-next-lineP
+    // highlight-next-line
     prefixes: ['https://example.com', 'example://'],
     config: {
       // ...

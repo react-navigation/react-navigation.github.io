@@ -7,7 +7,7 @@ sidebar_label: Navigation Ref
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Sometimes you need to trigger a navigation action from places where you do not have access to the `navigation` object, such as a Redux middleware. For such cases, you can dispatch navigation actions use a [`ref` on the navigation container](navigation-container.md#ref).
+Sometimes you need to trigger a navigation action from places where you do not have access to the `navigation` object, such as a Redux middleware. For such cases, you can dispatch navigation actions using a [`ref` on the navigation container](navigation-container.md#ref).
 
 **Do not** use the `ref` if:
 
@@ -76,7 +76,7 @@ export function navigate(name, params) {
 // add other navigation functions that you need and export them
 ```
 
-Then, in any of your javascript modules, import the `RootNavigation` and call functions which you exported from it. You may use this approach outside of your React components and, in fact, it works as well when used from within them.
+Then, in any of your javascript modules, import the `RootNavigation` and call functions which you exported from it. You may use this approach outside of your React components.
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
@@ -227,7 +227,7 @@ When writing tests, you may mock the navigation functions, and make assertions o
 
 ## Handling initialization
 
-When using this pattern, you need to keep few things in mind to avoid navigation from failing in your app.
+When using this pattern, you need to keep a few things in mind to avoid navigation from failing in your app.
 
 - The `ref` is set only after the navigation container renders, this can be async when handling deep links
 - A navigator needs to be rendered to be able to handle actions, the `ref` won't be ready without a navigator
@@ -356,4 +356,4 @@ export default function App() {
 </TabItem>
 </Tabs>
 
-If you're unsure if a navigator is rendered, you can call `navigationRef.current.getRootState()`, and it'll return a valid state object if any navigators are rendered, otherwise it will return `undefined`.
+If you're unsure if a navigator is rendered, you can call `navigationRef.getRootState()`, and it'll return a valid state object if any navigators are rendered, otherwise it will return `undefined`.

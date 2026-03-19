@@ -71,10 +71,9 @@ export default function DrawerExample() {
         return <Text>Drawer content</Text>;
       }}
     >
-      <Button
-        onPress={() => setOpen((prevOpen) => !prevOpen)}
-        title={`${open ? 'Close' : 'Open'} drawer`}
-      />
+      <Button onPress={() => setOpen((prevOpen) => !prevOpen)}>
+        {`${open ? 'Close' : 'Open'} drawer`}
+      </Button>
     </Drawer>
   );
 }
@@ -201,7 +200,10 @@ The `useDrawerProgress` hook returns a Reanimated `SharedValue` which represents
 Example with modern implementation:
 
 ```js
-import { Animated } from 'react-native-reanimated';
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 import { useDrawerProgress } from 'react-native-drawer-layout';
 
 // ...
@@ -213,7 +215,7 @@ function MyComponent() {
     return {
       transform: [
         {
-          translateX: interpolate(progress, [0, 1], [-100, 0]),
+          translateX: interpolate(progress.value, [0, 1], [-100, 0]),
         },
       ],
     };

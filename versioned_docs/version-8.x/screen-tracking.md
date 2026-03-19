@@ -74,18 +74,15 @@ export default function App() {
   return (
     <Navigation
       ref={navigationRef}
-      onReady={() => {
+      onReady={async () => {
         routeNameRef.current = navigationRef.current.getCurrentRoute().name;
 
         // Replace the line below to add the tracker from a mobile analytics SDK
-        await trackScreenView(currentRouteName);
+        await trackScreenView(routeNameRef.current);
       }}
       onStateChange={async () => {
         const previousRouteName = routeNameRef.current;
         const currentRouteName = navigationRef.current.getCurrentRoute().name;
-        const trackScreenView = () => {
-          // Your implementation of analytics goes here!
-        };
 
         if (previousRouteName !== currentRouteName) {
           // Replace the line below to add the tracker from a mobile analytics SDK
@@ -150,7 +147,7 @@ export default function App() {
   return (
     <NavigationContainer
       ref={navigationRef}
-      onReady={() => {
+      onReady={async () => {
         routeNameRef.current = navigationRef.current.getCurrentRoute().name;
 
         // Replace the line below to add the tracker from a mobile analytics SDK
@@ -159,9 +156,6 @@ export default function App() {
       onStateChange={async () => {
         const previousRouteName = routeNameRef.current;
         const currentRouteName = navigationRef.current.getCurrentRoute().name;
-        const trackScreenView = () => {
-          // Your implementation of analytics goes here!
-        };
 
         if (previousRouteName !== currentRouteName) {
           // Replace the line below to add the tracker from a mobile analytics SDK

@@ -54,7 +54,7 @@ export default function App() {
 
 :::warning
 
-To avoid the running the effect too often, it's important to wrap the callback in `useCallback` before passing it to `useFocusEffect` as shown in the example.
+To avoid running the effect too often, it's important to wrap the callback in `useCallback` before passing it to `useFocusEffect` as shown in the example.
 
 :::
 
@@ -138,7 +138,7 @@ useFocusEffect(
 );
 ```
 
-The cleanup function runs whenever the effect needs to cleanup, i.e. on `blur`, unmount, dependency change etc. It's not a good place to update the state or do something that should happen on `blur`. You should use listen to the `blur` event instead:
+The cleanup function runs whenever the effect needs to cleanup, i.e. on `blur`, unmount, dependency change etc. It's not a good place to update the state or do something that should happen on `blur`. You should use the `blur` event instead:
 
 ```js
 React.useEffect(() => {

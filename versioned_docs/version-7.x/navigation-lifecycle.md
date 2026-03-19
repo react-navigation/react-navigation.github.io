@@ -488,7 +488,7 @@ export default function App() {
 
 See [Navigation events](navigation-events.md) for more details.
 
-For performing side effects, we can use the [`useFocusEffect`](use-focus-effect.md) - it's like `useEffect` but ties to the navigation lifecycle -- it runs the effect when the screen comes into focus and cleans it up when the screen goes out of focus:
+For performing side effects, we can use the [`useFocusEffect`](use-focus-effect.md) - it's like `useEffect` but ties to the navigation lifecycle - it runs the effect when the screen comes into focus and cleans it up when the screen goes out of focus:
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>

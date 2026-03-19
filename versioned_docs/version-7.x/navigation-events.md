@@ -297,7 +297,7 @@ Example:
 <TabItem value="static" label="Static" default>
 
 ```js
-const Tab = createBottomTabNavigatior({
+const Tab = createBottomTabNavigator({
   screens: {
     Chat: {
       screen: Chat,
@@ -338,7 +338,7 @@ Example:
 <TabItem value="static" label="Static" default>
 
 ```js
-const Tab = createBottomTabNavigatior({
+const Tab = createBottomTabNavigator({
   screens: {
     Chat: {
       screen: Chat,
@@ -436,7 +436,7 @@ Similar to `listeners`, you can also pass a function to `screenListeners`. The f
 <TabItem value="static" label="Static" default>
 
 ```js
-const Tab = createBottomTabNavigatior({
+const Tab = createBottomTabNavigator({
   screenListeners: ({ navigation }) => ({
     state: (e) => {
       // Do something with the state

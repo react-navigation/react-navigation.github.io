@@ -151,7 +151,7 @@ String indicating whether the keyboard gets dismissed in response to a drag gest
 - `'on-drag'`: the keyboard is dismissed when a drag begins.
 - `'none'`: drags do not dismiss the keyboard.
 
-##### `overScrollMode`
+#### `overScrollMode`
 
 Used to override default value of pager's overScroll mode.
 
@@ -169,7 +169,7 @@ Object containing the initial height and width of the screens. Passing this will
 
 ```js
 {
-  width: Dimensions.get('window').width;
+  width: Dimensions.get('window').width,
 }
 ```
 

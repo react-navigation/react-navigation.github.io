@@ -21,9 +21,12 @@ Icons can be specified using the [`tabBarIcon`](bottom-tab-navigator.md#tabbaric
 
 ```js name="Tab bar icons" static2dynamic
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { Platform, View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  createBottomTabScreen,
+} from '@react-navigation/bottom-tabs';
 
 function HomeScreen() {
   return (
@@ -156,7 +159,10 @@ Sometimes we want to add badges to some tabs. You can use the [`tabBarBadge` opt
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  createBottomTabScreen,
+} from '@react-navigation/bottom-tabs';
 
 function HomeScreen() {
   return (

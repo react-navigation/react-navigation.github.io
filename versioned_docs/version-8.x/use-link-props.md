@@ -103,7 +103,7 @@ function Home() {
       action={StackActions.replace('Profile', { id: 'jane' })}
       href="/users/jane"
     >
-      Getting Started
+      Go to Jane's Profile
     </LinkButton>
   );
 }
