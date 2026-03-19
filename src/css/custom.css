@@ -781,6 +781,9 @@ header {
   height: 16px;
   margin: 0 0.5em 0 0;
   vertical-align: -0.125em;
+  border: 0;
+  outline: none;
+  border-radius: 0;
   box-shadow: none;
 }
 
