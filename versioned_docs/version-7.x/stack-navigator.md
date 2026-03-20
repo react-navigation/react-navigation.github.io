@@ -12,7 +12,7 @@ sidebar_label: Stack
 
 - <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/highlights/animation.mp4" /></video>
 
-  [Transition animations](#animation-related-options)
+  [Transition animations](#animations)
 
 - <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/highlights/header-animation.mp4" /></video>
 
