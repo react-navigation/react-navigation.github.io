@@ -1,6 +1,9 @@
 .wrapper {
-  background-color: var(--ifm-home-color-black);
-  color: var(--ifm-home-color-white);
+  --home-features-background: #25292e;
+  --home-features-text: #f7f7ff;
+
+  background-color: var(--home-features-background);
+  color: var(--home-features-text);
   display: flex;
   align-items: center;
   justify-content: center;

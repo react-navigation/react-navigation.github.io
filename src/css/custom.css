@@ -14,13 +14,11 @@
   --ifm-heading-font-family:
     Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif,
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-  font-weight: normal;
-  --ifm-font-size-base: 100%;
+
   --ifm-line-height-base: 1.75;
   --ifm-code-font-size: 85%;
 
   --ifm-heading-font-weight: 600;
-  --ifm-heading-line-height: 1.25;
   --ifm-heading-margin-top: 1.618rem;
 
   --ifm-color-primary: hsl(
@@ -72,8 +70,6 @@
   --ifm-home-color-background-secondary: #d5d6f5;
   --ifm-home-color-highlight: hsl(var(--primary-hue), 57.5%, 71.4%);
   --ifm-home-color-border: #414360;
-  --ifm-home-color-black: #25292e;
-  --ifm-home-color-white: #f7f7ff;
 
   --ifm-menu-color-background-active: rgba(107, 82, 174, 0.1);
 
@@ -175,10 +171,6 @@
   --ifm-alert-border-left-width: 1px;
   --ifm-alert-padding-vertical: 0.875rem;
   --ifm-alert-shadow: none;
-
-  --ifm-doc-version-badge-background: hsl(0, 0%, 100%);
-  --ifm-doc-version-badge-border: hsla(220, 10%, 54%, 0.2);
-  --ifm-doc-version-badge-text: hsl(220, 15%, 18%);
 
   --ifm-toc-border-color: var(--ifm-color-emphasis-200);
 
@@ -322,10 +314,6 @@
     10%,
     85%
   );
-
-  --ifm-doc-version-badge-background: hsl(225, 18%, 18%);
-  --ifm-doc-version-badge-border: hsla(220, 16%, 48%, 0.32);
-  --ifm-doc-version-badge-text: hsl(220, 20%, 92%);
 
   --ifm-toc-border-color: #31343a;
 
@@ -928,8 +916,6 @@ details[class^='details_'] {
   --ifm-alert-border-color: var(--codeblock-border-color);
   --ifm-alert-background-color: transparent;
   --ifm-alert-padding-vertical: 0.5rem;
-  --ifm-alert-padding-horizontal: 1rem;
-  --ifm-alert-border-radius: var(--ifm-global-radius);
   --ifm-alert-foreground-color: inherit;
   --ifm-link-color: inherit;
   --ifm-link-hover-color: inherit;
@@ -1059,11 +1045,21 @@ samp {
 }
 
 .theme-doc-version-badge {
+  --doc-version-badge-background: hsl(0, 0%, 100%);
+  --doc-version-badge-border: hsla(220, 10%, 54%, 0.2);
+  --doc-version-badge-text: hsl(220, 15%, 18%);
+
+  [data-theme='dark'] & {
+    --doc-version-badge-background: hsl(225, 18%, 18%);
+    --doc-version-badge-border: hsla(220, 16%, 48%, 0.32);
+    --doc-version-badge-text: hsl(220, 20%, 92%);
+  }
+
   padding: 0.375rem 0.75rem;
-  border: 1px solid var(--ifm-doc-version-badge-border);
+  border: 1px solid var(--doc-version-badge-border);
   border-radius: 999px;
-  background: var(--ifm-doc-version-badge-background);
-  color: var(--ifm-doc-version-badge-text);
+  background: var(--doc-version-badge-background);
+  color: var(--doc-version-badge-text);
   font-size: 0.8125rem;
   font-weight: 600;
 }
