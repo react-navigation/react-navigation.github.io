@@ -8,10 +8,13 @@
     SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New,
     monospace;
   --ifm-font-family-base:
-    Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', ui-sans-serif,
-    system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
-    Noto Color Emoji;
-  --ifm-heading-font-family: 'Google Sans', var(--ifm-font-family-base);
+    Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial,
+    ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol, Noto Color Emoji;
+  --ifm-heading-font-family:
+    Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-weight: normal;
   --ifm-font-size-base: 100%;
   --ifm-line-height-base: 1.75;
   --ifm-code-font-size: 85%;

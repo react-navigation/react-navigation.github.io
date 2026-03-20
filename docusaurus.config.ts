@@ -215,13 +215,6 @@ const config: Config = {
         crossOrigin: 'true',
       },
     },
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet',
-      },
-    },
   ],
   scripts: [
     '/js/snack-helpers.js',
