@@ -12,7 +12,7 @@ It follows material design guidelines by default, but you can also use your own 
   <source src="/assets/libraries/tab-view/tab-view.mp4" />
 </video>
 
-This package doesn't integrate with React Navigation. If you want to integrate the tab view with React Navigation's navigation system, e.g. want to show screens in the tab bar and be able to navigate between them using `navigation.navigate` etc, use [Material Top Tab Navigator](material-top-tab-navigator.md) instead.
+If you need React Navigation integration, e.g. show screens in the tab bar and be able to navigate between them using `navigation.navigate` etc, use [Material Top Tab Navigator](material-top-tab-navigator.md) instead.
 
 ## Installation
 
@@ -79,7 +79,7 @@ const routes = [
   { key: 'second', title: 'Second' },
 ];
 
-export default function TabViewExample() {
+export default function App() {
   const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
 
@@ -94,11 +94,6 @@ export default function TabViewExample() {
 }
 // codeblock-focus-end
 ```
-
-## More examples on Snack
-
-- [Custom Tab Bar](https://snack.expo.io/@satya164/react-native-tab-view-custom-tabbar)
-- [Lazy Load](https://snack.expo.io/@satya164/react-native-tab-view-lazy-load)
 
 ## API reference
 
@@ -259,6 +254,102 @@ If this is not specified, the default tab bar is rendered. You pass this props t
 />
 ```
 
+Example:
+
+```js
+import * as React from 'react';
+import {
+  Animated,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  useWindowDimensions,
+} from 'react-native';
+import { SceneMap, TabView } from 'react-native-tab-view';
+
+const FirstRoute = () => (
+  <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
+);
+
+const SecondRoute = () => (
+  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
+);
+
+const renderScene = SceneMap({
+  first: FirstRoute,
+  second: SecondRoute,
+});
+
+const routes = [
+  { key: 'first', title: 'First' },
+  { key: 'second', title: 'Second' },
+];
+
+// codeblock-focus-start
+const renderTabBar = ({ navigationState, position, jumpTo }) => {
+  const inputRange = navigationState.routes.map((_, index) => index);
+
+  return (
+    <View style={styles.tabBar}>
+      {navigationState.routes.map((route, index) => {
+        const opacity = position.interpolate({
+          inputRange,
+          outputRange: inputRange.map((inputIndex) =>
+            inputIndex === index ? 1 : 0.5
+          ),
+        });
+
+        return (
+          <TouchableOpacity
+            key={route.key}
+            style={styles.tabItem}
+            onPress={() => jumpTo(route.key)}
+          >
+            <Animated.Text style={[styles.label, { opacity }]}>
+              {route.title}
+            </Animated.Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+};
+
+export default function App() {
+  const layout = useWindowDimensions();
+  const [index, setIndex] = React.useState(0);
+
+  return (
+    <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      // highlight-next-line
+      renderTabBar={renderTabBar}
+      onIndexChange={setIndex}
+      initialLayout={{ width: layout.width }}
+    />
+  );
+}
+// codeblock-focus-end
+
+const styles = StyleSheet.create({
+  scene: {
+    flex: 1,
+  },
+  tabBar: {
+    flexDirection: 'row',
+  },
+  tabItem: {
+    alignItems: 'center',
+    flex: 1,
+    padding: 16,
+  },
+  label: {
+    color: '#000',
+  },
+});
+```
+
 ##### `tabBarPosition`
 
 Position of the tab bar in the tab view. Possible values are `'top'` and `'bottom'`. Defaults to `'top'`.
@@ -271,7 +362,7 @@ By default all scenes are rendered to provide a smoother swipe experience. But y
 
 ```js
 <TabView
-  lazy={({ route }) => route.name === 'Albums'}
+  lazy={({ route }) => route.key === 'albums'}
   ...
 />
 ```
@@ -282,6 +373,70 @@ You can also pass a boolean to enable lazy for all of the scenes:
 
 ```js
 <TabView lazy />
+```
+
+Example:
+
+```js
+import * as React from 'react';
+import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { SceneMap, TabView } from 'react-native-tab-view';
+
+const FirstRoute = () => (
+  <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
+);
+
+const SecondRoute = () => (
+  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
+);
+
+// codeblock-focus-start
+const renderLazyPlaceholder = ({ route }) => {
+  return (
+    <View style={styles.scene}>
+      <Text>Loading {route.title}...</Text>
+    </View>
+  );
+};
+
+// codeblock-focus-end
+const renderScene = SceneMap({
+  first: FirstRoute,
+  second: SecondRoute,
+});
+
+const routes = [
+  { key: 'first', title: 'First' },
+  { key: 'second', title: 'Second' },
+];
+
+// codeblock-focus-start
+export default function App() {
+  const layout = useWindowDimensions();
+  const [index, setIndex] = React.useState(0);
+
+  return (
+    <TabView
+      // highlight-next-line
+      lazy
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      // highlight-next-line
+      renderLazyPlaceholder={renderLazyPlaceholder}
+      onIndexChange={setIndex}
+      initialLayout={{ width: layout.width }}
+    />
+  );
+}
+// codeblock-focus-end
+
+const styles = StyleSheet.create({
+  scene: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+  },
+});
 ```
 
 ##### `lazyPreloadDistance`
@@ -330,7 +485,7 @@ You can use built-in adapters or create your own custom adapter. For example, yo
 import React from 'react';
 import { TabView, ScrollViewAdapter } from 'react-native-tab-view';
 
-export default function TabViewExample() {
+export default function App() {
   const [index, setIndex] = React.useState(0);
 
   return (
