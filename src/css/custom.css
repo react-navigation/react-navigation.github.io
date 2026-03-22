@@ -19,7 +19,7 @@
   --ifm-code-font-size: 85%;
 
   --ifm-heading-font-weight: 600;
-  --ifm-heading-margin-top: 1.618rem;
+  --ifm-heading-margin-top: 1rem;
 
   --ifm-color-primary: hsl(
     var(--primary-hue),
@@ -374,6 +374,11 @@ header {
   font-family: var(--ifm-heading-font-family);
 }
 
+.markdown {
+  --ifm-h1-vertical-rhythm-bottom: 1;
+  --ifm-heading-vertical-rhythm-bottom: 0.75;
+}
+
 .markdown :is(ul, ol) > li > p {
   margin-bottom: var(--ifm-list-paragraph-margin);
 }
@@ -603,8 +608,8 @@ header {
 
 @media (min-width: 85rem) {
   .menu > .menu__list > .menu__list-item {
-    padding-top: 1.5rem;
-    padding-bottom: 1.75rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 }
 
