@@ -503,25 +503,26 @@ Defaults to `slide` on iOS and `front` on other platforms.
 
 You can conditionally specify the `drawerType` to show a permanent drawer on bigger screens and a traditional drawer on small screens:
 
-```js
+```js static2dynamic
 import { useWindowDimensions } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-const Drawer = createDrawerNavigator();
-
-function MyDrawer() {
+const MyDrawer = createDrawerNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+}).with(({ Navigator }) => {
   const dimensions = useWindowDimensions();
 
   return (
-    <Drawer.Navigator
+    <Navigator
       screenOptions={{
         drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
       }}
-    >
-      {/* Screens */}
-    </Drawer.Navigator>
+    />
   );
-}
+});
 ```
 
 You can also specify other props such as `drawerStyle` based on screen size to customize the behavior. For example, you can combine it with `defaultStatus="open"` to achieve a master-detail layout:

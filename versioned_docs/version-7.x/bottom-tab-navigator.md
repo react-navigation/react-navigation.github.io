@@ -405,67 +405,55 @@ Position of the tab bar. Available values are:
 
 When the tab bar is positioned on the `left` or `right`, it is styled as a sidebar. This can be useful when you want to show a sidebar on larger screens and a bottom tab bar on smaller screens:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+```js static2dynamic
+import { useWindowDimensions } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-```js
 const Tabs = createBottomTabNavigator({
-  screenOptions: {
-    tabBarPosition: isLargeScreen ? 'left' : 'bottom',
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
   },
+}).with(({ Navigator }) => {
+  const dimensions = useWindowDimensions();
 
-  // ...
+  return (
+    <Navigator
+      screenOptions={{
+        tabBarPosition: dimensions.width >= 768 ? 'left' : 'bottom',
+      }}
+    />
+  );
 });
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-<Tab.Navigator
-  screenOptions={{
-    tabBarPosition: isLargeScreen ? 'left' : 'bottom',
-  }}
->
-```
-
-</TabItem>
-</Tabs>
 
 <img src="/assets/navigators/bottom-tabs/bottom-tabs-side.png" alt="Sidebar" style={{ width: '100%' }} />
 
 You can also render a compact sidebar by placing the label below the icon. This is only supported when the [`tabBarVariant`](#tabbarvariant) is set to `material`:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+```js static2dynamic
+import { useWindowDimensions } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-```js
 const Tabs = createBottomTabNavigator({
-  screenOptions: {
-    tabBarPosition: isLargeScreen ? 'left' : 'bottom',
-    tabBarVariant: isLargeScreen ? 'material' : 'uikit',
-    tabBarLabelPosition: 'below-icon',
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
   },
+}).with(({ Navigator }) => {
+  const dimensions = useWindowDimensions();
 
-  // ...
+  return (
+    <Navigator
+      screenOptions={{
+        tabBarPosition: dimensions.width >= 768 ? 'left' : 'bottom',
+        tabBarVariant: dimensions.width >= 768 ? 'material' : 'uikit',
+        tabBarLabelPosition: 'below-icon',
+      }}
+    />
+  );
 });
 ```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-<Tab.Navigator
-  screenOptions={{
-    tabBarPosition: isLargeScreen ? 'left' : 'bottom',
-    tabBarVariant: isLargeScreen ? 'material' : 'uikit',
-    tabBarLabelPosition: 'below-icon',
-  }}
->
-```
-
-</TabItem>
-</Tabs>
 
 <img src="/assets/navigators/bottom-tabs/bottom-tabs-side-compact.png" alt="Compact sidebar" style={{ width: '100%' }} />
 
