@@ -795,7 +795,7 @@ describe('rehype-static-to-dynamic', () => {
     assert.strictEqual(output, expected);
   });
 
-  test('screenOptions on navigator', async () => {
+  test('screenOptions and screenListeners on navigator', async () => {
     const input = dedent /* javascript */ `
       import { createNativeStackNavigator } from '@react-navigation/native-stack';
       import { createStaticNavigation } from '@react-navigation/native';
@@ -806,6 +806,9 @@ describe('rehype-static-to-dynamic', () => {
           headerShown: false,
         },
         // highlight-end
+        screenListeners: {
+          focus: () => console.log('focused'),
+        },
         screens: {
           Home: HomeScreen,
         },
@@ -838,6 +841,9 @@ describe('rehype-static-to-dynamic', () => {
               headerShown: false,
             }}
             // highlight-end
+            screenListeners={{
+              focus: () => console.log('focused'),
+            }}
           >
             <Stack.Screen name="Home" component={HomeScreen} />
           </Stack.Navigator>
@@ -985,6 +991,410 @@ describe('rehype-static-to-dynamic', () => {
 
     assert.strictEqual(output, expected);
   });
+
+  test('navigator with `.with(...)` wrapper', async () => {
+    const input = dedent /* javascript */ `
+      import { useWindowDimensions } from 'react-native';
+      import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+      import { createStaticNavigation } from '@react-navigation/native';
+
+      const Tabs = createBottomTabNavigator({
+        screens: {
+          Home: HomeScreen,
+          Profile: ProfileScreen,
+        },
+      }).with(({ Navigator }) => {
+        const dimensions = useWindowDimensions();
+
+        return (
+          <Navigator
+            screenOptions={{
+              tabBarPosition: dimensions.width >= 768 ? 'left' : 'bottom',
+            }}
+            screenListeners={{
+              state: () => console.log('state changed'),
+            }}
+          />
+        );
+      });
+
+      const Navigation = createStaticNavigation(Tabs);
+
+      export default function App() {
+        return <Navigation />;
+      }
+    `;
+
+    const tree = createTestTree(input);
+    const plugin = rehypeStaticToDynamic();
+    await plugin(tree);
+
+    const output = extractTransformedCode(tree);
+
+    const expected = dedent /* javascript */ `
+      import { useWindowDimensions } from 'react-native';
+      import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+      import { NavigationContainer } from '@react-navigation/native';
+
+      const Tab = createBottomTabNavigator();
+
+      function Tabs() {
+        const dimensions = useWindowDimensions();
+
+        return (
+          <Tab.Navigator
+            screenOptions={{
+              tabBarPosition: dimensions.width >= 768 ? 'left' : 'bottom',
+            }}
+            screenListeners={{
+              state: () => console.log('state changed'),
+            }}
+          >
+            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Profile" component={ProfileScreen} />
+          </Tab.Navigator>
+        );
+      }
+
+      export default function App() {
+        return (
+          <NavigationContainer>
+            <Tabs />
+          </NavigationContainer>
+        );
+      }
+    `;
+
+    assert.strictEqual(output, expected);
+  });
+
+  test(
+    'navigator with `.with(...)` merges screenOptions and screenListeners from plain objects',
+    async () => {
+    const input = dedent /* javascript */ `
+      import { useWindowDimensions } from 'react-native';
+      import { createDrawerNavigator } from '@react-navigation/drawer';
+      import { createStaticNavigation } from '@react-navigation/native';
+
+      const DrawerRoot = createDrawerNavigator({
+        screenOptions: {
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: 'tomato',
+          },
+        },
+        screenListeners: {
+          state: () => console.log('static state'),
+        },
+        screens: {
+          Home: HomeScreen,
+        },
+      }).with(({ Navigator }) => {
+        const dimensions = useWindowDimensions();
+
+        return (
+          <Navigator
+            screenOptions={{
+              drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
+            }}
+            screenListeners={{
+              focus: () => console.log('dynamic focus'),
+            }}
+          />
+        );
+      });
+
+      const Navigation = createStaticNavigation(DrawerRoot);
+
+      export default function App() {
+        return <Navigation />;
+      }
+    `;
+
+    const tree = createTestTree(input);
+    const plugin = rehypeStaticToDynamic();
+    await plugin(tree);
+
+    const output = extractTransformedCode(tree);
+
+    const expected = dedent /* javascript */ `
+      import { useWindowDimensions } from 'react-native';
+      import { createDrawerNavigator } from '@react-navigation/drawer';
+      import { NavigationContainer } from '@react-navigation/native';
+
+      const Drawer = createDrawerNavigator();
+
+      function DrawerRoot() {
+        const dimensions = useWindowDimensions();
+
+        return (
+          <Drawer.Navigator
+            screenOptions={{
+              headerTintColor: 'white',
+              headerStyle: {
+                backgroundColor: 'tomato',
+              },
+              drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
+            }}
+            screenListeners={{
+              state: () => console.log('static state'),
+              focus: () => console.log('dynamic focus'),
+            }}
+          >
+            <Drawer.Screen name="Home" component={HomeScreen} />
+          </Drawer.Navigator>
+        );
+      }
+
+      export default function App() {
+        return (
+          <NavigationContainer>
+            <DrawerRoot />
+          </NavigationContainer>
+        );
+      }
+    `;
+
+      assert.strictEqual(output, expected);
+    }
+  );
+
+  test(
+    'navigator with `.with(...)` merges static objects with wrapper functions',
+    async () => {
+      const input = dedent /* javascript */ `
+        import { createDrawerNavigator } from '@react-navigation/drawer';
+        import { createStaticNavigation } from '@react-navigation/native';
+
+        const DrawerRoot = createDrawerNavigator({
+          screenOptions: {
+            headerShown: false,
+          },
+          screenListeners: {
+            state: () => console.log('static state'),
+          },
+          screens: {
+            Home: HomeScreen,
+          },
+        }).with(({ Navigator }) => {
+          return (
+            <Navigator
+              screenOptions={({ route }) => ({
+                title: route.name,
+              })}
+              screenListeners={({ route }) => ({
+                focus: () => console.log(route.name),
+              })}
+            />
+          );
+        });
+
+        const Navigation = createStaticNavigation(DrawerRoot);
+
+        export default function App() {
+          return <Navigation />;
+        }
+      `;
+
+      const tree = createTestTree(input);
+      const plugin = rehypeStaticToDynamic();
+      await plugin(tree);
+
+      const output = extractTransformedCode(tree);
+
+      const expected = dedent /* javascript */ `
+        import { createDrawerNavigator } from '@react-navigation/drawer';
+        import { NavigationContainer } from '@react-navigation/native';
+
+        const Drawer = createDrawerNavigator();
+
+        function DrawerRoot() {
+          return (
+            <Drawer.Navigator
+              screenOptions={({ route }) => ({
+                headerShown: false,
+                title: route.name,
+              })}
+              screenListeners={({ route }) => ({
+                state: () => console.log('static state'),
+                focus: () => console.log(route.name),
+              })}
+            >
+              <Drawer.Screen name="Home" component={HomeScreen} />
+            </Drawer.Navigator>
+          );
+        }
+
+        export default function App() {
+          return (
+            <NavigationContainer>
+              <DrawerRoot />
+            </NavigationContainer>
+          );
+        }
+      `;
+
+      assert.strictEqual(output, expected);
+    }
+  );
+
+  test(
+    'navigator with `.with(...)` merges static functions with wrapper objects',
+    async () => {
+      const input = dedent /* javascript */ `
+        import { createDrawerNavigator } from '@react-navigation/drawer';
+        import { createStaticNavigation } from '@react-navigation/native';
+
+        const DrawerRoot = createDrawerNavigator({
+          screenOptions: ({ route }) => ({
+            title: route.name,
+          }),
+          screenListeners: ({ route }) => ({
+            state: () => console.log(route.name),
+          }),
+          screens: {
+            Home: HomeScreen,
+          },
+        }).with(({ Navigator }) => {
+          return (
+            <Navigator
+              screenOptions={{
+                headerShown: false,
+              }}
+              screenListeners={{
+                focus: () => console.log('dynamic focus'),
+              }}
+            />
+          );
+        });
+
+        const Navigation = createStaticNavigation(DrawerRoot);
+
+        export default function App() {
+          return <Navigation />;
+        }
+      `;
+
+      const tree = createTestTree(input);
+      const plugin = rehypeStaticToDynamic();
+      await plugin(tree);
+
+      const output = extractTransformedCode(tree);
+
+      const expected = dedent /* javascript */ `
+        import { createDrawerNavigator } from '@react-navigation/drawer';
+        import { NavigationContainer } from '@react-navigation/native';
+
+        const Drawer = createDrawerNavigator();
+
+        function DrawerRoot() {
+          return (
+            <Drawer.Navigator
+              screenOptions={({ route }) => ({
+                title: route.name,
+                headerShown: false,
+              })}
+              screenListeners={({ route }) => ({
+                state: () => console.log(route.name),
+                focus: () => console.log('dynamic focus'),
+              })}
+            >
+              <Drawer.Screen name="Home" component={HomeScreen} />
+            </Drawer.Navigator>
+          );
+        }
+
+        export default function App() {
+          return (
+            <NavigationContainer>
+              <DrawerRoot />
+            </NavigationContainer>
+          );
+        }
+      `;
+
+      assert.strictEqual(output, expected);
+    }
+  );
+
+  test(
+    'navigator with `.with(...)` merges screenOptions and screenListeners when both are functions',
+    async () => {
+      const input = dedent /* javascript */ `
+        import { createDrawerNavigator } from '@react-navigation/drawer';
+        import { createStaticNavigation } from '@react-navigation/native';
+
+        const DrawerRoot = createDrawerNavigator({
+          screenOptions: ({ route }) => ({
+            title: route.name,
+          }),
+          screenListeners: ({ route }) => ({
+            state: () => console.log(route.name),
+          }),
+          screens: {
+            Home: HomeScreen,
+          },
+        }).with(({ Navigator }) => {
+          return (
+            <Navigator
+              screenOptions={({ navigation }) => ({
+                headerRight: () => null,
+              })}
+              screenListeners={({ navigation }) => ({
+                focus: () => navigation.goBack(),
+              })}
+            />
+          );
+        });
+
+        const Navigation = createStaticNavigation(DrawerRoot);
+
+        export default function App() {
+          return <Navigation />;
+        }
+      `;
+
+      const tree = createTestTree(input);
+      const plugin = rehypeStaticToDynamic();
+      await plugin(tree);
+
+      const output = extractTransformedCode(tree);
+
+      const expected = dedent /* javascript */ `
+        import { createDrawerNavigator } from '@react-navigation/drawer';
+        import { NavigationContainer } from '@react-navigation/native';
+
+        const Drawer = createDrawerNavigator();
+
+        function DrawerRoot() {
+          return (
+            <Drawer.Navigator
+              screenOptions={({ route, navigation }) => ({
+                title: route.name,
+                headerRight: () => null,
+              })}
+              screenListeners={({ route, navigation }) => ({
+                state: () => console.log(route.name),
+                focus: () => navigation.goBack(),
+              })}
+            >
+              <Drawer.Screen name="Home" component={HomeScreen} />
+            </Drawer.Navigator>
+          );
+        }
+
+        export default function App() {
+          return (
+            <NavigationContainer>
+              <DrawerRoot />
+            </NavigationContainer>
+          );
+        }
+      `;
+
+      assert.strictEqual(output, expected);
+    }
+  );
 
   test('drawer navigator', async () => {
     const input = dedent /* javascript */ `

@@ -67,6 +67,7 @@ type NavigatorInfo = {
   navigatorConstName: string;
   type: string;
   config: t.ObjectExpression;
+  withCallback?: t.FunctionExpression | t.ArrowFunctionExpression;
   comments: CommentWithMarkers[];
   trailingComments: CommentWithMarkers[];
   index: number;
@@ -100,6 +101,12 @@ type Replacement = {
 };
 
 type CommentArrayKey = 'comments' | 'leadingComments' | 'trailingComments';
+
+type NavigatorCallInfo = {
+  type: string;
+  config: t.ObjectExpression;
+  withCallback?: t.FunctionExpression | t.ArrowFunctionExpression;
+};
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -417,27 +424,23 @@ export async function convertStaticToDynamic(code: string): Promise<string> {
       path.node.body.forEach((node, index) => {
         if (t.isVariableDeclaration(node)) {
           node.declarations.forEach((declarator) => {
-            if (
-              t.isCallExpression(declarator.init) &&
-              t.isIdentifier(declarator.init.callee) &&
-              declarator.init.callee.name.startsWith('create') &&
-              declarator.init.callee.name.endsWith('Navigator') &&
-              declarator.init.arguments.length > 0 &&
-              t.isObjectExpression(declarator.init.arguments[0])
-            ) {
+            const navigatorCallInfo = getNavigatorCallInfo(declarator.init);
+
+            if (navigatorCallInfo) {
               if (!t.isIdentifier(declarator.id)) {
                 return;
               }
 
               const navigatorVariable = declarator.id.name; // e.g., "MyStack"
-              const navigatorType = declarator.init.callee.name; // e.g., "createStackNavigator"
-              const config = declarator.init.arguments[0];
+              const { type: navigatorType, config, withCallback } =
+                navigatorCallInfo;
 
               navigatorInfos.push({
                 originalName: navigatorVariable,
                 navigatorConstName: '',
                 type: navigatorType,
                 config: config,
+                withCallback,
                 // Store leading/trailing comments to preserve codeblock-focus
                 comments: getCommentArray(node, 'comments'),
                 trailingComments: getCommentArray(node, 'trailingComments'),
@@ -523,6 +526,7 @@ export async function convertStaticToDynamic(code: string): Promise<string> {
         navigatorConstName,
         type,
         config,
+        withCallback,
         comments,
         trailingComments,
         index,
@@ -546,7 +550,8 @@ export async function convertStaticToDynamic(code: string): Promise<string> {
       const navigatorComponent: CommentedNode = createNavigatorComponent(
         originalName, // function name: MyStack
         navigatorConstName, // Stack.Navigator, Stack.Screen
-        parsedConfig
+        parsedConfig,
+        withCallback
       );
 
       // Preserve all comments from the original node
@@ -636,6 +641,7 @@ export async function convertStaticToDynamic(code: string): Promise<string> {
 
   // Remove trailing newline that prettier adds
   formattedCode = formattedCode.trimEnd();
+  formattedCode = collapseBlankLinesInMergedNavigatorPropObjects(formattedCode);
 
   // Post-process: Inject tracked comments into the formatted code
   // We do this after Prettier to ensure comments aren't moved/removed during formatting
@@ -781,6 +787,47 @@ function getObjectPropertyValue(
     prop.generator,
     prop.async
   );
+}
+
+function getNavigatorCallInfo(
+  expression: t.Expression | null | undefined
+): NavigatorCallInfo | null {
+  if (
+    t.isCallExpression(expression) &&
+    t.isIdentifier(expression.callee) &&
+    expression.callee.name.startsWith('create') &&
+    expression.callee.name.endsWith('Navigator') &&
+    expression.arguments.length > 0 &&
+    t.isObjectExpression(expression.arguments[0])
+  ) {
+    return {
+      type: expression.callee.name,
+      config: expression.arguments[0],
+    };
+  }
+
+  if (
+    t.isCallExpression(expression) &&
+    t.isMemberExpression(expression.callee) &&
+    !expression.callee.computed &&
+    t.isIdentifier(expression.callee.property, { name: 'with' }) &&
+    expression.arguments.length > 0 &&
+    (t.isArrowFunctionExpression(expression.arguments[0]) ||
+      t.isFunctionExpression(expression.arguments[0]))
+  ) {
+    const navigatorCall = getNavigatorCallInfo(expression.callee.object);
+
+    if (!navigatorCall) {
+      return null;
+    }
+
+    return {
+      ...navigatorCall,
+      withCallback: expression.arguments[0],
+    };
+  }
+
+  return null;
 }
 
 /**
@@ -1122,6 +1169,150 @@ function attachCommentsToNode(
   node.comments = [...(node.comments || []), ...comments];
 }
 
+function getBraceDelta(line: string) {
+  let delta = 0;
+  let inSingleQuote = false;
+  let inDoubleQuote = false;
+  let inTemplateString = false;
+  let inBlockComment = false;
+  let isEscaped = false;
+
+  for (let index = 0; index < line.length; index += 1) {
+    const char = line[index];
+    const nextChar = line[index + 1];
+
+    if (isEscaped) {
+      isEscaped = false;
+      continue;
+    }
+
+    if (inBlockComment) {
+      if (char === '*' && nextChar === '/') {
+        inBlockComment = false;
+        index += 1;
+      }
+
+      continue;
+    }
+
+    if (inSingleQuote) {
+      if (char === '\\') {
+        isEscaped = true;
+      } else if (char === "'") {
+        inSingleQuote = false;
+      }
+
+      continue;
+    }
+
+    if (inDoubleQuote) {
+      if (char === '\\') {
+        isEscaped = true;
+      } else if (char === '"') {
+        inDoubleQuote = false;
+      }
+
+      continue;
+    }
+
+    if (inTemplateString) {
+      if (char === '\\') {
+        isEscaped = true;
+      } else if (char === '`') {
+        inTemplateString = false;
+      }
+
+      continue;
+    }
+
+    if (char === '/' && nextChar === '/') {
+      break;
+    }
+
+    if (char === '/' && nextChar === '*') {
+      inBlockComment = true;
+      index += 1;
+      continue;
+    }
+
+    if (char === "'") {
+      inSingleQuote = true;
+      continue;
+    }
+
+    if (char === '"') {
+      inDoubleQuote = true;
+      continue;
+    }
+
+    if (char === '`') {
+      inTemplateString = true;
+      continue;
+    }
+
+    if (char === '{') {
+      delta += 1;
+      continue;
+    }
+
+    if (char === '}') {
+      delta -= 1;
+    }
+  }
+
+  return delta;
+}
+
+function collapseBlankLinesInMergedNavigatorPropObjects(code: string) {
+  const lines = code.split('\n');
+  const result: string[] = [];
+  let insideMergedNavigatorPropObject = false;
+  let objectDepth = 0;
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index];
+    const trimmedLine = line.trim();
+
+    if (
+      !insideMergedNavigatorPropObject &&
+      (trimmedLine.startsWith('screenOptions={{') ||
+        trimmedLine.startsWith('screenListeners={{'))
+    ) {
+      insideMergedNavigatorPropObject = true;
+      objectDepth = 1;
+      result.push(line);
+      continue;
+    }
+
+    if (!insideMergedNavigatorPropObject) {
+      result.push(line);
+      continue;
+    }
+
+    if (trimmedLine === '' && objectDepth === 1) {
+      const nextNonEmptyLine = lines
+        .slice(index + 1)
+        .find((candidate) => candidate.trim() !== '');
+
+      if (nextNonEmptyLine && !nextNonEmptyLine.trim().startsWith('}}')) {
+        continue;
+      }
+    }
+
+    result.push(line);
+
+    if (trimmedLine.startsWith('}}')) {
+      insideMergedNavigatorPropObject = false;
+      objectDepth = 0;
+      continue;
+    }
+
+    objectDepth += getBraceDelta(line);
+  }
+
+  return result.join('\n');
+}
+
 /**
  * Find a property line within a context (searches lines before for context marker)
  */
@@ -1187,18 +1378,428 @@ function createJsxMemberExpression(componentName: string, memberName: string) {
  * Create JSX attributes from propInfo objects
  */
 function createJsxAttributesFromProps(propsObject: Record<string, PropInfo>) {
-  return Object.values(propsObject).map((propInfo) => {
-    if (t.isStringLiteral(propInfo.value)) {
-      return t.jsxAttribute(
-        t.jsxIdentifier(propInfo.key),
-        t.stringLiteral(propInfo.value.value)
+  return Object.values(propsObject).map((propInfo) =>
+    createJsxAttributeFromPropValue(propInfo.key, propInfo.value)
+  );
+}
+
+function createJsxAttributeFromPropValue(key: string, value: t.Expression) {
+  if (t.isStringLiteral(value)) {
+    return t.jsxAttribute(t.jsxIdentifier(key), t.stringLiteral(value.value));
+  }
+
+  return t.jsxAttribute(
+    t.jsxIdentifier(key),
+    t.jsxExpressionContainer(value)
+  );
+}
+
+function getJsxAttributeName(
+  attribute: t.JSXAttribute | t.JSXSpreadAttribute
+): string | null {
+  if (!t.isJSXAttribute(attribute) || !t.isJSXIdentifier(attribute.name)) {
+    return null;
+  }
+
+  return attribute.name.name;
+}
+
+function getJsxAttributeValueExpression(
+  attribute: t.JSXAttribute
+): t.Expression | null {
+  if (attribute.value === null) {
+    return t.booleanLiteral(true);
+  }
+
+  if (t.isStringLiteral(attribute.value)) {
+    return t.stringLiteral(attribute.value.value);
+  }
+
+  if (t.isJSXExpressionContainer(attribute.value)) {
+    return t.isExpression(attribute.value.expression)
+      ? attribute.value.expression
+      : null;
+  }
+
+  return null;
+}
+
+function cloneObjectMember(
+  property: t.ObjectExpression['properties'][number]
+): t.ObjectExpression['properties'][number] {
+  if (t.isObjectProperty(property)) {
+    return t.objectProperty(
+      t.cloneNode(property.key, true),
+      t.cloneNode(property.value, true),
+      property.computed,
+      property.shorthand
+    );
+  }
+
+  if (t.isObjectMethod(property)) {
+    return t.objectMethod(
+      property.kind,
+      t.cloneNode(property.key, true),
+      property.params.map((param) => t.cloneNode(param, true)),
+      t.cloneNode(property.body, true),
+      property.computed,
+      property.generator,
+      property.async
+    );
+  }
+
+  return t.spreadElement(t.cloneNode(property.argument, true));
+}
+
+function stripGeneratedNodeFormatting<T extends t.Node>(node: T): T {
+  recast.visit(node as any, {
+    visitNode(path: any) {
+      if (path.node && typeof path.node === 'object') {
+        delete path.node.loc;
+        delete path.node.start;
+        delete path.node.end;
+        delete path.node.extra;
+        delete path.node.original;
+        delete path.node.tokens;
+      }
+
+      this.traverse(path);
+    },
+  });
+
+  return node;
+}
+
+function parseGeneratedProgram(code: string) {
+  return recast.parse(code, {
+    parser: {
+      parse(source, options) {
+        return babelParser.parse(source, {
+          ...options,
+          tokens: true,
+          attachComment: true,
+        });
+      },
+    },
+  });
+}
+
+function parseObjectExpressionFromCode(code: string) {
+  const ast = parseGeneratedProgram(`(${code})`);
+  const [statement] = ast.program.body;
+
+  if (
+    !t.isExpressionStatement(statement) ||
+    !t.isObjectExpression(statement.expression)
+  ) {
+    throw new Error(
+      'rehype-static-to-dynamic: Expected generated code to parse as an object expression.'
+    );
+  }
+
+  return statement.expression;
+}
+
+function isFunctionValue(
+  value: t.Expression
+): value is t.FunctionExpression | t.ArrowFunctionExpression {
+  return t.isFunctionExpression(value) || t.isArrowFunctionExpression(value);
+}
+
+function createMergedObjectExpression(
+  staticObject: t.ObjectExpression,
+  dynamicObject: t.ObjectExpression
+) {
+  const mergedObject = stripGeneratedNodeFormatting(
+    t.objectExpression([
+      ...staticObject.properties.map(cloneObjectMember),
+      ...dynamicObject.properties.map(cloneObjectMember),
+    ])
+  );
+
+  return parseObjectExpressionFromCode(
+    recast.prettyPrint(mergedObject, {
+      tabWidth: 2,
+      quote: 'single',
+      trailingComma: true,
+    }).code
+  );
+}
+
+function getFunctionReturnedObjectExpression(
+  value: t.FunctionExpression | t.ArrowFunctionExpression
+) {
+  if (t.isObjectExpression(value.body)) {
+    return t.cloneNode(value.body, true);
+  }
+
+  if (
+    t.isBlockStatement(value.body) &&
+    value.body.body.length === 1 &&
+    t.isReturnStatement(value.body.body[0]) &&
+    value.body.body[0].argument &&
+    t.isObjectExpression(value.body.body[0].argument)
+  ) {
+    return t.cloneNode(value.body.body[0].argument, true);
+  }
+
+  return null;
+}
+
+function createPatternSignature(
+  pattern: t.LVal | t.VoidPattern | undefined
+): string | null {
+  if (!pattern || t.isVoidPattern(pattern)) {
+    return '';
+  }
+
+  return recast.print(pattern).code;
+}
+
+function mergeObjectPatterns(
+  staticPattern: t.ObjectPattern,
+  dynamicPattern: t.ObjectPattern
+) {
+  const properties = new Map<string, t.ObjectPattern['properties'][number]>();
+
+  for (const property of staticPattern.properties) {
+    if (t.isRestElement(property)) {
+      return null;
+    }
+
+    const keyName = getPropertyKeyName(property.key);
+
+    if (!keyName) {
+      return null;
+    }
+
+    properties.set(keyName, t.cloneNode(property, true));
+  }
+
+  for (const property of dynamicPattern.properties) {
+    if (t.isRestElement(property)) {
+      return null;
+    }
+
+    const keyName = getPropertyKeyName(property.key);
+
+    if (!keyName) {
+      return null;
+    }
+
+    const existingProperty = properties.get(keyName);
+
+    if (existingProperty) {
+      if (recast.print(existingProperty).code !== recast.print(property).code) {
+        return null;
+      }
+
+      continue;
+    }
+
+    properties.set(keyName, t.cloneNode(property, true));
+  }
+
+  return t.objectPattern(Array.from(properties.values()));
+}
+
+function getMergedFunctionParams(
+  staticValue: t.FunctionExpression | t.ArrowFunctionExpression,
+  dynamicValue?: t.FunctionExpression | t.ArrowFunctionExpression
+) {
+  if (!dynamicValue) {
+    return staticValue.params.map((param) => t.cloneNode(param, true));
+  }
+
+  if (staticValue.params.length === 0 && dynamicValue.params.length === 0) {
+    return [];
+  }
+
+  if (staticValue.params.length === 0) {
+    return dynamicValue.params.map((param) => t.cloneNode(param, true));
+  }
+
+  if (dynamicValue.params.length === 0) {
+    return staticValue.params.map((param) => t.cloneNode(param, true));
+  }
+
+  if (staticValue.params.length !== dynamicValue.params.length) {
+    return null;
+  }
+
+  if (staticValue.params.length !== 1 || dynamicValue.params.length !== 1) {
+    const staticSignature = createPatternSignature(staticValue.params[0]);
+    const dynamicSignature = createPatternSignature(dynamicValue.params[0]);
+
+    return staticSignature === dynamicSignature
+      ? staticValue.params.map((param) => t.cloneNode(param, true))
+      : null;
+  }
+
+  const [staticParam] = staticValue.params;
+  const [dynamicParam] = dynamicValue.params;
+
+  if (
+    staticParam &&
+    dynamicParam &&
+    t.isObjectPattern(staticParam) &&
+    t.isObjectPattern(dynamicParam)
+  ) {
+    const mergedPattern = mergeObjectPatterns(staticParam, dynamicParam);
+
+    return mergedPattern ? [mergedPattern] : null;
+  }
+
+  const staticSignature = createPatternSignature(staticParam);
+  const dynamicSignature = createPatternSignature(dynamicParam);
+
+  return staticSignature === dynamicSignature
+    ? [t.cloneNode(staticParam, true)]
+    : null;
+}
+
+function createMergedFunctionExpression(
+  params: t.FunctionParameter[],
+  staticObject: t.ObjectExpression,
+  dynamicObject: t.ObjectExpression
+) {
+  return t.arrowFunctionExpression(
+    params.map((param) => t.cloneNode(param, true)),
+    createMergedObjectExpression(staticObject, dynamicObject)
+  );
+}
+
+function createSpreadSourceExpression(
+  value: t.Expression,
+  argIdentifier: t.Identifier
+) {
+  if (isFunctionValue(value)) {
+    return t.callExpression(t.cloneNode(value, true), [
+      t.cloneNode(argIdentifier, true),
+    ]);
+  }
+
+  return t.cloneNode(value, true);
+}
+
+function createFallbackMergedFunctionExpression(
+  staticValue: t.Expression,
+  dynamicValue: t.Expression
+) {
+  const argIdentifier = t.identifier('args');
+
+  return t.arrowFunctionExpression(
+    [argIdentifier],
+    t.objectExpression([
+      t.spreadElement(createSpreadSourceExpression(staticValue, argIdentifier)),
+      t.spreadElement(createSpreadSourceExpression(dynamicValue, argIdentifier)),
+    ])
+  );
+}
+
+function createMergedNavigatorPropExpression(
+  staticValue: t.Expression,
+  dynamicValue: t.Expression
+) {
+  if (t.isObjectExpression(staticValue) && t.isObjectExpression(dynamicValue)) {
+    return createMergedObjectExpression(staticValue, dynamicValue);
+  }
+
+  if (isFunctionValue(staticValue) && t.isObjectExpression(dynamicValue)) {
+    const staticObject = getFunctionReturnedObjectExpression(staticValue);
+    const params = getMergedFunctionParams(staticValue);
+
+    if (staticObject && params) {
+      return createMergedFunctionExpression(params, staticObject, dynamicValue);
+    }
+
+    return createFallbackMergedFunctionExpression(staticValue, dynamicValue);
+  }
+
+  if (t.isObjectExpression(staticValue) && isFunctionValue(dynamicValue)) {
+    const dynamicObject = getFunctionReturnedObjectExpression(dynamicValue);
+    const params = getMergedFunctionParams(dynamicValue);
+
+    if (dynamicObject && params) {
+      return createMergedFunctionExpression(params, staticValue, dynamicObject);
+    }
+
+    return createFallbackMergedFunctionExpression(staticValue, dynamicValue);
+  }
+
+  if (isFunctionValue(staticValue) && isFunctionValue(dynamicValue)) {
+    const staticObject = getFunctionReturnedObjectExpression(staticValue);
+    const dynamicObject = getFunctionReturnedObjectExpression(dynamicValue);
+    const params = getMergedFunctionParams(staticValue, dynamicValue);
+
+    if (staticObject && dynamicObject && params) {
+      return createMergedFunctionExpression(params, staticObject, dynamicObject);
+    }
+
+    return createFallbackMergedFunctionExpression(staticValue, dynamicValue);
+  }
+
+  return t.objectExpression([
+    t.spreadElement(t.cloneNode(staticValue, true)),
+    t.spreadElement(t.cloneNode(dynamicValue, true)),
+  ]);
+}
+
+function mergeNavigatorAttributes(
+  staticProps: Record<string, PropInfo>,
+  dynamicAttributes: (t.JSXAttribute | t.JSXSpreadAttribute)[]
+) {
+  const staticPropsByKey = new Map(
+    Object.values(staticProps).map((propInfo) => [propInfo.key, propInfo])
+  );
+  const consumedStaticProps = new Set<string>();
+
+  const mergedDynamicAttributes = dynamicAttributes.map((attribute) => {
+    if (!t.isJSXAttribute(attribute)) {
+      return t.cloneNode(attribute, true);
+    }
+
+    const attributeName = getJsxAttributeName(attribute);
+
+    if (!attributeName) {
+      return t.cloneNode(attribute, true);
+    }
+
+    const staticProp = staticPropsByKey.get(attributeName);
+
+    if (!staticProp) {
+      return t.cloneNode(attribute, true);
+    }
+
+    consumedStaticProps.add(attributeName);
+
+    if (
+      (attributeName === 'screenOptions' ||
+        attributeName === 'screenListeners') &&
+      getJsxAttributeValueExpression(attribute)
+    ) {
+      return createJsxAttributeFromPropValue(
+        attributeName,
+        createMergedNavigatorPropExpression(
+          staticProp.value,
+          getJsxAttributeValueExpression(attribute)!
+        )
       );
     }
-    return t.jsxAttribute(
-      t.jsxIdentifier(propInfo.key),
-      t.jsxExpressionContainer(propInfo.value)
-    );
+
+    return t.cloneNode(attribute, true);
   });
+
+  const remainingStaticAttributes = Object.values(staticProps)
+    .filter((propInfo) => !consumedStaticProps.has(propInfo.key))
+    .map((propInfo) =>
+      createJsxAttributeFromPropValue(
+        propInfo.key,
+        t.cloneNode(propInfo.value, true)
+      )
+    );
+
+  return [...remainingStaticAttributes, ...mergedDynamicAttributes];
 }
 
 /**
@@ -1234,6 +1835,164 @@ function createScreenElement(
     [],
     true
   );
+}
+
+function createNavigatorChildren(
+  componentName: string,
+  config: ParsedNavigatorConfig
+) {
+  const screenElements = [];
+
+  if (Object.keys(config.groups).length > 0) {
+    Object.entries(config.groups).forEach(([groupKey, groupConfig]) => {
+      const groupProps = [
+        t.jsxAttribute(
+          t.jsxIdentifier('navigationKey'),
+          t.stringLiteral(groupKey)
+        ),
+        ...createJsxAttributesFromProps(groupConfig.groupProps),
+      ];
+
+      const groupScreenElements = [];
+
+      Object.entries(groupConfig.screens).forEach(
+        ([screenName, screenConfig]) => {
+          groupScreenElements.push(t.jsxText('\n    '));
+          groupScreenElements.push(
+            createScreenElement(componentName, screenName, screenConfig)
+          );
+        }
+      );
+
+      groupScreenElements.push(t.jsxText('\n  '));
+
+      const groupElement = t.jsxElement(
+        t.jsxOpeningElement(
+          createJsxMemberExpression(componentName, 'Group'),
+          groupProps
+        ),
+        t.jsxClosingElement(createJsxMemberExpression(componentName, 'Group')),
+        groupScreenElements,
+        false
+      );
+
+      screenElements.push(t.jsxText('\n  '));
+      screenElements.push(groupElement);
+    });
+  }
+
+  Object.entries(config.screens).forEach(([screenName, screenConfig]) => {
+    screenElements.push(t.jsxText('\n  '));
+    screenElements.push(
+      createScreenElement(componentName, screenName, screenConfig)
+    );
+  });
+
+  screenElements.push(t.jsxText('\n'));
+
+  return screenElements;
+}
+
+function createNavigatorElement(
+  componentName: string,
+  navigatorProps: (t.JSXAttribute | t.JSXSpreadAttribute)[],
+  screenElements: (t.JSXText | t.JSXElement)[]
+) {
+  return t.jsxElement(
+    t.jsxOpeningElement(
+      createJsxMemberExpression(componentName, 'Navigator'),
+      navigatorProps
+    ),
+    t.jsxClosingElement(createJsxMemberExpression(componentName, 'Navigator')),
+    screenElements,
+    false
+  );
+}
+
+function getNavigatorBindingName(
+  withCallback: t.FunctionExpression | t.ArrowFunctionExpression
+) {
+  const [firstParam] = withCallback.params;
+  const param =
+    firstParam && t.isAssignmentPattern(firstParam)
+      ? firstParam.left
+      : firstParam;
+
+  if (!param || !t.isObjectPattern(param)) {
+    throw new Error(
+      'rehype-static-to-dynamic: Expected `.with(...)` callback to receive `{ Navigator }`.'
+    );
+  }
+
+  for (const property of param.properties) {
+    if (
+      t.isObjectProperty(property) &&
+      getPropertyKeyName(property.key) === 'Navigator'
+    ) {
+      if (t.isIdentifier(property.value)) {
+        return property.value.name;
+      }
+
+      if (
+        t.isAssignmentPattern(property.value) &&
+        t.isIdentifier(property.value.left)
+      ) {
+        return property.value.left.name;
+      }
+    }
+  }
+
+  throw new Error(
+    'rehype-static-to-dynamic: Expected `.with(...)` callback to destructure `Navigator`.'
+  );
+}
+
+function createWithNavigatorComponentBody(
+  componentName: string,
+  config: ParsedNavigatorConfig,
+  withCallback: t.FunctionExpression | t.ArrowFunctionExpression
+) {
+  const navigatorBindingName = getNavigatorBindingName(withCallback);
+  const screenElements = createNavigatorChildren(componentName, config);
+  const body = t.isBlockStatement(withCallback.body)
+    ? t.cloneNode(withCallback.body, true)
+    : t.blockStatement([
+        t.returnStatement(t.cloneNode(withCallback.body, true)),
+      ]);
+
+  let replacementCount = 0;
+
+  recast.visit(body as any, {
+    visitJSXElement(path: any) {
+      if (
+        t.isJSXIdentifier(path.node.openingElement.name) &&
+        path.node.openingElement.name.name === navigatorBindingName
+      ) {
+        replacementCount += 1;
+        path.replace(
+          createNavigatorElement(
+            componentName,
+            mergeNavigatorAttributes(
+              config.navigatorProps,
+              path.node.openingElement.attributes
+            ),
+            screenElements
+          )
+        );
+        return false;
+      }
+
+      this.traverse(path);
+    },
+  });
+
+  if (replacementCount === 0) {
+    throw new Error(
+      'rehype-static-to-dynamic: Expected `.with(...)` callback to render `<Navigator />`.'
+    );
+  }
+
+  return body;
 }
 
 /**
@@ -1488,84 +2247,25 @@ function parseNavigatorConfig(
 function createNavigatorComponent(
   functionName: string,
   componentName: string,
-  config: ParsedNavigatorConfig
+  config: ParsedNavigatorConfig,
+  withCallback?: t.FunctionExpression | t.ArrowFunctionExpression
 ) {
-  // Add all navigator-level props dynamically
-  const navigatorProps = createJsxAttributesFromProps(config.navigatorProps);
-
-  // Create screen elements
-  const screenElements = [];
-
-  // Handle groups if they exist
-  if (Object.keys(config.groups).length > 0) {
-    Object.entries(config.groups).forEach(([groupKey, groupConfig]) => {
-      const groupProps = [
-        t.jsxAttribute(
-          t.jsxIdentifier('navigationKey'),
-          t.stringLiteral(groupKey)
+  const body = withCallback
+    ? createWithNavigatorComponentBody(componentName, config, withCallback)
+    : t.blockStatement([
+        t.returnStatement(
+          createNavigatorElement(
+            componentName,
+            createJsxAttributesFromProps(config.navigatorProps),
+            createNavigatorChildren(componentName, config)
+          )
         ),
-        ...createJsxAttributesFromProps(groupConfig.groupProps),
-      ];
+      ]);
 
-      // Create screens for this group
-      const groupScreenElements = [];
-
-      Object.entries(groupConfig.screens).forEach(
-        ([screenName, screenConfig]) => {
-          groupScreenElements.push(t.jsxText('\n    '));
-          groupScreenElements.push(
-            createScreenElement(componentName, screenName, screenConfig)
-          );
-        }
-      );
-
-      groupScreenElements.push(t.jsxText('\n  '));
-
-      // Create the Group element
-      const groupElement = t.jsxElement(
-        t.jsxOpeningElement(
-          createJsxMemberExpression(componentName, 'Group'),
-          groupProps
-        ),
-        t.jsxClosingElement(createJsxMemberExpression(componentName, 'Group')),
-        groupScreenElements,
-        false
-      );
-
-      screenElements.push(t.jsxText('\n  '));
-      screenElements.push(groupElement);
-    });
-  }
-
-  // Handle standalone screens (not in groups)
-  Object.entries(config.screens).forEach(([screenName, screenConfig]) => {
-    screenElements.push(t.jsxText('\n  '));
-    screenElements.push(
-      createScreenElement(componentName, screenName, screenConfig)
-    );
-  });
-
-  screenElements.push(t.jsxText('\n'));
-
-  // Create Navigator element
-  const navigatorElement = t.jsxElement(
-    t.jsxOpeningElement(
-      createJsxMemberExpression(componentName, 'Navigator'),
-      navigatorProps
-    ),
-    t.jsxClosingElement(createJsxMemberExpression(componentName, 'Navigator')),
-    screenElements,
-    false
-  );
-
-  // Create return statement with parentheses for multiline JSX
-  const returnStatement = t.returnStatement(navigatorElement);
-
-  // Create function declaration
   const functionDeclaration = t.functionDeclaration(
     t.identifier(functionName),
     [],
-    t.blockStatement([returnStatement])
+    body
   );
 
   return functionDeclaration;
