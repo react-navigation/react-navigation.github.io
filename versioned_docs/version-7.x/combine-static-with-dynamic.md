@@ -162,13 +162,10 @@ const FeedTabs = createBottomTabNavigator({
 });
 ```
 
-To use the `FeedTabs` navigator for the `Feed` screen, we need to use the `createComponentForStaticNavigation` function:
+To use the `FeedTabs` navigator for the `Feed` screen, we need to get a component from the static navigator using the `getComponent()` method:
 
 ```js
-import { createComponentForStaticNavigation } from '@react-navigation/native';
-
-// highlight-next-line
-const FeedScreen = createComponentForStaticNavigation(FeedTabs, 'Feed');
+const FeedScreen = FeedTabs.getComponent();
 ```
 
 In addition, we can generate the TypeScript types for the `FeedTabs` navigator and use it in the types of `RootStack` without needing to write them manually:

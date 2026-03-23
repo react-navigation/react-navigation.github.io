@@ -213,6 +213,64 @@ The above example will only render the `HomeScreen` if the user is logged in.
 
 For more details, see [Authentication flow](auth-flow.md?config=static).
 
+### Passing dynamic props
+
+To pass dynamic props to the navigator created using `createXNavigator`, you can pass a component to the `with` method:
+
+```js
+const Drawer = createDrawerNavigator({
+  screenOptions: {
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: 'tomato',
+    },
+  },
+  screens: {
+    Home: HomeScreen,
+  },
+}).with(({ Navigator }) => {
+  const isLargeScreen = useIsLargeScreen();
+
+  return (
+    <Navigator
+      screenOptions={{
+        drawerType: isLargeScreen ? 'permanent' : 'front',
+      }}
+    />
+  );
+});
+```
+
+The component passed to `with` receives the `Navigator` component to render as a prop. It accepts any props supported by the navigator.
+
+The `screenOptions` and `screenListeners` props passed to the component will be shallow merged with the ones defined in the static config if any.
+
+### Creating a component
+
+The `getComponent()` method on the object returned by `createXNavigator` functions returns a React component to render for the navigator:
+
+```js
+const RootStackNavigator = RootStack.getComponent();
+```
+
+This is useful when [combining static and dynamic APIs](combine-static-with-dynamic.md), and not intended to be used directly if you're using static configuration for your whole app.
+
+## `createPathConfigForStaticNavigation`
+
+The `createPathConfigForStaticNavigation` function takes the static config returned by `createXNavigator` functions and returns a path config object that can be used within the linking config.
+
+```js
+const config = {
+  screens: {
+    Home: {
+      screens: createPathConfigForStaticNavigation(HomeTabs),
+    },
+  },
+};
+```
+
+This is intended to be used when [combining static and dynamic APIs](combine-static-with-dynamic.md) for more details.
+
 ## `createStaticNavigation`
 
 The `createStaticNavigation` function takes the static config returned by `createXNavigator` functions and returns a React component to render:
@@ -251,34 +309,3 @@ Similar to `NavigationContainer`, the component returned by `createStaticNavigat
    See [How does automatic path generation work](configuring-links.md#how-does-automatic-path-generation-work) for more details.
 
 By default, linking is enabled in static configuration with automatic path generation. It needs to be explicitly disabled by passing `enabled: false` to the `linking` prop if you don't want linking support.
-
-## `createComponentForStaticNavigation`
-
-The `createComponentForStaticNavigation` function takes the static config returned by `createXNavigator` functions and returns a React component to render. The second argument is a name for the component that'd be used in React DevTools:
-
-```js
-const RootStackNavigator = createComponentForStaticNavigation(
-  RootStack,
-  'RootNavigator'
-);
-```
-
-The returned component doesn't take any props. All of the configuration is inferred from the static config. It's essentially the same as defining a component using the dynamic API.
-
-This looks similar to `createStaticNavigation` however they are very different. When using static configuration, you'd never use this function directly. The only time you'd use this is if you're migrating away from static configuration and want to reuse existing code you wrote instead of rewriting it to the dynamic API. See [Combining static and dynamic APIs](combine-static-with-dynamic.md) for more details.
-
-## `createPathConfigForStaticNavigation`
-
-The `createPathConfigForStaticNavigation` function takes the static config returned by `createXNavigator` functions and returns a path config object that can be used within the linking config.
-
-```js
-const config = {
-  screens: {
-    Home: {
-      screens: createPathConfigForStaticNavigation(HomeTabs),
-    },
-  },
-};
-```
-
-Similar to `createComponentForStaticNavigation`, this is intended to be used when migrating away from static configuration. See [Combining static and dynamic APIs](combine-static-with-dynamic.md) for more details.
