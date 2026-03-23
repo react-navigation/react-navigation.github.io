@@ -265,11 +265,29 @@ function CustomDrawerContent({ navigation }) {
 
 To use the custom component, we need to pass it in the `drawerContent` prop:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+createDrawerNavigator({
+  drawerContent: (props) => <CustomDrawerContent {...props} />,
+  screens: {
+    // ...
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 ```js
 <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
   {/* screens */}
 </Drawer.Navigator>
 ```
+
+</TabItem>
+</Tabs>
 
 ### Options
 
@@ -307,15 +325,43 @@ Background color for the active item in the drawer.
 
 ![Drawer active background color](/assets/navigators/drawer/drawer-active-background-color.png)
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
 ```js
-screenOptions={{
-  drawerActiveTintColor: 'white',
-  drawerActiveBackgroundColor: '#003CB3',
-  drawerLabelStyle: {
-    color: 'white',
+createDrawerNavigator({
+  screenOptions: {
+    drawerActiveTintColor: 'white',
+    drawerActiveBackgroundColor: '#003CB3',
+    drawerLabelStyle: {
+      color: 'white',
+    },
   },
-}}
+  screens: {
+    // ...
+  },
+});
 ```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+<Drawer.Navigator
+  screenOptions={{
+    drawerActiveTintColor: 'white',
+    drawerActiveBackgroundColor: '#003CB3',
+    drawerLabelStyle: {
+      color: 'white',
+    },
+  }}
+>
+  {/* screens */}
+</Drawer.Navigator>
+```
+
+</TabItem>
+</Tabs>
 
 #### `drawerInactiveTintColor`
 
@@ -366,6 +412,26 @@ Style object for the wrapper view.
 
 Style object for the drawer component. You can pass a custom background color for a drawer or a custom width here.
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+createDrawerNavigator({
+  screenOptions: {
+    drawerStyle: {
+      backgroundColor: '#c6cbef',
+      width: 240,
+    },
+  },
+  screens: {
+    // ...
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 ```js
 <Drawer.Navigator
   screenOptions={{
@@ -378,6 +444,9 @@ Style object for the drawer component. You can pass a custom background color fo
   {/* screens */}
 </Drawer.Navigator>
 ```
+
+</TabItem>
+</Tabs>
 
 #### `drawerPosition`
 

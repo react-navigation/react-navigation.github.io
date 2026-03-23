@@ -804,6 +804,23 @@ With `custom` implementation, this accepts any style properties. With `native` i
 
 To show your screen under the tab bar, you can set the `position` style to absolute (only with `custom` implementation):
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+createBottomTabNavigator({
+  screenOptions: {
+    tabBarStyle: { position: 'absolute' },
+  },
+  screens: {
+    // ...
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 ```js
 <Tab.Navigator
   screenOptions={{
@@ -811,6 +828,9 @@ To show your screen under the tab bar, you can set the `position` style to absol
   }}
 >
 ```
+
+</TabItem>
+</Tabs>
 
 You also might need to add a bottom margin to your content if you have an absolutely positioned tab bar. React Navigation won't do it automatically. See [`useBottomTabBarHeight`](#usebottomtabbarheight) for more details.
 
@@ -822,8 +842,35 @@ Only supported with `custom` implementation.
 
 Example:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
 ```js
 import { BlurView } from 'expo-blur';
+import { StyleSheet } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+// ...
+
+createBottomTabNavigator({
+  screenOptions: {
+    tabBarStyle: { position: 'absolute' },
+    tabBarBackground: () => (
+      <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />
+    ),
+  },
+  screens: {
+    // ...
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+import { BlurView } from 'expo-blur';
+import { StyleSheet } from 'react-native';
 
 // ...
 
@@ -836,6 +883,9 @@ import { BlurView } from 'expo-blur';
   }}
 >
 ```
+
+</TabItem>
+</Tabs>
 
 When using `BlurView`, make sure to set `position: 'absolute'` in `tabBarStyle` as well. You'd also need to use [`useBottomTabBarHeight`](#usebottomtabbarheight) to add bottom padding to your content.
 

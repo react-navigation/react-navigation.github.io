@@ -263,11 +263,29 @@ function CustomDrawerContent({ navigation }) {
 
 To use the custom component, we need to pass it in the `drawerContent` prop:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+createDrawerNavigator({
+  drawerContent: (props) => <CustomDrawerContent {...props} />,
+  screens: {
+    // ...
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 ```js
 <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
   {/* screens */}
 </Drawer.Navigator>
 ```
+
+</TabItem>
+</Tabs>
 
 ### Options
 

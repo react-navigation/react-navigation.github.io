@@ -1076,6 +1076,28 @@ With these options, it's possible to build custom transition animations for scre
 
 Example:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+import { TransitionSpecs } from '@react-navigation/stack';
+
+// ...
+
+Profile: {
+  screen: Profile,
+  options: {
+    transitionSpec: {
+      open: TransitionSpecs.TransitionIOSSpec,
+      close: TransitionSpecs.TransitionIOSSpec,
+    },
+  },
+},
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 ```js
 import { TransitionSpecs } from '@react-navigation/stack';
 
@@ -1092,6 +1114,9 @@ import { TransitionSpecs } from '@react-navigation/stack';
   }}
 />;
 ```
+
+</TabItem>
+</Tabs>
 
 #### `CardStyleInterpolators`
 
@@ -1385,6 +1410,24 @@ A transparent modal is like a modal dialog which overlays the screen. The previo
 
 Example:
 
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+screens: {
+  Home: HomeStack,
+  Modal: {
+    screen: ModalScreen,
+    options: {
+      presentation: 'transparentModal',
+    },
+  },
+},
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
 ```js
 <Stack.Navigator>
   <Stack.Screen name="Home" component={HomeStack} />
@@ -1395,6 +1438,9 @@ Example:
   />
 </Stack.Navigator>
 ```
+
+</TabItem>
+</Tabs>
 
 Now, when you navigate to the `Modal` screen, it'll have a transparent background and the `Home` screen will be visible underneath.
 
