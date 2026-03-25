@@ -432,8 +432,11 @@ export async function convertStaticToDynamic(code: string): Promise<string> {
               }
 
               const navigatorVariable = declarator.id.name; // e.g., "MyStack"
-              const { type: navigatorType, config, withCallback } =
-                navigatorCallInfo;
+              const {
+                type: navigatorType,
+                config,
+                withCallback,
+              } = navigatorCallInfo;
 
               navigatorInfos.push({
                 originalName: navigatorVariable,
@@ -1388,10 +1391,7 @@ function createJsxAttributeFromPropValue(key: string, value: t.Expression) {
     return t.jsxAttribute(t.jsxIdentifier(key), t.stringLiteral(value.value));
   }
 
-  return t.jsxAttribute(
-    t.jsxIdentifier(key),
-    t.jsxExpressionContainer(value)
-  );
+  return t.jsxAttribute(t.jsxIdentifier(key), t.jsxExpressionContainer(value));
 }
 
 function getJsxAttributeName(
@@ -1692,7 +1692,9 @@ function createFallbackMergedFunctionExpression(
     [argIdentifier],
     t.objectExpression([
       t.spreadElement(createSpreadSourceExpression(staticValue, argIdentifier)),
-      t.spreadElement(createSpreadSourceExpression(dynamicValue, argIdentifier)),
+      t.spreadElement(
+        createSpreadSourceExpression(dynamicValue, argIdentifier)
+      ),
     ])
   );
 }
@@ -1733,7 +1735,11 @@ function createMergedNavigatorPropExpression(
     const params = getMergedFunctionParams(staticValue, dynamicValue);
 
     if (staticObject && dynamicObject && params) {
-      return createMergedFunctionExpression(params, staticObject, dynamicObject);
+      return createMergedFunctionExpression(
+        params,
+        staticObject,
+        dynamicObject
+      );
     }
 
     return createFallbackMergedFunctionExpression(staticValue, dynamicValue);
