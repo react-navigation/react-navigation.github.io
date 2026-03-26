@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="container container-fluid">
         <div className="footer__bottom text--center">
           <div className="footer__copyright">
-            Copyright © 2024 React Navigation. Built with{' '}
+            Copyright © {new Date().getFullYear()} React Navigation. Built with{' '}
             {links.map((link, index) => (
               <React.Fragment key={link.href}>
                 {index > 0 && ', '}
