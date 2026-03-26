@@ -213,12 +213,12 @@ The above example will only render the `HomeScreen` if the user is logged in.
 
 For more details, see [Authentication flow](auth-flow.md?config=static).
 
-### Passing dynamic props
+### Passing dynamic props or wrapping the navigator
 
-To pass dynamic props to the navigator created using `createXNavigator`, you can pass a component to the `with` method:
+To pass dynamic props or wrap the navigator created using `createXNavigator`, you can pass a component to the `with` method:
 
 ```js
-const Drawer = createDrawerNavigator({
+const MyDrawer = createDrawerNavigator({
   screenOptions: {
     headerTintColor: 'white',
     headerStyle: {
@@ -243,7 +243,82 @@ const Drawer = createDrawerNavigator({
 
 The component passed to `with` receives the `Navigator` component to render as a prop. It accepts any props supported by the navigator.
 
-The `screenOptions` and `screenListeners` props passed to the component will be shallow merged with the ones defined in the static config if any.
+To provide dynamic values for individual screen options, you can use the callback for [`screenOptions`](screen-options.md#screenoptions-prop-on-the-navigator) and use `route.name` to return different options for different screens:
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+}).with(({ Navigator }) => {
+  const user = useUser();
+
+  return (
+    <Navigator
+      screenOptions={({ route }) => {
+        if (route.name === 'Profile') {
+          return {
+            headerRight:
+              user.id === route.params.userId
+                ? () => <EditButton />
+                : undefined,
+          };
+        }
+
+        return {};
+      }}
+    />
+  );
+});
+```
+
+Similarly, the [`screenListeners`](navigation-events.md#screenlisteners-prop-on-the-navigator) prop can be used to provide dynamic listeners for the screens:
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+}).with(({ Navigator }) => {
+  return (
+    <Navigator
+      screenListeners={({ route }) => {
+        if (route.name === 'Profile') {
+          return {
+            focus: () => {
+              console.log(`Profile of user ${route.params.userId} focused`);
+            },
+          };
+        }
+
+        return {};
+      }}
+    />
+  );
+});
+```
+
+The `screenOptions` and `screenListeners` props passed to the component will be shallow merged with the ones defined in the static config if they are defined in both places.
+
+You can also wrap the `Navigator` component in a provider or any additional UI components:
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+  },
+}).with(({ Navigator }) => {
+  return (
+    <MyProvider>
+      <Navigator />
+    </MyProvider>
+  );
+});
+```
+
+Here, the `Navigator` component is wrapped inside a `MyProvider` component.
 
 ### Creating a component
 

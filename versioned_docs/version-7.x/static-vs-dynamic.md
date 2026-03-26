@@ -286,58 +286,9 @@ In the dynamic API, it's possible to wrap the navigator component. For example, 
 
 In most cases, it can be done in following ways with the static API:
 
-### `layout` on parent screen
-
-If the navigator is nested inside a screen in another navigator, you can use the [`layout`](screen.md#layout) property on the screen so it wraps the screen's content which includes the navigator:
-
-```js title="Dynamic API"
-const Tab = createBottomTabNavigator();
-
-function HomeTabs() {
-  return (
-    <SomeProvider>
-      <Tab.Navigator>
-        <Tab.Screen name="Feed" component={FeedScreen} />
-        <Tab.Screen name="Notifications" component={NotificationsScreen} />
-      </Tab.Navigator>
-    </SomeProvider>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-function RootStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeTabs} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
-}
-```
-
-```js title="Static API"
-const HomeTabs = createBottomTabNavigator({
-  screens: {
-    Feed: FeedScreen,
-    Notifications: NotificationsScreen,
-  },
-});
-
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Home: {
-      screen: HomeTabs,
-      layout: ({ children }) => <SomeProvider>{children}</SomeProvider>,
-    },
-    Profile: ProfileScreen,
-  },
-});
-```
-
 ### `layout` on the navigator
 
-You can also use the [`layout`](navigator.md#layout) property on the navigator to wrap the navigator's content:
+If your wrapper doesn't access the navigator's state, you can use the [`layout`](navigator.md#layout) property on the navigator to wrap the navigator's content:
 
 ```js title="Dynamic API"
 function RootStack() {
@@ -360,9 +311,189 @@ const RootStack = createNativeStackNavigator({
 });
 ```
 
-A navigator's layout is rendered as part of the navigator and has access to the navigator's state and options, whereas a wrapper component, or a layout on a parent screen don't.
+A navigator's layout is rendered as part of the navigator and has access to the navigator's state and options, whereas a wrapper component shown in the dynamic API example does not. So hooks such as [`useNavigationState`](use-navigation-state.md) used in `SomeProvider` will return the parent navigator's state in the dynamic example, but the current navigator's state in the static example.
 
-With both approaches, you can access the route params of the parent screen with the [`useRoute`](use-route.md) hook.
+Using `layout` is the recommended approach if your wrapper doesn't need the parent navigator's state. Otherwise, see the next approach.
+
+### `with` method on the navigator
+
+The [`with`](static-configuration.md#passing-dynamic-props-or-wrapping-the-navigator) method on the navigator returned by `createXNavigator` is the direct equivalent of wrapping the navigator component:
+
+```js title="Dynamic API"
+const Stack = createNativeStackNavigator();
+
+function RootStack() {
+  return (
+    <SomeProvider>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      </Stack.Navigator>
+    </SomeProvider>
+  );
+}
+```
+
+```js title="Static API"
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+}).with(({ Navigator }) => (
+  <SomeProvider>
+    <Navigator />
+  </SomeProvider>
+));
+```
+
+The component passed to `with` receives the `Navigator` component to render as a prop and is equivalent to the navigator component in the dynamic API.
+
+## Dynamic navigator props
+
+In the dynamic API, you can use hooks inside the navigator component to pass dynamic props to the navigator. In the static API, the [`with`](static-configuration.md#passing-dynamic-props-or-wrapping-the-navigator) method on the navigator lets you do the same:
+
+```js title="Dynamic API"
+const Stack = createNativeStackNavigator();
+
+function RootStack() {
+  const isLargeScreen = useIsLargeScreen();
+
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: isLargeScreen,
+      }}
+    >
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
+  );
+}
+```
+
+```js title="Static API"
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+}).with(({ Navigator }) => {
+  const isLargeScreen = useIsLargeScreen();
+
+  return (
+    <Navigator
+      screenOptions={{
+        headerShown: isLargeScreen,
+      }}
+    />
+  );
+});
+```
+
+The component passed to `with` receives the `Navigator` component as a prop. You can pass any props supported by the navigator to the `Navigator` component.
+
+To provide dynamic values for individual screen options, you can use the callback for [`screenOptions`](screen-options.md#screenoptions-prop-on-the-navigator) and use `route.name` to return different options for different screens:
+
+```js title="Dynamic API"
+const Stack = createNativeStackNavigator();
+
+function RootStack() {
+  const user = useUser();
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={({ route }) => ({
+          headerRight:
+            user.id === route.params.userId ? () => <EditButton /> : undefined,
+        })}
+      />
+    </Stack.Navigator>
+  );
+}
+```
+
+```js title="Static API"
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+}).with(({ Navigator }) => {
+  const user = useUser();
+
+  return (
+    <Navigator
+      screenOptions={({ route }) => {
+        if (route.name === 'Profile') {
+          return {
+            headerRight:
+              user.id === route.params.userId
+                ? () => <EditButton />
+                : undefined,
+          };
+        }
+
+        return {};
+      }}
+    />
+  );
+});
+```
+
+Similarly, the [`screenListeners`](navigation-events.md#screenlisteners-prop-on-the-navigator) prop can be used to provide dynamic listeners:
+
+```js title="Dynamic API"
+const Stack = createNativeStackNavigator();
+
+function RootStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        listeners={({ route }) => ({
+          focus: () => {
+            console.log(`Profile of user ${route.params.userId} focused`);
+          },
+        })}
+      />
+    </Stack.Navigator>
+  );
+}
+```
+
+```js title="Static API"
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+}).with(({ Navigator }) => {
+  return (
+    <Navigator
+      screenListeners={({ route }) => {
+        if (route.name === 'Profile') {
+          return {
+            focus: () => {
+              console.log(`Profile of user ${route.params.userId} focused`);
+            },
+          };
+        }
+
+        return {};
+      }}
+    />
+  );
+});
+```
+
+The `screenOptions` and `screenListeners` props passed to the `Navigator` component will be shallow merged with the ones defined in the static config if they are defined in both places.
 
 ## Deep linking
 
