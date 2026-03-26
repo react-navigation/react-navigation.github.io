@@ -1068,9 +1068,7 @@ describe('rehype-static-to-dynamic', () => {
     assert.strictEqual(output, expected);
   });
 
-  test(
-    'navigator with `.with(...)` merges screenOptions and screenListeners from plain objects',
-    async () => {
+  test('navigator with `.with(...)` merges screenOptions and screenListeners from plain objects', async () => {
     const input = dedent /* javascript */ `
       import { useWindowDimensions } from 'react-native';
       import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -1155,14 +1153,11 @@ describe('rehype-static-to-dynamic', () => {
       }
     `;
 
-      assert.strictEqual(output, expected);
-    }
-  );
+    assert.strictEqual(output, expected);
+  });
 
-  test(
-    'navigator with `.with(...)` merges static objects with wrapper functions',
-    async () => {
-      const input = dedent /* javascript */ `
+  test('navigator with `.with(...)` merges static objects with wrapper functions', async () => {
+    const input = dedent /* javascript */ `
         import { createDrawerNavigator } from '@react-navigation/drawer';
         import { createStaticNavigation } from '@react-navigation/native';
 
@@ -1196,13 +1191,13 @@ describe('rehype-static-to-dynamic', () => {
         }
       `;
 
-      const tree = createTestTree(input);
-      const plugin = rehypeStaticToDynamic();
-      await plugin(tree);
+    const tree = createTestTree(input);
+    const plugin = rehypeStaticToDynamic();
+    await plugin(tree);
 
-      const output = extractTransformedCode(tree);
+    const output = extractTransformedCode(tree);
 
-      const expected = dedent /* javascript */ `
+    const expected = dedent /* javascript */ `
         import { createDrawerNavigator } from '@react-navigation/drawer';
         import { NavigationContainer } from '@react-navigation/native';
 
@@ -1234,14 +1229,11 @@ describe('rehype-static-to-dynamic', () => {
         }
       `;
 
-      assert.strictEqual(output, expected);
-    }
-  );
+    assert.strictEqual(output, expected);
+  });
 
-  test(
-    'navigator with `.with(...)` merges static functions with wrapper objects',
-    async () => {
-      const input = dedent /* javascript */ `
+  test('navigator with `.with(...)` merges static functions with wrapper objects', async () => {
+    const input = dedent /* javascript */ `
         import { createDrawerNavigator } from '@react-navigation/drawer';
         import { createStaticNavigation } from '@react-navigation/native';
 
@@ -1275,13 +1267,13 @@ describe('rehype-static-to-dynamic', () => {
         }
       `;
 
-      const tree = createTestTree(input);
-      const plugin = rehypeStaticToDynamic();
-      await plugin(tree);
+    const tree = createTestTree(input);
+    const plugin = rehypeStaticToDynamic();
+    await plugin(tree);
 
-      const output = extractTransformedCode(tree);
+    const output = extractTransformedCode(tree);
 
-      const expected = dedent /* javascript */ `
+    const expected = dedent /* javascript */ `
         import { createDrawerNavigator } from '@react-navigation/drawer';
         import { NavigationContainer } from '@react-navigation/native';
 
@@ -1313,14 +1305,11 @@ describe('rehype-static-to-dynamic', () => {
         }
       `;
 
-      assert.strictEqual(output, expected);
-    }
-  );
+    assert.strictEqual(output, expected);
+  });
 
-  test(
-    'navigator with `.with(...)` merges screenOptions and screenListeners when both are functions',
-    async () => {
-      const input = dedent /* javascript */ `
+  test('navigator with `.with(...)` merges screenOptions and screenListeners when both are functions', async () => {
+    const input = dedent /* javascript */ `
         import { createDrawerNavigator } from '@react-navigation/drawer';
         import { createStaticNavigation } from '@react-navigation/native';
 
@@ -1354,13 +1343,13 @@ describe('rehype-static-to-dynamic', () => {
         }
       `;
 
-      const tree = createTestTree(input);
-      const plugin = rehypeStaticToDynamic();
-      await plugin(tree);
+    const tree = createTestTree(input);
+    const plugin = rehypeStaticToDynamic();
+    await plugin(tree);
 
-      const output = extractTransformedCode(tree);
+    const output = extractTransformedCode(tree);
 
-      const expected = dedent /* javascript */ `
+    const expected = dedent /* javascript */ `
         import { createDrawerNavigator } from '@react-navigation/drawer';
         import { NavigationContainer } from '@react-navigation/native';
 
@@ -1392,9 +1381,8 @@ describe('rehype-static-to-dynamic', () => {
         }
       `;
 
-      assert.strictEqual(output, expected);
-    }
-  );
+    assert.strictEqual(output, expected);
+  });
 
   test('drawer navigator', async () => {
     const input = dedent /* javascript */ `
