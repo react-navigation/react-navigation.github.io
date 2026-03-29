@@ -166,24 +166,18 @@ In `AndroidManifest.xml`, set `android:enableOnBackInvokedCallback` to `false` i
 
 When using React Navigation, you configure [**navigators**](glossary-of-terms.md#navigator) in your app. Navigators handle transitions between screens and provide UI such as headers, tab bars, etc.
 
-:::info
-
-When you use a navigator (such as stack navigator), you'll need to follow that navigator's installation instructions for any additional dependencies.
-
-:::
-
 There are 2 ways to configure navigators:
 
-### Static configuration
+<div class="featured-actions">
 
-The static configuration API lets you write your navigation configuration in an object. This reduces boilerplate and simplifies TypeScript types and deep linking. Some aspects can still be changed dynamically.
+- **[Static configuration](hello-react-navigation.md?config=static)**
 
-This is the **recommended way** to set up your app. If you need more flexibility later, you can mix and match with the dynamic configuration.
+  <span class="recommended-badge">Recommended</span>
 
-Continue to ["Hello React Navigation"](hello-react-navigation.md?config=static) to start writing some code with the static API.
+  Object-based configuration with automatic TypeScript types and deep linking. Supports static screen lists with dynamic navigator options.
 
-### Dynamic configuration
+- **[Dynamic configuration](hello-react-navigation.md?config=dynamic)**
 
-The dynamic configuration API lets you write your navigation configuration using React components that can change at runtime based on state or props. This offers more flexibility but requires significantly more boilerplate for TypeScript types, deep linking, etc.
+  Component-based configuration with significantly more boilerplate. Supports dynamic screen lists and navigator options.
 
-Continue to ["Hello React Navigation"](hello-react-navigation.md?config=dynamic) to start writing some code with the dynamic API.
+</div>
