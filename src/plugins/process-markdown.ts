@@ -25,11 +25,9 @@ export type ProcessedMarkdown = {
  * - Strips MDX import statements
  * - Transforms <Tabs>/<TabItem> into labeled sections
  * - Converts static2dynamic code fences into static + dynamic sections
- * - Strips code fence meta attributes (snack, name, static2dynamic, npm2yarn, etc.)
- * - Converts Docusaurus admonitions (:::note, :::warning, etc.) to blockquotes
  * - Converts HTML <img> tags to markdown image syntax
  * - Converts HTML <video> tags to plain video URLs
- * - Strips decorative HTML divs (device-frame, image-grid, feature-grid, etc.)
+ * - Strips HTML div wrappers while keeping their content
  * - Cleans up extra blank lines
  */
 export async function processMarkdown(
@@ -38,34 +36,17 @@ export async function processMarkdown(
   const { data: frontmatter, content: contentWithoutFrontmatter } =
     parseFrontmatter(rawContent);
 
-  let result = contentWithoutFrontmatter;
+  let result = await transformStatic2Dynamic(contentWithoutFrontmatter);
 
-  // Strip MDX import statements
-  result = stripImports(result);
-
-  // Transform <Tabs>/<TabItem> blocks (handles nesting)
-  result = transformTabs(result);
-
-  // Transform static2dynamic code fences
-  result = await transformStatic2Dynamic(result);
-
-  // Strip code fence meta attributes
-  result = stripCodeFenceMeta(result);
-
-  // Convert admonitions to blockquotes
-  result = convertAdmonitions(result);
-
-  // Convert HTML media tags and strip decorative divs,
-  // protecting code fences from modification
   result = withProtectedCodeFences(result, (text) => {
+    text = stripImports(text);
+    text = transformTabs(text);
     text = convertImageTags(text);
     text = convertVideoTags(text);
-    text = stripDecorativeDivs(text);
+    text = stripDivWrappers(text);
+    text = collapseExtraBlankLines(text);
     return text;
   });
-
-  // Clean up extra blank lines (max 2 consecutive)
-  result = result.replace(/\n{3,}/g, '\n\n');
 
   return { frontmatter, content: result.trim() };
 }
@@ -131,7 +112,6 @@ export function parseFrontmatter(fileContent: string): {
 
       let value = parts.slice(1).join(':').trim();
 
-      // Remove surrounding quotes if present
       if (
         (value.startsWith("'") && value.endsWith("'")) ||
         (value.startsWith('"') && value.endsWith('"'))
@@ -150,13 +130,9 @@ export function parseFrontmatter(fileContent: string): {
  * Remove MDX import lines (e.g. `import Tabs from '@theme/Tabs'`)
  */
 function stripImports(content: string): string {
-  return (
-    content
-      // Single-line: import X from 'y'
-      .replace(/^import\s+.*?from\s+['"].*?['"];?\s*$/gm, '')
-      // Multi-line: import { ... } from 'y'
-      .replace(/^import\s*\{[^}]*\}\s*from\s*['"].*?['"];?\s*$/gm, '')
-  );
+  return content
+    .replace(/^import\s+.*?from\s+['"].*?['"];?\s*$/gm, '')
+    .replace(/^import\s*\{[^}]*\}\s*from\s*['"].*?['"];?\s*$/gm, '');
 }
 
 /**
@@ -164,8 +140,6 @@ function stripImports(content: string): string {
  * Handles nested tabs by processing innermost first.
  */
 function transformTabs(content: string): string {
-  // Process repeatedly until no more <Tabs> blocks remain
-  // (handles nesting by resolving innermost first)
   let result = content;
   let iterations = 0;
   const maxIterations = 20;
@@ -192,7 +166,6 @@ function transformTabs(content: string): string {
  * This ensures nested tabs are resolved before their parents.
  */
 function findInnermostTabsBlock(content: string): TabsBlock | null {
-  // Find all <Tabs opening positions
   const tabsOpenRegex = /<Tabs[^>]*>/g;
   let lastInnermost: { openStart: number; openEnd: number } | null = null;
   let match: RegExpExecArray | null;
@@ -201,7 +174,6 @@ function findInnermostTabsBlock(content: string): TabsBlock | null {
     const openStart = match.index;
     const openEnd = openStart + match[0].length;
 
-    // Check if there's another <Tabs before the closing </Tabs>
     const closingPos = content.indexOf('</Tabs>', openEnd);
 
     if (closingPos === -1) {
@@ -210,7 +182,6 @@ function findInnermostTabsBlock(content: string): TabsBlock | null {
 
     const between = content.slice(openEnd, closingPos);
 
-    // If no nested <Tabs inside, this is an innermost block
     if (!between.includes('<Tabs')) {
       lastInnermost = { openStart, openEnd };
       break;
@@ -256,7 +227,6 @@ function parseTabItems(content: string): TabItem[] {
     });
   }
 
-  // If regex didn't match (e.g. label comes after value), try alternative order
   if (items.length === 0) {
     const altRegex =
       /<TabItem\s+[^>]*?(?:label=['"]([^'"]+)['"]|value=['"]([^'"]+)['"])[^>]*>([\s\S]*?)(?=<\/TabItem>)/g;
@@ -281,7 +251,6 @@ function renderTabsAsMarkdown(items: TabItem[]): string {
     return '';
   }
 
-  // If only one tab, just render its content without label
   if (items.length === 1) {
     return items[0].content;
   }
@@ -296,7 +265,6 @@ function renderTabsAsMarkdown(items: TabItem[]): string {
  * Generates both static and dynamic versions.
  */
 async function transformStatic2Dynamic(content: string): Promise<string> {
-  // Match code fences with static2dynamic in meta
   const fenceRegex =
     /^(```\w*)\s+([^\n]*static2dynamic[^\n]*)\n([\s\S]*?)^```$/gm;
   const matches: {
@@ -317,7 +285,6 @@ async function transformStatic2Dynamic(content: string): Promise<string> {
     });
   }
 
-  // Process all static2dynamic blocks in parallel
   const conversions = await Promise.all(
     matches.map(async (m) => {
       try {
@@ -334,7 +301,6 @@ async function transformStatic2Dynamic(content: string): Promise<string> {
           replacement: `${staticSection}\n\n${dynamicSection}`,
         };
       } catch {
-        // If conversion fails, keep the original code without static2dynamic meta
         const cleanMeta = cleanCodeFenceMeta(m.meta);
         const metaSuffix = cleanMeta ? ` ${cleanMeta}` : '';
 
@@ -355,32 +321,11 @@ async function transformStatic2Dynamic(content: string): Promise<string> {
   return result;
 }
 
-/**
- * Clean code fence meta by removing MDX-specific attributes.
- * Removes: static2dynamic, snack, npm2yarn, name="...", dependencies="..."
- */
 function cleanCodeFenceMeta(meta: string): string {
   return meta
     .replace(/\bstatic2dynamic\b/g, '')
-    .replace(/\bsnack\b/g, '')
-    .replace(/\bnpm2yarn\b/g, '')
-    .replace(/\bname=["'][^"']*["']/g, '')
-    .replace(/\bdependencies=["'][^"']*["']/g, '')
     .trim()
     .replace(/\s+/g, ' ');
-}
-
-/**
- * Strip meta attributes from all code fences (not just static2dynamic ones).
- */
-function stripCodeFenceMeta(content: string): string {
-  return content.replace(
-    /^(```\w*)[ \t]+([^\n]*?)$/gm,
-    (_match, lang: string, meta: string) => {
-      const cleaned = cleanCodeFenceMeta(meta);
-      return cleaned ? `${lang} ${cleaned}` : lang;
-    }
-  );
 }
 
 /**
@@ -396,16 +341,23 @@ function withProtectedCodeFences(
 
   const placeholder = (i: number) => `\x00CODEFENCE${i}\x00`;
 
-  const protected_ = content.replace(/^```[^\n]*\n[\s\S]*?^```$/gm, (match) => {
-    fences.push(match);
-    return placeholder(fences.length - 1);
-  });
+  const protectedContent = content.replace(
+    /^((?:`{3,}|~{3,}))[^\n]*\n[\s\S]*?^\1[ \t]*$/gm,
+    (match) => {
+      fences.push(match);
+      return placeholder(fences.length - 1);
+    }
+  );
 
-  const transformed = transform(protected_);
+  const transformed = transform(protectedContent);
 
   return transformed.replace(/\x00CODEFENCE(\d+)\x00/g, (_match, i) => {
     return fences[Number(i)];
   });
+}
+
+function collapseExtraBlankLines(content: string): string {
+  return content.replace(/\n{3,}/g, '\n\n');
 }
 
 /**
@@ -439,10 +391,10 @@ function convertVideoTags(content: string): string {
 }
 
 /**
- * Strip decorative HTML divs, keeping their inner content.
+ * Strip HTML divs, keeping their inner content.
  * Processes innermost divs first to handle nesting.
  */
-function stripDecorativeDivs(content: string): string {
+function stripDivWrappers(content: string): string {
   let result = content;
   let iterations = 0;
   const maxIterations = 50;
@@ -514,27 +466,4 @@ function stripInnermostDiv(content: string): string {
   }
 
   return content;
-}
-
-/**
- * Convert Docusaurus admonitions (:::note, :::warning, etc.) to blockquotes.
- *
- * :::warning          >  > **Warning:**
- * Content here   =>   >  > Content here
- * ::::               >
- */
-function convertAdmonitions(content: string): string {
-  return content.replace(
-    /^:::(\w+)\s*\n([\s\S]*?)^:::+\s*$/gm,
-    (_match, type: string, body: string) => {
-      const label = type.charAt(0).toUpperCase() + type.slice(1);
-      const trimmedBody = body.trim();
-      const quoted = trimmedBody
-        .split('\n')
-        .map((line) => `> ${line}`)
-        .join('\n');
-
-      return `> **${label}:**\n>\n${quoted}`;
-    }
-  );
 }

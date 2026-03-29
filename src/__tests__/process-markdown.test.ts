@@ -115,7 +115,7 @@ describe('processMarkdown', () => {
     assert.ok(result.includes('Only content.'));
   });
 
-  test('transforms static2dynamic code fences', async () => {
+  test('transforms static2dynamic code fences and removes only that tag', async () => {
     const input = dedent`
       Before code.
 
@@ -148,18 +148,14 @@ describe('processMarkdown', () => {
 
     assert.ok(result.includes('**Static:**'));
     assert.ok(result.includes('**Dynamic:**'));
-    // The dynamic version should have NavigationContainer
     assert.ok(result.includes('NavigationContainer'));
-    // Meta attributes should be stripped from fence lines
     assert.ok(!result.includes('static2dynamic'));
-    // Check that 'snack' doesn't appear in fence meta (it may appear in code content)
-    assert.ok(!result.match(/^```\w*.*snack/m));
-    assert.ok(!result.match(/^```\w*.*name=/m));
+    assert.ok(result.match(/^```js name="Example" snack$/m));
     assert.ok(result.includes('Before code.'));
     assert.ok(result.includes('After code.'));
   });
 
-  test('strips code fence meta attributes', async () => {
+  test('preserves code fence meta attributes', async () => {
     const input = dedent`
       \`\`\`js name="Test" snack
       const x = 1;
@@ -172,16 +168,10 @@ describe('processMarkdown', () => {
 
     const { content: result } = await processMarkdown(input);
 
-    assert.ok(!result.includes('name='));
-    assert.ok(!result.includes('snack'));
-    assert.ok(!result.includes('npm2yarn'));
-    assert.ok(result.includes('```js'));
-    assert.ok(result.includes('```bash'));
-    assert.ok(result.includes('const x = 1;'));
-    assert.ok(result.includes('npm install something'));
+    assert.strictEqual(result, input);
   });
 
-  test('converts admonitions to blockquotes', async () => {
+  test('preserves admonitions', async () => {
     const input = dedent`
       Some text.
 
@@ -196,14 +186,10 @@ describe('processMarkdown', () => {
 
     const { content: result } = await processMarkdown(input);
 
-    assert.ok(!result.includes(':::'));
-    assert.ok(result.includes('> **Warning:**'));
-    assert.ok(result.includes('> This is a warning.'));
-    assert.ok(result.includes('Some text.'));
-    assert.ok(result.includes('More text.'));
+    assert.strictEqual(result, input);
   });
 
-  test('converts info admonitions', async () => {
+  test('preserves info admonitions', async () => {
     const input = dedent`
       :::info
 
@@ -214,16 +200,15 @@ describe('processMarkdown', () => {
 
     const { content: result } = await processMarkdown(input);
 
-    assert.ok(result.includes('> **Info:**'));
-    assert.ok(result.includes('> Some info here.'));
+    assert.strictEqual(result, input);
   });
 
-  test('cleans up extra blank lines', async () => {
+  test('cleans up extra blank lines in plain markdown', async () => {
     const input = 'Line 1.\n\n\n\n\nLine 2.';
     const { content: result } = await processMarkdown(input);
 
     assert.ok(!result.includes('\n\n\n'));
-    assert.ok(result.includes('Line 1.\n\nLine 2.'));
+    assert.strictEqual(result, 'Line 1.\n\nLine 2.');
   });
 
   test('handles Tabs with code blocks inside', async () => {
@@ -382,7 +367,7 @@ describe('processMarkdown', () => {
     assert.ok(result.includes('/assets/fundamentals/navigate.mp4'));
   });
 
-  test('strips nested decorative divs', async () => {
+  test('strips nested divs', async () => {
     const input = dedent`
       <div className="outer">
       <div className="inner">
@@ -449,6 +434,84 @@ describe('processMarkdown', () => {
     assert.ok(result.includes('<img src="/logo.png" alt="Logo" />'));
     assert.ok(result.includes('<source src="/intro.mp4" />'));
     assert.ok(result.includes('</div>'));
+  });
+
+  test('preserves import statements inside code fences', async () => {
+    const input = dedent`
+      \`\`\`js
+      import { AppRegistry } from 'react-native-web';
+      import ReactDOMServer from 'react-dom/server';
+      import App from './src/App';
+
+      const html = ReactDOMServer.renderToString(App);
+      \`\`\`
+    `;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.strictEqual(result, input);
+  });
+
+  test('preserves admonitions inside code fences', async () => {
+    const input = dedent`
+      \`\`\`md
+      :::warning
+      Keep this as markdown source.
+      :::
+      \`\`\`
+    `;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.strictEqual(result, input);
+  });
+
+  test('preserves Tabs markup inside code fences', async () => {
+    const input = dedent`
+      \`\`\`mdx
+      <Tabs>
+      <TabItem value="static" label="Static">
+
+      Static content.
+
+      </TabItem>
+      </Tabs>
+      \`\`\`
+    `;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.strictEqual(result, input);
+  });
+
+  test('preserves tilde-fenced markdown source', async () => {
+    const input = dedent`
+      ~~~md
+      :::warning
+      Keep this as markdown source.
+      :::
+      ~~~
+    `;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.strictEqual(result, input);
+  });
+
+  test('strips generic divs and keeps their content', async () => {
+    const input = dedent`
+      <div id="callout">
+
+      **Important** raw HTML wrapper.
+
+      </div>
+    `;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.ok(!result.includes('<div'));
+    assert.ok(!result.includes('</div>'));
+    assert.ok(result.includes('**Important** raw HTML wrapper.'));
   });
 
   test('strips frontmatter and returns parsed data', async () => {
