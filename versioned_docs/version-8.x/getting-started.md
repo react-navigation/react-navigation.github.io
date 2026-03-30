@@ -157,9 +157,7 @@ There are 2 ways to configure navigators:
 
 <div class="featured-actions">
 
-- **[Static configuration](hello-react-navigation.md?config=static)**
-
-  <span class="recommended-badge">Recommended</span>
+- **[Static configuration](hello-react-navigation.md?config=static)** <span class="recommended-badge">Recommended</span>
 
   Object-based configuration with automatic TypeScript types and deep linking. Supports static screen lists with dynamic navigator options.
 

@@ -1260,7 +1260,7 @@ code {
     }
 
     &:hover,
-    &:focus-within {
+    &:has(> p:first-child a:focus-visible) {
       box-shadow: var(--ifm-global-shadow-md);
 
       &::before {
@@ -1275,27 +1275,14 @@ code {
 
   li > p {
     margin: 0;
+    margin-bottom: calc(var(--ifm-spacing-vertical) / 2);
   }
 
-  li > p + p {
-    margin-top: calc(var(--ifm-spacing-vertical) / 2);
-  }
-
-  li:has(> .recommended-badge) {
+  li > p:first-child {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    column-gap: 0.75rem;
-    row-gap: calc(var(--ifm-spacing-vertical) / 2);
-  }
-
-  li:has(> .recommended-badge) > p:first-child {
-    min-width: 0;
-  }
-
-  li:has(> .recommended-badge) > .recommended-badge + p {
-    flex-basis: 100%;
-    margin-top: 0;
+    gap: 0.75rem;
   }
 
   li > p:first-child a {
