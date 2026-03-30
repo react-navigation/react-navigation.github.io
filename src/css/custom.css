@@ -1314,15 +1314,6 @@ code {
     --recommended-badge-background: hsl(var(--ifm-color-info-hue), 70%, 96.8%);
     --recommended-badge-border: hsl(var(--ifm-color-info-hue), 56%, 85.5%);
 
-    [data-theme='dark'] & {
-      --recommended-badge-background: hsl(
-        var(--ifm-color-info-hue),
-        46%,
-        11.5%
-      );
-      --recommended-badge-border: hsl(var(--ifm-color-info-hue), 40%, 36%);
-    }
-
     position: relative;
     z-index: 1;
     display: inline-block;
@@ -1336,6 +1327,11 @@ code {
     white-space: nowrap;
     pointer-events: none;
   }
+}
+
+[data-theme='dark'] .featured-actions > ul .recommended-badge {
+  --recommended-badge-background: hsl(var(--ifm-color-info-hue), 46%, 11.5%);
+  --recommended-badge-border: hsl(var(--ifm-color-info-hue), 40%, 36%);
 }
 
 .image-grid > p {
