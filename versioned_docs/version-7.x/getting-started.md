@@ -36,11 +36,7 @@ You can use the [React Navigation template](https://github.com/react-navigation/
 npx create-expo-app@latest --template react-navigation/template
 ```
 
-See the project's `README.md` for more information on how to get started.
-
-If you created a new project using the template, you can skip the installation steps below and move on to ["Hello React Navigation"](hello-react-navigation.md?config=static).
-
-Otherwise, you can follow the instructions below to install React Navigation into your existing project.
+This creates a new Expo project with React Navigation already installed and configured. See the project's `README.md` for more information, then move on to [Setting up React Navigation](#setting-up-react-navigation).
 
 ## Installation
 
