@@ -33,5 +33,7 @@ Provides simple HOCs that map react-navigation props to your screen components d
 ## react-navigation-header-motion
 
 Provides building blocks for scroll-driven animated headers in React Native. It can be used with React Navigation to create collapsible, progress-driven headers, including headers rendered by the navigator itself via bridging components.
-[Documentation](https://pawicao.github.io/react-native-header-motion/)
+
+[Documentation](https://pawicao.github.io/react-native-header-motion)
+
 [Repository](https://github.com/pawicao/react-native-header-motion)
