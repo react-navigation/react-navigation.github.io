@@ -29,3 +29,9 @@ Helps you to render buttons in the navigation bar and handle the styling so you 
 Provides simple HOCs that map react-navigation props to your screen components directly - ie. instead of `const user = this.props.route.params.activeUser`, you'd write `const user = this.props.activeUser`.
 
 [Repository](https://github.com/vonovak/react-navigation-props-mapper)
+
+## react-navigation-header-motion
+
+Provides building blocks for scroll-driven animated headers in React Native. It can be used with React Navigation to create collapsible, progress-driven headers, including headers rendered by the navigator itself via bridging components.
+[Documentation](https://pawicao.github.io/react-native-header-motion/)
+[Repository](https://github.com/pawicao/react-native-header-motion)
