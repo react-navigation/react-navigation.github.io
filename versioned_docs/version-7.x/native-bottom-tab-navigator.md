@@ -119,20 +119,138 @@ The [`tabBarIcon`](#tabbaricon) and [`tabBarLabel`](#tabbarlabel) options will o
 
 The `tabBarSystemItem` option has special styling and behavior when set to `search` on iOS 26+.
 
-Additionally, when the `search` tab is selected, the tab bar transforms into a search field if the screen in the tab navigator or a nested [native stack navigator](native-stack-navigator.md) has [`headerSearchBarOptions`](native-stack-navigator.md#headersearchbaroptions) configured and the native header is shown with [`headerShown: true`](native-stack-navigator.md#headershown). This won't work if a custom header is provided with the `header` option.
+Additionally, when the `search` tab is selected, the tab bar transforms into a search field if:
+
+- The screen has a nested [native stack navigator](native-stack-navigator.md)
+- The focused screen in the nested native stack has [`headerSearchBarOptions`](native-stack-navigator.md#headersearchbaroptions)
+
+This won't work if `headerSearchBarOptions` is set on the tab screen itself.
 
 Example:
 
-```js
-tabBarSystemItem: 'search',
-headerShown: true,
-headerSearchBarOptions: {
-  placeholder: 'Search',
-},
+```js name="Search Tab on iOS 26" snack static2dynamic
+import * as React from 'react';
+import { Platform, View, Text, FlatList } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const DATA = [
+  'Apple',
+  'Banana',
+  'Cherry',
+  'Durian',
+  'Elderberry',
+  'Fig',
+  'Grape',
+];
+
+function HomeScreen() {
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+function FruitsListScreen() {
+  const [searchText, setSearchText] = React.useState('');
+
+  const filteredData = DATA.filter((item) =>
+    item.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  const navigation = useNavigation('FruitsList');
+
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerSearchBarOptions: {
+        placeholder: 'Search fruits',
+        onChange: (e) => {
+          setSearchText(e.nativeEvent.text);
+        },
+      },
+    });
+  }, [navigation]);
+
+  return (
+    <FlatList
+      data={filteredData}
+      keyExtractor={(item) => item}
+      renderItem={({ item }) => (
+        <View
+          style={{ padding: 16, borderBottomWidth: 1, borderColor: '#ccc' }}
+        >
+          <Text>{item}</Text>
+        </View>
+      )}
+    />
+  );
+}
+
+// codeblock-focus-start
+const SearchStack = createNativeStackNavigator({
+  screens: {
+    FruitsList: {
+      screen: FruitsListScreen,
+      options: {
+        title: 'Search',
+        // highlight-start
+        headerSearchBarOptions: {
+          placeholder: 'Search fruits',
+        },
+        // highlight-end
+      },
+    },
+  },
+});
+
+const HomeTabs = createBottomTabNavigator({
+  screens: {
+    Home: {
+      screen: HomeScreen,
+      options: {
+        tabBarIcon: Platform.select({
+          ios: {
+            type: 'sfSymbol',
+            name: 'house',
+          },
+          android: {
+            type: 'materialSymbol',
+            name: 'home',
+          },
+        }),
+      },
+    },
+    Search: {
+      // highlight-next-line
+      screen: SearchStack,
+      options: {
+        // highlight-next-line
+        tabBarSystemItem: 'search',
+      },
+    },
+  },
+});
+// codeblock-focus-end
+
+const Navigation = createStaticNavigation(HomeTabs);
+
+export default function App() {
+  return <Navigation />;
+}
 ```
 
 <video playsInline autoPlay muted loop>
-
   <source src="/assets/navigators/bottom-tabs/highlights/search-tab.mp4" />
 </video>
 
