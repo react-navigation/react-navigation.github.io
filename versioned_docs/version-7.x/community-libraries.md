@@ -30,7 +30,7 @@ Provides simple HOCs that map react-navigation props to your screen components d
 
 [Repository](https://github.com/vonovak/react-navigation-props-mapper)
 
-## react-navigation-header-motion
+## react-native-header-motion
 
 Provides building blocks for scroll-driven animated headers in React Native. It can be used with React Navigation to create collapsible, progress-driven headers, including headers rendered by the navigator itself via bridging components.
 
