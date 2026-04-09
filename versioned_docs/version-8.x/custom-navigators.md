@@ -127,15 +127,12 @@ function TabNavigator({ tabBarStyle, contentStyle, ...rest }) {
       <View style={[{ flex: 1 }, contentStyle]}>
         {state.routes.map((route, i) => {
           return (
-            <View
+            <React.Activity
               key={route.key}
-              style={[
-                StyleSheet.absoluteFill,
-                { display: i === state.index ? 'flex' : 'none' },
-              ]}
+              mode={i === state.index ? 'visible' : 'hidden'}
             >
               {descriptors[route.key].render()}
-            </View>
+            </React.Activity>
           );
         })}
       </View>
@@ -337,15 +334,12 @@ function TabNavigator({ tabBarStyle, contentStyle, ...rest }: Props) {
       <View style={[{ flex: 1 }, contentStyle]}>
         {state.routes.map((route, i) => {
           return (
-            <View
+            <React.Activity
               key={route.key}
-              style={[
-                StyleSheet.absoluteFill,
-                { display: i === state.index ? 'flex' : 'none' },
-              ]}
+              mode={i === state.index ? 'visible' : 'hidden'}
             >
               {descriptors[route.key].render()}
-            </View>
+            </React.Activity>
           );
         })}
       </View>
