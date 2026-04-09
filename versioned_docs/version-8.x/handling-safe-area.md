@@ -29,6 +29,22 @@ b. Avoid hiding content or making it difficult to interact with by having it obs
 
 The guide covers different scenarios and best practices for handling safe areas keeping these goals in mind.
 
+## Edge-to-edge on Android
+
+On Android, edge-to-edge means that your app draws under translucent system bars, such as the status bar and navigation bar. This behavior is similar to iOS.
+
+Starting with [Android 15 (API level 35)](https://developer.android.com/about/versions/15/behavior-changes-15#edge-to-edge), apps that target API 35 are edge-to-edge by default when running on Android 15 or later. On [Android 16 (API level 36)](https://developer.android.com/about/versions/16/behavior-changes-16#edge-to-edge), opting out of edge-to-edge is no longer supported.
+
+React Native supports edge-to-edge configuration from [version 0.81](https://reactnative.dev/blog/2025/08/12/react-native-0.81). You can enable edge-to-edge for Android versions below 16 by setting the `edgeToEdgeEnabled` property in `android/gradle.properties`:
+
+```properties
+edgeToEdgeEnabled=true
+```
+
+We recommend enabling edge-to-edge for Android to ensure that safe area is handled consistently across platforms and Android versions.
+
+This React Native option currently only works when your app uses the default `ReactActivity`, as documented in the [React Native Android template](https://github.com/react-native-community/template/blob/0.81.0/template/android/gradle.properties). If your app hosts React Native in a custom Android `Activity` or `Fragment`, you need to configure edge-to-edge in native Android code yourself.
+
 ## The `SafeAreaView` component
 
 While React Native exports a [`SafeAreaView`](https://reactnative.dev/docs/safeareaview) component, it is not adequate:
@@ -249,7 +265,8 @@ export default function Screen() {
 
 ## Summary
 
+- Enable to edge-to-edge on Android by setting `edgeToEdgeEnabled=true` in `android/gradle.properties` for safe area to work consistently
 - Use [`useSafeAreaInsets`](https://appandflow.github.io/react-native-safe-area-context/api/use-safe-area-insets) hook from `react-native-safe-area-context` instead of [`SafeAreaView`](https://reactnative.dev/docs/safeareaview) component
-- For `ScrollView`, `FlatList`, `SectionList`, etc. on iOS, prefer `contentInsetAdjustmentBehavior="automatic"`
+- For `ScrollView`, `FlatList`, `SectionList`, etc. on iOS, prefer [`contentInsetAdjustmentBehavior="automatic"`](https://reactnative.dev/docs/scrollview#contentinsetadjustmentbehavior-ios)
 - Don't wrap your whole app in `SafeAreaView`, instead apply the styles to content inside your screens
 - Apply only specific insets using the `useSafeAreaInsets` hook for more control
