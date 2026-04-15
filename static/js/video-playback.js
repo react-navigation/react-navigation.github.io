@@ -37,14 +37,24 @@ function setupPlayer(video) {
 
   video.style.transition = 'opacity 150ms';
 
-  if (video.readyState >= 2) {
+  const show = () => {
     video.style.opacity = '1';
+  };
+
+  if (video.readyState >= 2) {
+    show();
   } else {
     video.style.opacity = '0';
 
-    video.addEventListener('loadeddata', () => {
-      video.style.opacity = '1';
-    });
+    video.addEventListener('loadeddata', show);
+    video.addEventListener('canplay', show);
+    video.addEventListener('canplaythrough', show);
+
+    if (video.readyState >= 2) {
+      show();
+    }
+
+    setTimeout(show, 1000);
   }
 }
 
