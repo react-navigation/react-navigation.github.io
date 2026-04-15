@@ -25,33 +25,13 @@ function setupPlayer(video) {
   container.appendChild(video);
   container.appendChild(icon);
 
-  const feature = video.closest('.feature-grid li');
-
-  if (feature != null) {
-    video.removeAttribute('loop');
-    video.loop = false;
-
-    feature.addEventListener('mouseenter', () => {
-      video.removeEventListener('ended', pause);
-      video.loop = true;
-
+  container.addEventListener('click', () => {
+    if (video.paused) {
       play();
-    });
-
-    feature.addEventListener('mouseleave', () => {
-      video.loop = false;
-
-      video.addEventListener('ended', pause, { once: true });
-    });
-  } else {
-    container.addEventListener('click', () => {
-      if (video.paused) {
-        play();
-      } else {
-        pause();
-      }
-    });
-  }
+    } else {
+      pause();
+    }
+  });
 
   container.style.borderRadius = window.getComputedStyle(video).borderRadius;
 
