@@ -169,16 +169,8 @@ import {
 
 // ...
 
-export function createMyNavigator(config) {
-  return createNavigatorFactory(TabNavigator)(config);
-}
+export const createMyNavigator = createNavigatorFactory(MyNavigator);
 ```
-
-:::note
-
-We can also do `export const createMyNavigator = createNavigatorFactory(MyNavigator)` directly instead of wrapping in another function. However, the wrapper function is necessary to have proper [TypeScript support](#type-checking-navigators) for the navigator.
-
-:::
 
 Then it can be used like this:
 
@@ -225,22 +217,17 @@ import {
 } from 'react-native';
 import {
   createNavigatorFactory,
+  createScreenFactory,
   CommonActions,
   type DefaultNavigatorOptions,
+  type NavigationProp,
   type NavigatorTypeBagBase,
   type ParamListBase,
-  type StaticConfig,
-  type StaticParamList,
-  type StaticScreenConfig,
-  type StaticScreenConfigLinking,
-  type StaticScreenConfigScreen,
   type TabActionHelpers,
   type TabNavigationState,
   TabRouter,
   type TabRouterOptions,
-  type TypedNavigator,
   useNavigationBuilder,
-  type NavigationProp,
 } from '@react-navigation/native';
 
 // Additional props accepted by the view
@@ -347,48 +334,28 @@ function TabNavigator({ tabBarStyle, contentStyle, ...rest }: Props) {
   );
 }
 
-// Types required for type-checking the navigator
-type MyTabTypeBag<ParamList extends {}> = {
-  ParamList: ParamList;
-  State: TabNavigationState<ParamList>;
+// Type bag used for type-checking the navigator
+export interface MyTabTypeBag extends NavigatorTypeBagBase {
+  State: TabNavigationState<this['ParamList']>;
   ScreenOptions: MyNavigationOptions;
   EventMap: MyNavigationEventMap;
-  NavigationList: {
-    [RouteName in keyof ParamList]: MyNavigationProp<ParamList, RouteName>;
-  };
+  ActionHelpers: TabActionHelpers<this['ParamList']>;
   Navigator: typeof TabNavigator;
-};
-
-// The factory function with overloads for static and dynamic configuration
-export function createMyNavigator<
-  const ParamList extends ParamListBase,
->(): TypedNavigator<MyTabTypeBag<ParamList>, undefined>;
-export function createMyNavigator<
-  const Config extends StaticConfig<MyTabTypeBag<ParamListBase>>,
->(
-  config: Config
-): TypedNavigator<MyTabTypeBag<StaticParamList<{ config: Config }>>, Config>;
-export function createMyNavigator(config?: unknown) {
-  return createNavigatorFactory(TabNavigator)(config);
 }
+
+// The factory function for creating a navigator
+export const createMyNavigator =
+  createNavigatorFactory<MyTabTypeBag>(TabNavigator);
 
 // Helper function for creating screen config with proper types for static configuration
-export function createMyScreen<
-  const Linking extends StaticScreenConfigLinking,
-  const Screen extends StaticScreenConfigScreen,
->(
-  config: StaticScreenConfig<
-    Linking,
-    Screen,
-    TabNavigationState<ParamListBase>,
-    MyNavigationOptions,
-    MyNavigationEventMap,
-    MyNavigationProp<ParamListBase>
-  >
-) {
-  return config;
-}
+export const createMyScreen = createScreenFactory<MyTabTypeBag>();
 ```
+
+:::info
+
+The type bag must use an `interface` instead of `type` for `this` to work. It also needs to be exported in the public API for type inference to work.
+
+:::
 
 ## Extending Navigators
 

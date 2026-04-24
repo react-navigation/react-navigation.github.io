@@ -165,9 +165,9 @@ This is technically not a breaking change. It's not required to use this API and
 
 See [Static configuration docs](static-configuration.md#createxscreen) for more details.
 
-#### Custom navigators now require overloads for types
+#### Custom navigators have a simpler type API
 
-To work with the reworked TypeScript types, custom navigators now need to provide overloads for static and dynamic configuration APIs, and an additional API to create screen config.
+To work with the reworked TypeScript types, the type API for custom navigators has been updated. The new API uses an interface that extends `NavigatorTypeBagBase` and a pair of factory helpers - `createNavigatorFactory` and `createScreenFactory`:
 
 ```diff lang=ts
 - export function createMyNavigator<
@@ -192,53 +192,19 @@ To work with the reworked TypeScript types, custom navigators now need to provid
 - >(config?: Config): TypedNavigator<TypeBag, Config> {
 -   return createNavigatorFactory(MyNavigator)(config);
 - }
-+ type MyTypeBag<ParamList extends {}> = {
-+   ParamList: ParamList;
-+   State: TabNavigationState<ParamList>;
++ export interface MyTypeBag extends NavigatorTypeBagBase {
++   State: TabNavigationState<this['ParamList']>;
 +   ScreenOptions: MyNavigationOptions;
 +   EventMap: MyNavigationEventMap;
-+   NavigationList: {
-+     [RouteName in keyof ParamList]: MyNavigationProp<
-+       ParamList,
-+       RouteName
-+     >;
-+   };
++   ActionHelpers: TabActionHelpers<this['ParamList']>;
 +   Navigator: typeof MyNavigator;
-+ };
++ }
 +
-+ export function createMyNavigator<
-+   const ParamList extends ParamListBase,
-+ >(): TypedNavigator<MyTypeBag<ParamList>, undefined>;
-+ export function createMyNavigator<
-+   const Config extends StaticConfig<MyTypeBag<ParamListBase>>,
-+ >(
-+   config: Config
-+ ): TypedNavigator<
-+   MyTypeBag<StaticParamList<{ config: Config }>>,
-+   Config
-+ >;
-+ export function createMyNavigator(config?: unknown) {
-+   return createNavigatorFactory(MyNavigator)(config);
-+ }
-
-+ export function createMyScreen<
-+  const Linking extends StaticScreenConfigLinking,
-+  const Screen extends StaticScreenConfigScreen,
-+ >(
-+   config: StaticScreenConfig<
-+     Linking,
-+     Screen,
-+     TabNavigationState<ParamListBase>,
-+     MyNavigationOptions,
-+     MyNavigationEventMap,
-+     MyNavigationProp<ParamListBase>
-+   >
-+ ) {
-+   return config;
-+ }
++ export const createMyNavigator =
++   createNavigatorFactory<MyTypeBag>(MyNavigator);
++
++ export const createMyScreen = createScreenFactory<MyTypeBag>();
 ```
-
-It's a bit verbose, but we don't have a better way due to limitations of TypeScript.
 
 See [Custom navigators](custom-navigators.md) for more details.
 
