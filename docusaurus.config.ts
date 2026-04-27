@@ -186,6 +186,13 @@ const config: Config = {
         },
         blog: {
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
+          rehypePlugins: [
+            [
+              rehypeCodeblockMeta,
+              { match: { snack: true, lang: true, tabs: true } },
+            ],
+            rehypeStaticToDynamic,
+          ],
         },
         pages: {
           remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
