@@ -7,7 +7,7 @@ sidebar_label: Getting started
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The _Fundamentals_ section covers the most important aspects of React Navigation. It should be enough to build a typical mobile application and give you the background to dive deeper into the more advanced topics.
+React Navigation is a navigation library for React Native and Web. It provides routing logic and UI common on mobile apps and PWAs with type-safe navigation, built-in universal links on mobile, and browser history integration on the web.
 
 <details>
 <summary>Prior knowledge</summary>
@@ -151,6 +151,8 @@ In `AndroidManifest.xml`, set `android:enableOnBackInvokedCallback` to `false` i
 
 ## Setting up React Navigation
 
+The guides linked below cover the fundamentals of React Navigation, and give you the background to dive deeper into the more advanced topics.
+
 When using React Navigation, you configure [**navigators**](glossary-of-terms.md#navigator) in your app. Navigators handle transitions between screens and provide UI such as headers, tab bars, etc.
 
 There are 2 ways to configure navigators:
@@ -163,6 +165,6 @@ There are 2 ways to configure navigators:
 
 - **[Dynamic configuration](hello-react-navigation.md?config=dynamic)**
 
-  Component-based configuration with significantly more boilerplate. Supports dynamic screen lists and navigator options.
+  Component-based configuration with significantly more boilerplate for TypeScript and deep linking. Supports dynamic screen lists and navigator options.
 
 </div>
