@@ -9,15 +9,15 @@ import TabItem from '@theme/TabItem';
 
 React Navigation is a navigation library for React Native and Web. It provides routing logic and UI common on mobile apps and PWAs with type-safe navigation, built-in universal links on mobile, and browser history integration on the web.
 
-<details>
-<summary>Prior knowledge</summary>
+## Installation
 
-If you're already familiar with JavaScript, React and React Native, you'll be able to get moving with React Navigation quickly! If not, we recommend gaining some basic knowledge first, then coming back here when you're done.
+The `@react-navigation/native` package contains the core functionality of React Navigation.
 
-1. [React Documentation](https://react.dev/learn)
-2. [React Native Documentation](https://reactnative.dev/docs/getting-started)
+In your project directory, run:
 
-</details>
+```bash npm2yarn
+npm install @react-navigation/native@next
+```
 
 <details>
 <summary>Minimum requirements</summary>
@@ -28,16 +28,6 @@ If you're already familiar with JavaScript, React and React Native, you'll be ab
 - `react-native-web` >= 0.21.0 (if you support Web)
 
 </details>
-
-## Installation
-
-The `@react-navigation/native` package contains the core functionality of React Navigation.
-
-In your project directory, run:
-
-```bash npm2yarn
-npm install @react-navigation/native@next
-```
 
 ### Installing dependencies
 
