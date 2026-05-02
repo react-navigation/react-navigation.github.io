@@ -293,7 +293,7 @@ async function transformStatic2Dynamic(content: string): Promise<string> {
         const langTag = m.lang || 'js';
         const metaSuffix = cleanMeta ? ` ${cleanMeta}` : '';
 
-        const staticSection = `**Static:**\n\n\`\`\`${langTag}${metaSuffix}\n${m.code}\`\`\``;
+        const staticSection = `**Static (Recommended):**\n\n\`\`\`${langTag}${metaSuffix}\n${m.code}\`\`\``;
         const dynamicSection = `**Dynamic:**\n\n\`\`\`${langTag}${metaSuffix}\n${dynamicCode}\n\`\`\``;
 
         return {
