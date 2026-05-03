@@ -121,7 +121,7 @@ const linking = {
 
 If not specified, it defaults to `['*']`, which will match any host starting with `http`, `https`, and custom schemes such as `myapp://`.
 
-You only need to specify `prefixes` if you're using **Expo Go** or want to restrict the URLs your app handles.
+You only need to specify `prefixes` if you're using [**Expo Go**](https://expo.dev/go) or want to restrict the URLs your app handles.
 
 :::note
 
@@ -385,7 +385,6 @@ const config = {
 };
 
 const linking = {
-  prefixes: ['https://example.com', 'example://'],
   config,
 };
 
@@ -1557,7 +1556,6 @@ Example:
 
 ```js
 const linking = {
-  prefixes: ['https://example.com', 'example://'],
   getStateFromPath(path, options) {
     // Return a state object here
     // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`

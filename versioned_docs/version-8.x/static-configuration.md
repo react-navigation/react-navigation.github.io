@@ -366,14 +366,13 @@ Similar to `NavigationContainer`, the component returned by `createStaticNavigat
 
 1. It's not possible to pass a full `config` object to the `linking` prop. It can only accept [`path`](configuring-links.md#apps-under-subpaths) and an [`initialRouteName` for the root navigator](configuring-links.md#rendering-an-initial-route).
 2. The linking config is collected from the [`linking`](#linking) properties specified in the screen configuration.
-3. It's possible to pass `enabled: 'auto'` to automatically generate paths for all leaf screens:
+3. It defaults to `enabled: 'auto'` which enables deep links by default and automatically generate paths for all leaf screens.
 
    ```js
    const Navigation = createStaticNavigation(RootStack);
 
    const linking = {
-     enabled: 'auto',
-     prefixes: ['https://example.com', 'example://'],
+     path: '/app',
    };
 
    function App() {
@@ -383,4 +382,4 @@ Similar to `NavigationContainer`, the component returned by `createStaticNavigat
 
    See [How does automatic path generation work](configuring-links.md#how-does-automatic-path-generation-work) for more details.
 
-By default, linking is enabled in static configuration with automatic path generation. It needs to be explicitly disabled by passing `enabled: false` to the `linking` prop if you don't want linking support.
+By default, linking is enabled in static configuration with automatic path generation. If you don't want linking support, it can be disabled by explicitly passing `enabled: false` to the `linking` prop.

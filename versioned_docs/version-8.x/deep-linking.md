@@ -14,7 +14,7 @@ This guide will describe how to configure your app to handle deep links on vario
 
 React Native provides a [`Linking`](https://reactnative.dev/docs/linking) to get notified of incoming links. React Navigation can integrate with the `Linking` module to automatically handle deep links. On Web, React Navigation can integrate with browser's `history` API to handle URLs on client side. See [configuring links](configuring-links.md) to see more details on how to configure links in React Navigation.
 
-While you don't need to use the `linking` prop from React Navigation, and can handle deep links yourself by using the `Linking` API and navigating from there, it'll be significantly more complicated than using the `linking` prop which handles many edge cases for you. So we don't recommend implementing it by yourself.
+We don't recommend handling deep links yourself using a [`ref`](navigation-container.md#ref) as it can be error-prone and significantly more complicated. Using the `linking` prop is the recommended way to handle deep links in React Navigation.
 
 Below, we'll go through required configurations so that the deep link integration works.
 
@@ -56,9 +56,9 @@ See more details below at [Configuring React Navigation](#configuring-react-navi
 <details>
 <summary>Why use `Linking.createURL`?</summary>
 
-It is necessary to use `Linking.createURL` since the scheme differs between the [Expo Dev Client](https://docs.expo.dev/versions/latest/sdk/dev-client/) and standalone apps.
+It is necessary to use `Linking.createURL` since the scheme differs between the [Expo Go](https://expo.dev/go) and standalone apps.
 
-The scheme specified in `app.json` only applies to standalone apps. In the Expo client app you can deep link using `exp://ADDRESS:PORT/--/` where `ADDRESS` is often `127.0.0.1` and `PORT` is often `19000` - the URL is printed when you run `expo start`. The `Linking.createURL` function abstracts it out so that you don't need to specify them manually.
+The scheme specified in `app.json` only applies to standalone apps. In the Expo client (Expo Go or Dev Client) app you can deep link using `exp://ADDRESS:PORT/--/` where `ADDRESS` is often `127.0.0.1` and `PORT` is often `19000` - the URL is printed when you run `expo start`. The `Linking.createURL` function abstracts it out so that you don't need to specify them manually.
 
 </details>
 
@@ -283,55 +283,11 @@ Then, you need to [declare the association](https://developer.android.com/traini
 
 ## Configuring React Navigation
 
-To handle deep links, you need to configure React Navigation to use the `scheme` for parsing incoming deep links:
+To handle deep links, you need to configure React Navigation based on the API you're using.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+For static configuration, deep links are enabled by default with automatic path generation. So no additional configuration is needed. You can optionally customize the path patterns for specific screens if needed.
 
-```js
-const linking = {
-  prefixes: [
-    'example://', // Or `Linking.createURL('/')` for Expo apps
-  ],
-};
-
-function App() {
-  return <Navigation linking={linking} />;
-}
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-const linking = {
-  prefixes: [
-    'example://', // Or `Linking.createURL('/')` for Expo apps
-  ],
-};
-
-function App() {
-  return (
-    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
-      {/* content */}
-    </NavigationContainer>
-  );
-}
-```
-
-</TabItem>
-</Tabs>
-
-If you are using universal links, you need to add your domain to the prefixes as well:
-
-```js
-const linking = {
-  prefixes: [
-    'example://', // Or `Linking.createURL('/')` for Expo apps
-    'https://app.example.com',
-  ],
-};
-```
+For dynamic configuration, deep links are enabled if you provide a `linking` prop to the `NavigationContainer`. The `linking` prop should contain mappings between path patterns and screens.
 
 See [configuring links](configuring-links.md) to see further details on how to configure links in React Navigation.
 
@@ -422,8 +378,6 @@ Here is an example integration with [expo-notifications](https://docs.expo.dev/v
 
 ```js name="Expo Notifications"
 const linking = {
-  prefixes: ['example://', 'https://app.example.com'],
-
   // Custom function to get the URL which was used to open the app
   async getInitialURL() {
     // First, handle deep links
@@ -468,8 +422,6 @@ const linking = {
 
 ```js name="Expo Notifications"
 const linking = {
-  prefixes: ['example://', 'https://app.example.com'],
-
   config: {
     // Deep link configuration
   },

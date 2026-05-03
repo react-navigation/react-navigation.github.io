@@ -15,7 +15,7 @@ While Web support works out of the box, there are some things to configure to en
 
 1. [**Configure linking**](configuring-links.md)
 
-   Configuring linking allows React Navigation to integrate with the browser's URL bar. This is crucial for web apps to have proper URLs for each screen.
+   Configuring linking allows React Navigation to integrate with the browser's URL bar, using the same configuration as for deep linking in React Native. This is crucial for web apps to have proper URLs for each screen.
 
    Automatic links are already enabled by default when using [Static configuration](static-configuration.md). So if you're using static configuration, you don't need to do anything to enable linking.
 
