@@ -1,7 +1,7 @@
 ---
-title: Building custom screen transitions with react-native-screen-transitions
+title: Building custom transitions with react-native-screen-transitions
 authors: ed
-tags: [community, guide]
+tags: [tutorial, screen-transitions]
 ---
 
 import Tabs from '@theme/Tabs';
@@ -27,7 +27,7 @@ npm install react-native-screen-transitions
 
 ### Installing peer dependencies
 
-Next, install the necessary peer dependencies used by `react-native-screen-transitions`.
+Next, install the necessary peer dependencies used by `react-native-screen-transitions`, and `@react-native-masked-view/masked-view` for the example later in the article:
 
 <Tabs groupId='framework' queryString="framework">
 <TabItem value='expo' label='Expo' default>
@@ -38,19 +38,14 @@ In your project directory, run:
 npx expo install react-native-reanimated react-native-gesture-handler \
   @react-navigation/native @react-navigation/native-stack \
   @react-navigation/elements react-native-screens \
-  react-native-safe-area-context
+  react-native-safe-area-context \
+  @react-native-masked-view/masked-view
 ```
 
 This will install versions of these libraries that are compatible with your Expo SDK version.
 
-For the `navigationMaskEnabled` example later in the article, install `@react-native-masked-view/masked-view` too:
-
-```bash
-npx expo install @react-native-masked-view/masked-view
-```
-
 </TabItem>
-<TabItem value='bare' label='Bare React Native'>
+<TabItem value='community-cli' label='Community CLI'>
 
 In your project directory, run:
 
@@ -58,19 +53,14 @@ In your project directory, run:
 npm install react-native-reanimated react-native-gesture-handler \
   @react-navigation/native @react-navigation/native-stack \
   @react-navigation/elements react-native-screens \
-  react-native-safe-area-context
+  react-native-safe-area-context \
+  @react-native-masked-view/masked-view
 ```
 
 If you're on a Mac and developing for iOS, install the pods via [CocoaPods](https://cocoapods.org/) to complete the linking:
 
 ```bash
 npx pod-install ios
-```
-
-For the `navigationMaskEnabled` example later in the article, install `@react-native-masked-view/masked-view` too:
-
-```bash npm2yarn
-npm install @react-native-masked-view/masked-view
 ```
 
 </TabItem>
