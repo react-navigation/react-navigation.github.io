@@ -11,15 +11,15 @@ There are a few ways to make an app feel more alive, and I'm a big believer that
 
 Most people already know their OS animations by muscle memory. That's why a custom transition can land so well: used in the right place, it breaks the routine just enough to make a flow feel intentional.
 
-`react-native-screen-transitions` is a React Navigation transition toolkit for flows that need more control over navigation motion. In this article, we'll recreate an iOS-style page transition, then build up to a bounds-driven `navigation.zoom()` flow.
+[`react-native-screen-transitions`](https://screen-transitions.esjr.org) is a React Navigation transition toolkit for flows that need more control over navigation motion. In this article, we'll recreate an iOS-style page transition, then build up to a bounds-driven `navigation.zoom()` flow.
 
 <!--truncate-->
 
-One caveat before we start: this is not a blanket replacement for `@react-navigation/native-stack` or `@react-navigation/stack`. If `native-stack` already does the job, keep using it. If the JS stack already gives you enough control, keep using that too. `react-native-screen-transitions` fits when a specific flow needs more freedom: custom gesture choreography, snap points, bounds-driven motion, or a Reanimated-first transition model.
+One caveat before we start: this is not a blanket replacement for [`@react-navigation/native-stack`](/docs/native-stack-navigator) or [`@react-navigation/stack`](/docs/stack-navigator). If `native-stack` already does the job, keep using it. If the JS stack already gives you enough control, keep using that too. `react-native-screen-transitions` fits when a specific flow needs more freedom: custom gesture choreography, snap points, bounds-driven motion, or a Reanimated-first transition model.
 
 ## Setup
 
-The `react-native-screen-transitions` package contains the transition primitives. In your project directory, run:
+The [`react-native-screen-transitions`](https://screen-transitions.esjr.org/installation) package contains the transition primitives. In your project directory, run:
 
 ```bash npm2yarn
 npm install react-native-screen-transitions
@@ -82,7 +82,7 @@ Let's dissect the native iOS page animation and mimic it closely:
 
 ## Start with a Blank Stack
 
-Blank Stack is the navigator that ships with `react-native-screen-transitions`. It comes with no built-in animations, so every transition is yours to define. That's exactly what we want here.
+[Blank Stack](https://screen-transitions.esjr.org/stack-types) is the navigator that ships with `react-native-screen-transitions`. It comes with no built-in animations, so every transition is yours to define. That's exactly what we want here.
 
 ```tsx static2dynamic
 import { createBlankStackNavigator } from 'react-native-screen-transitions/blank-stack';
@@ -99,7 +99,7 @@ const RootStack = createBlankStackNavigator({
 
 To define a transition, we configure two things: how the gesture behaves, and how the screen animates.
 
-`transitionSpec` controls the spring configuration for opening and closing. `screenStyleInterpolator` is the function that returns the animated styles for the transition based on values like progress and screen layout. For this example, we'll keep it simple and drive everything from the root-level progress helper.
+`transitionSpec` controls the spring configuration for opening and closing. [`screenStyleInterpolator`](https://screen-transitions.esjr.org/custom-animations) is the function that returns the animated styles for the transition based on values like progress and screen layout. For this example, we'll keep it simple and drive everything from the root-level progress helper.
 
 ```tsx
 import { interpolate } from 'react-native-reanimated';
@@ -189,7 +189,7 @@ Where `react-native-screen-transitions` starts to pay off is when the transition
 </video>
 </div>
 
-One thing I'm really proud to announce with v3.4 is `navigation.zoom()`.
+One thing I'm really proud to announce with v3.4 is [`navigation.zoom()`](https://screen-transitions.esjr.org/navigation-zoom).
 
 `navigation.zoom()` is a bounds-driven helper for recreating that navigation zoom handoff between a source element and a destination screen. It works by measuring component A and component B with the Bounds API, then animating between them. This isn't a traditional shared-element system, so if that's what you need, I'd wait for Reanimated's version to mature.
 
@@ -331,7 +331,7 @@ The gallery example also updates `activeGalleryId` when the horizontal detail li
 
 And that's the whole thing: SwiftUI's `navigation.zoom()` look in pure JS.
 
-The full source for both examples lives [here](https://github.com/eds2002/react-native-screen-transitions) if you want to poke at it.
+The full source for both examples lives in the [react-native-screen-transitions GitHub repo](https://github.com/eds2002/react-native-screen-transitions) if you want to poke at it.
 
 ## What's next for Screen Transitions
 
