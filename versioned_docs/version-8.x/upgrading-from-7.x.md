@@ -33,7 +33,13 @@ The minimum required version of various peer dependencies have also been bumped:
 
 Previously, many navigators worked without `react-native-screens`, but now it's required for all navigators.
 
-Additionally, React Navigation now uses [`@callstack/liquid-glass`](https://github.com/callstack/liquid-glass) to implement liquid glass effect on iOS 26.
+If you're using Expo, you can install compatible versions of these dependencies with `expo install`:
+
+Additionally, React Navigation now uses [`@callstack/liquid-glass`](https://github.com/callstack/liquid-glass) to implement liquid glass effect on iOS 26. So make sure to install it:
+
+```bash npm2yarn
+npm install @callstack/liquid-glass
+```
 
 :::warning
 
