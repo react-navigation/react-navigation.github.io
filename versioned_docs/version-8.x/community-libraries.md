@@ -12,12 +12,6 @@ Please refer to the library's documentation to see which version of React Naviga
 
 :::
 
-## react-native-screen-transitions
-
-A library that provides customizable screen transition animations for React Navigation's [Native Stack Navigator](native-stack-navigator.md).
-
-[Repository](https://github.com/eds2002/react-native-screen-transitions)
-
 ## react-navigation-header-buttons
 
 Helps you to render buttons in the navigation bar and handle the styling so you don't have to. It tries to mimic the appearance of native navbar buttons and attempts to offer a simple interface for you to interact with.

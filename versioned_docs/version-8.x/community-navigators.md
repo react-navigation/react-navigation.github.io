@@ -37,3 +37,11 @@ This library provides a native bottom sheet with React Navigation integration. I
 [Documentation](https://sheet.lodev09.com/guides/navigation/)
 
 [Repository](https://github.com/lodev09/react-native-true-sheet)
+
+## React Native Screen Transitions
+
+This library provides React Navigation navigators with gesture-driven, shared element, and fully custom animations.
+
+[Documentation](https://screen-transitions.esjr.org/)
+
+[Repository](https://github.com/eds2002/react-native-screen-transitions)
