@@ -47,3 +47,12 @@ oskar:
   socials:
     x: o_kwasniewski
     github: okwasniewsk
+
+ed:
+  name: Ed
+  url: https://github.com/eds2002
+  image_url: https://github.com/eds2002.png
+  title: React Native Screen Transitions
+  socials:
+    x: trpfsu
+    github: eds2002
