@@ -752,6 +752,8 @@ export default function App() {
 }
 ```
 
+See [`jumpTo`](tab-actions.md#jumpto) for more details.
+
 ### Hooks
 
 The bottom tab navigator exports the following hooks:

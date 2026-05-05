@@ -849,6 +849,8 @@ export default function App() {
 }
 ```
 
+See [`openDrawer`](drawer-actions.md#opendrawer) for more details.
+
 #### `closeDrawer`
 
 Closes the drawer pane.
@@ -857,6 +859,8 @@ Closes the drawer pane.
 navigation.closeDrawer();
 ```
 
+See [`closeDrawer`](drawer-actions.md#closedrawer) for more details.
+
 #### `toggleDrawer`
 
 Opens the drawer pane if closed, closes the drawer pane if opened.
@@ -864,6 +868,8 @@ Opens the drawer pane if closed, closes the drawer pane if opened.
 ```js
 navigation.toggleDrawer();
 ```
+
+See [`toggleDrawer`](drawer-actions.md#toggledrawer) for more details.
 
 #### `jumpTo`
 
@@ -926,6 +932,8 @@ export default function App() {
   return <Navigation />;
 }
 ```
+
+See [`jumpTo`](drawer-actions.md#jumpto) for more details.
 
 ### Hooks
 

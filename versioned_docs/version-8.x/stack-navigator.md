@@ -543,6 +543,8 @@ Replaces the current screen with a new screen in the stack. The method accepts t
 navigation.replace('Profile', { owner: 'Michaś' });
 ```
 
+See [`replace`](stack-actions.md#replace) for more details.
+
 #### `push`
 
 Pushes a new screen to the top of the stack and navigate to it. The method accepts the following arguments:
@@ -554,6 +556,8 @@ Pushes a new screen to the top of the stack and navigate to it. The method accep
 navigation.push('Profile', { owner: 'Michaś' });
 ```
 
+See [`push`](stack-actions.md#push) for more details.
+
 #### `pop`
 
 Pops the current screen from the stack and navigates back to the previous screen. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
@@ -561,6 +565,8 @@ Pops the current screen from the stack and navigates back to the previous screen
 ```js
 navigation.pop();
 ```
+
+See [`pop`](stack-actions.md#pop) for more details.
 
 #### `popTo`
 
@@ -577,6 +583,8 @@ If a matching screen is not found in the stack, this will pop the current screen
 navigation.popTo('Profile', { owner: 'Michaś' });
 ```
 
+See [`popTo`](stack-actions.md#popto) for more details.
+
 #### `popToTop`
 
 Pops all of the screens in the stack except the first one and navigates to it.
@@ -584,6 +592,8 @@ Pops all of the screens in the stack except the first one and navigates to it.
 ```js
 navigation.popToTop();
 ```
+
+See [`popToTop`](stack-actions.md#poptotop) for more details.
 
 #### `retain`
 
@@ -594,6 +604,8 @@ Marks or unmarks the current screen in the stack to be retained after it is remo
 ```js
 navigation.retain(true);
 ```
+
+See [`retain`](stack-actions.md#retain) for more details.
 
 ### Hooks
 
