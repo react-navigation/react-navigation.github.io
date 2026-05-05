@@ -335,6 +335,8 @@ Similarly, if you were using `state.preloadedRoutes` to get the preloaded routes
 
 These changes also enable the new [retain](#stack-and-native-stack-navigators-now-support-retaining-screens) feature for Stack and Native Stack Navigators.
 
+If you use a custom navigator with `StackRouter` and do not want to change the state shape, you can copy the [previous implementation of `StackRouter` from React Navigation 7](https://github.com/react-navigation/react-navigation/blob/7.x/packages/routers/src/StackRouter.tsx) and use it instead. However, preloading and retaining routes will not be supported.
+
 See [Navigation state](navigation-state.md) for more details.
 
 ##### Preloaded screens behave closer to regular screens
