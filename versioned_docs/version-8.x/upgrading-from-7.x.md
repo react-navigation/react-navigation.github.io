@@ -301,7 +301,39 @@ createBottomTabNavigator({
 </TabItem>
 </Tabs>
 
-#### Preloaded screens now behave differently
+#### Preloaded routes in Stack have been reworked
+
+Preloaded routes in Stack and Native Stack Navigators have been reworked to remove various restrictions.
+
+The rework has 2 main consequences:
+
+##### Stack navigation state shape has changed
+
+Previously, the navigation state for Stack and Native Stack Navigators was as follows:
+
+- `state.routes` - array of route objects for active screens in the stack, limited by `state.index`.
+- `state.preloadedRoutes` - array of route objects for preloaded screens in the stack.
+
+After, the rework:
+
+- `state.routes` - array of route objects for all screens, including preloaded screens, which can extend beyond `state.index` and the routes after `state.index` are considered preloaded.
+- `state.preloadedRoutes` - no longer exists.
+
+So if your code had assumptions about `state.routes` being limited by `state.index` (e.g. determining focused route by checking if it's the last route in `state.routes` instead of using `state.index`), you may need to update it to check for `state.index` instead.
+
+```diff lang=js
+- const focusedRoute = state.routes[state.routes.length - 1];
++ const focusedRoute = state.routes[state.index];
+```
+
+Similarly, if you were using `state.preloadedRoutes` to get the preloaded routes, you can now get them by slicing `state.routes`:
+
+```diff lang=js
+- const preloadedRoutes = state.preloadedRoutes;
++ const preloadedRoutes = state.routes.slice(state.index + 1);
+```
+
+##### Preloaded screens behave closer to regular screens
 
 Previously, when a screen was preloaded in Stack and Native Stack Navigators, there were a few restrictions:
 

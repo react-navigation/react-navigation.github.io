@@ -27,7 +27,7 @@ There are few properties present in every navigation state object:
 - `type` - Type of the navigator that the state belongs to, e.g. `stack`, `tab`, `drawer`.
 - `key` - Unique key to identify the navigator.
 - `routeNames` - Name of the screens defined in the navigator. This is an unique array containing strings for each screen.
-- `routes` - List of route objects (screens) which are rendered in the navigator. It also represents the history in a stack navigator. There should be at least one item present in this array.
+- `routes` - List of route objects (screens) which are rendered in the navigator. In a stack or native stack navigator, the entries up to and including `index` also represent the history. There should be at least one item present in this array.
 - `index` - Index of the focused route object in the `routes` array.
 - `history` - An optional list of visited items. See [History stack](#history-stack) for more details.
 - `stale` - A navigation state is assumed to be stale unless the `stale` property is explicitly set to `false`. This means that the state object needs to be ["rehydrated"](#stale-state-objects).

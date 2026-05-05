@@ -914,8 +914,6 @@ Depending on the navigator, `preload` may work slightly differently:
 - In a stack navigator ([stack](stack-navigator.md), [native stack](native-stack-navigator.md)), the screen will be rendered off-screen and animated in when you navigate to it. If [`getId`](screen.md#id) is specified, it'll be used for the navigation to identify the preloaded screen.
 - In a tab or drawer navigator ([bottom tabs](bottom-tab-navigator.md), [material top tabs](material-top-tab-navigator.md), [drawer](drawer-navigator.md), etc.), the existing screen will be rendered as if `lazy` was set to `false`. Calling `preload` on a screen that is already rendered will not have any effect.
 
-When a screen is preloaded in a stack navigator, it can't dispatch navigation actions (e.g. `navigate`, `goBack`, etc.) until it becomes active.
-
 ### `setParams`
 
 The `setParams` method lets us update the params (`route.params`) of the current screen. `setParams` works like React's `setState` - it shallow merges the provided params object with the current params.
@@ -1698,27 +1696,27 @@ navigation.dispatch((state) => {
   return CommonActions.reset({
     ...state,
     routes,
-    index: routes.length - 1,
+    index: state.index + 1,
   });
 });
 ```
 
-You can use this functionality to build your own helpers that you can utilize in your app. Here is an example which implements inserting a screen just before the last one:
+You can use this functionality to build your own helpers that you can utilize in your app. Here is an example which implements inserting a screen just before the focused one:
 
 ```js
 import { CommonActions } from '@react-navigation/native';
 
-const insertBeforeLast = (routeName, params) => (state) => {
+const insertBeforeFocused = (routeName, params) => (state) => {
   const routes = [
-    ...state.routes.slice(0, -1),
+    ...state.routes.slice(0, state.index),
     { name: routeName, params },
-    state.routes[state.routes.length - 1],
+    ...state.routes.slice(state.index),
   ];
 
   return CommonActions.reset({
     ...state,
     routes,
-    index: routes.length - 1,
+    index: state.index + 1,
   });
 };
 ```
@@ -1726,7 +1724,7 @@ const insertBeforeLast = (routeName, params) => (state) => {
 Then use it like:
 
 ```js
-navigation.dispatch(insertBeforeLast('Home'));
+navigation.dispatch(insertBeforeFocused('Home'));
 ```
 
 ### `canGoBack`
