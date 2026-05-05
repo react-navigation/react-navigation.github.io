@@ -33,7 +33,13 @@ The minimum required version of various peer dependencies have also been bumped:
 
 Previously, many navigators worked without `react-native-screens`, but now it's required for all navigators.
 
-Additionally, React Navigation now uses [`@callstack/liquid-glass`](https://github.com/callstack/liquid-glass) to implement liquid glass effect on iOS 26.
+If you're using Expo, you can install compatible versions of these dependencies with `expo install`:
+
+Additionally, React Navigation now uses [`@callstack/liquid-glass`](https://github.com/callstack/liquid-glass) to implement liquid glass effect on iOS 26. So make sure to install it:
+
+```bash npm2yarn
+npm install @callstack/liquid-glass
+```
 
 :::warning
 
@@ -295,7 +301,43 @@ createBottomTabNavigator({
 </TabItem>
 </Tabs>
 
-#### Preloaded screens now behave differently
+#### Preloaded routes in Stack have been reworked
+
+Preloaded routes in Stack and Native Stack Navigators have been reworked to remove various restrictions.
+
+The rework has 2 main consequences:
+
+##### Stack navigation state shape has changed
+
+Previously, the navigation state for Stack and Native Stack Navigators was as follows:
+
+- `state.routes` - array of route objects for active screens in the stack, limited by `state.index`.
+- `state.preloadedRoutes` - array of route objects for preloaded screens in the stack.
+
+After, the rework:
+
+- `state.routes` - array of route objects for all screens, including preloaded screens, which can extend beyond `state.index` and the routes after `state.index` are considered preloaded.
+- `state.preloadedRoutes` - no longer exists.
+
+So if your code had assumptions about `state.routes` being limited by `state.index` (e.g. determining focused route by checking if it's the last route in `state.routes` instead of using `state.index`), you may need to update it to check for `state.index` instead.
+
+```diff lang=js
+- const focusedRoute = state.routes[state.routes.length - 1];
++ const focusedRoute = state.routes[state.index];
+```
+
+Similarly, if you were using `state.preloadedRoutes` to get the preloaded routes, you can now get them by slicing `state.routes`:
+
+```diff lang=js
+- const preloadedRoutes = state.preloadedRoutes;
++ const preloadedRoutes = state.routes.slice(state.index + 1);
+```
+
+These changes also enable the new [retain](#stack-and-native-stack-navigators-now-support-retaining-screens) feature for Stack and Native Stack Navigators.
+
+See [Navigation state](navigation-state.md) for more details.
+
+##### Preloaded screens behave closer to regular screens
 
 Previously, when a screen was preloaded in Stack and Native Stack Navigators, there were a few restrictions:
 
@@ -1009,6 +1051,29 @@ There is now a new `NavigationProvider` component that consolidates them, and ad
 ```
 
 This is only necessary if you have custom components rendered in a navigator, e.g. buttons in a custom tab bar. Components rendered as part of a screen will have access to the `navigation` and `route` objects without any additional setup.
+
+### Stack and Native Stack Navigators now support retaining screens
+
+Stack and Native Stack Navigators now support retaining screens after they are removed from the navigation history.
+
+Retaining a screen keeps it in the navigation state and rendered in the background, so local component state is preserved. The screen can later be brought back into focus with `navigate`:
+
+```js
+navigation.retain(true);
+```
+
+To stop retaining the current screen, call `retain(false)`:
+
+```js
+navigation.retain(false);
+```
+
+This can be useful in various scenarios:
+
+- Keeping a frequently used heavy screen in memory to avoid unmounting and remounting it for better performance when navigating back and forth.
+- Keeping a screen with a video or audio player rendered to enable functionality such as background playback or picture-in-picture mode when the user navigates away from the screen.
+
+See [`retain`](stack-actions.md#retain) for more details.
 
 ### `Header` from `@react-navigation/elements` has been reworked
 

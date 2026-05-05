@@ -6,6 +6,8 @@ sidebar_label: StackActions
 
 `StackActions` is an object containing methods for generating actions specific to stack-based navigators. Its methods expand upon the actions available in [`CommonActions`](navigation-actions.md).
 
+For screens inside a [Stack Navigator](stack-navigator.md) or [Native Stack Navigator](native-stack-navigator.md), all stack actions are available as methods on the `navigation` object.
+
 The following actions are supported:
 
 ## replace
@@ -22,28 +24,19 @@ import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
-  StackActions,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
-        }}
-      >
-        Push Profile on the stack
-      </Button>
-      <Button
-        onPress={() => {
           // codeblock-focus-start
-          navigation.dispatch(
-            StackActions.replace('Profile', { user: 'Wojtek' })
-          );
+          navigation.replace('Profile', { user: 'Wojtek' });
           // codeblock-focus-end
         }}
       >
@@ -54,24 +47,10 @@ function HomeScreen() {
 }
 
 function ProfileScreen({ route }) {
-  const navigation = useNavigation();
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
-      <Button onPress={() => navigation.dispatch(StackActions.pop(1))}>
-        Pop one screen from stack
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
-        }}
-      >
-        Push same screen on the stack
-      </Button>
-      <Button onPress={() => navigation.dispatch(StackActions.popToTop())}>
-        Pop to top
-      </Button>
     </View>
   );
 }
@@ -88,6 +67,14 @@ const Navigation = createStaticNavigation(RootStack);
 export default function App() {
   return <Navigation />;
 }
+```
+
+It can also be used with `navigation.dispatch`:
+
+```js
+import { StackActions } from '@react-navigation/native';
+
+navigation.dispatch(StackActions.replace('Profile', { user: 'Wojtek' }));
 ```
 
 If you want to replace a particular route, you can add a `source` property referring to the route key and `target` property referring to the navigation state key:
@@ -120,55 +107,104 @@ import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
-  StackActions,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
         onPress={() => {
           // codeblock-focus-start
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+          navigation.push('Profile', { user: 'Wojtek' });
           // codeblock-focus-end
         }}
       >
         Push Profile on the stack
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            StackActions.replace('Profile', { user: 'Wojtek' })
-          );
-        }}
-      >
-        Replace with Profile
       </Button>
     </View>
   );
 }
 
 function ProfileScreen({ route }) {
-  const navigation = useNavigation();
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
       <Text>{route.params.user}'s profile</Text>
-      <Button onPress={() => navigation.dispatch(StackActions.pop(1))}>
-        Pop one screen from stack
-      </Button>
+    </View>
+  );
+}
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+It can also be used with `navigation.dispatch`:
+
+```js
+import { StackActions } from '@react-navigation/native';
+
+navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+```
+
+## pop
+
+The `pop` action takes you back to a previous screen in the stack. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
+
+```js name="Stack actions pop" snack static2dynamic
+import * as React from 'react';
+import { Button } from '@react-navigation/elements';
+import { View, Text } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function HomeScreen() {
+  const navigation = useNavigation('Home');
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home!</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+          navigation.navigate('Profile');
         }}
       >
-        Push same screen on the stack
+        Go to Profile
       </Button>
-      <Button onPress={() => navigation.dispatch(StackActions.popToTop())}>
-        Pop to top
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation('Profile');
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile!</Text>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.pop(1);
+          // codeblock-focus-end
+        }}
+      >
+        Pop one screen from stack
       </Button>
     </View>
   );
@@ -188,87 +224,12 @@ export default function App() {
 }
 ```
 
-## pop
+It can also be used with `navigation.dispatch`:
 
-The `pop` action takes you back to a previous screen in the stack. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
+```js
+import { StackActions } from '@react-navigation/native';
 
-```js name="Stack actions pop" snack static2dynamic
-import * as React from 'react';
-import { Button } from '@react-navigation/elements';
-import { View, Text } from 'react-native';
-import {
-  createStaticNavigation,
-  useNavigation,
-  StackActions,
-} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-function HomeScreen() {
-  const navigation = useNavigation();
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home!</Text>
-      <Button
-        onPress={() => {
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
-        }}
-      >
-        Push Profile on the stack
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            StackActions.replace('Profile', { user: 'Wojtek' })
-          );
-        }}
-      >
-        Replace with Profile
-      </Button>
-    </View>
-  );
-}
-
-function ProfileScreen({ route }) {
-  const navigation = useNavigation();
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile!</Text>
-      <Text>{route.params.user}'s profile</Text>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(StackActions.pop(1));
-          // codeblock-focus-end
-        }}
-      >
-        Pop one screen from stack
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
-        }}
-      >
-        Push same screen on the stack
-      </Button>
-      <Button onPress={() => navigation.dispatch(StackActions.popToTop())}>
-        Pop to top
-      </Button>
-    </View>
-  );
-}
-
-const RootStack = createStackNavigator({
-  screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
-  },
-});
-
-const Navigation = createStaticNavigation(RootStack);
-
-export default function App() {
-  return <Navigation />;
-}
+navigation.dispatch(StackActions.pop(1));
 ```
 
 ## popTo
@@ -293,74 +254,55 @@ import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
-  StackActions,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+          navigation.navigate('Profile', { user: 'Wojtek' });
         }}
       >
-        Push Profile on the stack
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(StackActions.push('Settings'));
-        }}
-      >
-        Push Settings on the stack
+        Go to Profile
       </Button>
     </View>
   );
 }
 
 function ProfileScreen({ route }) {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Profile');
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
       <Text>{route?.params?.user || 'Guest'}'s profile</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(StackActions.push('Settings'));
+          navigation.navigate('Settings');
         }}
       >
-        Push Settings on the stack
-      </Button>
-      <Button
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(StackActions.popTo('Profile', { user: 'jane' }));
-          // codeblock-focus-end
-        }}
-      >
-        Pop to Profile with params
+        Go to Settings
       </Button>
     </View>
   );
 }
 
 function SettingsScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Settings');
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings!</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
-        }}
-      >
-        Push Profile on the stack
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(StackActions.popTo('Profile', { user: 'jane' }));
+          // codeblock-focus-start
+          navigation.popTo('Profile', { user: 'jane' });
+          // codeblock-focus-end
         }}
       >
         Pop to Profile with params
@@ -384,6 +326,14 @@ export default function App() {
 }
 ```
 
+It can also be used with `navigation.dispatch`:
+
+```js
+import { StackActions } from '@react-navigation/native';
+
+navigation.dispatch(StackActions.popTo('Profile', { user: 'jane' }));
+```
+
 ## popToTop
 
 The `popToTop` action takes you back to the first screen in the stack, dismissing all the others.
@@ -395,55 +345,36 @@ import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
-  StackActions,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
       <Button
         onPress={() => {
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
+          navigation.navigate('Profile');
         }}
       >
-        Push Profile on the stack
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(
-            StackActions.replace('Profile', { user: 'Wojtek' })
-          );
-        }}
-      >
-        Replace with Profile
+        Go to Profile
       </Button>
     </View>
   );
 }
 
-function ProfileScreen({ route }) {
-  const navigation = useNavigation();
+function ProfileScreen() {
+  const navigation = useNavigation('Profile');
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Profile!</Text>
-      <Text>{route.params.user}'s profile</Text>
-      <Button onPress={() => navigation.dispatch(StackActions.pop(1))}>
-        Pop one screen from stack
-      </Button>
-      <Button
-        onPress={() => {
-          navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
-        }}
-      >
-        Push same screen on the stack
-      </Button>
       <Button
         onPress={() => {
           // codeblock-focus-start
-          navigation.dispatch(StackActions.popToTop());
+          navigation.popToTop();
           // codeblock-focus-end
         }}
       >
@@ -465,4 +396,146 @@ const Navigation = createStaticNavigation(RootStack);
 export default function App() {
   return <Navigation />;
 }
+```
+
+It can also be used with `navigation.dispatch`:
+
+```js
+import { StackActions } from '@react-navigation/native';
+
+navigation.dispatch(StackActions.popToTop());
+```
+
+## retain
+
+The `retain` action marks a route to be retained in the [navigation state](navigation-state.md) after it is removed from history.
+
+It takes the following argument:
+
+- `enable` - _boolean_ - Whether to retain the route. Passing `true` marks the route to be retained, while `false` unmarks it.
+
+```js name="Stack actions retain" snack static2dynamic
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function HomeScreen() {
+  const navigation = useNavigation('Home');
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home!</Text>
+      <Button
+        onPress={() => {
+          navigation.navigate('Profile');
+        }}
+      >
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation('Profile');
+  const [count, setCount] = React.useState(0);
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile!</Text>
+      <Text>Count: {count}</Text>
+      <Button onPress={() => setCount((value) => value + 1)}>
+        Increment count
+      </Button>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.retain(true);
+          // codeblock-focus-end
+        }}
+      >
+        Retain Profile
+      </Button>
+      <Button
+        onPress={() => {
+          navigation.replace('Settings');
+        }}
+      >
+        Replace with Settings
+      </Button>
+      <Button
+        onPress={() => {
+          navigation.retain(false);
+        }}
+      >
+        Unretain Profile
+      </Button>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  const navigation = useNavigation('Settings');
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings!</Text>
+      <Button
+        onPress={() => {
+          navigation.navigate('Profile');
+        }}
+      >
+        Navigate to retained Profile
+      </Button>
+    </View>
+  );
+}
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+    Settings: SettingsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+It can also be used with `navigation.dispatch`:
+
+```js
+import { StackActions } from '@react-navigation/native';
+
+navigation.dispatch(StackActions.retain(true));
+```
+
+When a screen is marked to be retained, actions such as [`goBack`](navigation-actions.md#goback), [`pop`](#pop), [`popToTop`](#poptotop), [`replace`](#replace) etc. will remove it from history, but keep it in the navigation state. So the screen is not unmounted and stays rendered in the background, preserving its local state. Similar to [preloaded routes](navigation-actions.md#preload), it can be brought to focus with `navigate`.
+
+This can be useful in various scenarios:
+
+- Keeping a frequently used heavy screen in memory to avoid unmounting and remounting it for better performance when navigating back and forth.
+- Keeping a screen with a video or audio player rendered to enable functionality such as background playback or picture-in-picture mode when the user navigates away from the screen.
+
+If a route was removed from history while being retained, `retain(false)` will remove it from the navigation state and unmount the screen. If the route is still present in history, `retain(false)` will just unmark it, and the route will be removed from the navigation state when it's removed from history.
+
+By default, the action applies to the route that dispatched it. If you want to retain a particular route, you can add a `source` property referring to the route key and `target` property referring to the navigation state key:
+
+```js
+import { StackActions } from '@react-navigation/native';
+
+navigation.dispatch({
+  ...StackActions.retain(true),
+  source: route.key,
+  target: navigation.getState().key,
+});
 ```

@@ -755,6 +755,8 @@ export default function App() {
 }
 ```
 
+See [`jumpTo`](tab-actions.md#jumpto) for more details.
+
 ### Hooks
 
 The material top tab navigator exports the following hooks:

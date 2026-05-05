@@ -6,6 +6,8 @@ sidebar_label: TabActions
 
 `TabActions` is an object containing methods for generating actions specific to tab-based navigators. Its methods expand upon the actions available in [`CommonActions`](navigation-actions.md).
 
+For screens inside a [Bottom Tab Navigator](bottom-tab-navigator.md) or [Material Top Tab Navigator](material-top-tab-navigator.md), tab actions are available as methods on the `navigation` object.
+
 The following actions are supported:
 
 ## jumpTo
@@ -22,15 +24,12 @@ import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
-  TabActions,
 } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // codeblock-focus-start
 function HomeScreen() {
-  const navigation = useNavigation();
-  // highlight-next-line
-  const jumpToAction = TabActions.jumpTo('Profile', { user: 'Satya' });
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -38,7 +37,7 @@ function HomeScreen() {
       <Button
         onPress={() => {
           // highlight-next-line
-          navigation.dispatch(jumpToAction);
+          navigation.jumpTo('Profile', { user: 'Satya' });
         }}
       >
         Jump to Profile
@@ -71,4 +70,12 @@ const Navigation = createStaticNavigation(MyTabs);
 export default function App() {
   return <Navigation />;
 }
+```
+
+It can also be used with `navigation.dispatch`:
+
+```js
+import { TabActions } from '@react-navigation/native';
+
+navigation.dispatch(TabActions.jumpTo('Profile', { user: 'Satya' }));
 ```

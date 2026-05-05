@@ -6,6 +6,8 @@ sidebar_label: DrawerActions
 
 `DrawerActions` is an object containing methods for generating actions specific to drawer-based navigators. Its methods expand upon the actions available in [CommonActions](navigation-actions.md).
 
+For screens inside a [Drawer Navigator](drawer-navigator.md), drawer actions are available as methods on the `navigation` object.
+
 The following actions are supported:
 
 ## openDrawer
@@ -19,12 +21,11 @@ import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
-  DrawerActions,
 } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -32,7 +33,7 @@ function HomeScreen() {
       <Button
         onPress={() => {
           // codeblock-focus-start
-          navigation.dispatch(DrawerActions.openDrawer());
+          navigation.openDrawer();
           // codeblock-focus-end
         }}
       >
@@ -55,6 +56,14 @@ export default function App() {
 }
 ```
 
+It can also be used with `navigation.dispatch`:
+
+```js
+import { DrawerActions } from '@react-navigation/native';
+
+navigation.dispatch(DrawerActions.openDrawer());
+```
+
 ## closeDrawer
 
 The `closeDrawer` action can be used to close the drawer pane.
@@ -66,7 +75,6 @@ import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
-  DrawerActions,
 } from '@react-navigation/native';
 import {
   createDrawerNavigator,
@@ -76,14 +84,12 @@ import {
 } from '@react-navigation/drawer';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
-      <Button onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-        Open Drawer
-      </Button>
+      <Button onPress={() => navigation.openDrawer()}>Open Drawer</Button>
     </View>
   );
 }
@@ -98,7 +104,7 @@ function CustomDrawerContent(props) {
         label="Close drawer"
         onPress={() => {
           // codeblock-focus-start
-          navigation.dispatch(DrawerActions.closeDrawer());
+          navigation.closeDrawer();
           // codeblock-focus-end
         }}
       />
@@ -120,6 +126,14 @@ export default function App() {
 }
 ```
 
+It can also be used with `navigation.dispatch`:
+
+```js
+import { DrawerActions } from '@react-navigation/native';
+
+navigation.dispatch(DrawerActions.closeDrawer());
+```
+
 ## toggleDrawer
 
 The `toggleDrawer` action can be used to toggle the drawer pane.
@@ -131,48 +145,29 @@ import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
-  DrawerActions,
 } from '@react-navigation/native';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home!</Text>
-      <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.toggleDrawer();
+          // codeblock-focus-end
+        }}
+      >
         Toggle Drawer
       </Button>
     </View>
   );
 }
 
-function CustomDrawerContent(props) {
-  const { navigation } = props;
-
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => {
-          // codeblock-focus-start
-          navigation.dispatch(DrawerActions.toggleDrawer());
-          // codeblock-focus-end
-        }}
-      />
-    </DrawerContentScrollView>
-  );
-}
-
 const MyDrawer = createDrawerNavigator({
-  drawerContent: (props) => <CustomDrawerContent {...props} />,
   screens: {
     Home: HomeScreen,
   },
@@ -183,6 +178,14 @@ const Navigation = createStaticNavigation(MyDrawer);
 export default function App() {
   return <Navigation />;
 }
+```
+
+It can also be used with `navigation.dispatch`:
+
+```js
+import { DrawerActions } from '@react-navigation/native';
+
+navigation.dispatch(DrawerActions.toggleDrawer());
 ```
 
 ## jumpTo
@@ -199,12 +202,11 @@ import { Button } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   useNavigation,
-  DrawerActions,
 } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation('Home');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -212,9 +214,7 @@ function HomeScreen() {
       <Button
         onPress={() => {
           // codeblock-focus-start
-          navigation.dispatch(
-            DrawerActions.jumpTo('Profile', { user: 'Satya' })
-          );
+          navigation.jumpTo('Profile', { user: 'Satya' });
           // codeblock-focus-end
         }}
       >
@@ -247,4 +247,12 @@ const Navigation = createStaticNavigation(MyDrawer);
 export default function App() {
   return <Navigation />;
 }
+```
+
+It can also be used with `navigation.dispatch`:
+
+```js
+import { DrawerActions } from '@react-navigation/native';
+
+navigation.dispatch(DrawerActions.jumpTo('Profile', { user: 'Satya' }));
 ```

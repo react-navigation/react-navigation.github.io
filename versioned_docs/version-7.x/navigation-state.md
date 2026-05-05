@@ -69,6 +69,35 @@ const state = {
 
 It's important to note that even if there's a nested navigator, the `state` property on the `route` object is not added until a navigation happens, hence it's not guaranteed to exist, or maybe [stale](#stale-state-objects).
 
+## Navigator specific state
+
+Various navigators may also add additional properties to the navigation state object. Each navigator uses a [router](custom-routers.md) to manage the navigation state, and the router determines the shape of the navigation state object.
+
+Built-in navigators add the following properties:
+
+### Stack
+
+For navigators using the built-in `StackRouter`, such as [Stack](stack-navigator.md) and [Native Stack](native-stack-navigator.md) navigators, the state object has the following additional properties:
+
+- `type` - Always `stack`.
+- `preloadedRoutes` - Route objects for stack screens preloaded with [`preload`](navigation-actions.md#preload).
+
+### Tab
+
+For navigators using the built-in `TabRouter`, such as [Bottom Tabs](bottom-tab-navigator.md) and [Material Top Tabs](material-top-tab-navigator.md) navigators, the state object has the following additional properties:
+
+- `type` - Always `tab`.
+- `history` - Route history entries with `{ type: 'route', key, params? }`.
+- `preloadedRouteKeys` - Route keys for tab screens preloaded with [`preload`](navigation-actions.md#preload).
+
+### Drawer
+
+For navigators using the built-in `DrawerRouter`, such as [Drawer](drawer-navigator.md) navigator, the state object contains the same properties as the `TabRouter` with the following additional properties:
+
+- `type` - Always `drawer`.
+- `default` - The default drawer status from the `defaultStatus` option, either `open` or `closed`.
+- `history` - Drawer entries with `{ type: 'drawer', status: 'open' | 'closed' }` in addition to route history entries.
+
 ## History stack
 
 In React Navigation, each navigator may maintain a history stack to keep track of visited entries. This is used when navigating back, syncing with browser history on the Web, etc.

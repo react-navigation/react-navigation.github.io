@@ -514,13 +514,16 @@ function App() {
 
 </TabItem>
 </Tabs>
+
 See [configuring links guide](configuring-links.md) for more details on how to configure deep links and URL integration.
 
 #### Options
 
 ##### `linking.prefixes`
 
-URL prefixes to handle. You can provide multiple prefixes to support custom schemes as well as [universal links](https://developer.apple.com/ios/universal-links/).
+Optional URL prefixes to handle. By default, it matches any host starting with `http`, `https`, and custom schemes such as `myapp://` if this option is not specified.
+
+You can provide multiple prefixes to support custom schemes as well as [universal links](https://developer.apple.com/ios/universal-links/) to explicitly handle certain prefixes.
 
 Only URLs matching these prefixes will be handled. The prefix will be stripped from the URL before parsing.
 
@@ -591,7 +594,6 @@ import messaging from '@react-native-firebase/messaging';
 
 <Navigation
   linking={{
-    prefixes: ['https://example.com', 'example://'],
     // highlight-start
     async getInitialURL() {
       // Check if app was opened from a deep link
@@ -621,7 +623,6 @@ import messaging from '@react-native-firebase/messaging';
 
 <NavigationContainer
   linking={{
-    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },
@@ -667,7 +668,6 @@ import messaging from '@react-native-firebase/messaging';
 
 <Navigation
   linking={{
-    prefixes: ['https://example.com', 'example://'],
     // highlight-start
     subscribe(listener) {
       const onReceiveURL = ({ url }: { url: string }) => listener(url);
@@ -709,7 +709,6 @@ import messaging from '@react-native-firebase/messaging';
 
 <NavigationContainer
   linking={{
-    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },
@@ -765,7 +764,6 @@ Example:
 ```js
 <Navigation
   linking={{
-    prefixes: ['https://example.com', 'example://'],
     // highlight-start
     getStateFromPath(path, config) {
       // Return a state object here
@@ -782,7 +780,6 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },
@@ -815,7 +812,6 @@ Example:
 ```js
 <Navigation
   linking={{
-    prefixes: ['https://example.com', 'example://'],
     // highlight-start
     getPathFromState(state, config) {
       // Return a path string here
@@ -832,7 +828,6 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },
@@ -865,7 +860,6 @@ Example:
 ```js
 <Navigation
   linking={{
-    prefixes: ['https://example.com', 'example://'],
     // highlight-start
     getActionFromState(state, config) {
       // Return a navigation action here
@@ -882,7 +876,6 @@ Example:
 ```js
 <NavigationContainer
   linking={{
-    prefixes: ['https://example.com', 'example://'],
     config: {
       // ...
     },

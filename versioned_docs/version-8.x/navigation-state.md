@@ -27,7 +27,7 @@ There are few properties present in every navigation state object:
 - `type` - Type of the navigator that the state belongs to, e.g. `stack`, `tab`, `drawer`.
 - `key` - Unique key to identify the navigator.
 - `routeNames` - Name of the screens defined in the navigator. This is an unique array containing strings for each screen.
-- `routes` - List of route objects (screens) which are rendered in the navigator. It also represents the history in a stack navigator. There should be at least one item present in this array.
+- `routes` - List of route objects (screens) which are rendered in the navigator. In a stack or native stack navigator, the entries up to and including `index` also represent the history. There should be at least one item present in this array.
 - `index` - Index of the focused route object in the `routes` array.
 - `history` - An optional list of visited items. See [History stack](#history-stack) for more details.
 - `stale` - A navigation state is assumed to be stale unless the `stale` property is explicitly set to `false`. This means that the state object needs to be ["rehydrated"](#stale-state-objects).
@@ -70,6 +70,37 @@ const state = {
 
 It's important to note that even if there's a nested navigator, the `state` property on the `route` object is not added until a navigation happens, hence it's not guaranteed to exist, or maybe [stale](#stale-state-objects).
 
+## Navigator specific state
+
+Various navigators may also add additional properties to the navigation state object. Each navigator uses a [router](custom-routers.md) to manage the navigation state, and the router determines the shape of the navigation state object.
+
+Built-in navigators add the following properties:
+
+### Stack
+
+For navigators using the built-in `StackRouter`, such as [Stack](stack-navigator.md) and [Native Stack](native-stack-navigator.md) navigators, the state object has the following additional properties:
+
+- `type` - Always `stack`.
+- `retainedRouteKeys` - Route keys for routes that should be [retained](stack-actions.md#retain) when they are removed from the history stack.
+
+The `routes` array contains the history of visited screens until `index`, and the route objects after `index` represent [preloaded](navigation-actions.md#preload) or [retained](stack-actions.md#retain) screens.
+
+### Tab
+
+For navigators using the built-in `TabRouter`, such as [Bottom Tabs](bottom-tab-navigator.md) and [Material Top Tabs](material-top-tab-navigator.md) navigators, the state object has the following additional properties:
+
+- `type` - Always `tab`.
+- `history` - Route history entries with `{ type: 'route', key, params? }`.
+- `preloadedRouteKeys` - Route keys for tab screens preloaded with [`preload`](navigation-actions.md#preload).
+
+### Drawer
+
+For navigators using the built-in `DrawerRouter`, such as [Drawer](drawer-navigator.md) navigator, the state object contains the same properties as the `TabRouter` with the following additional properties:
+
+- `type` - Always `drawer`.
+- `default` - The default drawer status from the `defaultStatus` option, either `open` or `closed`.
+- `history` - Drawer entries with `{ type: 'drawer', status: 'open' | 'closed' }` in addition to route history entries.
+
 ## History stack
 
 In React Navigation, each navigator may maintain a history stack to keep track of visited entries. This is used when navigating back, syncing with browser history on the Web, etc.
@@ -78,7 +109,7 @@ Unlike Web, which has a linear history stack, React Navigation uses a nested his
 
 The history stack for a navigator is determined from the following sources:
 
-- `state.history` if present, otherwise `state.routes`
+- `state.history` if present, otherwise `state.routes` until `state.index`
 - `route.history` for each route in `state.routes`
 
 When determining total length of history stack (e.g. to sync with browser history on the Web), these 2 sources are combined.

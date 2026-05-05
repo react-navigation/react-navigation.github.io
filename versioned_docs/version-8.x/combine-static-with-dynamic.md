@@ -195,7 +195,6 @@ import { createPathConfigForStaticNavigation } from '@react-navigation/native';
 const feedScreens = createPathConfigForStaticNavigation(FeedTabs);
 
 const linking = {
-  prefixes: ['https://example.com', 'example://'],
   config: {
     screens: {
       Home: '',
