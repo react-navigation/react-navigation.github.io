@@ -1373,6 +1373,22 @@ Pops all of the screens in the stack except the first one and navigates to it.
 navigation.popToTop();
 ```
 
+#### `retain`
+
+Marks or unmarks the current screen in the stack to be retained after it is removed from the history. The method accepts the following argument:
+
+- `enable` - _boolean_ - Whether to retain the screen.
+
+```js
+navigation.retain(true);
+```
+
+:::warning
+
+Retaining screens is currently not supported on Android & iOS with Native Stack.
+
+:::
+
 ### Hooks
 
 The native stack navigator exports the following hooks:

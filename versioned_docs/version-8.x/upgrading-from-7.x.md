@@ -333,6 +333,10 @@ Similarly, if you were using `state.preloadedRoutes` to get the preloaded routes
 + const preloadedRoutes = state.routes.slice(state.index + 1);
 ```
 
+These changes also enable the new [retain](#stack-and-native-stack-navigators-now-support-retaining-screens) feature for Stack and Native Stack Navigators.
+
+See [Navigation state](navigation-state.md) for more details.
+
 ##### Preloaded screens behave closer to regular screens
 
 Previously, when a screen was preloaded in Stack and Native Stack Navigators, there were a few restrictions:
@@ -1047,6 +1051,29 @@ There is now a new `NavigationProvider` component that consolidates them, and ad
 ```
 
 This is only necessary if you have custom components rendered in a navigator, e.g. buttons in a custom tab bar. Components rendered as part of a screen will have access to the `navigation` and `route` objects without any additional setup.
+
+### Stack and Native Stack Navigators now support retaining screens
+
+Stack and Native Stack Navigators now support retaining screens after they are removed from the navigation history.
+
+Retaining a screen keeps it in the navigation state and rendered in the background, so local component state is preserved. The screen can later be brought back into focus with `navigate`:
+
+```js
+navigation.retain(true);
+```
+
+To stop retaining the current screen, call `retain(false)`:
+
+```js
+navigation.retain(false);
+```
+
+This can be useful in various scenarios:
+
+- Keeping a frequently used heavy screen in memory to avoid unmounting and remounting it for better performance when navigating back and forth.
+- Keeping a screen with a video or audio player rendered to enable functionality such as background playback or picture-in-picture mode when the user navigates away from the screen.
+
+See [`retain`](stack-actions.md#retain) for more details.
 
 ### `Header` from `@react-navigation/elements` has been reworked
 

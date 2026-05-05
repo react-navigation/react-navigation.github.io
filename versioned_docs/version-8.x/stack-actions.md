@@ -466,3 +466,140 @@ export default function App() {
   return <Navigation />;
 }
 ```
+
+## retain
+
+The `retain` action marks a route to be retained in the [navigation state](navigation-state.md) after it is removed from history.
+
+It takes the following argument:
+
+- `enable` - _boolean_ - Whether to retain the route. Passing `true` marks the route to be retained, while `false` unmarks it.
+
+```js name="Stack actions retain" snack static2dynamic
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
+import {
+  createStaticNavigation,
+  useNavigation,
+  StackActions,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home!</Text>
+      <Button
+        onPress={() => {
+          navigation.dispatch(StackActions.push('Profile'));
+        }}
+      >
+        Push Profile on the stack
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation();
+  const [count, setCount] = React.useState(0);
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile!</Text>
+      <Text>Count: {count}</Text>
+      <Button onPress={() => setCount((value) => value + 1)}>
+        Increment count
+      </Button>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dispatch(StackActions.retain(true));
+          // codeblock-focus-end
+        }}
+      >
+        Retain Profile
+      </Button>
+      <Button
+        onPress={() => {
+          navigation.dispatch(StackActions.replace('Settings'));
+        }}
+      >
+        Replace with Settings
+      </Button>
+      <Button
+        onPress={() => {
+          navigation.dispatch(StackActions.retain(false));
+        }}
+      >
+        Unretain Profile
+      </Button>
+      <Button
+        onPress={() => {
+          navigation.goBack();
+        }}
+      >
+        Go back
+      </Button>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings!</Text>
+      <Button
+        onPress={() => {
+          navigation.navigate('Profile');
+        }}
+      >
+        Navigate to retained Profile
+      </Button>
+      <Button onPress={() => navigation.dispatch(StackActions.popToTop())}>
+        Pop to top
+      </Button>
+    </View>
+  );
+}
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+    Settings: SettingsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+When a screen is marked to be retained, actions such as [`goBack`](navigation-actions.md#goback), [`pop`](#pop), [`popToTop`](#poptotop), [`replace`](#replace) etc. will remove it from history, but keep it in the navigation state. So the screen is not unmounted and stays rendered in the background, preserving its local state. Similar to [preloaded routes](navigation-actions.md#preload), it can be brought to focus with `navigate`.
+
+This can be useful in various scenarios:
+
+- Keeping a frequently used heavy screen in memory to avoid unmounting and remounting it for better performance when navigating back and forth.
+- Keeping a screen with a video or audio player rendered to enable functionality such as background playback or picture-in-picture mode when the user navigates away from the screen.
+
+If a route was removed from history while being retained, `retain(false)` will remove it from the navigation state and unmount the screen. If the route is still present in history, `retain(false)` will just unmark it, and the route will be removed from the navigation state when it's removed from history.
+
+By default, the action applies to the route that dispatched it. If you want to retain a particular route, you can add a `source` property referring to the route key and `target` property referring to the navigation state key:
+
+```js
+import { StackActions } from '@react-navigation/native';
+
+navigation.dispatch({
+  ...StackActions.retain(true),
+  source: route.key,
+  target: navigation.getState().key,
+});
+```
