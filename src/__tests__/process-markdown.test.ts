@@ -146,7 +146,7 @@ describe('processMarkdown', () => {
 
     const { content: result } = await processMarkdown(input);
 
-    assert.ok(result.includes('**Static:**'));
+    assert.ok(result.includes('**Static (Recommended):**'));
     assert.ok(result.includes('**Dynamic:**'));
     assert.ok(result.includes('NavigationContainer'));
     assert.ok(!result.includes('static2dynamic'));
