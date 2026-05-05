@@ -12,14 +12,6 @@ Please refer to the library's documentation to see which version of React Naviga
 
 :::
 
-## Expo Router
-
-Expo Router is a file-based router for React Native and web applications built by the Expo team.
-
-[Documentation](https://docs.expo.dev/router/introduction/)
-
-[Repository](https://github.com/expo/expo/tree/main/packages/expo-router)
-
 ## Solito
 
 A wrapper around React Navigation and Next.js that lets you share navigation code across platforms. Also, it provides a set of patterns and examples for building cross-platform apps with React Native + Next.js.
