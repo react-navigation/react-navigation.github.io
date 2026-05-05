@@ -1469,7 +1469,7 @@ code {
 
 .device-frame {
   --device-frame-bezel: 10px;
-  --device-frame-radius: 52px;
+  --device-frame-radius: 67px;
   --device-frame-screen-radius: calc(
     var(--device-frame-radius) - var(--device-frame-bezel) - 2px
   );

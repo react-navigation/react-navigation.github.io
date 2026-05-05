@@ -68,7 +68,7 @@ npx pod-install ios
 
 ## Recreating the iOS page transition
 
-<div className="device-frame" style={{ '--device-frame-radius': '64px' }}>
+<div className="device-frame">
 <video playsInline autoPlay muted loop>
   <source src="/assets/blog/screen-transitions/ios-reference.mp4" />
 </video>
@@ -155,7 +155,7 @@ const RootStack = createBlankStackNavigator({
 });
 ```
 
-<div className="device-frame" style={{ '--device-frame-radius': '64px' }}>
+<div className="device-frame">
 <video playsInline autoPlay muted loop>
   <source src="/assets/blog/screen-transitions/ios-card-transition.mp4" />
 </video>
@@ -183,7 +183,7 @@ Where `react-native-screen-transitions` starts to pay off is when the transition
 
 ## navigation.zoom()
 
-<div className="device-frame" style={{ '--device-frame-radius': '64px' }}>
+<div className="device-frame">
 <video playsInline autoPlay muted loop>
   <source src="/assets/blog/screen-transitions/navigation-zoom.mp4" />
 </video>
@@ -272,7 +272,7 @@ A few choices here are worth calling out.
 
 The example above works well when you have one obvious source and one obvious destination. A gallery is more interesting. You might have a masonry grid on the index screen, then a paged detail screen where the user can swipe between images before closing.
 
-<div className="device-frame" style={{ '--device-frame-radius': '64px' }}>
+<div className="device-frame">
 <video playsInline autoPlay muted loop>
   <source src="/assets/blog/screen-transitions/boundary-groups.mp4" />
 </video>
