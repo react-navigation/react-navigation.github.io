@@ -1,77 +1,59 @@
 ---
 id: navigation-context
-title: NavigationContext
-sidebar_label: NavigationContext
+title: Navigation context
+sidebar_label: Navigation context
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+The `NavigationProvider` provides the [navigation object](navigation-object.md) and [route object](route-object.md) to components rendered outside of a screen.
 
-`NavigationContext` provides the `navigation` object (same object as the [navigation](navigation-object.md) prop). In fact, [useNavigation](use-navigation.md) uses this context to get the `navigation` prop.
+Most of the time, you don't need to use this directly. Screens and various built-in components such as headers are automatically provided with the navigation and route objects.
 
-Most of the time, you won't use `NavigationContext` directly, as the provided `useNavigation` covers most use cases. But just in case you have something else in mind, `NavigationContext` is available for you to use.
+## Providing navigation and route
 
-Example:
+Use `NavigationProvider` when you already have `navigation` and `route` objects and need to make them available to a component that doesn't normally have access to them:
 
-```js name="Navigation context" snack static2dynamic
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Button } from '@react-navigation/elements';
-// codeblock-focus-start
-import { NavigationContext } from '@react-navigation/native';
-// codeblock-focus-end
+```js
 import {
+  NavigationProvider,
   useNavigation,
-  createStaticNavigation,
+  useRoute,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function HomeScreen() {
-  return <SomeComponent />;
-}
-
-// codeblock-focus-start
-
-function SomeComponent() {
-  // We can access navigation object via context
-  const navigation = React.useContext(NavigationContext);
-  // codeblock-focus-end
-
+function MyComponent({ navigation, route }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Some component inside HomeScreen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
+    <NavigationProvider navigation={navigation} route={route}>
+      <MyButton />
+    </NavigationProvider>
   );
-  // codeblock-focus-start
 }
-// codeblock-focus-end
 
-function ProfileScreen() {
+function MyButton() {
   const navigation = useNavigation();
+  const route = useRoute();
 
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
-    </View>
-  );
+  // ...
 }
+```
 
-const RootStack = createNativeStackNavigator({
-  initialRouteName: 'Home',
-  screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
-  },
-});
+This is useful for components rendered in [custom navigators](custom-navigators.md) that are not under a screen.
 
-const Navigation = createStaticNavigation(RootStack);
+## Accessing navigation and route
 
-function App() {
-  return <Navigation />;
+For most cases, you should use the [`useNavigation`](use-navigation.md) and [`useRoute`](use-route.md) hooks to access the navigation and route objects. They work in screens rendered in a navigator, or components wrapped in a `NavigationProvider`.
+
+However, if you need access to the contexts directly for any reason, you can use `NavigationContext` and `NavigationRouteContext` to access the navigation and route objects from the immediate parent screen or `NavigationProvider`:
+
+```js
+import * as React from 'react';
+import {
+  NavigationContext,
+  NavigationRouteContext,
+} from '@react-navigation/native';
+
+function MyComponent() {
+  const navigation = React.useContext(NavigationContext);
+  const route = React.useContext(NavigationRouteContext);
+
+  // ...
 }
-
-export default App;
 ```

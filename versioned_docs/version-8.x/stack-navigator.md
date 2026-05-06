@@ -249,13 +249,6 @@ Interpolated styles for various parts of the header. Refer the [Animations secti
 
 If `false`, the keyboard will NOT automatically dismiss when navigating to a new screen from this screen. Defaults to `true`.
 
-#### `freezeOnBlur`
-
-Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to `false`.
-Defaults to `true` when `enableFreeze()` from `react-native-screens` package is run at the top of the application.
-
-Only supported on iOS and Android.
-
 ### Header related options
 
 You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Stack.Navigator` or `options` prop of `Stack.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
@@ -271,7 +264,6 @@ This accepts a function that returns a React Element to display as a header. The
 - `navigation` - The navigation object for the current screen.
 - `route` - The route object for the current screen.
 - `options` - The options for the current screen
-- `layout` - Dimensions of the screen, contains `height` and `width` properties.
 - `progress` Animated nodes representing the progress of the animation.
 - `back` - Options for the back button, contains an object with a `title` property to use for back button label.
 - `styleInterpolator` - Function which returns interpolated styles for various elements in the header.
@@ -412,6 +404,8 @@ Defaults to back icon image for the platform:
 
 Title string used by the back button on iOS. Defaults to the previous scene's title. Use `headerBackButtonDisplayMode` to customize the behavior.
 
+On iOS 26 and later, the back button title isn't shown by default to match the platform behavior. Use [`headerBackButtonDisplayMode`](#headerbackbuttondisplaymode) to display it.
+
 #### `headerTruncatedBackTitle`
 
 Title string used by the back button when `headerBackTitle` doesn't fit on the screen. `"Back"` by default.
@@ -426,7 +420,7 @@ Supported values:
 - `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon).
 - `minimal`: Always displays only the icon without a title.
 
-Defaults to `default` on iOS, and `minimal` on Android.
+Defaults to `default` on iOS 25 and below, and `minimal` on iOS 26 and above and other platforms.
 
 #### `headerBackTitleStyle`
 
@@ -984,10 +978,8 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
     - `progress` - Animated node representing the progress value of the current screen. `0` when screen should start coming into view, `0.5` when it's mid-way, `1` when it should be fully in view.
   - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
     - `progress` - Animated node representing the progress value of the next screen.
-  - `layouts` - Layout measurements for various items we use for animation. Each layout object contain `height` and `width` properties.
+  - `layouts` - Layout measurements for the screen. Each layout object contain `height` and `width` properties.
     - `screen` - Layout of the whole screen.
-    - `title` - Layout of the title element. Might be `undefined` when not rendering a title.
-    - `leftLabel` - Layout of the back button label. Might be `undefined` when not rendering a back button label.
 
   A config that just fades the elements looks like this:
 

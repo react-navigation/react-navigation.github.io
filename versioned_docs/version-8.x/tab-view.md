@@ -56,7 +56,7 @@ npx pod-install ios
 ```js name="React Native Tab View" snack
 // codeblock-focus-start
 import * as React from 'react';
-import { View, useWindowDimensions } from 'react-native';
+import { View } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
 // codeblock-focus-end
@@ -80,7 +80,6 @@ const routes = [
 ];
 
 export default function App() {
-  const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
 
   return (
@@ -88,7 +87,6 @@ export default function App() {
       navigationState={{ index, routes }}
       renderScene={renderScene}
       onIndexChange={setIndex}
-      initialLayout={{ width: layout.width }}
     />
   );
 }
@@ -263,7 +261,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-  useWindowDimensions,
 } from 'react-native';
 import { SceneMap, TabView } from 'react-native-tab-view';
 
@@ -316,7 +313,6 @@ const renderTabBar = ({ navigationState, position, jumpTo }) => {
 };
 
 export default function App() {
-  const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
 
   return (
@@ -326,7 +322,6 @@ export default function App() {
       // highlight-next-line
       renderTabBar={renderTabBar}
       onIndexChange={setIndex}
-      initialLayout={{ width: layout.width }}
     />
   );
 }
@@ -379,7 +374,7 @@ Example:
 
 ```js
 import * as React from 'react';
-import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { SceneMap, TabView } from 'react-native-tab-view';
 
 const FirstRoute = () => (
@@ -412,7 +407,6 @@ const routes = [
 
 // codeblock-focus-start
 export default function App() {
-  const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
 
   return (
@@ -424,7 +418,6 @@ export default function App() {
       // highlight-next-line
       renderLazyPlaceholder={renderLazyPlaceholder}
       onIndexChange={setIndex}
-      initialLayout={{ width: layout.width }}
     />
   );
 }
@@ -552,17 +545,6 @@ Callback which is called when the swipe gesture starts, i.e. the user touches th
 ##### `onSwipeEnd`
 
 Callback which is called when the swipe gesture ends, i.e. the user lifts their finger from the screen after the swipe gesture.
-
-##### `initialLayout`
-
-Object containing the initial height and width of the screens. Passing this will improve the initial rendering performance. For most apps, this is a good default:
-
-```js
-<TabView
-  initialLayout={{ width: Dimensions.get('window').width }}
-  ...
-/>
-```
 
 ##### `pagerStyle`
 
@@ -870,21 +852,6 @@ function HomeComponent() {
 
 export default React.memo(HomeComponent);
 ```
-
-### Avoid one frame delay
-
-We need to measure the width of the container and hence need to wait before rendering some elements on the screen. If you know the initial width upfront, you can pass it in and we won't need to wait for measuring it. Most of the time, it's just the window width.
-
-For example, pass the following `initialLayout` to `TabView`:
-
-```js
-const initialLayout = {
-  height: 0,
-  width: Dimensions.get('window').width,
-};
-```
-
-The tab view will still react to changes in the dimension and adjust accordingly to accommodate things like orientation change.
 
 ### Optimize large number of routes
 

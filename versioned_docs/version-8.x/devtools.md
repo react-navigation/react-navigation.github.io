@@ -23,7 +23,7 @@ The package exposes the following APIs:
 
 ### `useLogger`
 
-This hook provides a logger for React Navigation. It logs the navigation state and actions to the console.
+This hook provides a logger for React Navigation. It logs the navigation state, actions, deep links, and events emitted by navigators to the console.
 
 <video playsInline autoPlay muted loop style={{ width: "585px" }}>
 

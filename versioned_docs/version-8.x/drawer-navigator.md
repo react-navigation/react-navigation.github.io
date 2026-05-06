@@ -448,6 +448,10 @@ drawerItemStyle: {
 },
 ```
 
+#### `drawerItemTestID`
+
+ID to locate the drawer item in tests.
+
 #### `drawerLabelStyle`
 
 Style object to apply to the `Text` style inside content section which renders a label.
@@ -656,13 +660,6 @@ Minimum swipe distance threshold that should activate opening the drawer.
 #### `keyboardDismissMode`
 
 Whether the keyboard should be dismissed when the swipe gesture begins. Defaults to `'on-drag'`. Set to `'none'` to disable keyboard handling.
-
-#### `freezeOnBlur`
-
-Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to `false`.
-Defaults to `true` when `enableFreeze()` from `react-native-screens` package is run at the top of the application.
-
-Only supported on iOS and Android.
 
 #### `popToTopOnBlur`
 

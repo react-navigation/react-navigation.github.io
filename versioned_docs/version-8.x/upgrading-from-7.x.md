@@ -265,6 +265,10 @@ The following props have been removed:
 
 If you use `insets` and `layout` in your custom tab bar, you can use [`useSafeAreaInsets`](https://appandflow.github.io/react-native-safe-area-context/api/use-safe-area-insets/) and [`useSafeAreaFrame`](https://appandflow.github.io/react-native-safe-area-context/api/use-safe-area-frame/) from [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context) instead to get the same values.
 
+If you were previously using `@react-navigation/bottom-tabs/unstable`, some of the options have changed:
+
+- `tabBarMinimizeBehavior: 'never'` has been renamed to `tabBarMinimizeBehavior: 'none'`
+
 See the [Bottom Tab Navigator docs](bottom-tab-navigator.md) for all the available options.
 
 #### Bottom Tabs no longer shows header by default
@@ -368,6 +372,19 @@ If your existing code checked `navigation.isFocused()` before calling `setOption
 
 See [`navigation.preload`](navigation-object.md#preload) for usage details.
 
+##### `useNavigationBuilder` no longer returns `describe`
+
+Previously `useNavigationBuilder` returned a `describe` function that created a generic `descriptor` object, similar to the values in `descriptors`. Since preloaded routes were not real routes (in `state.routes`), `describe` was used to create a descriptor for preloaded routes.
+
+Since preloaded routes have been reworked to be normal routes in `state.routes`, the `describe` function has been removed.
+
+If you have a custom navigator that uses `describe` for preloaded routes, update your code to use the [new shape of navigation state](#stack-navigation-state-shape-has-changed), then use `descriptors[route.key]` instead of `describe(route)` to get the descriptor for a route:
+
+```diff lang=js
+- const descriptor = describe(route);
++ const descriptor = descriptors[route.key];
+```
+
 #### Navigators no longer accept an `id` prop
 
 Previously, navigators accepted an `id` prop to identify them - which was used with `navigation.getParent(id)` to get a parent navigator by id. However, there were a couple of issues with this approach:
@@ -453,9 +470,11 @@ This meant that if the `layout` changed frequently, such as resizing the window 
 To avoid this, we have removed layout related props from these components:
 
 - `layout` prop from `Header` component from `@react-navigation/elements`
-- `titleLayout` and `screenLayout` props from `HeaderBackButton` component from `@react-navigation/elements`
+- `titleLayout`, `screenLayout`, and `onLabelLayout` props from `HeaderBackButton` component from `@react-navigation/elements`
+- `layout` prop from the bottom tab bar props
+- `layout` prop from `Header` in `@react-navigation/stack`
 - `layouts.title` and `layouts.leftLabel` parameters from `headerStyleInterpolator` in `@react-navigation/stack`
-- `layout` prop from `react-native-tab-view`
+- `layout` and `initialLayout` props from `react-native-tab-view`
 - `layout` prop from `react-native-drawer-layout`
 
 Since React Native doesn't provide APIs to handle layout changes in styles, it may still be necessary to handle layout changes manually in some cases. So we have added a [`useFrameSize`](elements.md#useframesize) hook that takes a selector function to minimize re-renders:
@@ -655,8 +674,13 @@ The following API that were marked as deprecated in React Navigation 7 have been
   ```
 
 - `getId` from the navigation object has been removed since the [`id` prop has been removed](#navigators-no-longer-accept-an-id-prop).
-
 - `navigationInChildEnabled` prop from `NavigationContainer` has been removed. This behavior is no longer supported.
+- `headerLargeTitle` option from Native Stack Navigator has been removed. Use `headerLargeTitleEnabled` instead:
+
+  ```diff lang=js
+  - headerLargeTitle: true
+  + headerLargeTitleEnabled: true
+  ```
 
 #### The linking config no longer requires a `prefixes` option
 
@@ -780,7 +804,7 @@ Some of these exports are still available and exported at `@react-navigation/ele
 
 #### The `getDefaultHeaderHeight` utility now accepts an object instead of positional arguments
 
-The `getDefaultHeaderHeight` utility from `@react-navigation/elements` now accepts an object with named properties instead of positional arguments to improve readability"
+The `getDefaultHeaderHeight` utility from `@react-navigation/elements` now accepts an object with named properties instead of positional arguments to improve readability:
 
 ```diff lang=js
 - getDefaultHeaderHeight(layout, false, statusBarHeight);
@@ -831,6 +855,18 @@ This can be useful in various scenario:
 - A screen with a custom modal component, where the modal is not a separate screen in the navigator, but its state should be reflected in the URL and history.
 
 See [`pushParams` docs](navigation-actions.md#pushparams) for more details.
+
+### `preload` now supports a `reuse` option in Stack navigators
+
+Previously, calling `preload` for the same screen multiple times in a Stack or Native Stack Navigator would add another preloaded route.
+
+In React Navigation 8, you can pass `reuse: true` to update params for an existing preloaded or matching route instead:
+
+```js
+navigation.preload('Profile', { user: 'jane' }, { reuse: true });
+```
+
+See [`preload`](navigation-actions.md#preload) for more details.
 
 ### Themes now support `ColorValue` and CSS custom properties
 
@@ -1030,6 +1066,38 @@ export default function App() {
 
 See [State persistence docs](state-persistence.md) for more details.
 
+### Static navigators can pass dynamic props or be wrapped with `.with`
+
+Static navigators now support a `.with` method to pass dynamic props to the navigator component or wrap it with additional providers or components:
+
+```js
+const MyDrawer = createDrawerNavigator({
+  screenOptions: {
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: 'tomato',
+    },
+  },
+  screens: {
+    Home: HomeScreen,
+  },
+}).with(({ Navigator }) => {
+  const isLargeScreen = useIsLargeScreen();
+
+  return (
+    <Navigator
+      screenOptions={{
+        drawerType: isLargeScreen ? 'permanent' : 'front',
+      }}
+    />
+  );
+});
+```
+
+The component passed to `.with` receives the `Navigator` component to render as a prop. It accepts any props supported by the navigator. If `screenOptions` or `screenListeners` are defined both in the static config and on the `Navigator` component, they will be shallow merged.
+
+See [Passing dynamic props or wrapping the navigator](static-configuration.md#passing-dynamic-props-or-wrapping-the-navigator) for more details.
+
 ### `NavigationProvider` lets you provide `navigation` and `route` objects
 
 Previously, to provide the `navigation` and `route` objects to your custom components, it was necessary to use `NavigationContext.Provider` and `NavigationRouteContext.Provider` respectively.
@@ -1082,9 +1150,10 @@ See [`retain`](stack-actions.md#retain) for more details.
 The `Header` component from `@react-navigation/elements` has been reworked with various improvements:
 
 - It uses the new liquid glass effect on iOS 26
+- It no longer needs the layout of the screen to render correctly
 - It supports `ColorValue` and CSS custom properties for colors
 - It supports `headerBlurEffect` on Web (previously only supported on iOS in Native Stack Navigator)
-- It no longer needs the layout of the screen to render correctly
+- It supports `headerLeftBackgroundVisible` and `headerRightBackgroundVisible` to control liquid glass backgrounds for header items on iOS 26+
 
 To match the iOS 26 design, the back button title is no longer shown by default on iOS 26.
 
@@ -1152,6 +1221,33 @@ export default function TabViewExample() {
 ```
 
 You can also create your own custom adapter by implementing the required interface. See the [`react-native-tab-view` docs](tab-view.md) for more information.
+
+### `Button` from `@react-navigation/elements` now supports disabled state, icons and React elements
+
+The [`Button`](elements.md#button) component now supports a disabled state.
+
+It also accepts an `icon` prop to show an icon alongside the button label:
+
+```js
+<Button
+  icon={Platform.select({
+    ios: {
+      type: 'sfSymbol',
+      name: 'person',
+    },
+    android: {
+      type: 'materialSymbol',
+      name: 'person',
+    },
+  })}
+>
+  Go to Profile
+</Button>
+```
+
+See [Icons](icons.md) for more details on icon objects.
+
+In addition, `Button` now accepts a React element as its children, as long as it can be nested inside a `Text` component.
 
 ### New built-in themes base on Material Design are now available
 

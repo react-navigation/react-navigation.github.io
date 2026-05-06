@@ -163,16 +163,6 @@ Possible values:
 
 Only supported on Android.
 
-#### `initialLayout`
-
-Object containing the initial height and width of the screens. Passing this will improve the initial rendering performance. For most apps, this is a good default:
-
-```js
-{
-  width: Dimensions.get('window').width,
-}
-```
-
 #### `style`
 
 Style to apply to the tab view container.

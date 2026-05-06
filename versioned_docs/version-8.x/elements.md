@@ -178,7 +178,7 @@ It receives an object containing following properties:
 - `tintColor`: The color of the icon and label.
 - `pressColor`: The color of the material ripple (Android >= 5.0 only).
 - `pressOpacity`: The opacity of the button when it's pressed (Android < 5.0, and iOS).
-- `displayMode`: How the element displays icon and title. Defaults to `default` on iOS and `minimal` on Android. Possible values:
+- `displayMode`: How the element displays icon and title. Defaults to `default` on iOS 25 and below, and `minimal` on iOS 26 and above and Android. Possible values:
   - `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
   - `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon). iOS >= 14 only, falls back to "default" on older iOS versions.
   - `minimal`: Always displays only the icon without a title.
@@ -373,7 +373,7 @@ Customize the style for the container of the `headerLeft` component, for example
 
 Whether the liquid glass background is visible for the item.
 
-Only supported on iOS 26.0 and later. Older versions of iOS and other platforms never show the background.\
+Only supported on iOS 26.0 and later. Older versions of iOS and other platforms never show the background.
 
 Defaults to `true`.
 
@@ -412,6 +412,35 @@ This is useful if you want to render a semi-transparent header or a blurred back
 Note that if you don't want your content to appear under the header, you need to manually add a top margin to your content. React Navigation won't do it automatically.
 
 To get the height of the header, you can use [`HeaderHeightContext`](#headerheightcontext) with [React's Context API](https://react.dev/reference/react/useContext#contextconsumer) or [`useHeaderHeight`](#useheaderheight).
+
+#### `headerBlurEffect`
+
+Blur effect for the transparent header on Web. The `headerTransparent` option needs to be set to `true` for this to work.
+
+Supported values:
+
+- `extraLight`
+- `light`
+- `regular`
+- `prominent`
+- `systemUltraThinMaterial`
+- `systemThinMaterial`
+- `systemMaterial`
+- `systemThickMaterial`
+- `systemChromeMaterial`
+- `systemUltraThinMaterialLight`
+- `systemThinMaterialLight`
+- `systemMaterialLight`
+- `systemThickMaterialLight`
+- `systemChromeMaterialLight`
+- `dark`
+- `systemUltraThinMaterialDark`
+- `systemThinMaterialDark`
+- `systemMaterialDark`
+- `systemThickMaterialDark`
+- `systemChromeMaterialDark`
+
+Only supported on Web.
 
 #### `headerBackground`
 
@@ -621,17 +650,14 @@ A component used to show the back button header. It's the default for [`headerLe
 - `pressColor` - Color for material ripple (Android >= 5.0 only).
 - `icon` - Icon to display custom icon in header's back button. See [Custom back icon](#custom-back-icon) section for more details.
 - `tintColor` - Tint color for the header.
-- `label` - Label text for the button. Usually the title of the previous screen. By default, this is only shown on iOS.
+- `label` - Label text for the button. Usually the title of the previous screen. By default, this is only shown on iOS 25 and below.
 - `truncatedLabel` - Label text to show when there isn't enough space for the full label.
-- `displayMode`: How the back button displays icon and title. Defaults to `default` on iOS and `minimal` on Android. Possible values:
+- `displayMode`: How the back button displays icon and title. Defaults to `default` on iOS 25 and below, and `minimal` on iOS 26 and above and Android. Possible values:
   - `default`: Displays one of the following depending on the available space: previous screen's title, generic title (e.g. 'Back') or no title (only icon).
   - `generic`: Displays one of the following depending on the available space: generic title (e.g. 'Back') or no title (only icon). iOS >= 14 only, falls back to "default" on older iOS versions.
   - `minimal`: Always displays only the icon without a title.
 - `labelStyle` - Style object for the label.
 - `allowFontScaling` - Whether label font should scale to respect Text Size accessibility settings.
-- `onLabelLayout` - Callback to trigger when the size of the label changes.
-- `screenLayout` - Layout of the screen.
-- `titleLayout` - Layout of the title element in the header.
 - `canGoBack` - Boolean to indicate whether it's possible to navigate back in stack.
 - `accessibilityLabel` - Accessibility label for the button for screen readers.
 - `testID` - ID to locate this button in tests.
@@ -702,7 +728,9 @@ A component that renders a button. In addition to [`PlatformPressable`](#platfor
   - `plain`
   - `filled`
 - `color` - Color of the button. Defaults to the [theme](themes.md)'s primary color.
-- `children` - Content to render inside the button.
+- `icon` - Icon to display before the label. It can be an icon object or a function that returns an icon object or a React element. See [Icons](icons.md) for more details.
+- `disabled` - Boolean which controls whether the button is disabled.
+- `children` - Content to render inside the button. It must be a string or React element that can be nested inside a `Text` component.
 
 In addition, the button integrates with React Navigation and accepts the same props as [`useLinkProps`](use-link-props.md#options) hook.
 
@@ -719,6 +747,29 @@ Or as a regular button:
 ```js
 <Button onPress={() => console.log('button pressed')}>Press me</Button>
 ```
+
+You can use the `icon` prop to show an icon before the label:
+
+```js
+<Button
+  icon={Platform.select({
+    ios: {
+      type: 'sfSymbol',
+      name: 'person',
+    },
+    android: {
+      type: 'materialSymbol',
+      name: 'person',
+    },
+  })}
+  screen="Profile"
+  params={{ userId: 'jane' }}
+>
+  Go to Profile
+</Button>
+```
+
+See [Icons](icons.md) for more details on icons.
 
 ### `Label`
 

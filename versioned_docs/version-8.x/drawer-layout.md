@@ -105,10 +105,6 @@ Callback which is called when the drawer is closed.
 
 Callback which returns a react element to render as the content of the drawer.
 
-##### `layout`
-
-Object containing the layout of the container. Defaults to the dimensions of the application's window.
-
 ##### `drawerPosition`
 
 Position of the drawer on the screen. Defaults to `right` in RTL mode, otherwise `left`.

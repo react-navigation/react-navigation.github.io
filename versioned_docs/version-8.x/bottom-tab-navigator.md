@@ -1024,7 +1024,7 @@ Supported on iOS 18 and above with `native` implementation. Not supported on tvO
 The minimize behavior for the tab bar. Supported values:
 
 - `auto` - resolves to the system default minimize behavior
-- `never` - the tab bar does not minimize
+- `none` - the tab bar does not minimize
 - `onScrollDown` - the tab bar minimizes when scrolling down and expands when scrolling back up
 - `onScrollUp` - the tab bar minimizes when scrolling up and expands when scrolling back down
 

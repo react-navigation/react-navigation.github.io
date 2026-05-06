@@ -402,13 +402,6 @@ Boolean indicating whether the navigation bar should be hidden. Defaults to `fal
 
 Only supported on Android.
 
-#### `freezeOnBlur`
-
-Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to `false`.
-Defaults to `true` when `enableFreeze()` from `react-native-screens` package is run at the top of the application.
-
-Only supported on iOS and Android.
-
 #### `scrollEdgeEffects`
 
 Configures the scroll edge effect for the _content ScrollView_ (the ScrollView that is present in first descendants chain of the Screen).
@@ -910,7 +903,7 @@ headerRight: () => <MaterialCommunityIcons name="map" color="blue" size={36} />;
 
 Whether the liquid glass background is visible for the item.
 
-Only supported on iOS 26.0 and later. Older versions of iOS and other platforms never show the background.\
+Only supported on iOS 26.0 and later. Older versions of iOS and other platforms never show the background.
 
 Defaults to `true`.
 
