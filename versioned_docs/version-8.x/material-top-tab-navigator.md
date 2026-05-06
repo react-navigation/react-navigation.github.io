@@ -151,17 +151,57 @@ String indicating whether the keyboard gets dismissed in response to a drag gest
 - `'on-drag'`: the keyboard is dismissed when a drag begins.
 - `'none'`: drags do not dismiss the keyboard.
 
-#### `overScrollMode`
+#### `adapter`
 
-Used to override default value of pager's overScroll mode.
+Function that renders a custom adapter for rendering pages. By default, the material top tab navigator uses [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) for rendering pages on Android and iOS. However, it may not be suitable for all use cases.
 
-Possible values:
+You can use built-in adapters from [`react-native-tab-view`](tab-view.md#renderadapter) or create your own custom adapter.
 
-- `'auto'` (default): Allow a user to over-scroll this view only if the content is large enough to meaningfully scroll.
-- `'always'`: Always allow a user to over-scroll this view.
-- `'never'`: Never allow a user to over-scroll this view.
+To pass adapter-specific props, wrap the adapter in a function and forward the navigator props:
 
-Only supported on Android.
+```js name="Material Top Tab Navigator adapter" snack static2dynamic
+import { Platform, Text, View } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { PagerViewAdapter, ScrollViewAdapter } from 'react-native-tab-view';
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+    </View>
+  );
+}
+
+const MyTabs = createMaterialTopTabNavigator({
+  adapter: (props) =>
+    Platform.OS === 'android' ? (
+      <PagerViewAdapter {...props} overScrollMode="never" pageMargin={8} />
+    ) : (
+      <ScrollViewAdapter {...props} bounces />
+    ),
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyTabs);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+`PagerViewAdapter` accepts props from [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view), such as `overScrollMode` and `pageMargin`. `ScrollViewAdapter` accepts [scroll view](https://reactnative.dev/docs/scrollview) props such as `bounces`.
 
 #### `style`
 

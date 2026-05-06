@@ -27,7 +27,7 @@ Usage:
 
 ```js name="React Navigation Elements Header" snack
 import * as React from 'react';
-import { SafeAreaProviderCompat } from '@react-navigation/elements';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 // codeblock-focus-start
 import { Header } from '@react-navigation/elements';
@@ -40,9 +40,9 @@ function MyHeader() {
 export default function App() {
   return (
     <NavigationContainer>
-      <SafeAreaProviderCompat>
+      <SafeAreaProvider>
         <MyHeader />
-      </SafeAreaProviderCompat>
+      </SafeAreaProvider>
     </NavigationContainer>
   );
 }
@@ -704,14 +704,6 @@ It can also be a function that returns a React Element to render any component:
 />
 ```
 
-### `MissingIcon`
-
-A component that renders a missing icon symbol. It can be used as a fallback for icons to show that there's a missing icon. It accepts the following props:
-
-- `color` - Color of the icon.
-- `size` - Size of the icon.
-- `style` - Additional styles for the icon.
-
 ### `PlatformPressable`
 
 A component which provides an abstraction on top of [`Pressable`](https://reactnative.dev/docs/Pressable) to handle platform differences. In addition to `Pressable`'s props, it accepts following additional props:
@@ -815,16 +807,6 @@ Usage:
 ```
 
 ## Utilities
-
-### `SafeAreaProviderCompat`
-
-A wrapper over the `SafeAreaProvider` component from [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context) which includes initial values.
-
-Usage:
-
-```js
-<SafeAreaProviderCompat>{/* Your components */}</SafeAreaProviderCompat>
-```
 
 ### `HeaderBackContext`
 

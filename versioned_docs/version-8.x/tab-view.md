@@ -256,12 +256,7 @@ Example:
 
 ```js
 import * as React from 'react';
-import {
-  Animated,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Animated, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SceneMap, TabView } from 'react-native-tab-view';
 
 const FirstRoute = () => (
@@ -452,25 +447,13 @@ String indicating whether the keyboard gets dismissed in response to a drag gest
 - `'on-drag'`: the keyboard is dismissed when a drag begins.
 - `'none'`: drags do not dismiss the keyboard.
 
-##### `overScrollMode`
-
-Used to override default value of pager's overScroll mode.
-
-Possible values:
-
-- `'auto'` (default): Allow a user to over-scroll this view only if the content is large enough to meaningfully scroll.
-- `'always'`: Always allow a user to over-scroll this view.
-- `'never'`: Never allow a user to over-scroll this view.
-
-Only supported on Android.
-
 ##### `swipeEnabled`
 
 Boolean indicating whether to enable swipe gestures. Swipe gestures are enabled by default. Passing `false` will disable swipe gestures, but the user can still switch tabs by pressing the tab bar.
 
 ##### `renderAdapter`
 
-A function that returns a custom adapter for rendering pages. By default, `react-native-tab-view` uses [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) for rendering pages on Android and iOS. However, it may not be suitable for all use cases.
+Function that renders a custom adapter for rendering pages. By default, `react-native-tab-view` uses [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) for rendering pages on Android and iOS. However, it may not be suitable for all use cases.
 
 You can use built-in adapters or create your own custom adapter. For example, you can use `ScrollViewAdapter` to use a `ScrollView` for rendering pages:
 
@@ -497,6 +480,36 @@ The following built-in adapters are available:
 - `PagerViewAdapter`: Uses [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) for rendering pages (default on Android & iOS).
 - `PanResponderAdapter`: Uses [`PanResponder`](https://reactnative.dev/docs/panresponder) for handling gestures (default on Web and other platforms).
 - `ScrollViewAdapter`: Uses [`ScrollView`](https://reactnative.dev/docs/scrollview) for rendering pages.
+
+To pass adapter-specific props, wrap the adapter in a function and forward the `TabView` props:
+
+```js
+import { Platform } from 'react-native';
+import {
+  PagerViewAdapter,
+  ScrollViewAdapter,
+  TabView,
+} from 'react-native-tab-view';
+
+function App() {
+  return (
+    <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      renderAdapter={(props) =>
+        Platform.OS === 'android' ? (
+          <PagerViewAdapter {...props} overScrollMode="never" pageMargin={8} />
+        ) : (
+          <ScrollViewAdapter {...props} bounces />
+        )
+      }
+    />
+  );
+}
+```
+
+`PagerViewAdapter` accepts props from [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view), such as `overScrollMode` and `pageMargin`. `ScrollViewAdapter` accepts [scroll view](https://reactnative.dev/docs/scrollview) props such as `bounces`, `decelerationRate`, and `keyboardShouldPersistTaps`.
 
 You can also create your own custom adapter by implementing the required interface:
 

@@ -305,21 +305,18 @@ type MyNavigationEventMap = {
 export type MyNavigationProp<
   ParamList extends ParamListBase,
   RouteName extends keyof ParamList = keyof ParamList,
-  NavigatorID extends string | undefined = undefined,
 > = NavigationProp<
   ParamList,
   RouteName,
-  NavigatorID,
   TabNavigationState<ParamList>,
   MyNavigationOptions,
-  MyNavigationEventMap
-> &
-  TabActionHelpers<ParamList>;
+  MyNavigationEventMap,
+  TabActionHelpers<ParamList>
+>;
 
 // The props accepted by the component is a combination of 3 things
 type Props = DefaultNavigatorOptions<
   ParamListBase,
-  string | undefined,
   TabNavigationState<ParamListBase>,
   MyNavigationOptions,
   MyNavigationEventMap,
@@ -470,7 +467,6 @@ import MyRouter from './MyRouter';
 
 const { state, descriptors, navigation, NavigationContent } =
   useNavigationBuilder(MyRouter, {
-    id,
     initialRouteName,
     children,
     layout,

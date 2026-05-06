@@ -152,7 +152,7 @@ The library ships with a few standard routers:
 
 There are two main ways to customize routers:
 
-- Override an existing router with the [`UNSTABLE_router`](navigator.md#router) prop on navigators
+- Override an existing router with the [`router`](navigator.md#router) prop on navigators
 - Customized navigators with a custom router, see [extending navigators](custom-navigators.md#extending-navigators)
 
 ### Custom Navigation Actions
