@@ -285,6 +285,25 @@ const unsubscribe = navigationRef.addListener('options', (e) => {
 });
 ```
 
+##### `__unsafe_action__`
+
+The event is triggered whenever a navigation action is dispatched, and before the state changes from the action have been applied:
+
+```js
+const unsubscribe = navigationRef.addListener('__unsafe_action__', (e) => {
+  // The action object that was dispatched
+  console.log(e.data.action);
+
+  // Whether the action didn't result in any state changes
+  console.log(e.data.noop);
+
+  // Stack trace of the action, only available in development
+  console.log(e.data.stack);
+});
+```
+
+It's only intended for debugging purposes and shouldn't be used for app logic.
+
 ## Props
 
 ### `initialState`

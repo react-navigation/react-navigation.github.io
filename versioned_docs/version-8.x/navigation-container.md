@@ -285,6 +285,47 @@ const unsubscribe = navigationRef.addListener('options', (e) => {
 });
 ```
 
+##### `__unsafe_action__`
+
+The event is triggered whenever a navigation action is dispatched, and before the state changes from the action have been applied:
+
+```js
+const unsubscribe = navigationRef.addListener('__unsafe_action__', (e) => {
+  // The action object that was dispatched
+  console.log(e.data.action);
+
+  // Whether the action didn't result in any state changes
+  console.log(e.data.noop);
+
+  // Stack trace of the action, only available in development
+  console.log(e.data.stack);
+});
+```
+
+It's only intended for debugging purposes and shouldn't be used for app logic.
+
+##### `__unsafe_event__`
+
+The event is triggered whenever an event is emitted by a navigator, and after all listeners have been called:
+
+```js
+const unsubscribe = navigationRef.addListener('__unsafe_event__', (e) => {
+  // The type of the event that was emitted
+  console.log(e.data.type);
+
+  // The data object passed when emitting the event
+  console.log(e.data.data);
+
+  // The key of the target route which received the event
+  console.log(e.data.target);
+
+  // Whether event.preventDefault() was called on this event
+  console.log(e.data.defaultPrevented);
+});
+```
+
+It's only intended for debugging purposes and shouldn't be used for app logic. To run app logic in response to an event, [listen to the event on the navigator level](navigation-events.md#listening-to-events) instead.
+
 ## Props
 
 ### `initialState`

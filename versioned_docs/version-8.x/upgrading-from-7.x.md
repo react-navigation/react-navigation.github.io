@@ -1279,6 +1279,23 @@ function MyHeader() {
 
 It renders a plain `View` on non-iPadOS platforms.
 
+### Navigation container ref now supports `__unsafe_event__`
+
+The navigation container ref now supports a `__unsafe_event__` event to listen for events emitted by navigators:
+
+```js
+const unsubscribe = navigationRef.addListener('__unsafe_event__', (e) => {
+  console.log(e.data.type);
+  console.log(e.data.data);
+  console.log(e.data.target);
+  console.log(e.data.defaultPrevented);
+});
+```
+
+This event is only intended for debugging purposes and shouldn't be used for app logic.
+
+See [NavigationContainer docs](navigation-container.md#__unsafe_event__) for more details.
+
 ### `useLogger` devtools now shows more information
 
 Previously, the `useLogger` devtools only showed navigation actions. It now shows the following additional information:
