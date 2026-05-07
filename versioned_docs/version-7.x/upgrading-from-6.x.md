@@ -209,7 +209,7 @@ or
 + const props = useLinkProps({ screen: 'Details', params: { foo: 42 } });
 ```
 
-With this change, you'd now have full type-safety when using the `Link` component given that you have [configured the global type](typescript.md#specifying-default-types-for-usenavigation-link-ref-etc).
+With this change, you'd now have full type-safety when using the `Link` component given that you have [configured the type of your root navigator](typescript.md#specifying-default-types-for-usenavigation-link-ref-etc).
 
 See [`Link`](link.md) and [`useLinkProps`](use-link-props.md) for usage.
 

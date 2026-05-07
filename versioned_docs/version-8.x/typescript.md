@@ -792,7 +792,7 @@ When writing types for React Navigation, there are a couple of things we recomme
 
 1. It's good to create a separate file (e.g. `navigation/types.tsx`) that contains the types related to React Navigation.
 2. Instead of using `CompositeNavigationProp` directly in your components, it's better to create a helper type that you can reuse.
-3. Specifying a global type for your root navigator would avoid manual annotations in many places.
+3. Specifying the type of your root navigator avoids manual annotations in many places.
 
 Considering these recommendations, the file containing the types may look something like this:
 
@@ -825,7 +825,7 @@ export type HomeTabScreenProps<T extends keyof HomeTabParamList> =
   >;
 ```
 
-Then, you'd set up the global type for your root navigator in the same file where your root navigator is defined:
+Then, you'd set up the type for your root navigator in the same file where your root navigator is defined:
 
 ```ts
 import { createStackNavigator } from '@react-navigation/stack';
@@ -837,7 +837,6 @@ function App() {
   // ...
 }
 
-// Specify the global type for the root navigator
 type RootStackType = typeof RootStack;
 
 declare module '@react-navigation/core' {

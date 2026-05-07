@@ -590,7 +590,7 @@ function ProfileScreen({ route }: ProfileScreenProps) {
 ```
 
 ```ts title="Static API"
-import type { StaticScreenProps, StaticParamList } from '@react-navigation/native';
+import type { StaticScreenProps } from '@react-navigation/native';
 
 type Props = StaticScreenProps<{ userId: string }>;
 
@@ -604,16 +604,14 @@ const RootStack = createNativeStackNavigator({
   },
 });
 
-type RootStackParamList = StaticParamList<typeof RootStack>;
+type RootStackType = typeof RootStack;
 
-declare global {
-  namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
-  }
+declare module '@react-navigation/core' {
+  interface RootNavigator extends RootStackType {}
 }
 ```
 
-Here, the `StaticParamList` utility type generates the param list type from the navigator config. Declaring the global `RootParamList` interface enables type checking for [`useNavigation`](use-navigation.md), [`Link`](link.md) etc.
+Declaring the `RootNavigator` module augmentation lets React Navigation know about the navigator used at the root of your app. This enables type checking for [`useNavigation`](use-navigation.md), [`Link`](link.md) etc.
 
 See [Configuring TypeScript](typescript.md) for more details.
 

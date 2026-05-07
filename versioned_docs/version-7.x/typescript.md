@@ -35,11 +35,9 @@ There are 2 steps to configure TypeScript with the static API:
    }
    ```
 
-2. Generate the `ParamList` type for the root navigator and specify it as the default type for the `RootParamList` type:
+2. Declare a module augmentation for `@react-navigation/core` and extend the `RootNavigator` interface with the type of your root navigator.
 
    ```ts
-   import type { StaticParamList } from '@react-navigation/native';
-
    const HomeTabs = createBottomTabNavigator({
      screens: {
        Feed: FeedScreen,
@@ -54,13 +52,11 @@ There are 2 steps to configure TypeScript with the static API:
    });
 
    // highlight-next-line
-   type RootStackParamList = StaticParamList<typeof RootStack>;
+   type RootStackType = typeof RootStack;
 
    // highlight-start
-   declare global {
-     namespace ReactNavigation {
-       interface RootParamList extends RootStackParamList {}
-     }
+   declare module '@react-navigation/core' {
+     interface RootNavigator extends RootStackType {}
    }
    // highlight-end
    ```
@@ -369,7 +365,7 @@ type ProfileScreenNavigationProp = CompositeNavigationProp<
 :::danger
 
 Annotating `useNavigation` isn't type-safe because the type parameter cannot be statically verified.
-Prefer [specifying a default type](#specifying-default-types-for-usenavigation-link-ref-etc) instead.
+Prefer [specifying the type of your root navigator](#specifying-default-types-for-usenavigation-link-ref-etc) instead.
 
 :::
 
@@ -473,19 +469,22 @@ const navigationRef =
 
 ## Specifying default types for `useNavigation`, `Link`, `ref` etc
 
-Instead of manually annotating these APIs, you can specify a global type for your root navigator which will be used as the default type.
+Instead of manually annotating these APIs, you can specify the type of your root navigator, which will be used to infer the default types.
 
-To do this, you can add this snippet somewhere in your codebase:
+To do this, you can use module augmentation for `@react-navigation/core` and extend the `RootNavigator` interface with the type of your root navigator:
 
-```js
-declare global {
-  namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
-  }
+```ts
+// highlight-next-line
+type RootStackType = typeof RootStack;
+
+// highlight-start
+declare module '@react-navigation/core' {
+  interface RootNavigator extends RootStackType {}
 }
+// highlight-end
 ```
 
-The `RootParamList` interface lets React Navigation know about the params accepted by your root navigator. Here we extend the type `RootStackParamList` because that's the type of params for our stack navigator at the root. The name of this type isn't important.
+This lets React Navigation know about the navigator used at the root of your app. Here we extend the `RootNavigator` interface with `RootStackType` because that's the type of the stack navigator at the root. The name of this type isn't important.
 
 Specifying this type is important if you heavily use [`useNavigation`](use-navigation.md), [`Link`](link.md) etc. in your app since it'll ensure type-safety. It will also make sure that you have correct nesting on the [`linking`](navigation-container.md#linking) prop.
 
@@ -495,7 +494,7 @@ When writing types for React Navigation, there are a couple of things we recomme
 
 1. It's good to create a separate file (e.g. `navigation/types.tsx`) that contains the types related to React Navigation.
 2. Instead of using `CompositeNavigationProp` directly in your components, it's better to create a helper type that you can reuse.
-3. Specifying a global type for your root navigator would avoid manual annotations in many places.
+3. Specifying the type of your root navigator avoids manual annotations in many places.
 
 Considering these recommendations, the file containing the types may look something like this:
 
@@ -526,11 +525,24 @@ export type HomeTabScreenProps<T extends keyof HomeTabParamList> =
     BottomTabScreenProps<HomeTabParamList, T>,
     RootStackScreenProps<'Home'>
   >;
+```
 
-declare global {
-  namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
-  }
+Then, you'd set up the type for your root navigator in the same file where your root navigator is defined:
+
+```ts
+import { createStackNavigator } from '@react-navigation/stack';
+import type { RootStackParamList } from './navigation/types';
+
+const RootStack = createStackNavigator<RootStackParamList>();
+
+function App() {
+  // ...
+}
+
+type RootStackType = typeof RootStack;
+
+declare module '@react-navigation/core' {
+  interface RootNavigator extends RootStackType {}
 }
 ```
 

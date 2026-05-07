@@ -61,7 +61,7 @@ We introduced a static API in React Navigation 7. However, some of the TypeScrip
 
 #### The root type now uses navigator type instead of param list
 
-Previously the types for the root navigator were specified using `declare global` and `RootParamList`. Now, they can be specified with module augmentation of `@react-navigation/core` and use the navigator's type instead a param list:
+Previously the types for the root navigator were specified using `declare global` and `RootParamList`. Now, they can be specified with module augmentation of `@react-navigation/core` and use the navigator's type instead of a param list:
 
 ```diff lang=ts
 - type RootStackParamList = StaticParamList<typeof RootStack>;
