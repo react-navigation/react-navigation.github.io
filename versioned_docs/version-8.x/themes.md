@@ -226,9 +226,9 @@ React Navigation provides basic light and dark themes on all platforms and dynam
 
 </div>
 
-The Material themes use platform colors to provide dynamic colors that adapt to the user's wallpaper and theme preferences, and are available on Android 14 (API level 34) and above.
+The Material themes use platform colors to provide dynamic colors that adapt to the user's wallpaper and theme preferences, and are available on Android 14 (API level 34) and above. On unsupported platforms or versions, they fallback to a non-dynamic theme based on Material Design colors.
 
-You can use the [`Platform`](https://reactnative.dev/docs/platform) API to fallback to a different theme on unsupported platforms or versions:
+If you'd like to use a different fallback theme, you can use the [`Platform`](https://reactnative.dev/docs/platform) API:
 
 ```js
 const MyTheme =
