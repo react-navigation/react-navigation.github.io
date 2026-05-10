@@ -265,10 +265,6 @@ The following props have been removed:
 
 If you use `insets` and `layout` in your custom tab bar, you can use [`useSafeAreaInsets`](https://appandflow.github.io/react-native-safe-area-context/api/use-safe-area-insets/) and [`useSafeAreaFrame`](https://appandflow.github.io/react-native-safe-area-context/api/use-safe-area-frame/) from [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context) instead to get the same values.
 
-If you were previously using `@react-navigation/bottom-tabs/unstable`, some of the options have changed:
-
-- `tabBarMinimizeBehavior: 'never'` has been renamed to `tabBarMinimizeBehavior: 'none'`
-
 See the [Bottom Tab Navigator docs](bottom-tab-navigator.md) for all the available options.
 
 #### Bottom Tabs no longer shows header by default
