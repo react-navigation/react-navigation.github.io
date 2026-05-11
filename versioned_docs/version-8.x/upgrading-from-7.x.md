@@ -25,7 +25,7 @@ The minimum required version of React Native, Expo, and TypeScript have been bum
 
 The minimum required version of various peer dependencies have also been bumped:
 
-- `react-native-screens` >= 4.20.0
+- `react-native-screens` >= 4.25.0
 - `react-native-safe-area-context` >= 5.5.0
 - `react-native-reanimated` >= 4.0.0
 - `react-native-pager-view` >= 7.0.0 (8.0.0 is recommended)
@@ -33,7 +33,7 @@ The minimum required version of various peer dependencies have also been bumped:
 
 Previously, many navigators worked without `react-native-screens`, but now it's required for all navigators.
 
-If you're using Expo, you can install compatible versions of these dependencies with `expo install`:
+If you're using Expo, you can install compatible versions of these dependencies with `expo install`.
 
 Additionally, React Navigation now uses [`@callstack/liquid-glass`](https://github.com/callstack/liquid-glass) to implement liquid glass effect on iOS 26. So make sure to install it:
 

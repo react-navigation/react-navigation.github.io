@@ -46,7 +46,7 @@ npm install @react-navigation/bottom-tabs
 
 The navigator requires React Native 0.79 or above is required. If you're using [Expo](https://expo.dev/), it requires SDK 53 or above.
 
-It also needs latest version of `react-native-screens`. If you're using Expo, make sure to use [development builds](https://docs.expo.dev/develop/development-builds/introduction/) instead of Expo Go to use the latest version of `react-native-screens`.
+It also needs `react-native-screens` 4.25.0 or above. If you're using Expo, make sure to use [development builds](https://docs.expo.dev/develop/development-builds/introduction/) instead of Expo Go to use the latest version of `react-native-screens`.
 
 ## Usage
 
