@@ -495,6 +495,14 @@ Only supported on iOS 26 and above.
   <source src="/assets/navigators/bottom-tabs/highlights/minimize-on-scroll.mp4" />
 </video>
 
+#### `tabBarSelectionEnabled`
+
+Whether this tab can be selected.
+
+When `false`, tapping on the tab in tab bar won't select the tab. Custom behavior can be implemented by listening to [`tabPress`](#tabpress) event.
+
+Defaults to `true`.
+
 #### `bottomAccessory`
 
 Function that returns a React element to display as an accessory view. The function receives an options object with a `placement` parameter that can be one of the following values:
@@ -556,8 +564,6 @@ This event is fired when the user presses the tab button for the current screen 
   - If the screen for the tab renders a scroll view, you can use [`useScrollToTop`](use-scroll-to-top.md) to scroll it to top
   - If the screen for the tab renders a stack navigator, a `popToTop` action is performed on the stack
 
-The default behavior of the tab press is controlled natively and cannot be prevented.
-
 ```js
 React.useEffect(() => {
   const unsubscribe = navigation.addListener('tabPress', (e) => {
@@ -568,6 +574,8 @@ React.useEffect(() => {
   return unsubscribe;
 }, [navigation]);
 ```
+
+The default behavior of the tab press is controlled natively and cannot be prevented. Use the [`tabBarSelectionEnabled`](#tabbarselectionenabled) option to prevent the tab from being selected when pressed if you want to implement custom behavior.
 
 #### `transitionStart`
 

@@ -1035,6 +1035,14 @@ Only supported with `native` implementation on iOS 26 and above.
   <source src="/assets/navigators/bottom-tabs/highlights/minimize-on-scroll.mp4" />
 </video>
 
+#### `tabBarSelectionEnabled`
+
+Whether this tab can be selected.
+
+When `false`, tapping on the tab in tab bar won't select the tab. Custom behavior can be implemented by listening to [`tabPress`](#tabpress) event.
+
+Defaults to `true`.
+
 #### `bottomAccessory`
 
 Function that returns a React element to display as an accessory view. The function receives an options object with a `placement` parameter that can be one of the following values:
@@ -1161,73 +1169,18 @@ This event is fired when the user presses the tab button for the current screen 
   - If the screen for the tab renders a scroll view, you can use [`useScrollToTop`](use-scroll-to-top.md) to scroll it to top
   - If the screen for the tab renders a stack navigator, a `popToTop` action is performed on the stack
 
-To prevent the default behavior, you can call `event.preventDefault`.
+```js
+React.useEffect(() => {
+  const unsubscribe = navigation.addListener('tabPress', (e) => {
+    // Do something manually
+    // ...
+  });
 
-:::note
-
-Calling `event.preventDefault` is only supported with the `custom` implementation. The default behavior cannot be prevented with the `native` implementation.
-
-:::
-
-```js name="Tab Press Event" snack static2dynamic
-import * as React from 'react';
-import { Alert, Text, View } from 'react-native';
-import {
-  createStaticNavigation,
-  useNavigation,
-} from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-function HomeScreen() {
-  const navigation = useNavigation('Home');
-
-  // codeblock-focus-start
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('tabPress', (e) => {
-      // Prevent default behavior
-      e.preventDefault();
-
-      // Do something manually
-      // ...
-    });
-
-    return unsubscribe;
-  }, [navigation]);
-  // codeblock-focus-end
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Text style={{ marginTop: 10, color: 'gray' }}>
-        Tab press event is prevented
-      </Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Settings Screen</Text>
-    </View>
-  );
-}
-
-const MyTabs = createBottomTabNavigator({
-  screens: {
-    Home: HomeScreen,
-    Settings: SettingsScreen,
-  },
-});
-
-const Navigation = createStaticNavigation(MyTabs);
-
-export default function App() {
-  return <Navigation />;
-}
+  return unsubscribe;
+}, [navigation]);
 ```
 
-If you have a custom tab bar, make sure to emit this event.
+The default behavior of the tab press is controlled natively and cannot be prevented. Use the [`tabBarSelectionEnabled`](#tabbarselectionenabled) option to prevent the tab from being selected when pressed if you want to implement custom behavior.
 
 :::note
 
