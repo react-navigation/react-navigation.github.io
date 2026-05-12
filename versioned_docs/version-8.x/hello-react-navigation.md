@@ -255,19 +255,72 @@ export default function App() {
 }
 ```
 
-## Passing additional props
+## Passing additional data
 
 <Tabs groupId="config" queryString="config">
 <TabItem value="static" label="Static" default>
 
-Passing additional props to a screen is not supported in the static API.
+To pass additional data to a screen, use `.with` to wrap the navigator with [React context](https://react.dev/reference/react/useContext) to pass data to the screens:
+
+```js
+// highlight-next-line
+const ExtraDataContext = React.createContext();
+
+function HomeScreen() {
+  // highlight-next-line
+  const extraData = React.useContext(ExtraDataContext);
+
+  return <Text>{extraData}</Text>;
+}
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: createNativeStackScreen({
+      screen: HomeScreen,
+    }),
+  },
+}).with(({ Navigator }) => {
+  return (
+    // highlight-next-line
+    <ExtraDataContext.Provider value={someData}>
+      <Navigator />
+    </ExtraDataContext.Provider>
+  );
+});
+```
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-We can pass additional props to a screen with 2 approaches:
+We can pass additional data to a screen with 2 approaches:
 
-1. [React context](https://react.dev/reference/react/useContext) and wrap the navigator with a context provider to pass data to the screens (recommended).
+1. [React context](https://react.dev/reference/react/useContext) and wrap the navigator with a context provider to pass data to the screens (recommended):
+
+   ```js
+   // highlight-next-line
+   const ExtraDataContext = React.createContext();
+
+   function HomeScreen() {
+     // highlight-next-line
+     const extraData = React.useContext(ExtraDataContext);
+
+     return <Text>{extraData}</Text>;
+   }
+
+   const Stack = createNativeStackNavigator();
+
+   function RootStack() {
+     return (
+       // highlight-next-line
+       <ExtraDataContext.Provider value={someData}>
+         <Stack.Navigator>
+           <Stack.Screen name="Home" component={HomeScreen} />
+         </Stack.Navigator>
+       </ExtraDataContext.Provider>
+     );
+   }
+   ```
+
 2. Render callback for the screen instead of specifying a `component` prop:
 
    ```js
@@ -316,6 +369,7 @@ Now that we have two screens, "How do we navigate from `Home` to `Details`?". Th
 - Each property under screens refers to the name of the route, and the value is the component to render for the route.
 - To specify what the initial route in a stack is, provide an [`initialRouteName`](navigator.md#initial-route-name) option for the navigator.
 - To specify screen-specific options, we can specify an [`options`](screen-options.md#options-prop-on-screen) property, and for common options, we can specify [`screenOptions`](screen-options.md#screenoptions-prop-on-the-navigator).
+- To pass additional data to a screen, we can use React context and use `.with` to wrap the navigator with a context provider to pass data to the screens.
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
@@ -325,6 +379,7 @@ Now that we have two screens, "How do we navigate from `Home` to `Details`?". Th
 - Each [`Stack.Screen`](screen.md) component takes a [`name`](screen.md#name) prop which refers to the name of the route and [`component`](screen.md#component) prop which specifies the component to render for the route. These are the 2 required props.
 - To specify what the initial route in a stack is, provide an [`initialRouteName`](navigator.md#initial-route-name) as the prop for the navigator.
 - To specify screen-specific options, we can pass an [`options`](screen-options.md#options-prop-on-screen) prop to `Stack.Screen`, and for common options, we can pass [`screenOptions`](screen-options.md#screenoptions-prop-on-the-navigator) to `Stack.Navigator`.
+- To pass additional data to a screen, we can either use React context and wrap the navigator with a context provider to pass data to the screens (recommended), or we can use a render callback for the screen instead of specifying a `component` prop.
 
 </TabItem>
 </Tabs>
