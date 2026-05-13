@@ -467,7 +467,7 @@ This usually means that TypeScript doesn't know the route names and params for y
 
 Ensure the following:
 
-- You have configured global types for your navigator. See [specifying root navigator type](typescript.md#specifying-root-navigator-type).
+- You have configured global types for your navigator. See [specifying default types for `useNavigation`, `Link`, `ref` etc.](typescript.md#specifying-default-types-for-usenavigation-link-ref-etc).
 - If you are using the dynamic API, you have provided a param list as a generic (e.g. `createStackNavigator<MyParamList>()`) and that your screen names match the keys in that param list. See [type checking the navigator](typescript.md#typechecking-the-navigator).
 
 ## Screens are unmounting/remounting during navigation

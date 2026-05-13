@@ -599,7 +599,7 @@ type ProfileScreenNavigationProp = CompositeNavigationProp<
 
 ## Annotating hooks
 
-The [`useRoute`](use-route.md), [`useNavigation`](use-navigation.md), and [`useNavigationState`](use-navigation-state.md) hooks accept the name of the current screen or any parent screen where it's nested as an argument for limited type inference in dynamic API after [specifying root navigator type](#specifying-root-navigator-type).
+The [`useRoute`](use-route.md), [`useNavigation`](use-navigation.md), and [`useNavigationState`](use-navigation-state.md) hooks accept the name of the current screen or any parent screen where it's nested as an argument for limited type inference in dynamic API after [specifying root navigator type](#specify-the-root-navigators-type).
 
 With `useRoute`:
 
