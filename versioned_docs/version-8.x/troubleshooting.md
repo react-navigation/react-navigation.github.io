@@ -151,6 +151,32 @@ cd ..
 
 Now rebuild the app and test on your device or simulator.
 
+## I'm getting an error "requireNativeComponent: "RNSScreen" was not found in the UIManager" or "ViewManager returned null for either RNSScreen or RCTRNSScreen"
+
+This and some similar errors, such as errors mentioning `RNSScreen`, `RNSScreenStack`, `RNSScreenStackHeaderConfig`, `RNSScreenContentWrapper` etc. might occur if the library [`react-native-screens`](https://github.com/software-mansion/react-native-screens) isn't installed correctly or the app hasn't been rebuilt after installing it.
+
+If you're using Expo managed workflow, install the version compatible with your Expo SDK:
+
+```bash
+npx expo install react-native-screens
+```
+
+If you're not using Expo managed workflow, install the package:
+
+```bash npm2yarn
+npm install react-native-screens
+```
+
+If you're testing on iOS and use Mac, make sure you have run `pod install` in the `ios/` folder:
+
+```bash
+cd ios
+pod install
+cd ..
+```
+
+Now rebuild the app and test on your device or simulator.
+
 ## I'm getting an error "Tried to register two views with the same name RNCSafeAreaProvider"
 
 This might occur if you have multiple versions of [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context) installed.
@@ -202,6 +228,34 @@ cd ..
 ```
 
 Now rebuild the app and test on your device or simulator.
+
+## I'm getting an error related to Reanimated or worklets
+
+Some navigators, such as Drawer Navigator, depend on [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) and [`react-native-worklets`](https://github.com/software-mansion/react-native-reanimated/tree/main/packages/react-native-worklets) for animations. If they aren't installed or configured correctly, you may see errors mentioning worklets, the Reanimated Babel plugin, or native modules from Reanimated.
+
+If you're using Expo managed workflow, install the compatible versions:
+
+```bash
+npx expo install react-native-reanimated react-native-worklets
+```
+
+If you're not using Expo managed workflow, install the packages:
+
+```bash npm2yarn
+npm install react-native-reanimated react-native-worklets
+```
+
+Then follow the [Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started) to configure the Reanimated Babel plugin.
+
+If you're testing on iOS and use Mac, make sure you have run `pod install` in the `ios/` folder:
+
+```bash
+cd ios
+pod install
+cd ..
+```
+
+After changing the Babel configuration or installing native dependencies, clear Metro's cache and rebuild the app.
 
 ## Nothing is visible on the screen after adding a `View`
 
@@ -351,6 +405,71 @@ const Stack = createNativeStackNavigator({
 
 The same applies to other options like `headerLeft`, `headerRight`, `tabBarIcon` etc. as well as props such as `tabBar`, `drawerContent` etc.
 
+## I'm getting "Couldn't find a navigation object. Is your component inside NavigationContainer?"
+
+This can happen if you use navigation hooks such as `useNavigation` or `useRoute` in a component that isn't rendered inside a navigator.
+
+Make sure that:
+
+- Your app renders `NavigationContainer` when using the dynamic API, or the component returned by `createStaticNavigation` when using the static API.
+- The component using navigation hooks is rendered as a screen or inside a screen.
+- You don't use navigation hooks in components rendered outside the navigation tree, such as a separate root, portal, or modal rendered outside the navigator.
+
+If you need to navigate from a component that isn't rendered inside a navigator, see [navigating without the navigation prop](navigating-without-navigation-prop.md).
+
+## I'm getting "The action 'NAVIGATE' was not handled by any navigator"
+
+This can happen if you're trying to navigate to a screen that doesn't exist in the navigator that handled the action.
+
+Check the following:
+
+- The route name passed to `navigation.navigate` exactly matches one of the screen names in the navigator.
+- If the screen is inside a nested navigator, you're navigating to it using the nested syntax shown in [navigating to a screen in a nested navigator](nesting-navigators.md#navigating-to-a-screen-in-a-nested-navigator).
+- If screens are rendered conditionally, such as in an authentication flow, the screen you're navigating to is currently available, and [you're not manually navigating after the condition changes](auth-flow.md#dont-manually-navigate-when-conditionally-rendering-screens).
+
+This error is shown in development to help you catch an incorrect navigations. It's not shown in production, and the app won't crash.
+
+## My header, tab bar, or drawer options are not updating
+
+This can happen if the option is configured on the wrong navigator. Each navigator has its own options. For example, a tab screen can configure its tab bar options, but it can't directly configure the header of a parent or child stack from its own `options`.
+
+If you have nested navigators, ensure that the options are configured on the correct navigator. Check each navigator's documentation to see which options it supports.
+
+See [screen options with nested navigators](screen-options-resolution.md) on how options are resolved with nested navigators.
+
+## My deep link opens the wrong screen or is ignored
+
+Issues with deep linking are often due to one of the following reasons:
+
+- The native URL scheme, universal link, or app link setup isn't configured correctly. See [setting up deep links](deep-linking.md#setting-up-deep-links).
+- The linking config doesn't match your nested navigator structure (if you're using dynamic API). See [mapping path to route names](configuring-links.md#mapping-path-to-route-names).
+- The deep link is handled manually using `useEffect` or similar instead of using the built-in deep linking support of React Navigation.
+
+You can test whether the native app receives the link by following [testing deep links](deep-linking.md#testing-deep-links). Use [React Navigation DevTools](devtools.md) to see if React Navigation receives the link.
+
+## `goBack` or the Android back button doesn't do anything
+
+This can happen if the current navigator doesn't have any screen to go back to. Navigation actions are handled by the current navigator first and then bubble up to parent navigators if they couldn't be handled. If none of the navigators have a previous screen to go back to, then the action will be ignored.
+
+You can use `navigation.canGoBack()` to check if the current navigator has a previous screen to go back to before calling `goBack` and provide a fallback action if needed:
+
+```js
+if (navigation.canGoBack()) {
+  navigation.goBack();
+} else {
+  navigation.navigate('Home');
+}
+```
+
+## TypeScript says the route name or params are `never`
+
+This usually means that TypeScript doesn't know the route names and params for your navigator.
+
+Ensure the following:
+
+- You have configured global types for your navigator. See [specifying root navigator type](typescript.md#specifying-root-navigator-type).
+- If you are using the dynamic API, you have provided a param list as a generic (e.g. `createStackNavigator<MyParamList>()`) and that your screen names match the keys in that param list. See [type checking the navigator](typescript.md#typechecking-the-navigator).
+
 ## Screens are unmounting/remounting during navigation
 
 Sometimes you might have noticed that your screens unmount/remount, or your local component state or the navigation state resets when you navigate. This might happen if you are creating React components during render.
@@ -479,13 +598,3 @@ function App() {
 </Tabs>
 
 This is not React Navigation specific, but related to React in general. You should always avoid creating components during render, whether you are using React Navigation or not.
-
-## App is not working properly when connected to Chrome Debugger
-
-When the app is connected to Chrome Debugger (or other tools that use Chrome Debugger such as [React Native Debugger](https://github.com/jhen0409/react-native-debugger)) you might encounter various issues related to timing.
-
-This can result in issues such as button presses taking a long time to register or not working at all, [gestures and animations being slow and buggy](https://github.com/facebook/react-native/issues/2367) etc. There can be other functional issues such as promises not resolving, [timeouts and intervals not working correctly](https://github.com/facebook/react-native/issues/4470) etc. as well.
-
-The issues are not related to React Navigation, but due to the nature of how the Chrome Debugger works. When connected to Chrome Debugger, your whole app runs on Chrome and communicates with the native app via sockets over the network, which can introduce latency and timing related issues.
-
-So, unless you are trying to debug something, it's better to test the app without being connected to the Chrome Debugger. If you are using iOS, you can alternatively use [Safari to debug your app](https://reactnative.dev/docs/debugging#safari-developer-tools) which debugs the app on the device directly and does not have these issues, though it has other downsides.
