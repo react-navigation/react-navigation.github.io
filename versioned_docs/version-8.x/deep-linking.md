@@ -478,6 +478,6 @@ To solve this, you need **Deferred Deep Linking**. This technique allows the lin
 
 React Navigation does not handle this natively, as it requires server-side attribution logic to work across both iOS and Android simultaneously. You will need to implement it yourself or use a third-party provider:
 
-- [**Detour**](https://docs.swmansion.com/detour): A flexible, developer-first library built by **Software Mansion**.
+- [**Detour**](https://docs.swmansion.com/detour): A flexible, developer-first library built by [**Software Mansion**](https://swmansion.com).
 - [**Branch**](https://branch.io/): A platform for cross-platform deep linking and attribution.
 - [**AppsFlyer**](https://www.appsflyer.com/): A platform focused on marketing analytics and mobile attribution.
