@@ -469,3 +469,15 @@ const linking = {
 </Tabs>
 
 Similar to the above example, you can integrate any API that provides a way to get the initial URL and to subscribe to new incoming URLs using the `getInitialURL` and `subscribe` options.
+
+## What if the app is not installed?
+
+Standard deep links (Universal Links or App Links) only work if the app is already installed on the user's device. If a user clicks a link but doesn't have your app, they are redirected to the Store. Once they install and open the app for the first time, the original link context and its parameters (like a referral code or a specific product ID) are usually lost.
+
+To solve this, you need **Deferred Deep Linking**. This technique allows the link parameters to "survive" the installation process so you can route the user to the correct screen on their very first launch.
+
+React Navigation does not handle this natively, as it requires server-side attribution logic to work across both iOS and Android simultaneously. You will need to implement it yourself or use a third-party provider:
+
+- [**Detour**](https://docs.swmansion.com/detour): A flexible, developer-first library built by [**Software Mansion**](https://swmansion.com).
+- [**Branch**](https://branch.io/): A platform for cross-platform deep linking and attribution.
+- [**AppsFlyer**](https://www.appsflyer.com/): A platform focused on marketing analytics and mobile attribution.
