@@ -145,9 +145,9 @@ It supports the following values:
 
 Defaults to `pause`.
 
-If you [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused.
+If you [`preload`](navigation-actions.md#preload) a screen, it remains active until it's focused and then unfocused for the first time. If you [`retain`](stack-actions.md#retain) a screen, it stays active and never gets paused or unmounted while retained.
 
-If a screen contains a nested navigator, it won't be unmounted, but paused instead.
+If a screen contains a nested navigator, it won't be unmounted, but paused instead even if `inactiveBehavior` is set to `unmount`.
 
 See [Inactive screens](navigation-lifecycle.md#inactive-screens) for more details.
 

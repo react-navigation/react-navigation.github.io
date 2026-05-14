@@ -302,7 +302,7 @@ It supports the following values:
 
 Defaults to `pause`.
 
-If you set [`lazy: false`](#lazy) or [`preload`](navigation-actions.md#preload) a screen, it won't be paused until after the first time it becomes focused.
+If you set [`lazy: false`](#lazy) or [`preload`](navigation-actions.md#preload) a screen, it remains active until it's focused and then unfocused for the first time.
 
 See [Inactive screens](navigation-lifecycle.md#inactive-screens) for more details.
 

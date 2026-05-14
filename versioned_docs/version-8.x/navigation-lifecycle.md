@@ -359,8 +359,9 @@ Here, "inactive" and "unfocused" have different meanings:
 
 - A screen becomes "unfocused" as soon as you navigate away from it
 - A screen becomes "inactive" based on various factors, such as gestures, animations, and other interactions after it becomes unfocused - without guarantees on timing
-- [Preloaded](navigation-actions.md#preload) screens don't become inactive until after the first time they become focused, so their effects can run to initialize the screen
 - Focus and blur are part of navigation lifecycle, but "inactive" is an optimization mechanism
+- [Preloaded](navigation-actions.md#preload) screens remain active until they're focused and then unfocused for the first time, so their effects can run to initialize the screen
+- [Retained](stack-actions.md#retain) screens stay active and never get paused or unmounted while retained, so their effects can keep running even when they're not focused
 
 ### Paused screens
 
