@@ -20,19 +20,37 @@
     },
     {
       "type": "category",
-      "label": "Guides",
+      "label": "Upgrade guides",
       "customProps": {
-        "icon": "guides"
+        "icon": "upgrade"
+      },
+      "items": ["upgrade-guides", "upgrading-from-7.x"]
+    },
+    {
+      "type": "category",
+      "label": "Features",
+      "customProps": {
+        "icon": "features"
       },
       "items": [
-        "themes",
-        "icons",
-        "testing",
         "typescript",
+        "testing",
         "deep-linking",
         "configuring-links",
+        "themes",
+        "icons",
         "state-persistence",
         "web-support",
+        "server-rendering"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Tutorials",
+      "customProps": {
+        "icon": "tutorials"
+      },
+      "items": [
         "auth-flow",
         "handling-safe-area",
         "customizing-tabbar",
@@ -46,12 +64,19 @@
         "preventing-going-back",
         "function-after-focusing-screen",
         "navigating-without-navigation-prop",
-        "server-rendering",
-        "screen-tracking",
+        "screen-tracking"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Static config",
+      "customProps": {
+        "icon": "static"
+      },
+      "items": [
+        "static-configuration",
         "static-vs-dynamic",
-        "combine-static-with-dynamic",
-        "troubleshooting",
-        "upgrading-from-7.x"
+        "combine-static-with-dynamic"
       ]
     },
     {
@@ -83,7 +108,6 @@
         "icon": "api"
       },
       "items": [
-        "static-configuration",
         "navigation-container",
         "server-container",
         "navigator",
@@ -94,7 +118,6 @@
         "navigation-object",
         "navigation-context",
         "navigation-events",
-        "navigation-state",
         "link",
         {
           "type": "category",
@@ -136,11 +159,11 @@
     },
     {
       "type": "category",
-      "label": "Build your own Navigator",
+      "label": "Advanced",
       "customProps": {
         "icon": "build"
       },
-      "items": ["custom-routers", "custom-navigators"]
+      "items": ["navigation-state", "custom-routers", "custom-navigators"]
     },
     {
       "type": "category",
@@ -162,8 +185,8 @@
         "icon": "meta"
       },
       "items": [
-        "migration-guides",
         "glossary-of-terms",
+        "troubleshooting",
         "pitch",
         "limitations",
         "used-by",

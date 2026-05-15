@@ -144,7 +144,7 @@ const config: Config = {
         redirects: [
           {
             from: '/next',
-            to: '/docs/migration-guides',
+            to: '/docs/upgrade-guides',
           },
         ],
         createRedirects(existingPath) {
