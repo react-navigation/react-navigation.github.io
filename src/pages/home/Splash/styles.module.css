@@ -113,7 +113,7 @@
 
 .linkText {
   color: var(--ifm-home-color-text);
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .linkText:hover {

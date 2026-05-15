@@ -2,6 +2,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 import type { Config } from '@docusaurus/types';
 
 import disableFullySpecified from './src/plugins/disable-fully-specified.ts';
+import latestAnnouncement from './src/plugins/latest-announcement.ts';
 import llmsTxt from './src/plugins/llms-txt.ts';
 import ogImage from './src/plugins/og-image.ts';
 import reactNavigationVersions from './src/plugins/react-navigation-versions.ts';
@@ -137,6 +138,7 @@ const config: Config = {
     disableFullySpecified,
     reactNavigationVersions,
     [llmsTxt, { latestVersion }],
+    latestAnnouncement,
     ogImage,
     [
       '@docusaurus/plugin-client-redirects',

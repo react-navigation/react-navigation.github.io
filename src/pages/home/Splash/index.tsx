@@ -1,11 +1,29 @@
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import { usePluginData } from '@docusaurus/useGlobalData';
 
+import type { LatestAnnouncement } from '../../../plugins/latest-announcement.ts';
 import SplashLeftIllustration from './SplashLeftIllustration';
 import SplashRightIllustration from './SplashRightIllustration';
 import styles from './styles.module.css';
 
+function isLatestAnnouncement(value: unknown): value is LatestAnnouncement {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'title' in value &&
+    typeof value.title === 'string' &&
+    'permalink' in value &&
+    typeof value.permalink === 'string'
+  );
+}
+
 export default function Splash() {
+  const data = usePluginData('latest-announcement');
+  const announcement = isLatestAnnouncement(data) ? data : null;
+
+  console.log('Announcement:', data);
+
   return (
     <section className={styles.wrapper}>
       <div className={styles.container}>
@@ -36,16 +54,17 @@ export default function Splash() {
         </div>
         <SplashRightIllustration />
       </div>
-      <div className={styles.migrationText}>
-        ✨ React Navigation 8 is coming. Check out the{' '}
-        <Link
-          to={useBaseUrl('/blog/2025/12/19/react-navigation-8.0-alpha')}
-          className={styles.linkText}
-        >
-          announcement
-        </Link>
-        .
-      </div>
+      {announcement && (
+        <div className={styles.migrationText}>
+          ✨{' '}
+          <Link
+            to={useBaseUrl(announcement.permalink)}
+            className={styles.linkText}
+          >
+            {announcement.title}
+          </Link>
+        </div>
+      )}
     </section>
   );
 }
