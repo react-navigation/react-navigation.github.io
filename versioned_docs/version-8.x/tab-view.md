@@ -480,6 +480,7 @@ The following built-in adapters are available:
 - `PagerViewAdapter`: Uses [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) for rendering pages (default on Android & iOS).
 - `PanResponderAdapter`: Uses [`PanResponder`](https://reactnative.dev/docs/panresponder) for handling gestures (default on Web and other platforms).
 - `ScrollViewAdapter`: Uses [`ScrollView`](https://reactnative.dev/docs/scrollview) for rendering pages.
+- `DefaultAdapter`: Uses `PagerViewAdapter` on Android & iOS, and `PanResponderAdapter` on Web and other platforms.
 
 To pass adapter-specific props, wrap the adapter in a function and forward the `TabView` props:
 
