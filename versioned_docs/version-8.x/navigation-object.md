@@ -717,11 +717,9 @@ The `preload` method allows preloading a screen in the background before navigat
 
 - `name` - _string_ - A destination name of the screen in the current or a parent navigator.
 - `params` - _object_ - Params to use for the destination route.
-- `options` - Options object containing the following properties:
-  - `reuse` - _boolean_ - Whether to reuse a matching preloaded or existing route instead of adding a new preloaded route. Defaults to `false`.
 
 ```js
-navigation.preload('Profile', { user: 'jane' }, { reuse: true });
+navigation.preload('Profile', { user: 'jane' });
 ```
 
 <Tabs groupId="config" queryString="config">
@@ -917,7 +915,7 @@ Preloading a screen means that the screen will be rendered in the background. Al
 
 Depending on the navigator, `preload` may work slightly differently:
 
-- In a stack navigator ([stack](stack-navigator.md), [native stack](native-stack-navigator.md)), the screen will be rendered off-screen and animated in when you navigate to it. If [`getId`](screen.md#id) is specified, it'll be used for the navigation to identify the preloaded screen. When `reuse` is `true`, a matching preloaded or existing route will be reused and its params will be updated.
+- In a stack navigator ([stack](stack-navigator.md), [native stack](native-stack-navigator.md)), the screen will be rendered off-screen and animated in when you navigate to it. Calling `preload` for a matching preloaded screen will update its params instead of adding a new preloaded screen. If [`getId`](screen.md#id) is specified, it'll be used for matching the preloaded screen. Otherwise, the screen name is used. If you need multiple preloaded instances of the same screen, use `getId` or [`reset`](#reset).
 - In a tab or drawer navigator ([bottom tabs](bottom-tab-navigator.md), [material top tabs](material-top-tab-navigator.md), [drawer](drawer-navigator.md), etc.), the existing screen will be rendered as if `lazy` was set to `false`. Calling `preload` on a screen that is already rendered will not have any effect.
 
 ### `setParams`

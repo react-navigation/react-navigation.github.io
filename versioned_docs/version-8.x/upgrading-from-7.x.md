@@ -339,6 +339,20 @@ If you use a custom navigator with `StackRouter` and do not want to change the s
 
 See [Navigation state](navigation-state.md) for more details.
 
+##### `preload` reuses matching preloaded routes instead of adding new ones
+
+Previously, calling `preload` for the same screen multiple times in a Stack or Native Stack Navigator would always preload a new instance of screen, leading to multiple preloaded instances. We found that this behavior was not intuitive and most people expected to have a single instance.
+
+In React Navigation 8, calling `preload` for a matching preloaded screen updates its params instead of adding another preloaded screen:
+
+```js
+navigation.preload('Profile', { user: 'jane' });
+```
+
+By default, preloaded screens are matched based on the screen name. The [`getId`](screen.md#id) prop can be used to match based on an ID derived from the params instead.
+
+See [`preload`](navigation-actions.md#preload) for more details.
+
 ##### Preloaded screens behave closer to regular screens
 
 Previously, when a screen was preloaded in Stack and Native Stack Navigators, there were a few restrictions:
@@ -851,18 +865,6 @@ This can be useful in various scenario:
 - A screen with a custom modal component, where the modal is not a separate screen in the navigator, but its state should be reflected in the URL and history.
 
 See [`pushParams` docs](navigation-actions.md#pushparams) for more details.
-
-### `preload` now supports a `reuse` option in Stack navigators
-
-Previously, calling `preload` for the same screen multiple times in a Stack or Native Stack Navigator would add another preloaded route.
-
-In React Navigation 8, you can pass `reuse: true` to update params for an existing preloaded or matching route instead:
-
-```js
-navigation.preload('Profile', { user: 'jane' }, { reuse: true });
-```
-
-See [`preload`](navigation-actions.md#preload) for more details.
 
 ### Themes now support `ColorValue` and CSS custom properties
 
