@@ -1043,6 +1043,26 @@ When `false`, tapping on the tab in tab bar won't select the tab. Custom behavio
 
 Defaults to `true`.
 
+#### `overrideScrollViewContentInsetAdjustmentBehavior`
+
+Whether to override the `contentInsetAdjustmentBehavior` of the first `ScrollView` in the first descendant chain from the tab screen.
+
+By default, React Native's `ScrollView` has `contentInsetAdjustmentBehavior` set to `never` instead of the UIKit default (`automatic`), which prevents `ScrollView`s from respecting navigation bar insets. When this option is `true`, that override is applied, restoring UIKit's `automatic` behavior for the first descendant `ScrollView`.
+
+Defaults to `true`. To disable for specific screens — for example to fix a blank gap appearing above content in a nested native-stack screen that uses `headerTransparent: true` — set the option to `false`:
+
+```js
+<Tab.Screen
+  name="Journal"
+  component={JournalStackNavigator}
+  options={{
+    overrideScrollViewContentInsetAdjustmentBehavior: false,
+  }}
+/>
+```
+
+Only supported on iOS.
+
 #### `bottomAccessory`
 
 Function that returns a React element to display as an accessory view. The function receives an options object with a `placement` parameter that can be one of the following values:
