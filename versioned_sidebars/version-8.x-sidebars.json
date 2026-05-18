@@ -20,11 +20,11 @@
     },
     {
       "type": "category",
-      "label": "Upgrade guides",
+      "label": "Migration guides",
       "customProps": {
         "icon": "upgrade"
       },
-      "items": ["upgrade-guides", "upgrading-from-7.x"]
+      "items": ["upgrade-guides", "upgrading-from-7.x", "from-expo-router"]
     },
     {
       "type": "category",
