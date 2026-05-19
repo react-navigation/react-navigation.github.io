@@ -653,6 +653,161 @@ Previously, the `gestureResponseDistance` option in Stack Navigator accepted an 
 + gestureResponseDistance: 50
 ```
 
+#### Material Top Tabs and `react-native-tab-view` have been updated to Material Design 3
+
+##### The tab bar now uses the `primary` variant by default
+
+The default tab bar styles in Material Top Tabs Navigator and `react-native-tab-view`'s `TabBar` have been updated to align with the latest [Material Design 3 guidelines](https://m3.material.io/components/tabs/overview).
+
+The tab bar now matches the `primary` variant in Material Design 3, which features a smaller indicator with rounded corners that tracks the label instead of being full width. The text color also uses the active tint color instead of the inactive tint color. Per material design guidelines, tab bars should use this variant when they are placed at top of the screen.
+
+If you want to keep the previous design, you can use the `secondary` variant which is closer to the previous design with `tabBarVariant` option:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```diff lang=js
+createMaterialTopTabNavigator({
+  screenOptions: {
++     tabBarVariant: 'secondary',
+  },
+  // ...
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```diff lang=js
+<Tab.Navigator
+  screenOptions={{
++     tabBarVariant: 'secondary',
+  }}
+>
+```
+
+</TabItem>
+</Tabs>
+
+If you're using `react-native-tab-view`, pass `variant` prop to `TabBar`:
+
+```diff lang=js
+<TabBar
++   variant="secondary"
+  {...props}
+/>
+```
+
+See [`tabBarVariant`](material-top-tab-navigator.md#tabbarvariant) and [`TabBar`'s `variant`](tab-view.md#variant) for more details.
+
+##### Props passed to the indicator have changed
+
+To support the new design of the tab bar, we have completely reworked the indicator. As a result, the props passed to the [`renderIndicator`](tab-view.md#renderindicator), [`tabBarIndicator`](material-top-tab-navigator.md#tabbarindicator) callbacks, and [`TabBarIndicator`](tab-view.md#tabbarindicator) component) have changed.
+
+The following props have been removed:
+
+- `width`
+- `getTabWidth`
+- `gap`
+- `children`
+
+The following new props have been added:
+
+- `variant` - the variant of the tab bar
+- `widths` - an array of indicator widths for each tab
+- `offsets` - an array of absolute x offsets for the indicator for each tab
+
+This rework abstracts moves indicator width and offset calculations to the tab bar to keep the indicator implementation simpler.
+
+Internally, the indicator is now rendered as multiple pieces to be able to support `borderRadius`, `borderTopLeftRadius`, or `borderTopRightRadius` etc. while still using `scale` transforms for animation. Because of the structural change, it doesn't support custom `children` anymore.
+
+If you have a custom `renderIndicator`, update it to use the new props:
+
+```diff lang=js
+renderIndicator={({
+  position,
+- width,
+- getTabWidth,
+- gap,
++ widths,
++ offsets,
+  style,
+}) => {
+  // ...
+  const translateX = position.interpolate({
+    inputRange,
+    outputRange: inputRange.map((x) => {
+      const i = Math.round(x);
+-     return i * getTabWidth(i) + i * (gap ?? 0);
++     return offsets[i];
+    }),
+  });
+
+  return (
+    <Animated.View
+-     style={[style, { width, transform: [{ translateX }] }]}
++     style={[style, { width: widths[0], transform: [{ translateX }] }]}
+    />
+  );
+}}
+```
+
+##### Props passed to the tab bar item have changed
+
+Because of the new design, we now need to measure the layout of each tab. To account for this, The props passed to the [`renderTabBarItem`](tab-view.md#rendertabbaritem) callback and [`TabBarItem`](tab-view.md#tabbaritem) component have changed.
+
+The following props have been removed:
+
+- `onLayout`
+- `defaultTabWidth`
+
+The following new props have been added:
+
+- `variant` - the variant of the tab bar
+- `onMeasureLayout` - callback to receive the layout (`{ width, height }`) of the tab
+- `onMeasureLabelLayout` - callback to receive the layout (`{ width, height }`) of the label container for the tab
+
+Instead of a `defaultTabWidth`, the `width` or `minWidth` is now passed through the `style` prop.
+
+If you were rendering your own tab bar item with `renderTabBarItem`, you now need to handle the `onMeasureLayout` and `onMeasureLabelLayout` props for the indicator to work:
+
+```tsx
+const containerRef = useRef<View>(null);
+const labelRef = useRef<View>(null);
+
+useLayoutEffect(() => {
+  containerRef.current?.measure((x, y, width, height) => {
+    onMeasureLayout({ width, height });
+  });
+
+  labelRef.current?.measure((x, y, width, height) => {
+    onMeasureLabelLayout({ width, height });
+  });
+}, [onMeasureLayout, onMeasureLabelLayout]);
+
+return (
+  <View
+    onLayout={(event) => {
+      const { width, height } = event.nativeEvent.layout;
+
+      onMeasureLayout({ width, height });
+    }}
+  >
+    <View
+      onLayout={(event) => {
+        const { width, height } = event.nativeEvent.layout;
+
+        onMeasureLabelLayout({ width, height });
+      }}
+    >
+      {/* ... */}
+    </View>
+  </View>
+);
+```
+
+The measurement in `useLayoutEffect` is not required, but it provides the layout before paint, so the indicator can be rendered as early as possible.
+
 #### Drawer Navigator now accepts `overlayStyle` instead of `overlayColor`
 
 Previously, the Drawer Navigator accepted an `overlayColor` prop to customize the color of the overlay that appears when the drawer is open. It now accepts `overlayStyle` prop instead to provide more flexibility for styling the overlay:

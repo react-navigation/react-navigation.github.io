@@ -4,13 +4,29 @@ title: React Native Tab View
 sidebar_label: Tab View
 ---
 
+<div className="feature-grid">
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/primary-tabbar.mp4" /></video>
+
+  [Primary](#variant)
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/secondary-tabbar.mp4" /></video>
+
+  [Secondary](#variant)
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/tab-icon.mp4" /></video>
+
+  [Icons](#icon)
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/scrollable-tabbar.mp4" /></video>
+
+  [Scrollable tabs](#scrollenabled)
+
+</div>
+
 React Native Tab View is a cross-platform Tab View component for React Native implemented using [`react-native-pager-view`](https://github.com/callstack/react-native-viewpager) on Android & iOS, and [PanResponder](https://reactnative.dev/docs/panresponder) on Web, macOS, and Windows.
 
 It follows material design guidelines by default, but you can also use your own custom tab bar or position the tab bar at the bottom.
-
-<video playsInline autoPlay muted loop>
-  <source src="/assets/libraries/tab-view/tab-view.mp4" />
-</video>
 
 If you need React Navigation integration, e.g. show screens in the tab bar and be able to navigate between them using `navigation.navigate` etc, use [Material Top Tab Navigator](material-top-tab-navigator.md) instead.
 
@@ -596,13 +612,38 @@ return (
 
 #### TabBar Props
 
+##### `variant`
+
+Variant of the tab bar. Supported values are:
+
+- `'primary'` (default): the indicator matches the label & icon width and is centered under the tab, active color defaults to the theme's primary color.
+- `'secondary'`: the indicator spans the full tab width, active color defaults to the theme's text color.
+
 ##### `renderTabBarItem`
 
-Function which takes a `TabBarItemProps` object and returns a custom React Element to be used as a tab button.
+Function that returns a custom React Element to be used as a tab button. By default, it uses [`TabBarItem`](#tabbaritem):
+
+```js
+<TabBar
+  renderTabBarItem={(props) => <TabBarItem {...props} style={myStyle} />}
+  ...
+/>
+```
+
+See [`TabBarItem`](#tabbaritem) for the full list of props.
 
 ##### `renderIndicator`
 
-Function which takes an object with the current route and returns a custom React Element to be used as a tab indicator.
+Function that returns a custom React Element to be used as a tab indicator. By default, it uses [`TabBarIndicator`](#tabbarindicator):
+
+```js
+<TabBar
+  renderIndicator={(props) => <TabBarIndicator {...props} style={myStyle} />}
+  ...
+/>
+```
+
+See [`TabBarIndicator`](#tabbarindicator) for the full list of props.
 
 ##### `onTabPress`
 
@@ -647,7 +688,7 @@ Opacity for pressed tab (iOS and Android < 5.0 only).
 
 Boolean indicating whether to make the tab bar scrollable.
 
-If you set `scrollEnabled` to `true`, you should also specify a `width` in `tabStyle` to improve the initial render.
+When `scrollEnabled` is `true`, each tab is sized to fit its content by default. To use a fixed width instead, set `width` in `tabStyle`.
 
 ##### `bounces`
 
@@ -663,13 +704,17 @@ By default, all tab items take up the same pre-calculated width based on the wid
 
 Style to apply to the active indicator.
 
-The indicator takes the same width as the tab item by default. It can be customized in a few ways:
+The default width of the indicator depends on the [`variant`](#variant):
 
-- To make it smaller by a certain amount, you can add a horizontal margin, e.g. `{ marginHorizontal: 10 }`.
-- Adding specific width will position the indicator at the left of the tab, e.g. `{ width: 20 }`.
-- To center it in the tab when a custom width is specified, you can specify `margin` as `'auto'`, e.g. `{ width: 20, marginHorizontal: 'auto' }`.
+- With `variant="primary"` (default), the indicator matches the width of the tab's label & icon and is centered under the tab.
+- With `variant="secondary"`, the indicator spans the full tab width.
 
-When the `tabStyle` has `width: 'auto'` and no explicit `width` is specified for the indicator, it is scaled to the width with `transform: [{ scaleX }]` for smooth animations. So specifying a `borderRadius` won't work as expected.
+You can customize the indicator in a few ways:
+
+- To shrink it by a fixed amount, add a horizontal margin, e.g. `{ marginHorizontal: 10 }`.
+- To give it a specific width, set `width`, e.g. `{ width: 20 }`. By default this aligns the indicator to the start.
+- To center a custom-width indicator inside the tab, set `margin` to `'auto'`, e.g. `{ width: 20, marginHorizontal: 'auto' }`.
+- To make the corners rounded, pass `borderRadius`,`borderTopLeftRadius`, or `borderTopRightRadius` etc. as a number, e.g. `{ borderRadius: 10 }`.
 
 If you need more control, you can use [`renderIndicator`](#renderindicator) to render a custom indicator instead.
 
@@ -799,6 +844,85 @@ badge: ({ route }) => (
 ##### `sceneStyle`
 
 Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping.
+
+### `TabBarIndicator`
+
+The default indicator component used by `TabBar`. It accepts the following props:
+
+- `variant` - Variant of the indicator. Same values as [`TabBar`'s `variant`](#variant). Determines the default size and position behavior:
+  - `'primary'` (default): the indicator matches the label & icon width and is centered under the tab.
+  - `'secondary'`: the indicator spans the full tab width.
+- `navigationState` - Same as [`TabView`'s `navigationState`](#navigationstate-required).
+- `widths` - Array of indicator widths in pixels, one entry per route in the same order as `navigationState.routes`. These are the widths computed by `TabBar` based on the current `variant`, `indicatorStyle`, and measured tab/label widths.
+- `offsets` - Array of indicator x offsets in pixels (absolute position within the tab bar), one entry per route in the same order as `navigationState.routes`. These already account for `gap`, padding, and any centering implied by `variant` or `marginHorizontal: 'auto'`.
+- `position` - Animated value that represents the current position. Goes from `0` to `routes.length - 1` based on the swipe progress. Use this together with `widths` and `offsets` to interpolate the indicator's translation between tabs.
+- `direction` - Layout direction of the tab bar. Either `'ltr'` or `'rtl'`.
+- `jumpTo` - Function to jump to another tab, takes a `route.key` as its argument.
+- `style` - Style to apply to the indicator. See [`indicatorStyle`](#indicatorstyle) for the full list of supported style customizations.
+
+Internally, the indicator is rendered as multiple pieces to be able to support `borderRadius`, `borderTopLeftRadius`, or `borderTopRightRadius` etc. while still using `scale` transforms for animation. So it may not work with all style values properly as if it was a single view.
+
+### `TabBarItem`
+
+The default tab button component used by `TabBar`. It accepts the following props:
+
+- `variant` - Variant of the tab. Same values as [`TabBar`'s `variant`](#variant). Determines the default active color.
+- `route` - The route object for this tab.
+- `navigationState` - Same as [`TabView`'s `navigationState`](#navigationstate-required).
+- `position` - Animated value that represents the current position, used to interpolate the active/inactive label opacity.
+- `activeColor` - Custom color for icon and label when the tab is active.
+- `inactiveColor` - Custom color for icon and label when the tab is inactive.
+- `pressColor` - Color for the material ripple (Android >= 5.0 only).
+- `pressOpacity` - Opacity for pressed tab (iOS and Android < 5.0 only).
+- `onPress` - Callback to invoke when the tab is pressed. The default `renderTabBarItem` wires this up to switch tabs.
+- `onLongPress` - Callback to invoke when the tab is long-pressed.
+- `onMeasureLayout` - Callback that receives the measured layout of the tab as `{ width, height }`. `TabBar` uses this to compute tab widths and indicator offsets when tabs are sized to their content (e.g. scrollable tab bars or `tabStyle: { width: 'auto' }`).
+- `onMeasureLabelLayout` - Callback that receives the measured layout of the label + icon as `{ width, height }`. `TabBar` uses this to size the indicator under the label for the `'primary'` variant.
+- `android_ripple` - Allows you to customize the Android ripple effect on tab press. See [`PressableAndroidRippleConfig`](https://reactnative.dev/docs/pressable#rippleconfig).
+- `style` - Style to apply to the tab container. Forwarded from `TabBar`'s `tabStyle`.
+
+In addition to these, `TabBarItem` accepts all the [tab options](#options) (`label`, `labelText`, `labelStyle`, `icon`, `badge`, `href`, `accessibilityLabel`, `accessible`, `testID`, etc.).
+
+If you render your own tab bar item via [`renderTabBarItem`](#rendertabbaritem) instead of using `TabBarItem`, you need to call `onMeasureLayout` and `onMeasureLabelLayout` for the indicator to work:
+
+```tsx
+const containerRef = useRef<View>(null);
+const labelRef = useRef<View>(null);
+
+useLayoutEffect(() => {
+  containerRef.current?.measure((x, y, width, height) => {
+    onMeasureLayout({ width, height });
+  });
+
+  labelRef.current?.measure((x, y, width, height) => {
+    onMeasureLabelLayout({ width, height });
+  });
+}, [onMeasureLayout, onMeasureLabelLayout]);
+
+return (
+  <View
+    ref={containerRef}
+    onLayout={(event) => {
+      const { width, height } = event.nativeEvent.layout;
+
+      onMeasureLayout({ width, height });
+    }}
+  >
+    <View
+      ref={labelRef}
+      onLayout={(event) => {
+        const { width, height } = event.nativeEvent.layout;
+
+        onMeasureLabelLayout({ width, height });
+      }}
+    >
+      {/* ... */}
+    </View>
+  </View>
+);
+```
+
+The measurement in `useLayoutEffect` is not required, but it provides the layout before paint, so the indicator can be rendered as early as possible.
 
 ## Optimization Tips
 

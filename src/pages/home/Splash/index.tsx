@@ -22,8 +22,6 @@ export default function Splash() {
   const data = usePluginData('latest-announcement');
   const announcement = isLatestAnnouncement(data) ? data : null;
 
-  console.log('Announcement:', data);
-
   return (
     <section className={styles.wrapper}>
       <div className={styles.container}>

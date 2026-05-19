@@ -6,21 +6,21 @@ sidebar_label: Material Top Tabs
 
 <div className="feature-grid">
 
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/primary-tabbar.mp4" /></video>
+
+  [Primary](#tabbarvariant)
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/secondary-tabbar.mp4" /></video>
+
+  [Secondary](#tabbarvariant)
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/tab-icon.mp4" /></video>
+
+  [Icons](#tabbaricon)
+
 - <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/scrollable-tabbar.mp4" /></video>
 
-  [Scrollable tab bar](#tabbarscrollenabled)
-
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/badge.mp4" /></video>
-
-  [Badges](#tabbarbadge)
-
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/custom-indicator.mp4" /></video>
-
-  [Custom indicator](#tabbarindicator)
-
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/custom-tabbar.mp4" /></video>
-
-  [Custom tab bar](#tabbar)
+  [Scrollable tabs](#tabbarscrollenabled)
 
 </div>
 
@@ -528,21 +528,32 @@ Whether the tab icon should be visible. Defaults to `false`.
 
 Function that returns a React element to use as a badge for the tab.
 
+#### `tabBarVariant`
+
+Variant of the tab bar. Supported values are:
+
+- `'primary'` (default): the indicator matches the label & icon width and is centered under the tab, active color defaults to the theme's primary color.
+- `'secondary'`: the indicator spans the full tab width, active color defaults to the theme's text color.
+
 #### `tabBarIndicator`
 
-Function that returns a React element as the tab bar indicator.
+Function that returns a React element as the tab bar indicator. It receives the same props that you'd pass to [`TabBarIndicator`](tab-view.md#tabbarindicator) from `react-native-tab-view`.
 
 #### `tabBarIndicatorStyle`
 
 Style object for the tab bar indicator.
 
-The indicator takes the same width as the tab item by default. It can be customized in a few ways:
+The default width of the indicator depends on [`tabBarVariant`](#tabbarvariant):
 
-- To make it smaller by a certain amount, you can add a horizontal margin, e.g. `{ marginHorizontal: 10 }`.
-- Adding specific width will position the indicator at the left of the tab, e.g. `{ width: 20 }`.
-- To center it in the tab when a custom width is specified, you can specify `margin` as `'auto'`, e.g. `{ width: 20, marginHorizontal: 'auto' }`.
+- With `tabBarVariant: 'primary'` (default), the indicator matches the width of the tab's label & icon and is centered under the tab.
+- With `tabBarVariant: 'secondary'`, the indicator spans the full tab width.
 
-When the `tabStyle` has `width: 'auto'` and no explicit `width` is specified for the indicator, it is scaled to the width with `transform: [{ scaleX }]` for smooth animations. So specifying a `borderRadius` won't work as expected.
+You can customize the indicator in a few ways:
+
+- To shrink it by a fixed amount, add a horizontal margin, e.g. `{ marginHorizontal: 10 }`.
+- To give it a specific width, set `width`, e.g. `{ width: 20 }`. By default this aligns the indicator to the start.
+- To center a custom-width indicator inside the tab, set `margin` to `'auto'`, e.g. `{ width: 20, marginHorizontal: 'auto' }`.
+- To make the corners rounded, pass `borderRadius`,`borderTopLeftRadius`, or `borderTopRightRadius` etc. as a number, e.g. `{ borderRadius: 10 }`.
 
 If you need more control, you can use [`tabBarIndicator`](#tabbarindicator) to render a custom indicator instead.
 
@@ -578,7 +589,7 @@ Boolean indicating whether the tab bar bounces when overscrolling.
 
 Boolean indicating whether to make the tab bar scrollable.
 
-If you set this to `true`, you should also specify a width in `tabBarItemStyle` to improve the performance of initial render.
+When this is set to `true`, each tab is sized to fit its content by default. To use a fixed width instead, set `width` in `tabBarItemStyle`.
 
 #### `tabBarLabelStyle`
 

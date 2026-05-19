@@ -4,11 +4,19 @@ title: React Native Drawer Layout
 sidebar_label: Drawer Layout
 ---
 
-A cross-platform Drawer component for React Native implemented using [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) on native platforms and CSS transitions on Web.
+<div className="feature-grid">
 
-<video playsInline autoPlay muted loop>
-  <source src="/assets/libraries/drawer-layout/drawer-layout.mp4" />
-</video>
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/drawer/highlights/drawer-types.mp4" /></video>
+
+  [Multiple types](#drawertype)
+
+- <video playsInline autoPlay muted loop><source src="/assets/navigators/drawer/highlights/drawer-position.mp4" /></video>
+
+  [Position on left or right](#drawerposition)
+
+</div>
+
+A cross-platform Drawer component for React Native implemented using [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) on native platforms and CSS transitions on Web.
 
 If you need React Navigation integration, e.g. show screens in the drawer and be able to navigate between them using `navigation.navigate` etc, use [Drawer Navigator](drawer-navigator.md) instead.
 
