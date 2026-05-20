@@ -383,11 +383,6 @@ header {
   margin-bottom: var(--ifm-list-paragraph-margin);
 }
 
-.markdown :is(ul, ol) > li > p:first-child:has(> code:only-child):has(+ p) {
-  font-weight: 600;
-  font-size: 1.25em;
-}
-
 .blog-wrapper .container {
   max-width: 100%;
   padding: 0 1.25rem;
