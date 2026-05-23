@@ -6,17 +6,16 @@ sidebar_label: Static API vs Dynamic API
 
 React Navigation provides two ways to configure your navigation:
 
-- Static API - object-based configuration with automatic TypeScript types and deep linking
-- Dynamic API - component-based dynamic configuration
+- **Static** - object-based configuration with automatic TypeScript types and deep linking
+- **Dynamic** - component-based dynamic configuration
 
 If you're already familiar with the dynamic API, this guide explains how each concept maps to the static API - whether you're migrating an existing app or just learning the static API.
 
 ## Limitations
 
-Since the static API is designed for static configuration, there are some limitations to be aware of:
+The main limitation of the static API is that **the navigation structure must be static**. This means that you cannot create the list of screens dynamically.
 
-- The navigation tree must be static - you cannot create the list of screens dynamically. However, you can [conditionally render screens using the `if` property](#conditional-screens).
-- React hooks cannot be used in `options`, `listeners` etc. However, [`React.use()`](https://react.dev/reference/react/use) can be used to read context values in `options` callback (though it may produce ESLint warnings since ESLint cannot detect that it runs during render), and you can use the `theme` parameter instead of `useTheme()`.
+It's still possible to use dynamic logic for other parts with [`if`](#conditional-screens), [`with`](#dynamic-navigator-props) etc.
 
 ## Basic usage
 
@@ -68,7 +67,7 @@ The component returned by [`createStaticNavigation`](static-configuration.md#cre
 
 ## Navigation object
 
-Screens no longer receive the `navigation` object as a prop in the static API. It's necessary to use the [`useNavigation`](use-navigation.md) hook instead:
+Screens do not receive the `navigation` object as a prop in the static API. It's necessary to use the [`useNavigation`](use-navigation.md) hook instead:
 
 ```js title="Dynamic API"
 function HomeScreen({ navigation }) {
