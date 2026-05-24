@@ -8,6 +8,12 @@ React Navigation 7 focuses on streamlining the API to avoid patterns that can ca
 
 This guides lists all the breaking changes and new features in React Navigation 7 that you need to be aware of when upgrading from React Navigation 6.
 
+:::tip
+
+If you use an AI coding assistant, see [react-navigation/skills](https://github.com/react-navigation/skills) for Agent skills to help with the upgrade.
+
+:::
+
 ## Minimum Requirements
 
 - `react-native` >= 0.72.0

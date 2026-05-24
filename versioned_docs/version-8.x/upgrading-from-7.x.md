@@ -15,6 +15,12 @@ React Navigation 8 is still in pre-release stage. The API may still change befor
 
 This guide lists all the breaking changes and new features in React Navigation 8 that you need to be aware of when upgrading from React Navigation 7.
 
+:::tip
+
+If you use an AI coding assistant, see [react-navigation/skills](https://github.com/react-navigation/skills) for Agent skills to help with the upgrade.
+
+:::
+
 ## Dependency changes
 
 The minimum required version of React Native, Expo, and TypeScript have been bumped:
