@@ -998,8 +998,6 @@ function NotFoundScreen({ route }) {
 }
 ```
 
-When doing server rendering, you'd also want to return correct status code for 404 errors. See [server rendering docs](server-rendering.md#handling-404-or-other-status-codes) for a guide on how to handle it.
-
 ## Rendering an initial route
 
 Sometimes you want to ensure that a certain screen will always be present as the first screen in the navigator's state. You can use the `initialRouteName` property to specify the screen to use for the initial screen.

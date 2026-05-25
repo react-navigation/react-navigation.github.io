@@ -988,6 +988,56 @@ The `getDefaultHeaderHeight` utility from `@react-navigation/elements` now accep
 
 See [Elements docs](elements.md#getdefaultheaderheight) for more details.
 
+#### Server rendering API has changed
+
+The `ServerContainer` export has moved to `@react-navigation/native/server`, and the `location` prop now accepts a `URL` object. It no longer accepts a `ref` or exposes `getCurrentOptions`.
+
+```diff lang=js
+- import { ServerContainer } from '@react-navigation/native';
++ import { ServerContainer } from '@react-navigation/native/server';
+
+- const ref = React.createRef();
++ const location = new URL(request.url, 'https://example.org/');
+
+  const html = ReactDOMServer.renderToString(
+-   <ServerContainer
+-     ref={ref}
+-     location={{ pathname: request.path, search: request.search }}
+-   >
++   <ServerContainer location={location}>
+      <App />
+    </ServerContainer>
+  );
+-
+- const options = ref.current?.getCurrentOptions();
+```
+
+For streaming SSR, wrap your app with `ServerContainer` inside `renderToPipeableStream`:
+
+```js
+import { ServerContainer } from '@react-navigation/native/server';
+import { renderToPipeableStream } from 'react-dom/server';
+
+const location = new URL(request.url, 'https://example.org/');
+
+const { pipe } = renderToPipeableStream(
+  <ServerContainer location={location}>
+    <App />
+  </ServerContainer>,
+  {
+    onShellReady() {
+      response.statusCode = 200;
+      response.setHeader('Content-Type', 'text/html');
+      pipe(response);
+    },
+  }
+);
+```
+
+The server rendering API no longer exposes the focused screen's options. To resolve document titles, meta tags, and status codes, etc., you can use [`getStateFromPath`](navigation-container.md#linkinggetstatefrompath) to parse the incoming URL and derive them from the route configuration on the server based on the parsed state.
+
+See the [`server rendering guide`](server-rendering.md) for a detailed guide and examples.
+
 ## New features
 
 ### Common hooks now accept name of the screen

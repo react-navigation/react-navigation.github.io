@@ -4,17 +4,11 @@ title: Server rendering
 sidebar_label: Server rendering
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-This guide will cover how to server render your React Native app using React Native for Web and React Navigation. We'll cover the following cases:
-
-1. Rendering the correct layout depending on the request URL
-2. Setting appropriate page metadata based on the focused screen
+This guide will cover how to server render your React Native app using React Native for Web and React Navigation.
 
 :::warning
 
-Server rendering support is currently limited. It's not possible to provide a seamless SSR experience due to a lack of APIs such as media queries. In addition, many third-party libraries often don't work well with server rendering.
+Server rendering support is currently limited. It's not possible to provide a seamless SSR experience due to a lack of APIs such as media queries. Many third-party libraries often don't work well with server rendering as well.
 
 :::
 
@@ -28,226 +22,85 @@ Before you follow the guide, make sure that your app already renders fine on ser
 
 ## Rendering the app
 
-First, let's take a look at an example of how you'd do [server rendering with React Native Web](http://necolas.github.io/react-native-web/docs/?path=/docs/guides-server-side--page) without involving React Navigation:
+First, let's take a look at an example of how you'd do [streaming server rendering with React](https://react.dev/reference/react-dom/server/renderToPipeableStream) without involving React Navigation:
 
 ```js
 import { AppRegistry } from 'react-native-web';
-import ReactDOMServer from 'react-dom/server';
+import { renderToPipeableStream } from 'react-dom/server';
 import App from './src/App';
 
 const { element, getStyleElement } = AppRegistry.getApplication('App');
 
-const html = ReactDOMServer.renderToString(element);
-const css = ReactDOMServer.renderToStaticMarkup(getStyleElement());
+function Document({ children, styles }) {
+  return (
+    <html style={{ height: '100%' }}>
+      <head>
+        <meta charSet="utf-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1.00001, viewport-fit=cover"
+        />
+        {styles}
+      </head>
+      <body style={{ minHeight: '100%' }}>
+        <div id="root" style={{ display: 'flex', minHeight: '100vh' }}>
+          {children}
+        </div>
+      </body>
+    </html>
+  );
+}
 
-const document = `
-  <!DOCTYPE html>
-  <html style="height: 100%">
-  <meta charset="utf-8">
-  <meta httpEquiv="X-UA-Compatible" content="IE=edge">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1.00001, viewport-fit=cover"
-  >
-  ${css}
-  <body style="min-height: 100%">
-  <div id="root" style="display: flex; min-height: 100vh">
-  ${html}
-  </div>
-`;
+const { pipe } = renderToPipeableStream(
+  <Document styles={getStyleElement()}>{element}</Document>,
+  {
+    onShellReady() {
+      response.statusCode = 200;
+      response.setHeader('Content-Type', 'text/html');
+      response.write('<!DOCTYPE html>');
+      pipe(response);
+    },
+  }
+);
 ```
 
 Here, `./src/App` is the file where you have `AppRegistry.registerComponent('App', () => App)`.
 
 If you're using React Navigation in your app, this will render the screens rendered by your home page. However, if you have [configured links](configuring-links.md) in your app, you'd want to render the correct screens for the request URL on server so that it matches what'll be rendered on the client.
 
-We can use the [`ServerContainer`](server-container.md) to do that by passing this info in the `location` prop. For example, with Koa, you can create a `URL` object from `ctx.url`:
+We can use the [`ServerContainer`](server-container.md) to do that by passing this info in the `location` prop. It must be imported from `@react-navigation/native/server` and passed a `URL` object.
+
+For example, with a Node server, you can create a `URL` object from `request.url`:
 
 ```js
-app.use(async (ctx) => {
-  const location = new URL(ctx.url, 'https://example.org/');
+import { ServerContainer } from '@react-navigation/native/server';
+import { renderToPipeableStream } from 'react-dom/server';
 
+function handler(request, response) {
   const { element, getStyleElement } = AppRegistry.getApplication('App');
+  const location = new URL(request.url, 'https://example.org/');
 
-  const html = ReactDOMServer.renderToString(
-    <ServerContainer location={location}>{element}</ServerContainer>
-  );
-
-  const css = ReactDOMServer.renderToStaticMarkup(getStyleElement());
-
-  const document = `
-    <!DOCTYPE html>
-    <html style="height: 100%">
-    <meta charset="utf-8">
-    <meta httpEquiv="X-UA-Compatible" content="IE=edge">
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1.00001, viewport-fit=cover"
-    >
-    ${css}
-    <body style="min-height: 100%">
-    <div id="root" style="display: flex; min-height: 100vh">
-    ${html}
-    </div>
-`;
-
-  ctx.body = document;
-});
-```
-
-You may also want to set the correct document title and descriptions for search engines, open graph etc. To do that, you can pass a `ref` to the container which will give you the current screen's options.
-
-```js
-app.use(async (ctx) => {
-  const location = new URL(ctx.url, 'https://example.org/');
-
-  const { element, getStyleElement } = AppRegistry.getApplication('App');
-
-  const ref = React.createRef();
-
-  const html = ReactDOMServer.renderToString(
-    <ServerContainer ref={ref} location={location}>
-      {element}
-    </ServerContainer>
-  );
-
-  const css = ReactDOMServer.renderToStaticMarkup(getStyleElement());
-
-  const options = ref.current?.getCurrentOptions();
-
-  const document = `
-    <!DOCTYPE html>
-    <html style="height: 100%">
-    <meta charset="utf-8">
-    <meta httpEquiv="X-UA-Compatible" content="IE=edge">
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1.00001, viewport-fit=cover"
-    >
-    ${css}
-    <title>${options?.title ?? 'My App'}</title>
-    <body style="min-height: 100%">
-    <div id="root" style="display: flex; min-height: 100vh">
-    ${html}
-    </div>
-`;
-
-  ctx.body = document;
-});
-```
-
-Make sure that you have specified a `title` option for your screens:
-
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
-
-```js
-const Stack = createNativeStackNavigator({
-  screens: {
-    Home: {
-      screen: HomeScreen,
-      options: {
-        // highlight-next-line
-        title: 'My App',
+  const { pipe } = renderToPipeableStream(
+    <Document styles={getStyleElement()}>
+      <ServerContainer location={location}>{element}</ServerContainer>
+    </Document>,
+    {
+      onShellReady() {
+        response.statusCode = 200;
+        response.setHeader('Content-Type', 'text/html');
+        response.write('<!DOCTYPE html>');
+        pipe(response);
       },
-    },
-    Profile: {
-      screen: ProfileScreen,
-      options: ({ route }) => ({
-        // highlight-next-line
-        title: `${route.params.name}'s Profile`,
-      }),
-    },
-  },
-});
-```
-
-</TabItem>
-<TabItem value="dynamic" label="Dynamic">
-
-```js
-<Stack.Navigator>
-  <Stack.Screen
-    name="Home"
-    component={HomeScreen}
-    options={{
-      // highlight-next-line
-      title: 'My App',
-    }}
-  />
-  <Stack.Screen
-    name="Profile"
-    component={ProfileScreen}
-    options={({ route }) => ({
-      // highlight-next-line
-      title: `${route.params.name}'s Profile`,
-    })}
-  />
-</Stack.Navigator>
-```
-
-</TabItem>
-</Tabs>
-
-## Handling 404 or other status codes
-
-When [rendering a screen for an invalid URL](configuring-links.md#handling-unmatched-routes-or-404), we should also return a `404` status code from the server.
-
-First, we need to create a context where we'll attach the status code. To do this, place the following code in a separate file that we will be importing on both the server and client:
-
-```js
-import * as React from 'react';
-
-const StatusCodeContext = React.createContext();
-
-export default StatusCodeContext;
-```
-
-Then, we need to use the context in our `NotFound` screen. Here, we add a `code` property with the value of `404` to signal that the screen was not found:
-
-```js
-function NotFound() {
-  const status = React.useContext(StatusCodeContext);
-
-  if (status) {
-    status.code = 404;
-  }
-
-  return (
-    <View>
-      <Text>Oops! This URL doesn't exist.</Text>
-    </View>
+    }
   );
 }
 ```
 
-You could also attach additional information in this object if you need to.
-
-Next, we need to create a status object to pass in the context on our server. By default, we'll set the `code` to `200`. Then pass the object in `StatusCodeContext.Provider` which should wrap the element with `ServerContainer`:
-
-```js
-// Create a status object
-const status = { code: 200 };
-
-const html = ReactDOMServer.renderToString(
-  // Pass the status object via context
-  <StatusCodeContext.Provider value={status}>
-    <ServerContainer ref={ref} location={location}>
-      {element}
-    </ServerContainer>
-  </StatusCodeContext.Provider>
-);
-
-// After rendering, get the status code and use it for server's response
-ctx.status = status.code;
-```
-
-After we render the app with `ReactDOMServer.renderToString`, the `code` property of the `status` object will be updated to be `404` if the `NotFound` screen was rendered.
-
-You can follow a similar approach for other status codes too, for example, `401` for unauthorized etc.
+To resolve document titles, meta tags, and status codes, etc., you can use [`getStateFromPath`](navigation-container.md#linkinggetstatefrompath) to parse the incoming URL and derive them from the route configuration on the server based on the parsed state.
 
 ## Summary
 
 - Use the `location` prop on `ServerContainer` to render correct screens based on the incoming request.
-- Attach a `ref` to the `ServerContainer` to get options for the current screen.
-- Use context to attach more information such as status code.
+- Import `ServerContainer` from `@react-navigation/native/server`.
+- Pass a `URL` object to `ServerContainer`.
