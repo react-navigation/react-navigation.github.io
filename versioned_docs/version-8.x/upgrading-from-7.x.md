@@ -1141,28 +1141,6 @@ Compared to parse functions, schemas provide a few advantages:
 
 See [Configuring links](configuring-links.md#using-standard-schema) and [TypeScript](typescript.md#parse-function-vs-standard-schema) for more details.
 
-### Groups now support `linking` option in static configuration
-
-The `linking` option can now be specified for groups in static configuration to define nested paths:
-
-```js
-const Stack = createStackNavigator({
-  groups: {
-    Settings: {
-      linking: { path: 'settings' },
-      screens: {
-        UserSettings: 'user',
-        AppSettings: 'app',
-      },
-    },
-  },
-});
-```
-
-This lets you prefix the paths of the screens in the group with a common prefix, e.g. `settings/` for `settings/user` and `settings/app`.
-
-See [Group](group.md) for more details.
-
 ### Deep linking to screens behind conditional screens is now supported
 
 Previously, if a screen was conditionally rendered based on some state (e.g. authentication status), deep linking to that screen wouldn't work since the screen wouldn't exist in the navigator when the app was opened via a deep link.
