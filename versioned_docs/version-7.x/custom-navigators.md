@@ -4,9 +4,6 @@ title: Custom navigators
 sidebar_label: Custom navigators
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 In essence, a navigator is a React component that takes a set of [screens](screen.md) and options, and renders them based on its [navigation state](navigation-state.md), generally with additional UI such as [headers](headers.md), [tab bars](bottom-tab-navigator.md), or [drawers](drawer-navigator.md).
 
 React Navigation provides a few built-in navigators, but they might not always fit your needs if you want a very custom behavior or UI. In such cases, you can build your own custom navigators using React Navigation's APIs.
@@ -170,15 +167,12 @@ So custom navigators need to wrap the navigator component in `createNavigatorFac
 Example:
 
 ```js
-import {
-  useNavigationBuilder,
-  createNavigatorFactory,
-} from '@react-navigation/native';
+import { createNavigatorFactory } from '@react-navigation/native';
 
 // ...
 
 export function createMyNavigator(config) {
-  return createNavigatorFactory(TabNavigator)(config);
+  return createNavigatorFactory(MyNavigator)(config);
 }
 ```
 
@@ -216,6 +210,7 @@ To type-check navigators, we need to provide few types:
 - Type of supported screen options
 - A map of event types emitted by the navigator
 - The type of the navigation object for each screen
+- The type of the props for each screen
 
 We also need to export a function to create the navigator configuration with proper types.
 
@@ -237,6 +232,7 @@ import {
   type DefaultNavigatorOptions,
   type NavigatorTypeBagBase,
   type ParamListBase,
+  type RouteProp,
   type StaticConfig,
   type TabActionHelpers,
   type TabNavigationState,
@@ -283,6 +279,16 @@ export type MyNavigationProp<
   MyNavigationEventMap
 > &
   TabActionHelpers<ParamList>;
+
+// The type of the props for each screen
+export type MyNavigatorScreenProps<
+  ParamList extends ParamListBase,
+  RouteName extends keyof ParamList = keyof ParamList,
+  NavigatorID extends string | undefined = undefined,
+> = {
+  navigation: MyNavigationProp<ParamList, RouteName, NavigatorID>;
+  route: RouteProp<ParamList, RouteName>;
+};
 
 // The props accepted by the component is a combination of 3 things
 type Props = DefaultNavigatorOptions<
@@ -356,22 +362,10 @@ function TabNavigator({ tabBarStyle, contentStyle, ...rest }: Props) {
   );
 }
 
-// Types required for type-checking the navigator
-type MyTabTypeBag<ParamList extends {}> = {
-  ParamList: ParamList;
-  State: TabNavigationState<ParamList>;
-  ScreenOptions: MyNavigationOptions;
-  EventMap: MyNavigationEventMap;
-  NavigationList: {
-    [RouteName in keyof ParamList]: MyNavigationProp<ParamList, RouteName>;
-  };
-  Navigator: typeof TabNavigator;
-};
-
 // The factory function with overloads for static and dynamic configuration
 export function createMyNavigator<
   const ParamList extends ParamListBase,
-  const NavigatorID extends string | undefined = undefined,
+  const NavigatorID extends string | undefined = string | undefined,
   const TypeBag extends NavigatorTypeBagBase = {
     ParamList: ParamList;
     NavigatorID: NavigatorID;
@@ -407,24 +401,30 @@ import {
 import { BottomTabView } from '@react-navigation/bottom-tabs';
 
 function MyBottomTabNavigator({
+  id,
   initialRouteName,
+  backBehavior,
+  UNSTABLE_routeNamesChangeBehavior,
   children,
   layout,
   screenListeners,
   screenOptions,
   screenLayout,
-  backBehavior,
+  UNSTABLE_router,
   ...rest
 }) {
   const { state, descriptors, navigation, NavigationContent } =
     useNavigationBuilder(TabRouter, {
+      id,
       initialRouteName,
+      backBehavior,
+      UNSTABLE_routeNamesChangeBehavior,
       children,
       layout,
       screenListeners,
       screenOptions,
       screenLayout,
-      backBehavior,
+      UNSTABLE_router,
     });
 
   return (
@@ -455,12 +455,13 @@ const { state, descriptors, navigation, NavigationContent } =
   useNavigationBuilder(MyRouter, {
     id,
     initialRouteName,
+    backBehavior,
+    UNSTABLE_routeNamesChangeBehavior,
     children,
     layout,
     screenListeners,
     screenOptions,
     screenLayout,
-    backBehavior,
   });
 
 // ...

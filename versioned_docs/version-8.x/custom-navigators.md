@@ -89,7 +89,7 @@ Example:
 
 ```js
 import * as React from 'react';
-import { Text, Pressable, View, StyleSheet } from 'react-native';
+import { Text, Pressable, View } from 'react-native';
 import {
   useNavigationBuilder,
   TabRouter,
@@ -167,10 +167,7 @@ So custom navigators need to wrap the navigator component in `createNavigatorFac
 Example:
 
 ```js
-import {
-  useNavigationBuilder,
-  createNavigatorFactory,
-} from '@react-navigation/native';
+import { createNavigatorFactory } from '@react-navigation/native';
 
 // ...
 
@@ -249,6 +246,7 @@ To type-check navigators, we need to provide few types:
 - Type of supported screen options
 - A map of event types emitted by the navigator
 - The type of the navigation object for each screen
+- The type of the props for each screen
 
 We also need to export functions to create the navigator and screen configurations with proper types.
 
@@ -262,7 +260,6 @@ import {
   Pressable,
   type StyleProp,
   type ViewStyle,
-  StyleSheet,
 } from 'react-native';
 import {
   createNavigatorFactory,
@@ -272,6 +269,7 @@ import {
   type NavigationProp,
   type NavigatorTypeBagBase,
   type ParamListBase,
+  type RouteProp,
   type TabActionHelpers,
   type TabNavigationState,
   TabRouter,
@@ -313,6 +311,15 @@ export type MyNavigationProp<
   MyNavigationEventMap,
   TabActionHelpers<ParamList>
 >;
+
+// The type of the props for each screen
+export type MyNavigatorScreenProps<
+  ParamList extends ParamListBase,
+  RouteName extends keyof ParamList = keyof ParamList,
+> = {
+  navigation: MyNavigationProp<ParamList, RouteName>;
+  route: RouteProp<ParamList, RouteName>;
+};
 
 // The props accepted by the component is a combination of 3 things
 type Props = DefaultNavigatorOptions<
@@ -421,23 +428,27 @@ import { BottomTabView } from '@react-navigation/bottom-tabs';
 
 function MyBottomTabNavigator({
   initialRouteName,
+  backBehavior,
+  routeNamesChangeBehavior,
   children,
   layout,
   screenListeners,
   screenOptions,
   screenLayout,
-  backBehavior,
+  router,
   ...rest
 }) {
   const { state, descriptors, navigation, NavigationContent } =
     useNavigationBuilder(TabRouter, {
       initialRouteName,
+      backBehavior,
+      routeNamesChangeBehavior,
       children,
       layout,
       screenListeners,
       screenOptions,
       screenLayout,
-      backBehavior,
+      router,
     });
 
   return (
@@ -468,12 +479,13 @@ import MyRouter from './MyRouter';
 const { state, descriptors, navigation, NavigationContent } =
   useNavigationBuilder(MyRouter, {
     initialRouteName,
+    backBehavior,
+    routeNamesChangeBehavior,
     children,
     layout,
     screenListeners,
     screenOptions,
     screenLayout,
-    backBehavior,
   });
 
 // ...
