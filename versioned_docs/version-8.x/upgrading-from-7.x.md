@@ -136,45 +136,6 @@ If you're using dynamic configuration, you can use `as`:
 + const focusedRouteName = useNavigationState((state) => state.routes[state.index].name as keyof RootStackParamList);
 ```
 
-#### New `createXScreen` API for creating screen config
-
-One of the limitations of the static config API is that the type of `route` object can't be inferred in screen callback, listeners callback etc. This made it difficult to use route params in these callbacks.
-
-To address this, we added a new `createXScreen` API for each navigator to create screen config with proper types:
-
-```diff lang=js
-const Stack = createStackNavigator({
-  screens: {
--     Profile: {
--       screen: ProfileScreen,
--       options: ({ route }) => {
--         const userId = route.params.userId; // Don't know the type of route params
--
--         return { title: `User ${userId}` };
--       },
--     },
-+     Profile: createStackScreen({
-+       screen: ProfileScreen,
-+       options: ({ route }) => {
-+         const userId = route.params.userId; // Now correctly inferred
-+
-+         return { title: `User ${userId}` };
-+       },
-+     });
-  }
-});
-```
-
-When using the `createXScreen` API, the type of params are automatically inferred based on the type annotation for the component specified in `screen` (e.g. `(props: StaticScreenProps<ProfileParams>)`) and the path pattern specified in the linking config (e.g. `linking: 'profile/:userId'`).
-
-Each navigator exports its own helper function, e.g. `createNativeStackScreen` for Native Stack Navigator, `createBottomTabScreen` for Bottom Tab Navigator, `createDrawerScreen` for Drawer Navigator etc.
-
-:::note
-
-This is technically not a breaking change. It's not required to use this API and your existing code will continue to work as before. You can incrementally adopt this API for new screens to get proper types for `route` object in various callbacks such as `options`, `listeners`, etc.
-
-:::
-
 See [Static configuration docs](static-configuration.md#createxscreen) for more details.
 
 #### Custom navigators have a simpler type API
@@ -1039,6 +1000,47 @@ The server rendering API no longer exposes the focused screen's options. To reso
 See the [`server rendering guide`](server-rendering.md) for a detailed guide and examples.
 
 ## New features
+
+### `createXScreen` let's you create screen config with proper types
+
+One of the limitations of the static config API is that the type of `route` object can't be inferred in screen callback, listeners callback etc. This made it difficult to use route params in these callbacks.
+
+To address this, we added a new `createXScreen` API for each navigator to create screen config with proper types:
+
+```diff lang=js
+const Stack = createStackNavigator({
+  screens: {
+-     Profile: {
+-       screen: ProfileScreen,
+-       options: ({ route }) => {
+-         const userId = route.params.userId; // Don't know the type of route params
+-
+-         return { title: `User ${userId}` };
+-       },
+-     },
++     Profile: createStackScreen({
++       screen: ProfileScreen,
++       options: ({ route }) => {
++         const userId = route.params.userId; // Now correctly inferred
++
++         return { title: `User ${userId}` };
++       },
++     });
+  }
+});
+```
+
+When using the `createXScreen` API, the type of params are automatically inferred based on the type annotation for the component specified in `screen` (e.g. `(props: StaticScreenProps<ProfileParams>)`) and the path pattern specified in the linking config (e.g. `linking: 'profile/:userId'`).
+
+Each navigator exports its own helper function, e.g. `createNativeStackScreen` for Native Stack Navigator, `createBottomTabScreen` for Bottom Tab Navigator, `createDrawerScreen` for Drawer Navigator etc.
+
+This API has also been backported to React Navigation 7.
+
+:::note
+
+It's not required to use this API and your existing code will continue to work as before. You can incrementally adopt this API to get proper types for `route` object in various callbacks such as `options`, `listeners`, etc.
+
+:::
 
 ### Common hooks now accept name of the screen
 

@@ -22,6 +22,7 @@ A very basic example looks like this:
 import {
   useNavigationBuilder,
   createNavigatorFactory,
+  createScreenFactory,
   StackRouter,
 } from '@react-navigation/native';
 
@@ -38,6 +39,8 @@ function MyNavigator(props) {
 }
 
 export const createMyNavigator = createNavigatorFactory(MyNavigator);
+
+export const createMyScreen = createScreenFactory();
 ```
 
 Now, we have an already working navigator, even though it doesn't do anything special yet.
@@ -202,6 +205,50 @@ function App() {
 }
 ```
 
+### `createScreenFactory`
+
+This `createScreenFactory` function is used to create a typed screen factory function, which takes a screen configuration object for proper type-checking in static configuration.
+
+Custom navigators should use `createScreenFactory` with appropriate types to create the screen factory function and export it.
+
+Example:
+
+```js
+import { createScreenFactory } from '@react-navigation/native';
+
+// ...
+
+export const createMyScreen = createScreenFactory();
+```
+
+The [Type-checking navigators](#type-checking-navigators) section covers an example of how the API is used with types.
+
+Then it can be used like this:
+
+```js static2dynamic
+import { createStaticNavigation } from '@react-navigation/native';
+import { createMyNavigator, createMyScreen } from './myNavigator';
+
+const MyTabs = createMyNavigator({
+  screens: {
+    Home: HomeScreen,
+    Feed: createMyScreen({
+      screen: FeedScreen,
+      linking: 'feed/:sort',
+      options: ({ navigation, route }) => ({
+        title: `Feed - ${route.params.sort}`,
+      }),
+    }),
+  },
+});
+
+const Navigation = createStaticNavigation(MyTabs);
+
+function App() {
+  return <Navigation />;
+}
+```
+
 ## Type-checking navigators
 
 To type-check navigators, we need to provide few types:
@@ -212,7 +259,7 @@ To type-check navigators, we need to provide few types:
 - The type of the navigation object for each screen
 - The type of the props for each screen
 
-We also need to export a function to create the navigator configuration with proper types.
+We also need to export functions to create the navigator and screen configurations with proper types.
 
 For example, to type-check our custom tab navigator, we can do something like this:
 
@@ -228,6 +275,7 @@ import {
 } from 'react-native';
 import {
   createNavigatorFactory,
+  createScreenFactory,
   CommonActions,
   type DefaultNavigatorOptions,
   type NavigatorTypeBagBase,
@@ -362,29 +410,40 @@ function TabNavigator({ tabBarStyle, contentStyle, ...rest }: Props) {
   );
 }
 
+// Type bag used for type-checking the navigator
+export type MyTabTypeBag<
+  ParamList extends ParamListBase = ParamListBase,
+  NavigatorID extends string | undefined = string | undefined,
+> = {
+  ParamList: ParamList;
+  NavigatorID: NavigatorID;
+  State: TabNavigationState<ParamList>;
+  ScreenOptions: MyNavigationOptions;
+  EventMap: MyNavigationEventMap;
+  NavigationList: {
+    [RouteName in keyof ParamList]: MyNavigationProp<
+      ParamList,
+      RouteName,
+      NavigatorID
+    >;
+  };
+  Navigator: typeof TabNavigator;
+};
+
 // The factory function with overloads for static and dynamic configuration
 export function createMyNavigator<
   const ParamList extends ParamListBase,
   const NavigatorID extends string | undefined = string | undefined,
-  const TypeBag extends NavigatorTypeBagBase = {
-    ParamList: ParamList;
-    NavigatorID: NavigatorID;
-    State: TabNavigationState<ParamList>;
-    ScreenOptions: MyNavigationOptions;
-    EventMap: MyNavigationEventMap;
-    NavigationList: {
-      [RouteName in keyof ParamList]: MyNavigationProp<
-        ParamList,
-        RouteName,
-        NavigatorID
-      >;
-    };
-    Navigator: typeof TabNavigator;
-  },
+  const TypeBag extends NavigatorTypeBagBase = MyTabTypeBag<
+    ParamList,
+    NavigatorID
+  >,
   const Config extends StaticConfig<TypeBag> = StaticConfig<TypeBag>,
 >(config?: Config): TypedNavigator<TypeBag, Config> {
   return createNavigatorFactory(TabNavigator)(config);
 }
+
+export const createMyScreen = createScreenFactory<MyTabTypeBag>();
 ```
 
 ## Extending Navigators
@@ -396,6 +455,7 @@ import * as React from 'react';
 import {
   useNavigationBuilder,
   createNavigatorFactory,
+  createScreenFactory,
   TabRouter,
 } from '@react-navigation/native';
 import { BottomTabView } from '@react-navigation/bottom-tabs';
@@ -442,6 +502,8 @@ function MyBottomTabNavigator({
 export function createMyNavigator(config) {
   return createNavigatorFactory(MyBottomTabNavigator)(config);
 }
+
+export const createMyBottomTabScreen = createScreenFactory();
 ```
 
 Now, we can customize it to add additional functionality or change the behavior. For example, use a [custom router](custom-routers.md) instead of the default [`TabRouter`](custom-routers.md#built-in-routers):

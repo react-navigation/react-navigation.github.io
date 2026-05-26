@@ -63,6 +63,36 @@ There are 2 steps to configure TypeScript with the static API:
 
    This is needed to type-check the [`useNavigation`](use-navigation.md) hook.
 
+The `createXScreen` helper functions enable type inference in screen configuration callbacks like `options`, `listeners`, etc. Each navigator exports its own version of the helper function:
+
+- `createNativeStackScreen` from `@react-navigation/native-stack`
+- `createStackScreen` from `@react-navigation/stack`
+- `createBottomTabScreen` from `@react-navigation/bottom-tabs`
+- `createDrawerScreen` from `@react-navigation/drawer`
+- `createMaterialTopTabScreen` from `@react-navigation/material-top-tabs`
+
+For example:
+
+```ts
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+      options: ({ route }) => ({
+        title: route.params.username,
+      }),
+    }),
+  },
+});
+```
+
+See [Static configuration](static-configuration.md#createxscreen) for more details.
+
 ## Navigator specific types
 
 Generally, we recommend using the default types for the [`useNavigation`](use-navigation.md) prop to access the navigation object in a navigator-agnostic manner. However, if you need to use navigator-specific APIs, e.g. `setOptions` to update navigator options, `push`, `pop`, `popTo` etc. with stacks, `openDrawer`, `closeDrawer` etc. with drawer and so on, you need to manually annotate [`useNavigation`](use-navigation.md):

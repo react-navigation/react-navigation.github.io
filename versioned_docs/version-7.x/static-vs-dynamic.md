@@ -147,9 +147,14 @@ All props passed to `<Stack.Screen>` except `name` and `component` become proper
 ```
 
 ```js title="Static API"
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
+
 const RootStack = createNativeStackNavigator({
   screens: {
-    Profile: {
+    Profile: createNativeStackScreen({
       screen: ProfileScreen,
       options: ({ route }) => ({
         title: route.params.userId,
@@ -158,10 +163,12 @@ const RootStack = createNativeStackNavigator({
         focus: () => console.log('focused'),
       },
       getId: ({ params }) => params.userId,
-    },
+    }),
   },
 });
 ```
+
+The [`createXScreen`](static-configuration.md#createxscreen) helper is for type inference in `options` and `listeners` callbacks. Each navigator exports its own screen helper: [`createNativeStackScreen`](native-stack-navigator.md), [`createStackScreen`](stack-navigator.md), [`createBottomTabScreen`](bottom-tab-navigator.md), [`createDrawerScreen`](drawer-navigator.md), [`createMaterialTopTabScreen`](material-top-tab-navigator.md).
 
 ## Conditional screens
 
@@ -590,6 +597,10 @@ function ProfileScreen({ route }: ProfileScreenProps) {
 
 ```ts title="Static API"
 import type { StaticScreenProps } from '@react-navigation/native';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 
 type Props = StaticScreenProps<{ userId: string }>;
 
@@ -599,7 +610,9 @@ function ProfileScreen({ route }: Props) {
 
 const RootStack = createNativeStackNavigator({
   screens: {
-    Profile: ProfileScreen,
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+    }),
   },
 });
 
