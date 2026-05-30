@@ -825,7 +825,7 @@ export type HomeTabScreenProps<T extends keyof HomeTabParamList> =
   >;
 ```
 
-Then, you'd set up the type for your root navigator in the same file where your root navigator is defined:
+Then, you'd set up the type for your root navigator in the same file where your root navigator is used:
 
 ```ts
 import { createStackNavigator } from '@react-navigation/stack';

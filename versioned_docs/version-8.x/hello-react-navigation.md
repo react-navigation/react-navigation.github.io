@@ -351,7 +351,7 @@ declare module '@react-navigation/core' {
 }
 ```
 
-Here, `RootStack` is the root navigator we created earlier using `createNativeStackNavigator`. You can place this code just below the code where you created your root navigator.
+Here, `RootStack` is the root navigator we created earlier using `createNativeStackNavigator`. You can place this code where you use the root navigator with `createStaticNavigation` or `NavigationContainer`.
 
 Check out the [Type checking with TypeScript](typescript.md) guide for more details.
 
