@@ -203,15 +203,15 @@ React Navigation starts with the navigation tree:
 
 ### Files and layouts
 
-| Expo Router                          | React Navigation                                                                                                                                                 |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `app/index.tsx`                      | A screen with `linking: ''`. Auto-detected based on the order or [`initialRouteName`](navigator.md#initial-route-name)                                           |
-| `app/profile/[userId].tsx`           | A screen with [`linking`](configuring-links.md#mapping-path-to-route-names) such as `profile/:userId`                                                            |
-| `app/[...slug].tsx`                  | A screen with [`linking: ':slug'`](configuring-links.md#mapping-path-to-route-names) or [`linking: '*'`](configuring-links.md#handling-unmatched-routes-or-404). |
-| `app/+not-found.tsx`                 | A screen with [`linking: '*'`](configuring-links.md#handling-unmatched-routes-or-404)                                                                            |
-| Groups such as `(tabs)`              | [Groups](group.md) in navigator configuration.                                                                                                                   |
-| `_layout.tsx`                        | [Navigator](navigator.md) configuration.                                                                                                                         |
-| `unstable_settings.initialRouteName` | [`initialRouteName`](navigator.md#initial-route-name) on the [navigator](navigator.md).                                                                          |
+| Expo Router                          | React Navigation                                                                                                       |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| `app/index.tsx`                      | A screen with `linking: ''`. Auto-detected based on the order or [`initialRouteName`](navigator.md#initial-route-name) |
+| `app/profile/[userId].tsx`           | A screen with [`linking`](configuring-links.md#mapping-path-to-route-names) such as `profile/:userId`                  |
+| `app/[...slug].tsx`                  | A screen with [`linking: '*'`](configuring-links.md#handling-unmatched-routes-or-404).                                 |
+| `app/+not-found.tsx`                 | A screen with [`linking: '*'`](configuring-links.md#handling-unmatched-routes-or-404)                                  |
+| Groups such as `(tabs)`              | [Groups](group.md) in navigator configuration.                                                                         |
+| `_layout.tsx`                        | [Navigator](navigator.md) configuration.                                                                               |
+| `unstable_settings.initialRouteName` | [`initialRouteName`](navigator.md#initial-route-name) on the [navigator](navigator.md).                                |
 
 ### Components and hooks
 
@@ -241,14 +241,14 @@ React Navigation starts with the navigation tree:
 
 ### Features without direct replacements
 
-| Expo Router                                             | Migration note                                                                                     |
+| Expo Router                                             | Alternative                                                                                        |
 | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | Typed routes                                            | [Type inference](typescript.md#setting-up-the-types) from the navigator and linking configuration. |
 | Protected routes                                        | Conditional screens or groups with [`if`](static-configuration.md#if).                             |
-| Native tabs                                             | Default on Android & iOS with [bottom tabs](bottom-tab-navigator.md).                              |
+| Native tabs                                             | [Bottom tabs](bottom-tab-navigator.md) which render native tabs by default on Android & iOS.       |
 | Headless tabs from `expo-router/ui`                     | Custom [`tabBar`](bottom-tab-navigator.md#tabbar) or [custom navigator](custom-navigators.md).     |
 | API routes and server middleware                        | No direct equivalent. Move this logic to your server.                                              |
-| Server rendering                                        | Partial support for [server rendering](server-rendering.md) with manual setup.                     |
+| Server rendering                                        | [Server rendering](server-rendering.md) with manual setup.                                         |
 | Static rendering                                        | No direct equivalent.                                                                              |
 | Link preview and link menu                              | Custom UI or platform-specific components.                                                         |
 | Zoom transition                                         | No direct equivalent, but planned.                                                                 |
