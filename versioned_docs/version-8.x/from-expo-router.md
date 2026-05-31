@@ -79,16 +79,23 @@ React Navigation starts with the navigation tree:
 
 2. Create a root navigator.
 
-   Define your root navigator with a `createXNavigator` function and render it with [`createStaticNavigation`](static-configuration.md#createstaticnavigation):
+   Define your root navigator with a `createXNavigator` function, create screen configs with the matching [`createXScreen`](static-configuration.md#createxscreen) helper, and render it with [`createStaticNavigation`](static-configuration.md#createstaticnavigation):
 
    ```tsx
    import { createStaticNavigation } from '@react-navigation/native';
-   import { createNativeStackNavigator } from '@react-navigation/native-stack';
+   import {
+     createNativeStackNavigator,
+     createNativeStackScreen,
+   } from '@react-navigation/native-stack';
 
    const RootStack = createNativeStackNavigator({
      screens: {
-       Home: HomeScreen,
-       Profile: ProfileScreen,
+       Home: createNativeStackScreen({
+         screen: HomeScreen,
+       }),
+       Profile: createNativeStackScreen({
+         screen: ProfileScreen,
+       }),
      },
    });
 
@@ -112,7 +119,9 @@ React Navigation starts with the navigation tree:
    ```ts
    const RootStack = createNativeStackNavigator({
      screens: {
-       Profile: ProfileScreen,
+       Profile: createNativeStackScreen({
+         screen: ProfileScreen,
+       }),
      },
    });
    ```
@@ -134,14 +143,20 @@ React Navigation starts with the navigation tree:
    ```ts
    const HomeTabs = createBottomTabNavigator({
      screens: {
-       Home: HomeScreen,
-       Feed: FeedScreen,
+       Home: createBottomTabScreen({
+         screen: HomeScreen,
+       }),
+       Feed: createBottomTabScreen({
+         screen: FeedScreen,
+       }),
      },
    });
 
    const RootStack = createNativeStackNavigator({
      screens: {
-       Main: HomeTabs,
+       Main: createNativeStackScreen({
+         screen: HomeTabs,
+       }),
      },
    });
    ```
@@ -155,10 +170,10 @@ React Navigation starts with the navigation tree:
    ```ts
    const RootStack = createNativeStackNavigator({
      screens: {
-       Profile: {
+       Profile: createNativeStackScreen({
          screen: ProfileScreen,
          linking: 'profile/:userId',
-       },
+       }),
      },
    });
    ```
@@ -172,14 +187,14 @@ React Navigation starts with the navigation tree:
    ```ts
    const RootStack = createNativeStackNavigator({
      screens: {
-       Home: {
+       Home: createNativeStackScreen({
          if: useIsSignedIn,
          screen: HomeScreen,
-       },
-       SignIn: {
+       }),
+       SignIn: createNativeStackScreen({
          if: useIsSignedOut,
          screen: SignInScreen,
-       },
+       }),
      },
    });
    ```
@@ -191,10 +206,10 @@ React Navigation starts with the navigation tree:
    ```ts
    const RootStack = createNativeStackNavigator({
      screens: {
-       NotFound: {
+       NotFound: createNativeStackScreen({
          screen: NotFoundScreen,
          linking: '*',
-       },
+       }),
      },
    });
    ```
@@ -353,7 +368,10 @@ export default function FeedLayout() {
 Model the same screens and options with explicit nested navigators:
 
 ```tsx title="src/RootStack.tsx"
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 
 import { HomeTabs } from './HomeTabs';
 import { NotFoundScreen } from './NotFoundScreen';
@@ -364,29 +382,32 @@ export const RootStack = createNativeStackNavigator({
     headerBackButtonDisplayMode: 'minimal',
   },
   screens: {
-    Main: {
+    Main: createNativeStackScreen({
       screen: HomeTabs,
       options: {
         headerShown: false,
       },
-    },
-    Profile: {
+    }),
+    Profile: createNativeStackScreen({
       screen: ProfileScreen,
       linking: 'profile/:userId',
       options: {
         presentation: 'modal',
       },
-    },
-    NotFound: {
+    }),
+    NotFound: createNativeStackScreen({
       screen: NotFoundScreen,
       linking: '*',
-    },
+    }),
   },
 });
 ```
 
 ```tsx title="src/HomeTabs.tsx"
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  createBottomTabScreen,
+} from '@react-navigation/bottom-tabs';
 import { Platform } from 'react-native';
 
 import { FeedStack } from './FeedStack';
@@ -398,7 +419,7 @@ export const HomeTabs = createBottomTabNavigator({
     tabBarMinimizeBehavior: 'onScrollDown',
   },
   screens: {
-    Home: {
+    Home: createBottomTabScreen({
       screen: HomeScreen,
       options: {
         tabBarLabel: 'Home',
@@ -413,8 +434,8 @@ export const HomeTabs = createBottomTabNavigator({
           },
         }),
       },
-    },
-    Feed: {
+    }),
+    Feed: createBottomTabScreen({
       screen: FeedStack,
       linking: 'feed',
       options: {
@@ -430,13 +451,16 @@ export const HomeTabs = createBottomTabNavigator({
           },
         }),
       },
-    },
+    }),
   },
 });
 ```
 
 ```tsx title="src/FeedStack.tsx"
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  createNativeStackScreen,
+} from '@react-navigation/native-stack';
 
 import { FeedListScreen } from './FeedListScreen';
 import { PostScreen } from './PostScreen';
@@ -446,7 +470,7 @@ export const FeedStack = createNativeStackNavigator({
     headerLargeTitleEnabled: true,
   },
   screens: {
-    FeedList: {
+    FeedList: createNativeStackScreen({
       screen: FeedListScreen,
       linking: '',
       options: {
@@ -454,14 +478,14 @@ export const FeedStack = createNativeStackNavigator({
           placeholder: 'Search posts',
         },
       },
-    },
-    Post: {
+    }),
+    Post: createNativeStackScreen({
       screen: PostScreen,
       linking: ':postId',
       options: {
         headerLargeTitleEnabled: false,
       },
-    },
+    }),
   },
 });
 ```
