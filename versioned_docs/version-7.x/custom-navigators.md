@@ -10,6 +10,12 @@ React Navigation provides a few built-in navigators, but they might not always f
 
 A custom navigator behaves just like a built-in navigator, and can be used in the same way. This means you can define screens the same way, use [route](route-object.md) and [navigation](navigation-object.md) objects in your screens, and navigate between screens with familiar API. The navigator will also be able to handle [deep linking](deep-linking.md), [state persistence](state-persistence.md), and other features that built-in navigators support.
 
+:::tip
+
+If you're publishing a navigator library, see [Standard navigator](standard-navigator.md) to build a navigator that can integrate with multiple navigation libraries such as React Navigation and Expo Router.
+
+:::
+
 ## Overview
 
 Under the hood, navigators are plain React components that use the [`useNavigationBuilder`](#usenavigationbuilder) hook.
