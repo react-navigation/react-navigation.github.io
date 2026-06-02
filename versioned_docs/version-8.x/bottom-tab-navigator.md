@@ -1043,6 +1043,12 @@ When `false`, tapping on the tab in tab bar won't select the tab. Custom behavio
 
 Defaults to `true`.
 
+:::note
+
+Setting this to `false` doesn't remove the tab press animation, as the tab can still be pressed. On iOS 26+, this means the liquid glass indicator moves to the pressed tab and then moves back to the active tab when the press is released.
+
+:::
+
 #### `bottomAccessory`
 
 Function that returns a React element to display as an accessory view. The function receives an options object with a `placement` parameter that can be one of the following values:
