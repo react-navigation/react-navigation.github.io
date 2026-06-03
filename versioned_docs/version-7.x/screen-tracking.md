@@ -184,7 +184,7 @@ export default function App() {
 
 :::note
 
-If you are building a library that wants to provide screen tracking integration with React Navigation, you can accept a [`ref`](navigation-container.md#ref) to the navigation container and use the [`ready`](navigation-container.md#ready) and [`state`](navigation-container.md#state) events instead of `onReady` and `onStateChange` props to keep your logic self-contained.
+If you are building a library that provides screen tracking integration with React Navigation, accept a [`ref`](navigation-container.md#ref) to the container and use the [`ready`](navigation-container.md#ready) and [`state`](navigation-container.md#state) events instead of `onReady` and `onStateChange`. Don't wrap `NavigationContainer` in your own component as it's not compatible with the [Static API](static-configuration.md) and doesn't compose with other libraries.
 
 :::
 
