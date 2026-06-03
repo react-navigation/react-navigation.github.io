@@ -1163,6 +1163,43 @@ const RootStack = createNativeStackNavigator({
 });
 ```
 
+### Multiple screens can now share the same path pattern for deep linking
+
+In React Navigation 7, each screen needed to have a unique path pattern for deep linking.
+
+React Navigation 8, we now supported shared paths, which allows multiple screens to share the same path pattern. This is useful for cases where the same screen appears in multiple nested navigators, but you want them to use a single URL. e.g. each tab contains its own stack with a `Profile` screen, while both copies still use a single URL such as `/profile/jane`.
+
+When using static configuration, this is detected automatically. It can also be explicitly specified with `shared: true` when using dynamic configuration, or when automatic detection won't detect this in static configuration:
+
+```js
+const config = {
+  screens: {
+    FeedTab: {
+      screens: {
+        Feed: '',
+        Profile: {
+          path: 'profile/:id',
+          shared: true,
+        },
+      },
+    },
+    SearchTab: {
+      screens: {
+        Search: 'search',
+        Profile: {
+          path: 'profile/:id',
+          shared: true,
+        },
+      },
+    },
+  },
+};
+```
+
+When handling deep links that have shared paths, React Navigation will try to automatically select the correct navigator based on the current navigation state.
+
+See [Shared paths](configuring-links.md#shared-paths) for more details.
+
 ### Navigators now accept a `router` prop
 
 A router defines how the navigator updates its state based on navigation actions. Previously, custom routers could only be used by [creating a custom navigator](custom-navigators.md#extending-navigators).

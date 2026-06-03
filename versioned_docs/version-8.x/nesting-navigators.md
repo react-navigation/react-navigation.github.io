@@ -591,6 +591,116 @@ function RootStack() {
 </TabItem>
 </Tabs>
 
+## Sharing the same screen in multiple navigators
+
+A common pattern in mobile apps is to nest stack navigators inside each tab of a bottom tab navigator. Often, there can be some screens that exist in each stack.
+
+Let's say you have a `FeedStack` tab and a `SearchStack` tab, and both of them can navigate to a `Profile` screen. You can add the `Profile` screen to both stacks, so that when you navigate to it from the `Feed` screen, the `FeedStack` tab stays selected and the tab bar remains visible. Pressing back from `Profile` will take you back to the previous screen in the same tab.
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+```js
+// highlight-start
+const Profile = createNativeStackScreen({
+  screen: ProfileScreen,
+  linking: 'profile/:id',
+});
+// highlight-end
+
+const FeedStack = createNativeStackNavigator({
+  screens: {
+    Feed: FeedScreen,
+    // highlight-next-line
+    Profile,
+  },
+});
+
+const SearchStack = createNativeStackNavigator({
+  screens: {
+    Search: SearchScreen,
+    // highlight-next-line
+    Profile,
+  },
+});
+
+const HomeTabs = createBottomTabNavigator({
+  screens: {
+    FeedTab: createBottomTabScreen({
+      screen: FeedStack,
+      options: {
+        title: 'Feed',
+      },
+    }),
+    SearchTab: createBottomTabScreen({
+      screen: SearchStack,
+      options: {
+        title: 'Search',
+      },
+    }),
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+```js
+function FeedStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Feed" component={FeedScreen} />
+      <Stack.Screen
+        name="Profile"
+        // highlight-next-line
+        component={ProfileScreen}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function SearchStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Search" component={SearchScreen} />
+      <Stack.Screen
+        name="Profile"
+        // highlight-next-line
+        component={ProfileScreen}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function HomeTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="FeedTab"
+        component={FeedStack}
+        options={{
+          title: 'Feed',
+        }}
+      />
+      <Tab.Screen
+        name="SearchTab"
+        component={SearchStack}
+        options={{
+          title: 'Search',
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+Each `Profile` screen belongs to the stack where it was opened. Calling `navigate('Profile', { id: 'jane' })` from inside `FeedStack` opens `Profile` in `FeedStack`, while the same call from inside `SearchStack` opens it in `SearchStack`.
+
+For deep linking and browser URL integration, you can [configure the same path for both screens](configuring-links.md#shared-paths) so that the URL is the same regardless of which stack it was opened from.
+
 ## Best practices when nesting
 
 We recommend keeping navigator nesting to a minimum. Try to achieve the behavior you want with as little nesting as possible.

@@ -274,6 +274,7 @@ When using automatic path generation with `enabled: 'auto'`, the following rules
 - Screen names will be converted from `PascalCase` to `kebab-case` to use as the path (e.g. `NewsFeed` -> `news-feed`).
 - Unless a screen has explicit empty path (`path: ''`) to use for the homepage, the first leaf screen encountered will be used as the homepage.
 - Path generation only handles leaf screens, i.e. no path is generated for screens containing nested navigators. It's still possible to specify a path for them with an explicit `linking` property.
+- If the same screen is used in multiple nested navigators with the same path pattern, the path will be marked as [shared](#shared-paths) automatically. This is detected by comparing the screen component or navigator reference.
 
 Let's say we have the following navigation structure:
 
@@ -1179,6 +1180,87 @@ const config = {
 
 With `exact` property set to `true`, `Profile` will ignore the parent screen's `path` config and you'll be able to navigate to `Profile` using a URL like `users/cal`.
 
+## Shared paths
+
+Sometimes the same screen is present in multiple nested navigators. For example, each tab can have its own stack, and each stack can contain a `Profile` screen. In this case, you may want `/profile/jane` to keep the current tab focused and open the `Profile` screen in that tab.
+
+React Navigation supports this with shared paths:
+
+<Tabs groupId="config" queryString="config">
+<TabItem value="static" label="Static" default>
+
+When using static configuration with automatic path generation (default behavior), shared paths are detected automatically when the same screen component or navigator reference appears in multiple branches with the same full path pattern:
+
+```js
+const Profile = createNativeStackScreen({
+  screen: ProfileScreen,
+  linking: 'profile/:id',
+});
+
+const FeedStack = createNativeStackNavigator({
+  screens: {
+    Feed: FeedScreen,
+    Profile,
+  },
+});
+
+const SearchStack = createNativeStackNavigator({
+  screens: {
+    Search: SearchScreen,
+    Profile,
+  },
+});
+```
+
+You can also set `shared` explicitly, which can be useful if the screen component is different but you still want to share the path:
+
+```js
+const Profile = createNativeStackScreen({
+  screen: ProfileScreen,
+  linking: {
+    path: 'profile/:id',
+    shared: true,
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic" label="Dynamic">
+
+When using dynamic configuration, specify `shared: true` for every screen config that should accept the same path:
+
+```js
+const config = {
+  screens: {
+    FeedTab: {
+      screens: {
+        Feed: '',
+        Profile: {
+          path: 'profile/:id',
+          shared: true,
+        },
+      },
+    },
+    SearchTab: {
+      screens: {
+        Search: 'search',
+        Profile: {
+          path: 'profile/:id',
+          shared: true,
+        },
+      },
+    },
+  },
+};
+```
+
+</TabItem>
+</Tabs>
+
+When a shared path matches more than one screen, React Navigation uses the current navigation state to choose the matching branch when possible to handle deep links.
+
+The first matching path is also the canonical path used when generating URLs. If you use [`alias`](#alias-for-paths), you need to explicitly mark the alias itself as `shared: true` when desired.
+
 ## Omitting a screen from path
 
 Sometimes, you may not want to have the route name of a screen in the path. For example, let's say you have a `Home` screen and the following config. When the page is opened in the browser you'll get `/home` as the URL:
@@ -1506,6 +1588,7 @@ Each item in the `alias` array can be a string matching the syntax of the `path`
 
 - `path` (required) - The path pattern to match.
 - `exact` - Whether to match the path exactly. Defaults to `false`. See [Matching exact paths](#matching-exact-paths) for more details.
+- `shared` - Whether this alias can resolve to multiple routes. Defaults to `false`. See [Shared paths](#shared-paths) for more details.
 - `parse` - Function to parse path segments into param values. See [Passing params](#passing-params) for more details.
 
 ## Advanced cases
