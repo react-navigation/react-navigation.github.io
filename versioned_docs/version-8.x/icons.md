@@ -93,11 +93,15 @@ The component accepts the following props:
 
 - `color`
 
-  The color of the symbol.
+  The color of the symbol. Defaults to black.
+
+  In `monochrome` mode, this is used as the tint color. In `hierarchical` and `palette` modes, it is used as the fallback for `colors.primary`.
 
 - `weight`
 
-  The weight of the symbol. Can be one of:
+  The weight of the symbol. Defaults to `regular`.
+
+  Can be one of:
   - `'thin'` (`100`)
   - `'ultralight'` (`200`)
   - `'light'` (`300`)
@@ -110,25 +114,46 @@ The component accepts the following props:
 
 - `scale`
 
-  The scale of the symbol relative to the font size. Can be one of:
+  The scale variant of the symbol relative to its font size. Defaults to `medium`.
+
+  Can be one of:
   - `'small'`
   - `'medium'`
   - `'large'`
 
-- `mode`
+- `variableValue`
+
+  A value between `0` and `1` used to customize variable symbols.
+
+  Variable symbols, such as `wifi` or `speaker.wave.3`, have layers that progressively activate to represent a magnitude. `0` renders the fewest layers, while `1` renders the full symbol.
+
+  This can be used for status indicators such as signal strength, battery level, volume, brightness, or progress. It has no effect on symbols that aren't variable.
+
+- `variableValueMode`
+
+  How the partial state from `variableValue` is rendered. Requires iOS 26+. Ignored on earlier versions. Defaults to `automatic`.
+
+  Can be one of:
+  - `'automatic'`: The system chooses based on the symbol.
+  - `'color'`: Inactive layers are faded with opacity.
+  - `'draw'`: Layers are partially drawn instead of faded.
+
+- `renderingMode`
 
   The rendering mode of the symbol. Can be one of:
-  - `'monochrome'` (single color tint, default)
-  - `'hierarchical'` (derived hierarchy from a single color)
-  - `'palette'` (explicit colors for each layer)
-  - `'multicolor'` (symbol's built-in multicolor scheme)
+  - `'monochrome'` (default): Single color tint.
+  - `'hierarchical'`: Derived hierarchy from a single color.
+  - `'palette'`: Explicit colors for each layer.
+  - `'multicolor'`: Symbol's built-in multicolor scheme.
 
 - `colors`
 
-  Object of colors to use for `hierarchical` and `palette` modes. It can have the following properties:
-  - `primary` (base color for `hierarchical` mode)
-  - `secondary` (second layer in `palette` mode)
-  - `tertiary` (third layer in `palette` mode).
+  Object of colors to use for non-monochrome rendering modes. It can have the following properties:
+  - `primary`: Base color for `hierarchical` mode.
+  - `secondary`: Second layer in `palette` mode.
+  - `tertiary`: Third layer in `palette` mode.
+
+  Ignored when `renderingMode` is `'multicolor'`. If the prop is not provided, the primary color defaults to the `color` prop.
 
   Example:
 
@@ -136,7 +161,7 @@ The component accepts the following props:
   <SFSymbol
     name="star.fill"
     size={30}
-    mode="palette"
+    renderingMode="palette"
     colors={{
       primary: 'red',
       secondary: 'yellow',
@@ -145,11 +170,18 @@ The component accepts the following props:
   />
   ```
 
-  If the prop is not provided, the primary color defaults to the `color` prop.
+- `colorRenderingMode`
 
-- `animation`
+  How color is applied across the symbol's layers. Requires iOS 26+. Ignored on earlier versions. Defaults to `automatic`.
 
-  The animation effect to apply when the symbol changes. Requires iOS 17+. Ignored on earlier versions.
+  Can be one of:
+  - `'automatic'`: The system chooses based on the symbol.
+  - `'flat'`: A solid color per layer.
+  - `'gradient'`: A gradient derived from each layer's color.
+
+- `effect`
+
+  The symbol effect to apply. Requires iOS 17+. Effects introduced in later iOS versions are ignored on earlier versions.
 
   It can be a string with the following values:
   - `'bounce'`
@@ -157,19 +189,138 @@ The component accepts the following props:
   - `'appear'`
   - `'disappear'`
   - `'variableColor'`
+  - `'scale'`
   - `'breathe'`
   - `'wiggle'`
   - `'rotate'`
+  - `'drawOn'`
+  - `'drawOff'`
 
-  Or a custom animation object with the following properties:
-  - `effect`: The animation effect to apply (such as `'bounce'`, `'pulse'`, etc.).
-  - `repeating`: Whether the animation repeats continuously. Defaults to `false`.
-  - `repeatCount`: Number of times to repeat the animation. Ignored if `repeating` is `true`.
-  - `speed`: Speed multiplier for the animation. Defaults to `1`.
-  - `wholeSymbol`: Whether to animate the whole symbol at once or layer by layer. Defaults to `false`.
-  - `direction`: Direction of the animation. Applicable to `bounce` and `wiggle`.
-  - `reversing`: Whether the variable color effect reverses with each cycle. Only applicable to `variableColor`. Defaults to `false`.
-  - `cumulative`: Whether each layer remains changed until the end of the cycle. Only applicable to `variableColor`. Defaults to `false`.
+  Or a custom effect object with a `type` property and additional options:
+
+  ```js
+  <SFSymbol
+    name="bell.fill"
+    effect={{
+      type: 'bounce',
+      direction: 'up',
+      repeat: { count: 2, delay: 0.2 },
+      speed: 1.5,
+      scope: 'wholeSymbol',
+    }}
+  />
+  ```
+
+  All effects support the following options:
+  - `type`: The effect to apply. One of the values listed above.
+  - `speed`: Speed multiplier for the effect. Defaults to `1`.
+  - `repeat`: Repeat behavior. Supported values are:
+    - `'continuous'`: Repeat indefinitely with no delay.
+    - `'nonRepeating'`: Run the effect once.
+    - An object with the following properties:
+      - `count`: Number of times to repeat the effect.
+      - `delay`: Delay in seconds between repeated effect cycles.
+
+  Some options are only supported by specific effects:
+  - `bounce`, `appear`, `disappear`, and `scale`:
+    - `direction`: Direction for the effect. Can be one of:
+      - `'up'`
+      - `'down'`
+    - `scope`: Whether to animate the whole symbol at once or by layer. Can be one of:
+      - `'byLayer'` (default)
+      - `'wholeSymbol'`
+
+  - `pulse`:
+    - `scope`: Whether to animate the whole symbol at once or by layer. Can be one of:
+      - `'byLayer'` (default)
+      - `'wholeSymbol'`
+
+  - `breathe`:
+    - `variant`: Breathe effect variant. Can be one of:
+      - `'plain'`
+      - `'pulse'`
+    - `scope`: Whether to animate the whole symbol at once or by layer. Can be one of:
+      - `'byLayer'` (default)
+    - `'wholeSymbol'`
+
+  - `wiggle`:
+    - `direction`: Direction for the effect. Can be one of:
+      - `'up'`
+      - `'down'`
+      - `'left'`
+      - `'right'`
+      - `'forward'`
+      - `'backward'`
+      - `'clockwise'`
+      - `'counterClockwise'`
+    - `angle`: Custom wiggle angle in degrees. Overrides `direction` when set.
+    - `scope`: Whether to animate the whole symbol at once or by layer. Can be one of:
+      - `'byLayer'` (default)
+      - `'wholeSymbol'`
+
+  - `rotate`:
+    - `direction`: Direction for the effect. Can be one of:
+      - `'clockwise'`
+      - `'counterClockwise'`
+    - `scope`: Whether to animate the whole symbol at once or by layer. Can be one of:
+      - `'byLayer'` (default)
+      - `'wholeSymbol'`
+
+  - `drawOn`:
+    - `scope`: Whether to animate the whole symbol at once, by layer, or individually. Can be one of:
+      - `'byLayer'` (default)
+      - `'wholeSymbol'`
+      - `'individually'`
+
+  - `drawOff`:
+    - `scope`: Whether to animate the whole symbol at once, by layer, or individually. Can be one of:
+      - `'byLayer'` (default)
+      - `'wholeSymbol'`
+      - `'individually'`
+    - `drawDirection`: Whether the animation follows the symbol's authored draw order or plays it in reverse. Can be one of:
+      - `'nonReversed'`: Follows the symbol's draw order.
+      - `'reversed'`: Plays the draw order in reverse.
+
+  - `variableColor`:
+    - `reversing`: Whether the effect reverses with each cycle. Defaults to `false`.
+    - `cumulative`: Whether layers light up cumulatively and stay active through the cycle. Defaults to `false`.
+    - `inactiveLayers`: How inactive layers are displayed. Can be one of:
+      - `'hide'`: Inactive layers are invisible.
+      - `'dim'`: Inactive layers stay visible but faded.
+
+- `contentTransition`
+
+  The transition to apply when the symbol `name` or `variableValue` changes. Requires iOS 17+. Ignored on earlier versions.
+
+  It can be a string with the following values:
+  - `'automatic'`
+  - `'replace'`
+
+  Or a custom transition object:
+
+  ```js
+  <SFSymbol
+    name={isConnected ? 'wifi' : 'wifi.slash'}
+    contentTransition={{
+      type: 'replace',
+      magic: true,
+    }}
+  />
+  ```
+
+  Transitions have the following options:
+  - `type`: The transition to apply. One of the values listed above.
+  - `speed`: Speed multiplier for the transition. Defaults to `1`.
+  - `variant`: Direction for the `replace` transition. Can be `'downUp'`, `'upUp'`, or `'offUp'`.
+  - `scope`: Whether the `replace` transition runs by layer or on the whole symbol.
+  - `magic`: Whether to prefer Magic Replace for `replace` transitions when possible. Falls back to regular Replace on iOS 17.
+
+  This can be used to animate changes to the icon in response to state. For example, changing `wifi` to `wifi.slash` with a `magic` replace transition animates the slash across the symbol.
+
+  <video playsInline autoPlay muted loop style={{ width: '150px', aspectRatio: 1 / 1 }}>
+
+    <source src="/assets/icons/sf-symbol-magic-replace.mp4" />
+  </video>
 
 ## Material Symbols
 
