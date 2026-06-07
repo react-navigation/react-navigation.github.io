@@ -485,7 +485,7 @@ export default function App() {
       navigationState={{ index, routes }}
       renderScene={renderScene}
       onIndexChange={setIndex}
-      renderAdapter={ScrollViewAdapter}
+      renderAdapter={(props) => <ScrollViewAdapter {...props} bounces />}
     />
   );
 }
