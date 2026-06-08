@@ -163,7 +163,12 @@
       "customProps": {
         "icon": "build"
       },
-      "items": ["navigation-state", "custom-routers", "custom-navigators"]
+      "items": [
+        "navigation-state",
+        "custom-routers",
+        "custom-navigators",
+        "standard-navigator"
+      ]
     },
     {
       "type": "category",
