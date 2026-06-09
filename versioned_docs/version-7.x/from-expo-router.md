@@ -16,7 +16,7 @@ Some of the benefits of React Navigation are:
 
 - More expressive APIs for precise control over navigation structure and behavior.
 - Modeled on state objects instead of URLs, which encode more information and enable features such as [`reset`](navigation-actions.md#reset) and [navigation state persistence](state-persistence.md).
-- More flexible deep linking, such as parsing and schema support for params, regex support for paths, and even fully custom parsing with [`getStateFromPath`](navigation-container.md#linkinggetstatefrompath) etc.
+- More flexible deep linking, such as parsing support for params, regex support for paths, and even fully custom parsing with [`getStateFromPath`](navigation-container.md#linkinggetstatefrompath) etc.
 - URL segments are not coupled to navigator nesting structure, making it possible to change the UI without affecting public URLs.
 
 Some of the benefits of Expo Router are:
@@ -30,7 +30,7 @@ Some of the benefits of Expo Router are:
 
 #### React Navigation requires a lot of boilerplate
 
-React Navigation's static configuration API is designed to minimize boilerplate. It provides [automatic type inference based on the navigator and linking configuration](typescript.md#setting-up-the-types), and [automatic paths for deep linking](configuring-links.md) out of the box.
+React Navigation's static configuration API is designed to minimize boilerplate. It provides [automatic type inference based on the navigator configuration](typescript.md), and [automatic paths for deep linking](configuring-links.md) out of the box.
 
 #### React Navigation doesn't support Web
 
@@ -38,7 +38,7 @@ React Navigation [supports Web out-of-the-box](web-support.md) with the same API
 
 #### React Navigation doesn't use native navigation primitives
 
-Official navigators in React Navigation such as [Native Stack](native-stack-navigator.md) and [Bottom Tabs](bottom-tab-navigator.md) use native primitives by default on Android & iOS, including platform styling such as [Liquid Glass on supported iOS versions](bottom-tab-navigator.md#native), [`SFSymbol`](icons.md#sf-symbols) and [Material Symbols](icons.md#material-symbols) support for icons, [Dynamic Material Themes on Android](themes.md#built-in-themes), and more.
+Official navigators in React Navigation such as [Native Stack](native-stack-navigator.md) and [Native Bottom Tabs](native-bottom-tab-navigator.md) use native primitives by default on Android & iOS, including platform styling such as [Liquid Glass on supported iOS versions](native-bottom-tab-navigator.md).
 
 ## Mental model
 
@@ -114,7 +114,7 @@ React Navigation starts with the navigation tree:
 
 3. Move each route file into a screen registration.
 
-   A route file such as `app/profile/[userId].tsx` becomes a screen component registered in a navigator. Keep the component code, but replace Expo Router hooks with React Navigation hooks such as [`useRoute`](use-route.md) and [`useNavigation`](use-navigation.md).
+   A route file such as `app/profile/[userId].tsx` becomes a screen component registered in a navigator. Keep the component code, but replace Expo Router hooks with React Navigation's [`useRoute`](use-route.md) (or `route` prop) and [`useNavigation`](use-navigation.md) hooks.
 
    ```ts
    const RootStack = createNativeStackNavigator({
@@ -127,9 +127,7 @@ React Navigation starts with the navigation tree:
    ```
 
    ```ts
-   function ProfileScreen() {
-     const route = useRoute('Profile');
-
+   function ProfileScreen({ route }) {
      const { userId } = route.params;
 
      // ...
@@ -138,7 +136,7 @@ React Navigation starts with the navigation tree:
 
 4. Recreate `_layout.tsx` files with nested navigators.
 
-   A layout returning `<Stack />` becomes [`createNativeStackNavigator`](native-stack-navigator.md) or [`createStackNavigator`](stack-navigator.md), `<Tabs />` becomes [`createBottomTabNavigator`](bottom-tab-navigator.md), and `<Drawer />` becomes [`createDrawerNavigator`](drawer-navigator.md). Nested layout files become [nested navigators](nesting-navigators.md).
+   A layout returning `<Stack />` becomes [`createNativeStackNavigator`](native-stack-navigator.md) or [`createStackNavigator`](stack-navigator.md), `<Tabs />` becomes [`createBottomTabNavigator`](bottom-tab-navigator.md), `<NativeTabs />` becomes [`createNativeBottomTabNavigator`](native-bottom-tab-navigator.md), and `<Drawer />` becomes [`createDrawerNavigator`](drawer-navigator.md). Nested layout files become [nested navigators](nesting-navigators.md).
 
    ```ts
    const HomeTabs = createBottomTabNavigator({
@@ -230,37 +228,37 @@ React Navigation starts with the navigation tree:
 
 ### Components and hooks
 
-| Expo Router                                                                                                          | React Navigation                                                                                                                                                                            |
-| -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`Stack`](https://docs.expo.dev/router/advanced/stack)                                                               | [`createNativeStackNavigator`](native-stack-navigator.md)                                                                                                                                   |
-| [`Tabs`](https://docs.expo.dev/router/advanced/tabs)                                                                 | [`createBottomTabNavigator`](bottom-tab-navigator.md).                                                                                                                                      |
-| [`Drawer`](https://docs.expo.dev/router/advanced/drawer)                                                             | [`createDrawerNavigator`](drawer-navigator.md)                                                                                                                                              |
-| [`SplitView`](https://docs.expo.dev/versions/latest/sdk/router/split-view)                                           | No direct equivalent, but planned.                                                                                                                                                          |
-| [`Link`](https://docs.expo.dev/versions/latest/sdk/router/link)                                                      | [`Link`](link.md) with a screen name and params, or a reusable custom link built with [`useLinkProps`](use-link-props.md)                                                                   |
-| [`Redirect`](https://docs.expo.dev/versions/latest/sdk/router/link#redirect)                                         | Conditional screens/groups with [`if`](static-configuration.md#if), or [`navigation.replace`](stack-actions.md#replace)                                                                     |
-| [`router.push`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                                  | [`navigation.push`](stack-actions.md#push) in stack navigators or [`navigation.pushParams`](navigation-actions.md#pushparams)                                                               |
-| [`router.navigate`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                              | [`navigation.navigate`](navigation-object.md#navigate)                                                                                                                                      |
-| [`router.replace`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                               | [`navigation.replace`](stack-actions.md#replace) in stack navigators                                                                                                                        |
-| [`router.back`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                                  | [`navigation.goBack`](navigation-object.md#goback)                                                                                                                                          |
-| [`router.setParams`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                             | [`navigation.setParams`](navigation-object.md#setparams), [`navigation.replaceParams`](navigation-actions.md#replaceparams) and [`navigation.pushParams`](navigation-actions.md#pushparams) |
-| [`router.prefetch`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                              | [`navigation.preload`](navigation-object.md#preload)                                                                                                                                        |
-| [`useRouter`](https://docs.expo.dev/versions/latest/sdk/router/#userouter)                                           | [`useNavigation`](use-navigation.md)                                                                                                                                                        |
-| [`useLocalSearchParams`](https://docs.expo.dev/versions/latest/sdk/router/#uselocalsearchparams)                     | [`useRoute`](use-route.md) and params from the [`route` object](route-object.md)                                                                                                            |
-| [`useGlobalSearchParams`](https://docs.expo.dev/versions/latest/sdk/router/#useglobalsearchparams)                   | No direct equivalent.                                                                                                                                                                       |
-| [`usePathname`](https://docs.expo.dev/versions/latest/sdk/router/#usepathname)                                       | [`useRoutePath`](use-route-path.md)                                                                                                                                                         |
-| [`useSegments`](https://docs.expo.dev/versions/latest/sdk/router/#usesegments)                                       | No direct equivalent.                                                                                                                                                                       |
-| [`useFocusEffect`](https://docs.expo.dev/versions/latest/sdk/router/#usefocuseffecteffect-do_not_pass_a_second_prop) | [`useFocusEffect`](use-focus-effect.md)                                                                                                                                                     |
-| [`useNavigation`](https://docs.expo.dev/versions/latest/sdk/router/#usenavigationparent)                             | [`useNavigation`](use-navigation.md)                                                                                                                                                        |
-| [`useSitemap`](https://docs.expo.dev/versions/latest/sdk/router/#usesitemap)                                         | No direct equivalent.                                                                                                                                                                       |
-| [`useLoaderData`](https://docs.expo.dev/router/web/data-loaders)                                                     | No direct equivalent, but planned.                                                                                                                                                          |
+| Expo Router                                                                                                          | React Navigation                                                                                                               |
+| -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| [`Stack`](https://docs.expo.dev/router/advanced/stack)                                                               | [`createNativeStackNavigator`](native-stack-navigator.md)                                                                      |
+| [`Tabs`](https://docs.expo.dev/router/advanced/tabs)                                                                 | [`createBottomTabNavigator`](bottom-tab-navigator.md).                                                                         |
+| [`Drawer`](https://docs.expo.dev/router/advanced/drawer)                                                             | [`createDrawerNavigator`](drawer-navigator.md)                                                                                 |
+| [`SplitView`](https://docs.expo.dev/versions/latest/sdk/router/split-view)                                           | No direct equivalent, but planned.                                                                                             |
+| [`Link`](https://docs.expo.dev/versions/latest/sdk/router/link)                                                      | [`Link`](link.md) with a screen name and params, or a reusable custom link built with [`useLinkProps`](use-link-props.md)      |
+| [`Redirect`](https://docs.expo.dev/versions/latest/sdk/router/link#redirect)                                         | Conditional screens/groups with [`if`](static-configuration.md#if), or [`navigation.replace`](stack-actions.md#replace)        |
+| [`router.push`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                                  | [`navigation.push`](stack-actions.md#push) in stack navigators                                                                 |
+| [`router.navigate`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                              | [`navigation.navigate`](navigation-object.md#navigate)                                                                         |
+| [`router.replace`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                               | [`navigation.replace`](stack-actions.md#replace) in stack navigators                                                           |
+| [`router.back`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                                  | [`navigation.goBack`](navigation-object.md#goback)                                                                             |
+| [`router.setParams`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                             | [`navigation.setParams`](navigation-object.md#setparams) and [`navigation.replaceParams`](navigation-actions.md#replaceparams) |
+| [`router.prefetch`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                              | [`navigation.preload`](navigation-object.md#preload)                                                                           |
+| [`useRouter`](https://docs.expo.dev/versions/latest/sdk/router/#userouter)                                           | [`useNavigation`](use-navigation.md)                                                                                           |
+| [`useLocalSearchParams`](https://docs.expo.dev/versions/latest/sdk/router/#uselocalsearchparams)                     | [`useRoute`](use-route.md) and params from the [`route` object](route-object.md)                                               |
+| [`useGlobalSearchParams`](https://docs.expo.dev/versions/latest/sdk/router/#useglobalsearchparams)                   | No direct equivalent.                                                                                                          |
+| [`usePathname`](https://docs.expo.dev/versions/latest/sdk/router/#usepathname)                                       | [`useRoutePath`](use-route-path.md)                                                                                            |
+| [`useSegments`](https://docs.expo.dev/versions/latest/sdk/router/#usesegments)                                       | No direct equivalent.                                                                                                          |
+| [`useFocusEffect`](https://docs.expo.dev/versions/latest/sdk/router/#usefocuseffecteffect-do_not_pass_a_second_prop) | [`useFocusEffect`](use-focus-effect.md)                                                                                        |
+| [`useNavigation`](https://docs.expo.dev/versions/latest/sdk/router/#usenavigationparent)                             | [`useNavigation`](use-navigation.md)                                                                                           |
+| [`useSitemap`](https://docs.expo.dev/versions/latest/sdk/router/#usesitemap)                                         | No direct equivalent.                                                                                                          |
+| [`useLoaderData`](https://docs.expo.dev/router/web/data-loaders)                                                     | No direct equivalent, but planned.                                                                                             |
 
 ### Features without direct replacements
 
 | Expo Router                                                                                            | Alternative                                                                                                                               |
 | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| [Typed routes](https://docs.expo.dev/router/reference/typed-routes)                                    | [Type inference](typescript.md#setting-up-the-types) from the navigator and linking configuration.                                        |
+| [Typed routes](https://docs.expo.dev/router/reference/typed-routes)                                    | [Type inference](typescript.md) from the navigator configuration.                                                                         |
 | [Protected routes](https://docs.expo.dev/router/advanced/protected)                                    | Conditional screens or groups with [`if`](static-configuration.md#if).                                                                    |
-| [Native tabs](https://docs.expo.dev/router/advanced/native-tabs)                                       | [Bottom tabs](bottom-tab-navigator.md) which render native tabs by default on Android & iOS.                                              |
+| [Native tabs](https://docs.expo.dev/router/advanced/native-tabs)                                       | Experimental [Native Bottom Tabs](native-bottom-tab-navigator.md) which render native tabs by default on Android & iOS.                   |
 | [Headless tabs from `expo-router/ui`](https://docs.expo.dev/router/advanced/custom-tabs)               | Custom [`tabBar`](bottom-tab-navigator.md#tabbar) or [custom navigator](custom-navigators.md).                                            |
 | [API routes and server middleware](https://docs.expo.dev/router/web/api-routes)                        | No direct equivalent. Move this logic to your server.                                                                                     |
 | [Server rendering](https://docs.expo.dev/router/web/static-rendering)                                  | [Server rendering](server-rendering.md) with manual setup.                                                                                |
@@ -405,20 +403,20 @@ export const RootStack = createNativeStackNavigator({
 
 ```tsx title="src/HomeTabs.tsx"
 import {
-  createBottomTabNavigator,
-  createBottomTabScreen,
-} from '@react-navigation/bottom-tabs';
+  createNativeBottomTabNavigator,
+  createNativeBottomTabScreen,
+} from '@react-navigation/bottom-tabs/unstable';
 import { Platform } from 'react-native';
 
 import { FeedStack } from './FeedStack';
 import { HomeScreen } from './HomeScreen';
 
-export const HomeTabs = createBottomTabNavigator({
+export const HomeTabs = createNativeBottomTabNavigator({
   screenOptions: {
     tabBarMinimizeBehavior: 'onScrollDown',
   },
   screens: {
-    Home: createBottomTabScreen({
+    Home: createNativeBottomTabScreen({
       screen: HomeScreen,
       options: {
         tabBarLabel: 'Home',
@@ -434,7 +432,7 @@ export const HomeTabs = createBottomTabNavigator({
         }),
       },
     }),
-    Feed: createBottomTabScreen({
+    Feed: createNativeBottomTabScreen({
       screen: FeedStack,
       linking: 'feed',
       options: {
