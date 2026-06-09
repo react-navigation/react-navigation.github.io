@@ -241,7 +241,7 @@ The component accepts the following props:
       - `'pulse'`
     - `scope`: Whether to animate the whole symbol at once or by layer. Can be one of:
       - `'byLayer'` (default)
-    - `'wholeSymbol'`
+      - `'wholeSymbol'`
 
   - `wiggle`:
     - `direction`: Direction for the effect. Can be one of:
@@ -311,8 +311,13 @@ The component accepts the following props:
   Transitions have the following options:
   - `type`: The transition to apply. One of the values listed above.
   - `speed`: Speed multiplier for the transition. Defaults to `1`.
-  - `variant`: Direction for the `replace` transition. Can be `'downUp'`, `'upUp'`, or `'offUp'`.
-  - `scope`: Whether the `replace` transition runs by layer or on the whole symbol.
+  - `variant`: Direction for the `replace` transition. Can be one of:
+    - `'downUp'`
+    - `'upUp'`
+    - `'offUp'`
+  - `scope`: Whether the `replace` transition runs by layer or on the whole symbol. Can be one of:
+    - `'byLayer'` (default)
+    - `'wholeSymbol'`
   - `magic`: Whether to prefer Magic Replace for `replace` transitions when possible. Falls back to regular Replace on iOS 17.
 
   This can be used to animate changes to the icon in response to state. For example, changing `wifi` to `wifi.slash` with a `magic` replace transition animates the slash across the symbol.
