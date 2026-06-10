@@ -51,13 +51,130 @@ Your package exports can point to those entry points:
 }
 ```
 
+To get React Navigation types, you can add `@react-navigation/native` as a `devDependency` and an optional `peerDependency`:
+
+```json
+{
+  "devDependencies": {
+    "@react-navigation/native": "next"
+  },
+  "peerDependencies": {
+    "@react-navigation/native": ">= 7.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@react-navigation/native": {
+      "optional": true
+    }
+  }
+}
+```
+
 ## Standard navigator implementation
 
 The standard navigator file should export the navigator object created with `createStandardNavigator`. This file shouldn't import React Navigation or Expo Router APIs.
 
 To create a standard navigator, use the `createStandardNavigator` function from `standard-navigation`, and pass it a component that renders the desired UI.
 
-Example:
+The basic shape looks like this:
+
+```tsx
+export type MyTabOptions = {
+  // screen options type
+};
+
+export type MyTabEventMap = {
+  // event map type
+};
+
+export type MyTabNavigatorProps = {
+  // additional navigator props type
+};
+
+export const MyTabNavigator = createStandardNavigator<
+  MyTabOptions,
+  MyTabEventMap,
+  MyTabNavigatorProps
+>(({ state, descriptors, actions, emitter, ...props }) => {
+  // render the navigator UI using the state and descriptors
+  // use actions to perform navigation and emitter to emit events
+});
+```
+
+The object returned by `createStandardNavigator` can then be used in the React Navigation and Expo Router entry points to create the navigators for each library.
+
+The `createStandardNavigator` function accepts three generic arguments:
+
+- **`MyTabOptions`**
+
+  The type of the options available for each screen. It's a record of option names to their types.
+  e.g.:
+
+  ```ts
+  type MyTabOptions = {
+    title?: string;
+  };
+  ```
+
+- **`MyTabEventMap`**
+
+  The type of the events that can be emitted by the navigator. It's a mapping of event names to event data and whether the event can be prevented.
+  e.g.:
+
+  ```ts
+  type MyTabEventMap = {
+    tabPress: {
+      data: { isAlreadyFocused: boolean };
+      canPreventDefault: true;
+    };
+  };
+  ```
+
+- **`MyTabNavigatorProps`**
+
+  The type of any additional props accepted by the navigator.
+
+The callback receives `state`, `descriptors`, `actions`, and `emitter` from the navigation library integration:
+
+- **`state`**
+
+  The state object for the navigator. Includes:
+  - `state.index`: The index of the currently focused route.
+  - `state.routes`: An array of route objects, each with `key`, `name`, `params` and `href` properties.
+
+  For stack navigators, `state.routes` array contains the history of visited screens until `state.index`, and the route objects after `state.index` represent [preloaded](navigation-actions.md#preload) routes.
+
+- **`descriptors`**
+
+  An object mapping route keys to their descriptors. `descriptors[route.key]` will give you the descriptor for a specific route, which includes:
+  - `descriptors[route.key].options`: The options for the route.
+  - `descriptors[route.key].render()`: Function that returns the react element to render for the route.
+
+- **`actions`**
+
+  An object with functions to perform navigation actions. Available actions are:
+  - `actions.navigate(name, params)`: Navigate to a route with the given name and params.
+  - `actions.back()`: Go back to the previous route in history.
+
+- **`emitter`**
+
+  An object with a function to emit events from the navigator. The `emitter.emit(...)` function accepts an object with the following properties:
+  - `type`: The name of the event to emit, one of the keys in the event map type.
+  - `target`: The key of the route that is the target of the event, i.e. the route that can listen for the event.
+  - `data`: An object with any additional data to include with the event.
+  - `canPreventDefault`: A boolean indicating whether listeners can call `event.preventDefault()` to prevent the default behavior associated with the event.
+
+  Example:
+
+  ```ts
+  emitter.emit({
+    type: 'tabPress',
+    target: route.key,
+    canPreventDefault: true,
+    data: { isAlreadyFocused: isFocused },
+  });
+  ```
+
+A basic implementation of a tab navigator could look like this:
 
 ```tsx title="src/MyTabNavigator.tsx"
 import * as React from 'react';
@@ -133,23 +250,43 @@ export const MyTabNavigator = createStandardNavigator<
 });
 ```
 
-The `createStandardNavigator` function accepts three generic arguments:
-
-- `MyTabOptions` - The type of the options available for each route descriptor.
-- `MyTabEventMap` - The type of the events that can be emitted by the navigator.
-- `MyTabNavigatorProps` - The type of any additional props accepted by the navigator.
-
-The callback receives `state`, `descriptors`, `actions`, and `emitter` from the navigation library integration:
-
-- `state.routes` contains `{ key, name, params, href }` objects.
-- `descriptors[route.key].options` contains the screen options.
-- `descriptors[route.key].render()` renders the screen.
-- `actions.navigate(name, params)` and `actions.back()` perform navigation.
-- `emitter.emit(...)` emits navigator events to screen listeners.
-
 ## React Navigation entry point
 
-The React Navigation entry point should wrap the standard navigator with `createStandardNavigationFactories` from `@react-navigation/native`:
+The React Navigation entry point should wrap the standard navigator with `createStandardNavigationFactories` from `@react-navigation/native`.
+
+The basic shape looks like this:
+
+```ts
+interface MyTabTypeBag extends StandardNavigationTypeBagBase {
+  State: TabNavigationState<this['ParamList']>;
+  ActionHelpers: TabActionHelpers<this['ParamList']>;
+  ScreenOptions: MyTabOptions;
+  EventMap: MyTabEventMap;
+  RouterOptions: TabRouterOptions;
+}
+
+const { createNavigator, createScreen } = createStandardNavigationFactories<
+  MyTabTypeBag,
+  MyTabNavigatorProps
+>(MyTabNavigator, TabRouter);
+```
+
+The `createStandardNavigationFactories` function accepts two generic arguments:
+
+- The type bag for the navigator (e.g. `MyTabTypeBag`), which includes the state, action helpers, screen options, event map, and router options types.
+- The type of any additional props accepted by the navigator (e.g. `MyTabNavigatorProps`).
+
+It accepts 3 arguments:
+
+- The standard navigator component.
+- The router factory function from React Navigation (e.g. `TabRouter`, `StackRouter`, etc.).
+- An optional function to map `{ navigation, state }` to custom props for the navigator component, in case you need any specific state or action helpers not available in the standard ones.
+
+It returns an object with `createNavigator` and `createScreen` functions that can be used to create the navigator and screens for React Navigation. These should be exported from the entry point.
+
+Additionally, you can export custom navigation prop and screen prop types (e.g. `MyTabNavigationProp` and `MyTabScreenProps`) that can be used by consumers for type annotations.
+
+A basic implementation of the React Navigation entry point could look like this:
 
 ```tsx title="src/react-navigation.tsx"
 import {
@@ -207,21 +344,6 @@ export const {
   TabRouter
 );
 ```
-
-The `createStandardNavigationFactories` function accepts two generic arguments:
-
-- The type bag for the navigator (e.g. `MyTabTypeBag`), which includes the state, action helpers, screen options, event map, and router options types.
-- The type of any additional props accepted by the navigator (e.g. `MyTabNavigatorProps`).
-
-It accepts 3 arguments:
-
-- The standard navigator component.
-- The router factory function from React Navigation (e.g. `TabRouter`, `StackRouter`, etc.).
-- An optional function to map `{ navigation, state }` to custom props for the navigator component, in case you need any specific state or action helpers not available in the standard ones.
-
-It returns an object with `createNavigator` and `createScreen` functions that can be used to create the navigator and screens for React Navigation. These should be exported from the entry point.
-
-Additionally, you can export custom navigation prop and screen prop types (e.g. `MyTabNavigationProp` and `MyTabScreenProps`) that can be used by consumers for type annotations.
 
 Consumers can then use the React Navigation entry point:
 
