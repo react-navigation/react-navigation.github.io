@@ -1,7 +1,7 @@
 ---
 id: upgrade-guides
 title: Upgrade Guides
-sidebar_label: Overview
+sidebar_label: Upgrade Guides
 ---
 
 This page contains links to pages that will guide you through the process of upgrading React Navigation:
