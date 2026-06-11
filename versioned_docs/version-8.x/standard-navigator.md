@@ -46,7 +46,7 @@ Your package exports can point to those entry points:
     }
   },
   "dependencies": {
-    "standard-navigation": "^0.0.5"
+    "standard-navigation": "^0.0.7"
   }
 }
 ```
@@ -59,7 +59,7 @@ To get React Navigation types, you can add `@react-navigation/native` as a `devD
     "@react-navigation/native": "next"
   },
   "peerDependencies": {
-    "@react-navigation/native": ">= 7.0.0"
+    "@react-navigation/native": ">= 7.3.0"
   },
   "peerDependenciesMeta": {
     "@react-navigation/native": {
