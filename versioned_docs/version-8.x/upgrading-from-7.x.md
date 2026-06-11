@@ -27,14 +27,15 @@ The minimum required version of React Native, Expo, and TypeScript have been bum
 
 - `react-native` >= 0.83
 - `expo` >= 55 ([development build](https://docs.expo.dev/development/introduction/) is required)
-- `typescript` >= 5.9.2 (if you use TypeScript)
+- `typescript` >= 6.0.0 (if you use TypeScript)
 
 The minimum required version of various peer dependencies have also been bumped:
 
 - `react-native-screens` >= 4.25.0
 - `react-native-safe-area-context` >= 5.5.0
+- `react-native-gesture-handler` >= 3.0.0
 - `react-native-reanimated` >= 4.0.0
-- `react-native-pager-view` >= 7.0.0 (8.0.0 is recommended)
+- `react-native-pager-view` >= 8.0.0
 - `react-native-web` >= 0.21.0
 
 Previously, many navigators worked without `react-native-screens`, but now it's required for all navigators.
@@ -959,6 +960,14 @@ And for `DrawerToggleButton`:
 
 See [HeaderBackButton](elements.md#headerbackbutton) and [DrawerToggleButton](drawer-navigator.md#headerleft) for more details.
 
+#### Some exports are removed from `@react-navigation/core`
+
+The following exports from `@react-navigation/core` have been removed:
+
+- `CurrentRenderContext`
+- `createComponentForStaticNavigation` - use the static navigator's `getComponent()` method instead
+- `StaticConfigGroup` and `StaticConfigScreens` types
+
 #### Some exports are removed from `@react-navigation/elements`
 
 The `@react-navigation/elements` package has exported some components that were primarily intended for internal usage. These components have been removed from the public API:
@@ -984,6 +993,11 @@ The `@react-navigation/elements` package has exported some components that were 
 - `SafeAreaProviderCompat`
 
   You can use `SafeAreaProvider` from [`react-native-safe-area-context`](https://github.com/AppAndFlow/react-native-safe-area-context) directly instead.
+
+- `Lazy`
+- `ResourceSavingView`
+
+  These components were internal utilities. You can copy the implementations for [`Lazy`](https://github.com/react-navigation/react-navigation/blob/7.x/packages/elements/src/Lazy.tsx) and [`ResourceSavingView`](https://github.com/react-navigation/react-navigation/blob/7.x/packages/elements/src/ResourceSavingView.tsx) if you need the same behavior.
 
 - `MissingIcon`
 
@@ -1515,6 +1529,13 @@ export default function TabViewExample() {
   );
 }
 ```
+
+`react-native-tab-view` exports the following adapters:
+
+- `DefaultAdapter` - uses `PagerViewAdapter` on Android and iOS, and `PanResponderAdapter` on other platforms
+- `PagerViewAdapter` - uses [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view)
+- `PanResponderAdapter` - uses React Native's `PanResponder`
+- `ScrollViewAdapter` - uses React Native's `ScrollView`
 
 You can also create your own custom adapter by implementing the required interface. See the [`react-native-tab-view` docs](tab-view.md) for more information.
 
