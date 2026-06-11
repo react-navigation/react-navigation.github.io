@@ -114,21 +114,6 @@ In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack
 - If you're on a different screen, it will push the new screen onto the stack.
 - If the [`getId`](screen.md#id) prop is specified, and another screen in the stack has the same ID, it will bring that screen to focus and update its params instead.
 
-<details>
-<summary>Advanced usage</summary>
-
-The `navigate` action can also accept an object as the argument with the following properties:
-
-- `name` - _string_ - A destination name of the screen in the current or a parent navigator
-- `params` - _object_ - Params to use for the destination route.
-- `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
-- `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen in the stack. Defaults to `false`.
-- `path` - _string_ - The path (from deep link or universal link) to associate with the screen.
-
-This is primarily used internally to associate a path with a screen when it's from a URL.
-
-</details>
-
 ### reset
 
 The `reset` action allows to reset the [navigation state](navigation-state.md) to the given state. It takes the following arguments:

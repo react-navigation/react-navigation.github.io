@@ -1661,12 +1661,7 @@ See [Navigation Actions Docs](navigation-actions.md) for a full list of availabl
 ```js
 import { CommonActions } from '@react-navigation/native';
 
-navigation.dispatch(
-  CommonActions.navigate({
-    name: 'Profile',
-    params: {},
-  })
-);
+navigation.dispatch(CommonActions.navigate('Profile', { userId: 'jane' }));
 ```
 
 When dispatching action objects, you can also specify few additional properties:
@@ -1680,7 +1675,7 @@ Example:
 import { CommonActions } from '@react-navigation/native';
 
 navigation.dispatch({
-  ...CommonActions.navigate('Profile'),
+  ...CommonActions.navigate('Profile', { userId: 'jane' }),
   source: 'someRouteKey',
   target: 'someStateKey',
 });

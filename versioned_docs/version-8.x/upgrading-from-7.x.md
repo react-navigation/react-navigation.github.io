@@ -396,6 +396,76 @@ This way you have more control over how params are updated in tab and drawer nav
 
 See [`setParams` action docs](navigation-actions.md#setparams) for more details.
 
+#### `navigate` no longer accepts an object
+
+Previously, [`navigation.navigate`](navigation-object.md#navigate) and [`CommonActions.navigate`](navigation-actions.md#navigate) accepted an object with `name`, `params`, `merge`, `pop`, and `path` properties.
+
+This was largely redundant and was only useful for a niche use case - to specify the `path` property to add to the `route` object. This is used internally by React Navigation, but not really useful for consumers.
+
+Because of this functionality, `navigate` needed overloads to support both the object form and the positional arguments form with TypeScript. This resulted in harder to read error messages when passing incorrect arguments to `navigate`.
+
+For example, a common case of missing params would result in an error message as follows:
+
+```text
+Argument of type 'string' is not assignable to parameter of type '{ name: "Home"; params: NavigatorScreenParams<{ Groups: undefined; Chat: { id: number; }; }> | undefined; path?: string | undefined; merge?: boolean | undefined; pop?: boolean | undefined; } | ... 31 more ... | { ...; }'
+```
+
+This above message doesn't even include the screen that we tried to navigate to, and it's not obvious that the issue is a missing params object.
+
+After the removal of the overload, the error message is much clearer and makes it obvious that an argument is missing:
+
+```text
+Expected 2-3 arguments, but got 1.
+```
+
+It also shows the method signature based on the screen name:
+
+```ts
+(method) navigate<"Feed">(screen: "Feed", params: {
+    sort: "hot" | "recent";
+}, options?: NavigateOptions | undefined): void
+```
+
+This makes it much easier to understand what arguments are expected and how to fix the error.
+
+We felt that the worse DX of the overload was not an acceptable tradeoff for a niche use case, so we removed the object form of `navigate`.
+
+If you were using the object form of `navigate`, you can update your code to use the positional arguments form:
+
+```diff lang=js
+- navigation.navigate({
+-   name: 'Profile',
+-   params: { userId: 123 },
+-   merge: true,
+- });
++ navigation.navigate('Profile', { userId: 123 }, { merge: true });
+```
+
+If you were passing the `route` object directly, pass `route.name` and `route.params` instead:
+
+```diff lang=js
+- navigation.navigate(route);
++ navigation.navigate(route.name, route.params);
+```
+
+If you need to specify a `path`, you can create the action object manually which still supports the `path` property:
+
+```diff lang=js
+- navigation.navigate({
+-   name: 'Profile',
+-   params: { userId: 123 },
+-   path: '/users/123',
+- });
++ navigation.dispatch({
++   type: 'NAVIGATE',
++   payload: {
++     name: 'Profile',
++     params: { userId: 123 },
++     path: '/users/123',
++   },
++ });
+```
+
 #### `getId` no longer re-arranges screens in the stack to make the screen unique
 
 Previously, the ID returned by `getId` was treated as a unique identifier. When using `navigate` or `push` to go to a route with an ID that already existed in the stack, the stack would rearrange to bring the existing route to the front. However, this resulted in broken behavior with Native Stack Navigator.
