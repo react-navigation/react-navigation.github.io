@@ -6,7 +6,7 @@ sidebar_label: Moving from Expo Router
 
 [Expo Router](https://docs.expo.dev/router/introduction/) is a file-based router for React Native and Web apps. Moving to React Navigation means replacing file-based configuration with code-based configuration.
 
-This guide intends to cover the main differences and the broad concepts between the two to get you started.
+This guide intends to cover the main differences and the broad concepts between the two to get you started. It'll focus on the static configuration API, which is the recommended way to use React Navigation in new apps.
 
 ## Why React Navigation
 

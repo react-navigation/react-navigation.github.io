@@ -6,7 +6,7 @@ sidebar_label: Moving from Expo Router
 
 [Expo Router](https://docs.expo.dev/router/introduction/) is a file-based router for React Native and Web apps. Moving to React Navigation means replacing file-based configuration with code-based configuration.
 
-This guide intends to cover the main differences and the broad concepts between the two to get you started.
+This guide intends to cover the main differences and the broad concepts between the two to get you started. It'll focus on the static configuration API, which is the recommended way to use React Navigation in new apps.
 
 ## Why React Navigation
 
@@ -18,6 +18,7 @@ Some of the benefits of React Navigation are:
 - Modeled on state objects instead of URLs, which encode more information and enable features such as [`reset`](navigation-actions.md#reset) and [navigation state persistence](state-persistence.md).
 - More flexible deep linking, such as parsing and schema support for params, regex support for paths, and even fully custom parsing with [`getStateFromPath`](navigation-container.md#linkinggetstatefrompath) etc.
 - URL segments are not coupled to navigator nesting structure, making it possible to change the UI without affecting public URLs.
+- Strong TypeScript support with type-safety as a primary goal of the API design.
 
 Some of the benefits of Expo Router are:
 
