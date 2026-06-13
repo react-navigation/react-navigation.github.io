@@ -671,7 +671,7 @@ Usage:
 
 #### Custom back icon
 
-The `icon` prop accepts an icon object for SF Symbols on iOS, Material Symbols on Android and image source on all platforms:
+The `icon` prop accepts an icon object for [SF Symbols](icons.md#sf-symbols) on iOS, [Material Symbols](icons.md#material-symbols) on Android, and [image sources](icons.md#images) on all platforms:
 
 ```js
 <HeaderBackButton

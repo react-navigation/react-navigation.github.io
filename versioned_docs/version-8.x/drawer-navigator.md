@@ -320,37 +320,11 @@ String or a function that given `{ focused: boolean, color: string }` returns a 
 
 #### `drawerIcon`
 
-Icon object to display or a function that given `{ focused: boolean, color: string, size: number }` returns an icon to display in drawer sidebar.
+Icon object to display or a function that given `{ focused: boolean, color: string, size: number }` returns an icon to display in the drawer.
 
-It supports the following types:
+The icon object can be one of the following types:
 
-- `materialSymbol` (Android only)
-
-  ```js
-  drawerIcon: {
-    type: 'materialSymbol',
-    name: 'favorite',
-  }
-  ```
-
-  It also supports the following optional properties:
-  - `variant` - Supported values: `outlined`, `rounded`, `sharp`
-  - `weight` - Supported values: `100`, `200`, `300`, `400`, `500`, `600`, `700`
-
-  See [Icons](icons.md#material-symbols) for more details.
-
-- `sfSymbol` (iOS only)
-
-  ```js
-  drawerIcon: {
-    type: 'sfSymbol',
-    name: 'heart',
-  }
-  ```
-
-  See [Icons](icons.md#sf-symbols) for more details.
-
-- `image`
+- Local image - Supported on all platforms
 
   ```js
   drawerIcon: {
@@ -359,14 +333,7 @@ It supports the following types:
   }
   ```
 
-  It also supports [drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) on Android, [xcasset](https://developer.apple.com/documentation/xcode/adding-images-to-your-xcode-project) on iOS:
-
-  ```js
-  drawerIcon: {
-    type: 'image',
-    source: { uri: 'icon_name' },
-  }
-  ```
+  See [Icons](icons.md#images) for more details.
 
   A `tinted` property can be used to control whether the icon should be tinted with the active/inactive color:
 
@@ -381,6 +348,32 @@ It supports the following types:
   Set `tinted` to `false` if the image has its own colors that you want to preserve.
 
   The image is tinted by default.
+
+- [SF Symbols](https://developer.apple.com/sf-symbols/) name - Supported on iOS
+
+  ```js
+  drawerIcon: {
+    type: 'sfSymbol',
+    name: 'heart',
+  }
+  ```
+
+  See [Icons](icons.md#sf-symbols) for more details.
+
+- [Material Symbols](https://fonts.google.com/icons) name - Supported on Android
+
+  ```js
+  drawerIcon: {
+    type: 'materialSymbol',
+    name: 'favorite',
+  }
+  ```
+
+  It also supports the following optional properties:
+  - `variant` - Supported values: `outlined`, `rounded`, `sharp`
+  - `weight` - Supported values: `100`, `200`, `300`, `400`, `500`, `600`, `700`
+
+  See [Icons](icons.md#material-symbols) for more details.
 
 In addition to the icon object, you can also provide a function which returns an icon object or a React element. It receives `focused`, `color`, and `size` in its argument object:
 
@@ -697,7 +690,7 @@ header: ({ navigation, route, options }) => {
 };
 ```
 
-Also see [icons documentation](icons.md) to use system icons such as [`SF Symbols`](https://developer.apple.com/sf-symbols/) and [Material Design Icons](https://material.io/resources/icons/) in your custom header.
+Also see [Icons](icons.md) for supported icon formats such as [SF Symbols](https://developer.apple.com/sf-symbols/), [Material Symbols](https://fonts.google.com/icons), and [images](icons.md#images) in your custom header.
 
 To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
 
@@ -748,7 +741,7 @@ headerLeft: (props) => (
 );
 ```
 
-See [Icons](icons.md) documentation on how to use [SF Symbols](icons.md#sf-symbols) and [Material Symbols](icons.md#material-symbols).
+See [Icons](icons.md) documentation on how to use [SF Symbols](icons.md#sf-symbols), [Material Symbols](icons.md#material-symbols), and [images](icons.md#images).
 
 ### Events
 

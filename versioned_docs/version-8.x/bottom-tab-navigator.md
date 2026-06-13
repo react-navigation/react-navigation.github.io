@@ -300,7 +300,7 @@ function MyTabBar({ navigation }) {
 }
 ```
 
-Also see [icons documentation](icons.md) to use system icons such as [`SF Symbols`](https://developer.apple.com/sf-symbols/) and [Material Design Icons](https://material.io/resources/icons/) in your custom tab bar.
+Also see [Icons](icons.md) for supported icon formats such as [SF Symbols](https://developer.apple.com/sf-symbols/), [Material Symbols](https://fonts.google.com/icons), and [images](icons.md#images) in your custom tab bar.
 
 ### Options
 
@@ -575,14 +575,7 @@ The icon object can be one of the following types:
 
   It's necessary to provide icons for multiple screen densities (1x, 2x, 3x), e.g.: `icon.png`, `icon@2x.png`, `icon@3x.png` etc. as icons are not scaled automatically on iOS for the `native` implementation.
 
-  It also supports [drawable resource](https://developer.android.com/guide/topics/resources/drawable-resource) on Android, [xcasset](https://developer.apple.com/documentation/xcode/adding-images-to-your-xcode-project) on iOS:
-
-  ```js
-  tabBarIcon: {
-    type: 'image',
-    source: { uri: 'icon_name' },
-  }
-  ```
+  See [Icons](icons.md#images) for more details.
 
   A `tinted` property can be used to control whether the icon should be tinted with the active/inactive color:
 

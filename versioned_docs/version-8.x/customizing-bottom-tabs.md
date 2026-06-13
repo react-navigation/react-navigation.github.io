@@ -12,9 +12,9 @@ This is similar to how you would customize a stack navigator &mdash; there are s
 
 Icons can be specified using the [`tabBarIcon`](bottom-tab-navigator.md#tabbaricon) option. The format of the icon varies based on the platform:
 
-- Local image - all platforms
-- SF Symbols name - iOS
-- Custom drawable name - Android
+- [Images](icons.md#images) - all platforms
+- [SF Symbols](icons.md#sf-symbols) name - iOS
+- [Material Symbols](icons.md#material-symbols) name - Android
 
 ```js name="Tab bar icons" static2dynamic
 import * as React from 'react';
@@ -105,14 +105,12 @@ Let's dissect this:
 
 - [`tabBarIcon`](bottom-tab-navigator.md#tabbaricon) is a supported option in bottom tab navigator. So we know we can use it on our screen components in the `options` prop.
 - `tabBarIcon` is an object specifying the icon to display.
-  - For iOS, you can use SF Symbols by setting `type: 'sfSymbol'` and providing the symbol `name`.
-  - For Android, you can use Material Symbols by setting `type: 'materialSymbol'` and providing the symbol `name`.
-  - For other platforms, use `type: 'image'` with a `source` pointing to your image file. Image files must be provided for multiple screen densities (1x, 2x, 3x), e.g.: `home-icon.png`, `home-icon@2x.png`, `home-icon@3x.png`.
+  - For iOS, you can use [SF Symbols](icons.md#sf-symbols) by setting `type: 'sfSymbol'` and providing the symbol `name`.
+  - For Android, you can use [Material Symbols](icons.md#material-symbols) by setting `type: 'materialSymbol'` and providing the symbol `name`.
+  - For other platforms, use [`type: 'image'`](icons.md#images) with a `source` pointing to your image file. Image files must be provided for multiple screen densities (1x, 2x, 3x), e.g.: `home-icon.png`, `home-icon@2x.png`, `home-icon@3x.png`.
 - [`Platform.select`](https://reactnative.dev/docs/platform#select) can be used to provide different icons based on the platform.
 - The `tabBarActiveTintColor` and `tabBarInactiveTintColor` options in `screenOptions` control the icon and label colors. These default to the iOS platform defaults, but you can change them as shown above.
 - Read the [full API reference](bottom-tab-navigator.md) for further information on `createBottomTabNavigator` configuration options.
-
-See [Icons](icons.md) for more details on different icon types and how to use them with React Navigation.
 
 ### Different icons for active and inactive states
 

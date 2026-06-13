@@ -635,6 +635,8 @@ It supports the following types:
   }
   ```
 
+  See [Icons](icons.md#images) for more details.
+
 Defaults to back icon image for the platform:
 
 - A chevron on iOS
@@ -1222,7 +1224,7 @@ header: ({ navigation, route, options, back }) => {
 
 To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
 
-Also see [icons documentation](icons.md) to use system icons such as [`SF Symbols`](https://developer.apple.com/sf-symbols/) and [Material Design Icons](https://material.io/resources/icons/) in your custom header.
+Also see [Icons](icons.md) for supported icon formats such as [SF Symbols](https://developer.apple.com/sf-symbols/), [Material Symbols](https://fonts.google.com/icons), and [images](icons.md#images) in your custom header.
 
 Note that if you specify a custom header, the native functionality such as large title, search bar etc. won't work.
 
@@ -1711,14 +1713,7 @@ Common properties:
 
     It's necessary to provide icons for multiple screen densities (1x, 2x, 3x), e.g.: `icon.png`, `icon@2x.png`, `icon@3x.png` etc. as icons are not scaled automatically.
 
-    It also supports [xcasset](https://developer.apple.com/documentation/xcode/adding-images-to-your-xcode-project):
-
-    ```js
-    icon: {
-      type: 'image',
-      source: { uri: 'icon_name' },
-    }
-    ```
+    See [Icons](icons.md#images) for more details.
 
     A `tinted` property can be used to control whether the icon should be tinted with the active/inactive color:
 
@@ -1740,6 +1735,8 @@ Common properties:
       name: 'heart',
     }
     ```
+
+    See [Icons](icons.md#sf-symbols) for more details.
 
 - `variant`: Visual variant of the button. Supported values:
   - `plain` (default)

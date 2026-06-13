@@ -294,7 +294,7 @@ header: ({ navigation, route, options, back }) => {
 
 To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
 
-Also see [icons documentation](icons.md) to use system icons such as [`SF Symbols`](https://developer.apple.com/sf-symbols/) and [Material Design Icons](https://material.io/resources/icons/) in your custom header.
+Also see [Icons](icons.md) for supported icon formats such as [SF Symbols](https://developer.apple.com/sf-symbols/), [Material Symbols](https://fonts.google.com/icons), and [images](icons.md#images) in your custom header.
 
 When using a custom header, there are 2 things to keep in mind:
 
@@ -386,6 +386,8 @@ It supports the following types:
     source: require('./path/to/icon.png'),
   }
   ```
+
+  See [Icons](icons.md#images) for more details.
 
 In addition to the icon object, you can also provide a function which returns a React Element to display as the back icon. It receives `tintColor` in its argument object:
 

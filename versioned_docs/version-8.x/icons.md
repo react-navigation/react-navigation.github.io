@@ -441,9 +441,7 @@ The component accepts the following props:
 
   The available weights depend on which weights are included in the bundle. If the specified weight is not included, it will throw an error.
 
-## Other sources
-
-### Images
+## Images
 
 React Navigation also supports using images as icons. It supports the same formats as React Native's [`Image`](https://reactnative.dev/docs/image) component.
 
@@ -472,6 +470,8 @@ tabBarIcon: {
 ```
 
 Here `icon_name` is the resource name without the file extension. On Android, this can refer to a bitmap drawable such as `res/drawable/icon_name.png` or a vector drawable such as `res/drawable/icon_name.xml`. On iOS, this can refer to an image in an asset catalog, such as an image set named `icon_name`.
+
+## Other sources
 
 ### [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
 
