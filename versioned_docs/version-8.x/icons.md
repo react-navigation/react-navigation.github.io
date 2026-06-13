@@ -38,7 +38,7 @@ Typically, components accept an icon object with a `type` property:
   }
   ```
 
-- `image`
+- [`image`](#images) (All platforms)
 
   ```js
   headerBackIcon: {
@@ -47,7 +47,7 @@ Typically, components accept an icon object with a `type` property:
   }
   ```
 
-The `sfSymbol` and `materialSymbol` types use the respective system icon libraries on each platform. The `image` type allows you to use a custom image as an icon on any platform.
+The `sfSymbol` and `materialSymbol` types use the respective system icon libraries on each platform. The `image` type allows you to use a custom image as an icon on any platform, drawable resources on Android, and asset catalog images on iOS.
 
 ## SF Symbols
 
