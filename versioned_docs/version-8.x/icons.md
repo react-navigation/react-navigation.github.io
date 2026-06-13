@@ -475,11 +475,11 @@ Here `icon_name` is the resource name without the file extension. On Android, th
 
 ### [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
 
-The React Native Vector Icons library provides a large set of icons. However, these icons are rendered using custom fonts, which are not supported in most native navigation components such as tab bars or headers.
+The React Native Vector Icons library provides various sets of font icons. Font icons cannot be used directly in most native navigation components such as tab bars or headers. But they can be [rasterized into images](https://github.com/oblador/react-native-vector-icons?tab=readme-ov-file#usage-as-png-imagesource-object) and used with the `type: 'image'` option.
 
-As an alternative, you can [rasterize the icon into an image source](https://github.com/oblador/react-native-vector-icons?tab=readme-ov-file#usage-as-png-imagesource-object). This image can then be used as an icon in such components using the `type: 'image'` option.
+To do this, install the appropriate icon package, such as `@react-native-vector-icons/lucide`, then install `@react-native-vector-icons/get-image` and rebuild the app.
 
-First, install the appropriate icon package, such as `@react-native-vector-icons/lucide`, along with `@react-native-vector-icons/get-image`. Then rebuild the app and use `getImageSourceSync` to create the image source:
+Now you can use the `getImageSourceSync` to create the image:
 
 ```js
 import { Lucide } from '@react-native-vector-icons/lucide';
