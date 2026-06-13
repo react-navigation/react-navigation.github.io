@@ -112,6 +112,8 @@ Let's dissect this:
 - The `tabBarActiveTintColor` and `tabBarInactiveTintColor` options in `screenOptions` control the icon and label colors. These default to the iOS platform defaults, but you can change them as shown above.
 - Read the [full API reference](bottom-tab-navigator.md) for further information on `createBottomTabNavigator` configuration options.
 
+See [Icons](icons.md) for more details on different icon types and how to use them with React Navigation.
+
 ### Different icons for active and inactive states
 
 You can also provide different icons for active and inactive states by using a function for the `tabBarIcon` option:
@@ -130,23 +132,6 @@ tabBarIcon: ({ focused }) => {
 The `focused` parameter indicates whether the tab is active or inactive.
 
 This not supported on Android with `native` [implementation](bottom-tab-navigator.md#implementation), the icon specified for inactive state will be used for both active and inactive states.
-
-### Using [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
-
-The React Native Vector Icons library provides a large set of icons. To use vector icons in your tab bar, we'd need to [get an image source](https://github.com/oblador/react-native-vector-icons?tab=readme-ov-file#usage-as-png-imagesource-object) from the icon component.
-
-First, make sure to install the appropriate icon package (e.g. `@react-native-vector-icons/lucide`) and `@react-native-vector-icons/get-image` and rebuild the app after installation. Then, you can use the `getImageSourceSync` method to get the image source for the desired icon:
-
-```js
-import { Lucide } from '@react-native-vector-icons/lucide';
-
-// ...
-
-tabBarIcon: {
-  type: 'image',
-  source: Lucide.getImageSourceSync('heart', 22),
-},
-```
 
 ## Add badges to tab items
 
