@@ -1611,6 +1611,8 @@ const unsubscribe = navigationRef.addListener('__unsafe_event__', (e) => {
 
 This event is only intended for debugging purposes and shouldn't be used for app logic.
 
+This API has also been backported to React Navigation 7.
+
 See [NavigationContainer docs](navigation-container.md#__unsafe_event__) for more details.
 
 ### `useLogger` devtools now shows more information
