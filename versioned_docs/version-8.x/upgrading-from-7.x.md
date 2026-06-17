@@ -100,27 +100,11 @@ In React Navigation 8, we reworked the types to automatically determine the corr
 + const navigation = useNavigation('Profile');
 ```
 
-If you're using dynamic configuration, there is limited support for automatic inference of types. The available screens, params etc. can be inferred, so actions such as `navigation.setParams`, `navigation.navigate` etc. will be properly typed. However, navigator specific types such as `push`, `setOptions`, `addListener` etc. cannot be inferred. So it still requires manual annotation for those cases.
-
-Additionally, now you need to use `as` instead of generics to make it clearer that this is unsafe:
-
-```diff lang=ts
-- const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'Profile'>>();
-+ const navigation = useNavigation() as StackNavigationProp<RootStackParamList, 'Profile'>;
-```
-
 The `useRoute` type has been updated in the same way:
 
 ```diff lang=ts
 - const route = useRoute<RouteProp<RootStackParamList, 'Profile'>>();
 + const route = useRoute('Profile');
-```
-
-And if you're using dynamic configuration:
-
-```diff lang=ts
-- const route = useRoute<RouteProp<RootStackParamList, 'Profile'>>();
-+ const route = useRoute() as RouteProp<RootStackParamList, 'Profile'>;
 ```
 
 Similarly, the `useNavigationState` type has been updated to accept the name of the screen in addition to the selector:
@@ -130,14 +114,45 @@ Similarly, the `useNavigationState` type has been updated to accept the name of 
 + const focusedRouteName = useNavigationState('Settings', (state) => state.routes[state.index].name);
 ```
 
-If you're using dynamic configuration, you can use `as`:
+If you use the dynamic API, you'll need to pass the type of the nested navigator to `NavigatorScreenParams` for `useNavigation` and `useNavigationState` to infer correct types based on screen:
+
+```diff lang=ts
+  type MyTabParamList = {
+-   Feed: NavigatorScreenParams<FeedStackParamList>;
++   Feed: NavigatorScreenParams<typeof FeedStack>;
+    Profile: { userId: string };
+    Settings: undefined;
+  };
+```
+
+Here `FeedStack` is the value returned by `createXNavigator` (e.g. `const FeedStack = createNativeStackNavigator<FeedStackParamList>()`).
+
+The old form for `NavigatorScreenParams` still works. But navigator-specific types such as `push`, `setOptions`, `addListener` etc. cannot be inferred based on screen name without specifying the navigator type. Actions such as `navigation.setParams`, `navigation.navigate` etc. can still be inferred.
+
+Using typed hooks also eliminates the need for manual `CompositeScreenProps` or `CompositeNavigationProp` usage for the dynamic API, as the hooks will automatically compose the types of nested navigators based on the screen name.
+
+The previously type-unsafe generic approach is no longer supported. To keep the previous behavior, you need to use `as` instead of generics to make it clearer that this is unsafe:
+
+```diff lang=ts
+- const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'Profile'>>();
++ const navigation = useNavigation() as StackNavigationProp<RootStackParamList, 'Profile'>;
+```
+
+Similarly for `useRoute`:
+
+```diff lang=ts
+- const route = useRoute<RouteProp<RootStackParamList, 'Profile'>>();
++ const route = useRoute() as RouteProp<RootStackParamList, 'Profile'>;
+```
+
+And for `useNavigationState`:
 
 ```diff lang=ts
 - const focusedRouteName = useNavigationState<RootStackParamList>((state) => state.routes[state.index].name);
 + const focusedRouteName = useNavigationState((state) => state.routes[state.index].name as keyof RootStackParamList);
 ```
 
-See [Static configuration docs](static-configuration.md#createxscreen) for more details.
+See [TypeScript](typescript.md) for more details.
 
 #### Custom navigators have a simpler type API
 
