@@ -35,7 +35,7 @@ There are 2 steps to configure TypeScript with the static API:
    }
    ```
 
-2. Declare a module augmentation for `@react-navigation/core` and extend the `RootNavigator` interface with the type of your root navigator.
+2. Declare a module augmentation for `@react-navigation/native` and extend the `RootNavigator` interface with the type of your root navigator.
 
    ```ts
    const HomeTabs = createBottomTabNavigator({
@@ -55,7 +55,7 @@ There are 2 steps to configure TypeScript with the static API:
    type RootStackType = typeof RootStack;
 
    // highlight-start
-   declare module '@react-navigation/core' {
+   declare module '@react-navigation/native' {
      interface RootNavigator extends RootStackType {}
    }
    // highlight-end
@@ -501,14 +501,14 @@ const navigationRef =
 
 Instead of manually annotating these APIs, you can specify the type of your root navigator, which will be used to infer the default types.
 
-To do this, you can use module augmentation for `@react-navigation/core` and extend the `RootNavigator` interface with the type of your root navigator:
+To do this, you can use module augmentation for `@react-navigation/native` and extend the `RootNavigator` interface with the type of your root navigator:
 
 ```ts
 // highlight-next-line
 type RootStackType = typeof RootStack;
 
 // highlight-start
-declare module '@react-navigation/core' {
+declare module '@react-navigation/native' {
   interface RootNavigator extends RootStackType {}
 }
 // highlight-end
@@ -571,7 +571,7 @@ function App() {
 
 type RootStackType = typeof RootStack;
 
-declare module '@react-navigation/core' {
+declare module '@react-navigation/native' {
   interface RootNavigator extends RootStackType {}
 }
 ```

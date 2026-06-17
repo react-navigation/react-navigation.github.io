@@ -7,11 +7,11 @@ sidebar_label: Configuring TypeScript
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-React Navigation can be configured to type-check screens and their params, as well as various other APIs using TypeScript. This provides better intelliSense and type safety when working with React Navigation.
+React Navigation can be configured to type-check screens and their params, as well as various other APIs using TypeScript. This provides better IntelliSense and type safety when working with React Navigation.
 
 First, make sure you have the following configuration in your `tsconfig.json` under `compilerOptions`:
 
-- `strict: true` or `strictNullChecks: true` - Necessary for intelliSense and type inference to work correctly.
+- `strict: true` or `strictNullChecks: true` - Necessary for IntelliSense and type inference to work correctly.
 - `moduleResolution: "bundler"` - Necessary to resolve the types correctly and match the behavior of [Metro](https://metrobundler.dev/) and other bundlers.
 
 <Tabs groupId="config" queryString="config">
@@ -21,9 +21,9 @@ First, make sure you have the following configuration in your `tsconfig.json` un
 
 There are 2 steps to configure TypeScript with the static API:
 
-### Specify the root navigator's type
+### Specifying the root navigator's type
 
-For the type-inference to work, React Navigation needs to know the type of the root navigator in your app. To do this, you can declare a module augmentation for `@react-navigation/core` and extend the `RootNavigator` interface with the type of your root navigator.
+For the type-inference to work, React Navigation needs to know the type of the root navigator in your app. To do this, you can declare a module augmentation for `@react-navigation/native` and extend the `RootNavigator` interface with the type of your root navigator.
 
 ```ts
 const HomeTabs = createBottomTabNavigator({
@@ -43,7 +43,7 @@ const RootStack = createNativeStackNavigator({
 type RootStackType = typeof RootStack;
 
 // highlight-start
-declare module '@react-navigation/core' {
+declare module '@react-navigation/native' {
   interface RootNavigator extends RootStackType {}
 }
 // highlight-end
@@ -51,7 +51,7 @@ declare module '@react-navigation/core' {
 
 This is needed to type-check hooks such as [`useNavigation`](use-navigation.md), [`useRoute`](use-route.md), [`useNavigationState`](use-navigation-state.md) etc.
 
-### Specify param types for screens
+### Specifying param types for screens
 
 After setting up the type for the root navigator, all we need to do is specify the type of params that our screens accept.
 
@@ -260,8 +260,8 @@ With `useNavigation`:
 function ProfileScreen() {
   const navigation = useNavigation('Profile');
 
-  // Helpers like `push` are correctly typed here
-  navigation.push('Feed');
+  // Helpers like `jumpTo` are correctly typed here
+  navigation.jumpTo('Feed');
 
   // ...
 }
@@ -293,7 +293,7 @@ The `useRoute` hook returns a union of all routes in the app, and can be narrowe
 function Header() {
   const route = useRoute();
 
-  // The route is an union of all routes in the app
+  // The route is a union of all routes in the app
   console.log(route.name);
 
   // It's possible to narrow down the type using type guards
@@ -335,68 +335,47 @@ function Header() {
 }
 ```
 
-## Nesting navigator using dynamic API
+## Nesting a dynamic navigator
 
-Consider the following example:
-
-```js
-const Tab = createBottomTabNavigator();
-
-function HomeTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Feed" component={FeedScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-}
-
-const RootStack = createStackNavigator({
-  screens: {
-    Home: HomeTabs,
-  },
-});
-```
-
-Here, the `HomeTabs` component is defined using the dynamic API. This means that React Navigation won't know about the screens defined in the nested navigator and the types for those screens. To fix this, we'd need to specify the types for the nested navigator explicitly.
-
-This can be done by annotating the type of the [`route`](route-object.md) prop that the screen component receives:
-
-```ts
-type HomeTabsParamList = {
-  Feed: undefined;
-  Profile: undefined;
-};
-
-// highlight-start
-type HomeTabsProps = StaticScreenProps<
-  NavigatorScreenParams<HomeTabsParamList>
->;
-// highlight-end
-
-// highlight-next-line
-function HomeTabs(_: HomeTabsProps) {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Feed" component={FeedScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-}
-```
-
-Here the `HomeTabsParamList` type defines the mapping of route names in the tab navigator to the types of their params. We then use the `NavigatorScreenParams` utility to say that these are the screens in a nested navigator in the `HomeTabs` component.
-
-Now, React Navigation knows about the screens in the nested navigator and their params, and the types can be inferred with hooks such as `useRoute`.
+If you render a dynamic navigator inside a static navigator, see [Mixing Static & Dynamic APIs](combine-static-with-dynamic.md#static-root-navigator-dynamic-nested-navigator) for the additional typing and linking configuration needed for the nested navigator.
 
 </TabItem>
 <TabItem value="dynamic" label="Dynamic">
 
-When using the dynamic API, it is necessary to specify the types for each screen as well as the nesting structure as it cannot be inferred from the code.
+## Setting up the types {#setting-up-the-types-dynamic}
 
-## Typechecking the navigator
+There are 2 steps to configure TypeScript with the dynamic API:
 
-To typecheck our route name and params, the first thing we need to do is to create an object type with mappings for route names to the params of the route. For example, say we have a route called `Profile` in our root navigator which should have a param `userId`:
+### Specifying the root navigator's type {#specifying-the-root-navigators-type-dynamic}
+
+You can specify the type for your root navigator which will enable automatic type inference for [`useRoute`](use-route.md), [`useNavigation`](use-navigation.md), [`useNavigationState`](use-navigation-state.md), [`Link`](link.md), [`ref`](navigation-container.md#ref), [`linking`](navigation-container.md#linking) etc.
+
+To do this, use module augmentation for `@react-navigation/native` and extend the `RootNavigator` interface with the type of your root navigator.
+
+```ts
+type RootStackParamList = {
+  Home: undefined;
+  Profile: { userId: string };
+  Feed: { sort: 'latest' | 'top' } | undefined;
+};
+
+const RootStack = createNativeStackNavigator<RootStackParamList>();
+
+// highlight-next-line
+type RootStackType = typeof RootStack;
+
+// highlight-start
+declare module '@react-navigation/native' {
+  interface RootNavigator extends RootStackType {}
+}
+// highlight-end
+```
+
+Here `RootStack` refers to the navigator used at the root of your app. The `RootStackParamList` type is covered in the next section.
+
+### Specifying param types for screens {#specifying-param-types-for-screens-dynamic}
+
+To type check route names and params, create an object type with mappings from route names to the params of each route. For example, say we have a route called `Profile` in our root navigator which should have a param `userId`:
 
 ```tsx
 type RootStackParamList = {
@@ -416,7 +395,7 @@ type RootStackParamList = {
 
 Specifying `undefined` means that the route doesn't have params. A union type with `undefined` (e.g. `SomeType | undefined`) means that params are optional.
 
-After we have defined the mapping, we need to tell our navigator to use it. To do that, we can pass it as a generic to the [`createXNavigator`](static-configuration.md) functions:
+After defining the mapping, tell the navigator to use it by passing it as a generic to the `createXNavigator` functions:
 
 ```tsx
 import { createStackNavigator } from '@react-navigation/stack';
@@ -438,17 +417,220 @@ And then we can use it:
 </RootStack.Navigator>
 ```
 
-This will provide type checking and intelliSense for props of the [`Navigator`](navigator.md) and [`Screen`](screen.md) components.
+This will provide type checking and IntelliSense for props of the [`Navigator`](navigator.md) and [`Screen`](screen.md) components.
+
+When a screen renders a nested navigator, use `NavigatorScreenParams` for that route. Define the child navigator first:
+
+```ts title="navigation/HomeStack.tsx"
+import { createStackNavigator } from '@react-navigation/stack';
+
+type HomeStackParamList = {
+  Feed: { sort: 'latest' | 'top' } | undefined;
+};
+
+// highlight-next-line
+export const HomeStack = createStackNavigator<HomeStackParamList>();
+```
+
+Then pass the type of the child navigator to `NavigatorScreenParams` in the parent navigator:
+
+```ts title="navigation/RootTabs.tsx"
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import type { NavigatorScreenParams } from '@react-navigation/native';
+import { HomeStack } from './HomeStack';
+
+type RootTabsParamList = {
+  // highlight-next-line
+  Home: NavigatorScreenParams<typeof HomeStack>;
+  Profile: { userId: string };
+};
+
+const RootTabs = createBottomTabNavigator<RootTabsParamList>();
+```
 
 :::note
 
-The type containing the mapping must be a type alias (e.g. `type RootStackParamList = { ... }`). It cannot be an interface (e.g. `interface RootStackParamList { ... }`). It also shouldn't extend `ParamListBase` (e.g. `interface RootStackParamList extends ParamListBase { ... }`). Doing so will result in incorrect type checking which allows you to pass incorrect route names.
+The type containing the mapping must be a type alias (e.g. `type RootStackParamList = { ... }`). It cannot be an interface (e.g. `interface RootStackParamList { ... }`) or extend `ParamListBase` (e.g. `interface RootStackParamList extends ParamListBase { ... }`).
 
 :::
 
-## Type checking screens
+## Using typed hooks {#using-typed-hooks-dynamic}
 
-To typecheck our screens, we need to annotate the `navigation` and the `route` props received by a screen. The navigator packages in React Navigation export generic types to define types for both the `navigation` and `route` props from the corresponding navigator.
+The [`useRoute`](use-route.md), [`useNavigation`](use-navigation.md), and [`useNavigationState`](use-navigation-state.md) hooks accept the name of the current screen or any parent screen where it's nested as an argument to infer the correct types.
+
+Once the root navigator and nested navigator routes are set up, these hooks are automatically typed based on the name of the screen passed to them.
+
+With `useRoute`:
+
+```ts
+function ProfileScreen() {
+  const route = useRoute('Profile');
+
+  // The params are correctly typed here
+  const { userId } = route.params;
+
+  // ...
+}
+```
+
+With `useNavigation`:
+
+```ts
+function ProfileScreen() {
+  const navigation = useNavigation('Profile');
+
+  // Helpers like `push` are correctly typed here
+  navigation.push('Feed', { sort: 'latest' });
+
+  // ...
+}
+```
+
+With `useNavigationState`:
+
+```ts
+function ProfileScreen() {
+  const focusedRouteName = useNavigationState(
+    'Profile',
+    // The state is correctly typed here
+    (state) => state.routes[state.index].name
+  );
+
+  // The `focusedRouteName` type is one of the route names
+  // defined in the navigator where `Profile` is defined
+  console.log(focusedRouteName);
+
+  // ...
+}
+```
+
+It's also possible to use these hooks without specifying the screen name - which can be useful in re-usable components that can be used across multiple screens. In this case, different things happen based on the hook.
+
+The `useRoute` hook returns a union of all routes in the app, and can be narrowed down using type guards:
+
+```ts
+function Header() {
+  const route = useRoute();
+
+  // The route is a union of all routes in the app
+  console.log(route.name);
+
+  // It's possible to narrow down the type using type guards
+  if (route.name === 'Profile') {
+    // Here route.params is correctly typed
+    const { userId } = route.params;
+  }
+
+  // ...
+}
+```
+
+The `useNavigation` hook returns a generic navigation object that refers to the root navigator. This means that any navigation actions can be called as if they are used in a screen of the root navigator:
+
+```ts
+function Header() {
+  const navigation = useNavigation();
+
+  // A generic navigation object that refers to the root navigator
+  navigation.navigate('Profile', { userId: '123' });
+
+  // ...
+}
+```
+
+The `useNavigationState` hook returns a generic navigation state without any navigator-specific types:
+
+```ts
+function Header() {
+  const focusedRouteName = useNavigationState((state) => {
+    // The state is a generic navigation state
+    return state.routes[state.index].name;
+  });
+
+  // The `focusedRouteName` type is `string`
+  console.log(focusedRouteName);
+
+  // ...
+}
+```
+
+## Annotating `options` and `screenOptions`
+
+When you pass the `options` to a `Screen` or `screenOptions` prop to a `Navigator` component, they are already type-checked and you don't need to do anything special. However, sometimes you might want to extract the options to a separate object, and you might want to annotate it.
+
+To annotate the options, we need to import the corresponding type from the navigator. For example, `StackNavigationOptions` for `@react-navigation/stack`:
+
+```ts
+import type { StackNavigationOptions } from '@react-navigation/stack';
+
+const options: StackNavigationOptions = {
+  headerShown: false,
+};
+```
+
+Similarly, you can import `DrawerNavigationOptions` from `@react-navigation/drawer`, `BottomTabNavigationOptions` from `@react-navigation/bottom-tabs` etc.
+
+When using the function form of `options` and `screenOptions`, you can annotate the arguments with a type exported from the navigator, e.g. `StackOptionsArgs` for `@react-navigation/stack`, `DrawerOptionsArgs` for `@react-navigation/drawer`, `BottomTabOptionsArgs` for `@react-navigation/bottom-tabs` etc.:
+
+```ts
+import type {
+  StackNavigationOptions,
+  StackOptionsArgs,
+} from '@react-navigation/stack';
+
+const options = ({ route }: StackOptionsArgs): StackNavigationOptions => {
+  return {
+    headerTitle: route.name,
+  };
+};
+```
+
+If you want to annotate the type of params in the `route` object, you can pass the param list and route name as generics to the `StackOptionsArgs` type:
+
+```ts
+import type {
+  StackNavigationOptions,
+  StackOptionsArgs,
+} from '@react-navigation/stack';
+
+const options = ({
+  route,
+}: StackOptionsArgs<RootStackParamList, 'Profile'>): StackNavigationOptions => {
+  const { userId } = route.params;
+
+  return {
+    headerTitle: `Profile of ${userId}`,
+  };
+};
+```
+
+## Advanced
+
+The sections below cover manual annotations and escape hatches that are usually not needed when you use the typed hooks with the root navigator and nested navigators set up as described above. They may still be useful for legacy code or some [Mixing Static & Dynamic APIs](combine-static-with-dynamic.md) cases.
+
+### Overriding the inferred navigation type
+
+If the types are not set up to infer the screen's navigator type (e.g. you use `NavigatorScreenParams<SomeParamList>` instead of `NavigatorScreenParams<typeof SomeNavigator>`), the hooks will still infer the type for methods such as `getState`, `setParams` etc, but navigator-specific methods won't be inferred.
+
+In that case, you can override the type of the returned `navigation` object. This can be done using [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) with the `as` keyword:
+
+```ts
+function ProfileScreen() {
+  const navigation = useNavigation('Profile') as ProfileScreenNavigationProp;
+
+  // ...
+}
+```
+
+:::danger
+
+Annotating `useNavigation` with `as` isn't type-safe because we cannot verify that the provided type matches the actual navigators.
+
+:::
+
+### Annotating screen props
+
+If you need to annotate screen props manually, the navigator packages in React Navigation export generic types to define types for both the `navigation` and `route` props from the corresponding navigator.
 
 For example, you can use `NativeStackScreenProps` for the Native Stack Navigator.
 
@@ -469,7 +651,7 @@ The type takes 2 generics:
 - The param list object we defined earlier
 - The name of the route the screen belongs to
 
-This allows us to type check route names and params which you're navigating using [`navigate`](navigation-object.md#navigate), [`push`](stack-actions.md#push) etc. The name of the current route is necessary to type check the params in `route.params` and when you call [`setParams`](navigation-actions#setparams) or [`replaceParams`](navigation-actions#replaceparams).
+This allows us to type check route names and params which you're navigating using [`navigate`](navigation-object.md#navigate), [`push`](stack-actions.md#push) etc. The name of the current route is necessary to type check the params in `route.params` and when you call [`setParams`](navigation-actions.md#setparams) or [`replaceParams`](navigation-actions.md#replaceparams).
 
 Similarly, you can import `StackScreenProps` from [`@react-navigation/stack`](stack-navigator.md), `DrawerScreenProps` from [`@react-navigation/drawer`](drawer-navigator.md), `BottomTabScreenProps` from [`@react-navigation/bottom-tabs`](bottom-tab-navigator.md) and so on.
 
@@ -524,35 +706,9 @@ import type { RouteProp } from '@react-navigation/native';
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'Profile'>;
 ```
 
-We recommend creating a separate file: `types.tsx` - where you keep the types and import from there in your component files instead of repeating them in each file.
-
-## Nesting navigators
-
-### Type checking screens and params in nested navigator
-
-You can [navigate to a screen in a nested navigator](nesting-navigators.md#navigating-to-a-screen-in-a-nested-navigator) by passing `screen` and `params` properties for the nested screen:
-
-```ts
-navigation.navigate('Home', {
-  screen: 'Feed',
-  params: { sort: 'latest' },
-});
-```
-
-To be able to type check this, we need to extract the params from the screen containing the nested navigator. This can be done using the `NavigatorScreenParams` utility:
-
-```ts
-import { NavigatorScreenParams } from '@react-navigation/native';
-
-type TabParamList = {
-  Home: NavigatorScreenParams<StackParamList>;
-  Profile: { userId: string };
-};
-```
-
 ### Combining navigation props
 
-When you nest navigators, the navigation prop of the screen is a combination of multiple navigation props. For example, if we have a tab inside a stack, the `navigation` prop will have both [`jumpTo`](tab-actions.md#jumpto) (from the tab navigator) and [`push`](stack-actions.md#push) (from the stack navigator). To make it easier to combine types from multiple navigators, you can use the `CompositeScreenProps` type.
+When you manually annotate screen props for nested navigators, the navigation prop of the screen is a combination of multiple navigation props. For example, if we have a tab inside a stack, the `navigation` prop will have both [`jumpTo`](tab-actions.md#jumpto) (from the tab navigator) and [`push`](stack-actions.md#push) (from the stack navigator). To make it easier to combine types from multiple navigators, you can use the `CompositeScreenProps` type.
 
 For example, if we have a `Profile` in a navigator, nested inside `Account` screen of a stack navigator, we can combine the types as follows:
 
@@ -562,8 +718,8 @@ import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import type { StackScreenProps } from '@react-navigation/stack';
 
 type ProfileScreenProps = CompositeScreenProps<
-  BottomTabScreenProps<TabParamList, 'Profile'>,
-  StackScreenProps<StackParamList, 'Account'>
+  BottomTabScreenProps<HomeTabsParamList, 'Profile'>,
+  StackScreenProps<RootStackParamList, 'Account'>
 >;
 ```
 
@@ -576,10 +732,10 @@ For multiple parent navigators, this second parameter can nest another `Composit
 
 ```ts
 type ProfileScreenProps = CompositeScreenProps<
-  BottomTabScreenProps<TabParamList, 'Profile'>,
+  BottomTabScreenProps<HomeTabsParamList, 'Profile'>,
   CompositeScreenProps<
-    StackScreenProps<StackParamList, 'Account'>,
-    DrawerScreenProps<DrawerParamList, 'Home'>
+    StackScreenProps<RootStackParamList, 'Account'>,
+    DrawerScreenProps<RootDrawerParamList, 'Home'>
   >
 >;
 ```
@@ -592,130 +748,12 @@ import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import type { StackNavigationProp } from '@react-navigation/stack';
 
 type ProfileScreenNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<TabParamList, 'Profile'>,
-  StackNavigationProp<StackParamList, 'Account'>
+  BottomTabNavigationProp<HomeTabsParamList, 'Profile'>,
+  StackNavigationProp<RootStackParamList, 'Account'>
 >;
 ```
 
-## Annotating hooks
-
-The [`useRoute`](use-route.md), [`useNavigation`](use-navigation.md), and [`useNavigationState`](use-navigation-state.md) hooks accept the name of the current screen or any parent screen where it's nested as an argument for limited type inference in dynamic API after [specifying root navigator type](#specify-the-root-navigators-type).
-
-With `useRoute`:
-
-```ts
-function ProfileScreen() {
-  const route = useRoute('Profile');
-
-  // The params are correctly typed here
-  const { userId } = route.params;
-
-  // ...
-}
-```
-
-With `useNavigation`:
-
-```ts
-function ProfileScreen() {
-  const navigation = useNavigation('Profile');
-
-  // Helpers like `getState` are correctly typed here
-  const state = navigation.getState();
-
-  // ...
-}
-```
-
-This will automatically infer the type for methods such as `getState`, `setParams` etc. However, it doesn't include navigator-specific types, and they cannot be automatically inferred when using the dynamic configuration.
-
-So if we want to use a navigator-specific method (e.g. `push` from stack navigator), we need to annotate the type of the returned `navigation` object.
-
-This can be done using [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) with the `as` keyword:
-
-```ts
-function ProfileScreen() {
-  const navigation = useNavigation('Profile') as ProfileScreenNavigationProp;
-
-  // ...
-}
-```
-
-:::danger
-
-Annotating `useNavigation` isn't type-safe because we cannot verify that the provided type matches the actual navigators.
-
-:::
-
-With `useNavigationState`:
-
-```ts
-function ProfileScreen() {
-  const focusedRouteName = useNavigationState(
-    'Profile',
-    // The state is correctly typed here
-    (state) => state.routes[state.index].name
-  );
-
-  // The `focusedRouteName` type is one of the route names
-  // defined in the navigator where `Profile` is defined
-  console.log(focusedRouteName);
-
-  // ...
-}
-```
-
-## Annotating `options` and `screenOptions`
-
-When you pass the `options` to a `Screen` or `screenOptions` prop to a `Navigator` component, they are already type-checked and you don't need to do anything special. However, sometimes you might want to extract the options to a separate object, and you might want to annotate it.
-
-To annotate the options, we need to import the corresponding type from the navigator. For example, `StackNavigationOptions` for `@react-navigation/stack`:
-
-```ts
-import type { StackNavigationOptions } from '@react-navigation/stack';
-
-const options: StackNavigationOptions = {
-  headerShown: false,
-};
-```
-
-Similarly, you can import `DrawerNavigationOptions` from `@react-navigation/drawer`, `BottomTabNavigationOptions` from `@react-navigation/bottom-tabs` etc.
-
-When using the function form of `options` and `screenOptions`, you can annotate the arguments with a type exported from the navigator, e.g. `StackOptionsArgs` for `@react-navigation/stack`, `DrawerOptionsArgs` for `@react-navigation/drawer`, `BottomTabOptionsArgs` for `@react-navigation/bottom-tabs` etc.:
-
-```ts
-import type {
-  StackNavigationOptions,
-  StackOptionsArgs,
-} from '@react-navigation/stack';
-
-const options = ({ route }: StackOptionsArgs): StackNavigationOptions => {
-  return {
-    headerTitle: route.name,
-  };
-};
-```
-
-If you want to annotate the type of params in the `route` object, you can use pass the param list and route name as generics to the `StackOptionsArgs` type:
-
-```ts
-import type {
-  StackNavigationOptions,
-  StackOptionsArgs,
-} from '@react-navigation/stack';
-
-const options = ({
-  route,
-}: StackOptionsArgs<RootStackParamList, 'Profile'>): StackNavigationOptions => {
-  const { userId } = route.params;
-
-  return {
-    headerTitle: `Profile of ${userId}`,
-  };
-};
-```
-
-## Annotating `ref` on `NavigationContainer`
+### Annotating `ref` on `NavigationContainer`
 
 If you use the `createNavigationContainerRef()` method to create the ref, you can annotate it to type-check navigation actions:
 
@@ -761,38 +799,85 @@ const navigationRef =
   React.createRef<NavigationContainerRef<RootStackParamList>>();
 ```
 
-## Specifying root navigator type
+## Organizing types
 
-You can specify the type for your root navigator which will enable automatic type inference (with limitations) for [`useRoute`](use-route.md), [`useNavigation`](use-navigation.md), [`useNavigationState`](use-navigation-state.md), [`Link`](link.md), [`ref`](navigation-container.md#ref), [`linking`](navigation-container.md#linking) etc.
+We recommend relying on the typed hooks instead of manually annotating screen props for simplicity.
 
-To do this, you can use module augmentation for `@react-navigation/core` and extend the `RootNavigator` interface with the type of your root navigator.
+1. Define each navigator's param list in the same module as that navigator.
+2. When a navigator renders another navigator as a screen, use `NavigatorScreenParams<typeof ChildNavigator>` for that route's params.
+3. Specify the type of your root navigator once with module augmentation.
+4. In screen components, use the hooks with the current screen name instead of annotating `navigation` and `route` props manually.
+
+First, define the child navigator and its param list:
+
+```ts title="navigation/HomeTabs.tsx"
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+export type HomeTabsParamList = {
+  Popular: undefined;
+  Latest: undefined;
+};
+
+export const HomeTabs = createBottomTabNavigator<HomeTabsParamList>();
+```
+
+Then, in any parent navigator that renders this navigator as a screen, use `NavigatorScreenParams<typeof HomeTabs>`:
+
+```ts title="navigation/AppStack.tsx"
+import type { NavigatorScreenParams } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { HomeTabs } from './HomeTabs';
+
+type AppStackParamList = {
+  Home: NavigatorScreenParams<typeof HomeTabs>;
+  PostDetails: { id: string };
+  NotFound: undefined;
+};
+
+export const AppStack = createStackNavigator<AppStackParamList>();
+```
+
+Use the same pattern at each nesting level. The parent route's params should use `NavigatorScreenParams<typeof ChildNavigator>`. This is necessary for proper type inference when using the typed hooks.
+
+Then, the root navigator's type needs to be specified with module augmentation. For example, if `AppStack` is the root navigator in your app:
 
 ```ts
-const RootStack = createNativeStackNavigator<RootStackParamList>();
+type RootStackType = typeof AppStack;
 
-function App() {
+declare module '@react-navigation/native' {
+  interface RootNavigator extends RootStackType {}
+}
+```
+
+Now, screen components can use typed hooks instead of importing navigator types:
+
+```ts
+import { useNavigation, useRoute } from '@react-navigation/native';
+
+function PopularScreen() {
+  const navigation = useNavigation('Popular');
+  const route = useRoute('Popular');
+
   // ...
 }
 
-// highlight-next-line
-type RootStackType = typeof RootStack;
+function PostDetailsScreen() {
+  const route = useRoute('PostDetails');
 
-// highlight-start
-declare module '@react-navigation/core' {
-  interface RootNavigator extends RootStackType {}
+  // The params are correctly typed here
+  const { id } = route.params;
+
+  // ...
 }
-// highlight-end
 ```
 
-Here `RootStack` refers to the navigator used at the root of your app.
+### Legacy setup
 
-## Organizing types
+If you have a legacy setup with manual screen prop annotations, this section will cover recommendations for organizing the types. For newer projects, we recommend using the typed hooks instead of manually annotating screen props.
 
-When writing types for React Navigation, there are a couple of things we recommend to keep things organized.
-
-1. It's good to create a separate file (e.g. `navigation/types.tsx`) that contains the types related to React Navigation.
-2. Instead of using `CompositeNavigationProp` directly in your components, it's better to create a helper type that you can reuse.
-3. Specifying the type of your root navigator avoids manual annotations in many places.
+- Create a separate file (e.g. `navigation/types.tsx`) that contains the types related to React Navigation.
+- Instead of using `CompositeNavigationProp` directly in your components, create helper types that you can reuse.
+- Specify the type of your root navigator to avoid manual annotations.
 
 Considering these recommendations, the file containing the types may look something like this:
 
@@ -839,7 +924,7 @@ function App() {
 
 type RootStackType = typeof RootStack;
 
-declare module '@react-navigation/core' {
+declare module '@react-navigation/native' {
   interface RootNavigator extends RootStackType {}
 }
 ```

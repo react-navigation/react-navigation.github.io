@@ -60,9 +60,7 @@ export default function App() {
 
 In the next step, we define `RootNavigation`, which is a simple module with functions that dispatch user-defined navigation actions.
 
-```js
-// RootNavigation.js
-
+```js title="RootNavigation.js"
 import { createNavigationContainerRef } from '@react-navigation/native';
 
 export const navigationRef = createNavigationContainerRef();

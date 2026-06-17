@@ -107,7 +107,7 @@ React Navigation starts with the navigation tree:
 
    type RootStackType = typeof RootStack;
 
-   declare module '@react-navigation/core' {
+   declare module '@react-navigation/native' {
      interface RootNavigator extends RootStackType {}
    }
    ```
@@ -500,7 +500,7 @@ export default function App() {
 
 type RootStackType = typeof RootStack;
 
-declare module '@react-navigation/core' {
+declare module '@react-navigation/native' {
   interface RootNavigator extends RootStackType {}
 }
 ```

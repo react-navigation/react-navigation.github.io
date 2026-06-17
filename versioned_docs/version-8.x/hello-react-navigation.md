@@ -346,7 +346,7 @@ If you're using TypeScript, you need to tell React Navigation about your root na
 ```ts
 type RootStackType = typeof RootStack;
 
-declare module '@react-navigation/core' {
+declare module '@react-navigation/native' {
   interface RootNavigator extends RootStackType {}
 }
 ```

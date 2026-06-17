@@ -44,14 +44,14 @@ Here, `FeedScreen` is a component that renders a bottom tab navigator and is def
 ```js
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-const Tab = createBottomTabNavigator();
+const FeedTabs = createBottomTabNavigator();
 
 function FeedScreen() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Latest" component={LatestScreen} />
-      <Tab.Screen name="Popular" component={PopularScreen} />
-    </Tab.Navigator>
+    <FeedTabs.Navigator>
+      <FeedTabs.Screen name="Latest" component={LatestScreen} />
+      <FeedTabs.Screen name="Popular" component={PopularScreen} />
+    </FeedTabs.Navigator>
   );
 }
 ```
@@ -96,14 +96,17 @@ import {
   StaticScreenProps,
   NavigatorScreenParams,
 } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-type FeedParamList = {
+type FeedTabsParamList = {
   Latest: undefined;
   Popular: undefined;
 };
 
+const FeedTabs = createBottomTabNavigator<FeedTabsParamList>();
+
 // highlight-next-line
-type Props = StaticScreenProps<NavigatorScreenParams<FeedParamList>>;
+type Props = StaticScreenProps<NavigatorScreenParams<typeof FeedTabs>>;
 
 // highlight-next-line
 function FeedScreen(_: Props) {
@@ -114,10 +117,13 @@ function FeedScreen(_: Props) {
 In the above snippet:
 
 1. We first define the param list type for screens in the navigator that defines params for each screen
-2. Then we use the `NavigatorScreenParams` type to get the type of route's `params` which will include types for the nested screens
-3. Finally, we use the type of `params` with `StaticScreenProps` to define the type of the screen component
+2. Then we create the dynamic navigator with that param list
+3. Then we use the `NavigatorScreenParams` type with `typeof FeedTabs` to get the type of route's `params` which will include types for the nested screens and the concrete navigator type
+4. Finally, we use the type of `params` with `StaticScreenProps` to define the type of the screen component
 
-This is based on how we'd define the type for a screen with a nested navigator with the dynamic API. See [Type checking screens and params in nested navigator](typescript.md#type-checking-screens-and-params-in-nested-navigator).
+Using `typeof FeedTabs` lets typed hooks such as `useNavigation('Latest')`, `useRoute('Latest')`, and `useNavigationState('Latest', selector)` infer the screens inside the nested tab navigator.
+
+This is based on how we'd define the type for a screen with a nested navigator with the dynamic API. See [Specifying param types for screens](typescript.md#specifying-param-types-for-screens-dynamic).
 
 ## Dynamic root navigator, static nested navigator
 
@@ -168,21 +174,15 @@ To use the `FeedTabs` navigator for the `Feed` screen, we need to get a componen
 const FeedScreen = FeedTabs.getComponent();
 ```
 
-In addition, we can generate the TypeScript types for the `FeedTabs` navigator and use it in the types of `RootStack` without needing to write them manually:
+In addition, we can use the type of the `FeedTabs` navigator in the types of `RootStack`:
 
 ```tsx
-import {
-  StaticParamList,
-  NavigatorScreenParams,
-} from '@react-navigation/native';
-
-// highlight-next-line
-type FeedTabsParamList = StaticParamList<typeof FeedTabs>;
+import { NavigatorScreenParams } from '@react-navigation/native';
 
 type RootStackParamList = {
   Home: undefined;
   // highlight-next-line
-  Feed: NavigatorScreenParams<FeedTabsParamList>;
+  Feed: NavigatorScreenParams<typeof FeedTabs>;
 };
 ```
 

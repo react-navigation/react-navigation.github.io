@@ -579,7 +579,7 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 type RootStackType = typeof RootStack;
 
-declare module '@react-navigation/core' {
+declare module '@react-navigation/native' {
   interface RootNavigator extends RootStackType {}
 }
 
@@ -610,7 +610,7 @@ const RootStack = createNativeStackNavigator({
 
 type RootStackType = typeof RootStack;
 
-declare module '@react-navigation/core' {
+declare module '@react-navigation/native' {
   interface RootNavigator extends RootStackType {}
 }
 ```
