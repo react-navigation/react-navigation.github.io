@@ -35,7 +35,7 @@ React Navigation's static configuration API is designed to minimize boilerplate.
 
 #### React Navigation doesn't support Web
 
-React Navigation [supports Web out-of-the-box](web-support.md) with the same API as native. The Web implementation includes support for browser URLs, history, and accessibility features. However, the web support is optimized for PWAs and doesn't have full support for [server rendering](server-rendering.md).
+React Navigation [supports Web out-of-the-box](web-support.md) with the same API as native. The Web implementation includes support for browser URLs, history, accessibility features as well as APIs such as [`pushParams`](navigation-actions.md#pushparams), [`backBehavior=fullHistory`](bottom-tab-navigator.md#backbehavior) etc. that are suitable for web apps. All official navigators also work on the web. The web support is optimized for PWAs and has limited [server rendering](server-rendering.md) support.
 
 #### React Navigation doesn't use native navigation primitives
 
