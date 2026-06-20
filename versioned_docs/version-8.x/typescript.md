@@ -348,9 +348,7 @@ There are 2 steps to configure TypeScript with the dynamic API:
 
 ### Specifying the root navigator's type {#specifying-the-root-navigators-type-dynamic}
 
-You can specify the type for your root navigator which will enable automatic type inference for [`useRoute`](use-route.md), [`useNavigation`](use-navigation.md), [`useNavigationState`](use-navigation-state.md), [`Link`](link.md), [`ref`](navigation-container.md#ref), [`linking`](navigation-container.md#linking) etc.
-
-To do this, use module augmentation for `@react-navigation/native` and extend the `RootNavigator` interface with the type of your root navigator.
+For the type-inference to work, React Navigation needs to know the type of the root navigator in your app. To do this, you can declare a module augmentation for `@react-navigation/native` and extend the `RootNavigator` interface with the type of your root navigator.
 
 ```ts
 type RootStackParamList = {
@@ -373,9 +371,11 @@ declare module '@react-navigation/native' {
 
 Here `RootStack` refers to the navigator used at the root of your app. The `RootStackParamList` type is covered in the next section.
 
+This is needed to type-check hooks such as [`useNavigation`](use-navigation.md), [`useRoute`](use-route.md), [`useNavigationState`](use-navigation-state.md) etc.
+
 ### Specifying param types for screens {#specifying-param-types-for-screens-dynamic}
 
-To type check route names and params, create an object type with mappings from route names to the params of each route. For example, say we have a route called `Profile` in our root navigator which should have a param `userId`:
+To type check route names and params, we need to create an object type with mappings from route names to the params of each route. For example, say we have a route called `Profile` in our root navigator which should have a param `userId`:
 
 ```tsx
 type RootStackParamList = {
@@ -419,7 +419,7 @@ And then we can use it:
 
 This will provide type checking and IntelliSense for props of the [`Navigator`](navigator.md) and [`Screen`](screen.md) components.
 
-When a screen renders a nested navigator, use `NavigatorScreenParams` for that route. Define the child navigator first:
+When a screen renders a nested navigator, use `NavigatorScreenParams` for that route. First, define and export the child navigator object:
 
 ```ts title="navigation/HomeStack.tsx"
 import { createStackNavigator } from '@react-navigation/stack';
