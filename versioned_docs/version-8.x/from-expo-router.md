@@ -31,7 +31,7 @@ Some of the benefits of Expo Router are:
 
 #### React Navigation requires a lot of boilerplate
 
-React Navigation's static configuration API is designed to minimize boilerplate. It provides [automatic type inference based on the navigator and linking configuration](typescript.md#setting-up-the-types), and [automatic paths for deep linking](configuring-links.md) out of the box.
+React Navigation's [static configuration API](static-configuration.md) is designed to minimize boilerplate. It provides [automatic type inference based on the navigator and linking configuration](typescript.md#setting-up-the-types), and [automatic paths for deep linking](configuring-links.md) out of the box.
 
 #### React Navigation doesn't support Web
 
@@ -40,6 +40,14 @@ React Navigation [supports Web out-of-the-box](web-support.md) with the same API
 #### React Navigation doesn't use native navigation primitives
 
 Official navigators in React Navigation such as [Native Stack](native-stack-navigator.md) and [Bottom Tabs](bottom-tab-navigator.md) use native primitives by default on Android & iOS, including platform styling such as [Liquid Glass on supported iOS versions](bottom-tab-navigator.md#native), [`SFSymbol`](icons.md#sf-symbols) and [Material Symbols](icons.md#material-symbols) support for icons, [Dynamic Material Themes on Android](themes.md#built-in-themes), and more.
+
+#### React Navigation is only suitable for complex apps
+
+React Navigation provides a lot of control and flexibility, which is useful for complex apps. But you are only exposed to that complexity when you need it. The [static configuration API](static-configuration.md) with [automatic type inference](typescript.md#setting-up-the-types) and [deep linking](configuring-links.md) works well for both simple and complex apps.
+
+#### React Navigation is maintained by Expo
+
+React Navigation was originally started by [Brent Vatne](https://github.com/brentvatne) from [Expo](https://docs.expo.dev/) and [Eric Vicenti](https://github.com/ericvicenti) from Facebook (now Meta). React Navigation 5 was a complete rewrite sponsored by Expo and led by [Satyajit Sahoo](https://github.com/satya164) from [Callstack](https://callstack.com/) in collaboration with [Michał Osadnik](https://github.com/osdnk) from [Software Mansion](https://www.software-mansion.com/). For the past few years, the project has been primarily maintained by Satyajit Sahoo with support from Callstack and Software Mansion. Neither Expo nor the Expo Router team is involved in its ongoing development, maintenance, or roadmap.
 
 ## Mental model
 
