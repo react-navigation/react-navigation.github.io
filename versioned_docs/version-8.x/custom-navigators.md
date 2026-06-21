@@ -121,9 +121,11 @@ function TabNavigator({ tabBarStyle, contentStyle, ...rest }) {
               });
 
               if (!isFocused && !event.defaultPrevented) {
-                navigation.dispatch({
-                  ...TabActions.jumpTo(route.name, route.params),
-                  target: state.key,
+                React.startTransition(() => {
+                  navigation.dispatch({
+                    ...TabActions.jumpTo(route.name, route.params),
+                    target: state.key,
+                  });
                 });
               }
             }}
@@ -367,9 +369,11 @@ function TabNavigator({ tabBarStyle, contentStyle, ...rest }: Props) {
               });
 
               if (!isFocused && !event.defaultPrevented) {
-                navigation.dispatch({
-                  ...CommonActions.navigate(route.name, route.params),
-                  target: state.key,
+                React.startTransition(() => {
+                  navigation.dispatch({
+                    ...CommonActions.navigate(route.name, route.params),
+                    target: state.key,
+                  });
                 });
               }
             }}
