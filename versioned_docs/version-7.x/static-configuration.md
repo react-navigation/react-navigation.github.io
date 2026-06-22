@@ -383,6 +383,8 @@ Similar to `NavigationContainer`, the component returned by `createStaticNavigat
 
    See [How does automatic path generation work](configuring-links.md#how-does-automatic-path-generation-work) for more details.
 
+Passing `enabled: true` enables linking support without automatic path generation, which means only the paths specified in the [screen's `linking` configuration](#linking) explicitly will be used for deep linking.
+
 ## `createPathConfigForStaticNavigation`
 
 The `createPathConfigForStaticNavigation` function takes the static config returned by `createXNavigator` functions and returns a path config object that can be used within the linking config.

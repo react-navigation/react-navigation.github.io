@@ -383,3 +383,5 @@ Similar to `NavigationContainer`, the component returned by `createStaticNavigat
    See [How does automatic path generation work](configuring-links.md#how-does-automatic-path-generation-work) for more details.
 
 By default, linking is enabled in static configuration with automatic path generation. If you don't want linking support, it can be disabled by explicitly passing `enabled: false` to the `linking` prop.
+
+Passing `enabled: true` enables linking support without automatic path generation, which means only the paths specified in the [screen's `linking` configuration](#linking) explicitly will be used for deep linking.
