@@ -127,11 +127,11 @@ Fake timers replace real implementation of the native timer functions (e.g. `set
 Often, component state is updated after an animation completes. To avoid getting an error in such cases, wrap `jest.runAllTimers()` in `act`:
 
 ```js
-import { act } from 'react-test-renderer';
+import { act } from '@testing-library/react-native';
 
 // ...
 
-act(() => jest.runAllTimers());
+await act(() => jest.runAllTimers());
 ```
 
 See the examples below for more details on how to use fake timers in tests involving navigation.
@@ -148,11 +148,11 @@ expect(screen.getByText('Settings screen')).toBeVisible();
 
 This is in contrast to the `toBeOnTheScreen` matcher, which checks if the element is rendered in the component tree. This matcher is not recommended when writing tests involving navigation.
 
-By default, the queries from React Native Testing Library (e.g. `getByRole`, `getByText`, `getByLabelText` etc.) [only return visible elements](https://callstack.github.io/react-native-testing-library/docs/api/queries#includehiddenelements-option). So you don't need to do anything special. However, if you're using a different library for your tests, you'll need to account for this behavior.
+By default, the queries from React Native Testing Library (e.g. `getByRole`, `getByText`, `getByLabelText` etc.) [only return visible elements](https://oss.callstack.com/react-native-testing-library/docs/api/queries#includehiddenelements-option). So you don't need to do anything special. However, if you're using a different library for your tests, you'll need to account for this behavior.
 
 ## Example tests
 
-We recommend using [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) to write your tests.
+We recommend using [React Native Testing Library](https://oss.callstack.com/react-native-testing-library/) to write your tests.
 
 In this guide, we will go through some example scenarios and show you how to write tests for them using Jest and React Native Testing Library:
 
@@ -246,13 +246,13 @@ test('navigates to settings by tab bar button press', async () => {
 
   const Navigation = createStaticNavigation(MyTabs);
 
-  render(<Navigation />);
+  await render(<Navigation />);
 
   const button = screen.getByRole('button', { name: 'Settings, tab, 2 of 2' });
 
   await user.press(button);
 
-  act(() => jest.runAllTimers());
+  await act(() => jest.runAllTimers());
 
   expect(screen.getByText('Settings screen')).toBeVisible();
 });
@@ -273,17 +273,19 @@ jest.useFakeTimers();
 test('navigates to settings by tab bar button press', async () => {
   const user = userEvent.setup();
 
-  render(
+  await render(
     <NavigationContainer>
       <MyTabs />
     </NavigationContainer>
   );
 
-  const button = screen.getByLabelText('Settings, tab, 2 of 2');
+  const button = screen.getByRole('button', {
+    name: 'Settings, tab, 2 of 2',
+  });
 
   await user.press(button);
 
-  act(() => jest.runAllTimers());
+  await act(() => jest.runAllTimers());
 
   expect(screen.getByText('Settings screen')).toBeVisible();
 });
@@ -294,8 +296,8 @@ test('navigates to settings by tab bar button press', async () => {
 
 In the above test, we:
 
-- Render the `MyTabs` navigator within a [NavigationContainer](navigation-container.md) in our test.
-- Get the tab bar button using the `getByLabelText` query that matches its accessibility label.
+- Render the `MyTabs` navigator using [`createStaticNavigation`](static-configuration.md#createstaticnavigation) for static configuration or a [NavigationContainer](navigation-container.md) for dynamic configuration.
+- Get the tab bar button using the `getByRole` query that matches its role and accessible name.
 - Press the button using `userEvent.press(button)` to simulate a user interaction.
 - Run all timers using `jest.runAllTimers()` to skip animations (e.g. animations in the `Pressable` for the button).
 - Assert that the `Settings screen` is visible after the navigation.
@@ -422,11 +424,11 @@ test('shows surprise text after navigating to surprise screen', async () => {
 
   const Navigation = createStaticNavigation(MyStack);
 
-  render(<Navigation />);
+  await render(<Navigation />);
 
-  await user.press(screen.getByLabelText('Click here!'));
+  await user.press(screen.getByRole('button', { name: 'Click here!' }));
 
-  act(() => jest.runAllTimers());
+  await act(() => jest.runAllTimers());
 
   expect(screen.getByText('Surprise!')).toBeVisible();
 });
@@ -447,15 +449,15 @@ jest.useFakeTimers();
 test('shows surprise text after navigating to surprise screen', async () => {
   const user = userEvent.setup();
 
-  render(
+  await render(
     <NavigationContainer>
       <MyStack />
     </NavigationContainer>
   );
 
-  await user.press(screen.getByLabelText('Click here!'));
+  await user.press(screen.getByRole('button', { name: 'Click here!' }));
 
-  act(() => jest.runAllTimers());
+  await act(() => jest.runAllTimers());
 
   expect(screen.getByText('Surprise!')).toBeVisible();
 });
@@ -466,8 +468,8 @@ test('shows surprise text after navigating to surprise screen', async () => {
 
 In the above test, we:
 
-- Render the `MyStack` navigator within a [NavigationContainer](navigation-container.md) in our test.
-- Get the button using the `getByLabelText` query that matches its title.
+- Render the `MyStack` navigator using [`createStaticNavigation`](static-configuration.md#createstaticnavigation) for static configuration or a [NavigationContainer](navigation-container.md) for dynamic configuration.
+- Get the button using the `getByRole` query that matches its role and accessible name.
 - Press the button using `userEvent.press(button)` to simulate a user interaction.
 - Run all timers using `jest.runAllTimers()` to skip animations (e.g. navigation animation between screens).
 - Assert that the `Surprise!` text is visible after the transition to the Surprise screen is complete.
@@ -696,10 +698,14 @@ test('loads data on Pokemon info screen after focus', async () => {
 
   const Navigation = createStaticNavigation(MyTabs);
 
-  render(<Navigation />);
+  await render(<Navigation />);
 
-  const homeTabButton = screen.getByLabelText('Home, tab, 1 of 2');
-  const pokemonTabButton = screen.getByLabelText('Pokemon, tab, 2 of 2');
+  const homeTabButton = screen.getByRole('button', {
+    name: 'Home, tab, 1 of 2',
+  });
+  const pokemonTabButton = screen.getByRole('button', {
+    name: 'Pokemon, tab, 2 of 2',
+  });
 
   await user.press(pokemonTabButton);
 
@@ -737,14 +743,18 @@ jest.useFakeTimers();
 test('loads data on Pokemon info screen after focus', async () => {
   const user = userEvent.setup();
 
-  render(
+  await render(
     <NavigationContainer>
       <MyTabs />
     </NavigationContainer>
   );
 
-  const homeTabButton = screen.getByLabelText('Home, tab, 1 of 2');
-  const pokemonTabButton = screen.getByLabelText('Pokemon, tab, 2 of 2');
+  const homeTabButton = screen.getByRole('button', {
+    name: 'Home, tab, 1 of 2',
+  });
+  const pokemonTabButton = screen.getByRole('button', {
+    name: 'Pokemon, tab, 2 of 2',
+  });
 
   await user.press(pokemonTabButton);
 
@@ -775,7 +785,7 @@ In the above test, we:
 - Assert that the `ditto` text is visible after the data is fetched.
 - Press the home tab button to navigate to the home screen.
 - Run all timers using `jest.runAllTimers()` to skip animations (e.g. animations in the `Pressable` for the button).
-- Press the profile tab button to navigate back to the Pokemon screen.
+- Press the Pokemon tab button to navigate back to the Pokemon screen.
 - Ensure that cached data is shown by asserting that the `Loading...` text is not visible and the `ditto` text is visible.
 
 :::note
@@ -828,12 +838,12 @@ We can use this test navigator in our tests like this:
 <TabItem value="static" label="Static" default>
 
 ```js title="MyComponent.test.js"
-import { act, render, screen } from '@testing-library/react-native';
+import { render, screen } from '@testing-library/react-native';
 import { createStaticNavigation } from '@react-navigation/native';
 import { createTestStackNavigator } from './TestStackNavigator';
 import { MyComponent } from './MyComponent';
 
-test('does not show modal when not focused', () => {
+test('does not show modal when not focused', async () => {
   const TestStack = createTestStackNavigator({
     screens: {
       A: MyComponent,
@@ -843,7 +853,7 @@ test('does not show modal when not focused', () => {
 
   const Navigation = createStaticNavigation(TestStack);
 
-  render(
+  await render(
     <Navigation
       initialState={{
         routes: [{ name: 'A' }, { name: 'B' }],
@@ -854,7 +864,7 @@ test('does not show modal when not focused', () => {
   expect(screen.queryByText('Modal')).not.toBeVisible();
 });
 
-test('shows modal when focused', () => {
+test('shows modal when focused', async () => {
   const TestStack = createTestStackNavigator({
     screens: {
       A: MyComponent,
@@ -864,7 +874,7 @@ test('shows modal when focused', () => {
 
   const Navigation = createStaticNavigation(TestStack);
 
-  render(
+  await render(
     <Navigation
       initialState={{
         routes: [{ name: 'B' }, { name: 'A' }],
@@ -880,12 +890,12 @@ test('shows modal when focused', () => {
 <TabItem value="dynamic" label="Dynamic">
 
 ```js title="MyComponent.test.js"
-import { act, render, screen } from '@testing-library/react-native';
+import { render, screen } from '@testing-library/react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createTestStackNavigator } from './TestStackNavigator';
 import { MyComponent } from './MyComponent';
 
-test('does not show modal when not focused', () => {
+test('does not show modal when not focused', async () => {
   const Stack = createTestStackNavigator();
 
   const TestStack = () => (
@@ -895,7 +905,7 @@ test('does not show modal when not focused', () => {
     </Stack.Navigator>
   );
 
-  render(
+  await render(
     <NavigationContainer
       initialState={{
         routes: [{ name: 'A' }, { name: 'B' }],
@@ -908,7 +918,7 @@ test('does not show modal when not focused', () => {
   expect(screen.queryByText('Modal')).not.toBeVisible();
 });
 
-test('shows modal when focused', () => {
+test('shows modal when focused', async () => {
   const Stack = createTestStackNavigator();
 
   const TestStack = () => (
@@ -918,7 +928,7 @@ test('shows modal when focused', () => {
     </Stack.Navigator>
   );
 
-  render(
+  await render(
     <NavigationContainer
       initialState={{
         routes: [{ name: 'B' }, { name: 'A' }],
