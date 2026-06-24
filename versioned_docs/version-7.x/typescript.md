@@ -14,8 +14,8 @@ First, make sure you have the following configuration in your `tsconfig.json` un
 - `strict: true` or `strictNullChecks: true` - Necessary for intelliSense and type inference to work correctly.
 - `moduleResolution: "bundler"` - Necessary to resolve the types correctly and match the behavior of [Metro](https://metrobundler.dev/) and other bundlers.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 There are 2 steps to configure TypeScript with the static API:
 
@@ -170,7 +170,7 @@ function HomeTabs(_: HomeTabsProps) {
 Now, when using `StaticParamList<typeof RootStack>`, it will include the screens defined in the nested navigator.
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 When using the dynamic API, it is necessary to specify the types for each screen as well as the nesting structure as it cannot be inferred from the code.
 
@@ -599,4 +599,4 @@ function PopularScreen() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>

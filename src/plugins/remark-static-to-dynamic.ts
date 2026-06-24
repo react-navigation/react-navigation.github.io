@@ -11,7 +11,7 @@ import * as babelParser from 'recast/parsers/babel-ts.js';
 import { visit } from 'unist-util-visit';
 import { fileURLToPath } from 'url';
 import type { Element, Root, Text } from 'hast';
-import type { Parent } from 'unist';
+import type { Node as UnistNode } from 'unist';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -31,6 +31,49 @@ export type RehypeStaticToDynamicMdxEsm = {
   data?: {
     estree?: unknown;
   };
+};
+
+type MdxJsxAttributeValueExpression = {
+  type: 'mdxJsxAttributeValueExpression';
+  value: string;
+  data: {
+    estree: unknown;
+  };
+};
+
+type MdxJsxAttribute = {
+  type: 'mdxJsxAttribute';
+  name: string;
+  value?: string | MdxJsxAttributeValueExpression;
+};
+
+type MdxJsxFlowElement = {
+  type: 'mdxJsxFlowElement';
+  name: string;
+  attributes: MdxJsxAttribute[];
+  children: MdxNode[];
+};
+
+type MarkdownCodeNode = {
+  type: 'code';
+  value: string;
+  lang?: string;
+  meta?: string;
+};
+
+type MdxTextNode = {
+  type: 'text';
+  value: string;
+};
+
+type MdxNode =
+  | MarkdownCodeNode
+  | MdxJsxFlowElement
+  | MdxTextNode
+  | RehypeStaticToDynamicMdxEsm;
+
+type MutableParent = {
+  children: unknown[];
 };
 
 export type RehypeStaticToDynamicRoot = Root;
@@ -95,9 +138,9 @@ type ParsedNavigatorConfig = {
 };
 
 type Replacement = {
-  parent: Parent;
+  parent: MutableParent;
   index: number;
-  tabsElement: Element;
+  tabsElement: MdxJsxFlowElement;
 };
 
 type CommentArrayKey = 'comments' | 'leadingComments' | 'trailingComments';
@@ -178,18 +221,29 @@ function parseModule(code: string): unknown {
   });
 }
 
-function isMdxEsmNode(
-  node: RehypeStaticToDynamicTreeChild | undefined
-): node is RehypeStaticToDynamicMdxEsm {
+function isMdxEsmNode(node: unknown): node is RehypeStaticToDynamicMdxEsm {
   return (
     isRecord(node) && node.type === 'mdxjsEsm' && typeof node.value === 'string'
   );
 }
 
-function isWhitespaceTextNode(
-  node: RehypeStaticToDynamicTreeChild | undefined
-): node is Text {
-  return node?.type === 'text' && node.value.trim() === '';
+function isWhitespaceTextNode(node: unknown): node is Text {
+  return (
+    isRecord(node) &&
+    node.type === 'text' &&
+    typeof node.value === 'string' &&
+    node.value.trim() === ''
+  );
+}
+
+function isCodeNode(node: unknown): node is MarkdownCodeNode {
+  return (
+    isRecord(node) && node.type === 'code' && typeof node.value === 'string'
+  );
+}
+
+function isMutableParent(value: unknown): value is MutableParent {
+  return isRecord(value) && Array.isArray(value.children);
 }
 
 function createTabsImportNode(value: string): RehypeStaticToDynamicMdxEsm {
@@ -200,7 +254,7 @@ function createTabsImportNode(value: string): RehypeStaticToDynamicMdxEsm {
   };
 }
 
-function ensureTabsImports(tree: Root) {
+function ensureTabsImports(tree: MutableParent) {
   let hasTabsImport = false;
   let hasTabItemImport = false;
 
@@ -243,7 +297,7 @@ function ensureTabsImports(tree: Root) {
   tree.children.splice(
     insertionIndex,
     0,
-    createTabsImportNode(missingImports.join('\n')) as Root['children'][number]
+    createTabsImportNode(missingImports.join('\n'))
   );
 }
 
@@ -254,52 +308,25 @@ function ensureTabsImports(tree: Root) {
  * corresponding dynamic configuration examples wrapped in tabs.
  */
 export default function rehypeStaticToDynamic() {
-  return async (tree: Root) => {
+  return async (tree: UnistNode & MutableParent) => {
     const promises: Promise<void>[] = [];
     const replacements: Replacement[] = [];
 
-    visit(tree, 'element', (node: Element, index, parent) => {
-      // Look for code blocks with static2dynamic in meta
-      if (
-        node.tagName === 'pre' &&
-        node.children?.length === 1 &&
-        node.children[0].type === 'element' &&
-        node.children[0].tagName === 'code'
-      ) {
-        const codeNode = getFirstChildElement(node);
-
-        if (!codeNode) {
-          return;
-        }
-
-        const meta = getMeta(codeNode.data);
-
-        // Check if meta contains 'static2dynamic'
-        if (!meta || !meta.includes('static2dynamic')) {
-          return;
-        }
-
-        // Extract code from the code block
-        const code = getTextNodeValue(codeNode);
-
-        if (!code) {
-          throw new Error(
-            'rehype-static-to-dynamic: Unable to extract code from code block'
-          );
-        }
-
-        // Queue async conversion
-        const promise = convertStaticToDynamic(code).then((dynamicCode) => {
-          const tabsElement = createTabsWithBothConfigs(
-            code,
-            dynamicCode,
-            node
-          );
-          if (!parent || typeof index !== 'number') return;
-          replacements.push({ parent, index, tabsElement });
-        });
-        promises.push(promise);
+    visit(tree, 'code', (node: UnistNode, index, parent) => {
+      if (!isCodeNode(node)) {
+        return;
       }
+
+      if (!node.meta?.includes('static2dynamic')) {
+        return;
+      }
+
+      const promise = convertStaticToDynamic(node.value).then((dynamicCode) => {
+        const tabsElement = createTabsWithBothConfigs(node, dynamicCode);
+        if (!isMutableParent(parent) || typeof index !== 'number') return;
+        replacements.push({ parent, index, tabsElement });
+      });
+      promises.push(promise);
     });
 
     // Wait for all conversions to complete
@@ -2280,43 +2307,56 @@ function createNavigatorComponent(
 /**
  * Create a TabItem element with code block
  */
+function createExpression(value: string): MdxJsxAttributeValueExpression {
+  return {
+    type: 'mdxJsxAttributeValueExpression',
+    value,
+    data: { estree: parseModule(value) },
+  };
+}
+
+function createValuesAttribute(): MdxJsxAttribute {
+  const value = `[
+    { value: 'static', label: 'Static', default: true },
+    { value: 'dynamic', label: 'Dynamic' },
+  ]`;
+
+  return {
+    type: 'mdxJsxAttribute',
+    name: 'values',
+    value: createExpression(value),
+  };
+}
+
 function createTabItem(
   value: string,
   label: string,
   code: string,
-  codeNode: Element,
-  originalCodeBlock: Element,
-  cleanData: Record<string, unknown>,
+  originalCodeNode: MarkdownCodeNode,
   isDefault = false
-): Element {
-  const children: Element['children'] = [
-    { type: 'text', value: '\n\n' },
-    {
-      type: 'element',
-      tagName: 'pre',
-      properties: originalCodeBlock.properties || {},
-      children: [
-        {
-          type: 'element',
-          tagName: 'code',
-          properties: codeNode.properties || {},
-          data: cleanData,
-          children: [{ type: 'text', value: code }],
-        },
-      ],
-    },
-    { type: 'text', value: '\n\n' },
-  ];
+): MdxJsxFlowElement {
+  const cleanMeta = originalCodeNode.meta
+    ?.replace(/\bstatic2dynamic\b\s*/g, '')
+    .trim();
 
   return {
-    type: 'element',
-    tagName: 'TabItem',
-    properties: {
-      value,
-      label,
-      ...(isDefault && { default: true }),
-    },
-    children,
+    type: 'mdxJsxFlowElement',
+    name: 'TabItem',
+    attributes: [
+      { type: 'mdxJsxAttribute', name: 'value', value },
+      { type: 'mdxJsxAttribute', name: 'label', value: label },
+      ...(isDefault
+        ? [{ type: 'mdxJsxAttribute' as const, name: 'default' }]
+        : []),
+    ],
+    children: [
+      {
+        type: 'code',
+        lang: originalCodeNode.lang,
+        meta: cleanMeta,
+        value: code,
+      },
+    ],
   };
 }
 
@@ -2324,29 +2364,20 @@ function createTabItem(
  * Create a Tabs element with both static and dynamic TabItems
  */
 function createTabsWithBothConfigs(
-  staticCode: string,
-  dynamicCode: string,
-  originalCodeBlock: Element
-): Element {
-  const codeNode = getFirstChildElement(originalCodeBlock);
-
-  if (!codeNode) {
-    throw new Error(
-      'rehype-static-to-dynamic: Expected code element in code block'
-    );
-  }
-
-  // Remove 'static2dynamic' from meta for the actual code blocks
-  const rawMeta = getMeta(codeNode.data) ?? '';
-  const cleanMeta = rawMeta.replace(/\bstatic2dynamic\b\s*/g, '').trim();
-  const cleanData = { ...getDataObject(codeNode.data), meta: cleanMeta };
-
+  originalCodeNode: MarkdownCodeNode,
+  dynamicCode: string
+): MdxJsxFlowElement {
   const tabItems = [
-    { value: 'static', label: 'Static', code: staticCode, isDefault: true },
+    {
+      value: 'static',
+      label: 'Static',
+      code: originalCodeNode.value,
+      isDefault: true,
+    },
     { value: 'dynamic', label: 'Dynamic', code: dynamicCode, isDefault: false },
   ];
 
-  const children: Element['children'] = [];
+  const children: MdxNode[] = [];
 
   tabItems.forEach((item) => {
     children.push({ type: 'text', value: '\n' });
@@ -2355,9 +2386,7 @@ function createTabsWithBothConfigs(
         item.value,
         item.label,
         item.code,
-        codeNode,
-        originalCodeBlock,
-        cleanData,
+        originalCodeNode,
         item.isDefault
       )
     );
@@ -2366,12 +2395,13 @@ function createTabsWithBothConfigs(
   children.push({ type: 'text', value: '\n' });
 
   return {
-    type: 'element',
-    tagName: 'Tabs',
-    properties: {
-      groupId: 'config',
-      queryString: 'config',
-    },
+    type: 'mdxJsxFlowElement',
+    name: 'Tabs',
+    attributes: [
+      { type: 'mdxJsxAttribute', name: 'groupId', value: 'config' },
+      { type: 'mdxJsxAttribute', name: 'queryString', value: 'config' },
+      createValuesAttribute(),
+    ],
     children,
   };
 }

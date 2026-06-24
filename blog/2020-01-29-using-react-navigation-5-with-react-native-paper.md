@@ -8,7 +8,7 @@ This is a guest post by the [React Native Paper](https://reactnativepaper.com/) 
 
 In this blog post, we'll show you how to build a Twitter clone app using React Navigation v5 and Paper.
 
-<!--truncate-->
+{/* truncate */}
 
 ## Introduction
 

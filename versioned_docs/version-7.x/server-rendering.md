@@ -138,8 +138,8 @@ app.use(async (ctx) => {
 
 Make sure that you have specified a `title` option for your screens:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const Stack = createNativeStackNavigator({
@@ -163,7 +163,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Navigator>
@@ -187,7 +187,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Handling 404 or other status codes
 

@@ -261,8 +261,8 @@ After changing the Babel configuration or installing native dependencies, clear 
 
 If you wrap the container in a `View`, make sure the `View` stretches to fill the container using `flex: 1`:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import * as React from 'react';
@@ -284,7 +284,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import * as React from 'react';
@@ -302,7 +302,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## I get the warning "Non-serializable values were found in the navigation state"
 
@@ -331,8 +331,8 @@ LogBox.ignoreLogs([
 
 This can happen when you pass a React component to an option that accepts a function returning a react element. For example, the [`headerTitle` option in native stack navigator](native-stack-navigator.md#headertitle) expects a function returning a react element:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const Stack = createNativeStackNavigator({
@@ -349,7 +349,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Screen
@@ -363,12 +363,12 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 If you directly pass a function here, you'll get this error when using hooks:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const Stack = createNativeStackNavigator({
@@ -386,7 +386,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Screen
@@ -401,7 +401,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 The same applies to other options like `headerLeft`, `headerRight`, `tabBarIcon` etc. as well as props such as `tabBar`, `drawerContent` etc.
 
@@ -468,7 +468,7 @@ This usually means that TypeScript doesn't know the route names and params for y
 Ensure the following:
 
 - You have configured global types for your navigator. See [specifying the root navigator's type](typescript.md#specifying-the-root-navigators-type).
-- If you are using the dynamic API, you have provided a param list as a generic (e.g. `createStackNavigator<MyParamList>()`) and that your screen names match the keys in that param list. See [specifying param types for screens](typescript.md#specifying-param-types-for-screens-dynamic).
+- If you are using the dynamic API, you have provided a param list as a generic (e.g. `createStackNavigator<MyParamList>()`) and that your screen names match the keys in that param list. See [specifying param types for screens](typescript.md#specifying-param-types-for-screens).
 
 ## Screens are unmounting/remounting during navigation
 
@@ -497,8 +497,8 @@ Here, every time the component re-renders, a new function will be created and pa
 
 Another easy to identify example of this is when you create a component inside another component:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 function App() {
@@ -519,7 +519,7 @@ function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 function App() {
@@ -536,7 +536,7 @@ function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Or when you use a higher order component (such as `connect` from Redux, or `withX` functions that accept a component) inside another component:
 
@@ -552,8 +552,8 @@ function App() {
 
 If you're unsure, it's always best to make sure that the components you are using as screens are defined outside of a React component. They could be defined in another file and imported, or defined at the top level scope in the same file:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const Home = () => {
@@ -576,7 +576,7 @@ function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const Home = () => {
@@ -595,6 +595,6 @@ function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This is not React Navigation specific, but related to React in general. You should always avoid creating components during render, whether you are using React Navigation or not.

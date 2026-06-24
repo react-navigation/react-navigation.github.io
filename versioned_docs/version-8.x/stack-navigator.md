@@ -47,8 +47,8 @@ npm install @react-navigation/stack@next
 
 The navigator depends on [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) for gestures and optionally [`@react-native-masked-view/masked-view`](https://github.com/react-native-masked-view/masked-view) for [UIKit style animations for the header](#headerstyleinterpolator).
 
-<Tabs groupId='framework' queryString="framework">
-<TabItem value='expo' label='Expo' default>
+<FrameworkTabs>
+<TabItem value='expo'>
 
 If you have a Expo managed project, in your project directory, run:
 
@@ -57,7 +57,7 @@ npx expo install react-native-gesture-handler @react-native-masked-view/masked-v
 ```
 
 </TabItem>
-<TabItem value='community-cli' label='Community CLI'>
+<TabItem value='community-cli'>
 
 If you have a bare React Native project, in your project directory, run:
 
@@ -66,7 +66,7 @@ npm install react-native-gesture-handler @react-native-masked-view/masked-view
 ```
 
 </TabItem>
-</Tabs>
+</FrameworkTabs>
 
 If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
 
@@ -1092,8 +1092,8 @@ With these options, it's possible to build custom transition animations for scre
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import { TransitionSpecs } from '@react-navigation/stack';
@@ -1112,7 +1112,7 @@ Profile: {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import { TransitionSpecs } from '@react-navigation/stack';
@@ -1132,7 +1132,7 @@ import { TransitionSpecs } from '@react-navigation/stack';
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 #### `CardStyleInterpolators`
 
@@ -1426,8 +1426,8 @@ A transparent modal is like a modal dialog which overlays the screen. The previo
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 screens: {
@@ -1442,7 +1442,7 @@ screens: {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Navigator>
@@ -1456,7 +1456,7 @@ screens: {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Now, when you navigate to the `Modal` screen, it'll have a transparent background and the `Home` screen will be visible underneath.
 

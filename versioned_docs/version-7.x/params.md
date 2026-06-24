@@ -108,8 +108,8 @@ export default function App() {
 
 Initial params can be specified in `initialParams`. These are used when navigating to the screen without params, and are shallow merged with any params that you pass:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 {
@@ -122,7 +122,7 @@ Initial params can be specified in `initialParams`. These are used when navigati
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Screen
@@ -134,7 +134,7 @@ Initial params can be specified in `initialParams`. These are used when navigati
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Updating params
 

@@ -6,7 +6,7 @@ tags: [announcement]
 
 React Navigation steps firmly into the next level and we’re very excited to announce to you something great happening in React Navigation codebase.
 
-<!--truncate-->
+{/* truncate */}
 
 ## Make it custom
 

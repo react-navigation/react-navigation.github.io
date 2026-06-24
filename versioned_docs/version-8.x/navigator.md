@@ -9,8 +9,8 @@ import TabItem from '@theme/TabItem';
 
 A navigator is responsible for managing and rendering a set of screens. It can be created using the `createXNavigator` functions, e.g. [`createStackNavigator`](stack-navigator.md), [`createNativeStackNavigator`](native-stack-navigator.md), [`createBottomTabNavigator`](bottom-tab-navigator.md), [`createMaterialTopTabNavigator`](material-top-tab-navigator.md), [`createDrawerNavigator`](drawer-navigator.md) etc.:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const MyStack = createNativeStackNavigator({
@@ -22,7 +22,7 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const Stack = createNativeStackNavigator();
@@ -38,7 +38,7 @@ function MyStack() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 In addition to the built-in navigators, it's also possible to build your custom navigators or use third-party navigators. See [custom navigators](custom-navigators.md) for more details.
 
@@ -52,8 +52,8 @@ There is a set of common configurations that are shared across all navigators:
 
 The name of the route to render on the first load of the navigator.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const MyStack = createNativeStackNavigator({
@@ -67,7 +67,7 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const Stack = createNativeStackNavigator();
@@ -86,7 +86,7 @@ function MyStack() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### Layout
 
@@ -96,8 +96,8 @@ The difference from adding a wrapper around the navigator manually is that the c
 
 It takes a function that returns a React element:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const MyStack = createNativeStackNavigator({
@@ -121,7 +121,7 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const Stack = createNativeStackNavigator();
@@ -150,14 +150,14 @@ function MyStack() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### Screen options
 
 Default options to use for all the screens in the navigator. It accepts either an object or a function returning an object:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const MyStack = createNativeStackNavigator({
@@ -174,7 +174,7 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const Stack = createNativeStackNavigator();
@@ -194,7 +194,7 @@ function MyStack() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 See [Options for screens](screen-options.md) for more details and examples.
 
@@ -208,8 +208,8 @@ A screen layout is a wrapper around each screen in the navigator. It makes it ea
 
 It takes a function that returns a React element:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const MyStack = createNativeStackNavigator({
@@ -236,7 +236,7 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const Stack = createNativeStackNavigator();
@@ -268,7 +268,7 @@ function MyStack() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### Router
 
@@ -276,8 +276,8 @@ Routers can be customized with the `router` prop on navigator to override how na
 
 It takes a function that receives the original router and returns an object with overrides:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const MyStack = createNativeStackNavigator({
@@ -301,7 +301,7 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const Stack = createNativeStackNavigator();
@@ -330,7 +330,7 @@ function MyStack() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 The function passed to `router` **must be a pure function and cannot reference outside dynamic variables**.
 
@@ -366,8 +366,8 @@ Caveats:
 
 Example usage:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createNativeStackNavigator({
@@ -390,7 +390,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Navigator
@@ -406,6 +406,6 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 The most common use case for this is to [show the correct screen based on authentication based on deep link](auth-flow.md#handling-deep-links-after-auth).

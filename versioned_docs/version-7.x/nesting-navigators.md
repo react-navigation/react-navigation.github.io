@@ -9,8 +9,8 @@ import TabItem from '@theme/TabItem';
 
 Nesting navigators means rendering a navigator inside a screen of another navigator, for example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Nested navigators" snack
 import * as React from 'react';
@@ -82,7 +82,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Nested navigators" snack
 import * as React from 'react';
@@ -159,7 +159,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 In this example, a tab navigator (`HomeTabs`) is nested inside a stack navigator (`RootStack`) under the `Home` screen. The structure looks like this:
 
@@ -209,8 +209,8 @@ navigation.dispatch(DrawerActions.toggleDrawer());
 
 Screens in a nested navigator don't receive events from the parent navigator (like `tabPress`). To listen to parent's events, use [`navigation.getParent`](navigation-object.md#getparent):
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Events from parent" snack
 import * as React from 'react';
@@ -295,7 +295,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Events from parent" snack
 import * as React from 'react';
@@ -384,7 +384,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Here `'MyTabs'` is the `id` of the parent navigator whose events you want to listen to.
 
@@ -403,8 +403,8 @@ Common patterns:
 
 Consider the following example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Navigating to nested screen" snack
 import * as React from 'react';
@@ -478,7 +478,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Navigating to nested screen" snack
 import * as React from 'react';
@@ -557,7 +557,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 To navigate to the `More` screen (which contains `MoreTabs`) from your `HomeScreen`:
 
@@ -577,8 +577,8 @@ Now `Messages` will be shown instead of `Feed`.
 
 You can also pass params by specifying a `params` key:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Navigating to nested screen" snack
 import * as React from 'react';
@@ -658,7 +658,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Navigating to nested screen" snack
 import * as React from 'react';
@@ -743,7 +743,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 If the navigator was already rendered, navigating to another screen will push a new screen in case of stack navigator.
 
@@ -788,8 +788,8 @@ This affects what happens when pressing the back button. When there's an initial
 
 When nesting navigators, you may see headers from both parent and child. To show only the child navigator's header, set `headerShown: false` on the parent screen:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Nested navigators" snack
 import * as React from 'react';
@@ -861,7 +861,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Nested navigators" snack
 import * as React from 'react';
@@ -940,12 +940,12 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This applies regardless of the nesting structure. If you don't want headers in any of the navigators, specify `headerShown: false` in all of them:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const HomeTabs = createBottomTabNavigator({
@@ -974,7 +974,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 function HomeTabs() {
@@ -1009,7 +1009,7 @@ function RootStack() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Best practices when nesting
 
@@ -1021,8 +1021,8 @@ Minimize nesting as much as possible. Nesting has many downsides:
 
 Think of nesting as a way to achieve the UI you want, not a way to organize your code. To group screens for organization, use the [`Group`](group.md) component for dynamic configuration or [`groups` property](static-configuration.md#groups) for static configuration.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const MyStack = createNativeStackNavigator({
@@ -1061,7 +1061,7 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Navigator>
@@ -1087,4 +1087,4 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>

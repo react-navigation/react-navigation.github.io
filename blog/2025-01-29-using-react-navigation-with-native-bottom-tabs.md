@@ -8,7 +8,7 @@ This is a guest post by Oskar Kwaśniewski, creator of `react-native-bottom-tabs
 
 This blog post will explain the differences between the JavaScript Bottom Tabs navigator and provide a step-by-step guide for integrating React Navigation with the Native Bottom Tabs Navigator.
 
-<!--truncate-->
+{/* truncate */}
 
 ## Introduction
 

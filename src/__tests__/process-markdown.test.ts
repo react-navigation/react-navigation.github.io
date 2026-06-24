@@ -51,6 +51,32 @@ describe('processMarkdown', () => {
     assert.ok(result.includes('After tabs.'));
   });
 
+  test('transforms reusable tab groups using their configured labels', async () => {
+    const input = dedent`
+      <ConfigTabs>
+      <TabItem value="static">
+
+      Static content here.
+
+      </TabItem>
+      <TabItem value="dynamic">
+
+      Dynamic content here.
+
+      </TabItem>
+      </ConfigTabs>
+    `;
+
+    const { content: result } = await processMarkdown(input);
+
+    assert.ok(!result.includes('<ConfigTabs'));
+    assert.ok(!result.includes('<TabItem'));
+    assert.ok(result.includes('**Static:**'));
+    assert.ok(result.includes('Static content here.'));
+    assert.ok(result.includes('**Dynamic:**'));
+    assert.ok(result.includes('Dynamic content here.'));
+  });
+
   test('transforms nested Tabs', async () => {
     const input = dedent`
       <Tabs groupId='framework' queryString="framework">

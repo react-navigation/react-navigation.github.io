@@ -21,8 +21,8 @@ When going back from `Profile` to `Home`:
 
 Similar behavior can be observed (in combination) with other navigators as well. Consider a tab navigator with two tabs, where each tab is a stack navigator:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Navigation lifecycle" snack
 import * as React from 'react';
@@ -151,7 +151,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Navigation lifecycle" snack
 import * as React from 'react';
@@ -288,7 +288,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 <div className="device-frame">
 <video playsInline autoPlay muted loop>
@@ -304,8 +304,8 @@ Now that we understand how React lifecycle methods work in React Navigation, let
 
 To detect when a screen gains or loses focus, we can listen to `focus` and `blur` events:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Focus and blur" snack
 import * as React from 'react';
@@ -393,7 +393,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Focus and blur" snack
 import * as React from 'react';
@@ -484,14 +484,14 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 See [Navigation events](navigation-events.md) for more details.
 
 For performing side effects, we can use the [`useFocusEffect`](use-focus-effect.md) - it's like `useEffect` but ties to the navigation lifecycle - it runs the effect when the screen comes into focus and cleans it up when the screen goes out of focus:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Focus effect" snack
 import * as React from 'react';
@@ -557,7 +557,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Focus effect" snack
 import * as React from 'react';
@@ -626,7 +626,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 <div className="device-frame">
 <video playsInline autoPlay muted loop>

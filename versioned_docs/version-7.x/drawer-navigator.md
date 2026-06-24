@@ -30,8 +30,8 @@ npm install @react-navigation/drawer
 
 The navigator depends on [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) for gestures and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) for animations.
 
-<Tabs groupId='framework' queryString="framework">
-<TabItem value='expo' label='Expo' default>
+<FrameworkTabs>
+<TabItem value='expo'>
 
 If you have a Expo managed project, in your project directory, run:
 
@@ -40,7 +40,7 @@ npx expo install react-native-gesture-handler react-native-reanimated react-nati
 ```
 
 </TabItem>
-<TabItem value='community-cli' label='Community CLI'>
+<TabItem value='community-cli'>
 
 If you have a bare React Native project, in your project directory, run:
 
@@ -51,7 +51,7 @@ npm install react-native-gesture-handler react-native-reanimated react-native-wo
 After installation, configure the Reanimated Babel Plugin in your project following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
 </TabItem>
-</Tabs>
+</FrameworkTabs>
 
 If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
 
@@ -265,8 +265,8 @@ function CustomDrawerContent({ navigation }) {
 
 To use the custom component, we need to pass it in the `drawerContent` prop:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 createDrawerNavigator({
@@ -278,7 +278,7 @@ createDrawerNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
@@ -287,7 +287,7 @@ createDrawerNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### Options
 
@@ -325,8 +325,8 @@ Background color for the active item in the drawer.
 
 ![Drawer active background color](/assets/navigators/drawer/drawer-active-background-color.png)
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 createDrawerNavigator({
@@ -344,7 +344,7 @@ createDrawerNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Drawer.Navigator
@@ -361,7 +361,7 @@ createDrawerNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 #### `drawerInactiveTintColor`
 
@@ -412,8 +412,8 @@ Style object for the wrapper view.
 
 Style object for the drawer component. You can pass a custom background color for a drawer or a custom width here.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 createDrawerNavigator({
@@ -430,7 +430,7 @@ createDrawerNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Drawer.Navigator
@@ -446,7 +446,7 @@ createDrawerNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 #### `drawerPosition`
 

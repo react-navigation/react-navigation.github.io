@@ -7,9 +7,9 @@ import llmsTxt from './src/plugins/llms-txt.ts';
 import ogImage from './src/plugins/og-image.ts';
 import reactNavigationVersions from './src/plugins/react-navigation-versions.ts';
 import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.ts';
-import rehypeStaticToDynamic from './src/plugins/rehype-static-to-dynamic.ts';
 import rehypeVideoAspectRatio from './src/plugins/rehype-video-aspect-ratio.ts';
 import remarkNpm2Yarn from './src/plugins/remark-npm2yarn.ts';
+import remarkStaticToDynamic from './src/plugins/remark-static-to-dynamic.ts';
 import darkTheme from './src/themes/react-navigation-dark';
 import lightTheme from './src/themes/react-navigation-light';
 
@@ -26,6 +26,10 @@ const config: Config = {
   onBrokenLinks: 'throw',
   onBrokenAnchors: 'throw',
   onDuplicateRoutes: 'throw',
+  future: {
+    v4: true,
+    faster: true,
+  },
   markdown: {
     hooks: {
       onBrokenMarkdownLinks: 'throw',
@@ -176,24 +180,28 @@ const config: Config = {
           },
           breadcrumbs: false,
           sidebarCollapsed: false,
-          remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
+          remarkPlugins: [
+            [remarkNpm2Yarn, { sync: true }],
+            remarkStaticToDynamic,
+          ],
           rehypePlugins: [
             [
               rehypeCodeblockMeta,
               { match: { snack: true, lang: true, tabs: true } },
             ],
             [rehypeVideoAspectRatio, { staticDir: 'static' }],
-            rehypeStaticToDynamic,
           ],
         },
         blog: {
-          remarkPlugins: [[remarkNpm2Yarn, { sync: true }]],
+          remarkPlugins: [
+            [remarkNpm2Yarn, { sync: true }],
+            remarkStaticToDynamic,
+          ],
           rehypePlugins: [
             [
               rehypeCodeblockMeta,
               { match: { snack: true, lang: true, tabs: true } },
             ],
-            rehypeStaticToDynamic,
           ],
         },
         pages: {

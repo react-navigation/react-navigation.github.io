@@ -123,7 +123,7 @@ In the above snippet:
 
 Using `typeof FeedTabs` lets typed hooks such as `useNavigation('Latest')`, `useRoute('Latest')`, and `useNavigationState('Latest', selector)` infer the screens inside the nested tab navigator.
 
-This is based on how we'd define the type for a screen with a nested navigator with the dynamic API. See [Specifying param types for screens](typescript.md#specifying-param-types-for-screens-dynamic).
+This is based on how we'd define the type for a screen with a nested navigator with the dynamic API. See [Specifying param types for screens](typescript.md#specifying-param-types-for-screens).
 
 ## Dynamic root navigator, static nested navigator
 

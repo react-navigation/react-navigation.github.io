@@ -14,8 +14,8 @@ First, make sure you have the following configuration in your `tsconfig.json` un
 - `strict: true` or `strictNullChecks: true` - Necessary for IntelliSense and type inference to work correctly.
 - `moduleResolution: "bundler"` - Necessary to resolve the types correctly and match the behavior of [Metro](https://metrobundler.dev/) and other bundlers.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ## Setting up the types
 
@@ -340,13 +340,13 @@ function Header() {
 If you render a dynamic navigator inside a static navigator, see [Mixing Static & Dynamic APIs](combine-static-with-dynamic.md#static-root-navigator-dynamic-nested-navigator) for the additional typing and linking configuration needed for the nested navigator.
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
-## Setting up the types {#setting-up-the-types-dynamic}
+<h2 id="setting-up-the-types-dynamic">Setting up the types</h2>
 
 There are 2 steps to configure TypeScript with the dynamic API:
 
-### Specifying the root navigator's type {#specifying-the-root-navigators-type-dynamic}
+<h3 id="specifying-the-root-navigators-type-dynamic">Specifying the root navigator's type</h3>
 
 For the type-inference to work, React Navigation needs to know the type of the root navigator in your app. To do this, you can declare a module augmentation for `@react-navigation/native` and extend the `RootNavigator` interface with the type of your root navigator.
 
@@ -373,7 +373,7 @@ Here `RootStack` refers to the navigator used at the root of your app. The `Root
 
 This is needed to type-check hooks such as [`useNavigation`](use-navigation.md), [`useRoute`](use-route.md), [`useNavigationState`](use-navigation-state.md) etc.
 
-### Specifying param types for screens {#specifying-param-types-for-screens-dynamic}
+<h3 id="specifying-param-types-for-screens-dynamic">Specifying param types for screens</h3>
 
 To type check route names and params, we need to create an object type with mappings from route names to the params of each route. For example, say we have a route called `Profile` in our root navigator which should have a param `userId`:
 
@@ -454,7 +454,7 @@ The type containing the mapping must be a type alias (e.g. `type RootStackParamL
 
 :::
 
-## Using typed hooks {#using-typed-hooks-dynamic}
+<h2 id="using-typed-hooks-dynamic">Using typed hooks</h2>
 
 The [`useRoute`](use-route.md), [`useNavigation`](use-navigation.md), and [`useNavigationState`](use-navigation-state.md) hooks accept the name of the current screen or any parent screen where it's nested as an argument to infer the correct types.
 
@@ -940,4 +940,4 @@ function PopularScreen({ navigation, route }: HomeTabScreenProps<'Popular'>) {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>

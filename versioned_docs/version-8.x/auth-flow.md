@@ -32,8 +32,8 @@ We want the following behavior from our authentication flow:
 
 We can configure different screens to be available based on some condition. For example, if the user is signed in, we want `Home` to be available. If the user is not signed in, we want `SignIn` to be available.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Authentication flow" snack
 import * as React from 'react';
@@ -124,7 +124,7 @@ We'll discuss how to provide the context value later.
 
 </TabItem>
 
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Authentication flow" snack
 import * as React from 'react';
@@ -180,7 +180,7 @@ When the value of `isSignedIn` changes, the screens defined based on the conditi
 The order of the screens matters when there are multiple screens matching the condition. For example, if there are two screens defined based on `isSignedIn`, the first screen will be shown when the condition is `true`.
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Add more screens
 
@@ -192,8 +192,8 @@ For our case, let's say we have 3 screens:
 
 So our navigator will look like:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createNativeStackNavigator({
@@ -216,7 +216,7 @@ const Navigation = createStaticNavigation(RootStack);
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const Stack = createNativeStackNavigator();
@@ -245,14 +245,14 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Notice how we have only defined the `Home` and `SignIn` screens here, and not the `SplashScreen`. The `SplashScreen` should be rendered before we render any navigators so that we don't render incorrect screens before we know whether the user is signed in or not.
 
 When we use this in our component, it'd look something like this:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 if (isLoading) {
@@ -270,7 +270,7 @@ return (
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 if (isLoading) {
@@ -300,7 +300,7 @@ return (
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `SecureStore` and validating the token.
 
@@ -308,8 +308,8 @@ Next, we're exposing the sign in status via the `SignInContext` so that it's ava
 
 In the above example, we have one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly for the screens accessible after sign in, you probably have more than one screen.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 We can use [`groups`](static-configuration.md#groups) to define multiple screens:
 
@@ -339,7 +339,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 We can use [`React.Fragment`](https://react.dev/reference/react/Fragment) or [`Group`](group.md) to define multiple screens:
 
@@ -365,7 +365,7 @@ Instead of having your login-related screens and rest of the screens in two diff
 :::
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Implement the logic for restoring the token
 
@@ -403,8 +403,8 @@ In our component, we will:
 - Expose the methods for sign in and sign out to child components using `AuthContext`
 
 So our component will look like this:
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Signing in and signing out with AuthContext" snack dependencies=expo-secure-store
 // codeblock-focus-start
@@ -587,7 +587,7 @@ const Navigation = createStaticNavigation(RootStack);
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Signing in and signing out with AuthContext" snack dependencies=expo-secure-store
 // codeblock-focus-start
@@ -755,7 +755,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Fill in other components
 
@@ -793,8 +793,8 @@ You can similarly fill in the other screens according to your requirements.
 
 Consider the following example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createNativeStackNavigator({
@@ -821,7 +821,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 isSignedIn ? (
@@ -840,14 +840,14 @@ isSignedIn ? (
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Here we have specific screens such as `SignIn`, `Home` etc. which are only shown depending on the sign in state. But we also have the `Help` screen which can be shown regardless of the login status. This also means that if the sign in state changes when the user is in the `Help` screen, they'll stay on the `Help` screen.
 
 This can be a problem, we probably want the user to be taken to the `SignIn` screen or `Home` screen instead of keeping them on the `Help` screen.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 To make this work, we can move the `Help` screen to both of the groups instead of keeping it outside. This will ensure that the [`navigationKey`](screen.md#navigation-key) (the name of the group) for the screen changes when the sign in state changes.
 
@@ -877,7 +877,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 To make this work, we can use [`navigationKey`](screen.md#navigation-key). When the `navigationKey` changes, React Navigation will remove all the screen.
 
@@ -927,7 +927,7 @@ If you have a bunch of shared screens, you can also use [`navigationKey` with a 
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 The examples above show stack navigator, but you can use the same approach with any navigator.
 
@@ -955,8 +955,8 @@ This API is experimental and may change in a minor release.
 
 :::
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createNativeStackNavigator({
@@ -979,7 +979,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Navigator
@@ -995,7 +995,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 The `routeNamesChangeBehavior` option allows you to control how React Navigation handles navigation when the available screens change because of conditions such as authentication state. When `lastUnhandled` is specified, React Navigation will remember the last screen that couldn't be handled, and after the condition changes, it'll automatically navigate to that screen if it's now available.
 

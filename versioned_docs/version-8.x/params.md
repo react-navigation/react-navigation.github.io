@@ -159,8 +159,8 @@ export default function App() {
 
 You can specify default params for a screen using `initialParams`. These are used when no params are passed during navigation, and are shallow merged with any params you do pass:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createNativeStackNavigator({
@@ -175,7 +175,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Screen
@@ -187,7 +187,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Updating params
 

@@ -8,7 +8,7 @@ We're excited to announce the release candidate of React Navigation 7.0.
 
 This release includes a new static API that simplifies the configuration of navigators and improves TypeScript and deep linking support. As well as various other improvements and new features.
 
-<!--truncate-->
+{/* truncate */}
 
 You can read the full list of changes in the [upgrade guide](/docs/upgrading-from-6.x). Here are some highlights:
 

@@ -9,8 +9,8 @@ import TabItem from '@theme/TabItem';
 
 Sometimes we may want to hide the tab bar in specific screens in a stack navigator nested in a tab navigator. Let's say we have 5 screens: `Home`, `Feed`, `Notifications`, `Profile` and `Settings`, and your navigation structure looks like this:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Hiding tab bar in screens"
 const HomeStack = createNativeStackNavigator({
@@ -37,7 +37,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 function HomeStack() {
@@ -64,14 +64,14 @@ function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 With this structure, when we navigate to the `Profile` or `Settings` screen, the tab bar will still stay visible over those screens.
 
 But if we want to show the tab bar only on the `Home`, `Feed` and `Notifications` screens, but not on the `Profile` and `Settings` screens, we'll need to change the navigation structure. The easiest way to achieve this is to nest the tab navigator inside the first screen of the stack instead of nesting stack inside tab navigator:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Hiding tabbar" snack
 import * as React from 'react';
@@ -131,7 +131,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Hiding tabbar" snack
 import * as React from 'react';
@@ -192,6 +192,6 @@ export default App;
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 After re-organizing the navigation structure, now if we navigate to the `Profile` or `Settings` screens, the tab bar won't be visible over the screen anymore.

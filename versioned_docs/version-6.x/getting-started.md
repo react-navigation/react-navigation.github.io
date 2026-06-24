@@ -72,8 +72,8 @@ work on Android devices. Edit `MainActivity.kt` or `MainActivity.java` file whic
 
 Add the highlighted code to the body of `MainActivity` class:
 
-<Tabs>
-  <TabItem value='kotlin' label='Kotlin' default>
+<AndroidLanguageTabs>
+  <TabItem value='kotlin'>
     ```kotlin {3-5}
     class MainActivity: ReactActivity() {
       // ...
@@ -84,7 +84,7 @@ Add the highlighted code to the body of `MainActivity` class:
     }
     ```
   </TabItem>
-  <TabItem value='java' label='Java'>
+  <TabItem value='java'>
     ```java {3-6}
     public class MainActivity extends ReactActivity {
       // ...
@@ -96,7 +96,7 @@ Add the highlighted code to the body of `MainActivity` class:
     }
     ```
   </TabItem>
-</Tabs>
+</AndroidLanguageTabs>
 
 and make sure to add the following import statement at the top of this file below your package statement:
 

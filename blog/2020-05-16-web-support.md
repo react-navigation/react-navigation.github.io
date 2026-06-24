@@ -10,7 +10,7 @@ One major pain point of reusing code for the web app has been navigation. React 
 
 We have finally added preliminary web support to React Navigation. Let's take a look at the changes.
 
-<!--truncate-->
+{/* truncate */}
 
 ## Integration with URLs in browsers
 

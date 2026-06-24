@@ -2,13 +2,31 @@ import dedent from 'dedent';
 import assert from 'node:assert';
 import { describe, test } from 'node:test';
 import rehypeStaticToDynamic, {
-  type RehypeStaticToDynamicElement as Element,
-  type RehypeStaticToDynamicElementChild as ElementChild,
   type RehypeStaticToDynamicMdxEsm as MdxEsm,
-  type RehypeStaticToDynamicRoot as Root,
-  type RehypeStaticToDynamicText as Text,
-  type RehypeStaticToDynamicTreeChild as TreeChild,
-} from '../plugins/rehype-static-to-dynamic.ts';
+} from '../plugins/remark-static-to-dynamic.ts';
+
+type Root = {
+  type: 'root';
+  children: unknown[];
+};
+
+type CodeNode = {
+  type: 'code';
+  value: string;
+  lang?: string;
+  meta?: string;
+};
+
+type MdxElement = {
+  type: 'mdxJsxFlowElement';
+  name: string;
+  attributes: Array<{
+    type: 'mdxJsxAttribute';
+    name: string;
+    value?: string | unknown;
+  }>;
+  children: unknown[];
+};
 
 /**
  * Helper function to create a test tree structure
@@ -19,25 +37,12 @@ function createTestTree(code: string, extraChildren: MdxEsm[] = []): Root {
     children: [
       ...extraChildren,
       {
-        type: 'element',
-        tagName: 'pre',
-        properties: {},
-        children: [
-          {
-            type: 'element',
-            tagName: 'code',
-            properties: {},
-            data: { meta: 'static2dynamic' },
-            children: [
-              {
-                type: 'text',
-                value: code,
-              },
-            ],
-          },
-        ],
+        type: 'code',
+        value: code,
+        lang: 'tsx',
+        meta: 'static2dynamic',
       },
-    ] as Root['children'],
+    ],
   };
 
   return tree;
@@ -49,19 +54,20 @@ function createTestTree(code: string, extraChildren: MdxEsm[] = []): Root {
 function extractTransformedCode(tree: Root): string {
   // After transformation, the tree should have TabItem elements
   const tabsElement = tree.children.find(
-    (child): child is Element => isElement(child) && child.tagName === 'Tabs'
+    (child): child is MdxElement =>
+      isMdxElement(child) && child.name === 'Tabs'
   );
 
-  if (!isElement(tabsElement) || tabsElement.tagName !== 'Tabs') {
+  if (!isMdxElement(tabsElement) || tabsElement.name !== 'Tabs') {
     throw new Error('Expected Tabs element not found');
   }
 
   // Find the "Dynamic" tab
   const dynamicTab = tabsElement.children.find(
-    (child): child is Element =>
-      isElement(child) &&
-      child.tagName === 'TabItem' &&
-      child.properties?.value === 'dynamic'
+    (child): child is MdxElement =>
+      isMdxElement(child) &&
+      child.name === 'TabItem' &&
+      getAttributeValue(child, 'value') === 'dynamic'
   );
 
   if (!dynamicTab) {
@@ -69,39 +75,33 @@ function extractTransformedCode(tree: Root): string {
   }
 
   // Extract the code from the dynamic tab
-  const preElement = dynamicTab.children.find(
-    (child): child is Element => isElement(child) && child.tagName === 'pre'
-  );
-
-  if (!preElement) {
-    throw new Error('Pre element not found in dynamic tab');
-  }
-
-  const codeElement = preElement.children.find(
-    (child): child is Element => isElement(child) && child.tagName === 'code'
-  );
+  const codeElement = dynamicTab.children.find(isCodeNode);
 
   if (!codeElement) {
     throw new Error('Code element not found');
   }
 
-  const textNode = codeElement.children.find(isTextNode);
-
-  return textNode?.value || '';
+  return codeElement.value;
 }
 
-function isElement(
-  node: TreeChild | ElementChild | undefined
-): node is Element {
-  return Boolean(node && node.type === 'element');
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
-function isMdxEsmNode(node: TreeChild | undefined): node is MdxEsm {
-  return Boolean(node && node.type === 'mdxjsEsm');
+function isMdxElement(node: unknown): node is MdxElement {
+  return isRecord(node) && node.type === 'mdxJsxFlowElement';
 }
 
-function isTextNode(node: ElementChild): node is Text {
-  return node.type === 'text';
+function isMdxEsmNode(node: unknown): node is MdxEsm {
+  return isRecord(node) && node.type === 'mdxjsEsm';
+}
+
+function isCodeNode(node: unknown): node is CodeNode {
+  return isRecord(node) && node.type === 'code' && typeof node.value === 'string';
+}
+
+function getAttributeValue(node: MdxElement, name: string): unknown {
+  return node.attributes.find((attribute) => attribute.name === name)?.value;
 }
 
 describe('rehype-static-to-dynamic', () => {

@@ -71,6 +71,27 @@ function createLabelWithIcon(
   };
 }
 
+function createValuesAttribute(
+  packageManagers: PackageManager[]
+): MdxJsxAttribute {
+  const value = `[${packageManagers
+    .map(
+      (pm) =>
+        `{ value: '${pm}', label: <><img className="pm-icon" src="/assets/pm/${pm}.svg" alt="" />${pm}</> }`
+    )
+    .join(', ')}]`;
+
+  return {
+    type: 'mdxJsxAttribute',
+    name: 'values',
+    value: {
+      type: 'mdxJsxAttributeValueExpression',
+      value,
+      data: { estree: parseExpression(value) },
+    },
+  };
+}
+
 function createTabItem({ code, node, pm }: CreateTabItemOptions): MdxNode {
   return {
     type: 'mdxJsxFlowElement',
@@ -93,13 +114,17 @@ function transformNode(
   converters: PackageManager[]
 ): MdxNode {
   const npmCode = node.value;
+  const packageManagers: PackageManager[] = ['npm', ...converters];
 
   return {
     type: 'mdxJsxFlowElement',
     name: 'Tabs',
     attributes: sync
-      ? [{ type: 'mdxJsxAttribute', name: 'groupId', value: 'npm2yarn' }]
-      : [],
+      ? [
+          { type: 'mdxJsxAttribute', name: 'groupId', value: 'npm2yarn' },
+          createValuesAttribute(packageManagers),
+        ]
+      : [createValuesAttribute(packageManagers)],
     children: [
       createTabItem({ code: npmCode, node, pm: 'npm' }),
       ...converters.map((pm) =>

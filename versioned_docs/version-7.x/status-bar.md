@@ -13,8 +13,8 @@ If you don't have a navigation header, or your navigation header changes color b
 
 This is a simple task when using a stack. You can render the `StatusBar` component, which is exposed by React Native, and set your config.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Different status bar" snack
 import * as React from 'react';
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
 
 </TabItem>
 
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Different status bar" snack
 import * as React from 'react';
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 <video playsInline autoPlay muted loop>
   <source src="/assets/statusbar/status-stack-ios.mp4" />
@@ -225,8 +225,8 @@ function FocusAwareStatusBar(props) {
 
 Now, our screens (both `Screen1.js` and `Screen2.js`) will use the `FocusAwareStatusBar` component instead of the `StatusBar` component from React Native:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Different status bar based on tabs" snack
 import * as React from 'react';
@@ -326,7 +326,7 @@ const styles = StyleSheet.create({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Different status bar based on tabs" snack
 import * as React from 'react';
@@ -420,7 +420,7 @@ const styles = StyleSheet.create({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Although not necessary, you can use the `FocusAwareStatusBar` component in the screens of the native stack navigator as well.
 

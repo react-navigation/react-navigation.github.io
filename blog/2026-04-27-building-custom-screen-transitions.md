@@ -13,7 +13,7 @@ Most people already know their OS animations by muscle memory. That's why a cust
 
 [`react-native-screen-transitions`](https://screen-transitions.esjr.org) is a React Navigation transition toolkit for flows that need more control over navigation motion. In this article, we'll recreate an iOS-style page transition, then build up to a bounds-driven `navigation.zoom()` flow.
 
-<!--truncate-->
+{/* truncate */}
 
 One caveat before we start: this is not a blanket replacement for [`@react-navigation/native-stack`](/docs/native-stack-navigator) or [`@react-navigation/stack`](/docs/stack-navigator). If `native-stack` already does the job, keep using it. If the JS stack already gives you enough control, keep using that too. `react-native-screen-transitions` fits when a specific flow needs more freedom: custom gesture choreography, snap points, bounds-driven motion, or a Reanimated-first transition model.
 
@@ -29,8 +29,8 @@ npm install react-native-screen-transitions
 
 Next, install the necessary peer dependencies used by `react-native-screen-transitions`, and `@react-native-masked-view/masked-view` for the example later in the article:
 
-<Tabs groupId='framework' queryString="framework">
-<TabItem value='expo' label='Expo' default>
+<FrameworkTabs>
+<TabItem value='expo'>
 
 In your project directory, run:
 
@@ -45,7 +45,7 @@ npx expo install react-native-reanimated react-native-gesture-handler \
 This will install versions of these libraries that are compatible with your Expo SDK version.
 
 </TabItem>
-<TabItem value='community-cli' label='Community CLI'>
+<TabItem value='community-cli'>
 
 In your project directory, run:
 
@@ -64,7 +64,7 @@ npx pod-install ios
 ```
 
 </TabItem>
-</Tabs>
+</FrameworkTabs>
 
 ## Recreating the iOS page transition
 

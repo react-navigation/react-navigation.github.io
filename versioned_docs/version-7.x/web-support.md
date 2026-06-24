@@ -47,8 +47,8 @@ By default, screen components are bundled in the main bundle. This can lead to a
 
 To reduce the bundle size, you can use [dynamic `import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) with [`React.lazy`](https://react.dev/reference/react/lazy) to lazy load screens:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Lazy loading screens" snack
 import { Suspense, lazy } from 'react';
@@ -69,7 +69,7 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Lazy loading screens" snack
 import { Suspense, lazy } from 'react';
@@ -98,7 +98,7 @@ Make sure to use `React.lazy` **outside** the component containing the navigator
 :::
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This will split the screen components into separate chunks (depending on your bundler) which are loaded on-demand when the screen is rendered. This can significantly reduce the initial bundle size.
 

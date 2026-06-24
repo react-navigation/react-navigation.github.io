@@ -8,7 +8,7 @@ We've continued working on React Navigation 8.0 since the [March progress report
 
 This post covers the highlights that landed since March 2026.
 
-<!--truncate-->
+{/* truncate */}
 
 ## Minimum requirements
 

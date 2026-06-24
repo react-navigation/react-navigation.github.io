@@ -7,7 +7,7 @@ tags: [tutorial, ui-kitten]
 This is a guest post by the [UI Kitten](http://akveo.github.io/react-native-ui-kitten) team. If you like this guide, checkout UI Kitten for more!
 In this blog post, we'll show a step-by-step guide on using React Navigation 5 with UI Kitten.
 
-<!--truncate-->
+{/* truncate */}
 
 ## Introduction
 

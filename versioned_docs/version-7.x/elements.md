@@ -50,8 +50,8 @@ export default function App() {
 
 To use the header in a navigator, you can use the `header` option in the screen options:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Header with Native Stack" snack
 import * as React from 'react';
@@ -95,7 +95,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Header with Native Stack" snack
 import * as React from 'react';
@@ -144,7 +144,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 :::note
 
@@ -165,8 +165,8 @@ When a function is specified, it receives an object containing following propert
 - `style`: Style object for the `Text` component.
 - `children`: The title string (from `title` in `options`).
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createNativeStackNavigator({
@@ -189,7 +189,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Screen
@@ -209,7 +209,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 #### `headerTitleAlign`
 
@@ -241,8 +241,8 @@ It receives an object containing following properties:
 
 You can use it to implement your custom left button, for example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createNativeStackNavigator({
@@ -265,7 +265,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Screen
@@ -285,7 +285,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 #### `headerRight`
 
@@ -297,8 +297,8 @@ It receives an object containing following properties:
 - `pressColor`: The color of the material ripple (Android >= 5.0 only).
 - `pressOpacity`: The opacity of the button when it's pressed (Android < 5.0, and iOS).
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createNativeStackNavigator({
@@ -321,7 +321,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Screen
@@ -341,7 +341,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 #### `headerSearchBarOptions`
 
@@ -456,8 +456,8 @@ Function which returns a React Element to render as the background of the header
 
 For example, you can use this with `headerTransparent` to render a blur view to create a translucent header.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Header blur" snack dependencies=expo-blur
 import * as React from 'react';
@@ -524,7 +524,7 @@ export default App;
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Header blur" snack dependencies=expo-blur
 import * as React from 'react';
@@ -591,7 +591,7 @@ export default App;
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 #### `headerStatusBarHeight`
 

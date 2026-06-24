@@ -8,7 +8,7 @@ The documentation is now live at [reactnavigation.org](/docs/getting-started), a
 
 React Navigation 7 aims to improve the developer experience with a new static API as well as bring many new features and improvements.
 
-<!--truncate-->
+{/* truncate */}
 
 ## Highlights
 
