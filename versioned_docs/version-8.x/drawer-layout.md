@@ -6,11 +6,15 @@ sidebar_label: Drawer Layout
 
 <div className="feature-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/drawer/highlights/drawer-types.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/drawer/highlights/drawer-types.mp4" />
+  </video>
 
   [Multiple types](#drawertype)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/drawer/highlights/drawer-position.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/drawer/highlights/drawer-position.mp4" />
+  </video>
 
   [Position on left or right](#drawerposition)
 
@@ -30,8 +34,8 @@ npm install react-native-drawer-layout@next
 
 The library depends on [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) for gestures and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) for animations.
 
-<Tabs groupId='framework' queryString="framework">
-<TabItem value='expo' label='Expo' default>
+<FrameworkTabs>
+<TabItem value='expo'>
 
 If you have a Expo managed project, in your project directory, run:
 
@@ -40,7 +44,7 @@ npx expo install react-native-gesture-handler react-native-reanimated react-nati
 ```
 
 </TabItem>
-<TabItem value='community-cli' label='Community CLI'>
+<TabItem value='community-cli'>
 
 If you have a bare React Native project, in your project directory, run:
 
@@ -51,7 +55,7 @@ npm install react-native-gesture-handler react-native-reanimated react-native-wo
 After installation, configure the Reanimated Babel Plugin in your project following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
 </TabItem>
-</Tabs>
+</FrameworkTabs>
 
 If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
 

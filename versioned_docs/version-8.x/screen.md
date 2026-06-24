@@ -9,8 +9,8 @@ import TabItem from '@theme/TabItem';
 
 A screen represents routes in a navigator. A screen's configuration contains the component for the route, options, event listeners, etc.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 Screens can be defined under the `screens` key in the navigator configuration:
 
@@ -24,7 +24,7 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 A `Screen` component is returned from a `createXNavigator` function. After creating the navigator, it can be used as children of the `Navigator` component:
 
@@ -44,7 +44,7 @@ function MyStack() {
 You need to provide at least a name and a component to render for each screen.
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Configuration
 
@@ -52,8 +52,8 @@ You need to provide at least a name and a component to render for each screen.
 
 The name to use for the screen.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 The key in the `screens` object is used as the name:
 
@@ -69,7 +69,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 It can be passed in the `name` prop to the `Screen` component:
 
@@ -82,7 +82,7 @@ It can be passed in the `name` prop to the `Screen` component:
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This name is used to navigate to the screen:
 
@@ -98,8 +98,8 @@ While it is supported, we recommend avoiding spaces or special characters in scr
 
 Options are used to configure how the screen gets presented in the navigator. It accepts either an object or a function returning an object:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const Stack = createNativeStackNavigator({
@@ -117,7 +117,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```jsx
 <Stack.Screen
@@ -132,12 +132,12 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 When you pass a function, it'll receive the [`route`](route-object.md), [`navigation`](navigation-object.md) and [`theme`](themes.md) as arguments:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const Stack = createNativeStackNavigator({
@@ -155,7 +155,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```jsx
 <Stack.Screen
@@ -170,7 +170,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 See [Options for screens](screen-options.md) for more details and examples.
 
@@ -178,8 +178,8 @@ See [Options for screens](screen-options.md) for more details and examples.
 
 Initial params are used as the default params for the screen. If a screen is used as `initialRouteName`, it'll contain the params from `initialParams`. If you navigate to a new screen, the params passed are shallow merged with the initial params.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const Stack = createNativeStackNavigator({
@@ -194,7 +194,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```jsx
 <Stack.Screen
@@ -206,7 +206,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### ID
 
@@ -217,8 +217,8 @@ A screen can have an ID to identify it. The ID is used differently based on the 
 
 This can be done by specifying the `getId` callback. It receives an object with the route params:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const Stack = createStackNavigator({
@@ -233,7 +233,7 @@ const Stack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```jsx
 <Stack.Screen
@@ -245,7 +245,7 @@ const Stack = createStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 In the above example, `params.userId` is used as an ID for the `Profile` screen with `getId`. So if you navigate to `Profile` with the same `userId`, it'll update the params of the existing screen instead of pushing a new one. If you navigate to `Profile` with a different `userId`, it'll push a new screen onto the stack.
 
@@ -253,8 +253,8 @@ In the above example, `params.userId` is used as an ID for the `Profile` screen 
 
 Each screen must specify a component to render for that route.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 It can be passed under the `screen` property in the screen configuration:
 
@@ -270,7 +270,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 #### `component`
 
@@ -318,7 +318,7 @@ By default, React Navigation applies optimizations to screen components to preve
 :::
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### Layout
 
@@ -326,8 +326,8 @@ A layout is a wrapper around the screen. It makes it easier to provide things su
 
 It takes a function that returns a React element:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const Stack = createNativeStackNavigator({
@@ -355,7 +355,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```jsx
 <Stack.Screen
@@ -382,7 +382,7 @@ const Stack = createNativeStackNavigator({
 To specify a layout for all multiple screens, you can use `screenLayout` in a [group](group.md#screen-layout) or [navigator](navigator.md#screen-layout).
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### Navigation key
 
@@ -390,8 +390,8 @@ A navigation key is an optional key for this screen. This doesn't need to be uni
 
 This can be useful when we have some screens that we want to be removed or reset when the condition changes:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const Stack = createNativeStackNavigator({
@@ -408,7 +408,7 @@ const Stack = createNativeStackNavigator({
 For the static API, we recommend using the [`groups`](group.md#navigation-key) instead of the `navigationKey` for each screen as you can dynamically add or remove groups with the [`if`](static-configuration.md#if) property.
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```jsx
 <Stack.Screen
@@ -420,7 +420,7 @@ For the static API, we recommend using the [`groups`](group.md#navigation-key) i
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### Event listeners
 

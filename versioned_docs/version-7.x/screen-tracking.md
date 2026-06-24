@@ -18,8 +18,8 @@ To get notified of state changes, we can use the `onStateChange` prop on `Naviga
 
 This example shows how the approach can be adapted to any mobile analytics SDK.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Screen tracking for analytics" snack
 import * as React from 'react';
@@ -99,7 +99,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Screen tracking for analytics" snack
 import * as React from 'react';
@@ -180,7 +180,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 :::note
 

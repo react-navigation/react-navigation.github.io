@@ -25,7 +25,13 @@ class HomeScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/simple-header-button" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/simple-header-button"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 The binding of `this` in `navigationOptions` is _not_ the `HomeScreen` instance, so you can't call `setState` or any instance methods on it. This is pretty important because it's extremely common to want the buttons in your header to interact with the screen that the header belongs to. So, we will look how to do this next.
 
@@ -64,7 +70,13 @@ class HomeScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/header-interacting-with-component-instance" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/header-interacting-with-component-instance"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 > React Navigation doesn't guarantee that your screen component will begin mounting before the header for the screen is rendered, and because the `increaseCount` param is set in `componentWillMount`, we may not have it available to us in `navigationOptions`, which is why we include the `|| {}` when grabbing the params (there may not be any). We know this is an awkward API and we do plan on improving it!
 

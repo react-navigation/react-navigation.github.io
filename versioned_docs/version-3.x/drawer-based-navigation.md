@@ -54,7 +54,13 @@ const DrawerNavigator = createDrawerNavigator(
 export default createAppContainer(DrawerNavigator);
 ```
 
-<a href="https://snack.expo.io/@react-navigation/basic-drawer-v3" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/basic-drawer-v3"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 To open and close drawer, use the following helpers to open and close the drawer:
 

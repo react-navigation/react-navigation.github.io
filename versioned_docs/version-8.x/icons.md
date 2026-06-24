@@ -72,8 +72,13 @@ function MyComponent() {
 }
 ```
 
-<video playsInline autoPlay muted loop style={{ width: '400px', aspectRatio: 4 / 5 }}>
-
+<video
+  playsInline
+  autoPlay
+  muted
+  loop
+  style={{ width: '400px', aspectRatio: 4 / 5 }}
+>
   <source src="/assets/icons/sf-symbol.mp4" />
 </video>
 
@@ -322,9 +327,14 @@ The component accepts the following props:
 
   This can be used to animate changes to the icon in response to state. For example, changing `wifi` to `wifi.slash` with a `magic` replace transition animates the slash across the symbol.
 
-  <video playsInline autoPlay muted loop style={{ width: '150px', aspectRatio: 1 / 1 }}>
-
-    <source src="/assets/icons/sf-symbol-magic-replace.mp4" />
+  <video
+    playsInline
+    autoPlay
+    muted
+    loop
+    style={{ width: '150px', aspectRatio: 1 / 1 }}
+  >
+    <source src="/assets/icons/sf-symbol-magic-replace.mp4"></source>
   </video>
 
 ## Material Symbols

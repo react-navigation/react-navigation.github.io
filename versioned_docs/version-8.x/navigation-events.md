@@ -222,8 +222,8 @@ Sometimes you might want to add a listener from the component where you defined 
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const Tab = createBottomTabNavigator({
@@ -242,7 +242,7 @@ const Tab = createBottomTabNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Tab.Screen
@@ -258,13 +258,14 @@ const Tab = createBottomTabNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 You can also pass a callback which returns the object with listeners. It'll receive `navigation` and `route` as the arguments.
 
 Example:
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const Tab = createBottomTabNavigator({
@@ -286,7 +287,7 @@ const Tab = createBottomTabNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Tab.Screen
@@ -305,7 +306,7 @@ const Tab = createBottomTabNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 :::warning
 
@@ -321,8 +322,8 @@ This can be useful if you want to listen to specific events regardless of the sc
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const Stack = createNativeStackNavigator({
@@ -340,7 +341,7 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Navigator
@@ -357,12 +358,12 @@ const Stack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Similar to `listeners`, you can also pass a function to `screenListeners`. The function will receive the [`navigation` object](navigation-object.md) and the [`route` object](route-object.md) for each screen. This can be useful if you need access to the `navigation` object.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const Tab = createBottomTabNavigator({
@@ -385,7 +386,7 @@ const Tab = createBottomTabNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Tab.Navigator
@@ -407,4 +408,4 @@ const Tab = createBottomTabNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>

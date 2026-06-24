@@ -127,7 +127,7 @@ function FocusAwareStatusBar(props) {
 
 Now, our screens (both `Screen1.js` and `Screen2.js`) will use the `FocusAwareStatusBar` component instead of the `StatusBar` component from React Native:
 
-<samp id="focus-status-bar"/>
+<samp id="focus-status-bar" />
 
 ```jsx
 function Screen1({ navigation }) {
@@ -191,13 +191,13 @@ Although not necessary, you can use the `FocusAwareStatusBar` component in the s
     <source src="/assets/statusbar/status-drawer-ios.mp4" />
   </video>
 
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/statusbar/status-drawer-android.mp4" />
-  </video>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/statusbar/status-drawer-android.mp4" />
+</video>
 
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/statusbar/status-tab-ios.mp4" />
-  </video>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/statusbar/status-tab-ios.mp4" />
+</video>
 
   <video playsInline autoPlay muted loop>
     <source src="/assets/statusbar/status-tab-android.mp4" />

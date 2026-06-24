@@ -8,7 +8,7 @@ This is a guest post by Oskar Kwaśniewski, creator of `react-native-bottom-tabs
 
 This blog post will explain the differences between the JavaScript Bottom Tabs navigator and provide a step-by-step guide for integrating React Navigation with the Native Bottom Tabs Navigator.
 
-<!--truncate-->
+{/* truncate */}
 
 ## Introduction
 
@@ -39,15 +39,24 @@ Native Bottom tabs adapt to the appearance of multiple platforms. You always get
 
 Bottom Navigation on iOS, with native blur.
 
-<img src="/assets/blog/native-bottom-tabs/android.png" alt="Native Tabs on Android" />
+<img
+  src="/assets/blog/native-bottom-tabs/android.png"
+  alt="Native Tabs on Android"
+/>
 
 Bottom Navigation on Android, following Material Design 3 styling.
 
-<img src="/assets/blog/native-bottom-tabs/ipados.png" alt="Native Tabs on iPadOS" />
+<img
+  src="/assets/blog/native-bottom-tabs/ipados.png"
+  alt="Native Tabs on iPadOS"
+/>
 
 On iPadOS tabs appear at the top with a button allowing you to go into the sidebar mode.
 
-<img src="/assets/blog/native-bottom-tabs/visionos.png" alt="Native Tabs on visionOS" />
+<img
+  src="/assets/blog/native-bottom-tabs/visionos.png"
+  alt="Native Tabs on visionOS"
+/>
 
 On visionOS, the tabs appear on the left side, attached outside of the window.
 
@@ -55,7 +64,10 @@ On visionOS, the tabs appear on the left side, attached outside of the window.
 
 On tvOS tabs appear on the top, making navigation with the TV remote a breeze.
 
-<img src="/assets/blog/native-bottom-tabs/macos.png" alt="Native Tabs on macOS" />
+<img
+  src="/assets/blog/native-bottom-tabs/macos.png"
+  alt="Native Tabs on macOS"
+/>
 
 On macOS, tabs appear on the left side, following the design of the Finder app.
 

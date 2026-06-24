@@ -58,7 +58,13 @@ class DetailsScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/navigate-with-params" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/navigate-with-params"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 ## Summary
 

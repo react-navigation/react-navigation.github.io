@@ -13,8 +13,8 @@ This guide covers customizing the tab bar in [`createBottomTabNavigator`](bottom
 
 This is similar to how you would customize a stack navigator &mdash; there are some properties that are set when you initialize the tab navigator and others that can be customized per-screen in `options`.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Tab bar icons" snack dependencies=@expo/vector-icons,@expo/vector-icons/Ionicons
 import * as React from 'react';
@@ -81,7 +81,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Tab based navigation" snack dependencies=@expo/vector-icons,@expo/vector-icons/Ionicons
 import * as React from 'react';
@@ -155,7 +155,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Let's dissect this:
 
@@ -167,8 +167,8 @@ Let's dissect this:
 
 Sometimes we want to add badges to some icons. You can use the [`tabBarBadge` option](bottom-tab-navigator.md#tabbarbadge) to do it:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Tab based navigation" snack
 import * as React from 'react';
@@ -216,7 +216,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Tab based navigation" snack
 import * as React from 'react';
@@ -271,7 +271,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 From UI perspective this component is ready to use, but you still need to find some way to pass down the badge count properly from somewhere else, like using [React Context](https://react.dev/reference/react/useContext), [Redux](https://redux.js.org/), [MobX](https://mobx.js.org/) or [event emitters](https://github.com/facebook/react-native/blob/master/Libraries/vendor/emitter/EventEmitter.js).
 

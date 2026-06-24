@@ -41,7 +41,7 @@ export function navigate(name, params) {
 
 Then, in any of your javascript modules, just import the `RootNavigation` and call functions which you exported from it. You may use this approach outside of your React components and, in fact, it works just as well when used from within them.
 
- <samp id="no-nav-prop" />
+<samp id="no-nav-prop" />
 
 ```js
 // any js module

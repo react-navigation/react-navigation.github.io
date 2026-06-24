@@ -6,19 +6,27 @@ sidebar_label: Stack
 
 <div className="feature-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/highlights/gestures.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/stack/highlights/gestures.mp4" />
+  </video>
 
   [Gestures](#gestureenabled)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/highlights/animation.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/stack/highlights/animation.mp4" />
+  </video>
 
   [Transition animations](#animations)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/highlights/header-animation.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/stack/highlights/header-animation.mp4" />
+  </video>
 
   [Header animations](#headerstyleinterpolators)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/highlights/search-bar.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/stack/highlights/search-bar.mp4" />
+  </video>
 
   [Search bar](elements.md#headersearchbaroptions)
 
@@ -47,8 +55,8 @@ npm install @react-navigation/stack
 
 The navigator depends on [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) for gestures and optionally [`@react-native-masked-view/masked-view`](https://github.com/react-native-masked-view/masked-view) for [UIKit style animations for the header](#headerstyleinterpolator).
 
-<Tabs groupId='framework' queryString="framework">
-<TabItem value='expo' label='Expo' default>
+<FrameworkTabs>
+<TabItem value='expo'>
 
 If you have a Expo managed project, in your project directory, run:
 
@@ -57,7 +65,7 @@ npx expo install react-native-gesture-handler @react-native-masked-view/masked-v
 ```
 
 </TabItem>
-<TabItem value='community-cli' label='Community CLI'>
+<TabItem value='community-cli'>
 
 If you have a bare React Native project, in your project directory, run:
 
@@ -66,7 +74,7 @@ npm install react-native-gesture-handler @react-native-masked-view/masked-view
 ```
 
 </TabItem>
-</Tabs>
+</FrameworkTabs>
 
 If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
 
@@ -576,61 +584,81 @@ Supported values for `animation` are:
 
 <div className="options-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-default.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/stack/animation-default.mp4" />
+  </video>
 
   `default`
 
   Default animation based on the platform and OS version.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-fade.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/stack/animation-fade.mp4" />
+  </video>
 
   `fade`
 
   Simple fade animation for dialogs.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-fade-from-bottom.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/stack/animation-fade-from-bottom.mp4" />
+  </video>
 
   `fade_from_bottom`
 
   Standard Android-style fade-in from the bottom for Android Oreo.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-fade-from-right.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/stack/animation-fade-from-right.mp4" />
+  </video>
 
   `fade_from_right`
 
   Standard Android-style fade-in from the right for Android 14.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-reveal-from-bottom.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/stack/animation-reveal-from-bottom.mp4" />
+  </video>
 
   `reveal_from_bottom`
 
   Standard Android-style reveal from the bottom for Android Pie.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-scale-from-center.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/stack/animation-scale-from-center.mp4" />
+  </video>
 
   `scale_from_center`
 
   Scale animation from the center.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-slide-from-right.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/stack/animation-slide-from-right.mp4" />
+  </video>
 
   `slide_from_right`
 
   Standard iOS-style slide in from the right.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-slide-from-left.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/stack/animation-slide-from-left.mp4" />
+  </video>
 
   `slide_from_left`
 
   Similar to `slide_from_right`, but the screen will slide in from the left.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-slide-from-bottom.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/stack/animation-slide-from-bottom.mp4" />
+  </video>
 
   `slide_from_bottom`
 
   Slide animation from the bottom for modals and bottom sheets.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/stack/animation-none.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/stack/animation-none.mp4" />
+  </video>
 
   `none`
 
@@ -1037,8 +1065,8 @@ With these options, it's possible to build custom transition animations for scre
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import { TransitionSpecs } from '@react-navigation/stack';
@@ -1057,7 +1085,7 @@ Profile: {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import { TransitionSpecs } from '@react-navigation/stack';
@@ -1077,7 +1105,7 @@ import { TransitionSpecs } from '@react-navigation/stack';
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 #### `CardStyleInterpolators`
 
@@ -1371,8 +1399,8 @@ A transparent modal is like a modal dialog which overlays the screen. The previo
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 screens: {
@@ -1387,7 +1415,7 @@ screens: {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Navigator>
@@ -1401,7 +1429,7 @@ screens: {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Now, when you navigate to the `Modal` screen, it'll have a transparent background and the `Home` screen will be visible underneath.
 

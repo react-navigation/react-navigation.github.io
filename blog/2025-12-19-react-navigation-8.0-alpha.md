@@ -11,7 +11,7 @@ We're excited to announce the first alpha release of React Navigation 8.0.
 
 For this release, we tried to minimize large breaking changes when possible, and focused on improvements such as better TypeScript types, native bottom tabs as the default, and various other new features. There are many more improvements planned for the final release.
 
-<!--truncate-->
+{/* truncate */}
 
 You can read the full list of changes in the [upgrade guide](/docs/8.x/upgrading-from-7.x). Here are some highlights:
 
@@ -237,8 +237,8 @@ It wasn't ideal, and [working around this limitation](https://www.callstack.com/
 
 Now we have a better approach in React Navigation 8 which is also straightforward to use:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const MyStack = createStackNavigator({
@@ -251,7 +251,7 @@ const MyStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 function MyStack() {
@@ -267,7 +267,7 @@ function MyStack() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 <video playsInline autoPlay muted loop style={{ width: '500px', aspectRatio: 1 / 1 }}>
 
@@ -288,8 +288,8 @@ While it was possible to implement this using `onStateChange` and `initialState`
 
 To make this simpler, we've added a `persistor` prop which takes care of these details:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 function App() {
@@ -316,7 +316,7 @@ function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 function App() {
@@ -345,7 +345,7 @@ function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 See [State persistence docs](/docs/8.x/state-persistence) for more details.
 

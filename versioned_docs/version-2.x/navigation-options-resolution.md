@@ -38,7 +38,13 @@ export default createBottomTabNavigator({
 });
 ```
 
-<a href="https://snack.expo.io/@notbrent/nested-navigationoptions-wrong" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@notbrent/nested-navigationoptions-wrong"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 As we mentioned earlier, you can only modify navigation options for a navigator from one of its screen components. `A` and `B` above are screen components in `HomeStack` and `SettingsStack` respectively, not in the tab navigator. So the result will be that the `tabBarLabel` property is not applied to the tab navigator. We can fix this though!
 
@@ -60,7 +66,13 @@ export default createBottomTabNavigator({
 });
 ```
 
-<a href="https://snack.expo.io/@notbrent/nested-navigationoptions-correct" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@notbrent/nested-navigationoptions-correct"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 To understand what is going on here, first recall that in the following example, `MyComponent` and `MyOtherComponent` are identical:
 

@@ -150,8 +150,8 @@ The hook will return `true` when the screen is focused and `false` when our comp
 
 The `useIsFocused` hook will cause our component to re-render when we focus and unfocus a screen. Using this hook component may introduce unnecessary component re-renders as a screen comes in and out of focus. This could cause issues depending on the type of action we're calling on focusing. Hence we recommend to use this hook only if you need to trigger a re-render. For side-effects such as subscribing to events or fetching data, use the methods described above.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="useIsFocused hook" snack
 import * as React from 'react';
@@ -200,7 +200,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value='dynamic' label='Dynamic' default>
+<TabItem value='dynamic'>
 
 ```js name="useIsFocused hook" snack
 import * as React from 'react';
@@ -242,6 +242,6 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This example is also documented in the [`useIsFocused` API documentation](use-is-focused.md).

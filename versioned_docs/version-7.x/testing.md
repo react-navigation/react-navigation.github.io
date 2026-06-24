@@ -160,8 +160,8 @@ In this guide, we will go through some example scenarios and show you how to wri
 
 In this example, we have a bottom tab navigator with two tabs: Home and Settings. We will write a test that asserts that we can navigate between these tabs by pressing the tab bar buttons.
 
-<Tabs groupId="example" queryString="example">
-<TabItem value="static" label="Static" default>
+<ExampleTabs>
+<TabItem value="static">
 
 ```js title="MyTabs.js"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -192,7 +192,7 @@ export const MyTabs = createBottomTabNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js title="MyTabs.js"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -227,10 +227,10 @@ export const MyTabs = () => {
 ```
 
 </TabItem>
-</Tabs>
+</ExampleTabs>
 
-<Tabs groupId="example" queryString="example">
-<TabItem value="static" label="Static" default>
+<ExampleTabs>
+<TabItem value="static">
 
 ```js title="MyTabs.test.js"
 import { expect, jest, test } from '@jest/globals';
@@ -259,7 +259,7 @@ test('navigates to settings by tab bar button press', async () => {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js title="MyTabs.test.js"
 import { expect, jest, test } from '@jest/globals';
@@ -292,7 +292,7 @@ test('navigates to settings by tab bar button press', async () => {
 ```
 
 </TabItem>
-</Tabs>
+</ExampleTabs>
 
 In the above test, we:
 
@@ -306,8 +306,8 @@ In the above test, we:
 
 In this example, we have a stack navigator with two screens: Home and Surprise. We will write a test that asserts that the text "Surprise!" is displayed after navigating to the Surprise screen.
 
-<Tabs groupId="example" queryString="example">
-<TabItem value="static" label="Static" default>
+<ExampleTabs>
+<TabItem value="static">
 
 ```js title="MyStack.js"
 import { useNavigation } from '@react-navigation/native';
@@ -354,7 +354,7 @@ export const MyStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js title="MyStack.js"
 import { useNavigation } from '@react-navigation/native';
@@ -405,10 +405,10 @@ export const MyStack = () => {
 ```
 
 </TabItem>
-</Tabs>
+</ExampleTabs>
 
-<Tabs groupId="example" queryString="example">
-<TabItem value="static" label="Static" default>
+<ExampleTabs>
+<TabItem value="static">
 
 ```js title="MyStack.test.js"
 import { expect, jest, test } from '@jest/globals';
@@ -435,7 +435,7 @@ test('shows surprise text after navigating to surprise screen', async () => {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js title="MyStack.test.js"
 import { expect, jest, test } from '@jest/globals';
@@ -464,7 +464,7 @@ test('shows surprise text after navigating to surprise screen', async () => {
 ```
 
 </TabItem>
-</Tabs>
+</ExampleTabs>
 
 In the above test, we:
 
@@ -478,8 +478,8 @@ In the above test, we:
 
 In this example, we have a bottom tab navigator with two tabs: Home and Pokemon. We will write a test that asserts the data fetching logic on focus in the Pokemon screen.
 
-<Tabs groupId="example" queryString="example">
-<TabItem value="static" label="Static" default>
+<ExampleTabs>
+<TabItem value="static">
 
 ```js title="MyTabs.js"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -561,7 +561,7 @@ export const MyTabs = createBottomTabNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js title="MyTabs.js"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -647,7 +647,7 @@ export function MyTabs() {
 ```
 
 </TabItem>
-</Tabs>
+</ExampleTabs>
 
 To make the test deterministic and isolate it from the real backend, you can mock the network requests with a library such as [Mock Service Worker](https://mswjs.io/):
 
@@ -679,8 +679,8 @@ const server = setupServer(...handlers);
 
 Refer to the documentation of the library to learn more about setting it up in your project - [Getting started](https://mswjs.io/docs/getting-started), [React Native integration](https://mswjs.io/docs/integrations/react-native).
 
-<Tabs groupId="example" queryString="example">
-<TabItem value="static" label="Static" default>
+<ExampleTabs>
+<TabItem value="static">
 
 ```js title="MyTabs.test.js"
 import './msw-node';
@@ -727,7 +727,7 @@ test('loads data on Pokemon info screen after focus', async () => {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js title="MyTabs.test.js"
 import './msw-node';
@@ -776,7 +776,7 @@ test('loads data on Pokemon info screen after focus', async () => {
 ```
 
 </TabItem>
-</Tabs>
+</ExampleTabs>
 
 In the above test, we:
 
@@ -834,8 +834,8 @@ This lets us test React Navigation specific logic such as `useFocusEffect` witho
 
 We can use this test navigator in our tests like this:
 
-<Tabs groupId="example" queryString="example">
-<TabItem value="static" label="Static" default>
+<ExampleTabs>
+<TabItem value="static">
 
 ```js title="MyComponent.test.js"
 import { render, screen } from '@testing-library/react-native';
@@ -887,7 +887,7 @@ test('shows modal when focused', async () => {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js title="MyComponent.test.js"
 import { render, screen } from '@testing-library/react-native';
@@ -943,7 +943,7 @@ test('shows modal when focused', async () => {
 ```
 
 </TabItem>
-</Tabs>
+</ExampleTabs>
 
 Here we create a test stack navigator using the `createTestStackNavigator` function. We then render the `MyComponent` component within the test navigator and assert that the modal is shown or hidden based on the focus state.
 

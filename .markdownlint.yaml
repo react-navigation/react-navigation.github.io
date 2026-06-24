@@ -6,5 +6,9 @@ MD013: false
 # Disable checks for inline HTML
 MD033: false
 
+# Disable checks that treat MDX comments/components as Markdown formatting
+MD037: false
+MD032: false
+
 # Descriptive link text
 MD059: false

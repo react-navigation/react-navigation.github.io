@@ -6,7 +6,7 @@ tags: [release, announcement]
 
 We're excited to announce that we finally have a prerelease version of React Navigation 6. We released React Navigation 5 more than half a year ago, and it brought a lot of new possibilities with the new dynamic API, and was met with overwhelmingly positive reaction. Since then, we've been working on incremental improvements and refinements to the library and thinking about how to make it even better. This brings us to the next major version of React Navigation.
 
-<!--truncate-->
+{/* truncate */}
 
 While React Navigation 5 was complete overhaul to the API of React Navigation, React Navigation 6 keeps the same API, with some breaking changes to make things more consistent and provide more flexibility. We also tried to address some common pain points and confusions that users had.
 

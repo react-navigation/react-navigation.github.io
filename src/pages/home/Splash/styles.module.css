@@ -76,6 +76,9 @@
 }
 
 .button {
+  --ifm-link-color: var(--ifm-home-color-text);
+  --ifm-link-decoration: none;
+
   border-radius: 0.5rem;
   border: 0.25rem solid var(--ifm-home-color-border);
   padding: 0.75rem 1rem;
@@ -89,12 +92,17 @@
 }
 
 .buttonPrimary {
+  --ifm-link-color: var(--ifm-home-color-background);
+
   background-color: var(--ifm-home-color-border);
   color: var(--ifm-home-color-background);
 }
 
 .button:hover,
 .buttonPrimary:hover {
+  --ifm-link-color: var(--ifm-home-color-highlight);
+  --ifm-link-decoration: none;
+
   background-color: var(--ifm-home-color-highlight);
   border-color: var(--ifm-home-color-highlight);
   color: var(--ifm-home-color-background);
@@ -112,11 +120,15 @@
 }
 
 .linkText {
+  --ifm-link-color: var(--ifm-home-color-text);
+
   color: var(--ifm-home-color-text);
   font-weight: 500;
 }
 
 .linkText:hover {
+  --ifm-link-color: var(--ifm-home-color-text);
+
   color: var(--ifm-home-color-text);
 }
 

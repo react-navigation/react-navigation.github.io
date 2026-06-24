@@ -227,8 +227,8 @@ Native bottom tabs are now used by default on iOS and Android. This allows us to
 
 To keep the previous behavior with JavaScript-based tabs, you can pass `implementation: 'custom'` to the navigator:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```diff lang=js
 createBottomTabNavigator({
@@ -238,7 +238,7 @@ createBottomTabNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```diff lang=js
 <Tab.Navigator
@@ -248,7 +248,7 @@ createBottomTabNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 As part of this change, some of the options have changed to work with native tabs:
 
@@ -276,8 +276,8 @@ Since Bottom Tabs now renders native tabs by default, the header is no longer sh
 
 Alternatively, you can enable the built-in header by passing `headerShown: true` in `screenOptions` of the navigator:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```diff lang=js
 createBottomTabNavigator({
@@ -290,7 +290,7 @@ createBottomTabNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```diff lang=js
 <Tab.Navigator
@@ -302,7 +302,7 @@ createBottomTabNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 #### Preloaded routes in Stack have been reworked
 
@@ -590,8 +590,8 @@ This is not a direct replacement as the behavior differs. For example, `freezeOn
 
 To update your code, remove `detachInactiveScreens`, `detachPreviousScreen`, and `freezeOnBlur` usage:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```diff lang=js
 createStackNavigator({
@@ -605,7 +605,7 @@ createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```diff lang=js
 <Stack.Navigator
@@ -618,7 +618,7 @@ createStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 See [Inactive screens](navigation-lifecycle.md#inactive-screens) for more details.
 
@@ -629,8 +629,8 @@ The `onChangeText` option in `headerSearchBarOptions` was confusingly named afte
 
 To avoid confusion due to this inconsistency, the option has been renamed to `onChange`. To upgrade, simply rename the option:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```diff lang=js
 createNativeStackNavigator({
@@ -652,7 +652,7 @@ createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```diff lang=js
 <Stack.Navigator>
@@ -673,7 +673,7 @@ createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This applies to all navigators that support `headerSearchBarOptions`, such as Native Stack Navigator with native header, and other navigators using `Header` from `@react-navigation/elements`.
 
@@ -736,8 +736,8 @@ The tab bar now matches the `primary` variant in Material Design 3, which featur
 
 If you want to keep the previous design, you can use the `secondary` variant which is closer to the previous design with `tabBarVariant` option:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```diff lang=js
 createMaterialTopTabNavigator({
@@ -749,7 +749,7 @@ createMaterialTopTabNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```diff lang=js
 <Tab.Navigator
@@ -760,7 +760,7 @@ createMaterialTopTabNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 If you're using `react-native-tab-view`, pass `variant` prop to `TabBar`:
 
@@ -928,8 +928,8 @@ Since then, the recommended way to develop with Expo has been to use [Developmen
 
 You can now omit the `prefixes` option in the linking configuration:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```diff lang=js
 <Navigation
@@ -941,7 +941,7 @@ You can now omit the `prefixes` option in the linking configuration:
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```diff lang=js
 <NavigationContainer
@@ -953,7 +953,7 @@ You can now omit the `prefixes` option in the linking configuration:
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 The `prefixes` default to `['*']`, which will match any host starting with `http`, `https`, and custom schemes such as `myapp://`.
 
@@ -1354,8 +1354,8 @@ Previously, state persistence could be implemented with `initialState` and `onSt
 
 The new `persistor` prop simplifies state persistence by reducing the boilerplate code needed to persist and restore state:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 export default function App() {
@@ -1380,7 +1380,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 export default function App() {
@@ -1407,7 +1407,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 See [State persistence docs](state-persistence.md) for more details.
 

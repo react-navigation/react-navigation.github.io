@@ -44,7 +44,13 @@ class HomeScreen extends React.Component {
 // ... other code from the previous section
 ```
 
-<a href="https://snack.expo.io/@react-navigation/our-first-navigate-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/our-first-navigate-v2"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 Let's break this down:
 
@@ -73,7 +79,13 @@ class DetailsScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/navigating-to-details-again-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/navigating-to-details-again-v2"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 If you run this code, you'll notice that when you tap "Go to Details... again" that it doesn't do anything! This is because we are already on the Details route. The `navigate` function roughly means "go to this screen", and if you are already on that screen then it makes sense that it would do nothing.
 
@@ -86,7 +98,13 @@ Let's suppose that we actually _want_ to add another details screen. This is pre
 />
 ```
 
-<a href="https://snack.expo.io/@react-navigation/pushing-details-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/pushing-details-v2"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 Each time you call `push` we add a new route to the navigation stack. When you call `navigate` it first tries to find an existing route with that name, and only pushes a new route if there isn't yet one on the stack.
 
@@ -120,7 +138,13 @@ class DetailsScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/going-back-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/going-back-v2"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 > On Android, React Navigation hooks in to the hardware back button and fires the `goBack()` function for you when the user presses it, so it behaves as the user would expect.
 

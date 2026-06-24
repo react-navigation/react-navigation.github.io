@@ -26,7 +26,7 @@ To resolve this exception, you could pass the `navigation` prop in to `GoToButto
 
 Alternatively, you can use the `useNavigation` to provide the `navigation` prop automatically (through React context, if you're curious).
 
-<samp id="navigation-in-component" >useNavigation in component</samp>
+<samp id="navigation-in-component">useNavigation in component</samp>
 
 ```js
 import * as React from 'react';

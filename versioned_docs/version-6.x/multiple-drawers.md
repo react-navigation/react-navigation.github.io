@@ -143,7 +143,7 @@ An alternative approach is to nest 2 [drawer navigators](drawer-navigator.md) in
 
 Here we have 2 drawer navigators nested inside each other, one is positioned on left and the other on the right:
 
-<samp id="multiple-drawers-issue"/>
+<samp id="multiple-drawers-issue" />
 
 ```js
 import * as React from 'react';

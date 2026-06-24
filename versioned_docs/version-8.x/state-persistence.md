@@ -20,8 +20,8 @@ To be able to persist the [navigation state](navigation-state.md), we can use th
 
 These function can be both synchronous or asynchronous. If a promise is returned from the `restore` function, make sure to provide a [`fallback`](navigation-container.md#fallback).
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Persisting the navigation state" snack dependencies=@react-native-async-storage/async-storage
 import * as React from 'react';
@@ -125,7 +125,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Persisting the navigation state" snack dependencies=@react-native-async-storage/async-storage
 import * as React from 'react';
@@ -232,7 +232,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This feature is particularly useful in development mode. You can enable it selectively by providing the `persistor` prop only if `__DEV__` is `true`.
 

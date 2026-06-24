@@ -20,8 +20,8 @@ Below, we'll go through required configurations so that the deep link integratio
 
 ## Setting up deep links
 
-<Tabs groupId='framework' queryString="framework">
-<TabItem value='expo' label='Expo' default>
+<FrameworkTabs>
+<TabItem value='expo'>
 
 ### Configuring URL scheme
 
@@ -122,7 +122,7 @@ You will also need to [declare the association](https://developer.android.com/tr
 See [Expo's documentation on Android App Links](https://docs.expo.dev/linking/android-app-links/) for more details.
 
 </TabItem>
-<TabItem value='community-cli' label='Community CLI'>
+<TabItem value='community-cli'>
 
 ### Setup on iOS
 
@@ -130,8 +130,8 @@ Let's configure the native iOS app to open based on the `example://` URI scheme.
 
 You'll need to add the `LinkingIOS` folder into your header search paths as described [here](https://reactnative.dev/docs/linking-libraries-ios#step-3). Then you'll need to add the following lines to your or `AppDelegate.swift` or `AppDelegate.mm` file:
 
-<Tabs groupId="ios-lang">
-<TabItem value='swift' label='Swift' default>
+<IosLanguageTabs>
+<TabItem value='swift'>
 
 ```swift
 func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -140,7 +140,7 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplication.Op
 ```
 
 </TabItem>
-<TabItem value='objc' label='Objective-C'>
+<TabItem value='objc'>
 
 ```objc
 #import <React/RCTLinkingManager.h>
@@ -154,12 +154,12 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplication.Op
 ```
 
 </TabItem>
-</Tabs>
+</IosLanguageTabs>
 
 If your app is using [Universal Links](https://developer.apple.com/ios/universal-links/), you'll need to add the following code as well:
 
-<Tabs groupId="ios-lang">
-<TabItem value='swift' label='Swift' default>
+<IosLanguageTabs>
+<TabItem value='swift'>
 
 ```swift
 func application(
@@ -175,7 +175,7 @@ func application(
 ```
 
 </TabItem>
-<TabItem value='objc' label='Objective-C'>
+<TabItem value='objc'>
 
 ```objc
 - (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
@@ -188,7 +188,7 @@ func application(
 ```
 
 </TabItem>
-</Tabs>
+</IosLanguageTabs>
 
 Now you need to add the scheme to your project configuration.
 
@@ -279,7 +279,7 @@ After adding them, it should look like this:
 Then, you need to [declare the association](https://developer.android.com/training/app-links/verify-android-applinks#web-assoc) between your website and your intent filters by hosting a Digital Asset Links JSON file.
 
 </TabItem>
-</Tabs>
+</FrameworkTabs>
 
 ## Configuring React Navigation
 
@@ -373,8 +373,8 @@ To achieve this, you'd need to override how React Navigation subscribes to incom
 
 Here is an example integration with [expo-notifications](https://docs.expo.dev/versions/latest/sdk/notifications):
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Expo Notifications"
 const linking = {
@@ -418,7 +418,7 @@ const linking = {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Expo Notifications"
 const linking = {
@@ -466,7 +466,7 @@ const linking = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Similar to the above example, you can integrate any API that provides a way to get the initial URL and to subscribe to new incoming URLs using the `getInitialURL` and `subscribe` options.
 

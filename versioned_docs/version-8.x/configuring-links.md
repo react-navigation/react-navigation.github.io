@@ -15,15 +15,15 @@ In this guide, we will configure React Navigation to handle external links. This
 
 Make sure that you have [configured deep links](deep-linking.md) in your app before proceeding.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 React Navigation handles incoming links by default when using [static configuration](static-configuration.md). All leaf screens in the navigator will be assigned a path based on their name automatically. No additional configuration is necessary.
 
 This is equivalent to specifying [`linking`](navigation-container.md#linking) prop on [`Navigation`](static-configuration.md#createstaticnavigation) with `enabled: 'auto'`.
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 The [`NavigationContainer`](navigation-container.md) component accepts a [`linking`](navigation-container.md#linking) prop that makes it easier to handle incoming links.
 
@@ -55,14 +55,14 @@ function App() {
 When you specify the `linking` prop, React Navigation will handle incoming links automatically.
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 On Android and iOS, it'll use React Native's [`Linking` module](https://reactnative.dev/docs/linking) to handle incoming deep links and universal links. On the Web, it'll use the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to sync the URL with the browser.
 
 You can also pass a [`fallback`](navigation-container.md#fallback) prop that controls what's displayed when React Navigation is trying to resolve the initial deep link URL:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import { createStaticNavigation } from '@react-navigation/native';
@@ -80,7 +80,7 @@ const Navigation = createStaticNavigation(RootStack);
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';
@@ -103,7 +103,7 @@ function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 The behavior can be customized further by specifying additional options in the `linking` prop as described below.
 
@@ -175,8 +175,8 @@ It's not possible to specify params here since this doesn't belong to a screen, 
 
 ## Mapping path to route names
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 If you specify `enabled: 'auto'` in the `linking` prop, React Navigation will automatically generate paths for all screens. For example, if you have a `Profile` screen in the navigator, it'll automatically generate a path for it as `profile`.
 
@@ -315,7 +315,7 @@ With automatic path generation, the following paths will be generated:
 If the URL contains a query string, it'll be passed as params to the screen. For example, the URL `/profile?user=jane` will pass the `user` param to the `Profile` screen.
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 If you specify a `linking` option, by default React Navigation will use the path segments as the route name when parsing the URL. However, directly translating path segments to route names may not be the expected behavior.
 
@@ -410,8 +410,9 @@ const config = {
 ```
 
 Similarly, any nesting needs to be reflected in the configuration.
+
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 <details>
 <summary>How it works</summary>
@@ -471,8 +472,8 @@ The `parse` property accepts a function that receives the string value from the 
 
 For example, to resolve `/user/@jane/settings` to the params `{ id: 'jane', section: 'settings' }`, you could use `parse` to strip the `@` prefix and `stringify` to add it back:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createStackNavigator({
@@ -496,7 +497,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const config = {
@@ -517,7 +518,7 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 <details>
 <summary>Result Navigation State</summary>
@@ -543,8 +544,8 @@ The `parse` property also accepts a schema from a [Standard Schema](https://stan
 
 If the schema validation fails, the URL won't match the current screen and React Navigation will try the next matching config. This lets you use schemas to narrow down which screen handles a URL.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import { z } from 'zod';
@@ -567,7 +568,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import { z } from 'zod';
@@ -587,14 +588,14 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 In this example, the `Profile` screen will only match if the `id` param starts with `@`. If the URL is `/user/jane`, it won't match because the schema validation fails, and React Navigation will try the next config.
 
 Here's another example that transforms a date string from the URL into a timestamp:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import * as v from 'valibot';
@@ -630,7 +631,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import * as v from 'valibot';
@@ -661,7 +662,7 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Using Standard Schema has a few advantages over using functions for parsing:
 
@@ -674,8 +675,8 @@ Sometimes a param may or may not be present in the URL depending on certain cond
 
 In this case, you would need to mark the `section` param as optional. You can do it by adding the `?` suffix after the param name:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createStackNavigator({
@@ -698,7 +699,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const config = {
@@ -718,7 +719,7 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 <details>
 <summary>Result Navigation State</summary>
@@ -757,8 +758,8 @@ If your app is opened with an invalid URL, most of the times you'd want to show 
 
 To handle this, you'll need to define a catch-all route that will be rendered if no other routes match the path. You can do it by specifying `*` for the path matching pattern:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const HomeTabs = createBottomTabNavigator({
@@ -798,7 +799,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const config = {
@@ -819,7 +820,7 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Here, we have defined a route named `NotFound` and set it to match `*` aka everything. If the path didn't match `user/:id` or `settings`, it'll be matched by this route.
 
@@ -838,8 +839,8 @@ const state = {
 
 You can even go more specific, for example, say if you want to show a different screen for invalid paths under `/settings`, you can specify such a pattern under `Settings`:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const SettingsStack = createStackNavigator({
@@ -893,7 +894,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const config = {
@@ -916,7 +917,7 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 <details>
 <summary>Result Navigation State</summary>
@@ -967,8 +968,8 @@ Sometimes you want to ensure that a certain screen will always be present as the
 
 In the above example, if you want the `Feed` screen to be the initial route in the navigator under `Home`, your config will look like this:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const HomeTabs = createBottomTabNavigator({
@@ -1011,7 +1012,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const config = {
@@ -1029,7 +1030,7 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 <details>
 <summary>Result Navigation State</summary>
@@ -1074,8 +1075,8 @@ Similarly, if you want to access params of a parent screen from a child screen, 
 
 By default, paths defined for each screen are matched against the URL relative to their parent screen's path. Consider the following config:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const ProfileTabs = createBottomTabNavigator({
@@ -1102,7 +1103,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const config = {
@@ -1118,7 +1119,7 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Here, you have a `path` property defined for the `Home` screen, as well as the child `Profile` screen. The profile screen specifies the path `users/:id`, but since it's nested inside a screen with the path `feed`, it'll try to match the pattern `feed/users/:id`.
 
@@ -1126,8 +1127,8 @@ This will result in the URL `/feed` navigating to `Home` screen, and `/feed/user
 
 In this case, it makes more sense to navigate to the `Profile` screen using a URL like `/users/cal`, rather than `/feed/users/cal`. To achieve this, you can override the relative matching behavior to `exact` matching:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const ProfileTabs = createBottomTabNavigator({
@@ -1156,7 +1157,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const config = {
@@ -1176,7 +1177,7 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 With `exact` property set to `true`, `Profile` will ignore the parent screen's `path` config and you'll be able to navigate to `Profile` using a URL like `users/cal`.
 
@@ -1186,8 +1187,8 @@ Sometimes the same screen is present in multiple nested navigators. For example,
 
 React Navigation supports this with shared paths:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 When using static configuration with automatic path generation (default behavior), shared paths are detected automatically when the same screen component or navigator reference appears in multiple branches with the same full path pattern:
 
@@ -1225,7 +1226,7 @@ const Profile = createNativeStackScreen({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 When using dynamic configuration, specify `shared: true` for every screen config that should accept the same path:
 
@@ -1255,7 +1256,7 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 When a shared path matches more than one screen, React Navigation uses the current navigation state to choose the matching branch when possible to handle deep links.
 
@@ -1265,8 +1266,8 @@ The first matching path is also the canonical path used when generating URLs. If
 
 Sometimes, you may not want to have the route name of a screen in the path. For example, let's say you have a `Home` screen and the following config. When the page is opened in the browser you'll get `/home` as the URL:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createStackNavigator({
@@ -1288,7 +1289,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const config = {
@@ -1302,14 +1303,14 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 But it'll be nicer if the URL was just `/` when visiting the home screen.
 
 You can specify an empty string as path or not specify a path at all, and React Navigation won't add the screen to the path (think of it like adding empty string to the path, which doesn't change anything):
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createStackNavigator({
@@ -1331,7 +1332,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const config = {
@@ -1345,7 +1346,7 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Serializing and parsing params
 
@@ -1353,8 +1354,8 @@ Since URLs are strings, any params you have for routes are also converted to str
 
 For example, say you have the URL `/chat/1589842744264` with the following config:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createStackNavigator({
@@ -1370,7 +1371,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const config = {
@@ -1381,7 +1382,7 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 When handling the URL, your params will look like this:
 
@@ -1391,8 +1392,8 @@ When handling the URL, your params will look like this:
 
 Here, the `date` param was parsed as a string because React Navigation doesn't know that it's supposed to be a timestamp, and hence number. You can customize it by providing a custom function to use for parsing:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createStackNavigator({
@@ -1411,7 +1412,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const config = {
@@ -1427,12 +1428,12 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 You can also provide your own function to serialize the params. For example, let's say that you want to use a DD-MM-YYYY format in the path instead of a timestamp:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createStackNavigator({
@@ -1460,7 +1461,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const config = {
@@ -1483,7 +1484,7 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Depending on your requirements, you can use this functionality to parse and stringify more complex data.
 
@@ -1493,8 +1494,8 @@ If you need more complex matching logic, you can use regular expressions to matc
 
 Regular expressions can be specified between parentheses `(` and `)` after a param name. For example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createStackNavigator({
@@ -1516,7 +1517,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const config = {
@@ -1528,7 +1529,7 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This will only match the path if it starts with `@` followed by alphanumeric characters or underscores. For example, the URL `/@jane` will match the `Profile` screen, but `/jane` won't.
 
@@ -1546,8 +1547,8 @@ If you want to have multiple paths for the same screen, you can use the `alias` 
 
 For example, if you want to match both `/users/:id` and `/:id` to the `Profile` screen, you can do this:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createStackNavigator({
@@ -1564,7 +1565,7 @@ const RootStack = createStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 const config = {
@@ -1578,7 +1579,7 @@ const config = {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 In this case, when the URL is `/users/jane` or `/jane`, it'll match the `Profile` screen. The `path` is the primary pattern that will be used to generate the URL, e.g. when navigating to the `Profile` screen in the app on the Web. The patterns in `alias` will be ignored when generating URLs. The `alias` patterns are not used for matching any child screens in nested navigators.
 
@@ -1614,19 +1615,19 @@ const linking = {
 
 ## Playground
 
-import LinkingTester from '@site/src/components/LinkingTester'
+import LinkingTester from '@site/src/components/LinkingTester';
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 Playground is not available for static config.
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 You can play around with customizing the config and path below, and see how the path is parsed.
 
 <LinkingTester />
 
 </TabItem>
-</Tabs>
+</ConfigTabs>

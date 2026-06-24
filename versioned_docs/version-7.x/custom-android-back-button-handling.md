@@ -13,8 +13,8 @@ As an example, consider a screen where user is selecting items in a list, and a 
 
 Returning `true` from `onBackPress` denotes that we have handled the event, and react-navigation's listener will not get called, thus not popping the screen. Returning `false` will cause the event to bubble up and react-navigation's listener will pop the screen.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Custom android back button" snack
 import * as React from 'react';
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Custom android back button" snack
 import * as React from 'react';
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 The presented approach will work well for screens that are shown in a `StackNavigator`. Custom back button handling in other situations may not be supported at the moment (eg. A known case when this does not work is when you want to handle back button press in an open drawer. PRs for such use cases are welcome!).
 

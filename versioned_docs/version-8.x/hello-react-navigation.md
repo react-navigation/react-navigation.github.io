@@ -257,8 +257,8 @@ export default function App() {
 
 ## Passing additional data
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 To pass additional data to a screen, use `.with` to wrap the navigator with [React context](https://react.dev/reference/react/useContext) to pass data to the screens:
 
@@ -290,7 +290,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 We can pass additional data to a screen with 2 approaches:
 
@@ -337,7 +337,7 @@ We can pass additional data to a screen with 2 approaches:
    :::
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Setting up TypeScript
 
@@ -361,8 +361,8 @@ Now that we have two screens, "How do we navigate from `Home` to `Details`?". Th
 
 ## Summary
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 - React Native doesn't have a built-in API for navigation like a web browser does. React Navigation provides this for you, along with the iOS and Android gestures and animations to transition between screens.
 - [`createNativeStackNavigator`](native-stack-navigator.md) is a function that takes the screens configuration and renders our content.
@@ -372,7 +372,7 @@ Now that we have two screens, "How do we navigate from `Home` to `Details`?". Th
 - To pass additional data to a screen, we can use React context and use `.with` to wrap the navigator with a context provider to pass data to the screens.
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 - React Native doesn't have a built-in API for navigation like a web browser does. React Navigation provides this for you, along with the iOS and Android gestures and animations to transition between screens.
 - [`Stack.Navigator`](native-stack-navigator.md) is a component that takes route configuration as its children with additional props for configuration and renders our content.
@@ -382,4 +382,4 @@ Now that we have two screens, "How do we navigate from `Home` to `Details`?". Th
 - To pass additional data to a screen, we can either use React context and wrap the navigator with a context provider to pass data to the screens (recommended), or we can use a render callback for the screen instead of specifying a `component` prop.
 
 </TabItem>
-</Tabs>
+</ConfigTabs>

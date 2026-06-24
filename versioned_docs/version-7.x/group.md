@@ -9,8 +9,8 @@ import TabItem from '@theme/TabItem';
 
 A group contains several [screens](screen.md) inside a navigator for organizational purposes. They can also be used to apply the same options such as header styles to a group of screens, or to define a common layout etc.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 Groups can be defined using the `groups` property in the navigator configuration:
 
@@ -78,7 +78,7 @@ export default function App() {
 The keys of the `groups` object (e.g. `Guest`, `User`) are used as the [`navigationKey`](#navigation-key) for the group. You can use any string as the key.
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 A `Group` component is returned from a `createXNavigator` function. After creating the navigator, it can be used as children of the `Navigator` component:
 
@@ -133,7 +133,7 @@ export default function App() {
 It's also possible to nest `Group` components inside other `Group` components.
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Configuration
 
@@ -141,8 +141,8 @@ It's also possible to nest `Group` components inside other `Group` components.
 
 Options to configure how the screens inside the group get presented in the navigator. It accepts either an object or a function returning an object:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const MyStack = createNativeStackNavigator({
@@ -162,7 +162,7 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```jsx
 <Stack.Group
@@ -177,12 +177,12 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 When you pass a function, it'll receive the [`route`](route-object.md) and [`navigation`](navigation-object.md):
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const MyStack = createNativeStackNavigator({
@@ -202,7 +202,7 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```jsx
 <Stack.Group
@@ -217,7 +217,7 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 These options are merged with the `options` specified in the individual screens, and the screen's options will take precedence over the group's options.
 
@@ -229,8 +229,8 @@ A screen layout is a wrapper around each screen in the group. It makes it easier
 
 It takes a function that returns a React element:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const MyStack = createNativeStackNavigator({
@@ -260,7 +260,7 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```jsx
 <Stack.Group
@@ -285,14 +285,14 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### Navigation key
 
 Optional key for a group of screens. If the key changes, all existing screens in this group will be removed (if used in a stack navigator) or reset (if used in a tab or drawer navigator):
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 The name of the group is used as the `navigationKey`:
 
@@ -318,7 +318,7 @@ const MyStack = createNativeStackNavigator({
 This means if a screen is defined in 2 groups and the groups use the [`if`](static-configuration.md#if) property, the screen will remount if the condition changes resulting in one group being removed and the other group being used.
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```jsx
 <Stack.Group
@@ -330,6 +330,6 @@ This means if a screen is defined in 2 groups and the groups use the [`if`](stat
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This is similar to the [`navigationKey`](screen.md#navigation-key) prop for screens, but applies to a group of screens.

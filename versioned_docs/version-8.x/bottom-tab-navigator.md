@@ -6,19 +6,27 @@ sidebar_label: Bottom Tabs
 
 <div className="feature-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/bottom-tabs/highlights/search-tab.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/bottom-tabs/highlights/search-tab.mp4" />
+  </video>
 
   [Search tab on iOS 26+](#search-tab-on-ios-26)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/bottom-tabs/highlights/bottom-accessory.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/bottom-tabs/highlights/bottom-accessory.mp4" />
+  </video>
 
   [Bottom accessory](#bottomaccessory)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/bottom-tabs/highlights/minimize-on-scroll.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/bottom-tabs/highlights/minimize-on-scroll.mp4" />
+  </video>
 
   [Minimize on scroll](#tabbarminimizebehavior)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/bottom-tabs/highlights/sidebar.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/bottom-tabs/highlights/sidebar.mp4" />
+  </video>
 
   [Sidebar](#tabbarcontrollermode)
 
@@ -129,8 +137,8 @@ The implementation to use for rendering the tab bar. Possible values:
 
 See [Native vs Custom implementation](#native-vs-custom-implementation) for more details.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 createBottomTabNavigator({
@@ -140,14 +148,14 @@ createBottomTabNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Tab.Navigator implementation="custom">{/* ... */}</Tab.Navigator>
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 #### `backBehavior`
 
@@ -797,8 +805,8 @@ With `custom` implementation, this accepts any style properties. With `native` i
 
 To show your screen under the tab bar, you can set the `position` style to absolute (only with `custom` implementation):
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 createBottomTabNavigator({
@@ -812,7 +820,7 @@ createBottomTabNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Tab.Navigator
@@ -823,7 +831,7 @@ createBottomTabNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 You also might need to add a bottom margin to your content if you have an absolutely positioned tab bar. React Navigation won't do it automatically. See [`useBottomTabBarHeight`](#usebottomtabbarheight) for more details.
 
@@ -835,8 +843,8 @@ Only supported with `custom` implementation.
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import { BlurView } from 'expo-blur';
@@ -859,7 +867,7 @@ createBottomTabNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import { BlurView } from 'expo-blur';
@@ -878,7 +886,7 @@ import { StyleSheet } from 'react-native';
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 When using `BlurView`, make sure to set `position: 'absolute'` in `tabBarStyle` as well. You'd also need to use [`useBottomTabBarHeight`](#usebottomtabbarheight) to add bottom padding to your content.
 
@@ -919,7 +927,11 @@ const Tabs = createBottomTabNavigator({
 });
 ```
 
-<img src="/assets/navigators/bottom-tabs/bottom-tabs-side.png" alt="Sidebar" style={{ width: '100%' }} />
+<img
+  src="/assets/navigators/bottom-tabs/bottom-tabs-side.png"
+  alt="Sidebar"
+  style={{ width: '100%' }}
+/>
 
 You can also render a compact sidebar by placing the label below the icon. This is only supported when the [`tabBarVariant`](#tabbarvariant) is set to `material`:
 
@@ -947,7 +959,11 @@ const Tabs = createBottomTabNavigator({
 });
 ```
 
-<img src="/assets/navigators/bottom-tabs/bottom-tabs-side-compact.png" alt="Compact sidebar" style={{ width: '100%' }} />
+<img
+  src="/assets/navigators/bottom-tabs/bottom-tabs-side-compact.png"
+  alt="Compact sidebar"
+  style={{ width: '100%' }}
+/>
 
 #### `tabBarVariant`
 
@@ -960,7 +976,11 @@ Only supported with `custom` implementation.
 
 The `material` variant is currently only supported when the [`tabBarPosition`](#tabbarposition) is set to `left` or `right`.
 
-<img src="/assets/navigators/bottom-tabs/bottom-tabs-side-material.png" alt="Sidebar with material variant" style={{ width: '100%' }} />
+<img
+  src="/assets/navigators/bottom-tabs/bottom-tabs-side-material.png"
+  alt="Sidebar with material variant"
+  style={{ width: '100%' }}
+/>
 
 #### `tabBarBlurEffect`
 
@@ -1436,51 +1456,26 @@ Bottom Tab Navigator exposes various options to configure the transition animati
 
   We can pass this config in the `transitionSpec` option:
 
-  <Tabs groupId="config" queryString="config">
-  <TabItem value="static" label="Static" default>
-
-  ```js
-  {
-    Profile: {
-      screen: Profile,
-      options: {
-        // highlight-start
-        transitionSpec: {
-          animation: 'timing',
-          config: {
-            duration: 150,
-            easing: Easing.inOut(Easing.ease),
+  ```js static2dynamic
+  const Tabs = createBottomTabNavigator({
+    screens: {
+      Profile: {
+        screen: Profile,
+        options: {
+          // highlight-start
+          transitionSpec: {
+            animation: 'timing',
+            config: {
+              duration: 150,
+              easing: Easing.inOut(Easing.ease),
+            },
           },
+          // highlight-end
         },
-        // highlight-end
       },
     },
-  }
+  });
   ```
-
-  </TabItem>
-  <TabItem value="dynamic" label="Dynamic">
-
-  ```js
-  <Tab.Screen
-    name="Profile"
-    component={Profile}
-    options={{
-      // highlight-start
-      transitionSpec: {
-        animation: 'timing',
-        config: {
-          duration: 150,
-          easing: Easing.inOut(Easing.ease),
-        },
-      },
-      // highlight-end
-    }}
-  />
-  ```
-
-  </TabItem>
-  </Tabs>
 
 - `sceneStyleInterpolator` - This is a function that specifies interpolated styles for various parts of the scene. It currently supports style for the view containing the screen:
   - `sceneStyle` - Style for the container view wrapping the screen content.
@@ -1509,53 +1504,27 @@ Bottom Tab Navigator exposes various options to configure the transition animati
 
   We can pass this function in `sceneStyleInterpolator` option:
 
-  <Tabs groupId="config" queryString="config">
-  <TabItem value="static" label="Static" default>
-
-  ```js
-  {
-    Profile: {
-      screen: Profile,
-      options: {
-        // highlight-start
-        sceneStyleInterpolator: ({ current }) => ({
-          sceneStyle: {
-            opacity: current.progress.interpolate({
-              inputRange: [-1, 0, 1],
-              outputRange: [0, 1, 0],
-            }),
-          },
-        }),
-        // highlight-end
+  ```js static2dynamic
+  const Tabs = createBottomTabNavigator({
+    screens: {
+      Profile: {
+        screen: Profile,
+        options: {
+          // highlight-start
+          sceneStyleInterpolator: ({ current }) => ({
+            sceneStyle: {
+              opacity: current.progress.interpolate({
+                inputRange: [-1, 0, 1],
+                outputRange: [0, 1, 0],
+              }),
+            },
+          }),
+          // highlight-end
+        },
       },
     },
-  }
+  });
   ```
-
-  </TabItem>
-  <TabItem value="dynamic" label="Dynamic">
-
-  ```js
-  <Tab.Screen
-    name="Profile"
-    component={Profile}
-    options={{
-      // highlight-start
-      sceneStyleInterpolator: ({ current }) => ({
-        sceneStyle: {
-          opacity: current.progress.interpolate({
-            inputRange: [-1, 0, 1],
-            outputRange: [0, 1, 0],
-          }),
-        },
-      }),
-      // highlight-end
-    }}
-  />
-  ```
-
-  </TabItem>
-  </Tabs>
 
 Putting these together, you can customize the transition animation for a screen:
 
@@ -1625,8 +1594,8 @@ We also export various configs from the library with ready-made configs that you
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import { TransitionSpecs } from '@react-navigation/bottom-tabs';
@@ -1646,7 +1615,7 @@ import { TransitionSpecs } from '@react-navigation/bottom-tabs';
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import { TransitionSpecs } from '@react-navigation/bottom-tabs';
@@ -1665,7 +1634,7 @@ import { TransitionSpecs } from '@react-navigation/bottom-tabs';
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 #### `SceneStyleInterpolators`
 
@@ -1674,8 +1643,8 @@ import { TransitionSpecs } from '@react-navigation/bottom-tabs';
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import { SceneStyleInterpolators } from '@react-navigation/bottom-tabs';
@@ -1695,7 +1664,7 @@ import { SceneStyleInterpolators } from '@react-navigation/bottom-tabs';
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import { SceneStyleInterpolators } from '@react-navigation/bottom-tabs';
@@ -1714,7 +1683,7 @@ import { SceneStyleInterpolators } from '@react-navigation/bottom-tabs';
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 #### `TransitionPresets`
 
@@ -1727,8 +1696,8 @@ You can spread these presets in `options` to customize the animation for a scree
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import { TransitionPresets } from '@react-navigation/bottom-tabs';
@@ -1748,7 +1717,7 @@ import { TransitionPresets } from '@react-navigation/bottom-tabs';
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import { TransitionPresets } from '@react-navigation/bottom-tabs';
@@ -1767,4 +1736,4 @@ import { TransitionPresets } from '@react-navigation/bottom-tabs';
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>

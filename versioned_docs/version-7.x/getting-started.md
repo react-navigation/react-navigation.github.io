@@ -42,8 +42,8 @@ npm install @react-navigation/native
 
 Next, install the dependencies used by most navigators: [`react-native-screens`](https://github.com/software-mansion/react-native-screens) and [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context).
 
-<Tabs groupId='framework' queryString="framework">
-<TabItem value='expo' label='Expo' default>
+<FrameworkTabs>
+<TabItem value='expo'>
 
 In your project directory, run:
 
@@ -54,7 +54,7 @@ npx expo install react-native-screens react-native-safe-area-context
 This will install versions of these libraries that are compatible with your Expo SDK version.
 
 </TabItem>
-<TabItem value='community-cli' label='Community CLI'>
+<TabItem value='community-cli'>
 
 In your project directory, run:
 
@@ -74,8 +74,8 @@ npx pod-install ios
 
 Edit `MainActivity.kt` or `MainActivity.java` under `android/app/src/main/java/<your package name>/` and add the highlighted code:
 
-<Tabs>
-<TabItem value='kotlin' label='Kotlin' default>
+<AndroidLanguageTabs>
+<TabItem value='kotlin'>
 
 ```kotlin
 // highlight-start
@@ -100,7 +100,7 @@ class MainActivity: ReactActivity() {
 ```
 
 </TabItem>
-<TabItem value='java' label='Java'>
+<TabItem value='java'>
 
 ```java
 // highlight-start
@@ -126,7 +126,7 @@ public class MainActivity extends ReactActivity {
 ```
 
 </TabItem>
-</Tabs>
+</AndroidLanguageTabs>
 
 This avoids crashes related to View state not being persisted across Activity restarts.
 
@@ -146,7 +146,7 @@ In `AndroidManifest.xml`, set `android:enableOnBackInvokedCallback` to `false` i
 ```
 
 </TabItem>
-</Tabs>
+</FrameworkTabs>
 
 ## Setting up React Navigation
 

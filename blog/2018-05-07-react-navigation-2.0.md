@@ -6,7 +6,7 @@ tags: [release, announcement]
 
 The documentation is now live at [reactnavigation.org](https://reactnavigation.org), and v1 lives [here](/docs/1.x/getting-started).
 
-<!--truncate-->
+{/* truncate */}
 
 ## Significant breaking changes
 

@@ -8,7 +8,7 @@ The documentation is now live at [reactnavigation.org](https://reactnavigation.o
 
 React Navigation 6 keeps mostly the same core API as React Navigation 5, and you can think of it as further polishing what was in React Navigation 5. Let's talk about the highlights of this release in this blog post.
 
-<!--truncate-->
+{/* truncate */}
 
 ## Highlights
 

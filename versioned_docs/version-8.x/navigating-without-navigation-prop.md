@@ -25,8 +25,8 @@ Note that it's usually better to trigger navigation from user actions such as bu
 
 You can get access to the root navigation object through a `ref` and pass it to the `RootNavigation` which we will later use to navigate.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import { createStaticNavigation } from '@react-navigation/native';
@@ -42,7 +42,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';
@@ -56,7 +56,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 In the next step, we define `RootNavigation`, which is a simple module with functions that dispatch user-defined navigation actions.
 

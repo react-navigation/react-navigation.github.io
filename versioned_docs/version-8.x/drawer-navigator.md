@@ -6,11 +6,15 @@ sidebar_label: Drawer
 
 <div className="feature-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/drawer/highlights/drawer-types.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/drawer/highlights/drawer-types.mp4" />
+  </video>
 
   [Multiple types](#drawertype)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/drawer/highlights/drawer-position.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/drawer/highlights/drawer-position.mp4" />
+  </video>
 
   [Position on left or right](#drawerposition)
 
@@ -30,8 +34,8 @@ npm install @react-navigation/drawer@next
 
 The navigator depends on [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) for gestures and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/) for animations.
 
-<Tabs groupId='framework' queryString="framework">
-<TabItem value='expo' label='Expo' default>
+<FrameworkTabs>
+<TabItem value='expo'>
 
 If you have a Expo managed project, in your project directory, run:
 
@@ -40,7 +44,7 @@ npx expo install react-native-gesture-handler react-native-reanimated react-nati
 ```
 
 </TabItem>
-<TabItem value='community-cli' label='Community CLI'>
+<TabItem value='community-cli'>
 
 If you have a bare React Native project, in your project directory, run:
 
@@ -51,7 +55,7 @@ npm install react-native-gesture-handler react-native-reanimated react-native-wo
 After installation, configure the Reanimated Babel Plugin in your project following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started).
 
 </TabItem>
-</Tabs>
+</FrameworkTabs>
 
 If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
 
@@ -263,8 +267,8 @@ function CustomDrawerContent({ navigation }) {
 
 To use the custom component, we need to pass it in the `drawerContent` prop:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 createDrawerNavigator({
@@ -276,7 +280,7 @@ createDrawerNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
@@ -285,7 +289,7 @@ createDrawerNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### Options
 
@@ -488,25 +492,33 @@ Type of the drawer. It determines how the drawer looks and animates.
 
 <div className="options-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/drawer/drawer-type-front.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/drawer/drawer-type-front.mp4" />
+  </video>
 
   `front`
 
   Traditional drawer which covers the screen with an overlay behind it.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/drawer/drawer-type-back.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/drawer/drawer-type-back.mp4" />
+  </video>
 
   `back`
 
   The drawer is revealed behind the screen on swipe.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/drawer/drawer-type-slide.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/drawer/drawer-type-slide.mp4" />
+  </video>
 
   `slide`
 
   Both the screen and the drawer slide on swipe to reveal the drawer.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/drawer/drawer-type-permanent.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/drawer/drawer-type-permanent.mp4" />
+  </video>
 
   `permanent`
 

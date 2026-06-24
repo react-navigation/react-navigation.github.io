@@ -13,8 +13,8 @@ Now that we know how to customize the look of our headers, let's make them inter
 
 The most common way to interact with a header is by tapping a button to the left or right of the title. Let's add a button to the right side of the header:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Header button" snack
 import * as React from 'react';
@@ -56,7 +56,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Header button" snack
 import * as React from 'react';
@@ -105,7 +105,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 <div className="device-frame">
 
@@ -119,8 +119,8 @@ When we define our button this way, you can't access or update the screen compon
 
 To make header buttons interact with screen state, we can use [`navigation.setOptions`](navigation-object.md#setoptions) inside the screen component:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Header button" snack
 import * as React from 'react';
@@ -174,7 +174,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Header button" snack
 import * as React from 'react';
@@ -232,12 +232,12 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 <div className="device-frame">
-<video playsInline autoPlay muted loop >
-  <source src="/assets/fundamentals/header-screen-interaction.mp4" />
-</video>
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/fundamentals/header-screen-interaction.mp4" />
+  </video>
 </div>
 
 Here we update `headerRight` with a button that has `onPress` handler that can access and update the component's state, since it's defined inside the component. We also specify a placeholder button without `onPress` in the screen's `options` to reserve the header space and avoid a layout shift when `setOptions` replaces it on mount.

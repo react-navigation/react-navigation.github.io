@@ -6,19 +6,27 @@ sidebar_label: Material Top Tabs
 
 <div className="feature-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/scrollable-tabbar.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/material-top-tabs/highlights/scrollable-tabbar.mp4" />
+  </video>
 
   [Scrollable tab bar](#tabbarscrollenabled)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/badge.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/material-top-tabs/highlights/badge.mp4" />
+  </video>
 
   [Badges](#tabbarbadge)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/custom-indicator.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/material-top-tabs/highlights/custom-indicator.mp4" />
+  </video>
 
   [Custom indicator](#tabbarindicator)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/material-top-tabs/highlights/custom-tabbar.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/material-top-tabs/highlights/custom-tabbar.mp4" />
+  </video>
 
   [Custom tab bar](#tabbar)
 
@@ -38,8 +46,8 @@ npm install @react-navigation/material-top-tabs
 
 The navigator depends on [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) for rendering the pages.
 
-<Tabs groupId='framework' queryString="framework">
-<TabItem value='expo' label='Expo' default>
+<FrameworkTabs>
+<TabItem value='expo'>
 
 If you have a Expo managed project, in your project directory, run:
 
@@ -48,7 +56,7 @@ npx expo install react-native-pager-view
 ```
 
 </TabItem>
-<TabItem value='community-cli' label='Community CLI'>
+<TabItem value='community-cli'>
 
 If you have a bare React Native project, in your project directory, run:
 
@@ -57,7 +65,7 @@ npm install react-native-pager-view
 ```
 
 </TabItem>
-</Tabs>
+</FrameworkTabs>
 
 If you're on a Mac and developing for iOS, you also need to install [pods](https://cocoapods.org/) to complete the linking.
 

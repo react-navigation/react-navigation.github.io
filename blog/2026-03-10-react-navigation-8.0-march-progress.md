@@ -8,7 +8,7 @@ We've been busy since the [first alpha release of React Navigation 8.0](/blog/20
 
 This post covers the features and improvements that landed since the first alpha release back in December 2025.
 
-<!--truncate-->
+{/* truncate */}
 
 ## Minimum requirements
 

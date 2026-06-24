@@ -13,8 +13,8 @@ In this document we'll explain how [screen options](screen-options.md) work when
 
 Let's take for example a tab navigator that contains a native stack in each tab. What happens if we set the `options` on a screen inside of the stack?
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Tabs with native stack" snack
 import * as React from 'react';
@@ -70,7 +70,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Tabs with native stack" snack
 import * as React from 'react';
@@ -129,12 +129,12 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 As we mentioned earlier, you can only modify navigation options for a navigator from one of its screen components. `A` and `B` above are screen components in `HomeStack` and `SettingsStack` respectively, not in the tab navigator. So the result will be that the `tabBarLabel` property is not applied to the tab navigator. We can fix this though!
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Tabs with native stack" snack
 import * as React from 'react';
@@ -190,7 +190,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Tabs with native stack" snack
 import * as React from 'react';
@@ -250,7 +250,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 When we set the `options` directly on `Screen` components containing the `HomeStack` and `SettingsStack` component, it allows us to control the options for its parent navigator when its used as a screen component. In this case, the options on our stack components configure the label in the tab navigator that renders the stacks.
 
@@ -258,8 +258,8 @@ When we set the `options` directly on `Screen` components containing the `HomeSt
 
 Imagine the following configuration:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Parent options from a child" snack
 import * as React from 'react';
@@ -321,7 +321,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Parent options from a child" snack
 import * as React from 'react';
@@ -385,7 +385,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 If we were to set the `headerTitle` with `options` for the `FeedScreen`, this would not work. This is because `App` stack will only look at its immediate children for configuration: `HomeTabs` and `SettingsScreen`.
 
@@ -413,8 +413,8 @@ function getHeaderTitle(route) {
 
 Then we can use this function with the `options` prop on `Screen`:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Parent options from a child" snack
 import * as React from 'react';
@@ -501,7 +501,7 @@ export default function App() {
 
 </TabItem>
 
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Parent options from a child" snack
 import * as React from 'react';
@@ -590,7 +590,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 So what's happening here? With the `getFocusedRouteNameFromRoute` helper, we can get the currently active route name from this child navigator (in this case it's the tab navigator since that's what we're rendering) and setting an appropriate title for the header.
 
@@ -604,8 +604,8 @@ In many cases, similar behavior can be achieved by reorganizing our navigators. 
 
 For example, for the above use case, instead of adding a tab navigator inside a stack navigator, we can add a stack navigator inside each of the tabs.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Reorganized navigators" snack
 import * as React from 'react';
@@ -676,7 +676,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Reorganized navigators" snack
 import * as React from 'react';
@@ -756,7 +756,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Additionally, this lets you push new screens to the feed and profile stacks without hiding the tab bar by adding more routes to those stacks.
 

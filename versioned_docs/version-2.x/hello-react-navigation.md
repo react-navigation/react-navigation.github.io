@@ -38,7 +38,13 @@ export default createStackNavigator({
 });
 ```
 
-<a href="https://snack.expo.io/@react-navigation/hello-world-v2" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/hello-world-v2"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 If you run this code, you will see a screen with an empty navigation bar and a grey content area containing your `HomeScreen` component. The styles you see for the navigation bar and the content area are the default configuration for a stack navigator, we'll learn how to configure those later.
 

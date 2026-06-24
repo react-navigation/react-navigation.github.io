@@ -44,7 +44,13 @@ class HomeScreen extends React.Component {
 // ... other code from the previous section
 ```
 
-<a href="https://snack.expo.io/@react-navigation/our-first-navigate" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/our-first-navigate"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 Let's break down this down:
 
@@ -73,7 +79,13 @@ class DetailsScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/navigating-to-details-again" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/navigating-to-details-again"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 If you run this code, you'll notice that each time you press the "Go to Details... again" button it will push a new screen on top. This is where our original comparison to `document.location.href` falls apart, because in a web browser these would not be treated as distinct routes and no new entries would be added to the browser history &mdash; `navigate` for `StackNavigator` behaves more like the web's `window.history.pushState`: each time you call `navigate` it pushes a new route to the navigation stack.
 
@@ -103,11 +115,17 @@ class DetailsScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/going-back" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/going-back"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 > On Android, React Navigation hooks in to the hardware back button and fires the `goBack()` function for you when the user presses it, so it behaves as the user would expect.
 
-<!-- we need to have an easier way to pop to top and popN -->
+{/* we need to have an easier way to pop to top and popN */}
 
 Another common requirement is to be able to go back _multiple_ screens -- for example, if you are several screens deep in a stack and want to dismiss all of them to go back to the first screen. We'll discuss how to do this in ["Building a sign in flow"](auth-flow.md).
 
