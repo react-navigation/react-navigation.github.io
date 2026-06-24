@@ -26,7 +26,7 @@ Notice that we wrap our components in a `Provider` like we'd normally do with `r
 
 Create a component, `connect` it to the store, then use that component in the `title`.
 
- <samp id="redux-integration" />
+<samp id="redux-integration" />
 
 ```js
 function Counter({ value }) {
@@ -71,7 +71,7 @@ function StaticCounter({ route }) {
 
 So our component will look like this:
 
- <samp id="redux-integration-nav-param" />
+<samp id="redux-integration-nav-param" />
 
 ```js
 <RootStack.Screen

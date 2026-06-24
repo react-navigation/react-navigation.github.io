@@ -524,8 +524,8 @@ These examples use a bottom tab navigator directly nested inside another stack n
 
 If you don't want headers in any of the navigators, you can specify `headerShown: false` in all of the navigators:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const HomeTabs = createBottomTabNavigator({
@@ -554,7 +554,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 function HomeTabs() {
@@ -589,7 +589,7 @@ function RootStack() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Sharing the same screen in multiple navigators
 
@@ -597,8 +597,8 @@ A common pattern in mobile apps is to nest stack navigators inside each tab of a
 
 Let's say you have a `FeedStack` tab and a `SearchStack` tab, and both of them can navigate to a `Profile` screen. You can add the `Profile` screen to both stacks, so that when you navigate to it from the `Feed` screen, the `FeedStack` tab stays selected and the tab bar remains visible. Pressing back from `Profile` will take you back to the previous screen in the same tab.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 // highlight-start
@@ -643,7 +643,7 @@ const HomeTabs = createBottomTabNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 function FeedStack() {
@@ -695,7 +695,7 @@ function HomeTabs() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Each `Profile` screen belongs to the stack where it was opened. Calling `navigate('Profile', { id: 'jane' })` from inside `FeedStack` opens `Profile` in `FeedStack`, while the same call from inside `SearchStack` opens it in `SearchStack`.
 
@@ -711,8 +711,8 @@ We recommend keeping navigator nesting to a minimum. Try to achieve the behavior
 
 Think of nesting navigators as a way to achieve the UI you want, not as a way to organize your code. If you want to create separate groups of screens for organization, use the [`Group`](group.md) component for dynamic configuration or [`groups` property](static-configuration.md#groups) for static configuration:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const MyStack = createNativeStackNavigator({
@@ -751,7 +751,7 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Navigator>
@@ -777,4 +777,4 @@ const MyStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>

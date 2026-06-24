@@ -119,7 +119,7 @@ You can customize the transition by passing a custom `SharedTransition` configur
 
 Custom transition configuration is not fully finalized and might change in a future release.
 
-<Tabs groupId="architecture" queryString="architecture">
+<Tabs groupId="architecture" queryString="architecture" values={[{ value: "new", label: "New Architecture (Reanimated 4)" }, { value: "old", label: "Old Architecture (Reanimated 3)", default: true }]}>
 <TabItem value="new" label="New Architecture (Reanimated 4)">
 
 On the New Architecture, the default transition animates `width`, `height`, `originX`, `originY`, `transform`, `backgroundColor`, and `opacity` using `withTiming` with a 500 ms duration.

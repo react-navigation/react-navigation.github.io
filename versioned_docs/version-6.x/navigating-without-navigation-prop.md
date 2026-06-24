@@ -55,7 +55,7 @@ export function navigate(name, params) {
 
 Then, in any of your javascript modules, import the `RootNavigation` and call functions which you exported from it. You may use this approach outside of your React components and, in fact, it works as well when used from within them.
 
- <samp id="no-nav-prop" />
+<samp id="no-nav-prop" />
 
 ```js
 // any js module
@@ -97,7 +97,7 @@ For an example, consider the following scenario, you have a screen somewhere in 
 
 To avoid this, you can use the `isReady()` method available on the ref as shown in the above examples.
 
-<samp id="handling-navigation-init"/>
+<samp id="handling-navigation-init" />
 
 ```js
 // RootNavigation.js

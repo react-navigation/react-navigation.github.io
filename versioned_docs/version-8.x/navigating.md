@@ -156,9 +156,9 @@ export default function App() {
 ```
 
 <div className="device-frame">
-<video playsInline autoPlay muted loop>
-  <source src="/assets/fundamentals/navigate.mp4" />
-</video>
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/fundamentals/navigate.mp4" />
+  </video>
 </div>
 
 The [`useNavigation`](use-navigation.md) hook takes the current route name as an argument. We can call `navigate` with the route name we want to go to.
@@ -300,9 +300,9 @@ export default function App() {
 ```
 
 <div className="device-frame">
-<video playsInline autoPlay muted loop>
-  <source src="/assets/fundamentals/stack-push.mp4" />
-</video>
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/fundamentals/stack-push.mp4" />
+  </video>
 </div>
 
 Each `push` call adds a new route to the stack, while `navigate` only pushes if you're not already on that route.
@@ -377,9 +377,9 @@ export default function App() {
 ```
 
 <div className="device-frame">
-<video playsInline autoPlay muted loop>
-  <source src="/assets/fundamentals/go-back.mp4" />
-</video>
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/fundamentals/go-back.mp4" />
+  </video>
 </div>
 
 :::note
@@ -461,9 +461,9 @@ export default function App() {
 ```
 
 <div className="device-frame">
-<video playsInline autoPlay muted loop>
-  <source src="/assets/fundamentals/pop-to-top.mp4" />
-</video>
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/fundamentals/pop-to-top.mp4" />
+  </video>
 </div>
 
 ## Summary

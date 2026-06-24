@@ -17,8 +17,8 @@ The container takes care of platform specific integration and provides various u
 
 Usage:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 When using the static API, the component returned by [`createStaticNavigation`](static-configuration.md#createstaticnavigation) is equivalent to the `NavigationContainer` component.
 
@@ -40,7 +40,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';
@@ -58,7 +58,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Ref
 
@@ -66,8 +66,8 @@ It's possible to pass a [`ref`](https://react.dev/learn/referencing-values-with-
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Using refs" snack
 import * as React from 'react';
@@ -120,7 +120,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Using refs" snack
 import * as React from 'react';
@@ -170,7 +170,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 If you're using a regular ref object, keep in mind that the ref may be initially `null` in some situations (such as when linking is enabled). To make sure that the ref is initialized, you can use the [`onReady`](#onready) callback to get notified when the navigation container finishes mounting.
 
@@ -334,8 +334,8 @@ Prop that accepts initial state for the navigator. This can be useful for cases 
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 <Navigation
@@ -345,7 +345,7 @@ Example:
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <NavigationContainer
@@ -357,7 +357,7 @@ Example:
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 See [Navigation state reference](navigation-state.md) for more details on the structure of the state object.
 
@@ -388,8 +388,9 @@ Function that gets called every time [navigation state](navigation-state.md) cha
 You can use it to track the focused screen, persist the navigation state etc.
 
 Example:
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 <Navigation
@@ -399,7 +400,7 @@ Example:
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <NavigationContainer
@@ -411,7 +412,7 @@ Example:
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### `onReady`
 
@@ -422,8 +423,8 @@ Function which is called after the navigation container and all its children fin
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 <Navigation
@@ -433,7 +434,7 @@ Example:
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <NavigationContainer
@@ -445,7 +446,7 @@ Example:
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This callback won't fire if there are no navigators rendered inside the container.
 
@@ -459,8 +460,8 @@ By default, React Navigation will show a development-only error message when an 
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 <Navigation
@@ -470,7 +471,7 @@ Example:
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <NavigationContainer
@@ -482,7 +483,7 @@ Example:
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### `linking`
 
@@ -490,8 +491,8 @@ Configuration for linking integration used for deep linking, URL support in brow
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import { createStaticNavigation } from '@react-navigation/native';
@@ -526,7 +527,7 @@ function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';
@@ -554,7 +555,7 @@ function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 See [configuring links guide](configuring-links.md) for more details on how to configure deep links and URL integration.
 
 #### Options
@@ -567,8 +568,8 @@ Only URLs matching these prefixes will be handled. The prefix will be stripped f
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 <Navigation
@@ -581,7 +582,7 @@ Example:
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <NavigationContainer
@@ -598,7 +599,7 @@ Example:
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This is only supported on iOS and Android.
 
@@ -624,8 +625,8 @@ You can provide a custom `getInitialURL` function where you can return the link 
 
 For example, you could do something like following to handle both deep linking and [Firebase notifications](https://rnfirebase.io/messaging/notifications):
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import messaging from '@react-native-firebase/messaging';
@@ -655,7 +656,7 @@ import messaging from '@react-native-firebase/messaging';
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import messaging from '@react-native-firebase/messaging';
@@ -690,7 +691,7 @@ import messaging from '@react-native-firebase/messaging';
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This option is not available on Web.
 
@@ -700,8 +701,8 @@ Similar to [`getInitialURL`](#linkinggetinitialurl), you can provide a custom `s
 
 For example, you could do something like following to handle both deep linking and [Firebase notifications](https://rnfirebase.io/messaging/notifications):
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import messaging from '@react-native-firebase/messaging';
@@ -743,7 +744,7 @@ import messaging from '@react-native-firebase/messaging';
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import messaging from '@react-native-firebase/messaging';
@@ -790,7 +791,7 @@ import messaging from '@react-native-firebase/messaging';
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This option is not available on Web.
 
@@ -800,8 +801,8 @@ React Navigation handles deep links and [URLs on Web](web-support.md) by parsing
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 <Navigation
@@ -818,7 +819,7 @@ Example:
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <NavigationContainer
@@ -840,7 +841,7 @@ Example:
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ##### `linking.getPathFromState`
 
@@ -850,8 +851,8 @@ If you provide a custom [`getStateFromPath`](#linkinggetstatefrompath), you shou
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 <Navigation
@@ -868,7 +869,7 @@ Example:
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <NavigationContainer
@@ -890,7 +891,7 @@ Example:
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ##### `linking.getActionFromState`
 
@@ -900,8 +901,8 @@ You can provide a custom `getActionFromState` function to customize how the stat
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 <Navigation
@@ -918,7 +919,7 @@ Example:
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <NavigationContainer
@@ -940,14 +941,14 @@ Example:
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### `fallback`
 
 React Element to use as a fallback while we resolve deep links. Defaults to `null`.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 <Navigation
@@ -957,7 +958,7 @@ React Element to use as a fallback while we resolve deep links. Defaults to `nul
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <NavigationContainer
@@ -969,7 +970,7 @@ React Element to use as a fallback while we resolve deep links. Defaults to `nul
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 If you have a native splash screen, please use [`onReady`](#onready) instead of `fallback` prop.
 
@@ -991,8 +992,8 @@ Custom formatter to use if you want to customize the title text. Defaults to:
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 <Navigation
@@ -1006,7 +1007,7 @@ Example:
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <NavigationContainer
@@ -1022,7 +1023,7 @@ Example:
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### `theme`
 
@@ -1039,8 +1040,8 @@ Supported values:
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 <Navigation
@@ -1050,7 +1051,7 @@ Example:
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <NavigationContainer
@@ -1062,7 +1063,7 @@ Example:
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This is used in various navigators to adjust the content according to the text direction, for example, the drawer in the [drawer navigator](drawer-navigator.md) is positioned on the right side in RTL languages.
 
@@ -1119,8 +1120,8 @@ In most apps, there will be only a single `NavigationContainer`. Nesting multipl
 
 You can wrap the nested `NavigationContainer` with the `NavigationIndependentTree` component to make it independent from the parent navigation tree:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import {
@@ -1144,7 +1145,7 @@ function NestedApp() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import {
@@ -1164,7 +1165,7 @@ function NestedApp() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Doing this disconnects any children navigators from the parent container and doesn't allow navigation between them.
 

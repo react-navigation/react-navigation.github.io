@@ -119,9 +119,9 @@ export default function App() {
 ```
 
 <div className="device-frame">
-<video playsInline autoPlay muted loop >
-  <source src="/assets/fundamentals/header-screen-interaction.mp4" />
-</video>
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/fundamentals/header-screen-interaction.mp4" />
+  </video>
 </div>
 
 Here we update `headerRight` with a button that has `onPress` handler that can access and update the component's state, since it's defined inside the component. We also specify a placeholder button without `onPress` in the screen's `options` to reserve the header space and avoid a layout shift when `setOptions` replaces it on mount.

@@ -34,8 +34,8 @@ This hook provides a logger for React Navigation. It logs the navigation state a
 
 To use the hook, import it and pass a `ref` to the `NavigationContainer` as its argument:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import * as React from 'react';
@@ -58,7 +58,7 @@ export default function App() {
 
 </TabItem>
 
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import * as React from 'react';
@@ -80,7 +80,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### `useReduxDevToolsExtension`
 
@@ -90,8 +90,8 @@ This hook provides integration with [Redux DevTools Extension](https://github.co
 
 To use the hook, import it and pass a `ref` to the `NavigationContainer` as its argument:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import * as React from 'react';
@@ -114,7 +114,7 @@ export default function App() {
 
 </TabItem>
 
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import * as React from 'react';
@@ -136,6 +136,6 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Now, you'll be able to see logs from React Navigation in Redux DevTools Extension, e.g. when you're debugging your app with React Native Debugger app.

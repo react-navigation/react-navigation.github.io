@@ -12,7 +12,21 @@ It's tempting to solve (a) by wrapping your entire app in a container with paddi
 
 ![](/assets/safe-area/intro.png)
 
-<a href="https://snack.expo.io/@react-navigation/boring-safe-area" target="blank" class="run-code-button">&rarr; Run the example pictured on the left</a> or, preferably, <a href="https://snack.expo.io/@react-navigation/nice-safe-area" target="blank" class="run-code-button">run the example pictured on the right.</a>
+<a
+  href="https://snack.expo.io/@react-navigation/boring-safe-area"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run the example pictured on the left
+</a>
+or, preferably,
+<a
+  href="https://snack.expo.io/@react-navigation/nice-safe-area"
+  target="blank"
+  class="run-code-button"
+>
+  run the example pictured on the right.
+</a>
 
 ## Hidden/Custom Navigation Bar or Tab Bar
 

@@ -710,8 +710,10 @@ header {
     > .theme-code-block:first-child
     + .code-block-footer:last-child
 ) {
-  & > .margin-top--md {
-    margin-top: 0 !important;
+  @layer docusaurus.infima {
+    & > .margin-top--md {
+      margin-top: 0 !important;
+    }
   }
 
   & > .tabs {
@@ -726,6 +728,8 @@ header {
   }
 
   & > .tabs > .tabs__item {
+    display: flex;
+    align-items: center;
     border: none;
     border-radius: 0;
     filter: saturate(0);
@@ -844,14 +848,6 @@ header {
 
 article {
   text-wrap: pretty;
-
-  & > div > * + h2 {
-    margin-top: 3.5rem;
-  }
-
-  & > div > * + h3 {
-    margin-top: 3rem;
-  }
 
   & h2 + p,
   & h3 + p,
@@ -1035,12 +1031,6 @@ samp {
   [data-theme='dark'] & {
     --ifm-alert-background-color: hsl(var(--ifm-color-danger-hue), 38%, 11.5%);
     --ifm-alert-border-color: hsl(var(--ifm-color-danger-hue), 32%, 36%);
-  }
-}
-
-.theme-doc-version-banner {
-  & > .margin-top--md {
-    margin-top: 0 !important;
   }
 }
 
@@ -1562,6 +1552,8 @@ code {
 
   & .avatar__photo {
     margin: calc(var(--ifm-leading) / 2) 0;
+    width: var(--ifm-avatar-photo-size);
+    border-radius: 50%;
   }
 
   & .avatar__intro {

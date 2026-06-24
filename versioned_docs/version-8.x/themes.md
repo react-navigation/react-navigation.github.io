@@ -189,23 +189,16 @@ React Navigation provides basic light and dark themes on all platforms and dynam
 ### `DefaultTheme`
 
 <ThemeColors>
-- primary: rgb(0 122 255)
-- background: rgb(242 242 247)
-- card: rgb(255 255 255)
-- text: rgb(0 0 0)
-- border: rgb(198 198 200)
-- notification: rgb(255 59 48)
+  - primary: rgb(0 122 255) - background: rgb(242 242 247) - card: rgb(255 255
+  255) - text: rgb(0 0 0) - border: rgb(198 198 200) - notification: rgb(255 59
+  48)
 </ThemeColors>
 
 ### `DarkTheme`
 
 <ThemeColors>
-- primary: rgb(10 132 255)
-- background: rgb(0 0 0)
-- card: rgb(28 28 30)
-- text: rgb(255 255 255)
-- border: rgb(56 56 58)
-- notification: rgb(255 69 58)
+  - primary: rgb(10 132 255) - background: rgb(0 0 0) - card: rgb(28 28 30) -
+  text: rgb(255 255 255) - border: rgb(56 56 58) - notification: rgb(255 69 58)
 </ThemeColors>
 
 ### `MaterialLightTheme`

@@ -14,19 +14,27 @@ Currently only iOS and Android are supported. Use [`createBottomTabNavigator`](b
 
 <div className="feature-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/bottom-tabs/highlights/search-tab.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/bottom-tabs/highlights/search-tab.mp4" />
+  </video>
 
   [Search tab on iOS 26+](#search-tab-on-ios-26)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/bottom-tabs/highlights/bottom-accessory.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/bottom-tabs/highlights/bottom-accessory.mp4" />
+  </video>
 
   [Bottom accessory](#bottomaccessory)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/bottom-tabs/highlights/minimize-on-scroll.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/bottom-tabs/highlights/minimize-on-scroll.mp4" />
+  </video>
 
   [Minimize on scroll](#tabbarminimizebehavior)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/bottom-tabs/highlights/sidebar.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/bottom-tabs/highlights/sidebar.mp4" />
+  </video>
 
   [Sidebar](#tabbarcontrollermode)
 

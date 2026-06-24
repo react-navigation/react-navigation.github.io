@@ -150,17 +150,17 @@ export default function App() {
 ```
 
 <div className="device-frame">
-<video playsInline autoPlay muted loop>
-  <source src="/assets/fundamentals/passing-params.mp4" />
-</video>
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/fundamentals/passing-params.mp4" />
+  </video>
 </div>
 
 ## Initial params
 
 You can specify default params for a screen using `initialParams`. These are used when no params are passed during navigation, and are shallow merged with any params you do pass:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 const RootStack = createNativeStackNavigator({
@@ -175,7 +175,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Screen
@@ -187,7 +187,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Updating params
 
@@ -350,9 +350,9 @@ export default function App() {
 ```
 
 <div className="device-frame">
-<video playsInline autoPlay muted loop>
-  <source src="/assets/fundamentals/passing-params-back.mp4" />
-</video>
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/fundamentals/passing-params-back.mp4" />
+  </video>
 </div>
 
 Here, after you press "Done", the home screen's `route.params` will be updated to reflect the post text that you passed in `popTo`.

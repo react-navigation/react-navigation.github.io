@@ -6,7 +6,7 @@ tags: [release, announcement]
 
 Exactly two months after the release of React Navigation 1.0, we are close to another major version release. We’d like to invite developers that use the library to give the release candidate a try in your app and let us know if you encounter any issues.
 
-<!--truncate-->
+{/* truncate */}
 
 ```bash
 yarn add react-navigation@^2.0.0-rc.1

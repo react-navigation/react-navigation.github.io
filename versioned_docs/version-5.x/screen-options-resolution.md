@@ -140,6 +140,7 @@ function getHeaderTitle(route) {
 Then we can use this function in 2 ways:
 
 1. Using `options` prop on `Screen` (recommended):
+
    <samp id="parent-options-from-child-opt1" />
 
    ```js
@@ -153,6 +154,7 @@ Then we can use this function in 2 ways:
    ```
 
 2. Using `navigation.setOptions`:
+
    <samp id="parent-options-from-child-opt2" />
 
    ```js

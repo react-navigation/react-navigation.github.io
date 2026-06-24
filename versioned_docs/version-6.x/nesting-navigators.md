@@ -159,7 +159,17 @@ navigation.navigate('Root', { screen: 'Profile' });
 Now, the `Profile` screen will be rendered instead of `Home` upon navigation.
 
 <summary>
-This may look very different from the way navigation used to work with nested screens previously. The difference is that in the previous versions, all configuration was static, so React Navigation could statically find the list of all the navigators and their screens by recursing into nested configurations. But with dynamic configuration, React Navigation doesn't know which screens are available and where until the navigator containing the screen renders. Normally, a screen doesn't render its contents until you navigate to it, so the configuration of navigators which haven't rendered is not yet available. This makes it necessary to specify the hierarchy you're navigating to. This is also why you should have as little nesting of navigators as possible to keep your code simpler.
+  This may look very different from the way navigation used to work with nested
+  screens previously. The difference is that in the previous versions, all
+  configuration was static, so React Navigation could statically find the list
+  of all the navigators and their screens by recursing into nested
+  configurations. But with dynamic configuration, React Navigation doesn't know
+  which screens are available and where until the navigator containing the
+  screen renders. Normally, a screen doesn't render its contents until you
+  navigate to it, so the configuration of navigators which haven't rendered is
+  not yet available. This makes it necessary to specify the hierarchy you're
+  navigating to. This is also why you should have as little nesting of
+  navigators as possible to keep your code simpler.
 </summary>
 
 ### Passing params to a screen in a nested navigator

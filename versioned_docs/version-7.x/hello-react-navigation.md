@@ -39,8 +39,8 @@ npm install @react-navigation/elements
 
 We can create a native stack navigator by using the `createNativeStackNavigator` function:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Native Stack Example" snack
 import * as React from 'react';
@@ -80,7 +80,7 @@ In a typical React Native app, the `createStaticNavigation` function should be o
 :::
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Native Stack Example" snack
 import * as React from 'react';
@@ -126,7 +126,7 @@ In a typical React Native app, the `NavigationContainer` should be only used onc
 :::
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 <div className="device-frame">
 
@@ -148,8 +148,8 @@ We haven't passed any configuration to the navigator yet, so it just uses the de
 
 Let's add a second screen and configure `Home` as the initial route:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Native Stack Example" snack
 import * as React from 'react';
@@ -194,7 +194,7 @@ export default function App() {
 Now our stack has two _routes_: `Home` and `Details`. Routes are defined under the `screens` property - the property name is the route name, and the value is the component to render.
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Native Stack Example" snack
 import * as React from 'react';
@@ -250,7 +250,7 @@ When using the dynamic API, the `component` prop accepts a component, not a rend
 :::
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Here, the initial route is set to `Home`. Try changing `initialRouteName` to `Details` and reload the app (Fast Refresh won't pick up this change) to see the Details screen first.
 
@@ -260,8 +260,8 @@ Each screen can specify options such as the header title.
 
 We can specify the `options` property in the screen configuration to set screen-specific options:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 To specify the options, we'll change how we have specified the screen component. Instead of specifying the screen component as the value, we can also specify an object with a `screen` property:
 
@@ -380,7 +380,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 Any customization options can be passed in the `options` prop for each screen component:
 
@@ -491,12 +491,12 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Passing additional data
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 To pass additional data to a screen, use `.with` to wrap the navigator with [React context](https://react.dev/reference/react/useContext) to pass data to the screens:
 
@@ -528,7 +528,7 @@ const RootStack = createNativeStackNavigator({
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 We can pass additional data to a screen with 2 approaches:
 
@@ -575,7 +575,7 @@ We can pass additional data to a screen with 2 approaches:
    :::
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## What's next?
 
@@ -590,8 +590,8 @@ If you are using TypeScript, you will need to specify the types accordingly. You
 
 ## Summary
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 - React Native doesn't have a built-in API for navigation like a web browser does. React Navigation provides this for you, along with the iOS and Android gestures and animations to transition between screens.
 - [`createNativeStackNavigator`](native-stack-navigator.md) is a function that takes the screens configuration and renders our content.
@@ -601,7 +601,7 @@ If you are using TypeScript, you will need to specify the types accordingly. You
 - To pass additional data to a screen, we can use React context and use `.with` to wrap the navigator with a context provider to pass data to the screens.
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 - React Native doesn't have a built-in API for navigation like a web browser does. React Navigation provides this for you, along with the iOS and Android gestures and animations to transition between screens.
 - [`Stack.Navigator`](native-stack-navigator.md) is a component that takes route configuration as its children with additional props for configuration and renders our content.
@@ -611,4 +611,4 @@ If you are using TypeScript, you will need to specify the types accordingly. You
 - To pass additional data to a screen, we can either use React context and wrap the navigator with a context provider to pass data to the screens (recommended), or we can use a render callback for the screen instead of specifying a `component` prop.
 
 </TabItem>
-</Tabs>
+</ConfigTabs>

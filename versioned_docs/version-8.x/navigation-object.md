@@ -82,8 +82,8 @@ The `navigate` method lets us navigate to another screen in your app. It takes t
   - `merge` - _boolean_ - Whether params should be merged with the existing route params, or replace them (when navigating to an existing screen). Defaults to `false`.
   - `pop` - _boolean_ - Whether screens should be popped to navigate to a matching screen (by name or id if `getId` is specified) in the stack. Defaults to `false`.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Navigate method" snack
 import * as React from 'react';
@@ -165,7 +165,7 @@ export default App;
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Navigate method" snack
 import * as React from 'react';
@@ -243,7 +243,7 @@ export default App;
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 In a stack navigator ([stack](stack-navigator.md) or [native stack](native-stack-navigator.md)), calling `navigate` with a screen name will have the following behavior:
 
@@ -261,8 +261,8 @@ The `goBack` method lets us go back to the previous screen in the navigator.
 
 By default, `goBack` will go back from the screen that it is called from:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Navigate method" snack
 import * as React from 'react';
@@ -343,7 +343,7 @@ export default App;
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Navigate method" snack
 import * as React from 'react';
@@ -420,14 +420,14 @@ export default App;
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### `reset`
 
 The `reset` method lets us replace the navigator state with a new state:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Navigation object replace and reset" snack
 import * as React from 'react';
@@ -566,7 +566,7 @@ export default App;
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Navigation object replace and reset" snack
 import * as React from 'react';
@@ -701,7 +701,7 @@ export default App;
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 The state object specified in `reset` replaces the existing [navigation state](navigation-state.md) with the new one, i.e. removes existing screens and add new ones. If you want to preserve the existing screens when changing the state, you can use [`CommonActions.reset`](navigation-actions.md#reset) with [`dispatch`](#dispatch) instead.
 
@@ -722,8 +722,8 @@ The `preload` method allows preloading a screen in the background before navigat
 navigation.preload('Profile', { user: 'jane' });
 ```
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Common actions preload" snack
 import * as React from 'react';
@@ -816,7 +816,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Common actions preload" snack
 import * as React from 'react';
@@ -909,7 +909,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Preloading a screen means that the screen will be rendered in the background. All the components in the screen will be mounted and the `useEffect` hooks will be called. This can be useful when you want to improve the perceived performance by hiding the delay in mounting heavy components or loading data.
 
@@ -922,8 +922,8 @@ Depending on the navigator, `preload` may work slightly differently:
 
 The `setParams` method lets us update the params (`route.params`) of the current screen. `setParams` works like React's `setState` - it shallow merges the provided params object with the current params.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Navigation object setParams" snack
 import * as React from 'react';
@@ -1025,7 +1025,7 @@ export default App;
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Navigation object setParams" snack
 import * as React from 'react';
@@ -1124,14 +1124,14 @@ export default App;
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### `replaceParams`
 
 The `replaceParams` method lets us replace the params (`route.params`) of the current screen with a new params object.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Navigation object replaceParams" snack
 import * as React from 'react';
@@ -1233,7 +1233,7 @@ export default App;
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Navigation object replaceParams" snack
 import * as React from 'react';
@@ -1332,7 +1332,7 @@ export default App;
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ### `pushParams`
 
@@ -1362,8 +1362,8 @@ The action works in all navigators, including stack, tab, and drawer navigators.
 
 The `setOptions` method lets us set screen options from within the component. This is useful if we need to use the component's props, state or context to configure our screen.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Navigation object setOptions" snack
 import * as React from 'react';
@@ -1453,7 +1453,7 @@ export default App;
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Navigation object setOptions" snack
 import * as React from 'react';
@@ -1540,7 +1540,7 @@ export default App;
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Any options specified here are shallow merged with the options specified when defining the screen.
 

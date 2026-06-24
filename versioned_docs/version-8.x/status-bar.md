@@ -230,13 +230,13 @@ Although not necessary, you can use the `FocusAwareStatusBar` component in the s
     <source src="/assets/statusbar/status-drawer-ios.mp4" />
   </video>
 
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/statusbar/status-drawer-android.mp4" />
-  </video>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/statusbar/status-drawer-android.mp4" />
+</video>
 
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/statusbar/status-tab-ios.mp4" />
-  </video>
+<video playsInline autoPlay muted loop>
+  <source src="/assets/statusbar/status-tab-ios.mp4" />
+</video>
 
   <video playsInline autoPlay muted loop>
     <source src="/assets/statusbar/status-tab-android.mp4" />

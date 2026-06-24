@@ -741,7 +741,7 @@ If you have the old format, it will continue to work without any changes. Howeve
 
 You can play around with customizing the config and path below, and see how the path is parsed.
 
-import LinkingTester from '@site/src/components/LinkingTester'
+import LinkingTester from '@site/src/components/LinkingTester';
 
 <LinkingTester />
 

@@ -15,8 +15,8 @@ Each `screen` component in your app is provided with the `route` object as a pro
   - `path` - An optional string containing the path that opened the screen. It exists when the screen was opened via a deep link.
   - `params` - An optional object containing params defined while navigating, e.g. `navigate('Twitter', { user: 'Jane Doe' })`.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Route prop" snack
 import * as React from 'react';
@@ -54,7 +54,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Route prop" snack
 import * as React from 'react';
@@ -93,4 +93,4 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>

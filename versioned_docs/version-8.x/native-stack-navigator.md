@@ -6,27 +6,39 @@ sidebar_label: Native Stack
 
 <div className="feature-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/highlights/formsheet.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/highlights/formsheet.mp4" />
+  </video>
 
   [Form sheet](#form-sheets)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/highlights/search-bar.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/highlights/search-bar.mp4" />
+  </video>
 
   [Search bar](#headersearchbaroptions)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/highlights/large-title.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/highlights/large-title.mp4" />
+  </video>
 
   [Large title header](#headerlargetitleenabled)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/highlights/header-items.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/highlights/header-items.mp4" />
+  </video>
 
   [Header items](#header-items)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/highlights/transparent-modal.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/highlights/transparent-modal.mp4" />
+  </video>
 
   [Transparent modal](#presentation)
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/highlights/animation.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/highlights/animation.mp4" />
+  </video>
 
   [Transition animations](#animation)
 
@@ -226,7 +238,9 @@ Supported values:
 
 This can be useful to provide appropriate animations, such as `push` for login and `pop` for logout.
 
-<video playsInline autoPlay muted loop> <source src="/assets/navigators/native-stack/animation-type-for-replace.mp4" />
+<video playsInline autoPlay muted loop>
+  {' '}
+  <source src="/assets/navigators/native-stack/animation-type-for-replace.mp4" />
 </video>
 
 #### `animation`
@@ -239,55 +253,73 @@ Supported values:
 
 <div className="options-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-default.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/animation-default.mp4" />
+  </video>
 
   `default`
 
   Use the platform default animation.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-fade.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/animation-fade.mp4" />
+  </video>
 
   `fade`
 
   Fade the screen in or out.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-fade-from-bottom.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/animation-fade-from-bottom.mp4" />
+  </video>
 
   `fade_from_bottom`
 
   Fade the new screen in from the bottom.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-flip.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/animation-flip.mp4" />
+  </video>
 
   `flip`
 
   Flip the screen. Requires `presentation: "modal"` on iOS.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-simple-push.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/animation-simple-push.mp4" />
+  </video>
 
   `simple_push`
 
   Use the default animation without the shadow and native header transition. On Android, this falls back to the default animation.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-slide-from-bottom.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/animation-slide-from-bottom.mp4" />
+  </video>
 
   `slide_from_bottom`
 
   Slide the new screen in from the bottom.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-slide-from-right.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/animation-slide-from-right.mp4" />
+  </video>
 
   `slide_from_right`
 
   Slide the new screen in from the right. On iOS, this falls back to the default animation.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-slide-from-left.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/animation-slide-from-left.mp4" />
+  </video>
 
   `slide_from_left`
 
   Slide the new screen in from the left. On iOS, this falls back to the default animation.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/animation-none.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/animation-none.mp4" />
+  </video>
 
   `none`
 
@@ -305,43 +337,57 @@ Supported values:
 
 <div className="options-grid">
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/presentation-card.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/presentation-card.mp4" />
+  </video>
 
   `card`
 
   The new screen will be pushed onto a stack, which means the default animation will be slide from the side on iOS, the animation on Android will vary depending on the OS version and theme.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/presentation-modal.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/presentation-modal.mp4" />
+  </video>
 
   `modal`
 
   The new screen will be presented modally. This also allows for a nested stack to be rendered inside the screen.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/presentation-contained-modal.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/presentation-contained-modal.mp4" />
+  </video>
 
   `containedModal`
 
   Uses "UIModalPresentationCurrentContext" modal style on iOS and falls back to "modal" on Android.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/presentation-fullscreen-modal.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/presentation-fullscreen-modal.mp4" />
+  </video>
 
   `fullScreenModal`
 
   Uses "UIModalPresentationFullScreen" modal style on iOS and falls back to "modal" on Android. A screen using this presentation style can't be dismissed by gesture.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/presentation-transparent-modal.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/presentation-transparent-modal.mp4" />
+  </video>
 
   `transparentModal`
 
   The new screen will be presented modally, but in addition, the previous screen will stay so that the content below can still be seen if the screen has translucent background.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/presentation-contained-transparent-modal.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/presentation-contained-transparent-modal.mp4" />
+  </video>
 
   `containedTransparentModal`
 
   Uses "UIModalPresentationOverCurrentContext" modal style on iOS and falls back to "transparentModal" on Android.
 
-- <video playsInline autoPlay muted loop><source src="/assets/navigators/native-stack/presentation-formsheet-ios.mp4" /></video>
+- <video playsInline autoPlay muted loop>
+    <source src="/assets/navigators/native-stack/presentation-formsheet-ios.mp4" />
+  </video>
 
   `formSheet`
 
@@ -431,7 +477,9 @@ The following options only work when [`presentation`](#presentation) is set to `
 
 #### `sheetAllowedDetents`
 
-<video playsInline autoPlay muted loop> <source src="/assets/navigators/native-stack/sheet-allowed-detents.mp4" />
+<video playsInline autoPlay muted loop>
+  {' '}
+  <source src="/assets/navigators/native-stack/sheet-allowed-detents.mp4" />
 </video>
 
 Describes heights where a sheet can rest.
@@ -444,7 +492,9 @@ See [Configuring sheet sizes](#configuring-sheet-sizes) for usage examples.
 
 #### `sheetElevation`
 
-<video playsInline autoPlay muted loop> <source src="/assets/navigators/native-stack/sheet-elevation.mp4" />
+<video playsInline autoPlay muted loop>
+  {' '}
+  <source src="/assets/navigators/native-stack/sheet-elevation.mp4" />
 </video>
 
 Integer value describing elevation of the sheet, impacting shadow on the top edge.
@@ -455,7 +505,9 @@ Defaults to `24`. Only supported on Android.
 
 #### `sheetExpandsWhenScrolledToEdge`
 
-<video playsInline autoPlay muted loop> <source src="/assets/navigators/native-stack/sheet-expands-when-scrolled-to-edge.mp4" />
+<video playsInline autoPlay muted loop>
+  {' '}
+  <source src="/assets/navigators/native-stack/sheet-expands-when-scrolled-to-edge.mp4" />
 </video>
 
 Whether the sheet should expand to a larger detent when scrolling.
@@ -468,7 +520,9 @@ See [Scroll behavior](#scroll-behavior) for more details.
 
 #### `sheetCornerRadius`
 
-<video playsInline autoPlay muted loop> <source src="/assets/navigators/native-stack/sheet-corner-radius.mp4" />
+<video playsInline autoPlay muted loop>
+  {' '}
+  <source src="/assets/navigators/native-stack/sheet-corner-radius.mp4" />
 </video>
 
 The corner radius of the sheet. If set to a non-negative value it will use the provided radius, otherwise the system default is used.
@@ -477,7 +531,9 @@ Only supported on Android and iOS.
 
 #### `sheetInitialDetentIndex`
 
-<video playsInline autoPlay muted loop> <source src="/assets/navigators/native-stack/sheet-initial-detent-index.mp4" />
+<video playsInline autoPlay muted loop>
+  {' '}
+  <source src="/assets/navigators/native-stack/sheet-initial-detent-index.mp4" />
 </video>
 
 Index of the detent the sheet should expand to after being opened. If the specified index is out of bounds of the `sheetAllowedDetents` array, an error will be thrown in development mode and the value will be reset to the default in production.
@@ -490,7 +546,9 @@ See [Configuring sheet sizes](#configuring-sheet-sizes) for usage examples.
 
 #### `sheetGrabberVisible`
 
-<video playsInline autoPlay muted loop> <source src="/assets/navigators/native-stack/sheet-grabber-visible.mp4" />
+<video playsInline autoPlay muted loop>
+  {' '}
+  <source src="/assets/navigators/native-stack/sheet-grabber-visible.mp4" />
 </video>
 
 Whether the sheet shows a grabber handle at the top.
@@ -499,7 +557,9 @@ Defaults to `false`. Only supported on iOS.
 
 #### `sheetLargestUndimmedDetentIndex`
 
-<video playsInline autoPlay muted loop> <source src="/assets/navigators/native-stack/sheet-largest-undimmed-detent-index.mp4" />
+<video playsInline autoPlay muted loop>
+  {' '}
+  <source src="/assets/navigators/native-stack/sheet-largest-undimmed-detent-index.mp4" />
 </video>
 
 The largest detent index for which the view underneath won't be dimmed.
@@ -1430,10 +1490,14 @@ const MyView = () => {
 
 Form sheets present content in a sheet that slides up from the bottom of the screen. They are commonly used for secondary actions, forms, or detail views that don't need to take over the full screen.
 
-<video playsInline autoPlay muted loop> <source src="/assets/navigators/native-stack/presentation-formsheet-android.mp4" />
+<video playsInline autoPlay muted loop>
+  {' '}
+  <source src="/assets/navigators/native-stack/presentation-formsheet-android.mp4" />
 </video>
 
-<video playsInline autoPlay muted loop> <source src="/assets/navigators/native-stack/presentation-formsheet-ios.mp4" />
+<video playsInline autoPlay muted loop>
+  {' '}
+  <source src="/assets/navigators/native-stack/presentation-formsheet-ios.mp4" />
 </video>
 
 To present a screen as a form sheet, set [`presentation`](#presentation) to `formSheet` in the screen's options:

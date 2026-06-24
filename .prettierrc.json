@@ -1,4 +1,17 @@
 {
+  "overrides": [
+    {
+      "files": [
+        "src/pages/**/*.md",
+        "blog/*.md",
+        "docs/**/*.md",
+        "versioned_docs/**/*.md"
+      ],
+      "options": {
+        "parser": "mdx"
+      }
+    }
+  ],
   "singleQuote": true,
   "tabWidth": 2,
   "trailingComma": "es5",

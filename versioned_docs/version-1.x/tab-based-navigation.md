@@ -39,7 +39,13 @@ export default TabNavigator({
 });
 ```
 
-<a href="https://snack.expo.io/@react-navigation/basic-tabs" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/basic-tabs"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 ## Customizing the appearance
 
@@ -84,7 +90,13 @@ export default TabNavigator(
 );
 ```
 
-<a href="https://snack.expo.io/@react-navigation/tabs-with-icons" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/tabs-with-icons"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 Let's dissect this:
 
@@ -129,7 +141,13 @@ class SettingsScreen extends React.Component {
 }
 ```
 
-<a href="https://snack.expo.io/@react-navigation/jumping-between-tabs" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/jumping-between-tabs"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 ## A `StackNavigator` for each tab
 
@@ -197,7 +215,13 @@ export default TabNavigator(
 );
 ```
 
-<a href="https://snack.expo.io/@react-navigation/stacks-in-tabs" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/stacks-in-tabs"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 ## Why do we need a TabNavigator instead of TabBarIOS or some other component?
 

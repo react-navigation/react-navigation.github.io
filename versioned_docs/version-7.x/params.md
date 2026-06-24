@@ -99,17 +99,17 @@ export default function App() {
 ```
 
 <div className="device-frame">
-<video playsInline autoPlay muted loop>
-  <source src="/assets/fundamentals/passing-params.mp4" />
-</video>
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/fundamentals/passing-params.mp4" />
+  </video>
 </div>
 
 ## Initial params
 
 Initial params can be specified in `initialParams`. These are used when navigating to the screen without params, and are shallow merged with any params that you pass:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 {
@@ -122,7 +122,7 @@ Initial params can be specified in `initialParams`. These are used when navigati
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 <Stack.Screen
@@ -134,7 +134,7 @@ Initial params can be specified in `initialParams`. These are used when navigati
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 ## Updating params
 
@@ -281,9 +281,9 @@ export default function App() {
 ```
 
 <div className="device-frame">
-<video playsInline autoPlay muted loop>
-  <source src="/assets/fundamentals/passing-params-back.mp4" />
-</video>
+  <video playsInline autoPlay muted loop>
+    <source src="/assets/fundamentals/passing-params-back.mp4" />
+  </video>
 </div>
 
 After pressing "Done", the home screen's `route.params` will be updated with the post text.

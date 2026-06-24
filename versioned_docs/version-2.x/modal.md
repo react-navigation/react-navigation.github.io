@@ -78,7 +78,13 @@ const RootStack = createStackNavigator(
 );
 ```
 
-<a href="https://snack.expo.io/@react-navigation/full-screen-modal" target="blank" class="run-code-button">&rarr; Run this code</a>
+<a
+  href="https://snack.expo.io/@react-navigation/full-screen-modal"
+  target="blank"
+  class="run-code-button"
+>
+  &rarr; Run this code
+</a>
 
 There are some important things to notice here:
 

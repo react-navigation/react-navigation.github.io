@@ -1,4 +1,4 @@
-import { convertStaticToDynamic } from './rehype-static-to-dynamic.ts';
+import { convertStaticToDynamic } from './remark-static-to-dynamic.ts';
 
 type TabItem = {
   label: string;
@@ -8,10 +8,41 @@ type TabItem = {
 type TabsBlock = {
   start: number;
   end: number;
+  name: TabComponentName;
   items: TabItem[];
 };
 
 type FrontMatterData = Record<string, string>;
+
+const tabLabelsByComponent = {
+  Tabs: {},
+  ConfigTabs: {
+    static: 'Static',
+    dynamic: 'Dynamic',
+  },
+  ExampleTabs: {
+    static: 'Static',
+    dynamic: 'Dynamic',
+  },
+  FrameworkTabs: {
+    expo: 'Expo',
+    'community-cli': 'Community CLI',
+  },
+  AndroidLanguageTabs: {
+    kotlin: 'Kotlin',
+    java: 'Java',
+  },
+  IosLanguageTabs: {
+    swift: 'Swift',
+    objc: 'Objective-C',
+  },
+} satisfies Record<string, Record<string, string>>;
+
+type TabComponentName = keyof typeof tabLabelsByComponent;
+
+function isTabComponentName(value: string): value is TabComponentName {
+  return value in tabLabelsByComponent;
+}
 
 export type ProcessedMarkdown = {
   frontmatter: FrontMatterData;
@@ -23,7 +54,7 @@ export type ProcessedMarkdown = {
  *
  * - Parses and strips YAML frontmatter
  * - Strips MDX import statements
- * - Transforms <Tabs>/<TabItem> into labeled sections
+ * - Transforms tab components with <TabItem> children into labeled sections
  * - Converts static2dynamic code fences into static + dynamic sections
  * - Converts HTML <img> tags to markdown image syntax
  * - Converts HTML <video> tags to plain video URLs
@@ -136,7 +167,7 @@ function stripImports(content: string): string {
 }
 
 /**
- * Transform all <Tabs>/<TabItem> blocks into plain markdown sections.
+ * Transform all tab component blocks into plain markdown sections.
  * Handles nested tabs by processing innermost first.
  */
 function transformTabs(content: string): string {
@@ -144,14 +175,14 @@ function transformTabs(content: string): string {
   let iterations = 0;
   const maxIterations = 20;
 
-  while (result.includes('<Tabs') && iterations < maxIterations) {
+  while (hasTabComponent(result) && iterations < maxIterations) {
     const block = findInnermostTabsBlock(result);
 
     if (!block) {
       break;
     }
 
-    const replacement = renderTabsAsMarkdown(block.items);
+    const replacement = renderTabsAsMarkdown(block.items, block.name);
     result =
       result.slice(0, block.start) + replacement + result.slice(block.end);
 
@@ -162,19 +193,31 @@ function transformTabs(content: string): string {
 }
 
 /**
- * Find the innermost (most deeply nested) <Tabs> block.
+ * Find the innermost (most deeply nested) tab component block.
  * This ensures nested tabs are resolved before their parents.
  */
 function findInnermostTabsBlock(content: string): TabsBlock | null {
-  const tabsOpenRegex = /<Tabs[^>]*>/g;
-  let lastInnermost: { openStart: number; openEnd: number } | null = null;
+  const tabsOpenRegex =
+    /<(Tabs|ConfigTabs|ExampleTabs|FrameworkTabs|AndroidLanguageTabs|IosLanguageTabs)\b[^>]*>/g;
+  let lastInnermost: {
+    openStart: number;
+    openEnd: number;
+    name: TabComponentName;
+  } | null = null;
   let match: RegExpExecArray | null;
 
   while ((match = tabsOpenRegex.exec(content)) !== null) {
     const openStart = match.index;
     const openEnd = openStart + match[0].length;
+    const name = match[1];
 
-    const closingPos = content.indexOf('</Tabs>', openEnd);
+    if (!isTabComponentName(name)) {
+      continue;
+    }
+
+    const closingTag = `</${name}>`;
+
+    const closingPos = content.indexOf(closingTag, openEnd);
 
     if (closingPos === -1) {
       continue;
@@ -182,8 +225,8 @@ function findInnermostTabsBlock(content: string): TabsBlock | null {
 
     const between = content.slice(openEnd, closingPos);
 
-    if (!between.includes('<Tabs')) {
-      lastInnermost = { openStart, openEnd };
+    if (!hasTabComponent(between)) {
+      lastInnermost = { openStart, openEnd, name };
       break;
     }
   }
@@ -192,8 +235,8 @@ function findInnermostTabsBlock(content: string): TabsBlock | null {
     return null;
   }
 
-  const { openStart, openEnd } = lastInnermost;
-  const closingTag = '</Tabs>';
+  const { openStart, openEnd, name } = lastInnermost;
+  const closingTag = `</${name}>`;
   const closingPos = content.indexOf(closingTag, openEnd);
 
   if (closingPos === -1) {
@@ -206,8 +249,15 @@ function findInnermostTabsBlock(content: string): TabsBlock | null {
   return {
     start: openStart,
     end: closingPos + closingTag.length,
+    name,
     items,
   };
+}
+
+function hasTabComponent(content: string): boolean {
+  return /<(Tabs|ConfigTabs|ExampleTabs|FrameworkTabs|AndroidLanguageTabs|IosLanguageTabs)\b/.test(
+    content
+  );
 }
 
 /**
@@ -246,7 +296,10 @@ function parseTabItems(content: string): TabItem[] {
 /**
  * Render parsed tab items as plain markdown with bold labels.
  */
-function renderTabsAsMarkdown(items: TabItem[]): string {
+function renderTabsAsMarkdown(
+  items: TabItem[],
+  componentName: TabComponentName
+): string {
   if (items.length === 0) {
     return '';
   }
@@ -255,8 +308,14 @@ function renderTabsAsMarkdown(items: TabItem[]): string {
     return items[0].content;
   }
 
+  const labelsByValue = tabLabelsByComponent[componentName];
+
   return items
-    .map((item) => `**${item.label}:**\n\n${item.content}`)
+    .map((item) => {
+      const label = labelsByValue[item.label] ?? item.label;
+
+      return `**${label}:**\n\n${item.content}`;
+    })
     .join('\n\n');
 }
 

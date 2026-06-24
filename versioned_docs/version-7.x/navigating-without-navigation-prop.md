@@ -25,8 +25,8 @@ Note that it's usually better to trigger navigation from user actions such as bu
 
 You can get access to the root navigation object through a `ref` and pass it to the `RootNavigation` which we will later use to navigate.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js
 import { createStaticNavigation } from '@react-navigation/native';
@@ -42,7 +42,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';
@@ -56,7 +56,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 In the next step, we define `RootNavigation`, which is a simple module with functions that dispatch user-defined navigation actions.
 
@@ -78,8 +78,8 @@ export function navigate(name, params) {
 
 Then, in any of your javascript modules, import the `RootNavigation` and call functions which you exported from it. You may use this approach outside of your React components.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Using navigate in any js module" snack
 import * as React from 'react';
@@ -142,7 +142,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Using navigate in any js module" snack
 import * as React from 'react';
@@ -205,7 +205,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 Apart from `navigate`, you can add other navigation actions:
 
@@ -238,8 +238,8 @@ For an example, consider the following scenario, you have a screen somewhere in 
 
 To avoid this, you can use the `isReady()` method available on the ref as shown in the above examples.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Handling navigation init" snack
 import * as React from 'react';
@@ -297,7 +297,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Handling navigation init" snack
 import * as React from 'react';
@@ -354,6 +354,6 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 If you're unsure if a navigator is rendered, you can call `navigationRef.getRootState()`, and it'll return a valid state object if any navigators are rendered, otherwise it will return `undefined`.

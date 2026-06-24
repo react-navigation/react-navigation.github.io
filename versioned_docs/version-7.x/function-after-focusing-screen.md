@@ -23,8 +23,8 @@ With this approach, we will only be able to call an action when the screen focus
 
 Example:
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="Focus event listener" snack
 // codeblock-focus-start
@@ -76,7 +76,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="Focus event listener" snack
 // codeblock-focus-start
@@ -125,7 +125,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 See the [navigation events guide](navigation-events.md) for more details on the event listener API.
 
@@ -137,8 +137,8 @@ React Navigation provides a [hook](use-focus-effect.md) that runs an effect when
 
 This is particularly handy when we are trying to stop something when the page is unfocused, like stopping a video or audio file from playing, or stopping the tracking of a user's location.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="useFocusEffect hook" snack
 import * as React from 'react';
@@ -185,7 +185,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value="dynamic" label="Dynamic">
+<TabItem value="dynamic">
 
 ```js name="useFocusEffect hook" snack
 import * as React from 'react';
@@ -230,7 +230,7 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 See the [`useFocusEffect`](https://reactnavigation.org/docs/use-focus-effect/) documentation for more details.
 
@@ -242,8 +242,8 @@ The hook will return `true` when the screen is focused and `false` when our comp
 
 The `useIsFocused` hook will cause our component to re-render when we focus and unfocus a screen. Using this hook component may introduce unnecessary component re-renders as a screen comes in and out of focus. This could cause issues depending on the type of action we're calling on focusing. Hence we recommend to use this hook only if you need to trigger a re-render. For side-effects such as subscribing to events or fetching data, use the methods described above.
 
-<Tabs groupId="config" queryString="config">
-<TabItem value="static" label="Static" default>
+<ConfigTabs>
+<TabItem value="static">
 
 ```js name="useIsFocused hook" snack
 import * as React from 'react';
@@ -285,7 +285,7 @@ export default function App() {
 ```
 
 </TabItem>
-<TabItem value='dynamic' label='Dynamic' default>
+<TabItem value='dynamic'>
 
 ```js name="useIsFocused hook" snack
 import * as React from 'react';
@@ -327,6 +327,6 @@ export default function App() {
 ```
 
 </TabItem>
-</Tabs>
+</ConfigTabs>
 
 This example is also documented in the [`useIsFocused` API documentation](use-is-focused.md).

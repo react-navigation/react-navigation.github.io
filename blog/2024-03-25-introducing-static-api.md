@@ -8,7 +8,7 @@ Two of the major pain points of using React Navigation have been TypeScript and 
 
 To solve this, we’re adding a new static API to React Navigation 7. It’s not the same API as React Navigation 4, but it’s similar. Many apps don’t need the features that the dynamic API provides, and they can use the simpler static API instead to simplify their codebase.
 
-<!--truncate-->
+{/* truncate */}
 
 :::note
 
