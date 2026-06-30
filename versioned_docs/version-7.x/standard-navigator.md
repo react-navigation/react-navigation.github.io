@@ -87,13 +87,17 @@ export type MyTabEventMap = {
 };
 
 export type MyTabNavigatorProps = {
-  // additional navigator props type
+  // props users pass to the navigator
+};
+
+export type MyTabMapperProps = {
+  // optional props supplied by a navigation library integration
 };
 
 export const MyTabNavigator = createStandardNavigator<
   MyTabOptions,
   MyTabEventMap,
-  MyTabNavigatorProps
+  MyTabNavigatorProps & MyTabMapperProps
 >(({ state, descriptors, actions, emitter, ...props }) => {
   // render the navigator UI using the state and descriptors
   // use actions to perform navigation and emitter to emit events
@@ -129,9 +133,9 @@ The `createStandardNavigator` function accepts three generic arguments:
   };
   ```
 
-- **`MyTabNavigatorProps`**
+- **`MyTabNavigatorProps & MyTabMapperProps`**
 
-  The type of any additional props accepted by the navigator.
+  The type of any additional public props accepted by the navigator as well as mapper props, i.e. optional props derived from react navigation's state and action helpers.
 
 The callback receives `state`, `descriptors`, `actions`, and `emitter` from the navigation library integration:
 
@@ -271,20 +275,24 @@ interface MyTabTypeBag extends StandardNavigationTypeBagBase {
 
 const { createNavigator, createScreen } = createStandardNavigationFactories<
   MyTabTypeBag,
-  MyTabNavigatorProps
->(MyTabNavigator, TabRouter);
+  MyTabNavigatorProps,
+  MyTabMapperProps
+>(MyTabNavigator, TabRouter, ({ state }) => ({
+  activeRouteName: state.routes[state.index]?.name ?? '',
+}));
 ```
 
-The `createStandardNavigationFactories` function accepts two generic arguments:
+The `createStandardNavigationFactories` function accepts up to three generic arguments:
 
 - The type bag for the navigator (e.g. `MyTabTypeBag`), which includes the state, action helpers, screen options, event map, and router options types.
-- The type of any additional props accepted by the navigator (e.g. `MyTabNavigatorProps`).
+- The type of public props accepted by the navigator (e.g. `MyTabNavigatorProps`). These props are exposed to users in the static config and dynamic navigator component.
+- The optional type of props derived from react navigation's state and action helpers in the mapper function (e.g. `MyTabMapperProps`). These props are passed to the standard navigator but aren't exposed to users.
 
 It accepts 3 arguments:
 
 - The standard navigator component.
 - The router factory function from React Navigation (e.g. `TabRouter`, `StackRouter`, etc.).
-- An optional function to map `{ navigation, state }` to custom props for the navigator component, in case you need any specific state or action helpers not available in the standard ones.
+- An optional function to map `{ navigation, state }` to props for the navigator component, in case you need any specific state or action helpers not available in the standard ones.
 
 It returns an object with `createNavigator` and `createScreen` functions that can be used to create the navigator and screens for React Navigation. These should be exported from the entry point.
 
@@ -379,4 +387,4 @@ const Navigation = createStaticNavigation(MyTabs);
 
 ## Expo Router entry point
 
-Work in progress.
+See [Expo Router documentation](https://docs.expo.dev/router/advanced/custom-navigators) for more information.
