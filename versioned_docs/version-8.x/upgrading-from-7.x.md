@@ -1120,6 +1120,18 @@ See the [`server rendering guide`](server-rendering.md) for a detailed guide and
 
 ## New features
 
+### Navigations are now suspense compatible
+
+This navigation state updates are now compatible with [concurrent rendering](https://react.dev/blog/2022/03/29/react-v18#what-is-concurrent-react) and navigation actions are wrapped in [transitions](https://react.dev/reference/react/startTransition) when possible.
+
+Navigations using transitions:
+
+- **Can be interrupted** - users can navigate away without waiting for the re-render to complete.
+- **Avoid unwanted loading indicators** - if a navigation suspends, React can keep the currently shown UI visible instead of immediately replacing it with a fallback.
+- **Wait for pending actions** - React can wait for pending transition actions to complete before showing the new screen.
+
+User-initiated navigations using [`useNavigation`](use-navigation.md), [`useLinkProps`](use-link-props.md) or [`ref`](navigation-container.md#ref) always use transitions. Some navigations such as switching tabs in native tab navigators, the native back action in native stack, gesture-driven navigations, etc. don't use transitions. When writing a custom navigator, you can decide whether you use transitions for navigations initiated by your navigator.
+
 ### `createXScreen` let's you create screen config with proper types
 
 One of the limitations of the static config API is that the type of `route` object can't be inferred in screen callback, listeners callback etc. This made it difficult to use route params in these callbacks.
@@ -1489,6 +1501,27 @@ This can be useful in various scenarios:
 - Keeping a screen with a video or audio player rendered to enable functionality such as background playback or picture-in-picture mode when the user navigates away from the screen.
 
 See [`retain`](stack-actions.md#retain) for more details.
+
+### Screens can now define a loader to fetch data on navigation
+
+Screens can now define a loader that runs when you navigate to them, so you can start fetching data before the screen renders. This makes it possible to implement "render-as-you-fetch" patterns where the screen suspends while reading data that the loader started fetching:
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+      UNSTABLE_loader: async ({ params }) => {
+        await queryClient.ensureQueryData(profileQuery(params.id));
+      },
+    }),
+  },
+});
+```
+
+This is an experimental feature and is only available with [static configuration](static-configuration.md).
+
+See [Data loading](data-loading.md) for more details.
 
 ### `Header` from `@react-navigation/elements` has been reworked
 

@@ -384,6 +384,29 @@ To specify a layout for all multiple screens, you can use `screenLayout` in a [g
 </TabItem>
 </ConfigTabs>
 
+### Loader
+
+Loader functions can be used to start loading data when navigating to a screen. This is only available with [static configuration](static-configuration.md).
+
+The loader receives the screen's `name` and `params`, and should return a promise:
+
+```js
+const Stack = createNativeStackNavigator({
+  screens: {
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+      // highlight-start
+      UNSTABLE_loader: async ({ params }) => {
+        await queryClient.ensureQueryData(profileQuery(params.id));
+      },
+      // highlight-end
+    }),
+  },
+});
+```
+
+See [Data loading](data-loading.md) for more details and examples.
+
 ### Navigation key
 
 A navigation key is an optional key for this screen. This doesn't need to be unique. If the key changes, existing screens with this name will be removed (if used in a stack navigator) or reset (if used in a tab or drawer navigator).
