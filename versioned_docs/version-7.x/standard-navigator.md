@@ -229,7 +229,9 @@ export const MyTabNavigator = createStandardNavigator<
               });
 
               if (!isFocused && !event.defaultPrevented) {
-                actions.navigate(route.name, route.params);
+                React.startTransition(() => {
+                  actions.navigate(route.name, route.params);
+                });
               }
             }}
             style={{ flex: 1 }}

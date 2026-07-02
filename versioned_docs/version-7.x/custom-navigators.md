@@ -385,9 +385,11 @@ function TabNavigator({ tabBarStyle, contentStyle, ...rest }: Props) {
               });
 
               if (!isFocused && !event.defaultPrevented) {
-                navigation.dispatch({
-                  ...CommonActions.navigate(route.name, route.params),
-                  target: state.key,
+                React.startTransition(() => {
+                  navigation.dispatch({
+                    ...CommonActions.navigate(route.name, route.params),
+                    target: state.key,
+                  });
                 });
               }
             }}
