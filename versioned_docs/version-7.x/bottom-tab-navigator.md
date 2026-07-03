@@ -31,7 +31,10 @@ import {
 } from '@react-navigation/native';
 import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  createBottomTabScreen,
+} from '@react-navigation/bottom-tabs';
 
 // codeblock-focus-end
 function HomeScreen() {
@@ -61,8 +64,12 @@ function ProfileScreen() {
 // codeblock-focus-start
 const MyTabs = createBottomTabNavigator({
   screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
+    Home: createBottomTabScreen({
+      screen: HomeScreen,
+    }),
+    Profile: createBottomTabScreen({
+      screen: ProfileScreen,
+    }),
   },
 });
 // codeblock-focus-end

@@ -95,7 +95,10 @@ import {
 } from '@react-navigation/native';
 import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  createStackScreen,
+} from '@react-navigation/stack';
 
 // codeblock-focus-end
 function HomeScreen() {
@@ -122,8 +125,12 @@ function ProfileScreen() {
 // codeblock-focus-start
 const MyStack = createStackNavigator({
   screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
+    Home: createStackScreen({
+      screen: HomeScreen,
+    }),
+    Profile: createStackScreen({
+      screen: ProfileScreen,
+    }),
   },
 });
 // codeblock-focus-end

@@ -86,7 +86,10 @@ import {
 } from '@react-navigation/native';
 import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import {
+  createMaterialTopTabNavigator,
+  createMaterialTopTabScreen,
+} from '@react-navigation/material-top-tabs';
 
 // codeblock-focus-end
 function HomeScreen() {
@@ -116,8 +119,12 @@ function ProfileScreen() {
 // codeblock-focus-start
 const MyTabs = createMaterialTopTabNavigator({
   screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
+    Home: createMaterialTopTabScreen({
+      screen: HomeScreen,
+    }),
+    Profile: createMaterialTopTabScreen({
+      screen: ProfileScreen,
+    }),
   },
 });
 // codeblock-focus-end

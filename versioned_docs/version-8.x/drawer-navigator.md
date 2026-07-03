@@ -69,14 +69,17 @@ To use this navigator, import it from `@react-navigation/drawer`:
 
 ```js name="Drawer Navigator" snack static2dynamic
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  createDrawerNavigator,
+  createDrawerScreen,
+} from '@react-navigation/drawer';
 
 // codeblock-focus-end
 function HomeScreen() {
@@ -106,8 +109,36 @@ function ProfileScreen() {
 // codeblock-focus-start
 const MyDrawer = createDrawerNavigator({
   screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
+    Home: createDrawerScreen({
+      screen: HomeScreen,
+      options: {
+        drawerIcon: Platform.select({
+          ios: {
+            type: 'sfSymbol',
+            name: 'house',
+          },
+          android: {
+            type: 'materialSymbol',
+            name: 'home',
+          },
+        }),
+      },
+    }),
+    Profile: createDrawerScreen({
+      screen: ProfileScreen,
+      options: {
+        drawerIcon: Platform.select({
+          ios: {
+            type: 'sfSymbol',
+            name: 'person',
+          },
+          android: {
+            type: 'materialSymbol',
+            name: 'person',
+          },
+        }),
+      },
+    }),
   },
 });
 // codeblock-focus-end

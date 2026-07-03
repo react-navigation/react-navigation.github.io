@@ -48,14 +48,17 @@ To use this navigator, import it from `@react-navigation/bottom-tabs`:
 
 ```js name="Bottom Tab Navigator" snack static2dynamic
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  createBottomTabScreen,
+} from '@react-navigation/bottom-tabs';
 
 // codeblock-focus-end
 function HomeScreen() {
@@ -85,8 +88,36 @@ function ProfileScreen() {
 // codeblock-focus-start
 const MyTabs = createBottomTabNavigator({
   screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
+    Home: createBottomTabScreen({
+      screen: HomeScreen,
+      options: {
+        tabBarIcon: Platform.select({
+          ios: {
+            type: 'sfSymbol',
+            name: 'house',
+          },
+          android: {
+            type: 'materialSymbol',
+            name: 'home',
+          },
+        }),
+      },
+    }),
+    Profile: createBottomTabScreen({
+      screen: ProfileScreen,
+      options: {
+        tabBarIcon: Platform.select({
+          ios: {
+            type: 'sfSymbol',
+            name: 'person',
+          },
+          android: {
+            type: 'materialSymbol',
+            name: 'person',
+          },
+        }),
+      },
+    }),
   },
 });
 // codeblock-focus-end

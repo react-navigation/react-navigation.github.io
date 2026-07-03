@@ -76,7 +76,10 @@ import {
 } from '@react-navigation/native';
 import { Button } from '@react-navigation/elements';
 // codeblock-focus-start
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  createDrawerNavigator,
+  createDrawerScreen,
+} from '@react-navigation/drawer';
 
 // codeblock-focus-end
 function HomeScreen() {
@@ -106,8 +109,12 @@ function ProfileScreen() {
 // codeblock-focus-start
 const MyDrawer = createDrawerNavigator({
   screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
+    Home: createDrawerScreen({
+      screen: HomeScreen,
+    }),
+    Profile: createDrawerScreen({
+      screen: ProfileScreen,
+    }),
   },
 });
 // codeblock-focus-end

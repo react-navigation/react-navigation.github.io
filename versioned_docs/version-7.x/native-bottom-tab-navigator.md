@@ -61,12 +61,19 @@ It also needs `react-native-screens` 4.25.0 or above. If you're using Expo, make
 To use this navigator, import it from `@react-navigation/bottom-tabs/unstable`:
 
 ```js name="Bottom Tab Navigator" static2dynamic
-import { createNativeBottomTabNavigator } from '@react-navigation/bottom-tabs/unstable';
+import {
+  createNativeBottomTabNavigator,
+  createNativeBottomTabScreen,
+} from '@react-navigation/bottom-tabs/unstable';
 
 const MyTabs = createNativeBottomTabNavigator({
   screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
+    Home: createNativeBottomTabScreen({
+      screen: HomeScreen,
+    }),
+    Profile: createNativeBottomTabScreen({
+      screen: ProfileScreen,
+    }),
   },
 });
 ```
