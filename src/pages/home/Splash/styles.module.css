@@ -100,8 +100,8 @@
 
 .button:hover,
 .buttonPrimary:hover {
-  --ifm-link-color: var(--ifm-home-color-highlight);
-  --ifm-link-decoration: none;
+  --ifm-link-hover-color: var(--ifm-home-color-background);
+  --ifm-link-hover-decoration: none;
 
   background-color: var(--ifm-home-color-highlight);
   border-color: var(--ifm-home-color-highlight);
@@ -127,7 +127,7 @@
 }
 
 .linkText:hover {
-  --ifm-link-color: var(--ifm-home-color-text);
+  --ifm-link-hover-color: var(--ifm-home-color-text);
 
   color: var(--ifm-home-color-text);
 }
