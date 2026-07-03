@@ -1,8 +1,8 @@
 import dedent from 'dedent';
 import assert from 'node:assert';
 import { describe, test } from 'node:test';
-import rehypeStaticToDynamic, {
-  type RehypeStaticToDynamicMdxEsm as MdxEsm,
+import remarkStaticToDynamic, {
+  type RemarkStaticToDynamicMdxEsm as MdxEsm,
 } from '../plugins/remark-static-to-dynamic.ts';
 
 type Root = {
@@ -105,7 +105,7 @@ function getAttributeValue(node: MdxElement, name: string): unknown {
   return node.attributes.find((attribute) => attribute.name === name)?.value;
 }
 
-describe('rehype-static-to-dynamic', () => {
+describe('remark-static-to-dynamic', () => {
   test('basic screen transformation', async () => {
     const input = dedent /* javascript */ `
       import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -126,7 +126,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -177,7 +177,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const importNode = tree.children.find(isMdxEsmNode);
@@ -217,7 +217,7 @@ describe('rehype-static-to-dynamic', () => {
           "import Tabs from '@theme/Tabs'\nimport TabItem from '@theme/TabItem'",
       },
     ]);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const tabImportNodes = tree.children.filter(
@@ -227,6 +227,126 @@ describe('rehype-static-to-dynamic', () => {
     );
 
     assert.strictEqual(tabImportNodes.length, 1);
+  });
+
+  test('removes createXScreen-only import when unused after conversion', async () => {
+    const input = dedent /* javascript */ `
+      import { createStackNavigator } from '@react-navigation/stack';
+      import { createNativeStackScreen } from '@react-navigation/native-stack';
+      import { createStaticNavigation } from '@react-navigation/native';
+
+      const RootStack = createStackNavigator({
+        screens: {
+          Home: createNativeStackScreen({
+            screen: HomeScreen,
+          }),
+        },
+      });
+
+      const Navigation = createStaticNavigation(RootStack);
+
+      export default function App() {
+        return <Navigation />;
+      }
+    `;
+
+    const tree = createTestTree(input);
+    const plugin = remarkStaticToDynamic();
+    await plugin(tree);
+
+    const output = extractTransformedCode(tree);
+
+    const expected = dedent /* javascript */ `
+      import { createStackNavigator } from '@react-navigation/stack';
+      import { NavigationContainer } from '@react-navigation/native';
+
+      const Stack = createStackNavigator();
+
+      function RootStack() {
+        return (
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomeScreen} />
+          </Stack.Navigator>
+        );
+      }
+
+      export default function App() {
+        return (
+          <NavigationContainer>
+            <RootStack />
+          </NavigationContainer>
+        );
+      }
+    `;
+
+    assert.strictEqual(output, expected);
+  });
+
+  test('keeps createXScreen import when still used after conversion', async () => {
+    const input = dedent /* javascript */ `
+      import { createNativeStackNavigator, createNativeStackScreen } from '@react-navigation/native-stack';
+      import { createStaticNavigation } from '@react-navigation/native';
+
+      function getStandaloneScreen() {
+        return createNativeStackScreen({
+          screen: ProfileScreen,
+        });
+      }
+
+      const RootStack = createNativeStackNavigator({
+        screens: {
+          Home: createNativeStackScreen({
+            screen: HomeScreen,
+          }),
+        },
+      });
+
+      const Navigation = createStaticNavigation(RootStack);
+
+      export default function App() {
+        return <Navigation />;
+      }
+    `;
+
+    const tree = createTestTree(input);
+    const plugin = remarkStaticToDynamic();
+    await plugin(tree);
+
+    const output = extractTransformedCode(tree);
+
+    const expected = dedent /* javascript */ `
+      import {
+        createNativeStackNavigator,
+        createNativeStackScreen,
+      } from '@react-navigation/native-stack';
+      import { NavigationContainer } from '@react-navigation/native';
+
+      function getStandaloneScreen() {
+        return createNativeStackScreen({
+          screen: ProfileScreen,
+        });
+      }
+
+      const Stack = createNativeStackNavigator();
+
+      function RootStack() {
+        return (
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomeScreen} />
+          </Stack.Navigator>
+        );
+      }
+
+      export default function App() {
+        return (
+          <NavigationContainer>
+            <RootStack />
+          </NavigationContainer>
+        );
+      }
+    `;
+
+    assert.strictEqual(output, expected);
   });
 
   test('screen with options', async () => {
@@ -251,7 +371,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -312,7 +432,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -375,7 +495,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -441,7 +561,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -505,7 +625,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -568,7 +688,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -637,7 +757,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -703,7 +823,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -764,7 +884,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -823,7 +943,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -889,7 +1009,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -954,7 +1074,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -1027,7 +1147,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -1111,7 +1231,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -1193,7 +1313,7 @@ describe('rehype-static-to-dynamic', () => {
       `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -1269,7 +1389,7 @@ describe('rehype-static-to-dynamic', () => {
       `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -1345,7 +1465,7 @@ describe('rehype-static-to-dynamic', () => {
       `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -1405,7 +1525,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -1456,7 +1576,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
 
     await assert.rejects(
       plugin(tree),
@@ -1510,7 +1630,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);
@@ -1599,7 +1719,7 @@ describe('rehype-static-to-dynamic', () => {
     `;
 
     const tree = createTestTree(input);
-    const plugin = rehypeStaticToDynamic();
+    const plugin = remarkStaticToDynamic();
     await plugin(tree);
 
     const output = extractTransformedCode(tree);

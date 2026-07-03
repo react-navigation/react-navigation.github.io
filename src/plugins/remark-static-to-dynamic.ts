@@ -20,12 +20,19 @@ const prettierConfig = JSON.parse(
   readFileSync(join(__dirname, '..', '..', '.prettierrc.json'), 'utf-8')
 );
 
+type BabelTsParserOptions = NonNullable<
+  Parameters<typeof babelParser.parse>[1]
+> & {
+  tokens: boolean;
+  attachComment: boolean;
+};
+
 type TrackedComment = {
   value: string;
   type: t.Comment['type'];
 };
 
-export type RehypeStaticToDynamicMdxEsm = {
+export type RemarkStaticToDynamicMdxEsm = {
   type: 'mdxjsEsm';
   value: string;
   data?: {
@@ -70,23 +77,23 @@ type MdxNode =
   | MarkdownCodeNode
   | MdxJsxFlowElement
   | MdxTextNode
-  | RehypeStaticToDynamicMdxEsm;
+  | RemarkStaticToDynamicMdxEsm;
 
 type MutableParent = {
   children: unknown[];
 };
 
-export type RehypeStaticToDynamicRoot = Root;
+export type RemarkStaticToDynamicRoot = Root;
 
-export type RehypeStaticToDynamicElement = Element;
+export type RemarkStaticToDynamicElement = Element;
 
-export type RehypeStaticToDynamicText = Text;
+export type RemarkStaticToDynamicText = Text;
 
-export type RehypeStaticToDynamicTreeChild =
+export type RemarkStaticToDynamicTreeChild =
   | Root['children'][number]
-  | RehypeStaticToDynamicMdxEsm;
+  | RemarkStaticToDynamicMdxEsm;
 
-export type RehypeStaticToDynamicElementChild = Element['children'][number];
+export type RemarkStaticToDynamicElementChild = Element['children'][number];
 
 type CommentWithMarkers = t.Comment & {
   leading?: boolean;
@@ -221,7 +228,20 @@ function parseModule(code: string): unknown {
   });
 }
 
-function isMdxEsmNode(node: unknown): node is RehypeStaticToDynamicMdxEsm {
+function parseWithBabelTs(
+  source: string,
+  options?: Parameters<typeof babelParser.parse>[1]
+) {
+  const parserOptions: BabelTsParserOptions = {
+    ...options,
+    tokens: true,
+    attachComment: true,
+  };
+
+  return babelParser.parse(source, parserOptions);
+}
+
+function isMdxEsmNode(node: unknown): node is RemarkStaticToDynamicMdxEsm {
   return (
     isRecord(node) && node.type === 'mdxjsEsm' && typeof node.value === 'string'
   );
@@ -246,7 +266,7 @@ function isMutableParent(value: unknown): value is MutableParent {
   return isRecord(value) && Array.isArray(value.children);
 }
 
-function createTabsImportNode(value: string): RehypeStaticToDynamicMdxEsm {
+function createTabsImportNode(value: string): RemarkStaticToDynamicMdxEsm {
   return {
     type: 'mdxjsEsm',
     value,
@@ -307,7 +327,7 @@ function ensureTabsImports(tree: MutableParent) {
  * This plugin finds code blocks with the 'static2dynamic' meta tag and generates
  * corresponding dynamic configuration examples wrapped in tabs.
  */
-export default function rehypeStaticToDynamic() {
+export default function remarkStaticToDynamic() {
   return async (tree: UnistNode & MutableParent) => {
     const promises: Promise<void>[] = [];
     const replacements: Replacement[] = [];
@@ -365,11 +385,7 @@ export async function convertStaticToDynamic(code: string): Promise<string> {
   const ast = recast.parse(code, {
     parser: {
       parse(source, options) {
-        return babelParser.parse(source, {
-          ...options,
-          tokens: true,
-          attachComment: true,
-        });
+        return parseWithBabelTs(source, options);
       },
     },
   });
@@ -380,7 +396,7 @@ export async function convertStaticToDynamic(code: string): Promise<string> {
   // Track comments throughout the transformation
   // We collect comments from the AST during transformation, then inject them
   // after Prettier formatting (since Prettier may reformat/move AST comments)
-  const commentTracking = new Set<CommentTrackingEntry>();
+  const commentTracking: CommentTrackingEntry[] = [];
 
   // First pass: Collect navigator info and transform imports
   recast.visit(ast, {
@@ -425,22 +441,6 @@ export async function convertStaticToDynamic(code: string): Promise<string> {
             );
           }
         }
-      }
-
-      // Remove createXScreen imports from navigator packages
-      // e.g., createNativeStackScreen from @react-navigation/native-stack
-      if (source.startsWith('@react-navigation/')) {
-        path.node.specifiers = path.node.specifiers.filter((spec) => {
-          if (t.isImportSpecifier(spec)) {
-            const importedName = getPropertyKeyName(spec.imported);
-            // Remove imports that match createXScreen pattern
-            return !(
-              importedName.startsWith('create') &&
-              importedName.endsWith('Screen')
-            );
-          }
-          return true;
-        });
       }
 
       this.traverse(path);
@@ -653,6 +653,10 @@ export async function convertStaticToDynamic(code: string): Promise<string> {
   staticNavigationIndices.forEach((index) => {
     ast.program.body.splice(index, 1);
   });
+
+  if (navigatorInfos.length > 0) {
+    cleanupUnusedCreateScreenImports(ast.program);
+  }
 
   // Generate code from AST using recast
   const output = recast.print(ast, {
@@ -889,7 +893,7 @@ function extractScreenConfig(screenValue: t.Node): t.Node {
 function trackScreenConfigComments(
   screenValue: t.Node,
   screenName: string,
-  commentTracking: Set<CommentTrackingEntry>
+  commentTracking: CommentTrackingEntry[]
 ) {
   const configObject = extractScreenConfig(screenValue);
 
@@ -901,7 +905,7 @@ function trackScreenConfigComments(
           getCommentArray(configProp, 'trailingComments').length > 0)
       ) {
         const propName = getPropertyKeyName(configProp.key);
-        commentTracking.add({
+        commentTracking.push({
           screenName,
           screenConfigProperty: propName,
           leadingComments: toTrackedComments(
@@ -922,13 +926,13 @@ function trackScreenConfigComments(
 function trackScreenComments(
   screenProp: t.ObjectProperty,
   screenName: string,
-  commentTracking: Set<CommentTrackingEntry>
+  commentTracking: CommentTrackingEntry[]
 ) {
   if (
     getCommentArray(screenProp, 'leadingComments').length > 0 ||
     getCommentArray(screenProp, 'trailingComments').length > 0
   ) {
-    commentTracking.add({
+    commentTracking.push({
       screenName,
       leadingComments: toTrackedComments(
         getCommentArray(screenProp, 'leadingComments')
@@ -1098,6 +1102,117 @@ function collectPatternIdentifiers(
   }
 }
 
+function isCreateScreenImport(
+  specifier: t.ImportDeclaration['specifiers'][number]
+) {
+  return (
+    t.isImportSpecifier(specifier) &&
+    getPropertyKeyName(specifier.imported).startsWith('create') &&
+    getPropertyKeyName(specifier.imported).endsWith('Screen')
+  );
+}
+
+function isReferenceIdentifier(path: any) {
+  let child = path.node;
+  let parentPath = path.parent;
+
+  while (parentPath) {
+    const parent = parentPath.node;
+
+    if (t.isImportDeclaration(parent)) {
+      return false;
+    }
+
+    if (t.isVariableDeclarator(parent) && parent.id === child) {
+      return false;
+    }
+
+    if (
+      (t.isFunctionDeclaration(parent) || t.isFunctionExpression(parent)) &&
+      (parent.id === child || parent.params.includes(child))
+    ) {
+      return false;
+    }
+
+    if (t.isArrowFunctionExpression(parent) && parent.params.includes(child)) {
+      return false;
+    }
+
+    if (
+      (t.isClassDeclaration(parent) || t.isClassExpression(parent)) &&
+      parent.id === child
+    ) {
+      return false;
+    }
+
+    if (t.isCatchClause(parent) && parent.param === child) {
+      return false;
+    }
+
+    if (
+      (t.isMemberExpression(parent) || t.isOptionalMemberExpression(parent)) &&
+      parent.property === child &&
+      !parent.computed
+    ) {
+      return false;
+    }
+
+    if (
+      t.isObjectProperty(parent) &&
+      parent.key === child &&
+      !parent.computed &&
+      !(parent.shorthand && parent.value === child)
+    ) {
+      return false;
+    }
+
+    child = parent;
+    parentPath = parentPath.parent;
+  }
+
+  return true;
+}
+
+function getReferencedIdentifierNames(program: t.Program) {
+  const references = new Set<string>();
+
+  program.body.forEach((node) => {
+    recast.visit(node, {
+      visitIdentifier(path: any) {
+        if (isReferenceIdentifier(path)) {
+          references.add(path.node.name);
+        }
+
+        this.traverse(path);
+      },
+    });
+  });
+
+  return references;
+}
+
+function cleanupUnusedCreateScreenImports(program: t.Program) {
+  const references = getReferencedIdentifierNames(program);
+
+  program.body = program.body.filter((node) => {
+    if (
+      !t.isImportDeclaration(node) ||
+      !node.source.value.startsWith('@react-navigation/')
+    ) {
+      return true;
+    }
+
+    const previousSpecifiers = node.specifiers;
+
+    node.specifiers = previousSpecifiers.filter(
+      (specifier) =>
+        !isCreateScreenImport(specifier) || references.has(specifier.local.name)
+    );
+
+    return previousSpecifiers.length === 0 || node.specifiers.length > 0;
+  });
+}
+
 function getTopLevelBindingNames(body: t.Program['body']) {
   const bindingNames = new Set<string>();
 
@@ -1152,7 +1267,7 @@ function planNavigatorNames(
 
     if (navigatorInfo.originalName === baseNavigatorConstName) {
       throw new Error(
-        `rehype-static-to-dynamic: Navigator name collision for "${navigatorInfo.originalName}". Rename the static navigator to avoid colliding with the generated dynamic code.`
+        `remark-static-to-dynamic: Navigator name collision for "${navigatorInfo.originalName}". Rename the static navigator to avoid colliding with the generated dynamic code.`
       );
     }
   });
@@ -1501,11 +1616,7 @@ function parseGeneratedProgram(code: string) {
   return recast.parse(code, {
     parser: {
       parse(source, options) {
-        return babelParser.parse(source, {
-          ...options,
-          tokens: true,
-          attachComment: true,
-        });
+        return parseWithBabelTs(source, options);
       },
     },
   });
@@ -1520,7 +1631,7 @@ function parseObjectExpressionFromCode(code: string) {
     !t.isObjectExpression(statement.expression)
   ) {
     throw new Error(
-      'rehype-static-to-dynamic: Expected generated code to parse as an object expression.'
+      'remark-static-to-dynamic: Expected generated code to parse as an object expression.'
     );
   }
 
@@ -1806,17 +1917,16 @@ function mergeNavigatorAttributes(
 
     consumedStaticProps.add(attributeName);
 
+    const dynamicValue = getJsxAttributeValueExpression(attribute);
+
     if (
       (attributeName === 'screenOptions' ||
         attributeName === 'screenListeners') &&
-      getJsxAttributeValueExpression(attribute)
+      dynamicValue
     ) {
       return createJsxAttributeFromPropValue(
         attributeName,
-        createMergedNavigatorPropExpression(
-          staticProp.value,
-          getJsxAttributeValueExpression(attribute)!
-        )
+        createMergedNavigatorPropExpression(staticProp.value, dynamicValue)
       );
     }
 
@@ -1953,7 +2063,7 @@ function getNavigatorBindingName(
 
   if (!param || !t.isObjectPattern(param)) {
     throw new Error(
-      'rehype-static-to-dynamic: Expected `.with(...)` callback to receive `{ Navigator }`.'
+      'remark-static-to-dynamic: Expected `.with(...)` callback to receive `{ Navigator }`.'
     );
   }
 
@@ -1976,7 +2086,7 @@ function getNavigatorBindingName(
   }
 
   throw new Error(
-    'rehype-static-to-dynamic: Expected `.with(...)` callback to destructure `Navigator`.'
+    'remark-static-to-dynamic: Expected `.with(...)` callback to destructure `Navigator`.'
   );
 }
 
@@ -2021,7 +2131,7 @@ function createWithNavigatorComponentBody(
 
   if (replacementCount === 0) {
     throw new Error(
-      'rehype-static-to-dynamic: Expected `.with(...)` callback to render `<Navigator />`.'
+      'remark-static-to-dynamic: Expected `.with(...)` callback to render `<Navigator />`.'
     );
   }
 
@@ -2089,6 +2199,34 @@ function parseScreenValue(screenValue: t.Node): ScreenConfig | null {
   return null;
 }
 
+function parseScreensObject(
+  screensObject: t.ObjectExpression,
+  commentTracking: CommentTrackingEntry[]
+) {
+  const screens: Record<string, ScreenConfig> = {};
+
+  screensObject.properties.forEach((screenProp) => {
+    if (!t.isObjectProperty(screenProp)) return;
+
+    const screenName = getPropertyKeyName(screenProp.key);
+    const screenValue = screenProp.value;
+
+    // Track comments on any property inside the screen config
+    trackScreenConfigComments(screenValue, screenName, commentTracking);
+
+    // Track comments on the screen element itself
+    trackScreenComments(screenProp, screenName, commentTracking);
+
+    const parsed = parseScreenValue(screenValue);
+
+    if (parsed) {
+      screens[screenName] = parsed;
+    }
+  });
+
+  return screens;
+}
+
 /**
  * Parse navigator configuration object.
  * Extracts screens, groups, and navigator-level properties.
@@ -2096,7 +2234,7 @@ function parseScreenValue(screenValue: t.Node): ScreenConfig | null {
  */
 function parseNavigatorConfig(
   configNode: t.ObjectExpression,
-  commentTracking: Set<CommentTrackingEntry>
+  commentTracking: CommentTrackingEntry[]
 ): ParsedNavigatorConfig {
   const result: ParsedNavigatorConfig = {
     screens: {}, // Standalone screens (not in groups)
@@ -2158,7 +2296,7 @@ function parseNavigatorConfig(
           leadingComments,
           trailingComments,
         };
-        commentTracking.add(commentObj);
+        commentTracking.push(commentObj);
       }
     }
 
@@ -2197,29 +2335,10 @@ function parseNavigatorConfig(
               t.isObjectProperty(groupConfigProp) &&
               t.isObjectExpression(groupConfigProp.value)
             ) {
-              // Parse screens within the group
-              groupConfigProp.value.properties.forEach((screenProp) => {
-                if (!t.isObjectProperty(screenProp)) return;
-
-                const screenName = getPropertyKeyName(screenProp.key);
-                const screenValue = screenProp.value;
-
-                // Track comments on any property inside the screen config
-                trackScreenConfigComments(
-                  screenValue,
-                  screenName,
-                  commentTracking
-                );
-
-                // Track comments on the screen element itself
-                trackScreenComments(screenProp, screenName, commentTracking);
-
-                const parsed = parseScreenValue(screenValue);
-
-                if (parsed) {
-                  groupConfig.screens[screenName] = parsed;
-                }
-              });
+              groupConfig.screens = parseScreensObject(
+                groupConfigProp.value,
+                commentTracking
+              );
             } else {
               // Store other group-level props (screenOptions, screenLayout, etc.)
               if (groupPropValue) {
@@ -2240,25 +2359,7 @@ function parseNavigatorConfig(
       t.isObjectProperty(prop) &&
       t.isObjectExpression(prop.value)
     ) {
-      // Parse screens object
-      prop.value.properties.forEach((screenProp) => {
-        if (!t.isObjectProperty(screenProp)) return;
-
-        const screenName = getPropertyKeyName(screenProp.key);
-        const screenValue = screenProp.value;
-
-        // Track comments on any property inside the screen config
-        trackScreenConfigComments(screenValue, screenName, commentTracking);
-
-        // Track comments on the screen element itself
-        trackScreenComments(screenProp, screenName, commentTracking);
-
-        const parsed = parseScreenValue(screenValue);
-
-        if (parsed) {
-          result.screens[screenName] = parsed;
-        }
-      });
+      result.screens = parseScreensObject(prop.value, commentTracking);
     } else {
       // Store all other navigator-level props (screenOptions, initialRouteName, etc.)
       // Keep track of whether the value is a string literal to determine JSX attribute format
