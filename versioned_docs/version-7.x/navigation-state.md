@@ -141,7 +141,6 @@ The state object is guaranteed to not be stale when accessing it with built-in A
 
 - Navigator's state with [`useNavigationState()`](use-navigation-state.md) or [`navigation.getState()`](navigation-object.md#getstate) - not including child navigators.
 - Complete state of the navigation tree with [`ref.getRootState()`](navigation-container.md#getrootstate) including root navigator and all child navigators.
--
 
 However, if you try to access a child navigator's state with the `state` property on the [`route`](route-object.md) object, it maybe a stale or partial state object. So it's not recommended to use this property directly.
 

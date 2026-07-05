@@ -127,7 +127,7 @@ If you use the dynamic API, you'll need to pass the type of the nested navigator
 
 Here `FeedStack` is the value returned by `createXNavigator` (e.g. `const FeedStack = createNativeStackNavigator<FeedStackParamList>()`).
 
-Typed hooks handle navigator nesting automatically. If you setup and use typed hooks, you don't need to combine navigation props manually with `CompositeScreenProps` or `CompositeNavigationProp`. The hooks compose the nested navigator types based on the screen name automatically, so manual types for dynamic navigation structures get much simpler:
+Typed hooks handle navigator nesting automatically. If you setup and use typed hooks, you don't need to combine navigation objects manually with `CompositeScreenProps` or `CompositeNavigationProp`. The hooks compose the nested navigator types based on the screen name automatically, so manual types for dynamic navigation structures get much simpler:
 
 ```diff lang=ts
 - type ProfileScreenNavigationProp = CompositeNavigationProp<

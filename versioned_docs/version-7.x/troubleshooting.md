@@ -415,7 +415,7 @@ Make sure that:
 - The component using navigation hooks is rendered as a screen or inside a screen.
 - You don't use navigation hooks in components rendered outside the navigation tree, such as a separate root, portal, or modal rendered outside the navigator.
 
-If you need to navigate from a component that isn't rendered inside a navigator, see [navigating without the navigation prop](navigating-without-navigation-prop.md).
+If you need to navigate from a component that isn't rendered inside a navigator, see [Navigation ref](navigation-ref.md).
 
 ## I'm getting "The action 'NAVIGATE' was not handled by any navigator"
 

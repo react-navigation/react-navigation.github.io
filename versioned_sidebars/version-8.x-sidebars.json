@@ -64,7 +64,7 @@
         "shared-element-transitions",
         "preventing-going-back",
         "function-after-focusing-screen",
-        "navigating-without-navigation-prop",
+        "navigation-ref",
         "screen-tracking"
       ]
     },

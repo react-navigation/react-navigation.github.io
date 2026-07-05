@@ -280,7 +280,7 @@ See docs for [Navigation Events](navigation-events.md#screenlisteners-prop-on-th
 
 The new `useNavigationContainerRef` hook and `createNavigationContainerRef` helper are useful for simplifying adding a ref to to `NavigationContainer`.
 
-See docs for [`NavigationContainer`](navigation-container.md#ref) and [Navigating without the navigation prop](navigating-without-navigation-prop.md) for more details and examples.
+See docs for [`NavigationContainer`](navigation-container.md#ref) and [Navigation ref](navigation-ref.md) for more details and examples.
 
 ### `useNavigation`, `Link`, `useLinkProps` etc. now work outside a screen
 

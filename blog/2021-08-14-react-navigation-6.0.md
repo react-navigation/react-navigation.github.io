@@ -62,7 +62,7 @@ We simplified many APIs with React Navigation 6 to address common use cases. For
 - Custom header doesn't require setting `headerMode="screen"` manually anymore
 - The `useHeaderHeight` hook now ignores hidden headers and returns the height of the closest visible header in parent
 - New option to set a [custom background](/docs/6.x/bottom-tab-navigator#tabbarbackground) (such as `BlurView`) for tab bar without having to use a custom tab bar
-- New API to manage ref on the container [(`createNavigationContainerRef` and `useNavigationContainerRef`)](/docs/6.x/navigating-without-navigation-prop)
+- New API to manage ref on the container [(`createNavigationContainerRef` and `useNavigationContainerRef`)](/docs/6.x/navigation-ref)
 
 ### New `Group` component for organization
 

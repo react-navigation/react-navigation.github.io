@@ -57,7 +57,7 @@ function App() {
 
 If you're using a regular ref object, keep in mind that the ref may be initially `null` in some situations (such as when linking is enabled). To make sure that the ref is initialized, you can use the [`onReady`](#onready) callback to get notified when the navigation container finishes mounting.
 
-See the [Navigating without the navigation prop](navigating-without-navigation-prop.md) guide for more details.
+See the [Navigation ref](navigation-ref.md) guide for more details.
 
 ### Methods on the ref
 
@@ -77,7 +77,7 @@ In addition to these methods, the ref object also includes the following special
 
 The `isReady` method returns a `boolean` indicating whether the navigation tree is ready. The navigation tree is ready when the `NavigationContainer` contains at least one navigator and all of the navigators have finished mounting.
 
-This can be used to determine whether it's safe to dispatch navigation actions without getting an error. See [handling initialization](navigating-without-navigation-prop.md#handling-initialization) for more details.
+This can be used to determine whether it's safe to dispatch navigation actions without getting an error. See [handling initialization](navigation-ref.md#handling-initialization) for more details.
 
 #### `resetRoot`
 
@@ -207,7 +207,7 @@ Example:
 
 Function which is called after the navigation container and all its children finish mounting for the first time. You can use it for:
 
-- Making sure that the `ref` is usable. See [docs regarding initialization of the ref](navigating-without-navigation-prop.md#handling-initialization) for more details.
+- Making sure that the `ref` is usable. See [Navigation ref](navigation-ref.md#handling-initialization) for more details.
 - Hiding your native splash screen
 
 Example:

@@ -185,7 +185,7 @@ You can use it to track the focused screen, persist the navigation state etc.
 
 Function which is called after the navigation container and all its children finish mounting for the first time. You can use it for:
 
-- Making sure that the `ref` is usable. See [docs regarding initialization of the ref](navigating-without-navigation-prop.md#handling-initialization) for more details.
+- Making sure that the `ref` is usable. See [Navigation ref](navigation-ref.md#handling-initialization) for more details.
 - Hiding your native splash screen
 
 ### `linking`

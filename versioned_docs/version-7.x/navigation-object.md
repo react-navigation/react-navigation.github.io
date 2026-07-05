@@ -24,7 +24,9 @@ The `navigation` object contains various convenience functions that dispatch nav
   - `addListener` - subscribe to events for the screen
   - `removeListener` - unsubscribe from events for the screen
 
-The `navigation` object can be accessed inside any screen component with the [`useNavigation`](use-navigation.md) hook. It's also passed as a prop only to screens components defined with the dynamic API.
+The `navigation` object can be accessed inside any screen component with the [`useNavigation`](use-navigation.md) hook.
+
+Screen components defined with the dynamic API also receive the `navigation` object as a prop. Consider it legacy and prefer using the `useNavigation` hook instead.
 
 :::warning
 
