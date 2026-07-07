@@ -107,6 +107,12 @@ function App() {
 
 The behavior can be customized further by specifying additional options in the `linking` prop as described below.
 
+:::tip
+
+When passing a `linking` prop, define the `linking` object at the module-level or memoize it with `useMemo` so that React Navigation can cache the processed configuration.
+
+:::
+
 ## Prefixes
 
 The `prefixes` option can be optionally used to specify custom schemes (e.g. `example://`) as well as host & domain names (e.g. `https://example.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
