@@ -203,9 +203,9 @@ To work with the reworked TypeScript types, the type API for custom navigators h
 - }
 + export interface MyTypeBag extends NavigatorTypeBagBase {
 +   State: TabNavigationState<this['ParamList']>;
++   ActionHelpers: TabActionHelpers<this['ParamList']>;
 +   ScreenOptions: MyNavigationOptions;
 +   EventMap: MyNavigationEventMap;
-+   ActionHelpers: TabActionHelpers<this['ParamList']>;
 +   Navigator: typeof MyNavigator;
 + }
 +
