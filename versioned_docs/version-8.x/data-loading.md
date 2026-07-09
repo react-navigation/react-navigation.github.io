@@ -6,7 +6,7 @@ sidebar_label: Data loading
 
 :::warning
 
-Data loading is an experimental feature. The API is intentionally minimal and will evolve based on user feedback. Please provide feedback on the [GitHub discussion](https://github.com/react-navigation/react-navigation/discussions/) to help us improve it.
+Data loading is an experimental feature. The API is intentionally minimal and will evolve based on user feedback. Please provide feedback in the [RFC on GitHub discussions](https://github.com/react-navigation/react-navigation/discussions/13177) to help us improve it.
 
 :::
 
@@ -22,7 +22,7 @@ Loaders are not called on the initial render or for actions that update the curr
 
 This is useful to implement "render-as-you-fetch" patterns, where the screen can suspend while reading data that the loader started fetching. If the screen is lazy loaded, the loader and the lazy loading of the screen run in parallel.
 
-This pattern is designed to work with React's Suspense and error boundaries. You can provide a Suspense fallback and an error boundary for your screens using [`screenLayout`](navigator.md#screen-layout) or [`layout`](screen.md#layout). If the loader throws an error, it will be caught by the nearest error boundary.
+This pattern is designed to work with React's Suspense and error boundaries. You can provide a Suspense fallback and an error boundary for your screens using [`screenLayout`](navigator.md#screen-layout) or [`layout`](screen.md#layout) to show a loading UI while the screen is waiting for data or an error UI if the screen throws an error.
 
 ## Adding a loader to a screen
 
