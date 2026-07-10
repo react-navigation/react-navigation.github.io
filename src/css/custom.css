@@ -370,6 +370,16 @@ h6 {
   font-size: 1rem;
 }
 
+/*
+ * Docusaurus renders the heading link's "#" with .hash-link::before.
+ * Its cascade layer polyfill places a specificity :not() after ::before,
+ * producing an invalid selector that browsers ignore.
+ * So we specify our own style with valid selector to make the hash visible.
+ */
+.hash-link::before {
+  content: '#';
+}
+
 header {
   font-family: var(--ifm-heading-font-family);
 }
