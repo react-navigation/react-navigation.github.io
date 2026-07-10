@@ -191,16 +191,27 @@ React Navigation provides basic light and dark themes on all platforms:
 ### `DefaultTheme`
 
 <ThemeColors>
-  - primary: rgb(0 122 255) - background: rgb(242 242 242) - card: rgb(255 255
-  255) - text: rgb(28 28 30) - border: rgb(216 216 216) - notification: rgb(255
-  59 48)
+
+- primary: rgb(0 122 255)
+- background: rgb(242 242 242)
+- card: rgb(255 255 255)
+- text: rgb(28 28 30)
+- border: rgb(216 216 216)
+- notification: rgb(255 59 48)
+
 </ThemeColors>
 
 ### `DarkTheme`
 
 <ThemeColors>
-  - primary: rgb(10 132 255) - background: rgb(1 1 1) - card: rgb(18 18 18) -
-  text: rgb(229 229 231) - border: rgb(39 39 41) - notification: rgb(255 69 58)
+
+- primary: rgb(10 132 255)
+- background: rgb(1 1 1)
+- card: rgb(18 18 18)
+- text: rgb(229 229 231)
+- border: rgb(39 39 41)
+- notification: rgb(255 69 58)
+
 </ThemeColors>
 
 The built-in themes use system fonts which vary based on the platform.
@@ -231,7 +242,7 @@ Alternatively, you can use the [`useColorScheme`](#using-the-operating-system-pr
 
 ## Using the operating system preferences
 
-On iOS 13+ and Android 10+, you can get user's preferred color scheme (`'dark'` or `'light'`) with the ([`useColorScheme` hook](https://reactnative.dev/docs/usecolorscheme)).
+On iOS 13+ and Android 10+, you can get user's preferred color scheme (`'dark'` or `'light'`) with the [`useColorScheme` hook](https://reactnative.dev/docs/usecolorscheme):
 
 ```js name="Operating system color theme" snack static2dynamic
 import * as React from 'react';
