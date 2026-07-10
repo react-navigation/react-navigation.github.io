@@ -1,0 +1,21 @@
+pre-commit:
+  jobs:
+    - name: format
+      run: yarn prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
+
+    - name: checks
+      group:
+        parallel: true
+        jobs:
+          - name: lint
+            run: yarn lint --no-globs {staged_files}
+            glob: '*.md'
+
+          - name: typecheck
+            run: yarn typecheck
+            glob: '*.{cjs,js,json,jsx,mjs,ts,tsx}'
+
+          - name: test
+            run: yarn test
+            glob: '*.{cjs,js,json,jsx,mjs,ts,tsx}'

@@ -20,7 +20,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Lint markdown
-        run: yarn markdownlint-cli2
+        run: yarn lint
 
       - name: Run Typecheck
         run: yarn typecheck
