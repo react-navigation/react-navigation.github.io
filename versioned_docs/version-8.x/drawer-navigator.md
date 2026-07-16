@@ -206,6 +206,13 @@ function CustomDrawerContent(props) {
 }
 ```
 
+The `DrawerContentScrollView` component applies safe are insets automatically:
+
+- On iOS, it sets `contentInsetAdjustmentBehavior="automatic"`
+- On other platforms, it adjusts paddings of the scrollable content
+
+You can override the default behavior by passing `contentInsetAdjustmentBehavior='never'` on iOS `contentContainerStyle` with custom paddings on other platforms.
+
 To add additional items in the drawer, you can use the `DrawerItem` component:
 
 ```js name="Custom Drawer Content" snack static2dynamic
@@ -667,12 +674,13 @@ Style object for the component wrapping the screen content.
 
 #### `configureGestureHandler`
 
-Callback to configure the underlying [gesture from `react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/gesture). It receives the `gesture` object as an argument:
+Callback to configure the underlying [pan gesture from `react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/gesture). It receives the gesture configuration and should return the updated configuration:
 
 ```js
-configureGestureHandler: ({ gesture }) => {
-  return gesture.enableTrackpadTwoFingerGesture(false);
-},
+configureGestureHandler: (config) => ({
+  ...config,
+  enableTrackpadTwoFingerGesture: false,
+}),
 ```
 
 This is not supported on Web.

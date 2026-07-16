@@ -15,8 +15,22 @@ import { useLinkProps } from '@react-navigation/native';
 
 // ...
 
-const LinkButton = ({ screen, params, action, href, children, ...rest }) => {
-  const props = useLinkProps({ screen, params, action, href });
+const LinkButton = ({
+  in: parent,
+  screen,
+  params,
+  action,
+  href,
+  children,
+  ...rest
+}) => {
+  const props = useLinkProps({
+    in: parent,
+    screen,
+    params,
+    action,
+    href,
+  });
 
   const [isHovered, setIsHovered] = React.useState(false);
 
@@ -64,6 +78,20 @@ If you want to navigate to a nested screen, you can pass the name of the `screen
 </LinkButton>
 ```
 
+### `in`
+
+By default, the link targets a screen in the root navigator. You can pass the name of the current or parent screen whose navigator contains the target screen with the `in` prop.
+
+For example, if the current screen is nested in the `Home` tab, you can link to the `Settings` tab in the parent tab navigator:
+
+```js
+<LinkButton in="Home" screen="Settings">
+  Go to Settings
+</LinkButton>
+```
+
+This is similar to how [useNavigation](use-navigation.md) accepts the current screen or any of its parent screens. But unlike navigating with `useNavigation`, navigation from `Link` using the `screen` and `params` props doesn't bubble up to parent navigators.
+
 ### `action`
 
 Sometimes we want a different behavior for in-page navigation, such as `replace` instead of `navigate`. We can use the `action` prop to customize it:
@@ -88,7 +116,9 @@ function Home() {
 }
 ```
 
-The `screen` and `params` props can be omitted if the `action` prop is specified. In that case, we recommend specifying the `href` prop as well to ensure that the link is accessible.
+The action gets dispatched to the current navigator and can bubble upto a parent navigator similar to dispatching the action with [navigation.dispatch](navigation-object.md#dispatch).
+
+The `screen` and `params` props can be omitted if the `action` prop is specified. In that case, we recommend specifying the `href` prop as well to ensure that the link is accessible. The `in` prop is not supported when only the `action` prop is specified.
 
 ### `href`
 

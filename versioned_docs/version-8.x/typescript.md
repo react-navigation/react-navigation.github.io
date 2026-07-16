@@ -335,6 +335,30 @@ function Header() {
 }
 ```
 
+## Using typed links
+
+The [`Link`](link.md), [`Button`](elements.md#button), and [`useLinkProps`](use-link-props.md) APIs are automatically type-checked based on the root navigator type.
+
+By default, the `screen` and `params` props refer to a screen in the root navigator. To link to a screen in the current or a parent navigator, pass the name of the current or parent screen with the `in` prop, similar to the screen name accepted by `useNavigation`.
+
+For example, suppose the `ArticleList` screen is in a stack nested under the `Feed` tab. The `Feed` tab is nested under the `Home` screen in the root navigator, alongside the `Settings` screen:
+
+```tsx
+function ArticleListScreen() {
+  return (
+    <>
+      {/* The root navigator is used by default */}
+      <Link screen="Settings">Go to Settings</Link>
+
+      {/* The navigator containing the Feed screen is used */}
+      <Link in="Feed" screen="Profile" params={{ userId: 'jane' }}>
+        Go to Jane's profile
+      </Link>
+    </>
+  );
+}
+```
+
 ## Nesting a dynamic navigator
 
 If you render a dynamic navigator inside a static navigator, see [Mixing Static & Dynamic APIs](combine-static-with-dynamic.md#static-root-navigator-dynamic-nested-navigator) for the additional typing and linking configuration needed for the nested navigator.
@@ -555,6 +579,30 @@ function Header() {
   console.log(focusedRouteName);
 
   // ...
+}
+```
+
+<h2 id="using-typed-links-dynamic">Using typed links</h2>
+
+The [`Link`](link.md), [`Button`](elements.md#button), and [`useLinkProps`](use-link-props.md) APIs are automatically type-checked based on the root navigator type.
+
+By default, the `screen` and `params` props refer to a screen in the root navigator. To link to a screen in the current or a parent navigator, pass the name of the current or parent screen with the `in` prop, similar to the screen name accepted by `useNavigation`.
+
+For example, suppose the `ArticleList` screen is in a stack nested under the `Feed` tab. The `Feed` tab is nested under the `Home` screen in the root navigator, alongside the `Settings` screen:
+
+```tsx
+function ArticleListScreen() {
+  return (
+    <>
+      {/* The root navigator is used by default */}
+      <Link screen="Settings">Go to Settings</Link>
+
+      {/* The navigator containing the Feed screen is used */}
+      <Link in="Feed" screen="Profile" params={{ userId: 'jane' }}>
+        Go to Jane's profile
+      </Link>
+    </>
+  );
 }
 ```
 

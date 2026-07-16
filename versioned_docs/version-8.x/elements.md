@@ -711,6 +711,43 @@ A component which provides an abstraction on top of [`Pressable`](https://reactn
 - `pressColor` - Color of material ripple on Android when it's pressed
 - `pressOpacity` - Opacity when it's pressed if material ripple isn't supported by the platform
 
+### `PlatformIcon`
+
+A component that renders an [icon object](icons.md) with a consistent API across platforms. It accepts the following props:
+
+- `icon` - Icon object to render. It can contain an image, an SF Symbol, or a Material Symbol.
+- `size` - Size of the icon.
+- `color` - Color to apply to the icon.
+- `style` - Style object for the icon.
+
+Example:
+
+```js
+import { PlatformIcon } from '@react-navigation/elements';
+import { Platform } from 'react-native';
+
+// ...
+
+<PlatformIcon
+  icon={Platform.select({
+    ios: {
+      type: 'sfSymbol',
+      name: 'person',
+    },
+    android: {
+      type: 'materialSymbol',
+      name: 'person',
+    },
+    default: {
+      type: 'image',
+      source: require('./person.png'),
+    },
+  })}
+  color="tomato"
+  size={24}
+/>;
+```
+
 ### `Button`
 
 A component that renders a button. In addition to [`PlatformPressable`](#platformpressable)'s props, it accepts following additional props:
@@ -721,6 +758,7 @@ A component that renders a button. In addition to [`PlatformPressable`](#platfor
   - `filled`
 - `color` - Color of the button. Defaults to the [theme](themes.md)'s primary color.
 - `icon` - Icon to display before the label. It can be an icon object or a function that returns an icon object or a React element. See [Icons](icons.md) for more details.
+- `loading` - Boolean which controls whether to show a loading indicator instead of the icon. The button is disabled while loading.
 - `disabled` - Boolean which controls whether the button is disabled.
 - `children` - Content to render inside the button. It must be a string or React element that can be nested inside a `Text` component.
 
@@ -734,7 +772,9 @@ It can be used to navigate between screens by specifying a screen name and param
 </Button>
 ```
 
-Or as a regular button:
+When navigating to a screen this way, it automatically shows the loading indicator while the navigation transition is pending. You can pass `loading={false}` to disable the automatic loading indicator.
+
+It can also be used as a regular button:
 
 ```js
 <Button onPress={() => console.log('button pressed')}>Press me</Button>

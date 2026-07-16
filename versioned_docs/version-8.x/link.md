@@ -17,7 +17,7 @@ import { Link } from '@react-navigation/native';
 
 function Home() {
   return (
-    <Link screen="Profile" params={{ id: 'jane' }}>
+    <Link in="Home" screen="Profile" params={{ id: 'jane' }}>
       Go to Jane's profile
     </Link>
   );
@@ -26,4 +26,4 @@ function Home() {
 
 If you want to use your own custom link component, you can use [`useLinkProps`](use-link-props.md) instead.
 
-The `Link` component accepts the [same props as `useLinkProps`](use-link-props.md#options)
+The `Link` component accepts the [same props as `useLinkProps`](use-link-props.md#options).

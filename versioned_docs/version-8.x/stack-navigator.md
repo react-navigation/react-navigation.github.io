@@ -640,6 +640,10 @@ This hook returns values related to the screen's animation. It contains the foll
 
 See [Transparent modals](#transparent-modals) for an example of how to use this hook.
 
+#### `useGestureHandler`
+
+This hook returns the pan gesture for the current Stack screen, or `null` if gestures are not supported on the platform. It can be used to coordinate a custom gesture with the Stack's gesture using the APIs from [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/gesture).
+
 ## Animations
 
 You can specify the `animation` option to customize the transition animation for screens being pushed or popped.
@@ -847,6 +851,7 @@ Stack Navigator exposes various options to configure the transition animation wh
   - `containerStyle` - Style for the container view wrapping the card.
   - `cardStyle` - Style for the view representing the card.
   - `overlayStyle` - Style for the view representing the semi-transparent overlay below
+  - `dimStyle` - Style for the dimming view on top of the card content.
   - `shadowStyle` - Style for the view representing the card shadow.
 
   The function receives the following properties in its argument:
@@ -1173,7 +1178,7 @@ import { TransitionSpecs } from '@react-navigation/stack';
 
 - `forHorizontalIOS` - Standard iOS-style slide in from the right.
 - `forVerticalIOS` - Standard iOS-style slide in from the bottom (used for modals).
-- `forModalPresentationIOS` - Standard iOS-style modal animation in iOS 13.
+- `forModalPresentationIOS` - Standard iOS-style modal animation.
 - `forFadeFromBottomAndroid` - Standard Android-style fade in from the bottom for Android Oreo.
 - `forRevealFromBottomAndroid` - Standard Android-style reveal from the bottom for Android Pie.
 

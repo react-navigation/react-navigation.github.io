@@ -726,6 +726,42 @@ Previously, the `gestureResponseDistance` option in Stack Navigator accepted an 
 + gestureResponseDistance: 50
 ```
 
+#### Stack and Drawer now use Gesture Handler 3
+
+Stack and Drawer navigators now require `react-native-gesture-handler` 3. In addition to the [dependency change](#dependency-changes), APIs for customizing and accessing gestures have changed to match the new Gesture Handler API.
+
+The [`configureGestureHandler`](drawer-navigator.md#configuregesturehandler) option in Drawer Navigator now receives and returns a gesture configuration object instead of a gesture builder:
+
+```diff lang=js
+- configureGestureHandler: (gesture) =>
+-   gesture.enableTrackpadTwoFingerGesture(false),
++ configureGestureHandler: (config) => ({
++   ...config,
++   enableTrackpadTwoFingerGesture: false,
++ }),
+```
+
+The utilities exported by Stack Navigator have also changed:
+
+```diff lang=js
+- import {
+-   GestureHandlerRefContext,
+-   useGestureHandlerRef,
+- } from '@react-navigation/stack';
++ import {
++   GestureHandlerContext,
++   useGestureHandler,
++ } from '@react-navigation/stack';
+```
+
+The [`useGestureHandler`](stack-navigator.md#usegesturehandler) hook returns the pan gesture for the current Stack screen instead of a ref to the gesture handler.
+
+#### Stack modal presentation has changed on iOS 26
+
+The modal presentation in Stack Navigator has been updated to match the latest iOS design on iOS 26 and later. Modal screens now use rounded corners, and the screens underneath are scaled and dimmed.
+
+This applies to screens using [`presentation: 'modal'`](stack-navigator.md#presentation) and the [`forModalPresentationIOS`](stack-navigator.md#cardstyleinterpolators) card style interpolator. If you use a custom card style interpolator for a similar presentation, it can now return a `dimStyle` to render a dimming view on top of the card content.
+
 #### Material Top Tabs and `react-native-tab-view` have been updated to Material Design 3
 
 ##### The tab bar now uses the `primary` variant by default
@@ -1191,6 +1227,20 @@ It's still possible to use these hooks without passing the screen name, same as 
 
 See [`useNavigation`](use-navigation.md), [`useRoute`](use-route.md), and [`useNavigationState`](use-navigation-state.md) for more details.
 
+### Links can target screens in the current or a parent navigator
+
+The [`useLinkProps`](use-link-props.md), [`Link`](link.md), and [`Button`](elements.md#button) APIs now accept an [`in`](use-link-props.md#in) prop. It specifies the name of the current or parent screen whose navigator contains the target screen.
+
+For example, a screen nested in the `Home` tab can link to the `Settings` tab in the parent tab navigator:
+
+```js
+<Link in="Home" screen="Settings">
+  Go to Settings
+</Link>
+```
+
+This is similar to how [typed hooks accept the name of the screen](#common-hooks-now-accept-name-of-the-screen). But unlike typed hooks, navigation from `Link` using the `screen` and `params` props doesn't bubble up to parent navigators.
+
 ### New entry can be added to history stack with `pushParams` action
 
 The `pushParams` action updates the params and pushes a new entry to the history stack:
@@ -1572,6 +1622,20 @@ tabBarIcon: Platform.select({
 
 In addition, new `SFSymbol` and `MaterialSymbol` components are exported from `@react-navigation/native` to render these icons directly.
 
+The new [`PlatformIcon`](elements.md#platformicon) component from `@react-navigation/elements` can render an icon object directly. It renders an image, SF Symbol, or Material Symbol based on the icon object:
+
+```js
+<PlatformIcon
+  icon={Platform.select({
+    ios: { type: 'sfSymbol', name: 'person' },
+    android: { type: 'materialSymbol', name: 'person' },
+    default: { type: 'image', source: require('./person.png') },
+  })}
+  color="tomato"
+  size={24}
+/>
+```
+
 See [Icons](icons.md) for more details.
 
 ### `react-native-tab-view` now supports a `renderAdapter` prop for custom adapters
@@ -1607,9 +1671,25 @@ export default function TabViewExample() {
 
 You can also create your own custom adapter by implementing the required interface. See the [`react-native-tab-view` docs](tab-view.md) for more information.
 
-### `Button` from `@react-navigation/elements` now supports disabled state, icons and React elements
+### `Button` from `@react-navigation/elements` now supports more options
 
-The [`Button`](elements.md#button) component now supports a disabled state.
+The [`Button`](elements.md#button) component now supports loading and disabled states. The `loading` prop shows a loading indicator in place of the icon and disables interaction:
+
+```js
+<Button loading={isLoading} onPress={submit}>
+  Submit
+</Button>
+```
+
+When the button navigates to a screen, it automatically shows the loading indicator while the navigation transition is pending. You can pass `loading={false}` to disable the automatic loading indicator.
+
+The `disabled` prop disables interaction and applies a disabled style to the button:
+
+```js
+<Button disabled={isDisabled} onPress={submit}>
+  Submit
+</Button>
+```
 
 It also accepts an `icon` prop to show an icon alongside the button label:
 
