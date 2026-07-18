@@ -66,7 +66,11 @@ React Navigation starts with the navigation tree:
 
 ## Migration checklist
 
-1. Remove Expo Router as the entry point.
+1. Install React Navigation.
+
+   Follow the [Getting started](getting-started.md) guide to install React Navigation and the dependencies used by the navigators you need.
+
+2. Remove Expo Router as the entry point.
 
    If your app uses [`expo-router/entry`](https://docs.expo.dev/router/installation) in `package.json`, replace it with your app's entry file. If you don't use Expo Router anywhere else, remove the `expo-router` package and the `expo-router` config plugin from your Expo app config.
 
@@ -85,7 +89,7 @@ React Navigation starts with the navigation tree:
    registerRootComponent(App);
    ```
 
-2. Create a root navigator.
+3. Create a root navigator.
 
    Define your root navigator with a `createXNavigator` function, create screen configs with the matching [`createXScreen`](static-configuration.md#createxscreen) helper, and render it with [`createStaticNavigation`](static-configuration.md#createstaticnavigation):
 
@@ -120,7 +124,7 @@ React Navigation starts with the navigation tree:
    }
    ```
 
-3. Move each route file into a screen registration.
+4. Move each route file into a screen registration.
 
    A route file such as `app/profile/[userId].tsx` becomes a screen component registered in a navigator. Keep the component code, but replace Expo Router hooks with React Navigation's [`useRoute`](use-route.md) (or `route` prop) and [`useNavigation`](use-navigation.md) hooks.
 
@@ -142,7 +146,7 @@ React Navigation starts with the navigation tree:
    }
    ```
 
-4. Recreate `_layout.tsx` files with nested navigators.
+5. Recreate `_layout.tsx` files with nested navigators.
 
    A layout returning `<Stack />` becomes [`createNativeStackNavigator`](native-stack-navigator.md) or [`createStackNavigator`](stack-navigator.md), `<Tabs />` becomes [`createBottomTabNavigator`](bottom-tab-navigator.md), `<NativeTabs />` becomes [`createNativeBottomTabNavigator`](native-bottom-tab-navigator.md), and `<Drawer />` becomes [`createDrawerNavigator`](drawer-navigator.md). Nested layout files become [nested navigators](nesting-navigators.md).
 
@@ -167,7 +171,7 @@ React Navigation starts with the navigation tree:
    });
    ```
 
-5. Recreate URLs with linking configuration.
+6. Recreate URLs with linking configuration.
 
    Expo Router infers paths from file names. React Navigation [generates paths automatically based on screen names](configuring-links.md#how-does-automatic-path-generation-work), and you can override paths with the `linking` property on a screen for custom patterns.
 
@@ -186,7 +190,7 @@ React Navigation starts with the navigation tree:
 
    For example, Expo Router's `app/profile/[userId].tsx` can become a root stack screen with `linking: 'profile/:userId'`.
 
-6. Replace redirects and protected routes.
+7. Replace redirects and protected routes.
 
    Replace [`Redirect`](https://docs.expo.dev/versions/latest/sdk/router/link#redirect) and [protected route groups](https://docs.expo.dev/router/advanced/protected) with conditional screens or groups. In static configuration, use the [`if`](static-configuration.md#if) property described in the [authentication flow](auth-flow.md?config=static) guide. When the condition changes, screens that no longer match are removed from the navigation state.
 
@@ -205,7 +209,7 @@ React Navigation starts with the navigation tree:
    });
    ```
 
-7. Handle unmatched routes and deep links.
+8. Handle unmatched routes and deep links.
 
    Replace [`+not-found`](https://docs.expo.dev/router/error-handling/#unmatched-routes) with a screen that uses a catch-all linking path such as `'*'`. Replace [`+native-intent`](https://docs.expo.dev/router/advanced/native-intent) with [`getInitialURL` and `subscribe`](deep-linking.md#integrating-with-other-tools) in the [`linking`](navigation-container.md#linking) configuration.
 
@@ -248,6 +252,11 @@ React Navigation starts with the navigation tree:
 | [`router.navigate`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                              | [`navigation.navigate`](navigation-object.md#navigate)                                                                         |
 | [`router.replace`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                               | [`navigation.replace`](stack-actions.md#replace) in stack navigators                                                           |
 | [`router.back`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                                  | [`navigation.goBack`](navigation-object.md#goback)                                                                             |
+| [`router.canGoBack`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                             | [`navigation.canGoBack`](navigation-object.md#cangoback)                                                                       |
+| [`router.dismiss`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                               | [`navigation.pop`](stack-actions.md#pop) in stack navigators                                                                   |
+| [`router.dismissTo`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                             | [`navigation.popTo`](stack-actions.md#popto) in stack navigators                                                               |
+| [`router.dismissAll`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                            | [`navigation.popToTop`](stack-actions.md#poptotop) in stack navigators                                                         |
+| [`router.canDismiss`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                            | [`navigation.canGoBack`](navigation-object.md#cangoback) in stack navigators                                                   |
 | [`router.setParams`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                             | [`navigation.setParams`](navigation-object.md#setparams) and [`navigation.replaceParams`](navigation-actions.md#replaceparams) |
 | [`router.prefetch`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                              | [`navigation.preload`](navigation-object.md#preload)                                                                           |
 | [`useRouter`](https://docs.expo.dev/versions/latest/sdk/router/#userouter)                                           | [`useNavigation`](use-navigation.md)                                                                                           |

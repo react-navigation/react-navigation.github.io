@@ -67,7 +67,13 @@ React Navigation starts with the navigation tree:
 
 ## Migration checklist
 
-1. Remove Expo Router as the entry point.
+1. Install React Navigation.
+
+   Follow the [Getting started](getting-started.md) guide to install React Navigation and the dependencies used by the navigators you need.
+
+   If your app runs in [Expo Go](https://expo.dev/go), you'll also need to switch to a [development build](https://docs.expo.dev/development/introduction/), since Expo Go doesn't support React Navigation 8.
+
+2. Remove Expo Router as the entry point.
 
    If your app uses [`expo-router/entry`](https://docs.expo.dev/router/installation) in `package.json`, replace it with your app's entry file. If you don't use Expo Router anywhere else, remove the `expo-router` package and the `expo-router` config plugin from your Expo app config.
 
@@ -86,7 +92,7 @@ React Navigation starts with the navigation tree:
    registerRootComponent(App);
    ```
 
-2. Create a root navigator.
+3. Create a root navigator.
 
    Define your root navigator with a `createXNavigator` function, create screen configs with the matching [`createXScreen`](static-configuration.md#createxscreen) helper, and render it with [`createStaticNavigation`](static-configuration.md#createstaticnavigation):
 
@@ -121,7 +127,7 @@ React Navigation starts with the navigation tree:
    }
    ```
 
-3. Move each route file into a screen registration.
+4. Move each route file into a screen registration.
 
    A route file such as `app/profile/[userId].tsx` becomes a screen component registered in a navigator. Keep the component code, but replace Expo Router hooks with React Navigation hooks such as [`useRoute`](use-route.md) and [`useNavigation`](use-navigation.md).
 
@@ -145,7 +151,7 @@ React Navigation starts with the navigation tree:
    }
    ```
 
-4. Recreate `_layout.tsx` files with nested navigators.
+5. Recreate `_layout.tsx` files with nested navigators.
 
    A layout returning `<Stack />` becomes [`createNativeStackNavigator`](native-stack-navigator.md) or [`createStackNavigator`](stack-navigator.md), `<Tabs />` becomes [`createBottomTabNavigator`](bottom-tab-navigator.md), and `<Drawer />` becomes [`createDrawerNavigator`](drawer-navigator.md). Nested layout files become [nested navigators](nesting-navigators.md).
 
@@ -170,7 +176,7 @@ React Navigation starts with the navigation tree:
    });
    ```
 
-5. Recreate URLs with linking configuration.
+6. Recreate URLs with linking configuration.
 
    Expo Router infers paths from file names. React Navigation [generates paths automatically based on screen names](configuring-links.md#how-does-automatic-path-generation-work), and you can override paths with the `linking` property on a screen for custom patterns.
 
@@ -189,7 +195,9 @@ React Navigation starts with the navigation tree:
 
    For example, Expo Router's `app/profile/[userId].tsx` can become a root stack screen with `linking: 'profile/:userId'`.
 
-6. Replace redirects and protected routes.
+   [Shared routes](https://docs.expo.dev/router/advanced/shared-routes) - defined with array syntax in group names such as `(feed,search)` - don't need an equivalent configuration. When the same screen is used in multiple navigators, React Navigation automatically treats its path as [shared](configuring-links.md#shared-paths), so all of them use a single URL. Expo Router targets a specific copy by including the group in the URL, e.g. `/(search)/profile/jane`. React Navigation has no such segment - opening `/profile/jane` keeps the current tab focused and opens `Profile` in that tab.
+
+7. Replace redirects and protected routes.
 
    Replace [`Redirect`](https://docs.expo.dev/versions/latest/sdk/router/link#redirect) and [protected route groups](https://docs.expo.dev/router/advanced/protected) with conditional screens or groups. In static configuration, use the [`if`](static-configuration.md#if) property described in the [authentication flow](auth-flow.md?config=static) guide. When the condition changes, screens that no longer match are removed from the navigation state.
 
@@ -208,7 +216,7 @@ React Navigation starts with the navigation tree:
    });
    ```
 
-7. Handle unmatched routes and deep links.
+8. Handle unmatched routes and deep links.
 
    Replace [`+not-found`](https://docs.expo.dev/router/error-handling/#unmatched-routes) with a screen that uses a catch-all linking path such as `'*'`. Replace [`+native-intent`](https://docs.expo.dev/router/advanced/native-intent) with [`getInitialURL` and `subscribe`](deep-linking.md#integrating-with-other-tools) in the [`linking`](navigation-container.md#linking) configuration.
 
@@ -251,6 +259,11 @@ React Navigation starts with the navigation tree:
 | [`router.navigate`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                              | [`navigation.navigate`](navigation-object.md#navigate)                                                                                                                                      |
 | [`router.replace`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                               | [`navigation.replace`](stack-actions.md#replace) in stack navigators                                                                                                                        |
 | [`router.back`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                                  | [`navigation.goBack`](navigation-object.md#goback)                                                                                                                                          |
+| [`router.canGoBack`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                             | [`navigation.canGoBack`](navigation-object.md#cangoback)                                                                                                                                    |
+| [`router.dismiss`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                               | [`navigation.pop`](stack-actions.md#pop) in stack navigators                                                                                                                                |
+| [`router.dismissTo`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                             | [`navigation.popTo`](stack-actions.md#popto) in stack navigators                                                                                                                            |
+| [`router.dismissAll`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                            | [`navigation.popToTop`](stack-actions.md#poptotop) in stack navigators                                                                                                                      |
+| [`router.canDismiss`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                            | [`navigation.canGoBack`](navigation-object.md#cangoback) in stack navigators                                                                                                                |
 | [`router.setParams`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                             | [`navigation.setParams`](navigation-object.md#setparams), [`navigation.replaceParams`](navigation-actions.md#replaceparams) and [`navigation.pushParams`](navigation-actions.md#pushparams) |
 | [`router.prefetch`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                              | [`navigation.preload`](navigation-object.md#preload)                                                                                                                                        |
 | [`useRouter`](https://docs.expo.dev/versions/latest/sdk/router/#userouter)                                           | [`useNavigation`](use-navigation.md)                                                                                                                                                        |
@@ -261,7 +274,7 @@ React Navigation starts with the navigation tree:
 | [`useFocusEffect`](https://docs.expo.dev/versions/latest/sdk/router/#usefocuseffecteffect-do_not_pass_a_second_prop) | [`useFocusEffect`](use-focus-effect.md)                                                                                                                                                     |
 | [`useNavigation`](https://docs.expo.dev/versions/latest/sdk/router/#usenavigationparent)                             | [`useNavigation`](use-navigation.md)                                                                                                                                                        |
 | [`useSitemap`](https://docs.expo.dev/versions/latest/sdk/router/#usesitemap)                                         | No direct equivalent.                                                                                                                                                                       |
-| [`useLoaderData`](https://docs.expo.dev/router/web/data-loaders)                                                     | No direct equivalent, but planned.                                                                                                                                                          |
+| [`useLoaderData`](https://docs.expo.dev/router/web/data-loaders)                                                     | No equivalent hook. A screen can define a [loader](data-loading.md) to start fetching on navigation, and read the data from your data fetching library.                                     |
 
 ### Features without direct replacements
 
