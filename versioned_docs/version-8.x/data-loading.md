@@ -22,7 +22,7 @@ Loaders are not called on the initial render or for actions that update the curr
 
 This is useful to implement "render-as-you-fetch" patterns, where the screen can suspend while reading data that the loader started fetching. If the screen is lazy loaded, the loader and the lazy loading of the screen run in parallel.
 
-This pattern is designed to work with React's Suspense and error boundaries. You can provide a Suspense fallback and an error boundary for your screens using [`screenLayout`](navigator.md#screen-layout) or [`layout`](screen.md#layout) to show a loading UI while the screen is waiting for data or an error UI if the screen throws an error.
+This pattern is designed to work with React's Suspense and error boundaries. You can provide a Suspense fallback and an error boundary for your screens using [`screenLayout`](navigator.md#screen-layout) or [`layout`](screen.md#layout) to show a loading UI while the screen is waiting for data or an error UI if the screen throws an error. See [Suspense and pending UI](suspense.md) for more details on placing Suspense boundaries and handling pending UI during navigation.
 
 ## Adding a loader to a screen
 

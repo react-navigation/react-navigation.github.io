@@ -41,6 +41,7 @@
         "icons",
         "state-persistence",
         "data-loading",
+        "suspense",
         "web-support",
         "server-rendering"
       ]
