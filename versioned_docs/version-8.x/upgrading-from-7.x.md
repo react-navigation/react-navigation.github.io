@@ -342,20 +342,6 @@ If you use a custom navigator with `StackRouter` and do not want to change the s
 
 See [Navigation state](navigation-state.md) for more details.
 
-##### `preload` reuses matching preloaded routes instead of adding new ones
-
-Previously, calling `preload` for the same screen multiple times in a Stack or Native Stack Navigator would always preload a new instance of screen, leading to multiple preloaded instances. We found that this behavior was not intuitive and most people expected to have a single instance.
-
-In React Navigation 8, calling `preload` for a matching preloaded screen updates its params instead of adding another preloaded screen:
-
-```js
-navigation.preload('Profile', { user: 'jane' });
-```
-
-By default, preloaded screens are matched based on the screen name. The [`getId`](screen.md#id) prop can be used to match based on an ID derived from the params instead.
-
-See [`preload`](navigation-actions.md#preload) for more details.
-
 ##### Preloaded screens behave closer to regular screens
 
 Previously, when a screen was preloaded in Stack and Native Stack Navigators, there were a few restrictions:
