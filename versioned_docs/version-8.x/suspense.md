@@ -59,9 +59,11 @@ const RootStack = createNativeStackNavigator({
 
 This fallback is still shown during the initial render, when there is no previously displayed screen to keep visible, or if a component suspends because of a state update that isn't wrapped in a transition.
 
-This can be useful for [stack navigators](stack-navigator.md), where you'd keep the current screen visible during navigation and [show pending UI on the current screen](#showing-pending-ui-on-the-current-screen).
+This can be useful to keep the current screen visible during navigation in [stack navigators](stack-navigator.md). When blocking navigation this way, it's also important to [show pending UI on the current screen](#showing-pending-ui-on-the-current-screen) so it's clear that navigation is in progress. Otherwise, the user may not realize that tapping a button did anything.
 
-It's not recommended for native tab navigators, where switching tabs by tapping the native tab bar doesn't run as a transition, so the fallback would hide the tab bar if a screen suspends.
+Because this boundary wraps the whole navigator, every screen that suspends keeps the current screen visible and blocks navigation until the destination is ready. If you'd rather show a loading UI right away for some screens, add a boundary around those screens instead.
+
+A boundary around the navigator isn't recommended for native tab navigators, where switching tabs by tapping the native tab bar doesn't run as a transition, so the fallback would hide the tab bar if a screen suspends.
 
 ### Around each screen
 
@@ -83,7 +85,7 @@ const RootStack = createNativeStackNavigator({
 });
 ```
 
-This is ideal for tab and [drawer navigators](drawer-navigator.md), as it keeps the tab bar or drawer visible and shows the loading UI only in the screen's area.
+This works well for all navigators. It's especially important in tab and drawer navigators, where it keeps the tab bar or drawer visible and shows the loading UI in the screen's area as soon as you navigate.
 
 ### Around a section inside a screen
 
