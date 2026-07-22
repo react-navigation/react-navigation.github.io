@@ -270,6 +270,26 @@ function MyStack() {
 </TabItem>
 </ConfigTabs>
 
+:::warning
+
+The function passed to `screenLayout` is invoked as a regular function, not rendered as a React component. This means you **cannot call React Hooks directly inside it** — doing so will fail at runtime with errors such as _"Should have a queue. You are likely calling Hooks conditionally, which is not allowed."_
+
+If you need to use Hooks, wrap your logic in a separate component and return it as JSX:
+
+```jsx
+function MyScreenLayout(props) {
+  const value = useMyHook(); // ✅ Hook runs inside a real component
+
+  return <ErrorBoundary>{props.children}</ErrorBoundary>;
+}
+
+const Stack = createNativeStackNavigator({
+  screenLayout: (props) => <MyScreenLayout {...props} />,
+});
+```
+
+:::
+
 ### Router
 
 Routers can be customized with the `router` prop on navigator to override how navigation actions are handled.
