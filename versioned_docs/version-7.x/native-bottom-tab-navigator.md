@@ -492,6 +492,18 @@ The display mode for the tab bar. Supported values:
 
 Only supported on iOS 18 and above. Not supported on tvOS.
 
+#### `overrideScrollViewContentInsetAdjustmentBehavior`
+
+Whether to override the `contentInsetAdjustmentBehavior` of the first `ScrollView` in the first descendant chain from the tab screen.
+
+By default, React Native's `ScrollView` has `contentInsetAdjustmentBehavior` set to `never` instead of UIKit's default `automatic`. Setting this option to `true` restores the automatic behavior so scroll views respect navigation bar insets.
+
+Set this option to `false` to disable this behavior for specific screens.
+
+Defaults to `true`.
+
+Only supported on iOS.
+
 #### `tabBarMinimizeBehavior`
 
 The minimize behavior for the tab bar. Supported values:
