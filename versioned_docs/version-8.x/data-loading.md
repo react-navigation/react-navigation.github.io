@@ -153,7 +153,7 @@ With this setup, React Navigation calls the loader for the `Profile` screen when
 
 ## Running loaders manually
 
-Use `UNSTABLE_getLoaderForState` to get the loader for a screen, for example when preloading data before the initial render, or when [server rendering](server-rendering.md):
+The `UNSTABLE_getLoaderForState` utility can be used to get the loader for a screen, for example when preloading data before the initial render, or when [server rendering](server-rendering.md):
 
 ```js
 import { UNSTABLE_getLoaderForState } from '@react-navigation/native';

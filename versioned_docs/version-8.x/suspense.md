@@ -165,8 +165,8 @@ Suspense boundaries only handle pending content. If loading fails, or the compon
 
 ```js static2dynamic
 const RootStack = createNativeStackNavigator({
+  // highlight-start
   screenLayout: ({ children }) => (
-    // highlight-next-line
     <ErrorBoundary fallback={<ErrorFallback />}>
       <React.Suspense fallback={<LoadingPlaceholder />}>
         {children}
