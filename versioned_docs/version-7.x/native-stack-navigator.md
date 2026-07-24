@@ -926,7 +926,7 @@ Example:
 unstable_headerLeftItems: () => [
   {
     type: 'button',
-    title: 'Edit',
+    label: 'Edit',
     onPress: () => {
       // Do something
     },
@@ -970,7 +970,7 @@ Example:
 unstable_headerRightItems: () => [
   {
     type: 'button',
-    title: 'Edit',
+    label: 'Edit',
     onPress: () => {
       // Do something
     },
