@@ -6,9 +6,7 @@ sidebar_label: Native Bottom Tabs
 
 :::warning
 
-This navigator is currently experimental. The API will change in future releases.
-
-Currently only iOS and Android are supported. Use [`createBottomTabNavigator`](bottom-tab-navigator.md) for web support.
+This navigator's API may change in a minor release. It currently only supports iOS and Android. Use [`createBottomTabNavigator`](bottom-tab-navigator.md) for web support.
 
 :::
 
