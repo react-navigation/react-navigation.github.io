@@ -62,7 +62,7 @@ function isCodeNode(node: MdxNode): node is CodeNode {
 function createLabelWithIcon(
   pm: PackageManager
 ): MdxJsxAttributeValueExpression {
-  const value = `<><img className="pm-icon" src="/assets/pm/${pm}.svg" alt="" />${pm}</>`;
+  const value = `<><img className="pm-icon" src="/assets/pm/${pm}.svg" alt="" width="16" height="16" loading="lazy" decoding="async" />${pm}</>`;
 
   return {
     type: 'mdxJsxAttributeValueExpression',
@@ -77,7 +77,7 @@ function createValuesAttribute(
   const value = `[${packageManagers
     .map(
       (pm) =>
-        `{ value: '${pm}', label: <><img className="pm-icon" src="/assets/pm/${pm}.svg" alt="" />${pm}</> }`
+        `{ value: '${pm}', label: <><img className="pm-icon" src="/assets/pm/${pm}.svg" alt="" width="16" height="16" loading="lazy" decoding="async" />${pm}</> }`
     )
     .join(', ')}]`;
 

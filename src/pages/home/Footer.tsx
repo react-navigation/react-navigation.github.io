@@ -16,7 +16,12 @@ export default function Footer() {
             {links.map((link, index) => (
               <React.Fragment key={link.href}>
                 {index > 0 && ', '}
-                <a target="_blank" rel="noreferrer noopener" href={link.href}>
+                <a
+                  className="footer__copyright-link"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  href={link.href}
+                >
                   {link.title}
                 </a>
               </React.Fragment>

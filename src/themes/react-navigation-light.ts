@@ -9,7 +9,7 @@ const theme: PrismTheme = {
     {
       types: ['comment', 'prolog', 'doctype', 'cdata'],
       style: {
-        color: 'hsl(212, 9%, 47%)',
+        color: 'hsl(212, 9%, 45%)',
         fontStyle: 'italic',
       },
     },
@@ -126,7 +126,7 @@ const theme: PrismTheme = {
     {
       types: ['template-string', 'string'],
       style: {
-        color: 'hsl(139, 66%, 32%)',
+        color: 'hsl(139, 66%, 30%)',
       },
     },
   ],

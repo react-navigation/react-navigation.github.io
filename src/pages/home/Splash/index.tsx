@@ -29,9 +29,9 @@ export default function Splash() {
         <div className={styles.main}>
           <div className={styles.mainContent}>
             <h1 className={styles.mainText}>React Navigation</h1>
-            <h3 className={styles.subText}>
+            <p className={styles.subText}>
               Routing and navigation for React Native and Web apps.
-            </h3>
+            </p>
             <div className={styles.buttonContainer}>
               <Link
                 to={useBaseUrl('/docs/getting-started')}

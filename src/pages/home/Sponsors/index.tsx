@@ -24,9 +24,17 @@ export default function Sponsors() {
               rel="noreferrer noopener"
             >
               <img
-                alt={`${sponsor.name} (${sponsor.username})`}
-                src={sponsor.avatarUrl}
+                alt={
+                  sponsor.name
+                    ? `${sponsor.name} (${sponsor.username})`
+                    : sponsor.username
+                }
+                src={`${sponsor.avatarUrl}&s=40`}
                 className={styles.avatar}
+                width={40}
+                height={40}
+                loading="lazy"
+                decoding="async"
               />
             </a>
           ))}

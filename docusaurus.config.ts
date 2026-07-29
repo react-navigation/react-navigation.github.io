@@ -1,13 +1,16 @@
 import type * as Preset from '@docusaurus/preset-classic';
 import type { Config } from '@docusaurus/types';
 
+import clientModules from './src/plugins/client-modules.ts';
+import codeSplitVideoCss from './src/plugins/code-split-video-css.ts';
 import disableFullySpecified from './src/plugins/disable-fully-specified.ts';
+import googleAnalyticsDeferred from './src/plugins/google-analytics-deferred.ts';
 import latestAnnouncement from './src/plugins/latest-announcement.ts';
 import llmsTxt from './src/plugins/llms-txt.ts';
 import ogImage from './src/plugins/og-image.ts';
 import reactNavigationVersions from './src/plugins/react-navigation-versions.ts';
 import rehypeCodeblockMeta from './src/plugins/rehype-codeblock-meta.ts';
-import rehypeVideoAspectRatio from './src/plugins/rehype-video-aspect-ratio.ts';
+import rehypeMediaAttributes from './src/plugins/rehype-media-attributes.ts';
 import remarkNpm2Yarn from './src/plugins/remark-npm2yarn.ts';
 import remarkStaticToDynamic from './src/plugins/remark-static-to-dynamic.ts';
 import darkTheme from './src/themes/react-navigation-dark';
@@ -20,7 +23,7 @@ const config: Config = {
   tagline: 'Routing and navigation for your React Native apps',
   url: process.env.URL || 'https://reactnavigation.org',
   baseUrl: '/',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/spiro.svg',
   organizationName: 'react-navigation',
   projectName: 'react-navigation.github.io',
   onBrokenLinks: 'throw',
@@ -44,17 +47,7 @@ const config: Config = {
     prism: {
       theme: lightTheme,
       darkTheme: darkTheme,
-      additionalLanguages: [
-        'bash',
-        'json',
-        'java',
-        'kotlin',
-        'groovy',
-        'ruby',
-        'swift',
-        'objectivec',
-        'toml',
-      ],
+      additionalLanguages: ['bash', 'java', 'toml'],
       magicComments: [
         {
           className: 'theme-code-block-highlighted-line',
@@ -75,6 +68,8 @@ const config: Config = {
       logo: {
         alt: 'React Navigation Logo',
         src: 'img/spiro.svg',
+        width: 294,
+        height: 300,
       },
       items: [
         {
@@ -139,6 +134,9 @@ const config: Config = {
     },
   } satisfies Preset.ThemeConfig,
   plugins: [
+    codeSplitVideoCss,
+    clientModules,
+    googleAnalyticsDeferred,
     disableFullySpecified,
     reactNavigationVersions,
     [llmsTxt, { latestVersion }],
@@ -189,7 +187,7 @@ const config: Config = {
               rehypeCodeblockMeta,
               { match: { snack: true, lang: true, tabs: true } },
             ],
-            [rehypeVideoAspectRatio, { staticDir: 'static' }],
+            [rehypeMediaAttributes, { staticDir: 'static' }],
           ],
         },
         blog: {
@@ -202,6 +200,7 @@ const config: Config = {
               rehypeCodeblockMeta,
               { match: { snack: true, lang: true, tabs: true } },
             ],
+            [rehypeMediaAttributes, { staticDir: 'static' }],
           ],
         },
         pages: {
@@ -210,33 +209,8 @@ const config: Config = {
         theme: {
           customCss: './src/css/custom.css',
         },
-        googleAnalytics: {
-          trackingID: 'UA-10128745-16',
-        },
       } satisfies Preset.Options,
     ],
-  ],
-  headTags: [
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'preconnect',
-        href: 'https://fonts.googleapis.com',
-      },
-    },
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'preconnect',
-        href: 'https://fonts.gstatic.com',
-        crossOrigin: 'true',
-      },
-    },
-  ],
-  scripts: [
-    '/js/snack-helpers.js',
-    '/js/toc-fixes.js',
-    '/js/video-playback.js',
   ],
 };
 
