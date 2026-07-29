@@ -67,6 +67,18 @@ const DEPS_VERSIONS = {
   ],
 };
 
+type MajorVersion = keyof typeof DEPS_VERSIONS;
+
+type SnackOptions = {
+  code: string;
+  label: string;
+  templateId: string | null;
+};
+
+function isMajorVersion(version: number): version is MajorVersion {
+  return Object.hasOwn(DEPS_VERSIONS, version);
+}
+
 function getVersion() {
   const maybeVersion = window.location.pathname.split('/')[1];
 
@@ -77,13 +89,17 @@ function getVersion() {
   return '6.x';
 }
 
-function getSnackUrl(options) {
+function getSnackUrl(options: SnackOptions) {
   let currentVersion = getVersion();
   let label = options.label || document.title;
   let code = options.code;
   let templateId = options.templateId;
 
-  const currentMajorVersion = currentVersion.match(/(\d+)\./)[1];
+  const currentMajorVersion = Number(currentVersion.match(/(\d+)\./)?.[1]);
+
+  if (!isMajorVersion(currentMajorVersion)) {
+    throw new Error(`Unsupported React Navigation version: ${currentVersion}`);
+  }
 
   let baseUrl =
     `https://snack.expo.io?platform=${DEFAULT_PLATFORM}&name=` +
@@ -104,14 +120,17 @@ function getSnackUrl(options) {
   }
 }
 
-function findNearestCodeBlock(node) {
+function findNearestCodeBlock(node: HTMLElement) {
   let nextElement = node.nextElementSibling;
-  if (!nextElement && node.parentElement.tagName === 'P') {
-    nextElement = node.parentElement.nextElementSibling;
+  const parent = node.parentElement;
+
+  if (!nextElement && parent?.tagName === 'P') {
+    nextElement = parent.nextElementSibling;
   }
 
   while (nextElement) {
     if (
+      nextElement instanceof HTMLElement &&
       nextElement.tagName === 'DIV' &&
       (nextElement.className.includes('mdxCodeBlock') ||
         nextElement.className.includes('codeBlockContainer'))
@@ -127,7 +146,7 @@ let openIcon =
   '<svg width="14px" height="14px" viewBox="0 0 16 16" style="vertical-align: -1px"><g stroke="none" stroke-width="1" fill="none"><polyline stroke="currentColor" points="8.5 0.5 15.5 0.5 15.5 7.5"></polyline><path d="M8,8 L15.0710678,0.928932188" stroke="currentColor"></path><polyline stroke="currentColor" points="9.06944444 3.5 1.5 3.5 1.5 14.5 12.5 14.5 12.5 6.93055556"></polyline></g></svg>';
 
 function appendSnackLink() {
-  let samples = document.querySelectorAll('samp');
+  let samples = document.querySelectorAll<HTMLElement>('samp');
 
   if (!samples.length) {
     return;
@@ -151,7 +170,7 @@ function appendSnackLink() {
 
     let link = document.createElement('a');
     link.className = 'code-block-snack-link';
-    link.dataset.snack = true;
+    link.dataset.snack = 'true';
     link.target = '_blank';
 
     if (label) {
@@ -188,7 +207,17 @@ function initializeSnackObservers() {
   appendSnackLink();
 
   const mutationObserver = new MutationObserver((mutations) => {
-    mutations.forEach(appendSnackLink);
+    if (
+      mutations.some((mutation) =>
+        Array.from(mutation.addedNodes).some(
+          (node) =>
+            node instanceof Element &&
+            (node.matches('samp') || node.querySelector('samp'))
+        )
+      )
+    ) {
+      appendSnackLink();
+    }
   });
 
   mutationObserver.observe(document.documentElement, {
@@ -197,4 +226,6 @@ function initializeSnackObservers() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', initializeSnackObservers);
+initializeSnackObservers();
+
+export {};

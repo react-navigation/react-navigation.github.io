@@ -34,9 +34,45 @@ export function CopyButton() {
     return promise;
   };
 
-  // Preload the .md file on mount so it's ready when the user clicks copy
   useEffect(() => {
-    loadMarkdown();
+    let idleId: number | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+    const loadWhenIdle = () => {
+      if (markdownRef.current) {
+        return;
+      }
+
+      loadMarkdown();
+    };
+
+    const preloadMarkdown = () => {
+      if ('requestIdleCallback' in window) {
+        idleId = window.requestIdleCallback(loadWhenIdle, {
+          timeout: 3000,
+        });
+      } else {
+        timeoutId = setTimeout(loadWhenIdle, 1000);
+      }
+    };
+
+    if (document.readyState === 'complete') {
+      preloadMarkdown();
+    } else {
+      window.addEventListener('load', preloadMarkdown, { once: true });
+    }
+
+    return () => {
+      window.removeEventListener('load', preloadMarkdown);
+
+      if (idleId !== undefined) {
+        window.cancelIdleCallback(idleId);
+      }
+
+      if (timeoutId !== undefined) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -148,6 +184,8 @@ export function CopyButton() {
         ref={buttonRef}
         type="button"
         onClick={onButtonClick}
+        onFocus={() => markdownRef.current ?? loadMarkdown()}
+        onMouseEnter={() => markdownRef.current ?? loadMarkdown()}
         className={styles.button}
         title="Copy page"
         aria-expanded={isOpen}
