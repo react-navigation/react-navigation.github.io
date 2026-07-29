@@ -558,7 +558,11 @@ The content is rendered twice for both placements, but only one is visible at a 
 
 #### `lazy`
 
-Whether this screen should render only after the first time it's accessed. Defaults to `true`. Set it to `false` if you want to render the screen on the initial render of the navigator.
+Whether this screen should render only after the first time it's accessed. Defaults to `false`.
+
+Enabling this option can cause a flicker when you tap a tab for the first time. The native component switches to the selected tab before React receives the event and re-renders the tab navigator with the screen content.
+
+An alternative is to render a placeholder component in your screen that stays visible until the data for the screen is ready, and start fetching data in [`useFocusEffect`](use-focus-effect.md) or when [`useIsFocused`](use-is-focused.md) returns `true`. This way, the placeholder is shown when you switch to the screen for the first time instead of a blank screen.
 
 #### `popToTopOnBlur`
 
