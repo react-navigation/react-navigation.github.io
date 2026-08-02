@@ -1728,7 +1728,9 @@ function MyHeader() {
 }
 ```
 
-It renders a plain `View` on non-iPadOS platforms.
+It doesn't render anything on non-iPadOS platforms.
+
+Built-in components such as [`Header`](elements.md#header), [`DrawerContentScrollView`](drawer-navigator.md#providing-a-custom-drawercontent) use it internally to avoid the traffic light buttons by default.
 
 ### Navigation container ref now supports `__unsafe_event__`
 
