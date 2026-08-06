@@ -462,9 +462,9 @@ If you are using `@react-navigation/material-bottom-tabs` in your project, you c
 + import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 ```
 
-See [Material Bottom Tab Navigator](https://callstack.github.io/react-native-paper/docs/guides/bottom-navigation/) for usage.
+See [Material Bottom Tab Navigator](https://oss.callstack.com/react-native-paper/docs/guides/bottom-navigation) for usage.
 
-Alternatively, you can use the [`BottomNavigation.Bar`](https://callstack.github.io/react-native-paper/docs/components/BottomNavigation/BottomNavigationBar) component as a custom tab bar with `@react-navigation/bottom-tabs`.
+Alternatively, you can use the [`BottomNavigation.Bar`](https://oss.callstack.com/react-native-paper/docs/components/BottomNavigation/BottomNavigationBar) component as a custom tab bar with `@react-navigation/bottom-tabs`.
 
 For any issues related to the Material Bottom Tab Navigator or `BottomNavigation.Bar`, please open them in the [react-native-paper repository](https://github.com/callstack/react-native-paper) instead of the React Navigation repository.
 

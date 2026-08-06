@@ -674,7 +674,7 @@ Style object for the component wrapping the screen content.
 
 #### `configureGestureHandler`
 
-Callback to configure the underlying [pan gesture from `react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/gesture). It receives the gesture configuration and should return the updated configuration:
+Callback to configure the underlying [Pan gesture from `react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/use-pan-gesture/). It receives the gesture configuration and should return the updated configuration:
 
 ```js
 configureGestureHandler: (config) => ({

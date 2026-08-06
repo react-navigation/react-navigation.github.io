@@ -26,7 +26,7 @@ This project aims to expose the native Bottom Tabs component to React Native. It
 
 The library provides React Navigation integration for its Material Bottom Tabs. Material Bottom Tabs is a material-design themed tab bar on the bottom of the screen that lets you switch between different routes with animation.
 
-[Documentation](https://callstack.github.io/react-native-paper/docs/guides/bottom-navigation/)
+[Documentation](https://oss.callstack.com/react-native-paper/docs/guides/bottom-navigation)
 
 [Repository](https://github.com/callstack/react-native-paper)
 

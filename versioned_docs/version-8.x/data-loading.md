@@ -54,7 +54,7 @@ This setup can work with any data fetching library that lets you start a request
 
 ### Using with TanStack Query
 
-With [TanStack Query](https://tanstack.com/query/latest/docs), the loader can call [`queryClient.ensureQueryData`](https://tanstack.com/query/latest/docs/reference/QueryClient#queryclientensurequerydata) to prefetch the data, and the screen can then read it with [`useSuspenseQuery`](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery):
+With [TanStack Query](https://tanstack.com/query/latest/docs), the loader can call [`queryClient.ensureQueryData`](https://tanstack.com/query/latest/docs/reference/QueryClient#queryclient-ensurequerydata) to prefetch the data, and the screen can then read it with [`useSuspenseQuery`](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery):
 
 ```js
 import * as React from 'react';

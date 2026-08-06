@@ -144,7 +144,7 @@ yarn example start
 
 ### Run Tests
 
-React Navigation has tests implemented in [Jest](https://facebook.github.io/jest/). To run either of these, from the React Navigation directory, run either of the following commands (after installing the `node_modules`) to run tests or type-checking.
+React Navigation has tests implemented in [Jest](https://jestjs.io/). To run either of these, from the React Navigation directory, run either of the following commands (after installing the `node_modules`) to run tests or type-checking.
 
 ```bash
 yarn test

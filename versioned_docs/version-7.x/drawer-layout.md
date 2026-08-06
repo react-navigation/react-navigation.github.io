@@ -181,7 +181,7 @@ This is only supported on iOS and Android.
 
 #### `configureGestureHandler`
 
-Callback to configure the underlying [gesture from `react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/gesture). It receives the `gesture` object as an argument:
+Callback to configure the underlying [Pan gesture from `react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/use-pan-gesture/). It receives the `gesture` object as an argument:
 
 ```js
 configureGestureHandler={({ gesture }) => {

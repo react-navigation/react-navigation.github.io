@@ -642,7 +642,7 @@ See [Transparent modals](#transparent-modals) for an example of how to use this 
 
 #### `useGestureHandler`
 
-This hook returns the pan gesture for the current Stack screen, or `null` if gestures are not supported on the platform. It can be used to coordinate a custom gesture with the Stack's gesture using the APIs from [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/gesture).
+This hook returns the pan gesture for the current Stack screen, or `null` if gestures are not supported on the platform. It can be used to coordinate a custom gesture with the Stack's gesture using the [Pan gesture APIs from `react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/use-pan-gesture/).
 
 ## Animations
 

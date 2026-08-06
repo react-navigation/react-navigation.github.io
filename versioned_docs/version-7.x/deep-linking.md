@@ -117,7 +117,7 @@ To set up Android App Links in your Expo app, you need to configure your [app co
 }
 ```
 
-You will also need to [declare the association](https://developer.android.com/training/app-links/verify-android-applinks#web-assoc) between your website and your intent filters by hosting a Digital Asset Links JSON file.
+You will also need to [declare the association](https://developer.android.com/training/app-links/configure-assetlinks#declare-website) between your website and your intent filters by hosting a Digital Asset Links JSON file.
 
 See [Expo's documentation on Android App Links](https://docs.expo.dev/linking/android-app-links/) for more details.
 
@@ -225,7 +225,7 @@ The easiest way to do this is with the `uri-scheme` package: `npx uri-scheme add
 If you want to add it manually, open up `SimpleApp/android/app/src/main/AndroidManifest.xml`, and make the following adjustments:
 
 1. Set `launchMode` of `MainActivity` to `singleTask` in order to receive intent on existing `MainActivity` (this is the default, so you may not need to actually change anything).
-2. Add the new [`intent-filter`](http://developer.android.com/training/app-indexing/deep-linking.html#adding-filters) inside the `MainActivity` entry with a `VIEW` type action:
+2. Add the new [`intent-filter`](https://developer.android.com/training/app-links/create-deeplinks#add-intent) inside the `MainActivity` entry with a `VIEW` type action:
 
 ```xml
 <activity
@@ -276,7 +276,7 @@ After adding them, it should look like this:
 </activity>
 ```
 
-Then, you need to [declare the association](https://developer.android.com/training/app-links/verify-android-applinks#web-assoc) between your website and your intent filters by hosting a Digital Asset Links JSON file.
+Then, you need to [declare the association](https://developer.android.com/training/app-links/configure-assetlinks#declare-website) between your website and your intent filters by hosting a Digital Asset Links JSON file.
 
 </TabItem>
 </FrameworkTabs>

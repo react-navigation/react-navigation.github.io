@@ -47,7 +47,7 @@ React Navigation provides a lot of control and flexibility, which is useful for 
 
 #### React Navigation is maintained by Expo
 
-React Navigation was originally started by [Brent Vatne](https://github.com/brentvatne) from [Expo](https://docs.expo.dev/) and [Eric Vicenti](https://github.com/ericvicenti) from Facebook (now Meta). React Navigation 5 was a complete rewrite sponsored by Expo and led by [Satyajit Sahoo](https://github.com/satya164) from [Callstack](https://callstack.com/) in collaboration with [Michał Osadnik](https://github.com/osdnk) from [Software Mansion](https://www.software-mansion.com/). For the past few years, the project has been primarily maintained by Satyajit Sahoo with support from Callstack and Software Mansion. Neither Expo nor the Expo Router team is involved in its ongoing development, maintenance, or roadmap.
+React Navigation was originally started by [Brent Vatne](https://github.com/brentvatne) from [Expo](https://docs.expo.dev/) and [Eric Vicenti](https://github.com/ericvicenti) from Facebook (now Meta). React Navigation 5 was a complete rewrite sponsored by Expo and led by [Satyajit Sahoo](https://github.com/satya164) from [Callstack](https://callstack.com/) in collaboration with [Michał Osadnik](https://github.com/osdnk) from [Software Mansion](https://swmansion.com/). For the past few years, the project has been primarily maintained by Satyajit Sahoo with support from Callstack and Software Mansion. Neither Expo nor the Expo Router team is involved in its ongoing development, maintenance, or roadmap.
 
 ## Mental model
 
