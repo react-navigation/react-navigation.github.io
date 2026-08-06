@@ -13,12 +13,14 @@ This is especially valuable during development because it allows the developer t
 
 ## Usage
 
-To be able to persist the [navigation state](navigation-state.md), we can use the `persistor` prop of the container. The `persistor` prop accepts an object with two functions:
+To persist the [navigation state](navigation-state.md), you can use the `persistor` prop of the container. The `persistor` prop accepts an object with two required functions:
 
-- `persist` - Function that receives the navigation state as an argument and should save it to storage.
-- `restore` - Function that returns the previously saved state from storage, or `undefined` if there's no saved state.
+- `persist` - Function that receives the serialized navigation state and should save it to storage. The stored state should be removed if it receives `undefined`. It can be synchronous or return a promise.
+- `restore` - Function that returns the previously saved serialized state, or `undefined` if there's no saved state. It can be synchronous or return a promise.
 
-These function can be both synchronous or asynchronous. If a promise is returned from the `restore` function, make sure to provide a [`fallback`](navigation-container.md#fallback).
+If a promise is returned from the `restore` function, make sure to provide a [`fallback`](navigation-container.md#fallback).
+
+By default, the state is serialized with `JSON.stringify` and parsed with `JSON.parse`. You can override this by providing `stringify` and `parse` functions to use a custom serialization format.
 
 <ConfigTabs>
 <TabItem value="static">
@@ -110,12 +112,16 @@ export default function App() {
       fallback={<Text>Loading...</Text>}
       persistor={{
         async persist(state) {
-          await AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state));
+          if (state === undefined) {
+            await AsyncStorage.removeItem(PERSISTENCE_KEY);
+          } else {
+            await AsyncStorage.setItem(PERSISTENCE_KEY, state);
+          }
         },
         async restore() {
           const state = await AsyncStorage.getItem(PERSISTENCE_KEY);
 
-          return state ? JSON.parse(state) : undefined;
+          return state ?? undefined;
         },
       }}
     />
@@ -215,12 +221,16 @@ export default function App() {
       fallback={<Text>Loading...</Text>}
       persistor={{
         async persist(state) {
-          await AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state));
+          if (state === undefined) {
+            await AsyncStorage.removeItem(PERSISTENCE_KEY);
+          } else {
+            await AsyncStorage.setItem(PERSISTENCE_KEY, state);
+          }
         },
         async restore() {
           const state = await AsyncStorage.getItem(PERSISTENCE_KEY);
 
-          return state ? JSON.parse(state) : undefined;
+          return state ?? undefined;
         },
       }}
     >

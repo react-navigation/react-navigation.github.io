@@ -22,8 +22,8 @@ npm install @react-navigation/native@next
 <details>
 <summary>Minimum requirements</summary>
 
-- `react-native` >= 0.83
-- `expo` >= 55 ([development build](https://docs.expo.dev/development/introduction/) is required)
+- `react-native` >= 0.86
+- `expo` >= 56 ([development build](https://docs.expo.dev/development/introduction/) is required)
 - `typescript` >= 6.0.0 (if you use TypeScript)
 - `react-native-web` >= 0.21.0 (if you support Web)
 

@@ -15,6 +15,23 @@ A screen represents routes in a navigator. A screen's configuration contains the
 Screens can be defined under the `screens` key in the navigator configuration:
 
 ```js
+const Stack = createNativeStackNavigator({
+  screens: {
+    Home: createNativeStackScreen({
+      screen: HomeScreen,
+    }),
+    Profile: createNativeStackScreen({
+      screen: ProfileScreen,
+    }),
+  },
+});
+```
+
+The [`createXScreen`](static-configuration.md#createxscreen) helper is optional, but necessary for type inference in screen configuration callbacks such as `options`, `listeners`, etc.
+
+A shorthand syntax is also supported where the screen component is used directly instead of a configuration object:
+
+```js
 const MyStack = createNativeStackNavigator({
   screens: {
     Home: HomeScreen,
@@ -61,9 +78,9 @@ The key in the `screens` object is used as the name:
 const Stack = createNativeStackNavigator({
   screens: {
     // highlight-next-line
-    Profile: {
+    Profile: createNativeStackScreen({
       screen: ProfileScreen,
-    },
+    }),
   },
 });
 ```
@@ -104,14 +121,14 @@ Options are used to configure how the screen gets presented in the navigator. It
 ```js
 const Stack = createNativeStackNavigator({
   screens: {
-    Profile: {
+    Profile: createNativeStackScreen({
       screen: ProfileScreen,
       // highlight-start
       options: {
         title: 'Awesome app',
       },
       // highlight-end
-    },
+    }),
   },
 });
 ```
@@ -142,14 +159,14 @@ When you pass a function, it'll receive the [`route`](route-object.md), [`naviga
 ```js
 const Stack = createNativeStackNavigator({
   screens: {
-    Profile: {
+    Profile: createNativeStackScreen({
       screen: ProfileScreen,
       // highlight-start
       options: ({ route, navigation, theme }) => ({
         title: route.params.userId,
       }),
       // highlight-end
-    },
+    }),
   },
 });
 ```
@@ -184,11 +201,11 @@ Initial params are used as the default params for the screen. If a screen is use
 ```js
 const Stack = createNativeStackNavigator({
   screens: {
-    Details: {
+    Details: createNativeStackScreen({
       screen: DetailsScreen,
       // highlight-next-line
       initialParams: { itemId: 42 },
-    },
+    }),
   },
 });
 ```
@@ -220,11 +237,11 @@ This can be done by specifying the `getId` callback. It receives an object with 
 ```js
 const Stack = createStackNavigator({
   screens: {
-    Profile: {
+    Profile: createStackScreen({
       screen: ProfileScreen,
       // highlight-next-line
       getId: ({ params }) => params.userId,
-    },
+    }),
   },
 });
 ```
@@ -273,10 +290,10 @@ It can be passed under the `screen` property in the screen configuration:
 ```js
 const Stack = createNativeStackNavigator({
   screens: {
-    Profile: {
+    Profile: createNativeStackScreen({
       // highlight-next-line
       screen: ProfileScreen,
-    },
+    }),
   },
 });
 ```
@@ -308,7 +325,7 @@ It's also possible to pass a function in the `getComponent` prop to lazily evalu
 />
 ```
 
-You can use this approach instead of the `component` prop if you want the `ProfileScreen` module to be lazily evaluated when needed. This is especially useful when using [ram bundles](https://reactnative.dev/docs/ram-bundles-inline-requires) to improve initial load.
+You can use this approach instead of the `component` prop if you want the `ProfileScreen` module to be lazily evaluated with [inline requires](https://reactnative.dev/docs/optimizing-javascript-loading#advanced-call-require-inline).
 
 #### `children`
 
@@ -344,7 +361,7 @@ It takes a function that returns a React element:
 ```js
 const Stack = createNativeStackNavigator({
   screens: {
-    Profile: {
+    Profile: createNativeStackScreen({
       screen: ProfileScreen,
       // highlight-start
       layout: ({ children }) => (
@@ -361,7 +378,7 @@ const Stack = createNativeStackNavigator({
         </ErrorBoundary>
       ),
       // highlight-end
-    },
+    }),
   },
 });
 ```
@@ -408,11 +425,11 @@ This can be useful when we have some screens that we want to be removed or reset
 ```js
 const Stack = createNativeStackNavigator({
   screens: {
-    Profile: {
+    Profile: createNativeStackScreen({
       screen: ProfileScreen,
       // highlight-next-line
       navigationKey: 'user',
-    },
+    }),
   },
 });
 ```

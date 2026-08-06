@@ -764,6 +764,25 @@ Style object for header. Supported properties:
 
 - `backgroundColor`
 
+#### `unstable_headerInsets`
+
+Which edges of the native header apply window insets (e.g. statusbar inset) on Android.
+
+The native header applies insets to every edge by default. Setting an edge to `false` removes the inset for that edge:
+
+```js
+unstable_headerInsets: {
+  top: false,
+  bottom: false,
+}
+```
+
+Supported edges are `top`, `left`, `right`, and `bottom`.
+
+Disabling an inset also disables it for nested headers. A nested header cannot re-enable an inset disabled by a parent header.
+
+This API may change in a minor release. Only supported on Android.
+
 #### `headerShadowVisible`
 
 Whether to hide the elevation shadow (Android) or the bottom border (iOS) on the header.

@@ -1085,12 +1085,18 @@ function MyComponent() {
 ### `persistor`
 
 An object containing functions to persist and restore the [navigation state](navigation-state.md).
-The `persistor` object should contain two functions:
 
-- `persist` - Function that receives the navigation state as an argument and should save it to storage.
-- `restore` - Function that returns the previously saved state from storage, or `undefined` if there's no saved state.
+The `persistor` object should contain two required functions:
 
-These function can be both synchronous or asynchronous. If a promise is returned from the `restore` function, make sure to provide a [`fallback`](navigation-container.md#fallback).
+- `persist` - Function that receives the serialized navigation state and should save it to storage. The stored state should be removed if it receives `undefined`. It can be synchronous or return a promise.
+- `restore` - Function that returns the previously saved serialized state, or `undefined` if there's no saved state. It can be synchronous or return a promise.
+
+By default, the state is serialized with `JSON.stringify` and parsed with `JSON.parse`. You can override this by providing the following optional functions:
+
+- `stringify` - Function that receives the navigation state and returns a serialized string or `undefined`.
+- `parse` - Function that receives the serialized string and returns the parsed navigation state or `undefined`.
+
+If a promise is returned from the `restore` function, make sure to provide a [`fallback`](navigation-container.md#fallback).
 
 See [state persistence guide](state-persistence.md) for example usage.
 

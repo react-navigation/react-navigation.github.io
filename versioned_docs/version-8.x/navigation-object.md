@@ -1791,14 +1791,14 @@ const drawerNavigation = navigation.getParent('Dashboard');
 
 // ...
 
-drawerNavigation?.openDrawer();
+drawerNavigation.openDrawer();
 ```
 
 In this case, `'Dashboard'` refers to the name of a parent screen of `Feed` that's used in the parent drawer navigator.
 
 This approach allows components to not have to know the nesting structure of the navigators. So it's highly recommended to use a screen name when using `getParent`.
 
-This method will return `undefined` if there is no matching parent navigator.
+When called without a screen name, this method returns `undefined` if there is no immediate parent navigator. When called with a screen name, it throws an error if that screen isn't found in the current or parent navigators.
 
 ### `getState`
 

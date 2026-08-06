@@ -25,8 +25,8 @@ If you use an AI coding assistant, see [react-navigation/skills](https://github.
 
 The minimum required version of React Native, Expo, and TypeScript have been bumped:
 
-- `react-native` >= 0.83
-- `expo` >= 55 ([development build](https://docs.expo.dev/development/introduction/) is required)
+- `react-native` >= 0.86
+- `expo` >= 56 ([development build](https://docs.expo.dev/development/introduction/) is required)
 - `typescript` >= 6.0.0 (if you use TypeScript)
 
 The minimum required version of various peer dependencies have also been bumped:
@@ -36,7 +36,7 @@ The minimum required version of various peer dependencies have also been bumped:
 - `react-native-gesture-handler` >= 3.0.0
 - `react-native-reanimated` >= 4.0.0
 - `react-native-pager-view` >= 8.0.0
-- `react-native-web` >= 0.21.0
+- `react-native-web` >= 0.21.0 (if you support Web)
 
 Previously, many navigators worked without `react-native-screens`, but now it's required for all navigators.
 
@@ -1195,6 +1195,26 @@ It's not required to use this API and your existing code will continue to work a
 
 :::
 
+### Static screen components can now be evaluated lazily
+
+Static screen configuration now supports a getter for the `screen` property to specify the screen component.
+
+The getter is evaluated only when the screen renders, which allows the screen module to be loaded lazily with [inline requires](https://reactnative.dev/docs/optimizing-javascript-loading#advanced-call-require-inline):
+
+```js
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Profile: createNativeStackScreen({
+      get screen() {
+        return require('./ProfileScreen').default;
+      },
+    }),
+  },
+});
+```
+
+See [Screen](screen.md#component) for more details.
+
 ### Common hooks now accept name of the screen
 
 The `useNavigation`, `useRoute`, and `useNavigationState` hooks can now optionally accept the name of the screen:
@@ -1411,15 +1431,16 @@ export default function App() {
     <Navigation
       persistor={{
         async persist(state) {
-          await AsyncStorage.setItem(
-            'NAVIGATION_STATE_V1',
-            JSON.stringify(state)
-          );
+          if (state === undefined) {
+            await AsyncStorage.removeItem('NAVIGATION_STATE_V1');
+          } else {
+            await AsyncStorage.setItem('NAVIGATION_STATE_V1', state);
+          }
         },
         async restore() {
           const state = await AsyncStorage.getItem('NAVIGATION_STATE_V1');
 
-          return state ? JSON.parse(state) : undefined;
+          return state ?? undefined;
         },
       }}
     />
@@ -1436,15 +1457,16 @@ export default function App() {
     <NavigationContainer
       persistor={{
         async persist(state) {
-          await AsyncStorage.setItem(
-            'NAVIGATION_STATE_V1',
-            JSON.stringify(state)
-          );
+          if (state === undefined) {
+            await AsyncStorage.removeItem('NAVIGATION_STATE_V1');
+          } else {
+            await AsyncStorage.setItem('NAVIGATION_STATE_V1', state);
+          }
         },
         async restore() {
           const state = await AsyncStorage.getItem('NAVIGATION_STATE_V1');
 
-          return state ? JSON.parse(state) : undefined;
+          return state ?? undefined;
         },
       }}
     >
@@ -1456,6 +1478,8 @@ export default function App() {
 
 </TabItem>
 </ConfigTabs>
+
+The navigation state is serialized with `JSON.stringify` and parsed with `JSON.parse` by default. The `persistor` can provide `stringify` and `parse` functions to use a custom serialization format.
 
 See [State persistence docs](state-persistence.md) for more details.
 
@@ -1559,6 +1583,23 @@ This is an experimental feature and is only available with [static configuration
 
 See [Data loading](data-loading.md) for more details.
 
+### Native Stack headers can opt out of Android window insets
+
+Native Stack Navigator now supports an experimental `unstable_headerInsets` option on Android. Set an edge to `false` when the app handles that inset itself:
+
+```js
+screenOptions: {
+  unstable_headerInsets: {
+    top: false,
+    bottom: false,
+  },
+}
+```
+
+Disabling an inset also disables it for nested headers. A nested header cannot re-enable an inset disabled by a parent header.
+
+See [`unstable_headerInsets`](native-stack-navigator.md#unstable_headerinsets) for more details.
+
 ### `Header` from `@react-navigation/elements` has been reworked
 
 The `Header` component from `@react-navigation/elements` has been reworked with various improvements:
@@ -1608,6 +1649,8 @@ tabBarIcon: Platform.select({
 
 In addition, new `SFSymbol` and `MaterialSymbol` components are exported from `@react-navigation/native` to render these icons directly.
 
+SF Symbol names can also refer to custom symbols in the app's asset catalog. React Navigation uses a system symbol when the name matches one, then falls back to the custom symbol.
+
 The new [`PlatformIcon`](elements.md#platformicon) component from `@react-navigation/elements` can render an icon object directly. It renders an image, SF Symbol, or Material Symbol based on the icon object:
 
 ```js
@@ -1623,6 +1666,12 @@ The new [`PlatformIcon`](elements.md#platformicon) component from `@react-naviga
 ```
 
 See [Icons](icons.md) for more details.
+
+### Drawer gestures now preview the drawer on long press
+
+On iOS and Android, pressing and holding within the swipe edge briefly peeks the drawer before it can be dragged open. This behavior follows the existing `swipeEnabled` and `swipeEdgeWidth` options.
+
+See [`swipeEnabled`](drawer-navigator.md#swipeenabled) for more details.
 
 ### `react-native-tab-view` now supports a `renderAdapter` prop for custom adapters
 
