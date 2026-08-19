@@ -748,6 +748,49 @@ The modal presentation in Stack Navigator has been updated to match the latest i
 
 This applies to screens using [`presentation: 'modal'`](stack-navigator.md#presentation) and the [`forModalPresentationIOS`](stack-navigator.md#cardstyleinterpolators) card style interpolator. If you use a custom card style interpolator for a similar presentation, it can now return a `dimStyle` to render a dimming view on top of the card content.
 
+#### Stack transition APIs and defaults have changed
+
+The built-in Stack transitions have been reworked to more closely match current iOS and Android animations. To achieve this, we have tweaked the APIs for more flexibility.
+
+The `closing` value passed to a custom `cardStyleInterpolator` has moved from the top level to `current.closing`:
+
+```diff lang=js
+- const forCustom = ({ current, next, closing }) => {
++ const forCustom = ({ current, next }) => {
+    // ...
+-   const isClosing = closing;
++   const isClosing = current.closing;
+  };
+```
+
+Similarly, the `next` object now also contains `next.closing` to indicate whether the next screen is closing.
+
+Custom header style interpolators now receive an `inverted` direction multiplier instead of the locale `direction`:
+
+```diff lang=js
+- const forCustomHeader = ({ current, direction }) => {
+-   const multiplier = direction === 'rtl' ? -1 : 1;
+-   const value = Animated.multiply(current.progress, multiplier);
++ const forCustomHeader = ({ current, inverted }) => {
++   const value = Animated.multiply(current.progress, inverted);
+  };
+```
+
+Previously, `direction` represented the locale direction. But it didn't account for the gesture direction. So we have replaced it with `inverted` which considers both the locale direction and the gesture direction and is consistent with the `inverted` value passed to `cardStyleInterpolator`.
+
+The following transition exports have changed:
+
+- `CardStyleInterpolators.forHorizontalIOSInverted` has been removed. Use `CardStyleInterpolators.forHorizontalIOS` with `gestureDirection: 'horizontal-inverted'`.
+- `TransitionSpecs.FadeOutToLeftAndroidSpec` has been renamed to `TransitionSpecs.FadeOutToRightAndroidSpec` to match the animation direction.
+
+The defaults for few options have also changed:
+
+- `gestureEnabled` now defaults to `true` on iOS for navigation-style transitions. Previously, it always defaulted to `true` on iOS.
+- `cardOverlayEnabled` now defaults to `true` only when required by the animation. Previously, it always defaulted to `true` on Android except for modal presentations.
+- `cardShadowEnabled` now defaults to `true` only when required by the animation. Previously, it always defaulted to `true`.
+
+See [Stack animations](stack-navigator.md#animations) for more details.
+
 #### Material Top Tabs and `react-native-tab-view` have been updated to Material Design 3
 
 ##### The tab bar now uses the `primary` variant by default
@@ -921,6 +964,45 @@ See [Drawer Navigator](drawer-navigator.md) for more details.
 Previously, unfocused screens on the Web were hidden from assistive technologies using `aria-hidden`, but they could still receive focus and keyboard interaction unless hidden with `display: none`. While most navigators used `display: none` on the Web to hide unfocused screens, it wasn't possible for some navigators such as [Material Top Tabs](material-top-tab-navigator.md) because it won't play well with animations and swipe gesture, or when using `presentation: 'transparentModal'` in [Stack Navigator](stack-navigator.md#presentation) as the screen needs to be visible to show the content underneath.
 
 Now all navigators use the [`inert`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/inert) attribute on the Web to make unfocused screens non-interactive and hidden from assistive technologies without affecting their visibility.
+
+#### `Link` accepts a fixed set of props
+
+The `Link` component no longer forwards arbitrary props supported by React Native's `Text` component. It no longer requires React Native Web for web support, and as a result, only supports a fixed set of common props.
+
+Some of the existing props have been changed to better match web:
+
+- `target` is now passed without modification. So you need to add underscore suffix explicitly:
+
+  ```diff lang=js
+  - <Link screen="Profile" target="blank" />
+  + <Link screen="Profile" target="_blank" />
+  ```
+
+- `style` accepts a plain object. You can use `StyleSheet.flatten` to convert an array of styles to a plain object:
+
+  ```diff lang=js
+  - <Link screen="Profile" style={[styles.link, styles.active]} />
+  + <Link screen="Profile" style={StyleSheet.flatten([styles.link, styles.active])} />
+  ```
+
+- `numberOfLines` is supported only on native platforms. You can use regular CSS to limit the number of lines on web:
+
+  ```diff lang=js
+  - <Link screen="Profile" numberOfLines={1} />
+  + <Link screen="Profile" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
+  ```
+
+- `accessibility*` are no longer supported. You can use the equivalent `aria-*` props instead.
+
+The web implementation also accepts a `className` prop for CSS styling.
+
+See [`Link`](link.md) for the full prop list.
+
+#### Navigation container refs no longer expose screen-specific methods
+
+The navigation container ref no longer contains the `isFocused`, `getParent`, or `setOptions` methods.
+
+These methods describe a screen and did not have meaningful behavior on the root container.
 
 #### Various deprecated APIs have been removed
 
@@ -1247,6 +1329,14 @@ For example, a screen nested in the `Home` tab can link to the `Settings` tab in
 
 This is similar to how [typed hooks accept the name of the screen](#common-hooks-now-accept-name-of-the-screen). But unlike typed hooks, navigation from `Link` using the `screen` and `params` props doesn't bubble up to parent navigators.
 
+### `@react-navigation/native` can be used without React Native for Web
+
+The `@react-navigation/native` package can now be used in a regular React web app without installing or aliasing [`react-native-web`](https://github.com/necolas/react-native-web).
+
+The built-in navigators render React Native components and still require React Native for Web. But if you are using a custom navigator that renders regular React components, you can use `@react-navigation/native` without React Native for Web.
+
+See [React Navigation on Web](web-support.md) for more details.
+
 ### New entry can be added to history stack with `pushParams` action
 
 The `pushParams` action updates the params and pushes a new entry to the history stack:
@@ -1329,6 +1419,49 @@ Compared to parse functions, schemas provide a few advantages:
 - **Better Query Param handling with TypeScript**: When using [Static Configuration](static-configuration.md), query params (e.g. `?foo=bar`) are always inferred as optional with `parse` functions. With schemas, you can specify whether a query param is required (e.g. `z.string()`) or optional (e.g. `z.string().optional()`).
 
 See [Configuring links](configuring-links.md#using-standard-schema) and [TypeScript](typescript.md#parse-function-vs-standard-schema) for more details.
+
+### Path params can match multiple segments
+
+Linking path patterns now support repeated params. You can now use `+` to match one or more path segments and `*` to match zero or more path segments:
+
+<ConfigTabs>
+<TabItem value="static">
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Files: {
+      screen: FilesScreen,
+      // Matches /files/a and /files/a/b
+      linking: 'files/:parts+',
+    },
+    OptionalFiles: {
+      screen: OptionalFilesScreen,
+      // Also matches /optional-files
+      linking: 'optional-files/:parts*',
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic">
+
+```js
+const config = {
+  screens: {
+    // Matches /files/a and /files/a/b
+    Files: 'files/:parts+',
+    // Also matches /optional-files
+    OptionalFiles: 'optional-files/:parts*',
+  },
+};
+```
+
+</TabItem>
+</ConfigTabs>
+
+See [Matching multiple path segments](configuring-links.md#matching-multiple-path-segments) for more details.
 
 ### Deep linking to screens behind conditional screens is now supported
 
@@ -1599,6 +1732,18 @@ screenOptions: {
 Disabling an inset also disables it for nested headers. A nested header cannot re-enable an inset disabled by a parent header.
 
 See [`unstable_headerInsets`](native-stack-navigator.md#unstable_headerinsets) for more details.
+
+### Stack Navigator has new built-in animations
+
+Stack Navigator now supports the `flip`, `ios_from_left`, and `ios_from_right` values for the `animation` option.
+
+The following presets are also available from `TransitionPresets`:
+
+- `DialogAndroid`
+- `ModalFlipIOS`
+- `CrossDissolveIOS`
+
+See [Stack animations](stack-navigator.md#animations) for the full list.
 
 ### `Header` from `@react-navigation/elements` has been reworked
 

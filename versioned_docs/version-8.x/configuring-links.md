@@ -758,6 +758,100 @@ const state = {
 
 </details>
 
+## Matching multiple path segments
+
+A path param normally matches one path segment. For example, the path `user/:id` will match `/user/jane` but not `/user/jane/settings`.
+
+If you want to match multiple segments, you can add `+` or `*` suffix after the param name.
+
+- `+` matches one or more segments. For example, `files/:parts+` will match `/files/a` and `/files/a/b`.
+- `*` matches zero or more segments. For example, `files/:parts*` will match `/files`, `/files/a` and `/files/a/b`.
+
+<ConfigTabs>
+<TabItem value="static">
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Files: {
+      screen: FilesScreen,
+      // Matches /files/a and /files/a/b
+      linking: 'files/:parts+',
+    },
+    OptionalFiles: {
+      screen: OptionalFilesScreen,
+      // Also matches /optional-files
+      linking: 'optional-files/:parts*',
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic">
+
+```js
+const config = {
+  screens: {
+    // Matches /files/a and /files/a/b
+    Files: 'files/:parts+',
+    // Also matches /optional-files
+    OptionalFiles: 'optional-files/:parts*',
+  },
+};
+```
+
+</TabItem>
+</ConfigTabs>
+
+When using `+` or `*`, the route params will contain a string with the matched segment, e.g. for `/files/a/b`, the `parts` param will be `a/b`. It can be an empty string if the param is optional and not present in the URL.
+
+If you want to get the segments as an array, you can use a custom `parse` [function](#using-functions) or [schema](#using-standard-schema):
+
+<ConfigTabs>
+<TabItem value="static">
+
+```js
+const RootStack = createStackNavigator({
+  screens: {
+    Files: {
+      screen: FilesScreen,
+      linking: {
+        path: 'files/:parts+',
+        parse: {
+          parts: (parts) => parts.split('/'),
+        },
+        stringify: {
+          parts: (parts) => parts.join('/'),
+        },
+      },
+    },
+  },
+});
+```
+
+</TabItem>
+<TabItem value="dynamic">
+
+```js
+const config = {
+  screens: {
+    Files: {
+      path: 'files/:parts+',
+      parse: {
+        parts: (parts) => parts.split('/'),
+      },
+      stringify: {
+        parts: (parts) => parts.join('/'),
+      },
+    },
+  },
+};
+```
+
+</TabItem>
+</ConfigTabs>
+
 ## Handling unmatched routes or 404
 
 If your app is opened with an invalid URL, most of the times you'd want to show an error page with some information. On the web, this is commonly known as 404 - or page not found error.

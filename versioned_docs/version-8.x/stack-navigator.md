@@ -172,11 +172,15 @@ String that can be used as a fallback for `headerTitle`.
 
 #### `cardShadowEnabled`
 
-Use this prop to have visible shadows during transitions. Defaults to `true`.
+Whether to show a shadow during transitions. By default, the shadow is shown when the selected `cardStyleInterpolator` provides a `shadowStyle`.
+
+Set it to `true` to always render the shadow or `false` to disable the shadow.
 
 #### `cardOverlayEnabled`
 
-Use this prop to have a semi-transparent dark overlay visible under the card during transitions. Defaults to `true` on Android and `false` on iOS.
+Whether to show a semi-transparent dark overlay under the card during transitions. By default, the overlay is shown when the selected `cardStyleInterpolator` provides an `overlayStyle`.
+
+Set it to `true` to always render the overlay or `false` to disable the overlay.
 
 #### `cardOverlay`
 
@@ -219,7 +223,7 @@ When `pop` is used, the `pop` animation is applied to the screen being replaced.
 
 #### `gestureEnabled`
 
-Whether you can use gestures to dismiss this screen. Defaults to `true` on iOS, `false` on Android.
+Whether you can use gestures to dismiss this screen. It defaults to `true` on iOS for navigation-style transitions that support interactive dismissal, and `false` otherwise.
 
 Gestures are not supported on Web.
 
@@ -279,7 +283,8 @@ This accepts a function that returns a React Element to display as a header. The
 - `navigation` - The navigation object for the current screen.
 - `route` - The route object for the current screen.
 - `options` - The options for the current screen
-- `progress` Animated nodes representing the progress of the animation.
+- `progress` - Animated nodes representing the progress of the animation.
+- `inverted` - Direction multiplier for the transition. `-1` when inverted, `1` otherwise.
 - `back` - Options for the back button, contains an object with a `title` property to use for back button label.
 - `styleInterpolator` - Function which returns interpolated styles for various elements in the header.
 
@@ -628,9 +633,10 @@ This hook returns values related to the screen's animation. It contains the foll
 
 - `current` - Values for the current screen:
   - `progress` - Animated node representing the progress value of the current screen.
+  - `closing` - Animated node representing whether the current screen is using the closing or opening animation. `1` when closing, `0` when opening.
 - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
   - `progress` - Animated node representing the progress value of the next screen.
-- `closing` - Animated node representing whether the card is closing. `1` when closing, `0` if not.
+  - `closing` - Animated node representing whether the next screen is using the closing or opening animation. `1` when closing, `0` when opening.
 - `swiping` - Animated node representing whether the card is being swiped. `1` when swiping, `0` if not.
 - `inverted` - Animated node representing whether the card is inverted. `-1` when inverted, `1` if not.
 - `index` - The index of the card in the stack.
@@ -684,6 +690,10 @@ Supported values for `animation` are:
 
   Standard Android-style fade-in from the right for Android 14.
 
+- `flip`
+
+  Standard iOS-style horizontal flip.
+
 - <video playsInline autoPlay muted loop>
     <source src="/assets/navigators/stack/animation-reveal-from-bottom.mp4" />
   </video>
@@ -699,6 +709,14 @@ Supported values for `animation` are:
   `scale_from_center`
 
   Scale animation from the center.
+
+- `ios_from_right`
+
+  Standard iOS-style slide in from the right.
+
+- `ios_from_left`
+
+  Standard iOS-style slide in from the left.
 
 - <video playsInline autoPlay muted loop>
     <source src="/assets/navigators/stack/animation-slide-from-right.mp4" />
@@ -722,7 +740,7 @@ Supported values for `animation` are:
 
   `slide_from_bottom`
 
-  Slide animation from the bottom for modals and bottom sheets.
+  Standard iOS-style slide in from the bottom for modals.
 
 - <video playsInline autoPlay muted loop>
     <source src="/assets/navigators/stack/animation-none.mp4" />
@@ -857,12 +875,16 @@ Stack Navigator exposes various options to configure the transition animation wh
   The function receives the following properties in its argument:
   - `current` - Values for the current screen:
     - `progress` - Animated node representing the progress value of the current screen.
+    - `closing` - Animated node representing whether the current screen is using the closing or opening animation. `1` when closing, `0` when opening.
   - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
     - `progress` - Animated node representing the progress value of the next screen.
+    - `closing` - Animated node representing whether the next screen is using the closing or opening animation. `1` when closing, `0` when opening.
   - `index` - The index of the card in the stack.
-  - `closing` - Animated node representing whether the card is closing. `1` when closing, `0` if not.
+  - `swiping` - Animated node representing whether the card is being swiped. `1` when swiping, `0` otherwise.
+  - `inverted` - Animated node representing the transition direction. `-1` when inverted, `1` otherwise.
   - `layouts` - Layout measurements for various items we use for animation.
     - `screen` - Layout of the whole screen. Contains `height` and `width` properties.
+  - `insets` - Safe area insets. Contains `top`, `right`, `bottom`, and `left` properties.
 
   > **Note that when a screen is not the last, it will use the next screen's transition config.** This is because many transitions involve an animation of the previous screen, and so these two transitions need to be kept together to prevent running two different kinds of transitions on the two screens (for example a slide and a modal). You can check the `next` parameter to find out if you want to animate out the previous screen. For more information about this parameter, see [Animation](stack-navigator.md#animations) section.
 
@@ -1020,6 +1042,7 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
     - `progress` - Animated node representing the progress value of the current screen. `0` when screen should start coming into view, `0.5` when it's mid-way, `1` when it should be fully in view.
   - `next` - Values for the screen after this one in the stack. This can be `undefined` in case the screen animating is the last one.
     - `progress` - Animated node representing the progress value of the next screen.
+  - `inverted` - Direction multiplier for the transition. `-1` when inverted, `1` otherwise.
   - `layouts` - Layout measurements for the screen. Each layout object contain `height` and `width` properties.
     - `screen` - Layout of the whole screen.
 
@@ -1126,9 +1149,16 @@ With these options, it's possible to build custom transition animations for scre
 #### `TransitionSpecs`
 
 - `TransitionIOSSpec` - Exact values from UINavigationController's animation configuration.
+- `FlipIOSSpec` - Configuration for the iOS horizontal flip transition.
 - `FadeInFromBottomAndroidSpec` - Configuration for activity open animation from Android Nougat.
 - `FadeOutToBottomAndroidSpec` - Configuration for activity close animation from Android Nougat.
-- `RevealFromBottomAndroidSpec` - Approximate configuration for activity open animation from Android Pie.
+- `DialogAndroidSpec` - Configuration for the standard Android dialog transition.
+- `RevealFromBottomAndroidSpec` - Configuration for activity open animation from Android Pie.
+- `ScaleFromCenterAndroidSpec` - Configuration for activity open animation from Android 10.
+- `FadeInFromRightAndroidSpec` - Configuration for activity open animation from Android 14 and later.
+- `FadeOutToRightAndroidSpec` - Configuration for activity close animation from Android 14 and later.
+- `BottomSheetSlideInSpec` - Configuration for the Material 3 bottom sheet opening animation.
+- `BottomSheetSlideOutSpec` - Configuration for the Material 3 bottom sheet closing animation.
 
 Example:
 
@@ -1181,6 +1211,14 @@ import { TransitionSpecs } from '@react-navigation/stack';
 - `forModalPresentationIOS` - Standard iOS-style modal animation.
 - `forFadeFromBottomAndroid` - Standard Android-style fade in from the bottom for Android Oreo.
 - `forRevealFromBottomAndroid` - Standard Android-style reveal from the bottom for Android Pie.
+- `forScaleFromCenterAndroid` - Standard Android-style scale from the center for Android 10.
+- `forFadeFromRightAndroid` - Standard Android-style fade from the right for Android 14 and later.
+- `forBottomSheetAndroid` - Standard Material 3 bottom sheet animation.
+- `forDialogAndroid` - Standard Android dialog animation.
+- `forFadeFromCenter` - Simple fade animation.
+- `forCrossDissolveIOS` - Standard iOS cross-dissolve animation.
+- `forFlipIOS` - Standard iOS horizontal flip animation.
+- `forNoAnimation` - No card animation.
 
 Example configuration for Android Oreo style vertical screen fade animation:
 
@@ -1249,7 +1287,10 @@ export default function App() {
 
 - `forUIKit` - Standard UIKit style animation for the header where the title fades into the back button label.
 - `forFade` - Simple fade animation for the header elements.
-- `forStatic` - Simple translate animation to translate the header along with the sliding screen.
+- `forSlideLeft` - Simple animation that translates the header to the left.
+- `forSlideRight` - Simple animation that translates the header to the right.
+- `forSlideUp` - Simple animation that translates the header up.
+- `forNoAnimation` - No header animation.
 
 Example configuration for default iOS animation for header elements where the title fades into the back button:
 
@@ -1328,8 +1369,15 @@ We export various transition presets which bundle various set of these options t
 - `ModalSlideFromBottomIOS` - Standard iOS navigation transition for modals.
 - `ModalPresentationIOS` - Standard iOS modal presentation style (introduced in iOS 13).
 - `FadeFromBottomAndroid` - Standard Android navigation transition when opening or closing an Activity on Android < 9 (Oreo).
+- `DialogAndroid` - Standard Android dialog transition.
 - `RevealFromBottomAndroid` - Standard Android navigation transition when opening or closing an Activity on Android 9 (Pie).
 - `ScaleFromCenterAndroid` - Standard Android navigation transition when opening or closing an Activity on Android >= 10.
+- `FadeFromRightAndroid` - Standard Android navigation transition when opening or closing an Activity on Android 14 and later.
+- `BottomSheetAndroid` - Standard Material 3 bottom sheet transition.
+- `ModalFadeTransition` - Fade transition for transparent modals.
+- `ModalFlipIOS` - Standard iOS horizontal flip transition.
+- `CrossDissolveIOS` - Standard iOS cross-dissolve transition.
+- `SlideFromLeftIOS` - Standard iOS navigation transition from the left.
 - `DefaultTransition` - Default navigation transition for the current platform.
 - `ModalTransition` - Default modal transition for the current platform.
 

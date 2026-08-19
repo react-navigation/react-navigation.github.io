@@ -26,4 +26,15 @@ function Home() {
 
 If you want to use your own custom link component, you can use [`useLinkProps`](use-link-props.md) instead.
 
-The `Link` component accepts the [same props as `useLinkProps`](use-link-props.md#options).
+The `Link` component accepts the [same props as `useLinkProps`](use-link-props.md#options), along with the following props:
+
+- `children` - Content to render inside the link.
+- `disabled` - Whether interaction with the link is disabled.
+- `onPress` - Callback called when the link is pressed. Calling `preventDefault` on the event prevents navigation.
+- `target` - Target for the anchor on the Web, such as `_blank` or `_self`.
+- `className` - CSS class for the anchor on the Web.
+- `style` - Plain style object for the link. If you need to pass a style array, use `StyleSheet.flatten` to convert it to a plain style object.
+- `id` - ID for the rendered element.
+- `testID` - ID to locate the link in tests.
+- `numberOfLines` - Maximum number of lines for the text on native platforms. This prop has no effect on the Web.
+- `aria-label`, `aria-busy`, `aria-expanded`, `aria-hidden`, `aria-labelledby`, `aria-live` - Accessibility properties supported by the link.

@@ -337,6 +337,10 @@ The component accepts the following props:
     <source src="/assets/icons/sf-symbol-magic-replace.mp4"></source>
   </video>
 
+- `style`
+
+  Plain style object for the symbol's native view. If you need to pass a style array, use `StyleSheet.flatten` to convert it to a plain style object.
+
 ## Material Symbols
 
 Material Symbols is a library of over 2,500 glyphs designed to integrate well with Material Design on Android.
@@ -450,6 +454,10 @@ The component accepts the following props:
   - `"bold"` (`700`)
 
   The available weights depend on which weights are included in the bundle. If the specified weight is not included, it will throw an error.
+
+- `style`
+
+  Plain style object for the symbol's native view. If you need to pass a style array, use `StyleSheet.flatten` to convert it to a plain style object.
 
 ## Images
 

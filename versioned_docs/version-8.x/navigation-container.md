@@ -180,7 +180,7 @@ See the [Navigation ref](navigation-ref.md) guide for more details.
 
 ### Methods on the ref
 
-The ref object includes all of the common navigation methods such as `navigate`, `goBack` etc. See [docs for `CommonActions`](navigation-actions.md) for more details.
+The ref object includes common navigation methods such as `navigate`, `goBack` etc. See [docs for `CommonActions`](navigation-actions.md) for more details.
 
 Example:
 

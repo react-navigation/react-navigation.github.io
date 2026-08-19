@@ -7,7 +7,9 @@ sidebar_label: Web support
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-React Navigation has built-in support for the Web platform. This allows you to use the same navigation logic in your React Native app as well as on the web. The navigators require using [React Native for Web](https://github.com/necolas/react-native-web) to work on the web.
+React Navigation has built-in support for the Web platform. This allows you to use the same navigation logic in your React Native app as well as on the web.
+
+The `@react-navigation/native` package can be used on Web without any additional dependencies. However, the built-in navigators require using [React Native for Web](https://github.com/necolas/react-native-web) to work on the web.
 
 ## Pre-requisites
 
