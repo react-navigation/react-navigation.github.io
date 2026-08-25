@@ -261,7 +261,7 @@ React Navigation starts with the navigation tree:
 | [`router.prefetch`](https://docs.expo.dev/versions/latest/sdk/router/#imperativerouter)                              | [`navigation.preload`](navigation-object.md#preload)                                                                           |
 | [`useRouter`](https://docs.expo.dev/versions/latest/sdk/router/#userouter)                                           | [`useNavigation`](use-navigation.md)                                                                                           |
 | [`useLocalSearchParams`](https://docs.expo.dev/versions/latest/sdk/router/#uselocalsearchparams)                     | [`useRoute`](use-route.md) and params from the [`route` object](route-object.md)                                               |
-| [`useGlobalSearchParams`](https://docs.expo.dev/versions/latest/sdk/router/#useglobalsearchparams)                   | No direct equivalent.                                                                                                          |
+| [`useGlobalSearchParams`](https://docs.expo.dev/versions/latest/sdk/router/#useglobalsearchparams)                   | No direct equivalent. We don't recommend this pattern.                                                                         |
 | [`usePathname`](https://docs.expo.dev/versions/latest/sdk/router/#usepathname)                                       | [`useRoutePath`](use-route-path.md)                                                                                            |
 | [`useSegments`](https://docs.expo.dev/versions/latest/sdk/router/#usesegments)                                       | No direct equivalent.                                                                                                          |
 | [`useFocusEffect`](https://docs.expo.dev/versions/latest/sdk/router/#usefocuseffecteffect-do_not_pass_a_second_prop) | [`useFocusEffect`](use-focus-effect.md)                                                                                        |
@@ -269,21 +269,21 @@ React Navigation starts with the navigation tree:
 | [`useSitemap`](https://docs.expo.dev/versions/latest/sdk/router/#usesitemap)                                         | No direct equivalent.                                                                                                          |
 | [`useLoaderData`](https://docs.expo.dev/router/web/data-loaders)                                                     | No direct equivalent, but planned.                                                                                             |
 
-### Features without direct replacements
+### Other features
 
-| Expo Router                                                                                            | Alternative                                                                                                                               |
-| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| [Typed routes](https://docs.expo.dev/router/reference/typed-routes)                                    | [Type inference](typescript.md) from the navigator configuration.                                                                         |
-| [Protected routes](https://docs.expo.dev/router/advanced/protected)                                    | Conditional screens or groups with [`if`](static-configuration.md#if).                                                                    |
-| [Native tabs](https://docs.expo.dev/router/advanced/native-tabs)                                       | Experimental [Native Bottom Tabs](native-bottom-tab-navigator.md) which render native tabs by default on Android & iOS.                   |
-| [Headless tabs from `expo-router/ui`](https://docs.expo.dev/router/advanced/custom-tabs)               | Custom [`tabBar`](bottom-tab-navigator.md#tabbar) or [custom navigator](custom-navigators.md).                                            |
-| [API routes and server middleware](https://docs.expo.dev/router/web/api-routes)                        | No direct equivalent. Move this logic to your server.                                                                                     |
-| [Server rendering](https://docs.expo.dev/router/web/static-rendering)                                  | [Server rendering](server-rendering.md) with manual setup.                                                                                |
-| [Static rendering](https://docs.expo.dev/router/web/static-rendering)                                  | No direct equivalent.                                                                                                                     |
-| [Link preview and link menu](https://docs.expo.dev/router/reference/link-preview)                      | Custom UI or platform-specific components.                                                                                                |
-| [Zoom transition](https://docs.expo.dev/router/advanced/zoom-transition/)                              | No direct equivalent, but planned.                                                                                                        |
-| [`Stack.Header`, `Stack.Toolbar`, `Stack.SearchBar` etc.](https://docs.expo.dev/router/advanced/stack) | Screen options, native stack options, custom headers etc.                                                                                 |
-| [`Color`](https://docs.expo.dev/router/reference/color)                                                | [`PlatformColor`](https://reactnative.dev/docs/platformcolor) from React Native, [Material Themes](themes.md#built-in-themes) on Android. |
+| Expo Router                                                                                            | React Navigation                                                                               |
+| ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| [Typed routes](https://docs.expo.dev/router/reference/typed-routes)                                    | [Type inference](typescript.md) from the navigator configuration.                              |
+| [Protected routes](https://docs.expo.dev/router/advanced/protected)                                    | Conditional screens or groups with [`if`](static-configuration.md#if).                         |
+| [Native tabs](https://docs.expo.dev/router/advanced/native-tabs)                                       | Experimental [Native Bottom Tabs](native-bottom-tab-navigator.md)                              |
+| [Headless tabs from `expo-router/ui`](https://docs.expo.dev/router/advanced/custom-tabs)               | Custom [`tabBar`](bottom-tab-navigator.md#tabbar) or [custom navigator](custom-navigators.md). |
+| [API routes and server middleware](https://docs.expo.dev/router/web/api-routes)                        | No direct equivalent. Move this logic to your server.                                          |
+| [Server rendering](https://docs.expo.dev/router/web/static-rendering)                                  | [Server rendering](server-rendering.md) with manual setup.                                     |
+| [Static rendering](https://docs.expo.dev/router/web/static-rendering)                                  | No direct equivalent.                                                                          |
+| [Link preview and link menu](https://docs.expo.dev/router/reference/link-preview)                      | No direct equivalent, but planned.                                                             |
+| [Zoom transition](https://docs.expo.dev/router/advanced/zoom-transition/)                              | No direct equivalent, but planned.                                                             |
+| [`Stack.Header`, `Stack.Toolbar`, `Stack.SearchBar` etc.](https://docs.expo.dev/router/advanced/stack) | Screen options, native stack options, custom headers etc.                                      |
+| [`Color`](https://docs.expo.dev/router/reference/color)                                                | No direct equivalent, but planned.                                                             |
 
 ## Example setup
 
