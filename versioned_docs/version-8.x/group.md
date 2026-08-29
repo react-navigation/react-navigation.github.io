@@ -287,6 +287,26 @@ const MyStack = createNativeStackNavigator({
 </TabItem>
 </ConfigTabs>
 
+:::warning
+
+The function passed to `screenLayout` is invoked as a regular function, not rendered as a React component. This means you **cannot call React Hooks directly inside it** — doing so will fail at runtime with errors such as _"Should have a queue. You are likely calling Hooks conditionally, which is not allowed."_
+
+If you need to use Hooks, wrap your logic in a separate component and return it as JSX:
+
+```jsx
+function MyScreenLayout(props) {
+  const value = useMyHook(); // ✅ Hook runs inside a real component
+
+  return <ErrorBoundary>{props.children}</ErrorBoundary>;
+}
+
+const Stack = createNativeStackNavigator({
+  screenLayout: (props) => <MyScreenLayout {...props} />,
+});
+```
+
+:::
+
 ### Navigation key
 
 Optional key for a group of screens. If the key changes, all existing screens in this group will be removed (if used in a stack navigator) or reset (if used in a tab or drawer navigator):
