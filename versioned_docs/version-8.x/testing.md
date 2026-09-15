@@ -807,21 +807,19 @@ import {
 import { View } from 'react-native';
 
 function TestStackNavigator(props) {
-  const { state, descriptors, NavigationContent } = useNavigationBuilder(
+  const { state, descriptors, render } = useNavigationBuilder(
     StackRouter,
     props
   );
 
-  return (
-    <NavigationContent>
-      {state.routes.map((route, index) => {
-        return (
-          <View key={route.key} aria-hidden={index !== state.index}>
-            {descriptors[route.key].render()}
-          </View>
-        );
-      })}
-    </NavigationContent>
+  return render(
+    state.routes.map((route, index) => {
+      return (
+        <View key={route.key} aria-hidden={index !== state.index}>
+          {descriptors[route.key].render()}
+        </View>
+      );
+    })
   );
 }
 

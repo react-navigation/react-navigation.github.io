@@ -219,6 +219,29 @@ See [Custom navigators](custom-navigators.md) for more details.
 
 ### Changes to navigators
 
+#### Custom navigators need to use the `render` callback
+
+Previously, `useNavigationBuilder` returned a `NavigationContent` component for wrapping the navigator's content. The API was problematic, as `NavigationContent` needed to be stable despite using dynamic data. The approach we used to achieve this was not compatible with concurrent rendering.
+
+To solve this properly, we replaced it with a `render` callback that takes the navigator's content as an argument and returns a React element:
+
+```diff lang=js
+- const { state, descriptors, NavigationContent } = useNavigationBuilder(
++ const { state, descriptors, render } = useNavigationBuilder(
+    Router,
+    props
+  );
+
+- return (
+-   <NavigationContent>
+-     <NavigatorView />
+-   </NavigationContent>
+- );
++ return render(<NavigatorView />);
+```
+
+See [Custom navigators](custom-navigators.md) for more details.
+
 #### Native Bottom Tabs are now default
 
 Previously, the Bottom Tab Navigator used a JavaScript-based implementation and a native implementation was available under `@react-navigation/bottom-tabs/unstable`. The `@react-navigation/bottom-tabs/unstable` entry point has been removed and it has been merged into the main package.
