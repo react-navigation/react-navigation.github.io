@@ -576,7 +576,7 @@ See [`push`](stack-actions.md#push) for more details.
 
 #### `pop`
 
-Pops the current screen from the stack and navigates back to the previous screen. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
+Pops the current history entry from the stack and navigates back to the previous entry. It takes one optional argument (`count`), which allows you to specify how many history entries to pop back by.
 
 ```js
 navigation.pop();
@@ -610,6 +610,16 @@ navigation.popToTop();
 ```
 
 See [`popToTop`](stack-actions.md#poptotop) for more details.
+
+#### `dismiss`
+
+Dismisses a screen from the stack.
+
+```js
+navigation.dismiss();
+```
+
+See [`dismiss`](stack-actions.md#dismiss) for more details.
 
 #### `retain`
 

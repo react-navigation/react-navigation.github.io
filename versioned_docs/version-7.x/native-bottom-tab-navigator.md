@@ -522,6 +522,24 @@ Setting this to `false` doesn't remove the tab press animation, as the tab can s
 
 :::
 
+#### `tabBarRepeatedPressBehavior`
+
+Behavior when the focused tab is pressed again. Available properties are:
+
+- `scrollToTop` - whether to scroll the first scroll view in the screen to the top
+- `popToTop` - whether to pop a nested stack to its first screen
+
+Both properties default to `true`.
+
+Example:
+
+```js
+tabBarRepeatedPressBehavior: {
+  scrollToTop: false,
+  popToTop: false
+},
+```
+
 #### `bottomAccessory`
 
 Function that returns a React element to display as an accessory view. The function receives an options object with a `placement` parameter that can be one of the following values:
@@ -584,8 +602,17 @@ This event is fired when the user presses the tab button for the current screen 
 
 - If the tab is not focused, tab press will focus that tab
 - If the tab is already focused:
-  - If the screen for the tab renders a scroll view, you can use [`useScrollToTop`](use-scroll-to-top.md) to scroll it to top
-  - If the screen for the tab renders a stack navigator, a `popToTop` action is performed on the stack
+  - If the screen for the tab renders a scroll view, it can be scrolled to the top
+  - If the screen for the tab renders a stack navigator, it can be popped to the top
+
+See [`tabBarRepeatedPressBehavior`](#tabbarrepeatedpressbehavior) for more details.
+
+The `data` object in the event contains the following properties:
+
+- `origin` - the origin of the event, always `native`
+- `behavior` - An object containing:
+  - `scrollToTop` - whether the screen should scroll to the top
+  - `popToTop` - whether a nested stack should pop to its first screen
 
 ```js
 React.useEffect(() => {

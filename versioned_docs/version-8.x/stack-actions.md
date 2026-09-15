@@ -77,25 +77,20 @@ import { StackActions } from '@react-navigation/native';
 navigation.dispatch(StackActions.replace('Profile', { user: 'Wojtek' }));
 ```
 
-If you want to replace a particular route, you can add a `source` property referring to the route key and `target` property referring to the navigation state key:
+By default, the action replaces the route that dispatched it. If you want to replace a particular route, you can add a `source` property referring to the route key:
 
 ```js
 import { StackActions } from '@react-navigation/native';
 
 navigation.dispatch({
-  ...StackActions.replace('Profile', {
-    user: 'jane',
-  }),
+  ...StackActions.replace('Profile', { user: 'Wojtek' }),
   source: route.key,
-  target: navigation.getState().key,
 });
 ```
 
-If the `source` property is explicitly set to `undefined`, it'll replace the focused route.
-
 ## push
 
-The `push` action adds a route on top of the stack and navigates forward to it. This differs from `navigate` in that `navigate` will pop back to earlier in the stack if a route of the given name is already present there. `push` will always add on top, so a route can be present multiple times.
+The `push` action adds a route on top of the stack and navigates forward to it.
 
 - `name` - _string_ - Name of the route to push onto the stack.
 - `params` - _object_ - Screen params to pass to the destination route.
@@ -160,9 +155,11 @@ import { StackActions } from '@react-navigation/native';
 navigation.dispatch(StackActions.push('Profile', { user: 'Wojtek' }));
 ```
 
+Unlike [`navigate`](navigation-actions.md#navigate), which reuses the current screen if it's the same as the destination, `push` always adds a new instance of the screen on top of the stack.
+
 ## pop
 
-The `pop` action takes you back to a previous screen in the stack. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
+The `pop` action removes history entries from the stack. It takes one optional argument (`count`), which allows you to specify how many history entries to pop back by.
 
 ```js name="Stack actions pop" snack static2dynamic
 import * as React from 'react';
@@ -232,11 +229,27 @@ import { StackActions } from '@react-navigation/native';
 navigation.dispatch(StackActions.pop(1));
 ```
 
+By default, the action pops history entries from the route that dispatched it. If you want to pop a particular route, you can add a `source` property referring to the route key:
+
+```js
+import { StackActions } from '@react-navigation/native';
+
+navigation.dispatch({
+  ...StackActions.pop(),
+  source: route.key,
+});
+```
+
+Here, "history entries" refer to 2 things:
+
+- The screens in the stack, added by [`push`](stack-actions.md#push), [`navigate`](navigation-actions.md#navigate) etc.
+- Param history for the screen, added by [`pushParams`](navigation-object.md#pushparams).
+
+If `pop` is dispatched from a screen earlier in the stack than the focused screen, it'll also remove all the screens above it in the stack, including the focused screen.
+
 ## popTo
 
 The `popTo` action takes you back to a previous screen in the stack by the name. It also allows you to pass params to the route.
-
-If a matching screen is not found in the stack, this will pop the current screen and add a new screen with the specified name and params - essentially behaving like a [`replace`](#replace). This ensures that the app doesn't break if a previous screen with the name did not exist - which can happen when the screen was opened from a deep link or push notification, or when used on the web etc.
 
 The method accepts the following arguments:
 
@@ -334,6 +347,8 @@ import { StackActions } from '@react-navigation/native';
 navigation.dispatch(StackActions.popTo('Profile', { user: 'jane' }));
 ```
 
+If a matching screen is not found in the stack, this will pop the current screen and add a new screen with the specified name and params - essentially behaving like a [`replace`](#replace). This ensures that the app doesn't break if a previous screen with the name did not exist - which can happen when the screen was opened from a deep link or push notification, or when used on the web etc.
+
 ## popToTop
 
 The `popToTop` action takes you back to the first screen in the stack, dismissing all the others.
@@ -404,6 +419,91 @@ It can also be used with `navigation.dispatch`:
 import { StackActions } from '@react-navigation/native';
 
 navigation.dispatch(StackActions.popToTop());
+```
+
+## dismiss
+
+The `dismiss` action dismisses the current screen from the stack.
+
+```js name="Stack actions dismiss" snack static2dynamic
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { Button } from '@react-navigation/elements';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function HomeScreen() {
+  const navigation = useNavigation('Home');
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home!</Text>
+      <Button
+        onPress={() => {
+          navigation.navigate('Profile');
+        }}
+      >
+        Go to Profile
+      </Button>
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  const navigation = useNavigation('Profile');
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile!</Text>
+      <Button
+        onPress={() => {
+          // codeblock-focus-start
+          navigation.dismiss();
+          // codeblock-focus-end
+        }}
+      >
+        Dismiss Profile
+      </Button>
+    </View>
+  );
+}
+
+const RootStack = createStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Profile: ProfileScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+
+It can also be used with `navigation.dispatch`:
+
+```js
+import { StackActions } from '@react-navigation/native';
+
+navigation.dispatch(StackActions.dismiss());
+```
+
+Unlike the [`pop`](#pop) action, it dismisses the entire screen regardless of param history, and it does not remove screens after the screen being dismissed.
+
+By default, the action dismisses the route that dispatched it. If you want to dismiss a particular route, you can add a `source` property referring to the route key:
+
+```js
+import { StackActions } from '@react-navigation/native';
+
+navigation.dispatch({
+  ...StackActions.dismiss(),
+  source: route.key,
+});
 ```
 
 ## retain
@@ -519,7 +619,7 @@ import { StackActions } from '@react-navigation/native';
 navigation.dispatch(StackActions.retain(true));
 ```
 
-When a screen is marked to be retained, actions such as [`goBack`](navigation-actions.md#goback), [`pop`](#pop), [`popToTop`](#poptotop), [`replace`](#replace) etc. will remove it from history, but keep it in the navigation state. So the screen is not unmounted and stays rendered in the background, preserving its local state. Similar to [preloaded routes](navigation-actions.md#preload), it can be brought to focus with `navigate`.
+When a screen is marked to be retained, actions such as [`goBack`](navigation-actions.md#goback), [`pop`](#pop), [`popToTop`](#poptotop), [`dismiss`](#dismiss), [`replace`](#replace) etc. will remove it from history, but keep it in the navigation state. So the screen is not unmounted and stays rendered in the background, preserving its local state. Similar to [preloaded routes](navigation-actions.md#preload), it can be brought to focus with [`navigate`](navigation-actions.md#navigate).
 
 This can be useful in various scenarios:
 
@@ -528,7 +628,7 @@ This can be useful in various scenarios:
 
 If a route was removed from history while being retained, `retain(false)` will remove it from the navigation state and unmount the screen. If the route is still present in history, `retain(false)` will just unmark it, and the route will be removed from the navigation state when it's removed from history.
 
-By default, the action applies to the route that dispatched it. If you want to retain a particular route, you can add a `source` property referring to the route key and `target` property referring to the navigation state key:
+By default, the action applies to the route that dispatched it. If you want to retain a particular route, you can add a `source` property referring to the route key:
 
 ```js
 import { StackActions } from '@react-navigation/native';
@@ -536,6 +636,5 @@ import { StackActions } from '@react-navigation/native';
 navigation.dispatch({
   ...StackActions.retain(true),
   source: route.key,
-  target: navigation.getState().key,
 });
 ```

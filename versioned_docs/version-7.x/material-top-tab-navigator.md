@@ -248,6 +248,16 @@ function MyTabBar({ state, descriptors, navigation, position }) {
             type: 'tabPress',
             target: route.key,
             canPreventDefault: true,
+            data: {
+              behavior: {
+                scrollToTop:
+                  isFocused &&
+                  options.tabBarRepeatedPressBehavior?.scrollToTop !== false,
+                popToTop:
+                  isFocused &&
+                  options.tabBarRepeatedPressBehavior?.popToTop !== false,
+              },
+            },
           });
 
           if (!isFocused && !event.defaultPrevented) {
@@ -511,6 +521,26 @@ By default, this renders `null`.
 
 Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping.
 
+#### `tabBarRepeatedPressBehavior`
+
+Behavior when the focused tab is pressed again. Available properties are:
+
+- `scrollToTop` - whether to scroll the first scroll view in the screen to the top
+- `popToTop` - whether to pop a nested stack to its first screen
+
+Both properties default to `true`.
+
+Example:
+
+```js
+tabBarRepeatedPressBehavior: {
+  scrollToTop: false,
+  popToTop: false
+},
+```
+
+For scroll to top behavior to work, make sure to use [`useScrollToTop`](use-scroll-to-top.md) in your screen.
+
 ### Events
 
 The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
@@ -521,8 +551,17 @@ This event is fired when the user presses the tab button for the current screen 
 
 - If the tab is not focused, tab press will focus that tab
 - If the tab is already focused:
-  - If the screen for the tab renders a scroll view, you can use [`useScrollToTop`](use-scroll-to-top.md) to scroll it to top
-  - If the screen for the tab renders a stack navigator, a `popToTop` action is performed on the stack
+  - If the screen for the tab renders a scroll view, it can be scrolled to the top
+  - If the screen for the tab renders a stack navigator, it can be popped to the top
+
+See [`tabBarRepeatedPressBehavior`](#tabbarrepeatedpressbehavior) for more details.
+
+For the built-in tab bar, the `behavior` object in `e.data` has the following properties:
+
+- `scrollToTop` - whether the screen should scroll to the top
+- `popToTop` - whether a nested stack should pop to its first screen
+
+Consumers of this event can use these properties to determine if they should perform these actions.
 
 To prevent the default behavior, you can call `event.preventDefault`:
 
