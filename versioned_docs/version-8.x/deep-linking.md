@@ -128,13 +128,19 @@ See [Expo's documentation on Android App Links](https://docs.expo.dev/linking/an
 
 Let's configure the native iOS app to open based on the `example://` URI scheme.
 
-You'll need to add the `LinkingIOS` folder into your header search paths as described [here](https://reactnative.dev/docs/linking-libraries-ios#step-3). Then you'll need to add the following lines to your or `AppDelegate.swift` or `AppDelegate.mm` file:
+You'll need to add the `LinkingIOS` folder into your header search paths as described [here](https://reactnative.dev/docs/linking-libraries-ios#step-3). Then you'll need to add the following lines to your `AppDelegate.swift` or `AppDelegate.mm` file:
 
 <IosLanguageTabs>
 <TabItem value='swift'>
 
 ```swift
-func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+import React
+
+override func application(
+  _ app: UIApplication,
+  open url: URL,
+  options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+) -> Bool {
   return RCTLinkingManager.application(app, open: url, options: options)
 }
 ```
@@ -162,16 +168,17 @@ If your app is using [Universal Links](https://developer.apple.com/ios/universal
 <TabItem value='swift'>
 
 ```swift
-func application(
+override func application(
   _ application: UIApplication,
   continue userActivity: NSUserActivity,
-  restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-    return RCTLinkingManager.application(
-      application,
-      continue: userActivity,
-      restorationHandler: restorationHandler
-    )
-  }
+  restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
+) -> Bool {
+  return RCTLinkingManager.application(
+    application,
+    continue: userActivity,
+    restorationHandler: restorationHandler
+  )
+}
 ```
 
 </TabItem>
