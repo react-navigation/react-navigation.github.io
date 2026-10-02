@@ -397,6 +397,10 @@ drawerItemStyle: {
 },
 ```
 
+#### `drawerItemTestID`
+
+ID to locate the drawer item in tests.
+
 #### `drawerLabelStyle`
 
 Style object to apply to the `Text` style inside content section which renders a label.
@@ -543,7 +547,7 @@ const MyDrawer = createDrawerNavigator({
   screenOptions: {
     drawerType: 'back',
     drawerStyle: { width: '100%' },
-    overlayColor: 'transparent',
+    overlayStyle: { backgroundColor: 'transparent' },
   },
   screens: {
     Home: HomeScreen,
@@ -568,9 +572,15 @@ Supported values:
 - `fade`
 - `none`
 
-#### `overlayColor`
+#### `overlayStyle`
 
-Color overlay to be displayed on top of the content view when drawer gets open. The opacity is animated from `0` to `1` when the drawer opens.
+Style for the overlay on top of the content view when drawer gets open. You can use this to customize the overlay color, opacity, and other properties:
+
+```js
+overlayStyle: {
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+}
+```
 
 #### `sceneStyle`
 

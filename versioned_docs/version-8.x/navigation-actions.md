@@ -10,7 +10,7 @@ Each navigation actions can contain at least the following properties:
 
 - `type` (required) - A string that represents the name of the action.
 - `payload` (optional) - An object containing additional information about the action. For example, it will contain `name` and `params` for `navigate`.
-- `source` (optional) - The key of the route which should be considered as the source of the action. This is used for some actions to determine which route to apply the action on. By default, `navigation.dispatch` adds the key of the route that dispatched the action.
+- `source` (optional) - The key of the route considered as the source of the action, automatically added when dispatching from a screen's `navigation` object.
 - `target` (optional) - The key of the [navigation state](navigation-state.md) the action should be applied on.
 
 It's important to highlight that dispatching a navigation action doesn't throw any error when the action is unhandled (similar to when you dispatch an action that isn't handled by a reducer in redux and nothing happens).
@@ -347,7 +347,7 @@ import { CommonActions } from '@react-navigation/native';
 navigation.dispatch(CommonActions.goBack());
 ```
 
-If you want to go back from a particular route, you can add a `source` property referring to the route key and a `target` property referring to the `key` of the navigator which contains the route:
+If you want to go back from a particular route, you can add a `source` property referring to the route key:
 
 ```js name="Common actions goBack" snack static2dynamic
 import * as React from 'react';
@@ -404,7 +404,6 @@ function ProfileScreen({ route }) {
           navigation.dispatch({
             ...CommonActions.goBack(),
             source: route.key,
-            target: navigation.getState().key,
           });
           // codeblock-focus-end
         }}

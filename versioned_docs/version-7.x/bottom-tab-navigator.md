@@ -158,6 +158,16 @@ function MyTabBar({ state, descriptors, navigation }) {
             type: 'tabPress',
             target: route.key,
             canPreventDefault: true,
+            data: {
+              behavior: {
+                scrollToTop:
+                  isFocused &&
+                  options.tabBarRepeatedPressBehavior?.scrollToTop !== false,
+                popToTop:
+                  isFocused &&
+                  options.tabBarRepeatedPressBehavior?.popToTop !== false,
+              },
+            },
           });
 
           if (!isFocused && !event.defaultPrevented) {
@@ -258,11 +268,17 @@ Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`
 
 #### `tabBarLabel`
 
-Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarShowLabel`.
+Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see [`tabBarLabelVisibilityMode`](#tabbarlabelvisibilitymode).
 
-#### `tabBarShowLabel`
+#### `tabBarLabelVisibilityMode`
 
-Whether the tab label should be visible. Defaults to `true`.
+The label visibility mode for the tab bar items. Supported values are:
+
+- `auto` - labels are shown automatically
+- `labeled` - labels are always shown
+- `unlabeled` - labels are never shown
+
+Defaults to `auto`.
 
 #### `tabBarLabelPosition`
 
@@ -559,6 +575,26 @@ Boolean indicating whether any nested stack should be popped to the top of the s
 
 It only works when there is a stack navigator (e.g. [stack navigator](stack-navigator.md) or [native stack navigator](native-stack-navigator.md)) nested under the tab navigator.
 
+#### `tabBarRepeatedPressBehavior`
+
+Behavior when the focused tab is pressed again. Available properties are:
+
+- `scrollToTop` - whether to scroll the first scroll view in the screen to the top
+- `popToTop` - whether to pop a nested stack to its first screen
+
+Both properties default to `true`.
+
+Example:
+
+```js
+tabBarRepeatedPressBehavior: {
+  scrollToTop: false,
+  popToTop: false
+},
+```
+
+For scroll to top behavior to work, make sure to use [`useScrollToTop`](use-scroll-to-top.md) in your screen.
+
 #### `sceneStyle`
 
 Style object for the component wrapping the screen content.
@@ -624,8 +660,17 @@ This event is fired when the user presses the tab button for the current screen 
 
 - If the tab is not focused, tab press will focus that tab
 - If the tab is already focused:
-  - If the screen for the tab renders a scroll view, you can use [`useScrollToTop`](use-scroll-to-top.md) to scroll it to top
-  - If the screen for the tab renders a stack navigator, a `popToTop` action is performed on the stack
+  - If the screen for the tab renders a scroll view, it can be scrolled to the top
+  - If the screen for the tab renders a stack navigator, it can be popped to the top
+
+See [`tabBarRepeatedPressBehavior`](#tabbarrepeatedpressbehavior) for more details.
+
+For the built-in tab bar, the `behavior` object in `e.data` has the following properties:
+
+- `scrollToTop` - whether the screen should scroll to the top
+- `popToTop` - whether a nested stack should pop to its first screen
+
+Consumers of this event can use these properties to determine if they should perform these actions.
 
 To prevent the default behavior, you can call `event.preventDefault`:
 

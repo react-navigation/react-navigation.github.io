@@ -152,6 +152,7 @@ This is the default implementation on other platforms such as web, macOS and Win
 - Liquid Glass effect on iOS 26+ requires your app to be built with Xcode 26 or above.
 - On Android, at most 5 tabs are supported with the `native` implementation. This is a limitation of the underlying native component.
 - The experimental `SafeAreaView` component from `react-native-screens/experimental` can be used to avoid overlapping native tab bar.
+- The `ScrollViewMarker` from `react-native-screens` can be used to configure scroll edge effects for native tabs.
 
 ## API Definition
 
@@ -245,13 +246,30 @@ function MyTabBar({ state, descriptors, navigation }) {
         const isFocused = state.index === index;
 
         const onPress = () => {
+          const isRepeatedPress =
+            isFocused && options.tabBarSelectionEnabled !== false;
+
           const event = navigation.emit({
             type: 'tabPress',
             target: route.key,
             canPreventDefault: true,
+            data: {
+              behavior: {
+                scrollToTop:
+                  isRepeatedPress &&
+                  options.tabBarRepeatedPressBehavior?.scrollToTop !== false,
+                popToTop:
+                  isRepeatedPress &&
+                  options.tabBarRepeatedPressBehavior?.popToTop !== false,
+              },
+            },
           });
 
-          if (!isFocused && !event.defaultPrevented) {
+          if (
+            !isFocused &&
+            !event.defaultPrevented &&
+            options.tabBarSelectionEnabled !== false
+          ) {
             navigation.navigate(route.name, route.params);
           }
         };
@@ -1099,6 +1117,26 @@ Setting this to `false` doesn't remove the tab press animation, as the tab can s
 
 :::
 
+#### `tabBarRepeatedPressBehavior`
+
+Behavior when the focused tab is pressed again. Available properties are:
+
+- `scrollToTop` - whether to scroll the first scroll view in the screen to the top
+- `popToTop` - whether to pop a nested stack to its first screen
+
+Both properties default to `true`.
+
+Example:
+
+```js
+tabBarRepeatedPressBehavior: {
+  scrollToTop: false,
+  popToTop: false
+},
+```
+
+When using the [`custom` implementation](#implementation), or a [custom tab bar](#tabbar), make sure to use [`useScrollToTop`](use-scroll-to-top.md) in your screen for the scroll-to-top behavior to work.
+
 #### `bottomAccessory`
 
 Function that returns a React element to display as an accessory view. The function receives an options object with a `placement` parameter that can be one of the following values:
@@ -1132,23 +1170,6 @@ On Android, iOS 18 and below, nothing is rendered. You can either use the [`scre
 The content is rendered twice for both placements, but only one is visible at a time based on the tab bar state. Any shared state should be stored outside of the component to keep both versions in sync.
 
 :::
-
-#### `scrollEdgeEffects`
-
-Configures the scroll edge effect for the _content ScrollView_ (the ScrollView that is present in first descendants chain of the Screen).
-Depending on values set, it will blur the scrolling content below certain UI elements (e.g. header items, search bar) for the specified edge of the ScrollView.
-When set in nested containers, i.e. Native Stack inside Native Bottom Tabs, or the other way around, the ScrollView will use only the innermost one's config.
-
-Edge effects can be configured for each edge separately. The following values are currently supported:
-
-- `automatic` - the automatic scroll edge effect style,
-- `hard` - a scroll edge effect with a hard cutoff and dividing line,
-- `soft` - a soft-edged scroll edge effect,
-- `hidden` - no scroll edge effect.
-
-Defaults to `automatic` for each edge.
-
-Only supported with `native` implementation on iOS 26 and above.
 
 #### `popToTopOnBlur`
 
@@ -1222,8 +1243,17 @@ This event is fired when the user presses the tab button for the current screen 
 
 - If the tab is not focused, tab press will focus that tab
 - If the tab is already focused:
-  - If the screen for the tab renders a scroll view, you can use [`useScrollToTop`](use-scroll-to-top.md) to scroll it to top
-  - If the screen for the tab renders a stack navigator, a `popToTop` action is performed on the stack
+  - If the screen for the tab renders a scroll view, it can be scrolled to the top
+  - If the screen for the tab renders a stack navigator, it can be popped to the top
+
+See [`tabBarRepeatedPressBehavior`](#tabbarrepeatedpressbehavior) for more details.
+
+The `data` object in the event contains the following properties:
+
+- `origin` - the origin of the event, `native` for a press from the native tab bar, and omitted for [`custom` implementation](#implementation) or a [custom tab bar](#tabbar).
+- `behavior` - An object containing:
+  - `scrollToTop` - whether the screen should scroll to the top
+  - `popToTop` - whether a nested stack should pop to its first screen
 
 ```js
 React.useEffect(() => {

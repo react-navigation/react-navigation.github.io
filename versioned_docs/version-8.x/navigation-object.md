@@ -48,6 +48,7 @@ If the navigator is a stack navigator, several alternatives to `navigate` and `g
   - `pop` - go back in the stack
   - `popTo` - go back to a specific screen in the stack
   - `popToTop` - go to the top of the stack
+  - `dismiss` - dismiss a screen from the stack
 
 See [Stack navigator helpers](stack-navigator.md#helpers) and [Native Stack navigator helpers](native-stack-navigator.md#helpers) for more details on these methods.
 

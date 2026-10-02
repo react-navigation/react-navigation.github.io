@@ -519,6 +519,42 @@ Since this was unusable, and resulted in hard to debug issues, we have changed t
 
 If you were relying on the previous behavior and are not using Native Stack Navigator, you can use the [`router` prop](#navigators-now-accept-a-router-prop) on the navigator to customize how each action updates the state, and implement the previous behavior.
 
+#### Navigation actions now work from the screen that dispatches them
+
+Previously, actions dispatched from a screen often worked from the focused screen. For example, `navigation.goBack()` in a unfocused screen would go back from the focused screen.
+
+Many actions have been reworked to consistently operate from the screen that dispatches them:
+
+- `navigate` removes active screens after the screen that dispatches the action before navigating. If there is a matching screen after it, it can be reused.
+- `goBack` and `pop` go back from the screen that dispatches the action and remove active screens after it.
+- `popTo` only looks for the matching screen starting from the screen that dispatches the action.
+- `replace` replaces the screen that dispatches the action instead of the focused screen.
+
+Similarly, the `canGoBack` method now checks whether you can go back from the screen that dispatches the action, rather than the focused screen.
+
+When dispatching an action from the screen's [`navigation` object](navigation-object.md), it adds the `source` field to the action, indicating the key of the screen that dispatched it, similar to before. But it's no longer constant. When an action bubbles to parent navigator, the `source` field is now updated to reflect the screen that contains the navigator that it bubbled from.
+
+The new behavior is important for a few reasons:
+
+- It prevents unexpected behavior, e.g., when accidentally double-tapping a back button, it won't incorrectly pop 2 screens.
+- It makes navigation interruptible, e.g., if navigation to a screen suspends and the old screen stays visible, navigating to another screen can now cancel the previous navigation.
+
+This should not affect the majority of use cases. If your code relies on actions being applied to the focused screen rather than the screen that dispatches them, you can explicitly set the `source` field to `undefined`:
+
+```diff lang=js
+- navigation.goBack();
++ navigation.dispatch({ ...CommonActions.goBack(), source: undefined });
+```
+
+If you want to dismiss a screen without removing the screens after it, you can use the new `dismiss` action:
+
+```diff lang=js
+- navigation.pop();
++ navigation.dismiss();
+```
+
+See [`dismiss`](stack-actions.md#dismiss) for more details.
+
 #### Navigators no longer use `InteractionManager`
 
 Previously, various navigators used `InteractionManager` to mark when animations and gestures were in progress. This was primarily used to defer code that should run after transitions, such as loading data or rendering heavy components.
@@ -1129,6 +1165,7 @@ The following exports from `@react-navigation/core` have been removed:
 - `CurrentRenderContext`
 - `createComponentForStaticNavigation` - use the static navigator's `getComponent()` method instead
 - `StaticConfigGroup` and `StaticConfigScreens` types
+- `NavigationMetaContext` - intended for use inside navigators
 
 #### Some exports are removed from `@react-navigation/elements`
 
