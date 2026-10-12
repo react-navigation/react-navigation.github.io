@@ -394,9 +394,14 @@ Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`
 
 #### `tabBarLabel`
 
-Title string of a tab displayed in the tab bar. When undefined, scene `title` is used. To hide, see [`tabBarLabelVisibilityMode`](#tabbarlabelvisibilitymode).
+Title string of a tab displayed in the tab bar. To hide, see [`tabBarLabelVisibilityMode`](#tabbarlabelvisibilitymode).
 
 Overrides the label provided by [`tabBarSystemItem`](#tabbarsystemitem) on iOS.
+
+If not provided, or set to `undefined`:
+
+- The system values are used on iOS if [`tabBarSystemItem`](#tabbarsystemitem) is set or [`tabBarRole`](#tabbarrole) is `search`.
+- Otherwise, it falls back to the [`title`](#title) or route name.
 
 #### `tabBarSystemItem`
 
@@ -417,14 +422,50 @@ Uses iOS built-in tab bar items with standard iOS styling and localized titles. 
 
 Only supported on iOS with `native` implementation.
 
-The [`tabBarIcon`](#tabbaricon) and [`tabBarLabel`](#tabbarlabel) options will override the icon and label from the system item. If you want to keep the system behavior on iOS, but need to provide icon and label for other platforms, use `Platform.OS` or `Platform.select` to conditionally set `undefined` for `tabBarIcon` and `tabBarLabel` on iOS.
+The [`tabBarIcon`](#tabbaricon) and [`tabBarLabel`](#tabbarlabel) options override the icon and label from the system item. If you want to keep the system behavior on iOS, but need to provide icon and label for other platforms, use `Platform.OS` or `Platform.select` to conditionally set `undefined` for `tabBarIcon` and `tabBarLabel` on iOS.
+
+When set to `search`, the tab may receive prominent visual treatment on iOS 26. See [`tabBarRole`](#tabbarrole) for the behavior on iOS 27 and above.
+
+#### `tabBarRole`
+
+The role of the tab within the system tab bar. Supported values:
+
+- `prominent` - the tab gets prominent visual treatment when supported on iOS 27 and above
+- `search` - the tab is used as the system search tab
+
+With the `prominent` role, the tab may receive special styling to make it stand out, such as a separate button next to the tab bar. Only one tab can have the `prominent` role at a time.
+
+<video playsInline autoPlay muted loop>
+  <source src="/assets/navigators/bottom-tabs/highlights/prominent-tab.mp4" />
+</video>
+
+On iOS 26.1, a tab with the `search` role gets prominent visual treatment. On iOS 27 and above, it gets prominent styling only if [`tabBarSearchAutoFocus`](#tabbarsearchautofocus) is enabled and no other tab has the `prominent` role. On iOS 27 and above, it also stays visible when the tab bar [minimizes](#tabbarminimizebehavior).
+
+The tab uses the system search icon and label by default on iOS. You can override them with [`tabBarSystemItem`](#tabbarsystemitem), [`tabBarIcon`](#tabbaricon), or [`tabBarLabel`](#tabbarlabel).
+
+On iOS 26.1 and above, at most one tab can have the `search` role. Adding or removing the `search` role after the tab is rendered is not supported.
+
+Also see [Search tab on iOS 26+](#search-tab-on-ios-26).
+
+Only supported on iOS with `native` implementation.
+
+#### `tabBarSearchAutoFocus`
+
+Whether the search field is automatically focused when the tab is selected. Cancelling the search selects the previously selected tab.
+
+Only applies to tabs with [`tabBarRole`](#tabbarrole) set to `search`, and requires [`headerSearchBarOptions`](native-stack-navigator.md#headersearchbaroptions) to be set in a native stack nested in the tab.
+
+Defaults to `false`.
+
+Only supported with `native` implementation on iOS 26.1 and above.
 
 ##### Search tab on iOS 26+
 
-The `tabBarSystemItem` option has special styling and behavior when set to `search` on iOS 26+.
+The [`tabBarRole`](#tabbarrole) option has special styling and behavior when set to `search` on iOS 26.1 and above.
 
 Additionally, when the `search` tab is selected, the tab bar transforms into a search field if:
 
+- [`tabBarSearchAutoFocus`](#tabbarsearchautofocus) is enabled
 - The screen has a nested [native stack navigator](native-stack-navigator.md)
 - The focused screen in the nested native stack has [`headerSearchBarOptions`](native-stack-navigator.md#headersearchbaroptions)
 
@@ -539,8 +580,10 @@ const HomeTabs = createBottomTabNavigator({
       // highlight-next-line
       screen: SearchStack,
       options: {
-        // highlight-next-line
-        tabBarSystemItem: 'search',
+        // highlight-start
+        tabBarRole: 'search',
+        tabBarSearchAutoFocus: true,
+        // highlight-end
       },
     },
   },
@@ -590,6 +633,26 @@ Only supported with `custom` implementation.
   The label is shown next to the icon (typical for larger devices such as tablets)
 
 </div>
+
+#### `tabBarLabelPositionAdjustment`
+
+Offset for the tab label relative to its default position. The offset can be specified separately for each item layout:
+
+- `stacked` - icon above the label, such as on iPhone in portrait
+- `inline` - icon beside the label in regular width, such as on iPad
+- `compactInline` - icon beside the label in compact width, such as on iPhone in landscape
+
+Each layout accepts `horizontal` and `vertical` offsets. Positive `horizontal` moves the label right, and positive `vertical` moves it down.
+
+```js
+tabBarLabelPositionAdjustment: {
+  stacked: { horizontal: 0, vertical: 2 },
+  inline: { horizontal: 2, vertical: 0 },
+  compactInline: { horizontal: 2, vertical: 0 },
+},
+```
+
+Only supported on iOS with `native` implementation.
 
 #### `tabBarAllowFontScaling`
 
@@ -652,7 +715,7 @@ The icon object can be one of the following types:
 
   Set `tinted` to `false` if the image has its own colors that you want to preserve.
 
-  The image is tinted by default. Overriding is only supported on iOS for the `native` implementation, all platforms for the `custom` implementation.
+  The image is tinted by default.
 
 - [SF Symbols](https://developer.apple.com/sf-symbols/) name - Supported on iOS
 
@@ -662,6 +725,12 @@ The icon object can be one of the following types:
     name: 'heart',
   }
   ```
+
+  The `renderingMode` property can be used to specify how to color the symbol:
+  - `monochrome`: Single color, using the tint color.
+  - `multicolor`: Uses the symbol's built-in multicolor scheme.
+
+  System symbols use a single color by default.
 
   See [Icons](icons.md#sf-symbols) for more details.
 
@@ -677,6 +746,7 @@ The icon object can be one of the following types:
   It also supports the following optional properties:
   - `variant` - Supported values: `outlined`, `rounded`, `sharp`
   - `weight` - Supported values: `100`, `200`, `300`, `400`, `500`, `600`, `700`
+  - `fill` - Whether to use the filled symbol.
 
   See [Icons](icons.md#material-symbols) for more details.
 
@@ -719,6 +789,14 @@ tabBarIcon: Platform.select({
   },
 });
 ```
+
+#### `tabBarIconSize`
+
+Size of the tab's icon.
+
+With `native` implementation, the largest size is used for the icon area in all tabs. Icons smaller than the largest size are centered in this area.
+
+Supported on all platforms with `custom` implementation. Only supported on Android with `native` implementation.
 
 #### `tabBarIconStyle`
 
@@ -797,6 +875,18 @@ Whether the active indicator should be used. Defaults to `true`.
 
 Only supported with `native` implementation on Android.
 
+#### `tabBarActiveIndicatorWidth`
+
+Width of the tab's active indicator.
+
+Only supported with `native` implementation on Android.
+
+#### `tabBarActiveIndicatorHeight`
+
+Height of the tab's active indicator.
+
+Only supported with `native` implementation on Android.
+
 #### `tabBarRippleColor`
 
 Color of the ripple effect when pressing a tab.
@@ -820,6 +910,12 @@ Only supported with `custom` implementation.
 Whether the tab bar is hidden when the keyboard opens. Defaults to `false`.
 
 Only supported with `custom` implementation.
+
+#### `tabBarVisibilityAnimationEnabled`
+
+Whether showing and hiding the tab bar is animated. Defaults to `true`.
+
+Only supported with `native` implementation on iOS 18 and above.
 
 #### `tabBarVisibilityAnimationConfig`
 
@@ -1087,6 +1183,22 @@ The [`tabBarPosition`](#tabbarposition) option can be used to override this in `
 
 Supported on iOS 18 and above with `native` implementation. Not supported on tvOS.
 
+#### `tabBarSidebarPreferredPlacement`
+
+Whether the sidebar or the tab bar is preferred when only one of them can be displayed. Supported values:
+
+- `auto` - uses the system default (tab bar)
+- `sidebar` - the sidebar is displayed when it's available
+- `tabBar` - the tab bar is displayed
+
+Requires [`tabBarControllerMode`](#tabbarcontrollermode) to be set to `tabSidebar`.
+
+The sidebar is only available when the horizontal size class is regular, e.g. on iPad, or on larger iPhones in landscape.
+
+Defaults to `auto`.
+
+Only supported with `native` implementation on iOS 27 and above. Not supported on tvOS.
+
 #### `tabBarMinimizeBehavior`
 
 The minimize behavior for the tab bar. Supported values:
@@ -1125,6 +1237,8 @@ Behavior when the focused tab is pressed again. Available properties are:
 - `popToTop` - whether to pop a nested stack to its first screen
 
 Both properties default to `true`.
+
+Ignored when [`tabBarSelectionEnabled`](#tabbarselectionenabled) is `false`.
 
 Example:
 
@@ -1266,11 +1380,11 @@ React.useEffect(() => {
 }, [navigation]);
 ```
 
-The default behavior of the tab press is controlled natively and cannot be prevented. Use the [`tabBarSelectionEnabled`](#tabbarselectionenabled) option to prevent the tab from being selected when pressed if you want to implement custom behavior.
+With `native` implementation, the default behavior of the tab press is controlled natively and cannot be prevented. Use the [`tabBarSelectionEnabled`](#tabbarselectionenabled) option to prevent the tab from being selected when pressed if you want to implement custom behavior.
 
 :::note
 
-By default, tabs are rendered lazily. So if you add a listener inside a screen component, it won't receive the event until the screen is focused for the first time. If you need to listen to this event before the screen is focused, you can specify the [listener in the screen config](navigation-events.md#listeners-prop-on-screen) instead.
+With [`lazy`](#lazy) set to `true`, tabs are rendered lazily. So if you add a listener inside a screen component, it won't receive the event until the screen is focused for the first time. If you need to listen to this event before the screen is focused, you can specify the [listener in the screen config](navigation-events.md#listeners-prop-on-screen) instead.
 
 :::
 

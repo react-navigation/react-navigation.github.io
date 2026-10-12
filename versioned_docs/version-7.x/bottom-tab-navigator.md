@@ -318,6 +318,10 @@ tabBarLabelStyle: {
 
 Function that given `{ focused: boolean, color: string, size: number }` returns a React.Node, to display in the tab bar.
 
+#### `tabBarIconSize`
+
+Size of the tab's icon.
+
 #### `tabBarIconStyle`
 
 Style object for the tab icon.

@@ -358,6 +358,9 @@ It can contain the following properties:
 - `autoCapitalize`: The auto-capitalization behavior. Possible values: `none`, `words`, `sentences`, `characters`.
 - `autoFocus`: Automatically focus search input on mount.
 - `cancelButtonText`: Text to be used instead of default `Cancel` button text (iOS only).
+- `cancelButtonAccessibilityLabel`: Accessibility label for the button that closes the search bar. Defaults to `cancelButtonText` on iOS and `Close` on other platforms.
+- `clearButtonAccessibilityLabel`: Accessibility label for the button that clears the search input. Defaults to `Clear text`.
+- `openButtonAccessibilityLabel`: Accessibility label for the header button that opens the search bar. Defaults to `Search`.
 - `inputType`: Type of the input. Possible values: `text`, `phone`, `number`, `email`.
 - `onBlur`: Callback that gets called when search input has lost focus.
 - `onChangeText`: Callback that gets called when the text changes.

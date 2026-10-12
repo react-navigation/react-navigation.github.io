@@ -616,7 +616,7 @@ Minimum swipe distance threshold that should activate opening the drawer.
 
 #### `keyboardDismissMode`
 
-Whether the keyboard should be dismissed when the swipe gesture begins. Defaults to `'on-drag'`. Set to `'none'` to disable keyboard handling.
+Whether the keyboard should be dismissed when the drawer starts opening or closing. Defaults to `'on-drag'`. Set to `'none'` to disable keyboard handling.
 
 #### `freezeOnBlur`
 

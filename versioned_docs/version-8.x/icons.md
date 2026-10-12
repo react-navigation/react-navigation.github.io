@@ -47,7 +47,7 @@ Typically, components accept an icon object with a `type` property:
   }
   ```
 
-The `sfSymbol` and `materialSymbol` types use the respective system icon libraries on each platform. The `image` type allows you to use a custom image as an icon on any platform, drawable resources on Android, and asset catalog images on iOS.
+The `sfSymbol` and `materialSymbol` types use the respective icon libraries on each platform. The `image` type allows you to use a custom image as an icon on any platform, drawable resources on Android, and asset catalog images on iOS.
 
 ## SF Symbols
 
@@ -59,6 +59,23 @@ Where SF Symbols are supported, icon options and props accept an object with `ty
 tabBarIcon: {
   type: 'sfSymbol',
   name: 'star.fill',
+}
+```
+
+The `renderingMode` property can be used to specify how to color the symbol:
+
+- `monochrome`: Single color, using the tint color.
+- `multicolor`: Uses the symbol's built-in multicolor scheme.
+
+System symbols use a single color by default.
+
+Example:
+
+```js
+tabBarIcon: {
+  type: 'sfSymbol',
+  name: 'cloud.sun.rain.fill',
+  renderingMode: 'multicolor',
 }
 ```
 
@@ -341,6 +358,31 @@ The component accepts the following props:
 
   Plain style object for the symbol's native view. If you need to pass a style array, use `StyleSheet.flatten` to convert it to a plain style object.
 
+### Custom SF Symbol names
+
+The `SFSymbol` component and the icon objects support custom SF Symbols included in the app's asset catalog as well. But TypeScript needs to be informed about these custom names to provide proper type checking.
+
+To do this, you can extend the `SFSymbolNames` interface with module augmentation:
+
+```tsx
+import '@react-navigation/native';
+
+declare module '@react-navigation/native' {
+  interface SFSymbolNames {
+    'my.custom.symbol': true;
+  }
+}
+```
+
+They can then be used in the `SFSymbol` component and icon objects:
+
+```js
+tabBarIcon: {
+  type: 'sfSymbol',
+  name: 'my.custom.symbol',
+}
+```
+
 ## Material Symbols
 
 Material Symbols is a library of over 2,500 glyphs designed to integrate well with Material Design on Android.
@@ -355,14 +397,15 @@ You can customize which variant and weights are included in the bundle by settin
     "fonts": [
       {
         "variant": "rounded",
-        "weights": [300]
+        "weights": [300],
+        "fills": [0, 1]
       }
     ]
   }
 }
 ```
 
-This will include the `"rounded"` variant with `300` weight in the bundle.
+This will include the `"rounded"` variant with `300` weight, and the unfilled (`0`) and filled (`1`) forms in the bundle.
 
 If you don't use Material Symbols and want to reduce your app size, you can also disable the font entirely by specifying an empty array for `fonts`:
 
@@ -391,7 +434,7 @@ tabBarIcon: {
 
 The behavior differs depending on the weights and variants included in the bundle. If there is a single variant and weight included, it will be used by default. You don't need to specify the variant or weight in the icon object. The built-in icons such as icons in the header will also use the included variant and weight automatically.
 
-If there are multiple variants or weights included, you can specify the `variant` and `weight` properties in the icon object to choose which one to use:
+If multiple variants or weights are included, `outlined` and `400` are used if available. Otherwise, you'll need to specify the variant or weight explicitly by specifying the `variant` and `weight` properties in the icon object to choose which one to use:
 
 ```js
 tabBarIcon: {
@@ -401,6 +444,8 @@ tabBarIcon: {
   weight: 300,
 }
 ```
+
+Similarly, if there is a single fill included for the selected variant and weight, it will be used by default. If both unfilled and filled forms are included, the unfilled form will be used by default.
 
 In addition, React Navigation also exports a `MaterialSymbol` component that you can use to render Material Symbols directly in your own components:
 
@@ -454,6 +499,12 @@ The component accepts the following props:
   - `"bold"` (`700`)
 
   The available weights depend on which weights are included in the bundle. If the specified weight is not included, it will throw an error.
+
+- `fill`
+
+  Whether to use the filled symbol. Automatically set if only one fill is available for the selected variant and weight. Defaults to `false` when both are included.
+
+  The available fills depend on which fills are included in the bundle (`0` for unfilled, `1` for filled). If the specified fill is not included, it will throw an error.
 
 - `style`
 

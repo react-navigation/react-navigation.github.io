@@ -146,10 +146,10 @@ Whether to hide the status bar when the drawer is open. Defaults to `false`.
 
 ##### `keyboardDismissMode`
 
-Whether to dismiss the keyboard when the drawer is open. Supported values are:
+Whether to dismiss the keyboard when the drawer starts opening or closing. Supported values are:
 
-- `none`: The keyboard will not be dismissed when the drawer is open.
-- `on-drag`: The keyboard will be dismissed when the drawer is opened by a swipe gesture.
+- `none`: The keyboard will not be dismissed by the drawer.
+- `on-drag`: The keyboard will be dismissed when the drawer starts opening or closing.
 
 Defaults to `on-drag`.
 

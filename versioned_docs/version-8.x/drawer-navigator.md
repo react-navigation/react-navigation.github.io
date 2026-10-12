@@ -414,6 +414,7 @@ The icon object can be one of the following types:
   It also supports the following optional properties:
   - `variant` - Supported values: `outlined`, `rounded`, `sharp`
   - `weight` - Supported values: `100`, `200`, `300`, `400`, `500`, `600`, `700`
+  - `fill` - Whether to use the filled symbol.
 
   See [Icons](icons.md#material-symbols) for more details.
 
@@ -703,7 +704,7 @@ Minimum swipe distance threshold that should activate opening the drawer.
 
 #### `keyboardDismissMode`
 
-Whether the keyboard should be dismissed when the swipe gesture begins. Defaults to `'on-drag'`. Set to `'none'` to disable keyboard handling.
+Whether the keyboard should be dismissed when the drawer starts opening or closing. Defaults to `'on-drag'`. Set to `'none'` to disable keyboard handling.
 
 #### `popToTopOnBlur`
 

@@ -424,6 +424,8 @@ Supported values:
 - `landscape_left`: landscape-left orientation is permitted.
 - `landscape_right`: landscape-right orientation is permitted.
 
+If not set, the screen inherits the orientation of its parent screen. If no parent screen sets `orientation`, the app's `Info.plist` determines the supported orientations on iOS, and the system decides the best orientation on Android.
+
 Only supported on Android and iOS.
 
 #### `autoHideHomeIndicator`
@@ -447,7 +449,7 @@ Only supported on iOS.
 
 #### `animationDuration`
 
-Changes the duration (in milliseconds) of `slide_from_bottom`, `fade_from_bottom`, `fade` and `simple_push` transitions on iOS. Defaults to `350`.
+Changes the duration (in milliseconds) of `slide_from_bottom`, `fade_from_bottom`, `fade` and `simple_push` transitions on iOS. Defaults to `500`.
 
 For screens with `default` and `flip` transitions, and, as of now, for screens with `presentation` set to `modal`, `formSheet`, `pageSheet` (regardless of transition), the duration isn't customizable.
 
@@ -926,6 +928,14 @@ headerBackVisible: true,
 headerBackTitle: 'Back',
 ```
 
+#### `headerLeftBackgroundVisible`
+
+Whether the liquid glass background is visible for the item.
+
+Only supported on iOS 26.0 and later. Older versions of iOS and other platforms never show the background.
+
+Defaults to `true`.
+
 #### `unstable_headerLeftItems`
 
 :::warning
@@ -969,6 +979,14 @@ Example:
 ```js
 headerRight: () => <MaterialCommunityIcons name="map" color="blue" size={36} />;
 ```
+
+#### `headerRightBackgroundVisible`
+
+Whether the liquid glass background is visible for the item.
+
+Only supported on iOS 26.0 and later. Older versions of iOS and other platforms never show the background.
+
+Defaults to `true`.
 
 #### `unstable_headerRightItems`
 
@@ -1794,6 +1812,7 @@ Common properties:
 - `hidesSharedBackground` (iOS 26+): Whether the background this item may share with other items in the bar should be hidden. Setting this to `true` hides the liquid glass background.
 - `sharesBackground` (iOS 26+): Whether this item can share a background with other items. Defaults to `true`.
 - `identifier` (iOS 26+) - An identifier used to match items across transitions.
+- `visibilityPriority` (iOS 27+): Priority used when items in `unstable_headerRightItems` don't fit in the header. Items with lower priority are moved to the overflow menu first. Supported values are `low`, `default`, and `high`. Defaults to `default`.
 - `badge` (iOS 26+): An optional badge to display alongside the item. Supported properties:
   - `value`: The value to display in the badge. It can be a string or a number.
   - `style`: Style object for the badge. Supported properties:
@@ -1858,6 +1877,7 @@ Supported properties when `type` is `menu`:
     - `submenu`: An object with the following properties:
       - `type`: Must be `submenu`.
       - `label`: Label of the submenu item.
+      - `description`: The secondary text displayed alongside the label of the submenu item.
       - `icon`: Optional icon to show alongside the label. It accepts the same formats as `icon` above.
 
       - `inline`: Whether the menu is displayed inline with the parent menu. By default, submenus are displayed after expanding the parent menu item. Inline menus are displayed as part of the parent menu as a section. Defaults to `false`.
