@@ -298,6 +298,26 @@ const Stack = createNativeStackNavigator({
 });
 ```
 
+The screen is lazily evaluated upon render if defined using a getter:
+
+```js
+const Stack = createNativeStackNavigator({
+  screens: {
+    Profile: createNativeStackScreen({
+      // highlight-start
+      get screen() {
+        return require('./ProfileScreen').default;
+      },
+      // highlight-end
+    }),
+  },
+});
+```
+
+Unlike the regular `screen` property, the getter can only specify screen components and not nested navigator objects.
+
+You can use this approach if you want the `ProfileScreen` module to be lazily evaluated with [inline requires](https://reactnative.dev/docs/optimizing-javascript-loading#advanced-call-require-inline).
+
 </TabItem>
 <TabItem value="dynamic">
 

@@ -215,6 +215,13 @@ To work with the reworked TypeScript types, the type API for custom navigators h
 + export const createMyScreen = createScreenFactory<MyTypeBag>();
 ```
 
+The `NavigationHelpers` type now accepts `ParamList`, `State`, and `EventMap` type arguments so methods such as `getState` return the navigator's state type. If you specify an event map, move it to the third type argument:
+
+```diff lang=ts
+- NavigationHelpers<ParamList, MyNavigationEventMap>
++ NavigationHelpers<ParamList, TabNavigationState<ParamList>, MyNavigationEventMap>
+```
+
 See [Custom navigators](custom-navigators.md) for more details.
 
 ### Changes to navigators
@@ -1340,6 +1347,8 @@ It's not required to use this API and your existing code will continue to work a
 ### Static screen components can now be evaluated lazily
 
 Static screen configuration now supports a getter for the `screen` property to specify the screen component.
+
+This feature has also been backported to React Navigation 7.
 
 The getter is evaluated only when the screen renders, which allows the screen module to be loaded lazily with [inline requires](https://reactnative.dev/docs/optimizing-javascript-loading#advanced-call-require-inline):
 

@@ -27,7 +27,7 @@ const Stack = createNativeStackNavigator({
 });
 ```
 
-The [`createXScreen`](static-configuration.md#createxscreen) helper is optional, but necessary for type inference in screen configuration callbacks such as `options`, `listeners etc.
+The [`createXScreen`](static-configuration.md#createxscreen) helper is optional, but necessary for type inference in screen configuration callbacks such as `options`, `listeners`, etc.
 
 A shorthand syntax is also supported where the screen component is used directly instead of a configuration object:
 
@@ -264,7 +264,7 @@ const Stack = createStackNavigator({
 </TabItem>
 </ConfigTabs>
 
-In the above example, `params.userId` is used as an ID for the `Profile` screen with `getId`. So if you navigate to `Profile` with the same `userId`, it'll update the params of the existing screen instead of pushing a new one. If you navigate to `Profile` with a different `userId`, it'll push a new screen onto the stack.
+In the above example, `params.userId` is used as an ID for the `Profile` screen with `getId`. So `Profile` screens with different `userId` values are treated as different screens.
 
 ### Component
 

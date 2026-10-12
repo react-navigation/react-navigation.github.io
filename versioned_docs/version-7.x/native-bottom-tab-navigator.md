@@ -52,7 +52,7 @@ npm install @react-navigation/bottom-tabs
 
 The navigator requires React Native 0.79 or above is required. If you're using [Expo](https://expo.dev/), it requires SDK 53 or above.
 
-It also needs `react-native-screens` 4.25.0 or above. If you're using Expo, make sure to use [development builds](https://docs.expo.dev/develop/development-builds/introduction/) instead of Expo Go to use the latest version of `react-native-screens`.
+It also needs `react-native-screens` 4.29.0 or above. If you're using Expo, make sure to use [development builds](https://docs.expo.dev/develop/development-builds/introduction/) instead of Expo Go to use the latest version of `react-native-screens`.
 
 ## Usage
 
@@ -128,12 +128,37 @@ Uses iOS built-in tab bar items with standard iOS styling and localized titles. 
 
 The [`tabBarIcon`](#tabbaricon) and [`tabBarLabel`](#tabbarlabel) options will override the icon and label from the system item. If you want to keep the system behavior on iOS, but need to provide icon and label for other platforms, use `Platform.OS` or `Platform.select` to conditionally set `undefined` for `tabBarIcon` and `tabBarLabel` on iOS.
 
+#### `tabBarRole`
+
+The role of the tab within the system tab bar. Supported values:
+
+- `search` - the tab is used as the system search tab
+
+On iOS 26.1, a tab with `search` role is positioned next to the tab bar. On iOS 27 and above, it's positioned next to the tab bar only if [`tabBarSearchAutoFocus`](#tabbarsearchautofocus) is enabled. On iOS 27 and above, it also stays visible when the tab bar [minimizes](#tabbarminimizebehavior).
+
+The system provided icon and label are used for the tab with the `search` role on iOS. An explicit [`tabBarSystemItem`](#tabbarsystemitem), or the [`tabBarIcon`](#tabbaricon) and [`tabBarLabel`](#tabbarlabel) options can be used to override them.
+
+On iOS 26.1 and above, at most one tab can have the `search` role, and changing the role after the tab is rendered is not supported.
+
+Only supported on iOS.
+
+#### `tabBarSearchAutoFocus`
+
+Whether the search field is automatically focused when the tab is selected. Cancelling the search selects the previously selected tab.
+
+Only applies to tabs with [`tabBarRole`](#tabbarrole) set to `search`, and requires [`headerSearchBarOptions`](native-stack-navigator.md#headersearchbaroptions) to be set in a native stack nested in the tab.
+
+Defaults to `false`.
+
+Only supported on iOS 26.1 and above.
+
 ##### Search tab on iOS 26+
 
-The `tabBarSystemItem` option has special styling and behavior when set to `search` on iOS 26+.
+The [`tabBarRole`](#tabbarrole) option has special styling and behavior when set to `search` on iOS 26.1 and above.
 
 Additionally, when the `search` tab is selected, the tab bar transforms into a search field if:
 
+- [`tabBarSearchAutoFocus`](#tabbarsearchautofocus) is enabled
 - The screen has a nested [native stack navigator](native-stack-navigator.md)
 - The focused screen in the nested native stack has [`headerSearchBarOptions`](native-stack-navigator.md#headersearchbaroptions)
 
@@ -248,8 +273,10 @@ const HomeTabs = createBottomTabNavigator({
       // highlight-next-line
       screen: SearchStack,
       options: {
-        // highlight-next-line
-        tabBarSystemItem: 'search',
+        // highlight-start
+        tabBarRole: 'search',
+        tabBarSearchAutoFocus: true,
+        // highlight-end
       },
     },
   },
@@ -275,8 +302,28 @@ Overrides the label provided by [`tabBarSystemItem`](#tabbarsystemitem) on iOS.
 
 If not provided, or set to `undefined`:
 
-- The system values are used if [`tabBarSystemItem`](#tabbarsystemitem) is set on iOS.
+- The system values are used on iOS if [`tabBarSystemItem`](#tabbarsystemitem) is set or [`tabBarRole`](#tabbarrole) is `search`.
 - Otherwise, it falls back to the [`title`](#title) or route name.
+
+#### `tabBarLabelPositionAdjustment`
+
+Offset for the tab label relative to its default position. The offset can be specified separately for each item layout:
+
+- `stacked` - icon above the label, such as on iPhone in portrait
+- `inline` - icon beside the label in regular width, such as on iPad
+- `compactInline` - icon beside the label in compact width, such as on iPhone in landscape
+
+Each layout accepts `horizontal` and `vertical` offsets. Positive `horizontal` moves the label right, and positive `vertical` moves it down.
+
+```js
+tabBarLabelPositionAdjustment: {
+  stacked: { horizontal: 0, vertical: 2 },
+  inline: { horizontal: 2, vertical: 0 },
+  compactInline: { horizontal: 2, vertical: 0 },
+},
+```
+
+Only supported on iOS.
 
 #### `tabBarLabelVisibilityMode`
 
@@ -346,7 +393,7 @@ The icon can be of following types:
   }
   ```
 
-  The image is tinted by default. Set `tinted` to `false` if the image has its own colors that you want to preserve on iOS. On Android, the image is always tinted and the `tinted` property is ignored.
+  The image is tinted by default. Set `tinted` to `false` if the image has its own colors that you want to preserve.
 
 - [SF Symbols](https://developer.apple.com/sf-symbols/) name - Supported on iOS
 
@@ -356,6 +403,10 @@ The icon can be of following types:
     name: 'heart',
   }
   ```
+
+  The `renderingMode` property can be used to specify how to color the symbol:
+  - `monochrome`: Single color tint.
+  - `multicolor`: Symbol's built-in multicolor scheme.
 
 To render different icons for active and inactive states, you can use a function:
 
@@ -384,6 +435,14 @@ tabBarIcon: Platform.select({
   },
 });
 ```
+
+#### `tabBarIconSize`
+
+Size of the tab's icon.
+
+The largest size is used for the icon area in all tabs. Icons smaller than the largest size are centered in this area.
+
+Only supported on Android.
 
 #### `tabBarBadge`
 
@@ -418,8 +477,6 @@ Color for the icon and label in the active tab.
 
 Color for the icon and label in the inactive tabs.
 
-Only supported on Android.
-
 #### `tabBarActiveIndicatorColor`
 
 Background color of the active indicator.
@@ -432,11 +489,29 @@ Whether the active indicator should be used. Defaults to `true`.
 
 Only supported on Android.
 
+#### `tabBarActiveIndicatorWidth`
+
+Width of the tab's active indicator.
+
+Only supported on Android.
+
+#### `tabBarActiveIndicatorHeight`
+
+Height of the tab's active indicator.
+
+Only supported on Android.
+
 #### `tabBarRippleColor`
 
 Color of the ripple effect when pressing a tab.
 
 Only supported on Android.
+
+#### `tabBarVisibilityAnimationEnabled`
+
+Whether showing and hiding the tab bar is animated. Defaults to `true`.
+
+Only supported on iOS 18 and above.
 
 #### `tabBarStyle`
 
@@ -490,12 +565,28 @@ The display mode for the tab bar. Supported values:
 
 Only supported on iOS 18 and above. Not supported on tvOS.
 
+#### `tabBarSidebarPreferredPlacement`
+
+Whether the sidebar or the tab bar is preferred when only one of them can be displayed. Supported values:
+
+- `auto` - uses the system default (tab bar)
+- `sidebar` - the sidebar is displayed when it's available
+- `tabBar` - the tab bar is displayed
+
+Requires [`tabBarControllerMode`](#tabbarcontrollermode) to be set to `tabSidebar`.
+
+The sidebar is only available when the horizontal size class is regular, e.g. on iPad, or on larger iPhones in landscape.
+
+Defaults to `auto`.
+
+Only supported on iOS 27 and above. Not supported on tvOS.
+
 #### `tabBarMinimizeBehavior`
 
 The minimize behavior for the tab bar. Supported values:
 
 - `auto` - resolves to the system default minimize behavior
-- `never` - the tab bar does not minimize
+- `none` - the tab bar does not minimize
 - `onScrollDown` - the tab bar minimizes when scrolling down and
   expands when scrolling back up
 - `onScrollUp` - the tab bar minimizes when scrolling up and expands
