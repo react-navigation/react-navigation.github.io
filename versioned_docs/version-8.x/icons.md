@@ -544,25 +544,6 @@ Here `icon_name` is the resource name without the file extension. On Android, th
 
 ## Other sources
 
-### [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
-
-The React Native Vector Icons library provides various sets of font icons. Font icons cannot be used directly in most native navigation components such as tab bars or headers. But they can be [rasterized into images](https://github.com/oblador/react-native-vector-icons?tab=readme-ov-file#usage-as-png-imagesource-object) and used with the `type: 'image'` option.
-
-To do this, install the appropriate icon package, such as `@react-native-vector-icons/lucide`, then install `@react-native-vector-icons/get-image` and rebuild the app.
-
-Now you can use the `getImageSourceSync` to create the image:
-
-```js
-import { Lucide } from '@react-native-vector-icons/lucide';
-
-// ...
-
-tabBarIcon: {
-  type: 'image',
-  source: Lucide.getImageSourceSync('heart', 22),
-},
-```
-
 ### [React Native Nano Icons](https://github.com/software-mansion-labs/react-native-nano-icons)
 
 [React Native Nano Icons](https://nano-icons.swmansion.com/) provides a way to use custom SVG files as performant font-based icons, both in JavaScript-based and native navigation components.
@@ -625,4 +606,23 @@ import { SFSymbol } from '@react-navigation/native';
 function MyComponent() {
   return <SFSymbol name="nano.newspaper" size={24} />;
 }
+```
+
+### [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
+
+The React Native Vector Icons library provides various sets of font icons. Font icons cannot be used directly in most native navigation components such as tab bars or headers. But they can be [rasterized into images](https://github.com/oblador/react-native-vector-icons?tab=readme-ov-file#usage-as-png-imagesource-object) and used with the `type: 'image'` option.
+
+To do this, install the appropriate icon package, such as `@react-native-vector-icons/lucide`, then install `@react-native-vector-icons/get-image` and rebuild the app.
+
+Now you can use the `getImageSourceSync` to create the image:
+
+```js
+import { Lucide } from '@react-native-vector-icons/lucide';
+
+// ...
+
+tabBarIcon: {
+  type: 'image',
+  source: Lucide.getImageSourceSync('heart', 22),
+},
 ```
