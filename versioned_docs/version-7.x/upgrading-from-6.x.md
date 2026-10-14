@@ -939,7 +939,9 @@ React.useLayoutEffect(() => {
   navigation.setOptions({
     headerSearchBarOptions: {
       placeholder: 'Search',
-      onChangeText: (text) => {
+      onChangeText: (event) => {
+        const text = event.nativeEvent.text;
+
         // Do something
       },
     },

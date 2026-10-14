@@ -302,7 +302,7 @@ See the [Bottom Tab Navigator docs](bottom-tab-navigator.md) for all the availab
 
 #### Bottom Tabs no longer shows header by default
 
-Since Bottom Tabs now renders native tabs by default, the header is no longer shown by default to match native look and feel. You can nest a [Native Stack Navigator](native-stack-navigator.md) inside each tab to show a header that integrates well with native tabs, e.g. [search tab on iOS 26+](bottom-tab-navigator.md#search-tab-on-ios-26).
+Since Bottom Tabs now renders native tabs by default, the header is no longer shown by default to match native look and feel. You can nest a [Native Stack Navigator](native-stack-navigator.md) inside each tab to show a header that integrates well with native tabs, e.g. [search tab on iOS](bottom-tab-navigator.md#search-tab-on-ios).
 
 Alternatively, you can enable the built-in header by passing `headerShown: true` in `screenOptions` of the navigator:
 

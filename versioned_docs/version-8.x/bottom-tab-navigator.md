@@ -10,7 +10,7 @@ sidebar_label: Bottom Tabs
     <source src="/assets/navigators/bottom-tabs/highlights/search-tab.mp4" />
   </video>
 
-  [Search tab on iOS 26+](#search-tab-on-ios-26)
+  [Search tab](#search-tab-on-ios)
 
 - <video playsInline autoPlay muted loop>
     <source src="/assets/navigators/bottom-tabs/highlights/bottom-accessory.mp4" />
@@ -424,7 +424,7 @@ Only supported on iOS with `native` implementation.
 
 The [`tabBarIcon`](#tabbaricon) and [`tabBarLabel`](#tabbarlabel) options override the icon and label from the system item. If you want to keep the system behavior on iOS, but need to provide icon and label for other platforms, use `Platform.OS` or `Platform.select` to conditionally set `undefined` for `tabBarIcon` and `tabBarLabel` on iOS.
 
-When set to `search`, the tab may receive prominent visual treatment on iOS 26. See [`tabBarRole`](#tabbarrole) for the behavior on iOS 27 and above.
+When set to `search`, the tab may receive prominent visual treatment on iOS 26 only. See [`tabBarRole`](#tabbarrole) instead for a setup that works on iOS 27 and above as well.
 
 #### `tabBarRole`
 
@@ -433,19 +433,19 @@ The role of the tab within the system tab bar. Supported values:
 - `prominent` - the tab gets prominent visual treatment when supported on iOS 27 and above
 - `search` - the tab is used as the system search tab
 
-With the `prominent` role, the tab may receive special styling to make it stand out, such as a separate button next to the tab bar. Only one tab can have the `prominent` role at a time.
+With the `prominent` role, the tab may receive special styling to make it stand out, such as a separate button next to the tab bar. Tabs with prominent styling also stay visible when the tab bar [minimizes](#tabbarminimizebehavior). Only one tab can have the `prominent` role at a time.
 
 <video playsInline autoPlay muted loop>
   <source src="/assets/navigators/bottom-tabs/highlights/prominent-tab.mp4" />
 </video>
 
-On iOS 26.1, a tab with the `search` role gets prominent visual treatment. On iOS 27 and above, it gets prominent styling only if [`tabBarSearchAutoFocus`](#tabbarsearchautofocus) is enabled and no other tab has the `prominent` role. On iOS 27 and above, it also stays visible when the tab bar [minimizes](#tabbarminimizebehavior).
+On iOS 26, a tab with the `search` role gets prominent visual treatment. On iOS 27 and above, it gets prominent styling only if [`tabBarSearchAutoFocus`](#tabbarsearchautofocus) is enabled and no other tab has the `prominent` role.
 
 The tab uses the system search icon and label by default on iOS. You can override them with [`tabBarSystemItem`](#tabbarsystemitem), [`tabBarIcon`](#tabbaricon), or [`tabBarLabel`](#tabbarlabel).
 
 On iOS 26.1 and above, at most one tab can have the `search` role. Adding or removing the `search` role after the tab is rendered is not supported.
 
-Also see [Search tab on iOS 26+](#search-tab-on-ios-26).
+Also see [Search tab on iOS](#search-tab-on-ios).
 
 Only supported on iOS with `native` implementation.
 
@@ -459,21 +459,17 @@ Defaults to `false`.
 
 Only supported with `native` implementation on iOS 26.1 and above.
 
-##### Search tab on iOS 26+
+##### Search tab on iOS
 
-The [`tabBarRole`](#tabbarrole) option has special styling and behavior when set to `search` on iOS 26.1 and above.
+When [`tabBarRole`](#tabbarrole) is set to `search`. The icon and label use the system search icon and label by default, and the tab may receive prominent visual treatment on iOS 26 and above.
 
-Additionally, when the `search` tab is selected, the tab bar transforms into a search field if:
+On iOS 27 and above, the [`tabBarSearchAutoFocus`](#tabbarsearchautofocus) option also needs to be enabled for the tab to receive prominent visual treatment.
 
-- [`tabBarSearchAutoFocus`](#tabbarsearchautofocus) is enabled
-- The screen has a nested [native stack navigator](native-stack-navigator.md)
-- The focused screen in the nested native stack has [`headerSearchBarOptions`](native-stack-navigator.md#headersearchbaroptions)
-
-This won't work if `headerSearchBarOptions` is set on the tab screen itself.
+Additionally, the bottom tab bar transforms into a search field if it has a nested [native stack navigator](native-stack-navigator.md) with [`headerSearchBarOptions`](native-stack-navigator.md#headersearchbaroptions) on the stack's first screen.
 
 Example:
 
-```js name="Search Tab on iOS 26" snack static2dynamic
+```js name="Search Tab on iOS" snack static2dynamic
 import * as React from 'react';
 import { Platform, View, Text, FlatList } from 'react-native';
 import {
@@ -529,6 +525,7 @@ function FruitsListScreen() {
 
   return (
     <FlatList
+      contentInsetAdjustmentBehavior="automatic"
       data={filteredData}
       keyExtractor={(item) => item}
       renderItem={({ item }) => (

@@ -1226,9 +1226,21 @@ Only supported on Android.
 
 A callback that gets called when search bar has lost focus.
 
+##### `onFocus`
+
+A callback that gets called when search bar has received focus.
+
+##### `onOpen`
+
+A callback that gets called when search bar is opened. Only supported on Android.
+
+##### `onClose`
+
+A callback that gets called when search bar is closed. Only supported on Android.
+
 ##### `onCancelButtonPress`
 
-A callback that gets called when the cancel button is pressed.
+A callback that gets called when the cancel button is pressed. Only supported on iOS.
 
 ##### `onSearchButtonPress`
 
@@ -1248,7 +1260,7 @@ React.useLayoutEffect(() => {
 
 ##### `onChangeText`
 
-A callback that gets called when the text changes. It receives the current text value of the search bar.
+A callback that gets called when the text changes. It receives an event containing the current text value of the search bar.
 
 Example:
 
