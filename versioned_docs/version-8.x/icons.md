@@ -383,6 +383,8 @@ tabBarIcon: {
 }
 ```
 
+To generate custom SF Symbols from SVG files, see [React Native Nano Icons](#react-native-nano-icons).
+
 ## Material Symbols
 
 Material Symbols is a library of over 2,500 glyphs designed to integrate well with Material Design on Android.
@@ -538,9 +540,73 @@ tabBarIcon: {
 }
 ```
 
-Here `icon_name` is the resource name without the file extension. On Android, this can refer to a bitmap drawable such as `res/drawable/icon_name.png` or a vector drawable such as `res/drawable/icon_name.xml`. On iOS, this can refer to an image in an asset catalog, such as an image set named `icon_name`.
+Here `icon_name` is the resource name without the file extension. On Android, this can refer to a bitmap drawable such as `res/drawable/icon_name.png` or a vector drawable such as `res/drawable/icon_name.xml`. On iOS, this can refer to an image in an asset catalog, such as an image set named `icon_name`. To generate vector drawables from SVG files, see [React Native Nano Icons](#react-native-nano-icons).
 
 ## Other sources
+
+### [React Native Nano Icons](https://github.com/software-mansion-labs/react-native-nano-icons)
+
+[React Native Nano Icons](https://nano-icons.swmansion.com/) provides a way to use custom SVG files as performant font-based icons.
+
+To use it, install the `react-native-nano-icons` package, then follow the [quick start](https://github.com/software-mansion-labs/react-native-nano-icons#-quick-start) to set it up with your SVG icons.
+
+Then you can use the icon by passing the name to the `nativeNanoSymbol` function:
+
+```js
+import { nativeNanoSymbol } from 'react-native-nano-icons/symbols';
+
+// ...
+
+tabBarIcon: nativeNanoSymbol('newspaper'),
+```
+
+Here, we use `newspaper` as the icon name, which is the filename `newspaper.svg` without extension.
+
+It returns `{ type: 'sfSymbol', name: 'nano.newspaper' }` on iOS, and `{ type: 'image', source: { uri: 'nano_newspaper' } }` on Android, which resolves to a native vector drawable asset.
+
+The second argument specifies how to color the symbol:
+
+- `monochrome` (default): Single color, using the tint color.
+- `multicolor`: Uses the original colors of the SVG file.
+
+For example, to show the colors only when the tab is focused:
+
+```js
+tabBarIcon: ({ focused }) =>
+  nativeNanoSymbol('microscope', focused ? 'multicolor' : 'monochrome'),
+```
+
+<video
+  playsInline
+  autoPlay
+  muted
+  loop
+  style={{ width: '400px', aspectRatio: 800 / 180 }}
+>
+  <source src="/assets/icons/nano-icons-ios.mp4" />
+</video>
+
+<video
+  playsInline
+  autoPlay
+  muted
+  loop
+  style={{ width: '400px', aspectRatio: 800 / 202 }}
+>
+  <source src="/assets/icons/nano-icons-android.mp4" />
+</video>
+
+The generated symbols are named with the [prefix](https://github.com/software-mansion-labs/react-native-nano-icons#symbolsets-options) of the symbol set, `nano` by default, and are added to [`SFSymbolNames`](#custom-sf-symbol-names) automatically. They can also be rendered with the standalone `SFSymbol` component:
+
+```js
+import { SFSymbol } from '@react-navigation/native';
+
+function MyComponent() {
+  return <SFSymbol name="nano.newspaper" size={24} />;
+}
+```
+
+For more general usage, the library also provides a font-based `Icon` component, created with [`createNanoIconSet`](https://github.com/software-mansion-labs/react-native-nano-icons#createnanoiconset), to render the icons in your own components.
 
 ### [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
 
