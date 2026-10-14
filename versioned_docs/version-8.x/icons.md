@@ -546,15 +546,11 @@ Here `icon_name` is the resource name without the file extension. On Android, th
 
 ### [React Native Nano Icons](https://github.com/software-mansion-labs/react-native-nano-icons)
 
-[React Native Nano Icons](https://nano-icons.swmansion.com/) provides a way to use custom SVG files as performant font-based icons, both in JavaScript-based and native navigation components.
+[React Native Nano Icons](https://nano-icons.swmansion.com/) provides a way to use custom SVG files as performant font-based icons.
 
-To use it, install the `react-native-nano-icons` package, then set it up depending on where the icons are rendered.
+To use it, install the `react-native-nano-icons` package, then follow the [quick start](https://github.com/software-mansion-labs/react-native-nano-icons#-quick-start) to set it up with your SVG icons.
 
-For JavaScript-based components, such as the `custom` [implementation](bottom-tab-navigator.md#implementation) of Bottom Tab Navigator, follow the [quick start](https://github.com/software-mansion-labs/react-native-nano-icons#-quick-start) and use the `Icon` component created with `createNanoIconSet`.
-
-For native components, such as the tab bar with the `native` implementation, follow the [native symbols setup](https://github.com/software-mansion-labs/react-native-nano-icons#-native-symbols) to generate SF Symbols on iOS and vector drawables on Android from your SVG files, and rebuild the app.
-
-Pass the SVG file name to the `nativeNanoSymbol` function to create a type-safe icon. For example, for `newspaper.svg`:
+Then you can use the icon by passing the name to the `nativeNanoSymbol` function:
 
 ```js
 import { nativeNanoSymbol } from 'react-native-nano-icons/symbols';
@@ -563,6 +559,8 @@ import { nativeNanoSymbol } from 'react-native-nano-icons/symbols';
 
 tabBarIcon: nativeNanoSymbol('newspaper'),
 ```
+
+Here, we use `newspaper` as the icon name, which is the filename `newspaper.svg` without extension.
 
 It returns `{ type: 'sfSymbol', name: 'nano.newspaper' }` on iOS, and `{ type: 'image', source: { uri: 'nano_newspaper' } }` on Android, which resolves to a native vector drawable asset.
 
@@ -607,6 +605,8 @@ function MyComponent() {
   return <SFSymbol name="nano.newspaper" size={24} />;
 }
 ```
+
+For more general usage, the library also provides a font-based `Icon` component, created with [`createNanoIconSet`](https://github.com/software-mansion-labs/react-native-nano-icons#createnanoiconset), to render the icons in your own components.
 
 ### [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
 
