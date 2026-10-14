@@ -573,7 +573,7 @@ For JavaScript-based components, such as the `custom` [implementation](bottom-ta
 
 For native components, such as the tab bar with the `native` implementation, follow the [native symbols setup](https://github.com/software-mansion-labs/react-native-nano-icons#-native-symbols) to generate SF Symbols on iOS and vector drawables on Android from your SVG files, and rebuild the app.
 
-Each SVG file becomes a symbol with the same name. Pass the name to the `nativeNanoSymbol` function to create a type-safe icon:
+Pass the SVG file name to the `nativeNanoSymbol` function to create a type-safe icon. For example, for `newspaper.svg`:
 
 ```js
 import { nativeNanoSymbol } from 'react-native-nano-icons/symbols';
