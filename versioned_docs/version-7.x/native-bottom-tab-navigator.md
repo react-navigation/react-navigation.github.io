@@ -402,6 +402,19 @@ The icon can be of following types:
 
   The image is tinted by default. Set `tinted` to `false` if the image has its own colors that you want to preserve.
 
+  To use font icons from [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons), [rasterize them into images](https://github.com/oblador/react-native-vector-icons?tab=readme-ov-file#usage-as-png-imagesource-object) with `@react-native-vector-icons/get-image`:
+
+  ```js
+  import { Lucide } from '@react-native-vector-icons/lucide';
+
+  // ...
+
+  tabBarIcon: {
+    type: 'image',
+    source: Lucide.getImageSourceSync('heart', 22),
+  }
+  ```
+
 - [SF Symbols](https://developer.apple.com/sf-symbols/) name - Supported on iOS
 
   ```js
@@ -416,6 +429,16 @@ The icon can be of following types:
   - `multicolor`: Uses the symbol's built-in multicolor scheme.
 
   System symbols use a single color by default.
+
+  To use custom SVG files as icons, use [React Native Nano Icons](https://nano-icons.swmansion.com/). Its `nativeNanoSymbol` function returns a custom SF Symbol on iOS and a vector drawable image on Android:
+
+  ```js
+  import { nativeNanoSymbol } from 'react-native-nano-icons/symbols';
+
+  // ...
+
+  tabBarIcon: nativeNanoSymbol('newspaper'),
+  ```
 
 To render different icons for active and inactive states, you can use a function:
 
