@@ -380,7 +380,7 @@ The navigator can [emit events](navigation-events.md) on certain actions. Suppor
 
 #### `transitionStart`
 
-This event is fired when the transition animation starts for the current screen.
+This event is fired when the transition animation starts for a screen with a listener registered.
 
 Event data:
 
@@ -400,7 +400,7 @@ React.useEffect(() => {
 
 #### `transitionEnd`
 
-This event is fired when the transition animation ends for the current screen.
+This event is fired when the transition animation ends for for a screen with a listener registered.
 
 Event data:
 
