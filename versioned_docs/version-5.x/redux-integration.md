@@ -24,7 +24,7 @@ Notice that we wrap our components in a `Provider` like we'd normally do with `r
 
 ## Use a component that is `connect`ed in `options`
 
-Create a component, `connect` it to the store, then use that component in the `title`.
+Create a component, `connect` it to the store, then use that component in the `headerTitle`.
 
 <samp id="redux-integration" />
 
@@ -40,7 +40,7 @@ const CounterContainer = connect((state) => ({ value: state.count }))(Counter);
 <Screen
   name="Test"
   component={TestScreen}
-  options={{ title: () => <CounterContainer /> }}
+  options={{ headerTitle: () => <CounterContainer /> }}
 />
 ```
 
