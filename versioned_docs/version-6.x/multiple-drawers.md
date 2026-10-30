@@ -20,6 +20,7 @@ import * as React from 'react';
 import { Button, View } from 'react-native';
 import { Drawer } from 'react-native-drawer-layout';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 
 function HomeScreen({ navigation }) {
   return (
@@ -73,6 +74,7 @@ import * as React from 'react';
 import { Button, View } from 'react-native';
 import { Drawer } from 'react-native-drawer-layout';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 
 const RightDrawerContext = React.createContext();
 
