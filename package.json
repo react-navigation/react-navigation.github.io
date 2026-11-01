@@ -36,7 +36,7 @@
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-simple-code-editor": "^0.14.1",
-    "satori": "^0.19.2"
+    "satori": "^0.33.5"
   },
   "devDependencies": {
     "@babel/types": "^7.28.5",
